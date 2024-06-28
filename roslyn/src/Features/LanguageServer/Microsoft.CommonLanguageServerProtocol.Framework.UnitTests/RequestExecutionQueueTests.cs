@@ -52,7 +52,7 @@ public class RequestExecutionQueueTests
                 (
                     typeof(IRequestContextFactory<TestRequestContext>),
                     (object)TestRequestContext.Factory.Instance
-                )
+                ),
             },
             supportsGetRegisteredServices: false
         );

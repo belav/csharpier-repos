@@ -48,7 +48,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Control ContentTemplateContainer
         {
             get { return _contentContainer; }

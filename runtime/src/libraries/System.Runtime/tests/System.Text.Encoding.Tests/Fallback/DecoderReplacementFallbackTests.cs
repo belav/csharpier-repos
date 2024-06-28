@@ -71,26 +71,26 @@ namespace System.Text.Tests
             {
                 new DecoderReplacementFallback(),
                 new DecoderReplacementFallback(),
-                true
+                true,
             };
             yield return new object[]
             {
                 new DecoderReplacementFallback(),
                 new DecoderReplacementFallback("?"),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 new DecoderReplacementFallback("abc"),
                 new DecoderReplacementFallback("abc"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new DecoderReplacementFallback("abc"),
                 new DecoderReplacementFallback("def"),
-                false
+                false,
             };
 
             yield return new object[] { new DecoderReplacementFallback(), new object(), false };

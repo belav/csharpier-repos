@@ -67,7 +67,7 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
     {
         var connectionStringBuilder = new SqlConnectionStringBuilder(GetValidatedConnectionString())
         {
-            InitialCatalog = "master"
+            InitialCatalog = "master",
         };
         connectionStringBuilder.Remove("AttachDBFilename");
 

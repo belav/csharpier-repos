@@ -214,7 +214,7 @@ namespace MonoTests.System.Windows.Forms
                 "Deactivate",
                 "LostFocus",
                 "HandleDestroyed",
-                "Disposed"
+                "Disposed",
             };
 
             _form = new Form();
@@ -281,7 +281,7 @@ namespace MonoTests.System.Windows.Forms
                 "VisibleChanged",
                 "Deactivate",
                 "LostFocus",
-                "HandleDestroyed"
+                "HandleDestroyed",
             };
 
             _form = new DelayedCloseForm();

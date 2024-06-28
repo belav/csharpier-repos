@@ -56,8 +56,8 @@ namespace System.Tests
         [Fact]
         public void FromInt16()
         {
-            short[] testValues = { 100, -100, 0, };
-            int[] expectedValues = { 100, -100, 0, };
+            short[] testValues = { 100, -100, 0 };
+            int[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToInt32, testValues, expectedValues);
         }
 
@@ -106,8 +106,8 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { 100.0f, -100.0f, 0.0f, };
-            int[] expectedValues = { 100, -100, 0, };
+            float[] testValues = { 100.0f, -100.0f, 0.0f };
+            int[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToInt32, testValues, expectedValues);
 
             float[] overflowValues = { float.MaxValue, float.MinValue };
@@ -124,7 +124,7 @@ namespace System.Tests
                 "0",
                 Int32.MinValue.ToString(),
                 Int32.MaxValue.ToString(),
-                null
+                null,
             };
             int[] expectedValues = { 100, -100, 0, int.MinValue, int.MaxValue, 0 };
             VerifyFromString(Convert.ToInt32, Convert.ToInt32, testValues, expectedValues);
@@ -162,7 +162,7 @@ namespace System.Tests
                 "20000000000",
                 "10000000000000000000000000000000",
             };
-            int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2, };
+            int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2 };
             int[] expectedValues =
             {
                 0,
@@ -186,7 +186,7 @@ namespace System.Tests
                 "-2147483649",
                 "111111111111111111111111111111111",
                 "1FFFFffff",
-                "777777777777"
+                "777777777777",
             };
             int[] overflowBases = { 10, 10, 2, 16, 8 };
             VerifyFromStringWithBaseThrows<OverflowException>(

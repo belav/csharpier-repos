@@ -20,8 +20,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = Element"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -35,8 +35,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = CDATA"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -50,8 +50,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = Comment"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -65,8 +65,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = EndElement"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -80,8 +80,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = EntityReference, not expanded"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -95,8 +95,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = ProcessingInstruction"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -110,8 +110,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = SignificantWhitespace"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -125,8 +125,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = Text"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -140,8 +140,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = Whitespace"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -155,8 +155,8 @@ namespace System.Xml.Tests
                             "LineNumber/LinePos after Read and NodeType = XmlDeclaration"
                         )
                         {
-                            Priority = 0
-                        }
+                            Priority = 0,
+                        },
                     }
                 );
             }
@@ -166,7 +166,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos14)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after MoveToElement")
+                        Attribute = new Variation("LineNumber/LinePos after MoveToElement"),
                     }
                 );
             }
@@ -178,7 +178,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after MoveToFirstAttribute/MoveToNextAttribute"
-                        )
+                        ),
                     }
                 );
             }
@@ -188,7 +188,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos16)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after MoveToAttribute")
+                        Attribute = new Variation("LineNumber/LinePos after MoveToAttribute"),
                     }
                 );
             }
@@ -198,7 +198,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos18)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after Skip")
+                        Attribute = new Variation("LineNumber/LinePos after Skip"),
                     }
                 );
             }
@@ -208,7 +208,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos19)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after ReadInnerXml")
+                        Attribute = new Variation("LineNumber/LinePos after ReadInnerXml"),
                     }
                 );
             }
@@ -218,7 +218,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos20)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after MoveToContent")
+                        Attribute = new Variation("LineNumber/LinePos after MoveToContent"),
                     }
                 );
             }
@@ -230,7 +230,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after ReadBase64 successive calls"
-                        )
+                        ),
                     }
                 );
             }
@@ -242,7 +242,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after ReadBinHex successive calls"
-                        )
+                        ),
                     }
                 );
             }
@@ -252,7 +252,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos26)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after ReadEndElement")
+                        Attribute = new Variation("LineNumber/LinePos after ReadEndElement"),
                     }
                 );
             }
@@ -262,7 +262,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos27)
                     {
-                        Attribute = new Variation("LineNumber/LinePos after ReadString")
+                        Attribute = new Variation("LineNumber/LinePos after ReadString"),
                     }
                 );
             }
@@ -274,7 +274,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber/LinePos after element containing entities in attribute values"
-                        )
+                        ),
                     }
                 );
             }
@@ -284,7 +284,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos40)
                     {
-                        Attribute = new Variation("LineNumber/LinePos when Read = false")
+                        Attribute = new Variation("LineNumber/LinePos when Read = false"),
                     }
                 );
             }
@@ -296,7 +296,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlTextReader:LineNumber and LinePos don't return the right position after ReadInnerXml is called"
-                        )
+                        ),
                     }
                 );
             }
@@ -308,7 +308,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlTextReader: LineNum and LinePosition incorrect for EndTag token and text element"
-                        )
+                        ),
                     }
                 );
             }
@@ -320,7 +320,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Bogus LineNumber value when reading attribute over XmlTextReader"
-                        )
+                        ),
                     }
                 );
             }
@@ -332,7 +332,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "LineNumber and LinePosition on attribute with columns"
-                        )
+                        ),
                     }
                 );
             }
@@ -349,7 +349,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestLinePos99)
                     {
-                        Attribute = new Variation("XmlException LineNumber and LinePosition")
+                        Attribute = new Variation("XmlException LineNumber and LinePosition"),
                     }
                 );
             }
@@ -359,7 +359,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadingNonWellFormedXmlThrows)
                     {
-                        Attribute = new Variation("Check error message on a non-wellformed XML")
+                        Attribute = new Variation("Check error message on a non-wellformed XML"),
                     }
                 );
             }
@@ -373,7 +373,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "When an XmlException is thrown both XmlException.LineNumber and XmlTextReader.LineNumber should be same"
-                        )
+                        ),
                     }
                 );
             }
@@ -385,7 +385,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Xml(Text)Reader does not increase line number for a new line in element end tag"
-                        )
+                        ),
                     }
                 );
             }
@@ -395,7 +395,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(LineNumberAndLinePositionAreCorrect)
                     {
-                        Attribute = new Variation("LineNumber and LinePosition are not correct")
+                        Attribute = new Variation("LineNumber and LinePosition are not correct"),
                     }
                 );
             }

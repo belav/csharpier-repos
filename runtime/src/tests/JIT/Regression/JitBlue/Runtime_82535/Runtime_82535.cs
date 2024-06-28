@@ -47,7 +47,7 @@ public struct Bacon
     public enum FooEnum
     {
         One,
-        Two
+        Two,
     };
 
     public FooEnum m_FooEnum;

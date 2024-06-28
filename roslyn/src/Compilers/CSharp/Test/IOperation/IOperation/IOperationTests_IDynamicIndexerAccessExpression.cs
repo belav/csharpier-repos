@@ -198,7 +198,7 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
             {
                 // CS0631: ref and out are not valid in this context
                 //     public int this[int i, ref dynamic ch] => 0;
-                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(9, 28)
+                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(9, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -354,7 +354,7 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
                 Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(10, 21),
                 // CS0631: ref and out are not valid in this context
                 //     public int this[ref int i, long c] => 0;
-                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(11, 21)
+                Diagnostic(ErrorCode.ERR_IllegalRefParam, "ref").WithLocation(11, 21),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -403,7 +403,7 @@ IDynamicIndexerAccessOperation (OperationKind.DynamicIndexerAccess, Type: dynami
                 // CS1977: Cannot use a lambda expression as an argument to a dynamically dispatched operation without first casting it to a delegate or expression tree type.
                 //         var x = /*<bind>*/c[delegate { }, y]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadDynamicMethodArgLambda, "delegate { }")
-                    .WithLocation(9, 29)
+                    .WithLocation(9, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -445,7 +445,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Int32, IsInvalid) (Syntax
                 //         var x = /*<bind>*/c[d]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadArgCount, "c[d]")
                     .WithArguments("this", "1")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -564,7 +564,7 @@ Block[B2] - Exit
                 //         p = C[d];
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "C")
                     .WithArguments("C", "type")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

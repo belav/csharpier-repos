@@ -242,12 +242,12 @@ namespace System.Net
                 descrs[0] = new EventData
                 {
                     DataPointer = (IntPtr)(arg1Ptr),
-                    Size = (arg1.Length + 1) * sizeof(char)
+                    Size = (arg1.Length + 1) * sizeof(char),
                 };
                 descrs[1] = new EventData
                 {
                     DataPointer = (IntPtr)(arg2Ptr),
-                    Size = (arg2.Length + 1) * sizeof(char)
+                    Size = (arg2.Length + 1) * sizeof(char),
                 };
                 descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
 

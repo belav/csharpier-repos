@@ -49,7 +49,7 @@ namespace Test
                     "HasFieldMarshal",
                     "Reserved3",
                     "Reserved4",
-                    "ReservedMask"
+                    "ReservedMask",
                 };
                 int[] truevalues = { 0, 1, 2, 4, 8, 16, 4096, 8192, 16384, 32768, 61440 };
 

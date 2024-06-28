@@ -19,7 +19,7 @@ namespace zipsharp
         {
             OSDefault = 0,
             CaseSensitive = 1,
-            CaseInsensitive = 2
+            CaseInsensitive = 2,
         }
 
         public static void CloseArchive(UnzipHandle handle)

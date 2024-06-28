@@ -72,7 +72,7 @@ namespace IdeCoreBenchmarks
             {
                 NewLines =
                     CSharpSyntaxFormattingOptions.Default.NewLines
-                    | NewLinePlacement.BeforeOpenBraceInTypes
+                    | NewLinePlacement.BeforeOpenBraceInTypes,
             };
         }
 

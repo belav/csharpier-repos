@@ -156,14 +156,14 @@ namespace Newtonsoft.Json.Tests.Issues
             new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.None,
-                MaxDepth = maxDepth
+                MaxDepth = maxDepth,
             };
 
         private JsonSerializerSettings SerializeSettings(int maxDepth) =>
             new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.All,
-                MaxDepth = maxDepth
+                MaxDepth = maxDepth,
             };
     }
 }

@@ -56,7 +56,7 @@ namespace Newtonsoft.Json.Tests.Converters
             ObjectIdTestClass c = new ObjectIdTestClass
             {
                 Id = new BsonObjectId(HexToBytes("4ABBED9D1D8B0F0218000001")),
-                Test = "1234£56"
+                Test = "1234£56",
             };
 
             MemoryStream ms = new MemoryStream();

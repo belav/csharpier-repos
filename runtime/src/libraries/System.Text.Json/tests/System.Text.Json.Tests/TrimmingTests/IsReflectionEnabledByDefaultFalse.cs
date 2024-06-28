@@ -159,7 +159,7 @@ public class MyJsonResolver : JsonSerializerContext, IJsonTypeInfoResolver
                 IsExtensionData = false,
                 NumberHandling = default,
                 PropertyName = "Value",
-                JsonPropertyName = null
+                JsonPropertyName = null,
             };
 
         global::System.Text.Json.Serialization.Metadata.JsonPropertyInfo propertyInfo0 =

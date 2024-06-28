@@ -73,6 +73,6 @@ namespace System.Net
         ApplicationProtocolMismatch,
         NoRenegotiation,
         KeySetDoesNotExist,
-        ContextExpiredError
+        ContextExpiredError,
     }
 }

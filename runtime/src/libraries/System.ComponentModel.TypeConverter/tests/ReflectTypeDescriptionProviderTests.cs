@@ -158,7 +158,7 @@ namespace System.ComponentModel.Tests
         {
             private List<IComponent> _components = new List<IComponent>
             {
-                new ComponentExtendedProvider()
+                new ComponentExtendedProvider(),
             };
 
             public ComponentCollection Components => new ComponentCollection(_components.ToArray());

@@ -31,6 +31,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         Auto = 0,
         SameAsSeriesOrder = 1,
-        ReversedSeriesOrder = 2
+        ReversedSeriesOrder = 2,
     }
 }

@@ -49,6 +49,6 @@ namespace System.Data
         /// <summary>
         /// The entity was modified and AcceptChanges has not been called.
         /// </summary>
-        Modified = 0x00000010
+        Modified = 0x00000010,
     }
 }

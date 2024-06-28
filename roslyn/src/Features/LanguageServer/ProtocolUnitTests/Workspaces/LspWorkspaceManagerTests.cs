@@ -413,7 +413,7 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 
@@ -869,7 +869,7 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace: true,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 
@@ -964,7 +964,7 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace: true,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 
@@ -1020,7 +1020,7 @@ public class LspWorkspaceManagerTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace: true,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 

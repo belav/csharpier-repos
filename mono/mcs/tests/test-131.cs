@@ -19,7 +19,7 @@ public class Blah
         [Simple("second")]
         B,
 
-        C
+        C,
     }
 
     public static int Main()

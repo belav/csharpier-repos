@@ -50,7 +50,7 @@ namespace System.Web.SessionState
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        Custom = 4
+        Custom = 4,
     };
 
     public interface IHttpSessionState

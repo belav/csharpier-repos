@@ -51,7 +51,7 @@ namespace System.Data.Mapping
                             new FunctionImportStructuralTypeMappingKB(
                                 new List<FunctionImportStructuralTypeMapping>(),
                                 itemCollection
-                            )
+                            ),
                         }
                     );
                 this.noExplicitResultMappings = true;

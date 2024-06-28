@@ -393,7 +393,7 @@ namespace Newtonsoft.Json.Tests.Linq
         {
             JTokenWriter writer = new JTokenWriter
             {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
 
             await writer.WriteValueAsync(

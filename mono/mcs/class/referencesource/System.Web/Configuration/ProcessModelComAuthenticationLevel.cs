@@ -14,6 +14,6 @@ namespace System.Web.Configuration
         Default = 3,
         Pkt = 4,
         PktIntegrity = 5,
-        PktPrivacy = 6
+        PktPrivacy = 6,
     }
 }

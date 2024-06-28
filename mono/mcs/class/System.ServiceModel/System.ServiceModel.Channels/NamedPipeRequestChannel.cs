@@ -81,7 +81,7 @@ namespace System.ServiceModel.Channels
             )
             {
                 Encoder = this.Encoder,
-                Via = this.Via
+                Via = this.Via,
             };
             frame.ProcessPreambleInitiator();
             frame.ProcessPreambleAckInitiator();

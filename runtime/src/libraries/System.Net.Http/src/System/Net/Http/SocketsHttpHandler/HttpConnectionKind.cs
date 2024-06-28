@@ -13,5 +13,6 @@ namespace System.Net.Http
         ProxyConnect, // Connection used for proxy CONNECT. Tunnel will be established on top of this.
         SocksTunnel, // SOCKS proxy usage for HTTP requests.
         SslSocksTunnel // SOCKS proxy usage for HTTPS requests.
+        ,
     }
 }

@@ -417,7 +417,7 @@ namespace System.Web.Management
                 {
                     "aspnet_PersonalizationPerUser",
                     "aspnet_Paths",
-                    "aspnet_PersonalizationAllUsers"
+                    "aspnet_PersonalizationAllUsers",
                 },
                 8
             ),

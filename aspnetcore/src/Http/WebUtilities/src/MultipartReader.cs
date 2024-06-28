@@ -64,7 +64,7 @@ public class MultipartReader
         // TODO: HeadersLengthLimit can't be modified until after the constructor.
         _currentStream = new MultipartReaderStream(_stream, _boundary)
         {
-            LengthLimit = HeadersLengthLimit
+            LengthLimit = HeadersLengthLimit,
         };
     }
 
@@ -107,14 +107,14 @@ public class MultipartReader
         _boundary.ExpectLeadingCrlf();
         _currentStream = new MultipartReaderStream(_stream, _boundary)
         {
-            LengthLimit = BodyLengthLimit
+            LengthLimit = BodyLengthLimit,
         };
         long? baseStreamOffset = _stream.CanSeek ? (long?)_stream.Position : null;
         return new MultipartSection()
         {
             Headers = headers,
             Body = _currentStream,
-            BaseStreamOffset = baseStreamOffset
+            BaseStreamOffset = baseStreamOffset,
         };
     }
 

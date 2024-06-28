@@ -33,7 +33,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 Id = Id,
                 MenuName = MenuName,
                 Description = Description,
-                Metric = Metric
+                Metric = Metric,
             };
         }
 
@@ -59,7 +59,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 UISideVisualizerAssemblyName = UISideVisualizerAssemblyName,
                 UISideVisualizerAssemblyLocation = UISideVisualizerAssemblyLocation,
                 DebuggeeSideVisualizerTypeName = DebuggeeSideVisualizerTypeName,
-                DebuggeeSideVisualizerAssemblyName = DebuggeeSideVisualizerAssemblyName
+                DebuggeeSideVisualizerAssemblyName = DebuggeeSideVisualizerAssemblyName,
             };
         }
 
@@ -87,7 +87,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 UISideVisualizerAssemblyLocation = UISideVisualizerAssemblyLocation,
                 DebuggeeSideVisualizerTypeName = DebuggeeSideVisualizerTypeName,
                 DebuggeeSideVisualizerAssemblyName = DebuggeeSideVisualizerAssemblyName,
-                ExtensionPartId = ExtensionPartId
+                ExtensionPartId = ExtensionPartId,
             };
         }
     }

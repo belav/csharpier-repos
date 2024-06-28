@@ -39,6 +39,6 @@ namespace System.Windows.Forms
         Right = 0x00000004,
         Bottom = 0x00000008,
         Middle = 0x00000800,
-        All = 0x0000080F
+        All = 0x0000080F,
     }
 }

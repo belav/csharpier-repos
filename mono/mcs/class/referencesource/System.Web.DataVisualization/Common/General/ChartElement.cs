@@ -307,7 +307,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Arrow direction is Top - Bottom
         /// </summary>
-        Bottom
+        Bottom,
     }
 
     /// <summary>
@@ -358,7 +358,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// The image is aligned in the center of the chart element.
         /// </summary>
-        Center
+        Center,
     };
 
     /// <summary>
@@ -399,7 +399,7 @@ namespace System.Web.UI.DataVisualization.Charting
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
             MessageId = "Unscaled"
         )]
-        Unscaled = 100
+        Unscaled = 100,
     };
 
     /// <summary>
@@ -420,7 +420,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// The axis is never enabled.
         /// </summary>
-        False
+        False,
     };
 
     /// <summary>
@@ -557,7 +557,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// DateTime with offset
         /// </summary>
-        DateTimeOffset
+        DateTimeOffset,
     };
 
     /// <summary>
@@ -863,7 +863,7 @@ namespace System.Web.UI.DataVisualization.Charting
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
             MessageId = "Zag"
         )]
-        ZigZag
+        ZigZag,
     };
 
     /// <summary>
@@ -884,7 +884,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// System default anti-aliasing quality.
         /// </summary>
-        SystemDefault
+        SystemDefault,
     }
 
     /// <summary>
@@ -911,7 +911,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Use anti-alias for everything.
         /// </summary>
-        All = Text | Graphics
+        All = Text | Graphics,
     };
 
     /// <summary>
@@ -967,7 +967,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// A 10-point star-shaped marker is displayed.
         /// </summary>
-        Star10 = 9
+        Star10 = 9,
     };
 
     /// <summary>
@@ -1013,7 +1013,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gradient is applied vertically from the center outwards.
         /// </summary>
-        VerticalCenter
+        VerticalCenter,
     };
 
     #endregion

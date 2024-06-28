@@ -39,6 +39,6 @@ namespace System.Xml.Serialization
     {
         None,
         Read,
-        Write
+        Write,
     }
 }

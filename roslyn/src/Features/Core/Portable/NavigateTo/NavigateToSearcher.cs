@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.NavigateTo
     {
         RegularDocuments = 0b01,
         GeneratedDocuments = 0b10,
-        AllDocuments = RegularDocuments | GeneratedDocuments
+        AllDocuments = RegularDocuments | GeneratedDocuments,
     }
 
     internal class NavigateToSearcher

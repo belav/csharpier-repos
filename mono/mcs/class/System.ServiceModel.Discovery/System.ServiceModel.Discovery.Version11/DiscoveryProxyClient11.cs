@@ -63,7 +63,7 @@ namespace System.ServiceModel.Discovery.Version11
         {
             var req = new MessageContracts11.ResolveRequest()
             {
-                Body = new ResolveCriteria11(criteria)
+                Body = new ResolveCriteria11(criteria),
             };
             return Channel.BeginResolve(req, callback, state);
         }

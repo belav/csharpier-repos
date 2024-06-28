@@ -1496,6 +1496,7 @@ namespace System.Data.SqlClient
             OnRow, // On a valid row in the current resultset
             AfterRows, // After all rows in current resultset
             AfterResults // After all resultsets in request
+            ,
         }
 
         private PositionState _currentPosition; // Where is the reader relative to incoming results?

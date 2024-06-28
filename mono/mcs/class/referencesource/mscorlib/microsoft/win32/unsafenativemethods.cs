@@ -298,7 +298,7 @@ namespace Microsoft.Win32
                 EVENT_ACTIVITY_CTRL_SET_ID = 2,
                 EVENT_ACTIVITY_CTRL_CREATE_ID = 3,
                 EVENT_ACTIVITY_CTRL_GET_SET_ID = 4,
-                EVENT_ACTIVITY_CTRL_CREATE_SET_ID = 5
+                EVENT_ACTIVITY_CTRL_CREATE_SET_ID = 5,
             };
 
             [System.Diagnostics.CodeAnalysis.SuppressMessage(
@@ -349,7 +349,7 @@ namespace Microsoft.Win32
                 TraceGuidQueryInfo,
                 TraceGuidQueryProcess,
                 TraceStackTracingInfo,
-                MaxTraceSetInfoClass
+                MaxTraceSetInfoClass,
             };
 
             internal struct TRACE_GUID_INFO

@@ -29,7 +29,7 @@ public class HeterogenousCollectionTests
 
         var patchDocument = new JsonPatchDocument
         {
-            ContractResolver = new CanvasContractResolver()
+            ContractResolver = new CanvasContractResolver(),
         };
 
         patchDocument.Add("/Items/-", circleJObject);

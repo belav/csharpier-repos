@@ -130,7 +130,7 @@ public class MigrationsScaffolderTest
                                     )
                                 )
                             )
-                        )
+                        ),
                     }
                 ),
                 historyRepository,

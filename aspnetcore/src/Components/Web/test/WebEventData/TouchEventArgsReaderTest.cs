@@ -28,7 +28,7 @@ public class TouchEventArgsReaderTest
                     PageX = 7.0,
                     PageY = 0.23,
                     ScreenX = 1.0,
-                    ScreenY = 39.2
+                    ScreenY = 39.2,
                 },
             },
             Detail = 789,
@@ -42,7 +42,7 @@ public class TouchEventArgsReaderTest
                     PageX = 786.0,
                     PageY = 1.4,
                     ScreenX = 5.0,
-                    ScreenY = 9.2
+                    ScreenY = 9.2,
                 },
                 new TouchPoint
                 {
@@ -52,7 +52,7 @@ public class TouchEventArgsReaderTest
                     PageX = 6.3,
                     PageY = 13.4,
                     ScreenX = 4.0,
-                    ScreenY = 7.2
+                    ScreenY = 7.2,
                 },
             },
             Touches = new[]

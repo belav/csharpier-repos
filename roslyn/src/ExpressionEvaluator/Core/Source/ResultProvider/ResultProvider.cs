@@ -1437,7 +1437,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             {
                 Initialized,
                 Executing,
-                Executed
+                Executed,
             }
 
             internal readonly DkmWorkList InnerWorkList;

@@ -14,7 +14,7 @@ public enum MyEnum
 {
     nil,
     alpha,
-    beta
+    beta,
 };
 
 public class Foo

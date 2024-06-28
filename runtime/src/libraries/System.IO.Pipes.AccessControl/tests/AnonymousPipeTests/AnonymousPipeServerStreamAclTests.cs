@@ -63,7 +63,7 @@ namespace System.IO.Pipes.Tests
             from inheritability in new[]
             {
                 HandleInheritability.None,
-                HandleInheritability.Inheritable
+                HandleInheritability.Inheritable,
             }
             from bufferSize in new[] { 0, 1 }
             select new object[] { direction, inheritability, bufferSize };

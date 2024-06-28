@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             Cached,
             Modified,
             Deleted,
-            MaxValue
+            MaxValue,
         }
 
         enum OperatorKind
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             SelectMany,
             Where,
             Combine,
-            MaxValue
+            MaxValue,
         }
 
         class HintNameProvider(int nextHintNameId)
@@ -95,7 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                                 {
                                     "a" when TransformAs => "b",
                                     "c" when TransformCs => "d",
-                                    var other => other
+                                    var other => other,
                                 }
                             )
                 );
@@ -157,7 +157,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                                         {
                                             "a" when logic.TransformAs => "b",
                                             "c" when logic.TransformCs => "d",
-                                            var other => other
+                                            var other => other,
                                         }
                                     )
                             )
@@ -354,7 +354,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             var comp = CreateCompilation(source);
             var generators = new[]
             {
-                new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(registerPipeline))
+                new IncrementalGeneratorWrapper(new PipelineCallbackGenerator(registerPipeline)),
             };
 
             // original input
@@ -451,7 +451,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     1 => "b",
                     2 => "c",
                     3 => "d",
-                    var num => throw ExceptionUtilities.UnexpectedValue(num)
+                    var num => throw ExceptionUtilities.UnexpectedValue(num),
                 };
             }
 
@@ -487,7 +487,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         bool transformCs = random.Next(2) == 0 ? true : false;
                         var operator1 = new SelectOperator(@operator, transformAs, transformCs)
                         {
-                            HintNameProvider = hintNameProvider
+                            HintNameProvider = hintNameProvider,
                         };
                         return makeOperatorTree(operator1, random.Next(depth));
 
@@ -513,7 +513,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                             sources.ToImmutableAndFree()
                         )
                         {
-                            HintNameProvider = hintNameProvider
+                            HintNameProvider = hintNameProvider,
                         };
                         return makeOperatorTree(operator2, random.Next(depth));
 
@@ -530,7 +530,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                             includeDs
                         )
                         {
-                            HintNameProvider = hintNameProvider
+                            HintNameProvider = hintNameProvider,
                         };
                         return makeOperatorTree(operator3, random.Next(depth));
 
@@ -545,7 +545,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         var operator4_2 = makeOperatorTree(@operator, random.Next(depth));
                         var operator4 = new CombineOperator(operator4_1, operator4_2)
                         {
-                            HintNameProvider = hintNameProvider
+                            HintNameProvider = hintNameProvider,
                         };
                         return makeOperatorTree(operator4, random.Next(depth));
                 }
@@ -729,7 +729,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
             {
                 var provider = context.AdditionalTextsProvider.SelectMany(
                     (additionalText, _) =>
-                        new (bool TransformAs, bool TransformCs)[] { (false, false), }.Select(
+                        new (bool TransformAs, bool TransformCs)[] { (false, false) }.Select(
                             logic =>
                                 (AdditionalText)
                                     new InMemoryAdditionalText(
@@ -738,7 +738,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                                         {
                                             "a" when logic.TransformAs => "b",
                                             "c" when logic.TransformCs => "d",
-                                            var other => other
+                                            var other => other,
                                         }
                                     )
                         )

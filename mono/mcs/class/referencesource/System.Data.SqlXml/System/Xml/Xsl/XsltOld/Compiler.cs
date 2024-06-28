@@ -60,7 +60,7 @@ namespace System.Xml.Xsl.XsltOld
 #if !FEATURE_PAL // visualbasic
         VisualBasic,
 #endif // !FEATURE_PAL
-        CSharp
+        CSharp,
     }
 
     internal class Compiler
@@ -855,7 +855,7 @@ namespace System.Xml.Xsl.XsltOld
         {
             new Hashtable(),
             new Hashtable(),
-            new Hashtable()
+            new Hashtable(),
         };
         ArrayList scriptFiles = new ArrayList();
 
@@ -961,13 +961,13 @@ namespace System.Xml.Xsl.XsltOld
                             null,
                             null
                         )
-                    :
+                :
 #if !FEATURE_PAL // visualbasic
-                    lang == ScriptingLanguage.VisualBasic
-                        ? (CodeDomProvider)new Microsoft.VisualBasic.VBCodeProvider()
-                        :
+                lang == ScriptingLanguage.VisualBasic
+                    ? (CodeDomProvider)new Microsoft.VisualBasic.VBCodeProvider()
+                :
 #endif
-                        /*CSharp | default */(CodeDomProvider)new Microsoft.CSharp.CSharpCodeProvider()
+                /*CSharp | default */(CodeDomProvider)new Microsoft.CSharp.CSharpCodeProvider()
             );
         }
 

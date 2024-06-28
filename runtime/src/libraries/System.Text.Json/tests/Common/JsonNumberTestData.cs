@@ -119,7 +119,7 @@ namespace System.Text.Json.Tests
                 12345,
                 // next two values are just to satisfy requirement of having 5 values in the list
                 67890,
-                98989
+                98989,
             };
             byte[] b32 = new byte[4];
             for (int i = 0; i < numberOfItems; i++)
@@ -137,7 +137,7 @@ namespace System.Text.Json.Tests
                 12345,
                 // next two values are just to satisfy requirement of having 5 values in the list
                 67890,
-                98989
+                98989,
             };
             byte[] b64 = new byte[8];
             for (int i = 0; i < numberOfItems; i++)
@@ -154,7 +154,7 @@ namespace System.Text.Json.Tests
                 1.1234e1,
                 -1.1234e1,
                 double.MaxValue,
-                double.MinValue
+                double.MinValue,
             };
             for (int i = 0; i < numberOfItems / 2; i++)
             {
@@ -179,7 +179,7 @@ namespace System.Text.Json.Tests
                 1.1234e1f,
                 -1.1234e1f,
                 float.MaxValue,
-                float.MinValue
+                float.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -195,7 +195,7 @@ namespace System.Text.Json.Tests
                 (decimal)1.1234e1,
                 (decimal)-1.1234e1,
                 decimal.MaxValue,
-                decimal.MinValue
+                decimal.MinValue,
             };
             for (int i = 0; i < numberOfItems / 2; i++)
             {
@@ -217,7 +217,7 @@ namespace System.Text.Json.Tests
                 (Int128)long.MaxValue + 1,
                 (Int128)long.MinValue - 1,
                 Int128.MaxValue,
-                Int128.MinValue
+                Int128.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -235,7 +235,7 @@ namespace System.Text.Json.Tests
             {
                 (UInt128)ulong.MaxValue + 1,
                 UInt128.MaxValue,
-                UInt128.MinValue
+                UInt128.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {
@@ -251,7 +251,7 @@ namespace System.Text.Json.Tests
                 (Half)1.1234e1,
                 (Half)(-1.1234e1),
                 Half.MaxValue,
-                Half.MinValue
+                Half.MinValue,
             };
             for (int i = 0; i < numberOfItems; i++)
             {

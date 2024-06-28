@@ -22,7 +22,7 @@ namespace System.Globalization.Tests
             30,
             31,
             30,
-            31
+            31,
         };
 
         private static readonly int[] s_daysPerMonthCommonYear = new int[13]
@@ -39,7 +39,7 @@ namespace System.Globalization.Tests
             30,
             31,
             30,
-            31
+            31,
         };
 
         public static IEnumerable<object[]> GetDaysInMonth_TestData()
@@ -50,7 +50,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 TaiwanCalendarUtilities.RandomYear(),
-                TaiwanCalendarUtilities.RandomMonth()
+                TaiwanCalendarUtilities.RandomMonth(),
             };
         }
 

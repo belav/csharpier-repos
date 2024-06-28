@@ -20,7 +20,7 @@ public class Managed
         LongStructPack16ExplicitId,
         OverlappingLongFloatId,
         OverlappingMultipleEightbyteId,
-        HFAId
+        HFAId,
     }
 
     [SecuritySafeCritical]
@@ -731,7 +731,7 @@ public class Managed
                     OverlappingLongFloat overlappingLongFloat = new OverlappingLongFloat
                     {
                         l = 12345,
-                        f = 12.45f
+                        f = 12.45f,
                     };
                     Console.WriteLine(
                         "\tCalling MarshalStructAsParam_AsExpByValOverlappingLongFloat..."
@@ -751,7 +751,7 @@ public class Managed
                     OverlappingLongFloat2 overlappingLongFloat2 = new OverlappingLongFloat2
                     {
                         l = 12345,
-                        f = 12.45f
+                        f = 12.45f,
                     };
                     Console.WriteLine(
                         "\tCalling MarshalStructAsParam_AsExpByValOverlappingLongFloat (Reversed field order)..."
@@ -777,7 +777,7 @@ public class Managed
                         new OverlappingMultipleEightbyte
                         {
                             arr = new float[3] { 1f, 400f, 623289f },
-                            i = 1234
+                            i = 1234,
                         };
                     if (
                         !MarshalStructAsParam_AsExpByValOverlappingMultipleEightByte(
@@ -802,8 +802,8 @@ public class Managed
                             f1 = 2.0f,
                             f2 = 10.5f,
                             f3 = 15.2f,
-                            f4 = 0.12f
-                        }
+                            f4 = 0.12f,
+                        },
                     };
 
                     float expected = hfa.hfa.f1 * hfa.hfa.f2 * hfa.hfa.f3 * hfa.hfa.f4;

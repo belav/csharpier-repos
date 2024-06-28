@@ -20,7 +20,7 @@ public class HttpMethodslTests
             (new string[] { "CONNECT", "Connect", "connect" }, HttpMethods.Connect),
             (new string[] { "OPTIONS", "Options", "options" }, HttpMethods.Options),
             (new string[] { "PATCH", "Patch", "patch" }, HttpMethods.Patch),
-            (new string[] { "TRACE", "Trace", "trace" }, HttpMethods.Trace)
+            (new string[] { "TRACE", "Trace", "trace" }, HttpMethods.Trace),
         };
 
         for (int i = 0; i < testCases.Count; i++)

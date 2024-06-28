@@ -3861,7 +3861,7 @@ namespace System.Web.UI.WebControls
         internal enum View
         {
             ChangePassword,
-            Success
+            Success,
         }
     }
 }

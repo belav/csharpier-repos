@@ -31,7 +31,7 @@ public class PrerenderComponentApplicationStoreTest
         var store = new PrerenderComponentApplicationStore(persistedState);
         var expected = new Dictionary<string, ReadOnlySequence<byte>>()
         {
-            ["MyValue"] = new ReadOnlySequence<byte>(new byte[] { 1, 2, 3, 4 })
+            ["MyValue"] = new ReadOnlySequence<byte>(new byte[] { 1, 2, 3, 4 }),
         };
 
         // Act

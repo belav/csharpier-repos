@@ -53,7 +53,7 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 FileName = this.xamlFileName,
                 IsPublic = this.DefaultClassIsPublic,
-                RootNamespace = this.rootNamespace
+                RootNamespace = this.rootNamespace,
             };
 
             // We loop through the provided XAML; for each node, we do two things:
@@ -684,14 +684,14 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     Source = this.xamlFileName,
                     LineNumber = lineInfo.LineNumber,
-                    LinePosition = lineInfo.LinePosition
+                    LinePosition = lineInfo.LinePosition,
                 };
             }
             else
             {
                 return new LoggableException(new InvalidOperationException(exceptionMessage))
                 {
-                    Source = this.xamlFileName
+                    Source = this.xamlFileName,
                 };
             }
         }

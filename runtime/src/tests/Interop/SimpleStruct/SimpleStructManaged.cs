@@ -98,7 +98,7 @@ namespace PInvokeTests
     {
         None = 0,
         OK = 1,
-        Cancel = 2
+        Cancel = 2,
     }
     #endregion
 

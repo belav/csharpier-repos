@@ -205,8 +205,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                         {
                             result = new
                             {
-                                value = obj["result"]?["preview"]?["ownProperties"]?["value"]
-                            }
+                                value = obj["result"]?["preview"]?["ownProperties"]?["value"],
+                            },
                         }
                     );
                 }
@@ -224,8 +224,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                         {
                             value = obj["result"],
                             type = obj["resultType"],
-                            description = obj["resultDescription"]
-                        }
+                            description = obj["resultDescription"],
+                        },
                     }
                 );
             }
@@ -264,7 +264,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     {
                         target.id,
                         target.sessionId,
-                        result = Value
+                        result = Value,
                     }
                 );
             }
@@ -275,7 +275,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                     {
                         target.id,
                         target.sessionId,
-                        error = Error
+                        error = Error,
                     }
                 );
             }
@@ -435,14 +435,14 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         Active,
         Disabled,
-        Pending
+        Pending,
     }
 
     internal enum StepKind
     {
         Into,
         Over,
-        Out
+        Out,
     }
 
     internal enum PauseOnExceptionsKind
@@ -450,7 +450,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         Unset,
         None,
         Uncaught,
-        All
+        All,
     }
 
     internal class ExecutionContext
@@ -474,7 +474,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             new ExecutionContext(null, Id, AuxData, PauseOnExceptions)
             {
                 ParentContext = this,
-                SessionId = sessionId
+                SessionId = sessionId,
             };
 
         public bool CopyDataFromParentContext()

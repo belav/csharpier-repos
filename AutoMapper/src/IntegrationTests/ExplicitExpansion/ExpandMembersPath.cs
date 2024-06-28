@@ -95,18 +95,18 @@ public class ExpandMembersPath : IntegrationTest<ExpandMembersPath.DatabaseIniti
                     new Class1
                     {
                         Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
-                        Name = "Alain Brito"
+                        Name = "Alain Brito",
                     },
                     new Class1
                     {
                         Class2 = new Class2 { Class3 = new Class3 { Name = "OtherValue" } },
-                        Name = "Jimmy Bogard"
+                        Name = "Jimmy Bogard",
                     },
                     new Class1
                     {
                         Class2 = new Class2 { Class3 = new Class3 { Name = "SomeValue" } },
-                        Name = "Bill Gates"
-                    }
+                        Name = "Bill Gates",
+                    },
                 }
             );
             base.Seed(context);

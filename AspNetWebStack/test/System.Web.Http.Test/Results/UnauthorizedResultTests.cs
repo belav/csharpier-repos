@@ -93,7 +93,7 @@ namespace System.Web.Http.Results
             IEnumerable<AuthenticationHeaderValue> challenges = new[]
             {
                 expectedChallenge1,
-                expectedChallenge2
+                expectedChallenge2,
             };
 
             using (HttpRequestMessage expectedRequest = CreateRequest())
@@ -145,7 +145,7 @@ namespace System.Web.Http.Results
             IEnumerable<AuthenticationHeaderValue> challenges = new[]
             {
                 expectedChallenge1,
-                expectedChallenge2
+                expectedChallenge2,
             };
             ApiController controller = CreateController();
 

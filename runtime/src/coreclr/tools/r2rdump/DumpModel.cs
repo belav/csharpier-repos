@@ -23,7 +23,7 @@ namespace R2RDump
             ".ni.exe",
             ".ni.dll",
             ".exe",
-            ".dll"
+            ".dll",
         };
 
         public bool DiffHideSameDisasm { get; init; }
@@ -85,7 +85,7 @@ namespace R2RDump
 
             IEnumerable<string> allRefPaths = new string[]
             {
-                Path.GetDirectoryName(parentFile)
+                Path.GetDirectoryName(parentFile),
             }.Concat(
                 (ReferencePath ?? Enumerable.Empty<DirectoryInfo>()).Select(path => path.FullName)
             );

@@ -158,7 +158,7 @@ namespace Wasm.Build.Tests
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             };
 
             psi.Environment["DOTNET_MULTILEVEL_LOOKUP"] = "0";

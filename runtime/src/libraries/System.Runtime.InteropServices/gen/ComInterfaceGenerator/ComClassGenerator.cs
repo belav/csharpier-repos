@@ -247,7 +247,7 @@ namespace Microsoft.Interop
                         TypeSyntaxes.IIUnknownDerivedDetails,
                         detailsTempLocal,
                         initializeToDefault: false
-                    )
+                    ),
                 };
             for (int i = 0; i < implementedInterfaces.Length; i++)
             {
@@ -299,7 +299,7 @@ namespace Microsoft.Interop
                                                         IdentifierName("ManagedVirtualMethodTable")
                                                     )
                                             )
-                                        )
+                                        ),
                                     }
                                 )
                             )

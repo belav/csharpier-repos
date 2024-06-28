@@ -20,7 +20,7 @@ public class Test_Alloc_neg2
             (long)(GCHandleType.Pinned + 1),
             Int32.MaxValue,
             UInt32.MaxValue,
-            Int64.MaxValue
+            Int64.MaxValue,
         };
         bool passed = true;
 

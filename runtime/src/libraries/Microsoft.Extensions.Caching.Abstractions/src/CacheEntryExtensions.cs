@@ -125,7 +125,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 new PostEvictionCallbackRegistration()
                 {
                     EvictionCallback = callback,
-                    State = state
+                    State = state,
                 }
             );
             return entry;

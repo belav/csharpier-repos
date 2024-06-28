@@ -365,13 +365,13 @@ namespace System.Linq.Expressions.Tests
                 yield return new object[]
                 {
                     expressionMethods.First(mi => mi.Name == names.Item2),
-                    typeof(int)
+                    typeof(int),
                 };
             foreach (Tuple<string, string> names in AssignAndEquivalentMethodNames(false))
                 yield return new object[]
                 {
                     expressionMethods.First(mi => mi.Name == names.Item2),
-                    typeof(double)
+                    typeof(double),
                 };
         }
 
@@ -399,14 +399,14 @@ namespace System.Linq.Expressions.Tests
                 {
                     expressionMethods.First(mi => mi.Name == names.Item1),
                     expressionMethods.First(mi => mi.Name == names.Item2),
-                    typeof(int)
+                    typeof(int),
                 };
             foreach (Tuple<string, string> names in AssignAndEquivalentMethodNames(false))
                 yield return new object[]
                 {
                     expressionMethods.First(mi => mi.Name == names.Item1),
                     expressionMethods.First(mi => mi.Name == names.Item2),
-                    typeof(double)
+                    typeof(double),
                 };
         }
 

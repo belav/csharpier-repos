@@ -47,7 +47,7 @@ namespace System.Web
             {
                 Path.DirectorySeparatorChar,
                 Path.AltDirectorySeparatorChar,
-                Path.VolumeSeparatorChar
+                Path.VolumeSeparatorChar,
             }; // from Path.GetFileName()
 
             private bool _isInitialized = false;

@@ -120,7 +120,7 @@ public class ContactApiController : Controller
                 Detail = "Detail",
                 Status = 404,
                 Instance = "Instance",
-                Extensions = { ["tracking-id"] = 27, },
+                Extensions = { ["tracking-id"] = 27 },
             }
         );
     }
@@ -133,8 +133,8 @@ public class ContactApiController : Controller
             {
                 Title = "Error",
                 Status = 400,
-                Extensions = { ["tracking-id"] = "27", },
-                Errors = { { "Error1", new[] { "Error Message" } }, },
+                Extensions = { ["tracking-id"] = "27" },
+                Errors = { { "Error1", new[] { "Error Message" } } },
             }
         );
     }

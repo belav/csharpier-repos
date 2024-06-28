@@ -107,7 +107,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                             {
                                 new DescriptionRun(
                                     (sourceText.Lines.IndexOf(span.Start) + 1).ToString()
-                                )
+                                ),
                             }
                         )
                     )

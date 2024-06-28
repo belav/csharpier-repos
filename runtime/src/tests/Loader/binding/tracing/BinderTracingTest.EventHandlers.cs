@@ -45,7 +45,7 @@ namespace BinderTracingTests
                     Success = false,
                     Cached = false,
                     AssemblyLoadContextResolvingHandlers = handlers.Invocations,
-                    NestedBinds = handlers.Binds
+                    NestedBinds = handlers.Binds,
                 };
             }
         }
@@ -70,7 +70,7 @@ namespace BinderTracingTests
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
                     AssemblyLoadContextResolvingHandlers = handlers.Invocations,
-                    NestedBinds = handlers.Binds
+                    NestedBinds = handlers.Binds,
                 };
             }
         }
@@ -93,7 +93,7 @@ namespace BinderTracingTests
                     Success = false,
                     Cached = false,
                     AssemblyLoadContextResolvingHandlers = handlers.Invocations,
-                    NestedBinds = handlers.Binds
+                    NestedBinds = handlers.Binds,
                 };
             }
         }
@@ -123,7 +123,7 @@ namespace BinderTracingTests
                     AssemblyLoadContextResolvingHandlers = handlerNull
                         .Invocations.Concat(handlerLoad.Invocations)
                         .ToList(),
-                    NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList()
+                    NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList(),
                 };
             }
         }
@@ -151,7 +151,7 @@ namespace BinderTracingTests
                     Success = false,
                     Cached = false,
                     AppDomainAssemblyResolveHandlers = handlers.Invocations,
-                    NestedBinds = handlers.Binds
+                    NestedBinds = handlers.Binds,
                 };
             }
         }
@@ -176,7 +176,7 @@ namespace BinderTracingTests
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
                     AppDomainAssemblyResolveHandlers = handlers.Invocations,
-                    NestedBinds = handlers.Binds
+                    NestedBinds = handlers.Binds,
                 };
             }
         }
@@ -202,7 +202,7 @@ namespace BinderTracingTests
                     ResultAssemblyPath = asm.Location,
                     Cached = false,
                     AppDomainAssemblyResolveHandlers = handlers.Invocations,
-                    NestedBinds = handlers.Binds
+                    NestedBinds = handlers.Binds,
                 };
             }
         }
@@ -232,7 +232,7 @@ namespace BinderTracingTests
                     AppDomainAssemblyResolveHandlers = handlerNull
                         .Invocations.Concat(handlerLoad.Invocations)
                         .ToList(),
-                    NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList()
+                    NestedBinds = handlerNull.Binds.Concat(handlerLoad.Binds).ToList(),
                 };
             }
         }
@@ -269,16 +269,16 @@ namespace BinderTracingTests
                         AssemblyName = asmDependency.GetName(),
                         HandlerName = AssemblyLoadFromHandlerName,
                         ResultAssemblyName = asmDependency.GetName(),
-                        ResultAssemblyPath = asmDependency.Location
-                    }
+                        ResultAssemblyPath = asmDependency.Location,
+                    },
                 },
                 AssemblyLoadFromHandler = new LoadFromHandlerInvocation()
                 {
                     AssemblyName = asmDependency.GetName(),
                     IsTrackedLoad = true,
                     RequestingAssemblyPath = asm.Location,
-                    ComputedRequestedAssemblyPath = asmDependency.Location
-                }
+                    ComputedRequestedAssemblyPath = asmDependency.Location,
+                },
             };
         }
 
@@ -319,15 +319,15 @@ namespace BinderTracingTests
                     {
                         AssemblyName = assemblyName,
                         HandlerName = AssemblyLoadFromHandlerName,
-                    }
+                    },
                 },
                 AssemblyLoadFromHandler = new LoadFromHandlerInvocation()
                 {
                     AssemblyName = assemblyName,
                     IsTrackedLoad = true,
                     RequestingAssemblyPath = asm.Location,
-                    ComputedRequestedAssemblyPath = expectedPath
-                }
+                    ComputedRequestedAssemblyPath = expectedPath,
+                },
             };
         }
 
@@ -356,14 +356,14 @@ namespace BinderTracingTests
                     {
                         AssemblyName = assemblyName,
                         HandlerName = AssemblyLoadFromHandlerName,
-                    }
+                    },
                 },
                 AssemblyLoadFromHandler = new LoadFromHandlerInvocation()
                 {
                     AssemblyName = assemblyName,
                     IsTrackedLoad = false,
-                    RequestingAssemblyPath = executingAssembly.Location
-                }
+                    RequestingAssemblyPath = executingAssembly.Location,
+                },
             };
         }
 
@@ -372,7 +372,7 @@ namespace BinderTracingTests
             Null,
             RequestedAssembly,
             NameMismatch,
-            Exception
+            Exception,
         }
 
         private class Handlers : IDisposable
@@ -482,7 +482,7 @@ namespace BinderTracingTests
                     Success = true,
                     ResultAssemblyName = asm.GetName(),
                     ResultAssemblyPath = asm.Location,
-                    Cached = false
+                    Cached = false,
                 };
                 Binds.Add(bind);
                 return asm;

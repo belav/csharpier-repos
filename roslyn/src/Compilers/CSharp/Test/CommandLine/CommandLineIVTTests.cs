@@ -39,7 +39,7 @@ public class CommandLineIVTTests : CommandLineTestBase
         var sw = new StringWriter();
 
         var compiler = CreateCSharpCompiler(
-            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path, },
+            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path },
             additionalReferences: new[] { comp1.ToMetadataReference() }
         );
 
@@ -125,7 +125,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var sw = new StringWriter();
 
         var compiler = CreateCSharpCompiler(
-            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path, },
+            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path },
             additionalReferences: new[] { comp1.ToMetadataReference() }
         );
 
@@ -213,7 +213,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var sw = new StringWriter();
 
         var compiler = CreateCSharpCompiler(
-            new[] { "/nologo", "/t:exe", "/preferreduilang:en", "/reportivts", source2.Path, },
+            new[] { "/nologo", "/t:exe", "/preferreduilang:en", "/reportivts", source2.Path },
             additionalReferences: new[] { comp1.ToMetadataReference() }
         );
 
@@ -307,7 +307,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
         var sw = new StringWriter();
 
         var compiler = CreateCSharpCompiler(
-            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path, },
+            new[] { "/nologo", "/t:library", "/preferreduilang:en", "/reportivts", source2.Path },
             additionalReferences: new[] { comp1.ToMetadataReference() }
         );
 
@@ -369,7 +369,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     [InlineData("/reportivts+")]
     public void TurnOnLast(string onFlag)
     {
-        var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts-", onFlag, });
+        var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts-", onFlag });
 
         Assert.True(compiler.Arguments.ReportInternalsVisibleToAttributes);
     }
@@ -379,7 +379,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     [InlineData("/reportivts+")]
     public void TurnOffLast(string onFlag)
     {
-        var compiler = CreateCSharpCompiler(new[] { "/nologo", onFlag, "/reportivts-", });
+        var compiler = CreateCSharpCompiler(new[] { "/nologo", onFlag, "/reportivts-" });
 
         Assert.False(compiler.Arguments.ReportInternalsVisibleToAttributes);
     }
@@ -387,7 +387,7 @@ Assembly reference: 'N1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'
     [Fact]
     public void BadReportIvtsValue()
     {
-        var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts:bad", });
+        var compiler = CreateCSharpCompiler(new[] { "/nologo", "/reportivts:bad" });
 
         Assert.False(compiler.Arguments.ReportInternalsVisibleToAttributes);
         compiler.Arguments.Errors.Verify(

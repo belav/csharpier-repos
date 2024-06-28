@@ -23,7 +23,7 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
             { nameof(DateTime.Hour), "%H" },
             { nameof(DateTime.Minute), "%M" },
             { nameof(DateTime.Second), "%S" },
-            { nameof(DateTime.DayOfWeek), "%w" }
+            { nameof(DateTime.DayOfWeek), "%w" },
         };
 
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;
@@ -149,13 +149,13 @@ public class SqliteDateTimeMemberTranslator : IMemberTranslator
                                 timestring,
                                 modifiers
                             ),
-                            _sqlExpressionFactory.Constant("0")
+                            _sqlExpressionFactory.Constant("0"),
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, false },
                         returnType
                     ),
-                    _sqlExpressionFactory.Constant(".")
+                    _sqlExpressionFactory.Constant("."),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, false },

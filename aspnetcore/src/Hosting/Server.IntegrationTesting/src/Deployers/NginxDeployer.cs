@@ -124,7 +124,7 @@ public class NginxDeployer : SelfHostDeployer
             using (
                 var process = new Process
                 {
-                    StartInfo = { FileName = "whoami", RedirectStandardOutput = true, }
+                    StartInfo = { FileName = "whoami", RedirectStandardOutput = true },
                 }
             )
             {
@@ -183,7 +183,7 @@ public class NginxDeployer : SelfHostDeployer
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 // Trying a work around for https://github.com/aspnet/Hosting/issues/140.
-                RedirectStandardInput = true
+                RedirectStandardInput = true,
             };
 
             using (var runNginx = new Process() { StartInfo = startInfo })
@@ -225,7 +225,7 @@ public class NginxDeployer : SelfHostDeployer
                     RedirectStandardError = true,
                     RedirectStandardOutput = true,
                     // Trying a work around for https://github.com/aspnet/Hosting/issues/140.
-                    RedirectStandardInput = true
+                    RedirectStandardInput = true,
                 };
 
                 using (var runNginx = new Process() { StartInfo = startInfo })

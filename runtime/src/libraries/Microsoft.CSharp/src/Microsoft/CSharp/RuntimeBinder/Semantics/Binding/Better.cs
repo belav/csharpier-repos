@@ -36,7 +36,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* SHORT*/
             {
@@ -55,7 +55,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 1,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* INT*/
             {
@@ -74,7 +74,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 1,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* LONG*/
             {
@@ -93,7 +93,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 1,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* FLOAT*/
             {
@@ -112,7 +112,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* DOUBLE*/
             {
@@ -131,7 +131,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* DECIMAL*/
             {
@@ -150,7 +150,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* CHAR*/
             {
@@ -169,7 +169,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* BOOL*/
             {
@@ -188,7 +188,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* SBYTE*/
             {
@@ -207,7 +207,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 1,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* USHORT*/
             {
@@ -226,7 +226,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* UINT*/
             {
@@ -245,7 +245,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* ULONG*/
             {
@@ -264,7 +264,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* IPTR*/
             {
@@ -283,7 +283,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* UIPTR*/
             {
@@ -302,7 +302,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
+                3,
             },
             new byte[] /* OBJECT*/
             {
@@ -321,8 +321,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 3,
                 3,
                 3,
-                3
-            }
+                3,
+            },
         };
 
         private static BetterType WhichMethodIsBetterTieBreaker(

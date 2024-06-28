@@ -45,7 +45,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             "deer",
             "pos",
             "itis",
-            "ism"
+            "ism",
         };
 
         private string[] _uninflectiveWordList = new string[]
@@ -124,7 +124,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             "offspring",
             "molasses",
             "shambles",
-            "shingles"
+            "shingles",
         };
 
         private Dictionary<string, string> _irregularVerbList = new Dictionary<string, string>()
@@ -135,7 +135,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "was", "were" },
             { "were", "were" },
             { "has", "have" },
-            { "have", "have" }
+            { "have", "have" },
         };
 
         private List<string> _pronounList = new List<string>()
@@ -263,7 +263,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "tie", "ties" },
             { "movie", "movies" },
             { "bonus", "bonuses" },
-            { "specimen", "specimens" }
+            { "specimen", "specimens" },
         };
 
         Dictionary<string, string> _assimilatedClassicalInflectionDictionary = new Dictionary<
@@ -327,7 +327,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "rhino", "rhinos" },
             { "fiasco", "fiascos" },
             { "magneto", "magnetos" },
-            { "stylo", "stylos" }
+            { "stylo", "stylos" },
         };
 
         Dictionary<string, string> _classicalInflectionDictionary = new Dictionary<string, string>()
@@ -446,7 +446,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "cherub", "cherubim" },
             { "goy", "goyim" },
             { "seraph", "seraphim" },
-            { "alumnus", "alumni" }
+            { "alumnus", "alumni" },
         };
 
         // this list contains all the plural words that being treated as singluar form, for example, "they" -> "they"
@@ -458,7 +458,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             "have",
             "were",
             "yourself",
-            "are"
+            "are",
         };
 
         // this list contains the words ending with "se" and we special case these words since
@@ -559,7 +559,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "galvanise", "galvanises" },
             { "princesse", "princesses" },
             { "universe", "universes" },
-            { "workhorse", "workhorses" }
+            { "workhorse", "workhorses" },
         };
 
         private Dictionary<string, string> _wordsEndingWithSisDictionary = new Dictionary<
@@ -596,7 +596,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "sclerosis", "scleroses" },
             { "psychosis", "psychoses" },
             { "apoptosis", "apoptoses" },
-            { "symbiosis", "symbioses" }
+            { "symbiosis", "symbioses" },
         };
 
         private Dictionary<string, string> _wordsEndingWithSusDictionary = new Dictionary<
@@ -605,7 +605,7 @@ namespace System.Data.Entity.Design.PluralizationServices
         >()
         {
             { "consensus", "consensuses" },
-            { "census", "censuses" }
+            { "census", "censuses" },
         };
 
         private Dictionary<string, string> _wordsEndingWithInxAnxYnxDictionary = new Dictionary<
@@ -617,7 +617,7 @@ namespace System.Data.Entity.Design.PluralizationServices
             { "larynx", "larynges" },
             { "lynx", "lynxes" },
             { "pharynx", "pharynxes" },
-            { "phalanx", "phalanxes" }
+            { "phalanx", "phalanxes" },
         };
 
         internal EnglishPluralizationService()

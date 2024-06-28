@@ -106,7 +106,7 @@ public static partial class ProcessUtil
                 UseShellExecute = false,
                 CreateNoWindow = true,
             },
-            EnableRaisingEvents = true
+            EnableRaisingEvents = true,
         };
 
         if (workingDirectory != null)

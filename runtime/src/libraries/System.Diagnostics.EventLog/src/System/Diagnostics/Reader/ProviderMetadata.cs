@@ -359,7 +359,7 @@ namespace System.Diagnostics.Eventing.Reader
             Level = 0,
             Opcode = 1,
             Task = 2,
-            Keyword = 3
+            Keyword = 3,
         }
 
         internal string FindStandardLevelDisplayName(string name, uint value)
@@ -586,17 +586,22 @@ namespace System.Diagnostics.Eventing.Reader
 
                             generalDisplayName = objectTypeName switch
                             {
-                                ObjectTypeName.Level =>
-                                    FindStandardLevelDisplayName(generalName, generalValue),
-                                ObjectTypeName.Opcode =>
-                                    FindStandardOpcodeDisplayName(generalName, generalValue >> 16),
-                                ObjectTypeName.Keyword =>
-                                    FindStandardKeywordDisplayName(
-                                        generalName,
-                                        generalValueKeyword
-                                    ),
-                                ObjectTypeName.Task =>
-                                    FindStandardTaskDisplayName(generalName, generalValue),
+                                ObjectTypeName.Level => FindStandardLevelDisplayName(
+                                    generalName,
+                                    generalValue
+                                ),
+                                ObjectTypeName.Opcode => FindStandardOpcodeDisplayName(
+                                    generalName,
+                                    generalValue >> 16
+                                ),
+                                ObjectTypeName.Keyword => FindStandardKeywordDisplayName(
+                                    generalName,
+                                    generalValueKeyword
+                                ),
+                                ObjectTypeName.Task => FindStandardTaskDisplayName(
+                                    generalName,
+                                    generalValue
+                                ),
                                 _ => null,
                             };
                         }

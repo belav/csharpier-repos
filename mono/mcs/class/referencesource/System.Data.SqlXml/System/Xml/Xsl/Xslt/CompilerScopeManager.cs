@@ -28,7 +28,7 @@ namespace System.Xml.Xsl.Xslt
 
             CompatibilityFlags = BackwardCompatibility | ForwardCompatibility,
             InheritedFlags = CompatibilityFlags | CanHaveApplyImports,
-            ExclusiveFlags = NsDecl | NsExcl | Variable
+            ExclusiveFlags = NsDecl | NsExcl | Variable,
         }
 
         public struct ScopeRecord

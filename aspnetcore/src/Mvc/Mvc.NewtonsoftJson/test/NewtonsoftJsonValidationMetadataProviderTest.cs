@@ -104,7 +104,7 @@ public class NewtonsoftJsonValidationMetadataProviderTest
             return new TheoryData<NamingStrategy>
             {
                 new UpperCaseJsonNamingPolicy(),
-                new CamelCaseNamingStrategy()
+                new CamelCaseNamingStrategy(),
             };
         }
     }

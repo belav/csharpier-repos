@@ -334,18 +334,18 @@ namespace System.IO.Pipes.Tests
             {
                 PipeOptions.None,
                 PipeOptions.Asynchronous,
-                PipeOptions.WriteThrough
+                PipeOptions.WriteThrough,
             }
             from direction in new[] { PipeDirection.In, PipeDirection.Out, PipeDirection.InOut }
             from transmissionMode in new[]
             {
                 PipeTransmissionMode.Byte,
-                PipeTransmissionMode.Message
+                PipeTransmissionMode.Message,
             }
             from inheritability in new[]
             {
                 HandleInheritability.None,
-                HandleInheritability.Inheritable
+                HandleInheritability.Inheritable,
             }
             from inBufferSize in new[] { 0, 1 }
             from outBufferSize in new[] { 0, 1 }
@@ -362,7 +362,7 @@ namespace System.IO.Pipes.Tests
                 outBufferSize,
                 maxNumberOfServerInstances,
                 rights,
-                controlType
+                controlType,
             };
 
         [Theory]

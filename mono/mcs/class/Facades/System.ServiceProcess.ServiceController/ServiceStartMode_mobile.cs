@@ -40,7 +40,7 @@ namespace System.ServiceProcess
         Boot = 0,
         Disabled = 4,
         Manual = 3,
-        System = 1
+        System = 1,
     }
 }
 

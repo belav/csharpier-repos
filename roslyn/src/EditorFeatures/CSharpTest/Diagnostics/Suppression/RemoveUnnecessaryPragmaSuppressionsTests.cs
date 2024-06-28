@@ -341,7 +341,7 @@ class Class
             {
                 Pragmas,
                 SuppressMessageAttributes,
-                PragmasAndSuppressMessageAttributes
+                PragmasAndSuppressMessageAttributes,
             }
 
             [Theory, CombinatorialData]
@@ -483,7 +483,7 @@ class Class
                     {
                         CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
                         excludeAll ? "all" : VariableDeclaredButNotUsedDiagnosticId
-                    }
+                    },
                 };
 
                 await TestMissingInRegularAndScriptAsync(
@@ -513,7 +513,7 @@ class Class
                     {
                         CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
                         "category: ExcludedCategory"
-                    }
+                    },
                 };
 
                 await TestMissingInRegularAndScriptAsync(
@@ -1234,7 +1234,7 @@ class Class
                     {
                         CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions,
                         excludeAll ? "all" : $"CS0168, {UserDiagnosticAnalyzer.Descriptor0168.Id}"
-                    }
+                    },
                 };
 
                 await TestMissingInRegularAndScriptAsync(
@@ -1269,7 +1269,7 @@ class Class
 
                 var options = new OptionsCollection(LanguageNames.CSharp)
                 {
-                    { CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions, disabledId }
+                    { CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions, disabledId },
                 };
 
                 var (disablePrefix, disableSuffix, restorePrefix, restoreSuffix) =

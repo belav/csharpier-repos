@@ -5,7 +5,7 @@ namespace Test
     public enum Enum
     {
         One,
-        Two
+        Two,
     }
 
     class CompilerTest

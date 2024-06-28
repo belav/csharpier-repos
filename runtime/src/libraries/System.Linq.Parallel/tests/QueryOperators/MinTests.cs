@@ -21,7 +21,7 @@ namespace System.Linq.Parallel.Tests
                 {
                     Labeled.Label("Default", UnorderedSources.Default(count)),
                     count,
-                    Min(count)
+                    Min(count),
                 };
             }
 
@@ -39,7 +39,7 @@ namespace System.Linq.Parallel.Tests
                 {
                     Labeled.Label("Out-of-order input", data.AsParallel()),
                     count,
-                    Min(count)
+                    Min(count),
                 };
             }
         }
@@ -219,11 +219,9 @@ namespace System.Linq.Parallel.Tests
 
             // Null is defined as 'least' when ordered, but is not the minimum.
             Func<int, float?> translate = x =>
-                x % 3 == 0
-                    ? (float?)null
-                    : x % 3 == 1
-                        ? float.MinValue
-                        : float.NaN;
+                x % 3 == 0 ? (float?)null
+                : x % 3 == 1 ? float.MinValue
+                : float.NaN;
 
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(
@@ -301,11 +299,9 @@ namespace System.Linq.Parallel.Tests
 
             // Null is defined as 'least' when ordered, but is not the minimum.
             Func<int, double?> translate = x =>
-                x % 3 == 0
-                    ? (double?)null
-                    : x % 3 == 1
-                        ? double.MinValue
-                        : double.NaN;
+                x % 3 == 0 ? (double?)null
+                : x % 3 == 1 ? double.MinValue
+                : double.NaN;
 
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(

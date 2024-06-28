@@ -37,14 +37,14 @@ namespace System.DirectoryServices.Protocols.Tests
                 "",
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 5, 2, 1, 0, 4, 0 }
-                    : new byte[] { 48, 5, 2, 1, 0, 4, 0 }
+                    : new byte[] { 48, 5, 2, 1, 0, 4, 0 },
             };
             yield return new object[]
             {
                 "S",
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 7, 2, 1, 0, 4, 2, 83, 0 }
-                    : new byte[] { 48, 7, 2, 1, 0, 4, 2, 83, 0 }
+                    : new byte[] { 48, 7, 2, 1, 0, 4, 2, 83, 0 },
             };
         }
 
@@ -70,7 +70,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 -1,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 8, 2, 4, 255, 255, 255, 255, 4, 0 }
-                    : new byte[] { 48, 5, 2, 1, 255, 4, 0 }
+                    : new byte[] { 48, 5, 2, 1, 255, 4, 0 },
             };
             yield return new object[]
             {
@@ -78,7 +78,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 10,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 7, 2, 1, 10, 4, 2, 83, 0 }
-                    : new byte[] { 48, 7, 2, 1, 10, 4, 2, 83, 0 }
+                    : new byte[] { 48, 7, 2, 1, 10, 4, 2, 83, 0 },
             };
         }
 

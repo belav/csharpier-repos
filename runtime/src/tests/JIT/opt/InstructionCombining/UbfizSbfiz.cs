@@ -65,7 +65,7 @@ public class Program
                 long.MaxValue + 1,
                 ushort.MaxValue,
                 uint.MaxValue,
-                (long)ulong.MaxValue
+                (long)ulong.MaxValue,
             };
 
             foreach (long t in testData)

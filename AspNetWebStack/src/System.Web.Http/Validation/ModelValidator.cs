@@ -76,7 +76,7 @@ namespace System.Web.Http.Validation
                                     propertyMetadata.PropertyName,
                                     propertyResult.MemberName
                                 ),
-                                Message = propertyResult.Message
+                                Message = propertyResult.Message,
                             };
                         }
                     }

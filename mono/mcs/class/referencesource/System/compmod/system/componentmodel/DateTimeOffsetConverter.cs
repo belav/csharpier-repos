@@ -199,7 +199,7 @@ namespace System.ComponentModel
                         typeof(int),
                         typeof(int),
                         typeof(int),
-                        typeof(TimeSpan)
+                        typeof(TimeSpan),
                     }
                 );
 
@@ -216,7 +216,7 @@ namespace System.ComponentModel
                             dto.Minute,
                             dto.Second,
                             dto.Millisecond,
-                            dto.Offset
+                            dto.Offset,
                         }
                     );
                 }

@@ -26,7 +26,7 @@ namespace System.Runtime.Serialization.Tests
         {
             var attribute = new ContractNamespaceAttribute("contractNamespace")
             {
-                ClrNamespace = value
+                ClrNamespace = value,
             };
             Assert.Equal(value, attribute.ClrNamespace);
         }

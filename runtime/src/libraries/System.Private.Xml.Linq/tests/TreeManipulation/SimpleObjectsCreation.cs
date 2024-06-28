@@ -22,7 +22,7 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(CreateXDocument)
                 {
-                    Attribute = new VariationAttribute("Empty XDocument") { Priority = 0 }
+                    Attribute = new VariationAttribute("Empty XDocument") { Priority = 0 },
                 }
             );
             AddChild(
@@ -31,8 +31,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Empty XDocument + XmlDecl")
                     {
                         Param = true,
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -41,32 +41,32 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Empty XDocument + XmlDecl=null")
                     {
                         Param = false,
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(CreateXDocument2)
                 {
-                    Attribute = new VariationAttribute("Copy Empty XDocument") { Priority = 1 }
+                    Attribute = new VariationAttribute("Copy Empty XDocument") { Priority = 1 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXDocument3)
                 {
-                    Attribute = new VariationAttribute("Copy NonEmpty XDocument") { Priority = 1 }
+                    Attribute = new VariationAttribute("Copy NonEmpty XDocument") { Priority = 1 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXDocument4)
                 {
-                    Attribute = new VariationAttribute("XDocument - null test") { Priority = 1 }
+                    Attribute = new VariationAttribute("XDocument - null test") { Priority = 1 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXElement1)
                 {
-                    Attribute = new VariationAttribute("Empty XElement - Xname") { Priority = 0 }
+                    Attribute = new VariationAttribute("Empty XElement - Xname") { Priority = 0 },
                 }
             );
             AddChild(
@@ -74,14 +74,14 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("Empty XElement - Xname - noNS")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(CreateXElement3)
                 {
-                    Attribute = new VariationAttribute("XElement - Xname - null") { Priority = 2 }
+                    Attribute = new VariationAttribute("XElement - Xname - null") { Priority = 2 },
                 }
             );
             AddChild(
@@ -89,14 +89,14 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XElement - Xname - empty string")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(CreateXElement4)
                 {
-                    Attribute = new VariationAttribute("Empty XElement - string") { Priority = 0 }
+                    Attribute = new VariationAttribute("Empty XElement - string") { Priority = 0 },
                 }
             );
             AddChild(
@@ -104,14 +104,14 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("Empty XElement - string - noNS")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(CreateXElement6)
                 {
-                    Attribute = new VariationAttribute("XElement - string - null") { Priority = 2 }
+                    Attribute = new VariationAttribute("XElement - string - null") { Priority = 2 },
                 }
             );
             AddChild(
@@ -119,14 +119,14 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XElement - XStreamingElement - null")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(CreateXElement7)
                 {
-                    Attribute = new VariationAttribute("XElement - copy empty") { Priority = 0 }
+                    Attribute = new VariationAttribute("XElement - copy empty") { Priority = 0 },
                 }
             );
             AddChild(
@@ -135,8 +135,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XElement - copy: connected, in XDocument")
                     {
                         Params = new object[] { true, true },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -147,8 +147,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, true },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -159,8 +159,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { true, false },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -171,8 +171,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, false },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -180,8 +180,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XElement - from reader - from root element")
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -191,8 +191,8 @@ namespace XLinqTests
                         "XElement - from reader - from inner element"
                     )
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -202,8 +202,8 @@ namespace XLinqTests
                         "XElement - from reader - from inner empty element"
                     )
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -213,8 +213,8 @@ namespace XLinqTests
                         "XElement - from reader - from inner element, namespaces"
                     )
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -225,8 +225,8 @@ namespace XLinqTests
                     )
                     {
                         Param = 4,
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -237,8 +237,8 @@ namespace XLinqTests
                     )
                     {
                         Param = 0,
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -249,8 +249,8 @@ namespace XLinqTests
                     )
                     {
                         Param = 1,
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -261,8 +261,8 @@ namespace XLinqTests
                     )
                     {
                         Param = false,
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -270,8 +270,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XAttribute - xname - not namespace decl")
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -282,8 +282,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "xmlns",
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -294,8 +294,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "p",
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -306,8 +306,8 @@ namespace XLinqTests
                     )
                     {
                         Param = true,
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -318,8 +318,8 @@ namespace XLinqTests
                     )
                     {
                         Param = false,
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -330,8 +330,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { true, "xmlns" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -342,8 +342,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, "xmlns" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -354,8 +354,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { true, "p" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -366,8 +366,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, "p" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -378,8 +378,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, "xmlns" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -390,8 +390,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { true, "p" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -405,10 +405,10 @@ namespace XLinqTests
                         {
                             "xml",
                             "http://www.w3.org/XML/1998/namespace",
-                            false
+                            false,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -417,8 +417,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XAttribute - xml namespace - prefix redef")
                     {
                         Params = new object[] { "xml", "another", true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -429,8 +429,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "p", "http://www.w3.org/XML/1998/namespace", true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -441,8 +441,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "p", "http://www.w3.org/2000/xmlns/", true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -450,8 +450,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XProcessingInstruction - target & data")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -459,8 +459,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XProcessingInstruction - target only")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -471,8 +471,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "?>",
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -483,8 +483,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "XmL",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -495,8 +495,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "XmL",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -507,8 +507,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "xML",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -519,8 +519,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "xmL",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -531,8 +531,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "Xml",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -543,8 +543,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "xmL",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -555,8 +555,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "XML",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -567,8 +567,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -579,8 +579,8 @@ namespace XLinqTests
                     )
                     {
                         Param = "xml",
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -591,8 +591,8 @@ namespace XLinqTests
                     )
                     {
                         Param = 2,
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -603,38 +603,38 @@ namespace XLinqTests
                     )
                     {
                         Param = 4,
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(CreateXComment1)
                 {
-                    Attribute = new VariationAttribute("XComment") { Priority = 1 }
+                    Attribute = new VariationAttribute("XComment") { Priority = 1 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXComment2)
                 {
-                    Attribute = new VariationAttribute("XComment - empty") { Priority = 3 }
+                    Attribute = new VariationAttribute("XComment - empty") { Priority = 3 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXComment3)
                 {
-                    Attribute = new VariationAttribute("XComment - from reader") { Priority = 1 }
+                    Attribute = new VariationAttribute("XComment - from reader") { Priority = 1 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXText0)
                 {
-                    Attribute = new VariationAttribute("XText - from string") { Priority = 0 }
+                    Attribute = new VariationAttribute("XText - from string") { Priority = 0 },
                 }
             );
             AddChild(
                 new TestVariation(CreateXText01)
                 {
-                    Attribute = new VariationAttribute("XText - copy") { Priority = 0 }
+                    Attribute = new VariationAttribute("XText - copy") { Priority = 0 },
                 }
             );
             AddChild(
@@ -643,8 +643,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XText - CDATA")
                     {
                         Params = new object[] { XmlNodeType.CDATA, "<![CDATA[MY_TEXT]]>" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -653,8 +653,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XText - text")
                     {
                         Params = new object[] { XmlNodeType.Text, "MY_TEXT" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -663,8 +663,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XText - Text - empty")
                     {
                         Params = new object[] { XmlNodeType.Text, "" },
-                        Priority = 3
-                    }
+                        Priority = 3,
+                    },
                 }
             );
             AddChild(
@@ -673,8 +673,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XText - CData - empty")
                     {
                         Params = new object[] { XmlNodeType.CDATA, "<![CDATA[]]>" },
-                        Priority = 3
-                    }
+                        Priority = 3,
+                    },
                 }
             );
             AddChild(
@@ -687,10 +687,10 @@ namespace XLinqTests
                             4,
                             XmlNodeType.Text,
                             "MY_TEXT",
-                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>"
+                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -705,10 +705,10 @@ namespace XLinqTests
                             2,
                             XmlNodeType.Text,
                             "\t",
-                            "<a xml:space='preserve'>\t<X/></a>"
+                            "<a xml:space='preserve'>\t<X/></a>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -721,10 +721,10 @@ namespace XLinqTests
                             6,
                             XmlNodeType.Text,
                             "\t",
-                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>"
+                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -737,10 +737,10 @@ namespace XLinqTests
                             2,
                             XmlNodeType.CDATA,
                             "MY_TEXT",
-                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>"
+                            "<A><![CDATA[MY_TEXT]]><B/>MY_TEXT<C/>\t<D/></A>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -751,10 +751,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             new[] { "root", null, null, null },
-                            "<!DOCTYPE root >"
+                            "<!DOCTYPE root >",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -765,10 +765,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             new[] { "root", null, "a2", "a3" },
-                            "<!DOCTYPE root SYSTEM \"a2\"[a3]>"
+                            "<!DOCTYPE root SYSTEM \"a2\"[a3]>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -779,10 +779,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             new[] { "root", "a1", null, "a3" },
-                            "<!DOCTYPE root PUBLIC \"a1\" \"\"[a3]>"
+                            "<!DOCTYPE root PUBLIC \"a1\" \"\"[a3]>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -793,10 +793,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             new[] { "root", null, null, "a3" },
-                            "<!DOCTYPE root [a3]>"
+                            "<!DOCTYPE root [a3]>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -807,10 +807,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             new[] { "root", "a1", "a2", "a3" },
-                            "<!DOCTYPE root PUBLIC \"a1\" \"a2\"[a3]>"
+                            "<!DOCTYPE root PUBLIC \"a1\" \"a2\"[a3]>",
                         },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
         }
@@ -1462,7 +1462,7 @@ namespace XLinqTests
                 "<X><A id='a'/><B/><?PI targ?></X>",
                 "<X><A xmlms='nas'/><B/><?PI targ?></X>",
                 "<X><A></A><B/><?PI targ?></X>",
-                "<X><A id='a'></A><B/><?PI targ?></X>"
+                "<X><A id='a'></A><B/><?PI targ?></X>",
             };
 
             foreach (string xml in xmls)

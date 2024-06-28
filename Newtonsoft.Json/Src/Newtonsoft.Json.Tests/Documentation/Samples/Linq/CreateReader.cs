@@ -52,7 +52,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 {
                     "Drives",
                     new JArray { "DVD", "SSD" }
-                }
+                },
             };
 
             JsonReader reader = o.CreateReader();

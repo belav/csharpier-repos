@@ -319,7 +319,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attribute = new ValidationAttributeOverrideBothIsValids()
             {
                 ErrorMessageResourceName = "InternalErrorMessageTestProperty",
-                ErrorMessageResourceType = typeof(ErrorMessageResources)
+                ErrorMessageResourceType = typeof(ErrorMessageResources),
             };
 
             Assert.Equal(

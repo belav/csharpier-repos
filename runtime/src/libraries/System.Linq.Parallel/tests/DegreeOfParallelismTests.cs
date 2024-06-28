@@ -39,7 +39,7 @@ namespace System.Linq.Parallel.Tests
                                 .AsParallel()
                         ),
                         results[1],
-                        results[2]
+                        results[2],
                     };
                 }
                 else if (query.ToString().StartsWith("Enumerable.Range"))
@@ -57,7 +57,7 @@ namespace System.Linq.Parallel.Tests
                             ).AsParallel()
                         ),
                         results[1],
-                        results[2]
+                        results[2],
                     };
                 }
                 else

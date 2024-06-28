@@ -118,7 +118,7 @@ public class PropertyAccessorsFactory
                                     ),
                                     Expression.Default(typeof(TProperty)),
                                     Expression.Convert(nullableValue, typeof(TProperty))
-                                )
+                                ),
                         }
                     );
                 }

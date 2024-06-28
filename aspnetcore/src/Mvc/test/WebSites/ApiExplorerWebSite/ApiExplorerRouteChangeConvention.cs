@@ -26,7 +26,7 @@ public class ApiExplorerRouteChangeConvention : Attribute, IActionModelConventio
             action.Selectors.Add(
                 new SelectorModel
                 {
-                    AttributeRouteModel = new AttributeRouteModel { Template = "NewIndex" }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "NewIndex" },
                 }
             );
         }

@@ -33,6 +33,6 @@ namespace System.Windows.Forms
     {
         MessageProcessed = 0,
         MessageNeeded = 1,
-        MessageNotNeeded = 2
+        MessageNotNeeded = 2,
     }
 }

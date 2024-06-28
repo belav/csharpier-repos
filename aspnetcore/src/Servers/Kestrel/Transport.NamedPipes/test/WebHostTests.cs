@@ -174,7 +174,7 @@ public class WebHostTests : LoggedTest
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://127.0.0.1/")
             {
                 Version = HttpVersion.Version11,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
 
             // Act
@@ -266,7 +266,9 @@ public class WebHostTests : LoggedTest
             {
                 Version = HttpVersion.Version11,
                 VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                Content = new ByteArrayContent(Encoding.UTF8.GetBytes(new string('c', 1024 * 1024)))
+                Content = new ByteArrayContent(
+                    Encoding.UTF8.GetBytes(new string('c', 1024 * 1024))
+                ),
             };
 
             // Act
@@ -333,7 +335,7 @@ public class WebHostTests : LoggedTest
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://127.0.0.1/")
             {
                 Version = clientVersion,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
 
             // Act
@@ -404,7 +406,7 @@ public class WebHostTests : LoggedTest
             var request = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1/")
             {
                 Version = clientVersion,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
 
             // Act
@@ -453,7 +455,7 @@ public class WebHostTests : LoggedTest
             var request = new HttpRequestMessage(HttpMethod.Get, $"http://127.0.0.1/")
             {
                 Version = HttpVersion.Version11,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
 
             // Act
@@ -481,8 +483,8 @@ public class WebHostTests : LoggedTest
         {
             SslOptions = new SslClientAuthenticationOptions
             {
-                RemoteCertificateValidationCallback = (_, __, ___, ____) => true
-            }
+                RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
+            },
         };
 
         var connectionFactory = new NamedPipesConnectionFactory(pipeName, impersonationLevel);

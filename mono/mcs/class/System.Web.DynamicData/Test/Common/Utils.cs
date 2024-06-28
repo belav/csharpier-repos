@@ -36,7 +36,7 @@ namespace MonoTests.Common
                             new { action = "List|Details|Edit|Insert" }
                         ),
                         Model = m,
-                        RouteHandler = new MyDynamicDataRouteHandler()
+                        RouteHandler = new MyDynamicDataRouteHandler(),
                     }
                 );
             }
@@ -49,7 +49,7 @@ namespace MonoTests.Common
                             new { action = "List|Details|Edit|Insert" }
                         ),
                         Model = m,
-                        RouteHandler = new MyDynamicDataRouteHandler()
+                        RouteHandler = new MyDynamicDataRouteHandler(),
                     }
                 );
             }

@@ -226,7 +226,7 @@ public class SqlServerCache : IDistributedCache
         {
             options = new DistributedCacheEntryOptions()
             {
-                SlidingExpiration = _defaultSlidingExpiration
+                SlidingExpiration = _defaultSlidingExpiration,
             };
         }
     }

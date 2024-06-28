@@ -21,7 +21,7 @@ namespace Tests.Collections
             InvalidArrayTypes = new[]
             {
                 typeof(MyInvalidReferenceType),
-                typeof(MyInvalidValueType)
+                typeof(MyInvalidValueType),
             };
         }
 

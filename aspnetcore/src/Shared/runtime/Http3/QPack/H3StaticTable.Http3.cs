@@ -40,7 +40,7 @@ namespace System.Net.Http.QPack
                 421 => 69,
                 425 => 70,
                 500 => 71,
-                _ => -1
+                _ => -1,
             };
 
             return index != -1;

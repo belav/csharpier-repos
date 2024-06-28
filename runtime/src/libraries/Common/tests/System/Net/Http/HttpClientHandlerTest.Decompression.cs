@@ -132,7 +132,7 @@ namespace System.Net.Http.Functional.Tests
                         leaveOpen: true
                     )),
                     DecompressionMethods.None,
-                    useCopyTo
+                    useCopyTo,
                 };
 #if !NETFRAMEWORK
                 yield return new object[]
@@ -144,7 +144,7 @@ namespace System.Net.Http.Functional.Tests
                         leaveOpen: true
                     )),
                     DecompressionMethods.Brotli,
-                    useCopyTo
+                    useCopyTo,
                 };
                 yield return new object[]
                 {
@@ -155,7 +155,7 @@ namespace System.Net.Http.Functional.Tests
                         leaveOpen: true
                     )),
                     DecompressionMethods.Deflate | DecompressionMethods.GZip,
-                    useCopyTo
+                    useCopyTo,
                 };
 #endif
             }

@@ -782,7 +782,7 @@ namespace Microsoft.NET.HostModel.Tests
             0,
             0,
             0,
-            0
+            0,
         };
 
         private class TestDirectory : IDisposable

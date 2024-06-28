@@ -20,7 +20,7 @@ public class Runtime_67331
         var vr4 = new byte[] { 0 };
         var vr5 = new byte[,]
         {
-            { 0 }
+            { 0 },
         };
         return M3(vr3, false, 0, 0, vr4, true, vr5, 0, 1, 1) == 1 ? 100 : -1;
     }

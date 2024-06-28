@@ -35,6 +35,6 @@ namespace System.Windows.Forms.Design.Behavior
     {
         NotSelected,
         Selected,
-        SelectedPrimary
+        SelectedPrimary,
     }
 }

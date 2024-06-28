@@ -53,7 +53,7 @@ namespace System.IO.Tests
                 (float)(-3.5E-20),
                 (float)(1.4E-10),
                 (float)10000.2,
-                (float)2.3E30
+                (float)2.3E30,
             };
 
             WriteTest(sglArr, (bw, s) => bw.Write(s), (br) => br.ReadSingle());
@@ -76,7 +76,7 @@ namespace System.IO.Tests
                 new decimal(3.4E+28),
                 new decimal(0.45),
                 new decimal(5.55),
-                new decimal(3.4899E23)
+                new decimal(3.4899E23),
             };
 
             WriteTest(decArr, (bw, s) => bw.Write(s), (br) => br.ReadDecimal());
@@ -98,7 +98,7 @@ namespace System.IO.Tests
                 3.4E-37,
                 0.45,
                 5.55,
-                3.4899E233
+                3.4899E233,
             };
 
             WriteTest(dblArr, (bw, s) => bw.Write(s), (br) => br.ReadDouble());
@@ -115,7 +115,7 @@ namespace System.IO.Tests
                 Half.MinValue,
                 Half.MaxValue,
                 (Half)0.45,
-                (Half)5.55
+                (Half)5.55,
             };
 
             WriteTest(hlfArr, (bw, s) => bw.Write(s), (br) => br.ReadHalf());
@@ -132,7 +132,7 @@ namespace System.IO.Tests
                 -10000,
                 10000,
                 -50,
-                50
+                50,
             };
 
             WriteTest(i16Arr, (bw, s) => bw.Write(s), (br) => br.ReadInt16());
@@ -160,7 +160,7 @@ namespace System.IO.Tests
                 50,
                 unchecked((int)uint.MinValue),
                 unchecked((int)uint.MaxValue),
-                unchecked((int)(uint.MaxValue - 100))
+                unchecked((int)(uint.MaxValue - 100)),
             };
 
             WriteTest(
@@ -192,7 +192,7 @@ namespace System.IO.Tests
                 50,
                 unchecked((long)ulong.MinValue),
                 unchecked((long)ulong.MaxValue),
-                unchecked((long)(ulong.MaxValue - 100))
+                unchecked((long)(ulong.MaxValue - 100)),
             };
 
             WriteTest(
@@ -213,7 +213,7 @@ namespace System.IO.Tests
                 100,
                 1000,
                 10000,
-                ushort.MaxValue - 100
+                ushort.MaxValue - 100,
             };
 
             WriteTest(ui16Arr, (bw, s) => bw.Write(s), (br) => br.ReadUInt16());
@@ -230,7 +230,7 @@ namespace System.IO.Tests
                 100,
                 1000,
                 10000,
-                uint.MaxValue - 100
+                uint.MaxValue - 100,
             };
 
             WriteTest(ui32Arr, (bw, s) => bw.Write(s), (br) => br.ReadUInt32());
@@ -247,7 +247,7 @@ namespace System.IO.Tests
                 100,
                 1000,
                 10000,
-                ulong.MaxValue - 100
+                ulong.MaxValue - 100,
             };
 
             WriteTest(ui64Arr, (bw, s) => bw.Write(s), (br) => br.ReadUInt64());
@@ -273,7 +273,7 @@ namespace System.IO.Tests
                 "\0\0\0\t\t\tHey\"\"",
                 "\u0022\u0011",
                 str1,
-                string.Empty
+                string.Empty,
             };
 
             WriteTest(strArr, (bw, s) => bw.Write(s), (br) => br.ReadString());

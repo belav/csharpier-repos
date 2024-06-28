@@ -1044,7 +1044,7 @@ namespace Internal.TypeSystem.Interop
                         byteType,
                         byteType,
                         byteType,
-                        byteType
+                        byteType,
                     }
                 );
                 MethodDesc guidCtorHandleMethod = guidType.GetKnownMethod(".ctor", sig);

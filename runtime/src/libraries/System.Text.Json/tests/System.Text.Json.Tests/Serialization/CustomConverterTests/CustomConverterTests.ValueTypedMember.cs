@@ -344,7 +344,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToInterfaceConverter();
-            var options = new JsonSerializerOptions() { IncludeFields = true, };
+            var options = new JsonSerializerOptions() { IncludeFields = true };
             options.Converters.Add(converter);
 
             string json;
@@ -374,7 +374,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToObjectConverter();
-            var options = new JsonSerializerOptions() { IncludeFields = true, };
+            var options = new JsonSerializerOptions() { IncludeFields = true };
             options.Converters.Add(converter);
 
             string json;
@@ -404,7 +404,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToInterfaceConverter();
-            var options = new JsonSerializerOptions() { IncludeFields = true, };
+            var options = new JsonSerializerOptions() { IncludeFields = true };
             options.Converters.Add(converter);
 
             string json;
@@ -437,7 +437,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""MyValueTypedProperty"":""ValueTypedProperty"",""MyRefTypedProperty"":""RefTypedProperty"",""MyValueTypedField"":""ValueTypedField"",""MyRefTypedField"":""RefTypedField""}";
 
             var converter = new ValueTypeToObjectConverter();
-            var options = new JsonSerializerOptions() { IncludeFields = true, };
+            var options = new JsonSerializerOptions() { IncludeFields = true };
             options.Converters.Add(converter);
 
             string json;
@@ -470,7 +470,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""MyValueTypedProperty"":null,""MyRefTypedProperty"":null,""MyValueTypedField"":null,""MyRefTypedField"":null}";
 
             var converter = new ValueTypeToInterfaceConverter();
-            var options = new JsonSerializerOptions() { IncludeFields = true, };
+            var options = new JsonSerializerOptions() { IncludeFields = true };
             options.Converters.Add(converter);
 
             string json;
@@ -504,7 +504,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""MyValueTypedProperty"":null,""MyRefTypedProperty"":null,""MyValueTypedField"":null,""MyRefTypedField"":null}";
 
             var converter = new ValueTypeToObjectConverter();
-            var options = new JsonSerializerOptions() { IncludeFields = true, };
+            var options = new JsonSerializerOptions() { IncludeFields = true };
             options.Converters.Add(converter);
 
             string json;

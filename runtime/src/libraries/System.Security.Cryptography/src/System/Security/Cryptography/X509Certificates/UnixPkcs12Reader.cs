@@ -232,7 +232,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new CryptographicException(SR.Cryptography_Pfx_BadPassword, e)
                 {
-                    HResult = ErrorInvalidPasswordHResult
+                    HResult = ErrorInvalidPasswordHResult,
                 };
             }
             finally
@@ -273,7 +273,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             throw new CryptographicException(SR.Cryptography_Pfx_BadPassword)
             {
-                HResult = ErrorInvalidPasswordHResult
+                HResult = ErrorInvalidPasswordHResult,
             };
         }
 

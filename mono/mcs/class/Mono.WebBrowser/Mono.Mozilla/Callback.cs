@@ -1192,7 +1192,7 @@ namespace Mono.Mozilla
         IsSecure = 2,
         SecureHigh = 262144,
         SecureMed = 65536,
-        SecureLow = 131072
+        SecureLow = 131072,
     }
     #endregion
 }

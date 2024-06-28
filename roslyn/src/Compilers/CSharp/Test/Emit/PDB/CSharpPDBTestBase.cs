@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.PDB
             using (
                 var reader = new XmlTextReader(new StringReader(pdb))
                 {
-                    DtdProcessing = DtdProcessing.Prohibit
+                    DtdProcessing = DtdProcessing.Prohibit,
                 }
             )
             {

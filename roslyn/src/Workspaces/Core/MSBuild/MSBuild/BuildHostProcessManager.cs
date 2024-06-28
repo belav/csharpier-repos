@@ -113,7 +113,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
                     BuildHostProcessKind.NetCore => CreateDotNetCoreBuildHostStartInfo(),
                     BuildHostProcessKind.NetFramework => CreateDotNetFrameworkBuildHostStartInfo(),
                     BuildHostProcessKind.Mono => CreateMonoBuildHostStartInfo(),
-                    _ => throw ExceptionUtilities.UnexpectedValue(buildHostKind)
+                    _ => throw ExceptionUtilities.UnexpectedValue(buildHostKind),
                 };
 
                 var process = Process.Start(processStartInfo);
@@ -215,7 +215,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     private ProcessStartInfo CreateDotNetFrameworkBuildHostStartInfo()
     {
         var netFrameworkBuildHost = GetPathToDotNetFrameworkBuildHost();
-        var processStartInfo = new ProcessStartInfo() { FileName = netFrameworkBuildHost, };
+        var processStartInfo = new ProcessStartInfo() { FileName = netFrameworkBuildHost };
 
         AppendBuildHostCommandLineArgumentsConfigureProcess(processStartInfo);
 
@@ -296,7 +296,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     }
 
     private static readonly XmlReaderSettings s_xmlSettings =
-        new() { DtdProcessing = DtdProcessing.Prohibit, };
+        new() { DtdProcessing = DtdProcessing.Prohibit };
 
     private static BuildHostProcessKind GetKindForProject(string projectFilePath)
     {
@@ -367,7 +367,7 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
     {
         NetCore,
         NetFramework,
-        Mono
+        Mono,
     }
 
     private sealed class BuildHostProcess : IAsyncDisposable

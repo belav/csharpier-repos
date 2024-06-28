@@ -12,7 +12,7 @@ class MyG<T, U>
 {
     public enum A
     {
-        X = 1
+        X = 1,
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     SyntaxFactory.ParseExpression("a"),
                     SyntaxFactory.ParseExpression("b"),
-                    SyntaxFactory.ParseExpression("c")
+                    SyntaxFactory.ParseExpression("c"),
                 }
             );
             Assert.Equal("x,a,b,c,y", insertBetween.ToFullString());
@@ -137,7 +137,7 @@ c,b",
                 {
                     SyntaxFactory.ParseExpression("A"),
                     SyntaxFactory.ParseExpression("B"),
-                    SyntaxFactory.ParseExpression("C")
+                    SyntaxFactory.ParseExpression("C"),
                 }
             );
 
@@ -339,7 +339,7 @@ c,b",
                 {
                     SyntaxFactory.ParseExpression("A+B"),
                     SyntaxFactory.IdentifierName("B"),
-                    SyntaxFactory.ParseExpression("1")
+                    SyntaxFactory.ParseExpression("1"),
                 }
             );
 

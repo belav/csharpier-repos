@@ -114,14 +114,14 @@ namespace System.Linq.Tests
                 {
                     orderID = 45321,
                     custID = 98022,
-                    total = 50
+                    total = 50,
                 },
                 new OrderRec
                 {
                     orderID = 97865,
                     custID = 32103,
-                    total = 25
-                }
+                    total = 25,
+                },
             };
             Assert.Empty(outer.GroupJoin(inner, e => e.custID, e => e.custID, createJoinRec));
         }
@@ -133,7 +133,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new[]
             {
@@ -141,14 +141,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -156,20 +156,20 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { 93489 },
-                    total = new int?[] { 45 }
+                    total = new int?[] { 45 },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Robert",
                     orderID = new int?[] { 93483 },
-                    total = new int?[] { 19 }
-                }
+                    total = new int?[] { 19 },
+                },
             };
 
             Assert.Equal(
@@ -194,14 +194,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -224,7 +224,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = null;
 
@@ -248,7 +248,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new AnagramRec[]
             {
@@ -256,14 +256,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -286,7 +286,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new AnagramRec[]
             {
@@ -294,14 +294,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -324,7 +324,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new AnagramRec[]
             {
@@ -332,14 +332,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -365,14 +365,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -388,7 +388,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = null;
 
@@ -405,7 +405,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new AnagramRec[]
             {
@@ -413,14 +413,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -436,7 +436,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new AnagramRec[]
             {
@@ -444,14 +444,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -467,7 +467,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new AnagramRec[]
             {
@@ -475,14 +475,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -522,7 +522,7 @@ namespace System.Linq.Tests
             CustomerRec[] outer = new[]
             {
                 new CustomerRec { name = "Tim", custID = 43434 },
-                new CustomerRec { name = "Bob", custID = 34093 }
+                new CustomerRec { name = "Bob", custID = 34093 },
             };
             OrderRec[] inner = { };
             JoinRec[] expected = new[]
@@ -531,14 +531,14 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { },
-                    total = new int?[] { }
-                }
+                    total = new int?[] { },
+                },
             };
 
             Assert.Equal(
@@ -552,7 +552,7 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new[]
             {
-                new CustomerRec { name = "Tim", custID = 43434 }
+                new CustomerRec { name = "Tim", custID = 43434 },
             };
             OrderRec[] inner = new[]
             {
@@ -560,8 +560,8 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = 43434,
-                    total = 25
-                }
+                    total = 25,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -569,8 +569,8 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { 97865 },
-                    total = new int?[] { 25 }
-                }
+                    total = new int?[] { 25 },
+                },
             };
 
             Assert.Equal(
@@ -584,7 +584,7 @@ namespace System.Linq.Tests
         {
             CustomerRec[] outer = new[]
             {
-                new CustomerRec { name = "Tim", custID = 43434 }
+                new CustomerRec { name = "Tim", custID = 43434 },
             };
             OrderRec[] inner = new[]
             {
@@ -592,8 +592,8 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = 49434,
-                    total = 25
-                }
+                    total = 25,
+                },
             };
             JoinRec[] expected = new JoinRec[]
             {
@@ -601,8 +601,8 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { },
-                    total = new int?[] { }
-                }
+                    total = new int?[] { },
+                },
             };
 
             Assert.Equal(
@@ -617,7 +617,7 @@ namespace System.Linq.Tests
             CustomerRec[] outer = new[]
             {
                 new CustomerRec { name = "Tim", custID = null },
-                new CustomerRec { name = "Bob", custID = null }
+                new CustomerRec { name = "Bob", custID = null },
             };
             OrderRec[] inner = new[]
             {
@@ -625,14 +625,14 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = null,
-                    total = 25
+                    total = 25,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = null,
-                    total = 19
-                }
+                    total = 19,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -640,14 +640,14 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { },
-                    total = new int?[] { }
-                }
+                    total = new int?[] { },
+                },
             };
 
             Assert.Equal(
@@ -662,7 +662,7 @@ namespace System.Linq.Tests
             CustomerRec[] outer = new[]
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
-                new CustomerRec { name = "Bob", custID = 9865 }
+                new CustomerRec { name = "Bob", custID = 9865 },
             };
             OrderRec[] inner = new[]
             {
@@ -670,20 +670,20 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = 1234,
-                    total = 25
+                    total = 25,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = 1234,
-                    total = 19
+                    total = 19,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = 9865,
-                    total = 19
-                }
+                    total = 19,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -691,14 +691,14 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { 97865, 34390 },
-                    total = new int?[] { 25, 19 }
+                    total = new int?[] { 25, 19 },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { 34390 },
-                    total = new int?[] { 19 }
-                }
+                    total = new int?[] { 19 },
+                },
             };
 
             Assert.Equal(
@@ -713,7 +713,7 @@ namespace System.Linq.Tests
             CustomerRec[] outer = new[]
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
-                new CustomerRec { name = "Bob", custID = 9865 }
+                new CustomerRec { name = "Bob", custID = 9865 },
             };
             OrderRec[] inner = new[]
             {
@@ -721,20 +721,20 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = 1234,
-                    total = 25
+                    total = 25,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = 1234,
-                    total = 19
+                    total = 19,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = 9865,
-                    total = 19
-                }
+                    total = 19,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -742,14 +742,14 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { 97865, 34390 },
-                    total = new int?[] { 25, 19 }
+                    total = new int?[] { 25, 19 },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { 34390 },
-                    total = new int?[] { 19 }
-                }
+                    total = new int?[] { 19 },
+                },
             };
 
             Assert.Equal(
@@ -767,7 +767,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9865 }
+                new CustomerRec { name = "Robert", custID = 9865 },
             };
             OrderRec[] inner = new[]
             {
@@ -775,14 +775,14 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = 1234,
-                    total = 25
+                    total = 25,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = 9865,
-                    total = 19
-                }
+                    total = 19,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -790,20 +790,20 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { 97865 },
-                    total = new int?[] { 25 }
+                    total = new int?[] { 25 },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { 34390 },
-                    total = new int?[] { 19 }
+                    total = new int?[] { 19 },
                 },
                 new JoinRec
                 {
                     name = "Robert",
                     orderID = new int?[] { 34390 },
-                    total = new int?[] { 19 }
-                }
+                    total = new int?[] { 19 },
+                },
             };
 
             Assert.Equal(
@@ -819,7 +819,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             OrderRec[] inner = new[]
             {
@@ -827,14 +827,14 @@ namespace System.Linq.Tests
                 {
                     orderID = 97865,
                     custID = 2334,
-                    total = 25
+                    total = 25,
                 },
                 new OrderRec
                 {
                     orderID = 34390,
                     custID = 9065,
-                    total = 19
-                }
+                    total = 19,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -842,20 +842,20 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Robert",
                     orderID = new int?[] { },
-                    total = new int?[] { }
-                }
+                    total = new int?[] { },
+                },
             };
 
             Assert.Equal(
@@ -871,7 +871,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new[]
             {
@@ -879,14 +879,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -894,20 +894,20 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Robert",
                     orderID = new int?[] { 93483 },
-                    total = new int?[] { 19 }
-                }
+                    total = new int?[] { 19 },
+                },
             };
 
             Assert.Equal(
@@ -923,7 +923,7 @@ namespace System.Linq.Tests
             {
                 new CustomerRec { name = "Tim", custID = 1234 },
                 new CustomerRec { name = "Bob", custID = 9865 },
-                new CustomerRec { name = "Robert", custID = 9895 }
+                new CustomerRec { name = "Robert", custID = 9895 },
             };
             AnagramRec[] inner = new[]
             {
@@ -931,14 +931,14 @@ namespace System.Linq.Tests
                 {
                     name = "Robert",
                     orderID = 93483,
-                    total = 19
+                    total = 19,
                 },
                 new AnagramRec
                 {
                     name = "miT",
                     orderID = 93489,
-                    total = 45
-                }
+                    total = 45,
+                },
             };
             JoinRec[] expected = new[]
             {
@@ -946,20 +946,20 @@ namespace System.Linq.Tests
                 {
                     name = "Tim",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Bob",
                     orderID = new int?[] { },
-                    total = new int?[] { }
+                    total = new int?[] { },
                 },
                 new JoinRec
                 {
                     name = "Robert",
                     orderID = new int?[] { 93483 },
-                    total = new int?[] { 19 }
-                }
+                    total = new int?[] { 19 },
+                },
             };
 
             Assert.Equal(

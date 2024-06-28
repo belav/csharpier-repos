@@ -645,14 +645,14 @@ namespace System.Speech.Synthesis
     {
         Ready,
         Speaking,
-        Paused
+        Paused,
     }
 
     [Flags]
     public enum SynthesizerEmphasis
     {
         Stressed = 1,
-        Emphasized = 2
+        Emphasized = 2,
     }
 
     #endregion

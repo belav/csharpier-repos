@@ -558,7 +558,7 @@ namespace ICSharpCode.SharpZipLib.BZip2
             858,
             364,
             936,
-            638
+            638,
         };
 
         /// <summary>

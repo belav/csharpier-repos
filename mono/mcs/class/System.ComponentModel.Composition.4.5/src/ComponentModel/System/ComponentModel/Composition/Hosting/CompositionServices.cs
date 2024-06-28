@@ -27,7 +27,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         private static readonly string[] reservedMetadataNames = new string[]
         {
-            CompositionConstants.PartCreationPolicyMetadataName
+            CompositionConstants.PartCreationPolicyMetadataName,
         };
 
         internal static Type GetDefaultTypeFromMember(this MemberInfo member)

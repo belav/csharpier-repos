@@ -1699,7 +1699,7 @@ namespace Microsoft.CodeAnalysis
                 '@',
                 '*',
                 '`',
-                '~'
+                '~',
             };
 
             private static string ParseName(string id, ref int index)

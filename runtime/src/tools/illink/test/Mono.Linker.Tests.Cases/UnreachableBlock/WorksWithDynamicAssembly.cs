@@ -23,7 +23,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         "library.dll",
         "Mono.Linker.Tests.Cases.UnreachableBlock.Dependencies.AssemblyWithUnreachableBlocks",
         "TestProperty()",
-        new string[] { "ldc.i4.0", "brfalse.s il_3", "ret", }
+        new string[] { "ldc.i4.0", "brfalse.s il_3", "ret" }
     )]
     [Kept]
     public class WorksWithDynamicAssembly

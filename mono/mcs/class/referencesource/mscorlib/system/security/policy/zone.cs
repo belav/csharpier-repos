@@ -39,7 +39,7 @@ namespace System.Security.Policy
             "Trusted",
             "Internet",
             "Untrusted",
-            "NoZone"
+            "NoZone",
         };
 
         public Zone(SecurityZone zone)

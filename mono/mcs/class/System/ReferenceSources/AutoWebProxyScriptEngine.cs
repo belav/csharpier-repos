@@ -107,7 +107,7 @@ namespace System.Net
                     {
                         proxyAddress = uri,
                         bypassOnLocal = bBypassOnLocal,
-                        bypassList = CreateBypassList(al)
+                        bypassList = CreateBypassList(al),
                     };
                 }
                 catch (UriFormatException) { }
@@ -192,7 +192,7 @@ namespace System.Net
                 {
                     proxyAddress = ToUri(strHttpProxy),
                     bypassOnLocal = bBypassOnLocal,
-                    bypassList = CreateBypassList(al)
+                    bypassList = CreateBypassList(al),
                 };
             }
 

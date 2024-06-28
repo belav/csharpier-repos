@@ -60,8 +60,8 @@ namespace System.DirectoryServices.Protocols.Tests
                     32,
                     2,
                     0,
-                    0
-                }
+                    0,
+                },
             };
             yield return new object[] { null, new byte[] { 48, 132, 0, 0, 0, 2, 4, 0 } };
         }

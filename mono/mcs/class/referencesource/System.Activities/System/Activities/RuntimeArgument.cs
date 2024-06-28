@@ -543,7 +543,7 @@ namespace System.Activities
             return new ValidationError(errorMessage, false, this.Name)
             {
                 Source = owner,
-                Id = owner.Id
+                Id = owner.Id,
             };
         }
 

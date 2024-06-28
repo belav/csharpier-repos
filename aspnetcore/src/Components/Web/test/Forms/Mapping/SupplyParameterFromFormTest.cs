@@ -42,7 +42,7 @@ public class SupplyParameterFromFormTest
                 {
                     builder.OpenComponent<FormParametersComponentWithName>(0);
                     builder.CloseComponent();
-                }
+                },
         };
 
         // Act

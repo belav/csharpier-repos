@@ -22,13 +22,13 @@ namespace System.PrivateUri.Tests
         {
             var options = new UriCreationOptions
             {
-                DangerousDisablePathAndQueryCanonicalization = true
+                DangerousDisablePathAndQueryCanonicalization = true,
             };
             Assert.True(options.DangerousDisablePathAndQueryCanonicalization);
 
             options = new UriCreationOptions
             {
-                DangerousDisablePathAndQueryCanonicalization = false
+                DangerousDisablePathAndQueryCanonicalization = false,
             };
             Assert.False(options.DangerousDisablePathAndQueryCanonicalization);
         }
@@ -70,7 +70,7 @@ namespace System.PrivateUri.Tests
                             0 => pqf,
                             1 => "\u00F6" + pqf,
                             2 => pqf + "\u00F6",
-                            _ => pqf.Insert(pqf.Length / 2, "\u00F6")
+                            _ => pqf.Insert(pqf.Length / 2, "\u00F6"),
                         }
                     )
                 )
@@ -109,7 +109,7 @@ namespace System.PrivateUri.Tests
                                 host,
                                 expectedPort,
                                 expectedPath,
-                                expectedQuery
+                                expectedQuery,
                             };
                         }
                     }
@@ -129,7 +129,7 @@ namespace System.PrivateUri.Tests
         {
             var options = new UriCreationOptions
             {
-                DangerousDisablePathAndQueryCanonicalization = true
+                DangerousDisablePathAndQueryCanonicalization = true,
             };
 
             var uri = new Uri(uriString, options);
@@ -237,7 +237,7 @@ namespace System.PrivateUri.Tests
         {
             var options = new UriCreationOptions
             {
-                DangerousDisablePathAndQueryCanonicalization = true
+                DangerousDisablePathAndQueryCanonicalization = true,
             };
 
             var uri = new Uri(implicitFilePath, options);
@@ -278,7 +278,7 @@ namespace System.PrivateUri.Tests
             string uriString = $"{scheme}://host/p%41th?a=%42#fragm%45nt";
             var options = new UriCreationOptions
             {
-                DangerousDisablePathAndQueryCanonicalization = true
+                DangerousDisablePathAndQueryCanonicalization = true,
             };
 
             var referenceUri = new Uri(uriString);

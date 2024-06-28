@@ -9,6 +9,6 @@ namespace System.Data
         None = 0,
 
         /// <summary>Changes are cascaded across the relationship.</summary>
-        Cascade = 1
+        Cascade = 1,
     }
 }

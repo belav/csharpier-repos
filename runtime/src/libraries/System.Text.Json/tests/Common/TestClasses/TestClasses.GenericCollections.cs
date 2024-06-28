@@ -55,7 +55,7 @@ namespace System.Text.Json.Serialization.Tests
             MyStringISetWrapper = new StringISetWrapper() { "Hello" };
             MyStringToStringIDictionaryWrapper = new GenericIDictionaryWrapper<string, string>()
             {
-                { "key", "value" }
+                { "key", "value" },
             };
             MyStringListWrapper = new StringListWrapper() { "Hello" };
             MyStringStackWrapper = new StringStackWrapper(new List<string> { "Hello" });
@@ -65,11 +65,11 @@ namespace System.Text.Json.Serialization.Tests
             MyStringSortedSetWrapper = new StringSortedSetWrapper() { "Hello" };
             MyStringToStringDictionaryWrapper = new StringToStringDictionaryWrapper()
             {
-                { "key", "value" }
+                { "key", "value" },
             };
             MyStringToStringSortedDictionaryWrapper = new StringToStringSortedDictionaryWrapper()
             {
-                { "key", "value" }
+                { "key", "value" },
             };
             MyStringToGenericDictionaryWrapper = new StringToGenericDictionaryWrapper<
                 StringToGenericDictionaryWrapper<string>
@@ -78,7 +78,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     "key",
                     new StringToGenericDictionaryWrapper<string>() { { "key", "value" } }
-                }
+                },
             };
         }
 
@@ -1633,7 +1633,7 @@ namespace System.Text.Json.Serialization.Tests
             Set = new GenericStructISetWrapper<int>() { 50 };
             Dictionary = new GenericStructIDictionaryWrapper<string, string>()
             {
-                { "key1", "value1" }
+                { "key1", "value1" },
             };
         }
 
@@ -1672,7 +1672,7 @@ namespace System.Text.Json.Serialization.Tests
             Set = new GenericStructISetWrapper<int>() { 50 };
             Dictionary = new GenericStructIDictionaryWrapper<string, string>()
             {
-                { "key1", "value1" }
+                { "key1", "value1" },
             };
         }
 

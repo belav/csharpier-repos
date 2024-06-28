@@ -44,7 +44,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             {
                 LanguageNames.CSharp => KnownMonikers.CSFileNode,
                 LanguageNames.VisualBasic => KnownMonikers.VBFileNode,
-                _ => KnownMonikers.Document
+                _ => KnownMonikers.Document,
             };
 
         public override object GetBrowseObject()

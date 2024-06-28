@@ -201,7 +201,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
             };
             Assert.False(options.IsReadOnly);
 
@@ -533,32 +533,32 @@ namespace System.Text.Json.Serialization.Tests
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9\"\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0032\\u0032\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0032\\u0032\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9>>>>>\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\\u003E\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\\u003E\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003e\\u003e\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                 };
             }
@@ -599,7 +599,7 @@ namespace System.Text.Json.Serialization.Tests
                     new object[]
                     {
                         "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA",
-                        "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA"
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA",
                     },
                     new object[] { "a\u0467\u0466a", "a\u0467\u0466a" },
                 };
@@ -683,8 +683,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 RuntimeConfigurationOptions =
                 {
-                    ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false
-                }
+                    ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false,
+                },
             };
 
             RemoteExecutor
@@ -746,8 +746,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 RuntimeConfigurationOptions =
                 {
-                    ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false
-                }
+                    ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false,
+                },
             };
 
             RemoteExecutor
@@ -822,8 +822,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 RuntimeConfigurationOptions =
                 {
-                    ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false
-                }
+                    ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false,
+                },
             };
 
             RemoteExecutor
@@ -909,8 +909,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 RuntimeConfigurationOptions =
                 {
-                    ["System.Text.Json.Serialization.EnableSourceGenReflectionFallback"] = true
-                }
+                    ["System.Text.Json.Serialization.EnableSourceGenReflectionFallback"] = true,
+                },
             };
 
             RemoteExecutor
@@ -967,8 +967,8 @@ namespace System.Text.Json.Serialization.Tests
                 RuntimeConfigurationOptions =
                 {
                     ["System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault"] = false,
-                    ["System.Text.Json.Serialization.EnableSourceGenReflectionFallback"] = true
-                }
+                    ["System.Text.Json.Serialization.EnableSourceGenReflectionFallback"] = true,
+                },
             };
 
             RemoteExecutor
@@ -1001,7 +1001,7 @@ namespace System.Text.Json.Serialization.Tests
                 TypeInfoResolver = JsonTypeInfoResolver.Combine(
                     JsonContext.Default,
                     new DefaultJsonTypeInfoResolver()
-                )
+                ),
             };
 
             var value = new MyClass();
@@ -1186,7 +1186,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             };
             Assert.False(options.IsReadOnly);
 
@@ -1286,7 +1286,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver
+                TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver,
             };
             JsonSerializerOptions optionsSingleton = JsonSerializerOptions.Default;
             JsonTestHelper.AssertOptionsEqual(options, optionsSingleton);
@@ -1334,7 +1334,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions(JsonSerializerDefaults.Web)
             {
-                TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver
+                TypeInfoResolver = JsonSerializerOptions.Default.TypeInfoResolver,
             };
 
             JsonSerializerOptions optionsSingleton = JsonSerializerOptions.Web;
@@ -1456,7 +1456,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     defaultResolver,
-                    JsonContext.Default
+                    JsonContext.Default,
                 }
             );
 
@@ -1466,8 +1466,8 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     defaultResolver,
-                    JsonContext.Default
-                }
+                    JsonContext.Default,
+                },
             };
             yield return WrapArgs(
                 optionsWithChain.TypeInfoResolver,
@@ -1475,7 +1475,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     defaultResolver,
-                    JsonContext.Default
+                    JsonContext.Default,
                 }
             );
 
@@ -1495,8 +1495,8 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     JsonContext.Default,
-                    defaultResolver
-                }
+                    defaultResolver,
+                },
             };
 
             // The TypeInfoResolver of the original options should be the chain itself
@@ -1506,14 +1506,14 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     JsonContext.Default,
-                    defaultResolver
+                    defaultResolver,
                 },
                 originalOptions.TypeInfoResolverChain
             );
 
             var optionsCopy = new JsonSerializerOptions
             {
-                TypeInfoResolver = originalOptions.TypeInfoResolver
+                TypeInfoResolver = originalOptions.TypeInfoResolver,
             };
 
             // The new options should preserve the original TypeInfoResolver but use a copy for the chain that it owns
@@ -1523,7 +1523,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     JsonContext.Default,
-                    defaultResolver
+                    defaultResolver,
                 },
                 optionsCopy.TypeInfoResolverChain
             );
@@ -1542,7 +1542,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     JsonContext.Default,
-                    defaultResolver
+                    defaultResolver,
                 },
                 originalOptions.TypeInfoResolverChain
             );
@@ -1552,7 +1552,7 @@ namespace System.Text.Json.Serialization.Tests
                     JsonContext.Default,
                     JsonContext.Default,
                     defaultResolver,
-                    appendedResolver
+                    appendedResolver,
                 },
                 optionsCopy.TypeInfoResolverChain
             );
@@ -1568,15 +1568,15 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonContext.Default,
                     JsonContext.Default,
-                    defaultResolver
-                }
+                    defaultResolver,
+                },
             };
             Assert.Equal(
                 new IJsonTypeInfoResolver[]
                 {
                     JsonContext.Default,
                     JsonContext.Default,
-                    defaultResolver
+                    defaultResolver,
                 },
                 options.TypeInfoResolverChain
             );
@@ -1605,7 +1605,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolverChain = { JsonContext.Default, JsonContext.Default }
+                TypeInfoResolverChain = { JsonContext.Default, JsonContext.Default },
             };
 
             var castChain = (IJsonTypeInfoResolver)options.TypeInfoResolverChain;
@@ -1619,7 +1619,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolverChain = { JsonContext.Default, JsonContext.Default }
+                TypeInfoResolverChain = { JsonContext.Default, JsonContext.Default },
             };
 
             Assert.Same(options.TypeInfoResolverChain, options.TypeInfoResolver);
@@ -1681,7 +1681,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolverChain = { resolver1, resolver2, resolver3, resolver4 }
+                TypeInfoResolverChain = { resolver1, resolver2, resolver3, resolver4 },
             };
 
             options.GetTypeInfo(typeof(int));
@@ -1833,7 +1833,7 @@ namespace System.Text.Json.Serialization.Tests
 
             options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             };
             Assert.Throws<InvalidOperationException>(() => options.IgnoreNullValues = true);
 
@@ -1849,7 +1849,7 @@ namespace System.Text.Json.Serialization.Tests
                 () =>
                     new JsonSerializerOptions
                     {
-                        DefaultIgnoreCondition = JsonIgnoreCondition.Always
+                        DefaultIgnoreCondition = JsonIgnoreCondition.Always,
                     }
             );
         }
@@ -1949,7 +1949,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
             };
             JsonTypeInfo<TestClassForEncoding> jti =
                 (JsonTypeInfo<TestClassForEncoding>)
@@ -2076,7 +2076,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
             };
             JsonTypeInfo<T> jsonTypeInfo = (JsonTypeInfo<T>)options.GetTypeInfo(typeof(T));
             string json = JsonSerializer.Serialize(value, jsonTypeInfo);

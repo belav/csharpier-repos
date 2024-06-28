@@ -34,7 +34,7 @@ namespace MonoTests.System
             _Hour = 8,
             _Minute = 4,
             _Second = 2,
-            _Millisecond = 1
+            _Millisecond = 1,
         }
 
         internal void DTAssertEquals(DateTime actual, DateTime expected, Resolution resolution)
@@ -2445,7 +2445,7 @@ namespace MonoTests.System
             {
                 "yyyy-MM-ddTHH:mm:ssZ",
                 "yyyy-MM-ddTHH:mm:sszzzz",
-                "yyyy-MM-dd"
+                "yyyy-MM-dd",
             };
             DateTimeStyles dts = DateTimeStyles.AdjustToUniversal;
             dts |= DateTimeStyles.AssumeUniversal;
@@ -2468,7 +2468,7 @@ namespace MonoTests.System
                 "HH:mm:sszzz",
                 "HH:mm:ss.FFFFFFFzzz",
                 "HH:mm:ssZ",
-                "HH:mm:ss.FFFFFFFZ"
+                "HH:mm:ss.FFFFFFFZ",
             };
             DateTimeStyles style =
                 DateTimeStyles.AllowLeadingWhite | DateTimeStyles.AllowTrailingWhite;
@@ -3501,7 +3501,7 @@ namespace MonoTests.System
                 "es",
                 "en",
                 "de",
-                "fr"
+                "fr",
             };
 
             foreach (string culture in cultures)

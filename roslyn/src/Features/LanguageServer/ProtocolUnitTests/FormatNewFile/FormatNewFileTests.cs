@@ -81,13 +81,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SimplifyMethod
             {
                 Project = new TextDocumentIdentifier
                 {
-                    Uri = ProtocolConversions.CreateAbsoluteUri(project.FilePath)
+                    Uri = ProtocolConversions.CreateAbsoluteUri(project.FilePath),
                 },
                 Document = new TextDocumentIdentifier
                 {
-                    Uri = ProtocolConversions.CreateAbsoluteUri(newFilePath)
+                    Uri = ProtocolConversions.CreateAbsoluteUri(newFilePath),
                 },
-                Contents = input
+                Contents = input,
             };
 
             return await testLspServer.ExecuteRequestAsync<FormatNewFileParams, string?>(

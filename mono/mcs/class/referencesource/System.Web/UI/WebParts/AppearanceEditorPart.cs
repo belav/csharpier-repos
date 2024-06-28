@@ -57,7 +57,7 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [WebSysDefaultValue(SR.AppearanceEditorPart_PartTitle),]
+        [WebSysDefaultValue(SR.AppearanceEditorPart_PartTitle)]
         public override string Title
         {
             get

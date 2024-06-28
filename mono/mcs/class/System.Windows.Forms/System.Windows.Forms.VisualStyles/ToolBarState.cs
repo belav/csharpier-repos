@@ -35,6 +35,6 @@ namespace System.Windows.Forms.VisualStyles
         Pressed = 3,
         Disabled = 4,
         Checked = 5,
-        HotChecked = 6
+        HotChecked = 6,
     }
 }

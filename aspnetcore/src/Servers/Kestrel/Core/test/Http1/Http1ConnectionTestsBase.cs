@@ -53,7 +53,7 @@ public class Http1ConnectionTestsBase : LoggedTest, IDisposable
 
         _serviceContext = new TestServiceContext(LoggerFactory)
         {
-            Scheduler = PipeScheduler.Inline
+            Scheduler = PipeScheduler.Inline,
         };
 
         _timeoutControl = new Mock<ITimeoutControl>();

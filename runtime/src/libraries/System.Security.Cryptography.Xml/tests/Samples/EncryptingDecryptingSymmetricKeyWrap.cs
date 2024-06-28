@@ -40,7 +40,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     CipherData = new CipherData(EncryptedXml.EncryptKey(innerKey.Key, key)),
                     EncryptionMethod = new EncryptionMethod(
                         TestHelpers.GetEncryptionMethodName(key, keyWrap: true)
-                    )
+                    ),
                 };
 
                 // Specify which EncryptedData
@@ -58,7 +58,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     // receiver knows which algorithm to use for decryption.
                     EncryptionMethod = new EncryptionMethod(
                         TestHelpers.GetEncryptionMethodName(innerKey)
-                    )
+                    ),
                 };
 
                 encryptedData.KeyInfo.AddClause(new KeyInfoEncryptedKey(encryptedKey));

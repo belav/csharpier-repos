@@ -24,19 +24,19 @@ namespace System.ComponentModel.Tests
             {
                 ImmutableObjectAttribute.Yes,
                 ImmutableObjectAttribute.Yes,
-                true
+                true,
             };
             yield return new object[]
             {
                 ImmutableObjectAttribute.No,
                 new ImmutableObjectAttribute(false),
-                true
+                true,
             };
             yield return new object[]
             {
                 ImmutableObjectAttribute.Yes,
                 ImmutableObjectAttribute.No,
-                false
+                false,
             };
 
             yield return new object[] { ImmutableObjectAttribute.Yes, new object(), false };

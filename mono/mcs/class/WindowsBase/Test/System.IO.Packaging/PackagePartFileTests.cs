@@ -53,7 +53,7 @@ namespace MonoTests.System.IO.Packaging
                 FileMode.Create,
                 FileMode.CreateNew,
                 FileMode.Truncate,
-                FileMode.Append
+                FileMode.Append,
             };
             FileMode[] otherModes = { FileMode.Open, FileMode.OpenOrCreate };
 

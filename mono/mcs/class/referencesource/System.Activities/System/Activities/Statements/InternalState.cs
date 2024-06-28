@@ -855,7 +855,7 @@ namespace System.Activities.Statements
                     new TriggerCompletedEvent
                     {
                         Bookmark = this.evaluateConditionBookmark.Get(context),
-                        TriggedId = internalTransition.InternalTransitionIndex
+                        TriggedId = internalTransition.InternalTransitionIndex,
                     },
                     out canBeProcessedImmediately
                 );

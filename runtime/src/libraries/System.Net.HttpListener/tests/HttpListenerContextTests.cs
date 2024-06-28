@@ -50,7 +50,7 @@ namespace System.Net.Tests
             yield return new object[]
             {
                 new string[] { "MyProtocol1", "MyProtocol2" },
-                "MyProtocol2"
+                "MyProtocol2",
             };
         }
 
@@ -290,7 +290,7 @@ namespace System.Net.Tests
             ArraySegment<byte> internalBuffer = new FakeArraySegment()
             {
                 Array = new byte[10],
-                Offset = offset
+                Offset = offset,
             }.ToActual();
             await AssertExtensions.ThrowsAsync<ArgumentOutOfRangeException>(
                 "internalBuffer.Offset",
@@ -314,7 +314,7 @@ namespace System.Net.Tests
             {
                 Array = new byte[10],
                 Offset = offset,
-                Count = count
+                Count = count,
             }.ToActual();
             await AssertExtensions.ThrowsAsync<ArgumentOutOfRangeException>(
                 "internalBuffer.Count",

@@ -337,7 +337,7 @@ namespace System.Resources.Tests
             {
                 "Bytes",
                 new byte[] { 41, 42, 43, 44, 192, 168, 1, 1 },
-                false
+                false,
             };
             yield return new object[] { "InvalidKeyName", null, false };
 

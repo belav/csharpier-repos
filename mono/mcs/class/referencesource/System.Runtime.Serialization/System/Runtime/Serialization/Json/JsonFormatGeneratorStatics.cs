@@ -442,7 +442,7 @@ namespace System.Runtime.Serialization
                     serInfoCtorArgs = new Type[]
                     {
                         typeof(SerializationInfo),
-                        typeof(StreamingContext)
+                        typeof(StreamingContext),
                     };
                 }
                 return serInfoCtorArgs;
@@ -552,7 +552,7 @@ namespace System.Runtime.Serialization
                             typeof(string),
                             typeof(string),
                             typeof(string),
-                            typeof(string)
+                            typeof(string),
                         },
                         null
                     );

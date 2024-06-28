@@ -147,8 +147,8 @@ public class Blog
                     .CompilerWarning("CS8618")
                     .WithLocation(0)
                     .WithLocation(1)
-                    .WithIsSuppressed(true)
-            }
+                    .WithIsSuppressed(true),
+            },
         }.RunAsync();
     }
 
@@ -186,8 +186,8 @@ public class Blog
                     .CompilerWarning("CS8618")
                     .WithLocation(1)
                     .WithLocation(2)
-                    .WithIsSuppressed(true)
-            }
+                    .WithIsSuppressed(true),
+            },
         }.RunAsync();
     }
 
@@ -202,7 +202,7 @@ public class Blog
                     .CompilerWarning("CS8618")
                     .WithLocation(0)
                     .WithLocation(0)
-                    .WithIsSuppressed(isSuppressed)
-            }
+                    .WithIsSuppressed(isSuppressed),
+            },
         }.RunAsync();
 }

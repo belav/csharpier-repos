@@ -206,7 +206,7 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         HorizontalAlignment.Left,
                         HorizontalAlignment.Center,
-                        HorizontalAlignment.Right
+                        HorizontalAlignment.Right,
                     }
                 );
                 if (
@@ -258,7 +258,7 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         HorizontalAlignment.Left,
                         HorizontalAlignment.Center,
-                        HorizontalAlignment.Right
+                        HorizontalAlignment.Right,
                     }
                 );
                 if (

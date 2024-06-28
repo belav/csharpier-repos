@@ -292,7 +292,7 @@ namespace System
                     default, // Pad the map to 32 elements to enable range check elimination
                     default,
                     default,
-                    default
+                    default,
                 ];
 
                 // Verify last element of the map

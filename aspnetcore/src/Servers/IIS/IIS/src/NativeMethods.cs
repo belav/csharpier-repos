@@ -38,7 +38,7 @@ internal static partial class NativeMethods
     {
         RQ_NOTIFICATION_CONTINUE,
         RQ_NOTIFICATION_PENDING,
-        RQ_NOTIFICATION_FINISH_REQUEST
+        RQ_NOTIFICATION_FINISH_REQUEST,
     }
 
     [LibraryImport(AspNetCoreModuleDll)]

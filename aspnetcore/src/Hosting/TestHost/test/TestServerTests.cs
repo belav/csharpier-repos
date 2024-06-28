@@ -859,7 +859,7 @@ public class TestServerTests
         [DiagnosticName("Microsoft.AspNetCore.Hosting.BeginRequest")]
         public virtual void OnBeginRequest(IProxyHttpContext httpContext)
         {
-            BeginRequest = new OnBeginRequestEventData() { HttpContext = httpContext, };
+            BeginRequest = new OnBeginRequestEventData() { HttpContext = httpContext };
         }
 
         public class OnEndRequestEventData
@@ -872,7 +872,7 @@ public class TestServerTests
         [DiagnosticName("Microsoft.AspNetCore.Hosting.EndRequest")]
         public virtual void OnEndRequest(IProxyHttpContext httpContext)
         {
-            EndRequest = new OnEndRequestEventData() { HttpContext = httpContext, };
+            EndRequest = new OnEndRequestEventData() { HttpContext = httpContext };
         }
 
         public class OnUnhandledExceptionEventData

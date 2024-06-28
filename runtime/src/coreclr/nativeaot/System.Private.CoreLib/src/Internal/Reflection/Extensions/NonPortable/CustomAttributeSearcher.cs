@@ -224,7 +224,7 @@ namespace Internal.Reflection.Extensions.NonPortable
                 return new AttributeUsageAttribute(AttributeTargets.All)
                 {
                     AllowMultiple = false,
-                    Inherited = true
+                    Inherited = true,
                 };
             return usage;
         }

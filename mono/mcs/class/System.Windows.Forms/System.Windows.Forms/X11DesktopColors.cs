@@ -91,7 +91,7 @@ namespace System.Windows.Forms
         {
             Gtk,
             KDE,
-            Unknown
+            Unknown,
         }
         #endregion	// Structs & Enums
 

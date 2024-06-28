@@ -42,7 +42,7 @@ namespace System.CommandLine.Rendering.Tests
                 .SplitForWrapping()
                 .Should()
                 .BeEquivalentTo(
-                    new[] { "words ", "and ", "then ", "space     ", },
+                    new[] { "words ", "and ", "then ", "space     " },
                     options => options.WithStrictOrdering()
                 );
         }
@@ -56,7 +56,7 @@ namespace System.CommandLine.Rendering.Tests
                 .SplitForWrapping()
                 .Should()
                 .BeEquivalentTo(
-                    new[] { "    ", "space ", "and ", "then ", "words", },
+                    new[] { "    ", "space ", "and ", "then ", "words" },
                     options => options.WithStrictOrdering()
                 );
         }
@@ -72,7 +72,7 @@ namespace System.CommandLine.Rendering.Tests
                 .SplitForWrapping()
                 .Should()
                 .BeEquivalentTo(
-                    new[] { newline, newline, "one ", "two", newline, "three", newline, },
+                    new[] { newline, newline, "one ", "two", newline, "three", newline },
                     options => options.WithStrictOrdering()
                 );
         }

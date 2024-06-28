@@ -27,8 +27,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { true, 4 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -39,8 +39,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, 1 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -51,8 +51,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, 4 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -63,8 +63,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { true, 1 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -72,8 +72,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("Invalid node types - single object")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -84,8 +84,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, 3 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -94,8 +94,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument valid add - connected (single)")
                     {
                         Params = new object[] { true, 1 },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -106,8 +106,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, 1 },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -116,8 +116,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument valid add - connected (multiple)")
                     {
                         Params = new object[] { true, 3 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -125,8 +125,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XDocument invalid add - double DTD")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -134,8 +134,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XDocument invalid add - DTD after element")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -145,8 +145,8 @@ namespace XLinqTests
                         "XDocument invalid add - multiple root elements"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -156,8 +156,8 @@ namespace XLinqTests
                         "XDocument invalid add - CData, attribute, text (no whitespace)"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -165,8 +165,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("Working on the text nodes 1.")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -174,8 +174,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("Working on the text nodes 2.")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
         }
@@ -322,7 +322,7 @@ namespace XLinqTests
                     new XAttribute("a1", "avalue"),
                     "text1",
                     new XText("text2"),
-                    new XDocument()
+                    new XDocument(),
                 }
             )
             {
@@ -360,7 +360,7 @@ namespace XLinqTests
             {
                 new XAttribute("xx", "yy"),
                 new XDocument(),
-                new XDocumentType("root", null, null, null)
+                new XDocumentType("root", null, null, null),
             };
 
             if (runWithEvents)

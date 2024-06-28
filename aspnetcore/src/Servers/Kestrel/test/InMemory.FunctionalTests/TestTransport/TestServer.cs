@@ -64,7 +64,7 @@ internal class TestServer : IAsyncDisposable, IStartup
             {
                 var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                 {
-                    KestrelServerOptions = options
+                    KestrelServerOptions = options,
                 };
 
                 configureListenOptions(listenOptions);

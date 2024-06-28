@@ -59,7 +59,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Note that other annotations do display inner text (e.g. rectangle,
     /// ellipse annotations.).
     /// </remarks>
-    [SRDescription("DescriptionAttributeTextAnnotation_TextAnnotation"),]
+    [SRDescription("DescriptionAttributeTextAnnotation_TextAnnotation")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

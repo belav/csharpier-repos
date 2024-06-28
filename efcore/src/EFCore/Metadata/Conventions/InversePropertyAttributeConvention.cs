@@ -763,7 +763,7 @@ public class InversePropertyAttributeConvention
                                 Tuple.Create<MemberInfo?, Type>(
                                     ambiguousInverse.Value.Item1,
                                     ambiguousInverse.Value.Item2.ClrType
-                                )
+                                ),
                             },
                             navigation,
                             entityType.ClrType

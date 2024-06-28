@@ -122,7 +122,7 @@ public readonly record struct ConfigurationValidator(IGlobalConfigurationExpress
             {
                 throw new AutoMapperConfigurationException(memberMap.TypeMap.Types)
                 {
-                    MemberMap = memberMap
+                    MemberMap = memberMap,
                 };
             }
             var context = new ValidationContext(types, memberMap, ObjectMapper: mapperToUse);

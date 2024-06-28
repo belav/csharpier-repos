@@ -210,7 +210,7 @@ public class RazorComponentResultTest
             PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly()
         )
         {
-            PreventStreamingRendering = true
+            PreventStreamingRendering = true,
         };
         var completionTask = result.ExecuteAsync(httpContext);
         await Task.Yield();
@@ -271,7 +271,7 @@ public class RazorComponentResultTest
         // Act
         var result = new RazorComponentResult(typeof(StreamingComponentThatRedirectsAsynchronously))
         {
-            PreventStreamingRendering = true
+            PreventStreamingRendering = true,
         };
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
             () => result.ExecuteAsync(httpContext)
@@ -335,7 +335,7 @@ public class RazorComponentResultTest
             () =>
                 new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously))
                 {
-                    PreventStreamingRendering = true
+                    PreventStreamingRendering = true,
                 }.ExecuteAsync(httpContext)
         );
 
@@ -538,7 +538,7 @@ public class RazorComponentResultTest
 
         var result = new DefaultHttpContext
         {
-            RequestServices = serviceCollection.BuildServiceProvider()
+            RequestServices = serviceCollection.BuildServiceProvider(),
         };
         result.Request.Scheme = "https";
         result.Request.Host = new HostString("test");

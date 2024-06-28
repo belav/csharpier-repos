@@ -36,6 +36,6 @@ namespace System.Windows.Forms
     {
         Continue = 0,
         Drop = 1,
-        Cancel = 2
+        Cancel = 2,
     }
 }

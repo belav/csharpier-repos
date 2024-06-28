@@ -272,7 +272,7 @@ class C {
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["if (true) {", VirtualKeyCode.RETURN, "var a = 1;",],
+                ["if (true) {", VirtualKeyCode.RETURN, "var a = 1;"],
                 HangMitigatingCancellationToken
             );
 
@@ -313,7 +313,7 @@ class C {
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["if (true) {", VirtualKeyCode.RETURN, "var a = 1;", '}',],
+                ["if (true) {", VirtualKeyCode.RETURN, "var a = 1;", '}'],
                 HangMitigatingCancellationToken
             );
 
@@ -345,7 +345,7 @@ class C {
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["class A { int i;", VirtualKeyCode.RETURN,],
+                ["class A { int i;", VirtualKeyCode.RETURN],
                 HangMitigatingCancellationToken
             );
 
@@ -413,7 +413,7 @@ class C {
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["void Goo(", VirtualKeyCode.ESCAPE, ")",],
+                ["void Goo(", VirtualKeyCode.ESCAPE, ")"],
                 HangMitigatingCancellationToken
             );
 
@@ -969,7 +969,7 @@ class C { }",
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["///", "{([<\"'",],
+                ["///", "{([<\"'"],
                 HangMitigatingCancellationToken
             );
 
@@ -1342,7 +1342,7 @@ class $$
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                [VirtualKeyCode.RETURN, "int Prop {",],
+                [VirtualKeyCode.RETURN, "int Prop {"],
                 HangMitigatingCancellationToken
             );
             await TestServices.EditorVerifier.TextContainsAsync(
@@ -1426,7 +1426,7 @@ class C {
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["if (true)", VirtualKeyCode.RETURN, "{",],
+                ["if (true)", VirtualKeyCode.RETURN, "{"],
                 HangMitigatingCancellationToken
             );
             await TestServices.EditorVerifier.CurrentLineTextAsync(

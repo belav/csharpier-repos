@@ -71,24 +71,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             ShouldConvertProperty(syntax, symbol, type) switch
                             {
                                 ConvertStatus.DoNotConvert => null,
-                                ConvertStatus.Override =>
-                                    new PositionalParameterInfo(
-                                        syntax,
-                                        symbol,
-                                        KeepAsOverride: true
-                                    ),
+                                ConvertStatus.Override => new PositionalParameterInfo(
+                                    syntax,
+                                    symbol,
+                                    KeepAsOverride: true
+                                ),
                                 ConvertStatus.OverrideIfConvertingSetToInit =>
                                     new PositionalParameterInfo(
                                         syntax,
                                         symbol,
                                         !allowSetToInitConversion
                                     ),
-                                ConvertStatus.AlwaysConvert =>
-                                    new PositionalParameterInfo(
-                                        syntax,
-                                        symbol,
-                                        KeepAsOverride: false
-                                    ),
+                                ConvertStatus.AlwaysConvert => new PositionalParameterInfo(
+                                    syntax,
+                                    symbol,
+                                    KeepAsOverride: false
+                                ),
                                 _ => throw ExceptionUtilities.Unreachable(),
                             }
                     )
@@ -143,7 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             /// <summary>
             /// we can convert this without changing the meaning
             /// </summary>
-            AlwaysConvert
+            AlwaysConvert,
         }
 
         private static ConvertStatus ShouldConvertProperty(

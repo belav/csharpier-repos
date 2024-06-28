@@ -26,7 +26,7 @@ namespace System.Web.Http.Batch
             HttpPropertyKeys.SynchronizationContextKey,
             HttpPropertyKeys.HttpConfigurationKey,
             HttpRoute.RoutingContextKey,
-            HttpBatchContextKey
+            HttpBatchContextKey,
         };
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace System.Web.Http.Batch
                     originalContext
                 )
                 {
-                    Url = new UrlHelper(subRequest)
+                    Url = new UrlHelper(subRequest),
                 };
 
                 subRequest.SetRequestContext(subRequestContext);

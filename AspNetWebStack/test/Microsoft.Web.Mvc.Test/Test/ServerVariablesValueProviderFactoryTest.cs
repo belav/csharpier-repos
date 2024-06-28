@@ -18,7 +18,7 @@ namespace Microsoft.Web.Mvc.Test
             NameValueCollection serverVars = new NameValueCollection
             {
                 { "foo", "fooValue" },
-                { "bar.baz", "barBazValue" }
+                { "bar.baz", "barBazValue" },
             };
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();

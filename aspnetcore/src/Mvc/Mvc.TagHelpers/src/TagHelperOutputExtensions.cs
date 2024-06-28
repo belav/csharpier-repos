@@ -21,7 +21,7 @@ public static class TagHelperOutputExtensions
         '\u0009',
         '\u000A',
         '\u000C',
-        '\u000D'
+        '\u000D',
     };
 
     /// <summary>

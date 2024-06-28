@@ -24,7 +24,7 @@ public class SqliteNetTopologySuiteAggregateMethodCallTranslatorPlugin
     {
         Translators = new IAggregateMethodCallTranslator[]
         {
-            new SqliteNetTopologySuiteAggregateMethodTranslator(sqlExpressionFactory)
+            new SqliteNetTopologySuiteAggregateMethodTranslator(sqlExpressionFactory),
         };
     }
 

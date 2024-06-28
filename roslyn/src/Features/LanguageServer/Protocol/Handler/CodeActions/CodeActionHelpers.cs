@@ -171,8 +171,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                             null,
                             nestedCodeActions: nestedCodeActions,
                             codeActionPathList
-                        )
-                    ]
+                        ),
+                    ],
                 };
             }
 
@@ -275,7 +275,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                         fixAllFlavors: null,
                         nestedCodeActions,
                         codeActionPathList
-                    )
+                    ),
                 }
             );
 
@@ -302,8 +302,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                             fixAllFlavors.ToArray(),
                             nestedCodeActions: null,
                             codeActionPathList
-                        )
-                    ]
+                        ),
+                    ],
                 };
 
                 builder.Add(
@@ -321,7 +321,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                             fixAllFlavors.ToArray(),
                             nestedCodeActions: null,
                             codeActionPathList
-                        )
+                        ),
                     }
                 );
             }
@@ -377,7 +377,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     fixAllFlavors: null,
                     nestedCodeActions: null,
                     codeActionPath: null
-                )
+                ),
             };
 
             static VSInternalCodeAction[] GenerateNestedVSCodeActions(
@@ -642,7 +642,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     CodeActionKind.Refactor,
                 UnifiedPredefinedSuggestedActionCategoryNames.StyleFix => CodeActionKind.QuickFix,
                 UnifiedPredefinedSuggestedActionCategoryNames.ErrorFix => CodeActionKind.QuickFix,
-                _ => throw ExceptionUtilities.UnexpectedValue(categoryName)
+                _ => throw ExceptionUtilities.UnexpectedValue(categoryName),
             };
 
         private static LSP.VSInternalPriorityLevel? UnifiedSuggestedActionSetPriorityToPriorityLevel(
@@ -654,7 +654,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                 CodeActionPriority.Low => LSP.VSInternalPriorityLevel.Low,
                 CodeActionPriority.Default => LSP.VSInternalPriorityLevel.Normal,
                 CodeActionPriority.High => LSP.VSInternalPriorityLevel.High,
-                _ => throw ExceptionUtilities.UnexpectedValue(priority)
+                _ => throw ExceptionUtilities.UnexpectedValue(priority),
             };
 
         public static CodeAction GetCodeActionToResolve(

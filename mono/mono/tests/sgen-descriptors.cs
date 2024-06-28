@@ -207,7 +207,7 @@ class Driver
                 i33 = 1,
                 i34 = 1,
                 i35 = 1,
-                o2 = new object()
+                o2 = new object(),
             };
 
             current = (object[])current[0];

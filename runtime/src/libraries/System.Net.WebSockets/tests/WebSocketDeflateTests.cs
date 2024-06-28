@@ -46,7 +46,7 @@ namespace System.Net.WebSockets.Tests
                 stream,
                 new WebSocketCreationOptions
                 {
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -82,7 +82,7 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions
                 {
                     IsServer = true,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -116,7 +116,7 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions
                 {
                     IsServer = true,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -138,7 +138,7 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions
                 {
                     IsServer = true,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -161,7 +161,7 @@ namespace System.Net.WebSockets.Tests
                 new WebSocketCreationOptions
                 {
                     IsServer = false,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -187,8 +187,8 @@ namespace System.Net.WebSockets.Tests
                 {
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
-                        ClientContextTakeover = false
-                    }
+                        ClientContextTakeover = false,
+                    },
                 }
             );
 
@@ -223,8 +223,8 @@ namespace System.Net.WebSockets.Tests
                     IsServer = true,
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
-                        ServerContextTakeover = false
-                    }
+                        ServerContextTakeover = false,
+                    },
                 }
             );
 
@@ -254,7 +254,7 @@ namespace System.Net.WebSockets.Tests
                 stream,
                 new WebSocketCreationOptions
                 {
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
             // The first 3 octets(0xf2 0x48 0x05) and the least significant two
@@ -300,8 +300,8 @@ namespace System.Net.WebSockets.Tests
                     DangerousDeflateOptions = new WebSocketDeflateOptions
                     {
                         ClientContextTakeover = clientContextTakover,
-                        ServerContextTakeover = serverContextTakover
-                    }
+                        ServerContextTakeover = serverContextTakover,
+                    },
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
@@ -311,8 +311,8 @@ namespace System.Net.WebSockets.Tests
                     DangerousDeflateOptions = new WebSocketDeflateOptions
                     {
                         ClientContextTakeover = clientContextTakover,
-                        ServerContextTakeover = serverContextTakover
-                    }
+                        ServerContextTakeover = serverContextTakover,
+                    },
                 }
             );
 
@@ -363,8 +363,8 @@ namespace System.Net.WebSockets.Tests
                     IsServer = true,
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
-                        ClientMaxWindowBits = windowBits
-                    }
+                        ClientMaxWindowBits = windowBits,
+                    },
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
@@ -373,8 +373,8 @@ namespace System.Net.WebSockets.Tests
                 {
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
-                        ClientMaxWindowBits = windowBits
-                    }
+                        ClientMaxWindowBits = windowBits,
+                    },
                 }
             );
 
@@ -474,7 +474,7 @@ namespace System.Net.WebSockets.Tests
                 stream.Remote,
                 new WebSocketCreationOptions
                 {
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -514,7 +514,7 @@ namespace System.Net.WebSockets.Tests
                 stream,
                 new WebSocketCreationOptions
                 {
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -544,8 +544,8 @@ namespace System.Net.WebSockets.Tests
                 {
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
-                        ClientMaxWindowBits = windowBits
-                    }
+                        ClientMaxWindowBits = windowBits,
+                    },
                 }
             );
 
@@ -600,8 +600,8 @@ namespace System.Net.WebSockets.Tests
                         ClientContextTakeover = false,
                         ClientMaxWindowBits = clientWindowBits,
                         ServerContextTakeover = false,
-                        ServerMaxWindowBits = serverWindowBits
-                    }
+                        ServerMaxWindowBits = serverWindowBits,
+                    },
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
@@ -613,8 +613,8 @@ namespace System.Net.WebSockets.Tests
                         ClientContextTakeover = false,
                         ClientMaxWindowBits = clientWindowBits,
                         ServerContextTakeover = false,
-                        ServerMaxWindowBits = serverWindowBits
-                    }
+                        ServerMaxWindowBits = serverWindowBits,
+                    },
                 }
             );
 
@@ -667,7 +667,7 @@ namespace System.Net.WebSockets.Tests
                     0x68,
                     0x6E,
                     0x50,
-                    0x79
+                    0x79,
                 },
                 new byte[]
                 {
@@ -686,7 +686,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x7B,
                     0x0A,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -705,7 +705,7 @@ namespace System.Net.WebSockets.Tests
                     0x3A,
                     0x20,
                     0x7B,
-                    0x0A
+                    0x0A,
                 },
                 new byte[]
                 {
@@ -724,7 +724,7 @@ namespace System.Net.WebSockets.Tests
                     0x68,
                     0x61,
                     0x76,
-                    0x69
+                    0x69,
                 },
                 new byte[]
                 {
@@ -743,7 +743,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -762,7 +762,7 @@ namespace System.Net.WebSockets.Tests
                     0x72,
                     0x43,
                     0x6C,
-                    0x6F
+                    0x6F,
                 },
                 new byte[]
                 {
@@ -781,7 +781,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -800,7 +800,7 @@ namespace System.Net.WebSockets.Tests
                     0x6E,
                     0x22,
                     0x3A,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -819,7 +819,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x72,
                     0x65,
-                    0x6D
+                    0x6D,
                 },
                 new byte[]
                 {
@@ -838,7 +838,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x3A,
                     0x20,
-                    0x31
+                    0x31,
                 },
                 new byte[]
                 {
@@ -857,7 +857,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x22,
-                    0x72
+                    0x72,
                 },
                 new byte[]
                 {
@@ -876,7 +876,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x61,
                     0x75,
-                    0x74
+                    0x74,
                 },
                 new byte[]
                 {
@@ -895,7 +895,7 @@ namespace System.Net.WebSockets.Tests
                     0x30,
                     0x5F,
                     0x36,
-                    0x5F
+                    0x5F,
                 },
                 new byte[]
                 {
@@ -914,7 +914,7 @@ namespace System.Net.WebSockets.Tests
                     0x2E,
                     0x6A,
                     0x73,
-                    0x6F
+                    0x6F,
                 },
                 new byte[]
                 {
@@ -933,7 +933,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -952,7 +952,7 @@ namespace System.Net.WebSockets.Tests
                     0x0A,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -971,7 +971,7 @@ namespace System.Net.WebSockets.Tests
                     0x69,
                     0x6F,
                     0x72,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -990,7 +990,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1009,7 +1009,7 @@ namespace System.Net.WebSockets.Tests
                     0x6F,
                     0x73,
                     0x65,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -1028,7 +1028,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1047,7 +1047,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x32,
                     0x2C,
-                    0x0A
+                    0x0A,
                 },
                 new byte[]
                 {
@@ -1066,7 +1066,7 @@ namespace System.Net.WebSockets.Tests
                     0x6D,
                     0x6F,
                     0x74,
-                    0x65
+                    0x65,
                 },
                 new byte[]
                 {
@@ -1085,7 +1085,7 @@ namespace System.Net.WebSockets.Tests
                     0x31,
                     0x30,
                     0x30,
-                    0x30
+                    0x30,
                 },
                 new byte[]
                 {
@@ -1104,7 +1104,7 @@ namespace System.Net.WebSockets.Tests
                     0x72,
                     0x65,
                     0x70,
-                    0x6F
+                    0x6F,
                 },
                 new byte[]
                 {
@@ -1123,7 +1123,7 @@ namespace System.Net.WebSockets.Tests
                     0x74,
                     0x6F,
                     0x62,
-                    0x61
+                    0x61,
                 },
                 new byte[]
                 {
@@ -1142,7 +1142,7 @@ namespace System.Net.WebSockets.Tests
                     0x5F,
                     0x30,
                     0x5F,
-                    0x63
+                    0x63,
                 },
                 new byte[]
                 {
@@ -1161,7 +1161,7 @@ namespace System.Net.WebSockets.Tests
                     0x6F,
                     0x6E,
                     0x22,
-                    0x0A
+                    0x0A,
                 },
                 new byte[]
                 {
@@ -1180,7 +1180,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -1199,7 +1199,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1218,7 +1218,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x3A,
                     0x20,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -1237,7 +1237,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x22,
-                    0x62
+                    0x62,
                 },
                 new byte[]
                 {
@@ -1256,7 +1256,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x3A,
                     0x20,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -1275,7 +1275,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x22,
-                    0x64
+                    0x64,
                 },
                 new byte[]
                 {
@@ -1294,7 +1294,7 @@ namespace System.Net.WebSockets.Tests
                     0x0A,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1313,7 +1313,7 @@ namespace System.Net.WebSockets.Tests
                     0x65,
                     0x43,
                     0x6C,
-                    0x6F
+                    0x6F,
                 },
                 new byte[]
                 {
@@ -1332,7 +1332,7 @@ namespace System.Net.WebSockets.Tests
                     0x30,
                     0x2C,
                     0x0A,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1351,7 +1351,7 @@ namespace System.Net.WebSockets.Tests
                     0x6F,
                     0x72,
                     0x74,
-                    0x66
+                    0x66,
                 },
                 new byte[]
                 {
@@ -1370,7 +1370,7 @@ namespace System.Net.WebSockets.Tests
                     0x61,
                     0x68,
                     0x6E,
-                    0x70
+                    0x70,
                 },
                 new byte[]
                 {
@@ -1389,7 +1389,7 @@ namespace System.Net.WebSockets.Tests
                     0x63,
                     0x61,
                     0x73,
-                    0x65
+                    0x65,
                 },
                 new byte[]
                 {
@@ -1408,7 +1408,7 @@ namespace System.Net.WebSockets.Tests
                     0x0A,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1427,7 +1427,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x31,
                     0x2E,
-                    0x31
+                    0x31,
                 },
                 new byte[]
                 {
@@ -1446,7 +1446,7 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
+                    0x20,
                 },
                 new byte[]
                 {
@@ -1465,7 +1465,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x4F,
                     0x4B,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -1484,7 +1484,7 @@ namespace System.Net.WebSockets.Tests
                     0x62,
                     0x65,
                     0x68,
-                    0x61
+                    0x61,
                 },
                 new byte[]
                 {
@@ -1503,7 +1503,7 @@ namespace System.Net.WebSockets.Tests
                     0x22,
                     0x4F,
                     0x4B,
-                    0x22
+                    0x22,
                 },
                 new byte[]
                 {
@@ -1522,7 +1522,7 @@ namespace System.Net.WebSockets.Tests
                     0x64,
                     0x75,
                     0x72,
-                    0x61
+                    0x61,
                 },
                 new byte[]
                 {
@@ -1541,8 +1541,8 @@ namespace System.Net.WebSockets.Tests
                     0x20,
                     0x20,
                     0x20,
-                    0x20
-                }
+                    0x20,
+                },
             };
 
             WebSocketTestStream stream = new();
@@ -1555,8 +1555,8 @@ namespace System.Net.WebSockets.Tests
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
                         ClientMaxWindowBits = 9,
-                        ServerMaxWindowBits = 9
-                    }
+                        ServerMaxWindowBits = 9,
+                    },
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
@@ -1567,8 +1567,8 @@ namespace System.Net.WebSockets.Tests
                     DangerousDeflateOptions = new WebSocketDeflateOptions()
                     {
                         ClientMaxWindowBits = 9,
-                        ServerMaxWindowBits = 9
-                    }
+                        ServerMaxWindowBits = 9,
+                    },
                 }
             );
 
@@ -1602,7 +1602,7 @@ namespace System.Net.WebSockets.Tests
                 {
                     IsServer = true,
                     KeepAliveInterval = TimeSpan.Zero,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -1622,7 +1622,7 @@ namespace System.Net.WebSockets.Tests
                 {
                     IsServer = false,
                     KeepAliveInterval = TimeSpan.Zero,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 
@@ -1656,7 +1656,7 @@ namespace System.Net.WebSockets.Tests
                 {
                     IsServer = true,
                     KeepAliveInterval = TimeSpan.Zero,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
             using WebSocket client = WebSocket.CreateFromStream(
@@ -1665,7 +1665,7 @@ namespace System.Net.WebSockets.Tests
                 {
                     IsServer = false,
                     KeepAliveInterval = TimeSpan.Zero,
-                    DangerousDeflateOptions = new WebSocketDeflateOptions()
+                    DangerousDeflateOptions = new WebSocketDeflateOptions(),
                 }
             );
 

@@ -19,9 +19,9 @@ namespace Microsoft.CodeAnalysis.Utilities
             brush switch
             {
                 SolidColorBrush solidColorBrush => solidColorBrush.Color,
-                GradientBrush gradientBrush =>
-                    gradientBrush.GradientStops.FirstOrDefault()?.Color ?? Colors.Transparent,
-                _ => Colors.Transparent
+                GradientBrush gradientBrush => gradientBrush.GradientStops.FirstOrDefault()?.Color
+                    ?? Colors.Transparent,
+                _ => Colors.Transparent,
             };
     }
 }

@@ -340,7 +340,7 @@ namespace System.Data.Query.PlanCompiler
             PlanCompilerPhase.Transformations,
             PlanCompilerPhase.JoinElimination,
             PlanCompilerPhase.CodeGen,
-            PlanCompilerPhase.PostCodeGen
+            PlanCompilerPhase.PostCodeGen,
         };
 
         private static BitVec s_ValidOpTypes = InitializeOpTypes();

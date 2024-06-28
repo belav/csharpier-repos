@@ -195,7 +195,7 @@ namespace System.ServiceModel.Activities.Presentation
         enum EditingMode
         {
             Message,
-            Parameter
+            Parameter,
         }
     }
 }

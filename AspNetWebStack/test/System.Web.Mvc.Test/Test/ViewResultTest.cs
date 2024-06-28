@@ -34,7 +34,7 @@ namespace System.Web.Mvc.Test
             );
             ViewResult result = new ViewResultHelper
             {
-                ViewEngineCollection = viewEngineCollection.Object
+                ViewEngineCollection = viewEngineCollection.Object,
             };
             viewEngineCollection
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
@@ -102,7 +102,7 @@ namespace System.Web.Mvc.Test
             );
             ViewResult result = new ViewResultHelper
             {
-                ViewEngineCollection = viewEngineCollection.Object
+                ViewEngineCollection = viewEngineCollection.Object,
             };
             viewEngineCollection
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
@@ -160,7 +160,7 @@ namespace System.Web.Mvc.Test
             ViewResult result = new ViewResultHelper
             {
                 ViewName = _viewName,
-                ViewEngineCollection = viewEngineCollection.Object
+                ViewEngineCollection = viewEngineCollection.Object,
             };
             view.Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
                 .Callback<ViewContext, TextWriter>(

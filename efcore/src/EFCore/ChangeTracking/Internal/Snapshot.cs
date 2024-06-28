@@ -119,7 +119,7 @@ public sealed class Snapshot : ISnapshot
             28 => typeof(Snapshot<,,,,,,,,,,,,,,,,,,,,,,,,,,,>).MakeGenericType(types),
             29 => typeof(Snapshot<,,,,,,,,,,,,,,,,,,,,,,,,,,,,>).MakeGenericType(types),
             30 => typeof(Snapshot<,,,,,,,,,,,,,,,,,,,,,,,,,,,,,>).MakeGenericType(types),
-            _ => throw new IndexOutOfRangeException()
+            _ => throw new IndexOutOfRangeException(),
         };
 
     /// <inheritdoc/>
@@ -1186,7 +1186,7 @@ public sealed class Snapshot<
                 T28,
                 T29
             > e
-        ) => e._value29
+        ) => e._value29,
     };
 
     /// <summary>
@@ -1378,7 +1378,7 @@ public sealed class Snapshot<
                 27 => _value27,
                 28 => _value28,
                 29 => _value29,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -2477,7 +2477,7 @@ public sealed class Snapshot<
                 T27,
                 T28
             > e
-        ) => e._value28
+        ) => e._value28,
     };
 
     /// <summary>
@@ -2664,7 +2664,7 @@ public sealed class Snapshot<
                 26 => _value26,
                 27 => _value27,
                 28 => _value28,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -3698,7 +3698,7 @@ public sealed class Snapshot<
                 T26,
                 T27
             > e
-        ) => e._value27
+        ) => e._value27,
     };
 
     /// <summary>
@@ -3880,7 +3880,7 @@ public sealed class Snapshot<
                 25 => _value25,
                 26 => _value26,
                 27 => _value27,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -4851,7 +4851,7 @@ public sealed class Snapshot<
                 T25,
                 T26
             > e
-        ) => e._value26
+        ) => e._value26,
     };
 
     /// <summary>
@@ -5028,7 +5028,7 @@ public sealed class Snapshot<
                 24 => _value24,
                 25 => _value25,
                 26 => _value26,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -5938,7 +5938,7 @@ public sealed class Snapshot<
                 T24,
                 T25
             > e
-        ) => e._value25
+        ) => e._value25,
     };
 
     /// <summary>
@@ -6110,7 +6110,7 @@ public sealed class Snapshot<
                 23 => _value23,
                 24 => _value24,
                 25 => _value25,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -6961,7 +6961,7 @@ public sealed class Snapshot<
                 T23,
                 T24
             > e
-        ) => e._value24
+        ) => e._value24,
     };
 
     /// <summary>
@@ -7128,7 +7128,7 @@ public sealed class Snapshot<
                 22 => _value22,
                 23 => _value23,
                 24 => _value24,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -7922,7 +7922,7 @@ public sealed class Snapshot<
                 T22,
                 T23
             > e
-        ) => e._value23
+        ) => e._value23,
     };
 
     /// <summary>
@@ -8084,7 +8084,7 @@ public sealed class Snapshot<
                 21 => _value21,
                 22 => _value22,
                 23 => _value23,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -8823,7 +8823,7 @@ public sealed class Snapshot<
                 T21,
                 T22
             > e
-        ) => e._value22
+        ) => e._value22,
     };
 
     /// <summary>
@@ -8980,7 +8980,7 @@ public sealed class Snapshot<
                 20 => _value20,
                 21 => _value21,
                 22 => _value22,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -9666,7 +9666,7 @@ public sealed class Snapshot<
                 T20,
                 T21
             > e
-        ) => e._value21
+        ) => e._value21,
     };
 
     /// <summary>
@@ -9818,7 +9818,7 @@ public sealed class Snapshot<
                 19 => _value19,
                 20 => _value20,
                 21 => _value21,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -10453,7 +10453,7 @@ public sealed class Snapshot<
                 T19,
                 T20
             > e
-        ) => e._value20
+        ) => e._value20,
     };
 
     /// <summary>
@@ -10600,7 +10600,7 @@ public sealed class Snapshot<
                 18 => _value18,
                 19 => _value19,
                 20 => _value20,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -11186,7 +11186,7 @@ public sealed class Snapshot<
                 T18,
                 T19
             > e
-        ) => e._value19
+        ) => e._value19,
     };
 
     /// <summary>
@@ -11328,7 +11328,7 @@ public sealed class Snapshot<
                 17 => _value17,
                 18 => _value18,
                 19 => _value19,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -11867,7 +11867,7 @@ public sealed class Snapshot<
                 T17,
                 T18
             > e
-        ) => e._value18
+        ) => e._value18,
     };
 
     /// <summary>
@@ -12004,7 +12004,7 @@ public sealed class Snapshot<
                 16 => _value16,
                 17 => _value17,
                 18 => _value18,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -12498,7 +12498,7 @@ public sealed class Snapshot<
                 T16,
                 T17
             > e
-        ) => e._value17
+        ) => e._value17,
     };
 
     /// <summary>
@@ -12630,7 +12630,7 @@ public sealed class Snapshot<
                 15 => _value15,
                 16 => _value16,
                 17 => _value17,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -12758,7 +12758,7 @@ public sealed class Snapshot<
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> e) =>
             e._value15,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> e) =>
-            e._value16
+            e._value16,
     };
 
     /// <summary>
@@ -12867,7 +12867,7 @@ public sealed class Snapshot<
                 14 => _value14,
                 15 => _value15,
                 16 => _value16,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -12973,7 +12973,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> e) =>
             e._value14,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> e) =>
-            e._value15
+            e._value15,
     };
 
     /// <summary>
@@ -13078,7 +13078,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
                 13 => _value13,
                 14 => _value14,
                 15 => _value15,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -13164,7 +13164,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> e) => e._value11,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> e) => e._value12,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> e) => e._value13,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> e) => e._value14
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> e) => e._value14,
     };
 
     /// <summary>
@@ -13262,7 +13262,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
                 12 => _value12,
                 13 => _value13,
                 14 => _value14,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -13343,7 +13343,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> e) => e._value10,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> e) => e._value11,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> e) => e._value12,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> e) => e._value13
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> e) => e._value13,
     };
 
     /// <summary>
@@ -13437,7 +13437,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
                 11 => _value11,
                 12 => _value12,
                 13 => _value13,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -13514,7 +13514,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> e) => e._value9,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> e) => e._value10,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> e) => e._value11,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> e) => e._value12
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> e) => e._value12,
     };
 
     /// <summary>
@@ -13604,7 +13604,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T
                 10 => _value10,
                 11 => _value11,
                 12 => _value12,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -13677,7 +13677,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> :
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> e) => e._value8,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> e) => e._value9,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> e) => e._value10,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> e) => e._value11
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> e) => e._value11,
     };
 
     /// <summary>
@@ -13762,7 +13762,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> :
                 9 => _value9,
                 10 => _value10,
                 11 => _value11,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -13831,7 +13831,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ISna
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> e) => e._value7,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> e) => e._value8,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> e) => e._value9,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> e) => e._value10
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> e) => e._value10,
     };
 
     /// <summary>
@@ -13910,7 +13910,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> : ISna
                 8 => _value8,
                 9 => _value9,
                 10 => _value10,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -13975,7 +13975,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : ISnapshot
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> e) => e._value6,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> e) => e._value7,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> e) => e._value8,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> e) => e._value9
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> e) => e._value9,
     };
 
     /// <summary>
@@ -14050,7 +14050,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> : ISnapshot
                 7 => _value7,
                 8 => _value8,
                 9 => _value9,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14111,7 +14111,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> : ISnapshot
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> e) => e._value5,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> e) => e._value6,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> e) => e._value7,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> e) => e._value8
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> e) => e._value8,
     };
 
     /// <summary>
@@ -14182,7 +14182,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7, T8> : ISnapshot
                 6 => _value6,
                 7 => _value7,
                 8 => _value8,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14239,7 +14239,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> : ISnapshot
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> e) => e._value4,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> e) => e._value5,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> e) => e._value6,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> e) => e._value7
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> e) => e._value7,
     };
 
     /// <summary>
@@ -14306,7 +14306,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6, T7> : ISnapshot
                 5 => _value5,
                 6 => _value6,
                 7 => _value7,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14359,7 +14359,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6> : ISnapshot
         (Snapshot<T0, T1, T2, T3, T4, T5, T6> e) => e._value3,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6> e) => e._value4,
         (Snapshot<T0, T1, T2, T3, T4, T5, T6> e) => e._value5,
-        (Snapshot<T0, T1, T2, T3, T4, T5, T6> e) => e._value6
+        (Snapshot<T0, T1, T2, T3, T4, T5, T6> e) => e._value6,
     };
 
     /// <summary>
@@ -14414,7 +14414,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5, T6> : ISnapshot
                 4 => _value4,
                 5 => _value5,
                 6 => _value6,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14463,7 +14463,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5> : ISnapshot
         (Snapshot<T0, T1, T2, T3, T4, T5> e) => e._value2,
         (Snapshot<T0, T1, T2, T3, T4, T5> e) => e._value3,
         (Snapshot<T0, T1, T2, T3, T4, T5> e) => e._value4,
-        (Snapshot<T0, T1, T2, T3, T4, T5> e) => e._value5
+        (Snapshot<T0, T1, T2, T3, T4, T5> e) => e._value5,
     };
 
     /// <summary>
@@ -14515,7 +14515,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4, T5> : ISnapshot
                 3 => _value3,
                 4 => _value4,
                 5 => _value5,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14560,7 +14560,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4> : ISnapshot
         (Snapshot<T0, T1, T2, T3, T4> e) => e._value1,
         (Snapshot<T0, T1, T2, T3, T4> e) => e._value2,
         (Snapshot<T0, T1, T2, T3, T4> e) => e._value3,
-        (Snapshot<T0, T1, T2, T3, T4> e) => e._value4
+        (Snapshot<T0, T1, T2, T3, T4> e) => e._value4,
     };
 
     /// <summary>
@@ -14609,7 +14609,7 @@ public sealed class Snapshot<T0, T1, T2, T3, T4> : ISnapshot
                 2 => _value2,
                 3 => _value3,
                 4 => _value4,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14650,7 +14650,7 @@ public sealed class Snapshot<T0, T1, T2, T3> : ISnapshot
         (Snapshot<T0, T1, T2, T3> e) => e._value0,
         (Snapshot<T0, T1, T2, T3> e) => e._value1,
         (Snapshot<T0, T1, T2, T3> e) => e._value2,
-        (Snapshot<T0, T1, T2, T3> e) => e._value3
+        (Snapshot<T0, T1, T2, T3> e) => e._value3,
     };
 
     /// <summary>
@@ -14696,7 +14696,7 @@ public sealed class Snapshot<T0, T1, T2, T3> : ISnapshot
                 1 => _value1,
                 2 => _value2,
                 3 => _value3,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14733,7 +14733,7 @@ public sealed class Snapshot<T0, T1, T2> : ISnapshot
     {
         (Snapshot<T0, T1, T2> e) => e._value0,
         (Snapshot<T0, T1, T2> e) => e._value1,
-        (Snapshot<T0, T1, T2> e) => e._value2
+        (Snapshot<T0, T1, T2> e) => e._value2,
     };
 
     /// <summary>
@@ -14775,7 +14775,7 @@ public sealed class Snapshot<T0, T1, T2> : ISnapshot
                 0 => _value0,
                 1 => _value1,
                 2 => _value2,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14808,7 +14808,7 @@ public sealed class Snapshot<T0, T1> : ISnapshot
     private static readonly Delegate[] ValueReaders =
     {
         (Snapshot<T0, T1> e) => e._value0,
-        (Snapshot<T0, T1> e) => e._value1
+        (Snapshot<T0, T1> e) => e._value1,
     };
 
     /// <summary>
@@ -14847,7 +14847,7 @@ public sealed class Snapshot<T0, T1> : ISnapshot
             {
                 0 => _value0,
                 1 => _value1,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
         set
         {
@@ -14910,7 +14910,7 @@ public sealed class Snapshot<T0> : ISnapshot
             _value0 = index switch
             {
                 0 => (T0)value!,
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
     }
 }

@@ -165,7 +165,7 @@ namespace System.Activities.Core.Presentation
                         }
 
                         return null;
-                    }
+                    },
                 }
             );
             builder.AddCustomAttributes(type, new FeatureAttribute(typeof(FlowSwitchLabelFeature)));
@@ -180,7 +180,7 @@ namespace System.Activities.Core.Presentation
                 new ShowPropertyInOutlineViewAttribute()
                 {
                     CurrentPropertyVisible = false,
-                    ChildNodePrefix = "Case : "
+                    ChildNodePrefix = "Case : ",
                 }
             );
             builder.AddCustomAttributes(

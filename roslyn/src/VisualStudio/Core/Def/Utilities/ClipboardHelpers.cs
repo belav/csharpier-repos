@@ -108,7 +108,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
                 ptd = IntPtr.Zero,
                 dwAspect = (uint)DVASPECT.DVASPECT_CONTENT,
                 lindex = -1,
-                tymed = (uint)TYMED.TYMED_HGLOBAL
+                tymed = (uint)TYMED.TYMED_HGLOBAL,
             };
 
         private static unsafe string? ReadStringFromHandle(IntPtr handle, bool unicode)

@@ -38,6 +38,6 @@ namespace System.Security.AccessControl
         FullControl =
             0xF003F
             | Interop.Advapi32.RegistryOperations.STANDARD_RIGHTS_READ
-            | Interop.Advapi32.RegistryOperations.STANDARD_RIGHTS_WRITE
+            | Interop.Advapi32.RegistryOperations.STANDARD_RIGHTS_WRITE,
     }
 }

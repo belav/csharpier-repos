@@ -36,7 +36,7 @@ namespace System.Data.Common.EntitySql
             /// <summary>
             /// Same as CompilationMode.Normal plus WITH RELATIONSHIP clause is allowed in type constructors.
             /// </summary>
-            UserViewGenerationMode
+            UserViewGenerationMode,
         }
 
         /// <summary>

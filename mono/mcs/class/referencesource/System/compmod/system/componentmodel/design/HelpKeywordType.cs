@@ -40,6 +40,6 @@ namespace System.ComponentModel.Design
         ///       Indicates the keyword is a filter keyword.
         ///    </para>
         /// </devdoc>
-        FilterKeyword
+        FilterKeyword,
     }
 }

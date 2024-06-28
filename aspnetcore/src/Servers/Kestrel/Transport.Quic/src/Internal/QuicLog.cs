@@ -478,6 +478,6 @@ internal static partial class QuicLog
     private enum StreamType
     {
         Unidirectional,
-        Bidirectional
+        Bidirectional,
     }
 }

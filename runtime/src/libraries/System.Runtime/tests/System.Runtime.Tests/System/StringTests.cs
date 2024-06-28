@@ -282,14 +282,14 @@ namespace System.Tests
                 "Hello",
                 "Larger Hello",
                 StringComparison.CurrentCulture,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Goodbye",
                 StringComparison.CurrentCulture,
-                false
+                false,
             };
             yield return new object[] { "", "", StringComparison.CurrentCulture, true };
             yield return new object[] { "", "hello", StringComparison.CurrentCulture, false };
@@ -299,7 +299,7 @@ namespace System.Tests
                 "Hello",
                 "Ell" + SoftHyphen,
                 StringComparison.CurrentCulture,
-                false
+                false,
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -308,7 +308,7 @@ namespace System.Tests
                     "Hello",
                     "ell" + SoftHyphen,
                     StringComparison.CurrentCulture,
-                    true
+                    true,
                 };
 
             // CurrentCultureIgnoreCase
@@ -317,35 +317,35 @@ namespace System.Tests
                 "Hello",
                 "ello",
                 StringComparison.CurrentCultureIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "Hello",
                 "ELL",
                 StringComparison.CurrentCultureIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "Hello",
                 "ElLo",
                 StringComparison.CurrentCultureIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "Hello",
                 "Larger Hello",
                 StringComparison.CurrentCultureIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Goodbye",
                 StringComparison.CurrentCultureIgnoreCase,
-                false
+                false,
             };
             yield return new object[] { "", "", StringComparison.CurrentCultureIgnoreCase, true };
             yield return new object[]
@@ -353,14 +353,14 @@ namespace System.Tests
                 "",
                 "hello",
                 StringComparison.CurrentCultureIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "",
                 StringComparison.CurrentCultureIgnoreCase,
-                true
+                true,
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -370,14 +370,14 @@ namespace System.Tests
                     "Hello",
                     "ell" + SoftHyphen,
                     StringComparison.CurrentCultureIgnoreCase,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     "Hello",
                     "Ell" + SoftHyphen,
                     StringComparison.CurrentCultureIgnoreCase,
-                    true
+                    true,
                 };
             }
 
@@ -390,14 +390,14 @@ namespace System.Tests
                 "Hello",
                 "Larger Hello",
                 StringComparison.InvariantCulture,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Goodbye",
                 StringComparison.InvariantCulture,
-                false
+                false,
             };
             yield return new object[] { "", "", StringComparison.InvariantCulture, true };
             yield return new object[] { "", "hello", StringComparison.InvariantCulture, false };
@@ -407,7 +407,7 @@ namespace System.Tests
                 "Hello",
                 "Ell" + SoftHyphen,
                 StringComparison.InvariantCulture,
-                false
+                false,
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -416,7 +416,7 @@ namespace System.Tests
                     "Hello",
                     "ell" + SoftHyphen,
                     StringComparison.InvariantCulture,
-                    true
+                    true,
                 };
 
             // InvariantCultureIgnoreCase
@@ -425,35 +425,35 @@ namespace System.Tests
                 "Hello",
                 "ello",
                 StringComparison.InvariantCultureIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "Hello",
                 "ELL",
                 StringComparison.InvariantCultureIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "Hello",
                 "ElLo",
                 StringComparison.InvariantCultureIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "Hello",
                 "Larger Hello",
                 StringComparison.InvariantCultureIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Goodbye",
                 StringComparison.InvariantCultureIgnoreCase,
-                false
+                false,
             };
             yield return new object[] { "", "", StringComparison.InvariantCultureIgnoreCase, true };
             yield return new object[]
@@ -461,14 +461,14 @@ namespace System.Tests
                 "",
                 "hello",
                 StringComparison.InvariantCultureIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "",
                 StringComparison.InvariantCultureIgnoreCase,
-                true
+                true,
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -478,14 +478,14 @@ namespace System.Tests
                     "Hello",
                     "ell" + SoftHyphen,
                     StringComparison.InvariantCultureIgnoreCase,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     "Hello",
                     "Ell" + SoftHyphen,
                     StringComparison.InvariantCultureIgnoreCase,
-                    true
+                    true,
                 };
             }
 
@@ -503,14 +503,14 @@ namespace System.Tests
                 "Hello",
                 "ell" + SoftHyphen,
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Ell" + SoftHyphen,
                 StringComparison.Ordinal,
-                false
+                false,
             };
 
             // OrdinalIgnoreCase
@@ -522,14 +522,14 @@ namespace System.Tests
                 "Hello",
                 "Larger Hello",
                 StringComparison.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Goodbye",
                 StringComparison.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[] { "", "", StringComparison.OrdinalIgnoreCase, true };
             yield return new object[] { "", "hello", StringComparison.OrdinalIgnoreCase, false };
@@ -539,14 +539,14 @@ namespace System.Tests
                 "Hello",
                 "ell" + SoftHyphen,
                 StringComparison.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello",
                 "Ell" + SoftHyphen,
                 StringComparison.OrdinalIgnoreCase,
-                false
+                false,
             };
         }
 
@@ -951,7 +951,7 @@ namespace System.Tests
             {
                 '|',
                 new object[] { new ObjectWithNullToString(), 2, new ObjectWithNullToString() },
-                "|2|"
+                "|2|",
             };
             yield return new object[] { '|', new object[] { "1", null, "3" }, "1||3" };
             yield return new object[] { '|', new object[] { "", "", "" }, "||" };
@@ -1032,7 +1032,7 @@ namespace System.Tests
                 "abc",
                 "def",
                 StringComparison.CurrentCulture,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1040,7 +1040,7 @@ namespace System.Tests
                 "ABC",
                 "def",
                 StringComparison.CurrentCulture,
-                "abc"
+                "abc",
             };
             yield return new object[] { "abc", "abc", "", StringComparison.CurrentCulture, "" };
             yield return new object[]
@@ -1049,7 +1049,7 @@ namespace System.Tests
                 "b",
                 "LONG",
                 StringComparison.CurrentCulture,
-                "aLONGc"
+                "aLONGc",
             };
             yield return new object[] { "abc", "b", "d", StringComparison.CurrentCulture, "adc" };
             yield return new object[] { "abc", "b", null, StringComparison.CurrentCulture, "ac" };
@@ -1061,7 +1061,7 @@ namespace System.Tests
                     "abc" + SoftHyphen,
                     "def",
                     StringComparison.CurrentCulture,
-                    "def"
+                    "def",
                 };
 
             yield return new object[]
@@ -1070,7 +1070,7 @@ namespace System.Tests
                 "abc",
                 "def",
                 StringComparison.CurrentCultureIgnoreCase,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1078,7 +1078,7 @@ namespace System.Tests
                 "ABC",
                 "def",
                 StringComparison.CurrentCultureIgnoreCase,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1086,7 +1086,7 @@ namespace System.Tests
                 "abc",
                 "",
                 StringComparison.CurrentCultureIgnoreCase,
-                ""
+                "",
             };
             yield return new object[]
             {
@@ -1094,7 +1094,7 @@ namespace System.Tests
                 "b",
                 "LONG",
                 StringComparison.CurrentCultureIgnoreCase,
-                "aLONGc"
+                "aLONGc",
             };
             yield return new object[]
             {
@@ -1102,7 +1102,7 @@ namespace System.Tests
                 "b",
                 "d",
                 StringComparison.CurrentCultureIgnoreCase,
-                "adc"
+                "adc",
             };
             yield return new object[]
             {
@@ -1110,7 +1110,7 @@ namespace System.Tests
                 "b",
                 null,
                 StringComparison.CurrentCultureIgnoreCase,
-                "ac"
+                "ac",
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -1120,7 +1120,7 @@ namespace System.Tests
                     "abc" + SoftHyphen,
                     "def",
                     StringComparison.CurrentCultureIgnoreCase,
-                    "def"
+                    "def",
                 };
 
             yield return new object[] { "abc", "abc", "def", StringComparison.Ordinal, "def" };
@@ -1137,7 +1137,7 @@ namespace System.Tests
                     "abc" + SoftHyphen,
                     "def",
                     StringComparison.Ordinal,
-                    "abc"
+                    "abc",
                 };
 
             yield return new object[]
@@ -1146,7 +1146,7 @@ namespace System.Tests
                 "abc",
                 "def",
                 StringComparison.OrdinalIgnoreCase,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1154,7 +1154,7 @@ namespace System.Tests
                 "ABC",
                 "def",
                 StringComparison.OrdinalIgnoreCase,
-                "def"
+                "def",
             };
             yield return new object[] { "abc", "abc", "", StringComparison.OrdinalIgnoreCase, "" };
             yield return new object[]
@@ -1163,7 +1163,7 @@ namespace System.Tests
                 "b",
                 "LONG",
                 StringComparison.OrdinalIgnoreCase,
-                "aLONGc"
+                "aLONGc",
             };
             yield return new object[]
             {
@@ -1171,7 +1171,7 @@ namespace System.Tests
                 "b",
                 "d",
                 StringComparison.OrdinalIgnoreCase,
-                "adc"
+                "adc",
             };
             yield return new object[]
             {
@@ -1179,7 +1179,7 @@ namespace System.Tests
                 "b",
                 null,
                 StringComparison.OrdinalIgnoreCase,
-                "ac"
+                "ac",
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -1189,7 +1189,7 @@ namespace System.Tests
                     "abc" + SoftHyphen,
                     "def",
                     StringComparison.OrdinalIgnoreCase,
-                    "abc"
+                    "abc",
                 };
 
             yield return new object[]
@@ -1198,7 +1198,7 @@ namespace System.Tests
                 "abc",
                 "def",
                 StringComparison.InvariantCulture,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1206,7 +1206,7 @@ namespace System.Tests
                 "ABC",
                 "def",
                 StringComparison.InvariantCulture,
-                "abc"
+                "abc",
             };
             yield return new object[] { "abc", "abc", "", StringComparison.InvariantCulture, "" };
             yield return new object[]
@@ -1215,7 +1215,7 @@ namespace System.Tests
                 "b",
                 "LONG",
                 StringComparison.InvariantCulture,
-                "aLONGc"
+                "aLONGc",
             };
             yield return new object[] { "abc", "b", "d", StringComparison.InvariantCulture, "adc" };
             yield return new object[] { "abc", "b", null, StringComparison.InvariantCulture, "ac" };
@@ -1227,7 +1227,7 @@ namespace System.Tests
                     "abc" + SoftHyphen,
                     "def",
                     StringComparison.InvariantCulture,
-                    "def"
+                    "def",
                 };
 
             yield return new object[]
@@ -1236,7 +1236,7 @@ namespace System.Tests
                 "abc",
                 "def",
                 StringComparison.InvariantCultureIgnoreCase,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1244,7 +1244,7 @@ namespace System.Tests
                 "ABC",
                 "def",
                 StringComparison.InvariantCultureIgnoreCase,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1252,7 +1252,7 @@ namespace System.Tests
                 "abc",
                 "",
                 StringComparison.InvariantCultureIgnoreCase,
-                ""
+                "",
             };
             yield return new object[]
             {
@@ -1260,7 +1260,7 @@ namespace System.Tests
                 "b",
                 "LONG",
                 StringComparison.InvariantCultureIgnoreCase,
-                "aLONGc"
+                "aLONGc",
             };
             yield return new object[]
             {
@@ -1268,7 +1268,7 @@ namespace System.Tests
                 "b",
                 "d",
                 StringComparison.InvariantCultureIgnoreCase,
-                "adc"
+                "adc",
             };
             yield return new object[]
             {
@@ -1276,7 +1276,7 @@ namespace System.Tests
                 "b",
                 null,
                 StringComparison.InvariantCultureIgnoreCase,
-                "ac"
+                "ac",
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -1287,7 +1287,7 @@ namespace System.Tests
                     "abc" + SoftHyphen,
                     "def",
                     StringComparison.InvariantCultureIgnoreCase,
-                    "def"
+                    "def",
                 };
 
                 string turkishSource = "\u0069\u0130";
@@ -1298,7 +1298,7 @@ namespace System.Tests
                     "\u0069",
                     "a",
                     StringComparison.Ordinal,
-                    "a\u0130"
+                    "a\u0130",
                 };
                 yield return new object[]
                 {
@@ -1306,7 +1306,7 @@ namespace System.Tests
                     "\u0069",
                     "a",
                     StringComparison.OrdinalIgnoreCase,
-                    "a\u0130"
+                    "a\u0130",
                 };
                 yield return new object[]
                 {
@@ -1314,7 +1314,7 @@ namespace System.Tests
                     "\u0130",
                     "a",
                     StringComparison.Ordinal,
-                    "\u0069a"
+                    "\u0069a",
                 };
                 yield return new object[]
                 {
@@ -1322,7 +1322,7 @@ namespace System.Tests
                     "\u0130",
                     "a",
                     StringComparison.OrdinalIgnoreCase,
-                    "\u0069a"
+                    "\u0069a",
                 };
 
                 yield return new object[]
@@ -1331,7 +1331,7 @@ namespace System.Tests
                     "\u0069",
                     "a",
                     StringComparison.InvariantCulture,
-                    "a\u0130"
+                    "a\u0130",
                 };
                 yield return new object[]
                 {
@@ -1339,7 +1339,7 @@ namespace System.Tests
                     "\u0069",
                     "a",
                     StringComparison.InvariantCultureIgnoreCase,
-                    "a\u0130"
+                    "a\u0130",
                 };
                 yield return new object[]
                 {
@@ -1347,7 +1347,7 @@ namespace System.Tests
                     "\u0130",
                     "a",
                     StringComparison.InvariantCulture,
-                    "\u0069a"
+                    "\u0069a",
                 };
                 yield return new object[]
                 {
@@ -1355,7 +1355,7 @@ namespace System.Tests
                     "\u0130",
                     "a",
                     StringComparison.InvariantCultureIgnoreCase,
-                    "\u0069a"
+                    "\u0069a",
                 };
             }
 
@@ -1446,7 +1446,7 @@ namespace System.Tests
                 "def",
                 false,
                 CultureInfo.InvariantCulture,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1455,7 +1455,7 @@ namespace System.Tests
                 "def",
                 false,
                 CultureInfo.InvariantCulture,
-                "abc"
+                "abc",
             };
 
             yield return new object[] { "abc", "abc", "def", true, null, "def" };
@@ -1467,7 +1467,7 @@ namespace System.Tests
                 "def",
                 true,
                 CultureInfo.InvariantCulture,
-                "def"
+                "def",
             };
             yield return new object[]
             {
@@ -1476,7 +1476,7 @@ namespace System.Tests
                 "def",
                 true,
                 CultureInfo.InvariantCulture,
-                "def"
+                "def",
             };
 
             if (PlatformDetection.IsNotInvariantGlobalization)
@@ -1490,7 +1490,7 @@ namespace System.Tests
                     "def",
                     false,
                     CultureInfo.InvariantCulture,
-                    "def"
+                    "def",
                 };
                 yield return new object[]
                 {
@@ -1499,7 +1499,7 @@ namespace System.Tests
                     "def",
                     true,
                     CultureInfo.InvariantCulture,
-                    "def"
+                    "def",
                 };
 
                 // Android has different results w/ tr-TR
@@ -1513,7 +1513,7 @@ namespace System.Tests
                         "a",
                         false,
                         new CultureInfo("tr-TR"),
-                        "a\u0130"
+                        "a\u0130",
                     };
                     yield return new object[]
                     {
@@ -1522,7 +1522,7 @@ namespace System.Tests
                         "a",
                         true,
                         new CultureInfo("tr-TR"),
-                        "aa"
+                        "aa",
                     };
                 }
 
@@ -1533,7 +1533,7 @@ namespace System.Tests
                     "a",
                     false,
                     CultureInfo.InvariantCulture,
-                    "a\u0130"
+                    "a\u0130",
                 };
                 yield return new object[]
                 {
@@ -1542,7 +1542,7 @@ namespace System.Tests
                     "a",
                     true,
                     CultureInfo.InvariantCulture,
-                    "a\u0130"
+                    "a\u0130",
                 };
             }
         }
@@ -2200,56 +2200,56 @@ namespace System.Tests
                 "Hello\uD801\uDC28",
                 "\uD801\uDC4f",
                 StringComparison.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "Hello\uD801\uDC28",
                 "\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                5
+                5,
             };
             yield return new object[]
             {
                 "Hello\u0200\u0202",
                 "\u0201\u0203",
                 StringComparison.OrdinalIgnoreCase,
-                5
+                5,
             };
             yield return new object[]
             {
                 "Hello\u0200\u0202",
                 "\u0201\u0203",
                 StringComparison.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "Hello\uD801\uDC00",
                 "\uDC00",
                 StringComparison.Ordinal,
-                6
+                6,
             };
             yield return new object[]
             {
                 "Hello\uD801\uDC00",
                 "\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                6
+                6,
             };
             yield return new object[]
             {
                 "Hello\uD801\uDC00",
                 "\uD801",
                 StringComparison.OrdinalIgnoreCase,
-                5
+                5,
             };
             yield return new object[]
             {
                 "Hello\uD801\uDC00",
                 "\uD801\uDC00",
                 StringComparison.Ordinal,
-                5
+                5,
             };
         }
 
@@ -2273,7 +2273,7 @@ namespace System.Tests
                 "\uD801\uDC4f",
                 6,
                 StringComparison.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -2281,7 +2281,7 @@ namespace System.Tests
                 "\uD801\uDC00",
                 6,
                 StringComparison.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -2289,7 +2289,7 @@ namespace System.Tests
                 "\uD801\uDC00",
                 1,
                 StringComparison.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -2297,7 +2297,7 @@ namespace System.Tests
                 "\u0201\u0203",
                 6,
                 StringComparison.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -2305,7 +2305,7 @@ namespace System.Tests
                 "\u0201\u0203",
                 1,
                 StringComparison.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -2313,7 +2313,7 @@ namespace System.Tests
                 "\u0201\u0203",
                 6,
                 StringComparison.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -2321,7 +2321,7 @@ namespace System.Tests
                 "\uDC00",
                 6,
                 StringComparison.Ordinal,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -2329,7 +2329,7 @@ namespace System.Tests
                 "\uDC00",
                 3,
                 StringComparison.Ordinal,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -2337,7 +2337,7 @@ namespace System.Tests
                 "\uDC00",
                 6,
                 StringComparison.OrdinalIgnoreCase,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -2345,7 +2345,7 @@ namespace System.Tests
                 "\uDC00",
                 4,
                 StringComparison.OrdinalIgnoreCase,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -2353,7 +2353,7 @@ namespace System.Tests
                 "\uD801",
                 6,
                 StringComparison.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -2361,7 +2361,7 @@ namespace System.Tests
                 "\uD801",
                 0,
                 StringComparison.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -2369,7 +2369,7 @@ namespace System.Tests
                 "\uD801\uDC00",
                 6,
                 StringComparison.Ordinal,
-                0
+                0,
             };
         }
 
@@ -2393,70 +2393,70 @@ namespace System.Tests
                 "\u0200\u0202",
                 "\u0201\u0203",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\uD801\uDC28",
                 "\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202",
                 "\u0201\u0203",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\uD801\uDC28",
                 "\uD801\uDC00",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\uD801\uD801\uDC28",
                 "\uD801\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\uD801\uD801\uDC28",
                 "\uD801\uD801\uDC00",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\u0200\u0202",
                 "\u0200\u0202",
                 StringComparison.Ordinal,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202",
                 "\u0200\u0202",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202",
                 "\u0200\u0202A",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\u0200\u0202",
                 "\u0200\u0202A",
                 StringComparison.OrdinalIgnoreCase,
-                false
+                false,
             };
         }
 
@@ -2484,70 +2484,70 @@ namespace System.Tests
                 "\u0200\u0202ABC",
                 "\u0201\u0203",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\uD801\uDC28ABC",
                 "\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202AB",
                 "\u0201\u0203",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\uD801\uDC28AB",
                 "\uD801\uDC00",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\uD801\uD801\uDC28AAA",
                 "\uD801\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\uD801\uD801\uDC28AAA",
                 "\uD801\uD801\uDC00",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\u0200\u0202AAA",
                 "\u0200\u0202",
                 StringComparison.Ordinal,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202AAA",
                 "\u0200\u0202",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202AAA",
                 "\u0200\u0202A",
                 StringComparison.Ordinal,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u0200\u0202AAA",
                 "\u0200\u0202A",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
         }
 
@@ -2570,70 +2570,70 @@ namespace System.Tests
                 "ABC\u0200\u0202",
                 "\u0201\u0203",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "ABC\uD801\uDC28",
                 "\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "AB\u0200\u0202",
                 "\u0201\u0203",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "AB\uD801\uDC28",
                 "\uD801\uDC00",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "AAA\uD801\uD801\uDC28",
                 "\uD801\uD801\uDC00",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "AAA\uD801\uD801\uDC28",
                 "\uD801\uD801\uDC00",
                 StringComparison.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "AAA\u0200\u0202",
                 "\u0200\u0202",
                 StringComparison.Ordinal,
-                true
+                true,
             };
             yield return new object[]
             {
                 "AAA\u0200\u0202",
                 "\u0200\u0202",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "AAA\u0200\u0202A",
                 "\u0200\u0202A",
                 StringComparison.Ordinal,
-                true
+                true,
             };
             yield return new object[]
             {
                 "AAA\u0200\u0202A",
                 "\u0200\u0202A",
                 StringComparison.OrdinalIgnoreCase,
-                true
+                true,
             };
         }
 
@@ -2656,16 +2656,15 @@ namespace System.Tests
             Assert.InRange(values.Length, 2, 4);
 
             string result =
-                values.Length == 2
-                    ? string.Concat(values[0].AsSpan(), values[1].AsSpan())
-                    : values.Length == 3
-                        ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
-                        : string.Concat(
-                            values[0].AsSpan(),
-                            values[1].AsSpan(),
-                            values[2].AsSpan(),
-                            values[3].AsSpan()
-                        );
+                values.Length == 2 ? string.Concat(values[0].AsSpan(), values[1].AsSpan())
+                : values.Length == 3
+                    ? string.Concat(values[0].AsSpan(), values[1].AsSpan(), values[2].AsSpan())
+                : string.Concat(
+                    values[0].AsSpan(),
+                    values[1].AsSpan(),
+                    values[2].AsSpan(),
+                    values[3].AsSpan()
+                );
 
             if (result.Length == 0)
             {

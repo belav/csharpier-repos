@@ -7,7 +7,7 @@ namespace Repro
     public enum Bla
     {
         A,
-        B
+        B,
     }
 
     class Driver

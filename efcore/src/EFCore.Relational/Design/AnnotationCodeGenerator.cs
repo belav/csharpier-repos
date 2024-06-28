@@ -245,13 +245,16 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
         {
             var strategyCall = mappingStrategy switch
             {
-                RelationalAnnotationNames.TpcMappingStrategy =>
-                    nameof(RelationalEntityTypeBuilderExtensions.UseTpcMappingStrategy),
-                RelationalAnnotationNames.TptMappingStrategy =>
-                    nameof(RelationalEntityTypeBuilderExtensions.UseTptMappingStrategy),
-                RelationalAnnotationNames.TphMappingStrategy =>
-                    nameof(RelationalEntityTypeBuilderExtensions.UseTphMappingStrategy),
-                _ => null
+                RelationalAnnotationNames.TpcMappingStrategy => nameof(
+                    RelationalEntityTypeBuilderExtensions.UseTpcMappingStrategy
+                ),
+                RelationalAnnotationNames.TptMappingStrategy => nameof(
+                    RelationalEntityTypeBuilderExtensions.UseTptMappingStrategy
+                ),
+                RelationalAnnotationNames.TphMappingStrategy => nameof(
+                    RelationalEntityTypeBuilderExtensions.UseTphMappingStrategy
+                ),
+                _ => null,
             };
 
             if (strategyCall != null)
@@ -406,20 +409,20 @@ public class AnnotationCodeGenerator : IAnnotationCodeGenerator
                     ? new MethodCallCodeFragment(
                         nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)
                     )
-                    : TryGetAndRemove(
-                        annotations,
-                        RelationalAnnotationNames.IsStored,
-                        out bool isStored
+                : TryGetAndRemove(
+                    annotations,
+                    RelationalAnnotationNames.IsStored,
+                    out bool isStored
+                )
+                    ? new MethodCallCodeFragment(
+                        nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                        computedColumnSql,
+                        isStored
                     )
-                        ? new MethodCallCodeFragment(
-                            nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
-                            computedColumnSql,
-                            isStored
-                        )
-                        : new MethodCallCodeFragment(
-                            nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
-                            computedColumnSql
-                        )
+                : new MethodCallCodeFragment(
+                    nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql),
+                    computedColumnSql
+                )
             );
         }
 

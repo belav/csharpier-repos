@@ -33,7 +33,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         {
             return new DkmEvaluationEnumAsyncResult(new DkmEvaluationResult[0])
             {
-                Exception = exception
+                Exception = exception,
             };
         }
     }

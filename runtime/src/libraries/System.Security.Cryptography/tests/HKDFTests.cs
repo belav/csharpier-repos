@@ -305,17 +305,17 @@ namespace System.Security.Cryptography.Tests
                 yield return new object[]
                 {
                     HashAlgorithmName.SHA3_256,
-                    SHA3_256.HashSizeInBytes - 1
+                    SHA3_256.HashSizeInBytes - 1,
                 };
                 yield return new object[]
                 {
                     HashAlgorithmName.SHA3_384,
-                    SHA3_384.HashSizeInBytes - 1
+                    SHA3_384.HashSizeInBytes - 1,
                 };
                 yield return new object[]
                 {
                     HashAlgorithmName.SHA3_512,
-                    SHA3_512.HashSizeInBytes - 1
+                    SHA3_512.HashSizeInBytes - 1,
                 };
             }
         }
@@ -490,7 +490,7 @@ namespace System.Security.Cryptography.Tests
                         Salt = "mysalt"u8.ToArray(),
                         Info = "myinfo"u8.ToArray(),
                         Okm = "35bd9d1c75cf7e30".HexToByteArray(),
-                    }
+                    },
                 };
 
                 yield return new object[]
@@ -504,7 +504,7 @@ namespace System.Security.Cryptography.Tests
                         Salt = "mysalt"u8.ToArray(),
                         Info = "myinfo"u8.ToArray(),
                         Okm = "323a8ab50c7190c8".HexToByteArray(),
-                    }
+                    },
                 };
 
                 yield return new object[]
@@ -518,7 +518,7 @@ namespace System.Security.Cryptography.Tests
                         Salt = "mysalt"u8.ToArray(),
                         Info = "myinfo"u8.ToArray(),
                         Okm = "27693b36a489e9f1".HexToByteArray(),
-                    }
+                    },
                 };
             }
         }

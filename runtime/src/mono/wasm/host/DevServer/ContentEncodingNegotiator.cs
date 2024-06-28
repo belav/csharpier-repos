@@ -17,14 +17,14 @@ internal sealed class ContentEncodingNegotiator
     private static readonly StringSegment[] _preferredEncodings = new StringSegment[]
     {
         "br",
-        "gzip"
+        "gzip",
     };
 
     private static readonly Dictionary<StringSegment, string> _encodingExtensionMap =
         new Dictionary<StringSegment, string>(StringSegmentComparer.OrdinalIgnoreCase)
         {
             ["br"] = ".br",
-            ["gzip"] = ".gz"
+            ["gzip"] = ".gz",
         };
 
     private readonly RequestDelegate _next;

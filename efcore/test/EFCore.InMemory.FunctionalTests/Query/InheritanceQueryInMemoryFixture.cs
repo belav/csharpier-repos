@@ -35,7 +35,7 @@ public class InheritanceQueryInMemoryFixture : InheritanceQueryFixtureBase
                     CountryId = kiwi.CountryId,
                     EagleId = kiwi.EagleId,
                     FoundOn = kiwi.FoundOn,
-                    IsFlightless = kiwi.IsFlightless
+                    IsFlightless = kiwi.IsFlightless,
                 };
             case Eagle eagle:
                 return new EagleQuery
@@ -44,7 +44,7 @@ public class InheritanceQueryInMemoryFixture : InheritanceQueryFixtureBase
                     CountryId = eagle.CountryId,
                     EagleId = eagle.EagleId,
                     Group = eagle.Group,
-                    IsFlightless = eagle.IsFlightless
+                    IsFlightless = eagle.IsFlightless,
                 };
         }
 

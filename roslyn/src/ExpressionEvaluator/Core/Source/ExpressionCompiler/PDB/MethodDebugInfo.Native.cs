@@ -543,7 +543,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             DuplicateName,
             VariableName,
-            ConstantName
+            ConstantName,
         }
 
         /// <summary>

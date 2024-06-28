@@ -28,7 +28,9 @@ namespace System.ServiceModel.Transactions
             TmProtocolTip = 1,
             TmProtocolMsdtcV1 = 2,
             TmProtocolMsdtcV2 = 3, // unicode host names in nameobject blobs etc
-            TmProtocolExtended = 4 // other stuff (e.g., WS-AT)
+            TmProtocolExtended =
+                4 // other stuff (e.g., WS-AT)
+            ,
         }
 
         public WhereaboutsReader(byte[] whereabouts)

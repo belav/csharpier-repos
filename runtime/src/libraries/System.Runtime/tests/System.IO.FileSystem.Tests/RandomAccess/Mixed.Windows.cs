@@ -194,12 +194,12 @@ namespace System.IO.Tests
                 IReadOnlyList<Memory<byte>> readBuffers = new Memory<byte>[]
                 {
                     readBuffer_1,
-                    readBuffer_2
+                    readBuffer_2,
                 };
                 IReadOnlyList<ReadOnlyMemory<byte>> writeBuffers = new ReadOnlyMemory<byte>[]
                 {
                     writeBuffer_1,
-                    writeBuffer_2
+                    writeBuffer_2,
                 };
 
                 foreach (bool syncWrite in syncWrites)

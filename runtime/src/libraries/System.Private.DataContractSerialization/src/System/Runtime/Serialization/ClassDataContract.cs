@@ -1725,7 +1725,7 @@ namespace System.Runtime.Serialization.DataContracts
                 s_serInfoCtorArgs ??= new Type[]
                 {
                     typeof(SerializationInfo),
-                    typeof(StreamingContext)
+                    typeof(StreamingContext),
                 };
 
             internal readonly struct Member

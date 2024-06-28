@@ -45,7 +45,7 @@ public class DataAnnotationsModelValidatorTest
             var array = new[]
             {
                 new SampleModel { Name = "one" },
-                new SampleModel { Name = "two" }
+                new SampleModel { Name = "two" },
             };
             var method = typeof(ModelValidationResultComparer).GetMethod(
                 nameof(ModelValidationResultComparer.GetHashCode),
@@ -306,7 +306,7 @@ public class DataAnnotationsModelValidatorTest
                     null,
                     new[]
                     {
-                        new ModelValidationResult(memberName: string.Empty, message: errorMessage)
+                        new ModelValidationResult(memberName: string.Empty, message: errorMessage),
                     }
                 },
                 {
@@ -314,7 +314,7 @@ public class DataAnnotationsModelValidatorTest
                     Enumerable.Empty<string>(),
                     new[]
                     {
-                        new ModelValidationResult(memberName: string.Empty, message: errorMessage)
+                        new ModelValidationResult(memberName: string.Empty, message: errorMessage),
                     }
                 },
                 {
@@ -322,7 +322,7 @@ public class DataAnnotationsModelValidatorTest
                     new[] { (string)null },
                     new[]
                     {
-                        new ModelValidationResult(memberName: string.Empty, message: errorMessage)
+                        new ModelValidationResult(memberName: string.Empty, message: errorMessage),
                     }
                 },
                 {
@@ -330,7 +330,7 @@ public class DataAnnotationsModelValidatorTest
                     new[] { string.Empty },
                     new[]
                     {
-                        new ModelValidationResult(memberName: string.Empty, message: errorMessage)
+                        new ModelValidationResult(memberName: string.Empty, message: errorMessage),
                     }
                 },
                 {
@@ -339,7 +339,7 @@ public class DataAnnotationsModelValidatorTest
                     new[] { nameof(string.Length) },
                     new[]
                     {
-                        new ModelValidationResult(memberName: string.Empty, message: errorMessage)
+                        new ModelValidationResult(memberName: string.Empty, message: errorMessage),
                     }
                 },
                 {
@@ -347,7 +347,7 @@ public class DataAnnotationsModelValidatorTest
                     new[] { "AnotherName" },
                     new[]
                     {
-                        new ModelValidationResult(memberName: "AnotherName", message: errorMessage)
+                        new ModelValidationResult(memberName: "AnotherName", message: errorMessage),
                     }
                 },
                 {
@@ -550,7 +550,7 @@ public class DataAnnotationsModelValidatorTest
                     new StringLengthAttribute(length)
                     {
                         ErrorMessage = LocalizationKey,
-                        MinimumLength = 1
+                        MinimumLength = 1,
                     },
                     string.Empty,
                     new object[] { nameof(SampleModel), length, 1 }
@@ -574,7 +574,7 @@ public class DataAnnotationsModelValidatorTest
                     new UrlAttribute() { ErrorMessage = LocalizationKey },
                     pattern,
                     new object[] { nameof(SampleModel), "Url" }
-                }
+                },
             };
         }
     }

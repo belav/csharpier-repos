@@ -50,7 +50,7 @@ namespace System.Diagnostics
                 {
                     return new ProcessModuleCollection(1)
                     {
-                        new ProcessModule(exePath, Path.GetFileName(exePath))
+                        new ProcessModule(exePath, Path.GetFileName(exePath)),
                     };
                 }
             }

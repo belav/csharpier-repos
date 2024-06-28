@@ -108,7 +108,7 @@ public class NoContentFormatterTests
 
         var formatter = new HttpNoContentOutputFormatter()
         {
-            TreatNullValueAsNoContent = treatNullValueAsNoContent
+            TreatNullValueAsNoContent = treatNullValueAsNoContent,
         };
 
         // Act

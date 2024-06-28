@@ -5,7 +5,7 @@ partial class A
     enum E
     {
         None = 0,
-        All = 1
+        All = 1,
     }
 }
 

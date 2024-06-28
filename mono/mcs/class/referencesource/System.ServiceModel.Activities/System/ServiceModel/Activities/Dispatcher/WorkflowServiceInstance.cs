@@ -332,7 +332,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                 persistenceContext
             )
             {
-                SynchronizationContext = synchronizationContext
+                SynchronizationContext = synchronizationContext,
             };
 
             // let us initalize the instance level extensions here
@@ -2403,7 +2403,7 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             Delete,
             Save,
-            Unload
+            Unload,
         }
 
         struct AcquireLockAsyncData
@@ -2928,7 +2928,7 @@ namespace System.ServiceModel.Activities.Dispatcher
             Aborted,
             Suspended,
             Completed,
-            Unloaded
+            Unloaded,
         };
 
         class ReleaseInstanceAsyncResult : AsyncResult

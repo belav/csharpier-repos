@@ -28,6 +28,6 @@ namespace System.Security.RightsManagement
     public enum UserActivationMode
     {
         Permanent,
-        Temporary
+        Temporary,
     }
 }

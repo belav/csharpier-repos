@@ -14,7 +14,7 @@ public struct QExistingStruct { }
 public enum FExistingEnum
 {
     One,
-    Two
+    Two,
 }
 
 public class ZExistingClass
@@ -110,7 +110,7 @@ public enum NewEnum
 {
     Red,
     Yellow,
-    Green
+    Green,
 }
 
 public class AnotherAddedClass
@@ -125,6 +125,6 @@ public class AnotherAddedClass
 
     public AnotherAddedClass()
     {
-        S = new NewNestedStruct { D = 1234.0, O = "1234", };
+        S = new NewNestedStruct { D = 1234.0, O = "1234" };
     }
 }

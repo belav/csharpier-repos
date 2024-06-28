@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         {
             var environmentVariables = new Dictionary<string, string>()
             {
-                ["NUGET_PACKAGES"] = _nugetCacheDir.Path
+                ["NUGET_PACKAGES"] = _nugetCacheDir.Path,
             };
 
             var dotNetExeName = "dotnet" + (Path.DirectorySeparatorChar == '/' ? "" : ".exe");
@@ -322,7 +322,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
                     "Project(net6)",
                     "Project(net5)",
                     "Library(netstandard2",
-                    "Library(net5)"
+                    "Library(net5)",
                 };
 
                 var actualNames = new HashSet<string>();

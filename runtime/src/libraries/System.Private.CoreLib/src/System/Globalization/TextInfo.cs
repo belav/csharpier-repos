@@ -23,7 +23,7 @@ namespace System.Globalization
         {
             NotInitialized = 0,
             False = 1,
-            True = 2
+            True = 2,
         }
 
         private string? _listSeparator;
@@ -48,7 +48,7 @@ namespace System.Globalization
             readOnly: true
         )
         {
-            _isAsciiCasingSameAsInvariant = Tristate.True
+            _isAsciiCasingSameAsInvariant = Tristate.True,
         };
 
         internal TextInfo(CultureData cultureData)

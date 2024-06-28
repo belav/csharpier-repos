@@ -195,14 +195,14 @@ namespace System.Net.Security.Tests
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[0],
                     SupportedNonTls13CipherSuites[1]
-                )
+                ),
             };
             var b = new ConnectionParams()
             {
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[1],
                     SupportedNonTls13CipherSuites[2]
-                )
+                ),
             };
 
             for (int i = 0; i < 2; i++)
@@ -226,14 +226,14 @@ namespace System.Net.Security.Tests
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[0],
                     SupportedNonTls13CipherSuites[1]
-                )
+                ),
             };
             var b = new ConnectionParams()
             {
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[2],
                     SupportedNonTls13CipherSuites[3]
-                )
+                ),
             };
 
             for (int i = 0; i < 2; i++)
@@ -256,7 +256,7 @@ namespace System.Net.Security.Tests
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[0],
                     TlsCipherSuite.TLS_AES_128_GCM_SHA256
-                )
+                ),
             };
 
             NegotiatedParams ret = ConnectAndGetNegotiatedParams(p, p);
@@ -282,14 +282,14 @@ namespace System.Net.Security.Tests
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[0],
                     SupportedNonTls13CipherSuites[1]
-                )
+                ),
             };
             var b = new ConnectionParams()
             {
                 CipherSuitesPolicy = BuildPolicy(
                     SupportedNonTls13CipherSuites[1],
                     SupportedNonTls13CipherSuites[0]
-                )
+                ),
             };
 
             for (int i = 0; i < 2; i++)
@@ -317,7 +317,7 @@ namespace System.Net.Security.Tests
                     SupportedNonTls13CipherSuites[0],
                     SupportedNonTls13CipherSuites[1],
                     SupportedNonTls13CipherSuites[2]
-                )
+                ),
             };
             var b = new ConnectionParams()
             {
@@ -325,7 +325,7 @@ namespace System.Net.Security.Tests
                     SupportedNonTls13CipherSuites[3],
                     SupportedNonTls13CipherSuites[2],
                     SupportedNonTls13CipherSuites[1]
-                )
+                ),
             };
 
             for (int i = 0; i < 2; i++)
@@ -370,7 +370,7 @@ namespace System.Net.Security.Tests
         {
             var a = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(TlsCipherSuite.TLS_AES_128_GCM_SHA256)
+                CipherSuitesPolicy = BuildPolicy(TlsCipherSuite.TLS_AES_128_GCM_SHA256),
             };
 
             var b = new ConnectionParams() { SslProtocols = NonTls13Protocols };
@@ -413,7 +413,7 @@ namespace System.Net.Security.Tests
             CheckPrereqsForNonTls13Tests(1);
             var a = new ConnectionParams()
             {
-                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0])
+                CipherSuitesPolicy = BuildPolicy(SupportedNonTls13CipherSuites[0]),
             };
 
             var b = new ConnectionParams() { SslProtocols = SslProtocols.Tls13 };
@@ -478,7 +478,7 @@ namespace System.Net.Security.Tests
             {
                 CipherSuitesPolicy csp = BuildPolicy(cs);
 
-                var paramsA = new ConnectionParams() { CipherSuitesPolicy = csp, };
+                var paramsA = new ConnectionParams() { CipherSuitesPolicy = csp };
 
                 var paramsB = new ConnectionParams();
                 int score = 0; // 1 for success 0 for fail. Sum should be even

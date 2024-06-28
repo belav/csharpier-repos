@@ -533,6 +533,6 @@ namespace System.ServiceModel.Security
     enum PurgingMode
     {
         TimerBasedPurge,
-        AccessBasedPurge
+        AccessBasedPurge,
     }
 }

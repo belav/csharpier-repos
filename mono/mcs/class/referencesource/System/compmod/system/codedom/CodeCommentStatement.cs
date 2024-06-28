@@ -17,7 +17,7 @@ namespace System.CodeDom
     /// <devdoc>
     ///    <para> Represents a comment.</para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeCommentStatement : CodeStatement
     {
         private CodeComment comment;

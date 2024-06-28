@@ -118,7 +118,7 @@ namespace System.Web.DynamicData
                 FilterRepeaterItem item = new FilterRepeaterItem()
                 {
                     DataItemIndex = itemIndex,
-                    DisplayIndex = itemIndex
+                    DisplayIndex = itemIndex,
                 };
                 itemIndex++;
                 ItemTemplate.InstantiateIn(item);

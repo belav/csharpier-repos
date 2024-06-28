@@ -16,7 +16,7 @@ internal static class ServerComponentSerializationSettings
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             PropertyNameCaseInsensitive = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         };
 
     // This setting is not configurable, but realistically we don't expect an app to take more than 30 seconds from when

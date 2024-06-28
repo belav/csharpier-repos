@@ -44,7 +44,7 @@ public class SqlServerGeometryMemberTranslator : IMemberTranslator
         {
             typeof(Geometry).GetTypeInfo().GetRuntimeProperty(nameof(Geometry.NumPoints))!,
             "STNumPoints"
-        }
+        },
     };
 
     private static readonly IDictionary<MemberInfo, string> GeometryMemberToFunctionName =
@@ -73,7 +73,7 @@ public class SqlServerGeometryMemberTranslator : IMemberTranslator
             {
                 typeof(Geometry).GetTypeInfo().GetRuntimeProperty(nameof(Geometry.PointOnSurface))!,
                 "STPointOnSurface"
-            }
+            },
         };
 
     private static readonly MemberInfo OgcGeometryType = typeof(Geometry)
@@ -215,7 +215,7 @@ public class SqlServerGeometryMemberTranslator : IMemberTranslator
                         _sqlExpressionFactory.Constant(
                             NetTopologySuite.Geometries.OgcGeometryType.CurvePolygon
                         )
-                    )
+                    ),
                 };
 
                 if (isGeography)

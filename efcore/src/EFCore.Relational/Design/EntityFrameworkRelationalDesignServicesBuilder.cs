@@ -48,7 +48,7 @@ public class EntityFrameworkRelationalDesignServicesBuilder : EntityFrameworkDes
                 typeof(IProviderConfigurationCodeGenerator),
                 new ServiceCharacteristics(ServiceLifetime.Singleton)
             },
-            { typeof(IDatabaseModelFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) }
+            { typeof(IDatabaseModelFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
         };
 
     /// <summary>

@@ -1145,15 +1145,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
                 WriteLine(
                     trimmed.Substring(
-                        trimmed.StartsWith("/** ")
-                            ? 4
-                            : trimmed.StartsWith("/**")
-                                ? 3
-                                : trimmed.StartsWith("* ")
-                                    ? 2
-                                    : trimmed.StartsWith("*")
-                                        ? 1
-                                        : 0
+                        trimmed.StartsWith("/** ") ? 4
+                        : trimmed.StartsWith("/**") ? 3
+                        : trimmed.StartsWith("* ") ? 2
+                        : trimmed.StartsWith("*") ? 1
+                        : 0
                     )
                 );
             }

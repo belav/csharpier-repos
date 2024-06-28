@@ -877,7 +877,7 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
                     Id1 = e1.Id,
                     Id2 = e2.Id,
                     e1.NullableIntA,
-                    e2.NullableIntB
+                    e2.NullableIntB,
                 },
             elementSorter: e => (e.Id1, e.Id2)
         );
@@ -1543,7 +1543,7 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => new
                     {
                         e.Id,
-                        Coalesce = e.NullableBoolA ?? (e.NullableBoolB ?? false)
+                        Coalesce = e.NullableBoolA ?? (e.NullableBoolB ?? false),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -1560,7 +1560,7 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => new
                     {
                         e.Id,
-                        Coalesce = (e.NullableBoolA ?? e.NullableBoolB) ?? false
+                        Coalesce = (e.NullableBoolA ?? e.NullableBoolB) ?? false,
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -1875,12 +1875,12 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
                     {
                         one = e1.NullableStringA,
                         two = e1.NullableStringB != e1.NullableStringC,
-                        three = true
+                        three = true,
                     } equals new
                     {
                         one = e2.NullableStringB,
                         two = e2.NullableBoolA ?? e2.BoolC,
-                        three = true
+                        three = true,
                     }
                 select new { e1, e2 },
             elementSorter: e => (e.e1.Id, e.e2.Id),
@@ -2457,7 +2457,7 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
             ss => ss.Set<NullSemanticsEntity1>().Where(e => !ids.Contains(e.IntA)).Select(e => e.Id)
         );
 
-        var ids2 = new List<int?> { 1, 2, };
+        var ids2 = new List<int?> { 1, 2 };
         await AssertQueryScalar(
             async,
             ss => ss.Set<NullSemanticsEntity1>().Where(e => ids2.Contains(e.IntA)).Select(e => e.Id)
@@ -2809,7 +2809,7 @@ public abstract class NullSemanticsQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => new
                     {
                         Foo = e.NullableStringA != null,
-                        Bar = e.NullableStringA != e.StringA
+                        Bar = e.NullableStringA != e.StringA,
                     }),
             elementSorter: e => (e.Foo, e.Bar)
         );

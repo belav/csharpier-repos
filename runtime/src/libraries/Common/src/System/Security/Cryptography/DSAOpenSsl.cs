@@ -436,7 +436,7 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalKeySizes = new KeySizes[]
         {
-            new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64)
+            new KeySizes(minSize: 512, maxSize: 3072, skipSize: 64),
         };
     }
 }

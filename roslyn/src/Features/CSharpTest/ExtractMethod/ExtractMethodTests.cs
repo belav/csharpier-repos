@@ -5289,7 +5289,7 @@ class Program
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
+                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Extract_method),
@@ -5311,7 +5311,7 @@ class Program
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
+                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Extract_method),
@@ -5337,7 +5337,7 @@ class Program
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
+                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Extract_method),
@@ -5365,7 +5365,7 @@ class Program
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication, },
+                TestState = { Sources = { code }, OutputKind = OutputKind.ConsoleApplication },
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
                 CodeActionEquivalenceKey = nameof(FeaturesResources.Extract_method),

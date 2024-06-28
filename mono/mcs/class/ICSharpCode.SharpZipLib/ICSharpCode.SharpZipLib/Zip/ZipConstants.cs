@@ -121,7 +121,7 @@ namespace ICSharpCode.SharpZipLib.Zip
         /// <remarks>
         /// Used when encrypting ht ecentral directory contents.
         /// </remarks>
-        HeaderMasked = 0x2000
+        HeaderMasked = 0x2000,
     }
 
     /// <summary>

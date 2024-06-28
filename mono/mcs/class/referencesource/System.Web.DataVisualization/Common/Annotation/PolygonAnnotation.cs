@@ -62,7 +62,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// <b>PolylineAnnotation</b> is a class that represents a polyline annotation.
     /// </summary>
-    [SRDescription("DescriptionAttributePolylineAnnotation_PolylineAnnotation"),]
+    [SRDescription("DescriptionAttributePolylineAnnotation_PolylineAnnotation")]
     [SuppressMessage(
         "Microsoft.Naming",
         "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -1149,7 +1149,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// <b>PolygonAnnotation</b> is a class that represents a polygon annotation.
     /// </summary>
-    [SRDescription("DescriptionAttributePolygonAnnotation_PolygonAnnotation"),]
+    [SRDescription("DescriptionAttributePolygonAnnotation_PolygonAnnotation")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -1497,7 +1497,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <remarks>
     /// At run-time, use <b>Path</b> property to set the path of a polyline or polygon.
     /// </remarks>
-    [SRDescription("DescriptionAttributeAnnotationPathPoint_AnnotationPathPoint"),]
+    [SRDescription("DescriptionAttributeAnnotationPathPoint_AnnotationPathPoint")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

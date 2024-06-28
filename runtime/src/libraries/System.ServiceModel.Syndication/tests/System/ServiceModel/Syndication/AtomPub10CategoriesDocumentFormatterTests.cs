@@ -125,7 +125,7 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 new InlineCategoriesDocument(),
-                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />"
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />",
             };
 
             // Full InlineCategoriesDocument
@@ -160,7 +160,7 @@ namespace System.ServiceModel.Syndication.Tests
                 BaseUri = new Uri("http://inlinecategories_url.com"),
                 Language = "inlinecategories_Language",
                 IsFixed = true,
-                Scheme = "inlinecategories_scheme"
+                Scheme = "inlinecategories_scheme",
             };
             fullInlineCategoriesDocument.AttributeExtensions.Add(
                 new XmlQualifiedName("inlinecategories_name1"),
@@ -194,14 +194,14 @@ namespace System.ServiceModel.Syndication.Tests
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
-</app:categories>"
+</app:categories>",
             };
 
             // Empty ReferencedCategoriesDocument.
             yield return new object[]
             {
                 new ReferencedCategoriesDocument(),
-                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />"
+                @"<app:categories xmlns:a10=""http://www.w3.org/2005/Atom"" xmlns:app=""http://www.w3.org/2007/app"" />",
             };
 
             // Full ReferencedCategoriesDocument.
@@ -210,7 +210,7 @@ namespace System.ServiceModel.Syndication.Tests
             )
             {
                 BaseUri = new Uri("http://referencecategories_url.com"),
-                Language = "referencecategories_language"
+                Language = "referencecategories_language",
             };
             fullReferenceCategoriesDocument.AttributeExtensions.Add(
                 new XmlQualifiedName("referencecategories_name1"),
@@ -240,7 +240,7 @@ namespace System.ServiceModel.Syndication.Tests
     <AtomPub10CategoriesDocumentFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </AtomPub10CategoriesDocumentFormatterTests.ExtensionObject>
-</app:categories>"
+</app:categories>",
             };
         }
 
@@ -310,12 +310,12 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 @"<app:different xmlns:app=""http://www.w3.org/2007/app"">",
-                false
+                false,
             };
             yield return new object[]
             {
                 @"<app:categories xmlns:app=""http://www.w3.org/2007/app"" />",
-                true
+                true,
             };
         }
 

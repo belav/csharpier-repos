@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     "b 1 x 0x000000FF",
                     "c",
                     $"d str=<null> projectId=MyProject summary=RudeEdits diagnostic=`{diagnostic}`",
-                    "e"
+                    "e",
                 },
                 log.GetTestAccessor().Entries.Select(e => e.GetDebuggerDisplay())
             );

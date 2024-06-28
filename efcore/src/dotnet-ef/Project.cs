@@ -96,7 +96,7 @@ internal class Project
                 "/target:GetEFProjectMetadata",
                 propertyArg,
                 "/verbosity:quiet",
-                "/nologo"
+                "/nologo",
             };
 
             args.Add(file);
@@ -136,7 +136,7 @@ internal class Project
             TargetFrameworkMoniker = metadata["TargetFrameworkMoniker"],
             Nullable = metadata["Nullable"],
             TargetFramework = metadata["TargetFramework"],
-            TargetPlatformIdentifier = metadata["TargetPlatformIdentifier"]
+            TargetPlatformIdentifier = metadata["TargetPlatformIdentifier"],
         };
     }
 

@@ -196,7 +196,7 @@ namespace MonoTests.System.Threading.Tasks
                 new ValueAndSquare() { Value = 7f },
                 new ValueAndSquare() { Value = 8f },
                 new ValueAndSquare() { Value = 9f },
-                new ValueAndSquare() { Value = 10f }
+                new ValueAndSquare() { Value = 10f },
             };
 
             Parallel.ForEach(Partitioner.Create(values), l => l.Square = l.Value * l.Value);

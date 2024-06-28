@@ -48,7 +48,7 @@ namespace System.Net.Sockets.Tests
                 {
                     Array = length != null ? new byte[length.Value] : null,
                     Offset = offset,
-                    Count = count
+                    Count = count,
                 }.ToActual();
 
                 await Assert.ThrowsAsync(
@@ -130,7 +130,7 @@ namespace System.Net.Sockets.Tests
                                 new ArraySegment<byte>(new byte[123]),
                                 new ArraySegment<byte>(new byte[256], 2, 100),
                                 new ArraySegment<byte>(new byte[1], 0, 0),
-                                new ArraySegment<byte>(new byte[64], 9, 33)
+                                new ArraySegment<byte>(new byte[64], 9, 33),
                             };
                             while (true)
                             {
@@ -203,7 +203,7 @@ namespace System.Net.Sockets.Tests
                             new ArraySegment<byte>(new byte[23]),
                             new ArraySegment<byte>(new byte[256], 2, 100),
                             new ArraySegment<byte>(new byte[1], 0, 0),
-                            new ArraySegment<byte>(new byte[64], 9, 9)
+                            new ArraySegment<byte>(new byte[64], 9, 9),
                         };
                         for (int sent = 0, toSend = BytesToSend; toSend > 0; toSend -= sent)
                         {
@@ -414,7 +414,7 @@ namespace System.Net.Sockets.Tests
                                             sendBuffer1,
                                             0,
                                             amountFromSendBuffer1
-                                        )
+                                        ),
                                     }
                                 );
                                 break;
@@ -503,7 +503,7 @@ namespace System.Net.Sockets.Tests
                                 new List<ArraySegment<byte>>
                                 {
                                     new ArraySegment<byte>(buffer1),
-                                    new ArraySegment<byte>(buffer2)
+                                    new ArraySegment<byte>(buffer2),
                                 }
                             );
                             Task<int> receive2 = ReceiveAsync(
@@ -511,7 +511,7 @@ namespace System.Net.Sockets.Tests
                                 new List<ArraySegment<byte>>
                                 {
                                     new ArraySegment<byte>(buffer3),
-                                    new ArraySegment<byte>(buffer4)
+                                    new ArraySegment<byte>(buffer4),
                                 }
                             );
                             Task<int> receive3 = ReceiveAsync(
@@ -661,16 +661,16 @@ namespace System.Net.Sockets.Tests
                             var bufferList1 = new List<ArraySegment<byte>>
                             {
                                 new ArraySegment<byte>(slice(sendData, 0, 1000000)),
-                                new ArraySegment<byte>(slice(sendData, 1000000, 1000000))
+                                new ArraySegment<byte>(slice(sendData, 1000000, 1000000)),
                             };
                             var bufferList2 = new List<ArraySegment<byte>>
                             {
                                 new ArraySegment<byte>(slice(sendData, 2000000, 1000000)),
-                                new ArraySegment<byte>(slice(sendData, 3000000, 1000000))
+                                new ArraySegment<byte>(slice(sendData, 3000000, 1000000)),
                             };
                             var bufferList3 = new List<ArraySegment<byte>>
                             {
-                                new ArraySegment<byte>(slice(sendData, 4000000, 1000000))
+                                new ArraySegment<byte>(slice(sendData, 4000000, 1000000)),
                             };
 
                             send1 = SendAsync(client, bufferList1);
@@ -1426,7 +1426,7 @@ namespace System.Net.Sockets.Tests
                 { IPAddress.Loopback.MapToIPv6(), true },
                 { IPAddress.Loopback, false },
                 { IPAddress.IPv6Loopback, false },
-                { IPAddress.Loopback.MapToIPv6(), false }
+                { IPAddress.Loopback.MapToIPv6(), false },
             };
 
         [Theory]

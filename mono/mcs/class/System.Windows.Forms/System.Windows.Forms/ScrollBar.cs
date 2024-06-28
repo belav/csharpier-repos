@@ -85,7 +85,7 @@ namespace System.Windows.Forms
             HoldButton,
             RepeatButton,
             HoldThumbArea,
-            RepeatThumbArea
+            RepeatThumbArea,
         }
 
         internal enum ThumbMoving

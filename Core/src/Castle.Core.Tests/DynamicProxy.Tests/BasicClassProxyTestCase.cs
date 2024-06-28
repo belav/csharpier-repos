@@ -170,7 +170,7 @@ namespace Castle.DynamicProxy.Tests
                         typeof(Type[]),
                         typeof(Type[]),
                         typeof(Type[][]),
-                        typeof(Type[][])
+                        typeof(Type[][]),
                     }
                 );
 

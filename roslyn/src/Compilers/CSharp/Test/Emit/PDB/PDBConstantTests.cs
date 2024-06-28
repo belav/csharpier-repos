@@ -456,7 +456,7 @@ class C
                             "<>2__current",
                             "<>l__initialThreadId",
                             "<>4__this",
-                            "<i>5__1"
+                            "<i>5__1",
                         },
                         module.GetFieldNames("C.<M>d__0")
                     );

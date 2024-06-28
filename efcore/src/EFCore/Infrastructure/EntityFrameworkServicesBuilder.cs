@@ -224,7 +224,7 @@ public class EntityFrameworkServicesBuilder
         {
             typeof(IInterceptorAggregator),
             new ServiceCharacteristics(ServiceLifetime.Scoped, multipleRegistrations: true)
-        }
+        },
     };
 
     /// <summary>

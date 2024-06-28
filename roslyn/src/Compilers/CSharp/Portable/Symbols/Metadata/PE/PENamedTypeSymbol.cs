@@ -396,7 +396,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                 _lazyUncommonProperties = new UncommonProperties()
                 {
                     lazyFilePathChecksum = ordinal.ToImmutableArray(),
-                    lazyDisplayFileName = displayFileName
+                    lazyDisplayFileName = displayFileName,
                 };
             }
 

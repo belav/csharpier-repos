@@ -163,19 +163,19 @@ public class ParameterizedQueriesTests_with_filter : AutoMapperSpecBase
                 {
                     DateActivated = new DateTime(2000, 1, 1),
                     Id = 1,
-                    Name = "Joe Schmoe"
+                    Name = "Joe Schmoe",
                 },
                 new User
                 {
                     DateActivated = new DateTime(2000, 2, 1),
                     Id = 2,
-                    Name = "John Schmoe"
+                    Name = "John Schmoe",
                 },
                 new User
                 {
                     DateActivated = new DateTime(2000, 3, 1),
                     Id = 3,
-                    Name = "Jim Schmoe"
+                    Name = "Jim Schmoe",
                 },
             }.AsQueryable();
         }

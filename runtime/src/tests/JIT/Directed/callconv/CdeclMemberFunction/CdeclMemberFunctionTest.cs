@@ -45,7 +45,7 @@ unsafe class CdeclMemberFunctionNative
 
     public enum E : uint
     {
-        Value = 42
+        Value = 42,
     }
 
     [DllImport(nameof(CdeclMemberFunctionNative))]
@@ -187,7 +187,7 @@ public unsafe class CdeclMemberFunctionTest
             vtable = UnmanagedCallersOnlyVtable,
             dummy = CdeclMemberFunctionNative.E.Value,
             width = width,
-            height = height
+            height = height,
         };
     }
 

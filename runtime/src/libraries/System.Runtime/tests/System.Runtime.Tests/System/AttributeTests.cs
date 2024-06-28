@@ -187,14 +187,14 @@ namespace System.Tests
                 new StringValueAttribute("hello"),
                 new StringValueAttribute("hello"),
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
                 new StringValueAttribute("hello"),
                 new StringValueAttribute("foo"),
                 false,
-                false
+                false,
             };
 
             yield return new object[]
@@ -202,14 +202,14 @@ namespace System.Tests
                 new StringValueIntValueAttribute("hello", 1),
                 new StringValueIntValueAttribute("hello", 1),
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
                 new StringValueIntValueAttribute("hello", 1),
                 new StringValueIntValueAttribute("hello", 2),
                 false,
-                true
+                true,
             }; // GetHashCode() ignores the int value
 
             yield return new object[] { new EmptyAttribute(), new EmptyAttribute(), true, true };
@@ -219,7 +219,7 @@ namespace System.Tests
                 new StringValueAttribute("hello"),
                 new StringValueIntValueAttribute("hello", 1),
                 false,
-                true
+                true,
             }; // GetHashCode() ignores the int value
             yield return new object[] { new StringValueAttribute("hello"), "hello", false, false };
             yield return new object[] { new StringValueAttribute("hello"), null, false, false };

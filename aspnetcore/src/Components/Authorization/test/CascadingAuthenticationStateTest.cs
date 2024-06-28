@@ -39,7 +39,7 @@ public class CascadingAuthenticationStateTest
         var services = new ServiceCollection();
         var authStateProvider = new TestAuthenticationStateProvider()
         {
-            CurrentAuthStateTask = Task.FromResult(CreateAuthenticationState("Bert"))
+            CurrentAuthStateTask = Task.FromResult(CreateAuthenticationState("Bert")),
         };
         services.AddSingleton<AuthenticationStateProvider>(authStateProvider);
 
@@ -79,7 +79,7 @@ public class CascadingAuthenticationStateTest
         var authStateTaskCompletionSource = new TaskCompletionSource<AuthenticationState>();
         var authStateProvider = new TestAuthenticationStateProvider()
         {
-            CurrentAuthStateTask = authStateTaskCompletionSource.Task
+            CurrentAuthStateTask = authStateTaskCompletionSource.Task,
         };
         services.AddSingleton<AuthenticationStateProvider>(authStateProvider);
 
@@ -139,7 +139,7 @@ public class CascadingAuthenticationStateTest
         var services = new ServiceCollection();
         var authStateProvider = new TestAuthenticationStateProvider()
         {
-            CurrentAuthStateTask = Task.FromResult(CreateAuthenticationState(null))
+            CurrentAuthStateTask = Task.FromResult(CreateAuthenticationState(null)),
         };
         services.AddSingleton<AuthenticationStateProvider>(authStateProvider);
 

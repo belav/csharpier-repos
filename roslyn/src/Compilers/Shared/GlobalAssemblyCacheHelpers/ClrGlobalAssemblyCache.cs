@@ -306,7 +306,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     cbAssemblyInfo = (uint)Marshal.SizeOf<ASSEMBLY_INFO>(),
                     pszCurrentAssemblyPathBuf = p,
-                    cchBuf = MAX_PATH
+                    cchBuf = MAX_PATH,
                 };
 
                 IAssemblyCache assemblyCacheObject;

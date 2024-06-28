@@ -70,7 +70,7 @@ namespace System.Runtime.Serialization.Json
                 new DataContractJsonSerializerSettings()
                 {
                     RootName = rootName,
-                    KnownTypes = knownTypes
+                    KnownTypes = knownTypes,
                 }
             ) { }
 

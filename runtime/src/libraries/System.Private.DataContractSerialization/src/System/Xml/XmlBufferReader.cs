@@ -426,7 +426,7 @@ namespace System.Xml
                         BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(8, 4)),
                         BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(12, 4)),
                         BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(4, 4)),
-                        BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(0, 4))
+                        BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(0, 4)),
                     };
 
                 Advance(ValueHandleLength.Decimal);
@@ -1050,7 +1050,7 @@ namespace System.Xml
                         BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(8, 4)),
                         BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(12, 4)),
                         BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(4, 4)),
-                        BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(0, 4))
+                        BinaryPrimitives.ReadInt32LittleEndian(bytes.Slice(0, 4)),
                     };
 
                 return new decimal(span);

@@ -83,7 +83,7 @@ namespace MonoTests.System.Windows.Markup
             var idc = new TypeDescriptorContext()
             {
                 Instance = "x:Int32",
-                Service = new XamlTypeResolver()
+                Service = new XamlTypeResolver(),
             }; // gives no difference ...
             Assert.IsFalse(tc.CanConvertFrom(idc, typeof(string)), "#5");
             Assert.IsFalse(tc.CanConvertFrom(idc, typeof(Type)), "#6");
@@ -101,7 +101,7 @@ namespace MonoTests.System.Windows.Markup
             var idc = new TypeDescriptorContext()
             {
                 Instance = "x:Int32",
-                Service = new XamlTypeResolver()
+                Service = new XamlTypeResolver(),
             }; // gives no differences...
             Assert.IsTrue(tc.CanConvertTo(idc, typeof(string)), "#5");
             Assert.IsFalse(tc.CanConvertTo(idc, typeof(Type)), "#6");

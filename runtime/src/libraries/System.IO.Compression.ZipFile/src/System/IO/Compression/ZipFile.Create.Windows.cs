@@ -21,7 +21,7 @@ namespace System.IO.Compression
                 {
                     RecurseSubdirectories = true,
                     AttributesToSkip = 0,
-                    IgnoreInaccessible = false
+                    IgnoreInaccessible = false,
                 }
             );
     }

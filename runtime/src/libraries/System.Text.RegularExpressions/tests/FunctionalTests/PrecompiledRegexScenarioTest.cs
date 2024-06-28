@@ -105,7 +105,7 @@ dsdf137success3245somethingold";
                     "\n",
                     "7",
                     "success",
-                    ""
+                    "",
                 },
                 testClass.Split(textWithMultipleMatches)
             );
@@ -115,7 +115,7 @@ dsdf137success3245somethingold";
                     "",
                     "4",
                     "success",
-                    $"\nbsdf135success1245somethingelse{Environment.NewLine}csdf136success2245somethingnew{Environment.NewLine}dsdf137success3245somethingold"
+                    $"\nbsdf135success1245somethingelse{Environment.NewLine}csdf136success2245somethingnew{Environment.NewLine}dsdf137success3245somethingold",
                 },
                 testClass.Split(textWithMultipleMatches, 2)
             );
@@ -164,13 +164,13 @@ namespace RegexTestNamespace
             {
                 { 0, 0 },
                 { 1, 1 },
-                { 2, 2 }
+                { 2, 2 },
             };
             CapNames = new Hashtable
             {
                 { "0", 0 },
                 { "1", 1 },
-                { "output", 2 }
+                { "output", 2 },
             };
             capslist = new string[3];
             capslist[0] = "0";

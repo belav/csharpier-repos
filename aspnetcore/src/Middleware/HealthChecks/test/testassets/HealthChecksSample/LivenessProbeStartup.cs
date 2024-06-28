@@ -16,7 +16,7 @@ public class LivenessProbeStartup
             .AddCheck<SlowDependencyHealthCheck>(
                 "Slow",
                 failureStatus: null,
-                tags: new[] { "ready", }
+                tags: new[] { "ready" }
             );
     }
 
@@ -48,7 +48,7 @@ public class LivenessProbeStartup
         // The readiness check uses all registered checks with the 'ready' tag.
         app.UseHealthChecks(
             "/health/ready",
-            new HealthCheckOptions() { Predicate = (check) => check.Tags.Contains("ready"), }
+            new HealthCheckOptions() { Predicate = (check) => check.Tags.Contains("ready") }
         );
 
         // The liveness filters out all checks and just returns success

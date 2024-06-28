@@ -30,14 +30,14 @@ public class AnchorTagHelperTest
                 { "asp-controller", "home" },
                 { "asp-fragment", "hello=world" },
                 { "asp-host", "contoso.com" },
-                { "asp-protocol", "http" }
+                { "asp-protocol", "http" },
             },
             items: new Dictionary<object, object>(),
             uniqueId: "test"
         );
         var output = new TagHelperOutput(
             expectedTagName,
-            attributes: new TagHelperAttributeList { { "id", "myanchor" }, },
+            attributes: new TagHelperAttributeList { { "id", "myanchor" } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
@@ -63,7 +63,7 @@ public class AnchorTagHelperTest
             Fragment = "hello=world",
             Host = "contoso.com",
             Protocol = "http",
-            RouteValues = { { "name", "value" }, },
+            RouteValues = { { "name", "value" } },
             ViewContext = viewContext,
         };
 
@@ -301,7 +301,7 @@ public class AnchorTagHelperTest
             Fragment = "hello=world",
             Host = "contoso.com",
             Protocol = "http",
-            RouteValues = new Dictionary<string, string> { { "area", "Home" } }
+            RouteValues = new Dictionary<string, string> { { "area", "Home" } },
         };
 
         // Act
@@ -363,7 +363,7 @@ public class AnchorTagHelperTest
             Area = string.Empty,
             Fragment = "hello=world",
             Host = "contoso.com",
-            Protocol = "http"
+            Protocol = "http",
         };
 
         // Act
@@ -575,7 +575,7 @@ public class AnchorTagHelperTest
         var metadataProvider = new EmptyModelMetadataProvider();
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider);
 
-        var anchorTagHelper = new AnchorTagHelper(htmlGenerator) { Route = "Default", };
+        var anchorTagHelper = new AnchorTagHelper(htmlGenerator) { Route = "Default" };
 
         typeof(AnchorTagHelper).GetProperty(propertyName).SetValue(anchorTagHelper, "Home");
         var output = new TagHelperOutput(

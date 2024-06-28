@@ -39,7 +39,7 @@ public class AccountController : Controller
             var claims = new List<Claim>
             {
                 new Claim("user", userName),
-                new Claim("role", "Member")
+                new Claim("role", "Member"),
             };
 
             await HttpContext.SignInAsync(

@@ -10,7 +10,7 @@ namespace System.Runtime.Loader.Tests
     public enum LoadBy
     {
         Path,
-        Stream
+        Stream,
     }
 
     public class ResourceAssemblyLoadContext : AssemblyLoadContext

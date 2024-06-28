@@ -20,8 +20,8 @@ namespace System.Xml.Tests
                             "MoveToAttribute(i) Verify with This[i] - Double Quote"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -33,7 +33,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToAttribute(i) Verify with This[i] - Single Quote"
-                        )
+                        ),
                     }
                 );
             }
@@ -47,8 +47,8 @@ namespace System.Xml.Tests
                             "MoveToAttribute(i) Verify with GetAttribute(i) - Double Quote"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -60,7 +60,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToAttribute(i) Verify with GetAttribute[i] - Single Quote"
-                        )
+                        ),
                     }
                 );
             }
@@ -72,8 +72,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("MoveToAttribute(i) NegativeOneOrdinal")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -83,7 +83,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(FieldCountOrdinal)
                     {
-                        Attribute = new Variation("MoveToAttribute(i) FieldCountOrdinal")
+                        Attribute = new Variation("MoveToAttribute(i) FieldCountOrdinal"),
                     }
                 );
             }
@@ -93,7 +93,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(OrdinalPlusOne)
                     {
-                        Attribute = new Variation("MoveToAttribute(i) OrdinalPlusOne") { Pri = 0 }
+                        Attribute = new Variation("MoveToAttribute(i) OrdinalPlusOne") { Pri = 0 },
                     }
                 );
             }
@@ -103,7 +103,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(OrdinalMinusOne)
                     {
-                        Attribute = new Variation("MoveToAttribute(i) OrdinalMinusOne")
+                        Attribute = new Variation("MoveToAttribute(i) OrdinalMinusOne"),
                     }
                 );
             }

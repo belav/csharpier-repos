@@ -177,8 +177,8 @@ namespace Newtonsoft.Json.Tests.Documentation
                         Type = JsonSchemaType.Array,
                         Items = new List<JsonSchema>
                         {
-                            new JsonSchema { Type = JsonSchemaType.String }
-                        }
+                            new JsonSchema { Type = JsonSchemaType.String },
+                        },
                     }
                 },
             };

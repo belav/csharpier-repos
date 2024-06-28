@@ -125,10 +125,9 @@ namespace ILLink.Shared.TrimAnalysis
                         FieldValue => DiagnosticId.FieldValueCannotBeStaticallyDetermined,
                         GenericParameterValue =>
                             DiagnosticId.TypePassedToGenericParameterCannotBeStaticallyDetermined,
-                        _ =>
-                            throw new NotImplementedException(
-                                $"unsupported target value {targetValue}"
-                            )
+                        _ => throw new NotImplementedException(
+                            $"unsupported target value {targetValue}"
+                        ),
                     };
 
                     _diagnosticContext.AddDiagnostic(

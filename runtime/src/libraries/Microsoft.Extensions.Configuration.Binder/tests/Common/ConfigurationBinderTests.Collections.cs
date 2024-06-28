@@ -25,7 +25,7 @@ namespace Microsoft.Extensions
                 { "StringList:0", "val0" },
                 { "StringList:1", "val1" },
                 { "StringList:2", "val2" },
-                { "StringList:x", "valx" }
+                { "StringList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -50,7 +50,7 @@ namespace Microsoft.Extensions
                 { "StringList:0", null },
                 { "StringList:1", null },
                 { "StringList:2", null },
-                { "StringList:x", null }
+                { "StringList:x", null },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -106,7 +106,7 @@ namespace Microsoft.Extensions
                 { "StringList:0", "val0" },
                 { "StringList:1", "val1" },
                 { "StringList:2", "val2" },
-                { "StringList:x", "valx" }
+                { "StringList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -155,7 +155,7 @@ namespace Microsoft.Extensions
             {
                 { "StringDictionary:abc", "val_1" },
                 { "StringDictionary:def", "val_2" },
-                { "StringDictionary:ghi", "val_3" }
+                { "StringDictionary:ghi", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -179,7 +179,7 @@ namespace Microsoft.Extensions
             {
                 { "EnumDictionary:abc", "val_1" },
                 { "EnumDictionary:def", "val_2" },
-                { "EnumDictionary:ghi", "val_3" }
+                { "EnumDictionary:ghi", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -203,7 +203,7 @@ namespace Microsoft.Extensions
             {
                 { "EnumDictionary:abc", "val_1" },
                 { "EnumDictionary:def", "val_2" },
-                { "EnumDictionary:ghi", "val_3" }
+                { "EnumDictionary:ghi", "val_3" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(input);
@@ -278,7 +278,7 @@ namespace Microsoft.Extensions
             {
                 { "IntegerKeyDictionary:0", "val_0" },
                 { "IntegerKeyDictionary:1", "val_1" },
-                { "IntegerKeyDictionary:2", "val_2" }
+                { "IntegerKeyDictionary:2", "val_2" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -305,7 +305,7 @@ namespace Microsoft.Extensions
                 { "StringList:0", "val0" },
                 { "StringList:1", "val1" },
                 { "StringList:2", "val2" },
-                { "StringList:x", "valx" }
+                { "StringList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -332,7 +332,7 @@ namespace Microsoft.Extensions
                 { "IntList:0", "42" },
                 { "IntList:1", "43" },
                 { "IntList:2", "44" },
-                { "IntList:x", "45" }
+                { "IntList:x", "45" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -360,7 +360,7 @@ namespace Microsoft.Extensions
                 { "AlreadyInitializedList:0", "val0" },
                 { "AlreadyInitializedList:1", "val1" },
                 { "AlreadyInitializedList:2", "val2" },
-                { "AlreadyInitializedList:x", "valx" }
+                { "AlreadyInitializedList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -389,7 +389,7 @@ namespace Microsoft.Extensions
                 { "AlreadyInitializedListInterface:0", "val0" },
                 { "AlreadyInitializedListInterface:1", "val1" },
                 { "AlreadyInitializedListInterface:2", "val2" },
-                { "AlreadyInitializedListInterface:x", "valx" }
+                { "AlreadyInitializedListInterface:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -423,7 +423,7 @@ namespace Microsoft.Extensions
                 { "CustomList:0", "val0" },
                 { "CustomList:1", "val1" },
                 { "CustomList:2", "val2" },
-                { "CustomList:x", "valx" }
+                { "CustomList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -504,7 +504,7 @@ namespace Microsoft.Extensions
             {
                 { "StringDictionary:abc", "val_1" },
                 { "StringDictionary:def", "val_2" },
-                { "StringDictionary:ghi", "val_3" }
+                { "StringDictionary:ghi", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -542,7 +542,7 @@ namespace Microsoft.Extensions
             var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<string, IDictionary<string, int>>
             {
-                ["ascii"] = new Dictionary<string, int> { ["a"] = 97 }
+                ["ascii"] = new Dictionary<string, int> { ["a"] = 97 },
             };
 
             config.Bind(origin);
@@ -558,12 +558,12 @@ namespace Microsoft.Extensions
             var input = new Dictionary<string, string>
             {
                 ["abc:def"] = "val_2",
-                ["abc:ghi"] = "val_3"
+                ["abc:ghi"] = "val_3",
             };
             var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<KeyEnum, IDictionary<KeyUintEnum, string>>
             {
-                [KeyEnum.abc] = new Dictionary<KeyUintEnum, string> { [KeyUintEnum.abc] = "val_1" }
+                [KeyEnum.abc] = new Dictionary<KeyUintEnum, string> { [KeyUintEnum.abc] = "val_1" },
             };
 
             config.Bind(origin);
@@ -577,7 +577,7 @@ namespace Microsoft.Extensions
         [Fact]
         public void ShouldPreserveExistingValuesInArrayWhenItIsDictionaryElement()
         {
-            var input = new Dictionary<string, string> { ["ascii:b"] = "98", };
+            var input = new Dictionary<string, string> { ["ascii:b"] = "98" };
             var config = new ConfigurationBuilder().AddInMemoryCollection(input).Build();
             var origin = new Dictionary<string, int[]> { ["ascii"] = new int[] { 97 } };
             config.Bind(origin);
@@ -627,7 +627,7 @@ namespace Microsoft.Extensions
             {
                 { "AlreadyInitializedHashSetDictionary:123:0", "val_1" },
                 { "AlreadyInitializedHashSetDictionary:123:1", "val_2" },
-                { "AlreadyInitializedHashSetDictionary:123:2", "val_3" }
+                { "AlreadyInitializedHashSetDictionary:123:2", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -675,7 +675,7 @@ namespace Microsoft.Extensions
             {
                 { "IntDictionary:abc", "42" },
                 { "IntDictionary:def", "43" },
-                { "IntDictionary:ghi", "44" }
+                { "IntDictionary:ghi", "44" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -699,7 +699,7 @@ namespace Microsoft.Extensions
             {
                 { "ObjectDictionary:abc:Integer", "1" },
                 { "ObjectDictionary:def:Integer", "2" },
-                { "ObjectDictionary:ghi:Integer", "3" }
+                { "ObjectDictionary:ghi:Integer", "3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -725,7 +725,7 @@ namespace Microsoft.Extensions
                 { "ListDictionary:abc:1", "abc_1" },
                 { "ListDictionary:def:0", "def_0" },
                 { "ListDictionary:def:1", "def_1" },
-                { "ListDictionary:def:2", "def_2" }
+                { "ListDictionary:def:2", "def_2" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -755,7 +755,7 @@ namespace Microsoft.Extensions
                 { "ISetDictionary:abc:1", "abc_1" },
                 { "ISetDictionary:def:0", "def_0" },
                 { "ISetDictionary:def:1", "def_1" },
-                { "ISetDictionary:def:2", "def_2" }
+                { "ISetDictionary:def:2", "def_2" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -813,7 +813,7 @@ namespace Microsoft.Extensions
             {
                 { "NonStringKeyDictionary:abc", "val_1" },
                 { "NonStringKeyDictionary:def", "val_2" },
-                { "NonStringKeyDictionary:ghi", "val_3" }
+                { "NonStringKeyDictionary:ghi", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -837,7 +837,7 @@ namespace Microsoft.Extensions
                 { "StringArray:0", "val0" },
                 { "StringArray:1", "val1" },
                 { "StringArray:2", "val2" },
-                { "StringArray:x", "valx" }
+                { "StringArray:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -865,7 +865,7 @@ namespace Microsoft.Extensions
                 { "StringArray:0", "val0" },
                 { "StringArray:1", "val1" },
                 { "StringArray:2", "val2" },
-                { "StringArray:x", "valx" }
+                { "StringArray:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -893,7 +893,7 @@ namespace Microsoft.Extensions
                 { "AlreadyInitializedArray:0", "val0" },
                 { "AlreadyInitializedArray:1", "val1" },
                 { "AlreadyInitializedArray:2", "val2" },
-                { "AlreadyInitializedArray:x", "valx" }
+                { "AlreadyInitializedArray:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -923,7 +923,7 @@ namespace Microsoft.Extensions
                 { "AlreadyInitializedArray:0", "val0" },
                 { "AlreadyInitializedArray:1", "val1" },
                 { "AlreadyInitializedArray:2", "val2" },
-                { "AlreadyInitializedArray:x", "valx" }
+                { "AlreadyInitializedArray:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -981,7 +981,7 @@ namespace Microsoft.Extensions
             var input = new Dictionary<string, string>
             {
                 { "DimensionalArray:0:0", "a" },
-                { "DimensionalArray:0:1", "b" }
+                { "DimensionalArray:0:1", "b" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1052,7 +1052,7 @@ namespace Microsoft.Extensions
                 { "IEnumerable:0", "val0" },
                 { "IEnumerable:1", "val1" },
                 { "IEnumerable:2", "val2" },
-                { "IEnumerable:x", "valx" }
+                { "IEnumerable:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1234,7 +1234,7 @@ namespace Microsoft.Extensions
                 { "ICollection:0", "val0" },
                 { "ICollection:1", "val1" },
                 { "ICollection:2", "val2" },
-                { "ICollection:x", "valx" }
+                { "ICollection:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1267,7 +1267,7 @@ namespace Microsoft.Extensions
                 { "IList:0", "val0" },
                 { "IList:1", "val1" },
                 { "IList:2", "val2" },
-                { "IList:x", "valx" }
+                { "IList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1300,7 +1300,7 @@ namespace Microsoft.Extensions
                 { "IReadOnlyCollection:0", "val0" },
                 { "IReadOnlyCollection:1", "val1" },
                 { "IReadOnlyCollection:2", "val2" },
-                { "IReadOnlyCollection:x", "valx" }
+                { "IReadOnlyCollection:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1328,7 +1328,7 @@ namespace Microsoft.Extensions
                 { "IReadOnlyList:0", "val0" },
                 { "IReadOnlyList:1", "val1" },
                 { "IReadOnlyList:2", "val2" },
-                { "IReadOnlyList:x", "valx" }
+                { "IReadOnlyList:x", "valx" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1355,7 +1355,7 @@ namespace Microsoft.Extensions
             {
                 { "IDictionary:abc", "val_1" },
                 { "IDictionary:def", "val_2" },
-                { "IDictionary:ghi", "val_3" }
+                { "IDictionary:ghi", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1379,7 +1379,7 @@ namespace Microsoft.Extensions
             {
                 { "IReadOnlyDictionary:abc", "val_1" },
                 { "IReadOnlyDictionary:def", "val_2" },
-                { "IReadOnlyDictionary:ghi", "val_3" }
+                { "IReadOnlyDictionary:ghi", "val_3" },
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -1618,7 +1618,7 @@ namespace Microsoft.Extensions
             var dic = new Dictionary<string, string>
             {
                 { "Items:item3", "3" },
-                { "Items:item4", "4" }
+                { "Items:item4", "4" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1640,7 +1640,7 @@ namespace Microsoft.Extensions
             var dic = new Dictionary<string, string>
             {
                 { "Dictionary:existing-item1", "666" },
-                { "Dictionary:item3", "3" }
+                { "Dictionary:item3", "3" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1668,7 +1668,7 @@ namespace Microsoft.Extensions
             var dic = new Dictionary<string, string>
             {
                 { "Dictionary:item1", "1" },
-                { "Dictionary:item2", "2" }
+                { "Dictionary:item2", "2" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1689,7 +1689,7 @@ namespace Microsoft.Extensions
             var dic = new Dictionary<string, string>
             {
                 { "Dictionary:existing-item1", "666" },
-                { "Dictionary:item3", "3" }
+                { "Dictionary:item3", "3" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1716,7 +1716,7 @@ namespace Microsoft.Extensions
             var dic = new Dictionary<string, string>
             {
                 { "InstantiatedReadOnlyDictionaryWithWithSomeValues:item3", "3" },
-                { "InstantiatedReadOnlyDictionaryWithWithSomeValues:item4", "4" }
+                { "InstantiatedReadOnlyDictionaryWithWithSomeValues:item4", "4" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1739,7 +1739,7 @@ namespace Microsoft.Extensions
             var dic = new Dictionary<string, string>
             {
                 { "NonInstantiatedReadOnlyDictionary:item3", "3" },
-                { "NonInstantiatedReadOnlyDictionary:item4", "4" }
+                { "NonInstantiatedReadOnlyDictionary:item4", "4" },
             };
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(dic);
@@ -1851,7 +1851,7 @@ namespace Microsoft.Extensions
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(
-                new Dictionary<string, string> { ["CustomIEnumerableCollection:0"] = "Yo!", }
+                new Dictionary<string, string> { ["CustomIEnumerableCollection:0"] = "Yo!" }
             );
             var config = configurationBuilder.Build();
 
@@ -1872,7 +1872,7 @@ namespace Microsoft.Extensions
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(
-                new Dictionary<string, string> { ["CustomCollection:0"] = "Yo!", }
+                new Dictionary<string, string> { ["CustomCollection:0"] = "Yo!" }
             );
             var config = configurationBuilder.Build();
 
@@ -1893,7 +1893,7 @@ namespace Microsoft.Extensions
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(
-                new Dictionary<string, string> { ["CustomDictionary:0"] = "Yo!", }
+                new Dictionary<string, string> { ["CustomDictionary:0"] = "Yo!" }
             );
             var config = configurationBuilder.Build();
 
@@ -1914,7 +1914,7 @@ namespace Microsoft.Extensions
         {
             var configurationBuilder = new ConfigurationBuilder();
             configurationBuilder.AddInMemoryCollection(
-                new Dictionary<string, string> { ["CustomSet:0"] = "Yo!", }
+                new Dictionary<string, string> { ["CustomSet:0"] = "Yo!" }
             );
             var config = configurationBuilder.Build();
 

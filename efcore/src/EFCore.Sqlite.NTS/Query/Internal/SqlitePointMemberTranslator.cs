@@ -22,7 +22,7 @@ public class SqlitePointMemberTranslator : IMemberTranslator
         { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.M))!, "M" },
         { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.X))!, "X" },
         { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.Y))!, "Y" },
-        { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.Z))!, "Z" }
+        { typeof(Point).GetTypeInfo().GetRuntimeProperty(nameof(Point.Z))!, "Z" },
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;

@@ -325,7 +325,7 @@ public static unsafe class Raytrace
                     (rng.NextSingle() * -8f) - 2f
                 ),
                 Color = new Vec3f(rng.NextSingle(), rng.NextSingle(), rng.NextSingle()),
-                Radius = (rng.NextSingle() * 0.85f) + 0.075f
+                Radius = (rng.NextSingle() * 0.85f) + 0.075f,
             };
         }
     }

@@ -132,7 +132,7 @@ namespace System.ServiceModel.Syndication
                 "ddd, dd MMMM yy HH:mm zzz",
                 "dd MMMM yyyy HH:mm zzz",
                 "ddd, dd MMM yy HH:mm zzz",
-                "dd MMM yyyy HH:mm zzz"
+                "dd MMM yyyy HH:mm zzz",
             };
 
             if (

@@ -102,7 +102,7 @@ namespace tests.system_data_dll.System_Data
                 "NewValue2",
                 new DateTime(0),
                 0.5,
-                true
+                true,
             };
             dt.Rows.Add(arrAddedRow);
             //delete existing rows

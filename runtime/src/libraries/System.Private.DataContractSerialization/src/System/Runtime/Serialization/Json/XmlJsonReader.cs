@@ -289,7 +289,7 @@ namespace System.Runtime.Serialization.Json
         {
             QuotedText,
             NumericalText,
-            None
+            None,
         };
 
         public override bool CanCanonicalize

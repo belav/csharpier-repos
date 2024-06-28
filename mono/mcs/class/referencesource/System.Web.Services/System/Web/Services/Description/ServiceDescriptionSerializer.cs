@@ -6084,7 +6084,7 @@ namespace System.Web.Services.Description
                             @"restriction",
                             @"list",
                             @"union",
-                            @"#all"
+                            @"#all",
                         },
                         new System.Int64[]
                         {
@@ -6094,7 +6094,7 @@ namespace System.Web.Services.Description
                             (long)global::System.Xml.Schema.XmlSchemaDerivationMethod.@Restriction,
                             (long)global::System.Xml.Schema.XmlSchemaDerivationMethod.@List,
                             (long)global::System.Xml.Schema.XmlSchemaDerivationMethod.@Union,
-                            (long)global::System.Xml.Schema.XmlSchemaDerivationMethod.@All
+                            (long)global::System.Xml.Schema.XmlSchemaDerivationMethod.@All,
                         },
                         @"System.Xml.Schema.XmlSchemaDerivationMethod"
                     );

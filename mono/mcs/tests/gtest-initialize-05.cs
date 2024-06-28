@@ -23,7 +23,7 @@ class C
         Point[] pa = new Point[]
         {
             new Point { X = 9 },
-            new Point { X = 8 }
+            new Point { X = 8 },
         };
 
         if (pa[0].X != 9)

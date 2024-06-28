@@ -185,7 +185,7 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[]
             {
-                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
             };
 
             if (PlatformDetection.IsReflectionEmitSupported)

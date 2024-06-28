@@ -39,7 +39,7 @@ public class ProjectEnumerableOfIntToHashSet
                 {
                     FirstName = "Bob",
                     LastName = "Smith",
-                    Items = new List<Item>(new[] { new Item(), new Item(), new Item() })
+                    Items = new List<Item>(new[] { new Item(), new Item(), new Item() }),
                 }
             );
 

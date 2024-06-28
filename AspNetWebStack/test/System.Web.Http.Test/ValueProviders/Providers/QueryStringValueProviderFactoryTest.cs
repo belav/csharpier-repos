@@ -27,7 +27,7 @@ namespace System.Web.Http.ValueProviders.Providers
         {
             var controllerContext = new HttpControllerContext()
             {
-                Request = new HttpRequestMessage()
+                Request = new HttpRequestMessage(),
             };
             var context = new HttpActionContext() { ControllerContext = controllerContext };
 

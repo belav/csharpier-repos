@@ -32,14 +32,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 ConversionOperators,
                 Methods,
                 Types,
-                Remaining
+                Remaining,
             }
 
             private enum InnerOrdering
             {
                 StaticInstance,
                 Accessibility,
-                Name
+                Name,
             }
 
             private enum Accessibility
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 Protected,
                 ProtectedOrInternal,
                 Internal,
-                Private
+                Private,
             }
 
             public int Compare(MemberDeclarationSyntax x, MemberDeclarationSyntax y)

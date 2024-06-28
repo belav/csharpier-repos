@@ -34,6 +34,6 @@ namespace System.Windows.Forms
         AllCells = 6,
         DisplayedCellsExceptHeader = 8,
         DisplayedCells = 10,
-        Fill = 16
+        Fill = 16,
     }
 }

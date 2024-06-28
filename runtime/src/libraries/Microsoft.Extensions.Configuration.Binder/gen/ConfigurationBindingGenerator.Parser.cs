@@ -67,7 +67,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         .ToImmutableEquatableArray(),
                     EmitEnumParseMethod = _emitEnumParseMethod,
                     EmitGenericParseEnum = _emitGenericParseEnum,
-                    EmitThrowIfNullMethod = IsThrowIfNullMethodToBeEmitted()
+                    EmitThrowIfNullMethod = IsThrowIfNullMethodToBeEmitted(),
                 };
             }
 
@@ -426,7 +426,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     DiagnosticDescriptors.ElementTypeNotSupported
                 );
 
-                return new ArraySpec(typeSymbol) { ElementTypeRef = elementTypeRef, };
+                return new ArraySpec(typeSymbol) { ElementTypeRef = elementTypeRef };
             }
 
             private TypeSpec CreateCollectionSpec(TypeParseInfo typeParseInfo)
@@ -829,7 +829,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                             PropertySpec spec =
                                 new(property, propertyTypeRef)
                                 {
-                                    ConfigurationKeyName = configKeyName
+                                    ConfigurationKeyName = configKeyName,
                                 };
 
                             (properties ??= new(StringComparer.OrdinalIgnoreCase))[propertyName] =

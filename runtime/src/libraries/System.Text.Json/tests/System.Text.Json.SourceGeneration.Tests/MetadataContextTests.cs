@@ -376,7 +376,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     [JsonConverter(typeof(JsonStringEnumConverter<EnumWrittenAsString>))]
     public enum EnumWrittenAsString
     {
-        A = 1
+        A = 1,
     }
 
     [JsonSerializable(typeof(EnumWrittenAsString))]

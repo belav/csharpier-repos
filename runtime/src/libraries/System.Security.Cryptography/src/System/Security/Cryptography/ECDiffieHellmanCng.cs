@@ -13,7 +13,7 @@ namespace System.Security.Cryptography
     {
         private CngAlgorithmCore _core = new CngAlgorithmCore(typeof(ECDiffieHellmanCng))
         {
-            DefaultKeyType = CngAlgorithm.ECDiffieHellman
+            DefaultKeyType = CngAlgorithm.ECDiffieHellman,
         };
         private CngAlgorithm _hashAlgorithm = CngAlgorithm.Sha256;
         private ECDiffieHellmanKeyDerivationFunction _kdf =

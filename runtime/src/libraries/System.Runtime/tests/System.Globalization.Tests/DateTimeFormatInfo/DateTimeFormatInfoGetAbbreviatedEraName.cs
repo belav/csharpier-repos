@@ -14,13 +14,13 @@ namespace System.Globalization.Tests
             {
                 new CultureInfo("en-US").DateTimeFormat,
                 0,
-                DateTimeFormatInfoData.EnUSAbbreviatedEraName()
+                DateTimeFormatInfoData.EnUSAbbreviatedEraName(),
             };
             yield return new object[]
             {
                 new CultureInfo("en-US").DateTimeFormat,
                 1,
-                DateTimeFormatInfoData.EnUSAbbreviatedEraName()
+                DateTimeFormatInfoData.EnUSAbbreviatedEraName(),
             };
             yield return new object[] { new DateTimeFormatInfo(), 0, "AD" };
             yield return new object[] { new DateTimeFormatInfo(), 1, "AD" };
@@ -28,7 +28,7 @@ namespace System.Globalization.Tests
             {
                 new CultureInfo("ja-JP").DateTimeFormat,
                 1,
-                DateTimeFormatInfoData.JaJPAbbreviatedEraName()
+                DateTimeFormatInfoData.JaJPAbbreviatedEraName(),
             };
 
             if (PlatformDetection.IsHybridGlobalizationOnBrowser)
@@ -41,7 +41,7 @@ namespace System.Globalization.Tests
                 {
                     new CultureInfo("bn-BD").DateTimeFormat,
                     1,
-                    "খৃষ্টাব্দ"
+                    "খৃষ্টাব্দ",
                 };
                 yield return new object[] { new CultureInfo("bn-IN").DateTimeFormat, 1, "খ্রিঃ" }; // "খৃষ্টাব্দ"
                 yield return new object[] { new CultureInfo("ca-AD").DateTimeFormat, 1, "dC" };
@@ -170,25 +170,25 @@ namespace System.Globalization.Tests
                 {
                     new CultureInfo("fr-BE").DateTimeFormat,
                     1,
-                    "ap. J.-C."
+                    "ap. J.-C.",
                 };
                 yield return new object[]
                 {
                     new CultureInfo("fr-CA").DateTimeFormat,
                     1,
-                    "ap. J.-C."
+                    "ap. J.-C.",
                 };
                 yield return new object[]
                 {
                     new CultureInfo("fr-CH").DateTimeFormat,
                     1,
-                    "ap. J.-C."
+                    "ap. J.-C.",
                 };
                 yield return new object[]
                 {
                     new CultureInfo("fr-FR").DateTimeFormat,
                     1,
-                    "ap. J.-C."
+                    "ap. J.-C.",
                 };
                 yield return new object[] { new CultureInfo("gu-IN").DateTimeFormat, 1, "ઇસ" };
                 yield return new object[] { new CultureInfo("he-IL").DateTimeFormat, 1, "אחריי" }; // לספירה
@@ -226,13 +226,13 @@ namespace System.Globalization.Tests
                 {
                     new CultureInfo("sr-Cyrl-RS").DateTimeFormat,
                     1,
-                    "н.е."
+                    "н.е.",
                 };
                 yield return new object[]
                 {
                     new CultureInfo("sr-Latn-RS").DateTimeFormat,
                     1,
-                    "n.e."
+                    "n.e.",
                 };
                 yield return new object[] { new CultureInfo("sv-AX").DateTimeFormat, 1, "e.Kr." };
                 yield return new object[] { new CultureInfo("sv-SE").DateTimeFormat, 1, "e.Kr." };
@@ -255,7 +255,7 @@ namespace System.Globalization.Tests
                 {
                     new CultureInfo("zh-Hans-HK").DateTimeFormat,
                     1,
-                    "公元"
+                    "公元",
                 };
                 yield return new object[] { new CultureInfo("zh-SG").DateTimeFormat, 1, "公元" };
                 yield return new object[] { new CultureInfo("zh-HK").DateTimeFormat, 1, "公元" };

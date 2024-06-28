@@ -210,7 +210,7 @@ namespace System.Linq.Expressions.Interpreter
                 {
                     _definitions = set = new HashSet<LabelScopeInfo>()
                     {
-                        (LabelScopeInfo)_definitions
+                        (LabelScopeInfo)_definitions,
                     };
                 }
                 set.Add(scope);

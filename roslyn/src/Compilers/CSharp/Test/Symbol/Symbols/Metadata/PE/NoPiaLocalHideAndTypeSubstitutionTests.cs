@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 references: new MetadataReference[]
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
-                    TestReferences.SymbolsTests.NoPia.LocalTypes1
+                    TestReferences.SymbolsTests.NoPia.LocalTypes1,
                 }
             );
 
@@ -123,7 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 source: new string[] { localTypeSource1 },
                 references: new MetadataReference[]
                 {
-                    TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.GeneralPia.WithEmbedInteropTypes(true),
                 }
             );
 
@@ -133,7 +133,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 references: new MetadataReference[]
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    new CSharpCompilationReference(localType1)
+                    new CSharpCompilationReference(localType1),
                 }
             );
 
@@ -144,7 +144,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPiaCopy,
                     new CSharpCompilationReference(localType2),
-                    new CSharpCompilationReference(localType1)
+                    new CSharpCompilationReference(localType1),
                 }
             );
 
@@ -305,7 +305,7 @@ static class TypeSubstitution
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -360,7 +360,7 @@ static class TypeSubstitution
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -418,7 +418,7 @@ static class TypeSubstitution
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -468,7 +468,7 @@ static class TypeSubstitution
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -512,7 +512,7 @@ static class TypeSubstitution
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -547,7 +547,7 @@ static class TypeSubstitution
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -586,7 +586,7 @@ static class TypeSubstitution
                 {
                     TestReferences.SymbolsTests.NoPia.GeneralPia,
                     TestReferences.SymbolsTests.NoPia.GeneralPiaCopy,
-                    TestReferences.SymbolsTests.NoPia.ExternalAsm1
+                    TestReferences.SymbolsTests.NoPia.ExternalAsm1,
                 }
             );
 
@@ -683,7 +683,7 @@ public class InterfaceImpl
                 source: localTypeSource2,
                 references: new List<MetadataReference>()
                 {
-                    new CSharpCompilationReference(localType1, embedInteropTypes: true)
+                    new CSharpCompilationReference(localType1, embedInteropTypes: true),
                 }
             );
 
@@ -700,7 +700,7 @@ public class InterfaceImpl
                 references: new List<MetadataReference>()
                 {
                     new CSharpCompilationReference(localType2),
-                    new CSharpCompilationReference(localType1)
+                    new CSharpCompilationReference(localType1),
                 }
             );
 
@@ -752,7 +752,7 @@ public interface I1
                 references: new List<MetadataReference>()
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
-                    new CSharpCompilationReference(localType)
+                    new CSharpCompilationReference(localType),
                 }
             );
 

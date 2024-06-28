@@ -100,7 +100,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             163,
             195,
             227,
-            258
+            258,
         };
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             5,
             5,
             5,
-            0
+            0,
         };
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             8193,
             12289,
             16385,
-            24577
+            24577,
         };
 
         /// <summary>
@@ -210,7 +210,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             12,
             12,
             13,
-            13
+            13,
         };
 
         /// <summary>

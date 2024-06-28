@@ -367,7 +367,7 @@ namespace System.Runtime
                 ExceptionIDs.NullReference => new NullReferenceException(),
                 ExceptionIDs.OutOfMemory => new OutOfMemoryException(),
                 ExceptionIDs.Overflow => new OverflowException(),
-                _ => null
+                _ => null,
             };
 #endif
             // If the helper fails to yield an object, then we fail-fast.
@@ -521,7 +521,7 @@ namespace System.Runtime
 
             SupersededFlag = 8,
 
-            InstructionFaultFlag = 0x10
+            InstructionFaultFlag = 0x10,
         }
 
         [StructLayout(LayoutKind.Explicit)]

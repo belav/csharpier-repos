@@ -11,7 +11,7 @@ public class Program
     {
         Option0,
         Option1,
-        Option2
+        Option2,
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

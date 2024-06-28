@@ -187,7 +187,7 @@ internal static class SymbolExtensions
         {
             IParameterSymbol parameterSymbol => parameterSymbol.Type,
             IPropertySymbol propertySymbol => propertySymbol.Type,
-            _ => throw new InvalidOperationException("Unexpected symbol type: " + symbol)
+            _ => throw new InvalidOperationException("Unexpected symbol type: " + symbol),
         };
     }
 

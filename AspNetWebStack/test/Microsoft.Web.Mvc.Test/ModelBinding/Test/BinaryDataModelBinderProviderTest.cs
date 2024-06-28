@@ -24,7 +24,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(byte[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", "not base64 encoded!" } }
+                ValueProvider = new SimpleValueProvider { { "foo", "not base64 encoded!" } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -48,7 +48,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(byte[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", "" } }
+                ValueProvider = new SimpleValueProvider { { "foo", "" } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -72,7 +72,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(byte[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", _base64String } }
+                ValueProvider = new SimpleValueProvider { { "foo", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -97,7 +97,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(Binary)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", _base64String } }
+                ValueProvider = new SimpleValueProvider { { "foo", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -123,7 +123,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(byte[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo.bar", _base64String } }
+                ValueProvider = new SimpleValueProvider { { "foo.bar", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();
@@ -147,7 +147,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(object)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", _base64String } }
+                ValueProvider = new SimpleValueProvider { { "foo", _base64String } },
             };
 
             BinaryDataModelBinderProvider binderProvider = new BinaryDataModelBinderProvider();

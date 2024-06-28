@@ -352,6 +352,6 @@ namespace System.Web.UI
 
         XhtmlMobileProfile,
 
-        Wml20
+        Wml20,
     }
 }

@@ -864,7 +864,7 @@ class Class
                         KeyValuePairUtil.Create(
                             IDEDiagnosticIds.FormattingDiagnosticId,
                             ReportDiagnostic.Warn
-                        )
+                        ),
                     };
                     compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
                         specificDiagnosticOptions
@@ -1173,7 +1173,7 @@ class Class
                         KeyValuePairUtil.Create(
                             IDEDiagnosticIds.FormattingDiagnosticId,
                             ReportDiagnostic.Warn
-                        )
+                        ),
                     };
                     compilationOptions = compilationOptions.WithSpecificDiagnosticOptions(
                         specificDiagnosticOptions

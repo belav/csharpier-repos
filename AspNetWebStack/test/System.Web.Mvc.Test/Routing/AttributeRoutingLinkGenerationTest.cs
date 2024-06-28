@@ -15,7 +15,7 @@ namespace System.Web.Mvc.Routing.Test
             // Arrange
             Type[] controllerTypes = new Type[]
             {
-                typeof(AreaWithPrefixWithControllerRouteController)
+                typeof(AreaWithPrefixWithControllerRouteController),
             };
             RouteCollection routes = MapControllers(controllerTypes);
             RequestContext requestContext = GetRequestContext();
@@ -24,7 +24,7 @@ namespace System.Web.Mvc.Routing.Test
             {
                 { "controller", "AreaWithPrefixWithControllerRoute" },
                 { "action", "A1" },
-                { "area", "Administration" }
+                { "area", "Administration" },
             };
 
             // Act
@@ -41,7 +41,7 @@ namespace System.Web.Mvc.Routing.Test
             // Arrange
             Type[] controllerTypes = new Type[]
             {
-                typeof(AreaWithPrefixWithControllerRouteController)
+                typeof(AreaWithPrefixWithControllerRouteController),
             };
             RouteCollection routes = MapControllers(controllerTypes);
             RequestContext requestContext = GetRequestContext();
@@ -50,7 +50,7 @@ namespace System.Web.Mvc.Routing.Test
             {
                 { "controller", "AreaWithPrefixWithControllerRoute" },
                 { "action", "A2" },
-                { "area", "Administration" }
+                { "area", "Administration" },
             };
 
             // Act
@@ -67,7 +67,7 @@ namespace System.Web.Mvc.Routing.Test
             // Arrange
             Type[] controllerTypes = new Type[]
             {
-                typeof(AreaWithPrefixWithControllerRouteController)
+                typeof(AreaWithPrefixWithControllerRouteController),
             };
             RouteCollection routes = MapControllers(controllerTypes);
             RequestContext requestContext = GetRequestContext();
@@ -78,7 +78,7 @@ namespace System.Web.Mvc.Routing.Test
                 "AreaWithPrefixWithControllerRoute"
             );
 
-            RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" }, };
+            RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" } };
 
             // Act
             VirtualPathData vpd = routes.GetVirtualPathForArea(requestContext, values);
@@ -98,7 +98,7 @@ namespace System.Web.Mvc.Routing.Test
 
             requestContext.RouteData.DataTokens.Add("controller", "MixedRouting");
 
-            RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" }, };
+            RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" } };
 
             // Act
             VirtualPathData vpd = routes.GetVirtualPathForArea(requestContext, values);
@@ -119,7 +119,7 @@ namespace System.Web.Mvc.Routing.Test
 
             requestContext.RouteData.DataTokens.Add("controller", "MixedRoutingWithOrder");
 
-            RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" }, };
+            RouteValueDictionary values = new RouteValueDictionary() { { "action", "A2" } };
 
             // Act
             VirtualPathData vpd = routes.GetVirtualPathForArea(requestContext, values);
@@ -147,7 +147,7 @@ namespace System.Web.Mvc.Routing.Test
             RouteValueDictionary values = new RouteValueDictionary()
             {
                 { "action", "A1" },
-                { "controller", "Controller1" }
+                { "controller", "Controller1" },
             };
 
             // Act

@@ -430,7 +430,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                         new[]
                         {
                             PatternMatchKind.StartOfWordSubstring,
-                            PatternMatchKind.StartOfWordSubstring
+                            PatternMatchKind.StartOfWordSubstring,
                         }
                     )
             );
@@ -448,7 +448,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                         new[]
                         {
                             PatternMatchKind.StartOfWordSubstring,
-                            PatternMatchKind.StartOfWordSubstring
+                            PatternMatchKind.StartOfWordSubstring,
                         }
                     )
             );
@@ -517,7 +517,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
                         new[]
                         {
                             PatternMatchKind.StartOfWordSubstring,
-                            PatternMatchKind.StartOfWordSubstring
+                            PatternMatchKind.StartOfWordSubstring,
                         }
                     )
             );

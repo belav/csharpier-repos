@@ -128,7 +128,7 @@ namespace System.Web.UI.WebControls.WebParts
         /// <devdoc>
         /// Overridden to change default value.
         /// </devdoc>
-        [DefaultValue(typeof(Color), "Gray"),]
+        [DefaultValue(typeof(Color), "Gray")]
         public override Color BorderColor
         {
             get

@@ -164,7 +164,7 @@ namespace Mono.Profiler.Log
                             };
                             break;
                         case LogEventType.GCResize:
-                            ev = new GCResizeEvent { NewSize = (long)_reader.ReadULeb128(), };
+                            ev = new GCResizeEvent { NewSize = (long)_reader.ReadULeb128() };
                             break;
                         case LogEventType.GCMove:
                         {
@@ -210,10 +210,10 @@ namespace Mono.Profiler.Log
                             ev = new GCFinalizeEndEvent();
                             break;
                         case LogEventType.GCFinalizeObjectBegin:
-                            ev = new GCFinalizeObjectBeginEvent { ObjectPointer = ReadObject(), };
+                            ev = new GCFinalizeObjectBeginEvent { ObjectPointer = ReadObject() };
                             break;
                         case LogEventType.GCFinalizeObjectEnd:
-                            ev = new GCFinalizeObjectEndEvent { ObjectPointer = ReadObject(), };
+                            ev = new GCFinalizeObjectEndEvent { ObjectPointer = ReadObject() };
                             break;
                         default:
                             throw new LogException($"Invalid extended event type ({extType}).");
@@ -312,11 +312,11 @@ namespace Mono.Profiler.Log
                         case LogMetadataType.AppDomain:
                             if (load)
                             {
-                                ev = new AppDomainLoadEvent { AppDomainId = ReadPointer(), };
+                                ev = new AppDomainLoadEvent { AppDomainId = ReadPointer() };
                             }
                             else if (unload)
                             {
-                                ev = new AppDomainUnloadEvent { AppDomainId = ReadPointer(), };
+                                ev = new AppDomainUnloadEvent { AppDomainId = ReadPointer() };
                             }
                             else
                             {
@@ -330,11 +330,11 @@ namespace Mono.Profiler.Log
                         case LogMetadataType.Thread:
                             if (load)
                             {
-                                ev = new ThreadStartEvent { ThreadId = ReadPointer(), };
+                                ev = new ThreadStartEvent { ThreadId = ReadPointer() };
                             }
                             else if (unload)
                             {
-                                ev = new ThreadEndEvent { ThreadId = ReadPointer(), };
+                                ev = new ThreadEndEvent { ThreadId = ReadPointer() };
                             }
                             else
                             {
@@ -387,13 +387,13 @@ namespace Mono.Profiler.Log
                     switch (extType)
                     {
                         case LogEventType.MethodLeave:
-                            ev = new LeaveEvent { MethodPointer = ReadMethod(), };
+                            ev = new LeaveEvent { MethodPointer = ReadMethod() };
                             break;
                         case LogEventType.MethodEnter:
-                            ev = new EnterEvent { MethodPointer = ReadMethod(), };
+                            ev = new EnterEvent { MethodPointer = ReadMethod() };
                             break;
                         case LogEventType.MethodLeaveExceptional:
-                            ev = new ExceptionalLeaveEvent { MethodPointer = ReadMethod(), };
+                            ev = new ExceptionalLeaveEvent { MethodPointer = ReadMethod() };
                             break;
                         case LogEventType.MethodJit:
                             ev = new JitEvent
@@ -551,7 +551,7 @@ namespace Mono.Profiler.Log
                             };
                             break;
                         case LogEventType.HeapRootUnregister:
-                            ev = new HeapRootUnregisterEvent { RootPointer = ReadPointer(), };
+                            ev = new HeapRootUnregisterEvent { RootPointer = ReadPointer() };
                             break;
                         default:
                             throw new LogException($"Invalid extended event type ({extType}).");
@@ -732,7 +732,7 @@ namespace Mono.Profiler.Log
                             };
                             break;
                         case LogEventType.MetaAotId:
-                            ev = new AotIdEvent { AotId = Guid.Parse(_reader.ReadCString()), };
+                            ev = new AotIdEvent { AotId = Guid.Parse(_reader.ReadCString()) };
                             break;
                         default:
                             throw new LogException($"Invalid extended event type ({extType}).");

@@ -1408,7 +1408,7 @@ namespace System
                 1000000,
                 10000000,
                 100000000,
-                1000000000
+                1000000000,
             };
 
             // Fast access for 10^n where n is 1-19
@@ -1517,7 +1517,7 @@ namespace System
                 1e77,
                 1e78,
                 1e79,
-                1e80
+                1e80,
             };
 
             #region Decimal Math Helpers

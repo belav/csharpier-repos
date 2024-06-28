@@ -267,7 +267,7 @@ namespace ILLink.RoslynAnalyzer
             Field = 0x0004,
             Event = 0x0008,
             Class = 0x0010,
-            All = MethodOrConstructor | Property | Field | Event | Class
+            All = MethodOrConstructor | Property | Field | Event | Class,
         }
 
         /// <summary>

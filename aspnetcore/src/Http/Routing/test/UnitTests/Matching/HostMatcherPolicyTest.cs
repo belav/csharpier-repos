@@ -12,7 +12,7 @@ public class HostMatcherPolicyTest
     public void INodeBuilderPolicy_AppliesToEndpoints_EndpointWithoutMetadata_ReturnsFalse()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", null), };
+        var endpoints = new[] { CreateEndpoint("/", null) };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -27,7 +27,7 @@ public class HostMatcherPolicyTest
     public void INodeBuilderPolicy_AppliesToEndpoints_EndpointWithoutHosts_ReturnsFalse()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", new HostAttribute(Array.Empty<string>())), };
+        var endpoints = new[] { CreateEndpoint("/", new HostAttribute(Array.Empty<string>())) };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -45,7 +45,7 @@ public class HostMatcherPolicyTest
         var endpoints = new[]
         {
             CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
-            CreateEndpoint("/", new HostAttribute(new[] { "localhost", })),
+            CreateEndpoint("/", new HostAttribute(new[] { "localhost" })),
         };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
@@ -66,7 +66,7 @@ public class HostMatcherPolicyTest
             CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
             CreateEndpoint(
                 "/",
-                new HostAttribute(new[] { "localhost", }),
+                new HostAttribute(new[] { "localhost" }),
                 new DynamicEndpointMetadata()
             ),
         };
@@ -90,7 +90,7 @@ public class HostMatcherPolicyTest
     public void INodeBuilderPolicy_AppliesToEndpoints_InvalidHosts(string host)
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", new HostAttribute(new[] { host })), };
+        var endpoints = new[] { CreateEndpoint("/", new HostAttribute(new[] { host })) };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -105,7 +105,7 @@ public class HostMatcherPolicyTest
     public void IEndpointSelectorPolicy_AppliesToEndpoints_EndpointWithoutMetadata_ReturnsTrue()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", null, new DynamicEndpointMetadata()), };
+        var endpoints = new[] { CreateEndpoint("/", null, new DynamicEndpointMetadata()) };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
@@ -147,7 +147,7 @@ public class HostMatcherPolicyTest
             CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
             CreateEndpoint(
                 "/",
-                new HostAttribute(new[] { "localhost", }),
+                new HostAttribute(new[] { "localhost" }),
                 new DynamicEndpointMetadata()
             ),
         };
@@ -168,7 +168,7 @@ public class HostMatcherPolicyTest
         var endpoints = new[]
         {
             CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
-            CreateEndpoint("/", new HostAttribute(new[] { "localhost", })),
+            CreateEndpoint("/", new HostAttribute(new[] { "localhost" })),
         };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -210,7 +210,7 @@ public class HostMatcherPolicyTest
         // Arrange
         var endpoints = new[]
         {
-            CreateEndpoint("/", new HostAttribute(new[] { "*:5000", "*:5001", })),
+            CreateEndpoint("/", new HostAttribute(new[] { "*:5000", "*:5001" })),
             CreateEndpoint("/", new HostAttribute(Array.Empty<string>())),
             CreateEndpoint("/", hostMetadata: null),
             CreateEndpoint("/", new HostAttribute("*.contoso.com:*")),
@@ -234,7 +234,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("*:*", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[7], },
+                    new[] { endpoints[1], endpoints[2], endpoints[7] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -242,7 +242,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("*:5000", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[0], endpoints[1], endpoints[2], },
+                    new[] { endpoints[0], endpoints[1], endpoints[2] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -250,7 +250,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("*:5001", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[0], endpoints[1], endpoints[2], },
+                    new[] { endpoints[0], endpoints[1], endpoints[2] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -258,7 +258,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("*.contoso.com:*", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -266,7 +266,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("*.sub.contoso.com:*", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[4], },
+                    new[] { endpoints[1], endpoints[2], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -274,7 +274,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("www.contoso.com:*", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[5], },
+                    new[] { endpoints[1], endpoints[2], endpoints[5] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -282,7 +282,7 @@ public class HostMatcherPolicyTest
             {
                 Assert.Equal("www.contoso.com:5000", e.State.ToString());
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[6], },
+                    new[] { endpoints[1], endpoints[2], endpoints[6] },
                     e.Endpoints.ToArray()
                 );
             }

@@ -745,7 +745,7 @@ namespace System.ServiceModel.Description
             {
                 Name = "OnBegin" + od.Name,
                 Attributes = MemberAttributes.Private | MemberAttributes.Final,
-                ReturnType = asyncResultType
+                ReturnType = asyncResultType,
             };
             type.Members.Add(cm);
 
@@ -781,7 +781,7 @@ namespace System.ServiceModel.Description
             {
                 Name = "OnEnd" + od.Name,
                 Attributes = MemberAttributes.Private | MemberAttributes.Final,
-                ReturnType = new CodeTypeReference(typeof(object[]))
+                ReturnType = new CodeTypeReference(typeof(object[])),
             };
             type.Members.Add(cm);
 
@@ -827,7 +827,7 @@ namespace System.ServiceModel.Description
             cm = new CodeMemberMethod()
             {
                 Name = "On" + od.Name + "Completed",
-                Attributes = MemberAttributes.Private | MemberAttributes.Final
+                Attributes = MemberAttributes.Private | MemberAttributes.Final,
             };
             type.Members.Add(cm);
 
@@ -893,7 +893,7 @@ namespace System.ServiceModel.Description
 
             var argsCtor = new CodeConstructor()
             {
-                Attributes = MemberAttributes.Public | MemberAttributes.Final
+                Attributes = MemberAttributes.Public | MemberAttributes.Final,
             };
             argsCtor.Parameters.Add(
                 new CodeParameterDeclarationExpression(typeof(object[]), "results")
@@ -927,7 +927,7 @@ namespace System.ServiceModel.Description
                 {
                     Name = "Result",
                     Type = resultType,
-                    Attributes = MemberAttributes.Public | MemberAttributes.Final
+                    Attributes = MemberAttributes.Public | MemberAttributes.Final,
                 };
                 resultProp.GetStatements.Add(
                     new CodeMethodReturnStatement(
@@ -951,7 +951,7 @@ namespace System.ServiceModel.Description
                 {
                     Name = od.Name + "Completed",
                     Type = handlerType,
-                    Attributes = MemberAttributes.Public | MemberAttributes.Final
+                    Attributes = MemberAttributes.Public | MemberAttributes.Final,
                 }
             );
 

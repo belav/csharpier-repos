@@ -20,7 +20,7 @@ namespace System.ComponentModel.Tests
                 {
                     { typeof(string), true },
                     { typeof(Uri), true },
-                    { typeof(InstanceDescriptor), true }
+                    { typeof(InstanceDescriptor), true },
                 },
                 UriTypeConverterTests.s_converter
             );
@@ -34,7 +34,7 @@ namespace System.ComponentModel.Tests
                 {
                     { typeof(string), true },
                     { typeof(Uri), true },
-                    { typeof(InstanceDescriptor), true }
+                    { typeof(InstanceDescriptor), true },
                 },
                 UriTypeConverterTests.s_converter
             );
@@ -49,28 +49,28 @@ namespace System.ComponentModel.Tests
                     {
                         "http://www.Microsoft.com/",
                         new Uri("http://www.Microsoft.com/"),
-                        CultureInfo.InvariantCulture
+                        CultureInfo.InvariantCulture,
                     },
                     {
                         "/relative",
                         new Uri("/relative", UriKind.Relative),
-                        CultureInfo.InvariantCulture
+                        CultureInfo.InvariantCulture,
                     },
                     {
                         new Uri("http://www.Microsoft.com/"),
                         new Uri("http://www.Microsoft.com/"),
-                        null
+                        null,
                     },
                     {
                         new Uri("/relative", UriKind.Relative),
                         new Uri("/relative", UriKind.Relative),
-                        null
+                        null,
                     },
                     {
                         "mailto:?to=User2@Host2.com;cc=User3@Host3com",
                         new Uri("mailto:?to=User2@Host2.com;cc=User3@Host3com"),
-                        null
-                    }
+                        null,
+                    },
                 },
                 UriTypeConverterTests.s_converter
             );
@@ -85,18 +85,18 @@ namespace System.ComponentModel.Tests
                     {
                         new Uri("http://www.Microsoft.com/"),
                         "http://www.Microsoft.com/",
-                        CultureInfo.InvariantCulture
+                        CultureInfo.InvariantCulture,
                     },
                     {
                         new Uri("/relative", UriKind.Relative),
                         "/relative",
-                        CultureInfo.InvariantCulture
+                        CultureInfo.InvariantCulture,
                     },
                     {
                         new Uri("mailto:?to=User2@Host2.com;cc=User3@Host3com"),
                         "mailto:?to=User2@Host2.com;cc=User3@Host3com",
-                        null
-                    }
+                        null,
+                    },
                 },
                 UriTypeConverterTests.s_converter
             );

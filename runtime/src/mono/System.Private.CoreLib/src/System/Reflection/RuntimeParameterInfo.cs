@@ -415,7 +415,7 @@ namespace System.Reflection
             {
                 var ctorArgs = new CustomAttributeTypedArgument[]
                 {
-                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value)
+                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value),
                 };
                 attrsData[count++] = new RuntimeCustomAttributeData(
                     (typeof(MarshalAsAttribute)).GetConstructor(new[] { typeof(UnmanagedType) })!,

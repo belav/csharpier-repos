@@ -144,7 +144,7 @@ namespace Mono.Attach
         enum PrimitiveType : byte
         {
             PRIM_TYPE_NULL = 17,
-            PRIM_TYPE_STRING = 18
+            PRIM_TYPE_STRING = 18,
         };
 
         void write_string(BinaryWriter writer, string s)

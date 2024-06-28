@@ -76,7 +76,7 @@ namespace System.Web.UI
             "Page_Error",
             "Page_Unload",
             "Page_AbortTransaction",
-            "Page_CommitTransaction"
+            "Page_CommitTransaction",
         };
 
         const BindingFlags bflags =

@@ -511,11 +511,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             // We're never a valid term if all arguments were valid terms.  If not, we're a valid
             // expression if all arguments where.  Otherwise, we're just invalid.
-            expressionType = validTerm
-                ? ExpressionType.ValidTerm
-                : validExpr
-                    ? ExpressionType.ValidExpression
-                    : ExpressionType.Invalid;
+            expressionType =
+                validTerm ? ExpressionType.ValidTerm
+                : validExpr ? ExpressionType.ValidExpression
+                : ExpressionType.Invalid;
         }
     }
 }

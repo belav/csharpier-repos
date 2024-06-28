@@ -632,7 +632,7 @@ namespace Castle.Services.Logging.NLogIntegration
                 new LogEventInfo(logLevel, Logger.Name, format)
                 {
                     Exception = exception,
-                    Parameters = args
+                    Parameters = args,
                 }
             );
         }
@@ -649,7 +649,7 @@ namespace Castle.Services.Logging.NLogIntegration
                 new LogEventInfo(logLevel, Logger.Name, format)
                 {
                     FormatProvider = formatProvider,
-                    Parameters = args
+                    Parameters = args,
                 }
             );
         }
@@ -668,7 +668,7 @@ namespace Castle.Services.Logging.NLogIntegration
                 {
                     Exception = exceptoin,
                     FormatProvider = formatProvider,
-                    Parameters = args
+                    Parameters = args,
                 }
             );
         }

@@ -178,7 +178,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Started,
                 Stopping,
                 Stop,
-                Stopped
+                Stopped,
             }
         }
     }

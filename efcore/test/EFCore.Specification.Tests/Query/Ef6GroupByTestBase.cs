@@ -68,7 +68,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         key1 = g.Key,
                         key2 = g.Key,
                         max = g.Max(p => p.Id),
-                        min = g.Min(s => s.Id + 2)
+                        min = g.Min(s => s.Id + 2),
                     })
         );
 
@@ -90,7 +90,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(g => new
                     {
                         keyIsNull = g.Key == null ? "is null" : "not null",
-                        logicExpression = (a && b || b && c)
+                        logicExpression = (a && b || b && c),
                     })
         );
     }
@@ -175,7 +175,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                             o.Id,
                             o.FirstName,
                             o.LastName,
-                            o.Alias
+                            o.Alias,
                         },
                         c => new { c.LastName, c.FirstName },
                         (k, g) => g.Count()
@@ -233,7 +233,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 k.Id,
                                 k.Alias,
-                                Count = g.Count()
+                                Count = g.Count(),
                             }
                     )
         );
@@ -269,7 +269,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     g.Key.Id,
                     g.Key.Alias,
-                    Count = g.Count()
+                    Count = g.Count(),
                 }
         );
 
@@ -285,7 +285,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     g.Key.Id,
                     Sum = g.Sum(x => x.Id),
-                    Count = g.Count()
+                    Count = g.Count(),
                 }
         );
 
@@ -358,8 +358,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                                 Year = yg.Key,
                                 MonthGroups = from o in yg
                                 group o by o.OrderDate.Month into mg
-                                select new { Month = mg.Key, Orders = mg }
-                            }
+                                select new { Month = mg.Key, Orders = mg },
+                            },
                         }
                 )
         );
@@ -458,7 +458,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         select new
                         {
                             Category = g.Key,
-                            CheapestProducts = g.Where(p => p.UnitPrice == minPrice)
+                            CheapestProducts = g.Where(p => p.UnitPrice == minPrice),
                         }
                 )
         );
@@ -490,7 +490,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         select new
                         {
                             Category = g.Key,
-                            MostExpensiveProducts = g.Where(p => p.UnitPrice == minPrice)
+                            MostExpensiveProducts = g.Where(p => p.UnitPrice == minPrice),
                         }
                 )
         );
@@ -601,7 +601,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(p => new
                     {
                         p.FirstName,
-                        FullName = p.FirstName + " " + p.MiddleInitial + " " + p.LastName
+                        FullName = p.FirstName + " " + p.MiddleInitial + " " + p.LastName,
                     })
                     .GroupBy(p => p.FirstName)
                     .OrderBy(e => e.Key)
@@ -635,7 +635,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     people.Key,
                     Style = people.Select(p => p.Style).FirstOrDefault(),
-                    Count = people.Count()
+                    Count = people.Count(),
                 }
         );
 
@@ -703,7 +703,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         Count = x.Count(),
                         Sum = x.Sum(el => el.Id),
                         SumOver60 = x.Sum(el => el.Id) / (decimal)60,
-                        TotalCallOutCharges = x.Sum(el => el.Feet.Size == 11 ? 1 : 0)
+                        TotalCallOutCharges = x.Sum(el => el.Feet.Size == 11 ? 1 : 0),
                     })
         );
 
@@ -731,7 +731,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     person1.Id,
                     shoes.Style,
-                    shoes.Age
+                    shoes.Age,
                 } into temp
                 orderby temp.Key.Id, temp.Key.Style, temp.Key.Age
                 select new
@@ -744,8 +744,8 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         t.Id,
                         t.Style,
-                        t.Age
-                    }
+                        t.Age,
+                    },
                 },
             r => r.Id,
             (l, r) =>
@@ -770,7 +770,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         LastName = g.Key,
                         Count = g.Count(),
                         First = g.OrderBy(e => e.Id).FirstOrDefault(),
-                        Take = g.OrderBy(e => e.Id).Take(2)
+                        Take = g.OrderBy(e => e.Id).Take(2),
                     })
                     .OrderByDescending(e => e.LastName)
                     .Select(e => e),
@@ -945,7 +945,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 { typeof(OrderForLinq), e => ((OrderForLinq)e)?.Id },
                 { typeof(Person), e => ((Person)e)?.Id },
                 { typeof(Shoes), e => ((Shoes)e)?.Id },
-                { typeof(Feet), e => ((Feet)e)?.Id }
+                { typeof(Feet), e => ((Feet)e)?.Id },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
         public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
@@ -1036,7 +1036,7 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                             Assert.Equal(ee.Size, aa.Size);
                         }
                     }
-                }
+                },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
     }
 
@@ -1225,148 +1225,148 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     ProductName = "Chai",
                     Category = "Beverages",
                     UnitPrice = 18.0000M,
-                    UnitsInStock = 39
+                    UnitsInStock = 39,
                 },
                 new()
                 {
                     ProductName = "Chang",
                     Category = "Beverages",
                     UnitPrice = 19.0000M,
-                    UnitsInStock = 17
+                    UnitsInStock = 17,
                 },
                 new()
                 {
                     ProductName = "Aniseed Syrup",
                     Category = "Condiments",
                     UnitPrice = 10.0000M,
-                    UnitsInStock = 13
+                    UnitsInStock = 13,
                 },
                 new()
                 {
                     ProductName = "Chef Anton's Cajun Seasoning",
                     Category = "Condiments",
                     UnitPrice = 22.0000M,
-                    UnitsInStock = 53
+                    UnitsInStock = 53,
                 },
                 new()
                 {
                     ProductName = "Chef Anton's Gumbo Mix",
                     Category = "Condiments",
                     UnitPrice = 21.3500M,
-                    UnitsInStock = 0
+                    UnitsInStock = 0,
                 },
                 new()
                 {
                     ProductName = "Grandma's Boysenberry Spread",
                     Category = "Condiments",
                     UnitPrice = 25.0000M,
-                    UnitsInStock = 120
+                    UnitsInStock = 120,
                 },
                 new()
                 {
                     ProductName = "Uncle Bob's Organic Dried Pears",
                     Category = "Produce",
                     UnitPrice = 30.0000M,
-                    UnitsInStock = 15
+                    UnitsInStock = 15,
                 },
                 new FeaturedProductForLinq
                 {
                     ProductName = "Northwoods Cranberry Sauce",
                     Category = "Condiments",
                     UnitPrice = 40.0000M,
-                    UnitsInStock = 6
+                    UnitsInStock = 6,
                 },
                 new()
                 {
                     ProductName = "Mishi Kobe Niku",
                     Category = "Meat/Poultry",
                     UnitPrice = 97.0000M,
-                    UnitsInStock = 29
+                    UnitsInStock = 29,
                 },
                 new()
                 {
                     ProductName = "Ikura",
                     Category = "Seafood",
                     UnitPrice = 31.0000M,
-                    UnitsInStock = 31
+                    UnitsInStock = 31,
                 },
                 new()
                 {
                     ProductName = "Queso Cabrales",
                     Category = "Dairy Products",
                     UnitPrice = 21.0000M,
-                    UnitsInStock = 22
+                    UnitsInStock = 22,
                 },
                 new FeaturedProductForLinq
                 {
                     ProductName = "Queso Manchego La Pastora",
                     Category = "Dairy Products",
                     UnitPrice = 38.0000M,
-                    UnitsInStock = 86
+                    UnitsInStock = 86,
                 },
                 new()
                 {
                     ProductName = "Konbu",
                     Category = "Seafood",
                     UnitPrice = 6.0000M,
-                    UnitsInStock = 24
+                    UnitsInStock = 24,
                 },
                 new()
                 {
                     ProductName = "Tofu",
                     Category = "Produce",
                     UnitPrice = 23.2500M,
-                    UnitsInStock = 35
+                    UnitsInStock = 35,
                 },
                 new()
                 {
                     ProductName = "Genen Shouyu",
                     Category = "Condiments",
                     UnitPrice = 15.5000M,
-                    UnitsInStock = 39
+                    UnitsInStock = 39,
                 },
                 new()
                 {
                     ProductName = "Pavlova",
                     Category = "Confections",
                     UnitPrice = 17.4500M,
-                    UnitsInStock = 29
+                    UnitsInStock = 29,
                 },
                 new FeaturedProductForLinq
                 {
                     ProductName = "Alice Mutton",
                     Category = "Meat/Poultry",
                     UnitPrice = 39.0000M,
-                    UnitsInStock = 0
+                    UnitsInStock = 0,
                 },
                 new FeaturedProductForLinq
                 {
                     ProductName = "Carnarvon Tigers",
                     Category = "Seafood",
                     UnitPrice = 62.5000M,
-                    UnitsInStock = 42
+                    UnitsInStock = 42,
                 },
                 new()
                 {
                     ProductName = "Teatime Chocolate Biscuits",
                     Category = "Confections",
                     UnitPrice = 9.2000M,
-                    UnitsInStock = 25
+                    UnitsInStock = 25,
                 },
                 new()
                 {
                     ProductName = "Sir Rodney's Marmalade",
                     Category = "Confections",
                     UnitPrice = 81.0000M,
-                    UnitsInStock = 40
+                    UnitsInStock = 40,
                 },
                 new()
                 {
                     ProductName = "Sir Rodney's Scones",
                     Category = "Confections",
                     UnitPrice = 10.0000M,
-                    UnitsInStock = 3
-                }
+                    UnitsInStock = 3,
+                },
             };
 
         private static IReadOnlyList<CustomerForLinq> CreateCustomersForLinq() =>
@@ -1376,26 +1376,26 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     Id = 1,
                     Region = "WA",
-                    CompanyName = "Microsoft"
+                    CompanyName = "Microsoft",
                 },
                 new()
                 {
                     Id = 2,
                     Region = "WA",
-                    CompanyName = "NewMonics"
+                    CompanyName = "NewMonics",
                 },
                 new()
                 {
                     Id = 3,
                     Region = "OR",
-                    CompanyName = "NewMonics"
+                    CompanyName = "NewMonics",
                 },
                 new()
                 {
                     Id = 4,
                     Region = "CA",
-                    CompanyName = "Microsoft"
-                }
+                    CompanyName = "Microsoft",
+                },
             };
 
         private static IReadOnlyList<OrderForLinq> CreateOrdersForLinq(
@@ -1409,49 +1409,49 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                     Id = 1,
                     Total = 111M,
                     OrderDate = new DateTime(1997, 9, 3),
-                    Customer = customers[0]
+                    Customer = customers[0],
                 },
                 new()
                 {
                     Id = 2,
                     Total = 222M,
                     OrderDate = new DateTime(2006, 9, 3),
-                    Customer = customers[1]
+                    Customer = customers[1],
                 },
                 new()
                 {
                     Id = 3,
                     Total = 333M,
                     OrderDate = new DateTime(1999, 9, 3),
-                    Customer = customers[0]
+                    Customer = customers[0],
                 },
                 new()
                 {
                     Id = 4,
                     Total = 444M,
                     OrderDate = new DateTime(2010, 9, 3),
-                    Customer = customers[1]
+                    Customer = customers[1],
                 },
                 new()
                 {
                     Id = 5,
                     Total = 2555M,
                     OrderDate = new DateTime(2009, 9, 3),
-                    Customer = customers[2]
+                    Customer = customers[2],
                 },
                 new()
                 {
                     Id = 6,
                     Total = 6555M,
                     OrderDate = new DateTime(1976, 9, 3),
-                    Customer = customers[3]
+                    Customer = customers[3],
                 },
                 new()
                 {
                     Id = 7,
                     Total = 555M,
                     OrderDate = new DateTime(1985, 9, 3),
-                    Customer = customers[2]
+                    Customer = customers[2],
                 },
             };
 
@@ -1499,15 +1499,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 1,
                             Style = "Sneakers",
-                            Age = 19
+                            Age = 19,
                         },
                         new Shoes
                         {
                             Id = 2,
                             Style = "Dress",
-                            Age = 20
-                        }
-                    }
+                            Age = 20,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1523,15 +1523,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 3,
                             Style = "Sneakers",
-                            Age = 21
+                            Age = 21,
                         },
                         new Shoes
                         {
                             Id = 4,
                             Style = "Dress",
-                            Age = 19
-                        }
-                    }
+                            Age = 19,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1547,15 +1547,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 5,
                             Style = "Sneakers",
-                            Age = 20
+                            Age = 20,
                         },
                         new Shoes
                         {
                             Id = 6,
                             Style = "Dress",
-                            Age = 21
-                        }
-                    }
+                            Age = 21,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1571,15 +1571,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 7,
                             Style = "Sneakers",
-                            Age = 19
+                            Age = 19,
                         },
                         new Shoes
                         {
                             Id = 8,
                             Style = "Dress",
-                            Age = 20
-                        }
-                    }
+                            Age = 20,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1595,15 +1595,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 9,
                             Style = "Sneakers",
-                            Age = 21
+                            Age = 21,
                         },
                         new Shoes
                         {
                             Id = 10,
                             Style = "Dress",
-                            Age = 19
-                        }
-                    }
+                            Age = 19,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1619,15 +1619,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 11,
                             Style = "Sneakers",
-                            Age = 20
+                            Age = 20,
                         },
                         new Shoes
                         {
                             Id = 12,
                             Style = "Dress",
-                            Age = 21
-                        }
-                    }
+                            Age = 21,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1643,15 +1643,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 13,
                             Style = "Sneakers",
-                            Age = 19
+                            Age = 19,
                         },
                         new Shoes
                         {
                             Id = 14,
                             Style = "Dress",
-                            Age = 20
-                        }
-                    }
+                            Age = 20,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1667,15 +1667,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 15,
                             Style = "Sneakers",
-                            Age = 21
+                            Age = 21,
                         },
                         new Shoes
                         {
                             Id = 16,
                             Style = "Dress",
-                            Age = 19
-                        }
-                    }
+                            Age = 19,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1691,15 +1691,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 17,
                             Style = "Sneakers",
-                            Age = 20
+                            Age = 20,
                         },
                         new Shoes
                         {
                             Id = 18,
                             Style = "Dress",
-                            Age = 21
-                        }
-                    }
+                            Age = 21,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1715,15 +1715,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 19,
                             Style = "Sneakers",
-                            Age = 19
+                            Age = 19,
                         },
                         new Shoes
                         {
                             Id = 20,
                             Style = "Dress",
-                            Age = 20
-                        }
-                    }
+                            Age = 20,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1739,15 +1739,15 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 21,
                             Style = "Sneakers",
-                            Age = 21
+                            Age = 21,
                         },
                         new Shoes
                         {
                             Id = 22,
                             Style = "Dress",
-                            Age = 19
-                        }
-                    }
+                            Age = 19,
+                        },
+                    },
                 },
                 new()
                 {
@@ -1763,16 +1763,16 @@ public abstract class Ef6GroupByTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = 23,
                             Style = "Sneakers",
-                            Age = 20
+                            Age = 20,
                         },
                         new Shoes
                         {
                             Id = 24,
                             Style = "Dress",
-                            Age = 21
-                        }
-                    }
-                }
+                            Age = 21,
+                        },
+                    },
+                },
             };
 
             foreach (var person in people)

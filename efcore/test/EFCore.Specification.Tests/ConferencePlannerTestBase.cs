@@ -65,7 +65,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     EmailAddress = "discord@sample.com",
                     FirstName = "",
                     LastName = "Discord",
-                    UserName = "Discord!"
+                    UserName = "Discord!",
                 }
             );
 
@@ -89,7 +89,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     EmailAddress = "pinkie@sample.com",
                     FirstName = "Pinkie",
                     LastName = "Pie",
-                    UserName = "Pinks"
+                    UserName = "Pinks",
                 }
             );
 
@@ -270,7 +270,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 FirstName = input.FirstName,
                 LastName = input.LastName,
                 UserName = input.UserName,
-                EmailAddress = input.EmailAddress
+                EmailAddress = input.EmailAddress,
             };
 
             _db.Attendees.Add(attendee);
@@ -404,13 +404,13 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 .Select(session => new SearchResult
                 {
                     Type = SearchResultType.Session,
-                    Session = session.MapSessionResponse()
+                    Session = session.MapSessionResponse(),
                 })
                 .Concat(
                     speakerResults.Select(speaker => new SearchResult
                     {
                         Type = SearchResultType.Speaker,
-                        Speaker = speaker.MapSpeakerResponse()
+                        Speaker = speaker.MapSpeakerResponse(),
                     })
                 );
 
@@ -476,7 +476,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     Title = "Pandas!",
                     StartTime = DateTimeOffset.Now,
                     EndTime = DateTimeOffset.Now.AddHours(1),
-                    TrackId = track.Id
+                    TrackId = track.Id,
                 }
             );
 
@@ -507,7 +507,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     Title = session.Title.Replace("C#", "F#"),
                     StartTime = session.StartTime,
                     EndTime = session.EndTime,
-                    TrackId = session.TrackId
+                    TrackId = session.TrackId,
                 }
             );
 
@@ -598,7 +598,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                 StartTime = input.StartTime,
                 EndTime = input.EndTime,
                 Abstract = input.Abstract,
-                TrackId = input.TrackId
+                TrackId = input.TrackId,
             };
 
             _db.Sessions.Add(session);
@@ -752,15 +752,15 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     EmailAddress = "sonicrainboom@sample.com",
                     FirstName = "Rainbow",
                     LastName = "Dash",
-                    UserName = "RainbowDash"
+                    UserName = "RainbowDash",
                 },
                 new()
                 {
                     EmailAddress = "solovely@sample.com",
                     FirstName = "Flutter",
                     LastName = "Shy",
-                    UserName = "Fluttershy"
-                }
+                    UserName = "Fluttershy",
+                },
             };
 
             var attendees2 = new List<TestModels.ConferencePlanner.Attendee>
@@ -770,15 +770,15 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     EmailAddress = "applesforever@sample.com",
                     FirstName = "Apple",
                     LastName = "Jack",
-                    UserName = "Applejack"
+                    UserName = "Applejack",
                 },
                 new()
                 {
                     EmailAddress = "precious@sample.com",
                     FirstName = "Rarity",
                     LastName = "",
-                    UserName = "Rarity"
-                }
+                    UserName = "Rarity",
+                },
             };
 
             var attendees3 = new List<TestModels.ConferencePlanner.Attendee>
@@ -788,15 +788,15 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                     EmailAddress = "princess@sample.com",
                     FirstName = "Twilight",
                     LastName = "Sparkle",
-                    UserName = "Princess"
+                    UserName = "Princess",
                 },
                 new()
                 {
                     EmailAddress = "pinkie@sample.com",
                     FirstName = "Pinkie",
                     LastName = "Pie",
-                    UserName = "Pinks"
-                }
+                    UserName = "Pinks",
+                },
             };
 
             using var document = JsonDocument.Parse(ConferenceData);
@@ -815,7 +815,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                         track = new Track
                         {
                             Name = roomJson.GetProperty("name").GetString(),
-                            Sessions = new List<TestModels.ConferencePlanner.Session>()
+                            Sessions = new List<TestModels.ConferencePlanner.Session>(),
                         };
 
                         tracks[roomId] = track;
@@ -833,7 +833,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                             {
                                 speaker = new Speaker
                                 {
-                                    Name = speakerJson.GetProperty("name").GetString()
+                                    Name = speakerJson.GetProperty("name").GetString(),
                                 };
 
                                 speakers[speakerId] = speaker;
@@ -847,7 +847,7 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                             Title = sessionJson.GetProperty("title").GetString(),
                             Abstract = sessionJson.GetProperty("description").GetString(),
                             StartTime = sessionJson.GetProperty("startsAt").GetDateTime(),
-                            EndTime = sessionJson.GetProperty("endsAt").GetDateTime()
+                            EndTime = sessionJson.GetProperty("endsAt").GetDateTime(),
                         };
 
                         session.SessionSpeakers = sessionSpeakers
@@ -855,13 +855,11 @@ public abstract partial class ConferencePlannerTestBase<TFixture> : IClassFixtur
                             .ToList();
 
                         var trackName = track.Name;
-                        var attendees = trackName.Contains("1")
-                            ? attendees1
-                            : trackName.Contains("2")
-                                ? attendees2
-                                : trackName.Contains("3")
-                                    ? attendees3
-                                    : attendees1.Concat(attendees2).Concat(attendees3).ToList();
+                        var attendees =
+                            trackName.Contains("1") ? attendees1
+                            : trackName.Contains("2") ? attendees2
+                            : trackName.Contains("3") ? attendees3
+                            : attendees1.Concat(attendees2).Concat(attendees3).ToList();
 
                         session.SessionAttendees = attendees
                             .Select(a => new SessionAttendee { Session = session, Attendee = a })

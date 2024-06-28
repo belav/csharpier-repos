@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_None)
                     {
-                        Attribute = new Variation("Attribute Test On None")
+                        Attribute = new Variation("Attribute Test On None"),
                     }
                 );
             }
@@ -26,7 +26,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_Element)
                     {
-                        Attribute = new Variation("Attribute Test  On Element") { Pri = 0 }
+                        Attribute = new Variation("Attribute Test  On Element") { Pri = 0 },
                     }
                 );
             }
@@ -36,7 +36,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_Text)
                     {
-                        Attribute = new Variation("Attribute Test On Text") { Pri = 0 }
+                        Attribute = new Variation("Attribute Test On Text") { Pri = 0 },
                     }
                 );
             }
@@ -46,7 +46,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_CDATA)
                     {
-                        Attribute = new Variation("Attribute Test On CDATA")
+                        Attribute = new Variation("Attribute Test On CDATA"),
                     }
                 );
             }
@@ -56,7 +56,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_ProcessingInstruction)
                     {
-                        Attribute = new Variation("Attribute Test On ProcessingInstruction")
+                        Attribute = new Variation("Attribute Test On ProcessingInstruction"),
                     }
                 );
             }
@@ -66,7 +66,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_Comment)
                     {
-                        Attribute = new Variation("AttributeTest On Comment")
+                        Attribute = new Variation("AttributeTest On Comment"),
                     }
                 );
             }
@@ -76,7 +76,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_DocumentType)
                     {
-                        Attribute = new Variation("AttributeTest On DocumentType") { Pri = 0 }
+                        Attribute = new Variation("AttributeTest On DocumentType") { Pri = 0 },
                     }
                 );
             }
@@ -86,7 +86,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_Whitespace)
                     {
-                        Attribute = new Variation("AttributeTest On Whitespace")
+                        Attribute = new Variation("AttributeTest On Whitespace"),
                     }
                 );
             }
@@ -96,7 +96,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_EndElement)
                     {
-                        Attribute = new Variation("AttributeTest On EndElement")
+                        Attribute = new Variation("AttributeTest On EndElement"),
                     }
                 );
             }
@@ -106,7 +106,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_XmlDeclaration)
                     {
-                        Attribute = new Variation("AttributeTest On XmlDeclaration") { Pri = 0 }
+                        Attribute = new Variation("AttributeTest On XmlDeclaration") { Pri = 0 },
                     }
                 );
             }
@@ -116,7 +116,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_EntityReference)
                     {
-                        Attribute = new Variation("Attribute Test On EntityReference")
+                        Attribute = new Variation("Attribute Test On EntityReference"),
                     }
                 );
             }
@@ -126,7 +126,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestAttributeTestNodeType_EndEntity)
                     {
-                        Attribute = new Variation("AttributeTest On EndEntity")
+                        Attribute = new Variation("AttributeTest On EndEntity"),
                     }
                 );
             }

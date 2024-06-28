@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
                             expressionStatementSyntax.Expression,
                         ThrowStatementSyntax throwStatementSyntax =>
                             throwStatementSyntax.Expression,
-                        _ => null
+                        _ => null,
                     };
                 }
             }
@@ -133,13 +133,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeRefactorings.InlineMethod
             // As the body of an expression-bodied lambda or method.'
             return syntaxNode.Parent switch
             {
-                ConditionalExpressionSyntax conditionalExpressionSyntax =>
-                    syntaxNode.Equals(conditionalExpressionSyntax.WhenTrue)
-                        || syntaxNode.Equals(conditionalExpressionSyntax.WhenFalse),
+                ConditionalExpressionSyntax conditionalExpressionSyntax => syntaxNode.Equals(
+                    conditionalExpressionSyntax.WhenTrue
+                ) || syntaxNode.Equals(conditionalExpressionSyntax.WhenFalse),
                 BinaryExpressionSyntax(
                     kind: SyntaxKind.CoalesceExpression
-                ) binaryExpressionSyntax =>
-                    syntaxNode.Equals(binaryExpressionSyntax.Right),
+                ) binaryExpressionSyntax => syntaxNode.Equals(binaryExpressionSyntax.Right),
                 LambdaExpressionSyntax lambdaExpressionSyntax =>
                     lambdaExpressionSyntax.ExpressionBody != null,
                 var parent => parent.IsKind(SyntaxKind.ArrowExpressionClause),

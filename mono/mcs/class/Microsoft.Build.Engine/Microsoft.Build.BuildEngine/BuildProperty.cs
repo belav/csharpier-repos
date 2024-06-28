@@ -291,6 +291,6 @@ namespace Microsoft.Build.BuildEngine
         Reserved,
         Global,
         Normal,
-        Environment
+        Environment,
     }
 }

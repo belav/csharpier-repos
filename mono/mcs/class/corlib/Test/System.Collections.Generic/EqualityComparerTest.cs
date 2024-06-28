@@ -40,7 +40,7 @@ namespace MonoTests.System.Collections.Generic
         enum E
         {
             A,
-            B
+            B,
         }
 
         [Test]

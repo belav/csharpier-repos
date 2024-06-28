@@ -2501,21 +2501,21 @@ WHERE [j].[Id] = 2
         {
             true => "[\"A\"]",
             false => "[]",
-            _ => "null"
+            _ => "null",
         };
 
         string parameterSize = value switch
         {
             true => "1537",
             false => "1534",
-            _ => "1536"
+            _ => "1536",
         };
 
         string updateParameter = value switch
         {
             true => "NULL",
             false => "'[\"Z\"]'",
-            _ => "'[]'"
+            _ => "'[]'",
         };
 
         AssertSql(

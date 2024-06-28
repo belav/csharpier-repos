@@ -37,7 +37,7 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
         var table = new ILEmitTrieJumpTable(
             0,
             -1,
-            new[] { ("hi", 1), },
+            new[] { ("hi", 1) },
             Vectorize,
             Mock.Of<JumpTable>()
         );
@@ -99,7 +99,7 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
         Assert.Equal(entry, path.Substring(start, length), ignoreCase: true);
 
         // Arrange
-        var table = CreateTable(0, -1, new[] { (entry, 1), });
+        var table = CreateTable(0, -1, new[] { (entry, 1) });
 
         var segment = new PathSegment(start, length);
 
@@ -161,7 +161,7 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
         Assert.Equal(entry, path.Substring(start, length), ignoreCase: true);
 
         // Arrange
-        var table = CreateTable(0, -1, new[] { (entry, 1), });
+        var table = CreateTable(0, -1, new[] { (entry, 1) });
 
         var segment = new PathSegment(start, length);
 
@@ -226,7 +226,7 @@ public abstract class ILEmitTreeJumpTableTestBase : MultipleEntryJumpTableTest
         Assert.NotEqual(entry, path.Substring(start, length));
 
         // Arrange
-        var table = CreateTable(0, -1, new[] { (entry, 1), });
+        var table = CreateTable(0, -1, new[] { (entry, 1) });
 
         var segment = new PathSegment(start, length);
 

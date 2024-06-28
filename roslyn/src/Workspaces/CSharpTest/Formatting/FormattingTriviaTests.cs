@@ -1876,7 +1876,7 @@ class Program
 
             var options = new CSharpSyntaxFormattingOptions()
             {
-                LineFormatting = new() { NewLine = "\n" }
+                LineFormatting = new() { NewLine = "\n" },
             };
 
             var formatted = Formatter.Format(
@@ -1935,7 +1935,7 @@ class F
 
             var options = new CSharpSyntaxFormattingOptions()
             {
-                LineFormatting = new() { UseTabs = true, NewLine = newLine }
+                LineFormatting = new() { UseTabs = true, NewLine = newLine },
             };
 
             var formatted = Formatter.Format(

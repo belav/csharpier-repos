@@ -35,6 +35,6 @@ namespace Mono.Cecil.Cil
         Nternal,
         Objmodel,
         Prefix,
-        Primitive
+        Primitive,
     }
 }

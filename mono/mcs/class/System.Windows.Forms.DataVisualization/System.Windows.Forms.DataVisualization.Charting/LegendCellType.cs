@@ -31,6 +31,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         Text = 0,
         SeriesSymbol = 1,
-        Image = 2
+        Image = 2,
     }
 }

@@ -2744,7 +2744,7 @@ public static class EntityFrameworkQueryableExtensions
                         arguments: new[]
                         {
                             source.Expression,
-                            Expression.Quote(navigationPropertyPath)
+                            Expression.Quote(navigationPropertyPath),
                         }
                     )
                 )
@@ -2770,7 +2770,7 @@ public static class EntityFrameworkQueryableExtensions
                         arguments: new[]
                         {
                             source.Expression,
-                            Expression.Quote(navigationPropertyPath)
+                            Expression.Quote(navigationPropertyPath),
                         }
                     )
                 )
@@ -2835,7 +2835,7 @@ public static class EntityFrameworkQueryableExtensions
                         arguments: new[]
                         {
                             source.Expression,
-                            Expression.Quote(navigationPropertyPath)
+                            Expression.Quote(navigationPropertyPath),
                         }
                     )
                 )
@@ -2879,7 +2879,7 @@ public static class EntityFrameworkQueryableExtensions
                         arguments: new[]
                         {
                             source.Expression,
-                            Expression.Quote(navigationPropertyPath)
+                            Expression.Quote(navigationPropertyPath),
                         }
                     )
                 )
@@ -3190,7 +3190,7 @@ public static class EntityFrameworkQueryableExtensions
             QueryTrackingBehavior.NoTracking => source.AsNoTracking(),
             QueryTrackingBehavior.NoTrackingWithIdentityResolution =>
                 source.AsNoTrackingWithIdentityResolution(),
-            _ => throw new ArgumentOutOfRangeException(nameof(track))
+            _ => throw new ArgumentOutOfRangeException(nameof(track)),
         };
 
     #endregion
@@ -3203,7 +3203,7 @@ public static class EntityFrameworkQueryableExtensions
             new[]
             {
                 typeof(IQueryable<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
-                typeof(string)
+                typeof(string),
             }
         )!;
 
@@ -3214,7 +3214,7 @@ public static class EntityFrameworkQueryableExtensions
             {
                 typeof(IQueryable<>).MakeGenericType(Type.MakeGenericMethodParameter(0)),
                 typeof(string),
-                typeof(int)
+                typeof(int),
             }
         )!;
 

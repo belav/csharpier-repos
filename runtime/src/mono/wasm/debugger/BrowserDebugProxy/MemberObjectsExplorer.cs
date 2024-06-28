@@ -105,7 +105,7 @@ namespace BrowserDebugProxy
                             buffer = data,
                             valtype = fieldValueType,
                             length = length,
-                            id = MonoSDBHelper.GetNewId()
+                            id = MonoSDBHelper.GetNewId(),
                         }
                     )
                 );
@@ -624,7 +624,7 @@ namespace BrowserDebugProxy
                 backingField[InternalUseFieldName.Section.Name] = getterMemberAccessAttrs switch
                 {
                     MethodAttributes.Private => "private",
-                    _ => "result"
+                    _ => "result",
                 };
                 backingField[InternalUseFieldName.State.Name] = state?.ToString();
 
@@ -701,7 +701,7 @@ namespace BrowserDebugProxy
                 propRet[InternalUseFieldName.Section.Name] = getterAttrs switch
                 {
                     MethodAttributes.Private => "private",
-                    _ => "result"
+                    _ => "result",
                 };
                 propRet[InternalUseFieldName.State.Name] = state?.ToString();
                 if (parentTypeId != -1)
@@ -743,7 +743,7 @@ namespace BrowserDebugProxy
                         isStatic = isStatic,
                         containerId = isStatic ? typeId : objectId.Value,
                         isValueType = isValueType,
-                        methodId = methodId
+                        methodId = methodId,
                     }
                 );
 
@@ -755,9 +755,9 @@ namespace BrowserDebugProxy
                             type = "function",
                             objectId = $"dotnet:method:{methodIdArgs.ToString(Newtonsoft.Json.Formatting.None)}",
                             className = "Function",
-                            description = "get " + propertyName + " ()"
+                            description = "get " + propertyName + " ()",
                         },
-                        name = propertyName
+                        name = propertyName,
                     }
                 );
             }
@@ -782,9 +782,9 @@ namespace BrowserDebugProxy
                         {
                             type = "symbol",
                             value = description,
-                            description
+                            description,
                         },
-                        name = "Target"
+                        name = "Target",
                     }
                 );
 

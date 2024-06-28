@@ -2147,18 +2147,18 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -2167,19 +2167,19 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
     private static Cherry CreateCherry(int id = 0) =>
@@ -2193,18 +2193,18 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new FieldMilk
             {
@@ -2213,19 +2213,19 @@ public class EntityEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
     private class Cherry

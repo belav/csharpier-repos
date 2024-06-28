@@ -23,7 +23,7 @@ public class ManyToManyTrackingProxySqlServerTest
             { "EntityTableSharing1.TableSharing2Shared", DeleteBehavior.ClientCascade },
             { "UnidirectionalEntityBranch.UnidirectionalEntityRoot", DeleteBehavior.ClientCascade },
             { "UnidirectionalEntityOne.SelfSkipPayloadLeft", DeleteBehavior.ClientCascade },
-            { "UnidirectionalEntityTwo.SelfSkipSharedRight", DeleteBehavior.ClientCascade }
+            { "UnidirectionalEntityTwo.SelfSkipSharedRight", DeleteBehavior.ClientCascade },
         };
 
     public override Task Can_insert_many_to_many_shared_with_payload(bool async)

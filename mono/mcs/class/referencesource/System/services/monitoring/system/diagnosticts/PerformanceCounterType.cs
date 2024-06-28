@@ -47,6 +47,6 @@ namespace System.Diagnostics
         CounterMultiBase = NativeMethods.PERF_COUNTER_MULTI_BASE,
 
         CounterDelta32 = NativeMethods.PERF_COUNTER_DELTA,
-        CounterDelta64 = NativeMethods.PERF_COUNTER_LARGE_DELTA
+        CounterDelta64 = NativeMethods.PERF_COUNTER_LARGE_DELTA,
     }
 }

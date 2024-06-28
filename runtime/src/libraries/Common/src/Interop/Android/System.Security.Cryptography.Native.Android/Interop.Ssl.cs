@@ -175,7 +175,7 @@ internal static partial class Interop
                     protocolData[i] = new ApplicationProtocolData
                     {
                         Data = (byte*)memHandles[i].Pointer,
-                        Length = protocol.Length
+                        Length = protocol.Length,
                     };
                 }
                 int ret = SSLStreamSetApplicationProtocols(sslHandle, protocolData, count);

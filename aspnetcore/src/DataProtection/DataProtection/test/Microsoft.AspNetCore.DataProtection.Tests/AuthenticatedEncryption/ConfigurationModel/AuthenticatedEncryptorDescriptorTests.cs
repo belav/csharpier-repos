@@ -313,7 +313,7 @@ public class AuthenticatedEncryptorDescriptorTests
             new AuthenticatedEncryptorConfiguration()
             {
                 EncryptionAlgorithm = encryptionAlgorithm,
-                ValidationAlgorithm = validationAlgorithm
+                ValidationAlgorithm = validationAlgorithm,
             },
             masterKey
         );

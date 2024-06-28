@@ -18,7 +18,7 @@ namespace System.ComponentModel.Tests
                 ConvertTo_WithContext(
                     new object[1, 3]
                     {
-                        { "any string", "(Text)", null }
+                        { "any string", "(Text)", null },
                     },
                     new MultilineStringConverter()
                 );

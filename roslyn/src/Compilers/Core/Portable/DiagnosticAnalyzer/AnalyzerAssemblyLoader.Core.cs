@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis
         /// to anti virus scans. It can have a load time of 300-500ms while loading from disk
         /// is generally 1-2ms. Use this with caution on Windows.
         /// </remarks>
-        LoadFromStream
+        LoadFromStream,
     }
 
     internal partial class AnalyzerAssemblyLoader

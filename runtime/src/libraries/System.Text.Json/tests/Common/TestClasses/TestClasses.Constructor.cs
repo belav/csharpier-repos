@@ -2894,7 +2894,10 @@ namespace System.Text.Json.Serialization.Tests
         {
             CurrentEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 3).ToList(),
             FutureEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 9).ToList(),
-            PastEvents = Enumerable.Repeat(MyEventsListerItem.Instance, 60).ToList() // usually  there is a lot of historical data
+            PastEvents = Enumerable
+                .Repeat(MyEventsListerItem.Instance, 60)
+                .ToList() // usually  there is a lot of historical data
+            ,
         };
     }
 
@@ -2928,11 +2931,11 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         StartDate = DateTimeTestHelpers.FixedDateTimeValue,
                         EndDate = DateTimeTestHelpers.FixedDateTimeValue.AddDays(1),
-                        Name = "A very nice task to have"
+                        Name = "A very nice task to have",
                     },
                     4
                 )
-                .ToList()
+                .ToList(),
         };
     }
 

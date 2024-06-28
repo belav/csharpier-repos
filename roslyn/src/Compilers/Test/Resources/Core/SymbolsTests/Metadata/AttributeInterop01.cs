@@ -44,7 +44,7 @@ namespace Interop
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     [Serializable, ComVisible(false)]

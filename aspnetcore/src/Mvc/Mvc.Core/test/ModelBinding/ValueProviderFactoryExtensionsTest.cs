@@ -13,7 +13,7 @@ public class ValueProviderFactoryExtensionsTest
         {
             new FooValueProviderFactory(),
             new BarValueProviderFactory(),
-            new FooValueProviderFactory()
+            new FooValueProviderFactory(),
         };
 
         // Act
@@ -32,7 +32,7 @@ public class ValueProviderFactoryExtensionsTest
         {
             new FooValueProviderFactory(),
             new BarValueProviderFactory(),
-            new FooValueProviderFactory()
+            new FooValueProviderFactory(),
         };
 
         // Act

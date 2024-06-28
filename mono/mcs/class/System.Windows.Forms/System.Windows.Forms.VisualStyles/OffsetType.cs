@@ -43,6 +43,6 @@ namespace System.Windows.Forms.VisualStyles
         LeftOfLastButton = 10,
         RightOfLastButton = 11,
         AboveLastButton = 12,
-        BelowLastButton = 13
+        BelowLastButton = 13,
     }
 }

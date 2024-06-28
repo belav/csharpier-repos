@@ -105,7 +105,7 @@ namespace RenderingPlayground
                                 .GetProcesses()
                                 .Where(x => !string.IsNullOrEmpty(x.MainWindowTitle))
                                 .OrderBy(p => p.ProcessName)
-                                .ToList()
+                                .ToList(),
                         };
                         table.AddColumn(process => $"{process.ProcessName} ", "Name");
                         table.AddColumn(
@@ -120,7 +120,7 @@ namespace RenderingPlayground
 
                         var screen = new ScreenView(renderer: consoleRenderer, console)
                         {
-                            Child = table
+                            Child = table,
                         };
                         screen.Render();
                     }
@@ -194,7 +194,7 @@ namespace RenderingPlayground
 
                         var screen = new ScreenView(renderer: consoleRenderer, console)
                         {
-                            Child = gridView
+                            Child = gridView,
                         };
                         screen.Render(region);
 

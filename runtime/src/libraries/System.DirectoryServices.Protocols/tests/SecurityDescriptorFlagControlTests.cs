@@ -36,14 +36,14 @@ namespace System.DirectoryServices.Protocols.Tests
                 SecurityMasks.Group,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 3, 2, 1, 2 }
-                    : new byte[] { 48, 3, 2, 1, 2 }
+                    : new byte[] { 48, 3, 2, 1, 2 },
             };
             yield return new object[]
             {
                 SecurityMasks.None - 1,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 6, 2, 4, 255, 255, 255, 255 }
-                    : new byte[] { 48, 3, 2, 1, 255 }
+                    : new byte[] { 48, 3, 2, 1, 255 },
             };
         }
 

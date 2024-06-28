@@ -23,6 +23,6 @@ namespace System.ServiceModel.Configuration
         UserNameForCertificate,
         UserNameForSslNegotiated,
         UserNameOverTransport,
-        SspiNegotiatedOverTransport
+        SspiNegotiatedOverTransport,
     }
 }

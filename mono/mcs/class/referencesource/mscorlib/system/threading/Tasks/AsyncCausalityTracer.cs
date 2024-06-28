@@ -138,7 +138,7 @@ namespace System.Threading.Tasks
         private enum Loggers : byte
         {
             CausalityTracer = 1,
-            ETW = 2
+            ETW = 2,
         }
 
         //We receive the actual value for these as a callback

@@ -172,7 +172,7 @@ namespace System.Net.Http
                 MaxBytesPerRead = Int32.MaxValue,
                 MaxDepth = DefaultMaxDepth,
                 MaxNameTableCharCount = Int32.MaxValue,
-                MaxStringContentLength = Int32.MaxValue
+                MaxStringContentLength = Int32.MaxValue,
             };
         }
 

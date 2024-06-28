@@ -30,7 +30,7 @@ public class RemoveExternalLogin : DefaultUIPage
             new Dictionary<string, string>
             {
                 ["login_LoginProvider"] = loginProvider,
-                ["login_ProviderKey"] = providerKey
+                ["login_ProviderKey"] = providerKey,
             }
         );
 

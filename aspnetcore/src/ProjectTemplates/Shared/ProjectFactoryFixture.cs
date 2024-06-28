@@ -50,7 +50,7 @@ public class ProjectFactoryFixture : IDisposable
             DiagnosticsMessageSink = DiagnosticsMessageSink,
             // Ensure first character is a letter to avoid random insertions of '_' into template namespace
             // declarations (i.e. make it more stable for testing)
-            ProjectGuid = GetRandomLetter() + Path.GetRandomFileName().Replace(".", string.Empty)
+            ProjectGuid = GetRandomLetter() + Path.GetRandomFileName().Replace(".", string.Empty),
         };
         project.ProjectName = $"AspNet.{project.ProjectGuid}";
 

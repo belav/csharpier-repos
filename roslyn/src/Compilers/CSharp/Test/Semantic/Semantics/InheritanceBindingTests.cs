@@ -583,39 +583,39 @@ abstract class Goo : AbstractGoo
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 11,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 11,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 12,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 12,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 13,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 13,
-                        Column = 25
+                        Column = 25,
                     },
                 }
             );
@@ -649,39 +649,39 @@ abstract class Goo : AbstractGoo
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 11,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 11,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 12,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 12,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 13,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 13,
-                        Column = 25
+                        Column = 25,
                     },
                 }
             );
@@ -715,39 +715,39 @@ abstract class Goo : AbstractGoo
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 11,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 11,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 12,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 12,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 13,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 13,
-                        Column = 25
+                        Column = 25,
                     },
                 }
             );
@@ -833,25 +833,25 @@ class Derived : Base, Interface
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 15,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 16,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 17,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 18,
-                        Column = 26
+                        Column = 26,
                     },
                 }
             );
@@ -901,49 +901,49 @@ class Derived : Base, Interface
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 21,
-                        Column = 25
+                        Column = 25,
                     }, //0
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 22,
-                        Column = 28
+                        Column = 28,
                     }, //1
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 23,
-                        Column = 25
+                        Column = 25,
                     }, //2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoSetToOverride,
                         Line = 24,
-                        Column = 37
+                        Column = 37,
                     }, //3.set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoSetToOverride,
                         Line = 25,
-                        Column = 42
+                        Column = 42,
                     }, //4.set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoGetToOverride,
                         Line = 26,
-                        Column = 37
+                        Column = 37,
                     }, //5.get
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoGetToOverride,
                         Line = 27,
-                        Column = 37
+                        Column = 37,
                     }, //6.get
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 30,
-                        Column = 25
+                        Column = 25,
                     }, //9
                 }
             );
@@ -1747,7 +1747,7 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideSealed,
                         Line = 12,
-                        Column = 28
+                        Column = 28,
                     },
                 }
             );
@@ -1782,7 +1782,7 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideSealed,
                         Line = 14,
-                        Column = 25
+                        Column = 25,
                     }, //Derived.Property
                 }
             );
@@ -1817,7 +1817,7 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideSealed,
                         Line = 14,
-                        Column = 25
+                        Column = 25,
                     }, //Derived indexer
                 }
             );
@@ -1881,7 +1881,7 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideSealed,
                         Line = 14,
-                        Column = 25
+                        Column = 25,
                     }, //Derived.Property
                 }
             );
@@ -1916,7 +1916,7 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideSealed,
                         Line = 14,
-                        Column = 25
+                        Column = 25,
                     }, //Derived indexer
                 }
             );
@@ -2220,13 +2220,13 @@ class Derived2 : Derived
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 15,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 16,
-                        Column = 26
+                        Column = 26,
                     },
                 }
             );
@@ -2263,13 +2263,13 @@ class Derived2 : Derived
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 15,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 16,
-                        Column = 26
+                        Column = 26,
                     },
                 }
             );
@@ -2306,13 +2306,13 @@ class Derived2 : Derived
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 15,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 16,
-                        Column = 26
+                        Column = 26,
                     },
                 }
             );
@@ -2349,13 +2349,13 @@ class Derived2 : Derived
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 15,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 16,
-                        Column = 26
+                        Column = 26,
                     },
                 }
             );
@@ -2392,13 +2392,13 @@ class Derived2 : Derived
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 15,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 16,
-                        Column = 26
+                        Column = 26,
                     },
                 }
             );
@@ -2435,13 +2435,13 @@ class Derived2 : Derived
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 15,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantOverrideNonVirtual,
                         Line = 16,
-                        Column = 41
+                        Column = 41,
                     },
                 }
             );
@@ -2480,19 +2480,19 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeReturnTypeOnOverride,
                         Line = 17,
-                        Column = 28
+                        Column = 28,
                     }, //3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeReturnTypeOnOverride,
                         Line = 18,
-                        Column = 25
+                        Column = 25,
                     }, //4
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeReturnTypeOnOverride,
                         Line = 19,
-                        Column = 26
+                        Column = 26,
                     }, //5
                 }
             );
@@ -2602,146 +2602,146 @@ abstract class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 20,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 21,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 22,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 23,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 24,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 25,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 26,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 27,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 28,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 29,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 30,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 31,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 32,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 34,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 35,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 36,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 37,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 38,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 39,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 41,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 42,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 43,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 44,
-                        Column = 25
-                    }
+                        Column = 25,
+                    },
                 }
             );
         }
@@ -2777,13 +2777,13 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 16,
-                        Column = 28
+                        Column = 28,
                     }, //3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 17,
-                        Column = 25
+                        Column = 25,
                     }, //4
                 }
             );
@@ -2858,13 +2858,13 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 16,
-                        Column = 28
+                        Column = 28,
                     }, //3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 17,
-                        Column = 25
+                        Column = 25,
                     }, //4
                 }
             );
@@ -3259,13 +3259,13 @@ class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 16,
-                        Column = 49
+                        Column = 49,
                     }, //3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 17,
-                        Column = 46
+                        Column = 46,
                     }, //4
                 }
             );
@@ -3296,13 +3296,13 @@ class Derived : Base<string>
                     {
                         Code = (int)ErrorCode.ERR_CantChangeReturnTypeOnOverride,
                         Line = 10,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeReturnTypeOnOverride,
                         Line = 11,
-                        Column = 28
+                        Column = 28,
                     },
                 }
             );
@@ -3478,7 +3478,7 @@ class Derived : Base<string>
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 11,
-                        Column = 28
+                        Column = 28,
                     }, //2
                 }
             );
@@ -3563,7 +3563,7 @@ class Derived : Base<string>
                     {
                         Code = (int)ErrorCode.ERR_CantChangeTypeOnOverride,
                         Line = 11,
-                        Column = 49
+                        Column = 49,
                     }, //2
                 }
             );
@@ -4067,13 +4067,13 @@ class Concrete : Abstract2
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //Method2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //Method4
                 }
             );
@@ -4113,25 +4113,25 @@ class Concrete : Abstract2
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //2.get
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //2.set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //4.get
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //4.set
                 }
             );
@@ -4214,25 +4214,25 @@ class Concrete : Abstract2
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //2.add
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //2.remove
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //4.add
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedAbstractMethod,
                         Line = 17,
-                        Column = 7
+                        Column = 7,
                     }, //4.remove
                 }
             );
@@ -4590,7 +4590,7 @@ class Class : Interface
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedInterfaceMember,
                         Line = 7,
-                        Column = 15
+                        Column = 15,
                     }, //1
                 }
             );
@@ -5359,37 +5359,37 @@ class Base : Interface
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                 }
             );
@@ -5428,37 +5428,37 @@ class Base : Interface
                     {
                         Code = (int)ErrorCode.ERR_BadMemberFlag,
                         Line = 14,
-                        Column = 24
+                        Column = 24,
                     }, //indexer can't be static
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                 }
             );
@@ -5497,37 +5497,37 @@ class Base : Interface
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                 }
             );
@@ -5592,130 +5592,130 @@ class Derived : Base3, Interface { }
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 13,
-                        Column = 22
+                        Column = 22,
                     },
                     //Derived2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 28,
-                        Column = 24
+                        Column = 24,
                     },
                     //Derived3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 45,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 45,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 45,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 45,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 45,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 45,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 45,
-                        Column = 24
-                    }
+                        Column = 24,
+                    },
                 }
             );
         }
@@ -5776,111 +5776,111 @@ class Derived3 : Base2, Interface
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     //Derived2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     //Derived3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                 }
             );
@@ -5942,106 +5942,106 @@ class Derived3 : Base2, Interface
                     {
                         Code = (int)ErrorCode.ERR_BadMemberFlag,
                         Line = 14,
-                        Column = 24
+                        Column = 24,
                     }, //indexer can't be static
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     //Derived2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     //Derived3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     //Base2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_BadMemberFlag,
                         Line = 32,
-                        Column = 24
+                        Column = 24,
                     }, //indexer can't be static
                 }
             );
@@ -6103,111 +6103,111 @@ class Derived3 : Base2, Interface
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 12,
-                        Column = 14
+                        Column = 14,
                     },
                     //Derived2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 26,
-                        Column = 24
+                        Column = 24,
                     },
                     //Derived3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberStatic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CloseUnimplementedInterfaceMemberNotPublic,
                         Line = 40,
-                        Column = 25
+                        Column = 25,
                     },
                 }
             );
@@ -6529,105 +6529,105 @@ abstract class Derived2 : Derived
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 28,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 28,
                         Column = 17,
-                        IsWarning = false
+                        IsWarning = false,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 29,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 29,
                         Column = 26,
-                        IsWarning = false
+                        IsWarning = false,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 30,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 30,
                         Column = 25,
-                        IsWarning = false
+                        IsWarning = false,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 33,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 34,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 35,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 46,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 47,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 48,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 51,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 52,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 53,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                 }
             );
@@ -6701,105 +6701,105 @@ abstract class Derived2 : Derived
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 28,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //1
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 28,
                         Column = 17,
-                        IsWarning = false
+                        IsWarning = false,
                     }, //1.get/set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 29,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 29,
                         Column = 26,
-                        IsWarning = false
+                        IsWarning = false,
                     }, //2.get/set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 30,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 30,
                         Column = 25,
-                        IsWarning = false
+                        IsWarning = false,
                     }, //3.get/set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 33,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //4
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 34,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //5
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 35,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //6
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 46,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //7
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 47,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //8
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 48,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //9
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 51,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //10
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 52,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //11
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 53,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //12
                 }
             );
@@ -6873,105 +6873,105 @@ abstract class Derived2 : Derived
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 28,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //1
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 28,
                         Column = 17,
-                        IsWarning = false
+                        IsWarning = false,
                     }, //1.get/set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 29,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 29,
                         Column = 26,
-                        IsWarning = false
+                        IsWarning = false,
                     }, //2.get/set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 30,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //3
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_HidingAbstractMethod,
                         Line = 30,
                         Column = 25,
-                        IsWarning = false
+                        IsWarning = false,
                     }, //3.get/set
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 33,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //4
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 34,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //5
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 35,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //6
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 46,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //7
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 47,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //8
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 48,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //9
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 51,
                         Column = 17,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //10
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 52,
                         Column = 26,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //11
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewOrOverrideExpected,
                         Line = 53,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     }, //12
                 }
             );
@@ -7127,7 +7127,7 @@ public class Class : Interface<int>
                         Code = (int)ErrorCode.WRN_ExplicitImplCollision,
                         Line = 10,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                 }
             );
@@ -7228,7 +7228,7 @@ public class Class : Interface<int>
                         Code = (int)ErrorCode.WRN_ExplicitImplCollision,
                         Line = 10,
                         Column = 25,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                 }
             );
@@ -7662,7 +7662,7 @@ public class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 4,
-                        Column = 28
+                        Column = 28,
                     }, //can't see internal method in other compilation
                 }
             );
@@ -7696,7 +7696,7 @@ public class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 4,
-                        Column = 28
+                        Column = 28,
                     }, //can't see internal method in other compilation
                 }
             );
@@ -7730,7 +7730,7 @@ public class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 4,
-                        Column = 28
+                        Column = 28,
                     }, //can't see internal method in other compilation
                 }
             );
@@ -7764,7 +7764,7 @@ public class Derived : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 4,
-                        Column = 43
+                        Column = 43,
                     }, //can't see internal method in other compilation
                 }
             );
@@ -7984,73 +7984,73 @@ public class Derived1 : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 24,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 25,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 26,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 28,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 29,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 30,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 32,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 33,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 35,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 37,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 38,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 39,
-                        Column = 38
+                        Column = 38,
                     },
                 }
             );
@@ -8110,73 +8110,73 @@ public class Derived1 : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 24,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 25,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 26,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 28,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 29,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 30,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 32,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 33,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 35,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 37,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 38,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 39,
-                        Column = 38
+                        Column = 38,
                     },
                 }
             );
@@ -8236,73 +8236,73 @@ public class Derived1 : Base
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 24,
-                        Column = 44
+                        Column = 44,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 25,
-                        Column = 53
+                        Column = 53,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 26,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 28,
-                        Column = 43
+                        Column = 43,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 29,
-                        Column = 53
+                        Column = 53,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 30,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 32,
-                        Column = 43
+                        Column = 43,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 33,
-                        Column = 44
+                        Column = 44,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 35,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 37,
-                        Column = 43
+                        Column = 43,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 38,
-                        Column = 44
+                        Column = 44,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 39,
-                        Column = 53
+                        Column = 53,
                     },
                 }
             );
@@ -8414,73 +8414,73 @@ public class Derived2 : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 5,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 6,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 7,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 9,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 10,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 11,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 14,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 16,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 17,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 19,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 20,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 21,
-                        Column = 38
+                        Column = 38,
                     },
                 }
             );
@@ -8546,73 +8546,73 @@ public class Derived2 : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 5,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 6,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 7,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 9,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 10,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 11,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 14,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 16,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 17,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 19,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 20,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 21,
-                        Column = 38
+                        Column = 38,
                     },
                 }
             );
@@ -8678,73 +8678,73 @@ public class Derived2 : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 5,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 6,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 7,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 9,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 10,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 11,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 14,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 16,
-                        Column = 38
+                        Column = 38,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 17,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 19,
-                        Column = 28
+                        Column = 28,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 20,
-                        Column = 29
+                        Column = 29,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 21,
-                        Column = 38
+                        Column = 38,
                     },
                 }
             );
@@ -8810,73 +8810,73 @@ public class Derived2 : Base
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 5,
-                        Column = 44
+                        Column = 44,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 6,
-                        Column = 53
+                        Column = 53,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_OverrideNotExpected,
                         Line = 7,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 9,
-                        Column = 43
+                        Column = 43,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 10,
-                        Column = 53
+                        Column = 53,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 11,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 14,
-                        Column = 43
+                        Column = 43,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 16,
-                        Column = 53
+                        Column = 53,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 17,
-                        Column = 41
+                        Column = 41,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 19,
-                        Column = 43
+                        Column = 43,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 20,
-                        Column = 44
+                        Column = 44,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_CantChangeAccessOnOverride,
                         Line = 21,
-                        Column = 53
+                        Column = 53,
                     },
                 }
             );
@@ -8926,73 +8926,73 @@ class Class : Interface
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyMissingAccessor,
                         Line = 19,
-                        Column = 19
+                        Column = 19,
                     }, //1
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyMissingAccessor,
                         Line = 20,
-                        Column = 19
+                        Column = 19,
                     }, //2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyMissingAccessor,
                         Line = 24,
-                        Column = 19
+                        Column = 19,
                     }, //4
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyAddingAccessor,
                         Line = 24,
-                        Column = 31
+                        Column = 31,
                     }, //4
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyAddingAccessor,
                         Line = 25,
-                        Column = 49
+                        Column = 49,
                     }, //5
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyMissingAccessor,
                         Line = 27,
-                        Column = 19
+                        Column = 19,
                     }, //7
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyAddingAccessor,
                         Line = 27,
-                        Column = 31
+                        Column = 31,
                     }, //7
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ExplicitPropertyAddingAccessor,
                         Line = 29,
-                        Column = 31
+                        Column = 31,
                     }, //9
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedInterfaceMember,
                         Line = 17,
-                        Column = 15
+                        Column = 15,
                     }, //1
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedInterfaceMember,
                         Line = 17,
-                        Column = 15
+                        Column = 15,
                     }, //2
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedInterfaceMember,
                         Line = 17,
-                        Column = 15
+                        Column = 15,
                     }, //4
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UnimplementedInterfaceMember,
                         Line = 17,
-                        Column = 15
+                        Column = 15,
                     }, //7
                 }
             );

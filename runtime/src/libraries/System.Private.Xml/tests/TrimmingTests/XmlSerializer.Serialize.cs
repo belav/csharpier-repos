@@ -23,7 +23,7 @@ namespace System.Xml.Serialization.TrimmingTests
                 {
                     DataDate = new DateTime(2009, 4, 13),
                     DataType = "Data",
-                    LastUpdatedDate = new DateTime(2010, 12, 12)
+                    LastUpdatedDate = new DateTime(2010, 12, 12),
                 }
             );
             obj.DataUpdates.DataUpdateInfo.Add(
@@ -31,7 +31,7 @@ namespace System.Xml.Serialization.TrimmingTests
                 {
                     DataDate = new DateTime(2009, 4, 14),
                     DataType = "Data",
-                    LastUpdatedDate = new DateTime(2010, 12, 12)
+                    LastUpdatedDate = new DateTime(2010, 12, 12),
                 }
             );
 

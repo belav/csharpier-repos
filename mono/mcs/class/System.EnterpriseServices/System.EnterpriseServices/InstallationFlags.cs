@@ -43,6 +43,6 @@ namespace System.EnterpriseServices
         Install = 512,
         ReconfigureExistingApplication = 8,
         Register = 256,
-        ReportWarningsToConsole = 32
+        ReportWarningsToConsole = 32,
     }
 }

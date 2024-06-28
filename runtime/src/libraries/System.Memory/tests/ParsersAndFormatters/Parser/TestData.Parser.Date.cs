@@ -40,7 +40,7 @@ namespace System.Buffers.Text.Tests
                                 expectedSuccess: true
                             )
                             {
-                                ExpectedBytesConsumed = testData.ExpectedBytesConsumed
+                                ExpectedBytesConsumed = testData.ExpectedBytesConsumed,
                             };
                         }
                         if (formatSymbol == 'G')
@@ -52,7 +52,7 @@ namespace System.Buffers.Text.Tests
                                 expectedSuccess: true
                             )
                             {
-                                ExpectedBytesConsumed = testData.ExpectedBytesConsumed
+                                ExpectedBytesConsumed = testData.ExpectedBytesConsumed,
                             };
                         }
                     }

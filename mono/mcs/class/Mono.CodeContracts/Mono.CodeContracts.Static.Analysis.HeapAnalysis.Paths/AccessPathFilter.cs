@@ -100,7 +100,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
         private enum Flags
         {
             AllowLocals = 1,
-            RequireParameter = 2
+            RequireParameter = 2,
         }
         #endregion
 
@@ -110,7 +110,7 @@ namespace Mono.CodeContracts.Static.Analysis.HeapAnalysis.Paths
             NoFilter = 0,
             FromPrecondition,
             FromPostcondition,
-            FromMethodBody
+            FromMethodBody,
         }
         #endregion
     }

@@ -470,21 +470,28 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
     ) =>
         annotation.Name switch
         {
-            SqlServerAnnotationNames.Clustered =>
-                (bool)annotation.Value! == false
-                    ? new MethodCallCodeFragment(IndexIsClusteredMethodInfo, false)
-                    : new MethodCallCodeFragment(IndexIsClusteredMethodInfo),
+            SqlServerAnnotationNames.Clustered => (bool)annotation.Value! == false
+                ? new MethodCallCodeFragment(IndexIsClusteredMethodInfo, false)
+                : new MethodCallCodeFragment(IndexIsClusteredMethodInfo),
 
-            SqlServerAnnotationNames.Include =>
-                new MethodCallCodeFragment(IndexIncludePropertiesMethodInfo, annotation.Value),
-            SqlServerAnnotationNames.FillFactor =>
-                new MethodCallCodeFragment(IndexHasFillFactorMethodInfo, annotation.Value),
-            SqlServerAnnotationNames.SortInTempDb =>
-                new MethodCallCodeFragment(IndexSortInTempDbMethodInfo, annotation.Value),
-            SqlServerAnnotationNames.DataCompression =>
-                new MethodCallCodeFragment(IndexUseDataCompressionMethodInfo, annotation.Value),
+            SqlServerAnnotationNames.Include => new MethodCallCodeFragment(
+                IndexIncludePropertiesMethodInfo,
+                annotation.Value
+            ),
+            SqlServerAnnotationNames.FillFactor => new MethodCallCodeFragment(
+                IndexHasFillFactorMethodInfo,
+                annotation.Value
+            ),
+            SqlServerAnnotationNames.SortInTempDb => new MethodCallCodeFragment(
+                IndexSortInTempDbMethodInfo,
+                annotation.Value
+            ),
+            SqlServerAnnotationNames.DataCompression => new MethodCallCodeFragment(
+                IndexUseDataCompressionMethodInfo,
+                annotation.Value
+            ),
 
-            _ => null
+            _ => null,
         };
 
     private static MethodCallCodeFragment? GenerateValueGenerationStrategy(
@@ -529,11 +536,10 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
                     seedAnnotation = model.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
                 }
 
-                var seed = seedAnnotation is null
-                    ? 1L
-                    : seedAnnotation.Value is int intValue
-                        ? intValue
-                        : (long?)seedAnnotation.Value ?? 1L;
+                var seed =
+                    seedAnnotation is null ? 1L
+                    : seedAnnotation.Value is int intValue ? intValue
+                    : (long?)seedAnnotation.Value ?? 1L;
 
                 var increment =
                     GetAndRemove<int?>(annotations, SqlServerAnnotationNames.IdentityIncrement)
@@ -548,7 +554,7 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
                     {
                         (1L, 1) => Array.Empty<object>(),
                         (_, 1) => new object[] { seed },
-                        _ => new object[] { seed, increment }
+                        _ => new object[] { seed, increment },
                     }
                 );
 
@@ -568,7 +574,7 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
                     {
                         (null, null) => Array.Empty<object>(),
                         (_, null) => new object[] { name },
-                        _ => new object[] { name!, schema }
+                        _ => new object[] { name!, schema },
                     }
                 );
             }
@@ -592,7 +598,7 @@ public class SqlServerAnnotationCodeGenerator : AnnotationCodeGenerator
                     {
                         (null, null) => Array.Empty<object>(),
                         (_, null) => new object[] { nameOrSuffix },
-                        _ => new object[] { nameOrSuffix!, schema }
+                        _ => new object[] { nameOrSuffix!, schema },
                     }
                 );
             }

@@ -72,7 +72,7 @@ namespace Newtonsoft.Json.Tests.Converters
             NullableDateTimeTestClass t = new NullableDateTimeTestClass()
             {
                 DateTimeField = null,
-                DateTimeOffsetField = null
+                DateTimeOffsetField = null,
             };
 
             JavaScriptDateTimeConverter converter = new JavaScriptDateTimeConverter();
@@ -88,7 +88,16 @@ namespace Newtonsoft.Json.Tests.Converters
             t = new NullableDateTimeTestClass()
             {
                 DateTimeField = new DateTime(2000, 12, 15, 22, 11, 3, 55, DateTimeKind.Utc),
-                DateTimeOffsetField = new DateTimeOffset(2000, 12, 15, 22, 11, 3, 55, TimeSpan.Zero)
+                DateTimeOffsetField = new DateTimeOffset(
+                    2000,
+                    12,
+                    15,
+                    22,
+                    11,
+                    3,
+                    55,
+                    TimeSpan.Zero
+                ),
             };
 
             result = JsonConvert.SerializeObject(t, converter);

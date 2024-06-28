@@ -1217,7 +1217,7 @@ class C
         {
             Equal = 0,
             DifferingNullability = 0b01,
-            NotEqual = 0b10
+            NotEqual = 0b10,
         }
 
         private void AssertEqualityAndHashCode(

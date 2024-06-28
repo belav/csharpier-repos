@@ -538,7 +538,7 @@ public class ChangeDetectorTest
         {
             Id = -1,
             TagId = 777,
-            PrincipalId = 778
+            PrincipalId = 778,
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Added);
@@ -572,7 +572,7 @@ public class ChangeDetectorTest
         {
             Id = -1,
             TagId = 777,
-            PrincipalId = 778
+            PrincipalId = 778,
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Added);
@@ -800,7 +800,7 @@ public class ChangeDetectorTest
         {
             Id = Guid.NewGuid(),
             Category = originalCategory,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -841,13 +841,13 @@ public class ChangeDetectorTest
         {
             Id = 77,
             PrincipalId = 1,
-            TagId = 777
+            TagId = 777,
         };
         var product = new Product
         {
             Id = Guid.NewGuid(),
             Category = originalCategory,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -858,7 +858,7 @@ public class ChangeDetectorTest
             {
                 Id = 99,
                 PrincipalId = 2,
-                TagId = 778
+                TagId = 778,
             };
         product.Category = newCategory;
 
@@ -896,7 +896,7 @@ public class ChangeDetectorTest
         {
             Id = Guid.NewGuid(),
             Category = category,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -926,7 +926,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -974,7 +974,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1011,7 +1011,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1087,7 +1087,7 @@ public class ChangeDetectorTest
         {
             Id = 2,
             Category = category,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1115,7 +1115,7 @@ public class ChangeDetectorTest
         var category = new CategoryWithChanged
         {
             Id = 77,
-            Products = new ObservableCollection<ProductWithChanged> { product1, product2 }
+            Products = new ObservableCollection<ProductWithChanged> { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1158,7 +1158,7 @@ public class ChangeDetectorTest
         {
             Id = Guid.NewGuid(),
             Category = originalCategory,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1186,7 +1186,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             TagId = 77,
-            PrincipalId = 778
+            PrincipalId = 778,
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1239,7 +1239,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1365,7 +1365,7 @@ public class ChangeDetectorTest
         {
             Id = -1,
             TagId = 777,
-            PrincipalId = 778
+            PrincipalId = 778,
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Added);
@@ -1490,7 +1490,7 @@ public class ChangeDetectorTest
         {
             Id = Guid.NewGuid(),
             Category = originalCategory,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1528,13 +1528,13 @@ public class ChangeDetectorTest
         {
             Id = 77,
             PrincipalId = 1,
-            TagId = 777
+            TagId = 777,
         };
         var product = new NotifyingProduct
         {
             Id = Guid.NewGuid(),
             Category = originalCategory,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1545,7 +1545,7 @@ public class ChangeDetectorTest
             {
                 Id = 78,
                 PrincipalId = 2,
-                TagId = 778
+                TagId = 778,
             };
 
         product.Category = newCategory;
@@ -1578,7 +1578,7 @@ public class ChangeDetectorTest
         {
             Id = Guid.NewGuid(),
             Category = category,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1605,7 +1605,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1648,7 +1648,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1684,7 +1684,7 @@ public class ChangeDetectorTest
         {
             Id = Guid.NewGuid(),
             Category = originalCategory,
-            DependentId = 1
+            DependentId = 1,
         };
         var entry = stateManager.GetOrCreateEntry(product);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1692,7 +1692,7 @@ public class ChangeDetectorTest
         var newCategory = new NotifyingCategory
         {
             PrincipalId = 2,
-            Tag = new NotifyingCategoryTag()
+            Tag = new NotifyingCategoryTag(),
         };
         product.Category = newCategory;
 
@@ -1713,7 +1713,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             TagId = 77,
-            PrincipalId = 777
+            PrincipalId = 777,
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);
@@ -1760,7 +1760,7 @@ public class ChangeDetectorTest
         {
             Id = 1,
             PrincipalId = 77,
-            Products = { product1, product2 }
+            Products = { product1, product2 },
         };
         var entry = stateManager.GetOrCreateEntry(category);
         entry.SetEntityState(EntityState.Unchanged);

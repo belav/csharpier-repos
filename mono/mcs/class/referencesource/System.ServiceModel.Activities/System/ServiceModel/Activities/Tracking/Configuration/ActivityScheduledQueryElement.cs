@@ -88,7 +88,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             return new ActivityScheduledQuery
             {
                 ActivityName = this.ActivityName,
-                ChildActivityName = this.ChildActivityName
+                ChildActivityName = this.ChildActivityName,
             };
         }
     }

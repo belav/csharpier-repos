@@ -19,7 +19,7 @@ internal enum NewLineBeforeOpenBracePlacement
     ObjectCollectionArrayInitializers = 1 << 6,
     LambdaExpressionBody = 1 << 7,
     Accessors = 1 << 8,
-    All = (1 << 9) - 1
+    All = (1 << 9) - 1,
 }
 
 internal static partial class Extensions

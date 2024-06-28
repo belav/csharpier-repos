@@ -181,7 +181,7 @@ namespace System.IO.Tests
             const int capacity = 100;
             UmaTestStruct_ContainsReferenceType inStruct = new UmaTestStruct_ContainsReferenceType
             {
-                referenceType = new object()
+                referenceType = new object(),
             };
             using (var buffer = new TestSafeBuffer(capacity))
             using (var uma = new UnmanagedMemoryAccessor(buffer, 0, capacity, FileAccess.ReadWrite))
@@ -220,7 +220,7 @@ namespace System.IO.Tests
             const int capacity = 100;
             UmaTestStruct_Generic<string> inStruct = new UmaTestStruct_Generic<string>()
             {
-                ofT = "Cats!"
+                ofT = "Cats!",
             };
             using (var buffer = new TestSafeBuffer(capacity))
             using (var uma = new UnmanagedMemoryAccessor(buffer, 0, capacity, FileAccess.ReadWrite))
@@ -248,7 +248,7 @@ namespace System.IO.Tests
                 int2 = 2,
                 bool1 = false,
                 char1 = 'p',
-                bool2 = true
+                bool2 = true,
             };
             UmaTestStruct outStruct;
             using (TestSafeBuffer buffer = new TestSafeBuffer(capacity))

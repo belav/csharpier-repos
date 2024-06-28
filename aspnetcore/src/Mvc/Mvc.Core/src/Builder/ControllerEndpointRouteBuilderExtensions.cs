@@ -542,7 +542,7 @@ public static class ControllerEndpointRouteBuilderExtensions
             {
                 { "action", action },
                 { "controller", controller },
-                { "area", area }
+                { "area", area },
             }
         );
     }

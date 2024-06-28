@@ -31,7 +31,7 @@ public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSc
                 {
                     new Claim("Manager", "yes"),
                     new Claim(ClaimTypes.Role, "Administrator"),
-                    new Claim(ClaimTypes.NameIdentifier, "John")
+                    new Claim(ClaimTypes.NameIdentifier, "John"),
                 },
                 Scheme.Name
             )

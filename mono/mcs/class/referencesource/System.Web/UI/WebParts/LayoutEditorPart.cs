@@ -88,7 +88,7 @@ namespace System.Web.UI.WebControls.WebParts
             get { return (_chromeStateErrorMessage != null || _zoneIndexErrorMessage != null); }
         }
 
-        [WebSysDefaultValue(SR.LayoutEditorPart_PartTitle),]
+        [WebSysDefaultValue(SR.LayoutEditorPart_PartTitle)]
         public override string Title
         {
             get
@@ -266,7 +266,7 @@ namespace System.Web.UI.WebControls.WebParts
                 SR.GetString(SR.LayoutEditorPart_ZoneIndex),
             };
 
-            WebControl[] propertyEditors = new WebControl[] { _chromeState, _zone, _zoneIndex, };
+            WebControl[] propertyEditors = new WebControl[] { _chromeState, _zone, _zoneIndex };
 
             string[] errorMessages = new string[]
             {

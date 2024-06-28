@@ -62,7 +62,7 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     "valueMember"
                 ),
-                true
+                true,
             };
             yield return new object[]
             {
@@ -73,7 +73,7 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     "valueMember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -84,7 +84,7 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     "valueMember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -95,7 +95,7 @@ namespace System.ComponentModel.Tests
                     "lookupmember",
                     "valueMember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -106,7 +106,7 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     "valuemember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -117,7 +117,7 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     "valueMember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -128,7 +128,7 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     "valueMember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -139,7 +139,7 @@ namespace System.ComponentModel.Tests
                     null,
                     "valueMember"
                 ),
-                false
+                false,
             };
             yield return new object[]
             {
@@ -150,38 +150,38 @@ namespace System.ComponentModel.Tests
                     "lookupMember",
                     null
                 ),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new LookupBindingPropertiesAttribute(),
                 new LookupBindingPropertiesAttribute(),
-                true
+                true,
             };
             yield return new object[]
             {
                 new LookupBindingPropertiesAttribute(),
                 new LookupBindingPropertiesAttribute("dataSource", null, null, null),
-                false
+                false,
             };
             yield return new object[]
             {
                 new LookupBindingPropertiesAttribute(),
                 new LookupBindingPropertiesAttribute(null, "displayMember", null, null),
-                false
+                false,
             };
             yield return new object[]
             {
                 new LookupBindingPropertiesAttribute(),
                 new LookupBindingPropertiesAttribute(null, null, "valueMember", null),
-                false
+                false,
             };
             yield return new object[]
             {
                 new LookupBindingPropertiesAttribute(),
                 new LookupBindingPropertiesAttribute(null, null, null, "lookupMember"),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

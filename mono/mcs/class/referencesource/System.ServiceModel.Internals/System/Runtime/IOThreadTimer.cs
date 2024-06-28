@@ -163,7 +163,7 @@ namespace System.Runtime
                 this.waitableTimers = new WaitableTimer[]
                 {
                     this.stableTimerGroup.WaitableTimer,
-                    this.volatileTimerGroup.WaitableTimer
+                    this.volatileTimerGroup.WaitableTimer,
                 };
             }
 

@@ -123,7 +123,7 @@ namespace System.Data.SqlClient.SqlGen
                 "tz",
                 "iso_week",
                 "isoww",
-                "isowk"
+                "isowk",
             },
             StringComparer.OrdinalIgnoreCase
         ).MakeReadOnly();
@@ -141,7 +141,7 @@ namespace System.Data.SqlClient.SqlGen
                     "SqlServer.DATALENGTH",
                     "SqlServer.CHARINDEX",
                     "Edm.IndexOf",
-                    "Edm.Length"
+                    "Edm.Length",
                 },
                 StringComparer.Ordinal
             ).MakeReadOnly();
@@ -161,7 +161,7 @@ namespace System.Data.SqlClient.SqlGen
                 "ntext",
                 "varbinary(max)",
                 "image",
-                "xml"
+                "xml",
             },
             StringComparer.Ordinal
         ).MakeReadOnly();

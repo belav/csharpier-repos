@@ -121,7 +121,7 @@ namespace System.Globalization.Tests
                 new[]
                 {
                     GetTimeFormats(ci, TIME_NOSECONDS)[0],
-                    ReescapeWin32String(GetLocaleInfo(ci, LOCALE_SSHORTTIME))
+                    ReescapeWin32String(GetLocaleInfo(ci, LOCALE_SSHORTTIME)),
                 }
             );
             Assert.Contains(
@@ -129,7 +129,7 @@ namespace System.Globalization.Tests
                 new[]
                 {
                     GetCalendarInfo(ci, calId, CAL_SSHORTDATE)[0],
-                    ReescapeWin32String(GetLocaleInfo(ci, LOCALE_SSHORTDATE))
+                    ReescapeWin32String(GetLocaleInfo(ci, LOCALE_SSHORTDATE)),
                 }
             );
 
@@ -138,7 +138,7 @@ namespace System.Globalization.Tests
                 new[]
                 {
                     GetCalendarInfo(ci, calId, CAL_SYEARMONTH)[0],
-                    ReescapeWin32String(GetLocaleInfo(ci, LOCALE_SYEARMONTH))
+                    ReescapeWin32String(GetLocaleInfo(ci, LOCALE_SYEARMONTH)),
                 }
             );
 
@@ -755,7 +755,7 @@ namespace System.Globalization.Tests
                 "ara",
                 "ARA",
                 "ar",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -765,7 +765,7 @@ namespace System.Globalization.Tests
                 "bul",
                 "BGR",
                 "bg",
-                "bg-BG"
+                "bg-BG",
             };
             yield return new object[]
             {
@@ -775,7 +775,7 @@ namespace System.Globalization.Tests
                 "cat",
                 "CAT",
                 "ca",
-                "ca-ES"
+                "ca-ES",
             };
             yield return new object[]
             {
@@ -785,7 +785,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHS",
                 "zh-Hans",
-                "zh-CN"
+                "zh-CN",
             };
             yield return new object[]
             {
@@ -795,7 +795,7 @@ namespace System.Globalization.Tests
                 "ces",
                 "CSY",
                 "cs",
-                "cs-CZ"
+                "cs-CZ",
             };
             yield return new object[]
             {
@@ -805,7 +805,7 @@ namespace System.Globalization.Tests
                 "dan",
                 "DAN",
                 "da",
-                "da-DK"
+                "da-DK",
             };
             yield return new object[]
             {
@@ -815,7 +815,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DEU",
                 "de",
-                "de-DE"
+                "de-DE",
             };
             yield return new object[]
             {
@@ -825,7 +825,7 @@ namespace System.Globalization.Tests
                 "ell",
                 "ELL",
                 "el",
-                "el-GR"
+                "el-GR",
             };
             yield return new object[]
             {
@@ -835,7 +835,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENU",
                 "en",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -845,7 +845,7 @@ namespace System.Globalization.Tests
                 "spa",
                 "ESP",
                 "es",
-                "es-ES"
+                "es-ES",
             };
             yield return new object[]
             {
@@ -855,7 +855,7 @@ namespace System.Globalization.Tests
                 "fin",
                 "FIN",
                 "fi",
-                "fi-FI"
+                "fi-FI",
             };
             yield return new object[]
             {
@@ -865,7 +865,7 @@ namespace System.Globalization.Tests
                 "fra",
                 "FRA",
                 "fr",
-                "fr-FR"
+                "fr-FR",
             };
             yield return new object[]
             {
@@ -875,7 +875,7 @@ namespace System.Globalization.Tests
                 "heb",
                 "HEB",
                 "he",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -885,7 +885,7 @@ namespace System.Globalization.Tests
                 "hun",
                 "HUN",
                 "hu",
-                "hu-HU"
+                "hu-HU",
             };
             yield return new object[]
             {
@@ -895,7 +895,7 @@ namespace System.Globalization.Tests
                 "ita",
                 "ITA",
                 "it",
-                "it-IT"
+                "it-IT",
             };
             yield return new object[]
             {
@@ -905,7 +905,7 @@ namespace System.Globalization.Tests
                 "jpn",
                 "JPN",
                 "ja",
-                "ja-JP"
+                "ja-JP",
             };
             yield return new object[]
             {
@@ -915,7 +915,7 @@ namespace System.Globalization.Tests
                 "kor",
                 "KOR",
                 "ko",
-                "ko-KR"
+                "ko-KR",
             };
             yield return new object[]
             {
@@ -925,7 +925,7 @@ namespace System.Globalization.Tests
                 "nld",
                 "NLD",
                 "nl",
-                "nl-NL"
+                "nl-NL",
             };
             yield return new object[]
             {
@@ -935,7 +935,7 @@ namespace System.Globalization.Tests
                 "pol",
                 "PLK",
                 "pl",
-                "pl-PL"
+                "pl-PL",
             };
             yield return new object[]
             {
@@ -945,7 +945,7 @@ namespace System.Globalization.Tests
                 "por",
                 "PTB",
                 "pt",
-                "pt-BR"
+                "pt-BR",
             };
             yield return new object[]
             {
@@ -955,7 +955,7 @@ namespace System.Globalization.Tests
                 "ron",
                 "ROM",
                 "ro",
-                "ro-RO"
+                "ro-RO",
             };
             yield return new object[]
             {
@@ -965,7 +965,7 @@ namespace System.Globalization.Tests
                 "rus",
                 "RUS",
                 "ru",
-                "ru-RU"
+                "ru-RU",
             };
             yield return new object[]
             {
@@ -975,7 +975,7 @@ namespace System.Globalization.Tests
                 "hrv",
                 "HRV",
                 "hr",
-                "hr-HR"
+                "hr-HR",
             };
             yield return new object[]
             {
@@ -985,7 +985,7 @@ namespace System.Globalization.Tests
                 "slk",
                 "SKY",
                 "sk",
-                "sk-SK"
+                "sk-SK",
             };
             yield return new object[]
             {
@@ -995,7 +995,7 @@ namespace System.Globalization.Tests
                 "swe",
                 "SVE",
                 "sv",
-                "sv-SE"
+                "sv-SE",
             };
             yield return new object[]
             {
@@ -1005,7 +1005,7 @@ namespace System.Globalization.Tests
                 "tha",
                 "THA",
                 "th",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1015,7 +1015,7 @@ namespace System.Globalization.Tests
                 "tur",
                 "TRK",
                 "tr",
-                "tr-TR"
+                "tr-TR",
             };
             yield return new object[]
             {
@@ -1025,7 +1025,7 @@ namespace System.Globalization.Tests
                 "ind",
                 "IND",
                 "id",
-                "id-ID"
+                "id-ID",
             };
             yield return new object[]
             {
@@ -1035,7 +1035,7 @@ namespace System.Globalization.Tests
                 "ukr",
                 "UKR",
                 "uk",
-                "uk-UA"
+                "uk-UA",
             };
             yield return new object[]
             {
@@ -1045,7 +1045,7 @@ namespace System.Globalization.Tests
                 "slv",
                 "SLV",
                 "sl",
-                "sl-SI"
+                "sl-SI",
             };
             yield return new object[]
             {
@@ -1055,7 +1055,7 @@ namespace System.Globalization.Tests
                 "est",
                 "ETI",
                 "et",
-                "et-EE"
+                "et-EE",
             };
             yield return new object[]
             {
@@ -1065,7 +1065,7 @@ namespace System.Globalization.Tests
                 "lav",
                 "LVI",
                 "lv",
-                "lv-LV"
+                "lv-LV",
             };
             yield return new object[]
             {
@@ -1075,7 +1075,7 @@ namespace System.Globalization.Tests
                 "lit",
                 "LTH",
                 "lt",
-                "lt-LT"
+                "lt-LT",
             };
             yield return new object[]
             {
@@ -1085,7 +1085,7 @@ namespace System.Globalization.Tests
                 "fas",
                 "FAR",
                 "fa",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1095,7 +1095,7 @@ namespace System.Globalization.Tests
                 "vie",
                 "VIT",
                 "vi",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1105,7 +1105,7 @@ namespace System.Globalization.Tests
                 "hin",
                 "HIN",
                 "hi",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1115,7 +1115,7 @@ namespace System.Globalization.Tests
                 "msa",
                 "MSL",
                 "ms",
-                "ms-MY"
+                "ms-MY",
             };
             yield return new object[]
             {
@@ -1125,7 +1125,7 @@ namespace System.Globalization.Tests
                 "swa",
                 "SWK",
                 "sw",
-                "sw-KE"
+                "sw-KE",
             };
             yield return new object[]
             {
@@ -1135,7 +1135,7 @@ namespace System.Globalization.Tests
                 "guj",
                 "GUJ",
                 "gu",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1145,7 +1145,7 @@ namespace System.Globalization.Tests
                 "tel",
                 "TEL",
                 "te",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1155,7 +1155,7 @@ namespace System.Globalization.Tests
                 "kan",
                 "KDI",
                 "kn",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1165,7 +1165,7 @@ namespace System.Globalization.Tests
                 "mar",
                 "MAR",
                 "mr",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1175,7 +1175,7 @@ namespace System.Globalization.Tests
                 "amh",
                 "AMH",
                 "am",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1185,7 +1185,7 @@ namespace System.Globalization.Tests
                 "ara",
                 "ARA",
                 "ar-SA",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1195,7 +1195,7 @@ namespace System.Globalization.Tests
                 "bul",
                 "BGR",
                 "bg-BG",
-                "bg-BG"
+                "bg-BG",
             };
             yield return new object[]
             {
@@ -1205,7 +1205,7 @@ namespace System.Globalization.Tests
                 "cat",
                 "CAT",
                 "ca-ES",
-                "ca-ES"
+                "ca-ES",
             };
             yield return new object[]
             {
@@ -1215,7 +1215,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHT",
                 "zh-Hant-TW",
-                "zh-TW"
+                "zh-TW",
             };
             yield return new object[]
             {
@@ -1225,7 +1225,7 @@ namespace System.Globalization.Tests
                 "ces",
                 "CSY",
                 "cs-CZ",
-                "cs-CZ"
+                "cs-CZ",
             };
             yield return new object[]
             {
@@ -1235,7 +1235,7 @@ namespace System.Globalization.Tests
                 "dan",
                 "DAN",
                 "da-DK",
-                "da-DK"
+                "da-DK",
             };
             yield return new object[]
             {
@@ -1245,7 +1245,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DEU",
                 "de-DE",
-                "de-DE"
+                "de-DE",
             };
             yield return new object[]
             {
@@ -1255,7 +1255,7 @@ namespace System.Globalization.Tests
                 "ell",
                 "ELL",
                 "el-GR",
-                "el-GR"
+                "el-GR",
             };
             yield return new object[]
             {
@@ -1265,7 +1265,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENU",
                 "en-US",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1275,7 +1275,7 @@ namespace System.Globalization.Tests
                 "fin",
                 "FIN",
                 "fi-FI",
-                "fi-FI"
+                "fi-FI",
             };
             yield return new object[]
             {
@@ -1285,7 +1285,7 @@ namespace System.Globalization.Tests
                 "fra",
                 "FRA",
                 "fr-FR",
-                "fr-FR"
+                "fr-FR",
             };
             yield return new object[]
             {
@@ -1295,7 +1295,7 @@ namespace System.Globalization.Tests
                 "heb",
                 "HEB",
                 "he-IL",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1305,7 +1305,7 @@ namespace System.Globalization.Tests
                 "hun",
                 "HUN",
                 "hu-HU",
-                "hu-HU"
+                "hu-HU",
             };
             yield return new object[]
             {
@@ -1315,7 +1315,7 @@ namespace System.Globalization.Tests
                 "ita",
                 "ITA",
                 "it-IT",
-                "it-IT"
+                "it-IT",
             };
             yield return new object[]
             {
@@ -1325,7 +1325,7 @@ namespace System.Globalization.Tests
                 "jpn",
                 "JPN",
                 "ja-JP",
-                "ja-JP"
+                "ja-JP",
             };
             yield return new object[]
             {
@@ -1335,7 +1335,7 @@ namespace System.Globalization.Tests
                 "kor",
                 "KOR",
                 "ko-KR",
-                "ko-KR"
+                "ko-KR",
             };
             yield return new object[]
             {
@@ -1345,7 +1345,7 @@ namespace System.Globalization.Tests
                 "nld",
                 "NLD",
                 "nl-NL",
-                "nl-NL"
+                "nl-NL",
             };
             yield return new object[]
             {
@@ -1355,7 +1355,7 @@ namespace System.Globalization.Tests
                 "pol",
                 "PLK",
                 "pl-PL",
-                "pl-PL"
+                "pl-PL",
             };
             yield return new object[]
             {
@@ -1365,7 +1365,7 @@ namespace System.Globalization.Tests
                 "por",
                 "PTB",
                 "pt-BR",
-                "pt-BR"
+                "pt-BR",
             };
             yield return new object[]
             {
@@ -1375,7 +1375,7 @@ namespace System.Globalization.Tests
                 "ron",
                 "ROM",
                 "ro-RO",
-                "ro-RO"
+                "ro-RO",
             };
             yield return new object[]
             {
@@ -1385,7 +1385,7 @@ namespace System.Globalization.Tests
                 "rus",
                 "RUS",
                 "ru-RU",
-                "ru-RU"
+                "ru-RU",
             };
             yield return new object[]
             {
@@ -1395,7 +1395,7 @@ namespace System.Globalization.Tests
                 "hrv",
                 "HRV",
                 "hr-HR",
-                "hr-HR"
+                "hr-HR",
             };
             yield return new object[]
             {
@@ -1405,7 +1405,7 @@ namespace System.Globalization.Tests
                 "slk",
                 "SKY",
                 "sk-SK",
-                "sk-SK"
+                "sk-SK",
             };
             yield return new object[]
             {
@@ -1415,7 +1415,7 @@ namespace System.Globalization.Tests
                 "swe",
                 "SVE",
                 "sv-SE",
-                "sv-SE"
+                "sv-SE",
             };
             yield return new object[]
             {
@@ -1425,7 +1425,7 @@ namespace System.Globalization.Tests
                 "tha",
                 "THA",
                 "th-TH",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1435,7 +1435,7 @@ namespace System.Globalization.Tests
                 "tur",
                 "TRK",
                 "tr-TR",
-                "tr-TR"
+                "tr-TR",
             };
             yield return new object[]
             {
@@ -1445,7 +1445,7 @@ namespace System.Globalization.Tests
                 "ind",
                 "IND",
                 "id-ID",
-                "id-ID"
+                "id-ID",
             };
             yield return new object[]
             {
@@ -1455,7 +1455,7 @@ namespace System.Globalization.Tests
                 "ukr",
                 "UKR",
                 "uk-UA",
-                "uk-UA"
+                "uk-UA",
             };
             yield return new object[]
             {
@@ -1465,7 +1465,7 @@ namespace System.Globalization.Tests
                 "slv",
                 "SLV",
                 "sl-SI",
-                "sl-SI"
+                "sl-SI",
             };
             yield return new object[]
             {
@@ -1475,7 +1475,7 @@ namespace System.Globalization.Tests
                 "est",
                 "ETI",
                 "et-EE",
-                "et-EE"
+                "et-EE",
             };
             yield return new object[]
             {
@@ -1485,7 +1485,7 @@ namespace System.Globalization.Tests
                 "lav",
                 "LVI",
                 "lv-LV",
-                "lv-LV"
+                "lv-LV",
             };
             yield return new object[]
             {
@@ -1495,7 +1495,7 @@ namespace System.Globalization.Tests
                 "lit",
                 "LTH",
                 "lt-LT",
-                "lt-LT"
+                "lt-LT",
             };
             yield return new object[]
             {
@@ -1505,7 +1505,7 @@ namespace System.Globalization.Tests
                 "fas",
                 "FAR",
                 "fa-IR",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1515,7 +1515,7 @@ namespace System.Globalization.Tests
                 "vie",
                 "VIT",
                 "vi-VN",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1525,7 +1525,7 @@ namespace System.Globalization.Tests
                 "hin",
                 "HIN",
                 "hi-IN",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1535,7 +1535,7 @@ namespace System.Globalization.Tests
                 "swa",
                 "SWK",
                 "sw-KE",
-                "sw-KE"
+                "sw-KE",
             };
             yield return new object[]
             {
@@ -1545,7 +1545,7 @@ namespace System.Globalization.Tests
                 "guj",
                 "GUJ",
                 "gu-IN",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1555,7 +1555,7 @@ namespace System.Globalization.Tests
                 "tel",
                 "TEL",
                 "te-IN",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1565,7 +1565,7 @@ namespace System.Globalization.Tests
                 "kan",
                 "KDI",
                 "kn-IN",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1575,7 +1575,7 @@ namespace System.Globalization.Tests
                 "mar",
                 "MAR",
                 "mr-IN",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1585,7 +1585,7 @@ namespace System.Globalization.Tests
                 "amh",
                 "AMH",
                 "am-ET",
-                "en-US"
+                "en-US",
             };
             yield return new object[]
             {
@@ -1595,7 +1595,7 @@ namespace System.Globalization.Tests
                 "fil",
                 "FPO",
                 "fil-PH",
-                "fil-PH"
+                "fil-PH",
             };
             yield return new object[]
             {
@@ -1605,7 +1605,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHS",
                 "zh-Hans-CN",
-                "zh-CN"
+                "zh-CN",
             };
             yield return new object[]
             {
@@ -1615,7 +1615,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DES",
                 "de-CH",
-                "de-CH"
+                "de-CH",
             };
             yield return new object[]
             {
@@ -1625,7 +1625,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENG",
                 "en-GB",
-                "en-GB"
+                "en-GB",
             };
             yield return new object[]
             {
@@ -1635,7 +1635,7 @@ namespace System.Globalization.Tests
                 "spa",
                 "ESM",
                 "es-MX",
-                "es-MX"
+                "es-MX",
             };
             yield return new object[]
             {
@@ -1645,7 +1645,7 @@ namespace System.Globalization.Tests
                 "fra",
                 "FRB",
                 "fr-BE",
-                "fr-BE"
+                "fr-BE",
             };
             yield return new object[]
             {
@@ -1655,7 +1655,7 @@ namespace System.Globalization.Tests
                 "ita",
                 "ITS",
                 "it-CH",
-                "it-CH"
+                "it-CH",
             };
             yield return new object[]
             {
@@ -1665,7 +1665,7 @@ namespace System.Globalization.Tests
                 "nld",
                 "NLB",
                 "nl-BE",
-                "nl-BE"
+                "nl-BE",
             };
             yield return new object[]
             {
@@ -1675,7 +1675,7 @@ namespace System.Globalization.Tests
                 "por",
                 "PTG",
                 "pt-PT",
-                "pt-PT"
+                "pt-PT",
             };
             yield return new object[]
             {
@@ -1685,7 +1685,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "ZHH",
                 "zh-Hant-HK",
-                "zh-HK"
+                "zh-HK",
             };
             yield return new object[]
             {
@@ -1695,7 +1695,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DEA",
                 "de-AT",
-                "de-AT"
+                "de-AT",
             };
             yield return new object[]
             {
@@ -1705,7 +1705,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENA",
                 "en-AU",
-                "en-AU"
+                "en-AU",
             };
             yield return new object[]
             {
@@ -1715,7 +1715,7 @@ namespace System.Globalization.Tests
                 "spa",
                 "ESN",
                 "es-ES",
-                "es-ES"
+                "es-ES",
             };
             yield return new object[]
             {
@@ -1725,7 +1725,7 @@ namespace System.Globalization.Tests
                 "fra",
                 "FRC",
                 "fr-CA",
-                "fr-CA"
+                "fr-CA",
             };
             yield return new object[]
             {
@@ -1735,7 +1735,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "ZHI",
                 "zh-Hans-SG",
-                "zh-SG"
+                "zh-SG",
             };
             yield return new object[]
             {
@@ -1745,7 +1745,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DEL",
                 "de-LU",
-                "de-LU"
+                "de-LU",
             };
             yield return new object[]
             {
@@ -1755,7 +1755,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENC",
                 "en-CA",
-                "en-CA"
+                "en-CA",
             };
             yield return new object[]
             {
@@ -1765,7 +1765,7 @@ namespace System.Globalization.Tests
                 "fra",
                 "FRS",
                 "fr-CH",
-                "fr-CH"
+                "fr-CH",
             };
             yield return new object[]
             {
@@ -1775,7 +1775,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DEC",
                 "de-LI",
-                "de-LI"
+                "de-LI",
             };
             yield return new object[]
             {
@@ -1785,7 +1785,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENZ",
                 "en-NZ",
-                "en-NZ"
+                "en-NZ",
             };
             yield return new object[]
             {
@@ -1795,7 +1795,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENI",
                 "en-IE",
-                "en-IE"
+                "en-IE",
             };
             yield return new object[]
             {
@@ -1805,7 +1805,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENS",
                 "en-ZA",
-                "en-ZA"
+                "en-ZA",
             };
             yield return new object[]
             {
@@ -1815,7 +1815,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENJ",
                 "en-JM",
-                "en-JM"
+                "en-JM",
             };
             yield return new object[]
             {
@@ -1825,7 +1825,7 @@ namespace System.Globalization.Tests
                 "srp",
                 "SRM",
                 "sr-Latn-RS",
-                "sr-Latn-RS"
+                "sr-Latn-RS",
             };
             yield return new object[]
             {
@@ -1835,7 +1835,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENL",
                 "en-BZ",
-                "en-BZ"
+                "en-BZ",
             };
             yield return new object[]
             {
@@ -1845,7 +1845,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENT",
                 "en-TT",
-                "en-TT"
+                "en-TT",
             };
             yield return new object[]
             {
@@ -1855,7 +1855,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENW",
                 "en-ZW",
-                "en-ZW"
+                "en-ZW",
             };
             yield return new object[]
             {
@@ -1865,7 +1865,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENP",
                 "en-PH",
-                "en-PH"
+                "en-PH",
             };
             yield return new object[]
             {
@@ -1875,7 +1875,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENN",
                 "en-IN",
-                "en-IN"
+                "en-IN",
             };
             yield return new object[]
             {
@@ -1885,7 +1885,7 @@ namespace System.Globalization.Tests
                 "eng",
                 "ENE",
                 "en-SG",
-                "en-SG"
+                "en-SG",
             };
             yield return new object[]
             {
@@ -1895,7 +1895,7 @@ namespace System.Globalization.Tests
                 "srp",
                 "SRM",
                 "sr-Latn",
-                "sr-Latn-RS"
+                "sr-Latn-RS",
             };
             yield return new object[]
             {
@@ -1905,7 +1905,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHS",
                 "zh",
-                "zh-CN"
+                "zh-CN",
             };
             yield return new object[]
             {
@@ -1915,7 +1915,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHT",
                 "zh-Hant",
-                "zh-HK"
+                "zh-HK",
             };
             yield return new object[]
             {
@@ -1925,7 +1925,7 @@ namespace System.Globalization.Tests
                 "srp",
                 "SRB",
                 "sr",
-                "sr-Latn-RS"
+                "sr-Latn-RS",
             };
             yield return new object[]
             {
@@ -1935,7 +1935,7 @@ namespace System.Globalization.Tests
                 "deu",
                 "DEU",
                 "de-DE",
-                "de-DE"
+                "de-DE",
             };
             yield return new object[]
             {
@@ -1945,7 +1945,7 @@ namespace System.Globalization.Tests
                 "hun",
                 "HUN",
                 "hu-HU",
-                "hu-HU"
+                "hu-HU",
             };
             yield return new object[]
             {
@@ -1955,7 +1955,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHS",
                 "zh-Hans-CN",
-                "zh-CN"
+                "zh-CN",
             };
             yield return new object[]
             {
@@ -1965,7 +1965,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "ZHI",
                 "zh-Hans-SG",
-                "zh-SG"
+                "zh-SG",
             };
             yield return new object[]
             {
@@ -1975,7 +1975,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHT",
                 "zh-Hant-TW",
-                "zh-TW"
+                "zh-TW",
             };
             yield return new object[]
             {
@@ -1985,7 +1985,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "CHT",
                 "zh-Hant-TW",
-                "zh-TW"
+                "zh-TW",
             };
             yield return new object[]
             {
@@ -1995,7 +1995,7 @@ namespace System.Globalization.Tests
                 "jpn",
                 "JPN",
                 "ja-JP",
-                "ja-JP"
+                "ja-JP",
             };
             yield return new object[]
             {
@@ -2005,7 +2005,7 @@ namespace System.Globalization.Tests
                 "zho",
                 "ZHH",
                 "zh-Hant-HK",
-                "zh-HK"
+                "zh-HK",
             };
             if (!PlatformDetection.IsHybridGlobalizationOnOSX)
             {
@@ -2017,7 +2017,7 @@ namespace System.Globalization.Tests
                     "srp",
                     "SRO",
                     "sr-Cyrl-RS",
-                    "sr-Cyrl-RS"
+                    "sr-Cyrl-RS",
                 };
                 yield return new object[]
                 {
@@ -2027,7 +2027,7 @@ namespace System.Globalization.Tests
                     "srp",
                     "SRO",
                     "sr-Cyrl",
-                    "sr-Cyrl-RS"
+                    "sr-Cyrl-RS",
                 };
             }
         }

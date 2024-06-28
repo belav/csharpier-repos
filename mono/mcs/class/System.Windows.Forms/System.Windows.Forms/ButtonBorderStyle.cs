@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         Dashed = 2,
         Solid = 3,
         Inset = 4,
-        Outset = 5
+        Outset = 5,
     }
 }

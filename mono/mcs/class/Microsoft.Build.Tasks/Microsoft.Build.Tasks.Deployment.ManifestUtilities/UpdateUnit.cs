@@ -37,6 +37,6 @@ namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
     {
         Hours,
         Days,
-        Weeks
+        Weeks,
     }
 }

@@ -262,7 +262,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 0xC9,
                 0xDB,
                 0xED,
-                0xFF
+                0xFF,
             };
 
             var utf8 = new UTF8Encoding(false, true);
@@ -339,7 +339,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var parallelOptions = new ParallelOptions
             {
-                MaxDegreeOfParallelism = Environment.ProcessorCount * 2
+                MaxDegreeOfParallelism = Environment.ProcessorCount * 2,
             };
             Parallel.For(
                 0,

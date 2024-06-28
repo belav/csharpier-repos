@@ -115,7 +115,7 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                             {
                                 context.Response.Redirect(context.RedirectUri + "&custom=test");
                                 return Task.FromResult(0);
-                            }
+                            },
                         };
                     });
             },
@@ -433,7 +433,7 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                                     return res;
                                 }
                                 return null;
-                            }
+                            },
                         };
                     });
             },
@@ -522,13 +522,13 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                                             displayName = "Test Name",
                                             givenName = "Test Given Name",
                                             surname = "Test Family Name",
-                                            mail = "Test email"
+                                            mail = "Test email",
                                         }
                                     );
                                 }
 
                                 return null;
-                            }
+                            },
                         };
                     });
             },

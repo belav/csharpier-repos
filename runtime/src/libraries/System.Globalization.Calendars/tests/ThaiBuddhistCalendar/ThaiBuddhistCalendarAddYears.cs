@@ -16,12 +16,12 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 DateTime.MinValue,
-                s_randomDataGenerator.GetInt16(-55) % 9999
+                s_randomDataGenerator.GetInt16(-55) % 9999,
             };
             yield return new object[]
             {
                 DateTime.MaxValue,
-                -(s_randomDataGenerator.GetInt16(-55) % 9999)
+                -(s_randomDataGenerator.GetInt16(-55) % 9999),
             };
 
             yield return new object[] { DateTime.MinValue, 0 };
@@ -31,12 +31,12 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 new DateTime(2000, 1, 1),
-                s_randomDataGenerator.GetInt16(-55) % 7999
+                s_randomDataGenerator.GetInt16(-55) % 7999,
             };
             yield return new object[]
             {
                 new DateTime(2000, 1, 1),
-                -(s_randomDataGenerator.GetInt16(-55) % 2000)
+                -(s_randomDataGenerator.GetInt16(-55) % 2000),
             };
         }
 

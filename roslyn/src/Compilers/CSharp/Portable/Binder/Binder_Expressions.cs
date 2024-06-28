@@ -222,7 +222,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 CreateErrorType()
             )
             {
-                WasCompilerGenerated = wasCompilerGenerated
+                WasCompilerGenerated = wasCompilerGenerated,
             };
         }
 
@@ -362,19 +362,15 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             if (expression is null)
                 return null;
-            var result = !expression.NeedsToBeConverted()
-                ? expression
+            var result =
+                !expression.NeedsToBeConverted() ? expression
                 : type is null
                     ? BindToNaturalType(
                         expression,
                         BindingDiagnosticBag.Discarded,
                         reportNoTargetType: false
                     )
-                    : GenerateConversionForAssignment(
-                        type,
-                        expression,
-                        BindingDiagnosticBag.Discarded
-                    );
+                : GenerateConversionForAssignment(type, expression, BindingDiagnosticBag.Discarded);
             return result;
         }
 
@@ -3220,15 +3216,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                     var alias = (AliasSymbol)symbol;
                     return alias.Target switch
                     {
-                        TypeSymbol typeSymbol =>
-                            new BoundTypeExpression(node, alias, typeSymbol, hasErrors: isError),
-                        NamespaceSymbol namespaceSymbol =>
-                            new BoundNamespaceExpression(
-                                node,
-                                namespaceSymbol,
-                                alias,
-                                hasErrors: isError
-                            ),
+                        TypeSymbol typeSymbol => new BoundTypeExpression(
+                            node,
+                            alias,
+                            typeSymbol,
+                            hasErrors: isError
+                        ),
+                        NamespaceSymbol namespaceSymbol => new BoundNamespaceExpression(
+                            node,
+                            namespaceSymbol,
+                            alias,
+                            hasErrors: isError
+                        ),
                         _ => throw ExceptionUtilities.UnexpectedValue(alias.Target.Kind),
                     };
                 }
@@ -3430,7 +3429,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     return new BoundPreviousSubmissionReference(syntax, memberDeclaringType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else
@@ -3448,7 +3447,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         return new BoundHostObjectMemberReference(syntax, hostObjectType)
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         };
                     }
                 }
@@ -3630,7 +3629,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new BoundThisReference(node, thisTypeOpt ?? CreateErrorType(), hasErrors)
             {
-                WasCompilerGenerated = wasCompilerGenerated
+                WasCompilerGenerated = wasCompilerGenerated,
             };
         }
 
@@ -4234,7 +4233,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         TypeKind.FunctionPointer => ErrorCode.ERR_MethFuncPtrMismatch,
                         TypeKind.Delegate => ErrorCode.ERR_CannotConvertAddressOfToDelegate,
-                        _ => ErrorCode.ERR_AddressOfToNonFunctionPointer
+                        _ => ErrorCode.ERR_AddressOfToNonFunctionPointer,
                     };
 
                     diagnostics.Add(
@@ -5004,11 +5003,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             BindValueKind valueKind =
-                refKind == RefKind.None
-                    ? BindValueKind.RValue
-                    : refKind == RefKind.In
-                        ? BindValueKind.ReadonlyRef
-                        : BindValueKind.RefOrOut;
+                refKind == RefKind.None ? BindValueKind.RValue
+                : refKind == RefKind.In ? BindValueKind.ReadonlyRef
+                : BindValueKind.RefOrOut;
 
             BoundExpression argument;
             if (allowArglist)
@@ -5995,7 +5992,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         GetSpecialType(SpecialType.System_Int32, diagnostics, nonNullSyntax)
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 sizes = sizeArray.AsImmutableOrNull();
@@ -6020,7 +6017,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         initSyntax.Parent == null
                         || initSyntax.Parent.Kind() != SyntaxKind.EqualsValueClause
                         || ((EqualsValueClauseSyntax)initSyntax.Parent).Value != initSyntax
-                    )
+                    ),
             };
         }
 
@@ -6310,7 +6307,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     GetSpecialType(SpecialType.System_Int32, diagnostics, node)
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
 
@@ -6787,7 +6784,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         hasErrors: hasErrors
                     )
                     {
-                        WasCompilerGenerated = initializerArgumentListOpt == null
+                        WasCompilerGenerated = initializerArgumentListOpt == null,
                     };
                 }
                 else
@@ -7065,21 +7062,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ExpressionElementSyntax
                     {
                         Expression: CollectionExpressionSyntax nestedCollectionExpression
-                    } =>
-                        @this.BindCollectionExpression(
-                            nestedCollectionExpression,
-                            diagnostics,
-                            nestingLevel + 1
-                        ),
-                    ExpressionElementSyntax expressionElementSyntax =>
-                        @this.BindValue(
-                            expressionElementSyntax.Expression,
-                            diagnostics,
-                            BindValueKind.RValue
-                        ),
-                    SpreadElementSyntax spreadElementSyntax =>
-                        bindSpreadElement(spreadElementSyntax, diagnostics, @this),
-                    _ => throw ExceptionUtilities.UnexpectedValue(syntax.Kind())
+                    } => @this.BindCollectionExpression(
+                        nestedCollectionExpression,
+                        diagnostics,
+                        nestingLevel + 1
+                    ),
+                    ExpressionElementSyntax expressionElementSyntax => @this.BindValue(
+                        expressionElementSyntax.Expression,
+                        diagnostics,
+                        BindValueKind.RValue
+                    ),
+                    SpreadElementSyntax spreadElementSyntax => bindSpreadElement(
+                        spreadElementSyntax,
+                        diagnostics,
+                        @this
+                    ),
+                    _ => throw ExceptionUtilities.UnexpectedValue(syntax.Kind()),
                 };
             }
 
@@ -7676,7 +7674,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 type
             )
             {
-                WasCompilerGenerated = wasCompilerGenerated
+                WasCompilerGenerated = wasCompilerGenerated,
             };
         }
 
@@ -7697,7 +7695,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 type
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
 
             switch (syntax.Kind())
@@ -8375,7 +8373,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundPropertyAccess propertyAccess => propertyAccess.PropertySymbol,
                     BoundFieldAccess fieldAccess => fieldAccess.FieldSymbol,
                     // Error cases
-                    _ => null
+                    _ => null,
                 };
 
                 if (memberSymbol is null)
@@ -8425,7 +8423,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BaseObjectCreationExpressionSyntax { NewKeyword: { } newKeyword } =>
                         newKeyword.GetLocation(),
                     AttributeSyntax { Name: { } name } => name.Location,
-                    _ => creationSyntax.Location
+                    _ => creationSyntax.Location,
                 };
 
                 foreach (var (_, member) in requiredMembersBuilder)
@@ -8793,7 +8791,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     boundCall.HasAnyErrors
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
             else
@@ -8908,7 +8906,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 elementPlaceholder: addElementPlaceholder,
                 iteratorBody: new BoundExpressionStatement(syntax, addMethodInvocation)
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 }
             );
         }
@@ -13074,12 +13072,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     expr.Type
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 var argumentPlaceholders = ImmutableArray.Create(
                     new BoundImplicitIndexerValuePlaceholder(convertedArguments[0].Syntax, int32)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     }
                 );
 
@@ -13089,7 +13087,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     argument: convertedArguments[0],
                     lengthOrCountAccess: new BoundArrayLength(node, receiverPlaceholder, int32)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     },
                     receiverPlaceholder,
                     indexerOrSliceAccess: new BoundArrayAccess(
@@ -13099,7 +13097,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         resultType
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     },
                     argumentPlaceholders,
                     resultType
@@ -13872,19 +13870,20 @@ namespace Microsoft.CodeAnalysis.CSharp
             var argument = arguments.Arguments[0];
 
             var argType = argument.Type;
-            ThreeState argIsIndexNotRange = TypeSymbol.Equals(
-                argType,
-                Compilation.GetWellKnownType(WellKnownType.System_Index),
-                TypeCompareKind.ConsiderEverything
-            )
-                ? ThreeState.True
+            ThreeState argIsIndexNotRange =
+                TypeSymbol.Equals(
+                    argType,
+                    Compilation.GetWellKnownType(WellKnownType.System_Index),
+                    TypeCompareKind.ConsiderEverything
+                )
+                    ? ThreeState.True
                 : TypeSymbol.Equals(
                     argType,
                     Compilation.GetWellKnownType(WellKnownType.System_Range),
                     TypeCompareKind.ConsiderEverything
                 )
                     ? ThreeState.False
-                    : ThreeState.Unknown;
+                : ThreeState.Unknown;
 
             Debug.Assert(receiver.Type is not null);
             if (!argIsIndexNotRange.HasValue())
@@ -13899,7 +13898,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 receiver.Type
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
             if (
                 !TryBindIndexOrRangeImplicitIndexerParts(
@@ -14061,7 +14060,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                     Compilation.GetSpecialType(SpecialType.System_Int32)
                                 )
                                 {
-                                    WasCompilerGenerated = true
+                                    WasCompilerGenerated = true,
                                 };
                                 argumentPlaceholders = ImmutableArray.Create(intPlaceholder);
 
@@ -14169,14 +14168,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Compilation.GetSpecialType(SpecialType.System_Int32)
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 var lengthArgumentPlaceholder = new BoundImplicitIndexerValuePlaceholder(
                     syntax,
                     Compilation.GetSpecialType(SpecialType.System_Int32)
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 argumentPlaceholders = ImmutableArray.Create(
                     startArgumentPlaceholder,
@@ -14200,7 +14199,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     LookupResultKind.Viable
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 indexerOrSliceAccess = BindMethodGroupInvocation(
@@ -15449,7 +15448,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors: receiver.HasErrors
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
             return receiver;
         }

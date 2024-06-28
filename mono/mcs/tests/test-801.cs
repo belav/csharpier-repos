@@ -6,7 +6,7 @@ class C
     {
         V_0 = 10,
         V_1 = 50,
-        V_2 = 80
+        V_2 = 80,
     }
 
     public static implicit operator E(C x)

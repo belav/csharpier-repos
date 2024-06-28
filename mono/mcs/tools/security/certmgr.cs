@@ -92,7 +92,7 @@ namespace Mono.Tools
             Put,
             List,
             Ssl,
-            ImportKey
+            ImportKey,
         }
 
         static Action GetAction(string arg)
@@ -130,7 +130,7 @@ namespace Mono.Tools
             None,
             Certificate,
             CRL,
-            CTL
+            CTL,
         }
 
         static ObjectType GetObjectType(string arg)

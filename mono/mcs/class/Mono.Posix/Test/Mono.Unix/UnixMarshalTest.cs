@@ -54,7 +54,7 @@ namespace MonoTests.Mono.Unix
         [Test]
         public void TestStringToHeap()
         {
-            object[] data = { "Hello, world!", true, true, "ＭＳ Ｐゴシック", false, true, };
+            object[] data = { "Hello, world!", true, true, "ＭＳ Ｐゴシック", false, true };
 
             for (int i = 0; i < data.Length; i += 3)
             {

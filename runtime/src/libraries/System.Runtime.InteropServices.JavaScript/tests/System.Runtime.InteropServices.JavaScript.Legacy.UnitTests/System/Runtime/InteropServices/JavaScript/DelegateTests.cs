@@ -199,7 +199,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             {
                 _objectPrototype.Call(),
                 "Uint8Array",
-                Uint8Array.From(new byte[10])
+                Uint8Array.From(new byte[10]),
             };
             yield return new object[] { _objectPrototype.Call(), "Array", new Array(10) };
         }

@@ -106,7 +106,7 @@ namespace System.Web.Mvc.Test
             AuthorizeAttributeHelper helper = new AuthorizeAttributeHelper()
             {
                 Users = "SomeUser, SomeOtherUser",
-                Roles = "SomeRole, SomeOtherRole"
+                Roles = "SomeRole, SomeOtherRole",
             };
 
             Mock<HttpContextBase> mockHttpContext = new Mock<HttpContextBase>();
@@ -187,7 +187,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper
                 .Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()))
@@ -196,7 +196,7 @@ namespace System.Web.Mvc.Test
 
             AuthorizationContext filterContext = new Mock<AuthorizationContext>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             }.Object;
 
             // Act
@@ -212,7 +212,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(true);
             AuthorizeAttributeHelper helper = mockHelper.Object;
@@ -280,7 +280,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
@@ -307,7 +307,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             AuthorizeAttributeHelper helper = mockHelper.Object;
 
@@ -339,7 +339,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper
                 .Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>()))
@@ -364,7 +364,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<AuthorizeAttributeHelper> mockHelper = new Mock<AuthorizeAttributeHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper.Setup(h => h.PublicAuthorizeCore(It.IsAny<HttpContextBase>())).Returns(true);
             AuthorizeAttributeHelper helper = mockHelper.Object;

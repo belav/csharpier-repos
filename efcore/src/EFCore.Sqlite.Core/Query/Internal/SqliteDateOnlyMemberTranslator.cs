@@ -20,7 +20,7 @@ public class SqliteDateOnlyMemberTranslator : IMemberTranslator
             { nameof(DateOnly.Month), "%m" },
             { nameof(DateOnly.DayOfYear), "%j" },
             { nameof(DateOnly.Day), "%d" },
-            { nameof(DateOnly.DayOfWeek), "%w" }
+            { nameof(DateOnly.DayOfWeek), "%w" },
         };
 
     private readonly SqliteSqlExpressionFactory _sqlExpressionFactory;

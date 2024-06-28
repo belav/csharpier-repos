@@ -57,7 +57,7 @@ namespace System.Reflection.Emit.Tests
                     LibName = "Foo1.dll",
                     EntrypointName = "Wha1",
                     ReturnType = typeof(int),
-                    ParameterTypes = new Type[] { typeof(string) }
+                    ParameterTypes = new Type[] { typeof(string) },
                 };
                 yield return new DpmParams()
                 {
@@ -66,7 +66,7 @@ namespace System.Reflection.Emit.Tests
                     EntrypointName = "Wha2",
                     ReturnType = typeof(int),
                     ParameterTypes = new Type[] { typeof(int) },
-                    NativeCallConv = CallingConvention.Cdecl
+                    NativeCallConv = CallingConvention.Cdecl,
                 };
                 yield return new DpmParams()
                 {
@@ -75,7 +75,7 @@ namespace System.Reflection.Emit.Tests
                     EntrypointName = "Wha3",
                     ReturnType = typeof(double),
                     ParameterTypes = new Type[] { typeof(string) },
-                    Charset = CharSet.Ansi
+                    Charset = CharSet.Ansi,
                 };
                 yield return new DpmParams()
                 {
@@ -84,7 +84,7 @@ namespace System.Reflection.Emit.Tests
                     EntrypointName = "Wha4",
                     ReturnType = typeof(IntPtr),
                     ParameterTypes = new Type[] { typeof(string) },
-                    Charset = CharSet.Unicode
+                    Charset = CharSet.Unicode,
                 };
                 yield return new DpmParams()
                 {
@@ -93,7 +93,7 @@ namespace System.Reflection.Emit.Tests
                     EntrypointName = "Wha5",
                     ReturnType = typeof(int),
                     ParameterTypes = new Type[] { typeof(object) },
-                    Charset = CharSet.Auto
+                    Charset = CharSet.Auto,
                 };
                 yield return new DpmParams()
                 {
@@ -102,7 +102,7 @@ namespace System.Reflection.Emit.Tests
                     EntrypointName = "Wha6",
                     ReturnType = typeof(char),
                     ParameterTypes = new Type[] { typeof(string) },
-                    Charset = CharSet.None
+                    Charset = CharSet.None,
                 };
                 yield return new DpmParams()
                 {
@@ -110,7 +110,7 @@ namespace System.Reflection.Emit.Tests
                     LibName = "Foo7.dll",
                     EntrypointName = "B1",
                     ReturnType = typeof(void),
-                    ParameterTypes = new Type[] { typeof(string) }
+                    ParameterTypes = new Type[] { typeof(string) },
                 };
                 yield return new DpmParams()
                 {

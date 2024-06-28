@@ -21,7 +21,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(IEnumerable<int>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" } },
             };
 
             CollectionModelBinderProvider binderProvider = new CollectionModelBinderProvider();
@@ -44,7 +44,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(int)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" } },
             };
 
             CollectionModelBinderProvider binderProvider = new CollectionModelBinderProvider();
@@ -67,7 +67,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(IEnumerable<int>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             CollectionModelBinderProvider binderProvider = new CollectionModelBinderProvider();

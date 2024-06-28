@@ -148,8 +148,8 @@ namespace System.Web.WebPages.Administration.Test
                 new WebPackageSource(name: "Feed1", source: "http://www.microsoft.com/Feed1"),
                 new WebPackageSource(name: "Feed2", source: "http://www.microsoft.com/Feed2")
                 {
-                    FilterPreferredPackages = true
-                }
+                    FilterPreferredPackages = true,
+                },
             };
             var stream = new MemoryStream();
 

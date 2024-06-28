@@ -28,7 +28,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
                 {
                     Id1 = ticks,
                     Id2 = ticks + 1,
-                    Name = "Rainbow Dash"
+                    Name = "Rainbow Dash",
                 }
             );
 
@@ -140,7 +140,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
                     {
                         Id1 = 1,
                         Id2 = 7,
-                        Name = "Apple Jack 1"
+                        Name = "Apple Jack 1",
                     }
                 )
             ).Entity;
@@ -150,7 +150,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
                     {
                         Id1 = 2,
                         Id2 = 7,
-                        Name = "Apple Jack 2"
+                        Name = "Apple Jack 2",
                     }
                 )
             ).Entity;
@@ -160,7 +160,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
                     {
                         Id1 = 3,
                         Id2 = 7,
-                        Name = "Apple Jack 3"
+                        Name = "Apple Jack 3",
                     }
                 )
             ).Entity;
@@ -236,7 +236,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
                 {
                     e.Id1,
                     e.Id2,
-                    e.Discriminator
+                    e.Discriminator,
                 });
             });
 
@@ -248,7 +248,7 @@ public abstract class CompositeKeyEndToEndTestBase<TFixture> : IClassFixture<TFi
                 {
                     e.Id1,
                     e.Id2,
-                    e.Id3
+                    e.Id3,
                 });
                 b.Property(e => e.Id1).ValueGeneratedOnAdd();
                 b.Property(e => e.Id3).ValueGeneratedOnAdd();

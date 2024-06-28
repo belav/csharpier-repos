@@ -115,7 +115,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
         {
             ActivityStateQuery query = new ActivityStateQuery()
             {
-                ActivityName = this.ActivityName
+                ActivityName = this.ActivityName,
             };
 
             foreach (StateElement stateElement in this.States)

@@ -319,7 +319,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 IndentString = "$",
                 ElseOnClosing = true,
-                BracingStyle = "C"
+                BracingStyle = "C",
             };
 
             // CodeArrayCreateExpression.
@@ -328,13 +328,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeArrayCreateExpression(new CodeTypeReference("type")),
                 null,
-                "new type[0]"
+                "new type[0]",
             };
             yield return new object[]
             {
                 new CodeArrayCreateExpression(new CodeTypeReference("type", 2)),
                 null,
-                "new type[0]"
+                "new type[0]",
             };
             yield return new object[]
             {
@@ -342,7 +342,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference("type", 1), 1)
                 ),
                 null,
-                "new type[0][]"
+                "new type[0][]",
             };
 
             yield return new object[]
@@ -352,7 +352,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression[] { new CodePrimitiveExpression(1) }
                 ),
                 null,
-                $"new type[] {{{nl}        1}}"
+                $"new type[] {{{nl}        1}}",
             };
             yield return new object[]
             {
@@ -361,11 +361,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression[]
                     {
                         new CodePrimitiveExpression(1),
-                        new CodePrimitiveExpression(2)
+                        new CodePrimitiveExpression(2),
                     }
                 ),
                 null,
-                $"new type[] {{{nl}        1,{nl}        2}}"
+                $"new type[] {{{nl}        1,{nl}        2}}",
             };
             yield return new object[]
             {
@@ -374,14 +374,14 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression[]
                     {
                         new CodePrimitiveExpression(1),
-                        new CodePrimitiveExpression(2)
+                        new CodePrimitiveExpression(2),
                     }
                 )
                 {
-                    SizeExpression = new CodeExpression()
+                    SizeExpression = new CodeExpression(),
                 },
                 null,
-                $"new type[] {{{nl}        1,{nl}        2}}"
+                $"new type[] {{{nl}        1,{nl}        2}}",
             };
             yield return new object[]
             {
@@ -390,7 +390,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression[] { new CodePrimitiveExpression(1) }
                 ),
                 null,
-                $"new type[,] {{{nl}        1}}"
+                $"new type[,] {{{nl}        1}}",
             };
             yield return new object[]
             {
@@ -399,35 +399,35 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression[] { new CodePrimitiveExpression(1) }
                 ),
                 null,
-                $"new type[][] {{{nl}        1}}"
+                $"new type[][] {{{nl}        1}}",
             };
 
             yield return new object[]
             {
                 new CodeArrayCreateExpression(new CodeTypeReference("type"))
                 {
-                    SizeExpression = new CodePrimitiveExpression(1)
+                    SizeExpression = new CodePrimitiveExpression(1),
                 },
                 null,
-                "new type[1]"
+                "new type[1]",
             };
             yield return new object[]
             {
                 new CodeArrayCreateExpression(new CodeTypeReference("type")) { Size = 0 },
                 null,
-                "new type[0]"
+                "new type[0]",
             };
             yield return new object[]
             {
                 new CodeArrayCreateExpression(new CodeTypeReference("type")) { Size = -1 },
                 null,
-                "new type[-1]"
+                "new type[-1]",
             };
             yield return new object[]
             {
                 new CodeArrayCreateExpression(new CodeTypeReference("type")) { Size = 1 },
                 null,
-                "new type[1]"
+                "new type[1]",
             };
 
             // CodeBaseReferenceExpression.
@@ -442,7 +442,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 + 2)"
+                "(1 + 2)",
             };
             yield return new object[]
             {
@@ -452,7 +452,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 = 2)"
+                "(1 = 2)",
             };
             yield return new object[]
             {
@@ -462,7 +462,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 & 2)"
+                "(1 & 2)",
             };
             yield return new object[]
             {
@@ -472,7 +472,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 | 2)"
+                "(1 | 2)",
             };
             yield return new object[]
             {
@@ -482,7 +482,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 && 2)"
+                "(1 && 2)",
             };
             yield return new object[]
             {
@@ -492,7 +492,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 || 2)"
+                "(1 || 2)",
             };
             yield return new object[]
             {
@@ -502,7 +502,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 / 2)"
+                "(1 / 2)",
             };
             yield return new object[]
             {
@@ -512,7 +512,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 > 2)"
+                "(1 > 2)",
             };
             yield return new object[]
             {
@@ -522,7 +522,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 >= 2)"
+                "(1 >= 2)",
             };
             yield return new object[]
             {
@@ -532,7 +532,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 == 2)"
+                "(1 == 2)",
             };
             yield return new object[]
             {
@@ -542,7 +542,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 != 2)"
+                "(1 != 2)",
             };
             yield return new object[]
             {
@@ -552,7 +552,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 < 2)"
+                "(1 < 2)",
             };
             yield return new object[]
             {
@@ -562,7 +562,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 <= 2)"
+                "(1 <= 2)",
             };
             yield return new object[]
             {
@@ -572,7 +572,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 % 2)"
+                "(1 % 2)",
             };
             yield return new object[]
             {
@@ -582,7 +582,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 * 2)"
+                "(1 * 2)",
             };
             yield return new object[]
             {
@@ -592,7 +592,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 - 2)"
+                "(1 - 2)",
             };
             yield return new object[]
             {
@@ -602,7 +602,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1 == 2)"
+                "(1 == 2)",
             };
             yield return new object[]
             {
@@ -612,7 +612,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1  2)"
+                "(1  2)",
             };
             yield return new object[]
             {
@@ -622,7 +622,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1  2)"
+                "(1  2)",
             };
             yield return new object[]
             {
@@ -636,7 +636,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 null,
-                $"((1 * 2) {Environment.NewLine}            + 3)"
+                $"((1 * 2) {Environment.NewLine}            + 3)",
             };
             yield return new object[]
             {
@@ -650,7 +650,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"(1 {Environment.NewLine}            * (2 + 3))"
+                $"(1 {Environment.NewLine}            * (2 + 3))",
             };
             yield return new object[]
             {
@@ -664,7 +664,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 customOptions,
-                $"((1 * 2) {Environment.NewLine}$$$+ 3)"
+                $"((1 * 2) {Environment.NewLine}$$$+ 3)",
             };
             yield return new object[]
             {
@@ -678,7 +678,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 customOptions,
-                $"(1 {Environment.NewLine}$$$* (2 + 3))"
+                $"(1 {Environment.NewLine}$$$* (2 + 3))",
             };
 
             // CodeCastExpression.
@@ -689,7 +689,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                "((type)(1))"
+                "((type)(1))",
             };
 
             // CodeDelegateCreateExpression.
@@ -701,7 +701,7 @@ namespace System.CodeDom.Compiler.Tests
                     string.Empty
                 ),
                 null,
-                "new void(1.)"
+                "new void(1.)",
             };
             yield return new object[]
             {
@@ -711,7 +711,7 @@ namespace System.CodeDom.Compiler.Tests
                     "methodName"
                 ),
                 null,
-                "new type(1.methodName)"
+                "new type(1.methodName)",
             };
             yield return new object[]
             {
@@ -721,7 +721,7 @@ namespace System.CodeDom.Compiler.Tests
                     "as"
                 ),
                 null,
-                "new @is(1.@as)"
+                "new @is(1.@as)",
             };
 
             // CodeFieldReferenceExpression.
@@ -730,32 +730,32 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeFieldReferenceExpression(null, string.Empty),
                 null,
-                ""
+                "",
             };
             yield return new object[]
             {
                 new CodeFieldReferenceExpression(null, "fieldName"),
                 null,
-                "fieldName"
+                "fieldName",
             };
             yield return new object[] { new CodeFieldReferenceExpression(null, "as"), null, "@as" };
             yield return new object[]
             {
                 new CodeFieldReferenceExpression(new CodePrimitiveExpression(1), string.Empty),
                 null,
-                "1."
+                "1.",
             };
             yield return new object[]
             {
                 new CodeFieldReferenceExpression(new CodePrimitiveExpression(1), "fieldName"),
                 null,
-                "1.fieldName"
+                "1.fieldName",
             };
             yield return new object[]
             {
                 new CodeFieldReferenceExpression(new CodePrimitiveExpression(1), "as"),
                 null,
-                "1.@as"
+                "1.@as",
             };
 
             // CodeArgumentReferenceExpression.
@@ -764,13 +764,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeArgumentReferenceExpression(string.Empty),
                 null,
-                ""
+                "",
             };
             yield return new object[]
             {
                 new CodeArgumentReferenceExpression("parameterName"),
                 null,
-                "parameterName"
+                "parameterName",
             };
             yield return new object[] { new CodeArgumentReferenceExpression("as"), null, "@as" };
 
@@ -780,13 +780,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeVariableReferenceExpression(string.Empty),
                 null,
-                ""
+                "",
             };
             yield return new object[]
             {
                 new CodeVariableReferenceExpression("variableName"),
                 null,
-                "variableName"
+                "variableName",
             };
             yield return new object[] { new CodeVariableReferenceExpression("as"), null, "@as" };
 
@@ -795,7 +795,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeIndexerExpression(new CodePrimitiveExpression(1)),
                 null,
-                "1[]"
+                "1[]",
             };
             yield return new object[]
             {
@@ -804,7 +804,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "1[2]"
+                "1[2]",
             };
             yield return new object[]
             {
@@ -814,7 +814,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 null,
-                "1[2, 3]"
+                "1[2, 3]",
             };
 
             // CodeArrayIndexerExpression.
@@ -822,7 +822,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeArrayIndexerExpression(new CodePrimitiveExpression(1)),
                 null,
-                "1[]"
+                "1[]",
             };
             yield return new object[]
             {
@@ -831,7 +831,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "1[2]"
+                "1[2]",
             };
             yield return new object[]
             {
@@ -841,7 +841,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 null,
-                "1[2, 3]"
+                "1[2, 3]",
             };
 
             // GenerateSnippetExpression.
@@ -856,7 +856,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeMethodInvokeExpression(new CodeMethodReferenceExpression()),
                 null,
-                "()"
+                "()",
             };
             yield return new object[]
             {
@@ -864,7 +864,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMethodReferenceExpression(null, string.Empty)
                 ),
                 null,
-                "()"
+                "()",
             };
             yield return new object[]
             {
@@ -872,7 +872,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMethodReferenceExpression(null, "methodName")
                 ),
                 null,
-                "methodName()"
+                "methodName()",
             };
             yield return new object[]
             {
@@ -884,7 +884,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "methodName<type1>()"
+                "methodName<type1>()",
             };
             yield return new object[]
             {
@@ -897,7 +897,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "methodName<type1, type2>()"
+                "methodName<type1, type2>()",
             };
             yield return new object[]
             {
@@ -906,7 +906,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                "methodName(1)"
+                "methodName(1)",
             };
             yield return new object[]
             {
@@ -916,13 +916,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "methodName(1, 2)"
+                "methodName(1, 2)",
             };
             yield return new object[]
             {
                 new CodeMethodInvokeExpression(new CodeMethodReferenceExpression(null, "as")),
                 null,
-                "@as()"
+                "@as()",
             };
             yield return new object[]
             {
@@ -930,7 +930,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMethodReferenceExpression(null, "as", new CodeTypeReference("is"))
                 ),
                 null,
-                "@as<@is>()"
+                "@as<@is>()",
             };
 
             yield return new object[]
@@ -939,7 +939,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), string.Empty)
                 ),
                 null,
-                "1.()"
+                "1.()",
             };
             yield return new object[]
             {
@@ -947,7 +947,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), "methodName")
                 ),
                 null,
-                "1.methodName()"
+                "1.methodName()",
             };
             yield return new object[]
             {
@@ -959,7 +959,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "1.methodName<type1>()"
+                "1.methodName<type1>()",
             };
             yield return new object[]
             {
@@ -972,7 +972,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "1.methodName<type1, type2>()"
+                "1.methodName<type1, type2>()",
             };
             yield return new object[]
             {
@@ -981,7 +981,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "1.methodName(2)"
+                "1.methodName(2)",
             };
             yield return new object[]
             {
@@ -991,7 +991,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 null,
-                "1.methodName(2, 3)"
+                "1.methodName(2, 3)",
             };
             yield return new object[]
             {
@@ -999,7 +999,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), "as")
                 ),
                 null,
-                "1.@as()"
+                "1.@as()",
             };
             yield return new object[]
             {
@@ -1011,7 +1011,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "1.@as<@is>()"
+                "1.@as<@is>()",
             };
 
             yield return new object[]
@@ -1027,7 +1027,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "((1 + 2)).()"
+                "((1 + 2)).()",
             };
             yield return new object[]
             {
@@ -1042,7 +1042,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "((1 + 2)).methodName()"
+                "((1 + 2)).methodName()",
             };
             yield return new object[]
             {
@@ -1058,7 +1058,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "((1 + 2)).methodName<type1>()"
+                "((1 + 2)).methodName<type1>()",
             };
             yield return new object[]
             {
@@ -1075,7 +1075,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "((1 + 2)).methodName<type1, type2>()"
+                "((1 + 2)).methodName<type1, type2>()",
             };
             yield return new object[]
             {
@@ -1091,7 +1091,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 null,
-                "((1 + 2)).methodName(3)"
+                "((1 + 2)).methodName(3)",
             };
             yield return new object[]
             {
@@ -1108,7 +1108,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(4)
                 ),
                 null,
-                "((1 + 2)).methodName(3, 4)"
+                "((1 + 2)).methodName(3, 4)",
             };
             yield return new object[]
             {
@@ -1123,7 +1123,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "((1 + 2)).@as()"
+                "((1 + 2)).@as()",
             };
             yield return new object[]
             {
@@ -1139,7 +1139,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "((1 + 2)).@as<@is>()"
+                "((1 + 2)).@as<@is>()",
             };
 
             // GenerateMethodReferenceExpression.
@@ -1148,13 +1148,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeMethodReferenceExpression(null, string.Empty),
                 null,
-                ""
+                "",
             };
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(null, "methodName"),
                 null,
-                "methodName"
+                "methodName",
             };
             yield return new object[]
             {
@@ -1164,7 +1164,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type1")
                 ),
                 null,
-                "methodName<type1>"
+                "methodName<type1>",
             };
             yield return new object[]
             {
@@ -1175,32 +1175,32 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type2")
                 ),
                 null,
-                "methodName<type1, type2>"
+                "methodName<type1, type2>",
             };
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(null, "as"),
                 null,
-                "@as"
+                "@as",
             };
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(null, "as", new CodeTypeReference("is")),
                 null,
-                "@as<@is>"
+                "@as<@is>",
             };
 
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), string.Empty),
                 null,
-                "1."
+                "1.",
             };
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), "methodName"),
                 null,
-                "1.methodName"
+                "1.methodName",
             };
             yield return new object[]
             {
@@ -1210,7 +1210,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type1")
                 ),
                 null,
-                "1.methodName<type1>"
+                "1.methodName<type1>",
             };
             yield return new object[]
             {
@@ -1221,13 +1221,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type2")
                 ),
                 null,
-                "1.methodName<type1, type2>"
+                "1.methodName<type1, type2>",
             };
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), "as"),
                 null,
-                "1.@as"
+                "1.@as",
             };
             yield return new object[]
             {
@@ -1237,7 +1237,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("is")
                 ),
                 null,
-                "1.@as<@is>"
+                "1.@as<@is>",
             };
 
             yield return new object[]
@@ -1251,7 +1251,7 @@ namespace System.CodeDom.Compiler.Tests
                     string.Empty
                 ),
                 null,
-                "((1 + 2))."
+                "((1 + 2)).",
             };
             yield return new object[]
             {
@@ -1264,7 +1264,7 @@ namespace System.CodeDom.Compiler.Tests
                     "methodName"
                 ),
                 null,
-                "((1 + 2)).methodName"
+                "((1 + 2)).methodName",
             };
             yield return new object[]
             {
@@ -1278,7 +1278,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type1")
                 ),
                 null,
-                "((1 + 2)).methodName<type1>"
+                "((1 + 2)).methodName<type1>",
             };
             yield return new object[]
             {
@@ -1293,7 +1293,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type2")
                 ),
                 null,
-                "((1 + 2)).methodName<type1, type2>"
+                "((1 + 2)).methodName<type1, type2>",
             };
             yield return new object[]
             {
@@ -1306,7 +1306,7 @@ namespace System.CodeDom.Compiler.Tests
                     "as"
                 ),
                 null,
-                "((1 + 2)).@as"
+                "((1 + 2)).@as",
             };
             yield return new object[]
             {
@@ -1320,7 +1320,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("is")
                 ),
                 null,
-                "((1 + 2)).@as<@is>"
+                "((1 + 2)).@as<@is>",
             };
 
             // CodeEventReferenceExpression.
@@ -1329,32 +1329,32 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeEventReferenceExpression(null, string.Empty),
                 null,
-                ""
+                "",
             };
             yield return new object[]
             {
                 new CodeEventReferenceExpression(null, "eventName"),
                 null,
-                "eventName"
+                "eventName",
             };
             yield return new object[] { new CodeEventReferenceExpression(null, "as"), null, "@as" };
             yield return new object[]
             {
                 new CodeEventReferenceExpression(new CodePrimitiveExpression(1), string.Empty),
                 null,
-                "1."
+                "1.",
             };
             yield return new object[]
             {
                 new CodeEventReferenceExpression(new CodePrimitiveExpression(1), "eventName"),
                 null,
-                "1.eventName"
+                "1.eventName",
             };
             yield return new object[]
             {
                 new CodeEventReferenceExpression(new CodePrimitiveExpression(1), "as"),
                 null,
-                "1.@as"
+                "1.@as",
             };
 
             // CodeDelegateInvokeExpression.
@@ -1364,7 +1364,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeDelegateInvokeExpression(null, new CodePrimitiveExpression(1)),
                 null,
-                "(1)"
+                "(1)",
             };
             yield return new object[]
             {
@@ -1374,13 +1374,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "(1, 2)"
+                "(1, 2)",
             };
             yield return new object[]
             {
                 new CodeDelegateInvokeExpression(new CodePrimitiveExpression(1)),
                 null,
-                "1()"
+                "1()",
             };
             yield return new object[]
             {
@@ -1389,7 +1389,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "1(2)"
+                "1(2)",
             };
             yield return new object[]
             {
@@ -1399,7 +1399,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(3)
                 ),
                 null,
-                "1(2, 3)"
+                "1(2, 3)",
             };
 
             // CodeObjectCreateExpression.
@@ -1408,7 +1408,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeObjectCreateExpression(new CodeTypeReference("type")),
                 null,
-                "new type()"
+                "new type()",
             };
             yield return new object[]
             {
@@ -1417,7 +1417,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                "new type(1)"
+                "new type(1)",
             };
             yield return new object[]
             {
@@ -1427,13 +1427,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                "new type(1, 2)"
+                "new type(1, 2)",
             };
             yield return new object[]
             {
                 new CodeObjectCreateExpression(new CodeTypeReference("as")),
                 null,
-                "new @as()"
+                "new @as()",
             };
 
             // CodeParameterDeclarationExpression.
@@ -1442,64 +1442,64 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), string.Empty),
                 null,
-                "type "
+                "type ",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name"),
                 null,
-                "type name"
+                "type name",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.In
+                    Direction = FieldDirection.In,
                 },
                 null,
-                "type name"
+                "type name",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.Out
+                    Direction = FieldDirection.Out,
                 },
                 null,
-                "out type name"
+                "out type name",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.Ref
+                    Direction = FieldDirection.Ref,
                 },
                 null,
-                "ref type name"
+                "ref type name",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.In - 1
+                    Direction = FieldDirection.In - 1,
                 },
                 null,
-                "type name"
+                "type name",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.Ref + 1
+                    Direction = FieldDirection.Ref + 1,
                 },
                 null,
-                "type name"
+                "type name",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression(new CodeTypeReference("as"), "is"),
                 null,
-                "@as @is"
+                "@as @is",
             };
 
             var parameterDeclarationExpression = new CodeParameterDeclarationExpression(
@@ -1534,14 +1534,14 @@ namespace System.CodeDom.Compiler.Tests
             {
                 parameterDeclarationExpression,
                 null,
-                "[()] [name1()] [name2(1)] [name3(arg1=1, arg2=2)] [@is(@as=1, arg2=2)] type name"
+                "[()] [name1()] [name2(1)] [name3(arg1=1, arg2=2)] [@is(@as=1, arg2=2)] type name",
             };
 
             foreach (
                 string paramsName in new string[]
                 {
                     "System.ParamArrayAttribute",
-                    "system.paramsarrayattribute"
+                    "system.paramsarrayattribute",
                 }
             )
             {
@@ -1585,7 +1585,7 @@ namespace System.CodeDom.Compiler.Tests
                 {
                     paramsParameterDeclarationExpression,
                     null,
-                    "[()] [name1()] [name2(1)] [name3(arg1=1, arg2=2)] [@is(@as=1, arg2=2)] params type name"
+                    "[()] [name1()] [name2(1)] [name3(arg1=1, arg2=2)] [@is(@as=1, arg2=2)] params type name",
                 };
             }
 
@@ -1594,31 +1594,31 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeDirectionExpression(FieldDirection.In, new CodePrimitiveExpression(1)),
                 null,
-                "1"
+                "1",
             };
             yield return new object[]
             {
                 new CodeDirectionExpression(FieldDirection.Out, new CodePrimitiveExpression(1)),
                 null,
-                "out 1"
+                "out 1",
             };
             yield return new object[]
             {
                 new CodeDirectionExpression(FieldDirection.Ref, new CodePrimitiveExpression(1)),
                 null,
-                "ref 1"
+                "ref 1",
             };
             yield return new object[]
             {
                 new CodeDirectionExpression(FieldDirection.In - 1, new CodePrimitiveExpression(1)),
                 null,
-                "1"
+                "1",
             };
             yield return new object[]
             {
                 new CodeDirectionExpression(FieldDirection.Ref + 1, new CodePrimitiveExpression(1)),
                 null,
-                "1"
+                "1",
             };
 
             // CodePrimitiveExpression.
@@ -1652,7 +1652,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodePrimitiveExpression("\uD800\uDC00"),
                 null,
-                "\"\uD800\uDC00\""
+                "\"\uD800\uDC00\"",
             };
             yield return new object[]
             {
@@ -1660,7 +1660,7 @@ namespace System.CodeDom.Compiler.Tests
                     "\r\t\"'\0\\\n\u2027\u2028\u2029\u2030\u0083\u0084\u0085"
                 ),
                 null,
-                "\"\\r\\t\\\"\\'\\0\\\\\\n\u2027\\u2028\\u2029\u2030\u0083\u0084\\u0085\""
+                "\"\\r\\t\\\"\\'\\0\\\\\\n\u2027\\u2028\\u2029\u2030\u0083\u0084\\u0085\"",
             };
             yield return new object[] { new CodePrimitiveExpression("\uDC00"), null, "\"\uDC00\"" };
             yield return new object[] { new CodePrimitiveExpression("\uD800"), null, "\"\uD800\"" };
@@ -1670,7 +1670,7 @@ namespace System.CodeDom.Compiler.Tests
                     "01234567890123456789012345678901234567890123456789012345678901234567890123456789"
                 ),
                 null,
-                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\""
+                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\"",
             };
             yield return new object[]
             {
@@ -1678,7 +1678,7 @@ namespace System.CodeDom.Compiler.Tests
                     "01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800"
                 ),
                 null,
-                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\" +{nl}    \"\""
+                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\" +{nl}    \"\"",
             };
             yield return new object[]
             {
@@ -1686,7 +1686,7 @@ namespace System.CodeDom.Compiler.Tests
                     "01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\uDC00"
                 ),
                 null,
-                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\uDC00\" +{nl}    \"\""
+                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\uDC00\" +{nl}    \"\"",
             };
             yield return new object[]
             {
@@ -1694,7 +1694,7 @@ namespace System.CodeDom.Compiler.Tests
                     "01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800a"
                 ),
                 null,
-                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\" +{nl}    \"a\""
+                $"\"01234567890123456789012345678901234567890123456789012345678901234567890123456789\uD800\" +{nl}    \"a\"",
             };
             yield return new object[]
             {
@@ -1702,7 +1702,7 @@ namespace System.CodeDom.Compiler.Tests
                     "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
                 ),
                 null,
-                $"\"012345678901234567890123456789012345678901234567890123456789012345678901234567890\" +{nl}    \"123456789\""
+                $"\"012345678901234567890123456789012345678901234567890123456789012345678901234567890\" +{nl}    \"123456789\"",
             };
             yield return new object[]
             {
@@ -1710,25 +1710,25 @@ namespace System.CodeDom.Compiler.Tests
                     "012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789"
                 ),
                 customOptions,
-                $"\"012345678901234567890123456789012345678901234567890123456789012345678901234567890\" +{nl}$\"123456789\""
+                $"\"012345678901234567890123456789012345678901234567890123456789012345678901234567890\" +{nl}$\"123456789\"",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(new string('a', 256)),
                 null,
-                $"@\"{new string('a', 256)}\""
+                $"@\"{new string('a', 256)}\"",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression("\"" + new string('a', 254) + "\""),
                 null,
-                $"@\"\"\"{new string('a', 254)}\"\"\""
+                $"@\"\"\"{new string('a', 254)}\"\"\"",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression("\"" + new string('a', 1498) + "\""),
                 null,
-                $"@\"\"\"{new string('a', 1498)}\"\"\""
+                $"@\"\"\"{new string('a', 1498)}\"\"\"",
             };
             yield return new object[] { new CodePrimitiveExpression((byte)1), null, "1" };
             yield return new object[] { new CodePrimitiveExpression((short)1), null, "1" };
@@ -1739,49 +1739,49 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodePrimitiveExpression(float.NegativeInfinity),
                 null,
-                "float.NegativeInfinity"
+                "float.NegativeInfinity",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(float.PositiveInfinity),
                 null,
-                "float.PositiveInfinity"
+                "float.PositiveInfinity",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(float.MaxValue),
                 null,
-                "3.4028235E+38F"
+                "3.4028235E+38F",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(double.NaN),
                 null,
-                "double.NaN"
+                "double.NaN",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(double.NegativeInfinity),
                 null,
-                "double.NegativeInfinity"
+                "double.NegativeInfinity",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(double.PositiveInfinity),
                 null,
-                "double.PositiveInfinity"
+                "double.PositiveInfinity",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(double.MaxValue),
                 null,
-                "1.7976931348623157E+308D"
+                "1.7976931348623157E+308D",
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression(decimal.MaxValue),
                 null,
-                "79228162514264337593543950335m"
+                "79228162514264337593543950335m",
             };
             yield return new object[] { new CodePrimitiveExpression(true), null, "true" };
             yield return new object[] { new CodePrimitiveExpression(false), null, "false" };
@@ -1792,37 +1792,37 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodePropertyReferenceExpression(null, string.Empty),
                 null,
-                ""
+                "",
             };
             yield return new object[]
             {
                 new CodePropertyReferenceExpression(null, "fieldName"),
                 null,
-                "fieldName"
+                "fieldName",
             };
             yield return new object[]
             {
                 new CodePropertyReferenceExpression(null, "as"),
                 null,
-                "@as"
+                "@as",
             };
             yield return new object[]
             {
                 new CodePropertyReferenceExpression(new CodePrimitiveExpression(1), string.Empty),
                 null,
-                "1."
+                "1.",
             };
             yield return new object[]
             {
                 new CodePropertyReferenceExpression(new CodePrimitiveExpression(1), "fieldName"),
                 null,
-                "1.fieldName"
+                "1.fieldName",
             };
             yield return new object[]
             {
                 new CodePropertyReferenceExpression(new CodePrimitiveExpression(1), "as"),
                 null,
-                "1.@as"
+                "1.@as",
             };
 
             // CodePropertySetValueReferenceExpression.
@@ -1830,7 +1830,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodePropertySetValueReferenceExpression(),
                 null,
-                "value"
+                "value",
             };
 
             // CodeThisReferenceExpression.
@@ -1841,62 +1841,62 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference()),
                 null,
-                "void"
+                "void",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference((string)null)),
                 null,
-                "void"
+                "void",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference(string.Empty)),
                 null,
-                "void"
+                "void",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type")),
                 null,
-                "type"
+                "type",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("as")),
                 null,
-                "@as"
+                "@as",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  type  ")),
                 null,
-                "  type  "
+                "  type  ",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type`")),
                 null,
-                "type<>"
+                "type<>",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type`-1")),
                 null,
-                "type<>-1"
+                "type<>-1",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type`0")),
                 null,
-                "type<>"
+                "type<>",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type`1")),
                 null,
-                "type<>"
+                "type<>",
             };
             yield return new object[]
             {
@@ -1904,13 +1904,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type`1", new CodeTypeReference("type1"))
                 ),
                 null,
-                "type<type1>"
+                "type<type1>",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type`2")),
                 null,
-                "type<, >"
+                "type<, >",
             };
             yield return new object[]
             {
@@ -1918,7 +1918,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type`2", new CodeTypeReference("type1"))
                 ),
                 null,
-                "type<type1, >"
+                "type<type1, >",
             };
             yield return new object[]
             {
@@ -1930,7 +1930,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "type<type1, type2>"
+                "type<type1, type2>",
             };
             yield return new object[]
             {
@@ -1943,56 +1943,56 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                "type<type1, type2>"
+                "type<type1, type2>",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type+innerType")),
                 null,
-                "type.innerType"
+                "type.innerType",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type+as")),
                 null,
-                "type.@as"
+                "type.@as",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("as+innerType")),
                 null,
-                "@as.innerType"
+                "@as.innerType",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("as+is")),
                 null,
-                "@as.@is"
+                "@as.@is",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type.innerType")),
                 null,
-                "type.innerType"
+                "type.innerType",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("type.as")),
                 null,
-                "type.@as"
+                "type.@as",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("as.innerType")),
                 null,
-                "@as.innerType"
+                "@as.innerType",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("as.is")),
                 null,
-                "@as.@is"
+                "@as.@is",
             };
             yield return new object[]
             {
@@ -2000,7 +2000,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type`1+innerType", new CodeTypeReference("type1"))
                 ),
                 null,
-                "type<type1>.innerType"
+                "type<type1>.innerType",
             };
             yield return new object[]
             {
@@ -2008,7 +2008,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type`1.innerType", new CodeTypeReference("type1"))
                 ),
                 null,
-                "type<type1>.innerType"
+                "type<type1>.innerType",
             };
 
             yield return new object[]
@@ -2017,7 +2017,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference("type"), 0)
                 ),
                 null,
-                "type"
+                "type",
             };
             yield return new object[]
             {
@@ -2025,7 +2025,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference("type"), -1)
                 ),
                 null,
-                "type"
+                "type",
             };
             yield return new object[]
             {
@@ -2033,7 +2033,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference("type"), 1)
                 ),
                 null,
-                "type[]"
+                "type[]",
             };
             yield return new object[]
             {
@@ -2041,7 +2041,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference("type"), 2)
                 ),
                 null,
-                "type[,]"
+                "type[,]",
             };
             yield return new object[]
             {
@@ -2049,13 +2049,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference("type", 1), 1)
                 ),
                 null,
-                "type[][]"
+                "type[][]",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference((CodeTypeReference)null, 1)),
                 null,
-                "void[]"
+                "void[]",
             };
             yield return new object[]
             {
@@ -2063,311 +2063,311 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(new CodeTypeReference((CodeTypeReference)null, 1), 1)
                 ),
                 null,
-                "void[][]"
+                "void[][]",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Byte")),
                 null,
-                "byte"
+                "byte",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.byte")),
                 null,
-                "byte"
+                "byte",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.byte  ")),
                 null,
-                "byte"
+                "byte",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.UInt16")),
                 null,
-                "ushort"
+                "ushort",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.uint16")),
                 null,
-                "ushort"
+                "ushort",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.uint16  ")),
                 null,
-                "ushort"
+                "ushort",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.UInt32")),
                 null,
-                "uint"
+                "uint",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.uint32")),
                 null,
-                "uint"
+                "uint",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.uint32  ")),
                 null,
-                "uint"
+                "uint",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.UInt64")),
                 null,
-                "ulong"
+                "ulong",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.uint64")),
                 null,
-                "ulong"
+                "ulong",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.uint64  ")),
                 null,
-                "ulong"
+                "ulong",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.SByte")),
                 null,
-                "sbyte"
+                "sbyte",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.sbyte")),
                 null,
-                "sbyte"
+                "sbyte",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.sbyte  ")),
                 null,
-                "sbyte"
+                "sbyte",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Int16")),
                 null,
-                "short"
+                "short",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.int16")),
                 null,
-                "short"
+                "short",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.int16  ")),
                 null,
-                "short"
+                "short",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Int32")),
                 null,
-                "int"
+                "int",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.int32")),
                 null,
-                "int"
+                "int",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.int32  ")),
                 null,
-                "int"
+                "int",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Int64")),
                 null,
-                "long"
+                "long",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.int64")),
                 null,
-                "long"
+                "long",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.int64  ")),
                 null,
-                "long"
+                "long",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Boolean")),
                 null,
-                "bool"
+                "bool",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.boolean")),
                 null,
-                "bool"
+                "bool",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.boolean  ")),
                 null,
-                "bool"
+                "bool",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Char")),
                 null,
-                "char"
+                "char",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.char")),
                 null,
-                "char"
+                "char",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.char  ")),
                 null,
-                "char"
+                "char",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Single")),
                 null,
-                "float"
+                "float",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.single")),
                 null,
-                "float"
+                "float",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.single  ")),
                 null,
-                "float"
+                "float",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Double")),
                 null,
-                "double"
+                "double",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.double")),
                 null,
-                "double"
+                "double",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.double  ")),
                 null,
-                "double"
+                "double",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Decimal")),
                 null,
-                "decimal"
+                "decimal",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.decimal")),
                 null,
-                "decimal"
+                "decimal",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.decimal  ")),
                 null,
-                "decimal"
+                "decimal",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.String")),
                 null,
-                "string"
+                "string",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.string")),
                 null,
-                "string"
+                "string",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.string  ")),
                 null,
-                "string"
+                "string",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Object")),
                 null,
-                "object"
+                "object",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.object")),
                 null,
-                "object"
+                "object",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.object  ")),
                 null,
-                "object"
+                "object",
             };
 
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("System.Void")),
                 null,
-                "void"
+                "void",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("system.void")),
                 null,
-                "void"
+                "void",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(new CodeTypeReference("  system.void  ")),
                 null,
-                "void"
+                "void",
             };
 
             yield return new object[]
@@ -2376,29 +2376,29 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference() { Options = CodeTypeReferenceOptions.GlobalReference }
                 ),
                 null,
-                "void"
+                "void",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(
                     new CodeTypeReference("system.int32")
                     {
-                        Options = CodeTypeReferenceOptions.GlobalReference
+                        Options = CodeTypeReferenceOptions.GlobalReference,
                     }
                 ),
                 null,
-                "int"
+                "int",
             };
             yield return new object[]
             {
                 new CodeTypeReferenceExpression(
                     new CodeTypeReference("type")
                     {
-                        Options = CodeTypeReferenceOptions.GlobalReference
+                        Options = CodeTypeReferenceOptions.GlobalReference,
                     }
                 ),
                 null,
-                "global::type"
+                "global::type",
             };
 
             // CodeTypeOfExpression.
@@ -2412,13 +2412,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeDefaultValueExpression(new CodeTypeReference("type")),
                 null,
-                "default(type)"
+                "default(type)",
             };
             yield return new object[]
             {
                 new CodeDefaultValueExpression(new CodeTypeReference("as")),
                 null,
-                "default(@as)"
+                "default(@as)",
             };
         }
 
@@ -2451,7 +2451,7 @@ namespace System.CodeDom.Compiler.Tests
                     null,
                     CodeBinaryOperatorType.Add,
                     new CodePrimitiveExpression(2)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -2459,19 +2459,19 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     CodeBinaryOperatorType.Add,
                     null
-                )
+                ),
             };
 
             yield return new object[] { new CodeCastExpression() };
             yield return new object[]
             {
-                new CodeCastExpression(new CodeTypeReference("name"), null)
+                new CodeCastExpression(new CodeTypeReference("name"), null),
             };
 
             yield return new object[] { new CodeDelegateCreateExpression() };
             yield return new object[]
             {
-                new CodeDelegateCreateExpression(new CodeTypeReference("type"), null, "methodName")
+                new CodeDelegateCreateExpression(new CodeTypeReference("type"), null, "methodName"),
             };
 
             yield return new object[] { new CodeIndexerExpression() };
@@ -2517,25 +2517,28 @@ namespace System.CodeDom.Compiler.Tests
 
             yield return new object[]
             {
-                new CodeArrayCreateExpression("type", new CodeExpression[] { new CodeExpression() })
+                new CodeArrayCreateExpression(
+                    "type",
+                    new CodeExpression[] { new CodeExpression() }
+                ),
             };
             yield return new object[]
             {
                 new CodeArrayCreateExpression("type", new CodeExpression[] { new CodeExpression() })
                 {
-                    SizeExpression = new CodePrimitiveExpression(1)
-                }
+                    SizeExpression = new CodePrimitiveExpression(1),
+                },
             };
             yield return new object[]
             {
                 new CodeArrayCreateExpression("type", new CodeExpression[] { new CodeExpression() })
                 {
-                    Size = 1
-                }
+                    Size = 1,
+                },
             };
             yield return new object[]
             {
-                new CodeArrayCreateExpression("type") { SizeExpression = new CodeExpression() }
+                new CodeArrayCreateExpression("type") { SizeExpression = new CodeExpression() },
             };
 
             yield return new object[]
@@ -2544,7 +2547,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression(),
                     CodeBinaryOperatorType.Add,
                     new CodePrimitiveExpression(2)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -2552,12 +2555,12 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     CodeBinaryOperatorType.Add,
                     new CodeExpression()
-                )
+                ),
             };
 
             yield return new object[]
             {
-                new CodeCastExpression(new CodeTypeReference("name"), new CodeExpression())
+                new CodeCastExpression(new CodeTypeReference("name"), new CodeExpression()),
             };
 
             yield return new object[]
@@ -2566,48 +2569,51 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type"),
                     new CodeExpression(),
                     "methodName"
-                )
+                ),
             };
 
             yield return new object[]
             {
-                new CodeFieldReferenceExpression(new CodeExpression(), "fieldName")
+                new CodeFieldReferenceExpression(new CodeExpression(), "fieldName"),
             };
 
             yield return new object[] { new CodeIndexerExpression(new CodeExpression()) };
             yield return new object[]
             {
-                new CodeIndexerExpression(new CodePrimitiveExpression(1), new CodeExpression())
+                new CodeIndexerExpression(new CodePrimitiveExpression(1), new CodeExpression()),
             };
 
             yield return new object[] { new CodeArrayIndexerExpression(new CodeExpression()) };
             yield return new object[]
             {
-                new CodeArrayIndexerExpression(new CodePrimitiveExpression(1), new CodeExpression())
+                new CodeArrayIndexerExpression(
+                    new CodePrimitiveExpression(1),
+                    new CodeExpression()
+                ),
             };
 
             yield return new object[]
             {
                 new CodeMethodInvokeExpression(
                     new CodeMethodReferenceExpression(new CodeExpression(), "methodName")
-                )
+                ),
             };
             yield return new object[]
             {
                 new CodeMethodInvokeExpression(
                     new CodeMethodReferenceExpression(new CodePrimitiveExpression(1), "methodName"),
                     new CodeExpression()
-                )
+                ),
             };
 
             yield return new object[]
             {
-                new CodeMethodReferenceExpression(new CodeExpression(), "methodName")
+                new CodeMethodReferenceExpression(new CodeExpression(), "methodName"),
             };
 
             yield return new object[]
             {
-                new CodeEventReferenceExpression(new CodeExpression(), "fieldName")
+                new CodeEventReferenceExpression(new CodeExpression(), "fieldName"),
             };
 
             yield return new object[] { new CodeDelegateInvokeExpression(new CodeExpression()) };
@@ -2616,12 +2622,12 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeDelegateInvokeExpression(
                     new CodePrimitiveExpression(1),
                     new CodeExpression()
-                )
+                ),
             };
 
             yield return new object[]
             {
-                new CodeObjectCreateExpression(new CodeTypeReference("type"), new CodeExpression())
+                new CodeObjectCreateExpression(new CodeTypeReference("type"), new CodeExpression()),
             };
 
             var invalidParameterDeclarationExpression = new CodeParameterDeclarationExpression(
@@ -2638,7 +2644,7 @@ namespace System.CodeDom.Compiler.Tests
 
             yield return new object[]
             {
-                new CodeDirectionExpression(FieldDirection.In, new CodeExpression())
+                new CodeDirectionExpression(FieldDirection.In, new CodeExpression()),
             };
 
             yield return new object[] { new CodePrimitiveExpression(new DateTime()) };
@@ -2647,7 +2653,7 @@ namespace System.CodeDom.Compiler.Tests
 
             yield return new object[]
             {
-                new CodePropertyReferenceExpression(new CodeExpression(), "propertyName")
+                new CodePropertyReferenceExpression(new CodeExpression(), "propertyName"),
             };
         }
 
@@ -2713,7 +2719,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 IndentString = "$",
                 ElseOnClosing = true,
-                BracingStyle = "C"
+                BracingStyle = "C",
             };
 
             // CodeCommentStatement
@@ -2722,7 +2728,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeCommentStatement(string.Empty, docComment: true),
                 null,
-                $"/// {nl}"
+                $"/// {nl}",
             };
 
             yield return new object[] { new CodeCommentStatement("text"), null, $"// text{nl}" };
@@ -2730,49 +2736,49 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeCommentStatement("text", docComment: true),
                 null,
-                $"/// text{nl}"
+                $"/// text{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\0more"),
                 null,
-                $"// textmore{nl}"
+                $"// textmore{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\n"),
                 null,
-                $"// text\n//{nl}"
+                $"// text\n//{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\nmore"),
                 null,
-                $"// text\n//more{nl}"
+                $"// text\n//more{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\r"),
                 null,
-                $"// text\r//{nl}"
+                $"// text\r//{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\rmore"),
                 null,
-                $"// text\r//more{nl}"
+                $"// text\r//more{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\r\nmore"),
                 null,
-                $"// text\r\n//more{nl}"
+                $"// text\r\n//more{nl}",
             };
             yield return new object[]
             {
                 new CodeCommentStatement("text\u2027\u2028more\u2029\u2030more\u0083\u0084\u0085"),
                 null,
-                $"// text\u2027\u2028//more\u2029//\u2030more\u0083\u0084\u0085//{nl}"
+                $"// text\u2027\u2028//more\u2029//\u2030more\u0083\u0084\u0085//{nl}",
             };
 
             // CodeMethodReturnStatement.
@@ -2781,7 +2787,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeMethodReturnStatement(new CodePrimitiveExpression(1)),
                 null,
-                $"return 1;{nl}"
+                $"return 1;{nl}",
             };
 
             // GenerateConditionStatement.
@@ -2789,19 +2795,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeConditionStatement(new CodePrimitiveExpression(1)),
                 null,
-                $"if (1) {{{nl}}}{nl}"
-            };
-            yield return new object[]
-            {
-                new CodeConditionStatement(
-                    new CodePrimitiveExpression(1),
-                    new CodeStatement[]
-                    {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(2))
-                    }
-                ),
-                null,
-                $"if (1) {{{nl}    2;{nl}}}{nl}"
+                $"if (1) {{{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2810,11 +2804,23 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(2)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(3))
                     }
                 ),
                 null,
-                $"if (1) {{{nl}    2;{nl}    3;{nl}}}{nl}"
+                $"if (1) {{{nl}    2;{nl}}}{nl}",
+            };
+            yield return new object[]
+            {
+                new CodeConditionStatement(
+                    new CodePrimitiveExpression(1),
+                    new CodeStatement[]
+                    {
+                        new CodeExpressionStatement(new CodePrimitiveExpression(2)),
+                        new CodeExpressionStatement(new CodePrimitiveExpression(3)),
+                    }
+                ),
+                null,
+                $"if (1) {{{nl}    2;{nl}    3;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2823,11 +2829,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[0],
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(2))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(2)),
                     }
                 ),
                 null,
-                $"if (1) {{{nl}}}{nl}else {{{nl}    2;{nl}}}{nl}"
+                $"if (1) {{{nl}}}{nl}else {{{nl}    2;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2836,35 +2842,23 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(2)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(3))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(3)),
                     },
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(4)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(5))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(5)),
                     }
                 ),
                 null,
-                $"if (1) {{{nl}    2;{nl}    3;{nl}}}{nl}else {{{nl}    4;{nl}    5;{nl}}}{nl}"
+                $"if (1) {{{nl}    2;{nl}    3;{nl}}}{nl}else {{{nl}    4;{nl}    5;{nl}}}{nl}",
             };
 
             yield return new object[]
             {
                 new CodeConditionStatement(new CodePrimitiveExpression(1)),
                 null,
-                $"if (1) {{{nl}}}{nl}"
-            };
-            yield return new object[]
-            {
-                new CodeConditionStatement(
-                    new CodePrimitiveExpression(1),
-                    new CodeStatement[]
-                    {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(2))
-                    }
-                ),
-                customOptions,
-                $"if (1){nl}{{{nl}$2;{nl}}}{nl}"
+                $"if (1) {{{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2873,11 +2867,23 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(2)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(3))
                     }
                 ),
                 customOptions,
-                $"if (1){nl}{{{nl}$2;{nl}$3;{nl}}}{nl}"
+                $"if (1){nl}{{{nl}$2;{nl}}}{nl}",
+            };
+            yield return new object[]
+            {
+                new CodeConditionStatement(
+                    new CodePrimitiveExpression(1),
+                    new CodeStatement[]
+                    {
+                        new CodeExpressionStatement(new CodePrimitiveExpression(2)),
+                        new CodeExpressionStatement(new CodePrimitiveExpression(3)),
+                    }
+                ),
+                customOptions,
+                $"if (1){nl}{{{nl}$2;{nl}$3;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2886,11 +2892,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[0],
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(2))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(2)),
                     }
                 ),
                 customOptions,
-                $"if (1){nl}{{{nl}}} else{nl}{{{nl}$2;{nl}}}{nl}"
+                $"if (1){nl}{{{nl}}} else{nl}{{{nl}$2;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2899,16 +2905,16 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(2)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(3))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(3)),
                     },
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(4)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(5))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(5)),
                     }
                 ),
                 customOptions,
-                $"if (1){nl}{{{nl}$2;{nl}$3;{nl}}} else{nl}{{{nl}$4;{nl}$5;{nl}}}{nl}"
+                $"if (1){nl}{{{nl}$2;{nl}$3;{nl}}} else{nl}{{{nl}$4;{nl}$5;{nl}}}{nl}",
             };
 
             yield return new object[]
@@ -2918,7 +2924,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpressionStatement(new CodePrimitiveExpression(new string('a', 82)))
                 ),
                 null,
-                $"if (1) {{{nl}    \"{new string('a', 81)}\" +{nl}        \"a\";{nl}}}{nl}"
+                $"if (1) {{{nl}    \"{new string('a', 81)}\" +{nl}        \"a\";{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2932,7 +2938,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"if (1) {{{nl}    if (2) {{{nl}        \"{new string('a', 81)}\" +{nl}            \"a\";{nl}    }}{nl}}}{nl}"
+                $"if (1) {{{nl}    if (2) {{{nl}        \"{new string('a', 81)}\" +{nl}            \"a\";{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2949,7 +2955,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            \"{new string('a', 81)}\" +{nl}                \"a\";{nl}        }}{nl}    }}{nl}}}{nl}"
+                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            \"{new string('a', 81)}\" +{nl}                \"a\";{nl}        }}{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2969,7 +2975,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            if (4) {{{nl}                \"{new string('a', 81)}\" +{nl}                    \"a\";{nl}            }}{nl}        }}{nl}    }}{nl}}}{nl}"
+                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            if (4) {{{nl}                \"{new string('a', 81)}\" +{nl}                    \"a\";{nl}            }}{nl}        }}{nl}    }}{nl}}}{nl}",
             };
 
             yield return new object[]
@@ -2979,7 +2985,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeCommentStatement("text\rmore")
                 ),
                 null,
-                $"if (1) {{{nl}    // text\r    //more{nl}}}{nl}"
+                $"if (1) {{{nl}    // text\r    //more{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -2991,7 +2997,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"if (1) {{{nl}    if (2) {{{nl}        // text\r        //more{nl}    }}{nl}}}{nl}"
+                $"if (1) {{{nl}    if (2) {{{nl}        // text\r        //more{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3006,7 +3012,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            // text\r            //more{nl}        }}{nl}    }}{nl}}}{nl}"
+                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            // text\r            //more{nl}        }}{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3024,7 +3030,7 @@ namespace System.CodeDom.Compiler.Tests
                     )
                 ),
                 null,
-                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            if (4) {{{nl}                // text\r                //more{nl}            }}{nl}        }}{nl}    }}{nl}}}{nl}"
+                $"if (1) {{{nl}    if (2) {{{nl}        if (3) {{{nl}            if (4) {{{nl}                // text\r                //more{nl}            }}{nl}        }}{nl}    }}{nl}}}{nl}",
             };
 
             // CodeTryCatchFinallyStatement.
@@ -3032,20 +3038,20 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeTryCatchFinallyStatement(),
                 null,
-                $"try {{{nl}}}{nl}"
+                $"try {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTryCatchFinallyStatement(
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(1))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(1)),
                     },
                     new CodeCatchClause[0],
                     new CodeStatement[0]
                 ),
                 null,
-                $"try {{{nl}    1;{nl}}}{nl}"
+                $"try {{{nl}    1;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3059,12 +3065,12 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeTypeReference("typeName"),
                             new CodeExpressionStatement(new CodePrimitiveExpression(1))
                         ),
-                        new CodeCatchClause("as", new CodeTypeReference("is"))
+                        new CodeCatchClause("as", new CodeTypeReference("is")),
                     },
                     new CodeStatement[0]
                 ),
                 null,
-                $"try {{{nl}}}{nl}catch (System.Exception ) {{{nl}}}{nl}catch (typeName name) {{{nl}    1;{nl}}}{nl}catch (@is @as) {{{nl}}}{nl}"
+                $"try {{{nl}}}{nl}catch (System.Exception ) {{{nl}}}{nl}catch (typeName name) {{{nl}    1;{nl}}}{nl}catch (@is @as) {{{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3073,11 +3079,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeCatchClause[0],
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(1))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(1)),
                     }
                 ),
                 null,
-                $"try {{{nl}}}{nl}finally {{{nl}    1;{nl}}}{nl}"
+                $"try {{{nl}}}{nl}finally {{{nl}    1;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3085,7 +3091,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(1)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(2))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(2)),
                     },
                     new CodeCatchClause[]
                     {
@@ -3096,36 +3102,36 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeExpressionStatement(new CodePrimitiveExpression(3)),
                             new CodeExpressionStatement(new CodePrimitiveExpression(4))
                         ),
-                        new CodeCatchClause("as", new CodeTypeReference("is"))
+                        new CodeCatchClause("as", new CodeTypeReference("is")),
                     },
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(5)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(6))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(6)),
                     }
                 ),
                 null,
-                $"try {{{nl}    1;{nl}    2;{nl}}}{nl}catch (System.Exception ) {{{nl}}}{nl}catch (typeName name) {{{nl}    3;{nl}    4;{nl}}}{nl}catch (@is @as) {{{nl}}}{nl}finally {{{nl}    5;{nl}    6;{nl}}}{nl}"
+                $"try {{{nl}    1;{nl}    2;{nl}}}{nl}catch (System.Exception ) {{{nl}}}{nl}catch (typeName name) {{{nl}    3;{nl}    4;{nl}}}{nl}catch (@is @as) {{{nl}}}{nl}finally {{{nl}    5;{nl}    6;{nl}}}{nl}",
             };
 
             yield return new object[]
             {
                 new CodeTryCatchFinallyStatement(),
                 customOptions,
-                $"try{nl}{{{nl}}}{nl}"
+                $"try{nl}{{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTryCatchFinallyStatement(
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(1))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(1)),
                     },
                     new CodeCatchClause[0],
                     new CodeStatement[0]
                 ),
                 customOptions,
-                $"try{nl}{{{nl}$1;{nl}}}{nl}"
+                $"try{nl}{{{nl}$1;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3139,12 +3145,12 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeTypeReference("typeName"),
                             new CodeExpressionStatement(new CodePrimitiveExpression(1))
                         ),
-                        new CodeCatchClause("as", new CodeTypeReference("is"))
+                        new CodeCatchClause("as", new CodeTypeReference("is")),
                     },
                     new CodeStatement[0]
                 ),
                 customOptions,
-                $"try{nl}{{{nl}}} catch (System.Exception ){nl}{{{nl}}} catch (typeName name){nl}{{{nl}$1;{nl}}} catch (@is @as){nl}{{{nl}}}{nl}"
+                $"try{nl}{{{nl}}} catch (System.Exception ){nl}{{{nl}}} catch (typeName name){nl}{{{nl}$1;{nl}}} catch (@is @as){nl}{{{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3153,11 +3159,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeCatchClause[0],
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(1))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(1)),
                     }
                 ),
                 customOptions,
-                $"try{nl}{{{nl}}} finally{nl}{{{nl}$1;{nl}}}{nl}"
+                $"try{nl}{{{nl}}} finally{nl}{{{nl}$1;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3165,7 +3171,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(1)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(2))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(2)),
                     },
                     new CodeCatchClause[]
                     {
@@ -3176,16 +3182,16 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeExpressionStatement(new CodePrimitiveExpression(3)),
                             new CodeExpressionStatement(new CodePrimitiveExpression(4))
                         ),
-                        new CodeCatchClause("as", new CodeTypeReference("is"))
+                        new CodeCatchClause("as", new CodeTypeReference("is")),
                     },
                     new CodeStatement[]
                     {
                         new CodeExpressionStatement(new CodePrimitiveExpression(5)),
-                        new CodeExpressionStatement(new CodePrimitiveExpression(6))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(6)),
                     }
                 ),
                 customOptions,
-                $"try{nl}{{{nl}$1;{nl}$2;{nl}}} catch (System.Exception ){nl}{{{nl}}} catch (typeName name){nl}{{{nl}$3;{nl}$4;{nl}}} catch (@is @as){nl}{{{nl}}} finally{nl}{{{nl}$5;{nl}$6;{nl}}}{nl}"
+                $"try{nl}{{{nl}$1;{nl}$2;{nl}}} catch (System.Exception ){nl}{{{nl}}} catch (typeName name){nl}{{{nl}$3;{nl}$4;{nl}}} catch (@is @as){nl}{{{nl}}} finally{nl}{{{nl}$5;{nl}$6;{nl}}}{nl}",
             };
 
             // CodeAssignStatement.
@@ -3196,7 +3202,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(2)
                 ),
                 null,
-                $"1 = 2;{nl}"
+                $"1 = 2;{nl}",
             };
 
             // CodeExpressionStatement.
@@ -3204,7 +3210,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeExpressionStatement(new CodePrimitiveExpression(1)),
                 null,
-                $"1;{nl}"
+                $"1;{nl}",
             };
 
             // CodeIterationStatement.
@@ -3217,7 +3223,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[0]
                 ),
                 null,
-                $"for (goto label1;{nl}; 1; goto label2;{nl}) {{{nl}}}{nl}"
+                $"for (goto label1;{nl}; 1; goto label2;{nl}) {{{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3228,11 +3234,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeGotoStatement("label3"),
-                        new CodeGotoStatement("label4")
+                        new CodeGotoStatement("label4"),
                     }
                 ),
                 null,
-                $"for (goto label1;{nl}; 1; goto label2;{nl}) {{{nl}    goto label3;{nl}    goto label4;{nl}}}{nl}"
+                $"for (goto label1;{nl}; 1; goto label2;{nl}) {{{nl}    goto label3;{nl}    goto label4;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3251,11 +3257,11 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeAssignStatement(
                             new CodePrimitiveExpression(6),
                             new CodePrimitiveExpression(7)
-                        )
+                        ),
                     }
                 ),
                 null,
-                $"for (1 = 2; 3; 4 = 5) {{{nl}    6 = 7;{nl}}}{nl}"
+                $"for (1 = 2; 3; 4 = 5) {{{nl}    6 = 7;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3265,11 +3271,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpressionStatement(new CodePrimitiveExpression(3)),
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(4))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(4)),
                     }
                 ),
                 null,
-                $"for (1; 2; 3) {{{nl}    4;{nl}}}{nl}"
+                $"for (1; 2; 3) {{{nl}    4;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3280,7 +3286,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[] { new CodeVariableDeclarationStatement("type3", "name3") }
                 ),
                 null,
-                $"for (type1 name1; 1; type2 name2) {{{nl}    type3 name3;{nl}}}{nl}"
+                $"for (type1 name1; 1; type2 name2) {{{nl}    type3 name3;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3295,7 +3301,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[] { new CodeVariableDeclarationStatement("type3", "name3") }
                 ),
                 null,
-                $"for (type1 name1 = 1; 2; type2 name2) {{{nl}    type3 name3;{nl}}}{nl}"
+                $"for (type1 name1 = 1; 2; type2 name2) {{{nl}    type3 name3;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3306,7 +3312,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[] { new CodeSnippetStatement("value3") }
                 ),
                 null,
-                $"for (value1{nl}; 1; value2{nl}) {{{nl}value3{nl}}}{nl}"
+                $"for (value1{nl}; 1; value2{nl}) {{{nl}value3{nl}}}{nl}",
             };
 
             yield return new object[]
@@ -3318,7 +3324,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[0]
                 ),
                 customOptions,
-                $"for (goto label1;{nl}; 1; goto label2;{nl}){nl}{{{nl}}}{nl}"
+                $"for (goto label1;{nl}; 1; goto label2;{nl}){nl}{{{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3329,11 +3335,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[]
                     {
                         new CodeGotoStatement("label3"),
-                        new CodeGotoStatement("label4")
+                        new CodeGotoStatement("label4"),
                     }
                 ),
                 customOptions,
-                $"for (goto label1;{nl}; 1; goto label2;{nl}){nl}{{{nl}$goto label3;{nl}$goto label4;{nl}}}{nl}"
+                $"for (goto label1;{nl}; 1; goto label2;{nl}){nl}{{{nl}$goto label3;{nl}$goto label4;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3352,11 +3358,11 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeAssignStatement(
                             new CodePrimitiveExpression(6),
                             new CodePrimitiveExpression(7)
-                        )
+                        ),
                     }
                 ),
                 customOptions,
-                $"for (1 = 2; 3; 4 = 5){nl}{{{nl}$6 = 7;{nl}}}{nl}"
+                $"for (1 = 2; 3; 4 = 5){nl}{{{nl}$6 = 7;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3366,11 +3372,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpressionStatement(new CodePrimitiveExpression(3)),
                     new CodeStatement[]
                     {
-                        new CodeExpressionStatement(new CodePrimitiveExpression(4))
+                        new CodeExpressionStatement(new CodePrimitiveExpression(4)),
                     }
                 ),
                 customOptions,
-                $"for (1; 2; 3){nl}{{{nl}$4;{nl}}}{nl}"
+                $"for (1; 2; 3){nl}{{{nl}$4;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3381,7 +3387,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[] { new CodeVariableDeclarationStatement("type3", "name3") }
                 ),
                 customOptions,
-                $"for (type1 name1; 1; type2 name2){nl}{{{nl}$type3 name3;{nl}}}{nl}"
+                $"for (type1 name1; 1; type2 name2){nl}{{{nl}$type3 name3;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3396,7 +3402,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[] { new CodeVariableDeclarationStatement("type3", "name3") }
                 ),
                 customOptions,
-                $"for (type1 name1 = 1; 2; type2 name2){nl}{{{nl}$type3 name3;{nl}}}{nl}"
+                $"for (type1 name1 = 1; 2; type2 name2){nl}{{{nl}$type3 name3;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -3407,7 +3413,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeStatement[] { new CodeSnippetStatement("value3") }
                 ),
                 customOptions,
-                $"for (value1{nl}; 1; value2{nl}){nl}{{{nl}value3{nl}}}{nl}"
+                $"for (value1{nl}; 1; value2{nl}){nl}{{{nl}value3{nl}}}{nl}",
             };
 
             // CodeThrowExceptionStatement
@@ -3416,7 +3422,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeThrowExceptionStatement(new CodePrimitiveExpression(1)),
                 null,
-                $"throw 1;{nl}"
+                $"throw 1;{nl}",
             };
 
             // CodeSnippetStatement.
@@ -3429,13 +3435,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeVariableDeclarationStatement(),
                 null,
-                $"void ;{nl}"
+                $"void ;{nl}",
             };
             yield return new object[]
             {
                 new CodeVariableDeclarationStatement(new CodeTypeReference("type"), "name"),
                 null,
-                $"type name;{nl}"
+                $"type name;{nl}",
             };
             yield return new object[]
             {
@@ -3445,13 +3451,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"type name = 1;{nl}"
+                $"type name = 1;{nl}",
             };
             yield return new object[]
             {
                 new CodeVariableDeclarationStatement(new CodeTypeReference("as"), "is"),
                 null,
-                $"@as @is;{nl}"
+                $"@as @is;{nl}",
             };
 
             // CodeAttachEventStatement.
@@ -3462,7 +3468,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $" += 1;{nl}"
+                $" += 1;{nl}",
             };
             yield return new object[]
             {
@@ -3471,7 +3477,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $" += 1;{nl}"
+                $" += 1;{nl}",
             };
             yield return new object[]
             {
@@ -3480,7 +3486,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"eventName += 1;{nl}"
+                $"eventName += 1;{nl}",
             };
             yield return new object[]
             {
@@ -3489,7 +3495,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"@as += 1;{nl}"
+                $"@as += 1;{nl}",
             };
             yield return new object[]
             {
@@ -3498,7 +3504,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"1. += 1;{nl}"
+                $"1. += 1;{nl}",
             };
             yield return new object[]
             {
@@ -3507,7 +3513,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"1.eventName += 1;{nl}"
+                $"1.eventName += 1;{nl}",
             };
             yield return new object[]
             {
@@ -3516,7 +3522,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"1.@as += 1;{nl}"
+                $"1.@as += 1;{nl}",
             };
 
             // CodeRemoveEventStatement.
@@ -3527,7 +3533,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $" -= 1;{nl}"
+                $" -= 1;{nl}",
             };
             yield return new object[]
             {
@@ -3536,7 +3542,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $" -= 1;{nl}"
+                $" -= 1;{nl}",
             };
             yield return new object[]
             {
@@ -3545,7 +3551,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"eventName -= 1;{nl}"
+                $"eventName -= 1;{nl}",
             };
             yield return new object[]
             {
@@ -3554,7 +3560,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"@as -= 1;{nl}"
+                $"@as -= 1;{nl}",
             };
             yield return new object[]
             {
@@ -3563,7 +3569,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"1. -= 1;{nl}"
+                $"1. -= 1;{nl}",
             };
             yield return new object[]
             {
@@ -3572,7 +3578,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"1.eventName -= 1;{nl}"
+                $"1.eventName -= 1;{nl}",
             };
             yield return new object[]
             {
@@ -3581,7 +3587,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1)
                 ),
                 null,
-                $"1.@as -= 1;{nl}"
+                $"1.@as -= 1;{nl}",
             };
 
             // CodeGotoStatement.
@@ -3600,14 +3606,14 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpressionStatement(new CodePrimitiveExpression(1))
                 ),
                 null,
-                $"label:{nl}    1;{nl}"
+                $"label:{nl}    1;{nl}",
             };
             yield return new object[] { new CodeLabeledStatement(), customOptions, $":{nl}" };
             yield return new object[]
             {
                 new CodeLabeledStatement("label"),
                 customOptions,
-                $"label:{nl}"
+                $"label:{nl}",
             };
             yield return new object[] { new CodeLabeledStatement("as"), customOptions, $"as:{nl}" };
             yield return new object[]
@@ -3617,7 +3623,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpressionStatement(new CodePrimitiveExpression(1))
                 ),
                 customOptions,
-                $"label:{nl}$1;{nl}"
+                $"label:{nl}$1;{nl}",
             };
 
             // Custom.
@@ -3625,10 +3631,10 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeExpressionStatement(new CodePrimitiveExpression(1))
                 {
-                    LinePragma = new CodeLinePragma()
+                    LinePragma = new CodeLinePragma(),
                 },
                 null,
-                $"{nl}#line 0 \"\"{nl}1;{nl}{nl}#line default{nl}#line hidden{nl}"
+                $"{nl}#line 0 \"\"{nl}1;{nl}{nl}#line default{nl}#line hidden{nl}",
             };
 
             var fullStatement = new CodeExpressionStatement(new CodePrimitiveExpression(1));
@@ -3733,7 +3739,7 @@ namespace System.CodeDom.Compiler.Tests
                     + $"{nl}#line 1 \"fileName\"{nl}"
                     + $"1;{nl}"
                     + $"{nl}#line default{nl}#line hidden{nl}"
-                    + $"#pragma checksum \"\" \"{{00000000-0000-0000-0000-000000000000}}\" \"\"{nl}#pragma checksum \"endFileName\" \"{{00000001-0002-0003-0405-060708090a0b}}\" \"\"{nl}#pragma checksum \"endFileName\" \"{{00000001-0002-0003-0405-060708090a0b}}\" \"010203\"{nl}#region {nl}#region endText{nl}#endregion{nl}#endregion{nl}#region {nl}#region endText{nl}"
+                    + $"#pragma checksum \"\" \"{{00000000-0000-0000-0000-000000000000}}\" \"\"{nl}#pragma checksum \"endFileName\" \"{{00000001-0002-0003-0405-060708090a0b}}\" \"\"{nl}#pragma checksum \"endFileName\" \"{{00000001-0002-0003-0405-060708090a0b}}\" \"010203\"{nl}#region {nl}#region endText{nl}#endregion{nl}#endregion{nl}#region {nl}#region endText{nl}",
             };
         }
 
@@ -3761,11 +3767,11 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new CodeAssignStatement() };
             yield return new object[]
             {
-                new CodeAssignStatement(null, new CodePrimitiveExpression(1))
+                new CodeAssignStatement(null, new CodePrimitiveExpression(1)),
             };
             yield return new object[]
             {
-                new CodeAssignStatement(new CodePrimitiveExpression(1), null)
+                new CodeAssignStatement(new CodePrimitiveExpression(1), null),
             };
 
             yield return new object[] { new CodeIterationStatement() };
@@ -3775,7 +3781,7 @@ namespace System.CodeDom.Compiler.Tests
                     null,
                     new CodePrimitiveExpression(1),
                     new CodeGotoStatement("label")
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3783,7 +3789,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeGotoStatement("label"),
                     null,
                     new CodeGotoStatement("label")
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3791,7 +3797,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeGotoStatement("label"),
                     new CodePrimitiveExpression(1),
                     null
-                )
+                ),
             };
 
             yield return new object[] { new CodeAttachEventStatement() };
@@ -3800,7 +3806,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeAttachEventStatement(
                     new CodeEventReferenceExpression(null, "eventName"),
                     null
-                )
+                ),
             };
 
             yield return new object[] { new CodeRemoveEventStatement() };
@@ -3809,7 +3815,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeRemoveEventStatement(
                     new CodeEventReferenceExpression(null, "eventName"),
                     null
-                )
+                ),
             };
         }
 
@@ -3849,7 +3855,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     new CodeStatement[] { new CodeStatement() },
                     new CodeStatement[] { new CodeGotoStatement("label") }
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3857,7 +3863,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     new CodeStatement[] { new CodeGotoStatement("label") },
                     new CodeStatement[] { new CodeStatement() }
-                )
+                ),
             };
 
             yield return new object[]
@@ -3870,10 +3876,10 @@ namespace System.CodeDom.Compiler.Tests
                             "name",
                             new CodeTypeReference("typeName"),
                             new CodeGotoStatement("label")
-                        )
+                        ),
                     },
                     new CodeStatement[] { new CodeGotoStatement("label") }
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3885,10 +3891,10 @@ namespace System.CodeDom.Compiler.Tests
                             "name",
                             new CodeTypeReference("typeName"),
                             new CodeStatement()
-                        )
+                        ),
                     },
                     new CodeStatement[] { new CodeGotoStatement("label") }
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3900,19 +3906,19 @@ namespace System.CodeDom.Compiler.Tests
                             "name",
                             new CodeTypeReference("typeName"),
                             new CodeGotoStatement("label")
-                        )
+                        ),
                     },
                     new CodeStatement[] { new CodeStatement() }
-                )
+                ),
             };
 
             yield return new object[]
             {
-                new CodeAssignStatement(new CodeExpression(), new CodePrimitiveExpression(1))
+                new CodeAssignStatement(new CodeExpression(), new CodePrimitiveExpression(1)),
             };
             yield return new object[]
             {
-                new CodeAssignStatement(new CodePrimitiveExpression(1), new CodeExpression())
+                new CodeAssignStatement(new CodePrimitiveExpression(1), new CodeExpression()),
             };
 
             yield return new object[]
@@ -3922,7 +3928,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     new CodeGotoStatement("label"),
                     new CodeGotoStatement("label")
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3931,7 +3937,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeExpression(),
                     new CodeGotoStatement("label"),
                     new CodeGotoStatement("label")
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3940,7 +3946,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     new CodeStatement(),
                     new CodeGotoStatement("label")
-                )
+                ),
             };
             yield return new object[]
             {
@@ -3949,7 +3955,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(1),
                     new CodeGotoStatement("label"),
                     new CodeStatement()
-                )
+                ),
             };
 
             yield return new object[] { new CodeThrowExceptionStatement(new CodeExpression()) };
@@ -3960,7 +3966,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference("type"),
                     "name",
                     new CodeExpression()
-                )
+                ),
             };
 
             yield return new object[]
@@ -3968,7 +3974,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeAttachEventStatement(
                     new CodeEventReferenceExpression(null, "eventName"),
                     new CodeExpression()
-                )
+                ),
             };
 
             yield return new object[]
@@ -3976,7 +3982,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeRemoveEventStatement(
                     new CodeEventReferenceExpression(null, "eventName"),
                     new CodeExpression()
-                )
+                ),
             };
 
             yield return new object[] { new CodeLabeledStatement("label", new CodeStatement()) };
@@ -4045,7 +4051,7 @@ namespace System.CodeDom.Compiler.Tests
                 ElseOnClosing = true,
                 BracingStyle = "C",
                 BlankLinesBetweenMembers = false,
-                VerbatimOrder = true
+                VerbatimOrder = true,
             };
 
             // Support - CodeAttributeDeclarationCollection.
@@ -4085,31 +4091,31 @@ namespace System.CodeDom.Compiler.Tests
             parameters.Add(
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.In
+                    Direction = FieldDirection.In,
                 }
             );
             parameters.Add(
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.Out
+                    Direction = FieldDirection.Out,
                 }
             );
             parameters.Add(
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.Ref
+                    Direction = FieldDirection.Ref,
                 }
             );
             parameters.Add(
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.In - 1
+                    Direction = FieldDirection.In - 1,
                 }
             );
             parameters.Add(
                 new CodeParameterDeclarationExpression(new CodeTypeReference("type"), "name")
                 {
-                    Direction = FieldDirection.Ref + 1
+                    Direction = FieldDirection.Ref + 1,
                 }
             );
             parameters.Add(
@@ -4134,7 +4140,7 @@ namespace System.CodeDom.Compiler.Tests
                 string paramsName in new string[]
                 {
                     "System.ParamArrayAttribute",
-                    "system.paramsarrayattribute"
+                    "system.paramsarrayattribute",
                 }
             )
             {
@@ -4182,7 +4188,7 @@ namespace System.CodeDom.Compiler.Tests
 
             var fullTypeParameter = new CodeTypeParameter("name")
             {
-                HasConstructorConstraint = true
+                HasConstructorConstraint = true,
             };
             fullTypeParameter.CustomAttributes.AddRange(attributes);
             fullTypeParameter.Constraints.Add(new CodeTypeReference());
@@ -4231,25 +4237,25 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeTypeDeclaration(),
                 null,
-                $"public class  {{{nl}}}{nl}"
+                $"public class  {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name"),
                 null,
-                $"public class name {{{nl}}}{nl}"
+                $"public class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("as"),
                 null,
-                $"public class @as {{{nl}}}{nl}"
+                $"public class @as {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name"),
                 customOptions,
-                $"public class name{nl}{{{nl}}}{nl}"
+                $"public class name{nl}{{{nl}}}{nl}",
             };
 
             CodeTypeDeclaration CreateType(CodeTypeMember member)
@@ -4265,24 +4271,24 @@ namespace System.CodeDom.Compiler.Tests
             {
                 CreateType(new CodeMemberField()),
                 null,
-                $"public class type {{{nl}    {nl}    private void ;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private void ;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeMemberField("fieldType", "field")),
                 null,
-                $"public class type {{{nl}    {nl}    private fieldType field;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private fieldType field;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField("fieldType", "field")
                     {
-                        InitExpression = new CodePrimitiveExpression(1)
+                        InitExpression = new CodePrimitiveExpression(1),
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private fieldType field = 1;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private fieldType field = 1;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4290,30 +4296,30 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField("fieldType", "field") { LinePragma = new CodeLinePragma() }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    {nl}    #line 0 \"\"{nl}    private fieldType field;{nl}    {nl}    #line default{nl}    #line hidden{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    {nl}    #line 0 \"\"{nl}    private fieldType field;{nl}    {nl}    #line default{nl}    #line hidden{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeMemberField()),
                 customOptions,
-                $"public class type{nl}{{{nl}$private void ;{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$private void ;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeMemberField("fieldType", "field")),
                 customOptions,
-                $"public class type{nl}{{{nl}$private fieldType field;{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$private fieldType field;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField("fieldType", "field")
                     {
-                        InitExpression = new CodePrimitiveExpression(1)
+                        InitExpression = new CodePrimitiveExpression(1),
                     }
                 ),
                 customOptions,
-                $"public class type{nl}{{{nl}$private fieldType field = 1;{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$private fieldType field = 1;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4321,7 +4327,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField("fieldType", "field") { LinePragma = new CodeLinePragma() }
                 ),
                 customOptions,
-                $"public class type{nl}{{{nl}${nl}$#line 0 \"\"{nl}$private fieldType field;{nl}${nl}$#line default{nl}$#line hidden{nl}}}{nl}"
+                $"public class type{nl}{{{nl}${nl}$#line 0 \"\"{nl}$private fieldType field;{nl}${nl}$#line default{nl}$#line hidden{nl}}}{nl}",
             };
 
             yield return new object[]
@@ -4329,11 +4335,11 @@ namespace System.CodeDom.Compiler.Tests
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Abstract
+                        Attributes = MemberAttributes.Abstract,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4341,29 +4347,29 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name") { Attributes = MemberAttributes.Final }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Static
+                        Attributes = MemberAttributes.Static,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Override
+                        Attributes = MemberAttributes.Override,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4371,18 +4377,18 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name") { Attributes = MemberAttributes.Const }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    const int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.ScopeMask
+                        Attributes = MemberAttributes.ScopeMask,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4390,172 +4396,172 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name") { Attributes = MemberAttributes.New }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.VTableMask
+                        Attributes = MemberAttributes.VTableMask,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Overloaded
+                        Attributes = MemberAttributes.Overloaded,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Assembly
+                        Attributes = MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.FamilyAndAssembly
+                        Attributes = MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Family
+                        Attributes = MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.FamilyOrAssembly
+                        Attributes = MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Private
+                        Attributes = MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.Public
+                        Attributes = MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.AccessMask
+                        Attributes = MemberAttributes.AccessMask,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.New | MemberAttributes.Assembly
+                        Attributes = MemberAttributes.New | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.New | MemberAttributes.FamilyAndAssembly
+                        Attributes = MemberAttributes.New | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.New | MemberAttributes.Family
+                        Attributes = MemberAttributes.New | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.New | MemberAttributes.FamilyOrAssembly
+                        Attributes = MemberAttributes.New | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.New | MemberAttributes.Private
+                        Attributes = MemberAttributes.New | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(
                     new CodeMemberField(typeof(int), "name")
                     {
-                        Attributes = MemberAttributes.New | MemberAttributes.Public
+                        Attributes = MemberAttributes.New | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4565,11 +4571,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4579,11 +4585,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Final
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4593,11 +4599,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4607,11 +4613,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4621,11 +4627,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Const
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new const int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4635,11 +4641,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4649,11 +4655,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Final
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4663,11 +4669,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4677,11 +4683,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4691,11 +4697,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Const
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new const int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4705,11 +4711,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Family
+                            | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4717,11 +4723,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family
+                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4729,11 +4735,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family
+                            MemberAttributes.New
+                            | MemberAttributes.Static
+                            | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4743,11 +4751,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Family
+                            | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4755,11 +4763,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family
+                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new const int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4769,11 +4777,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4783,11 +4791,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Final
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4797,11 +4805,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4811,11 +4819,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4825,11 +4833,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Const
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new const int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4839,11 +4847,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Private
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4851,11 +4859,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private
+                            MemberAttributes.New
+                            | MemberAttributes.Final
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4865,11 +4875,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.Private
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4879,11 +4889,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Private
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4891,11 +4901,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Private
+                            MemberAttributes.New
+                            | MemberAttributes.Const
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new const int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4905,11 +4917,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Public
+                            | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4917,11 +4929,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public
+                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4929,11 +4941,13 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public
+                            MemberAttributes.New
+                            | MemberAttributes.Static
+                            | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new static int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new static int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4943,11 +4957,11 @@ namespace System.CodeDom.Compiler.Tests
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Public
+                            | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new int name;{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -4955,11 +4969,11 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeMemberField(typeof(int), "name")
                     {
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public
+                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new const int name;{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new const int name;{nl}}}{nl}",
             };
 
             var fullField = new CodeMemberField("fieldType", "fieldName");
@@ -5008,7 +5022,7 @@ namespace System.CodeDom.Compiler.Tests
     #region 
     #region startText
 }}
-"
+",
             };
             yield return new object[]
             {
@@ -5049,7 +5063,7 @@ $#endregion
 $#region 
 $#region startText
 }}
-"
+",
             };
 
             // CodeSnippetTypeMember.
@@ -5057,37 +5071,37 @@ $#region startText
             {
                 CreateType(new CodeSnippetTypeMember()),
                 null,
-                $"public class type {{{nl}    {nl}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeSnippetTypeMember("text")),
                 null,
-                $"public class type {{{nl}    {nl}text{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}text{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeSnippetTypeMember("text") { LinePragma = new CodeLinePragma() }),
                 null,
-                $"public class type {{{nl}    {nl}    {nl}    #line 0 \"\"{nl}text{nl}    #line default{nl}    #line hidden{nl}    {nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    {nl}    #line 0 \"\"{nl}text{nl}    #line default{nl}    #line hidden{nl}    {nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeSnippetTypeMember()),
                 customOptions,
-                $"public class type{nl}{{{nl}{nl}}}{nl}"
+                $"public class type{nl}{{{nl}{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeSnippetTypeMember("text")),
                 customOptions,
-                $"public class type{nl}{{{nl}text{nl}}}{nl}"
+                $"public class type{nl}{{{nl}text{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeSnippetTypeMember("text") { LinePragma = new CodeLinePragma() }),
                 customOptions,
-                $"public class type{nl}{{{nl}${nl}$#line 0 \"\"{nl}text{nl}${nl}$#line default{nl}$#line hidden{nl}}}{nl}"
+                $"public class type{nl}{{{nl}${nl}$#line 0 \"\"{nl}text{nl}${nl}$#line default{nl}$#line hidden{nl}}}{nl}",
             };
 
             var fullSnippet = new CodeSnippetTypeMember("text");
@@ -5130,7 +5144,7 @@ text
     #region startText
     
 }}
-"
+",
             };
 
             // CodeMemberMethod.
@@ -5138,19 +5152,7 @@ text
             {
                 CreateType(new CodeMemberMethod()),
                 null,
-                $"public class type {{{nl}    {nl}    private void () {{{nl}    }}{nl}}}{nl}"
-            };
-            yield return new object[]
-            {
-                CreateType(
-                    new CodeMemberMethod
-                    {
-                        ReturnType = new CodeTypeReference("returnType"),
-                        Name = "name"
-                    }
-                ),
-                null,
-                $"public class type {{{nl}    {nl}    private returnType name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private void () {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5159,11 +5161,10 @@ text
                     {
                         ReturnType = new CodeTypeReference("returnType"),
                         Name = "name",
-                        PrivateImplementationType = new CodeTypeReference("privateType")
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    returnType privateType.name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private returnType name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5172,11 +5173,24 @@ text
                     {
                         ReturnType = new CodeTypeReference("returnType"),
                         Name = "name",
-                        LinePragma = new CodeLinePragma()
+                        PrivateImplementationType = new CodeTypeReference("privateType"),
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    {nl}    #line 0 \"\"{nl}    private returnType name() {{{nl}    }}{nl}    {nl}    #line default{nl}    #line hidden{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    returnType privateType.name() {{{nl}    }}{nl}}}{nl}",
+            };
+            yield return new object[]
+            {
+                CreateType(
+                    new CodeMemberMethod
+                    {
+                        ReturnType = new CodeTypeReference("returnType"),
+                        Name = "name",
+                        LinePragma = new CodeLinePragma(),
+                    }
+                ),
+                null,
+                $"public class type {{{nl}    {nl}    {nl}    #line 0 \"\"{nl}    private returnType name() {{{nl}    }}{nl}    {nl}    #line default{nl}    #line hidden{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5184,7 +5198,7 @@ text
                     new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private @as @is() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private @as @is() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5193,29 +5207,17 @@ text
                     {
                         ReturnType = new CodeTypeReference("as"),
                         Name = "is",
-                        PrivateImplementationType = new CodeTypeReference("base")
+                        PrivateImplementationType = new CodeTypeReference("base"),
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    @as @base.@is() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    @as @base.@is() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
                 CreateType(new CodeMemberMethod()),
                 customOptions,
-                $"public class type{nl}{{{nl}$private void (){nl}${{{nl}$}}{nl}}}{nl}"
-            };
-            yield return new object[]
-            {
-                CreateType(
-                    new CodeMemberMethod
-                    {
-                        ReturnType = new CodeTypeReference("returnType"),
-                        Name = "name"
-                    }
-                ),
-                customOptions,
-                $"public class type{nl}{{{nl}$private returnType name(){nl}${{{nl}$}}{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$private void (){nl}${{{nl}$}}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5224,11 +5226,10 @@ text
                     {
                         ReturnType = new CodeTypeReference("returnType"),
                         Name = "name",
-                        PrivateImplementationType = new CodeTypeReference("privateType")
                     }
                 ),
                 customOptions,
-                $"public class type{nl}{{{nl}$returnType privateType.name(){nl}${{{nl}$}}{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$private returnType name(){nl}${{{nl}$}}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5237,11 +5238,24 @@ text
                     {
                         ReturnType = new CodeTypeReference("returnType"),
                         Name = "name",
-                        LinePragma = new CodeLinePragma()
+                        PrivateImplementationType = new CodeTypeReference("privateType"),
                     }
                 ),
                 customOptions,
-                $"public class type{nl}{{{nl}${nl}$#line 0 \"\"{nl}$private returnType name(){nl}${{{nl}$}}{nl}${nl}$#line default{nl}$#line hidden{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$returnType privateType.name(){nl}${{{nl}$}}{nl}}}{nl}",
+            };
+            yield return new object[]
+            {
+                CreateType(
+                    new CodeMemberMethod
+                    {
+                        ReturnType = new CodeTypeReference("returnType"),
+                        Name = "name",
+                        LinePragma = new CodeLinePragma(),
+                    }
+                ),
+                customOptions,
+                $"public class type{nl}{{{nl}${nl}$#line 0 \"\"{nl}$private returnType name(){nl}${{{nl}$}}{nl}${nl}$#line default{nl}$#line hidden{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5249,7 +5263,7 @@ text
                     new CodeMemberMethod { ReturnType = new CodeTypeReference("as"), Name = "is" }
                 ),
                 customOptions,
-                $"public class type{nl}{{{nl}$private @as @is(){nl}${{{nl}$}}{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$private @as @is(){nl}${{{nl}$}}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5258,11 +5272,11 @@ text
                     {
                         ReturnType = new CodeTypeReference("as"),
                         Name = "is",
-                        PrivateImplementationType = new CodeTypeReference("base")
+                        PrivateImplementationType = new CodeTypeReference("base"),
                     }
                 ),
                 customOptions,
-                $"public class type{nl}{{{nl}$@as @base.@is(){nl}${{{nl}$}}{nl}}}{nl}"
+                $"public class type{nl}{{{nl}$@as @base.@is(){nl}${{{nl}$}}{nl}}}{nl}",
             };
 
             yield return new object[]
@@ -5271,7 +5285,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Abstract }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5279,7 +5293,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Final }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5287,7 +5301,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Static }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5295,7 +5309,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Override }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5303,7 +5317,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Const }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5311,7 +5325,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.ScopeMask }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5319,7 +5333,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.New }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5327,7 +5341,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.VTableMask }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5335,7 +5349,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Overloaded }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5343,7 +5357,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Assembly }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5351,11 +5365,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.FamilyAndAssembly
+                        Attributes = MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5363,7 +5377,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Family }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5371,11 +5385,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.FamilyOrAssembly
+                        Attributes = MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5383,7 +5397,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Private }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5391,7 +5405,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.Public }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5399,7 +5413,7 @@ text
                     new CodeMemberMethod { Name = "name", Attributes = MemberAttributes.AccessMask }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5407,11 +5421,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.New | MemberAttributes.Assembly
+                        Attributes = MemberAttributes.New | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5419,11 +5433,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.New | MemberAttributes.FamilyAndAssembly
+                        Attributes = MemberAttributes.New | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5431,11 +5445,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.New | MemberAttributes.Family
+                        Attributes = MemberAttributes.New | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5443,11 +5457,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.New | MemberAttributes.FamilyOrAssembly
+                        Attributes = MemberAttributes.New | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5455,11 +5469,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.New | MemberAttributes.Private
+                        Attributes = MemberAttributes.New | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5467,11 +5481,11 @@ text
                     new CodeMemberMethod
                     {
                         Name = "name",
-                        Attributes = MemberAttributes.New | MemberAttributes.Public
+                        Attributes = MemberAttributes.New | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5482,11 +5496,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5497,11 +5511,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Final
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5512,11 +5526,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5527,11 +5541,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5542,11 +5556,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Const
-                            | MemberAttributes.Assembly
+                            | MemberAttributes.Assembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5557,11 +5571,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5572,11 +5586,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Final
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5587,11 +5601,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5602,11 +5616,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5617,11 +5631,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Const
-                            | MemberAttributes.FamilyAndAssembly
+                            | MemberAttributes.FamilyAndAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5632,11 +5646,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Family
+                            | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5645,11 +5659,11 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family
+                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5658,11 +5672,13 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Family
+                            MemberAttributes.New
+                            | MemberAttributes.Static
+                            | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5673,11 +5689,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Family
+                            | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5686,11 +5702,11 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family
+                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Family,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected new virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected new virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5701,11 +5717,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5716,11 +5732,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Final
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5731,11 +5747,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5746,11 +5762,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5761,11 +5777,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Const
-                            | MemberAttributes.FamilyOrAssembly
+                            | MemberAttributes.FamilyOrAssembly,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    protected internal new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    protected internal new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5776,11 +5792,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Private
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5789,11 +5805,13 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Private
+                            MemberAttributes.New
+                            | MemberAttributes.Final
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5804,11 +5822,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Static
-                            | MemberAttributes.Private
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5819,11 +5837,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Private
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5832,11 +5850,13 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Private
+                            MemberAttributes.New
+                            | MemberAttributes.Const
+                            | MemberAttributes.Private,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    private new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5847,11 +5867,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Abstract
-                            | MemberAttributes.Public
+                            | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new abstract void name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new abstract void name();{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5860,11 +5880,11 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public
+                            MemberAttributes.New | MemberAttributes.Final | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5873,11 +5893,13 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Static | MemberAttributes.Public
+                            MemberAttributes.New
+                            | MemberAttributes.Static
+                            | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new static void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new static void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5888,11 +5910,11 @@ text
                         Attributes =
                             MemberAttributes.New
                             | MemberAttributes.Override
-                            | MemberAttributes.Public
+                            | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new override void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new override void name() {{{nl}    }}{nl}}}{nl}",
             };
             yield return new object[]
             {
@@ -5901,17 +5923,17 @@ text
                     {
                         Name = "name",
                         Attributes =
-                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public
+                            MemberAttributes.New | MemberAttributes.Const | MemberAttributes.Public,
                     }
                 ),
                 null,
-                $"public class type {{{nl}    {nl}    public new virtual void name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    public new virtual void name() {{{nl}    }}{nl}}}{nl}",
             };
 
             var singleAttributeMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             singleAttributeMethod.CustomAttributes.Add(
                 new CodeAttributeDeclaration("attributeName")
@@ -5920,13 +5942,13 @@ text
             {
                 CreateType(singleAttributeMethod),
                 null,
-                $"public class type {{{nl}    {nl}    [attributeName()]{nl}    private returnType name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    [attributeName()]{nl}    private returnType name() {{{nl}    }}{nl}}}{nl}",
             };
 
             var singleReturnTypeAttributeMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             singleReturnTypeAttributeMethod.ReturnTypeCustomAttributes.Add(
                 new CodeAttributeDeclaration("attributeName")
@@ -5935,26 +5957,26 @@ text
             {
                 CreateType(singleReturnTypeAttributeMethod),
                 null,
-                $"public class type {{{nl}    {nl}    [return: attributeName()]{nl}    private returnType name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    [return: attributeName()]{nl}    private returnType name() {{{nl}    }}{nl}}}{nl}",
             };
 
             var singleTypeParameterMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             singleTypeParameterMethod.TypeParameters.Add(new CodeTypeParameter("typeParameter"));
             yield return new object[]
             {
                 CreateType(singleTypeParameterMethod),
                 null,
-                $"public class type {{{nl}    {nl}    private returnType name<typeParameter>() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private returnType name<typeParameter>() {{{nl}    }}{nl}}}{nl}",
             };
 
             var singleImplementationTypes = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             singleImplementationTypes.ImplementationTypes.Add(
                 new CodeTypeReference("implementationType")
@@ -5963,13 +5985,13 @@ text
             {
                 CreateType(singleImplementationTypes),
                 null,
-                $"public class type {{{nl}    {nl}    private returnType name() {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private returnType name() {{{nl}    }}{nl}}}{nl}",
             };
 
             var singleParameterMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             singleParameterMethod.Parameters.Add(
                 new CodeParameterDeclarationExpression("parameterType", "parameterName")
@@ -5978,13 +6000,13 @@ text
             {
                 CreateType(singleParameterMethod),
                 null,
-                $"public class type {{{nl}    {nl}    private returnType name(parameterType parameterName) {{{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private returnType name(parameterType parameterName) {{{nl}    }}{nl}}}{nl}",
             };
 
             var singleStatementMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             singleStatementMethod.Statements.Add(
                 new CodeExpressionStatement(new CodePrimitiveExpression(1))
@@ -5993,27 +6015,27 @@ text
             {
                 CreateType(singleStatementMethod),
                 null,
-                $"public class type {{{nl}    {nl}    private returnType name() {{{nl}        1;{nl}    }}{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    private returnType name() {{{nl}        1;{nl}    }}{nl}}}{nl}",
             };
 
             var abstractMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
                 Name = "name",
-                Attributes = MemberAttributes.Abstract
+                Attributes = MemberAttributes.Abstract,
             };
             abstractMethod.Statements.Add(new CodeStatement());
             yield return new object[]
             {
                 CreateType(abstractMethod),
                 null,
-                $"public class type {{{nl}    {nl}    abstract returnType name();{nl}}}{nl}"
+                $"public class type {{{nl}    {nl}    abstract returnType name();{nl}}}{nl}",
             };
 
             var fullMethod = new CodeMemberMethod
             {
                 ReturnType = new CodeTypeReference("returnType"),
-                Name = "name"
+                Name = "name",
             };
             fullMethod.StartDirectives.AddRange(directives);
             fullMethod.Comments.AddRange(comments);
@@ -6031,7 +6053,7 @@ text
             // Interface.
             var fullInterface = new CodeTypeDeclaration("type")
             {
-                TypeAttributes = TypeAttributes.Public | TypeAttributes.Interface
+                TypeAttributes = TypeAttributes.Public | TypeAttributes.Interface,
             };
             fullInterface.StartDirectives.AddRange(directives);
             fullInterface.Comments.AddRange(comments);
@@ -6050,7 +6072,7 @@ text
                 new CodeMemberMethod
                 {
                     ReturnType = new CodeTypeReference("returnType"),
-                    Name = "name"
+                    Name = "name",
                 }
             );
             fullInterface.Members.Add(
@@ -6058,7 +6080,7 @@ text
                 {
                     ReturnType = new CodeTypeReference("returnType"),
                     Name = "name",
-                    PrivateImplementationType = new CodeTypeReference("privateType")
+                    PrivateImplementationType = new CodeTypeReference("privateType"),
                 }
             );
             fullInterface.Members.Add(
@@ -6069,7 +6091,7 @@ text
                 {
                     ReturnType = new CodeTypeReference("as"),
                     Name = "is",
-                    PrivateImplementationType = new CodeTypeReference("base")
+                    PrivateImplementationType = new CodeTypeReference("base"),
                 }
             );
             fullInterface.Members.Add(abstractMethod);
@@ -6227,7 +6249,7 @@ text
 #endregion
 #region 
 #region startText
-"
+",
             };
 
             // Enum.
@@ -6235,13 +6257,13 @@ text
             {
                 new CodeTypeDeclaration { IsEnum = true },
                 null,
-                $"public enum  {{{nl}}}{nl}"
+                $"public enum  {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsEnum = true },
                 null,
-                $"public enum name {{{nl}}}{nl}"
+                $"public enum name {{{nl}}}{nl}",
             };
 
             var fullEnum = new CodeTypeDeclaration("name") { IsEnum = true };
@@ -6262,7 +6284,7 @@ text
                 new CodeMemberMethod
                 {
                     ReturnType = new CodeTypeReference("returnType"),
-                    Name = "name"
+                    Name = "name",
                 }
             );
             fullEnum.Members.Add(
@@ -6270,7 +6292,7 @@ text
                 {
                     ReturnType = new CodeTypeReference("returnType"),
                     Name = "name",
-                    PrivateImplementationType = new CodeTypeReference("privateType")
+                    PrivateImplementationType = new CodeTypeReference("privateType"),
                 }
             );
             fullEnum.Members.Add(
@@ -6281,7 +6303,7 @@ text
                 {
                     ReturnType = new CodeTypeReference("as"),
                     Name = "is",
-                    PrivateImplementationType = new CodeTypeReference("base")
+                    PrivateImplementationType = new CodeTypeReference("base"),
                 }
             );
             fullEnum.Members.Add(abstractMethod);
@@ -6428,7 +6450,7 @@ text
 #endregion
 #region 
 #region startText
-"
+",
             };
 
             // Delegate.
@@ -6436,30 +6458,30 @@ text
             {
                 new CodeTypeDelegate(),
                 null,
-                $"public delegate void ();{nl}"
+                $"public delegate void ();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name"),
                 null,
-                $"public delegate void name();{nl}"
+                $"public delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { ReturnType = new CodeTypeReference("returnType") },
                 null,
-                $"public delegate returnType name();{nl}"
+                $"public delegate returnType name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("is") { ReturnType = new CodeTypeReference("as") },
                 null,
-                $"public delegate @as @is();{nl}"
+                $"public delegate @as @is();{nl}",
             };
 
             var singleAttributeDelegate = new CodeTypeDelegate("name")
             {
-                ReturnType = new CodeTypeReference("returnType")
+                ReturnType = new CodeTypeReference("returnType"),
             };
             singleAttributeDelegate.CustomAttributes.Add(
                 new CodeAttributeDeclaration("attributeName")
@@ -6468,12 +6490,12 @@ text
             {
                 singleAttributeDelegate,
                 null,
-                $"[attributeName()]{nl}public delegate returnType name();{nl}"
+                $"[attributeName()]{nl}public delegate returnType name();{nl}",
             };
 
             var singleParameterDelegate = new CodeTypeDelegate("name")
             {
-                ReturnType = new CodeTypeReference("returnType")
+                ReturnType = new CodeTypeReference("returnType"),
             };
             singleParameterDelegate.Parameters.Add(
                 new CodeParameterDeclarationExpression("parameterType", "parameterName")
@@ -6482,12 +6504,12 @@ text
             {
                 singleParameterDelegate,
                 null,
-                $"public delegate returnType name(parameterType parameterName);{nl}"
+                $"public delegate returnType name(parameterType parameterName);{nl}",
             };
 
             var fullDelegate = new CodeTypeDelegate("name")
             {
-                ReturnType = new CodeTypeReference("returnType")
+                ReturnType = new CodeTypeReference("returnType"),
             };
             fullDelegate.StartDirectives.AddRange(directives);
             fullDelegate.Comments.AddRange(comments);
@@ -6507,7 +6529,7 @@ text
                 new CodeMemberMethod
                 {
                     ReturnType = new CodeTypeReference("returnType"),
-                    Name = "name"
+                    Name = "name",
                 }
             );
             fullDelegate.Members.Add(
@@ -6515,7 +6537,7 @@ text
                 {
                     ReturnType = new CodeTypeReference("returnType"),
                     Name = "name",
-                    PrivateImplementationType = new CodeTypeReference("privateType")
+                    PrivateImplementationType = new CodeTypeReference("privateType"),
                 }
             );
             fullDelegate.Members.Add(
@@ -6526,7 +6548,7 @@ text
                 {
                     ReturnType = new CodeTypeReference("as"),
                     Name = "is",
-                    PrivateImplementationType = new CodeTypeReference("base")
+                    PrivateImplementationType = new CodeTypeReference("base"),
                 }
             );
             fullDelegate.Members.Add(abstractMethod);
@@ -6660,7 +6682,7 @@ text
 #endregion
 #region 
 #region startText
-"
+",
             };
 
             var largeDelegate1 = new CodeTypeDelegate("name");
@@ -6669,7 +6691,7 @@ text
             {
                 largeDelegate1,
                 null,
-                $"public delegate void name(type0 name0, type1 name1, type2 name2, type3 name3, type4 name4, type5 name5, type6 name6, type7 name7, type8 name8, type9 name9, type10 name10, type11 name11, type12 name12, type13 name13, type14 name14);{nl}"
+                $"public delegate void name(type0 name0, type1 name1, type2 name2, type3 name3, type4 name4, type5 name5, type6 name6, type7 name7, type8 name8, type9 name9, type10 name10, type11 name11, type12 name12, type13 name13, type14 name14);{nl}",
             };
 
             var largeDelegate2 = new CodeTypeDelegate("name");
@@ -6678,13 +6700,13 @@ text
             {
                 largeDelegate2,
                 null,
-                $"public delegate void name({nl}            type0 name0, {nl}            type1 name1, {nl}            type2 name2, {nl}            type3 name3, {nl}            type4 name4, {nl}            type5 name5, {nl}            type6 name6, {nl}            type7 name7, {nl}            type8 name8, {nl}            type9 name9, {nl}            type10 name10, {nl}            type11 name11, {nl}            type12 name12, {nl}            type13 name13, {nl}            type14 name14, {nl}            type15 name15);{nl}"
+                $"public delegate void name({nl}            type0 name0, {nl}            type1 name1, {nl}            type2 name2, {nl}            type3 name3, {nl}            type4 name4, {nl}            type5 name5, {nl}            type6 name6, {nl}            type7 name7, {nl}            type8 name8, {nl}            type9 name9, {nl}            type10 name10, {nl}            type11 name11, {nl}            type12 name12, {nl}            type13 name13, {nl}            type14 name14, {nl}            type15 name15);{nl}",
             };
             yield return new object[]
             {
                 largeDelegate2,
                 customOptions,
-                $"public delegate void name({nl}$$$type0 name0, {nl}$$$type1 name1, {nl}$$$type2 name2, {nl}$$$type3 name3, {nl}$$$type4 name4, {nl}$$$type5 name5, {nl}$$$type6 name6, {nl}$$$type7 name7, {nl}$$$type8 name8, {nl}$$$type9 name9, {nl}$$$type10 name10, {nl}$$$type11 name11, {nl}$$$type12 name12, {nl}$$$type13 name13, {nl}$$$type14 name14, {nl}$$$type15 name15);{nl}"
+                $"public delegate void name({nl}$$$type0 name0, {nl}$$$type1 name1, {nl}$$$type2 name2, {nl}$$$type3 name3, {nl}$$$type4 name4, {nl}$$$type5 name5, {nl}$$$type6 name6, {nl}$$$type7 name7, {nl}$$$type8 name8, {nl}$$$type9 name9, {nl}$$$type10 name10, {nl}$$$type11 name11, {nl}$$$type12 name12, {nl}$$$type13 name13, {nl}$$$type14 name14, {nl}$$$type15 name15);{nl}",
             };
 
             // Custom.
@@ -6692,7 +6714,7 @@ text
             {
                 new CodeTypeDeclaration("name") { LinePragma = new CodeLinePragma() },
                 null,
-                $"{nl}#line 0 \"\"{nl}public class name {{{nl}}}{nl}{nl}#line default{nl}#line hidden{nl}"
+                $"{nl}#line 0 \"\"{nl}public class name {{{nl}}}{nl}{nl}#line default{nl}#line hidden{nl}",
             };
 
             var singleBaseTypeType = new CodeTypeDeclaration("name");
@@ -6701,7 +6723,7 @@ text
             {
                 singleBaseTypeType,
                 null,
-                $"public class name : baseType {{{nl}}}{nl}"
+                $"public class name : baseType {{{nl}}}{nl}",
             };
 
             var singleTypeParameterType = new CodeTypeDeclaration("name");
@@ -6710,7 +6732,7 @@ text
             {
                 singleTypeParameterType,
                 null,
-                $"public class name<name> {{{nl}}}{nl}"
+                $"public class name<name> {{{nl}}}{nl}",
             };
 
             var singleTypeParameterConstraintType = new CodeTypeDeclaration("name");
@@ -6719,7 +6741,7 @@ text
             {
                 singleTypeParameterConstraintType,
                 null,
-                $"public class name<name>{nl}    where name : constraint {{{nl}}}{nl}"
+                $"public class name<name>{nl}    where name : constraint {{{nl}}}{nl}",
             };
 
             var singleNewTypeParameterConstraintType = new CodeTypeDeclaration("name");
@@ -6730,14 +6752,14 @@ text
             {
                 singleNewTypeParameterConstraintType,
                 null,
-                $"public class name<name>{nl}    where name : new() {{{nl}}}{nl}"
+                $"public class name<name>{nl}    where name : new() {{{nl}}}{nl}",
             };
 
             yield return new object[]
             {
                 CreateType(new CodeTypeMember()),
                 null,
-                $"public class type {{{nl}}}{nl}"
+                $"public class type {{{nl}}}{nl}",
             };
 
             var fullType = new CodeTypeDeclaration("name");
@@ -6790,7 +6812,7 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
 #endregion
 #region 
 #region startText
-"
+",
             };
 
             // TypeAttributes.
@@ -6798,752 +6820,752 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.NotPublic },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.NotPublic,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"internal struct name {{{nl}}}{nl}"
+                $"internal struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.NotPublic,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"internal enum name {{{nl}}}{nl}"
+                $"internal enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.AutoLayout },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Class },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.AnsiClass },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Public },
                 null,
-                $"public class name {{{nl}}}{nl}"
+                $"public class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Public,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"public struct name {{{nl}}}{nl}"
+                $"public struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Public,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"public enum name {{{nl}}}{nl}"
+                $"public enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.NestedPublic },
                 null,
-                $"public class name {{{nl}}}{nl}"
+                $"public class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPublic,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"public struct name {{{nl}}}{nl}"
+                $"public struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPublic,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"public enum name {{{nl}}}{nl}"
+                $"public enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.NestedPrivate },
                 null,
-                $"private class name {{{nl}}}{nl}"
+                $"private class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPrivate,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"private struct name {{{nl}}}{nl}"
+                $"private struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPrivate,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"private enum name {{{nl}}}{nl}"
+                $"private enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.NestedFamily },
                 null,
-                $"protected class name {{{nl}}}{nl}"
+                $"protected class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.NestedAssembly },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.NestedFamANDAssem
+                    TypeAttributes = TypeAttributes.NestedFamANDAssem,
                 },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.VisibilityMask },
                 null,
-                $"protected internal class name {{{nl}}}{nl}"
+                $"protected internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.NestedFamORAssem
+                    TypeAttributes = TypeAttributes.NestedFamORAssem,
                 },
                 null,
-                $"protected internal class name {{{nl}}}{nl}"
+                $"protected internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.SequentialLayout
+                    TypeAttributes = TypeAttributes.SequentialLayout,
                 },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.ExplicitLayout },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.LayoutMask },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.ClassSemanticsMask
+                    TypeAttributes = TypeAttributes.ClassSemanticsMask,
                 },
                 null,
-                $"internal interface name {{{nl}}}{nl}"
+                $"internal interface name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Interface },
                 null,
-                $"internal interface name {{{nl}}}{nl}"
+                $"internal interface name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Interface,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"internal struct name {{{nl}}}{nl}"
+                $"internal struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Interface,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"internal enum name {{{nl}}}{nl}"
+                $"internal enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Abstract },
                 null,
-                $"internal abstract class name {{{nl}}}{nl}"
+                $"internal abstract class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Abstract,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"internal struct name {{{nl}}}{nl}"
+                $"internal struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Abstract,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"internal enum name {{{nl}}}{nl}"
+                $"internal enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Sealed },
                 null,
-                $"internal sealed class name {{{nl}}}{nl}"
+                $"internal sealed class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Sealed,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"internal struct name {{{nl}}}{nl}"
+                $"internal struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     TypeAttributes = TypeAttributes.Sealed,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"internal enum name {{{nl}}}{nl}"
+                $"internal enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.SpecialName },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.RTSpecialName },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Import },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.Serializable },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.WindowsRuntime },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.UnicodeClass },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.AutoClass },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.StringFormatMask
+                    TypeAttributes = TypeAttributes.StringFormatMask,
                 },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.CustomFormatClass
+                    TypeAttributes = TypeAttributes.CustomFormatClass,
                 },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.HasSecurity },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.ReservedMask },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { TypeAttributes = TypeAttributes.BeforeFieldInit },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
-                    TypeAttributes = TypeAttributes.CustomFormatMask
+                    TypeAttributes = TypeAttributes.CustomFormatMask,
                 },
                 null,
-                $"internal class name {{{nl}}}{nl}"
+                $"internal class name {{{nl}}}{nl}",
             };
 
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NotPublic },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.NotPublic,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.NotPublic,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.AutoLayout },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Class },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.AnsiClass },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Public },
                 null,
-                $"public delegate void name();{nl}"
+                $"public delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Public,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"public delegate void name();{nl}"
+                $"public delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Public,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"public delegate void name();{nl}"
+                $"public delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NestedPublic },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPublic,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPublic,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NestedPrivate },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPrivate,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.NestedPrivate,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NestedFamily },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NestedAssembly },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NestedFamANDAssem },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.VisibilityMask },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.NestedFamORAssem },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.SequentialLayout },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.ExplicitLayout },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.LayoutMask },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.ClassSemanticsMask },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Interface },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Interface,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Interface,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Abstract },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Abstract,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Abstract,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Sealed },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Sealed,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name")
                 {
                     TypeAttributes = TypeAttributes.Sealed,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.SpecialName },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.RTSpecialName },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Import },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.Serializable },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.WindowsRuntime },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.UnicodeClass },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.AutoClass },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.StringFormatMask },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.CustomFormatClass },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.HasSecurity },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.ReservedMask },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.BeforeFieldInit },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDelegate("name") { TypeAttributes = TypeAttributes.CustomFormatMask },
                 null,
-                $"delegate void name();{nl}"
+                $"delegate void name();{nl}",
             };
 
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { Attributes = MemberAttributes.New },
                 null,
-                $"new public class name {{{nl}}}{nl}"
+                $"new public class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     Attributes = MemberAttributes.New,
-                    IsStruct = true
+                    IsStruct = true,
                 },
                 null,
-                $"new public struct name {{{nl}}}{nl}"
+                $"new public struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     Attributes = MemberAttributes.New,
-                    IsEnum = true
+                    IsEnum = true,
                 },
                 null,
-                $"new public enum name {{{nl}}}{nl}"
+                $"new public enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     Attributes = MemberAttributes.New,
-                    TypeAttributes = TypeAttributes.Interface
+                    TypeAttributes = TypeAttributes.Interface,
                 },
                 null,
-                $"new internal interface name {{{nl}}}{nl}"
+                $"new internal interface name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsPartial = true },
                 null,
-                $"public partial class name {{{nl}}}{nl}"
+                $"public partial class name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsPartial = true, IsStruct = true },
                 null,
-                $"public partial struct name {{{nl}}}{nl}"
+                $"public partial struct name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsPartial = true, IsEnum = true },
                 null,
-                $"public enum name {{{nl}}}{nl}"
+                $"public enum name {{{nl}}}{nl}",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name")
                 {
                     IsPartial = true,
-                    TypeAttributes = TypeAttributes.Interface
+                    TypeAttributes = TypeAttributes.Interface,
                 },
                 null,
-                $"internal partial interface name {{{nl}}}{nl}"
+                $"internal partial interface name {{{nl}}}{nl}",
             };
         }
 
@@ -7625,7 +7647,7 @@ public class name<, name, [attribute()]  name, name, name, [()] [name1()] [name2
             ;
             yield return new object[]
             {
-                CreateType(new CodeMemberField { InitExpression = new CodeExpression() })
+                CreateType(new CodeMemberField { InitExpression = new CodeExpression() }),
             };
 
             var invalidStatementMethod = new CodeMemberMethod();

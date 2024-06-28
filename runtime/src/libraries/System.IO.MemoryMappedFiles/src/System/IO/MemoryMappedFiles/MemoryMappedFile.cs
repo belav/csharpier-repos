@@ -177,7 +177,7 @@ namespace System.IO.MemoryMappedFiles
             {
                 FileMode.Open => true, // FileStream ctor will throw if the file doesn't exist
                 FileMode.CreateNew => false,
-                _ => File.Exists(path)
+                _ => File.Exists(path),
             };
             SafeFileHandle fileHandle = File.OpenHandle(
                 path,

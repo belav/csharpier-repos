@@ -93,7 +93,7 @@ namespace System.Threading.RateLimiting
                 QueueLimit = options.QueueLimit,
                 ReplenishmentPeriod = options.ReplenishmentPeriod,
                 TokensPerPeriod = options.TokensPerPeriod,
-                AutoReplenishment = options.AutoReplenishment
+                AutoReplenishment = options.AutoReplenishment,
             };
 
             _tokenCount = options.TokenLimit;
@@ -467,7 +467,7 @@ namespace System.Threading.RateLimiting
         {
             private static readonly string[] s_allMetadataNames = new[]
             {
-                MetadataName.RetryAfter.Name
+                MetadataName.RetryAfter.Name,
             };
 
             private readonly TimeSpan? _retryAfter;

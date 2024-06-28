@@ -182,7 +182,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                     {
                         DiagnosticExtensions.GetCompilerDiagnosticAnalyzerReference(
                             LanguageNames.CSharp
-                        )
+                        ),
                     }
                 )
             );
@@ -220,7 +220,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
                     {
                         DiagnosticExtensions.GetCompilerDiagnosticAnalyzerReference(
                             LanguageNames.CSharp
-                        )
+                        ),
                     }
                 )
             );

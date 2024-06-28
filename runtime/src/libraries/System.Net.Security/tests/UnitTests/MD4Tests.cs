@@ -33,7 +33,7 @@ namespace System.Net.Security.Tests
                 0xe0,
                 0xc0,
                 0x89,
-                0xc0
+                0xc0,
             };
             Verify(input, expected);
         }
@@ -60,7 +60,7 @@ namespace System.Net.Security.Tests
                 0xdb,
                 0xd6,
                 0xfb,
-                0x24
+                0x24,
             };
             Verify(input, expected);
         }
@@ -87,7 +87,7 @@ namespace System.Net.Security.Tests
                 0x7a,
                 0xa6,
                 0x72,
-                0x9d
+                0x9d,
             };
             Verify(input, expected);
         }
@@ -116,7 +116,7 @@ namespace System.Net.Security.Tests
                 0xe1,
                 0xc7,
                 0x01,
-                0x4b
+                0x4b,
             };
             Verify(input, expected);
         }
@@ -145,7 +145,7 @@ namespace System.Net.Security.Tests
                 0xdf,
                 0x41,
                 0x2d,
-                0xa9
+                0xa9,
             };
             Verify(input, expected);
         }
@@ -178,7 +178,7 @@ namespace System.Net.Security.Tests
                 0x53,
                 0xe7,
                 0xf0,
-                0xe4
+                0xe4,
             };
             Verify(input, expected);
         }
@@ -209,7 +209,7 @@ namespace System.Net.Security.Tests
                 0x4f,
                 0xcc,
                 0x05,
-                0x36
+                0x36,
             };
             Verify(input, expected);
         }
@@ -239,7 +239,7 @@ namespace System.Net.Security.Tests
                 0xac,
                 0x4f,
                 0x48,
-                0xe6
+                0xe6,
             };
             Verify(input, expected);
         }
@@ -271,7 +271,7 @@ namespace System.Net.Security.Tests
                 0x1c,
                 0xc7,
                 0x61,
-                0x33
+                0x33,
             };
             Verify(input, expected);
         }
@@ -302,7 +302,7 @@ namespace System.Net.Security.Tests
                 0x25,
                 0x88,
                 0x46,
-                0x24
+                0x24,
             };
             Verify(input, expected);
         }
@@ -333,7 +333,7 @@ namespace System.Net.Security.Tests
                 0x49,
                 0x2a,
                 0xe7,
-                0x0b
+                0x0b,
             };
             Verify(input, expected);
         }
@@ -364,7 +364,7 @@ namespace System.Net.Security.Tests
                 0xcc,
                 0x71,
                 0xfe,
-                0x36
+                0x36,
             };
             Verify(input, expected);
         }
@@ -395,7 +395,7 @@ namespace System.Net.Security.Tests
                 0xed,
                 0x2a,
                 0x02,
-                0x48
+                0x48,
             };
             Verify(input, expected);
         }
@@ -426,7 +426,7 @@ namespace System.Net.Security.Tests
                 0xe8,
                 0x6c,
                 0x47,
-                0x59
+                0x59,
             };
             Verify(input, expected);
         }
@@ -457,7 +457,7 @@ namespace System.Net.Security.Tests
                 0xb1,
                 0x24,
                 0xb0,
-                0x40
+                0x40,
             };
             Verify(input, expected);
         }

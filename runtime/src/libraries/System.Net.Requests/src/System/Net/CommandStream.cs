@@ -415,7 +415,7 @@ namespace System.Net
             UserCommand = 0x1,
             GiveDataStream = 0x2,
             CreateDataConnection = 0x4,
-            DontLogParameter = 0x8
+            DontLogParameter = 0x8,
         }
 
         internal sealed class PipelineEntry

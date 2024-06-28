@@ -50,7 +50,7 @@ namespace DebuggerTests
                     32,
                     "DebuggerTests.PointerTests.LocalPointersAsync",
                     true
-                }
+                },
             };
 
         [ConditionalTheory(nameof(RunningOnChrome))]
@@ -160,7 +160,7 @@ namespace DebuggerTests
                         {
                             TPointer("int*"),
                             TPointer("int*"),
-                            TPointer("int*", is_null: true)
+                            TPointer("int*", is_null: true),
                         }
                     );
 
@@ -208,7 +208,7 @@ namespace DebuggerTests
                             TPointer("int**"),
                             TPointer("int**"),
                             TPointer("int**"),
-                            TPointer("int**", is_null: true)
+                            TPointer("int**", is_null: true),
                         }
                     );
 
@@ -221,7 +221,7 @@ namespace DebuggerTests
                                 TPointer("int*", is_null: true),
                                 TPointer("int*"),
                                 TPointer("int*", is_null: true),
-                                null
+                                null,
                             }
                         );
 
@@ -271,7 +271,7 @@ namespace DebuggerTests
                             ),
                             gsp_null = TPointer(
                                 "DebuggerTests.GenericStructWithUnmanagedT<System.DateTime>*"
-                            )
+                            ),
                         },
                         "locals",
                         num_fields: 26
@@ -299,7 +299,7 @@ namespace DebuggerTests
                             {
                                 Value = TDateTime(gs_dt),
                                 IntField = TNumber(4),
-                                DTPP = TPointer("System.DateTime**")
+                                DTPP = TPointer("System.DateTime**"),
                             },
                             "locals#gsp#deref"
                         );
@@ -336,7 +336,7 @@ namespace DebuggerTests
                             {
                                 Value = TDateTime(gs_dt),
                                 IntField = TNumber(4),
-                                DTPP = TPointer("System.DateTime**")
+                                DTPP = TPointer("System.DateTime**"),
                             },
                             "locals#gsp#deref"
                         );
@@ -392,7 +392,7 @@ namespace DebuggerTests
                             new[]
                             {
                                 TPointer("System.DateTime*"),
-                                TPointer("System.DateTime*", is_null: true)
+                                TPointer("System.DateTime*", is_null: true),
                             }
                         )
                     );
@@ -470,7 +470,7 @@ namespace DebuggerTests
                                 ),
                                 TValueType(
                                     "DebuggerTests.GenericStructWithUnmanagedT<System.DateTime>"
-                                )
+                                ),
                             }
                         );
 
@@ -483,7 +483,7 @@ namespace DebuggerTests
                                 {
                                     Value = TDateTime(gs_dt),
                                     IntField = TNumber(4),
-                                    DTPP = TPointer("System.DateTime**")
+                                    DTPP = TPointer("System.DateTime**"),
                                 },
                                 "locals#gsp#deref"
                             );
@@ -510,7 +510,7 @@ namespace DebuggerTests
                                 {
                                     Value = TDateTime(gs_dt),
                                     IntField = TNumber(4),
-                                    DTPP = TPointer("System.DateTime**")
+                                    DTPP = TPointer("System.DateTime**"),
                                 },
                                 "locals#gsp#deref"
                             );
@@ -554,7 +554,7 @@ namespace DebuggerTests
                     var dt = new DateTime(5, 6, 7, 8, 9, 10);
                     await CheckProps(
                         locals,
-                        new { dtppa = TArray("System.DateTime**[]", "System.DateTime**[3]"), },
+                        new { dtppa = TArray("System.DateTime**[]", "System.DateTime**[3]") },
                         "locals",
                         num_fields: 26
                     );
@@ -568,7 +568,7 @@ namespace DebuggerTests
                             {
                                 TPointer("System.DateTime**"),
                                 TPointer("System.DateTime**"),
-                                TPointer("System.DateTime**", is_null: true)
+                                TPointer("System.DateTime**", is_null: true),
                             }
                         )
                     );
@@ -577,7 +577,7 @@ namespace DebuggerTests
                     {
                         TPointer("System.DateTime*"),
                         TPointer("System.DateTime*", is_null: true),
-                        null
+                        null,
                     };
 
                     var actual_elems = new JToken[exp_elems.Length];
@@ -630,7 +630,7 @@ namespace DebuggerTests
                             ),
                             cwp_null = TObject(
                                 "DebuggerTests.GenericClassWithPointers<System.DateTime>"
-                            )
+                            ),
                         },
                         "locals",
                         num_fields: 26
@@ -701,7 +701,7 @@ namespace DebuggerTests
                             ip = TPointer("int*"),
                             ipp = TPointer("int**"),
                             ipa = TArray("int*[]", "int*[3]"),
-                            ippa = TArray("int**[]", "int**[5]")
+                            ippa = TArray("int**[]", "int**[5]"),
                         },
                         "locals",
                         num_fields: 8
@@ -726,7 +726,7 @@ namespace DebuggerTests
                         {
                             TPointer("int*"),
                             TPointer("int*"),
-                            TPointer("int*", is_null: true)
+                            TPointer("int*", is_null: true),
                         }
                     );
 
@@ -742,7 +742,7 @@ namespace DebuggerTests
                             TPointer("int**"),
                             TPointer("int**"),
                             TPointer("int**"),
-                            TPointer("int**", is_null: true)
+                            TPointer("int**", is_null: true),
                         }
                     );
 
@@ -755,7 +755,7 @@ namespace DebuggerTests
                                 TPointer("int*", is_null: true),
                                 TPointer("int*"),
                                 TPointer("int*", is_null: true),
-                                null
+                                null,
                             }
                         );
 
@@ -799,7 +799,7 @@ namespace DebuggerTests
                             dtp = TPointer("System.DateTime*"),
                             dtpp = TPointer("System.DateTime**"),
                             dtpa = TArray("System.DateTime*[]", "System.DateTime*[2]"),
-                            dtppa = TArray("System.DateTime**[]", "System.DateTime**[3]")
+                            dtppa = TArray("System.DateTime**[]", "System.DateTime**[3]"),
                         },
                         "locals",
                         num_fields: 8
@@ -829,7 +829,7 @@ namespace DebuggerTests
                             new[]
                             {
                                 TPointer("System.DateTime*"),
-                                TPointer("System.DateTime*", is_null: true)
+                                TPointer("System.DateTime*", is_null: true),
                             }
                         )
                     );
@@ -851,7 +851,7 @@ namespace DebuggerTests
                             {
                                 TPointer("System.DateTime**"),
                                 TPointer("System.DateTime**"),
-                                TPointer("System.DateTime**", is_null: true)
+                                TPointer("System.DateTime**", is_null: true),
                             }
                         )
                     );
@@ -860,7 +860,7 @@ namespace DebuggerTests
                     {
                         TPointer("System.DateTime*"),
                         TPointer("System.DateTime*", is_null: true),
-                        null
+                        null,
                     };
 
                     await CheckArrayElements(dtppa_elems, exp_elems);

@@ -971,7 +971,7 @@ namespace System.ServiceModel.Channels
                 (byte)'?',
                 (byte)'x',
                 (byte)'m',
-                (byte)'l'
+                (byte)'l',
             };
             static readonly byte[] version10Text =
             {
@@ -987,7 +987,7 @@ namespace System.ServiceModel.Channels
                 (byte)'1',
                 (byte)'.',
                 (byte)'0',
-                (byte)'"'
+                (byte)'"',
             };
             static readonly byte[] encodingText =
             {
@@ -999,7 +999,7 @@ namespace System.ServiceModel.Channels
                 (byte)'i',
                 (byte)'n',
                 (byte)'g',
-                (byte)'='
+                (byte)'=',
             };
 
             class UTF8BufferedMessageData : BufferedMessageData

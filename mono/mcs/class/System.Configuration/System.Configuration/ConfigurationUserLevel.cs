@@ -34,6 +34,6 @@ namespace System.Configuration
     {
         None = 0,
         PerUserRoaming = 10,
-        PerUserRoamingAndLocal = 20
+        PerUserRoamingAndLocal = 20,
     }
 }

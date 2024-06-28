@@ -41,7 +41,7 @@ public class ViewComponentResultTest
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider())
             {
-                Model = customModel
+                Model = customModel,
             },
         };
 
@@ -54,7 +54,7 @@ public class ViewComponentResultTest
     {
         // Arrange
         var actionContext = new ActionContext(
-            new DefaultHttpContext() { RequestServices = Mock.Of<IServiceProvider>(), },
+            new DefaultHttpContext() { RequestServices = Mock.Of<IServiceProvider>() },
             new RouteData(),
             new ActionDescriptor()
         );
@@ -95,7 +95,7 @@ public class ViewComponentResultTest
             Arguments = new { name = "World!" },
             ViewData = null,
             TempData = null,
-            ViewComponentName = "Text"
+            ViewComponentName = "Text",
         };
 
         // Act
@@ -113,7 +113,7 @@ public class ViewComponentResultTest
 
         var actionContext = CreateActionContext();
 
-        var viewComponentResult = new ViewComponentResult { TempData = _tempDataDictionary, };
+        var viewComponentResult = new ViewComponentResult { TempData = _tempDataDictionary };
 
         // Act and Assert
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -534,7 +534,7 @@ public class ViewComponentResultTest
                 {
                     new MediaTypeHeaderValue("text/foo") { Encoding = Encoding.ASCII }.ToString(),
                     "text/foo; charset=us-ascii"
-                }
+                },
             };
         }
     }
@@ -611,7 +611,7 @@ public class ViewComponentResultTest
             ViewComponentName = "Text",
             ContentType = new MediaTypeHeaderValue("text/html")
             {
-                Encoding = Encoding.UTF8
+                Encoding = Encoding.UTF8,
             }.ToString(),
             TempData = _tempDataDictionary,
         };

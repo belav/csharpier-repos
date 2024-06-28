@@ -585,7 +585,7 @@ public class ComplexObjectModelBinderTest
         var metadata = GetMetadataForProperty(typeof(PersonWithBindExclusion), property);
         var bindingContext = new DefaultModelBindingContext()
         {
-            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
+            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext() },
             ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion)),
         };
 
@@ -637,7 +637,7 @@ public class ComplexObjectModelBinderTest
         var metadata = GetMetadataForProperty(typeof(ModelWithMixedBindingBehaviors), property);
         var bindingContext = new DefaultModelBindingContext()
         {
-            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
+            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext() },
             ModelMetadata = GetMetadataForType(typeof(ModelWithMixedBindingBehaviors)),
         };
 
@@ -1547,7 +1547,7 @@ public class ComplexObjectModelBinderTest
         public int[] SettableArray { get; set; } = new int[] { 0, 1 };
 
         public IDictionary<int, string> SettableDictionary { get; set; } =
-            new Dictionary<int, string> { { 0, "zero" }, { 25, "twenty-five" }, };
+            new Dictionary<int, string> { { 0, "zero" }, { 25, "twenty-five" } };
 
         public IList<int> SettableList { get; set; } = new List<int> { 3, 9, 0 };
     }

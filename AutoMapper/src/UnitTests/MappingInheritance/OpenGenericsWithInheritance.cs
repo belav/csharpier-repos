@@ -90,8 +90,8 @@ public class OpenGenericsWithInclude : AutoMapperSpecBase
             BarList =
             {
                 new Bar<string> { Id = 1, Value = "One" },
-                new Bar<string> { Id = 2, Value = "Two" }
-            }
+                new Bar<string> { Id = 2, Value = "Two" },
+            },
         };
 
         var personMapped = Mapper.Map<PersonModel>(person);
@@ -165,8 +165,8 @@ public class OpenGenericsWithIncludeBase : AutoMapperSpecBase
             BarList =
             {
                 new Bar<string> { Id = 1, Value = "One" },
-                new Bar<string> { Id = 2, Value = "Two" }
-            }
+                new Bar<string> { Id = 2, Value = "Two" },
+            },
         };
 
         var personMapped = Mapper.Map<PersonModel>(person);
@@ -234,7 +234,7 @@ public class OpenGenericsAndNonGenericsWithIncludeBase : AutoMapperSpecBase
         {
             BaseMember = "foo",
             Id = 695,
-            SubMember = "bar"
+            SubMember = "bar",
         };
 
         var model = this.Mapper.Map<SubModel>(entity);

@@ -128,7 +128,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 Kind = kind,
                 ContextualKind = contextualKind,
                 Text = text ?? canonicalText,
-                ValueText = valueText ?? text ?? canonicalText
+                ValueText = valueText ?? text ?? canonicalText,
             };
         }
 

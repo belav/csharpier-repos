@@ -65,7 +65,7 @@ namespace System.Security.AccessControl
         Access = 0x2,
         Owner = 0x4,
         Group = 0x8,
-        All = 0xF
+        All = 0xF,
     }
 
     [Flags]

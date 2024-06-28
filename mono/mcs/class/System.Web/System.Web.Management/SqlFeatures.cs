@@ -37,6 +37,6 @@ namespace System.Web.Management
         RoleManager = 4,
         Personalization = 8,
         SqlWebEventProvider = 16,
-        All = 1073741855
+        All = 1073741855,
     }
 }

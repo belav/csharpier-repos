@@ -31,6 +31,6 @@ namespace System.Windows.Forms
         Disable = 0,
         EnableWithAutoHeaderText = 1,
         EnableWithoutHeaderText = 2,
-        EnableAlwaysIncludeHeaderText = 3
+        EnableAlwaysIncludeHeaderText = 3,
     }
 }

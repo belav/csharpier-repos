@@ -312,18 +312,17 @@ internal static class CSharpStructureHelpers
                         ?? delegateDeclaration.DelegateKeyword,
                 DestructorDeclarationSyntax destructorDeclaration =>
                     destructorDeclaration.TildeToken,
-                EnumDeclarationSyntax enumDeclaration =>
-                    enumDeclaration.Modifiers.FirstOrNull() ?? enumDeclaration.EnumKeyword,
+                EnumDeclarationSyntax enumDeclaration => enumDeclaration.Modifiers.FirstOrNull()
+                    ?? enumDeclaration.EnumKeyword,
                 EnumMemberDeclarationSyntax enumMemberDeclaration =>
                     enumMemberDeclaration.Identifier,
-                EventDeclarationSyntax eventDeclaration =>
-                    eventDeclaration.Modifiers.FirstOrNull() ?? eventDeclaration.EventKeyword,
+                EventDeclarationSyntax eventDeclaration => eventDeclaration.Modifiers.FirstOrNull()
+                    ?? eventDeclaration.EventKeyword,
                 EventFieldDeclarationSyntax eventFieldDeclaration =>
                     eventFieldDeclaration.Modifiers.FirstOrNull()
                         ?? eventFieldDeclaration.EventKeyword,
-                FieldDeclarationSyntax fieldDeclaration =>
-                    fieldDeclaration.Modifiers.FirstOrNull()
-                        ?? fieldDeclaration.Declaration.GetFirstToken(),
+                FieldDeclarationSyntax fieldDeclaration => fieldDeclaration.Modifiers.FirstOrNull()
+                    ?? fieldDeclaration.Declaration.GetFirstToken(),
                 IndexerDeclarationSyntax indexerDeclaration =>
                     indexerDeclaration.Modifiers.FirstOrNull()
                         ?? indexerDeclaration.Type.GetFirstToken(),
@@ -336,9 +335,9 @@ internal static class CSharpStructureHelpers
                 PropertyDeclarationSyntax propertyDeclaration =>
                     propertyDeclaration.Modifiers.FirstOrNull()
                         ?? propertyDeclaration.Type.GetFirstToken(),
-                TypeDeclarationSyntax typeDeclaration =>
-                    typeDeclaration.Modifiers.FirstOrNull() ?? typeDeclaration.Keyword,
-                _ => default
+                TypeDeclarationSyntax typeDeclaration => typeDeclaration.Modifiers.FirstOrNull()
+                    ?? typeDeclaration.Keyword,
+                _ => default,
             };
 
         static SyntaxToken GetHintTextEndToken(SyntaxNode node) =>
@@ -348,7 +347,7 @@ internal static class CSharpStructureHelpers
                     enumDeclaration.OpenBraceToken.GetPreviousToken(),
                 TypeDeclarationSyntax typeDeclaration =>
                     typeDeclaration.OpenBraceToken.GetPreviousToken(),
-                _ => node.GetLastToken()
+                _ => node.GetLastToken(),
             };
     }
 

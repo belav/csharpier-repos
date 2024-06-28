@@ -224,7 +224,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         getResult: null
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else
@@ -322,7 +322,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ? expressionOpt
                         : new BoundLocal(syntax, declarationsOpt[0].LocalSymbol, null, type)
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         };
 
                     BindingDiagnosticBag patternDiagnostics =

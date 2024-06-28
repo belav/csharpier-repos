@@ -753,7 +753,7 @@ namespace System.Numerics.Tests
                     0,
                     0,
                     0,
-                    0
+                    0,
                 }
             );
 
@@ -783,7 +783,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             );
 
@@ -827,7 +827,7 @@ namespace System.Numerics.Tests
                         0,
                         0,
                         0,
-                        0
+                        0,
                     },
                     tempUInt64
                 );
@@ -851,7 +851,7 @@ namespace System.Numerics.Tests
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
-                            tempByteArray[3]
+                            tempByteArray[3],
                         }
                     );
                     VerifyCtorByteArray(
@@ -861,7 +861,7 @@ namespace System.Numerics.Tests
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
-                            0
+                            0,
                         },
                         tempUInt64
                     );
@@ -874,7 +874,7 @@ namespace System.Numerics.Tests
                             tempByteArray[0],
                             tempByteArray[1],
                             tempByteArray[2],
-                            tempByteArray[3]
+                            tempByteArray[3],
                         },
                         tempUInt64
                     );
@@ -902,7 +902,7 @@ namespace System.Numerics.Tests
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
-                            tempByteArray[4]
+                            tempByteArray[4],
                         }
                     );
 
@@ -914,7 +914,7 @@ namespace System.Numerics.Tests
                             tempByteArray[2],
                             tempByteArray[3],
                             tempByteArray[4],
-                            0
+                            0,
                         },
                         tempUInt64
                     );
@@ -928,7 +928,7 @@ namespace System.Numerics.Tests
                             tempByteArray[1],
                             tempByteArray[2],
                             tempByteArray[3],
-                            tempByteArray[4]
+                            tempByteArray[4],
                         },
                         tempUInt64
                     );
@@ -959,7 +959,7 @@ namespace System.Numerics.Tests
                             tempByteArray[4],
                             tempByteArray[5],
                             tempByteArray[6],
-                            tempByteArray[7]
+                            tempByteArray[7],
                         }
                     );
                     VerifyCtorByteArray(
@@ -973,7 +973,7 @@ namespace System.Numerics.Tests
                             tempByteArray[5],
                             tempByteArray[6],
                             tempByteArray[7],
-                            0
+                            0,
                         },
                         tempUInt64
                     );
@@ -990,7 +990,7 @@ namespace System.Numerics.Tests
                             tempByteArray[4],
                             tempByteArray[5],
                             tempByteArray[6],
-                            tempByteArray[7]
+                            tempByteArray[7],
                         },
                         tempUInt64
                     );
@@ -1011,7 +1011,7 @@ namespace System.Numerics.Tests
                         (byte)s_random.Next(0, 256),
                         (byte)s_random.Next(0, 256),
                         (byte)s_random.Next(0, 256),
-                        (byte)s_random.Next(0, 256)
+                        (byte)s_random.Next(0, 256),
                     }
                 );
             }

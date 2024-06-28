@@ -41,7 +41,7 @@ namespace System.Data.SqlTypes
         EQ,
         GE,
         GT,
-        NE
+        NE,
     }
 
     // This enumeration is used to inquire about internal storage of a SqlBytes or SqlChars instance:
@@ -49,7 +49,7 @@ namespace System.Data.SqlTypes
     {
         Buffer = 0,
         Stream = 1,
-        UnmanagedBuffer = 2
+        UnmanagedBuffer = 2,
     }
 
     [Serializable]

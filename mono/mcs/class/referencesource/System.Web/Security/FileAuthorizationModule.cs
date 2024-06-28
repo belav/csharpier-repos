@@ -340,7 +340,7 @@ namespace System.Web.Security
                                 SlidingExpiration = slidingExp,
                                 OnRemovedCallback = new CacheItemRemovedCallback(
                                     oSecDesc.OnCacheItemRemoved
-                                )
+                                ),
                             }
                         );
                     }

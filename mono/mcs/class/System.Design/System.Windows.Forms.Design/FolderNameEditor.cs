@@ -93,7 +93,7 @@ namespace System.Windows.Forms.Design
             Recent = 8,
             SendTo = 9,
             StartMenu = 11,
-            Templates = 21
+            Templates = 21,
         }
 
         [Flags]
@@ -105,7 +105,7 @@ namespace System.Windows.Forms.Design
             RestrictToDomain = 2,
             RestrictToFilesystem = 1,
             RestrictToSubfolders = 8,
-            ShowTextBox = 16
+            ShowTextBox = 16,
         }
 
         protected sealed class FolderBrowser : Component

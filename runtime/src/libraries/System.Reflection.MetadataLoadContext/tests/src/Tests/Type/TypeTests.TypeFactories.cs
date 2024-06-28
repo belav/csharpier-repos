@@ -68,7 +68,7 @@ namespace System.Reflection.Tests
             {
                 typeof(int).Project(),
                 typeof(string).Project(),
-                typeof(double).Project()
+                typeof(double).Project(),
             };
             Type t = gt.MakeGenericType(gas);
 

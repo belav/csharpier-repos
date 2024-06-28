@@ -47,7 +47,7 @@ namespace Microsoft.Extensions.Configuration.Xml
                 CloseInput = false, // caller will close the stream
                 DtdProcessing = DtdProcessing.Prohibit,
                 IgnoreComments = true,
-                IgnoreWhitespace = true
+                IgnoreWhitespace = true,
             };
 
             XmlConfigurationElement? root = null;
@@ -125,7 +125,7 @@ namespace Microsoft.Extensions.Configuration.Xml
                                                 new List<XmlConfigurationElement>
                                                 {
                                                     parent.SingleChild,
-                                                    element
+                                                    element,
                                                 }
                                             );
                                         }
@@ -135,7 +135,7 @@ namespace Microsoft.Extensions.Configuration.Xml
                                                 parent.SingleChild.SiblingName,
                                                 new List<XmlConfigurationElement>
                                                 {
-                                                    parent.SingleChild
+                                                    parent.SingleChild,
                                                 }
                                             );
                                             children.Add(

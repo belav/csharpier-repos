@@ -4,7 +4,7 @@ public enum TestEnum
 {
     A,
     B,
-    C
+    C,
 }
 
 class Driver

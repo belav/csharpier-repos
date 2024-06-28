@@ -233,7 +233,7 @@ namespace System.ServiceModel.Channels
                     this.sin6_addr[v4Index],
                     this.sin6_addr[v4Index + 1],
                     this.sin6_addr[v4Index + 2],
-                    this.sin6_addr[v4Index + 3]
+                    this.sin6_addr[v4Index + 3],
                 };
                 return new IPAddress(addr);
             }

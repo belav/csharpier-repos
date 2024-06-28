@@ -562,7 +562,7 @@ namespace MonoTests.System.Data.Utils
             // add primary key, fill method will update existing rows instead of insert new ones
             dsExpected.Tables[0].PrimaryKey = new DataColumn[]
             {
-                dsExpected.Tables[0].Columns["EmployeeID"]
+                dsExpected.Tables[0].Columns["EmployeeID"],
             };
             //if (ReadSchemaOnly)	dsExpected.Tables[1].PrimaryKey = new DataColumn[] {dsExpected.Tables[1].Columns["CustomerID"]};
             dsExpected.AcceptChanges();
@@ -682,7 +682,7 @@ namespace MonoTests.System.Data.Utils
             dbDA.Fill(dsExpected);
             dsExpected.Tables[0].PrimaryKey = new DataColumn[]
             {
-                dsExpected.Tables[0].Columns["EmployeeID"]
+                dsExpected.Tables[0].Columns["EmployeeID"],
             };
 
             CompareResults_Update(dsDB1, dsDB2, ref dbDA);
@@ -916,7 +916,7 @@ namespace MonoTests.System.Data.Utils
             dbDA.Fill(dsExpected);
             dsExpected.Tables[0].PrimaryKey = new DataColumn[]
             {
-                dsExpected.Tables[0].Columns["EmployeeID"]
+                dsExpected.Tables[0].Columns["EmployeeID"],
             };
 
             CompareResults_Update(dsDB1, dsDB2, ref dbDA);
@@ -1153,7 +1153,7 @@ namespace MonoTests.System.Data.Utils
             dbDA.Fill(dsExpected);
             dsExpected.Tables[0].PrimaryKey = new DataColumn[]
             {
-                dsExpected.Tables[0].Columns["EmployeeID"]
+                dsExpected.Tables[0].Columns["EmployeeID"],
             };
 
             CompareResults_Update(dsDB1, dsDB2, ref dbDA);
@@ -1394,7 +1394,7 @@ namespace MonoTests.System.Data.Utils
             dbDA.Fill(dsExpected);
             dsExpected.Tables[0].PrimaryKey = new DataColumn[]
             {
-                dsExpected.Tables[0].Columns["EmployeeID"]
+                dsExpected.Tables[0].Columns["EmployeeID"],
             };
 
             CompareResults_Update(dsDB1, dsDB2, ref dbDA);

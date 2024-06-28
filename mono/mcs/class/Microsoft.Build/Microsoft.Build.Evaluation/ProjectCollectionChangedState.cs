@@ -13,6 +13,6 @@ namespace Microsoft.Build.Evaluation
         Loggers,
         OnlyLogCriticalEvents,
         SkipEvaluation,
-        Toolsets
+        Toolsets,
     }
 }

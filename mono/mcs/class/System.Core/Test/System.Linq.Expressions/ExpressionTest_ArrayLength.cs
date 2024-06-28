@@ -77,7 +77,7 @@ namespace MonoTests.System.Linq.Expressions
             string[,] array =
             {
                 { },
-                { }
+                { },
             };
 
             Expression.ArrayLength(Expression.Constant(array));

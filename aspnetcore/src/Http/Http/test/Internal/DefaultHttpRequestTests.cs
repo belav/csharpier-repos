@@ -64,7 +64,7 @@ public class DefaultHttpRequestTests
         // Arrange
         const string expected = "localhost:9001";
 
-        var headers = new HeaderDictionary() { { "Host", expected }, };
+        var headers = new HeaderDictionary() { { "Host", expected } };
 
         var request = CreateRequest(headers);
 
@@ -81,7 +81,7 @@ public class DefaultHttpRequestTests
         // Arrange
         const string expected = "löcalhöst";
 
-        var headers = new HeaderDictionary() { { "Host", "xn--lcalhst-90ae" }, };
+        var headers = new HeaderDictionary() { { "Host", "xn--lcalhst-90ae" } };
 
         var request = CreateRequest(headers);
 
@@ -220,7 +220,7 @@ public class DefaultHttpRequestTests
 
         var customRouteValuesFeature = new CustomRouteValuesFeature
         {
-            RouteValues = new RouteValueDictionary(new { key = "customvalue" })
+            RouteValues = new RouteValueDictionary(new { key = "customvalue" }),
         };
         context.Features.Set<IRouteValuesFeature>(customRouteValuesFeature);
         // Can override DefaultHttpRequest.RouteValues with custom feature

@@ -218,7 +218,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Whether caching is enabled for this data source.
         /// </devdoc>
-        [DefaultValue(true), WebCategory("Cache"), WebSysDescription(SR.DataSourceCache_Enabled),]
+        [DefaultValue(true), WebCategory("Cache"), WebSysDescription(SR.DataSourceCache_Enabled)]
         public virtual bool EnableCaching
         {
             get { return Cache.Enabled; }
@@ -290,7 +290,7 @@ namespace System.Web.UI.WebControls
         /// Arguments for the XSL transform.
         /// This should be populated in the Transforming event.
         /// </devdoc>
-        [Browsable(false),]
+        [Browsable(false)]
         public virtual XsltArgumentList TransformArgumentList
         {
             get { return _transformArgumentList; }
@@ -359,7 +359,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Specifies an initial XPath that is applied to the XML data.
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.XmlDataSource_XPath),]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.XmlDataSource_XPath)]
         public virtual string XPath
         {
             get
@@ -389,7 +389,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Raised before the XSL transform is applied.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.XmlDataSource_Transforming),]
+        [WebCategory("Data"), WebSysDescription(SR.XmlDataSource_Transforming)]
         public event EventHandler Transforming
         {
             add { Events.AddHandler(EventTransforming, value); }

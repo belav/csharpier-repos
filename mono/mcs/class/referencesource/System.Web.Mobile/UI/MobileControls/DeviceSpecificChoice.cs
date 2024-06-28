@@ -90,7 +90,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Contents"]/*' />
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content),]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IDictionary Contents
         {
             get
@@ -104,7 +104,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Templates"]/*' />
-        [PersistenceMode(PersistenceMode.InnerProperty),]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
         public IDictionary Templates
         {
             get
@@ -118,7 +118,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.HasTemplates"]/*' />
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasTemplates
         {
             get { return _templates != null && _templates.Count > 0; }
@@ -731,7 +731,7 @@ namespace System.Web.UI.MobileControls
         private String _name;
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Template"]/*' />
-        [Filterable(false), TemplateContainer(typeof(TemplateContainer)),]
+        [Filterable(false), TemplateContainer(typeof(TemplateContainer))]
         public ITemplate Template
         {
             get { return _template; }

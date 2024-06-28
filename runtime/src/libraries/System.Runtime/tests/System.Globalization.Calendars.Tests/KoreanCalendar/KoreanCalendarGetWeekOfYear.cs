@@ -23,7 +23,7 @@ namespace System.Globalization.Tests
             {
                 s_randomDataGenerator.GetDateTime(-55),
                 rule,
-                firstDayOfWeek
+                firstDayOfWeek,
             };
         }
 

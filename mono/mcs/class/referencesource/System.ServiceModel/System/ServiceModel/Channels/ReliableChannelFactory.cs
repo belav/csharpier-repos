@@ -171,13 +171,13 @@ namespace System.ServiceModel.Channels
                 {
                     new OperationWithTimeoutBeginCallback(base.OnBeginClose),
                     new OperationWithTimeoutBeginCallback(this.faultHelper.BeginClose),
-                    new OperationWithTimeoutBeginCallback(this.innerChannelFactory.BeginClose)
+                    new OperationWithTimeoutBeginCallback(this.innerChannelFactory.BeginClose),
                 },
                 new OperationEndCallback[]
                 {
                     new OperationEndCallback(base.OnEndClose),
                     new OperationEndCallback(this.faultHelper.EndClose),
-                    new OperationEndCallback(this.innerChannelFactory.EndClose)
+                    new OperationEndCallback(this.innerChannelFactory.EndClose),
                 },
                 callback,
                 state

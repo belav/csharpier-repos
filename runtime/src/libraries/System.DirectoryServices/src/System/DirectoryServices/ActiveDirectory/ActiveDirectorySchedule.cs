@@ -30,7 +30,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Twenty,
         TwentyOne,
         TwentyTwo,
-        TwentyThree
+        TwentyThree,
     }
 
     public enum MinuteOfHour
@@ -38,7 +38,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Zero = 0,
         Fifteen = 15,
         Thirty = 30,
-        FortyFive = 45
+        FortyFive = 45,
     }
 
     public class ActiveDirectorySchedule

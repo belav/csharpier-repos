@@ -43,7 +43,7 @@ namespace Microsoft.Interop.JavaScript
                     new
                     {
                         Syntax = (MethodDeclarationSyntax)context.TargetNode,
-                        Symbol = (IMethodSymbol)context.TargetSymbol
+                        Symbol = (IMethodSymbol)context.TargetSymbol,
                     }
             );
 
@@ -59,7 +59,7 @@ namespace Microsoft.Interop.JavaScript
                     {
                         Syntax = data.Syntax,
                         Symbol = data.Symbol,
-                        Diagnostic = diagnostic
+                        Diagnostic = diagnostic,
                     };
                 }
             );
@@ -199,7 +199,7 @@ namespace Microsoft.Interop.JavaScript
                         {
                             Token(SyntaxKind.InternalKeyword),
                             Token(SyntaxKind.StaticKeyword),
-                            Token(SyntaxKind.UnsafeKeyword)
+                            Token(SyntaxKind.UnsafeKeyword),
                         }
                     )
                 )

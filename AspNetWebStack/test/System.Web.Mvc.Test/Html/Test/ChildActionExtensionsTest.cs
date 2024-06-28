@@ -55,7 +55,7 @@ namespace System.Web.Mvc.Html.Test
 
             _viewContext = new ViewContext
             {
-                RequestContext = new RequestContext(_httpContext.Object, _originalRouteData)
+                RequestContext = new RequestContext(_httpContext.Object, _originalRouteData),
             };
 
             _viewDataContainer = new Mock<IViewDataContainer>();

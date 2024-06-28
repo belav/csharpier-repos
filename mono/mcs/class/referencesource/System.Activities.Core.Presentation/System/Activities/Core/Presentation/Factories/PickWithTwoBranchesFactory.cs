@@ -16,8 +16,8 @@ namespace System.Activities.Core.Presentation.Factories
                 Branches =
                 {
                     new System.Activities.Statements.PickBranch { DisplayName = "Branch1" },
-                    new System.Activities.Statements.PickBranch { DisplayName = "Branch2" }
-                }
+                    new System.Activities.Statements.PickBranch { DisplayName = "Branch2" },
+                },
             };
         }
     }

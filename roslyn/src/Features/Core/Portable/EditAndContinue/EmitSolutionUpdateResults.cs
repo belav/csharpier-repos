@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ),
                 Diagnostics = ImmutableArray<ProjectDiagnostics>.Empty,
                 RudeEdits = ImmutableArray<(DocumentId, ImmutableArray<RudeEditDiagnostic>)>.Empty,
-                SyntaxError = null
+                SyntaxError = null,
             };
 
         public required ModuleUpdates ModuleUpdates { get; init; }
@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 ModuleUpdates = ModuleUpdates,
                 Diagnostics = Diagnostics.ToDiagnosticData(solution),
                 RudeEdits = RudeEdits,
-                SyntaxError = GetSyntaxErrorData(solution)
+                SyntaxError = GetSyntaxErrorData(solution),
             };
 
         public DiagnosticData? GetSyntaxErrorData(Solution solution)
@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         DiagnosticSeverity.Error =>
                             ManagedHotReloadDiagnosticSeverity.RestartRequired,
                         DiagnosticSeverity.Warning => ManagedHotReloadDiagnosticSeverity.Warning,
-                        _ => throw ExceptionUtilities.UnexpectedValue(descriptor.DefaultSeverity)
+                        _ => throw ExceptionUtilities.UnexpectedValue(descriptor.DefaultSeverity),
                     };
 
                     var fileSpan = tree.GetMappedLineSpan(diagnostic.Span, cancellationToken);

@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var analyzer = new Analyzer();
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
-                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) }
+                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) },
             };
 
             using var workspace = TestWorkspace.CreateCSharp(

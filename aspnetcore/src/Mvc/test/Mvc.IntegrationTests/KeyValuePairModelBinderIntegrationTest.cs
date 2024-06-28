@@ -18,7 +18,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -58,7 +58,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -121,7 +121,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
 
         // Act
@@ -153,7 +153,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -216,7 +216,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
 
         // Act
@@ -248,8 +248,8 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(KeyValuePair<string, int>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -289,7 +289,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -329,7 +329,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, int>)
+            ParameterType = typeof(KeyValuePair<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -367,7 +367,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, Person>)
+            ParameterType = typeof(KeyValuePair<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -408,8 +408,8 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(KeyValuePair<string, Person>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(KeyValuePair<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -450,7 +450,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, Person>)
+            ParameterType = typeof(KeyValuePair<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -491,7 +491,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(KeyValuePair<string, Person>)
+            ParameterType = typeof(KeyValuePair<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -527,7 +527,7 @@ public class KeyValuePairModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "p",
-            ParameterType = typeof(KeyValuePair<string, string[]>)
+            ParameterType = typeof(KeyValuePair<string, string[]>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>

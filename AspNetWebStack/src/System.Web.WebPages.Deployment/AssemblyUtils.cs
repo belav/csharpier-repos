@@ -43,7 +43,7 @@ namespace System.Web.WebPages.Deployment
             GetFullName("System.Web.WebPages.Administration", WebPagesV1Version),
             GetFullName("System.Web.WebPages.Razor", WebPagesV1Version),
             GetFullName("WebMatrix.Data", WebPagesV1Version),
-            GetFullName("WebMatrix.WebData", WebPagesV1Version)
+            GetFullName("WebMatrix.WebData", WebPagesV1Version),
         };
 
         private static readonly AssemblyName[] _versionCurrentAssemblyList = new[]
@@ -55,7 +55,7 @@ namespace System.Web.WebPages.Deployment
             GetFullName("System.Web.WebPages.Administration", ThisAssemblyName.Version),
             GetFullName("System.Web.WebPages.Razor", ThisAssemblyName.Version),
             GetFullName("WebMatrix.Data", ThisAssemblyName.Version),
-            GetFullName("WebMatrix.WebData", ThisAssemblyName.Version)
+            GetFullName("WebMatrix.WebData", ThisAssemblyName.Version),
         };
 
         internal static Version GetMaxWebPagesVersion()

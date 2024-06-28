@@ -160,7 +160,7 @@ namespace System.Web.WebPages
                 buildManagerResult = new BuildManagerResult
                 {
                     ObjectFactory = objectFactory,
-                    Exists = objectFactory != null
+                    Exists = objectFactory != null,
                 };
                 // Cache the result with a sliding expiration for a long duration.
                 HttpRuntime.Cache.Add(

@@ -1897,7 +1897,7 @@ namespace MonoTests.System.Data
             dtParent.PrimaryKey = new DataColumn[]
             {
                 dtParent.Columns["ParentDouble"],
-                dtParent.Columns["ParentDateTime"]
+                dtParent.Columns["ParentDateTime"],
             };
             // check primary key - ColumnType Double,DateTime test1
             dr = dtParent.NewRow();
@@ -1964,7 +1964,7 @@ namespace MonoTests.System.Data
             ds.Tables[0].PrimaryKey = new DataColumn[]
             {
                 ds.Tables[0].Columns[0],
-                ds.Tables[0].Columns[1]
+                ds.Tables[0].Columns[1],
             };
             Assert.AreEqual(2, ds.Tables[0].PrimaryKey.Length, "DT170");
         }

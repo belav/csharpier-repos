@@ -19,28 +19,28 @@ namespace System.Net.Mail.Tests
                 Address,
                 DisplayName,
                 null,
-                $"\"{DisplayName}\" <{Address}>"
+                $"\"{DisplayName}\" <{Address}>",
             };
             yield return new object[]
             {
                 Address,
                 UnicodeDisplayName,
                 null,
-                $"\"{UnicodeDisplayName}\" <{Address}>"
+                $"\"{UnicodeDisplayName}\" <{Address}>",
             };
             yield return new object[]
             {
                 Address,
                 $"\"{DisplayName}\"",
                 DisplayName,
-                $"\"{DisplayName}\" <{Address}>"
+                $"\"{DisplayName}\" <{Address}>",
             };
             yield return new object[]
             {
                 Address,
                 $"\"{UnicodeDisplayName}\"",
                 UnicodeDisplayName,
-                $"\"{UnicodeDisplayName}\" <{Address}>"
+                $"\"{UnicodeDisplayName}\" <{Address}>",
             };
         }
 
@@ -61,14 +61,14 @@ namespace System.Net.Mail.Tests
                     Address,
                     displayName,
                     null,
-                    $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>"
+                    $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>",
                 };
                 yield return new object[]
                 {
                     Address,
                     $"\"{displayName}\"",
                     displayName,
-                    $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>"
+                    $"\"{displayName.Replace("\"", "\\\"")}\" <{Address}>",
                 };
             }
 

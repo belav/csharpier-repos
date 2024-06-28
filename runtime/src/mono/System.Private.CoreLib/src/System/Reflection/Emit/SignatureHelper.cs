@@ -48,7 +48,7 @@ namespace System.Reflection.Emit
             HELPER_FIELD,
             HELPER_LOCAL,
             HELPER_METHOD,
-            HELPER_PROPERTY
+            HELPER_PROPERTY,
         }
 
         #region Sync with MonoReflectionSigHelper in object-internals.h

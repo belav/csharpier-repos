@@ -23,7 +23,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             // Act
@@ -62,7 +62,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(int)
-                )
+                ),
             };
 
             // Act & assert
@@ -119,7 +119,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
                     () => 42,
                     typeof(int)
-                )
+                ),
             };
 
             // Assert
@@ -136,7 +136,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = ModelMetadataProviders.Current.GetMetadataForType(
                     () => 42,
                     typeof(int)
-                )
+                ),
             };
 
             // Act & assert
@@ -157,7 +157,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     () => 42,
                     typeof(int)
                 ),
-                ModelName = "theInt"
+                ModelName = "theInt",
             };
 
             // Act

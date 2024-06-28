@@ -56,7 +56,7 @@ namespace Microsoft.CodeAnalysis
                 new Dictionary<string, string>
                 {
                     { "Key1", "Value1" },
-                    { "Key2", "Value2" }
+                    { "Key2", "Value2" },
                 }.ToImmutableDictionary();
 
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
@@ -722,7 +722,7 @@ namespace Microsoft.CodeAnalysis
                     ReportDiagnostic.Error => "error",
                     ReportDiagnostic.Warn => "warning",
                     ReportDiagnostic.Info or ReportDiagnostic.Hidden => "note",
-                    _ => throw ExceptionUtilities.UnexpectedValue(severity)
+                    _ => throw ExceptionUtilities.UnexpectedValue(severity),
                 };
 
                 return $@"""level"": ""{severityString}""";
@@ -1393,7 +1393,7 @@ namespace Microsoft.CodeAnalysis
                 OperationBlockEnd,
                 Compilation,
                 CompilationEnd,
-                SyntaxTree
+                SyntaxTree,
             }
 
             public AnalyzerWithInvalidDiagnosticLocation(
@@ -1795,7 +1795,7 @@ namespace Microsoft.CodeAnalysis
                 Operation,
                 OperationInOperationBlockStart,
                 OperationBlock,
-                OperationBlockEnd
+                OperationBlockEnd,
             }
 
             public OperationAnalyzer(ActionKind actionKind, bool verifyGetControlFlowGraph = false)
@@ -3384,7 +3384,7 @@ namespace Microsoft.CodeAnalysis
             {
                 Symbol,
                 SymbolStartEnd,
-                CompilationStartEnd
+                CompilationStartEnd,
             }
 
             public const string RuleId = "ID1";
@@ -3822,7 +3822,7 @@ namespace Microsoft.CodeAnalysis
                 OperationBlockStartEndAction,
                 SyntaxNodeAction,
                 CodeBlockAction,
-                CodeBlockStartEndAction
+                CodeBlockStartEndAction,
             }
 
             public LocalNonLocalDiagnosticsAnalyzer(ActionKind actionKind)

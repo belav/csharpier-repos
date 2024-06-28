@@ -684,26 +684,26 @@ namespace LibraryImportGenerator.IntegrationTests
                 {
                     b1 = true,
                     b2 = false,
-                    b3 = true
+                    b3 = true,
                 },
                 new BoolStruct
                 {
                     b1 = false,
                     b2 = true,
-                    b3 = false
+                    b3 = false,
                 },
                 new BoolStruct
                 {
                     b1 = true,
                     b2 = true,
-                    b3 = true
+                    b3 = true,
                 },
                 new BoolStruct
                 {
                     b1 = false,
                     b2 = false,
-                    b3 = false
-                }
+                    b3 = false,
+                },
             };
 
         private static List<BoolStruct> GetNegatedBoolStructs(List<BoolStruct> toNegate) =>
@@ -712,7 +712,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 {
                     b1 = !b.b1,
                     b2 = !b.b2,
-                    b3 = !b.b3
+                    b3 = !b.b3,
                 })
                 .ToList();
     }

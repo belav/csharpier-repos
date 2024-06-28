@@ -56,7 +56,7 @@ namespace System.Web.Http.ModelBinding
                 ModelName = "someName",
                 //ModelState = executionContext.Controller.ViewData.ModelState,
                 //PropertyFilter = _ => true,
-                ValueProvider = new SimpleValueProvider { { "someName", "dummyValue" } }
+                ValueProvider = new SimpleValueProvider { { "someName", "dummyValue" } },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -112,7 +112,7 @@ namespace System.Web.Http.ModelBinding
                 ModelName = "someName",
                 //ModelState = executionContext.Controller.ViewData.ModelState,
                 //PropertyFilter = _ => true,
-                ValueProvider = new SimpleValueProvider { { "someOtherName", "dummyValue" } }
+                ValueProvider = new SimpleValueProvider { { "someOtherName", "dummyValue" } },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -201,7 +201,7 @@ namespace System.Web.Http.ModelBinding
                 .Verifiable();
             List<ModelBinderProvider> binderProviders = new List<ModelBinderProvider>()
             {
-                mockBinderProvider.Object
+                mockBinderProvider.Object,
             };
             CompositeModelBinderProvider shimBinderProvider = new CompositeModelBinderProvider(
                 binderProviders

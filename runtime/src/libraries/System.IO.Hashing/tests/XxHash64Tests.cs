@@ -18,7 +18,7 @@ namespace System.IO.Hashing.Tests
             0x51,
             0xD8,
             0xE9,
-            0x99
+            0x99,
         };
 
         public XxHash64Tests()

@@ -33,7 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                 NotificationOption2.Warning,
                 KnownMonikers.StatusWarning
             ),
-            new NotificationOptionViewModel(NotificationOption2.Error, KnownMonikers.StatusError)
+            new NotificationOptionViewModel(NotificationOption2.Error, KnownMonikers.StatusError),
         ];
 
         public string CodeStyleMembersAutomationText => ServicesVSResources.Naming_rules;
@@ -55,7 +55,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style
                     Specifications = new ObservableCollection<SymbolSpecification>(
                         info.SymbolSpecifications
                     ),
-                    NotificationPreferences = new List<NotificationOptionViewModel>(_notifications)
+                    NotificationPreferences = new List<NotificationOptionViewModel>(_notifications),
                 };
 
                 viewModel.SelectedSpecification = viewModel.Specifications.Single(s =>

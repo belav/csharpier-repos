@@ -23,7 +23,7 @@ namespace System.Text.RegularExpressions.Tests
                     "aA",
                     "da-DK",
                     RegexOptions.None,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
@@ -32,7 +32,7 @@ namespace System.Text.RegularExpressions.Tests
                     "aA",
                     "da-DK",
                     RegexOptions.None,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
@@ -41,7 +41,7 @@ namespace System.Text.RegularExpressions.Tests
                     "aA",
                     "da-DK",
                     RegexOptions.IgnoreCase,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
@@ -50,7 +50,7 @@ namespace System.Text.RegularExpressions.Tests
                     "aA",
                     "da-DK",
                     RegexOptions.IgnoreCase,
-                    true
+                    true,
                 };
             }
         }
@@ -84,7 +84,7 @@ namespace System.Text.RegularExpressions.Tests
                 yield return new object[]
                 {
                     engine,
-                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
                 };
             }
         }
@@ -243,7 +243,7 @@ namespace System.Text.RegularExpressions.Tests
                 return new Regex[]
                 {
                     new Regex(input, additional),
-                    new Regex(input, RegexOptions.Compiled | additional)
+                    new Regex(input, RegexOptions.Compiled | additional),
                 };
             }
         }
@@ -328,14 +328,14 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     "I\u0131\u0130i",
                     RegexOptions.None,
-                    "I\u0131\u0130i"
+                    "I\u0131\u0130i",
                 };
                 yield return new object[]
                 {
                     engine,
                     "I\u0131\u0130i",
                     RegexOptions.IgnoreCase,
-                    "I\u0131\u0130i"
+                    "I\u0131\u0130i",
                 };
             }
         }
@@ -387,7 +387,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "abcIIIxyz",
-                        "III"
+                        "III",
                     };
                     yield return new object[]
                     {
@@ -396,7 +396,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "abcIi\u0130xyz",
-                        "Ii\u0130"
+                        "Ii\u0130",
                     };
                     yield return new object[]
                     {
@@ -405,7 +405,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "abcI\u0130ixyz",
-                        "I\u0130i"
+                        "I\u0130i",
                     };
                     yield return new object[]
                     {
@@ -414,7 +414,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "abc\u0130IIxyz",
-                        "\u0130II"
+                        "\u0130II",
                     };
                     yield return new object[]
                     {
@@ -423,7 +423,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "abc\u0130\u0131Ixyz",
-                        ""
+                        "",
                     };
                     yield return new object[]
                     {
@@ -432,7 +432,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "abc\u0130Iixyz",
-                        "\u0130Ii"
+                        "\u0130Ii",
                     };
                     yield return new object[]
                     {
@@ -441,7 +441,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         enUS,
                         "ii\u0130i\u0131ab",
-                        ""
+                        "",
                     };
 
                     // Expected answers in the invariant culture
@@ -452,7 +452,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         invariant,
                         "xy\u0131ab",
-                        ""
+                        "",
                     };
                     yield return new object[]
                     {
@@ -461,7 +461,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         invariant,
                         "abcIIIxyz",
-                        "III"
+                        "III",
                     };
                     yield return new object[]
                     {
@@ -470,7 +470,7 @@ namespace System.Text.RegularExpressions.Tests
                         engine,
                         invariant,
                         "abc\u0130\u0131Ixyz",
-                        ""
+                        "",
                     };
 
                     // Expected answers in the Turkish culture
@@ -486,7 +486,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "xy\u0131ab",
-                            "\u0131"
+                            "\u0131",
                         };
                         yield return new object[]
                         {
@@ -495,7 +495,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "abcIIIxyz",
-                            ""
+                            "",
                         };
                         yield return new object[]
                         {
@@ -504,7 +504,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "abcIi\u0130xyz",
-                            ""
+                            "",
                         };
                         yield return new object[]
                         {
@@ -513,7 +513,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "abcI\u0130ixyz",
-                            ""
+                            "",
                         };
                         yield return new object[]
                         {
@@ -522,7 +522,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "ii\u0130i\u0131ab",
-                            "i\u0131"
+                            "i\u0131",
                         };
                         yield return new object[]
                         {
@@ -531,7 +531,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "\u0131",
-                            "\u0131"
+                            "\u0131",
                         };
                         yield return new object[]
                         {
@@ -540,7 +540,7 @@ namespace System.Text.RegularExpressions.Tests
                             engine,
                             turkish,
                             "c\u0131c",
-                            "\u0131"
+                            "\u0131",
                         };
                     }
                 }
@@ -576,7 +576,7 @@ namespace System.Text.RegularExpressions.Tests
                 engine,
                 invariant,
                 "abcIi\u0130xyz",
-                "Ii"
+                "Ii",
             }; // <-- failing for None, Compiled
             yield return new object[]
             {
@@ -585,7 +585,7 @@ namespace System.Text.RegularExpressions.Tests
                 engine,
                 invariant,
                 "abcI\u0130ixyz",
-                ""
+                "",
             }; // <-- failing for Compiled
             yield return new object[]
             {
@@ -594,7 +594,7 @@ namespace System.Text.RegularExpressions.Tests
                 engine,
                 invariant,
                 "abc\u0130IIxyz",
-                "II"
+                "II",
             }; // <-- failing for Compiled
             yield return new object[]
             {
@@ -603,7 +603,7 @@ namespace System.Text.RegularExpressions.Tests
                 engine,
                 invariant,
                 "abc\u0130Iixyz",
-                "Ii"
+                "Ii",
             }; // <-- failing for Compiled
             yield return new object[]
             {
@@ -612,7 +612,7 @@ namespace System.Text.RegularExpressions.Tests
                 engine,
                 invariant,
                 "ii\u0130i\u0131ab",
-                "\u0130i"
+                "\u0130i",
             }; // <-- failing for None, Compiled
 
             // Expected answers in the Turkish culture
@@ -627,7 +627,7 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     turkish,
                     "abc\u0130IIxyz",
-                    "\u0130II"
+                    "\u0130II",
                 }; // <-- failing for None, Compiled
                 yield return new object[]
                 {
@@ -636,7 +636,7 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     turkish,
                     "abc\u0130\u0131Ixyz",
-                    "\u0130\u0131I"
+                    "\u0130\u0131I",
                 }; // <-- failing for None, Compiled
                 yield return new object[]
                 {
@@ -645,7 +645,7 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     turkish,
                     "abc\u0130Iixyz",
-                    "\u0130I"
+                    "\u0130I",
                 }; // <-- failing for None, Compiled
             }
         }

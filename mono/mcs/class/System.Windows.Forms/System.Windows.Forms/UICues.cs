@@ -37,6 +37,6 @@ namespace System.Windows.Forms
         Shown = 0x00000003,
         ChangeFocus = 0x00000004,
         ChangeKeyboard = 0x00000008,
-        Changed = 0x0000000C
+        Changed = 0x0000000C,
     }
 }

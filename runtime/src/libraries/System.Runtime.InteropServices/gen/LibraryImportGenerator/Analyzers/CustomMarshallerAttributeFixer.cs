@@ -397,14 +397,14 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.Value.Stateless.ConvertToUnmanaged,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType))
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
                         },
                         returnType: unmanagedTypeSyntax.Value,
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -417,14 +417,14 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.Value.Stateless.ConvertToManaged,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value)
+                            gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
                         },
                         returnType: gen.TypeExpression(managedType),
                         accessibility: Accessibility.Public,
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -447,7 +447,7 @@ namespace Microsoft.Interop.Analyzers
                         gen.GetAccessorDeclaration(
                             statements: new[]
                             {
-                                DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                                DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                             }
                         )
                     )
@@ -483,7 +483,7 @@ namespace Microsoft.Interop.Analyzers
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -514,7 +514,7 @@ namespace Microsoft.Interop.Analyzers
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -531,7 +531,7 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesSource,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType))
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
                         },
                         returnType: gen.TypeExpression(
                             readOnlySpanOfT.Construct(managedElementTypeSymbol.Value)
@@ -540,7 +540,7 @@ namespace Microsoft.Interop.Analyzers
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -561,7 +561,7 @@ namespace Microsoft.Interop.Analyzers
                             gen.ParameterDeclaration(
                                 "numElements",
                                 gen.TypeExpression(SpecialType.System_Int32)
-                            )
+                            ),
                         },
                         returnType: gen.TypeExpression(
                             spanOfT.Construct(typeParameters[typeParameters.Length - 1])
@@ -570,7 +570,7 @@ namespace Microsoft.Interop.Analyzers
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -591,7 +591,7 @@ namespace Microsoft.Interop.Analyzers
                             gen.ParameterDeclaration(
                                 "numElements",
                                 gen.TypeExpression(SpecialType.System_Int32)
-                            )
+                            ),
                         },
                         returnType: gen.TypeExpression(
                             readOnlySpanOfT.Construct(typeParameters[typeParameters.Length - 1])
@@ -600,7 +600,7 @@ namespace Microsoft.Interop.Analyzers
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -617,7 +617,7 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.LinearCollection.Stateless.GetManagedValuesDestination,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType))
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
                         },
                         returnType: gen.TypeExpression(
                             spanOfT.Construct(managedElementTypeSymbol.Value)
@@ -626,7 +626,7 @@ namespace Microsoft.Interop.Analyzers
                         modifiers: DeclarationModifiers.Static,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -735,12 +735,12 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.Value.Stateful.FromManaged,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType))
+                            gen.ParameterDeclaration("managed", gen.TypeExpression(managedType)),
                         },
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -755,7 +755,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -768,12 +768,12 @@ namespace Microsoft.Interop.Analyzers
                         ShapeMemberNames.Value.Stateful.FromUnmanaged,
                         parameters: new[]
                         {
-                            gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value)
+                            gen.ParameterDeclaration("unmanaged", unmanagedTypeSyntax.Value),
                         },
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -788,7 +788,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -811,7 +811,7 @@ namespace Microsoft.Interop.Analyzers
                         gen.GetAccessorDeclaration(
                             statements: new[]
                             {
-                                DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                                DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                             }
                         )
                     )
@@ -833,7 +833,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -854,7 +854,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -874,7 +874,7 @@ namespace Microsoft.Interop.Analyzers
                             gen.ParameterDeclaration(
                                 "numElements",
                                 gen.TypeExpression(SpecialType.System_Int32)
-                            )
+                            ),
                         },
                         returnType: gen.TypeExpression(
                             readOnlySpanOfT.Construct(typeParameters[typeParameters.Length - 1])
@@ -882,7 +882,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -902,7 +902,7 @@ namespace Microsoft.Interop.Analyzers
                             gen.ParameterDeclaration(
                                 "numElements",
                                 gen.TypeExpression(SpecialType.System_Int32)
-                            )
+                            ),
                         },
                         returnType: gen.TypeExpression(
                             spanOfT.Construct(managedElementTypeSymbol.Value)
@@ -910,7 +910,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );
@@ -924,7 +924,7 @@ namespace Microsoft.Interop.Analyzers
                         accessibility: Accessibility.Public,
                         statements: new[]
                         {
-                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation)
+                            DefaultMethodStatement(gen, editor.SemanticModel.Compilation),
                         }
                     )
                 );

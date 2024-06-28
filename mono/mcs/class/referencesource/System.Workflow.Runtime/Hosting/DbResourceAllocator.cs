@@ -29,7 +29,7 @@ namespace System.Workflow.Runtime.Hosting
     internal enum Provider
     {
         SqlClient = 0,
-        OleDB = 1
+        OleDB = 1,
     }
 
     /// <summary>

@@ -696,7 +696,7 @@ namespace System.Runtime.Remoting.Lifetime
         {
             Initial = 0,
             Waiting = 1,
-            Completed = 2
+            Completed = 2,
         }
 
         internal sealed class SponsorStateInfo

@@ -91,7 +91,7 @@ namespace Microsoft.AspNetCore.Mvc
         {
             // Arrange
             var collection = new ServiceCollection();
-            var controllerTypes = new[] { typeof(ControllerTypeA), typeof(TypeBController), }
+            var controllerTypes = new[] { typeof(ControllerTypeA), typeof(TypeBController) }
                 .Select(t => t.GetTypeInfo())
                 .ToArray();
 

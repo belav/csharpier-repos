@@ -17,7 +17,7 @@ namespace GC_Microbenchmarks
         Small = 8000,
         SmallFinal = 8500, // small finalizable object
         Large = 85000,
-        ExtraLarge = 20 * 1024 * 1024
+        ExtraLarge = 20 * 1024 * 1024,
     }
 
     // the condition to satisfy before ending the benchmark
@@ -26,7 +26,7 @@ namespace GC_Microbenchmarks
         Undefined,
         HeapSize,
         Segments,
-        Objects
+        Objects,
     }
 
     // the object that gets allocated

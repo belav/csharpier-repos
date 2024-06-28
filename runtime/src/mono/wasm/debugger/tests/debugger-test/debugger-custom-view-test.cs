@@ -105,13 +105,13 @@ namespace DebuggerTests
             {
                 FirstName = "Anton",
                 SurName = "Mueller",
-                Age = 44
+                Age = 44,
             };
             var person2 = new Person
             {
                 FirstName = "Lisa",
                 SurName = "M\u00FCller",
-                Age = 41
+                Age = 41,
             };
 
             Console.WriteLine("break here");

@@ -50,7 +50,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void BuildOneEntry()
         {
             X509Extension ext = CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
-                new[] { "http://crl.microsoft.com/pki/crl/products/MicCodSigPCA_08-31-2010.crl", }
+                new[] { "http://crl.microsoft.com/pki/crl/products/MicCodSigPCA_08-31-2010.crl" }
             );
 
             Assert.False(ext.Critical, "ext.Critical");
@@ -96,7 +96,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void UriNotValidated()
         {
             X509Extension ext = CertificateRevocationListBuilder.BuildCrlDistributionPointExtension(
-                new[] { "!!!!", }
+                new[] { "!!!!" }
             );
 
             Assert.Equal("300C300AA008A006860421212121", ext.RawData.ByteArrayToHex());

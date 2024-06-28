@@ -1675,7 +1675,7 @@ namespace System.Linq.Expressions.Tests
                 decimal.One,
                 decimal.MinusOne,
                 decimal.MinValue,
-                decimal.MaxValue
+                decimal.MaxValue,
             };
             decimal[] result = new decimal[size];
             for (int i = 0; i < size; i++)
@@ -1701,7 +1701,7 @@ namespace System.Linq.Expressions.Tests
                     {
                         return i + 1;
                     },
-                (Action<object>)delegate { }
+                (Action<object>)delegate { },
             };
             Delegate[] result = new Delegate[size];
             for (int i = 0; i < size; i++)
@@ -1724,7 +1724,7 @@ namespace System.Linq.Expressions.Tests
                 double.Epsilon,
                 double.NegativeInfinity,
                 double.PositiveInfinity,
-                double.NaN
+                double.NaN,
             };
             double[] result = new double[size];
             for (int i = 0; i < size; i++)
@@ -1771,7 +1771,7 @@ namespace System.Linq.Expressions.Tests
                 float.Epsilon,
                 float.NegativeInfinity,
                 float.PositiveInfinity,
-                float.NaN
+                float.NaN,
             };
             float[] result = new float[size];
             for (int i = 0; i < size; i++)
@@ -1791,7 +1791,7 @@ namespace System.Linq.Expressions.Tests
                     delegate()
                     {
                         return null;
-                    }
+                    },
             };
             Func<object>[] result = new Func<object>[size];
             for (int i = 0; i < size; i++)
@@ -1822,7 +1822,7 @@ namespace System.Linq.Expressions.Tests
                 new C(),
                 new D(),
                 new D(0),
-                new D(5)
+                new D(5),
             };
             IEquatable<C>[] result = new IEquatable<C>[size];
             for (int i = 0; i < size; i++)
@@ -3806,7 +3806,7 @@ namespace System.Linq.Expressions.Tests
                 new[,]
                 {
                     { 1, 2 },
-                    { 2, 1 }
+                    { 2, 1 },
                 }
             );
             AssertExtensions.Throws<ArgumentException>(
@@ -3936,15 +3936,15 @@ namespace System.Linq.Expressions.Tests
                                     {
                                         {
                                             {
-                                                { "hugz" }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                                { "hugz" },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             };
             ConstantExpression array = Expression.Constant(arrayObj);
             Func<string> func = Expression

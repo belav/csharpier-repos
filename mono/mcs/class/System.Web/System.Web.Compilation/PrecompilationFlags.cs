@@ -42,6 +42,6 @@ namespace System.Web.Compilation
         CodeAnalysis = 16,
         AllowPartiallyTrustedCallers = 32,
         DelaySign = 64,
-        FixedNames = 128
+        FixedNames = 128,
     }
 }

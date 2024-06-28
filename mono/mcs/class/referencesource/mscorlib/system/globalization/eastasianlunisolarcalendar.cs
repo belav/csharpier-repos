@@ -38,7 +38,7 @@ namespace System.Globalization
             243,
             273,
             304,
-            334
+            334,
         };
 
         internal static readonly int[] DaysToMonth366 =
@@ -54,7 +54,7 @@ namespace System.Globalization
             244,
             274,
             305,
-            335
+            335,
         };
 
         internal const int DatePartYear = 0;

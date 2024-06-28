@@ -231,7 +231,7 @@ namespace System.Collections.Immutable.Tests
             var list = new List<KeyValuePair<int, int>>
             {
                 new KeyValuePair<int, int>(3, 5),
-                new KeyValuePair<int, int>(8, 10)
+                new KeyValuePair<int, int>(8, 10),
             };
             IImmutableDictionary<int, int> nonEmpty = empty.AddRange(list);
             this.VerifyAvlTreeState(nonEmpty);

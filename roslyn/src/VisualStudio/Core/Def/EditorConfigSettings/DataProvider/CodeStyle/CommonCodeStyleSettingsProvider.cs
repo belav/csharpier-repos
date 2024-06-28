@@ -172,14 +172,14 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
                     AccessibilityModifiersRequired.Always,
                     AccessibilityModifiersRequired.ForNonInterfaceMembers,
                     AccessibilityModifiersRequired.Never,
-                    AccessibilityModifiersRequired.OmitIfDefault
+                    AccessibilityModifiersRequired.OmitIfDefault,
                 ],
                 valueDescriptions:
                 [
                     ServicesVSResources.Always,
                     ServicesVSResources.For_non_interface_members,
                     ServicesVSResources.Never,
-                    ServicesVSResources.Omit_if_default
+                    ServicesVSResources.Omit_if_default,
                 ]
             );
 
@@ -285,12 +285,12 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             var enumValues = new[]
             {
                 ParenthesesPreference.AlwaysForClarity,
-                ParenthesesPreference.NeverIfUnnecessary
+                ParenthesesPreference.NeverIfUnnecessary,
             };
             var valueDescriptions = new[]
             {
                 ServicesVSResources.Always_for_clarity,
-                ServicesVSResources.Never_if_unnecessary
+                ServicesVSResources.Never_if_unnecessary,
             };
 
             yield return CodeStyleSetting.Create(
@@ -335,12 +335,12 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.CodeSt
             var enumValues = new[]
             {
                 UnusedParametersPreference.NonPublicMethods,
-                UnusedParametersPreference.AllMethods
+                UnusedParametersPreference.AllMethods,
             };
             var valueDescriptions = new[]
             {
                 ServicesVSResources.Non_public_methods,
-                ServicesVSResources.All_methods
+                ServicesVSResources.All_methods,
             };
 
             yield return CodeStyleSetting.Create(

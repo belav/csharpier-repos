@@ -44,7 +44,7 @@ public class ModelCodeGeneratorSelectorTest
                 new TestTemplatedModelGenerator(hasTemplates: true),
                 expected,
                 new TestTemplatedModelGenerator(hasTemplates: false),
-                new TestModelCodeGenerator("C#")
+                new TestModelCodeGenerator("C#"),
             }
         );
 
@@ -52,7 +52,7 @@ public class ModelCodeGeneratorSelectorTest
             new ModelCodeGenerationOptions
             {
                 Language = "C#",
-                ProjectDir = Directory.GetCurrentDirectory()
+                ProjectDir = Directory.GetCurrentDirectory(),
             }
         );
 
@@ -68,7 +68,7 @@ public class ModelCodeGeneratorSelectorTest
             {
                 new TestTemplatedModelGenerator(hasTemplates: false),
                 new TestModelCodeGenerator("C#"),
-                expected
+                expected,
             }
         );
 

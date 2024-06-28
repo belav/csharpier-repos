@@ -315,7 +315,7 @@ public class B : A<object?>
             {
                 NullableAttributeDefinition,
                 NullableContextAttributeDefinition,
-                source
+                source,
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
@@ -386,7 +386,7 @@ public class Program
                 NullableAttributeDefinition,
                 NullableContextAttributeDefinition,
                 NullablePublicOnlyAttributeDefinition,
-                source
+                source,
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
@@ -435,7 +435,7 @@ public class Program
                 NullableAttributeDefinition,
                 NullableContextAttributeDefinition,
                 NullablePublicOnlyAttributeDefinition,
-                source
+                source,
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
@@ -482,7 +482,7 @@ public class Program
             {
                 NullableAttributeDefinition,
                 NullableContextAttributeDefinition,
-                source
+                source,
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
@@ -512,7 +512,7 @@ public class Program
             {
                 NullableAttributeDefinition,
                 NullableContextAttributeDefinition,
-                source
+                source,
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);
@@ -577,7 +577,7 @@ public class Program
                 NullableAttributeDefinition,
                 NullableContextAttributeDefinition,
                 NullablePublicOnlyAttributeDefinition,
-                source
+                source,
             };
 
             var comp = CreateCompilation(sources, options: options, parseOptions: parseOptions);

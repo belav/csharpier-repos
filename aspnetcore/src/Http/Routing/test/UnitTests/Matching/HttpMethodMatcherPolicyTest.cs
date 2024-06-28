@@ -13,7 +13,7 @@ public class HttpMethodMatcherPolicyTest
     public void INodeBuilderPolicy_AppliesToNode_EndpointWithoutMetadata_ReturnsFalse()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", null), };
+        var endpoints = new[] { CreateEndpoint("/", null) };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
 
@@ -49,7 +49,7 @@ public class HttpMethodMatcherPolicyTest
         var endpoints = new[]
         {
             CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
         };
 
         var policy = (INodeBuilderPolicy)CreatePolicy();
@@ -70,7 +70,7 @@ public class HttpMethodMatcherPolicyTest
             CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
             CreateEndpoint(
                 "/",
-                new HttpMethodMetadata(new[] { "GET", }),
+                new HttpMethodMetadata(new[] { "GET" }),
                 new DynamicEndpointMetadata()
             ),
         };
@@ -88,7 +88,7 @@ public class HttpMethodMatcherPolicyTest
     public void IEndpointSelectorPolicy_AppliesToNode_EndpointWithoutMetadata_ReturnsTrue()
     {
         // Arrange
-        var endpoints = new[] { CreateEndpoint("/", null, new DynamicEndpointMetadata()), };
+        var endpoints = new[] { CreateEndpoint("/", null, new DynamicEndpointMetadata()) };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
 
@@ -132,7 +132,7 @@ public class HttpMethodMatcherPolicyTest
                 new HttpMethodMetadata(Array.Empty<string>()),
                 new DynamicEndpointMetadata()
             ),
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
         };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -151,7 +151,7 @@ public class HttpMethodMatcherPolicyTest
         var endpoints = new[]
         {
             CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
         };
 
         var policy = (IEndpointSelectorPolicy)CreatePolicy();
@@ -203,7 +203,7 @@ public class HttpMethodMatcherPolicyTest
         {
             // These are arrange in an order that we won't actually see in a product scenario. It's done
             // this way so we can verify that ordering is preserved by GetEdges.
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
             CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
             CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", "PUT", "POST" })),
             CreateEndpoint("/", new HttpMethodMetadata(new[] { "PUT", "POST" })),
@@ -221,13 +221,13 @@ public class HttpMethodMatcherPolicyTest
             e =>
             {
                 Assert.Equal(new EdgeKey(AnyMethod, isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: false), e.State);
                 Assert.Equal(
-                    new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4], },
+                    new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -235,7 +235,7 @@ public class HttpMethodMatcherPolicyTest
             {
                 Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: false), e.State);
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
@@ -243,7 +243,7 @@ public class HttpMethodMatcherPolicyTest
             {
                 Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             }
@@ -258,7 +258,7 @@ public class HttpMethodMatcherPolicyTest
         {
             // These are arrange in an order that we won't actually see in a product scenario. It's done
             // this way so we can verify that ordering is preserved by GetEdges.
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
             CreateEndpoint("/", new HttpMethodMetadata(Array.Empty<string>())),
             CreateEndpoint(
                 "/",
@@ -282,51 +282,51 @@ public class HttpMethodMatcherPolicyTest
             e =>
             {
                 Assert.Equal(new EdgeKey(AnyMethod, isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey(AnyMethod, isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: false), e.State);
                 Assert.Equal(
-                    new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4], },
+                    new[] { endpoints[0], endpoints[1], endpoints[2], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[2], endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: false), e.State);
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[2], endpoints[4] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
                 Assert.Equal(
-                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4], },
+                    new[] { endpoints[1], endpoints[2], endpoints[3], endpoints[4] },
                     e.Endpoints.ToArray()
                 );
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[2], endpoints[4], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[2], endpoints[4] }, e.Endpoints.ToArray());
             }
         );
     }
@@ -339,7 +339,7 @@ public class HttpMethodMatcherPolicyTest
         {
             // These are arrange in an order that we won't actually see in a product scenario. It's done
             // this way so we can verify that ordering is preserved by GetEdges.
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
             CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", "PUT", "POST" })),
             CreateEndpoint("/", new HttpMethodMetadata(new[] { "PUT", "POST" })),
         };
@@ -360,17 +360,17 @@ public class HttpMethodMatcherPolicyTest
             e =>
             {
                 Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[1], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[0], endpoints[1] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[2] }, e.Endpoints.ToArray());
             }
         );
     }
@@ -383,7 +383,7 @@ public class HttpMethodMatcherPolicyTest
         {
             // These are arrange in an order that we won't actually see in a product scenario. It's done
             // this way so we can verify that ordering is preserved by GetEdges.
-            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET", })),
+            CreateEndpoint("/", new HttpMethodMetadata(new[] { "GET" })),
             CreateEndpoint(
                 "/",
                 new HttpMethodMetadata(new[] { "GET", "PUT", "POST" }, acceptCorsPreflight: true)
@@ -407,32 +407,32 @@ public class HttpMethodMatcherPolicyTest
             e =>
             {
                 Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[0], endpoints[1], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[0], endpoints[1] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("GET", isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[1], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("POST", isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[1], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: false), e.State);
-                Assert.Equal(new[] { endpoints[1], endpoints[2], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1], endpoints[2] }, e.Endpoints.ToArray());
             },
             e =>
             {
                 Assert.Equal(new EdgeKey("PUT", isCorsPreflightRequest: true), e.State);
-                Assert.Equal(new[] { endpoints[1], }, e.Endpoints.ToArray());
+                Assert.Equal(new[] { endpoints[1] }, e.Endpoints.ToArray());
             }
         );
     }

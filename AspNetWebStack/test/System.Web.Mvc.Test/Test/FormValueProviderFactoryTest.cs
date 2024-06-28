@@ -12,7 +12,7 @@ namespace System.Web.Mvc.Test
     {
         private static readonly NameValueCollection _backingStore = new NameValueCollection()
         {
-            { "foo", "fooValue" }
+            { "foo", "fooValue" },
         };
 
         private static readonly NameValueCollection _unvalidatedBackingStore =

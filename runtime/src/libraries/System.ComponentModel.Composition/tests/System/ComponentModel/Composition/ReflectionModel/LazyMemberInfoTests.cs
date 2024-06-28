@@ -242,7 +242,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     accessors = new MemberInfo[]
                     {
                         property.GetGetMethod(true),
-                        property.GetSetMethod(true)
+                        property.GetSetMethod(true),
                     };
                 }
                 else if (member.MemberType == MemberTypes.Event)
@@ -252,7 +252,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     {
                         event_.GetRaiseMethod(true),
                         event_.GetAddMethod(true),
-                        event_.GetRemoveMethod(true)
+                        event_.GetRemoveMethod(true),
                     };
                 }
                 else

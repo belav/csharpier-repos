@@ -215,7 +215,7 @@ namespace System.DirectoryServices.Tests
             var context = new DirectoryVirtualListViewContext();
             var listView = new DirectoryVirtualListView
             {
-                DirectoryVirtualListViewContext = context
+                DirectoryVirtualListViewContext = context,
             };
             Assert.Equal(context, listView.DirectoryVirtualListViewContext);
         }
@@ -241,7 +241,7 @@ namespace System.DirectoryServices.Tests
             var listView = new DirectoryVirtualListView
             {
                 ApproximateTotal = approximateTotal,
-                TargetPercentage = targetPercentage
+                TargetPercentage = targetPercentage,
             };
             Assert.Equal(targetPercentage, listView.TargetPercentage);
             Assert.Equal(expectedOffset, listView.Offset);

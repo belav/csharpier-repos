@@ -127,7 +127,7 @@ namespace System.Net
         {
             None,
             Challenge,
-            Response
+            Response,
         }
 
         AuthorizationState auth_state,

@@ -107,7 +107,7 @@ namespace tests.system_data_dll.System_Data
                 "NewValue2",
                 new DateTime(0),
                 0.5,
-                true
+                true,
             };
             ds.Tables["Table2"].Rows.Add(arrAddedRow);
             //delete existing rows

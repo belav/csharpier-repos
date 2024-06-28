@@ -236,7 +236,7 @@ namespace Tracing.Tests.Common
                 Size = reader.ReadUInt16(),
                 CommandSet = reader.ReadByte(),
                 CommandId = reader.ReadByte(),
-                Reserved = reader.ReadUInt16()
+                Reserved = reader.ReadUInt16(),
             };
 
             return header;

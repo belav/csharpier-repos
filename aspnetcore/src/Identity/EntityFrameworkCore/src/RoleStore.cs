@@ -457,6 +457,6 @@ public class RoleStore<TRole, TContext, TKey, TUserRole, TRoleClaim>
         {
             RoleId = role.Id,
             ClaimType = claim.Type,
-            ClaimValue = claim.Value
+            ClaimValue = claim.Value,
         };
 }

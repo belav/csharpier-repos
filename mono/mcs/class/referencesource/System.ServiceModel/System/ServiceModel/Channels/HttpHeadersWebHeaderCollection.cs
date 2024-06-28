@@ -36,7 +36,7 @@ namespace System.ServiceModel.Channels
             (char)0xB,
             (char)0xC,
             (char)0xD,
-            (char)0x20
+            (char)0x20,
         };
         private static readonly char[] InvalidParamChars = new char[]
         {
@@ -61,7 +61,7 @@ namespace System.ServiceModel.Channels
             ' ',
             '\t',
             '\r',
-            '\n'
+            '\n',
         };
 
         private HttpRequestMessage httpRequestMessage;

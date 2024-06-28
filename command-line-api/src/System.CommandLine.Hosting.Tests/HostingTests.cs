@@ -87,7 +87,7 @@ namespace System.CommandLine.Hosting.Tests
             }
 
             var config = new CliConfiguration(
-                new CliRootCommand { Action = CommandHandler.Create<IHost>(Execute), }
+                new CliRootCommand { Action = CommandHandler.Create<IHost>(Execute) }
             ).UseHost(host =>
             {
                 var parseResult = (ParseResult)host.Properties[typeof(ParseResult)];
@@ -119,7 +119,7 @@ namespace System.CommandLine.Hosting.Tests
             }
 
             var config = new CliConfiguration(
-                new CliRootCommand { Action = CommandHandler.Create<IHost>(Execute), }
+                new CliRootCommand { Action = CommandHandler.Create<IHost>(Execute) }
             ).UseHost(args =>
             {
                 var host = new HostBuilder();

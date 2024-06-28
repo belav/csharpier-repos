@@ -118,7 +118,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 FirstName = "James",
                 LastName = "Newton-King",
-                Roles = new List<string> { "Admin" }
+                Roles = new List<string> { "Admin" },
             };
 
             string json = JsonConvert.SerializeObject(

@@ -35,7 +35,7 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[]
             {
                 typeof(ManagedInterfaceSupportDualInterfaceWithMethods),
-                7
+                7,
             };
             yield return new object[] { typeof(ManagedInterfaceSupportIDispatch), 7 };
             yield return new object[] { typeof(ManagedInterfaceSupportIDispatchWithMethods), 7 };

@@ -63,7 +63,7 @@ namespace System.Diagnostics.Tests
                     mre.Wait();
                 })
                 {
-                    IsBackground = true
+                    IsBackground = true,
                 }.Start();
             }
 

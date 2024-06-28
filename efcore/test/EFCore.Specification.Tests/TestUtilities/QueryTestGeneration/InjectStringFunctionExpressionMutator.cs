@@ -24,7 +24,7 @@ public class InjectStringFunctionExpressionMutator : ExpressionMutator
         {
             nameof(string.ToLower),
             nameof(string.ToUpper),
-            nameof(string.Trim)
+            nameof(string.Trim),
         };
 
         var methodInfos = methodNames

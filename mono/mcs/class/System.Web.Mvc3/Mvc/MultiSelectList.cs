@@ -97,7 +97,7 @@
                 {
                     Value = value,
                     Text = Eval(item, DataTextField),
-                    Selected = selectedValues.Contains(value)
+                    Selected = selectedValues.Contains(value),
                 };
             return listItems.ToList();
         }
@@ -115,7 +115,7 @@
                 select new SelectListItem
                 {
                     Text = Eval(item, DataTextField),
-                    Selected = selectedValues.Contains(item)
+                    Selected = selectedValues.Contains(item),
                 };
             return listItems.ToList();
         }

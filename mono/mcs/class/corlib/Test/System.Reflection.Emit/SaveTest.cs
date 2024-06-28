@@ -611,7 +611,7 @@ namespace MonoTests.System.Reflection.Emit
             0xD3,
             0x17,
             0xDA,
-            0x78
+            0x78,
         };
 
         string tempDir = Path.Combine(Path.GetTempPath(), typeof(SaveTest).FullName);

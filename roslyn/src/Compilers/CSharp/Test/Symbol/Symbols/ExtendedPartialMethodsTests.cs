@@ -329,7 +329,7 @@ partial class C
             new[] { "protected" },
             new[] { "private" },
             new[] { "protected internal" },
-            new[] { "private protected" }
+            new[] { "private protected" },
         };
 
         [Theory]

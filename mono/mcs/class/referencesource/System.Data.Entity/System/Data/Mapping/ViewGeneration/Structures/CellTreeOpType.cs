@@ -14,7 +14,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     internal enum ViewTarget
     {
         QueryView,
-        UpdateView
+        UpdateView,
     }
 
     // Different operations that are used in the CellTreeNode nodes
@@ -26,5 +26,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         LOJ, // left outerjoin
         IJ, // inner join
         LASJ // left antisemijoin
+        ,
     }
 }

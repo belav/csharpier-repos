@@ -733,11 +733,11 @@ public class XmlDataContractSerializerInputFormatterTest
         var settings = new DataContractSerializerSettings
         {
             RootName = dictionary.Add(SubstituteRootName),
-            RootNamespace = dictionary.Add(SubstituteRootNamespace)
+            RootNamespace = dictionary.Add(SubstituteRootNamespace),
         };
         var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions())
         {
-            SerializerSettings = settings
+            SerializerSettings = settings,
         };
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));
@@ -796,11 +796,11 @@ public class XmlDataContractSerializerInputFormatterTest
         );
         var settings = new DataContractSerializerSettings
         {
-            KnownTypes = new[] { typeof(SomeDummyClass) }
+            KnownTypes = new[] { typeof(SomeDummyClass) },
         };
         var formatter = new XmlDataContractSerializerInputFormatter(new MvcOptions())
         {
-            SerializerSettings = settings
+            SerializerSettings = settings,
         };
         var contentBytes = Encoding.UTF8.GetBytes(input);
         var context = GetInputFormatterContext(contentBytes, typeof(DummyClass));

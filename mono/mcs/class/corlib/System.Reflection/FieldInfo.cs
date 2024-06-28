@@ -131,7 +131,7 @@ namespace System.Reflection
             {
                 var ctorArgs = new CustomAttributeTypedArgument[]
                 {
-                    new CustomAttributeTypedArgument(typeof(int), GetFieldOffset())
+                    new CustomAttributeTypedArgument(typeof(int), GetFieldOffset()),
                 };
                 attrsData[count++] = new CustomAttributeData(
                     (typeof(FieldOffsetAttribute)).GetConstructor(new[] { typeof(int) }),
@@ -144,7 +144,7 @@ namespace System.Reflection
             {
                 var ctorArgs = new CustomAttributeTypedArgument[]
                 {
-                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value)
+                    new CustomAttributeTypedArgument(typeof(UnmanagedType), marshalAs.Value),
                 };
                 attrsData[count++] = new CustomAttributeData(
                     (typeof(MarshalAsAttribute)).GetConstructor(new[] { typeof(UnmanagedType) }),

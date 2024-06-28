@@ -137,6 +137,6 @@ public class FormattingDbContextLogger : IDbContextLogger
             LogLevel.Warning => "warn: ",
             LogLevel.Error => "fail: ",
             LogLevel.Critical => "crit: ",
-            _ => "none"
+            _ => "none",
         };
 }

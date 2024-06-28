@@ -29,12 +29,12 @@ namespace System.Data.Tests
                     new DataColumn("ChildId", typeof(int)),
                     new DataColumn("ParentId", typeof(int)),
                     new DataColumn("Data", dataType),
-                }
+                },
             };
 
             var dataSet = new DataSet()
             {
-                Tables = { parentTable, childTable, },
+                Tables = { parentTable, childTable },
                 Relations =
                 {
                     new DataRelation("relation", parentTable.Columns[0], childTable.Columns[1]),
@@ -121,7 +121,7 @@ namespace System.Data.Tests
                 typeof(ulong),
                 typeof(float),
                 typeof(double),
-                typeof(decimal)
+                typeof(decimal),
             };
             var sqlTypes = new[]
             {
@@ -132,7 +132,7 @@ namespace System.Data.Tests
                 typeof(SqlSingle),
                 typeof(SqlDouble),
                 typeof(SqlDecimal),
-                typeof(SqlMoney)
+                typeof(SqlMoney),
             };
 
             foreach (var type in types.Concat(sqlTypes))
@@ -164,7 +164,7 @@ namespace System.Data.Tests
                     {
                         type,
                         aggregation.Operator + "(Child.Data)",
-                        ChangeType(aggregation.Result, resultType)
+                        ChangeType(aggregation.Result, resultType),
                     };
                 }
                 // BUG? Var() for SQL types can't convert to System.Double, but StDev can
@@ -206,7 +206,7 @@ namespace System.Data.Tests
                 typeof(long),
                 typeof(float),
                 typeof(double),
-                typeof(decimal)
+                typeof(decimal),
             };
             foreach (var type1 in types)
             {
@@ -227,7 +227,7 @@ namespace System.Data.Tests
                                 equation.Expression,
                                 operand1,
                                 operand2,
-                                ChangeType(equation.Result, type3)
+                                ChangeType(equation.Result, type3),
                             };
                             yield return new object[]
                             {
@@ -237,7 +237,7 @@ namespace System.Data.Tests
                                 equation.Expression,
                                 operand1,
                                 DBNull.Value,
-                                DBNull.Value
+                                DBNull.Value,
                             };
                         }
                     }
@@ -252,7 +252,7 @@ namespace System.Data.Tests
                             equation.Expression,
                             operand1,
                             operand2,
-                            equation.Result
+                            equation.Result,
                         };
                         yield return new object[]
                         {
@@ -262,7 +262,7 @@ namespace System.Data.Tests
                             equation.Expression,
                             operand1,
                             DBNull.Value,
-                            DBNull.Value
+                            DBNull.Value,
                         };
                     }
                 }
@@ -277,7 +277,7 @@ namespace System.Data.Tests
                     equation.Expression,
                     10ul,
                     2ul,
-                    ChangeType(equation.Result, typeof(ulong))
+                    ChangeType(equation.Result, typeof(ulong)),
                 };
 
             var sqlObjects = new object[]
@@ -289,7 +289,7 @@ namespace System.Data.Tests
                 new SqlSingle(),
                 new SqlDouble(),
                 new SqlDecimal(),
-                new SqlMoney()
+                new SqlMoney(),
             };
             foreach (var sqlNull in sqlObjects)
             {
@@ -314,7 +314,7 @@ namespace System.Data.Tests
                             equation.Expression,
                             operand1,
                             operand2,
-                            ChangeType(equation.Result, type)
+                            ChangeType(equation.Result, type),
                         };
 
                     yield return new object[]
@@ -325,7 +325,7 @@ namespace System.Data.Tests
                         equation.Expression,
                         operand1,
                         sqlNull,
-                        sqlNull
+                        sqlNull,
                     };
                 }
 
@@ -339,7 +339,7 @@ namespace System.Data.Tests
                         equation.Expression,
                         operand1,
                         operand2,
-                        new SqlBoolean(equation.Result)
+                        new SqlBoolean(equation.Result),
                     };
                     // BUG? Result type of comparison of two SQL types (when one operard is Null) is the type itself, not SqlBoolean.
                     yield return new object[]
@@ -350,7 +350,7 @@ namespace System.Data.Tests
                         equation.Expression,
                         operand1,
                         sqlNull,
-                        sqlNull
+                        sqlNull,
                     };
                 }
             }

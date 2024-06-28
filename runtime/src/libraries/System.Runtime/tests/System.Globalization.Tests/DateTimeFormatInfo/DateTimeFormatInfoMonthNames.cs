@@ -26,7 +26,7 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
+                    "",
                 },
                 DateTimeFormatInfo.InvariantInfo.MonthNames
             );
@@ -44,11 +44,11 @@ namespace System.Globalization.Tests
         {
             yield return new object[]
             {
-                new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "" }
+                new string[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "" },
             };
             yield return new object[]
             {
-                new string[] { "", "", "", "", "", "", "", "", "", "", "", "", "" }
+                new string[] { "", "", "", "", "", "", "", "", "", "", "", "", "" },
             };
         }
 
@@ -72,8 +72,8 @@ namespace System.Globalization.Tests
                     "شوال",
                     "ذو القعدة",
                     "ذو الحجة",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -92,8 +92,8 @@ namespace System.Globalization.Tests
                     "ኦክቶበር",
                     "ኖቬምበር",
                     "ዲሴምበር",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -112,8 +112,8 @@ namespace System.Globalization.Tests
                     "октомври",
                     "ноември",
                     "декември",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -132,8 +132,8 @@ namespace System.Globalization.Tests
                     "অক্টোবর",
                     "নভেম্বর",
                     "ডিসেম্বর",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -152,8 +152,8 @@ namespace System.Globalization.Tests
                     "অক্টোবর",
                     "নভেম্বর",
                     "ডিসেম্বর",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -172,8 +172,8 @@ namespace System.Globalization.Tests
                     "octubre",
                     "novembre",
                     "desembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -192,8 +192,8 @@ namespace System.Globalization.Tests
                     "octubre",
                     "novembre",
                     "desembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -212,8 +212,8 @@ namespace System.Globalization.Tests
                     "říjen",
                     "listopad",
                     "prosinec",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -232,8 +232,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -252,8 +252,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -272,8 +272,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -292,8 +292,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -312,8 +312,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -332,8 +332,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -352,8 +352,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -372,8 +372,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Dezember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -392,8 +392,8 @@ namespace System.Globalization.Tests
                     "Οκτωβρίου",
                     "Νοεμβρίου",
                     "Δεκεμβρίου",
-                    ""
-                }
+                    "",
+                },
             }; // BUG!!! JS returns Genitive for Greek even though we expect Nominative; "Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"
             yield return new object[]
             {
@@ -412,8 +412,8 @@ namespace System.Globalization.Tests
                     "Οκτωβρίου",
                     "Νοεμβρίου",
                     "Δεκεμβρίου",
-                    ""
-                }
+                    "",
+                },
             }; // BUG!!! JS returns Genitive for Greek even though we expect Nominative; "Ιανουάριος", "Φεβρουάριος", "Μάρτιος", "Απρίλιος", "Μάιος", "Ιούνιος", "Ιούλιος", "Αύγουστος", "Σεπτέμβριος", "Οκτώβριος", "Νοέμβριος", "Δεκέμβριος"
             yield return new object[]
             {
@@ -432,8 +432,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -452,8 +452,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -472,8 +472,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -492,8 +492,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -512,8 +512,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -532,8 +532,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -552,8 +552,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -572,8 +572,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -592,8 +592,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -612,8 +612,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -632,8 +632,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -652,8 +652,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -672,8 +672,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -692,8 +692,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -712,8 +712,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -732,8 +732,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -752,8 +752,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -772,8 +772,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -792,8 +792,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -812,8 +812,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -832,8 +832,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -852,8 +852,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -872,8 +872,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -892,8 +892,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -912,8 +912,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -932,8 +932,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -952,8 +952,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -972,8 +972,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -992,8 +992,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1012,8 +1012,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1032,8 +1032,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1052,8 +1052,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1072,8 +1072,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1092,8 +1092,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1112,8 +1112,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1132,8 +1132,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1152,8 +1152,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1172,8 +1172,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1192,8 +1192,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1212,8 +1212,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1232,8 +1232,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1252,8 +1252,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1272,8 +1272,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1292,8 +1292,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1312,8 +1312,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1332,8 +1332,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1352,8 +1352,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1372,8 +1372,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1392,8 +1392,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1412,8 +1412,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1432,8 +1432,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1452,8 +1452,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1472,8 +1472,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1492,8 +1492,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1512,8 +1512,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1532,8 +1532,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1552,8 +1552,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1572,8 +1572,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1592,8 +1592,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1612,8 +1612,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1632,8 +1632,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1652,8 +1652,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1672,8 +1672,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1692,8 +1692,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1712,8 +1712,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1732,8 +1732,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1752,8 +1752,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1772,8 +1772,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1792,8 +1792,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1812,8 +1812,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1832,8 +1832,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1852,8 +1852,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1872,8 +1872,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1892,8 +1892,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1912,8 +1912,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1932,8 +1932,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1952,8 +1952,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1972,8 +1972,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -1992,8 +1992,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2012,8 +2012,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2032,8 +2032,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2052,8 +2052,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2072,8 +2072,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2092,8 +2092,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2112,8 +2112,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2132,8 +2132,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2152,8 +2152,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2172,8 +2172,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2192,8 +2192,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2212,8 +2212,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2232,8 +2232,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2252,8 +2252,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2272,8 +2272,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2292,8 +2292,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2312,8 +2312,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2332,8 +2332,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2352,8 +2352,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2372,8 +2372,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2392,8 +2392,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2412,8 +2412,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2432,8 +2432,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2452,8 +2452,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2472,8 +2472,8 @@ namespace System.Globalization.Tests
                     "October",
                     "November",
                     "December",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2492,8 +2492,8 @@ namespace System.Globalization.Tests
                     "octubre",
                     "noviembre",
                     "diciembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2512,8 +2512,8 @@ namespace System.Globalization.Tests
                     "octubre",
                     "noviembre",
                     "diciembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2532,8 +2532,8 @@ namespace System.Globalization.Tests
                     "octubre",
                     "noviembre",
                     "diciembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2552,8 +2552,8 @@ namespace System.Globalization.Tests
                     "oktoober",
                     "november",
                     "detsember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2572,8 +2572,8 @@ namespace System.Globalization.Tests
                     "دی",
                     "بهمن",
                     "اسفند",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2592,8 +2592,8 @@ namespace System.Globalization.Tests
                     "lokakuu",
                     "marraskuu",
                     "joulukuu",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2612,8 +2612,8 @@ namespace System.Globalization.Tests
                     "Oktubre",
                     "Nobyembre",
                     "Disyembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2632,8 +2632,8 @@ namespace System.Globalization.Tests
                     "octobre",
                     "novembre",
                     "décembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2652,8 +2652,8 @@ namespace System.Globalization.Tests
                     "octobre",
                     "novembre",
                     "décembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2672,8 +2672,8 @@ namespace System.Globalization.Tests
                     "octobre",
                     "novembre",
                     "décembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2692,8 +2692,8 @@ namespace System.Globalization.Tests
                     "octobre",
                     "novembre",
                     "décembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2712,8 +2712,8 @@ namespace System.Globalization.Tests
                     "ઑક્ટોબર",
                     "નવેમ્બર",
                     "ડિસેમ્બર",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2732,8 +2732,8 @@ namespace System.Globalization.Tests
                     "אוקטובר",
                     "נובמבר",
                     "דצמבר",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2752,8 +2752,8 @@ namespace System.Globalization.Tests
                     "अक्तूबर",
                     "नवंबर",
                     "दिसंबर",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2772,8 +2772,8 @@ namespace System.Globalization.Tests
                     "listopad",
                     "studeni",
                     "prosinac",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2792,8 +2792,8 @@ namespace System.Globalization.Tests
                     "listopad",
                     "studeni",
                     "prosinac",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2812,8 +2812,8 @@ namespace System.Globalization.Tests
                     "október",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2832,8 +2832,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Desember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2852,8 +2852,8 @@ namespace System.Globalization.Tests
                     "ottobre",
                     "novembre",
                     "dicembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2872,8 +2872,8 @@ namespace System.Globalization.Tests
                     "ottobre",
                     "novembre",
                     "dicembre",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2892,8 +2892,8 @@ namespace System.Globalization.Tests
                     "10月",
                     "11月",
                     "12月",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2912,8 +2912,8 @@ namespace System.Globalization.Tests
                     "ಅಕ್ಟೋಬರ್",
                     "ನವೆಂಬರ್",
                     "ಡಿಸೆಂಬರ್",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2932,8 +2932,8 @@ namespace System.Globalization.Tests
                     "10월",
                     "11월",
                     "12월",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2952,8 +2952,8 @@ namespace System.Globalization.Tests
                     "spalis",
                     "lapkritis",
                     "gruodis",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2972,8 +2972,8 @@ namespace System.Globalization.Tests
                     "oktobris",
                     "novembris",
                     "decembris",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -2992,8 +2992,8 @@ namespace System.Globalization.Tests
                     "ഒക്‌ടോബർ",
                     "നവംബർ",
                     "ഡിസംബർ",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3012,8 +3012,8 @@ namespace System.Globalization.Tests
                     "ऑक्टोबर",
                     "नोव्हेंबर",
                     "डिसेंबर",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3032,8 +3032,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Disember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3052,8 +3052,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Disember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3072,8 +3072,8 @@ namespace System.Globalization.Tests
                     "Oktober",
                     "November",
                     "Disember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3092,8 +3092,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "desember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3112,8 +3112,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "desember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3132,8 +3132,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "desember",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3152,8 +3152,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3172,8 +3172,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3192,8 +3192,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3212,8 +3212,8 @@ namespace System.Globalization.Tests
                     "październik",
                     "listopad",
                     "grudzień",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3232,8 +3232,8 @@ namespace System.Globalization.Tests
                     "outubro",
                     "novembro",
                     "dezembro",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3252,8 +3252,8 @@ namespace System.Globalization.Tests
                     "outubro",
                     "novembro",
                     "dezembro",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3272,8 +3272,8 @@ namespace System.Globalization.Tests
                     "octombrie",
                     "noiembrie",
                     "decembrie",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3292,8 +3292,8 @@ namespace System.Globalization.Tests
                     "октябрь",
                     "ноябрь",
                     "декабрь",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3312,8 +3312,8 @@ namespace System.Globalization.Tests
                     "október",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3332,8 +3332,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3352,8 +3352,8 @@ namespace System.Globalization.Tests
                     "октобар",
                     "новембар",
                     "децембар",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3372,8 +3372,8 @@ namespace System.Globalization.Tests
                     "oktobar",
                     "novembar",
                     "decembar",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3392,8 +3392,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3412,8 +3412,8 @@ namespace System.Globalization.Tests
                     "oktober",
                     "november",
                     "december",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3432,8 +3432,8 @@ namespace System.Globalization.Tests
                     "Oktoba",
                     "Novemba",
                     "Desemba",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3452,8 +3452,8 @@ namespace System.Globalization.Tests
                     "Oktoba",
                     "Novemba",
                     "Desemba",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3472,8 +3472,8 @@ namespace System.Globalization.Tests
                     "Oktoba",
                     "Novemba",
                     "Desemba",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3492,8 +3492,8 @@ namespace System.Globalization.Tests
                     "Oktoba",
                     "Novemba",
                     "Desemba",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3512,8 +3512,8 @@ namespace System.Globalization.Tests
                     "அக்டோபர்",
                     "நவம்பர்",
                     "டிசம்பர்",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3532,8 +3532,8 @@ namespace System.Globalization.Tests
                     "அக்டோபர்",
                     "நவம்பர்",
                     "டிசம்பர்",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3552,8 +3552,8 @@ namespace System.Globalization.Tests
                     "அக்டோபர்",
                     "நவம்பர்",
                     "டிசம்பர்",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3572,8 +3572,8 @@ namespace System.Globalization.Tests
                     "அக்டோபர்",
                     "நவம்பர்",
                     "டிசம்பர்",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3592,8 +3592,8 @@ namespace System.Globalization.Tests
                     "అక్టోబర్",
                     "నవంబర్",
                     "డిసెంబర్",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3612,8 +3612,8 @@ namespace System.Globalization.Tests
                     "ตุลาคม",
                     "พฤศจิกายน",
                     "ธันวาคม",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3632,8 +3632,8 @@ namespace System.Globalization.Tests
                     "Ekim",
                     "Kasım",
                     "Aralık",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3652,8 +3652,8 @@ namespace System.Globalization.Tests
                     "Ekim",
                     "Kasım",
                     "Aralık",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3672,8 +3672,8 @@ namespace System.Globalization.Tests
                     "жовтень",
                     "листопад",
                     "грудень",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3692,8 +3692,8 @@ namespace System.Globalization.Tests
                     "Tháng 10",
                     "Tháng 11",
                     "Tháng 12",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3712,8 +3712,8 @@ namespace System.Globalization.Tests
                     "十月",
                     "十一月",
                     "十二月",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3732,8 +3732,8 @@ namespace System.Globalization.Tests
                     "十月",
                     "十一月",
                     "十二月",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3752,8 +3752,8 @@ namespace System.Globalization.Tests
                     "10月",
                     "11月",
                     "12月",
-                    ""
-                }
+                    "",
+                },
             }; // "一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月", ""
             yield return new object[]
             {
@@ -3772,8 +3772,8 @@ namespace System.Globalization.Tests
                     "10月",
                     "11月",
                     "12月",
-                    ""
-                }
+                    "",
+                },
             };
             yield return new object[]
             {
@@ -3792,8 +3792,8 @@ namespace System.Globalization.Tests
                     "10月",
                     "11月",
                     "12月",
-                    ""
-                }
+                    "",
+                },
             };
         }
 
@@ -3849,7 +3849,7 @@ namespace System.Globalization.Tests
                         "10",
                         "11",
                         "12",
-                        ""
+                        "",
                     }
             );
         }
@@ -3874,8 +3874,8 @@ namespace System.Globalization.Tests
                     "Nov",
                     "Dec",
                     "",
-                    "Additional"
-                }
+                    "Additional",
+                },
             };
         }
 
@@ -3906,7 +3906,7 @@ namespace System.Globalization.Tests
                         "10",
                         "11",
                         "12",
-                        ""
+                        "",
                     }
             );
         }
@@ -3929,7 +3929,7 @@ namespace System.Globalization.Tests
                 "Oct.",
                 "Nov.",
                 "Dec.",
-                "."
+                ".",
             };
             Assert.Equal("Jun. 76", new DateTime(1976, 6, 19).ToString("MMMM yy", format));
         }
@@ -3951,7 +3951,7 @@ namespace System.Globalization.Tests
                 "10",
                 "11",
                 "12",
-                "13"
+                "13",
             };
             var format = new DateTimeFormatInfo { MonthNames = value };
             value[0] = null;

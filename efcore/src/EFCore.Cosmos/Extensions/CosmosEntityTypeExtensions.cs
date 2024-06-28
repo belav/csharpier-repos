@@ -447,11 +447,9 @@ public static class CosmosEntityTypeExtensions
     ) =>
         entityType.SetOrRemoveAnnotation(
             CosmosAnnotationNames.Throughput,
-            throughput == null || autoscale == null
-                ? null
-                : autoscale.Value
-                    ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                    : ThroughputProperties.CreateManualThroughput(throughput.Value)
+            throughput == null || autoscale == null ? null
+                : autoscale.Value ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
+                : ThroughputProperties.CreateManualThroughput(throughput.Value)
         );
 
     /// <summary>
@@ -471,11 +469,10 @@ public static class CosmosEntityTypeExtensions
             entityType
                 .SetOrRemoveAnnotation(
                     CosmosAnnotationNames.Throughput,
-                    throughput == null || autoscale == null
-                        ? null
+                    throughput == null || autoscale == null ? null
                         : autoscale.Value
                             ? ThroughputProperties.CreateAutoscaleThroughput(throughput.Value)
-                            : ThroughputProperties.CreateManualThroughput(throughput.Value),
+                        : ThroughputProperties.CreateManualThroughput(throughput.Value),
                     fromDataAnnotation
                 )
                 ?.Value;

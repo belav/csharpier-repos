@@ -51,7 +51,7 @@ namespace System.Web.WebPages.Administration.Test
 
             var webProjectManager = new WebProjectManager(projectManager.Object, @"x:\")
             {
-                DoNotAddBindingRedirects = true
+                DoNotAddBindingRedirects = true,
             };
 
             var packageFile1 = new Mock<IPackageFile>();
@@ -169,9 +169,9 @@ namespace System.Web.WebPages.Administration.Test
                         new PackageDependency(
                             "B",
                             new VersionSpec { MinVersion = new SemanticVersion("1.0") }
-                        )
+                        ),
                     }
-                )
+                ),
             };
             repository.Setup(c => c.GetPackages()).Returns(packages.AsQueryable());
 

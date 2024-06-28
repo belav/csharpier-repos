@@ -207,7 +207,7 @@
             Value1 = 0,
             Value2 = 1,
             Value3 = 2,
-            Value4 = 3
+            Value4 = 3,
         }
 
         public class Source
@@ -217,7 +217,7 @@
                 { Property.Value1, false },
                 { Property.Value2, false },
                 { Property.Value3, false },
-                { Property.Value4, false }
+                { Property.Value4, false },
             };
 
             public int Value1

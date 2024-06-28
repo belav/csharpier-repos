@@ -38,7 +38,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument
                     )
-                }
+                },
             };
             return result;
         }
@@ -73,7 +73,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument2
                     )
-                }
+                },
             };
             return result;
         }
@@ -119,7 +119,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument3
                     )
-                }
+                },
             };
             return result;
         }
@@ -176,7 +176,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument4
                     )
-                }
+                },
             };
             return result;
         }
@@ -244,7 +244,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument5
                     )
-                }
+                },
             };
             return result;
         }
@@ -1188,7 +1188,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument13
                     )
-                }
+                },
             };
             return result;
         }
@@ -1356,7 +1356,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument14
                     )
-                }
+                },
             };
             return result;
         }
@@ -1550,7 +1550,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument15
                     )
-                }
+                },
             };
             return result;
         }
@@ -1756,7 +1756,7 @@ namespace System.Activities
                         ArgumentDirection.In,
                         this.Argument16
                     )
-                }
+                },
             };
             return result;
         }

@@ -557,7 +557,7 @@ class winx64structs
     {
         var vector3Pair = new winx64_vector3PairStruct
         {
-            first = new winx64_vector3Struct(1, 2, 3)
+            first = new winx64_vector3Struct(1, 2, 3),
         };
 
         var local2 = new winx64_vector3Struct(1, 1, 1);

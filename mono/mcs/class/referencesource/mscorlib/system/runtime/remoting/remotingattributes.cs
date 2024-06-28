@@ -532,7 +532,7 @@ namespace System.Runtime.Remoting.Metadata
     {
         All,
         Sequence,
-        Choice
+        Choice,
     } // XmlFieldOrderOption
 
     [AttributeUsage(
@@ -554,7 +554,7 @@ namespace System.Runtime.Remoting.Metadata
             XmlElementName = 0x1,
             XmlNamespace = 0x2,
             XmlTypeName = 0x4,
-            XmlTypeNamespace = 0x8
+            XmlTypeNamespace = 0x8,
         }
 
         private ExplicitlySet _explicitlySet = ExplicitlySet.None;
@@ -827,7 +827,7 @@ namespace System.Runtime.Remoting.Metadata
         private enum ExplicitlySet
         {
             None = 0x0,
-            XmlElementName = 0x1
+            XmlElementName = 0x1,
         }
 
         private ExplicitlySet _explicitlySet = ExplicitlySet.None;

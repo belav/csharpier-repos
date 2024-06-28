@@ -183,16 +183,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _factory,
                                 _factory.Convert(objectType, savedInputExpression)
                             )
-                            : (
-                                _factory.WellKnownMember(
-                                    WellKnownMember.System_Runtime_CompilerServices_SwitchExpressionException__ctor,
-                                    isOptional: true
-                                ) is MethodSymbol
+                        : (
+                            _factory.WellKnownMember(
+                                WellKnownMember.System_Runtime_CompilerServices_SwitchExpressionException__ctor,
+                                isOptional: true
+                            ) is MethodSymbol
+                        )
+                            ? ConstructThrowSwitchExpressionExceptionParameterlessHelperCall(
+                                _factory
                             )
-                                ? ConstructThrowSwitchExpressionExceptionParameterlessHelperCall(
-                                    _factory
-                                )
-                                : ConstructThrowInvalidOperationExceptionHelperCall(_factory);
+                        : ConstructThrowInvalidOperationExceptionHelperCall(_factory);
 
                     result.Add(throwCall);
                 }

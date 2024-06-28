@@ -242,7 +242,7 @@ End Class",
                     expectedResult = SpecializedCollections.SingletonEnumerable(root.FullSpan);
 
                     return document.WithSyntaxRoot(root);
-                }
+                },
             };
 
             VerifyRange("{|b:class C {}|}", transformer, ref expectedResult);
@@ -264,7 +264,7 @@ End Class",
                     expectedResult = SpecializedCollections.SingletonEnumerable(root.FullSpan);
 
                     return document.WithSyntaxRoot(root);
-                }
+                },
             };
 
             VerifyRange("{|b:class C {}|}", transformer, ref expectedResult);
@@ -288,7 +288,7 @@ End Class",
                     );
 
                     return document.WithSyntaxRoot(root);
-                }
+                },
             };
 
             VerifyRange("namespace N { {|b:class C {}|} }", transformer, ref expectedResult);
@@ -312,7 +312,7 @@ End Class",
                     );
 
                     return document.WithSyntaxRoot(root);
-                }
+                },
             };
 
             VerifyRange(
@@ -469,7 +469,7 @@ End Module";
                     expectedResult = SpecializedCollections.EmptyEnumerable<TextSpan>();
 
                     return document.WithSyntaxRoot(root);
-                }
+                },
             };
 
             VerifyRange(
@@ -549,7 +549,7 @@ End Module";
                 {
                     result = spans;
                     return Task.FromResult(document);
-                }
+                },
             };
 
             var document = CreateDocument(code, language);

@@ -74,7 +74,7 @@ public class ControllerActionEndpointDataSourceBenchmark
         var routeValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
         {
             ["Controller"] = "Controller" + id,
-            ["Action"] = "Index"
+            ["Action"] = "Index",
         };
 
         var template = DefaultRoute
@@ -85,7 +85,7 @@ public class ControllerActionEndpointDataSourceBenchmark
         {
             RouteValues = routeValues,
             DisplayName = "Action " + id,
-            AttributeRouteInfo = new AttributeRouteInfo() { Template = template, }
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = template },
         };
     }
 
@@ -96,9 +96,9 @@ public class ControllerActionEndpointDataSourceBenchmark
             RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
                 ["Controller"] = "Controller" + id,
-                ["Action"] = "Index"
+                ["Action"] = "Index",
             },
-            DisplayName = "Action " + id
+            DisplayName = "Action " + id,
         };
     }
 

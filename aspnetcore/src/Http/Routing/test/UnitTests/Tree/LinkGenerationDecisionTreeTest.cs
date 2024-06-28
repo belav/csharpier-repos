@@ -262,7 +262,7 @@ public class LinkGenerationDecisionTreeTest
             {
                 controller = "Store",
                 action = "Buy",
-                slug = "1234"
+                slug = "1234",
             }
         );
 
@@ -382,7 +382,7 @@ public class LinkGenerationDecisionTreeTest
             {
                 controller = "Store",
                 action = "Buy",
-                area = "Admin"
+                area = "Admin",
             }
         );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
@@ -395,7 +395,7 @@ public class LinkGenerationDecisionTreeTest
             {
                 controller = "Store",
                 action = "Buy",
-                area = "Admin"
+                area = "Admin",
             }
         );
 
@@ -437,7 +437,7 @@ public class LinkGenerationDecisionTreeTest
             {
                 controller = "Store",
                 action = "Buy",
-                area = "Admin"
+                area = "Admin",
             }
         );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
@@ -446,8 +446,8 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { controller = "Store", },
-            new { action = "Buy", area = "Admin", }
+            new { controller = "Store" },
+            new { action = "Buy", area = "Admin" }
         );
 
         // Act
@@ -491,7 +491,7 @@ public class LinkGenerationDecisionTreeTest
             {
                 controller = "Store",
                 action = "Buy",
-                area = "Admin"
+                area = "Admin",
             }
         );
         entry2.Entry.RouteTemplate = TemplateParser.Parse("b");
@@ -534,7 +534,7 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null, });
+        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null });
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
@@ -567,7 +567,7 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null, });
+        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null });
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
@@ -577,7 +577,7 @@ public class LinkGenerationDecisionTreeTest
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { page = "/Store/Buy", }, new { area = "Admin", });
+        var context = CreateContext(new { page = "/Store/Buy" }, new { area = "Admin" });
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues)
@@ -604,7 +604,7 @@ public class LinkGenerationDecisionTreeTest
         // Arrange
         var entries = new List<OutboundMatch>();
 
-        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null, });
+        var entry1 = CreateMatch(new { page = "/Store/Buy", area = (string)null });
         entry1.Entry.RouteTemplate = TemplateParser.Parse("a");
         entries.Add(entry1);
 
@@ -614,7 +614,7 @@ public class LinkGenerationDecisionTreeTest
 
         var tree = new LinkGenerationDecisionTree(entries);
 
-        var context = CreateContext(new { }, new { page = "/Store/Buy", area = "Admin", });
+        var context = CreateContext(new { }, new { page = "/Store/Buy", area = "Admin" });
 
         // Act
         var matches = tree.GetMatches(context.Values, context.AmbientValues)
@@ -668,8 +668,8 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { controller = "Home", action = "Index", },
-            new { page = "/Store/Buy", }
+            new { controller = "Home", action = "Index" },
+            new { page = "/Store/Buy" }
         );
 
         // Act
@@ -720,8 +720,8 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { controller = "Home", action = "Index", },
-            new { page = "/Store/Buy", area = "Admin", }
+            new { controller = "Home", action = "Index" },
+            new { page = "/Store/Buy", area = "Admin" }
         );
 
         // Act
@@ -778,7 +778,7 @@ public class LinkGenerationDecisionTreeTest
                 action = "Index",
                 page = "16",
             },
-            new { page = "/Store/Buy", }
+            new { page = "/Store/Buy" }
         );
 
         // Act
@@ -829,7 +829,7 @@ public class LinkGenerationDecisionTreeTest
                 action = "Index",
                 page = "/Store/Buy",
             },
-            new { page = "/Store/Buy", }
+            new { page = "/Store/Buy" }
         );
 
         // Act
@@ -874,8 +874,8 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { page = "/Store/Buy", },
-            new { controller = "Home", action = "Index", }
+            new { page = "/Store/Buy" },
+            new { controller = "Home", action = "Index" }
         );
 
         // Act
@@ -926,7 +926,7 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { page = "/Store/Buy", },
+            new { page = "/Store/Buy" },
             new
             {
                 controller = "Home",
@@ -983,7 +983,7 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { page = "/Store/Buy", action = "buy", },
+            new { page = "/Store/Buy", action = "buy" },
             new
             {
                 controller = "Home",
@@ -1034,7 +1034,7 @@ public class LinkGenerationDecisionTreeTest
         var tree = new LinkGenerationDecisionTree(entries);
 
         var context = CreateContext(
-            new { page = "/Store/Buy", action = "Index", },
+            new { page = "/Store/Buy", action = "Index" },
             new
             {
                 controller = "Home",
@@ -1063,7 +1063,7 @@ public class LinkGenerationDecisionTreeTest
                 {
                     action = "Buy",
                     controller = "Store",
-                    version = "V1"
+                    version = "V1",
                 },
                 "Store/Buy/V1"
             )
@@ -1074,7 +1074,7 @@ public class LinkGenerationDecisionTreeTest
                 {
                     action = "Buy",
                     controller = "Store",
-                    area = "Admin"
+                    area = "Admin",
                 },
                 "Admin/Store/Buy"
             )
@@ -1086,7 +1086,7 @@ public class LinkGenerationDecisionTreeTest
                 {
                     action = "Buy",
                     controller = "Store",
-                    version = "V2"
+                    version = "V2",
                 },
                 "Store/Buy/V2"
             )

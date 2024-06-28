@@ -31,7 +31,7 @@ namespace System.Activities.Expressions
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.bounds;

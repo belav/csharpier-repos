@@ -71,19 +71,19 @@ namespace System.ComponentModel.Design.Serialization.Tests
             {
                 memberRelationship,
                 new MemberRelationship(owner1, member1),
-                true
+                true,
             };
             yield return new object[]
             {
                 memberRelationship,
                 new MemberRelationship(owner2, member1),
-                false
+                false,
             };
             yield return new object[]
             {
                 memberRelationship,
                 new MemberRelationship(owner1, member2),
-                false
+                false,
             };
 
             yield return new object[] { memberRelationship, new object(), false };

@@ -57,7 +57,7 @@
                 () =>
                     (Owner != null && Owner.TemplateControl != null)
                         ? Owner.TemplateControl.GetType()
-                        : null
+                        : null,
             };
         }
 

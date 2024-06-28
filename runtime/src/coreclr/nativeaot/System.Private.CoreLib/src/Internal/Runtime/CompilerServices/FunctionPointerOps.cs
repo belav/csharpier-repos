@@ -71,7 +71,7 @@ namespace Internal.Runtime.CompilerServices
                 var key = new GenericMethodDescriptorInfo
                 {
                     MethodFunctionPointer = canonFunctionPointer,
-                    InstantiationArgument = instantiationArgument
+                    InstantiationArgument = instantiationArgument,
                 };
 
                 uint index = 0;

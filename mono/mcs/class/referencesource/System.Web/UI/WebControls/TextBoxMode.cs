@@ -31,6 +31,6 @@ namespace System.Web.UI.WebControls
         Phone = 12,
         Time = 13,
         Url = 14,
-        Week = 15
+        Week = 15,
     }
 }

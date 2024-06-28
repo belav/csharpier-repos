@@ -22,8 +22,8 @@ public class LanguageViewLocationExpanderTest
                     "/Views/{1}/{0}.cshtml",
                     "/Views/Shared/{0}.en-GB.cshtml",
                     "/Views/Shared/{0}.en.cshtml",
-                    "/Views/Shared/{0}.cshtml"
-                }
+                    "/Views/Shared/{0}.cshtml",
+                },
             };
 
             yield return new object[]
@@ -37,8 +37,8 @@ public class LanguageViewLocationExpanderTest
                     "/Views/{1}/{0}.cshtml",
                     "/Views/Shared/en-GB/{0}.cshtml",
                     "/Views/Shared/en/{0}.cshtml",
-                    "/Views/Shared/{0}.cshtml"
-                }
+                    "/Views/Shared/{0}.cshtml",
+                },
             };
 
             yield return new object[]
@@ -48,7 +48,7 @@ public class LanguageViewLocationExpanderTest
                 {
                     "/Areas/{2}/Views/{1}/{0}.cshtml",
                     "/Areas/{2}/Views/Shared/{0}.cshtml",
-                    "/Views/Shared/{0}.cshtml"
+                    "/Views/Shared/{0}.cshtml",
                 },
                 new[]
                 {
@@ -60,8 +60,8 @@ public class LanguageViewLocationExpanderTest
                     "/Areas/{2}/Views/Shared/{0}.cshtml",
                     "/Views/Shared/{0}.en-GB.cshtml",
                     "/Views/Shared/{0}.en.cshtml",
-                    "/Views/Shared/{0}.cshtml"
-                }
+                    "/Views/Shared/{0}.cshtml",
+                },
             };
 
             yield return new object[]
@@ -71,7 +71,7 @@ public class LanguageViewLocationExpanderTest
                 {
                     "/Areas/{2}/Views/{1}/{0}.cshtml",
                     "/Areas/{2}/Views/Shared/{0}.cshtml",
-                    "/Views/Shared/{0}.cshtml"
+                    "/Views/Shared/{0}.cshtml",
                 },
                 new[]
                 {
@@ -83,8 +83,8 @@ public class LanguageViewLocationExpanderTest
                     "/Areas/{2}/Views/Shared/{0}.cshtml",
                     "/Views/Shared/en-GB/{0}.cshtml",
                     "/Views/Shared/en/{0}.cshtml",
-                    "/Views/Shared/{0}.cshtml"
-                }
+                    "/Views/Shared/{0}.cshtml",
+                },
             };
         }
     }
@@ -95,7 +95,7 @@ public class LanguageViewLocationExpanderTest
         {
             yield return new object[]
             {
-                new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" }
+                new[] { "/Views/{1}/{0}.cshtml", "/Views/Shared/{0}.cshtml" },
             };
 
             yield return new object[]
@@ -104,8 +104,8 @@ public class LanguageViewLocationExpanderTest
                 {
                     "/Areas/{2}/Views/{1}/{0}.cshtml",
                     "/Areas/{2}/Views/Shared/{0}.cshtml",
-                    "/Views/Shared/{0}.cshtml"
-                }
+                    "/Views/Shared/{0}.cshtml",
+                },
             };
         }
     }

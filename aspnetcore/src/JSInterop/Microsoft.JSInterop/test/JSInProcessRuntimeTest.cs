@@ -13,7 +13,7 @@ public class JSInProcessRuntimeBaseTest
         // Arrange
         var runtime = new TestJSInProcessRuntime
         {
-            NextResultJson = "{\"intValue\":123,\"stringValue\":\"Hello\"}"
+            NextResultJson = "{\"intValue\":123,\"stringValue\":\"Hello\"}",
         };
 
         // Act
@@ -71,7 +71,7 @@ public class JSInProcessRuntimeBaseTest
         // Arrange
         var runtime = new TestJSInProcessRuntime
         {
-            NextResultJson = "[{\"__dotNetObject\":2},{\"__dotNetObject\":1}]"
+            NextResultJson = "[{\"__dotNetObject\":2},{\"__dotNetObject\":1}]",
         };
         var obj1 = new object();
         var obj2 = new object();

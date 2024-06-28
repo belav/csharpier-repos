@@ -27,7 +27,7 @@ public class PageRemoteAttributeTest
         var testableAttribute = new TestablePageRemoteAttribute
         {
             PageName = "Foo",
-            PageHandler = "Bar"
+            PageHandler = "Bar",
         };
 
         var ambientValues = new RouteValueDictionary() { ["page"] = "/Foo" };
@@ -39,7 +39,7 @@ public class PageRemoteAttributeTest
             ActionContext = GetActionContext(
                 new ServiceCollection().BuildServiceProvider(),
                 routeData
-            )
+            ),
         };
 
         var validationContext = GetValidationContext(urlHelper);
@@ -62,7 +62,7 @@ public class PageRemoteAttributeTest
         var testableAttribute = new TestablePageRemoteAttribute
         {
             PageName = "Foo",
-            PageHandler = "Bar"
+            PageHandler = "Bar",
         };
 
         var ambientValues = new RouteValueDictionary { ["page"] = "/Page" };
@@ -74,7 +74,7 @@ public class PageRemoteAttributeTest
             ActionContext = GetActionContext(
                 new ServiceCollection().BuildServiceProvider(),
                 routeData
-            )
+            ),
         };
 
         var validationContext = GetValidationContext(urlHelper);
@@ -101,7 +101,7 @@ public class PageRemoteAttributeTest
             ActionContext = GetActionContext(
                 new ServiceCollection().BuildServiceProvider(),
                 routeData
-            )
+            ),
         };
 
         var validationContext = GetValidationContext(urlHelper);
@@ -122,7 +122,7 @@ public class PageRemoteAttributeTest
         var ambientValues = new RouteValueDictionary
         {
             ["page"] = "/Page",
-            ["handler"] = "Handler"
+            ["handler"] = "Handler",
         };
 
         var routeData = new RouteData(ambientValues) { Routers = { Mock.Of<IRouter>() } };
@@ -132,7 +132,7 @@ public class PageRemoteAttributeTest
             ActionContext = GetActionContext(
                 new ServiceCollection().BuildServiceProvider(),
                 routeData
-            )
+            ),
         };
 
         var validationContext = GetValidationContext(urlHelper);
@@ -197,11 +197,11 @@ public class PageRemoteAttributeTest
     {
         // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
         // through the HttpContext.
-        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
 
         if (routeData == null)
         {
-            routeData = new RouteData { Routers = { Mock.Of<IRouter>(), }, };
+            routeData = new RouteData { Routers = { Mock.Of<IRouter>() } };
         }
 
         return new ActionContext(httpContext, routeData, new ActionDescriptor());

@@ -64,6 +64,6 @@ namespace Mono.Security.Cryptography
         /// Because this method uses fixed values for the P and G parameters, not all bit sizes are supported.
         /// The current implementation supports bit sizes of 768, 1024 and 1536.
         /// </summary>
-        Static
+        Static,
     }
 }

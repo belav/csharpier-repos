@@ -84,7 +84,7 @@ public sealed partial class QuicStream
                 // when using CancellationTokenSource.CancelAfter.
                 // Ignore the exception
             }
-        }
+        },
     };
     private ReceiveBuffers _receiveBuffers = new ReceiveBuffers();
     private int _receivedNeedsEnable;
@@ -106,7 +106,7 @@ public sealed partial class QuicStream
                 // when using CancellationTokenSource.CancelAfter.
                 // Ignore the exception
             }
-        }
+        },
     };
     private MsQuicBuffers _sendBuffers = new MsQuicBuffers();
     private int _sendLocked;
@@ -721,22 +721,28 @@ public sealed partial class QuicStream
     private unsafe int HandleStreamEvent(ref QUIC_STREAM_EVENT streamEvent) =>
         streamEvent.Type switch
         {
-            QUIC_STREAM_EVENT_TYPE.START_COMPLETE =>
-                HandleEventStartComplete(ref streamEvent.START_COMPLETE),
+            QUIC_STREAM_EVENT_TYPE.START_COMPLETE => HandleEventStartComplete(
+                ref streamEvent.START_COMPLETE
+            ),
             QUIC_STREAM_EVENT_TYPE.RECEIVE => HandleEventReceive(ref streamEvent.RECEIVE),
-            QUIC_STREAM_EVENT_TYPE.SEND_COMPLETE =>
-                HandleEventSendComplete(ref streamEvent.SEND_COMPLETE),
+            QUIC_STREAM_EVENT_TYPE.SEND_COMPLETE => HandleEventSendComplete(
+                ref streamEvent.SEND_COMPLETE
+            ),
             QUIC_STREAM_EVENT_TYPE.PEER_SEND_SHUTDOWN => HandleEventPeerSendShutdown(),
-            QUIC_STREAM_EVENT_TYPE.PEER_SEND_ABORTED =>
-                HandleEventPeerSendAborted(ref streamEvent.PEER_SEND_ABORTED),
-            QUIC_STREAM_EVENT_TYPE.PEER_RECEIVE_ABORTED =>
-                HandleEventPeerReceiveAborted(ref streamEvent.PEER_RECEIVE_ABORTED),
-            QUIC_STREAM_EVENT_TYPE.SEND_SHUTDOWN_COMPLETE =>
-                HandleEventSendShutdownComplete(ref streamEvent.SEND_SHUTDOWN_COMPLETE),
-            QUIC_STREAM_EVENT_TYPE.SHUTDOWN_COMPLETE =>
-                HandleEventShutdownComplete(ref streamEvent.SHUTDOWN_COMPLETE),
+            QUIC_STREAM_EVENT_TYPE.PEER_SEND_ABORTED => HandleEventPeerSendAborted(
+                ref streamEvent.PEER_SEND_ABORTED
+            ),
+            QUIC_STREAM_EVENT_TYPE.PEER_RECEIVE_ABORTED => HandleEventPeerReceiveAborted(
+                ref streamEvent.PEER_RECEIVE_ABORTED
+            ),
+            QUIC_STREAM_EVENT_TYPE.SEND_SHUTDOWN_COMPLETE => HandleEventSendShutdownComplete(
+                ref streamEvent.SEND_SHUTDOWN_COMPLETE
+            ),
+            QUIC_STREAM_EVENT_TYPE.SHUTDOWN_COMPLETE => HandleEventShutdownComplete(
+                ref streamEvent.SHUTDOWN_COMPLETE
+            ),
             QUIC_STREAM_EVENT_TYPE.PEER_ACCEPTED => HandleEventPeerAccepted(),
-            _ => QUIC_STATUS_SUCCESS
+            _ => QUIC_STATUS_SUCCESS,
         };
 
 #pragma warning disable CS3016

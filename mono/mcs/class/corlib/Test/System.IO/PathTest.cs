@@ -27,7 +27,7 @@ namespace MonoTests.System.IO
     {
         Windows,
         Unix,
-        Mac
+        Mac,
     }
 
     [TestFixture]
@@ -596,7 +596,7 @@ namespace MonoTests.System.IO
                 // I don't understand this comment^^.
                 // No trimming occurs but the paths are not equal. That's why the test fails. Commented out.
                 //{"root/..                      /", "root/..                   /"},
-                { ".//", String.Empty }
+                { ".//", String.Empty },
             };
 
             for (int i = 0; i < test.GetUpperBound(0); i++)
@@ -660,7 +660,7 @@ namespace MonoTests.System.IO
                 { "root/..             /", "" },
                 { "root/./", "root\\" },
                 { "root/..                      /", "" },
-                { ".//", "" }
+                { ".//", "" },
             };
 
             for (int i = 0; i < test.GetUpperBound(0); i++)
@@ -712,7 +712,7 @@ namespace MonoTests.System.IO
                 { "root/..             /", "" },
                 { "root/./", "root\\" },
                 { "root/..                      /", "" },
-                { ".//", "" }
+                { ".//", "" },
             };
 
             for (int i = 0; i < test.GetUpperBound(0); i++)
@@ -767,7 +767,7 @@ namespace MonoTests.System.IO
                 { "root/..             /", "" },
                 { "root/./", "root\\" },
                 { "root/..                      /", "" },
-                { ".//", "" }
+                { ".//", "" },
             };
 
             string root3 = @"//server/share";
@@ -1463,7 +1463,7 @@ namespace MonoTests.System.IO
                     '\x1C',
                     '\x1D',
                     '\x1E',
-                    '\x1F'
+                    '\x1F',
                 };
                 Assert.AreEqual(expected.Length, invalid.Length);
                 for (int i = 0; i < expected.Length; i++)

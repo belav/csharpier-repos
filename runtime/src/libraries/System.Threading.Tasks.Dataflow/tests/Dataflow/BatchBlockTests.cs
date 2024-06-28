@@ -23,9 +23,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     {
                         MaxMessagesPerTask = 1,
                         CancellationToken = new CancellationToken(true),
-                        MaxNumberOfGroups = 1
+                        MaxNumberOfGroups = 1,
                     }
-                )
+                ),
             };
             for (int i = 0; i < blocks.Length; i++)
             {
@@ -70,7 +70,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new BatchBlock<int>(
                         2,
                         new GroupingDataflowBlockOptions { MaxMessagesPerTask = 1 }
-                    )
+                    ),
             };
             foreach (var generator in generators)
             {
@@ -262,7 +262,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 TaskScheduler scheduler in new[]
                 {
                     TaskScheduler.Default,
-                    new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler
+                    new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler,
                 }
             )
             foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
@@ -276,7 +276,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     {
                         BoundedCapacity = boundedCapacity,
                         MaxMessagesPerTask = maxMessagesPerTask,
-                        TaskScheduler = scheduler
+                        TaskScheduler = scheduler,
                     }
                 );
                 await Task.WhenAll(
@@ -421,7 +421,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new GroupingDataflowBlockOptions
                     {
                         BoundedCapacity = boundedCapacity,
-                        Greedy = greedy
+                        Greedy = greedy,
                     }
                 );
                 Task<bool>[] sends = Enumerable
@@ -475,7 +475,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             messageConsumed = false; // fail when attempting to consume reserved message
                             return 0;
                         }
-                    }
+                    },
                 };
                 Assert.Equal(
                     expected: DataflowMessageStatus.Postponed,
@@ -596,7 +596,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 new GroupingDataflowBlockOptions
                 {
                     CancellationToken = cts.Token,
-                    MaxNumberOfGroups = 1
+                    MaxNumberOfGroups = 1,
                 }
             );
 
@@ -674,7 +674,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                             new GroupingDataflowBlockOptions
                             {
                                 MaxNumberOfGroups = maxNumberOfGroups,
-                                Greedy = greedy
+                                Greedy = greedy,
                             }
                         );
 
@@ -748,7 +748,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     ReserveMessageDelegate = delegate
                     {
                         throw new InvalidCastException();
-                    }
+                    },
                 };
 
                 var batch = new BatchBlock<int>(
@@ -927,8 +927,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         QueueTaskDelegate = delegate
                         {
                             throw new FormatException();
-                        }
-                    }
+                        },
+                    },
                 }
             );
             Task<bool> t1 = bb.SendAsync(1);

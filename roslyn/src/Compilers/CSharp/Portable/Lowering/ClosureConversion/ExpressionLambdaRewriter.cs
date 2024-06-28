@@ -656,8 +656,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression loweredRight
         )
         {
-            return ((object)methodOpt == null)
-                ? ExprFactory(opName, loweredLeft, loweredRight)
+            return ((object)methodOpt == null) ? ExprFactory(opName, loweredLeft, loweredRight)
                 : requiresLifted
                     ? ExprFactory(
                         opName,
@@ -673,7 +672,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                         _bound.MethodInfo(methodOpt)
                     )
-                    : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
+                : ExprFactory(opName, loweredLeft, loweredRight, _bound.MethodInfo(methodOpt));
         }
 
         private TypeSymbol PromotedType(TypeSymbol underlying)
@@ -957,11 +956,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         )
         {
             var nullObject = _bound.Null(_objectType);
-            receiver = requiresInstanceReceiver
-                ? nullObject
-                : receiver.Type.IsReferenceType
-                    ? receiver
-                    : _bound.Convert(_objectType, receiver);
+            receiver =
+                requiresInstanceReceiver ? nullObject
+                : receiver.Type.IsReferenceType ? receiver
+                : _bound.Convert(_objectType, receiver);
 
             var createDelegate = _bound.WellKnownMethod(
                 WellKnownMember.System_Reflection_MethodInfo__CreateDelegate,
@@ -1203,7 +1201,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Expression,
             MemberInitializer,
-            CollectionInitializer
+            CollectionInitializer,
         };
 
         private BoundExpression VisitInitializer(BoundExpression node, out InitializerKind kind)

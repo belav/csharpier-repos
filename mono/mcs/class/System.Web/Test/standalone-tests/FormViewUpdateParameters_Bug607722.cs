@@ -67,9 +67,9 @@ namespace StandAloneTests.FormViewUpdateParameters_Bug607722
                     PostValues = new SerializableDictionary<string, string>
                     {
                         { "__EVENTTARGET", "FormView1$EditButton" },
-                        { "__EVENTARGUMENT", String.Empty }
+                        { "__EVENTARGUMENT", String.Empty },
                     },
-                    UrlDescription = "Edit phase"
+                    UrlDescription = "Edit phase",
                 }
             );
             runItems.Add(
@@ -80,9 +80,9 @@ namespace StandAloneTests.FormViewUpdateParameters_Bug607722
                         { "__EVENTTARGET", "FormView1$UpdateButton" },
                         { "__EVENTARGUMENT", String.Empty },
                         { "FormView1$M1TextBox", "12" },
-                        { "FormView1$M2TextBox", "12" }
+                        { "FormView1$M2TextBox", "12" },
                     },
-                    UrlDescription = "Update phase"
+                    UrlDescription = "Update phase",
                 }
             );
 #else
@@ -94,9 +94,9 @@ namespace StandAloneTests.FormViewUpdateParameters_Bug607722
                         "__EVENTTARGET",
                         "FormView1$EditButton",
                         "__EVENTARGUMENT",
-                        String.Empty
+                        String.Empty,
                     },
-                    UrlDescription = "Edit phase"
+                    UrlDescription = "Edit phase",
                 }
             );
             runItems.Add(
@@ -111,9 +111,9 @@ namespace StandAloneTests.FormViewUpdateParameters_Bug607722
                         "FormView1$M1TextBox",
                         "12",
                         "FormView1$M2TextBox",
-                        "12"
+                        "12",
                     },
-                    UrlDescription = "Update phase"
+                    UrlDescription = "Update phase",
                 }
             );
 #endif

@@ -33,8 +33,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                     VerifyComInterfaceGenerator
                         .Diagnostic(GeneratorDiagnostics.MultipleComInterfaceBaseTypes)
                         .WithLocation(0)
-                        .WithArguments("IComInterface2")
-                }
+                        .WithArguments("IComInterface2"),
+                },
             };
             yield return new object[]
             {
@@ -50,7 +50,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                         .Diagnostic(GeneratorDiagnostics.InstanceEventDeclaredInInterface)
                         .WithLocation(1)
                         .WithArguments("Event", "INativeAPI"),
-                }
+                },
             };
         }
 
@@ -131,7 +131,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                             safeHandleMarshallerDoesNotSupportManagedToUnmanaged,
                             "outValue"
                         ),
-                }
+                },
             };
 
             // Marshallers with only support for their expected places in the signatures in
@@ -164,37 +164,37 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 customStructMarshallingCodeSnippets.Stateless.NativeToManagedOnlyOutParameter,
-                new[] { invalidManagedToUnmanagedParameterDiagnostic }
+                new[] { invalidManagedToUnmanagedParameterDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 customStructMarshallingCodeSnippets.Stateless.NativeToManagedOnlyReturnValue,
-                new[] { invalidReturnTypeDiagnostic }
+                new[] { invalidReturnTypeDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 customStructMarshallingCodeSnippets.Stateless.ByValueInParameter,
-                new[] { invalidUnmanagedToManagedParameterDiagnostic }
+                new[] { invalidUnmanagedToManagedParameterDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 customStructMarshallingCodeSnippets.Stateful.NativeToManagedOnlyOutParameter,
-                new[] { invalidManagedToUnmanagedParameterDiagnostic }
+                new[] { invalidManagedToUnmanagedParameterDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 customStructMarshallingCodeSnippets.Stateful.NativeToManagedOnlyReturnValue,
-                new[] { invalidReturnTypeDiagnostic }
+                new[] { invalidReturnTypeDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 customStructMarshallingCodeSnippets.Stateful.ByValueInParameter,
-                new[] { invalidUnmanagedToManagedParameterDiagnostic }
+                new[] { invalidUnmanagedToManagedParameterDiagnostic },
             };
         }
 
@@ -236,8 +236,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                         .WithArguments(
                             "Test.IStringMarshalling0",
                             CustomStringMarshallingWithNoCustomTypeMessage
-                        )
-                }
+                        ),
+                },
             };
             yield return new object[]
             {
@@ -253,8 +253,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                         .WithArguments(
                             "Test.IStringMarshalling0",
                             CustomTypeSpecifiedWithNoStringMarshallingCustom
-                        )
-                }
+                        ),
+                },
             };
 
             // Inheritance no diagnostic
@@ -262,13 +262,13 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(utf16Marshalling, utf16Marshalling),
-                emptyDiagnostics
+                emptyDiagnostics,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(utf8Marshalling, utf8Marshalling),
-                emptyDiagnostics
+                emptyDiagnostics,
             };
             yield return new object[]
             {
@@ -277,7 +277,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     customUtf16Marshalling,
                     customUtf16Marshalling
                 ),
-                emptyDiagnostics
+                emptyDiagnostics,
             };
 
             // mismatches
@@ -286,37 +286,37 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(utf8Marshalling, utf16Marshalling),
-                mismatchAt1
+                mismatchAt1,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(utf16Marshalling, utf8Marshalling),
-                mismatchAt1
+                mismatchAt1,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(utf16Marshalling, customUtf16Marshalling),
-                mismatchAt1
+                mismatchAt1,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(customUtf16Marshalling, utf16Marshalling),
-                mismatchAt1
+                mismatchAt1,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(utf8Marshalling, customUtf16Marshalling),
-                mismatchAt1
+                mismatchAt1,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.DerivedWithStringMarshalling(customUtf16Marshalling, utf8Marshalling),
-                mismatchAt1
+                mismatchAt1,
             };
 
             // Three levels inheritance
@@ -329,7 +329,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     utf8Marshalling,
                     utf8Marshalling
                 ),
-                emptyDiagnostics
+                emptyDiagnostics,
             };
             yield return new object[]
             {
@@ -339,7 +339,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     utf16Marshalling,
                     utf16Marshalling
                 ),
-                emptyDiagnostics
+                emptyDiagnostics,
             };
             yield return new object[]
             {
@@ -349,7 +349,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     customUtf16Marshalling,
                     customUtf16Marshalling
                 ),
-                emptyDiagnostics
+                emptyDiagnostics,
             };
 
             //Mismatches
@@ -361,7 +361,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     utf8Marshalling,
                     utf16Marshalling
                 ),
-                MismatchesWithLocations(2)
+                MismatchesWithLocations(2),
             };
             yield return new object[]
             {
@@ -371,7 +371,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     utf16Marshalling,
                     utf16Marshalling
                 ),
-                MismatchesWithLocations(1).Concat(BaseCannotBeGeneratedWithLocations(2)).ToArray()
+                MismatchesWithLocations(1).Concat(BaseCannotBeGeneratedWithLocations(2)).ToArray(),
             };
             yield return new object[]
             {
@@ -381,7 +381,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     utf16Marshalling,
                     utf8Marshalling
                 ),
-                MismatchesWithLocations(1, 2)
+                MismatchesWithLocations(1, 2),
             };
             yield return new object[]
             {
@@ -391,7 +391,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     utf16Marshalling,
                     customUtf16Marshalling
                 ),
-                MismatchesWithLocations(1, 2)
+                MismatchesWithLocations(1, 2),
             };
 
             // Base has no StringMarshalling and Derived does is okay
@@ -466,11 +466,11 @@ namespace ComInterfaceGenerator.Unit.Tests
                         .WithArguments(
                             "Test.IStringMarshalling0",
                             CustomStringMarshallingWithNoCustomTypeMessage
-                        )
+                        ),
                 }
                     .Concat(MismatchesWithLocations(1))
                     .Concat(BaseCannotBeGeneratedWithLocations(2, 3, 4, 5))
-                    .ToArray()
+                    .ToArray(),
             };
 
             DiagnosticResult[] MismatchesWithLocations(params int[] locations)
@@ -516,22 +516,22 @@ namespace ComInterfaceGenerator.Unit.Tests
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippets.Stateless.NativeToManagedOnlyInParameter
+                customStructMarshallingCodeSnippets.Stateless.NativeToManagedOnlyInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippets.Stateless.ByValueOutParameter
+                customStructMarshallingCodeSnippets.Stateless.ByValueOutParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippets.Stateful.NativeToManagedOnlyInParameter
+                customStructMarshallingCodeSnippets.Stateful.NativeToManagedOnlyInParameter,
             };
             yield return new[]
             {
                 ID(),
-                customStructMarshallingCodeSnippets.Stateful.ByValueOutParameter
+                customStructMarshallingCodeSnippets.Stateful.ByValueOutParameter,
             };
         }
 
@@ -662,7 +662,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     .WithArguments(
                         "Test.IComInterface",
                         "'Test.IComInterface' has accessibility 'private'."
-                    )
+                    ),
             };
             var protectedDiagnostic = new DiagnosticResult[]
             {
@@ -671,7 +671,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     .WithArguments(
                         "Test.IComInterface",
                         "'Test.IComInterface' has accessibility 'protected'."
-                    )
+                    ),
             };
 
             var group = new List<(string, DiagnosticResult[], string)>()
@@ -714,7 +714,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     .WithArguments(
                         "Test.CustomStringMarshallingType",
                         "'Test.CustomStringMarshallingType' has accessibility 'private'."
-                    )
+                    ),
             };
             var protectedDiagnostic = new DiagnosticResult[]
             {
@@ -725,7 +725,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     .WithArguments(
                         "Test.CustomStringMarshallingType",
                         "'Test.CustomStringMarshallingType' has accessibility 'protected'."
-                    )
+                    ),
             };
 
             var group = new List<(string, string, DiagnosticResult[], string)>()
@@ -874,9 +874,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                     Sources = { ("Source.cs", source) },
                     AdditionalProjects =
                     {
-                        ["Other"] = { Sources = { ("Other.cs", additionalSource) }, },
+                        ["Other"] = { Sources = { ("Other.cs", additionalSource) } },
                     },
-                    AdditionalProjectReferences = { "Other" }
+                    AdditionalProjectReferences = { "Other" },
                 },
                 TestBehaviors =
                     TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
@@ -1035,7 +1035,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 Source(voidReturn, contentsOutArr, outSize),
-                outParamDiag
+                outParamDiag,
             };
             yield return new object[] { ID(), Source(voidReturn, contentsOutArr, refSize) };
 
@@ -1045,7 +1045,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 Source(voidReturn, contentsInOutArr, outSize),
-                outParamDiag
+                outParamDiag,
             };
             yield return new object[] { ID(), Source(voidReturn, contentsInOutArr, refSize) };
 
@@ -1094,25 +1094,25 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 Source(sizeReturn, inArrReturnSize),
-                returnValueDiag
+                returnValueDiag,
             };
             yield return new object[]
             {
                 ID(),
                 Source(sizeReturn, refArrReturnSize),
-                returnValueDiag
+                returnValueDiag,
             };
             yield return new object[]
             {
                 ID(),
                 Source(sizeReturn, contentsOutArrReturnSize),
-                returnValueDiag
+                returnValueDiag,
             };
             yield return new object[]
             {
                 ID(),
                 Source(sizeReturn, contentsInOutArrReturnSize),
-                returnValueDiag
+                returnValueDiag,
             };
 
             var returnArr = ("IntStruct[]", "", new[] { "size" });
@@ -1180,25 +1180,25 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 enumReturn,
-                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic }
+                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 intReturn,
-                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic }
+                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 structHrReturn,
-                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic }
+                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic },
             };
             yield return new object[]
             {
                 ID(),
                 structHResultReturn,
-                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic }
+                new DiagnosticResult[] { managedReturnWillBeOutDiagnostic },
             };
             yield return new object[] { ID(), floatReturn, new DiagnosticResult[] { } };
 
@@ -1214,8 +1214,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                 structHrPreserveSig,
                 new DiagnosticResult[]
                 {
-                    hresultReturnStructWillBeStructDiagnostic.WithArguments("HR")
-                }
+                    hresultReturnStructWillBeStructDiagnostic.WithArguments("HR"),
+                },
             };
             yield return new object[]
             {
@@ -1223,8 +1223,8 @@ namespace ComInterfaceGenerator.Unit.Tests
                 structHResultPreserveSig,
                 new DiagnosticResult[]
                 {
-                    hresultReturnStructWillBeStructDiagnostic.WithArguments("HResult")
-                }
+                    hresultReturnStructWillBeStructDiagnostic.WithArguments("HResult"),
+                },
             };
 
             var structHResultPreserveSigWithMarshalAs = Template(
@@ -1236,7 +1236,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 structHResultPreserveSigWithMarshalAs,
-                new DiagnosticResult[] { }
+                new DiagnosticResult[] { },
             };
 
             var intReturnMarshalAs = Template("int", "", "[return: MarshalAs(UnmanagedType.I4)]");
@@ -1271,7 +1271,7 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             var test = new VerifyComInterfaceGenerator.Test(referenceAncillaryInterop: false)
             {
-                TestState = { Sources = { ("Source.cs", source) }, },
+                TestState = { Sources = { ("Source.cs", source) } },
                 TestBehaviors =
                     TestBehaviors.SkipGeneratedSourcesCheck | TestBehaviors.SkipGeneratedCodeCheck,
             };

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 public enum someEnum2
 {
     aaa,
-    bbb
+    bbb,
 }
 
 class Tests
@@ -24,7 +24,7 @@ public class GenericEnumTest<T>
     public enum anEnum
     {
         val1,
-        val2
+        val2,
     }
 
     public async Task<int> ThrowExceptionWithGeneric(T val)

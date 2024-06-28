@@ -39,6 +39,6 @@ namespace System.IO
         LastAccess = 32,
         LastWrite = 16,
         Security = 256,
-        Size = 8
+        Size = 8,
     }
 }

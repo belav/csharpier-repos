@@ -8434,7 +8434,7 @@ class C8
                             "M<I1>"
                         )
                         .WithArguments("I1", "I1.M01()")
-                        .WithLocation(67, 11)
+                        .WithLocation(67, 11),
                 };
             }
             else
@@ -8712,7 +8712,7 @@ class C8
                         "M<I1>"
                     )
                     .WithArguments("I1", "I1.M01()")
-                    .WithLocation(67, 11)
+                    .WithLocation(67, 11),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -8898,7 +8898,7 @@ class C8
                         "M<I3>"
                     )
                     .WithArguments("I3", "I1.M01()")
-                    .WithLocation(50, 11)
+                    .WithLocation(50, 11),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -9057,7 +9057,7 @@ class C8
                         "M<I3>"
                     )
                     .WithArguments("I3", "I1.M01()")
-                    .WithLocation(50, 11)
+                    .WithLocation(50, 11),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -9216,7 +9216,7 @@ class C8
                         "M<I3>"
                     )
                     .WithArguments("I3", "I1.M01()")
-                    .WithLocation(50, 11)
+                    .WithLocation(50, 11),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -22791,7 +22791,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -23404,7 +23404,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -23524,7 +23524,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -23628,7 +23628,7 @@ public class C1<T> : I1
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -23653,7 +23653,7 @@ public class C2 : C1<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -23753,7 +23753,7 @@ public class C1<T> : I1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -23778,7 +23778,7 @@ public class C2 : C1<int>, I1<int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -23875,7 +23875,7 @@ public class C1<T> : I1
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -23900,7 +23900,7 @@ public class C2 : C1<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -23985,7 +23985,7 @@ public class C1<T> : I1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -24011,7 +24011,7 @@ public class C2 : C1<int>, I1<int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -24100,7 +24100,7 @@ public class C11<T> : C1<T>, I1
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -24125,7 +24125,7 @@ public class C2 : C11<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -24227,7 +24227,7 @@ public class C11<T> : C1<T>, I1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -24252,7 +24252,7 @@ public class C2 : C11<int>, I1<int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -24357,7 +24357,7 @@ public class C1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -24391,7 +24391,7 @@ public class C2 : C1<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -24519,7 +24519,7 @@ public class C1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -24553,7 +24553,7 @@ public class C2 : C1<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -24629,11 +24629,10 @@ public class C2 : C1<int>, I1
             {
                 ">>" => WellKnownMemberNames.RightShiftOperatorName,
                 ">>>" => WellKnownMemberNames.UnsignedRightShiftOperatorName,
-                _ =>
-                    OperatorFacts.BinaryOperatorNameFromSyntaxKindIfAny(
-                        SyntaxFactory.ParseToken(op).Kind(),
-                        isChecked: isChecked
-                    )
+                _ => OperatorFacts.BinaryOperatorNameFromSyntaxKindIfAny(
+                    SyntaxFactory.ParseToken(op).Kind(),
+                    isChecked: isChecked
+                ),
             };
 
         internal static string GetUnaryOperatorName(
@@ -26355,7 +26354,7 @@ interface I14 : I1
                 Diagnostic(badSignatureError, op).WithLocation(42, 16 + checkedKeyword.Length),
                 // (47,23): error CS0563: One of the parameters of a binary operator must be the containing type
                 //     static T operator |(T x, int y) => default;
-                Diagnostic(badSignatureError, op).WithLocation(47, 23 + checkedKeyword.Length)
+                Diagnostic(badSignatureError, op).WithLocation(47, 23 + checkedKeyword.Length),
             };
 
             if (op is "==" or "!=")
@@ -26409,7 +26408,7 @@ interface I14 : I1
                                     ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators,
                                     op
                                 )
-                                .WithLocation(47, 23 + checkedKeyword.Length)
+                                .WithLocation(47, 23 + checkedKeyword.Length),
                         }
                     )
                     .ToArray();
@@ -26441,7 +26440,7 @@ interface I14 : I1
                             //     T operator |(T x, int y) => default;
                             Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, op)
                                 .WithArguments("I8<T>.operator " + checkedKeyword + op + "(T, int)")
-                                .WithLocation(42, 16 + checkedKeyword.Length)
+                                .WithLocation(42, 16 + checkedKeyword.Length),
                         }
                     )
                     .ToArray();
@@ -26724,7 +26723,7 @@ interface I14 : I1
                 //     virtual  static I1 I1.operator |(I1 x, int y);
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, op)
                     .WithArguments("virtual")
-                    .WithLocation(67, 36 + checkedKeyword.Length)
+                    .WithLocation(67, 36 + checkedKeyword.Length),
             };
 
             if (op is "==" or "!=")
@@ -26778,7 +26777,7 @@ interface I14 : I1
                                     ErrorCode.ERR_InterfacesCantContainConversionOrEqualityOperators,
                                     op
                                 )
-                                .WithLocation(47, 23 + checkedKeyword.Length)
+                                .WithLocation(47, 23 + checkedKeyword.Length),
                         }
                     )
                     .ToArray();
@@ -26810,7 +26809,7 @@ interface I14 : I1
                             //     T operator |(T x, int y) => default;
                             Diagnostic(ErrorCode.ERR_OperatorsMustBeStatic, op)
                                 .WithArguments("I8<T>.operator " + checkedKeyword + op + "(T, int)")
-                                .WithLocation(42, 16 + checkedKeyword.Length)
+                                .WithLocation(42, 16 + checkedKeyword.Length),
                         }
                     )
                     .ToArray();
@@ -27009,7 +27008,7 @@ public interface I2<T> where T : I2<T>
                             "10.0",
                             "11.0"
                         )
-                        .WithLocation(9, 42)
+                        .WithLocation(9, 42),
                 };
             }
             else
@@ -27035,7 +27034,7 @@ public interface I2<T> where T : I2<T>
                             "10.0",
                             "11.0"
                         )
-                        .WithLocation(9, 34)
+                        .WithLocation(9, 34),
                 };
             }
 
@@ -27098,7 +27097,7 @@ public interface I2<T> where T : I2<T>
                     //     virtual  static T operator checked ++(T x) => throw null;
                     Diagnostic(ErrorCode.ERR_InvalidModifierForLanguageVersion, op)
                         .WithArguments(modifier.Trim(), "10.0", "11.0")
-                        .WithLocation(19, 40)
+                        .WithLocation(19, 40),
                 };
             }
             else
@@ -27119,7 +27118,7 @@ public interface I2<T> where T : I2<T>
                     //     virtual  static T operator true(T x) => throw null;
                     Diagnostic(ErrorCode.ERR_InvalidModifierForLanguageVersion, op)
                         .WithArguments(modifier.Trim(), "10.0", "11.0")
-                        .WithLocation(19, 32)
+                        .WithLocation(19, 32),
                 };
             }
 
@@ -29061,7 +29060,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -29178,7 +29177,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -29327,7 +29326,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -29453,7 +29452,7 @@ public class C3 : C2<C3>, I1<C3>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -30815,7 +30814,7 @@ class C2 : I1<C2>
                 ">=" => "<=",
                 "==" => "!=",
                 "!=" => "==",
-                _ => null
+                _ => null,
             };
         }
 
@@ -31103,7 +31102,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -31198,7 +31197,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -31385,7 +31384,7 @@ public class C3 : C2, I1<C2>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -31585,7 +31584,7 @@ public class C3 : C2, I1<C2>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -31769,7 +31768,7 @@ public partial class C1<T, U>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -31794,7 +31793,7 @@ public class C2 : C1<int, int>, I1<C1<int, int>, int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -31965,7 +31964,7 @@ public partial class C1<T, U> : I1<C1<T, U>, U>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -31990,7 +31989,7 @@ public class C2 : C1<int, int>, I1<C1<int, int>, int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -32151,7 +32150,7 @@ public partial class C1<T, U>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -32176,7 +32175,7 @@ public class C2 : C11<int, int>, I1<C11<int, int>, C1<int, int>>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -34148,7 +34147,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -36147,7 +36146,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -36307,7 +36306,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -36451,7 +36450,7 @@ public class C1<T> : I1
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -36477,7 +36476,7 @@ public class C2 : C1<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -36560,7 +36559,7 @@ public class C1<T> : I1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -36587,7 +36586,7 @@ public class C2 : C1<int>, I1<int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -37772,7 +37771,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -39835,7 +39834,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -39990,7 +39989,7 @@ public class C3 : C2, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -40144,7 +40143,7 @@ public class C1<T> : I1
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -40170,7 +40169,7 @@ public class C2 : C1<int>, I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -40253,7 +40252,7 @@ public class C1<T> : I1<T>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -40280,7 +40279,7 @@ public class C2 : C1<int>, I1<int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -40329,7 +40328,7 @@ public class C2 : C1<int>, I1<int>
                 ("implicit", _) => WellKnownMemberNames.ImplicitConversionName,
                 ("explicit", false) => WellKnownMemberNames.ExplicitConversionName,
                 ("explicit", true) => WellKnownMemberNames.CheckedExplicitConversionName,
-                _ => throw TestExceptionUtilities.UnexpectedValue(op)
+                _ => throw TestExceptionUtilities.UnexpectedValue(op),
             };
 
         internal static string GetConversionOperatorName(
@@ -42243,7 +42242,7 @@ public class C3 : C2, I1<C2>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -43128,7 +43127,7 @@ public class C3 : C2, I1<C2>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -43301,7 +43300,7 @@ public partial class C1<T, U> : I1<C1<T, U>, U>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -43326,7 +43325,7 @@ public class C2 : C1<int, int>, I1<C1<int, int>, int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -43481,7 +43480,7 @@ public partial class C1<T, U> : I1<C1<T, U>, U>
                 references: new[]
                 {
                     CreateCompilation("", targetFramework: _supportingFramework)
-                        .ToMetadataReference()
+                        .ToMetadataReference(),
                 }
             );
 
@@ -43506,7 +43505,7 @@ public class C2 : C1<int, int>, I1<C1<int, int>, int>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -48158,7 +48157,7 @@ public class C5 : I1<C5>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -48247,7 +48246,7 @@ public class C5 : I1<C5>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -48336,7 +48335,7 @@ public class C5 : I1<C5>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -48425,7 +48424,7 @@ public class C5 : I1<C5>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {

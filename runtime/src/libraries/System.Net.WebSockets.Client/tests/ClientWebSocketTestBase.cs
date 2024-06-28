@@ -36,7 +36,7 @@ namespace System.Net.WebSockets.Client.Tests
         public static readonly object[][] SecureEchoServersAndBoolean = new object[][]
         {
             new object[] { Test.Common.Configuration.WebSockets.SecureRemoteEchoServer, false },
-            new object[] { Test.Common.Configuration.WebSockets.SecureRemoteEchoServer, true }
+            new object[] { Test.Common.Configuration.WebSockets.SecureRemoteEchoServer, true },
         };
 
         public const int TimeOutMilliseconds = 30000;
@@ -79,7 +79,7 @@ namespace System.Net.WebSockets.Client.Tests
                     {
                         ub.Uri,
                         exceptionMessage,
-                        WebSocketError.NotAWebSocket
+                        WebSocketError.NotAWebSocket,
                     };
                 }
             }

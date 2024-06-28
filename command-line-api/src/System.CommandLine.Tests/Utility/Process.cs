@@ -25,8 +25,8 @@ public static class Process
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
-                UseShellExecute = false
-            }
+                UseShellExecute = false,
+            },
         };
 
         if (!string.IsNullOrWhiteSpace(workingDirectory))

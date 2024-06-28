@@ -22,7 +22,7 @@ public class ConfigurationProviderCommandLineTest : ConfigurationProviderTestBas
             new KeyPerFileConfigurationSource
             {
                 Optional = true,
-                FileProvider = new TestFileProvider(testFiles.ToArray())
+                FileProvider = new TestFileProvider(testFiles.ToArray()),
             }
         );
 

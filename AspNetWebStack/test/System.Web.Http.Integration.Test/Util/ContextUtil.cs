@@ -64,7 +64,7 @@ namespace System.Web.Http
             req.SetRouteData(route);
             return new HttpControllerContext(config, route, req)
             {
-                ControllerDescriptor = new HttpControllerDescriptor(config)
+                ControllerDescriptor = new HttpControllerDescriptor(config),
             };
         }
 

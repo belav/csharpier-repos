@@ -30,6 +30,6 @@ namespace System.DirectoryServices
         Owner = 1,
         Group = 2,
         Dacl = 4,
-        Sacl = 8
+        Sacl = 8,
     }
 }

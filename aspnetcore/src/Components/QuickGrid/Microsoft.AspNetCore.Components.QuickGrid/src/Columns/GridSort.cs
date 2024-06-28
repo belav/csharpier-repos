@@ -140,8 +140,8 @@ public sealed class GridSort<TGridItem>
                 Direction =
                     (_firstExpression.Item2 ^ ascending)
                         ? SortDirection.Descending
-                        : SortDirection.Ascending
-            }
+                        : SortDirection.Ascending,
+            },
         };
 
         if (_thenExpressions is not null)
@@ -155,7 +155,7 @@ public sealed class GridSort<TGridItem>
                         Direction =
                             (thenAscending ^ ascending)
                                 ? SortDirection.Descending
-                                : SortDirection.Ascending
+                                : SortDirection.Ascending,
                     }
                 );
             }

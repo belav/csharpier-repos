@@ -41,14 +41,14 @@ namespace Mono.AssemblyLinker
     {
         Dll,
         Exe,
-        Win
+        Win,
     }
 
     enum DelaySign
     {
         NotSet,
         Yes,
-        No
+        No,
     }
 
     public enum Platform
@@ -58,7 +58,7 @@ namespace Mono.AssemblyLinker
         Arm,
         X86,
         X64,
-        IA64
+        IA64,
     }
 
     public class AssemblyLinker
@@ -665,7 +665,7 @@ namespace Mono.AssemblyLinker
                     0x94,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 };
 
                 byte[] encodedPublicKey = new byte[12 + publickey.Length];

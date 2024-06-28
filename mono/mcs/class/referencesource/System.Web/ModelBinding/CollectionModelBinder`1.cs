@@ -58,7 +58,7 @@
                         null,
                         typeof(TElement)
                     ),
-                    ModelName = fullChildName
+                    ModelName = fullChildName,
                 };
 
                 object boundValue = null;
@@ -151,8 +151,8 @@
                     ValueProvider = new ValueProviderCollection()
                     { // aggregate value provider
                         new ElementalValueProvider(bindingContext.ModelName, rawValueElement, culture), // our temporary provider goes at the front of the list
-                        bindingContext.ValueProvider
-                    }
+                        bindingContext.ValueProvider,
+                    },
                 };
 
                 object boundValue = null;

@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             UnableToCreateAnalyzer = 2,
             NoAnalyzers = 3,
             ReferencesFramework = 4,
-            ReferencesNewerCompiler = 5
+            ReferencesNewerCompiler = 5,
         }
 
         /// <summary>

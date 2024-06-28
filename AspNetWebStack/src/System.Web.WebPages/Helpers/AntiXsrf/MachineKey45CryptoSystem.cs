@@ -11,7 +11,7 @@ namespace System.Web.Helpers.AntiXsrf
     {
         private static readonly string[] _purposes = new string[]
         {
-            "System.Web.Helpers.AntiXsrf.AntiForgeryToken.v1"
+            "System.Web.Helpers.AntiXsrf.AntiForgeryToken.v1",
         };
         private static readonly MachineKey45CryptoSystem _singletonInstance =
             GetSingletonInstance();

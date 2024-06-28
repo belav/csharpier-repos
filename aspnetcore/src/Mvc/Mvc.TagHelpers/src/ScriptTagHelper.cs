@@ -71,7 +71,7 @@ public class ScriptTagHelper : UrlResolutionTagHelper
             {
                 FallbackSrcIncludeAttributeName,
                 FallbackSrcExcludeAttributeName,
-                FallbackTestExpressionAttributeName
+                FallbackTestExpressionAttributeName,
             }
         ),
     };
@@ -502,6 +502,6 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         /// Rendering a fallback block if primary javascript fails to load. Will also do globbing for both the
         /// primary and fallback srcs if the appropriate properties are set.
         /// </summary>
-        Fallback = 2
+        Fallback = 2,
     }
 }

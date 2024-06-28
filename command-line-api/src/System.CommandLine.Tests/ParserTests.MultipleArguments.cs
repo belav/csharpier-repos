@@ -113,7 +113,7 @@ namespace System.CommandLine.Tests
                 {
                     option,
                     new CliArgument<string>("arg1"),
-                    new CliArgument<string>("arg2")
+                    new CliArgument<string>("arg2"),
                 };
 
                 var result = command.Parse("-e foo");
@@ -178,9 +178,9 @@ namespace System.CommandLine.Tests
                 var arg2 = new CliArgument<string>("arg2")
                 {
                     Arity = ArgumentArity.ZeroOrOne,
-                    DefaultValueFactory = (_) => "the-default"
+                    DefaultValueFactory = (_) => "the-default",
                 };
-                var rootCommand = new CliRootCommand { arg1, arg2, };
+                var rootCommand = new CliRootCommand { arg1, arg2 };
 
                 var result = rootCommand.Parse("value-1");
 
@@ -195,7 +195,7 @@ namespace System.CommandLine.Tests
                 CliArgument<string> arg2 =
                     new(name: "arg2") { DefaultValueFactory = (_) => "the-default" };
 
-                var rootCommand = new CliRootCommand { arg1, arg2, };
+                var rootCommand = new CliRootCommand { arg1, arg2 };
 
                 var result = rootCommand.Parse("");
 
@@ -234,7 +234,7 @@ namespace System.CommandLine.Tests
                     new CliArgument<string>("arg1"),
                     new CliArgument<string>("arg2"),
                     new CliArgument<string>("arg3"),
-                    new CliArgument<string>("arg4")
+                    new CliArgument<string>("arg4"),
                 };
 
                 var result = CliParser.Parse(command, providedArgs);

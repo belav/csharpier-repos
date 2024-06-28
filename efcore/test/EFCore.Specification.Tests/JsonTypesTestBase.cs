@@ -889,11 +889,9 @@ public abstract class JsonTypesTestBase
     public virtual void Can_read_write_nullable_binary_JSON_values(string? value, string json) =>
         Can_read_and_write_JSON_value<NullableBytesType, byte[]?>(
             nameof(NullableBytesType.Bytes),
-            value == null
-                ? default
-                : value == ""
-                    ? Array.Empty<byte>()
-                    : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
+            value == null ? default
+                : value == "" ? Array.Empty<byte>()
+                : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
             json
         );
 
@@ -1489,11 +1487,9 @@ public abstract class JsonTypesTestBase
         Can_read_and_write_JSON_property_value<NullableBytesType, byte[]?>(
             b => b.HasConversion<string>(),
             nameof(NullableBytesType.Bytes),
-            value == null
-                ? default
-                : value == ""
-                    ? Array.Empty<byte>()
-                    : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
+            value == null ? default
+                : value == "" ? Array.Empty<byte>()
+                : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
             json
         );
 
@@ -1816,7 +1812,7 @@ public abstract class JsonTypesTestBase
                 new[]
                 {
                     factory.CreateLineString(new[] { new Coordinate(0, 0), new Coordinate(0, 1) }),
-                    factory.CreateLineString(new[] { new Coordinate(1, 0), new Coordinate(1, 1) })
+                    factory.CreateLineString(new[] { new Coordinate(1, 0), new Coordinate(1, 1) }),
                 }
             ),
             """{"Prop":"MULTILINESTRING ((0 0, 0 1), (1 0, 1 1))"}"""
@@ -1854,7 +1850,7 @@ public abstract class JsonTypesTestBase
                     new Coordinate(0, 0),
                     new Coordinate(1, 0),
                     new Coordinate(0, 1),
-                    new Coordinate(0, 0)
+                    new Coordinate(0, 0),
                 }
             ),
             """{"Prop":"POLYGON ((0 0, 1 0, 0 1, 0 0))"}"""
@@ -1892,7 +1888,7 @@ public abstract class JsonTypesTestBase
                     new Coordinate(0, 0),
                     new Coordinate(1, 0),
                     new Coordinate(0, 1),
-                    new Coordinate(0, 0)
+                    new Coordinate(0, 0),
                 }
             ),
             """{"Prop":"POLYGON ((0 0, 1 0, 0 1, 0 0))"}"""
@@ -2012,7 +2008,7 @@ public abstract class JsonTypesTestBase
                 new[]
                 {
                     factory.CreateLineString(new[] { new Coordinate(0, 0), new Coordinate(0, 1) }),
-                    factory.CreateLineString(new[] { new Coordinate(1, 0), new Coordinate(1, 1) })
+                    factory.CreateLineString(new[] { new Coordinate(1, 0), new Coordinate(1, 1) }),
                 }
             ),
             """{"Prop":{"type":"MultiLineString","coordinates":[[[0.0,0.0],[0.0,1.0]],[[1.0,0.0],[1.0,1.0]]]}}"""
@@ -2042,7 +2038,7 @@ public abstract class JsonTypesTestBase
                     new Coordinate(0, 0),
                     new Coordinate(1, 0),
                     new Coordinate(0, 1),
-                    new Coordinate(0, 0)
+                    new Coordinate(0, 0),
                 }
             ),
             """{"Prop":{"type":"Polygon","coordinates":[[[0.0,0.0],[1.0,0.0],[0.0,1.0],[0.0,0.0]]]}}"""
@@ -2072,7 +2068,7 @@ public abstract class JsonTypesTestBase
                     new Coordinate(0, 0),
                     new Coordinate(1, 0),
                     new Coordinate(0, 1),
-                    new Coordinate(0, 0)
+                    new Coordinate(0, 0),
                 }
             ),
             """{"Prop":{"type":"Polygon","coordinates":[[[0.0,0.0],[1.0,0.0],[0.0,1.0],[0.0,0.0]]]}}"""
@@ -2400,7 +2396,7 @@ public abstract class JsonTypesTestBase
             {
                 DateTime.MinValue,
                 new(2023, 5, 29, 10, 52, 47),
-                DateTime.MaxValue
+                DateTime.MaxValue,
             },
             """{"Prop":["0001-01-01T00:00:00","2023-05-29T10:52:47","9999-12-31T23:59:59.9999999"]}""",
             mappedCollection: true
@@ -2421,7 +2417,7 @@ public abstract class JsonTypesTestBase
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(-2, 0, 0)),
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(0, 0, 0)),
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(2, 0, 0)),
-                DateTimeOffset.MaxValue
+                DateTimeOffset.MaxValue,
             },
             """{"Prop":["0001-01-01T00:00:00+00:00","2023-05-29T10:52:47-02:00","2023-05-29T10:52:47+00:00","2023-05-29T10:52:47+02:00","9999-12-31T23:59:59.9999999+00:00"]}""",
             mappedCollection: true
@@ -2482,7 +2478,7 @@ public abstract class JsonTypesTestBase
             {
                 new(),
                 new("8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD"),
-                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
             },
             """{"Prop":["00000000-0000-0000-0000-000000000000","8c44242f-8e3f-4a20-8be8-98c7c1aadebd","ffffffff-ffff-ffff-ffff-ffffffffffff"]}""",
             mappedCollection: true
@@ -2501,7 +2497,7 @@ public abstract class JsonTypesTestBase
             {
                 "MinValue",
                 "❤❥웃유♋☮✌☏☢☠✔☑♚▲♪฿Ɖ⛏♥❣♂♀☿👍✍✉☣☤✘☒♛▼♫⌘⌛¡♡ღツ☼☁❅♾️✎©®™Σ✪✯☭➳Ⓐ✞℃℉°✿⚡☃☂✄¢€£∞✫★½☯✡☪",
-                "MaxValue"
+                "MaxValue",
             },
             """{"Prop":["MinValue","\u2764\u2765\uC6C3\uC720\u264B\u262E\u270C\u260F\u2622\u2620\u2714\u2611\u265A\u25B2\u266A\u0E3F\u0189\u26CF\u2665\u2763\u2642\u2640\u263F\uD83D\uDC4D\u270D\u2709\u2623\u2624\u2718\u2612\u265B\u25BC\u266B\u2318\u231B\u00A1\u2661\u10E6\u30C4\u263C\u2601\u2745\u267E\uFE0F\u270E\u00A9\u00AE\u2122\u03A3\u272A\u272F\u262D\u27B3\u24B6\u271E\u2103\u2109\u00B0\u273F\u26A1\u2603\u2602\u2704\u00A2\u20AC\u00A3\u221E\u272B\u2605\u00BD\u262F\u2721\u262A","MaxValue"]}""",
             mappedCollection: true
@@ -2521,7 +2517,7 @@ public abstract class JsonTypesTestBase
                 new byte[] { 0, 0, 0, 1 },
                 new byte[] { 255, 255, 255, 255 },
                 Array.Empty<byte>(),
-                new byte[] { 1, 2, 3, 4 }
+                new byte[] { 1, 2, 3, 4 },
             },
             """{"Prop":["AAAAAQ==","/////w==","","AQIDBA=="]}""",
             mappedCollection: true
@@ -2541,7 +2537,7 @@ public abstract class JsonTypesTestBase
                 new(
                     "https://user:password@www.contoso.com:80/Home/Index.htm?q1=v1&q2=v2#FragmentName"
                 ),
-                new("file:///C:/test/path/file.txt")
+                new("file:///C:/test/path/file.txt"),
             },
             """{"Prop":["https://user:password@www.contoso.com:80/Home/Index.htm?q1=v1\u0026q2=v2#FragmentName","file:///C:/test/path/file.txt"]}""",
             mappedCollection: true
@@ -2584,7 +2580,7 @@ public abstract class JsonTypesTestBase
                 PhysicalAddress.None,
                 PhysicalAddress.Parse("001122334455"),
                 PhysicalAddress.Parse("00-11-22-33-44-55"),
-                PhysicalAddress.Parse("0011.2233.4455")
+                PhysicalAddress.Parse("0011.2233.4455"),
             },
             """{"Prop":["","001122334455","001122334455","001122334455"]}""",
             mappedCollection: true
@@ -2675,7 +2671,7 @@ public abstract class JsonTypesTestBase
                 EnumU16.Max,
                 EnumU16.Default,
                 EnumU16.One,
-                (EnumU16)8
+                (EnumU16)8,
             },
             """{"Prop":[0,65535,0,1,8]}""",
             mappedCollection: true
@@ -2696,7 +2692,7 @@ public abstract class JsonTypesTestBase
                 EnumU32.Max,
                 EnumU32.Default,
                 EnumU32.One,
-                (EnumU32)8
+                (EnumU32)8,
             },
             """{"Prop":[0,4294967295,0,1,8]}""",
             mappedCollection: true,
@@ -2718,7 +2714,7 @@ public abstract class JsonTypesTestBase
                 EnumU64.Max,
                 EnumU64.Default,
                 EnumU64.One,
-                (EnumU64)8
+                (EnumU64)8,
             },
             """{"Prop":[0,18446744073709551615,0,1,8]}""",
             mappedCollection: true
@@ -2920,7 +2916,7 @@ public abstract class JsonTypesTestBase
                 DateTime.MinValue,
                 null,
                 new(2023, 5, 29, 10, 52, 47),
-                DateTime.MaxValue
+                DateTime.MaxValue,
             },
             """{"Prop":["0001-01-01T00:00:00",null,"2023-05-29T10:52:47","9999-12-31T23:59:59.9999999"]}""",
             mappedCollection: true
@@ -2942,7 +2938,7 @@ public abstract class JsonTypesTestBase
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(0, 0, 0)),
                 null,
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(2, 0, 0)),
-                DateTimeOffset.MaxValue
+                DateTimeOffset.MaxValue,
             },
             """{"Prop":["0001-01-01T00:00:00+00:00","2023-05-29T10:52:47-02:00","2023-05-29T10:52:47+00:00",null,"2023-05-29T10:52:47+02:00","9999-12-31T23:59:59.9999999+00:00"]}""",
             mappedCollection: true
@@ -3004,7 +3000,7 @@ public abstract class JsonTypesTestBase
                 new(),
                 null,
                 new("8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD"),
-                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
             },
             """{"Prop":["00000000-0000-0000-0000-000000000000",null,"8c44242f-8e3f-4a20-8be8-98c7c1aadebd","ffffffff-ffff-ffff-ffff-ffffffffffff"]}""",
             mappedCollection: true
@@ -3024,7 +3020,7 @@ public abstract class JsonTypesTestBase
                 "MinValue",
                 null,
                 "❤❥웃유♋☮✌☏☢☠✔☑♚▲♪฿Ɖ⛏♥❣♂♀☿👍✍✉☣☤✘☒♛▼♫⌘⌛¡♡ღツ☼☁❅♾️✎©®™Σ✪✯☭➳Ⓐ✞℃℉°✿⚡☃☂✄¢€£∞✫★½☯✡☪",
-                "MaxValue"
+                "MaxValue",
             },
             """{"Prop":["MinValue",null,"\u2764\u2765\uC6C3\uC720\u264B\u262E\u270C\u260F\u2622\u2620\u2714\u2611\u265A\u25B2\u266A\u0E3F\u0189\u26CF\u2665\u2763\u2642\u2640\u263F\uD83D\uDC4D\u270D\u2709\u2623\u2624\u2718\u2612\u265B\u25BC\u266B\u2318\u231B\u00A1\u2661\u10E6\u30C4\u263C\u2601\u2745\u267E\uFE0F\u270E\u00A9\u00AE\u2122\u03A3\u272A\u272F\u262D\u27B3\u24B6\u271E\u2103\u2109\u00B0\u273F\u26A1\u2603\u2602\u2704\u00A2\u20AC\u00A3\u221E\u272B\u2605\u00BD\u262F\u2721\u262A","MaxValue"]}""",
             mappedCollection: true
@@ -3045,7 +3041,7 @@ public abstract class JsonTypesTestBase
                 null,
                 new byte[] { 255, 255, 255, 255 },
                 Array.Empty<byte>(),
-                new byte[] { 1, 2, 3, 4 }
+                new byte[] { 1, 2, 3, 4 },
             },
             """{"Prop":["AAAAAQ==",null,"/////w==","","AQIDBA=="]}""",
             mappedCollection: true
@@ -3066,7 +3062,7 @@ public abstract class JsonTypesTestBase
                     "https://user:password@www.contoso.com:80/Home/Index.htm?q1=v1&q2=v2#FragmentName"
                 ),
                 null,
-                new("file:///C:/test/path/file.txt")
+                new("file:///C:/test/path/file.txt"),
             },
             """{"Prop":["https://user:password@www.contoso.com:80/Home/Index.htm?q1=v1\u0026q2=v2#FragmentName",null,"file:///C:/test/path/file.txt"]}""",
             mappedCollection: true
@@ -3114,7 +3110,7 @@ public abstract class JsonTypesTestBase
                 null,
                 PhysicalAddress.Parse("001122334455"),
                 PhysicalAddress.Parse("00-11-22-33-44-55"),
-                PhysicalAddress.Parse("0011.2233.4455")
+                PhysicalAddress.Parse("0011.2233.4455"),
             },
             """{"Prop":["",null,"001122334455","001122334455","001122334455"]}""",
             mappedCollection: true
@@ -3150,7 +3146,7 @@ public abstract class JsonTypesTestBase
                 Enum16.Max,
                 Enum16.Default,
                 Enum16.One,
-                (Enum16)(-8)
+                (Enum16)(-8),
             },
             """{"Prop":[-32768,null,32767,0,1,-8]}""",
             mappedCollection: true
@@ -3172,7 +3168,7 @@ public abstract class JsonTypesTestBase
                 Enum32.Max,
                 Enum32.Default,
                 Enum32.One,
-                (Enum32)(-8)
+                (Enum32)(-8),
             },
             """{"Prop":[-2147483648,null,2147483647,0,1,-8]}""",
             mappedCollection: true
@@ -3194,7 +3190,7 @@ public abstract class JsonTypesTestBase
                 Enum64.Max,
                 Enum64.Default,
                 Enum64.One,
-                (Enum64)(-8)
+                (Enum64)(-8),
             },
             """{"Prop":[-9223372036854775808,null,9223372036854775807,0,1,-8]}""",
             mappedCollection: true
@@ -3216,7 +3212,7 @@ public abstract class JsonTypesTestBase
                 EnumU8.Max,
                 EnumU8.Default,
                 EnumU8.One,
-                (EnumU8?)8
+                (EnumU8?)8,
             },
             """{"Prop":[0,null,255,0,1,8]}""",
             mappedCollection: true
@@ -3238,7 +3234,7 @@ public abstract class JsonTypesTestBase
                 EnumU16.Max,
                 EnumU16.Default,
                 EnumU16.One,
-                (EnumU16?)8
+                (EnumU16?)8,
             },
             """{"Prop":[0,null,65535,0,1,8]}""",
             mappedCollection: true
@@ -3260,7 +3256,7 @@ public abstract class JsonTypesTestBase
                 EnumU32.Max,
                 EnumU32.Default,
                 EnumU32.One,
-                (EnumU32?)8
+                (EnumU32?)8,
             },
             """{"Prop":[0,null,4294967295,0,1,8]}""",
             mappedCollection: true
@@ -3282,7 +3278,7 @@ public abstract class JsonTypesTestBase
                 EnumU64.Max,
                 EnumU64.Default,
                 EnumU64.One,
-                (EnumU64?)8
+                (EnumU64?)8,
             },
             """{"Prop":[0,null,18446744073709551615,0,1,8]}""",
             mappedCollection: true
@@ -3396,7 +3392,7 @@ public abstract class JsonTypesTestBase
             {
                 DateTime.MinValue,
                 new(2023, 5, 29, 10, 52, 47),
-                DateTime.MaxValue
+                DateTime.MaxValue,
             },
             """{"Prop":"[\u00220001-01-01T00:00:00\u0022,\u00222023-05-29T10:52:47\u0022,\u00229999-12-31T23:59:59.9999999\u0022]"}"""
         );
@@ -3455,7 +3451,7 @@ public abstract class JsonTypesTestBase
             {
                 "MinValue",
                 "❤❥웃유♋☮✌☏☢☠✔☑♚▲♪฿Ɖ⛏♥❣♂♀☿👍✍✉☣☤✘☒♛▼♫⌘⌛¡♡ღツ☼☁❅♾️✎©®™Σ✪✯☭➳Ⓐ✞℃℉°✿⚡☃☂✄¢€£∞✫★½☯✡☪",
-                "MaxValue"
+                "MaxValue",
             },
             """{"Prop":"[\u0022MinValue\u0022,\u0022\\u2764\\u2765\\uC6C3\\uC720\\u264B\\u262E\\u270C\\u260F\\u2622\\u2620\\u2714\\u2611\\u265A\\u25B2\\u266A\\u0E3F\\u0189\\u26CF\\u2665\\u2763\\u2642\\u2640\\u263F\\uD83D\\uDC4D\\u270D\\u2709\\u2623\\u2624\\u2718\\u2612\\u265B\\u25BC\\u266B\\u2318\\u231B\\u00A1\\u2661\\u10E6\\u30C4\\u263C\\u2601\\u2745\\u267E\\uFE0F\\u270E\\u00A9\\u00AE\\u2122\\u03A3\\u272A\\u272F\\u262D\\u27B3\\u24B6\\u271E\\u2103\\u2109\\u00B0\\u273F\\u26A1\\u2603\\u2602\\u2704\\u00A2\\u20AC\\u00A3\\u221E\\u272B\\u2605\\u00BD\\u262F\\u2721\\u262A\u0022,\u0022MaxValue\u0022]"}"""
         );
@@ -3479,7 +3475,7 @@ public abstract class JsonTypesTestBase
                 new byte[] { 0, 0, 0, 1 },
                 new byte[] { 255, 255, 255, 255 },
                 Array.Empty<byte>(),
-                new byte[] { 1, 2, 3, 4 }
+                new byte[] { 1, 2, 3, 4 },
             },
             """{"Prop":"[\u0022AAAAAQ==\u0022,\u0022/////w==\u0022,\u0022\u0022,\u0022AQIDBA==\u0022]"}"""
         );
@@ -3522,7 +3518,7 @@ public abstract class JsonTypesTestBase
                 EnumU64.Max,
                 EnumU64.Default,
                 EnumU64.One,
-                (EnumU64)8
+                (EnumU64)8,
             },
             """{"Prop":"[0,18446744073709551615,0,1,8]"}"""
         );
@@ -3639,7 +3635,7 @@ public abstract class JsonTypesTestBase
                 DateTime.MinValue,
                 null,
                 new(2023, 5, 29, 10, 52, 47),
-                DateTime.MaxValue
+                DateTime.MaxValue,
             },
             """{"Prop":"[\u00220001-01-01T00:00:00\u0022,null,\u00222023-05-29T10:52:47\u0022,\u00229999-12-31T23:59:59.9999999\u0022]"}"""
         );
@@ -3699,7 +3695,7 @@ public abstract class JsonTypesTestBase
                 "MinValue",
                 null,
                 "❤❥웃유♋☮✌☏☢☠✔☑♚▲♪฿Ɖ⛏♥❣♂♀☿👍✍✉☣☤✘☒♛▼♫⌘⌛¡♡ღツ☼☁❅♾️✎©®™Σ✪✯☭➳Ⓐ✞℃℉°✿⚡☃☂✄¢€£∞✫★½☯✡☪",
-                "MaxValue"
+                "MaxValue",
             },
             """{"Prop":"[\u0022MinValue\u0022,null,\u0022\\u2764\\u2765\\uC6C3\\uC720\\u264B\\u262E\\u270C\\u260F\\u2622\\u2620\\u2714\\u2611\\u265A\\u25B2\\u266A\\u0E3F\\u0189\\u26CF\\u2665\\u2763\\u2642\\u2640\\u263F\\uD83D\\uDC4D\\u270D\\u2709\\u2623\\u2624\\u2718\\u2612\\u265B\\u25BC\\u266B\\u2318\\u231B\\u00A1\\u2661\\u10E6\\u30C4\\u263C\\u2601\\u2745\\u267E\\uFE0F\\u270E\\u00A9\\u00AE\\u2122\\u03A3\\u272A\\u272F\\u262D\\u27B3\\u24B6\\u271E\\u2103\\u2109\\u00B0\\u273F\\u26A1\\u2603\\u2602\\u2704\\u00A2\\u20AC\\u00A3\\u221E\\u272B\\u2605\\u00BD\\u262F\\u2721\\u262A\u0022,\u0022MaxValue\u0022]"}"""
         );
@@ -3724,7 +3720,7 @@ public abstract class JsonTypesTestBase
                 null,
                 new byte[] { 255, 255, 255, 255 },
                 Array.Empty<byte>(),
-                new byte[] { 1, 2, 3, 4 }
+                new byte[] { 1, 2, 3, 4 },
             },
             """{"Prop":"[\u0022AAAAAQ==\u0022,null,\u0022/////w==\u0022,\u0022\u0022,\u0022AQIDBA==\u0022]"}"""
         );
@@ -3750,7 +3746,7 @@ public abstract class JsonTypesTestBase
                 Enum32.Max,
                 Enum32.Default,
                 Enum32.One,
-                (Enum32)(-8)
+                (Enum32)(-8),
             },
             """{"Prop":"[-2147483648,null,2147483647,0,1,-8]"}"""
         );
@@ -3776,7 +3772,7 @@ public abstract class JsonTypesTestBase
                 EnumU64.Max,
                 EnumU64.Default,
                 EnumU64.One,
-                (EnumU64)8
+                (EnumU64)8,
             },
             """{"Prop":"[0,null,18446744073709551615,0,1,8]"}"""
         );
@@ -3800,12 +3796,12 @@ public abstract class JsonTypesTestBase
             {
                 new() { Id = int.MinValue },
                 new() { Id = 0 },
-                new() { Id = int.MaxValue }
+                new() { Id = int.MaxValue },
             },
             """{"Prop":[-2147483648,0,2147483647]}""",
             facets: new Dictionary<string, object?>
             {
-                { CoreAnnotationNames.ValueConverter, typeof(DddIdConverter) }
+                { CoreAnnotationNames.ValueConverter, typeof(DddIdConverter) },
             }
         );
 
@@ -3825,12 +3821,12 @@ public abstract class JsonTypesTestBase
                 new() { Id = int.MinValue },
                 null,
                 new() { Id = 0 },
-                new() { Id = int.MaxValue }
+                new() { Id = int.MaxValue },
             },
             """{"Prop":[null,-2147483648,null,0,2147483647]}""",
             facets: new Dictionary<string, object?>
             {
-                { CoreAnnotationNames.ValueConverter, typeof(DddIdConverter) }
+                { CoreAnnotationNames.ValueConverter, typeof(DddIdConverter) },
             }
         );
 
@@ -3863,7 +3859,7 @@ public abstract class JsonTypesTestBase
             facets: new Dictionary<string, object?>
             {
                 { CoreAnnotationNames.Precision, 12 },
-                { CoreAnnotationNames.Scale, 6 }
+                { CoreAnnotationNames.Scale, 6 },
             }
         );
 
@@ -3876,12 +3872,12 @@ public abstract class JsonTypesTestBase
             {
                 new(),
                 new("8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD"),
-                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
             },
             """{"Prop":["AAAAAAAAAAAAAAAAAAAAAA==","LyREjD+OIEqL6JjHwarevQ==","/////////////////////w=="]}""",
             facets: new Dictionary<string, object?>
             {
-                { CoreAnnotationNames.ProviderClrType, typeof(byte[]) }
+                { CoreAnnotationNames.ProviderClrType, typeof(byte[]) },
             }
         );
 
@@ -4024,7 +4020,7 @@ public abstract class JsonTypesTestBase
                 {
                     { PropertyInfo: PropertyInfo p } => _nullabilityInfoContext.Create(p),
                     { FieldInfo: FieldInfo f } => _nullabilityInfoContext.Create(f),
-                    _ => throw new UnreachableException()
+                    _ => throw new UnreachableException(),
                 };
 
                 elementNullable =
@@ -4137,7 +4133,7 @@ public abstract class JsonTypesTestBase
         Min = sbyte.MinValue,
         Default = 0,
         One = 1,
-        Max = sbyte.MaxValue
+        Max = sbyte.MaxValue,
     }
 
     public enum Enum16 : short
@@ -4145,7 +4141,7 @@ public abstract class JsonTypesTestBase
         Min = short.MinValue,
         Default = 0,
         One = 1,
-        Max = short.MaxValue
+        Max = short.MaxValue,
     }
 
     public enum Enum32
@@ -4153,7 +4149,7 @@ public abstract class JsonTypesTestBase
         Min = int.MinValue,
         Default = 0,
         One = 1,
-        Max = int.MaxValue
+        Max = int.MaxValue,
     }
 
     public enum Enum64 : long
@@ -4161,7 +4157,7 @@ public abstract class JsonTypesTestBase
         Min = long.MinValue,
         Default = 0,
         One = 1,
-        Max = long.MaxValue
+        Max = long.MaxValue,
     }
 
     public enum EnumU8 : byte
@@ -4169,7 +4165,7 @@ public abstract class JsonTypesTestBase
         Min = byte.MinValue,
         Default = 0,
         One = 1,
-        Max = byte.MaxValue
+        Max = byte.MaxValue,
     }
 
     public enum EnumU16 : ushort
@@ -4177,7 +4173,7 @@ public abstract class JsonTypesTestBase
         Min = ushort.MinValue,
         Default = 0,
         One = 1,
-        Max = ushort.MaxValue
+        Max = ushort.MaxValue,
     }
 
     public enum EnumU32 : uint
@@ -4185,7 +4181,7 @@ public abstract class JsonTypesTestBase
         Min = uint.MinValue,
         Default = 0,
         One = 1,
-        Max = uint.MaxValue
+        Max = uint.MaxValue,
     }
 
     public enum EnumU64 : ulong
@@ -4193,7 +4189,7 @@ public abstract class JsonTypesTestBase
         Min = ulong.MinValue,
         Default = 0,
         One = 1,
-        Max = ulong.MaxValue
+        Max = ulong.MaxValue,
     }
 
     public class CustomCollectionConverter<T, TElement> : ValueConverter<T, string>

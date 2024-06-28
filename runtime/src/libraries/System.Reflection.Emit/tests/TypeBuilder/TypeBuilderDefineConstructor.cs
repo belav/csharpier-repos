@@ -14,85 +14,85 @@ namespace System.Reflection.Emit.Tests
             {
                 MethodAttributes.Public,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Family,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Assembly,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Private,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.PrivateScope,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.FamORAssem,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.FamANDAssem,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Final | MethodAttributes.Public,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Final | MethodAttributes.Family,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.SpecialName | MethodAttributes.Family,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.UnmanagedExport | MethodAttributes.Family,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.RTSpecialName | MethodAttributes.Family,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.HideBySig | MethodAttributes.Family,
                 new Type[] { typeof(int), typeof(int) },
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Static,
                 new Type[0],
-                CallingConventions.Standard
+                CallingConventions.Standard,
             };
 
             // Ignores any CallingConventions, sets to CallingConventions.Standard
@@ -100,31 +100,31 @@ namespace System.Reflection.Emit.Tests
             {
                 MethodAttributes.Public,
                 new Type[0],
-                CallingConventions.Any
+                CallingConventions.Any,
             };
             yield return new object[]
             {
                 MethodAttributes.Public,
                 new Type[0],
-                CallingConventions.ExplicitThis
+                CallingConventions.ExplicitThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Public,
                 new Type[0],
-                CallingConventions.HasThis
+                CallingConventions.HasThis,
             };
             yield return new object[]
             {
                 MethodAttributes.Public,
                 new Type[0],
-                CallingConventions.Standard
+                CallingConventions.Standard,
             };
             yield return new object[]
             {
                 MethodAttributes.Public,
                 new Type[0],
-                CallingConventions.VarArgs
+                CallingConventions.VarArgs,
             };
         }
 

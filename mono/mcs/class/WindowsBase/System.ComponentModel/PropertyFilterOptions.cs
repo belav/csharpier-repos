@@ -35,6 +35,6 @@ namespace System.ComponentModel
         SetValues = 2,
         UnsetValues = 4,
         Valid = 8,
-        All = 15
+        All = 15,
     }
 }

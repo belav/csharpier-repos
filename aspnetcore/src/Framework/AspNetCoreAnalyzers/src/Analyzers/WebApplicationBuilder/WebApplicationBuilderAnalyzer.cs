@@ -43,13 +43,13 @@ public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
             {
                 wellKnownTypes.Get(
                     WellKnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions
-                )
+                ),
             };
             INamedTypeSymbol[] configureWebHostTypes =
             {
                 wellKnownTypes.Get(
                     WellKnownType.Microsoft_Extensions_Hosting_GenericHostWebHostBuilderExtensions
-                )
+                ),
             };
             INamedTypeSymbol[] userStartupTypes =
             {
@@ -67,7 +67,7 @@ public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
                 ),
                 wellKnownTypes.Get(
                     WellKnownType.Microsoft_AspNetCore_Hosting_WebHostBuilderExtensions
-                )
+                ),
             };
             INamedTypeSymbol[] configureServicesTypes =
             {
@@ -76,7 +76,7 @@ public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
                 ),
                 wellKnownTypes.Get(
                     WellKnownType.Microsoft_AspNetCore_Builder_ConfigureWebHostBuilder
-                )
+                ),
             };
             INamedTypeSymbol[] configureAppTypes =
             {
@@ -93,14 +93,14 @@ public sealed class WebApplicationBuilderAnalyzer : DiagnosticAnalyzer
             };
             INamedTypeSymbol[] configureHostTypes =
             {
-                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_ConfigureHostBuilder)
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_ConfigureHostBuilder),
             };
             INamedTypeSymbol[] useEndpointTypes =
             {
                 wellKnownTypes.Get(
                     WellKnownType.Microsoft_AspNetCore_Builder_EndpointRoutingApplicationBuilderExtensions
                 ),
-                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_WebApplication)
+                wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Builder_WebApplication),
             };
 
             context.RegisterOperationAction(

@@ -245,7 +245,7 @@ namespace System.Web.WebPages.Test
             object derived = new DerivedClassWithOverride
             {
                 PropA = "propAValue",
-                PropB = "propBValue"
+                PropB = "propBValue",
             };
 
             // Act

@@ -250,7 +250,7 @@ public class FilterFactoryTest
                 providerContext.Results.Add(
                     new FilterItem(new FilterDescriptor(filter, FilterScope.Global), filter)
                     {
-                        IsReusable = reusable
+                        IsReusable = reusable,
                     }
                 );
             },
@@ -270,7 +270,7 @@ public class FilterFactoryTest
         var filterProviders = new IFilterProvider[]
         {
             new DefaultFilterProvider(),
-            customFilterProvider
+            customFilterProvider,
         };
         var filterDescriptors = actionContext.ActionDescriptor.FilterDescriptors;
 
@@ -375,7 +375,7 @@ public class FilterFactoryTest
 
     private static ActionContext CreateActionContext(FilterDescriptor[] filterDescriptors)
     {
-        var actionDescriptor = new ActionDescriptor { FilterDescriptors = filterDescriptors, };
+        var actionDescriptor = new ActionDescriptor { FilterDescriptors = filterDescriptors };
 
         return new ActionContext(new DefaultHttpContext(), new RouteData(), actionDescriptor);
     }

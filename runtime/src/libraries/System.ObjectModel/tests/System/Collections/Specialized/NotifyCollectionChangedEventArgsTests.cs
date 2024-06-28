@@ -117,13 +117,13 @@ namespace System.Collections.Specialized.Tests
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Add,
-                new object[] { "item" }
+                new object[] { "item" },
             };
             yield return new object[] { NotifyCollectionChangedAction.Remove, new object[0] };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Remove,
-                new object[] { "item" }
+                new object[] { "item" },
             };
             yield return new object[] { NotifyCollectionChangedAction.Reset, null };
         }
@@ -156,38 +156,38 @@ namespace System.Collections.Specialized.Tests
             {
                 NotifyCollectionChangedAction.Add,
                 new object[] { "item" },
-                10
+                10,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Add,
                 new object[] { "item" },
-                0
+                0,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Add,
                 new object[] { "item" },
-                -1
+                -1,
             };
             yield return new object[] { NotifyCollectionChangedAction.Remove, new object[0], 10 };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Remove,
                 new object[] { "item" },
-                10
+                10,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Remove,
                 new object[] { "item" },
-                0
+                0,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Remove,
                 new object[] { "item" },
-                -1
+                -1,
             };
             yield return new object[] { NotifyCollectionChangedAction.Reset, null, -1 };
         }
@@ -414,25 +414,25 @@ namespace System.Collections.Specialized.Tests
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
-                new object[] { "oldItem" }
+                new object[] { "oldItem" },
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
-                new object[0]
+                new object[0],
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[0],
-                new object[] { "oldItem " }
+                new object[] { "oldItem " },
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[0],
-                new object[0]
+                new object[0],
             };
         }
 
@@ -459,49 +459,49 @@ namespace System.Collections.Specialized.Tests
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
                 new object[] { "oldItem" },
-                10
+                10,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
                 new object[] { "oldItem" },
-                0
+                0,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
                 new object[] { "oldItem" },
-                -1
+                -1,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
                 new object[] { "oldItem" },
-                -2
+                -2,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[] { "newItem" },
                 new object[0],
-                1
+                1,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[0],
                 new object[] { "oldItem " },
-                1
+                1,
             };
             yield return new object[]
             {
                 NotifyCollectionChangedAction.Replace,
                 new object[0],
                 new object[0],
-                1
+                1,
             };
         }
 

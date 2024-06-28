@@ -486,7 +486,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
             {
                 (decimal?)1m,
                 (decimal?)2m,
-                (decimal?)3m
+                (decimal?)3m,
             };
             // Unboxing from System.ValueType
             foreach (System.ValueType y in (dynamic)xv1)
@@ -521,14 +521,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.statements.freach.freac
     {
         Red,
         Blue,
-        Green
+        Green,
     }
 
     public enum Cars
     {
         Toyota,
         Lexus,
-        BMW
+        BMW,
     }
 
     public class Test

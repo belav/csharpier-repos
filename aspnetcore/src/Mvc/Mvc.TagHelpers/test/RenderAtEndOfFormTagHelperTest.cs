@@ -25,7 +25,7 @@ public class RenderAtEndOfFormTagHelperTest
                             "hidden",
                             "false",
                             TagRenderMode.SelfClosing
-                        )
+                        ),
                     },
                     @"<input name=""SomeName"" type=""hidden"" value=""false"" />"
                 },
@@ -45,11 +45,11 @@ public class RenderAtEndOfFormTagHelperTest
                             "hidden",
                             "false",
                             TagRenderMode.SelfClosing
-                        )
+                        ),
                     },
                     @"<input name=""SomeName"" type=""hidden"" value=""false"" />"
                         + @"<input name=""SomeOtherName"" type=""hidden"" value=""false"" />"
-                }
+                },
             };
         }
     }

@@ -394,7 +394,7 @@ namespace Microsoft.CodeAnalysis
             OK,
             NoDigits,
             Underflow,
-            Overflow
+            Overflow,
         }
 
         /// <summary>

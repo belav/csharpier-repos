@@ -83,7 +83,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// Zoom reset button.
         /// </summary>
-        ZoomReset
+        ZoomReset,
     }
 
     /// <summary>
@@ -110,7 +110,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// All buttons are shown.
         /// </summary>
-        All = SmallScroll | ResetZoom
+        All = SmallScroll | ResetZoom,
     }
 
     #endregion
@@ -2152,7 +2152,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// Axis containing the scrollbar of the event.
         /// </summary>
-        [SRDescription("DescriptionAttributeAxis"),]
+        [SRDescription("DescriptionAttributeAxis")]
         public Axis Axis
         {
             get { return _axis; }
@@ -2161,7 +2161,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// ChartArea containing the scrollbar of the event.
         /// </summary>
-        [SRDescription("DescriptionAttributeChartArea"),]
+        [SRDescription("DescriptionAttributeChartArea")]
         public ChartArea ChartArea
         {
             get { return _axis.ChartArea; }
@@ -2170,7 +2170,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// Button type of the scrollbar button clicked.
         /// </summary>
-        [SRDescription("DescriptionAttributeScrollBarEventArgs_ButtonType"),]
+        [SRDescription("DescriptionAttributeScrollBarEventArgs_ButtonType")]
         public ScrollBarButtonType ButtonType
         {
             get { return _buttonType; }
@@ -2179,7 +2179,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// Indicates if the event is handled by the user and no further processing is required.
         /// </summary>
-        [SRDescription("DescriptionAttributeScrollBarEventArgs_Handled"),]
+        [SRDescription("DescriptionAttributeScrollBarEventArgs_Handled")]
         public bool IsHandled
         {
             get { return _isHandled; }
@@ -2189,7 +2189,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// X position of mouse cursor.
         /// </summary>
-        [SRDescription("DescriptionAttributeScrollBarEventArgs_MousePositionX"),]
+        [SRDescription("DescriptionAttributeScrollBarEventArgs_MousePositionX")]
         public int MousePositionX
         {
             get { return _mousePositionX; }
@@ -2198,7 +2198,7 @@ namespace System.Windows.Forms.DataVisualization.Charting
         /// <summary>
         /// Y position of mouse cursor.
         /// </summary>
-        [SRDescription("DescriptionAttributeScrollBarEventArgs_MousePositionY"),]
+        [SRDescription("DescriptionAttributeScrollBarEventArgs_MousePositionY")]
         public int MousePositionY
         {
             get { return _mousePositionY; }

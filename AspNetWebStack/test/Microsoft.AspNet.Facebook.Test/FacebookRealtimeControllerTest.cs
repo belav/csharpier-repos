@@ -46,7 +46,7 @@ namespace Microsoft.AspNet.Facebook.Test
             {
                 Challenge = challenge,
                 Mode = "subscribe",
-                Verify_Token = verifyToken
+                Verify_Token = verifyToken,
             };
             Assert.Equal(
                 challenge,
@@ -74,7 +74,7 @@ namespace Microsoft.AspNet.Facebook.Test
             {
                 Challenge = challenge,
                 Mode = "subscribe",
-                Verify_Token = "bar"
+                Verify_Token = "bar",
             };
             Assert.Equal(
                 expectedStatusCode,
@@ -94,7 +94,7 @@ namespace Microsoft.AspNet.Facebook.Test
             var userRealTimeController = new UserRealtimeCallbackController(appSecret, null);
             userRealTimeController.Request = new HttpRequestMessage
             {
-                Content = new StringContent(contentString, Encoding.UTF8, "text/json")
+                Content = new StringContent(contentString, Encoding.UTF8, "text/json"),
             };
             var request = userRealTimeController.Request;
             request.Headers.Add("X-Hub-Signature", headerValue);
@@ -115,7 +115,7 @@ namespace Microsoft.AspNet.Facebook.Test
             var userRealTimeController = new UserRealtimeCallbackController(AppSecret, null);
             userRealTimeController.Request = new HttpRequestMessage
             {
-                Content = new StringContent(contentString, Encoding.UTF8, "text/json")
+                Content = new StringContent(contentString, Encoding.UTF8, "text/json"),
             };
             var request = userRealTimeController.Request;
             if (headerValue != null)

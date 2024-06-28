@@ -19,7 +19,7 @@ public class SqlServerDateOnlyMemberTranslator : IMemberTranslator
             { nameof(DateOnly.Year), "year" },
             { nameof(DateOnly.Month), "month" },
             { nameof(DateOnly.DayOfYear), "dayofyear" },
-            { nameof(DateOnly.Day), "day" }
+            { nameof(DateOnly.Day), "day" },
         };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;

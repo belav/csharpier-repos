@@ -1223,10 +1223,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///     Gets and sets the TreeView's selected node.
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TreeNode SelectedNode
         {
             get { return _selectedNode; }
@@ -4508,7 +4505,7 @@ namespace System.Web.UI.WebControls
                 27,
                 28,
                 29,
-                30
+                30,
             };
 
             public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)

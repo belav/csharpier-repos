@@ -17,10 +17,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             1,
-                            "<?xml version='1.0'?>\t<?PI?> <E><sub1/></E>\n <!--comx--> "
+                            "<?xml version='1.0'?>\t<?PI?> <E><sub1/></E>\n <!--comx--> ",
                         },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
         }

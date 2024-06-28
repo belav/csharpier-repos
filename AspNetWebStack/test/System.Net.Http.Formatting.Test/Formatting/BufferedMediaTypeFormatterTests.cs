@@ -25,7 +25,7 @@ namespace System.Net.Http.Formatting
             {
                 return new List<MediaTypeHeaderValue>
                 {
-                    new MediaTypeHeaderValue(ExpectedSupportedMediaType)
+                    new MediaTypeHeaderValue(ExpectedSupportedMediaType),
                 };
             }
         }
@@ -52,7 +52,7 @@ namespace System.Net.Http.Formatting
         {
             MockBufferedMediaTypeFormatter formatter = new MockBufferedMediaTypeFormatter()
             {
-                BufferSize = 512
+                BufferSize = 512,
             };
 
             MockBufferedMediaTypeFormatter derivedFormatter = new MockBufferedMediaTypeFormatter(

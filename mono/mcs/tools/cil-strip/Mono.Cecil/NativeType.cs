@@ -69,6 +69,6 @@ namespace Mono.Cecil
         LPSTRUCT = 0x2b,
         CUSTOMMARSHALER = 0x2c,
         ERROR = 0x2d,
-        MAX = 0x50
+        MAX = 0x50,
     }
 }

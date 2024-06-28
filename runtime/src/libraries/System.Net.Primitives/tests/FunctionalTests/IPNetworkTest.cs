@@ -313,7 +313,7 @@ namespace System.Net.Primitives.Functional.Tests
         }
 
         public static IEnumerable<object[]> CidrInputs() =>
-            new[] { "127.0.0.0/24", "172.16.0.0/12", "10.0.0.0/16", "192.168.2.0/24", }.Select(s =>
+            new[] { "127.0.0.0/24", "172.16.0.0/12", "10.0.0.0/16", "192.168.2.0/24" }.Select(s =>
                 new object[] { s }
             );
 

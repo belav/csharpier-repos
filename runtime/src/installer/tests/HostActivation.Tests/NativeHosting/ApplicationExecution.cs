@@ -46,7 +46,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 ApplicationExecutionArg,
                 sharedState.HostFxrPath,
                 project.AppDll,
-                "throw_exception"
+                "throw_exception",
             };
 
             sharedState

@@ -13,7 +13,7 @@ internal sealed class DecoderStreamReader
         Ready,
         HeaderAckowledgement,
         StreamCancellation,
-        InsertCountIncrement
+        InsertCountIncrement,
     }
 
     //0   1   2   3   4   5   6   7

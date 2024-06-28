@@ -33,6 +33,6 @@ namespace System.IO.Packaging
         CertificateRequired,
         InvalidCertificate,
         ReferenceNotFound,
-        NotSigned
+        NotSigned,
     }
 }

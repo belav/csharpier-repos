@@ -108,7 +108,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(
@@ -136,7 +136,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             string source = """
@@ -303,7 +303,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(
@@ -402,7 +402,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
@@ -443,7 +443,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(
@@ -490,7 +490,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(
@@ -552,7 +552,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
             Compilation compilation = CompilationHelper.CreateCompilation(
                 source,
@@ -720,7 +720,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(

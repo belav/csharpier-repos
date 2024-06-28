@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             {
                 SyntaxKind.ExternKeyword,
                 SyntaxKind.AsyncKeyword,
-                SyntaxKind.UnsafeKeyword
+                SyntaxKind.UnsafeKeyword,
             };
 
         public StaticKeywordRecommender()

@@ -40,7 +40,7 @@ namespace System.Web.Razor.Parser
             "namespace",
             "class",
             "layout",
-            "sessionstate"
+            "sessionstate",
         };
 
         private Dictionary<VBKeyword, Func<bool>> _keywordHandlers =
@@ -226,7 +226,7 @@ namespace System.Web.Razor.Parser
                 acceptTrailingDot: DirectParentIsCode
             )
             {
-                AcceptedCharacters = AcceptedCharacters.NonWhiteSpace
+                AcceptedCharacters = AcceptedCharacters.NonWhiteSpace,
             };
         }
 

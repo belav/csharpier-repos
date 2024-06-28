@@ -93,7 +93,7 @@ internal sealed class JwtIssuer
             IssuerSigningKey = _signingKey,
             ValidateAudience = false,
             ValidateIssuer = false,
-            ValidateIssuerSigningKey = true
+            ValidateIssuerSigningKey = true,
         };
         if (
             handler

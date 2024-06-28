@@ -485,7 +485,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -528,7 +528,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -571,7 +571,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -614,7 +614,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -659,7 +659,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -704,7 +704,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeMethodSynchronous
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { expected }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }

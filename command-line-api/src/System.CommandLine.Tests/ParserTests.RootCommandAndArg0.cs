@@ -17,7 +17,7 @@ public partial class ParserTests
         {
             var command = new CliCommand("outer")
             {
-                new CliCommand("inner") { new CliOption<string>("-x") }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result1 = command.Parse(Split("inner -x hello"));
@@ -31,7 +31,7 @@ public partial class ParserTests
         {
             var command = new CliRootCommand
             {
-                new CliCommand("inner") { new CliOption<string>("-x") }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             command.Parse(Split("inner -x hello")).Errors.Should().BeEmpty();
@@ -54,7 +54,7 @@ public partial class ParserTests
         {
             var command = new CliCommand("outer")
             {
-                new CliCommand("inner") { new CliOption<string>("-x") }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result1 = command.Parse("inner -x hello");
@@ -68,7 +68,7 @@ public partial class ParserTests
         {
             var command = new CliRootCommand
             {
-                new CliCommand("inner") { new CliOption<string>("-x") }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result2 = command.Parse($"\"{CliRootCommand.ExecutablePath}\" inner -x hello");
@@ -83,7 +83,7 @@ public partial class ParserTests
         {
             var rootCommand = new CliCommand("outer")
             {
-                new CliCommand("inner") { new CliOption<string>("-x") }
+                new CliCommand("inner") { new CliOption<string>("-x") },
             };
 
             var result1 = rootCommand.Parse("inner -x hello");

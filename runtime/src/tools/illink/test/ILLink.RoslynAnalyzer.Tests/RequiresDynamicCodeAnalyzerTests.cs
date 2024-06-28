@@ -48,7 +48,7 @@ namespace System.Diagnostics.CodeAnalysis
             {
                 TestCode = source + dynamicCodeAttribute,
                 FixedCode = fixedSource + dynamicCodeAttribute,
-                ReferenceAssemblies = TestCaseUtils.NetCoreAppReferencessemblies
+                ReferenceAssemblies = TestCaseUtils.NetCoreAppReferencessemblies,
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
             test.TestState.AnalyzerConfigFiles.Add(
@@ -157,7 +157,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(23, 25, 23, 31)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: new[]
                 {
@@ -197,7 +197,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(11, 16, 11, 20)
-                    .WithArguments("C.M1()", " message.", "")
+                    .WithArguments("C.M1()", " message.", ""),
             };
             // No fix available inside a lambda, requires manual code change since attribute cannot
             // be applied
@@ -250,7 +250,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(11, 22, 11, 26)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: Array.Empty<DiagnosticResult>(),
                 // The default iterations for the codefix is the number of diagnostics (1 in this case)
@@ -298,7 +298,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresDynamicCode)
                         .WithSpan(9, 16, 9, 20)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: new[]
                 {
@@ -309,7 +309,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                         .WithArguments(
                             "message",
                             "System.Diagnostics.CodeAnalysis.RequiresDynamicCodeAttribute.RequiresDynamicCodeAttribute(string)"
-                        )
+                        ),
                 }
             );
         }
@@ -335,7 +335,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(9, 12, 9, 16)
-                    .WithArguments("C.M1()", " message.", "")
+                    .WithArguments("C.M1()", " message.", ""),
             };
             // Can't apply RDC on properties at the moment
             return VerifyRequiresDynamicCodeCodeFix(src, src, diag, diag);
@@ -392,7 +392,7 @@ build_property.{MSBuildPropertyOptionNames.EnableAotAnalyzer} = true"
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresDynamicCode)
                     .WithSpan(13, 17, 13, 21)
-                    .WithArguments("C.M1()", " message.", "")
+                    .WithArguments("C.M1()", " message.", ""),
             };
             return VerifyRequiresDynamicCodeCodeFix(
                 src,

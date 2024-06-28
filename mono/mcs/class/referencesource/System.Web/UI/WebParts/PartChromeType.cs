@@ -35,6 +35,6 @@ namespace System.Web.UI.WebControls.WebParts
         /// <devdoc>
         /// Render the border only.
         /// </devdoc>
-        BorderOnly = 4
+        BorderOnly = 4,
     }
 }

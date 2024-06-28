@@ -26,7 +26,7 @@ public class SqlServerPolygonMemberTranslator : IMemberTranslator
         new Dictionary<MemberInfo, string>
         {
             { ExteriorRing, "STExteriorRing" },
-            { NumInteriorRings, "STNumInteriorRing" }
+            { NumInteriorRings, "STNumInteriorRing" },
         };
 
     private readonly IRelationalTypeMappingSource _typeMappingSource;

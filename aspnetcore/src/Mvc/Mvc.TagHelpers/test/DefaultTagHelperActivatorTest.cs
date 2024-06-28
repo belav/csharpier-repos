@@ -66,7 +66,7 @@ public class DefaultTagHelperActivatorTest
 
         var viewContext = new ViewContext
         {
-            HttpContext = new DefaultHttpContext { RequestServices = services, }
+            HttpContext = new DefaultHttpContext { RequestServices = services },
         };
 
         return viewContext;

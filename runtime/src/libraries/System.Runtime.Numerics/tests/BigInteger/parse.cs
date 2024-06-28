@@ -1192,7 +1192,7 @@ namespace System.Numerics.Tests
                 "c",
                 "d",
                 "e",
-                "f"
+                "f",
             };
             int size = random.Next(min, max);
             bool hasHexCharacter = false;
@@ -1251,7 +1251,7 @@ namespace System.Numerics.Tests
                 'C',
                 'D',
                 'E',
-                'F'
+                'F',
             };
             char result = '5';
             while (result == '5')

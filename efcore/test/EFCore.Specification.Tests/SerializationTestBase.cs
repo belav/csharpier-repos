@@ -137,7 +137,7 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
         {
             ReferenceHandler = ReferenceHandler.Preserve,
             WriteIndented = writeIndented,
-            MaxDepth = maxDepth
+            MaxDepth = maxDepth,
         };
 
         return JsonSerializer.Deserialize<T>(
@@ -161,7 +161,7 @@ public abstract class SerializationTestBase<TFixture> : IClassFixture<TFixture>
                 ? ReferenceLoopHandling.Ignore
                 : ReferenceLoopHandling.Error,
             EqualityComparer = ReferenceEqualityComparer.Instance,
-            Formatting = writeIndented ? Formatting.Indented : Formatting.None
+            Formatting = writeIndented ? Formatting.Indented : Formatting.None,
         };
 
         var serializeObject = JsonConvert.SerializeObject(collection, options);

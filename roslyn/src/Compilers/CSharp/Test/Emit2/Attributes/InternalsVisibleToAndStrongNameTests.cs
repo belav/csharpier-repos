@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     return new[]
                     {
                         new object[] { TestOptions.Regular },
-                        new object[] { TestOptions.RegularWithLegacyStrongName }
+                        new object[] { TestOptions.RegularWithLegacyStrongName },
                     };
                 }
 
@@ -336,7 +336,7 @@ public class Test
             )
             {
                 GetStrongNameInterfaceFunc = () =>
-                    throw new DllNotFoundException("aaa.dll not found.")
+                    throw new DllNotFoundException("aaa.dll not found."),
             };
             var options = TestOptions.ReleaseDll.WithStrongNameProvider(provider);
 
@@ -1195,7 +1195,7 @@ public class C {}",
 }",
                 references: new[]
                 {
-                    AssemblyMetadata.CreateFromStream(otherStream, leaveOpen: true).GetReference()
+                    AssemblyMetadata.CreateFromStream(otherStream, leaveOpen: true).GetReference(),
                 },
                 assemblyName: "WantsIVTAccessButCantHave",
                 options: TestOptions.SigningReleaseDll,
@@ -1603,7 +1603,7 @@ public class A
                     ErrorCode.ERR_FriendRefSigningMismatch,
                     arguments: new object[]
                     {
-                        "Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+                        "Paul, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                     }
                 )
             );
@@ -3186,7 +3186,7 @@ public class C
                         new[]
                         {
                             other.References.ElementAt(0),
-                            new CSharpCompilationReference(unsigned)
+                            new CSharpCompilationReference(unsigned),
                         }
                     )
                 )
@@ -3197,7 +3197,7 @@ public class C
                         new[]
                         {
                             other.References.ElementAt(0),
-                            MetadataReference.CreateFromStream(unsigned.EmitToStream())
+                            MetadataReference.CreateFromStream(unsigned.EmitToStream()),
                         }
                     )
                 )
@@ -3240,16 +3240,16 @@ public class C
                     new[]
                     {
                         other.References.ElementAt(0),
-                        new CSharpCompilationReference(unsigned)
+                        new CSharpCompilationReference(unsigned),
                     }
                 ),
                 other.WithReferences(
                     new[]
                     {
                         other.References.ElementAt(0),
-                        MetadataReference.CreateFromStream(unsigned.EmitToStream())
+                        MetadataReference.CreateFromStream(unsigned.EmitToStream()),
                     }
-                )
+                ),
             };
 
             foreach (var comp in comps)
@@ -3793,7 +3793,7 @@ class B
                 SignBuilderFunc = delegate
                 {
                     throw null;
-                }
+                },
             };
 
             var options = TestOptions
@@ -3953,7 +3953,7 @@ class TestAttribute : System.Attribute
                         "Issue57742_01_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(2, 40)
+                    .WithLocation(2, 40),
             };
 
             comp.VerifyDiagnostics(expected);
@@ -4003,7 +4003,7 @@ using System.Runtime.CompilerServices;
                         "Issue57742_02_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(4, 45)
+                    .WithLocation(4, 45),
             };
 
             comp.VerifyDiagnostics(expected);
@@ -4079,7 +4079,7 @@ class TestAttribute : System.Attribute
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(5, 42)
+                    .WithLocation(5, 42),
             };
 
             comp.VerifyDiagnostics(expected);
@@ -4138,7 +4138,7 @@ class TestAttribute : System.Attribute
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(5, 42)
+                    .WithLocation(5, 42),
             };
 
             comp2.VerifyDiagnostics(expected2);
@@ -4182,7 +4182,7 @@ using System.Reflection;
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(4, 42)
+                    .WithLocation(4, 42),
             };
 
             comp3.VerifyDiagnostics(expected3);
@@ -4226,7 +4226,7 @@ using System.Reflection;
                         "Issue57742_03_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(4, 42)
+                    .WithLocation(4, 42),
             };
 
             comp4.VerifyDiagnostics(expected4);
@@ -4298,7 +4298,7 @@ using System.Runtime.CompilerServices;
                         "Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             comp.VerifyDiagnostics(expected);
@@ -4353,7 +4353,7 @@ using System.Runtime.CompilerServices;
                         "Issue57742_04_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             comp2.VerifyDiagnostics(expected2);
@@ -4398,7 +4398,7 @@ internal class C {}
                         "Issue57742_05_Lib, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         ""
                     )
-                    .WithLocation(2, 67)
+                    .WithLocation(2, 67),
             };
 
             comp.VerifyDiagnostics(expected);

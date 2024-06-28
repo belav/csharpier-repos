@@ -48,7 +48,7 @@ namespace System.ServiceModel.Activities.Configuration
             return new WorkflowIdleBehavior()
             {
                 TimeToPersist = this.TimeToPersist,
-                TimeToUnload = this.TimeToUnload
+                TimeToUnload = this.TimeToUnload,
             };
         }
 

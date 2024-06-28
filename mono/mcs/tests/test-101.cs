@@ -26,11 +26,11 @@ namespace Test
         }
     }
 
-    [Flags,]
+    [Flags]
     enum X
     {
         A,
-        B
+        B,
     }
 
     [My("testclass")]

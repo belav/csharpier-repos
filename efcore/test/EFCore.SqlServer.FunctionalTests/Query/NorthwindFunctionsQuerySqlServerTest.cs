@@ -2899,7 +2899,7 @@ WHERE [o].[OrderDate] IS NOT NULL AND CAST([o].[OrderDate] AS date) = '1996-09-1
                 ),
                 PopulationStandardDeviation = EF.Functions.StandardDeviationPopulation(
                     g.Select(od => od.UnitPrice)
-                )
+                ),
             });
 
         var results = async ? await query.ToListAsync() : query.ToList();
@@ -2931,7 +2931,7 @@ GROUP BY [o].[ProductID]
                 SampleStandardDeviation = EF.Functions.VarianceSample(g.Select(od => od.UnitPrice)),
                 PopulationStandardDeviation = EF.Functions.VariancePopulation(
                     g.Select(od => od.UnitPrice)
-                )
+                ),
             });
 
         var results = async ? await query.ToListAsync() : query.ToList();

@@ -144,11 +144,9 @@ public class SharedTableEntryMap<TValue>
                 return 1;
             }
 
-            return !_table.GetRowInternalForeignKeys(x.EntityType).Any()
-                ? -1
-                : !_table.GetRowInternalForeignKeys(y.EntityType).Any()
-                    ? 1
-                    : StringComparer.Ordinal.Compare(x.EntityType.Name, y.EntityType.Name);
+            return !_table.GetRowInternalForeignKeys(x.EntityType).Any() ? -1
+                : !_table.GetRowInternalForeignKeys(y.EntityType).Any() ? 1
+                : StringComparer.Ordinal.Compare(x.EntityType.Name, y.EntityType.Name);
         }
     }
 }

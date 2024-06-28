@@ -69,7 +69,7 @@ namespace System.Data
                             {
                                 constr.ConstraintName,
                                 constr.ColumnNames,
-                                constr.IsPrimaryKey
+                                constr.IsPrimaryKey,
                             }
                         );
                 }
@@ -86,7 +86,7 @@ namespace System.Data
                                 typeof(string[]),
                                 typeof(AcceptRejectRule),
                                 typeof(Rule),
-                                typeof(Rule)
+                                typeof(Rule),
                             }
                         );
                     if (ctor != null)
@@ -100,7 +100,7 @@ namespace System.Data
                                 constr.ChildColumnNames,
                                 constr.AcceptRejectRule,
                                 constr.DeleteRule,
-                                constr.UpdateRule
+                                constr.UpdateRule,
                             }
                         );
                 }

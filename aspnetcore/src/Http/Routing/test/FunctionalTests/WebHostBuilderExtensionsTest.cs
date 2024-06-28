@@ -43,7 +43,7 @@ public class WebHostBuilderExtensionsTest
                         ),
                     new HttpRequestMessage(HttpMethod.Post, "greeting/James")
                     {
-                        Content = new StringContent("Biography")
+                        Content = new StringContent("Biography"),
                     },
                     "James Biography"
                 },
@@ -60,7 +60,7 @@ public class WebHostBuilderExtensionsTest
                         ),
                     new HttpRequestMessage(HttpMethod.Put, "greeting/James")
                     {
-                        Content = new StringContent("Biography")
+                        Content = new StringContent("Biography"),
                     },
                     "James Biography"
                 },
@@ -88,7 +88,7 @@ public class WebHostBuilderExtensionsTest
                         ),
                     new HttpRequestMessage(HttpMethod.Post, "greeting/James")
                     {
-                        Content = new StringContent("Biography")
+                        Content = new StringContent("Biography"),
                     },
                     "James Biography"
                 },

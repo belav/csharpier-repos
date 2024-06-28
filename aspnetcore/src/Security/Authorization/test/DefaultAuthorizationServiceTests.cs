@@ -105,7 +105,7 @@ public class DefaultAuthorizationServiceTests
                 new Claim[]
                 {
                     new Claim("Permission", "CanViewPage"),
-                    new Claim("Permission", "CanViewAnything")
+                    new Claim("Permission", "CanViewAnything"),
                 },
                 "Basic"
             )
@@ -242,7 +242,7 @@ public class DefaultAuthorizationServiceTests
                 )
         );
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim("SomethingElse", "CanViewPage"), }, "Basic")
+            new ClaimsIdentity(new Claim[] { new Claim("SomethingElse", "CanViewPage") }, "Basic")
         );
 
         // Act
@@ -266,7 +266,7 @@ public class DefaultAuthorizationServiceTests
                 )
         );
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim("SomethingElse", "CanViewPage"), }, "Basic")
+            new ClaimsIdentity(new Claim[] { new Claim("SomethingElse", "CanViewPage") }, "Basic")
         );
 
         // Act
@@ -286,7 +286,7 @@ public class DefaultAuthorizationServiceTests
                 .AddPolicy("Basic", policy => policy.RequireClaim("Permission", "CanViewPage"))
         );
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewComment"), }, "Basic")
+            new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewComment") }, "Basic")
         );
 
         // Act
@@ -359,7 +359,7 @@ public class DefaultAuthorizationServiceTests
                 .AddPolicy("Basic", policy => policy.RequireClaim("Permission", "CanViewPage"))
         );
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewPage"), }, "Basic")
+            new ClaimsIdentity(new Claim[] { new Claim("Permission", "CanViewPage") }, "Basic")
         );
 
         // Act
@@ -401,7 +401,7 @@ public class DefaultAuthorizationServiceTests
                 new Claim[]
                 {
                     new Claim(ClaimTypes.Role, "User"),
-                    new Claim(ClaimTypes.Role, "Administrator")
+                    new Claim(ClaimTypes.Role, "Administrator"),
                 },
                 "Basic"
             )
@@ -421,7 +421,7 @@ public class DefaultAuthorizationServiceTests
         var policy = new AuthorizationPolicyBuilder().RequireClaim(ClaimTypes.Role);
         var authorizationService = BuildAuthorizationService();
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Role, "none"), }, "Basic")
+            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Role, "none") }, "Basic")
         );
 
         // Act
@@ -489,7 +489,7 @@ public class DefaultAuthorizationServiceTests
         var policy = new AuthorizationPolicyBuilder().RequireClaim("Permission", "CanViewPage");
         var authorizationService = BuildAuthorizationService();
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Role, "Nope"), }, "AuthType")
+            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Role, "Nope") }, "AuthType")
         );
 
         // Act
@@ -538,7 +538,7 @@ public class DefaultAuthorizationServiceTests
                 .AddPolicy("Hao", policy => policy.RequireUserName("Hao"))
         );
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Tek"), }, "AuthType")
+            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Tek") }, "AuthType")
         );
 
         // Act
@@ -560,7 +560,7 @@ public class DefaultAuthorizationServiceTests
             });
         });
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Hao"), }, "AuthType")
+            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Hao") }, "AuthType")
         );
 
         // Act
@@ -627,7 +627,7 @@ public class DefaultAuthorizationServiceTests
         });
         var user = new ClaimsPrincipal(new ClaimsIdentity());
         user.AddIdentity(
-            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Name"), }, "AuthType")
+            new ClaimsIdentity(new Claim[] { new Claim(ClaimTypes.Name, "Name") }, "AuthType")
         );
 
         // Act
@@ -847,7 +847,7 @@ public class DefaultAuthorizationServiceTests
             });
         });
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim("Base", "Value"), }, "AuthType")
+            new ClaimsIdentity(new Claim[] { new Claim("Base", "Value") }, "AuthType")
         );
 
         // Act
@@ -863,7 +863,7 @@ public class DefaultAuthorizationServiceTests
     {
         public static OperationAuthorizationRequirement Edit = new OperationAuthorizationRequirement
         {
-            Name = "Edit"
+            Name = "Edit",
         };
         public static OperationAuthorizationRequirement Create =
             new OperationAuthorizationRequirement { Name = "Create" };
@@ -926,7 +926,7 @@ public class DefaultAuthorizationServiceTests
             services.AddTransient<IAuthorizationHandler, SuperUserHandler>();
         });
         var user = new ClaimsPrincipal(
-            new ClaimsIdentity(new Claim[] { new Claim("SuperUser", "yes"), }, "AuthType")
+            new ClaimsIdentity(new Claim[] { new Claim("SuperUser", "yes") }, "AuthType")
         );
 
         // Act

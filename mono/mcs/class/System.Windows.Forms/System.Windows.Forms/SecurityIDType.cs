@@ -38,6 +38,6 @@ namespace System.Windows.Forms
         DeletedAccount = 6,
         Invalid = 7,
         Unknown = 8,
-        Computer = 9
+        Computer = 9,
     }
 }

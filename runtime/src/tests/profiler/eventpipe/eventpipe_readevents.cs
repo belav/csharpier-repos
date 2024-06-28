@@ -77,7 +77,7 @@ namespace EventPipeTests
 
             List<KeyValuePair<string, string>> myList = new List<KeyValuePair<string, string>>()
             {
-                KeyValuePair.Create("samplekey", "samplevalue")
+                KeyValuePair.Create("samplekey", "samplevalue"),
             };
             myEventSource.KeyValueEvent("Source", "Event", myList);
 

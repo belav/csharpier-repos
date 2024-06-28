@@ -152,73 +152,73 @@ namespace BasicApi.Models
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id--}_1.png"
+                    Url = $"http://example.com/pets/{id--}_1.png",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Url = $"http://example.com/pets/{id}_1.png"
+                    Url = $"http://example.com/pets/{id}_1.png",
                 },
             };
 
@@ -229,73 +229,73 @@ namespace BasicApi.Models
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id--,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
                 new
                 {
                     Id = id,
                     PetId = id,
-                    Name = "Tag1"
+                    Name = "Tag1",
                 },
             };
 

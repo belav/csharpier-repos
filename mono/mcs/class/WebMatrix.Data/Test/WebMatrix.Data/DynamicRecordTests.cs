@@ -44,7 +44,7 @@ namespace MonoTests.WebMatrix.Data
             {
                 { "foo", 1 },
                 { "bar", 4.1f },
-                { "foobar", "foobar" }
+                { "foobar", "foobar" },
             };
             record = new DynamicRecord(fields);
         }

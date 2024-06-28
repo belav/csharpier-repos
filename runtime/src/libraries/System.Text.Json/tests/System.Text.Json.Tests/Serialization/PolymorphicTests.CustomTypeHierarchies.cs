@@ -368,7 +368,7 @@ namespace System.Text.Json.Serialization.Tests
                 TypeInfoResolver = new CustomPolymorphismResolver<PolymorphicClass>
                 {
                     UnknownDerivedTypeHandling = jsonUnknownDerivedTypeHandling,
-                }.WithDerivedType<PolymorphicClass.DerivedAbstractClass>()
+                }.WithDerivedType<PolymorphicClass.DerivedAbstractClass>(),
             };
 
             PolymorphicClass value = new PolymorphicClass.DerivedAbstractClass.DerivedClass();
@@ -392,15 +392,15 @@ namespace System.Text.Json.Serialization.Tests
                             {
                                 jsonTypeInfo.PolymorphismOptions = null;
                             }
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             };
 
             PolymorphicClass value = new PolymorphicClass.DerivedAbstractClass.DerivedClass
             {
                 Number = 42,
-                Boolean = true
+                Boolean = true,
             };
             string json = await Serializer.SerializeWrapper(value, options);
             JsonTestHelper.AssertJsonEqual("""{"Number":42}""", json);
@@ -795,7 +795,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -807,7 +807,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator
                     {
                         Number = 42,
-                        String = "str"
+                        String = "str",
                     }
                 );
 
@@ -816,14 +816,14 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""$type"" : ""derivedClassOfDerivedClass1"", ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
                     ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     }
                 );
 
@@ -844,7 +844,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
                     {
                         Number = 42,
-                        Boolean = true
+                        Boolean = true,
                     }
                 );
 
@@ -852,13 +852,13 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedClass_IntegerTypeDiscriminator
                     {
                         Number = 42,
-                        String = "str"
+                        String = "str",
                     },
                     ExpectedJson: @"{ ""$type"" : -1, ""Number"" : 42, ""String"" : ""str"" }",
                     ExpectedRoundtripValue: new DerivedClass_IntegerTypeDiscriminator
                     {
                         Number = 42,
-                        String = "str"
+                        String = "str",
                     }
                 );
 
@@ -883,12 +883,12 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedCollection_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""$type"" : ""derivedCollectionOfDerivedCollection"", ""$values"" : [42,42,42] }",
                     ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator.DerivedClass
                     {
-                        Number = 42
+                        Number = 42,
                     }
                 );
 
@@ -908,12 +908,12 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedDictionary_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""$type"" : ""derivedDictionaryOfDerivedDictionary"", ""dictionaryKey"" : 42 }",
                     ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass
                     {
-                        Number = 42
+                        Number = 42,
                     }
                 );
 
@@ -964,7 +964,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         TypeDiscriminatorPropertyName = "_case",
                         UnknownDerivedTypeHandling =
-                            JsonUnknownDerivedTypeHandling.FallBackToBaseType
+                            JsonUnknownDerivedTypeHandling.FallBackToBaseType,
                     }
                         .WithDerivedType<DerivedClass1_NoTypeDiscriminator>()
                         .WithDerivedType<DerivedClass1_TypeDiscriminator>("derivedClass1")
@@ -982,7 +982,7 @@ namespace System.Text.Json.Serialization.Tests
                         )
                         .WithDerivedType<DerivedClassWithCustomConverter_TypeDiscriminator>(
                             "derivedClassWithCustomConverter"
-                        )
+                        ),
                 };
 
             public static IEnumerable<TestData> GetSerializeTestData_CustomConfigWithBaseTypeFallback()
@@ -1004,7 +1004,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""Number"" : 42 }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1016,7 +1016,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator
                     {
                         Number = 42,
-                        String = "str"
+                        String = "str",
                     }
                 );
 
@@ -1025,14 +1025,14 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""_case"" : ""derivedClassOfDerivedClass1"", ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
                     ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     }
                 );
 
@@ -1046,7 +1046,7 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        Boolean = true
+                        Boolean = true,
                     },
                     ExpectedJson: @"{ ""Number"" : 42 }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1058,7 +1058,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
                     {
                         Number = 42,
-                        Boolean = true
+                        Boolean = true,
                     }
                 );
 
@@ -1067,7 +1067,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         Boolean = true,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""Number"" : 42 }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1089,7 +1089,7 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedCollection_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""Number"" : 42 }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1111,12 +1111,12 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedDictionary_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""_case"" : ""derivedDictionaryOfDerivedDictionary"", ""dictionaryKey"" : 42 }",
                     ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass
                     {
-                        Number = 42
+                        Number = 42,
                     }
                 );
 
@@ -1148,7 +1148,7 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedClassWithCustomConverter_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""Number"" : 42 }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1167,7 +1167,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         TypeDiscriminatorPropertyName = "_case",
                         UnknownDerivedTypeHandling =
-                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                     }
                         .WithDerivedType<DerivedClass1_NoTypeDiscriminator>()
                         .WithDerivedType<DerivedClass1_TypeDiscriminator>("derivedClass1")
@@ -1186,7 +1186,7 @@ namespace System.Text.Json.Serialization.Tests
                         )
                         .WithDerivedType<DerivedClassWithCustomConverter_TypeDiscriminator>(
                             "derivedClassWithCustomConverter"
-                        )
+                        ),
                 };
 
             public static IEnumerable<TestData> GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
@@ -1208,7 +1208,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1220,7 +1220,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator
                     {
                         Number = 42,
-                        String = "str"
+                        String = "str",
                     }
                 );
 
@@ -1229,14 +1229,14 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""_case"" : ""derivedClassOfDerivedClass1"", ""Number"" : 42, ""String"" : ""str"", ""ExtraProperty"" : ""extra"" }",
                     ExpectedRoundtripValue: new DerivedClass1_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
                         String = "str",
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     }
                 );
 
@@ -1250,7 +1250,7 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedClass2_NoTypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        Boolean = true
+                        Boolean = true,
                     },
                     ExpectedJson: @"{ ""Number"" : 42 }",
                     ExpectedRoundtripValue: new PolymorphicClass { Number = 42 }
@@ -1262,7 +1262,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
                     {
                         Number = 42,
-                        Boolean = true
+                        Boolean = true,
                     }
                 );
 
@@ -1271,13 +1271,13 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Number = 42,
                         Boolean = true,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""_case"" : ""derivedClass2"", ""Number"" : 42, ""Boolean"" : true }",
                     ExpectedRoundtripValue: new DerivedClass2_TypeDiscriminator
                     {
                         Number = 42,
-                        Boolean = true
+                        Boolean = true,
                     }
                 );
 
@@ -1303,7 +1303,7 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedCollection_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""_case"" : ""derivedCollection"", ""$values"" : [42,42,42] }",
                     ExpectedRoundtripValue: new DerivedCollection_TypeDiscriminator { Number = 42 }
@@ -1325,12 +1325,12 @@ namespace System.Text.Json.Serialization.Tests
                     Value: new DerivedDictionary_TypeDiscriminator.DerivedClass
                     {
                         Number = 42,
-                        ExtraProperty = "extra"
+                        ExtraProperty = "extra",
                     },
                     ExpectedJson: @"{ ""_case"" : ""derivedDictionaryOfDerivedDictionary"", ""dictionaryKey"" : 42 }",
                     ExpectedRoundtripValue: new DerivedDictionary_TypeDiscriminator.DerivedClass
                     {
-                        Number = 42
+                        Number = 42,
                     }
                 );
 
@@ -1507,10 +1507,10 @@ namespace System.Text.Json.Serialization.Tests
                         Info = "2",
                         List = new List<TestNode>
                         {
-                            new TestNodeList { Name = "testName4", Info = "1" }
-                        }
-                    }
-                }
+                            new TestNodeList { Name = "testName4", Info = "1" },
+                        },
+                    },
+                },
             };
 
             string json = await Serializer.SerializeWrapper(obj);
@@ -2118,7 +2118,7 @@ namespace System.Text.Json.Serialization.Tests
                         ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator
                         {
                             Number = 42,
-                            String = "str"
+                            String = "str",
                         }
                     );
 
@@ -2131,7 +2131,7 @@ namespace System.Text.Json.Serialization.Tests
                         Value: new DerivedStruct_NoTypeDiscriminator
                         {
                             Number = 42,
-                            String = "str"
+                            String = "str",
                         },
                         ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
                         ExpectedDeserializationException: typeof(NotSupportedException)
@@ -2143,7 +2143,7 @@ namespace System.Text.Json.Serialization.Tests
                         ExpectedRoundtripValue: new DerivedStruct_TypeDiscriminator
                         {
                             Number = 42,
-                            String = "str"
+                            String = "str",
                         }
                     );
                 }
@@ -2154,12 +2154,12 @@ namespace System.Text.Json.Serialization.Tests
                         TypeInfoResolver = new CustomPolymorphismResolver<PolymorphicInterface>
                         {
                             UnknownDerivedTypeHandling =
-                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                         }
                             .WithDerivedType<DerivedClass_TypeDiscriminator>("derivedClass")
                             .WithDerivedType<DerivedStruct_NoTypeDiscriminator>()
                             .WithDerivedType<DerivedInterface1>()
-                            .WithDerivedType<DerivedInterface2>()
+                            .WithDerivedType<DerivedInterface2>(),
                     };
 
                 public static IEnumerable<TestData> GetSerializeTestData_CustomConfigWithNearestAncestorFallback()
@@ -2182,7 +2182,7 @@ namespace System.Text.Json.Serialization.Tests
                         ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator
                         {
                             Number = 42,
-                            String = "str"
+                            String = "str",
                         }
                     );
 
@@ -2191,13 +2191,13 @@ namespace System.Text.Json.Serialization.Tests
                         {
                             Number = 42,
                             String = "str",
-                            ExtraProperty = "extra"
+                            ExtraProperty = "extra",
                         },
                         ExpectedJson: @"{ ""$type"" : ""derivedClass"", ""Number"" : 42, ""String"" : ""str"" }",
                         ExpectedRoundtripValue: new DerivedClass_TypeDiscriminator
                         {
                             Number = 42,
-                            String = "str"
+                            String = "str",
                         }
                     );
 
@@ -2205,7 +2205,7 @@ namespace System.Text.Json.Serialization.Tests
                         Value: new DerivedStruct_NoTypeDiscriminator
                         {
                             Number = 42,
-                            String = "str"
+                            String = "str",
                         },
                         ExpectedJson: @"{ ""Number"" : 42, ""String"" : ""str"" }",
                         ExpectedDeserializationException: typeof(NotSupportedException)
@@ -2238,7 +2238,7 @@ namespace System.Text.Json.Serialization.Tests
                         new CustomPolymorphismResolver<PolymorphicInterface>
                         {
                             UnknownDerivedTypeHandling =
-                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                         }
                             .WithDerivedType<DerivedInterface1>()
                             .WithDerivedType<DerivedInterface2>()
@@ -2249,7 +2249,7 @@ namespace System.Text.Json.Serialization.Tests
                         new CustomPolymorphismResolver<PolymorphicInterface>
                         {
                             UnknownDerivedTypeHandling =
-                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                                JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                         }
                             .WithDerivedType<DerivedInterface1>()
                             .WithDerivedType<DerivedClass_TypeDiscriminator>()
@@ -2393,7 +2393,7 @@ namespace System.Text.Json.Serialization.Tests
                 source,
                 new List<int>(source),
                 new Queue<int>(source),
-                new HashSet<int>(source)
+                new HashSet<int>(source),
             };
 
             string expectedJson =
@@ -2419,7 +2419,7 @@ namespace System.Text.Json.Serialization.Tests
                 new List<int>(source),
                 new List<int>(source),
                 new Queue<int>(source),
-                new HashSet<int>(source)
+                new HashSet<int>(source),
             };
 
             string json =
@@ -2446,11 +2446,11 @@ namespace System.Text.Json.Serialization.Tests
                 TypeInfoResolver = new CustomPolymorphismResolver<IEnumerable<int>>
                 {
                     UnknownDerivedTypeHandling =
-                        JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                 }
                     .WithDerivedType<List<int>>("list")
                     .WithDerivedType<Queue<int>>("queue")
-                    .WithDerivedType<ISet<int>>("set")
+                    .WithDerivedType<ISet<int>>("set"),
             };
 
         [Fact]
@@ -2719,7 +2719,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new PolymorphicDictionary
                     {
                         ["key1"] = 42,
-                        ["key2"] = -1
+                        ["key2"] = -1,
                     }
                 );
 
@@ -2735,7 +2735,7 @@ namespace System.Text.Json.Serialization.Tests
                     ExpectedRoundtripValue: new PolymorphicDictionary
                     {
                         ["key1"] = 42,
-                        ["key2"] = -1
+                        ["key2"] = -1,
                     }
                 );
             }
@@ -2755,7 +2755,7 @@ namespace System.Text.Json.Serialization.Tests
                 new List<KeyValuePair<int, object>> { new KeyValuePair<int, object>(0, 0) },
                 new Dictionary<int, object> { [42] = false },
                 new SortedDictionary<int, object> { [0] = 1, [1] = 42 },
-                ImmutableDictionary.Create<int, object>()
+                ImmutableDictionary.Create<int, object>(),
             };
 
             string expectedJson =
@@ -2786,7 +2786,7 @@ namespace System.Text.Json.Serialization.Tests
                 new List<KeyValuePair<int, object>> { new KeyValuePair<int, object>(0, 0) },
                 new Dictionary<int, object> { [42] = false },
                 new SortedDictionary<int, object> { [0] = 1, [1] = 42 },
-                new Dictionary<int, object>()
+                new Dictionary<int, object>(),
             };
 
             var actualValues = await Serializer.DeserializeWrapper<IEnumerable<
@@ -2816,11 +2816,11 @@ namespace System.Text.Json.Serialization.Tests
                 >
                 {
                     UnknownDerivedTypeHandling =
-                        JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                        JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                 }
                     .WithDerivedType<Dictionary<int, object>>("dictionary")
                     .WithDerivedType<SortedDictionary<int, object>>("sortedDictionary")
-                    .WithDerivedType<IReadOnlyDictionary<int, object>>("readOnlyDictionary")
+                    .WithDerivedType<IReadOnlyDictionary<int, object>>("readOnlyDictionary"),
             };
         #endregion
 
@@ -3079,7 +3079,7 @@ namespace System.Text.Json.Serialization.Tests
                 Value: new PolymorphicClass.DerivedClass1_TypeDiscriminator
                 {
                     Number = 42,
-                    String = "str"
+                    String = "str",
                 },
                 JsonTemplate: id =>
                     $@"{{""$id"":""{id}"",""$type"":""derivedClass1"",""Number"":42,""String"":""str""}}"
@@ -3462,14 +3462,14 @@ namespace System.Text.Json.Serialization.Tests
                     new CustomPolymorphismResolver<PolymorphicInterfaceWithInterfaceDerivedType>()
                     {
                         UnknownDerivedTypeHandling =
-                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor
+                            JsonUnknownDerivedTypeHandling.FallBackToNearestAncestor,
                     }
                         .WithDerivedType<PolymorphicInterfaceWithInterfaceDerivedType.DerivedInterface>(
                             "derivedInterface"
                         )
                         .WithDerivedType<PolymorphicInterfaceWithInterfaceDerivedType.DerivedClass>(
                             "derivedClass"
-                        )
+                        ),
             };
 
         [Fact]
@@ -3612,7 +3612,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var value = new PolymorphicClass_CustomConverter_NoTypeDiscriminator.DerivedClass
             {
-                Number = 42
+                Number = 42,
             };
             string expectedJson = @"{ ""Number"" : 42 }";
             string actualJson = await Serializer.SerializeWrapper(value);
@@ -3689,7 +3689,7 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value =
                 new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass
                 {
-                    Number = 42
+                    Number = 42,
                 };
 
             string expectedJson = @"{ ""$type"" : ""derivedClass"", ""Number"" : 42 }";
@@ -3714,7 +3714,7 @@ namespace System.Text.Json.Serialization.Tests
             PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName value =
                 new PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName.DerivedClass
                 {
-                    Number = 42
+                    Number = 42,
                 };
 
             string expectedJson =
@@ -3756,8 +3756,8 @@ namespace System.Text.Json.Serialization.Tests
                     TypeInfoResolver =
                         new CustomPolymorphismResolver<PolymorphicClass_InvalidCustomTypeDiscriminatorPropertyName>
                         {
-                            TypeDiscriminatorPropertyName = customPropertyName
-                        }.WithDerivedType<DerivedClass>("derivedClass")
+                            TypeDiscriminatorPropertyName = customPropertyName,
+                        }.WithDerivedType<DerivedClass>("derivedClass"),
                 };
             }
         }

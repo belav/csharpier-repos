@@ -17,7 +17,7 @@ namespace System.Text.Json.Serialization.Tests
             new JsonSerializerSettings
             {
                 PreserveReferencesHandling = PreserveReferencesHandling.All,
-                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
             };
 
         public class Employee
@@ -45,7 +45,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Name = "Angela",
 
-                Manager = bob
+                Manager = bob,
             };
             bob.Subordinates = new List<Employee> { angela };
 
@@ -54,7 +54,7 @@ namespace System.Text.Json.Serialization.Tests
                 ["extString"] = "string value",
                 ["extNumber"] = 100,
                 ["extObject"] = bob,
-                ["extArray"] = bob.Subordinates
+                ["extArray"] = bob.Subordinates,
             };
 
             angela.ExtensionData = extensionData;
@@ -99,7 +99,7 @@ namespace System.Text.Json.Serialization.Tests
                 Roles = ImmutableArray.Create(
                     new RoleStruct { Description = "Contributor" },
                     new RoleStruct { Description = "Infrastructure" }
-                )
+                ),
             };
 
             //ImmutableArray<T> as root.
@@ -131,7 +131,7 @@ namespace System.Text.Json.Serialization.Tests
             //$ Key in dictionary holding primitive type.
             Dictionary<string, object> dictionary = new Dictionary<string, object>
             {
-                ["$string"] = "Hello world"
+                ["$string"] = "Hello world",
             };
             string json = await Serializer.SerializeWrapper(
                 dictionary,
@@ -142,7 +142,7 @@ namespace System.Text.Json.Serialization.Tests
             //$ Key in dictionary holding complex type.
             dictionary = new Dictionary<string, object>
             {
-                ["$object"] = new ClassWithExtensionData { Hello = "World" }
+                ["$object"] = new ClassWithExtensionData { Hello = "World" },
             };
             json = await Serializer.SerializeWrapper(dictionary, s_serializerOptionsPreserve);
             Assert.Equal(
@@ -156,8 +156,8 @@ namespace System.Text.Json.Serialization.Tests
                 ExtensionData =
                 {
                     ["$string"] = "Hello world",
-                    ["$object"] = new ClassWithExtensionData { Hello = "World" }
-                }
+                    ["$object"] = new ClassWithExtensionData { Hello = "World" },
+                },
             };
             json = await Serializer.SerializeWrapper(poco, s_serializerOptionsPreserve);
             Assert.Equal(
@@ -187,19 +187,19 @@ namespace System.Text.Json.Serialization.Tests
             {
                 PreservableList = list,
                 // Do not write any curly braces for ImmutableArray since is a value type.
-                NonProservableArray = immutableArr
+                NonProservableArray = immutableArr,
             };
             await Serializer.SerializeWrapper(root, s_serializerOptionsPreserve);
 
             ImmutableArray<List<int>> immutablArraytOfLists = new List<List<int>>
             {
-                list
+                list,
             }.ToImmutableArray();
             await Serializer.SerializeWrapper(immutablArraytOfLists, s_serializerOptionsPreserve);
 
             List<ImmutableArray<int>> listOfImmutableArrays = new List<ImmutableArray<int>>
             {
-                immutableArr
+                immutableArr,
             };
             await Serializer.SerializeWrapper(listOfImmutableArrays, s_serializerOptionsPreserve);
 
@@ -208,7 +208,7 @@ namespace System.Text.Json.Serialization.Tests
                 list,
                 immutableArr,
                 list,
-                immutableArr
+                immutableArr,
             };
             await Serializer.SerializeWrapper(mixedListOfLists, s_serializerOptionsPreserve);
         }
@@ -229,7 +229,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             // Test that POCO's implementation of GetHashCode is always used.
             ClassIncorrectHashCode elem = new ClassIncorrectHashCode();
-            List<ClassIncorrectHashCode> list = new List<ClassIncorrectHashCode>() { elem, elem, };
+            List<ClassIncorrectHashCode> list = new List<ClassIncorrectHashCode>() { elem, elem };
 
             string json = await Serializer.SerializeWrapper(list, s_serializerOptionsPreserve);
             Assert.Equal(@"{""$id"":""1"",""$values"":[{""$id"":""2""},{""$ref"":""2""}]}", json);

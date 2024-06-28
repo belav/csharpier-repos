@@ -29,6 +29,6 @@ namespace System.ServiceModel.Channels
     {
         WhenDuplex,
         Always,
-        Never
+        Never,
     }
 }

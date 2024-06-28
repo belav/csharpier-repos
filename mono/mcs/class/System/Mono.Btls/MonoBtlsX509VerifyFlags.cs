@@ -34,7 +34,7 @@ namespace Mono.Btls
         DEFAULT = 0,
         CRL_CHECK = 1,
         CRL_CHECK_ALL = 2,
-        X509_STRIC = 4
+        X509_STRIC = 4,
     }
 }
 #endif

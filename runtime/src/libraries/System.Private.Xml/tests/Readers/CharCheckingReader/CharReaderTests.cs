@@ -27,20 +27,20 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ErrorCondition",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCDepthReader()
                 {
-                    Attribute = new TestCase() { Name = "Depth", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "Depth", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
                 new TCNamespaceReader()
                 {
-                    Attribute = new TestCase() { Name = "Namespace", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "Namespace", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
@@ -49,32 +49,32 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "IsEmptyElement",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCXmlSpaceReader()
                 {
-                    Attribute = new TestCase() { Name = "XmlSpace", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "XmlSpace", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
                 new TCXmlLangReader()
                 {
-                    Attribute = new TestCase() { Name = "XmlLang", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "XmlLang", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
                 new TCSkipReader()
                 {
-                    Attribute = new TestCase() { Name = "Skip", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "Skip", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
                 new TCInvalidXMLReader()
                 {
-                    Attribute = new TestCase() { Name = "InvalidXML", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "InvalidXML", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
@@ -83,8 +83,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadOuterXml",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -93,8 +93,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "AttributeAccess",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -103,8 +103,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "This(Name) and This(Name, Namespace)",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -113,8 +113,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "MoveToAttribute(Name) and MoveToAttribute(Name, Namespace)",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -123,8 +123,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "GetAttribute (Ordinal)",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -133,8 +133,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "GetAttribute(Name) and GetAttribute(Name, Namespace)",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -143,8 +143,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "This [Ordinal]",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -153,8 +153,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "MoveToAttribute(Ordinal)",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -163,8 +163,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "MoveToFirstAttribute()",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -173,8 +173,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "MoveToNextAttribute()",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -183,8 +183,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "Attribute Test when NodeType != Attributes",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -193,8 +193,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "Attributes test on XmlDeclaration",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -203,8 +203,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "xmlns as local name",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -213,8 +213,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "bounded namespace to xmlns prefix",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -223,8 +223,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadInnerXml",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -233,8 +233,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "MoveToContent",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -243,8 +243,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "IsStartElement",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -253,8 +253,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadStartElement",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -263,8 +263,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadEndElement",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -273,14 +273,14 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ResolveEntity and ReadAttributeValue",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCHasValueReader()
                 {
-                    Attribute = new TestCase() { Name = "HasValue", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "HasValue", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
@@ -289,14 +289,14 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadAttributeValue",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCReadReader()
                 {
-                    Attribute = new TestCase() { Name = "Read", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "Read", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
@@ -305,14 +305,14 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "MoveToElement",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCDisposeReader()
                 {
-                    Attribute = new TestCase() { Name = "Dispose", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "Dispose", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
@@ -321,14 +321,14 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "Buffer Boundaries",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCXmlNodeIntegrityTestFile()
                 {
-                    Attribute = new TestCase() { Name = "BeforeRead", Desc = "BeforeRead" }
+                    Attribute = new TestCase() { Name = "BeforeRead", Desc = "BeforeRead" },
                 }
             );
             module.AddChild(
@@ -337,14 +337,14 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "AfterCloseInTheMiddle",
-                        Desc = "AfterCloseInTheMiddle"
-                    }
+                        Desc = "AfterCloseInTheMiddle",
+                    },
                 }
             );
             module.AddChild(
                 new TCXmlNodeIntegrityTestFile()
                 {
-                    Attribute = new TestCase() { Name = "AfterClose", Desc = "AfterClose" }
+                    Attribute = new TestCase() { Name = "AfterClose", Desc = "AfterClose" },
                 }
             );
             module.AddChild(
@@ -353,8 +353,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "AfterReadIsFalse",
-                        Desc = "AfterReadIsFalse"
-                    }
+                        Desc = "AfterReadIsFalse",
+                    },
                 }
             );
             module.AddChild(
@@ -363,8 +363,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "Read Subtree",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -373,8 +373,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadToDescendant",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -383,14 +383,14 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadToNextSibling",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
                 new TCReadValueReader()
                 {
-                    Attribute = new TestCase() { Name = "ReadValue", Desc = "CharCheckingReader" }
+                    Attribute = new TestCase() { Name = "ReadValue", Desc = "CharCheckingReader" },
                 }
             );
             module.AddChild(
@@ -399,8 +399,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadContentAsBase64",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -409,8 +409,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadElementContentAsBase64",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -419,8 +419,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadContentAsBinHex",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -429,8 +429,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadElementContentAsBinHex",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -439,8 +439,8 @@ namespace System.Xml.CharCheckingReaderTests
                     Attribute = new TestCase()
                     {
                         Name = "ReadToFollowing",
-                        Desc = "CharCheckingReader"
-                    }
+                        Desc = "CharCheckingReader",
+                    },
                 }
             );
 

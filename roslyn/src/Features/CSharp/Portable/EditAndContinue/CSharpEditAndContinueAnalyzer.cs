@@ -397,20 +397,19 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             CommonForEachStatementSyntax node,
             int position
         ) =>
-            position < node.OpenParenToken.SpanStart
-                ? ForEachPart.ForEach
-                : position < node.InKeyword.SpanStart
-                    ? ForEachPart.VariableDeclaration
-                    : position < node.Expression.SpanStart
-                        ? ForEachPart.In
-                        : ForEachPart.Expression;
+            position < node.OpenParenToken.SpanStart ? ForEachPart.ForEach
+            : position < node.InKeyword.SpanStart ? ForEachPart.VariableDeclaration
+            : position < node.Expression.SpanStart ? ForEachPart.In
+            : ForEachPart.Expression;
 
         private static TextSpan GetActiveSpan(ForEachStatementSyntax node, ForEachPart part) =>
             part switch
             {
                 ForEachPart.ForEach => node.ForEachKeyword.Span,
-                ForEachPart.VariableDeclaration =>
-                    TextSpan.FromBounds(node.Type.SpanStart, node.Identifier.Span.End),
+                ForEachPart.VariableDeclaration => TextSpan.FromBounds(
+                    node.Type.SpanStart,
+                    node.Identifier.Span.End
+                ),
                 ForEachPart.In => node.InKeyword.Span,
                 ForEachPart.Expression => node.Expression.Span,
                 _ => throw ExceptionUtilities.UnexpectedValue(part),
@@ -423,8 +422,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             part switch
             {
                 ForEachPart.ForEach => node.ForEachKeyword.Span,
-                ForEachPart.VariableDeclaration =>
-                    TextSpan.FromBounds(node.Variable.SpanStart, node.Variable.Span.End),
+                ForEachPart.VariableDeclaration => TextSpan.FromBounds(
+                    node.Variable.SpanStart,
+                    node.Variable.Span.End
+                ),
                 ForEachPart.In => node.InKeyword.Span,
                 ForEachPart.Expression => node.Expression.Span,
                 _ => throw ExceptionUtilities.UnexpectedValue(part),
@@ -437,11 +438,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             part switch
             {
                 SwitchExpressionPart.WholeExpression => node.Span,
-                SwitchExpressionPart.SwitchBody =>
-                    TextSpan.FromBounds(
-                        node.SwitchKeyword.SpanStart,
-                        node.CloseBraceToken.Span.End
-                    ),
+                SwitchExpressionPart.SwitchBody => TextSpan.FromBounds(
+                    node.SwitchKeyword.SpanStart,
+                    node.CloseBraceToken.Span.End
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(part),
             };
 
@@ -501,11 +501,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 AccessorDeclarationSyntax
                 {
                     Parent.Parent: IndexerDeclarationSyntax { ParameterList: var list }
-                } =>
-                    list,
+                } => list,
                 ArrowExpressionClauseSyntax { Parent: { } memberDecl } =>
                     GetDeclarationParameterList(memberDecl),
-                _ => declaration.GetParameterList()
+                _ => declaration.GetParameterList(),
             };
 
         internal static Match<SyntaxNode> ComputeBodyMatch(
@@ -1288,9 +1287,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                         or WellKnownMemberNames.ObjectGetHashCode
                         or WellKnownMemberNames.ObjectToString
                         or WellKnownMemberNames.DeconstructMethodName
-                } =>
-                    null,
-                _ => selector(symbol.DeclaringSyntaxReferences)?.GetSyntax(cancellationToken)
+                } => null,
+                _ => selector(symbol.DeclaringSyntaxReferences)?.GetSyntax(cancellationToken),
             };
 
             // Use the parameter list to represent primary constructor declaration.
@@ -2613,13 +2611,10 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
             TextSpan second,
             TextSpan defaultSpan
         ) =>
-            (first.Length > 0 && second.Length > 0)
-                ? TextSpan.FromBounds(first.Start, second.End)
-                : (first.Length > 0)
-                    ? first
-                    : (second.Length > 0)
-                        ? second
-                        : defaultSpan;
+            (first.Length > 0 && second.Length > 0) ? TextSpan.FromBounds(first.Start, second.End)
+            : (first.Length > 0) ? first
+            : (second.Length > 0) ? second
+            : defaultSpan;
 
         internal override TextSpan GetLambdaParameterDiagnosticSpan(SyntaxNode lambda, int ordinal)
         {
@@ -2654,13 +2649,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal override string GetDisplayName(INamedTypeSymbol symbol) =>
             symbol.TypeKind switch
             {
-                TypeKind.Struct =>
-                    symbol.IsRecord
-                        ? CSharpFeaturesResources.record_struct
-                        : CSharpFeaturesResources.struct_,
-                TypeKind.Class =>
-                    symbol.IsRecord ? CSharpFeaturesResources.record_ : FeaturesResources.class_,
-                _ => base.GetDisplayName(symbol)
+                TypeKind.Struct => symbol.IsRecord
+                    ? CSharpFeaturesResources.record_struct
+                    : CSharpFeaturesResources.struct_,
+                TypeKind.Class => symbol.IsRecord
+                    ? CSharpFeaturesResources.record_
+                    : FeaturesResources.class_,
+                _ => base.GetDisplayName(symbol),
             };
 
         internal override string GetDisplayName(IEventSymbol symbol) =>
@@ -2674,14 +2669,14 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
         internal override string GetDisplayName(IMethodSymbol symbol) =>
             symbol.MethodKind switch
             {
-                MethodKind.PropertyGet =>
-                    symbol.AssociatedSymbol is IPropertySymbol { IsIndexer: true }
-                        ? CSharpFeaturesResources.indexer_getter
-                        : CSharpFeaturesResources.property_getter,
-                MethodKind.PropertySet =>
-                    symbol.AssociatedSymbol is IPropertySymbol { IsIndexer: true }
-                        ? CSharpFeaturesResources.indexer_setter
-                        : CSharpFeaturesResources.property_setter,
+                MethodKind.PropertyGet => symbol.AssociatedSymbol
+                    is IPropertySymbol { IsIndexer: true }
+                    ? CSharpFeaturesResources.indexer_getter
+                    : CSharpFeaturesResources.property_getter,
+                MethodKind.PropertySet => symbol.AssociatedSymbol
+                    is IPropertySymbol { IsIndexer: true }
+                    ? CSharpFeaturesResources.indexer_setter
+                    : CSharpFeaturesResources.property_setter,
                 MethodKind.StaticConstructor => FeaturesResources.static_constructor,
                 MethodKind.Destructor => CSharpFeaturesResources.destructor,
                 MethodKind.Conversion => CSharpFeaturesResources.conversion_operator,
@@ -2691,7 +2686,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     when symbol.Name
                         == WellKnownMemberNames.TopLevelStatementsEntryPointMethodName =>
                     CSharpFeaturesResources.top_level_code,
-                _ => base.GetDisplayName(symbol)
+                _ => base.GetDisplayName(symbol),
             };
 
         protected override string? TryGetDisplayName(SyntaxNode node, EditKind editKind) =>
@@ -2827,7 +2822,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                     {
                         SyntaxKind.PropertyDeclaration => CSharpFeaturesResources.property_getter,
                         SyntaxKind.IndexerDeclaration => CSharpFeaturesResources.indexer_getter,
-                        _ => null
+                        _ => null,
                     };
 
                 case SyntaxKind.TypeParameterConstraintClause:
@@ -3301,9 +3296,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 INamedTypeSymbol => RudeEditKind.None,
 
                 // Inserting virtual or interface member into an existing type is not allowed.
-                { IsVirtual: true }
-                or { IsOverride: true }
-                or { IsAbstract: true } =>
+                { IsVirtual: true } or { IsOverride: true } or { IsAbstract: true } =>
                     RudeEditKind.InsertVirtual,
 
                 // Inserting destructor to an existing type is not allowed.
@@ -3313,8 +3306,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 IMethodSymbol
                 {
                     MethodKind: MethodKind.Conversion or MethodKind.UserDefinedOperator
-                } =>
-                    RudeEditKind.InsertOperator,
+                } => RudeEditKind.InsertOperator,
 
                 // Inserting a method that explictly implements an interface method into an existing type is not allowed.
                 IMethodSymbol { ExplicitInterfaceImplementations.IsEmpty: false } =>
@@ -3328,7 +3320,7 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue
                 IFieldSymbol { ContainingType.TypeKind: TypeKind.Enum } => RudeEditKind.Insert,
 #pragma warning restore format
 
-                _ => RudeEditKind.None
+                _ => RudeEditKind.None,
             };
 
             if (rudeEditKind != RudeEditKind.None)

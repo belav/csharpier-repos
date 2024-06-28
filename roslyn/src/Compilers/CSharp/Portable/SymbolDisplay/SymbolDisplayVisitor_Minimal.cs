@@ -284,16 +284,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         private static QueryBodySyntax? GetQueryBody(SyntaxToken token) =>
             token.Parent switch
             {
-                FromClauseSyntax fromClause when fromClause.Identifier == token =>
-                    fromClause.Parent as QueryBodySyntax
-                        ?? ((QueryExpressionSyntax)fromClause.Parent!).Body,
-                LetClauseSyntax letClause when letClause.Identifier == token =>
-                    letClause.Parent as QueryBodySyntax,
-                JoinClauseSyntax joinClause when joinClause.Identifier == token =>
-                    joinClause.Parent as QueryBodySyntax,
+                FromClauseSyntax fromClause when fromClause.Identifier == token => fromClause.Parent
+                    as QueryBodySyntax
+                    ?? ((QueryExpressionSyntax)fromClause.Parent!).Body,
+                LetClauseSyntax letClause when letClause.Identifier == token => letClause.Parent
+                    as QueryBodySyntax,
+                JoinClauseSyntax joinClause when joinClause.Identifier == token => joinClause.Parent
+                    as QueryBodySyntax,
                 QueryContinuationSyntax continuation when continuation.Identifier == token =>
                     continuation.Body,
-                _ => null
+                _ => null,
             };
 
         private string RemoveAttributeSuffixIfNecessary(INamedTypeSymbol symbol, string symbolName)

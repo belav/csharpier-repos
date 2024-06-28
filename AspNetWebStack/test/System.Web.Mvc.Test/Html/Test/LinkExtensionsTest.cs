@@ -721,7 +721,7 @@ namespace System.Web.Mvc.Html.Test
                 new
                 {
                     Parameter = "linkText",
-                    Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName"))
+                    Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName")),
                 },
                 // ActionLink(string linkText, string actionName, object routeValues, object htmlAttributes)
                 new
@@ -735,7 +735,7 @@ namespace System.Web.Mvc.Html.Test
                                 new Object(),
                                 null /* htmlAttributes */
                             )
-                    )
+                    ),
                 },
                 // ActionLink(string linkText, string actionName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
@@ -749,7 +749,7 @@ namespace System.Web.Mvc.Html.Test
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary()
                             )
-                    )
+                    ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName)
                 new
@@ -757,7 +757,7 @@ namespace System.Web.Mvc.Html.Test
                     Parameter = "linkText",
                     Action = new Action(
                         () => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName")
-                    )
+                    ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName, object routeValues, object htmlAttributes)
                 new
@@ -772,7 +772,7 @@ namespace System.Web.Mvc.Html.Test
                                 new Object(),
                                 null /* htmlAttributes */
                             )
-                    )
+                    ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
@@ -787,7 +787,7 @@ namespace System.Web.Mvc.Html.Test
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary()
                             )
-                    )
+                    ),
                 },
                 // ActionLink(string linkText, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
@@ -805,7 +805,7 @@ namespace System.Web.Mvc.Html.Test
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary()
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, object routeValues, object htmlAttributes)
                 new
@@ -818,7 +818,7 @@ namespace System.Web.Mvc.Html.Test
                                 new Object(),
                                 null /* htmlAttributes */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
@@ -831,7 +831,7 @@ namespace System.Web.Mvc.Html.Test
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary()
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, string routeName, object routeValues)
                 new
@@ -844,7 +844,7 @@ namespace System.Web.Mvc.Html.Test
                                 "routeName",
                                 null /* routeValues */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues)
                 new
@@ -857,7 +857,7 @@ namespace System.Web.Mvc.Html.Test
                                 "routeName",
                                 new RouteValueDictionary() /* routeValues */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, string routeName)
                 new
@@ -869,7 +869,7 @@ namespace System.Web.Mvc.Html.Test
                                 String.Empty,
                                 (string)null /* routeName */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, object routeValues)
                 new
@@ -881,7 +881,7 @@ namespace System.Web.Mvc.Html.Test
                                 String.Empty,
                                 (object)null /* routeValues */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, RouteValueDictionary routeValues)
                 new
@@ -893,7 +893,7 @@ namespace System.Web.Mvc.Html.Test
                                 String.Empty,
                                 new RouteValueDictionary() /* routeValues */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, string routeName, object routeValues, object htmlAttributes)
                 new
@@ -907,7 +907,7 @@ namespace System.Web.Mvc.Html.Test
                                 new Object(),
                                 null /* htmlAttributes */
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
@@ -921,7 +921,7 @@ namespace System.Web.Mvc.Html.Test
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary()
                             )
-                    )
+                    ),
                 },
                 // RouteLink(string linkText, string routeName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
                 new
@@ -938,7 +938,7 @@ namespace System.Web.Mvc.Html.Test
                                 new RouteValueDictionary(),
                                 new RouteValueDictionary()
                             )
-                    )
+                    ),
                 },
             };
 
@@ -990,7 +990,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 ),
                 new RouteValueDictionary(new { baz = "baz" })
@@ -1022,7 +1022,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { baz = "baz" }
             );
@@ -1053,7 +1053,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { foo_baz = "baz" }
             );
@@ -1101,7 +1101,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { baz = "baz" }
             );
@@ -1156,7 +1156,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { foo_baz = "baz" }
             );
@@ -1188,7 +1188,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { baz = "baz" }
             );
@@ -1219,7 +1219,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { baz = "baz" }
             );
@@ -1268,7 +1268,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 ),
                 new RouteValueDictionary()
@@ -1297,7 +1297,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { baz = "baz" }
             );
@@ -1325,7 +1325,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 new { foo_baz = "baz" }
             );

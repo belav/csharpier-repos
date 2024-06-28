@@ -78,6 +78,8 @@ namespace System.IdentityModel
         InitAnonymous = 0x00040000, // ISC_REQ_NULL_SESSION
         AcceptAnonymous = 0x00100000, // ASC_REQ_ALLOW_NULL_SESSION
         ChannelBindingProxyBindings = 0x04000000, // ASC_REQ_PROXY_BINDINGS
-        ChannelBindingAllowMissingBindings = 0x10000000 // ASC_REQ_ALLOW_MISSING_BINDINGS
+        ChannelBindingAllowMissingBindings =
+            0x10000000 // ASC_REQ_ALLOW_MISSING_BINDINGS
+        ,
     }
 }

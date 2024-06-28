@@ -600,7 +600,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     ),
                     new AuthenticationProperties()
                     {
-                        ExpiresUtc = _timeProvider.GetUtcNow().Add(TimeSpan.FromMinutes(5))
+                        ExpiresUtc = _timeProvider.GetUtcNow().Add(TimeSpan.FromMinutes(5)),
                     }
                 )
         );
@@ -651,7 +651,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     {
                         ctx.ShouldRenew = true;
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -690,7 +690,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                         ctx.RejectPrincipal();
                         ctx.HttpContext.SignOutAsync("Cookies");
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -726,7 +726,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     {
                         ctx.ShouldRenew = true;
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -777,7 +777,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     {
                         ctx.ShouldRenew = true;
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -846,7 +846,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                             )
                         );
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -891,7 +891,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                             ctx.Properties.Items["updated"] = "yes";
                         }
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -954,7 +954,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     {
                         ctx.ShouldRenew = true;
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -1030,7 +1030,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                             id.AddClaim(new Claim("counter", claim.Value + "1"));
                         }
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -1109,7 +1109,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                         // calculated relative to the issue time.
                         ctx.Properties.IssuedUtc = _timeProvider.GetUtcNow();
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -1175,7 +1175,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                     {
                         ctx.ShouldRenew = true;
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -1247,7 +1247,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                         lastExpiresDate = ctx.Properties.ExpiresUtc;
                         ctx.ShouldRenew = true;
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             context =>
@@ -1314,7 +1314,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                             .GetUtcNow()
                             .Add(TimeSpan.FromMinutes(5));
                         return Task.FromResult(0);
-                    }
+                    },
                 };
             },
             SignInAsAlice
@@ -1488,7 +1488,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                         Assert.Equal(expectRenew, context.ShouldRenew);
                         context.ShouldRenew = renew;
                         return Task.CompletedTask;
-                    }
+                    },
                 };
             },
             SignInAsAlice
@@ -2325,7 +2325,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                                         context.Properties.ExpiresUtc = null;
                                         context.ShouldRenew = true;
                                         return Task.FromResult(0);
-                                    }
+                                    },
                                 };
                             })
                     )
@@ -2510,7 +2510,7 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                                         CookieAuthenticationDefaults.AuthenticationScheme,
                                         new AuthenticationProperties()
                                         {
-                                            RedirectUri = "/CustomRedirect"
+                                            RedirectUri = "/CustomRedirect",
                                         }
                                     );
                                 }

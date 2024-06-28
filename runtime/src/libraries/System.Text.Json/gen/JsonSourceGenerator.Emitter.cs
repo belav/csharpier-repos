@@ -797,7 +797,7 @@ namespace System.Text.Json.SourceGeneration
                             $"static obj => (({declaringTypeFQN})obj).{propertyName}",
                         { CanUseGetter: false, HasJsonInclude: true } =>
                             $"""static _ => throw new {InvalidOperationExceptionTypeRef}("{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.TypeRef.Name, propertyName)}")""",
-                        _ => "null"
+                        _ => "null",
                     };
 
                     string setterValue = property switch
@@ -1166,7 +1166,7 @@ namespace System.Text.Json.SourceGeneration
                     JsonPrimitiveTypeKind.String or JsonPrimitiveTypeKind.Char => "WriteString",
                     JsonPrimitiveTypeKind.Boolean => "WriteBoolean",
                     JsonPrimitiveTypeKind.ByteArray => "WriteBase64String",
-                    _ => null
+                    _ => null,
                 };
             }
 
@@ -1304,14 +1304,12 @@ namespace System.Text.Json.SourceGeneration
                     ?? contextSpec.GeneratedOptionsSpec?.DefaultIgnoreCondition
                 ) switch
                 {
-                    JsonIgnoreCondition.WhenWritingNull =>
-                        propertySpec.PropertyType.CanBeNull
-                            ? DefaultCheckType.Null
-                            : DefaultCheckType.None,
-                    JsonIgnoreCondition.WhenWritingDefault =>
-                        propertySpec.PropertyType.CanBeNull
-                            ? DefaultCheckType.Null
-                            : DefaultCheckType.Default,
+                    JsonIgnoreCondition.WhenWritingNull => propertySpec.PropertyType.CanBeNull
+                        ? DefaultCheckType.Null
+                        : DefaultCheckType.None,
+                    JsonIgnoreCondition.WhenWritingDefault => propertySpec.PropertyType.CanBeNull
+                        ? DefaultCheckType.Null
+                        : DefaultCheckType.Default,
                     _ => DefaultCheckType.None,
                 };
             }
@@ -1546,14 +1544,18 @@ namespace System.Text.Json.SourceGeneration
                     string? policyName = knownNamingPolicy switch
                     {
                         JsonKnownNamingPolicy.CamelCase => nameof(JsonNamingPolicy.CamelCase),
-                        JsonKnownNamingPolicy.SnakeCaseLower =>
-                            nameof(JsonNamingPolicy.SnakeCaseLower),
-                        JsonKnownNamingPolicy.SnakeCaseUpper =>
-                            nameof(JsonNamingPolicy.SnakeCaseUpper),
-                        JsonKnownNamingPolicy.KebabCaseLower =>
-                            nameof(JsonNamingPolicy.KebabCaseLower),
-                        JsonKnownNamingPolicy.KebabCaseUpper =>
-                            nameof(JsonNamingPolicy.KebabCaseUpper),
+                        JsonKnownNamingPolicy.SnakeCaseLower => nameof(
+                            JsonNamingPolicy.SnakeCaseLower
+                        ),
+                        JsonKnownNamingPolicy.SnakeCaseUpper => nameof(
+                            JsonNamingPolicy.SnakeCaseUpper
+                        ),
+                        JsonKnownNamingPolicy.KebabCaseLower => nameof(
+                            JsonNamingPolicy.KebabCaseLower
+                        ),
+                        JsonKnownNamingPolicy.KebabCaseUpper => nameof(
+                            JsonNamingPolicy.KebabCaseUpper
+                        ),
                         _ => null,
                     };
 
@@ -1794,8 +1796,7 @@ namespace System.Text.Json.SourceGeneration
                     CollectionType.List => "CreateListInfo",
                     CollectionType.IListOfT or CollectionType.IList => "CreateIListInfo",
                     CollectionType.ICollectionOfT => "CreateICollectionInfo",
-                    CollectionType.IEnumerableOfT
-                    or CollectionType.IEnumerable =>
+                    CollectionType.IEnumerableOfT or CollectionType.IEnumerable =>
                         "CreateIEnumerableInfo",
                     CollectionType.StackOfT or CollectionType.Stack => "CreateStackInfo",
                     CollectionType.QueueOfT or CollectionType.Queue => "CreateQueueInfo",
@@ -1808,8 +1809,7 @@ namespace System.Text.Json.SourceGeneration
                     CollectionType.ISet => "CreateISetInfo",
 
                     CollectionType.Dictionary => "CreateDictionaryInfo",
-                    CollectionType.IDictionaryOfTKeyTValue
-                    or CollectionType.IDictionary =>
+                    CollectionType.IDictionaryOfTKeyTValue or CollectionType.IDictionary =>
                         "CreateIDictionaryInfo",
                     CollectionType.IReadOnlyDictionary => "CreateIReadOnlyDictionaryInfo",
                     CollectionType.ImmutableDictionary => "CreateImmutableDictionaryInfo",

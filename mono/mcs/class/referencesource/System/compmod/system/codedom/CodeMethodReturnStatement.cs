@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a return statement.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeMethodReturnStatement : CodeStatement
     {
         private CodeExpression expression;

@@ -34,7 +34,7 @@ public class StrAccess1
     public static String str1 = "test string";
     public static String[,] str2darr =
     {
-        { "test string" }
+        { "test string" },
     };
     public static char sb0,
         sb1,
@@ -55,7 +55,7 @@ public class StrAccess1
         string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
             new Random().Next(),
         string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-        _ => DefaultSeed
+        _ => DefaultSeed,
     };
 
     public static Random rand = new Random(Seed);
@@ -69,7 +69,7 @@ public class StrAccess1
         Char[,] c2darr =
         {
             { '0', '1', '2', '3', '4', '5', '6' },
-            { 'a', 'b', 'c', 'd', 'e', 'f', 'g' }
+            { 'a', 'b', 'c', 'd', 'e', 'f', 'g' },
         };
         CL cl1 = new CL();
         VT vt1;

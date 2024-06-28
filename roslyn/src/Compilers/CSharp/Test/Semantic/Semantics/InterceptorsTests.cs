@@ -65,7 +65,7 @@ public class InterceptorsTests : CSharpTestBase
                     ErrorCode.ERR_InterceptorGlobalNamespace,
                     @"InterceptsLocation(""Program.cs"", 4, 3)"
                 )
-                .WithLocation(13, 6)
+                .WithLocation(13, 6),
         };
         var comp = CreateCompilation(new[] { (source, "Program.cs"), s_attributesSource });
         comp.VerifyEmitDiagnostics(sadCaseDiagnostics);
@@ -944,7 +944,7 @@ public class InterceptorsTests : CSharpTestBase
                 (source0, "Program.cs"),
                 (source1, "File1.cs"),
                 (source2, "File2.cs"),
-                s_attributesSource
+                s_attributesSource,
             },
             parseOptions: RegularWithInterceptors
         );
@@ -4422,7 +4422,7 @@ public class InterceptorsTests : CSharpTestBase
             {
                 (source, "Program.cs"),
                 s_attributesSource,
-                (UnscopedRefAttributeDefinition, "UnscopedRefAttribute.cs")
+                (UnscopedRefAttributeDefinition, "UnscopedRefAttribute.cs"),
             },
             parseOptions: RegularWithInterceptors,
             expectedOutput: "1"
@@ -4464,7 +4464,7 @@ public class InterceptorsTests : CSharpTestBase
             {
                 (source, "Program.cs"),
                 s_attributesSource,
-                (UnscopedRefAttributeDefinition, "UnscopedRefAttribute.cs")
+                (UnscopedRefAttributeDefinition, "UnscopedRefAttribute.cs"),
             },
             parseOptions: RegularWithInterceptors,
             options: WithNullableEnable()
@@ -4891,7 +4891,7 @@ partial struct CustomHandler
                     ),
                     "b.cs"
                 ),
-                s_attributesSource
+                s_attributesSource,
             },
             parseOptions: RegularWithInterceptors,
             expectedOutput: "12"
@@ -4952,7 +4952,7 @@ partial struct CustomHandler
                     ),
                     "b.cs"
                 ),
-                s_attributesSource
+                s_attributesSource,
             },
             parseOptions: RegularWithInterceptors,
             expectedOutput: "1"
@@ -5014,7 +5014,7 @@ partial struct CustomHandler
                     ),
                     "b.cs"
                 ),
-                s_attributesSource
+                s_attributesSource,
             },
             parseOptions: RegularWithInterceptors,
             expectedOutput: "12"
@@ -5930,7 +5930,7 @@ partial struct CustomHandler
             {
                 (source, "Program.cs"),
                 s_attributesSource,
-                (UnmanagedCallersOnlyAttributeDefinition, "UnmanagedCallersOnlyAttribute.cs")
+                (UnmanagedCallersOnlyAttributeDefinition, "UnmanagedCallersOnlyAttribute.cs"),
             },
             parseOptions: RegularWithInterceptors
         );

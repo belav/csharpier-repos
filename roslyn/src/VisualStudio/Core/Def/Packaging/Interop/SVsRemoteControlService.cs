@@ -22,6 +22,6 @@ namespace Microsoft.Internal.VisualStudio.Shell.Interop
         /// <summary>
         /// If the locally cached file exists and it was checked against the server less than pollingIntervalMinutes (specified in CreateClient) ago, returns that. Otherwise null.
         /// </summary>
-        ReturnsNull = 1
+        ReturnsNull = 1,
     }
 }

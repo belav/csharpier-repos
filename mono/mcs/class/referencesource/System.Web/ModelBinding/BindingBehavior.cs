@@ -4,6 +4,6 @@
     {
         Optional = 0,
         Never,
-        Required
+        Required,
     }
 }

@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         {
                             ("File1", initialMarkUpForFile1),
                             ("File2", initialMarkUpForFile2),
-                        }
+                        },
                     },
                     FixedState =
                     {
@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                         {
                             ("File1", expectedMarkUpForFile1),
                             ("File2", expectedMarkUpForFile2),
-                        }
+                        },
                     },
                     CodeActionValidationMode = CodeActionValidationMode.None,
                     LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 {
                     CodeActionIndex = keepInlinedMethod ? 1 : 0,
                     TestState = { Sources = { initialMarkUp } },
-                    FixedState = { Sources = { expectedMarkUp }, },
+                    FixedState = { Sources = { expectedMarkUp } },
                     CodeActionValidationMode = CodeActionValidationMode.None,
                     LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
                 };
@@ -2000,7 +2000,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
                 DiagnosticResult
                     .CompilerError("CS4032")
                     .WithSpan(6, 33, 6, 56)
-                    .WithArguments("int")
+                    .WithArguments("int"),
             };
             return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
@@ -3711,7 +3711,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
             var diagnostic = new List<DiagnosticResult>()
             {
                 // User is inlining method in arrow function, there is no place to put the declaration of 'i'
-                DiagnosticResult.CompilerError("CS0103").WithSpan(3, 29, 3, 30).WithArguments("i")
+                DiagnosticResult.CompilerError("CS0103").WithSpan(3, 29, 3, 30).WithArguments("i"),
             };
             return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """
@@ -3787,7 +3787,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InlineMethod
             var diagnostic = new List<DiagnosticResult>()
             {
                 // User is inlining method in arrow function, there is no place to put the declaration of 'i'
-                DiagnosticResult.CompilerError("CS0103").WithSpan(6, 26, 6, 27).WithArguments("i")
+                DiagnosticResult.CompilerError("CS0103").WithSpan(6, 26, 6, 27).WithArguments("i"),
             };
             return TestVerifier.TestBothKeepAndRemoveInlinedMethodInSameFileAsync(
                 """

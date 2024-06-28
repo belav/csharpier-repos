@@ -25,7 +25,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         // All EXF flags are < 0x01000000
         MustBeInvocable = 0x20000000,
 
-        All = Ctor | NewObj | Operator | Indexer | UserCallable | BaseCall | MustBeInvocable
+        All = Ctor | NewObj | Operator | Indexer | UserCallable | BaseCall | MustBeInvocable,
     }
 
     /////////////////////////////////////////////////////////////////////////////////

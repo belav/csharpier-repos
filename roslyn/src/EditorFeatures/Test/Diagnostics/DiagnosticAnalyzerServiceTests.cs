@@ -625,7 +625,7 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                     typeof(Priority1Analyzer),
                     typeof(Priority10Analyzer),
                     typeof(Priority15Analyzer),
-                    typeof(Priority20Analyzer)
+                    typeof(Priority20Analyzer),
                 },
                 analyzers.Select(a => a.GetType())
             );
@@ -675,7 +675,7 @@ dotnet_diagnostic.{DisabledByDefaultAnalyzer.s_compilationRule.Id}.severity = wa
                                 )
                             ),
                             filePath: "test.cs"
-                        )
+                        ),
                     }
                 )
             );
@@ -830,7 +830,7 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                                     )
                                 ),
                                 filePath: "z:\\test.cs"
-                            )
+                            ),
                         }
                     )
                 );
@@ -1005,14 +1005,12 @@ dotnet_diagnostic.{NamedTypeAnalyzer.DiagnosticId}.severity = warning
                     BackgroundAnalysisScope.None
                         or BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                     _
-                ) =>
-                    0,
+                ) => 0,
                 (
                     BackgroundAnalysisScope.OpenFiles
                         or BackgroundAnalysisScope.FullSolution,
                     false
-                ) =>
-                    1,
+                ) => 1,
                 (BackgroundAnalysisScope.OpenFiles, true) => 2,
                 (BackgroundAnalysisScope.FullSolution, true) => 4,
                 _ => throw ExceptionUtilities.Unreachable(),

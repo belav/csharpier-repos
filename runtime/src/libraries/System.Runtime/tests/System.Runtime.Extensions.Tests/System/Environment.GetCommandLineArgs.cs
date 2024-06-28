@@ -18,15 +18,15 @@ namespace System.Tests
             yield return new object[] { new string[] { "\"Arg With Quotes\"" } };
             yield return new object[]
             {
-                new string[] { "\"Arg1 With Quotes\"", "\"Arg2 With Quotes\"" }
+                new string[] { "\"Arg1 With Quotes\"", "\"Arg2 With Quotes\"" },
             };
             yield return new object[]
             {
-                new string[] { "\"Arg1 With Quotes\"", "Arg2", "\"Arg3 With Quotes\"" }
+                new string[] { "\"Arg1 With Quotes\"", "Arg2", "\"Arg3 With Quotes\"" },
             };
             yield return new object[]
             {
-                new string[] { "arg1", @"\\\\\" + "\"alpha", @"\" + "\"arg3" }
+                new string[] { "arg1", @"\\\\\" + "\"alpha", @"\" + "\"arg3" },
             };
         }
 

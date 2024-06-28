@@ -18,7 +18,7 @@ namespace System.Diagnostics.Tests
                 return;
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
             {
-                ReverseDirection = true
+                ReverseDirection = true,
             };
             var eventLog = new EventLogReader(
                 query,
@@ -48,7 +48,7 @@ namespace System.Diagnostics.Tests
                 return;
             var query = new EventLogQuery(log, PathType.LogName, "*[System]")
             {
-                ReverseDirection = true
+                ReverseDirection = true,
             };
             using (
                 var eventLog = new EventLogReader(query, Helpers.GetBookmark(log, PathType.LogName))
@@ -71,7 +71,7 @@ namespace System.Diagnostics.Tests
                 return;
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
             {
-                ReverseDirection = true
+                ReverseDirection = true,
             };
             var eventLog = new EventLogReader(
                 query,
@@ -97,7 +97,7 @@ namespace System.Diagnostics.Tests
                 return;
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
             {
-                ReverseDirection = true
+                ReverseDirection = true,
             };
             var eventLog = new EventLogReader(
                 query,
@@ -125,7 +125,7 @@ namespace System.Diagnostics.Tests
                 return;
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
             {
-                ReverseDirection = true
+                ReverseDirection = true,
             };
             var eventLog = new EventLogReader(
                 query,
@@ -196,7 +196,7 @@ namespace System.Diagnostics.Tests
 
             var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
             {
-                ReverseDirection = true
+                ReverseDirection = true,
             };
             var eventLog = new EventLogReader(query, bookmarkArg);
             using (eventLog)

@@ -42,7 +42,7 @@ public class JsonTranscodingRouteAdapterTests
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
             { "__Complex_book.name_2", "first" },
-            { "__Complex_book.name_4", "second" }
+            { "__Complex_book.name_4", "second" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -141,7 +141,7 @@ public class JsonTranscodingRouteAdapterTests
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_x.y.z_1", "my/value/b/c/d" }
+            { "__Complex_x.y.z_1", "my/value/b/c/d" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -160,7 +160,7 @@ public class JsonTranscodingRouteAdapterTests
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_x.y.z_1", "my/value/b/c/d:verb" }
+            { "__Complex_x.y.z_1", "my/value/b/c/d:verb" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -248,7 +248,7 @@ public class JsonTranscodingRouteAdapterTests
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_name_2", "test/name:verb" }
+            { "__Complex_name_2", "test/name:verb" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);
@@ -270,7 +270,7 @@ public class JsonTranscodingRouteAdapterTests
         var httpContext = new DefaultHttpContext();
         httpContext.Request.RouteValues = new RouteValueDictionary
         {
-            { "__Complex_name_2", "test/name/:verb" }
+            { "__Complex_name_2", "test/name/:verb" },
         };
 
         adapter.RewriteVariableActions[0](httpContext);

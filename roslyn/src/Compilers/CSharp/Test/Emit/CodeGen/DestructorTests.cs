@@ -60,7 +60,7 @@ public class Program
                         "Base",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -124,7 +124,7 @@ public class Program
                         "Base",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -199,7 +199,7 @@ public class Program
                         "Derived",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -302,7 +302,7 @@ public class Program
                         "Derived",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -420,7 +420,7 @@ public class Program
                         "Derived",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -488,7 +488,7 @@ public class Program
                         "Derived",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -557,7 +557,7 @@ public class Program
                         "Derived",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -943,7 +943,7 @@ public class A
                         .Select(handle => new
                         {
                             handle = handle,
-                            row = peFileReader.GetTypeDefinition(handle)
+                            row = peFileReader.GetTypeDefinition(handle),
                         })
                         .Single(pair =>
                             peFileReader.GetString(pair.row.Name) == "A"
@@ -967,7 +967,7 @@ public class A
                         .Select(handle => new
                         {
                             handle = handle,
-                            row = peFileReader.GetTypeReference(handle)
+                            row = peFileReader.GetTypeReference(handle),
                         })
                         .Single(pair =>
                             peFileReader.GetString(pair.row.Name) == "Object"
@@ -981,7 +981,7 @@ public class A
                         .Select(handle => new
                         {
                             handle = handle,
-                            row = peFileReader.GetMemberReference(handle)
+                            row = peFileReader.GetMemberReference(handle),
                         })
                         .Single(pair =>
                             pair.row.Parent == (EntityHandle)handleObject

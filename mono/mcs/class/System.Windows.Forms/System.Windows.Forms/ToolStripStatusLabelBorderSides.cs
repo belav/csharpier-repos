@@ -45,6 +45,6 @@ namespace System.Windows.Forms
         Top = 2,
         Right = 4,
         Bottom = 8,
-        All = 15
+        All = 15,
     }
 }

@@ -179,7 +179,7 @@ namespace System.Web.Mvc.Async.Test
 
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "id1", 42 }
+                { "id1", 42 },
             };
 
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
@@ -224,7 +224,7 @@ namespace System.Web.Mvc.Async.Test
             ReflectedAsyncActionDescriptor ad = GetActionDescriptor(_asyncMethod, _completedMethod);
             ControllerContext controllerContext = new ControllerContext()
             {
-                Controller = new RegularSyncController()
+                Controller = new RegularSyncController(),
             };
 
             // Act & assert
@@ -378,7 +378,7 @@ namespace System.Web.Mvc.Async.Test
                 false /* validateMethod */
             )
             {
-                DispatcherCache = new ActionMethodDispatcherCache()
+                DispatcherCache = new ActionMethodDispatcherCache(),
             };
         }
 

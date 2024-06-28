@@ -1663,14 +1663,14 @@ namespace System.Net.Http.Tests
                 headers.Descriptor.Name,
                 "header2",
                 "header3",
-                "header4"
+                "header4",
             };
             string[] expectedHeaderValues =
             {
                 parsedPrefix + "1",
                 "value2",
                 "",
-                "value41, value42"
+                "value41, value42",
             };
             int i = 0;
 
@@ -1766,7 +1766,7 @@ namespace System.Net.Http.Tests
                     {
                         "not a date",
                         "another not a date",
-                        "Sat, 03 Feb 0001 04:05:06 GMT"
+                        "Sat, 03 Feb 0001 04:05:06 GMT",
                     },
                     nonValidated["Date"].ToHashSet()
                 );
@@ -2489,7 +2489,7 @@ namespace System.Net.Http.Tests
             foreach (
                 HeaderStringValues hsv in new[]
                 {
-                    new HeaderStringValues(KnownHeaders.Accept.Descriptor, Array.Empty<string>())
+                    new HeaderStringValues(KnownHeaders.Accept.Descriptor, Array.Empty<string>()),
                 }
             )
             {
@@ -2507,7 +2507,7 @@ namespace System.Net.Http.Tests
                 HeaderStringValues hsv in new[]
                 {
                     new HeaderStringValues(KnownHeaders.Accept.Descriptor, "hello"),
-                    new HeaderStringValues(KnownHeaders.Accept.Descriptor, new[] { "hello" })
+                    new HeaderStringValues(KnownHeaders.Accept.Descriptor, new[] { "hello" }),
                 }
             )
             {
@@ -2530,7 +2530,7 @@ namespace System.Net.Http.Tests
                     new HeaderStringValues(
                         KnownHeaders.Accept.Descriptor,
                         new[] { "hello", "world" }
-                    )
+                    ),
                 }
             )
             {
@@ -2832,7 +2832,7 @@ namespace System.Net.Http.Tests
                         headers.CacheControl = new CacheControlHeaderValue
                         {
                             Private = true,
-                            OnlyIfCached = true
+                            OnlyIfCached = true,
                         },
                     static headers => headers.Add("a", "b"),
                     static headers => headers.Add("c", new[] { "d", "e" }),
@@ -2933,7 +2933,7 @@ namespace System.Net.Http.Tests
                     "foo*",
                     "foo* ",
                     "foo*bar",
-                    "foo* bar"
+                    "foo* bar",
                 }
             )
             foreach (string newLine in new[] { "\r", "\n", "\r\n" })

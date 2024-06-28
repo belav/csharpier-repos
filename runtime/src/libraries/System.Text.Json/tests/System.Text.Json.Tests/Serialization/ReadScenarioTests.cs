@@ -29,7 +29,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Converters = { new JsonStringEnumConverter(), new MyDateTimeConverter() }
+                Converters = { new JsonStringEnumConverter(), new MyDateTimeConverter() },
             };
 
             Model model = JsonSerializer.Deserialize<Model>(json, options);
@@ -65,7 +65,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             Blue,
             Green,
-            Brown
+            Brown,
         }
     }
 }

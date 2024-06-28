@@ -73,7 +73,7 @@ namespace System.Formats.Cbor.Tests
                     CborConformanceMode.Canonical,
                     CborConformanceMode.Ctap2Canonical,
                     CborConformanceMode.Lax,
-                    CborConformanceMode.Strict
+                    CborConformanceMode.Strict,
                 }
             )
             {
@@ -387,7 +387,7 @@ namespace System.Formats.Cbor.Tests
             ECPoint q = new ECPoint()
             {
                 X = hexExpectedQx.HexToByteArray(),
-                Y = hexExpectedQy.HexToByteArray()
+                Y = hexExpectedQy.HexToByteArray(),
             };
             (ECDsa ecDsa, HashAlgorithmName? name) = CborCoseKeyHelpers.ParseECDsaPublicKey(
                 hexEncoding.HexToByteArray()

@@ -44,6 +44,8 @@ namespace System.Diagnostics.PerformanceData
         /// InstanceAggregate only exists in Longhonr Server. Counter consumption applications aggregate raw
         /// counter data for active instances with the same instance name.
         /// </summary>
-        InstanceAggregate = 0x00000016 // PERF_COUNTERSET_INSTANCE_AGGREGATE
+        InstanceAggregate =
+            0x00000016 // PERF_COUNTERSET_INSTANCE_AGGREGATE
+        ,
     }
 }

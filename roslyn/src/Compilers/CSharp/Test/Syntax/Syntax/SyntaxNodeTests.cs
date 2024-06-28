@@ -2170,7 +2170,7 @@ namespace Microsoft.CSharp.Test
                         missingComma,
                         omittedArraySize,
                         missingComma,
-                        omittedArraySize
+                        omittedArraySize,
                     }
                 ),
                 SyntaxFactory.Token(SyntaxKind.CloseBracketToken)

@@ -33,7 +33,7 @@ public partial class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTest
         var person = new Person
         {
             Name = "Person",
-            Child = new Person { Name = "Child", },
+            Child = new Person { Name = "Child" },
         };
         person.Child.Parent = person;
 
@@ -203,7 +203,7 @@ public partial class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTest
         var formatter = SystemTextJsonOutputFormatter.CreateFormatter(jsonOptions);
         var expectedContent =
             "{\"$type\":\"JsonPersonExtended\",\"age\":99,\"name\":\"Person\",\"child\":null,\"parent\":null}";
-        JsonPerson person = new JsonPersonExtended() { Name = "Person", Age = 99, };
+        JsonPerson person = new JsonPersonExtended() { Name = "Person", Age = 99 };
 
         var mediaType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
         var encoding = CreateOrGetSupportedEncoding(formatter, "utf-8", isDefaultEncoding: true);

@@ -67,7 +67,7 @@ namespace System.Activities
             this.temporaryResolutionData = new TemporaryResolutionData
             {
                 TemporaryResolutionEnvironment = resolutionEnvironment,
-                BufferGetsOnCollapse = bufferGetsOnCollapse
+                BufferGetsOnCollapse = bufferGetsOnCollapse,
             };
         }
 

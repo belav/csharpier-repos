@@ -13,17 +13,17 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 DateTimeFormatInfo.InvariantInfo,
-                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'"
+                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
             };
             yield return new object[]
             {
                 new CultureInfo("en-US").DateTimeFormat,
-                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'"
+                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
             };
             yield return new object[]
             {
                 new CultureInfo("ja-JP").DateTimeFormat,
-                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'"
+                "ddd, dd MMM yyyy HH':'mm':'ss 'GMT'",
             };
         }
 

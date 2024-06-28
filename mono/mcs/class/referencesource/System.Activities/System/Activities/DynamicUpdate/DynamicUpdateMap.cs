@@ -285,7 +285,9 @@ namespace System.Activities.DynamicUpdate
                 NewDefinitionMemberCount = second.NewDefinitionMemberCount,
                 ArgumentsAreUnknown = first.ArgumentsAreUnknown && second.ArgumentsAreUnknown,
                 oldArguments = first.ArgumentsAreUnknown ? second.oldArguments : first.oldArguments,
-                newArguments = second.ArgumentsAreUnknown ? first.newArguments : second.newArguments
+                newArguments = second.ArgumentsAreUnknown
+                    ? first.newArguments
+                    : second.newArguments,
             };
 
             foreach (DynamicUpdateMapEntry firstEntry in first.Entries)
@@ -335,9 +337,9 @@ namespace System.Activities.DynamicUpdate
             DynamicUpdateMap result = new DynamicUpdateMap
             {
                 IsImplementationAsRoot = true,
-                NewDefinitionMemberCount = 1
+                NewDefinitionMemberCount = 1,
             };
-            result.AddEntry(new DynamicUpdateMapEntry(1, 1) { ImplementationUpdateMap = this, });
+            result.AddEntry(new DynamicUpdateMapEntry(1, 1) { ImplementationUpdateMap = this });
             return result;
         }
 

@@ -28,6 +28,6 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Use strict Equivalence only.
         /// </summary>
-        ExactMatchOnly = 2
+        ExactMatchOnly = 2,
     }
 }

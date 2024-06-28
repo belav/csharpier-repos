@@ -234,7 +234,7 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 Name = "name",
                 Label = "label",
-                Scheme = "scheme"
+                Scheme = "scheme",
             };
             attributeSyndicationCategory.AttributeExtensions.Add(
                 new XmlQualifiedName("term"),
@@ -255,7 +255,7 @@ namespace System.ServiceModel.Syndication.Tests
                 MediaType = "link_mediaType",
                 Title = "link_title",
                 Length = 10,
-                Uri = new Uri("http://link_uri.com")
+                Uri = new Uri("http://link_uri.com"),
             };
             attributeSyndicationLink.AttributeExtensions.Add(
                 new XmlQualifiedName("rel"),
@@ -367,9 +367,9 @@ namespace System.ServiceModel.Syndication.Tests
                 new SyndicationItem()
                 {
                     Id = "id",
-                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1)
+                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
                 },
-                fullSyndicationItem
+                fullSyndicationItem,
             };
 
             fullSyndicationFeed.Language = "language";
@@ -477,7 +477,7 @@ namespace System.ServiceModel.Syndication.Tests
             <Value>10</Value>
         </Atom10FeedFormatterTests.ExtensionObject>
     </entry>
-</feed>"
+</feed>",
             };
         }
 
@@ -606,7 +606,7 @@ namespace System.ServiceModel.Syndication.Tests
             var item = new SyndicationItem()
             {
                 Id = "id",
-                LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1)
+                LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
             };
             CompareHelper.AssertEqualWriteOutput(
                 @"<entry xmlns=""http://www.w3.org/2005/Atom"">
@@ -660,13 +660,13 @@ namespace System.ServiceModel.Syndication.Tests
                 new SyndicationItem()
                 {
                     Id = "id1",
-                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1)
+                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
                 },
                 new SyndicationItem()
                 {
                     Id = "id2",
-                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1)
-                }
+                    LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(1),
+                },
             };
             CompareHelper.AssertEqualWriteOutput(
                 @"<entry xmlns=""http://www.w3.org/2005/Atom"">
@@ -756,13 +756,13 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 @"<different xmlns=""http://www.w3.org/2005/Atom"" />",
-                false
+                false,
             };
             yield return new object[] { @"<feed xmlns=""http://www.w3.org/2005/Atom"" />", true };
             yield return new object[]
             {
                 @"<feed xmlns=""http://www.w3.org/2005/Atom""></feed>",
-                true
+                true,
             };
         }
 
@@ -1904,7 +1904,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter<SyndicationFeedTryParseTrueSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
 
@@ -2448,7 +2448,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new CustomAtom10FeedFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
 
@@ -2499,7 +2499,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -2514,7 +2514,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -2527,7 +2527,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter(typeof(SyndicationFeedSubclass))
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -2542,7 +2542,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter(typeof(SyndicationFeedSubclass))
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -2555,7 +2555,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter<SyndicationFeed>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -2570,7 +2570,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter<SyndicationFeed>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -2583,7 +2583,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter<SyndicationFeedSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Feed);
@@ -2598,7 +2598,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Atom10FeedFormatter<SyndicationFeedSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Feed);
@@ -2904,7 +2904,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var formatter = new Atom10FeedFormatter()
             {
-                PreserveAttributeExtensions = preserveAttributeExtensions
+                PreserveAttributeExtensions = preserveAttributeExtensions,
             };
             Assert.Equal(preserveAttributeExtensions, formatter.PreserveAttributeExtensions);
         }
@@ -2916,7 +2916,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var formatter = new Atom10FeedFormatter()
             {
-                PreserveElementExtensions = preserveElementExtensions
+                PreserveElementExtensions = preserveElementExtensions,
             };
             Assert.Equal(preserveElementExtensions, formatter.PreserveElementExtensions);
         }

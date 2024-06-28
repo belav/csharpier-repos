@@ -27,8 +27,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Conformance Settings",
-                        Desc = "Conformance Settings"
-                    }
+                        Desc = "Conformance Settings",
+                    },
                 }
             );
             module.AddChild(
@@ -37,8 +37,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Create Overloads",
-                        Desc = "Create Overloads"
-                    }
+                        Desc = "Create Overloads",
+                    },
                 }
             );
             module.AddChild(
@@ -47,14 +47,14 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Filter Settings",
-                        Desc = "Filter Settings"
-                    }
+                        Desc = "Filter Settings",
+                    },
                 }
             );
             module.AddChild(
                 new TCLineInfo()
                 {
-                    Attribute = new TestCase() { Name = "LineInfo", Desc = "LineInfo" }
+                    Attribute = new TestCase() { Name = "LineInfo", Desc = "LineInfo" },
                 }
             );
             module.AddChild(
@@ -63,8 +63,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "MaxCharacters Settings",
-                        Desc = "MaxCharacters Settings"
-                    }
+                        Desc = "MaxCharacters Settings",
+                    },
                 }
             );
             module.AddChild(
@@ -73,8 +73,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.CharCheckingReader",
-                        Param = "CharCheckingReader"
-                    }
+                        Param = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -83,8 +83,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.SubtreeReader",
-                        Param = "SubtreeReader"
-                    }
+                        Param = "SubtreeReader",
+                    },
                 }
             );
             module.AddChild(
@@ -93,8 +93,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.CoreReader",
-                        Param = "CoreReader"
-                    }
+                        Param = "CoreReader",
+                    },
                 }
             );
             module.AddChild(
@@ -103,8 +103,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.WrappedReader",
-                        Param = "WrappedReader"
-                    }
+                        Param = "WrappedReader",
+                    },
                 }
             );
             module.AddChild(
@@ -113,8 +113,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "CloseInput.WrappedReader",
-                        Param = "WrappedReader"
-                    }
+                        Param = "WrappedReader",
+                    },
                 }
             );
             module.AddChild(
@@ -123,8 +123,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "CloseInput.CharCheckingReader",
-                        Param = "CharCheckingReader"
-                    }
+                        Param = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -133,8 +133,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "CloseInput.CoreReader",
-                        Param = "CoreReader"
-                    }
+                        Param = "CoreReader",
+                    },
                 }
             );
             module.AddChild(
@@ -143,8 +143,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "CloseInput.SubtreeReader",
-                        Param = "SubtreeReader"
-                    }
+                        Param = "SubtreeReader",
+                    },
                 }
             );
             module.AddChild(
@@ -153,8 +153,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.CharCheckingReader",
-                        Param = "CharCheckingReader"
-                    }
+                        Param = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -163,8 +163,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.CoreReader",
-                        Param = "CoreReader"
-                    }
+                        Param = "CoreReader",
+                    },
                 }
             );
             module.AddChild(
@@ -173,8 +173,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.WrappedReader",
-                        Param = "WrappedReader"
-                    }
+                        Param = "WrappedReader",
+                    },
                 }
             );
             module.AddChild(
@@ -183,8 +183,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "ReaderSettings Generic Tests.SubtreeReader",
-                        Param = "SubtreeReader"
-                    }
+                        Param = "SubtreeReader",
+                    },
                 }
             );
             module.AddChild(
@@ -193,8 +193,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "TCDtdProcessingCoreReader.CharCheckingReader",
-                        Param = "CharCheckingReader"
-                    }
+                        Param = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -203,8 +203,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "TCDtdProcessingCoreReader.CoreReader",
-                        Param = "CoreReader"
-                    }
+                        Param = "CoreReader",
+                    },
                 }
             );
             module.AddChild(
@@ -213,8 +213,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "TCDtdProcessingCoreReader.WrappedReader",
-                        Param = "WrappedReader"
-                    }
+                        Param = "WrappedReader",
+                    },
                 }
             );
             module.AddChild(
@@ -223,8 +223,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "TCDtdProcessingCoreReader.SubtreeReader",
-                        Param = "SubtreeReader"
-                    }
+                        Param = "SubtreeReader",
+                    },
                 }
             );
             module.AddChild(
@@ -233,8 +233,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Read xml as one byte stream.CharCheckingReader",
-                        Param = "CharCheckingReader"
-                    }
+                        Param = "CharCheckingReader",
+                    },
                 }
             );
             module.AddChild(
@@ -243,8 +243,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Read xml as one byte stream.SubtreeReader",
-                        Param = "SubtreeReader"
-                    }
+                        Param = "SubtreeReader",
+                    },
                 }
             );
             module.AddChild(
@@ -253,8 +253,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Read xml as one byte stream.CoreReader",
-                        Param = "CoreReader"
-                    }
+                        Param = "CoreReader",
+                    },
                 }
             );
             module.AddChild(
@@ -263,8 +263,8 @@ namespace System.Xml.ReaderSettingsTests
                     Attribute = new TestCase()
                     {
                         Name = "Read xml as one byte stream.WrappedReader",
-                        Param = "WrappedReader"
-                    }
+                        Param = "WrappedReader",
+                    },
                 }
             );
 

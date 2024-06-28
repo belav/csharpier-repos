@@ -97,7 +97,7 @@ namespace MonoTests.System.ServiceModel.Discovery
             var ac = new AnnouncementClient(
                 new AnnouncementEndpoint()
                 {
-                    Address = new EndpointAddress("http://localhost:37564")
+                    Address = new EndpointAddress("http://localhost:37564"),
                 }
             );
             var edm = new EndpointDiscoveryMetadata();
@@ -113,7 +113,7 @@ namespace MonoTests.System.ServiceModel.Discovery
             var ac = new AnnouncementClient(
                 new UdpAnnouncementEndpoint()
                 {
-                    Address = new EndpointAddress("http://localhost:37564")
+                    Address = new EndpointAddress("http://localhost:37564"),
                 }
             );
             var edm = new EndpointDiscoveryMetadata();
@@ -137,7 +137,7 @@ namespace MonoTests.System.ServiceModel.Discovery
                 new AnnouncementEndpoint()
                 {
                     Binding = new BasicHttpBinding(),
-                    Address = new EndpointAddress("soap.udp://localhost:37564")
+                    Address = new EndpointAddress("soap.udp://localhost:37564"),
                 }
             );
             var edm = new EndpointDiscoveryMetadata();
@@ -162,9 +162,9 @@ namespace MonoTests.System.ServiceModel.Discovery
                     Binding = new BasicHttpBinding()
                     {
                         SendTimeout = TimeSpan.FromSeconds(10),
-                        ReceiveTimeout = TimeSpan.FromSeconds(10)
+                        ReceiveTimeout = TimeSpan.FromSeconds(10),
                     },
-                    Address = http_address
+                    Address = http_address,
                 }
             );
             var edm = new EndpointDiscoveryMetadata();
@@ -188,7 +188,7 @@ namespace MonoTests.System.ServiceModel.Discovery
             var binding = new CustomBinding(new HttpTransportBindingElement())
             {
                 SendTimeout = TimeSpan.FromSeconds(10),
-                ReceiveTimeout = TimeSpan.FromSeconds(10)
+                ReceiveTimeout = TimeSpan.FromSeconds(10),
             };
             var ac = new AnnouncementClient(
                 new AnnouncementEndpoint() { Binding = binding, Address = http_address }

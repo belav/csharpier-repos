@@ -82,7 +82,7 @@ namespace System.Formats.Tar.Tests
         {
             Dictionary<string, string> extendedAttribute = new Dictionary<string, string>()
             {
-                { key, value }
+                { key, value },
             };
 
             Assert.Throws<ArgumentException>(

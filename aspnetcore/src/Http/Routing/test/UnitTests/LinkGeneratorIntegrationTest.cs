@@ -20,7 +20,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "api/Pets/{id}",
-                    defaults: new { controller = "Pets", action = "GetById", },
+                    defaults: new { controller = "Pets", action = "GetById" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -36,7 +36,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "api/Pets",
-                    defaults: new { controller = "Pets", action = "GetAll", },
+                    defaults: new { controller = "Pets", action = "GetAll" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -52,7 +52,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "api/Pets/{id}",
-                    defaults: new { controller = "Pets", action = "Update", },
+                    defaults: new { controller = "Pets", action = "Update" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -68,7 +68,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "api/Inventory/{searchTerm}/{page}",
-                    defaults: new { controller = "Inventory", action = "Search", },
+                    defaults: new { controller = "Inventory", action = "Search" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -95,7 +95,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 2000,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
             // Conventional routed endpoint 2
             EndpointFactory.CreateRouteEndpoint(
@@ -112,7 +112,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 2000,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
             // Conventional routed endpoint 3
             EndpointFactory.CreateRouteEndpoint(
@@ -129,7 +129,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 2000,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
             // Conventional routed link generation route 1
             EndpointFactory.CreateRouteEndpoint(
@@ -146,14 +146,14 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 2000,
-                metadata: new object[] { new SuppressMatchingMetadata(), }
+                metadata: new object[] { new SuppressMatchingMetadata() }
             ),
             // Conventional routed endpoint 4 (with area)
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Admin/{controller=Home}/{action=Index}/{id?}",
-                    defaults: new { area = "Admin", },
-                    parameterPolicies: new { controller = "Admin", },
+                    defaults: new { area = "Admin" },
+                    parameterPolicies: new { controller = "Admin" },
                     requiredValues: new
                     {
                         area = "Admin",
@@ -163,14 +163,14 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 1000,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
             // Conventional routed endpoint 5 (with area)
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Admin/{controller=Home}/{action=Index}/{id?}",
-                    defaults: new { area = "Admin", },
-                    parameterPolicies: new { controller = "Admin", },
+                    defaults: new { area = "Admin" },
+                    parameterPolicies: new { controller = "Admin" },
                     requiredValues: new
                     {
                         area = "Admin",
@@ -180,14 +180,14 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 1000,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
             // Conventional routed link generation route 2
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Admin/{controller=Home}/{action=Index}/{id?}",
-                    defaults: new { area = "Admin", },
-                    parameterPolicies: new { area = "Admin", },
+                    defaults: new { area = "Admin" },
+                    parameterPolicies: new { area = "Admin" },
                     requiredValues: new
                     {
                         controller = RoutePattern.RequiredValueAny,
@@ -197,7 +197,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 1000,
-                metadata: new object[] { new SuppressMatchingMetadata(), }
+                metadata: new object[] { new SuppressMatchingMetadata() }
             ),
             // Conventional routed link generation route 3 - this doesn't match any actions.
             EndpointFactory.CreateRouteEndpoint(
@@ -245,7 +245,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Pages",
-                    defaults: new { page = "/Pages/Index", },
+                    defaults: new { page = "/Pages/Index" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -261,7 +261,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Pages/Index",
-                    defaults: new { page = "/Pages/Index", },
+                    defaults: new { page = "/Pages/Index" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -272,13 +272,13 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 0,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
             // Razor Page 2 primary endpoint
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Pages/Help/{id?}",
-                    defaults: new { page = "/Pages/Help", },
+                    defaults: new { page = "/Pages/Help" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -294,7 +294,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Pages/About/{id?}",
-                    defaults: new { page = "/Pages/About", },
+                    defaults: new { page = "/Pages/About" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -310,7 +310,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Admin/Pages",
-                    defaults: new { page = "/Pages/Index", area = "Admin", },
+                    defaults: new { page = "/Pages/Index", area = "Admin" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -326,7 +326,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
             EndpointFactory.CreateRouteEndpoint(
                 RoutePatternFactory.Parse(
                     "Admin/Pages/Index",
-                    defaults: new { page = "/Pages/Index", area = "Admin", },
+                    defaults: new { page = "/Pages/Index", area = "Admin" },
                     parameterPolicies: null,
                     requiredValues: new
                     {
@@ -337,7 +337,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
                     }
                 ),
                 order: 0,
-                metadata: new object[] { new SuppressLinkGenerationMetadata(), }
+                metadata: new object[] { new SuppressLinkGenerationMetadata() }
             ),
         };
 
@@ -384,7 +384,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Home", action = "Index", };
+        var values = new { controller = "Home", action = "Index" };
         var ambientValues = new { };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
@@ -433,7 +433,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Store", id = "17", };
+        var values = new { controller = "Store", id = "17" };
         var ambientValues = new { };
         var address = CreateAddress(
             routeName: "custom",
@@ -459,7 +459,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { page = "/Pages/Index", };
+        var values = new { page = "/Pages/Index" };
         var ambientValues = new { };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
@@ -481,7 +481,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { area = "Admin", page = "/Pages/Index", };
+        var values = new { area = "Admin", page = "/Pages/Index" };
         var ambientValues = new { };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
@@ -534,7 +534,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Pets", action = "GetById", };
+        var values = new { controller = "Pets", action = "GetById" };
         var ambientValues = new
         {
             controller = "Pets",
@@ -561,7 +561,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Pets", action = "GetById", };
+        var values = new { controller = "Pets", action = "GetById" };
         var ambientValues = new
         {
             controller = "Pets",
@@ -588,8 +588,8 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Pets", action = "GetById", };
-        var ambientValues = new { page = "/Pages/Help", id = "17", };
+        var values = new { controller = "Pets", action = "GetById" };
+        var ambientValues = new { page = "/Pages/Help", id = "17" };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -610,7 +610,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Home", action = "Index", };
+        var values = new { controller = "Home", action = "Index" };
         var ambientValues = new
         {
             controller = "Home",
@@ -637,7 +637,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Home", action = "Index", };
+        var values = new { controller = "Home", action = "Index" };
         var ambientValues = new
         {
             controller = "Pets",
@@ -664,8 +664,8 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Home", action = "Index", };
-        var ambientValues = new { page = "/Pages/Help", id = "17", };
+        var values = new { controller = "Home", action = "Index" };
+        var ambientValues = new { page = "/Pages/Help", id = "17" };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -686,7 +686,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Home", action = "Index11", };
+        var values = new { controller = "Home", action = "Index11" };
         var ambientValues = new
         {
             controller = "Pets",
@@ -745,7 +745,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Store", };
+        var values = new { controller = "Store" };
         var ambientValues = new
         {
             controller = "Home",
@@ -776,8 +776,8 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { controller = "Store", id = "17", };
-        var ambientValues = new { controller = "Store", };
+        var values = new { controller = "Store", id = "17" };
+        var ambientValues = new { controller = "Store" };
         var address = CreateAddress(
             routeName: "custom",
             values: values,
@@ -802,8 +802,8 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { custom2 = "17", };
-        var ambientValues = new { controller = "Store", };
+        var values = new { custom2 = "17" };
+        var ambientValues = new { controller = "Store" };
         var address = CreateAddress(
             routeName: "custom2",
             values: values,
@@ -828,8 +828,8 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { page = "/Pages/Help", };
-        var ambientValues = new { page = "/Pages/Help", id = "17", };
+        var values = new { page = "/Pages/Help" };
+        var ambientValues = new { page = "/Pages/Help", id = "17" };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -850,7 +850,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { page = "/Pages/Help", };
+        var values = new { page = "/Pages/Help" };
         var ambientValues = new
         {
             controller = "Pets",
@@ -877,8 +877,8 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { page = "/Pages/Help", };
-        var ambientValues = new { page = "/Pages/About", id = "17", };
+        var values = new { page = "/Pages/Help" };
+        var ambientValues = new { page = "/Pages/About", id = "17" };
         var address = CreateAddress(values: values, ambientValues: ambientValues);
 
         // Act
@@ -899,7 +899,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { page = "/Pages/Help2", };
+        var values = new { page = "/Pages/Help2" };
         var ambientValues = new
         {
             controller = "Pets",
@@ -926,7 +926,7 @@ public class LinkGeneratorIntegrationTest : LinkGeneratorTestBase
         // Arrange
         var httpContext = CreateHttpContext();
 
-        var values = new { page = "/Pages/Index", };
+        var values = new { page = "/Pages/Index" };
         var ambientValues = new
         {
             area = "Admin",

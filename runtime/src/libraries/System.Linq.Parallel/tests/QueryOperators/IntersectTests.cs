@@ -18,7 +18,7 @@ namespace System.Linq.Parallel.Tests
                 0,
                 1,
                 Math.Max(DuplicateFactor * 2, leftCount),
-                2 * Math.Max(DuplicateFactor, leftCount * 2)
+                2 * Math.Max(DuplicateFactor, leftCount * 2),
             }.Distinct();
         }
 
@@ -34,7 +34,7 @@ namespace System.Linq.Parallel.Tests
                         leftCount,
                         rightStart,
                         rightCount,
-                        Math.Min(leftCount, (rightCount + 1) / 2)
+                        Math.Min(leftCount, (rightCount + 1) / 2),
                     };
                 }
             }
@@ -54,7 +54,7 @@ namespace System.Linq.Parallel.Tests
                                 {
                                     UnorderedSources.Default(rightStart, rightCount),
                                     rightCount,
-                                    Math.Min(leftCount, (rightCount + 1) / 2)
+                                    Math.Min(leftCount, (rightCount + 1) / 2),
                                 }
                             )
                             .ToArray();
@@ -84,7 +84,7 @@ namespace System.Linq.Parallel.Tests
                         leftCount,
                         UnorderedSources.Default(rightStart, rightCount),
                         rightCount,
-                        Math.Min(leftCount, (rightCount + 1) / 2)
+                        Math.Min(leftCount, (rightCount + 1) / 2),
                     };
                 }
             }

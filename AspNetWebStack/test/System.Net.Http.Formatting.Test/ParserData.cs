@@ -120,7 +120,7 @@ namespace System.Net.Http
                     "path ",
                     " path ",
                     "æææø ø øååå",
-                    "いくつか の テキスト"
+                    "いくつか の テキスト",
                 };
             }
         }
@@ -140,7 +140,7 @@ namespace System.Net.Http
                     Int32.MinValue.ToString(),
                     Int32.MaxValue.ToString(),
                     "æææøøøååå",
-                    "いくつかのテキスト"
+                    "いくつかのテキスト",
                 };
             }
         }

@@ -42,6 +42,6 @@ namespace System.Windows.Forms.Design
         None = 0,
         RightSizeable = 8,
         TopSizeable = 1,
-        Visible = 1073741824
+        Visible = 1073741824,
     }
 }

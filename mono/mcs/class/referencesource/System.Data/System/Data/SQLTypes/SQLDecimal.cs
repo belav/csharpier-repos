@@ -122,7 +122,7 @@ namespace System.Data.SqlTypes
             10 * 10 * 10 * 10 * 10 * 10,
             10 * 10 * 10 * 10 * 10 * 10 * 10,
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10,
-            10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10
+            10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10,
         };
 
         #region DecimalHelperTableGenerator
@@ -2095,7 +2095,7 @@ namespace System.Data.SqlTypes
             4,
             4,
             4,
-            4
+            4,
         };
 
         private static byte CLenFromPrec(byte bPrec)
@@ -2654,7 +2654,7 @@ namespace System.Data.SqlTypes
                 snumOp.m_data1,
                 snumOp.m_data2,
                 snumOp.m_data3,
-                snumOp.m_data4
+                snumOp.m_data4,
             };
 
             // Loop through numeric value checking each byte for differences.

@@ -506,7 +506,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    <para>Gets or sets the number of items to display on a single page.</para>
         /// </devdoc>
-        [WebCategory("Paging"), DefaultValue(10), WebSysDescription(SR.DataGrid_PageSize),]
+        [WebCategory("Paging"), DefaultValue(10), WebSysDescription(SR.DataGrid_PageSize)]
         public virtual int PageSize
         {
             get

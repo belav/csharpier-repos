@@ -250,7 +250,7 @@ public class TestController
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("bookId")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -319,7 +319,7 @@ public class TestController
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("bookId")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -440,7 +440,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -494,7 +494,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -544,7 +544,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -594,7 +594,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -644,7 +644,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -694,7 +694,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -744,7 +744,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -794,7 +794,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("id")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert
@@ -846,7 +846,7 @@ class Program
         {
             new DiagnosticResult(DiagnosticDescriptors.RoutePatternUnusedParameter)
                 .WithArguments("bookId")
-                .WithLocation(0)
+                .WithLocation(0),
         };
 
         // Act & Assert

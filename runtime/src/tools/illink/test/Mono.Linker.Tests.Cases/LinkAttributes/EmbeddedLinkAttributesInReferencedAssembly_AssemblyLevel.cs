@@ -12,7 +12,7 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes
         new string[] { "Dependencies/TestRemoveDontRemoveAttributes.cs" },
         resources: new object[]
         {
-            new string[] { "Dependencies/TestRemoveAttribute.xml", "ILLink.LinkAttributes.xml" }
+            new string[] { "Dependencies/TestRemoveAttribute.xml", "ILLink.LinkAttributes.xml" },
         },
         addAsReference: false
     )]

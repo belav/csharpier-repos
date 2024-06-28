@@ -429,7 +429,7 @@ namespace System
         EnterVerticalHlMode,
         SetAAttributes,
         SetPglenInch, // 393
-        Last
+        Last,
     }
 }
 #endif

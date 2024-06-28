@@ -26,7 +26,7 @@ public class TagHelperOutputExtensionsTest
             {
                 {
                     "first",
-                    new TagHelperAttributeList { { "second", "B" }, },
+                    new TagHelperAttributeList { { "second", "B" } },
                     new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
                     new[]
                     {
@@ -36,7 +36,7 @@ public class TagHelperOutputExtensionsTest
                 },
                 {
                     "second",
-                    new TagHelperAttributeList { { "first", "A" }, },
+                    new TagHelperAttributeList { { "first", "A" } },
                     new TagHelperAttributeList
                     {
                         { "second", "B" },
@@ -52,12 +52,12 @@ public class TagHelperOutputExtensionsTest
                 },
                 {
                     "second",
-                    new TagHelperAttributeList { { "first", "A" }, },
+                    new TagHelperAttributeList { { "first", "A" } },
                     new TagHelperAttributeList
                     {
                         { "second", "B" },
                         { "first", "A" },
-                        { "second", "Duplicate B" }
+                        { "second", "Duplicate B" },
                     },
                     new[]
                     {
@@ -68,8 +68,8 @@ public class TagHelperOutputExtensionsTest
                 },
                 {
                     "dynamic",
-                    new TagHelperAttributeList { { "first", "A" }, { "second", "B" }, },
-                    new TagHelperAttributeList { { "dynamic", "value" }, },
+                    new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
+                    new TagHelperAttributeList { { "dynamic", "value" } },
                     new[]
                     {
                         new TagHelperAttribute("first", "A"),
@@ -83,7 +83,7 @@ public class TagHelperOutputExtensionsTest
                     {
                         { "first", "A" },
                         { "dynamic", "value" },
-                        { "secondDynamic", "another value" }
+                        { "secondDynamic", "another value" },
                     },
                     new TagHelperAttributeList { { "second", "B" } },
                     new[]
@@ -100,7 +100,7 @@ public class TagHelperOutputExtensionsTest
                     {
                         { "first", "A" },
                         { "dynamic", "value" },
-                        { "secondDynamic", "another value" }
+                        { "secondDynamic", "another value" },
                     },
                     new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
                     new[]
@@ -117,13 +117,13 @@ public class TagHelperOutputExtensionsTest
                     {
                         { "first", "A" },
                         { "dynamic", "value" },
-                        { "secondDynamic", "another value" }
+                        { "secondDynamic", "another value" },
                     },
                     new TagHelperAttributeList
                     {
                         { "first", "A" },
                         { "second", "B" },
-                        { "third", "C" }
+                        { "third", "C" },
                     },
                     new[]
                     {
@@ -139,13 +139,13 @@ public class TagHelperOutputExtensionsTest
                     {
                         { "third", "C" },
                         { "dynamic", "value" },
-                        { "secondDynamic", "another value" }
+                        { "secondDynamic", "another value" },
                     },
                     new TagHelperAttributeList
                     {
                         { "first", "A" },
                         { "second", "B" },
-                        { "third", "C" }
+                        { "third", "C" },
                     },
                     new[]
                     {
@@ -161,7 +161,7 @@ public class TagHelperOutputExtensionsTest
                     {
                         { "third", "C" },
                         { "dynamic", "value" },
-                        { "secondDynamic", "another value" }
+                        { "secondDynamic", "another value" },
                     },
                     new TagHelperAttributeList
                     {
@@ -184,7 +184,7 @@ public class TagHelperOutputExtensionsTest
                     {
                         { "third", "C" },
                         { "dynamic", "value" },
-                        { "secondDynamic", "another value" }
+                        { "secondDynamic", "another value" },
                     },
                     new TagHelperAttributeList
                     {
@@ -207,11 +207,7 @@ public class TagHelperOutputExtensionsTest
                 },
                 {
                     "first",
-                    new TagHelperAttributeList
-                    {
-                        { "third", "C" },
-                        { "third", "Duplicate Third" },
-                    },
+                    new TagHelperAttributeList { { "third", "C" }, { "third", "Duplicate Third" } },
                     new TagHelperAttributeList
                     {
                         { "third", "C" },
@@ -227,11 +223,7 @@ public class TagHelperOutputExtensionsTest
                 },
                 {
                     "first",
-                    new TagHelperAttributeList
-                    {
-                        { "third", "C" },
-                        { "third", "Duplicate Third" },
-                    },
+                    new TagHelperAttributeList { { "third", "C" }, { "third", "Duplicate Third" } },
                     new TagHelperAttributeList
                     {
                         { "third", "C" },
@@ -247,7 +239,7 @@ public class TagHelperOutputExtensionsTest
                 },
                 {
                     "first",
-                    new TagHelperAttributeList { { "third", "D" }, },
+                    new TagHelperAttributeList { { "third", "D" } },
                     new TagHelperAttributeList
                     {
                         { "first", "A" },
@@ -521,7 +513,7 @@ public class TagHelperOutputExtensionsTest
             attributes: new TagHelperAttributeList()
             {
                 { "route-Hello", "World" },
-                { "Route-I", "Am" }
+                { "Route-I", "Am" },
             },
             getChildContentAsync: (useCachedResult, encoder) =>
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
@@ -552,7 +544,7 @@ public class TagHelperOutputExtensionsTest
             attributes: new TagHelperAttributeList()
             {
                 { "route-Hello", "World" },
-                { "Route-I", "Am" }
+                { "Route-I", "Am" },
             },
             getChildContentAsync: (useCachedResult, encoder) =>
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
@@ -580,7 +572,7 @@ public class TagHelperOutputExtensionsTest
             attributes: new TagHelperAttributeList()
             {
                 { "route-Hello", "World" },
-                { "Route-I", "Am" }
+                { "Route-I", "Am" },
             },
             getChildContentAsync: (useCachedResult, encoder) =>
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
@@ -614,7 +606,7 @@ public class TagHelperOutputExtensionsTest
                 {
                     new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        { "class", "btn" }
+                        { "class", "btn" },
                     },
                     new TagHelperAttributeList { { "class", "btn2" }, { "class", "btn3" } },
                     new TagHelperAttributeList { { "class", "btn2 btn" } }
@@ -622,7 +614,7 @@ public class TagHelperOutputExtensionsTest
                 {
                     new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        { "ClAsS", "btn" }
+                        { "ClAsS", "btn" },
                     },
                     new TagHelperAttributeList { { "class", "btn2" }, { "class", "btn3" } },
                     new TagHelperAttributeList { { "class", "btn2 btn" } }
@@ -630,7 +622,7 @@ public class TagHelperOutputExtensionsTest
                 {
                     new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        { "class", "btn" }
+                        { "class", "btn" },
                     },
                     new TagHelperAttributeList { { "clASS", "btn2" }, { "class", "btn3" } },
                     new TagHelperAttributeList { { "clASS", "btn2 btn" } }
@@ -638,7 +630,7 @@ public class TagHelperOutputExtensionsTest
                 {
                     new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        { "class", "btn" }
+                        { "class", "btn" },
                     },
                     new TagHelperAttributeList { { "clASS", "btn2" }, { "CLass", "btn3" } },
                     new TagHelperAttributeList { { "clASS", "btn2 btn" } }
@@ -646,7 +638,7 @@ public class TagHelperOutputExtensionsTest
                 {
                     new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        { "CLASS", "btn" }
+                        { "CLASS", "btn" },
                     },
                     new TagHelperAttributeList { { "clASS", "btn2" }, { "CLass", "btn3" } },
                     new TagHelperAttributeList { { "clASS", "btn2 btn" } }
@@ -654,7 +646,7 @@ public class TagHelperOutputExtensionsTest
                 {
                     new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        { "CLASS", "btn" }
+                        { "CLASS", "btn" },
                     },
                     new TagHelperAttributeList
                     {
@@ -696,7 +688,7 @@ public class TagHelperOutputExtensionsTest
                         { "A", "A Value" },
                         { "B", "B Value" },
                     }
-                }
+                },
             };
         }
     }

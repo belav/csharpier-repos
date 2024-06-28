@@ -247,7 +247,7 @@ public partial class RemoteAuthenticatorViewCore<
             new RemoteAuthenticationContext<TAuthenticationState>
             {
                 State = AuthenticationState,
-                InteractiveRequest = interactiveRequest
+                InteractiveRequest = interactiveRequest,
             }
         );
 
@@ -274,7 +274,7 @@ public partial class RemoteAuthenticatorViewCore<
                     ApplicationPaths.LogInFailedPath,
                     AuthenticationNavigationOptions with
                     {
-                        HistoryEntryState = result.ErrorMessage
+                        HistoryEntryState = result.ErrorMessage,
                     }
                 );
                 break;
@@ -317,7 +317,7 @@ public partial class RemoteAuthenticatorViewCore<
                     ApplicationPaths.LogInFailedPath,
                     AuthenticationNavigationOptions with
                     {
-                        HistoryEntryState = result.ErrorMessage
+                        HistoryEntryState = result.ErrorMessage,
                     }
                 );
                 break;
@@ -344,7 +344,7 @@ public partial class RemoteAuthenticatorViewCore<
                 ApplicationPaths.LogOutFailedPath,
                 AuthenticationNavigationOptions with
                 {
-                    HistoryEntryState = "The logout was not initiated from within the page."
+                    HistoryEntryState = "The logout was not initiated from within the page.",
                 }
             );
             return;
@@ -361,7 +361,7 @@ public partial class RemoteAuthenticatorViewCore<
                 new RemoteAuthenticationContext<TAuthenticationState>
                 {
                     State = AuthenticationState,
-                    InteractiveRequest = interactiveRequest
+                    InteractiveRequest = interactiveRequest,
                 }
             );
             switch (result.Status)
@@ -388,7 +388,7 @@ public partial class RemoteAuthenticatorViewCore<
                         ApplicationPaths.LogOutFailedPath,
                         AuthenticationNavigationOptions with
                         {
-                            HistoryEntryState = result.ErrorMessage
+                            HistoryEntryState = result.ErrorMessage,
                         }
                     );
                     break;
@@ -433,7 +433,7 @@ public partial class RemoteAuthenticatorViewCore<
                     ApplicationPaths.LogOutFailedPath,
                     AuthenticationNavigationOptions with
                     {
-                        HistoryEntryState = result.ErrorMessage
+                        HistoryEntryState = result.ErrorMessage,
                     }
                 );
                 break;

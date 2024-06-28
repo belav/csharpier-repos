@@ -37,7 +37,7 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// All events, including previous levels
         /// </summary>
-        Verbose
+        Verbose,
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Undefined task
         /// </summary>
-        None = 0
+        None = 0,
     }
 
     /// <summary>
@@ -111,7 +111,7 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// An event representing receiving an activity transfer from another component
         /// </summary>
-        Receive = 240
+        Receive = 240,
     }
 
     /// <summary>
@@ -193,6 +193,6 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Events raised using classic eventlog API
         /// </summary>
-        EventLogClassic = 0x80000000000000
+        EventLogClassic = 0x80000000000000,
     }
 }

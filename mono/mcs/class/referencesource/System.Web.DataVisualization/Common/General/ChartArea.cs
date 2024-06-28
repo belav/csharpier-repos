@@ -88,7 +88,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Chart areas are aligned using all values (horizontally and vertically).
         /// </summary>
-        All = Vertical | Horizontal
+        All = Vertical | Horizontal,
     }
 
     /// <summary>
@@ -151,7 +151,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// ChartArea class exposes all the properties and methods
     /// of its base ChartArea3D class.
     /// </summary>
-    [DefaultProperty("Axes"), SRDescription("DescriptionAttributeChartArea_ChartArea"),]
+    [DefaultProperty("Axes"), SRDescription("DescriptionAttributeChartArea_ChartArea")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -2825,7 +2825,7 @@ namespace System.Web.UI.DataVisualization.Charting
                     // Get label rotated position
                     PointF[] labelPosition = new PointF[]
                     {
-                        new PointF(areaCenterAbs.X, plotAreaRectAbs.Y)
+                        new PointF(areaCenterAbs.X, plotAreaRectAbs.Y),
                     };
                     Matrix newMatrix = new Matrix();
                     newMatrix.RotateAt(textAngle, areaCenterAbs);

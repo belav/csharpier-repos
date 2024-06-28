@@ -28,7 +28,7 @@ namespace JitTest_array2_refany_cs
             ulong[,] aul2 = new ulong[,]
             {
                 { 1, 2, 3 },
-                { 4, 5, 6 }
+                { 4, 5, 6 },
             };
             TestRef(__makeref(aul2));
             for (int i = 0; i < 2; i++)

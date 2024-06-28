@@ -17,9 +17,9 @@ namespace System.Web.WebPages
         {
             new DefaultDisplayMode(MobileDisplayModeId)
             {
-                ContextCondition = context => context.GetOverriddenBrowser().IsMobileDevice
+                ContextCondition = context => context.GetOverriddenBrowser().IsMobileDevice,
             },
-            new DefaultDisplayMode()
+            new DefaultDisplayMode(),
         };
 
         internal DisplayModeProvider()

@@ -231,7 +231,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             )
             {
                 Height = _heightAndWidthOfTheGlyph,
-                Width = _heightAndWidthOfTheGlyph
+                Width = _heightAndWidthOfTheGlyph,
             };
 
         private void FormatMappingChanged(object sender, FormatItemsEventArgs e) =>

@@ -971,7 +971,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     { "ContractNamespace", endpoint.ContractNamespace },
                     { "ContractName", endpoint.ContractName },
-                    { "Endpoint", endpoint.ListenUri }
+                    { "Endpoint", endpoint.ListenUri },
                 };
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,

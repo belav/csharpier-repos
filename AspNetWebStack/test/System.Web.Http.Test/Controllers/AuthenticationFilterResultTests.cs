@@ -205,7 +205,7 @@ namespace System.Web.Http.Controllers
                 IAuthenticationFilter[] filters = new IAuthenticationFilter[]
                 {
                     firstFilter,
-                    secondFilter
+                    secondFilter,
                 };
                 IHttpActionResult innerResult = CreateDummyActionResult();
                 IHttpActionResult product = CreateProductUnderTest(
@@ -287,7 +287,7 @@ namespace System.Web.Http.Controllers
             IAuthenticationFilter[] filters = new IAuthenticationFilter[]
             {
                 firstFilter,
-                secondFilter
+                secondFilter,
             };
             IHttpActionResult innerResult = CreateStubActionResult();
 
@@ -502,7 +502,7 @@ namespace System.Web.Http.Controllers
             IAuthenticationFilter[] filters = new IAuthenticationFilter[]
             {
                 firstFilter,
-                secondFilter
+                secondFilter,
             };
             IHttpActionResult originalInnerResult = CreateDummyActionResult();
             CancellationToken expectedCancellationToken = CreateCancellationToken();

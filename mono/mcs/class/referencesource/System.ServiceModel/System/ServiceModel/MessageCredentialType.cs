@@ -9,7 +9,7 @@ namespace System.ServiceModel
         Windows,
         UserName,
         Certificate,
-        IssuedToken
+        IssuedToken,
     }
 
     static class MessageCredentialTypeHelper

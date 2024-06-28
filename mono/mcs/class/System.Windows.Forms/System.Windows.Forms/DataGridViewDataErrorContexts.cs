@@ -38,6 +38,6 @@ namespace System.Windows.Forms
         LeaveControl = 2048,
         CurrentCellChange = 4096,
         Scroll = 8192,
-        ClipboardContent = 16384
+        ClipboardContent = 16384,
     }
 }

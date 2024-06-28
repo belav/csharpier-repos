@@ -21,7 +21,7 @@ namespace System.Workflow.ComponentModel.Design
         public enum LayoutUpdateReason
         {
             LayoutChanged,
-            ZoomChanged
+            ZoomChanged,
         }
 
         protected IServiceProvider serviceProvider;
@@ -171,7 +171,7 @@ namespace System.Workflow.ComponentModel.Design
                 //Before we select the transform factor we make sure that logicalviewport origin is scaled down
                 Point[] logicalViewPortOrigin = new Point[]
                 {
-                    viewPortData.LogicalViewPort.Location
+                    viewPortData.LogicalViewPort.Location,
                 };
                 transformationMatrix.TransformPoints(logicalViewPortOrigin);
 
@@ -302,7 +302,7 @@ namespace System.Workflow.ComponentModel.Design
                 //Before we select the transform factor we make sure that logicalviewport origin is scaled down
                 Point[] logicalViewPortOrigin = new Point[]
                 {
-                    viewPortData.LogicalViewPort.Location
+                    viewPortData.LogicalViewPort.Location,
                 };
                 transformationMatrix.TransformPoints(logicalViewPortOrigin);
 
@@ -677,7 +677,7 @@ namespace System.Workflow.ComponentModel.Design
             Point[] points = new Point[]
             {
                 viewPortData.Translation,
-                new Point(viewPortData.ViewPortSize)
+                new Point(viewPortData.ViewPortSize),
             };
             coOrdTxMatrix.TransformPoints(points);
             Rectangle physicalViewPort = new Rectangle(points[0], new Size(points[1]));
@@ -721,7 +721,7 @@ namespace System.Workflow.ComponentModel.Design
                 points = new Point[]
                 {
                     viewPortBitmapArea.Location,
-                    new Point(viewPortBitmapArea.Size)
+                    new Point(viewPortBitmapArea.Size),
                 };
                 coOrdTxMatrix.TransformPoints(points);
                 viewPortBitmapArea.Location = points[0];
@@ -783,7 +783,7 @@ namespace System.Workflow.ComponentModel.Design
                 Point[] points = new Point[]
                 {
                     viewPortData.Translation,
-                    new Point(viewPortData.ViewPortSize)
+                    new Point(viewPortData.ViewPortSize),
                 };
                 coOrdTxMatrix.TransformPoints(points);
                 coOrdTxMatrix.Invert();
@@ -886,7 +886,7 @@ namespace System.Workflow.ComponentModel.Design
                         points = new Point[]
                         {
                             viewPortBitmapArea.Location,
-                            new Point(viewPortBitmapArea.Size)
+                            new Point(viewPortBitmapArea.Size),
                         };
                         coOrdTxMatrix.TransformPoints(points);
                         viewPortBitmapArea.Location = points[0];

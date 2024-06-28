@@ -72,7 +72,7 @@ public class ApiConventionTypeAttributeTest
         {
             new ProducesAttribute(typeof(object)),
             new ServiceFilterAttribute(typeof(object)),
-            new AuthorizeAttribute()
+            new AuthorizeAttribute(),
         };
         var expected = GetErrorMessage(methodName, attributes);
 

@@ -24,7 +24,7 @@ namespace Tracing.Tests.GCFinalizers
                     "Microsoft-Windows-DotNETRuntime",
                     EventLevel.Informational,
                     0b1
-                )
+                ),
             };
 
             bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
@@ -49,13 +49,13 @@ namespace Tracing.Tests.GCFinalizers
             {
                 { "Microsoft-Windows-DotNETRuntime", -1 },
                 { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
-                { "Microsoft-DotNETCore-SampleProfiler", -1 }
+                { "Microsoft-DotNETCore-SampleProfiler", -1 },
             };
 
         private static Dictionary<string, ExpectedEventCount> _expectedEventCountsNativeAOT =
             new Dictionary<string, ExpectedEventCount>()
             {
-                { "Microsoft-Windows-DotNETRuntime", -1 }
+                { "Microsoft-Windows-DotNETRuntime", -1 },
             };
 
         private static Action _eventGeneratingAction = () =>

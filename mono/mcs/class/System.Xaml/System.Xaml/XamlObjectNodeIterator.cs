@@ -210,7 +210,7 @@ namespace System.Xaml
                     new XmlWriterSettings()
                     {
                         OmitXmlDeclaration = true,
-                        ConformanceLevel = ConformanceLevel.Auto
+                        ConformanceLevel = ConformanceLevel.Auto,
                     }
                 );
                 var val = xobj.GetRawValue() as IXmlSerializable;

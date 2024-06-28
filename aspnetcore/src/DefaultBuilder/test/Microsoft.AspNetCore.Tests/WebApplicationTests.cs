@@ -180,15 +180,15 @@ public class WebApplicationTests
         {
             yield return new[]
             {
-                (WebApplicationBuilderConstructorFunc)WebApplicationBuilderConstructor
+                (WebApplicationBuilderConstructorFunc)WebApplicationBuilderConstructor,
             };
             yield return new[]
             {
-                (WebApplicationBuilderConstructorFunc)WebApplicationSlimBuilderConstructor
+                (WebApplicationBuilderConstructorFunc)WebApplicationSlimBuilderConstructor,
             };
             yield return new[]
             {
-                (WebApplicationBuilderConstructorFunc)WebApplicationEmptyBuilderConstructor
+                (WebApplicationBuilderConstructorFunc)WebApplicationEmptyBuilderConstructor,
             };
         }
     }
@@ -505,7 +505,7 @@ public class WebApplicationTests
                     builder.AddInMemoryCollection(
                         new Dictionary<string, string>
                         {
-                            { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) }
+                            { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) },
                         }
                     );
                 })
@@ -518,7 +518,7 @@ public class WebApplicationTests
                     builder.AddInMemoryCollection(
                         new Dictionary<string, string>
                         {
-                            { WebHostDefaults.EnvironmentKey, envName }
+                            { WebHostDefaults.EnvironmentKey, envName },
                         }
                     );
                 })
@@ -531,7 +531,7 @@ public class WebApplicationTests
                     builder.AddInMemoryCollection(
                         new Dictionary<string, string>
                         {
-                            { WebHostDefaults.ContentRootKey, contentRoot }
+                            { WebHostDefaults.ContentRootKey, contentRoot },
                         }
                     );
                 })
@@ -554,7 +554,7 @@ public class WebApplicationTests
                     builder.AddInMemoryCollection(
                         new Dictionary<string, string>
                         {
-                            { WebHostDefaults.HostingStartupAssembliesKey, "hosting" }
+                            { WebHostDefaults.HostingStartupAssembliesKey, "hosting" },
                         }
                     );
                 })
@@ -567,7 +567,10 @@ public class WebApplicationTests
                     builder.AddInMemoryCollection(
                         new Dictionary<string, string>
                         {
-                            { WebHostDefaults.HostingStartupExcludeAssembliesKey, "hostingexclude" }
+                            {
+                                WebHostDefaults.HostingStartupExcludeAssembliesKey,
+                                "hostingexclude"
+                            },
                         }
                     );
                 })
@@ -603,24 +606,24 @@ public class WebApplicationTests
                     "./wwwroot2",
                     "./bar/../wwwroot2",
                     "foo/../wwwroot2",
-                    "wwwroot2/."
+                    "wwwroot2/.",
                 }
             )
             {
                 yield return new object[]
                 {
                     webRoot,
-                    (CreateBuilderOptionsFunc)CreateBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateBuilderOptions,
                 };
                 yield return new object[]
                 {
                     webRoot,
-                    (CreateBuilderOptionsFunc)CreateSlimBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateSlimBuilderOptions,
                 };
                 yield return new object[]
                 {
                     webRoot,
-                    (CreateBuilderOptionsFunc)CreateEmptyBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateEmptyBuilderOptions,
                 };
             }
         }
@@ -642,7 +645,7 @@ public class WebApplicationTests
             var options = new WebApplicationOptions
             {
                 ContentRootPath = contentRoot,
-                WebRootPath = "wwwroot2"
+                WebRootPath = "wwwroot2",
             };
 
             var builder = createBuilder(options);
@@ -671,7 +674,7 @@ public class WebApplicationTests
 
         try
         {
-            var options = new WebApplicationOptions { ContentRootPath = contentRoot, };
+            var options = new WebApplicationOptions { ContentRootPath = contentRoot };
 
             var builder = createBuilder(options);
 
@@ -697,24 +700,24 @@ public class WebApplicationTests
                     "./wwwroot",
                     "./bar/../wwwroot",
                     "foo/../wwwroot",
-                    "wwwroot/."
+                    "wwwroot/.",
                 }
             )
             {
                 yield return new object[]
                 {
                     webRoot,
-                    (CreateBuilderOptionsFunc)CreateBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateBuilderOptions,
                 };
                 yield return new object[]
                 {
                     webRoot,
-                    (CreateBuilderOptionsFunc)CreateSlimBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateSlimBuilderOptions,
                 };
                 yield return new object[]
                 {
                     webRoot,
-                    (CreateBuilderOptionsFunc)CreateEmptyBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateEmptyBuilderOptions,
                 };
             }
         }
@@ -760,12 +763,12 @@ public class WebApplicationTests
                 yield return new object[]
                 {
                     path,
-                    (CreateBuilderOptionsFunc)CreateSlimBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateSlimBuilderOptions,
                 };
                 yield return new object[]
                 {
                     path,
-                    (CreateBuilderOptionsFunc)CreateEmptyBuilderOptions
+                    (CreateBuilderOptionsFunc)CreateEmptyBuilderOptions,
                 };
             }
         }
@@ -878,7 +881,7 @@ public class WebApplicationTests
     {
         var options = new WebApplicationOptions
         {
-            EnvironmentName = isDevelopment ? Environments.Development : Environments.Production
+            EnvironmentName = isDevelopment ? Environments.Development : Environments.Production,
         };
 
         var webApplication = createBuilder(options).Build();
@@ -918,7 +921,7 @@ public class WebApplicationTests
     {
         var options = new WebApplicationOptions
         {
-            EnvironmentName = isDevelopment ? Environments.Development : Environments.Production
+            EnvironmentName = isDevelopment ? Environments.Development : Environments.Production,
         };
 
         var webApplication = CreateEmptyBuilderOptions(options).Build();
@@ -939,7 +942,7 @@ public class WebApplicationTests
         var options = new WebApplicationOptions
         {
             ApplicationName = nameof(WebApplicationTests), // This is not a real assembly
-            EnvironmentName = Environments.Development
+            EnvironmentName = Environments.Development,
         };
 
         // Use secrets fails to load an invalid assembly name but does not throw
@@ -958,7 +961,7 @@ public class WebApplicationTests
         var options = new WebApplicationOptions
         {
             ApplicationName = typeof(WebApplicationTests).Assembly.GetName().Name,
-            EnvironmentName = Environments.Development
+            EnvironmentName = Environments.Development,
         };
 
         var webApplication = createBuilder(options).Build();
@@ -977,7 +980,7 @@ public class WebApplicationTests
         var options = new WebApplicationOptions
         {
             ApplicationName = typeof(WebApplicationTests).Assembly.GetName().Name,
-            EnvironmentName = Environments.Development
+            EnvironmentName = Environments.Development,
         };
 
         var webApplication = CreateEmptyBuilderOptions(options).Build();
@@ -1009,7 +1012,7 @@ public class WebApplicationTests
                 ApplicationName = nameof(WebApplicationTests),
                 ContentRootPath = contentRoot,
                 EnvironmentName = envName,
-                WebRootPath = webRoot
+                WebRootPath = webRoot,
             };
 
             var builder = createBuilder(
@@ -1062,12 +1065,12 @@ public class WebApplicationTests
                     $"--{WebHostDefaults.ApplicationKey}=testhost",
                     $"--{WebHostDefaults.ContentRootKey}={contentRoot}",
                     $"--{WebHostDefaults.WebRootKey}=wwwroot2",
-                    $"--{WebHostDefaults.EnvironmentKey}=Test"
+                    $"--{WebHostDefaults.EnvironmentKey}=Test",
                 },
                 ApplicationName = nameof(WebApplicationTests),
                 ContentRootPath = contentRoot,
                 EnvironmentName = envName,
-                WebRootPath = webRoot
+                WebRootPath = webRoot,
             };
 
             var builder = createBuilder(
@@ -1121,7 +1124,7 @@ public class WebApplicationTests
                     $"--{WebHostDefaults.ContentRootKey}={contentRoot}",
                     $"--{WebHostDefaults.EnvironmentKey}={envName}",
                     $"--{WebHostDefaults.WebRootKey}={webRoot}",
-                }
+                },
             };
 
             var builder = createBuilder(
@@ -1391,14 +1394,14 @@ public class WebApplicationTests
             hostBuilder.ConfigureHostConfiguration(config =>
             {
                 config.AddInMemoryCollection(
-                    new Dictionary<string, string>() { { "A", "A" }, { "B", "B" }, }
+                    new Dictionary<string, string>() { { "A", "A" }, { "B", "B" } }
                 );
             });
 
             hostBuilder.ConfigureAppConfiguration(config =>
             {
                 config.AddInMemoryCollection(
-                    new Dictionary<string, string>() { { "C", "C" }, { "D", "D" }, }
+                    new Dictionary<string, string>() { { "C", "C" }, { "D", "D" } }
                 );
             });
 
@@ -1408,9 +1411,7 @@ public class WebApplicationTests
 
                 builder.ConfigureAppConfiguration(config =>
                 {
-                    config.AddInMemoryCollection(
-                        new Dictionary<string, string>() { { "F", "F" }, }
-                    );
+                    config.AddInMemoryCollection(new Dictionary<string, string>() { { "F", "F" } });
                 });
             });
         });
@@ -1444,21 +1445,21 @@ public class WebApplicationTests
         {
             hostBuilder.ConfigureHostConfiguration(config =>
             {
-                config.AddInMemoryCollection(new Dictionary<string, string>() { { "A", "A" }, });
+                config.AddInMemoryCollection(new Dictionary<string, string>() { { "A", "A" } });
             });
 
             hostBuilder.ConfigureAppConfiguration(config =>
             {
                 // This clears configuration added both via ConfigureHostConfiguration and builder.Configuration.
                 config.Sources.Clear();
-                config.AddInMemoryCollection(new Dictionary<string, string>() { { "B", "B" }, });
+                config.AddInMemoryCollection(new Dictionary<string, string>() { { "B", "B" } });
             });
         });
 
         var builder = createBuilder();
 
         builder.Configuration.AddInMemoryCollection(
-            new Dictionary<string, string>() { { "C", "C" }, }
+            new Dictionary<string, string>() { { "C", "C" } }
         );
 
         await using var app = builder.Build();
@@ -1507,7 +1508,7 @@ public class WebApplicationTests
         );
 
         builder.Configuration.AddInMemoryCollection(
-            new Dictionary<string, string>() { { "B", "B" }, }
+            new Dictionary<string, string>() { { "B", "B" } }
         );
 
         await using var app = builder.Build();
@@ -1809,7 +1810,7 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         builder.Configuration.AddInMemoryCollection(
-            new Dictionary<string, string> { ["foo"] = "bar", }
+            new Dictionary<string, string> { ["foo"] = "bar" }
         );
 
         Assert.Equal("bar", builder.Configuration["foo"]);
@@ -2556,7 +2557,7 @@ public class WebApplicationTests
         var builder = WebApplication.CreateBuilder(
             new WebApplicationOptions
             {
-                ApplicationName = typeof(WebApplicationTests).Assembly.FullName
+                ApplicationName = typeof(WebApplicationTests).Assembly.FullName,
             }
         );
         await using var app = builder.Build();
@@ -2758,7 +2759,7 @@ public class WebApplicationTests
             {
                 ApplicationName = typeof(WebApplicationOptions).Assembly.FullName,
                 EnvironmentName = Environments.Staging,
-                ContentRootPath = Path.GetTempPath()
+                ContentRootPath = Path.GetTempPath(),
             }
         );
 
@@ -2788,7 +2789,7 @@ public class WebApplicationTests
         var builder = createBuilder();
 
         builder.Configuration.AddInMemoryCollection(
-            new Dictionary<string, string> { ["foo"] = "bar", }
+            new Dictionary<string, string> { ["foo"] = "bar" }
         );
 
         var app = builder.Build();
@@ -3514,7 +3515,7 @@ public class WebApplicationTests
                     configurationBuilder.AddInMemoryCollection(
                         new[]
                         {
-                            new KeyValuePair<string, string>("testhostingstartup:config", "value")
+                            new KeyValuePair<string, string>("testhostingstartup:config", "value"),
                         }
                     )
             );

@@ -41,7 +41,7 @@ namespace BasicEventSourceTests
                 var listenerGenerators = new List<Func<Listener>>
                 {
                     () => eventListener,
-                    () => etwListener
+                    () => etwListener,
                 };
 
                 Test_Write_T_In_Manifest_Serialization_Impl(listenerGenerators);

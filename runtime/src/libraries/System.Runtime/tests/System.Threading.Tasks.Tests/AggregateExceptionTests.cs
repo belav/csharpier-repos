@@ -68,7 +68,7 @@ namespace System.Threading.Tasks.Tests
             innerExceptions = new Exception[2]
             {
                 new AggregateException(),
-                new AggregateException()
+                new AggregateException(),
             };
             ex = new AggregateException(innerExceptions);
             Assert.Equal(ex.GetBaseException(), ex);

@@ -14,12 +14,12 @@ class Join
     {
         Data[] d1 = new Data[]
         {
-            new Data() { Key = 1, Value = "First" }
+            new Data() { Key = 1, Value = "First" },
         };
         Data[] d2 = new Data[]
         {
             new Data() { Key = 1, Value = "Second" },
-            new Data() { Key = 1, Value = "Third" }
+            new Data() { Key = 1, Value = "Third" },
         };
 
         var e =

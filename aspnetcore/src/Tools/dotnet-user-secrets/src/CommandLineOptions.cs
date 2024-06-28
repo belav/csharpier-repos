@@ -25,7 +25,7 @@ public class CommandLineOptions
             Error = console.Error,
             Name = "dotnet user-secrets",
             FullName = "User Secrets Manager",
-            Description = "Manages user secrets"
+            Description = "Manages user secrets",
         };
 
         app.HelpOption();

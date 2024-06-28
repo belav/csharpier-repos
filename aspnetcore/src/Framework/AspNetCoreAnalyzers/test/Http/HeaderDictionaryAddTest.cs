@@ -29,7 +29,7 @@ var context = new DefaultHttpContext();
                 {
                     new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                         .WithLocation(0)
-                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                 },
                 @"
 using Microsoft.AspNetCore.Http;
@@ -52,7 +52,7 @@ var context = new DefaultHttpContext();
                         .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                     new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                         .WithLocation(1)
-                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                 },
                 @"
 using Microsoft.AspNetCore.Http;
@@ -72,14 +72,14 @@ var context = new DefaultHttpContext();
                 {
                     new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                         .WithLocation(0)
-                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                 },
                 @"
 using Microsoft.AspNetCore.Http;
 
 var context = new DefaultHttpContext();
 context.Request.Headers.Append(""Accept"", ""text/html""){|CS1002:|}"
-            }
+            },
         };
 
     [Theory]
@@ -111,7 +111,7 @@ var context = new Microsoft.AspNetCore.Http.DefaultHttpContext();
 using Microsoft.AspNetCore.Http;
 
 var context = new Microsoft.AspNetCore.Http.DefaultHttpContext();
-context.Request.Headers.Append(""Accept"", ""text/html"");"
+context.Request.Headers.Append(""Accept"", ""text/html"");",
         };
 
         // Inserted alphabetically based on existing using directives
@@ -129,7 +129,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 var context = new Microsoft.AspNetCore.Http.DefaultHttpContext();
-context.Request.Headers.Append(""Accept"", ""text/html"");"
+context.Request.Headers.Append(""Accept"", ""text/html"");",
         };
 
         // Inserted after 'System' using directives
@@ -149,7 +149,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 var context = new Microsoft.AspNetCore.Http.DefaultHttpContext();
-context.Request.Headers.Append(""Accept"", ""text/html"");"
+context.Request.Headers.Append(""Accept"", ""text/html"");",
         };
     }
 
@@ -172,7 +172,7 @@ context.Request.Headers.Append(""Accept"", ""text/html"");"
             {
                 new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                     .WithLocation(0)
-                    .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                    .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
             },
             fixedSource.TrimStart().ReplaceLineEndings(),
             codeActionEquivalenceKey: AppendCodeActionEquivalenceKey
@@ -193,7 +193,7 @@ var context = new DefaultHttpContext();
                 {
                     new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                         .WithLocation(0)
-                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                 },
                 @"
 using Microsoft.AspNetCore.Http;
@@ -216,7 +216,7 @@ var context = new DefaultHttpContext();
                         .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                     new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                         .WithLocation(1)
-                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                 },
                 @"
 using Microsoft.AspNetCore.Http;
@@ -236,14 +236,14 @@ var context = new DefaultHttpContext();
                 {
                     new DiagnosticResult(DiagnosticDescriptors.DoNotUseIHeaderDictionaryAdd)
                         .WithLocation(0)
-                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message)
+                        .WithMessage(Resources.Analyzer_HeaderDictionaryAdd_Message),
                 },
                 @"
 using Microsoft.AspNetCore.Http;
 
 var context = new DefaultHttpContext();
 context.Request.Headers[""Accept""] = ""text/html""{|CS1002:|}"
-            }
+            },
         };
 
     [Theory]

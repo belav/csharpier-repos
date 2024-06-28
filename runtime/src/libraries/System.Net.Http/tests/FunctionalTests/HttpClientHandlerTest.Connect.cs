@@ -25,7 +25,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Connect, url)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         request.Headers.Host = "foo.com:345";
 
@@ -75,14 +75,14 @@ namespace System.Net.Http.Functional.Tests
                                 TextReader clientReader = new StreamReader(clientStream);
                                 TextWriter clientWriter = new StreamWriter(clientStream)
                                 {
-                                    AutoFlush = true
+                                    AutoFlush = true,
                                 };
                                 TextWriter serverWriter = new StreamWriter(
                                     connection.Stream,
                                     leaveOpen: true
                                 )
                                 {
-                                    AutoFlush = true
+                                    AutoFlush = true,
                                 };
 
                                 const string helloServer = "hello server";
@@ -115,7 +115,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Connect, url)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         request.Headers.Host = "foo.com:345";
                         // We need to use ResponseHeadersRead here, otherwise we will hang trying to buffer the response body.

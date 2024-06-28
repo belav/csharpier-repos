@@ -89,7 +89,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 item => Assert.Contains(item, completionItems)
             );
             Assert.All(
-                ["cls", "help", "load", "prompt", "reset", "undef", "define",],
+                ["cls", "help", "load", "prompt", "reset", "undef", "define"],
                 item => Assert.DoesNotContain(item, completionItems)
             );
         }

@@ -56,7 +56,7 @@ namespace System.Net.Http.Formatting.Parsers
             BeforeVersionNumbers,
             MajorVersionNumber,
             MinorVersionNumber,
-            AfterCarriageReturn
+            AfterCarriageReturn,
         }
 
         /// <summary>

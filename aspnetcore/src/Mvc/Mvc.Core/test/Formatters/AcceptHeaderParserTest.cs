@@ -14,7 +14,7 @@ public class AcceptHeaderParserTest
         var header = "application/json";
         var expected = new List<MediaTypeSegmentWithQuality>
         {
-            new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0)
+            new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0),
         };
 
         // Act
@@ -32,7 +32,7 @@ public class AcceptHeaderParserTest
         var expected = new List<MediaTypeSegmentWithQuality>
         {
             new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0),
-            new MediaTypeSegmentWithQuality(new StringSegment("application/xml;q=0.8"), 0.8)
+            new MediaTypeSegmentWithQuality(new StringSegment("application/xml;q=0.8"), 0.8),
         };
 
         // Act
@@ -80,9 +80,9 @@ public class AcceptHeaderParserTest
             { new[] { "img/png,/;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
             { new[] { "img/png,*/;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
             { new[] { "img/png,/*;q=0.9,text/html" }, new string[] { "img/png", "text/html" } },
-            { new[] { "img/png, /;q=0.9" }, new string[] { "img/png", } },
-            { new[] { "img/png, */;q=0.9" }, new string[] { "img/png", } },
-            { new[] { "img/png;q=1.0, /*;q=0.9" }, new string[] { "img/png;q=1.0", } },
+            { new[] { "img/png, /;q=0.9" }, new string[] { "img/png" } },
+            { new[] { "img/png, */;q=0.9" }, new string[] { "img/png" } },
+            { new[] { "img/png;q=1.0, /*;q=0.9" }, new string[] { "img/png;q=1.0" } },
         };
 
     [Theory]
@@ -111,7 +111,7 @@ public class AcceptHeaderParserTest
         var expected = new List<MediaTypeSegmentWithQuality>
         {
             new MediaTypeSegmentWithQuality(new StringSegment("application/json"), 1.0),
-            new MediaTypeSegmentWithQuality(new StringSegment("application/xml;q=0.8"), 0.8)
+            new MediaTypeSegmentWithQuality(new StringSegment("application/xml;q=0.8"), 0.8),
         };
 
         // Act

@@ -257,7 +257,7 @@ namespace System.Net.WebSockets
             Created = 0,
             Connecting = 1,
             Connected = 2,
-            Disposed = 3
+            Disposed = 3,
         }
     }
 }

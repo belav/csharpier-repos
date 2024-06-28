@@ -24,8 +24,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider
                 {
                     { "foo.key", 42 },
-                    { "foo.value", "someValue" }
-                }
+                    { "foo.value", "someValue" },
+                },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -51,8 +51,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider
                 {
                     { "foo.key", 42 },
-                    { "foo.value", "someValue" }
-                }
+                    { "foo.value", "someValue" },
+                },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -75,7 +75,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(KeyValuePair<int, string>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo.value", "someValue" } }
+                ValueProvider = new SimpleValueProvider { { "foo.value", "someValue" } },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -98,7 +98,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(KeyValuePair<int, string>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo.key", 42 } }
+                ValueProvider = new SimpleValueProvider { { "foo.key", 42 } },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();

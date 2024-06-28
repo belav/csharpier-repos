@@ -43,11 +43,9 @@ namespace Microsoft.CSharp
         public override ICodeCompiler CreateCompiler() => _generator;
 
         public override TypeConverter GetConverter(Type type) =>
-            type == typeof(MemberAttributes)
-                ? CSharpMemberAttributeConverter.Default
-                : type == typeof(TypeAttributes)
-                    ? CSharpTypeAttributeConverter.Default
-                    : base.GetConverter(type);
+            type == typeof(MemberAttributes) ? CSharpMemberAttributeConverter.Default
+            : type == typeof(TypeAttributes) ? CSharpTypeAttributeConverter.Default
+            : base.GetConverter(type);
 
         public override void GenerateCodeFromMember(
             CodeTypeMember member,

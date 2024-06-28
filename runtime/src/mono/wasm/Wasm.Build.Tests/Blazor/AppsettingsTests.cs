@@ -58,7 +58,7 @@ public class AppsettingsTests : BlazorWasmTestBase
                         existsChecked = true;
                     else if (msg.Text.Contains($"appSettings Content '{{ \"Id\": \"{id}\" }}'"))
                         contentChecked = true;
-                }
+                },
             }
         );
 

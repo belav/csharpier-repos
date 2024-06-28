@@ -14,7 +14,7 @@ namespace System.Runtime.Serialization
         EnumDataContract,
         PrimitiveDataContract,
         XmlDataContract,
-        Unknown = -1
+        Unknown = -1,
     }
 
     internal static class DataContractExtensions
@@ -27,7 +27,7 @@ namespace System.Runtime.Serialization
                 "EnumDataContract" => DataContractType.EnumDataContract,
                 "PrimitiveDataContract" => DataContractType.PrimitiveDataContract,
                 "XmlDataContract" => DataContractType.XmlDataContract,
-                _ => DataContractType.Unknown
+                _ => DataContractType.Unknown,
             };
 
         internal static bool Is(this DataContract dataContract, DataContractType dcType)

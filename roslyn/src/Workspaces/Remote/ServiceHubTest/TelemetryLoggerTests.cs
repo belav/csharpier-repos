@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 null => "<null>",
                 TelemetryComplexProperty { Value: IEnumerable<object?> items } =>
                     $"Complex[{string.Join(",", items.Select(InspectPropertyValue))}]",
-                _ => value.ToString()!
+                _ => value.ToString()!,
             };
 
         [Theory]
@@ -163,7 +163,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     new[]
                     {
                         "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end",
-                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.delta="
+                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.delta=",
                     },
                     InspectProperties(
                         scope.EndEvent,
@@ -176,7 +176,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 AssertEx.Equal(
                     new[]
                     {
-                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end"
+                        "vs.ide.vbcs.debugging.encsession.editsession.emitdeltaerrorid.test=end",
                     },
                     InspectProperties(scope.EndEvent)
                 );

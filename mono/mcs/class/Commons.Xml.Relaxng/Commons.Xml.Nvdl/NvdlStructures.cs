@@ -286,7 +286,7 @@ namespace Commons.Xml.Nvdl
         None,
         Elements,
         Attributes,
-        Both
+        Both,
     }
 
     public abstract class NvdlRule : NvdlAttributable
@@ -383,7 +383,7 @@ namespace Commons.Xml.Nvdl
     {
         Attach,
         AttachPlaceholder,
-        Unwrap
+        Unwrap,
     }
 
     public abstract class NvdlResultAction : NvdlNoCancelAction

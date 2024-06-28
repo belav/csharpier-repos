@@ -102,7 +102,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new GroupingDataflowBlockOptions
                 {
                     MaxNumberOfGroups = 3,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
 

@@ -64,7 +64,7 @@ namespace Wasm.Build.Tests
             buildArgs = buildArgs with
             {
                 ProjectName = projectName,
-                ExtraBuildArgs = "-p:PublishTrimmed=false"
+                ExtraBuildArgs = "-p:PublishTrimmed=false",
             };
             buildArgs = ExpandBuildArgs(buildArgs);
 

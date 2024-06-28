@@ -108,7 +108,7 @@ internal sealed class SpaProxyLaunchManager : IDisposable
             {
                 // It's ok for us to do this here since this service is only plugged in during development.
                 ServerCertificateCustomValidationCallback =
-                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             }
         );
         // We don't care about the returned content type as long as the server is able to answer with 2XX
@@ -226,7 +226,10 @@ internal sealed class SpaProxyLaunchManager : IDisposable
                 CreateNoWindow = false,
                 UseShellExecute = true,
                 WindowStyle = ProcessWindowStyle.Normal,
-                WorkingDirectory = Path.Combine(AppContext.BaseDirectory, _options.WorkingDirectory)
+                WorkingDirectory = Path.Combine(
+                    AppContext.BaseDirectory,
+                    _options.WorkingDirectory
+                ),
             };
             _spaProcess = Process.Start(info);
             if (_spaProcess != null && !_spaProcess.HasExited && !_options.KeepRunning)
@@ -277,7 +280,7 @@ catch
         )
         {
             CreateNoWindow = true,
-            WorkingDirectory = Path.Combine(AppContext.BaseDirectory, _options.WorkingDirectory)
+            WorkingDirectory = Path.Combine(AppContext.BaseDirectory, _options.WorkingDirectory),
         };
 
         var stopProcess = Process.Start(stopScriptInfo);
@@ -342,7 +345,7 @@ rm {scriptPath};
         var stopScriptInfo = new ProcessStartInfo("/bin/bash", scriptPath)
         {
             CreateNoWindow = true,
-            WorkingDirectory = Path.Combine(AppContext.BaseDirectory, _options.WorkingDirectory)
+            WorkingDirectory = Path.Combine(AppContext.BaseDirectory, _options.WorkingDirectory),
         };
 
         var stopProcess = Process.Start(stopScriptInfo);

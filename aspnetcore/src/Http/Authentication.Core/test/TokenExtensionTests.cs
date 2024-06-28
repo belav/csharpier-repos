@@ -45,7 +45,7 @@ public class TokenExtensionTests
         props.StoreTokens(
             new[]
             {
-                new AuthenticationToken { Name = "Zero", Value = "0" }
+                new AuthenticationToken { Name = "Zero", Value = "0" },
             }
         );
 

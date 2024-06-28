@@ -116,7 +116,7 @@ namespace System
                             ? uri.IsAbsoluteUri
                                 ? UriKind.Absolute
                                 : UriKind.Relative
-                            : m_UriKind
+                            : m_UriKind,
                     }
                 );
             }

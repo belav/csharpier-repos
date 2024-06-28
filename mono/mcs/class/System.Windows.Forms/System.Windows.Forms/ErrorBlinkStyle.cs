@@ -32,6 +32,6 @@ namespace System.Windows.Forms
     {
         BlinkIfDifferentError = 0,
         AlwaysBlink = 1,
-        NeverBlink = 2
+        NeverBlink = 2,
     }
 }

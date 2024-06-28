@@ -36,7 +36,7 @@ namespace System.Tests
                 PosixSignal.SIGINT,
                 PosixSignal.SIGQUIT,
                 PosixSignal.SIGTERM,
-                PosixSignal.SIGHUP
+                PosixSignal.SIGHUP,
             };
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]

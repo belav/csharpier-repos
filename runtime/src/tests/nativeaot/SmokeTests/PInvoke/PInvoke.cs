@@ -1395,7 +1395,7 @@ namespace PInvokeTests
             {
                 FirstField = 1.0f,
                 SecondField = 2.0f,
-                ThirdField = 3
+                ThirdField = 3,
             };
             int bs_size = Marshal.SizeOf<BlittableStruct>(bs);
             ThrowIfNotEquals(40, bs_size, "Marshal.SizeOf<BlittableStruct> failed");
@@ -1425,7 +1425,7 @@ namespace PInvokeTests
                 f1 = 100,
                 f2 = true,
                 f3 = false,
-                f4 = true
+                f4 = true,
             };
             int size = Marshal.SizeOf<NonBlittableStruct>(ts);
             ThrowIfNotEquals(16, size, "Marshal.SizeOf<NonBlittableStruct> failed");
@@ -1450,7 +1450,7 @@ namespace PInvokeTests
                 f1 = 100,
                 f2 = 12345678,
                 f3 = 999,
-                f4 = -4
+                f4 = -4,
             };
             int bc_size = Marshal.SizeOf<BlittableClass>(bc);
             ThrowIfNotEquals(24, bc_size, "Marshal.SizeOf<BlittableClass> failed");
@@ -1475,7 +1475,7 @@ namespace PInvokeTests
             {
                 f1 = false,
                 f2 = true,
-                f3 = 42
+                f3 = 42,
             };
             int nbc_size = Marshal.SizeOf<NonBlittableClass>(nbc);
             ThrowIfNotEquals(12, nbc_size, "Marshal.SizeOf<NonBlittableClass> failed");

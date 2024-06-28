@@ -42,7 +42,7 @@ namespace System.Data.Common.CommandTrees.Internal
             /// <summary>
             /// Stop all rule processing and return the result expression as the final result expression
             /// </summary>
-            Stop
+            Stop,
         }
 
         /// <summary>

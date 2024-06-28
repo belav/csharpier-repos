@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis
             Initialized = GenericParameter << 1,
 
             AllowMultiple = Initialized << 1,
-            Inherited = AllowMultiple << 1
+            Inherited = AllowMultiple << 1,
         }
 
         private readonly PackedAttributeUsage _flags;

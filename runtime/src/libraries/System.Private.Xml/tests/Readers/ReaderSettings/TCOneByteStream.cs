@@ -19,7 +19,7 @@ namespace System.Xml.ReaderSettingsTests
                     {
                         Attribute = new Variation(
                             "445370: Parsing this 'some]' as fragment fails with 'Unexpected EOF' error"
-                        )
+                        ),
                     }
                 );
             }
@@ -31,7 +31,7 @@ namespace System.Xml.ReaderSettingsTests
                     {
                         Attribute = new Variation(
                             "445370a: Parsing this 'some]' as fragment fails with 'Unexpected EOF' error"
-                        )
+                        ),
                     }
                 );
             }
@@ -41,7 +41,9 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(
                     new CVariation(v1)
                     {
-                        Attribute = new Variation("Read as one byte stream xml with surrogate char")
+                        Attribute = new Variation(
+                            "Read as one byte stream xml with surrogate char"
+                        ),
                     }
                 );
             }
@@ -51,7 +53,7 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(
                     new CVariation(v1a)
                     {
-                        Attribute = new Variation("Read as TextReader xml with surrogate char")
+                        Attribute = new Variation("Read as TextReader xml with surrogate char"),
                     }
                 );
             }
@@ -63,7 +65,7 @@ namespace System.Xml.ReaderSettingsTests
                     {
                         Attribute = new Variation(
                             "XmlWriter.WriteNode: read as one byte stream xml with surrogate char"
-                        )
+                        ),
                     }
                 );
             }

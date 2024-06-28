@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
                         IndentationSize = lineFormattingOptions.IndentationSize,
                         NewLine = lineFormattingOptions.NewLine,
                     },
-                    AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration
+                    AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration,
                 }
             ) { }
 
@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
                 new()
                 {
                     LineFormatting = formattingOptions.LineFormatting,
-                    AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration
+                    AutoXmlDocCommentGeneration = autoXmlDocCommentGeneration,
                 }
             );
         }

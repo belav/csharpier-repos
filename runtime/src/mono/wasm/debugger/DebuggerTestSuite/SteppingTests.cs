@@ -545,7 +545,7 @@ namespace DebuggerTests
                 str_member = TString("ss_local#SimpleStruct#string#0#SimpleStruct#str_member"),
                 dt = TDateTime(dt),
                 gs = TValueType("DebuggerTests.ValueTypesTest.GenericStruct<System.DateTime>"),
-                Kind = TEnum("System.DateTimeKind", "Local")
+                Kind = TEnum("System.DateTimeKind", "Local"),
             };
             var ss_local_gs = new
             {
@@ -554,7 +554,7 @@ namespace DebuggerTests
                     "System.Collections.Generic.List<System.DateTime>",
                     description: "Count = 1"
                 ),
-                Options = TEnum("DebuggerTests.Options", "Option1")
+                Options = TEnum("DebuggerTests.Options", "Option1"),
             };
 
             // Check ss_arg's properties
@@ -600,7 +600,7 @@ namespace DebuggerTests
                 ),
                 dt = TDateTime(dt),
                 gs = TValueType("DebuggerTests.ValueTypesTest.GenericStruct<System.DateTime>"),
-                Kind = TEnum("System.DateTimeKind", "Utc")
+                Kind = TEnum("System.DateTimeKind", "Utc"),
             };
 
             ss_arg_props = await GetObjectOnFrame(pause_location["callFrames"][0], "ss_arg");
@@ -623,7 +623,7 @@ namespace DebuggerTests
                             "System.Collections.Generic.List<System.DateTime>",
                             description: "Count = 1"
                         ),
-                        Options = TEnum("DebuggerTests.Options", "Option1")
+                        Options = TEnum("DebuggerTests.Options", "Option1"),
                     }
                 );
             }
@@ -673,7 +673,7 @@ namespace DebuggerTests
                 new
                 {
                     ss_local = TValueType("DebuggerTests.ValueTypesTest.SimpleStruct"),
-                    ss_ret = TValueType("DebuggerTests.ValueTypesTest.SimpleStruct")
+                    ss_ret = TValueType("DebuggerTests.ValueTypesTest.SimpleStruct"),
                 },
                 "locals#0"
             );
@@ -742,7 +742,7 @@ namespace DebuggerTests
                     new
                     {
                         obj = TObject("DebuggerTests.ClassForToStringTests"),
-                        vt = TObject("DebuggerTests.StructForToStringTests")
+                        vt = TObject("DebuggerTests.StructForToStringTests"),
                     },
                     "locals"
                 );
@@ -851,7 +851,7 @@ namespace DebuggerTests
                         ssta = TArray(
                             "DebuggerTests.StructForToStringTests[]",
                             "DebuggerTests.StructForToStringTests[1]"
-                        )
+                        ),
                     },
                     "locals"
                 );
@@ -1985,7 +1985,7 @@ namespace DebuggerTests
             {
                 "https://symbols.nuget.org/download/symbols",
                 "https://msdl.microsoft.com/download/bad-non-existant",
-                "https://msdl.microsoft.com/download/symbols"
+                "https://msdl.microsoft.com/download/symbols",
             };
             var waitForScript = WaitForScriptParsedEventsAsync(new string[] { "JArray.cs" });
             var symbolOptions = JObject.FromObject(

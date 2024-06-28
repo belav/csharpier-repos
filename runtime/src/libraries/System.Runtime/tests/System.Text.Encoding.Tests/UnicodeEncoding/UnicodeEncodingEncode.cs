@@ -19,7 +19,7 @@ namespace System.Text.Tests
                     "a" + c + "b",
                     0,
                     3,
-                    new byte[] { 97, 0, (byte)c, 0, 98, 0 }
+                    new byte[] { 97, 0, (byte)c, 0, 98, 0 },
                 };
                 yield return new object[] { "a" + c + "b", 1, 1, new byte[] { (byte)c, 0 } };
                 yield return new object[] { "a" + c + "b", 2, 1, new byte[] { 98, 0 } };
@@ -36,7 +36,7 @@ namespace System.Text.Tests
                 "a\uD800\uDC00b",
                 0,
                 4,
-                new byte[] { 97, 0, 0, 216, 0, 220, 98, 0 }
+                new byte[] { 97, 0, 0, 216, 0, 220, 98, 0 },
             };
 
             yield return new object[]
@@ -44,7 +44,7 @@ namespace System.Text.Tests
                 "\uD800\uDC00\uFFFD\uFEB7",
                 0,
                 4,
-                new byte[] { 0x00, 0xD8, 0x00, 0xDC, 0xFD, 0xFF, 0xB7, 0xFE }
+                new byte[] { 0x00, 0xD8, 0x00, 0xDC, 0xFD, 0xFF, 0xB7, 0xFE },
             };
 
             // Mixture of ASCII and Unicode
@@ -53,14 +53,14 @@ namespace System.Text.Tests
                 "FooBA\u0400R",
                 0,
                 7,
-                new byte[] { 70, 0, 111, 0, 111, 0, 66, 0, 65, 0, 0, 4, 82, 0 }
+                new byte[] { 70, 0, 111, 0, 111, 0, 66, 0, 65, 0, 0, 4, 82, 0 },
             };
             yield return new object[]
             {
                 "\u00C0nima\u0300l",
                 0,
                 7,
-                new byte[] { 192, 0, 110, 0, 105, 0, 109, 0, 97, 0, 0, 3, 108, 0 }
+                new byte[] { 192, 0, 110, 0, 105, 0, 109, 0, 97, 0, 0, 3, 108, 0 },
             };
             yield return new object[]
             {
@@ -88,15 +88,15 @@ namespace System.Text.Tests
                     115,
                     0,
                     116,
-                    0
-                }
+                    0,
+                },
             };
             yield return new object[]
             {
                 "\uD803\uDD75\uD803\uDD75\uD803\uDD75",
                 0,
                 6,
-                new byte[] { 3, 216, 117, 221, 3, 216, 117, 221, 3, 216, 117, 221 }
+                new byte[] { 3, 216, 117, 221, 3, 216, 117, 221, 3, 216, 117, 221 },
             };
             yield return new object[] { "\u0130", 0, 1, new byte[] { 48, 1 } };
 
@@ -105,21 +105,21 @@ namespace System.Text.Tests
                 "za\u0306\u01fd\u03b2",
                 0,
                 5,
-                new byte[] { 122, 0, 97, 0, 6, 3, 253, 1, 178, 3 }
+                new byte[] { 122, 0, 97, 0, 6, 3, 253, 1, 178, 3 },
             };
             yield return new object[]
             {
                 "za\u0306\u01FD\u03B2\uD8FF\uDCFF",
                 0,
                 7,
-                new byte[] { 122, 0, 97, 0, 6, 3, 253, 1, 178, 3, 255, 216, 255, 220 }
+                new byte[] { 122, 0, 97, 0, 6, 3, 253, 1, 178, 3, 255, 216, 255, 220 },
             };
             yield return new object[]
             {
                 "za\u0306\u01FD\u03B2\uD8FF\uDCFF",
                 4,
                 3,
-                new byte[] { 178, 3, 255, 216, 255, 220 }
+                new byte[] { 178, 3, 255, 216, 255, 220 },
             };
 
             // High BMP non-chars
@@ -131,7 +131,7 @@ namespace System.Text.Tests
                 "\uFFFF\uFFFE",
                 0,
                 2,
-                new byte[] { 0xFF, 0xFF, 0xFE, 0xFF }
+                new byte[] { 0xFF, 0xFF, 0xFE, 0xFF },
             };
 
             // Empty strings
@@ -247,8 +247,8 @@ namespace System.Text.Tests
                     115,
                     0,
                     116,
-                    0
-                }
+                    0,
+                },
             };
             yield return new object[]
             {
@@ -274,8 +274,8 @@ namespace System.Text.Tests
                     115,
                     0,
                     116,
-                    0
-                }
+                    0,
+                },
             };
             yield return new object[]
             {
@@ -301,8 +301,8 @@ namespace System.Text.Tests
                     116,
                     0,
                     253,
-                    255
-                }
+                    255,
+                },
             };
             yield return new object[]
             {
@@ -328,8 +328,8 @@ namespace System.Text.Tests
                     116,
                     0,
                     253,
-                    255
-                }
+                    255,
+                },
             };
             yield return new object[] { "\uDD75", 0, 1, new byte[] { 253, 255 } };
             yield return new object[]
@@ -366,8 +366,8 @@ namespace System.Text.Tests
                     253,
                     255,
                     253,
-                    255
-                }
+                    255,
+                },
             };
         }
 

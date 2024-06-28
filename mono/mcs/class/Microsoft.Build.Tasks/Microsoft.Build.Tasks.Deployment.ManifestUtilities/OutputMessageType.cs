@@ -37,6 +37,6 @@ namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
     {
         Info,
         Warning,
-        Error
+        Error,
     }
 }

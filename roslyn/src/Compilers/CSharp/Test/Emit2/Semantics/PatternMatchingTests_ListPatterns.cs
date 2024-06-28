@@ -1057,7 +1057,7 @@ class X
             // error CS0021: Cannot apply indexing with [] to an expression of type 'object'
             subpattern == ".._"
                 ? Diagnostic(ErrorCode.ERR_BadIndexLHS, subpattern).WithArguments("object")
-                : null
+                : null,
         };
         var compilation = CreateCompilationWithIndexAndRange(
             source,
@@ -4144,7 +4144,7 @@ public class C
             "_ = new C() is [var x];",
             "_ = new C() is [..var y];",
             "_ = new C()[^1];",
-            "_ = new C()[..];"
+            "_ = new C()[..];",
         };
 
         foreach (var source in sources)
@@ -8483,7 +8483,7 @@ class C
             "[..[..[1,2],3]]",
             "[1, ..[2], 3]",
             "[1, ..[2, ..[3]]]",
-            "[1, ..[2, ..[], 3]]"
+            "[1, ..[2, ..[], 3]]",
         };
 
         // testing every possible combination takes too long,

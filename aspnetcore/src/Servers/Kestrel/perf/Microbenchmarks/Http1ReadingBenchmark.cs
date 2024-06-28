@@ -145,7 +145,7 @@ public class Http1ReadingBenchmark
     {
         None,
         Sync,
-        Async
+        Async,
     }
 
     [GlobalCleanup]

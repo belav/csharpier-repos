@@ -168,7 +168,7 @@ namespace IntelHardwareIntrinsicTest.Avx1
                                 {
                                     typeof(Vector256<Single>),
                                     typeof(Vector256<Single>),
-                                    typeof(FloatComparisonMode)
+                                    typeof(FloatComparisonMode),
                                 }
                             )
                             .Invoke(null, new object[] { vf1, vf2, (FloatComparisonMode)32 });
@@ -201,7 +201,7 @@ namespace IntelHardwareIntrinsicTest.Avx1
                                 {
                                     typeof(Vector256<Double>),
                                     typeof(Vector256<Double>),
-                                    typeof(FloatComparisonMode)
+                                    typeof(FloatComparisonMode),
                                 }
                             )
                             .Invoke(null, new object[] { vd1, vd2, (FloatComparisonMode)32 });

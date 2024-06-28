@@ -150,7 +150,7 @@ namespace System.Web.UI.Design.MobileControls
                     itemCountLabel,
                     _txtItemCount,
                     itemsPerPageLabel,
-                    _txtItemsPerPage
+                    _txtItemsPerPage,
                 }
             );
         }

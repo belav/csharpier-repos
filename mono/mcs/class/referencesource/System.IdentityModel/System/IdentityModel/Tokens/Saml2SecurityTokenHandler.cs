@@ -47,7 +47,7 @@ namespace System.IdentityModel.Tokens
         private static string[] tokenTypeIdentifiers = new string[]
         {
             SecurityTokenTypes.Saml2TokenProfile11,
-            SecurityTokenTypes.OasisWssSaml2TokenProfile11
+            SecurityTokenTypes.OasisWssSaml2TokenProfile11,
         };
         private SamlSecurityTokenRequirement samlSecurityTokenRequirement;
         private SecurityTokenSerializer keyInfoSerializer;

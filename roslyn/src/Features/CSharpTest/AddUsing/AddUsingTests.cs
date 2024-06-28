@@ -2167,7 +2167,7 @@ class Program
                     {
                         "exprs",
                         AssemblyMetadata.CreateFromImage(ResourcesNet451.SystemCore).GetReference()
-                    }
+                    },
                 }
             );
 

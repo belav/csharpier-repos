@@ -24,5 +24,5 @@ public record BlazorRunOptions(
 public enum BlazorRunHost
 {
     DotnetRun,
-    WebServer
+    WebServer,
 };

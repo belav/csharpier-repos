@@ -2361,7 +2361,7 @@ public class C
                             + "[System.Runtime.CompilerServices.DecimalConstantAttribute(0, 0, 0, 0, 2)] [opt] System.Decimal b = 2, "
                             + "[System.Runtime.CompilerServices.DecimalConstantAttribute(10, 20, 30, 40, 50)] [opt] System.Decimal value = -55340232238.3085240370) "
                             + "cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -2405,7 +2405,7 @@ public delegate void D([Optional, DecimalConstantAttribute(hi: 3, sign: 2, mid: 
                             + "[System.Runtime.CompilerServices.DecimalConstantAttribute(1, 2, 3, 4, 5)] [opt] System.Decimal& a = -5534023223830852403.7, "
                             + "[System.Runtime.CompilerServices.DecimalConstantAttribute(0, 0, 0, 0, 2)] [opt] System.Decimal b = 2) "
                             + "runtime managed"
-                    )
+                    ),
                 }
             );
         }
@@ -3309,174 +3309,174 @@ public class C
                 new
                 {
                     attr = MakeDllImport(),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M0
                 new
                 {
                     attr = MakeDllImport(cc: CallingConvention.Cdecl),
-                    expected = MethodImportAttributes.CallingConventionCDecl
+                    expected = MethodImportAttributes.CallingConventionCDecl,
                 }, // M1
                 new
                 {
                     attr = MakeDllImport(cc: CallingConvention.FastCall),
-                    expected = MethodImportAttributes.CallingConventionFastCall
+                    expected = MethodImportAttributes.CallingConventionFastCall,
                 }, // M2
                 new
                 {
                     attr = MakeDllImport(cc: CallingConvention.StdCall),
-                    expected = MethodImportAttributes.CallingConventionStdCall
+                    expected = MethodImportAttributes.CallingConventionStdCall,
                 }, // M3
                 new
                 {
                     attr = MakeDllImport(cc: CallingConvention.ThisCall),
-                    expected = MethodImportAttributes.CallingConventionThisCall
+                    expected = MethodImportAttributes.CallingConventionThisCall,
                 }, // M4
                 new
                 {
                     attr = MakeDllImport(cc: CallingConvention.Winapi),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M5
                 // charset & exact spelling:
                 new
                 {
                     attr = MakeDllImport(),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M6
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.None),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M7
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Ansi),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.CharSetAnsi
+                        | MethodImportAttributes.CharSetAnsi,
                 }, // M8
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Unicode),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.CharSetUnicode
+                        | MethodImportAttributes.CharSetUnicode,
                 }, // M9
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Auto),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.CharSetAuto
+                        | MethodImportAttributes.CharSetAuto,
                 }, // M10
                 new
                 {
                     attr = MakeDllImport(exactSpelling: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.ExactSpelling
+                        | MethodImportAttributes.ExactSpelling,
                 }, // M11
                 new
                 {
                     attr = MakeDllImport(exactSpelling: false),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M12
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Ansi, exactSpelling: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
                         | MethodImportAttributes.ExactSpelling
-                        | MethodImportAttributes.CharSetAnsi
+                        | MethodImportAttributes.CharSetAnsi,
                 }, // M13
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Ansi, exactSpelling: false),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.CharSetAnsi
+                        | MethodImportAttributes.CharSetAnsi,
                 }, // M14
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Unicode, exactSpelling: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
                         | MethodImportAttributes.ExactSpelling
-                        | MethodImportAttributes.CharSetUnicode
+                        | MethodImportAttributes.CharSetUnicode,
                 }, // M15
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Unicode, exactSpelling: false),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.CharSetUnicode
+                        | MethodImportAttributes.CharSetUnicode,
                 }, // M16
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Auto, exactSpelling: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
                         | MethodImportAttributes.ExactSpelling
-                        | MethodImportAttributes.CharSetAuto
+                        | MethodImportAttributes.CharSetAuto,
                 }, // M17
                 new
                 {
                     attr = MakeDllImport(charSet: CharSet.Auto, exactSpelling: false),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.CharSetAuto
+                        | MethodImportAttributes.CharSetAuto,
                 }, // M18
                 // preservesig:
                 new
                 {
                     attr = MakeDllImport(preserveSig: true),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M19
                 new
                 {
                     attr = MakeDllImport(preserveSig: false),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M20
                 // setLastError:
                 new
                 {
                     attr = MakeDllImport(setLastError: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.SetLastError
+                        | MethodImportAttributes.SetLastError,
                 }, // M21
                 new
                 {
                     attr = MakeDllImport(setLastError: false),
-                    expected = MethodImportAttributes.CallingConventionWinApi
+                    expected = MethodImportAttributes.CallingConventionWinApi,
                 }, // M22
                 // bestFitMapping:
                 new
                 {
                     attr = MakeDllImport(bestFitMapping: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.BestFitMappingEnable
+                        | MethodImportAttributes.BestFitMappingEnable,
                 }, // M23
                 new
                 {
                     attr = MakeDllImport(bestFitMapping: false),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.BestFitMappingDisable
+                        | MethodImportAttributes.BestFitMappingDisable,
                 }, // M24
                 // throwOnUnmappableChar:
                 new
                 {
                     attr = MakeDllImport(throwOnUnmappableChar: true),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.ThrowOnUnmappableCharEnable
+                        | MethodImportAttributes.ThrowOnUnmappableCharEnable,
                 }, // M23
                 new
                 {
                     attr = MakeDllImport(throwOnUnmappableChar: false),
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.ThrowOnUnmappableCharDisable
+                        | MethodImportAttributes.ThrowOnUnmappableCharDisable,
                 }, // M24
                 // invalid enum values (ignored)
                 new
                 {
                     attr = "[DllImport(\"bar\", CharSet = (CharSet)15, SetLastError = true)]",
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.SetLastError
+                        | MethodImportAttributes.SetLastError,
                 }, // M25
                 // invalid enum values (ignored)
                 new
                 {
                     attr = "[DllImport(\"bar\", CallingConvention = (CallingConvention)15, SetLastError = true)]",
                     expected = MethodImportAttributes.CallingConventionWinApi
-                        | MethodImportAttributes.SetLastError
+                        | MethodImportAttributes.SetLastError,
                 }, // M26
             };
 
@@ -5013,7 +5013,7 @@ public class MainClass
                             ErrorCode.WRN_CoClassWithoutComImport,
                             "CoClass(typeof(WorksheetClass))"
                         )
-                        .WithArguments("IWorksheet")
+                        .WithArguments("IWorksheet"),
                 }
             );
 
@@ -11747,7 +11747,7 @@ class Class6
                         "Windows.Foundation.Metadata.DeprecatedAttribute",
                         "class, struct, enum, constructor, method, property, indexer, field, event, interface, delegate"
                     )
-                    .WithLocation(52, 10)
+                    .WithLocation(52, 10),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -12110,7 +12110,7 @@ public sealed class ConcreteGoo5 : IGoo1
                 //         b.Goo(); // ConcreteGoo3
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "b.Goo()")
                     .WithArguments("ConcreteGoo3.Goo()", "ConcreteGoo3.Goo has been deprecated")
-                    .WithLocation(25, 9)
+                    .WithLocation(25, 9),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -12174,7 +12174,7 @@ class Test
                         "IExceptionalInterface.ExceptionalProp.get",
                         "Actually, don't even use the prop at all."
                     )
-                    .WithLocation(9, 27)
+                    .WithLocation(9, 27),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -12250,7 +12250,7 @@ public class C
                 //         ss = new Scenario1();
                 Diagnostic(ErrorCode.ERR_BogusType, "Scenario1")
                     .WithArguments("Scenario1")
-                    .WithLocation(7, 18)
+                    .WithLocation(7, 18),
             };
 
             cscomp.VerifyDiagnostics(expected);
@@ -12372,7 +12372,7 @@ public class C
                 //         r.sc1_method();
                 Diagnostic(ErrorCode.ERR_BindToBogus, "sc1_method")
                     .WithArguments("RequiredAttr.ReqAttrUsage.sc1_method()")
-                    .WithLocation(11, 11)
+                    .WithLocation(11, 11),
             };
 
             cscomp.VerifyDiagnostics(expected);

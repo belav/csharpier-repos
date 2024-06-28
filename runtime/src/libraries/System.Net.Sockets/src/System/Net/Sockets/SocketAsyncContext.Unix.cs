@@ -115,7 +115,7 @@ namespace System.Net.Sockets
                 Running,
                 RunningWithPendingCancellation,
                 Complete,
-                Canceled
+                Canceled,
             }
 
             private int _state; // Actually AsyncOperation.State.
@@ -901,7 +901,7 @@ namespace System.Net.Sockets
         {
             Pending = 0,
             Completed = 1,
-            Cancelled = 2
+            Cancelled = 2,
         }
 
         private struct OperationQueue<TOperation>
@@ -1460,11 +1460,9 @@ namespace System.Net.Sockets
             )
             {
                 string queueType =
-                    typeof(TOperation) == typeof(ReadOperation)
-                        ? "recv"
-                        : typeof(TOperation) == typeof(WriteOperation)
-                            ? "send"
-                            : "???";
+                    typeof(TOperation) == typeof(ReadOperation) ? "recv"
+                    : typeof(TOperation) == typeof(WriteOperation) ? "send"
+                    : "???";
 
                 OutputTrace(
                     $"{IdOf(context)}-{queueType}.{memberName}: {message}, {_state}-{_sequenceNumber}, {((_tail == null) ? "empty" : "not empty")}"
@@ -1697,7 +1695,7 @@ namespace System.Net.Sockets
                 return errorCode;
             }
 
-            var operation = new AcceptOperation(this) { SocketAddress = socketAddress, };
+            var operation = new AcceptOperation(this) { SocketAddress = socketAddress };
 
             PerformSyncOperation(ref _receiveQueue, operation, -1, observedSequenceNumber);
 
@@ -1792,7 +1790,7 @@ namespace System.Net.Sockets
                 return errorCode;
             }
 
-            var operation = new ConnectOperation(this) { SocketAddress = socketAddress, };
+            var operation = new ConnectOperation(this) { SocketAddress = socketAddress };
 
             PerformSyncOperation(ref _sendQueue, operation, -1, observedSequenceNumber);
 
@@ -2526,7 +2524,7 @@ namespace System.Net.Sockets
                 Count = count,
                 Flags = flags,
                 SocketAddress = socketAddress,
-                BytesTransferred = bytesSent
+                BytesTransferred = bytesSent,
             };
 
             PerformSyncOperation(ref _sendQueue, operation, timeout, observedSequenceNumber);
@@ -2581,7 +2579,7 @@ namespace System.Net.Sockets
                     Count = count,
                     Flags = flags,
                     SocketAddress = socketAddress,
-                    BytesTransferred = bytesSent
+                    BytesTransferred = bytesSent,
                 };
 
                 PerformSyncOperation(ref _sendQueue, operation, timeout, observedSequenceNumber);
@@ -2713,7 +2711,7 @@ namespace System.Net.Sockets
                 Offset = offset,
                 Flags = flags,
                 SocketAddress = socketAddress,
-                BytesTransferred = bytesSent
+                BytesTransferred = bytesSent,
             };
 
             PerformSyncOperation(ref _sendQueue, operation, timeout, observedSequenceNumber);
@@ -2810,7 +2808,7 @@ namespace System.Net.Sockets
                 FileHandle = fileHandle,
                 Offset = offset,
                 Count = count,
-                BytesTransferred = bytesSent
+                BytesTransferred = bytesSent,
             };
 
             PerformSyncOperation(ref _sendQueue, operation, timeout, observedSequenceNumber);
@@ -2854,7 +2852,7 @@ namespace System.Net.Sockets
                 FileHandle = fileHandle,
                 Offset = offset,
                 Count = count,
-                BytesTransferred = bytesSent
+                BytesTransferred = bytesSent,
             };
 
             if (

@@ -11,9 +11,9 @@ public class AuthenticationPropertiesTests
     [Fact]
     public void Clone_Copies()
     {
-        var items = new Dictionary<string, string?> { ["foo"] = "bar", };
+        var items = new Dictionary<string, string?> { ["foo"] = "bar" };
         var value = "value";
-        var parameters = new Dictionary<string, object?> { ["foo2"] = value, };
+        var parameters = new Dictionary<string, object?> { ["foo2"] = value };
         var props = new AuthenticationProperties(items, parameters);
         Assert.Same(items, props.Items);
         Assert.Same(parameters, props.Parameters);
@@ -40,7 +40,7 @@ public class AuthenticationPropertiesTests
     [Fact]
     public void ItemsConstructor_ReusesItemsDictionary()
     {
-        var items = new Dictionary<string, string?> { ["foo"] = "bar", };
+        var items = new Dictionary<string, string?> { ["foo"] = "bar" };
         var props = new AuthenticationProperties(items);
         Assert.Same(items, props.Items);
         Assert.Empty(props.Parameters);
@@ -49,7 +49,7 @@ public class AuthenticationPropertiesTests
     [Fact]
     public void FullConstructor_ReusesDictionaries()
     {
-        var items = new Dictionary<string, string?> { ["foo"] = "bar", };
+        var items = new Dictionary<string, string?> { ["foo"] = "bar" };
         var parameters = new Dictionary<string, object?>
         {
             ["number"] = 1234,
@@ -315,7 +315,7 @@ public class AuthenticationPropertiesTests
             ExpiresUtc = new DateTimeOffset(2021, 03, 28, 13, 47, 00, TimeSpan.Zero),
             IssuedUtc = new DateTimeOffset(2021, 03, 28, 12, 47, 00, TimeSpan.Zero),
             IsPersistent = true,
-            RedirectUri = "/foo/bar"
+            RedirectUri = "/foo/bar",
         };
 
         props.Items.Add("foo", "bar");
@@ -371,7 +371,7 @@ public class AuthenticationPropertiesTests
             ExpiresUtc = new DateTimeOffset(2021, 03, 28, 13, 47, 00, TimeSpan.Zero),
             IssuedUtc = new DateTimeOffset(2021, 03, 28, 12, 47, 00, TimeSpan.Zero),
             IsPersistent = true,
-            RedirectUri = "/foo/bar"
+            RedirectUri = "/foo/bar",
         };
 
         props.Items.Add("foo", "bar");

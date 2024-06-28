@@ -152,7 +152,7 @@ public class IdentityUIScriptsTest : IDisposable
                     Src = scriptElement.Source,
                     Integrity = scriptElement.Integrity,
                     FallbackSrc = fallbackSrcAttribute?.Value,
-                    File = cshtmlFile
+                    File = cshtmlFile,
                 }
             );
         }

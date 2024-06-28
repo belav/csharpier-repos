@@ -70,14 +70,14 @@ namespace Microsoft.CodeAnalysis.AddPackage
                     FeaturesResources.Find_and_install_latest_version_of_0,
                     _packageName
                 )
-                : _isLocal
-                    ? string.Format(
-                        FeaturesResources.Use_locally_installed_0_version_1_This_version_used_in_colon_2,
-                        _packageName,
-                        _versionOpt,
-                        string.Join(", ", _projectsWithMatchingVersion)
-                    )
-                    : string.Format(FeaturesResources.Install_0_1, _packageName, _versionOpt);
+            : _isLocal
+                ? string.Format(
+                    FeaturesResources.Use_locally_installed_0_version_1_This_version_used_in_colon_2,
+                    _packageName,
+                    _versionOpt,
+                    string.Join(", ", _projectsWithMatchingVersion)
+                )
+            : string.Format(FeaturesResources.Install_0_1, _packageName, _versionOpt);
 
         internal override bool ApplyDuringTests => true;
 

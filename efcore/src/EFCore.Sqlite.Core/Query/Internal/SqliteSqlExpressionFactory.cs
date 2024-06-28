@@ -171,7 +171,7 @@ public class SqliteSqlExpressionFactory : SqlExpressionFactory
             {
                 GlobExpression globExpression => ApplyTypeMappingOnGlob(globExpression),
                 RegexpExpression regexpExpression => ApplyTypeMappingOnRegexp(regexpExpression),
-                _ => base.ApplyTypeMapping(sqlExpression, typeMapping)
+                _ => base.ApplyTypeMapping(sqlExpression, typeMapping),
             };
 
     private SqlExpression ApplyTypeMappingOnGlob(GlobExpression globExpression)

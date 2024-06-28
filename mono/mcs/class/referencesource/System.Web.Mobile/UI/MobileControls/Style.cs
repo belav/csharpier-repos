@@ -214,10 +214,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.Control"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MobileControl Control
         {
             get { return _control; }
@@ -267,7 +264,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal Style ReferredStyle
         {
             get
@@ -530,21 +527,21 @@ namespace System.Web.UI.MobileControls
             set { this[FontNameKey] = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal BooleanOption Bold
         {
             get { return (BooleanOption)this[BoldKey]; }
             set { this[BoldKey] = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal BooleanOption Italic
         {
             get { return (BooleanOption)this[ItalicKey]; }
             set { this[ItalicKey] = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         internal FontSize FontSize
         {
             get { return (FontSize)this[FontSizeKey]; }
@@ -636,10 +633,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Style.uex' path='docs/doc[@for="Style.IsTemplated"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool IsTemplated
         {
             get { return IsTemplatedInternal(null); }

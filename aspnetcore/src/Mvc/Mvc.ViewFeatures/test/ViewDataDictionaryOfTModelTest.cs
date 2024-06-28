@@ -111,7 +111,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
         var model = new SupremeTestModel();
-        var source = new ViewDataDictionary(metadataProvider) { Model = model, };
+        var source = new ViewDataDictionary(metadataProvider) { Model = model };
 
         // Act
         var viewData = new ViewDataDictionary(source);
@@ -129,7 +129,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
         var model = new SupremeTestModel();
-        var source = new ViewDataDictionary(metadataProvider) { Model = model, };
+        var source = new ViewDataDictionary(metadataProvider) { Model = model };
 
         // Act
         var viewData = new ViewDataDictionary<TestModel>(source);
@@ -199,7 +199,7 @@ public class ViewDataDictionaryOfTModelTest
             "The model item passed into the ViewDataDictionary is of type 'System.Int32', "
             + "but this ViewDataDictionary instance requires a model item of type 'System.String'.";
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary<int>(metadataProvider) { Model = 23, };
+        var source = new ViewDataDictionary<int>(metadataProvider) { Model = 23 };
 
         // Act & Assert
         var exception = Assert.Throws<InvalidOperationException>(
@@ -261,7 +261,7 @@ public class ViewDataDictionaryOfTModelTest
     {
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary<int?>(metadataProvider) { Model = -48, };
+        var source = new ViewDataDictionary<int?>(metadataProvider) { Model = -48 };
 
         // Act
         var viewData = new ViewDataDictionary<int?>(source, model);
@@ -299,7 +299,7 @@ public class ViewDataDictionaryOfTModelTest
         // Arrange
         var model = new TestModel();
         var metadataProvider = new EmptyModelMetadataProvider();
-        var source = new ViewDataDictionary<TestModel>(metadataProvider) { Model = model, };
+        var source = new ViewDataDictionary<TestModel>(metadataProvider) { Model = model };
 
         // Act
         var viewData = new ViewDataDictionary<TestModel>(source, model);

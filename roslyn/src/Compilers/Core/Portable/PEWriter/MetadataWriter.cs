@@ -507,12 +507,12 @@ namespace Microsoft.Cci
         internal static readonly string[,] dummyAssemblyAttributeParentQualifier =
         {
             { "", "M" },
-            { "S", "SM" }
+            { "S", "SM" },
         };
         private readonly TypeReferenceHandle[,] _dummyAssemblyAttributeParent =
         {
             { default(TypeReferenceHandle), default(TypeReferenceHandle) },
-            { default(TypeReferenceHandle), default(TypeReferenceHandle) }
+            { default(TypeReferenceHandle), default(TypeReferenceHandle) },
         };
 
         internal CommonPEModuleBuilder Module => module;
@@ -1242,7 +1242,7 @@ namespace Microsoft.Cci
             {
                 IFieldReference fieldReference => this.GetFieldSignatureIndex(fieldReference),
                 IMethodReference methodReference => this.GetMethodSignatureHandle(methodReference),
-                _ => throw ExceptionUtilities.Unreachable()
+                _ => throw ExceptionUtilities.Unreachable(),
             };
         }
 
@@ -1936,7 +1936,7 @@ namespace Microsoft.Cci
                 IFieldDefinition fieldDef => GetFieldDefinitionHandle(fieldDef),
                 IEventDefinition eventDef => GetEventDefinitionHandle(eventDef),
                 IPropertyDefinition propertyDef => GetPropertyDefIndex(propertyDef),
-                _ => throw ExceptionUtilities.Unreachable()
+                _ => throw ExceptionUtilities.Unreachable(),
             };
         }
 
@@ -3615,7 +3615,7 @@ namespace Microsoft.Cci
                 IFieldReference fieldReference => GetFieldHandle(fieldReference),
                 IMethodReference methodReference => GetMethodHandle(methodReference),
                 ISignature signature => GetStandaloneSignatureHandle(signature),
-                _ => throw ExceptionUtilities.UnexpectedValue(reference)
+                _ => throw ExceptionUtilities.UnexpectedValue(reference),
             };
         }
 

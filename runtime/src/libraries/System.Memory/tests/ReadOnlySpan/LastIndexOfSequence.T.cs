@@ -56,7 +56,7 @@ namespace System.SpanTests
                     9,
                     77,
                     0,
-                    1
+                    1,
                 }
             );
             ReadOnlySpan<int> value = new ReadOnlySpan<int>(new int[] { 77, 77, 88 });
@@ -185,7 +185,7 @@ namespace System.SpanTests
                     "77",
                     "77",
                     "88",
-                    "9"
+                    "9",
                 }
             );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(new string[] { "5", "1", "77" });
@@ -231,7 +231,7 @@ namespace System.SpanTests
                     "9",
                     "77",
                     "0",
-                    "1"
+                    "1",
                 }
             );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(
@@ -265,7 +265,7 @@ namespace System.SpanTests
                     "77",
                     "77",
                     "88",
-                    "9"
+                    "9",
                 }
             );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(
@@ -299,7 +299,7 @@ namespace System.SpanTests
                     "77",
                     "77",
                     "88",
-                    "9"
+                    "9",
                 }
             );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(
@@ -358,7 +358,7 @@ namespace System.SpanTests
                     "77",
                     "77",
                     "88",
-                    "9"
+                    "9",
                 }
             );
             ReadOnlySpan<string> value = new ReadOnlySpan<string>(Array.Empty<string>());

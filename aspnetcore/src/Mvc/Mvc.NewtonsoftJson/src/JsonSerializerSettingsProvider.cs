@@ -42,13 +42,13 @@ public static class JsonSerializerSettingsProvider
             // Setting this to None prevents Json.NET from loading malicious, unsafe, or security-sensitive types
             TypeNameHandling = TypeNameHandling.None,
 
-            Converters = { ValidationProblemDetailsConverter, ProblemDetailsConverter, }
+            Converters = { ValidationProblemDetailsConverter, ProblemDetailsConverter },
         };
     }
 
     // To enable unit testing
     internal static DefaultContractResolver CreateContractResolver()
     {
-        return new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy(), };
+        return new DefaultContractResolver { NamingStrategy = new CamelCaseNamingStrategy() };
     }
 }

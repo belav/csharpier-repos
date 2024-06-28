@@ -50,7 +50,7 @@ public partial class MatcherBuilderMultipleEntryBenchmark : EndpointRoutingBench
             CreateNodeBuilderPolicy(6),
             CreateEndpointSelectorPolicy(10),
             CreateUberPolicy(12),
-            CreateEndpointComparerPolicy(11)
+            CreateEndpointComparerPolicy(11),
         };
         _loggerFactory = NullLoggerFactory.Instance;
         _selector = new DefaultEndpointSelector();

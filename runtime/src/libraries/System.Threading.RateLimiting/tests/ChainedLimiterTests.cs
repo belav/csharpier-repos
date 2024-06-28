@@ -43,7 +43,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
+                        QueueLimit = 0,
                     }
                 );
             });
@@ -55,7 +55,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
+                        QueueLimit = 0,
                     }
                 );
             });
@@ -81,7 +81,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
+                        QueueLimit = 0,
                     }
                 );
             });
@@ -93,7 +93,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
+                        QueueLimit = 0,
                     }
                 );
             });
@@ -119,7 +119,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 34,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 4
+                        QueueLimit = 4,
                     }
                 );
             });
@@ -131,7 +131,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 22,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 2
+                        QueueLimit = 2,
                     }
                 );
             });
@@ -143,7 +143,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 13,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10
+                        QueueLimit = 10,
                     }
                 );
             });
@@ -172,7 +172,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 34,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 0
+                        QueueLimit = 0,
                     }
                 );
             });
@@ -197,7 +197,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 34,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 4
+                        QueueLimit = 4,
                     }
                 );
             });
@@ -209,7 +209,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 22,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 2
+                        QueueLimit = 2,
                     }
                 );
             });
@@ -221,7 +221,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 13,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10
+                        QueueLimit = 10,
                     }
                 );
             });
@@ -248,7 +248,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 34,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 4
+                        QueueLimit = 4,
                     }
                 );
             });
@@ -260,7 +260,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 22,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 2
+                        QueueLimit = 2,
                     }
                 );
             });
@@ -272,7 +272,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 13,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10
+                        QueueLimit = 10,
                     }
                 );
             });
@@ -419,7 +419,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             var concurrencyLimiter2 = new ConcurrencyLimiter(
@@ -427,7 +427,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -462,7 +462,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             var concurrencyLimiter2 = new ConcurrencyLimiter(
@@ -470,7 +470,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -505,7 +505,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -531,7 +531,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -558,7 +558,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -594,7 +594,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -629,7 +629,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var concurrencyLimiter2 = new ConcurrencyLimiter(
@@ -637,7 +637,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -670,7 +670,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var concurrencyLimiter2 = new ConcurrencyLimiter(
@@ -678,7 +678,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -711,7 +711,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -739,7 +739,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -808,7 +808,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -817,7 +817,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -845,7 +845,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -854,7 +854,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -882,7 +882,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -891,7 +891,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -901,7 +901,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -931,7 +931,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -941,7 +941,7 @@ namespace System.Threading.RateLimiting.Tests
                     key => new CustomizableLimiter()
                     {
                         AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease())
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
                     }
                 );
             });
@@ -952,7 +952,7 @@ namespace System.Threading.RateLimiting.Tests
                     key => new CustomizableLimiter()
                     {
                         AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease())
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
                     }
                 );
             });
@@ -984,7 +984,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -993,7 +993,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -1003,7 +1003,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -1034,7 +1034,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -1044,7 +1044,7 @@ namespace System.Threading.RateLimiting.Tests
                     key => new CustomizableLimiter()
                     {
                         AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease())
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
                     }
                 );
             });
@@ -1055,7 +1055,7 @@ namespace System.Threading.RateLimiting.Tests
                     key => new CustomizableLimiter()
                     {
                         AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease())
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
                     }
                 );
             });
@@ -1088,7 +1088,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -1097,7 +1097,7 @@ namespace System.Threading.RateLimiting.Tests
                     1,
                     key => new CustomizableLimiter()
                     {
-                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease()
+                        AttemptAcquireCoreImpl = _ => new ThrowDisposeLease(),
                     }
                 );
             });
@@ -1128,7 +1128,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 1,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -1138,7 +1138,7 @@ namespace System.Threading.RateLimiting.Tests
                     key => new CustomizableLimiter()
                     {
                         AcquireAsyncCoreImpl = (_, _) =>
-                            new ValueTask<RateLimitLease>(new ThrowDisposeLease())
+                            new ValueTask<RateLimitLease>(new ThrowDisposeLease()),
                     }
                 );
             });
@@ -1169,7 +1169,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 5,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var concurrencyLimiter2 = new ConcurrencyLimiter(
@@ -1177,7 +1177,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 3,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -1211,7 +1211,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 5,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var concurrencyLimiter2 = new ConcurrencyLimiter(
@@ -1219,7 +1219,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 3,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -1320,7 +1320,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = 1
+                        QueueLimit = 1,
                     }
                 );
             });
@@ -1344,7 +1344,7 @@ namespace System.Threading.RateLimiting.Tests
                 {
                     PermitLimit = 2,
                     QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                    QueueLimit = 0
+                    QueueLimit = 0,
                 }
             );
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
@@ -1359,7 +1359,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = 1
+                        QueueLimit = 1,
                     }
                 );
             });
@@ -1392,7 +1392,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = 1
+                        QueueLimit = 1,
                     }
                 );
             });
@@ -1406,7 +1406,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                        QueueLimit = 0
+                        QueueLimit = 0,
                     }
                 );
             });
@@ -1575,7 +1575,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             var customizableLimiter2 = new CustomizableLimiter();
             customizableLimiter2.AttemptAcquireCoreImpl = _ => new CustomizableLease()
@@ -1598,7 +1598,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {
@@ -1656,7 +1656,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             var customizableLimiter2 = new CustomizableLimiter();
             customizableLimiter2.AttemptAcquireCoreImpl = _ => new CustomizableLease()
@@ -1680,7 +1680,7 @@ namespace System.Threading.RateLimiting.Tests
                     }
                     metadata = null;
                     return false;
-                }
+                },
             };
             using var limiter1 = PartitionedRateLimiter.Create<string, int>(resource =>
             {

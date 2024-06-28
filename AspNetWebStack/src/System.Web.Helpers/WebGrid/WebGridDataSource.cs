@@ -188,7 +188,7 @@ namespace System.Web.Helpers
                         data,
                         sorterFunctionBody,
                         sorterFunctionParameter,
-                        sort.SortDirection
+                        sort.SortDirection,
                     }
                 );
         }

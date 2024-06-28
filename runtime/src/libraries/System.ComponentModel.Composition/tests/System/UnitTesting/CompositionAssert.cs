@@ -30,7 +30,7 @@ namespace System.UnitTesting
                 new CompositionErrorExpectation
                 {
                     Id = (ErrorId)CompositionErrorId.Unknown,
-                    Element = element
+                    Element = element,
                 },
                 retry,
                 action
@@ -50,7 +50,7 @@ namespace System.UnitTesting
                 new CompositionErrorExpectation
                 {
                     Id = (ErrorId)CompositionErrorId.Unknown,
-                    InnerExceptionType = typeof(TInner)
+                    InnerExceptionType = typeof(TInner),
                 },
                 retry,
                 action
@@ -101,7 +101,7 @@ namespace System.UnitTesting
 
         public static void ThrowsError(ErrorId id, RetryMode retry, Action action)
         {
-            ThrowsError(new CompositionErrorExpectation { Id = id, }, retry, action);
+            ThrowsError(new CompositionErrorExpectation { Id = id }, retry, action);
         }
 
         private static void ThrowsError(
@@ -138,7 +138,7 @@ namespace System.UnitTesting
 
         public static void ThrowsChangeRejectedError(ErrorId id, RetryMode retry, Action action)
         {
-            ThrowsChangeRejectedError(new CompositionErrorExpectation { Id = id, }, retry, action);
+            ThrowsChangeRejectedError(new CompositionErrorExpectation { Id = id }, retry, action);
         }
 
         public static void ThrowsChangeRejectedError(
@@ -370,7 +370,7 @@ namespace System.UnitTesting
             {
                 expectation.InnerExpectations = new CompositionErrorExpectation[]
                 {
-                    new CompositionErrorExpectation() { Id = ids[i] }
+                    new CompositionErrorExpectation() { Id = ids[i] },
                 };
                 expectation = expectation.InnerExpectations[0];
             }

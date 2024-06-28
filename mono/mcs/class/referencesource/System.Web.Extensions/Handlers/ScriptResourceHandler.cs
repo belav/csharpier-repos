@@ -748,9 +748,9 @@ namespace System.Web.Handlers
                             assembly,
                             new List<Tuple<string, CultureInfo>>()
                             {
-                                new Tuple<string, CultureInfo>(resourceName, culture)
+                                new Tuple<string, CultureInfo>(resourceName, culture),
                             }
-                        )
+                        ),
                     },
                     zip
                 );

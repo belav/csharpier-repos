@@ -188,7 +188,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 new JSFunctionBinding.JSBindingType
                 {
                     Type = MarshalerType.Nullable,
-                    ResultMarshalerType = primitive._signatureType.Type
+                    ResultMarshalerType = primitive._signatureType.Type,
                 }
             );
         }
@@ -217,7 +217,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 new JSFunctionBinding.JSBindingType
                 {
                     Type = MarshalerType.Task,
-                    ResultMarshalerType = result._signatureType.Type
+                    ResultMarshalerType = result._signatureType.Type,
                 }
             );
         }
@@ -234,7 +234,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 new JSFunctionBinding.JSBindingType
                 {
                     Type = MarshalerType.Array,
-                    Arg1MarshalerType = element._signatureType.Type
+                    Arg1MarshalerType = element._signatureType.Type,
                 }
             );
         }
@@ -254,7 +254,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 new JSFunctionBinding.JSBindingType
                 {
                     Type = MarshalerType.ArraySegment,
-                    Arg1MarshalerType = element._signatureType.Type
+                    Arg1MarshalerType = element._signatureType.Type,
                 }
             );
         }
@@ -272,7 +272,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 new JSFunctionBinding.JSBindingType
                 {
                     Type = MarshalerType.Span,
-                    Arg1MarshalerType = element._signatureType.Type
+                    Arg1MarshalerType = element._signatureType.Type,
                 }
             );
         }
@@ -303,7 +303,7 @@ namespace System.Runtime.InteropServices.JavaScript
                 new JSFunctionBinding.JSBindingType
                 {
                     Type = MarshalerType.Action,
-                    Arg1MarshalerType = arg1._signatureType.Type
+                    Arg1MarshalerType = arg1._signatureType.Type,
                 }
             );
         }

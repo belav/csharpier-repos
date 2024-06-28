@@ -97,7 +97,7 @@ namespace MonoTests.System.Xml
             "unsignedInt",
             "unsignedShort",
             "unsignedByte",
-            "positiveInteger"
+            "positiveInteger",
         };
 
         static string[] xdttypes =
@@ -105,7 +105,7 @@ namespace MonoTests.System.Xml
             "anyAtomicType",
             "untypedAtomic",
             "yearMonthDuration",
-            "dayTimeDuration"
+            "dayTimeDuration",
         };
 
         private static XmlQualifiedName[] AllTypeNames

@@ -58,7 +58,7 @@ namespace System.IO.Tests
                 (char)0xD,
                 (char)0x20,
                 (char)0x85,
-                (char)0xA0
+                (char)0xA0,
             };
             Assert.False(Exists(invalidPath));
             if (!trimmed.Contains(invalidPath.ToCharArray()[0]))

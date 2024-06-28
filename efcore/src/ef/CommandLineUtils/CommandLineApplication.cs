@@ -18,7 +18,7 @@ internal class CommandLineApplication
         Succeeded,
         ShowHelp,
         ShowVersion,
-        UnexpectedArgs
+        UnexpectedArgs,
     }
 
     // Indicates whether the parser should throw an exception when it runs into an unexpected argument.
@@ -70,7 +70,7 @@ internal class CommandLineApplication
         var command = new CommandLineApplication(throwOnUnexpectedArg)
         {
             Name = name,
-            Parent = this
+            Parent = this,
         };
         Commands.Add(command);
         configuration(command);
@@ -118,7 +118,7 @@ internal class CommandLineApplication
         {
             Name = name,
             Description = description,
-            MultipleValues = multipleValues
+            MultipleValues = multipleValues,
         };
         Arguments.Add(argument);
         configuration(argument);

@@ -27,7 +27,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person1)
+            ParameterType = typeof(Person1),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -77,7 +77,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person2)
+            ParameterType = typeof(Person2),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -117,7 +117,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person3)
+            ParameterType = typeof(Person3),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -164,7 +164,7 @@ public class NullableReferenceTypeIntegrationTest
         {
             Name = "param1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         var method = GetType()

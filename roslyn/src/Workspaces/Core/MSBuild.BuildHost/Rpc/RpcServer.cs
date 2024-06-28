@@ -182,7 +182,7 @@ internal sealed class RpcServer
             response = new Response
             {
                 Id = request.Id,
-                Value = result is not null ? JToken.FromObject(result) : null
+                Value = result is not null ? JToken.FromObject(result) : null,
             };
         }
         catch (Exception e)
@@ -193,7 +193,7 @@ internal sealed class RpcServer
             response = new Response
             {
                 Id = request.Id,
-                Exception = $"An exception of type {e.GetType()} was thrown: {e.Message}"
+                Exception = $"An exception of type {e.GetType()} was thrown: {e.Message}",
             };
         }
 

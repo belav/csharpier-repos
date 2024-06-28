@@ -16,7 +16,7 @@ namespace System.Workflow.Activities.Rules
     public enum RuleAttributeTarget
     {
         Parameter,
-        This
+        This,
     }
 
     public abstract class RuleAttribute : Attribute

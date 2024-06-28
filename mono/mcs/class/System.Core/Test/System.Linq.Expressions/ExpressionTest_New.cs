@@ -223,7 +223,7 @@ namespace MonoTests.System.Linq.Expressions
                 {
                     typeof(FakeAnonymousType).GetProperty("Foo"),
                     typeof(FakeAnonymousType).GetProperty("Bar"),
-                    typeof(FakeAnonymousType).GetProperty("Baz")
+                    typeof(FakeAnonymousType).GetProperty("Baz"),
                 }
             );
 
@@ -257,7 +257,7 @@ namespace MonoTests.System.Linq.Expressions
                 new[]
                 {
                     typeof(FakeAnonymousType).GetProperty("Foo"),
-                    typeof(FakeAnonymousType).GetProperty("Bar")
+                    typeof(FakeAnonymousType).GetProperty("Bar"),
                 }
             );
         }

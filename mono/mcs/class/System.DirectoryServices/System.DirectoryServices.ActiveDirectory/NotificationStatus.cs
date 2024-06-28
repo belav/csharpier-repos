@@ -27,6 +27,6 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         NoNotification,
         IntraSiteOnly,
-        NotificationAlways
+        NotificationAlways,
     }
 }

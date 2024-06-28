@@ -554,7 +554,7 @@ ORDER BY [i].[_Position];
                     nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated),
                     nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2),
                     nameof(StoreValueGenerationContext.WithAllDatabaseGenerated),
-                    nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2)
+                    nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2),
                 }
             )
             {

@@ -25,7 +25,7 @@ namespace System.Collections.Tests
             {
                 new DictionaryEntry("key", "key"),
                 new DictionaryEntry("value", "value"),
-                "[[key, key], [value, value]]"
+                "[[key, key], [value, value]]",
             };
 
             // There's no truncation; keys and values are emitted as-is
@@ -33,7 +33,7 @@ namespace System.Collections.Tests
             {
                 new String('K', 512),
                 new String('V', 1024),
-                $"[{new String('K', 512)}, {new String('V', 1024)}]"
+                $"[{new String('K', 512)}, {new String('V', 1024)}]",
             };
         }
 

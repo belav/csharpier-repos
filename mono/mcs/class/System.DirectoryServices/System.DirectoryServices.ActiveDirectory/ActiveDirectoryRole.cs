@@ -29,6 +29,6 @@ namespace System.DirectoryServices.ActiveDirectory
         NamingRole,
         PdcRole,
         RidRole,
-        InfrastructureRole
+        InfrastructureRole,
     }
 }

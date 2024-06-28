@@ -142,7 +142,7 @@ namespace System.Net.Http.Headers
                 "no-transform",
                 "private",
                 "proxy-revalidate",
-                "public"
+                "public",
             },
             H2StaticTable.CacheControl,
             H3StaticTable.CacheControlMaxAge0
@@ -406,7 +406,7 @@ namespace System.Net.Http.Headers
                 "same-origin",
                 "no-referrer-when-downgrade",
                 "no-referrer",
-                "unsafe-url"
+                "unsafe-url",
             }
         );
         public static readonly KnownHeader Refresh = new KnownHeader(

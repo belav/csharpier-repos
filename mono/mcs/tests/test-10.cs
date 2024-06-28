@@ -241,7 +241,7 @@ class X
 
 enum E : byte
 {
-    Min = 9
+    Min = 9,
 }
 
 class Test2

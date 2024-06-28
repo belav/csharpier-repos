@@ -34,11 +34,10 @@ namespace Roslyn.Test.Utilities.PDB
                 (isDefault != null)
                     ? isDefault(expectedValue)
                     : EqualityComparer<T>.Default.Equals(expectedValue, default);
-            var expectedValueString = expectedIsDefault
-                ? null
-                : (toString != null)
-                    ? toString(expectedValue)
-                    : expectedValue.ToString();
+            var expectedValueString =
+                expectedIsDefault ? null
+                : (toString != null) ? toString(expectedValue)
+                : expectedValue.ToString();
 
             pdbOptions.TryGetValue(pdbName, out var actualValueString);
             Assert.Equal(expectedValueString, actualValueString);

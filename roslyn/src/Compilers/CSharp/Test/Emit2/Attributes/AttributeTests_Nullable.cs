@@ -334,7 +334,7 @@ public interface I1<T> : I2<T, (object a, object b)>
                 references: new[]
                 {
                     getReference(valueTuple_comp),
-                    getReference(tupleElementNamesAttribute_comp)
+                    getReference(tupleElementNamesAttribute_comp),
                 }
             );
             lib1_comp.VerifyDiagnostics();
@@ -374,7 +374,7 @@ public interface I0 : I1<string>
                 new[]
                 {
                     "I1<System.String>",
-                    "I2<System.String, (System.Object a, System.Object b)>"
+                    "I2<System.String, (System.Object a, System.Object b)>",
                 },
                 imc1.AllInterfacesNoUseSiteDiagnostics.Select(i =>
                     i.ToTestDisplayString(includeNonNullable: true)
@@ -2131,7 +2131,7 @@ public class C<T> where T : A<object>
                         "object?"
                     )
                     .WithArguments("C<T, U>", "T", "object?")
-                    .WithLocation(6, 15)
+                    .WithLocation(6, 15),
             };
 
             comp2.VerifyEmitDiagnostics(expected);

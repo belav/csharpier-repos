@@ -568,7 +568,7 @@ namespace System.Web.UI.WebControls.WebParts
             set { ViewState["NoExistingConnectionTitle"] = value; }
         }
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Themeable(false),]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never), Themeable(false)]
         public override PartChromeType PartChromeType
         {
             get { return base.PartChromeType; }
@@ -3049,7 +3049,7 @@ namespace System.Web.UI.WebControls.WebParts
         {
             None = 0,
             Consumer = 1,
-            Provider = 2
+            Provider = 2,
         }
 
         private enum ConnectionsZoneMode
@@ -3057,7 +3057,7 @@ namespace System.Web.UI.WebControls.WebParts
             ExistingConnections = 0,
             ConnectToConsumer = 1,
             ConnectToProvider = 2,
-            ConfiguringTransformer = 3
+            ConfiguringTransformer = 3,
         }
     }
 }

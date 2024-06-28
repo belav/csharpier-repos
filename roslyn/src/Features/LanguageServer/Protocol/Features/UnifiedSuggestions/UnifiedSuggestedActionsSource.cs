@@ -687,16 +687,14 @@ namespace Microsoft.CodeAnalysis.UnifiedSuggestions
         )
         {
             var actions = refactoring.CodeActions.WhereAsArray(IsActionAndSpanApplicable);
-            return actions.Length == 0
-                ? null
-                : actions.Length == refactoring.CodeActions.Length
-                    ? refactoring
-                    : new CodeRefactoring(
-                        refactoring.Provider,
-                        actions,
-                        refactoring.FixAllProviderInfo,
-                        refactoring.CodeActionOptionsProvider
-                    );
+            return actions.Length == 0 ? null
+                : actions.Length == refactoring.CodeActions.Length ? refactoring
+                : new CodeRefactoring(
+                    refactoring.Provider,
+                    actions,
+                    refactoring.FixAllProviderInfo,
+                    refactoring.CodeActionOptionsProvider
+                );
 
             bool IsActionAndSpanApplicable(
                 (CodeAction action, TextSpan? applicableSpan) actionAndSpan

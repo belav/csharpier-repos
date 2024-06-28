@@ -34,7 +34,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Title",
                     Name = "Title",
                     HasNameTable = true,
-                    Value = "XPath test"
+                    Value = "XPath test",
                 },
                 new XPathResultToken
                 {
@@ -44,7 +44,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -53,7 +53,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
+                    Value = "\n   XPath test\n   Direct content\n ",
                 }
             );
 
@@ -88,7 +88,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Title",
                     Name = "Title",
                     HasNameTable = true,
-                    Value = "XPath test"
+                    Value = "XPath test",
                 },
                 new XPathResultToken
                 {
@@ -97,7 +97,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Summary",
                     Name = "Summary",
                     HasNameTable = true,
-                    Value = "This shall test XPath test"
+                    Value = "This shall test XPath test",
                 },
                 new XPathResultToken
                 {
@@ -107,7 +107,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -116,7 +116,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
+                    Value = "\n   XPath test\n   Direct content\n ",
                 }
             );
 
@@ -152,7 +152,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Doc",
                     HasNameTable = true,
                     Value =
-                        "\n XPath test\n This shall test XPath test\n \n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n \n \n   XPath test\n   Direct content\n \n"
+                        "\n XPath test\n This shall test XPath test\n \n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n \n \n   XPath test\n   Direct content\n \n",
                 },
                 new XPathResultToken
                 {
@@ -162,7 +162,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -171,7 +171,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
+                    Value = "\n   XPath test\n   Direct content\n ",
                 }
             );
 
@@ -206,7 +206,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -215,7 +215,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = " Nested  Paragraph "
+                    Value = " Nested  Paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -224,7 +224,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "Second paragraph "
+                    Value = "Second paragraph ",
                 }
             );
 
@@ -259,7 +259,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -268,7 +268,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = " Nested  Paragraph "
+                    Value = " Nested  Paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -277,7 +277,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "Second paragraph "
+                    Value = "Second paragraph ",
                 }
             );
 
@@ -312,7 +312,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 },
                 new XPathResultToken
                 {
@@ -321,7 +321,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "Second paragraph "
+                    Value = "Second paragraph ",
                 }
             );
 
@@ -357,7 +357,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 },
                 new XPathResultToken
                 {
@@ -366,7 +366,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Chap",
                     Name = "Chap",
                     HasNameTable = true,
-                    Value = "\n   XPath test\n   Direct content\n "
+                    Value = "\n   XPath test\n   Direct content\n ",
                 }
             );
 
@@ -401,7 +401,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     LocalName = "Para",
                     Name = "Para",
                     HasNameTable = true,
-                    Value = "First paragraph  Nested  Paragraph  End of first paragraph "
+                    Value = "First paragraph  Nested  Paragraph  End of first paragraph ",
                 }
             );
 

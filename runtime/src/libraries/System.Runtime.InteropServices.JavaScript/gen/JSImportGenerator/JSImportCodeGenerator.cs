@@ -41,7 +41,7 @@ namespace Microsoft.Interop.JavaScript
                 ReturnIdentifier
             )
             {
-                CodeEmitOptions = new(SkipInit: true)
+                CodeEmitOptions = new(SkipInit: true),
             };
             _context = new JSImportCodeContext(attributeData, innerContext);
             _marshallers = BoundGenerators.Create(
@@ -67,7 +67,7 @@ namespace Microsoft.Interop.JavaScript
                     ReturnNativeIdentifier
                 )
                 {
-                    CodeEmitOptions = new(SkipInit: true)
+                    CodeEmitOptions = new(SkipInit: true),
                 };
                 _context = new JSImportCodeContext(attributeData, innerContext);
             }
@@ -87,7 +87,7 @@ namespace Microsoft.Interop.JavaScript
                     diagnosticsBag.ReportGeneratorDiagnostic(
                         new GeneratorDiagnostic.NotSupported(spanArg.TypeInfo, _context)
                         {
-                            NotSupportedDetails = SR.SpanAndTaskNotSupported
+                            NotSupportedDetails = SR.SpanAndTaskNotSupported,
                         }
                     );
                 }
@@ -455,7 +455,7 @@ namespace Microsoft.Interop.JavaScript
                                 new[]
                                 {
                                     Argument(IdentifierName(_signatureContext.BindingName)),
-                                    Argument(IdentifierName(Constants.ArgumentsBuffer))
+                                    Argument(IdentifierName(Constants.ArgumentsBuffer)),
                                 }
                             )
                         )

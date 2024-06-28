@@ -38,7 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
                 new ColumnState2(ColumnDefinitions.NamingStyle.Type, isVisible: true, width: 0),
                 new ColumnState2(ColumnDefinitions.NamingStyle.Style, isVisible: true, width: 0),
                 new ColumnState2(ColumnDefinitions.NamingStyle.Severity, isVisible: true, width: 0),
-                new ColumnState2(ColumnDefinitions.NamingStyle.Location, isVisible: true, width: 0)
+                new ColumnState2(ColumnDefinitions.NamingStyle.Location, isVisible: true, width: 0),
             };
 
         protected override string[] GetFixedColumns() =>
@@ -47,7 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
                 ColumnDefinitions.NamingStyle.Type,
                 ColumnDefinitions.NamingStyle.Style,
                 ColumnDefinitions.NamingStyle.Severity,
-                ColumnDefinitions.NamingStyle.Location
+                ColumnDefinitions.NamingStyle.Location,
             };
     }
 }

@@ -37,7 +37,7 @@ namespace System.Configuration
         Attribute = 0x01,
         Element = 0x02,
 
-        Exclude = 0x10
+        Exclude = 0x10,
     }
 
     public sealed class ConfigurationLockCollection : ICollection, IEnumerable

@@ -75,7 +75,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 compilerInfo,
                 CodeDomProvider.GetCompilerInfo("vb"),
-                false
+                false,
             };
 
             // .NET Core fixes a typo in .NET Framework and validates that the casted object

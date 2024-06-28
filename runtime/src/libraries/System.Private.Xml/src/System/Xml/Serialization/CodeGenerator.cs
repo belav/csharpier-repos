@@ -892,7 +892,7 @@ namespace System.Xml.Serialization
                                 typeof(int),
                                 typeof(int),
                                 typeof(bool),
-                                typeof(byte)
+                                typeof(byte),
                             }
                         )!;
                         int[] bits = decimal.GetBits((decimal)o);
@@ -1598,7 +1598,7 @@ namespace System.Xml.Serialization
         LessThanOrEqualTo,
         GreaterThan,
         NotEqualTo,
-        GreaterThanOrEqualTo
+        GreaterThanOrEqualTo,
     }
 
     internal sealed class IfState

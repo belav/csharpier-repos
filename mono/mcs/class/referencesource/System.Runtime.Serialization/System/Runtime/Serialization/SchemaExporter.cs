@@ -769,7 +769,7 @@ namespace System.Runtime.Serialization
                             Dictionary<string, string> values = new Dictionary<string, string>(2)
                             {
                                 { "ItemType", item.ToString() },
-                                { "Name", qname.Namespace + ":" + qname.Name }
+                                { "Name", qname.Namespace + ":" + qname.Name },
                             };
                             TraceUtility.Trace(
                                 TraceEventType.Warning,

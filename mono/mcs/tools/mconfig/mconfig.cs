@@ -61,7 +61,7 @@ namespace Mono.MonoConfig
             "  -t,--target={any,web,application} Use this target when executing 'command'",
             "",
             "To see the list of commands, features and default config file templates, run mconfig",
-            "without any parameters"
+            "without any parameters",
         };
 
         string[] usageCommands =
@@ -72,7 +72,7 @@ namespace Mono.MonoConfig
             "",
             "  {defconfig,dc} [template_name] [target_directory]",
             "     Write a config file based on the named template.",
-            ""
+            "",
         };
 
         List<string> plain_arguments;
@@ -310,13 +310,13 @@ namespace Mono.MonoConfig
             ),
             Path.Combine(ConfigPath, "config.xml"),
             Path.Combine(".", "mconfig.xml"),
-            null
+            null,
         };
 
         static CommandHandler[] commands =
         {
             new CommandHandler(new string[] { "addfeature", "af" }, HandleAddFeature),
-            new CommandHandler(new string[] { "defconfig", "dc" }, HandleDefaultConfig)
+            new CommandHandler(new string[] { "defconfig", "dc" }, HandleDefaultConfig),
         };
 
         static string ConfigPath

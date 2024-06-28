@@ -33,7 +33,7 @@ namespace System.Workflow.Activities.Common
     {
         Continue = 0,
         Skip = 1,
-        Abort = 2
+        Abort = 2,
     }
 
     #region Class WalkerEventArgs

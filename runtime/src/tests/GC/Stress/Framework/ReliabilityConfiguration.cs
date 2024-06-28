@@ -19,7 +19,7 @@ public enum TestStartModeEnum
 {
     AppDomainLoader,
     ProcessLoader,
-    AssemblyLoadContextLoader
+    AssemblyLoadContextLoader,
 }
 
 public enum AppDomainLoaderMode
@@ -27,7 +27,7 @@ public enum AppDomainLoaderMode
     FullIsolation,
     Normal,
     RoundRobin,
-    Lazy
+    Lazy,
 }
 
 public enum AssemblyLoadContextLoaderMode
@@ -35,7 +35,7 @@ public enum AssemblyLoadContextLoaderMode
     FullIsolation,
     Normal,
     RoundRobin,
-    Lazy
+    Lazy,
 }
 
 [Flags]
@@ -51,7 +51,7 @@ public enum LoggingLevels
     TestStarter = 0x80,
     AssemblyLoadContext = 0x100,
 
-    All = (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x80 | 0x100)
+    All = (0x01 | 0x02 | 0x04 | 0x08 | 0x10 | 0x20 | 0x80 | 0x100),
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1614,5 +1614,5 @@ public enum TestAttributes
 public enum CustomActionType
 {
     None,
-    LegacySecurityPolicy
+    LegacySecurityPolicy,
 }

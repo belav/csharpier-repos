@@ -190,7 +190,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     {
                         context.Token = "something";
                         return Task.FromResult(0);
-                    }
+                    },
                 };
                 o.TokenHandlers.Clear();
                 o.TokenHandlers.Insert(0, new InvalidTokenValidator());
@@ -229,7 +229,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     {
                         new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"),
                         new Claim(ClaimTypes.Email, "bob@contoso.com"),
-                        new Claim(ClaimsIdentity.DefaultNameClaimType, "bob")
+                        new Claim(ClaimsIdentity.DefaultNameClaimType, "bob"),
                     };
 
                     context.Principal = new ClaimsPrincipal(
@@ -238,7 +238,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     context.Success();
 
                     return Task.FromResult<object>(null);
-                }
+                },
             };
         });
 
@@ -444,7 +444,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     context.ErrorUri = uri;
 
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -541,7 +541,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"));
 
                     return Task.FromResult<object>(null);
-                }
+                },
             };
             options.TokenHandlers.Clear();
             options.TokenHandlers.Add(
@@ -566,7 +566,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 {
                     context.Token = "CustomToken";
                     return Task.FromResult<object>(null);
-                }
+                },
             };
             options.TokenHandlers.Clear();
             options.TokenHandlers.Add(
@@ -862,7 +862,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 OnForbidden = context =>
                 {
                     return Task.FromResult(0);
-                }
+                },
             };
         });
         var newBearerToken = "Bearer " + tokenData.tokenText;
@@ -889,7 +889,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 {
                     context.Response.StatusCode = 418;
                     return context.Response.WriteAsync("You Shall Not Pass");
-                }
+                },
             };
         });
         var newBearerToken = "Bearer " + tokenData.tokenText;
@@ -915,7 +915,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     return context.Response.WriteAsync("You Shall Not Pass");
                 }
                 return Task.CompletedTask;
-            }
+            },
         };
 
         using var host = new HostBuilder()
@@ -1265,14 +1265,14 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                     "SecurityTokenInvalidAudienceException"
                 )
                 {
-                    InvalidAudience = "Bad Audience"
+                    InvalidAudience = "Bad Audience",
                 };
             }
             if (ExceptionType == typeof(SecurityTokenInvalidIssuerException))
             {
                 throw new SecurityTokenInvalidIssuerException("SecurityTokenInvalidIssuerException")
                 {
-                    InvalidIssuer = "Bad Issuer"
+                    InvalidIssuer = "Bad Issuer",
                 };
             }
             if (ExceptionType == typeof(SecurityTokenInvalidLifetimeException))
@@ -1350,7 +1350,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                 {
                     ClaimsIdentity = new ClaimsIdentity(claims, AuthenticationScheme),
                     SecurityToken = validatedToken,
-                    IsValid = true
+                    IsValid = true,
                 }
             );
         }
@@ -1467,7 +1467,7 @@ public class JwtBearerTests_Handler : SharedAuthenticationTests<JwtBearerOptions
                                         new
                                         {
                                             Expires = authenticationResult.Properties?.ExpiresUtc,
-                                            Issued = authenticationResult.Properties?.IssuedUtc
+                                            Issued = authenticationResult.Properties?.IssuedUtc,
                                         }
                                     );
                                 }

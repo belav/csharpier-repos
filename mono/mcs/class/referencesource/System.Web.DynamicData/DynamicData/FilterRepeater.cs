@@ -352,7 +352,7 @@
             return GetFilterControls()
                 .Select(filter =>
                     (Parameter)
-                        new DynamicControlParameter(filter.UniqueID) { Name = filter.DataField, }
+                        new DynamicControlParameter(filter.UniqueID) { Name = filter.DataField }
                 );
         }
 

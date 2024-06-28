@@ -37,7 +37,7 @@ namespace System.Collections.Concurrent
         /// the source) and partial support for dependencies between items (a thread cannot deadlock waiting for an item
         /// that it, itself, is responsible for processing).
         /// </summary>
-        NoBuffering = 0x1
+        NoBuffering = 0x1,
     }
 
     // The static class Partitioners implements 3 default partitioning strategies:

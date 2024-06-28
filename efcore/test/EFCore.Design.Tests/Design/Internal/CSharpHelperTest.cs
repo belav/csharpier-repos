@@ -231,7 +231,7 @@ public class CSharpHelperTest
         var value = new object[,]
         {
             { 'A', 1 },
-            { 'B', 2 }
+            { 'B', 2 },
         };
 
         var result = new CSharpHelper(TypeMappingSource).Literal(value);
@@ -294,7 +294,7 @@ public class CSharpHelperTest
 
     private enum SomeEnum
     {
-        Default
+        Default,
     }
 
     [ConditionalTheory]
@@ -501,7 +501,7 @@ public class CSharpHelperTest
                 new[]
                 {
                     new MethodCallCodeFragment(_testFuncMethodInfo, "One"),
-                    new MethodCallCodeFragment(_testFuncMethodInfo, "Two")
+                    new MethodCallCodeFragment(_testFuncMethodInfo, "Two"),
                 }
             )
         );
@@ -530,7 +530,7 @@ public class CSharpHelperTest
                     new[]
                     {
                         new MethodCallCodeFragment(_testFuncMethodInfo, "Two"),
-                        new MethodCallCodeFragment(_testFuncMethodInfo, "Three")
+                        new MethodCallCodeFragment(_testFuncMethodInfo, "Three"),
                     }
                 )
             )

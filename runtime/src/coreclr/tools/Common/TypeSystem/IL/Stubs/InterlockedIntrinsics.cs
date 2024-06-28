@@ -41,7 +41,7 @@ namespace Internal.IL.Stubs
                             {
                                 objectType.MakeByRefType(),
                                 objectType,
-                                objectType
+                                objectType,
                             }
                         )
                     );

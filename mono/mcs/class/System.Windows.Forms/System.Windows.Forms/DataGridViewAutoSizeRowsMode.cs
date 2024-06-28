@@ -33,6 +33,6 @@ namespace System.Windows.Forms
         AllCells = 7,
         DisplayedHeaders = 9,
         DisplayedCellsExceptHeaders = 10,
-        DisplayedCells = 11
+        DisplayedCells = 11,
     }
 }

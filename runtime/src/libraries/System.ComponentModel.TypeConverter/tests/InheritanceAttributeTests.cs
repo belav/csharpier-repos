@@ -82,13 +82,13 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new InheritanceAttribute(InheritanceLevel.Inherited),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new InheritanceAttribute(InheritanceLevel.InheritedReadOnly),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

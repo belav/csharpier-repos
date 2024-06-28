@@ -402,15 +402,14 @@ namespace Microsoft.CodeAnalysis.Editing
             return ParameterDeclaration(
                 symbol.Name,
                 TypeExpression(symbol.Type),
-                initializer is not null
-                    ? initializer
+                initializer is not null ? initializer
                     : symbol.HasExplicitDefaultValue
                         ? GenerateExpression(
                             symbol.Type,
                             symbol.ExplicitDefaultValue,
                             canUseFieldReference: true
                         )
-                        : null,
+                    : null,
                 symbol.RefKind,
                 isExtension: symbol
                     is { Ordinal: 0, ContainingSymbol: IMethodSymbol { IsExtensionMethod: true } },
@@ -953,66 +952,59 @@ namespace Microsoft.CodeAnalysis.Editing
 
                     var declaration = type.TypeKind switch
                     {
-                        TypeKind.Class =>
-                            ClassDeclaration(
-                                type.IsRecord,
+                        TypeKind.Class => ClassDeclaration(
+                            type.IsRecord,
+                            type.Name,
+                            type.TypeParameters.Select(TypeParameter),
+                            accessibility: type.DeclaredAccessibility,
+                            modifiers: DeclarationModifiers.From(type),
+                            baseType: type.BaseType != null ? TypeExpression(type.BaseType) : null,
+                            interfaceTypes: type.Interfaces.Select(TypeExpression),
+                            members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
+                        ),
+                        TypeKind.Struct => StructDeclaration(
+                            type.IsRecord,
+                            type.Name,
+                            type.TypeParameters.Select(TypeParameter),
+                            accessibility: type.DeclaredAccessibility,
+                            modifiers: DeclarationModifiers.From(type),
+                            interfaceTypes: type.Interfaces.Select(TypeExpression),
+                            members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
+                        ),
+                        TypeKind.Interface => InterfaceDeclaration(
+                            type.Name,
+                            type.TypeParameters.Select(TypeParameter),
+                            accessibility: type.DeclaredAccessibility,
+                            interfaceTypes: type.Interfaces.Select(TypeExpression),
+                            members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
+                        ),
+                        TypeKind.Enum => EnumDeclaration(
+                            type.Name,
+                            underlyingType: type.EnumUnderlyingType
+                                is null
+                                    or { SpecialType: SpecialType.System_Int32 }
+                                ? null
+                                : TypeExpression(type.EnumUnderlyingType.SpecialType),
+                            accessibility: type.DeclaredAccessibility,
+                            members: type.GetMembers()
+                                .Where(s => s.Kind == SymbolKind.Field)
+                                .Select(Declaration)
+                        ),
+                        TypeKind.Delegate => type.GetMembers(
+                            WellKnownMemberNames.DelegateInvokeName
+                        )
+                            is [IMethodSymbol invoke, ..]
+                            ? DelegateDeclaration(
                                 type.Name,
-                                type.TypeParameters.Select(TypeParameter),
-                                accessibility: type.DeclaredAccessibility,
-                                modifiers: DeclarationModifiers.From(type),
-                                baseType: type.BaseType != null
-                                    ? TypeExpression(type.BaseType)
-                                    : null,
-                                interfaceTypes: type.Interfaces.Select(TypeExpression),
-                                members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
-                            ),
-                        TypeKind.Struct =>
-                            StructDeclaration(
-                                type.IsRecord,
-                                type.Name,
-                                type.TypeParameters.Select(TypeParameter),
-                                accessibility: type.DeclaredAccessibility,
-                                modifiers: DeclarationModifiers.From(type),
-                                interfaceTypes: type.Interfaces.Select(TypeExpression),
-                                members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
-                            ),
-                        TypeKind.Interface =>
-                            InterfaceDeclaration(
-                                type.Name,
-                                type.TypeParameters.Select(TypeParameter),
-                                accessibility: type.DeclaredAccessibility,
-                                interfaceTypes: type.Interfaces.Select(TypeExpression),
-                                members: type.GetMembers().Where(CanBeDeclared).Select(Declaration)
-                            ),
-                        TypeKind.Enum =>
-                            EnumDeclaration(
-                                type.Name,
-                                underlyingType: type.EnumUnderlyingType
-                                    is null
-                                        or { SpecialType: SpecialType.System_Int32 }
+                                typeParameters: type.TypeParameters.Select(TypeParameter),
+                                parameters: invoke.Parameters.Select(p => ParameterDeclaration(p)),
+                                returnType: invoke.ReturnsVoid
                                     ? null
-                                    : TypeExpression(type.EnumUnderlyingType.SpecialType),
+                                    : TypeExpression(invoke.ReturnType),
                                 accessibility: type.DeclaredAccessibility,
-                                members: type.GetMembers()
-                                    .Where(s => s.Kind == SymbolKind.Field)
-                                    .Select(Declaration)
-                            ),
-                        TypeKind.Delegate =>
-                            type.GetMembers(WellKnownMemberNames.DelegateInvokeName)
-                                is [IMethodSymbol invoke, ..]
-                                ? DelegateDeclaration(
-                                    type.Name,
-                                    typeParameters: type.TypeParameters.Select(TypeParameter),
-                                    parameters: invoke.Parameters.Select(p =>
-                                        ParameterDeclaration(p)
-                                    ),
-                                    returnType: invoke.ReturnsVoid
-                                        ? null
-                                        : TypeExpression(invoke.ReturnType),
-                                    accessibility: type.DeclaredAccessibility,
-                                    modifiers: DeclarationModifiers.From(type)
-                                )
-                                : null,
+                                modifiers: DeclarationModifiers.From(type)
+                            )
+                            : null,
                         _ => null,
                     };
 

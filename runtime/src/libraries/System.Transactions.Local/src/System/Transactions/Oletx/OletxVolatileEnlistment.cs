@@ -1074,7 +1074,7 @@ internal sealed class OletxVolatileEnlistment : OletxBaseEnlistment, IPromotedEn
         Prepared,
         Aborted,
         InDoubt,
-        Done
+        Done,
     }
 
     private readonly IEnlistmentNotificationInternal _iEnlistmentNotification;

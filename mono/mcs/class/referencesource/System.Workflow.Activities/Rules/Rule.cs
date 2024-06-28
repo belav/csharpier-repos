@@ -17,7 +17,7 @@ namespace System.Workflow.Activities.Rules
     public enum RuleReevaluationBehavior
     {
         Never,
-        Always
+        Always,
     };
 
     [Serializable]

@@ -81,7 +81,7 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
         )
         {
             Mode = SqliteOpenMode.ReadOnly,
-            Pooling = false
+            Pooling = false,
         };
 
         var contextOptions = new DbContextOptionsBuilder()
@@ -91,7 +91,7 @@ public class SqliteRelationalConnection : RelationalConnection, ISqliteRelationa
         return new SqliteRelationalConnection(
             Dependencies with
             {
-                ContextOptions = contextOptions
+                ContextOptions = contextOptions,
             },
             _rawSqlCommandBuilder,
             _logger

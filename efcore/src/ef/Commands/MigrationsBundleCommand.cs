@@ -58,8 +58,8 @@ internal partial class MigrationsBundleCommand
                 ["TargetFramework"] = Framework!.Value()!,
                 ["EFCoreVersion"] = EFCoreVersion!,
                 ["Project"] = Project!.Value()!,
-                ["StartupProject"] = StartupProject!.Value()!
-            }
+                ["StartupProject"] = StartupProject!.Value()!,
+            },
         };
         projectGenerator.Initialize();
 
@@ -74,8 +74,8 @@ internal partial class MigrationsBundleCommand
             {
                 ["ContextType"] = context,
                 ["Assembly"] = assembly,
-                ["StartupAssembly"] = startupAssembly
-            }
+                ["StartupAssembly"] = startupAssembly,
+            },
         };
         programGenerator.Initialize();
 

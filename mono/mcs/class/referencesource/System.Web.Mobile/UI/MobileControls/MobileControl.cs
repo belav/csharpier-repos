@@ -176,7 +176,7 @@ namespace System.Web.UI.MobileControls
             }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public sealed override void ApplyStyleSheetSkin(Page page)
         {
             throw new NotSupportedException(SR.GetString(SR.Theme_Not_Supported_On_MobileControls));

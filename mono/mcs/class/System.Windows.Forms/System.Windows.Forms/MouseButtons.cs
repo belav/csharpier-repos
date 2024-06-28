@@ -39,6 +39,6 @@ namespace System.Windows.Forms
         Right = 0x00200000,
         Middle = 0x00400000,
         XButton1 = 0x00800000,
-        XButton2 = 0x01000000
+        XButton2 = 0x01000000,
     }
 }

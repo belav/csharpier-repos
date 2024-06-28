@@ -39,7 +39,7 @@ namespace Microsoft.Interop
                     gen.Diagnostics.Add(
                         new GeneratorDiagnostic.NotRecommended(info, context)
                         {
-                            Details = SR.InVariantShouldBeRef
+                            Details = SR.InVariantShouldBeRef,
                         }
                     )
                 );

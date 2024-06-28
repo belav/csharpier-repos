@@ -83,7 +83,7 @@ namespace System.Net.Http.Functional.Tests
                     4 => ProcessSocks4Request(clientSocket, ns),
                     5 => ProcessSocks5Request(clientSocket, ns),
                     -1 => throw new Exception("Early EOF"),
-                    _ => throw new Exception("Bad request version")
+                    _ => throw new Exception("Bad request version"),
                 }
             ).ConfigureAwait(false);
         }
@@ -237,7 +237,7 @@ namespace System.Net.Http.Functional.Tests
             // Open connection to destination server.
             using var serverSocket = new Socket(SocketType.Stream, ProtocolType.Tcp)
             {
-                NoDelay = true
+                NoDelay = true,
             };
             await serverSocket.ConnectAsync(remoteHost, remotePort).ConfigureAwait(false);
             var serverStream = new NetworkStream(serverSocket);

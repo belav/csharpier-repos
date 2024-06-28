@@ -572,7 +572,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 PropertySymbol property => property.GetFlowAnalysisAnnotations(),
                 ParameterSymbol parameter => parameter.FlowAnalysisAnnotations,
                 FieldSymbol field => field.FlowAnalysisAnnotations,
-                _ => FlowAnalysisAnnotations.None
+                _ => FlowAnalysisAnnotations.None,
             };
         }
 
@@ -646,11 +646,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 SymbolKind.Property => ((PropertySymbol)symbol).RequiresInstanceReceiver,
                 SymbolKind.Field => ((FieldSymbol)symbol).RequiresInstanceReceiver,
                 SymbolKind.Event => ((EventSymbol)symbol).RequiresInstanceReceiver,
-                _ =>
-                    throw new ArgumentException(
-                        "only methods, properties, fields and events can take a receiver",
-                        nameof(symbol)
-                    ),
+                _ => throw new ArgumentException(
+                    "only methods, properties, fields and events can take a receiver",
+                    nameof(symbol)
+                ),
             };
         }
 

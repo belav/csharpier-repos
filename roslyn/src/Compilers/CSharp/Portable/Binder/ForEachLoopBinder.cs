@@ -1102,7 +1102,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         collectionExprType.GetNullableUnderlyingType()
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     }; // Don't affect the type in the SemanticModel.
                 }
             }
@@ -1206,7 +1206,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             Succeeded,
             FailedNotReported,
-            FailedAndReported
+            FailedAndReported,
         }
 
         private EnumeratorResult GetEnumeratorInfoCore(

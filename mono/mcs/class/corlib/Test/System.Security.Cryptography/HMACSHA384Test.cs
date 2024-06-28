@@ -188,7 +188,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0b,
                 0x0b,
                 0x0b,
-                0x0b
+                0x0b,
             };
             byte[] data = Encoding.Default.GetBytes("Hi There");
             byte[] digest =
@@ -240,7 +240,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xb2,
                 0xfa,
                 0x9c,
-                0xb6
+                0xb6,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC1", hmac, data, digest);
@@ -301,7 +301,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xfa,
                 0xb2,
                 0x16,
-                0x49
+                0x49,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC2", hmac, data, digest);
@@ -332,7 +332,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data =
             {
@@ -385,7 +385,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xdd,
                 0xdd,
                 0xdd,
-                0xdd
+                0xdd,
             };
             byte[] digest =
             {
@@ -436,7 +436,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x01,
                 0xa3,
                 0x4f,
-                0x27
+                0x27,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC3", hmac, data, digest);
@@ -472,7 +472,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x16,
                 0x17,
                 0x18,
-                0x19
+                0x19,
             };
             byte[] data =
             {
@@ -525,7 +525,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xcd,
                 0xcd,
                 0xcd,
-                0xcd
+                0xcd,
             };
             byte[] digest =
             {
@@ -576,7 +576,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xc6,
                 0x74,
                 0xcf,
-                0xfb
+                0xfb,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC4", hmac, data, digest);
@@ -607,7 +607,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0c,
                 0x0c,
                 0x0c,
-                0x0c
+                0x0c,
             };
             byte[] data = Encoding.Default.GetBytes("Test With Truncation");
             byte[] digest =
@@ -627,7 +627,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x9b,
                 0xae,
                 0xf8,
-                0x97
+                0x97,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC5", hmac, data, digest);
@@ -769,7 +769,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data = Encoding.Default.GetBytes(
                 "Test Using Larger Than Block-Size Key - Hash Key First"
@@ -823,7 +823,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x63,
                 0xf4,
                 0x49,
-                0x52
+                0x52,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC6", hmac, data, digest);
@@ -965,7 +965,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data = Encoding.Default.GetBytes(
                 "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
@@ -1019,7 +1019,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0c,
                 0x46,
                 0x52,
-                0x3e
+                0x3e,
             };
             HMAC hmac = new SelectableHmacSha384(key, false);
             Check("HMACSHA384-N-RFC4231-TC7", hmac, data, digest);
@@ -1049,7 +1049,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0b,
                 0x0b,
                 0x0b,
-                0x0b
+                0x0b,
             };
             byte[] data = Encoding.Default.GetBytes("Hi There");
             byte[] digest =
@@ -1101,7 +1101,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x9E,
                 0xF7,
                 0x0E,
-                0x40
+                0x40,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC1", hmac, data, digest);
@@ -1162,7 +1162,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x52,
                 0xE3,
                 0x66,
-                0x6F
+                0x6F,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC2", hmac, data, digest);
@@ -1193,7 +1193,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data =
             {
@@ -1246,7 +1246,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xdd,
                 0xdd,
                 0xdd,
-                0xdd
+                0xdd,
             };
             byte[] digest =
             {
@@ -1297,7 +1297,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x65,
                 0x44,
                 0x18,
-                0x98
+                0x98,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC3", hmac, data, digest);
@@ -1333,7 +1333,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x16,
                 0x17,
                 0x18,
-                0x19
+                0x19,
             };
             byte[] data =
             {
@@ -1386,7 +1386,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xcd,
                 0xcd,
                 0xcd,
-                0xcd
+                0xcd,
             };
             byte[] digest =
             {
@@ -1437,7 +1437,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x84,
                 0x21,
                 0x8F,
-                0xB3
+                0xB3,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC4", hmac, data, digest);
@@ -1468,7 +1468,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0c,
                 0x0c,
                 0x0c,
-                0x0c
+                0x0c,
             };
             byte[] data = Encoding.Default.GetBytes("Test With Truncation");
             byte[] digest =
@@ -1488,7 +1488,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x6F,
                 0x60,
                 0x6B,
-                0x59
+                0x59,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC5", hmac, data, digest);
@@ -1630,7 +1630,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data = Encoding.Default.GetBytes(
                 "Test Using Larger Than Block-Size Key - Hash Key First"
@@ -1684,7 +1684,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x45,
                 0xB7,
                 0x08,
-                0x5F
+                0x5F,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC6", hmac, data, digest);
@@ -1826,7 +1826,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data = Encoding.Default.GetBytes(
                 "This is a test using a larger than block-size key and a larger than block-size data. The key needs to be hashed before being used by the HMAC algorithm."
@@ -1880,7 +1880,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x7E,
                 0xAA,
                 0x83,
-                0xBD
+                0xBD,
             };
             HMAC hmac = new SelectableHmacSha384(key, true);
             Check("HMACSHA384-L-RFC4231-TC7", hmac, data, digest);

@@ -378,6 +378,6 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// for back-end systems where a failure is going to result in a highly broken experience, for example if parsing a file
         /// catastrophically failed.
         /// </summary>
-        Critical
+        Critical,
     }
 }

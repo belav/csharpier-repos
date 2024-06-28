@@ -1059,7 +1059,7 @@ namespace System.Net.Http.Functional.Tests
             DontOverrideCreateContentReadStream = 0x8,
             CanCalculateLength = 0x10,
             ThrowInTryComputeLength = 0x20,
-            ThrowInAsyncSerializeMethods = 0x40
+            ThrowInAsyncSerializeMethods = 0x40,
         }
 
         private class MockContent : HttpContent

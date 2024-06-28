@@ -1600,7 +1600,7 @@ public class NavigationFixer : INavigationFixer
                     new[]
                     {
                         firstEntry[firstForeignKey.PrincipalKey.Properties[0]],
-                        secondEntry[secondForeignKey.PrincipalKey.Properties[0]]
+                        secondEntry[secondForeignKey.PrincipalKey.Properties[0]],
                     }
                 );
                 return true;

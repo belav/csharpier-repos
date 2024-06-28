@@ -696,7 +696,7 @@ namespace MonoTests.System.Reflection.Emit
                     typeof(GenericType<>).MakeGenericType(typeParams[0]),
                     typeof(GenericType<>).MakeGenericType(
                         typeof(GenericType<>).MakeGenericType(typeParams[0])
-                    )
+                    ),
                 }
             );
 

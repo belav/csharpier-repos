@@ -246,8 +246,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         CodeStyleOptions2.PreferExplicitTupleNames,
                         false,
                         NotificationOption2.Warning
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -275,8 +275,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         CodeStyleOptions2.PreferExplicitTupleNames,
                         false,
                         NotificationOption2.Warning
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -327,7 +327,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp11
+                LanguageVersion = LanguageVersion.CSharp11,
             }.RunAsync();
         }
     }

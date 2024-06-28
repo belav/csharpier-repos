@@ -166,7 +166,10 @@ internal static class UseCollectionExpressionHelpers
                         c =>
                             c.Parameters
                                 is [
-                                    { Name: "capacity", Type.SpecialType: SpecialType.System_Int32 }
+                                    {
+                                        Name: "capacity",
+                                        Type.SpecialType: SpecialType.System_Int32
+                                    },
                                 ]
                     );
                     if (capacityConstructor != null)
@@ -583,16 +586,22 @@ internal static class UseCollectionExpressionHelpers
             ConditionalExpressionSyntax conditionalExpression =>
                 IsInTargetTypedConditionalExpression(conditionalExpression, topExpression),
             // Similar rules for switches.
-            SwitchExpressionArmSyntax switchExpressionArm =>
-                IsInTargetTypedSwitchExpressionArm(switchExpressionArm),
+            SwitchExpressionArmSyntax switchExpressionArm => IsInTargetTypedSwitchExpressionArm(
+                switchExpressionArm
+            ),
             InitializerExpressionSyntax initializerExpression =>
                 IsInTargetTypedInitializerExpression(initializerExpression, topExpression),
-            CollectionElementSyntax collectionElement =>
-                IsInTargetTypedCollectionElement(collectionElement),
-            AssignmentExpressionSyntax assignmentExpression =>
-                IsInTargetTypedAssignmentExpression(assignmentExpression, topExpression),
-            BinaryExpressionSyntax binaryExpression =>
-                IsInTargetTypedBinaryExpression(binaryExpression, topExpression),
+            CollectionElementSyntax collectionElement => IsInTargetTypedCollectionElement(
+                collectionElement
+            ),
+            AssignmentExpressionSyntax assignmentExpression => IsInTargetTypedAssignmentExpression(
+                assignmentExpression,
+                topExpression
+            ),
+            BinaryExpressionSyntax binaryExpression => IsInTargetTypedBinaryExpression(
+                binaryExpression,
+                topExpression
+            ),
             ArgumentSyntax or AttributeArgumentSyntax => true,
             ReturnStatementSyntax => true,
             ArrowExpressionClauseSyntax => true,
@@ -1111,10 +1120,10 @@ internal static class UseCollectionExpressionHelpers
                                         ITypeParameterSymbol
                                         {
                                             TypeParameterKind: TypeParameterKind.Method
-                                        }
+                                        },
                                     ]
                                 } enumerableType
-                            }
+                            },
                         ]
                     && enumerableType.OriginalDefinition.Equals(compilation.IEnumerableOfTType())
                 )
@@ -1180,7 +1189,7 @@ internal static class UseCollectionExpressionHelpers
                                     TypeParameterKind: TypeParameterKind.Method
                                 }
                             }
-                        }
+                        },
                     ]
                 )
                 {
@@ -1193,7 +1202,7 @@ internal static class UseCollectionExpressionHelpers
                             {
                                 Expression: ArrayCreationExpressionSyntax { Initializer: not null }
                                     or ImplicitArrayCreationExpressionSyntax
-                            }
+                            },
                         ]
                     )
                     {
@@ -1222,10 +1231,10 @@ internal static class UseCollectionExpressionHelpers
                                         ITypeParameterSymbol
                                         {
                                             TypeParameterKind: TypeParameterKind.Method
-                                        }
+                                        },
                                     ]
                                 } spanType
-                            }
+                            },
                         ]
                 )
                 {

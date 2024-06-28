@@ -31,7 +31,7 @@ namespace MockInterop01
         Red = 0x0001,
         Blue = 0x0002,
         White = 0x0004,
-        All = 0x0007
+        All = 0x0007,
     }
 
     // [TypeIdentifier("71B8C65D-7748-447A-B786-64682CBEF136", "MockInterop01.UnionStruct")]

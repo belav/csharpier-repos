@@ -90,12 +90,9 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
                         g.VerifyMemberRefNames(".ctor");
 
                         g.VerifyEncLogDefinitions(
-                            new[]
-                            {
-                                Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            }
+                            new[] { Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -744,7 +741,7 @@ class Bad : Bad
                         public int G(in int y, ref readonly int z) => throw null;
                     }
                     """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifyTypeDefNames();
@@ -759,7 +756,7 @@ class Bad : Bad
                                     12,
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
-                                )
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -767,7 +764,7 @@ class Bad : Bad
                             {
                                 Handle(4, TableIndex.MethodDef),
                                 Handle(1, TableIndex.Param),
-                                Handle(12, TableIndex.CustomAttribute)
+                                Handle(12, TableIndex.CustomAttribute),
                             }
                         );
                     }
@@ -795,7 +792,7 @@ class Bad : Bad
                         public int F(out int x) => throw null;
                     }
                     """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifyTypeDefNames();
@@ -805,7 +802,7 @@ class Bad : Bad
                             new[]
                             {
                                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.Param, EditAndContinueOperation.Default)
+                                Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -838,7 +835,7 @@ class Bad : Bad
                         public int G(ref readonly int x) => throw null;
                     }
                     """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifyTypeDefNames();
@@ -849,7 +846,11 @@ class Bad : Bad
                             {
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(9, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    9,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -857,7 +858,7 @@ class Bad : Bad
                             {
                                 Handle(3, TableIndex.MethodDef),
                                 Handle(1, TableIndex.Param),
-                                Handle(9, TableIndex.CustomAttribute)
+                                Handle(9, TableIndex.CustomAttribute),
                             }
                         );
                     }
@@ -990,7 +991,7 @@ class Bad : Bad
                                 new CustomAttributeRow(
                                     Handle(7, TableIndex.MethodDef),
                                     Handle(1, TableIndex.MethodDef)
-                                )
+                                ),
                             ]
                         );
                     }
@@ -1019,10 +1020,7 @@ class Bad : Bad
                         );
 
                         g.VerifyEncMapDefinitions(
-                            [
-                                Handle(7, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                            ]
+                            [Handle(7, TableIndex.MethodDef), Handle(4, TableIndex.CustomAttribute)]
                         );
 
                         g.VerifyCustomAttributes(
@@ -1030,7 +1028,7 @@ class Bad : Bad
                                 new CustomAttributeRow(
                                     Handle(7, TableIndex.MethodDef),
                                     Handle(2, TableIndex.MethodDef)
-                                )
+                                ),
                             ]
                         );
                     }
@@ -1049,7 +1047,7 @@ class Bad : Bad
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C")),
-                        Edit(SemanticEditKind.Update, c => c.GetMember("C.F"))
+                        Edit(SemanticEditKind.Update, c => c.GetMember("C.F")),
                     },
                     validator: g =>
                     {
@@ -1133,7 +1131,12 @@ class Bad : Bad
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
                                 ), // updating a row that was new in Generation 2
-                                Row(7, TableIndex.CustomAttribute, EditAndContinueOperation.Default) // adding a new CustomAttribute, and skipping row 6 which is not for the method being emitted
+                                Row(
+                                    7,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ) // adding a new CustomAttribute, and skipping row 6 which is not for the method being emitted
+                                ,
                             ]
                         );
 
@@ -1236,7 +1239,7 @@ class Bad : Bad
                                 new CustomAttributeRow(
                                     Handle(10, TableIndex.TypeDef),
                                     Handle(2, TableIndex.MethodDef)
-                                )
+                                ),
                             ]
                         );
                     }
@@ -1260,7 +1263,7 @@ class Bad : Bad
                     edits: new[]
                     {
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.F")),
-                        Edit(SemanticEditKind.Update, c => c.GetMember("D.G"))
+                        Edit(SemanticEditKind.Update, c => c.GetMember("D.G")),
                     },
                     validator: g =>
                     {
@@ -1272,7 +1275,7 @@ class Bad : Bad
                                 Handle(6, TableIndex.CustomAttribute),
                                 Handle(8, TableIndex.CustomAttribute),
                                 Handle(9, TableIndex.CustomAttribute),
-                                Handle(10, TableIndex.CustomAttribute)
+                                Handle(10, TableIndex.CustomAttribute),
                             ]
                         );
 
@@ -2022,7 +2025,7 @@ class Bad : Bad
                             void H() { }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.H")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.H")) },
                     validator: g =>
                     {
                         g.VerifyEncLogDefinitions(
@@ -2047,7 +2050,7 @@ class Bad : Bad
                                     11,
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
-                                )
+                                ),
                             ]
                         );
 
@@ -2136,7 +2139,7 @@ class Bad : Bad
                             [A1] void G() { }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.G")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.G")) },
                     validator: g =>
                     {
                         g.VerifyEncLogDefinitions(
@@ -2151,10 +2154,7 @@ class Bad : Bad
                         );
 
                         g.VerifyEncMapDefinitions(
-                            [
-                                Handle(6, TableIndex.MethodDef),
-                                Handle(4, TableIndex.CustomAttribute),
-                            ]
+                            [Handle(6, TableIndex.MethodDef), Handle(4, TableIndex.CustomAttribute)]
                         );
 
                         g.VerifyCustomAttributes(
@@ -2176,7 +2176,7 @@ class Bad : Bad
                             [A2] void G() { }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifyEncLogDefinitions(
@@ -2191,10 +2191,7 @@ class Bad : Bad
                         );
 
                         g.VerifyEncMapDefinitions(
-                            [
-                                Handle(5, TableIndex.MethodDef),
-                                Handle(5, TableIndex.CustomAttribute),
-                            ]
+                            [Handle(5, TableIndex.MethodDef), Handle(5, TableIndex.CustomAttribute)]
                         );
 
                         g.VerifyCustomAttributes(
@@ -2232,7 +2229,11 @@ class Bad : Bad
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    5,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             ]
                         );
 
@@ -2314,7 +2315,7 @@ class Bad : Bad
                             [A2, A3] void F() { }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifyEncLogDefinitions(
@@ -2363,7 +2364,7 @@ class Bad : Bad
                             void F() { }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Update, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifyEncLogDefinitions(
@@ -2374,7 +2375,11 @@ class Bad : Bad
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    5,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             ]
                         );
 
@@ -3220,7 +3225,7 @@ class C
                             {
                                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -3228,7 +3233,7 @@ class C
                             {
                                 Handle(1, TableIndex.MethodDef),
                                 Handle(5, TableIndex.MethodDef),
-                                Handle(6, TableIndex.MethodDef)
+                                Handle(6, TableIndex.MethodDef),
                             }
                         );
 
@@ -3609,7 +3614,7 @@ partial class C
                         Edit(
                             SemanticEditKind.Update,
                             c => c.GetMember<IMethodSymbol>("C.M").PartialImplementationPart
-                        )
+                        ),
                     },
                     validator: g =>
                     {
@@ -4133,7 +4138,7 @@ delegate void D([A]int x);
                         Edit(SemanticEditKind.Update, c => c.GetMember("C")),
                         Edit(SemanticEditKind.Update, c => c.GetMember("C._x")),
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.X")),
-                        Edit(SemanticEditKind.Update, c => c.GetMember("D"))
+                        Edit(SemanticEditKind.Update, c => c.GetMember("D")),
                     },
                     validator: g =>
                     {
@@ -4166,6 +4171,7 @@ delegate void D([A]int x);
                                     Handle(1, TableIndex.Property),
                                     Handle(5, TableIndex.MethodDef)
                                 ) // X
+                                ,
                             ]
                         );
 
@@ -4208,7 +4214,11 @@ delegate void D([A]int x);
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(2, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    2,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             ]
                         );
 
@@ -4227,7 +4237,7 @@ delegate void D([A]int x);
                                 Handle(11, TableIndex.CustomAttribute),
                                 Handle(12, TableIndex.CustomAttribute),
                                 Handle(1, TableIndex.Property),
-                                Handle(2, TableIndex.MethodSemantics)
+                                Handle(2, TableIndex.MethodSemantics),
                             ]
                         );
                     }
@@ -4261,7 +4271,7 @@ delegate void D([A]int x);
                         Edit(SemanticEditKind.Update, c => c.GetMember("C")),
                         Edit(SemanticEditKind.Update, c => c.GetMember("C._x")),
                         Edit(SemanticEditKind.Update, c => c.GetMember("C.X")),
-                        Edit(SemanticEditKind.Update, c => c.GetMember("D"))
+                        Edit(SemanticEditKind.Update, c => c.GetMember("D")),
                     },
                     validator: g =>
                     {
@@ -4294,6 +4304,7 @@ delegate void D([A]int x);
                                     Handle(1, TableIndex.Property),
                                     Handle(11, TableIndex.MethodDef)
                                 ) // X
+                                ,
                             ]
                         );
 
@@ -4337,7 +4348,11 @@ delegate void D([A]int x);
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(3, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    3,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
 
@@ -4357,7 +4372,7 @@ delegate void D([A]int x);
                                 Handle(11, TableIndex.CustomAttribute),
                                 Handle(12, TableIndex.CustomAttribute),
                                 Handle(1, TableIndex.Property),
-                                Handle(3, TableIndex.MethodSemantics)
+                                Handle(3, TableIndex.MethodSemantics),
                             }
                         );
                     }
@@ -5230,7 +5245,11 @@ class C
                                     TableIndex.MethodSemantics,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(4, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    4,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -5418,7 +5437,7 @@ class C
                                 Handle(7, TableIndex.CustomAttribute),
                                 Handle(1, TableIndex.Property),
                                 Handle(3, TableIndex.MethodSemantics),
-                                Handle(4, TableIndex.MethodSemantics)
+                                Handle(4, TableIndex.MethodSemantics),
                             }
                         );
 
@@ -5640,12 +5659,9 @@ class C
                             ".ctor"
                         );
                         g.VerifyEncLogDefinitions(
-                            new[]
-                            {
-                                Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            }
+                            new[] { Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(2, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -5853,7 +5869,7 @@ class C
                                 Handle(11, TableIndex.CustomAttribute),
                                 Handle(2, TableIndex.Property),
                                 Handle(3, TableIndex.MethodSemantics),
-                                Handle(4, TableIndex.MethodSemantics)
+                                Handle(4, TableIndex.MethodSemantics),
                             }
                         );
 
@@ -6223,7 +6239,7 @@ class C
                                 Handle(7, TableIndex.CustomAttribute),
                                 Handle(1, TableIndex.Property),
                                 Handle(5, TableIndex.MethodSemantics),
-                                Handle(6, TableIndex.MethodSemantics)
+                                Handle(6, TableIndex.MethodSemantics),
                             }
                         );
 
@@ -6476,7 +6492,11 @@ class C
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(1, TableIndex.Property, EditAndContinueOperation.Default),
                                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(3, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    3,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -6552,7 +6572,11 @@ class C
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(2, TableIndex.Property, EditAndContinueOperation.Default),
                                 Row(2, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(4, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    4,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -6562,7 +6586,7 @@ class C
                                 Handle(2, TableIndex.Param),
                                 Handle(4, TableIndex.StandAloneSig),
                                 Handle(2, TableIndex.Property),
-                                Handle(4, TableIndex.MethodSemantics)
+                                Handle(4, TableIndex.MethodSemantics),
                             }
                         );
 
@@ -7801,7 +7825,11 @@ class C
                                 Row(8, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(4, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
                                 Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(8, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    8,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -7812,7 +7840,7 @@ class C
                                 Handle(7, TableIndex.MethodDef),
                                 Handle(8, TableIndex.MethodDef),
                                 Handle(9, TableIndex.MethodDef),
-                                Handle(8, TableIndex.CustomAttribute)
+                                Handle(8, TableIndex.CustomAttribute),
                             }
                         );
                     }
@@ -14981,12 +15009,9 @@ public interface IB
                             ".ctor"
                         );
                         g.VerifyEncLogDefinitions(
-                            new[]
-                            {
-                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            }
+                            new[] { Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -15477,7 +15502,7 @@ class C
                 ),
                 testData: new CompilationTestData
                 {
-                    SymWriterFactory = _ => new MockSymUnmanagedWriter()
+                    SymWriterFactory = _ => new MockSymUnmanagedWriter(),
                 }
             );
 
@@ -19689,7 +19714,7 @@ namespace N
                             SemanticEditKind.Delete,
                             c => c.GetParameterlessConstructor("R"),
                             c => c.GetMember("R")
-                        )
+                        ),
                     },
                     validator: g =>
                     {
@@ -19769,7 +19794,11 @@ namespace N
                                     TableIndex.MethodSemantics,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(3, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    3,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                     }
@@ -19821,7 +19850,7 @@ namespace N
                         // delete of the old primary constructor.
                         // This test demonstrates that the compiler does not emit them automatically given just the constructor insert.
                         // The synthesized auto-properties and Deconstruct method are emitted.
-                        Edit(SemanticEditKind.Insert, c => c.GetPrimaryConstructor("R"))
+                        Edit(SemanticEditKind.Insert, c => c.GetPrimaryConstructor("R")),
                     },
                     validator: g =>
                     {
@@ -20077,7 +20106,11 @@ namespace N
                                     TableIndex.MethodSemantics,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(5, TableIndex.MethodSemantics, EditAndContinueOperation.Default)
+                                Row(
+                                    5,
+                                    TableIndex.MethodSemantics,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
 
@@ -20361,7 +20394,7 @@ class C
                         g.VerifyEncLogDefinitions(
                             new[] { Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -20422,10 +20455,10 @@ class C
                             new[]
                             {
                                 Row(2, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
-                                Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -20462,7 +20495,7 @@ class C
                         g.VerifyEncLogDefinitions(
                             new[] { Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -20524,7 +20557,7 @@ class C
                         g.VerifyEncLogDefinitions(
                             new[] { Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -20557,7 +20590,7 @@ class C
                         g.VerifyEncLogDefinitions(
                             new[] { Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(1, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -20629,13 +20662,10 @@ class C
                         g.VerifyTypeDefNames();
                         g.VerifyMethodDefNames("M1");
                         g.VerifyEncLogDefinitions(
-                            new[]
-                            {
-                                Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            }
+                            new[] { Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
 
-                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         g.VerifyCustomAttributes();
 
@@ -20689,7 +20719,11 @@ class C
                                     TableIndex.CustomAttribute,
                                     EditAndContinueOperation.Default
                                 ),
-                                Row(6, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    6,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -20700,7 +20734,7 @@ class C
                                 Handle(2, TableIndex.Param),
                                 Handle(1, TableIndex.CustomAttribute),
                                 Handle(5, TableIndex.CustomAttribute),
-                                Handle(6, TableIndex.CustomAttribute)
+                                Handle(6, TableIndex.CustomAttribute),
                             }
                         );
                         g.VerifyCustomAttributes(
@@ -20717,7 +20751,7 @@ class C
                                 new CustomAttributeRow(
                                     Handle(3, TableIndex.MethodDef),
                                     Handle(2, TableIndex.MethodDef)
-                                )
+                                ),
                             }
                         );
 
@@ -20783,7 +20817,7 @@ class C
                                 Row(2, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
-                                Row(1, TableIndex.Param, EditAndContinueOperation.Default)
+                                Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -20791,7 +20825,7 @@ class C
                             {
                                 Handle(3, TableIndex.MethodDef),
                                 Handle(1, TableIndex.Param),
-                                Handle(1, TableIndex.StandAloneSig)
+                                Handle(1, TableIndex.StandAloneSig),
                             }
                         );
 
@@ -20832,12 +20866,9 @@ class C
                         g.VerifyTypeDefNames();
                         g.VerifyMethodDefNames("M1");
                         g.VerifyEncLogDefinitions(
-                            new[]
-                            {
-                                Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                            }
+                            new[] { Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default) }
                         );
-                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef), });
+                        g.VerifyEncMapDefinitions(new[] { Handle(3, TableIndex.MethodDef) });
 
                         var expectedIL = """
                         {
@@ -20873,7 +20904,7 @@ class C
                             {
                                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.Param, EditAndContinueOperation.Default)
+                                Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -20881,7 +20912,7 @@ class C
                             {
                                 Handle(3, TableIndex.MethodDef),
                                 Handle(1, TableIndex.Param),
-                                Handle(2, TableIndex.StandAloneSig)
+                                Handle(2, TableIndex.StandAloneSig),
                             }
                         );
 
@@ -20954,14 +20985,14 @@ class C
                             new[]
                             {
                                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
                             new[]
                             {
                                 Handle(1, TableIndex.MethodDef),
-                                Handle(5, TableIndex.MethodDef)
+                                Handle(5, TableIndex.MethodDef),
                             }
                         );
 
@@ -21013,7 +21044,7 @@ class C
                                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
-                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -21022,7 +21053,7 @@ class C
                                 Handle(3, TableIndex.Field),
                                 Handle(1, TableIndex.MethodDef),
                                 Handle(4, TableIndex.MethodDef),
-                                Handle(6, TableIndex.MethodDef)
+                                Handle(6, TableIndex.MethodDef),
                             }
                         );
 
@@ -21093,14 +21124,14 @@ class C
                             new[]
                             {
                                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(6, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
                             new[]
                             {
                                 Handle(1, TableIndex.MethodDef),
-                                Handle(6, TableIndex.MethodDef)
+                                Handle(6, TableIndex.MethodDef),
                             }
                         );
 
@@ -21146,7 +21177,7 @@ class C
                         void F() { _ = new Action(() => Console.WriteLine(1)); } 
                     }
                     """,
-                    edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers(
@@ -21191,14 +21222,14 @@ class C
                             new[]
                             {
                                 Row(2, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
                             new[]
                             {
                                 Handle(2, TableIndex.MethodDef),
-                                Handle(5, TableIndex.MethodDef)
+                                Handle(5, TableIndex.MethodDef),
                             }
                         );
 
@@ -21280,7 +21311,7 @@ class C
                             [
                                 .. synthesized,
                                 "C<T>: {<>c__0}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <F>b__0_0, <F>b__0_1#1}"
+                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <F>b__0_0, <F>b__0_1#1}",
                             ]
                         );
                     }
@@ -21313,7 +21344,7 @@ class C
                             [
                                 .. synthesized,
                                 "C<T>: {<>c__0}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}"
+                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
                             ]
                         );
                     }
@@ -21340,7 +21371,7 @@ class C
                             [
                                 .. synthesized,
                                 "C<T>: {<>c__0}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}"
+                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
                             ]
                         );
 
@@ -21358,7 +21389,7 @@ class C
                                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -21367,7 +21398,7 @@ class C
                                 Handle(5, TableIndex.MethodDef),
                                 Handle(9, TableIndex.MethodDef),
                                 Handle(10, TableIndex.MethodDef),
-                                Handle(11, TableIndex.MethodDef)
+                                Handle(11, TableIndex.MethodDef),
                             }
                         );
 
@@ -21395,7 +21426,7 @@ class C
                             }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers(
@@ -21403,7 +21434,7 @@ class C
                                 .. synthesized,
                                 "C<T>: {<>c__0#4, <>c__0}",
                                 "C<T>.<>c__0#4<S>: {<>9__0#4_0#4, <F>b__0#4_0#4}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}"
+                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
                             ]
                         );
 
@@ -21493,7 +21524,7 @@ class C
                                 .. synthesized,
                                 "C<T>: {<>c__0#4, <>c__0}",
                                 "C<T>.<>c__0#4<S>: {<>9__0#4_0#4, <F>b__0#4_0#4}",
-                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}"
+                                "C<T>.<>c__0<S>: {<>9__0_0, <>9__0_1#1, <>9__0_2#2, <F>b__0_0, <F>b__0_1#1, <F>b__0_2#2}",
                             ]
                         );
 
@@ -21509,7 +21540,7 @@ class C
                             new[]
                             {
                                 Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(15, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(15, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -21633,7 +21664,7 @@ class C
                             {
                                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(7, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(8, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(8, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -21675,14 +21706,14 @@ class C
                             }
                         }
                         """,
-                    edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")), },
+                    edits: new[] { Edit(SemanticEditKind.Insert, c => c.GetMember("C.F")) },
                     validator: g =>
                     {
                         g.VerifySynthesizedMembers(
                             [
                                 .. synthesized,
                                 "C<T>: {<F>g__N|0#3_1#3, <>c__DisplayClass0#3_0#3, <F>g__L|0_0, <F>g__M|0_1#1}",
-                                "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}"
+                                "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}",
                             ]
                         );
 
@@ -21784,7 +21815,7 @@ class C
                             [
                                 .. synthesized,
                                 "C<T>: {<F>g__N|0#3_1#3, <>c__DisplayClass0#3_0#3, <F>g__L|0_0, <F>g__M|0_1#1}",
-                                "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}"
+                                "C<T>.<>c__DisplayClass0#3_0#3: {x, <F>g__O|0#3, <F>b__2#3}",
                             ]
                         );
 
@@ -21802,7 +21833,7 @@ class C
                                 Row(5, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
-                                Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
 
@@ -21956,7 +21987,7 @@ class C
                                 Row(2, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
-                                Row(2, TableIndex.Param, EditAndContinueOperation.Default)
+                                Row(2, TableIndex.Param, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -21964,7 +21995,7 @@ class C
                             {
                                 Handle(1, TableIndex.MethodDef),
                                 Handle(3, TableIndex.MethodDef),
-                                Handle(2, TableIndex.Param)
+                                Handle(2, TableIndex.Param),
                             }
                         );
 
@@ -22131,7 +22162,7 @@ class C
                                 Row(2, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.Default),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
-                                Row(2, TableIndex.Param, EditAndContinueOperation.Default)
+                                Row(2, TableIndex.Param, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -22140,7 +22171,7 @@ class C
                                 Handle(1, TableIndex.MethodDef),
                                 Handle(3, TableIndex.MethodDef),
                                 Handle(2, TableIndex.Param),
-                                Handle(2, TableIndex.StandAloneSig)
+                                Handle(2, TableIndex.StandAloneSig),
                             }
                         );
 
@@ -22219,7 +22250,7 @@ class C
                                 Handle(1, TableIndex.MethodDef),
                                 Handle(3, TableIndex.MethodDef),
                                 Handle(1, TableIndex.Param),
-                                Handle(3, TableIndex.StandAloneSig)
+                                Handle(3, TableIndex.StandAloneSig),
                             }
                         );
 
@@ -22307,7 +22338,7 @@ class C
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
                                 Row(2, TableIndex.Param, EditAndContinueOperation.Default),
                                 Row(3, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
-                                Row(3, TableIndex.Param, EditAndContinueOperation.Default)
+                                Row(3, TableIndex.Param, EditAndContinueOperation.Default),
                             }
                         );
                         g.VerifyEncMapDefinitions(
@@ -22316,7 +22347,7 @@ class C
                                 Handle(1, TableIndex.MethodDef),
                                 Handle(3, TableIndex.MethodDef),
                                 Handle(2, TableIndex.Param),
-                                Handle(3, TableIndex.Param)
+                                Handle(3, TableIndex.Param),
                             }
                         );
 
@@ -23101,7 +23132,7 @@ file class C
                             new[]
                             {
                                 Row(2, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
-                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default)
+                                Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
                             }
                         );
 
@@ -23109,7 +23140,7 @@ file class C
                             new[]
                             {
                                 Handle(1, TableIndex.MethodDef),
-                                Handle(2, TableIndex.StandAloneSig)
+                                Handle(2, TableIndex.StandAloneSig),
                             }
                         );
 
@@ -23371,7 +23402,11 @@ file class C
                                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
                                 Row(3, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    5,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
 
@@ -23385,7 +23420,7 @@ file class C
                                 Handle(3, TableIndex.Param),
                                 Handle(5, TableIndex.CustomAttribute),
                                 Handle(3, TableIndex.StandAloneSig),
-                                Handle(4, TableIndex.StandAloneSig)
+                                Handle(4, TableIndex.StandAloneSig),
                             }
                         );
                     }
@@ -23440,7 +23475,11 @@ file class C
                                 Row(1, TableIndex.Param, EditAndContinueOperation.Default),
                                 Row(4, TableIndex.MethodDef, EditAndContinueOperation.AddParameter),
                                 Row(3, TableIndex.Param, EditAndContinueOperation.Default),
-                                Row(5, TableIndex.CustomAttribute, EditAndContinueOperation.Default)
+                                Row(
+                                    5,
+                                    TableIndex.CustomAttribute,
+                                    EditAndContinueOperation.Default
+                                ),
                             }
                         );
 
@@ -23453,7 +23492,7 @@ file class C
                                 Handle(1, TableIndex.Param),
                                 Handle(3, TableIndex.Param),
                                 Handle(5, TableIndex.CustomAttribute),
-                                Handle(2, TableIndex.StandAloneSig)
+                                Handle(2, TableIndex.StandAloneSig),
                             }
                         );
                     }
@@ -23553,7 +23592,7 @@ file class C
                                 Row(3, TableIndex.GenericParam, EditAndContinueOperation.Default),
                                 Row(4, TableIndex.GenericParam, EditAndContinueOperation.Default),
                                 Row(5, TableIndex.GenericParam, EditAndContinueOperation.Default),
-                                Row(6, TableIndex.GenericParam, EditAndContinueOperation.Default)
+                                Row(6, TableIndex.GenericParam, EditAndContinueOperation.Default),
                             }
                         );
 
@@ -23572,7 +23611,7 @@ file class C
                                 Handle(3, TableIndex.GenericParam),
                                 Handle(4, TableIndex.GenericParam),
                                 Handle(5, TableIndex.GenericParam),
-                                Handle(6, TableIndex.GenericParam)
+                                Handle(6, TableIndex.GenericParam),
                             }
                         );
                     }
@@ -23739,7 +23778,7 @@ file class C
                                 Row(9, TableIndex.GenericParam, EditAndContinueOperation.Default),
                                 Row(10, TableIndex.GenericParam, EditAndContinueOperation.Default),
                                 Row(11, TableIndex.GenericParam, EditAndContinueOperation.Default),
-                                Row(12, TableIndex.GenericParam, EditAndContinueOperation.Default)
+                                Row(12, TableIndex.GenericParam, EditAndContinueOperation.Default),
                             }
                         );
 
@@ -23765,7 +23804,7 @@ file class C
                                 Handle(9, TableIndex.GenericParam),
                                 Handle(10, TableIndex.GenericParam),
                                 Handle(11, TableIndex.GenericParam),
-                                Handle(12, TableIndex.GenericParam)
+                                Handle(12, TableIndex.GenericParam),
                             }
                         );
                     }
@@ -23855,7 +23894,7 @@ file class C
                                 Row(14, TableIndex.GenericParam, EditAndContinueOperation.Default),
                                 Row(15, TableIndex.GenericParam, EditAndContinueOperation.Default),
                                 Row(16, TableIndex.GenericParam, EditAndContinueOperation.Default),
-                                Row(17, TableIndex.GenericParam, EditAndContinueOperation.Default)
+                                Row(17, TableIndex.GenericParam, EditAndContinueOperation.Default),
                             }
                         );
 
@@ -23881,7 +23920,7 @@ file class C
                                 Handle(14, TableIndex.GenericParam),
                                 Handle(15, TableIndex.GenericParam),
                                 Handle(16, TableIndex.GenericParam),
-                                Handle(17, TableIndex.GenericParam)
+                                Handle(17, TableIndex.GenericParam),
                             }
                         );
                     }

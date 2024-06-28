@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 new VSProjectContextList
                 {
                     ProjectContexts = contexts.ToArray(),
-                    DefaultIndex = documents.IndexOf(d => d.Id == currentContextDocumentId)
+                    DefaultIndex = documents.IndexOf(d => d.Id == currentContextDocumentId),
                 }
             );
         }

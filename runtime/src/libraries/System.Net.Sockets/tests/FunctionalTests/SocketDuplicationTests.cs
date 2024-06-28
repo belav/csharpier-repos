@@ -85,7 +85,7 @@ namespace System.Net.Sockets.Tests
                 ProtocolType.Tcp
             )
             {
-                Blocking = blocking
+                Blocking = blocking,
             };
             Assert.Equal(blocking, original.Blocking);
 
@@ -327,7 +327,7 @@ namespace System.Net.Sockets.Tests
         {
             SocketInformation socketInformation = new SocketInformation()
             {
-                ProtocolInformation = new byte[4]
+                ProtocolInformation = new byte[4],
             };
 
             ArgumentException ex = Assert.Throws<ArgumentException>(
@@ -360,7 +360,7 @@ namespace System.Net.Sockets.Tests
                 SocketInformation result = new SocketInformation()
                 {
                     Options = options,
-                    ProtocolInformation = new byte[protocolInfoLength]
+                    ProtocolInformation = new byte[protocolInfoLength],
                 };
                 br.Read(result.ProtocolInformation);
                 return result;

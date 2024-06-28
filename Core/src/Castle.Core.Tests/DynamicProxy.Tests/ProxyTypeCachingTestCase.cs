@@ -59,7 +59,7 @@ namespace Castle.DynamicProxy.Tests
             new object[] { ProxyKind.Class },
             new object[] { ProxyKind.WithoutTarget },
             new object[] { ProxyKind.WithTarget },
-            new object[] { ProxyKind.WithTargetInterface }
+            new object[] { ProxyKind.WithTargetInterface },
         };
 
         [Test]

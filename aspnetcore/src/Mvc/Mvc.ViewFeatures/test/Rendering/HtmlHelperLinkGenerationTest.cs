@@ -25,7 +25,7 @@ public class HtmlHelperLinkGenerationTest
                 "https",
                 "www.contoso.com",
                 "h1",
-                new { p1 = "p1-value" }
+                new { p1 = "p1-value" },
             };
             yield return new object[]
             {
@@ -35,7 +35,7 @@ public class HtmlHelperLinkGenerationTest
                 "https",
                 "www.contoso.com",
                 null,
-                null
+                null,
             };
             yield return new object[]
             {
@@ -45,7 +45,7 @@ public class HtmlHelperLinkGenerationTest
                 "https",
                 null,
                 null,
-                null
+                null,
             };
             yield return new object[]
             {
@@ -55,7 +55,7 @@ public class HtmlHelperLinkGenerationTest
                 null,
                 null,
                 null,
-                null
+                null,
             };
             yield return new object[] { "Details", "Product", null, null, null, null, null };
             yield return new object[] { null, null, null, null, null, null, null };
@@ -134,7 +134,7 @@ public class HtmlHelperLinkGenerationTest
                 "https",
                 "www.contoso.com",
                 "h1",
-                new { p1 = "p1-value" }
+                new { p1 = "p1-value" },
             };
             yield return new object[]
             {
@@ -143,7 +143,7 @@ public class HtmlHelperLinkGenerationTest
                 "https",
                 "www.contoso.com",
                 null,
-                null
+                null,
             };
             yield return new object[]
             {
@@ -152,7 +152,7 @@ public class HtmlHelperLinkGenerationTest
                 "https",
                 null,
                 null,
-                null
+                null,
             };
             yield return new object[]
             {
@@ -161,7 +161,7 @@ public class HtmlHelperLinkGenerationTest
                 null,
                 null,
                 null,
-                null
+                null,
             };
             yield return new object[] { "default", null, null, null, null, null };
         }

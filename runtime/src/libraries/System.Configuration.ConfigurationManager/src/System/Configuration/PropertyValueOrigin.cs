@@ -7,6 +7,8 @@ namespace System.Configuration
     {
         Default = 0, // Default is retrieved
         Inherited = 1, // It is inherited
-        SetHere = 2 // It was set here
+        SetHere =
+            2 // It was set here
+        ,
     }
 }

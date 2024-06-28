@@ -38,7 +38,7 @@ public class SqlServerLineStringMemberTranslator : IMemberTranslator
         {
             typeof(LineString).GetTypeInfo().GetRuntimeProperty(nameof(LineString.IsRing))!,
             "STIsRing"
-        }
+        },
     };
 
     private readonly IRelationalTypeMappingSource _typeMappingSource;

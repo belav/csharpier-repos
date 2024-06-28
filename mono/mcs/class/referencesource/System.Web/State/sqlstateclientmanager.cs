@@ -43,7 +43,7 @@ namespace System.Web.SessionState
         {
             None = 0x00000000,
             GetLockAge = 0x00000001,
-            Uninitialized = 0xFFFFFFFF
+            Uninitialized = 0xFFFFFFFF,
         }
 
 #pragma warning disable 0649

@@ -21,7 +21,7 @@ internal static partial class Interop
         {
             None,
             CGroup1,
-            CGroup2
+            CGroup2,
         };
 
         /// <summary>Path to cgroup filesystem that tells us which version of cgroup is in use.</summary>

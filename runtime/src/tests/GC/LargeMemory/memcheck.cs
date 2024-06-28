@@ -86,7 +86,7 @@ public static class MemCheck
     {
         MEMORYSTATUSEX mem = new MEMORYSTATUSEX
         {
-            dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX))
+            dwLength = (uint)Marshal.SizeOf(typeof(MEMORYSTATUSEX)),
         };
         bool success = GlobalMemoryStatusEx(ref mem);
         return success ? BytesToMB(mem.ullAvailPhys) : (uint?)null;

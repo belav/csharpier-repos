@@ -94,7 +94,7 @@ public class MicrosoftAccountHandler : OAuthHandler<MicrosoftAccountOptions>
         {
             { "client_id", Options.ClientId },
             { "response_type", "code" },
-            { "redirect_uri", redirectUri }
+            { "redirect_uri", redirectUri },
         };
 
         AddQueryString(

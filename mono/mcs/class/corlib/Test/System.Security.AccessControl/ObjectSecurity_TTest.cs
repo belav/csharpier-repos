@@ -16,7 +16,7 @@ namespace MonoTests.System.Security.AccessControl
     {
         enum WillWorkRights
         {
-            Value = 1
+            Value = 1,
         }
 
         class WillWorkSecurity : ObjectSecurity<WillWorkRights>

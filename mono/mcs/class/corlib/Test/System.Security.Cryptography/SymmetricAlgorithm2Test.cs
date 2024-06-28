@@ -188,7 +188,7 @@ namespace MonoTests.System.Security.Cryptography
                 13,
                 14,
                 15,
-                16
+                16,
             };
 
             enc.TransformBlock(challenge, 0, challenge.Length, response, 0);

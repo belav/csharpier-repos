@@ -55,7 +55,7 @@ namespace ILLink.RoslynAnalyzer.Tests
             {
                 TestCode = source,
                 FixedCode = fixedSource,
-                ReferenceAssemblies = TestCaseUtils.NetCoreAppReferencessemblies
+                ReferenceAssemblies = TestCaseUtils.NetCoreAppReferencessemblies,
             };
             test.ExpectedDiagnostics.AddRange(baselineExpected);
             test.TestState.AnalyzerConfigFiles.Add(
@@ -599,7 +599,7 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresAssemblyFiles)
                         .WithSpan(20, 25, 20, 31)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: Array.Empty<DiagnosticResult>()
             );
@@ -693,7 +693,7 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresAssemblyFiles)
                         .WithSpan(9, 12, 9, 16)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: Array.Empty<DiagnosticResult>()
             );
@@ -750,7 +750,7 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                 VerifyCS
                     .Diagnostic(DiagnosticId.RequiresAssemblyFiles)
                     .WithSpan(13, 17, 13, 21)
-                    .WithArguments("C.M1()", " message.", "")
+                    .WithArguments("C.M1()", " message.", ""),
             };
             return VerifyRequiresAssemblyFilesCodeFix(
                 src,
@@ -836,7 +836,7 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresAssemblyFiles)
                         .WithSpan(11, 22, 11, 26)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: Array.Empty<DiagnosticResult>(),
                 numberOfIterations: 2
@@ -880,7 +880,7 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresAssemblyFiles)
                         .WithSpan(9, 17, 9, 21)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: Array.Empty<DiagnosticResult>()
             );
@@ -937,7 +937,7 @@ build_property.{MSBuildPropertyOptionNames.EnableSingleFileAnalyzer} = true"
                     VerifyCS
                         .Diagnostic(DiagnosticId.RequiresAssemblyFiles)
                         .WithSpan(13, 12, 13, 16)
-                        .WithArguments("C.M1()", " message.", "")
+                        .WithArguments("C.M1()", " message.", ""),
                 },
                 fixedExpected: Array.Empty<DiagnosticResult>()
             );

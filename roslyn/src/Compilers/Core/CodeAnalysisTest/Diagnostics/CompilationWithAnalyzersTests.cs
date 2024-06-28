@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                         KeyValuePairUtil.Create(
                             $"CS{(int)ErrorCode.WRN_AlwaysNull:D4}",
                             ReportDiagnostic.Suppress
-                        )
+                        ),
                     }
                 )
             );

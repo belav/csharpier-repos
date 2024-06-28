@@ -47,6 +47,6 @@ namespace System.Data.OracleClient
         TimestampWithTZ = 0x14,
         UInt16 = 0x18,
         UInt32 = 0x19,
-        VarChar = 0x16
+        VarChar = 0x16,
     }
 }

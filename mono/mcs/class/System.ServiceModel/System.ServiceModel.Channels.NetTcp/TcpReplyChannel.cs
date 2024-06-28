@@ -67,7 +67,7 @@ namespace System.ServiceModel.Channels.NetTcp
             NetworkStream ns = client.GetStream();
             frame = new TcpBinaryFrameManager(TcpBinaryFrameManager.SingletonUnsizedMode, ns, true)
             {
-                Encoder = this.Encoder
+                Encoder = this.Encoder,
             };
 
             // FIXME: use timeout

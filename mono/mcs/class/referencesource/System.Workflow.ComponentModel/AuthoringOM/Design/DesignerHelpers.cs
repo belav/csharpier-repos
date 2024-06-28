@@ -33,7 +33,7 @@ namespace System.Workflow.ComponentModel.Design
         Right = 2,
         Top = 4,
         Bottom = 8,
-        Center = 16
+        Center = 16,
     }
     #endregion
 
@@ -52,7 +52,7 @@ namespace System.Workflow.ComponentModel.Design
         {
             Blue = 0,
             Silver = 1,
-            Green = 2
+            Green = 2,
         }
 
         [Obsolete(
@@ -64,7 +64,7 @@ namespace System.Workflow.ComponentModel.Design
             BkGnd = 1,
             Border = 2,
             Highlight = 3,
-            Shadow = 4
+            Shadow = 4,
         };
 
         private static Color[,] XPColorSchemes = new Color[,]
@@ -74,22 +74,22 @@ namespace System.Workflow.ComponentModel.Design
                 Color.FromArgb(255, 255, 255),
                 Color.FromArgb(181, 186, 214),
                 Color.FromArgb(66, 142, 255),
-                Color.FromArgb(181, 195, 231)
+                Color.FromArgb(181, 195, 231),
             },
             {
                 Color.FromArgb(49, 68, 115),
                 Color.FromArgb(255, 255, 255),
                 Color.FromArgb(186, 187, 201),
                 Color.FromArgb(126, 124, 124),
-                Color.FromArgb(206, 207, 216)
+                Color.FromArgb(206, 207, 216),
             },
             {
                 Color.FromArgb(86, 102, 45),
                 Color.FromArgb(255, 255, 255),
                 Color.FromArgb(210, 219, 197),
                 Color.FromArgb(114, 146, 29),
-                Color.FromArgb(212, 220, 190)
-            }
+                Color.FromArgb(212, 220, 190),
+            },
         };
         #endregion
 
@@ -993,7 +993,7 @@ namespace System.Workflow.ComponentModel.Design
                 Point[] endSegment = new Point[]
                 {
                     points[points.GetLength(0) - 2],
-                    points[points.GetLength(0) - 1]
+                    points[points.GetLength(0) - 1],
                 };
                 int capSize =
                     (endSegment[0].Y == endSegment[1].Y)
@@ -2915,7 +2915,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(rect.Left, rect.Top),
-                            new Point(rect.Left, rect.Bottom)
+                            new Point(rect.Left, rect.Bottom),
                         }
                     )
                 );
@@ -2930,7 +2930,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(rect.Left, rect.Top),
-                            new Point(rect.Right, rect.Top)
+                            new Point(rect.Right, rect.Top),
                         }
                     )
                 );
@@ -2945,7 +2945,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(rect.Right, rect.Top),
-                            new Point(rect.Right, rect.Bottom)
+                            new Point(rect.Right, rect.Bottom),
                         }
                     )
                 );
@@ -2960,7 +2960,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(rect.Left, rect.Bottom),
-                            new Point(rect.Right, rect.Bottom)
+                            new Point(rect.Right, rect.Bottom),
                         }
                     )
                 );

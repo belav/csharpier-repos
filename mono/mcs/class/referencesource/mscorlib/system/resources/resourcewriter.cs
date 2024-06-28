@@ -444,7 +444,7 @@ namespace System.Resources
                         (byte)'S',
                         (byte)'-',
                         (byte)'-',
-                        (byte)'>'
+                        (byte)'>',
                     }
                 );
 
@@ -459,7 +459,7 @@ namespace System.Resources
                         (byte)'-',
                         (byte)'-',
                         (byte)'-',
-                        (byte)'>'
+                        (byte)'>',
                     }
                 );
 #endif
@@ -563,7 +563,7 @@ namespace System.Resources
                         (byte)'E',
                         (byte)'S',
                         (byte)'-',
-                        (byte)'>'
+                        (byte)'>',
                     }
                 );
 #endif
@@ -595,7 +595,7 @@ namespace System.Resources
                         (byte)'-',
                         (byte)'-',
                         (byte)'-',
-                        (byte)'>'
+                        (byte)'>',
                     }
                 );
 #endif

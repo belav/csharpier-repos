@@ -281,7 +281,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         SymbolKind.Field => F.Field(F.This(), (FieldSymbol)member),
                         SymbolKind.Property => F.Property(F.This(), (PropertySymbol)member),
-                        _ => throw ExceptionUtilities.UnexpectedValue(member.Kind)
+                        _ => throw ExceptionUtilities.UnexpectedValue(member.Kind),
                     };
 
                     // builder.Append((object)<value>); OR builder.Append(<value>.ToString()); for value types

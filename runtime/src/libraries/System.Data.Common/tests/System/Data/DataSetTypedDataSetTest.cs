@@ -1082,7 +1082,7 @@ namespace System.Data.Tests
                         ProductID,
                         UnitPrice,
                         Quantity,
-                        Discount
+                        Discount,
                     };
                     Rows.Add(rowOrderDetailsRow);
                     return rowOrderDetailsRow;
@@ -1441,7 +1441,7 @@ namespace System.Data.Tests
                         ShipCity,
                         ShipRegion,
                         ShipPostalCode,
-                        ShipCountry
+                        ShipCountry,
                     };
                     Rows.Add(rowOrdersRow);
                     return rowOrdersRow;

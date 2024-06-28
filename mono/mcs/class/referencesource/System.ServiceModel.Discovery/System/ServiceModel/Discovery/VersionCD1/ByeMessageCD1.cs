@@ -35,7 +35,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 ),
                 Bye = EndpointDiscoveryMetadataCD1.FromEndpointDiscoveryMetadata(
                     endpointDiscoveryMetadata
-                )
+                ),
             };
         }
     }

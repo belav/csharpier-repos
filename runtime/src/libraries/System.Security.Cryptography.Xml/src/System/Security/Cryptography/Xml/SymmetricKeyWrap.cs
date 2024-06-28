@@ -17,7 +17,7 @@ namespace System.Security.Cryptography.Xml
             0x79,
             0xe8,
             0x21,
-            0x05
+            0x05,
         };
         private static readonly byte[] s_rgbAES_KW_IV =
         {
@@ -28,7 +28,7 @@ namespace System.Security.Cryptography.Xml
             0xa6,
             0xa6,
             0xa6,
-            0xa6
+            0xa6,
         };
 
         //

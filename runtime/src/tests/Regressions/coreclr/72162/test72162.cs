@@ -11,7 +11,7 @@ public class Test72162
     public static int TestEntryPoint()
     {
         int iRetVal = 100;
-        Double[] dblTestValues = { -1000.54, -100.999, -10.999, 10.999, 100.999, 1000.999, };
+        Double[] dblTestValues = { -1000.54, -100.999, -10.999, 10.999, 100.999, 1000.999 };
         String[] strExpectedValues = { "-1001", "-101", "-11", "11", "101", "1001" };
 
         for (int i = 0; i < dblTestValues.Length; i++)

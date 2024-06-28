@@ -36,7 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseNullPropagation
                 // `.Y`.
                 CodeActionValidationMode = CodeActionValidationMode.None,
                 LanguageVersion = LanguageVersion.CSharp9,
-                TestState = { OutputKind = outputKind, },
+                TestState = { OutputKind = outputKind },
             }.RunAsync();
         }
 

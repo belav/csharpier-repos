@@ -432,11 +432,9 @@ public static class SqlServerPropertyExtensions
 
         // Support pre-6.0 IdentitySeed annotations, which contained an int rather than a long
         var annotation = property.FindAnnotation(SqlServerAnnotationNames.IdentitySeed);
-        return annotation is null
-            ? null
-            : annotation.Value is int intValue
-                ? intValue
-                : (long?)annotation.Value;
+        return annotation is null ? null
+            : annotation.Value is int intValue ? intValue
+            : (long?)annotation.Value;
     }
 
     /// <summary>

@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.Http.Logging
             serviceCollection
                 .AddHttpClient("test")
                 .ConfigurePrimaryHttpMessageHandler(() => new TestMessageHandler())
-                .RedactLoggedHeaders(new[] { "Authorization", "X-Sensitive", });
+                .RedactLoggedHeaders(new[] { "Authorization", "X-Sensitive" });
 
             // Assert
             var services = serviceCollection.BuildServiceProvider();
@@ -41,7 +41,7 @@ namespace Microsoft.Extensions.Http.Logging
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
             request.Headers.Authorization = new AuthenticationHeaderValue("fake", "secret value");
-            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true, };
+            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
             await client.SendAsync(request);
 
@@ -144,7 +144,7 @@ Y-Non-Sensitive: innocuous value
 
             var request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
             request.Headers.Authorization = new AuthenticationHeaderValue("fake", "secret value");
-            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true, };
+            request.Headers.CacheControl = new CacheControlHeaderValue() { NoCache = true };
 
             await client.SendAsync(request);
 

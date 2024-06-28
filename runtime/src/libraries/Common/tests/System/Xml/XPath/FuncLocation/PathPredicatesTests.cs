@@ -36,7 +36,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 }
             );
 
@@ -72,7 +72,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "Chap",
                     HasNameTable = true,
                     Value =
-                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n "
+                        "\n   XPath test\n   First paragraph  Nested  Paragraph  End of first paragraph \n   Second paragraph \n ",
                 }
             );
 
@@ -107,7 +107,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "Child2",
                     Name = "Child2",
                     HasNameTable = true,
-                    Value = "Second"
+                    Value = "Second",
                 },
                 new XPathResultToken
                 {
@@ -116,7 +116,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "Child3",
                     Name = "Child3",
                     HasNameTable = true,
-                    Value = "Third"
+                    Value = "Third",
                 },
                 new XPathResultToken
                 {
@@ -125,7 +125,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "Child4",
                     Name = "Child4",
                     HasNameTable = true,
-                    Value = "Fourth"
+                    Value = "Fourth",
                 },
                 new XPathResultToken
                 {
@@ -134,7 +134,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "Child5",
                     Name = "Child5",
                     HasNameTable = true,
-                    Value = "Last"
+                    Value = "Last",
                 }
             );
 
@@ -170,7 +170,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 }
             );
 
@@ -206,7 +206,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -216,7 +216,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -226,7 +226,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -262,7 +262,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -272,7 +272,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -281,7 +281,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 }
             );
 
@@ -410,7 +410,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -421,7 +421,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 }
             );
 
@@ -457,7 +457,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -467,7 +467,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -477,7 +477,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t"
+                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -487,7 +487,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -497,7 +497,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -506,7 +506,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -516,7 +516,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -552,7 +552,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -562,7 +562,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -572,7 +572,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t"
+                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -582,7 +582,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -592,7 +592,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -601,7 +601,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -611,7 +611,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -647,7 +647,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -657,7 +657,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -667,7 +667,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t"
+                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -677,7 +677,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -687,7 +687,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -696,7 +696,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -706,7 +706,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -742,7 +742,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -752,7 +752,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -762,7 +762,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t"
+                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -772,7 +772,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -782,7 +782,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -791,7 +791,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -801,7 +801,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -837,7 +837,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -847,7 +847,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -857,7 +857,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t"
+                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -867,7 +867,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -877,7 +877,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -886,7 +886,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -896,7 +896,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -932,7 +932,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -942,7 +942,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -952,7 +952,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -988,7 +988,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -998,7 +998,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -1007,7 +1007,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 }
             );
 
@@ -1112,7 +1112,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -1122,7 +1122,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -1132,7 +1132,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -1168,7 +1168,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -1178,7 +1178,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -1188,7 +1188,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -1223,7 +1223,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken
                 {
@@ -1232,7 +1232,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken
                 {
@@ -1241,7 +1241,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken
                 {
@@ -1250,7 +1250,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken
                 {
@@ -1259,7 +1259,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken
                 {
@@ -1268,7 +1268,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken
                 {
@@ -1277,7 +1277,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
+                    Value = "Trenton Today, Trenton Tomorrow",
                 }
             );
 
@@ -1312,7 +1312,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken
                 {
@@ -1321,7 +1321,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken
                 {
@@ -1330,7 +1330,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken
                 {
@@ -1339,7 +1339,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken
                 {
@@ -1348,7 +1348,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken
                 {
@@ -1357,7 +1357,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken
                 {
@@ -1366,7 +1366,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
+                    Value = "Trenton Today, Trenton Tomorrow",
                 }
             );
 
@@ -1401,7 +1401,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken
                 {
@@ -1410,7 +1410,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken
                 {
@@ -1419,7 +1419,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken
                 {
@@ -1428,7 +1428,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken
                 {
@@ -1437,7 +1437,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken
                 {
@@ -1446,7 +1446,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken
                 {
@@ -1455,7 +1455,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
+                    Value = "Trenton Today, Trenton Tomorrow",
                 }
             );
 
@@ -1490,7 +1490,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Road and Track"
+                    Value = "Road and Track",
                 },
                 new XPathResultToken
                 {
@@ -1499,7 +1499,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Week"
+                    Value = "PC Week",
                 },
                 new XPathResultToken
                 {
@@ -1508,7 +1508,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Magazine"
+                    Value = "PC Magazine",
                 },
                 new XPathResultToken
                 {
@@ -1517,7 +1517,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton"
+                    Value = "Tracking Trenton",
                 }
             );
 
@@ -1552,7 +1552,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Road and Track"
+                    Value = "Road and Track",
                 },
                 new XPathResultToken
                 {
@@ -1561,7 +1561,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Week"
+                    Value = "PC Week",
                 },
                 new XPathResultToken
                 {
@@ -1570,7 +1570,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Magazine"
+                    Value = "PC Magazine",
                 },
                 new XPathResultToken
                 {
@@ -1579,7 +1579,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton"
+                    Value = "Tracking Trenton",
                 }
             );
 
@@ -1614,7 +1614,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Road and Track"
+                    Value = "Road and Track",
                 },
                 new XPathResultToken
                 {
@@ -1623,7 +1623,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Week"
+                    Value = "PC Week",
                 },
                 new XPathResultToken
                 {
@@ -1632,7 +1632,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Magazine"
+                    Value = "PC Magazine",
                 },
                 new XPathResultToken
                 {
@@ -1641,7 +1641,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton"
+                    Value = "Tracking Trenton",
                 }
             );
 
@@ -1676,7 +1676,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 }
             );
 
@@ -1711,7 +1711,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 }
             );
 
@@ -1768,7 +1768,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 }
             );
 
@@ -1826,7 +1826,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken
                 {
@@ -1835,7 +1835,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken
                 {
@@ -1844,7 +1844,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -1853,7 +1853,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -1862,7 +1862,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Anderson"
+                    Value = "Anderson",
                 },
                 new XPathResultToken
                 {
@@ -1871,7 +1871,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "er"
+                    Value = "er",
                 },
                 new XPathResultToken
                 {
@@ -1880,7 +1880,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 }
             );
 
@@ -1961,7 +1961,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -1972,7 +1972,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -1983,7 +1983,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -1993,7 +1993,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2003,7 +2003,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2014,7 +2014,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2024,7 +2024,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2034,7 +2034,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2045,7 +2045,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2056,7 +2056,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2067,7 +2067,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2077,7 +2077,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2089,7 +2089,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2100,7 +2100,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2112,7 +2112,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t"
+                    Value = "\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2124,7 +2124,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere is Trenton?\n\t"
+                    Value = "\n\t\tWhere is Trenton?\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2136,7 +2136,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere in the world is Trenton?\n\t"
+                    Value = "\n\t\tWhere in the world is Trenton?\n\t",
                 }
             );
 
@@ -2171,7 +2171,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -2200,7 +2200,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2210,7 +2210,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t"
+                        "\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t",
                 }
             );
 
@@ -2238,7 +2238,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 }
             );
 
@@ -2269,7 +2269,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2280,7 +2280,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2291,7 +2291,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2302,7 +2302,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2313,7 +2313,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2324,7 +2324,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2335,7 +2335,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t",
                 }
             );
 
@@ -2442,7 +2442,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken
                 {
@@ -2451,7 +2451,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken
                 {
@@ -2460,7 +2460,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken
                 {
@@ -2469,7 +2469,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken
                 {
@@ -2478,7 +2478,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken
                 {
@@ -2487,7 +2487,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken
                 {
@@ -2496,7 +2496,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
+                    Value = "Trenton Today, Trenton Tomorrow",
                 }
             );
 
@@ -2526,7 +2526,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2535,7 +2535,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken
                 {
@@ -2545,7 +2545,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2554,7 +2554,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "Joe"
+                    Value = "Joe",
                 },
                 new XPathResultToken
                 {
@@ -2563,7 +2563,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken
                 {
@@ -2572,7 +2572,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "award",
                     Name = "award",
                     HasNameTable = true,
-                    Value = "Trenton Literary Review Honorable Mention"
+                    Value = "Trenton Literary Review Honorable Mention",
                 },
                 new XPathResultToken
                 {
@@ -2583,7 +2583,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "USA"
+                    Value = "USA",
                 },
                 new XPathResultToken
                 {
@@ -2592,7 +2592,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "12"
+                    Value = "12",
                 },
                 new XPathResultToken
                 {
@@ -2603,7 +2603,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2612,7 +2612,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken
                 {
@@ -2622,7 +2622,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2631,7 +2631,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "Mary"
+                    Value = "Mary",
                 },
                 new XPathResultToken
                 {
@@ -2640,7 +2640,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken
                 {
@@ -2650,7 +2650,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2659,7 +2659,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "JoeBob"
+                    Value = "JoeBob",
                 },
                 new XPathResultToken
                 {
@@ -2668,7 +2668,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Loser"
+                    Value = "Loser",
                 },
                 new XPathResultToken
                 {
@@ -2677,7 +2677,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "country",
                     Name = "country",
                     HasNameTable = true,
-                    Value = "US"
+                    Value = "US",
                 },
                 new XPathResultToken
                 {
@@ -2686,7 +2686,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken
                 {
@@ -2697,7 +2697,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2706,7 +2706,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken
                 {
@@ -2716,7 +2716,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t"
+                        "\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2725,7 +2725,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first.name",
                     Name = "first.name",
                     HasNameTable = true,
-                    Value = "Mike"
+                    Value = "Mike",
                 },
                 new XPathResultToken
                 {
@@ -2734,7 +2734,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last.name",
                     Name = "last.name",
                     HasNameTable = true,
-                    Value = "Hyman"
+                    Value = "Hyman",
                 },
                 new XPathResultToken
                 {
@@ -2743,7 +2743,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t"
+                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2752,7 +2752,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first.name",
                     Name = "first.name",
                     HasNameTable = true,
-                    Value = "Jonathan"
+                    Value = "Jonathan",
                 },
                 new XPathResultToken
                 {
@@ -2761,7 +2761,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last.name",
                     Name = "last.name",
                     HasNameTable = true,
-                    Value = "Marsh"
+                    Value = "Marsh",
                 },
                 new XPathResultToken
                 {
@@ -2771,7 +2771,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55.95"
+                    Value = "55.95",
                 },
                 new XPathResultToken
                 {
@@ -2781,7 +2781,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2790,7 +2790,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Road and Track"
+                    Value = "Road and Track",
                 },
                 new XPathResultToken
                 {
@@ -2799,7 +2799,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "3.50"
+                    Value = "3.50",
                 },
                 new XPathResultToken
                 {
@@ -2808,7 +2808,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 },
                 new XPathResultToken
                 {
@@ -2818,7 +2818,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "special_edition",
                     Name = "special_edition",
                     HasNameTable = true,
-                    Value = "Yes"
+                    Value = "Yes",
                 },
                 new XPathResultToken
                 {
@@ -2828,7 +2828,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2837,7 +2837,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Week"
+                    Value = "PC Week",
                 },
                 new XPathResultToken
                 {
@@ -2846,7 +2846,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "free"
+                    Value = "free",
                 },
                 new XPathResultToken
                 {
@@ -2855,7 +2855,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publisher",
                     Name = "publisher",
                     HasNameTable = true,
-                    Value = "Ziff Davis"
+                    Value = "Ziff Davis",
                 },
                 new XPathResultToken
                 {
@@ -2866,7 +2866,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2875,7 +2875,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "PC Magazine"
+                    Value = "PC Magazine",
                 },
                 new XPathResultToken
                 {
@@ -2885,7 +2885,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "3.95"
+                    Value = "3.95",
                 },
                 new XPathResultToken
                 {
@@ -2894,7 +2894,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publisher",
                     Name = "publisher",
                     HasNameTable = true,
-                    Value = "Ziff Davis"
+                    Value = "Ziff Davis",
                 },
                 new XPathResultToken
                 {
@@ -2904,7 +2904,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "articles",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t"
+                        "\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2913,7 +2913,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story1",
                     Name = "story1",
                     HasNameTable = true,
-                    Value = "Create a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t"
+                    Value = "Create a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2922,7 +2922,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "details",
                     Name = "details",
                     HasNameTable = true,
-                    Value = "Create a list of needed hardware"
+                    Value = "Create a list of needed hardware",
                 },
                 new XPathResultToken
                 {
@@ -2932,7 +2932,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "story2",
                     HasNameTable = true,
                     Value =
-                        "The future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t"
+                        "The future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2941,7 +2941,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "details",
                     Name = "details",
                     HasNameTable = true,
-                    Value = "Can Netscape stay alive with Microsoft eating up its browser share?"
+                    Value = "Can Netscape stay alive with Microsoft eating up its browser share?",
                 },
                 new XPathResultToken
                 {
@@ -2950,7 +2950,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "stock",
                     Name = "stock",
                     HasNameTable = true,
-                    Value = "MSFT 99.30"
+                    Value = "MSFT 99.30",
                 },
                 new XPathResultToken
                 {
@@ -2960,7 +2960,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "date",
                     Name = "date",
                     HasNameTable = true,
-                    Value = "1998-06-23"
+                    Value = "1998-06-23",
                 },
                 new XPathResultToken
                 {
@@ -2969,7 +2969,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story3",
                     Name = "story3",
                     HasNameTable = true,
-                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t"
+                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2979,7 +2979,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -2988,7 +2988,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "articles",
                     Name = "articles",
                     HasNameTable = true,
-                    Value = "\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t"
+                    Value = "\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -2997,7 +2997,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story1",
                     Name = "story1",
                     HasNameTable = true,
-                    Value = "Sport Cars - Can you really dream?\n\t\t\t"
+                    Value = "Sport Cars - Can you really dream?\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -3007,7 +3007,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3016,7 +3016,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "award",
                     Name = "award",
                     HasNameTable = true,
-                    Value = "PC Magazine Best Product of 1997"
+                    Value = "PC Magazine Best Product of 1997",
                 },
                 new XPathResultToken
                 {
@@ -3027,7 +3027,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3036,7 +3036,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken
                 {
@@ -3046,7 +3046,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -3055,7 +3055,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first.name",
                     Name = "first.name",
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken
                 {
@@ -3064,7 +3064,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -3074,7 +3074,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -3083,7 +3083,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first.name",
                     Name = "first.name",
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken
                 {
@@ -3092,7 +3092,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -3101,7 +3101,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken
                 {
@@ -3112,7 +3112,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3121,7 +3121,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken
                 {
@@ -3131,7 +3131,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t"
+                        "\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -3140,7 +3140,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken
                 {
@@ -3149,7 +3149,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -3158,7 +3158,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "Frank"
+                    Value = "Frank",
                 },
                 new XPathResultToken
                 {
@@ -3167,7 +3167,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Anderson"
+                    Value = "Anderson",
                 },
                 new XPathResultToken
                 {
@@ -3176,7 +3176,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "award",
                     Name = "award",
                     HasNameTable = true,
-                    Value = "Pulizer"
+                    Value = "Pulizer",
                 },
                 new XPathResultToken
                 {
@@ -3186,7 +3186,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -3195,7 +3195,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken
                 {
@@ -3204,7 +3204,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -3213,7 +3213,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "10"
+                    Value = "10",
                 },
                 new XPathResultToken
                 {
@@ -3224,7 +3224,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3233,7 +3233,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken
                 {
@@ -3242,7 +3242,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "author",
                     Name = "author",
                     HasNameTable = true,
-                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t"
+                    Value = "\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -3251,7 +3251,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "first-name",
                     Name = "first-name",
                     HasNameTable = true,
-                    Value = "Hack"
+                    Value = "Hack",
                 },
                 new XPathResultToken
                 {
@@ -3260,7 +3260,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "er"
+                    Value = "er",
                 },
                 new XPathResultToken
                 {
@@ -3270,7 +3270,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "degree",
                     Name = "degree",
                     HasNameTable = true,
-                    Value = "Ph.D."
+                    Value = "Ph.D.",
                 },
                 new XPathResultToken
                 {
@@ -3279,7 +3279,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "08"
+                    Value = "08",
                 },
                 new XPathResultToken
                 {
@@ -3289,7 +3289,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3298,7 +3298,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton"
+                    Value = "Tracking Trenton",
                 },
                 new XPathResultToken
                 {
@@ -3307,7 +3307,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "2.50"
+                    Value = "2.50",
                 },
                 new XPathResultToken
                 {
@@ -3316,7 +3316,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 },
                 new XPathResultToken
                 {
@@ -3328,7 +3328,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3337,7 +3337,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Tracking Trenton Stocks"
+                    Value = "Tracking Trenton Stocks",
                 },
                 new XPathResultToken
                 {
@@ -3346,7 +3346,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "0.98"
+                    Value = "0.98",
                 },
                 new XPathResultToken
                 {
@@ -3355,7 +3355,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 }
             );
 
@@ -3384,7 +3384,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3394,7 +3394,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3405,7 +3405,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3415,7 +3415,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3425,7 +3425,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3435,7 +3435,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 }
             );
 
@@ -3465,7 +3465,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 }
             );
 
@@ -3494,7 +3494,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3504,7 +3504,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3515,7 +3515,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3525,7 +3525,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3535,7 +3535,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3545,7 +3545,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 }
             );
 
@@ -3574,7 +3574,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3584,7 +3584,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3595,7 +3595,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3605,7 +3605,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3615,7 +3615,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3625,7 +3625,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 }
             );
 
@@ -3655,7 +3655,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3666,7 +3666,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3677,7 +3677,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3688,7 +3688,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3699,7 +3699,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3710,7 +3710,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3721,7 +3721,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t",
                 }
             );
 
@@ -3751,7 +3751,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3762,7 +3762,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3773,7 +3773,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3783,7 +3783,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3793,7 +3793,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3804,7 +3804,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3815,7 +3815,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3826,7 +3826,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3837,7 +3837,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3847,7 +3847,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3859,7 +3859,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3870,7 +3870,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t",
                 }
             );
 
@@ -3898,7 +3898,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken
                 {
@@ -3907,7 +3907,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken
                 {
@@ -3916,7 +3916,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken
                 {
@@ -3925,7 +3925,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken
                 {
@@ -3934,7 +3934,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken
                 {
@@ -3943,7 +3943,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken
                 {
@@ -3952,7 +3952,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
+                    Value = "Trenton Today, Trenton Tomorrow",
                 }
             );
 
@@ -3982,7 +3982,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -3993,7 +3993,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4004,7 +4004,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4014,7 +4014,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4024,7 +4024,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4035,7 +4035,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4045,7 +4045,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4055,7 +4055,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4066,7 +4066,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4077,7 +4077,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4088,7 +4088,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4098,7 +4098,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4110,7 +4110,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t",
                 }
             );
 
@@ -4139,7 +4139,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4149,7 +4149,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4160,7 +4160,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4170,7 +4170,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4180,7 +4180,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4190,7 +4190,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4202,7 +4202,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t",
                 }
             );
 
@@ -4231,7 +4231,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "booksection",
                     HasNameTable = true,
                     Value =
-                        "\n\t\n\t\t\n\t\t\tA Brief History Of Time\n\t\t\n\t\t\n\t\t\tThe Beautiful Universe\n\t\t\n\t\t\n\t\t\tNewton's Time Machine\n\t\t\n\t\t\n\t\t\tThe Quark And The Jaguar\n\t\t\n\t\t\n\t\t\n\t"
+                        "\n\t\n\t\t\n\t\t\tA Brief History Of Time\n\t\t\n\t\t\n\t\t\tThe Beautiful Universe\n\t\t\n\t\t\n\t\t\tNewton's Time Machine\n\t\t\n\t\t\n\t\t\tThe Quark And The Jaguar\n\t\t\n\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4243,7 +4243,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "http://book.htm",
                     HasNameTable = true,
                     Prefix = "NSbook",
-                    Value = "\n\t\t\tA Brief History Of Time\n\t\t"
+                    Value = "\n\t\t\tA Brief History Of Time\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4254,7 +4254,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "http://book.htm",
                     HasNameTable = true,
                     Prefix = "NSbook",
-                    Value = "A Brief History Of Time"
+                    Value = "A Brief History Of Time",
                 },
                 new XPathResultToken
                 {
@@ -4266,7 +4266,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "http://book.htm",
                     HasNameTable = true,
                     Prefix = "NSbook",
-                    Value = "\n\t\t\tThe Beautiful Universe\n\t\t"
+                    Value = "\n\t\t\tThe Beautiful Universe\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4277,7 +4277,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "http://book.htm",
                     HasNameTable = true,
                     Prefix = "NSbook",
-                    Value = "The Beautiful Universe"
+                    Value = "The Beautiful Universe",
                 },
                 new XPathResultToken
                 {
@@ -4287,7 +4287,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\t\tNewton's Time Machine\n\t\t"
+                    Value = "\n\t\t\tNewton's Time Machine\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4296,7 +4296,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "Newton's Time Machine"
+                    Value = "Newton's Time Machine",
                 },
                 new XPathResultToken
                 {
@@ -4306,7 +4306,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "book",
                     Name = "book",
                     HasNameTable = true,
-                    Value = "\n\t\t\tThe Quark And The Jaguar\n\t\t"
+                    Value = "\n\t\t\tThe Quark And The Jaguar\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4315,7 +4315,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "title",
                     Name = "title",
                     HasNameTable = true,
-                    Value = "The Quark And The Jaguar"
+                    Value = "The Quark And The Jaguar",
                 }
             );
 
@@ -4345,7 +4345,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4356,7 +4356,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4367,7 +4367,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4377,7 +4377,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4387,7 +4387,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4398,7 +4398,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4408,7 +4408,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4418,7 +4418,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4429,7 +4429,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4440,7 +4440,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4451,7 +4451,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4461,7 +4461,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4473,7 +4473,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4484,7 +4484,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4496,7 +4496,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t"
+                    Value = "\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4508,7 +4508,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere is Trenton?\n\t"
+                    Value = "\n\t\tWhere is Trenton?\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4520,7 +4520,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere in the world is Trenton?\n\t"
+                    Value = "\n\t\tWhere in the world is Trenton?\n\t",
                 }
             );
 
@@ -4595,7 +4595,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     HasChildren = true,
                     HasNameTable = true,
                     Value =
-                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
+                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n",
                 }
             );
 
@@ -4625,7 +4625,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "USA"
+                    Value = "USA",
                 },
                 new XPathResultToken
                 {
@@ -4634,7 +4634,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "12"
+                    Value = "12",
                 },
                 new XPathResultToken
                 {
@@ -4644,7 +4644,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4653,7 +4653,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "country",
                     Name = "country",
                     HasNameTable = true,
-                    Value = "US"
+                    Value = "US",
                 },
                 new XPathResultToken
                 {
@@ -4662,7 +4662,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken
                 {
@@ -4671,7 +4671,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t"
+                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4680,7 +4680,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last.name",
                     Name = "last.name",
                     HasNameTable = true,
-                    Value = "Marsh"
+                    Value = "Marsh",
                 },
                 new XPathResultToken
                 {
@@ -4690,7 +4690,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55.95"
+                    Value = "55.95",
                 },
                 new XPathResultToken
                 {
@@ -4700,7 +4700,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "special_edition",
                     Name = "special_edition",
                     HasNameTable = true,
-                    Value = "Yes"
+                    Value = "Yes",
                 },
                 new XPathResultToken
                 {
@@ -4709,7 +4709,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publisher",
                     Name = "publisher",
                     HasNameTable = true,
-                    Value = "Ziff Davis"
+                    Value = "Ziff Davis",
                 },
                 new XPathResultToken
                 {
@@ -4719,7 +4719,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "articles",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t"
+                        "\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4728,7 +4728,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "details",
                     Name = "details",
                     HasNameTable = true,
-                    Value = "Create a list of needed hardware"
+                    Value = "Create a list of needed hardware",
                 },
                 new XPathResultToken
                 {
@@ -4738,7 +4738,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "date",
                     Name = "date",
                     HasNameTable = true,
-                    Value = "1998-06-23"
+                    Value = "1998-06-23",
                 },
                 new XPathResultToken
                 {
@@ -4747,7 +4747,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story3",
                     Name = "story3",
                     HasNameTable = true,
-                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t"
+                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4756,7 +4756,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "articles",
                     Name = "articles",
                     HasNameTable = true,
-                    Value = "\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t"
+                    Value = "\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4765,7 +4765,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story1",
                     Name = "story1",
                     HasNameTable = true,
-                    Value = "Sport Cars - Can you really dream?\n\t\t\t"
+                    Value = "Sport Cars - Can you really dream?\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4774,7 +4774,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "award",
                     Name = "award",
                     HasNameTable = true,
-                    Value = "PC Magazine Best Product of 1997"
+                    Value = "PC Magazine Best Product of 1997",
                 },
                 new XPathResultToken
                 {
@@ -4784,7 +4784,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4793,7 +4793,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -4802,7 +4802,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken
                 {
@@ -4812,7 +4812,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4821,7 +4821,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -4830,7 +4830,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "10"
+                    Value = "10",
                 },
                 new XPathResultToken
                 {
@@ -4840,7 +4840,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "degree",
                     Name = "degree",
                     HasNameTable = true,
-                    Value = "Ph.D."
+                    Value = "Ph.D.",
                 },
                 new XPathResultToken
                 {
@@ -4849,7 +4849,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "08"
+                    Value = "08",
                 },
                 new XPathResultToken
                 {
@@ -4858,7 +4858,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 },
                 new XPathResultToken
                 {
@@ -4867,7 +4867,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 },
                 new XPathResultToken
                 {
@@ -4876,7 +4876,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "Trenton Forever"
+                    Value = "Trenton Forever",
                 },
                 new XPathResultToken
                 {
@@ -4886,7 +4886,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "excerpt",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t"
+                        "\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4895,7 +4895,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "emph",
                     Name = "emph",
                     HasNameTable = true,
-                    Value = "I"
+                    Value = "I",
                 },
                 new XPathResultToken
                 {
@@ -4904,7 +4904,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "definition-list",
                     Name = "definition-list",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t"
+                    Value = "\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -4913,7 +4913,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "definition",
                     Name = "definition",
                     HasNameTable = true,
-                    Value = "misery"
+                    Value = "misery",
                 },
                 new XPathResultToken
                 {
@@ -4924,7 +4924,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "Robert Bob"
+                    Value = "Robert Bob",
                 },
                 new XPathResultToken
                 {
@@ -4935,7 +4935,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "Where is Trenton?"
+                    Value = "Where is Trenton?",
                 },
                 new XPathResultToken
                 {
@@ -4947,7 +4947,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere in the world is Trenton?\n\t"
+                    Value = "\n\t\tWhere in the world is Trenton?\n\t",
                 },
                 new XPathResultToken
                 {
@@ -4958,7 +4958,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "Where in the world is Trenton?"
+                    Value = "Where in the world is Trenton?",
                 }
             );
 
@@ -4989,7 +4989,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "bookstore",
                     HasNameTable = true,
                     Value =
-                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n"
+                        "\n\t\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t\n\t\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t\n\t\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t\n\t\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t\n\t\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t\n\t\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t\n\t\n\t\tPC Magazine Best Product of 1997\n\t\n\t\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t\n\t\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t\n\t\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t\n\t\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t\n\t\n\t\tTracking Trenton Stocks\n\t\t0.98\n\t\t\n\t\n\t\n\t\tTrenton Today, Trenton Tomorrow\n\t\t\n\t\t\tToni\n\t\t\tBob\n\t\t\tB.A.\n\t\t\tPh.D.\n\t\t\tPulizer\n\t\t\tStill in Trenton\n\t\t\tTrenton Forever\n\t\t\n\t\t6.50\n\t\t\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t\n\t\n\t\n\t\tWho's Who in Trenton\n\t\tRobert Bob\n\t\n\t\n\t\tWhere is Trenton?\n\t\n\t\n\t\tWhere in the world is Trenton?\n\t\n",
                 },
                 new XPathResultToken
                 {
@@ -5000,7 +5000,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "USA"
+                    Value = "USA",
                 },
                 new XPathResultToken
                 {
@@ -5009,7 +5009,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "12"
+                    Value = "12",
                 },
                 new XPathResultToken
                 {
@@ -5019,7 +5019,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5028,7 +5028,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "country",
                     Name = "country",
                     HasNameTable = true,
-                    Value = "US"
+                    Value = "US",
                 },
                 new XPathResultToken
                 {
@@ -5037,7 +5037,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken
                 {
@@ -5046,7 +5046,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t"
+                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5055,7 +5055,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last.name",
                     Name = "last.name",
                     HasNameTable = true,
-                    Value = "Marsh"
+                    Value = "Marsh",
                 },
                 new XPathResultToken
                 {
@@ -5065,7 +5065,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55.95"
+                    Value = "55.95",
                 },
                 new XPathResultToken
                 {
@@ -5075,7 +5075,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "special_edition",
                     Name = "special_edition",
                     HasNameTable = true,
-                    Value = "Yes"
+                    Value = "Yes",
                 },
                 new XPathResultToken
                 {
@@ -5084,7 +5084,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publisher",
                     Name = "publisher",
                     HasNameTable = true,
-                    Value = "Ziff Davis"
+                    Value = "Ziff Davis",
                 },
                 new XPathResultToken
                 {
@@ -5094,7 +5094,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "articles",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t"
+                        "\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5103,7 +5103,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "details",
                     Name = "details",
                     HasNameTable = true,
-                    Value = "Create a list of needed hardware"
+                    Value = "Create a list of needed hardware",
                 },
                 new XPathResultToken
                 {
@@ -5113,7 +5113,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "date",
                     Name = "date",
                     HasNameTable = true,
-                    Value = "1998-06-23"
+                    Value = "1998-06-23",
                 },
                 new XPathResultToken
                 {
@@ -5122,7 +5122,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story3",
                     Name = "story3",
                     HasNameTable = true,
-                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t"
+                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5131,7 +5131,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "articles",
                     Name = "articles",
                     HasNameTable = true,
-                    Value = "\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t"
+                    Value = "\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5140,7 +5140,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "story1",
                     Name = "story1",
                     HasNameTable = true,
-                    Value = "Sport Cars - Can you really dream?\n\t\t\t"
+                    Value = "Sport Cars - Can you really dream?\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5149,7 +5149,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "award",
                     Name = "award",
                     HasNameTable = true,
-                    Value = "PC Magazine Best Product of 1997"
+                    Value = "PC Magazine Best Product of 1997",
                 },
                 new XPathResultToken
                 {
@@ -5159,7 +5159,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5168,7 +5168,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -5177,7 +5177,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken
                 {
@@ -5187,7 +5187,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "publication",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t"
+                        "\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5196,7 +5196,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "last-name",
                     Name = "last-name",
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken
                 {
@@ -5205,7 +5205,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "10"
+                    Value = "10",
                 },
                 new XPathResultToken
                 {
@@ -5215,7 +5215,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "degree",
                     Name = "degree",
                     HasNameTable = true,
-                    Value = "Ph.D."
+                    Value = "Ph.D.",
                 },
                 new XPathResultToken
                 {
@@ -5224,7 +5224,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "price",
                     Name = "price",
                     HasNameTable = true,
-                    Value = "08"
+                    Value = "08",
                 },
                 new XPathResultToken
                 {
@@ -5233,7 +5233,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 },
                 new XPathResultToken
                 {
@@ -5242,7 +5242,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     IsEmptyElement = true,
                     LocalName = "subscription",
                     Name = "subscription",
-                    HasNameTable = true
+                    HasNameTable = true,
                 },
                 new XPathResultToken
                 {
@@ -5251,7 +5251,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "publication",
                     Name = "publication",
                     HasNameTable = true,
-                    Value = "Trenton Forever"
+                    Value = "Trenton Forever",
                 },
                 new XPathResultToken
                 {
@@ -5261,7 +5261,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "excerpt",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t"
+                        "\n\t\t\tIt was a dark and stormy night.\n\t\t\tBut then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\tI have.\n\t\t\t\n\t\t\t\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t\n\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5270,7 +5270,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "emph",
                     Name = "emph",
                     HasNameTable = true,
-                    Value = "I"
+                    Value = "I",
                 },
                 new XPathResultToken
                 {
@@ -5279,7 +5279,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "definition-list",
                     Name = "definition-list",
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t"
+                    Value = "\n\t\t\t\tTrenton\n\t\t\t\tmisery\n\t\t\t",
                 },
                 new XPathResultToken
                 {
@@ -5288,7 +5288,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "definition",
                     Name = "definition",
                     HasNameTable = true,
-                    Value = "misery"
+                    Value = "misery",
                 },
                 new XPathResultToken
                 {
@@ -5299,7 +5299,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "Robert Bob"
+                    Value = "Robert Bob",
                 },
                 new XPathResultToken
                 {
@@ -5310,7 +5310,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "Where is Trenton?"
+                    Value = "Where is Trenton?",
                 },
                 new XPathResultToken
                 {
@@ -5322,7 +5322,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere in the world is Trenton?\n\t"
+                    Value = "\n\t\tWhere in the world is Trenton?\n\t",
                 },
                 new XPathResultToken
                 {
@@ -5333,7 +5333,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "Where in the world is Trenton?"
+                    Value = "Where in the world is Trenton?",
                 }
             );
 
@@ -5370,7 +5370,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NamespaceURI = "urn:http//www.placeholder-name-here.com/schema/",
                     HasNameTable = true,
                     Prefix = "my",
-                    Value = "\n\t\tWhere is Trenton?\n\t"
+                    Value = "\n\t\tWhere is Trenton?\n\t",
                 }
             );
 
@@ -5399,7 +5399,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "author",
                     HasNameTable = true,
                     Value =
-                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t"
+                        "\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t",
                 }
             );
 
@@ -5429,7 +5429,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken
                 {
@@ -5440,7 +5440,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken
                 {
@@ -5450,7 +5450,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t"
+                    Value = "\n\t\tTracking Trenton\n\t\t2.50\n\t\t\n\t",
                 }
             );
 
@@ -5526,7 +5526,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Comment,
                     HasNameTable = true,
-                    Value = " This file represents a fragment of a book store inventory database "
+                    Value = " This file represents a fragment of a book store inventory database ",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5534,7 +5534,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Seven Years in Trenton"
+                    Value = "Seven Years in Trenton",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5542,28 +5542,28 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Joe"
+                    Value = "Joe",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Trenton Literary Review Honorable Mention"
+                    Value = "Trenton Literary Review Honorable Mention",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "USA"
+                    Value = "USA",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5571,7 +5571,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "12"
+                    Value = "12",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5580,7 +5580,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "History of Trenton"
+                    Value = "History of Trenton",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5588,41 +5588,41 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Mary"
+                    Value = "Mary",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t"
+                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "JoeBob"
+                    Value = "JoeBob",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Loser"
+                    Value = "Loser",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "US"
+                    Value = "US",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5631,7 +5631,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5640,7 +5640,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "XQL The Golden Years"
+                    Value = "XQL The Golden Years",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5648,34 +5648,34 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Mike"
+                    Value = "Mike",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Hyman"
+                    Value = "Hyman",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\t"
+                    Value = "\n\t\t\t\tXQL For Dummies\n\t\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Jonathan"
+                    Value = "Jonathan",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Marsh"
+                    Value = "Marsh",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5684,7 +5684,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "55.95"
+                    Value = "55.95",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5693,14 +5693,14 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Road and Track"
+                    Value = "Road and Track",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "3.50"
+                    Value = "3.50",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5708,7 +5708,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Yes"
+                    Value = "Yes",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5717,21 +5717,21 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "PC Week"
+                    Value = "PC Week",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "free"
+                    Value = "free",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Ziff Davis"
+                    Value = "Ziff Davis",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5740,21 +5740,21 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "PC Magazine"
+                    Value = "PC Magazine",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "3.95"
+                    Value = "3.95",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Ziff Davis"
+                    Value = "Ziff Davis",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5762,13 +5762,13 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Create a dream PC\n\t\t\t\t"
+                    Value = "Create a dream PC\n\t\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Create a list of needed hardware"
+                    Value = "Create a list of needed hardware",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5776,27 +5776,27 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "The future of the web\n\t\t\t\t"
+                    Value = "The future of the web\n\t\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Can Netscape stay alive with Microsoft eating up its browser share?"
+                    Value = "Can Netscape stay alive with Microsoft eating up its browser share?",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "MSFT 99.30"
+                    Value = "MSFT 99.30",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "1998-06-23"
+                    Value = "1998-06-23",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5804,7 +5804,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t"
+                    Value = "Visual Basic 5.0 - Will it stand the test of time?\n\t\t\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5815,7 +5815,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Sport Cars - Can you really dream?\n\t\t\t"
+                    Value = "Sport Cars - Can you really dream?\n\t\t\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5825,7 +5825,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "PC Magazine Best Product of 1997"
+                    Value = "PC Magazine Best Product of 1997",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5834,7 +5834,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "History of Trenton 2"
+                    Value = "History of Trenton 2",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5842,34 +5842,34 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t"
+                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5878,7 +5878,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "55"
+                    Value = "55",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5887,7 +5887,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "History of Trenton Vol 3"
+                    Value = "History of Trenton Vol 3",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5895,55 +5895,55 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Frank"
+                    Value = "Frank",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Anderson"
+                    Value = "Anderson",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Pulizer"
+                    Value = "Pulizer",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t"
+                    Value = "\n\t\t\t\tSelected Short Stories of\n\t\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Mary F"
+                    Value = "Mary F",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Robinson"
+                    Value = "Robinson",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5952,7 +5952,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "10"
+                    Value = "10",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5961,7 +5961,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "How To Fix Computers"
+                    Value = "How To Fix Computers",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5969,21 +5969,21 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Hack"
+                    Value = "Hack",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "er"
+                    Value = "er",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Ph.D."
+                    Value = "Ph.D.",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -5991,7 +5991,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "08"
+                    Value = "08",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6000,14 +6000,14 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Tracking Trenton"
+                    Value = "Tracking Trenton",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "2.50"
+                    Value = "2.50",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6017,14 +6017,14 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Tracking Trenton Stocks"
+                    Value = "Tracking Trenton Stocks",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "0.98"
+                    Value = "0.98",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6034,7 +6034,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Trenton Today, Trenton Tomorrow"
+                    Value = "Trenton Today, Trenton Tomorrow",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6042,49 +6042,49 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Toni"
+                    Value = "Toni",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Bob"
+                    Value = "Bob",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "B.A."
+                    Value = "B.A.",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Ph.D."
+                    Value = "Ph.D.",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Pulizer"
+                    Value = "Pulizer",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Still in Trenton"
+                    Value = "Still in Trenton",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Trenton Forever"
+                    Value = "Trenton Forever",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6092,7 +6092,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "6.50"
+                    Value = "6.50",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6100,7 +6100,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "It was a dark and stormy night."
+                    Value = "It was a dark and stormy night.",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6108,53 +6108,37 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
                     Value =
-                        "But then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\t"
+                        "But then all nights in Trenton seem dark and\n\t\t\tstormy to someone who has gone through what\n\t\t\t",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "I"
+                    Value = "I",
                 },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = " have.\n\t\t\t"
+                    Value = " have.\n\t\t\t",
                 },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken
-                {
-                    NodeType = XPathNodeType.Text,
-                    HasNameTable = true,
-                    Value = "Trenton"
-                },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken
-                {
-                    NodeType = XPathNodeType.Text,
-                    HasNameTable = true,
-                    Value = "misery"
-                },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
-                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Who's Who in Trenton"
+                    Value = "Trenton",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Robert Bob"
+                    Value = "misery",
                 },
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6162,7 +6146,14 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Where is Trenton?"
+                    Value = "Who's Who in Trenton",
+                },
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Robert Bob",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
@@ -6171,7 +6162,16 @@ namespace XPathTests.FunctionalTests.Location.Paths
                 {
                     NodeType = XPathNodeType.Text,
                     HasNameTable = true,
-                    Value = "Where in the world is Trenton?"
+                    Value = "Where is Trenton?",
+                },
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
+                new XPathResultToken
+                {
+                    NodeType = XPathNodeType.Text,
+                    HasNameTable = true,
+                    Value = "Where in the world is Trenton?",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
@@ -6204,7 +6204,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6215,7 +6215,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 }
             );
 
@@ -6246,7 +6246,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 }
             );
 
@@ -6274,7 +6274,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6284,7 +6284,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6295,7 +6295,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6305,7 +6305,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6315,7 +6315,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 }
             );
 
@@ -6345,7 +6345,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6357,7 +6357,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6369,7 +6369,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6380,7 +6380,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6391,7 +6391,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6403,7 +6403,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6414,7 +6414,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6425,7 +6425,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6437,7 +6437,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6449,7 +6449,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6461,7 +6461,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
             );
@@ -6490,7 +6490,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6500,7 +6500,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6511,7 +6511,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6521,7 +6521,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken
                 {
@@ -6531,7 +6531,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 }
             );
 
@@ -6561,7 +6561,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t"
+                        "\n\t\tSeven Years in Trenton\n\t\t\n\t\t\tJoe\n\t\t\tBob\n\t\t\tTrenton Literary Review Honorable Mention\n\t\t\tUSA\n\t\t\n\t\t12\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6573,7 +6573,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton\n\t\t\n\t\t\tMary\n\t\t\tBob\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tJoeBob\n\t\t\t\tLoser\n\t\t\t\tUS\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6585,7 +6585,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t"
+                        "\n\t\tXQL The Golden Years\n\t\t\n\t\t\tMike\n\t\t\tHyman\n\t\t\t\n\t\t\t\tXQL For Dummies\n\t\t\t\tJonathan\n\t\t\t\tMarsh\n\t\t\t\n\t\t\n\t\t55.95\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6596,7 +6596,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t"
+                    Value = "\n\t\tRoad and Track\n\t\t3.50\n\t\t\n\t\tYes\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6607,7 +6607,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t"
+                    Value = "\n\t\tPC Week\n\t\tfree\n\t\tZiff Davis\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6619,7 +6619,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "magazine",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t"
+                        "\n\t\tPC Magazine\n\t\t3.95\n\t\tZiff Davis\n\t\t\n\t\t\tCreate a dream PC\n\t\t\t\tCreate a list of needed hardware\n\t\t\t\n\t\t\tThe future of the web\n\t\t\t\tCan Netscape stay alive with Microsoft eating up its browser share?\n\t\t\t\tMSFT 99.30\n\t\t\t\t1998-06-23\n\t\t\t\n\t\t\tVisual Basic 5.0 - Will it stand the test of time?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6630,7 +6630,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t"
+                    Value = "\n\t\t\n\t\t\tSport Cars - Can you really dream?\n\t\t\t\n\t\t\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6641,7 +6641,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "magazine",
                     Name = "magazine",
                     HasNameTable = true,
-                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t"
+                    Value = "\n\t\tPC Magazine Best Product of 1997\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6653,7 +6653,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t"
+                        "\n\t\tHistory of Trenton 2\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t55\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6665,7 +6665,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t"
+                        "\n\t\tHistory of Trenton Vol 3\n\t\t\n\t\t\tMary F\n\t\t\tRobinson\n\t\t\tFrank\n\t\t\tAnderson\n\t\t\tPulizer\n\t\t\t\n\t\t\t\tSelected Short Stories of\n\t\t\t\tMary F\n\t\t\t\tRobinson\n\t\t\t\n\t\t\n\t\t10\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true },
                 new XPathResultToken
@@ -6677,7 +6677,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     Name = "book",
                     HasNameTable = true,
                     Value =
-                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t"
+                        "\n\t\tHow To Fix Computers\n\t\t\n\t\t\tHack\n\t\t\ter\n\t\t\tPh.D.\n\t\t\n\t\t08\n\t",
                 },
                 new XPathResultToken { NodeType = XPathNodeType.Whitespace, HasNameTable = true }
             );
@@ -6722,7 +6722,7 @@ namespace XPathTests.FunctionalTests.Location.Paths
                     LocalName = "award",
                     Name = "award",
                     HasNameTable = true,
-                    Value = "Trenton Literary Review Honorable Mention"
+                    Value = "Trenton Literary Review Honorable Mention",
                 }
             );
 

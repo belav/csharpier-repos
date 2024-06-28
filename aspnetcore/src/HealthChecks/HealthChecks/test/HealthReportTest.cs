@@ -69,7 +69,7 @@ public class HealthReportTest
                 {
                     "Foo",
                     new HealthReportEntry(HealthStatus.Healthy, null, TimeSpan.MinValue, null, null)
-                }
+                },
             },
             totalDuration: TimeSpan.FromMilliseconds(milliseconds)
         );

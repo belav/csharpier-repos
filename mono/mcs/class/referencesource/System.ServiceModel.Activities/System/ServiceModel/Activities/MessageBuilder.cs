@@ -251,7 +251,7 @@ namespace System.ServiceModel.Activities
                 )
                 {
                     Index = 0,
-                    Type = type
+                    Type = type,
 
                     // We do not infer MessagePartDescription.ProtectionLevel
                 };
@@ -290,7 +290,7 @@ namespace System.ServiceModel.Activities
                 )
                 {
                     Index = index,
-                    Type = argumentTypes[index]
+                    Type = argumentTypes[index],
 
                     // We do not infer MessagePartDescription.ProtectionLevel
                 };
@@ -370,7 +370,7 @@ namespace System.ServiceModel.Activities
             FaultDescription result = new FaultDescription(action)
             {
                 Namespace = operation.DeclaringContract.Namespace,
-                DetailType = faultType
+                DetailType = faultType,
             };
             result.SetNameOnly(new XmlName(name));
             return result;

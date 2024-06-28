@@ -59,7 +59,7 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     public async Task Constructor_SuppressInputFormatterBuffering_UsingMvcOptions_DoesNotBufferRequestBody()
     {
         // Arrange
-        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = true, };
+        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = true };
         var formatter = new NewtonsoftJsonInputFormatter(
             GetLogger(),
             _serializerSettings,
@@ -93,7 +93,7 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
     public async Task Version_2_1_Constructor_SuppressInputFormatterBufferingSetToTrue_UsingMutatedOptions()
     {
         // Arrange
-        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = false, };
+        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = false };
         var formatter = new NewtonsoftJsonInputFormatter(
             GetLogger(),
             _serializerSettings,
@@ -152,7 +152,7 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
         // by default we ignore missing members, so here explicitly changing it
         var serializerSettings = new JsonSerializerSettings
         {
-            MissingMemberHandling = MissingMemberHandling.Error
+            MissingMemberHandling = MissingMemberHandling.Error,
         };
         var formatter = CreateFormatter(
             serializerSettings,
@@ -346,7 +346,7 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             ArrayPool<char>.Shared,
             _objectPoolProvider,
             new MvcOptions(),
-            new MvcNewtonsoftJsonOptions() { AllowInputFormatterExceptionMessages = true, }
+            new MvcNewtonsoftJsonOptions() { AllowInputFormatterExceptionMessages = true }
         );
 
         var contentBytes = Encoding.UTF8.GetBytes("{");
@@ -583,7 +583,7 @@ public class NewtonsoftJsonInputFormatterTest : JsonInputFormatterTestBase
             Error = (sender, eventArgs) =>
             {
                 eventArgs.ErrorContext.Handled = true;
-            }
+            },
         };
         var formatter = new NewtonsoftJsonInputFormatter(
             GetLogger(),

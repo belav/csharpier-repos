@@ -27,7 +27,7 @@ namespace Tracing.Tests.RundownValidation
 
             var providers = new List<EventPipeProvider>()
             {
-                new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose)
+                new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose),
             };
 
             return IpcTraceTest.RunAndValidateEventCounts(
@@ -44,7 +44,7 @@ namespace Tracing.Tests.RundownValidation
             ExpectedEventCount
         >()
         {
-            { "Microsoft-Windows-DotNETRuntimeRundown", -1 }
+            { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
         };
 
         // We only care about rundown so skip generating any events.

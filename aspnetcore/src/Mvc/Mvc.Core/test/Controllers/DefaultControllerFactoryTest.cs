@@ -19,13 +19,13 @@ public class DefaultControllerFactoryTest
         var expected = new MyController();
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerTypeInfo = typeof(MyController).GetTypeInfo()
+            ControllerTypeInfo = typeof(MyController).GetTypeInfo(),
         };
 
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices() },
         };
 
         var activator = new Mock<IControllerActivator>();
@@ -48,13 +48,13 @@ public class DefaultControllerFactoryTest
         // Arrange
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerTypeInfo = typeof(ControllerWithAttributes).GetTypeInfo()
+            ControllerTypeInfo = typeof(ControllerWithAttributes).GetTypeInfo(),
         };
 
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices() },
         };
         var factory = CreateControllerFactory(
             new DefaultControllerActivator(new TypeActivatorCache())
@@ -74,13 +74,13 @@ public class DefaultControllerFactoryTest
         // Arrange
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerTypeInfo = typeof(ControllerWithAttributes).GetTypeInfo()
+            ControllerTypeInfo = typeof(ControllerWithAttributes).GetTypeInfo(),
         };
 
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices() },
         };
         var factory = CreateControllerFactory(
             new DefaultControllerActivator(new TypeActivatorCache())
@@ -100,13 +100,13 @@ public class DefaultControllerFactoryTest
         // Arrange
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerTypeInfo = typeof(ControllerWithoutAttributes).GetTypeInfo()
+            ControllerTypeInfo = typeof(ControllerWithoutAttributes).GetTypeInfo(),
         };
 
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices() },
         };
         var factory = CreateControllerFactory(
             new DefaultControllerActivator(new TypeActivatorCache())
@@ -126,13 +126,13 @@ public class DefaultControllerFactoryTest
         // Arrange
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerTypeInfo = typeof(ControllerWithNonVisibleProperties).GetTypeInfo()
+            ControllerTypeInfo = typeof(ControllerWithNonVisibleProperties).GetTypeInfo(),
         };
 
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices() },
         };
         var factory = CreateControllerFactory(
             new DefaultControllerActivator(new TypeActivatorCache())
@@ -153,13 +153,13 @@ public class DefaultControllerFactoryTest
         // Arrange
         var actionDescriptor = new ControllerActionDescriptor
         {
-            ControllerTypeInfo = typeof(ControllerThatCannotBeActivated).GetTypeInfo()
+            ControllerTypeInfo = typeof(ControllerThatCannotBeActivated).GetTypeInfo(),
         };
 
         var context = new ControllerContext()
         {
             ActionDescriptor = actionDescriptor,
-            HttpContext = new DefaultHttpContext() { RequestServices = GetServices(), },
+            HttpContext = new DefaultHttpContext() { RequestServices = GetServices() },
         };
         var factory = CreateControllerFactory(
             new DefaultControllerActivator(new TypeActivatorCache())

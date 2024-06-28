@@ -80,12 +80,17 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalBlockSizes =
         {
-            new KeySizes(minSize: 64, maxSize: 64, skipSize: 0)
+            new KeySizes(minSize: 64, maxSize: 64, skipSize: 0),
         };
 
         private static readonly KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(minSize: 40, maxSize: 1024, skipSize: 8) // 1024 bits is theoretical max according to the RFC
+            new KeySizes(
+                minSize: 40,
+                maxSize: 1024,
+                skipSize: 8
+            ) // 1024 bits is theoretical max according to the RFC
+            ,
         };
     }
 }

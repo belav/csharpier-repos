@@ -21,7 +21,7 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     typeof(CInterfaceImplementerI1I2).Project(),
-                    new Type[] { typeof(Interface1).Project(), typeof(Interface2).Project() }
+                    new Type[] { typeof(Interface1).Project(), typeof(Interface2).Project() },
                 };
 
                 yield return new object[]
@@ -31,8 +31,8 @@ namespace System.Reflection.Tests
                     {
                         typeof(Interface1).Project(),
                         typeof(Interface2).Project(),
-                        typeof(Interface3).Project()
-                    }
+                        typeof(Interface3).Project(),
+                    },
                 };
 
                 yield return new object[]
@@ -43,8 +43,8 @@ namespace System.Reflection.Tests
                         typeof(Interface123).Project(),
                         typeof(Interface1).Project(),
                         typeof(Interface2).Project(),
-                        typeof(Interface3).Project()
-                    }
+                        typeof(Interface3).Project(),
+                    },
                 };
 
                 yield return new object[]
@@ -54,8 +54,8 @@ namespace System.Reflection.Tests
                     {
                         typeof(InterfaceII5).Project(),
                         typeof(InterfaceI5).Project(),
-                        typeof(Interface5).Project()
-                    }
+                        typeof(Interface5).Project(),
+                    },
                 };
 
                 yield return new object[]
@@ -64,8 +64,8 @@ namespace System.Reflection.Tests
                     new Type[]
                     {
                         typeof(IGeneric1<int>).Project(),
-                        typeof(IGeneric2<string>).Project()
-                    }
+                        typeof(IGeneric2<string>).Project(),
+                    },
                 };
 
                 yield return new object[]
@@ -74,7 +74,7 @@ namespace System.Reflection.Tests
                         .Project()
                         .GetTypeInfo()
                         .GenericTypeParameters[0],
-                    new Type[] { typeof(IConstrained1).Project() }
+                    new Type[] { typeof(IConstrained1).Project() },
                 };
 
                 yield return new object[]
@@ -86,8 +86,8 @@ namespace System.Reflection.Tests
                         typeof(IEnumerable<int>).Project(),
                         typeof(ICollection<int>).Project(),
                         typeof(IList<int>).Project(),
-                        typeof(IReadOnlyList<int>).Project()
-                    }
+                        typeof(IReadOnlyList<int>).Project(),
+                    },
                 };
             }
         }

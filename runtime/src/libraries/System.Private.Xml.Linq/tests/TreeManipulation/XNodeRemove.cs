@@ -40,7 +40,7 @@ namespace XLinqTests
                 new XDocument(
                     new XDeclaration("1.0", "UTF8", "true"),
                     new XElement("c", new XAttribute("id", "a0"), new XElement("cc"))
-                )
+                ),
             };
 
             foreach (XNode n in nodes)
@@ -79,7 +79,7 @@ namespace XLinqTests
                 new XText(" "),
                 new XText(" "),
                 new XComment("comment1"),
-                new XComment("comment2")
+                new XComment("comment2"),
             };
 
             foreach (var nodes in data.NonRecursiveVariations(itemCount))
@@ -135,7 +135,7 @@ namespace XLinqTests
                 "string1",
                 "string2",
                 new XComment("comment1"),
-                new XComment("comment2")
+                new XComment("comment2"),
             };
 
             foreach (var nodes in data.NonRecursiveVariations(itemCount))

@@ -39,7 +39,7 @@ namespace System.Web.Util
         QueryString = 1,
         Form = 2,
         Cookies = 3,
-        ServerVars = 4
+        ServerVars = 4,
     }
 
     [

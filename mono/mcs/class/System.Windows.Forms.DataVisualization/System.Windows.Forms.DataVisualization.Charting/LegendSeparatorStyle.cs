@@ -36,6 +36,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         DashLine = 4,
         DotLine = 5,
         GradientLine = 6,
-        ThickGradientLine = 7
+        ThickGradientLine = 7,
     }
 }

@@ -44,11 +44,9 @@ namespace BenchmarksGame
         static int read(Stream stream, byte[] buffer, int offset, int count)
         {
             var bytesRead = stream.Read(buffer, offset, count);
-            return bytesRead == count
-                ? offset + count
-                : bytesRead == 0
-                    ? offset
-                    : read(stream, buffer, offset + bytesRead, count - bytesRead);
+            return bytesRead == count ? offset + count
+                : bytesRead == 0 ? offset
+                : read(stream, buffer, offset + bytesRead, count - bytesRead);
         }
 
         static Stream ReaderStream;
@@ -123,7 +121,7 @@ namespace BenchmarksGame
                     {
                         Pages = data,
                         StartHeader = startHeader,
-                        EndExclusive = i
+                        EndExclusive = i,
                     };
                     if (afterFirst)
                         (sequence.ReverseThread = new Thread(() => Reverse(sequence))).Start();
@@ -139,7 +137,7 @@ namespace BenchmarksGame
             {
                 Pages = data,
                 StartHeader = startHeader,
-                EndExclusive = i == -1 ? data[data.Count - 1].Length : i
+                EndExclusive = i == -1 ? data[data.Count - 1].Length : i,
             };
             Reverse(lastSequence);
             writeQue.Add(lastSequence);

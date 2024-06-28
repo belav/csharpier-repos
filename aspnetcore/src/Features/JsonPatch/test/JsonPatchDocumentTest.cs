@@ -95,7 +95,7 @@ public class JsonPatchDocumentTest
             DecimalValue = 10,
             DoubleValue = 10,
             FloatValue = 10,
-            IntegerValue = 10
+            IntegerValue = 10,
         };
 
         var patchDocument = new JsonPatchDocument<SimpleObject>();

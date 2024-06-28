@@ -530,7 +530,7 @@ namespace System.Net.Http.HPack
                 27,
                 27,
                 26,
-                30
+                30,
             ];
 
         private static readonly ushort[] s_decodingTree = GenerateDecodingLookupTree();

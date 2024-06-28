@@ -98,6 +98,6 @@ namespace System.Web.UI
 
         WhiteSpace,
 
-        ZIndex
+        ZIndex,
     }
 }

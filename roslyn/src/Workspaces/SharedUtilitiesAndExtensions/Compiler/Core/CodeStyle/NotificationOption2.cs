@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 ReportDiagnostic.Info => Suggestion,
                 ReportDiagnostic.Hidden or ReportDiagnostic.Default => Silent,
                 ReportDiagnostic.Suppress => None,
-                _ => throw ExceptionUtilities.UnexpectedValue(reportDiagnostic)
+                _ => throw ExceptionUtilities.UnexpectedValue(reportDiagnostic),
             };
 
         public static NotificationOption2 ForSeverity(DiagnosticSeverity severity) =>
@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 DiagnosticSeverity.Warning => Warning,
                 DiagnosticSeverity.Info => Suggestion,
                 DiagnosticSeverity.Hidden => Silent,
-                _ => throw ExceptionUtilities.UnexpectedValue(severity)
+                _ => throw ExceptionUtilities.UnexpectedValue(severity),
             };
     }
 }

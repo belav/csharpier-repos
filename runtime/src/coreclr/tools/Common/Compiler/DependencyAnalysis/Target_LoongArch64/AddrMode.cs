@@ -9,7 +9,7 @@ namespace ILCompiler.DependencyAnalysis.LoongArch64
         Int16 = 2,
         Int32 = 4,
         Int64 = 8,
-        Int128 = 16
+        Int128 = 16,
     }
 
     public struct AddrMode

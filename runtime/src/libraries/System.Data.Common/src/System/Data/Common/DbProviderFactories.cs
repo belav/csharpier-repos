@@ -97,27 +97,27 @@ namespace System.Data.Common
         {
             DataColumn nameColumn = new DataColumn(NameColumnName, typeof(string))
             {
-                ReadOnly = true
+                ReadOnly = true,
             };
             DataColumn descriptionColumn = new DataColumn(DescriptionColumnName, typeof(string))
             {
-                ReadOnly = true
+                ReadOnly = true,
             };
             DataColumn invariantNameColumn = new DataColumn(InvariantNameColumnName, typeof(string))
             {
-                ReadOnly = true
+                ReadOnly = true,
             };
             DataColumn assemblyQualifiedNameColumn = new DataColumn(
                 AssemblyQualifiedNameColumnName,
                 typeof(string)
             )
             {
-                ReadOnly = true
+                ReadOnly = true,
             };
 
             DataTable toReturn = new DataTable(ProviderGroupColumnName)
             {
-                Locale = CultureInfo.InvariantCulture
+                Locale = CultureInfo.InvariantCulture,
             };
             toReturn.Columns.AddRange(
                 new[]
@@ -125,7 +125,7 @@ namespace System.Data.Common
                     nameColumn,
                     descriptionColumn,
                     invariantNameColumn,
-                    assemblyQualifiedNameColumn
+                    assemblyQualifiedNameColumn,
                 }
             );
             toReturn.PrimaryKey = new[] { invariantNameColumn };

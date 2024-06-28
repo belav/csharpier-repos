@@ -32,6 +32,6 @@ namespace System.Messaging
         Peek = 32,
 
         PeekAndAdmin = Peek + 128,
-        ReceiveAndAdmin = Receive + 128
+        ReceiveAndAdmin = Receive + 128,
     }
 }

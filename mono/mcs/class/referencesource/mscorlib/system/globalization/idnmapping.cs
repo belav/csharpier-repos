@@ -850,11 +850,9 @@ namespace System.Globalization
                                 for (q = delta, k = punycodeBase; ; k += punycodeBase)
                                 {
                                     int t =
-                                        k <= bias
-                                            ? tmin
-                                            : k >= bias + tmax
-                                                ? tmax
-                                                : k - bias;
+                                        k <= bias ? tmin
+                                        : k >= bias + tmax ? tmax
+                                        : k - bias;
                                     if (q < t)
                                         break;
                                     Contract.Assert(
@@ -1117,11 +1115,9 @@ namespace System.Globalization
 
                             i += (int)(digit * w);
                             int t =
-                                k <= bias
-                                    ? tmin
-                                    : k >= bias + tmax
-                                        ? tmax
-                                        : k - bias;
+                                k <= bias ? tmin
+                                : k >= bias + tmax ? tmax
+                                : k - bias;
                             if (digit < t)
                                 break;
                             Contract.Assert(

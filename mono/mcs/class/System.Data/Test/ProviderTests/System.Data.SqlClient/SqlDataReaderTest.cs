@@ -323,7 +323,7 @@ namespace MonoTests.System.Data.Connected.SqlClient
             0x66,
             0x06,
             0x66,
-            0x98
+            0x98,
         };
 
         SqlConnection conn = null;
@@ -3730,7 +3730,7 @@ namespace MonoTests.System.Data.Connected.SqlClient
                 new object[] { "XmlSchemaCollectionName", typeof(string) },
                 new object[] { "UdtAssemblyQualifiedName", typeof(string) },
                 new object[] { "NonVersionedProviderType", typeof(int) },
-                new object[] { "IsColumnSet", typeof(bool) }
+                new object[] { "IsColumnSet", typeof(bool) },
             };
 
             Assert.AreEqual(columns.Length, schemaTable.Columns.Count, prefix);

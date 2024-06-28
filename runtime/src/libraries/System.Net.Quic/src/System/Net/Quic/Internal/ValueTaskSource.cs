@@ -19,7 +19,7 @@ internal sealed class ValueTaskSource : IValueTaskSource
     {
         None,
         Awaiting,
-        Completed
+        Completed,
     }
 
     private State _state;
@@ -32,7 +32,7 @@ internal sealed class ValueTaskSource : IValueTaskSource
         _state = State.None;
         _valueTaskSource = new ManualResetValueTaskSourceCore<bool>()
         {
-            RunContinuationsAsynchronously = true
+            RunContinuationsAsynchronously = true,
         };
         _cancellationRegistration = default;
         _keepAlive = default;

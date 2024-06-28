@@ -111,7 +111,7 @@ namespace Mono.Xml
             CR = 0xD,
             EOL = 0xE,
             CHARS = 0xF,
-            UNKNOWN = 0x1F
+            UNKNOWN = 0x1F,
         }
 
         private enum ActionCode : byte
@@ -130,7 +130,7 @@ namespace Mono.Xml
             ACC_CHARS_STATE_CHANGE = 0xB,
             ACC_CDATA = 0xC,
             PROC_CHAR_REF = 0xD,
-            UNKNOWN = 0xF
+            UNKNOWN = 0xF,
         }
 
         public class AttrListImpl : IMutableAttrList
@@ -701,7 +701,7 @@ namespace Mono.Xml
             (ushort)(((ushort)CharKind.DQUOTE << 12) | ((ushort)ActionCode.ACC_CDATA << 8) | 19),
             (ushort)(((ushort)CharKind.CHARS << 12) | ((ushort)ActionCode.ACC_CDATA << 8) | 19),
             (ushort)(((ushort)CharKind.CHARS << 12) | ((ushort)ActionCode.UNKNOWN << 8) | 255),
-            0xFFFF
+            0xFFFF,
         };
 
         protected static string[] errors =
@@ -713,7 +713,7 @@ namespace Mono.Xml
             /* 4 */"Invalid attr value",
             /* 5 */"Empty tag",
             /* 6 */"No end tag",
-            /* 7 */"Bad entity ref"
+            /* 7 */"Bad entity ref",
         };
 
         protected int line;

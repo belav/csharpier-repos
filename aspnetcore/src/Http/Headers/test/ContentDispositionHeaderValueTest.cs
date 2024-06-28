@@ -549,7 +549,7 @@ public class ContentDispositionHeaderValueTest
             "inline;name=",
             new ContentDispositionHeaderValue("inline")
             {
-                Parameters = { new NameValueHeaderValue("name", "") }
+                Parameters = { new NameValueHeaderValue("name", "") },
             }
         }, // TODO: passing in a null value causes a strange assert on CoreCLR before the test even starts. Not reproducible in the body of a test.
         {
@@ -586,14 +586,14 @@ public class ContentDispositionHeaderValueTest
             @"attachment; filename=""\""quoting\"" tested.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                FileName = "\"\"quoting\" tested.html\""
+                FileName = "\"\"quoting\" tested.html\"",
             }
         }, // 'attachment', specifying a filename of \"quoting\" tested.html (using double quotes around "quoting" to test... quoting)
         {
             @"attachment; filename=""Here's a semicolon;.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                FileName = @"""Here's a semicolon;.html"""
+                FileName = @"""Here's a semicolon;.html""",
             }
         }, // , 'attachment', specifying a filename of Here's a semicolon;.html - this checks for proper parsing for parameters.
         {
@@ -601,7 +601,7 @@ public class ContentDispositionHeaderValueTest
             new ContentDispositionHeaderValue(@"attachment")
             {
                 FileName = @"""foo.html""",
-                Parameters = { new NameValueHeaderValue("foo", @"""bar""") }
+                Parameters = { new NameValueHeaderValue("foo", @"""bar""") },
             }
         }, // 'attachment', specifying a filename of foo.html and an extension parameter "foo" which should be ignored (see <a href="http://greenbytes.de/tech/webdav/rfc2183.html#rfc.section.2.8">Section 2.8 of RFC 2183</a>.).
         {
@@ -609,7 +609,7 @@ public class ContentDispositionHeaderValueTest
             new ContentDispositionHeaderValue(@"attachment")
             {
                 FileName = @"""foo.html""",
-                Parameters = { new NameValueHeaderValue("foo", @"""\""\\""") }
+                Parameters = { new NameValueHeaderValue("foo", @"""\""\\""") },
             }
         }, // 'attachment', specifying a filename of foo.html and an extension parameter "foo" which should be ignored (see <a href="http://greenbytes.de/tech/webdav/rfc2183.html#rfc.section.2.8">Section 2.8 of RFC 2183</a>.). The extension parameter actually uses backslash-escapes. This tests whether the UA properly skips the parameter.
         {
@@ -628,35 +628,35 @@ public class ContentDispositionHeaderValueTest
             @"attachment; filename=""foo-ä.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("filename", @"""foo-ä.html""") }
+                Parameters = { new NameValueHeaderValue("filename", @"""foo-ä.html""") },
             }
         }, // 'attachment', specifying a filename of foo-ä.html, using plain ISO-8859-1
         {
             @"attachment; filename=""foo-&#xc3;&#xa4;.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                FileName = @"""foo-&#xc3;&#xa4;.html"""
+                FileName = @"""foo-&#xc3;&#xa4;.html""",
             }
         }, // 'attachment', specifying a filename of foo-&#xc3;&#xa4;.html, which happens to be foo-ä.html using UTF-8 encoding.
         {
             @"attachment; filename=""foo-%41.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("filename", @"""foo-%41.html""") }
+                Parameters = { new NameValueHeaderValue("filename", @"""foo-%41.html""") },
             }
         },
         {
             @"attachment; filename=""50%.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("filename", @"""50%.html""") }
+                Parameters = { new NameValueHeaderValue("filename", @"""50%.html""") },
             }
         },
         {
             @"attachment; filename=""foo-%\41.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("filename", @"""foo-%\41.html""") }
+                Parameters = { new NameValueHeaderValue("filename", @"""foo-%\41.html""") },
             }
         }, // 'attachment', specifying a filename of foo-%41.html, using an escape character (this tests whether adding an escape character inside a %xx sequence can be used to disable the non-conformant %xx-unescaping).
         {
@@ -667,14 +667,14 @@ public class ContentDispositionHeaderValueTest
             @"attachment; filename=""ä-%41.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("filename", @"""ä-%41.html""") }
+                Parameters = { new NameValueHeaderValue("filename", @"""ä-%41.html""") },
             }
         }, // 'attachment', specifying a filename parameter of ä-%41.html. (this test was added to observe the behavior when non-ASCII characters and percent-hexdig sequences are combined)
         {
             @"attachment; filename=""foo-%c3%a4-%e2%82%ac.html""",
             new ContentDispositionHeaderValue("attachment")
             {
-                FileName = @"""foo-%c3%a4-%e2%82%ac.html"""
+                FileName = @"""foo-%c3%a4-%e2%82%ac.html""",
             }
         }, // 'attachment', specifying a filename of foo-%c3%a4-%e2%82%ac.html, using raw percent encoded UTF-8 to represent foo-ä-&#x20ac;.html
         {
@@ -685,7 +685,7 @@ public class ContentDispositionHeaderValueTest
             @"attachment; xfilename=foo.html",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("xfilename", "foo.html") }
+                Parameters = { new NameValueHeaderValue("xfilename", "foo.html") },
             }
         },
         {
@@ -701,8 +701,8 @@ public class ContentDispositionHeaderValueTest
                     new NameValueHeaderValue(
                         "creation-date",
                         @"""Wed, 12 Feb 1997 16:29:51 -0500"""
-                    )
-                }
+                    ),
+                },
             }
         },
         {
@@ -714,8 +714,8 @@ public class ContentDispositionHeaderValueTest
                     new NameValueHeaderValue(
                         "modification-date",
                         @"""Wed, 12 Feb 1997 16:29:51 -0500"""
-                    )
-                }
+                    ),
+                },
             }
         },
         { @"foobar", new ContentDispositionHeaderValue("foobar") }, //  @"This should be equivalent to using ""attachment""."
@@ -723,14 +723,14 @@ public class ContentDispositionHeaderValueTest
             @"attachment; example=""filename=example.txt""",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("example", @"""filename=example.txt""") }
+                Parameters = { new NameValueHeaderValue("example", @"""filename=example.txt""") },
             }
         },
         {
             @"attachment; filename*=iso-8859-1''foo-%E4.html",
             new ContentDispositionHeaderValue("attachment")
             {
-                Parameters = { new NameValueHeaderValue("filename*", "iso-8859-1''foo-%E4.html") }
+                Parameters = { new NameValueHeaderValue("filename*", "iso-8859-1''foo-%E4.html") },
             }
         }, // 'attachment', specifying a filename of foo-ä.html, using RFC2231 encoded ISO-8859-1
         {
@@ -739,8 +739,8 @@ public class ContentDispositionHeaderValueTest
             {
                 Parameters =
                 {
-                    new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4-%e2%82%ac.html")
-                }
+                    new NameValueHeaderValue("filename*", "UTF-8''foo-%c3%a4-%e2%82%ac.html"),
+                },
             }
         }, // 'attachment', specifying a filename of foo-ä-&#x20ac;.html, using RFC2231 encoded UTF-8
         {
@@ -749,8 +749,8 @@ public class ContentDispositionHeaderValueTest
             {
                 Parameters =
                 {
-                    new NameValueHeaderValue("filename*", "''foo-%c3%a4-%e2%82%ac.html")
-                }
+                    new NameValueHeaderValue("filename*", "''foo-%c3%a4-%e2%82%ac.html"),
+                },
             }
         }, // Behavior is undefined in RFC 2231, the charset part is missing, although UTF-8 was used.
         {
@@ -778,7 +778,7 @@ public class ContentDispositionHeaderValueTest
             new ContentDispositionHeaderValue("attachment")
             {
                 FileName = @"""foo-ae.html""",
-                FileNameStar = "foo-ä.html"
+                FileNameStar = "foo-ä.html",
             }
         },
         {
@@ -786,7 +786,7 @@ public class ContentDispositionHeaderValueTest
             new ContentDispositionHeaderValue("attachment")
             {
                 FileNameStar = "foo-ä.html",
-                FileName = @"""foo-ae.html"""
+                FileName = @"""foo-ae.html""",
             }
         },
         {
@@ -794,21 +794,21 @@ public class ContentDispositionHeaderValueTest
             new ContentDispositionHeaderValue("attachment")
             {
                 FileName = @"""foo.html""",
-                Parameters = { new NameValueHeaderValue("foobar", "x") }
+                Parameters = { new NameValueHeaderValue("foobar", "x") },
             }
         },
         {
             @"attachment; filename=""=?ISO-8859-1?Q?foo-=E4.html?=""",
             new ContentDispositionHeaderValue("attachment")
             {
-                FileName = @"""=?ISO-8859-1?Q?foo-=E4.html?="""
+                FileName = @"""=?ISO-8859-1?Q?foo-=E4.html?=""",
             }
         }, // attachment; filename="=?ISO-8859-1?Q?foo-=E4.html?="
         {
             @"attachment; filename=""=?utf-8?B?Zm9vLeQuaHRtbA==?=""",
             new ContentDispositionHeaderValue("attachment")
             {
-                FileName = @"""=?utf-8?B?Zm9vLeQuaHRtbA==?="""
+                FileName = @"""=?utf-8?B?Zm9vLeQuaHRtbA==?=""",
             }
         }, // attachment; filename="=?utf-8?B?Zm9vLeQuaHRtbA==?="
         {

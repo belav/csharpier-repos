@@ -39,7 +39,7 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var connection = new SubDirectoryConnection
             {
-                Credential = new NetworkCredential("username", "password")
+                Credential = new NetworkCredential("username", "password"),
             };
             connection.Credential = null;
         }

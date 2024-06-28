@@ -23,6 +23,7 @@ namespace System
             "Europe/Simferopol", // Prefer "Simferopol Time" over "Moscow Standard Time (Simferopol)"
             "Pacific/Apia", // Prefer "Samoa Time" over "Apia Time"
             "Pacific/Pitcairn" // Prefer "Pitcairn Islands Time" over "Pitcairn Time"
+            ,
         };
 #endif
 

@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 0 => MethodDeclaration,
                 1 => FileInformationExpression,
                 2 => EndOfLineToken,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 }

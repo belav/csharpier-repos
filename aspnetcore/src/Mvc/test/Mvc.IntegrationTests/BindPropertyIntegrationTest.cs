@@ -198,7 +198,7 @@ public class BindPropertyIntegrationTest
         var propertyDescriptor = new PageBoundPropertyDescriptor
         {
             BindingInfo = BindingInfo.GetBindingInfo(
-                new[] { new FromQueryAttribute { Name = propertyInfo.Name }, }
+                new[] { new FromQueryAttribute { Name = propertyInfo.Name } }
             ),
             Name = propertyInfo.Name,
             ParameterType = propertyInfo.PropertyType,

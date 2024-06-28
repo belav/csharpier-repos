@@ -49,6 +49,6 @@ namespace System.Diagnostics
         /// <devdoc>
         ///     Time critical priority
         /// </devdoc>
-        TimeCritical = 15
+        TimeCritical = 15,
     }
 }

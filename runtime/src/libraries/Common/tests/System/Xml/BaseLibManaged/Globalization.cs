@@ -676,7 +676,7 @@ namespace WebData.BaseLib
             0x309D,
             0x309E,
             0x30FC,
-            0x30FE
+            0x30FE,
         };
 
         public static string GetIllegalXmlString(int iMaxChar, bool bAbsolute)

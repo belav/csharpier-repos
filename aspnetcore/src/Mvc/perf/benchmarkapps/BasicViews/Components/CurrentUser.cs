@@ -14,7 +14,7 @@ namespace BasicViews.Components
             "Joe",
             "Larry",
             "Moe",
-            "Shemp"
+            "Shemp",
         };
         private static int index = 0;
 

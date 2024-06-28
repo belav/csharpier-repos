@@ -360,7 +360,7 @@ public class RoutingEndpointRoutingTest : RoutingTestsBase<RoutingWebSite.Startu
                 {
                     action = "Param",
                     controller = "ConventionalTransformer",
-                    param = "MyValue"
+                    param = "MyValue",
                 }
             );
 

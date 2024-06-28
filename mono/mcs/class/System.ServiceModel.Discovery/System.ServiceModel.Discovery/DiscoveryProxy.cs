@@ -139,7 +139,7 @@ namespace System.ServiceModel.Discovery
                 MessageSequence = new DiscoveryMessageSequence11(
                     DiscoveryMessageSequenceGenerator.Next()
                 ),
-                Body = new EndpointDiscoveryMetadata11(ret)
+                Body = new EndpointDiscoveryMetadata11(ret),
             };
         }
 
@@ -184,7 +184,7 @@ namespace System.ServiceModel.Discovery
                 MessageSequence = new DiscoveryMessageSequenceApril2005(
                     DiscoveryMessageSequenceGenerator.Next()
                 ),
-                Body = new EndpointDiscoveryMetadataApril2005(ret)
+                Body = new EndpointDiscoveryMetadataApril2005(ret),
             };
         }
 
@@ -227,7 +227,7 @@ namespace System.ServiceModel.Discovery
                 MessageSequence = new DiscoveryMessageSequenceCD1(
                     DiscoveryMessageSequenceGenerator.Next()
                 ),
-                Body = new EndpointDiscoveryMetadataCD1(ret)
+                Body = new EndpointDiscoveryMetadataCD1(ret),
             };
         }
 

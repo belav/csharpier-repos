@@ -68,7 +68,7 @@ namespace System.Web.Mvc.Routing
 
             RouteValueDictionary defaults = new RouteValueDictionary
             {
-                { "controller", controllerName }
+                { "controller", controllerName },
             };
 
             Type controllerType = controllerDescriptor.ControllerType;
@@ -99,7 +99,7 @@ namespace System.Web.Mvc.Routing
             {
                 Defaults = defaults,
                 Constraints = constraints,
-                DataTokens = dataTokens
+                DataTokens = dataTokens,
             };
 
             return route;
@@ -142,7 +142,7 @@ namespace System.Web.Mvc.Routing
             RouteValueDictionary defaults = new RouteValueDictionary
             {
                 { "controller", controllerName },
-                { "action", actionName }
+                { "action", actionName },
             };
 
             RouteValueDictionary constraints = new RouteValueDictionary();
@@ -208,7 +208,7 @@ namespace System.Web.Mvc.Routing
             {
                 Defaults = defaults,
                 Constraints = constraints,
-                DataTokens = dataTokens
+                DataTokens = dataTokens,
             };
 
             return route;

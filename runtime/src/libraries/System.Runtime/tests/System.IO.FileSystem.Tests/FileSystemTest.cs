@@ -19,7 +19,7 @@ namespace System.IO.Tests
             0xF0,
             0x07,
             0xBA,
-            0x11
+            0x11,
         };
 
         public static bool AreAllLongPathsAvailable => PathFeatures.AreAllLongPathsAvailable();
@@ -63,7 +63,7 @@ namespace System.IO.Tests
                 {
                     "",
                     "" + Path.DirectorySeparatorChar,
-                    "" + Path.DirectorySeparatorChar + Path.DirectorySeparatorChar
+                    "" + Path.DirectorySeparatorChar + Path.DirectorySeparatorChar,
                 };
 
                 if (PlatformDetection.IsWindows)
@@ -195,7 +195,7 @@ namespace System.IO.Tests
                     {
                         FileName = "/bin/sh",
                         ArgumentList = { "-c", "umask" },
-                        RedirectStandardOutput = true
+                        RedirectStandardOutput = true,
                     }
                 );
                 string stdout = px.StandardOutput.ReadToEnd().Trim();

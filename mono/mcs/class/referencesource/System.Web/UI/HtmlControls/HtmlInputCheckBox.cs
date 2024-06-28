@@ -30,7 +30,7 @@ namespace System.Web.UI.HtmlControls
     ///       element on the server.
     ///    </para>
     /// </devdoc>
-    [DefaultEvent("ServerChange"), SupportsEventValidation,]
+    [DefaultEvent("ServerChange"), SupportsEventValidation]
     public class HtmlInputCheckBox : HtmlInputControl, IPostBackDataHandler
     {
         private static readonly object EventServerChange = new object();

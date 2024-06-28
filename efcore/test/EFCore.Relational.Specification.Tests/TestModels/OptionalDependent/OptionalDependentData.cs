@@ -27,16 +27,16 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "11",
-                    OpNested2 = 11
+                    OpNested2 = 11,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(2001, 1, 1),
                     OpNested1 = "1001",
-                    OpNested2 = 1001
-                }
-            }
+                    OpNested2 = 1001,
+                },
+            },
         };
 
         var e2 = new OptionalDependentEntityAllOptional
@@ -50,16 +50,16 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = 21
+                    OpNested2 = 21,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(2002, 1, 1),
                     OpNested1 = "2001",
-                    OpNested2 = 2001
-                }
-            }
+                    OpNested2 = 2001,
+                },
+            },
         };
 
         var e3 = new OptionalDependentEntityAllOptional
@@ -73,16 +73,16 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = null
+                    OpNested2 = null,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(2003, 1, 1),
                     OpNested1 = "3001",
-                    OpNested2 = 3001
-                }
-            }
+                    OpNested2 = 3001,
+                },
+            },
         };
 
         var e4 = new OptionalDependentEntityAllOptional
@@ -96,16 +96,16 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = 41
+                    OpNested2 = 41,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(2004, 1, 1),
                     OpNested1 = null,
-                    OpNested2 = 4001
-                }
-            }
+                    OpNested2 = 4001,
+                },
+            },
         };
 
         var e5 = new OptionalDependentEntityAllOptional
@@ -119,16 +119,16 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = 51
+                    OpNested2 = 51,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(2005, 1, 1),
                     OpNested1 = null,
-                    OpNested2 = null
-                }
-            }
+                    OpNested2 = null,
+                },
+            },
         };
 
         var e6 = new OptionalDependentEntityAllOptional
@@ -145,9 +145,9 @@ public class OptionalDependentData : ISetSource
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(2005, 1, 1),
                     OpNested1 = null,
-                    OpNested2 = 6001
-                }
-            }
+                    OpNested2 = 6001,
+                },
+            },
         };
 
         var e7 = new OptionalDependentEntityAllOptional
@@ -161,10 +161,10 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = 71
+                    OpNested2 = 71,
                 },
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e8 = new OptionalDependentEntityAllOptional
@@ -178,10 +178,10 @@ public class OptionalDependentData : ISetSource
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = null
+                    OpNested2 = null,
                 },
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e9 = new OptionalDependentEntityAllOptional
@@ -193,8 +193,8 @@ public class OptionalDependentData : ISetSource
                 OpProp1 = "9",
                 OpProp2 = 9,
                 OpNav1 = null,
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e10 = new OptionalDependentEntityAllOptional
@@ -206,8 +206,8 @@ public class OptionalDependentData : ISetSource
                 OpProp1 = "10",
                 OpProp2 = null,
                 OpNav1 = null,
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e11 = new OptionalDependentEntityAllOptional
@@ -219,15 +219,15 @@ public class OptionalDependentData : ISetSource
                 OpProp1 = null,
                 OpProp2 = null,
                 OpNav1 = null,
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e12 = new OptionalDependentEntityAllOptional
         {
             Id = 12,
             Name = "op_e12",
-            Json = null
+            Json = null,
         };
 
         return new List<OptionalDependentEntityAllOptional>
@@ -243,7 +243,7 @@ public class OptionalDependentData : ISetSource
             e9,
             e10,
             e11,
-            e12
+            e12,
         };
     }
 
@@ -262,29 +262,29 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "11",
-                    OpNested2 = 11
+                    OpNested2 = 11,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4001, 1, 1),
                     OpNested1 = "12",
-                    OpNested2 = 12
+                    OpNested2 = 12,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "13",
-                    OpNested2 = 13
+                    OpNested2 = 13,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5001, 1, 1),
                     OpNested1 = "14",
-                    OpNested2 = 14
-                }
-            }
+                    OpNested2 = 14,
+                },
+            },
         };
 
         var e2 = new OptionalDependentEntitySomeRequired
@@ -300,29 +300,29 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = 21
+                    OpNested2 = 21,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4002, 1, 1),
                     OpNested1 = "22",
-                    OpNested2 = 22
+                    OpNested2 = 22,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "23",
-                    OpNested2 = 23
+                    OpNested2 = 23,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5002, 1, 1),
                     OpNested1 = "24",
-                    OpNested2 = 24
-                }
-            }
+                    OpNested2 = 24,
+                },
+            },
         };
 
         var e3 = new OptionalDependentEntitySomeRequired
@@ -338,29 +338,29 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = null
+                    OpNested2 = null,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4003, 1, 1),
                     OpNested1 = "32",
-                    OpNested2 = 32
+                    OpNested2 = 32,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "33",
-                    OpNested2 = 33
+                    OpNested2 = 33,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5003, 1, 1),
                     OpNested1 = "34",
-                    OpNested2 = 34
-                }
-            }
+                    OpNested2 = 34,
+                },
+            },
         };
 
         var e4 = new OptionalDependentEntitySomeRequired
@@ -376,29 +376,29 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "41",
-                    OpNested2 = 41
+                    OpNested2 = 41,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4004, 1, 1),
                     OpNested1 = null,
-                    OpNested2 = null
+                    OpNested2 = null,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "43",
-                    OpNested2 = 43
+                    OpNested2 = 43,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5004, 1, 1),
                     OpNested1 = "44",
-                    OpNested2 = 44
-                }
-            }
+                    OpNested2 = 44,
+                },
+            },
         };
 
         var e5 = new OptionalDependentEntitySomeRequired
@@ -414,29 +414,29 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "51",
-                    OpNested2 = 51
+                    OpNested2 = 51,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4005, 1, 1),
                     OpNested1 = "52",
-                    OpNested2 = 52
+                    OpNested2 = 52,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = null
+                    OpNested2 = null,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5005, 1, 1),
                     OpNested1 = "54",
-                    OpNested2 = 54
-                }
-            }
+                    OpNested2 = 54,
+                },
+            },
         };
 
         var e6 = new OptionalDependentEntitySomeRequired
@@ -452,29 +452,29 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "61",
-                    OpNested2 = 61
+                    OpNested2 = 61,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4006, 1, 1),
                     OpNested1 = "62",
-                    OpNested2 = 62
+                    OpNested2 = 62,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "63",
-                    OpNested2 = 63
+                    OpNested2 = 63,
                 },
                 OpNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5006, 1, 1),
                     OpNested1 = null,
-                    OpNested2 = null
-                }
-            }
+                    OpNested2 = null,
+                },
+            },
         };
 
         var e7 = new OptionalDependentEntitySomeRequired
@@ -490,14 +490,14 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "71",
-                    OpNested2 = 71
+                    OpNested2 = 71,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4007, 1, 1),
                     OpNested1 = "72",
-                    OpNested2 = 72
+                    OpNested2 = 72,
                 },
 
                 OpNav1 = null,
@@ -506,9 +506,9 @@ public class OptionalDependentData : ISetSource
                     ReqNested1 = false,
                     ReqNested2 = new DateTime(5007, 1, 1),
                     OpNested1 = "74",
-                    OpNested2 = 74
-                }
-            }
+                    OpNested2 = 74,
+                },
+            },
         };
 
         var e8 = new OptionalDependentEntitySomeRequired
@@ -524,23 +524,23 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "81",
-                    OpNested2 = 81
+                    OpNested2 = 81,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4008, 1, 1),
                     OpNested1 = "82",
-                    OpNested2 = 82
+                    OpNested2 = 82,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "83",
-                    OpNested2 = 83
+                    OpNested2 = 83,
                 },
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e9 = new OptionalDependentEntitySomeRequired
@@ -556,23 +556,23 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "91",
-                    OpNested2 = 91
+                    OpNested2 = 91,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4009, 1, 1),
                     OpNested1 = "92",
-                    OpNested2 = 92
+                    OpNested2 = 92,
                 },
 
                 OpNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = null,
-                    OpNested2 = null
+                    OpNested2 = null,
                 },
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e10 = new OptionalDependentEntitySomeRequired
@@ -588,19 +588,19 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "101",
-                    OpNested2 = 101
+                    OpNested2 = 101,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4010, 1, 1),
                     OpNested1 = "102",
-                    OpNested2 = 102
+                    OpNested2 = 102,
                 },
 
                 OpNav1 = null,
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e11 = new OptionalDependentEntitySomeRequired
@@ -616,26 +616,26 @@ public class OptionalDependentData : ISetSource
                 ReqNav1 = new OptionalDependentNestedJsonAllOptional
                 {
                     OpNested1 = "111",
-                    OpNested2 = 111
+                    OpNested2 = 111,
                 },
                 ReqNav2 = new OptionalDependentNestedJsonSomeRequired
                 {
                     ReqNested1 = true,
                     ReqNested2 = new DateTime(4011, 1, 1),
                     OpNested1 = "112",
-                    OpNested2 = 112
+                    OpNested2 = 112,
                 },
 
                 OpNav1 = null,
-                OpNav2 = null
-            }
+                OpNav2 = null,
+            },
         };
 
         var e12 = new OptionalDependentEntitySomeRequired
         {
             Id = 12,
             Name = "req_e12",
-            Json = null
+            Json = null,
         };
 
         return new List<OptionalDependentEntitySomeRequired>
@@ -651,7 +651,7 @@ public class OptionalDependentData : ISetSource
             e9,
             e10,
             e11,
-            e12
+            e12,
         };
     }
 

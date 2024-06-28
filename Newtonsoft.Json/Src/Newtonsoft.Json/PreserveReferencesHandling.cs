@@ -57,6 +57,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Preserve references when serializing.
         /// </summary>
-        All = Objects | Arrays
+        All = Objects | Arrays,
     }
 }

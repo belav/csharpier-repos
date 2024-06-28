@@ -50,13 +50,13 @@ namespace Internal.TypeSystem.Interop
         BlittableValueClassByRefReturn,
         BlittableValueClassWithCopyCtor,
         CustomMarshaler,
-        Invalid
+        Invalid,
     }
 
     public enum MarshallerType
     {
         Argument,
         Element,
-        Field
+        Field,
     }
 }

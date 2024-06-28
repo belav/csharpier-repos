@@ -13,7 +13,7 @@ namespace System.Reflection
         {
             "mscorlib",
             "System.Runtime",
-            "netstandard"
+            "netstandard",
         };
 
         // Cache loaded coreAssembly and core types.

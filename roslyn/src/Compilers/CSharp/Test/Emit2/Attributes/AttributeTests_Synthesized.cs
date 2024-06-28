@@ -430,7 +430,7 @@ class C
                         expected = new[]
                         {
                             "DebuggerDisplayAttribute",
-                            "CompilerGeneratedAttribute"
+                            "CompilerGeneratedAttribute",
                         };
                     }
                     else

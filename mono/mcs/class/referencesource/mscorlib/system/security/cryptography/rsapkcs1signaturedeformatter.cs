@@ -132,7 +132,7 @@ namespace System.Security.Cryptography
                             typeof(byte[]),
                             typeof(byte[]),
                             typeof(HashAlgorithmName),
-                            typeof(RSASignaturePadding)
+                            typeof(RSASignaturePadding),
                         }
                     );
                 }

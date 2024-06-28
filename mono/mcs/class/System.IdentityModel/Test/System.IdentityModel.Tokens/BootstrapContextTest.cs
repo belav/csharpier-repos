@@ -212,7 +212,7 @@ namespace MonoTests.System.IdentityModel.Tokens.net_4_5
             0x00,
             0x02,
             0x01,
-            0x0B
+            0x0B,
         };
         private static readonly byte[] SerializedBootstrapContextString = new byte[]
         {
@@ -403,7 +403,7 @@ namespace MonoTests.System.IdentityModel.Tokens.net_4_5
             0x6B,
             0x65,
             0x6E,
-            0x0B
+            0x0B,
         };
 
         // Put in some non-ascii/latin1 characters to test the encoding scheme
@@ -756,7 +756,7 @@ namespace MonoTests.System.IdentityModel.Tokens.net_4_5
             0x67,
             0x3D,
             0x3D,
-            0x0B
+            0x0B,
         };
 
         [Test]

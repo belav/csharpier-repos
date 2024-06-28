@@ -157,7 +157,7 @@ namespace System.Data.Objects
                         typeof(IEnumerable),
                         typeof(ObjectContext),
                         typeof(bool),
-                        typeof(EntitySet)
+                        typeof(EntitySet),
                     },
                     null
                 );

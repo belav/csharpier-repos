@@ -37,7 +37,7 @@ namespace System.Data.Common.EntitySql
         /// <summary>
         /// An expression returning a metadata member such as a type, function group or namespace.
         /// </summary>
-        MetadataMember
+        MetadataMember,
     }
 
     /// <summary>
@@ -1382,7 +1382,7 @@ namespace System.Data.Common.EntitySql
         /// Inside of a group key definition
         /// All range variables originating on the defining scope of this aggregate should yield <see cref="ScopeEntry.GetExpression"/>.
         /// </summary>
-        GroupKey
+        GroupKey,
     }
 
     /// <summary>

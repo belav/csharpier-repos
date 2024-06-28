@@ -30,7 +30,7 @@ public class SqliteTypeMappingTest : RelationalTypeMappingTest
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     private class NoTiny

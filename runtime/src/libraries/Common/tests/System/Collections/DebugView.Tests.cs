@@ -17,45 +17,45 @@ namespace System.Collections.Tests
             yield return new object[]
             {
                 new Dictionary<int, string>(),
-                new KeyValuePair<string, string>[0]
+                new KeyValuePair<string, string>[0],
             };
             yield return new object[]
             {
                 new ReadOnlyDictionary<int, string>(new Dictionary<int, string>()),
-                new KeyValuePair<string, string>[0]
+                new KeyValuePair<string, string>[0],
             };
             yield return new object[]
             {
                 new SortedDictionary<string, int>(),
-                new KeyValuePair<string, string>[0]
+                new KeyValuePair<string, string>[0],
             };
             yield return new object[]
             {
                 new SortedList<int, string>(),
-                new KeyValuePair<string, string>[0]
+                new KeyValuePair<string, string>[0],
             };
 
             yield return new object[]
             {
                 new Dictionary<int, string> { { 1, "One" }, { 2, "Two" } },
-                new KeyValuePair<string, string>[] { new("[1]", "\"One\""), new("[2]", "\"Two\""), }
+                new KeyValuePair<string, string>[] { new("[1]", "\"One\""), new("[2]", "\"Two\"") },
             };
             yield return new object[]
             {
                 new ReadOnlyDictionary<int, string>(
                     new Dictionary<int, string> { { 1, "One" }, { 2, "Two" } }
                 ),
-                new KeyValuePair<string, string>[] { new("[1]", "\"One\""), new("[2]", "\"Two\""), }
+                new KeyValuePair<string, string>[] { new("[1]", "\"One\""), new("[2]", "\"Two\"") },
             };
             yield return new object[]
             {
                 new SortedDictionary<string, int> { { "One", 1 }, { "Two", 2 } },
-                new KeyValuePair<string, string>[] { new("[\"One\"]", "1"), new("[\"Two\"]", "2"), }
+                new KeyValuePair<string, string>[] { new("[\"One\"]", "1"), new("[\"Two\"]", "2") },
             };
             yield return new object[]
             {
                 new SortedList<string, double> { { "One", 1.0 }, { "Two", 2.0 } },
-                new KeyValuePair<string, string>[] { new("[\"One\"]", "1"), new("[\"Two\"]", "2"), }
+                new KeyValuePair<string, string>[] { new("[\"One\"]", "1"), new("[\"Two\"]", "2") },
             };
         }
 
@@ -65,41 +65,41 @@ namespace System.Collections.Tests
             yield return new object[]
             {
                 Hashtable.Synchronized(new Hashtable()),
-                new KeyValuePair<string, string>[0]
+                new KeyValuePair<string, string>[0],
             };
             yield return new object[] { new SortedList(), new KeyValuePair<string, string>[0] };
             yield return new object[]
             {
                 SortedList.Synchronized(new SortedList()),
-                new KeyValuePair<string, string>[0]
+                new KeyValuePair<string, string>[0],
             };
 
             yield return new object[]
             {
                 new Hashtable { { "a", 1 }, { "b", "B" } },
-                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\""), }
+                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\"") },
             };
             yield return new object[]
             {
                 Hashtable.Synchronized(new Hashtable { { "a", 1 }, { "b", "B" } }),
-                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\""), }
+                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\"") },
             };
             yield return new object[]
             {
                 new SortedList { { "a", 1 }, { "b", "B" } },
-                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\""), }
+                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\"") },
             };
             yield return new object[]
             {
                 SortedList.Synchronized(new SortedList { { "a", 1 }, { "b", "B" } }),
-                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\""), }
+                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\"") },
             };
 #if !NETFRAMEWORK // ListDictionaryInternal in .Net Framework is not annotated with debugger attributes.
             yield return new object[] { new Exception().Data, new KeyValuePair<string, string>[0] };
             yield return new object[]
             {
                 new Exception { Data = { { "a", 1 }, { "b", "B" } } }.Data,
-                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\""), }
+                new KeyValuePair<string, string>[] { new("[\"a\"]", "1"), new("[\"b\"]", "\"B\"") },
             };
 #endif
         }
@@ -123,7 +123,7 @@ namespace System.Collections.Tests
 
             yield return new object[]
             {
-                new HashSet<string> { "One", "Two" }
+                new HashSet<string> { "One", "Two" },
             };
 
             LinkedList<object> linkedList = new();
@@ -132,7 +132,7 @@ namespace System.Collections.Tests
             yield return new object[] { linkedList };
             yield return new object[]
             {
-                new List<int> { 1, 2 }
+                new List<int> { 1, 2 },
             };
 
             Queue<double> queue = new();
@@ -141,7 +141,7 @@ namespace System.Collections.Tests
             yield return new object[] { queue };
             yield return new object[]
             {
-                new SortedSet<int> { 1, 2 }
+                new SortedSet<int> { 1, 2 },
             };
 
             Stack<object> stack = new();
@@ -151,36 +151,36 @@ namespace System.Collections.Tests
 
             yield return new object[]
             {
-                new SortedList<string, int> { { "One", 1 }, { "Two", 2 } }.Keys
+                new SortedList<string, int> { { "One", 1 }, { "Two", 2 } }.Keys,
             };
             yield return new object[]
             {
-                new SortedList<float, long> { { 1f, 1L }, { 2f, 2L } }.Values
+                new SortedList<float, long> { { 1f, 1L }, { 2f, 2L } }.Values,
             };
 
             yield return new object[]
             {
-                new Dictionary<double, float> { { 1.0, 1.0f }, { 2.0, 2.0f } }.Keys
+                new Dictionary<double, float> { { 1.0, 1.0f }, { 2.0, 2.0f } }.Keys,
             };
             yield return new object[]
             {
-                new Dictionary<float, double> { { 1.0f, 1.0 }, { 2.0f, 2.0 } }.Values
+                new Dictionary<float, double> { { 1.0f, 1.0 }, { 2.0f, 2.0 } }.Values,
             };
             yield return new object[]
             {
                 new SortedDictionary<Guid, string>
                 {
                     { Guid.NewGuid(), "One" },
-                    { Guid.NewGuid(), "Two" }
-                }.Keys
+                    { Guid.NewGuid(), "Two" },
+                }.Keys,
             };
             yield return new object[]
             {
                 new SortedDictionary<long, Guid>
                 {
                     { 1L, Guid.NewGuid() },
-                    { 2L, Guid.NewGuid() }
-                }.Values
+                    { 2L, Guid.NewGuid() },
+                }.Values,
             };
         }
 

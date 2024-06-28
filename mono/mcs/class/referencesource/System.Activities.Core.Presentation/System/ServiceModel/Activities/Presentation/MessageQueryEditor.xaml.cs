@@ -93,7 +93,7 @@ namespace System.ServiceModel.Activities.Presentation
         {
             return new MessageQueryComboBoxItem()
             {
-                Style = (Style)this.FindResource("comboBoxStyle")
+                Style = (Style)this.FindResource("comboBoxStyle"),
             };
         }
 
@@ -317,7 +317,7 @@ namespace System.ServiceModel.Activities.Presentation
                 //requirement of combo box is that data source must be enumerable, so provide one elemnt array
                 this.ItemsSource = new object[]
                 {
-                    new TypeEntryContainer() { Items = items, DisplayText = text.ToString() }
+                    new TypeEntryContainer() { Items = items, DisplayText = text.ToString() },
                 };
             }
             else

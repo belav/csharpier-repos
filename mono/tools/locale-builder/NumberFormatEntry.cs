@@ -74,7 +74,7 @@ namespace Mono.Tools.LocaleBuilder
             "6",
             "7",
             "8",
-            "9"
+            "9",
         };
 
         public int Row;

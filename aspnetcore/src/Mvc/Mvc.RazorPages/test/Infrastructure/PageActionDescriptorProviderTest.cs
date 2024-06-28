@@ -40,9 +40,9 @@ public class PageActionDescriptorProviderTest
             {
                 new SelectorModel
                 {
-                    AttributeRouteModel = new AttributeRouteModel { Template = "/Test/{id:int?}", }
-                }
-            }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "/Test/{id:int?}" },
+                },
+            },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
@@ -69,14 +69,14 @@ public class PageActionDescriptorProviderTest
         // Arrange
         var model = new PageRouteModel("/Test.cshtml", "/Test")
         {
-            RouteValues = { { "custom-key", "custom-value" }, },
+            RouteValues = { { "custom-key", "custom-value" } },
             Selectors =
             {
                 new SelectorModel
                 {
-                    AttributeRouteModel = new AttributeRouteModel { Template = "/Test/{id:int?}", }
-                }
-            }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "/Test/{id:int?}" },
+                },
+            },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
@@ -114,7 +114,7 @@ public class PageActionDescriptorProviderTest
         // Arrange
         var model = new PageRouteModel("/Areas/Accounts/Pages/Test.cshtml", "/Test", "Accounts")
         {
-            RouteValues = { { "page", "/Test" }, { "area", "Accounts" }, },
+            RouteValues = { { "page", "/Test" }, { "area", "Accounts" } },
             Selectors =
             {
                 new SelectorModel
@@ -122,9 +122,9 @@ public class PageActionDescriptorProviderTest
                     AttributeRouteModel = new AttributeRouteModel
                     {
                         Template = "Accounts/Test/{id:int?}",
-                    }
-                }
-            }
+                    },
+                },
+            },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
         var provider = new PageActionDescriptorProvider(
@@ -170,8 +170,8 @@ public class PageActionDescriptorProviderTest
                 new SelectorModel
                 {
                     AttributeRouteModel = new AttributeRouteModel(),
-                    ActionConstraints = { expected }
-                }
+                    ActionConstraints = { expected },
+                },
             },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
@@ -205,8 +205,8 @@ public class PageActionDescriptorProviderTest
                 new SelectorModel
                 {
                     AttributeRouteModel = new AttributeRouteModel(),
-                    EndpointMetadata = { expected }
-                }
+                    EndpointMetadata = { expected },
+                },
             },
         };
         var applicationModelProvider = new TestPageRouteModelProvider(model);
@@ -234,7 +234,7 @@ public class PageActionDescriptorProviderTest
         var applicationModelProvider = new TestPageRouteModelProvider(
             new PageRouteModel("/base-path/Test.cshtml", "/base-path/Test")
             {
-                Selectors = { CreateSelectorModel("base-path/Test/Home") }
+                Selectors = { CreateSelectorModel("base-path/Test/Home") },
             },
             new PageRouteModel("/base-path/Index.cshtml", "/base-path/Index")
             {
@@ -242,7 +242,7 @@ public class PageActionDescriptorProviderTest
                 {
                     CreateSelectorModel("base-path/Index"),
                     CreateSelectorModel("base-path/"),
-                }
+                },
             },
             new PageRouteModel("/base-path/Admin/Index.cshtml", "/base-path/Admin/Index")
             {
@@ -250,11 +250,11 @@ public class PageActionDescriptorProviderTest
                 {
                     CreateSelectorModel("base-path/Admin/Index"),
                     CreateSelectorModel("base-path/Admin"),
-                }
+                },
             },
             new PageRouteModel("/base-path/Admin/User.cshtml", "/base-path/Admin/User")
             {
-                Selectors = { CreateSelectorModel("base-path/Admin/User"), },
+                Selectors = { CreateSelectorModel("base-path/Admin/User") },
             }
         );
 
@@ -286,7 +286,7 @@ public class PageActionDescriptorProviderTest
     {
         return new SelectorModel
         {
-            AttributeRouteModel = new AttributeRouteModel { Template = template, }
+            AttributeRouteModel = new AttributeRouteModel { Template = template },
         };
     }
 
@@ -346,9 +346,9 @@ public class PageActionDescriptorProviderTest
             {
                 new SelectorModel
                 {
-                    AttributeRouteModel = new AttributeRouteModel { Template = "Home", }
-                }
-            }
+                    AttributeRouteModel = new AttributeRouteModel { Template = "Home" },
+                },
+            },
         };
     }
 
@@ -365,7 +365,7 @@ public class PageActionDescriptorProviderTest
         return Options.Create(
             new RazorPagesOptions
             {
-                Conventions = new PageConventionCollection(Mock.Of<IServiceProvider>())
+                Conventions = new PageConventionCollection(Mock.Of<IServiceProvider>()),
             }
         );
     }

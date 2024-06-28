@@ -258,7 +258,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                     .HasForeignKey<RequiredSingleComposite2>(e => new
                     {
                         e.BackId,
-                        e.BackAlternateId
+                        e.BackAlternateId,
                     })
                     .HasPrincipalKey<RequiredSingleAk1>(e => new { e.Id, e.AlternateId });
             });
@@ -278,7 +278,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                     .HasForeignKey<OptionalSingleComposite2>(e => new
                     {
                         e.BackId,
-                        e.ParentAlternateId
+                        e.ParentAlternateId,
                     })
                     .HasPrincipalKey<OptionalSingleAk1>(e => new { e.Id, e.AlternateId });
             });
@@ -516,7 +516,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                     .HasForeignKey<SomethingOfCategoryB>(socb => new
                     {
                         socb.SomethingId,
-                        socb.CategoryId
+                        socb.CategoryId,
                     })
                     .OnDelete(DeleteBehavior.ClientSetNull);
 
@@ -543,7 +543,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                     {
                         Id = 1,
                         SwedesId = 1,
-                        TurnipId = 1
+                        TurnipId = 1,
                     }
                 );
 
@@ -565,7 +565,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                     {
                         Id = 1,
                         Key = "root-1",
-                        Name = "Root One"
+                        Name = "Root One",
                     }
                 );
 
@@ -577,7 +577,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         Id = 4,
                         Key = "root-1/leaf-1",
                         Name = "Leaf One-One",
-                        RootId = 1
+                        RootId = 1,
                     }
                 );
 
@@ -603,8 +603,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new(),
-                            new()
-                        }
+                            new(),
+                        },
                     },
                     new()
                     {
@@ -613,9 +613,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new(),
-                            new()
-                        }
-                    }
+                            new(),
+                        },
+                    },
                 },
                 OptionalChildren = new ObservableHashSet<Optional1>(
                     ReferenceEqualityComparer.Instance
@@ -628,11 +628,11 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new(),
-                            new()
+                            new(),
                         },
                         CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                             ReferenceEqualityComparer.Instance
-                        )
+                        ),
                     },
                     new()
                     {
@@ -641,37 +641,37 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new(),
-                            new()
+                            new(),
                         },
                         CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                             ReferenceEqualityComparer.Instance
-                        )
-                    }
+                        ),
+                    },
                 },
                 RequiredSingle = new RequiredSingle1 { Single = new RequiredSingle2() },
                 OptionalSingle = new OptionalSingle1 { Single = new OptionalSingle2() },
                 OptionalSingleDerived = new OptionalSingle1Derived
                 {
-                    Single = new OptionalSingle2Derived()
+                    Single = new OptionalSingle2Derived(),
                 },
                 OptionalSingleMoreDerived = new OptionalSingle1MoreDerived
                 {
-                    Single = new OptionalSingle2MoreDerived()
+                    Single = new OptionalSingle2MoreDerived(),
                 },
                 RequiredNonPkSingle = new RequiredNonPkSingle1
                 {
-                    Single = new RequiredNonPkSingle2()
+                    Single = new RequiredNonPkSingle2(),
                 },
                 RequiredNonPkSingleDerived = new RequiredNonPkSingle1Derived
                 {
                     Single = new RequiredNonPkSingle2Derived(),
-                    Root = new Root()
+                    Root = new Root(),
                 },
                 RequiredNonPkSingleMoreDerived = new RequiredNonPkSingle1MoreDerived
                 {
                     Single = new RequiredNonPkSingle2MoreDerived(),
                     Root = new Root(),
-                    DerivedRoot = new Root()
+                    DerivedRoot = new Root(),
                 },
                 RequiredChildrenAk = new ObservableHashSet<RequiredAk1>(
                     ReferenceEqualityComparer.Instance
@@ -685,15 +685,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new() { AlternateId = Guid.NewGuid() },
-                            new() { AlternateId = Guid.NewGuid() }
+                            new() { AlternateId = Guid.NewGuid() },
                         },
                         CompositeChildren = new ObservableHashSet<RequiredComposite2>(
                             ReferenceEqualityComparer.Instance
                         )
                         {
                             new(),
-                            new()
-                        }
+                            new(),
+                        },
                     },
                     new()
                     {
@@ -703,16 +703,16 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new() { AlternateId = Guid.NewGuid() },
-                            new() { AlternateId = Guid.NewGuid() }
+                            new() { AlternateId = Guid.NewGuid() },
                         },
                         CompositeChildren = new ObservableHashSet<RequiredComposite2>(
                             ReferenceEqualityComparer.Instance
                         )
                         {
                             new(),
-                            new()
-                        }
-                    }
+                            new(),
+                        },
+                    },
                 },
                 OptionalChildrenAk = new ObservableHashSet<OptionalAk1>(
                     ReferenceEqualityComparer.Instance
@@ -726,15 +726,15 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new() { AlternateId = Guid.NewGuid() },
-                            new() { AlternateId = Guid.NewGuid() }
+                            new() { AlternateId = Guid.NewGuid() },
                         },
                         CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                             ReferenceEqualityComparer.Instance
                         )
                         {
                             new(),
-                            new()
-                        }
+                            new(),
+                        },
                     },
                     new()
                     {
@@ -744,56 +744,56 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new() { AlternateId = Guid.NewGuid() },
-                            new() { AlternateId = Guid.NewGuid() }
+                            new() { AlternateId = Guid.NewGuid() },
                         },
                         CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                             ReferenceEqualityComparer.Instance
                         )
                         {
                             new(),
-                            new()
-                        }
-                    }
+                            new(),
+                        },
+                    },
                 },
                 RequiredSingleAk = new RequiredSingleAk1
                 {
                     AlternateId = Guid.NewGuid(),
                     Single = new RequiredSingleAk2 { AlternateId = Guid.NewGuid() },
-                    SingleComposite = new RequiredSingleComposite2()
+                    SingleComposite = new RequiredSingleComposite2(),
                 },
                 OptionalSingleAk = new OptionalSingleAk1
                 {
                     AlternateId = Guid.NewGuid(),
                     Single = new OptionalSingleAk2 { AlternateId = Guid.NewGuid() },
-                    SingleComposite = new OptionalSingleComposite2()
+                    SingleComposite = new OptionalSingleComposite2(),
                 },
                 OptionalSingleAkDerived = new OptionalSingleAk1Derived
                 {
                     AlternateId = Guid.NewGuid(),
-                    Single = new OptionalSingleAk2Derived { AlternateId = Guid.NewGuid() }
+                    Single = new OptionalSingleAk2Derived { AlternateId = Guid.NewGuid() },
                 },
                 OptionalSingleAkMoreDerived = new OptionalSingleAk1MoreDerived
                 {
                     AlternateId = Guid.NewGuid(),
-                    Single = new OptionalSingleAk2MoreDerived { AlternateId = Guid.NewGuid() }
+                    Single = new OptionalSingleAk2MoreDerived { AlternateId = Guid.NewGuid() },
                 },
                 RequiredNonPkSingleAk = new RequiredNonPkSingleAk1
                 {
                     AlternateId = Guid.NewGuid(),
-                    Single = new RequiredNonPkSingleAk2 { AlternateId = Guid.NewGuid() }
+                    Single = new RequiredNonPkSingleAk2 { AlternateId = Guid.NewGuid() },
                 },
                 RequiredNonPkSingleAkDerived = new RequiredNonPkSingleAk1Derived
                 {
                     AlternateId = Guid.NewGuid(),
                     Single = new RequiredNonPkSingleAk2Derived { AlternateId = Guid.NewGuid() },
-                    Root = new Root()
+                    Root = new Root(),
                 },
                 RequiredNonPkSingleAkMoreDerived = new RequiredNonPkSingleAk1MoreDerived
                 {
                     AlternateId = Guid.NewGuid(),
                     Single = new RequiredNonPkSingleAk2MoreDerived { AlternateId = Guid.NewGuid() },
                     Root = new Root(),
-                    DerivedRoot = new Root()
+                    DerivedRoot = new Root(),
                 },
                 RequiredCompositeChildren = new ObservableHashSet<RequiredComposite1>(
                     ReferenceEqualityComparer.Instance
@@ -807,8 +807,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new() { Id = 1 },
-                            new() { Id = 2 }
-                        }
+                            new() { Id = 2 },
+                        },
                     },
                     new()
                     {
@@ -818,10 +818,10 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
                         )
                         {
                             new() { Id = 3 },
-                            new() { Id = 4 }
-                        }
-                    }
-                }
+                            new() { Id = 4 },
+                        },
+                    },
+                },
             };
 
         protected override void Seed(PoolableDbContext context)
@@ -873,7 +873,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture> : IClassFixture<TFi
     {
         Dependent = 1,
         Principal = 2,
-        Fk = 4
+        Fk = 4,
     }
 
     protected Expression<Func<Root, bool>> IsTheRoot => r => r.AlternateId == Fixture.RootAK;

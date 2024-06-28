@@ -492,7 +492,7 @@ namespace MonoTests.System
                 new DateTimeOffset(2008, 01, 14, 13, 21, 5, new TimeSpan(-5, 0, 0)),
             };
 
-            string[] formats = { "dddd, dd MMMM yyyy HH:mm:ss zzz", };
+            string[] formats = { "dddd, dd MMMM yyyy HH:mm:ss zzz" };
 
             foreach (DateTimeOffset dto in dtos)
             foreach (string format in formats)

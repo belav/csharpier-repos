@@ -130,23 +130,23 @@ namespace TypeSystemTests
         {
             yield return new object[]
             {
-                new TargetDetails(TargetArchitecture.ARM, TargetOS.Unknown, TargetAbi.NativeAot)
+                new TargetDetails(TargetArchitecture.ARM, TargetOS.Unknown, TargetAbi.NativeAot),
             };
             yield return new object[]
             {
-                new TargetDetails(TargetArchitecture.ARM64, TargetOS.Unknown, TargetAbi.NativeAot)
+                new TargetDetails(TargetArchitecture.ARM64, TargetOS.Unknown, TargetAbi.NativeAot),
             };
             yield return new object[]
             {
-                new TargetDetails(TargetArchitecture.X64, TargetOS.Unknown, TargetAbi.NativeAot)
+                new TargetDetails(TargetArchitecture.X64, TargetOS.Unknown, TargetAbi.NativeAot),
             };
             yield return new object[]
             {
-                new TargetDetails(TargetArchitecture.X86, TargetOS.Unknown, TargetAbi.NativeAot)
+                new TargetDetails(TargetArchitecture.X86, TargetOS.Unknown, TargetAbi.NativeAot),
             };
             yield return new object[]
             {
-                new TargetDetails(TargetArchitecture.Wasm32, TargetOS.Unknown, TargetAbi.NativeAot)
+                new TargetDetails(TargetArchitecture.Wasm32, TargetOS.Unknown, TargetAbi.NativeAot),
             };
         }
 

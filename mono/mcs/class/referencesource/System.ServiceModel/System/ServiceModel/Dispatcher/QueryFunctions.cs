@@ -279,7 +279,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum QueryFunctionFlag
     {
         None = 0x00000000,
-        UsesContextNode = 0x00000001
+        UsesContextNode = 0x00000001,
     }
 
     internal abstract class QueryFunction
@@ -417,7 +417,7 @@ namespace System.ServiceModel.Dispatcher
         SubstringAfter,
         Substring,
         SubstringLimit,
-        Translate
+        Translate,
     }
 
     internal class XPathFunctionLibrary : IFunctionLibrary
@@ -505,7 +505,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         ValueDataType.String,
                         ValueDataType.String,
-                        ValueDataType.String
+                        ValueDataType.String,
                     }
                 ),
                 new XPathFunction(
@@ -517,7 +517,7 @@ namespace System.ServiceModel.Dispatcher
                         ValueDataType.String,
                         ValueDataType.String,
                         ValueDataType.String,
-                        ValueDataType.String
+                        ValueDataType.String,
                     }
                 ),
                 new XPathFunction(
@@ -570,7 +570,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         ValueDataType.String,
                         ValueDataType.Double,
-                        ValueDataType.Double
+                        ValueDataType.Double,
                     }
                 ),
                 new XPathFunction(
@@ -593,7 +593,7 @@ namespace System.ServiceModel.Dispatcher
                     {
                         ValueDataType.String,
                         ValueDataType.String,
-                        ValueDataType.String
+                        ValueDataType.String,
                     }
                 ),
                 new XPathFunction(
@@ -649,7 +649,7 @@ namespace System.ServiceModel.Dispatcher
                     "namespace-uri",
                     ValueDataType.String,
                     QueryFunctionFlag.UsesContextNode
-                )
+                ),
             };
         }
 

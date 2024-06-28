@@ -23,7 +23,7 @@ namespace DependecyGraphViewer.Tests
                     """,
                 0,
                 true,
-                0
+                0,
             };
             // only nodes, no edges
             yield return new object[]
@@ -41,7 +41,7 @@ namespace DependecyGraphViewer.Tests
                     """,
                 4,
                 true,
-                0
+                0,
             };
             // nodes and edges
             yield return new object[]
@@ -72,7 +72,7 @@ namespace DependecyGraphViewer.Tests
                     """,
                 4,
                 true,
-                4
+                4,
             };
             // invalid graph
             yield return new object[]
@@ -91,7 +91,7 @@ namespace DependecyGraphViewer.Tests
                     """,
                 0,
                 false,
-                0
+                0,
             };
         }
 

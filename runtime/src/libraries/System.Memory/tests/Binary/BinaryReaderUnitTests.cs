@@ -848,7 +848,7 @@ namespace System.Buffers.Binary.Tests
                 L1 = long.MinValue,
                 US1 = ushort.MinValue,
                 UI1 = uint.MinValue,
-                UL1 = ulong.MinValue
+                UL1 = ulong.MinValue,
             };
 
             WriteInt16BigEndian(spanBE, testExplicitStruct.S0);
@@ -899,7 +899,7 @@ namespace System.Buffers.Binary.Tests
                 L1 = ReadInt64BigEndian(spanBE.Slice(34)),
                 US1 = ReadUInt16BigEndian(spanBE.Slice(42)),
                 UI1 = ReadUInt32BigEndian(spanBE.Slice(44)),
-                UL1 = ReadUInt64BigEndian(spanBE.Slice(48))
+                UL1 = ReadUInt64BigEndian(spanBE.Slice(48)),
             };
 
             TestHelpers.TestStructExplicit readStructAndReverseFromReadOnlySpan =
@@ -957,7 +957,7 @@ namespace System.Buffers.Binary.Tests
                 L1 = ReadInt64BigEndian(readOnlySpanBE.Slice(34)),
                 US1 = ReadUInt16BigEndian(readOnlySpanBE.Slice(42)),
                 UI1 = ReadUInt32BigEndian(readOnlySpanBE.Slice(44)),
-                UL1 = ReadUInt64BigEndian(readOnlySpanBE.Slice(48))
+                UL1 = ReadUInt64BigEndian(readOnlySpanBE.Slice(48)),
             };
 
             Assert.Equal(testExplicitStruct, readStructAndReverse);

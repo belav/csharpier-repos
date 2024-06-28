@@ -47,6 +47,6 @@ namespace System.Data
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        InferTypedSchema = 6
+        InferTypedSchema = 6,
     }
 }

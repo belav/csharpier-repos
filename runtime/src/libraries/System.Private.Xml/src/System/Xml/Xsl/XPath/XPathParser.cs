@@ -247,12 +247,10 @@ namespace System.Xml.Xsl.XPath
         private static XPathNodeType PrincipalNodeType(XPathAxis axis)
         {
             return (
-                axis == XPathAxis.Attribute
-                    ? XPathNodeType.Attribute
-                    : axis == XPathAxis.Namespace
-                        ? XPathNodeType.Namespace
-                        :
-                        /*else*/XPathNodeType.Element
+                axis == XPathAxis.Attribute ? XPathNodeType.Attribute
+                : axis == XPathAxis.Namespace ? XPathNodeType.Namespace
+                :
+                /*else*/XPathNodeType.Element
             );
         }
 

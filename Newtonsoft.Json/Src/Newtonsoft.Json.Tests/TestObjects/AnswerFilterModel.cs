@@ -52,7 +52,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
                 {
                     Text = answer,
                     Value = answer,
-                    Selected = false
+                    Selected = false,
                 }
             ).ToList();
         }

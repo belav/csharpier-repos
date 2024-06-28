@@ -407,7 +407,7 @@ namespace System.Security.Cryptography.Tests
                                 typeof(byte[]),
                                 typeof(int),
                                 typeof(int),
-                                typeof(HashAlgorithmName)
+                                typeof(HashAlgorithmName),
                             },
                             null
                         )

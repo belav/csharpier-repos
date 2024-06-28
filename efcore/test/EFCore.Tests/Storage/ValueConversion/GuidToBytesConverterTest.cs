@@ -30,7 +30,7 @@ public class GuidToBytesConverterTest
                 60,
                 229,
                 180,
-                98
+                98,
             },
             converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
         );
@@ -64,7 +64,7 @@ public class GuidToBytesConverterTest
                 60,
                 229,
                 180,
-                98
+                98,
             },
             converter(new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
         );
@@ -92,7 +92,7 @@ public class GuidToBytesConverterTest
                 60,
                 229,
                 180,
-                98
+                98,
             },
             converter((Guid?)new Guid("96EE27B4-868B-4049-BA67-CBB83CE5B462"))
         );
@@ -130,7 +130,7 @@ public class GuidToBytesConverterTest
                     60,
                     229,
                     180,
-                    98
+                    98,
                 }
             )
         );
@@ -161,7 +161,7 @@ public class GuidToBytesConverterTest
                         229,
                         180,
                         98,
-                        0
+                        0,
                     }
                 )
         );
@@ -189,7 +189,7 @@ public class GuidToBytesConverterTest
                         184,
                         60,
                         229,
-                        180
+                        180,
                     }
                 )
         );
@@ -226,7 +226,7 @@ public class GuidToBytesConverterTest
                     60,
                     229,
                     180,
-                    98
+                    98,
                 }
             )
         );

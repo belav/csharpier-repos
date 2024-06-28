@@ -24,15 +24,15 @@ internal sealed partial class HttpConnectionDispatcher
         TransferFormats = new List<string>
         {
             nameof(TransferFormat.Text),
-            nameof(TransferFormat.Binary)
-        }
+            nameof(TransferFormat.Binary),
+        },
     };
 
     private static readonly AvailableTransport _serverSentEventsAvailableTransport =
         new AvailableTransport
         {
             Transport = nameof(HttpTransportType.ServerSentEvents),
-            TransferFormats = new List<string> { nameof(TransferFormat.Text) }
+            TransferFormats = new List<string> { nameof(TransferFormat.Text) },
         };
 
     private static readonly AvailableTransport _longPollingAvailableTransport =
@@ -42,8 +42,8 @@ internal sealed partial class HttpConnectionDispatcher
             TransferFormats = new List<string>
             {
                 nameof(TransferFormat.Text),
-                nameof(TransferFormat.Binary)
-            }
+                nameof(TransferFormat.Binary),
+            },
         };
 
     private readonly HttpConnectionManager _manager;
@@ -886,7 +886,7 @@ internal sealed partial class HttpConnectionDispatcher
             Path = existingRequestFeature.Path,
             PathBase = existingRequestFeature.PathBase,
             QueryString = existingRequestFeature.QueryString,
-            RawTarget = existingRequestFeature.RawTarget
+            RawTarget = existingRequestFeature.RawTarget,
         };
         var requestHeaders = new Dictionary<string, StringValues>(
             existingRequestFeature.Headers.Count,

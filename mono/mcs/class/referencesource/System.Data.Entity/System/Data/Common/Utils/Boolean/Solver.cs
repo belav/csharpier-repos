@@ -42,7 +42,7 @@ namespace System.Data.Common.Utils.Boolean
         internal readonly static Vertex[] BooleanVariableChildren = new Vertex[]
         {
             Vertex.One,
-            Vertex.Zero
+            Vertex.Zero,
         };
         #endregion
 

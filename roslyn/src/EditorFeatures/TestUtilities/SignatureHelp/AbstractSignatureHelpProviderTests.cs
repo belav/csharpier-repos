@@ -602,7 +602,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SignatureHelp
 
             var options = new SignatureHelpOptions() with
             {
-                HideAdvancedMembers = hideAdvancedMembers
+                HideAdvancedMembers = hideAdvancedMembers,
             };
             document = testWorkspace.CurrentSolution.GetDocument(documentId);
             var code = (await document.GetTextAsync()).ToString();

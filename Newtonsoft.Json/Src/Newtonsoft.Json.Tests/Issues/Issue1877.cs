@@ -59,7 +59,7 @@ namespace Newtonsoft.Json.Tests.Issues
                 new JsonSerializerSettings
                 {
                     ObjectCreationHandling = ObjectCreationHandling.Replace,
-                    Converters = { new VersionConverter() }
+                    Converters = { new VersionConverter() },
                 }
             );
 

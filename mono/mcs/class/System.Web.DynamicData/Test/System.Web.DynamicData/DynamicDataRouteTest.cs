@@ -223,7 +223,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Action = PageAction.Details,
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -260,7 +260,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Table = "BazTable",
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -297,7 +297,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Table = "MyTable",
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
             routes.Add(ddr);
             var rd = new RouteData();
@@ -326,7 +326,7 @@ namespace MonoTests.System.Web.DynamicData
             var ddr = new DynamicDataRoute("{table}/{action}.aspx")
             {
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
             routes.Add(ddr);
             var rd = new RouteData();
@@ -352,7 +352,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Action = null,
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -385,7 +385,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Action = String.Empty,
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -422,7 +422,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Table = null,
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -451,7 +451,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Table = String.Empty,
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -483,7 +483,7 @@ namespace MonoTests.System.Web.DynamicData
                 Defaults = new RouteValueDictionary() { { "Action", "InitialAction" } },
                 Action = PageAction.Details,
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);
@@ -521,7 +521,7 @@ namespace MonoTests.System.Web.DynamicData
                 Defaults = new RouteValueDictionary() { { "Table", "FooWithDefaultsTable" } },
                 Table = "BazTable",
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
 
             routes.Add(ddr);

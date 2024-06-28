@@ -33,7 +33,7 @@ namespace System.Web.Http
             SystemDiagnosticsTraceWriter traceWriter = new SystemDiagnosticsTraceWriter()
             {
                 MinimumLevel = TraceLevel.Info,
-                IsVerbose = false
+                IsVerbose = false,
             };
 
             configuration.Services.Replace(typeof(ITraceWriter), traceWriter);

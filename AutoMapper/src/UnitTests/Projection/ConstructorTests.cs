@@ -73,11 +73,11 @@ public class ConstructorLetClause : AutoMapperSpecBase
                     {
                         Values = new[]
                         {
-                            new SourceValue { Value1 = 1, Value2 = 2 }
-                        }
-                    }
-                }
-            }
+                            new SourceValue { Value1 = 1, Value2 = 2 },
+                        },
+                    },
+                },
+            },
         }.AsQueryable().ProjectTo<Destination>(Configuration);
         var first = query.First();
         first.Item.Value1.ShouldBe(1);
@@ -220,7 +220,7 @@ public class ConstructorsWithCollections : AutoMapperSpecBase
         ProjectTo<UserDto>(
                 new[]
                 {
-                    new Users { FkAddress = new Addresses { Address = "address" } }
+                    new Users { FkAddress = new Addresses { Address = "address" } },
                 }.AsQueryable()
             )
             .First()

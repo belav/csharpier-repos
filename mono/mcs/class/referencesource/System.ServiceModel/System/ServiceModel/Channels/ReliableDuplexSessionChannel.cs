@@ -299,14 +299,14 @@ namespace System.ServiceModel.Channels
                 {
                     this.outputConnection.BeginClose,
                     wsrm11 ? this.BeginCloseSequence : default(OperationWithTimeoutBeginCallback),
-                    this.BeginTerminateSequence
+                    this.BeginTerminateSequence,
                 };
 
             OperationEndCallback[] endOperations = new OperationEndCallback[]
             {
                 this.outputConnection.EndClose,
                 wsrm11 ? this.EndCloseSequence : default(OperationEndCallback),
-                this.EndTerminateSequence
+                this.EndTerminateSequence,
             };
 
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
@@ -1038,7 +1038,7 @@ namespace System.ServiceModel.Channels
                 this.guard.BeginClose,
                 this.session.BeginClose,
                 this.BeginCloseBinder,
-                base.OnBeginClose
+                base.OnBeginClose,
             };
 
             endOperations = new OperationEndCallback[]
@@ -1048,7 +1048,7 @@ namespace System.ServiceModel.Channels
                 this.guard.EndClose,
                 this.session.EndClose,
                 this.EndCloseBinder,
-                base.OnEndClose
+                base.OnEndClose,
             };
 
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
@@ -2257,13 +2257,13 @@ namespace System.ServiceModel.Channels
                 new OperationWithTimeoutBeginCallback[]
                 {
                     new OperationWithTimeoutBeginCallback(base.OnBeginClose),
-                    new OperationWithTimeoutBeginCallback(this.BeginUnregisterChannel)
+                    new OperationWithTimeoutBeginCallback(this.BeginUnregisterChannel),
                 };
 
             OperationEndCallback[] endOperations = new OperationEndCallback[]
             {
                 new OperationEndCallback(base.OnEndClose),
-                new OperationEndCallback(this.EndUnregisterChannel)
+                new OperationEndCallback(this.EndUnregisterChannel),
             };
 
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(

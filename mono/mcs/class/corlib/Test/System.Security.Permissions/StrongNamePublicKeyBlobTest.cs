@@ -201,7 +201,7 @@ namespace MonoTests.System.Security.Permissions
             0xF8,
             0xFF,
             0xA4,
-            0xCB
+            0xCB,
         };
 
         [Test]

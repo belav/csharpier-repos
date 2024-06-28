@@ -24,14 +24,14 @@ namespace System.Web.Http.ModelBinding.Binders
                 ),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
             context.ControllerContext.Configuration.Services.Replace(
                 typeof(ModelBinderProvider),
                 new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
                 {
-                    SuppressPrefixCheck = true
+                    SuppressPrefixCheck = true,
                 }
             );
 
@@ -75,14 +75,14 @@ namespace System.Web.Http.ModelBinding.Binders
                 ),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
             context.ControllerContext.Configuration.Services.Replace(
                 typeof(ModelBinderProvider),
                 new SimpleModelBinderProvider(typeof(int), mockIntBinder.Object)
                 {
-                    SuppressPrefixCheck = true
+                    SuppressPrefixCheck = true,
                 }
             );
 
@@ -125,7 +125,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 ),
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             // Act

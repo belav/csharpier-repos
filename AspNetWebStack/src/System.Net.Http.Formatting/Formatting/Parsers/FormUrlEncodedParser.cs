@@ -56,7 +56,7 @@ namespace System.Net.Http.Formatting.Parsers
         private enum NameValueState
         {
             Name = 0,
-            Value
+            Value,
         }
 
         /// <summary>

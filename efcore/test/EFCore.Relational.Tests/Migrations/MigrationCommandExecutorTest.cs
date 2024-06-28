@@ -20,7 +20,7 @@ public class MigrationCommandExecutorTest
         var commandList = new List<MigrationCommand>
         {
             new(CreateRelationalCommand(), null, logger),
-            new(CreateRelationalCommand(), null, logger)
+            new(CreateRelationalCommand(), null, logger),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -64,7 +64,7 @@ public class MigrationCommandExecutorTest
         var commandList = new List<MigrationCommand>
         {
             new(CreateRelationalCommand(), null, logger),
-            new(CreateRelationalCommand(), null, logger)
+            new(CreateRelationalCommand(), null, logger),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -117,7 +117,7 @@ public class MigrationCommandExecutorTest
         var commandList = new List<MigrationCommand>
         {
             new(CreateRelationalCommand(), null, logger),
-            new(CreateRelationalCommand(), null, logger, transactionSuppressed: true)
+            new(CreateRelationalCommand(), null, logger, transactionSuppressed: true),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -184,7 +184,7 @@ public class MigrationCommandExecutorTest
         var commandList = new List<MigrationCommand>
         {
             new(CreateRelationalCommand(), null, logger, transactionSuppressed: true),
-            new(CreateRelationalCommand(), null, logger, transactionSuppressed: true)
+            new(CreateRelationalCommand(), null, logger, transactionSuppressed: true),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -220,7 +220,7 @@ public class MigrationCommandExecutorTest
         var commandList = new List<MigrationCommand>
         {
             new(CreateRelationalCommand(), null, logger),
-            new(CreateRelationalCommand(), null, logger, transactionSuppressed: true)
+            new(CreateRelationalCommand(), null, logger, transactionSuppressed: true),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -261,7 +261,7 @@ public class MigrationCommandExecutorTest
         var commandList = new List<MigrationCommand>
         {
             new(CreateRelationalCommand(), null, logger, transactionSuppressed: true),
-            new(CreateRelationalCommand(), null, logger)
+            new(CreateRelationalCommand(), null, logger),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -308,7 +308,7 @@ public class MigrationCommandExecutorTest
                 logger,
                 transactionSuppressed: true
             ),
-            new(CreateRelationalCommand(commandText: "Third"), null, logger)
+            new(CreateRelationalCommand(commandText: "Third"), null, logger),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();
@@ -371,7 +371,7 @@ public class MigrationCommandExecutorTest
 
         var commandList = new List<MigrationCommand>
         {
-            new(CreateRelationalCommand(), null, logger)
+            new(CreateRelationalCommand(), null, logger),
         };
 
         var migrationCommandExecutor = new MigrationCommandExecutor();

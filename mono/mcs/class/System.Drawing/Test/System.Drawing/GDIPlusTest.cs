@@ -844,7 +844,7 @@ namespace MonoTests.System.Drawing
             RectangleF[] rf = new RectangleF[2]
             {
                 new RectangleF(1, 2, -2, -1),
-                new RectangleF(0, 0, 10, 10)
+                new RectangleF(0, 0, 10, 10),
             };
             Assert.AreEqual(
                 Status.InvalidParameter,

@@ -371,7 +371,7 @@ namespace System.Web.Mvc.Test
                 null
             )
             {
-                NullDisplayText = nullText
+                NullDisplayText = nullText,
             };
 
             // Act
@@ -423,7 +423,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             SimpleDisplayTextModelWithoutToString model = new SimpleDisplayTextModelWithoutToString
             {
-                FirstProperty = "First Property Value"
+                FirstProperty = "First Property Value",
             };
             EmptyModelMetadataProvider provider = new EmptyModelMetadataProvider();
             ModelMetadata metadata = new ModelMetadata(
@@ -1100,7 +1100,7 @@ namespace System.Web.Mvc.Test
             Mock<ModelMetadataProvider> provider = new Mock<ModelMetadataProvider>();
             DummyContactModel model = new DummyContactModel
             {
-                Array = new[] { 4, 8, 15, 16, 23, 42 }
+                Array = new[] { 4, 8, 15, 16, 23, 42 },
             };
             ViewDataDictionary<DummyContactModel> viewData =
                 new ViewDataDictionary<DummyContactModel>(model);
@@ -1294,7 +1294,7 @@ namespace System.Web.Mvc.Test
                 "PropertyName"
             )
             {
-                DisplayName = "Display Name"
+                DisplayName = "Display Name",
             };
 
             // Act

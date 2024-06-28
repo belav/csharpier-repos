@@ -1404,7 +1404,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
@@ -1412,7 +1412,7 @@ namespace System.Deployment.Internal.Isolation
             Failed = 0,
             Installed = 1,
             Refreshed = 2,
-            AlreadyInstalled = 3
+            AlreadyInstalled = 3,
         }
 
         public void Destroy() { }
@@ -1458,7 +1458,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
@@ -1466,7 +1466,7 @@ namespace System.Deployment.Internal.Isolation
             Failed = 0,
             Installed = 1,
             Refreshed = 2,
-            AlreadyInstalled = 3
+            AlreadyInstalled = 3,
         }
 
         public StoreOperationStageComponentFile(
@@ -1513,7 +1513,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum RefFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public StoreApplicationReference(System.Guid RefScheme, string Id, string NcData)
@@ -1564,13 +1564,13 @@ namespace System.Deployment.Internal.Isolation
         public enum OpFlags
         {
             Nothing = 0,
-            NeverExpires = 0x1
+            NeverExpires = 0x1,
         }
 
         public enum Disposition
         {
             Failed = 0,
-            Pinned = 1
+            Pinned = 1,
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -1618,13 +1618,13 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
         {
             Failed = 0,
-            Unpinned = 1
+            Unpinned = 1,
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -1663,7 +1663,7 @@ namespace System.Deployment.Internal.Isolation
         public enum OpFlags
         {
             Nothing = 0,
-            UninstallOthers = 0x1
+            UninstallOthers = 0x1,
         }
 
         public enum Disposition
@@ -1721,14 +1721,14 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public enum Disposition
         {
             Failed = 0,
             DidNotExist = 1,
-            Uninstalled = 2
+            Uninstalled = 2,
         }
 
         [System.Security.SecuritySafeCritical] // auto-generated
@@ -1814,7 +1814,7 @@ namespace System.Deployment.Internal.Isolation
         public enum Disposition
         {
             Failed = 0,
-            Set = 2
+            Set = 2,
         }
 
         public StoreOperationSetDeploymentMetadata(
@@ -1945,7 +1945,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum OpFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [System.Security.SecurityCritical] // auto-generated
@@ -1985,7 +1985,7 @@ namespace System.Deployment.Internal.Isolation
             Light = 1,
             LimitSize = 2,
             LimitTime = 4,
-            LimitCount = 8
+            LimitCount = 8,
         }
 
         public StoreOperationScavenge(
@@ -2031,7 +2031,7 @@ namespace System.Deployment.Internal.Isolation
         InstallDeployment = 24,
         UninstallDeployment = 25,
         SetDeploymentMetadata = 26,
-        Scavenge = 27
+        Scavenge = 27,
     }
 
     //
@@ -2201,7 +2201,7 @@ namespace System.Deployment.Internal.Isolation
             Nothing = 0,
             VisibleOnly = 0x1,
             MatchServicing = 0x2,
-            ForceLibrarySemantics = 0x4
+            ForceLibrarySemantics = 0x4,
         }
 
         public StoreAssemblyEnumeration EnumAssemblies(EnumAssembliesFlags Flags)
@@ -2227,7 +2227,7 @@ namespace System.Deployment.Internal.Isolation
         {
             Nothing = 0,
             IncludeInstalled = 0x1,
-            IncludeMissing = 0x2
+            IncludeMissing = 0x2,
         }
 
         [SecuritySafeCritical]
@@ -2247,7 +2247,7 @@ namespace System.Deployment.Internal.Isolation
         {
             Nothing = 0,
             IncludeInstalled = 0x1,
-            IncludeMissing = 0x2
+            IncludeMissing = 0x2,
         }
 
         [SecuritySafeCritical]
@@ -2266,7 +2266,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum EnumAssemblyInstallReferenceFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [SecuritySafeCritical]
@@ -2401,7 +2401,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum EnumCategoriesFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [SecuritySafeCritical]
@@ -2419,7 +2419,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum EnumSubcategoriesFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         public StoreSubcategoryEnumeration EnumSubcategories(
@@ -2446,7 +2446,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum EnumCategoryInstancesFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [SecuritySafeCritical]
@@ -2465,7 +2465,7 @@ namespace System.Deployment.Internal.Isolation
         [Flags]
         public enum GetPackagePropertyFlags
         {
-            Nothing = 0
+            Nothing = 0,
         }
 
         [System.Security.SecurityCritical] // auto-generated
@@ -3157,7 +3157,7 @@ namespace System.Deployment.Internal.Isolation
                 ProcessorFallbackListValid = 4,
                 ProcessorValid = 8,
                 SourceValid = 16,
-                IgnoreVisibility = 32
+                IgnoreVisibility = 32,
             }
         }
 
@@ -3180,7 +3180,7 @@ namespace System.Deployment.Internal.Isolation
             public enum SourceFlags
             {
                 Definition = 1,
-                Reference = 2
+                Reference = 2,
             }
 
             [System.Security.SecurityCritical] // auto-generated
@@ -3573,7 +3573,7 @@ namespace System.Deployment.Internal.Isolation
         {
             Undefined = 0,
             Starting = 1,
-            Running = 2
+            Running = 2,
         }
 
         public enum ApplicationStateDisposition
@@ -3778,7 +3778,7 @@ namespace System.Deployment.Internal.Isolation
     {
         Undefined = 0,
         Starting = 1,
-        Running = 2
+        Running = 2,
     };
 
     [ComImport]

@@ -318,7 +318,7 @@ public class Test : Class1
                             ".Class3 0x27000001 (ExportedType) 0x0002",
                             "NS1.Class4 0x26000001 (AssemblyFile) 0x0001",
                             ".Class7 0x27000003 (ExportedType) 0x0002",
-                            ".Class2 0x26000002 (AssemblyFile) 0x0001"
+                            ".Class2 0x26000002 (AssemblyFile) 0x0001",
                         },
                         actual
                     );
@@ -2946,7 +2946,7 @@ class Program
                     (byte)'l',
                     (byte)'l',
                     0x00,
-                    0x00
+                    0x00,
                 },
                 importTableDirectoryBytes
             );

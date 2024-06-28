@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    End = new Position { Line = 4, Character = 11 },
                 },
                 diagnostics: null
             );
@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 GenerateTextEdit(
                     "var",
                     new LSP.Range { Start = new Position(4, 8), End = new Position(4, 11) }
-                )
+                ),
             };
 
             var expectedResolvedAction = CodeActionsTests.CreateCodeAction(
@@ -91,7 +91,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    End = new Position { Line = 4, Character = 11 },
                 },
                 edit: GenerateWorkspaceEdit(testLspServer.GetLocations("caret"), expectedTextEdits)
             );
@@ -121,7 +121,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
             var titlePath = new string[]
             {
                 FeaturesResources.Introduce_constant,
-                string.Format(FeaturesResources.Introduce_constant_for_0, "1")
+                string.Format(FeaturesResources.Introduce_constant_for_0, "1"),
             };
             var unresolvedCodeAction = CodeActionsTests.CreateCodeAction(
                 title: string.Format(FeaturesResources.Introduce_constant_for_0, "1"),
@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    End = new Position { Line = 4, Character = 11 },
                 },
                 diagnostics: null
             );
@@ -165,7 +165,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 GenerateTextEdit(
                     "V",
                     new LSP.Range { Start = new Position(4, 16), End = new Position(4, 17) }
-                )
+                ),
             };
 
             var expectedResolvedAction = CodeActionsTests.CreateCodeAction(
@@ -184,7 +184,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.CodeActions
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 4, Character = 8 },
-                    End = new Position { Line = 4, Character = 11 }
+                    End = new Position { Line = 4, Character = 11 },
                 },
                 diagnostics: null,
                 edit: GenerateWorkspaceEdit(testLspServer.GetLocations("caret"), expectedTextEdits)
@@ -217,16 +217,16 @@ class {|caret:ABC|}
                         {
                             WorkspaceEdit = new WorkspaceEditSetting
                             {
-                                ResourceOperations = [ResourceOperationKind.Rename]
-                            }
-                        }
-                    }
+                                ResourceOperations = [ResourceOperationKind.Rename],
+                            },
+                        },
+                    },
                 }
             );
 
             var titlePath = new string[]
             {
-                string.Format(FeaturesResources.Rename_file_to_0, "ABC.cs")
+                string.Format(FeaturesResources.Rename_file_to_0, "ABC.cs"),
             };
             var unresolvedCodeAction = CodeActionsTests.CreateCodeAction(
                 title: string.Format(FeaturesResources.Rename_file_to_0, "ABC.cs"),
@@ -242,7 +242,7 @@ class {|caret:ABC|}
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 0, Character = 6 },
-                    End = new Position { Line = 0, Character = 9 }
+                    End = new Position { Line = 0, Character = 9 },
                 },
                 diagnostics: null
             );
@@ -277,7 +277,7 @@ class {|caret:ABC|}
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 0, Character = 6 },
-                    End = new Position { Line = 0, Character = 9 }
+                    End = new Position { Line = 0, Character = 9 },
                 },
                 diagnostics: null,
                 edit: GenerateRenameFileEdit(
@@ -315,7 +315,7 @@ class {|caret:ABC|}
                 string.Format(
                     FeaturesResources.Encapsulate_field_colon_0_and_use_property,
                     "_value"
-                )
+                ),
             };
             var unresolvedCodeAction = CodeActionsTests.CreateCodeAction(
                 title: string.Format(
@@ -337,7 +337,7 @@ class {|caret:ABC|}
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 2, Character = 33 },
-                    End = new Position { Line = 39, Character = 2 }
+                    End = new Position { Line = 39, Character = 2 },
                 },
                 diagnostics: null
             );
@@ -354,8 +354,8 @@ class {|caret:ABC|}
                     Range = new LSP.Range()
                     {
                         Start = new Position { Line = 2, Character = 4 },
-                        End = new Position { Line = 2, Character = 10 }
-                    }
+                        End = new Position { Line = 2, Character = 10 },
+                    },
                 },
                 new TextEdit
                 {
@@ -363,8 +363,8 @@ class {|caret:ABC|}
                     Range = new LSP.Range
                     {
                         Start = new Position { Line = 2, Character = 31 },
-                        End = new Position { Line = 2, Character = 32 }
-                    }
+                        End = new Position { Line = 2, Character = 32 },
+                    },
                 },
                 new TextEdit
                 {
@@ -375,9 +375,9 @@ class {|caret:ABC|}
                     Range = new LSP.Range
                     {
                         Start = new Position { Line = 2, Character = 43 },
-                        End = new Position { Line = 2, Character = 43 }
-                    }
-                }
+                        End = new Position { Line = 2, Character = 43 },
+                    },
+                },
             };
             var expectedCodeAction = CodeActionsTests.CreateCodeAction(
                 title: string.Format(
@@ -399,7 +399,7 @@ class {|caret:ABC|}
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 2, Character = 33 },
-                    End = new Position { Line = 39, Character = 2 }
+                    End = new Position { Line = 39, Character = 2 },
                 },
                 diagnostics: null,
                 edit: GenerateWorkspaceEdit(testLspServer.GetLocations("caret"), edits)
@@ -430,16 +430,16 @@ class BCD
                         {
                             WorkspaceEdit = new WorkspaceEditSetting
                             {
-                                ResourceOperations = [ResourceOperationKind.Create]
-                            }
-                        }
-                    }
+                                ResourceOperations = [ResourceOperationKind.Create],
+                            },
+                        },
+                    },
                 }
             );
 
             var titlePath = new string[]
             {
-                string.Format(FeaturesResources.Move_type_to_0, "ABC.cs")
+                string.Format(FeaturesResources.Move_type_to_0, "ABC.cs"),
             };
             var unresolvedCodeAction = CodeActionsTests.CreateCodeAction(
                 title: string.Format(FeaturesResources.Move_type_to_0, "ABC.cs"),
@@ -455,7 +455,7 @@ class BCD
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 0, Character = 6 },
-                    End = new Position { Line = 0, Character = 9 }
+                    End = new Position { Line = 0, Character = 9 },
                 },
                 diagnostics: null
             );
@@ -489,7 +489,7 @@ class BCD
                     {
                         TextDocument = new OptionalVersionedTextDocumentIdentifier
                         {
-                            Uri = newDocumentUri
+                            Uri = newDocumentUri,
                         },
                         Edits = new TextEdit[]
                         {
@@ -497,23 +497,23 @@ class BCD
                             {
                                 Range = new LSP.Range
                                 {
-                                    Start = new Position() { Line = 0, Character = 0, },
-                                    End = new Position() { Line = 0, Character = 0 }
+                                    Start = new Position() { Line = 0, Character = 0 },
+                                    End = new Position() { Line = 0, Character = 0 },
                                 },
                                 NewText =
                                     @"class ABC
 {
 }
-"
-                            }
-                        }
+",
+                            },
+                        },
                     },
                     // Remove the declaration from existing file
                     new TextDocumentEdit()
                     {
                         TextDocument = new OptionalVersionedTextDocumentIdentifier()
                         {
-                            Uri = existingDocumentUri
+                            Uri = existingDocumentUri,
                         },
                         Edits = new TextEdit[]
                         {
@@ -521,14 +521,14 @@ class BCD
                             {
                                 Range = new LSP.Range
                                 {
-                                    Start = new Position() { Line = 0, Character = 0, },
-                                    End = new Position() { Line = 4, Character = 0 }
+                                    Start = new Position() { Line = 0, Character = 0 },
+                                    End = new Position() { Line = 4, Character = 0 },
                                 },
-                                NewText = ""
-                            }
-                        }
-                    }
-                }
+                                NewText = "",
+                            },
+                        },
+                    },
+                },
             };
 
             var expectedCodeAction = CodeActionsTests.CreateCodeAction(
@@ -545,7 +545,7 @@ class BCD
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 0, Character = 6 },
-                    End = new Position { Line = 0, Character = 9 }
+                    End = new Position { Line = 0, Character = 9 },
                 },
                 diagnostics: null,
                 edit: workspaceEdit
@@ -576,9 +576,9 @@ class {|caret:BCD|}
                         {
                             WorkspaceEdit = new WorkspaceEditSetting
                             {
-                                ResourceOperations = [ResourceOperationKind.Create]
-                            }
-                        }
+                                ResourceOperations = [ResourceOperationKind.Create],
+                            },
+                        },
                     },
 
                     DocumentFileContainingFolders = new[] { Path.Combine("dir1", "dir2", "dir3") },
@@ -587,7 +587,7 @@ class {|caret:BCD|}
 
             var titlePath = new string[]
             {
-                string.Format(FeaturesResources.Move_type_to_0, "BCD.cs")
+                string.Format(FeaturesResources.Move_type_to_0, "BCD.cs"),
             };
             var unresolvedCodeAction = CodeActionsTests.CreateCodeAction(
                 title: string.Format(FeaturesResources.Move_type_to_0, "BCD.cs"),
@@ -603,7 +603,7 @@ class {|caret:BCD|}
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 3, Character = 6 },
-                    End = new Position { Line = 3, Character = 9 }
+                    End = new Position { Line = 3, Character = 9 },
                 },
                 diagnostics: null
             );
@@ -639,7 +639,7 @@ class {|caret:BCD|}
                     {
                         TextDocument = new OptionalVersionedTextDocumentIdentifier
                         {
-                            Uri = newDocumentUri
+                            Uri = newDocumentUri,
                         },
                         Edits = new TextEdit[]
                         {
@@ -647,22 +647,22 @@ class {|caret:BCD|}
                             {
                                 Range = new LSP.Range
                                 {
-                                    Start = new Position() { Line = 0, Character = 0, },
-                                    End = new Position() { Line = 0, Character = 0 }
+                                    Start = new Position() { Line = 0, Character = 0 },
+                                    End = new Position() { Line = 0, Character = 0 },
                                 },
                                 NewText =
                                     @"class BCD
 {
-}"
-                            }
-                        }
+}",
+                            },
+                        },
                     },
                     // Remove the declaration from existing file
                     new TextDocumentEdit()
                     {
                         TextDocument = new OptionalVersionedTextDocumentIdentifier()
                         {
-                            Uri = existingDocumentUri
+                            Uri = existingDocumentUri,
                         },
                         Edits = new TextEdit[]
                         {
@@ -670,14 +670,14 @@ class {|caret:BCD|}
                             {
                                 Range = new LSP.Range
                                 {
-                                    Start = new Position() { Line = 3, Character = 0, },
-                                    End = new Position() { Line = 5, Character = 1 }
+                                    Start = new Position() { Line = 3, Character = 0 },
+                                    End = new Position() { Line = 5, Character = 1 },
                                 },
-                                NewText = ""
-                            }
-                        }
-                    }
-                }
+                                NewText = "",
+                            },
+                        },
+                    },
+                },
             };
 
             var expectedCodeAction = CodeActionsTests.CreateCodeAction(
@@ -694,7 +694,7 @@ class {|caret:BCD|}
                 applicableRange: new LSP.Range
                 {
                     Start = new Position { Line = 3, Character = 6 },
-                    End = new Position { Line = 3, Character = 9 }
+                    End = new Position { Line = 3, Character = 9 },
                 },
                 diagnostics: null,
                 edit: workspaceEdit
@@ -732,11 +732,11 @@ class {|caret:BCD|}
                     {
                         TextDocument = new OptionalVersionedTextDocumentIdentifier
                         {
-                            Uri = locations.Single().Uri
+                            Uri = locations.Single().Uri,
                         },
                         Edits = edits,
-                    }
-                }
+                    },
+                },
             };
 
         private static WorkspaceEdit GenerateRenameFileEdit(
@@ -751,7 +751,7 @@ class {|caret:BCD|}
                         RenameFile,
                         DeleteFile
                     >(new RenameFile() { OldUri = locations.oldUri, NewUri = locations.newUri }))
-                    .ToArray()
+                    .ToArray(),
             };
     }
 }

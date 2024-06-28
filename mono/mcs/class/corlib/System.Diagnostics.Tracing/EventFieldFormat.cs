@@ -38,6 +38,6 @@ namespace System.Diagnostics.Tracing
         HResult = 15,
         Json = 12,
         String = 2,
-        Xml = 11
+        Xml = 11,
     }
 }

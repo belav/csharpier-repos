@@ -27,8 +27,8 @@ public class WeatherForecastService
             {
                 ContractResolver = new DefaultContractResolver
                 {
-                    NamingStrategy = new CamelCaseNamingStrategy()
-                }
+                    NamingStrategy = new CamelCaseNamingStrategy(),
+                },
             }
         );
         return weatherData;

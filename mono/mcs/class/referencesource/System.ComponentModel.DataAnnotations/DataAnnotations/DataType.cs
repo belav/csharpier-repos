@@ -88,6 +88,6 @@
         /// <summary>
         /// File upload data type
         /// </summary>
-        Upload
+        Upload,
     }
 }

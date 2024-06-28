@@ -310,11 +310,9 @@ namespace System.ServiceModel.Channels.Security
             SecurityKeyIdentifierClause encClause = ShouldOutputEncryptedKey
                 ? CounterParameters.CallCreateKeyIdentifierClause(
                     encToken,
-                    !ShouldOutputEncryptedKey
-                        ? SecurityTokenReferenceStyle.Internal
-                        : includeEncToken
-                            ? Parameters.ReferenceStyle
-                            : SecurityTokenReferenceStyle.External
+                    !ShouldOutputEncryptedKey ? SecurityTokenReferenceStyle.Internal
+                        : includeEncToken ? Parameters.ReferenceStyle
+                        : SecurityTokenReferenceStyle.External
                 )
                 : null;
 

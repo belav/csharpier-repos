@@ -20,7 +20,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass
@@ -1102,7 +1102,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             dynamic dy = mc;
             List<Test> list = new List<Test>()
             {
-                new Test() { _field1 = dy.Property_Float, _field2 = dy.Property_FloatNullArr }
+                new Test() { _field1 = dy.Property_Float, _field2 = dy.Property_FloatNullArr },
             };
             if (
                 list.Count == 1
@@ -1432,7 +1432,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             mc.myStructArr = new MyStruct[]
             {
                 new MyStruct() { Number = 1 },
-                new MyStruct() { Number = -1 }
+                new MyStruct() { Number = -1 },
             };
             dynamic dy = mc;
             bool result = TestMethod(1, string.Empty, (MyStruct[])dy.Property_MyStructArr);
@@ -1479,7 +1479,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.regpro
             mc.myStructNullArr = new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = -1 }
+                new MyStruct() { Number = -1 },
             };
             if (((MyStruct?[])dy.Property_MyStructNullArr)[0] == null)
                 return 0;

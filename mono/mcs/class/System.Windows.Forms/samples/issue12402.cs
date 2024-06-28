@@ -185,7 +185,7 @@ namespace Test
                     this.linkLabel6,
                     this.linkLabel7,
                     this.linkLabel8,
-                    this.linkLabel9
+                    this.linkLabel9,
                 }
             );
             this.Name = "Form1";

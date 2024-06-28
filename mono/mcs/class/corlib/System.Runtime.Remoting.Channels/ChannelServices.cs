@@ -385,7 +385,7 @@ namespace System.Runtime.Remoting.Channels
                 {
                     typeof(IDictionary),
                     typeof(IClientChannelSinkProvider),
-                    typeof(IServerChannelSinkProvider)
+                    typeof(IServerChannelSinkProvider),
                 };
                 parms = new Object[] { channel.CustomProperties, clientSinks, serverSinks };
             }
@@ -563,7 +563,7 @@ namespace System.Runtime.Remoting.Channels
         static IList oldStartModeTypes = new string[]
         {
             "Novell.Zenworks.Zmd.Public.UnixServerChannel",
-            "Novell.Zenworks.Zmd.Public.UnixChannel"
+            "Novell.Zenworks.Zmd.Public.UnixChannel",
         };
     }
 

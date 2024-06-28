@@ -51,7 +51,7 @@ public static class HttpClientExtensions
         }
         var submision = new HttpRequestMessage(new HttpMethod(submit.Method.ToString()), target)
         {
-            Content = new StreamContent(submit.Body)
+            Content = new StreamContent(submit.Body),
         };
 
         foreach (var header in submit.Headers)

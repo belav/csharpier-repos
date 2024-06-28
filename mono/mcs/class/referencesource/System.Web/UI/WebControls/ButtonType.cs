@@ -24,6 +24,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// A link button, like the LinkButton WebControl.
         /// </devdoc>
-        Link = 2
+        Link = 2,
     }
 }

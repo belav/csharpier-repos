@@ -72,7 +72,7 @@ internal partial class TestRunner
                         Message = string.Format(
                             LanguageServerResources.Test_run_error,
                             testRunCompleteArgs.Error
-                        )
+                        ),
                     }
                 );
                 return;
@@ -151,7 +151,7 @@ internal partial class TestRunner
             {
                 TestsPassed = passed,
                 TestsFailed = failed,
-                TestsSkipped = skipped
+                TestsSkipped = skipped,
             };
             return stats;
         }

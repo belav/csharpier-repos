@@ -1317,7 +1317,7 @@ namespace System.IO.Tests
                 var watcher = new FileSystemWatcher(TestDirectory)
                 {
                     IncludeSubdirectories = true,
-                    NotifyFilter = NotifyFilters.FileName
+                    NotifyFilter = NotifyFilters.FileName,
                 }
             )
             {

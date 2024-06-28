@@ -76,7 +76,7 @@ namespace System.Linq
             {
                 return new TElement[]
                 {
-                    GetEnumerableSorter().ElementAt(buffer._items, count, minIdx)
+                    GetEnumerableSorter().ElementAt(buffer._items, count, minIdx),
                 };
             }
 
@@ -105,7 +105,7 @@ namespace System.Linq
             {
                 return new List<TElement>(1)
                 {
-                    GetEnumerableSorter().ElementAt(buffer._items, count, minIdx)
+                    GetEnumerableSorter().ElementAt(buffer._items, count, minIdx),
                 };
             }
 

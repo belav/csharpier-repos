@@ -610,7 +610,7 @@ namespace System
             HasPrefixAndSuffix,
             HasOnlyPrefix,
             HasOnlySuffix,
-            HasNoPrefixNorSuffix
+            HasNoPrefixNorSuffix,
         }
 
         struct VarAndLitPair

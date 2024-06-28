@@ -123,8 +123,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Formatting
                 Options = new LSP.FormattingOptions()
                 {
                     InsertSpaces = insertSpaces,
-                    TabSize = tabSize
-                }
+                    TabSize = tabSize,
+                },
             };
     }
 }

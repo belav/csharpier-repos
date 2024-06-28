@@ -607,7 +607,7 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (va
                         ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
                         "var c1 = new C(), c2 = new C()"
                     )
-                    .WithLocation(12, 26)
+                    .WithLocation(12, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
@@ -727,7 +727,7 @@ IBlockOperation (5 statements, 2 locals) (OperationKind.Block, Type: null, IsInv
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ")").WithLocation(14, 22),
                 // CS1513: } expected
                 //         using (c1, c2)
-                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(14, 22)
+                Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(14, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -796,7 +796,7 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (va
                 //         /*<bind>*/using (var c1 = new C())
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var c1 = new C()")
                     .WithArguments("C")
-                    .WithLocation(9, 26)
+                    .WithLocation(9, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
@@ -854,7 +854,7 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using (c1
                 //         /*<bind>*/using (c1)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "c1")
                     .WithArguments("C")
-                    .WithLocation(10, 26)
+                    .WithLocation(10, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
@@ -898,7 +898,7 @@ IUsingOperation (OperationKind.Using, Type: null, IsInvalid) (Syntax: 'using () 
                 //         /*<bind>*/using ()
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
                     .WithArguments(")")
-                    .WithLocation(9, 26)
+                    .WithLocation(9, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<UsingStatementSyntax>(
@@ -1527,7 +1527,7 @@ Block[B4] - Exit
                 // file.cs(19,25): error CS1751: Cannot specify a default value for a parameter array
                 //     public void Dispose(params object[] extras = null) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params")
-                    .WithLocation(19, 25)
+                    .WithLocation(19, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -1814,7 +1814,7 @@ class C
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params int)")
-                    .WithLocation(14, 11)
+                    .WithLocation(14, 11),
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
@@ -1973,7 +1973,7 @@ class C
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params int)")
-                    .WithLocation(14, 11)
+                    .WithLocation(14, 11),
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
@@ -2132,7 +2132,7 @@ class C
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params int)")
-                    .WithLocation(14, 11)
+                    .WithLocation(14, 11),
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
@@ -2292,7 +2292,7 @@ class C
                 //         s.Dispose();
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Dispose")
                     .WithArguments("extras", "S.Dispose(params object[], int)")
-                    .WithLocation(14, 11)
+                    .WithLocation(14, 11),
             };
 
             var compilation = CreateCompilationWithIL(source, ilSource);
@@ -3283,7 +3283,7 @@ Block[B8] - Exit
                 //         using (GetDisposable() ?? input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input")
                     .WithArguments("NotDisposable")
-                    .WithLocation(6, 16)
+                    .WithLocation(6, 16),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -3392,7 +3392,7 @@ Block[B6] - Exit
                 //         using (b ? GetDisposable() : input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable() : input")
                     .WithArguments("MyDisposable")
-                    .WithLocation(6, 16)
+                    .WithLocation(6, 16),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -3509,7 +3509,7 @@ Block[B8] - Exit
                 //         using (b ? GetDisposable<MyDisposable>() : input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "b ? GetDisposable<MyDisposable>() : input")
                     .WithArguments("MyDisposable")
-                    .WithLocation(6, 16)
+                    .WithLocation(6, 16),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -3641,7 +3641,7 @@ Block[B8] - Exit
                 //         using (GetDisposable() ?? input)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "GetDisposable() ?? input")
                     .WithArguments("MyDisposable?")
-                    .WithLocation(6, 16)
+                    .WithLocation(6, 16),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -4482,7 +4482,7 @@ Block[B6] - Exit
                 //         await using (s)
                 Diagnostic(ErrorCode.ERR_NoConvToIAsyncDisp, "s")
                     .WithArguments("S?")
-                    .WithLocation(9, 22)
+                    .WithLocation(9, 22),
             };
 
             var comp = CreateCompilationWithTasksExtensions(new[] { source, AsyncStreamsTypes });
@@ -4868,7 +4868,7 @@ Block[B6] - Exit
                     .WithLocation(8, 21),
                 // file.cs(11,34): error CS0231: A params parameter must be the last parameter in a parameter list
                 //     Task DisposeAsync(int a = 3, params int[] extras, bool b = false) => throw null;
-                Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] extras").WithLocation(11, 34)
+                Diagnostic(ErrorCode.ERR_ParamsLast, "params int[] extras").WithLocation(11, 34),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7025,7 +7025,7 @@ class P : System.IDisposable
             label3:
                 using var b = new P();"
                     )
-                    .WithLocation(15, 13)
+                    .WithLocation(15, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7131,7 +7131,7 @@ class P : System.IDisposable
             {
                 // file.cs(12,9): warning CS0162: Unreachable code detected
                 //         int x = 0;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "int").WithLocation(12, 9)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "int").WithLocation(12, 9),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7228,7 +7228,7 @@ class P : System.IDisposable
                 // file.cs(13,9): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //         goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
-                    .WithLocation(13, 9)
+                    .WithLocation(13, 9),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7339,7 +7339,7 @@ class P : System.IDisposable
                 // file.cs(15,9): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //         goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
-                    .WithLocation(15, 9)
+                    .WithLocation(15, 9),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7549,7 +7549,7 @@ class P : System.IDisposable
                 // file.cs(14,13): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //             goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
-                    .WithLocation(14, 13)
+                    .WithLocation(14, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7669,7 +7669,7 @@ class P : System.IDisposable
                 // file.cs(17,13): error CS8649: A goto cannot jump to a location before a using declaration within the same block.
                 //             goto label1;
                 Diagnostic(ErrorCode.ERR_GoToBackwardJumpOverUsingVar, "goto label1;")
-                    .WithLocation(17, 13)
+                    .WithLocation(17, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -7834,7 +7834,7 @@ Block[B4] - Exit
                 //             using var x = new P();
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using var x = new P();")
                     .WithArguments("P")
-                    .WithLocation(8, 13)
+                    .WithLocation(8, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -8996,7 +8996,7 @@ class C
                 //         _ = local;
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "local")
                     .WithArguments("local")
-                    .WithLocation(8, 13)
+                    .WithLocation(8, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -9150,7 +9150,7 @@ class C2
                 // file.cs(14,17): error CS8647: A using variable cannot be used directly within a switch section (consider using braces).
                 //                 using C1 o1 = new C1();
                 Diagnostic(ErrorCode.ERR_UsingVarInSwitchCase, "using C1 o1 = new C1();")
-                    .WithLocation(14, 17)
+                    .WithLocation(14, 17),
             };
 
             var expectedFlowGraph =
@@ -9271,7 +9271,7 @@ class C2
                 // file.cs(12,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             using C1 o1 = new C1();
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();")
-                    .WithLocation(12, 13)
+                    .WithLocation(12, 13),
             };
 
             var expectedFlowGraph =
@@ -9376,7 +9376,7 @@ class C2
                 // file.cs(13,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             using C1 o1 = new C1();
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();")
-                    .WithLocation(13, 13)
+                    .WithLocation(13, 13),
             };
 
             var expectedFlowGraph =
@@ -9480,7 +9480,7 @@ class C2
                 // file.cs(13,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             using C1 o1 = new C1();
                 Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "using C1 o1 = new C1();")
-                    .WithLocation(13, 13)
+                    .WithLocation(13, 13),
             };
 
             var expectedFlowGraph =

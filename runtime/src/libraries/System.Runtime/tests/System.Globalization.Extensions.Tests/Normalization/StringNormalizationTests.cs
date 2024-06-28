@@ -62,7 +62,7 @@ namespace System.Globalization.Tests
             {
                 "\u1E9b\u0323",
                 NormalizationForm.FormD,
-                "\u017f\u0323\u0307"
+                "\u017f\u0323\u0307",
             };
 
             if (
@@ -78,7 +78,7 @@ namespace System.Globalization.Tests
                 {
                     "\u1E9b\u0323",
                     NormalizationForm.FormKD,
-                    "\u0073\u0323\u0307"
+                    "\u0073\u0323\u0307",
                 };
             }
         }

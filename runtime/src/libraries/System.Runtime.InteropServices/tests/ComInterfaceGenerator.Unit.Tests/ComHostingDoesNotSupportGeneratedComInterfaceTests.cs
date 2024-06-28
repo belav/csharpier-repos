@@ -127,9 +127,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                             is_global = true
                             build_property.EnableComHosting = {enableComHosting}
                             """
-                        )
-                    }
-                }
+                        ),
+                    },
+                },
             };
 
             return test.RunAsync();

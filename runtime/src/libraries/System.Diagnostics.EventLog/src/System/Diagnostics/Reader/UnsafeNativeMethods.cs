@@ -31,7 +31,7 @@ namespace Microsoft.Win32
             EvtQueryFilePath = 0x2,
             EvtQueryForwardDirection = 0x100,
             EvtQueryReverseDirection = 0x200,
-            EvtQueryTolerateQueryErrors = 0x1000
+            EvtQueryTolerateQueryErrors = 0x1000,
         }
 
         [Flags]
@@ -41,7 +41,7 @@ namespace Microsoft.Win32
             EvtSubscribeStartAtOldestRecord = 2,
             EvtSubscribeStartAfterBookmark = 3,
             EvtSubscribeTolerateQueryErrors = 0x1000,
-            EvtSubscribeStrict = 0x10000
+            EvtSubscribeStrict = 0x10000,
         }
 
         /// <summary>
@@ -78,13 +78,13 @@ namespace Microsoft.Win32
 
             // Array = 128
             EvtVarTypeStringArray = 129,
-            EvtVarTypeUInt32Array = 136
+            EvtVarTypeUInt32Array = 136,
         }
 
         internal enum EvtMasks
         {
             EVT_VARIANT_TYPE_MASK = 0x7f,
-            EVT_VARIANT_TYPE_ARRAY = 128
+            EVT_VARIANT_TYPE_ARRAY = 128,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -197,7 +197,7 @@ namespace Microsoft.Win32
         internal enum EvtEventPropertyId
         {
             EvtEventQueryIDs = 0,
-            EvtEventPath = 1
+            EvtEventPath = 1,
         }
 
         /// <summary>
@@ -206,7 +206,9 @@ namespace Microsoft.Win32
         internal enum EvtQueryPropertyId
         {
             EvtQueryNames = 0, //String;   //Variant will be array of EvtVarTypeString
-            EvtQueryStatuses = 1 //UInt32;   //Variant will be Array of EvtVarTypeUInt32
+            EvtQueryStatuses =
+                1 //UInt32;   //Variant will be Array of EvtVarTypeUInt32
+            ,
         }
 
         /// <summary>
@@ -247,13 +249,15 @@ namespace Microsoft.Win32
             EvtPublisherMetadataKeywords = 25, // EvtVarTypeEvtHandle, ObjectArray
             EvtPublisherMetadataKeywordName = 26, // EvtVarTypeString
             EvtPublisherMetadataKeywordValue = 27, // EvtVarTypeUInt64
-            EvtPublisherMetadataKeywordMessageID = 28 //,       // EvtVarTypeUInt32
+            EvtPublisherMetadataKeywordMessageID =
+                28 //,       // EvtVarTypeUInt32
+            ,
             // EvtPublisherMetadataPropertyIdEND
         }
 
         internal enum EvtChannelReferenceFlags
         {
-            EvtChannelReferenceImported = 1
+            EvtChannelReferenceImported = 1,
         }
 
         internal enum EvtEventMetadataPropertyId
@@ -267,6 +271,7 @@ namespace Microsoft.Win32
             EventMetadataEventKeyword, // EvtVarTypeUInt64
             EventMetadataEventMessageID, // EvtVarTypeUInt32
             EventMetadataEventTemplate // EvtVarTypeString
+            ,
             // EvtEventMetadataPropertyIdEND
         }
 
@@ -293,7 +298,7 @@ namespace Microsoft.Win32
             EvtChannelPublishingConfigClockType, // EvtVarTypeUInt32, EVT_CHANNEL_CLOCK_TYPE
             EvtChannelPublishingConfigSidType, // EvtVarTypeUInt32, EVT_CHANNEL_SID_TYPE
             EvtChannelPublisherList, // EvtVarTypeString | EVT_VARIANT_TYPE_ARRAY
-            EvtChannelConfigPropertyIdEND
+            EvtChannelConfigPropertyIdEND,
         }
 
         // LOG INFORMATION
@@ -313,7 +318,7 @@ namespace Microsoft.Win32
         {
             EvtExportLogChannelPath = 1,
             EvtExportLogFilePath = 2,
-            EvtExportLogTolerateQueryErrors = 0x1000
+            EvtExportLogTolerateQueryErrors = 0x1000,
         }
 
         // RENDERING
@@ -321,14 +326,18 @@ namespace Microsoft.Win32
         {
             EvtRenderContextValues = 0, // Render specific properties
             EvtRenderContextSystem = 1, // Render all system properties (System)
-            EvtRenderContextUser = 2 // Render all user properties (User/EventData)
+            EvtRenderContextUser =
+                2 // Render all user properties (User/EventData)
+            ,
         }
 
         internal enum EvtRenderFlags
         {
             EvtRenderEventValues = 0, // Variants
             EvtRenderEventXml = 1, // XML
-            EvtRenderBookmark = 2 // Bookmark
+            EvtRenderBookmark =
+                2 // Bookmark
+            ,
         }
 
         internal enum EvtFormatMessageFlags
@@ -341,7 +350,7 @@ namespace Microsoft.Win32
             EvtFormatMessageChannel = 6,
             EvtFormatMessageProvider = 7,
             EvtFormatMessageId = 8,
-            EvtFormatMessageXml = 9
+            EvtFormatMessageXml = 9,
         }
 
         internal enum EvtSystemPropertyId
@@ -364,13 +373,13 @@ namespace Microsoft.Win32
             EvtSystemComputer, // EvtVarTypeString
             EvtSystemUserID, // EvtVarTypeSid
             EvtSystemVersion, // EvtVarTypeUInt8
-            EvtSystemPropertyIdEND
+            EvtSystemPropertyIdEND,
         }
 
         // SESSION
         internal enum EvtLoginClass
         {
-            EvtRpcLogin = 1
+            EvtRpcLogin = 1,
         }
 
 #if NET7_0_OR_GREATER
@@ -449,7 +458,7 @@ namespace Microsoft.Win32
                             User = Marshal.PtrToStringUni(_value.User),
                             Domain = Marshal.PtrToStringUni(_value.Domain),
                             Password = _passwordHandle,
-                            Flags = _value.Flags
+                            Flags = _value.Flags,
                         };
                     }
 
@@ -477,7 +486,7 @@ namespace Microsoft.Win32
             EvtSeekRelativeToCurrent = 3,
             EvtSeekRelativeToBookmark = 4,
             EvtSeekOriginMask = 7,
-            EvtSeekStrict = 0x10000
+            EvtSeekStrict = 0x10000,
         }
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
@@ -824,7 +833,7 @@ namespace Microsoft.Win32
                         {
                             StringVal = Marshal.PtrToStringUni(StringVal),
                             Count = Count,
-                            Type = Type
+                            Type = Type,
                         };
                     }
 

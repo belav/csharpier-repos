@@ -65,7 +65,7 @@ app.MapGet(""/hello/{name?}/{title?}"", (string? name, string? title) => $""Hell
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
                 .WithArguments("title")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -128,7 +128,7 @@ app.MapGet(""/hello/{name?}/{title?}"", SayHello);
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
                 .WithArguments("title")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -194,7 +194,7 @@ public partial class ExternalImplementation
                 .WithLocation(2),
             new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
                 .WithArguments("title")
-                .WithLocation(3)
+                .WithLocation(3),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostics, fixedSource);
@@ -243,7 +243,7 @@ public static class Helpers
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.DetectMismatchedParameterOptionality)
                 .WithArguments("title")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         await VerifyCS.VerifyCodeFixAsync(

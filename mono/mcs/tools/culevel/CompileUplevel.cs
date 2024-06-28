@@ -598,7 +598,7 @@ namespace Mono.Tools
                             {
                                 new CodeArgumentReferenceExpression("ua"),
                                 hasJavaScript,
-                                ualengthRef
+                                ualengthRef,
                             }
                         );
                         subMatches.TrueStatements.Add(returnHasJS);
@@ -996,7 +996,7 @@ namespace Mono.Tools
                         FieldDirection.Out,
                         new CodeArgumentReferenceExpression("hasJavaScript")
                     ),
-                    new CodeArgumentReferenceExpression("ualength")
+                    new CodeArgumentReferenceExpression("ualength"),
                 }
             );
         }

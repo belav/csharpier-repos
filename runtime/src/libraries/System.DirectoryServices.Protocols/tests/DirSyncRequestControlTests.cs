@@ -39,21 +39,21 @@ namespace System.DirectoryServices.Protocols.Tests
                 null,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
-                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
+                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 },
             };
             yield return new object[]
             {
                 new byte[0],
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
-                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
+                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 },
             };
             yield return new object[]
             {
                 new byte[] { 97, 98, 99 },
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 13, 2, 1, 0, 2, 3, 16, 0, 0, 4, 3, 97, 98, 99 }
-                    : new byte[] { 48, 13, 2, 1, 0, 2, 3, 16, 0, 0, 4, 3, 97, 98, 99 }
+                    : new byte[] { 48, 13, 2, 1, 0, 2, 3, 16, 0, 0, 4, 3, 97, 98, 99 },
             };
         }
 
@@ -81,7 +81,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 DirectorySynchronizationOptions.None,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
-                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
+                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 },
             };
             yield return new object[]
             {
@@ -108,9 +108,9 @@ namespace System.DirectoryServices.Protocols.Tests
                         0,
                         0,
                         4,
-                        0
+                        0,
                     }
-                    : new byte[] { 48, 10, 2, 1, 255, 2, 3, 16, 0, 0, 4, 0 }
+                    : new byte[] { 48, 10, 2, 1, 255, 2, 3, 16, 0, 0, 4, 0 },
             };
             yield return new object[]
             {
@@ -118,7 +118,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 DirectorySynchronizationOptions.ObjectSecurity,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 13, 2, 1, 1, 2, 3, 16, 0, 0, 4, 3, 97, 98, 99 }
-                    : new byte[] { 48, 13, 2, 1, 1, 2, 3, 16, 0, 0, 4, 3, 97, 98, 99 }
+                    : new byte[] { 48, 13, 2, 1, 1, 2, 3, 16, 0, 0, 4, 3, 97, 98, 99 },
             };
         }
 
@@ -151,7 +151,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 1048576,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
-                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 }
+                    : new byte[] { 48, 10, 2, 1, 0, 2, 3, 16, 0, 0, 4, 0 },
             };
             yield return new object[]
             {
@@ -160,7 +160,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 0,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 11, 2, 4, 255, 255, 255, 255, 2, 1, 0, 4, 0 }
-                    : new byte[] { 48, 8, 2, 1, 255, 2, 1, 0, 4, 0 }
+                    : new byte[] { 48, 8, 2, 1, 255, 2, 1, 0, 4, 0 },
             };
             yield return new object[]
             {
@@ -169,7 +169,7 @@ namespace System.DirectoryServices.Protocols.Tests
                 10,
                 (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                     ? new byte[] { 48, 132, 0, 0, 0, 11, 2, 1, 1, 2, 1, 10, 4, 3, 97, 98, 99 }
-                    : new byte[] { 48, 11, 2, 1, 1, 2, 1, 10, 4, 3, 97, 98, 99 }
+                    : new byte[] { 48, 11, 2, 1, 1, 2, 1, 10, 4, 3, 97, 98, 99 },
             };
         }
 

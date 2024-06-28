@@ -29,6 +29,6 @@ namespace System.IO.Packaging
     {
         InCertificatePart,
         InSignaturePart,
-        NotEmbedded
+        NotEmbedded,
     }
 }

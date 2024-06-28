@@ -58,7 +58,7 @@ C.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -118,7 +118,8 @@ C.M();
             src,
             references: new[]
             {
-                CreateCompilation(new[] { libSrc, experimentalAttributeSrc }).EmitToImageReference()
+                CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
+                    .EmitToImageReference(),
             }
         );
 
@@ -206,7 +207,7 @@ C.M();
             references: new[]
             {
                 CreateCompilation(libSrc, references: new[] { attrRef }).EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -267,7 +268,7 @@ C.M();
             references: new[]
             {
                 CreateCompilation(libSrc, references: new[] { attrRef }).EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -368,7 +369,7 @@ C.M();
             {
                 CreateCompilation(libSrc, references: new[] { attrRef, moduleRef })
                     .EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -420,7 +421,8 @@ C.M();
             src,
             references: new[]
             {
-                CreateCompilation(new[] { libSrc, experimentalAttributeSrc }).EmitToImageReference()
+                CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
+                    .EmitToImageReference(),
             }
         );
 
@@ -464,7 +466,8 @@ C.M();
             src,
             references: new[]
             {
-                CreateCompilation(new[] { libSrc, experimentalAttributeSrc }).EmitToImageReference()
+                CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
+                    .EmitToImageReference(),
             }
         );
 
@@ -498,7 +501,8 @@ C.M();
             src,
             references: new[]
             {
-                CreateCompilation(new[] { libSrc, experimentalAttributeSrc }).EmitToImageReference()
+                CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
+                    .EmitToImageReference(),
             }
         );
         comp.VerifyDiagnostics(
@@ -571,7 +575,7 @@ C.M();
             references: new[]
             {
                 CreateCompilation(libSrc, references: new[] { attrRef }).EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -666,7 +670,7 @@ C.M();
             references: new[]
             {
                 CreateCompilation(libSrc, references: new[] { attrRef }).EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -826,7 +830,7 @@ C.M();
             references: new[]
             {
                 CreateCompilation(libSrc, references: new[] { attrRef }).EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -909,7 +913,7 @@ C.Nested.M();
             references: new[]
             {
                 CreateCompilation(libSrc, references: new[] { attrRef }).EmitToImageReference(),
-                attrRef
+                attrRef,
             }
         );
 
@@ -966,7 +970,7 @@ public class Derived : C
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1026,7 +1030,7 @@ public class DerivedDerived : Derived
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1078,7 +1082,8 @@ public class Derived : C { public override void M() { } }
             src,
             references: new[]
             {
-                CreateCompilation(new[] { libSrc, experimentalAttributeSrc }).EmitToImageReference()
+                CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
+                    .EmitToImageReference(),
             }
         );
 
@@ -1124,7 +1129,7 @@ public class C : I
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1156,7 +1161,7 @@ public class C : I
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1184,7 +1189,7 @@ C.M();
             src,
             references: new[]
             {
-                CreateCompilation(libSrc, references: new[] { missingRef }).EmitToImageReference()
+                CreateCompilation(libSrc, references: new[] { missingRef }).EmitToImageReference(),
             }
         );
         comp.VerifyDiagnostics(
@@ -1433,7 +1438,7 @@ S.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1472,7 +1477,7 @@ e.ToString();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1513,7 +1518,7 @@ _ = new C();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1554,7 +1559,7 @@ C.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1595,7 +1600,7 @@ _ = C.P;
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1636,7 +1641,7 @@ _ = C.field;
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1677,7 +1682,7 @@ C.Event += () => { };
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1714,7 +1719,7 @@ i.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1748,7 +1753,7 @@ d();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1784,7 +1789,7 @@ C.M(42);
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1814,7 +1819,7 @@ _ = C.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -1841,7 +1846,7 @@ c.ToString();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2520,7 +2525,7 @@ C.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2617,7 +2622,7 @@ C.M();
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2654,7 +2659,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2698,7 +2703,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2735,7 +2740,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2775,7 +2780,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2812,7 +2817,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2849,7 +2854,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 
@@ -2883,7 +2888,7 @@ class D
                 references: new[]
                 {
                     CreateCompilation(new[] { libSrc, experimentalAttributeSrc })
-                        .EmitToImageReference()
+                        .EmitToImageReference(),
                 }
             );
 

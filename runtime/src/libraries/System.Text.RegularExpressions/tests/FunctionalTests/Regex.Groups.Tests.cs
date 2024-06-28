@@ -39,7 +39,7 @@ namespace System.Text.RegularExpressions.Tests
                         regexes[i],
                         cases[i].Culture,
                         cases[i].Input,
-                        cases[i].Expected
+                        cases[i].Expected,
                     };
                 }
             }
@@ -2516,7 +2516,7 @@ namespace System.Text.RegularExpressions.Tests
                     "aaabbbcccdddeeefff",
                     "aaabbbcccdddeeefff",
                     "",
-                    "aaabbbcccdddeeefff"
+                    "aaabbbcccdddeeefff",
                 }
             );
             yield return (
@@ -2639,7 +2639,7 @@ namespace System.Text.RegularExpressions.Tests
                         "<03deep_03",
                         ">>>",
                         "<",
-                        "03deep_03"
+                        "03deep_03",
                     }
                 );
 
@@ -2657,7 +2657,7 @@ namespace System.Text.RegularExpressions.Tests
                         "<01deep_01<02deep_01<03deep_01>><02deep_02><02deep_03<03deep_03>>>",
                         "",
                         "",
-                        "01deep_01<02deep_01<03deep_01>><02deep_02><02deep_03<03deep_03>>"
+                        "01deep_01<02deep_01<03deep_01>><02deep_02><02deep_03<03deep_03>>",
                     }
                 );
 
@@ -2701,7 +2701,7 @@ namespace System.Text.RegularExpressions.Tests
                         "<b><a>Cat</a></b><<<<c>>>><<d><e<f>><g><<<>>>>",
                         "",
                         "",
-                        "<a>Cat"
+                        "<a>Cat",
                     }
                 );
             }
@@ -2746,7 +2746,7 @@ namespace System.Text.RegularExpressions.Tests
                         "1",
                         Environment.NewLine
                             + "<Projecaa DefaultTargets=\"x\"/>"
-                            + Environment.NewLine
+                            + Environment.NewLine,
                     }
                 );
 
@@ -2758,7 +2758,7 @@ namespace System.Text.RegularExpressions.Tests
                     new string[]
                     {
                         @"<%# DataBinder.Eval(this, ""MyNumber"") %>",
-                        @" DataBinder.Eval(this, ""MyNumber"") "
+                        @" DataBinder.Eval(this, ""MyNumber"") ",
                     }
                 );
             }
@@ -2879,7 +2879,7 @@ namespace System.Text.RegularExpressions.Tests
                     "/pages/homepage.aspx/index.aspx",
                     "/pages",
                     "homepage.aspx",
-                    "index"
+                    "index",
                 }
             );
 
@@ -2922,7 +2922,7 @@ namespace System.Text.RegularExpressions.Tests
                     "/pages/homepage.aspx/index.aspx",
                     "/pages",
                     "homepage.aspx",
-                    "index"
+                    "index",
                 }
             );
 
@@ -2972,7 +2972,7 @@ namespace System.Text.RegularExpressions.Tests
                     "/pages/homepage.aspx/index.aspx",
                     "/pages",
                     "homepage.aspx",
-                    "index"
+                    "index",
                 }
             );
 
@@ -3022,7 +3022,7 @@ namespace System.Text.RegularExpressions.Tests
                     "/pages/homepage.aspx/index.aspx",
                     "/pages",
                     "homepage.aspx",
-                    "index"
+                    "index",
                 }
             );
 

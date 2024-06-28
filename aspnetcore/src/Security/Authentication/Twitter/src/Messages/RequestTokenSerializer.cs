@@ -89,7 +89,7 @@ public class RequestTokenSerializer : IDataSerializer<RequestToken>
             Token = token,
             TokenSecret = tokenSecret,
             CallbackConfirmed = callbackConfirmed,
-            Properties = properties
+            Properties = properties,
         };
     }
 }

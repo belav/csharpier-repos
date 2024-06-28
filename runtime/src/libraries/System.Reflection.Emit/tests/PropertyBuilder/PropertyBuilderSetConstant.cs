@@ -12,7 +12,7 @@ namespace System.Reflection.Emit.Tests
         {
             Red = 0,
             Green = 1,
-            Blue = 2
+            Blue = 2,
         }
 
         public static IEnumerable<object[]> SetConstant_TestData()

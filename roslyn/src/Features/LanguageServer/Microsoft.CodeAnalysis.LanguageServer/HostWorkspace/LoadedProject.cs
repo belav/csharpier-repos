@@ -58,7 +58,7 @@ internal sealed class LoadedProject : IDisposable
         {
             new(projectDirectory, ".cs"),
             new(projectDirectory, ".cshtml"),
-            new(projectDirectory, ".razor")
+            new(projectDirectory, ".razor"),
         };
 
         _fileChangeContext = fileWatcher.CreateContext(watchedDirectories);

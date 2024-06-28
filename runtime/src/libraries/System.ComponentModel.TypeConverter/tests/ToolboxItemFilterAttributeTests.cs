@@ -62,19 +62,19 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new ToolboxItemFilterAttribute("filterstring", ToolboxItemFilterType.Allow),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Custom),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };
@@ -111,19 +111,19 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new ToolboxItemFilterAttribute("filterstring", ToolboxItemFilterType.Allow),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Custom),
-                true
+                true,
             };
 
             yield return new object[] { attribute, new object(), false };

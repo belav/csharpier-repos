@@ -24,7 +24,7 @@ namespace System.Security.Cryptography
     internal enum CryptoAPITransformMode
     {
         Encrypt = 0,
-        Decrypt = 1
+        Decrypt = 1,
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -483,7 +483,7 @@ namespace System.Security.Cryptography
         UseArchivableKey = 0x0010,
         UseUserProtectedKey = 0x0020,
         NoPrompt = 0x0040,
-        CreateEphemeralKey = 0x0080
+        CreateEphemeralKey = 0x0080,
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]

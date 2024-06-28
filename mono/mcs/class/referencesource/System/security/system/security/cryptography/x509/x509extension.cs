@@ -94,7 +94,7 @@ namespace System.Security.Cryptography.X509Certificates
         KeyEncipherment = 0x0020,
         NonRepudiation = 0x0040,
         DigitalSignature = 0x0080,
-        DecipherOnly = 0x8000
+        DecipherOnly = 0x8000,
     }
 
     public sealed class X509KeyUsageExtension : X509Extension

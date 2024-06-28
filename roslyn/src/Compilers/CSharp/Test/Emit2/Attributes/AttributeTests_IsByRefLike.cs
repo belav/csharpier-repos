@@ -62,7 +62,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: validate
@@ -84,7 +84,7 @@ ref struct S1{}
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>
@@ -116,7 +116,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>
@@ -169,7 +169,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 symbolValidator: validate
             );
@@ -193,7 +193,7 @@ class Test<T>
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>
@@ -226,7 +226,7 @@ namespace System.Runtime.CompilerServices
                     new[]
                     {
                         codeA,
-                        GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                        GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                     }
                 )
                 .VerifyDiagnostics()
@@ -996,7 +996,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: validate,
@@ -1079,7 +1079,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>
@@ -1149,7 +1149,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>
@@ -1251,7 +1251,7 @@ class Test
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>
@@ -1488,7 +1488,7 @@ namespace System
                 new[]
                 {
                     text,
-                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired)
+                    GetCompilerFeatureRequiredAttributeText(includeCompilerFeatureRequired),
                 },
                 verify: Verification.Passes,
                 symbolValidator: module =>

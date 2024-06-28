@@ -823,6 +823,6 @@ internal sealed class Http2OutputProducer : IHttpOutputProducer, IHttpOutputAbor
         None = 0,
         FlushHeaders = 1,
         Aborted = 2,
-        Completed = 4
+        Completed = 4,
     }
 }

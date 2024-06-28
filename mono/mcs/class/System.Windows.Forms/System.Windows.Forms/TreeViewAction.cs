@@ -30,6 +30,6 @@ namespace System.Windows.Forms
         ByKeyboard,
         ByMouse,
         Collapse,
-        Expand
+        Expand,
     }
 }

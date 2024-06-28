@@ -14,7 +14,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliRootCommand
             {
-                new CliCommand("verb") { new CliOption<int>("-x") }
+                new CliCommand("verb") { new CliOption<int>("-x") },
             };
 
             var commandLine = "verb -x 123";
@@ -34,7 +34,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliRootCommand
             {
-                new CliCommand("verb") { new CliOption<int>("-x") }
+                new CliCommand("verb") { new CliOption<int>("-x") },
             };
 
             var commandLine = "verb -x 123";
@@ -52,7 +52,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliRootCommand
             {
-                new CliCommand("verb") { new CliOption<int>("-x") }
+                new CliCommand("verb") { new CliOption<int>("-x") },
             };
 
             var parseResult = command.Parse(new[] { "verb", "-x", "123" });
@@ -66,7 +66,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<string>("--option1"),
-                new CliOption<string>("--option2")
+                new CliOption<string>("--option2"),
             };
 
             string textToMatch = command
@@ -83,7 +83,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<string>("--option1"),
-                new CliOption<string>("--option2")
+                new CliOption<string>("--option2"),
             };
 
             var commandLine = "the-command t";
@@ -107,7 +107,7 @@ namespace System.CommandLine.Tests
             {
                 new CliArgument<string>("arg"),
                 option1,
-                new CliOption<string>("--option2")
+                new CliOption<string>("--option2"),
             };
 
             var textToMatch = command
@@ -126,7 +126,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<string>("--option1"),
-                new CliOption<string>("--option2")
+                new CliOption<string>("--option2"),
             };
 
             string textToMatch = command
@@ -143,7 +143,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<string>("--option1"),
-                new CliOption<string>("--option2")
+                new CliOption<string>("--option2"),
             };
 
             string textToMatch = command
@@ -160,7 +160,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<string>("--option1"),
-                new CliOption<string>("--option2")
+                new CliOption<string>("--option2"),
             };
 
             string textToMatch = command
@@ -181,7 +181,7 @@ namespace System.CommandLine.Tests
             {
                 option1,
                 new CliOption<string>("--option2"),
-                new CliArgument<string>("arg")
+                new CliArgument<string>("arg"),
             };
 
             string textToMatch = command

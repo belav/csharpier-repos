@@ -177,8 +177,8 @@ public class ReverseForPath : AutoMapperSpecBase
         {
             CustomerHolder = new CustomerHolder
             {
-                Customer = new Customer { Name = "George Costanza", Total = 74.85m }
-            }
+                Customer = new Customer { Name = "George Costanza", Total = 74.85m },
+            },
         };
         var dto = Mapper.Map<OrderDto>(model);
         dto.CustomerName.ShouldBe("George Costanza");
@@ -332,7 +332,7 @@ public class ReverseDefaultFlatteningWithIgnoreMember : AutoMapperSpecBase
         var dto = new OrderDto
         {
             CustomerholderCustomerName = "George Costanza",
-            CustomerholderCustomerTotal = 74.85m
+            CustomerholderCustomerTotal = 74.85m,
         };
         var model = Mapper.Map<Order>(dto);
         model.Customerholder.Customer.Name.ShouldBeNull();
@@ -376,7 +376,7 @@ public class ReverseDefaultFlattening : AutoMapperSpecBase
         var dto = new OrderDto
         {
             CustomerholderCustomerName = "George Costanza",
-            CustomerholderCustomerTotal = 74.85m
+            CustomerholderCustomerTotal = 74.85m,
         };
         var model = Mapper.Map<Order>(dto);
         model.Customerholder.Customer.Name.ShouldBe("George Costanza");
@@ -442,7 +442,7 @@ public class ReverseMapConventions : AutoMapperSpecBase
             {
                 Enabled = true,
                 EndDate = _endDate,
-                StartDate = _startDate
+                StartDate = _startDate,
             }
         );
     }
@@ -733,7 +733,7 @@ public class When_reverse_mapping_open_generics_with_MapFrom : AutoMapperSpecBas
         Destination<int> destination = new Destination<int>
         {
             Value2 = 1337,
-            StringValue2 = "StringValue2"
+            StringValue2 = "StringValue2",
         };
         Source<int> source = Mapper.Map<Destination<int>, Source<int>>(destination);
         source.Value.ShouldBe(1337);

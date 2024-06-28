@@ -176,7 +176,7 @@ namespace MonoTests.System.Text
                 0x6B,
                 0x51,
                 0x2D,
-                0x2E
+                0x2E,
             };
             UTF7Encoding UTF7enc = new UTF7Encoding();
             char[] actual = UTF7enc.GetChars(UTF7Bytes);
@@ -212,7 +212,7 @@ namespace MonoTests.System.Text
                 0x41,
                 0x49,
                 0x51,
-                0x2D
+                0x2D,
             };
 
             UTF7Encoding UTF7enc = new UTF7Encoding();
@@ -249,7 +249,7 @@ namespace MonoTests.System.Text
                 0x49,
                 0x71,
                 0x65,
-                0x2D
+                0x2D,
             };
 
             UTF7Encoding UTF7enc = new UTF7Encoding();
@@ -288,7 +288,7 @@ namespace MonoTests.System.Text
                 0x4D,
                 0x2D,
                 0x31,
-                0x2E
+                0x2E,
             };
 
             UTF7Encoding UTF7enc = new UTF7Encoding();

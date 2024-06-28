@@ -196,7 +196,7 @@ namespace System.Xml.Schema
                                     context.LocalName!,
                                     context.Namespace!
                                 ),
-                                XmlSchemaValidator.PrintExpectedElements(names, false)
+                                XmlSchemaValidator.PrintExpectedElements(names, false),
                             }
                         );
                     }

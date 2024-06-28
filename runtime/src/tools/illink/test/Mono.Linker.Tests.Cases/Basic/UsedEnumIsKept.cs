@@ -31,7 +31,7 @@ namespace Mono.Linker.Tests.Cases.Basic
             Two,
 
             [Kept]
-            Three
+            Three,
         }
     }
 }

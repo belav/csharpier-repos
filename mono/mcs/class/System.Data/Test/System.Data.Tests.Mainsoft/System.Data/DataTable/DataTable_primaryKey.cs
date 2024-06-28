@@ -335,7 +335,7 @@ namespace tests.system_data_dll.System_Data
             dtParent.PrimaryKey = new DataColumn[]
             {
                 dtParent.Columns["ParentDouble"],
-                dtParent.Columns["ParentDateTime"]
+                dtParent.Columns["ParentDateTime"],
             };
             try
             {
@@ -440,7 +440,7 @@ namespace tests.system_data_dll.System_Data
                 ds.Tables[0].PrimaryKey = new DataColumn[]
                 {
                     ds.Tables[0].Columns[0],
-                    ds.Tables[0].Columns[1]
+                    ds.Tables[0].Columns[1],
                 };
                 base.Compare(ds.Tables[0].PrimaryKey.Length, 2);
             }

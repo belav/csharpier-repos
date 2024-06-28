@@ -104,7 +104,7 @@ internal sealed class DataAnnotationsClientModelValidatorProvider : IClientModel
                         new RequiredAttribute(),
                         stringLocalizer
                     ),
-                    IsReusable = true
+                    IsReusable = true,
                 }
             );
         }

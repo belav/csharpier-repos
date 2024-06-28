@@ -859,7 +859,7 @@ namespace A.B {
                 options: TestOptions.ReleaseDll,
                 syntaxTrees: new SyntaxTree[]
                 {
-                    SyntaxFactory.ParseSyntaxTree("public class C {}")
+                    SyntaxFactory.ParseSyntaxTree("public class C {}"),
                 },
                 references: new MetadataReference[] { MscorlibRef }
             );
@@ -884,7 +884,7 @@ namespace A.B {
                 options: TestOptions.ReleaseDll,
                 syntaxTrees: new SyntaxTree[]
                 {
-                    SyntaxFactory.ParseSyntaxTree(@"extern alias Alias; class D : Alias::C {}")
+                    SyntaxFactory.ParseSyntaxTree(@"extern alias Alias; class D : Alias::C {}"),
                 },
                 references: new MetadataReference[] { MscorlibRef, mtref }
             );
@@ -902,7 +902,7 @@ namespace A.B {
                     SyntaxFactory.ParseSyntaxTree(
                         "extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}",
                         options: TestOptions.Regular9
-                    )
+                    ),
                 },
                 references: new MetadataReference[] { MscorlibRef, mtref }
             );
@@ -951,7 +951,7 @@ namespace A.B {
                     SyntaxFactory.ParseSyntaxTree(
                         "public class C {}",
                         options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                    )
+                    ),
                 },
                 references: new MetadataReference[] { MscorlibRef }
             );
@@ -969,7 +969,7 @@ namespace A.B {
                     SyntaxFactory.ParseSyntaxTree(
                         @"class D {}",
                         options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                    )
+                    ),
                 },
                 references: new MetadataReference[] { MscorlibRef, mtref }
             );
@@ -985,7 +985,7 @@ namespace A.B {
                     SyntaxFactory.ParseSyntaxTree(
                         @"extern alias Alias; class D : Alias::C {}",
                         options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                    )
+                    ),
                 },
                 references: new MetadataReference[] { MscorlibRef, mtref }
             );
@@ -1003,7 +1003,7 @@ namespace A.B {
                     SyntaxFactory.ParseSyntaxTree(
                         "extern alias Alias(*#$@^%*&); class D : Alias(*#$@^%*&).C {}",
                         options: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp6)
-                    )
+                    ),
                 },
                 references: new MetadataReference[] { MscorlibRef, mtref }
             );
@@ -1352,7 +1352,7 @@ public class C2 {
 public static void M() {
     var a = new C1();
 }
-}"
+}",
                 }
             );
             netModule2.VerifyEmitDiagnostics();
@@ -1368,7 +1368,7 @@ public class C3 {
 public static void Main(string[] args) {
 var a = new C2();
 }
-}"
+}",
                 }
             );
             assembly.VerifyEmitDiagnostics(
@@ -1381,7 +1381,7 @@ var a = new C2();
                 references: new MetadataReference[]
                 {
                     netModule1.EmitToImageReference(),
-                    netModule2.EmitToImageReference()
+                    netModule2.EmitToImageReference(),
                 },
                 source: new string[]
                 {
@@ -1390,7 +1390,7 @@ public class C3 {
 public static void Main(string[] args) {
 var a = new C2();
 }
-}"
+}",
                 }
             );
             assembly.VerifyEmitDiagnostics();
@@ -1420,7 +1420,7 @@ public class C2 {
 public static void M() {
     var a = new C1();
 }
-}"
+}",
                 }
             );
             netModule2.VerifyEmitDiagnostics();
@@ -1436,7 +1436,7 @@ public class C2a {
 public static void M() {
     var a = new C1();
 }
-}"
+}",
                 }
             );
             netModule3.VerifyEmitDiagnostics();
@@ -1447,7 +1447,7 @@ public static void M() {
                 references: new MetadataReference[]
                 {
                     netModule2.EmitToImageReference(),
-                    netModule3.EmitToImageReference()
+                    netModule3.EmitToImageReference(),
                 },
                 source: new string[]
                 {
@@ -1456,7 +1456,7 @@ public class C3 {
 public static void Main(string[] args) {
 var a = new C2();
 }
-}"
+}",
                 }
             );
             assembly.VerifyEmitDiagnostics(
@@ -1481,7 +1481,7 @@ using System.Runtime.InteropServices;
 public class C2 {
     [DllImport(""user32.dll"", CharSet = CharSet.Unicode)]
     public static extern int MessageBox(IntPtr hWnd, String text, String caption, uint type);
-}"
+}",
                 }
             );
             netModule1.VerifyEmitDiagnostics();
@@ -1497,7 +1497,7 @@ public class C3 {
 public static void Main(string[] args) {
 var a = new C2();
 }
-}"
+}",
                 }
             );
             assembly.VerifyEmitDiagnostics();
@@ -1525,7 +1525,7 @@ public class C2 {
 public static void M() {
     var a = new C1();
 }
-}"
+}",
                 }
             );
             netModule2.VerifyEmitDiagnostics();
@@ -1536,7 +1536,7 @@ public static void M() {
                 references: new MetadataReference[]
                 {
                     netModule1.EmitToImageReference(),
-                    netModule2.EmitToImageReference()
+                    netModule2.EmitToImageReference(),
                 },
                 source: new string[]
                 {
@@ -1545,7 +1545,7 @@ public class C3 {
 public static void Main(string[] args) {
 var a = new C2();
 }
-}"
+}",
                 }
             );
             assembly.VerifyEmitDiagnostics(
@@ -2406,7 +2406,7 @@ class B
         public void CanReadAndWriteDefaultWin32Res()
         {
             var comp = CSharpCompilation.Create("Compilation");
-            var mft = new MemoryStream(new byte[] { 0, 1, 2, 3, });
+            var mft = new MemoryStream(new byte[] { 0, 1, 2, 3 });
             var res = comp.CreateDefaultWin32Resources(true, false, mft, null);
             var list = comp.MakeWin32ResourceList(res, new DiagnosticBag());
             Assert.Equal(2, list.Count);
@@ -2864,7 +2864,7 @@ class C { }",
                         references: new[]
                         {
                             MscorlibRef,
-                            mdModule.GetReference(display: "ModuleCS00")
+                            mdModule.GetReference(display: "ModuleCS00"),
                         },
                         options: TestOptions.ReleaseDll
                     );
@@ -2885,7 +2885,7 @@ class C { }",
             {
                 Net451.mscorlib,
                 Net451.System,
-                TestReferences.NetFx.silverlight_v5_0_5_0.System
+                TestReferences.NetFx.silverlight_v5_0_5_0.System,
             };
 
             var compilation = CreateEmptyCompilation(
@@ -2950,7 +2950,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 Net451.mscorlib,
                 Net451.System,
                 TestReferences.NetFx.silverlight_v5_0_5_0.System,
-                mdRef
+                mdRef,
             };
 
             // Source references the type in the dll
@@ -3676,7 +3676,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.None,
-                    CodeAnalysis.NullableAnnotation.None
+                    CodeAnalysis.NullableAnnotation.None,
                 },
                 GetAnonymousTypeNullableAnnotations(type)
             );
@@ -3708,7 +3708,7 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.NotAnnotated,
-                    CodeAnalysis.NullableAnnotation.Annotated
+                    CodeAnalysis.NullableAnnotation.Annotated,
                 },
                 GetAnonymousTypeNullableAnnotations(type)
             );
@@ -4338,7 +4338,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.None,
-                    CodeAnalysis.NullableAnnotation.None
+                    CodeAnalysis.NullableAnnotation.None,
                 },
                 type.TypeArgumentNullableAnnotations
             );
@@ -4346,7 +4346,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.None,
-                    CodeAnalysis.NullableAnnotation.None
+                    CodeAnalysis.NullableAnnotation.None,
                 },
                 type.TypeArgumentNullableAnnotations()
             );
@@ -4377,7 +4377,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.Annotated,
-                    CodeAnalysis.NullableAnnotation.NotAnnotated
+                    CodeAnalysis.NullableAnnotation.NotAnnotated,
                 },
                 type.TypeArgumentNullableAnnotations
             );
@@ -4385,7 +4385,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.Annotated,
-                    CodeAnalysis.NullableAnnotation.NotAnnotated
+                    CodeAnalysis.NullableAnnotation.NotAnnotated,
                 },
                 type.TypeArgumentNullableAnnotations()
             );
@@ -4439,7 +4439,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.None,
-                    CodeAnalysis.NullableAnnotation.None
+                    CodeAnalysis.NullableAnnotation.None,
                 },
                 type.TypeArgumentNullableAnnotations
             );
@@ -4447,7 +4447,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.None,
-                    CodeAnalysis.NullableAnnotation.None
+                    CodeAnalysis.NullableAnnotation.None,
                 },
                 type.TypeArgumentNullableAnnotations()
             );
@@ -4479,7 +4479,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.Annotated,
-                    CodeAnalysis.NullableAnnotation.NotAnnotated
+                    CodeAnalysis.NullableAnnotation.NotAnnotated,
                 },
                 type.TypeArgumentNullableAnnotations
             );
@@ -4487,7 +4487,7 @@ class C
                 new[]
                 {
                     CodeAnalysis.NullableAnnotation.Annotated,
-                    CodeAnalysis.NullableAnnotation.NotAnnotated
+                    CodeAnalysis.NullableAnnotation.NotAnnotated,
                 },
                 type.TypeArgumentNullableAnnotations()
             );
@@ -4920,7 +4920,7 @@ System.Action a = () => { return; };
                 {
                     useMetadataReference
                         ? referenceComp.ToMetadataReference()
-                        : referenceComp.EmitToImageReference()
+                        : referenceComp.EmitToImageReference(),
                 }
             );
 
@@ -4949,7 +4949,7 @@ System.Action a = () => { return; };
                 {
                     useMetadataReference
                         ? referenceComp.ToMetadataReference()
-                        : referenceComp.EmitToImageReference()
+                        : referenceComp.EmitToImageReference(),
                 }
             );
 

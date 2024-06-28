@@ -54,7 +54,7 @@ namespace System.Workflow.Activities.Rules
             Float = 0x08,
             Decimal = 0x10,
             String = 0x20,
-            Bool = 0x40
+            Bool = 0x40,
         };
 
         /// <summary>
@@ -842,7 +842,7 @@ namespace System.Workflow.Activities.Rules
         {
             Arithmetic,
             Equality,
-            Relational
+            Relational,
         }
 
         internal static MethodInfo ObjectEquality = typeof(DefaultOperators).GetMethod(

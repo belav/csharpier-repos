@@ -34,6 +34,6 @@ namespace System.Management
     {
         Mof = 0,
         CimDtd20,
-        WmiDtd20
+        WmiDtd20,
     }
 }

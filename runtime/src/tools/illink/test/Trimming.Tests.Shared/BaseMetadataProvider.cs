@@ -59,7 +59,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 Source = fullSource,
                 DestinationFileName = string.IsNullOrEmpty(destinationFileName)
                     ? fullSource.FileName
-                    : destinationFileName
+                    : destinationFileName,
             };
         }
 

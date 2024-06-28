@@ -53,7 +53,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = false
+            Enabled = false,
         };
 
         // Act
@@ -88,7 +88,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         // Act
@@ -231,7 +231,7 @@ public class CacheTagHelperTest
             new HtmlTestEncoder()
         )
         {
-            ExpiresOn = expiresOn
+            ExpiresOn = expiresOn,
         };
 
         // Act
@@ -321,7 +321,7 @@ public class CacheTagHelperTest
             new HtmlTestEncoder()
         )
         {
-            ExpiresAfter = expiresAfter
+            ExpiresAfter = expiresAfter,
         };
 
         // Act
@@ -342,7 +342,7 @@ public class CacheTagHelperTest
             new HtmlTestEncoder()
         )
         {
-            ExpiresSliding = expiresSliding
+            ExpiresSliding = expiresSliding,
         };
 
         // Act
@@ -363,7 +363,7 @@ public class CacheTagHelperTest
             new HtmlTestEncoder()
         )
         {
-            Priority = priority
+            Priority = priority,
         };
 
         // Act
@@ -393,7 +393,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            ExpiresAfter = TimeSpan.FromMinutes(10)
+            ExpiresAfter = TimeSpan.FromMinutes(10),
         };
 
         // Act - 1
@@ -417,7 +417,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            ExpiresAfter = TimeSpan.FromMinutes(10)
+            ExpiresAfter = TimeSpan.FromMinutes(10),
         };
         currentTime = currentTime.AddMinutes(11);
 
@@ -451,7 +451,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            ExpiresOn = currentTime.AddMinutes(5)
+            ExpiresOn = currentTime.AddMinutes(5),
         };
 
         // Act - 1
@@ -476,7 +476,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            ExpiresOn = currentTime.AddMinutes(5)
+            ExpiresOn = currentTime.AddMinutes(5),
         };
 
         // Act - 2
@@ -509,7 +509,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            ExpiresSliding = TimeSpan.FromSeconds(30)
+            ExpiresSliding = TimeSpan.FromSeconds(30),
         };
 
         // Act - 1
@@ -534,7 +534,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            ExpiresSliding = TimeSpan.FromSeconds(30)
+            ExpiresSliding = TimeSpan.FromSeconds(30),
         };
 
         // Act - 2
@@ -658,7 +658,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var cacheTagHelper2 = new CacheTagHelper(
@@ -667,7 +667,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         // Act
@@ -749,7 +749,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var cacheTagHelper2 = new CacheTagHelper(
@@ -758,7 +758,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         // Act
@@ -855,7 +855,7 @@ public class CacheTagHelperTest
         {
             ViewContext = GetViewContext(),
             Enabled = true,
-            ExpiresAfter = TimeSpan.FromHours(1.0)
+            ExpiresAfter = TimeSpan.FromHours(1.0),
         };
 
         // Act - 1
@@ -924,7 +924,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var cacheTagHelper2 = new CacheTagHelper(
@@ -933,7 +933,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var tagHelperOutput2 = new TagHelperOutput(
@@ -979,7 +979,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
         var cacheTagHelper2 = new CacheTagHelper(
             new CacheTagHelperMemoryCacheFactory(cache),
@@ -987,7 +987,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var invokeCount = 0;
@@ -1029,7 +1029,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var cacheTagHelper2 = new CacheTagHelper(
@@ -1038,7 +1038,7 @@ public class CacheTagHelperTest
         )
         {
             ViewContext = GetViewContext(),
-            Enabled = true
+            Enabled = true,
         };
 
         var invokeCount = 0;
@@ -1172,7 +1172,7 @@ public class CacheTagHelperTest
             var cacheKey = Assert.IsType<CacheTagKey>(key);
             Assert.Equal(Key1, cacheKey.Key);
 
-            Entry = new TestCacheEntry { Key = key, DisposeCallback = ManualResetEvent2.Set, };
+            Entry = new TestCacheEntry { Key = key, DisposeCallback = ManualResetEvent2.Set };
 
             return Entry;
         }

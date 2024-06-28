@@ -143,7 +143,7 @@ namespace System.Windows.Forms
             ColumnResize = 8,
             RowResize = 16,
             Caption = 32,
-            ParentRows = 64
+            ParentRows = 64,
         }
 
         public sealed class HitTestInfo

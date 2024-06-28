@@ -9,7 +9,7 @@ namespace N
         public enum ItemSlot
         {
             ItemM1,
-            ItemM2
+            ItemM2,
         }
     }
 }

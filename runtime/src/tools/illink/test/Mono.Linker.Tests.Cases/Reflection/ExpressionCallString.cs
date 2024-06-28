@@ -424,7 +424,7 @@ namespace Mono.Linker.Tests.Cases.Reflection
                     Type[] types = p switch
                     {
                         0 => new Type[] { typeof(TestType) },
-                        1 => new Type[] { typeof(TestType) }
+                        1 => new Type[] { typeof(TestType) },
                     };
 
                     Expression.Call(typeof(TwoKnownTypeArrays), _unknownMethodName, types);

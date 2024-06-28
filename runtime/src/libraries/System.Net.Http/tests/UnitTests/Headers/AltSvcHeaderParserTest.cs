@@ -58,8 +58,8 @@ namespace System.Net.Http.Tests
                 "h2=\":8000\"",
                 new[]
                 {
-                    new AltSvcHeaderValue("h2", host: null, port: 8000, defaultAge, persist: false)
-                }
+                    new AltSvcHeaderValue("h2", host: null, port: 8000, defaultAge, persist: false),
+                },
             };
 
             // Example from RFC 7838, Section 3: change of host/port.
@@ -74,8 +74,8 @@ namespace System.Net.Http.Tests
                         port: 80,
                         defaultAge,
                         persist: false
-                    )
-                }
+                    ),
+                },
             };
 
             // Example from RFC 7838, Section 3: multiple services in one line.
@@ -91,8 +91,8 @@ namespace System.Net.Http.Tests
                         defaultAge,
                         persist: false
                     ),
-                    new AltSvcHeaderValue("h2", host: null, port: 443, defaultAge, persist: false)
-                }
+                    new AltSvcHeaderValue("h2", host: null, port: 443, defaultAge, persist: false),
+                },
             };
 
             // Example from RFC 7838, Section 3.1: change of port with max age.
@@ -107,8 +107,8 @@ namespace System.Net.Http.Tests
                         port: 443,
                         TimeSpan.FromTicks(TimeSpan.TicksPerSecond * 3600),
                         persist: false
-                    )
-                }
+                    ),
+                },
             };
 
             // Example from RFC 7838, Section 3.1: change of port with max age and persist.
@@ -123,8 +123,8 @@ namespace System.Net.Http.Tests
                         port: 443,
                         TimeSpan.FromTicks(TimeSpan.TicksPerSecond * 2592000),
                         persist: true
-                    )
-                }
+                    ),
+                },
             };
 
             // "clear".

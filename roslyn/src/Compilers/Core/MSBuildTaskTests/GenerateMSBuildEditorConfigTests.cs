@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                PropertyItems = new[] { property1, property2 }
+                PropertyItems = new[] { property1, property2 },
             };
             configTask.Execute();
 
@@ -72,13 +72,13 @@ build_property.Property2 = def456
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1 }
+                MetadataItems = new[] { item1 },
             };
             configTask.Execute();
 
@@ -103,7 +103,7 @@ build_metadata.Compile.ToRetrieve = abc123
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             ITaskItem item2 = MSBuildUtil.CreateTaskItem(
@@ -112,7 +112,7 @@ build_metadata.Compile.ToRetrieve = abc123
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "def456" }
+                    { "ToRetrieve", "def456" },
                 }
             );
             ITaskItem item3 = MSBuildUtil.CreateTaskItem(
@@ -121,13 +121,13 @@ build_metadata.Compile.ToRetrieve = abc123
                 {
                     { "ItemType", "AdditionalFiles" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "ghi789" }
+                    { "ToRetrieve", "ghi789" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1, item2, item3 }
+                MetadataItems = new[] { item1, item2, item3 },
             };
             configTask.Execute();
 
@@ -159,7 +159,7 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             ITaskItem item2 = MSBuildUtil.CreateTaskItem(
@@ -168,7 +168,7 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "def456" }
+                    { "ToRetrieve", "def456" },
                 }
             );
             ITaskItem item3 = MSBuildUtil.CreateTaskItem(
@@ -177,13 +177,13 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "ghi789" }
+                    { "ToRetrieve", "ghi789" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1, item2, item3 }
+                MetadataItems = new[] { item1, item2, item3 },
             };
             configTask.Execute();
 
@@ -214,7 +214,7 @@ build_metadata.Compile.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             ITaskItem item2 = MSBuildUtil.CreateTaskItem(
@@ -223,13 +223,13 @@ build_metadata.Compile.ToRetrieve = ghi789
                 {
                     { "ItemType", "AdditionalFile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "def456" }
+                    { "ToRetrieve", "def456" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1, item2 }
+                MetadataItems = new[] { item1, item2 },
             };
             configTask.Execute();
 
@@ -254,13 +254,13 @@ build_metadata.AdditionalFile.ToRetrieve = def456
                 new Dictionary<string, string>
                 {
                     { "ItemType", "Compile" },
-                    { "MetadataName", "ToRetrieve" }
+                    { "MetadataName", "ToRetrieve" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1 }
+                MetadataItems = new[] { item1 },
             };
             configTask.Execute();
 
@@ -294,7 +294,7 @@ build_metadata.Compile.ToRetrieve =
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1, item2, item3 }
+                MetadataItems = new[] { item1, item2, item3 },
             };
             configTask.Execute();
 
@@ -318,7 +318,7 @@ build_metadata.Compile.ToRetrieve =
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             ITaskItem item2 = MSBuildUtil.CreateTaskItem(
@@ -327,7 +327,7 @@ build_metadata.Compile.ToRetrieve =
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "def456" }
+                    { "ToRetrieve", "def456" },
                 }
             );
             ITaskItem item3 = MSBuildUtil.CreateTaskItem(
@@ -336,7 +336,7 @@ build_metadata.Compile.ToRetrieve =
                 {
                     { "ItemType", "AdditionalFiles" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "ghi789" }
+                    { "ToRetrieve", "ghi789" },
                 }
             );
             ITaskItem item4 = MSBuildUtil.CreateTaskItem(
@@ -345,7 +345,7 @@ build_metadata.Compile.ToRetrieve =
                 {
                     { "ItemType", "AdditionalFiles" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "jkl012" }
+                    { "ToRetrieve", "jkl012" },
                 }
             );
 
@@ -361,7 +361,7 @@ build_metadata.Compile.ToRetrieve =
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
                 MetadataItems = new[] { item1, item2, item3, item4 },
-                PropertyItems = new[] { property1, property2 }
+                PropertyItems = new[] { property1, property2 },
             };
             configTask.Execute();
 
@@ -395,7 +395,7 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             TaskItem item2 = new TaskItem(
@@ -404,7 +404,7 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             TaskItem item3 = new TaskItem(
@@ -413,13 +413,13 @@ build_metadata.AdditionalFiles.ToRetrieve = ghi789
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1, item2, item3 }
+                MetadataItems = new[] { item1, item2, item3 },
             };
             configTask.Execute();
             var result = configTask.ConfigFileContents;
@@ -458,7 +458,7 @@ build_metadata.Compile.ToRetrieve = abc123
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
             TaskItem item2 = new TaskItem(
@@ -467,13 +467,13 @@ build_metadata.Compile.ToRetrieve = abc123
                 {
                     { "ItemType", "AdditionalFile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "def456" }
+                    { "ToRetrieve", "def456" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1, item2 }
+                MetadataItems = new[] { item1, item2 },
             };
             configTask.Execute();
 
@@ -528,7 +528,7 @@ values
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                PropertyItems = new[] { property1, property2 }
+                PropertyItems = new[] { property1, property2 },
             };
             configTask.Execute();
 
@@ -561,13 +561,13 @@ build_property.Property2 = def456
                 {
                     { "ItemType", "Compile" },
                     { "MetadataName", "ToRetrieve" },
-                    { "ToRetrieve", "abc123" }
+                    { "ToRetrieve", "abc123" },
                 }
             );
 
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
-                MetadataItems = new[] { item1 }
+                MetadataItems = new[] { item1 },
             };
             configTask.Execute();
 
@@ -603,7 +603,7 @@ build_metadata.Compile.ToRetrieve = abc123
             GenerateMSBuildEditorConfig configTask = new GenerateMSBuildEditorConfig()
             {
                 PropertyItems = new[] { property1, property2 },
-                FileName = new TaskItem(fileName)
+                FileName = new TaskItem(fileName),
             };
             configTask.Execute();
 

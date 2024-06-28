@@ -91,7 +91,7 @@ namespace Microsoft.AspNet.Facebook.Realtime
 
             return new HttpResponseMessage
             {
-                Content = new StringContent(subscriptionVerification.Challenge)
+                Content = new StringContent(subscriptionVerification.Challenge),
             };
         }
 

@@ -67,7 +67,7 @@ class A : IA
         {
         }
     }
-}"
+}",
             };
 
             await using var testLspServer = await CreateTestLspServerAsync(
@@ -111,7 +111,7 @@ class A : IA
                     Uri = ProtocolConversions.CreateAbsoluteUri(
                         $"C:\\{TestSpanMapper.GeneratedFileName}"
                     ),
-                    Range = new LSP.Range { Start = position, End = position }
+                    Range = new LSP.Range { Start = position, End = position },
                 }
             );
             AssertLocationsEqual(ImmutableArray.Create(TestSpanMapper.MappedFileLocation), results);

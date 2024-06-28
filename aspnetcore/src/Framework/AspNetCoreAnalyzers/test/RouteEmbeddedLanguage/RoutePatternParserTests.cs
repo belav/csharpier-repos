@@ -188,7 +188,7 @@ public partial class RoutePatternParserTests
                     new Dictionary<string, string>
                     {
                         ["controller"] = "TestController",
-                        ["action"] = "TestAction"
+                        ["action"] = "TestAction",
                     }
                 );
             }

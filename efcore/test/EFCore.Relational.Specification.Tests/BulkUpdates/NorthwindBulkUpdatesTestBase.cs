@@ -338,7 +338,7 @@ public abstract class NorthwindBulkUpdatesTestBase<TFixture> : BulkUpdatesTestBa
                             .Select(e => new OrderDetail
                             {
                                 OrderID = e.OrderID,
-                                ProductID = e.ProductID
+                                ProductID = e.ProductID,
                             }),
                     rowsAffectedCount: 0
                 )
@@ -1205,7 +1205,7 @@ WHERE [OrderID] < 10300"
                 {
                     c,
                     c2,
-                    o
+                    o,
                 },
             e => e.c,
             s => s.SetProperty(c => c.c.ContactName, "Updated"),
@@ -1245,7 +1245,7 @@ WHERE [OrderID] < 10300"
                 {
                     c,
                     c2,
-                    o
+                    o,
                 },
             e => e.c,
             s => s.SetProperty(c => c.c.ContactName, "Updated"),
@@ -1322,7 +1322,7 @@ WHERE [CustomerID] LIKE 'A%'"
                 select new
                 {
                     c,
-                    LastOrder = c.Orders.OrderByDescending(o => o.OrderDate).FirstOrDefault()
+                    LastOrder = c.Orders.OrderByDescending(o => o.OrderDate).FirstOrDefault(),
                 },
             e => e.c,
             s => s.SetProperty(c => c.c.City, c => c.LastOrder.OrderDate.Value.Year.ToString()),
@@ -1374,7 +1374,7 @@ WHERE [CustomerID] LIKE 'A%'"
                     LastOrderDate = c
                         .Orders.OrderByDescending(o => o.OrderDate)
                         .FirstOrDefault()
-                        .OrderDate.Value.Year
+                        .OrderDate.Value.Year,
                 },
             e => e.c,
             s => s.SetProperty(c => c.c.City, c => c.LastOrderDate.ToString()),

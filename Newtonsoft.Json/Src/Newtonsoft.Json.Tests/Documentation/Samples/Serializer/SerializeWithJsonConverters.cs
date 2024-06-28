@@ -54,7 +54,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             List<StringComparison> stringComparisons = new List<StringComparison>
             {
                 StringComparison.CurrentCulture,
-                StringComparison.Ordinal
+                StringComparison.Ordinal,
             };
 
             string jsonWithoutConverter = JsonConvert.SerializeObject(stringComparisons);

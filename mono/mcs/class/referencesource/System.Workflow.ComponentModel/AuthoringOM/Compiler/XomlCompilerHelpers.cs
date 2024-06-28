@@ -1067,7 +1067,7 @@ namespace System.Workflow.ComponentModel.Compiler
         enum MetadataTokenType
         {
             ModuleRef = 0x1a000000,
-            AssemblyRef = 0x23000000
+            AssemblyRef = 0x23000000,
         }
 
         [StructLayout(LayoutKind.Sequential)]

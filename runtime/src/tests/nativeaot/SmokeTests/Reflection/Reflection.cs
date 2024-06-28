@@ -1476,7 +1476,7 @@ internal static class ReflectionTest
     {
         enum Mine
         {
-            One = 2018
+            One = 2018,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1763,7 +1763,7 @@ internal static class ReflectionTest
 
         enum Mine
         {
-            One
+            One,
         }
 
         class PartialCanonTestType<T, U>
@@ -1923,7 +1923,7 @@ internal static class ReflectionTest
     {
         public enum UnreferencedEnum
         {
-            One
+            One,
         }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
@@ -2698,13 +2698,13 @@ internal static class ReflectionTest
                 typeof(NonGenericType),
                 typeof(GenericType<int>),
                 typeof(ReferencedBaseType<int>),
-                typeof(GenericWithReferenceBaseType<int>)
+                typeof(GenericWithReferenceBaseType<int>),
             },
             ValueTypes = new[]
             {
                 typeof(GenericStruct<int>),
                 typeof(NonGenericStruct),
-                typeof(Container<int>.GenericEnum)
+                typeof(Container<int>.GenericEnum),
             }
         )]
         public static void Run()

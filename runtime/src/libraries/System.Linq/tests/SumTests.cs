@@ -376,7 +376,7 @@ namespace System.Linq.Tests
                 null,
                 -1f,
                 0.5f,
-                null
+                null,
             };
             Assert.Equal(1f, sourceNullableFloat.Sum());
             Assert.Equal(1f, sourceNullableFloat.Sum(x => x));
@@ -400,7 +400,7 @@ namespace System.Linq.Tests
                 null,
                 -1d,
                 0.5d,
-                null
+                null,
             };
             Assert.Equal(1d, sourceNullableDouble.Sum());
             Assert.Equal(1d, sourceNullableDouble.Sum(x => x));
@@ -424,7 +424,7 @@ namespace System.Linq.Tests
                 null,
                 -1m,
                 0.5m,
-                null
+                null,
             };
             Assert.Equal(1m, sourceNullableDecimal.Sum());
             Assert.Equal(1m, sourceNullableDecimal.Sum(x => x));
@@ -564,7 +564,7 @@ namespace System.Linq.Tests
             {
                 float.MaxValue,
                 null,
-                float.MaxValue
+                float.MaxValue,
             };
             Assert.True(float.IsPositiveInfinity(sourceNullableFloat.Sum().Value));
             Assert.True(float.IsPositiveInfinity(sourceNullableFloat.Sum(x => x).Value));
@@ -585,7 +585,7 @@ namespace System.Linq.Tests
             {
                 double.MaxValue,
                 null,
-                double.MaxValue
+                double.MaxValue,
             };
             Assert.True(double.IsPositiveInfinity(sourceNullableDouble.Sum().Value));
             Assert.True(double.IsPositiveInfinity(sourceNullableDouble.Sum(x => x).Value));
@@ -606,7 +606,7 @@ namespace System.Linq.Tests
             {
                 decimal.MaxValue,
                 null,
-                1m
+                1m,
             };
             Assert.Throws<OverflowException>(() => sourceNullableDecimal.Sum());
             Assert.Throws<OverflowException>(() => sourceNullableDecimal.Sum(x => x));
@@ -657,7 +657,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (float?)9.5f },
                 new { name = "John", num = default(float?) },
-                new { name = "Bob", num = (float?)8.5f }
+                new { name = "Bob", num = (float?)8.5f },
             };
             Assert.Equal(18.0f, source.Sum(e => e.num).Value);
         }
@@ -683,7 +683,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 10 },
                 new { name = "John", num = 50 },
-                new { name = "Bob", num = -30 }
+                new { name = "Bob", num = -30 },
             };
             Assert.Equal(30, source.Sum(e => e.num));
         }
@@ -715,7 +715,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (int?)10 },
                 new { name = "John", num = default(int?) },
-                new { name = "Bob", num = (int?)-30 }
+                new { name = "Bob", num = (int?)-30 },
             };
             Assert.Equal(-20, source.Sum(e => e.num));
         }
@@ -727,7 +727,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (int?)10 },
                 new { name = "John", num = default(int?) },
-                new { name = "Bob", num = (int?)-30 }
+                new { name = "Bob", num = (int?)-30 },
             };
             Assert.Equal(-20, source.RunOnce().Sum(e => e.num));
         }
@@ -753,7 +753,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 10L },
                 new { name = "John", num = (long)int.MaxValue },
-                new { name = "Bob", num = 40L }
+                new { name = "Bob", num = 40L },
             };
 
             Assert.Equal(int.MaxValue + 50L, source.Sum(e => e.num));
@@ -786,7 +786,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (long?)10L },
                 new { name = "John", num = (long?)int.MaxValue },
-                new { name = "Bob", num = default(long?) }
+                new { name = "Bob", num = default(long?) },
             };
 
             Assert.Equal(int.MaxValue + 10L, source.Sum(e => e.num));
@@ -820,7 +820,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 9.5 },
                 new { name = "John", num = 10.5 },
-                new { name = "Bob", num = 3.5 }
+                new { name = "Bob", num = 3.5 },
             };
 
             Assert.Equal(23.5, source.Sum(e => e.num));
@@ -853,7 +853,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (double?)9.5 },
                 new { name = "John", num = default(double?) },
-                new { name = "Bob", num = (double?)8.5 }
+                new { name = "Bob", num = (double?)8.5 },
             };
             Assert.Equal(18.0, source.Sum(e => e.num).Value);
         }
@@ -879,7 +879,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 20.51m },
                 new { name = "John", num = 10m },
-                new { name = "Bob", num = 2.33m }
+                new { name = "Bob", num = 2.33m },
             };
             Assert.Equal(32.84m, source.Sum(e => e.num));
         }
@@ -911,7 +911,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (decimal?)20.51m },
                 new { name = "John", num = default(decimal?) },
-                new { name = "Bob", num = (decimal?)2.33m }
+                new { name = "Bob", num = (decimal?)2.33m },
             };
             Assert.Equal(22.84m, source.Sum(e => e.num));
         }
@@ -937,7 +937,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 9.5f },
                 new { name = "John", num = 10.5f },
-                new { name = "Bob", num = 3.5f }
+                new { name = "Bob", num = 3.5f },
             };
             Assert.Equal(23.5f, source.Sum(e => e.num));
         }

@@ -60,7 +60,7 @@ namespace System.Web.Http.Validation.Validators
                             yield return new ModelValidationResult
                             {
                                 Message = result.ErrorMessage,
-                                MemberName = memberName
+                                MemberName = memberName,
                             };
                         }
                     }

@@ -638,7 +638,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         private static readonly string[] ClientNamespaceOfSchemasMissingStoreSuffix =
         {
             "System.Storage.Sync.Utility",
-            "System.Storage.Sync.Services"
+            "System.Storage.Sync.Services",
         };
 
         /// <summary>

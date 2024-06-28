@@ -1190,7 +1190,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         BoundUnconvertedInterpolatedString s => s,
                         BoundBinaryOperator b => doRebind(diagnostics, b),
-                        _ => throw ExceptionUtilities.UnexpectedValue(current.Right.Kind)
+                        _ => throw ExceptionUtilities.UnexpectedValue(current.Right.Kind),
                     };
                     left = BindSimpleBinaryOperator(
                         (BinaryExpressionSyntax)current.Syntax,
@@ -4462,7 +4462,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     )
 #pragma warning disable format
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
 #pragma warning restore format
                     return MakeIsPatternExpression(

@@ -1137,7 +1137,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                     {
                         new SignatureHelpTestItem(
                             "int System.Collections.Generic.List<int>[int index]"
-                        )
+                        ),
                     }
                 );
             }

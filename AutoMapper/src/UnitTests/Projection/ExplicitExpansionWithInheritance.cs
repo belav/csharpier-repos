@@ -62,8 +62,8 @@ public class ExplicitExpansionWithInheritance : AutoMapperSpecBase
         {
             CreatedBy = new User(),
             ModifiedBy = new User(),
-            Computer = new Computer() { CreatedBy = new User(), ModifiedBy = new User(), },
-            OtherComputer = new Computer() { CreatedBy = new User(), ModifiedBy = new User(), }
+            Computer = new Computer() { CreatedBy = new User(), ModifiedBy = new User() },
+            OtherComputer = new Computer() { CreatedBy = new User(), ModifiedBy = new User() },
         };
     }
 

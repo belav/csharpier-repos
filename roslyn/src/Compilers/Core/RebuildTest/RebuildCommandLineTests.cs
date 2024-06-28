@@ -359,12 +359,12 @@ namespace Nested
 
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + alias
+                    CommandLine = commandInfo.CommandLine + alias,
                 };
 
                 yield return commandInfo with
                 {
-                    CommandLineSuffix = commandInfo.CommandLineSuffix + alias
+                    CommandLineSuffix = commandInfo.CommandLineSuffix + alias,
                 };
             }
 
@@ -373,12 +373,12 @@ namespace Nested
                 yield return commandInfo with
                 {
                     CommandLine = commandInfo.CommandLine + " /debug:portable",
-                    PdbFileName = "test.pdb"
+                    PdbFileName = "test.pdb",
                 };
 
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /debug:embedded"
+                    CommandLine = commandInfo.CommandLine + " /debug:embedded",
                 };
             }
 
@@ -388,19 +388,19 @@ namespace Nested
                 yield return commandInfo;
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize+"
+                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize+",
                 };
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize-"
+                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize-",
                 };
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /optimize-"
+                    CommandLine = commandInfo.CommandLine + " /optimize-",
                 };
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /optimize+"
+                    CommandLine = commandInfo.CommandLine + " /optimize+",
                 };
             }
 
@@ -414,7 +414,7 @@ namespace Nested
                             commandInfo.CommandLine,
                             commandInfo.PeFileName,
                             commandInfo.PdbFileName,
-                            commandInfo.CommandLineSuffix
+                            commandInfo.CommandLineSuffix,
                         }
                     );
                 }
@@ -592,19 +592,19 @@ End Namespace
                 yield return commandInfo;
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize+"
+                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize+",
                 };
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize-"
+                    CommandLine = commandInfo.CommandLine + " /debug+ /optimize-",
                 };
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /optimize-"
+                    CommandLine = commandInfo.CommandLine + " /optimize-",
                 };
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /optimize+"
+                    CommandLine = commandInfo.CommandLine + " /optimize+",
                 };
             }
 
@@ -612,14 +612,14 @@ End Namespace
             {
                 yield return commandInfo with
                 {
-                    CommandLine = commandInfo.CommandLine + " /vbruntime*"
+                    CommandLine = commandInfo.CommandLine + " /vbruntime*",
                 };
 
                 yield return commandInfo with
                 {
                     CommandLine =
                         commandInfo.CommandLine
-                        + @" /d:_MYTYPE=""Empty"" /vbruntime:Microsoft.VisualBasic.dll"
+                        + @" /d:_MYTYPE=""Empty"" /vbruntime:Microsoft.VisualBasic.dll",
                 };
             }
 
@@ -632,7 +632,7 @@ End Namespace
                         {
                             commandInfo.CommandLine,
                             commandInfo.PeFileName,
-                            commandInfo.PdbFileName
+                            commandInfo.PdbFileName,
                         }
                     );
                 }

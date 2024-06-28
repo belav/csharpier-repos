@@ -128,7 +128,7 @@ namespace Microsoft.AspNet.Facebook.Authorization
                 SignedRequest = signedRequest,
                 AccessToken = accessToken,
                 UserId = userId,
-                Configuration = _config
+                Configuration = _config,
             };
 
             PermissionContext permissionContext = new PermissionContext

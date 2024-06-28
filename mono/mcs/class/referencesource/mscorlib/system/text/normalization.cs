@@ -41,7 +41,7 @@ namespace System.Text
         FormKCDisallowUnassigned = 0x105,
         FormKDDisallowUnassigned = 0x106,
 #endif // !FEATURE_NORM_IDNA_ONLY
-        FormIdnaDisallowUnassigned = 0x10d
+        FormIdnaDisallowUnassigned = 0x10d,
     }
 
     // This internal class wraps up our normalization behavior

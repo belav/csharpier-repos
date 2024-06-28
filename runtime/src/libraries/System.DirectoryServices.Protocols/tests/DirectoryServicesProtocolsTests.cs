@@ -385,7 +385,7 @@ namespace System.DirectoryServices.Protocols.Tests
                     DirectoryAttributeModification[] mods = new DirectoryAttributeModification[2]
                     {
                         mod1,
-                        mod2
+                        mod2,
                     };
 
                     string fullDn = dn + "," + LdapConfiguration.Configuration.SearchDn;
@@ -677,45 +677,45 @@ namespace System.DirectoryServices.Protocols.Tests
             {
                 "input",
                 new byte[] { 1, 2, 3, 4, 5 },
-                ResultCode.CompareFalse
+                ResultCode.CompareFalse,
             };
 
             yield return new object[]
             {
                 "http://example.com/",
                 "http://example.com/",
-                ResultCode.CompareTrue
+                ResultCode.CompareTrue,
             };
             yield return new object[]
             {
                 "http://example.com/",
                 new Uri("http://example.com/"),
-                ResultCode.CompareTrue
+                ResultCode.CompareTrue,
             };
             yield return new object[]
             {
                 "http://example.com/",
                 "http://example.com/"u8.ToArray(),
-                ResultCode.CompareTrue
+                ResultCode.CompareTrue,
             };
 
             yield return new object[]
             {
                 "http://example.com/",
                 "http://false/",
-                ResultCode.CompareFalse
+                ResultCode.CompareFalse,
             };
             yield return new object[]
             {
                 "http://example.com/",
                 new Uri("http://false/"),
-                ResultCode.CompareFalse
+                ResultCode.CompareFalse,
             };
             yield return new object[]
             {
                 "http://example.com/",
                 "http://false/"u8.ToArray(),
-                ResultCode.CompareFalse
+                ResultCode.CompareFalse,
             };
         }
 
@@ -920,7 +920,7 @@ namespace System.DirectoryServices.Protocols.Tests
                     new string[]
                     {
                         LdapConfiguration.Configuration.ServerName,
-                        LdapConfiguration.Configuration.ServerName
+                        LdapConfiguration.Configuration.ServerName,
                     },
                     true,
                     false
@@ -929,7 +929,7 @@ namespace System.DirectoryServices.Protocols.Tests
                     new string[]
                     {
                         LdapConfiguration.Configuration.ServerName,
-                        LdapConfiguration.Configuration.ServerName
+                        LdapConfiguration.Configuration.ServerName,
                     },
                     int.Parse(
                         LdapConfiguration.Configuration.Port,
@@ -946,7 +946,7 @@ namespace System.DirectoryServices.Protocols.Tests
 
             using LdapConnection connection = new LdapConnection(directoryIdentifier, credential)
             {
-                AuthType = AuthType.Basic
+                AuthType = AuthType.Basic,
             };
 
             // Set server protocol before bind; OpenLDAP servers default
@@ -1132,7 +1132,7 @@ namespace System.DirectoryServices.Protocols.Tests
 
             LdapConnection connection = new LdapConnection(directoryIdentifier, credential)
             {
-                AuthType = AuthType.Basic
+                AuthType = AuthType.Basic,
             };
 
             // Set server protocol before bind; OpenLDAP servers default

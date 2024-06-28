@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestXmlLang1)
                     {
-                        Attribute = new Variation("XmlLang test within EmptyTag")
+                        Attribute = new Variation("XmlLang test within EmptyTag"),
                     }
                 );
             }
@@ -28,8 +28,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("XmlLang test within a scope (no nested element)")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -43,8 +43,8 @@ namespace System.Xml.Tests
                             "XmlLang test within a scope (with nested element)"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -56,7 +56,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlLang test immediately outside the XmlLang scope"
-                        )
+                        ),
                     }
                 );
             }
@@ -66,7 +66,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestXmlLang5)
                     {
-                        Attribute = new Variation("XmlLang test with multiple XmlLang declaration")
+                        Attribute = new Variation("XmlLang test with multiple XmlLang declaration"),
                     }
                 );
             }
@@ -76,7 +76,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestXmlLang6)
                     {
-                        Attribute = new Variation("XmlLang valid values") { Pri = 0 }
+                        Attribute = new Variation("XmlLang valid values") { Pri = 0 },
                     }
                 );
             }
@@ -86,7 +86,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestXmlTextReaderLang1)
                     {
-                        Attribute = new Variation("More XmlLang valid values")
+                        Attribute = new Variation("More XmlLang valid values"),
                     }
                 );
             }

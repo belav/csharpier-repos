@@ -39,7 +39,7 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 Name = "Alias",
-                ClrType = typeof(string)
+                ClrType = typeof(string),
             }
         );
 
@@ -53,7 +53,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "Name",
                 ClrType = typeof(string),
                 IsUnicode = true,
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -66,7 +66,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "Name",
                 ClrType = typeof(string),
                 IsUnicode = false,
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -81,7 +81,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 IsUnicode = false,
                 IsNullable = true,
                 IsFixedLength = true,
-                MaxLength = 100
+                MaxLength = 100,
             }
         );
 
@@ -95,7 +95,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "Name",
                 ClrType = typeof(string),
                 MaxLength = 32,
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -108,7 +108,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "Name",
                 ClrType = typeof(string),
                 MaxLength = 30,
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -123,7 +123,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "Pi",
                 ClrType = typeof(decimal),
                 Precision = 15,
-                Scale = 10
+                Scale = 10,
             }
         );
 
@@ -136,7 +136,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "Pi",
                 ClrType = typeof(decimal),
                 Precision = 20,
-                Scale = 7
+                Scale = 7,
             }
         );
 
@@ -147,7 +147,7 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 Columns = new[] { "SpouseId" },
-                PrincipalTable = "People"
+                PrincipalTable = "People",
             }
         );
 
@@ -158,7 +158,7 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Table = "People",
                 Name = "LuckyNumber",
-                ClrType = typeof(int)
+                ClrType = typeof(int),
             }
         );
 
@@ -169,7 +169,7 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Name = "People",
                 Schema = "dbo",
-                NewName = "Person"
+                NewName = "Person",
             }
         );
 
@@ -182,7 +182,7 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Name = "People",
                 Schema = "dbo",
                 NewName = "Person",
-                NewSchema = "dbo"
+                NewSchema = "dbo",
             }
         );
 
@@ -196,11 +196,11 @@ public abstract class MigrationsSqlGeneratorTestBase
                 new Coordinate(1.1, 2.2),
                 new Coordinate(2.2, 2.2),
                 new Coordinate(2.2, 1.1),
-                new Coordinate(7.1, 7.2)
+                new Coordinate(7.1, 7.2),
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly LineString _lineString2 =
@@ -210,17 +210,17 @@ public abstract class MigrationsSqlGeneratorTestBase
                 new Coordinate(7.1, 7.2),
                 new Coordinate(20.2, 20.2),
                 new Coordinate(20.20, 1.1),
-                new Coordinate(70.1, 70.2)
+                new Coordinate(70.1, 70.2),
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly MultiPoint _multiPoint =
         new(new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) })
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly Polygon _polygon1 =
@@ -231,12 +231,12 @@ public abstract class MigrationsSqlGeneratorTestBase
                     new Coordinate(1.1, 2.2),
                     new Coordinate(2.2, 2.2),
                     new Coordinate(2.2, 1.1),
-                    new Coordinate(1.1, 2.2)
+                    new Coordinate(1.1, 2.2),
                 }
             )
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly Polygon _polygon2 =
@@ -247,12 +247,12 @@ public abstract class MigrationsSqlGeneratorTestBase
                     new Coordinate(10.1, 20.2),
                     new Coordinate(20.2, 20.2),
                     new Coordinate(20.2, 10.1),
-                    new Coordinate(10.1, 20.2)
+                    new Coordinate(10.1, 20.2),
                 }
             )
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly Point _point1 = new(1.1, 2.2, 3.3) { SRID = 4326 };
@@ -274,11 +274,11 @@ public abstract class MigrationsSqlGeneratorTestBase
                 _polygon2,
                 _point1,
                 _multiLineString,
-                _multiPolygon
+                _multiPolygon,
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     [ConditionalFact]
@@ -299,8 +299,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                     { 4, "Harry Strickland", null },
                     { 5, "The Imp", null },
                     { 6, "The Kingslayer", null },
-                    { 7, "Aemon Targaryen", _geometryCollection }
-                }
+                    { 7, "Aemon Targaryen", _geometryCollection },
+                },
             }
         );
 
@@ -316,8 +316,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Columns = new[] { "First Name" },
                 Values = new object[,]
                 {
-                    { "John" }
-                }
+                    { "John" },
+                },
             }
         );
 
@@ -331,8 +331,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Columns = new[] { "First Name", "Last Name" },
                 Values = new object[,]
                 {
-                    { "John", "Snow" }
-                }
+                    { "John", "Snow" },
+                },
             }
         );
 
@@ -347,8 +347,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                 Values = new object[,]
                 {
                     { "John" },
-                    { "Daenerys" }
-                }
+                    { "Daenerys" },
+                },
             }
         );
 
@@ -367,8 +367,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Columns = new[] { "First Name" },
                                 Values = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -391,8 +391,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 ColumnTypes = new[] { "char[]" },
                                 Values = new object[,]
                                 {
-                                    { null }
-                                }
+                                    { null },
+                                },
                             }
                         )
                 )
@@ -414,8 +414,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Columns = new[] { "First Name", "Last Name" },
                                 Values = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -437,8 +437,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 ColumnTypes = new[] { "string", "string" },
                                 Values = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -461,8 +461,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Columns = new[] { "First Name" },
                                 Values = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -484,8 +484,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 Columns = new[] { "Name" },
                                 Values = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -506,8 +506,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                     { "Daenerys" },
                     { "John" },
                     { "Arya" },
-                    { "Harry" }
-                }
+                    { "Harry" },
+                },
             }
         );
 
@@ -525,8 +525,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                     { "Daenerys", "Targaryen" },
                     { "John", "Snow" },
                     { "Arya", "Stark" },
-                    { "Harry", "Strickland" }
-                }
+                    { "Harry", "Strickland" },
+                },
             }
         );
 
@@ -540,8 +540,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "Snow" }
-                }
+                    { "Snow" },
+                },
             }
         );
 
@@ -555,8 +555,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "First Name", "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "John", "Snow" }
-                }
+                    { "John", "Snow" },
+                },
             }
         );
 
@@ -574,8 +574,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumns = new[] { "First Name" },
                                 KeyValues = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -597,8 +597,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumns = new[] { "First Name", "Last Name" },
                                 KeyValues = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -620,8 +620,8 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumnTypes = new[] { "string", "string" },
                                 KeyValues = new object[,]
                                 {
-                                    { "John" }
-                                }
+                                    { "John" },
+                                },
                             }
                         )
                 )
@@ -639,14 +639,14 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyValues = new object[,]
                 {
                     { "Hodor" },
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
                     { "Winterfell", "Stark", "Northmen" },
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             }
         );
 
@@ -661,14 +661,14 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyValues = new object[,]
                 {
                     { "Hodor", null },
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
                     { "Stark" },
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             }
         );
 
@@ -683,14 +683,14 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyValues = new object[,]
                 {
                     { "Hodor", null },
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
                     { "Winterfell", "Stark", "Northmen" },
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             }
         );
 
@@ -704,13 +704,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "First Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             }
         );
 
@@ -724,13 +724,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "First Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             }
         );
 
@@ -745,14 +745,14 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyValues = new object[,]
                 {
                     { "Hodor" },
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
                     { "Stark" },
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             }
         );
 
@@ -766,13 +766,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "First Name", "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             }
         );
 
@@ -786,13 +786,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "First Name", "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             }
         );
 
@@ -806,13 +806,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                 KeyColumns = new[] { "First Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             }
         );
 
@@ -830,13 +830,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumns = new[] { "First Name" },
                                 KeyValues = new object[,]
                                 {
-                                    { "Daenerys" }
+                                    { "Daenerys" },
                                 },
                                 Columns = new[] { "House Allegiance" },
                                 Values = new object[,]
                                 {
-                                    { "Targaryen" }
-                                }
+                                    { "Targaryen" },
+                                },
                             }
                         )
                 )
@@ -860,13 +860,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyValues = new object[,]
                                 {
                                     { "Daenerys" },
-                                    { "John" }
+                                    { "John" },
                                 },
                                 Columns = new[] { "House Allegiance" },
                                 Values = new object[,]
                                 {
-                                    { "Targaryen" }
-                                }
+                                    { "Targaryen" },
+                                },
                             }
                         )
                 )
@@ -888,13 +888,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumns = new[] { "First Name", "Last Name" },
                                 KeyValues = new object[,]
                                 {
-                                    { "Daenerys" }
+                                    { "Daenerys" },
                                 },
                                 Columns = new[] { "House Allegiance" },
                                 Values = new object[,]
                                 {
-                                    { "Targaryen" }
-                                }
+                                    { "Targaryen" },
+                                },
                             }
                         )
                 )
@@ -916,13 +916,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumnTypes = new[] { "string", "string" },
                                 KeyValues = new object[,]
                                 {
-                                    { "Daenerys" }
+                                    { "Daenerys" },
                                 },
                                 Columns = new[] { "House Allegiance" },
                                 Values = new object[,]
                                 {
-                                    { "Targaryen" }
-                                }
+                                    { "Targaryen" },
+                                },
                             }
                         )
                 )
@@ -944,13 +944,13 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumns = new[] { "First Name" },
                                 KeyValues = new object[,]
                                 {
-                                    { "Daenerys" }
+                                    { "Daenerys" },
                                 },
                                 Columns = new[] { "House Allegiance", "Culture" },
                                 Values = new object[,]
                                 {
-                                    { "Targaryen" }
-                                }
+                                    { "Targaryen" },
+                                },
                             }
                         )
                 )
@@ -971,14 +971,14 @@ public abstract class MigrationsSqlGeneratorTestBase
                                 KeyColumns = new[] { "First Name" },
                                 KeyValues = new object[,]
                                 {
-                                    { "Daenerys" }
+                                    { "Daenerys" },
                                 },
                                 Columns = new[] { "House Allegiance" },
                                 ColumnTypes = new[] { "string", "string" },
                                 Values = new object[,]
                                 {
-                                    { "Targaryen" }
-                                }
+                                    { "Targaryen" },
+                                },
                             }
                         )
                 )
@@ -1003,9 +1003,9 @@ public abstract class MigrationsSqlGeneratorTestBase
                         Schema = "dbo",
                         ClrType = typeof(string),
                         DefaultValue = "\r\nVarious Line\rBreaks\n",
-                        IsUnicode = isUnicode
-                    }
-                }
+                        IsUnicode = isUnicode,
+                    },
+                },
             }
         );
 
@@ -1034,9 +1034,9 @@ public abstract class MigrationsSqlGeneratorTestBase
                         Schema = "dbo",
                         ClrType = typeof(string),
                         DefaultValue = defaultValue,
-                        IsUnicode = isUnicode
-                    }
-                }
+                        IsUnicode = isUnicode,
+                    },
+                },
             }
         );
     }
@@ -1050,7 +1050,7 @@ public abstract class MigrationsSqlGeneratorTestBase
             {
                 Name = "TestRestartSequenceOperation",
                 Schema = "dbo",
-                StartValue = startsAt
+                StartValue = startsAt,
             }
         );
 

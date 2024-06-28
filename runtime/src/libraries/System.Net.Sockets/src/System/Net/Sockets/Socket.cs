@@ -3970,11 +3970,9 @@ namespace System.Net.Sockets
         internal static int GetAddressSize(EndPoint endPoint)
         {
             AddressFamily fam = endPoint.AddressFamily;
-            return fam == AddressFamily.InterNetwork
-                ? SocketAddressPal.IPv4AddressSize
-                : fam == AddressFamily.InterNetworkV6
-                    ? SocketAddressPal.IPv6AddressSize
-                    : endPoint.Serialize().Size;
+            return fam == AddressFamily.InterNetwork ? SocketAddressPal.IPv4AddressSize
+                : fam == AddressFamily.InterNetworkV6 ? SocketAddressPal.IPv6AddressSize
+                : endPoint.Serialize().Size;
         }
 
         private SocketAddress Serialize(ref EndPoint remoteEP)
@@ -4858,7 +4856,7 @@ namespace System.Net.Sockets
                 SocketException se => se.SocketErrorCode,
                 ObjectDisposedException => SocketError.OperationAborted,
                 OperationCanceledException => SocketError.OperationAborted,
-                _ => SocketError.SocketError
+                _ => SocketError.SocketError,
             };
         }
 

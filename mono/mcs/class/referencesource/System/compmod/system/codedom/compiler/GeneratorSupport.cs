@@ -13,7 +13,7 @@ namespace System.CodeDom.Compiler
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [Flags, Serializable,]
+    [Flags, Serializable]
     public enum GeneratorSupport
     {
         /// <devdoc>

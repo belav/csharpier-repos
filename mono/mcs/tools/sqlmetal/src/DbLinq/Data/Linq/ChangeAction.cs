@@ -31,6 +31,6 @@ namespace System.Data.Linq
         None,
         Delete,
         Insert,
-        Update
+        Update,
     }
 }

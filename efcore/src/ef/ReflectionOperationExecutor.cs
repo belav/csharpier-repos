@@ -83,7 +83,7 @@ internal class ReflectionOperationExecutor : OperationExecutorBase
                 { "language", Language },
                 { "nullable", Nullable },
                 { "toolsVersion", ProductInfo.GetVersion() },
-                { "remainingArguments", RemainingArguments }
+                { "remainingArguments", RemainingArguments },
             }
         )!;
 

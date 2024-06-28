@@ -24,7 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                     TriggerCharacters = ["<", " ", ":", ".", "=", "\"", "'", "{", ",", "("],
                     AllCommitCharacters = RoslynCompletion
                         .CompletionRules.Default.DefaultCommitCharacters.Select(c => c.ToString())
-                        .ToArray()
+                        .ToArray(),
                 },
                 HoverProvider = true,
                 FoldingRangeProvider = new FoldingRangeOptions { },
@@ -32,22 +32,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 DocumentRangeFormattingProvider = true,
                 DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions
                 {
-                    FirstTriggerCharacter = ">"
+                    FirstTriggerCharacter = ">",
                 },
                 OnAutoInsertProvider = new VSInternalDocumentOnAutoInsertOptions
                 {
-                    TriggerCharacters = ["=", "/"]
+                    TriggerCharacters = ["=", "/"],
                 },
                 TextDocumentSync = new TextDocumentSyncOptions
                 {
                     Change = TextDocumentSyncKind.None,
-                    OpenClose = false
+                    OpenClose = false,
                 },
                 SupportsDiagnosticRequests = true,
                 LinkedEditingRangeProvider = new LinkedEditingRangeOptions { },
                 ExecuteCommandProvider = new ExecuteCommandOptions
                 {
-                    Commands = [StringConstants.CreateEventHandlerCommand]
+                    Commands = [StringConstants.CreateEventHandlerCommand],
                 },
                 DefinitionProvider = true,
             };
@@ -61,7 +61,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 TextDocumentSync = new TextDocumentSyncOptions
                 {
                     Change = TextDocumentSyncKind.None,
-                    OpenClose = false
+                    OpenClose = false,
                 },
             };
     }

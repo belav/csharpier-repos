@@ -60,7 +60,7 @@ namespace System.DirectoryServices.Protocols.Tests
             DirectoryAttribute[] attributes = new DirectoryAttribute[]
             {
                 new DirectoryAttribute(),
-                new DirectoryAttribute()
+                new DirectoryAttribute(),
             };
 
             var collection = new DirectoryAttributeCollection();
@@ -86,7 +86,7 @@ namespace System.DirectoryServices.Protocols.Tests
             {
                 new DirectoryAttribute(),
                 null,
-                new DirectoryAttribute()
+                new DirectoryAttribute(),
             };
             var collection = new DirectoryAttributeCollection();
 
@@ -100,7 +100,7 @@ namespace System.DirectoryServices.Protocols.Tests
             DirectoryAttribute[] attributes = new DirectoryAttribute[]
             {
                 new DirectoryAttribute(),
-                new DirectoryAttribute()
+                new DirectoryAttribute(),
             };
             var attributeCollection = new DirectoryAttributeCollection();
             attributeCollection.AddRange(attributes);

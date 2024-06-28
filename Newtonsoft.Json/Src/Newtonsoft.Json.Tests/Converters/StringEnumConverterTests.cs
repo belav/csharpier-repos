@@ -61,14 +61,14 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             Default = 0,
             First = 1,
-            Second = 2
+            Second = 2,
         }
 
         public enum NegativeEnum
         {
             Negative = -1,
             Zero = 0,
-            Positive = 1
+            Positive = 1,
         }
 
         [Flags]
@@ -80,7 +80,7 @@ namespace Newtonsoft.Json.Tests.Converters
             Zero = 0,
             One = 1,
             Two = 2,
-            Four = 4
+            Four = 4,
         }
 
 #if !NET20
@@ -91,7 +91,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             [EnumMember(Value = "@second")]
             Second,
-            Third
+            Third,
         }
 
         public enum NamedEnumDuplicate
@@ -101,7 +101,7 @@ namespace Newtonsoft.Json.Tests.Converters
 
             [EnumMember(Value = "@second")]
             Second,
-            Third
+            Third,
         }
 
         public enum NamedEnumWithComma
@@ -116,7 +116,7 @@ namespace Newtonsoft.Json.Tests.Converters
             Third,
 
             [EnumMember(Value = ",")]
-            JustComma
+            JustComma,
         }
 #endif
 
@@ -137,7 +137,7 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             This,
             Is,
-            CamelCase
+            CamelCase,
         }
 
         [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
@@ -145,7 +145,7 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             This,
             Is,
-            CamelCase
+            CamelCase,
         }
 
         [JsonConverter(typeof(StringEnumConverter), typeof(SnakeCaseNamingStrategy))]
@@ -153,7 +153,7 @@ namespace Newtonsoft.Json.Tests.Converters
         {
             This,
             Is,
-            SnakeCase
+            SnakeCase,
         }
 
         [JsonConverter(
@@ -165,21 +165,21 @@ namespace Newtonsoft.Json.Tests.Converters
         public enum NotAllowIntegerValuesEnum
         {
             Foo = 0,
-            Bar = 1
+            Bar = 1,
         }
 
         [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy))]
         public enum AllowIntegerValuesEnum
         {
             Foo = 0,
-            Bar = 1
+            Bar = 1,
         }
 
         [JsonConverter(typeof(StringEnumConverter), typeof(CamelCaseNamingStrategy), null)]
         public enum NullArgumentInAttribute
         {
             Foo = 0,
-            Bar = 1
+            Bar = 1,
         }
 
         [Test]
@@ -359,7 +359,7 @@ Parameter name: namingStrategyType",
                 {
                     EnumContainer<NamedEnumDuplicate> c = new EnumContainer<NamedEnumDuplicate>
                     {
-                        Enum = NamedEnumDuplicate.First
+                        Enum = NamedEnumDuplicate.First,
                     };
 
                     JsonConvert.SerializeObject(c, Formatting.Indented, new StringEnumConverter());
@@ -401,7 +401,7 @@ Parameter name: namingStrategyType",
         {
             EnumContainer<NamedEnumWithComma> c = new EnumContainer<NamedEnumWithComma>
             {
-                Enum = NamedEnumWithComma.Third
+                Enum = NamedEnumWithComma.Third,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -427,7 +427,7 @@ Parameter name: namingStrategyType",
         {
             EnumContainer<NamedEnumWithComma> c = new EnumContainer<NamedEnumWithComma>
             {
-                Enum = NamedEnumWithComma.JustComma
+                Enum = NamedEnumWithComma.JustComma,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -491,7 +491,7 @@ Parameter name: namingStrategyType",
             {
                 StoreColor = StoreColor.Red,
                 NullableStoreColor1 = StoreColor.White,
-                NullableStoreColor2 = null
+                NullableStoreColor2 = null,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -517,7 +517,7 @@ Parameter name: namingStrategyType",
             {
                 StoreColor = StoreColor.Red,
                 NullableStoreColor1 = StoreColor.DarkGoldenrod,
-                NullableStoreColor2 = null
+                NullableStoreColor2 = null,
             };
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -545,7 +545,7 @@ Parameter name: namingStrategyType",
             {
                 StoreColor = (StoreColor)1000,
                 NullableStoreColor1 = (StoreColor)1000,
-                NullableStoreColor2 = null
+                NullableStoreColor2 = null,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -571,7 +571,7 @@ Parameter name: namingStrategyType",
             {
                 StoreColor = StoreColor.Red | StoreColor.White,
                 NullableStoreColor1 = StoreColor.White & StoreColor.Yellow,
-                NullableStoreColor2 = StoreColor.Red | StoreColor.White | StoreColor.Black
+                NullableStoreColor2 = StoreColor.Red | StoreColor.White | StoreColor.Black,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -644,7 +644,7 @@ Parameter name: namingStrategyType",
             NegativeEnumClass negativeEnumClass = new NegativeEnumClass()
             {
                 Value1 = NegativeEnum.Negative,
-                Value2 = (NegativeEnum)int.MinValue
+                Value2 = (NegativeEnum)int.MinValue,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -748,7 +748,7 @@ Parameter name: namingStrategyType",
         {
             EnumContainer<FlagsTestEnum> c = new EnumContainer<FlagsTestEnum>
             {
-                Enum = FlagsTestEnum.First | FlagsTestEnum.Second
+                Enum = FlagsTestEnum.First | FlagsTestEnum.Second,
             };
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -862,7 +862,7 @@ Parameter name: namingStrategyType",
                 Foo.Bat,
                 Foo.SerializeAsBaz,
                 Foo.FooBar | Foo.SerializeAsBaz,
-                (Foo)int.MaxValue
+                (Foo)int.MaxValue,
             };
 
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -956,7 +956,7 @@ Parameter name: namingStrategyType",
             Bat,
 
             [EnumMember(Value = "baz")]
-            SerializeAsBaz
+            SerializeAsBaz,
         }
 
         [Test]
@@ -973,7 +973,7 @@ Parameter name: namingStrategyType",
                         new DuplicateEnumNameTestClass
                         {
                             Value = DuplicateNameEnum.foo_bar,
-                            Value2 = DuplicateNameEnum2.foo_bar_NOT_USED
+                            Value2 = DuplicateNameEnum2.foo_bar_NOT_USED,
                         }
                     );
 
@@ -1112,7 +1112,7 @@ Parameter name: namingStrategyType",
         public enum EnumWithDifferentCases
         {
             M,
-            m
+            m,
         }
 
         [Test]
@@ -1151,7 +1151,7 @@ Parameter name: namingStrategyType",
         public enum EnumMemberDoesNotMatchName
         {
             [EnumMember(Value = "first_value")]
-            First
+            First,
         }
 
         [Test]
@@ -1208,7 +1208,7 @@ Parameter name: namingStrategyType",
             First,
 
             [EnumMember(Value = "second_value")]
-            first
+            first,
         }
 
         [Test]
@@ -1238,7 +1238,7 @@ Parameter name: namingStrategyType",
             Month,
 
             [EnumMember(Value = "m")]
-            Minute
+            Minute,
         }
 
         [Test]
@@ -1304,7 +1304,7 @@ Parameter name: namingStrategyType",
         third,
 
         [EnumMember(Value = "-4")]
-        fourth
+        fourth,
     }
 
     [DataContract]
@@ -1320,7 +1320,7 @@ Parameter name: namingStrategyType",
         FooBar = 2,
 
         [EnumMember]
-        foo_bar_NOT_USED = 3
+        foo_bar_NOT_USED = 3,
     }
 
     [DataContract]
@@ -1336,7 +1336,7 @@ Parameter name: namingStrategyType",
         foo_bar = 2,
 
         [EnumMember(Value = "TEST")]
-        foo_bar_NOT_USED = 3
+        foo_bar_NOT_USED = 3,
     }
 #endif
 }

@@ -146,7 +146,7 @@ namespace System.Runtime.InteropServices.RuntimeInformationTests
                         "/proc/sys/vm/oom_kill_allocating_task",
                         "/proc/sys/kernel/core_pattern",
                         "/proc/sys/kernel/core_uses_pid",
-                        "/proc/sys/kernel/coredump_filter"
+                        "/proc/sys/kernel/coredump_filter",
                     }
                 )
                 {

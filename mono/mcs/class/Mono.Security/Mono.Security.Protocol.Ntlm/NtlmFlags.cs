@@ -70,6 +70,6 @@ namespace Mono.Security.Protocol.Ntlm
         Negotiate128 = 0x20000000,
 
         // Indicates that this client supports medium (56-bit) encryption.
-        Negotiate56 = (unchecked((int)0x80000000))
+        Negotiate56 = (unchecked((int)0x80000000)),
     }
 }

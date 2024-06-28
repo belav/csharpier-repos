@@ -910,7 +910,7 @@ namespace System.Runtime.Serialization.Json
                     itemName,
                     emptyDictionaryString,
                     -1,
-                    objectLocal
+                    objectLocal,
                 };
                 readResult = (bool)mi.Invoke((JsonReaderDelegator)xmlReader, args);
                 objectLocal = args.Last();
@@ -1028,7 +1028,7 @@ namespace System.Runtime.Serialization.Json
             Fail,
             AsString,
             UsingParseEnum,
-            UsingCustomParse
+            UsingCustomParse,
         }
     }
 }

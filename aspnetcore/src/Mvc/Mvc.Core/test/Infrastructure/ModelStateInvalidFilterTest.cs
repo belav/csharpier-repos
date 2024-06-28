@@ -54,7 +54,7 @@ public class ModelStateInvalidFilterTest
     {
         // Arrange
         var expected = new BadRequestResult();
-        var options = new ApiBehaviorOptions { InvalidModelStateResponseFactory = _ => expected, };
+        var options = new ApiBehaviorOptions { InvalidModelStateResponseFactory = _ => expected };
         var filter = new ModelStateInvalidFilter(options, NullLogger.Instance);
         var context = GetActionExecutingContext();
         context.ModelState.AddModelError("some-key", "some-error");

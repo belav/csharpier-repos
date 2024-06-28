@@ -222,7 +222,7 @@ app.MapGet("/", getHeaderWithDefault);
                     fromHeaderWithNullNameRequiredSource,
                     expectedBody,
                     200,
-                    expectedBody
+                    expectedBody,
                 },
                 new object[] { fromHeaderWithNullNameRequiredSource, null, 400, string.Empty },
                 new object[] { fromHeaderNullableSource, expectedBody, 200, expectedBody },
@@ -294,7 +294,7 @@ app.MapPost("/", postServiceWithDefault);
                 new object[] { fromServiceEnumerableNullableSource, true, true },
                 new object[] { fromServiceEnumerableNullableSource, false, true },
                 new object[] { fromServiceEnumerableDefaultValueSource, true, true },
-                new object[] { fromServiceEnumerableDefaultValueSource, false, true }
+                new object[] { fromServiceEnumerableDefaultValueSource, false, true },
             };
         }
     }
@@ -485,7 +485,7 @@ app.MapGet("/", (HttpContext httpContext, int id) =>
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = new QueryCollection(
-            new Dictionary<string, StringValues> { ["id"] = "42", }
+            new Dictionary<string, StringValues> { ["id"] = "42" }
         );
 
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -510,7 +510,7 @@ app.MapMethods("/", supportedMethods, (HttpContext httpContext, int id) =>
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = new QueryCollection(
-            new Dictionary<string, StringValues> { ["id"] = "42", }
+            new Dictionary<string, StringValues> { ["id"] = "42" }
         );
 
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -556,7 +556,7 @@ app.Map("/", (HttpContext httpContext, int id) =>
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = new QueryCollection(
-            new Dictionary<string, StringValues> { ["id"] = "42", }
+            new Dictionary<string, StringValues> { ["id"] = "42" }
         );
 
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -580,7 +580,7 @@ app.MapFallback("/", (HttpContext httpContext, int id) =>
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = new QueryCollection(
-            new Dictionary<string, StringValues> { ["id"] = "42", }
+            new Dictionary<string, StringValues> { ["id"] = "42" }
         );
 
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -604,7 +604,7 @@ app.MapFallback((HttpContext httpContext, int id) =>
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Query = new QueryCollection(
-            new Dictionary<string, StringValues> { ["id"] = "42", }
+            new Dictionary<string, StringValues> { ["id"] = "42" }
         );
 
         httpContext.Request.Headers.Referer = "https://example.org";

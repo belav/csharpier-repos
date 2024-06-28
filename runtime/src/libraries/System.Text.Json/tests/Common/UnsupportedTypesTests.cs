@@ -141,7 +141,7 @@ namespace System.Text.Json.Serialization.Tests
                 new int[,]
                 {
                     { 1, 0 },
-                    { 0, 1 }
+                    { 0, 1 },
                 }
             );
             yield return WrapArgs(
@@ -149,9 +149,9 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     {
                         {
-                            { false }
-                        }
-                    }
+                            { false },
+                        },
+                    },
                 }
             );
             yield return WrapArgs(typeof(int));

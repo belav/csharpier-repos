@@ -412,7 +412,7 @@ public class RoutePatternMatcherTest
                 controller = "blog",
                 action = "showpost",
                 m = (string)null,
-                d = (string)null
+                d = (string)null,
             }
         );
 
@@ -555,7 +555,7 @@ public class RoutePatternMatcherTest
                 {
                     controller = "home",
                     action = "index",
-                    id = (string)null
+                    id = (string)null,
                 }
             )
         );
@@ -584,7 +584,7 @@ public class RoutePatternMatcherTest
                 {
                     Controller = "Home",
                     id = "123",
-                    Param1 = "p1"
+                    Param1 = "p1",
                 }
             )
         );
@@ -668,7 +668,7 @@ public class RoutePatternMatcherTest
                 {
                     Controller = "Home",
                     id = "123",
-                    Param1 = "p1"
+                    Param1 = "p1",
                 }
             )
         );
@@ -705,7 +705,7 @@ public class RoutePatternMatcherTest
                     controller = "Home",
                     action = "ShowPilot",
                     missionId = (string)null,
-                    name = (string)null
+                    name = (string)null,
                 }
             ),
             new RouteValueDictionary(
@@ -714,7 +714,7 @@ public class RoutePatternMatcherTest
                     controller = "Home",
                     action = "ShowPilot",
                     missionId = "777",
-                    name = "12345./foobar"
+                    name = "12345./foobar",
                 }
             )
         );
@@ -866,7 +866,7 @@ public class RoutePatternMatcherTest
             {
                 { " ", "not a space" },
                 { "op.tional", "default value" },
-                { "ran!dom", "va@lue" }
+                { "ran!dom", "va@lue" },
             },
             new RouteValueDictionary()
             {
@@ -874,7 +874,7 @@ public class RoutePatternMatcherTest
                 { ".!$%", "weimatch" },
                 { "dynamic.data", "omatcherid" },
                 { "op.tional", "default value" },
-                { "ran!dom", "va@lue" }
+                { "ran!dom", "va@lue" },
             }
         );
     }
@@ -923,7 +923,7 @@ public class RoutePatternMatcherTest
             {
                 { "language", "xx" },
                 { "locale", "yy" },
-                { "controller", "foo" }
+                { "controller", "foo" },
             }
         );
     }

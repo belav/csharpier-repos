@@ -193,7 +193,7 @@ namespace System.Web.UI.WebControls
                     FontUnit.Medium,
                     FontUnit.Large,
                     FontUnit.XLarge,
-                    FontUnit.XXLarge
+                    FontUnit.XXLarge,
                 };
 
                 values = new StandardValuesCollection(namedUnits);

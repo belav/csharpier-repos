@@ -4,7 +4,7 @@ namespace System.Runtime.CompilerServices
     {
         CannotCast = 0,
         CanCast = 1,
-        MaybeCast = 2
+        MaybeCast = 2,
     }
 
     // trivial implementation of the cast cache

@@ -19,6 +19,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Redirect to the dedicated login page.
         /// </devdoc>
-        RedirectToLoginPage = 1
+        RedirectToLoginPage = 1,
     }
 }

@@ -96,14 +96,14 @@ OFFSET 0 LIMIT 1
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = 1
+            PartitionKey = 1,
         };
 
         var customer2 = new Customer
         {
             Id = 42,
             Name = "Theon Twin",
-            PartitionKey = 2
+            PartitionKey = 2,
         };
 
         await using (var innerContext = CreateContext())

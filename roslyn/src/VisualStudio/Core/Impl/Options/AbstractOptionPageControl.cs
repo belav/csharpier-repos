@@ -47,7 +47,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                     {
                         Left = 7,
                         Right = 7,
-                        Top = 7
+                        Top = 7,
                     }
                 )
             );
@@ -117,7 +117,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 Source = new OptionBinding<bool>(OptionStore, optionKey),
                 Path = new PropertyPath("Value"),
-                UpdateSourceTrigger = UpdateSourceTrigger.Default
+                UpdateSourceTrigger = UpdateSourceTrigger.Default,
             };
 
             AddSearchHandler(checkbox);
@@ -137,7 +137,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 Source = new OptionBinding<bool?>(OptionStore, nullableOptionKey),
                 Path = new PropertyPath("Value"),
                 UpdateSourceTrigger = UpdateSourceTrigger.Default,
-                Converter = new NullableBoolOptionConverter(onNullValue)
+                Converter = new NullableBoolOptionConverter(onNullValue),
             };
 
             AddSearchHandler(checkbox);
@@ -156,7 +156,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 Source = new PerLanguageOptionBinding<bool>(OptionStore, optionKey, languageName),
                 Path = new PropertyPath("Value"),
-                UpdateSourceTrigger = UpdateSourceTrigger.Default
+                UpdateSourceTrigger = UpdateSourceTrigger.Default,
             };
 
             AddSearchHandler(checkbox);
@@ -181,7 +181,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 ),
                 Path = new PropertyPath("Value"),
                 UpdateSourceTrigger = UpdateSourceTrigger.Default,
-                Converter = new NullableBoolOptionConverter(onNullValue)
+                Converter = new NullableBoolOptionConverter(onNullValue),
             };
 
             AddSearchHandler(checkbox);
@@ -196,7 +196,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 Source = new OptionBinding<int>(OptionStore, optionKey),
                 Path = new PropertyPath("Value"),
-                UpdateSourceTrigger = UpdateSourceTrigger.Default
+                UpdateSourceTrigger = UpdateSourceTrigger.Default,
             };
 
             var bindingExpression = textBox.SetBinding(TextBox.TextProperty, binding);
@@ -213,7 +213,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             {
                 Source = new PerLanguageOptionBinding<int>(OptionStore, optionKey, languageName),
                 Path = new PropertyPath("Value"),
-                UpdateSourceTrigger = UpdateSourceTrigger.Default
+                UpdateSourceTrigger = UpdateSourceTrigger.Default,
             };
 
             var bindingExpression = textBox.SetBinding(TextBox.TextProperty, binding);
@@ -231,7 +231,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 Source = new OptionBinding<T>(OptionStore, optionKey),
                 Path = new PropertyPath("Value"),
                 Converter = new ComboBoxItemTagToIndexConverter(),
-                ConverterParameter = comboBox
+                ConverterParameter = comboBox,
             };
 
             AddSearchHandler(comboBox);
@@ -255,7 +255,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 Source = new PerLanguageOptionBinding<T>(OptionStore, optionKey, languageName),
                 Path = new PropertyPath("Value"),
                 Converter = new ComboBoxItemTagToIndexConverter(),
-                ConverterParameter = comboBox
+                ConverterParameter = comboBox,
             };
 
             AddSearchHandler(comboBox);
@@ -280,7 +280,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 Path = new PropertyPath("Value"),
                 UpdateSourceTrigger = UpdateSourceTrigger.Default,
                 Converter = new RadioButtonCheckedConverter(),
-                ConverterParameter = optionValue
+                ConverterParameter = optionValue,
             };
 
             AddSearchHandler(radiobutton);

@@ -101,7 +101,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(float*),
                                             typeof(Vector128<int>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -110,7 +110,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
                                             indexi,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(floatTable.outArrayPtr, vf);
@@ -231,7 +231,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(double*),
                                             typeof(Vector128<int>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -240,7 +240,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(doubletTable.inArrayPtr, typeof(double*)),
                                             indexi,
-                                            (byte)8
+                                            (byte)8,
                                         }
                                     );
                         Unsafe.Write(doubletTable.outArrayPtr, vd);
@@ -358,7 +358,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(int*),
                                             typeof(Vector128<int>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -367,7 +367,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(intTable.inArrayPtr, typeof(int*)),
                                             indexi,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(intTable.outArrayPtr, vf);
@@ -459,7 +459,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(uint*),
                                             typeof(Vector128<int>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -468,7 +468,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
                                             indexi,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(intTable.outArrayPtr, vf);
@@ -564,7 +564,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(long*),
                                             typeof(Vector128<int>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -573,7 +573,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(longTable.inArrayPtr, typeof(long*)),
                                             indexi,
-                                            (byte)8
+                                            (byte)8,
                                         }
                                     );
                         Unsafe.Write(longTable.outArrayPtr, vf);
@@ -669,7 +669,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(ulong*),
                                             typeof(Vector128<int>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -678,7 +678,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(longTable.inArrayPtr, typeof(ulong*)),
                                             indexi,
-                                            (byte)8
+                                            (byte)8,
                                         }
                                     );
                         Unsafe.Write(longTable.outArrayPtr, vf);
@@ -776,7 +776,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(int*),
                                             typeof(Vector128<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -785,7 +785,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(intTable.inArrayPtr, typeof(int*)),
                                             indexl,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(intTable.outArrayPtr, vf);
@@ -879,7 +879,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(uint*),
                                             typeof(Vector128<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -888,7 +888,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
                                             indexl,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(intTable.outArrayPtr, vf);
@@ -986,7 +986,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(long*),
                                             typeof(Vector128<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -995,7 +995,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(longTable.inArrayPtr, typeof(long*)),
                                             indexl,
-                                            (byte)8
+                                            (byte)8,
                                         }
                                     );
                         Unsafe.Write(longTable.outArrayPtr, vf);
@@ -1093,7 +1093,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(ulong*),
                                             typeof(Vector128<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -1102,7 +1102,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(longTable.inArrayPtr, typeof(ulong*)),
                                             indexl,
-                                            (byte)8
+                                            (byte)8,
                                         }
                                     );
                         Unsafe.Write(longTable.outArrayPtr, vf);
@@ -1207,7 +1207,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(float*),
                                             typeof(Vector128<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -1216,7 +1216,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
                                             indexl,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(floatTable.outArrayPtr, vf);
@@ -1339,7 +1339,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(double*),
                                             typeof(Vector128<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -1348,7 +1348,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(doubletTable.inArrayPtr, typeof(double*)),
                                             indexl,
-                                            (byte)8
+                                            (byte)8,
                                         }
                                     );
                         Unsafe.Write(doubletTable.outArrayPtr, vd);
@@ -1468,7 +1468,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(int*),
                                             typeof(Vector256<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -1477,7 +1477,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(intTable.inArrayPtr, typeof(int*)),
                                             indexl256,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(intTable.outArrayPtr, vf);
@@ -1575,7 +1575,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(uint*),
                                             typeof(Vector256<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -1584,7 +1584,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(intTable.inArrayPtr, typeof(uint*)),
                                             indexl256,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         if (!intTable.CheckResult((x, y) => x == y, vector256longIndexTable))
@@ -1691,7 +1691,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             typeof(float*),
                                             typeof(Vector256<long>),
-                                            typeof(byte)
+                                            typeof(byte),
                                         }
                                     )
                                     .Invoke(
@@ -1700,7 +1700,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                                         {
                                             Pointer.Box(floatTable.inArrayPtr, typeof(float*)),
                                             indexl256,
-                                            (byte)4
+                                            (byte)4,
                                         }
                                     );
                         Unsafe.Write(floatTable.outArrayPtr, vf);

@@ -57,7 +57,7 @@ namespace C5
         /// property  takes time O(1),
         /// where n is the size of the collection.
         /// </summary>
-        Constant = 4
+        Constant = 4,
     }
 
     /*
@@ -98,6 +98,6 @@ namespace C5
         /// <summary>
         /// Opposite direction
         /// </summary>
-        Backwards
+        Backwards,
     }
 }

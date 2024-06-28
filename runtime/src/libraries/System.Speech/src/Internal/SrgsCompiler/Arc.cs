@@ -96,9 +96,9 @@ namespace System.Speech.Internal.SrgsCompiler
                     _specialTransitionIndex =
                         (specialRule == CfgGrammar.SPRULETRANS_WILDCARD)
                             ? CfgGrammar.SPWILDCARDTRANSITION
-                            : (specialRule == CfgGrammar.SPRULETRANS_DICTATION)
-                                ? CfgGrammar.SPDICTATIONTRANSITION
-                                : CfgGrammar.SPTEXTBUFFERTRANSITION;
+                        : (specialRule == CfgGrammar.SPRULETRANS_DICTATION)
+                            ? CfgGrammar.SPDICTATIONTRANSITION
+                        : CfgGrammar.SPTEXTBUFFERTRANSITION;
                 }
                 else
                 {
@@ -632,11 +632,9 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 sb.Append('\'');
                 sb.Append(
-                    _iWord == 0
-                        ? new string(new char[] { (char)0x3b5 })
-                        : _be != null
-                            ? _be.Words[_iWord]
-                            : _iWord.ToString(CultureInfo.InvariantCulture)
+                    _iWord == 0 ? new string(new char[] { (char)0x3b5 })
+                    : _be != null ? _be.Words[_iWord]
+                    : _iWord.ToString(CultureInfo.InvariantCulture)
                 );
                 sb.Append('\'');
             }
@@ -918,7 +916,7 @@ namespace System.Speech.Internal.SrgsCompiler
     internal enum Direction
     {
         Right,
-        Left
+        Left,
     }
     #endregion
 }

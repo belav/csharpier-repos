@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             0xC9,
             0xDB,
             0xED,
-            0xFF
+            0xFF,
         ];
 
         [

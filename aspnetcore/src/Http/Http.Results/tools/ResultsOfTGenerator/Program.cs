@@ -1166,7 +1166,7 @@ public static class StringExtensions
             18 => "eighteen",
             19 => "nineteen",
             20 => "twenty",
-            _ => throw new NotImplementedException("Add more numbers")
+            _ => throw new NotImplementedException("Add more numbers"),
         };
 
     public static string ToOrdinalWords(this int number) =>
@@ -1192,7 +1192,7 @@ public static class StringExtensions
             18 => "eighteenth",
             19 => "nineteenth",
             20 => "twentieth",
-            _ => throw new NotImplementedException("Add more numbers")
+            _ => throw new NotImplementedException("Add more numbers"),
         };
 
     public static string TitleCase(this string value) =>

@@ -878,7 +878,7 @@ namespace Mono.Data.Sqlite
                                     (string)row[SchemaTableOptionalColumn.BaseCatalogName],
                                     null,
                                     (string)row[SchemaTableColumn.BaseTableName],
-                                    null
+                                    null,
                                 }
                             );
                         }
@@ -893,7 +893,7 @@ namespace Mono.Data.Sqlite
                                     null,
                                     (string)row[SchemaTableColumn.BaseTableName],
                                     (string)rowIndexes["INDEX_NAME"],
-                                    null
+                                    null,
                                 }
                             );
                             foreach (DataRow rowColumnIndex in tblIndexColumns.Rows)

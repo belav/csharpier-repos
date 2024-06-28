@@ -89,6 +89,6 @@ namespace System.Web.UI.WebControls
         ///       The font size is extra extra large.
         ///    </para>
         /// </devdoc>
-        XXLarge = 10
+        XXLarge = 10,
     }
 }

@@ -24,7 +24,7 @@ namespace System.Net.Http.Headers
                     HttpOnly = true,
                     MaxAge = TimeSpan.FromDays(1),
                     Path = "path1",
-                    Secure = true
+                    Secure = true,
                 };
                 dataset.Add(
                     header1,

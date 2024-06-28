@@ -218,25 +218,25 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     SampleEnumSByte.MinNegative,
                     sbyte.MinValue,
-                    "MySByteEnum"
+                    "MySByteEnum",
                 };
                 yield return new object[]
                 {
                     SampleEnumInt16.MinNegative,
                     short.MinValue,
-                    "MyInt16Enum"
+                    "MyInt16Enum",
                 };
                 yield return new object[]
                 {
                     SampleEnumInt32.MinNegative,
                     int.MinValue,
-                    "MyInt32Enum"
+                    "MyInt32Enum",
                 };
                 yield return new object[]
                 {
                     SampleEnumInt64.MinNegative,
                     long.MinValue,
-                    "MyInt64Enum"
+                    "MyInt64Enum",
                 };
                 yield return new object[] { SampleEnumSByte.Max, sbyte.MaxValue, "MySByteEnum" };
                 yield return new object[] { SampleEnumInt16.Max, short.MaxValue, "MyInt16Enum" };
@@ -268,61 +268,61 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     typeof(SampleEnumUInt32),
                     ByteMaxPlus1,
-                    "MyUInt32Enum"
+                    "MyUInt32Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt32),
                     Int16MaxPlus1,
-                    "MyUInt32Enum"
+                    "MyUInt32Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt32),
                     Int32MaxPlus1,
-                    "MyUInt32Enum"
+                    "MyUInt32Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt32),
                     UInt16MaxPlus1,
-                    "MyUInt32Enum"
+                    "MyUInt32Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt64),
                     ByteMaxPlus1,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt64),
                     Int16MaxPlus1,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt64),
                     Int32MaxPlus1,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt64),
                     Int64MaxPlus1,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt64),
                     UInt16MaxPlus1,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
                 yield return new object[]
                 {
                     typeof(SampleEnumUInt64),
                     UInt32MaxPlus1,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
             }
         }
@@ -336,19 +336,19 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     SampleEnumUInt16.MinZero,
                     ushort.MinValue,
-                    "MyUInt16Enum"
+                    "MyUInt16Enum",
                 };
                 yield return new object[]
                 {
                     SampleEnumUInt32.MinZero,
                     uint.MinValue,
-                    "MyUInt32Enum"
+                    "MyUInt32Enum",
                 };
                 yield return new object[]
                 {
                     SampleEnumUInt64.MinZero,
                     ulong.MinValue,
-                    "MyUInt64Enum"
+                    "MyUInt64Enum",
                 };
                 yield return new object[] { SampleEnumByte.Max, byte.MaxValue, "MyByteEnum" };
                 yield return new object[] { SampleEnumUInt16.Max, ushort.MaxValue, "MyUInt16Enum" };
@@ -417,168 +417,168 @@ namespace System.Text.Json.Serialization.Tests
                     1,
                     ByteMaxPlus1,
                     typeof(SampleEnumByte),
-                    SampleEnumByte.MinZero
+                    SampleEnumByte.MinZero,
                 };
                 yield return new object[]
                 {
                     2,
                     ByteMaxPlus1,
                     typeof(SampleEnumByte),
-                    SampleEnumByte.MinZero
+                    SampleEnumByte.MinZero,
                 };
                 yield return new object[]
                 {
                     3,
                     ByteMaxPlus1,
                     typeof(SampleEnumByte),
-                    SampleEnumByte.MinZero
+                    SampleEnumByte.MinZero,
                 };
                 yield return new object[]
                 {
                     4,
                     ByteMaxPlus1,
                     typeof(SampleEnumByte),
-                    SampleEnumByte.MinZero
+                    SampleEnumByte.MinZero,
                 };
                 yield return new object[]
                 {
                     1,
                     UInt16MaxPlus1,
                     typeof(SampleEnumUInt16),
-                    SampleEnumUInt16.MinZero
+                    SampleEnumUInt16.MinZero,
                 };
                 yield return new object[]
                 {
                     2,
                     UInt16MaxPlus1,
                     typeof(SampleEnumUInt16),
-                    SampleEnumUInt16.MinZero
+                    SampleEnumUInt16.MinZero,
                 };
                 yield return new object[]
                 {
                     3,
                     UInt16MaxPlus1,
                     typeof(SampleEnumUInt16),
-                    SampleEnumUInt16.MinZero
+                    SampleEnumUInt16.MinZero,
                 };
                 yield return new object[]
                 {
                     4,
                     UInt16MaxPlus1,
                     typeof(SampleEnumUInt16),
-                    SampleEnumUInt16.MinZero
+                    SampleEnumUInt16.MinZero,
                 };
                 yield return new object[]
                 {
                     1,
                     UInt32MaxPlus1,
                     typeof(SampleEnumUInt32),
-                    SampleEnumUInt32.MinZero
+                    SampleEnumUInt32.MinZero,
                 };
                 yield return new object[]
                 {
                     2,
                     UInt32MaxPlus1,
                     typeof(SampleEnumUInt32),
-                    SampleEnumUInt32.MinZero
+                    SampleEnumUInt32.MinZero,
                 };
                 yield return new object[]
                 {
                     3,
                     UInt32MaxPlus1,
                     typeof(SampleEnumUInt32),
-                    SampleEnumUInt32.MinZero
+                    SampleEnumUInt32.MinZero,
                 };
                 yield return new object[]
                 {
                     4,
                     UInt32MaxPlus1,
                     typeof(SampleEnumUInt32),
-                    SampleEnumUInt32.MinZero
+                    SampleEnumUInt32.MinZero,
                 };
                 yield return new object[]
                 {
                     1,
                     SByteMaxPlus1,
                     typeof(SampleEnumSByte),
-                    SampleEnumSByte.MinNegative
+                    SampleEnumSByte.MinNegative,
                 };
                 yield return new object[]
                 {
                     2,
                     SByteMaxPlus1,
                     typeof(SampleEnumSByte),
-                    SampleEnumSByte.Zero
+                    SampleEnumSByte.Zero,
                 };
                 yield return new object[]
                 {
                     3,
                     SByteMaxPlus1,
                     typeof(SampleEnumSByte),
-                    SampleEnumSByte.MinNegative
+                    SampleEnumSByte.MinNegative,
                 };
                 yield return new object[]
                 {
                     4,
                     SByteMaxPlus1,
                     typeof(SampleEnumSByte),
-                    SampleEnumSByte.Zero
+                    SampleEnumSByte.Zero,
                 };
                 yield return new object[]
                 {
                     1,
                     Int16MaxPlus1,
                     typeof(SampleEnumInt16),
-                    SampleEnumInt16.MinNegative
+                    SampleEnumInt16.MinNegative,
                 };
                 yield return new object[]
                 {
                     2,
                     Int16MaxPlus1,
                     typeof(SampleEnumInt16),
-                    SampleEnumInt16.Zero
+                    SampleEnumInt16.Zero,
                 };
                 yield return new object[]
                 {
                     3,
                     Int16MaxPlus1,
                     typeof(SampleEnumInt16),
-                    SampleEnumInt16.MinNegative
+                    SampleEnumInt16.MinNegative,
                 };
                 yield return new object[]
                 {
                     4,
                     Int16MaxPlus1,
                     typeof(SampleEnumInt16),
-                    SampleEnumInt16.Zero
+                    SampleEnumInt16.Zero,
                 };
                 yield return new object[]
                 {
                     1,
                     Int32MaxPlus1,
                     typeof(SampleEnumInt32),
-                    SampleEnumInt32.MinNegative
+                    SampleEnumInt32.MinNegative,
                 };
                 yield return new object[]
                 {
                     2,
                     Int32MaxPlus1,
                     typeof(SampleEnumInt32),
-                    SampleEnumInt32.Zero
+                    SampleEnumInt32.Zero,
                 };
                 yield return new object[]
                 {
                     3,
                     Int32MaxPlus1,
                     typeof(SampleEnumInt32),
-                    SampleEnumInt32.MinNegative
+                    SampleEnumInt32.MinNegative,
                 };
                 yield return new object[]
                 {
                     4,
                     Int32MaxPlus1,
                     typeof(SampleEnumInt32),
-                    SampleEnumInt32.Zero
+                    SampleEnumInt32.Zero,
                 };
             }
         }

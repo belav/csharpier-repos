@@ -311,7 +311,7 @@ namespace System.CommandLine.Rendering.Views
                 SizeMode.Fixed => 0,
                 SizeMode.SizeToContent => 1,
                 SizeMode.Star => 2,
-                _ => throw new InvalidOperationException($"Unknown size mode {sizeMode}")
+                _ => throw new InvalidOperationException($"Unknown size mode {sizeMode}"),
             };
         }
     }

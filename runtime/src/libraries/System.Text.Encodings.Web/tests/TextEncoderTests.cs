@@ -78,7 +78,7 @@ namespace System.Text.Encodings.Web.Tests
                 0xA0,
                 0xA1,
                 0xA2,
-                0x50
+                0x50,
             }; // UTF-8 subsequences of varying length
 
             var encoder = new ConfigurableScalarTextEncoder(_ =>
@@ -173,7 +173,7 @@ namespace System.Text.Encodings.Web.Tests
                         int destinationLength in new[]
                         {
                             expectedOutputBytesSoFar.Count,
-                            expectedOutputBytesSoFar.Count + 1024
+                            expectedOutputBytesSoFar.Count + 1024,
                         }
                     )
                     {
@@ -278,7 +278,7 @@ namespace System.Text.Encodings.Web.Tests
                     int destinationLength in new[]
                     {
                         expectedOutputBytesSoFar.Count,
-                        expectedOutputBytesSoFar.Count + 1024
+                        expectedOutputBytesSoFar.Count + 1024,
                     }
                 )
                 {

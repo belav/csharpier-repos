@@ -151,13 +151,13 @@ namespace CoreXml.Test.XLinq
             public enum ExplicitCastTestType
             {
                 RoundTrip,
-                XmlConvert
+                XmlConvert,
             }
 
             public enum NodeCreateType
             {
                 Constructor,
-                SetValue
+                SetValue,
             }
 
             //[TestCase(Name = "XElement - value conversion round trip   (constructor)", Params = new object[] { typeof(XElement), ExplicitCastTestType.RoundTrip, NodeCreateType.Constructor })]
@@ -241,7 +241,7 @@ namespace CoreXml.Test.XLinq
                     // Guid
                     System.Guid.Empty,
                     System.Guid.NewGuid(),
-                    System.Guid.NewGuid()
+                    System.Guid.NewGuid(),
                 };
 
                 public static Dictionary<Type, Type> typeMapper;

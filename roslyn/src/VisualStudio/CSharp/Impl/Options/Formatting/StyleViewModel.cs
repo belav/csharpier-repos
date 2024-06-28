@@ -1577,7 +1577,7 @@ class Customer2
         }}
     }}
 //]
-"
+",
         ];
 
         private static readonly string s_preferReadOnlyStruct =
@@ -3011,7 +3011,7 @@ class C2
             {
                 PreferBracesPreference.Always,
                 PreferBracesPreference.None,
-                PreferBracesPreference.WhenMultiline
+                PreferBracesPreference.WhenMultiline,
             };
 
             CodeStyleItems.Add(
@@ -3039,7 +3039,7 @@ class C2
             var enumValues = new[]
             {
                 NamespaceDeclarationPreference.BlockScoped,
-                NamespaceDeclarationPreference.FileScoped
+                NamespaceDeclarationPreference.FileScoped,
             };
 
             CodeStyleItems.Add(
@@ -3072,7 +3072,7 @@ class C2
             {
                 ExpressionBodyPreference.Never,
                 ExpressionBodyPreference.WhenPossible,
-                ExpressionBodyPreference.WhenOnSingleLine
+                ExpressionBodyPreference.WhenOnSingleLine,
             };
 
             CodeStyleItems.Add(
@@ -3083,7 +3083,7 @@ class C2
                     [
                         s_preferBlockBodyForMethods,
                         s_preferExpressionBodyForMethods,
-                        s_preferExpressionBodyForMethods
+                        s_preferExpressionBodyForMethods,
                     ],
                     this,
                     optionStore,
@@ -3100,7 +3100,7 @@ class C2
                     [
                         s_preferBlockBodyForConstructors,
                         s_preferExpressionBodyForConstructors,
-                        s_preferExpressionBodyForConstructors
+                        s_preferExpressionBodyForConstructors,
                     ],
                     this,
                     optionStore,
@@ -3117,7 +3117,7 @@ class C2
                     [
                         s_preferBlockBodyForOperators,
                         s_preferExpressionBodyForOperators,
-                        s_preferExpressionBodyForOperators
+                        s_preferExpressionBodyForOperators,
                     ],
                     this,
                     optionStore,
@@ -3134,7 +3134,7 @@ class C2
                     [
                         s_preferBlockBodyForProperties,
                         s_preferExpressionBodyForProperties,
-                        s_preferExpressionBodyForProperties
+                        s_preferExpressionBodyForProperties,
                     ],
                     this,
                     optionStore,
@@ -3151,7 +3151,7 @@ class C2
                     [
                         s_preferBlockBodyForIndexers,
                         s_preferExpressionBodyForIndexers,
-                        s_preferExpressionBodyForIndexers
+                        s_preferExpressionBodyForIndexers,
                     ],
                     this,
                     optionStore,
@@ -3168,7 +3168,7 @@ class C2
                     [
                         s_preferBlockBodyForAccessors,
                         s_preferExpressionBodyForAccessors,
-                        s_preferExpressionBodyForAccessors
+                        s_preferExpressionBodyForAccessors,
                     ],
                     this,
                     optionStore,
@@ -3185,7 +3185,7 @@ class C2
                     [
                         s_preferBlockBodyForLambdas,
                         s_preferExpressionBodyForLambdas,
-                        s_preferExpressionBodyForLambdas
+                        s_preferExpressionBodyForLambdas,
                     ],
                     this,
                     optionStore,
@@ -3202,7 +3202,7 @@ class C2
                     [
                         s_preferBlockBodyForLocalFunctions,
                         s_preferExpressionBodyForLocalFunctions,
-                        s_preferExpressionBodyForLocalFunctions
+                        s_preferExpressionBodyForLocalFunctions,
                     ],
                     this,
                     optionStore,
@@ -3226,7 +3226,7 @@ class C2
             var enumValues = new[]
             {
                 UnusedValuePreference.UnusedLocalVariable,
-                UnusedValuePreference.DiscardVariable
+                UnusedValuePreference.DiscardVariable,
             };
 
             CodeStyleItems.Add(
@@ -3249,7 +3249,7 @@ class C2
                     enumValues,
                     [
                         s_avoidUnusedValueExpressionStatementUnusedLocal,
-                        s_avoidUnusedValueExpressionStatementDiscard
+                        s_avoidUnusedValueExpressionStatementDiscard,
                     ],
                     this,
                     optionStore,
@@ -3267,7 +3267,7 @@ class C2
             var examples = new[]
             {
                 s_avoidUnusedParametersNonPublicMethods,
-                s_avoidUnusedParametersAllMethods
+                s_avoidUnusedParametersAllMethods,
             };
 
             AddUnusedParameterOption(optionStore, parameterPreferencesGroupTitle, examples);

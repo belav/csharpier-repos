@@ -302,7 +302,7 @@ namespace System.IO.Ports.Tests
                     0x6f,
                     0x72,
                     0x6c,
-                    0x64
+                    0x64,
                 };
 
                 Task writingTask = Task.Run(() =>

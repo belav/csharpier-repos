@@ -61,7 +61,7 @@ public class OwinWebSocketAcceptAdapter
         {
             options = new Dictionary<string, object>(1)
             {
-                { OwinConstants.WebSocket.SubProtocol, context.SubProtocol }
+                { OwinConstants.WebSocket.SubProtocol, context.SubProtocol },
             };
             _subProtocol = context.SubProtocol;
         }

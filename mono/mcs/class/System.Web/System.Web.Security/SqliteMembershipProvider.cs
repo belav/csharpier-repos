@@ -1865,7 +1865,7 @@ namespace System.Web.Security
         enum FailureType
         {
             Password,
-            PasswordAnswer
+            PasswordAnswer,
         }
         #endregion
     }

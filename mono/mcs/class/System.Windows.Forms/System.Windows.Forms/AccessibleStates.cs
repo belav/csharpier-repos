@@ -66,6 +66,6 @@ namespace System.Windows.Forms
 
         [Obsolete]
         Valid = 0x3FFFFFFF,
-        HasPopup = 0x40000000
+        HasPopup = 0x40000000,
     }
 }

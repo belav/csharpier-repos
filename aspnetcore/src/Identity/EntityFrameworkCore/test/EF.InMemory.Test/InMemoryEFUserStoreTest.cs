@@ -51,7 +51,7 @@ public class InMemoryEFUserStoreTest
             Email = email,
             PhoneNumber = phoneNumber,
             LockoutEnabled = lockoutEnabled,
-            LockoutEnd = lockoutEnd
+            LockoutEnd = lockoutEnd,
         };
     }
 

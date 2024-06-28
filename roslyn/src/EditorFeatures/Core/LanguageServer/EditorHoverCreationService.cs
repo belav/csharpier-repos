@@ -74,7 +74,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/918138
                 RawContent = await IntellisenseQuickInfoBuilder
                     .BuildContentWithoutNavigationActionsAsync(info, context, cancellationToken)
-                    .ConfigureAwait(false)
+                    .ConfigureAwait(false),
             };
         }
     }

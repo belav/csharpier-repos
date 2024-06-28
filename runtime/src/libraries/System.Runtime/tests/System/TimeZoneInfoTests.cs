@@ -169,7 +169,13 @@ namespace System.Tests
                         "+0430"
                     },
                     { s_NewfoundlandTz, "(UTC-03:30) America/St_Johns", null, "NST", "NDT" },
-                    { s_catamarcaTz, "(UTC-03:00) America/Argentina/Catamarca", null, "-03", "-02" }
+                    {
+                        s_catamarcaTz,
+                        "(UTC-03:00) America/Argentina/Catamarca",
+                        null,
+                        "-03",
+                        "-02"
+                    },
                 };
             else if (
                 PlatformDetection.IsHybridGlobalizationOnOSX
@@ -222,7 +228,7 @@ namespace System.Tests
                         null,
                         "Argentina Standard Time",
                         "Argentina Summer Time"
-                    }
+                    },
                 };
             else if (PlatformDetection.IsWindows)
                 return new TheoryData<TimeZoneInfo, string, string, string, string>
@@ -268,7 +274,7 @@ namespace System.Tests
                         null,
                         "Argentina Standard Time",
                         "Argentina Daylight Time"
-                    }
+                    },
                 };
             else
                 return new TheoryData<TimeZoneInfo, string, string, string, string>
@@ -314,7 +320,7 @@ namespace System.Tests
                         null,
                         "Argentina Standard Time",
                         "Argentina Summer Time"
-                    }
+                    },
                 };
         }
 
@@ -2962,7 +2968,7 @@ namespace System.Tests
             TimeSpan[] localOffsets = new TimeSpan[]
             {
                 new TimeSpan(-7, 0, 0),
-                new TimeSpan(-8, 0, 0)
+                new TimeSpan(-8, 0, 0),
             };
             VerifyAmbiguousOffsetsException<ArgumentException>(
                 TimeZoneInfo.Local,
@@ -4760,7 +4766,7 @@ namespace System.Tests
             "UCT",
             "UTC",
             "Universal",
-            "Zulu"
+            "Zulu",
         };
 
         // On Android GMT, GMT+0, and GMT-0 are values

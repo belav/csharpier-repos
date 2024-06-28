@@ -16,7 +16,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, state.Options);
         }
@@ -29,7 +29,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, state.Options);
         }
@@ -42,7 +42,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, state.Options);
 
@@ -50,7 +50,7 @@ namespace System.Text.Json.Tests
                 new JsonReaderOptions
                 {
                     CommentHandling = JsonCommentHandling.Disallow,
-                    MaxDepth = 0
+                    MaxDepth = 0,
                 }
             );
             Assert.Equal(expectedOption, state.Options);
@@ -58,7 +58,7 @@ namespace System.Text.Json.Tests
             expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 32
+                MaxDepth = 32,
             };
             state = new JsonReaderState(new JsonReaderOptions { MaxDepth = 32 });
             Assert.Equal(32, state.Options.MaxDepth);
@@ -107,7 +107,7 @@ namespace System.Text.Json.Tests
             var expectedOption = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, options);
 
@@ -120,7 +120,7 @@ namespace System.Text.Json.Tests
             options = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             Assert.Equal(expectedOption, options);
         }
@@ -148,7 +148,7 @@ namespace System.Text.Json.Tests
             JsonReaderOptions options = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 0
+                MaxDepth = 0,
             };
             state = new JsonReaderState(options);
             reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
@@ -184,7 +184,7 @@ namespace System.Text.Json.Tests
             JsonReaderOptions options = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 64
+                MaxDepth = 64,
             };
             var state = new JsonReaderState(options);
             var reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);
@@ -199,7 +199,7 @@ namespace System.Text.Json.Tests
             options = new JsonReaderOptions
             {
                 CommentHandling = JsonCommentHandling.Disallow,
-                MaxDepth = 32
+                MaxDepth = 32,
             };
             state = new JsonReaderState(options);
             reader = new Utf8JsonReader(dataUtf8, isFinalBlock: true, state);

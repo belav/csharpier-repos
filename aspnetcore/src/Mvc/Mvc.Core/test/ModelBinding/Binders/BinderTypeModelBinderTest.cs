@@ -84,7 +84,7 @@ public class BinderTypeModelBinderTest
             {
                 HttpContext = new DefaultHttpContext()
                 {
-                    RequestServices = new ServiceCollection().BuildServiceProvider()
+                    RequestServices = new ServiceCollection().BuildServiceProvider(),
                 },
             },
             ModelMetadata = metadataProvider.GetMetadataForType(modelType),

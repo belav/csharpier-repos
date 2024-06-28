@@ -115,7 +115,7 @@ namespace System.Web.Http.Owin
                 CancellationToken expectedAppDisposing = tokenSource.Token;
                 IDictionary<string, object> properties = new Dictionary<string, object>
                 {
-                    { "host.OnAppDisposing", expectedAppDisposing }
+                    { "host.OnAppDisposing", expectedAppDisposing },
                 };
                 appBuilder.SetupGet(b => b.Properties).Returns(properties);
                 appBuilder
@@ -195,7 +195,7 @@ namespace System.Web.Http.Owin
                 CancellationToken expectedAppDisposing = tokenSource.Token;
                 IDictionary<string, object> properties = new Dictionary<string, object>
                 {
-                    { "host.OnAppDisposing", expectedAppDisposing }
+                    { "host.OnAppDisposing", expectedAppDisposing },
                 };
                 appBuilderMock.SetupGet(b => b.Properties).Returns(properties);
                 appBuilderMock

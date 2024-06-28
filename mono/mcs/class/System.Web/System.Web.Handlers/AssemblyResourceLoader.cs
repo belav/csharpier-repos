@@ -175,7 +175,7 @@ namespace System.Web.Handlers
                                 debug,
                                 false,
                                 true
-                            )
+                            ),
                         };
 
                         entry.Resources.Add(rkNoNotify, er);
@@ -196,7 +196,7 @@ namespace System.Web.Handlers
                                 debug,
                                 true,
                                 true
-                            )
+                            ),
                         };
 
                         entry.Resources.Add(rkNotify, er);
@@ -217,7 +217,7 @@ namespace System.Web.Handlers
                                 false,
                                 false,
                                 true
-                            )
+                            ),
                         };
                         entry.Resources.Add(resourceNameHash, er);
                     }

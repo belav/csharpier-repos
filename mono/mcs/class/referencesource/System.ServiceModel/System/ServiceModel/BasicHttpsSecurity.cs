@@ -38,7 +38,7 @@ namespace System.ServiceModel
             {
                 Mode = basicHttpSecurityMode,
                 Transport = httpTransportSecurity,
-                Message = httpMessageSecurity
+                Message = httpMessageSecurity,
             };
         }
 
@@ -105,7 +105,9 @@ namespace System.ServiceModel
             {
                 Message = basicHttpsSecurity.Message,
                 Transport = basicHttpsSecurity.Transport,
-                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(basicHttpsSecurity.Mode)
+                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpSecurityMode(
+                    basicHttpsSecurity.Mode
+                ),
             };
 
             return basicHttpSecurity;
@@ -119,7 +121,9 @@ namespace System.ServiceModel
             {
                 Message = basicHttpSecurity.Message,
                 Transport = basicHttpSecurity.Transport,
-                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpsSecurityMode(basicHttpSecurity.Mode)
+                Mode = BasicHttpsSecurityModeHelper.ToBasicHttpsSecurityMode(
+                    basicHttpSecurity.Mode
+                ),
             };
 
             return basicHttpsSecurity;

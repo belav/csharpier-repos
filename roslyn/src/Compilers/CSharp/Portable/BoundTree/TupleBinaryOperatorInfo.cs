@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         Single,
         NullNull,
-        Multiple
+        Multiple,
     }
 
     /// <summary>

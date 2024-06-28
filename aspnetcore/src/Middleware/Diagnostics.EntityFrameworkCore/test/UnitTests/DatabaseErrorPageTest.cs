@@ -28,7 +28,7 @@ public class DatabaseErrorPageTest
                     databaseExists: false,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -55,7 +55,7 @@ public class DatabaseErrorPageTest
                     databaseExists: false,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { "111_MigrationOne" }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -82,7 +82,7 @@ public class DatabaseErrorPageTest
                     databaseExists: true,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { "111_MigrationOne" }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -109,7 +109,7 @@ public class DatabaseErrorPageTest
                     databaseExists: true,
                     pendingModelChanges: true,
                     pendingMigrations: new string[] { "111_MigrationOne" }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -136,7 +136,7 @@ public class DatabaseErrorPageTest
                     databaseExists: true,
                     pendingModelChanges: true,
                     pendingMigrations: new string[] { }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -163,7 +163,7 @@ public class DatabaseErrorPageTest
                     databaseExists: false,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -191,7 +191,7 @@ public class DatabaseErrorPageTest
                     databaseExists: false,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -218,7 +218,7 @@ public class DatabaseErrorPageTest
                     databaseExists: true,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { "111_MigrationOne" }
-                )
+                ),
             },
             options: options,
             pathBase: PathString.Empty
@@ -245,7 +245,7 @@ public class DatabaseErrorPageTest
                     databaseExists: true,
                     pendingModelChanges: false,
                     pendingMigrations: new string[] { "111_MigrationOne" }
-                )
+                ),
             },
             options: options,
             pathBase: "/PathBase"

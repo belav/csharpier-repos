@@ -113,7 +113,7 @@ namespace System.Net.Security
                     PAL_SSLStreamStatus.NeedData => SecurityStatusPalErrorCode.ContinueNeeded,
                     PAL_SSLStreamStatus.Renegotiate => SecurityStatusPalErrorCode.Renegotiate,
                     PAL_SSLStreamStatus.Closed => SecurityStatusPalErrorCode.ContextExpired,
-                    _ => SecurityStatusPalErrorCode.InternalError
+                    _ => SecurityStatusPalErrorCode.InternalError,
                 };
 
                 if (securityContext.BytesReadyForConnection <= output?.Length)
@@ -166,7 +166,7 @@ namespace System.Net.Security
                     PAL_SSLStreamStatus.NeedData => SecurityStatusPalErrorCode.OK,
                     PAL_SSLStreamStatus.Renegotiate => SecurityStatusPalErrorCode.Renegotiate,
                     PAL_SSLStreamStatus.Closed => SecurityStatusPalErrorCode.ContextExpired,
-                    _ => SecurityStatusPalErrorCode.InternalError
+                    _ => SecurityStatusPalErrorCode.InternalError,
                 };
 
                 return new SecurityStatusPal(statusCode);
@@ -245,7 +245,7 @@ namespace System.Net.Security
                 {
                     PAL_SSLStreamStatus.OK => SecurityStatusPalErrorCode.OK,
                     PAL_SSLStreamStatus.NeedData => SecurityStatusPalErrorCode.ContinueNeeded,
-                    _ => SecurityStatusPalErrorCode.InternalError
+                    _ => SecurityStatusPalErrorCode.InternalError,
                 };
 
                 outputBuffer = sslContext.ReadPendingWrites();

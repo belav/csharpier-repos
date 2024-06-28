@@ -23,7 +23,7 @@ internal static partial class FileResultHelper
         Unspecified,
         NotModified,
         ShouldProcess,
-        PreconditionFailed
+        PreconditionFailed,
     }
 
     internal static async Task WriteFileAsync(

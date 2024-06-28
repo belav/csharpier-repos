@@ -109,7 +109,7 @@ namespace System.Text.Json.Serialization.Tests
                 ConcreteDerivedClassWithNoPublicDefaultCtor.Error("oops"),
                 ConcreteDerivedClassWithNoPublicDefaultCtor.Ok<string>(),
                 ConcreteDerivedClassWithNoPublicDefaultCtor.Ok<int>(),
-                ConcreteDerivedClassWithNoPublicDefaultCtor.Ok()
+                ConcreteDerivedClassWithNoPublicDefaultCtor.Ok(),
             };
             Assert.Equal(
                 "[{\"ErrorString\":\"oops\",\"Result\":null},{\"Result\":null},{\"Result\":0},{\"ErrorString\":\"ok\",\"Result\":null}]",
@@ -151,7 +151,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
             string result = JsonSerializer.Serialize(test, options);
 
@@ -164,7 +164,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                NumberHandling = JsonNumberHandling.AllowReadingFromString
+                NumberHandling = JsonNumberHandling.AllowReadingFromString,
             };
             JsonSerializer.Serialize(new object(), options);
         }
@@ -206,7 +206,7 @@ namespace System.Text.Json.Serialization.Tests
                         Prop18 = DateTime.MaxValue,
                         Prop19 = DateTime.MaxValue,
                         Prop20 = 25000,
-                        Prop21 = DateTime.MaxValue
+                        Prop21 = DateTime.MaxValue,
                     };
 
                 // It takes a little over 4,338,000 items to reach a payload size above the Array.MaxLength value.

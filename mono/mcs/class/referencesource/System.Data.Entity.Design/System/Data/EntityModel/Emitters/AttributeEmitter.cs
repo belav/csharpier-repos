@@ -311,7 +311,7 @@ namespace System.Data.EntityModel.Emitters
                                 )
                             ),
                             "Content"
-                        )
+                        ),
                     }
                 );
                 propertyDecl.CustomAttributes.Add(attribute);

@@ -219,7 +219,7 @@ namespace System.Text.Json
         {
             return new InvalidOperationException(message)
             {
-                Source = ExceptionSourceValueToRethrowAsJsonException
+                Source = ExceptionSourceValueToRethrowAsJsonException,
             };
         }
 
@@ -771,7 +771,7 @@ namespace System.Text.Json
 
             throw new FormatException(message)
             {
-                Source = ExceptionSourceValueToRethrowAsJsonException
+                Source = ExceptionSourceValueToRethrowAsJsonException,
             };
         }
 
@@ -804,7 +804,7 @@ namespace System.Text.Json
 
             throw new FormatException(message)
             {
-                Source = ExceptionSourceValueToRethrowAsJsonException
+                Source = ExceptionSourceValueToRethrowAsJsonException,
             };
         }
 
@@ -887,7 +887,7 @@ namespace System.Text.Json
         Half,
         Single,
         Double,
-        Decimal
+        Decimal,
     }
 
     internal enum DataType

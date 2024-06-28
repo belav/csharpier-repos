@@ -105,6 +105,7 @@ namespace System.Xml.RwFactoryWriterTests
             Error, // In case of an error. Should throw CTestFailedException anyways.
             Pass, // Test() is successful.
             Complete //After Successful PostTest.
+            ,
         };
 
         protected TestState pstate = TestState.Initial;

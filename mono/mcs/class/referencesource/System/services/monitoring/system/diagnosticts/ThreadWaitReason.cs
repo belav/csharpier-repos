@@ -82,6 +82,6 @@ namespace System.Diagnostics
         /// <devdoc>
         ///     Thread is waiting for an unknown reason.
         /// </devdoc>
-        Unknown
+        Unknown,
     }
 }

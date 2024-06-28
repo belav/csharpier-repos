@@ -32,6 +32,6 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Return Parameter
         /// </summary>
-        ReturnValue
+        ReturnValue,
     }
 }

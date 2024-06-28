@@ -117,11 +117,9 @@ namespace System.Threading.Tasks
             }
 
             static string ToString(object value) =>
-                value is null
-                    ? "(null)"
-                    : value is Task t
-                        ? $"Status: {t.Status}, Exception: {t.Exception?.InnerException}"
-                        : value.ToString();
+                value is null ? "(null)"
+                : value is Task t ? $"Status: {t.Status}, Exception: {t.Exception?.InnerException}"
+                : value.ToString();
         }
 
         private GetStateMachineData() { }

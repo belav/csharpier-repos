@@ -524,7 +524,7 @@ namespace System.Threading.Tests
         private enum UniqueEnumUsedOnlyWithNonInterferenceTest
         {
             True,
-            False
+            False,
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]

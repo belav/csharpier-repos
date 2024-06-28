@@ -728,7 +728,7 @@ namespace System.Workflow.Activities.Rules
                     ),
                     new BinaryOperationDescriptor(TokenID.Divide, CodeBinaryOperatorType.Divide),
                     new BinaryOperationDescriptor(TokenID.Modulus, CodeBinaryOperatorType.Modulus)
-                )
+                ),
             };
 
         #endregion
@@ -743,7 +743,7 @@ namespace System.Workflow.Activities.Rules
         {
             Unknown = 0,
             Read = 1,
-            Write = 2
+            Write = 2,
         }
 
         #region Constructor

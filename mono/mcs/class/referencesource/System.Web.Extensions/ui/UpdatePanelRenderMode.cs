@@ -12,6 +12,6 @@ namespace System.Web.UI
     public enum UpdatePanelRenderMode
     {
         Block,
-        Inline
+        Inline,
     }
 }

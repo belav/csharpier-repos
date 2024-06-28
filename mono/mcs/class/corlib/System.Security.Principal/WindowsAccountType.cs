@@ -38,6 +38,6 @@ namespace System.Security.Principal
         Normal,
         Guest,
         System,
-        Anonymous
+        Anonymous,
     }
 }

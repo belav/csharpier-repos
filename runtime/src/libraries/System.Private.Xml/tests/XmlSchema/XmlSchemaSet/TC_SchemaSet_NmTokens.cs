@@ -54,7 +54,7 @@ namespace System.Xml.XmlSchemaTests
                 ValidationFlags =
                     XmlSchemaValidationFlags.ProcessSchemaLocation
                     | XmlSchemaValidationFlags.ReportValidationWarnings,
-                XmlResolver = new XmlUrlResolver()
+                XmlResolver = new XmlUrlResolver(),
             };
             int numevents = 0;
             settings.ValidationEventHandler += (sender, args) =>

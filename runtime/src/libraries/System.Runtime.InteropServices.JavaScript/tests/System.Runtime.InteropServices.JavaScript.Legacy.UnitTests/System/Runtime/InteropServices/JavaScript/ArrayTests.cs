@@ -105,7 +105,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 "test10",
                 "test11",
                 "test12",
-                "test13"
+                "test13",
             };
             var jsArray = new Array();
             for (int d = 0; d < objArray.Length; d++)
@@ -133,7 +133,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 "test10",
                 "test11",
                 "test12",
-                "test13"
+                "test13",
             };
             var jsArray = new Array();
             for (int d = 0; d < objArray.Length; d++)
@@ -161,7 +161,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 "test10",
                 "test11",
                 "test12",
-                "test13"
+                "test13",
             };
             var jsArray = new Array();
             for (int d = 0; d < objArray.Length; d++)

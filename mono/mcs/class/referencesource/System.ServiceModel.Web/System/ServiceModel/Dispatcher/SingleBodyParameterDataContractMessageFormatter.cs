@@ -23,14 +23,14 @@ namespace System.ServiceModel.Dispatcher
             typeof(IEnumerable),
             typeof(IList),
             typeof(ICollection),
-            typeof(IDictionary)
+            typeof(IDictionary),
         };
         static readonly Type[] GenericCollectionDataContractInterfaces = new Type[]
         {
             typeof(IEnumerable<>),
             typeof(IList<>),
             typeof(ICollection<>),
-            typeof(IDictionary<,>)
+            typeof(IDictionary<,>),
         };
         XmlObjectSerializer cachedOutputSerializer;
         Type cachedOutputSerializerType;

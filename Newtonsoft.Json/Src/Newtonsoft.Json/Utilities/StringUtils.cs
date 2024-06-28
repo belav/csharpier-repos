@@ -242,7 +242,7 @@ namespace Newtonsoft.Json.Utilities
             Start,
             Lower,
             Upper,
-            NewWord
+            NewWord,
         }
 
         private static string ToSeparatedCase(string s, char separator)

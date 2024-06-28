@@ -104,7 +104,7 @@ namespace Novell.Directory.Ldap.Utilclass
             new System.Object[] { "95", "More Results To Return" },
             new System.Object[] { "96", "Client Loop" },
             new System.Object[] { "97", "Referral Limit Exceeded" },
-            new System.Object[] { "112", "TLS not supported" }
+            new System.Object[] { "112", "TLS not supported" },
         };
     } //End ResultCodeMessages
 }

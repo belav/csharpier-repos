@@ -269,7 +269,7 @@ public abstract class ComplexNavigationsQueryFixtureBase
             { typeof(InheritanceDerived1), e => ((InheritanceDerived1)e)?.Id },
             { typeof(InheritanceDerived2), e => ((InheritanceDerived2)e)?.Id },
             { typeof(InheritanceLeaf1), e => ((InheritanceLeaf1)e)?.Id },
-            { typeof(InheritanceLeaf2), e => ((InheritanceLeaf2)e)?.Id }
+            { typeof(InheritanceLeaf2), e => ((InheritanceLeaf2)e)?.Id },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
@@ -442,7 +442,7 @@ public abstract class ComplexNavigationsQueryFixtureBase
                         Assert.Equal(ee.Name, aa.Name);
                     }
                 }
-            }
+            },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)

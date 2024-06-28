@@ -35,6 +35,8 @@ namespace Mono.Cecil
     {
         VisibilityMask = 0x0007,
         Public = 0x0001, // The resource is exported from the Assembly
-        Private = 0x0002 // The resource is private to the Assembly
+        Private =
+            0x0002 // The resource is private to the Assembly
+        ,
     }
 }

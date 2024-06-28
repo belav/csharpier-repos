@@ -36,6 +36,6 @@ namespace Xunit
             | Browser
             | LinuxBionic
             | Wasi,
-        Any = ~0
+        Any = ~0,
     }
 }

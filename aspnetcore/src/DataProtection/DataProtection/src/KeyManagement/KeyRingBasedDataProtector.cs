@@ -450,6 +450,6 @@ internal sealed unsafe class KeyRingBasedDataProtector : IDataProtector, IPersis
     {
         Ok,
         DefaultEncryptionKeyChanged,
-        DecryptionKeyWasRevoked
+        DecryptionKeyWasRevoked,
     }
 }

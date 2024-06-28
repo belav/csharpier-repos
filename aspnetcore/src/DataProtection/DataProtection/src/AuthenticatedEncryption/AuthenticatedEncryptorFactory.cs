@@ -77,7 +77,7 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
                 ),
                 EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
                     authenticatedConfiguration.EncryptionAlgorithm
-                )
+                ),
             };
 
             return new CngGcmAuthenticatedEncryptorFactory(
@@ -101,7 +101,7 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
                     ),
                     HashAlgorithm = GetBCryptAlgorithmNameFromValidationAlgorithm(
                         authenticatedConfiguration.ValidationAlgorithm
-                    )
+                    ),
                 };
 
                 return new CngCbcAuthenticatedEncryptorFactory(
@@ -121,7 +121,7 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
                     ),
                     ValidationAlgorithmType = GetManagedTypeFromValidationAlgorithm(
                         authenticatedConfiguration.ValidationAlgorithm
-                    )
+                    ),
                 };
 
                 return new ManagedAuthenticatedEncryptorFactory(

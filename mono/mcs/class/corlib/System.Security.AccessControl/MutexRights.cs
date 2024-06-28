@@ -37,6 +37,6 @@ namespace System.Security.AccessControl
         ChangePermissions = 0x040000,
         TakeOwnership = 0x080000,
         Synchronize = 0x100000,
-        FullControl = 0x1F0001
+        FullControl = 0x1F0001,
     }
 }

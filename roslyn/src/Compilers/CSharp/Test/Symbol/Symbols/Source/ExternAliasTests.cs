@@ -126,7 +126,7 @@ Bar::NS.Goo d = new Bar::NS.Goo();
                 {
                     MscorlibRef,
                     ExternAliasTests.Goo1,
-                    ExternAliasTests.Goo2
+                    ExternAliasTests.Goo2,
                 }
             );
 

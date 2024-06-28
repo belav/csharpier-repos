@@ -161,7 +161,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 var syntax = context.Operation.Syntax switch
                 {
                     CSharpSyntax.VariableDeclarationSyntax s => s.Type,
-                    _ => context.Operation.Syntax
+                    _ => context.Operation.Syntax,
                 };
                 context.ReportDiagnostic(
                     Diagnostic.Create(Descriptor, syntax.GetLocation(), declarator.Symbol.Type)
@@ -221,9 +221,10 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
             {
                 var location = declaringSyntax.GetSyntax() switch
                 {
-                    CSharpSyntax.ClassDeclarationSyntax { BaseList.Types.Count: > 0 } s =>
-                        s.BaseList.Types[0].GetLocation(),
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    CSharpSyntax.ClassDeclarationSyntax { BaseList.Types.Count: > 0 } s => s
+                        .BaseList.Types[0]
+                        .GetLocation(),
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, baseSymbol));
@@ -237,7 +238,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 var location = declaringSyntax.GetSyntax() switch
                 {
                     CSharpSyntax.ClassDeclarationSyntax s => s.Identifier.GetLocation(),
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, @interface));
@@ -260,7 +261,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 var location = declaringSyntax.GetSyntax() switch
                 {
                     CSharpSyntax.MethodDeclarationSyntax s => s.ReturnType.GetLocation(),
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(
@@ -277,7 +278,7 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
                 {
                     CSharpSyntax.ParameterSyntax { Type: not null } s => s.Type.GetLocation(),
 
-                    { } otherSyntax => otherSyntax.GetLocation()
+                    { } otherSyntax => otherSyntax.GetLocation(),
                 };
 
                 context.ReportDiagnostic(Diagnostic.Create(Descriptor, location, paramSymbol.Type));
@@ -328,20 +329,19 @@ public sealed class InternalUsageDiagnosticAnalyzer : DiagnosticAnalyzer
             CSharpSyntax.InvocationExpressionSyntax
             {
                 Expression: CSharpSyntax.MemberAccessExpressionSyntax memberAccessSyntax
-            } =>
-                memberAccessSyntax.Name,
+            } => memberAccessSyntax.Name,
             CSharpSyntax.MemberAccessExpressionSyntax s => s.Name,
             CSharpSyntax.ObjectCreationExpressionSyntax s => s.Type,
             CSharpSyntax.PropertyDeclarationSyntax s => s.Type,
-            CSharpSyntax.VariableDeclaratorSyntax declarator =>
-                declarator.Parent is CSharpSyntax.VariableDeclarationSyntax declaration
-                    ? declaration.Type
-                    : declarator,
+            CSharpSyntax.VariableDeclaratorSyntax declarator => declarator.Parent
+                is CSharpSyntax.VariableDeclarationSyntax declaration
+                ? declaration.Type
+                : declarator,
             CSharpSyntax.TypeOfExpressionSyntax s => s.Type,
 
             // TODO: VB syntax narrowing (#22085)
 
-            _ => syntax
+            _ => syntax,
         };
 
     private static bool IsInternal(SymbolAnalysisContext context, ITypeSymbol symbol) =>

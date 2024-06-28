@@ -48,44 +48,44 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             typeof(DateTime),
             typeof(DateTimeOffset),
             typeof(TimeOnly),
-            typeof(TimeSpan)
+            typeof(TimeSpan),
         },
         [ExpressionType.Divide] = new HashSet<Type>
         {
             typeof(TimeOnly),
             typeof(TimeSpan),
-            typeof(ulong)
+            typeof(ulong),
         },
         [ExpressionType.GreaterThan] = new HashSet<Type>
         {
             typeof(DateTimeOffset),
             typeof(TimeSpan),
-            typeof(ulong)
+            typeof(ulong),
         },
         [ExpressionType.GreaterThanOrEqual] = new HashSet<Type>
         {
             typeof(DateTimeOffset),
             typeof(TimeSpan),
-            typeof(ulong)
+            typeof(ulong),
         },
         [ExpressionType.LessThan] = new HashSet<Type>
         {
             typeof(DateTimeOffset),
             typeof(TimeSpan),
-            typeof(ulong)
+            typeof(ulong),
         },
         [ExpressionType.LessThanOrEqual] = new HashSet<Type>
         {
             typeof(DateTimeOffset),
             typeof(TimeSpan),
-            typeof(ulong)
+            typeof(ulong),
         },
         [ExpressionType.Modulo] = new HashSet<Type> { typeof(ulong) },
         [ExpressionType.Multiply] = new HashSet<Type>
         {
             typeof(TimeOnly),
             typeof(TimeSpan),
-            typeof(ulong)
+            typeof(ulong),
         },
         [ExpressionType.Subtract] = new HashSet<Type>
         {
@@ -93,8 +93,8 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             typeof(DateTime),
             typeof(DateTimeOffset),
             typeof(TimeOnly),
-            typeof(TimeSpan)
-        }
+            typeof(TimeSpan),
+        },
     };
 
     private static readonly IReadOnlyDictionary<Type, string> ModuloFunctions = new Dictionary<
@@ -104,7 +104,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
     {
         { typeof(decimal), "ef_mod" },
         { typeof(double), "mod" },
-        { typeof(float), "mod" }
+        { typeof(float), "mod" },
     };
 
     /// <summary>
@@ -355,39 +355,36 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                     // simple LIKE
                     translation = patternConstant.Value switch
                     {
-                        null =>
-                            _sqlExpressionFactory.Like(
-                                translatedInstance,
-                                _sqlExpressionFactory.Constant(null, stringTypeMapping)
-                            ),
+                        null => _sqlExpressionFactory.Like(
+                            translatedInstance,
+                            _sqlExpressionFactory.Constant(null, stringTypeMapping)
+                        ),
 
                         // In .NET, all strings start with/end with/contain the empty string, but SQL LIKE return false for empty patterns.
                         // Return % which always matches instead.
                         // Note that we don't just return a true constant, since null strings shouldn't match even an empty string
                         // (but SqlNullabilityProcess will convert this to a true constant if the instance is non-nullable)
-                        "" =>
-                            _sqlExpressionFactory.Like(
+                        "" => _sqlExpressionFactory.Like(
+                            translatedInstance,
+                            _sqlExpressionFactory.Constant("%")
+                        ),
+
+                        string s => s.Any(IsLikeWildChar)
+                            ? _sqlExpressionFactory.Like(
                                 translatedInstance,
-                                _sqlExpressionFactory.Constant("%")
+                                _sqlExpressionFactory.Constant(
+                                    startsWith
+                                        ? EscapeLikePattern(s) + '%'
+                                        : '%' + EscapeLikePattern(s)
+                                ),
+                                _sqlExpressionFactory.Constant(LikeEscapeString)
+                            )
+                            : _sqlExpressionFactory.Like(
+                                translatedInstance,
+                                _sqlExpressionFactory.Constant(startsWith ? s + '%' : '%' + s)
                             ),
 
-                        string s =>
-                            s.Any(IsLikeWildChar)
-                                ? _sqlExpressionFactory.Like(
-                                    translatedInstance,
-                                    _sqlExpressionFactory.Constant(
-                                        startsWith
-                                            ? EscapeLikePattern(s) + '%'
-                                            : '%' + EscapeLikePattern(s)
-                                    ),
-                                    _sqlExpressionFactory.Constant(LikeEscapeString)
-                                )
-                                : _sqlExpressionFactory.Like(
-                                    translatedInstance,
-                                    _sqlExpressionFactory.Constant(startsWith ? s + '%' : '%' + s)
-                                ),
-
-                        _ => throw new UnreachableException()
+                        _ => throw new UnreachableException(),
                     };
 
                     return true;
@@ -457,14 +454,14 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                                                     nullable: true,
                                                     argumentsPropagateNullability: new[] { true },
                                                     typeof(int)
-                                                )
+                                                ),
                                             },
                                             nullable: true,
                                             argumentsPropagateNullability: new[]
                                             {
                                                 true,
                                                 false,
-                                                true
+                                                true,
                                             },
                                             typeof(string),
                                             stringTypeMapping
@@ -504,11 +501,11 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                                                         nullable: true,
                                                         argumentsPropagateNullability: new[]
                                                         {
-                                                            true
+                                                            true,
                                                         },
                                                         typeof(int)
                                                     )
-                                                )
+                                                ),
                                             },
                                             nullable: true,
                                             argumentsPropagateNullability: new[] { true, true },
@@ -546,7 +543,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
 
             string s => startsWith ? EscapeLikePattern(s) + '%' : '%' + EscapeLikePattern(s),
 
-            _ => throw new UnreachableException()
+            _ => throw new UnreachableException(),
         };
 
     // See https://www.sqlite.org/lang_expr.html
@@ -590,7 +587,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             ExpressionType.GreaterThan,
             ExpressionType.GreaterThanOrEqual,
             ExpressionType.LessThan,
-            ExpressionType.LessThanOrEqual
+            ExpressionType.LessThanOrEqual,
         }.Contains(sqlBinary.OperatorType);
 
     private Expression DoDecimalCompare(
@@ -611,15 +608,21 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
 
         return op switch
         {
-            ExpressionType.GreaterThan =>
-                Dependencies.SqlExpressionFactory.GreaterThan(left: actual, right: oracle),
+            ExpressionType.GreaterThan => Dependencies.SqlExpressionFactory.GreaterThan(
+                left: actual,
+                right: oracle
+            ),
             ExpressionType.GreaterThanOrEqual =>
                 Dependencies.SqlExpressionFactory.GreaterThanOrEqual(left: actual, right: oracle),
-            ExpressionType.LessThan =>
-                Dependencies.SqlExpressionFactory.LessThan(left: actual, right: oracle),
-            ExpressionType.LessThanOrEqual =>
-                Dependencies.SqlExpressionFactory.LessThanOrEqual(left: actual, right: oracle),
-            _ => visitedExpression
+            ExpressionType.LessThan => Dependencies.SqlExpressionFactory.LessThan(
+                left: actual,
+                right: oracle
+            ),
+            ExpressionType.LessThanOrEqual => Dependencies.SqlExpressionFactory.LessThanOrEqual(
+                left: actual,
+                right: oracle
+            ),
+            _ => visitedExpression,
         };
     }
 
@@ -630,7 +633,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
             ExpressionType.Add,
             ExpressionType.Subtract,
             ExpressionType.Multiply,
-            ExpressionType.Divide
+            ExpressionType.Divide,
         }.Contains(sqlBinary.OperatorType);
 
     private Expression DoDecimalArithmetics(
@@ -642,26 +645,23 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
     {
         return op switch
         {
-            ExpressionType.Add =>
-                DecimalArithmeticExpressionFactoryMethod(
-                    ResolveFunctionNameFromExpressionType(op),
-                    left,
-                    right
-                ),
-            ExpressionType.Divide =>
-                DecimalArithmeticExpressionFactoryMethod(
-                    ResolveFunctionNameFromExpressionType(op),
-                    left,
-                    right
-                ),
-            ExpressionType.Multiply =>
-                DecimalArithmeticExpressionFactoryMethod(
-                    ResolveFunctionNameFromExpressionType(op),
-                    left,
-                    right
-                ),
+            ExpressionType.Add => DecimalArithmeticExpressionFactoryMethod(
+                ResolveFunctionNameFromExpressionType(op),
+                left,
+                right
+            ),
+            ExpressionType.Divide => DecimalArithmeticExpressionFactoryMethod(
+                ResolveFunctionNameFromExpressionType(op),
+                left,
+                right
+            ),
+            ExpressionType.Multiply => DecimalArithmeticExpressionFactoryMethod(
+                ResolveFunctionNameFromExpressionType(op),
+                left,
+                right
+            ),
             ExpressionType.Subtract => DecimalSubtractExpressionFactoryMethod(left, right),
-            _ => visitedExpression
+            _ => visitedExpression,
         };
 
         static string ResolveFunctionNameFromExpressionType(ExpressionType expressionType) =>
@@ -671,7 +671,7 @@ public class SqliteSqlTranslatingExpressionVisitor : RelationalSqlTranslatingExp
                 ExpressionType.Divide => "ef_divide",
                 ExpressionType.Multiply => "ef_multiply",
                 ExpressionType.Subtract => "ef_add",
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
 
         Expression DecimalArithmeticExpressionFactoryMethod(

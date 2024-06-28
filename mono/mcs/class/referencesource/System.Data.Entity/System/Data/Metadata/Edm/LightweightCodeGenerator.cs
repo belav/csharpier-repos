@@ -591,7 +591,7 @@ namespace System.Data.Objects
                     typeof(AssociationEndMember),
                     typeof(AssociationEndMember),
                     typeof(NavigationPropertyAccessor),
-                    typeof(NavigationPropertyAccessor)
+                    typeof(NavigationPropertyAccessor),
                 },
                 null
             );

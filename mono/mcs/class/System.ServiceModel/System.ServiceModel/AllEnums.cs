@@ -41,7 +41,7 @@ namespace System.ServiceModel
     {
         Exact,
         Prefix,
-        Any
+        Any,
     }
 
     public enum AuditLevel
@@ -77,7 +77,7 @@ namespace System.ServiceModel
     public enum BasicHttpsSecurityMode
     {
         Transport,
-        TransportWithMessageCredential
+        TransportWithMessageCredential,
     }
 
     public enum CommunicationState
@@ -238,7 +238,7 @@ namespace System.ServiceModel // used to be S.SM.Ch
         Ntlm,
         Windows,
         Certificate,
-        InheritedFromHost
+        InheritedFromHost,
     }
 
     public enum HttpProxyCredentialType
@@ -326,7 +326,7 @@ namespace System.ServiceModel.Channels
     {
         Anonymous,
         NonAnonymous,
-        Mixed
+        Mixed,
     }
 
     public enum TransferSession
@@ -362,7 +362,7 @@ namespace System.ServiceModel.Description
     public enum MetadataExchangeClientMode
     {
         MetadataExchange,
-        HttpGet
+        HttpGet,
     }
 
     [Flags]

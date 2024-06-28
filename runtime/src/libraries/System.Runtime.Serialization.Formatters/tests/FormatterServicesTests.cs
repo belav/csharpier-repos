@@ -68,7 +68,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             yield return new object[] { typeof(int).MakeByRefType() };
             yield return new object[]
             {
-                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0]
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
             };
         }
 
@@ -113,7 +113,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             yield return new object[] { typeof(GenericClass<>) };
             yield return new object[]
             {
-                typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>))
+                typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)),
             };
         }
 

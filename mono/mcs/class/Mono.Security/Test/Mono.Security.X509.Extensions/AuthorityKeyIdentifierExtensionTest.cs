@@ -60,7 +60,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 aki.Identifier,
                 "Identifier"
@@ -92,7 +92,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             Empty(aki);
         }
@@ -122,7 +122,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension(ext);
             Empty(aki);
@@ -153,7 +153,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             AuthorityKeyIdentifierExtension aki = new AuthorityKeyIdentifierExtension(ext.ASN1);
             Empty(aki);
@@ -185,7 +185,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(
                 "30-22-06-03-55-1D-23-01-01-FF-04-18-30-16-80-14-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00",
@@ -217,7 +217,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 aki2.Identifier,
                 "Identifier"

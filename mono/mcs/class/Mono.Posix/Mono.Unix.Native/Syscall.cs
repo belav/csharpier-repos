@@ -75,7 +75,9 @@ namespace Mono.Unix.Native
         LOG_ODELAY = 0x04, // delay open until first syslog (default)
         LOG_NDELAY = 0x08, // don't delay open
         LOG_NOWAIT = 0x10, // don't wait for console forks; DEPRECATED
-        LOG_PERROR = 0x20 // log to stderr as well
+        LOG_PERROR =
+            0x20 // log to stderr as well
+        ,
     }
 
     [Map]
@@ -115,7 +117,9 @@ namespace Mono.Unix.Native
         LOG_WARNING = 4, // warning conditions
         LOG_NOTICE = 5, // normal but significant condition
         LOG_INFO = 6, // informational
-        LOG_DEBUG = 7 // debug-level messages
+        LOG_DEBUG =
+            7 // debug-level messages
+        ,
     }
 
     [Map]
@@ -158,7 +162,7 @@ namespace Mono.Unix.Native
         O_LARGEFILE = 0x00008000,
         O_CLOEXEC = 0x00080000,
         O_PATH = 0x00200000,
-        O_NOATIME = 0x00040000
+        O_NOATIME = 0x00040000,
     }
 
     [Map]
@@ -170,7 +174,7 @@ namespace Mono.Unix.Native
         AT_REMOVEDIR = 0x00000200,
         AT_SYMLINK_FOLLOW = 0x00000400,
         AT_NO_AUTOMOUNT = 0x00000800,
-        AT_EMPTY_PATH = 0x00001000
+        AT_EMPTY_PATH = 0x00001000,
     }
 
     // mode_t
@@ -362,7 +366,7 @@ namespace Mono.Unix.Native
         SIGIO = 29, // I/O now possible (4.2 BSD).
         SIGPWR = 30, // Power failure restart (System V).
         SIGSYS = 31, // Bad system call.
-        SIGUNUSED = 31
+        SIGUNUSED = 31,
     }
 
     [Flags]
@@ -408,7 +412,7 @@ namespace Mono.Unix.Native
         _PC_REC_XFER_ALIGN,
         _PC_ALLOC_SIZE_MIN,
         _PC_SYMLINK_MAX,
-        _PC_2_SYMLINKS
+        _PC_2_SYMLINKS,
     }
 
     [Map]
@@ -620,7 +624,7 @@ namespace Mono.Unix.Native
         _SC_LEVEL3_CACHE_LINESIZE,
         _SC_LEVEL4_CACHE_SIZE,
         _SC_LEVEL4_CACHE_ASSOC,
-        _SC_LEVEL4_CACHE_LINESIZE
+        _SC_LEVEL4_CACHE_LINESIZE,
     }
 
     [Map]
@@ -670,7 +674,7 @@ namespace Mono.Unix.Native
         _CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS,
         _CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS,
         _CS_POSIX_V6_LPBIG_OFFBIG_LIBS,
-        _CS_POSIX_V6_LPBIG_OFFBIG_LINTFLAGS
+        _CS_POSIX_V6_LPBIG_OFFBIG_LINTFLAGS,
     }
 
     [Map]
@@ -1569,7 +1573,7 @@ namespace Mono.Unix.Native
         EPOLLHUP = 0x010,
         EPOLLRDHUP = 0x2000,
         EPOLLONESHOT = 1 << 30,
-        EPOLLET = unchecked((uint)(1 << 31))
+        EPOLLET = unchecked((uint)(1 << 31)),
     }
 
     public enum EpollOp

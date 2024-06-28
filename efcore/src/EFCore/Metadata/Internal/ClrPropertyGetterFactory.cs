@@ -107,7 +107,7 @@ public class ClrPropertyGetterFactory : ClrAccessorFactory<IClrPropertyGetter>
                             memberInfo,
                             fromContainingType
                         )
-                    )
+                    ),
                 }
             );
         }

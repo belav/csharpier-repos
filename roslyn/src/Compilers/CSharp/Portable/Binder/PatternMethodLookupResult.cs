@@ -33,6 +33,6 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// One or more errors occurred while performing the lookup
         /// </summary>
-        ResultHasErrors
+        ResultHasErrors,
     }
 }

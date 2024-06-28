@@ -1660,7 +1660,7 @@ class C
                 new CSharpSyntaxFormattingOptions() { LineFormatting = new() { UseTabs = useTabs } }
             )
             {
-                IndentStyle = indentStyle
+                IndentStyle = indentStyle,
             };
 
             Assert.False(

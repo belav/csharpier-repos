@@ -2,7 +2,7 @@ using System;
 
 enum E : byte
 {
-    V
+    V,
 }
 
 class A

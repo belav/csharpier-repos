@@ -191,7 +191,7 @@ internal static class DecisionTreeBuilder<TItem>
             }
         }
 
-        return new DecisionTreeNode<TItem>() { Criteria = reducedCriteria, Matches = matches, };
+        return new DecisionTreeNode<TItem>() { Criteria = reducedCriteria, Matches = matches };
     }
 
     private sealed class TreeBuilderContext

@@ -80,7 +80,7 @@ namespace System.IO.Tests
             };
             TestISynchronizeInvoke invoker = new TestISynchronizeInvoke()
             {
-                ExpectedDelegate = dele
+                ExpectedDelegate = dele,
             };
             using (var watcher = new TestFileSystemWatcher(TestDirectory, "*"))
             {
@@ -122,7 +122,7 @@ namespace System.IO.Tests
             };
             TestISynchronizeInvoke invoker = new TestISynchronizeInvoke()
             {
-                ExpectedDelegate = dele
+                ExpectedDelegate = dele,
             };
             using (var watcher = new TestFileSystemWatcher(TestDirectory, "*"))
             {
@@ -147,7 +147,7 @@ namespace System.IO.Tests
             };
             TestISynchronizeInvoke invoker = new TestISynchronizeInvoke()
             {
-                ExpectedDelegate = dele
+                ExpectedDelegate = dele,
             };
             using (var watcher = new TestFileSystemWatcher(TestDirectory, "*"))
             {

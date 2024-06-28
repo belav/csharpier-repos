@@ -51,7 +51,7 @@ internal sealed partial class VoterNotifyShim : NotificationShimBase, ITransacti
         {
             OletxTransactionHeuristic.XACTHEURISTIC_ABORT => ShimNotificationType.AbortedNotify,
             OletxTransactionHeuristic.XACTHEURISTIC_COMMIT => ShimNotificationType.CommittedNotify,
-            _ => ShimNotificationType.InDoubtNotify
+            _ => ShimNotificationType.InDoubtNotify,
         };
 
         ShimFactory.NewNotification(this);

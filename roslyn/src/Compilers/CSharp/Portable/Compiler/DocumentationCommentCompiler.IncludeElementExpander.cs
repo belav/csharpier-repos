@@ -393,7 +393,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return new XNode[]
                     {
                         new XComment(commentMessage),
-                        includeElement.Copy(copyAttributeAnnotations: false)
+                        includeElement.Copy(copyAttributeAnnotations: false),
                     };
                 }
 

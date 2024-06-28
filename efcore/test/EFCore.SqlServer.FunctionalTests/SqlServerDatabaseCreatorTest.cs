@@ -384,7 +384,7 @@ public class SqlServerDatabaseCreatorEnsureCreatedTest : SqlServerDatabaseCreato
                 "Blogs.OrNothing (float)",
                 "Blogs.TheGu (uniqueidentifier)",
                 "Blogs.ToEat (tinyint)",
-                "Blogs.WayRound (bigint)"
+                "Blogs.WayRound (bigint)",
             },
             columns
         );

@@ -31,7 +31,9 @@ namespace System.Xml.Schema
         XdrDateTime = 0x200,
         XdrTimeNoTz = 0x400, //XDRTime with tz is the same as xsd:time
 #endif
-        AllXsd = 0xFF //All still does not include the XDR formats
+        AllXsd =
+            0xFF //All still does not include the XDR formats
+        ,
     }
 
     /// <summary>
@@ -76,6 +78,7 @@ namespace System.Xml.Schema
             Zulu,
             LocalWestOfZulu, // GMT-1..14, N..Y
             LocalEastOfZulu // GMT+1..14, A..M
+            ,
         }
 
         // Masks and shifts used for packing and unpacking extra
@@ -787,7 +790,7 @@ namespace System.Xml.Schema
             XmlTypeCode.GYear,
             XmlTypeCode.GMonthDay,
             XmlTypeCode.GDay,
-            XmlTypeCode.GMonth
+            XmlTypeCode.GMonth,
         };
 
         // Parsing string according to XML schema spec
@@ -1069,7 +1072,7 @@ namespace System.Xml.Schema
                 1000,
                 10000,
                 100000,
-                1000000
+                1000000,
             };
 
             private bool ParseTime(ref int start)

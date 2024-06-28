@@ -45,7 +45,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: string.Empty, pattern: "{controller}/{action}");
@@ -67,7 +67,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(
@@ -94,7 +94,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "home",
             action = "index",
-            locale = "en-NZ"
+            locale = "en-NZ",
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{controller}/{action}");
@@ -114,7 +114,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "home",
             action = "index",
-            locale = "en-NZ"
+            locale = "en-NZ",
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{locale}/{controller}/{action}");
@@ -135,7 +135,7 @@ public class ActionEndpointFactoryTest
             controller = "TestController",
             action = "TestAction",
             area = "admin",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{controller}/{action}");
@@ -156,7 +156,7 @@ public class ActionEndpointFactoryTest
             controller = "TestController",
             action = "TestAction",
             area = (string)null,
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{area}/{controller}/{action}");
@@ -176,7 +176,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(
@@ -206,7 +206,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(
@@ -232,7 +232,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values, "{controller}/{action=TESTACTION}/{id?}");
         // Act
@@ -253,7 +253,7 @@ public class ActionEndpointFactoryTest
         {
             area = "admin",
             controller = "home",
-            action = "index"
+            action = "index",
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(routeName: "test", pattern: "{controller}/{action}");
@@ -273,7 +273,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values, "Products/{action:int}");
 
@@ -297,7 +297,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values, "{controller}/{action}/{page}");
 
@@ -319,7 +319,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values, "{controller}/{action}/{page}");
         action.AttributeRouteInfo.Name = "Test";
@@ -344,7 +344,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values, "{controller}/{action}/{page}");
         action.AttributeRouteInfo.Name = "Test";
@@ -388,7 +388,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction1",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(
@@ -412,7 +412,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var route = CreateRoute(
@@ -436,7 +436,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "Home",
             action = "Index",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
         var routes = new[]
@@ -481,7 +481,7 @@ public class ActionEndpointFactoryTest
         {
             controller = "TestController",
             action = "TestAction",
-            page = (string)null
+            page = (string)null,
         };
         var action = CreateActionDescriptor(values);
 
@@ -542,7 +542,7 @@ public class ActionEndpointFactoryTest
             endpoints,
             new HashSet<string>(),
             action,
-            new[] { route, },
+            new[] { route },
             conventions: Array.Empty<Action<EndpointBuilder>>(),
             groupConventions: Array.Empty<Action<EndpointBuilder>>(),
             finallyConventions: Array.Empty<Action<EndpointBuilder>>(),
@@ -565,7 +565,7 @@ public class ActionEndpointFactoryTest
         ConventionalRouteEntry route
     )
     {
-        return CreateConventionalRoutedEndpoints(action, new[] { route, });
+        return CreateConventionalRoutedEndpoints(action, new[] { route });
     }
 
     private IReadOnlyList<Endpoint> CreateConventionalRoutedEndpoints(
@@ -632,7 +632,7 @@ public class ActionEndpointFactoryTest
             actionDescriptor.AttributeRouteInfo = new AttributeRouteInfo
             {
                 Name = pattern,
-                Template = pattern
+                Template = pattern,
             };
         }
 

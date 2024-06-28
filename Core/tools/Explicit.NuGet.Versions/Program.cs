@@ -135,7 +135,7 @@ namespace Explicit.NuGet.Versions
                                     new NuspecContentEntry
                                     {
                                         Contents = nuspecXml,
-                                        EntryName = zipEntry.FileName
+                                        EntryName = zipEntry.FileName,
                                     };
                                 break;
                             }

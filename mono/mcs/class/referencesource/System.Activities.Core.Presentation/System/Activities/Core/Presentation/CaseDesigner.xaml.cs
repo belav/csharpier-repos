@@ -102,7 +102,7 @@ namespace System.Activities.Core.Presentation
                 Getter = (modelItem) =>
                 {
                     return "Case";
-                }
+                },
             };
             attachedPropertiesService.AddProperty(displayNameProperty);
         }

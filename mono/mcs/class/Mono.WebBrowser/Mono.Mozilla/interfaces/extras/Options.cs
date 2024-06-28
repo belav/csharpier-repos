@@ -31,6 +31,6 @@ namespace Mono.Mozilla
     {
         Network = 1,
         Content = 2,
-        All = 3
+        All = 3,
     }
 }

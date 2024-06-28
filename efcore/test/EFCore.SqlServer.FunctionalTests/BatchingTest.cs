@@ -85,7 +85,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 1
+                    Order = 1,
                 };
 
                 context.Set<Blog>().Add(blog1);
@@ -100,7 +100,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 1
+                    Order = 1,
                 };
 
                 context.Set<Blog>().Add(blog2);
@@ -110,7 +110,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner2,
-                    Order = 2
+                    Order = 2,
                 };
 
                 context.Set<Blog>().Add(blog3);
@@ -184,7 +184,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 1
+                    Order = 1,
                 }
             );
             blogs.Add(
@@ -192,7 +192,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner2,
-                    Order = 2
+                    Order = 2,
                 }
             );
             blogs.Add(
@@ -200,7 +200,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner1,
-                    Order = 3
+                    Order = 3,
                 }
             );
             blogs.Add(
@@ -208,7 +208,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner2,
-                    Order = 4
+                    Order = 4,
                 }
             );
 
@@ -251,7 +251,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
         var owners = new[]
         {
             new Owner { Name = "0" },
-            new Owner { Name = "1" }
+            new Owner { Name = "1" },
         };
         using (var context = CreateContext())
         {
@@ -264,7 +264,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 {
                     Id = Guid.NewGuid(),
                     Owner = owner,
-                    Order = h
+                    Order = h,
                 };
 
                 for (var i = 0; i <= 40; i++)
@@ -308,7 +308,7 @@ public class BatchingTest : IClassFixture<BatchingTest.BatchingTestFixture>
                 var owner2 = new Owner
                 {
                     Id = "A",
-                    Name = string.Join("", Enumerable.Repeat('A', 900))
+                    Name = string.Join("", Enumerable.Repeat('A', 900)),
                 };
                 context.Owners.Add(owner1);
                 context.Owners.Add(owner2);

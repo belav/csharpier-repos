@@ -28,7 +28,7 @@ namespace System.Web.Http.Filters
         {
             IExceptionFilter filter = new Mock<ExceptionFilterAttribute>()
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
 
             Assert.ThrowsArgumentNull(
@@ -64,7 +64,7 @@ namespace System.Web.Http.Filters
         public async Task ExecuteExceptionFilterAsync_InvokesOnExceptionMethod()
         {
             // Arrange
-            var mockFilter = new Mock<ExceptionFilterAttribute>() { CallBase = true, };
+            var mockFilter = new Mock<ExceptionFilterAttribute>() { CallBase = true };
 
             IExceptionFilter filter = mockFilter.Object;
 

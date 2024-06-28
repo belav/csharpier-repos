@@ -148,7 +148,7 @@ namespace Newtonsoft.Json.Tests
                         + Environment.NewLine
                         + new string(' ', 100)
                         + "<p>Content!</p>"
-                }
+                },
             };
 
             JsonArrayPool arrayPool = new JsonArrayPool();
@@ -185,7 +185,7 @@ namespace Newtonsoft.Json.Tests
                 {
                     CloseOutput = true,
                     Indentation = 2,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             )
             {
@@ -1359,7 +1359,7 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc
+                DateTimeZoneHandling = Json.DateTimeZoneHandling.Utc,
             };
 
             writer.WriteValue(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
@@ -1373,7 +1373,7 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                StringEscapeHandling = StringEscapeHandling.EscapeHtml
+                StringEscapeHandling = StringEscapeHandling.EscapeHtml,
             };
 
             string script = @"<script type=""text/javascript"">alert('hi');</script>";
@@ -1398,7 +1398,7 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                StringEscapeHandling = StringEscapeHandling.EscapeNonAscii
+                StringEscapeHandling = StringEscapeHandling.EscapeNonAscii,
             };
 
             string unicode = "\u5f20";
@@ -1751,7 +1751,7 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             CustomJsonTextWriter writer = new CustomJsonTextWriter(sw)
             {
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
             writer.WriteStartObject();
             Assert.AreEqual(WriteState.Object, writer.WriteState);
@@ -1774,7 +1774,7 @@ _____'propertyName': NaN,
         [Test]
         public void QuoteDictionaryNames()
         {
-            var d = new Dictionary<string, int> { { "a", 1 }, };
+            var d = new Dictionary<string, int> { { "a", 1 } };
             var jsonSerializerSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

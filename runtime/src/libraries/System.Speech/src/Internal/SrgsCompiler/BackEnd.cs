@@ -1035,11 +1035,9 @@ namespace System.Speech.Internal.SrgsCompiler
                         newArc = new Arc(
                             (ulSpecialTransitionIndex != 0) ? 0 : (int)arc.TransitionIndex,
                             flWeight,
-                            arc.LowConfRequired
-                                ? CfgGrammar.SP_LOW_CONFIDENCE
-                                : arc.HighConfRequired
-                                    ? CfgGrammar.SP_HIGH_CONFIDENCE
-                                    : CfgGrammar.SP_NORMAL_CONFIDENCE,
+                            arc.LowConfRequired ? CfgGrammar.SP_LOW_CONFIDENCE
+                                : arc.HighConfRequired ? CfgGrammar.SP_HIGH_CONFIDENCE
+                                : CfgGrammar.SP_NORMAL_CONFIDENCE,
                             ulSpecialTransitionIndex,
                             MatchMode.AllWords,
                             ref _fNeedWeightTable

@@ -20,7 +20,7 @@ namespace System.ServiceModel.Description
         static readonly IEnumerable<string> wildcardMediaTypes = new List<string>()
         {
             "application",
-            "text"
+            "text",
         };
 
         List<MultiplexingFormatMapping> mappings;

@@ -82,6 +82,6 @@ internal sealed class DateTimeSegment : PatternSegment
         Minute,
         Second,
         DayOfWeek,
-        Time
+        Time,
     }
 }

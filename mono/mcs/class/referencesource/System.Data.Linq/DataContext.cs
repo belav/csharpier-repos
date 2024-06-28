@@ -37,7 +37,7 @@ namespace System.Data.Linq
         /// <summary>
         /// Only fail after all changes have been attempted.
         /// </summary>
-        ContinueOnConflict
+        ContinueOnConflict,
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ namespace System.Data.Linq
         /// All current values are overwritten with current database values,
         /// regardless of whether they have been changed.
         /// </summary>
-        OverwriteCurrentValues
+        OverwriteCurrentValues,
     }
 
     /// <summary>

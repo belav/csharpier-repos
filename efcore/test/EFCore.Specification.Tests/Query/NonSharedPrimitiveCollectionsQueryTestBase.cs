@@ -94,7 +94,7 @@ public abstract class NonSharedPrimitiveCollectionsQueryTestBase : NonSharedMode
     private enum MyEnum
     {
         Label1,
-        Label2
+        Label2,
     }
 
     [ConditionalFact]

@@ -651,7 +651,7 @@ namespace Microsoft.Interop
             yield return MarshallerHelpers.SkipInitOrDefaultInit(
                 new TypePositionInfo(SpecialTypeInfo.Int32, NoMarshallingInfo.Instance)
                 {
-                    InstanceIdentifier = numElementsIdentifier
+                    InstanceIdentifier = numElementsIdentifier,
                 },
                 context
             );

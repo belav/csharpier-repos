@@ -127,7 +127,7 @@ namespace MonoTests.System.Windows.Forms
                     "tt",
                     "ttt",
                     "tttt",
-                    "ttttt"
+                    "ttttt",
                 }
             );
             formats.AddRange(

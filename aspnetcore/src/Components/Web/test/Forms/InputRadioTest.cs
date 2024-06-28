@@ -17,7 +17,7 @@ public class InputRadioTest
         var rootComponent = new TestInputRadioHostComponent<TestEnum>
         {
             EditContext = new EditContext(model),
-            InnerContent = RadioButtonsWithoutGroup(null)
+            InnerContent = RadioButtonsWithoutGroup(null),
         };
 
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -32,8 +32,8 @@ public class InputRadioTest
         var model = new TestModel();
         var rootComponent = new TestInputRadioHostComponent<TestEnum>
         {
-            EditContext = new EditContext(model) { ShouldUseFieldIdentifiers = false, },
-            InnerContent = RadioButtonsWithGroup(null, () => model.TestEnum)
+            EditContext = new EditContext(model) { ShouldUseFieldIdentifiers = false },
+            InnerContent = RadioButtonsWithGroup(null, () => model.TestEnum),
         };
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
@@ -52,7 +52,7 @@ public class InputRadioTest
         var rootComponent = new TestInputRadioHostComponent<TestEnum>
         {
             EditContext = new EditContext(model),
-            InnerContent = RadioButtonsWithGroup(groupName, () => model.TestEnum)
+            InnerContent = RadioButtonsWithGroup(groupName, () => model.TestEnum),
         };
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
@@ -70,7 +70,7 @@ public class InputRadioTest
         var rootComponent = new TestInputRadioHostComponent<TestEnum>
         {
             EditContext = new EditContext(model),
-            InnerContent = RadioButtonsWithGroup(null, () => model.TestEnum)
+            InnerContent = RadioButtonsWithGroup(null, () => model.TestEnum),
         };
 
         var inputRadioComponents = await RenderAndGetTestInputComponentAsync(rootComponent);
@@ -138,7 +138,7 @@ public class InputRadioTest
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     private class TestModel

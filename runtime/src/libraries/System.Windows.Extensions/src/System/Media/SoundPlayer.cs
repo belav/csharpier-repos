@@ -573,7 +573,7 @@ namespace System.Media
                 Interop.WinMM.WAVEFORMATEX? waveFormat = null;
                 var ckRIFF = new Interop.WinMM.MMCKINFO()
                 {
-                    fccType = mmioFOURCC('W', 'A', 'V', 'E')
+                    fccType = mmioFOURCC('W', 'A', 'V', 'E'),
                 };
                 var ck = default(Interop.WinMM.MMCKINFO);
                 if (

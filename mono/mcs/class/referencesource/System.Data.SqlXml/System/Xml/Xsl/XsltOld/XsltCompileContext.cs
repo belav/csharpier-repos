@@ -1182,7 +1182,7 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         XPathResultType.Number,
                         XPathResultType.String,
-                        XPathResultType.String
+                        XPathResultType.String,
                     }
                 ) { }
 

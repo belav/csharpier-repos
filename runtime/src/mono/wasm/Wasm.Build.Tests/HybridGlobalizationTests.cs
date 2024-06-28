@@ -28,7 +28,7 @@ namespace Wasm.Build.Tests
             parameters: new object[]
             { /*aot*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         [MemberData(
@@ -36,7 +36,7 @@ namespace Wasm.Build.Tests
             parameters: new object[]
             { /*aot*/
                 true,
-                RunHost.All
+                RunHost.All,
             }
         )]
         public void AOT_HybridGlobalizationTests(BuildArgs buildArgs, RunHost host, string id) =>
@@ -48,7 +48,7 @@ namespace Wasm.Build.Tests
             parameters: new object[]
             { /*aot*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         public void RelinkingWithoutAOT(BuildArgs buildArgs, RunHost host, string id) =>

@@ -152,7 +152,7 @@ namespace MonoTests.Remoting
         b,
         c,
         d,
-        e
+        e,
     };
 
     [Serializable]

@@ -34,6 +34,6 @@ namespace System.Security.Authentication.ExtendedProtection
     {
         Unknown = 0,
         Unique = 25,
-        Endpoint = 26
+        Endpoint = 26,
     }
 }

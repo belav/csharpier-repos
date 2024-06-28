@@ -350,7 +350,7 @@ class C
                     "System.IAsyncResult SomeDelegate.BeginInvoke(int a, System.AsyncCallback callback, object @object)",
                     parameterDocumentation: "Parameter docs",
                     currentParameterIndex: 0
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -380,7 +380,7 @@ class C
                     "System.IAsyncResult SomeDelegate.BeginInvoke(int a, System.AsyncCallback callback, object @object)",
                     parameterDocumentation: null,
                     currentParameterIndex: 1
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -646,7 +646,7 @@ class C
                     string.Empty,
                     string.Empty,
                     currentParameterIndex: 0
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -684,7 +684,7 @@ class C
                     string.Empty,
                     string.Empty,
                     currentParameterIndex: 0
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -714,7 +714,7 @@ class C
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
-                new SignatureHelpTestItem("void C.Bar()", currentParameterIndex: 0)
+                new SignatureHelpTestItem("void C.Bar()", currentParameterIndex: 0),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -745,7 +745,7 @@ class C
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("void C.Bar()", currentParameterIndex: 0),
-                new SignatureHelpTestItem("void C.Bar(int i)", currentParameterIndex: 0)
+                new SignatureHelpTestItem("void C.Bar(int i)", currentParameterIndex: 0),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -786,7 +786,7 @@ class Program
 
 {FeaturesResources.Types_colon}
     'a {FeaturesResources.is_} new {{ string Name, int Age }}"
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -825,7 +825,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -864,7 +864,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -898,7 +898,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -937,7 +937,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -971,7 +971,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -1010,7 +1010,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -1049,7 +1049,7 @@ public class Derived : Base
                     parameterDocumentation: string.Empty,
                     currentParameterIndex: 0,
                     description: string.Empty
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -2233,7 +2233,7 @@ class C<T>
                     string.Empty,
                     "Real t",
                     currentParameterIndex: 0
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -2261,7 +2261,7 @@ class C
            string k, string l, string m, string n, string o, string p, string q, string r, string s, string t, string u, 
            string v, string w, string x, string y, string z)",
                     currentParameterIndex: 0
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -2961,7 +2961,7 @@ class Goo
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("void Goo.Bar(int x)", currentParameterIndex: 0),
-                new SignatureHelpTestItem("void Goo.Bar(string s)", currentParameterIndex: 0)
+                new SignatureHelpTestItem("void Goo.Bar(string s)", currentParameterIndex: 0),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -2992,7 +2992,7 @@ class Goo
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("void Goo.Bar(int x)", currentParameterIndex: 0),
-                new SignatureHelpTestItem("void Goo.Bar(string s)", currentParameterIndex: 0)
+                new SignatureHelpTestItem("void Goo.Bar(string s)", currentParameterIndex: 0),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3023,7 +3023,7 @@ class Goo
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
                 new SignatureHelpTestItem("void Goo.Bar(int x)", currentParameterIndex: 0),
-                new SignatureHelpTestItem("void Goo.Bar(string s)", currentParameterIndex: 0)
+                new SignatureHelpTestItem("void Goo.Bar(string s)", currentParameterIndex: 0),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3099,7 +3099,7 @@ class C
                 new SignatureHelpTestItem("bool string.Equals(string a, string b)"),
                 new SignatureHelpTestItem(
                     "bool string.Equals(string a, string b, System.StringComparison comparisonType)"
-                )
+                ),
             };
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -3129,7 +3129,7 @@ namespace Test
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>()
             {
-                new SignatureHelpTestItem("void Test.Goo.Bar(string s)")
+                new SignatureHelpTestItem("void Test.Goo.Bar(string s)"),
             };
             await TestAsync(markup, expectedOrderedItems);
         }
@@ -3206,7 +3206,7 @@ class C
                     string.Empty,
                     currentParameterIndex: 0
                 ),
-                new SignatureHelpTestItem("void C.Goo<T, U>(T a, U b)", string.Empty)
+                new SignatureHelpTestItem("void C.Goo<T, U>(T a, U b)", string.Empty),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3239,7 +3239,7 @@ class C
                     string.Empty,
                     string.Empty,
                     currentParameterIndex: 1
-                )
+                ),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3412,7 +3412,7 @@ class C
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
-                new SignatureHelpTestItem("void Local()")
+                new SignatureHelpTestItem("void Local()"),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3436,7 +3436,7 @@ class C
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
-                new SignatureHelpTestItem("void Local()")
+                new SignatureHelpTestItem("void Local()"),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3459,7 +3459,7 @@ class C
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
-                new SignatureHelpTestItem("int delegate*(int)", currentParameterIndex: 0)
+                new SignatureHelpTestItem("int delegate*(int)", currentParameterIndex: 0),
             };
 
             await TestAsync(markup, expectedOrderedItems);
@@ -3482,7 +3482,7 @@ class C
 
             var expectedOrderedItems = new List<SignatureHelpTestItem>
             {
-                new SignatureHelpTestItem("int delegate*(string, long)", currentParameterIndex: 1)
+                new SignatureHelpTestItem("int delegate*(string, long)", currentParameterIndex: 1),
             };
 
             await TestAsync(markup, expectedOrderedItems);

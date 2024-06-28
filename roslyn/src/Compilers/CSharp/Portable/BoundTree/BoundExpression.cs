@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     MemberAccessExpressionSyntax memberAccess => memberAccess.Name,
                     SimpleNameSyntax name => name,
-                    _ => null
+                    _ => null,
                 };
             }
         }

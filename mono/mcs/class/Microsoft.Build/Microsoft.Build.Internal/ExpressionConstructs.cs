@@ -127,7 +127,7 @@ namespace Microsoft.Build.Internal.Expressions
         GT,
         GE,
         And,
-        Or
+        Or,
     }
 
     partial class BinaryExpression : Expression

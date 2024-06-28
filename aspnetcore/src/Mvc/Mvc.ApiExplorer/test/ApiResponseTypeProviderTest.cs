@@ -22,11 +22,7 @@ public class ApiResponseTypeProviderTest
             nameof(GetApiResponseTypes_ReturnsResponseTypesFromActionIfPresentController.Get)
         );
         actionDescriptor.Properties[typeof(ApiConventionResult)] = new ApiConventionResult(
-            new[]
-            {
-                new ProducesResponseTypeAttribute(201),
-                new ProducesResponseTypeAttribute(404),
-            }
+            new[] { new ProducesResponseTypeAttribute(201), new ProducesResponseTypeAttribute(404) }
         );
 
         var provider = GetProvider();
@@ -774,7 +770,7 @@ public class ApiResponseTypeProviderTest
             nameof(TestController.PutModel)
         );
         actionDescriptor.Properties[typeof(ApiConventionResult)] = new ApiConventionResult(
-            new IApiResponseMetadataProvider[] { new ProducesResponseTypeAttribute(200), }
+            new IApiResponseMetadataProvider[] { new ProducesResponseTypeAttribute(200) }
         );
         actionDescriptor.Properties[typeof(ProducesErrorResponseTypeAttribute)] =
             new ProducesErrorResponseTypeAttribute(typeof(ProblemDetails));
@@ -943,7 +939,7 @@ public class ApiResponseTypeProviderTest
 
     private static ApiResponseTypeProvider GetProvider()
     {
-        var mvcOptions = new MvcOptions { OutputFormatters = { new TestOutputFormatter() }, };
+        var mvcOptions = new MvcOptions { OutputFormatters = { new TestOutputFormatter() } };
         var provider = new ApiResponseTypeProvider(
             new EmptyModelMetadataProvider(),
             new ActionResultTypeMapper(),

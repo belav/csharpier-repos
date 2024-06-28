@@ -63,7 +63,7 @@ namespace System.Data.Tests
                     "value",
                     new DateTime(0),
                     0.5,
-                    true
+                    true,
                 };
             });
 
@@ -126,7 +126,7 @@ namespace System.Data.Tests
                     new DateTime(0),
                     0.5,
                     true,
-                    DBNull.Value
+                    DBNull.Value,
                 };
             });
 

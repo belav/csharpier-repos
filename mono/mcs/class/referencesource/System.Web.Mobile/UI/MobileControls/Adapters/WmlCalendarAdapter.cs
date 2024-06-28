@@ -270,7 +270,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     baseState,
                     _chooseOption,
                     visibleDate.Ticks.ToString(CultureInfo.InvariantCulture),
-                    _eraCount
+                    _eraCount,
                 };
             }
         }
@@ -866,7 +866,7 @@ namespace System.Web.UI.MobileControls.Adapters
             TypeDate,
             DateOption,
             WeekOption,
-            MonthOption
+            MonthOption,
         };
 
         private void OptionListEventHandler(Object source, ListCommandEventArgs e)

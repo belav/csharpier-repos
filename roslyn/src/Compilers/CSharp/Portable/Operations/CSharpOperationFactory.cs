@@ -410,7 +410,7 @@ namespace Microsoft.CodeAnalysis.Operations
                     ITypeSymbol? type = boundNode switch
                     {
                         BoundExpression boundExpr => boundExpr.GetPublicTypeSymbol(),
-                        _ => null
+                        _ => null,
                     };
                     return new NoneOperation(
                         children,
@@ -2552,11 +2552,14 @@ namespace Microsoft.CodeAnalysis.Operations
                 IOperation right = Create(currentBinary.Right);
                 left = currentBinary switch
                 {
-                    BoundBinaryOperator binaryOp =>
-                        CreateBoundBinaryOperatorOperation(binaryOp, left, right),
+                    BoundBinaryOperator binaryOp => CreateBoundBinaryOperatorOperation(
+                        binaryOp,
+                        left,
+                        right
+                    ),
                     BoundUserDefinedConditionalLogicalOperator logicalOp =>
                         createBoundUserDefinedConditionalLogicalOperator(logicalOp, left, right),
-                    { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind)
+                    { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind),
                 };
             }
 
@@ -3863,7 +3866,7 @@ namespace Microsoft.CodeAnalysis.Operations
                 BoundTupleLiteral { Type: var t } => t,
                 BoundConvertedTupleLiteral { SourceTuple: { Type: var t } } => t,
                 BoundConvertedTupleLiteral => null,
-                { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind)
+                { Kind: var kind } => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
             ImmutableArray<IOperation> elements = CreateFromArray<BoundExpression, IOperation>(
@@ -4161,10 +4164,9 @@ namespace Microsoft.CodeAnalysis.Operations
                                     BoundDynamicInvocation
                                     {
                                         Expression: BoundMethodGroup { Name: var name }
-                                    } =>
-                                        name,
+                                    } => name,
                                     { HasErrors: true } => "",
-                                    _ => throw ExceptionUtilities.UnexpectedValue(part.Kind)
+                                    _ => throw ExceptionUtilities.UnexpectedValue(part.Kind),
                                 };
 
                                 var operationKind = methodName switch
@@ -4174,7 +4176,7 @@ namespace Microsoft.CodeAnalysis.Operations
                                         OperationKind.InterpolatedStringAppendLiteral,
                                     BoundInterpolatedString.AppendFormattedMethod =>
                                         OperationKind.InterpolatedStringAppendFormatted,
-                                    _ => throw ExceptionUtilities.UnexpectedValue(methodName)
+                                    _ => throw ExceptionUtilities.UnexpectedValue(methodName),
                                 };
 
                                 return new InterpolatedStringAppendOperation(
@@ -4230,17 +4232,19 @@ namespace Microsoft.CodeAnalysis.Operations
 
             var (placeholderKind, argumentIndex) = placeholder.ArgumentIndex switch
             {
-                >= 0
-                and var index =>
-                    (InterpolatedStringArgumentPlaceholderKind.CallsiteArgument, index),
-                BoundInterpolatedStringArgumentPlaceholder.InstanceParameter =>
-                    (InterpolatedStringArgumentPlaceholderKind.CallsiteReceiver, NonArgumentIndex),
-                BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter =>
-                    (
-                        InterpolatedStringArgumentPlaceholderKind.TrailingValidityArgument,
-                        NonArgumentIndex
-                    ),
-                _ => throw ExceptionUtilities.UnexpectedValue(placeholder.ArgumentIndex)
+                >= 0 and var index => (
+                    InterpolatedStringArgumentPlaceholderKind.CallsiteArgument,
+                    index
+                ),
+                BoundInterpolatedStringArgumentPlaceholder.InstanceParameter => (
+                    InterpolatedStringArgumentPlaceholderKind.CallsiteReceiver,
+                    NonArgumentIndex
+                ),
+                BoundInterpolatedStringArgumentPlaceholder.TrailingConstructorValidityParameter => (
+                    InterpolatedStringArgumentPlaceholderKind.TrailingValidityArgument,
+                    NonArgumentIndex
+                ),
+                _ => throw ExceptionUtilities.UnexpectedValue(placeholder.ArgumentIndex),
             };
 
             return new InterpolatedStringHandlerArgumentPlaceholderOperation(

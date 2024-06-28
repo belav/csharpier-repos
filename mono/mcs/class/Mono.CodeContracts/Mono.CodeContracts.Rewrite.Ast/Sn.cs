@@ -37,6 +37,6 @@ namespace Mono.CodeContracts.Rewrite.Ast
     {
         None,
         Signed,
-        Unsigned
+        Unsigned,
     }
 }

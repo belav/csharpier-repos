@@ -38,7 +38,7 @@ public class StartupDataAnnotations
             {
                 DefaultRequestCulture = new RequestCulture("en-US", "en-US"),
                 SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US") },
-                SupportedUICultures = new List<CultureInfo> { new CultureInfo("en-US") }
+                SupportedUICultures = new List<CultureInfo> { new CultureInfo("en-US") },
             }
         );
 

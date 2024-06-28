@@ -128,7 +128,7 @@ namespace Moq.Tests
         [Fact]
         public void MockInvocationsIncludeException_BaseCall_Virtual()
         {
-            var mock = new Mock<Test>() { CallBase = true, };
+            var mock = new Mock<Test>() { CallBase = true };
 
             var thrown = Assert.Throws<InvalidOperationException>(
                 () => mock.Object.ThrowingVirtualMethod()

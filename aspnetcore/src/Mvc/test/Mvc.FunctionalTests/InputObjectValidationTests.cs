@@ -29,21 +29,21 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
             {
                 "{\"ByteProperty\":1, \"NullableByteProperty\":5, \"ByteArrayProperty\":[1,2,3]}",
                 StatusCodes.Status400BadRequest,
-                "The field ByteProperty must be between 2 and 8."
+                "The field ByteProperty must be between 2 and 8.",
             };
 
             yield return new object[]
             {
                 "{\"ByteProperty\":8, \"NullableByteProperty\":1, \"ByteArrayProperty\":[1,2,3]}",
                 StatusCodes.Status400BadRequest,
-                "The field NullableByteProperty must be between 2 and 8."
+                "The field NullableByteProperty must be between 2 and 8.",
             };
 
             yield return new object[]
             {
                 "{\"ByteProperty\":8, \"NullableByteProperty\":2, \"ByteArrayProperty\":[1]}",
                 StatusCodes.Status400BadRequest,
-                "The field ByteArrayProperty must be a string or array type with a minimum length of '2'."
+                "The field ByteArrayProperty must be a string or array type with a minimum length of '2'.",
             };
         }
     }
@@ -361,7 +361,7 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
                 Assert.Equal(
                     new[]
                     {
-                        "Invalid character after parsing property name. Expected ':' but got: =. Path '', line 1, position 4."
+                        "Invalid character after parsing property name. Expected ':' but got: =. Path '', line 1, position 4.",
                     },
                     error.Value
                 );
@@ -402,7 +402,7 @@ public class InputObjectValidationTests : IClassFixture<MvcTestFixture<Formatter
                 Assert.Equal(
                     new[]
                     {
-                        "Required property 'isbn' not found in JSON. Path '', line 1, position 44."
+                        "Required property 'isbn' not found in JSON. Path '', line 1, position 44.",
                     },
                     error.Value
                 );

@@ -52,7 +52,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
         private static readonly char[] PathSeparatorCharacters =
         [
             Path.DirectorySeparatorChar,
-            Path.AltDirectorySeparatorChar
+            Path.AltDirectorySeparatorChar,
         ];
 
         #region Mutable fields that should only be used from the UI thread

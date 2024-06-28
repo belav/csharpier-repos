@@ -169,7 +169,7 @@ namespace Moq.Tests
             var mock = new Mock<object>();
             var customDefaultValueProvider = new Mock<DefaultValueProvider>()
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
 
             mock.DefaultValueProvider = customDefaultValueProvider;
@@ -1333,7 +1333,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IHaveBadSerializableProperty>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
 
             Assert.ThrowsAny<Exception>(() => mock.Object.BadSerializable);
@@ -1344,7 +1344,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IHaveBadSerializableProperty>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             mock.SetupAllProperties();
 

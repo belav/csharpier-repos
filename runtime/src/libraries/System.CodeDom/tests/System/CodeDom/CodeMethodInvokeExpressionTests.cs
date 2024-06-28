@@ -24,12 +24,12 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(),
-                new CodeExpression[0]
+                new CodeExpression[0],
             };
             yield return new object[]
             {
                 new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length"),
-                new CodeExpression[] { new CodePrimitiveExpression("Value") }
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
             };
         }
 
@@ -60,7 +60,7 @@ namespace System.CodeDom.Tests
             {
                 new CodePrimitiveExpression("Value"),
                 "Length",
-                new CodeExpression[] { new CodePrimitiveExpression("Value") }
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
             };
         }
 
@@ -104,7 +104,7 @@ namespace System.CodeDom.Tests
             yield return new object[] { new CodeMethodReferenceExpression() };
             yield return new object[]
             {
-                new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length")
+                new CodeMethodReferenceExpression(new CodePrimitiveExpression("Value"), "Length"),
             };
         }
 

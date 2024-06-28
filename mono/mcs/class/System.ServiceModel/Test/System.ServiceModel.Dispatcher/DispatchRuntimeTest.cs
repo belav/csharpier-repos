@@ -201,7 +201,7 @@ namespace MonoTests.System.ServiceModel.Dispatcher
                     new BasicHttpBinding()
                     {
                         SendTimeout = TimeSpan.FromSeconds(5),
-                        ReceiveTimeout = TimeSpan.FromSeconds(5)
+                        ReceiveTimeout = TimeSpan.FromSeconds(5),
                     },
                     new EndpointAddress("http://localhost:" + port + "/AllActions")
                 );

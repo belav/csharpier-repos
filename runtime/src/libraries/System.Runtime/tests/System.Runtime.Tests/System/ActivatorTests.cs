@@ -1184,7 +1184,7 @@ namespace System.Tests
                     "publicclassnodefaultconstructorsample",
                     "PublicClassNoDefaultConstructorSample",
                     typeof(TypeLoadException)
-                }
+                },
             };
 
         [ConditionalTheory(
@@ -1295,7 +1295,7 @@ namespace System.Tests
                     "",
                     null,
                     true
-                }
+                },
             };
 
         [ConditionalTheory(
@@ -1341,7 +1341,7 @@ namespace System.Tests
                 new object[0],
                 CultureInfo.InvariantCulture,
                 null,
-                "PublicClassSample"
+                "PublicClassSample",
             };
             yield return new object[]
             {
@@ -1353,7 +1353,7 @@ namespace System.Tests
                 new object[0],
                 CultureInfo.InvariantCulture,
                 null,
-                "PublicClassSample"
+                "PublicClassSample",
             };
             yield return new object[]
             {
@@ -1365,7 +1365,7 @@ namespace System.Tests
                 new object[1] { 1 },
                 CultureInfo.InvariantCulture,
                 null,
-                "PublicClassSample"
+                "PublicClassSample",
             };
             yield return new object[]
             {
@@ -1377,7 +1377,7 @@ namespace System.Tests
                 new object[1] { 1 },
                 CultureInfo.InvariantCulture,
                 null,
-                "PublicClassSample"
+                "PublicClassSample",
             };
 
             yield return new object[]
@@ -1390,7 +1390,7 @@ namespace System.Tests
                 new object[0],
                 CultureInfo.InvariantCulture,
                 null,
-                "PrivateClassSample"
+                "PrivateClassSample",
             };
             yield return new object[]
             {
@@ -1402,7 +1402,7 @@ namespace System.Tests
                 new object[0],
                 CultureInfo.InvariantCulture,
                 null,
-                "PrivateClassSample"
+                "PrivateClassSample",
             };
             yield return new object[]
             {
@@ -1414,7 +1414,7 @@ namespace System.Tests
                 new object[1] { 1 },
                 CultureInfo.InvariantCulture,
                 null,
-                "PrivateClassSample"
+                "PrivateClassSample",
             };
             yield return new object[]
             {
@@ -1426,7 +1426,7 @@ namespace System.Tests
                 new object[1] { 1 },
                 CultureInfo.InvariantCulture,
                 null,
-                "PrivateClassSample"
+                "PrivateClassSample",
             };
         }
 
@@ -1488,7 +1488,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PublicClassSample",
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1501,7 +1501,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PublicClassSample",
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1514,7 +1514,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PublicClassSample",
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1527,7 +1527,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PublicClassSample",
-                false
+                false,
             };
 
             yield return new object[]
@@ -1541,7 +1541,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PrivateClassSample",
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1554,7 +1554,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PrivateClassSample",
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1567,7 +1567,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PrivateClassSample",
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1580,7 +1580,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "PrivateClassSample",
-                false
+                false,
             };
 
             yield return new object[]
@@ -1594,7 +1594,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 typeof(PublicType).FullName,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1607,7 +1607,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 typeof(PrivateType).FullName,
-                false
+                false,
             };
 
             yield return new object[]
@@ -1621,7 +1621,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1634,7 +1634,7 @@ namespace System.Tests
                 CultureInfo.InvariantCulture,
                 null,
                 "",
-                true
+                true,
             };
         }
 

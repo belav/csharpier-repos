@@ -26,12 +26,9 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
         ) =>
             precedenceKind switch
             {
-                PrecedenceKind.Arithmetic
-                or PrecedenceKind.Shift
-                or PrecedenceKind.Bitwise =>
+                PrecedenceKind.Arithmetic or PrecedenceKind.Shift or PrecedenceKind.Bitwise =>
                     options.ArithmeticBinaryParentheses,
-                PrecedenceKind.Relational
-                or PrecedenceKind.Equality =>
+                PrecedenceKind.Relational or PrecedenceKind.Equality =>
                     options.RelationalBinaryParentheses,
                 PrecedenceKind.Logical or PrecedenceKind.Coalesce => options.OtherBinaryParentheses,
                 PrecedenceKind.Other => options.OtherParentheses,

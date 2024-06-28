@@ -1553,7 +1553,7 @@ new C()
                 new MetadataReference[]
                 {
                     NetStandard13.SystemRuntime,
-                    libExe.ToMetadataReference()
+                    libExe.ToMetadataReference(),
                 },
                 mainName
             );
@@ -1601,7 +1601,7 @@ new C()
                 new MetadataReference[]
                 {
                     NetStandard13.SystemRuntime,
-                    libExe.ToMetadataReference()
+                    libExe.ToMetadataReference(),
                 },
                 mainName
             );
@@ -1974,7 +1974,7 @@ new List<ArgumentException>()
             {
                 X = 1,
                 Y = 2,
-                Z = 3
+                Z = 3,
             };
             var r0 = CSharpScript.EvaluateAsync<int>("X + Y + Z", globals: obj);
             Assert.Equal(6, r0.Result);
@@ -1983,7 +1983,7 @@ new List<ArgumentException>()
             {
                 X = 1,
                 Y = 2,
-                Z = 3
+                Z = 3,
             };
             var r1 = CSharpScript.EvaluateAsync<int>("X", globals: obj);
             Assert.Equal(1, r1.Result);

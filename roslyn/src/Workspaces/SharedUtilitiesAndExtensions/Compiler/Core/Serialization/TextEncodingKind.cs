@@ -68,7 +68,7 @@ internal static partial class EncodingExtensions
             TextEncodingKind.EncodingUnicode_BE_BOM => Encoding.BigEndianUnicode,
             TextEncodingKind.EncodingUnicode_LE => s_encodingUnicode_LE,
             TextEncodingKind.EncodingUnicode_LE_BOM => Encoding.Unicode,
-            _ => throw ExceptionUtilities.UnexpectedValue(kind)
+            _ => throw ExceptionUtilities.UnexpectedValue(kind),
         };
 
     public static bool TryGetEncodingKind(this Encoding encoding, out TextEncodingKind kind)

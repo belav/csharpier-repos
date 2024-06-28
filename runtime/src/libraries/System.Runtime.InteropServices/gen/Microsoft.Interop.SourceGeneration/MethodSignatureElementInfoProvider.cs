@@ -59,7 +59,7 @@ namespace Microsoft.Interop
                     )
                 ) with
                 {
-                    ManagedIndex = TypePositionInfo.ReturnIndex
+                    ManagedIndex = TypePositionInfo.ReturnIndex,
                 };
                 return true;
             }
@@ -85,7 +85,7 @@ namespace Microsoft.Interop
                         _compilation
                     ) with
                     {
-                        ManagedIndex = i
+                        ManagedIndex = i,
                     };
                     return true;
                 }
@@ -125,7 +125,7 @@ namespace Microsoft.Interop
                 _compilation
             ) with
             {
-                ManagedIndex = paramIndex
+                ManagedIndex = paramIndex,
             };
             return true;
         }

@@ -145,7 +145,7 @@ namespace Microsoft.Win32
             "HKEY_USERS",
             "HKEY_PERFORMANCE_DATA",
             "HKEY_CURRENT_CONFIG",
-            "HKEY_DYN_DATA"
+            "HKEY_DYN_DATA",
         };
 
         // MSDN defines the following limits for registry key names & values:
@@ -180,7 +180,7 @@ namespace Microsoft.Win32
             CheckKeyReadPermission = 9,
             CheckSubTreePermission = 10,
             CheckOpenSubKeyWithWritablePermission = 11,
-            CheckOpenSubKeyPermission = 12
+            CheckOpenSubKeyPermission = 12,
         };
 
         /**
@@ -3023,7 +3023,7 @@ namespace Microsoft.Win32
     public enum RegistryValueOptions
     {
         None = 0,
-        DoNotExpandEnvironmentNames = 1
+        DoNotExpandEnvironmentNames = 1,
     }
 
     // the name for this API is meant to mimic FileMode, which has similar values
@@ -3032,7 +3032,7 @@ namespace Microsoft.Win32
     {
         Default = 0,
         ReadSubTree = 1,
-        ReadWriteSubTree = 2
+        ReadWriteSubTree = 2,
     }
 
 #endif // !FEATURE_PAL

@@ -82,7 +82,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             2,
             14,
             1,
-            15
+            15,
         };
 
         static byte[] bit4Reverse = { 0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15 };

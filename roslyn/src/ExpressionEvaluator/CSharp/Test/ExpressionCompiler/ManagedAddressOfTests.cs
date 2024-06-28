@@ -187,7 +187,7 @@ enum E
                         var expectedType = type switch
                         {
                             "dynamic" => "object",
-                            _ => type
+                            _ => type,
                         };
 
                         testData

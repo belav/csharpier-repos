@@ -224,7 +224,7 @@ namespace System.Web.UI.WebControls
         /// <para>Gets or sets a property indicating whether the format string should be HtmlEncoded
         /// when it is displayed to the user.</para>
         /// </devdoc>
-        [WebCategory("Behavior"), DefaultValue(true),]
+        [WebCategory("Behavior"), DefaultValue(true)]
         public virtual bool HtmlEncodeFormatString
         {
             get

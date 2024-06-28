@@ -40,7 +40,7 @@ namespace MonoTests.System.Runtime.CompilerServices
         readonly Dictionary<string, bool> ExpectedFeatures = new Dictionary<string, bool>
         {
             { "PortablePdb", true },
-            { "DefaultImplementationsOfInterfaces", true }
+            { "DefaultImplementationsOfInterfaces", true },
         };
 
         [Test]

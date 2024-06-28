@@ -618,7 +618,7 @@ namespace System.Security.Cryptography
             0x00000820,
             0x00020020,
             0x08000000,
-            0x08020800
+            0x08020800,
         };
 
         // Permuted choice 1 table, PC-1, page 19
@@ -680,7 +680,7 @@ namespace System.Security.Cryptography
             28 - 1,
             20 - 1,
             12 - 1,
-            4 - 1
+            4 - 1,
         };
 
         /*
@@ -706,7 +706,7 @@ namespace System.Security.Cryptography
             0x17,
             0x19,
             0x1B,
-            0x1C
+            0x1C,
         };
 
         // Permuted choice 2 table, PC-2, page 21
@@ -760,7 +760,7 @@ namespace System.Security.Cryptography
             50 - 1,
             36 - 1,
             29 - 1,
-            32 - 1
+            32 - 1,
         };
 
         /*
@@ -1304,7 +1304,7 @@ namespace System.Security.Cryptography
             0x00800000,
             0x80800000,
             0x80800000,
-            0x80800000
+            0x80800000,
         };
 
         internal static readonly uint[] fpTab =
@@ -1820,7 +1820,7 @@ namespace System.Security.Cryptography
             0x02020200,
             0x00000000,
             0x02020202,
-            0x00000000
+            0x00000000,
         };
 
         /*		static DESTransform ()

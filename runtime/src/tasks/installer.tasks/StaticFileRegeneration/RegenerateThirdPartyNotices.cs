@@ -62,7 +62,7 @@ namespace Microsoft.DotNet.Build.Tasks
                             Repo = repo,
                             Branch = branch,
                             PotentialPath = path,
-                            Url = $"{GitHubRawContentBaseUrl}{repo}/{branch}/{path}"
+                            Url = $"{GitHubRawContentBaseUrl}{repo}/{branch}/{path}",
                         });
                     })
                     .Select(async c =>
@@ -102,7 +102,7 @@ namespace Microsoft.DotNet.Build.Tasks
                             c.Branch,
                             c.PotentialPath,
                             c.Url,
-                            Content = content
+                            Content = content,
                         };
                     })
             );
@@ -189,7 +189,7 @@ namespace Microsoft.DotNet.Build.Tasks
             var newTpn = new TpnDocument
             {
                 Preamble = existingTpn.Preamble,
-                Sections = existingTpn.Sections.Concat(newSections)
+                Sections = existingTpn.Sections.Concat(newSections),
             };
 
             File.WriteAllText(TpnFile, newTpn.ToString());

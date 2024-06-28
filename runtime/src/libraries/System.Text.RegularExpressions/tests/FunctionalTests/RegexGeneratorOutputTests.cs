@@ -418,7 +418,7 @@ namespace System.Text.RegularExpressions.Tests
                             }
                         }
                     }
-                    """
+                    """,
             };
 
             yield return new object[]
@@ -715,7 +715,7 @@ namespace System.Text.RegularExpressions.Tests
                         }
 
                     }
-                    """
+                    """,
             };
 
             yield return new object[]
@@ -881,7 +881,7 @@ namespace System.Text.RegularExpressions.Tests
                             internal static readonly SearchValues<char> s_asciiLetters = SearchValues.Create("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
                         }
                     }
-                    """
+                    """,
             };
         }
     }

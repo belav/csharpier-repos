@@ -260,7 +260,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         parent.ChildrenCompositeKey = new List<ChildCompositeKey>
         {
             childCompositeKey1,
-            childCompositeKey2
+            childCompositeKey2,
         };
 
         context.Attach(parent);
@@ -3055,7 +3055,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
             new JsonSerializerSettings
             {
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             }
         );
 
@@ -3072,7 +3072,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
         var options = new JsonSerializerOptions
         {
             ReferenceHandler = ReferenceHandler.Preserve,
-            WriteIndented = true
+            WriteIndented = true,
         };
 
         serialized = JsonSerializer.Serialize(blogs, options);
@@ -4724,7 +4724,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
             {
                 parent.Id,
                 parent.Single,
-                parent.Single!.ParentId
+                parent.Single!.ParentId,
             };
     }
 
@@ -5368,7 +5368,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     .HasForeignKey<SingleCompositeKey>(e => new
                     {
                         e.ParentAlternateId,
-                        e.ParentId
+                        e.ParentId,
                     });
 
                 b.HasMany(e => e.ManyChildren).WithMany(e => e.ManyParents);
@@ -5484,7 +5484,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Birthday = new DateTime(1973, 9, 3),
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5499,26 +5499,26 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 11,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
+                            Milk = CreateMilk(),
                         },
                         new()
                         {
                             Id = 12,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
-                        }
+                            Milk = CreateMilk(),
+                        },
                     },
                     SinglePkToPk = new SinglePkToPk
                     {
                         Id = 707,
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Single = new Single
                     {
                         Id = 21,
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     ChildrenAk = new List<ChildAk>
                     {
@@ -5526,20 +5526,20 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 31,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
+                            Milk = CreateMilk(),
                         },
                         new()
                         {
                             Id = 32,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
-                        }
+                            Milk = CreateMilk(),
+                        },
                     },
                     SingleAk = new SingleAk
                     {
                         Id = 42,
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     ChildrenShadowFk = new List<ChildShadowFk>
                     {
@@ -5547,20 +5547,20 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 51,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
+                            Milk = CreateMilk(),
                         },
                         new()
                         {
                             Id = 52,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
-                        }
+                            Milk = CreateMilk(),
+                        },
                     },
                     SingleShadowFk = new SingleShadowFk
                     {
                         Id = 62,
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     ChildrenCompositeKey = new List<ChildCompositeKey>
                     {
@@ -5568,20 +5568,20 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 51,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
+                            Milk = CreateMilk(),
                         },
                         new()
                         {
                             Id = 52,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
-                        }
+                            Milk = CreateMilk(),
+                        },
                     },
                     SingleCompositeKey = new SingleCompositeKey
                     {
                         Id = 62,
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     WithRecursiveProperty = new WithRecursiveProperty { Id = 8086 },
                     ManyChildren = new List<Child>
@@ -5590,11 +5590,11 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 999,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
-                        }
+                            Milk = CreateMilk(),
+                        },
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5606,23 +5606,23 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         FirstName = "firstNameWriter0",
                         LastName = "lastNameWriter0",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Reader = new Person
                     {
                         FirstName = "firstNameReader0",
                         LastName = "lastNameReader0",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Host = new Host
                     {
                         HostName = "127.0.0.1",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5634,23 +5634,23 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         FirstName = "firstNameWriter1",
                         LastName = "lastNameWriter1",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Reader = new Person
                     {
                         FirstName = "firstNameReader1",
                         LastName = "lastNameReader1",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Host = new Host
                     {
                         HostName = "127.0.0.2",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5662,23 +5662,23 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         FirstName = "firstNameWriter2",
                         LastName = "lastNameWriter2",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Reader = new Person
                     {
                         FirstName = "firstNameReader2",
                         LastName = "lastNameReader2",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Host = new Host
                     {
                         HostName = "127.0.0.3",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5686,21 +5686,21 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
             {
                 Size = "Small",
                 Culture = CreateCulture(),
-                Milk = CreateMilk()
+                Milk = CreateMilk(),
             };
 
             var nose2 = new Nose
             {
                 Size = "Medium",
                 Culture = CreateCulture(),
-                Milk = CreateMilk()
+                Milk = CreateMilk(),
             };
 
             var nose3 = new Nose
             {
                 Size = "Large",
                 Culture = CreateCulture(),
-                Milk = CreateMilk()
+                Milk = CreateMilk(),
             };
 
             context.Add(
@@ -5708,7 +5708,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     BaseNoses = new List<Nose> { nose1, nose2, nose3 },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5717,7 +5717,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     ParsonNoses = new List<Nose> { nose2, nose3 },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5726,7 +5726,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     CompanyNoses = new List<Nose> { nose1, nose3 },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5742,10 +5742,10 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         Line1 = "Line1",
                         Line2 = "Line2",
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5756,10 +5756,10 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Address = new OwnedAddress
                     {
                         Street = "Paradise Alley",
-                        PostalCode = "WEEEEEE"
+                        PostalCode = "WEEEEEE",
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5769,7 +5769,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Id = 200,
                     Address = new OwnedAddress { Street = "Dead End", PostalCode = "N0 WA1R" },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5779,10 +5779,10 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Id = 300,
                     Addresses = new List<OwnedAddress>
                     {
-                        new() { Street = "4 Privet Drive", PostalCode = "SURREY" }
+                        new() { Street = "4 Privet Drive", PostalCode = "SURREY" },
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5794,10 +5794,10 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     {
                         new() { Street = "The Ministry", PostalCode = "MAG1C" },
                         new() { Street = "Diagon Alley", PostalCode = "WC2H 0AW" },
-                        new() { Street = "Shell Cottage", PostalCode = "THE SEA" }
+                        new() { Street = "Shell Cottage", PostalCode = "THE SEA" },
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5807,10 +5807,10 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Id = 500,
                     Addresses = new List<OwnedAddress>
                     {
-                        new() { Street = "Spinner's End", PostalCode = "BE WA1R" }
+                        new() { Street = "Spinner's End", PostalCode = "BE WA1R" },
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5820,10 +5820,10 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Id = 600,
                     Addresses = new List<OwnedAddress>
                     {
-                        new() { Street = "12 Grimmauld Place", PostalCode = "L0N D0N" }
+                        new() { Street = "12 Grimmauld Place", PostalCode = "L0N D0N" },
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5835,7 +5835,7 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     {
                         Id = 100,
                         Culture = CreateCulture(),
-                        Milk = CreateMilk()
+                        Milk = CreateMilk(),
                     },
                     Children = new List<NonVirtualChild>
                     {
@@ -5843,11 +5843,11 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             Id = 101,
                             Culture = CreateCulture(),
-                            Milk = CreateMilk()
-                        }
+                            Milk = CreateMilk(),
+                        },
                     },
                     Culture = CreateCulture(),
-                    Milk = CreateMilk()
+                    Milk = CreateMilk(),
                 }
             );
 
@@ -5862,18 +5862,18 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             };
 
         protected static Milk CreateMilk() =>
@@ -5884,18 +5884,18 @@ public abstract class LazyLoadProxyTestBase<TFixture> : IClassFixture<TFixture>
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             };
     }
 }

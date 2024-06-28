@@ -45,11 +45,11 @@ namespace System.Formats.Asn1.Tests.Reader
                     "360F" + "040D4A6F686E20512E20536D697468",
                     "John Q. Smith",
                 },
-                new object[] { AsnEncodingRules.BER, "1600", "", },
-                new object[] { AsnEncodingRules.CER, "1600", "", },
-                new object[] { AsnEncodingRules.DER, "1600", "", },
-                new object[] { AsnEncodingRules.BER, "3600", "", },
-                new object[] { AsnEncodingRules.BER, "3680" + "0000", "", },
+                new object[] { AsnEncodingRules.BER, "1600", "" },
+                new object[] { AsnEncodingRules.CER, "1600", "" },
+                new object[] { AsnEncodingRules.DER, "1600", "" },
+                new object[] { AsnEncodingRules.BER, "3600", "" },
+                new object[] { AsnEncodingRules.BER, "3680" + "0000", "" },
                 new object[]
                 {
                     AsnEncodingRules.BER,

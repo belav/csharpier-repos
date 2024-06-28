@@ -12,7 +12,7 @@ namespace System.ServiceModel.Dispatcher
         Double,
         StackFrame,
         Sequence,
-        String
+        String,
     }
 
     // Value is like Variant. Since a Value is only temporary storage, we use memory to avoid typecasting type

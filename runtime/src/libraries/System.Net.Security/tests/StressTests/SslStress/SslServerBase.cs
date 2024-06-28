@@ -58,7 +58,7 @@ namespace SslStress
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
                     SslApplicationProtocol.Http11,
-                    SslApplicationProtocol.Http2
+                    SslApplicationProtocol.Http2,
                 },
                 ServerCertificate = _certificate,
             };

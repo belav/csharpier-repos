@@ -79,14 +79,14 @@ public class DeepTypeMapper : IObjectToObjectMapper
                 City = "istanbul",
                 Country = "turkey",
                 Id = 1,
-                Street = "istiklal cad."
+                Street = "istiklal cad.",
             },
             HomeAddress = new Address()
             {
                 City = "istanbul",
                 Country = "turkey",
                 Id = 2,
-                Street = "istiklal cad."
+                Street = "istiklal cad.",
             },
             Id = 1,
             Name = "Eduardo Najera",
@@ -98,15 +98,15 @@ public class DeepTypeMapper : IObjectToObjectMapper
                     City = "istanbul",
                     Country = "turkey",
                     Id = 5,
-                    Street = "istiklal cad."
+                    Street = "istiklal cad.",
                 },
                 new Address()
                 {
                     City = "izmir",
                     Country = "turkey",
                     Id = 6,
-                    Street = "konak"
-                }
+                    Street = "konak",
+                },
             },
             Addresses = new List<Address>()
             {
@@ -115,16 +115,16 @@ public class DeepTypeMapper : IObjectToObjectMapper
                     City = "istanbul",
                     Country = "turkey",
                     Id = 3,
-                    Street = "istiklal cad."
+                    Street = "istiklal cad.",
                 },
                 new Address()
                 {
                     City = "izmir",
                     Country = "turkey",
                     Id = 4,
-                    Street = "konak"
-                }
-            }.ToArray()
+                    Street = "konak",
+                },
+            }.ToArray(),
         };
     }
 
@@ -182,14 +182,14 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
                 City = "istanbul",
                 Country = "turkey",
                 Id = 1,
-                Street = "istiklal cad."
+                Street = "istiklal cad.",
             },
             HomeAddress = new Address()
             {
                 City = "istanbul",
                 Country = "turkey",
                 Id = 2,
-                Street = "istiklal cad."
+                Street = "istiklal cad.",
             },
             Id = 1,
             Name = "Eduardo Najera",
@@ -201,15 +201,15 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
                     City = "istanbul",
                     Country = "turkey",
                     Id = 5,
-                    Street = "istiklal cad."
+                    Street = "istiklal cad.",
                 },
                 new Address()
                 {
                     City = "izmir",
                     Country = "turkey",
                     Id = 6,
-                    Street = "konak"
-                }
+                    Street = "konak",
+                },
             },
             Addresses = new List<Address>()
             {
@@ -218,16 +218,16 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
                     City = "istanbul",
                     Country = "turkey",
                     Id = 3,
-                    Street = "istiklal cad."
+                    Street = "istiklal cad.",
                 },
                 new Address()
                 {
                     City = "izmir",
                     Country = "turkey",
                     Id = 4,
-                    Street = "konak"
-                }
-            }.ToArray()
+                    Street = "konak",
+                },
+            }.ToArray(),
         };
     }
 
@@ -244,14 +244,14 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
             Id = _customer.Address.Id,
             Street = _customer.Address.Street,
             Country = _customer.Address.Country,
-            City = _customer.Address.City
+            City = _customer.Address.City,
         };
 
         dto.HomeAddress = new AddressDTO()
         {
             Id = _customer.HomeAddress.Id,
             Country = _customer.HomeAddress.Country,
-            City = _customer.HomeAddress.City
+            City = _customer.HomeAddress.City,
         };
 
         dto.Addresses = new AddressDTO[_customer.Addresses.Length];
@@ -261,7 +261,7 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
             {
                 Id = _customer.Addresses[i].Id,
                 Country = _customer.Addresses[i].Country,
-                City = _customer.Addresses[i].City
+                City = _customer.Addresses[i].City,
             };
         }
 
@@ -273,7 +273,7 @@ public class ManualDeepTypeMapper : IObjectToObjectMapper
                 {
                     Id = workAddress.Id,
                     Country = workAddress.Country,
-                    City = workAddress.City
+                    City = workAddress.City,
                 }
             );
         }
@@ -316,19 +316,19 @@ public class Foo
                 {
                     Name = "j1",
                     Int64 = 123,
-                    NullInt = 321
+                    NullInt = 321,
                 },
                 new InnerFoo
                 {
                     Name = "j2",
                     Int32 = 12345,
-                    NullInt = 54321
+                    NullInt = 54321,
                 },
                 new InnerFoo
                 {
                     Name = "j3",
                     Int32 = 12345,
-                    NullInt = 54321
+                    NullInt = 54321,
                 },
             },
             FooArr = new[]
@@ -442,7 +442,7 @@ public class ManualComplexTypeMapper : IObjectToObjectMapper
                 {
                     Name = foo.Name,
                     Int64 = foo.Int64,
-                    NullInt = foo.NullInt
+                    NullInt = foo.NullInt,
                 }
             );
         }
@@ -454,7 +454,7 @@ public class ManualComplexTypeMapper : IObjectToObjectMapper
             {
                 Name = foo.Name,
                 Int64 = foo.Int64,
-                NullInt = foo.NullInt
+                NullInt = foo.NullInt,
             };
         }
         Array.Copy(_foo.IntArr, dest.IntArr, _foo.IntArr.Length);
@@ -495,7 +495,7 @@ public class FlatteningMapper : IObjectToObjectMapper
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
             Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
             SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
@@ -519,7 +519,7 @@ public class ManualMapper : IObjectToObjectMapper
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
             Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
             SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
@@ -534,7 +534,7 @@ public class ManualMapper : IObjectToObjectMapper
             Sub2ProperName = _source.Sub2.ProperName,
             SubProperName = _source.Sub.ProperName,
             SubSubSubIAmACoolProperty = _source.Sub.SubSub.IAmACoolProperty,
-            SubWithExtraNameProperName = _source.SubWithExtraName.ProperName
+            SubWithExtraNameProperName = _source.SubWithExtraName.ProperName,
         };
     }
 }

@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             {
                 AutoFormattingOptions = _globalOptions.GetAutoFormattingOptions(
                     document.Project.Language
-                )
+                ),
             };
 
             var textChanges = formattingService.GetFormattingChangesOnTypedCharacter(

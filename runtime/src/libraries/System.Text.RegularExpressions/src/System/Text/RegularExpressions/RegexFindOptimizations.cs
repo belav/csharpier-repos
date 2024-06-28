@@ -138,7 +138,7 @@ namespace System.Text.RegularExpressions
                         Debug.Assert(!RegexCharClass.IsNegated(charClass) || chars is null);
                         FixedDistanceSets = new List<FixedDistanceSet>()
                         {
-                            new FixedDistanceSet(chars, charClass, 0)
+                            new FixedDistanceSet(chars, charClass, 0),
                         };
                         FindMode = FindNextStartingPositionMode.LeadingSet_RightToLeft;
                         _asciiLookups = new uint[1][];
@@ -881,11 +881,11 @@ namespace System.Text.RegularExpressions
                         ReadOnlySpan<char> slice = textSpan.Slice(startingPos);
 
                         // Find the literal.  If we can't find it, we're done searching.
-                        int i = literal.String is not null
-                            ? slice.IndexOf(literal.String.AsSpan(), literal.StringComparison)
-                            : literal.Chars is not null
-                                ? slice.IndexOfAny(literal.Chars.AsSpan())
-                                : slice.IndexOf(literal.Char);
+                        int i =
+                            literal.String is not null
+                                ? slice.IndexOf(literal.String.AsSpan(), literal.StringComparison)
+                            : literal.Chars is not null ? slice.IndexOfAny(literal.Chars.AsSpan())
+                            : slice.IndexOf(literal.Char);
                         if (i < 0)
                         {
                             break;

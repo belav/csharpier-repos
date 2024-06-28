@@ -73,7 +73,7 @@ namespace System.Diagnostics.Tests
                 "Application"
             )
             {
-                MessageResourceFile = messageDllPath
+                MessageResourceFile = messageDllPath,
             };
             try
             {

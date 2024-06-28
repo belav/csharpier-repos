@@ -15,7 +15,7 @@ namespace System.Web.UI.WebControls
     /// <devdoc>
     /// Represents a Parameter that gets its value from the application's route data.
     /// </devdoc>
-    [DefaultProperty("RouteKey"),]
+    [DefaultProperty("RouteKey")]
     public class RouteParameter : Parameter
     {
         /// <devdoc>
@@ -63,11 +63,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The name of the route value to get the value from.
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Parameter"),
-            WebSysDescription(SR.RouteParameter_RouteKey),
-        ]
+        [DefaultValue(""), WebCategory("Parameter"), WebSysDescription(SR.RouteParameter_RouteKey)]
         public string RouteKey
         {
             get

@@ -253,7 +253,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         CodeBlockEndActions = CodeBlockEndActions,
                         OperationBlockStartActions = OperationBlockStartActions,
                         OperationBlockActions = OperationBlockActions,
-                        OperationBlockEndActions = OperationBlockEndActions
+                        OperationBlockEndActions = OperationBlockEndActions,
                     };
 
                     return true;

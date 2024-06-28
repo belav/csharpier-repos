@@ -1142,7 +1142,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     { "Lines", "System.String[]" },
                     { "File", "System.String" },
                     { "Overwrite", "System.Boolean" },
-                    { "WriteOnlyWhenDifferent", "System.Boolean" }
+                    { "WriteOnlyWhenDifferent", "System.Boolean" },
                 }
             );
 
@@ -1185,7 +1185,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 #if DUMP_MSBUILD_BIN_LOG
             return new ILogger[]
             {
-                new Build.Logging.BinaryLogger() { Parameters = callerName + ".binlog" }
+                new Build.Logging.BinaryLogger() { Parameters = callerName + ".binlog" },
             };
 #else
             return Array.Empty<ILogger>();

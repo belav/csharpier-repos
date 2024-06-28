@@ -162,12 +162,12 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.ListBind(property) };
             yield return new object[]
             {
-                Expression.ListBind(property, Enumerable.Empty<ElementInit>())
+                Expression.ListBind(property, Enumerable.Empty<ElementInit>()),
             };
             yield return new object[] { Expression.ListBind(member) };
             yield return new object[]
             {
-                Expression.ListBind(member, Enumerable.Empty<ElementInit>())
+                Expression.ListBind(member, Enumerable.Empty<ElementInit>()),
             };
         }
 
@@ -248,17 +248,17 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.ListBind(property) };
             yield return new object[]
             {
-                Expression.ListBind(property, Enumerable.Empty<ElementInit>())
+                Expression.ListBind(property, Enumerable.Empty<ElementInit>()),
             };
             yield return new object[] { Expression.ListBind(member) };
             yield return new object[]
             {
-                Expression.ListBind(member, Enumerable.Empty<ElementInit>())
+                Expression.ListBind(member, Enumerable.Empty<ElementInit>()),
             };
             yield return new object[] { Expression.ListBind(fieldMember) };
             yield return new object[]
             {
-                Expression.ListBind(fieldMember, Enumerable.Empty<ElementInit>())
+                Expression.ListBind(fieldMember, Enumerable.Empty<ElementInit>()),
             };
         }
 
@@ -385,7 +385,7 @@ namespace System.Linq.Expressions.Tests
                         Expression.ElementInit(
                             typeof(List<int>).GetMethod(nameof(List<int>.Add)),
                             Expression.Constant(1)
-                        )
+                        ),
                     }
                 )
             );
@@ -414,7 +414,7 @@ namespace System.Linq.Expressions.Tests
                             Expression.ElementInit(
                                 typeof(List<int>).GetMethod(nameof(List<int>.Add)),
                                 Expression.Constant(1)
-                            )
+                            ),
                         }
                     )
                 )

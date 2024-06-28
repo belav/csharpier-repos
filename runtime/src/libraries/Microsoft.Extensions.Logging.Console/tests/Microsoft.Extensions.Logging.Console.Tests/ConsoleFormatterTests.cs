@@ -193,12 +193,12 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 {
                     TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
                     UseUtcTimestamp = false,
-                    ColorBehavior = LoggerColorBehavior.Enabled
+                    ColorBehavior = LoggerColorBehavior.Enabled,
                 },
                 new ConsoleFormatterOptions
                 {
                     TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
-                    UseUtcTimestamp = false
+                    UseUtcTimestamp = false,
                 },
                 new JsonConsoleFormatterOptions
                 {
@@ -208,8 +208,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     {
                         // otherwise escapes for timezone formatting from + to \u002b
                         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                        Indented = true
-                    }
+                        Indented = true,
+                    },
                 }
             );
             var levelPrefix = t.GetLevelPrefix(level);

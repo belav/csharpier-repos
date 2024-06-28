@@ -89,7 +89,7 @@ namespace Mono.CSharp
         //
         None = 0,
         Covariant = 1,
-        Contravariant = -1
+        Contravariant = -1,
     }
 
     [Flags]
@@ -98,7 +98,7 @@ namespace Mono.CSharp
         None = 0,
         Constructor = 1 << 2,
         Class = 1 << 3,
-        Struct = 1 << 4
+        Struct = 1 << 4,
     }
 
     public class SpecialContraintExpr : FullNamedExpression
@@ -600,7 +600,7 @@ namespace Mono.CSharp
             {
                 BaseType = spec.BaseType,
                 InterfacesDefined = spec.InterfacesDefined,
-                TypeArguments = spec.TypeArguments
+                TypeArguments = spec.TypeArguments,
             };
         }
 
@@ -3576,7 +3576,7 @@ namespace Mono.CSharp
         {
             Exact = 0,
             Lower = 1,
-            Upper = 2
+            Upper = 2,
         }
 
         struct BoundInfo : IEquatable<BoundInfo>

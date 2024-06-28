@@ -98,7 +98,7 @@ namespace Internal.Cryptography.Pal.AnyOS
                     certs[i].Certificate = originatorCerts[i].RawData;
                 }
 
-                envelopedData.OriginatorInfo = new OriginatorInfoAsn { CertificateSet = certs, };
+                envelopedData.OriginatorInfo = new OriginatorInfoAsn { CertificateSet = certs };
             }
 
             envelopedData.RecipientInfos = new RecipientInfoAsn[recipients.Count];
@@ -114,11 +114,10 @@ namespace Internal.Cryptography.Pal.AnyOS
                     recipient.Certificate.GetKeyAlgorithm() switch
                     {
                         Oids.Rsa => MakeKtri(cek, recipient, out v0Recipient),
-                        _ =>
-                            throw new CryptographicException(
-                                SR.Cryptography_Cms_UnknownAlgorithm,
-                                recipient.Certificate.GetKeyAlgorithm()
-                            ),
+                        _ => throw new CryptographicException(
+                            SR.Cryptography_Cms_UnknownAlgorithm,
+                            recipient.Certificate.GetKeyAlgorithm()
+                        ),
                     };
                 allRecipientsVersion0 = allRecipientsVersion0 && v0Recipient;
             }

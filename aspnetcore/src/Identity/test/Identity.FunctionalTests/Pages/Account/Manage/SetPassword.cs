@@ -23,7 +23,7 @@ public class SetPassword : DefaultUIPage
             new Dictionary<string, string>
             {
                 ["Input_NewPassword"] = newPassword,
-                ["Input_ConfirmPassword"] = newPassword
+                ["Input_ConfirmPassword"] = newPassword,
             }
         );
 

@@ -21,24 +21,30 @@ namespace Microsoft.Interop
             diagnostic = Support switch
             {
                 ByValueMarshalKindSupport.Supported => null,
-                ByValueMarshalKindSupport.NotRecommended =>
-                    new GeneratorDiagnostic.NotRecommended(info, context) { Details = details },
-                ByValueMarshalKindSupport.Unnecessary =>
-                    new GeneratorDiagnostic.UnnecessaryData(
-                        info,
-                        context,
-                        ImmutableArray.Create(info.ByValueMarshalAttributeLocations.OutLocation)
-                    )
-                    {
-                        UnnecessaryDataName = SR.InOutAttributes,
-                        UnnecessaryDataDetails = details
-                    },
-                ByValueMarshalKindSupport.NotSupported =>
-                    new GeneratorDiagnostic.NotSupported(info, context)
-                    {
-                        NotSupportedDetails = details
-                    },
-                _ => throw new UnreachableException()
+                ByValueMarshalKindSupport.NotRecommended => new GeneratorDiagnostic.NotRecommended(
+                    info,
+                    context
+                )
+                {
+                    Details = details,
+                },
+                ByValueMarshalKindSupport.Unnecessary => new GeneratorDiagnostic.UnnecessaryData(
+                    info,
+                    context,
+                    ImmutableArray.Create(info.ByValueMarshalAttributeLocations.OutLocation)
+                )
+                {
+                    UnnecessaryDataName = SR.InOutAttributes,
+                    UnnecessaryDataDetails = details,
+                },
+                ByValueMarshalKindSupport.NotSupported => new GeneratorDiagnostic.NotSupported(
+                    info,
+                    context
+                )
+                {
+                    NotSupportedDetails = details,
+                },
+                _ => throw new UnreachableException(),
             };
             return Support;
         }
@@ -105,7 +111,7 @@ namespace Microsoft.Interop
                 {
                     diagnostic = new GeneratorDiagnostic.NotSupported(info, context)
                     {
-                        NotSupportedDetails = SR.InOutAttributeByRefNotSupported
+                        NotSupportedDetails = SR.InOutAttributeByRefNotSupported,
                     };
                     return ByValueMarshalKindSupport.NotSupported;
                 }
@@ -123,15 +129,27 @@ namespace Microsoft.Interop
 
             return marshalKind switch
             {
-                ByValueContentsMarshalKind.Default =>
-                    DefaultSupport.GetSupport(info, context, out diagnostic),
-                ByValueContentsMarshalKind.In =>
-                    InSupport.GetSupport(info, context, out diagnostic),
-                ByValueContentsMarshalKind.Out =>
-                    OutSupport.GetSupport(info, context, out diagnostic),
-                ByValueContentsMarshalKind.InOut =>
-                    InOutSupport.GetSupport(info, context, out diagnostic),
-                _ => throw new UnreachableException()
+                ByValueContentsMarshalKind.Default => DefaultSupport.GetSupport(
+                    info,
+                    context,
+                    out diagnostic
+                ),
+                ByValueContentsMarshalKind.In => InSupport.GetSupport(
+                    info,
+                    context,
+                    out diagnostic
+                ),
+                ByValueContentsMarshalKind.Out => OutSupport.GetSupport(
+                    info,
+                    context,
+                    out diagnostic
+                ),
+                ByValueContentsMarshalKind.InOut => InOutSupport.GetSupport(
+                    info,
+                    context,
+                    out diagnostic
+                ),
+                _ => throw new UnreachableException(),
             };
         }
     }

@@ -130,7 +130,7 @@ namespace Tester
             var ti = new CacheItemPriorityQueueTestItem()
             {
                 Operation = QueueOperation.QueueSize,
-                QueueCount = qs.Queue.Count
+                QueueCount = qs.Queue.Count,
             };
             sw.WriteLine(ti.Serialize());
         }
@@ -175,7 +175,7 @@ namespace Tester
                 ListIndex = index,
                 ExpiresAt = updatedItem.ExpiresAt,
                 PriorityQueueIndex = FindQueueIndex(qs, item),
-                Guid = updatedItem.Guid != null ? updatedItem.Guid.ToString() : null
+                Guid = updatedItem.Guid != null ? updatedItem.Guid.ToString() : null,
             };
             sw.WriteLine(ti.Serialize());
             qs.UpdateCount++;
@@ -195,7 +195,7 @@ namespace Tester
                 QueueCount = qs.Queue.Count,
                 ListIndex = index,
                 PriorityQueueIndex = item.PriorityQueueIndex,
-                OperationCount = qs.DisableCount
+                OperationCount = qs.DisableCount,
             };
             if (item == null)
                 ti.IsNull = true;
@@ -218,7 +218,7 @@ namespace Tester
                 Operation = QueueOperation.Dequeue,
                 QueueCount = qs.Queue.Count,
                 OperationCount = qs.DequeueCount,
-                PriorityQueueIndex = item.PriorityQueueIndex
+                PriorityQueueIndex = item.PriorityQueueIndex,
             };
             if (item != null)
             {
@@ -240,7 +240,7 @@ namespace Tester
                 Operation = QueueOperation.Peek,
                 QueueCount = qs.Queue.Count,
                 OperationCount = qs.PeekCount,
-                PriorityQueueIndex = item.PriorityQueueIndex
+                PriorityQueueIndex = item.PriorityQueueIndex,
             };
             if (item != null)
             {
@@ -271,7 +271,7 @@ namespace Tester
                 ListIndex = index,
                 Guid = qs.Peek().Guid.ToString(),
                 OperationCount = qs.EnqueueCount,
-                PriorityQueueIndex = item.PriorityQueueIndex
+                PriorityQueueIndex = item.PriorityQueueIndex,
             };
 
             sw.WriteLine(ti.Serialize());

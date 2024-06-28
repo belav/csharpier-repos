@@ -46,6 +46,6 @@ namespace System.Security
             | HostPolicyLevel
             | HostAssemblyEvidence
             | HostDetermineApplicationTrust
-            | HostResolvePolicy
+            | HostResolvePolicy,
     }
 }

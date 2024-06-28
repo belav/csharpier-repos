@@ -25,7 +25,7 @@ namespace Microsoft.Interop
                 ByValueContentsMarshalKind.In => RefKind.In,
                 ByValueContentsMarshalKind.InOut => RefKind.Ref,
                 ByValueContentsMarshalKind.Out => RefKind.Out,
-                _ => throw new System.ArgumentOutOfRangeException(nameof(byValue))
+                _ => throw new System.ArgumentOutOfRangeException(nameof(byValue)),
             };
         }
 
@@ -415,7 +415,7 @@ namespace Microsoft.Interop
                 MarshalDirection.UnmanagedToManaged => StubCodeContext.Stage.CleanupCalleeAllocated,
                 MarshalDirection.ManagedToUnmanaged => StubCodeContext.Stage.CleanupCallerAllocated,
                 MarshalDirection.Bidirectional => StubCodeContext.Stage.CleanupCallerAllocated,
-                _ => throw new UnreachableException()
+                _ => throw new UnreachableException(),
             };
         }
 

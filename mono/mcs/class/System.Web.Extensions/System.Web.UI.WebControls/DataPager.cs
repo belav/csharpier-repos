@@ -71,7 +71,7 @@ namespace System.Web.UI.WebControls
             "There is no data-bound control associated with the DataPager control.",
             "Control with id '{0}' cannot be found in the page",
             "Control '{0}' is not pageable",
-            "DataPager has no naming container"
+            "DataPager has no naming container",
         };
 
         IPageableItemContainer _pageableContainer;

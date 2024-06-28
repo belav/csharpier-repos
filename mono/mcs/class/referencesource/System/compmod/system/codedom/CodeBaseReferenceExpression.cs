@@ -20,6 +20,6 @@ namespace System.CodeDom
     ///       class.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeBaseReferenceExpression : CodeExpression { }
 }

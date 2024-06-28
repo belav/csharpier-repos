@@ -382,7 +382,7 @@ internal static class ServiceDescriptorHelpers
         {
             HttpRule rule => rule,
             IMessage message => HttpRule.Parser.ParseFrom(message.ToByteArray()),
-            _ => null
+            _ => null,
         };
 
         return httpRule != null;

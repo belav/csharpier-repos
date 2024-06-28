@@ -513,7 +513,7 @@ namespace System.ServiceModel.Description
                     {
                         DetailType = a.DetailType,
                         Name = fname,
-                        Namespace = fns
+                        Namespace = fns,
                     };
 #if !MOBILE
                     if (a.HasProtectionLevel)
@@ -647,11 +647,9 @@ namespace System.ServiceModel.Description
             if (action == null)
                 action = String.Concat(
                     cd.Namespace,
-                    cd.Namespace.Length == 0
-                        ? "urn:"
-                        : cd.Namespace.EndsWith("/")
-                            ? ""
-                            : "/",
+                    cd.Namespace.Length == 0 ? "urn:"
+                        : cd.Namespace.EndsWith("/") ? ""
+                        : "/",
                     cd.Name,
                     "/",
                     od.Name,
@@ -710,7 +708,7 @@ namespace System.ServiceModel.Description
                 isRequest ^ isCallback ? MessageDirection.Input : MessageDirection.Output
             )
             {
-                IsRequest = isRequest
+                IsRequest = isRequest,
             };
             md.MessageType = MessageFilterOutByRef(messageType);
             if (mca.HasProtectionLevel)
@@ -918,11 +916,9 @@ namespace System.ServiceModel.Description
 
         static Type MessageFilterOutByRef(Type type)
         {
-            return type == null
-                ? null
-                : type.IsByRef
-                    ? type.GetElementType()
-                    : type;
+            return type == null ? null
+                : type.IsByRef ? type.GetElementType()
+                : type;
         }
 
         static MessageParameterAttribute GetMessageParameterAttribute(

@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
         public enum ExtractLocation
         {
             SameFile,
-            NewFile
+            NewFile,
         }
 
         public static readonly ExtractInterfaceOptionsResult Cancelled = new(isCancelled: true);

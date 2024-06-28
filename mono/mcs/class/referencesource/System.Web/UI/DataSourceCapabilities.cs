@@ -14,6 +14,6 @@ namespace System.Web.UI
 
         Page = 0x2,
 
-        RetrieveTotalRowCount = 0x4
+        RetrieveTotalRowCount = 0x4,
     }
 }

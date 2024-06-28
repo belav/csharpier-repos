@@ -28,7 +28,7 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var compiledView = new CompiledViewDescriptor { RelativePath = path, };
+        var compiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(compiledViews: new[] { compiledView });
 
         // Act
@@ -49,7 +49,7 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+        var precompiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(compiledViews: new[] { precompiledView });
 
         // Act
@@ -64,7 +64,7 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var compiledView = new CompiledViewDescriptor { RelativePath = path, };
+        var compiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(compiledViews: new[] { compiledView });
 
         // Act
@@ -79,8 +79,8 @@ public class DefaultViewCompilerTest
     {
         // Arrange
         var path = "/Views/Home/Index.cshtml";
-        var compiledView = new CompiledViewDescriptor { RelativePath = path, };
-        var compiledViews = new List<CompiledViewDescriptor> { compiledView, };
+        var compiledView = new CompiledViewDescriptor { RelativePath = path };
+        var compiledViews = new List<CompiledViewDescriptor> { compiledView };
         var viewCompiler = GetViewCompiler(compiledViews);
 
         // Act - 1

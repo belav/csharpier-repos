@@ -47,7 +47,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item?name={name}&series={series}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -55,7 +55,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -63,7 +63,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -71,8 +71,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 1
-                    }
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
@@ -85,7 +85,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -93,7 +93,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -101,7 +101,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -109,7 +109,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/{id}?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -117,7 +117,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads?name={name}&age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -125,7 +125,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads?name={name}&age={age}&ssn={ssn}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 3
+                        NumberOfParameters = 3,
                     },
                     new
                     {
@@ -133,7 +133,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/{id}?name={name}&ssn={ssn}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 3
+                        NumberOfParameters = 3,
                     },
                     new
                     {
@@ -141,7 +141,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads?name={name}&ssn={ssn}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -149,7 +149,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -157,7 +157,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads?name={name}&age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -165,7 +165,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/{id}?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -173,8 +173,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/{id}?name={name}&age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 3
-                    }
+                        NumberOfParameters = 3,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -215,7 +215,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "myitem?name={name}&series={series}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -223,7 +223,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "myitem",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -231,7 +231,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "myitem",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -239,8 +239,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "myitem/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 1
-                    }
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -281,7 +281,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item/GetItem?name={name}&series={series}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -289,7 +289,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item/PostItem",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -297,7 +297,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item/PostItem",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -305,8 +305,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item/RemoveItem/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 1
-                    }
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
@@ -319,7 +319,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/Get/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -327,7 +327,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/Get",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -335,7 +335,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/Get?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -343,7 +343,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/GetPersonByNameAndId/{id}?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -351,7 +351,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/GetPersonByNameAndAge?name={name}&age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -359,7 +359,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/GetPersonByNameAgeAndSsn?name={name}&age={age}&ssn={ssn}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 3
+                        NumberOfParameters = 3,
                     },
                     new
                     {
@@ -367,7 +367,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/GetPersonByNameIdAndSsn/{id}?name={name}&ssn={ssn}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 3
+                        NumberOfParameters = 3,
                     },
                     new
                     {
@@ -375,7 +375,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/GetPersonByNameAndSsn?name={name}&ssn={ssn}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -383,7 +383,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/Post",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -391,7 +391,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/ActionDefaultedToPost?name={name}&age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -399,7 +399,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/Delete/{id}?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -407,8 +407,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Overloads/Delete/{id}?name={name}&age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 3
-                    }
+                        NumberOfParameters = 3,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -449,8 +449,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "Item/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 1
-                    }
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
             }
@@ -550,7 +550,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "Item?name={name}&series={series}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 2
+                    NumberOfParameters = 2,
                 },
                 new
                 {
@@ -558,7 +558,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "Item",
                     HasRequestFormatters = true,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 1
+                    NumberOfParameters = 1,
                 },
                 new
                 {
@@ -566,7 +566,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "Item",
                     HasRequestFormatters = true,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 1
+                    NumberOfParameters = 1,
                 },
                 new
                 {
@@ -574,8 +574,8 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "Item/{id}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = false,
-                    NumberOfParameters = 1
-                }
+                    NumberOfParameters = 1,
+                },
             };
             ApiExplorerHelper.VerifyApiDescriptions(descriptions, expectedResults);
         }
@@ -605,8 +605,8 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "AmbiguousAction/{id}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 1
-                }
+                    NumberOfParameters = 1,
+                },
             };
             ApiExplorerHelper.VerifyApiDescriptions(descriptions, expectedResults);
         }
@@ -641,7 +641,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{majorVersion}/{minorVersion}/custom?name={name}&series={series}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 4
+                    NumberOfParameters = 4,
                 },
                 new
                 {
@@ -649,7 +649,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{majorVersion}/{minorVersion}/custom",
                     HasRequestFormatters = true,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 3
+                    NumberOfParameters = 3,
                 },
                 new
                 {
@@ -657,7 +657,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{majorVersion}/{minorVersion}/custom",
                     HasRequestFormatters = true,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 3
+                    NumberOfParameters = 3,
                 },
                 new
                 {
@@ -665,7 +665,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{majorVersion}/{minorVersion}/custom?id={id}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = false,
-                    NumberOfParameters = 3
+                    NumberOfParameters = 3,
                 },
                 new
                 {
@@ -673,7 +673,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{version}/Item?name={name}&series={series}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 3
+                    NumberOfParameters = 3,
                 },
                 new
                 {
@@ -681,7 +681,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{version}/Item",
                     HasRequestFormatters = true,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 2
+                    NumberOfParameters = 2,
                 },
                 new
                 {
@@ -689,7 +689,7 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{version}/Item",
                     HasRequestFormatters = true,
                     HasResponseFormatters = true,
-                    NumberOfParameters = 2
+                    NumberOfParameters = 2,
                 },
                 new
                 {
@@ -697,8 +697,8 @@ namespace System.Web.Http.ApiExplorer
                     RelativePath = "{version}/Item/{id}",
                     HasRequestFormatters = false,
                     HasResponseFormatters = false,
-                    NumberOfParameters = 2
-                }
+                    NumberOfParameters = 2,
+                },
             };
             ApiExplorerHelper.VerifyApiDescriptions(descriptions, expectedResults);
         }

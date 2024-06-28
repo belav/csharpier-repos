@@ -24,7 +24,7 @@ public class FirstNameAttribute : ValidationProviderAttribute
         {
             new RequiredAttribute(),
             new RegularExpressionAttribute(pattern: "[A-Za-z]*"),
-            new StringLengthAttribute(maximumLength: 5)
+            new StringLengthAttribute(maximumLength: 5),
         };
     }
 }

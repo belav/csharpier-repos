@@ -148,7 +148,7 @@ namespace System.Web.Http.ModelBinding
             {
                 ItemName = "Bike",
                 Quantity = 1,
-                Customer = new ModelBindCustomer { Name = "Fred" }
+                Customer = new ModelBindCustomer { Name = "Fred" },
             };
             var formatter = new MediaTypeFormatterCollection().FindWriter(
                 typeof(ModelBindOrder),
@@ -184,7 +184,7 @@ namespace System.Web.Http.ModelBinding
             {
                 ItemName = "Bike",
                 Quantity = 1,
-                Customer = new ModelBindCustomer { Name = "Fred" }
+                Customer = new ModelBindCustomer { Name = "Fred" },
             };
             var formatter = new MediaTypeFormatterCollection().FindWriter(
                 typeof(ModelBindOrder),

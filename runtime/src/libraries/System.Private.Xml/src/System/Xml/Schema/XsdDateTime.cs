@@ -26,7 +26,9 @@ namespace System.Xml.Schema
         XdrDateTimeNoTz = 0x100,
         XdrDateTime = 0x200,
         XdrTimeNoTz = 0x400, //XDRTime with tz is the same as xsd:time
-        AllXsd = 0xFF //All still does not include the XDR formats
+        AllXsd =
+            0xFF //All still does not include the XDR formats
+        ,
     }
 
     /// <summary>
@@ -69,6 +71,7 @@ namespace System.Xml.Schema
             Zulu,
             LocalWestOfZulu, // GMT-1..14, N..Y
             LocalEastOfZulu // GMT+1..14, A..M
+            ,
         }
 
         // Masks and shifts used for packing and unpacking extra
@@ -405,16 +408,14 @@ namespace System.Xml.Schema
                 XsdDateTimeKind.Zulu => new DateTime(_dt.Ticks, DateTimeKind.Utc),
 
                 // Adjust to UTC and then convert to local in the current time zone
-                XsdDateTimeKind.LocalEastOfZulu =>
-                    new DateTime(
-                        _dt.Subtract(new TimeSpan(ZoneHour, ZoneMinute, 0)).Ticks,
-                        DateTimeKind.Utc
-                    ),
-                XsdDateTimeKind.LocalWestOfZulu =>
-                    new DateTime(
-                        _dt.Add(new TimeSpan(ZoneHour, ZoneMinute, 0)).Ticks,
-                        DateTimeKind.Utc
-                    ),
+                XsdDateTimeKind.LocalEastOfZulu => new DateTime(
+                    _dt.Subtract(new TimeSpan(ZoneHour, ZoneMinute, 0)).Ticks,
+                    DateTimeKind.Utc
+                ),
+                XsdDateTimeKind.LocalWestOfZulu => new DateTime(
+                    _dt.Add(new TimeSpan(ZoneHour, ZoneMinute, 0)).Ticks,
+                    DateTimeKind.Utc
+                ),
                 _ => _dt,
             };
 
@@ -759,7 +760,7 @@ namespace System.Xml.Schema
             XmlTypeCode.GYear,
             XmlTypeCode.GMonthDay,
             XmlTypeCode.GDay,
-            XmlTypeCode.GMonth
+            XmlTypeCode.GMonth,
         };
 
         // Parsing string according to XML schema spec

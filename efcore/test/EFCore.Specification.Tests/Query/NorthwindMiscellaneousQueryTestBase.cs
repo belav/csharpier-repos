@@ -755,7 +755,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         CustomerIDA = ca.CustomerID,
                         CustomerIDB = cb.CustomerID,
                         ContactNameA = ca.ContactName,
-                        ContactNameB = cb.ContactName
+                        ContactNameB = cb.ContactName,
                     }
                 ).Skip(10).Take(5), e => e.OrderID);
 
@@ -775,7 +775,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         c.CustomerID,
                         Data1 = hasData ? customer.CustomerID : "none",
                         Data2 = customer != null ? customer.CustomerID : "none",
-                        Data3 = !hasData ? "none" : customer.CustomerID
+                        Data3 = !hasData ? "none" : customer.CustomerID,
                     })
         );
     }
@@ -794,7 +794,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         // ReSharper disable SimplifyConditionalTernaryExpression
                         Data1 = param != null ? o.OrderDate == param.Value : true,
-                        Data2 = param == null ? true : o.OrderDate == param.Value
+                        Data2 = param == null ? true : o.OrderDate == param.Value,
                         // ReSharper restore SimplifyConditionalTernaryExpression
                     })
         );
@@ -829,7 +829,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 ss.Set<Customer>()
                     .Select(c => new
                     {
-                        Result = test ?? values.Select(c2 => c2.CustomerID).Contains(c.CustomerID)
+                        Result = test ?? values.Select(c2 => c2.CustomerID).Contains(c.CustomerID),
                     })
         );
     }
@@ -1309,7 +1309,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 {
                     t.e,
                     t.o,
-                    c
+                    c,
                 }
         );
 
@@ -1413,7 +1413,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(e => new
                     {
                         e.A,
-                        Orders = ss.Set<Order>().Where(o => o.CustomerID == e.CustomerID).ToList()
+                        Orders = ss.Set<Order>().Where(o => o.CustomerID == e.CustomerID).ToList(),
                     }),
             elementSorter: e => e.A.Id,
             elementAsserter: (e, a) =>
@@ -1438,7 +1438,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             .Select(e => new
             {
                 e.A,
-                Orders = context.Set<Order>().Where(o => o.CustomerID == e.CustomerID).ToList()
+                Orders = context.Set<Order>().Where(o => o.CustomerID == e.CustomerID).ToList(),
             });
 
         var actual = async
@@ -1458,7 +1458,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .GetExpectedData()
                     .Set<Order>()
                     .Where(o => o.CustomerID == e.CustomerID)
-                    .ToList()
+                    .ToList(),
             })
             .ToList()
             .OrderBy(e => e.A.Id)
@@ -1650,7 +1650,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                 .OrderBy(o => o.OrderID)
                                 .ThenBy(o => c.CustomerID)
                                 .Skip(100)
-                                .Take(2)
+                                .Take(2),
                         }
                 ),
             typeof(IQueryable<Order>).ShortDisplayName()
@@ -1713,7 +1713,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                 )
                                 .Select(o => o.OrderID)
                                 .OrderBy(o => o),
-                            Customer = c
+                            Customer = c,
                         },
                     elementAsserter: (e, a) =>
                     {
@@ -1766,7 +1766,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         .Select(o => o.OrderID)
                         .OrderBy(o => o)
                         .ToArray(),
-                    Customer = c
+                    Customer = c,
                 },
             elementAsserter: (e, a) =>
             {
@@ -2258,7 +2258,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         {
                             e1,
                             s,
-                            c
+                            c,
                         },
                     e => (e.e1.EmployeeID, e.c.CustomerID)
                 )
@@ -2298,7 +2298,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 {
                     e1,
                     c,
-                    e2.FirstName
+                    e2.FirstName,
                 },
             e => (e.e1.EmployeeID, e.c.CustomerID, e.FirstName)
         );
@@ -2318,7 +2318,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     e2,
                     e3,
                     e1,
-                    e4
+                    e4,
                 },
             e => (e.e2.EmployeeID, e.e3.EmployeeID, e.e1.EmployeeID, e.e4.EmployeeID)
         );
@@ -2348,7 +2348,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                 {
                     e1.City,
                     e2.Country,
-                    e3.FirstName
+                    e3.FirstName,
                 },
             e => (e.City, e.Country, e.FirstName)
         );
@@ -2571,7 +2571,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             {
                                 e.cr,
                                 e.or,
-                                od
+                                od,
                             }
                     )
                     .Where(r => r.cr.City == "London")
@@ -3227,7 +3227,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         c.CompanyName,
-                        Region = c.Region ?? "ZZ"
+                        Region = c.Region ?? "ZZ",
                     })
                     .OrderBy(o => o.Region)
                     .ThenBy(o => o.CustomerID),
@@ -3280,7 +3280,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         c.CompanyName,
-                        Region = c.Region ?? "ZZ"
+                        Region = c.Region ?? "ZZ",
                     }),
             e => e.CustomerID
         );
@@ -3313,7 +3313,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         c.CompanyName,
-                        Region = c.Region ?? "ZZ"
+                        Region = c.Region ?? "ZZ",
                     })
                     .OrderBy(c => c.Region)
                     .Take(5),
@@ -3331,7 +3331,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         c.CompanyName,
-                        Region = c.Region ?? "ZZ"
+                        Region = c.Region ?? "ZZ",
                     })
                     .OrderBy(c => c.Region)
                     .Take(10)
@@ -3350,7 +3350,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         c.CompanyName,
-                        c.Region
+                        c.Region,
                     })
                     .OrderBy(c => c.Region ?? "ZZ")
                     .Take(10)
@@ -3819,7 +3819,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR"
+                        Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR",
                     })
         );
 
@@ -3836,7 +3836,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         c.CustomerID,
                         Value = c.CustomerID == "ALFKI"
                             | c.CustomerID == "ANATR"
-                            | c.CustomerID == "ANTON"
+                            | c.CustomerID == "ANTON",
                     })
         );
 
@@ -3851,7 +3851,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         c.CustomerID,
-                        Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
+                        Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR",
                     })
         );
 
@@ -3867,7 +3867,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
-                            | c.CustomerID == "ANTON"
+                            | c.CustomerID == "ANTON",
                     })
         );
 
@@ -3951,7 +3951,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         Value = c.CustomerID == "ALFKI" | c.CustomerID == "ANATR"
-                            || c.CustomerID == "ANTON"
+                            || c.CustomerID == "ANTON",
                     })
         );
 
@@ -3967,7 +3967,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         Value = c.CustomerID == "ALFKI" & c.CustomerID == "ANATR"
-                            && c.CustomerID == "ANTON"
+                            && c.CustomerID == "ANTON",
                     })
         );
 
@@ -4160,7 +4160,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(o => new
                     {
                         OrderId = o.OrderID,
-                        ss.Set<Customer>().SingleOrDefault(c => c.CustomerID == o.CustomerID).City
+                        ss.Set<Customer>().SingleOrDefault(c => c.CustomerID == o.CustomerID).City,
                     })
                     .OrderBy(o => o.City),
             assertOrder: true
@@ -4183,7 +4183,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         City = EF.Property<string>(
                             ss.Set<Customer>().SingleOrDefault(c => c.CustomerID == o.CustomerID),
                             "City"
-                        )
+                        ),
                     })
                     .OrderBy(o => o.City),
             assertOrder: true
@@ -4257,7 +4257,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(o => o.OrderDate != null)
                     .Select(o => new Order
                     {
-                        ShipName = o.OrderID.ToString(new CultureInfo("en-US"))
+                        ShipName = o.OrderID.ToString(new CultureInfo("en-US")),
                     }),
             e => e.ShipName
         );
@@ -4333,7 +4333,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(o => o.OrderDate != null)
                     .Select(o => new Order
                     {
-                        OrderDate = o.OrderDate.Value.AddTicks(TimeSpan.TicksPerMillisecond)
+                        OrderDate = o.OrderDate.Value.AddTicks(TimeSpan.TicksPerMillisecond),
                     }),
             e => e.OrderDate
         );
@@ -4348,7 +4348,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(o => o.OrderDate != null)
                     .Select(o => new Order
                     {
-                        OrderDate = o.OrderDate.Value.AddMilliseconds(1000000000000)
+                        OrderDate = o.OrderDate.Value.AddMilliseconds(1000000000000),
                     }),
             e => e.OrderDate
         );
@@ -4363,7 +4363,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(o => o.OrderDate != null)
                     .Select(o => new Order
                     {
-                        OrderDate = o.OrderDate.Value.AddMilliseconds(-1000000000000)
+                        OrderDate = o.OrderDate.Value.AddMilliseconds(-1000000000000),
                     })
         );
 
@@ -4383,7 +4383,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             .OrderDate.Value.AddDays(
                                 o.OrderDate.Value.Millisecond / millisecondsPerDay
                             )
-                            .AddMilliseconds(o.OrderDate.Value.Millisecond % millisecondsPerDay)
+                            .AddMilliseconds(o.OrderDate.Value.Millisecond % millisecondsPerDay),
                     }),
             e => e.OrderDate
         );
@@ -4400,7 +4400,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .OrderBy(o => o.OrderID)
                     .Select(o => new
                     {
-                        Test = new DateTime(1900, 1, 1).AddMinutes(o.OrderID % 25)
+                        Test = new DateTime(1900, 1, 1).AddMinutes(o.OrderID % 25),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) => AssertEqual(e.Test, a.Test)
@@ -4485,7 +4485,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         o1.OrderID,
-                        o2.OrderDate
+                        o2.OrderDate,
                     }
                 ),
             e => (e.CustomerID, e.OrderID)
@@ -4509,7 +4509,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     {
                         c.CustomerID,
                         o1.OrderID,
-                        o2.OrderDate
+                        o2.OrderDate,
                     }
                 ),
             e => (e.CustomerID, e.OrderID)
@@ -4718,7 +4718,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             on new { o.CustomerID, o.OrderID } equals new
                             {
                                 c.CustomerID,
-                                OrderID = 10000
+                                OrderID = 10000,
                             }
                             into grouping
                         from c in ClientDefaultIfEmpty(grouping)
@@ -4746,7 +4746,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             on new { o.OrderID, o.CustomerID } equals new
                             {
                                 OrderID = 10000,
-                                c.CustomerID
+                                c.CustomerID,
                             }
                             into grouping
                         from c in ClientDefaultIfEmpty(grouping)
@@ -4922,7 +4922,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Where(c => c.Orders.Count > 1)
                     .Select(c => new
                     {
-                        A = c.Orders.OrderByDescending(o => o.OrderID).FirstOrDefault().OrderDate
+                        A = c.Orders.OrderByDescending(o => o.OrderID).FirstOrDefault().OrderDate,
                     })
                     .OrderBy(n => n.A),
             assertOrder: true
@@ -5066,7 +5066,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         Property = c
                             .Orders.OrderByDescending(o => o.OrderID)
                             .FirstOrDefault()
-                            .OrderDate
+                            .OrderDate,
                     })
                     .OrderBy(n => n.Property),
             assertOrder: true,
@@ -5550,9 +5550,9 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             .Orders.Select(o => new
                             {
                                 InnerOrder = c.Orders.Count(),
-                                Id = c.CustomerID
+                                Id = c.CustomerID,
                             })
-                            .ToList()
+                            .ToList(),
                     }),
             elementAsserter: (e, a) =>
             {
@@ -5574,7 +5574,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         c.CustomerID,
-                        OuterOrders = c.Orders.Count(o => c.Orders.Count() > 0)
+                        OuterOrders = c.Orders.Count(o => c.Orders.Count() > 0),
                     })
         );
 
@@ -5898,7 +5898,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
             o => o.OrderID,
             o => o.OrderDate,
             o => o.Customer.CustomerID,
-            o => o.Customer.City
+            o => o.Customer.City,
         };
 
         return AssertQuery(
@@ -5967,7 +5967,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(e => new
                     {
                         e.Item.OrderID,
-                        ProductIds = e.Item.OrderDetails.Select(od => od.ProductID).ToList()
+                        ProductIds = e.Item.OrderDetails.Select(od => od.ProductID).ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -5996,7 +5996,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(e => new
                     {
                         e.Item.OrderID,
-                        ProductIds = e.Item.OrderDetails.Select(od => od.ProductID).ToList()
+                        ProductIds = e.Item.OrderDetails.Select(od => od.ProductID).ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -6026,7 +6026,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(e => new
                     {
                         e.Item.OrderID,
-                        ProductIds = e.Item.OrderDetails.Select(od => od.ProductID).ToList()
+                        ProductIds = e.Item.OrderDetails.Select(od => od.ProductID).ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -6240,7 +6240,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         var customers = new List<Customer>
         {
             null,
-            new() { CustomerID = "ALFKI" }
+            new() { CustomerID = "ALFKI" },
         };
 
         return AssertQuery(async, ss => ss.Set<Customer>().Where(c => customers.Contains(c)));
@@ -6261,7 +6261,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new Dto(randomString)
                     {
                         CustomerID = c.CustomerID,
-                        NestedDto = new Dto(randomString)
+                        NestedDto = new Dto(randomString),
                     }),
             elementSorter: e => e.CustomerID,
             elementAsserter: (e, a) => Assert.Equal(e.CustomerID, a.CustomerID)
@@ -6527,7 +6527,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             c
                                 .Orders.OrderBy(e => e.OrderDate)
                                 .FirstOrDefault()
-                                .Customer.Orders.Any(e => e.OrderID < 11000)
+                                .Customer.Orders.Any(e => e.OrderID < 11000),
                     }),
             ss =>
                 ss.Set<Customer>()
@@ -6540,7 +6540,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                                 .Orders.OrderBy(e => e.OrderDate)
                                 .FirstOrDefault()
                                 .Customer.Orders.Any(e => e.OrderID < 11000)
-                            : (bool?)false
+                            : (bool?)false,
                     }),
             assertOrder: true
         );
@@ -6574,7 +6574,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         c.CustomerID,
-                        Sum = c.Orders.Select(o => o.OrderID).DefaultIfEmpty().Sum()
+                        Sum = c.Orders.Select(o => o.OrderID).DefaultIfEmpty().Sum(),
                     }),
             elementSorter: c => c.CustomerID
         );
@@ -6591,7 +6591,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         c.CustomerID,
                         Order = (c.Orders.Any() ? c.Orders.FirstOrDefault() : null) == null
                             ? null
-                            : new { c.Orders.OrderBy(o => o.OrderID).FirstOrDefault().OrderDate }
+                            : new { c.Orders.OrderBy(o => o.OrderID).FirstOrDefault().OrderDate },
                     }),
             elementSorter: c => c.CustomerID,
             elementAsserter: (e, a) => AssertEqual(e.Order, a.Order)
@@ -6626,7 +6626,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         CustomerID = x.CustomerID,
                         OrderDate = x
                             .Orders.FirstOrDefault(t => t.OrderID == t.OrderID)
-                            .MaybeScalar(e => e.OrderDate)
+                            .MaybeScalar(e => e.OrderDate),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -6644,7 +6644,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
         public static readonly Expression<Func<Customer, TestDto>> Projection = x => new TestDto
         {
             CustomerID = x.CustomerID,
-            OrderDate = x.Orders.FirstOrDefault(t => t.OrderID == t.OrderID).OrderDate
+            OrderDate = x.Orders.FirstOrDefault(t => t.OrderID == t.OrderID).OrderDate,
         };
     }
 
@@ -6660,7 +6660,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Select(c => new
                     {
                         c.CustomerID,
-                        OrderDate = c.Orders.Any() ? c.Orders.First().OrderDate : default
+                        OrderDate = c.Orders.Any() ? c.Orders.First().OrderDate : default,
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -6777,7 +6777,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                     .Customers.Select(c => new
                     {
                         c.CustomerID,
-                        Orders = context.Orders.Where(o => o.Customer.CustomerID == c.CustomerID)
+                        Orders = context.Orders.Where(o => o.Customer.CustomerID == c.CustomerID),
                     })
                     .ToListAsync()
             )
@@ -6788,7 +6788,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         y => x.CustomerID,
                         y => y,
                         (h, id) => new { h.Customer }
-                    )
+                    ),
                 })
                 .ToList();
 
@@ -6849,7 +6849,7 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                         Subquery = c
                             .Orders.Select(o => new { First = o.OrderID, Second = o.OrderDate })
                             .Distinct()
-                            .ToList()
+                            .ToList(),
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -6885,10 +6885,10 @@ public abstract class NorthwindMiscellaneousQueryTestBase<TFixture> : QueryTestB
                             {
                                 First = o.OrderID,
                                 Second = o.OrderDate,
-                                Third = o.Customer.City
+                                Third = o.Customer.City,
                             })
                             .Distinct()
-                            .ToList()
+                            .ToList(),
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>

@@ -44,7 +44,7 @@ namespace System.Net.Http
         {
             Headers.ContentType = new MediaTypeHeaderValue(mediaType ?? "text/plain")
             {
-                CharSet = (encoding ?? Encoding.UTF8).WebName
+                CharSet = (encoding ?? Encoding.UTF8).WebName,
             };
         }
 

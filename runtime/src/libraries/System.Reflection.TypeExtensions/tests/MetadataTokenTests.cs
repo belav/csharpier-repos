@@ -39,7 +39,7 @@ namespace System.Reflection.Tests
             new object[] { typeof(MetadataTokenTests).GetProperties()[0], 0x17 },
             new object[] { typeof(MetadataTokenTests).GetEvents()[0], 0x14 },
             new object[] { typeof(MetadataTokenTests).GetFields()[0], 0x04 },
-            new object[] { typeof(Test<>).GetGenericArguments()[0].GetTypeInfo(), 0x2A }
+            new object[] { typeof(Test<>).GetGenericArguments()[0].GetTypeInfo(), 0x2A },
         };
 
         [ActiveIssue("https://github.com/mono/mono/issues/15194", TestRuntimes.Mono)]

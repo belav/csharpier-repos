@@ -52,7 +52,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
             var msg = new MessageContractsCD1.OnlineAnnouncement()
             {
                 EndpointDiscoveryMetadata = md,
-                MessageSequence = seq
+                MessageSequence = seq,
             };
             return Channel.BeginOnlineAnnouncement(msg, callback, state);
         }
@@ -74,7 +74,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
             var msg = new MessageContractsCD1.OfflineAnnouncement()
             {
                 EndpointDiscoveryMetadata = md,
-                MessageSequence = seq
+                MessageSequence = seq,
             };
             return Channel.BeginOfflineAnnouncement(msg, callback, state);
         }

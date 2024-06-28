@@ -21,7 +21,7 @@ namespace System.CodeDom
     ///       snippet member of a class.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeSnippetTypeMember : CodeTypeMember
     {
         private string text;

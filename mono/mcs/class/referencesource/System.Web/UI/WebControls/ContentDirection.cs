@@ -24,6 +24,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    [To be supplied.]
         /// </devdoc>
-        RightToLeft
+        RightToLeft,
     }
 }

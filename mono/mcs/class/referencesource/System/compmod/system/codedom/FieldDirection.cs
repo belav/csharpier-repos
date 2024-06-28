@@ -16,7 +16,7 @@ namespace System.CodeDom
     ///       Specifies values used to indicate field and parameter directions.
     ///    </para>
     /// </devdoc>
-    [ComVisible(true), Serializable,]
+    [ComVisible(true), Serializable]
     public enum FieldDirection
     {
         /// <devdoc>

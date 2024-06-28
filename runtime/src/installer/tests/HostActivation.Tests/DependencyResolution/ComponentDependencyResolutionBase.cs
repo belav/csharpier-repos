@@ -78,7 +78,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     run_app_and_resolve,
                     Path.Combine(hostFxrFolder, Binaries.HostFxr.FileName),
                     hostApp.AppDll,
-                    componentPath
+                    componentPath,
                 };
 
                 Command command = Command
@@ -117,7 +117,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     Path.Combine(hostFxrFolder, Binaries.HostFxr.FileName),
                     hostApp.AppDll,
                     componentOnePath,
-                    componentTwoPath
+                    componentTwoPath,
                 };
 
                 return Command

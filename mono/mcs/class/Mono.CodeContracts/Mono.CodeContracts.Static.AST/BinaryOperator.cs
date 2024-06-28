@@ -64,7 +64,7 @@ namespace Mono.CodeContracts.Static.AST
         Sub,
         Sub_Ovf,
         Sub_Ovf_Un,
-        Xor
+        Xor,
     }
 
     static class BinaryOperatorExtensions

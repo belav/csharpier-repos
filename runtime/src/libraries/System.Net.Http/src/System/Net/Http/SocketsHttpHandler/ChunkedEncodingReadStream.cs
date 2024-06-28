@@ -308,10 +308,9 @@ namespace System.Net.Http
                 ValidateCopyToArguments(destination, bufferSize);
 
                 return cancellationToken.IsCancellationRequested
-                    ? Task.FromCanceled(cancellationToken)
-                    : _connection == null
-                        ? Task.CompletedTask
-                        : CopyToAsyncCore(destination, cancellationToken);
+                        ? Task.FromCanceled(cancellationToken)
+                    : _connection == null ? Task.CompletedTask
+                    : CopyToAsyncCore(destination, cancellationToken);
             }
 
             private async Task CopyToAsyncCore(
@@ -599,7 +598,7 @@ namespace System.Net.Http
                 ExpectChunkData,
                 ExpectChunkTerminator,
                 ConsumeTrailers,
-                Done
+                Done,
             }
 
             public override bool NeedsDrain => CanReadFromConnection;

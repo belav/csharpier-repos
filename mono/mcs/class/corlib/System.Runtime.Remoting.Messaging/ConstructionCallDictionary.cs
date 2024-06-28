@@ -48,7 +48,7 @@ namespace System.Runtime.Remoting.Messaging
             "__ActivationType",
             "__ContextProperties",
             "__Activator",
-            "__ActivationTypeName"
+            "__ActivationTypeName",
         };
 
         public ConstructionCallDictionary(IConstructionCallMessage message)

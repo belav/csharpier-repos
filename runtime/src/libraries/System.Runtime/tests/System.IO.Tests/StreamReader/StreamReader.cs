@@ -50,7 +50,7 @@ namespace System.IO.Tests
             yield return new object[] { new UTF32Encoding(bigEndian: true, byteOrderMark: true) };
             yield return new object[]
             {
-                new UnicodeEncoding(bigEndian: false, byteOrderMark: true)
+                new UnicodeEncoding(bigEndian: false, byteOrderMark: true),
             };
             yield return new object[] { new UnicodeEncoding(bigEndian: true, byteOrderMark: true) };
         }

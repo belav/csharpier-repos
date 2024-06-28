@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     TestReferences.SymbolsTests.Methods.CSMethods,
                     TestReferences.SymbolsTests.Methods.VBMethods,
                     Net40.mscorlib,
-                    TestReferences.SymbolsTests.Methods.ByRefReturn
+                    TestReferences.SymbolsTests.Methods.ByRefReturn,
                 },
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(
                     MetadataImportOptions.Internal
@@ -1653,7 +1653,7 @@ public class D
             {
                 MetadataReference.CreateFromImage(
                     TestResources.SymbolsTests.Metadata.PublicAndPrivateFlags
-                )
+                ),
             };
 
             var comp = CreateCompilation(source, references: references);

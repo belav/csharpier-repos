@@ -81,8 +81,8 @@ public class ControllerTest
             AuthenticationTokens = new[]
             {
                 new AuthenticationToken { Name = "refresh_token", Value = "refresh" },
-                new AuthenticationToken { Name = "access_token", Value = "access" }
-            }
+                new AuthenticationToken { Name = "access_token", Value = "access" },
+            },
         };
 
         var context = new DefaultHttpContext();

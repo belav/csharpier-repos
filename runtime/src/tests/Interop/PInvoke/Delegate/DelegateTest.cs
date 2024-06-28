@@ -38,7 +38,7 @@ public class DelegateTest
             CallbackWithExpectedValue cb = new CallbackWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateCallbackWithValue(cb));
@@ -48,7 +48,7 @@ public class DelegateTest
             CallbackWithExpectedValue cb = new CallbackWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateAndUpdateCallbackWithValue(ref cb));
@@ -91,7 +91,7 @@ public class DelegateTest
             var cb = new DispatchDelegateWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateStructDelegateValueMatchesExpected(cb));
@@ -101,7 +101,7 @@ public class DelegateTest
             var cb = new DispatchDelegateWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(ValidateDelegateValueMatchesExpectedAndClearStruct(ref cb));
@@ -112,7 +112,7 @@ public class DelegateTest
             var cb = new DispatchDelegateWithExpectedValue
             {
                 expectedValue = expectedValue,
-                del = TestFunction
+                del = TestFunction,
             };
 
             Assert.True(DuplicateStruct(cb, out var cbOut));

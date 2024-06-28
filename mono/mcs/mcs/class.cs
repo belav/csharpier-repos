@@ -600,7 +600,7 @@ namespace Mono.CSharp
         {
             Equals = 1,
             GetHashCode = 1 << 1,
-            HasStaticFieldInitializer = 1 << 2
+            HasStaticFieldInitializer = 1 << 2,
         }
 
         readonly List<MemberCore> members;
@@ -1849,7 +1849,7 @@ namespace Mono.CSharp
 
                 var block = new ToplevelBlock(Compiler, proxy_method.ParameterInfo, Location)
                 {
-                    IsCompilerGenerated = true
+                    IsCompilerGenerated = true,
                 };
 
                 var mg = MethodGroupExpr.CreatePredefined(method, method.DeclaringType, Location);
@@ -3386,7 +3386,7 @@ namespace Mono.CSharp
             {
                 c.Block = new ToplevelBlock(Compiler, parameters, Location)
                 {
-                    IsCompilerGenerated = true
+                    IsCompilerGenerated = true,
                 };
             }
             else

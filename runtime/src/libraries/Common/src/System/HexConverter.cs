@@ -782,6 +782,7 @@ namespace System
                 0xFF,
                 0xFF,
                 0xFF // 255
+                ,
             ];
     }
 }

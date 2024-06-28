@@ -170,7 +170,7 @@ namespace System.ServiceModel.Security
                 TokenImpersonationLevel.Anonymous,
                 TokenImpersonationLevel.Identification,
                 TokenImpersonationLevel.Impersonation,
-                TokenImpersonationLevel.Delegation
+                TokenImpersonationLevel.Delegation,
             };
 
         internal static string ToString(TokenImpersonationLevel impersonationLevel)

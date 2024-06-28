@@ -197,7 +197,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                         Range = ProtocolConversions.TextSpanToRange(
                             sourceDefinition.Span.Value,
                             sourceText
-                        )
+                        ),
                     };
                 }
             }
@@ -209,7 +209,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                 return new LSP.Location
                 {
                     Uri = new Uri(sourceDefinition.FilePath),
-                    Range = new LSP.Range() { Start = position, End = position }
+                    Range = new LSP.Range() { Start = position, End = position },
                 };
             }
         }

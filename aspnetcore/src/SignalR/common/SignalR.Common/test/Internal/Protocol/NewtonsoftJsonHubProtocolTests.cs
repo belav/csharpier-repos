@@ -33,8 +33,8 @@ public class NewtonsoftJsonHubProtocolTests : JsonHubProtocolTestsBase
                     : NullValueHandling.Include,
                 ContractResolver = useCamelCase
                     ? new CamelCasePropertyNamesContractResolver()
-                    : new DefaultContractResolver()
-            }
+                    : new DefaultContractResolver(),
+            },
         };
 
         return new NewtonsoftJsonHubProtocol(Options.Create(protocolOptions));

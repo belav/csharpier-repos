@@ -28,7 +28,7 @@ namespace System.Runtime.InteropServices.Marshalling
             {
                 ThisPtr = obj,
                 Table = *obj,
-                ManagedType = details.Implementation.TypeHandle
+                ManagedType = details.Implementation.TypeHandle,
             };
         }
 

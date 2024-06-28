@@ -39,7 +39,7 @@ struct S2
 
 enum E
 {
-    E_1 = 1
+    E_1 = 1,
 }
 
 class Base
@@ -342,11 +342,9 @@ class Tester : Base
                 return true;
             });
 
-        return b
-            ? -1
-            : i == 8
-                ? 0
-                : i;
+        return b ? -1
+            : i == 8 ? 0
+            : i;
     }
 
     async Task<int> BinaryTest_3()
@@ -686,7 +684,7 @@ class Tester : Base
         b = new Base(value, await Task.Factory.StartNew(() => 11))
         {
             field_int = await Task.Factory.StartNew(() => 12),
-            PropertyInt = await Task.Factory.StartNew(() => 13)
+            PropertyInt = await Task.Factory.StartNew(() => 13),
         };
 
         if (b.field_int != 25)
@@ -695,7 +693,7 @@ class Tester : Base
         b = new Base()
         {
             field_int = await Task.Factory.StartNew(() => 12),
-            PropertyInt = await Task.Factory.StartNew(() => 13)
+            PropertyInt = await Task.Factory.StartNew(() => 13),
         };
 
         if (b.field_int != 25)
@@ -714,7 +712,7 @@ class Tester : Base
 
         s = new S(value, await Task.Factory.StartNew(() => "y"))
         {
-            Value = await Task.Factory.StartNew(() => 12)
+            Value = await Task.Factory.StartNew(() => 12),
         };
 
         if (s.Value != 12)
@@ -754,7 +752,7 @@ class Tester : Base
         var a = new ushort[,]
         {
             { await Task.Factory.StartNew(() => (ushort)5), 50 },
-            { 30, await Task.Factory.StartNew(() => (ushort)3) }
+            { 30, await Task.Factory.StartNew(() => (ushort)3) },
         };
 
         return a[0, 0] * a[1, 1] == 15;
@@ -782,7 +780,7 @@ class Tester : Base
             await Task.Factory.StartNew(() => 5),
             11,
             23,
-            45
+            45,
         };
         return a.Length == 13;
     }

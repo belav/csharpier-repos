@@ -445,7 +445,7 @@ public class RazorPageTest
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "bar", () => page.Output.WriteAsync(expected) }
+            { "bar", () => page.Output.WriteAsync(expected) },
         };
 
         // Act
@@ -490,7 +490,7 @@ public class RazorPageTest
         );
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "baz", _nullRenderAsyncDelegate }
+            { "baz", _nullRenderAsyncDelegate },
         };
 
         // Act & Assert
@@ -517,7 +517,7 @@ public class RazorPageTest
         );
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "baz", _nullRenderAsyncDelegate }
+            { "baz", _nullRenderAsyncDelegate },
         };
 
         // Act & Assert
@@ -556,7 +556,7 @@ public class RazorPageTest
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "baz", _nullRenderAsyncDelegate }
+            { "baz", _nullRenderAsyncDelegate },
         };
         page.BodyContent = new HtmlString("body-content");
 
@@ -580,7 +580,7 @@ public class RazorPageTest
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "baz", _nullRenderAsyncDelegate }
+            { "baz", _nullRenderAsyncDelegate },
         };
         page.BodyContent = new HtmlString("body-content");
 
@@ -604,7 +604,7 @@ public class RazorPageTest
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "header", _nullRenderAsyncDelegate }
+            { "header", _nullRenderAsyncDelegate },
         };
 
         // Act & Assert
@@ -629,7 +629,7 @@ public class RazorPageTest
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "header", _nullRenderAsyncDelegate }
+            { "header", _nullRenderAsyncDelegate },
         };
 
         // Act & Assert
@@ -654,7 +654,7 @@ public class RazorPageTest
         });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { "header", _nullRenderAsyncDelegate }
+            { "header", _nullRenderAsyncDelegate },
         };
 
         // Act & Assert
@@ -732,7 +732,7 @@ public class RazorPageTest
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { sectionName, _nullRenderAsyncDelegate }
+            { sectionName, _nullRenderAsyncDelegate },
         };
         await page.ExecuteAsync();
 
@@ -758,7 +758,7 @@ public class RazorPageTest
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
-            { sectionName, _nullRenderAsyncDelegate }
+            { sectionName, _nullRenderAsyncDelegate },
         };
         page.IgnoreSection(sectionName);
 
@@ -782,7 +782,7 @@ public class RazorPageTest
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "ignored", _nullRenderAsyncDelegate },
-            { "not-ignored-section", () => page.Output.WriteAsync("not-ignored-section-content") }
+            { "not-ignored-section", () => page.Output.WriteAsync("not-ignored-section-content") },
         };
 
         // Act
@@ -1062,7 +1062,7 @@ public class RazorPageTest
         var attributeValues = new[]
         {
             Tuple.Create("  ", 9, (object)true, 11, false),
-            Tuple.Create("  ", 9, (object)"abcd", 17, true)
+            Tuple.Create("  ", 9, (object)"abcd", 17, true),
         };
         var page = CreatePage(p => { });
         page.HtmlEncoder = new HtmlTestEncoder();

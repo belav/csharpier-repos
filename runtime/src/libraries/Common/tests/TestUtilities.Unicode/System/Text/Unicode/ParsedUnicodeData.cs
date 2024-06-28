@@ -195,7 +195,7 @@ namespace System.Text.Unicode
                 string resourceName in new[]
                 {
                     Resources.GraphemeBreakProperty,
-                    Resources.EmojiData
+                    Resources.EmojiData,
                 }
             )
             {

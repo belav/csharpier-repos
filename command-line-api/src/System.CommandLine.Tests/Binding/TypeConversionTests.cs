@@ -253,7 +253,7 @@ namespace System.CommandLine.Tests.Binding
         {
             var argument = new CliArgument<string[]>("the-arg")
             {
-                Arity = ArgumentArity.ZeroOrMore
+                Arity = ArgumentArity.ZeroOrMore,
             };
 
             var command = new CliCommand("the-command") { new CliOption<string>("-a"), argument };
@@ -328,7 +328,7 @@ namespace System.CommandLine.Tests.Binding
 
             var option = new CliOption<DirectoryInfo>("-x")
             {
-                DefaultValueFactory = (_) => directoryInfo
+                DefaultValueFactory = (_) => directoryInfo,
             };
 
             var command = new CliCommand("something") { option };
@@ -345,7 +345,7 @@ namespace System.CommandLine.Tests.Binding
 
             var argument = new CliArgument<DirectoryInfo>("the-arg")
             {
-                DefaultValueFactory = (_) => directoryInfo
+                DefaultValueFactory = (_) => directoryInfo,
             };
 
             var command = new CliCommand("something") { argument };
@@ -490,7 +490,7 @@ namespace System.CommandLine.Tests.Binding
                             out var uri
                         )
                             ? uri
-                            : null
+                            : null,
                 };
 
             GetValue(option, "-x http://example.com")
@@ -552,7 +552,7 @@ namespace System.CommandLine.Tests.Binding
                 new("-us")
                 {
                     CustomParser = (argumentResult) =>
-                        IPAddress.Parse(argumentResult.Tokens.Last().Value)
+                        IPAddress.Parse(argumentResult.Tokens.Last().Value),
                 };
 
             GetValue(option, "-us 1.2.3.4").Should().Be(IPAddress.Parse("1.2.3.4"));
@@ -566,7 +566,7 @@ namespace System.CommandLine.Tests.Binding
                 new("-us")
                 {
                     CustomParser = (argumentResult) =>
-                        IPEndPoint.Parse(argumentResult.Tokens.Last().Value)
+                        IPEndPoint.Parse(argumentResult.Tokens.Last().Value),
                 };
 
             GetValue(option, "-us 1.2.3.4:56").Should().Be(IPEndPoint.Parse("1.2.3.4:56"));

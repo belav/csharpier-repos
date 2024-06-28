@@ -108,7 +108,7 @@ namespace Newtonsoft.Json
             /// <summary>
             /// The end of the file has been reached successfully.
             /// </summary>
-            Finished
+            Finished,
         }
 
         // current Token data

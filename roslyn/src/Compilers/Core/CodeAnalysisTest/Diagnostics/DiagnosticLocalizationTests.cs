@@ -193,7 +193,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 { "Resource1", "My Resource 1 DefaultCulture string" },
                 { "Resource2", "My Resource 2 DefaultCulture string" },
                 { "Resource3", "My Resource 3 DefaultCulture string" },
-                { "ResourceWithArguments", "My Resource DefaultCulture string {0}" }
+                { "ResourceWithArguments", "My Resource DefaultCulture string {0}" },
             };
 
             var arResources = new Dictionary<string, string>()
@@ -201,13 +201,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
                 { "Resource1", "ARABIC string for My Resource 1" },
                 { "Resource2", "ARABIC string for My Resource 2" },
                 { "Resource3", "ARABIC string for My Resource 3" },
-                { "ResourceWithArguments", "{0} ARABIC string for My Resource" }
+                { "ResourceWithArguments", "{0} ARABIC string for My Resource" },
             };
 
             var resourceSetMap = new Dictionary<string, Dictionary<string, string>>()
             {
                 { CustomResourceManager.DefaultCulture.Name, defaultCultureResources },
-                { "ar-SA", arResources }
+                { "ar-SA", arResources },
             };
 
             return new CustomResourceManager(resourceSetMap);

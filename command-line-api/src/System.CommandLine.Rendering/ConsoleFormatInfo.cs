@@ -82,7 +82,7 @@ namespace System.CommandLine.Rendering
             return new ConsoleFormatInfo()
             {
                 _isReadOnly = true,
-                _supportsAnsiCodes = supportsAnsi
+                _supportsAnsiCodes = supportsAnsi,
             };
         }
 

@@ -142,7 +142,7 @@ namespace System.Activities
         {
             return new InOutArgument<T>
             {
-                Expression = new VariableReference<T> { Variable = variable }
+                Expression = new VariableReference<T> { Variable = variable },
             };
         }
 

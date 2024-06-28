@@ -297,7 +297,7 @@ namespace DbLinq.PostgreSql
                 "gbt_",
                 "pg_buffercache",
                 "plpgsql_",
-                "plpgsql_call_handler"
+                "plpgsql_call_handler",
             };
 
             foreach (string s in prefixes)

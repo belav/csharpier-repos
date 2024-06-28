@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents an object create expression.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeObjectCreateExpression : CodeExpression
     {
         private CodeTypeReference createType;

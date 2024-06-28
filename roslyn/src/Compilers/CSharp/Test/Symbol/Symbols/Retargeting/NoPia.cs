@@ -395,7 +395,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -528,7 +528,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -640,7 +640,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia4,
                     TestReferences.SymbolsTests.NoPia.Pia1,
-                    MscorlibRef
+                    MscorlibRef,
                 },
                 null
             );
@@ -692,7 +692,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia4,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -720,7 +720,7 @@ public class LocalTypes3
                 targetFramework: TargetFramework.Standard,
                 references: new[]
                 {
-                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true),
                 }
             );
             CompileAndVerify(LocalTypes1);
@@ -732,7 +732,7 @@ public class LocalTypes3
                 targetFramework: TargetFramework.Standard,
                 references: new[]
                 {
-                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true),
                 }
             );
             CompileAndVerify(LocalTypes2);
@@ -744,7 +744,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 }
             );
 
@@ -876,7 +876,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -988,7 +988,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia4,
                     TestReferences.SymbolsTests.NoPia.Pia1,
-                    MscorlibRef
+                    MscorlibRef,
                 },
                 null
             );
@@ -1040,7 +1040,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia4,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -1076,7 +1076,7 @@ public class LocalTypes3
                 targetFramework: TargetFramework.Standard,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(Pia1, embedInteropTypes: true)
+                    new CSharpCompilationReference(Pia1, embedInteropTypes: true),
                 }
             );
             CompileAndVerify(LocalTypes1);
@@ -1088,7 +1088,7 @@ public class LocalTypes3
                 targetFramework: TargetFramework.Standard,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(Pia1, embedInteropTypes: true)
+                    new CSharpCompilationReference(Pia1, embedInteropTypes: true),
                 }
             );
             CompileAndVerify(LocalTypes2);
@@ -1100,7 +1100,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -1233,7 +1233,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia1,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -1345,7 +1345,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia4,
                     TestReferences.SymbolsTests.NoPia.Pia1,
-                    MscorlibRef
+                    MscorlibRef,
                 },
                 null
             );
@@ -1397,7 +1397,7 @@ public class LocalTypes3
                 {
                     TestReferences.SymbolsTests.NoPia.Pia4,
                     MscorlibRef,
-                    TestReferences.SymbolsTests.MDTestLib1
+                    TestReferences.SymbolsTests.MDTestLib1,
                 },
                 null
             );
@@ -1438,7 +1438,7 @@ public class LocalTypes3
                     mscorlibRef,
                     cyclic2Ref,
                     piaRef,
-                    localTypes1Ref
+                    localTypes1Ref,
                 }
             );
             Assert.NotNull(tc1.Assembly); // force creation of SourceAssemblySymbol
@@ -1450,7 +1450,7 @@ public class LocalTypes3
                     mscorlibRef,
                     cyclic2Ref,
                     piaRef,
-                    localTypes1Ref
+                    localTypes1Ref,
                 }
             );
             Assert.NotNull(tc2.Assembly); // force creation of SourceAssemblySymbol
@@ -1477,7 +1477,7 @@ public class LocalTypes3
                 assemblyName: "LocalTypes1",
                 references: new[]
                 {
-                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true),
                 }
             );
             CompileAndVerify(LocalTypes1);
@@ -1491,7 +1491,7 @@ public class LocalTypes3
                     mscorlibRef,
                     cyclic2Ref,
                     piaRef,
-                    localTypes1Ref
+                    localTypes1Ref,
                 }
             );
             Assert.NotNull(tc1.Assembly); // force creation of SourceAssemblySymbol
@@ -1503,7 +1503,7 @@ public class LocalTypes3
                     mscorlibRef,
                     cyclic2Ref,
                     piaRef,
-                    localTypes1Ref
+                    localTypes1Ref,
                 }
             );
             Assert.NotNull(tc2.Assembly); // force creation of SourceAssemblySymbol
@@ -1538,7 +1538,7 @@ public class LocalTypes3
                 assemblyName: "LocalTypes1",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(Pia1, embedInteropTypes: true)
+                    new CSharpCompilationReference(Pia1, embedInteropTypes: true),
                 }
             );
             CompileAndVerify(LocalTypes1);
@@ -1552,7 +1552,7 @@ public class LocalTypes3
                     mscorlibRef,
                     cyclic2Ref,
                     piaRef,
-                    localTypes1Ref
+                    localTypes1Ref,
                 }
             );
             Assert.NotNull(tc1.Assembly); // force creation of SourceAssemblySymbol
@@ -1564,7 +1564,7 @@ public class LocalTypes3
                     mscorlibRef,
                     cyclic2Ref,
                     piaRef,
-                    localTypes1Ref
+                    localTypes1Ref,
                 }
             );
             Assert.NotNull(tc2.Assembly); // force creation of SourceAssemblySymbol
@@ -1847,7 +1847,7 @@ public class C
                 //         var resultingTuple = ((x, y) = new C());
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "(x, y)")
                     .WithArguments("(T1, T2)")
-                    .WithLocation(19, 31)
+                    .WithLocation(19, 31),
             };
 
             var comp1 = CreateCompilationWithMscorlib46(
@@ -1855,7 +1855,7 @@ public class C
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.ToMetadataReference(embedInteropTypes: true)
+                    pia.ToMetadataReference(embedInteropTypes: true),
                 }
             );
             comp1.VerifyDiagnostics(expectedDiagnostics);
@@ -1865,7 +1865,7 @@ public class C
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.EmitToImageReference(embedInteropTypes: true)
+                    pia.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             comp2.VerifyDiagnostics(expectedDiagnostics);
@@ -1923,7 +1923,7 @@ public interface ITest2 : ITest1 { }
                 // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
-                    .WithLocation(1, 1)
+                    .WithLocation(1, 1),
             };
 
             var comp1 = CreateCompilation(
@@ -1931,7 +1931,7 @@ public interface ITest2 : ITest1 { }
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.ToMetadataReference(embedInteropTypes: true)
+                    pia.ToMetadataReference(embedInteropTypes: true),
                 }
             );
             comp1.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -1941,7 +1941,7 @@ public interface ITest2 : ITest1 { }
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.EmitToImageReference(embedInteropTypes: true)
+                    pia.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             comp2.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -1998,7 +1998,7 @@ public interface ITest2 : ITest1 { }
                 // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
-                    .WithLocation(1, 1)
+                    .WithLocation(1, 1),
             };
 
             var comp1 = CreateCompilation(
@@ -2006,7 +2006,7 @@ public interface ITest2 : ITest1 { }
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.ToMetadataReference(embedInteropTypes: true)
+                    pia.ToMetadataReference(embedInteropTypes: true),
                 }
             );
             comp1.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2016,7 +2016,7 @@ public interface ITest2 : ITest1 { }
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.EmitToImageReference(embedInteropTypes: true)
+                    pia.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             comp2.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2060,7 +2060,7 @@ public interface ITest2 : ITest1 { }
                 // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
-                    .WithLocation(1, 1)
+                    .WithLocation(1, 1),
             };
 
             var comp1 = CreateCompilation(
@@ -2068,7 +2068,7 @@ public interface ITest2 : ITest1 { }
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.ToMetadataReference(embedInteropTypes: true)
+                    pia.ToMetadataReference(embedInteropTypes: true),
                 }
             );
             comp1.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2078,7 +2078,7 @@ public interface ITest2 : ITest1 { }
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.EmitToImageReference(embedInteropTypes: true)
+                    pia.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             comp2.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2137,7 +2137,7 @@ public interface ITest2
                 // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
-                    .WithLocation(1, 1)
+                    .WithLocation(1, 1),
             };
 
             var comp1 = CreateCompilation(
@@ -2145,7 +2145,7 @@ public interface ITest2
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.ToMetadataReference(embedInteropTypes: true)
+                    pia.ToMetadataReference(embedInteropTypes: true),
                 }
             );
             comp1.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2155,7 +2155,7 @@ public interface ITest2
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    pia.EmitToImageReference(embedInteropTypes: true)
+                    pia.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             comp2.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2232,7 +2232,7 @@ public class C
                 // error CS1768: Type 'S<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType)
                     .WithArguments("S<T>")
-                    .WithLocation(1, 1)
+                    .WithLocation(1, 1),
             };
 
             var comp1 = CreateCompilationWithMscorlib46(
@@ -2241,7 +2241,7 @@ public class C
                 references: new MetadataReference[]
                 {
                     pia.ToMetadataReference(embedInteropTypes: true),
-                    lib.ToMetadataReference()
+                    lib.ToMetadataReference(),
                 }
             );
             comp1.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2252,7 +2252,7 @@ public class C
                 references: new MetadataReference[]
                 {
                     pia.EmitToImageReference(embedInteropTypes: true),
-                    lib.EmitToImageReference()
+                    lib.EmitToImageReference(),
                 }
             );
             comp2.VerifyEmitDiagnostics(expectedDiagnostics);
@@ -2305,7 +2305,7 @@ namespace System
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(pia).WithEmbedInteropTypes(true)
+                    new CSharpCompilationReference(pia).WithEmbedInteropTypes(true),
                 }
             );
             comp1.VerifyDiagnostics(
@@ -2336,7 +2336,9 @@ namespace System
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromImage(pia.EmitToArray()).WithEmbedInteropTypes(true)
+                    MetadataReference
+                        .CreateFromImage(pia.EmitToArray())
+                        .WithEmbedInteropTypes(true),
                 }
             );
             comp2.VerifyDiagnostics(
@@ -2372,7 +2374,7 @@ namespace System
                 assemblyName: "LocalTypes3",
                 references: new[]
                 {
-                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.Pia1.WithEmbedInteropTypes(true),
                 }
             );
             CompileAndVerify(LocalTypes3);
@@ -2461,7 +2463,7 @@ namespace System
                 assemblyName: "LocalTypes3",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(Pia1, embedInteropTypes: true)
+                    new CSharpCompilationReference(Pia1, embedInteropTypes: true),
                 }
             );
             CompileAndVerify(LocalTypes3);
@@ -2613,7 +2615,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -2634,7 +2636,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     localTypes2Image,
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -2655,7 +2657,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    piaImage
+                    piaImage,
                 }
             );
 
@@ -2766,7 +2768,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -2787,7 +2789,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     localTypes2Image,
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -2808,7 +2810,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    piaImage
+                    piaImage,
                 }
             );
 
@@ -2919,7 +2921,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -2946,7 +2948,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     localTypes2Image,
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -2973,7 +2975,7 @@ public struct S1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    piaImage
+                    piaImage,
                 }
             );
 
@@ -3074,7 +3076,7 @@ interface AttrTest1
                 assemblyName: "LocalTypes2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(pia, embedInteropTypes: true)
+                    new CSharpCompilationReference(pia, embedInteropTypes: true),
                 }
             );
 
@@ -3086,7 +3088,7 @@ interface AttrTest1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -3107,7 +3109,7 @@ interface AttrTest1
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    piaImage
+                    piaImage,
                 }
             );
 
@@ -3202,7 +3204,7 @@ public struct S2<T>
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -3223,7 +3225,7 @@ public struct S2<T>
                 references: new MetadataReference[]
                 {
                     localTypes2Image,
-                    new CSharpCompilationReference(pia)
+                    new CSharpCompilationReference(pia),
                 }
             );
 
@@ -3244,7 +3246,7 @@ public struct S2<T>
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(localTypes2),
-                    piaImage
+                    piaImage,
                 }
             );
 
@@ -3349,7 +3351,7 @@ public class Consumer
                 references: new[]
                 {
                     new CSharpCompilationReference(multiModule),
-                    new CSharpCompilationReference(pia1)
+                    new CSharpCompilationReference(pia1),
                 }
             );
 
@@ -3406,7 +3408,7 @@ class UsePia2
                 MetadataReference piaRef in new[]
                 {
                     piaCompilation.EmitToImageReference(),
-                    piaCompilation.ToMetadataReference()
+                    piaCompilation.ToMetadataReference(),
                 }
             )
             {
@@ -3419,7 +3421,7 @@ class UsePia2
                     MetadataReference consumer1Ref in new[]
                     {
                         compilation1.EmitToImageReference(),
-                        compilation1.ToMetadataReference()
+                        compilation1.ToMetadataReference(),
                     }
                 )
                 {

@@ -33,7 +33,7 @@ namespace System.Xml.XmlResolverTests
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd",
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent",
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent",
-                "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent",
             };
 
             Assert.Equal(expectedUris.Length, resolver.PreloadedUris.Count());
@@ -50,7 +50,7 @@ namespace System.Xml.XmlResolverTests
             string[] expectedUris =
             {
                 "-//Netscape Communications//DTD RSS 0.91//EN",
-                "http://my.netscape.com/publish/formats/rss-0.91.dtd"
+                "http://my.netscape.com/publish/formats/rss-0.91.dtd",
             };
             Assert.Equal(expectedUris.Length, resolver.PreloadedUris.Count());
             foreach (string uriString in expectedUris)
@@ -79,7 +79,7 @@ namespace System.Xml.XmlResolverTests
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent",
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent",
                 "-//Netscape Communications//DTD RSS 0.91//EN",
-                "http://my.netscape.com/publish/formats/rss-0.91.dtd"
+                "http://my.netscape.com/publish/formats/rss-0.91.dtd",
             };
             Assert.Equal(expectedUris.Length, resolver.PreloadedUris.Count());
             foreach (string uriString in expectedUris)
@@ -96,7 +96,7 @@ namespace System.Xml.XmlResolverTests
             string[] expectedUris =
             {
                 "-//Netscape Communications//DTD RSS 0.91//EN",
-                "http://my.netscape.com/publish/formats/rss-0.91.dtd"
+                "http://my.netscape.com/publish/formats/rss-0.91.dtd",
             };
             Assert.Equal(expectedUris.Length, resolver.PreloadedUris.Count());
             foreach (string uriString in expectedUris)
@@ -123,7 +123,7 @@ namespace System.Xml.XmlResolverTests
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd",
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent",
                 "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent",
-                "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent"
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent",
             };
 
             Assert.Equal(expectedUris.Length, resolver.PreloadedUris.Count());

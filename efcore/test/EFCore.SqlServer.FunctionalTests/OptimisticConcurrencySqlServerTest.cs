@@ -25,8 +25,8 @@ public class OptimisticConcurrencyULongSqlServerTest
                 Child = new
                 {
                     Id = x.OptionalChild == null ? Guid.Empty : x.OptionalChild.Id,
-                    Version = x.OptionalChild == null ? 0 : x.OptionalChild.Version
-                }
+                    Version = x.OptionalChild == null ? 0 : x.OptionalChild.Version,
+                },
             })
             .ToArrayAsync();
     }
@@ -170,7 +170,7 @@ public abstract class OptimisticConcurrencySqlServerTestBase<TFixture, TRowVersi
     {
         Tph,
         Tpt,
-        Tpc
+        Tpc,
     }
 
     protected async Task Row_version_with_owned_types<TEntity, TVersion>(

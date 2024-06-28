@@ -72,7 +72,7 @@ namespace System.Net.Http.Functional.Tests
                 options: new GenericLoopbackOptions
                 {
                     UseSsl = useSsl,
-                    Address = host == "::1" ? IPAddress.IPv6Loopback : IPAddress.Loopback
+                    Address = host == "::1" ? IPAddress.IPv6Loopback : IPAddress.Loopback,
                 }
             );
         }
@@ -87,7 +87,7 @@ namespace System.Net.Http.Functional.Tests
                     "[::1]",
                     false,
                     null,
-                    "SOCKS4 does not support IPv6 addresses."
+                    "SOCKS4 does not support IPv6 addresses.",
                 };
                 yield return new object[]
                 {
@@ -95,7 +95,7 @@ namespace System.Net.Http.Functional.Tests
                     "localhost",
                     true,
                     null,
-                    "Failed to authenticate with the SOCKS server."
+                    "Failed to authenticate with the SOCKS server.",
                 };
                 yield return new object[]
                 {
@@ -103,7 +103,7 @@ namespace System.Net.Http.Functional.Tests
                     "localhost",
                     true,
                     new NetworkCredential("bad_username", "bad_password"),
-                    "Failed to authenticate with the SOCKS server."
+                    "Failed to authenticate with the SOCKS server.",
                 };
                 yield return new object[]
                 {
@@ -111,7 +111,7 @@ namespace System.Net.Http.Functional.Tests
                     "localhost",
                     true,
                     new NetworkCredential(new string('a', 256), "foo"),
-                    "Encoding the UserName took more than the maximum of 255 bytes."
+                    "Encoding the UserName took more than the maximum of 255 bytes.",
                 };
             }
 
@@ -121,7 +121,7 @@ namespace System.Net.Http.Functional.Tests
                 new string('a', 256),
                 false,
                 null,
-                "Failed to resolve the destination host to an IPv4 address."
+                "Failed to resolve the destination host to an IPv4 address.",
             };
 
             foreach (string scheme in new[] { "socks4a", "socks5" })
@@ -132,7 +132,7 @@ namespace System.Net.Http.Functional.Tests
                     new string('a', 256),
                     false,
                     null,
-                    "Encoding the host took more than the maximum of 255 bytes."
+                    "Encoding the host took more than the maximum of 255 bytes.",
                 };
             }
 
@@ -142,7 +142,7 @@ namespace System.Net.Http.Functional.Tests
                 "localhost",
                 true,
                 null,
-                "SOCKS server did not return a suitable authentication method."
+                "SOCKS server did not return a suitable authentication method.",
             };
             yield return new object[]
             {
@@ -150,7 +150,7 @@ namespace System.Net.Http.Functional.Tests
                 "localhost",
                 true,
                 new NetworkCredential("bad_username", "bad_password"),
-                "Failed to authenticate with the SOCKS server."
+                "Failed to authenticate with the SOCKS server.",
             };
             yield return new object[]
             {
@@ -158,7 +158,7 @@ namespace System.Net.Http.Functional.Tests
                 "localhost",
                 true,
                 new NetworkCredential(new string('a', 256), "foo"),
-                "Encoding the UserName took more than the maximum of 255 bytes."
+                "Encoding the UserName took more than the maximum of 255 bytes.",
             };
             yield return new object[]
             {
@@ -166,7 +166,7 @@ namespace System.Net.Http.Functional.Tests
                 "localhost",
                 true,
                 new NetworkCredential("foo", new string('a', 256)),
-                "Encoding the Password took more than the maximum of 255 bytes."
+                "Encoding the Password took more than the maximum of 255 bytes.",
             };
         }
 
@@ -188,7 +188,7 @@ namespace System.Net.Http.Functional.Tests
 
             handler.Proxy = new WebProxy($"{scheme}://127.0.0.1:{proxy.Port}")
             {
-                Credentials = credentials
+                Credentials = credentials,
             };
 
             HttpRequestMessage request = CreateRequest(

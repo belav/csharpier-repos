@@ -532,7 +532,7 @@ namespace System.Speech.Internal.SrgsCompiler
             RF_CHECKED_EPSILON = (1 << 0),
             RF_CHECKED_EXIT_PATH = (1 << 1),
             RF_CHECKED_LEFT_RECURSION = (1 << 2),
-            RF_IN_LEFT_RECUR_CHECK = (1 << 3)
+            RF_IN_LEFT_RECUR_CHECK = (1 << 3),
         };
 
         // Flags used by recursive algorithms

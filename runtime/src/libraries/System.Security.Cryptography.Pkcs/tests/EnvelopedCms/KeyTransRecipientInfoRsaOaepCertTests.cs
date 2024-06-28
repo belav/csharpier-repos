@@ -121,7 +121,7 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             0x02,
             0x01,
             0x05,
-            0x00
+            0x00,
         };
     }
 }

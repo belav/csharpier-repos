@@ -148,7 +148,7 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (i) ..
                 //         /*<bind>*/lock (i)
                 Diagnostic(ErrorCode.ERR_LockNeedsReference, "i")
                     .WithArguments("int")
-                    .WithLocation(7, 25)
+                    .WithLocation(7, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
@@ -189,7 +189,7 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock () ...
                 //         /*<bind>*/lock ()
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
                     .WithArguments(")")
-                    .WithLocation(6, 25)
+                    .WithLocation(6, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
@@ -232,7 +232,7 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (inval
                 //         /*<bind>*/lock (invalidReference)
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "invalidReference")
                     .WithArguments("invalidReference")
-                    .WithLocation(8, 25)
+                    .WithLocation(8, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
@@ -277,7 +277,7 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (o)')
                     .WithLocation(7, 27),
                 // CS1002: ; expected
                 //         /*<bind>*/lock (o)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 27)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
@@ -400,7 +400,7 @@ ILockOperation (OperationKind.Lock, Type: null, IsInvalid) (Syntax: 'lock (M2())
                 //         /*<bind>*/lock (M2())
                 Diagnostic(ErrorCode.ERR_LockNeedsReference, "M2()")
                     .WithArguments("void")
-                    .WithLocation(6, 25)
+                    .WithLocation(6, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LockStatementSyntax>(
@@ -827,7 +827,7 @@ Block[B6] - Exit
                 //         lock (input1)
                 Diagnostic(ErrorCode.ERR_LockNeedsReference, "input1")
                     .WithArguments("int")
-                    .WithLocation(6, 15)
+                    .WithLocation(6, 15),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

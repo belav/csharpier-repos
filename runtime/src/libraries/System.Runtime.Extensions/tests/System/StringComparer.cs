@@ -195,13 +195,13 @@ namespace System.Tests
             new object[]
             {
                 StringComparison.CurrentCultureIgnoreCase,
-                StringComparer.CurrentCultureIgnoreCase
+                StringComparer.CurrentCultureIgnoreCase,
             },
             new object[] { StringComparison.InvariantCulture, StringComparer.InvariantCulture },
             new object[]
             {
                 StringComparison.InvariantCultureIgnoreCase,
-                StringComparer.InvariantCultureIgnoreCase
+                StringComparer.InvariantCultureIgnoreCase,
             },
             new object[] { StringComparison.Ordinal, StringComparer.Ordinal },
             new object[] { StringComparison.OrdinalIgnoreCase, StringComparer.OrdinalIgnoreCase },
@@ -242,7 +242,7 @@ namespace System.Tests
                 "TURKY I",
                 "tr-TR",
                 CompareOptions.None,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -250,7 +250,7 @@ namespace System.Tests
                 "TURKY \u0130",
                 "tr-TR",
                 CompareOptions.None,
-                false
+                false,
             };
             yield return new object[] { "abcd", "ABCD", "en-US", CompareOptions.IgnoreCase, true };
             yield return new object[]
@@ -259,7 +259,7 @@ namespace System.Tests
                 "LATIN I",
                 "en-US",
                 CompareOptions.IgnoreCase,
-                true
+                true,
             };
 
             // Android has its own ICU, which doesn't work well with tr
@@ -271,7 +271,7 @@ namespace System.Tests
                     "TURKY I",
                     "tr-TR",
                     CompareOptions.IgnoreCase,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
@@ -279,7 +279,7 @@ namespace System.Tests
                     "TURKY \u0130",
                     "tr-TR",
                     CompareOptions.IgnoreCase,
-                    true
+                    true,
                 };
             }
 
@@ -289,7 +289,7 @@ namespace System.Tests
                 "ab cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -297,7 +297,7 @@ namespace System.Tests
                 "ab+cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -305,7 +305,7 @@ namespace System.Tests
                 "ab%cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -313,7 +313,7 @@ namespace System.Tests
                 "ab&cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -321,7 +321,7 @@ namespace System.Tests
                 "ab$cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -329,7 +329,7 @@ namespace System.Tests
                 "ab$cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -337,7 +337,7 @@ namespace System.Tests
                 "ab$cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -345,7 +345,7 @@ namespace System.Tests
                 "ab$cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -353,7 +353,7 @@ namespace System.Tests
                 "ab$cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -361,7 +361,7 @@ namespace System.Tests
                 "ab$cd",
                 "en-US",
                 CompareOptions.IgnoreSymbols,
-                true
+                true,
             };
         }
 

@@ -21,7 +21,7 @@ namespace System.Web.Mvc
             var rule = new ModelClientValidationRule
             {
                 ValidationType = "extension",
-                ErrorMessage = ErrorMessage
+                ErrorMessage = ErrorMessage,
             };
             rule.ValidationParameters["extension"] = Attribute.Extensions;
             yield return rule;

@@ -17,7 +17,7 @@ namespace System.Web.Mvc.Test
             List<ModelValidatorProvider> list = new List<ModelValidatorProvider>()
             {
                 new Mock<ModelValidatorProvider>().Object,
-                new Mock<ModelValidatorProvider>().Object
+                new Mock<ModelValidatorProvider>().Object,
             };
 
             // Act
@@ -75,7 +75,7 @@ namespace System.Web.Mvc.Test
             var providers = new ModelValidatorProvider[]
             {
                 new Mock<ModelValidatorProvider>(MockBehavior.Strict).Object,
-                new Mock<ModelValidatorProvider>(MockBehavior.Strict).Object
+                new Mock<ModelValidatorProvider>(MockBehavior.Strict).Object,
             };
             var collection = new ModelValidatorProviderCollection(providers);
 
@@ -127,7 +127,7 @@ namespace System.Web.Mvc.Test
             var providers = new List<ModelValidatorProvider>()
             {
                 new Mock<ModelValidatorProvider>(MockBehavior.Strict).Object,
-                new Mock<ModelValidatorProvider>(MockBehavior.Strict).Object
+                new Mock<ModelValidatorProvider>(MockBehavior.Strict).Object,
             };
             var collection = new ModelValidatorProviderCollection(providers);
 
@@ -150,14 +150,14 @@ namespace System.Web.Mvc.Test
             var dependencyProviders = new ModelValidatorProvider[]
             {
                 firstProvider.Object,
-                secondProvider.Object
+                secondProvider.Object,
             };
             var collectionProviders = new ModelValidatorProvider[] { thirdProvider.Object };
             var expectedProviders = new ModelValidatorProvider[]
             {
                 firstProvider.Object,
                 secondProvider.Object,
-                thirdProvider.Object
+                thirdProvider.Object,
             };
 
             var resolver = new Mock<IDependencyResolver>();
@@ -224,7 +224,7 @@ namespace System.Web.Mvc.Test
                 new SimpleModelValidator(),
                 new SimpleModelValidator(),
                 new SimpleModelValidator(),
-                new SimpleModelValidator()
+                new SimpleModelValidator(),
             };
 
             Mock<ModelValidatorProvider> provider1 = new Mock<ModelValidatorProvider>();
@@ -262,7 +262,7 @@ namespace System.Web.Mvc.Test
                 new SimpleModelValidator(),
                 new SimpleModelValidator(),
                 new SimpleModelValidator(),
-                new SimpleModelValidator()
+                new SimpleModelValidator(),
             };
 
             ModelMetadata metadata = GetMetadata();
@@ -285,7 +285,7 @@ namespace System.Web.Mvc.Test
                     new ModelValidatorProvider[]
                     {
                         resolverProvider1.Object,
-                        resolverprovider2.Object
+                        resolverprovider2.Object,
                     }
                 );
 

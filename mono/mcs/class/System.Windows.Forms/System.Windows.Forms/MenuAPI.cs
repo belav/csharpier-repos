@@ -60,7 +60,7 @@ namespace System.Windows.Forms
             Idle,
             Startup,
             NoPopups,
-            Navigating
+            Navigating,
         }
 
         KeyNavState keynav_state = KeyNavState.Idle;

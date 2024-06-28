@@ -39,7 +39,7 @@ namespace System.Reflection.Metadata
                 HashAlgorithm = hashAlgorithm,
 #pragma warning restore
                 Flags = GetAssemblyNameFlags(flags),
-                ContentType = GetContentTypeFromAssemblyFlags(flags)
+                ContentType = GetContentTypeFromAssemblyFlags(flags),
             };
 
             bool hasPublicKey = (flags & AssemblyFlags.PublicKey) != 0;

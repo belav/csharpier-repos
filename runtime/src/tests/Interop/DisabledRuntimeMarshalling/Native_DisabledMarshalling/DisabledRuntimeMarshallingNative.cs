@@ -109,7 +109,7 @@ public unsafe class DisabledRuntimeMarshallingNative
 
     public enum ByteEnum : byte
     {
-        Value = 42
+        Value = 42,
     }
 
     [DllImport(nameof(DisabledRuntimeMarshallingNative))]

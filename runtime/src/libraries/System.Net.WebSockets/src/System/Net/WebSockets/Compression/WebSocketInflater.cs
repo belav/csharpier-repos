@@ -256,7 +256,7 @@ namespace System.Net.WebSockets.Compression
                 ErrorCode.MemError => SR.ZLibErrorNotEnoughMemory,
                 ErrorCode.DataError => SR.ZLibUnsupportedCompression,
                 ErrorCode.StreamError => SR.ZLibErrorInconsistentStream,
-                _ => SR.Format(SR.ZLibErrorUnexpected, (int)errorCode)
+                _ => SR.Format(SR.ZLibErrorUnexpected, (int)errorCode),
             };
             throw new WebSocketException(message);
         }

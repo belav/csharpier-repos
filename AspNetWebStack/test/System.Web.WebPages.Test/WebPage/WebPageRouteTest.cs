@@ -88,7 +88,7 @@ namespace System.Web.WebPages.Test
                 "~/2.two",
                 "~/1.1/2/3.3",
                 "~/one/two/3/4.4",
-                "~/one/two/3/4/5/6/foo.htm"
+                "~/one/two/3/4/5/6/foo.htm",
             };
             string[] extensions = new[] { "aspx", "hao", "one", "two", "3", "4" };
 
@@ -117,7 +117,7 @@ namespace System.Web.WebPages.Test
                 "~/2.Mobile.two",
                 "~/1.1/2/3.Mobile.3",
                 "~/one/two/3/4.Mobile.4",
-                "~/one/two/3/4/5/6/foo.Mobile.htm"
+                "~/one/two/3/4/5/6/foo.Mobile.htm",
             };
             string[] extensions = new[] { "aspx", "hao", "one", "two", "3", "4" };
 
@@ -133,7 +133,7 @@ namespace System.Web.WebPages.Test
                 "~/_hi.evil",
                 "~/_nest/good.evil",
                 "~/_nest/_hide.evil",
-                "~/_ok.good"
+                "~/_ok.good",
             };
             string[] extensions = new[] { "evil" };
 
@@ -277,7 +277,7 @@ namespace System.Web.WebPages.Test
             {
                 "~/one/two/default.aspx",
                 "~/one/default.aspx",
-                "~/default.aspx"
+                "~/default.aspx",
             };
             string[] extensions = new[] { "aspx" };
 
@@ -312,7 +312,7 @@ namespace System.Web.WebPages.Test
                 "~/one/index.aspx",
                 "~/one/default.aspx",
                 "~/index.aspq",
-                "~/default.aspx"
+                "~/default.aspx",
             };
             string[] extensions = new[] { "aspx", "aspq" };
 
@@ -330,7 +330,7 @@ namespace System.Web.WebPages.Test
                 "~/one/index.aspx",
                 "~/one/default.aspx",
                 "~/index.aspq",
-                "~/default.aspx"
+                "~/default.aspx",
             };
             string[] extensions = new[] { "aspx" };
 

@@ -33,7 +33,7 @@ namespace System.Data.Linq
         /// <summary>
         /// The entity will be updated.
         /// </summary>
-        Update
+        Update,
     }
 
     internal class ChangeProcessor
@@ -775,7 +775,7 @@ namespace System.Data.Linq
         enum VisitState
         {
             Before,
-            After
+            After,
         }
 
         private List<TrackedObject> GetOrderedList()
@@ -813,16 +813,14 @@ namespace System.Data.Linq
                 return 1;
             }
             // first order by action: Inserts first, Updates, Deletes last
-            int xAction = x.IsNew
-                ? 0
-                : x.IsDeleted
-                    ? 2
-                    : 1;
-            int yAction = y.IsNew
-                ? 0
-                : y.IsDeleted
-                    ? 2
-                    : 1;
+            int xAction =
+                x.IsNew ? 0
+                : x.IsDeleted ? 2
+                : 1;
+            int yAction =
+                y.IsNew ? 0
+                : y.IsDeleted ? 2
+                : 1;
             if (xAction < yAction)
             {
                 return -1;

@@ -294,7 +294,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                                                 ),
                                                                 SyntaxFactory.Argument(
                                                                     joinClause.RightExpression.WithoutTrailingTrivia()
-                                                                )
+                                                                ),
                                                             }
                                                         )
                                                     )
@@ -636,7 +636,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                             parentStatement.ReplaceNode(
                                 invocationExpression,
                                 initializer.WithAdditionalAnnotations(Simplifier.Annotation)
-                            )
+                            ),
                         ];
                         nodesAfterLocal = [];
                     }
@@ -655,14 +655,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                 symbolName,
                                 initializer,
                                 generateTypeFromExpression: false
-                            )
+                            ),
                         };
                         nodesAfterLocal =
                         [
                             parentStatement.ReplaceNode(
                                 invocationExpression,
                                 variableLocal.WithAdditionalAnnotations(Simplifier.Annotation)
-                            )
+                            ),
                         ];
                     }
                 }
@@ -728,13 +728,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq
                                 symbolName,
                                 initializer,
                                 generateTypeFromExpression: false
-                            )
+                            ),
                         };
                         nodesAfter = new[]
                         {
                             SyntaxFactory
                                 .ReturnStatement(variable)
-                                .WithAdditionalAnnotations(Simplifier.Annotation)
+                                .WithAdditionalAnnotations(Simplifier.Annotation),
                         };
                         return true;
                     // SyntaxKind.Argument:

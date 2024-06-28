@@ -267,9 +267,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Summary",
                             action = "Index",
-                            page = 1
+                            page = 1,
                         }
-                    )
+                    ),
                 }
             );
 
@@ -279,7 +279,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Apis", action = "Index" }
-                    )
+                    ),
                 }
             );
 
@@ -289,7 +289,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Reports", action = "SingleReport" }
-                    )
+                    ),
                 }
             );
 
@@ -302,9 +302,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Reports",
                             action = "Index",
-                            page = 1
+                            page = 1,
                         }
-                    )
+                    ),
                 }
             );
 
@@ -314,7 +314,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Home", action = "Index" }
-                    )
+                    ),
                 }
             );
 
@@ -379,9 +379,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "todo",
                             action = "list",
-                            page = 0
+                            page = 0,
                         }
-                    )
+                    ),
                 }
             );
 
@@ -394,9 +394,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "home",
                             action = "list",
-                            page = 0
+                            page = 0,
                         }
-                    )
+                    ),
                 }
             );
 
@@ -447,8 +447,8 @@ namespace MonoTests.System.Web.Routing
                     Defaults = new RouteValueDictionary
                     {
                         { "controller", "blog" },
-                        { "user", "admin" }
-                    }
+                        { "user", "admin" },
+                    },
                 }
             );
 
@@ -458,8 +458,8 @@ namespace MonoTests.System.Web.Routing
                     Defaults = new RouteValueDictionary
                     {
                         { "controller", "forum" },
-                        { "user", "admin" }
-                    }
+                        { "user", "admin" },
+                    },
                 }
             );
 
@@ -490,7 +490,7 @@ namespace MonoTests.System.Web.Routing
             c.Add(
                 new MyRoute("reports/{year}/{month}/{day}", new MyRouteHandler())
                 {
-                    Defaults = new RouteValueDictionary { { "day", 1 } }
+                    Defaults = new RouteValueDictionary { { "day", 1 } },
                 }
             );
 
@@ -525,7 +525,7 @@ namespace MonoTests.System.Web.Routing
                     { "year", 2007 },
                     { "month", 1 },
                     { "day", 12 },
-                    { "category", 123 }
+                    { "category", 123 },
                 }
             );
             Assert.IsNotNull(vp, "#4");
@@ -533,7 +533,7 @@ namespace MonoTests.System.Web.Routing
 
             vp = c.GetVirtualPath(
                 new RequestContext(hc, rd),
-                new RouteValueDictionary { { "year", 2007 }, }
+                new RouteValueDictionary { { "year", 2007 } }
             );
             Assert.IsNull(vp, "#5");
         }
@@ -546,7 +546,7 @@ namespace MonoTests.System.Web.Routing
             c.Add(
                 new MyRoute("reports/{year}/{month}/{day}", new MyRouteHandler())
                 {
-                    Defaults = new RouteValueDictionary { { "day", 1 } }
+                    Defaults = new RouteValueDictionary { { "day", 1 } },
                 }
             );
 
@@ -581,7 +581,7 @@ namespace MonoTests.System.Web.Routing
                     { "year", 2007 },
                     { "month", 1 },
                     { "day", 12 },
-                    { "category", 123 }
+                    { "category", 123 },
                 }
             );
             Assert.IsNotNull(vp, "#4");
@@ -589,7 +589,7 @@ namespace MonoTests.System.Web.Routing
 
             vp = c.GetVirtualPath(
                 new RequestContext(hc, rd),
-                new RouteValueDictionary { { "year", 2007 }, }
+                new RouteValueDictionary { { "year", 2007 } }
             );
             Assert.IsNull(vp, "#5");
         }
@@ -647,7 +647,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Home", action = "LogOn" }
-                    )
+                    ),
                 }
             );
 
@@ -659,10 +659,10 @@ namespace MonoTests.System.Web.Routing
                         {
                             site = "_",
                             controller = "Home",
-                            action = "Index"
+                            action = "Index",
                         }
                     ),
-                    Constraints = new RouteValueDictionary(new { site = "_?[0-9A-Za-z-]*" })
+                    Constraints = new RouteValueDictionary(new { site = "_?[0-9A-Za-z-]*" }),
                 }
             );
 
@@ -681,7 +681,7 @@ namespace MonoTests.System.Web.Routing
             var rvs = new RouteValueDictionary()
             {
                 { "controller", "Home" },
-                { "action", "Index" }
+                { "action", "Index" },
             };
             var vpd = routes.GetVirtualPath(new RequestContext(hc, rd), rvs);
             Assert.IsNotNull(vpd, "#A1");
@@ -739,7 +739,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Dinners", action = "Index" }
-                    )
+                    ),
                 }
             );
 
@@ -752,9 +752,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Home",
                             action = "Index",
-                            id = ""
+                            id = "",
                         }
-                    )
+                    ),
                 }
             );
 
@@ -776,7 +776,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Dinners", action = "Index" }
-                    )
+                    ),
                 }
             );
 
@@ -789,9 +789,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Home",
                             action = "Index",
-                            id = ""
+                            id = "",
                         }
-                    )
+                    ),
                 }
             );
 

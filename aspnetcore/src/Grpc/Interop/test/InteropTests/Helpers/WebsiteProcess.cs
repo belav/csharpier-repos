@@ -33,7 +33,7 @@ public class WebsiteProcess : IDisposable
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             FileName = "dotnet",
-            Arguments = path
+            Arguments = path,
         };
         _process.EnableRaisingEvents = true;
         _process.OutputDataReceived += Process_OutputDataReceived;

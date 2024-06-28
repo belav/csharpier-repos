@@ -14,7 +14,7 @@ namespace BoundTreeGenerator
     internal enum TargetLanguage
     {
         VB,
-        CSharp
+        CSharp,
     }
 
     internal enum NullHandling
@@ -23,6 +23,7 @@ namespace BoundTreeGenerator
         Disallow,
         Always,
         NotApplicable // for value types
+        ,
     }
 
     internal sealed class BoundNodeClassWriter
@@ -1006,11 +1007,9 @@ namespace BoundTreeGenerator
                     WriteLine(
                         "Public {0}ReadOnly Property {2} As {1}",
                         (
-                            IsNew(field)
-                                ? "Shadows "
-                                : IsPropertyOverrides(field)
-                                    ? "Overrides "
-                                    : ""
+                            IsNew(field) ? "Shadows "
+                            : IsPropertyOverrides(field) ? "Overrides "
+                            : ""
                         ),
                         field.Type,
                         field.Name
@@ -1204,13 +1203,13 @@ namespace BoundTreeGenerator
 
             string wasUpdatedCheck(Field field)
             {
-                var format = TypeIsTypeSymbol(field)
-                    ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
+                var format =
+                    TypeIsTypeSymbol(field)
+                        ? "!TypeSymbol.Equals({0}, this.{1}, TypeCompareKind.ConsiderEverything)"
                     : TypeIsSymbol(field)
                         ? "!Symbols.SymbolEqualityComparer.ConsiderEverything.Equals({0}, this.{1})"
-                        : IsValueType(field.Type) && field.Type[^1] == '?'
-                            ? "!{0}.Equals(this.{1})"
-                            : "{0} != this.{1}";
+                    : IsValueType(field.Type) && field.Type[^1] == '?' ? "!{0}.Equals(this.{1})"
+                    : "{0} != this.{1}";
 
                 return string.Format(format, ToCamelCase(field.Name), field.Name);
             }
@@ -1978,7 +1977,7 @@ namespace BoundTreeGenerator
             {
                 TargetLanguage.CSharp => "ImmutableArray<",
                 TargetLanguage.VB => "ImmutableArray(Of ",
-                _ => throw new InvalidOperationException($"Unknown target language {_targetLang}")
+                _ => throw new InvalidOperationException($"Unknown target language {_targetLang}"),
             };
 
             if (typeName.StartsWith(immutableArrayPrefix, StringComparison.Ordinal))

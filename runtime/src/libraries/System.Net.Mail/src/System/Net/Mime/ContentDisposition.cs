@@ -62,7 +62,7 @@ namespace System.Net.Mime
             { CreationDateKey, s_dateParser },
             { ModificationDateKey, s_dateParser },
             { ReadDateKey, s_dateParser },
-            { SizeKey, s_longParser }
+            { SizeKey, s_longParser },
         };
 
         public ContentDisposition()

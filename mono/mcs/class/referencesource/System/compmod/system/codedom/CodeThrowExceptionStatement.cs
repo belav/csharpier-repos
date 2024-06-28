@@ -20,7 +20,7 @@ namespace System.CodeDom
     ///       a statement that throws an exception.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeThrowExceptionStatement : CodeStatement
     {
         private CodeExpression toThrow;

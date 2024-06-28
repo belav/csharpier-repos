@@ -46,7 +46,7 @@ namespace System.Linq.Tests
             int?[] expected = { 90, 55, null, 43, 89 };
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name = "Prakash", total = expected }
+                new StringWithIntArray { name = "Prakash", total = expected },
             };
             Assert.Equal(expected, source.SelectMany(e => e.total));
         }
@@ -60,7 +60,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[0] },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[0] },
-                new StringWithIntArray { name = "Prakash", total = new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
             };
 
             Assert.Empty(source.SelectMany(e => e.total));
@@ -75,7 +75,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[0] },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[0] },
-                new StringWithIntArray { name = "Prakash", total = new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
             };
 
             Assert.Empty(source.SelectMany((e, i) => e.total));
@@ -90,7 +90,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[0] },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[0] },
-                new StringWithIntArray { name = "Prakash", total = new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
             };
 
             Assert.Empty(source.SelectMany(e => e.total, (e, f) => f.ToString()));
@@ -105,7 +105,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[0] },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[0] },
-                new StringWithIntArray { name = "Prakash", total = new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
             };
 
             Assert.Empty(source.SelectMany((e, i) => e.total, (e, f) => f.ToString()));
@@ -120,7 +120,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } },
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.SelectMany(e => e.total));
@@ -135,7 +135,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } },
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.RunOnce().SelectMany(e => e.total.RunOnce()));
@@ -153,7 +153,7 @@ namespace System.Linq.Tests
             int?[] expected = { 90, 55, null, 43, 89 };
             StringWithIntArray[] source =
             {
-                new StringWithIntArray { name = "Prakash", total = expected }
+                new StringWithIntArray { name = "Prakash", total = expected },
             };
             Assert.Equal(expected, source.SelectMany((e, index) => e.total));
         }
@@ -167,7 +167,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[0] },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[0] },
-                new StringWithIntArray { name = "Prakash", total = new int?[0] }
+                new StringWithIntArray { name = "Prakash", total = new int?[0] },
             };
             Assert.Empty(source.SelectMany((e, index) => e.total));
         }
@@ -181,7 +181,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } },
             };
             int?[] expected = { 1, 2, 3, 4, 5, 6, 8, 9, -10, 100 };
             Assert.Equal(expected, source.SelectMany((e, index) => e.total));
@@ -196,7 +196,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } },
             };
 
             Assert.Equal(
@@ -214,7 +214,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } },
             };
 
             Assert.Equal(
@@ -245,7 +245,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } },
             };
             string[] expected = { "1", "2", "3", "4", "5", "6", "8", "9", "-10", "100" };
 
@@ -371,7 +371,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Prakash", total = new int?[] { -10, 100 } },
             };
             string[] expected = { "1", "2", "3", "4" };
             Assert.Equal(
@@ -392,7 +392,7 @@ namespace System.Linq.Tests
                 new StringWithIntArray { name = "Bob", total = new int?[] { 5, 6 } },
                 new StringWithIntArray { name = "Chris", total = new int?[0] },
                 new StringWithIntArray { name = null, total = new int?[] { 8, 9 } },
-                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } }
+                new StringWithIntArray { name = "Robert", total = new int?[] { -10, 100 } },
             };
 
             string[] expected = { "-10", "100" };
@@ -615,7 +615,7 @@ namespace System.Linq.Tests
                     new TestEnumerable<int>(new int[] { 1 }),
                     new TestEnumerable<int>(new int[] { 2 }),
                     new int[] { 3 },
-                }
+                },
             };
 
             // Marker at beginning
@@ -627,7 +627,7 @@ namespace System.Linq.Tests
                     new TestEnumerable<int>(new int[] { 1 }),
                     new TestEnumerable<int>(new int[] { 2 }),
                     new TestEnumerable<int>(new int[] { 3 }),
-                }
+                },
             };
 
             // Marker in middle
@@ -638,7 +638,7 @@ namespace System.Linq.Tests
                     new TestEnumerable<int>(new int[] { 0 }),
                     new int[] { 1 },
                     new TestEnumerable<int>(new int[] { 2 }),
-                }
+                },
             };
 
             // Non-marker in middle
@@ -649,7 +649,7 @@ namespace System.Linq.Tests
                     new int[] { 0 },
                     new TestEnumerable<int>(new int[] { 1 }),
                     new int[] { 2 },
-                }
+                },
             };
 
             // Big arrays (marker in middle)
@@ -660,7 +660,7 @@ namespace System.Linq.Tests
                     new TestEnumerable<int>(Enumerable.Range(0, 100).ToArray()),
                     Enumerable.Range(100, 100).ToArray(),
                     new TestEnumerable<int>(Enumerable.Range(200, 100).ToArray()),
-                }
+                },
             };
 
             // Big arrays (non-marker in middle)
@@ -671,7 +671,7 @@ namespace System.Linq.Tests
                     Enumerable.Range(0, 100).ToArray(),
                     new TestEnumerable<int>(Enumerable.Range(100, 100).ToArray()),
                     Enumerable.Range(200, 100).ToArray(),
-                }
+                },
             };
 
             // Interleaved (first marker)
@@ -684,7 +684,7 @@ namespace System.Linq.Tests
                     new int[] { 2 },
                     new TestEnumerable<int>(new int[] { 3 }),
                     new int[] { 4 },
-                }
+                },
             };
 
             // Interleaved (first non-marker)
@@ -697,7 +697,7 @@ namespace System.Linq.Tests
                     new TestEnumerable<int>(new int[] { 2 }),
                     new int[] { 3 },
                     new TestEnumerable<int>(new int[] { 4 }),
-                }
+                },
             };
         }
     }

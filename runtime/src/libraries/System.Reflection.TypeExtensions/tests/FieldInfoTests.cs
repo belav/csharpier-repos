@@ -110,28 +110,28 @@ namespace System.Reflection.Tests
                 typeof(FI_BaseClass),
                 "_privateStringField",
                 new FI_BaseClass(),
-                "2"
+                "2",
             };
             yield return new object[]
             {
                 typeof(FI_SubClass),
                 "_protectedIntField",
                 new FI_SubClass(),
-                3
+                3,
             };
             yield return new object[]
             {
                 typeof(FI_BaseClass),
                 "_privateNullableIntField",
                 new FI_BaseClass(),
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(FI_BaseClass),
                 "_publicField",
                 new FI_BaseClass(),
-                new FI_EquatableClass() { ID = 42 }
+                new FI_EquatableClass() { ID = 42 },
             };
 
             yield return new object[]
@@ -139,7 +139,7 @@ namespace System.Reflection.Tests
                 typeof(FI_BaseClass),
                 "_protectedField",
                 new FI_BaseClass(),
-                new FI_GenericClass<int>() { ID = 24 }
+                new FI_GenericClass<int>() { ID = 24 },
             };
             yield return new object[] { typeof(FI_BaseClass), "s_privateField", null, 1 };
         }
@@ -213,6 +213,6 @@ namespace System.Reflection.Tests
     public enum FI_Enum
     {
         Case1,
-        Case2
+        Case2,
     }
 }

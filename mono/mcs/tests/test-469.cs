@@ -28,7 +28,7 @@ class Lambda
             delegate(int b)
             {
                 f(x += b);
-            }
+            },
         };
     }
 

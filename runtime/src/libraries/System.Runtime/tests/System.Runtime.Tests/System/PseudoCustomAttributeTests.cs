@@ -167,13 +167,13 @@ namespace System.Tests
             {
                 typeof(TestTypeWithAttributes),
                 typeof(SerializableAttribute),
-                new SerializableAttribute()
+                new SerializableAttribute(),
             };
             yield return new object[]
             {
                 typeof(ITestComInterface),
                 typeof(ComImportAttribute),
-                new ComImportAttribute()
+                new ComImportAttribute(),
             };
 
             FieldInfo testField = typeof(TestTypeWithAttributes).GetField("_testField");
@@ -181,19 +181,19 @@ namespace System.Tests
             {
                 testField,
                 typeof(FieldOffsetAttribute),
-                new FieldOffsetAttribute(120)
+                new FieldOffsetAttribute(120),
             };
             yield return new object[]
             {
                 testField,
                 typeof(NonSerializedAttribute),
-                new NonSerializedAttribute()
+                new NonSerializedAttribute(),
             };
             yield return new object[]
             {
                 testField,
                 typeof(MarshalAsAttribute),
-                new MarshalAsAttribute(UnmanagedType.ByValTStr) { SizeConst = 100 }
+                new MarshalAsAttribute(UnmanagedType.ByValTStr) { SizeConst = 100 },
             };
 
             MethodInfo testMethod = typeof(TestTypeWithAttributes).GetMethod("TestMethod");
@@ -203,32 +203,32 @@ namespace System.Tests
             {
                 testMethodParameter,
                 typeof(MarshalAsAttribute),
-                new MarshalAsAttribute(UnmanagedType.LPArray) { ArraySubType = UnmanagedType.I4 }
+                new MarshalAsAttribute(UnmanagedType.LPArray) { ArraySubType = UnmanagedType.I4 },
             };
             yield return new object[]
             {
                 testMethodParameter,
                 typeof(InAttribute),
-                new InAttribute()
+                new InAttribute(),
             };
             yield return new object[]
             {
                 testMethodParameter,
                 typeof(OutAttribute),
-                new OutAttribute()
+                new OutAttribute(),
             };
             yield return new object[]
             {
                 testMethodParameter,
                 typeof(OptionalAttribute),
-                new OptionalAttribute()
+                new OptionalAttribute(),
             };
 
             yield return new object[]
             {
                 testMethod.ReturnParameter,
                 typeof(MarshalAsAttribute),
-                new MarshalAsAttribute(UnmanagedType.Bool)
+                new MarshalAsAttribute(UnmanagedType.Bool),
             };
 
             yield return new object[]
@@ -241,15 +241,15 @@ namespace System.Tests
                     CharSet = CharSet.Unicode,
                     SetLastError = true,
                     PreserveSig = true,
-                    EntryPoint = "MyEntryPoint"
-                }
+                    EntryPoint = "MyEntryPoint",
+                },
             };
 
             yield return new object[]
             {
                 testMethod,
                 typeof(PreserveSigAttribute),
-                new PreserveSigAttribute()
+                new PreserveSigAttribute(),
             };
         }
 
@@ -259,14 +259,14 @@ namespace System.Tests
             {
                 typeof(TestTypeWithoutAttributes),
                 typeof(SerializableAttribute),
-                null
+                null,
             };
 
             yield return new object[]
             {
                 typeof(TestTypeWithoutAttributes),
                 typeof(ComImportAttribute),
-                null
+                null,
             };
 
             FieldInfo testField = typeof(TestTypeWithoutAttributes).GetField("_testField");
@@ -286,7 +286,7 @@ namespace System.Tests
             {
                 testMethod.ReturnParameter,
                 typeof(MarshalAsAttribute),
-                null
+                null,
             };
 
             yield return new object[] { testMethod, typeof(DllImportAttribute), null };

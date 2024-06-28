@@ -175,7 +175,7 @@ namespace System.Text.Json.Serialization.Tests
             Entity entity2 = new Entity();
             entity2.Value = "entity2";
 
-            var dictionary = new Dictionary<Guid, Entity> { [guid1] = entity1, [guid2] = entity2, };
+            var dictionary = new Dictionary<Guid, Entity> { [guid1] = entity1, [guid2] = entity2 };
 
             void Verify()
             {

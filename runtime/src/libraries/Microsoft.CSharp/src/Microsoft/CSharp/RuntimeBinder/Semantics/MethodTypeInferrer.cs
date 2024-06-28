@@ -16,7 +16,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             InferenceFailed,
             MadeProgress,
             NoProgress,
-            Success
+            Success,
         }
 
         [Flags]
@@ -25,7 +25,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             Unknown = 0x00,
             NotDependent = 0x01,
             DependsMask = 0x10,
-            Indirect = 0x12
+            Indirect = 0x12,
         }
 
         private readonly ExpressionBinder _binder;

@@ -123,7 +123,7 @@ public class CandidateSetTest
         var services = new Mock<IServiceProvider>();
         services
             .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
-            .Returns(new[] { new TestMetadataMatcherPolicy(), });
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         // Act
@@ -160,15 +160,15 @@ public class CandidateSetTest
 
         var replacements = new RouteEndpoint[3]
         {
-            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata(), }),
+            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata() }),
             CreateEndpoint($"new /B", metadata: new object[] { }),
-            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata(), }),
+            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata() }),
         };
 
         var services = new Mock<IServiceProvider>();
         services
             .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
-            .Returns(new[] { new TestMetadataMatcherPolicy(), });
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         candidateSet.SetValidity(0, false); // Has no effect. We always count new stuff as valid by default.
@@ -212,15 +212,15 @@ public class CandidateSetTest
 
         var replacements = new RouteEndpoint[3]
         {
-            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata(), }),
+            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata() }),
             CreateEndpoint($"new /B", metadata: new object[] { }),
-            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata(), }),
+            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata() }),
         };
 
         var services = new Mock<IServiceProvider>();
         services
             .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
-            .Returns(new[] { new TestMetadataMatcherPolicy(), });
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         candidateSet.SetValidity(5, false); // Has no effect. We always count new stuff as valid by default.
@@ -271,15 +271,15 @@ public class CandidateSetTest
 
         var replacements = new RouteEndpoint[3]
         {
-            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata(), }),
+            CreateEndpoint($"new /A", metadata: new object[] { new TestMetadata() }),
             CreateEndpoint($"new /B", metadata: new object[] { }),
-            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata(), }),
+            CreateEndpoint($"new /C", metadata: new object[] { new TestMetadata() }),
         };
 
         var services = new Mock<IServiceProvider>();
         services
             .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
-            .Returns(new[] { new TestMetadataMatcherPolicy(), });
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         candidateSet.SetValidity(9, false); // Has no effect. We always count new stuff as valid by default.
@@ -324,7 +324,7 @@ public class CandidateSetTest
         var services = new Mock<IServiceProvider>();
         services
             .Setup(s => s.GetService(typeof(IEnumerable<MatcherPolicy>)))
-            .Returns(new[] { new TestMetadataMatcherPolicy(), });
+            .Returns(new[] { new TestMetadataMatcherPolicy() });
         var comparer = new EndpointMetadataComparer(services.Object);
 
         // Act

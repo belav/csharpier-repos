@@ -384,7 +384,7 @@ namespace Microsoft.Extensions.DependencyInjection
             // Arrange
             var collection = new ServiceCollection
             {
-                ServiceDescriptor.Transient(expectedServiceType, expectedServiceType)
+                ServiceDescriptor.Transient(expectedServiceType, expectedServiceType),
             };
 
             // Act
@@ -681,7 +681,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     typeof(IFakeService),
                     typeof(FakeService),
                     ServiceLifetime.Transient
-                )
+                ),
             };
 
             // Act

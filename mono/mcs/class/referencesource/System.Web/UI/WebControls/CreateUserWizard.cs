@@ -131,7 +131,7 @@ namespace System.Web.UI.WebControls
 
         #region Public Properties
 
-        [DefaultValue(0),]
+        [DefaultValue(0)]
         public override int ActiveStepIndex
         {
             get { return base.ActiveStepIndex; }
@@ -1554,7 +1554,7 @@ namespace System.Web.UI.WebControls
             }
         }
 
-        [DefaultValue(""),]
+        [DefaultValue("")]
         public override string SkipLinkText
         {
             get
@@ -2561,7 +2561,7 @@ namespace System.Web.UI.WebControls
                 Display = _requiredFieldValidatorDisplay,
                 Text = SR.GetString(SR.LoginControls_DefaultRequiredFieldValidatorText),
                 Enabled = enableValidation,
-                Visible = enableValidation
+                Visible = enableValidation,
             };
             return validator;
         }
@@ -3550,14 +3550,14 @@ namespace System.Web.UI.WebControls
                 {
                     ID = _continueButtonID + "Button",
                     CommandName = ContinueButtonCommandName,
-                    CausesValidation = false
+                    CausesValidation = false,
                 };
 
                 container.ContinueImageButton = new ImageButton()
                 {
                     ID = _continueButtonID + "ImageButton",
                     CommandName = ContinueButtonCommandName,
-                    CausesValidation = false
+                    CausesValidation = false,
                 };
                 ;
             }
@@ -3641,14 +3641,14 @@ namespace System.Web.UI.WebControls
                 container.PasswordTextBox = new TextBox()
                 {
                     ID = _passwordID,
-                    TextMode = TextBoxMode.Password
+                    TextMode = TextBoxMode.Password,
                 };
                 ;
 
                 container.ConfirmPasswordTextBox = new TextBox()
                 {
                     ID = _confirmPasswordID,
-                    TextMode = TextBoxMode.Password
+                    TextMode = TextBoxMode.Password,
                 };
 
                 bool enableValidation = true;
@@ -3692,7 +3692,7 @@ namespace System.Web.UI.WebControls
                     ValidationGroup = validationGroup,
                     Display = _regexpFieldValidatorDisplay,
                     Enabled = enableValidation,
-                    Visible = enableValidation
+                    Visible = enableValidation,
                 };
 
                 container.PasswordRequired = CreateRequiredFieldValidator(
@@ -4060,7 +4060,7 @@ namespace System.Web.UI.WebControls
                     ID = id + "LinkButton",
                     Visible = false,
                     CommandName = commandName,
-                    ValidationGroup = validationGroup
+                    ValidationGroup = validationGroup,
                 };
                 buttons[0] = linkButton;
 
@@ -4072,7 +4072,7 @@ namespace System.Web.UI.WebControls
                     // for postbacks to work, we don't need this behavior in the designer
                     Visible = !_wizard.DesignMode,
                     CommandName = commandName,
-                    ValidationGroup = validationGroup
+                    ValidationGroup = validationGroup,
                 };
                 imageButton.PreRender += new EventHandler(OnPreRender);
 

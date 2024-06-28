@@ -209,7 +209,7 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
                 new ParallelOptions
                 {
                     MaxDegreeOfParallelism = allowedParallelism,
-                    CancellationToken = BuildTaskCancelled.Token
+                    CancellationToken = BuildTaskCancelled.Token,
                 },
                 (i, state) =>
                 {
@@ -348,7 +348,7 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
     {
         (byte)0x0a,
         (byte)0x20,
-        (byte)0x20
+        (byte)0x20,
     };
 
     private static byte[] InitLookupTable()
@@ -621,11 +621,9 @@ public abstract class EmitBundleBase : Microsoft.Build.Utilities.Task, ICancelab
         foreach (var c in filename)
         {
             sb.Append(
-                IsAlphanumeric(c)
-                    ? c
-                    : (c == '+')
-                        ? "plus"
-                        : '_'
+                IsAlphanumeric(c) ? c
+                : (c == '+') ? "plus"
+                : '_'
             ); // To help differentiate timezones differing by a symbol (i.e. GMT+0 GMT-0)
         }
 

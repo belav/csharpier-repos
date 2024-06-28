@@ -291,7 +291,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                         RoslynDebug.AssertNotNull(_primary);
                         _sources = new Dictionary<object, AbstractTableEntriesSource<TItem>>
                         {
-                            { _primary.Key, _primary }
+                            { _primary.Key, _primary },
                         };
                         _primary = null;
                     }

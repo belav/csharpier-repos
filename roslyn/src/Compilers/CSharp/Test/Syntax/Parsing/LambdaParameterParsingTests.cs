@@ -1317,7 +1317,7 @@ class C {
                 {
                     // (1,20): error CS1001: Identifier expected
                     // Func<int> func1 = (!!) => 42;
-                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "!").WithLocation(1, 20)
+                    Diagnostic(ErrorCode.ERR_IdentifierExpected, "!").WithLocation(1, 20),
                 }
             );
             N(SyntaxKind.FieldDeclaration);

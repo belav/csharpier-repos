@@ -35,7 +35,7 @@ public class EmptyNullSubstituteBug : NonValidatingSpecBase
             Name = "Eric Cartman",
             Age = 12,
             ClientIPAddress = "192.22.2.1",
-            NotifyEmail = "stan@gmail.com"
+            NotifyEmail = "stan@gmail.com",
         };
 
         _destination = Mapper.Map(model, _destination);

@@ -24,7 +24,7 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
                 {
                     FirstName = c.FirstName,
                     LastName = c.LastName,
-                    FullAddress = c.Address.Street + ", " + c.Address.City + " " + c.Address.State
+                    FullAddress = c.Address.Street + ", " + c.Address.City + " " + c.Address.State,
                 })
                 .ToList();
 
@@ -89,8 +89,8 @@ public class CustomMapFromTest : IntegrationTest<CustomMapFromTest.DatabaseIniti
                     {
                         Street = "123 Anywhere",
                         City = "Austin",
-                        State = "TX"
-                    }
+                        State = "TX",
+                    },
                 }
             );
 

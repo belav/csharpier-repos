@@ -207,7 +207,7 @@ namespace MonoTests.System.Text
                 0x4f,
                 0x00,
                 0x4d,
-                0x00
+                0x00,
             };
             byte[] bigEndianBytes = new byte[] { 0xfe, 0xff, 0x00, 0x42, 0x00, 0x4f, 0x00, 0x4d };
             UnicodeEncoding encoding;

@@ -39,7 +39,7 @@ namespace Microsoft.Interop.UnitTests
             {
                 TestTargetFramework.Framework => ".NETFramework",
                 TestTargetFramework.Standard => ".NETStandard",
-                _ => ".NETCoreApp"
+                _ => ".NETCoreApp",
             };
             _targetFrameworkVersion = targetFramework switch
             {
@@ -48,7 +48,7 @@ namespace Microsoft.Interop.UnitTests
                 TestTargetFramework.Core => "v3.1",
                 TestTargetFramework.Net6 => "v6.0",
                 TestTargetFramework.Net => _liveTargetFrameworkVersion,
-                _ => throw new UnreachableException()
+                _ => throw new UnreachableException(),
             };
         }
 

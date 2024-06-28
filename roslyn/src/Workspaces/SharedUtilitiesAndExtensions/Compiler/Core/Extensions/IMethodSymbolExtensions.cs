@@ -85,8 +85,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             {
                 WellKnownMemberNames.AdditionOperatorName
                 or WellKnownMemberNames.CheckedAdditionOperatorName
-                or WellKnownMemberNames.UnaryPlusOperatorName =>
-                    PredefinedOperator.Addition,
+                or WellKnownMemberNames.UnaryPlusOperatorName => PredefinedOperator.Addition,
                 WellKnownMemberNames.BitwiseAndOperatorName => PredefinedOperator.BitwiseAnd,
                 WellKnownMemberNames.BitwiseOrOperatorName => PredefinedOperator.BitwiseOr,
                 WellKnownMemberNames.ConcatenateOperatorName => PredefinedOperator.Concatenate,
@@ -94,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 or WellKnownMemberNames.CheckedDecrementOperatorName =>
                     PredefinedOperator.Decrement,
                 WellKnownMemberNames.DivisionOperatorName
-                or WellKnownMemberNames.CheckedDivisionOperatorName =>
-                    PredefinedOperator.Division,
+                or WellKnownMemberNames.CheckedDivisionOperatorName => PredefinedOperator.Division,
                 WellKnownMemberNames.EqualityOperatorName => PredefinedOperator.Equality,
                 WellKnownMemberNames.ExclusiveOrOperatorName => PredefinedOperator.ExclusiveOr,
                 WellKnownMemberNames.ExponentOperatorName => PredefinedOperator.Exponent,
@@ -114,8 +112,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                     PredefinedOperator.LessThanOrEqual,
                 WellKnownMemberNames.LikeOperatorName => PredefinedOperator.Like,
                 WellKnownMemberNames.LogicalNotOperatorName
-                or WellKnownMemberNames.OnesComplementOperatorName =>
-                    PredefinedOperator.Complement,
+                or WellKnownMemberNames.OnesComplementOperatorName => PredefinedOperator.Complement,
                 WellKnownMemberNames.ModulusOperatorName => PredefinedOperator.Modulus,
                 WellKnownMemberNames.MultiplyOperatorName
                 or WellKnownMemberNames.CheckedMultiplyOperatorName =>

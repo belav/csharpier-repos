@@ -14,6 +14,6 @@ namespace System.Text
         FormKC = 5,
 
         [UnsupportedOSPlatform("browser")]
-        FormKD = 6
+        FormKD = 6,
     }
 }

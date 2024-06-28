@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 "compiler/preprocess/preprocess-source1.cs",
                 "compiler/preprocess/sub/preprocess-source2.cs",
-                "compiler/preprocess/sub/sub/preprocess-source3.cs"
+                "compiler/preprocess/sub/sub/preprocess-source3.cs",
             }
         )]
         [InlineData("src/project", "compiler/Preprocess/**.cs", new string[] { })]
@@ -70,7 +70,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 "compiler/preprocess/preprocess-source1.cs",
                 "compiler/preprocess/sub/preprocess-source2.cs",
-                "compiler/preprocess/sub/sub/preprocess-source3.cs"
+                "compiler/preprocess/sub/sub/preprocess-source3.cs",
             }
         )]
         [InlineData(
@@ -80,7 +80,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 "compiler/Preprocess/preprocess-source1.cs",
                 "compiler/Preprocess/sub/preprocess-source2.cs",
-                "compiler/Preprocess/sub/sub/preprocess-source3.cs"
+                "compiler/Preprocess/sub/sub/preprocess-source3.cs",
             }
         )]
         public void IncludeCaseInsensitive(
@@ -104,7 +104,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess-source1.cs",
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData(
@@ -114,7 +114,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData(
@@ -125,7 +125,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess-source1.cs",
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData(
@@ -136,7 +136,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess-source1.cs",
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData("src/project/compiler/preprocess/", "**/preprocess*", new string[] { })]
@@ -153,7 +153,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess-source1.cs",
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData(
@@ -169,7 +169,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess-source1.cs",
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         public void ExcludeCaseSensitive(string root, string excludePattern, string[] expectedFiles)
@@ -190,7 +190,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess-source1.cs",
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData(
@@ -200,7 +200,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData(
@@ -210,7 +210,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
             {
                 "sub/preprocess-source2.cs",
                 "sub/sub/preprocess-source3.cs",
-                "sub/sub/preprocess-source3.txt"
+                "sub/sub/preprocess-source3.txt",
             }
         )]
         [InlineData("src/project/compiler/preprocess/", "**/Preprocess*", new string[] { })]
@@ -494,7 +494,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "compiler/shared/shared1.cs",
                 "compiler/shared/sub/shared2.cs",
-                "compiler/shared/sub/sub/sharedsub.cs"
+                "compiler/shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -523,7 +523,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "compiler/shared/shared1.cs",
                 "compiler/shared/sub/shared2.cs",
-                "compiler/shared/sub/sub/sharedsub.cs"
+                "compiler/shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -548,7 +548,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess/sub/sub/preprocess-source3.cs",
                 "shared/shared1.cs",
                 "shared/sub/shared2.cs",
-                "shared/sub/sub/sharedsub.cs"
+                "shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -571,7 +571,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "preprocess/sub/sub/preprocess-source3.cs",
                 "shared/shared1.cs",
                 "shared/sub/shared2.cs",
-                "shared/sub/sub/sharedsub.cs"
+                "shared/sub/sub/sharedsub.cs",
             };
 
             AssertExtensions.CollectionEqual(expected, actual, StringComparer.OrdinalIgnoreCase);
@@ -884,7 +884,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "compiler/preprocess/sub/sub/preprocess-source3.cs",
                 "compiler/shared/shared1.cs",
                 "compiler/shared/sub/shared2.cs",
-                "compiler/shared/sub/sub/sharedsub.cs"
+                "compiler/shared/sub/sub/sharedsub.cs",
             };
 
             Assert.Equal(
@@ -953,7 +953,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests
                 "res/resource2.text",
                 "res/resource3.text",
                 ".hidden/file1.hid",
-                ".hidden/sub/file2.hid"
+                ".hidden/sub/file2.hid",
             };
 
             return files.Select(x => (rootDir + x).Replace('/', directorySeparator));

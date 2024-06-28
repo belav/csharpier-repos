@@ -54,7 +54,7 @@ namespace System.Globalization
             276,
             306,
             336,
-            366
+            366,
         };
 
         internal const int MaxCalendarYear = 9378;

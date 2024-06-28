@@ -137,14 +137,14 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 OverrideSpecifiedNames = false,
                 ProcessDictionaryKeys = false,
-                ProcessExtensionDataNames = false
+                ProcessExtensionDataNames = false,
             };
 
             var s2 = new T
             {
                 OverrideSpecifiedNames = overrideSpecifiedNames,
                 ProcessDictionaryKeys = processDictionaryKeys,
-                ProcessExtensionDataNames = processExtensionDataNames
+                ProcessExtensionDataNames = processExtensionDataNames,
             };
 
             Assert.IsFalse(s1.Equals(s2));

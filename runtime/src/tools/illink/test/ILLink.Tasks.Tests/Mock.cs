@@ -62,7 +62,7 @@ namespace ILLink.Tasks.Tests
             "DumpDependencies",
             "RemoveSymbols",
             "TreatWarningsAsErrors",
-            "SingleWarn"
+            "SingleWarn",
         };
 
         public static IEnumerable<string> GetOptimizationPropertyNames()
@@ -231,7 +231,7 @@ namespace ILLink.Tasks.Tests
         {
             return new List<BaseStep>()
             {
-                new RootAssemblyInput(null, AssemblyRootMode.EntryPoint)
+                new RootAssemblyInput(null, AssemblyRootMode.EntryPoint),
             };
         }
     }

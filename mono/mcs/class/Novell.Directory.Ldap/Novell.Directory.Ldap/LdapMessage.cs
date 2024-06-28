@@ -599,7 +599,7 @@ namespace Novell.Directory.Ldap
                 {
                     typeof(System.String),
                     typeof(bool),
-                    typeof(sbyte[])
+                    typeof(sbyte[]),
                 };
                 System.Object[] args = new System.Object[] { oid, critical, value_Renamed };
                 System.Exception ex = null;

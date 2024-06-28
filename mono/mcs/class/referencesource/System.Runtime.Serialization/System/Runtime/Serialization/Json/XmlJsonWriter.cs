@@ -145,7 +145,7 @@ namespace System.Runtime.Serialization.Json
             Number,
             String,
             Object,
-            Array
+            Array,
         };
 
         [Flags]

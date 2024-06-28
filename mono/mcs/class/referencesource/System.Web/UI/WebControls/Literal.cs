@@ -138,7 +138,7 @@ namespace System.Web.UI.WebControls
 
         /// <devdoc>
         /// </devdoc>
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override void Focus()
         {
             throw new NotSupportedException(SR.GetString(SR.NoFocusSupport, this.GetType().Name));

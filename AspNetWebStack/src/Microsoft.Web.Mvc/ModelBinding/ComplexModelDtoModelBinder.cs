@@ -28,7 +28,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                         ModelName = ModelBinderUtil.CreatePropertyModelName(
                             bindingContext.ModelName,
                             propertyMetadata.PropertyName
-                        )
+                        ),
                     };
 
                 // bind and propagate the values

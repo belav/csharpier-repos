@@ -1388,7 +1388,7 @@ unsafe class Source : Il
                         originalComp.ToMetadataReference(),
                         retargeted2Ref,
                         consistentRef,
-                        ilRef
+                        ilRef,
                     },
                     options: TestOptions.UnsafeReleaseDll,
                     parseOptions: TestOptions.Regular9,
@@ -1505,7 +1505,7 @@ public class C
                 references: new[]
                 {
                     afterRetargeting.ToMetadataReference(),
-                    unmanagedCallersOnlyAssembly.ToMetadataReference()
+                    unmanagedCallersOnlyAssembly.ToMetadataReference(),
                 }
             );
             finalComp.VerifyDiagnostics(
@@ -1615,7 +1615,7 @@ public class C
                 references: new[]
                 {
                     afterRetargeting.ToMetadataReference(),
-                    unmanagedCallersOnlyAssembly.ToMetadataReference()
+                    unmanagedCallersOnlyAssembly.ToMetadataReference(),
                 }
             );
             finalComp.VerifyDiagnostics(

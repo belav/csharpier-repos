@@ -28,7 +28,7 @@ public class InjectWhereExpressionMutator : ExpressionMutator
 
         var candidateExpressions = new List<Expression>
         {
-            Expression.Constant(random.Choose(new List<bool> { true, false }))
+            Expression.Constant(random.Choose(new List<bool> { true, false })),
         };
 
         if (typeArgument == typeof(bool))

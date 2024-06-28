@@ -637,7 +637,11 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
             {
                 navigation.IsCollection
                     ? AddToCollectionNavigation(entityParameter, relatedEntityParameter, navigation)
-                    : AssignReferenceNavigation(entityParameter, relatedEntityParameter, navigation)
+                    : AssignReferenceNavigation(
+                        entityParameter,
+                        relatedEntityParameter,
+                        navigation
+                    ),
             };
 
             if (inverseNavigation != null)

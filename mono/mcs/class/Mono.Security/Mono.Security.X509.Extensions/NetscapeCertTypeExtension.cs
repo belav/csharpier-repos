@@ -72,7 +72,7 @@ namespace Mono.Security.X509.Extensions
             ObjectSigning = 0x10,
             SslCA = 0x04,
             SmimeCA = 0x02,
-            ObjectSigningCA = 0x01
+            ObjectSigningCA = 0x01,
         }
 
         private int ctbits;

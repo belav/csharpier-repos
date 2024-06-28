@@ -40,6 +40,6 @@ namespace System.Windows.Forms
         Hot = 64,
         Marked = 128,
         Indeterminate = 256,
-        ShowKeyboardCues = 512
+        ShowKeyboardCues = 512,
     }
 }

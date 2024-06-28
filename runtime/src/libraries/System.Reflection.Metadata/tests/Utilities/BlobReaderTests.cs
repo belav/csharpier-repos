@@ -465,7 +465,7 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public unsafe void IndexOf()
         {
-            byte[] buffer = new byte[] { 0xF0, 0x90, 0x8D, };
+            byte[] buffer = new byte[] { 0xF0, 0x90, 0x8D };
 
             fixed (byte* bufferPtr = buffer)
             {

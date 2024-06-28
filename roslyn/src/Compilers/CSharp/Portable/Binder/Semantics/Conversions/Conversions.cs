@@ -109,7 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 WellKnownMember.System_Runtime_CompilerServices_DecimalConstantAttribute__ctor,
                             SpecialType.System_DateTime =>
                                 WellKnownMember.System_Runtime_CompilerServices_DateTimeConstantAttribute__ctor,
-                            _ => null
+                            _ => null,
                         };
                         if (member != null)
                         {
@@ -383,12 +383,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                             elementType,
                             ref useSiteInfo
                         ),
-                    _ =>
-                        ClassifyImplicitConversionFromExpression(
-                            (BoundExpression)element,
-                            elementType,
-                            ref useSiteInfo
-                        ),
+                    _ => ClassifyImplicitConversionFromExpression(
+                        (BoundExpression)element,
+                        elementType,
+                        ref useSiteInfo
+                    ),
                 };
             }
         }

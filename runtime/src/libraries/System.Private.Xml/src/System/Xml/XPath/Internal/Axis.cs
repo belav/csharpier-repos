@@ -30,7 +30,7 @@ namespace MS.Internal.Xml.XPath
             Preceding,
             PrecedingSibling,
             Self,
-            None
+            None,
         };
 
         // constructor

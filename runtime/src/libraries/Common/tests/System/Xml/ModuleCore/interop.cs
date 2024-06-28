@@ -21,7 +21,7 @@ namespace OLEDB.Test.ModuleCore
         eVariationStatusTimedOut,
         eVariationStatusConformanceWarning,
         eVariationStatusException,
-        eVariationStatusAborted
+        eVariationStatusAborted,
     }
 
     ////////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@ namespace OLEDB.Test.ModuleCore
         HR_OPTIONAL,
         HR_SUCCEED,
         HR_FAIL,
-        HR_WARNING
+        HR_WARNING,
     }
 
     ////////////////////////////////////////////////////////////////////////

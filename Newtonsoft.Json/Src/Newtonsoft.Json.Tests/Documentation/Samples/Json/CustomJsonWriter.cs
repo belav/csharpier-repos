@@ -333,7 +333,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
                 Name = "James",
                 Age = 30,
                 Enabled = true,
-                Roles = new[] { "Publisher", "Administrator" }
+                Roles = new[] { "Publisher", "Administrator" },
             };
 
             StringWriter sw = new StringWriter();

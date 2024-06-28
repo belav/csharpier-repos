@@ -565,7 +565,7 @@ namespace MonoTests.System.Collections
             0x08,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         private static byte[] _serializedCultureV11 = new byte[]
@@ -764,7 +764,7 @@ namespace MonoTests.System.Collections
             0x04,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         private static byte[] _serializedDefaultInvariantV11 = new byte[]
@@ -963,7 +963,7 @@ namespace MonoTests.System.Collections
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         private static byte[] _serializedDefaultV20 = new byte[]
@@ -1181,7 +1181,7 @@ namespace MonoTests.System.Collections
             0x2d,
             0x42,
             0x45,
-            0x0b
+            0x0b,
         };
 
         private static byte[] _serializedDefaultInvariantV20 = new byte[]
@@ -1394,7 +1394,7 @@ namespace MonoTests.System.Collections
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         private static byte[] _serializedCultureV20 = new byte[]
@@ -1612,7 +1612,7 @@ namespace MonoTests.System.Collections
             0x2d,
             0x54,
             0x52,
-            0x0b
+            0x0b,
         };
     }
 }

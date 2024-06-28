@@ -1257,6 +1257,7 @@ namespace System.Windows.Forms
             Metallic, // Luna Silver
             MediaCenter, // Media Center (Energy Blue)
             Aero // Windows Vista
+            ,
         }
         #endregion
     }

@@ -24,5 +24,5 @@ public enum RequestQueueMode
     /// Create a queue with the given name if it does not already exist, otherwise attach to the existing queue.
     /// Most configuration options do not apply when attaching to an existing queue.
     /// </summary>
-    CreateOrAttach
+    CreateOrAttach,
 }

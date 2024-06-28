@@ -103,7 +103,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -147,7 +147,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -189,7 +189,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -229,7 +229,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -267,7 +267,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -308,7 +308,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -355,7 +355,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -398,7 +398,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -435,7 +435,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -472,7 +472,7 @@ namespace System.Web.Mvc.Test
                 controllerFilter,
                 actionFilter,
                 lastFilter,
-                overrideFilter
+                overrideFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 
@@ -498,7 +498,7 @@ namespace System.Web.Mvc.Test
             IEnumerable<Filter> filters = new Filter[]
             {
                 actionAndExceptionFilter,
-                overrideExceptionFilter
+                overrideExceptionFilter,
             };
             FilterInfo product = CreateProductUnderTest(filters);
 

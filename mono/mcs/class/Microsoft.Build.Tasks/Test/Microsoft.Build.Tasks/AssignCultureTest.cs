@@ -74,7 +74,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 @"bar\sample.txt",
                 "sample.it.png",
                 @"dir\sample.en.png",
-                "sample.inv.txt"
+                "sample.inv.txt",
             };
 
             engine = new Engine(Consts.BinPath);
@@ -101,7 +101,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "bar/sample.txt",
                         "sample.it.png",
                         "dir/sample.en.png",
-                        "sample.inv.txt"
+                        "sample.inv.txt",
                     },
                     new string[] { null, null, "fr", "en", null, null, null, "it", "en", null },
                     "AssignedFiles",
@@ -122,7 +122,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         @"bar\sample.txt",
                         "sample.it.png",
                         @"dir\sample.en.png",
-                        "sample.inv.txt"
+                        "sample.inv.txt",
                     },
                     new string[] { null, null, "fr", "en", null, null, null, "it", "en", null },
                     "AssignedFiles",
@@ -145,7 +145,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "foo.fr.resx",
                         "dir/abc.en.resx",
                         "sample.it.png",
-                        "dir/sample.en.png"
+                        "dir/sample.en.png",
                     },
                     new string[] { "fr", "en", "it", "en" },
                     "AssignedFilesWithCulture",
@@ -160,7 +160,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "foo.fr.resx",
                         @"dir\abc.en.resx",
                         "sample.it.png",
-                        @"dir\sample.en.png"
+                        @"dir\sample.en.png",
                     },
                     new string[] { "fr", "en", "it", "en" },
                     "AssignedFilesWithCulture",
@@ -185,7 +185,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "foo.bar.resx",
                         "sample.txt",
                         "bar/sample.txt",
-                        "sample.inv.txt"
+                        "sample.inv.txt",
                     },
                     null,
                     "AssignedFilesWithNoCulture",
@@ -202,7 +202,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "foo.bar.resx",
                         "sample.txt",
                         @"bar\sample.txt",
-                        "sample.inv.txt"
+                        "sample.inv.txt",
                     },
                     null,
                     "AssignedFilesWithNoCulture",
@@ -231,7 +231,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "bar/sample.txt",
                         "sample.png",
                         "dir/sample.png",
-                        "sample.inv.txt"
+                        "sample.inv.txt",
                     },
                     new string[] { null, null, "fr", "en", null, null, null, "it", "en", null },
                     "CultureNeutralAssignedFiles",
@@ -252,7 +252,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         @"bar\sample.txt",
                         "sample.png",
                         @"dir\sample.png",
-                        "sample.inv.txt"
+                        "sample.inv.txt",
                     },
                     new string[] { null, null, "fr", "en", null, null, null, "it", "en", null },
                     "CultureNeutralAssignedFiles",

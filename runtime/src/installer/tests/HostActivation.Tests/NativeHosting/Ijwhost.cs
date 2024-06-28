@@ -80,7 +80,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     app.AppDll,
                     "NativeEntryPoint",
                     sharedState.HostFxrPath, // optional 4th and 5th arguments that tell nativehost to start the runtime before loading the C++/CLI library
-                    startupConfigPath
+                    startupConfigPath,
                 };
 
                 File.Move(app.RuntimeConfigJson, startupConfigPath);

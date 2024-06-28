@@ -32,7 +32,7 @@ namespace System.Composition.Convention.Tests
         private static readonly Type[] s_contractInterfaces = new[]
         {
             typeof(IContract1),
-            typeof(IContract2)
+            typeof(IContract2),
         };
 
         [Fact]

@@ -59,7 +59,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
         {
             ["controller"] = "Orders",
             ["action"] = "GetById",
-            ["id"] = "500"
+            ["id"] = "500",
         };
 
         // Act
@@ -215,7 +215,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home",
-                    action = "newaction"
+                    action = "newaction",
                 },
                 requiredValues: new { controller = "home", action = "newaction" },
                 order: 1
@@ -228,7 +228,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home",
-                    action = "contact"
+                    action = "contact",
                 },
                 requiredValues: new { controller = "home", action = "contact" },
                 order: 2
@@ -241,7 +241,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home2",
-                    action = "newaction"
+                    action = "newaction",
                 },
                 requiredValues: new { controller = "home2", action = "newaction" },
                 order: 3
@@ -254,7 +254,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home2",
-                    action = "contact"
+                    action = "contact",
                 },
                 requiredValues: new { controller = "home2", action = "contact" },
                 order: 4
@@ -267,7 +267,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home3",
-                    action = "contact"
+                    action = "contact",
                 },
                 requiredValues: new { controller = "home3", action = "contact" },
                 order: 5
@@ -280,7 +280,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home",
-                    action = "newaction"
+                    action = "newaction",
                 },
                 requiredValues: new { controller = "home", action = "newaction" },
                 order: 6,
@@ -294,7 +294,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home2",
-                    action = "newaction"
+                    action = "newaction",
                 },
                 requiredValues: new { controller = "home2", action = "newaction" },
                 order: 7,
@@ -308,7 +308,7 @@ public class EndpointRoutingUrlHelperTest : UrlHelperTestBase
                 {
                     id = "defaultid",
                     controller = "home",
-                    action = "contact"
+                    action = "contact",
                 },
                 requiredValues: new { controller = "home", action = "contact" },
                 order: 8,

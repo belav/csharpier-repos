@@ -174,7 +174,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                 {
                     this.ContextBuffer.CurrentSnapshot.CreateFullTrackingSpan(
                         SpanTrackingMode.EdgeInclusive
-                    )
+                    ),
                 },
                 ProjectionBufferOptions.None,
                 _contentType
@@ -220,7 +220,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                     previousStatementSpan,
                     debuggerMappedSpan,
                     this.StatementTerminator,
-                    restOfFileSpan
+                    restOfFileSpan,
                 },
                 ProjectionBufferOptions.None,
                 _contentType
@@ -301,7 +301,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
                     {
                         projectionBuffer.CurrentSnapshot.CreateFullTrackingSpan(
                             SpanTrackingMode.EdgeInclusive
-                        )
+                        ),
                     },
                     ProjectionBufferOptions.None,
                     _contentType
@@ -310,7 +310,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.DebuggerIntelli
             immediateWindowContext = new ImmediateWindowContext()
             {
                 ProjectionBuffer = projectionBuffer,
-                ElisionBuffer = elisionProjectionBuffer
+                ElisionBuffer = elisionProjectionBuffer,
             };
 
             _textView.TextBuffer.PostChanged += TextBuffer_PostChanged;

@@ -32,7 +32,7 @@ namespace MonoTests.System
             "0",
             "0.00",
             "0.00 %",
-            "0"
+            "0",
         };
         private string[] Results1_Nfi =
         {
@@ -43,7 +43,7 @@ namespace MonoTests.System
             "0",
             "0.00",
             "0.00 %",
-            "0"
+            "0",
         };
         private string[] Results2 =
         {
@@ -54,7 +54,7 @@ namespace MonoTests.System
             "255",
             "255.00000",
             "25,500.00000 %",
-            "000ff"
+            "000ff",
         };
         private string[] Results2_Nfi =
         {
@@ -65,7 +65,7 @@ namespace MonoTests.System
             "255",
             "255.00000",
             "25,500.00000 %",
-            "000ff"
+            "000ff",
         };
 
         private CultureInfo old_culture;

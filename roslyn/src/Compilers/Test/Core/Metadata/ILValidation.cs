@@ -312,7 +312,7 @@ namespace Roslyn.Test.Utilities
                         peImage,
                         peHeadersSize,
                         peHeaderAlignment,
-                        strongNameSignatureFixup
+                        strongNameSignatureFixup,
                     }
                 );
         }

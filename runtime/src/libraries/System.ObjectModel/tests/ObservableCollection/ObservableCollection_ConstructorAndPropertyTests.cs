@@ -50,14 +50,14 @@ namespace System.Collections.ObjectModel.Tests
             new object[] { new string[] { "one", "two", "three" } },
             new object[]
             {
-                new List<string> { "one", "two", "three" }
+                new List<string> { "one", "two", "three" },
             },
             new object[]
             {
-                new Collection<string> { "one", "two", "three" }
+                new Collection<string> { "one", "two", "three" },
             },
             new object[] { Enumerable.Range(1, 3).Select(i => i.ToString()) },
-            new object[] { CreateIteratorCollection() }
+            new object[] { CreateIteratorCollection() },
         };
 
         private static IEnumerable<string> CreateIteratorCollection()

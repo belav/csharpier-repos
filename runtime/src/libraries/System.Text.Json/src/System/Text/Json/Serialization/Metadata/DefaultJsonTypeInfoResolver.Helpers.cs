@@ -337,7 +337,7 @@ namespace System.Text.Json.Serialization.Metadata
                         ParameterType = reflectionInfo.ParameterType,
                         Position = reflectionInfo.Position,
                         HasDefaultValue = reflectionInfo.HasDefaultValue,
-                        DefaultValue = reflectionInfo.GetDefaultValue()
+                        DefaultValue = reflectionInfo.GetDefaultValue(),
                     };
 
                 jsonParameters[i] = jsonInfo;

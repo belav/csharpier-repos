@@ -31,6 +31,6 @@ namespace System.Windows.Forms
         DisableResizing = 1,
         AutoSizeToAllHeaders = 2,
         AutoSizeToDisplayedHeaders = 3,
-        AutoSizeToFirstHeader = 4
+        AutoSizeToFirstHeader = 4,
     }
 }

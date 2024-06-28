@@ -54,7 +54,7 @@ namespace System.Data.Design
         {
             None = 0,
             HierarchicalUpdate = 1,
-            LinqOverTypedDatasets = 2
+            LinqOverTypedDatasets = 2,
         }
 
         [MonoTODO]

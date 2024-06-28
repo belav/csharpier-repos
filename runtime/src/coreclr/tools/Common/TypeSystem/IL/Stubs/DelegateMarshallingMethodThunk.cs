@@ -14,7 +14,7 @@ namespace Internal.IL.Stubs
     {
         ReverseOpenStatic,
         ReverseClosed,
-        ForwardNativeFunctionWrapper
+        ForwardNativeFunctionWrapper,
     }
 
     /// <summary>
@@ -138,7 +138,7 @@ namespace Internal.IL.Stubs
                             CharSet.Ansi => true,
                             CharSet.Unicode => false,
                             CharSet.Auto => !_delegateType.Context.Target.IsWindows,
-                            _ => true
+                            _ => true,
                         };
 
                         MethodSignature delegateSignature = _invokeMethod.Signature;

@@ -120,7 +120,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public enum MyEnum
         {
             Default = 0,
-            Other
+            Other,
         }
 
         [Test]
@@ -132,7 +132,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings()
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 }
             );
 
@@ -149,7 +149,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Paid = false,
                 FollowUpDays = 30,
                 FollowUpEmailAddress = string.Empty,
-                PaidDate = null
+                PaidDate = null,
             };
 
             string included = JsonConvert.SerializeObject(
@@ -181,7 +181,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Paid = false,
                 FollowUpDays = 30,
                 FollowUpEmailAddress = string.Empty,
-                PaidDate = null
+                PaidDate = null,
             };
 
             string included = JsonConvert.SerializeObject(
@@ -231,7 +231,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new DefaultValueAttributeTestClass
                 {
                     TestField1 = int.MinValue,
-                    TestProperty1 = "NotDefault"
+                    TestProperty1 = "NotDefault",
                 },
                 Formatting.None,
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
@@ -242,7 +242,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new DefaultValueAttributeTestClass
                 {
                     TestField1 = 21,
-                    TestProperty1 = "NotDefault"
+                    TestProperty1 = "NotDefault",
                 },
                 Formatting.None,
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
@@ -253,7 +253,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new DefaultValueAttributeTestClass
                 {
                     TestField1 = 21,
-                    TestProperty1 = "TestProperty1Value"
+                    TestProperty1 = "TestProperty1Value",
                 },
                 Formatting.None,
                 new JsonSerializerSettings { DefaultValueHandling = DefaultValueHandling.Ignore }
@@ -271,7 +271,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     json,
                     new JsonSerializerSettings
                     {
-                        DefaultValueHandling = DefaultValueHandling.Populate
+                        DefaultValueHandling = DefaultValueHandling.Populate,
                     }
                 );
             Assert.AreEqual("TestProperty1Value", c.TestProperty1);
@@ -280,7 +280,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 }
             );
             Assert.AreEqual("TestProperty1Value", c.TestProperty1);
@@ -302,7 +302,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "{}",
                 new JsonSerializerSettings
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 }
             );
             Assert.AreEqual(-1, c1.field1);
@@ -312,7 +312,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "{'field1':-1,'field2':'default'}",
                 new JsonSerializerSettings
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 }
             );
             Assert.AreEqual(-1, c2.field1);
@@ -364,7 +364,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings
                 {
                     DefaultValueHandling = DefaultValueHandling.Ignore,
-                    NullValueHandling = NullValueHandling.Ignore
+                    NullValueHandling = NullValueHandling.Ignore,
                 }
             );
 
@@ -487,7 +487,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 str,
                 new JsonSerializerSettings
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 }
             );
 
@@ -731,6 +731,6 @@ namespace Newtonsoft.Json.Tests.Serialization
     {
         Default = 0,
         Currency,
-        Integer
+        Integer,
     }
 }

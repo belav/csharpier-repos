@@ -134,7 +134,7 @@ namespace Microsoft.Interop.Analyzers
                                     comp.GetTypeByMetadataName(TypeNames.BStrStringMarshaller)
                                 )
                             )
-                        )
+                        ),
                     }
                 );
             }

@@ -29,7 +29,7 @@ public class main
             typeof(string),
             typeof(ClassA),
             typeof(Base),
-            typeof(Derived)
+            typeof(Derived),
         };
         Type[] array_types =
         {
@@ -37,7 +37,7 @@ public class main
             typeof(string[]),
             typeof(ClassA[]),
             typeof(Base[]),
-            typeof(Derived[])
+            typeof(Derived[]),
         };
 
         for (int j = 0; j < 100; ++j)

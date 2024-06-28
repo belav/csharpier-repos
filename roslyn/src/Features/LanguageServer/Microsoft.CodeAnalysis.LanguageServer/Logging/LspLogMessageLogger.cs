@@ -82,11 +82,10 @@ internal sealed class LspLogMessageLogger : ILogger
                             LogLevel.Warning => MessageType.Warning,
                             LogLevel.Error => MessageType.Error,
                             LogLevel.Critical => MessageType.Error,
-                            _ =>
-                                throw new InvalidOperationException(
-                                    $"Unexpected logLevel argument {logLevel}"
-                                ),
-                        }
+                            _ => throw new InvalidOperationException(
+                                $"Unexpected logLevel argument {logLevel}"
+                            ),
+                        },
                     },
                     CancellationToken.None
                 );

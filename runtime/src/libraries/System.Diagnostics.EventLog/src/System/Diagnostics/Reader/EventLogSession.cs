@@ -16,7 +16,7 @@ namespace System.Diagnostics.Eventing.Reader
         Default = 0,
         Negotiate = 1,
         Kerberos = 2,
-        Ntlm = 3
+        Ntlm = 3,
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ namespace System.Diagnostics.Eventing.Reader
     public enum PathType
     {
         LogName = 1,
-        FilePath = 2
+        FilePath = 2,
     }
 
     /// <summary>

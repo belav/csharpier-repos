@@ -33,7 +33,7 @@ public class PropertyEntryTest
                     {
                         Id = id,
                         Name = "NewA",
-                        LongName = "NewB"
+                        LongName = "NewB",
                     }
                 )
                 .Entity;
@@ -144,7 +144,7 @@ public class PropertyEntryTest
                     {
                         Id = Guid.NewGuid(),
                         Name = "A",
-                        LongName = "B"
+                        LongName = "B",
                     }
                 )
                 .Entity.Id;
@@ -190,7 +190,7 @@ public class PropertyEntryTest
                 {
                     Id = 1,
                     Primate = "Monkey",
-                    RequiredPrimate = "Tarsier"
+                    RequiredPrimate = "Tarsier",
                 }
             )
             .GetInfrastructure();
@@ -220,7 +220,7 @@ public class PropertyEntryTest
                 {
                     Id = 1,
                     Primate = "Monkey",
-                    RequiredPrimate = "Tarsier"
+                    RequiredPrimate = "Tarsier",
                 }
             )
             .GetInfrastructure();
@@ -252,7 +252,7 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
@@ -285,7 +285,7 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
@@ -318,7 +318,7 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
@@ -450,7 +450,7 @@ public class PropertyEntryTest
         {
             Id = 1,
             Primate = "Monkey",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
@@ -698,7 +698,7 @@ public class PropertyEntryTest
             Id = 1,
             Primate = "Monkey",
             Marmate = "Bovril",
-            RequiredPrimate = "Tarsier"
+            RequiredPrimate = "Tarsier",
         };
         var entry = context.Entry(entity).GetInfrastructure();
         entry.SetEntityState(EntityState.Unchanged);
@@ -706,13 +706,13 @@ public class PropertyEntryTest
         var primateEntry = new PropertyEntry(entry, entry.EntityType.FindProperty("Primate")!)
         {
             OriginalValue = "Chimp",
-            IsModified = true
+            IsModified = true,
         };
 
         var marmateEntry = new PropertyEntry(entry, entry.EntityType.FindProperty("Marmate")!)
         {
             OriginalValue = "Marmite",
-            IsModified = true
+            IsModified = true,
         };
 
         var requiredEntry = new PropertyEntry(
@@ -721,7 +721,7 @@ public class PropertyEntryTest
         )
         {
             OriginalValue = "Bushbaby",
-            IsModified = true
+            IsModified = true,
         };
 
         Assert.Equal(EntityState.Modified, entry.EntityState);
@@ -1331,18 +1331,18 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new Tag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new Tog { Text = "To1" }
+                        Tog = new Tog { Text = "To1" },
                     },
                     Manufacturer = new Manufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new Tag { Text = "Ta2" },
-                        Tog = new Tog { Text = "To2" }
+                        Tog = new Tog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
+                    Validation = false,
                 },
                 Milk = new Milk
                 {
@@ -1351,18 +1351,18 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new Tag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new Tog { Text = "To1" }
+                        Tog = new Tog { Text = "To1" },
                     },
                     Manufacturer = new Manufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new Tag { Text = "Ta2" },
-                        Tog = new Tog { Text = "To2" }
+                        Tog = new Tog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
+                    Validation = false,
                 },
                 FieldCulture = new FieldCulture
                 {
@@ -1371,18 +1371,18 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new FieldTag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new FieldTog { Text = "To1" }
+                        Tog = new FieldTog { Text = "To1" },
                     },
                     Manufacturer = new FieldManufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new FieldTag { Text = "Ta2" },
-                        Tog = new FieldTog { Text = "To2" }
+                        Tog = new FieldTog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
+                    Validation = false,
                 },
                 FieldMilk = new FieldMilk
                 {
@@ -1391,19 +1391,19 @@ public class PropertyEntryTest
                         Charge = 1.0m,
                         Tag = new FieldTag { Text = "Ta1" },
                         Title = "Ti1",
-                        Tog = new FieldTog { Text = "To1" }
+                        Tog = new FieldTog { Text = "To1" },
                     },
                     Manufacturer = new FieldManufacturer
                     {
                         Name = "M1",
                         Rating = 7,
                         Tag = new FieldTag { Text = "Ta2" },
-                        Tog = new FieldTog { Text = "To2" }
+                        Tog = new FieldTog { Text = "To2" },
                     },
                     Rating = 8,
                     Species = "S1",
-                    Validation = false
-                }
+                    Validation = false,
+                },
             }
         );
 
@@ -1515,18 +1515,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -1535,18 +1535,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -1555,18 +1555,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -1575,19 +1575,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -1842,18 +1842,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -1862,18 +1862,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -1882,18 +1882,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -1902,19 +1902,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -2180,18 +2180,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -2200,18 +2200,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -2220,18 +2220,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -2240,19 +2240,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -2314,7 +2314,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new Tag { Text = "Tag1b" },
-            Tog = new Tog { Text = "Tog1b" }
+            Tog = new Tog { Text = "Tog1b" },
         };
 
         cultureLicenseEntry.CurrentValue = new License
@@ -2322,7 +2322,7 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new Tag { Text = "Tag2b" },
-            Tog = new Tog { Text = "Tog2b" }
+            Tog = new Tog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.Culture, cultureEntry.CurrentValue);
@@ -2358,19 +2358,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new Tag { Text = "Tag2c" },
-                Tog = new Tog { Text = "Tog2c" }
+                Tog = new Tog { Text = "Tog2c" },
             },
             Manufacturer = new Manufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new Tag { Text = "Tag1c" },
-                Tog = new Tog { Text = "Tog1c" }
+                Tog = new Tog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.Culture, cultureEntry.CurrentValue);
@@ -2443,7 +2443,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new Tag { Text = "Tag1b" },
-            Tog = new Tog { Text = "Tog1b" }
+            Tog = new Tog { Text = "Tog1b" },
         };
 
         milkLicenseEntry.CurrentValue = new License
@@ -2451,7 +2451,7 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new Tag { Text = "Tag2b" },
-            Tog = new Tog { Text = "Tog2b" }
+            Tog = new Tog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.Milk, milkEntry.CurrentValue);
@@ -2481,19 +2481,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new Tag { Text = "Tag2c" },
-                Tog = new Tog { Text = "Tog2c" }
+                Tog = new Tog { Text = "Tog2c" },
             },
             Manufacturer = new Manufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new Tag { Text = "Tag1c" },
-                Tog = new Tog { Text = "Tog1c" }
+                Tog = new Tog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.Milk, milkEntry.CurrentValue);
@@ -2578,7 +2578,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new FieldTag { Text = "Tag1b" },
-            Tog = new FieldTog { Text = "Tog1b" }
+            Tog = new FieldTog { Text = "Tog1b" },
         };
 
         fieldCultureLicenseEntry.CurrentValue = new FieldLicense
@@ -2586,7 +2586,7 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new FieldTag { Text = "Tag2b" },
-            Tog = new FieldTog { Text = "Tog2b" }
+            Tog = new FieldTog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.FieldCulture, fieldCultureEntry.CurrentValue);
@@ -2628,19 +2628,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new FieldTag { Text = "Tag2c" },
-                Tog = new FieldTog { Text = "Tog2c" }
+                Tog = new FieldTog { Text = "Tog2c" },
             },
             Manufacturer = new FieldManufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new FieldTag { Text = "Tag1c" },
-                Tog = new FieldTog { Text = "Tog1c" }
+                Tog = new FieldTog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.FieldCulture, fieldCultureEntry.CurrentValue);
@@ -2722,7 +2722,7 @@ public class PropertyEntryTest
             Name = "NameB",
             Rating = -7,
             Tag = new FieldTag { Text = "Tag1b" },
-            Tog = new FieldTog { Text = "Tog1b" }
+            Tog = new FieldTog { Text = "Tog1b" },
         };
 
         fieldMilkLicenseEntry.CurrentValue = new FieldLicense
@@ -2730,7 +2730,7 @@ public class PropertyEntryTest
             Charge = -1.0m,
             Title = "TitleB",
             Tag = new FieldTag { Text = "Tag2b" },
-            Tog = new FieldTog { Text = "Tog2b" }
+            Tog = new FieldTog { Text = "Tog2b" },
         };
 
         Assert.Equal(yogurt.FieldMilk, fieldMilkEntry.CurrentValue);
@@ -2769,19 +2769,19 @@ public class PropertyEntryTest
                 Charge = -2.0m,
                 Title = "TitleC",
                 Tag = new FieldTag { Text = "Tag2c" },
-                Tog = new FieldTog { Text = "Tog2c" }
+                Tog = new FieldTog { Text = "Tog2c" },
             },
             Manufacturer = new FieldManufacturer
             {
                 Name = "NameC",
                 Rating = -8,
                 Tag = new FieldTag { Text = "Tag1c" },
-                Tog = new FieldTog { Text = "Tog1c" }
+                Tog = new FieldTog { Text = "Tog1c" },
             },
             Rating = -77,
             Species = "SpC",
             Subspecies = "SpS",
-            Validation = null
+            Validation = null,
         };
 
         Assert.Equal(yogurt.FieldMilk, fieldMilkEntry.CurrentValue);
@@ -2900,18 +2900,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -2920,18 +2920,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -2940,18 +2940,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -2960,19 +2960,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -3122,18 +3122,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -3142,18 +3142,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -3162,18 +3162,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -3182,19 +3182,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -3560,18 +3560,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -3580,18 +3580,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -3600,18 +3600,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -3620,19 +3620,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);
@@ -4320,18 +4320,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -4340,18 +4340,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -4360,18 +4360,18 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldMilk = new FieldMilk
             {
@@ -4380,19 +4380,19 @@ public class PropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
         var entry = context.Entry(yogurt);

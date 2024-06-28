@@ -168,7 +168,7 @@ public class CustomValueGeneratorTest
         "Kasper Schmeichel",
         "Wes Morgan",
         "Robert Huth",
-        "Leonardo Ulloa"
+        "Leonardo Ulloa",
     };
 
     private static long ToCounter(Guid guid)
@@ -218,7 +218,7 @@ public class CustomValueGeneratorTest
                 Guid.NewGuid(),
                 Guid.NewGuid(),
                 Guid.NewGuid(),
-                Guid.NewGuid()
+                Guid.NewGuid(),
             };
 
         private int _counter = -1;

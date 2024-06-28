@@ -64,7 +64,7 @@ public class RenderTreeDiffBuilderTest : IDisposable
             {
                 builder.OpenComponent<FakeComponent>(0);
                 builder.CloseComponent();
-            }
+            },
         }.Select(x => new object[] { x });
 
     [Fact]

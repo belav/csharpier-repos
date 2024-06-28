@@ -17,7 +17,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 CultureInfo.CurrentCulture.Name,
-                CultureInfo.CurrentCulture.EnglishName
+                CultureInfo.CurrentCulture.EnglishName,
             };
 
             if (SupportFullGlobalizationData || PlatformDetection.IsHybridGlobalizationOnOSX)

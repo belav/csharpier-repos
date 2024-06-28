@@ -271,7 +271,7 @@ public static class TypedResults
         ArgumentNullException.ThrowIfNull(context);
         return new(data, statusCode, contentType)
         {
-            JsonTypeInfo = context.GetRequiredTypeInfo(typeof(TValue))
+            JsonTypeInfo = context.GetRequiredTypeInfo(typeof(TValue)),
         };
     }
 

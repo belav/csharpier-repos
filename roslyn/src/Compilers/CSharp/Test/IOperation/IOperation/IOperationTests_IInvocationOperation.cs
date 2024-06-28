@@ -41,7 +41,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                 //         /*<bind>*/c.M1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.M1")
                     .WithArguments("C.M1()")
-                    .WithLocation(9, 19)
+                    .WithLocation(9, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -111,7 +111,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                 //         /*<bind>*/C.M1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "C.M1")
                     .WithArguments("C.M1()")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -685,7 +685,7 @@ public class MyClass
                 //         (c1 ?? c2).M2(o2);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M2")
                     .WithArguments("MyClass.M2(object)")
-                    .WithLocation(7, 9)
+                    .WithLocation(7, 9),
             };
 
             string expectedFlowGraph =

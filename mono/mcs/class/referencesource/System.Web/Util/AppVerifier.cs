@@ -139,7 +139,7 @@
             AllStepMask = BeginExecutionStepMask | ExecutionStepCallbackMask,
 
             AllBeginMask = BeginCallHandlerMask | BeginExecutionStepMask,
-            AllCallbackMask = CallHandlerCallbackMask | ExecutionStepCallbackMask
+            AllCallbackMask = CallHandlerCallbackMask | ExecutionStepCallbackMask,
         };
 
         // The declarative order of these two fields is important; don't swap them!

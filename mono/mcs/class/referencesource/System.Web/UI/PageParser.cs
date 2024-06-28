@@ -794,7 +794,7 @@ namespace System.Web.UI
         private enum TraceModeInternal
         {
             SortByTime = 0,
-            SortByCategory = 1
+            SortByCategory = 1,
         }
 
         // This must be in its own method to avoid jitting System.EnterpriseServices.dll

@@ -224,6 +224,6 @@ namespace System.Web.UI
         Page = 1,
         Session = 2,
         Application = 3,
-        AppInstance = 4
+        AppInstance = 4,
     }
 }

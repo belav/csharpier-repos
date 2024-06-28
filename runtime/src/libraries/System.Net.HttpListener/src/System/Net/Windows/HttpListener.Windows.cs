@@ -1095,7 +1095,7 @@ namespace System.Net
                                         Binding = binding,
                                         Policy = GetAuthenticationExtendedProtectionPolicy(
                                             extendedProtectionPolicy
-                                        )
+                                        ),
                                     };
                                 sessionContext = new NegotiateAuthentication(serverOptions);
                                 contextPackage = package;

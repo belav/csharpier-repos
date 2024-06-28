@@ -166,7 +166,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         try { <AS:4>M2();</AS:4> } finally { }
     }
 }
-"
+",
             };
 
             var module1 = new Guid("11111111-1111-1111-1111-111111111111");
@@ -258,7 +258,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"3: {document2.FilePath}: (8,20)-(8,25) flags=[MethodUpToDate, NonLeafFrame] mvid=22222222-2222-2222-2222-222222222222 0x06000004 v1 IL_0002", // [|F2();|] in M2
                     $"4: {document2.FilePath}: (26,20)-(26,25) flags=[MethodUpToDate, NonLeafFrame] mvid=22222222-2222-2222-2222-222222222222 0x06000005 v1 IL_0003", // [|M2();|] in Main
                     $"5: NonRoslynDocument.mcpp: (1,1)-(1,10) flags=[MethodUpToDate, NonLeafFrame] mvid={module3} 0x06000005 v1 IL_000A",
-                    $"6: a.dummy: (2,1)-(2,10) flags=[MethodUpToDate, NonLeafFrame] mvid={module4} 0x06000005 v1 IL_000A"
+                    $"6: a.dummy: (2,1)-(2,10) flags=[MethodUpToDate, NonLeafFrame] mvid={module4} 0x06000005 v1 IL_000A",
                 },
                 statements.Select(InspectActiveStatementAndInstruction)
             );
@@ -271,7 +271,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new[]
                 {
                     $"1: {document1.FilePath}: (4,32)-(4,37) flags=[MethodUpToDate, NonLeafFrame]",
-                    $"0: {document1.FilePath}: (9,14)-(9,35) flags=[LeafFrame, MethodUpToDate]"
+                    $"0: {document1.FilePath}: (9,14)-(9,35) flags=[LeafFrame, MethodUpToDate]",
                 },
                 baseActiveStatementsMap
                     .DocumentPathMap[document1.FilePath]
@@ -284,6 +284,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"3: {document2.FilePath}: (8,20)-(8,25) flags=[MethodUpToDate, NonLeafFrame]", // [|F2();|] in M2
                     $"2: {document2.FilePath}: (21,14)-(21,24) flags=[MethodUpToDate, NonLeafFrame]", // [|Test1.M1()|] in F2
                     $"4: {document2.FilePath}: (26,20)-(26,25) flags=[MethodUpToDate, NonLeafFrame]" // [|M2();|] in Main
+                    ,
                 },
                 baseActiveStatementsMap
                     .DocumentPathMap[document2.FilePath]
@@ -301,7 +302,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             );
 
             AssertEx.Equal(
-                new[] { $"6: a.dummy: (2,1)-(2,10) flags=[MethodUpToDate, NonLeafFrame]", },
+                new[] { $"6: a.dummy: (2,1)-(2,10) flags=[MethodUpToDate, NonLeafFrame]" },
                 baseActiveStatementsMap.DocumentPathMap["a.dummy"].Select(InspectActiveStatement)
             );
 
@@ -315,7 +316,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 .ConfigureAwait(false);
 
             AssertEx.Equal(
-                new[] { $"[{document1.FilePath}: (4,8)-(4,46)]", "[]", },
+                new[] { $"[{document1.FilePath}: (4,8)-(4,46)]", "[]" },
                 oldActiveStatements1.Select(s =>
                     "[" + string.Join(", ", s.ExceptionRegions.Spans) + "]"
                 )
@@ -380,7 +381,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"0x06000004 v1 | ER {document2.FilePath}: (14,8)-(16,9) => (15,8)-(17,9)",
                     $"0x06000004 v1 | ER {document2.FilePath}: (10,10)-(12,11) => (11,10)-(13,11)",
                     $"0x06000003 v1 | AS {document2.FilePath}: (21,14)-(21,24) => (21,14)-(21,24)",
-                    $"0x06000005 v1 | AS {document2.FilePath}: (26,20)-(26,25) => (26,20)-(26,25)"
+                    $"0x06000005 v1 | AS {document2.FilePath}: (26,20)-(26,25) => (26,20)-(26,25)",
                 },
                 nonRemappableRegions.Select(r =>
                     $"{r.Method.GetDebuggerDisplay()} | {r.Region.GetDebuggerDisplay()}"
@@ -391,7 +392,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new[]
                 {
                     $"0x06000004 v1 | (15,8)-(17,9) Delta=-1",
-                    $"0x06000004 v1 | (11,10)-(13,11) Delta=-1"
+                    $"0x06000004 v1 | (11,10)-(13,11) Delta=-1",
                 },
                 exceptionRegionUpdates.Select(InspectExceptionRegionUpdate)
             );
@@ -464,7 +465,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new[]
                 {
                     $"0: {document.FilePath}: (6,18)-(6,23) flags=[MethodUpToDate, NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000001 v1 IL_0000 '<AS:0>F2();</AS:0>'",
-                    $"1: {document.FilePath}: (18,14)-(18,36) flags=[LeafFrame, MethodUpToDate] mvid=11111111-1111-1111-1111-111111111111 0x06000002 v1 IL_0000 '<AS:1>throw new Exception();</AS:1>'"
+                    $"1: {document.FilePath}: (18,14)-(18,36) flags=[LeafFrame, MethodUpToDate] mvid=11111111-1111-1111-1111-111111111111 0x06000002 v1 IL_0000 '<AS:1>throw new Exception();</AS:1>'",
                 },
                 baseActiveStatements.Select(s => InspectActiveStatementAndInstruction(s, baseText))
             );
@@ -480,7 +481,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             // Note that the spans correspond to the base snapshot (V2).
             AssertEx.Equal(
-                new[] { $"[{document.FilePath}: (8,8)-(12,9) 'catch (Exception) {{']", "[]", },
+                new[] { $"[{document.FilePath}: (8,8)-(12,9) 'catch (Exception) {{']", "[]" },
                 oldActiveStatements.Select(s =>
                     "["
                     + string.Join(
@@ -539,7 +540,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             );
 
             AssertEx.Equal(
-                new[] { "0x06000001 v1 | (8,8)-(12,9) Delta=0", },
+                new[] { "0x06000001 v1 | (8,8)-(12,9) Delta=0" },
                 exceptionRegionUpdates.Select(InspectExceptionRegionUpdate)
             );
 
@@ -714,7 +715,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                             isExceptionRegion: true
                         )
                     )
-                }
+                },
             }.ToImmutableDictionary();
 
             using var workspace = new TestWorkspace(composition: s_composition);
@@ -744,7 +745,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                     $"0: {document.FilePath}: (6,18)-(6,22) flags=[MethodUpToDate, NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000001 v2 IL_0000 '<AS:0>M();</AS:0>'",
                     $"1: {document.FilePath}: (20,18)-(20,22) flags=[MethodUpToDate, NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000002 v2 IL_0000 '<AS:1>M();</AS:1>'",
                     $"2: {document.FilePath}: (29,22)-(29,26) flags=[NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000003 v1 IL_0000 '{{   <AS:2>M();</AS:2>'",
-                    $"3: {document.FilePath}: (53,22)-(53,26) flags=[NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000004 v1 IL_0000 '<AS:3>M();</AS:3>'"
+                    $"3: {document.FilePath}: (53,22)-(53,26) flags=[NonLeafFrame] mvid=11111111-1111-1111-1111-111111111111 0x06000004 v1 IL_0000 '<AS:3>M();</AS:3>'",
                 },
                 baseActiveStatements.Select(s =>
                     InspectActiveStatementAndInstruction(s, sourceTextV2)
@@ -858,7 +859,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 new[]
                 {
                     $"0x06000002 v2 IL_0000: (19,18)-(19,22) '<AS:1>M();</AS:1>'",
-                    $"0x06000004 v1 IL_0000: (55,22)-(55,26) '<AS:3>M();</AS:3>'"
+                    $"0x06000004 v1 IL_0000: (55,22)-(55,26) '<AS:3>M();</AS:3>'",
                 },
                 activeStatementsInUpdatedMethods.Select(update =>
                     $"{InspectActiveStatementUpdate(update)} '{GetFirstLineText(update.NewSpan.ToLinePositionSpan(), sourceTextV3)}'"
@@ -888,7 +889,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
     {
         <AS:0>M();</AS:0>
     }
-}"
+}",
             };
 
             var thread1 = Guid.NewGuid();
@@ -909,7 +910,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                         | ActiveStatementFlags.MethodUpToDate,
                     ActiveStatementFlags.NonLeafFrame
                         | ActiveStatementFlags.LeafFrame
-                        | ActiveStatementFlags.MethodUpToDate
+                        | ActiveStatementFlags.MethodUpToDate,
                 ]
             );
 

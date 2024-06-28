@@ -55,7 +55,7 @@ namespace System.CommandLine.Suggest.Tests
             _environmentVariables = new[]
             {
                 ("DOTNET_ROOT", _dotnetHostDir.FullName),
-                ("INTERNAL_TEST_DOTNET_SUGGEST_HOME", _testRoot)
+                ("INTERNAL_TEST_DOTNET_SUGGEST_HOME", _testRoot),
             };
         }
 

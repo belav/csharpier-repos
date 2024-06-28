@@ -17,7 +17,7 @@ namespace LifeTimeFX
     {
         Short,
         Medium,
-        Long
+        Long,
     }
 
     public interface LifeTime

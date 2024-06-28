@@ -21,7 +21,7 @@ namespace System.IO.Tests
                 new FileStreamOptions
                 {
                     Mode = mode,
-                    Access = mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
+                    Access = mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
                 }
             );
 
@@ -47,7 +47,7 @@ namespace System.IO.Tests
                     Access = access,
                     Share = share,
                     BufferSize = bufferSize,
-                    Options = options
+                    Options = options,
                 }
             );
 
@@ -69,7 +69,7 @@ namespace System.IO.Tests
                     Share = share,
                     BufferSize = bufferSize,
                     Options = options,
-                    PreallocationSize = preallocationSize
+                    PreallocationSize = preallocationSize,
                 }
             );
 
@@ -93,7 +93,7 @@ namespace System.IO.Tests
                     BufferSize = bufferSize,
                     Options = options,
                     PreallocationSize = preallocationSize,
-                    UnixCreateMode = unixFileMode
+                    UnixCreateMode = unixFileMode,
                 }
             );
 

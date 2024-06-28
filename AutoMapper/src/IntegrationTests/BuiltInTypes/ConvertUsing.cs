@@ -17,7 +17,7 @@ public class ConvertUsingWithNullables
     public enum MyEnum
     {
         Value1 = 0,
-        Value2 = 1
+        Value2 = 1,
     }
 
     public class MyTable

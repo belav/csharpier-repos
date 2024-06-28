@@ -47,7 +47,7 @@ namespace Castle.DynamicProxy.Tests
             @"C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin",
             @"C:\Program Files\Microsoft SDKs\Windows\v6.0A\Bin",
             @"C:\Program Files (x86)\Microsoft SDKs\Windows\v6.0A\Bin",
-            @"C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\bin"
+            @"C:\Program Files (x86)\Microsoft Visual Studio 8\SDK\v2.0\bin",
         };
 
         private static string FindPeVerifyPath()
@@ -143,8 +143,8 @@ namespace Castle.DynamicProxy.Tests
                     UseShellExecute = false,
                     WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory,
                     Arguments = "\"" + assemblyPath + "\" /VERBOSE",
-                    CreateNoWindow = true
-                }
+                    CreateNoWindow = true,
+                },
             };
             process.Start();
             var processOutput = process.StandardOutput.ReadToEnd();

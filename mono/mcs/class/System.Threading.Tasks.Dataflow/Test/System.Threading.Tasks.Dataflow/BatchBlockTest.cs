@@ -168,7 +168,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     Greedy = false,
                     BoundedCapacity = 2,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             var source1 = new BufferBlock<int>(
@@ -216,7 +216,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     Greedy = true,
                     BoundedCapacity = 3,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
 
@@ -248,7 +248,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     Greedy = false,
                     BoundedCapacity = 3,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             var source1 = new BufferBlock<int>(
@@ -294,7 +294,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     Greedy = false,
                     BoundedCapacity = 3,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             var source1 = new BufferBlock<int>(
@@ -353,7 +353,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new GroupingDataflowBlockOptions
                 {
                     MaxNumberOfGroups = 2,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
 
@@ -461,7 +461,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     MaxNumberOfGroups = 1,
                     Greedy = false,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             ITargetBlock<int> target = block;

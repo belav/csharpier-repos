@@ -891,7 +891,7 @@ class Program
                     VirtualKeyCode.HOME,
                     VirtualKeyCode.DELETE,
                     VirtualKeyCode.VK_P,
-                    VirtualKeyCode.RETURN
+                    VirtualKeyCode.RETURN,
                 ],
                 HangMitigatingCancellationToken
             );

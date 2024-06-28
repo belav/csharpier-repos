@@ -33,7 +33,7 @@ internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable
 
             var serverFormatter = new MessagePackFormatter()
             {
-                MultiplexingStream = serverMultiplexingStream
+                MultiplexingStream = serverMultiplexingStream,
             };
             _serverRpc = new JsonRpc(
                 new LengthHeaderMessageHandler(serverChannel, serverFormatter)
@@ -50,7 +50,7 @@ internal sealed class BrokeredServiceProxy<T> : IAsyncDisposable
 
             var clientFormatter = new MessagePackFormatter()
             {
-                MultiplexingStream = clientMultiplexingStream
+                MultiplexingStream = clientMultiplexingStream,
             };
             _clientRpc = new JsonRpc(
                 new LengthHeaderMessageHandler(clientChannel, clientFormatter)

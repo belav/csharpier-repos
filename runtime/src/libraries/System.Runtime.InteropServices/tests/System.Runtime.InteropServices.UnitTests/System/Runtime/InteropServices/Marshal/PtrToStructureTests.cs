@@ -295,17 +295,17 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[]
             {
                 typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[]
             {
                 typeof(int).MakePointerType(),
-                typeof(MissingMethodException)
+                typeof(MissingMethodException),
             };
             yield return new object[]
             {
                 typeof(int).MakeByRefType(),
-                typeof(MissingMethodException)
+                typeof(MissingMethodException),
             };
         }
 
@@ -344,7 +344,7 @@ namespace System.Runtime.InteropServices.Tests
         public enum Int32Enum : int
         {
             Value1,
-            Value2
+            Value2,
         }
     }
 }

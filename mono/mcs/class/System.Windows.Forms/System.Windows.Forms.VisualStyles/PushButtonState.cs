@@ -34,6 +34,6 @@ namespace System.Windows.Forms.VisualStyles
         Hot = 2,
         Pressed = 3,
         Disabled = 4,
-        Default = 5
+        Default = 5,
     }
 }

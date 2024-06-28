@@ -17,7 +17,7 @@ namespace System.Activities.Runtime
         {
             typeof(NativeActivityContext),
             typeof(Bookmark),
-            typeof(object)
+            typeof(object),
         };
 
         public BookmarkCallbackWrapper(BookmarkCallback callback, ActivityInstance owningInstance)

@@ -44,7 +44,7 @@ namespace MonoTests.System.Reflection.Emit
                 "Fail",
                 MethodAttributes.Public,
                 typeof(void),
-                new[] { eb, }
+                new[] { eb }
             );
             var builder = hello.DefineParameter(1, ParameterAttributes.In, "failParam");
             builder.SetConstant(1);
@@ -53,7 +53,7 @@ namespace MonoTests.System.Reflection.Emit
         public enum E : byte
         {
             E1,
-            E2
+            E2,
         }
 
         [Test]

@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Retargeting
                 references: new[]
                 {
                     oldMsCorLib,
-                    TestReferences.SymbolsTests.CustomModifiers.Modifiers.netmodule
+                    TestReferences.SymbolsTests.CustomModifiers.Modifiers.netmodule,
                 }
             );
 
@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Retargeting
                 references: new MetadataReference[]
                 {
                     newMsCorLib,
-                    new CSharpCompilationReference(c1)
+                    new CSharpCompilationReference(c1),
                 }
             );
 

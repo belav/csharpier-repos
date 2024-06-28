@@ -52,25 +52,25 @@ namespace System.Reflection.Tests
             {
                 methodSampleConstructors1[0],
                 methodSampleConstructors2[0],
-                true
+                true,
             };
             yield return new object[]
             {
                 methodSampleConstructors1[1],
                 methodSampleConstructors2[1],
-                true
+                true,
             };
             yield return new object[]
             {
                 methodSampleConstructors1[2],
                 methodSampleConstructors2[2],
-                true
+                true,
             };
             yield return new object[]
             {
                 methodSampleConstructors1[1],
                 methodSampleConstructors2[2],
-                false
+                false,
             };
         }
 

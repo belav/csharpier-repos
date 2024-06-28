@@ -27,7 +27,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                             Id = 1,
                             AlternateId = new Guid(),
                             Dependent = new DependentBase<byte?>(1),
-                            Owned = new OwnedType(c)
+                            Owned = new OwnedType(c),
                         }
                     );
 
@@ -322,7 +322,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                     referenceOwnership,
                     collectionOwnership,
                     dependentForeignKey,
-                    derivedSkipNavigation.Inverse.ForeignKey
+                    derivedSkipNavigation.Inverse.ForeignKey,
                 },
                 principalKey.GetReferencingForeignKeys()
             );
@@ -332,7 +332,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 {
                     dependentBaseForeignKey,
                     referenceOwnership,
-                    derivedSkipNavigation.Inverse.ForeignKey
+                    derivedSkipNavigation.Inverse.ForeignKey,
                 },
                 principalBase.GetReferencingForeignKeys()
             );
@@ -347,7 +347,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                     referenceOwnership,
                     collectionOwnership,
                     dependentForeignKey,
-                    derivedSkipNavigation.Inverse.ForeignKey
+                    derivedSkipNavigation.Inverse.ForeignKey,
                 },
                 principalKey.GetReferencingForeignKeys()
             );
@@ -358,7 +358,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                     dependentBaseForeignKey,
                     tptForeignKey,
                     referenceOwnership,
-                    derivedSkipNavigation.Inverse.ForeignKey
+                    derivedSkipNavigation.Inverse.ForeignKey,
                 },
                 principalBase.GetReferencingForeignKeys()
             );
@@ -450,7 +450,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 RelationalAnnotationNames.TableName,
                 RelationalAnnotationNames.ViewName,
                 RelationalAnnotationNames.ViewSchema,
-                "go"
+                "go",
             },
             complexType.GetAnnotations().Select(a => a.Name)
         );
@@ -719,7 +719,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 "RefTypeIList",
                 "RefTypeArray",
                 "RefTypeEnumerable",
-                "Enum1"
+                "Enum1",
             },
             insertSproc.Parameters.Select(p => p.PropertyName)
         );
@@ -765,7 +765,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 "RefTypeIList",
                 "RefTypeArray",
                 "RefTypeEnumerable",
-                "Id"
+                "Id",
             },
             updateSproc.Parameters.Select(p => p.PropertyName)
         );
@@ -838,7 +838,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 "RefTypeList",
                 "RefTypeIList",
                 "RefTypeArray",
-                "RefTypeEnumerable"
+                "RefTypeEnumerable",
             },
             insertSproc.Parameters.Select(p => p.PropertyName)
         );
@@ -883,7 +883,7 @@ public abstract class CompiledModelRelationalTestBase : CompiledModelTestBase
                 "RefTypeIList",
                 "RefTypeArray",
                 "RefTypeEnumerable",
-                "Id"
+                "Id",
             },
             updateSproc.Parameters.Select(p => p.PropertyName)
         );

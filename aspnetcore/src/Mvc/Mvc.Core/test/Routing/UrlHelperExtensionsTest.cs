@@ -16,8 +16,8 @@ public class UrlHelperExtensionsTest
     {
         // Arrange
         UrlRouteContext actual = null;
-        var routeData = new RouteData { Values = { { "page", "ambient-page" }, } };
-        var actionContext = new ActionContext { RouteData = routeData, };
+        var routeData = new RouteData { Values = { { "page", "ambient-page" } } };
+        var actionContext = new ActionContext { RouteData = routeData };
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
             .Setup(h => h.RouteUrl(It.IsAny<UrlRouteContext>()))
@@ -49,8 +49,8 @@ public class UrlHelperExtensionsTest
             new TheoryData<object>
             {
                 { new { id = 10 } },
-                { new Dictionary<string, object> { ["id"] = 10, } },
-                { new RouteValueDictionary { ["id"] = 10, } },
+                { new Dictionary<string, object> { ["id"] = 10 } },
+                { new RouteValueDictionary { ["id"] = 10 } },
             };
     }
 
@@ -223,8 +223,8 @@ public class UrlHelperExtensionsTest
     {
         // Arrange
         UrlRouteContext actual = null;
-        var routeData = new RouteData { Values = { { "page", "ambient-page" }, } };
-        var actionContext = new ActionContext { RouteData = routeData, };
+        var routeData = new RouteData { Values = { { "page", "ambient-page" } } };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -265,7 +265,7 @@ public class UrlHelperExtensionsTest
             Values =
             {
                 { "page", new DateTimeOffset(2018, 10, 31, 7, 37, 38, TimeSpan.FromHours(-7)) },
-            }
+            },
         };
         var actionContext = new ActionContext
         {
@@ -313,9 +313,9 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" }, }
+            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" } },
         };
-        var actionContext = new ActionContext { RouteData = routeData, };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -357,9 +357,9 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" }, }
+            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" } },
         };
-        var actionContext = new ActionContext { RouteData = routeData, };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -396,9 +396,9 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" }, }
+            Values = { { "page", "ambient-page" }, { "handler", "ambient-handler" } },
         };
-        var actionContext = new ActionContext { RouteData = routeData, };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -509,9 +509,9 @@ public class UrlHelperExtensionsTest
         {
             ActionDescriptor = new ActionDescriptor
             {
-                RouteValues = new Dictionary<string, string> { { "page", "/Home" }, },
+                RouteValues = new Dictionary<string, string> { { "page", "/Home" } },
             },
-            RouteData = new RouteData { Values = { ["page"] = "/Home" }, },
+            RouteData = new RouteData { Values = { ["page"] = "/Home" } },
         };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
@@ -543,7 +543,7 @@ public class UrlHelperExtensionsTest
         var expected = "SiblingName";
         UrlRouteContext actual = null;
         var routeData = new RouteData();
-        var actionContext = new ActionContext { RouteData = new RouteData(), };
+        var actionContext = new ActionContext { RouteData = new RouteData() };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -567,9 +567,9 @@ public class UrlHelperExtensionsTest
         UrlRouteContext actual = null;
         var routeData = new RouteData
         {
-            Values = { { "page", "ambient-page" }, { "area", "ambient-area" }, }
+            Values = { { "page", "ambient-page" }, { "area", "ambient-area" } },
         };
-        var actionContext = new ActionContext { RouteData = routeData, };
+        var actionContext = new ActionContext { RouteData = routeData };
 
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -610,7 +610,7 @@ public class UrlHelperExtensionsTest
 
         var httpContext = new DefaultHttpContext
         {
-            Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost), }
+            Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost) },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var urlHelper = CreateMockUrlHelper(actionContext);
@@ -642,7 +642,7 @@ public class UrlHelperExtensionsTest
 
         var httpContext = new DefaultHttpContext
         {
-            Request = { Scheme = "http://", Host = new HostString(expectedHost), }
+            Request = { Scheme = "http://", Host = new HostString(expectedHost) },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var urlHelper = CreateMockUrlHelper(actionContext);
@@ -674,7 +674,7 @@ public class UrlHelperExtensionsTest
 
         var httpContext = new DefaultHttpContext
         {
-            Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net"), }
+            Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net") },
         };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var urlHelper = CreateMockUrlHelper(actionContext);
@@ -709,9 +709,9 @@ public class UrlHelperExtensionsTest
         {
             HttpContext = new DefaultHttpContext
             {
-                Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost), }
+                Request = { Scheme = expectedProtocol, Host = new HostString(expectedHost) },
             },
-            RouteData = new RouteData { Values = { { "page", "ambient-page" }, } },
+            RouteData = new RouteData { Values = { { "page", "ambient-page" } } },
         };
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -750,9 +750,9 @@ public class UrlHelperExtensionsTest
         {
             HttpContext = new DefaultHttpContext
             {
-                Request = { Scheme = "http://", Host = new HostString(expectedHost), }
+                Request = { Scheme = "http://", Host = new HostString(expectedHost) },
             },
-            RouteData = new RouteData { Values = { { "page", "ambient-page" }, } },
+            RouteData = new RouteData { Values = { { "page", "ambient-page" } } },
         };
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -791,9 +791,9 @@ public class UrlHelperExtensionsTest
         {
             HttpContext = new DefaultHttpContext
             {
-                Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net"), }
+                Request = { Scheme = expectedProtocol, Host = new HostString("www.asp.net") },
             },
-            RouteData = new RouteData { Values = { { "page", "ambient-page" }, } },
+            RouteData = new RouteData { Values = { { "page", "ambient-page" } } },
         };
         var urlHelper = CreateMockUrlHelper(actionContext);
         urlHelper
@@ -838,9 +838,9 @@ public class UrlHelperExtensionsTest
         {
             ActionDescriptor = new ActionDescriptor
             {
-                RouteValues = new Dictionary<string, string> { { "page", page }, },
+                RouteValues = new Dictionary<string, string> { { "page", page } },
             },
-            RouteData = new RouteData { Values = { ["page"] = page }, },
+            RouteData = new RouteData { Values = { ["page"] = page } },
         };
     }
 }

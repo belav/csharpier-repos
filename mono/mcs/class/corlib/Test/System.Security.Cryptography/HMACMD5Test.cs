@@ -164,7 +164,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0b,
                 0x0b,
                 0x0b,
-                0x0b
+                0x0b,
             };
             byte[] data = Encoding.Default.GetBytes("Hi There");
             byte[] digest =
@@ -184,7 +184,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x15,
                 0x8b,
                 0xfc,
-                0x9d
+                0x9d,
             };
             Check("RFC2202-TC1", key, data, digest);
         }
@@ -211,7 +211,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0a,
                 0x5d,
                 0xb7,
-                0x38
+                0x38,
             };
             Check("RFC2202-TC2", key, data, digest);
         }
@@ -236,7 +236,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xaa,
                 0xaa,
                 0xaa,
-                0xaa
+                0xaa,
             };
             byte[] data = new byte[50];
             for (int i = 0; i < data.Length; i++)
@@ -258,7 +258,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xf0,
                 0xe8,
                 0xb3,
-                0xf6
+                0xf6,
             };
             Check("RFC2202-TC3", key, data, digest);
         }
@@ -292,7 +292,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x16,
                 0x17,
                 0x18,
-                0x19
+                0x19,
             };
             byte[] data = new byte[50];
             for (int i = 0; i < data.Length; i++)
@@ -314,7 +314,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x46,
                 0xff,
                 0xaa,
-                0x79
+                0x79,
             };
             Check("RFC2202-TC4", key, data, digest);
         }
@@ -339,7 +339,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x0c,
                 0x0c,
                 0x0c,
-                0x0c
+                0x0c,
             };
             byte[] data = Encoding.Default.GetBytes("Test With Truncation");
             byte[] digest =
@@ -359,7 +359,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x69,
                 0x0e,
                 0xfd,
-                0x4c
+                0x4c,
             };
             Check("RFC2202-TC5", key, data, digest);
         }
@@ -390,7 +390,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x61,
                 0xb9,
                 0xd0,
-                0xcd
+                0xcd,
             };
             Check("RFC2202-TC6", key, data, digest);
         }
@@ -421,7 +421,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xdb,
                 0x3a,
                 0xa5,
-                0x3e
+                0x3e,
             };
             Check("RFC2202-TC7", key, data, digest);
         }

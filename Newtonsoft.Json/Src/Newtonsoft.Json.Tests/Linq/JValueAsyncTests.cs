@@ -50,7 +50,7 @@ namespace Newtonsoft.Json.Tests.Linq
                 await JToken.ReadFromAsync(
                     new JsonTextReader(new StringReader("9.9"))
                     {
-                        FloatParseHandling = FloatParseHandling.Decimal
+                        FloatParseHandling = FloatParseHandling.Decimal,
                     }
                 );
 

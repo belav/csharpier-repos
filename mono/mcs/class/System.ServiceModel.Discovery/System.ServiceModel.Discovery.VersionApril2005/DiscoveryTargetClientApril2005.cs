@@ -90,7 +90,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         {
             var req = new MessageContractsApril2005.FindRequest()
             {
-                Body = new FindCriteriaApril2005(criteria)
+                Body = new FindCriteriaApril2005(criteria),
             };
             Channel.BeginFind(
                 req,
@@ -149,7 +149,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
         {
             var req = new MessageContractsApril2005.ResolveRequest()
             {
-                Body = new ResolveCriteriaApril2005(criteria)
+                Body = new ResolveCriteriaApril2005(criteria),
             };
             Channel.BeginResolve(
                 req,

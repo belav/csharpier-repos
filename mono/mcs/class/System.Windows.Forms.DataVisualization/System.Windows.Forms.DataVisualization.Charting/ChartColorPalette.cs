@@ -41,6 +41,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Chocolate = 9,
         Fire = 10,
         SeaGreen = 11,
-        BrightPastel = 12
+        BrightPastel = 12,
     }
 }

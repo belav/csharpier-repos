@@ -160,7 +160,7 @@ namespace Test.Sys.Drawing
             "White",
             "WhiteSmoke",
             "Yellow",
-            "YellowGreen"
+            "YellowGreen",
         };
 
         string[] ar_system_brushes =
@@ -185,7 +185,7 @@ namespace Test.Sys.Drawing
             "Menu",
             "ScrollBar",
             "Window",
-            "WindowText"
+            "WindowText",
         };
 
         #endregion

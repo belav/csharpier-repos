@@ -497,7 +497,7 @@ public abstract class CompositeKeysQueryFixtureBase
             .HasForeignKey<CompositeThree>(e => new
             {
                 e.Level2_Required_Id1,
-                e.Level2_Required_Id2
+                e.Level2_Required_Id2,
             })
             .IsRequired()
             .OnDelete(DeleteBehavior.Restrict);
@@ -508,7 +508,7 @@ public abstract class CompositeKeysQueryFixtureBase
             .HasForeignKey<CompositeThree>(e => new
             {
                 e.Level2_Optional_Id1,
-                e.Level2_Optional_Id2
+                e.Level2_Optional_Id2,
             })
             .IsRequired(false);
         modelBuilder

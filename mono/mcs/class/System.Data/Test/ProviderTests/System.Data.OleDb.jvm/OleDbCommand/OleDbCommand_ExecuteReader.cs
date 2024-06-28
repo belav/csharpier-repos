@@ -219,7 +219,7 @@ namespace MonoTests.System.Data.OleDb
                         "INSERT INTO Categories (CategoryName, Description) VALUES('__TEST_RECORD__', 'Inserted')",
                         "UPDATE Categories  SET Description='Updated' WHERE CategoryName='__TEST_RECORD__'",
                         "DELETE FROM Categories WHERE CategoryName='__TEST_RECORD__'",
-                        "SELECT * FROM Categories "
+                        "SELECT * FROM Categories ",
                     };
                     string insertCmdTxt = CreateCompundSqlStatement(
                         sqlStatements,

@@ -190,7 +190,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0
+                    0,
                 }
             );
             var y = new BigInteger(

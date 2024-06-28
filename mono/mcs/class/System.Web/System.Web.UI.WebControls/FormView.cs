@@ -1830,7 +1830,7 @@ namespace System.Web.UI.WebControls
                 defaultMode,
                 dataKeyNames,
                 (key == null ? null : ((IStateManager)key).SaveViewState()),
-                (oldEditValues == null ? null : ((IStateManager)oldEditValues).SaveViewState())
+                (oldEditValues == null ? null : ((IStateManager)oldEditValues).SaveViewState()),
             };
         }
 

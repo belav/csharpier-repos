@@ -475,7 +475,7 @@ internal struct StaticFileContext
         Unspecified,
         NotModified,
         ShouldProcess,
-        PreconditionFailed
+        PreconditionFailed,
     }
 
     [Flags]

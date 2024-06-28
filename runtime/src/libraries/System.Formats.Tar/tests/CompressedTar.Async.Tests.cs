@@ -27,7 +27,7 @@ namespace System.Formats.Tar.Tests
                     {
                         Mode = FileMode.CreateNew,
                         Access = FileAccess.Write,
-                        Options = FileOptions.Asynchronous
+                        Options = FileOptions.Asynchronous,
                     };
 
                 await using (
@@ -58,7 +58,7 @@ namespace System.Formats.Tar.Tests
                     {
                         Mode = FileMode.Open,
                         Access = FileAccess.Read,
-                        Options = FileOptions.Asynchronous
+                        Options = FileOptions.Asynchronous,
                     };
 
                 await using (FileStream streamToDecompress = File.Open(archivePath, readOptions))
@@ -104,7 +104,7 @@ namespace System.Formats.Tar.Tests
                     {
                         Mode = FileMode.CreateNew,
                         Access = FileAccess.Write,
-                        Options = FileOptions.Asynchronous
+                        Options = FileOptions.Asynchronous,
                     };
 
                 await using (FileStream streamToCompress = File.Open(archivePath, createOptions))
@@ -133,7 +133,7 @@ namespace System.Formats.Tar.Tests
                     {
                         Mode = FileMode.Open,
                         Access = FileAccess.Read,
-                        Options = FileOptions.Asynchronous
+                        Options = FileOptions.Asynchronous,
                     };
 
                 await using (FileStream streamToDecompress = File.Open(archivePath, readOptions))

@@ -34,6 +34,6 @@ namespace System.Web.UI
         UserControl,
         Master,
         SourceFile,
-        Other
+        Other,
     }
 }

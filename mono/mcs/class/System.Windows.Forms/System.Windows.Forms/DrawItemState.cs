@@ -39,6 +39,6 @@ namespace System.Windows.Forms
         Inactive = 128,
         NoAccelerator = 256,
         NoFocusRect = 512,
-        ComboBoxEdit = 4096
+        ComboBoxEdit = 4096,
     }
 }

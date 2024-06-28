@@ -190,7 +190,7 @@ namespace System.Linq.Parallel.Tests
                         Partitioner
                             .Create(Enumerable.Range(0, count).ToArray(), loadBalance: false)
                             .AsParallel()
-                    )
+                    ),
                 };
 
                 // For each source and mode, get both unordered and ordered queries that should easily parallelize for all execution modes
@@ -198,7 +198,7 @@ namespace System.Linq.Parallel.Tests
                     ParallelExecutionMode mode in new[]
                     {
                         ParallelExecutionMode.Default,
-                        ParallelExecutionMode.ForceParallelism
+                        ParallelExecutionMode.ForceParallelism,
                     }
                 )
                 {
@@ -223,7 +223,7 @@ namespace System.Linq.Parallel.Tests
                             dop,
                             dop,
                             query,
-                            ParallelExecutionMode.ForceParallelism
+                            ParallelExecutionMode.ForceParallelism,
                         }; // should parallelize, thus expected DOP of > 1
                         yield return new object[]
                         {
@@ -231,7 +231,7 @@ namespace System.Linq.Parallel.Tests
                             dop,
                             1,
                             query,
-                            ParallelExecutionMode.Default
+                            ParallelExecutionMode.Default,
                         }; // won't parallelize, thus expected DOP of 1
                     }
                 }
@@ -248,7 +248,7 @@ namespace System.Linq.Parallel.Tests
             ParallelExecutionMode[] modes = new[]
             {
                 ParallelExecutionMode.Default,
-                ParallelExecutionMode.ForceParallelism
+                ParallelExecutionMode.ForceParallelism,
             };
 
             foreach (ParallelMergeOptions first in modes)

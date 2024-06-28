@@ -357,7 +357,7 @@ namespace System.Web.Http.Tracing.Tracers
             );
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor.Setup(a => a.GetFilterPipeline()).Returns(filterCollection);
@@ -393,7 +393,7 @@ namespace System.Web.Http.Tracing.Tracers
             );
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor.Setup(a => a.GetFilters()).Returns(filters);
@@ -452,7 +452,7 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor
@@ -486,7 +486,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "ExecuteAsync"
+                    Operation = "ExecuteAsync",
                 },
                 new TraceRecord(
                     controllerContext.Request,
@@ -494,8 +494,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
@@ -515,7 +515,7 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             InvalidOperationException exception = new InvalidOperationException("test");
             mockActionDescriptor
@@ -549,7 +549,7 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(
                     controllerContext.Request,
@@ -557,8 +557,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Error
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act & Assert

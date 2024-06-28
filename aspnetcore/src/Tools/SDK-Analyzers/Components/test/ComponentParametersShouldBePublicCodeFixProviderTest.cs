@@ -52,7 +52,7 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.BadProperty1' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 40) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 40) },
             }
         );
 
@@ -102,7 +102,7 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should have a public setter.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 39) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 39) },
             },
             new DiagnosticResult
             {
@@ -110,7 +110,7 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should have a public setter.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 39) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 39) },
             },
             new DiagnosticResult
             {
@@ -118,7 +118,7 @@ public class ComponentParametersShouldBePublicCodeFixProviderTest : CodeFixVerif
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should have a public setter.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 10, 39) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 10, 39) },
             }
         );
     }

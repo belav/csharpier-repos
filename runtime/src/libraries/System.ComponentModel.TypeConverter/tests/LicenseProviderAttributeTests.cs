@@ -59,17 +59,17 @@ namespace System.ComponentModel.Tests
             yield return new object[]
             {
                 new LicenseProviderAttribute((string)null),
-                "System.ComponentModel.LicenseProviderAttribute"
+                "System.ComponentModel.LicenseProviderAttribute",
             };
             yield return new object[]
             {
                 new LicenseProviderAttribute("typeName"),
-                "System.ComponentModel.LicenseProviderAttributetypeName"
+                "System.ComponentModel.LicenseProviderAttributetypeName",
             };
             yield return new object[]
             {
                 new LicenseProviderAttribute(typeof(int)),
-                "System.ComponentModel.LicenseProviderAttributeSystem.Int32"
+                "System.ComponentModel.LicenseProviderAttributeSystem.Int32",
             };
         }
 
@@ -92,43 +92,43 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new LicenseProviderAttribute(typeof(int)),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new LicenseProviderAttribute(new TypeDelegator(typeof(int))),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new LicenseProviderAttribute(typeof(bool)),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new LicenseProviderAttribute(new TypeDelegator(typeof(bool))),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new LicenseProviderAttribute((Type)null),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new LicenseProviderAttribute("typeName"),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new LicenseProviderAttribute((string)null),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

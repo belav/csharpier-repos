@@ -129,7 +129,7 @@ public abstract class RelationalTypeMappingSource
                         elementMapping = FindMapping(element);
                         mappingInfo = mappingInfo with
                         {
-                            ElementTypeMapping = (RelationalTypeMapping?)elementMapping
+                            ElementTypeMapping = (RelationalTypeMapping?)elementMapping,
                         };
                     }
                 }

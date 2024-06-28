@@ -101,11 +101,9 @@ namespace System.Globalization
                 else
                 {
                     StandardFormat sf =
-                        c == 'g'
-                            ? StandardFormat.g
-                            : c == 'G'
-                                ? StandardFormat.G
-                                : throw new FormatException(SR.Format_InvalidString);
+                        c == 'g' ? StandardFormat.g
+                        : c == 'G' ? StandardFormat.G
+                        : throw new FormatException(SR.Format_InvalidString);
                     return TryFormatStandard(
                         value,
                         sf,
@@ -155,7 +153,7 @@ namespace System.Globalization
         {
             C,
             G,
-            g
+            g,
         }
 
         internal static unsafe bool TryFormatStandard<TChar>(

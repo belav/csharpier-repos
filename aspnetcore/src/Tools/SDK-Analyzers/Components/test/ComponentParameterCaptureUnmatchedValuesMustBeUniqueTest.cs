@@ -58,7 +58,7 @@ public class ComponentParameterCaptureUnmatchedValuesMustBeUniqueTest : Diagnost
                 Id = DiagnosticDescriptors.ComponentParameterCaptureUnmatchedValuesMustBeUnique.Id,
                 Message = message,
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 6, 15) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 6, 15) },
             }
         );
     }

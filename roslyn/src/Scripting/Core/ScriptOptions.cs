@@ -216,7 +216,7 @@ namespace Microsoft.CodeAnalysis.Scripting
                 ? this
                 : new ScriptOptions(this)
                 {
-                    MetadataReferences = CheckImmutableArray(references, nameof(references))
+                    MetadataReferences = CheckImmutableArray(references, nameof(references)),
                 };
 
         /// <summary>
@@ -344,7 +344,7 @@ namespace Microsoft.CodeAnalysis.Scripting
                 ? this
                 : new ScriptOptions(this)
                 {
-                    Imports = CheckImmutableArray(imports, nameof(imports))
+                    Imports = CheckImmutableArray(imports, nameof(imports)),
                 };
 
         /// <summary>

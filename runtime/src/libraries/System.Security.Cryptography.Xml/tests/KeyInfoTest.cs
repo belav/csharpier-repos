@@ -139,7 +139,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     new RSAParameters()
                     {
                         Modulus = Convert.FromBase64String(rsaModulus),
-                        Exponent = Convert.FromBase64String(rsaExponent)
+                        Exponent = Convert.FromBase64String(rsaExponent),
                     }
                 );
                 RSAKeyValue rsa = new RSAKeyValue(key);
@@ -714,7 +714,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0x59,
             0x98,
             0x41,
-            0x89
+            0x89,
         };
 
         [Fact]
@@ -765,7 +765,7 @@ namespace System.Security.Cryptography.Xml.Tests
                         new RSAParameters()
                         {
                             Modulus = Convert.FromBase64String(rsaModulus),
-                            Exponent = Convert.FromBase64String(rsaExponent)
+                            Exponent = Convert.FromBase64String(rsaExponent),
                         }
                     );
                     RSAKeyValue rsa = new RSAKeyValue(keyRSA);

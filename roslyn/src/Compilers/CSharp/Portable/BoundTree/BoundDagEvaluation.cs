@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BoundDagSliceEvaluation e => getSymbolFromIndexerAccess(e.IndexerAccess),
                     BoundDagIndexerEvaluation e => getSymbolFromIndexerAccess(e.IndexerAccess),
                     BoundDagAssignmentEvaluation => null,
-                    _ => throw ExceptionUtilities.UnexpectedValue(this.Kind)
+                    _ => throw ExceptionUtilities.UnexpectedValue(this.Kind),
                 };
 
                 Debug.Assert(result is not null || this is BoundDagAssignmentEvaluation);
@@ -100,7 +100,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // To do so would imply that dag evaluation assigns to the original input
                 0 => "<error>",
 
-                _ => $"t{id}"
+                _ => $"t{id}",
             };
         }
 #endif

@@ -81,7 +81,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         TraceEventType.Critical,
                         42,
                         format,
-                        args
+                        args,
                     },
                     new object[]
                     {
@@ -91,7 +91,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         TraceEventType.Verbose,
                         12,
                         message,
-                        null
+                        null,
                     },
                     new object[]
                     {
@@ -101,7 +101,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         TraceEventType.Error,
                         24,
                         format,
-                        args
+                        args,
                     },
                     new object[]
                     {
@@ -111,8 +111,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         TraceEventType.Information,
                         33,
                         message,
-                        null
-                    }
+                        null,
+                    },
                 };
             }
         }
@@ -212,7 +212,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co1971",
                         TraceEventType.Critical,
                         42,
-                        decimal.MaxValue
+                        decimal.MaxValue,
                     },
                     new object[]
                     {
@@ -221,7 +221,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co\"1984\"",
                         TraceEventType.Verbose,
                         12,
-                        message
+                        message,
                     },
                     new object[]
                     {
@@ -230,7 +230,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co1971",
                         TraceEventType.Error,
                         24,
-                        decimal.MinusOne
+                        decimal.MinusOne,
                     },
                     new object[]
                     {
@@ -239,8 +239,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co\"1984\"",
                         TraceEventType.Information,
                         33,
-                        message
-                    }
+                        message,
+                    },
                 };
             }
         }
@@ -300,7 +300,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co1971",
                         TraceEventType.Critical,
                         42,
-                        new object[0]
+                        new object[0],
                     },
                     new object[]
                     {
@@ -310,7 +310,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co\"1984\"",
                         TraceEventType.Verbose,
                         12,
-                        null
+                        null,
                     },
                     new object[]
                     {
@@ -320,7 +320,7 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co1971",
                         TraceEventType.Error,
                         24,
-                        new object[] { "Hello", 6 }
+                        new object[] { "Hello", 6 },
                     },
                     new object[]
                     {
@@ -330,8 +330,8 @@ namespace System.Diagnostics.TextWriterTraceListenerTests
                         "Co\"1984\"",
                         TraceEventType.Information,
                         33,
-                        null
-                    }
+                        null,
+                    },
                 };
             }
         }

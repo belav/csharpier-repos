@@ -108,7 +108,7 @@ namespace Microsoft.Interop
                                 nativeReturnMarshaller.Generator.AsNativeType(
                                     nativeReturnMarshaller.TypeInfo
                                 )
-                            )
+                            ),
                     };
                 }
 
@@ -283,7 +283,7 @@ namespace Microsoft.Interop
                         new(info, context)
                         {
                             NotSupportedDetails =
-                                SR.MarshallerInNativeReturnPositionMustMatchNativeReturnType
+                                SR.MarshallerInNativeReturnPositionMustMatchNativeReturnType,
                         }
                     );
                 }

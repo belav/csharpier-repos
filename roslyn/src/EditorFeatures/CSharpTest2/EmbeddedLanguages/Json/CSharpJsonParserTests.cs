@@ -196,7 +196,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.Json
                         new JsonDocumentOptions
                         {
                             AllowTrailingCommas = false,
-                            CommentHandling = JsonCommentHandling.Disallow
+                            CommentHandling = JsonCommentHandling.Disallow,
                         }
                     );
                 }

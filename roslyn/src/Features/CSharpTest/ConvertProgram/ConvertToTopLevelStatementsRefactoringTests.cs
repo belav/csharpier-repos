@@ -37,7 +37,7 @@ $$
                 {
                     // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                     DiagnosticResult.CompilerError("CS5001"),
-                }
+                },
             }.RunAsync();
         }
 
@@ -94,7 +94,7 @@ System.Console.WriteLine(args[0]);
                         false,
                         NotificationOption2.Suggestion
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -124,7 +124,7 @@ class Program
                         false,
                         NotificationOption2.Suggestion
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -160,7 +160,7 @@ class Program
                 {
                     // error CS5001: Program does not contain a static 'Main' method suitable for an entry point
                     DiagnosticResult.CompilerError("CS5001"),
-                }
+                },
             }.RunAsync();
         }
 
@@ -192,7 +192,7 @@ class Program
                         false,
                         NotificationOption2.Suggestion
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -222,7 +222,7 @@ class Program
                         true,
                         NotificationOption2.Suggestion
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -252,7 +252,7 @@ class Program
                         true,
                         NotificationOption2.Silent
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -285,7 +285,7 @@ System.Console.WriteLine(0);
                         true,
                         NotificationOption2.None
                     },
-                }
+                },
             }.RunAsync();
         }
     }

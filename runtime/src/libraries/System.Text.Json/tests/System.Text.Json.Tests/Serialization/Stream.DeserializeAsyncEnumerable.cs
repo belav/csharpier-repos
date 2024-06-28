@@ -28,7 +28,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             JsonSerializerOptions options = new JsonSerializerOptions
             {
-                DefaultBufferSize = bufferSize
+                DefaultBufferSize = bufferSize,
             };
 
             using var stream = new MemoryStream(GenerateJsonArray(count));
@@ -77,7 +77,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 DefaultBufferSize = bufferSize,
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
             };
 
             byte[] data = JsonSerializer.SerializeToUtf8Bytes(source);
@@ -134,7 +134,7 @@ namespace System.Text.Json.Serialization.Tests
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {
-                Converters = { new DegenerateQueueConverterFactory() }
+                Converters = { new DegenerateQueueConverterFactory() },
             };
 
             byte[] data = JsonSerializer.SerializeToUtf8Bytes(
@@ -267,7 +267,7 @@ namespace System.Text.Json.Serialization.Tests
             DeserializeAsyncEnumerableOverload overload
         )
         {
-            JsonSerializerOptions options = new JsonSerializerOptions { DefaultBufferSize = 1, };
+            JsonSerializerOptions options = new JsonSerializerOptions { DefaultBufferSize = 1 };
 
             byte[] data = JsonSerializer.SerializeToUtf8Bytes(Enumerable.Range(1, 100));
 
@@ -351,7 +351,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Field1 = i,
                         Field2 = $"lorem ipsum dolor: {i}",
-                        Field3 = i % 2 == 0
+                        Field3 = i % 2 == 0,
                     }),
                 100,
                 DeserializeAsyncEnumerableOverload.JsonSerializerOptions
@@ -363,7 +363,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Field1 = i,
                         Field2 = $"lorem ipsum dolor: {i}",
-                        Field3 = i % 2 == 0
+                        Field3 = i % 2 == 0,
                     }),
                 100,
                 DeserializeAsyncEnumerableOverload.JsonTypeInfo
@@ -375,7 +375,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Field1 = i,
                         Field2 = $"lorem ipsum dolor: {i}",
-                        Field3 = i % 2 == 0
+                        Field3 = i % 2 == 0,
                     }),
                 500,
                 DeserializeAsyncEnumerableOverload.JsonSerializerOptions
@@ -391,7 +391,7 @@ namespace System.Text.Json.Serialization.Tests
         public enum DeserializeAsyncEnumerableOverload
         {
             JsonSerializerOptions,
-            JsonTypeInfo
+            JsonTypeInfo,
         };
 
         private static IAsyncEnumerable<T> DeserializeAsyncEnumerableWrapper<T>(
@@ -410,8 +410,7 @@ namespace System.Text.Json.Serialization.Tests
                         ResolveJsonTypeInfo<T>(options),
                         cancellationToken
                     ),
-                DeserializeAsyncEnumerableOverload.JsonSerializerOptions
-                or _ =>
+                DeserializeAsyncEnumerableOverload.JsonSerializerOptions or _ =>
                     JsonSerializer.DeserializeAsyncEnumerable<T>(
                         stream,
                         options,

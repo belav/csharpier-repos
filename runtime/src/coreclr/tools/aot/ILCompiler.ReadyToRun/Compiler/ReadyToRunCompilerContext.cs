@@ -347,7 +347,7 @@ namespace ILCompiler
                 return type.InstanceFieldSize.AsInt switch
                 {
                     16 => ValueTypeShapeCharacteristics.Vector128Aggregate,
-                    _ => ValueTypeShapeCharacteristics.None
+                    _ => ValueTypeShapeCharacteristics.None,
                 };
             }
             return ValueTypeShapeCharacteristics.None;

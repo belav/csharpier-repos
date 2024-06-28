@@ -818,7 +818,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
                     ConstructorInitializerSyntax constructorInitializer =>
                         constructorInitializer.ArgumentList,
                     ElementAccessExpressionSyntax elementAccess => elementAccess.ArgumentList,
-                    _ => throw ExceptionUtilities.UnexpectedValue(node.Kind())
+                    _ => throw ExceptionUtilities.UnexpectedValue(node.Kind()),
                 };
 
                 if (argumentList == null)
@@ -1210,9 +1210,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ChangeSignature
             return newArgument switch
             {
                 ArgumentSyntax a => (TArgumentSyntax)(SyntaxNode)a.WithNameColon(NameColon(name)),
-                AttributeArgumentSyntax a =>
-                    (TArgumentSyntax)(SyntaxNode)a.WithNameColon(NameColon(name)),
-                _ => throw ExceptionUtilities.UnexpectedValue(newArgument.Kind())
+                AttributeArgumentSyntax a => (TArgumentSyntax)
+                    (SyntaxNode)a.WithNameColon(NameColon(name)),
+                _ => throw ExceptionUtilities.UnexpectedValue(newArgument.Kind()),
             };
         }
 

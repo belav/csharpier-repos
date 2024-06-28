@@ -79,7 +79,7 @@ public class CompareAttributeAdapterTest
         var expectedProperties = new object[]
         {
             "MyPropertyDisplayName",
-            "OtherPropertyDisplayName"
+            "OtherPropertyDisplayName",
         };
 
         var expectedMessage =
@@ -186,7 +186,7 @@ public class CompareAttributeAdapterTest
 
         var attribute = new CompareAttribute("OtherProperty")
         {
-            ErrorMessage = "Hello '{0}', goodbye '{1}'."
+            ErrorMessage = "Hello '{0}', goodbye '{1}'.",
         };
         var adapter = new CompareAttributeAdapter(attribute, stringLocalizer: null);
 

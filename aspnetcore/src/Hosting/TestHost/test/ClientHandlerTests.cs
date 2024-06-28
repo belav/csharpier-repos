@@ -745,7 +745,7 @@ public class ClientHandlerTests
         {
             return new TestHostingContext()
             {
-                HttpContext = new DefaultHttpContext(contextFeatures)
+                HttpContext = new DefaultHttpContext(contextFeatures),
             };
         }
 
@@ -796,7 +796,7 @@ public class ClientHandlerTests
             _inspector(contextFeatures);
             return new TestHostingContext()
             {
-                HttpContext = new DefaultHttpContext(contextFeatures)
+                HttpContext = new DefaultHttpContext(contextFeatures),
             };
         }
 

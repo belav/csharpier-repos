@@ -536,13 +536,13 @@ namespace [|{@namespace}|]
             var originalSources = new[]
             {
                 (Path.Combine(folder, "Class1.cs"), code1),
-                ("Class2.cs", code2)
+                ("Class2.cs", code2),
             };
 
             var fixedSources = new[]
             {
                 (Path.Combine(folder, "Class1.cs"), fixed1),
-                ("Class2.cs", fixed2)
+                ("Class2.cs", fixed2),
             };
 
             await RunTestAsync(originalSources, fixedSources);
@@ -635,13 +635,13 @@ namespace Foo
             var originalSources = new[]
             {
                 (Path.Combine(folder, "Class1.cs"), code1),
-                ("Class2.cs", code2)
+                ("Class2.cs", code2),
             };
 
             var fixedSources = new[]
             {
                 (Path.Combine(folder, "Class1.cs"), fixed1),
-                ("Class2.cs", fixed2)
+                ("Class2.cs", fixed2),
             };
 
             await RunTestAsync(originalSources, fixedSources);
@@ -885,7 +885,7 @@ namespace [|Project2.Test|]
                                 (
                                     Path.Combine(project2Directory, ".editorconfig"),
                                     project2EditorConfig
-                                )
+                                ),
                             },
                         },
                     },
@@ -905,18 +905,18 @@ namespace [|Project2.Test|]
                             AdditionalProjectReferences = { "TestProject" },
                             Sources =
                             {
-                                (Path.Combine(project2folder, "P.cs"), project2FixedSource)
+                                (Path.Combine(project2folder, "P.cs"), project2FixedSource),
                             },
                             AnalyzerConfigFiles =
                             {
                                 (
                                     Path.Combine(project2Directory, ".editorconfig"),
                                     project2EditorConfig
-                                )
+                                ),
                             },
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             };
 
             testState.SolutionTransforms.Add(

@@ -320,7 +320,7 @@ namespace MonoTests.System.Data.Connected.Odbc
             0x66,
             0x06,
             0x66,
-            0x98
+            0x98,
         };
 
         OdbcConnection conn;
@@ -1472,7 +1472,7 @@ namespace MonoTests.System.Data.Connected.Odbc
                 new object[] { "BaseSchemaName", typeof(string) },
                 new object[] { "BaseCatalogName", typeof(string) },
                 new object[] { "BaseTableName", typeof(string) },
-                new object[] { "BaseColumnName", typeof(string) }
+                new object[] { "BaseColumnName", typeof(string) },
             };
 
             Assert.AreEqual(columns.Length, schemaTable.Columns.Count, prefix);

@@ -51,6 +51,6 @@ namespace System.Net.Http
         InadequateSecurity = 0xc,
 
         /// <summary>The endpoint requires that HTTP/1.1 be used instead of HTTP/2.</summary>
-        Http11Required = 0xd
+        Http11Required = 0xd,
     }
 }

@@ -120,7 +120,7 @@ namespace System.Web.Helpers.Test
                 canPage: false
             )
             {
-                DefaultSort = defaultSort
+                DefaultSort = defaultSort,
             };
 
             // Act
@@ -150,7 +150,7 @@ namespace System.Web.Helpers.Test
                 canPage: false
             )
             {
-                DefaultSort = defaultSort
+                DefaultSort = defaultSort,
             };
 
             // Act
@@ -173,13 +173,13 @@ namespace System.Web.Helpers.Test
             var defaultSort = new SortInfo
             {
                 SortColumn = "FirstName",
-                SortDirection = SortDirection.Ascending
+                SortDirection = SortDirection.Ascending,
             };
             IEnumerable<dynamic> values = new[]
             {
                 new Person { LastName = "Z" },
                 new Person { LastName = "X" },
-                new Person { LastName = "Y" }
+                new Person { LastName = "Y" },
             };
             var dataSource = new WebGridDataSource(
                 new WebGrid(GetContext()),
@@ -189,7 +189,7 @@ namespace System.Web.Helpers.Test
                 canPage: false
             )
             {
-                DefaultSort = defaultSort
+                DefaultSort = defaultSort,
             };
 
             // Act
@@ -209,7 +209,7 @@ namespace System.Web.Helpers.Test
             {
                 new TestDynamicType("col", "val1"),
                 new TestDynamicType("col", "val2"),
-                new TestDynamicType("col", "val3")
+                new TestDynamicType("col", "val3"),
             };
             var dataSource = new WebGridDataSource(
                 new WebGrid(GetContext()),
@@ -299,7 +299,7 @@ namespace System.Web.Helpers.Test
             {
                 new TestDynamicType("col", "val1"),
                 new TestDynamicType("col", "val2"),
-                new TestDynamicType("col", DBNull.Value)
+                new TestDynamicType("col", DBNull.Value),
             };
             var dataSource = new WebGridDataSource(
                 new WebGrid(GetContext()),
@@ -334,7 +334,7 @@ namespace System.Web.Helpers.Test
                 canPage: true
             )
             {
-                RowsPerPage = 2
+                RowsPerPage = 2,
             };
 
             // Act
@@ -359,7 +359,7 @@ namespace System.Web.Helpers.Test
                 canPage: true
             )
             {
-                RowsPerPage = 2
+                RowsPerPage = 2,
             };
 
             // Act
@@ -387,7 +387,7 @@ namespace System.Web.Helpers.Test
                 canPage: true
             )
             {
-                RowsPerPage = 3
+                RowsPerPage = 3,
             };
 
             // Act
@@ -412,7 +412,7 @@ namespace System.Web.Helpers.Test
                 canPage: true
             )
             {
-                RowsPerPage = 2
+                RowsPerPage = 2,
             };
 
             // Act

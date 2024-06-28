@@ -48,7 +48,7 @@ namespace System.Data.Common
             get { return this; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DbCommand? DeleteCommand
         {
             get { return (DbCommand?)(_IDbDataAdapter.DeleteCommand); }
@@ -67,7 +67,7 @@ namespace System.Data.Common
             set { _fillCommandBehavior = (value | CommandBehavior.SequentialAccess); }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DbCommand? InsertCommand
         {
             get { return (DbCommand?)(_IDbDataAdapter.InsertCommand); }
@@ -80,7 +80,7 @@ namespace System.Data.Common
             set { _insertCommand = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DbCommand? SelectCommand
         {
             get { return (DbCommand?)(_IDbDataAdapter.SelectCommand); }
@@ -106,7 +106,7 @@ namespace System.Data.Common
             }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public DbCommand? UpdateCommand
         {
             get { return (DbCommand?)(_IDbDataAdapter.UpdateCommand); }

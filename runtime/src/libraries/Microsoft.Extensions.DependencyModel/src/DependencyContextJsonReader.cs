@@ -465,7 +465,7 @@ namespace Microsoft.Extensions.DependencyModel
                 Compilations = compilations,
                 RuntimeTargets = runtimeTargets,
                 Resources = resources,
-                CompileOnly = compileOnly
+                CompileOnly = compileOnly,
             };
         }
 
@@ -756,7 +756,7 @@ namespace Microsoft.Extensions.DependencyModel
                 Serviceable = serviceable,
                 Path = path,
                 HashPath = hashPath,
-                RuntimeStoreManifestName = runtimeStoreManifestName
+                RuntimeStoreManifestName = runtimeStoreManifestName,
             };
         }
 

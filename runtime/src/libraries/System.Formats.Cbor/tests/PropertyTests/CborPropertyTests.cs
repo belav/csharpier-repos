@@ -228,7 +228,7 @@ namespace System.Formats.Cbor.Tests
                     _ when (length < 24) => 1,
                     _ when (length < byte.MaxValue) => 1 + sizeof(byte),
                     _ when (length < ushort.MaxValue) => 1 + sizeof(ushort),
-                    _ => 1 + sizeof(uint)
+                    _ => 1 + sizeof(uint),
                 };
             }
         }
@@ -262,7 +262,7 @@ namespace System.Formats.Cbor.Tests
             int length = input.RootDocuments.Length;
             input.RootDocuments = new[]
             {
-                CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments)
+                CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments),
             };
             byte[] encoding = CborDocumentSerializer.encode(input);
 
@@ -285,7 +285,7 @@ namespace System.Formats.Cbor.Tests
         {
             input.RootDocuments = new[]
             {
-                CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments)
+                CborDocument.NewArray(_isDefiniteLength: true, input.RootDocuments),
             };
             byte[] encoding = CborDocumentSerializer.encode(input);
 

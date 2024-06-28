@@ -33,6 +33,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         None = 0,
         SmallScroll = 1,
         ResetZoom = 2,
-        All = 3
+        All = 3,
     }
 }

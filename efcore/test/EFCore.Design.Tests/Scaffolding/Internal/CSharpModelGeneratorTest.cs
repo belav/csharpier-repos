@@ -33,7 +33,7 @@ public class CSharpModelGeneratorTest
                 ContextNamespace = "ContextNameSpace",
                 ContextDir = Path.Combine("..", "TestContextDir" + Path.DirectorySeparatorChar),
                 ContextName = "TestContext",
-                ConnectionString = "Data Source=Test"
+                ConnectionString = "Data Source=Test",
             }
         );
 

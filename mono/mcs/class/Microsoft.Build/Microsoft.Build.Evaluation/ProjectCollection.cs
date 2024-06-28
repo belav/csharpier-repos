@@ -509,7 +509,7 @@ namespace Microsoft.Build.Evaluation
                         ? MacOSXExternalXBuildDir
                         : String.Empty,
                     DotConfigExtensionsPath,
-                    DefaultExtensionsPath
+                    DefaultExtensionsPath,
                 }
             );
 
@@ -759,7 +759,7 @@ namespace Microsoft.Build.Evaluation
         static readonly char[] path_sep =
         {
             Path.DirectorySeparatorChar,
-            Path.AltDirectorySeparatorChar
+            Path.AltDirectorySeparatorChar,
         };
 
         internal static string GetWellKnownMetadata(

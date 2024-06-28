@@ -122,7 +122,7 @@ namespace System.Runtime.Diagnostics
             EventSeverity.Informational | EventFacility.SecurityAudit | 0x0007,
         TransportAuthenticationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x0008,
         ImpersonationSuccess = EventSeverity.Informational | EventFacility.SecurityAudit | 0x0009,
-        ImpersonationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x000a
+        ImpersonationFailure = EventSeverity.Error | EventFacility.SecurityAudit | 0x000a,
     }
 
     enum EventSeverity : uint
@@ -130,7 +130,7 @@ namespace System.Runtime.Diagnostics
         Success = 0x00000000,
         Informational = 0x40000000,
         Warning = 0x80000000,
-        Error = 0xc0000000
+        Error = 0xc0000000,
     }
 
     enum EventFacility : uint
@@ -140,6 +140,6 @@ namespace System.Runtime.Diagnostics
         TransactionBridge = 0x00030000,
         SMSvcHost = 0x00040000,
         InfoCards = 0x00050000,
-        SecurityAudit = 0x00060000
+        SecurityAudit = 0x00060000,
     }
 }

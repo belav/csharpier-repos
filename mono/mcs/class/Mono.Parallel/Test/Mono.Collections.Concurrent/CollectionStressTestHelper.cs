@@ -41,7 +41,7 @@ namespace MonoTests.Mono.Collections.Concurrent
     {
         InOrder,
         Reversed,
-        DontCare
+        DontCare,
     }
 
     public static class CollectionStressTestHelper

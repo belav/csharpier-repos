@@ -424,7 +424,7 @@ namespace System.Net.Sockets.Tests
                     ProtocolType.Tcp
                 )
                 {
-                    Blocking = false
+                    Blocking = false,
                 }
             )
             {

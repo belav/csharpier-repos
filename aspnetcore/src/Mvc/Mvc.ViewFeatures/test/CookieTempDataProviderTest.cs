@@ -248,7 +248,7 @@ public class CookieTempDataProviderTest
             dataProtector,
             new CookieTempDataProviderOptions
             {
-                Cookie = { Path = optionsPath, Domain = optionsDomain }
+                Cookie = { Path = optionsPath, Domain = optionsDomain },
             }
         );
         var responseCookies = new MockResponseCookieCollection();
@@ -365,7 +365,7 @@ public class CookieTempDataProviderTest
             {
                 Key = key,
                 Value = value,
-                Options = options
+                Options = options,
             };
         }
 

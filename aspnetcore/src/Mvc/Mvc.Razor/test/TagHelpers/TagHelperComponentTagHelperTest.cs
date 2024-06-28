@@ -434,7 +434,7 @@ public class TagHelperComponentTagHelperTest
                 .AddSingleton<ITagHelperComponentPropertyActivator>(
                     new TagHelperComponentPropertyActivator()
                 )
-                .BuildServiceProvider()
+                .BuildServiceProvider(),
         };
 
         var viewContext = Mock.Of<ViewContext>(vc => vc.HttpContext == httpContext);

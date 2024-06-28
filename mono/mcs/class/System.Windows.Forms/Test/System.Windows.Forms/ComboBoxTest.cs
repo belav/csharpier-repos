@@ -1151,7 +1151,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 new MockItem("A", 0),
                 new MockItem("B", 1),
-                new MockItem("C", 2)
+                new MockItem("C", 2),
             };
 
             cb.DataSource = items;

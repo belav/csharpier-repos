@@ -8,7 +8,9 @@ namespace System.Net
     {
         Normal = 0x0, // just a close
         Abort = 0x1, // unconditionally release resources
-        Silent = 0x2 // do not throw on close if possible
+        Silent =
+            0x2 // do not throw on close if possible
+        ,
     }
 
     //

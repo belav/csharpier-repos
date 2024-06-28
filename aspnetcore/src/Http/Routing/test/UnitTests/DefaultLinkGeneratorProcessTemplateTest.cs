@@ -23,7 +23,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var success = linkGenerator.TryProcessTemplate(
             httpContext: null,
             endpoint: endpoint,
-            values: new RouteValueDictionary(new { p1 = "Home", p3 = "bar", }),
+            values: new RouteValueDictionary(new { p1 = "Home", p3 = "bar" }),
             ambientValues: null,
             options: null,
             result: out var result
@@ -54,7 +54,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var success = linkGenerator.TryProcessTemplate(
             httpContext: httpContext,
             endpoint: endpoint,
-            values: new RouteValueDictionary(new { path = routeValue, }),
+            values: new RouteValueDictionary(new { path = routeValue }),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
             result: out var result
@@ -92,7 +92,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var success = linkGenerator.TryProcessTemplate(
             httpContext: httpContext,
             endpoint: endpoint,
-            values: new RouteValueDictionary(new { path = routeValue, }),
+            values: new RouteValueDictionary(new { path = routeValue }),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
             options: null,
             result: out var result
@@ -258,7 +258,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     page = 1,
                     color = new List<string> { "red", "green", "blue" },
-                    message = "textfortest"
+                    message = "textfortest",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -309,7 +309,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             s.Configure<RouteOptions>(o => o.LowercaseUrls = true);
         };
 
-        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint, });
+        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
         var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
         // Act
@@ -339,7 +339,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             s.Configure<RouteOptions>(o => o.LowercaseUrls = true);
         };
 
-        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint, });
+        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
         var httpContext = CreateHttpContext();
 
         // Act
@@ -365,9 +365,9 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "Foo/{bar=MyBar}/{id?}",
-            policies: new { bar = new SlugifyParameterTransformer(), }
+            policies: new { bar = new SlugifyParameterTransformer() }
         );
-        var linkGenerator = CreateLinkGenerator(endpoints: new[] { endpoint, });
+        var linkGenerator = CreateLinkGenerator(endpoints: new[] { endpoint });
         var httpContext = CreateHttpContext();
 
         // Act
@@ -400,7 +400,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             s.Configure<RouteOptions>(o => o.LowercaseUrls = true);
         };
 
-        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint, });
+        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
         var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
         // Act
@@ -438,7 +438,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             });
         };
 
-        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint, });
+        var linkGenerator = CreateLinkGenerator(configure, endpoints: new[] { endpoint });
         var httpContext = CreateHttpContext(ambientValues: new { controller = "Home" });
 
         // Act
@@ -450,7 +450,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     ShowStatus = "True",
-                    INFO = "DETAILED"
+                    INFO = "DETAILED",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -520,7 +520,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     ShowStatus = "True",
-                    INFO = "DETAILED"
+                    INFO = "DETAILED",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -618,7 +618,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     ShowStatus = "True",
-                    INFO = "DETAILED"
+                    INFO = "DETAILED",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -658,11 +658,11 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     ShowStatus = "True",
-                    INFO = "DETAILED"
+                    INFO = "DETAILED",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-            options: new LinkOptions() { LowercaseUrls = true, LowercaseQueryStrings = true, },
+            options: new LinkOptions() { LowercaseUrls = true, LowercaseQueryStrings = true },
             result: out var result
         );
 
@@ -691,7 +691,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             endpoint: endpoint,
             values: new RouteValueDictionary(new { action = "Index" }),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
-            options: new LinkOptions() { AppendTrailingSlash = true, },
+            options: new LinkOptions() { AppendTrailingSlash = true },
             result: out var result
         );
 
@@ -734,7 +734,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "{p1}/{p2}",
             defaults: new { p2 = "catchall" },
-            policies: new { p2 = new RegexRouteConstraint("\\d{4}"), }
+            policies: new { p2 = new RegexRouteConstraint("\\d{4}") }
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(ambientValues: new { });
@@ -870,7 +870,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 controller = "Home",
                 action = "Blog",
-                extra = "42"
+                extra = "42",
             }
         );
         var expectedValues = new RouteValueDictionary(
@@ -878,7 +878,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 controller = "Home",
                 action = "Store",
-                extra = "42"
+                extra = "42",
             }
         );
 
@@ -916,7 +916,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 controller = "Home",
                 action = "Store",
-                otherthing = "17"
+                otherthing = "17",
             },
             policies: new { c = constraint }
         );
@@ -958,7 +958,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             template: "slug/{controller}/{action}",
             defaults: new { action = "Index" },
-            policies: new { c = constraint, }
+            policies: new { c = constraint }
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(
@@ -999,9 +999,9 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 controller = "Home",
                 action = "Store",
                 otherthing = "17",
-                thirdthing = "13"
+                thirdthing = "13",
             },
-            policies: new { c = constraint, }
+            policies: new { c = constraint }
         );
         var linkGenerator = CreateLinkGenerator(endpoint);
         var httpContext = CreateHttpContext(
@@ -1009,7 +1009,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 controller = "Home",
                 action = "Blog",
-                otherthing = "17"
+                otherthing = "17",
             }
         );
 
@@ -1019,7 +1019,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 controller = "Home",
                 action = "Store",
                 otherthing = "17",
-                thirdthing = "13"
+                thirdthing = "13",
             }
         );
 
@@ -1067,7 +1067,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    id = 4
+                    id = 4,
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1102,7 +1102,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    id = "not-an-integer"
+                    id = "not-an-integer",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1139,7 +1139,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    id = 98
+                    id = 98,
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1202,7 +1202,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    id = "not-an-integer"
+                    id = "not-an-integer",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1237,7 +1237,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    id = 14
+                    id = 14,
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1276,7 +1276,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    id = 50
+                    id = 50,
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1310,7 +1310,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    name = "products"
+                    name = "products",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1341,7 +1341,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    name = "products"
+                    name = "products",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1399,7 +1399,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    name = "products"
+                    name = "products",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1458,7 +1458,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     action = "Index",
                     controller = "Home",
                     name = "products",
-                    format = "json"
+                    format = "json",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1491,7 +1491,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                 {
                     action = "Index",
                     controller = "Home",
-                    name = "products"
+                    name = "products",
                 }
             ),
             ambientValues: DefaultLinkGenerator.GetAmbientValues(httpContext),
@@ -1640,7 +1640,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "Products", action = "Edit" },
                     new
@@ -1648,14 +1648,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 // link to same action on same controller - ignoring case
@@ -1664,7 +1664,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "ProDUcts",
                         action = "EDit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "ProDUcts", action = "EDit" },
                     new
@@ -1672,14 +1672,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 // link to same action and same controller on same area
@@ -1689,27 +1689,27 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        id = 10
-                    },
-                    new
-                    {
-                        area = "Admin",
-                        controller = "Products",
-                        action = "Edit"
+                        id = 10,
                     },
                     new
                     {
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
                     },
                     new
                     {
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
+                    },
+                    new
+                    {
+                        area = "Admin",
+                        controller = "Products",
+                        action = "Edit",
+                        page = (string)null,
                     }
                 },
                 // link to same action and same controller on same area
@@ -1719,7 +1719,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "Products", action = "Edit" },
                     new
@@ -1727,14 +1727,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 // link to same action and same controller
@@ -1743,7 +1743,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "Products", action = "Edit" },
                     new
@@ -1751,14 +1751,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 {
@@ -1766,7 +1766,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "Products", action = "Edit" },
                     new
@@ -1774,14 +1774,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 {
@@ -1789,7 +1789,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "Products", action = "Edit" },
                     new
@@ -1797,14 +1797,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "",
                         controller = "Products",
                         action = "Edit",
-                        page = ""
+                        page = "",
                     },
                     new
                     {
                         area = "",
                         controller = "Products",
                         action = "Edit",
-                        page = ""
+                        page = "",
                     }
                 },
                 // link to same page
@@ -1816,14 +1816,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = (string)null,
                         action = (string)null,
-                        page = "Products/Edit"
+                        page = "Products/Edit",
                     },
                     new
                     {
                         area = (string)null,
                         controller = (string)null,
                         action = (string)null,
-                        page = "Products/Edit"
+                        page = "Products/Edit",
                     }
                 },
             };
@@ -1881,7 +1881,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 c = "Products",
                 a = "Edit",
-                id = 10
+                id = 10,
             }
         );
 
@@ -1918,7 +1918,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
             {
                 c = "Products",
                 a = "Edit",
-                id = 10
+                id = 10,
             }
         );
 
@@ -1952,7 +1952,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { controller = "Products", action = "List" },
                     new
@@ -1960,14 +1960,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = "Products",
                         action = "List",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = (string)null,
                         controller = "Products",
                         action = "List",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 // link to different action on same controller and same area
@@ -1977,27 +1977,27 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "Customer",
                         controller = "Products",
                         action = "Edit",
-                        id = 10
-                    },
-                    new
-                    {
-                        area = "Customer",
-                        controller = "Products",
-                        action = "List"
+                        id = 10,
                     },
                     new
                     {
                         area = "Customer",
                         controller = "Products",
                         action = "List",
-                        page = (string)null
                     },
                     new
                     {
                         area = "Customer",
                         controller = "Products",
                         action = "List",
-                        page = (string)null
+                        page = (string)null,
+                    },
+                    new
+                    {
+                        area = "Customer",
+                        controller = "Products",
+                        action = "List",
+                        page = (string)null,
                     }
                 },
                 // link from one area to a different one
@@ -2007,27 +2007,27 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        id = 10
-                    },
-                    new
-                    {
-                        area = "Consumer",
-                        controller = "Products",
-                        action = "Edit"
+                        id = 10,
                     },
                     new
                     {
                         area = "Consumer",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
                     },
                     new
                     {
                         area = "Consumer",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
+                    },
+                    new
+                    {
+                        area = "Consumer",
+                        controller = "Products",
+                        action = "Edit",
+                        page = (string)null,
                     }
                 },
                 // link from non-area to a area one
@@ -2036,27 +2036,27 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
-                    },
-                    new
-                    {
-                        area = "Consumer",
-                        controller = "Products",
-                        action = "Edit"
+                        id = 10,
                     },
                     new
                     {
                         area = "Consumer",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
                     },
                     new
                     {
                         area = "Consumer",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
+                    },
+                    new
+                    {
+                        area = "Consumer",
+                        controller = "Products",
+                        action = "Edit",
+                        page = (string)null,
                     }
                 },
                 // link from area to a non-area based action
@@ -2066,27 +2066,27 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = "Admin",
                         controller = "Products",
                         action = "Edit",
-                        id = 10
-                    },
-                    new
-                    {
-                        area = "",
-                        controller = "Products",
-                        action = "Edit"
+                        id = 10,
                     },
                     new
                     {
                         area = "",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
                     },
                     new
                     {
                         area = "",
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
+                    },
+                    new
+                    {
+                        area = "",
+                        controller = "Products",
+                        action = "Edit",
+                        page = (string)null,
                     }
                 },
                 // link from controller-action to a page
@@ -2095,7 +2095,7 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                     {
                         controller = "Products",
                         action = "Edit",
-                        id = 10
+                        id = 10,
                     },
                     new { page = "Products/Edit" },
                     new
@@ -2103,14 +2103,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = (string)null,
                         action = (string)null,
-                        page = "Products/Edit"
+                        page = "Products/Edit",
                     },
                     new
                     {
                         area = (string)null,
                         controller = (string)null,
                         action = (string)null,
-                        page = "Products/Edit"
+                        page = "Products/Edit",
                     }
                 },
                 // link from a page to controller-action
@@ -2122,14 +2122,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     },
                     new
                     {
                         area = (string)null,
                         controller = "Products",
                         action = "Edit",
-                        page = (string)null
+                        page = (string)null,
                     }
                 },
                 // link from one page to a different page
@@ -2141,14 +2141,14 @@ public class DefaultLinkGeneratorProcessTemplateTest : LinkGeneratorTestBase
                         area = (string)null,
                         controller = (string)null,
                         action = (string)null,
-                        page = "Products/Edit"
+                        page = "Products/Edit",
                     },
                     new
                     {
                         area = (string)null,
                         controller = (string)null,
                         action = (string)null,
-                        page = "Products/Edit"
+                        page = "Products/Edit",
                     }
                 },
             };

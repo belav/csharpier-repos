@@ -253,7 +253,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
                 { "a", "hello " },
-                { "b", "world" }
+                { "b", "world" },
             };
 
             ReflectedActionDescriptor ad = GetActionDescriptor(
@@ -290,7 +290,7 @@ namespace System.Web.Mvc.Test
             ReflectedActionDescriptor ad = GetActionDescriptor(_int32EqualsIntMethod);
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "obj", null }
+                { "obj", null },
             };
 
             // Act & assert
@@ -312,7 +312,7 @@ namespace System.Web.Mvc.Test
             ReflectedActionDescriptor ad = GetActionDescriptor(_int32EqualsIntMethod);
             Dictionary<string, object> parameters = new Dictionary<string, object>()
             {
-                { "obj", "notAnInteger" }
+                { "obj", "notAnInteger" },
             };
 
             // Act & assert
@@ -525,7 +525,7 @@ namespace System.Web.Mvc.Test
                 false /* validateMethod */
             )
             {
-                DispatcherCache = new ActionMethodDispatcherCache()
+                DispatcherCache = new ActionMethodDispatcherCache(),
             };
         }
 

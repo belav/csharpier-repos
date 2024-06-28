@@ -229,7 +229,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.RegularExpressions
                 0xFE,
                 0xFF,
                 0xFF,
-                0x07
+                0x07,
             };
             var chDiv8 = ch >> 3;
             if ((uint)chDiv8 < (uint)asciiLookup.Length)

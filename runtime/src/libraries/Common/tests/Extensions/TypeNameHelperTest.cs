@@ -210,7 +210,7 @@ namespace Microsoft.Extensions.Internal
                     closedInnerType,
                     true,
                     "Microsoft.Extensions.Internal.TypeNameHelperTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<bool>"
-                }
+                },
             };
         }
 
@@ -332,7 +332,7 @@ namespace Microsoft.Extensions.Internal
                     {
                         typeof(Outer<int>.E<Outer<int>.E<string>>),
                         "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.E"
-                    }
+                    },
                 };
             }
         }

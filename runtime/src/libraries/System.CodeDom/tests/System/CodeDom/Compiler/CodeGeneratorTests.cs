@@ -86,7 +86,7 @@ namespace System.CodeDom.Compiler.Tests
                     CodeBinaryOperatorType.Add,
                     new CodePrimitiveExpression(2)
                 ),
-                "(1 + 2)"
+                "(1 + 2)",
             };
             yield return new object[]
             {
@@ -99,7 +99,7 @@ namespace System.CodeDom.Compiler.Tests
                     CodeBinaryOperatorType.Add,
                     new CodePrimitiveExpression(3)
                 ),
-                $"((1 * 2) {Environment.NewLine}            + 3)"
+                $"((1 * 2) {Environment.NewLine}            + 3)",
             };
             yield return new object[]
             {
@@ -112,7 +112,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodePrimitiveExpression(3)
                     )
                 ),
-                $"(1 {Environment.NewLine}            * (2 + 3))"
+                $"(1 {Environment.NewLine}            * (2 + 3))",
             };
         }
 
@@ -214,13 +214,13 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeTypeMember(),
                 new CodeGeneratorOptions(),
-                Environment.NewLine
+                Environment.NewLine,
             };
             yield return new object[]
             {
                 new CodeTypeMember(),
                 new CodeGeneratorOptions { BlankLinesBetweenMembers = false },
-                string.Empty
+                string.Empty,
             };
         }
 
@@ -566,7 +566,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeCommentStatement[]
                 {
                     new CodeCommentStatement(text),
-                    new CodeCommentStatement("otherText")
+                    new CodeCommentStatement("otherText"),
                 }
             );
             int callCount = 0;
@@ -974,7 +974,7 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new CodeDirectiveCollection() };
             yield return new object[]
             {
-                new CodeDirectiveCollection(new CodeDirective[] { new CodeDirective() })
+                new CodeDirectiveCollection(new CodeDirective[] { new CodeDirective() }),
             };
         }
 
@@ -1668,7 +1668,7 @@ namespace System.CodeDom.Compiler.Tests
                 string.Empty,
                 string.Empty,
                 FieldDirection.Out,
-                "out Type "
+                "out Type ",
             };
             yield return new object[] { "type", "name", FieldDirection.Out, "out Type name" };
             yield return new object[] { null, null, FieldDirection.Ref, "ref Type " };
@@ -1677,7 +1677,7 @@ namespace System.CodeDom.Compiler.Tests
                 string.Empty,
                 string.Empty,
                 FieldDirection.Ref,
-                "ref Type "
+                "ref Type ",
             };
             yield return new object[] { "type", "name", FieldDirection.Ref, "ref Type name" };
             yield return new object[] { null, null, FieldDirection.In - 1, "Type " };
@@ -1686,7 +1686,7 @@ namespace System.CodeDom.Compiler.Tests
                 string.Empty,
                 string.Empty,
                 FieldDirection.In - 1,
-                "Type "
+                "Type ",
             };
             yield return new object[] { "type", "name", FieldDirection.In - 1, "Type name" };
             yield return new object[] { null, null, FieldDirection.Ref + 1, "Type " };
@@ -1695,7 +1695,7 @@ namespace System.CodeDom.Compiler.Tests
                 string.Empty,
                 string.Empty,
                 FieldDirection.Ref + 1,
-                "Type "
+                "Type ",
             };
             yield return new object[] { "type", "name", FieldDirection.Ref + 1, "Type name" };
         }
@@ -1714,7 +1714,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 var e = new CodeParameterDeclarationExpression(type, name)
                 {
-                    Direction = direction
+                    Direction = direction,
                 };
                 generator.GenerateParameterDeclarationExpressionAction = (actualE, baseMethod) =>
                     baseMethod(actualE);
@@ -1760,7 +1760,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 var e = new CodeParameterDeclarationExpression("Type", "Name")
                 {
-                    Direction = FieldDirection.Ref
+                    Direction = FieldDirection.Ref,
                 };
                 e.CustomAttributes.Add(new CodeAttributeDeclaration("name"));
                 e.CustomAttributes.Add(new CodeAttributeDeclaration("name"));
@@ -2627,44 +2627,44 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeTypeDeclaration(),
                 null,
-                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration(),
                 new CodeGeneratorOptions(),
-                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration(),
                 new CodeGeneratorOptions { BlankLinesBetweenMembers = false },
-                $"TypeStart TypeEndTypeStart TypeEnd"
+                $"TypeStart TypeEndTypeStart TypeEnd",
             };
 
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsClass = true },
                 null,
-                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsEnum = true },
                 null,
-                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsInterface = true },
                 null,
-                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
             };
             yield return new object[]
             {
                 new CodeTypeDeclaration("name") { IsStruct = true },
                 null,
-                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd"
+                $"{Environment.NewLine}TypeStart TypeEnd{Environment.NewLine}TypeStart TypeEnd",
             };
         }
 
@@ -3142,7 +3142,7 @@ namespace System.CodeDom.Compiler.Tests
                                 "AttributeName2",
                                 new CodePrimitiveExpression(2)
                             )
-                        )
+                        ),
                     }
                 );
                 int generateAttributeDeclarationsStartCallCount = 0;
@@ -3209,7 +3209,7 @@ namespace System.CodeDom.Compiler.Tests
                 {
                     new CodeAttributeDeclaration(),
                     new CodeAttributeDeclaration(string.Empty),
-                    new CodeAttributeDeclaration("name")
+                    new CodeAttributeDeclaration("name"),
                 }
             );
             generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
@@ -3230,7 +3230,7 @@ namespace System.CodeDom.Compiler.Tests
                 var attributes = new CodeAttributeDeclarationCollection(
                     new CodeAttributeDeclaration[]
                     {
-                        new CodeAttributeDeclaration("name", new CodeAttributeArgument())
+                        new CodeAttributeDeclaration("name", new CodeAttributeArgument()),
                     }
                 );
                 generator.OutputAttributeDeclarationsAction = (actualAttributes, baseMethod) =>
@@ -3985,40 +3985,18 @@ namespace System.CodeDom.Compiler.Tests
             {
                 new CodeParameterDeclarationExpression[]
                 {
-                    new CodeParameterDeclarationExpression()
+                    new CodeParameterDeclarationExpression(),
                 },
-                "Type "
+                "Type ",
             };
             yield return new object[]
             {
                 new CodeParameterDeclarationExpression[]
                 {
                     new CodeParameterDeclarationExpression("type1", "name1"),
-                    new CodeParameterDeclarationExpression("type2", "name2")
+                    new CodeParameterDeclarationExpression("type2", "name2"),
                 },
-                "Type name1, Type name2"
-            };
-            yield return new object[]
-            {
-                new CodeParameterDeclarationExpression[]
-                {
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression()
-                },
-                "Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type "
+                "Type name1, Type name2",
             };
             yield return new object[]
             {
@@ -4039,12 +4017,34 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeParameterDeclarationExpression(),
                     new CodeParameterDeclarationExpression(),
                     new CodeParameterDeclarationExpression(),
-                    new CodeParameterDeclarationExpression()
+                },
+                "Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type , Type ",
+            };
+            yield return new object[]
+            {
+                new CodeParameterDeclarationExpression[]
+                {
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
+                    new CodeParameterDeclarationExpression(),
                 },
                 string.Concat(
                     PlatformDetection.IsNetFramework ? string.Empty : $"            ",
                     $"{Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             , {Environment.NewLine}Type             "
-                )
+                ),
             };
         }
 
@@ -4116,7 +4116,7 @@ namespace System.CodeDom.Compiler.Tests
             var parameters = new CodeParameterDeclarationExpressionCollection(
                 new CodeParameterDeclarationExpression[]
                 {
-                    new CodeParameterDeclarationExpression()
+                    new CodeParameterDeclarationExpression(),
                 }
             );
             generator.OutputParametersAction = (actualParameters, baseMethod) =>

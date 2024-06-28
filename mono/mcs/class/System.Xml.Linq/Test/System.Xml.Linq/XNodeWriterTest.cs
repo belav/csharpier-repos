@@ -121,7 +121,7 @@ namespace MonoTests.System.Xml.Linq
             XmlSerializer serializer = new XmlSerializer(typeof(MyData));
             MyData data = new MyData()
             {
-                Elements = new MyElementBase[] { new MyElement1 { V = 2 } }
+                Elements = new MyElementBase[] { new MyElement1 { V = 2 } },
             };
 
             XDocument doc = new XDocument();

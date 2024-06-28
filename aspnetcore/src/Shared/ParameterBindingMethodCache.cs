@@ -213,11 +213,11 @@ internal sealed class ParameterBindingMethodCache
                 // default to `DateTimeStyles.AllowWhiteSpaces`.
                 var dateTimeStyles = type switch
                 {
-                    Type t when t == typeof(DateTime) =>
-                        DateTimeStyles.AdjustToUniversal | DateTimeStyles.AllowWhiteSpaces,
-                    Type t when t == typeof(DateTimeOffset) =>
-                        DateTimeStyles.AssumeUniversal | DateTimeStyles.AllowWhiteSpaces,
-                    _ => DateTimeStyles.AllowWhiteSpaces
+                    Type t when t == typeof(DateTime) => DateTimeStyles.AdjustToUniversal
+                        | DateTimeStyles.AllowWhiteSpaces,
+                    Type t when t == typeof(DateTimeOffset) => DateTimeStyles.AssumeUniversal
+                        | DateTimeStyles.AllowWhiteSpaces,
+                    _ => DateTimeStyles.AllowWhiteSpaces,
                 };
 
                 return (expression, formatProvider) =>
@@ -757,7 +757,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(IFormatProvider),
                     typeof(DateTimeStyles),
-                    typeof(DateTime).MakeByRefType()
+                    typeof(DateTime).MakeByRefType(),
                 }
             );
         }
@@ -771,7 +771,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(IFormatProvider),
                     typeof(DateTimeStyles),
-                    typeof(DateTimeOffset).MakeByRefType()
+                    typeof(DateTimeOffset).MakeByRefType(),
                 }
             );
         }
@@ -785,7 +785,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(IFormatProvider),
                     typeof(DateTimeStyles),
-                    typeof(DateOnly).MakeByRefType()
+                    typeof(DateOnly).MakeByRefType(),
                 }
             );
         }
@@ -799,7 +799,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(IFormatProvider),
                     typeof(DateTimeStyles),
-                    typeof(TimeOnly).MakeByRefType()
+                    typeof(TimeOnly).MakeByRefType(),
                 }
             );
         }
@@ -826,7 +826,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(long).MakeByRefType()
+                    typeof(long).MakeByRefType(),
                 }
             );
         }
@@ -840,7 +840,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(ulong).MakeByRefType()
+                    typeof(ulong).MakeByRefType(),
                 }
             );
         }
@@ -854,7 +854,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(int).MakeByRefType()
+                    typeof(int).MakeByRefType(),
                 }
             );
         }
@@ -868,7 +868,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(uint).MakeByRefType()
+                    typeof(uint).MakeByRefType(),
                 }
             );
         }
@@ -882,7 +882,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(short).MakeByRefType()
+                    typeof(short).MakeByRefType(),
                 }
             );
         }
@@ -896,7 +896,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(ushort).MakeByRefType()
+                    typeof(ushort).MakeByRefType(),
                 }
             );
         }
@@ -910,7 +910,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(byte).MakeByRefType()
+                    typeof(byte).MakeByRefType(),
                 }
             );
         }
@@ -924,7 +924,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(sbyte).MakeByRefType()
+                    typeof(sbyte).MakeByRefType(),
                 }
             );
         }
@@ -938,7 +938,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(double).MakeByRefType()
+                    typeof(double).MakeByRefType(),
                 }
             );
 
@@ -954,7 +954,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(float).MakeByRefType()
+                    typeof(float).MakeByRefType(),
                 }
             );
 
@@ -970,7 +970,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(Half).MakeByRefType()
+                    typeof(Half).MakeByRefType(),
                 }
             );
 
@@ -986,7 +986,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(decimal).MakeByRefType()
+                    typeof(decimal).MakeByRefType(),
                 }
             );
 
@@ -1002,7 +1002,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(IntPtr).MakeByRefType()
+                    typeof(IntPtr).MakeByRefType(),
                 }
             );
         }
@@ -1016,7 +1016,7 @@ internal sealed class ParameterBindingMethodCache
                     typeof(string),
                     typeof(NumberStyles),
                     typeof(IFormatProvider),
-                    typeof(BigInteger).MakeByRefType()
+                    typeof(BigInteger).MakeByRefType(),
                 }
             );
         }

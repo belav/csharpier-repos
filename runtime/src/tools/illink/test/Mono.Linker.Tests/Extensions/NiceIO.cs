@@ -1012,12 +1012,12 @@ namespace Mono.Linker.Tests.Extensions
     {
         Native,
         Forward,
-        Backward
+        Backward,
     }
 
     public enum DeleteMode
     {
         Normal,
-        Soft
+        Soft,
     }
 }

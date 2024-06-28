@@ -643,7 +643,7 @@ public class BodyModelBinderTests
             new TestInputFormatter(canRead: false),
             new TestInputFormatter(canRead: false),
             canReadFormatter1,
-            canReadFormatter2
+            canReadFormatter2,
         };
 
         var provider = new TestModelMetadataProvider();
@@ -802,7 +802,7 @@ public class BodyModelBinderTests
 
         var bindingContext = new DefaultModelBindingContext
         {
-            ActionContext = new ActionContext() { HttpContext = httpContext, },
+            ActionContext = new ActionContext() { HttpContext = httpContext },
             FieldName = "someField",
             IsTopLevelObject = true,
             ModelMetadata = metadataProvider.GetMetadataForType(modelType),

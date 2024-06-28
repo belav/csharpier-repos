@@ -54,7 +54,7 @@ public readonly struct PathSegment
             null => "",
             SqlConstantExpression { Value: not null } sqlConstant => $"[{sqlConstant.Value}]",
             SqlParameterExpression sqlParameter => $"[{sqlParameter.Name}]",
-            _ => "[(...)]"
+            _ => "[(...)]",
         };
 
     /// <inheritdoc />

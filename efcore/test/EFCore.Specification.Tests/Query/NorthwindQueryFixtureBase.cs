@@ -105,7 +105,7 @@ public abstract class NorthwindQueryFixtureBase<TModelCustomizer>
             {
                 typeof(OrderDetail),
                 e => (((OrderDetail)e)?.OrderID.ToString(), ((OrderDetail)e)?.ProductID.ToString())
-            }
+            },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =

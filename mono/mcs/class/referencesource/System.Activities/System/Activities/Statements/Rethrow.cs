@@ -15,7 +15,7 @@ namespace System.Activities.Statements
         {
             DelegateInArgument<Rethrow> element = new DelegateInArgument<Rethrow>()
             {
-                Name = "constraintArg"
+                Name = "constraintArg",
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
@@ -32,9 +32,9 @@ namespace System.Activities.Statements
                             {
                                 ValidationContext = validationContext,
                             },
-                            RethrowActivity = element
+                            RethrowActivity = element,
                         },
-                    }
+                    },
                 }
             );
         }

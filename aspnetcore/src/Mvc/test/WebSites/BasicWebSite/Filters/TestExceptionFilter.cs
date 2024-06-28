@@ -22,7 +22,7 @@ public class TestExceptionFilter : ExceptionFilterAttribute
                 context.Result = new ContentResult()
                 {
                     Content = "Exception was handled in TestExceptionFilter",
-                    StatusCode = 200
+                    StatusCode = 200,
                 };
                 context.ExceptionHandled = true;
             }

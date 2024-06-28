@@ -79,31 +79,31 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new DataObjectFieldAttribute(true, true, true, 10),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new DataObjectFieldAttribute(false, true, true, 10),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new DataObjectFieldAttribute(true, false, true, 10),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new DataObjectFieldAttribute(true, true, false, 10),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new DataObjectFieldAttribute(true, true, true, 9),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

@@ -4,6 +4,6 @@
     {
         Replace = 0,
         InsertBefore = 1,
-        InsertAfter = 2
+        InsertAfter = 2,
     }
 }

@@ -688,7 +688,7 @@ namespace GHTTests
                 new Item(1, "aaaa"),
                 new Item(2, "bbbb"),
                 new Item(3, "cccc"),
-                new Item(4, "dddd")
+                new Item(4, "dddd"),
             };
         }
 

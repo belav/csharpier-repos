@@ -58,7 +58,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// Annotation callout style.
     /// <seealso cref="CalloutAnnotation.CalloutStyle"/>
     /// </summary>
-    [SRDescription("DescriptionAttributeCalloutStyle_CalloutStyle"),]
+    [SRDescription("DescriptionAttributeCalloutStyle_CalloutStyle")]
     public enum CalloutStyle
     {
         /// <summary>
@@ -107,7 +107,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// annotation position and anchor point. It can display text and automatically
     /// calculate the required size. Different <see cref="CalloutStyle"/> are supported.
     /// </remarks>
-    [SRDescription("DescriptionAttributeCalloutAnnotation_CalloutAnnotation"),]
+    [SRDescription("DescriptionAttributeCalloutAnnotation_CalloutAnnotation")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

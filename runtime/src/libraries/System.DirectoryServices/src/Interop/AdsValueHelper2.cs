@@ -122,7 +122,7 @@ namespace System.DirectoryServices
                         wHour = LowOfInt(adsvalue.generic.c),
                         wMinute = HighOfInt(adsvalue.generic.c),
                         wSecond = LowOfInt(adsvalue.generic.d),
-                        wMilliseconds = HighOfInt(adsvalue.generic.d)
+                        wMilliseconds = HighOfInt(adsvalue.generic.d),
                     };
 
                     return new DateTime(
@@ -257,7 +257,7 @@ namespace System.DirectoryServices
             {
                 Offset = vlv.offset,
                 ApproximateTotal = vlv.contentCount,
-                DirectoryVirtualListViewContext = new DirectoryVirtualListViewContext(bytes)
+                DirectoryVirtualListViewContext = new DirectoryVirtualListViewContext(bytes),
             };
         }
 

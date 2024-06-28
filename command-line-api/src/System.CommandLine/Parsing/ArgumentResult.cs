@@ -178,9 +178,11 @@ namespace System.CommandLine.Parsing
                 return Argument.Arity.MaximumNumberOfValues switch
                 {
                     1 when _tokens is null => ArgumentConversionResult.None(this),
-                    1 when _tokens is not null =>
-                        ArgumentConversionResult.Success(this, _tokens[0]),
-                    _ => ArgumentConversionResult.Success(this, Tokens)
+                    1 when _tokens is not null => ArgumentConversionResult.Success(
+                        this,
+                        _tokens[0]
+                    ),
+                    _ => ArgumentConversionResult.Success(this, Tokens),
                 };
             }
 

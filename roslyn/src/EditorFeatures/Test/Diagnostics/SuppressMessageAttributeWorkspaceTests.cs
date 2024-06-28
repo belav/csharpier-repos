@@ -63,7 +63,7 @@ namespace System.Diagnostics.CodeAnalysis
                             ),
                             syntaxTrees: new[]
                             {
-                                CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef)
+                                CSharpSyntaxTree.ParseText(unconditionalSuppressMessageDef),
                             },
                             references: new[] { TestBase.MscorlibRef }
                         )
@@ -165,7 +165,7 @@ public class C2
                 {
                     new ThrowExceptionForEachNamedTypeAnalyzer(
                         ExceptionDispatchInfo.Capture(new Exception())
-                    )
+                    ),
                 },
                 diagnostics: [diagnostic, diagnostic, diagnostic]
             );

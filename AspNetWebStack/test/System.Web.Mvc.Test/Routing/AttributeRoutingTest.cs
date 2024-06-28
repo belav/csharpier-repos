@@ -326,7 +326,7 @@ namespace System.Web.Routing
             var routes = new RouteCollection();
             object defaults = new
             {
-                controller = controllerType.Name.Substring(0, controllerType.Name.Length - 10)
+                controller = controllerType.Name.Substring(0, controllerType.Name.Length - 10),
             };
             routes.Add(new Route("standard/{action}", new RouteValueDictionary(defaults), null));
             AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes);
@@ -520,7 +520,7 @@ namespace System.Web.Routing
             // Arrange
             var controllerTypes = new[]
             {
-                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.HomeController)
+                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.HomeController),
             };
 
             var routes = new RouteCollection();
@@ -538,7 +538,7 @@ namespace System.Web.Routing
             // Arrange
             var controllerTypes = new[]
             {
-                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.AccountController)
+                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.AccountController),
             };
 
             var routes = new RouteCollection();
@@ -555,7 +555,7 @@ namespace System.Web.Routing
             return new DefaultControllerFactory
             {
                 BuildManager = new MockBuildManager(controllerTypes),
-                ControllerTypeCache = new ControllerTypeCache()
+                ControllerTypeCache = new ControllerTypeCache(),
             };
         }
 

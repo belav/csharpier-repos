@@ -741,26 +741,26 @@ namespace MonoTests.System.Linq
                     {
                         LastName = "M\u00FCller",
                         FirstName = "Peter",
-                        Age = 21
+                        Age = 21,
                     },
                     new Person
                     {
                         LastName = "M\u00FCller",
                         FirstName = "Herbert",
-                        Age = 22
+                        Age = 22,
                     },
                     new Person
                     {
                         LastName = "Meier",
                         FirstName = "Hubert",
-                        Age = 23
+                        Age = 23,
                     },
                     new Person
                     {
                         LastName = "Meier",
                         FirstName = "Isidor",
-                        Age = 24
-                    }
+                        Age = 24,
+                    },
                 };
             }
 
@@ -1141,7 +1141,7 @@ namespace MonoTests.System.Linq
                     new Pet { Name = "Barley", Owner = "Peter" },
                     new Pet { Name = "Boots", Owner = "Herbert" },
                     new Pet { Name = "Whiskers", Owner = "Herbert" },
-                    new Pet { Name = "Daisy", Owner = "Isidor" }
+                    new Pet { Name = "Daisy", Owner = "Isidor" },
                 }
             );
 
@@ -1185,7 +1185,7 @@ namespace MonoTests.System.Linq
                     new Pet { Name = "Barley", Owner = "Peter" },
                     new Pet { Name = "Boots", Owner = "Herbert" },
                     new Pet { Name = "Whiskers", Owner = "herbert" },
-                    new Pet { Name = "Daisy", Owner = "Isidor" }
+                    new Pet { Name = "Daisy", Owner = "Isidor" },
                 }
             );
             var result = persons.Join(
@@ -1521,37 +1521,37 @@ namespace MonoTests.System.Linq
                 {
                     Position = 1,
                     LastName = "Smith",
-                    FirstName = "John"
+                    FirstName = "John",
                 },
                 new
                 {
                     Position = 2,
                     LastName = "Smith",
-                    FirstName = "Jack"
+                    FirstName = "Jack",
                 },
                 new
                 {
                     Position = 3,
                     LastName = "Smith",
-                    FirstName = "John"
+                    FirstName = "John",
                 },
                 new
                 {
                     Position = 4,
                     LastName = "Smith",
-                    FirstName = "Jack"
+                    FirstName = "Jack",
                 },
                 new
                 {
                     Position = 5,
                     LastName = "Smith",
-                    FirstName = "John"
+                    FirstName = "John",
                 },
                 new
                 {
                     Position = 6,
                     LastName = "Smith",
-                    FirstName = "Jack"
+                    FirstName = "Jack",
                 },
             };
 
@@ -1733,9 +1733,9 @@ namespace MonoTests.System.Linq
                     new PetOwner
                     {
                         Name = "Price, Vernette",
-                        Pets = new[] { "Scratches", "Diesel" }
+                        Pets = new[] { "Scratches", "Diesel" },
                     },
-                    new PetOwner { Name = "Hines, Patrick", Pets = new[] { "Dusty" } }
+                    new PetOwner { Name = "Hines, Patrick", Pets = new[] { "Dusty" } },
                 }
             );
 
@@ -1761,7 +1761,7 @@ namespace MonoTests.System.Linq
                     new PetOwner { Name = "Higa", Pets = new[] { "Scruffy", "Sam" } },
                     new PetOwner { Name = "Ashkenazi", Pets = new[] { "Walker", "Sugar" } },
                     new PetOwner { Name = "Price", Pets = new[] { "Scratches", "Diesel" } },
-                    new PetOwner { Name = "Hines", Pets = new[] { "Dusty" } }
+                    new PetOwner { Name = "Hines", Pets = new[] { "Dusty" } },
                 }
             );
 

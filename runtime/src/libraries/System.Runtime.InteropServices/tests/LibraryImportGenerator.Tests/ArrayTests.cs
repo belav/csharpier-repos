@@ -367,7 +367,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 "\uD83C\uDF32 \u6728 \uD83D\uDD25 \u706B \uD83C\uDF3E \u571F \uD83D\uDEE1 \u91D1 \uD83C\uDF0A \u6C34",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit.",
                 string.Empty,
-                null
+                null,
             };
         }
 
@@ -594,26 +594,26 @@ namespace LibraryImportGenerator.IntegrationTests
                 {
                     b1 = true,
                     b2 = false,
-                    b3 = true
+                    b3 = true,
                 },
                 new BoolStruct
                 {
                     b1 = false,
                     b2 = true,
-                    b3 = false
+                    b3 = false,
                 },
                 new BoolStruct
                 {
                     b1 = true,
                     b2 = true,
-                    b3 = true
+                    b3 = true,
                 },
                 new BoolStruct
                 {
                     b1 = false,
                     b2 = false,
-                    b3 = false
-                }
+                    b3 = false,
+                },
             };
 
         private static BoolStruct[] GetNegatedBoolStructs(BoolStruct[] toNegate) =>
@@ -622,7 +622,7 @@ namespace LibraryImportGenerator.IntegrationTests
                 {
                     b1 = !b.b1,
                     b2 = !b.b2,
-                    b3 = !b.b3
+                    b3 = !b.b3,
                 })
                 .ToArray();
 

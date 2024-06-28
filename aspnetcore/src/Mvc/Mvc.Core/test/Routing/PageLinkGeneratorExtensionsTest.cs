@@ -17,18 +17,18 @@ public class PageLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "About/{id}",
-            defaults: new { page = "/About", },
-            requiredValues: new { page = "/About", }
+            defaults: new { page = "/About" },
+            requiredValues: new { page = "/About" }
         );
         var endpoint2 = CreateEndpoint(
             "Admin/ManageUsers/{handler?}",
-            defaults: new { page = "/Admin/ManageUsers", },
-            requiredValues: new { page = "/Admin/ManageUsers", }
+            defaults: new { page = "/Admin/ManageUsers" },
+            requiredValues: new { page = "/Admin/ManageUsers" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
-        var httpContext = CreateHttpContext(new { page = "/About", id = 17, });
+        var httpContext = CreateHttpContext(new { page = "/About", id = 17 });
         httpContext.Request.PathBase = new PathString("/Foo/Bar?encodeme?");
 
         // Act
@@ -36,7 +36,7 @@ public class PageLinkGeneratorExtensionsTest
             httpContext,
             values: new RouteValueDictionary(new { id = 18, query = "some?query" }),
             fragment: new FragmentString("#Fragment?"),
-            options: new LinkOptions() { AppendTrailingSlash = true, }
+            options: new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -49,13 +49,13 @@ public class PageLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "About/{id}",
-            defaults: new { page = "/About", },
-            requiredValues: new { page = "/About", }
+            defaults: new { page = "/About" },
+            requiredValues: new { page = "/About" }
         );
         var endpoint2 = CreateEndpoint(
             "Admin/ManageUsers/{handler?}",
-            defaults: new { page = "/Admin/ManageUsers", },
-            requiredValues: new { page = "/Admin/ManageUsers", }
+            defaults: new { page = "/Admin/ManageUsers" },
+            requiredValues: new { page = "/Admin/ManageUsers" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
@@ -67,7 +67,7 @@ public class PageLinkGeneratorExtensionsTest
             values: new RouteValueDictionary(new { user = "jamesnk", query = "some?query" }),
             new PathString("/Foo/Bar?encodeme?"),
             new FragmentString("#Fragment?"),
-            new LinkOptions() { AppendTrailingSlash = true, }
+            new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -83,19 +83,19 @@ public class PageLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "About/{id}",
-            defaults: new { page = "/About", },
-            requiredValues: new { page = "/About", }
+            defaults: new { page = "/About" },
+            requiredValues: new { page = "/About" }
         );
         var endpoint2 = CreateEndpoint(
             "Admin/ManageUsers",
-            defaults: new { page = "/Admin/ManageUsers", },
-            requiredValues: new { page = "/Admin/ManageUsers", }
+            defaults: new { page = "/Admin/ManageUsers" },
+            requiredValues: new { page = "/Admin/ManageUsers" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
         var httpContext = CreateHttpContext(
-            new { page = "/Admin/ManageUsers", handler = "DeleteUser", }
+            new { page = "/Admin/ManageUsers", handler = "DeleteUser" }
         );
         httpContext.Request.PathBase = new PathString("/Foo/Bar?encodeme?");
 
@@ -105,7 +105,7 @@ public class PageLinkGeneratorExtensionsTest
             page: "/About",
             values: new RouteValueDictionary(new { id = 19, query = "some?query" }),
             fragment: new FragmentString("#Fragment?"),
-            options: new LinkOptions() { AppendTrailingSlash = true, }
+            options: new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -118,13 +118,13 @@ public class PageLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "About/{id}",
-            defaults: new { page = "/About", },
-            requiredValues: new { page = "/About", }
+            defaults: new { page = "/About" },
+            requiredValues: new { page = "/About" }
         );
         var endpoint2 = CreateEndpoint(
             "Admin/ManageUsers",
-            defaults: new { page = "/Admin/ManageUsers", },
-            requiredValues: new { page = "/Admin/ManageUsers", }
+            defaults: new { page = "/Admin/ManageUsers" },
+            requiredValues: new { page = "/Admin/ManageUsers" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
@@ -138,7 +138,7 @@ public class PageLinkGeneratorExtensionsTest
             new HostString("example.com"),
             new PathString("/Foo/Bar?encodeme?"),
             new FragmentString("#Fragment?"),
-            new LinkOptions() { AppendTrailingSlash = true, }
+            new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -154,18 +154,18 @@ public class PageLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "About/{id}",
-            defaults: new { page = "/About", },
-            requiredValues: new { page = "/About", }
+            defaults: new { page = "/About" },
+            requiredValues: new { page = "/About" }
         );
         var endpoint2 = CreateEndpoint(
             "Admin/ManageUsers",
-            defaults: new { page = "/Admin/ManageUsers", },
-            requiredValues: new { page = "/Admin/ManageUsers", }
+            defaults: new { page = "/Admin/ManageUsers" },
+            requiredValues: new { page = "/Admin/ManageUsers" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
-        var httpContext = CreateHttpContext(new { page = "/Admin/ManageUsers", });
+        var httpContext = CreateHttpContext(new { page = "/Admin/ManageUsers" });
         httpContext.Request.Scheme = "http";
         httpContext.Request.Host = new HostString("example.com");
         httpContext.Request.PathBase = new PathString("/Foo/Bar?encodeme?");
@@ -175,7 +175,7 @@ public class PageLinkGeneratorExtensionsTest
             httpContext,
             values: new RouteValueDictionary(new { query = "some?query" }),
             fragment: new FragmentString("#Fragment?"),
-            options: new LinkOptions() { AppendTrailingSlash = true, }
+            options: new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert

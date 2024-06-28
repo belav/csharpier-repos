@@ -58,7 +58,7 @@ namespace System.Numerics
                 11,
                 05,
                 10,
-                09
+                09,
             ];
 
         private static ReadOnlySpan<byte> Log2DeBruijn => // 32
@@ -94,7 +94,7 @@ namespace System.Numerics
                 26,
                 05,
                 04,
-                31
+                31,
             ];
 
         /// <summary>

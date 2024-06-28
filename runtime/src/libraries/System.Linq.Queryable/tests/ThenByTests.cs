@@ -18,32 +18,32 @@ namespace System.Linq.Tests.LegacyTests
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Tim",
                     City = "Seattle",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Philip",
                     City = "Orlando",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Chris",
                     City = "London",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Rob",
                     City = "Kent",
-                    Country = "UK"
-                }
+                    Country = "UK",
+                },
             };
             var expected = new[]
             {
@@ -51,32 +51,32 @@ namespace System.Linq.Tests.LegacyTests
                 {
                     Name = "Rob",
                     City = "Kent",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Chris",
                     City = "London",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Philip",
                     City = "Orlando",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Tim",
                     City = "Seattle",
-                    Country = "USA"
-                }
+                    Country = "USA",
+                },
             };
 
             Assert.Equal(

@@ -211,7 +211,7 @@ namespace System.Web.Services.Description
                             @"newAsync",
                             @"oldAsync",
                             @"order",
-                            @"enableDataBinding"
+                            @"enableDataBinding",
                         },
                         new System.Int64[]
                         {
@@ -220,7 +220,7 @@ namespace System.Web.Services.Description
                             (long)System.Xml.Serialization.CodeGenerationOptions.@GenerateNewAsync,
                             (long)System.Xml.Serialization.CodeGenerationOptions.@GenerateOldAsync,
                             (long)System.Xml.Serialization.CodeGenerationOptions.@GenerateOrder,
-                            (long)System.Xml.Serialization.CodeGenerationOptions.@EnableDataBinding
+                            (long)System.Xml.Serialization.CodeGenerationOptions.@EnableDataBinding,
                         },
                         @"System.Xml.Serialization.CodeGenerationOptions"
                     );

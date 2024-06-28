@@ -19,22 +19,22 @@ namespace System.Net.Http.Unit.Tests.HPack
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", "value" } },
-                null
+                null,
             };
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", "value" } },
-                Encoding.ASCII
+                Encoding.ASCII,
             };
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", new[] { "value1", "value2" } } },
-                null
+                null,
             };
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", new[] { "value1", "value2" } } },
-                Encoding.ASCII
+                Encoding.ASCII,
             };
             yield return new object[]
             {
@@ -45,17 +45,17 @@ namespace System.Net.Http.Unit.Tests.HPack
                     { "header-1", "value1" },
                     { "header-2", new[] { "value1", "value2" } },
                 },
-                null
+                null,
             };
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", "foo" } },
-                Encoding.UTF8
+                Encoding.UTF8,
             };
             yield return new object[]
             {
                 new HttpRequestHeaders() { { "header", "\uD83D\uDE03" } },
-                Encoding.UTF8
+                Encoding.UTF8,
             };
             yield return new object[]
             {
@@ -67,9 +67,12 @@ namespace System.Net.Http.Unit.Tests.HPack
                     },
                     { "header-1", "\uD83D\uDE03" },
                     { "header-2", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" },
-                    { "header-3", new[] { "\uD83D\uDE03", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" } }
+                    {
+                        "header-3",
+                        new[] { "\uD83D\uDE03", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" }
+                    },
                 },
-                Encoding.UTF8
+                Encoding.UTF8,
             };
         }
 

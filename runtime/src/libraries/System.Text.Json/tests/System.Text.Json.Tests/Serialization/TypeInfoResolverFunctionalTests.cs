@@ -33,11 +33,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(
@@ -87,11 +83,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions();
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestProperty"":42,""TestField"":""test valueX""}", json);
@@ -129,11 +121,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 43,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 43 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestProperty"":43,""TestField"":""test value""}", json);
@@ -172,11 +160,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestField"":""test value""}", json);
@@ -213,11 +197,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestProperty"":42,""TestField"":""test value""}", json);
@@ -254,11 +234,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestProperty"":""42"",""TestField"":""test value""}", json);
@@ -293,11 +269,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestProperty"":43,""TestField"":""test value""}", json);
@@ -376,8 +348,8 @@ namespace System.Text.Json.Serialization.Tests
 
             TestClassWithDictionaries originalObj = new TestClassWithDictionaries()
             {
-                DictionaryProperty1 = new Dictionary<string, int> { ["test1"] = 4, ["test2"] = 5, },
-                DictionaryProperty2 = new Dictionary<string, int> { ["foo"] = 1, ["bar"] = 8, },
+                DictionaryProperty1 = new Dictionary<string, int> { ["test1"] = 4, ["test2"] = 5 },
+                DictionaryProperty2 = new Dictionary<string, int> { ["foo"] = 1, ["bar"] = 8 },
             };
 
             string json = JsonSerializer.Serialize(originalObj, options);
@@ -404,7 +376,7 @@ namespace System.Text.Json.Serialization.Tests
                     if (ti.Type == typeof(TestClass))
                     {
                         Func<TestClass> createObj = () =>
-                            new TestClass() { TestField = "test value", TestProperty = 42, };
+                            new TestClass() { TestField = "test value", TestProperty = 42 };
 
                         if (useTypedCreateObject)
                         {
@@ -548,7 +520,7 @@ namespace System.Text.Json.Serialization.Tests
                     DictionaryProperty1 = new Dictionary<string, int>
                     {
                         ["test1"] = 2,
-                        ["test2"] = 3
+                        ["test2"] = 3,
                     },
                     DictionaryProperty2 = new Dictionary<string, int>(),
                 };
@@ -566,7 +538,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     ["*test*"] = -1,
                     ["test1"] = 2,
-                    ["test2"] = 3
+                    ["test2"] = 3,
                 },
                 deserialized.DictionaryProperty1
             );
@@ -610,11 +582,7 @@ namespace System.Text.Json.Serialization.Tests
             options.IncludeFields = true;
             options.TypeInfoResolver = resolver;
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 42,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 42 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""TestProperty"":""42"",""TestField"":""test value""}", json);
@@ -637,7 +605,7 @@ namespace System.Text.Json.Serialization.Tests
                         options
                     );
                     ti.CreateObject = () =>
-                        new TestClass() { TestField = string.Empty, TestProperty = 42, };
+                        new TestClass() { TestField = string.Empty, TestProperty = 42 };
 
                     JsonPropertyInfo field = ti.CreateJsonPropertyInfo(
                         typeof(string),
@@ -684,7 +652,7 @@ namespace System.Text.Json.Serialization.Tests
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new DefaultJsonTypeInfoResolver()
+                TypeInfoResolver = new DefaultJsonTypeInfoResolver(),
             };
             options.IncludeFields = true;
             options.TypeInfoResolver = JsonTypeInfoResolver.Combine(
@@ -692,11 +660,7 @@ namespace System.Text.Json.Serialization.Tests
                 options.TypeInfoResolver
             );
 
-            TestClass originalObj = new TestClass()
-            {
-                TestField = "test value",
-                TestProperty = 45,
-            };
+            TestClass originalObj = new TestClass() { TestField = "test value", TestProperty = 45 };
 
             string json = JsonSerializer.Serialize(originalObj, options);
             Assert.Equal(@"{""MyTestField"":""test value"",""MyTestProperty"":45}", json);
@@ -731,7 +695,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new DataContractResolver()
+                TypeInfoResolver = new DataContractResolver(),
             };
 
             var value = new DataContractResolver.TestClass
@@ -739,7 +703,7 @@ namespace System.Text.Json.Serialization.Tests
                 String = "str",
                 Boolean = true,
                 Int = 42,
-                Ignored = "ignored"
+                Ignored = "ignored",
             };
             string json = JsonSerializer.Serialize(value, options);
             Assert.Equal("""{"intValue":42,"boolValue":true,"stringValue":"str"}""", json);
@@ -818,7 +782,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new SpecifiedContractResolver()
+                TypeInfoResolver = new SpecifiedContractResolver(),
             };
 
             var value = new SpecifiedContractResolver.TestClass { String = "str", Int = 42 };
@@ -880,7 +844,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolver = new FieldContractResolver()
+                TypeInfoResolver = new FieldContractResolver(),
             };
 
             var value = FieldContractResolver.TestClass.Create("str", 42, true);
@@ -905,7 +869,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         _string = @string,
                         _int = @int,
-                        _bool = @bool
+                        _bool = @bool,
                     };
 
                 // Should be ignored by the serializer

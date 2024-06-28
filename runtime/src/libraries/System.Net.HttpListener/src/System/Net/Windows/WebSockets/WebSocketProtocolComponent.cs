@@ -18,13 +18,13 @@ namespace System.Net.WebSockets
                 new Interop.WebSocket.HttpHeader()
                 {
                     Name = HttpKnownHeaderNames.Connection,
-                    Value = HttpKnownHeaderNames.Upgrade
+                    Value = HttpKnownHeaderNames.Upgrade,
                 },
                 new Interop.WebSocket.HttpHeader()
                 {
                     Name = HttpKnownHeaderNames.Upgrade,
-                    Value = HttpWebSocket.WebSocketUpgradeToken
-                }
+                    Value = HttpWebSocket.WebSocketUpgradeToken,
+                },
             };
 
         private static readonly Interop.WebSocket.HttpHeader[]? s_serverFakeRequestHeaders;
@@ -47,7 +47,7 @@ namespace System.Net.WebSockets
             BinaryFragment = 0x80000003,
             Close = 0x80000004,
             PingPong = 0x80000005,
-            UnsolicitedPong = 0x80000006
+            UnsolicitedPong = 0x80000006,
         }
 
         internal enum PropertyType
@@ -106,7 +106,7 @@ namespace System.Net.WebSockets
                 {
                     Name = HttpKnownHeaderNames.SecWebSocketKey,
                     Value = EmptyWebsocketKeyBase64,
-                }
+                },
             };
         }
 #pragma warning restore CA1810

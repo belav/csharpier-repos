@@ -73,7 +73,7 @@ namespace System.DirectoryServices.Protocols
     {
         PartialResult = 0,
         CompleteResult = 1,
-        Done = 2
+        Done = 2,
     }
 
     internal sealed class LdapPartialAsyncResult : LdapAsyncResult

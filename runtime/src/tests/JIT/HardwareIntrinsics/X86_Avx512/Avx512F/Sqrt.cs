@@ -39,7 +39,7 @@ namespace IntelHardwareIntrinsicTest._Avx512F
                             1,
                             -5,
                             100,
-                            0
+                            0,
                         },
                         new float[16]
                     )

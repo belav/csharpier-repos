@@ -42,7 +42,7 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 "title",
                 "description",
-                new Uri("/relative", UriKind.Relative)
+                new Uri("/relative", UriKind.Relative),
             };
         }
 
@@ -62,14 +62,14 @@ namespace System.ServiceModel.Syndication.Tests
                 "",
                 "",
                 new Uri("http://microsoft.com"),
-                new SyndicationItem[0]
+                new SyndicationItem[0],
             };
             yield return new object[]
             {
                 "title",
                 "description",
                 new Uri("/relative", UriKind.Relative),
-                new SyndicationItem[] { new SyndicationItem(), null }
+                new SyndicationItem[] { new SyndicationItem(), null },
             };
         }
 
@@ -103,7 +103,7 @@ namespace System.ServiceModel.Syndication.Tests
                 "",
                 new Uri("http://microsoft.com"),
                 "",
-                DateTimeOffset.Now
+                DateTimeOffset.Now,
             };
             yield return new object[]
             {
@@ -111,7 +111,7 @@ namespace System.ServiceModel.Syndication.Tests
                 "description",
                 new Uri("/relative", UriKind.Relative),
                 "id",
-                DateTimeOffset.Now.AddDays(2)
+                DateTimeOffset.Now.AddDays(2),
             };
         }
 
@@ -153,7 +153,7 @@ namespace System.ServiceModel.Syndication.Tests
                 new Uri("http://microsoft.com"),
                 "",
                 DateTimeOffset.Now,
-                new SyndicationItem[0]
+                new SyndicationItem[0],
             };
             yield return new object[]
             {
@@ -162,7 +162,7 @@ namespace System.ServiceModel.Syndication.Tests
                 new Uri("/relative", UriKind.Relative),
                 "id",
                 DateTimeOffset.Now.AddDays(2),
-                new SyndicationItem[] { new SyndicationItem(), null }
+                new SyndicationItem[] { new SyndicationItem(), null },
             };
         }
 
@@ -215,7 +215,7 @@ namespace System.ServiceModel.Syndication.Tests
             original.ImageUrl = new Uri("http://imageurl.com");
             original.Items = new SyndicationItem[]
             {
-                new SyndicationItem("title", "content", null)
+                new SyndicationItem("title", "content", null),
             };
             original.Language = "language";
             original.LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(10);

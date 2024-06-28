@@ -46,6 +46,6 @@ namespace System.Diagnostics
         CounterMultiBase = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_MULTI_BASE,
 
         CounterDelta32 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_DELTA,
-        CounterDelta64 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_DELTA
+        CounterDelta64 = Interop.Kernel32.PerformanceCounterOptions.PERF_COUNTER_LARGE_DELTA,
     }
 }

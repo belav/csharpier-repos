@@ -163,7 +163,7 @@ public class IISMiddlewareTests
                 HttpMethod.Head,
                 HttpMethod.Get,
                 HttpMethod.Delete,
-                HttpMethod.Options
+                HttpMethod.Options,
             };
         }
     }

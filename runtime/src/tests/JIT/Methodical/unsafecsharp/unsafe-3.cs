@@ -358,7 +358,7 @@ namespace Test_unsafe_3
                     new AA[,]
                     {
                         { new AA(), new AA() },
-                        { new AA(), loc_x }
+                        { new AA(), loc_x },
                     },
                     2
                 ) != 100
@@ -444,7 +444,7 @@ namespace Test_unsafe_3
                     new B[,]
                     {
                         { new B(), new B() },
-                        { new B(), loc_x.m_b }
+                        { new B(), loc_x.m_b },
                     },
                     1,
                     1
@@ -546,11 +546,11 @@ namespace Test_unsafe_3
                     new long[,,]
                     {
                         {
-                            { 0 }
+                            { 0 },
                         },
                         {
-                            { 0 }
-                        }
+                            { 0 },
+                        },
                     },
                     2
                 ) != 100
@@ -608,11 +608,11 @@ namespace Test_unsafe_3
                     new long[,,]
                     {
                         {
-                            { 0 }
+                            { 0 },
                         },
                         {
-                            { 0 }
-                        }
+                            { 0 },
+                        },
                     },
                     2,
                     2
@@ -685,7 +685,7 @@ namespace Test_unsafe_3
                     new AA[,]
                     {
                         { new AA(), new AA() },
-                        { new AA(), loc_x }
+                        { new AA(), loc_x },
                     },
                     2
                 ) != 100
@@ -771,7 +771,7 @@ namespace Test_unsafe_3
                     new B[,]
                     {
                         { new B(), new B() },
-                        { new B(), loc_x.m_b }
+                        { new B(), loc_x.m_b },
                     },
                     1,
                     1

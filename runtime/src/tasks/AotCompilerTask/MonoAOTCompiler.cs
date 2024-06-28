@@ -939,7 +939,7 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
                             MonoAotLibraryFormat.Dll => ".dll",
                             MonoAotLibraryFormat.Dylib => ".dylib",
                             MonoAotLibraryFormat.So => ".so",
-                            _ => throw new ArgumentOutOfRangeException()
+                            _ => throw new ArgumentOutOfRangeException(),
                         };
                         string libraryFileName =
                             $"{LibraryFilePrefix}{assemblyFilename}{extension}";
@@ -1084,7 +1084,11 @@ public class MonoAOTCompiler : Microsoft.Build.Utilities.Task
         var envVariables = new Dictionary<string, string>
         {
             { "MONO_PATH", monoPaths },
-            { "MONO_ENV_OPTIONS", string.Empty } // we do not want options to be provided out of band to the cross compilers
+            {
+                "MONO_ENV_OPTIONS",
+                string.Empty
+            } // we do not want options to be provided out of band to the cross compilers
+            ,
         };
 
         var responseFileContent = string.Join(" ", processArgs);
@@ -1480,7 +1484,7 @@ public enum MonoAotMode
     FullInterp,
     Hybrid,
     LLVMOnly,
-    LLVMOnlyInterp
+    LLVMOnlyInterp,
 }
 
 public enum MonoAotOutputType
@@ -1500,5 +1504,5 @@ public enum MonoAotLibraryFormat
 public enum MonoAotModulesTableLanguage
 {
     C,
-    ObjC
+    ObjC,
 }

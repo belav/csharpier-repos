@@ -16,7 +16,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[]
             {
                 new XElement("parent", new XElement("child", "child text")),
-                (XName)"{b}newName"
+                (XName)"{b}newName",
             },
         };
 

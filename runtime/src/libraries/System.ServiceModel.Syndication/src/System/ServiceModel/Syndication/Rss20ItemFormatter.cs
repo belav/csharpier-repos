@@ -41,7 +41,7 @@ namespace System.ServiceModel.Syndication
 
             _feedSerializer = new Rss20FeedFormatter
             {
-                SerializeExtensionsAsAtom = _serializeExtensionsAsAtom = true
+                SerializeExtensionsAsAtom = _serializeExtensionsAsAtom = true,
             };
             ItemType = itemTypeToCreate;
         }
@@ -54,7 +54,7 @@ namespace System.ServiceModel.Syndication
         {
             _feedSerializer = new Rss20FeedFormatter
             {
-                SerializeExtensionsAsAtom = _serializeExtensionsAsAtom = serializeExtensionsAsAtom
+                SerializeExtensionsAsAtom = _serializeExtensionsAsAtom = serializeExtensionsAsAtom,
             };
             ItemType = itemToWrite.GetType();
         }

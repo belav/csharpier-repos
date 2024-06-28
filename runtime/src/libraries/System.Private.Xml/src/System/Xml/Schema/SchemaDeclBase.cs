@@ -15,7 +15,7 @@ namespace System.Xml.Schema
             Required,
             Implied,
             Fixed,
-            RequiredFixed
+            RequiredFixed,
         };
 
         protected XmlQualifiedName name = XmlQualifiedName.Empty;

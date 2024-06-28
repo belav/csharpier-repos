@@ -13,7 +13,7 @@ public class ModelBinderProviderExtensionsTest
         {
             new FooModelBinderProvider(),
             new BarModelBinderProvider(),
-            new FooModelBinderProvider()
+            new FooModelBinderProvider(),
         };
 
         // Act
@@ -32,7 +32,7 @@ public class ModelBinderProviderExtensionsTest
         {
             new FooModelBinderProvider(),
             new BarModelBinderProvider(),
-            new FooModelBinderProvider()
+            new FooModelBinderProvider(),
         };
 
         // Act

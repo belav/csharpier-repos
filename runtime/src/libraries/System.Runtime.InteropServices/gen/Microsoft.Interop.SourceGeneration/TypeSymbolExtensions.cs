@@ -276,7 +276,7 @@ namespace Microsoft.Interop
                         namedType.ConstructedFrom,
                         namedOther.ConstructedFrom
                     ),
-                _ => SymbolEqualityComparer.Default.Equals(type, other)
+                _ => SymbolEqualityComparer.Default.Equals(type, other),
             };
         }
 

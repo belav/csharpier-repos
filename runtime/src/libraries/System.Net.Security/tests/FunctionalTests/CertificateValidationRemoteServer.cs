@@ -269,8 +269,8 @@ namespace System.Net.Security.Tests
                     // so change the policy to only check the end certificate.
                     RevocationFlag = X509RevocationFlag.EndCertificateOnly,
 
-                    ExtraStore = { issuerCert, },
-                    CustomTrustStore = { rootCert, },
+                    ExtraStore = { issuerCert },
+                    CustomTrustStore = { rootCert },
                 },
             };
 

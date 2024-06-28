@@ -176,7 +176,7 @@ public class DependencyInjectionMethodParameterBinding : DependencyInjectionPara
                                 Expression.Call(serviceVariable, b.Method, parameters),
                                 parameters
                             )
-                        )
+                        ),
                     }
                 );
 

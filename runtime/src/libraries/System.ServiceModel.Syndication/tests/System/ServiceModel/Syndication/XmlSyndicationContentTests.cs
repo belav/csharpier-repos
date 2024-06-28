@@ -134,7 +134,7 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 "text/html",
-                new DataContractSerializer(typeof(ExtensionObject))
+                new DataContractSerializer(typeof(ExtensionObject)),
             };
         }
 

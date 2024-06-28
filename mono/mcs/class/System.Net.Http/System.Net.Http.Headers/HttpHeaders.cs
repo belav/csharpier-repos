@@ -331,7 +331,7 @@ namespace System.Net.Http.Headers
                     "WWW-Authenticate",
                     AuthenticationHeaderValue.TryParse,
                     HttpHeaderKind.Response
-                )
+                ),
             };
 
             known_headers = new Dictionary<string, HeaderInfo>(StringComparer.OrdinalIgnoreCase);

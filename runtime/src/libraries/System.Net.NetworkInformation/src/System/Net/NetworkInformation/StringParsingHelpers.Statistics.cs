@@ -228,7 +228,7 @@ namespace System.Net.NetworkInformation
                 OutTimestamps = parser.ParseNextInt64(),
                 OutTimestampReps = parser.ParseNextInt64(),
                 OutAddrMasks = parser.ParseNextInt64(),
-                OutAddrMaskReps = parser.ParseNextInt64()
+                OutAddrMaskReps = parser.ParseNextInt64(),
             };
         }
 
@@ -277,7 +277,7 @@ namespace System.Net.NetworkInformation
                 OutNeighborAdvertisements = reader.GetNextValueAsInt64(
                     "Icmp6OutNeighborAdvertisements"
                 ),
-                OutRedirects = reader.GetNextValueAsInt64("Icmp6OutRedirects")
+                OutRedirects = reader.GetNextValueAsInt64("Icmp6OutRedirects"),
             };
         }
 
@@ -406,7 +406,7 @@ namespace System.Net.NetworkInformation
                 RetransSegs = parser.ParseNextInt64(),
                 InErrs = parser.ParseNextInt64(),
                 OutRsts = parser.ParseNextInt64(),
-                InCsumErrors = inCsumErrorsIdx == -1 ? 0 : parser.ParseNextInt64()
+                InCsumErrors = inCsumErrorsIdx == -1 ? 0 : parser.ParseNextInt64(),
             };
         }
 
@@ -447,7 +447,7 @@ namespace System.Net.NetworkInformation
                 OutDatagrams = parser.ParseNextInt64(),
                 RcvbufErrors = parser.ParseNextInt64(),
                 SndbufErrors = parser.ParseNextInt64(),
-                InCsumErrors = inCsumErrorsIdx == -1 ? 0 : parser.ParseNextInt64()
+                InCsumErrors = inCsumErrorsIdx == -1 ? 0 : parser.ParseNextInt64(),
             };
         }
 

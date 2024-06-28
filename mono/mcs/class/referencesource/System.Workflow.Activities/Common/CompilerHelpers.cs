@@ -36,7 +36,7 @@ namespace System.Workflow.Activities.Common
     internal enum SupportedLanguages
     {
         VB,
-        CSharp
+        CSharp,
     }
 
     internal static class CompilerHelpers

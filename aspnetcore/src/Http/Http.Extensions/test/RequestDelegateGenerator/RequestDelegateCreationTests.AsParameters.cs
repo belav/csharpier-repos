@@ -68,7 +68,7 @@ app.MapGet("/", TestAction);
                 ),
                 [anotherCustomParamName] = originalAnotherCustomQueryParam.ToString(
                     NumberFormatInfo.InvariantInfo
-                )
+                ),
             }
         );
 

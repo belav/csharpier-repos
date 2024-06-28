@@ -54,7 +54,7 @@ public class LayoutViewTest
                                         builder.AddContent(456, "Goodbye");
                                     }
                                 )
-                            }
+                            },
                         }
                     )
                 )
@@ -81,7 +81,7 @@ public class LayoutViewTest
                     ParameterView.FromDictionary(
                         new Dictionary<string, object>
                         {
-                            { nameof(LayoutView.Layout), typeof(RootLayout) }
+                            { nameof(LayoutView.Layout), typeof(RootLayout) },
                         }
                     )
                 )
@@ -132,7 +132,7 @@ public class LayoutViewTest
                                         builder.AddContent(456, "Goodbye");
                                     }
                                 )
-                            }
+                            },
                         }
                     )
                 )
@@ -185,7 +185,7 @@ public class LayoutViewTest
                                         builder.AddContent(456, "Goodbye");
                                     }
                                 )
-                            }
+                            },
                         }
                     )
                 )
@@ -250,7 +250,7 @@ public class LayoutViewTest
                                         builder.AddContent(0, "Initial content");
                                     }
                                 )
-                            }
+                            },
                         }
                     )
                 )
@@ -273,7 +273,7 @@ public class LayoutViewTest
                                         builder.AddContent(0, "Changed content");
                                     }
                                 )
-                            }
+                            },
                         }
                     )
                 )
@@ -326,7 +326,7 @@ public class LayoutViewTest
                                         builder.AddContent(0, "Some content");
                                     }
                                 )
-                            }
+                            },
                         }
                     )
                 )

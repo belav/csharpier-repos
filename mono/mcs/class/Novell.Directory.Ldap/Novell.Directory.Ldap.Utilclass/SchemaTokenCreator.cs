@@ -356,11 +356,9 @@ namespace Novell.Directory.Ldap.Utilclass
                     buf[i++] = (char)curc;
                     curc = read();
                     ctype =
-                        curc < 0
-                            ? (sbyte)CharacterTypes.WHITESPACE
-                            : curc < 256
-                                ? this.ctype[curc]
-                                : (sbyte)CharacterTypes.ALPHABETIC;
+                        curc < 0 ? (sbyte)CharacterTypes.WHITESPACE
+                        : curc < 256 ? this.ctype[curc]
+                        : (sbyte)CharacterTypes.ALPHABETIC;
                 } while (
                     (ctype & ((sbyte)CharacterTypes.ALPHABETIC | (sbyte)CharacterTypes.NUMERIC))
                     != 0

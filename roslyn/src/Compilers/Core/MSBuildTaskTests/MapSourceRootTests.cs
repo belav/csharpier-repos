@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     new TaskItem(@"/packages/SourcePackage2/"),
                     new TaskItem(
                         @"c:\MyProjects\MyProject\",
-                        new Dictionary<string, string> { { "SourceControl", "Git" }, }
+                        new Dictionary<string, string> { { "SourceControl", "Git" } }
                     ),
                     new TaskItem(
                         @"c:\MyProjects\MyProject\a\b\",
@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                         }
                     ),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -103,7 +103,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     new TaskItem(@"!@#:;$%^&*()_+|{}\"),
                     new TaskItem(
                         @"****/",
-                        new Dictionary<string, string> { { "SourceControl", "Git" }, }
+                        new Dictionary<string, string> { { "SourceControl", "Git" } }
                     ),
                     new TaskItem(
                         @"****\|||:;\",
@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                         }
                     ),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     new TaskItem(@"C:"),
                     new TaskItem(@"C"),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -207,7 +207,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                         }
                     ),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -257,7 +257,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                     new TaskItem(@"C:\packages\SourcePackage1\"),
                     new TaskItem(@"c:\packages\SourcePackage2\"),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -319,7 +319,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                     ),
                     new TaskItem(path3),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -410,7 +410,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                     ),
                     new TaskItem(path3),
                 },
-                Deterministic = deterministic
+                Deterministic = deterministic,
             };
 
             bool result = task.Execute();
@@ -526,7 +526,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                         }
                     ),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -569,7 +569,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                         }
                     ),
                 },
-                Deterministic = true
+                Deterministic = true,
             };
 
             bool result = task.Execute();
@@ -615,7 +615,7 @@ ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslas
                         }
                     ),
                 },
-                Deterministic = deterministic
+                Deterministic = deterministic,
             };
 
             bool result = task.Execute();

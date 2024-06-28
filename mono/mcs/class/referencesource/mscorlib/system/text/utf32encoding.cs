@@ -925,7 +925,7 @@ namespace System.Text
                             unchecked((byte)(iChar >> 24)),
                             unchecked((byte)(iChar >> 16)),
                             unchecked((byte)(iChar >> 8)),
-                            unchecked((byte)(iChar))
+                            unchecked((byte)(iChar)),
                         };
                     }
                     else
@@ -935,7 +935,7 @@ namespace System.Text
                             unchecked((byte)(iChar)),
                             unchecked((byte)(iChar >> 8)),
                             unchecked((byte)(iChar >> 16)),
-                            unchecked((byte)(iChar >> 24))
+                            unchecked((byte)(iChar >> 24)),
                         };
                     }
 
@@ -1093,7 +1093,7 @@ namespace System.Text
                             unchecked((byte)(iChar >> 24)),
                             unchecked((byte)(iChar >> 16)),
                             unchecked((byte)(iChar >> 8)),
-                            unchecked((byte)(iChar))
+                            unchecked((byte)(iChar)),
                         };
                     }
                     else
@@ -1103,7 +1103,7 @@ namespace System.Text
                             unchecked((byte)(iChar)),
                             unchecked((byte)(iChar >> 8)),
                             unchecked((byte)(iChar >> 16)),
-                            unchecked((byte)(iChar >> 24))
+                            unchecked((byte)(iChar >> 24)),
                         };
                     }
 

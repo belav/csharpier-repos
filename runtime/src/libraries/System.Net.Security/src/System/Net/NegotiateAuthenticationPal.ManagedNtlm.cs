@@ -78,7 +78,7 @@ namespace System.Net
                 VersionMajor = 6,
                 VersionMinor = 1,
                 ProductBuild = 7600,
-                CurrentRevision = 15
+                CurrentRevision = 15,
             };
 
             private const int ChallengeResponseLength = 24;

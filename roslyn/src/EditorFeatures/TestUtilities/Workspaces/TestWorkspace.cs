@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     {
                         NotificationSeverity.Information => "💡",
                         NotificationSeverity.Warning => "⚠",
-                        _ => "❌"
+                        _ => "❌",
                     };
 
                     var fullMessage = string.IsNullOrEmpty(title)
@@ -350,7 +350,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             {
                 WorkspaceKind.MiscellaneousFiles => false,
                 WorkspaceKind.Interactive => false,
-                _ => true
+                _ => true,
             };
 
         protected override void ApplyDocumentTextChanged(DocumentId document, SourceText newText)

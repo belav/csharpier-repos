@@ -18,6 +18,6 @@ namespace System.ComponentModel
 
         Insert = 3,
 
-        Delete = 4
+        Delete = 4,
     }
 }

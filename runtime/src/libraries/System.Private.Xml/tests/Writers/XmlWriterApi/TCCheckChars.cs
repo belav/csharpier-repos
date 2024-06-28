@@ -57,7 +57,7 @@ namespace System.Xml.XmlWriterApiTests
                 '\u000E',
                 '\u001F',
                 '\uFFFE',
-                '\uFFFF'
+                '\uFFFF',
             };
 
             XmlWriter w = utils.CreateWriter(ConformanceLevel.Auto);
@@ -172,7 +172,7 @@ namespace System.Xml.XmlWriterApiTests
                 '\u000E',
                 '\u001F',
                 '\uFFFE',
-                '\uFFFF'
+                '\uFFFF',
             };
 
             XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -245,7 +245,7 @@ namespace System.Xml.XmlWriterApiTests
                 '\u000E',
                 '\u001F',
                 '\uFFFE',
-                '\uFFFF'
+                '\uFFFF',
             };
 
             XmlWriterSettings wSettings = new XmlWriterSettings();
@@ -386,7 +386,7 @@ namespace System.Xml.XmlWriterApiTests
                 '\u000E',
                 '\u001F',
                 '\uFFFE',
-                '\uFFFF'
+                '\uFFFF',
             };
             XmlWriter w = utils.CreateWriter(wSettings);
             try

@@ -201,47 +201,47 @@ namespace R2RTest
         public CliOption<DirectoryInfo> InputDirectory { get; } =
             new CliOption<DirectoryInfo>("--input-directory", "-in")
             {
-                Description = "Folder containing assemblies to optimize"
+                Description = "Folder containing assemblies to optimize",
             }.AcceptExistingOnly();
 
         public CliOption<DirectoryInfo> OutputDirectory { get; } =
             new CliOption<DirectoryInfo>("--output-directory", "-out")
             {
-                Description = "Folder to emit compiled assemblies"
+                Description = "Folder to emit compiled assemblies",
             };
 
         public CliOption<DirectoryInfo> CoreRootDirectory { get; } =
             new CliOption<DirectoryInfo>("--core-root-directory", "-cr")
             {
                 Description = "Location of the CoreCLR CORE_ROOT folder",
-                Arity = ArgumentArity.ExactlyOne
+                Arity = ArgumentArity.ExactlyOne,
             }.AcceptExistingOnly();
 
         public CliOption<DirectoryInfo[]> ReferencePath { get; } =
             new CliOption<DirectoryInfo[]>("--reference-path", "-r")
             {
                 Description = "Folder containing assemblies to reference during compilation",
-                Arity = ArgumentArity.ZeroOrMore
+                Arity = ArgumentArity.ZeroOrMore,
             }.AcceptExistingOnly();
 
         public CliOption<FileInfo[]> MibcPath { get; } =
             new CliOption<FileInfo[]>("--mibc-path", "-m")
             {
                 Description = "Mibc files to use in compilation",
-                Arity = ArgumentArity.ZeroOrMore
+                Arity = ArgumentArity.ZeroOrMore,
             }.AcceptExistingOnly();
 
         public CliOption<FileInfo> Crossgen2Path { get; } =
             new CliOption<FileInfo>("--crossgen2-path", "-c2p")
             {
-                Description = "Explicit Crossgen2 path (useful for cross-targeting)"
+                Description = "Explicit Crossgen2 path (useful for cross-targeting)",
             }.AcceptExistingOnly();
 
         public CliOption<bool> VerifyTypeAndFieldLayout { get; } =
             new("--verify-type-and-field-layout")
             {
                 Description =
-                    "Verify that struct type layout and field offsets match between compile time and runtime. Use only for diagnostic purposes."
+                    "Verify that struct type layout and field offsets match between compile time and runtime. Use only for diagnostic purposes.",
             };
 
         public CliOption<bool> NoJit { get; } =
@@ -262,7 +262,7 @@ namespace R2RTest
         public CliOption<bool> NoCleanup { get; } =
             new("--nocleanup")
             {
-                Description = "Don't clean up compilation artifacts after test runs"
+                Description = "Don't clean up compilation artifacts after test runs",
             };
 
         public CliOption<bool> Map { get; } =
@@ -271,7 +271,7 @@ namespace R2RTest
         public CliOption<bool> Pdb { get; } =
             new("--pdb")
             {
-                Description = "Generate PDB symbol information (Crossgen2 / Windows only)"
+                Description = "Generate PDB symbol information (Crossgen2 / Windows only)",
             };
 
         public CliOption<bool> Perfmap { get; } =
@@ -281,14 +281,14 @@ namespace R2RTest
             new("--perfmap-format-version")
             {
                 DefaultValueFactory = _ => 1,
-                Description = "Perfmap format version to generate"
+                Description = "Perfmap format version to generate",
             };
 
         public CliOption<int> DegreeOfParallelism { get; } =
             new("--degree-of-parallelism", "-dop")
             {
                 Description =
-                    "Override default compilation / execution DOP (default = logical processor count)"
+                    "Override default compilation / execution DOP (default = logical processor count)",
             };
 
         public CliOption<bool> Sequential { get; } =
@@ -298,7 +298,7 @@ namespace R2RTest
             new("--iterations")
             {
                 DefaultValueFactory = _ => 1,
-                Description = "Number of iterations for each test execution"
+                Description = "Number of iterations for each test execution",
             };
 
         public CliOption<bool> Framework { get; } =
@@ -307,7 +307,7 @@ namespace R2RTest
         public CliOption<bool> UseFramework { get; } =
             new("--use-framework")
             {
-                Description = "Use native framework (don't precompile, assume previously compiled)"
+                Description = "Use native framework (don't precompile, assume previously compiled)",
             };
 
         public CliOption<bool> Release { get; } =
@@ -316,7 +316,7 @@ namespace R2RTest
         public CliOption<bool> LargeBubble { get; } =
             new("--large-bubble")
             {
-                Description = "Assume all input files as part of one version bubble"
+                Description = "Assume all input files as part of one version bubble",
             };
 
         public CliOption<bool> Composite { get; } =
@@ -326,7 +326,7 @@ namespace R2RTest
             new("--crossgen2-parallelism")
             {
                 Description =
-                    "Max number of threads to use in Crossgen2 (default = logical processor count)"
+                    "Max number of threads to use in Crossgen2 (default = logical processor count)",
             };
 
         public CliOption<FileInfo> Crossgen2JitPath { get; } =
@@ -336,25 +336,25 @@ namespace R2RTest
             new("--issues-path", "-ip")
             {
                 Description = "Path to issues.targets",
-                Arity = ArgumentArity.ZeroOrMore
+                Arity = ArgumentArity.ZeroOrMore,
             };
 
         public CliOption<int> CompilationTimeoutMinutes { get; } =
             new("--compilation-timeout-minutes", "-ct")
             {
-                Description = "Compilation timeout (minutes)"
+                Description = "Compilation timeout (minutes)",
             };
 
         public CliOption<int> ExecutionTimeoutMinutes { get; } =
             new("--execution-timeout-minutes", "-et")
             {
-                Description = "Execution timeout (minutes)"
+                Description = "Execution timeout (minutes)",
             };
 
         public CliOption<FileInfo> R2RDumpPath { get; } =
             new CliOption<FileInfo>("--r2r-dump-path")
             {
-                Description = "Path to R2RDump.exe/dll"
+                Description = "Path to R2RDump.exe/dll",
             }.AcceptExistingOnly();
 
         public CliOption<bool> MeasurePerf { get; } =
@@ -363,21 +363,21 @@ namespace R2RTest
         public CliOption<string> InputFileSearchString { get; } =
             new("--input-file-search-string", "-input-file")
             {
-                Description = "Search string for input files in the input directory"
+                Description = "Search string for input files in the input directory",
             };
 
         public CliOption<string> GCStress { get; } =
             new("--gcstress")
             {
                 Description =
-                    "Run tests with the specified GC stress level enabled (the argument value is in hex)"
+                    "Run tests with the specified GC stress level enabled (the argument value is in hex)",
             };
 
         public CliOption<string> DotNetCli { get; } =
             new("--dotnet-cli", "-cli")
             {
                 Description =
-                    "For dev box testing, point at .NET 5 dotnet.exe or <repo>/dotnet.cmd."
+                    "For dev box testing, point at .NET 5 dotnet.exe or <repo>/dotnet.cmd.",
             };
 
         public CliOption<string> TargetArch { get; } =
@@ -389,7 +389,7 @@ namespace R2RTest
         public CliOption<FileInfo> PackageList { get; } =
             new CliOption<FileInfo>("--package-list", "-pl")
             {
-                Description = "Text file containing a package name on each line"
+                Description = "Text file containing a package name on each line",
             }.AcceptExistingOnly();
 
         //
@@ -398,7 +398,7 @@ namespace R2RTest
         public CliOption<DirectoryInfo> AspNetPath { get; } =
             new CliOption<DirectoryInfo>("--asp-net-path", "-asp")
             {
-                Description = "Path to SERP's ASP.NET Core folder"
+                Description = "Path to SERP's ASP.NET Core folder",
             }.AcceptExistingOnly();
 
         private static int Main(string[] args) =>

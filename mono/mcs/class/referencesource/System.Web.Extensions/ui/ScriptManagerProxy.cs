@@ -237,7 +237,7 @@ namespace System.Web.UI
             set { throw new NotImplementedException(); }
         }
 
-        [Category("Action"), ResourceDescription("ScriptManager_Navigate"),]
+        [Category("Action"), ResourceDescription("ScriptManager_Navigate")]
         public event EventHandler<HistoryEventArgs> Navigate
         {
             add { Events.AddHandler(_navigateEvent, value); }

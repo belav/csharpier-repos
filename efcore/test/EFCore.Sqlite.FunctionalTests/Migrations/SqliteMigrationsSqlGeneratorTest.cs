@@ -23,16 +23,16 @@ public class SqliteMigrationsSqlGeneratorTest : MigrationsSqlGeneratorTestBase
                         ClrType = typeof(int),
                         Name = "FlavorId",
                         ColumnType = "INT",
-                        Table = "Pie"
-                    }
-                }
+                        Table = "Pie",
+                    },
+                },
             },
             new AddForeignKeyOperation
             {
                 Table = "Pie",
                 PrincipalTable = "Flavor",
                 Columns = new[] { "FlavorId" },
-                PrincipalColumns = new[] { "Id" }
+                PrincipalColumns = new[] { "Id" },
             }
         );
 
@@ -61,9 +61,9 @@ CREATE TABLE "Pie" (
                         Table = "History",
                         ClrType = typeof(string),
                         ColumnType = "TEXT",
-                        DefaultValue = new DateTime(2015, 4, 12, 17, 5, 0)
-                    }
-                }
+                        DefaultValue = new DateTime(2015, 4, 12, 17, 5, 0),
+                    },
+                },
             }
         );
 
@@ -113,7 +113,7 @@ CREATE TABLE "TestLineBreaks" (
             Table = "People",
             ClrType = typeof(long),
             ColumnType = "INTEGER",
-            IsNullable = false
+            IsNullable = false,
         };
         if (autoincrement)
         {
@@ -133,7 +133,7 @@ CREATE TABLE "TestLineBreaks" (
                         Table = "People",
                         ClrType = typeof(int),
                         ColumnType = "int",
-                        IsNullable = true
+                        IsNullable = true,
                     },
                     new AddColumnOperation
                     {
@@ -141,13 +141,13 @@ CREATE TABLE "TestLineBreaks" (
                         Table = "People",
                         ClrType = typeof(string),
                         ColumnType = "char(11)",
-                        IsNullable = true
-                    }
+                        IsNullable = true,
+                    },
                 },
                 PrimaryKey = new AddPrimaryKeyOperation { Name = pkName, Columns = new[] { "Id" } },
                 UniqueConstraints =
                 {
-                    new AddUniqueConstraintOperation { Columns = new[] { "SSN" } }
+                    new AddUniqueConstraintOperation { Columns = new[] { "SSN" } },
                 },
                 ForeignKeys =
                 {
@@ -155,9 +155,9 @@ CREATE TABLE "TestLineBreaks" (
                     {
                         Columns = new[] { "EmployerId" },
                         PrincipalTable = "Companies",
-                        PrincipalColumns = new[] { "Id" }
-                    }
-                }
+                        PrincipalColumns = new[] { "Id" },
+                    },
+                },
             }
         );
 
@@ -283,7 +283,7 @@ ALTER TABLE "Person" ADD "Name" TEXT NULL;
                 Name = "Geometry",
                 [SqliteAnnotationNames.Srid] = 4326,
                 ColumnType = "GEOMETRYZM",
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -344,7 +344,7 @@ SELECT AddGeometryColumn('Geometries', 'Geometry', 4326, 'GEOMETRYZM', -1, 0);
                         Table = "People",
                         Name = "FullName",
                         ClrType = typeof(string),
-                        ComputedColumnSql = "FirstName || ' ' || LastName"
+                        ComputedColumnSql = "FirstName || ' ' || LastName",
                     }
                 )
         );
@@ -409,10 +409,10 @@ ALTER TABLE "People" RENAME TO "Person";
                         Table = "People",
                         ClrType = typeof(int),
                         IsNullable = false,
-                        ["Autoincrement"] = true
-                    }
+                        ["Autoincrement"] = true,
+                    },
                 },
-                PrimaryKey = new AddPrimaryKeyOperation { Columns = new[] { "Id" } }
+                PrimaryKey = new AddPrimaryKeyOperation { Columns = new[] { "Id" } },
             }
         );
 
@@ -762,7 +762,7 @@ SELECT changes();
                     {
                         Table = "Blogs",
                         Name = "PK_Blogs",
-                        Columns = new[] { "Id" }
+                        Columns = new[] { "Id" },
                     }
                 )
         );
@@ -780,7 +780,7 @@ SELECT changes();
                     {
                         Table = "Blogs",
                         Name = "AK_Blogs_Uri",
-                        Columns = new[] { "Uri" }
+                        Columns = new[] { "Uri" },
                     }
                 )
         );
@@ -801,7 +801,7 @@ SELECT changes();
                     {
                         Table = "Blogs",
                         Name = "CK_Blogs_Rating",
-                        Sql = "Rating BETWEEN 1 AND 5"
+                        Sql = "Rating BETWEEN 1 AND 5",
                     }
                 )
         );
@@ -882,7 +882,7 @@ SELECT changes();
                 Table = "Blogs",
                 ClrType = typeof(string),
                 Name = "Summary",
-                Comment = "A short description"
+                Comment = "A short description",
             }
         );
 

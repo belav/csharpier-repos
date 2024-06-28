@@ -40,7 +40,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     NamespaceURI = "http://book.htm",
                     HasNameTable = true,
                     Prefix = "NSbook",
-                    Value = "\n\t\t\tA Brief History Of Time\n\t\t"
+                    Value = "\n\t\t\tA Brief History Of Time\n\t\t",
                 }
             );
 
@@ -80,7 +80,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     NamespaceURI = "http://book.htm",
                     HasNameTable = true,
                     Prefix = "NSbook",
-                    Value = "\n\t\t\tA Brief History Of Time\n\t\t"
+                    Value = "\n\t\t\tA Brief History Of Time\n\t\t",
                 }
             );
 
@@ -119,7 +119,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "prefix2:elem",
                     NamespaceURI = "http://prefix2.htm",
                     HasNameTable = true,
-                    Prefix = "prefix2"
+                    Prefix = "prefix2",
                 }
             );
 
@@ -183,7 +183,7 @@ namespace XPathTests.FunctionalTests.Expressions
                     Name = "book",
                     NamespaceURI = "http://default.htm",
                     HasNameTable = true,
-                    Value = "\n\t\t\tNewton's Time Machine\n\t\t"
+                    Value = "\n\t\t\tNewton's Time Machine\n\t\t",
                 }
             );
 

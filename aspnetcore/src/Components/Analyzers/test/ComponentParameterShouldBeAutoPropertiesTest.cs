@@ -106,7 +106,7 @@ private void DoSomething() { }
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties.Id,
                 Message = "Component parameter 'C.MyProp' should be auto property",
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 15), },
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 15) },
                 Severity = CodeAnalysis.DiagnosticSeverity.Warning,
             }
         );
@@ -146,7 +146,7 @@ private void DoSomething() { }
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties.Id,
                 Message = "Component parameter 'C.MyProp' should be auto property",
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 15), },
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 15) },
                 Severity = CodeAnalysis.DiagnosticSeverity.Warning,
             }
         );

@@ -15,7 +15,7 @@ namespace SslStress.Utils
             "GiB",
             "TiB",
             "PiB",
-            "EiB"
+            "EiB",
         };
 
         public static string Format(long byteCount)

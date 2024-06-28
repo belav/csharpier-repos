@@ -25,19 +25,19 @@ namespace System.CodeDom.Tests
             {
                 new CodePrimitiveExpression("Value1"),
                 new CodeStatement[] { new CodeCommentStatement("Value2") },
-                new CodeStatement[0]
+                new CodeStatement[0],
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression("Value1"),
                 new CodeStatement[] { new CodeCommentStatement("Value2") },
-                new CodeStatement[] { new CodeCommentStatement("Value3") }
+                new CodeStatement[] { new CodeCommentStatement("Value3") },
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression("Value1"),
                 new CodeStatement[0],
-                new CodeStatement[] { new CodeCommentStatement("Value3") }
+                new CodeStatement[] { new CodeCommentStatement("Value3") },
             };
         }
 

@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 ReportDiagnostic.Info => WorkspacesResources.Suggestion,
                 ReportDiagnostic.Warn => WorkspacesResources.Warning,
                 ReportDiagnostic.Error => WorkspacesResources.Error,
-                _ => throw ExceptionUtilities.UnexpectedValue(severity)
+                _ => throw ExceptionUtilities.UnexpectedValue(severity),
             };
     }
 }

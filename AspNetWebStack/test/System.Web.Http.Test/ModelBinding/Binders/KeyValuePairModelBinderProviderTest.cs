@@ -24,8 +24,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "foo.key", 42 },
-                    { "foo.value", "someValue" }
-                }
+                    { "foo.value", "someValue" },
+                },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();
@@ -51,8 +51,8 @@ namespace System.Web.Http.ModelBinding.Binders
                 ValueProvider = new SimpleHttpValueProvider
                 {
                     { "foo.key", 42 },
-                    { "foo.value", "someValue" }
-                }
+                    { "foo.value", "someValue" },
+                },
             };
 
             KeyValuePairModelBinderProvider binderProvider = new KeyValuePairModelBinderProvider();

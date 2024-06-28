@@ -500,7 +500,7 @@ public sealed partial class SelectExpression
             {
                 ColumnExpression columnExpression => columnExpression.IsNullable,
                 SqlConstantExpression sqlConstantExpression => sqlConstantExpression.Value == null,
-                _ => true
+                _ => true,
             };
 
         public ConcreteColumnExpression(
@@ -937,7 +937,7 @@ public sealed partial class SelectExpression
                         Tags = selectExpression.Tags,
                         _usedAliases = selectExpression._usedAliases.ToHashSet(),
                         _projectionMapping = newProjectionMappings,
-                        _mutable = selectExpression._mutable
+                        _mutable = selectExpression._mutable,
                     };
 
                     newSelectExpression._removableJoinTables.AddRange(
@@ -1018,7 +1018,7 @@ public sealed partial class SelectExpression
                                 newArguments
                             )
                             {
-                                Alias = tableValuedFunctionExpression.Alias
+                                Alias = tableValuedFunctionExpression.Alias,
                             };
 
                     foreach (var annotation in tableValuedFunctionExpression.GetAnnotations())

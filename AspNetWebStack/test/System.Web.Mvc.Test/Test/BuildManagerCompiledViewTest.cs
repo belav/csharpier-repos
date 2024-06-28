@@ -97,7 +97,7 @@ namespace System.Web.Mvc.Test
                 activator.Object
             )
             {
-                BuildManager = buildManager
+                BuildManager = buildManager,
             };
 
             // Act
@@ -125,7 +125,7 @@ namespace System.Web.Mvc.Test
                 dependencyResolver: dependencyResolver.Object
             )
             {
-                BuildManager = buildManager
+                BuildManager = buildManager,
             };
 
             // Act
@@ -148,7 +148,7 @@ namespace System.Web.Mvc.Test
                 dependencyResolver: dependencyResolver.Object
             )
             {
-                BuildManager = buildManager
+                BuildManager = buildManager,
             };
 
             // Act & Assert, confirming type name and full stack are available in Exception

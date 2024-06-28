@@ -87,7 +87,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 new ControlPoker(),
                 new ControlPoker(),
-                new ControlPoker()
+                new ControlPoker(),
             };
 
             for (int i = 0; i < flat_controls.Length; i++)
@@ -288,19 +288,19 @@ namespace MonoTests.System.Windows.Forms
             {
                 new ControlPoker(),
                 new ControlPoker(),
-                new ControlPoker()
+                new ControlPoker(),
             };
             ControlPoker[] ctrls_b = new ControlPoker[]
             {
                 new ControlPoker(),
                 new ControlPoker(),
-                new ControlPoker()
+                new ControlPoker(),
             };
             ControlPoker[] ctrls_c = new ControlPoker[]
             {
                 new ControlPoker(),
                 new ControlPoker(),
-                new ControlPoker()
+                new ControlPoker(),
             };
 
             con_a.Controls.AddRange(ctrls_a);
@@ -362,19 +362,19 @@ namespace MonoTests.System.Windows.Forms
             {
                 new ControlPoker("ctrls-a-0"),
                 new ControlPoker("ctrls-a-1"),
-                new ControlPoker("ctrls-a-2")
+                new ControlPoker("ctrls-a-2"),
             };
             ControlPoker[] ctrls_b = new ControlPoker[]
             {
                 new ControlPoker("ctrls-b-0"),
                 new ControlPoker("ctrls-b-1"),
-                new ControlPoker("ctrls-b-2")
+                new ControlPoker("ctrls-b-2"),
             };
             ControlPoker[] ctrls_c = new ControlPoker[]
             {
                 new ControlPoker("ctrls-c-0"),
                 new ControlPoker("ctrls-c-1"),
-                new ControlPoker("ctrls-c-2")
+                new ControlPoker("ctrls-c-2"),
             };
 
             con_a.Controls.AddRange(ctrls_a);
@@ -436,19 +436,19 @@ namespace MonoTests.System.Windows.Forms
             {
                 new ControlPoker("ctrls-a-0"),
                 new ControlPoker("ctrls-a-1"),
-                new ControlPoker("ctrls-a-2")
+                new ControlPoker("ctrls-a-2"),
             };
             ControlPoker[] ctrls_b = new ControlPoker[]
             {
                 new ControlPoker("ctrls-b-0"),
                 new ControlPoker("ctrls-b-1"),
-                new ControlPoker("ctrls-b-2")
+                new ControlPoker("ctrls-b-2"),
             };
             ControlPoker[] ctrls_c = new ControlPoker[]
             {
                 new ControlPoker("ctrls-c-0"),
                 new ControlPoker("ctrls-c-1"),
-                new ControlPoker("ctrls-c-2")
+                new ControlPoker("ctrls-c-2"),
             };
 
             con_a.Controls.AddRange(ctrls_a);
@@ -510,19 +510,19 @@ namespace MonoTests.System.Windows.Forms
             {
                 new ControlPoker("ctrls-a-0"),
                 new ControlPoker("ctrls-a-1"),
-                new ControlPoker("ctrls-a-2")
+                new ControlPoker("ctrls-a-2"),
             };
             ControlPoker[] ctrls_b = new ControlPoker[]
             {
                 new ControlPoker("ctrls-b-0"),
                 new ControlPoker("ctrls-b-1"),
-                new ControlPoker("ctrls-b-2")
+                new ControlPoker("ctrls-b-2"),
             };
             ControlPoker[] ctrls_c = new ControlPoker[]
             {
                 new ControlPoker("ctrls-c-0"),
                 new ControlPoker("ctrls-c-1"),
-                new ControlPoker("ctrls-c-2")
+                new ControlPoker("ctrls-c-2"),
             };
 
             con_a.Controls.AddRange(ctrls_a);
@@ -587,7 +587,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 new ControlPoker("ctrls-a-0"),
                 new ControlPoker("ctrls-a-1"),
-                new ControlPoker("ctrls-a-2")
+                new ControlPoker("ctrls-a-2"),
             };
             ControlPoker ctrl_b = new ControlPoker("ctrl-b");
 

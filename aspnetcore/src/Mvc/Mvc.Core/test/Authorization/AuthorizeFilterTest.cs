@@ -289,7 +289,7 @@ public class AuthorizeFilterTest
             new IAuthorizeData[]
             {
                 new AuthorizeAttribute { Policy = "true" },
-                new AuthorizeAttribute { Policy = "false" }
+                new AuthorizeAttribute { Policy = "false" },
             }
         );
         var authorizationContext = GetAuthorizationContext(anonymous: false);
@@ -318,7 +318,7 @@ public class AuthorizeFilterTest
             new IAuthorizeData[]
             {
                 new AuthorizeAttribute { Policy = "true" },
-                new AuthorizeAttribute { Policy = "false" }
+                new AuthorizeAttribute { Policy = "false" },
             }
         );
         var authorizationContext = GetAuthorizationContext(anonymous: false);
@@ -617,7 +617,7 @@ public class AuthorizeFilterTest
                 "test"
             )
         );
-        var context = new AuthorizationFilterContext(ActionContext, new[] { filter, });
+        var context = new AuthorizationFilterContext(ActionContext, new[] { filter });
 
         // Act
         var effectivePolicy = await filter.GetEffectivePolicyAsync(context);
@@ -645,7 +645,7 @@ public class AuthorizeFilterTest
                     new Claim("Permission", "CanViewPage"),
                     new Claim(ClaimTypes.Role, "Administrator"),
                     new Claim(ClaimTypes.Role, "User"),
-                    new Claim(ClaimTypes.NameIdentifier, "John")
+                    new Claim(ClaimTypes.NameIdentifier, "John"),
                 },
                 "Basic"
             )
@@ -658,7 +658,7 @@ public class AuthorizeFilterTest
             {
                 new Claim("Permission", "CupBearer"),
                 new Claim(ClaimTypes.Role, "Token"),
-                new Claim(ClaimTypes.NameIdentifier, "John Bear")
+                new Claim(ClaimTypes.NameIdentifier, "John Bear"),
             },
             "Bearer"
         );

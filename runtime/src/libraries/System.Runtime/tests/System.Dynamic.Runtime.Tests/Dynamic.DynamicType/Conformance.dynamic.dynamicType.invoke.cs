@@ -369,12 +369,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.invoke.invo
         public List<dynamic> Foo = new List<object>()
         {
             (Action<int>)Test.CallMe,
-            (Action<int>)(x => Test.CallMe(x))
+            (Action<int>)(x => Test.CallMe(x)),
         };
         public dynamic[] Bar = new dynamic[]
         {
             (Action<int>)Test.CallMe,
-            (Action<int>)(x => Test.CallMe(x))
+            (Action<int>)(x => Test.CallMe(x)),
         };
         public dynamic this[int x]
         {

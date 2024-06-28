@@ -543,7 +543,7 @@ namespace MonoTests.Mono.Unix
                 0xBC,
                 0xBD,
                 0xBE,
-                0xBF
+                0xBF,
             };
             string s = unix.GetString(data);
             Assert.AreEqual(
@@ -633,7 +633,7 @@ namespace MonoTests.Mono.Unix
                 0xDE,
                 0x20,
                 0xDF,
-                0x20
+                0x20,
             };
             string s = unix.GetString(data);
             Assert.AreEqual(
@@ -687,7 +687,7 @@ namespace MonoTests.Mono.Unix
                 0xEE,
                 0x20,
                 0xEF,
-                0x20
+                0x20,
             };
             string s = unix.GetString(data);
             Assert.AreEqual(
@@ -723,7 +723,7 @@ namespace MonoTests.Mono.Unix
                 0xF6,
                 0x20,
                 0xF7,
-                0x20
+                0x20,
             };
             string s = unix.GetString(data);
             Assert.AreEqual(
@@ -758,7 +758,7 @@ namespace MonoTests.Mono.Unix
                 0xF6,
                 0x20,
                 0xF7,
-                0x20
+                0x20,
             };
             string s = unix.GetString(data);
             Assert.AreEqual(
@@ -964,7 +964,7 @@ namespace MonoTests.Mono.Unix
                 0xBF,
                 0xBF,
                 0xBF,
-                0xBF
+                0xBF,
             };
             string s = unix.GetString(data);
             Assert.AreEqual(

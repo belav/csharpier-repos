@@ -12,7 +12,7 @@ namespace System.Data.Linq.SqlClient
     {
         Value,
         UserArgument,
-        PreviousResult
+        PreviousResult,
     }
 
     internal class SqlParameterInfo

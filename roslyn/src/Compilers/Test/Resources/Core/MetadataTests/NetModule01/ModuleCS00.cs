@@ -12,7 +12,7 @@ public enum ModEnum : ulong
     None = 0,
     Red = 255,
     White = 255255,
-    Blue = 1
+    Blue = 1,
 }
 
 public interface ModIBase

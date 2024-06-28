@@ -40,7 +40,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         cachedInvocation = invocation;
                         invocation.Proceed();
-                    })
+                    }),
                 },
                 target: new WithCallbackSimple(method: () =>
                 {

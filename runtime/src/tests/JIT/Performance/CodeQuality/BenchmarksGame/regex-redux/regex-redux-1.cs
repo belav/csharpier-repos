@@ -62,7 +62,7 @@ namespace BenchmarksGame
                 "aggg[acg]aaa|ttt[cgt]ccct",
                 "agggt[cgt]aa|tt[acg]accct",
                 "agggta[cgt]a|t[acg]taccct",
-                "agggtaa[cgt]|[acg]ttaccct"
+                "agggtaa[cgt]|[acg]ttaccct",
             };
 
             int count;
@@ -84,7 +84,7 @@ namespace BenchmarksGame
                 new IUB("aND|caN|Ha[DS]|WaS", "<3>"),
                 new IUB("a[NSt]|BY", "<2>"),
                 new IUB("<[^>]*>", "|"),
-                new IUB("\\|[^|][^|]*\\|", "-")
+                new IUB("\\|[^|][^|]*\\|", "-"),
             };
 
             foreach (IUB iub in codes)

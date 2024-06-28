@@ -409,7 +409,7 @@ namespace System.ServiceModel.Channels
                 var rp = new HttpResponseMessageProperty()
                 {
                     StatusCode = hrr.StatusCode,
-                    StatusDescription = hrr.StatusDescription
+                    StatusDescription = hrr.StatusDescription,
                 };
                 foreach (var key in hrr.Headers.AllKeys)
                     rp.Headers[key] = hrr.Headers[key];

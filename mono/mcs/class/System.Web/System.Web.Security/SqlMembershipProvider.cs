@@ -1489,7 +1489,7 @@ namespace System.Web.Security
             MembershipUsers = 1,
             UsersInRoles = 2,
             Profiles = 4,
-            WebPartStateUser = 8
+            WebPartStateUser = 8,
         }
 
         sealed class PasswordInfo

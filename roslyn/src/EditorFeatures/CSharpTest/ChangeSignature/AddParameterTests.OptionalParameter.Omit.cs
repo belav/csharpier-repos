@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     CallSiteKind.Omitted,
                     isRequired: false,
                     defaultValue: "1"
-                )
+                ),
             };
             var updatedCode = """
                 class C
@@ -78,7 +78,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     CallSiteKind.Omitted,
                     isRequired: false,
                     defaultValue: "1"
-                )
+                ),
             };
             var updatedCode = """
                 class C
@@ -121,7 +121,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     isRequired: false,
                     defaultValue: "1"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 class C
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     isRequired: false,
                     defaultValue: "1"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 class C
@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     isRequired: false,
                     defaultValue: "3"
                 ),
-                new AddedParameterOrExistingIndex(2)
+                new AddedParameterOrExistingIndex(2),
             };
             var updatedCode = """
                 [Some(1, 2, y: 4)]

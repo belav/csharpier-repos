@@ -38,7 +38,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             QueryableMethods.LastOrDefaultWithPredicate,
             QueryableMethods.LastOrDefaultWithoutPredicate,
             QueryableMethods.ElementAt,
-            QueryableMethods.ElementAtOrDefault
+            QueryableMethods.ElementAtOrDefault,
         };
 
     private static readonly MethodInfo ParameterValueExtractorMethod =
@@ -169,14 +169,13 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             StructuralTypeReferenceExpression
             {
                 Parameter: StructuralTypeShaperExpression shaper
-            } =>
-                shaper,
+            } => shaper,
 
             StructuralTypeReferenceExpression { Subquery: not null } => null, // TODO: think about this - probably unsupported (if so, message)
 
             SqlExpression s => s,
 
-            _ => null
+            _ => null,
         };
     }
 
@@ -551,21 +550,16 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             ExpressionType.AddChecked => ExpressionType.Add,
             ExpressionType.SubtractChecked => ExpressionType.Subtract,
             ExpressionType.MultiplyChecked => ExpressionType.Multiply,
-            _ => binaryExpression.NodeType
+            _ => binaryExpression.NodeType,
         };
 
-        return
-            TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
+        return TranslationFailed(binaryExpression.Left, visitedLeft, out var sqlLeft)
             || TranslationFailed(binaryExpression.Right, visitedRight, out var sqlRight)
-            ? QueryCompilationContext.NotTranslatedExpression
+                ? QueryCompilationContext.NotTranslatedExpression
             : uncheckedNodeTypeVariant == ExpressionType.Coalesce
                 ? _sqlExpressionFactory.Coalesce(sqlLeft!, sqlRight!)
-                : _sqlExpressionFactory.MakeBinary(
-                    uncheckedNodeTypeVariant,
-                    sqlLeft!,
-                    sqlRight!,
-                    null
-                ) ?? QueryCompilationContext.NotTranslatedExpression;
+            : _sqlExpressionFactory.MakeBinary(uncheckedNodeTypeVariant, sqlLeft!, sqlRight!, null)
+                ?? QueryCompilationContext.NotTranslatedExpression;
 
         Expression ProcessGetType(
             StructuralTypeReferenceExpression typeReference,
@@ -859,7 +853,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                                     NodeType: ExpressionType.Assign,
                                     Right: ProjectionBindingExpression pbe2
                                 },
-                                _
+                                _,
                             ]
                         }
                 )
@@ -2417,14 +2411,10 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                                 );
 
                             condition =
-                                condition == null
-                                    ? optionalPropertiesCondition
-                                    : nodeType == ExpressionType.Equal
-                                        ? Expression.OrElse(condition, optionalPropertiesCondition)
-                                        : Expression.AndAlso(
-                                            condition,
-                                            optionalPropertiesCondition
-                                        );
+                                condition == null ? optionalPropertiesCondition
+                                : nodeType == ExpressionType.Equal
+                                    ? Expression.OrElse(condition, optionalPropertiesCondition)
+                                : Expression.AndAlso(condition, optionalPropertiesCondition);
                         }
 
                         if (condition != null)
@@ -2590,11 +2580,11 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
                         nodeType != ExpressionType.Equal
                     );
 
-                    comparisons = comparisons is null
-                        ? comparison
+                    comparisons =
+                        comparisons is null ? comparison
                         : nodeType == ExpressionType.Equal
                             ? Expression.AndAlso(comparisons, comparison)
-                            : Expression.OrElse(comparisons, comparison);
+                        : Expression.OrElse(comparisons, comparison);
                 }
 
                 foreach (var complexProperty in type.GetComplexProperties())
@@ -2719,35 +2709,32 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
     ) =>
         target switch
         {
-            SqlConstantExpression constant =>
-                Expression.Constant(
-                    constant.Value is null
-                        ? null
-                        : complexProperty.GetGetter().GetClrValue(constant.Value),
-                    complexProperty.ClrType.MakeNullable()
-                ),
+            SqlConstantExpression constant => Expression.Constant(
+                constant.Value is null
+                    ? null
+                    : complexProperty.GetGetter().GetClrValue(constant.Value),
+                complexProperty.ClrType.MakeNullable()
+            ),
 
             SqlParameterExpression sqlParameterExpression
                 when sqlParameterExpression.Name.StartsWith(
                     QueryCompilationContext.QueryParameterPrefix,
                     StringComparison.Ordinal
-                ) =>
-                new ParameterBasedComplexPropertyChainExpression(
-                    sqlParameterExpression,
-                    complexProperty
-                ),
+                ) => new ParameterBasedComplexPropertyChainExpression(
+                sqlParameterExpression,
+                complexProperty
+            ),
 
             MemberInitExpression memberInitExpression
                 when memberInitExpression.Bindings.SingleOrDefault(mb =>
                     mb.Member.Name == complexProperty.Name
                 )
-                    is MemberAssignment memberAssignment =>
-                memberAssignment.Expression,
+                    is MemberAssignment memberAssignment => memberAssignment.Expression,
 
             // For non-constant/parameter complex property accesses, BindComplexProperty is called instead of this method
             // TODO: possibly refactor, folding this method into BindComplexProperty to have it handle the constant/parameter cases as well
             // (but consider the non-complex property case as well)
-            _ => throw new UnreachableException()
+            _ => throw new UnreachableException(),
         };
 
     private static T? ParameterValueExtractor<T>(
@@ -2817,13 +2804,12 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             ConstantExpression => true,
             NewExpression e => e.Arguments.All(CanEvaluate),
             NewArrayExpression e => e.Expressions.All(CanEvaluate),
-            MemberInitExpression e =>
-                CanEvaluate(e.NewExpression)
-                    && e.Bindings.All(mb =>
-                        mb is MemberAssignment memberAssignment
-                        && CanEvaluate(memberAssignment.Expression)
-                    ),
-            _ => false
+            MemberInitExpression e => CanEvaluate(e.NewExpression)
+                && e.Bindings.All(mb =>
+                    mb is MemberAssignment memberAssignment
+                    && CanEvaluate(memberAssignment.Expression)
+                ),
+            _ => false,
         };
 
     private static bool IsNullSqlConstantExpression(Expression expression) =>
@@ -2904,7 +2890,7 @@ public class RelationalSqlTranslatingExpressionVisitor : ExpressionVisitor
             {
                 { Parameter: not null } => Parameter.DebuggerDisplay(),
                 { Subquery: not null } => ExpressionPrinter.Print(Subquery!),
-                _ => throw new UnreachableException()
+                _ => throw new UnreachableException(),
             };
     }
 }

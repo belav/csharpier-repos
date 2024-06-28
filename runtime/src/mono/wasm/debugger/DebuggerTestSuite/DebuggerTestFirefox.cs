@@ -43,7 +43,10 @@ public class DebuggerTestFirefox : DebuggerTestBase
                 (cmd, client.SendCommand(cmd, args, token));
             var init_cmds = new List<(string, Task<Result>)>
             {
-                getInitCmdFn("listTabs", JObject.FromObject(new { type = "listTabs", to = "root" }))
+                getInitCmdFn(
+                    "listTabs",
+                    JObject.FromObject(new { type = "listTabs", to = "root" })
+                ),
             };
 
             return init_cmds;
@@ -142,10 +145,10 @@ public class DebuggerTestFirefox : DebuggerTestBase
                     {
                         line = line + 1,
                         column,
-                        sourceUrl = dicFileToUrl[url_key]
+                        sourceUrl = dicFileToUrl[url_key],
                     }
                 ),
-                to = _client.BreakpointActorId
+                to = _client.BreakpointActorId,
             }
         );
 
@@ -222,7 +225,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                         {
                             scriptId = frame["where"]["actor"].Value<string>(),
                             lineNumber = frame["where"]["line"].Value<int>(),
-                            columnNumber = frame["where"]["column"].Value<int>()
+                            columnNumber = frame["where"]["column"].Value<int>(),
                         }
                     ),
                     url = scripts[frame["where"]["actor"].Value<string>()],
@@ -238,12 +241,12 @@ public class DebuggerTestFirefox : DebuggerTestBase
                                         type = "object",
                                         className = "Object",
                                         description = "Object",
-                                        objectId = frame["actor"].Value<string>()
+                                        objectId = frame["actor"].Value<string>(),
                                     }
-                                )
+                                ),
                             }
                         )
-                    )
+                    ),
                 }
             );
             callFrames.Add(callFrame);
@@ -361,7 +364,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                             type = "object",
                             subtype = "null",
                             className = value["value"]["class"].Value<string>(),
-                            description = value["value"]["class"].Value<string>()
+                            description = value["value"]["class"].Value<string>(),
                         }
                     );
                     if (actor != null && actor.StartsWith("dotnet:pointer:"))
@@ -374,7 +377,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                             type = type,
                             objectId = value["value"]["actor"].Value<string>(),
                             className = "Function",
-                            description = $"get {name} ()"
+                            description = $"get {name} ()",
                         }
                     );
                     valueType = "get";
@@ -386,7 +389,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                             type = type,
                             objectId = value["value"]["actor"]?.Value<string>(),
                             value = value["value"]["value"]?.Value<string>(),
-                            description = value["value"]["value"].Value<string>()
+                            description = value["value"]["value"].Value<string>(),
                         }
                     );
                     break;
@@ -427,7 +430,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                 {
                     type = value["type"],
                     value = value["value"],
-                    description
+                    description,
                 }
             );
         }
@@ -481,7 +484,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                         .Value["result"]["value"]
                         ?["iterator"]?["actor"].Value<string>()
                         .Replace("propertyIterator", ""),
-                    type = "prototypeAndProperties"
+                    type = "prototypeAndProperties",
                 }
             );
             var objProps = await cli.SendCommand("prototypeAndProperties", o, token);
@@ -515,11 +518,9 @@ public class DebuggerTestFirefox : DebuggerTestBase
             resumeLimit = JObject.FromObject(
                 new
                 {
-                    type = kind == StepKind.Over
-                        ? "next"
-                        : kind == StepKind.Out
-                            ? "finish"
-                            : "step"
+                    type = kind == StepKind.Over ? "next"
+                    : kind == StepKind.Out ? "finish"
+                    : "step",
                 }
             );
         }
@@ -528,7 +529,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
             {
                 to = _client.ThreadActorId,
                 type = "resume",
-                resumeLimit
+                resumeLimit,
             }
         );
 
@@ -567,7 +568,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                 typeName = type,
                 methodName = method,
                 lineOffset = lineOffset,
-                to = "internal"
+                to = "internal",
             }
         );
 
@@ -587,10 +588,10 @@ public class DebuggerTestFirefox : DebuggerTestBase
                     {
                         line = m_line + lineOffset + 1,
                         column = col,
-                        sourceUrl = m_url
+                        sourceUrl = m_url,
                     }
                 ),
-                to = _client.BreakpointActorId
+                to = _client.BreakpointActorId,
             }
         );
 
@@ -627,7 +628,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                         type = res.Value["result"]["value"]["type"],
                         className = res.Value["result"]["value"]["class"],
                         description = res.Value["result"]["value"]["description"],
-                        objectId = actor
+                        objectId = actor,
                     }
                 );
                 if (actor?.StartsWith("dotnet:valuetype:") == true)
@@ -662,7 +663,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                 to = _client.ConsoleActorId,
                 type = "evaluateJSAsync",
                 text = expression,
-                options = new { eager = true, mapped = new { @await = true } }
+                options = new { eager = true, mapped = new { @await = true } },
             }
         );
     }
@@ -678,7 +679,7 @@ public class DebuggerTestFirefox : DebuggerTestBase
                     to = wait_res["from"].Value<string>(),
                     type = "frames",
                     start = 0,
-                    count = 1000
+                    count = 1000,
                 }
             ),
             token

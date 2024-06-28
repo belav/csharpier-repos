@@ -16,6 +16,6 @@ namespace System.ComponentModel.Composition.Hosting
         Default = 0x0000,
         DisableSilentRejection = 0x0001,
         IsThreadSafe = 0x0002,
-        ExportCompositionService = 0x0004
+        ExportCompositionService = 0x0004,
     }
 }

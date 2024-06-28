@@ -20,7 +20,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire();
@@ -50,7 +50,7 @@ namespace System.Threading.RateLimiting.Test
                             QueueLimit = 1,
                             ReplenishmentPeriod = TimeSpan.FromMinutes(2),
                             TokensPerPeriod = 1,
-                            AutoReplenishment = false
+                            AutoReplenishment = false,
                         }
                     )
             );
@@ -65,7 +65,7 @@ namespace System.Threading.RateLimiting.Test
                             QueueLimit = -1,
                             ReplenishmentPeriod = TimeSpan.FromMinutes(2),
                             TokensPerPeriod = 1,
-                            AutoReplenishment = false
+                            AutoReplenishment = false,
                         }
                     )
             );
@@ -80,7 +80,7 @@ namespace System.Threading.RateLimiting.Test
                             QueueLimit = 1,
                             ReplenishmentPeriod = TimeSpan.FromMinutes(2),
                             TokensPerPeriod = -1,
-                            AutoReplenishment = false
+                            AutoReplenishment = false,
                         }
                     )
             );
@@ -95,7 +95,7 @@ namespace System.Threading.RateLimiting.Test
                             QueueLimit = 1,
                             ReplenishmentPeriod = TimeSpan.MinValue,
                             TokensPerPeriod = 1,
-                            AutoReplenishment = false
+                            AutoReplenishment = false,
                         }
                     )
             );
@@ -110,7 +110,7 @@ namespace System.Threading.RateLimiting.Test
                             QueueLimit = 1,
                             ReplenishmentPeriod = TimeSpan.FromMilliseconds(-1),
                             TokensPerPeriod = 1,
-                            AutoReplenishment = false
+                            AutoReplenishment = false,
                         }
                     )
             );
@@ -125,7 +125,7 @@ namespace System.Threading.RateLimiting.Test
                             QueueLimit = 1,
                             ReplenishmentPeriod = TimeSpan.Zero,
                             TokensPerPeriod = 1,
-                            AutoReplenishment = false
+                            AutoReplenishment = false,
                         }
                     )
             );
@@ -142,7 +142,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -168,7 +168,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = await limiter.AcquireAsync();
@@ -205,7 +205,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -246,7 +246,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
@@ -269,7 +269,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -298,7 +298,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(2);
@@ -334,7 +334,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(2);
@@ -364,7 +364,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -396,7 +396,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = int.MaxValue,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = int.MaxValue,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(int.MaxValue);
@@ -428,7 +428,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => limiter.AttemptAcquire(2));
@@ -445,7 +445,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
@@ -464,7 +464,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             Assert.Throws<ArgumentOutOfRangeException>(() => limiter.AttemptAcquire(-1));
@@ -481,7 +481,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
@@ -500,7 +500,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -519,7 +519,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
@@ -541,7 +541,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -560,7 +560,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = await limiter.AcquireAsync(1);
@@ -586,7 +586,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             using var lease = await limiter.AcquireAsync(2);
@@ -617,7 +617,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -647,7 +647,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(3),
                     TokensPerPeriod = 3,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -682,7 +682,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(2);
@@ -724,7 +724,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -752,7 +752,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -783,7 +783,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -815,7 +815,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
@@ -833,7 +833,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             using var lease = limiter.AttemptAcquire(1);
@@ -854,7 +854,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -892,7 +892,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(1);
@@ -929,7 +929,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueLimit = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(20),
                 TokensPerPeriod = 1,
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new TokenBucketRateLimiter(options);
 
@@ -959,7 +959,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueLimit = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(20),
                 TokensPerPeriod = 1,
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new TokenBucketRateLimiter(options);
 
@@ -984,7 +984,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueLimit = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(20),
                 TokensPerPeriod = 2,
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new TokenBucketRateLimiter(options);
 
@@ -1009,7 +1009,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueLimit = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(20),
                 TokensPerPeriod = 100,
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new TokenBucketRateLimiter(options);
 
@@ -1034,7 +1034,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueLimit = 1,
                 ReplenishmentPeriod = TimeSpan.FromSeconds(20),
                 TokensPerPeriod = 1,
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new TokenBucketRateLimiter(options);
 
@@ -1057,7 +1057,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 3,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             Assert.True(limiter.AttemptAcquire(5).IsAcquired);
@@ -1082,7 +1082,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(30),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             Assert.Equal(2, limiter.GetStatistics().CurrentAvailablePermits);
@@ -1102,7 +1102,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromSeconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = true
+                    AutoReplenishment = true,
                 }
             );
             Assert.Equal(2, limiter.GetStatistics().CurrentAvailablePermits);
@@ -1121,7 +1121,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1000),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = true
+                    AutoReplenishment = true,
                 }
             );
             Assert.Equal(2, limiter.GetStatistics().CurrentAvailablePermits);
@@ -1142,7 +1142,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1174,7 +1174,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1209,7 +1209,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1240,7 +1240,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 3,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1270,7 +1270,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(2),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1312,7 +1312,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(2),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             limiter.AttemptAcquire(1);
@@ -1330,7 +1330,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(2),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             Assert.NotNull(limiter.IdleDuration);
@@ -1350,7 +1350,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             limiter.AttemptAcquire(1);
@@ -1370,7 +1370,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = replenishPeriod,
                     TokensPerPeriod = 1,
-                    AutoReplenishment = true
+                    AutoReplenishment = true,
                 }
             );
             Assert.True(limiter.IsAutoReplenishing);
@@ -1385,7 +1385,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 2,
                     ReplenishmentPeriod = replenishPeriod,
                     TokensPerPeriod = 1,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             Assert.False(limiter2.IsAutoReplenishing);
@@ -1403,7 +1403,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 1,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 2,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1429,7 +1429,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 50,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 30,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
 
@@ -1490,7 +1490,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 50,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 30,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             var lease = limiter.AttemptAcquire(0);
@@ -1526,7 +1526,7 @@ namespace System.Threading.RateLimiting.Test
                     QueueLimit = 50,
                     ReplenishmentPeriod = TimeSpan.FromMilliseconds(1),
                     TokensPerPeriod = 30,
-                    AutoReplenishment = false
+                    AutoReplenishment = false,
                 }
             );
             limiter.Dispose();
@@ -1616,7 +1616,7 @@ namespace System.Threading.RateLimiting.Test
                 new object[]
                 {
                     currentTick
-                        + addMilliseconds * (long)(TimeSpan.TicksPerMillisecond / TickFrequency)
+                        + addMilliseconds * (long)(TimeSpan.TicksPerMillisecond / TickFrequency),
                 }
             );
         }

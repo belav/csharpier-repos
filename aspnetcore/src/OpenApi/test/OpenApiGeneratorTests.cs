@@ -646,7 +646,7 @@ public class OpenApiOperationGeneratorTests
                     StatusCodes.Status400BadRequest,
                     typeof(ProblemDetails),
                     new[] { "application/json+problem" }
-                )
+                ),
             }
         );
 
@@ -670,7 +670,7 @@ public class OpenApiOperationGeneratorTests
                     typeof(InferredJsonClass),
                     new[] { "application/json" }
                 ),
-                new EndpointNameMetadata(endpointGroupName)
+                new EndpointNameMetadata(endpointGroupName),
             }
         );
 
@@ -692,7 +692,7 @@ public class OpenApiOperationGeneratorTests
                     typeof(InferredJsonClass),
                     new[] { "application/json" }
                 ),
-                new ExcludeFromDescriptionAttribute()
+                new ExcludeFromDescriptionAttribute(),
             }
         );
 
@@ -726,7 +726,7 @@ public class OpenApiOperationGeneratorTests
                     StatusCodes.Status409Conflict,
                     typeof(ProblemDetails),
                     new[] { "application/problem+json" }
-                )
+                ),
             }
         );
         var responses = operation.Responses;
@@ -778,7 +778,7 @@ public class OpenApiOperationGeneratorTests
                     StatusCodes.Status201Created,
                     typeof(InferredJsonClass),
                     new[] { "application/json" }
-                )
+                ),
             }
         );
 
@@ -814,7 +814,7 @@ public class OpenApiOperationGeneratorTests
                     new string[] { "application/json", "application/xml" },
                     typeof(string),
                     true
-                )
+                ),
             }
         );
 
@@ -847,7 +847,7 @@ public class OpenApiOperationGeneratorTests
                     new string[] { "application/json" },
                     typeof(InferredJsonClass),
                     true
-                )
+                ),
             }
         );
 
@@ -1225,7 +1225,7 @@ public class OpenApiOperationGeneratorTests
         var httpMethodMetadata = new HttpMethodMetadata(httpMethods ?? new[] { "GET" });
         var hostEnvironment = new HostEnvironment()
         {
-            ApplicationName = nameof(OpenApiOperationGeneratorTests)
+            ApplicationName = nameof(OpenApiOperationGeneratorTests),
         };
         var metadataItems = new List<object>(attributes) { methodInfo, httpMethodMetadata };
         metadataItems.AddRange(additionalMetadata ?? Array.Empty<object>());

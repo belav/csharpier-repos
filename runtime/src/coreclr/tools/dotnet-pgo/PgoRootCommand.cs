@@ -22,7 +22,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 Description =
                     "Input .mibc files to be merged. Multiple input arguments are specified as --input file1.mibc --input file2.mibc",
                 Required = true,
-                Arity = ArgumentArity.OneOrMore
+                Arity = ArgumentArity.OneOrMore,
             };
         public CliOption<string[]> InputFilesToCompare { get; } =
             new("--input", "-i")
@@ -30,14 +30,18 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 Description =
                     "The input .mibc files to be compared. Specify as --input file1.mibc --input file2.mibc",
                 Required = true,
-                Arity = new ArgumentArity(2, 2) /* exactly two */
+                Arity = new ArgumentArity(
+                    2,
+                    2
+                ) /* exactly two */
+                ,
             };
         public CliOption<string> InputFileToDump { get; } =
             new("--input", "-i")
             {
                 Description = "Name of the input mibc file to dump",
                 Required = true,
-                Arity = ArgumentArity.ExactlyOne
+                Arity = ArgumentArity.ExactlyOne,
             };
         public CliOption<string> TraceFilePath { get; } =
             new("--trace", "-t") { Description = "Specify the trace file to be parsed" };
@@ -47,19 +51,19 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             new("--precise-debug-info-file")
             {
                 Description =
-                    "Name of file of newline separated JSON objects containing precise debug info"
+                    "Name of file of newline separated JSON objects containing precise debug info",
             };
         public CliOption<int> Pid { get; } =
             new("--pid")
             {
                 Description =
-                    "The pid within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified"
+                    "The pid within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified",
             };
         public CliOption<string> ProcessName { get; } =
             new("--process-name")
             {
                 Description =
-                    "The process name within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified"
+                    "The process name within the trace of the process to examine. If this is a multi-process trace, at least one of --pid or --process-name must be specified",
             };
         public CliOption<List<string>> Reference =
             new("--reference", "-r")
@@ -67,100 +71,100 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 CustomParser = result => Helpers.BuildPathList(result.Tokens),
                 DefaultValueFactory = result => Helpers.BuildPathList(result.Tokens),
                 Description =
-                    "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option"
+                    "If a reference is not located on disk at the same location as used in the process, it may be specified with a --reference parameter. Multiple --reference parameters may be specified. The wild cards * and ? are supported by this option",
             };
         public CliOption<int> ClrInstanceId { get; } =
             new("--clr-instance-id")
             {
                 Description =
-                    "If the process contains multiple .NET runtimes, the instance ID must be specified"
+                    "If the process contains multiple .NET runtimes, the instance ID must be specified",
             };
         public CliOption<bool> Spgo { get; } =
             new("--spgo")
             {
                 Description =
-                    "Base profile on samples in the input. Uses last branch records if available and otherwise raw IP samples"
+                    "Base profile on samples in the input. Uses last branch records if available and otherwise raw IP samples",
             };
         public CliOption<int> SpgoMinSamples { get; } =
             new("--spgo-min-samples")
             {
                 DefaultValueFactory = _ => 50,
                 Description =
-                    "The minimum number of total samples a function must have before generating profile data for it with SPGO. Default: 50"
+                    "The minimum number of total samples a function must have before generating profile data for it with SPGO. Default: 50",
             };
         public CliOption<bool> IncludeFullGraphs { get; } =
             new("--include-full-graphs")
             {
                 Description =
-                    "Include all blocks and edges in the written .mibc file, regardless of profile counts"
+                    "Include all blocks and edges in the written .mibc file, regardless of profile counts",
             };
         public CliOption<double> ExcludeEventsBefore { get; } =
             new("--exclude-events-before")
             {
                 DefaultValueFactory = _ => Double.MinValue,
                 Description =
-                    "Exclude data from events before specified time. Time is specified as milliseconds from the start of the trace"
+                    "Exclude data from events before specified time. Time is specified as milliseconds from the start of the trace",
             };
         public CliOption<double> ExcludeEventsAfter { get; } =
             new("--exclude-events-after")
             {
                 DefaultValueFactory = _ => Double.MaxValue,
                 Description =
-                    "Exclude data from events after specified time. Time is specified as milliseconds from the start of the trace"
+                    "Exclude data from events after specified time. Time is specified as milliseconds from the start of the trace",
             };
         public CliOption<string> ExcludeEventsBeforeJittingMethod { get; } =
             new("--exclude-events-before-jitting-method")
             {
                 DefaultValueFactory = _ => string.Empty,
                 Description =
-                    "Exclude data from events before observing a specific method getting jitted. Method is matched using a regular expression against the method name. Note that the method name is formatted the same as in PerfView which includes typed parameters."
+                    "Exclude data from events before observing a specific method getting jitted. Method is matched using a regular expression against the method name. Note that the method name is formatted the same as in PerfView which includes typed parameters.",
             };
         public CliOption<string> ExcludeEventsAfterJittingMethod { get; } =
             new("--exclude-events-after-jitting-method")
             {
                 DefaultValueFactory = _ => string.Empty,
                 Description =
-                    "Exclude data from events after observing a specific method getting jitted. Method is matched using a regular expression against the method name. Note that the method name is formatted the same as in PerfView which includes typed parameters."
+                    "Exclude data from events after observing a specific method getting jitted. Method is matched using a regular expression against the method name. Note that the method name is formatted the same as in PerfView which includes typed parameters.",
             };
         public CliOption<string> IncludeMethods { get; } =
             new("--include-methods")
             {
                 DefaultValueFactory = _ => string.Empty,
                 Description =
-                    "Include methods with names matching regular expression. Note that the method names are formatted the same as in PerfView which includes typed parameters."
+                    "Include methods with names matching regular expression. Note that the method names are formatted the same as in PerfView which includes typed parameters.",
             };
         public CliOption<string> ExcludeMethods { get; } =
             new("--exclude-methods")
             {
                 DefaultValueFactory = _ => string.Empty,
                 Description =
-                    "Exclude methods with names matching regular expression. Note that the method names are formatted the same as in PerfView which includes typed parameters."
+                    "Exclude methods with names matching regular expression. Note that the method names are formatted the same as in PerfView which includes typed parameters.",
             };
         public CliOption<bool> Compressed { get; } =
             new("--compressed")
             {
                 DefaultValueFactory = _ => true,
-                Description = "Generate compressed mibc"
+                Description = "Generate compressed mibc",
             };
         public CliOption<int> DumpWorstOverlapGraphs { get; } =
             new("--dump-worst-overlap-graphs")
             {
                 DefaultValueFactory = _ => -1,
                 Description =
-                    "Number of graphs to dump to .dot format in dump-worst-overlap-graphs-to directory"
+                    "Number of graphs to dump to .dot format in dump-worst-overlap-graphs-to directory",
             };
         public CliOption<string> DumpWorstOverlapGraphsTo { get; } =
             new("--dump-worst-overlap-graphs-to")
             {
                 Description =
-                    "Number of graphs to dump to .dot format in dump-worst-overlap-graphs-to directory"
+                    "Number of graphs to dump to .dot format in dump-worst-overlap-graphs-to directory",
             };
         public CliOption<bool> AutomaticReferences { get; } =
             new("--automatic-references")
             {
                 DefaultValueFactory = _ => true,
                 Description =
-                    "Attempt to find references by using paths embedded in the trace file. Defaults to true"
+                    "Attempt to find references by using paths embedded in the trace file. Defaults to true",
             };
         public CliOption<AssemblyName[]> IncludedAssemblies { get; } =
             new("--include-reference")
@@ -168,20 +172,20 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 CustomParser = MakeAssemblyNameArray,
                 DefaultValueFactory = MakeAssemblyNameArray,
                 Description =
-                    "If specified, include in Mibc file only references to the specified assemblies. Assemblies are specified as assembly names, not filenames. For instance, `System.Private.CoreLib` not `System.Private.CoreLib.dll`. Multiple --include-reference options may be specified."
+                    "If specified, include in Mibc file only references to the specified assemblies. Assemblies are specified as assembly names, not filenames. For instance, `System.Private.CoreLib` not `System.Private.CoreLib.dll`. Multiple --include-reference options may be specified.",
             };
 
         private CliOption<bool> _includeReadyToRun { get; } =
             new("--includeReadyToRun")
             {
-                Description = "Include ReadyToRun methods in the trace file"
+                Description = "Include ReadyToRun methods in the trace file",
             };
         private CliOption<Verbosity> _verbosity { get; } =
             new("--verbose")
             {
                 DefaultValueFactory = _ => Verbosity.normal,
                 Description =
-                    "Adjust verbosity level. Supported levels are minimal, normal, detailed, and diagnostic"
+                    "Adjust verbosity level. Supported levels are minimal, normal, detailed, and diagnostic",
             };
         private CliOption<bool> _isSorted { get; } =
             new("--sorted") { Description = "Generate sorted output." };
@@ -207,7 +211,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             minimal,
             normal,
             detailed,
-            diagnostic
+            diagnostic,
         }
 
         public PgoRootCommand(string[] args)
@@ -234,7 +238,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     PreciseDebugInfoFile,
                     Spgo,
                     SpgoMinSamples,
-                    IncludeFullGraphs
+                    IncludeFullGraphs,
                 };
 
             createMbicCommand.SetAction(result =>
@@ -271,7 +275,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     _verbosity,
                     _isSorted,
                     _showTimestamp,
-                    _includeReadyToRun
+                    _includeReadyToRun,
                 };
 
             createJitTraceCommand.SetAction(result =>
@@ -304,7 +308,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     OutputFilePath,
                     IncludedAssemblies,
                     _verbosity,
-                    Compressed
+                    Compressed,
                 };
 
             mergeCommand.SetAction(result =>
@@ -341,7 +345,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                 {
                     InputFilesToCompare,
                     DumpWorstOverlapGraphs,
-                    DumpWorstOverlapGraphsTo
+                    DumpWorstOverlapGraphsTo,
                 };
 
             compareMbicCommand.SetAction(result => ExecuteWithContext(result, false));

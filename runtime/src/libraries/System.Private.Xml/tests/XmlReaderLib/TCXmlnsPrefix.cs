@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TXmlnsPrefix1)
                     {
-                        Attribute = new Variation("NamespaceURI of xmlns:a attribute") { Pri = 0 }
+                        Attribute = new Variation("NamespaceURI of xmlns:a attribute") { Pri = 0 },
                     }
                 );
             }
@@ -30,8 +30,8 @@ namespace System.Xml.Tests
                             "NamespaceURI of element/attribute with xmlns attribute"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -41,7 +41,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TXmlnsPrefix3)
                     {
-                        Attribute = new Variation("LookupNamespace with xmlns prefix")
+                        Attribute = new Variation("LookupNamespace with xmlns prefix"),
                     }
                 );
             }
@@ -53,8 +53,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Define prefix for 'www.w3.org/2000/xmlns'")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -64,7 +64,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TXmlnsPrefix5)
                     {
-                        Attribute = new Variation("Redefine namespace attached to xmlns prefix")
+                        Attribute = new Variation("Redefine namespace attached to xmlns prefix"),
                     }
                 );
             }
@@ -78,8 +78,8 @@ namespace System.Xml.Tests
                             "False duplicates and non-duplicates possible in the XmlReader during attribute normalization"
                         )
                         {
-                            Param = false
-                        }
+                            Param = false,
+                        },
                     }
                 );
                 this.AddChild(
@@ -89,8 +89,8 @@ namespace System.Xml.Tests
                             "False duplicates and non-duplicates possible in the XmlReader during attribute normalization"
                         )
                         {
-                            Param = true
-                        }
+                            Param = true,
+                        },
                     }
                 );
             }

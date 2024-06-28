@@ -21,7 +21,7 @@ namespace Mono.Linker.Tests.Cases.TestFramework
         resources: new object[]
         {
             "Dependencies/CanCompileReferencesWithResources_Lib1.txt",
-            "Dependencies/CanCompileReferencesWithResources_Lib1.log"
+            "Dependencies/CanCompileReferencesWithResources_Lib1.log",
         },
         compilerToUse: "mcs"
     )]

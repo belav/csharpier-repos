@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.WorkspaceServices
             );
 
             AssertEx.Equal(
-                new[] { "test_option1=5", "test_option2=6", },
+                new[] { "test_option1=5", "test_option2=6" },
                 changedOptions.Select(e => $"{e.Option.Definition.ConfigName}={e.Value}")
             );
 

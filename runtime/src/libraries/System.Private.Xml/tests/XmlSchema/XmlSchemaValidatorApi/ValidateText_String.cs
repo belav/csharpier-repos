@@ -146,7 +146,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                     {
                         "Sch_InvalidTextInElementExpecting",
                         new object[] { "Sch_ElementName", "ElementOnlyElement" },
-                        new object[] { "Sch_ElementName", "child" }
+                        new object[] { "Sch_ElementName", "child" },
                     }
                 );
                 return;

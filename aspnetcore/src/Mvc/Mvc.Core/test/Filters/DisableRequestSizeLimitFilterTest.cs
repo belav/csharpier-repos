@@ -49,7 +49,7 @@ public class DisableRequestSizeLimitFilterTest
             new IFilterMetadata[]
             {
                 disableRequestSizeLimitResourceFilter,
-                disableRequestSizeLimitResourceFilterFinal
+                disableRequestSizeLimitResourceFilterFinal,
             }
         );
 

@@ -1922,7 +1922,7 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var client = server.CreateClient();
         var request = new HttpRequestMessage(HttpMethod.Get, "/attr_restrictedsize")
         {
-            Content = new ReadOnlyMemoryContent("from request"u8.ToArray())
+            Content = new ReadOnlyMemoryContent("from request"u8.ToArray()),
         };
         request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(
             "text/plain"
@@ -2034,7 +2034,7 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var client = server.CreateClient();
         var request = new HttpRequestMessage(HttpMethod.Get, "/ext_restrictedsize")
         {
-            Content = new ReadOnlyMemoryContent("from request"u8.ToArray())
+            Content = new ReadOnlyMemoryContent("from request"u8.ToArray()),
         };
         request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(
             "text/plain"

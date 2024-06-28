@@ -846,7 +846,7 @@ namespace System.Numerics.Tests
                 new CultureInfo("de-DE"),
                 new CultureInfo("he-IL"),
                 new CultureInfo("ru-RU"),
-                new CultureInfo("zh-CN")
+                new CultureInfo("zh-CN"),
             };
             long intMaxPlus1 = ((long)int.MaxValue + 1);
             string intMaxPlus1String = intMaxPlus1.ToString();
@@ -3652,7 +3652,7 @@ namespace System.Numerics.Tests
                 "c",
                 "d",
                 "e",
-                "f"
+                "f",
             };
             int size = random.Next(min, max);
 
@@ -3687,7 +3687,7 @@ namespace System.Numerics.Tests
                 'B',
                 'b',
                 'R',
-                'r'
+                'r',
             };
             char result = 'C';
             while (result == 'C')

@@ -13,6 +13,6 @@
         /// <summary>
         /// An item container, such as DetailsView, FormView (or a control implementing IDataBoundItemControl)
         /// </summary>
-        Item
+        Item,
     }
 }

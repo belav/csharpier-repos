@@ -137,14 +137,14 @@ public class WebAssemblyHostConfigurationTest
             { "Mem1", "Value1" },
             { "Mem1:", "NoKeyValue1" },
             { "Mem1:KeyInMem1", "ValueInMem1" },
-            { "Mem1:KeyInMem1:Deep1", "ValueDeep1" }
+            { "Mem1:KeyInMem1:Deep1", "ValueDeep1" },
         };
         var dic2 = new Dictionary<string, string>()
         {
             { "Mem2", "Value2" },
             { "Mem2:", "NoKeyValue2" },
             { "Mem2:KeyInMem2", "ValueInMem2" },
-            { "Mem2:KeyInMem2:Deep2", "ValueDeep2" }
+            { "Mem2:KeyInMem2:Deep2", "ValueDeep2" },
         };
         var dic3 = new Dictionary<string, string>()
         {
@@ -153,7 +153,7 @@ public class WebAssemblyHostConfigurationTest
             { "Mem3:KeyInMem3", "ValueInMem3" },
             { "Mem3:KeyInMem4", "ValueInMem4" },
             { "Mem3:KeyInMem3:Deep3", "ValueDeep3" },
-            { "Mem3:KeyInMem3:Deep4", "ValueDeep4" }
+            { "Mem3:KeyInMem3:Deep4", "ValueDeep4" },
         };
         var memConfigSrc1 = new MemoryConfigurationSource { InitialData = dic1 };
         var memConfigSrc2 = new MemoryConfigurationSource { InitialData = dic2 };

@@ -51,7 +51,7 @@ public class RouteViewTest
         // Arrange
         var routeParams = new Dictionary<string, object>
         {
-            { nameof(ComponentWithLayout.Message), "Test message" }
+            { nameof(ComponentWithLayout.Message), "Test message" },
         };
         var routeData = new RouteData(typeof(ComponentWithLayout), routeParams);
 

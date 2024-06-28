@@ -28,7 +28,7 @@ namespace Tracing.Tests.ReverseValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" },
                 },
                 duringExecution: async (_) =>
                 {
@@ -60,7 +60,7 @@ namespace Tracing.Tests.ReverseValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" },
                 },
                 duringExecution: async (_) =>
                 {
@@ -84,7 +84,7 @@ namespace Tracing.Tests.ReverseValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" },
                 },
                 duringExecution: async (int pid) =>
                 {
@@ -104,7 +104,7 @@ namespace Tracing.Tests.ReverseValidation
                             format: EventPipeSerializationFormat.NetTrace,
                             providers: new List<Provider>
                             {
-                                new Provider("Microsoft-DotNETCore-SampleProfiler")
+                                new Provider("Microsoft-DotNETCore-SampleProfiler"),
                             }
                         );
                         Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -145,7 +145,7 @@ namespace Tracing.Tests.ReverseValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" },
                 },
                 duringExecution: async (int pid) =>
                 {
@@ -154,7 +154,7 @@ namespace Tracing.Tests.ReverseValidation
                         format: EventPipeSerializationFormat.NetTrace,
                         providers: new List<Provider>
                         {
-                            new Provider("Microsoft-DotNETCore-SampleProfiler")
+                            new Provider("Microsoft-DotNETCore-SampleProfiler"),
                         }
                     );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -194,7 +194,7 @@ namespace Tracing.Tests.ReverseValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" },
                 },
                 duringExecution: async (int pid) =>
                 {
@@ -203,7 +203,7 @@ namespace Tracing.Tests.ReverseValidation
                         format: EventPipeSerializationFormat.NetTrace,
                         providers: new List<Provider>
                         {
-                            new Provider("Microsoft-DotNETCore-SampleProfiler")
+                            new Provider("Microsoft-DotNETCore-SampleProfiler"),
                         }
                     );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");
@@ -240,7 +240,7 @@ namespace Tracing.Tests.ReverseValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName},nosuspend" },
                 },
                 duringExecution: async (int pid) =>
                 {
@@ -249,7 +249,7 @@ namespace Tracing.Tests.ReverseValidation
                         format: EventPipeSerializationFormat.NetTrace,
                         providers: new List<Provider>
                         {
-                            new Provider("Microsoft-DotNETCore-SampleProfiler")
+                            new Provider("Microsoft-DotNETCore-SampleProfiler"),
                         }
                     );
                     Logger.logger.Log("Starting EventPipeSession over standard connection");

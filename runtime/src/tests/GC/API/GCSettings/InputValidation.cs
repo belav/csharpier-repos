@@ -60,7 +60,7 @@ public class InputValidation
                 GCLatencyMode.Batch,
                 GCLatencyMode.Interactive,
                 GCLatencyMode.LowLatency,
-                GCLatencyMode.SustainedLowLatency
+                GCLatencyMode.SustainedLowLatency,
             }
         );
         public List<GCLatencyMode> validInputs = new List<GCLatencyMode>();
@@ -69,7 +69,7 @@ public class InputValidation
             new GCLatencyMode[]
             {
                 (GCLatencyMode)(GCLatencyMode.Batch - 1),
-                (GCLatencyMode)(GCLatencyMode.SustainedLowLatency + 1)
+                (GCLatencyMode)(GCLatencyMode.SustainedLowLatency + 1),
             }
         );
 

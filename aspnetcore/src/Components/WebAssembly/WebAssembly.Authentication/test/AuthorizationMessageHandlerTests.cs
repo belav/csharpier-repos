@@ -69,7 +69,7 @@ public class AuthorizationMessageHandlerTests
                         {
                             Expires = DateTime.Now.AddHours(1),
                             GrantedScopes = new string[] { "All" },
-                            Value = "asdf"
+                            Value = "asdf",
                         },
                         null,
                         null
@@ -108,7 +108,7 @@ public class AuthorizationMessageHandlerTests
                         {
                             Expires = DateTime.Now.AddHours(1),
                             GrantedScopes = new string[] { "All" },
-                            Value = "asdf"
+                            Value = "asdf",
                         },
                         null,
                         null
@@ -151,7 +151,7 @@ public class AuthorizationMessageHandlerTests
                         {
                             Expires = DateTime.Now.AddMinutes(3),
                             GrantedScopes = new string[] { "All" },
-                            Value = "asdf"
+                            Value = "asdf",
                         },
                         null,
                         null
@@ -194,7 +194,7 @@ public class AuthorizationMessageHandlerTests
                         new InteractiveRequestOptions
                         {
                             Interaction = InteractionType.GetToken,
-                            ReturnUrl = "https://www.example.com"
+                            ReturnUrl = "https://www.example.com",
                         }
                     )
                 )
@@ -230,7 +230,7 @@ public class AuthorizationMessageHandlerTests
                         {
                             Expires = DateTime.Now.AddMinutes(3),
                             GrantedScopes = new string[] { "All" },
-                            Value = "asdf"
+                            Value = "asdf",
                         },
                         null,
                         null

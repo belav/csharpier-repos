@@ -88,7 +88,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             FaultPropagationQuery query = new FaultPropagationQuery
             {
                 FaultSourceActivityName = this.FaultSourceActivityName,
-                FaultHandlerActivityName = this.FaultHandlerActivityName
+                FaultHandlerActivityName = this.FaultHandlerActivityName,
             };
 
             return query;

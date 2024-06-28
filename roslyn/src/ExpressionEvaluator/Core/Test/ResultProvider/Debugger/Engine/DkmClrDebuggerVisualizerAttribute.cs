@@ -83,6 +83,6 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         //
         // Summary:
         //     Present on an assembly loaded by the debuggee.
-        Debuggee
+        Debuggee,
     }
 }

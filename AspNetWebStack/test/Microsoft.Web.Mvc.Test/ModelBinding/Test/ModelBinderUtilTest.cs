@@ -223,7 +223,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
             bindingContext.ModelMetadata.Model = "hello!";
 
@@ -240,7 +240,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
 
             // Act
@@ -269,7 +269,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
             bindingContext.ModelMetadata.Model = 42;
 
@@ -291,7 +291,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
 
             // Act & assert
@@ -330,7 +330,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(object))
+                ModelMetadata = GetMetadata(typeof(object)),
             };
 
             // Act & assert

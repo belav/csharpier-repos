@@ -24,7 +24,7 @@ namespace System.Web.Http.WebHost
                         {
                             SuppressFormsAuthRedirectHelper.AppSettingsSuppressFormsAuthenticationRedirectKey,
                             setting
-                        }
+                        },
                     }
                 )
             );

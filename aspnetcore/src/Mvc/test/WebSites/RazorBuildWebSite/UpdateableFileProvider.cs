@@ -108,7 +108,7 @@ public class UpdateableFileProvider : IFileProvider
         {
             var file = new TestFileInfo("@page" + Environment.NewLine + "Original content")
             {
-                Name = "UpdateablePage.cshtml"
+                Name = "UpdateablePage.cshtml",
             };
 
             var files = new List<IFileInfo> { file };

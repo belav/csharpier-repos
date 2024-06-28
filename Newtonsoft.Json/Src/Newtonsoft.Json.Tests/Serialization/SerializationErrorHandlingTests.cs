@@ -66,7 +66,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(e.ErrorContext.Error);
                         e.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
 
@@ -93,7 +93,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         {
                             errors.Add(e.ErrorContext.Error);
                             e.ErrorContext.Handled = true;
-                        }
+                        },
                     }
                 );
 
@@ -139,7 +139,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
 
@@ -172,6 +172,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "[1] - Error message for member 1 = An item with the same key has already been added.",
                 "[1] - Error message for member 1 = An element with the same key already exists in the dictionary.", // mono
                 "[1] - Error message for member 1 = An item with the same key has already been added. Key: Jim" // netcore
+                ,
             };
             VersionKeyedCollection c = JsonConvert.DeserializeObject<VersionKeyedCollection>(json);
             Assert.AreEqual(1, c.Count);
@@ -236,32 +237,32 @@ namespace Newtonsoft.Json.Tests.Serialization
                         {
                             Member = "Value1",
                             ThrowError = "Handle this!",
-                            Member2 = "Member1"
+                            Member2 = "Member1",
                         },
                         new ListErrorObject { Member = "Value2", Member2 = "Member2" },
                         new ListErrorObject
                         {
                             Member = "Value3",
                             ThrowError = "Handle that!",
-                            Member2 = "Member3"
-                        }
+                            Member2 = "Member3",
+                        },
                     },
                     {
                         new ListErrorObject
                         {
                             Member = "Value1",
                             ThrowError = "Handle this!",
-                            Member2 = "Member1"
+                            Member2 = "Member1",
                         },
                         new ListErrorObject { Member = "Value2", Member2 = "Member2" },
                         new ListErrorObject
                         {
                             Member = "Value3",
                             ThrowError = "Handle that!",
-                            Member2 = "Member3"
-                        }
-                    }
-                }
+                            Member2 = "Member3",
+                        },
+                    },
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -275,7 +276,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         {
                             e.ErrorContext.Handled = true;
                         }
-                    }
+                    },
                 }
             );
 
@@ -327,15 +328,15 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     Member = "Value1",
                     ThrowError = "Handle this!",
-                    Member2 = "Member1"
+                    Member2 = "Member1",
                 },
                 new ListErrorObject { Member = "Value2", Member2 = "Member2" },
                 new ListErrorObject
                 {
                     Member = "Value3",
                     ThrowError = "Handle that!",
-                    Member2 = "Member3"
-                }
+                    Member2 = "Member3",
+                },
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -403,7 +404,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         );
                         args.ErrorContext.Handled = true;
                     },
-                    Converters = { new IsoDateTimeConverter() }
+                    Converters = { new IsoDateTimeConverter() },
                 }
             );
             var c = serializer.Deserialize<List<DateTime>>(
@@ -489,7 +490,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         Error = (s, a) => eventErrorHandlerCalled = true,
-                        Converters = { new IsoDateTimeConverter() }
+                        Converters = { new IsoDateTimeConverter() },
                     }
                 );
 
@@ -509,7 +510,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Name = "George Michael Bluth",
                 Age = 16,
                 Roles = null,
-                Title = "Mister Manager"
+                Title = "Mister Manager",
             };
 
             string json = JsonConvert.SerializeObject(person, Formatting.Indented);
@@ -738,7 +739,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(arg.ErrorContext.Error.Message);
                         arg.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
 
@@ -768,7 +769,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(arg.ErrorContext.Error.Message);
                         arg.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
             object o = serializer.Deserialize(reader, typeof(int[]));
@@ -799,7 +800,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     {
                         errors.Add(arg.ErrorContext.Error.Message);
                         arg.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
 
@@ -832,7 +833,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             using (
                 var jsonTextReader = new JsonTextReader(new StringReader(input))
                 {
-                    MaxDepth = maxDepth
+                    MaxDepth = maxDepth,
                 }
             )
             {
@@ -840,7 +841,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         MaxDepth = maxDepth,
-                        MetadataPropertyHandling = MetadataPropertyHandling.Default
+                        MetadataPropertyHandling = MetadataPropertyHandling.Default,
                     }
                 );
                 jsonSerializer.Error += (sender, e) =>
@@ -882,7 +883,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             using (
                 var jsonTextReader = new JsonTextReader(new StringReader(input))
                 {
-                    MaxDepth = maxDepth
+                    MaxDepth = maxDepth,
                 }
             )
             {
@@ -890,7 +891,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         MaxDepth = maxDepth,
-                        MetadataPropertyHandling = MetadataPropertyHandling.Default
+                        MetadataPropertyHandling = MetadataPropertyHandling.Default,
                     }
                 );
                 jsonSerializer.Error += (sender, e) =>
@@ -943,7 +944,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         errors.Add(e.ErrorContext.Error.Message);
                         e.ErrorContext.Handled = true;
                     },
-                    MetadataPropertyHandling = MetadataPropertyHandling.Default
+                    MetadataPropertyHandling = MetadataPropertyHandling.Default,
                 }
             );
             Assert.AreEqual(true, newDynamicObject.Explicit);
@@ -1184,7 +1185,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             Something s = new Something
             {
-                RootSomethingElse = new RootSomethingElse { SomethingElse = new SomethingElse() }
+                RootSomethingElse = new RootSomethingElse { SomethingElse = new SomethingElse() },
             };
             RootThing r = new RootThing { Something = s };
 
@@ -1209,7 +1210,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     Error = (o, e) =>
                     {
                         e.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
 
@@ -1226,7 +1227,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     Error = (o, e) =>
                     {
                         e.ErrorContext.Handled = true;
-                    }
+                    },
                 }
             );
 

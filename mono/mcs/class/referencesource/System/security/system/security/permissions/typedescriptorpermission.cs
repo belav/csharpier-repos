@@ -25,7 +25,7 @@ namespace System.Security.Permissions
     public enum TypeDescriptorPermissionFlags
     {
         NoFlags = 0,
-        RestrictedRegistrationAccess = 1
+        RestrictedRegistrationAccess = 1,
     }
 
     [Serializable]

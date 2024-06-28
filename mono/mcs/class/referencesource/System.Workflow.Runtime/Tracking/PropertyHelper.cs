@@ -242,7 +242,7 @@ namespace System.Workflow.Runtime.Tracking
             {
                 "__winoe_ActivityLocks_",
                 "__winoe_StaticActivityLocks_",
-                "__winoe_MethodLocks_"
+                "__winoe_MethodLocks_",
             };
 
             foreach (string s in vars)

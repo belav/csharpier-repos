@@ -35,6 +35,6 @@ namespace System.Web.Services.Protocols
     {
         Default,
         Soap11,
-        Soap12
+        Soap12,
     }
 }

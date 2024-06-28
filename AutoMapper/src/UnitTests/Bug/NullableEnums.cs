@@ -15,7 +15,7 @@ public class NullableEnums : AutoMapperSpecBase
     public enum EnumType
     {
         One,
-        Two
+        Two,
     }
 
     protected override MapperConfiguration CreateConfiguration() =>

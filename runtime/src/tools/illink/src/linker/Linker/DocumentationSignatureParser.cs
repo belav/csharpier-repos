@@ -34,7 +34,7 @@ namespace Mono.Linker
             Type = 0x0004,
             Property = 0x0008,
             Event = 0x0010,
-            All = Method | Field | Type | Property | Event
+            All = Method | Field | Type | Property | Event,
         }
 
         public static IEnumerable<IMemberDefinition> GetMembersForDocumentationSignature(
@@ -946,7 +946,7 @@ namespace Mono.Linker
             '@',
             '*',
             '`',
-            '~'
+            '~',
         };
 
         static string ParseName(string id, ref int index)

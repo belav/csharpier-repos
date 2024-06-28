@@ -771,7 +771,7 @@ public class RouteTest
             {
                 page = 1,
                 color = new List<string> { "red", "green", "blue" },
-                message = "textfortest"
+                message = "textfortest",
             },
             new { controller = "Home", action = "Index" }
         );
@@ -1052,7 +1052,7 @@ public class RouteTest
             {
                 Controller = "Home",
                 action = "Blog",
-                extra = "42"
+                extra = "42",
             }
         );
 
@@ -1061,7 +1061,7 @@ public class RouteTest
             {
                 controller = "Home",
                 action = "Store",
-                extra = "42"
+                extra = "42",
             }
         );
 
@@ -1163,7 +1163,7 @@ public class RouteTest
             {
                 Controller = "Home",
                 action = "Blog",
-                otherthing = "17"
+                otherthing = "17",
             }
         );
 
@@ -1173,7 +1173,7 @@ public class RouteTest
                 controller = "Home",
                 action = "Store",
                 otherthing = "17",
-                thirdthing = "13"
+                thirdthing = "13",
             }
         );
 
@@ -1201,7 +1201,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                id = 4
+                id = 4,
             }
         );
 
@@ -1224,7 +1224,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                id = "asf"
+                id = "asf",
             }
         );
 
@@ -1245,7 +1245,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                id = 98
+                id = 98,
             }
         );
 
@@ -1286,7 +1286,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                id = "sdfd"
+                id = "sdfd",
             }
         );
 
@@ -1307,7 +1307,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                id = 14
+                id = 14,
             }
         );
 
@@ -1337,7 +1337,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                name = "products"
+                name = "products",
             }
         );
 
@@ -1367,7 +1367,7 @@ public class RouteTest
                 action = "Index",
                 controller = "Home",
                 name = "products",
-                format = "xml"
+                format = "xml",
             }
         );
 
@@ -1396,7 +1396,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                name = "products"
+                name = "products",
             }
         );
 
@@ -1426,7 +1426,7 @@ public class RouteTest
                 action = "Index",
                 controller = "Home",
                 name = "products",
-                format = "xml"
+                format = "xml",
             }
         );
 
@@ -1455,7 +1455,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                name = "products"
+                name = "products",
             }
         );
 
@@ -1485,7 +1485,7 @@ public class RouteTest
                 action = "Index",
                 controller = "Home",
                 name = "products",
-                format = "json"
+                format = "json",
             }
         );
 
@@ -1514,7 +1514,7 @@ public class RouteTest
             {
                 action = "Index",
                 controller = "Home",
-                name = "products"
+                name = "products",
             }
         );
 
@@ -1690,7 +1690,7 @@ public class RouteTest
         services.AddOptions();
         services.AddRouting();
 
-        var context = new DefaultHttpContext { RequestServices = services.BuildServiceProvider(), };
+        var context = new DefaultHttpContext { RequestServices = services.BuildServiceProvider() };
 
         return new VirtualPathContext(context, ambientValues, values);
     }
@@ -1714,7 +1714,7 @@ public class RouteTest
                 new RouteValueDictionary { { "key1", "data1" }, { "key2", 13 } },
                 new Dictionary<string, object> { { "key1", "data1" }, { "key2", 13 } },
             };
-            yield return new object[] { new object(), new Dictionary<string, object>(), };
+            yield return new object[] { new object(), new Dictionary<string, object>() };
             yield return new object[] { null, new Dictionary<string, object>() };
             yield return new object[]
             {
@@ -1942,7 +1942,7 @@ public class RouteTest
             yield return new object[] { new RouteValueDictionary() };
             yield return new object[]
             {
-                new RouteValueDictionary() { { "tokenKeyA", "tokenValueA" } }
+                new RouteValueDictionary() { { "tokenKeyA", "tokenValueA" } },
             };
         }
     }

@@ -274,7 +274,7 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                         new[]
                         {
                             innerIncludeMethodCall.Arguments[0],
-                            Expression.Constant($"{innerNavigationPath}.{currentNavigationpath}")
+                            Expression.Constant($"{innerNavigationPath}.{currentNavigationpath}"),
                         }
                     );
                 }
@@ -295,10 +295,10 @@ public abstract class NorthwindStringIncludeQueryTestBase<TFixture>
                     NodeType: ExpressionType.Convert
                         or ExpressionType.Convert
                         or ExpressionType.TypeAs
-                } unaryExpression =>
-                    GetPath(unaryExpression.Operand),
-                _ =>
-                    throw new NotImplementedException("Unhandled expression tree in Include lambda")
+                } unaryExpression => GetPath(unaryExpression.Operand),
+                _ => throw new NotImplementedException(
+                    "Unhandled expression tree in Include lambda"
+                ),
             };
     }
 }

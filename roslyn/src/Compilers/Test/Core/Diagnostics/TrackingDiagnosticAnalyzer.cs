@@ -109,7 +109,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 SymbolKind.NamedType,
                 SymbolKind.Namespace,
                 SymbolKind.Parameter,
-                SymbolKind.Property
+                SymbolKind.Property,
             };
 
             var actualSymbolKinds = _callLog
@@ -167,110 +167,110 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 {
                     SymbolKind = SymbolKind.Event,
                     MethodKind = InvalidMethodKind,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Field,
                     MethodKind = InvalidMethodKind,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.Constructor,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.Conversion,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.Destructor,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 }, // C# only
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.EventAdd,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.EventRemove,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.EventRaise,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 }, // VB only
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.ExplicitInterfaceImplementation,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 }, // C# only
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.Ordinary,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.Ordinary,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.PropertyGet,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.PropertySet,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.StaticConstructor,
-                    ReturnsVoid = true
+                    ReturnsVoid = true,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Method,
                     MethodKind = MethodKind.UserDefinedOperator,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Property,
                     MethodKind = InvalidMethodKind,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.NamedType,
                     MethodKind = InvalidMethodKind,
-                    ReturnsVoid = false
+                    ReturnsVoid = false,
                 },
                 new
                 {
                     SymbolKind = SymbolKind.Namespace,
                     MethodKind = InvalidMethodKind,
-                    ReturnsVoid = false
-                }
+                    ReturnsVoid = false,
+                },
             }.AsEnumerable();
 
             if (symbolKindsWithNoCodeBlocks != null)
@@ -290,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 {
                     SymbolKind = e.SymbolKind.Value,
                     MethodKind = e.MethodKind ?? InvalidMethodKind,
-                    e.ReturnsVoid
+                    e.ReturnsVoid,
                 })
                 .Distinct();
             var actualOnCodeBlockEndedArguments = _callLog
@@ -299,7 +299,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 {
                     SymbolKind = e.SymbolKind.Value,
                     MethodKind = e.MethodKind ?? InvalidMethodKind,
-                    e.ReturnsVoid
+                    e.ReturnsVoid,
                 })
                 .Distinct();
 

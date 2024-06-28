@@ -631,7 +631,7 @@ namespace System.Web.Mvc.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 )
             );
@@ -654,7 +654,7 @@ namespace System.Web.Mvc.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 ),
                 "http",
@@ -684,7 +684,7 @@ namespace System.Web.Mvc.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 ),
                 String.Empty /* protocol */
@@ -715,7 +715,7 @@ namespace System.Web.Mvc.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 ),
                 null /* protocol */
@@ -746,7 +746,7 @@ namespace System.Web.Mvc.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 ),
                 null /* protocol */
@@ -770,7 +770,7 @@ namespace System.Web.Mvc.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             );
 
@@ -791,7 +791,7 @@ namespace System.Web.Mvc.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 },
                 "https"
             );
@@ -832,7 +832,7 @@ namespace System.Web.Mvc.Test
                     {
                         Action = "newaction",
                         Controller = "home2",
-                        id = "someid"
+                        id = "someid",
                     }
                 )
             );
@@ -854,7 +854,7 @@ namespace System.Web.Mvc.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             );
 
@@ -875,7 +875,7 @@ namespace System.Web.Mvc.Test
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             );
 
@@ -911,7 +911,7 @@ namespace System.Web.Mvc.Test
                     controller = "controller",
                     action = "action",
                     b = UrlParameter.Optional,
-                    c = UrlParameter.Optional
+                    c = UrlParameter.Optional,
                 }
             );
 
@@ -943,14 +943,14 @@ namespace System.Web.Mvc.Test
             rt.Add(
                 new Route("{controller}/{action}/{id}", null)
                 {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
                 }
             );
             rt.Add(
                 "namedroute",
                 new Route("named/{controller}/{action}/{id}", null)
                 {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
                 }
             );
 

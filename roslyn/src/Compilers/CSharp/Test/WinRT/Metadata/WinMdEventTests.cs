@@ -242,7 +242,7 @@ public partial class B : I
                     references: new[]
                     {
                         MscorlibRef_v4_0_30316_17626,
-                        SystemCoreRef_v4_0_30319_17929
+                        SystemCoreRef_v4_0_30319_17929,
                     },
                     options: TestOptions.DebugWinMD.WithAllowUnsafe(true),
                     assemblyName: "EventLibrary"
@@ -314,7 +314,7 @@ class C
 
             var dynamicCommon = CreateEmptyCompilation(
                 DynamicCommonSrc,
-                references: new[] { MscorlibRef_v4_0_30316_17626, _eventLibRef, },
+                references: new[] { MscorlibRef_v4_0_30316_17626, _eventLibRef },
                 options: TestOptions.DebugModule.WithAllowUnsafe(true)
             );
 
@@ -329,7 +329,7 @@ class C
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d3").WithArguments("A.d3"),
                     // (7,42): warning CS0067: The event 'A.d2' is never used
                     //     public event genericDelegate<object> d2;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d2").WithArguments("A.d2")
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "d2").WithArguments("A.d2"),
                 }
             );
 
@@ -342,7 +342,7 @@ class C
                     SystemCoreRef_v4_0_30319_17929,
                     CSharpRef,
                     _eventLibRef,
-                    dynamicCommonRef
+                    dynamicCommonRef,
                 }
             );
             verifier.VerifyIL(
@@ -3019,7 +3019,7 @@ class C : Interface
                 OutputKind kind in new[]
                 {
                     OutputKind.DynamicallyLinkedLibrary,
-                    OutputKind.WindowsRuntimeMetadata
+                    OutputKind.WindowsRuntimeMetadata,
                 }
             )
             {
@@ -3099,7 +3099,7 @@ class OverrideAndImplIncorrectly : ReversedBase, Interface
                 OutputKind kind in new[]
                 {
                     OutputKind.DynamicallyLinkedLibrary,
-                    OutputKind.WindowsRuntimeMetadata
+                    OutputKind.WindowsRuntimeMetadata,
                 }
             )
             {
@@ -3201,7 +3201,7 @@ class C : Interface
                 OutputKind kind in new[]
                 {
                     OutputKind.DynamicallyLinkedLibrary,
-                    OutputKind.WindowsRuntimeMetadata
+                    OutputKind.WindowsRuntimeMetadata,
                 }
             )
             {
@@ -3454,7 +3454,7 @@ class C
                 OutputKind kind in new[]
                 {
                     OutputKind.DynamicallyLinkedLibrary,
-                    OutputKind.WindowsRuntimeMetadata
+                    OutputKind.WindowsRuntimeMetadata,
                 }
             )
             {

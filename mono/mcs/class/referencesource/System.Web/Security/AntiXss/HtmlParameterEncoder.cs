@@ -24,7 +24,7 @@ namespace System.Web.Security.AntiXss
         /// <summary>
         /// Encode spaces for use in form data
         /// </summary>
-        HtmlForm = 2
+        HtmlForm = 2,
     }
 
     /// <summary>

@@ -192,7 +192,7 @@ namespace System.Web.Helpers.Test
                 Age = 23.3,
                 Dob = new DateTime(1986, 11, 19),
                 LongType = 1000000000,
-                Type = 1
+                Type = 1,
             };
 
             using (new CultureReplacer("en-US"))
@@ -220,7 +220,7 @@ namespace System.Web.Helpers.Test
             MockObjectVisitor visitor = CreateObjectVisitor();
             PersonNode node = new PersonNode
             {
-                Person = new Person { Name = "David", Age = 23.3 }
+                Person = new Person { Name = "David", Age = 23.3 },
             };
             node.Next = node;
 

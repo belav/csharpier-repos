@@ -28,7 +28,7 @@ internal sealed class BrowserArguments
     private OptionSet GetOptions() =>
         new OptionSet
         {
-            { "forward-console", "Forward JS console output", v => ForwardConsoleOutput = true }
+            { "forward-console", "Forward JS console output", v => ForwardConsoleOutput = true },
         };
 
     public void ParseJsonProperties(IDictionary<string, JsonElement>? properties)

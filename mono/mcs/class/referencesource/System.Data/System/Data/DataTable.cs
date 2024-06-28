@@ -756,7 +756,7 @@ namespace System.Data
                             {
                                 (int)fk.AcceptRejectRule,
                                 (int)fk.UpdateRule,
-                                (int)fk.DeleteRule
+                                (int)fk.DeleteRule,
                             }
                         );
                         list.Add(fk.ExtendedProperties);

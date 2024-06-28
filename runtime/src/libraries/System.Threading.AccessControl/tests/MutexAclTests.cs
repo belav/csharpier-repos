@@ -104,7 +104,7 @@ namespace System.Threading.Tests
                 MutexRights.FullControl,
                 MutexRights.Synchronize,
                 MutexRights.Modify,
-                MutexRights.Modify | MutexRights.Synchronize
+                MutexRights.Modify | MutexRights.Synchronize,
             }
             from accessControl in new[] { AccessControlType.Allow, AccessControlType.Deny }
             select new object[] { initiallyOwned, rights, accessControl };

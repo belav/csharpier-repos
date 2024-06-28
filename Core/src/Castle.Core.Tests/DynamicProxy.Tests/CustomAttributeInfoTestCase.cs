@@ -108,7 +108,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 42,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
+                        ArrayProperty = new[] { 1, 2, 3 },
                     }
             );
             var y = CustomAttributeInfo.FromExpression(
@@ -117,7 +117,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 42,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
+                        ArrayProperty = new[] { 1, 2, 3 },
                     }
             );
 
@@ -134,7 +134,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 42,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
+                        ArrayProperty = new[] { 1, 2, 3 },
                     }
             );
             var y = CustomAttributeInfo.FromExpression(
@@ -143,7 +143,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 99,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
+                        ArrayProperty = new[] { 1, 2, 3 },
                     }
             );
 
@@ -159,7 +159,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 42,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
+                        ArrayProperty = new[] { 1, 2, 3 },
                     }
             );
             var y = CustomAttributeInfo.FromExpression(
@@ -168,7 +168,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 99,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 4 }
+                        ArrayProperty = new[] { 1, 2, 4 },
                     }
             );
 
@@ -184,7 +184,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 42,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
+                        arrayField = new[] { 1, 2, 3 },
                     }
             );
             var y = CustomAttributeInfo.FromExpression(
@@ -193,7 +193,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 42,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
+                        arrayField = new[] { 1, 2, 3 },
                     }
             );
 
@@ -210,7 +210,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 42,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
+                        arrayField = new[] { 1, 2, 3 },
                     }
             );
             var y = CustomAttributeInfo.FromExpression(
@@ -219,7 +219,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 99,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
+                        arrayField = new[] { 1, 2, 3 },
                     }
             );
 
@@ -235,7 +235,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 42,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
+                        arrayField = new[] { 1, 2, 3 },
                     }
             );
             var y = CustomAttributeInfo.FromExpression(
@@ -244,7 +244,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 99,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 4 }
+                        arrayField = new[] { 1, 2, 4 },
                     }
             );
 
@@ -291,7 +291,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         IntProperty = 42,
                         StringProperty = "foo",
-                        ArrayProperty = new[] { 1, 2, 3 }
+                        ArrayProperty = new[] { 1, 2, 3 },
                     },
                 new CustomAttributeInfo(
                     defaultCtor,
@@ -307,7 +307,7 @@ namespace Castle.DynamicProxy.Tests
                     {
                         intField = 42,
                         stringField = "foo",
-                        arrayField = new[] { 1, 2, 3 }
+                        arrayField = new[] { 1, 2, 3 },
                     },
                 new CustomAttributeInfo(
                     defaultCtor,

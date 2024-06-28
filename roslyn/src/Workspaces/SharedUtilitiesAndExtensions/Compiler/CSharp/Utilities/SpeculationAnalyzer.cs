@@ -301,7 +301,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
                     paramNames = new List<string>()
                     {
-                        originalSimpleLambda.Parameter.Identifier.ValueText
+                        originalSimpleLambda.Parameter.Identifier.ValueText,
                     };
                     originalLambdaBody = originalSimpleLambda.Body;
                     replacedLambdaBody = replacedSimpleLambda.Body;
@@ -846,12 +846,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
 
             return expression.Kind() switch
             {
-                SyntaxKind.InvocationExpression =>
-                    ((InvocationExpressionSyntax)expression).ArgumentList,
-                SyntaxKind.ObjectCreationExpression =>
-                    ((ObjectCreationExpressionSyntax)expression).ArgumentList,
-                SyntaxKind.ElementAccessExpression =>
-                    ((ElementAccessExpressionSyntax)expression).ArgumentList,
+                SyntaxKind.InvocationExpression => (
+                    (InvocationExpressionSyntax)expression
+                ).ArgumentList,
+                SyntaxKind.ObjectCreationExpression => (
+                    (ObjectCreationExpressionSyntax)expression
+                ).ArgumentList,
+                SyntaxKind.ElementAccessExpression => (
+                    (ElementAccessExpressionSyntax)expression
+                ).ArgumentList,
                 _ => null,
             };
         }

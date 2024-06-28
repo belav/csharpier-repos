@@ -146,7 +146,7 @@ namespace System.Linq.Tests
                     { "Bob", 2 },
                     { "bob", 1 },
                     { "tim", 1 },
-                    { "Tim", 1 }
+                    { "Tim", 1 },
                 }
             );
 

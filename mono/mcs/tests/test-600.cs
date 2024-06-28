@@ -4,12 +4,12 @@ namespace Test
 {
     enum Key_byte : byte
     {
-        A = 1
+        A = 1,
     }
 
     enum Key_ulong : ulong
     {
-        A = 1
+        A = 1,
     }
 
     class Regression

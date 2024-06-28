@@ -17,7 +17,7 @@ internal sealed class CreateCommand
         "yyyy-MM-dd HH:mm",
         "yyyy/MM/dd",
         "yyyy/MM/dd HH:mm",
-        "yyyy-MM-ddTHH:mm:ss.fffffffzzz"
+        "yyyy-MM-ddTHH:mm:ss.fffffffzzz",
     };
     private static readonly string[] _timeSpanFormats = new[]
     {
@@ -30,7 +30,7 @@ internal sealed class CreateCommand
         @"h\h",
         @"m\ms\s",
         @"m\m",
-        @"s\s"
+        @"s\s",
     };
 
     public static void Register(ProjectCommandLineApplication app, Program program)

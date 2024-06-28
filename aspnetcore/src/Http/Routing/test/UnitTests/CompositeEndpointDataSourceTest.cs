@@ -51,7 +51,7 @@ public class CompositeEndpointDataSourceTest
                 Prefix = prefix,
                 Conventions = conventions,
                 FinallyConventions = finallyConventions,
-                ApplicationServices = applicationServices
+                ApplicationServices = applicationServices,
             }
         );
 
@@ -65,7 +65,7 @@ public class CompositeEndpointDataSourceTest
     {
         var ex = new Exception();
         var compositeDataSource = new CompositeEndpointDataSource(
-            new[] { new EndpointThrowingDataSource(ex), }
+            new[] { new EndpointThrowingDataSource(ex) }
         );
         var groupContext = new RouteGroupContext
         {
@@ -300,7 +300,7 @@ public class CompositeEndpointDataSourceTest
         var prefix = RoutePatternFactory.Parse("/prefix");
         var applicationServices = new ServiceCollection().BuildServiceProvider();
         var metadata = new EndpointNameMetadata("name");
-        var conventions = new Action<EndpointBuilder>[] { b => b.Metadata.Add(metadata), };
+        var conventions = new Action<EndpointBuilder>[] { b => b.Metadata.Add(metadata) };
         var finallyConventions = Array.Empty<Action<EndpointBuilder>>();
 
         var context = new RouteGroupContext
@@ -308,7 +308,7 @@ public class CompositeEndpointDataSourceTest
             Prefix = prefix,
             Conventions = conventions,
             FinallyConventions = finallyConventions,
-            ApplicationServices = applicationServices
+            ApplicationServices = applicationServices,
         };
         var groupedEndpoints = compositeDataSource.GetGroupedEndpoints(context);
 
@@ -344,7 +344,7 @@ public class CompositeEndpointDataSourceTest
                 {
                     b.Metadata.Add(metadata);
                 }
-            }
+            },
         };
         var conventions = Array.Empty<Action<EndpointBuilder>>();
 
@@ -353,7 +353,7 @@ public class CompositeEndpointDataSourceTest
             Prefix = prefix,
             Conventions = conventions,
             FinallyConventions = finallyConventions,
-            ApplicationServices = applicationServices
+            ApplicationServices = applicationServices,
         };
         var groupedEndpoints = compositeDataSource.GetGroupedEndpoints(context);
 
@@ -399,7 +399,7 @@ public class CompositeEndpointDataSourceTest
                 {
                     b.Metadata.Add(metadata);
                 }
-            }
+            },
         };
 
         var context = new RouteGroupContext
@@ -407,7 +407,7 @@ public class CompositeEndpointDataSourceTest
             Prefix = prefix,
             Conventions = conventions,
             FinallyConventions = finallyConventions,
-            ApplicationServices = applicationServices
+            ApplicationServices = applicationServices,
         };
         var groupedEndpoints = compositeDataSource.GetGroupedEndpoints(context);
 
@@ -460,7 +460,7 @@ public class CompositeEndpointDataSourceTest
                 {
                     b.Metadata.Add("saw-last-metadata");
                 }
-            }
+            },
         };
         var conventions = Array.Empty<Action<EndpointBuilder>>();
 
@@ -469,7 +469,7 @@ public class CompositeEndpointDataSourceTest
             Prefix = prefix,
             Conventions = conventions,
             FinallyConventions = finallyConventions,
-            ApplicationServices = applicationServices
+            ApplicationServices = applicationServices,
         };
         var groupedEndpoints = compositeDataSource.GetGroupedEndpoints(context);
         // Call twice to ensure that `GetGroupedEndpoints` is idempotent

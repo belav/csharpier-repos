@@ -280,7 +280,7 @@ internal sealed class GlobalOptionService(
 
         var changedOptions = new List<OptionChangedEventArgs>
         {
-            new OptionChangedEventArgs(optionKey, newValue)
+            new OptionChangedEventArgs(optionKey, newValue),
         };
         RaiseOptionChangedEvent(changedOptions);
         return true;

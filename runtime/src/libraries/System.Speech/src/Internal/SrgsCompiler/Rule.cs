@@ -80,11 +80,9 @@ namespace System.Speech.Internal.SrgsCompiler
             }
             else
             {
-                return (rule2._cfgRule.Import)
-                    ? 1
-                    : (rule2._cfgRule.Dynamic)
-                        ? -1
-                        : rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset;
+                return (rule2._cfgRule.Import) ? 1
+                    : (rule2._cfgRule.Dynamic) ? -1
+                    : rule1._cfgRule._nameOffset - rule2._cfgRule._nameOffset;
             }
         }
 
@@ -150,7 +148,7 @@ namespace System.Speech.Internal.SrgsCompiler
             rule._cfgRule = new CfgRule(idWord, offsetName, _cfgRule._flag)
             {
                 DirtyRule = true,
-                FirstArcIndex = 0
+                FirstArcIndex = 0,
             };
             return rule;
         }

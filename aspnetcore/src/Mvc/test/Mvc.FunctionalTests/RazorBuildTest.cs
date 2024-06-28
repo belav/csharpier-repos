@@ -162,7 +162,7 @@ public class RazorBuildTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.Sta
     private async Task UpdateFile(string path, string content)
     {
         var updateContent = new FormUrlEncodedContent(
-            new Dictionary<string, string> { { "path", path }, { "content", content }, }
+            new Dictionary<string, string> { { "path", path }, { "content", content } }
         );
 
         var response = await Client.PostAsync($"/UpdateableViews/Update", updateContent);

@@ -26,7 +26,7 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             await config.InvokeAsync($"[env:{_testVariableName}={value}]");
@@ -48,7 +48,7 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             await config.InvokeAsync($"[env:{_testVariableName}={value}]");
@@ -70,7 +70,7 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             await config.InvokeAsync($"[env:{variable}]");
@@ -93,7 +93,7 @@ namespace System.CommandLine.Tests
 
             var config = new CliConfiguration(rootCommand)
             {
-                EnableDefaultExceptionHandler = false
+                EnableDefaultExceptionHandler = false,
             };
 
             var result = config.Parse($"[env:={value}]");

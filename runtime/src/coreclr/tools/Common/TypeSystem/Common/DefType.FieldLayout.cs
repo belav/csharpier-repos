@@ -475,7 +475,7 @@ namespace Internal.TypeSystem
                 ValueTypeShapeCharacteristics.Float64Aggregate => 8,
                 ValueTypeShapeCharacteristics.Vector64Aggregate => 8,
                 ValueTypeShapeCharacteristics.Vector128Aggregate => 16,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
         }
 
@@ -553,7 +553,7 @@ namespace Internal.TypeSystem
                     NonGcStatics = computedStaticLayout.NonGcStatics,
                     GcStatics = computedStaticLayout.GcStatics,
                     ThreadNonGcStatics = computedStaticLayout.ThreadNonGcStatics,
-                    ThreadGcStatics = computedStaticLayout.ThreadGcStatics
+                    ThreadGcStatics = computedStaticLayout.ThreadGcStatics,
                 };
                 _staticBlockInfo = staticBlockInfo;
             }

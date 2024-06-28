@@ -263,7 +263,7 @@ public static class XmlDictionaryWriterTest
             //"MTOM",
             "Text",
             "Text",
-            "Text"
+            "Text",
         };
 
         List<string> Encodings = new List<string>
@@ -274,7 +274,7 @@ public static class XmlDictionaryWriterTest
             "unicodeFFFE",
             "utf-8",
             "utf-16",
-            "unicodeFFFE"
+            "unicodeFFFE",
         };
 
         for (int i = 0; i < ReaderWriterType.Count; i++)
@@ -454,7 +454,7 @@ public static class XmlDictionaryWriterTest
             0x55,
             0x55,
             0xd5,
-            0x3f
+            0x3f,
         };
         Guid guid = new Guid(new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 });
         DateTime datetime = new DateTime(2022, 8, 26, 12, 34, 56, DateTimeKind.Utc);
@@ -482,7 +482,7 @@ public static class XmlDictionaryWriterTest
                 0x13,
                 0x12,
                 0x11,
-                0x10
+                0x10,
             }
         );
         AssertBytesWritten(x => x.WriteValue(guid), XmlBinaryNodeType.GuidText, guid.ToByteArray());
@@ -600,14 +600,14 @@ public static class XmlDictionaryWriterTest
                 0x55,
                 0x55,
                 0xd5,
-                0x3f
+                0x3f,
             }
         );
 
         decimal[] decimals = new[]
         {
             new decimal(0x20212223, 0x10111213, 0x01020304, true, scale: 0x1b),
-            new decimal(0x50515253, 0x40414243, 0x31323334, false, scale: 0x1c)
+            new decimal(0x50515253, 0x40414243, 0x31323334, false, scale: 0x1c),
         };
         AssertBytesWritten(
             x => x.WriteArray(null, "a", null, decimals, 0, decimals.Length),
@@ -646,14 +646,14 @@ public static class XmlDictionaryWriterTest
                 0x43,
                 0x42,
                 0x41,
-                0x40
+                0x40,
             }
         );
 
         DateTime[] datetimes = new[]
         {
             new DateTime(2022, 8, 26, 12, 34, 56, DateTimeKind.Utc),
-            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local)
+            new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Local),
         };
         Span<byte> datetimeBytes = stackalloc byte[8 * datetimes.Length];
         for (int i = 0; i < datetimes.Length; i++)
@@ -673,7 +673,7 @@ public static class XmlDictionaryWriterTest
         TimeSpan[] timespans = new[]
         {
             new TimeSpan(0x0807060504030201),
-            new TimeSpan(0x1817161514131211)
+            new TimeSpan(0x1817161514131211),
         };
         AssertBytesWritten(
             x => x.WriteArray(null, "a", null, timespans, 0, timespans.Length),
@@ -696,7 +696,7 @@ public static class XmlDictionaryWriterTest
                 0x15,
                 0x16,
                 0x17,
-                0x18
+                0x18,
             }
         );
 
@@ -726,10 +726,10 @@ public static class XmlDictionaryWriterTest
                         130,
                         140,
                         150,
-                        160
+                        160,
                     }
                 )
-            )
+            ),
         };
         AssertBytesWritten(
             x => x.WriteArray(null, "a", null, guids, 0, guids.Length),
@@ -768,7 +768,7 @@ public static class XmlDictionaryWriterTest
                 130,
                 140,
                 150,
-                160
+                160,
             }
         );
 

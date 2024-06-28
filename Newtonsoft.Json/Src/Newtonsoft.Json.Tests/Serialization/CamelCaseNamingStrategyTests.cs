@@ -54,7 +54,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy()
+                NamingStrategy = new CamelCaseNamingStrategy(),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -101,7 +101,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy { OverrideSpecifiedNames = true }
+                NamingStrategy = new CamelCaseNamingStrategy { OverrideSpecifiedNames = true },
             };
 
             JsonSerializer serializer = new JsonSerializer();
@@ -126,12 +126,12 @@ namespace Newtonsoft.Json.Tests.Serialization
                 ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
-                Sizes = new[] { "Small", "Medium", "Large" }
+                Sizes = new[] { "Small", "Medium", "Large" },
             };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy()
+                NamingStrategy = new CamelCaseNamingStrategy(),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -176,7 +176,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = true }
+                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = true },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -204,12 +204,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             Dictionary<string, string> values = new Dictionary<string, string>
             {
                 { "First", "Value1!" },
-                { "Second", "Value2!" }
+                { "Second", "Value2!" },
             };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy()
+                NamingStrategy = new CamelCaseNamingStrategy(),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -233,12 +233,12 @@ namespace Newtonsoft.Json.Tests.Serialization
             Dictionary<string, string> values = new Dictionary<string, string>
             {
                 { "First", "Value1!" },
-                { "Second", "Value2!" }
+                { "Second", "Value2!" },
             };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = true }
+                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = true },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -272,7 +272,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new PropertyAttributeNamingStrategyTestClass
                 {
                     HasNoAttributeNamingStrategy = "Value1!",
-                    HasAttributeNamingStrategy = "Value2!"
+                    HasAttributeNamingStrategy = "Value2!",
                 };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -303,7 +303,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new ContainerAttributeNamingStrategyTestClass
                 {
                     Prop1 = "Value1!",
-                    Prop2 = "Value2!"
+                    Prop2 = "Value2!",
                 };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -331,7 +331,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new DictionaryAttributeNamingStrategyTestClass
                 {
                     ["Key1"] = "Value1!",
-                    ["Key2"] = "Value2!"
+                    ["Key2"] = "Value2!",
                 };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);

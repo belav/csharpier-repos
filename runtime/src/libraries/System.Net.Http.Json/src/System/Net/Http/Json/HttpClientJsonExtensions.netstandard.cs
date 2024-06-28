@@ -31,7 +31,7 @@ namespace System.Net.Http.Json
             // HttpClient.PatchAsync is not available in .NET standard and NET462
             HttpRequestMessage request = new HttpRequestMessage(HttpPatch, requestUri)
             {
-                Content = content
+                Content = content,
             };
             return client.SendAsync(request, cancellationToken);
         }

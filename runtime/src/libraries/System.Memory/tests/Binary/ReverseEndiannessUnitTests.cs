@@ -96,56 +96,56 @@ namespace System.Buffers.Binary.Tests
                     Enumerable
                         .Range(0, length)
                         .Select(_ => (ushort)r.Next(int.MinValue, int.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => (short)r.Next(int.MinValue, int.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => (uint)r.Next(int.MinValue, int.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => r.Next(int.MinValue, int.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => (ulong)r.NextInt64(long.MinValue, long.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => r.NextInt64(long.MinValue, long.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => (nuint)r.NextInt64(long.MinValue, long.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
                     Enumerable
                         .Range(0, length)
                         .Select(_ => (nint)r.NextInt64(long.MinValue, long.MaxValue))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
@@ -155,7 +155,7 @@ namespace System.Buffers.Binary.Tests
                             (ulong)r.NextInt64(long.MinValue, long.MaxValue),
                             (ulong)r.NextInt64(long.MinValue, long.MaxValue)
                         ))
-                        .ToArray()
+                        .ToArray(),
                 };
                 yield return new object[]
                 {
@@ -165,7 +165,7 @@ namespace System.Buffers.Binary.Tests
                             (ulong)r.NextInt64(long.MinValue, long.MaxValue),
                             (ulong)r.NextInt64(long.MinValue, long.MaxValue)
                         ))
-                        .ToArray()
+                        .ToArray(),
                 };
             }
         }

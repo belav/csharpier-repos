@@ -447,7 +447,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x00
+                    0x00,
                 },
                 builder.Slice(124, -40)
             );

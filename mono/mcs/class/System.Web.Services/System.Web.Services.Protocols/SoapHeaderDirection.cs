@@ -36,6 +36,6 @@ namespace System.Web.Services.Protocols
         In = 0x1,
         InOut = 0x3,
         Out = 0x2,
-        Fault = 0x4
+        Fault = 0x4,
     }
 }

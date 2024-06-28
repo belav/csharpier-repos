@@ -111,7 +111,7 @@ namespace Microsoft.Extensions.Options.Tests
                     new ValidationResult("Failure 6"),
                     null,
                     new ValidationResult("Failure 7"),
-                    null
+                    null,
                 }
             );
 
@@ -218,7 +218,7 @@ namespace Microsoft.Extensions.Options.Tests
                     new ValidationResult("Failure 16"),
                     null,
                     new ValidationResult("Failure 17"),
-                    null
+                    null,
                 }
             );
 

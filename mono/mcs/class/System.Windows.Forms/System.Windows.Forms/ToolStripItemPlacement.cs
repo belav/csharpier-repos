@@ -33,6 +33,6 @@ namespace System.Windows.Forms
     {
         Main = 0,
         Overflow = 1,
-        None = 2
+        None = 2,
     }
 }

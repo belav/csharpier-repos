@@ -79,5 +79,6 @@ namespace System.Web.UI
         Expression, // <%= ... %>
         DataBinding, // <%# ... %>
         EncodedExpression // <%: ... %>
+        ,
     }
 }

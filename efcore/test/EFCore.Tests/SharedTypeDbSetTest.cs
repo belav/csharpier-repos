@@ -228,13 +228,13 @@ public class SharedTypeDbSetTest
         {
             Id = 1,
             Name = "Marmite",
-            Price = 7.99m
+            Price = 7.99m,
         };
         var product12 = new Product
         {
             Id = 2,
             Name = "Bovril",
-            Price = 4.99m
+            Price = 4.99m,
         };
 
         var category21 = new Category { Id = 1, Name = "Beverages" };
@@ -243,13 +243,13 @@ public class SharedTypeDbSetTest
         {
             Id = 1,
             Name = "Marmite",
-            Price = 7.99m
+            Price = 7.99m,
         };
         var product22 = new Product
         {
             Id = 2,
             Name = "Bovril",
-            Price = 4.99m
+            Price = 4.99m,
         };
 
         var categoryEntry11 = await categoryAdder(context.Category1s, category11);
@@ -394,13 +394,13 @@ public class SharedTypeDbSetTest
         {
             Id = 1,
             Name = "Marmite",
-            Price = 7.99m
+            Price = 7.99m,
         };
         var product2 = new Product
         {
             Id = 2,
             Name = "Bovril",
-            Price = 4.99m
+            Price = 4.99m,
         };
 
         await categoryAdder(context, new[] { category1, category2 });
@@ -530,13 +530,13 @@ public class SharedTypeDbSetTest
         {
             Id = 1,
             Name = "Marmite",
-            Price = 7.99m
+            Price = 7.99m,
         };
         var product2 = new Product
         {
             Id = 2,
             Name = "Bovril",
-            Price = 4.99m
+            Price = 4.99m,
         };
 
         await categoryAdder(context, new List<Category> { category1, category2 });

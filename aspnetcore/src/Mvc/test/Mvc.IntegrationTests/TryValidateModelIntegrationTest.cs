@@ -26,7 +26,7 @@ public class TryValidateModelIntegrationTest
             Country = "UK", // Here the validate country is USA only
             DatePurchased = new DateTime(2010, 10, 10),
             Price = 110,
-            Version = "2"
+            Version = "2",
         };
 
         var controller = CreateController(testContext, testContext.MetadataProvider);
@@ -60,7 +60,7 @@ public class TryValidateModelIntegrationTest
             DatePurchased = new DateTime(2010, 10, 10),
             Name = "MVC",
             Price = 110,
-            Version = "2"
+            Version = "2",
         };
 
         var controller = CreateController(testContext, testContext.MetadataProvider);
@@ -92,8 +92,8 @@ public class TryValidateModelIntegrationTest
                 {
                     Detail1 = "d1",
                     Detail2 = "d2",
-                    Detail3 = "d3"
-                }
+                    Detail3 = "d3",
+                },
             }
         );
         model.Add(
@@ -105,8 +105,8 @@ public class TryValidateModelIntegrationTest
                 {
                     Detail1 = "d1",
                     Detail2 = "d2",
-                    Detail3 = "d3"
-                }
+                    Detail3 = "d3",
+                },
             }
         );
 

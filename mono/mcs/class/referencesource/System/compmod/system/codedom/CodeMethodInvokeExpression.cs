@@ -20,7 +20,7 @@ namespace System.CodeDom
     ///       expression to invoke a method, to be called on a given target.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeMethodInvokeExpression : CodeExpression
     {
         private CodeMethodReferenceExpression method;

@@ -1275,19 +1275,19 @@ namespace ILCompiler.DependencyAnalysis
             {
                 "System.Runtime.CompilerServices",
                 "ClassConstructorRunner",
-                "CheckStaticClassConstructionReturnGCStaticBase"
+                "CheckStaticClassConstructionReturnGCStaticBase",
             },
             new string[]
             {
                 "System.Runtime.CompilerServices",
                 "ClassConstructorRunner",
-                "CheckStaticClassConstructionReturnNonGCStaticBase"
+                "CheckStaticClassConstructionReturnNonGCStaticBase",
             },
             new string[]
             {
                 "System.Runtime.CompilerServices",
                 "ClassConstructorRunner",
-                "CheckStaticClassConstructionReturnThreadStaticBase"
+                "CheckStaticClassConstructionReturnThreadStaticBase",
             },
             new string[] { "Internal.Runtime", "ThreadStatics", "GetThreadStaticBaseForType" },
             new string[] { "Internal.Runtime", "ThreadStatics", "GetInlinedThreadStaticBaseSlow" },

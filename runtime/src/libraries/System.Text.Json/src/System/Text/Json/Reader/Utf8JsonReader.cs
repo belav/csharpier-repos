@@ -2839,7 +2839,7 @@ namespace System.Text.Json
                 JsonTokenType.StartObject => nameof(JsonTokenType.StartObject),
                 JsonTokenType.String => nameof(JsonTokenType.String),
                 JsonTokenType.True => nameof(JsonTokenType.True),
-                _ => ((byte)TokenType).ToString()
+                _ => ((byte)TokenType).ToString(),
             };
 
         private ReadOnlySpan<byte> GetUnescapedSpan()

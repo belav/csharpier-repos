@@ -18,7 +18,7 @@ namespace MonoTests.System
         Overflow = 1,
         ReverseRound = 2,
         DivideByZero = 3,
-        ReverseOverflow = 4
+        ReverseOverflow = 4,
     }
 
     public struct TestResult
@@ -106,7 +106,7 @@ namespace MonoTests.System
                 -3203854.9559968181492513385018m,
                 -3203854.9559968181492513385017m,
                 -48466870444188873796420.0286m,
-                -48466870444188873796420.02860m
+                -48466870444188873796420.02860m,
             };
 
             short[,] cmpTable = new short[size, size]
@@ -124,7 +124,7 @@ namespace MonoTests.System
                 { -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 0, -1, 1, 1 },
                 { -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, 1, 0, 1, 1 },
                 { -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, 0, 0 },
-                { -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, 0, 0 }
+                { -1, -1, -1, -1, -1, -1, -1, -1, 1, -1, -1, -1, 0, 0 },
             };
 
             for (int i = 0; i < size; i++)

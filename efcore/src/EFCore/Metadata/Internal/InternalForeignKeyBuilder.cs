@@ -5183,7 +5183,7 @@ public class InternalForeignKeyBuilder
         Remove = 1 << 0,
         ResetToPrincipal = 1 << 1,
         ResetToDependent = 1 << 2,
-        ResetDependentProperties = 1 << 3
+        ResetDependentProperties = 1 << 3,
     }
 
     /// <inheritdoc />

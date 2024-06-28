@@ -503,7 +503,10 @@ namespace System.Xml.Schema
                             new string[]
                             {
                                 xsiType.ToString(),
-                                XmlSchemaValidator.QNameString(context.LocalName, context.Namespace)
+                                XmlSchemaValidator.QNameString(
+                                    context.LocalName,
+                                    context.Namespace
+                                ),
                             }
                         );
                         elementDecl = null;
@@ -1346,7 +1349,7 @@ namespace System.Xml.Schema
                                             new string[2]
                                             {
                                                 ks.ToString(),
-                                                constraints[i].constraint.name.ToString()
+                                                constraints[i].constraint.name.ToString(),
                                             },
                                             reader.BaseURI,
                                             ks.PosLine,
@@ -1373,7 +1376,7 @@ namespace System.Xml.Schema
                                             new string[2]
                                             {
                                                 ks.ToString(),
-                                                constraints[i].constraint.name.ToString()
+                                                constraints[i].constraint.name.ToString(),
                                             },
                                             reader.BaseURI,
                                             ks.PosLine,
@@ -1433,7 +1436,7 @@ namespace System.Xml.Schema
                                     new string[2]
                                     {
                                         ks.ToString(),
-                                        vcs[i].constraint.name.ToString()
+                                        vcs[i].constraint.name.ToString(),
                                     },
                                     reader.BaseURI,
                                     ks.PosLine,

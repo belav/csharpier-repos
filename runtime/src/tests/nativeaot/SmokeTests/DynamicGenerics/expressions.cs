@@ -395,7 +395,7 @@ namespace Expressions
                     new MyType1("Dynamic1"),
                     new MyType1("Dynamic2"),
                     new MyType2(123),
-                    new MyType2(456)
+                    new MyType2(456),
                 }
             );
         }
@@ -417,7 +417,7 @@ namespace Expressions
                     new MyStructType1("Dynamic1"),
                     new MyStructType1("Dynamic2"),
                     new MyStructType2(123),
-                    new MyStructType2(456)
+                    new MyStructType2(456),
                 }
             );
 #endif

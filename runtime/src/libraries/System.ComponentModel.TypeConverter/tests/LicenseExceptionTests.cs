@@ -64,7 +64,7 @@ namespace System.ComponentModel.Tests
                 typeof(LicenseException),
                 new object(),
                 "message",
-                new DivideByZeroException()
+                new DivideByZeroException(),
             };
         }
 

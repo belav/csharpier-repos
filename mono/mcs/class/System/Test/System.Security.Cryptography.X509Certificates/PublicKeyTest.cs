@@ -559,7 +559,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x57,
             0xBC,
             0x63,
-            0x1C
+            0x1C,
         };
 
         private static byte[] cert_b =
@@ -1339,7 +1339,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x81,
             0xB9,
             0x01,
-            0x97
+            0x97,
         };
 
         private static byte[] cert_c =
@@ -2792,7 +2792,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x02,
             0x02,
             0x07,
-            0xD0
+            0xD0,
         };
 
         private static byte[] asn_null = new byte[] { 0x05, 0x00 };
@@ -2891,7 +2891,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x03,
             0x01,
             0x00,
-            0x01
+            0x01,
         };
         public const string rsa_public_key_xml =
             "<RSAKeyValue><Modulus>LVjpv/AxzXkGUFrVng4s5sL3+dLOVWSFsZCakrM2wbzqyCO3qzqnZGN3X4QijuW2Rd1GrgrdAMIfutmtwHVi+JWCooCxgmn64a9/vH3ifHbVvCqA+w==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue>";
@@ -3187,7 +3187,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x98,
             0xC5,
             0xAF,
-            0x54
+            0x54,
         };
         private static byte[] dsa_public_key = new byte[]
         {
@@ -3321,7 +3321,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x98,
             0x94,
             0xCB,
-            0xB8
+            0xB8,
         };
         public const string dsa_public_key_xml =
             "<DSAKeyValue><P>kIk+GBv+ox0WiQC01UCCTC7sPWYNDbkXQG46XAN7G5MoDO+5l+Oh6+KjfGHdb9WtFWkAFrLDCD3EWcbycKWw9R8d9LAV2n4oOSSZNlvsOSX6kkll0kMFap6je/Deoy/Tbzr5NcMp1EVsVpreNm7+EmiWe0UdLP+5LfVSjN8+L2M=</P><Q>gam10ATym6fYVUw7MqFFMk/1Ud0=</Q><G>ZHqIC/I+kYFZnPTqxnsOvuoF6Hf9IDSHocRp9siLGdrN+iGKV6l6JgpW1O1LG3xw7bTmemre0yni6Zoz7QmNnt/aLkrBUJLuL+Va84ViakjcGwKYprDRCUsQ0fD64LEdE1RLwKhA73HoVmuiKcseCX0nOZE7IE+YOeg5ypjFr1Q=</G><Y>VKiItY8BVs4Yj6bWfCkpdUXoMaQHF+0eXbJ7u848l2ceiAr+fQAiJx1m7vYbtpV/Wv8GNAJDw4PEZiyhBQ5os8rc0/kMwGbfhYRLIF1BrMDsN5IOlxm/UzVjJxgzNUJN8C1tp6SYqlfz0rhuTo//vm9ODwtEJO7fTCJbRJiUy7g=</Y></DSAKeyValue>";
@@ -3513,7 +3513,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                         0x0C,
                         0x0D,
                         0x0E,
-                        0x0F
+                        0x0F,
                     }
                 ),
                 new AsnEncodedData(rsa_public_key)
@@ -3694,7 +3694,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                         0x0C,
                         0x0D,
                         0x0E,
-                        0x0F
+                        0x0F,
                     }
                 ),
                 new AsnEncodedData(dsa_public_key)
@@ -3739,7 +3739,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                         0x0C,
                         0x0D,
                         0x0E,
-                        0x0F
+                        0x0F,
                     }
                 ),
                 new AsnEncodedData(dsa_public_key)

@@ -137,29 +137,26 @@ public partial class RelationalShapedQueryCompilingExpressionVisitor
                             propertyName,
                             expectedType
                         )
-                        : exception is InvalidCastException
-                            ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
-                                entityType,
-                                propertyName,
-                                expectedType,
-                                actualType
-                            )
-                            : RelationalStrings.ErrorMaterializingProperty(
-                                entityType,
-                                propertyName
-                            );
+                    : exception is InvalidCastException
+                        ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                            entityType,
+                            propertyName,
+                            expectedType,
+                            actualType
+                        )
+                    : RelationalStrings.ErrorMaterializingProperty(entityType, propertyName);
             }
             else
             {
                 message =
                     exception is NullReferenceException || Equals(value, DBNull.Value)
                         ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
-                        : exception is InvalidCastException
-                            ? RelationalStrings.ErrorMaterializingValueInvalidCast(
-                                expectedType,
-                                actualType
-                            )
-                            : RelationalStrings.ErrorMaterializingValue;
+                    : exception is InvalidCastException
+                        ? RelationalStrings.ErrorMaterializingValueInvalidCast(
+                            expectedType,
+                            actualType
+                        )
+                    : RelationalStrings.ErrorMaterializingValue;
             }
 
             throw new InvalidOperationException(message, exception);

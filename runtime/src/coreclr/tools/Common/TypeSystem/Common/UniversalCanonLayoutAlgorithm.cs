@@ -29,7 +29,7 @@ namespace Internal.TypeSystem
                 ByteCountUnaligned = LayoutInt.Indeterminate,
                 ByteCountAlignment = LayoutInt.Indeterminate,
                 Offsets = Array.Empty<FieldAndOffset>(),
-                LayoutAbiStable = true
+                LayoutAbiStable = true,
             };
         }
 
@@ -48,24 +48,24 @@ namespace Internal.TypeSystem
                 NonGcStatics = new StaticsBlock()
                 {
                     Size = LayoutInt.Zero,
-                    LargestAlignment = LayoutInt.Zero
+                    LargestAlignment = LayoutInt.Zero,
                 },
                 GcStatics = new StaticsBlock()
                 {
                     Size = LayoutInt.Zero,
-                    LargestAlignment = LayoutInt.Zero
+                    LargestAlignment = LayoutInt.Zero,
                 },
                 ThreadNonGcStatics = new StaticsBlock()
                 {
                     Size = LayoutInt.Zero,
-                    LargestAlignment = LayoutInt.Zero
+                    LargestAlignment = LayoutInt.Zero,
                 },
                 ThreadGcStatics = new StaticsBlock()
                 {
                     Size = LayoutInt.Zero,
-                    LargestAlignment = LayoutInt.Zero
+                    LargestAlignment = LayoutInt.Zero,
                 },
-                Offsets = Array.Empty<FieldAndOffset>()
+                Offsets = Array.Empty<FieldAndOffset>(),
             };
         }
 

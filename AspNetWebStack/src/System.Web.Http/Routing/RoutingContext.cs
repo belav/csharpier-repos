@@ -12,7 +12,7 @@ namespace System.Web.Http.Routing
     {
         private static readonly RoutingContext CachedInvalid = new RoutingContext()
         {
-            IsValid = false
+            IsValid = false,
         };
 
         public static RoutingContext Invalid()
@@ -22,7 +22,7 @@ namespace System.Web.Http.Routing
 
         public static RoutingContext Valid(List<string> pathSegments)
         {
-            return new RoutingContext() { PathSegments = pathSegments, IsValid = true, };
+            return new RoutingContext() { PathSegments = pathSegments, IsValid = true };
         }
 
         private RoutingContext() { }

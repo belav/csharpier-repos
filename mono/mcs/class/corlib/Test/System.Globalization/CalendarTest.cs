@@ -986,7 +986,7 @@ namespace MonoTests.System.Globalization
         {
             CultureInfo ciJapanese = new CultureInfo("ja-JP")
             {
-                DateTimeFormat = { Calendar = new JapaneseCalendar() }
+                DateTimeFormat = { Calendar = new JapaneseCalendar() },
             };
 
             DateTime dt = new DateTime(1970, 1, 1);

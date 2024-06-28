@@ -1095,7 +1095,7 @@ public class DefaultPageApplicationModelProviderTest
                     p.BindingInfo.RequestPredicate(
                         new ActionContext
                         {
-                            HttpContext = new DefaultHttpContext { Request = { Method = "GET", } }
+                            HttpContext = new DefaultHttpContext { Request = { Method = "GET" } },
                         }
                     )
                 );

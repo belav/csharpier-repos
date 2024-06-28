@@ -404,6 +404,6 @@ namespace System.Net.WebSockets
     {
         None = 0,
         EndOfMessage = 1,
-        DisableCompression = 2
+        DisableCompression = 2,
     }
 }

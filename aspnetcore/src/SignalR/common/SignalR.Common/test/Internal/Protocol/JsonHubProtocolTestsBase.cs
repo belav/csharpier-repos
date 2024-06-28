@@ -100,7 +100,7 @@ public abstract class JsonHubProtocolTestsBase
                         DateTimeOffset.Parse(
                             "2016-05-10T13:51:20+12:34",
                             CultureInfo.InvariantCulture
-                        )
+                        ),
                     }
                 ),
                 true,
@@ -487,7 +487,7 @@ public abstract class JsonHubProtocolTestsBase
                         DateTimeOffset.Parse(
                             "2016-05-10T13:51:20+12:34",
                             CultureInfo.InvariantCulture
-                        )
+                        ),
                     }
                 ),
                 false,
@@ -521,7 +521,7 @@ public abstract class JsonHubProtocolTestsBase
                 false,
                 true,
                 "{ \"item\": \"foo\", \"invocationId\": \"1a\", \"type\":2 }"
-            )
+            ),
         }.ToDictionary(t => t.Name);
 
     public static IEnumerable<object[]> OutOfOrderJsonTestDataNames =>
@@ -844,7 +844,7 @@ public abstract class JsonHubProtocolTestsBase
                 IntProp = 43,
                 DoubleProp = 3.14159,
                 StringProp = "test",
-                DateTimeProp = DateTime.Parse("6/3/2019 10:00:00 PM", CultureInfo.InvariantCulture)
+                DateTimeProp = DateTime.Parse("6/3/2019 10:00:00 PM", CultureInfo.InvariantCulture),
             },
             streamItemMessage.Item
         );
@@ -859,7 +859,7 @@ public abstract class JsonHubProtocolTestsBase
             IntProp = default,
             DoubleProp = 1.1,
             StringProp = "test",
-            DateTimeProp = default
+            DateTimeProp = default,
         };
         var expectedOutput = Frame(
             "{\"type\":1,\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[{\"stringProp\":\"test\",\"doubleProp\":1.1,\"intProp\":0,\"dateTimeProp\":\"0001-01-01T00:00:00\",\"nullProp\":null,\"byteArrProp\":\"AgQG\"}]}"
@@ -994,7 +994,7 @@ public abstract class JsonHubProtocolTestsBase
                     IntProp = default,
                     DoubleProp = 1.1,
                     StringProp = "test",
-                    DateTimeProp = default
+                    DateTimeProp = default,
                 }
             ),
             new ClientResultTestData(
@@ -1007,7 +1007,7 @@ public abstract class JsonHubProtocolTestsBase
                     IntProp = default,
                     DoubleProp = 1.1,
                     StringProp = "test",
-                    DateTimeProp = default
+                    DateTimeProp = default,
                 }
             ),
         }.ToDictionary(t => t.Name);

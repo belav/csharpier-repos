@@ -39,7 +39,7 @@ public class UriTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 
@@ -79,7 +79,7 @@ public class UriTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 
@@ -150,7 +150,7 @@ public class UriTests : AbstractLanguageServerProtocolTests
             mutatingLspWorkspace,
             new InitializationOptions
             {
-                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer
+                ServerKind = WellKnownLspServerKinds.CSharpVisualBasicLspServer,
             }
         );
 

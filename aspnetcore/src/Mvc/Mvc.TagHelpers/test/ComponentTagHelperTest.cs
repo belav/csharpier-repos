@@ -49,7 +49,7 @@ public class ComponentTagHelperTest
     public async Task ProcessAsync_WithoutSpecifyingRenderMode_ThrowsError()
     {
         // Arrange
-        var tagHelper = new ComponentTagHelper { ViewContext = GetViewContext(), };
+        var tagHelper = new ComponentTagHelper { ViewContext = GetViewContext() };
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
 

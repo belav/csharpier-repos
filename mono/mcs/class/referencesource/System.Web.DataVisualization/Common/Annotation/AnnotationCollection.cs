@@ -66,7 +66,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// This class includes methods for adding, inserting, iterating and removing annotations.
     /// </para>
     /// </remarks>
-    [SRDescription("DescriptionAttributeAnnotations3"),]
+    [SRDescription("DescriptionAttributeAnnotations3")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

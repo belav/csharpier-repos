@@ -144,7 +144,7 @@ namespace System.CommandLine.Tests.Utility
                     thisAssembly,
                     className,
                     methodName,
-                    exceptionFile
+                    exceptionFile,
                 }
             );
             if (args != null)

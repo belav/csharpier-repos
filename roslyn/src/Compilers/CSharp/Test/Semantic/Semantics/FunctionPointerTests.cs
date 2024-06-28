@@ -2842,7 +2842,7 @@ public class C<T>
                 new[]
                 {
                     "System.Runtime.CompilerServices.CallConvCdecl",
-                    "System.Runtime.CompilerServices.CallConvStdcall"
+                    "System.Runtime.CompilerServices.CallConvStdcall",
                 },
                 funcPtrType
                     .Signature.GetCallingConventionModifiers()
@@ -2986,7 +2986,7 @@ unsafe class D : C<delegate*<void>>
                 "delegate*<System.Object>",
                 "delegate*<System.Object>",
                 "TStatic",
-                "TStatic"
+                "TStatic",
             };
 
             AssertEx.Equal(expectedTypes, invocationTypes);
@@ -3048,7 +3048,7 @@ unsafe class C
                 "delegate*<System.String, System.Void>[]",
                 "TStatic",
                 "delegate*<System.Object>[]",
-                "TStatic"
+                "TStatic",
             };
 
             AssertEx.Equal(expectedTypes, invocationTypes);
@@ -3402,7 +3402,7 @@ unsafe class C
                 "delegate*<System.String?>",
                 "?",
                 "?",
-                "delegate*<ref System.String>"
+                "delegate*<ref System.String>",
             };
 
             AssertEx.Equal(expectedTypes, invocationTypes);
@@ -3490,7 +3490,7 @@ unsafe class C
                 "delegate*<System.String, System.Void>",
                 "?",
                 "?",
-                "delegate*<ref System.String, System.Void>"
+                "delegate*<ref System.String, System.Void>",
             };
 
             AssertEx.Equal(expectedTypes, invocationTypes);

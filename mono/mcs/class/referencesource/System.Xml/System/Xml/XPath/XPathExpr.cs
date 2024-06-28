@@ -39,7 +39,7 @@ namespace System.Xml.XPath
         NodeSet = 3,
         Navigator = XPathResultType.String,
         Any = 5,
-        Error
+        Error,
     };
 
     public abstract class XPathExpression

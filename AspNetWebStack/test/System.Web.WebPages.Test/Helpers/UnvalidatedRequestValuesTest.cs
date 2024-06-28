@@ -44,7 +44,7 @@ namespace Microsoft.WebPages.Test.Helpers
             // Arrange
             NameValueCollection queryString = new NameValueCollection()
             {
-                { "foo", "fooQueryString" }
+                { "foo", "fooQueryString" },
             };
 
             NameValueCollection form = new NameValueCollection()
@@ -57,7 +57,7 @@ namespace Microsoft.WebPages.Test.Helpers
             {
                 new HttpCookie("foo", "fooCookie"),
                 new HttpCookie("bar", "barCookie"),
-                new HttpCookie("baz", "bazCookie")
+                new HttpCookie("baz", "bazCookie"),
             };
 
             NameValueCollection serverVars = new NameValueCollection()

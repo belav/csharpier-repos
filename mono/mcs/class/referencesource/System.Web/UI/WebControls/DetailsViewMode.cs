@@ -29,6 +29,6 @@ namespace System.Web.UI.WebControls
         /// <para>
         /// The control is editing a new record for insert.</para>
         /// </devdoc>
-        Insert = 2
+        Insert = 2,
     }
 }

@@ -34,7 +34,7 @@ internal static class TypeNameHelper
         { typeof(string), "string" },
         { typeof(uint), "uint" },
         { typeof(ulong), "ulong" },
-        { typeof(ushort), "ushort" }
+        { typeof(ushort), "ushort" },
     };
 
     [return: NotNullIfNotNull("item")]

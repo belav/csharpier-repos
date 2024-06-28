@@ -50,6 +50,6 @@ namespace System.Messaging
         ReachQueue = 2,
         ReachQueueTimeout = 32770,
         Receive = 16384,
-        ReceiveTimeout = 49154
+        ReceiveTimeout = 49154,
     }
 }

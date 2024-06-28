@@ -39,7 +39,7 @@ namespace System.Threading
     enum SynchronizationContextProperties
     {
         None = 0,
-        RequireWaitNotification = 0x1
+        RequireWaitNotification = 0x1,
     };
 #endif
 

@@ -922,7 +922,7 @@ namespace System.Runtime.Serialization.Json
                             {
                                 type,
                                 typeof(XmlDictionaryString),
-                                typeof(XmlDictionaryString)
+                                typeof(XmlDictionaryString),
                             },
                             null
                         ),

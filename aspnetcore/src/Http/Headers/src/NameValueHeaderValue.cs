@@ -105,7 +105,7 @@ public class NameValueHeaderValue
         {
             _name = _name,
             _value = _value,
-            _isReadOnly = true
+            _isReadOnly = true,
         };
     }
 

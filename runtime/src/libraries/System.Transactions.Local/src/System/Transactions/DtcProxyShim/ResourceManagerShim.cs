@@ -57,7 +57,7 @@ internal sealed class ResourceManagerShim
             {
                 OletxXactStat.XACTSTAT_ABORTED => OletxTransactionOutcome.Aborted,
                 OletxXactStat.XACTSTAT_COMMITTED => OletxTransactionOutcome.Committed,
-                _ => OletxTransactionOutcome.Aborted
+                _ => OletxTransactionOutcome.Aborted,
             };
         }
         catch (COMException e) when (e.ErrorCode == OletxHelper.XACT_E_REENLISTTIMEOUT)

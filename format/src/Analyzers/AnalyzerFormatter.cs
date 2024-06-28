@@ -310,7 +310,7 @@ namespace Microsoft.CodeAnalysis.Tools.Analyzers
                                     diagnosticPosition,
                                     diagnostic.Id,
                                     $"{diagnostic.Severity.ToString().ToLower()} {diagnostic.Id}: {diagnostic.GetMessage()}"
-                                )
+                                ),
                             }
                         )
                     );

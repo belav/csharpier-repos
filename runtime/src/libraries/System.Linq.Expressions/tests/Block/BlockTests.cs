@@ -294,7 +294,7 @@ namespace System.Linq.Expressions.Tests
                 new[]
                 {
                     Expression.Parameter(typeof(int), "x"),
-                    Expression.Parameter(typeof(int), "y")
+                    Expression.Parameter(typeof(int), "y"),
                 },
                 Expression.Empty()
             );

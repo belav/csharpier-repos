@@ -40,7 +40,7 @@ namespace System.Xml.Xsl.IlGen
     {
         None,
         OnTrue,
-        OnFalse
+        OnFalse,
     };
 
     /// <summary>

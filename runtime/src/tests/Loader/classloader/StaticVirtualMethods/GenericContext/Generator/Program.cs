@@ -13,7 +13,7 @@ namespace VirtualStaticInterfaceMethodTestGen
         {
             Call,
             Ldftn,
-            CreateDelegate
+            CreateDelegate,
         }
 
         enum ConstrainedTypeDefinition
@@ -21,7 +21,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             NonGenericClass,
             NonGenericValuetype,
             GenericClass,
-            GenericValuetype
+            GenericValuetype,
         }
 
         enum ConstrainedTypeScenario
@@ -38,7 +38,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             NonGeneric,
             GenericOverString,
             GenericOverObject,
-            CuriouslyRecurringGeneric
+            CuriouslyRecurringGeneric,
         }
 
         enum MethodType
@@ -46,7 +46,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             NormalMethod,
             GenericMethodOverInt,
             GenericMethodOverString,
-            GenericMethodOverTypeParameter
+            GenericMethodOverTypeParameter,
         }
 
         enum CallerMethodScenario
@@ -54,7 +54,7 @@ namespace VirtualStaticInterfaceMethodTestGen
             NonGeneric,
             GenericOverInt32,
             GenericOverString,
-            GenericOverConstrainedType
+            GenericOverConstrainedType,
         }
 
         struct TestScenario
@@ -488,7 +488,7 @@ namespace VirtualStaticInterfaceMethodTestGen
                     implMethodDesc.HasBody = true;
                     implMethodDesc.MethodImpls = new string[]
                     {
-                        $"method void {ToILDasmTypeName(ImplPrefix + iface, ifaceGenericArguments)}::NormalMethod()"
+                        $"method void {ToILDasmTypeName(ImplPrefix + iface, ifaceGenericArguments)}::NormalMethod()",
                     };
 
                     EmitMethod(implsGenerated, implMethodDesc);
@@ -498,7 +498,7 @@ namespace VirtualStaticInterfaceMethodTestGen
                     implMethodDesc.Name = $"'{iface}{ifaceGenericArguments}.GenericMethod'<U>";
                     implMethodDesc.MethodImpls = new string[]
                     {
-                        $"method void {ToILDasmTypeName(ImplPrefix + iface, ifaceGenericArguments)}::GenericMethod<[1]>()"
+                        $"method void {ToILDasmTypeName(ImplPrefix + iface, ifaceGenericArguments)}::GenericMethod<[1]>()",
                     };
                     EmitMethod(implsGenerated, implMethodDesc);
                     GenerateMethodBody(true);

@@ -350,7 +350,7 @@ namespace Microsoft.CodeAnalysis
             {
                 LanguageNames.CSharp => ".cs",
                 LanguageNames.VisualBasic => ".vb",
-                _ => null
+                _ => null,
             };
 
             if (extension == null)
@@ -1238,33 +1238,34 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            dependentDocumentVersion = recalculateDocumentVersion
-                ? AsyncLazy.Create(c =>
-                    ComputeLatestDocumentVersionAsync(
-                        newDocumentStates,
-                        newAdditionalDocumentStates,
-                        c
+            dependentDocumentVersion =
+                recalculateDocumentVersion
+                    ? AsyncLazy.Create(c =>
+                        ComputeLatestDocumentVersionAsync(
+                            newDocumentStates,
+                            newAdditionalDocumentStates,
+                            c
+                        )
                     )
-                )
-                : contentChanged
-                    ? AsyncLazy.Create(newDocument.GetTextVersionAsync)
-                    : _lazyLatestDocumentVersion;
+                : contentChanged ? AsyncLazy.Create(newDocument.GetTextVersionAsync)
+                : _lazyLatestDocumentVersion;
 
-            dependentSemanticVersion = recalculateSemanticVersion
-                ? AsyncLazy.Create(c =>
-                    ComputeLatestDocumentTopLevelChangeVersionAsync(
-                        newDocumentStates,
-                        newAdditionalDocumentStates,
-                        c
+            dependentSemanticVersion =
+                recalculateSemanticVersion
+                    ? AsyncLazy.Create(c =>
+                        ComputeLatestDocumentTopLevelChangeVersionAsync(
+                            newDocumentStates,
+                            newAdditionalDocumentStates,
+                            c
+                        )
                     )
-                )
                 : contentChanged
                     ? CreateLazyLatestDocumentTopLevelChangeVersion(
                         newDocument,
                         newDocumentStates,
                         newAdditionalDocumentStates
                     )
-                    : _lazyLatestDocumentTopLevelChangeVersion;
+                : _lazyLatestDocumentTopLevelChangeVersion;
         }
     }
 }

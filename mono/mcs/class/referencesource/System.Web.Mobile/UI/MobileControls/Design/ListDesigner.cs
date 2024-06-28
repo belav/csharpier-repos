@@ -52,7 +52,7 @@ namespace System.Web.UI.Design.MobileControls
         {
             new String[] { Constants.HeaderTemplateTag, Constants.FooterTemplateTag },
             new String[] { Constants.ItemTemplateTag, Constants.AlternatingItemTemplateTag },
-            new String[] { Constants.SeparatorTemplateTag }
+            new String[] { Constants.SeparatorTemplateTag },
         };
         private static readonly Attribute[] _emptyAttrs = new Attribute[0];
 

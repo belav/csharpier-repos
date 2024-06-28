@@ -255,7 +255,7 @@ namespace System.Configuration
 
     public enum SettingsManageability
     {
-        Roaming = 0
+        Roaming = 0,
     }
 
     /// <devdoc>
@@ -264,6 +264,6 @@ namespace System.Configuration
     public enum SpecialSetting
     {
         ConnectionString = 0,
-        WebServiceUrl = 1
+        WebServiceUrl = 1,
     }
 }

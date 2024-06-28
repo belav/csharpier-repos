@@ -446,7 +446,7 @@ namespace System.Net.PeerToPeer.Collaboration
                 pe.peerAddress.sin6.sin6_addr12,
                 pe.peerAddress.sin6.sin6_addr13,
                 pe.peerAddress.sin6.sin6_addr14,
-                pe.peerAddress.sin6.sin6_addr15
+                pe.peerAddress.sin6.sin6_addr15,
             };
             IPAddress IPAddr = new IPAddress(addrBytes, (long)pe.peerAddress.sin6.sin6_scope_id);
             ushort port;

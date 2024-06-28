@@ -84,19 +84,9 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
             return _routeGroupBuilder._dataSources.Count switch
             {
                 0 => Array.Empty<Endpoint>(),
-                1 =>
-                    _routeGroupBuilder
-                        ._dataSources[0]
-                        .GetGroupedEndpoints(
-                            GetNextRouteGroupContext(
-                                prefix,
-                                conventions,
-                                finallyConventions,
-                                applicationServices
-                            )
-                        ),
-                _ =>
-                    SelectEndpointsFromAllDataSources(
+                1 => _routeGroupBuilder
+                    ._dataSources[0]
+                    .GetGroupedEndpoints(
                         GetNextRouteGroupContext(
                             prefix,
                             conventions,
@@ -104,6 +94,14 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
                             applicationServices
                         )
                     ),
+                _ => SelectEndpointsFromAllDataSources(
+                    GetNextRouteGroupContext(
+                        prefix,
+                        conventions,
+                        finallyConventions,
+                        applicationServices
+                    )
+                ),
             };
         }
 
@@ -147,7 +145,7 @@ public sealed class RouteGroupBuilder : IEndpointRouteBuilder, IEndpointConventi
                 Prefix = fullPrefix,
                 Conventions = combinedConventions,
                 FinallyConventions = combinedFinallyConventions,
-                ApplicationServices = applicationServices
+                ApplicationServices = applicationServices,
             };
         }
 

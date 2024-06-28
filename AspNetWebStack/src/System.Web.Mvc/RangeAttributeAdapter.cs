@@ -24,7 +24,7 @@ namespace System.Web.Mvc
                     errorMessage,
                     Attribute.Minimum,
                     Attribute.Maximum
-                )
+                ),
             };
         }
     }

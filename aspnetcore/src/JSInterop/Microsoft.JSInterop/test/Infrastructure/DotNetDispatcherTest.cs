@@ -169,7 +169,7 @@ public class DotNetDispatcherTest
             {
                 new TestDTO { StringVal = "Another string", IntVal = 456 },
                 new[] { 100, 200 },
-                objectRef
+                objectRef,
             },
             jsRuntime.JsonSerializerOptions
         );
@@ -233,7 +233,7 @@ public class DotNetDispatcherTest
             {
                 new TestDTO { StringVal = "Another string", IntVal = 456 },
                 new[] { 100, 200 },
-                objectRef
+                objectRef,
             },
             jsRuntime.JsonSerializerOptions
         );
@@ -1099,7 +1099,7 @@ public class DotNetDispatcherTest
             new TestJSRuntime(),
             "SomeMethod",
             arguments,
-            new[] { typeof(string), typeof(int), }
+            new[] { typeof(string), typeof(int) }
         );
 
         // Assert
@@ -1117,7 +1117,7 @@ public class DotNetDispatcherTest
             new TestJSRuntime(),
             "SomeMethod",
             arguments,
-            new[] { typeof(TestDTO), }
+            new[] { typeof(TestDTO) }
         );
 
         // Assert
@@ -1137,7 +1137,7 @@ public class DotNetDispatcherTest
             new TestJSRuntime(),
             "SomeMethod",
             arguments,
-            new[] { typeof(int), typeof(TestDTO), }
+            new[] { typeof(int), typeof(TestDTO) }
         );
 
         // Assert
@@ -1158,7 +1158,7 @@ public class DotNetDispatcherTest
                     new TestJSRuntime(),
                     method,
                     arguments,
-                    new[] { typeof(int), typeof(TestDTO), }
+                    new[] { typeof(int), typeof(TestDTO) }
                 )
         );
 
@@ -1226,15 +1226,15 @@ public class DotNetDispatcherTest
                 new TestDTO // Return via JSON marshalling
                 {
                     StringVal = dtoViaJson.StringVal.ToUpperInvariant(),
-                    IntVal = dtoViaJson.IntVal + incrementAmounts.Sum()
+                    IntVal = dtoViaJson.IntVal + incrementAmounts.Sum(),
                 },
                 DotNetObjectReference.Create(
                     new TestDTO // Return by ref
                     {
                         StringVal = dtoByRef.Value.StringVal.ToUpperInvariant(),
-                        IntVal = dtoByRef.Value.IntVal + incrementAmounts.Sum()
+                        IntVal = dtoByRef.Value.IntVal + incrementAmounts.Sum(),
                     }
-                )
+                ),
             };
 
         [JSInvokable(nameof(IncorrectDotNetObjectRefUsage))]
@@ -1270,9 +1270,9 @@ public class DotNetDispatcherTest
                     new TestDTO
                     {
                         IntVal = someDTO.IntVal + 1,
-                        StringVal = someDTO.StringVal.ToUpperInvariant()
+                        StringVal = someDTO.StringVal.ToUpperInvariant(),
                     }
-                )
+                ),
             };
         }
 
@@ -1297,7 +1297,7 @@ public class DotNetDispatcherTest
                         StringVal = dtoByRef.StringVal.ToUpperInvariant(),
                         IntVal = dtoByRef.IntVal * 2,
                     }
-                )
+                ),
             };
         }
 
@@ -1322,7 +1322,7 @@ public class DotNetDispatcherTest
                             StringVal = dtoByRef.StringVal.ToUpperInvariant(),
                             IntVal = dtoByRef.IntVal * 2,
                         }
-                    )
+                    ),
                 }
             );
         }

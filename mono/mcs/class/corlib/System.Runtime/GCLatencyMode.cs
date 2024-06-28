@@ -36,6 +36,6 @@ namespace System.Runtime
         Interactive = 1,
         LowLatency = 2,
         SustainedLowLatency = 3,
-        NoGCRegion = 4
+        NoGCRegion = 4,
     }
 }

@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a simple assignment statement.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeAssignStatement : CodeStatement
     {
         private CodeExpression left;

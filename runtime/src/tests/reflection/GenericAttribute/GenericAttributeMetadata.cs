@@ -44,7 +44,7 @@ public class MultiAttribute<T> : Attribute
 public enum MyEnum
 {
     Ctor,
-    Property
+    Property,
 }
 
 [SingleAttribute<int>()]

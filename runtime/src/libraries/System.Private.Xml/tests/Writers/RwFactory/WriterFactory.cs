@@ -16,7 +16,7 @@ namespace System.Xml.RwFactoryWriterTests
         protected enum WriterType
         {
             UTF8Writer,
-            UnicodeWriter
+            UnicodeWriter,
         };
 
         protected enum WriteThru
@@ -24,7 +24,7 @@ namespace System.Xml.RwFactoryWriterTests
             Stream,
             StringBuilder,
             TextWriter,
-            XmlWriter
+            XmlWriter,
         };
 
         protected enum WriterOverload
@@ -35,7 +35,7 @@ namespace System.Xml.RwFactoryWriterTests
             MemoryStream,
             TextWriter,
             UTF8Writer,
-            UnicodeWriter
+            UnicodeWriter,
         };
 
         private XmlWriter _factoryWriter = null;

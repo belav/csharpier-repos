@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Http.Test
         {
             // Arrange
             var primaryHandler = Mock.Of<HttpMessageHandler>();
-            var additionalHandlers = new DelegatingHandler[] { null, };
+            var additionalHandlers = new DelegatingHandler[] { null };
 
             // Act & Assert
             var exception = Assert.Throws<InvalidOperationException>(() =>

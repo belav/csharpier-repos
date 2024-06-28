@@ -159,7 +159,7 @@ namespace System.Xml.XslCompiledTransformApiTests
             {
                 CharType.NameStartChar,
                 CharType.NameStartSurrogateHighChar,
-                CharType.NameStartSurrogateLowChar
+                CharType.NameStartSurrogateLowChar,
             };
 
             string charsToChooseFrom = isValidChar
@@ -170,7 +170,7 @@ namespace System.Xml.XslCompiledTransformApiTests
             foreach (
                 bool enableDebug in new bool[]
                 { /*true,*/
-                    false
+                    false,
                 }
             ) // XSLT debugging not supported in Core
             {
@@ -243,7 +243,7 @@ namespace System.Xml.XslCompiledTransformApiTests
             {
                 CharType.NameStartChar,
                 CharType.NameStartSurrogateHighChar,
-                CharType.NameStartSurrogateLowChar
+                CharType.NameStartSurrogateLowChar,
             };
 
             string charsToChooseFrom = isValidChar
@@ -254,7 +254,7 @@ namespace System.Xml.XslCompiledTransformApiTests
             foreach (
                 bool enableDebug in new bool[]
                 { /*true,*/
-                    false
+                    false,
                 }
             ) // XSLT debugging not supported in Core
             {

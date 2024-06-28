@@ -1060,7 +1060,7 @@ public class CSharpCompilerFeatureRequiredTests
                 [CompilerFeatureRequired("OnDelegateType")]
                 public delegate void OnDelegateType();
                 """,
-                CSharpTestBase.CompilerFeatureRequiredAttribute
+                CSharpTestBase.CompilerFeatureRequiredAttribute,
             }
         );
 

@@ -19,7 +19,7 @@ namespace System.Linq.Tests
             {
                 { 1, 1 },
                 { 2, 2 },
-                { 3, 3 }
+                { 3, 3 },
             };
             Dictionary<int, int> result = source.ToDictionary(key => key.Key, val => val.Value);
 
@@ -165,7 +165,7 @@ namespace System.Linq.Tests
                     { 1, "0" },
                     { 2, "1" },
                     { 3, "2" },
-                    { 4, "3" }
+                    { 4, "3" },
                 },
                 Enumerable.Range(0, 4).RunOnce().ToDictionary(i => i + 1, i => i.ToString())
             );
@@ -176,7 +176,7 @@ namespace System.Linq.Tests
                     { 0, "0" },
                     { 1, "1" },
                     { 2, "2" },
-                    { 3, "3" }
+                    { 3, "3" },
                 },
                 Enumerable
                     .Range(0, 4)
@@ -191,7 +191,7 @@ namespace System.Linq.Tests
                     { 0, "0" },
                     { 1, "1" },
                     { 2, "2" },
-                    { 3, "3" }
+                    { 3, "3" },
                 },
                 Enumerable.Range(0, 4).Select(i => (i, i.ToString())).RunOnce().ToDictionary()
             );
@@ -401,7 +401,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = "null", Score = 55 }
+                new { Name = "null", Score = 55 },
             };
 
             source.ToDictionary(e => e.Name); // Doesn't throw;
@@ -410,7 +410,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = default(string), Score = 55 }
+                new { Name = default(string), Score = 55 },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -422,7 +422,7 @@ namespace System.Linq.Tests
             {
                 new("Chris", 50),
                 new("Bob", 95),
-                new(default, 55)
+                new(default, 55),
             };
 
             AssertExtensions.Throws<ArgumentNullException>("key", () => source2.ToDictionary());
@@ -439,7 +439,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = "null", Score = 55 }
+                new { Name = "null", Score = 55 },
             };
 
             source.ToDictionary(e => e.Name, new AnagramEqualityComparer()); // Doesn't throw;
@@ -448,7 +448,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = default(string), Score = 55 }
+                new { Name = default(string), Score = 55 },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -464,7 +464,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = "null", Score = 55 }
+                new { Name = "null", Score = 55 },
             };
 
             source.ToDictionary(e => e.Name, e => e); // Doesn't throw;
@@ -473,7 +473,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = default(string), Score = 55 }
+                new { Name = default(string), Score = 55 },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -489,7 +489,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = "null", Score = 55 }
+                new { Name = "null", Score = 55 },
             };
 
             source.ToDictionary(e => e.Name, e => e, new AnagramEqualityComparer()); // Doesn't throw;
@@ -498,7 +498,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = default(string), Score = 55 }
+                new { Name = default(string), Score = 55 },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -514,7 +514,7 @@ namespace System.Linq.Tests
             {
                 new { Name = "Chris", Score = 50 },
                 new { Name = "Bob", Score = 95 },
-                new { Name = "Bob", Score = 55 }
+                new { Name = "Bob", Score = 55 },
             };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -526,7 +526,7 @@ namespace System.Linq.Tests
             {
                 new("Chris", 50),
                 new("Bob", 95),
-                new("Bob", 55)
+                new("Bob", 55),
             };
 
             AssertExtensions.Throws<ArgumentException>(
@@ -601,7 +601,7 @@ namespace System.Linq.Tests
                 new { Name = keys[1], Score = 45 },
                 new { Name = keys[2], Score = 100 },
                 new { Name = keys[3], Score = 90 },
-                new { Name = keys[4], Score = 45 }
+                new { Name = keys[4], Score = 45 },
             };
 
             AssertMatches(

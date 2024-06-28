@@ -49,7 +49,7 @@ namespace Castle.DynamicProxy.Generators
                 namingScope
             )
             {
-                Logger = Logger
+                Logger = Logger,
             };
         }
 
@@ -78,7 +78,7 @@ namespace Castle.DynamicProxy.Generators
                 GetTarget
             )
             {
-                Logger = Logger
+                Logger = Logger,
             };
         }
 

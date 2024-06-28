@@ -49,13 +49,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 // If we have an explicit lambda return type, async should go just before it. Otherwise, it should go before parameter list.
                 // static [|async|] (a) => ....
                 // static [|async|] ExplicitReturnType (a) => ....
-                ParenthesizedLambdaExpressionSyntax parenthesizedLambda =>
-                    (
-                        parenthesizedLambda.ReturnType as SyntaxNode
-                        ?? parenthesizedLambda.ParameterList
-                    ).SpanStart,
+                ParenthesizedLambdaExpressionSyntax parenthesizedLambda => (
+                    parenthesizedLambda.ReturnType as SyntaxNode
+                    ?? parenthesizedLambda.ParameterList
+                ).SpanStart,
                 SimpleLambdaExpressionSyntax simpleLambda => simpleLambda.Parameter.SpanStart,
-                _ => throw ExceptionUtilities.UnexpectedValue(declaration.Kind())
+                _ => throw ExceptionUtilities.UnexpectedValue(declaration.Kind()),
             };
         }
 

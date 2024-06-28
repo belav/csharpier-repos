@@ -131,7 +131,7 @@ namespace System.Net.Http.Functional.Tests
                         {
                             serverTask1,
                             serverTask2,
-                            secondResponse
+                            secondResponse,
                         }.WhenAllOrAnyFailed();
                     }
                 }

@@ -151,7 +151,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x00,
                     0x23,
-                }
+                },
             };
 
             var baseRowCounts = new int[MetadataTokens.TableCount];
@@ -312,7 +312,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     2, // Gen2: Guid #1, #2
                     2, // Gen3: Guid #1, #2
                     3, // Gen4: Guid #1, #2, #3
-                }
+                },
             };
 
             var aggregator = new MetadataAggregator(new RowCounts[0][], heapSizes);

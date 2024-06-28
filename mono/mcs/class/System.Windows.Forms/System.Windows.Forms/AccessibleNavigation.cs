@@ -36,6 +36,6 @@ namespace System.Windows.Forms
         Next = 5,
         Previous = 6,
         FirstChild = 7,
-        LastChild = 8
+        LastChild = 8,
     }
 }

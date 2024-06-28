@@ -26,7 +26,7 @@ public class CosmosApiConsistencyTest
                 typeof(CosmosPropertyBuilderExtensions),
                 typeof(CosmosServiceCollectionExtensions),
                 typeof(CosmosDbContextOptionsExtensions),
-                typeof(CosmosDbContextOptionsBuilder)
+                typeof(CosmosDbContextOptionsBuilder),
             };
 
         public override Dictionary<
@@ -70,7 +70,7 @@ public class CosmosApiConsistencyTest
                         typeof(CosmosPropertyBuilderExtensions),
                         null
                     )
-                }
+                },
             };
     }
 }

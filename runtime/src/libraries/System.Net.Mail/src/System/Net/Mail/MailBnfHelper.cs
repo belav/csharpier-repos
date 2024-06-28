@@ -335,7 +335,7 @@ namespace System.Net.Mime
             "Sep",
             "Oct",
             "Nov",
-            "Dec"
+            "Dec",
         };
 
         internal static string? GetDateTimeString(DateTime value, StringBuilder? builder)

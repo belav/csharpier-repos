@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         Identity,
         Down,
         Up,
-        Unrelated
+        Unrelated,
     }
 
     internal static class IBufferGraphExtensions

@@ -15,7 +15,7 @@ namespace System.Net.Security
         ChangeCipherSpec = 20,
         Alert = 21,
         Handshake = 22,
-        AppData = 23
+        AppData = 23,
     }
 
     internal enum TlsHandshakeType : byte
@@ -34,7 +34,7 @@ namespace System.Net.Security
         ClientKeyExchange = 16,
         Finished = 20,
         KeyUpdate = 24,
-        MessageHash = 254
+        MessageHash = 254,
     }
 
     internal enum TlsAlertLevel : byte
@@ -80,7 +80,7 @@ namespace System.Net.Security
         TruncatedHmac = 4,
         CertificateStatusRequest = 5,
         ApplicationProtocols = 16,
-        SupportedVersions = 43
+        SupportedVersions = 43,
     }
 
     internal struct TlsFrameHeader
@@ -112,7 +112,7 @@ namespace System.Net.Security
             None = 0,
             Http11 = 1,
             Http2 = 2,
-            Other = 128
+            Other = 128,
         }
 
         public struct TlsFrameInfo
@@ -163,7 +163,7 @@ namespace System.Net.Security
             0,
             2,
             2,
-            70
+            70,
         };
         private static readonly byte[] s_protocolMismatch12 = new byte[]
         {
@@ -173,7 +173,7 @@ namespace System.Net.Security
             0,
             2,
             2,
-            70
+            70,
         };
         private static readonly byte[] s_protocolMismatch11 = new byte[]
         {
@@ -183,7 +183,7 @@ namespace System.Net.Security
             0,
             2,
             2,
-            70
+            70,
         };
         private static readonly byte[] s_protocolMismatch10 = new byte[]
         {
@@ -193,7 +193,7 @@ namespace System.Net.Security
             0,
             2,
             2,
-            70
+            70,
         };
         private static readonly byte[] s_protocolMismatch30 = new byte[]
         {
@@ -203,7 +203,7 @@ namespace System.Net.Security
             0,
             2,
             2,
-            40
+            40,
         };
 
         private const int UInt24Size = 3;
@@ -216,7 +216,7 @@ namespace System.Net.Security
         // Per spec "AllowUnassigned flag MUST be set". See comment above DecodeString() for more details.
         private static readonly IdnMapping s_idnMapping = new IdnMapping()
         {
-            AllowUnassigned = true
+            AllowUnassigned = true,
         };
         private static readonly Encoding s_encoding = Encoding.GetEncoding(
             "utf-8",
@@ -417,7 +417,7 @@ namespace System.Net.Security
                     0,
                     2,
                     2,
-                    (byte)reason
+                    (byte)reason,
                 };
                 switch (version)
                 {
@@ -989,7 +989,7 @@ namespace System.Net.Security
 
         private enum NameType : byte
         {
-            HostName = 0x00
+            HostName = 0x00,
         }
     }
 }

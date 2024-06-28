@@ -123,7 +123,7 @@ public class RepeatInfo_Autogen {{
             new int[] { 2, 4 },
             new int[] { 2, 7 },
             new int[] { 3, 9 },
-            new int[] { 3, 7 }
+            new int[] { 3, 7 },
         };
         int ntests = 1 << 7;
         int lcount = -1;

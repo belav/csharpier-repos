@@ -122,10 +122,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <summary>
         /// list of types which are new in the 3.5 framework.
         /// </summary>
-        private static Type[] unsupportedTypesInFramework30 = new Type[]
-        {
-            typeof(DateTimeOffset),
-        };
+        private static Type[] unsupportedTypesInFramework30 = new Type[] { typeof(DateTimeOffset) };
 
         #endregion
 

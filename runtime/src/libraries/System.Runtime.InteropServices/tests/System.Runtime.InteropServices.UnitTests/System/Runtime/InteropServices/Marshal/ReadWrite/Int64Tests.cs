@@ -86,7 +86,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             if (IntPtr.Size == 8)
@@ -151,7 +151,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new long[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             if (IntPtr.Size == 8)

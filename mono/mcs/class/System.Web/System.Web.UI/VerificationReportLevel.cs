@@ -33,6 +33,6 @@ namespace System.Web.UI
     {
         Error = 0,
         Warning = 1,
-        Guideline = 2
+        Guideline = 2,
     }
 }

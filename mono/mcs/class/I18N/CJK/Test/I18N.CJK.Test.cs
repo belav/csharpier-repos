@@ -685,7 +685,7 @@ namespace MonoTests.I18N.CJK
                 0x1b,
                 0x28,
                 0x4a,
-                0x74
+                0x74,
             };
             string s = Manager.GetEncoding("ISO-2022-JP").GetString(b);
             Assert.AreEqual("don\u2019t", s);

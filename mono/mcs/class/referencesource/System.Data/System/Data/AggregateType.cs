@@ -58,6 +58,6 @@ namespace System.Data
         /// <devdoc>
         ///    <para>Standard deviation.</para>
         /// </devdoc>
-        StDev = 11
+        StDev = 11,
     }
 }

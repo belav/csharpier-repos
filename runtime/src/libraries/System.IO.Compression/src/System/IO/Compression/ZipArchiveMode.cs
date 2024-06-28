@@ -28,6 +28,6 @@ namespace System.IO.Compression
         /// The underlying file or stream must be readable, writable and seekable.
         /// No data will be written to the underlying file or stream until the archive is disposed.
         /// </summary>
-        Update
+        Update,
     }
 }

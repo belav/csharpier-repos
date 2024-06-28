@@ -29,7 +29,7 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 0x0F,
                 0x10,
                 0x11,
-                0x12
+                0x12,
             };
 
         protected override byte[] IV =>
@@ -50,7 +50,7 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 0x1F,
                 0x20,
                 0x21,
-                0x22
+                0x22,
             };
 
         protected override SymmetricAlgorithm CreateAlgorithm() => AesFactory.Create();
@@ -2268,7 +2268,7 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                     // plaintext
                     Array.Empty<byte>(),
                     // ciphertext
-                    new byte[] { 0x02, },
+                    new byte[] { 0x02 },
                     PaddingMode.PKCS7,
                     CipherMode.CFB,
                     8,

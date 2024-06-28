@@ -28,7 +28,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
             {
                 return new ObjectResult(new object())
                 {
-                    StatusCode = StatusCodes.Status202Accepted
+                    StatusCode = StatusCodes.Status202Accepted,
                 };
             }
 
@@ -44,7 +44,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers._OUTPUT_
                 return new ObjectResult(new object())
                 {
                     ContentTypes = { "application/json" },
-                    StatusCode = FieldStatusCode
+                    StatusCode = FieldStatusCode,
                 };
             }
 

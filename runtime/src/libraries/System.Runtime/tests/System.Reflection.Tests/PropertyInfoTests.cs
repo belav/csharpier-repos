@@ -59,7 +59,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.ReadWriteProperty2),
                 new BaseClass(),
                 null,
-                -1.0
+                -1.0,
             };
             yield return new object[]
             {
@@ -67,7 +67,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.ReadWriteProperty3),
                 typeof(BaseClass),
                 null,
-                -2
+                -2,
             };
             yield return new object[]
             {
@@ -75,7 +75,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.Name),
                 new BaseClass(),
                 null,
-                "hello"
+                "hello",
             };
             yield return new object[]
             {
@@ -83,7 +83,7 @@ namespace System.Reflection.Tests
                 "BasicIndexer",
                 new CustomIndexerNameClass(),
                 new object[] { 1, "2" },
-                null
+                null,
             };
             yield return new object[]
             {
@@ -91,7 +91,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.ReadOnlyProperty),
                 new BaseClass(),
                 null,
-                100
+                100,
             };
         }
 
@@ -116,7 +116,7 @@ namespace System.Reflection.Tests
                 "BasicIndexer",
                 new CustomIndexerNameClass(),
                 new object[] { 1, "2", 3 },
-                typeof(TargetParameterCountException)
+                typeof(TargetParameterCountException),
             };
             yield return new object[]
             {
@@ -124,7 +124,7 @@ namespace System.Reflection.Tests
                 "BasicIndexer",
                 new CustomIndexerNameClass(),
                 null,
-                typeof(TargetParameterCountException)
+                typeof(TargetParameterCountException),
             };
 
             // Incorrect type
@@ -134,7 +134,7 @@ namespace System.Reflection.Tests
                 "BasicIndexer",
                 new CustomIndexerNameClass(),
                 new object[] { "1", "2" },
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
 
             // Readonly
@@ -144,7 +144,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.WriteOnlyProperty),
                 new BaseClass(),
                 null,
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
 
             // Null target
@@ -154,7 +154,7 @@ namespace System.Reflection.Tests
                 "BasicIndexer",
                 null,
                 new object[] { "1", "2" },
-                typeof(TargetException)
+                typeof(TargetException),
             };
         }
 
@@ -182,7 +182,7 @@ namespace System.Reflection.Tests
                 typeof(BaseClass),
                 new string[] { "hello" },
                 null,
-                new string[] { "hello" }
+                new string[] { "hello" },
             };
             yield return new object[]
             {
@@ -191,7 +191,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 new string[] { "hello" },
                 null,
-                new string[] { "hello" }
+                new string[] { "hello" },
             };
             yield return new object[]
             {
@@ -200,7 +200,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 "hello",
                 null,
-                "hello"
+                "hello",
             };
             yield return new object[]
             {
@@ -209,7 +209,7 @@ namespace System.Reflection.Tests
                 new AdvancedIndexerClass(),
                 "hello",
                 new object[] { 99, 2, new string[] { "hello" }, "f" },
-                "992f1"
+                "992f1",
             };
             yield return new object[]
             {
@@ -218,7 +218,7 @@ namespace System.Reflection.Tests
                 new AdvancedIndexerClass(),
                 "pw",
                 new object[] { 99, 2, new string[] { "hello" }, "SOME string" },
-                "992SOME string1"
+                "992SOME string1",
             };
             yield return new object[]
             {
@@ -227,7 +227,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 (byte)1,
                 null,
-                (BaseClass.ShortEnum)1
+                (BaseClass.ShortEnum)1,
             };
             yield return new object[]
             {
@@ -236,7 +236,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 (short)2,
                 null,
-                (BaseClass.IntEnum)2
+                (BaseClass.IntEnum)2,
             };
             yield return new object[]
             {
@@ -245,7 +245,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 (int)3,
                 null,
-                (BaseClass.LongEnum)3
+                (BaseClass.LongEnum)3,
             };
         }
 
@@ -299,7 +299,7 @@ namespace System.Reflection.Tests
                 new AdvancedIndexerClass(),
                 "value",
                 new object[] { 99, 2, new string[] { "a" } },
-                typeof(TargetParameterCountException)
+                typeof(TargetParameterCountException),
             };
 
             // Obj is null
@@ -310,7 +310,7 @@ namespace System.Reflection.Tests
                 null,
                 null,
                 null,
-                typeof(TargetException)
+                typeof(TargetException),
             };
             yield return new object[]
             {
@@ -319,7 +319,7 @@ namespace System.Reflection.Tests
                 null,
                 "value",
                 new object[] { 99, 2, new string[] { "a" }, "b" },
-                typeof(TargetException)
+                typeof(TargetException),
             };
 
             // Readonly
@@ -330,7 +330,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 100,
                 null,
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
 
             // Wrong value type
@@ -341,7 +341,7 @@ namespace System.Reflection.Tests
                 new AdvancedIndexerClass(),
                 "value",
                 new object[] { 99, 2, "invalid", "string" },
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[]
             {
@@ -350,7 +350,7 @@ namespace System.Reflection.Tests
                 new AdvancedIndexerClass(),
                 100,
                 new object[] { 99, 2, new string[] { "a" }, "b" },
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[]
             {
@@ -359,7 +359,7 @@ namespace System.Reflection.Tests
                 new BaseClass(),
                 "string",
                 null,
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
         }
 

@@ -152,14 +152,14 @@ namespace Wasm.Build.Tests
                     // list of each member data - for Debug+@aot
                     new object?[]
                     {
-                        new BuildArgs("placeholder", "Debug", aot, "placeholder", extraArgs)
+                        new BuildArgs("placeholder", "Debug", aot, "placeholder", extraArgs),
                     }.AsEnumerable(),
 #endif
                     // list of each member data - for Release+@aot
                     new object?[]
                     {
-                        new BuildArgs("placeholder", "Release", aot, "placeholder", extraArgs)
-                    }.AsEnumerable()
+                        new BuildArgs("placeholder", "Release", aot, "placeholder", extraArgs),
+                    }.AsEnumerable(),
                 }.AsEnumerable();
             }
             else
@@ -168,8 +168,8 @@ namespace Wasm.Build.Tests
                 {
                     new object?[]
                     {
-                        new BuildArgs("placeholder", config, aot, "placeholder", extraArgs)
-                    }.AsEnumerable()
+                        new BuildArgs("placeholder", config, aot, "placeholder", extraArgs),
+                    }.AsEnumerable(),
                 };
             }
         }
@@ -203,7 +203,7 @@ namespace Wasm.Build.Tests
                     buildType,
                     $"-bl:{logFilePath}",
                     $"-p:Configuration={config}",
-                    "-nr:false"
+                    "-nr:false",
                 };
             commandLineArgs.AddRange(extraArgs);
 
@@ -799,6 +799,6 @@ namespace Wasm.Build.Tests
     {
         FromRuntimePack,
         Relinked,
-        AOT
+        AOT,
     };
 }

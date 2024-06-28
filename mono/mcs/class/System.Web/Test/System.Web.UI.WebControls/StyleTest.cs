@@ -309,7 +309,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "Font_Names=namelist1, namelist2",
                 "Font_Underline=True",
                 "BackColor=Color [Red]",
-                "Font_Strikeout=True"
+                "Font_Strikeout=True",
             };
             string[] expect2 =
             {
@@ -326,7 +326,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "BorderColor=Color [Green]",
                 "Font_Underline=True",
                 "BackColor=Color [Red]",
-                "Font_Strikeout=True"
+                "Font_Strikeout=True",
             };
             string[] expect3 =
             {
@@ -344,7 +344,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "Font_Names=",
                 "Font_Underline=True",
                 "BackColor=Color [Red]",
-                "Font_Strikeout=True"
+                "Font_Strikeout=True",
             };
             StyleTestClass s;
             StyleTestClass copy;

@@ -37,6 +37,6 @@ namespace System.Web.DynamicData.ModelProviders
         OneToOne,
         OneToMany,
         ManyToOne,
-        ManyToMany
+        ManyToMany,
     }
 }

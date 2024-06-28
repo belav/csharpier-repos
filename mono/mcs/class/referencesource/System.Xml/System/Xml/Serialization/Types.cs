@@ -45,7 +45,7 @@ namespace System.Xml.Serialization
         Void,
         Node,
         Attribute,
-        Serializable
+        Serializable,
     }
 
     internal enum TypeFlags
@@ -606,7 +606,7 @@ namespace System.Xml.Serialization
             //"normalizedString",
             "NOTATION",
             "positiveInteger",
-            "token"
+            "token",
         };
 
         static TypeScope()

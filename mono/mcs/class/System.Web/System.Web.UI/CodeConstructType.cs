@@ -33,6 +33,6 @@ namespace System.Web.UI
         CodeSnippet = 0,
         ExpressionSnippet = 1,
         DataBindingSnippet = 2,
-        ScriptTag = 3
+        ScriptTag = 3,
     }
 }

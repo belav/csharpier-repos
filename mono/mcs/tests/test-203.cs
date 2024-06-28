@@ -1,6 +1,6 @@
 public enum Modifiers
 {
-    Public = 0x0001
+    Public = 0x0001,
 }
 
 class Foo

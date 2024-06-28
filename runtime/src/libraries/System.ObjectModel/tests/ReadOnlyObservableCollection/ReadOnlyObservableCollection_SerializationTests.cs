@@ -13,19 +13,19 @@ namespace System.Collections.ObjectModel.Tests
         {
             yield return new object[]
             {
-                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>())
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>()),
             };
             yield return new object[]
             {
-                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1 })
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1 }),
             };
             yield return new object[]
             {
-                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2 })
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2 }),
             };
             yield return new object[]
             {
-                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2, 3 })
+                new ReadOnlyObservableCollection<int>(new ObservableCollection<int>() { 1, 2, 3 }),
             };
         }
 

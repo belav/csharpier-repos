@@ -24,7 +24,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
                 .Select(i => new CliOption<string>($"-option{i}")
                 {
                     Arity = arity,
-                    Description = $"Description for -option {i} ...."
+                    Description = $"Description for -option {i} ....",
                 });
 
         /// <remarks>

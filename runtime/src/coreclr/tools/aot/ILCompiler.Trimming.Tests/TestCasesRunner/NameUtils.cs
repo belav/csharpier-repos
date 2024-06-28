@@ -20,7 +20,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 MethodDesc method => TrimAssemblyNamePrefix(method.GetDisplayName()),
                 FieldDesc field => TrimAssemblyNamePrefix(field.ToString()),
                 ModuleDesc module => module.Assembly.GetName().Name,
-                _ => null
+                _ => null,
             };
 
         private static string? TrimAssemblyNamePrefix(string? name)
@@ -49,7 +49,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                     TypeDefinition type => type.GetDisplayName(),
                     IMemberDefinition member => member.FullName,
                     AssemblyDefinition asm => asm.Name.Name,
-                    _ => throw new NotImplementedException()
+                    _ => throw new NotImplementedException(),
                 }
             );
 

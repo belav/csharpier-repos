@@ -70,7 +70,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
             "lpt7",
             "lpt8",
             "lpt9",
-            "clock$"
+            "clock$",
         ];
 #pragma warning restore format
 

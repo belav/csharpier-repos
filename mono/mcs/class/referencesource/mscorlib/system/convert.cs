@@ -29,7 +29,7 @@ namespace System
     public enum Base64FormattingOptions
     {
         None = 0,
-        InsertLineBreaks = 1
+        InsertLineBreaks = 1,
     }
 
     // Returns the type code of this object. An implementation of this method
@@ -132,7 +132,7 @@ namespace System
             (RuntimeType)typeof(Decimal),
             (RuntimeType)typeof(DateTime),
             (RuntimeType)typeof(Object), //TypeCode is discontinuous so we need a placeholder.
-            (RuntimeType)typeof(String)
+            (RuntimeType)typeof(String),
         };
 
         // Need to special case Enum because typecode will be underlying type, e.g. Int32
@@ -204,7 +204,7 @@ namespace System
             '9',
             '+',
             '/',
-            '='
+            '=',
         };
 
         private const Int32 base64LineBreakPosition = 76;

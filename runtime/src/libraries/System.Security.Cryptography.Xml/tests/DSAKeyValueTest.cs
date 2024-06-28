@@ -80,7 +80,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     "Y",
                     "J",
                     "Seed",
-                    "PgenCounter"
+                    "PgenCounter",
                 }
                     .Select(elementName =>
                         xmlkey.SelectSingleNode($"/schema:DSAKeyValue/schema:{elementName}", ns)
@@ -180,7 +180,7 @@ namespace System.Security.Cryptography.Xml.Tests
                 { "P", p },
                 { "Q", q },
                 { "G", g },
-                { "Y", y }
+                { "Y", y },
             };
 
             XmlDocument doc = new XmlDocument();

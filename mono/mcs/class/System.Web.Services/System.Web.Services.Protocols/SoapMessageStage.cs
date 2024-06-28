@@ -35,6 +35,6 @@ namespace System.Web.Services.Protocols
         AfterDeserialize = 0x8,
         AfterSerialize = 0x2,
         BeforeDeserialize = 0x4,
-        BeforeSerialize = 0x1
+        BeforeSerialize = 0x1,
     }
 }

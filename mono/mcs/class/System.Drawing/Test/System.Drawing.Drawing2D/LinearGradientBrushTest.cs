@@ -193,7 +193,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     100,
                     100,
                     50,
-                    125
+                    125,
                 }
             );
 
@@ -213,7 +213,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     55,
                     100,
                     45,
-                    100
+                    100,
                 }
             );
 
@@ -233,7 +233,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     100,
                     60,
                     50,
-                    40
+                    40,
                 }
             );
 
@@ -253,7 +253,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     27,
                     59,
                     73,
-                    41
+                    41,
                 }
             );
         }
@@ -1082,7 +1082,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     -1.942611f,
                     -0.09442017f,
                     247.2034f,
-                    48.05788f
+                    48.05788f,
                 }
             );
             CheckMatrixForScalableAngle(
@@ -1105,7 +1105,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     2.129422f,
                     0.6830124f,
                     -157.2269f,
-                    76.23613f
+                    76.23613f,
                 }
             );
 
@@ -1129,7 +1129,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     -0.6475369f,
                     -0.09442022f,
                     169.499f,
-                    12.84323f
+                    12.84323f,
                 }
             );
             CheckMatrixForScalableAngle(
@@ -1152,7 +1152,7 @@ namespace MonoTests.System.Drawing.Drawing2D
                     0.7098075f,
                     0.6830125f,
                     -72.04998f,
-                    190.6699f
+                    190.6699f,
                 }
             );
         }

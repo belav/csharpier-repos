@@ -582,8 +582,8 @@ public class HostingApplicationDiagnosticsTests
                 Headers = new HeaderDictionary()
                 {
                     { "Request-Id", "ParentId1" },
-                    { "baggage", "Key1=value1, Key2=value2" }
-                }
+                    { "baggage", "Key1=value1, Key2=value2" },
+                },
             }
         );
         hostingApplication.CreateContext(features);
@@ -631,8 +631,8 @@ public class HostingApplicationDiagnosticsTests
                 Headers = new HeaderDictionary()
                 {
                     { "Request-Id", "ParentId1" },
-                    { "Correlation-Context", "Key1=value1, Key2=value2" }
-                }
+                    { "Correlation-Context", "Key1=value1, Key2=value2" },
+                },
             }
         );
         hostingApplication.CreateContext(features);
@@ -680,8 +680,8 @@ public class HostingApplicationDiagnosticsTests
                 {
                     { "Request-Id", "ParentId1" },
                     { "Correlation-Context", "Key1=value1, Key2=value2" },
-                    { "baggage", "Key1=value3, Key2=value4" }
-                }
+                    { "baggage", "Key1=value3, Key2=value4" },
+                },
             }
         );
         hostingApplication.CreateContext(features);
@@ -728,8 +728,12 @@ public class HostingApplicationDiagnosticsTests
                 Headers = new HeaderDictionary()
                 {
                     { "Request-Id", "ParentId1" },
-                    { "baggage", "Key1=value1, Key2=value2, Key1=value3" } // duplicated keys allowed by the contract
-                }
+                    {
+                        "baggage",
+                        "Key1=value1, Key2=value2, Key1=value3"
+                    } // duplicated keys allowed by the contract
+                    ,
+                },
             }
         );
         hostingApplication.CreateContext(features);
@@ -739,7 +743,7 @@ public class HostingApplicationDiagnosticsTests
         {
             KeyValuePair.Create("Key1", "value1"),
             KeyValuePair.Create("Key2", "value2"),
-            KeyValuePair.Create("Key1", "value3")
+            KeyValuePair.Create("Key1", "value3"),
         };
 
         Assert.Equal(expectedBaggage, Activity.Current.Baggage.ToArray());
@@ -777,8 +781,8 @@ public class HostingApplicationDiagnosticsTests
                 Headers = new HeaderDictionary()
                 {
                     { "Request-Id", "ParentId1" },
-                    { "baggage", "Key1=value1%2F1" }
-                }
+                    { "baggage", "Key1=value1%2F1" },
+                },
             }
         );
         hostingApplication.CreateContext(features);
@@ -822,8 +826,8 @@ public class HostingApplicationDiagnosticsTests
                 {
                     { "traceparent", "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01" },
                     { "tracestate", "TraceState1" },
-                    { "baggage", "Key1=value1, Key2=value2" }
-                }
+                    { "baggage", "Key1=value1, Key2=value2" },
+                },
             }
         );
         hostingApplication.CreateContext(features);
@@ -861,7 +865,7 @@ public class HostingApplicationDiagnosticsTests
                 parentId = activity.ParentId;
                 parentSpanId = activity.ParentSpanId.ToHexString();
                 traceId = activity.TraceId.ToHexString();
-            }
+            },
         };
 
         ActivitySource.AddActivityListener(listener);
@@ -872,7 +876,7 @@ public class HostingApplicationDiagnosticsTests
                 Headers = new HeaderDictionary()
                 {
                     { "traceparent", "00-35aae61e3e99044eb5ea5007f2cd159b-40a8bd87c078cb4c-00" },
-                }
+                },
             }
         );
 
@@ -938,7 +942,7 @@ public class HostingApplicationDiagnosticsTests
             ActivityStarted = activity =>
             {
                 parentSpanId = Activity.Current.ParentSpanId.ToHexString();
-            }
+            },
         };
 
         ActivitySource.AddActivityListener(listener);
@@ -950,8 +954,8 @@ public class HostingApplicationDiagnosticsTests
                 {
                     { "traceparent", "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01" },
                     { "tracestate", "TraceState1" },
-                    { "baggage", "Key1=value1, Key2=value2" }
-                }
+                    { "baggage", "Key1=value1, Key2=value2" },
+                },
             }
         );
 

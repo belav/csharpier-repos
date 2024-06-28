@@ -560,7 +560,7 @@ namespace DbMetal
                     yield return new Pair<string, T>
                     {
                         First = propertyInfo.Name,
-                        Second = descriptions[0]
+                        Second = descriptions[0],
                     };
             }
             foreach (var fieldInfo in t.GetFields())
@@ -570,7 +570,7 @@ namespace DbMetal
                     yield return new Pair<string, T>
                     {
                         First = fieldInfo.Name,
-                        Second = descriptions[0]
+                        Second = descriptions[0],
                     };
             }
         }

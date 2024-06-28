@@ -41,7 +41,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             RenameShortcutKey.SearchInComments,
             RenameShortcutKey.SearchInStrings,
             RenameShortcutKey.Apply,
-            RenameShortcutKey.PreviewChanges
+            RenameShortcutKey.PreviewChanges,
         };
 
         public RenameDashboard(
@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 this.FileRenameCheckbox,
                 this.PreviewChangesCheckbox,
                 this.ApplyButton,
-                this.CloseButton
+                this.CloseButton,
             }.ToList();
 
             _textView = textView;

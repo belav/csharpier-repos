@@ -15,7 +15,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 CultureInfo.GetCultureInfo("bg-BG").NumberFormat,
-                new int[] { 0, 8 }
+                new int[] { 0, 8 },
             };
         }
 

@@ -21,6 +21,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    Path will be rendered from current to root.
         /// </devdoc>
-        CurrentToRoot = 1
+        CurrentToRoot = 1,
     }
 }

@@ -41,19 +41,19 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new DesignerCategoryAttribute("category"),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new DesignerCategoryAttribute("category2"),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new DesignerCategoryAttribute(string.Empty),
-                false
+                false,
             };
             // .NET Framework throws a NullReferenceException.
             if (!PlatformDetection.IsNetFramework)
@@ -68,19 +68,19 @@ namespace System.ComponentModel.Tests
                 {
                     new DesignerCategoryAttribute(null),
                     new DesignerCategoryAttribute(null),
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     new DesignerCategoryAttribute(null),
                     new DesignerCategoryAttribute("category"),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new DesignerCategoryAttribute(null),
                     new DesignerCategoryAttribute(string.Empty),
-                    false
+                    false,
                 };
             }
 
@@ -88,7 +88,7 @@ namespace System.ComponentModel.Tests
             {
                 new DesignerCategoryAttribute("category"),
                 new object(),
-                false
+                false,
             };
             yield return new object[] { new DesignerCategoryAttribute("category"), null, false };
             yield return new object[] { new DesignerCategoryAttribute(null), new object(), false };
@@ -115,22 +115,22 @@ namespace System.ComponentModel.Tests
             yield return new object[]
             {
                 (Func<DesignerCategoryAttribute>)(() => DesignerCategoryAttribute.Component),
-                "Component"
+                "Component",
             };
             yield return new object[]
             {
                 (Func<DesignerCategoryAttribute>)(() => DesignerCategoryAttribute.Default),
-                string.Empty
+                string.Empty,
             };
             yield return new object[]
             {
                 (Func<DesignerCategoryAttribute>)(() => DesignerCategoryAttribute.Form),
-                "Form"
+                "Form",
             };
             yield return new object[]
             {
                 (Func<DesignerCategoryAttribute>)(() => DesignerCategoryAttribute.Generic),
-                "Designer"
+                "Designer",
             };
         }
 

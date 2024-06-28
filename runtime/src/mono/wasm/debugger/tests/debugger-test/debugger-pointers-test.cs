@@ -40,13 +40,13 @@ namespace DebuggerTests
             {
                 Value = new DateTime(1, 2, 3, 4, 5, 6),
                 IntField = 4,
-                DTPP = &dtp
+                DTPP = &dtp,
             };
             var gs_null = new GenericStructWithUnmanagedT<DateTime>
             {
                 Value = new DateTime(1, 2, 3, 4, 5, 6),
                 IntField = 4,
-                DTPP = &dtp_null
+                DTPP = &dtp_null,
             };
             var gsp = &gs;
             var gsp_null = &gs_null;
@@ -110,13 +110,13 @@ namespace DebuggerTests
             {
                 Value = new DateTime(1, 2, 3, 4, 5, 6),
                 IntField = 4,
-                DTPP = &dtp
+                DTPP = &dtp,
             };
             var gs_null = new GenericStructWithUnmanagedT<DateTime>
             {
                 Value = new DateTime(1, 2, 3, 4, 5, 6),
                 IntField = 4,
-                DTPP = &dtp_null
+                DTPP = &dtp_null,
             };
             var gsp = &gs;
             var gsp_null = &gs_null;

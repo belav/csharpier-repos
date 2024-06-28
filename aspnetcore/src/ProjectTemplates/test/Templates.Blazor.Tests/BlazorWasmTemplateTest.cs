@@ -467,7 +467,7 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                     new()
                     {
                         UrlString = "**/Identity/Account/Login**",
-                        WaitUntil = WaitUntilState.NetworkIdle
+                        WaitUntil = WaitUntilState.NetworkIdle,
                     }
                 ),
                 page.ClickAsync("text=Log in")
@@ -479,7 +479,7 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                     new()
                     {
                         UrlString = "**/Identity/Account/Register**",
-                        WaitUntil = WaitUntilState.NetworkIdle
+                        WaitUntil = WaitUntilState.NetworkIdle,
                     }
                 ),
                 page.ClickAsync("text=Register as a new user")
@@ -498,7 +498,7 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                     new()
                     {
                         UrlString = "**/Identity/Account/RegisterConfirmation**",
-                        WaitUntil = WaitUntilState.NetworkIdle
+                        WaitUntil = WaitUntilState.NetworkIdle,
                     }
                 ),
                 page.ClickAsync("#registerSubmit")
@@ -510,7 +510,7 @@ public class BlazorWasmTemplateTest : BlazorTemplateTest
                     new()
                     {
                         UrlString = "**/Identity/Account/ConfirmEmail**",
-                        WaitUntil = WaitUntilState.NetworkIdle
+                        WaitUntil = WaitUntilState.NetworkIdle,
                     }
                 ),
                 page.ClickAsync("text=Click here to confirm your account")

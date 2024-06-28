@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Completion.Log
             ExtensionMethodCompletionPartialResultCount,
 
             CommitUsingSemicolonToAddParenthesis,
-            CommitUsingDotToAddParenthesis
+            CommitUsingDotToAddParenthesis,
         }
 
         internal static void LogTypeImportCompletionTicksDataPoint(TimeSpan elapsed)

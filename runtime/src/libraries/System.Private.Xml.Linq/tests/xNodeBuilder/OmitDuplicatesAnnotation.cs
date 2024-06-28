@@ -64,7 +64,7 @@ namespace CoreXml.Test.XLinq
                             new XmlReaderSettings()
                             {
                                 IgnoreWhitespace = true,
-                                DtdProcessing = DtdProcessing.Ignore
+                                DtdProcessing = DtdProcessing.Ignore,
                             }
                         )
                     )
@@ -94,7 +94,7 @@ namespace CoreXml.Test.XLinq
                             new XmlReaderSettings()
                             {
                                 IgnoreWhitespace = true,
-                                DtdProcessing = DtdProcessing.Ignore
+                                DtdProcessing = DtdProcessing.Ignore,
                             }
                         )
                     )
@@ -127,7 +127,7 @@ namespace CoreXml.Test.XLinq
                                 new XmlWriterSettings()
                                 {
                                     OmitXmlDeclaration = true,
-                                    NamespaceHandling = NamespaceHandling.OmitDuplicates
+                                    NamespaceHandling = NamespaceHandling.OmitDuplicates,
                                 }
                             )
                         )
@@ -142,7 +142,7 @@ namespace CoreXml.Test.XLinq
                                 new XmlReaderSettings()
                                 {
                                     IgnoreWhitespace = true,
-                                    DtdProcessing = DtdProcessing.Ignore
+                                    DtdProcessing = DtdProcessing.Ignore,
                                 }
                             )
                         )
@@ -236,7 +236,7 @@ namespace CoreXml.Test.XLinq
                         SaveOptions.None,
                         SaveOptions.DisableFormatting,
                         SaveOptions.OmitDuplicateNamespaces,
-                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces
+                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces,
                     };
 
                     foreach (SaveOptions[] opts in Tuples2(options))
@@ -290,7 +290,7 @@ namespace CoreXml.Test.XLinq
                         SaveOptions.None,
                         SaveOptions.DisableFormatting,
                         SaveOptions.OmitDuplicateNamespaces,
-                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces
+                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces,
                     };
 
                     foreach (SaveOptions[] opts in Tuples2(options))
@@ -344,7 +344,7 @@ namespace CoreXml.Test.XLinq
                         SaveOptions.None,
                         SaveOptions.DisableFormatting,
                         SaveOptions.OmitDuplicateNamespaces,
-                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces
+                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces,
                     };
 
                     foreach (SaveOptions[] opts in Tuples2(options))
@@ -492,7 +492,7 @@ namespace CoreXml.Test.XLinq
                             SaveOptions so in new SaveOptions[]
                             {
                                 SaveOptions.None,
-                                SaveOptions.OmitDuplicateNamespaces
+                                SaveOptions.OmitDuplicateNamespaces,
                             }
                         )
                         {
@@ -506,7 +506,7 @@ namespace CoreXml.Test.XLinq
                             SaveOptions so in new SaveOptions[]
                             {
                                 SaveOptions.None,
-                                SaveOptions.OmitDuplicateNamespaces
+                                SaveOptions.OmitDuplicateNamespaces,
                             }
                         )
                         {

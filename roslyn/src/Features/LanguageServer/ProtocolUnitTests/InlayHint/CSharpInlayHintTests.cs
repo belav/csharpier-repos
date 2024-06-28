@@ -140,7 +140,7 @@ class A
             var inlayHintParams = new LSP.InlayHintParams
             {
                 TextDocument = textDocument,
-                Range = ProtocolConversions.TextSpanToRange(span, sourceText)
+                Range = ProtocolConversions.TextSpanToRange(span, sourceText),
             };
 
             var actualInlayHints = await testLspServer.ExecuteRequestAsync<
@@ -210,8 +210,8 @@ class A
                     SupportsVisualStudioExtensions = true,
                     Workspace = new WorkspaceClientCapabilities
                     {
-                        InlayHint = new InlayHintWorkspaceSetting { RefreshSupport = true }
-                    }
+                        InlayHint = new InlayHintWorkspaceSetting { RefreshSupport = true },
+                    },
                 }
             );
             testLspServer.TestWorkspace.GlobalOptions.SetGlobalOption(

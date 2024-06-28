@@ -32,7 +32,7 @@ namespace MonoTests.System
             "-32768",
             "-32,768.00",
             "-3,276,800.00 %",
-            "8000"
+            "8000",
         };
         private string[] Results2 =
         {
@@ -43,7 +43,7 @@ namespace MonoTests.System
             "32767",
             "32,767.00000",
             "3,276,700.00000 %",
-            "07fff"
+            "07fff",
         };
         private string[] ResultsNfi1 =
         {
@@ -54,7 +54,7 @@ namespace MonoTests.System
             "-32768",
             "-32,768.00",
             "-3,276,800.00 %",
-            "8000"
+            "8000",
         };
         private string[] ResultsNfi2 =
         {
@@ -65,7 +65,7 @@ namespace MonoTests.System
             "32767",
             "32,767.00000",
             "3,276,700.00000 %",
-            "07fff"
+            "07fff",
         };
         private NumberFormatInfo Nfi = NumberFormatInfo.InvariantInfo;
 

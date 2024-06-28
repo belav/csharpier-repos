@@ -30,7 +30,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
 
             return parameters;
@@ -71,7 +71,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -122,7 +122,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -184,7 +184,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -257,7 +257,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -341,7 +341,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -436,7 +436,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -542,7 +542,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -659,7 +659,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -787,7 +787,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -927,7 +927,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -1078,7 +1078,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -1240,7 +1240,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -1427,7 +1427,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -1626,7 +1626,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -1837,7 +1837,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }
@@ -2060,7 +2060,7 @@ namespace System.Activities
                         ArgumentDirection.Out,
                         this.Result
                     )
-                }
+                },
             };
             return parameters;
         }

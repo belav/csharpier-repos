@@ -166,7 +166,7 @@ namespace System.Diagnostics
         /// <internalonly/>
         private enum State
         {
-            IsLocal = 0x2
+            IsLocal = 0x2,
         }
     }
 }

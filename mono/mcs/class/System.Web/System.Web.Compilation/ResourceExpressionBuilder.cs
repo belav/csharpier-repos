@@ -78,7 +78,7 @@ namespace System.Web.Compilation
                 expr = new CodeExpression[]
                 {
                     new CodePrimitiveExpression(fields.ClassKey),
-                    new CodePrimitiveExpression(fields.ResourceKey)
+                    new CodePrimitiveExpression(fields.ResourceKey),
                 };
                 CodeMethodInvokeExpression getgro = new CodeMethodInvokeExpression(
                     new CodeThisReferenceExpression(),
@@ -187,7 +187,7 @@ namespace System.Web.Compilation
                     {
                         new CodePrimitiveExpression(resname),
                         new CodeTypeOfExpression(new CodeTypeReference(declaringType)),
-                        new CodePrimitiveExpression(memberName)
+                        new CodePrimitiveExpression(memberName),
                     }
                 );
 

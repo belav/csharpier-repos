@@ -30,7 +30,7 @@ public class PartialViewResultTest
         {
             ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider())
             {
-                Model = customModel
+                Model = customModel,
             },
         };
 
@@ -43,7 +43,7 @@ public class PartialViewResultTest
     {
         // Arrange
         var actionContext = new ActionContext(
-            new DefaultHttpContext() { RequestServices = Mock.Of<IServiceProvider>(), },
+            new DefaultHttpContext() { RequestServices = Mock.Of<IServiceProvider>() },
             new RouteData(),
             new ActionDescriptor()
         );

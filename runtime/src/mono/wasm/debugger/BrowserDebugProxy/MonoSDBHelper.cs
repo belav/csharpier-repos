@@ -62,7 +62,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         ForDebuggerDisplayAttribute = 16,
         WithProperties = 32,
         JustMyCode = 64,
-        AutoExpandable = 128
+        AutoExpandable = 128,
     }
 
     internal enum CommandSet
@@ -81,7 +81,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         Module = 24,
         Field = 25,
         Event = 64,
-        Pointer = 65
+        Pointer = 65,
     }
 
     internal enum EventKind
@@ -105,7 +105,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         UserLog = 16,
         Crash = 17,
         EnC = 18,
-        MethodUpdate = 19
+        MethodUpdate = 19,
     }
 
     internal enum ModifierKind
@@ -117,14 +117,14 @@ namespace Microsoft.WebAssembly.Diagnostics
         Step = 10,
         AssemblyOnly = 11,
         SourceFileOnly = 12,
-        TypeNameOnly = 13
+        TypeNameOnly = 13,
     }
 
     internal enum SuspendPolicy
     {
         None = 0,
         EventThread = 1,
-        All = 2
+        All = 2,
     }
 
     internal enum CmdVM
@@ -148,7 +148,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         VmWriteMemory = 17,
         GetAssemblyByName = 18,
         GetModuleByGUID = 19,
-        GetAssemblyAndPdbBytes = 20
+        GetAssemblyAndPdbBytes = 20,
     }
 
     internal enum CmdFrame
@@ -159,12 +159,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetDomain = 4,
         SetThis = 5,
         GetArgument = 6,
-        GetArguments = 7
+        GetArguments = 7,
     }
 
     internal enum CmdEvent
     {
-        Composite = 100
+        Composite = 100,
     }
 
     internal enum CmdThread
@@ -180,14 +180,14 @@ namespace Microsoft.WebAssembly.Diagnostics
         /* Ditto */
         GetTid = 6,
         SetIp = 7,
-        GetElapsedTime = 8
+        GetElapsedTime = 8,
     }
 
     internal enum CmdEventRequest
     {
         Set = 1,
         Clear = 2,
-        ClearAllBreakpoints = 3
+        ClearAllBreakpoints = 3,
     }
 
     internal enum CmdAppDomain
@@ -217,7 +217,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetTypeFromToken = 11,
         GetMethodFromToken = 12,
         HasDebugInfo = 13,
-        HasDebugInfoLoaded = 18
+        HasDebugInfoLoaded = 18,
     }
 
     internal enum CmdModule
@@ -228,7 +228,7 @@ namespace Microsoft.WebAssembly.Diagnostics
 
     internal enum CmdPointer
     {
-        GetValue = 1
+        GetValue = 1,
     }
 
     internal enum CmdMethod
@@ -248,7 +248,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         ClassToken = 13,
         AsyncDebugInfo = 14,
         GetNameFull = 15,
-        GetPrettyName = 16
+        GetPrettyName = 16,
     }
 
     internal enum CmdType
@@ -287,19 +287,19 @@ namespace Microsoft.WebAssembly.Diagnostics
         GetLength = 1,
         GetValues = 2,
         SetValues = 3,
-        RefGetType = 4
+        RefGetType = 4,
     }
 
     internal enum CmdField
     {
-        GetInfo = 1
+        GetInfo = 1,
     }
 
     internal enum CmdString
     {
         GetValue = 1,
         GetLength = 2,
-        GetChars = 3
+        GetChars = 3,
     }
 
     internal enum CmdObject
@@ -313,7 +313,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         RefGetInfo = 7,
         GetValuesICorDbg = 8,
         RefDelegateGetMethod = 9,
-        RefIsDelegate = 10
+        RefIsDelegate = 10,
     }
 
     internal enum ElementType
@@ -356,7 +356,7 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         Type = 0x50,
         Boxed = 0x51,
-        Enum = 0x55
+        Enum = 0x55,
     }
 
     internal enum ValueTypeId
@@ -364,7 +364,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         Null = 0xf0,
         Type = 0xf1,
         VType = 0xf2,
-        FixedArray = 0xf3
+        FixedArray = 0xf3,
     }
 
     internal enum MonoTypeNameFormat
@@ -372,7 +372,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         FormatIL,
         FormatReflection,
         FullName,
-        AssemblyQualified
+        AssemblyQualified,
     }
 
     internal enum StepFilter
@@ -381,13 +381,13 @@ namespace Microsoft.WebAssembly.Diagnostics
         StaticCtor = 1,
         DebuggerHidden = 2,
         DebuggerStepThrough = 4,
-        DebuggerNonUserCode = 8
+        DebuggerNonUserCode = 8,
     }
 
     internal enum StepSize
     {
         Minimal,
-        LineColumn
+        LineColumn,
     }
 
     internal sealed class AssemblyAndPdbData
@@ -1335,7 +1335,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 CmdField => CommandSet.Field,
                 CmdEvent => CommandSet.Event,
                 CmdPointer => CommandSet.Pointer,
-                _ => throw new Exception("Unknown CommandSet")
+                _ => throw new Exception("Unknown CommandSet"),
             };
 
         internal async Task<MonoBinaryReader> SendDebuggerAgentCommandWithParms<T>(
@@ -2909,7 +2909,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 new
                 {
                     items = await GetArrayValues(arrayId, token),
-                    dimensionsDetails = length.Bounds
+                    dimensionsDetails = length.Bounds,
                 }
             );
             return arrayProxy;
@@ -3278,7 +3278,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                                     buffer = data,
                                     valtype = attr["set"]["valtype"],
                                     length,
-                                    id = GetNewId()
+                                    id = GetNewId(),
                                 }
                             );
                         }
@@ -3304,10 +3304,10 @@ namespace Microsoft.WebAssembly.Diagnostics
                                             command = CmdVM.InvokeMethod,
                                             buffer = data,
                                             length = length,
-                                            id = GetNewId()
+                                            id = GetNewId(),
                                         }
                                     ),
-                                    name = propertyNameStr
+                                    name = propertyNameStr,
                                 }
                             )
                         );

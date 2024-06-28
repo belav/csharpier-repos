@@ -226,7 +226,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The command to execute when Delete() is called on the SqlDataSourceView.
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_DeleteCommand),]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_DeleteCommand)]
         public string DeleteCommand
         {
             get { return GetView().DeleteCommand; }
@@ -270,7 +270,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Whether caching is enabled for this data source.
         /// </devdoc>
-        [DefaultValue(false), WebCategory("Cache"), WebSysDescription(SR.DataSourceCache_Enabled),]
+        [DefaultValue(false), WebCategory("Cache"), WebSysDescription(SR.DataSourceCache_Enabled)]
         public virtual bool EnableCaching
         {
             get { return Cache.Enabled; }
@@ -314,7 +314,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The command to execute when Insert() is called on the SqlDataSourceView.
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_InsertCommand),]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_InsertCommand)]
         public string InsertCommand
         {
             get { return GetView().InsertCommand; }
@@ -398,7 +398,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The command to execute when Select() is called on the SqlDataSourceView.
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_SelectCommand),]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_SelectCommand)]
         public string SelectCommand
         {
             get { return GetView().SelectCommand; }
@@ -510,7 +510,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The command to execute when Update() is called on the SqlDataSourceView.
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_UpdateCommand),]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.SqlDataSource_UpdateCommand)]
         public string UpdateCommand
         {
             get { return GetView().UpdateCommand; }
@@ -555,7 +555,7 @@ namespace System.Web.UI.WebControls
         /// This event is raised after the Delete operation has completed.
         /// Handle this event if you need to examine the values of output parameters.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Deleted),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Deleted)]
         public event SqlDataSourceStatusEventHandler Deleted
         {
             add { GetView().Deleted += value; }
@@ -571,7 +571,7 @@ namespace System.Web.UI.WebControls
         /// can cancel the event by setting the Cancel property of the DataCommandEventArgs
         /// to true.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Deleting),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Deleting)]
         public event SqlDataSourceCommandEventHandler Deleting
         {
             add { GetView().Deleting += value; }
@@ -585,7 +585,7 @@ namespace System.Web.UI.WebControls
         /// is set. If the Cancel property of the event arguments is set to true,
         /// the Select operation is aborted and the operation will return null.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Filtering),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Filtering)]
         public event SqlDataSourceFilteringEventHandler Filtering
         {
             add { GetView().Filtering += value; }
@@ -596,7 +596,7 @@ namespace System.Web.UI.WebControls
         /// This event is raised after the Insert operation has completed.
         /// Handle this event if you need to examine the values of output parameters.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Inserted),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Inserted)]
         public event SqlDataSourceStatusEventHandler Inserted
         {
             add { GetView().Inserted += value; }
@@ -612,7 +612,7 @@ namespace System.Web.UI.WebControls
         /// can cancel the event by setting the Cancel property of the DataCommandEventArgs
         /// to true.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Inserting),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Inserting)]
         public event SqlDataSourceCommandEventHandler Inserting
         {
             add { GetView().Inserting += value; }
@@ -623,7 +623,7 @@ namespace System.Web.UI.WebControls
         /// This event is raised after the Select operation has completed.
         /// Handle this event if you need to examine the values of output parameters.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.SqlDataSource_Selected),]
+        [WebCategory("Data"), WebSysDescription(SR.SqlDataSource_Selected)]
         public event SqlDataSourceStatusEventHandler Selected
         {
             add { GetView().Selected += value; }
@@ -639,7 +639,7 @@ namespace System.Web.UI.WebControls
         /// can cancel the event by setting the Cancel property of the DataCommandEventArgs
         /// to true.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.SqlDataSource_Selecting),]
+        [WebCategory("Data"), WebSysDescription(SR.SqlDataSource_Selecting)]
         public event SqlDataSourceSelectingEventHandler Selecting
         {
             add { GetView().Selecting += value; }
@@ -650,7 +650,7 @@ namespace System.Web.UI.WebControls
         /// This event is raised after the Update operation has completed.
         /// Handle this event if you need to examine the values of output parameters.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Updated),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Updated)]
         public event SqlDataSourceStatusEventHandler Updated
         {
             add { GetView().Updated += value; }
@@ -666,7 +666,7 @@ namespace System.Web.UI.WebControls
         /// can cancel the event by setting the Cancel property of the DataCommandEventArgs
         /// to true.
         /// </devdoc>
-        [WebCategory("Data"), WebSysDescription(SR.DataSource_Updating),]
+        [WebCategory("Data"), WebSysDescription(SR.DataSource_Updating)]
         public event SqlDataSourceCommandEventHandler Updating
         {
             add { GetView().Updating += value; }

@@ -26,7 +26,7 @@ namespace System.Net.Http.Unit.Tests.QPack
         private static readonly byte[] _literalHeaderFieldWithNameReferenceStatic = new byte[]
         {
             0x5f,
-            0x1d
+            0x1d,
         };
 
         // 4.5.6 - Literal Field Line With Literal Name - (literal-header-field)
@@ -53,7 +53,7 @@ namespace System.Net.Http.Unit.Tests.QPack
             0x69,
             0x65,
             0x6c,
-            0x64
+            0x64,
         };
 
         private const string _contentTypeString = "content-type";
@@ -70,7 +70,7 @@ namespace System.Net.Http.Unit.Tests.QPack
             0xa3,
             0x90,
             0xb6,
-            0x7f
+            0x7f,
         };
 
         private const string _headerNameString = "new-header";
@@ -87,7 +87,7 @@ namespace System.Net.Http.Unit.Tests.QPack
             0xee,
             0x3a,
             0x2d,
-            0x2f
+            0x2f,
         };
 
         private static readonly byte[] _headerNameHuffman = new byte[] { 0x3f, 0x01 }
@@ -100,7 +100,7 @@ namespace System.Net.Http.Unit.Tests.QPack
 
         private static readonly byte[] _headerValueHuffman = new byte[]
         {
-            (byte)(0x80 | _headerValueHuffmanBytes.Length)
+            (byte)(0x80 | _headerValueHuffmanBytes.Length),
         }
             .Concat(_headerValueHuffmanBytes)
             .ToArray();
@@ -244,7 +244,7 @@ namespace System.Net.Http.Unit.Tests.QPack
                 {
                     new KeyValuePair<string, string>(":method", new string('A', 8192 / 2)),
                     new KeyValuePair<string, string>(":path", new string('A', 8192 / 2)),
-                    new KeyValuePair<string, string>(":scheme", "http")
+                    new KeyValuePair<string, string>(":scheme", "http"),
                 }
             );
         }
@@ -380,7 +380,7 @@ namespace System.Net.Http.Unit.Tests.QPack
                     0x73,
                     0x6c,
                     0x61,
-                    0x74
+                    0x74,
                 },
             };
 
@@ -403,7 +403,7 @@ namespace System.Net.Http.Unit.Tests.QPack
         {
             KeyValuePair<string, string>[] expectedValues = new[]
             {
-                new KeyValuePair<string, string>(expectedHeaderName, expectedHeaderValue)
+                new KeyValuePair<string, string>(expectedHeaderName, expectedHeaderValue),
             };
 
             TestDecodeWithoutIndexing(encoded, expectedValues);

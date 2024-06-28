@@ -40,6 +40,6 @@ namespace System.Web.UI.WebControls
         ///    </para>
         /// </devdoc>
         FirstTwoLetters = 3,
-        Shortest = 4
+        Shortest = 4,
     }
 }

@@ -25,7 +25,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 false,
                 false,
-                ""
+                "",
             };
             yield return new object[]
             {
@@ -40,7 +40,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 false,
                 true,
-                "D:(D;;0x1000;;;BO)"
+                "D:(D;;0x1000;;;BO)",
             };
             yield return new object[]
             {
@@ -55,7 +55,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 true,
                 false,
-                "S:(AU;SA;0x1000;;;BA)"
+                "S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -70,7 +70,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 true,
                 true,
-                "D:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "D:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -85,7 +85,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 false,
                 false,
-                "G:BG"
+                "G:BG",
             };
             yield return new object[]
             {
@@ -100,7 +100,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 false,
                 true,
-                "G:BGD:(D;;0x1000;;;BO)"
+                "G:BGD:(D;;0x1000;;;BO)",
             };
             yield return new object[]
             {
@@ -115,7 +115,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 false,
-                "G:BGS:(AU;SA;0x1000;;;BA)"
+                "G:BGS:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -130,7 +130,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "G:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "G:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -145,7 +145,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 false,
                 false,
-                "O:BA"
+                "O:BA",
             };
             yield return new object[]
             {
@@ -160,7 +160,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 false,
                 true,
-                "O:BAD:(D;;0x1000;;;BO)"
+                "O:BAD:(D;;0x1000;;;BO)",
             };
             yield return new object[]
             {
@@ -175,7 +175,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 true,
                 false,
-                "O:BAS:(AU;SA;0x1000;;;BA)"
+                "O:BAS:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -190,7 +190,7 @@ namespace System.Security.AccessControl.Tests
                 false,
                 true,
                 true,
-                "O:BAD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "O:BAD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -205,7 +205,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 false,
                 false,
-                "O:BAG:BG"
+                "O:BAG:BG",
             };
             yield return new object[]
             {
@@ -220,7 +220,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 false,
                 true,
-                "O:BAG:BGD:(D;;0x1000;;;BO)"
+                "O:BAG:BGD:(D;;0x1000;;;BO)",
             };
             yield return new object[]
             {
@@ -235,7 +235,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 false,
-                "O:BAG:BGS:(AU;SA;0x1000;;;BA)"
+                "O:BAG:BGS:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -250,7 +250,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "O:BAG:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -265,7 +265,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                ""
+                "",
             };
             yield return new object[]
             {
@@ -280,7 +280,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "O:BAG:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -295,7 +295,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGD:(D;;0x1000;;;BO)"
+                "O:BAG:BGD:(D;;0x1000;;;BO)",
             };
             yield return new object[]
             {
@@ -310,7 +310,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGD:(D;;0x1000;;;BO)"
+                "O:BAG:BGD:(D;;0x1000;;;BO)",
             };
             yield return new object[]
             {
@@ -325,7 +325,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "O:BAG:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -340,7 +340,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGS:(AU;SA;0x1000;;;BA)"
+                "O:BAG:BGS:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -355,7 +355,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAG:BGS:(AU;SA;0x1000;;;BA)"
+                "O:BAG:BGS:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -370,7 +370,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "G:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "G:BGD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
             yield return new object[]
             {
@@ -385,7 +385,7 @@ namespace System.Security.AccessControl.Tests
                 true,
                 true,
                 true,
-                "O:BAD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)"
+                "O:BAD:(D;;0x1000;;;BO)S:(AU;SA;0x1000;;;BA)",
             };
         }
 

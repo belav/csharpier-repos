@@ -246,7 +246,7 @@ namespace Microsoft.Extensions.Http
                 Services,
                 ScopeFactory,
                 Options,
-                new[] { filter1.Object, filter2.Object, filter3.Object, }
+                new[] { filter1.Object, filter2.Object, filter3.Object }
             );
 
             // Act

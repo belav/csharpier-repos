@@ -18,7 +18,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             B,
             C,
             D,
-            E
+            E,
         }
 
         public enum SByteEnum : sbyte
@@ -28,7 +28,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             C,
             D,
             E,
-            Z = -1
+            Z = -1,
         }
 
         public enum Int32Enum
@@ -38,7 +38,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             C,
             D,
             E,
-            Z = -1
+            Z = -1,
         }
 
         public enum UInt32Enum : uint
@@ -47,7 +47,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             B,
             C,
             D,
-            E
+            E,
         }
 
         public enum Int64Enum : long
@@ -57,7 +57,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             C,
             D,
             E,
-            Z = -1
+            Z = -1,
         }
 
         public static IEnumerable<object[]> ByteEnums() =>

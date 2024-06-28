@@ -32,6 +32,8 @@ namespace System.Web
         UpdateRequestCache = 0x00000200, // update cache
         LogRequest = 0x00000400, // log request
         EndRequest = 0x00000800, // end request
-        SendResponse = 0x20000000 // send response
+        SendResponse =
+            0x20000000 // send response
+        ,
     }
 }

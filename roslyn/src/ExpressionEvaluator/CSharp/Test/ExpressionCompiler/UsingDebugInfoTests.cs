@@ -787,8 +787,8 @@ namespace N
                                 [
                                     new[]
                                     {
-                                        "TSystem.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-                                    }
+                                        "TSystem.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+                                    },
                                 ],
                                 suppressUsingInfo: true
                             )
@@ -1527,7 +1527,7 @@ public class C2 : C1
                     module1,
                     module2,
                     MscorlibRef_v4_0_30316_17626.ToModuleInstance(),
-                    ExpressionCompilerTestHelpers.IntrinsicAssemblyReference.ToModuleInstance()
+                    ExpressionCompilerTestHelpers.IntrinsicAssemblyReference.ToModuleInstance(),
                 }
             );
 

@@ -9,7 +9,7 @@ namespace System.Workflow.ComponentModel
     {
         Add = 0x01,
         Remove = 0x2,
-        Replace = Add | Remove
+        Replace = Add | Remove,
     }
 
     internal class ItemListChangeEventArgs<T> : EventArgs

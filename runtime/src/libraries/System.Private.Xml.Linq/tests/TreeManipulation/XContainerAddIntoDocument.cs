@@ -25,8 +25,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("(Multiple) XDocument whitespace only")
                     {
                         Params = new object[] { " ", 3, false, false, " " },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -35,8 +35,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument with Root Elem")
                     {
                         Params = new object[] { "<A/>", 1, true, false },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -45,8 +45,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("(Multiple) XDocument")
                     {
                         Params = new object[] { " <?PI?><!--comm-->", 4, false, false },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -55,8 +55,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("(Multiple) XDocument with Root Elem")
                     {
                         Params = new object[] { "<A/>", 3, true, false },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -71,10 +71,10 @@ namespace XLinqTests
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
                             4,
                             true,
-                            false
+                            false,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -83,8 +83,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument - connected")
                     {
                         Params = new object[] { " <?PI?><!--comm-->", 1, false, true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -93,8 +93,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument whitespace only - connected")
                     {
                         Params = new object[] { " ", 1, false, true, " " },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -103,8 +103,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument with Root Elem - connected")
                     {
                         Params = new object[] { "<A/>", 1, true, true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -119,10 +119,10 @@ namespace XLinqTests
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
                             3,
                             true,
-                            true
+                            true,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -131,8 +131,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("(Multiple) XDocument - connected")
                     {
                         Params = new object[] { " <?PI?><!--comm-->", 4, false, true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -143,8 +143,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { " ", 3, false, true, " " },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -155,8 +155,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "<A/>", 3, true, true },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -165,8 +165,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument whitespace only")
                     {
                         Params = new object[] { " ", 1, false, false, " " },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -179,10 +179,10 @@ namespace XLinqTests
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
                             3,
                             true,
-                            false
+                            false,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -197,10 +197,10 @@ namespace XLinqTests
                             "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
                             4,
                             true,
-                            true
+                            true,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -209,8 +209,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XDocument")
                     {
                         Params = new object[] { " <?PI?><!--comm-->", 1, false, false },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
         }
@@ -257,7 +257,7 @@ namespace XLinqTests
                 "\t",
                 " ",
                 "",
-                null
+                null,
             };
 
             if (isConnected)

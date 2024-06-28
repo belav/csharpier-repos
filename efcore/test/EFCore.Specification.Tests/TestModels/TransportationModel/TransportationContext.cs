@@ -94,8 +94,8 @@ public class TransportationContext : PoolableDbContext
                 Operator = new Operator
                 {
                     Name = "Lance Armstrong",
-                    VehicleName = "Trek Pro Fit Madone 6 Series"
-                }
+                    VehicleName = "Trek Pro Fit Madone 6 Series",
+                },
             },
             new PoweredVehicle
             {
@@ -105,8 +105,8 @@ public class TransportationContext : PoolableDbContext
                 {
                     Name = "Albert Williams",
                     LicenseType = "Muni Transit",
-                    VehicleName = "1984 California Car"
-                }
+                    VehicleName = "1984 California Car",
+                },
             },
             new PoweredVehicle
             {
@@ -115,14 +115,14 @@ public class TransportationContext : PoolableDbContext
                 Engine = new Engine
                 {
                     Description = "416 hp three phase, four pole AC induction",
-                    VehicleName = "P85 2012 Tesla Model S Performance Edition"
+                    VehicleName = "P85 2012 Tesla Model S Performance Edition",
                 },
                 Operator = new LicensedOperator
                 {
                     Name = "Elon Musk",
                     LicenseType = "Driver",
-                    VehicleName = "P85 2012 Tesla Model S Performance Edition"
-                }
+                    VehicleName = "P85 2012 Tesla Model S Performance Edition",
+                },
             },
             new PoweredVehicle
             {
@@ -136,16 +136,16 @@ public class TransportationContext : PoolableDbContext
                     {
                         FuelType = "Liquid oxygen and anhydrous ammonia",
                         Capacity = 11250,
-                        VehicleName = "North American X-15A-2"
+                        VehicleName = "North American X-15A-2",
                     },
-                    VehicleName = "North American X-15A-2"
+                    VehicleName = "North American X-15A-2",
                 },
                 Operator = new LicensedOperator
                 {
                     Name = "William J. Knight",
                     LicenseType = "Air Force Test Pilot",
-                    VehicleName = "North American X-15A-2"
-                }
+                    VehicleName = "North American X-15A-2",
+                },
             },
             new PoweredVehicle
             {
@@ -158,19 +158,19 @@ public class TransportationContext : PoolableDbContext
                         FuelType = "Reduced smoke Hydroxyl-Terminated Polybutadiene",
                         Capacity = 22,
                         GrainGeometry = "Cylindrical",
-                        VehicleName = "AIM-9M Sidewinder"
+                        VehicleName = "AIM-9M Sidewinder",
                     },
-                    VehicleName = "AIM-9M Sidewinder"
+                    VehicleName = "AIM-9M Sidewinder",
                 },
                 Operator = new Operator
                 {
                     Details = new OperatorDetails
                     {
                         Type = "Heat-seeking",
-                        VehicleName = "AIM-9M Sidewinder"
+                        VehicleName = "AIM-9M Sidewinder",
                     },
-                    VehicleName = "AIM-9M Sidewinder"
-                }
-            }
+                    VehicleName = "AIM-9M Sidewinder",
+                },
+            },
         };
 }

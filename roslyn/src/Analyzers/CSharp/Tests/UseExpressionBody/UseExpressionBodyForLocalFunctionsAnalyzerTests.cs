@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
                         ExpressionBodyPreference.WhenPossible
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -53,8 +53,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
                         ExpressionBodyPreference.WhenOnSingleLine
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
                         ExpressionBodyPreference.Never
-                    }
+                    },
                 },
                 ReferenceAssemblies = referenceAssemblies ?? ReferenceAssemblies.Default,
             }.RunAsync();
@@ -927,7 +927,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                             {
                                 return x;
                             }|}
-                            """
+                            """,
                     },
                 },
                 FixedState =
@@ -936,7 +936,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         """
                             int Bar(int x) => x;
-                            """
+                            """,
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -945,7 +945,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
                         ExpressionBodyPreference.WhenPossible
-                    }
+                    },
                 },
             }.RunAsync();
         }
@@ -962,7 +962,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         """
                             {|IDE0061:int Bar(int x) => x;|}
-                            """
+                            """,
                     },
                 },
                 FixedState =
@@ -971,7 +971,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         """
                             int Bar(int x) { return x; }
-                            """
+                            """,
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
@@ -980,7 +980,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
                         ExpressionBodyPreference.Never
-                    }
+                    },
                 },
             }.RunAsync();
         }

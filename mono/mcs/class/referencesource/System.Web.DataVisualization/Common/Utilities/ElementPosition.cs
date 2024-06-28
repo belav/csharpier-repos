@@ -69,10 +69,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// the position of the chart element in relative coordinates,
     /// from (0,0) to (100,100).
     /// </summary>
-    [
-        SRDescription("DescriptionAttributeElementPosition_ElementPosition"),
-        DefaultProperty("Data"),
-    ]
+    [SRDescription("DescriptionAttributeElementPosition_ElementPosition"), DefaultProperty("Data")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

@@ -40,6 +40,6 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Mapping between CSpace and SSpace
         /// </summary>
-        CSSpace = 4
+        CSSpace = 4,
     }
 }

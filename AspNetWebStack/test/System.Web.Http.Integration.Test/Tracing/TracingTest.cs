@@ -486,7 +486,7 @@ namespace System.Web.Http.ModelBinding
             );
             Mock<DelegatingHandler> customMessageHandler = new Mock<DelegatingHandler>()
             {
-                CallBase = true
+                CallBase = true,
             };
             config.MessageHandlers.Add(customMessageHandler.Object);
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
@@ -545,7 +545,7 @@ namespace System.Web.Http.ModelBinding
             );
             Mock<DelegatingHandler> customMessageHandler = new Mock<DelegatingHandler>()
             {
-                CallBase = true
+                CallBase = true,
             };
             config.MessageHandlers.Add(customMessageHandler.Object);
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();

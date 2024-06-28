@@ -26,7 +26,7 @@ namespace System.IO.Tests
                 @"file://www.microsoft.com",
                 @"bad::$DATA",
                 @"C  :",
-                @"C  :\somedir"
+                @"C  :\somedir",
             };
 
         public static TheoryData<string> TestData_Spaces => new TheoryData<string> { " ", "   " };
@@ -36,7 +36,7 @@ namespace System.IO.Tests
             {
                 // One and two periods have special meaning (current and parent dir)
                 "...",
-                "...."
+                "....",
             };
 
         public static TheoryData<string> TestData_Wildcards => new TheoryData<string> { "*", "?" };
@@ -47,7 +47,7 @@ namespace System.IO.Tests
                 // These are supported by Windows although .NET blocked them historically
                 "\"",
                 "<",
-                ">"
+                ">",
             };
 
         public static TheoryData<string> TestData_UnicodeWhiteSpace =>
@@ -66,7 +66,7 @@ namespace System.IO.Tests
                 @"\\LOCALHOST",
                 @"\\LOCALHOST\",
                 @"\\LOCALHOST\\",
-                @"\\LOCALHOST\.."
+                @"\\LOCALHOST\..",
             };
 
         public static TheoryData<string> TestData_InvalidDriveLetters =>
@@ -80,7 +80,7 @@ namespace System.IO.Tests
                 { @"[://" },
                 { @"`:/foo " },
                 { @"{:/" },
-                { @"]:" }
+                { @"]:" },
             };
 
         public static TheoryData<string> TestData_ValidDriveLetters =>
@@ -94,7 +94,7 @@ namespace System.IO.Tests
                 { @"D://" },
                 { @"E:/foo " },
                 { @"F:/" },
-                { @"G:" }
+                { @"G:" },
             };
 
         public static TheoryData<string, string> TestData_GetDirectoryName =>
@@ -108,7 +108,7 @@ namespace System.IO.Tests
                 { Path.Combine("dir", "baz", "bar"), Path.Combine("dir", "baz") },
                 { Path.Combine("..", "..", "files.txt"), Path.Combine("..", "..") },
                 { Path.DirectorySeparatorChar + "foo", Path.DirectorySeparatorChar.ToString() },
-                { Path.DirectorySeparatorChar.ToString(), null }
+                { Path.DirectorySeparatorChar.ToString(), null },
             };
 
         public static TheoryData<string, string> TestData_GetDirectoryName_Windows =>
@@ -120,7 +120,7 @@ namespace System.IO.Tests
                 { @"dir\\baz", "dir" },
                 { @"dir//baz", "dir" },
                 { @"C:\foo", @"C:\" },
-                { @"C:foo", "C:" }
+                { @"C:foo", "C:" },
             };
 
         public static TheoryData<string, string> TestData_GetExtension =>
@@ -137,7 +137,7 @@ namespace System.IO.Tests
                 { "file.e xe", ".e xe" },
                 { "file. ", ". " },
                 { " file. ", ". " },
-                { " file.extension", ".extension" }
+                { " file.extension", ".extension" },
             };
 
         public static TheoryData<string, string> TestData_GetFileName =>
@@ -154,7 +154,7 @@ namespace System.IO.Tests
                 { Path.Combine("baz", "file.exe"), "file.exe" },
                 { Path.Combine("baz", "file.exe") + Path.AltDirectorySeparatorChar, "" },
                 { Path.Combine("bar", "baz", "file.exe"), "file.exe" },
-                { Path.Combine("bar", "baz", "file.exe") + Path.DirectorySeparatorChar, "" }
+                { Path.Combine("bar", "baz", "file.exe") + Path.DirectorySeparatorChar, "" },
             };
 
         public static TheoryData<string, string> TestData_GetFileNameWithoutExtension =>
@@ -164,7 +164,7 @@ namespace System.IO.Tests
                 { "file", "file" },
                 { "file.exe", "file" },
                 { Path.Combine("bar", "baz", "file.exe"), "file" },
-                { Path.Combine("bar", "baz") + Path.DirectorySeparatorChar, "" }
+                { Path.Combine("bar", "baz") + Path.DirectorySeparatorChar, "" },
             };
 
         public static TheoryData<string, string> TestData_GetPathRoot_Unc =>
@@ -200,7 +200,7 @@ namespace System.IO.Tests
                 {
                     @"\\?\C:\foo\bar.txt",
                     PathFeatures.IsUsingLegacyPathNormalization() ? @"\\?\C:" : @"\\?\C:\"
-                }
+                },
             };
 
         public static TheoryData<string, string> TestData_GetPathRoot_Windows =>

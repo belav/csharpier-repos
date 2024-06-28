@@ -59,10 +59,9 @@ namespace System.Text.Json.Nodes
             {
                 JsonValueKind.Null => null,
                 JsonValueKind.Object => new JsonObject(element, options),
-                _ =>
-                    throw new InvalidOperationException(
-                        SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object))
-                    )
+                _ => throw new InvalidOperationException(
+                    SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Object))
+                ),
             };
         }
 
@@ -101,7 +100,7 @@ namespace System.Text.Json.Nodes
                 _dictionary = new JsonPropertyDictionary<JsonNode?>(
                     caseInsensitive,
                     dictionary.Count
-                )
+                ),
             };
 
             foreach (KeyValuePair<string, JsonNode?> item in dictionary)

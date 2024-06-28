@@ -703,7 +703,7 @@ namespace System.Speech.Internal
         private enum NodeColor
         {
             BLACK = 0,
-            RED = 1
+            RED = 1,
         }
 
         #endregion

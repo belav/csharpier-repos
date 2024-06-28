@@ -630,7 +630,7 @@ namespace TypeDictTestTypes
                 new object[]
                 {
                     new MyStruct { m_IntMember = 2, m_StringMember = "fff" },
-                    "TypeDictTestTypes.MyStruct"
+                    "TypeDictTestTypes.MyStruct",
                 }
             );
         }
@@ -1059,7 +1059,7 @@ namespace BaseTypeDict
                 {
                     TypeOf.BTDT_MyClass2,
                     TypeOf.BTDT_MyClass3,
-                    TypeOf.BTDT_MyClass4
+                    TypeOf.BTDT_MyClass4,
                 }
             )
             {
@@ -1072,7 +1072,7 @@ namespace BaseTypeDict
                 {
                     TypeOf.BTDT_MyClass4,
                     TypeOf.BTDT_MyClass3,
-                    TypeOf.BTDT_MyClass2
+                    TypeOf.BTDT_MyClass2,
                 }
             )
             {
@@ -1085,7 +1085,7 @@ namespace BaseTypeDict
                 {
                     TypeOf.BTDT_MyClass2,
                     TypeOf.BTDT_MyClass4_2,
-                    TypeOf.BTDT_MyClass4_3
+                    TypeOf.BTDT_MyClass4_3,
                 }
             )
             {
@@ -1098,7 +1098,7 @@ namespace BaseTypeDict
                 {
                     TypeOf.BTDT_MyClass4_3,
                     TypeOf.BTDT_MyClass4_2,
-                    TypeOf.BTDT_MyClass2
+                    TypeOf.BTDT_MyClass2,
                 }
             )
             {
@@ -2421,7 +2421,7 @@ namespace TemplateDependencyFromGenArgs
                 "TestClass.MyGenMethod<O3`1<>+Nested<O2`1<>+Nested<O1`2<>+Nested<CommonType1,CommonType2>>>>()",
                 "TestClass.NestedTestClass.MyGenMethod<P3`1<>+Nested<P2`1<>+Nested<P1`2<>+Nested<CommonType1,CommonType2>>>>()",
                 "TestClass.NestedGenTestClass<Q3`1<>+Nested<Q2`1<>+Nested<Q1`2<>+Nested<CommonType1,CommonType2>>>>.MyMethod()",
-                "TestClass.NestedGenTestClass<R3`1<>+Nested<R2`1<>+Nested<R1`2<>+Nested<CommonType1,CommonType2>>>>.MyGenMethod<CommonType1>()"
+                "TestClass.NestedGenTestClass<R3`1<>+Nested<R2`1<>+Nested<R1`2<>+Nested<CommonType1,CommonType2>>>>.MyGenMethod<CommonType1>()",
             };
 
             var t = typeof(CallerType<,>).MakeGenericType(TypeOf.CommonType1, TypeOf.CommonType2);

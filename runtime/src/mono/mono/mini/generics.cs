@@ -630,7 +630,7 @@ class Tests
 
     enum MyEnumUlong : ulong
     {
-        Value_2 = 2
+        Value_2 = 2,
     }
 
     public static int test_0_regress_550964_constrained_enum_long()
@@ -1104,7 +1104,7 @@ class Tests
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     class Doc
@@ -1221,7 +1221,7 @@ class Tests
 
     enum ConstrainedEnum
     {
-        Val = 1
+        Val = 1,
     }
 
     public static int test_0_regress_constrained_iface_call_enum()
@@ -1363,7 +1363,7 @@ class Tests
     enum AnEnum
     {
         A,
-        B
+        B,
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -1418,13 +1418,13 @@ class Tests
     enum Enum1
     {
         A,
-        B
+        B,
     }
 
     enum Enum2
     {
         A,
-        B
+        B,
     }
 
     public static int test_0_partial_sharing_ginst()

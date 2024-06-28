@@ -154,7 +154,7 @@ namespace System.IO.Pipes.Tests
                 Task[] tasks = new[]
                 {
                     Task.Run(() => server.WaitForConnection()),
-                    Task.Run(() => client.Connect())
+                    Task.Run(() => client.Connect()),
                 };
 
                 Assert.True(Task.WaitAll(tasks, 20_000));

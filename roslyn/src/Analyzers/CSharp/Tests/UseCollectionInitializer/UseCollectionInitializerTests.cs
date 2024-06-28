@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCollectionInitialize
             LanguageVersion? languageVersion = null
         )
         {
-            var test = new VerifyCS.Test { TestCode = testCode, FixedCode = testCode, };
+            var test = new VerifyCS.Test { TestCode = testCode, FixedCode = testCode };
 
             if (languageVersion != null)
                 test.LanguageVersion = languageVersion.Value;

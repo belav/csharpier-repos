@@ -286,7 +286,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x85,
                 0x10,
                 0x85,
-                0x86
+                0x86,
             };
             Rfc2898DeriveBytes pkcs5 = new Rfc2898DeriveBytes(
                 "All n-entities must communicate with other n-entities via n-1 entiteeheehees",
@@ -333,7 +333,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x26,
                 0x83,
                 0xdf,
-                0xe8
+                0xe8,
             };
             Rfc2898DeriveBytes pkcs5 = new Rfc2898DeriveBytes(
                 "All n-entities must communicate with other n-entities via n-1 entiteeheehees",
@@ -386,7 +386,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x85,
                 0x10,
                 0x85,
-                0x86
+                0x86,
             };
             Assert.AreEqual(expected_part1, key1, "RFC3211_TC2_Splitted_TwoBlocks-1");
             byte[] expected_part2 =
@@ -406,7 +406,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x26,
                 0x83,
                 0xdf,
-                0xe8
+                0xe8,
             };
             byte[] key2 = pkcs5.GetBytes(16);
             Assert.AreEqual(expected_part2, key2, "RFC3211_TC2_Splitted_TwoBlocks-2");

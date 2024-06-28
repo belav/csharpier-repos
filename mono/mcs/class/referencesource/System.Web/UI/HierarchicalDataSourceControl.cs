@@ -20,7 +20,7 @@ namespace System.Web.UI
     {
         private static readonly object EventDataSourceChanged = new object();
 
-        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never),]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override string ClientID
         {
             get { return base.ClientID; }
@@ -37,13 +37,13 @@ namespace System.Web.UI
             set { throw new NotSupportedException(); }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override ControlCollection Controls
         {
             get { return base.Controls; }
         }
 
-        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never),]
+        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override bool EnableTheming
         {
             get { return false; }
@@ -55,7 +55,7 @@ namespace System.Web.UI
             }
         }
 
-        [Browsable(false), DefaultValue(""), EditorBrowsable(EditorBrowsableState.Never),]
+        [Browsable(false), DefaultValue(""), EditorBrowsable(EditorBrowsableState.Never)]
         public override string SkinID
         {
             get { return String.Empty; }
@@ -71,7 +71,7 @@ namespace System.Web.UI
         /// Gets or sets a value that indicates whether a control should be rendered on
         /// the page.
         /// </summary>
-        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never),]
+        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Visible
         {
             get { return false; }
@@ -83,7 +83,7 @@ namespace System.Web.UI
             }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override void ApplyStyleSheetSkin(Page page)
         {
             base.ApplyStyleSheetSkin(page);
@@ -97,7 +97,7 @@ namespace System.Web.UI
             return new EmptyControlCollection(this);
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override Control FindControl(string id)
         {
             return base.FindControl(id);
@@ -105,7 +105,7 @@ namespace System.Web.UI
 
         /// <devdoc>
         /// </devdoc>
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override void Focus()
         {
             throw new NotSupportedException(SR.GetString(SR.NoFocusSupport, this.GetType().Name));
@@ -113,7 +113,7 @@ namespace System.Web.UI
 
         protected abstract HierarchicalDataSourceView GetHierarchicalView(string viewPath);
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool HasControls()
         {
             return base.HasControls();
@@ -126,7 +126,7 @@ namespace System.Web.UI
                 onDataSourceChangedHandler(this, e);
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override void RenderControl(HtmlTextWriter writer)
         {
             base.RenderControl(writer);

@@ -96,7 +96,7 @@ public class SocketTransportOptionsTests : LoggedTestBase
         {
             yield return new object[]
             {
-                new UnixDomainSocketEndPoint($"/tmp/{DateTime.UtcNow:yyyyMMddTHHmmss.fff}.sock")
+                new UnixDomainSocketEndPoint($"/tmp/{DateTime.UtcNow:yyyyMMddTHHmmss.fff}.sock"),
             };
         }
 

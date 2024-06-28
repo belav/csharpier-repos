@@ -774,7 +774,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 FullyQualifiedTypeName = fullyQualifiedTypeName,
                 MemberName = memberName,
-                ExpectedSignature = expectedSignature
+                ExpectedSignature = expectedSignature,
             };
         }
 
@@ -944,14 +944,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     return new List<object[]>()
                     {
                         new object[] { DebugInformationFormat.Pdb },
-                        new object[] { DebugInformationFormat.PortablePdb }
+                        new object[] { DebugInformationFormat.PortablePdb },
                     };
                 }
                 else
                 {
                     return new List<object[]>()
                     {
-                        new object[] { DebugInformationFormat.PortablePdb }
+                        new object[] { DebugInformationFormat.PortablePdb },
                     };
                 }
             }
@@ -960,7 +960,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public static IEnumerable<object[]> PdbFormats =>
             new List<object[]>(ExternalPdbFormats)
             {
-                new object[] { DebugInformationFormat.Embedded }
+                new object[] { DebugInformationFormat.Embedded },
             };
 
         #endregion

@@ -40,7 +40,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -99,7 +99,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -127,7 +127,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -154,7 +154,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -181,7 +181,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -204,7 +204,7 @@ namespace System.Collections.ObjectModel.Tests
         {
             KeyValuePair<int, string>[] expectedArr = new KeyValuePair<int, string>[]
             {
-                new KeyValuePair<int, string>(1, "one")
+                new KeyValuePair<int, string>(1, "one"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -225,7 +225,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -253,7 +253,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -281,7 +281,7 @@ namespace System.Collections.ObjectModel.Tests
                 new KeyValuePair<int, string>(2, "two"),
                 new KeyValuePair<int, string>(3, "three"),
                 new KeyValuePair<int, string>(4, "four"),
-                new KeyValuePair<int, string>(5, "five")
+                new KeyValuePair<int, string>(5, "five"),
             };
             DummyDictionary<int, string> dummyExpectedDict = new DummyDictionary<int, string>(
                 expectedArr
@@ -320,7 +320,7 @@ namespace System.Collections.ObjectModel.Tests
                 {
                     { 1, 2 },
                     { 2, 4 },
-                    { 3, 6 }
+                    { 3, 6 },
                 }
             );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(dict);

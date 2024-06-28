@@ -48,7 +48,7 @@ namespace DebuggerTests
                         type = "object",
                         subtype = "error",
                         className = "DebuggerTests.CustomException",
-                        uncaught = false
+                        uncaught = false,
                     }
                 ),
                 "exception0.data"
@@ -83,7 +83,7 @@ namespace DebuggerTests
                         type = "object",
                         subtype = "error",
                         className = "DebuggerTests.CustomException",
-                        uncaught = true
+                        uncaught = true,
                     }
                 ),
                 "exception1.data"
@@ -112,7 +112,7 @@ namespace DebuggerTests
                         type = "object",
                         subtype = "error",
                         className = "TypeError",
-                        uncaught = false
+                        uncaught = false,
                     }
                 ),
                 "exception0.data"
@@ -134,7 +134,7 @@ namespace DebuggerTests
                         type = "object",
                         subtype = "error",
                         className = "RangeError",
-                        uncaught = true
+                        uncaught = true,
                     }
                 ),
                 "exception1.data"
@@ -230,6 +230,7 @@ namespace DebuggerTests
                             type = "object",
                             subtype = "error",
                             className = "Error" // BUG?: "DebuggerTests.CustomException"
+                            ,
                         }
                     ),
                     "exception"
@@ -275,7 +276,7 @@ namespace DebuggerTests
                         {
                             type = "object",
                             subtype = "error",
-                            className = "RangeError"
+                            className = "RangeError",
                         }
                     ),
                     "exception"
@@ -333,7 +334,7 @@ namespace DebuggerTests
                         type = "object",
                         subtype = "error",
                         className = exception_type,
-                        uncaught = true
+                        uncaught = true,
                     }
                 ),
                 "exception.data"
@@ -390,7 +391,7 @@ namespace DebuggerTests
                         type = "object",
                         subtype = "error",
                         className = "DebuggerTests.CustomException",
-                        uncaught = true
+                        uncaught = true,
                     }
                 ),
                 "exception1.data"
@@ -482,7 +483,7 @@ namespace DebuggerTests
                         subtype = "error",
                         className = class_name,
                         uncaught = false,
-                        description = "not implemented caught"
+                        description = "not implemented caught",
                     }
                 ),
                 "exception0.data"
@@ -494,7 +495,7 @@ namespace DebuggerTests
             var ptd = JObject.FromObject(
                 new
                 {
-                    value = new { objectId = pause_location["data"]["objectId"]?.Value<string>() }
+                    value = new { objectId = pause_location["data"]["objectId"]?.Value<string>() },
                 }
             );
             var res = await InvokeGetter(ptd, "Message");
@@ -529,7 +530,7 @@ namespace DebuggerTests
                         subtype = "error",
                         className = class_name,
                         uncaught = true,
-                        description = "not implemented uncaught"
+                        description = "not implemented uncaught",
                     }
                 ),
                 "exception1.data"
@@ -541,7 +542,7 @@ namespace DebuggerTests
             ptd = JObject.FromObject(
                 new
                 {
-                    value = new { objectId = pause_location["data"]["objectId"]?.Value<string>() }
+                    value = new { objectId = pause_location["data"]["objectId"]?.Value<string>() },
                 }
             );
             res = await InvokeGetter(ptd, "Message");

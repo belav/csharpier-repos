@@ -94,9 +94,9 @@ public class PreserveComponentStateBenchmark
         _serviceScope = _serviceProvider.GetRequiredService<IServiceScopeFactory>().CreateScope();
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = _serviceScope.ServiceProvider
+            RequestServices = _serviceScope.ServiceProvider,
         };
 
-        return new ViewContext { HttpContext = httpContext, };
+        return new ViewContext { HttpContext = httpContext };
     }
 }

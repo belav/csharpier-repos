@@ -18,7 +18,7 @@ public class W3CLoggerTests
         var options = new W3CLoggerOptions()
         {
             LoggingFields = W3CLoggingFields.Date | W3CLoggingFields.Time,
-            LogDirectory = path
+            LogDirectory = path,
         };
         try
         {
@@ -77,7 +77,7 @@ public class W3CLoggerTests
         {
             LoggingFields =
                 W3CLoggingFields.UriQuery | W3CLoggingFields.Host | W3CLoggingFields.ProtocolStatus,
-            LogDirectory = path
+            LogDirectory = path,
         };
         try
         {

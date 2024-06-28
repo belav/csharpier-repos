@@ -112,7 +112,7 @@ namespace System.IO
             (Char)28,
             (Char)29,
             (Char)30,
-            (Char)31
+            (Char)31,
         };
 
         // Trim trailing white spaces, tabs etc but don't be aggressive in removing everything that has UnicodeCategory of trailing space.
@@ -161,7 +161,7 @@ namespace System.IO
             (Char)30,
             (Char)31,
             '*',
-            '?'
+            '?',
         };
 
         private static readonly char[] InvalidFileNameChars =
@@ -206,7 +206,7 @@ namespace System.IO
             '*',
             '?',
             '\\',
-            '/'
+            '/',
         };
 
         public static readonly char PathSeparator = ';';
@@ -1573,11 +1573,9 @@ namespace System.IO
         {
             if (path1 == null || path2 == null || path3 == null)
                 throw new ArgumentNullException(
-                    (path1 == null)
-                        ? "path1"
-                        : (path2 == null)
-                            ? "path2"
-                            : "path3"
+                    (path1 == null) ? "path1"
+                    : (path2 == null) ? "path2"
+                    : "path3"
                 );
             Contract.EndContractBlock();
             CheckInvalidPathChars(path1);
@@ -1591,13 +1589,10 @@ namespace System.IO
         {
             if (path1 == null || path2 == null || path3 == null || path4 == null)
                 throw new ArgumentNullException(
-                    (path1 == null)
-                        ? "path1"
-                        : (path2 == null)
-                            ? "path2"
-                            : (path3 == null)
-                                ? "path3"
-                                : "path4"
+                    (path1 == null) ? "path1"
+                    : (path2 == null) ? "path2"
+                    : (path3 == null) ? "path3"
+                    : "path4"
                 );
             Contract.EndContractBlock();
             CheckInvalidPathChars(path1);
@@ -1741,7 +1736,7 @@ namespace System.IO
             '2',
             '3',
             '4',
-            '5'
+            '5',
         };
 
         internal static String ToBase32StringSuitableForDirName(byte[] buff)

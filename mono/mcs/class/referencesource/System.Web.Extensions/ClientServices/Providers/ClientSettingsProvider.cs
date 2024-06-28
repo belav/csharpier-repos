@@ -523,7 +523,7 @@ namespace System.Web.ClientServices.Providers
                 typeof(ArrayList),
                 typeof(ProfilePropertyMetadata),
                 typeof(IDictionary<string, object>),
-                typeof(Collection<string>)
+                typeof(Collection<string>),
             };
 
             for (int iter = 0; iter < _KnownTypesArray.Length; iter++)
@@ -679,7 +679,7 @@ namespace System.Web.ClientServices.Providers
                 object[] paramValues = new object[]
                 {
                     propertyNames,
-                    id.IsAuthenticated && (id is ClientFormsIdentity)
+                    id.IsAuthenticated && (id is ClientFormsIdentity),
                 };
                 object obj = null;
                 try
@@ -839,7 +839,7 @@ namespace System.Web.ClientServices.Providers
                 object[] paramValues = new object[]
                 {
                     propertyValues,
-                    id.IsAuthenticated && (id is ClientFormsIdentity)
+                    id.IsAuthenticated && (id is ClientFormsIdentity),
                 };
 
                 object o = ProxyHelper.CreateWebRequestAndGetResponse(

@@ -103,12 +103,12 @@ namespace System.CommandLine.Tests.Help
         {
             var argument = new CliArgument<string>("the-args")
             {
-                Arity = new ArgumentArity(minArity, maxArity)
+                Arity = new ArgumentArity(minArity, maxArity),
             };
             var command = new CliCommand("the-command", "command help")
             {
                 argument,
-                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" }
+                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" },
             };
             var rootCommand = new CliRootCommand();
             rootCommand.Subcommands.Add(command);
@@ -136,17 +136,17 @@ namespace System.CommandLine.Tests.Help
         {
             var arg1 = new CliArgument<string>("arg1")
             {
-                Arity = new ArgumentArity(minArityForArg1, maxArityForArg1)
+                Arity = new ArgumentArity(minArityForArg1, maxArityForArg1),
             };
             var arg2 = new CliArgument<string>("arg2")
             {
-                Arity = new ArgumentArity(minArityForArg2, maxArityForArg2)
+                Arity = new ArgumentArity(minArityForArg2, maxArityForArg2),
             };
             var command = new CliCommand("the-command", "command help")
             {
                 arg1,
                 arg2,
-                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" }
+                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" },
             };
 
             var rootCommand = new CliRootCommand();
@@ -190,12 +190,12 @@ namespace System.CommandLine.Tests.Help
             var inner = new CliCommand("inner", "command help")
             {
                 new CliOption<string>("-v") { Description = "Sets the verbosity" },
-                new CliArgument<string[]>("inner-args")
+                new CliArgument<string[]>("inner-args"),
             };
             _ = new CliCommand("outer", "command help")
             {
                 inner,
-                new CliArgument<string[]>("outer-args")
+                new CliArgument<string[]>("outer-args"),
             };
 
             _helpBuilder.Write(inner, _console);
@@ -260,8 +260,8 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string[]>($"outer args {NewLine}\r\nwith new\nlines"),
                 new CliCommand("inner-command", "command help")
                 {
-                    new CliArgument<string>("inner-args")
-                }
+                    new CliArgument<string>("inner-args"),
+                },
             };
 
             _helpBuilder.Write(outer, _console);
@@ -286,8 +286,8 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string[]>("outer args long enough to wrap to a new line"),
                 new CliCommand("inner-command", "command help")
                 {
-                    new CliArgument<string[]>("inner-args")
-                }
+                    new CliArgument<string[]>("inner-args"),
+                },
             };
             //NB: Using Command with a fixed name, rather than RootCommand here
             //because RootCommand.ExecutableName returns different values when
@@ -355,7 +355,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command", "command help")
             {
-                new CliArgument<string>("arg command name") { Description = "test" }
+                new CliArgument<string>("arg command name") { Description = "test" },
             };
 
             _helpBuilder.Write(command, _console);
@@ -368,7 +368,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity." }
+                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity." },
             };
 
             _helpBuilder.Write(command, _console);
@@ -384,8 +384,8 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("-v")
                 {
                     Description = "Sets the verbosity.",
-                    HelpName = "argument for options"
-                }
+                    HelpName = "argument for options",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -401,8 +401,8 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("--verbosity", "-v")
                 {
                     HelpName = "LEVEL",
-                    Description = "Sets the verbosity."
-                }
+                    Description = "Sets the verbosity.",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -425,7 +425,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command")
             {
-                new CliOption<VerbosityOptions>("--verbosity", "-v") { HelpName = "LEVEL" }
+                new CliOption<VerbosityOptions>("--verbosity", "-v") { HelpName = "LEVEL" },
             };
 
             _helpBuilder.Write(command, _console);
@@ -439,7 +439,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command", "Help text from description")
             {
-                new CliArgument<string>("the-arg") { Description = "Help text from HelpDetail" }
+                new CliArgument<string>("the-arg") { Description = "Help text from HelpDetail" },
             };
 
             var expected =
@@ -462,12 +462,12 @@ namespace System.CommandLine.Tests.Help
             var hiddenArg = new CliArgument<int>(hiddenArgName)
             {
                 Description = hiddenDesc,
-                Hidden = true
+                Hidden = true,
             };
             var visibleArg = new CliArgument<int>(visibleArgName)
             {
                 Description = visibleDesc,
-                Hidden = false
+                Hidden = false,
             };
             command.Arguments.Add(hiddenArg);
             command.Arguments.Add(visibleArg);
@@ -489,7 +489,7 @@ namespace System.CommandLine.Tests.Help
         {
             var reused = new CliArgument<string>("reused")
             {
-                Description = "This argument is valid on both outer and inner commands"
+                Description = "This argument is valid on both outer and inner commands",
             };
             var inner = new CliCommand("inner", "The inner command") { reused };
             _ = new CliCommand("outer") { reused, inner };
@@ -513,15 +513,15 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("the-inner-command-arg")
                 {
                     Description = "The argument for the inner command",
-                }
+                },
             };
             _ = new CliCommand("outer", "HelpDetail text for the outer command")
             {
                 new CliArgument<string>("outer-command-arg")
                 {
-                    Description = "The argument for the outer command"
+                    Description = "The argument for the outer command",
                 },
-                inner
+                inner,
             };
 
             var expected =
@@ -541,8 +541,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliArgument<string>("outer-command-arg")
                 {
-                    Description = $"The argument\r\nfor the\ninner command"
-                }
+                    Description = $"The argument\r\nfor the\ninner command",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -564,7 +564,7 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("outer-command-arg")
                 {
                     Description = $"The argument\r\nfor the\ninner command",
-                }
+                },
             };
 
             var helpBuilder = GetHelpBuilder(25);
@@ -592,7 +592,7 @@ namespace System.CommandLine.Tests.Help
 
             var command = new CliCommand("outer", "Help text for the outer command")
             {
-                new CliArgument<string>("outer-command-arg") { Description = longCmdText }
+                new CliArgument<string>("outer-command-arg") { Description = longCmdText },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -616,7 +616,7 @@ namespace System.CommandLine.Tests.Help
 
             var command = new CliRootCommand
             {
-                new CliArgument<string>(name) { Description = description }
+                new CliArgument<string>(name) { Description = description },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -727,7 +727,7 @@ namespace System.CommandLine.Tests.Help
             var argument = new CliArgument<string>("the-arg")
             {
                 Description = "Help text from HelpDetail",
-                DefaultValueFactory = (_) => "the-arg-value"
+                DefaultValueFactory = (_) => "the-arg-value",
             };
 
             var command = new CliCommand("the-command", "Help text from description") { argument };
@@ -747,7 +747,7 @@ namespace System.CommandLine.Tests.Help
             var argument = new CliArgument<string>("the-arg")
             {
                 Description = "The argument description",
-                DefaultValueFactory = (_) => ""
+                DefaultValueFactory = (_) => "",
             };
 
             var command = new CliCommand("the-command", "The command description") { argument };
@@ -790,12 +790,12 @@ namespace System.CommandLine.Tests.Help
             };
             var otherArgument = new CliArgument<string>("the-other-arg")
             {
-                DefaultValueFactory = (_) => "the-other-arg-value"
+                DefaultValueFactory = (_) => "the-other-arg-value",
             };
             var command = new CliCommand("the-command", "Help text from description")
             {
                 argument,
-                otherArgument
+                otherArgument,
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -819,8 +819,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliArgument<List<int>>("filter-size")
                 {
-                    DefaultValueFactory = (_) => new List<int>() { 0, 2, 4 }
-                }
+                    DefaultValueFactory = (_) => new List<int>() { 0, 2, 4 },
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -857,7 +857,7 @@ namespace System.CommandLine.Tests.Help
         {
             var commandLineBuilder = new CliCommand("noOptions")
             {
-                new CliCommand("outer", "description for outer")
+                new CliCommand("outer", "description for outer"),
             };
 
             _helpBuilder.Write(commandLineBuilder, _console);
@@ -883,7 +883,7 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<string>("-x"),
                 new CliOption<string>("-n"),
-                new HelpOption()
+                new HelpOption(),
             };
 
             _helpBuilder.Write(command, _console);
@@ -924,8 +924,8 @@ namespace System.CommandLine.Tests.Help
                 },
                 new CliOption<string>("--bbbbbbbbbb", "-b")
                 {
-                    Description = "An option with 15 characters"
-                }
+                    Description = "An option with 15 characters",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -949,8 +949,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<string>("-multi", "--alt-option")
                 {
-                    Description = "HelpDetail for option"
-                }
+                    Description = "HelpDetail for option",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -967,8 +967,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<string>("--m", "--alt-option")
                 {
-                    Description = "HelpDetail for option"
-                }
+                    Description = "HelpDetail for option",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -983,8 +983,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<bool>("--aaa", "-a")
                 {
-                    Description = $"Help{NewLine}for \r\n the\noption"
-                }
+                    Description = $"Help{NewLine}for \r\n the\noption",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1036,7 +1036,7 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("--aaa", "-a")
                 {
                     Description = longOptionText,
-                    DefaultValueFactory = (_) => "the quick brown fox jumps over the lazy dog"
+                    DefaultValueFactory = (_) => "the quick brown fox jumps over the lazy dog",
                 },
                 new CliOption<string>("-y") { Description = "Option with a short description" },
             };
@@ -1060,7 +1060,7 @@ namespace System.CommandLine.Tests.Help
 
             var command = new CliCommand("test")
             {
-                new CliOption<bool>(alias) { Description = description }
+                new CliOption<bool>(alias) { Description = description },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -1080,7 +1080,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<bool>("--required") { Required = true }
+                new CliOption<bool>("--required") { Required = true },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1095,7 +1095,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("--required", "-r") { Required = true, HelpName = "ARG" }
+                new CliOption<string>("--required", "-r") { Required = true, HelpName = "ARG" },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1150,7 +1150,7 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<bool>("--first", "-f"),
                 new CliOption<bool>("--second", "-s"),
                 new CliOption<bool>("--third"),
-                new CliOption<bool>("--last", "-l")
+                new CliOption<bool>("--last", "-l"),
             };
 
             _helpBuilder.Write(command, _console);
@@ -1167,7 +1167,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("-z", "-a", "--zzz", "--aaa")
+                new CliOption<string>("-z", "-a", "--zzz", "--aaa"),
             };
 
             _helpBuilder.Write(command, _console);
@@ -1183,8 +1183,8 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("-arg")
                 {
                     DefaultValueFactory = (_) => "the-arg-value",
-                    HelpName = "the-arg"
-                }
+                    HelpName = "the-arg",
+                },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -1203,8 +1203,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<List<int>>("--filter-size")
                 {
-                    DefaultValueFactory = (_) => new List<int> { 0, 2, 4 }
-                }
+                    DefaultValueFactory = (_) => new List<int> { 0, 2, 4 },
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1222,8 +1222,8 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<string[]>("--prefixes")
                 {
-                    DefaultValueFactory = (_) => new[] { "^(TODO|BUG)", "^HACK" }
-                }
+                    DefaultValueFactory = (_) => new[] { "^(TODO|BUG)", "^HACK" },
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1245,8 +1245,11 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliCommand("inner-er", "inner-er description")
                 {
-                    new CliOption<string>("some-option") { Description = "some-option description" }
-                }
+                    new CliOption<string>("some-option")
+                    {
+                        Description = "some-option description",
+                    },
+                },
             };
 
             var sibling = new CliCommand("sibling", "sibling description");
@@ -1266,8 +1269,8 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("outer-args"),
                 new CliCommand("inner", $"inner{NewLine}command help \r\n with \nnewlines")
                 {
-                    new CliArgument<string>("inner-args")
-                }
+                    new CliArgument<string>("inner-args"),
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1298,8 +1301,8 @@ namespace System.CommandLine.Tests.Help
                 new CliCommand("inner-command", longSubcommandDescription)
                 {
                     new CliArgument<string[]>("inner-args"),
-                    new CliOption<string>("--verbosity", "-v")
-                }
+                    new CliOption<string>("--verbosity", "-v"),
+                },
             };
 
             helpBuilder.Write(command, _console);
@@ -1389,7 +1392,7 @@ namespace System.CommandLine.Tests.Help
             var argument = new CliArgument<string>("the-arg");
             var otherArgumentHidden = new CliArgument<string>("the-other-hidden-arg")
             {
-                Hidden = true
+                Hidden = true,
             };
             argument.DefaultValueFactory = _ => "the-arg-value";
             otherArgumentHidden.DefaultValueFactory = _ => "the-other-hidden-arg-value";
@@ -1401,8 +1404,8 @@ namespace System.CommandLine.Tests.Help
                 {
                     argument,
                     otherArgumentHidden,
-                    new CliArgument<string>("inner-other-arg-no-default")
-                }
+                    new CliArgument<string>("inner-other-arg-no-default"),
+                },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(LargeMaxWidth);
@@ -1419,17 +1422,17 @@ namespace System.CommandLine.Tests.Help
         {
             var argument = new CliArgument<string>("the-arg")
             {
-                DefaultValueFactory = (_) => "the-arg-value"
+                DefaultValueFactory = (_) => "the-arg-value",
             };
             var otherArgument = new CliArgument<string>("the-other-arg")
             {
-                DefaultValueFactory = (_) => "the-other-arg-value"
+                DefaultValueFactory = (_) => "the-other-arg-value",
             };
 
             var command = new CliCommand("outer", "outer command help")
             {
                 new CliArgument<string>("outer-args"),
-                new CliCommand("inner", "inner command help") { argument, otherArgument }
+                new CliCommand("inner", "inner command help") { argument, otherArgument },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(LargeMaxWidth);
@@ -1456,7 +1459,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("-x") { Description = "the-option-description" }
+                new CliOption<string>("-x") { Description = "the-option-description" },
             };
 
             var helpBuilder = GetHelpBuilder();

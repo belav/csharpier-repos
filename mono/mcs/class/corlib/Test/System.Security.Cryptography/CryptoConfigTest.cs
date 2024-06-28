@@ -410,7 +410,7 @@ namespace MonoTests.System.Security.Cryptography
             0x0D,
             0x01,
             0x01,
-            0x04
+            0x04,
         };
 
         [Test]

@@ -1239,7 +1239,7 @@ public class X
                         0x7a,
                         0x7a,
                         0x7a,
-                        0x00
+                        0x00,
                     }
                 },
                 {
@@ -1257,7 +1257,7 @@ public class X
                         0x7a,
                         0x7a,
                         0x7a,
-                        0x00
+                        0x00,
                     }
                 },
                 {
@@ -1304,7 +1304,7 @@ public class X
                         0xe1,
                         0x88,
                         0xb4,
-                        0x29
+                        0x29,
                     }
                 },
                 { "CustomMarshaler10", new byte[] { 0x2c, 0x00, 0x00, 0x00, 0x00 } },
@@ -1335,7 +1335,7 @@ public class X
                         0x00,
                         0x64,
                         0x64,
-                        0x64
+                        0x64,
                     }
                 },
                 {
@@ -1354,7 +1354,7 @@ public class X
                         0xf0,
                         0xaa,
                         0x9b,
-                        0x96
+                        0x96,
                     }
                 },
             };
@@ -1488,7 +1488,7 @@ class X
                         0x00,
                         0x64,
                         0x64,
-                        0x64
+                        0x64,
                     }
                 },
             };
@@ -1558,7 +1558,7 @@ class X
                         0x00,
                         0x64,
                         0x64,
-                        0x64
+                        0x64,
                     }
                 },
             };

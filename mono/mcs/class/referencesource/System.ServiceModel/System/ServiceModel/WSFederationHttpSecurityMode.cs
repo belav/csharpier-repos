@@ -7,7 +7,7 @@ namespace System.ServiceModel
     {
         None,
         Message,
-        TransportWithMessageCredential
+        TransportWithMessageCredential,
     }
 
     static class WSFederationHttpSecurityModeHelper

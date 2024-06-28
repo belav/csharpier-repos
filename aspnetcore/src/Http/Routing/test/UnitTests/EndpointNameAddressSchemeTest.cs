@@ -14,12 +14,12 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), }
+            metadata: new object[] { new EndpointNameMetadata("name1") }
         );
 
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "/b",
-            metadata: new object[] { new EndpointNameMetadata("name2"), }
+            metadata: new object[] { new EndpointNameMetadata("name2") }
         );
 
         var addressScheme = CreateAddressScheme(endpoint1, endpoint2);
@@ -80,7 +80,7 @@ public class EndpointNameAddressSchemeTest
     {
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), }
+            metadata: new object[] { new EndpointNameMetadata("name1") }
         );
         var dynamicDataSource = new DynamicEndpointDataSource(new[] { endpoint1 });
 
@@ -94,7 +94,7 @@ public class EndpointNameAddressSchemeTest
         // Arrange 2
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "/b",
-            metadata: new object[] { new EndpointNameMetadata("name2"), }
+            metadata: new object[] { new EndpointNameMetadata("name2") }
         );
 
         // Act 2
@@ -178,33 +178,33 @@ public class EndpointNameAddressSchemeTest
             EndpointFactory.CreateRouteEndpoint(
                 "/a",
                 displayName: "a",
-                metadata: new object[] { new EndpointNameMetadata("name1"), }
+                metadata: new object[] { new EndpointNameMetadata("name1") }
             ),
             EndpointFactory.CreateRouteEndpoint(
                 "/b",
                 displayName: "b",
-                metadata: new object[] { new EndpointNameMetadata("name1"), }
+                metadata: new object[] { new EndpointNameMetadata("name1") }
             ),
             EndpointFactory.CreateRouteEndpoint(
                 "/c",
                 displayName: "c",
-                metadata: new object[] { new EndpointNameMetadata("name1"), }
+                metadata: new object[] { new EndpointNameMetadata("name1") }
             ),
             //// Not a duplicate
             EndpointFactory.CreateRouteEndpoint(
                 "/d",
                 displayName: "d",
-                metadata: new object[] { new EndpointNameMetadata("NAME1"), }
+                metadata: new object[] { new EndpointNameMetadata("NAME1") }
             ),
             EndpointFactory.CreateRouteEndpoint(
                 "/e",
                 displayName: "e",
-                metadata: new object[] { new EndpointNameMetadata("name2"), }
+                metadata: new object[] { new EndpointNameMetadata("name2") }
             ),
             EndpointFactory.CreateRouteEndpoint(
                 "/f",
                 displayName: "f",
-                metadata: new object[] { new EndpointNameMetadata("name2"), }
+                metadata: new object[] { new EndpointNameMetadata("name2") }
             ),
         };
 

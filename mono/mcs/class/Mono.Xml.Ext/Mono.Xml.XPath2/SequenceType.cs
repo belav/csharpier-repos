@@ -376,6 +376,7 @@ namespace Mono.Xml.XPath2
         Preceding,
         AncestorOrSelf,
         Namespace // only applicable under XPath 2.0, not XQuery 1.0
+        ,
     }
 
     public class XPathAxis

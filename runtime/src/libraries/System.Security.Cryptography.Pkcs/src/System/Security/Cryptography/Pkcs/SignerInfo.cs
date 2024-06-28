@@ -279,7 +279,7 @@ namespace System.Security.Cryptography.Pkcs
 
                         SignerInfo signerInfo = new SignerInfo(ref parsedData, _document)
                         {
-                            _parentSignerInfo = this
+                            _parentSignerInfo = this,
                         };
 
                         signerInfos.Add(signerInfo);

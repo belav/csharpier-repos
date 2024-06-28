@@ -11,7 +11,7 @@ internal static partial class Interop
         public enum SystemParametersAction : uint
         {
             SPI_GETICONTITLELOGFONT = 0x1F,
-            SPI_GETNONCLIENTMETRICS = 0x29
+            SPI_GETNONCLIENTMETRICS = 0x29,
         }
 
         [LibraryImport(Libraries.User32)]

@@ -84,7 +84,7 @@
                                     propertyMetadata.PropertyName,
                                     propertyResult.MemberName
                                 ),
-                                Message = propertyResult.Message
+                                Message = propertyResult.Message,
                             };
                         }
                     }

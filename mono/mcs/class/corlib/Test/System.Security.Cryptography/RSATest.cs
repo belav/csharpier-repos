@@ -238,7 +238,7 @@ namespace MonoTests.System.Security.Cryptography
             0x09,
             0x1d,
             0xbd,
-            0xcb
+            0xcb,
         };
         static byte[] rsaExponent = { 0x11 };
         static byte[] rsaP =
@@ -306,7 +306,7 @@ namespace MonoTests.System.Security.Cryptography
             0x58,
             0xfb,
             0x65,
-            0x99
+            0x99,
         };
         static byte[] rsaQ =
         {
@@ -373,7 +373,7 @@ namespace MonoTests.System.Security.Cryptography
             0xaf,
             0x46,
             0x15,
-            0x03
+            0x03,
         };
         static byte[] rsaDP =
         {
@@ -440,7 +440,7 @@ namespace MonoTests.System.Security.Cryptography
             0x1f,
             0x67,
             0xc9,
-            0x81
+            0x81,
         };
         static byte[] rsaDQ =
         {
@@ -507,7 +507,7 @@ namespace MonoTests.System.Security.Cryptography
             0x98,
             0x36,
             0xda,
-            0x3d
+            0x3d,
         };
         static byte[] rsaInverseQ =
         {
@@ -574,7 +574,7 @@ namespace MonoTests.System.Security.Cryptography
             0x79,
             0x80,
             0x39,
-            0xf7
+            0xf7,
         };
         static byte[] rsaD =
         {
@@ -705,7 +705,7 @@ namespace MonoTests.System.Security.Cryptography
             0x5b,
             0x1c,
             0xb3,
-            0xc1
+            0xc1,
         };
 
         static string xmlPrivate =

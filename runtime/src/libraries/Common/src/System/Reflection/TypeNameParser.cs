@@ -616,7 +616,7 @@ namespace System.Reflection
                     Array => elementType.MakeArrayType(),
                     Pointer => elementType.MakePointerType(),
                     ByRef => elementType.MakeByRefType(),
-                    _ => elementType.MakeArrayType(_rankOrModifier)
+                    _ => elementType.MakeArrayType(_rankOrModifier),
                 };
             }
         }

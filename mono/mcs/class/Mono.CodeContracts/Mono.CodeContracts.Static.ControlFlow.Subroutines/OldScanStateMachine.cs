@@ -202,7 +202,7 @@ namespace Mono.CodeContracts.Static.ControlFlow.Subroutines
             OutsideOld,
             InsideOld,
             InsertingOld,
-            InsertingOldAfterCall
+            InsertingOldAfterCall,
         }
         #endregion
     }

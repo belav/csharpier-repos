@@ -3501,7 +3501,7 @@ public partial class Class1<T>
             {
                 (Name: "b.cs", Content: source1),
                 (Name: "c.cs", Content: source2),
-                (Name: "a.cs", Content: source3)
+                (Name: "a.cs", Content: source3),
             };
 
             var expectedOutput =
@@ -3634,7 +3634,7 @@ public partial class Class1<T>
             {
                 (Name: "b.cs", Content: source1),
                 (Name: "c.cs", Content: source2),
-                (Name: "a.cs", Content: source3)
+                (Name: "a.cs", Content: source3),
             };
 
             var expectedOutput =

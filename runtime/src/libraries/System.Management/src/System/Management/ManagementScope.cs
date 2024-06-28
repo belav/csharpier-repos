@@ -425,7 +425,7 @@ namespace System.Management
             APTTYPE_STA = 0,
             APTTYPE_MTA = 1,
             APTTYPE_NA = 2,
-            APTTYPE_MAINSTA = 3
+            APTTYPE_MAINSTA = 3,
         }
 
         internal static ResetSecurity ResetSecurity_f;

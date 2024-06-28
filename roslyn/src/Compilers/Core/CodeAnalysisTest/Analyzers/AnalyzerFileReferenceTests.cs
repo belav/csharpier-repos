@@ -436,7 +436,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "/nostdlib",
                     $@"/r:""{corlib}""",
                     "/out:something.dll",
-                    source.Path
+                    source.Path,
                 },
                 new BuildPaths(
                     clientDir: directory.Path,
@@ -488,7 +488,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "/nostdlib",
                     $@"/r:""{corlib}""",
                     "/out:something.dll",
-                    source.Path
+                    source.Path,
                 },
                 new BuildPaths(
                     clientDir: directory.Path,
@@ -540,7 +540,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "Microsoft.CodeAnalysis.UnitTests.VisualBasicAndCSharpGenerator",
                     "Microsoft.CodeAnalysis.UnitTests.FSharpGenerator",
                     "Microsoft.CodeAnalysis.UnitTests.TestSourceAndIncrementalGenerator",
-                    "Microsoft.CodeAnalysis.UnitTests.TestIncrementalGenerator"
+                    "Microsoft.CodeAnalysis.UnitTests.TestIncrementalGenerator",
                 },
                 typeNames
             );
@@ -582,7 +582,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "Microsoft.CodeAnalysis.UnitTests.CSharpAndVisualBasicGenerator",
                     "Microsoft.CodeAnalysis.UnitTests.VisualBasicAndCSharpGenerator",
                     "Microsoft.CodeAnalysis.UnitTests.TestSourceAndIncrementalGenerator",
-                    "Microsoft.CodeAnalysis.UnitTests.TestIncrementalGenerator"
+                    "Microsoft.CodeAnalysis.UnitTests.TestIncrementalGenerator",
                 },
                 typeNames
             );
@@ -604,7 +604,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     "Microsoft.CodeAnalysis.UnitTests.CSharpAndVisualBasicGenerator",
                     "Microsoft.CodeAnalysis.UnitTests.VisualBasicAndCSharpGenerator",
                     "Microsoft.CodeAnalysis.UnitTests.TestSourceAndIncrementalGenerator",
-                    "Microsoft.CodeAnalysis.UnitTests.TestIncrementalGenerator"
+                    "Microsoft.CodeAnalysis.UnitTests.TestIncrementalGenerator",
                 },
                 typeNames
             );
@@ -676,7 +676,7 @@ public class Generator : ISourceGenerator
                         {
                             MetadataReference.CreateFromAssemblyInternal(
                                 typeof(ISourceGenerator).Assembly
-                            )
+                            ),
                         }
                     ),
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)

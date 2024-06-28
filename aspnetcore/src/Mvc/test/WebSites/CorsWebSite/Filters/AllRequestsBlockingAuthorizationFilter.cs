@@ -18,7 +18,7 @@ public class AllRequestsBlockingAuthorizationFilter : Attribute, IAuthorizationF
         context.Result = new ContentResult()
         {
             Content = "You are unauthorized!!",
-            StatusCode = 401
+            StatusCode = 401,
         };
     }
 }

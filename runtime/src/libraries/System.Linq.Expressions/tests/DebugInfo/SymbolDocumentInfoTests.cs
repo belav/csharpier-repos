@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
                 "\uD800\uDC00",
                 Guid.NewGuid(),
                 Guid.NewGuid(),
-                Guid.Empty
+                Guid.Empty,
             };
         }
 

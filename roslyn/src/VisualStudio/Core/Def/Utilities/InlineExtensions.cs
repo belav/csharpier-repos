@@ -18,7 +18,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             {
                 Run run => run.Text,
                 Hyperlink hyperlink => string.Join("", hyperlink.Inlines.Select(GetText)),
-                _ => null
+                _ => null,
             };
     }
 }

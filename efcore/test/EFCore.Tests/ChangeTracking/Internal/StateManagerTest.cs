@@ -57,7 +57,7 @@ public class StateManagerTest
         {
             Id = 77,
             AlternateId = 66,
-            Value = "Existing"
+            Value = "Existing",
         };
         context.Attach(entity);
         context.Attach(
@@ -65,7 +65,7 @@ public class StateManagerTest
             {
                 Id = 77,
                 AlternateId = 66,
-                Value = "New"
+                Value = "New",
             }
         );
 
@@ -185,7 +185,7 @@ public class StateManagerTest
             {
                 Id = 77,
                 AlternateId = 66,
-                Owned = new SingleKeyOwned()
+                Owned = new SingleKeyOwned(),
             }
         );
 
@@ -202,7 +202,7 @@ public class StateManagerTest
                             {
                                 Id = 78,
                                 AlternateId = 67,
-                                Owned = duplicateOwned
+                                Owned = duplicateOwned,
                             }
                         )
                 )
@@ -227,7 +227,7 @@ public class StateManagerTest
             {
                 Id = 77,
                 AlternateId = 66,
-                Owned = owned
+                Owned = owned,
             }
         );
 
@@ -239,7 +239,7 @@ public class StateManagerTest
             {
                 Id = 78,
                 AlternateId = 67,
-                Owned = duplicateOwned
+                Owned = duplicateOwned,
             }
         );
 
@@ -261,7 +261,7 @@ public class StateManagerTest
                 Id1 = 77,
                 Id2 = 78,
                 AlternateId1 = 66,
-                AlternateId2 = 67
+                AlternateId2 = 67,
             }
         );
 
@@ -276,7 +276,7 @@ public class StateManagerTest
                                 Id1 = 77,
                                 Id2 = 78,
                                 AlternateId1 = 66,
-                                AlternateId2 = 68
+                                AlternateId2 = 68,
                             }
                         )
                 )
@@ -301,7 +301,7 @@ public class StateManagerTest
             Id2 = 78,
             AlternateId1 = 66,
             AlternateId2 = 67,
-            Value = "Existing"
+            Value = "Existing",
         };
         context.Attach(entity);
         context.Attach(
@@ -311,7 +311,7 @@ public class StateManagerTest
                 Id2 = 78,
                 AlternateId1 = 66,
                 AlternateId2 = 67,
-                Value = "New"
+                Value = "New",
             }
         );
 
@@ -333,7 +333,7 @@ public class StateManagerTest
                 Id1 = 77,
                 Id2 = 78,
                 AlternateId1 = 66,
-                AlternateId2 = 67
+                AlternateId2 = 67,
             }
         );
 
@@ -348,7 +348,7 @@ public class StateManagerTest
                                 Id1 = 77,
                                 Id2 = 79,
                                 AlternateId1 = 66,
-                                AlternateId2 = 67
+                                AlternateId2 = 67,
                             }
                         )
                 )
@@ -367,7 +367,7 @@ public class StateManagerTest
                 Id2 = 78,
                 AlternateId1 = 66,
                 AlternateId2 = 67,
-                Owned = new CompositeKeyOwned()
+                Owned = new CompositeKeyOwned(),
             }
         );
 
@@ -390,7 +390,7 @@ public class StateManagerTest
                                 Id2 = 178,
                                 AlternateId1 = 166,
                                 AlternateId2 = 168,
-                                Owned = duplicateOwned
+                                Owned = duplicateOwned,
                             }
                         )
                 )
@@ -439,7 +439,7 @@ public class StateManagerTest
             {
                 Id = 77,
                 AlternateId = 66,
-                Owned = new SingleKeyOwned()
+                Owned = new SingleKeyOwned(),
             }
         );
 
@@ -456,7 +456,7 @@ public class StateManagerTest
                             {
                                 Id = 78,
                                 AlternateId = 67,
-                                Owned = duplicateOwned
+                                Owned = duplicateOwned,
                             }
                         )
                 )
@@ -474,7 +474,7 @@ public class StateManagerTest
                 Id1 = 77,
                 Id2 = 78,
                 AlternateId1 = 66,
-                AlternateId2 = 67
+                AlternateId2 = 67,
             }
         );
 
@@ -489,7 +489,7 @@ public class StateManagerTest
                                 Id1 = 77,
                                 Id2 = 78,
                                 AlternateId1 = 66,
-                                AlternateId2 = 68
+                                AlternateId2 = 68,
                             }
                         )
                 )
@@ -507,7 +507,7 @@ public class StateManagerTest
                 Id1 = 77,
                 Id2 = 78,
                 AlternateId1 = 66,
-                AlternateId2 = 67
+                AlternateId2 = 67,
             }
         );
 
@@ -525,7 +525,7 @@ public class StateManagerTest
                                 Id1 = 77,
                                 Id2 = 79,
                                 AlternateId1 = 66,
-                                AlternateId2 = 67
+                                AlternateId2 = 67,
                             }
                         )
                 )
@@ -544,7 +544,7 @@ public class StateManagerTest
                 Id2 = 78,
                 AlternateId1 = 66,
                 AlternateId2 = 67,
-                Owned = new CompositeKeyOwned()
+                Owned = new CompositeKeyOwned(),
             }
         );
 
@@ -567,7 +567,7 @@ public class StateManagerTest
                                 Id2 = 178,
                                 AlternateId1 = 166,
                                 AlternateId2 = 168,
-                                Owned = duplicateOwned
+                                Owned = duplicateOwned,
                             }
                         )
                 )
@@ -618,7 +618,7 @@ public class StateManagerTest
                                 Id1 = 77,
                                 Id2 = null,
                                 AlternateId1 = 66,
-                                AlternateId2 = 68
+                                AlternateId2 = 68,
                             }
                         )
                 )
@@ -641,7 +641,7 @@ public class StateManagerTest
                                 Id1 = 77,
                                 Id2 = 79,
                                 AlternateId1 = 66,
-                                AlternateId2 = null
+                                AlternateId2 = null,
                             }
                         )
                 )
@@ -996,7 +996,7 @@ public class StateManagerTest
             {
                 Id = 77,
                 Name = "Beverages",
-                PrincipalId = 777
+                PrincipalId = 777,
             }
         );
         var entry2 = stateManager.GetOrCreateEntry(
@@ -1004,7 +1004,7 @@ public class StateManagerTest
             {
                 Id = 78,
                 Name = "Foods",
-                PrincipalId = 778
+                PrincipalId = 778,
             }
         );
         var entry3 = stateManager.GetOrCreateEntry(
@@ -1012,7 +1012,7 @@ public class StateManagerTest
             {
                 Id = 79,
                 Name = "Stuff",
-                PrincipalId = 779
+                PrincipalId = 779,
             }
         );
 

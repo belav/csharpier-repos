@@ -20,7 +20,7 @@ namespace System.Linq.Expressions.Tests
             typeof(int),
             typeof(object),
             typeof(DateTime),
-            typeof(DynamicExpressionTests)
+            typeof(DynamicExpressionTests),
         };
 
         public static IEnumerable<object[]> SizesAndTypes =>

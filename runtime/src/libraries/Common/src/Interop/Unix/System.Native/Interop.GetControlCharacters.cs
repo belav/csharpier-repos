@@ -33,7 +33,7 @@ internal static partial class Interop
             VDISCARD = 13,
             VWERASE = 14,
             VLNEXT = 15,
-            VEOL2 = 16
+            VEOL2 = 16,
         };
     }
 }

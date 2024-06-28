@@ -88,7 +88,7 @@ namespace System.Reflection.Tests
             "Pubfld5",
             "Pubfld6",
             "Members",
-            "PublicFieldNames"
+            "PublicFieldNames",
         };
 
         public string SubPubfld1 = "";
@@ -119,7 +119,7 @@ namespace System.Reflection.Tests
             "Members",
             "InheritedFieldNames",
             "NewFieldNames",
-            "PublicFieldNames"
+            "PublicFieldNames",
         };
         public new string Pubfld1 = "";
         public new readonly string Pubfld2 = "";

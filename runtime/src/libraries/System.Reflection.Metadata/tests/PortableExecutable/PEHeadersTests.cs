@@ -107,7 +107,7 @@ namespace System.Reflection.PortableExecutable.Tests
                 {
                     ".s1 offset=0x200 rva=0x200 size=512",
                     ".s2 offset=0x400 rva=0x400 size=512",
-                    ".s3 offset=0x600 rva=0x600 size=512"
+                    ".s3 offset=0x600 rva=0x600 size=512",
                 },
                 peHeaders.SectionHeaders.Select(h =>
                     $"{h.Name} offset=0x{h.PointerToRawData:x3} rva=0x{h.VirtualAddress:x3} size={h.SizeOfRawData}"

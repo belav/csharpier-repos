@@ -30,6 +30,6 @@ namespace System.DirectoryServices
         All,
         Descendents,
         SelfAndChildren,
-        Children
+        Children,
     }
 }

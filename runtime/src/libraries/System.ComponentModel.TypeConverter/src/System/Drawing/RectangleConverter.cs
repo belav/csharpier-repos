@@ -90,7 +90,7 @@ namespace System.Drawing
                         intConverter.ConvertToString(context, culture, rect.X),
                         intConverter.ConvertToString(context, culture, rect.Y),
                         intConverter.ConvertToString(context, culture, rect.Width),
-                        intConverter.ConvertToString(context, culture, rect.Height)
+                        intConverter.ConvertToString(context, culture, rect.Height),
                     };
                     return string.Join(sep, args);
                 }

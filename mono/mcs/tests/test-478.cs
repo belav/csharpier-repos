@@ -12,7 +12,7 @@ namespace Test
     [Test(TestEnum2.TestValue)]
     enum TestEnum
     {
-        Value
+        Value,
     }
 
     class TestAttribute : Attribute
@@ -25,6 +25,6 @@ namespace Test
     enum TestEnum2
     {
         [Test2]
-        TestValue
+        TestValue,
     }
 }

@@ -54,7 +54,7 @@ namespace System.Net
         ParameterIsDirectory = 0x20,
         ShouldParseForResponseUri = 0x40,
         HasHttpCommand = 0x80,
-        MustChangeWorkingDirectoryToPath = 0x100
+        MustChangeWorkingDirectoryToPath = 0x100,
     }
 
     internal class FtpMethodInfo
@@ -211,7 +211,7 @@ namespace System.Net
                 FtpOperation.PrintWorkingDirectory,
                 FtpMethodFlags.DoesNotTakeParameter,
                 null
-            )
+            ),
         };
     }
 
@@ -2000,6 +2000,7 @@ namespace System.Net
             WriteReady, // First half is done, i.e. either writer or response stream. This is always assumed unless Started or CheckForError
             ReadReady, // Second half is done, i.e. the read stream can be accesses.
             ReleaseConnection // Release the control connection (request is read i.e. done-done)
+            ,
         }
 
         //

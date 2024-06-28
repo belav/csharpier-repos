@@ -25,7 +25,7 @@
             {
                 var source = new Source
                 {
-                    Values = new List<int> { 1, 2, 3, 4, }
+                    Values = new List<int> { 1, 2, 3, 4 },
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -57,7 +57,7 @@
             {
                 var source = new Source
                 {
-                    Values = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4, })
+                    Values = new ReadOnlyCollection<int>(new List<int> { 1, 2, 3, 4 }),
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -89,7 +89,7 @@
             {
                 var source = new Source
                 {
-                    Values = new List<int> { 1, 2, 3, 4, }
+                    Values = new List<int> { 1, 2, 3, 4 },
                 };
 
                 var dest = Mapper.Map<Destination>(source);
@@ -113,7 +113,7 @@
                     ValueUser = new List<UserSource>()
                     {
                         new UserSource("y", 20),
-                        new UserSource("x", 19)
+                        new UserSource("x", 19),
                     },
                 };
                 var config = new MapperConfiguration(cfg =>

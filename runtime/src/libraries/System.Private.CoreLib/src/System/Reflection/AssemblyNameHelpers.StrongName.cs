@@ -116,7 +116,7 @@ namespace System.Reflection
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             ];
     }
 }

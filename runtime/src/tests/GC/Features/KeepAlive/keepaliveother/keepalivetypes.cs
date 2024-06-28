@@ -34,7 +34,7 @@ public class Test
     {
         Red,
         Blue,
-        Green
+        Green,
     }
 
     public static int Main()

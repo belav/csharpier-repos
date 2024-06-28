@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a reference to a field.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeFieldReferenceExpression : CodeExpression
     {
         private CodeExpression targetObject;

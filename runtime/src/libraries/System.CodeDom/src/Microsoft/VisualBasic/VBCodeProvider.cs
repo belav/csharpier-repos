@@ -45,11 +45,9 @@ namespace Microsoft.VisualBasic
         public override ICodeCompiler CreateCompiler() => _generator;
 
         public override TypeConverter GetConverter(Type type) =>
-            type == typeof(MemberAttributes)
-                ? VBMemberAttributeConverter.Default
-                : type == typeof(TypeAttributes)
-                    ? VBTypeAttributeConverter.Default
-                    : base.GetConverter(type);
+            type == typeof(MemberAttributes) ? VBMemberAttributeConverter.Default
+            : type == typeof(TypeAttributes) ? VBTypeAttributeConverter.Default
+            : base.GetConverter(type);
 
         public override void GenerateCodeFromMember(
             CodeTypeMember member,

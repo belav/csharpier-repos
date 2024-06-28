@@ -24,7 +24,7 @@ public static class SqlExceptionFactory
                         "ErrorMessage",
                         "Procedure",
                         0,
-                        null
+                        null,
                     }
                 );
         var errors = (SqlErrorCollection)

@@ -1755,7 +1755,7 @@ namespace Mono.CSharp
         {
             None = 0,
             DynamicType = 1,
-            TypeParameter = 1 << 1
+            TypeParameter = 1 << 1,
         }
 
         public static readonly byte[] Empty;

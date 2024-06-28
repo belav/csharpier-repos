@@ -133,6 +133,6 @@ namespace System.Security.RightsManagement
         GlobalOptionAlreadySet,
         OwnerLicenseNotFound,
 
-        Success = 0
+        Success = 0,
     }
 }

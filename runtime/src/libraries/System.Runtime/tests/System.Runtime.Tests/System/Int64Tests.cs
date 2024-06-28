@@ -110,14 +110,14 @@ namespace System.Tests
                         long.MinValue,
                         defaultSpecifier,
                         defaultFormat,
-                        "-9223372036854775808"
+                        "-9223372036854775808",
                     };
                     yield return new object[]
                     {
                         (long)-4567,
                         defaultSpecifier,
                         defaultFormat,
-                        "-4567"
+                        "-4567",
                     };
                     yield return new object[] { (long)0, defaultSpecifier, defaultFormat, "0" };
                     yield return new object[]
@@ -125,14 +125,14 @@ namespace System.Tests
                         (long)4567,
                         defaultSpecifier,
                         defaultFormat,
-                        "4567"
+                        "4567",
                     };
                     yield return new object[]
                     {
                         long.MaxValue,
                         defaultSpecifier,
                         defaultFormat,
-                        "9223372036854775807"
+                        "9223372036854775807",
                     };
                 }
 
@@ -142,21 +142,21 @@ namespace System.Tests
                     (long)4567,
                     "D99",
                     defaultFormat,
-                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567"
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567",
                 };
                 yield return new object[]
                 {
                     (long)4567,
                     "D99\09",
                     defaultFormat,
-                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567"
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567",
                 };
                 yield return new object[]
                 {
                     (long)-4567,
                     "D99",
                     defaultFormat,
-                    "-000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567"
+                    "-000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567",
                 };
 
                 yield return new object[] { (long)0, "x", defaultFormat, "0" };
@@ -170,7 +170,7 @@ namespace System.Tests
                     (long)-0x2468,
                     "b",
                     defaultFormat,
-                    "1111111111111111111111111111111111111111111111111101101110011000"
+                    "1111111111111111111111111111111111111111111111111101101110011000",
                 };
 
                 yield return new object[]
@@ -178,7 +178,7 @@ namespace System.Tests
                     (long)2468,
                     "N",
                     defaultFormat,
-                    string.Format("{0:N}", 2468.00)
+                    string.Format("{0:N}", 2468.00),
                 };
             }
 
@@ -188,56 +188,56 @@ namespace System.Tests
                 (long)32,
                 "C100",
                 invariantFormat,
-                "\u00A432.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                "\u00A432.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             };
             yield return new object[]
             {
                 (long)32,
                 "P100",
                 invariantFormat,
-                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %"
+                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %",
             };
             yield return new object[]
             {
                 (long)32,
                 "D100",
                 invariantFormat,
-                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032"
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032",
             };
             yield return new object[]
             {
                 (long)32,
                 "E100",
                 invariantFormat,
-                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001"
+                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001",
             };
             yield return new object[]
             {
                 (long)32,
                 "F100",
                 invariantFormat,
-                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             };
             yield return new object[]
             {
                 (long)32,
                 "N100",
                 invariantFormat,
-                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             };
             yield return new object[]
             {
                 (long)32,
                 "X100",
                 invariantFormat,
-                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020"
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020",
             };
             yield return new object[]
             {
                 (long)32,
                 "B100",
                 invariantFormat,
-                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000"
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000",
             };
 
             var customFormat = new NumberFormatInfo()
@@ -250,7 +250,7 @@ namespace System.Tests
                 PercentSymbol = "@",
                 PercentGroupSeparator = ",",
                 PercentDecimalSeparator = ".",
-                PercentDecimalDigits = 5
+                PercentDecimalDigits = 5,
             };
             yield return new object[] { (long)-2468, "N", customFormat, "#2*468~00" };
             yield return new object[] { (long)2468, "N", customFormat, "2*468~00" };
@@ -318,7 +318,7 @@ namespace System.Tests
                     objs[0],
                     objs[1],
                     objs[2],
-                    unsigned ? (long)(uint)(int)objs[3] : (long)(int)objs[3]
+                    unsigned ? (long)(uint)(int)objs[3] : (long)(int)objs[3],
                 };
             }
 
@@ -336,7 +336,7 @@ namespace System.Tests
                         s,
                         NumberStyles.Integer,
                         null,
-                        neg ? result * -1 : result
+                        neg ? result * -1 : result,
                     };
                 }
             }
@@ -371,42 +371,42 @@ namespace System.Tests
                 "-9223372036854775808",
                 NumberStyles.Integer,
                 null,
-                long.MinValue
+                long.MinValue,
             };
             yield return new object[]
             {
                 "9223372036854775807",
                 NumberStyles.Integer,
                 null,
-                long.MaxValue
+                long.MaxValue,
             };
             yield return new object[]
             {
                 "   -9223372036854775808   ",
                 NumberStyles.Integer,
                 null,
-                long.MinValue
+                long.MinValue,
             };
             yield return new object[]
             {
                 "   +9223372036854775807   ",
                 NumberStyles.Integer,
                 null,
-                long.MaxValue
+                long.MaxValue,
             };
             yield return new object[]
             {
                 "7FFFFFFFFFFFFFFF",
                 NumberStyles.HexNumber,
                 null,
-                long.MaxValue
+                long.MaxValue,
             };
             yield return new object[]
             {
                 "8000000000000000",
                 NumberStyles.HexNumber,
                 null,
-                long.MinValue
+                long.MinValue,
             };
             yield return new object[] { "FFFFFFFFFFFFFFFF", NumberStyles.HexNumber, null, -1L };
             yield return new object[]
@@ -414,35 +414,35 @@ namespace System.Tests
                 "   FFFFFFFFFFFFFFFF  ",
                 NumberStyles.HexNumber,
                 null,
-                -1L
+                -1L,
             };
             yield return new object[]
             {
                 "111111111111111111111111111111111111111111111111111111111111111",
                 NumberStyles.BinaryNumber,
                 null,
-                long.MaxValue
+                long.MaxValue,
             };
             yield return new object[]
             {
                 "1000000000000000000000000000000000000000000000000000000000000000",
                 NumberStyles.BinaryNumber,
                 null,
-                long.MinValue
+                long.MinValue,
             };
             yield return new object[]
             {
                 "1111111111111111111111111111111111111111111111111111111111111111",
                 NumberStyles.BinaryNumber,
                 null,
-                -1L
+                -1L,
             };
             yield return new object[]
             {
                 "   1111111111111111111111111111111111111111111111111111111111111111  ",
                 NumberStyles.BinaryNumber,
                 null,
-                -1L
+                -1L,
             };
         }
 
@@ -588,7 +588,7 @@ namespace System.Tests
                     ((string)inputs[0]).Length,
                     inputs[1],
                     inputs[2],
-                    inputs[3]
+                    inputs[3],
                 };
             }
 
@@ -599,7 +599,7 @@ namespace System.Tests
                 19,
                 NumberStyles.Integer,
                 null,
-                -922337203685477580
+                -922337203685477580,
             };
             yield return new object[]
             {
@@ -608,7 +608,7 @@ namespace System.Tests
                 19,
                 NumberStyles.Integer,
                 null,
-                9223372036854775807
+                9223372036854775807,
             };
             yield return new object[]
             {
@@ -617,7 +617,7 @@ namespace System.Tests
                 1,
                 NumberStyles.Integer,
                 null,
-                9
+                9,
             };
             yield return new object[] { "ABC", 0, 2, NumberStyles.HexNumber, null, (long)0xAB };
             yield return new object[]
@@ -627,7 +627,7 @@ namespace System.Tests
                 8,
                 NumberStyles.BinaryNumber,
                 null,
-                (long)0b10101011
+                (long)0b10101011,
             };
             yield return new object[]
             {
@@ -636,7 +636,7 @@ namespace System.Tests
                 3,
                 NumberStyles.AllowParentheses,
                 null,
-                (long)123
+                (long)123,
             };
             yield return new object[]
             {
@@ -645,7 +645,7 @@ namespace System.Tests
                 2,
                 NumberStyles.Currency,
                 new NumberFormatInfo() { CurrencySymbol = "$" },
-                (long)1
+                (long)1,
             };
         }
 

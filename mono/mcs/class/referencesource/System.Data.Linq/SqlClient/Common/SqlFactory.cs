@@ -266,7 +266,7 @@ namespace System.Data.Linq.SqlClient
                 new SqlExpression[]
                 {
                     new SqlVariable(typeof(void), null, partName, expr.SourceExpression),
-                    expr
+                    expr,
                 },
                 expr.SourceExpression
             );
@@ -294,7 +294,7 @@ namespace System.Data.Linq.SqlClient
                 {
                     new SqlVariable(typeof(void), null, partName, sourceExpression),
                     value,
-                    expr
+                    expr,
                 },
                 sourceExpression
             );
@@ -326,7 +326,7 @@ namespace System.Data.Linq.SqlClient
                 {
                     new SqlVariable(typeof(void), null, partName, sourceExpression),
                     value,
-                    expr
+                    expr,
                 },
                 sourceExpression
             );

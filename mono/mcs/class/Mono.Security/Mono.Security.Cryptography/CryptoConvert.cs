@@ -68,7 +68,7 @@ namespace Mono.Security.Cryptography
                 (byte)(val & 0xff),
                 (byte)((val >> 8) & 0xff),
                 (byte)((val >> 16) & 0xff),
-                (byte)((val >> 24) & 0xff)
+                (byte)((val >> 24) & 0xff),
             };
         }
 

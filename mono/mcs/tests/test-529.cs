@@ -2,7 +2,7 @@ class C
 {
     enum E
     {
-        A
+        A,
     }
 
     public static void Main()

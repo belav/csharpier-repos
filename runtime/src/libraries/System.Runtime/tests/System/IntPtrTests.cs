@@ -65,7 +65,7 @@ namespace System.Tests
             {
                 unchecked((nint)0x7fffffffffffffff),
                 5,
-                unchecked((long)0x8000000000000004)
+                unchecked((long)0x8000000000000004),
             };
             /// Add should not throw an OverflowException
         }
@@ -316,14 +316,14 @@ namespace System.Tests
                         nint.MinValue,
                         defaultSpecifier,
                         defaultFormat,
-                        Is64Bit ? "-9223372036854775808" : "-2147483648"
+                        Is64Bit ? "-9223372036854775808" : "-2147483648",
                     };
                     yield return new object[]
                     {
                         (nint)(-4567),
                         defaultSpecifier,
                         defaultFormat,
-                        "-4567"
+                        "-4567",
                     };
                     yield return new object[] { (nint)0, defaultSpecifier, defaultFormat, "0" };
                     yield return new object[]
@@ -331,14 +331,14 @@ namespace System.Tests
                         (nint)4567,
                         defaultSpecifier,
                         defaultFormat,
-                        "4567"
+                        "4567",
                     };
                     yield return new object[]
                     {
                         nint.MaxValue,
                         defaultSpecifier,
                         defaultFormat,
-                        Is64Bit ? "9223372036854775807" : "2147483647"
+                        Is64Bit ? "9223372036854775807" : "2147483647",
                     };
                 }
 
@@ -348,21 +348,21 @@ namespace System.Tests
                     (nint)4567,
                     "D99",
                     defaultFormat,
-                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567"
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567",
                 };
                 yield return new object[]
                 {
                     (nint)4567,
                     "D99\09",
                     defaultFormat,
-                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567"
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567",
                 };
                 yield return new object[]
                 {
                     (nint)(-4567),
                     "D99\09",
                     defaultFormat,
-                    "-000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567"
+                    "-000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000004567",
                 };
 
                 yield return new object[] { (nint)0, "x", defaultFormat, "0" };
@@ -372,7 +372,7 @@ namespace System.Tests
                     (nint)(-0x2468),
                     "x",
                     defaultFormat,
-                    Is64Bit ? "ffffffffffffdb98" : "ffffdb98"
+                    Is64Bit ? "ffffffffffffdb98" : "ffffdb98",
                 };
 
                 yield return new object[] { (nint)0, "b", defaultFormat, "0" };
@@ -384,7 +384,7 @@ namespace System.Tests
                     defaultFormat,
                     Is64Bit
                         ? "1111111111111111111111111111111111111111111111111101101110011000"
-                        : "11111111111111111101101110011000"
+                        : "11111111111111111101101110011000",
                 };
 
                 yield return new object[]
@@ -392,7 +392,7 @@ namespace System.Tests
                     (nint)2468,
                     "N",
                     defaultFormat,
-                    string.Format("{0:N}", 2468.00)
+                    string.Format("{0:N}", 2468.00),
                 };
             }
 
@@ -406,7 +406,7 @@ namespace System.Tests
                 PercentSymbol = "@",
                 PercentGroupSeparator = ",",
                 PercentDecimalSeparator = ".",
-                PercentDecimalDigits = 5
+                PercentDecimalDigits = 5,
             };
             yield return new object[] { (nint)(-2468), "N", customFormat, "#2*468~00" };
             yield return new object[] { (nint)2468, "N", customFormat, "2*468~00" };
@@ -465,7 +465,7 @@ namespace System.Tests
             NumberFormatInfo samePositiveNegativeFormat = new NumberFormatInfo()
             {
                 PositiveSign = "|",
-                NegativeSign = "|"
+                NegativeSign = "|",
             };
 
             NumberFormatInfo emptyPositiveFormat = new NumberFormatInfo() { PositiveSign = "" };
@@ -478,14 +478,14 @@ namespace System.Tests
                 "0000000000000000000000000000000000000000000000000000000000",
                 NumberStyles.None,
                 null,
-                (nint)0
+                (nint)0,
             };
             yield return new object[]
             {
                 "0000000000000000000000000000000000000000000000000000000001",
                 NumberStyles.None,
                 null,
-                (nint)1
+                (nint)1,
             };
             yield return new object[] { "2147483647", NumberStyles.None, null, (nint)2147483647 };
             yield return new object[] { "02147483647", NumberStyles.None, null, (nint)2147483647 };
@@ -494,7 +494,7 @@ namespace System.Tests
                 "00000000000000000000000000000000000000000000000002147483647",
                 NumberStyles.None,
                 null,
-                (nint)2147483647
+                (nint)2147483647,
             };
             yield return new object[] { "123\0\0", NumberStyles.None, null, (nint)123 };
 
@@ -512,7 +512,7 @@ namespace System.Tests
                         s,
                         NumberStyles.Integer,
                         null,
-                        (nint)(neg ? result * -1 : result)
+                        (nint)(neg ? result * -1 : result),
                     };
                 }
             }
@@ -553,14 +553,14 @@ namespace System.Tests
                     "8000000000000000",
                     NumberStyles.HexNumber,
                     null,
-                    nint.MinValue
+                    nint.MinValue,
                 };
                 yield return new object[]
                 {
                     "7FFFFFFFFFFFFFFF",
                     NumberStyles.HexNumber,
                     null,
-                    nint.MaxValue
+                    nint.MaxValue,
                 };
             }
             else
@@ -570,14 +570,14 @@ namespace System.Tests
                     "80000000",
                     NumberStyles.HexNumber,
                     null,
-                    nint.MinValue
+                    nint.MinValue,
                 };
                 yield return new object[]
                 {
                     "7FFFFFFF",
                     NumberStyles.HexNumber,
                     null,
-                    nint.MaxValue
+                    nint.MaxValue,
                 };
             }
 
@@ -587,14 +587,14 @@ namespace System.Tests
                 "100100011",
                 NumberStyles.BinaryNumber,
                 null,
-                (nint)0b100100011
+                (nint)0b100100011,
             };
             yield return new object[]
             {
                 "101010111100",
                 NumberStyles.BinaryNumber,
                 null,
-                (nint)0b101010111100
+                (nint)0b101010111100,
             };
             yield return new object[] { "10010", NumberStyles.BinaryNumber, null, (nint)0b10010 };
             if (Is64Bit)
@@ -604,14 +604,14 @@ namespace System.Tests
                     "1000000000000000000000000000000000000000000000000000000000000000",
                     NumberStyles.BinaryNumber,
                     null,
-                    nint.MinValue
+                    nint.MinValue,
                 };
                 yield return new object[]
                 {
                     "111111111111111111111111111111111111111111111111111111111111111",
                     NumberStyles.BinaryNumber,
                     null,
-                    nint.MaxValue
+                    nint.MaxValue,
                 };
             }
             else
@@ -621,14 +621,14 @@ namespace System.Tests
                     "10000000000000000000000000000000",
                     NumberStyles.BinaryNumber,
                     null,
-                    nint.MinValue
+                    nint.MinValue,
                 };
                 yield return new object[]
                 {
                     "1111111111111111111111111111111",
                     NumberStyles.BinaryNumber,
                     null,
-                    nint.MaxValue
+                    nint.MaxValue,
                 };
             }
 
@@ -637,28 +637,28 @@ namespace System.Tests
             {
                 CurrencySymbol = "$",
                 CurrencyGroupSeparator = "|",
-                NumberGroupSeparator = "/"
+                NumberGroupSeparator = "/",
             };
             yield return new object[]
             {
                 "$1|000",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)1000
+                (nint)1000,
             };
             yield return new object[]
             {
                 "$1000",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)1000
+                (nint)1000,
             };
             yield return new object[]
             {
                 "$   1000",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)1000
+                (nint)1000,
             };
             yield return new object[] { "1000", NumberStyles.Currency, currencyFormat, (nint)1000 };
             yield return new object[]
@@ -666,28 +666,28 @@ namespace System.Tests
                 "$(1000)",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)(-1000)
+                (nint)(-1000),
             };
             yield return new object[]
             {
                 "($1000)",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)(-1000)
+                (nint)(-1000),
             };
             yield return new object[]
             {
                 "$-1000",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)(-1000)
+                (nint)(-1000),
             };
             yield return new object[]
             {
                 "-$1000",
                 NumberStyles.Currency,
                 currencyFormat,
-                (nint)(-1000)
+                (nint)(-1000),
             };
 
             NumberFormatInfo emptyCurrencyFormat = new NumberFormatInfo() { CurrencySymbol = "" };
@@ -696,21 +696,21 @@ namespace System.Tests
                 "100",
                 NumberStyles.Currency,
                 emptyCurrencyFormat,
-                (nint)100
+                (nint)100,
             };
 
             // If CurrencySymbol and Negative are the same, NegativeSign is preferred
             NumberFormatInfo sameCurrencyNegativeSignFormat = new NumberFormatInfo()
             {
                 NegativeSign = "|",
-                CurrencySymbol = "|"
+                CurrencySymbol = "|",
             };
             yield return new object[]
             {
                 "|1000",
                 NumberStyles.AllowCurrencySymbol | NumberStyles.AllowLeadingSign,
                 sameCurrencyNegativeSignFormat,
-                (nint)(-1000)
+                (nint)(-1000),
             };
 
             // Any
@@ -722,7 +722,7 @@ namespace System.Tests
                 "-2147483648",
                 NumberStyles.AllowLeadingSign,
                 null,
-                (nint)(-2147483648)
+                (nint)(-2147483648),
             };
             yield return new object[] { "-123", NumberStyles.AllowLeadingSign, null, (nint)(-123) };
             yield return new object[] { "+0", NumberStyles.AllowLeadingSign, null, (nint)0 };
@@ -735,7 +735,7 @@ namespace System.Tests
                 "|123",
                 NumberStyles.AllowLeadingSign,
                 samePositiveNegativeFormat,
-                (nint)123
+                (nint)123,
             };
 
             // Empty PositiveSign or NegativeSign
@@ -744,14 +744,14 @@ namespace System.Tests
                 "100",
                 NumberStyles.AllowLeadingSign,
                 emptyPositiveFormat,
-                (nint)100
+                (nint)100,
             };
             yield return new object[]
             {
                 "100",
                 NumberStyles.AllowLeadingSign,
                 emptyNegativeFormat,
-                (nint)100
+                (nint)100,
             };
 
             // AllowTrailingSign
@@ -762,7 +762,7 @@ namespace System.Tests
                 "123-",
                 NumberStyles.AllowTrailingSign,
                 null,
-                (nint)(-123)
+                (nint)(-123),
             };
 
             // If PositiveSign and NegativeSign are the same, PositiveSign is preferred
@@ -771,7 +771,7 @@ namespace System.Tests
                 "123|",
                 NumberStyles.AllowTrailingSign,
                 samePositiveNegativeFormat,
-                (nint)123
+                (nint)123,
             };
 
             // Empty PositiveSign or NegativeSign
@@ -780,14 +780,14 @@ namespace System.Tests
                 "100",
                 NumberStyles.AllowTrailingSign,
                 emptyPositiveFormat,
-                (nint)100
+                (nint)100,
             };
             yield return new object[]
             {
                 "100",
                 NumberStyles.AllowTrailingSign,
                 emptyNegativeFormat,
-                (nint)100
+                (nint)100,
             };
 
             // AllowLeadingWhite and AllowTrailingWhite
@@ -797,7 +797,7 @@ namespace System.Tests
                 "  123  ",
                 NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
                 null,
-                (nint)123
+                (nint)123,
             };
             yield return new object[] { "123  ", NumberStyles.AllowTrailingWhite, null, (nint)123 };
             yield return new object[]
@@ -805,21 +805,21 @@ namespace System.Tests
                 "123  \0\0",
                 NumberStyles.AllowTrailingWhite,
                 null,
-                (nint)123
+                (nint)123,
             };
             yield return new object[]
             {
                 "   2147483647   ",
                 NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
                 null,
-                (nint)2147483647
+                (nint)2147483647,
             };
             yield return new object[]
             {
                 "   -2147483648   ",
                 NumberStyles.Integer,
                 null,
-                (nint)(-2147483648)
+                (nint)(-2147483648),
             };
             foreach (char c in new[] { (char)0x9, (char)0xA, (char)0xB, (char)0xC, (char)0xD })
             {
@@ -829,7 +829,7 @@ namespace System.Tests
                     cs + cs + "123" + cs + cs,
                     NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
                     null,
-                    (nint)123
+                    (nint)123,
                 };
             }
             yield return new object[]
@@ -837,53 +837,53 @@ namespace System.Tests
                 "  0  ",
                 NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
                 null,
-                (nint)0
+                (nint)0,
             };
             yield return new object[]
             {
                 "  000000000  ",
                 NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
                 null,
-                (nint)0
+                (nint)0,
             };
 
             // AllowThousands
             NumberFormatInfo thousandsFormat = new NumberFormatInfo()
             {
-                NumberGroupSeparator = "|"
+                NumberGroupSeparator = "|",
             };
             yield return new object[]
             {
                 "1000",
                 NumberStyles.AllowThousands,
                 thousandsFormat,
-                (nint)1000
+                (nint)1000,
             };
             yield return new object[]
             {
                 "1|0|0|0",
                 NumberStyles.AllowThousands,
                 thousandsFormat,
-                (nint)1000
+                (nint)1000,
             };
             yield return new object[]
             {
                 "1|||",
                 NumberStyles.AllowThousands,
                 thousandsFormat,
-                (nint)1
+                (nint)1,
             };
 
             NumberFormatInfo IntegerNumberSeparatorFormat = new NumberFormatInfo()
             {
-                NumberGroupSeparator = "1"
+                NumberGroupSeparator = "1",
             };
             yield return new object[]
             {
                 "1111",
                 NumberStyles.AllowThousands,
                 IntegerNumberSeparatorFormat,
-                (nint)1111
+                (nint)1111,
             };
 
             // AllowExponent
@@ -896,14 +896,14 @@ namespace System.Tests
                 "(1E2)",
                 NumberStyles.AllowExponent | NumberStyles.AllowParentheses,
                 null,
-                (nint)(-100)
+                (nint)(-100),
             };
             yield return new object[]
             {
                 "-1E2",
                 NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign,
                 null,
-                (nint)(-100)
+                (nint)(-100),
             };
 
             NumberFormatInfo negativeFormat = new NumberFormatInfo() { PositiveSign = "|" };
@@ -912,7 +912,7 @@ namespace System.Tests
                 "1E|2",
                 NumberStyles.AllowExponent,
                 negativeFormat,
-                (nint)100
+                (nint)100,
             };
 
             // AllowParentheses
@@ -922,33 +922,33 @@ namespace System.Tests
                 "(123)",
                 NumberStyles.AllowParentheses,
                 null,
-                (nint)(-123)
+                (nint)(-123),
             };
 
             // AllowDecimalPoint
             NumberFormatInfo decimalFormat = new NumberFormatInfo()
             {
-                NumberDecimalSeparator = "|"
+                NumberDecimalSeparator = "|",
             };
             yield return new object[]
             {
                 "67|",
                 NumberStyles.AllowDecimalPoint,
                 decimalFormat,
-                (nint)67
+                (nint)67,
             };
 
             // NumberFormatInfo has a custom property with length > (nint)1
             NumberFormatInfo IntegerCurrencyFormat = new NumberFormatInfo()
             {
-                CurrencySymbol = "123"
+                CurrencySymbol = "123",
             };
             yield return new object[]
             {
                 "123123",
                 NumberStyles.AllowCurrencySymbol,
                 IntegerCurrencyFormat,
-                (nint)123
+                (nint)123,
             };
 
             yield return new object[]
@@ -956,42 +956,42 @@ namespace System.Tests
                 "123123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { PositiveSign = "1" },
-                (nint)23123
+                (nint)23123,
             };
             yield return new object[]
             {
                 "123123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { NegativeSign = "1" },
-                (nint)(-23123)
+                (nint)(-23123),
             };
             yield return new object[]
             {
                 "123123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { PositiveSign = "123" },
-                (nint)123
+                (nint)123,
             };
             yield return new object[]
             {
                 "123123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { NegativeSign = "123" },
-                (nint)(-123)
+                (nint)(-123),
             };
             yield return new object[]
             {
                 "123123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { PositiveSign = "12312" },
-                (nint)3
+                (nint)3,
             };
             yield return new object[]
             {
                 "123123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { NegativeSign = "12312" },
-                (nint)(-3)
+                (nint)(-3),
             };
         }
 
@@ -1045,14 +1045,14 @@ namespace System.Tests
                 null,
                 NumberStyles.Integer,
                 null,
-                typeof(ArgumentNullException)
+                typeof(ArgumentNullException),
             };
             yield return new object[]
             {
                 null,
                 NumberStyles.Any,
                 null,
-                typeof(ArgumentNullException)
+                typeof(ArgumentNullException),
             };
 
             // String contains is null, empty or enitrely whitespace.
@@ -1062,7 +1062,7 @@ namespace System.Tests
                     NumberStyles.Integer,
                     NumberStyles.HexNumber,
                     NumberStyles.BinaryNumber,
-                    NumberStyles.Any
+                    NumberStyles.Any,
                 }
             )
             {
@@ -1094,7 +1094,7 @@ namespace System.Tests
                     "\x2029",
                     "\x202F",
                     "\x205F",
-                    "\x3000"
+                    "\x3000",
                 }
             )
             {
@@ -1103,14 +1103,14 @@ namespace System.Tests
                     c + "123",
                     NumberStyles.Integer,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
                 yield return new object[]
                 {
                     "123" + c,
                     NumberStyles.Integer,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
             }
 
@@ -1121,7 +1121,7 @@ namespace System.Tests
                     NumberStyles.Integer,
                     NumberStyles.HexNumber,
                     NumberStyles.BinaryNumber,
-                    NumberStyles.Any
+                    NumberStyles.Any,
                 }
             )
             {
@@ -1140,14 +1140,14 @@ namespace System.Tests
                 "\0\0123",
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "\0\0123",
                 NumberStyles.Any,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // String has internal zeros
@@ -1156,7 +1156,7 @@ namespace System.Tests
                 "1\023",
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[] { "1\023", NumberStyles.Any, null, typeof(FormatException) };
 
@@ -1166,7 +1166,7 @@ namespace System.Tests
                 "123\0\0   ",
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // Integer doesn't allow hex, exponents, paretheses, currency, thousands, decimal
@@ -1175,42 +1175,42 @@ namespace System.Tests
                 "abc",
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "1E23",
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "(123)",
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 1000.ToString("C0"),
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 1000.ToString("N0"),
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 678.90.ToString("F2"),
                 NumberStyles.Integer,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // HexNumber
@@ -1219,42 +1219,42 @@ namespace System.Tests
                 "0xabc",
                 NumberStyles.HexNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "&habc",
                 NumberStyles.HexNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "G1",
                 NumberStyles.HexNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "g1",
                 NumberStyles.HexNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "+abc",
                 NumberStyles.HexNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-abc",
                 NumberStyles.HexNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // BinaryNumber
@@ -1263,42 +1263,42 @@ namespace System.Tests
                 "0b101",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "abc",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "G1",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "g1",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "+10",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-01",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // None doesn't allow hex or leading or trailing whitespace
@@ -1308,21 +1308,21 @@ namespace System.Tests
                 "123   ",
                 NumberStyles.None,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "   123",
                 NumberStyles.None,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "  123  ",
                 NumberStyles.None,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowLeadingSign
@@ -1331,42 +1331,42 @@ namespace System.Tests
                 "+",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "+-123",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-+123",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "- 123",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "+ 123",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowTrailingSign
@@ -1375,35 +1375,35 @@ namespace System.Tests
                 "123-+",
                 NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "123+-",
                 NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "123 -",
                 NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "123 +",
                 NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // Parentheses has priority over CurrencySymbol and PositiveSign
             NumberFormatInfo currencyNegativeParenthesesFormat = new NumberFormatInfo()
             {
                 CurrencySymbol = "(",
-                PositiveSign = "))"
+                PositiveSign = "))",
             };
             yield return new object[]
             {
@@ -1412,7 +1412,7 @@ namespace System.Tests
                     | NumberStyles.AllowCurrencySymbol
                     | NumberStyles.AllowTrailingSign,
                 currencyNegativeParenthesesFormat,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowTrailingSign and AllowLeadingSign
@@ -1421,28 +1421,28 @@ namespace System.Tests
                 "+123+",
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "+123-",
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-123+",
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-123-",
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowLeadingSign and AllowParentheses
@@ -1451,14 +1451,14 @@ namespace System.Tests
                 "-(1000)",
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowParentheses,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "(-1000)",
                 NumberStyles.AllowLeadingSign | NumberStyles.AllowParentheses,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowLeadingWhite
@@ -1467,14 +1467,14 @@ namespace System.Tests
                 "1   ",
                 NumberStyles.AllowLeadingWhite,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "   1   ",
                 NumberStyles.AllowLeadingWhite,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowTrailingWhite
@@ -1483,27 +1483,27 @@ namespace System.Tests
                 "   1       ",
                 NumberStyles.AllowTrailingWhite,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "   1",
                 NumberStyles.AllowTrailingWhite,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowThousands
             NumberFormatInfo thousandsFormat = new NumberFormatInfo()
             {
-                NumberGroupSeparator = "|"
+                NumberGroupSeparator = "|",
             };
             yield return new object[]
             {
                 "|||1",
                 NumberStyles.AllowThousands,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // AllowExponent
@@ -1512,41 +1512,41 @@ namespace System.Tests
                 "65E",
                 NumberStyles.AllowExponent,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "65E19",
                 NumberStyles.AllowExponent,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 "65E+19",
                 NumberStyles.AllowExponent,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 "65E-1",
                 NumberStyles.AllowExponent,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
 
             // AllowDecimalPoint
             NumberFormatInfo decimalFormat = new NumberFormatInfo()
             {
-                NumberDecimalSeparator = "."
+                NumberDecimalSeparator = ".",
             };
             yield return new object[]
             {
                 "67.9",
                 NumberStyles.AllowDecimalPoint,
                 decimalFormat,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
 
             // Parsing Integers doesn't allow NaN, PositiveInfinity or NegativeInfinity
@@ -1554,28 +1554,28 @@ namespace System.Tests
             {
                 NaNSymbol = "NaN",
                 PositiveInfinitySymbol = "Infinity",
-                NegativeInfinitySymbol = "-Infinity"
+                NegativeInfinitySymbol = "-Infinity",
             };
             yield return new object[]
             {
                 "NaN",
                 NumberStyles.Any,
                 doubleFormat,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "Infinity",
                 NumberStyles.Any,
                 doubleFormat,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-Infinity",
                 NumberStyles.Any,
                 doubleFormat,
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // Only has a leading sign
@@ -1584,14 +1584,14 @@ namespace System.Tests
                 "+",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "-",
                 NumberStyles.AllowLeadingSign,
                 null,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[] { " +", NumberStyles.Integer, null, typeof(FormatException) };
             yield return new object[] { " -", NumberStyles.Integer, null, typeof(FormatException) };
@@ -1601,28 +1601,28 @@ namespace System.Tests
             // NumberFormatInfo has a custom property with length > (nint)1
             NumberFormatInfo IntegerCurrencyFormat = new NumberFormatInfo()
             {
-                CurrencySymbol = "123"
+                CurrencySymbol = "123",
             };
             yield return new object[]
             {
                 "123",
                 NumberStyles.AllowCurrencySymbol,
                 IntegerCurrencyFormat,
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { PositiveSign = "123" },
-                typeof(FormatException)
+                typeof(FormatException),
             };
             yield return new object[]
             {
                 "123",
                 NumberStyles.AllowLeadingSign,
                 new NumberFormatInfo() { NegativeSign = "123" },
-                typeof(FormatException)
+                typeof(FormatException),
             };
 
             // Decimals not in range of IntPtr
@@ -1640,6 +1640,7 @@ namespace System.Tests
                     "-10000000000000000000", // extra digit after long.MinValue
                     "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000", // really big
                     "-100000000000000000000000000000000000000000000000000000000000000000000000000000000000000" // really small
+                    ,
                 }
             )
             {
@@ -1651,14 +1652,14 @@ namespace System.Tests
                         s + "   ",
                         styles,
                         null,
-                        typeof(OverflowException)
+                        typeof(OverflowException),
                     };
                     yield return new object[]
                     {
                         s + "   " + "\0\0\0",
                         styles,
                         null,
-                        typeof(OverflowException)
+                        typeof(OverflowException),
                     };
 
                     yield return new object[] { s + "g", styles, null, typeof(FormatException) };
@@ -1674,6 +1675,7 @@ namespace System.Tests
                     "10000000000000000", // ulong.MaxValue + (nint)1
                     "FFFFFFFFFFFFFFFF0", // extra digit after ulong.MaxValue
                     "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000" // really big
+                    ,
                 }
             )
             {
@@ -1682,21 +1684,21 @@ namespace System.Tests
                     s,
                     NumberStyles.HexNumber,
                     null,
-                    typeof(OverflowException)
+                    typeof(OverflowException),
                 };
                 yield return new object[]
                 {
                     s + "   ",
                     NumberStyles.HexNumber,
                     null,
-                    typeof(OverflowException)
+                    typeof(OverflowException),
                 };
                 yield return new object[]
                 {
                     s + "   " + "\0\0",
                     NumberStyles.HexNumber,
                     null,
-                    typeof(OverflowException)
+                    typeof(OverflowException),
                 };
 
                 yield return new object[]
@@ -1704,21 +1706,21 @@ namespace System.Tests
                     s + "g",
                     NumberStyles.HexNumber,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
                 yield return new object[]
                 {
                     s + "\0g",
                     NumberStyles.HexNumber,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
                 yield return new object[]
                 {
                     s + " g",
                     NumberStyles.HexNumber,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
             }
 
@@ -1729,6 +1731,7 @@ namespace System.Tests
                     "10000000000000000000000000000000000000000000000000000000000000000", // ulong.MaxValue + (nint)1
                     "11111111111111111111111111111111111111111111111111111111111111110", // extra digit after ulong.MaxValue
                     "100000000000000000000000000000000000000000000000000000000000000000000000000000000000000" // really big
+                    ,
                 }
             )
             {
@@ -1737,21 +1740,21 @@ namespace System.Tests
                     s,
                     NumberStyles.BinaryNumber,
                     null,
-                    typeof(OverflowException)
+                    typeof(OverflowException),
                 };
                 yield return new object[]
                 {
                     s + "   ",
                     NumberStyles.BinaryNumber,
                     null,
-                    typeof(OverflowException)
+                    typeof(OverflowException),
                 };
                 yield return new object[]
                 {
                     s + "   " + "\0\0",
                     NumberStyles.BinaryNumber,
                     null,
-                    typeof(OverflowException)
+                    typeof(OverflowException),
                 };
 
                 yield return new object[]
@@ -1759,21 +1762,21 @@ namespace System.Tests
                     s + "g",
                     NumberStyles.BinaryNumber,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
                 yield return new object[]
                 {
                     s + "\0g",
                     NumberStyles.BinaryNumber,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
                 yield return new object[]
                 {
                     s + " g",
                     NumberStyles.BinaryNumber,
                     null,
-                    typeof(FormatException)
+                    typeof(FormatException),
                 };
             }
 
@@ -1782,21 +1785,21 @@ namespace System.Tests
                 "9223372036854775809-",
                 NumberStyles.AllowTrailingSign,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 "(9223372036854775809)",
                 NumberStyles.AllowParentheses,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 "2E19",
                 NumberStyles.AllowExponent,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
         }
 
@@ -1875,14 +1878,14 @@ namespace System.Tests
                     ((string)inputs[0]).Length,
                     inputs[1],
                     inputs[2],
-                    inputs[3]
+                    inputs[3],
                 };
             }
 
             NumberFormatInfo samePositiveNegativeFormat = new NumberFormatInfo()
             {
                 PositiveSign = "|",
-                NegativeSign = "|"
+                NegativeSign = "|",
             };
 
             NumberFormatInfo emptyPositiveFormat = new NumberFormatInfo() { PositiveSign = "" };
@@ -1896,7 +1899,7 @@ namespace System.Tests
                 9,
                 NumberStyles.None,
                 null,
-                (nint)147483647
+                (nint)147483647,
             };
             yield return new object[] { "2147483647", 1, 1, NumberStyles.None, null, (nint)1 };
             yield return new object[] { "123\0\0", 2, 2, NumberStyles.None, null, (nint)3 };
@@ -1911,7 +1914,7 @@ namespace System.Tests
                 2,
                 NumberStyles.HexNumber,
                 null,
-                (nint)0xFF
+                (nint)0xFF,
             };
             yield return new object[] { "FFFFFFFF", 0, 1, NumberStyles.HexNumber, null, (nint)0xF };
 
@@ -1925,7 +1928,7 @@ namespace System.Tests
                 2,
                 NumberStyles.BinaryNumber,
                 null,
-                (nint)0b11
+                (nint)0b11,
             };
             yield return new object[]
             {
@@ -1934,7 +1937,7 @@ namespace System.Tests
                 1,
                 NumberStyles.BinaryNumber,
                 null,
-                (nint)0b1
+                (nint)0b1,
             };
 
             // Currency
@@ -1948,9 +1951,9 @@ namespace System.Tests
                 {
                     CurrencySymbol = "$",
                     CurrencyGroupSeparator = "|",
-                    NumberGroupSeparator = "/"
+                    NumberGroupSeparator = "/",
                 },
-                (nint)1000
+                (nint)1000,
             };
 
             NumberFormatInfo emptyCurrencyFormat = new NumberFormatInfo() { CurrencySymbol = "" };
@@ -1961,7 +1964,7 @@ namespace System.Tests
                 2,
                 NumberStyles.Currency,
                 emptyCurrencyFormat,
-                (nint)0
+                (nint)0,
             };
             yield return new object[]
             {
@@ -1970,14 +1973,14 @@ namespace System.Tests
                 1,
                 NumberStyles.Currency,
                 emptyCurrencyFormat,
-                (nint)1
+                (nint)1,
             };
 
             // If CurrencySymbol and Negative are the same, NegativeSign is preferred
             NumberFormatInfo sameCurrencyNegativeSignFormat = new NumberFormatInfo()
             {
                 NegativeSign = "|",
-                CurrencySymbol = "|"
+                CurrencySymbol = "|",
             };
             yield return new object[]
             {
@@ -1986,7 +1989,7 @@ namespace System.Tests
                 3,
                 NumberStyles.AllowCurrencySymbol | NumberStyles.AllowLeadingSign,
                 sameCurrencyNegativeSignFormat,
-                (nint)0
+                (nint)0,
             };
             yield return new object[]
             {
@@ -1995,7 +1998,7 @@ namespace System.Tests
                 2,
                 NumberStyles.AllowCurrencySymbol | NumberStyles.AllowLeadingSign,
                 sameCurrencyNegativeSignFormat,
-                (nint)(-1)
+                (nint)(-1),
             };
 
             // Any
@@ -2009,7 +2012,7 @@ namespace System.Tests
                 10,
                 NumberStyles.AllowLeadingSign,
                 null,
-                (nint)(-214748364)
+                (nint)(-214748364),
             };
 
             // AllowTrailingSign
@@ -2020,7 +2023,7 @@ namespace System.Tests
                 3,
                 NumberStyles.AllowTrailingSign,
                 null,
-                (nint)123
+                (nint)123,
             };
 
             // AllowExponent
@@ -2033,7 +2036,7 @@ namespace System.Tests
                 3,
                 NumberStyles.AllowExponent | NumberStyles.AllowParentheses,
                 null,
-                (nint)1E2
+                (nint)1E2,
             };
             yield return new object[]
             {
@@ -2042,7 +2045,7 @@ namespace System.Tests
                 3,
                 NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign,
                 null,
-                (nint)1E2
+                (nint)1E2,
             };
         }
 

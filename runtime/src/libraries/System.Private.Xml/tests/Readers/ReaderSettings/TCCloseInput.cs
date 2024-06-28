@@ -17,7 +17,7 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(
                     new CVariation(v1)
                     {
-                        Attribute = new Variation("Default Values") { Priority = 0 }
+                        Attribute = new Variation("Default Values") { Priority = 0 },
                     }
                 );
             }

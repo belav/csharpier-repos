@@ -75,7 +75,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                         Id = 1,
                         Email = "mgr1@company.com",
                         Logon = "mgr1",
-                        Name = "Manager 1"
+                        Name = "Manager 1",
                     },
                     new Staff
                     {
@@ -83,7 +83,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                         Email = "mgr2@company.com",
                         Logon = "mgr2",
                         Name = "Manager 2",
-                        ManagerId = 1
+                        ManagerId = 1,
                     },
                     new Staff
                     {
@@ -92,7 +92,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                         Logon = "emp",
                         Name = "Employee",
                         ManagerId = 1,
-                        SecondaryManagerId = 2
+                        SecondaryManagerId = 2,
                     }
                 );
 
@@ -108,7 +108,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                         PeriodEnd = new DateTimeOffset(
                             new DateTime(2020, 12, 31).ToUniversalTime()
                         ),
-                        StaffId = 3
+                        StaffId = 3,
                     }
                 );
         }
@@ -235,19 +235,19 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                     {
                         IceCreamId = 1,
                         Name = "Vanilla",
-                        Taste = (byte)Taste.Sweet
+                        Taste = (byte)Taste.Sweet,
                     },
                     new IceCream
                     {
                         IceCreamId = 2,
                         Name = "Chocolate",
-                        Taste = (byte)Taste.Sweet
+                        Taste = (byte)Taste.Sweet,
                     },
                     new IceCream
                     {
                         IceCreamId = 3,
                         Name = "Match",
-                        Taste = (byte)Taste.Bitter
+                        Taste = (byte)Taste.Bitter,
                     }
                 );
             });
@@ -312,8 +312,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
 
         public void Seed()
         {
-            Add(new Author { Blog = new DevBlog { Title = "Dev Blog", } });
-            Add(new Author { Blog = new PhotoBlog { Title = "Photo Blog", } });
+            Add(new Author { Blog = new DevBlog { Title = "Dev Blog" } });
+            Add(new Author { Blog = new PhotoBlog { Title = "Photo Blog" } });
 
             SaveChanges();
         }
@@ -387,8 +387,8 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                     {
                         new() { Title = "Hamlet" },
                         new() { Title = "Othello" },
-                        new() { Title = "MacBeth" }
-                    }
+                        new() { Title = "MacBeth" },
+                    },
                 }
             );
 
@@ -464,13 +464,13 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
             {
                 Name = "Active supplier 1",
                 IsDeleted = false,
-                Location = activeAddress
+                Location = activeAddress,
             };
             var activeSupplier2 = new Supplier
             {
                 Name = "Active supplier 2",
                 IsDeleted = false,
-                Location = deletedAddress
+                Location = deletedAddress,
             };
             var activeSupplier3 = new Supplier { Name = "Active supplier 3", IsDeleted = false };
             var deletedSupplier = new Supplier { Name = "Deleted supplier", IsDeleted = false };
@@ -643,7 +643,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                             y.ShippingDate == null && y.CancellationDate == null
                                 ? o
                                 : (o - 10000000)
-                        )
+                        ),
                     }
             )
             .OrderBy(e => e.Key);
@@ -694,7 +694,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                 SpecialSum = entity
                     .Items.Where(x => x.Type == orderItemType)
                     .Select(x => x.Price)
-                    .FirstOrDefault()
+                    .FirstOrDefault(),
             });
 
         var result = async ? await query.ToListAsync() : query.ToList();
@@ -731,7 +731,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
     {
         Undefined = 0,
         MyType1 = 1,
-        MyType2 = 2
+        MyType2 = 2,
     }
 
     #endregion
@@ -782,7 +782,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                     .Where(n => n.CustomerId == x.Key.CustomerId)
                     .Min(h => h.HourlyRate),
                 HourlyRate = x.Min(f => f.HourlyRate),
-                Count = x.Count()
+                Count = x.Count(),
             });
 
         var orders = async ? await query.ToListAsync() : query.ToList();
@@ -826,19 +826,19 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
             {
                 Number = "A1",
                 Customer = customerA,
-                HourlyRate = 10
+                HourlyRate = 10,
             };
             var orderA2 = new Order
             {
                 Number = "A2",
                 Customer = customerA,
-                HourlyRate = 11
+                HourlyRate = 11,
             };
             var orderB1 = new Order
             {
                 Number = "B1",
                 Customer = customerB,
-                HourlyRate = 20
+                HourlyRate = 20,
             };
 
             var timeSheetA = new TimeSheet { Order = orderA1, Project = projectA };
@@ -935,7 +935,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                     select tg.Sum() + tg2.Sum()
                 )
                     .OrderBy(e => 1)
-                    .FirstOrDefault()
+                    .FirstOrDefault(),
             };
 
         var orders = async ? await query.ToListAsync() : query.ToList();
@@ -971,7 +971,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
             .Select(g => new
             {
                 Test1 = g.Select(x => x.Child1.Value1).Distinct().Count(),
-                Test2 = g.Select(x => x.Child2.Value2).Distinct().Count()
+                Test2 = g.Select(x => x.Child2.Value2).Distinct().Count(),
             });
 
         var orders = async ? await query.ToListAsync() : query.ToList();
@@ -991,7 +991,7 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
             .Select(g => new
             {
                 Test1 = g.Select(x => x.ChildFilter1.Value1).Distinct().Count(),
-                Test2 = g.Select(x => x.ChildFilter2.Value2).Distinct().Count()
+                Test2 = g.Select(x => x.ChildFilter2.Value2).Distinct().Count(),
             });
 
         var orders = async ? await query.ToListAsync() : query.ToList();
@@ -1115,13 +1115,13 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                         new()
                         {
                             SomeInteger = 1,
-                            SomeOtherNullableDateTime = new DateTime(2000, 11, 18)
-                        }
-                    }
+                            SomeOtherNullableDateTime = new DateTime(2000, 11, 18),
+                        },
+                    },
                 }
             );
 
-            Add(new Parent26744 { Children = new List<Child26744> { new() { SomeInteger = 1, } } });
+            Add(new Parent26744 { Children = new List<Child26744> { new() { SomeInteger = 1 } } });
 
             SaveChanges();
         }
@@ -1245,27 +1245,27 @@ public abstract class SimpleQueryTestBase : NonSharedModelTestBase
                     Id = 1,
                     Name = "Alice",
                     Species = "Felis catus",
-                    EdcuationLevel = "MBA"
+                    EdcuationLevel = "MBA",
                 },
                 new Cat
                 {
                     Id = 2,
                     Name = "Mac",
                     Species = "Felis catus",
-                    EdcuationLevel = "BA"
+                    EdcuationLevel = "BA",
                 },
                 new Dog
                 {
                     Id = 3,
                     Name = "Toast",
                     Species = "Canis familiaris",
-                    FavoriteToy = "Mr. Squirrel"
+                    FavoriteToy = "Mr. Squirrel",
                 },
                 new FarmAnimal
                 {
                     Id = 4,
                     Value = 100.0,
-                    Species = "Ovis aries"
+                    Species = "Ovis aries",
                 }
             );
 

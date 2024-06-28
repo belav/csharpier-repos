@@ -1504,7 +1504,7 @@ class CSHide : VBIMeth02Impl, IMeth02, IMeth03
                 references: new[]
                 {
                     TestReferences.MetadataTests.InterfaceAndClass.VBInterfaces01,
-                    TestReferences.MetadataTests.InterfaceAndClass.VBClasses01
+                    TestReferences.MetadataTests.InterfaceAndClass.VBClasses01,
                 },
                 assemblyName: "OHI_AccessUnqualifiedNestedType001",
                 options: TestOptions.ReleaseDll

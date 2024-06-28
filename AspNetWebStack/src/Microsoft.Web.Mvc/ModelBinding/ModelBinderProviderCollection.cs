@@ -143,7 +143,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 modelBinder
             )
             {
-                SuppressPrefixCheck = suppressPrefixCheck
+                SuppressPrefixCheck = suppressPrefixCheck,
             };
             InsertSimpleProviderAtFront(provider);
         }
@@ -213,7 +213,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 );
                 provider = new SimpleModelBinderProvider(modelType, binderInstance)
                 {
-                    SuppressPrefixCheck = attr.SuppressPrefixCheck
+                    SuppressPrefixCheck = attr.SuppressPrefixCheck,
                 };
             }
             else

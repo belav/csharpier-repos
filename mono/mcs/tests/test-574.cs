@@ -4,7 +4,7 @@ using System.Threading;
 enum A
 {
     Hello,
-    Bye
+    Bye,
 }
 
 class X

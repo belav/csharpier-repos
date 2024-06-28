@@ -1119,7 +1119,7 @@ public class UserManagerTest
                     "A",
                     new TokenProviderDescriptor(typeof(ATokenProvider))
                     {
-                        ProviderInstance = provider
+                        ProviderInstance = provider,
                     }
                 )
             )
@@ -1241,7 +1241,7 @@ public class UserManagerTest
                     TokenOptions.DefaultProvider,
                     new TokenProviderDescriptor(typeof(ATokenProvider))
                     {
-                        ProviderInstance = provider
+                        ProviderInstance = provider,
                     }
                 )
             )
@@ -1775,7 +1775,7 @@ public class UserManagerTest
     {
         public static readonly IdentityError ErrorMessage = new IdentityError
         {
-            Description = "I'm Bad."
+            Description = "I'm Bad.",
         };
 
         private IdentityResult badResult;
@@ -2730,7 +2730,7 @@ public class UserManagerTest
             return new IdentityError
             {
                 Code = Code,
-                Description = string.Format(CultureInfo.InvariantCulture, FormatError, email)
+                Description = string.Format(CultureInfo.InvariantCulture, FormatError, email),
             };
         }
     }

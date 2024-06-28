@@ -44,7 +44,7 @@ public abstract partial class RequestDelegateCreationTests
                 {
                     "DateTimeOffset",
                     "1970-01-01T00:00:00.0000000+00:00",
-                    DateTimeOffset.UnixEpoch
+                    DateTimeOffset.UnixEpoch,
                 },
                 new object[] { "TimeSpan", "00:00:42", TimeSpan.FromSeconds(42) },
                 new object[] { "TimeOnly", "4:34 PM   ", new TimeOnly(16, 34) },
@@ -57,7 +57,7 @@ public abstract partial class RequestDelegateCreationTests
                 {
                     "IPEndPoint",
                     "127.0.0.1:80",
-                    new IPEndPoint(IPAddress.Loopback, 80)
+                    new IPEndPoint(IPAddress.Loopback, 80),
                 },
                 new object[] { "AddressFamily", "Unix", AddressFamily.Unix },
                 new object[] { "ILOpCode", "Nop", ILOpCode.Nop },
@@ -65,17 +65,17 @@ public abstract partial class RequestDelegateCreationTests
                 {
                     "AssemblyFlags",
                     "PublicKey,Retargetable",
-                    AssemblyFlags.PublicKey | AssemblyFlags.Retargetable
+                    AssemblyFlags.PublicKey | AssemblyFlags.Retargetable,
                 },
                 new object[] { "MyEnum", "ValueB", MyEnum.ValueB },
                 new object[]
                 {
                     "MyTryParseRecord",
                     "https://example.org",
-                    new MyTryParseRecord(new Uri("https://example.org"))
+                    new MyTryParseRecord(new Uri("https://example.org")),
                 },
                 new object[] { "int?", "42", 42 },
-                new object[] { "int?", null, null }
+                new object[] { "int?", null, null },
             };
         }
     }
@@ -120,42 +120,42 @@ app.MapGet("/hello", (HttpContext context, [FromQuery]{{typeName}} p) =>
                 new object[]
                 {
                     "9/20/2021 4:18:44 PM",
-                    "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified"
+                    "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified",
                 },
                 new object[]
                 {
                     "2021-09-20 4:18:44",
-                    "Time: 2021-09-20T04:18:44.0000000, Kind: Unspecified"
+                    "Time: 2021-09-20T04:18:44.0000000, Kind: Unspecified",
                 },
                 new object[]
                 {
                     "   9/20/2021    4:18:44 PM  ",
-                    "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified"
+                    "Time: 2021-09-20T16:18:44.0000000, Kind: Unspecified",
                 },
                 new object[]
                 {
                     "2021-09-20T16:28:02.000-07:00",
-                    "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc"
+                    "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc",
                 },
                 new object[]
                 {
                     "  2021-09-20T 16:28:02.000-07:00  ",
-                    "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc"
+                    "Time: 2021-09-20T23:28:02.0000000Z, Kind: Utc",
                 },
                 new object[]
                 {
                     "2021-09-20T23:30:02.000+00:00",
-                    "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc"
+                    "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc",
                 },
                 new object[]
                 {
                     "     2021-09-20T23:30: 02.000+00:00 ",
-                    "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc"
+                    "Time: 2021-09-20T23:30:02.0000000Z, Kind: Utc",
                 },
                 new object[]
                 {
                     "2021-09-20 16:48:02-07:00",
-                    "Time: 2021-09-20T23:48:02.0000000Z, Kind: Utc"
+                    "Time: 2021-09-20T23:48:02.0000000Z, Kind: Utc",
                 },
             };
         }
@@ -190,22 +190,22 @@ app.MapGet("/", (HttpContext context, [FromQuery] DateTime time)
                 new object[]
                 {
                     "09/20/2021 16:35:12 +00:00",
-                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00"
+                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00",
                 },
                 new object[]
                 {
                     "09/20/2021 11:35:12 +07:00",
-                    "Time: 2021-09-20T11:35:12.0000000+07:00, Offset: 07:00:00"
+                    "Time: 2021-09-20T11:35:12.0000000+07:00, Offset: 07:00:00",
                 },
                 new object[]
                 {
                     "09/20/2021 16:35:12",
-                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00"
+                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00",
                 },
                 new object[]
                 {
                     " 09/20/2021 16:35:12 ",
-                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00"
+                    "Time: 2021-09-20T16:35:12.0000000+00:00, Offset: 00:00:00",
                 },
             };
         }

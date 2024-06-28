@@ -315,7 +315,7 @@ namespace MonoTests.System.Web.DynamicData
                     Action = PageAction.List,
                     ViewName = "ListDetails",
                     Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler()
+                    RouteHandler = new MyDynamicDataRouteHandler(),
                 }
             );
 
@@ -325,7 +325,7 @@ namespace MonoTests.System.Web.DynamicData
                     Action = PageAction.Details,
                     ViewName = "ListDetails",
                     Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler()
+                    RouteHandler = new MyDynamicDataRouteHandler(),
                 }
             );
 
@@ -353,7 +353,7 @@ namespace MonoTests.System.Web.DynamicData
                     Action = PageAction.Edit,
                     ViewName = "MyEditInsert",
                     Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler()
+                    RouteHandler = new MyDynamicDataRouteHandler(),
                 }
             );
 
@@ -363,7 +363,7 @@ namespace MonoTests.System.Web.DynamicData
                     Action = PageAction.Insert,
                     ViewName = "MyEditInsert",
                     Model = m,
-                    RouteHandler = new MyDynamicDataRouteHandler()
+                    RouteHandler = new MyDynamicDataRouteHandler(),
                 }
             );
 
@@ -1006,7 +1006,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Constraints = new RouteValueDictionary(new { action = "List|Details|Edit|Insert" }),
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
             routes.Add(route);
 
@@ -1032,7 +1032,7 @@ namespace MonoTests.System.Web.DynamicData
             {
                 Constraints = new RouteValueDictionary(new { action = "List|Details|Edit|Insert" }),
                 Model = m,
-                RouteHandler = new MyDynamicDataRouteHandler()
+                RouteHandler = new MyDynamicDataRouteHandler(),
             };
             routes.Add(route);
 

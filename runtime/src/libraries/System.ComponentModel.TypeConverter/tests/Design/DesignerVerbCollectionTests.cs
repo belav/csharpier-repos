@@ -22,7 +22,7 @@ namespace System.ComponentModel.Design.Tests
             var value = new DesignerVerb[]
             {
                 new DesignerVerb("Text", null),
-                new DesignerVerb("Text", null)
+                new DesignerVerb("Text", null),
             };
             var collection = new DesignerVerbCollection(value);
             Assert.Equal(2, collection.Count);
@@ -95,7 +95,7 @@ namespace System.ComponentModel.Design.Tests
             var value = new DesignerVerb[]
             {
                 new DesignerVerb("Text", null),
-                new DesignerVerb("Text", null)
+                new DesignerVerb("Text", null),
             };
             var collection = new DesignerVerbCollection();
             collection.AddRange(value);
@@ -110,7 +110,7 @@ namespace System.ComponentModel.Design.Tests
             var value = new DesignerVerb[]
             {
                 new DesignerVerb("Text", null),
-                new DesignerVerb("Text", null)
+                new DesignerVerb("Text", null),
             };
             var collection = new DesignerVerbCollection();
             collection.AddRange(new DesignerVerbCollection(value));
@@ -125,7 +125,7 @@ namespace System.ComponentModel.Design.Tests
             var value = new DesignerVerb[]
             {
                 new DesignerVerb("Text", null),
-                new DesignerVerb("Text", null)
+                new DesignerVerb("Text", null),
             };
             var collection = new DesignerVerbCollection(value);
             collection.AddRange(collection);

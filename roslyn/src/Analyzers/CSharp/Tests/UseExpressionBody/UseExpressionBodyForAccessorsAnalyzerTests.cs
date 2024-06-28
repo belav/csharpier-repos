@@ -87,7 +87,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
                         ExpressionBodyPreference.WhenPossible
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
                         ExpressionBodyPreference.Never
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -640,7 +640,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         ExpressionBodyPreference.WhenOnSingleLine,
                         NotificationOption2.None
                     },
-                }
+                },
             }.RunAsync();
         }
 
@@ -844,7 +844,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                         CSharpCodeStyleOptions.PreferExpressionBodiedIndexers,
                         ExpressionBodyPreference.Never
                     },
-                }
+                },
             }.RunAsync();
         }
 

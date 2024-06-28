@@ -1335,13 +1335,13 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
         {
             Single = new2dd,
             Root = new Root(),
-            DerivedRoot = new Root()
+            DerivedRoot = new Root(),
         };
         var newRoot = new Root
         {
             RequiredNonPkSingle = new1,
             RequiredNonPkSingleDerived = new1d,
-            RequiredNonPkSingleMoreDerived = new1dd
+            RequiredNonPkSingleMoreDerived = new1dd,
         };
         Root root = null;
         IReadOnlyList<EntityEntry> entries = null;
@@ -1430,9 +1430,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     var testCode =
                         deleteOrphansTiming == CascadeTiming.Immediate
                             ? () => context.ChangeTracker.DetectChanges()
-                            : deleteOrphansTiming == null
-                                ? () => context.ChangeTracker.CascadeChanges()
-                                : (Action)(() => context.SaveChanges());
+                        : deleteOrphansTiming == null ? () => context.ChangeTracker.CascadeChanges()
+                        : (Action)(() => context.SaveChanges());
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 
@@ -1684,9 +1683,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     var testCode =
                         deleteOrphansTiming == CascadeTiming.Immediate
                             ? () => context.ChangeTracker.DetectChanges()
-                            : deleteOrphansTiming == null
-                                ? () => context.ChangeTracker.CascadeChanges()
-                                : (Action)(() => context.SaveChanges());
+                        : deleteOrphansTiming == null ? () => context.ChangeTracker.CascadeChanges()
+                        : (Action)(() => context.SaveChanges());
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
 

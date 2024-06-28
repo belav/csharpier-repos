@@ -118,7 +118,7 @@ namespace System.Windows.Forms
         WS_EX_NOACTIVATE = 0x08000000,
 
         WS_EX_OVERLAPPEDWINDOW = WS_EX_WINDOWEDGE | WS_EX_CLIENTEDGE,
-        WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST
+        WS_EX_PALETTEWINDOW = WS_EX_WINDOWEDGE | WS_EX_TOOLWINDOW | WS_EX_TOPMOST,
     }
 
     [Flags]
@@ -132,7 +132,7 @@ namespace System.Windows.Forms
         TBSTYLE_TOOLTIPS = 0x100,
         TBSTYLE_FLAT = 0x800,
         TBSTYLE_LIST = 0x1000,
-        TBSTYLE_TRANSPARENT = 0x8000
+        TBSTYLE_TRANSPARENT = 0x8000,
     }
 
 #if PUBLIC_TYPES
@@ -408,7 +408,7 @@ namespace System.Windows.Forms
         NIN_BALLOONSHOW = WM_USER + 0x0002,
         NIN_BALLOONHIDE = WM_USER + 0x0003,
         NIN_BALLOONTIMEOUT = WM_USER + 0x0004,
-        NIN_BALLOONUSERCLICK = WM_USER + 0x0005
+        NIN_BALLOONUSERCLICK = WM_USER + 0x0005,
     }
 
 #if PUBLIC_TYPES
@@ -439,7 +439,7 @@ namespace System.Windows.Forms
         UIS_INITIALIZE = 3,
         UISF_HIDEFOCUS = 0x1,
         UISF_HIDEACCEL = 0x2,
-        UISF_ACTIVE = 0x4
+        UISF_ACTIVE = 0x4,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -511,7 +511,7 @@ namespace System.Windows.Forms
         None = 0x00,
         Get = 0x01,
         Set = 0x02,
-        GetSet = 0x03
+        GetSet = 0x03,
     }
 
 #if PUBLIC_TYPES
@@ -523,7 +523,7 @@ namespace System.Windows.Forms
     {
         WA_INACTIVE = 0,
         WA_ACTIVE = 1,
-        WA_CLICKACTIVE = 2
+        WA_CLICKACTIVE = 2,
     }
 
 #if PUBLIC_TYPES
@@ -535,7 +535,7 @@ namespace System.Windows.Forms
     {
         None = 0,
         ExtendedKey = 0x0001,
-        KeyUp = 0x0002
+        KeyUp = 0x0002,
     }
 
 #if PUBLIC_TYPES
@@ -715,7 +715,9 @@ namespace System.Windows.Forms
         XK_Scroll_Lock = 0xff14,
         XK_Sys_Req = 0xff15,
         XK_Escape = 0xff1b,
-        XK_Delete = 0xffff /* Delete, rubout */
+        XK_Delete =
+            0xffff /* Delete, rubout */
+        ,
     }
 
 #if PUBLIC_TYPES
@@ -740,7 +742,7 @@ namespace System.Windows.Forms
         XK_Break = 0xff6b,
         XK_Mode_switch = 0xff7e,
         XK_script_switch = 0xff7e,
-        XK_Num_Lock = 0xff7f
+        XK_Num_Lock = 0xff7f,
     }
 
 #if PUBLIC_TYPES
@@ -787,7 +789,7 @@ namespace System.Windows.Forms
         XK_KP_6 = 0xffb6,
         XK_KP_7 = 0xffb7,
         XK_KP_8 = 0xffb8,
-        XK_KP_9 = 0xffb9
+        XK_KP_9 = 0xffb9,
     }
 
 #if PUBLIC_TYPES
@@ -815,7 +817,7 @@ namespace System.Windows.Forms
         XK_dead_semivoiced_sound = 0xfe5f,
         XK_dead_belowdot = 0xfe60,
         XK_dead_hook = 0xfe61,
-        XK_dead_horn = 0xfe62
+        XK_dead_horn = 0xfe62,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -843,7 +845,7 @@ namespace System.Windows.Forms
     {
         PM_NOREMOVE = 0x00000000,
         PM_REMOVE = 0x00000001,
-        PM_NOYIELD = 0x00000002
+        PM_NOYIELD = 0x00000002,
     }
 
 #if PUBLIC_TYPES
@@ -880,7 +882,7 @@ namespace System.Windows.Forms
         SizeWE = 24,
         UpArrow = 25,
         VSplit = 26,
-        WaitCursor = 27
+        WaitCursor = 27,
     }
 
 #if PUBLIC_TYPES
@@ -918,7 +920,7 @@ namespace System.Windows.Forms
         HTSIZELAST = HTBOTTOMRIGHT,
         HTOBJECT = 19,
         HTCLOSE = 20,
-        HTHELP = 21
+        HTHELP = 21,
     }
 
 #if PUBLIC_TYPES
@@ -930,7 +932,7 @@ namespace System.Windows.Forms
     {
         None = 0,
         Normal = 1,
-        Tool = 2
+        Tool = 2,
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -977,7 +979,7 @@ namespace System.Windows.Forms
         CF_ENHMETAFILE = 14,
         CF_HDROP = 15,
         CF_LOCALE = 16,
-        CF_DIBV5 = 17
+        CF_DIBV5 = 17,
     }
 
     [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -1031,7 +1033,7 @@ namespace System.Windows.Forms
         SB_LEFT = 6,
         SB_BOTTOM = 7,
         SB_RIGHT = 7,
-        SB_ENDSCROLL = 8
+        SB_ENDSCROLL = 8,
     }
 
 #if PUBLIC_TYPES
@@ -1048,7 +1050,7 @@ namespace System.Windows.Forms
         RGN_COPY,
 
         RGN_MIN = RGN_AND,
-        RGN_MAX = RGN_COPY
+        RGN_MAX = RGN_COPY,
     }
 
 #if PUBLIC_TYPES
@@ -1076,7 +1078,7 @@ namespace System.Windows.Forms
         SC_HOTKEY = 0xF150,
         SC_DEFAULT = 0xF160,
         SC_MONITORPOWER = 0xF170,
-        SC_CONTEXTHELP = 0xF180
+        SC_CONTEXTHELP = 0xF180,
     }
 
 #if PUBLIC_TYPES
@@ -1090,6 +1092,6 @@ namespace System.Windows.Forms
         Error = 2,
         Question = 3,
         Warning = 4,
-        Information = 5
+        Information = 5,
     }
 }

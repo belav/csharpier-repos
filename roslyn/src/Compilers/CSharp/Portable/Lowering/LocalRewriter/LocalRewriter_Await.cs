@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     type
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 },
                 used
             );

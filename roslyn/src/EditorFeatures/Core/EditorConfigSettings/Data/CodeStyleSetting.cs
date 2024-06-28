@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             var valueDescriptions = new[]
             {
                 trueValueDescription ?? EditorFeaturesResources.Yes,
-                falseValueDescription ?? EditorFeaturesResources.No
+                falseValueDescription ?? EditorFeaturesResources.No,
             };
 
             return new CodeStyleSetting<bool>(
@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
             var valueDescriptions = new[]
             {
                 trueValueDescription ?? EditorFeaturesResources.Yes,
-                falseValueDescription ?? EditorFeaturesResources.No
+                falseValueDescription ?? EditorFeaturesResources.No,
             };
 
             return new CodeStyleSetting<bool>(

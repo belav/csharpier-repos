@@ -34,6 +34,6 @@ namespace System.Web.Mail
     public enum MailEncoding
     {
         UUEncode,
-        Base64
+        Base64,
     }
 }

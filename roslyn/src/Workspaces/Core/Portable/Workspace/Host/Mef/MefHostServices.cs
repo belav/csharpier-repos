@@ -122,7 +122,7 @@ namespace Microsoft.CodeAnalysis.Host.Mef
             "Microsoft.CodeAnalysis.VisualBasic.Workspaces",
             "Microsoft.CodeAnalysis.Features",
             "Microsoft.CodeAnalysis.CSharp.Features",
-            "Microsoft.CodeAnalysis.VisualBasic.Features"
+            "Microsoft.CodeAnalysis.VisualBasic.Features",
         ];
 
         internal static bool IsDefaultAssembly(Assembly assembly)

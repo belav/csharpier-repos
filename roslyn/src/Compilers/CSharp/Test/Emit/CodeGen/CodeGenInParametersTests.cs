@@ -5572,7 +5572,7 @@ Console.Write(C.M(in s));
                 references: new[]
                 {
                     libChanged.EmitToImageReference(),
-                    libUser.EmitToImageReference()
+                    libUser.EmitToImageReference(),
                 }
             );
             CompileAndVerify(comp, expectedOutput: "RAN 00");
@@ -5668,7 +5668,7 @@ System.Console.Write(c.M());
                 references: new[]
                 {
                     libChanged.EmitToImageReference(),
-                    libUser.EmitToImageReference()
+                    libUser.EmitToImageReference(),
                 }
             );
             CompileAndVerify(comp, expectedOutput: "Report1 11");

@@ -19,8 +19,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Simple positive test 1")
                         {
                             Params = new object[] { "NNS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
                 this.AddChild(
@@ -29,8 +29,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Simple positive test 2")
                         {
                             Params = new object[] { "DNS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
                 this.AddChild(
@@ -39,8 +39,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Simple positive test 3")
                         {
                             Params = new object[] { "NS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -54,8 +54,8 @@ namespace System.Xml.Tests
                             "Read on a deep tree at least more than 4K boundary"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -67,8 +67,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Read on a deep tree with more than 65536 elems")
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -83,10 +83,10 @@ namespace System.Xml.Tests
                             Params = new object[]
                             {
                                 "NS",
-                                "<root xmlns:a='a'><a:a att='1'/><a:a att='2'/><a:a att='3'/></root>"
+                                "<root xmlns:a='a'><a:a att='1'/><a:a att='2'/><a:a att='3'/></root>",
                             },
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -97,10 +97,10 @@ namespace System.Xml.Tests
                             Params = new object[]
                             {
                                 "DNS",
-                                "<root xmlns='a'><a att='1'/><a att='2'/><a att='3'/></root>"
+                                "<root xmlns='a'><a att='1'/><a att='2'/><a att='3'/></root>",
                             },
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -111,10 +111,10 @@ namespace System.Xml.Tests
                             Params = new object[]
                             {
                                 "NNS",
-                                "<root><a att='1'/><a att='2'/><a att='3'/></root>"
+                                "<root><a att='1'/><a att='2'/><a att='3'/></root>",
                             },
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -128,8 +128,8 @@ namespace System.Xml.Tests
                             "If name not found, stop at end element of the subtree"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -143,8 +143,8 @@ namespace System.Xml.Tests
                             "Positioning on a level and try to find the name which is on a level higher"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -158,8 +158,8 @@ namespace System.Xml.Tests
                             "Read to next sibling on one level and again to level below it"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -169,7 +169,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v12)
                     {
-                        Attribute = new Variation("Call from different nodetypes") { Pri = 1 }
+                        Attribute = new Variation("Call from different nodetypes") { Pri = 1 },
                     }
                 );
             }
@@ -183,8 +183,8 @@ namespace System.Xml.Tests
                             "Pass null to both arguments throws ArgumentException"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -196,8 +196,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Different names, same uri works correctly")
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }

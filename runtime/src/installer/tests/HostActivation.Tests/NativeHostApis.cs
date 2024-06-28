@@ -78,7 +78,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 new List<(string fwName, string[] fwVersions)>()
                 {
                     ("HostFxr.Test.A", new[] { "1.2.3", "3.0.0" }),
-                    ("HostFxr.Test.B", new[] { "5.6.7-A" })
+                    ("HostFxr.Test.B", new[] { "5.6.7-A" }),
                 };
             public string[] SelfRegisteredGlobalSdks = new[] { "3.0.0", "15.1.4-preview", "5.6.7" };
             public string[] LocalSdks = new[] { "0.1.2", "5.6.7-preview", "1.2.3" };
@@ -88,7 +88,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             )>()
             {
                 ("HostFxr.Test.B", new[] { "4.0.0", "5.6.7-A" }),
-                ("HostFxr.Test.C", new[] { "3.0.0" })
+                ("HostFxr.Test.C", new[] { "3.0.0" }),
             };
 
             public SdkResolutionFixture(SharedTestState state)
@@ -218,7 +218,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             string expectedData = string.Join(
                 ';',
-                new[] { ("resolved_sdk_dir", Path.Combine(f.LocalSdkDir, "5.6.7-preview")), }
+                new[] { ("resolved_sdk_dir", Path.Combine(f.LocalSdkDir, "5.6.7-preview")) }
             );
 
             f.Dotnet.Exec(f.AppDll, new[] { "hostfxr_resolve_sdk2", f.ExeDir, f.WorkingDir, "0" })
@@ -342,7 +342,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 {
                     Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.B"),
                     Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.B"),
-                    Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.C")
+                    Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.C"),
                 }
             );
 
@@ -377,7 +377,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             var f = new SdkResolutionFixture(sharedTestState);
             string expectedSdkVersions = string.Join(
                 ';',
-                new[] { "0.1.2", "1.2.3", "5.6.7-preview", }
+                new[] { "0.1.2", "1.2.3", "5.6.7-preview" }
             );
 
             string expectedSdkPaths = string.Join(
@@ -406,7 +406,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 {
                     Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.B"),
                     Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.B"),
-                    Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.C")
+                    Path.Combine(f.LocalFrameworksDir, "HostFxr.Test.C"),
                 }
             );
 

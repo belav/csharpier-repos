@@ -47,7 +47,7 @@ namespace System.Reflection.Metadata.Tests
                     0x11,
                     0x12,
                     0x13,
-                    0x14
+                    0x14,
                 }
             );
             Assert.Equal(new Guid("04030201-0605-0807-090a-0b0c0d0e0f10"), id3.Guid);
@@ -193,7 +193,7 @@ namespace System.Reflection.Metadata.Tests
                     0x0D,
                     0x0E,
                     0x0F,
-                    0x10
+                    0x10,
                 },
                 id1.Guid.ToByteArray()
             );
@@ -221,7 +221,7 @@ namespace System.Reflection.Metadata.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 id2.Guid.ToByteArray()
             );
@@ -249,7 +249,7 @@ namespace System.Reflection.Metadata.Tests
                     0xff,
                     0xff,
                     0xff,
-                    0xff
+                    0xff,
                 }
             );
 
@@ -271,7 +271,7 @@ namespace System.Reflection.Metadata.Tests
                     0xff,
                     0xff,
                     0xff,
-                    0xff
+                    0xff,
                 },
                 id3.Guid.ToByteArray()
             );

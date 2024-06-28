@@ -2033,7 +2033,7 @@ public class C3
                         "C0",
                         "MethodReference_05_0, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
-                    .WithLocation(7, 9)
+                    .WithLocation(7, 9),
             };
             AssertUsedAssemblyReferences(
                 source3,
@@ -2117,7 +2117,7 @@ public interface C0
                 //         x.M1("b");
                 Diagnostic(ErrorCode.ERR_NoCanonicalView, "x.M1")
                     .WithArguments("C0")
-                    .WithLocation(7, 9)
+                    .WithLocation(7, 9),
             };
 
             AssertUsedAssemblyReferences(
@@ -5483,7 +5483,7 @@ class C2
                     // (1001,1): hidden CS8019: Unnecessary using directive.
                     // using N1.N2;
                     Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1.N2;")
-                        .WithLocation(1001, 1)
+                        .WithLocation(1001, 1),
                 },
                 new[]
                 {
@@ -5495,7 +5495,7 @@ class C2
                     // using N1.N2;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
                         .WithArguments("N1")
-                        .WithLocation(1001, 7)
+                        .WithLocation(1001, 7),
                 },
                 references
             );
@@ -5531,7 +5531,7 @@ class C2
                     // (1001,1): hidden CS8019: Unnecessary using directive.
                     // using N1;
                     Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N1;")
-                        .WithLocation(1001, 1)
+                        .WithLocation(1001, 1),
                 },
                 new[]
                 {
@@ -5543,7 +5543,7 @@ class C2
                     // using N1;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
                         .WithArguments("N1")
-                        .WithLocation(1001, 7)
+                        .WithLocation(1001, 7),
                 },
                 references
             );
@@ -5618,7 +5618,7 @@ class C2
                     {
                         1 => references,
                         2 => expected,
-                        _ => new MetadataReference[] { }
+                        _ => new MetadataReference[] { },
                     },
                     references
                 );
@@ -5809,7 +5809,7 @@ class C2
                     // (1001,1): hidden CS8019: Unnecessary using directive.
                     // using static N1.N2.E0;
                     Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using static N1.N2.E0;")
-                        .WithLocation(1001, 1)
+                        .WithLocation(1001, 1),
                 },
                 new[]
                 {
@@ -5821,7 +5821,7 @@ class C2
                     // using static N1.N2.E0;
                     Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "N1")
                         .WithArguments("N1")
-                        .WithLocation(1001, 14)
+                        .WithLocation(1001, 14),
                 },
                 references
             );
@@ -5878,7 +5878,7 @@ class C2
                         1 => references,
                         2 => new[] { reference0, reference1 },
                         3 => new[] { reference0 },
-                        _ => new MetadataReference[] { }
+                        _ => new MetadataReference[] { },
                     },
                     references
                 );
@@ -7135,7 +7135,7 @@ public class C2
                     // (2,1): hidden CS8020: Unused extern alias.
                     // extern alias N1C1;
                     Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
-                        .WithLocation(2, 1)
+                        .WithLocation(2, 1),
                 },
                 new[]
                 {
@@ -7147,7 +7147,7 @@ public class C2
                     // extern alias N1C1;
                     Diagnostic(ErrorCode.ERR_BadExternAlias, "N1C1")
                         .WithArguments("N1C1")
-                        .WithLocation(2, 14)
+                        .WithLocation(2, 14),
                 },
                 references
             );
@@ -7175,7 +7175,7 @@ public class C2
                     // (2,1): hidden CS8020: Unused extern alias.
                     // extern alias N1C1;
                     Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
-                        .WithLocation(2, 1)
+                        .WithLocation(2, 1),
                 },
                 new[]
                 {
@@ -7187,7 +7187,7 @@ public class C2
                     // extern alias N1C1;
                     Diagnostic(ErrorCode.ERR_BadExternAlias, "N1C1")
                         .WithArguments("N1C1")
-                        .WithLocation(2, 14)
+                        .WithLocation(2, 14),
                 },
                 references
             );

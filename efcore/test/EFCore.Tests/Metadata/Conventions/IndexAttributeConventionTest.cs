@@ -31,7 +31,7 @@ public class IndexAttributeConventionTest
         var indexProperties = new List<string>
         {
             propABuilder.Metadata.Name,
-            propBBuilder.Metadata.Name
+            propBBuilder.Metadata.Name,
         };
         var indexBuilder = entityBuilder.HasIndex(
             indexProperties,

@@ -34,6 +34,6 @@ namespace System.Web.Security
     {
         All,
         Encryption,
-        Validation
+        Validation,
     }
 }

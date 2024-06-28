@@ -174,7 +174,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         var examInstanceQuestion = new ExamQuestion3595
         {
             Question = question,
-            Exam = examInstance
+            Exam = examInstance,
         };
 
         context.Add(question);
@@ -359,7 +359,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 {
                     One = eRootJoined,
                     Two = 2,
-                    Coalesce = eRootJoined ?? (eVersion ?? eRootJoined)
+                    Coalesce = eRootJoined ?? (eVersion ?? eRootJoined),
                 };
 
             var result = query.ToList();
@@ -404,7 +404,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 {
                     eRootJoined,
                     eVersion,
-                    foo = eRootJoined ?? eVersion
+                    foo = eRootJoined ?? eVersion,
                 };
 
             Assert.Equal(3, query.ToList().Count);
@@ -623,11 +623,11 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     {
                         new()
                         {
-                            Comments = new List<Comment5456> { new(), new() }
+                            Comments = new List<Comment5456> { new(), new() },
                         },
-                        new()
+                        new(),
                     },
-                    Author = new Author5456()
+                    Author = new Author5456(),
                 }
             );
         }
@@ -792,7 +792,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     CustomerMembershipId =
                         customerMembership != null ? customerMembership.Id : default(int?),
                     CustomerMembershipName =
-                        customerMembership != null ? customerMembership.Name : ""
+                        customerMembership != null ? customerMembership.Name : "",
                 };
             return query;
         }
@@ -807,17 +807,17 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         var customerMembership1 = new CustomerMembership19708
         {
             Name = "FirstChild",
-            Customer = customer1
+            Customer = customer1,
         };
         var customerMembership2 = new CustomerMembership19708
         {
             Name = "SecondChild1",
-            Customer = customer2
+            Customer = customer2,
         };
         var customerMembership3 = new CustomerMembership19708
         {
             Name = "SecondChild2",
-            Customer = customer2
+            Customer = customer2,
         };
 
         context.AddRange(customer1, customer2, customer3);
@@ -871,7 +871,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                                     .FrontCover.Illustrations.FirstOrDefault(i =>
                                         i.State >= IllustrationState21768.Approved
                                     )
-                                    .Uri
+                                    .Uri,
                             }
                             : null,
                 };
@@ -955,7 +955,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         New,
         PendingApproval,
         Approved,
-        Printed
+        Printed,
     }
 
     private class MyContext21768 : DbContext
@@ -1048,9 +1048,9 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                         {
                             Other = dtoOwner.Owned2.Other == null
                                 ? null
-                                : new { dtoOwner.Owned2.Other.Id }
+                                : new { dtoOwner.Owned2.Other.Id },
                         },
-                    Owned1 = dtoOwner.Owned1 == null ? null : new { dtoOwner.Owned1.Value }
+                    Owned1 = dtoOwner.Owned1 == null ? null : new { dtoOwner.Owned1.Value },
                 })
                 .ToList();
 
@@ -1063,7 +1063,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     private static void Seed20729(MyContext20729 context)
     {
         context.Owners.Add(
-            new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729(), }
+            new Owner20729 { Owned1 = new Owned120729(), Owned2 = new Owned220729() }
         );
 
         context.SaveChanges();
@@ -1322,13 +1322,13 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             {
                 a = "a0",
                 a1 = "a1",
-                forkey = "a"
+                forkey = "a",
             },
             new()
             {
                 a = "a2",
                 a1 = "a1",
-                forkey = "d"
+                forkey = "d",
             },
         };
         var tmp_b = new B19253[]
@@ -1337,13 +1337,13 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             {
                 b = "b0",
                 b1 = "b1",
-                forkey = "a"
+                forkey = "a",
             },
             new()
             {
                 b = "b2",
                 b1 = "b1",
-                forkey = "c"
+                forkey = "c",
             },
         };
         context.A.AddRange(tmp_a);
@@ -1443,7 +1443,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             {
                 Id1 = 1,
                 Id2 = 11,
-                OwnedProp = new OwnedClass23687 { A = "A", B = "B" }
+                OwnedProp = new OwnedClass23687 { A = "A", B = "B" },
             }
         );
 
@@ -1549,7 +1549,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         One,
         Two,
         Three,
-        Four
+        Four,
     }
 
     private class StatusMap23593
@@ -1619,7 +1619,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     private enum UserTypes23926
     {
         User,
-        DerivedUser
+        DerivedUser,
     }
 
     private class DerivedUser23926 : User23926
@@ -1663,7 +1663,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     A = x.Owned.First,
                     B = x.Owned.Second,
                     C = x.Child.Owned.First,
-                    D = x.Child.Owned.Second
+                    D = x.Child.Owned.Second,
                 })
                 .FirstOrDefault();
 
@@ -1685,7 +1685,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                 {
                     First = 2,
                     Second = 4,
-                    AnotherValueType = "yay"
+                    AnotherValueType = "yay",
                 },
                 Child = new ChildEntity18435
                 {
@@ -1693,9 +1693,9 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                     {
                         First = 1,
                         Second = 3,
-                        AnotherValueType = "nay"
-                    }
-                }
+                        AnotherValueType = "nay",
+                    },
+                },
             }
         );
 
@@ -1766,7 +1766,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
     private enum Bar19425
     {
         value1,
-        value2
+        value2,
     }
 
     private class FooTable19425
@@ -1811,14 +1811,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
             new MyEntity19667
             {
                 Id = 1,
-                Type = new MyType19667 { Date = new DateTime(2020, 1, 1) }
+                Type = new MyType19667 { Date = new DateTime(2020, 1, 1) },
             }
         );
         context.Entities.Add(
             new MyEntity19667
             {
                 Id = 2,
-                Type = new MyType19667 { Date = new DateTime(2020, 1, 1).AddDays(1) }
+                Type = new MyType19667 { Date = new DateTime(2020, 1, 1).AddDays(1) },
             }
         );
 
@@ -1867,7 +1867,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
             var result2 = (
                 from r in context.Root
-                select new { r.A.Sub.AValue, r.B.BValue, }
+                select new { r.A.Sub.AValue, r.B.BValue }
             ).FirstOrDefault();
 
             Assert.Equal(result1.BValue, result2.BValue);
@@ -1879,7 +1879,7 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         var root = new Root20359
         {
             A = new A20359 { Sub = new ASubClass20359 { AValue = "A Value" } },
-            B = new B20359 { BValue = "B Value" }
+            B = new B20359 { BValue = "B Value" },
         };
 
         context.Add(root);
@@ -1972,9 +1972,9 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
 
     private static void Seed23360(MyContext23360 context)
     {
-        context.User.Add(new User23360 { Forename = "Peter", Surname = "Smith", });
+        context.User.Add(new User23360 { Forename = "Peter", Surname = "Smith" });
 
-        context.Customer.Add(new Customer23360 { GivenName = "John", FamilyName = "Doe", });
+        context.Customer.Add(new Customer23360 { GivenName = "John", FamilyName = "Doe" });
 
         context.SaveChanges();
     }
@@ -2040,10 +2040,10 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
                                     .PropertyB.PropertyCList.Select(y => new CDto18394
                                     {
                                         Id = y.Id,
-                                        SomeText = y.SomeText
+                                        SomeText = y.SomeText,
                                     })
-                                    .ToList()
-                            }
+                                    .ToList(),
+                            },
                 })
                 .FirstOrDefault();
 
@@ -2057,8 +2057,8 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         {
             PropertyB = new B18394
             {
-                PropertyCList = new List<C18394> { new() { SomeText = "TestText" } }
-            }
+                PropertyCList = new List<C18394> { new() { SomeText = "TestText" } },
+            },
         };
         context.As.Add(a);
 
@@ -2156,14 +2156,14 @@ public class QueryBugsInMemoryTest : IClassFixture<InMemoryFixture>
         var inner = new Inner23934
         {
             Id = Guid.NewGuid(),
-            OwnedProp = new OwnedClass23934 { At = new DateTime(2020, 1, 1) }
+            OwnedProp = new OwnedClass23934 { At = new DateTime(2020, 1, 1) },
         };
 
         var outer = new Outer23934
         {
             Id = Guid.NewGuid(),
             OwnedProp = new OwnedClass23934 { At = new DateTime(2020, 1, 1) },
-            InnerId = inner.Id
+            InnerId = inner.Id,
         };
 
         context.Inners.Add(inner);

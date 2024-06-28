@@ -418,7 +418,7 @@ namespace System.Web.Razor.Parser
                 Language.TokenizeString
             )
             {
-                AutoCompleteAtEndOfSpan = true
+                AutoCompleteAtEndOfSpan = true,
             };
 
             Span.EditHandler = editHandler;

@@ -21,6 +21,6 @@ namespace System.ComponentModel.Design
         /// <summary>
         /// Indicates the keyword is a filter keyword.
         /// </summary>
-        FilterKeyword
+        FilterKeyword,
     }
 }

@@ -46,6 +46,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         FrameTitle5 = 14,
         FrameTitle6 = 15,
         FrameTitle7 = 16,
-        FrameTitle8 = 17
+        FrameTitle8 = 17,
     }
 }

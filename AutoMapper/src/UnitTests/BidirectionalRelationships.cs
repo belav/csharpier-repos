@@ -217,7 +217,7 @@ public class When_mapping_to_a_destination_with_a_bidirectional_parent_one_to_ma
 
             List<ChildModel> childModels = new List<ChildModel>
             {
-                new ChildModel { ID = 1, Parent = _parent }
+                new ChildModel { ID = 1, Parent = _parent },
             };
 
             Dictionary<int, ParentModel> parents = childModels.ToDictionary(

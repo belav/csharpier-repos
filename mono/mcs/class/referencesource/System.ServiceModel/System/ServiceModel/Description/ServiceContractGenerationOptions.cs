@@ -14,6 +14,6 @@ namespace System.ServiceModel.Description
         ClientClass = 8,
         TypedMessages = 16,
         EventBasedAsynchronousMethods = 32,
-        TaskBasedAsynchronousMethod = 64
+        TaskBasedAsynchronousMethod = 64,
     }
 }

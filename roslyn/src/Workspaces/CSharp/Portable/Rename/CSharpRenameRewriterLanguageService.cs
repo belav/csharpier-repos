@@ -966,7 +966,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                                 newIdentifierToken,
                                 new RenameTokenSimplificationAnnotation()
                                 {
-                                    OriginalTextSpan = oldToken.Span
+                                    OriginalTextSpan = oldToken.Span,
                                 }
                             )
                         );
@@ -1543,7 +1543,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Rename
                     {
                         "_" + replacementText,
                         "get_" + replacementText,
-                        "set_" + replacementText
+                        "set_" + replacementText,
                     }
                 )
                 {

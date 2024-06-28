@@ -149,7 +149,7 @@ namespace System.Security.Cryptography.Tests
                 4,
                 5,
                 6,
-                7
+                7,
             };
             string label = "FANCY DATA";
             string expected =
@@ -220,7 +220,7 @@ namespace System.Security.Cryptography.Tests
                 4,
                 5,
                 6,
-                7
+                7,
             };
 
             Span<char> write = buffer[10..];
@@ -288,7 +288,7 @@ namespace System.Security.Cryptography.Tests
                 6,
                 7,
                 8,
-                9
+                9,
             };
             string label = "UNFANCY DATA";
             string expected =
@@ -421,7 +421,7 @@ namespace System.Security.Cryptography.Tests
                 0x41,
                 0x75,
                 0x43,
-                0x44
+                0x44,
             };
             string label = "EC PRIVATE KEY";
             string expected =

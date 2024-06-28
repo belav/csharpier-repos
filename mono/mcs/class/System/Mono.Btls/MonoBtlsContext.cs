@@ -374,7 +374,7 @@ namespace Mono.Btls
             {
                 CipherSuiteCode = cipher,
                 ProtocolVersion = GetProtocol(protocol),
-                PeerDomainName = serverName
+                PeerDomainName = serverName,
             };
         }
 

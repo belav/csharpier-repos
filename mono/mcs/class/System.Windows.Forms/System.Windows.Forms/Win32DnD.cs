@@ -211,7 +211,7 @@ namespace System.Windows.Forms
             DVASPECT_CONTENT = 1,
             DVASPECT_THUMBNAIL = 2,
             DVASPECT_ICON = 4,
-            DVASPECT_DOCPRINT = 8
+            DVASPECT_DOCPRINT = 8,
         }
 
         internal enum TYMED
@@ -223,7 +223,7 @@ namespace System.Windows.Forms
             TYMED_GDI = 16,
             TYMED_MFPICT = 32,
             TYMED_ENHMF = 64,
-            TYMED_NULL = 0
+            TYMED_NULL = 0,
         }
 
         private static readonly Guid IID_IUnknown = new Guid(

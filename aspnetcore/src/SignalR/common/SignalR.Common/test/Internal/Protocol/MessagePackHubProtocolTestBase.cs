@@ -38,7 +38,7 @@ public abstract class MessagePackHubProtocolTestBase
     public enum TestEnum
     {
         Zero = 0,
-        One
+        One,
     }
 
     // Test Data for Parse/WriteMessages:
@@ -315,7 +315,7 @@ public abstract class MessagePackHubProtocolTestBase
             0xc3,
             StringBytes(2),
             (byte)'e',
-            (byte)'x'
+            (byte)'x',
         };
 
         // Parse the input fully now.
@@ -398,7 +398,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0xa3,
                     (byte)'f',
                     (byte)'o',
-                    (byte)'o'
+                    (byte)'o',
                 },
                 "Reading 'headers[1].Key' as String failed."
             ),
@@ -421,7 +421,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'f',
                     (byte)'o',
                     (byte)'o',
-                    0x90
+                    0x90,
                 },
                 "Reading 'headers[1].Value' as String failed."
             ),
@@ -477,7 +477,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0x91,
                     0xa0,
                     0x91,
-                    0xa0
+                    0xa0,
                 },
                 "Null or empty value in streamIds received."
             ),
@@ -562,7 +562,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0xa3,
                     (byte)'x',
                     (byte)'y',
-                    (byte)'z'
+                    (byte)'z',
                 },
                 "Reading 'resultKind' as Int32 failed."
             ),
@@ -662,7 +662,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0xa3,
                     (byte)'x',
                     (byte)'y',
-                    (byte)'z'
+                    (byte)'z',
                 },
                 "Reading array length for 'arguments' failed."
             ),
@@ -681,7 +681,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'x',
                     (byte)'y',
                     (byte)'z',
-                    42
+                    42,
                 },
                 "Reading array length for 'arguments' failed."
             ),
@@ -700,7 +700,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'x',
                     (byte)'y',
                     (byte)'z',
-                    0x90
+                    0x90,
                 },
                 "Invocation provides 0 argument(s) but target expects 1."
             ),
@@ -723,7 +723,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0xa1,
                     (byte)'a',
                     0xa1,
-                    (byte)'b'
+                    (byte)'b',
                 },
                 "Invocation provides 2 argument(s) but target expects 1."
             ),
@@ -743,7 +743,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'y',
                     (byte)'z',
                     0x91,
-                    42
+                    42,
                 },
                 "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked."
             ),
@@ -762,7 +762,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0xa3,
                     (byte)'x',
                     (byte)'y',
-                    (byte)'z'
+                    (byte)'z',
                 },
                 "Reading array length for 'arguments' failed."
             ), // array is missing
@@ -781,7 +781,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'x',
                     (byte)'y',
                     (byte)'z',
-                    42
+                    42,
                 },
                 "Reading array length for 'arguments' failed."
             ), // arguments isn't an array
@@ -800,7 +800,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'x',
                     (byte)'y',
                     (byte)'z',
-                    0x90
+                    0x90,
                 },
                 "Invocation provides 0 argument(s) but target expects 1."
             ), // array is missing elements
@@ -823,7 +823,7 @@ public abstract class MessagePackHubProtocolTestBase
                     0xa1,
                     (byte)'a',
                     0xa1,
-                    (byte)'b'
+                    (byte)'b',
                 },
                 "Invocation provides 2 argument(s) but target expects 1."
             ), // argument count does not match binder argument count
@@ -843,7 +843,7 @@ public abstract class MessagePackHubProtocolTestBase
                     (byte)'y',
                     (byte)'z',
                     0x91,
-                    42
+                    42,
                 },
                 "Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked."
             ), // argument type mismatch

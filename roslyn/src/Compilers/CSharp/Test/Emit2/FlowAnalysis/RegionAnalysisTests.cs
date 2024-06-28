@@ -10289,7 +10289,7 @@ public struct CustomHandler
             {
                 (true, _) => "c",
                 (_, true) => "i1, c",
-                (_, false) => "i1, i2, c"
+                (_, false) => "i1, i2, c",
             };
 
             Assert.Equal(
@@ -10353,7 +10353,7 @@ public struct CustomHandler
             {
                 (true, _) => "c",
                 (_, true) => "i1, c",
-                (_, false) => "i1, i2, c"
+                (_, false) => "i1, i2, c",
             };
 
             Assert.Equal(

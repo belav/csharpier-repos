@@ -31,98 +31,98 @@ namespace System.Reflection.Tests
                 "FieldNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "FieldNonNullable",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(NullabilityInfoContextTests)
+                typeof(NullabilityInfoContextTests),
             };
             yield return new object[]
             {
                 "FieldValueTypeUnknown",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(int)
+                typeof(int),
             };
             yield return new object[]
             {
                 "FieldValueTypeNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(double)
+                typeof(double),
             };
             yield return new object[]
             {
                 "FieldValueTypeNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldAllowNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldDisallowNull2",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldAllowNull2",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldMaybeNull2",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldNotNull2",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
         }
 
@@ -151,21 +151,21 @@ namespace System.Reflection.Tests
                 "EventNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(EventHandler)
+                typeof(EventHandler),
             };
             yield return new object[]
             {
                 "EventUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(EventHandler)
+                typeof(EventHandler),
             };
             yield return new object[]
             {
                 "EventNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(EventHandler)
+                typeof(EventHandler),
             };
         }
 
@@ -194,140 +194,140 @@ namespace System.Reflection.Tests
                 "PropertyNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyNullableReadOnly",
                 NullabilityState.Nullable,
                 NullabilityState.Unknown,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyNonNullable",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(NullabilityInfoContextTests)
+                typeof(NullabilityInfoContextTests),
             };
             yield return new object[]
             {
                 "PropertyValueTypeUnknown",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(short)
+                typeof(short),
             };
             yield return new object[]
             {
                 "PropertyValueType",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(float)
+                typeof(float),
             };
             yield return new object[]
             {
                 "PropertyValueTypeNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(long?)
+                typeof(long?),
             };
             yield return new object[]
             {
                 "PropertyValueTypeDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "PropertyValueTypeAllowNull",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(byte)
+                typeof(byte),
             };
             yield return new object[]
             {
                 "PropertyValueTypeNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "PropertyValueTypeMaybeNull",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(byte)
+                typeof(byte),
             };
             yield return new object[]
             {
                 "PropertyDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyAllowNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyDisallowNull2",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyAllowNull2",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyMaybeNull2",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyNotNull2",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "Item",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
         }
 
@@ -366,31 +366,31 @@ namespace System.Reflection.Tests
             {
                 "PropertyArrayUnknown",
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "PropertyArrayNullNull",
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "PropertyArrayNullNon",
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
                 "PropertyArrayNonNull",
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "PropertyArrayNonNon",
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -417,31 +417,31 @@ namespace System.Reflection.Tests
             {
                 "PropertyArrayUnknown",
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "PropertyArrayNullNull",
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // T?[]? PropertyArrayNullNull { get; set; }
             yield return new object[]
             {
                 "PropertyArrayNullNon",
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // T?[] PropertyArrayNullNon { get; set; }
             yield return new object[]
             {
                 "PropertyArrayNonNull",
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // T[]? PropertyArrayNonNull { get; set; }
             yield return new object[]
             {
                 "PropertyArrayNonNon",
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // T[] PropertyArrayNonNon { get; set; }
         }
 
@@ -469,49 +469,49 @@ namespace System.Reflection.Tests
                 "PropertyJaggedArrayUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "PropertyJaggedArrayNullNullNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "PropertyJaggedArrayNullNullNon",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
                 "PropertyJaggedArrayNullNonNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "PropertyJaggedArrayNonNullNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "PropertyJaggedArrayNullNonNon",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
                 "PropertyJaggedArrayNonNonNull",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
         }
 
@@ -543,7 +543,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
@@ -551,7 +551,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -559,7 +559,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
@@ -567,7 +567,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -575,7 +575,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -583,7 +583,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -616,7 +616,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
@@ -624,7 +624,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // Tuple<T?, string?, string?>?
             yield return new object[]
             {
@@ -632,7 +632,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // Tuple<T, T?, string>
             yield return new object[]
             {
@@ -640,7 +640,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // Tuple<string?, T, T?>?
             yield return new object[]
             {
@@ -648,7 +648,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // Tuple<T, string?, string>?
             yield return new object[]
             {
@@ -656,7 +656,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // Tuple<string, string, T>
         }
 
@@ -689,7 +689,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
@@ -697,7 +697,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
@@ -705,7 +705,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -713,7 +713,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -721,7 +721,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
@@ -729,7 +729,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -737,7 +737,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -770,7 +770,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
@@ -778,7 +778,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // IDictionary<T?, string?[]?> PropertyDictionaryNullNullNullNon { get; set; }
             yield return new object[]
             {
@@ -786,7 +786,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // IDictionary<Type, T?[]>? PropertyDictionaryNonNullNonNull
             yield return new object[]
             {
@@ -794,7 +794,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // IDictionary<T?, T[]>? PropertyDictionaryNullNonNonNull
             yield return new object[]
             {
@@ -802,7 +802,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // IDictionary<Type, T?[]> PropertyDictionaryNonNullNonNon
             yield return new object[]
             {
@@ -810,7 +810,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             }; // IDictionary<T, T[]>? PropertyDictionaryNonNonNonNull
             yield return new object[]
             {
@@ -818,7 +818,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             }; // IDictionary<T, string[]> PropertyDictionaryNonNonNonNon
         }
 
@@ -907,42 +907,42 @@ namespace System.Reflection.Tests
                 "PropertyNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyNonNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyAllowNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "PropertyMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
         }
 
@@ -986,42 +986,42 @@ namespace System.Reflection.Tests
                 "FieldNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "FieldUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "FieldNonNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "FieldDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "FieldAllowNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
             yield return new object[]
             {
                 "FieldMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(TypeWithNotNullContext)
+                typeof(TypeWithNotNullContext),
             };
         }
 
@@ -1086,49 +1086,49 @@ namespace System.Reflection.Tests
                 "FieldNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldUnknown",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldNonNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldAllowNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
         }
 
@@ -1155,21 +1155,21 @@ namespace System.Reflection.Tests
                 "FieldNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "FieldNullableEnabled",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
         }
 
@@ -1199,21 +1199,21 @@ namespace System.Reflection.Tests
                 "PropertyNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyUnknown",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyNullableEnabled",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
         }
 
@@ -1243,21 +1243,21 @@ namespace System.Reflection.Tests
                 "FieldNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "FieldUnknown",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(int)
+                typeof(int),
             };
             yield return new object[]
             {
                 "FieldNullableEnabled",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(int)
+                typeof(int),
             };
         }
 
@@ -1284,21 +1284,21 @@ namespace System.Reflection.Tests
                 "PropertyNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(int?)
+                typeof(int?),
             };
             yield return new object[]
             {
                 "PropertyUnknown",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(int)
+                typeof(int),
             };
             yield return new object[]
             {
                 "PropertyNullableEnabled",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(int)
+                typeof(int),
             };
         }
 
@@ -1417,43 +1417,43 @@ namespace System.Reflection.Tests
             {
                 "MethodReturnsUnknown",
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "MethodReturnsNullNon",
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
                 "MethodReturnsNullNull",
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "MethodReturnsNonNull",
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "MethodReturnsNonNotNull",
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
                 "MethodReturnsNonMaybeNull",
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "MethodReturnsNonNon",
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -1483,7 +1483,7 @@ namespace System.Reflection.Tests
                 "MethodReturnsTupleNullNonNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             // public Tuple<string?, int> MethodReturnsTupleNullNonNot() => null!
             yield return new object[]
@@ -1491,7 +1491,7 @@ namespace System.Reflection.Tests
                 "MethodReturnsTupleNullNonNot",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             // public (int?, string)? MethodReturnsValueTupleNullNonNull() => null;
             yield return new object[]
@@ -1499,7 +1499,7 @@ namespace System.Reflection.Tests
                 "MethodReturnsValueTupleNullNonNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             // public (string?, string) MethodReturnsValueTupleNullNonNon() => (null, string.Empty);
             yield return new object[]
@@ -1507,7 +1507,7 @@ namespace System.Reflection.Tests
                 "MethodReturnsValueTupleNullNonNon",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -1535,43 +1535,43 @@ namespace System.Reflection.Tests
             {
                 "MethodReturnsUnknown",
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "MethodReturnsGeneric",
                 NullabilityState.Nullable,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "MethodReturnsNullGeneric",
                 NullabilityState.Nullable,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "MethodReturnsGenericNotNull",
                 NullabilityState.NotNull,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "MethodReturnsGenericMaybeNull",
                 NullabilityState.Nullable,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
                 "MethodNonNullListNullGeneric",
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
                 "MethodNullListNonNullGeneric",
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
         }
 
@@ -1605,7 +1605,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
@@ -1614,7 +1614,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
@@ -1623,7 +1623,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
@@ -1632,7 +1632,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object[]
             {
@@ -1641,7 +1641,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
         }
 
@@ -1713,7 +1713,7 @@ namespace System.Reflection.Tests
                     NullabilityState.NotNull,
                     NullabilityState.Nullable,
                     NullabilityState.NotNull,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 },
                 // out KeyValuePair<string?, object> a
                 new object?[]
@@ -1722,7 +1722,7 @@ namespace System.Reflection.Tests
                     NullabilityState.NotNull,
                     NullabilityState.Nullable,
                     NullabilityState.NotNull,
-                    null
+                    null,
                 },
                 // ref Tuple<Type?, decimal>? b
                 new object?[]
@@ -1731,7 +1731,7 @@ namespace System.Reflection.Tests
                     NullabilityState.Nullable,
                     NullabilityState.Nullable,
                     NullabilityState.NotNull,
-                    null
+                    null,
                 },
                 // in KeyValuePair<ICloneable, IFormatProvider?>? c
                 new object?[]
@@ -1740,7 +1740,7 @@ namespace System.Reflection.Tests
                     NullabilityState.Nullable,
                     NullabilityState.NotNull,
                     NullabilityState.Nullable,
-                    null
+                    null,
                 },
             };
 
@@ -1771,7 +1771,7 @@ namespace System.Reflection.Tests
             {
                 genericArgument0State,
                 genericArgument1State,
-                genericArgument2State
+                genericArgument2State,
             };
             for (var i = 0; i < genericArgumentStates.Length; ++i)
             {
@@ -1863,7 +1863,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             yield return new object[]
             {
@@ -1871,7 +1871,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object[]
             {
@@ -1879,7 +1879,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -1945,7 +1945,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                new Type[] { typeof(string), typeof(object), typeof(object) }
+                new Type[] { typeof(string), typeof(object), typeof(object) },
             };
             yield return new object[]
             {
@@ -1958,8 +1958,8 @@ namespace System.Reflection.Tests
                     typeof(string),
                     typeof(string),
                     typeof(CompareInfo),
-                    typeof(CompareOptions)
-                }
+                    typeof(CompareOptions),
+                },
             };
             yield return new object[]
             {
@@ -1967,7 +1967,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                new Type[] { typeof(string), typeof(String?[]), typeof(int), typeof(int) }
+                new Type[] { typeof(string), typeof(String?[]), typeof(int), typeof(int) },
             };
         }
 
@@ -2061,63 +2061,63 @@ namespace System.Reflection.Tests
                 "PropertyDisabled",
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyDisabledAllowNull",
                 NullabilityState.Unknown,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyDisabledMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.Unknown,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyEnabledAllowNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyEnabledNotNull",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyEnabledMaybeNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyEnabledDisallowNull",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyEnabledNullable",
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                typeof(string)
+                typeof(string),
             };
             yield return new object[]
             {
                 "PropertyEnabledNonNullable",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                typeof(string)
+                typeof(string),
             };
         }
 
@@ -2239,7 +2239,7 @@ namespace System.Reflection.Tests
                     NullabilityState.NotNull,
                     NullabilityState.Nullable,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 },
                 new[]
                 {
@@ -2247,8 +2247,8 @@ namespace System.Reflection.Tests
                     typeof(Tuple<string, string>),
                     typeof(string),
                     typeof(string),
-                    typeof(string)
-                }
+                    typeof(string),
+                },
             };
             yield return new object[]
             {
@@ -2259,7 +2259,7 @@ namespace System.Reflection.Tests
                     NullabilityState.NotNull,
                     NullabilityState.Nullable,
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 },
                 new[]
                 {
@@ -2267,8 +2267,8 @@ namespace System.Reflection.Tests
                     typeof(Tuple<string, string>),
                     typeof(string),
                     typeof(string),
-                    typeof(string)
-                }
+                    typeof(string),
+                },
             };
         }
 
@@ -2311,7 +2311,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
 
             // public IEnumerable<Tuple<(string? name, object value)?, int>?>? MethodReturnsEnumerableNullTupleNullNonNullValueTupleNullNonNull() => null!;
@@ -2323,7 +2323,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
 
             // public IEnumerable<Tuple<Tuple<string, object?>, int>?> MethodReturnsEnumerableNonTupleNonNonNullTupleNonNullNon() => null!;
@@ -2335,7 +2335,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
 
             // public IEnumerable<GenericStruct<Tuple<string, object?>?, int>?>? MethodReturnsEnumerableNullStructNullNonNonTupleNonNullNull() => null;
@@ -2347,7 +2347,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
 
             // public IEnumerable<Tuple<GenericStruct<string, object?>?, int>?>? MethodReturnsEnumerableNullTupleNullNonNullStructNonNullNull() => null;
@@ -2359,7 +2359,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
 
             // public IEnumerable<(GenericStruct<string, object?> str, int? count)> MethodReturnsEnumerableNonValueTupleNonNullNonTupleNonNullNon() => null!;
@@ -2371,7 +2371,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
         }
 
@@ -2410,7 +2410,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
                 NullabilityState.Unknown,
-                NullabilityState.Unknown
+                NullabilityState.Unknown,
             };
             // [return: MaybeNull] public ref string RefReturnMaybeNull([DisallowNull] ref string? id)
             yield return new object[]
@@ -2419,7 +2419,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             // public ref string RefReturnNotNullable([MaybeNull] ref string id)
             yield return new object[]
@@ -2428,7 +2428,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             // [return: NotNull]public ref string? RefReturnNotNull([NotNull] ref string? id)
             yield return new object[]
@@ -2437,7 +2437,7 @@ namespace System.Reflection.Tests
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             // public ref string? RefReturnNullable([AllowNull] ref string id)
             yield return new object[]
@@ -2446,7 +2446,7 @@ namespace System.Reflection.Tests
                 NullabilityState.Nullable,
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
         }
 
@@ -2477,7 +2477,7 @@ namespace System.Reflection.Tests
                 "UnknownValueTuple",
                 NullabilityState.NotNull,
                 NullabilityState.Unknown,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             // public (string?, object) NullNonNonValueTuple; [0, 2, 1]
             yield return new object[]
@@ -2485,7 +2485,7 @@ namespace System.Reflection.Tests
                 "Null_Non_Non_ValueTuple",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             // public (string?, object)? Null_Non_Null_ValueTuple; [0, 2, 1]
             yield return new object[]
@@ -2493,7 +2493,7 @@ namespace System.Reflection.Tests
                 "Null_Non_Null_ValueTuple",
                 NullabilityState.Nullable,
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             // public (int, int?)? Non_Null_Null_ValueTuple; [0]
             yield return new object[]
@@ -2501,7 +2501,7 @@ namespace System.Reflection.Tests
                 "Non_Null_Null_ValueTuple",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             // public (int, string) Non_Non_Non_ValueTuple; [0, 1]
             yield return new object[]
@@ -2509,7 +2509,7 @@ namespace System.Reflection.Tests
                 "Non_Non_Non_ValueTuple",
                 NullabilityState.NotNull,
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             // public (int, string?) Non_Null_Non_ValueTuple; [0, 2]
             yield return new object[]
@@ -2517,7 +2517,7 @@ namespace System.Reflection.Tests
                 "Non_Null_Non_ValueTuple",
                 NullabilityState.NotNull,
                 NullabilityState.Nullable,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
         }
 
@@ -2544,43 +2544,43 @@ namespace System.Reflection.Tests
             {
                 typeof(ListOfUnconstrained<string?>),
                 NullabilityState.Nullable,
-                null
+                null,
             };
             yield return new object?[]
             {
                 typeof(ListUnconstrainedOfNullable<string>),
                 NullabilityState.Nullable,
-                null
+                null,
             };
             yield return new object?[]
             {
                 typeof(ListUnconstrainedOfNullableOfObject<>),
                 NullabilityState.NotNull,
-                null
+                null,
             };
             yield return new object?[]
             {
                 typeof(ListOfArrayOfNullableString),
                 NullabilityState.NotNull,
-                NullabilityState.Nullable
+                NullabilityState.Nullable,
             };
             yield return new object?[]
             {
                 typeof(ListOfNotNull<ListOfNotNull<object>>),
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object?[]
             {
                 typeof(ListOfListOfObject<string?>),
                 NullabilityState.NotNull,
-                NullabilityState.NotNull
+                NullabilityState.NotNull,
             };
             yield return new object?[]
             {
                 typeof(ListMultiGenericOfNotNull<object?, string, string?>),
                 NullabilityState.NotNull,
-                null
+                null,
             };
         }
 
@@ -2706,17 +2706,17 @@ namespace System.Reflection.Tests
                 new object[]
                 {
                     typeof(TypeWithPropertiesNestingItsGenericTypeArgument<bool>),
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 },
                 new object[]
                 {
                     typeof(TypeWithPropertiesNestingItsGenericTypeArgument<bool?>),
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 },
                 new object[]
                 {
                     typeof(TypeWithPropertiesNestingItsGenericTypeArgument<object>),
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 },
             };
 
@@ -2817,169 +2817,169 @@ namespace System.Reflection.Tests
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor<>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor<int?>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor<object>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Disallow<>)),
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Disallow<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Disallow<int?>)),
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Disallow<object>)),
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Maybe<>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Maybe<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Maybe<int?>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Maybe<object>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Allow<>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Allow<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Allow<int?>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericTypeWithCtor_Allow<object>)),
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor<>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor<object>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Disallow<>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Disallow<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Disallow<object>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Maybe<>)),
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Maybe<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Maybe<object>)),
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Allow<>)),
                     NullabilityState.NotNull,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Allow<int>)),
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(GenericNonNullableTypeWithCtor_Allow<object>)),
                     NullabilityState.NotNull,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
             };
 
@@ -3013,56 +3013,56 @@ namespace System.Reflection.Tests
                     EnsureReflection(typeof(ClassWithGenericMethods)),
                     MethodNullable,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods)),
                     MethodNonNullable,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods_Disallow)),
                     MethodNullable,
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods_Disallow)),
                     MethodNonNullable,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods_Maybe)),
                     MethodNullable,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods_Maybe)),
                     MethodNonNullable,
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods_Allow)),
                     MethodNullable,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     EnsureReflection(typeof(ClassWithGenericMethods_Allow)),
                     MethodNonNullable,
                     NullabilityState.NotNull,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
             };
         }
@@ -3098,91 +3098,91 @@ namespace System.Reflection.Tests
                 [
                     (GenericMethod<int>)ClassWithGenericMethods.GenericMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethod<int?>)ClassWithGenericMethods.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     (GenericMethod<object>)ClassWithGenericMethods.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     (GenericMethod<int>)ClassWithGenericMethods.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethod<object>)ClassWithGenericMethods.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodRef<int>)ClassWithGenericMethods_Maybe.GenericMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodRef<int?>)ClassWithGenericMethods_Maybe.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     (GenericMethodRef<object>)ClassWithGenericMethods_Maybe.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     (GenericMethodRef<int>)ClassWithGenericMethods_Maybe.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodRef<object>)ClassWithGenericMethods_Maybe.GenericNotNullMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethod<int>)ClassWithGenericMethods_Allow.GenericMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethod<int?>)ClassWithGenericMethods_Allow.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     (GenericMethod<object>)ClassWithGenericMethods_Allow.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 [
                     (GenericMethod<int>)ClassWithGenericMethods_Allow.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethod<object>)ClassWithGenericMethods_Allow.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.Nullable
+                    NullabilityState.Nullable,
                 ],
 
                 // Specialized delegates are required due to CS8622
@@ -3190,33 +3190,33 @@ namespace System.Reflection.Tests
                 [
                     (GenericMethodDisallow<int>)ClassWithGenericMethods_Disallow.GenericMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodDisallow<int?>)ClassWithGenericMethods_Disallow.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodDisallow<object>)ClassWithGenericMethods_Disallow.GenericMethod,
                     NullabilityState.Nullable,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodDisallow<int>)
                         ClassWithGenericMethods_Disallow.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
 
                 [
                     (GenericMethodDisallow<object>)
                         ClassWithGenericMethods_Disallow.GenericNotNullMethod,
                     NullabilityState.NotNull,
-                    NullabilityState.NotNull
+                    NullabilityState.NotNull,
                 ],
             };
 

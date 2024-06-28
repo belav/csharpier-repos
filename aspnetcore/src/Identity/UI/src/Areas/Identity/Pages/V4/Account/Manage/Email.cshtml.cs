@@ -103,7 +103,7 @@ internal sealed class EmailModel<TUser> : EmailModel
         var email = await _userManager.GetEmailAsync(user);
         Email = email;
 
-        Input = new InputModel { NewEmail = email!, };
+        Input = new InputModel { NewEmail = email! };
 
         IsEmailConfirmed = await _userManager.IsEmailConfirmedAsync(user);
     }
@@ -148,7 +148,7 @@ internal sealed class EmailModel<TUser> : EmailModel
                     area = "Identity",
                     userId = userId,
                     email = Input.NewEmail,
-                    code = code
+                    code = code,
                 },
                 protocol: Request.Scheme
             )!;
@@ -191,7 +191,7 @@ internal sealed class EmailModel<TUser> : EmailModel
             {
                 area = "Identity",
                 userId = userId,
-                code = code
+                code = code,
             },
             protocol: Request.Scheme
         );

@@ -137,7 +137,7 @@ namespace System.Linq.Expressions.Tests
                 typeof(DateTime),
                 typeof(string),
                 typeof(ExpressionTests),
-                typeof(ExpressionType)
+                typeof(ExpressionType),
             }.Select(type => new object[] { type });
 
         [Fact]
@@ -313,7 +313,7 @@ namespace System.Linq.Expressions.Tests
                 ),
                 Expression.Field(null, typeof(ExpressionTests), "TestField"),
                 Expression.Field(null, typeof(ExpressionTests), "TestConstant"),
-                Expression.Field(null, typeof(ExpressionTests), "TestInitOnlyField")
+                Expression.Field(null, typeof(ExpressionTests), "TestInitOnlyField"),
             };
             Expression.Block(typeof(void), readableExpressions);
         }

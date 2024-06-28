@@ -20,7 +20,7 @@ public class HtmlHelperOptionsController : Controller
                 second: 5,
                 millisecond: 60,
                 offset: TimeSpan.FromHours(0)
-            )
+            ),
         };
 
         ModelState.AddModelError(string.Empty, "A model error occurred.");
@@ -41,7 +41,7 @@ public class HtmlHelperOptionsController : Controller
                 second: 5,
                 millisecond: 60,
                 offset: TimeSpan.FromHours(0)
-            )
+            ),
         };
 
         ModelState.AddModelError(string.Empty, "A model error occurred.");

@@ -24,6 +24,7 @@ namespace System.Data.Odbc
         {
             DbConnectionStringKeywords.Dsn, // (int)Keywords.Dsn
             DbConnectionStringKeywords.Driver // (int)Keywords.Driver
+            ,
         };
         private static readonly Dictionary<string, Keywords> s_keywords = new Dictionary<
             string,
@@ -31,7 +32,7 @@ namespace System.Data.Odbc
         >(2, StringComparer.OrdinalIgnoreCase)
         {
             { DbConnectionStringKeywords.Driver, Keywords.Driver },
-            { DbConnectionStringKeywords.Dsn, Keywords.Dsn }
+            { DbConnectionStringKeywords.Dsn, Keywords.Dsn },
         };
 
         private string[]? _knownKeywords;

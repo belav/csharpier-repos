@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
         private static readonly string[] ExcludedPropertyNames =
         {
             "ArgumentCount",
-            "ExpressionCount"
+            "ExpressionCount",
         };
 
         private Type GetDebugViewType(Type type)
@@ -236,19 +236,19 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.Assign(Expression.Variable(typeof(int)), Expression.Constant(-1))
+                Expression.Assign(Expression.Variable(typeof(int)), Expression.Constant(-1)),
             };
             yield return new object[]
             {
-                Expression.Equal(Expression.Constant(false), Expression.Constant(true))
+                Expression.Equal(Expression.Constant(false), Expression.Constant(true)),
             };
             yield return new object[]
             {
-                Expression.AddAssign(Expression.Parameter(typeof(int)), Expression.Constant(2))
+                Expression.AddAssign(Expression.Parameter(typeof(int)), Expression.Constant(2)),
             };
             yield return new object[]
             {
-                Expression.Assign(Expression.Parameter(typeof(int)), Expression.Constant(2))
+                Expression.Assign(Expression.Parameter(typeof(int)), Expression.Constant(2)),
             };
         }
 
@@ -267,7 +267,7 @@ namespace System.Linq.Expressions.Tests
                         Expression.Block(
                             parameters,
                             Enumerable.Range(0, count).Select(x => Expression.Constant(x))
-                        )
+                        ),
                     };
                 }
             }
@@ -277,7 +277,7 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.Catch(typeof(InvalidFilterCriteriaException), Expression.Empty())
+                Expression.Catch(typeof(InvalidFilterCriteriaException), Expression.Empty()),
             };
             yield return new object[]
             {
@@ -285,14 +285,14 @@ namespace System.Linq.Expressions.Tests
                     typeof(InvalidCastException),
                     Expression.Constant(3),
                     Expression.Constant(false)
-                )
+                ),
             };
             yield return new object[]
             {
                 Expression.Catch(
                     Expression.Variable(typeof(InvalidFilterCriteriaException)),
                     Expression.Empty()
-                )
+                ),
             };
             yield return new object[]
             {
@@ -300,7 +300,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Variable(typeof(InvalidCastException)),
                     Expression.Constant(3),
                     Expression.Constant(false)
-                )
+                ),
             };
         }
 
@@ -308,7 +308,7 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.IfThen(Expression.Constant(false), Expression.Constant(1))
+                Expression.IfThen(Expression.Constant(false), Expression.Constant(1)),
             };
             yield return new object[]
             {
@@ -316,7 +316,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(false),
                     Expression.Constant(2),
                     Expression.Constant(3)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -324,7 +324,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(true),
                     Expression.Constant(4),
                     Expression.Constant(5)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -333,7 +333,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(""),
                     Expression.Constant(""),
                     typeof(object)
-                )
+                ),
             };
         }
 
@@ -349,7 +349,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.ClearDebugInfo(Expression.SymbolDocument("")) };
             yield return new object[]
             {
-                Expression.DebugInfo(Expression.SymbolDocument(""), 1, 2, 3, 4)
+                Expression.DebugInfo(Expression.SymbolDocument(""), 1, 2, 3, 4),
             };
         }
 
@@ -364,7 +364,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.Continue(Expression.Label(typeof(void))) };
             yield return new object[]
             {
-                Expression.Break(Expression.Label(typeof(void)), typeof(void))
+                Expression.Break(Expression.Label(typeof(void)), typeof(void)),
             };
             yield return new object[]
             {
@@ -372,7 +372,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Label(typeof(object)),
                     Expression.Constant(""),
                     typeof(object)
-                )
+                ),
             };
         }
 
@@ -383,7 +383,7 @@ namespace System.Linq.Expressions.Tests
                 Expression.ArrayAccess(
                     Expression.Constant(new[] { 1, 2, 3 }),
                     Expression.Constant(2)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -391,7 +391,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Default(typeof(Dictionary<string, int>)),
                     "Item",
                     Expression.Constant("key")
-                )
+                ),
             };
         }
 
@@ -404,7 +404,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(addFunc),
                     Expression.Constant(4),
                     Expression.Constant(5)
-                )
+                ),
             };
 
             for (int i = 0; i != 7; ++i)
@@ -419,14 +419,14 @@ namespace System.Linq.Expressions.Tests
                     .ToArray();
                 yield return new object[]
                 {
-                    Expression.Invoke(Expression.Lambda(Expression.Empty(), parameters), arguments)
+                    Expression.Invoke(Expression.Lambda(Expression.Empty(), parameters), arguments),
                 };
                 yield return new object[]
                 {
                     Expression.Invoke(
                         Expression.Lambda(Expression.Constant(0), parameters),
                         arguments
-                    )
+                    ),
                 };
             }
         }
@@ -436,7 +436,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.Label(Expression.Label(typeof(void))) };
             yield return new object[]
             {
-                Expression.Label(Expression.Label(typeof(string)), Expression.Constant("!"))
+                Expression.Label(Expression.Label(typeof(string)), Expression.Constant("!")),
             };
         }
 
@@ -458,7 +458,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.Loop(Expression.Empty()) };
             yield return new object[]
             {
-                Expression.Loop(Expression.Empty(), Expression.Label(typeof(void)))
+                Expression.Loop(Expression.Empty(), Expression.Label(typeof(void))),
             };
             yield return new object[]
             {
@@ -466,7 +466,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Empty(),
                     Expression.Label(typeof(void)),
                     Expression.Label(typeof(void))
-                )
+                ),
             };
         }
 
@@ -478,7 +478,7 @@ namespace System.Linq.Expressions.Tests
                     null,
                     typeof(ExpressionDebuggerTypeProxyTests),
                     nameof(DebugViewProperty)
-                )
+                ),
             };
             yield return new object[] { Expression.Property(Expression.Constant(""), "Length") };
         }
@@ -496,7 +496,7 @@ namespace System.Linq.Expressions.Tests
                             Expression.Constant(3)
                         )
                     )
-                )
+                ),
             };
         }
 
@@ -504,7 +504,7 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.Call(Expression.Constant(1), "ToString", new Type[0])
+                Expression.Call(Expression.Constant(1), "ToString", new Type[0]),
             };
             Expression<Func<bool>> exp = () => 1.Equals(2);
             yield return new object[] { exp.Body };
@@ -518,7 +518,7 @@ namespace System.Linq.Expressions.Tests
                     typeof(int),
                     Expression.Constant(2),
                     Expression.Constant(2)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -526,7 +526,7 @@ namespace System.Linq.Expressions.Tests
                     typeof(string),
                     Expression.Constant("A"),
                     Expression.Constant("B")
-                )
+                ),
             };
         }
 
@@ -539,7 +539,7 @@ namespace System.Linq.Expressions.Tests
                     typeof(string).GetConstructors().First(c => c.GetParameters().Length == 2),
                     Expression.Constant('x'),
                     Expression.Constant(3)
-                )
+                ),
             };
         }
 
@@ -554,7 +554,7 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.RuntimeVariables(Expression.Variable(typeof(int)))
+                Expression.RuntimeVariables(Expression.Variable(typeof(int))),
             };
             yield return new object[] { Expression.RuntimeVariables() };
         }
@@ -563,7 +563,7 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.SwitchCase(Expression.Empty(), Expression.Constant(0))
+                Expression.SwitchCase(Expression.Empty(), Expression.Constant(0)),
             };
         }
 
@@ -576,7 +576,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(2),
                     Expression.Constant("!"),
                     Expression.SwitchCase(Expression.Constant("X"), Expression.Constant(1))
-                )
+                ),
             };
         }
 
@@ -584,18 +584,18 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                Expression.TryFault(Expression.Empty(), Expression.Empty())
+                Expression.TryFault(Expression.Empty(), Expression.Empty()),
             };
             yield return new object[]
             {
-                Expression.TryFinally(Expression.Empty(), Expression.Empty())
+                Expression.TryFinally(Expression.Empty(), Expression.Empty()),
             };
             yield return new object[]
             {
                 Expression.TryCatch(
                     Expression.Constant(1),
                     Expression.Catch(typeof(Exception), Expression.Constant(2))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -603,7 +603,7 @@ namespace System.Linq.Expressions.Tests
                     Expression.Constant(1),
                     Expression.Empty(),
                     Expression.Catch(typeof(Exception), Expression.Constant(2))
-                )
+                ),
             };
         }
 
@@ -612,7 +612,7 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.TypeIs(Expression.Constant(2), typeof(string)) };
             yield return new object[]
             {
-                Expression.TypeAs(Expression.Constant("", typeof(object)), typeof(string))
+                Expression.TypeAs(Expression.Constant("", typeof(object)), typeof(string)),
             };
         }
 

@@ -27,6 +27,6 @@ namespace System.Web.UI.WebControls
         ///    A full month format is used. For
         ///    example, January.
         /// </devdoc>
-        FullMonth = 2
+        FullMonth = 2,
     }
 }

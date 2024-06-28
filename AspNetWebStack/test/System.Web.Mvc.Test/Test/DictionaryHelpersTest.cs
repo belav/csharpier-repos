@@ -17,7 +17,7 @@ namespace System.Web.Mvc.Test
                 StringComparer.OrdinalIgnoreCase
             )
             {
-                { "FOOBAR", 42 }
+                { "FOOBAR", 42 },
             };
 
             // Act
@@ -35,7 +35,7 @@ namespace System.Web.Mvc.Test
                 StringComparer.OrdinalIgnoreCase
             )
             {
-                { "FOO.BAR", 42 }
+                { "FOO.BAR", 42 },
             };
 
             // Act
@@ -57,7 +57,7 @@ namespace System.Web.Mvc.Test
                 { "FOOBAR", "foobarValue" },
                 { "FOO.BAR", "foo.barValue" },
                 { "FOO[0]", "foo[0]Value" },
-                { "BAR", "barValue" }
+                { "BAR", "barValue" },
             };
 
             // Act

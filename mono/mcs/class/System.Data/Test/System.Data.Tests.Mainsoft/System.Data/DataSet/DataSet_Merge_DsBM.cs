@@ -102,7 +102,7 @@ namespace tests.system_data_dll.System_Data
             ds.Tables["NewTable"].Rows.Add(new object[] { 3, 4 });
             ds.Tables["NewTable"].PrimaryKey = new DataColumn[]
             {
-                ds.Tables["NewTable"].Columns["NewColumn1"]
+                ds.Tables["NewTable"].Columns["NewColumn1"],
             };
 
             #region "ds,false,MissingSchemaAction.Add)"

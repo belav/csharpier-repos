@@ -24,7 +24,7 @@ namespace System.IO.Tests
                 {
                     Options = fileOptions,
                     Access = FileAccess.Write,
-                    Share = FileShare.Write
+                    Share = FileShare.Write,
                 };
             using FileStream fs = new(devicePath, options);
             fs.Write("foo"u8);
@@ -42,7 +42,7 @@ namespace System.IO.Tests
                 {
                     Options = fileOptions,
                     Access = FileAccess.Write,
-                    Share = FileShare.Write
+                    Share = FileShare.Write,
                 };
             using FileStream fs = new(devicePath, options);
             await fs.WriteAsync("foo"u8.ToArray());

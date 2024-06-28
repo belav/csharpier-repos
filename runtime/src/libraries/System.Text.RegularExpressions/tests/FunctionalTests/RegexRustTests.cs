@@ -40,7 +40,7 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         regexes[i],
                         cases[i].Input,
-                        cases[i].MatchBoundaries
+                        cases[i].MatchBoundaries,
                     };
                 }
             }

@@ -124,10 +124,16 @@ namespace System.IO.Enumeration
 
             return options.MatchType switch
             {
-                MatchType.Simple =>
-                    FileSystemName.MatchesSimpleExpression(expression.AsSpan(), name, ignoreCase),
-                MatchType.Win32 =>
-                    FileSystemName.MatchesWin32Expression(expression.AsSpan(), name, ignoreCase),
+                MatchType.Simple => FileSystemName.MatchesSimpleExpression(
+                    expression.AsSpan(),
+                    name,
+                    ignoreCase
+                ),
+                MatchType.Win32 => FileSystemName.MatchesWin32Expression(
+                    expression.AsSpan(),
+                    name,
+                    ignoreCase
+                ),
                 _ => throw new ArgumentOutOfRangeException(nameof(options)),
             };
         }
@@ -145,7 +151,7 @@ namespace System.IO.Enumeration
             )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -162,7 +168,7 @@ namespace System.IO.Enumeration
             )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -179,7 +185,7 @@ namespace System.IO.Enumeration
             )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    MatchesPattern(expression, entry.FileName, options)
+                    MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -198,7 +204,7 @@ namespace System.IO.Enumeration
             )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    !entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -217,7 +223,7 @@ namespace System.IO.Enumeration
             )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options)
+                    entry.IsDirectory && MatchesPattern(expression, entry.FileName, options),
             };
         }
 
@@ -236,7 +242,7 @@ namespace System.IO.Enumeration
             )
             {
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
-                    MatchesPattern(expression, entry.FileName, options)
+                    MatchesPattern(expression, entry.FileName, options),
             };
         }
     }

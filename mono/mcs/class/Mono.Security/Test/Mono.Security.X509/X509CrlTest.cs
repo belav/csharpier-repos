@@ -541,7 +541,7 @@ namespace MonoTests.Mono.Security.X509
             0x2A,
             0x11,
             0xFA,
-            0xDC
+            0xDC,
         };
 
         [Test]
@@ -1073,7 +1073,7 @@ namespace MonoTests.Mono.Security.X509
             0x97,
             0x73,
             0x8E,
-            0x40
+            0x40,
         };
 
         [Test]
@@ -1429,7 +1429,7 @@ namespace MonoTests.Mono.Security.X509
             0xC3,
             0x00,
             0xB1,
-            0x28
+            0x28,
         };
 
         public static byte[] basicConstraintsCriticalcAFalseCACert_crt =
@@ -2085,7 +2085,7 @@ namespace MonoTests.Mono.Security.X509
             0xCD,
             0xE3,
             0xD2,
-            0x1C
+            0x1C,
         };
 
         [Test]

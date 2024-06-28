@@ -24,7 +24,7 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         AntiSemiJoin,
 
         // Project,
-        Named
+        Named,
     }
 
     internal interface ITileQuery

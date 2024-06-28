@@ -67,7 +67,7 @@ namespace System
             0xFE,
             0xFF,
             0xFF,
-            0x07
+            0x07,
         };
 
         private static bool IdContainsAnyDisallowedChars(string zoneId)

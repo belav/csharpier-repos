@@ -33,7 +33,7 @@ namespace System.Web.Http.Validation.Providers
                 {
                     return new ModelValidator[]
                     {
-                        new RequiredMemberModelValidator(validatorProviders)
+                        new RequiredMemberModelValidator(validatorProviders),
                     };
                 }
             }

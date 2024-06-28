@@ -172,7 +172,7 @@ namespace MonoTests.System.Xaml.Schema
                 new XamlTypeName[]
                 {
                     new XamlTypeName("urn:bar", "Bar"),
-                    new XamlTypeName("urn:baz", "Baz")
+                    new XamlTypeName("urn:baz", "Baz"),
                 }
             );
             Assert.AreEqual("{urn:foo}Foo({urn:bar}Bar, {urn:baz}Baz)", n.ToString(), "#1");
@@ -206,7 +206,7 @@ namespace MonoTests.System.Xaml.Schema
                 new XamlTypeName[]
                 {
                     new XamlTypeName("urn:bar", "Bar"),
-                    new XamlTypeName("urn:baz", "Baz")
+                    new XamlTypeName("urn:baz", "Baz"),
                 }
             );
             var lookup = new MyNamespaceLookup();
@@ -225,7 +225,7 @@ namespace MonoTests.System.Xaml.Schema
                 new XamlTypeName[]
                 {
                     new XamlTypeName("urn:bar", "Bar"),
-                    new XamlTypeName("urn:baz", "Baz")
+                    new XamlTypeName("urn:baz", "Baz"),
                 }
             );
             Assert.AreEqual("{urn:foo}Foo({urn:bar}Bar, {urn:baz}Baz)", n.ToString(null), "#1");
@@ -240,7 +240,7 @@ namespace MonoTests.System.Xaml.Schema
                 new XamlTypeName[]
                 {
                     new XamlTypeName("urn:bar", "Bar"),
-                    new XamlTypeName("urn:baz", "Baz")
+                    new XamlTypeName("urn:baz", "Baz"),
                 }
             );
             var lookup = new MyNamespaceLookup();

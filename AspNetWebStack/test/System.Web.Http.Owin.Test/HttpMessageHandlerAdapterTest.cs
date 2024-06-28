@@ -453,7 +453,7 @@ namespace System.Web.Http.Owin
                     MessageHandler = handler,
                     BufferPolicySelector = bufferPolicySelector,
                     ExceptionLogger = new EmptyExceptionLogger(),
-                    ExceptionHandler = new DefaultExceptionHandler()
+                    ExceptionHandler = new DefaultExceptionHandler(),
                 }
             );
 
@@ -1034,7 +1034,7 @@ namespace System.Web.Http.Owin
             var expectedReasonPhrase = "OH NO!";
             var response = new HttpResponseMessage(HttpStatusCode.ServiceUnavailable)
             {
-                ReasonPhrase = expectedReasonPhrase
+                ReasonPhrase = expectedReasonPhrase,
             };
             var handler = new HandlerStub() { Response = response };
             var bufferPolicySelector = CreateBufferPolicySelector(
@@ -2274,7 +2274,7 @@ namespace System.Web.Http.Owin
                 MessageHandler = messageHandler,
                 BufferPolicySelector = CreateDummyBufferPolicy(),
                 ExceptionLogger = CreateDummyExceptionLogger(),
-                ExceptionHandler = CreateDummyExceptionHandler()
+                ExceptionHandler = CreateDummyExceptionHandler(),
             };
         }
 
@@ -2477,7 +2477,7 @@ namespace System.Web.Http.Owin
                 StringComparer.OrdinalIgnoreCase
             )
             {
-                { "Host", new string[] { hostHeaderValue } }
+                { "Host", new string[] { hostHeaderValue } },
             };
             environment["owin.RequestPathBase"] = pathBase;
             environment["owin.RequestPath"] = path;
@@ -2613,7 +2613,7 @@ namespace System.Web.Http.Owin
                 MessageHandler = messageHandler,
                 BufferPolicySelector = bufferPolicySelector,
                 ExceptionLogger = new EmptyExceptionLogger(),
-                ExceptionHandler = new DefaultExceptionHandler()
+                ExceptionHandler = new DefaultExceptionHandler(),
             };
         }
 

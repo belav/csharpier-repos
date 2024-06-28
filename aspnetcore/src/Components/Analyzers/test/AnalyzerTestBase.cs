@@ -39,7 +39,7 @@ public abstract class AnalyzerTestBase
         }
 
         var read = Read(source);
-        return DiagnosticProject.Create(GetType().Assembly, new[] { read.Source, });
+        return DiagnosticProject.Create(GetType().Assembly, new[] { read.Source });
     }
 
     public Task<Compilation> CreateCompilationAsync(string source)

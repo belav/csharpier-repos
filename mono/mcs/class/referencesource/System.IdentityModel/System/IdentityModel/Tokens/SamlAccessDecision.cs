@@ -16,6 +16,6 @@ namespace System.IdentityModel.Tokens
         Deny,
 
         [EnumMember]
-        Indeterminate
+        Indeterminate,
     }
 }

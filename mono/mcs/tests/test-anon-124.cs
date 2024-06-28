@@ -272,7 +272,7 @@ class Test
             {
                 new string[] { "a", "b", "c" },
                 new string[] { "1", "2", "3" },
-                new string[] { "A", "B", "C" }
+                new string[] { "A", "B", "C" },
             }
         );
         if (t10()[2][2] != null)
@@ -280,7 +280,7 @@ class Test
 
         var array = new short[,]
         {
-            { 10, 20 }
+            { 10, 20 },
         };
         var t10a = ArrayMultiMutate(array);
         if (t10a() != array[0, 0].GetHashCode())

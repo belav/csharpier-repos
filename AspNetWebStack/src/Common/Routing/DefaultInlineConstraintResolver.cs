@@ -60,7 +60,7 @@ namespace System.Web.Mvc.Routing
                 { "range", typeof(RangeRouteConstraint) },
                 // Regex-based constraints
                 { "alpha", typeof(AlphaRouteConstraint) },
-                { "regex", typeof(RegexRouteConstraint) }
+                { "regex", typeof(RegexRouteConstraint) },
             };
         }
 

@@ -678,7 +678,7 @@ namespace System.ServiceProcess
             return new SERVICE_TABLE_ENTRY()
             {
                 callback = Marshal.GetFunctionPointerForDelegate(_mainCallback!),
-                name = Marshal.StringToHGlobalUni(_serviceName)
+                name = Marshal.StringToHGlobalUni(_serviceName),
             };
         }
 

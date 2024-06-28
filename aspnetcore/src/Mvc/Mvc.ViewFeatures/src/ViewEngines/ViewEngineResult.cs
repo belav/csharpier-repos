@@ -52,7 +52,7 @@ public class ViewEngineResult
         ArgumentNullException.ThrowIfNull(viewName);
         ArgumentNullException.ThrowIfNull(searchedLocations);
 
-        return new ViewEngineResult(viewName) { SearchedLocations = searchedLocations, };
+        return new ViewEngineResult(viewName) { SearchedLocations = searchedLocations };
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public class ViewEngineResult
         ArgumentNullException.ThrowIfNull(viewName);
         ArgumentNullException.ThrowIfNull(view);
 
-        return new ViewEngineResult(viewName) { View = view, };
+        return new ViewEngineResult(viewName) { View = view };
     }
 
     /// <summary>

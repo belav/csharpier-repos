@@ -24,6 +24,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// Diagnostic for a compiler error.
         /// This means we can't do anything until the error is fixed.
         /// </summary>
-        Error = 3
+        Error = 3,
     }
 }

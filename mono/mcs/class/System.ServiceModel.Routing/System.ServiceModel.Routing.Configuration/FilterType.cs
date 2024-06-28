@@ -9,6 +9,6 @@ namespace System.ServiceModel.Routing.Configuration
         Custom,
         EndpointName,
         MatchAll,
-        XPath
+        XPath,
     }
 }

@@ -23,7 +23,7 @@ public class InMemoryApiConsistencyTest
             {
                 typeof(InMemoryServiceCollectionExtensions),
                 typeof(InMemoryDbContextOptionsExtensions),
-                typeof(InMemoryDbContextOptionsBuilder)
+                typeof(InMemoryDbContextOptionsBuilder),
             };
     }
 }

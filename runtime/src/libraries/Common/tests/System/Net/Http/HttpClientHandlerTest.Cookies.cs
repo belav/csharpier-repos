@@ -120,7 +120,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 new Cookie("hello", "world"),
                 new Cookie("foo", "bar"),
-                new Cookie("ABC", "123")
+                new Cookie("ABC", "123"),
             };
 
             await LoopbackServerFactory.CreateClientAndServerAsync(
@@ -161,7 +161,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         requestMessage.Headers.Add("Cookie", s_customCookieHeaderValue);
 
@@ -189,7 +189,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var requestMessage = new HttpRequestMessage(HttpMethod.Get, uri)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         requestMessage.Headers.Add("Cookie", "A=1");
                         requestMessage.Headers.Add("Cookie", "B=2");
@@ -268,7 +268,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var requestMessage = new HttpRequestMessage(HttpMethod.Get, url)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         requestMessage.Headers.Add("Cookie", s_customCookieHeaderValue);
 
@@ -307,7 +307,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var requestMessage = new HttpRequestMessage(HttpMethod.Get, url)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         requestMessage.Headers.Add("Cookie", "A=1");
                         requestMessage.Headers.Add("Cookie", "B=2");
@@ -425,7 +425,7 @@ namespace System.Net.Http.Functional.Tests
                                 new HttpHeaderData(
                                     "Set-Cookie",
                                     GetCookieHeaderValue(cookieName, cookieValue)
-                                )
+                                ),
                             },
                             s_simpleContent
                         );
@@ -466,7 +466,7 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 new HttpHeaderData("Set-Cookie", "A=1; Path=/"),
                                 new HttpHeaderData("Set-Cookie", "B=2; Path=/"),
-                                new HttpHeaderData("Set-Cookie", "C=3; Path=/")
+                                new HttpHeaderData("Set-Cookie", "C=3; Path=/"),
                             },
                             s_simpleContent
                         );
@@ -506,7 +506,7 @@ namespace System.Net.Http.Functional.Tests
                         Task<HttpResponseMessage> getResponseTask = client.GetAsync(requestUrl);
                         Task<HttpRequestData> serverTask = server.HandleRequestAsync(
                             HttpStatusCode.OK,
-                            new HttpHeaderData[] { new HttpHeaderData("Set-Cookie", "A=1"), },
+                            new HttpHeaderData[] { new HttpHeaderData("Set-Cookie", "A=1") },
                             s_simpleContent
                         );
                         await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
@@ -537,7 +537,7 @@ namespace System.Net.Http.Functional.Tests
                         Task<HttpResponseMessage> getResponseTask = client.GetAsync(requestUrl);
                         Task<HttpRequestData> serverTask = server.HandleRequestAsync(
                             HttpStatusCode.OK,
-                            new[] { new HttpHeaderData("Set-Cookie", "A=1; Path=/other"), },
+                            new[] { new HttpHeaderData("Set-Cookie", "A=1; Path=/other") },
                             s_simpleContent
                         );
                         await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
@@ -630,7 +630,10 @@ namespace System.Net.Http.Functional.Tests
                             HttpStatusCode.OK,
                             new HttpHeaderData[]
                             {
-                                new HttpHeaderData("Set-Cookie", $"{s_cookieName}={newCookieValue}")
+                                new HttpHeaderData(
+                                    "Set-Cookie",
+                                    $"{s_cookieName}={newCookieValue}"
+                                ),
                             },
                             s_simpleContent
                         );
@@ -665,7 +668,7 @@ namespace System.Net.Http.Functional.Tests
                                 new HttpHeaderData(
                                     "Set-Cookie",
                                     $"{s_cookieName}=; Expires=Sun, 06 Nov 1994 08:49:37 GMT"
-                                )
+                                ),
                             },
                             s_simpleContent
                         );
@@ -696,7 +699,7 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 new HttpHeaderData("Set-Cookie", "A=1; Path=/;Expires=asdfsadgads"), // invalid Expires
                                 new HttpHeaderData("Set-Cookie", "B=2; Path=/"),
-                                new HttpHeaderData("Set-Cookie", "C=3; Path=/")
+                                new HttpHeaderData("Set-Cookie", "C=3; Path=/"),
                             },
                             s_simpleContent
                         );
@@ -760,7 +763,7 @@ namespace System.Net.Http.Functional.Tests
                         new HttpHeaderData[]
                         {
                             new HttpHeaderData("Location", $"{path2}"),
-                            new HttpHeaderData("Set-Cookie", "A=1; Path=/")
+                            new HttpHeaderData("Set-Cookie", "A=1; Path=/"),
                         }
                     );
 
@@ -823,7 +826,7 @@ namespace System.Net.Http.Functional.Tests
                         new HttpHeaderData[]
                         {
                             new HttpHeaderData("WWW-Authenticate", "Basic realm=\"WallyWorld\""),
-                            new HttpHeaderData("Set-Cookie", "A=1; Path=/")
+                            new HttpHeaderData("Set-Cookie", "A=1; Path=/"),
                         }
                     );
 
@@ -868,14 +871,14 @@ namespace System.Net.Http.Functional.Tests
                 {
                     ".AspNetCore.Session",
                     "RAExEmXpoCbueP_QYM",
-                    useCookies
+                    useCookies,
                 };
 
                 yield return new object[]
                 {
                     ".AspNetCore.Antiforgery.Xam7_OeLcN4",
                     "CfDJ8NGNxAt7CbdClq3UJ8_6w_4661wRQZT1aDtUOIUKshbcV4P0NdS8klCL5qGSN-PNBBV7w23G6MYpQ81t0PMmzIN4O04fqhZ0u1YPv66mixtkX3iTi291DgwT3o5kozfQhe08-RAExEmXpoCbueP_QYM",
-                    useCookies
+                    useCookies,
                 };
 
                 // WinHttpHandler calls WinHttpQueryHeaders to iterate through multiple Set-Cookie header values,
@@ -896,50 +899,50 @@ namespace System.Net.Http.Functional.Tests
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 126),
-                    useCookies
+                    useCookies,
                 };
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 127),
-                    useCookies
+                    useCookies,
                 };
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 128),
-                    useCookies
+                    useCookies,
                 };
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 129),
-                    useCookies
+                    useCookies,
                 };
 
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 254),
-                    useCookies
+                    useCookies,
                 };
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 255),
-                    useCookies
+                    useCookies,
                 };
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 256),
-                    useCookies
+                    useCookies,
                 };
                 yield return new object[]
                 {
                     "foo",
                     GenerateCookie(name: "foo", repeat: 'a', overallHeaderValueLength: 257),
-                    useCookies
+                    useCookies,
                 };
             }
         }

@@ -179,7 +179,7 @@ namespace System.Security.Cryptography.X509Certificates
             'C',
             'D',
             'E',
-            'F'
+            'F',
         };
 
         internal static string EncodeHexString(byte[] sArray)

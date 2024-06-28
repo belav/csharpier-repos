@@ -161,7 +161,7 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                     foreach (var contentType in contentTypes)
                     {
                         apiDescription.SupportedRequestFormats.Add(
-                            new ApiRequestFormat { MediaType = contentType, }
+                            new ApiRequestFormat { MediaType = contentType }
                         );
                     }
                 }
@@ -471,7 +471,7 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
     {
         if (contentTypes.Count == 0)
         {
-            contentTypes = new MediaTypeCollection { (string)null!, };
+            contentTypes = new MediaTypeCollection { (string)null! };
         }
 
         var results = new List<ApiRequestFormat>();
@@ -738,7 +738,7 @@ public class DefaultApiDescriptionProvider : IApiDescriptionProvider
                 Source = source,
                 Type = GetModelType(bindingContext.ModelMetadata),
                 ParameterDescriptor = Parameter,
-                BindingInfo = bindingContext.BindingInfo
+                BindingInfo = bindingContext.BindingInfo,
             };
         }
 

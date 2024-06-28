@@ -86,7 +86,7 @@ namespace ObjectStackAllocation
     {
         Heap,
         Stack,
-        Undefined
+        Undefined,
     }
 
     public class Tests

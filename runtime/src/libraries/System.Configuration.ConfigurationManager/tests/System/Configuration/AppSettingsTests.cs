@@ -123,7 +123,7 @@ namespace System.ConfigurationTests
                 {
                     MachineConfigFilename = machine.ConfigPath,
                     ExeConfigFilename = exe.ConfigPath,
-                    RoamingUserConfigFilename = user.ConfigPath
+                    RoamingUserConfigFilename = user.ConfigPath,
                 };
 
                 var config = ConfigurationManager.OpenMappedExeConfiguration(

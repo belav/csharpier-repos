@@ -19,7 +19,7 @@ public class WebHostConfigurationTests
             { WebHostDefaults.EnvironmentKey, Environments.Development },
             { WebHostDefaults.DetailedErrorsKey, "true" },
             { WebHostDefaults.CaptureStartupErrorsKey, "true" },
-            { WebHostDefaults.SuppressStatusMessagesKey, "true" }
+            { WebHostDefaults.SuppressStatusMessagesKey, "true" },
         };
 
         var config = new WebHostOptions(
@@ -40,7 +40,7 @@ public class WebHostConfigurationTests
     {
         var parameters = new Dictionary<string, string>()
         {
-            { "ENVIRONMENT", Environments.Development }
+            { "ENVIRONMENT", Environments.Development },
         };
         var config = new WebHostOptions(
             new ConfigurationBuilder().AddInMemoryCollection(parameters).Build()

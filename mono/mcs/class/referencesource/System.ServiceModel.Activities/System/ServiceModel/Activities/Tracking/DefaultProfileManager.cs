@@ -160,7 +160,7 @@ namespace System.ServiceModel.Activities.Tracking
                             {
                                 Name = profileElement.Name,
                                 ImplementationVisibility = profileElement.ImplementationVisibility,
-                                ActivityDefinitionId = workflowElement.ActivityDefinitionId
+                                ActivityDefinitionId = workflowElement.ActivityDefinitionId,
                             };
 
                             workflowElement.AddQueries(profile.Queries);

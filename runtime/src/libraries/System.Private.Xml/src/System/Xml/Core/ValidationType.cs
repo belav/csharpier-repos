@@ -33,6 +33,6 @@ namespace System.Xml
 
         // Validate according to W3C XSD schemas, including inline schemas. An error is returned if both XDR and XSD schemas
         // are referenced from the same document.
-        Schema
+        Schema,
     }
 }

@@ -86,7 +86,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
                 using HttpResponseMessage response = await client.SendAsync(request);
             });
@@ -128,7 +128,7 @@ namespace System.Net.Http.Functional.Tests
                             Method = HttpMethod.Get,
                             RequestUri = server.Address,
                             Version = HttpVersion30,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                         };
                     using var response = await client
                         .SendAsync(request)
@@ -177,7 +177,7 @@ namespace System.Net.Http.Functional.Tests
                                 Method = HttpMethod.Get,
                                 RequestUri = server.Address,
                                 Version = HttpVersion30,
-                                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                             };
 
                         tasks[i] = client.SendAsync(request);
@@ -271,7 +271,7 @@ namespace System.Net.Http.Functional.Tests
                                             return 0;
                                         }
                                     )
-                                )
+                                ),
                             };
 
                         tasks[i] = client.SendAsync(request);
@@ -298,7 +298,7 @@ namespace System.Net.Http.Functional.Tests
                                     return 0;
                                 }
                             )
-                        )
+                        ),
                     };
                 var lastTask = client.SendAsync(last);
 
@@ -352,7 +352,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 await AssertProtocolErrorAsync(
@@ -390,7 +390,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 await AssertProtocolErrorAsync(
@@ -431,7 +431,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 await AssertProtocolErrorAsync(
@@ -485,7 +485,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead);
@@ -525,7 +525,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 var response = await client.SendAsync(
@@ -589,7 +589,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 var response = await client.SendAsync(
@@ -641,7 +641,7 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent
+                        Content = requestContent,
                     };
 
                 var responseTask = client.SendAsync(
@@ -715,7 +715,7 @@ namespace System.Net.Http.Functional.Tests
                             Task.CompletedTask,
                             new TaskCompletionSource<bool>(),
                             250
-                        )
+                        ),
                     };
 
                 var response = await client.SendAsync(
@@ -822,7 +822,7 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent
+                        Content = requestContent,
                     };
 
                 Task<HttpResponseMessage> responseTask = client.SendAsync(request);
@@ -866,7 +866,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 using HttpResponseMessage response = await client.SendAsync(request);
@@ -889,7 +889,7 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(uri, UriKind.Absolute),
                 Version = HttpVersion.Version30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
             using HttpResponseMessage response = await client
                 .SendAsync(request)
@@ -910,7 +910,7 @@ namespace System.Net.Http.Functional.Tests
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(uri, UriKind.Absolute),
                 Version = HttpVersion.Version30,
-                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
             };
             using HttpResponseMessage response = await client
                 .SendAsync(request, HttpCompletionOption.ResponseContentRead)
@@ -965,7 +965,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = new Uri(uri, UriKind.Absolute),
                     Version = requestVersion,
-                    VersionPolicy = policy
+                    VersionPolicy = policy,
                 }
             )
             {
@@ -1004,7 +1004,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = new Uri(uri, UriKind.Absolute),
                     Version = requestVersion,
-                    VersionPolicy = policy
+                    VersionPolicy = policy,
                 }
             )
             {
@@ -1020,7 +1020,7 @@ namespace System.Net.Http.Functional.Tests
         public enum CancellationType
         {
             Dispose,
-            CancellationToken
+            CancellationToken,
         }
 
         [Theory]
@@ -1081,7 +1081,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
                 HttpResponseMessage response = await client
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -1187,7 +1187,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
                 HttpResponseMessage response = await client
                     .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
@@ -1253,7 +1253,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
             HttpResponseMessage response = await client
                 .SendAsync(request)
@@ -1306,8 +1306,8 @@ namespace System.Net.Http.Functional.Tests
                             {
                                 cts.Cancel();
                                 return true;
-                            }
-                        }
+                            },
+                        },
                     }
                 );
                 using HttpRequestMessage request =
@@ -1316,7 +1316,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
                 await Assert.ThrowsAnyAsync<OperationCanceledException>(
                     async () => await client.SendAsync(request, cts.Token)
@@ -1329,7 +1329,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
                 await client.SendAsync(request2);
             });
@@ -1361,7 +1361,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
 
             HttpResponseMessage response = await client
@@ -1398,7 +1398,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
@@ -1426,7 +1426,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
             using HttpRequestMessage request2 =
                 new()
@@ -1434,7 +1434,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
             HttpRequestException ex = await Assert.ThrowsAsync<HttpRequestException>(
                 () => client.SendAsync(request).WaitAsync(TimeSpan.FromSeconds(10))
@@ -1497,7 +1497,7 @@ namespace System.Net.Http.Functional.Tests
                     Method = HttpMethod.Get,
                     RequestUri = server.Address,
                     Version = HttpVersion30,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                    VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                 };
             HttpResponseMessage response = await client
                 .SendAsync(request)
@@ -1565,7 +1565,7 @@ namespace System.Net.Http.Functional.Tests
                     RequestUri = server.Address,
                     Version = HttpVersion30,
                     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                    Content = requestContent
+                    Content = requestContent,
                 };
 
             var responseTask = client
@@ -1651,7 +1651,7 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent
+                        Content = requestContent,
                     };
 
                 var responseTask = client.SendAsync(request);
@@ -1727,7 +1727,7 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent
+                        Content = requestContent,
                     };
 
                 var cts = new CancellationTokenSource();
@@ -1815,7 +1815,7 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent
+                        Content = requestContent,
                     };
 
                 var cts = new CancellationTokenSource();
@@ -1910,7 +1910,7 @@ namespace System.Net.Http.Functional.Tests
                         RequestUri = server.Address,
                         Version = HttpVersion30,
                         VersionPolicy = HttpVersionPolicy.RequestVersionExact,
-                        Content = requestContent
+                        Content = requestContent,
                     };
 
                 var cts = new CancellationTokenSource();
@@ -1999,7 +1999,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 using HttpResponseMessage response = await client.SendAsync(request);
@@ -2087,7 +2087,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 await AssertProtocolErrorAsync(
@@ -2134,7 +2134,7 @@ namespace System.Net.Http.Functional.Tests
                         Method = HttpMethod.Get,
                         RequestUri = server.Address,
                         Version = HttpVersion30,
-                        VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                        VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                     };
 
                 await AssertProtocolErrorAsync(
@@ -2182,7 +2182,10 @@ namespace System.Net.Http.Functional.Tests
                 //{ "https://www.litespeedtech.com/" }, // LiteSpeed
                 { "https://quic.tech:8443/" }, // Cloudflare
                 { "https://quic.aiortc.org:443/" }, // aioquic
-                { "https://h2o.examp1e.net/" } // h2o/quicly
+                {
+                    "https://h2o.examp1e.net/"
+                } // h2o/quicly
+                ,
             };
 
         /// <summary>

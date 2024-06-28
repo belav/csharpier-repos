@@ -65,7 +65,7 @@ namespace MonoTests.System.CodeDom.Compiler
             var opt = new CodeGeneratorOptions()
             {
                 BlankLinesBetweenMembers = false,
-                VerbatimOrder = false
+                VerbatimOrder = false,
             };
 
             var ccu = new CodeCompileUnit();
@@ -95,7 +95,7 @@ namespace MonoTests.System.CodeDom.Compiler
             var opt = new CodeGeneratorOptions()
             {
                 BlankLinesBetweenMembers = false,
-                VerbatimOrder = true
+                VerbatimOrder = true,
             };
 
             var ccu = new CodeCompileUnit();

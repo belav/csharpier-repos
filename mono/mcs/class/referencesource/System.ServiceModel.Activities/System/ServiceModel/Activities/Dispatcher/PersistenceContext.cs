@@ -1212,7 +1212,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                         {
                             SaveWorkflowCommand saveCommand = new SaveWorkflowCommand()
                             {
-                                UnlockInstance = true
+                                UnlockInstance = true,
                             };
                             this.persistenceContext.PopulateActivationMetadata(saveCommand);
                             IAsyncResult result = this.persistenceContext.store.BeginExecute(

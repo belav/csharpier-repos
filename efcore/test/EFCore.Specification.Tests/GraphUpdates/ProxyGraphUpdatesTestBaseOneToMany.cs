@@ -679,7 +679,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                         )
                         {
                             context.CreateProxy<OptionalOverlapping2>(e => e.Id = 5),
-                            context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6)
+                            context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6),
                         };
                     });
 
@@ -1038,7 +1038,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             var orphaned = new List<Optional2>
             {
                 context.CreateProxy<Optional2>(e => e.Parent = removed),
-                context.CreateProxy<Optional2>(e => e.Parent = removed)
+                context.CreateProxy<Optional2>(e => e.Parent = removed),
             };
 
             context.AddRange(orphaned);

@@ -88,7 +88,7 @@ public class JwtBearerPostConfigureOptions : IPostConfigureOptions<JwtBearerOpti
                     new OpenIdConnectConfigurationRetriever(),
                     new HttpDocumentRetriever(options.Backchannel)
                     {
-                        RequireHttps = options.RequireHttpsMetadata
+                        RequireHttps = options.RequireHttpsMetadata,
                     }
                 )
                 {

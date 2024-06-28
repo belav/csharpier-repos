@@ -53,7 +53,7 @@ class C
             var favoritesByTypeName = new Dictionary<string, DkmClrObjectFavoritesInfo>()
             {
                 { "C", new DkmClrObjectFavoritesInfo(new[] { "b" }) },
-                { "B", new DkmClrObjectFavoritesInfo(new[] { "s4", "s2" }) }
+                { "B", new DkmClrObjectFavoritesInfo(new[] { "s4", "s2" }) },
             };
 
             var runtime = new DkmClrRuntimeInstance(
@@ -185,7 +185,7 @@ class B
 
             var favoritesByTypeName = new Dictionary<string, DkmClrObjectFavoritesInfo>()
             {
-                { "A", new DkmClrObjectFavoritesInfo(new[] { "s2" }) }
+                { "A", new DkmClrObjectFavoritesInfo(new[] { "s2" }) },
             };
 
             var runtime = new DkmClrRuntimeInstance(
@@ -270,7 +270,7 @@ class C
             var favoritesByTypeName = new Dictionary<string, DkmClrObjectFavoritesInfo>()
             {
                 { "C", new DkmClrObjectFavoritesInfo(new[] { "b" }) },
-                { "B", new DkmClrObjectFavoritesInfo(new[] { "s4", "s2" }) }
+                { "B", new DkmClrObjectFavoritesInfo(new[] { "s4", "s2" }) },
             };
 
             var runtime = new DkmClrRuntimeInstance(
@@ -365,7 +365,10 @@ class C
 
             var favoritesByTypeName = new Dictionary<string, DkmClrObjectFavoritesInfo>()
             {
-                { "A", new DkmClrObjectFavoritesInfo(new[] { "s4", "s2" }, "s4 = {s4}, s2 = {s2}") }
+                {
+                    "A",
+                    new DkmClrObjectFavoritesInfo(new[] { "s4", "s2" }, "s4 = {s4}, s2 = {s2}")
+                },
             };
 
             var runtime = new DkmClrRuntimeInstance(
@@ -416,7 +419,7 @@ class C
                         "s4 = {s4}, s2 = {s2}",
                         "{s4}, {s2}"
                     )
-                }
+                },
             };
 
             var runtime = new DkmClrRuntimeInstance(
@@ -475,7 +478,7 @@ class B
             var favoritesByTypeName = new Dictionary<string, DkmClrObjectFavoritesInfo>()
             {
                 { "B", new DkmClrObjectFavoritesInfo(new[] { "a2" }) },
-                { "A", new DkmClrObjectFavoritesInfo(new[] { "s2" }) }
+                { "A", new DkmClrObjectFavoritesInfo(new[] { "s2" }) },
             };
 
             var runtime = new DkmClrRuntimeInstance(
@@ -562,7 +565,7 @@ class B : A
             var favoritesByTypeName = new Dictionary<string, DkmClrObjectFavoritesInfo>()
             {
                 { "B", new DkmClrObjectFavoritesInfo(new[] { "S1" }) },
-                { "A", new DkmClrObjectFavoritesInfo(new[] { "S2" }) }
+                { "A", new DkmClrObjectFavoritesInfo(new[] { "S2" }) },
             };
 
             var runtime = new DkmClrRuntimeInstance(

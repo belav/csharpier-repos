@@ -85,7 +85,7 @@ namespace System.Activities
                     collectionInterfaces = new List<Type>(2)
                     {
                         typeof(IList<>),
-                        typeof(ICollection<>)
+                        typeof(ICollection<>),
                     };
                 }
                 return collectionInterfaces;
@@ -802,7 +802,7 @@ namespace System.Activities
                 ActivityLocationReferenceEnvironment newImplementationEnvironment =
                     new ActivityLocationReferenceEnvironment(activity.HostEnvironment)
                     {
-                        InternalRoot = activity
+                        InternalRoot = activity,
                     };
 
                 int nextEnvironmentId = 0;

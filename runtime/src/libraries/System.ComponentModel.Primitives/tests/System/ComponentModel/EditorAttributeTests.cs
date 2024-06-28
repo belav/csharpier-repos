@@ -90,12 +90,12 @@ namespace System.ComponentModel.Tests
             yield return new object[]
             {
                 "BaseTypeName",
-                "System.ComponentModel.EditorAttributeBaseTypeName"
+                "System.ComponentModel.EditorAttributeBaseTypeName",
             };
             yield return new object[]
             {
                 "BaseTypeName,Other",
-                "System.ComponentModel.EditorAttributeBaseTypeName"
+                "System.ComponentModel.EditorAttributeBaseTypeName",
             };
             yield return new object[] { string.Empty, "System.ComponentModel.EditorAttribute" };
             yield return new object[] { null, "System.ComponentModel.EditorAttribute" };
@@ -119,44 +119,44 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new EditorAttribute("typeName", "baseTypeName"),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new EditorAttribute("typename", "baseTypeName"),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new EditorAttribute("typeName", "basetypename"),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new EditorAttribute("typeName", (string)null),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new EditorAttribute("typeName", (string)null),
                 new EditorAttribute("typeName", (string)null),
-                true
+                true,
             };
             yield return new object[]
             {
                 new EditorAttribute("typeName", (string)null),
                 new EditorAttribute("typename", (string)null),
-                false
+                false,
             };
             yield return new object[]
             {
                 new EditorAttribute("typeName", (string)null),
                 new EditorAttribute("typeName", "baseTypeName"),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

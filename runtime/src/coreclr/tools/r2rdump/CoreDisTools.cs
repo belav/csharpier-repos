@@ -22,7 +22,7 @@ namespace R2RDump
             Target_X64,
             Target_Thumb,
             Target_Arm64,
-            Target_LoongArch64
+            Target_LoongArch64,
         };
 
         [DllImport(_dll, CallingConvention = CallingConvention.Cdecl)]
@@ -215,7 +215,7 @@ namespace R2RDump
                     // Instructions are dumped as 4-byte hexadecimal integers
                     Machine.LoongArch64 => 4 * 2 + 1,
 
-                    _ => throw new NotImplementedException()
+                    _ => throw new NotImplementedException(),
                 };
 
                 MnemonicIndentation = NakedWithOffsetIndentation + byteDumpLength;

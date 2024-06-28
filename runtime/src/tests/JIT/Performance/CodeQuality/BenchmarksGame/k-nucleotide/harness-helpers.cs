@@ -43,7 +43,7 @@ namespace BenchmarksGame
                     39203,
                     39190,
                     39081,
-                    39023
+                    39023,
                 };
                 expectedCountFragments = new int[] { 11765, 3572, 380, 7, 7 };
                 resourceName =
@@ -69,7 +69,7 @@ namespace BenchmarksGame
                     202,
                     201,
                     185,
-                    167
+                    167,
                 };
                 expectedCountFragments = new int[] { 54, 24, 4, 0, 0 };
                 resourceName =

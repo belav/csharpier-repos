@@ -231,7 +231,7 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
                         Object: null,
                         Arguments: [
                             MethodCallExpression equalsMethodCallExpression,
-                            ParameterExpression parameterExpresion
+                            ParameterExpression parameterExpresion,
                         ]
                     }
                 && equalsMethodCallExpression.TryGetEFPropertyArguments(out _, out var propertyName)
@@ -473,7 +473,7 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
 
         var projectionMapping = new Dictionary<ProjectionMember, Expression>
         {
-            { new ProjectionMember(), translation }
+            { new ProjectionMember(), translation },
         };
 
         selectExpression.ClearOrdering();
@@ -708,7 +708,7 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         );
         var projectionMapping = new Dictionary<ProjectionMember, Expression>
         {
-            { new ProjectionMember(), translation }
+            { new ProjectionMember(), translation },
         };
 
         selectExpression.ClearOrdering();
@@ -869,7 +869,7 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
             selectExpression.ReplaceProjectionMapping(
                 new Dictionary<ProjectionMember, Expression>
                 {
-                    { projectionMember, entityProjectionExpression.UpdateEntityType(derivedType) }
+                    { projectionMember, entityProjectionExpression.UpdateEntityType(derivedType) },
                 }
             );
 
@@ -1269,14 +1269,12 @@ public class CosmosQueryableMethodTranslatingExpressionVisitor
         {
             if (binaryExpression.NodeType == ExpressionType.Equal)
             {
-                var valueExpression = IsPartitionKeyPropertyAccess(
-                    binaryExpression.Left,
-                    entityType
-                )
-                    ? binaryExpression.Right
+                var valueExpression =
+                    IsPartitionKeyPropertyAccess(binaryExpression.Left, entityType)
+                        ? binaryExpression.Right
                     : IsPartitionKeyPropertyAccess(binaryExpression.Right, entityType)
                         ? binaryExpression.Left
-                        : null;
+                    : null;
 
                 if (
                     valueExpression is ConstantExpression

@@ -44,7 +44,7 @@ namespace Tests.System.Security
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 @"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             )
@@ -245,7 +245,7 @@ namespace Tests.System.Security
                 0x6b,
                 0xdd,
                 0x5d,
-                0xc4
+                0xc4,
             };
 
             AssemblyName name = new AssemblyName();

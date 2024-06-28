@@ -174,7 +174,7 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
                         {
                             Assembly = match.Groups["assembly"].Value,
                             Import = match.Groups["namespace"].Value,
-                            Xmlns = xmlns
+                            Xmlns = xmlns,
                         }
                     );
                 }

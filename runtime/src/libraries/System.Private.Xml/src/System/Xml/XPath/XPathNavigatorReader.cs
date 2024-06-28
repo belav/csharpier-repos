@@ -55,6 +55,7 @@ namespace System.Xml.XPath
             XmlNodeType.ProcessingInstruction, // XPathNodeType.ProcessingInstruction
             XmlNodeType.Comment, // XPathNodeType.Comment
             XmlNodeType.None // XPathNodeType.All
+            ,
         };
 
         /// <summary>

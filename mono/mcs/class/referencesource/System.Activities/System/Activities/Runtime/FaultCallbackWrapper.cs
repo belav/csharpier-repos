@@ -17,7 +17,7 @@ namespace System.Activities.Runtime
         {
             typeof(NativeActivityFaultContext),
             typeof(Exception),
-            typeof(ActivityInstance)
+            typeof(ActivityInstance),
         };
 
         public FaultCallbackWrapper(FaultCallback callback, ActivityInstance owningInstance)

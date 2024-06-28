@@ -5,7 +5,7 @@ public class Outer
     public enum Inner
     {
         ONE,
-        TWO
+        TWO,
     }
 }
 

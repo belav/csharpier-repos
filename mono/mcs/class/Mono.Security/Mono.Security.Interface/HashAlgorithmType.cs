@@ -39,6 +39,6 @@ namespace Mono.Security.Interface
         Unknown = 255,
 
         // Mono-specific addition, allowing us to reuse it IHashAlgorithm API for TLS 1.0 / 1.1.
-        Md5Sha1 = 254
+        Md5Sha1 = 254,
     }
 }

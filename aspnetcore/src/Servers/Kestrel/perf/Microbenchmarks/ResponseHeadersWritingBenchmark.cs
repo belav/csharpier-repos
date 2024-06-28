@@ -225,6 +225,6 @@ public class ResponseHeadersWritingBenchmark
         PlaintextWithCookie,
         PlaintextChunkedWithCookie,
         LiveAspNet,
-        Common
+        Common,
     }
 }

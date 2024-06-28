@@ -33,6 +33,6 @@ namespace System.Windows.Forms
         RowHeader = 3,
         TopLeftHeader = 4,
         HorizontalScrollBar = 5,
-        VerticalScrollBar = 6
+        VerticalScrollBar = 6,
     }
 }

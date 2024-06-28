@@ -94,7 +94,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             return new WebPackageSource(feedUrl.OriginalString, nameAttribute.Value)
             {
                 FilterPreferredPackages =
-                    filterPreferredAttribute != null && filterPreferredAttribute.Value.AsBool(false)
+                    filterPreferredAttribute != null
+                    && filterPreferredAttribute.Value.AsBool(false),
             };
         }
 

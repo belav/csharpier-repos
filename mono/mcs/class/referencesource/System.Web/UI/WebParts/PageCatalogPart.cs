@@ -65,7 +65,7 @@ namespace System.Web.UI.WebControls.WebParts
                 }
             );
 
-        [WebSysDefaultValue(SR.PageCatalogPart_PartTitle),]
+        [WebSysDefaultValue(SR.PageCatalogPart_PartTitle)]
         public override string Title
         {
             get

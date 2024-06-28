@@ -79,6 +79,6 @@ namespace DbLinq.Data.Linq.Sugar.Expressions
         Pow,
         Round,
         Sign,
-        Sqrt
+        Sqrt,
     }
 }

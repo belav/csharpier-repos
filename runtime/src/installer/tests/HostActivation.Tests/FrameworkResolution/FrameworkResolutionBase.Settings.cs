@@ -92,7 +92,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             CommandLine,
             Environment,
             RuntimeOptions,
-            FrameworkReference
+            FrameworkReference,
         }
 
         public static Func<TestSettings, TestSettings> RollForwardSetting(

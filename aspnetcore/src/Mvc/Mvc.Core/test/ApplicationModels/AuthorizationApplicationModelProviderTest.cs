@@ -139,7 +139,7 @@ public class AuthorizationApplicationModelProviderTest
                 {
                     return true;
                 }
-            )
+            ),
         };
         var authorizationPolicy = new AuthorizationPolicy(requirements, new string[] { "dingos" });
         var authOptions = Options.Create(new AuthorizationOptions());
@@ -173,7 +173,7 @@ public class AuthorizationApplicationModelProviderTest
                 {
                     return true;
                 }
-            )
+            ),
         };
         var authorizationPolicy = new AuthorizationPolicy(requirements, new string[] { "dingos" });
         var authorizationPolicyProviderMock = new Mock<IAuthorizationPolicyProvider>();

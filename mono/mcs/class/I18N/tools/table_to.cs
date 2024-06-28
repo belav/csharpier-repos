@@ -56,7 +56,7 @@ public class table_to
                         : new char[]
                         {
                             (char)(0xd800 + ((i - 0x10000) >> 10)),
-                            (char)(0xdc00 + ((i - 0x10000) & 0x3ff))
+                            (char)(0xdc00 + ((i - 0x10000) & 0x3ff)),
                         }
                 );
                 byte[] outp = encoding.GetBytes(inp);

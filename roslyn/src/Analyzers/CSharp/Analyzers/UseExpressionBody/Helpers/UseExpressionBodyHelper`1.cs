@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseExpressionBody
                             {
                                 AttributeLists.Count: 0,
                                 RawKind: (int)SyntaxKind.GetAccessorDeclaration
-                            } accessor
+                            } accessor,
                         ]
                     }
                 ? accessor

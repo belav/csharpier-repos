@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                         documents,
                         options with
                         {
-                            AssociatePropertyReferencesWithSpecificAccessor = false
+                            AssociatePropertyReferencesWithSpecificAccessor = false,
                         },
                         cancellationToken
                     )
@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                     state,
                     options with
                     {
-                        AssociatePropertyReferencesWithSpecificAccessor = false
+                        AssociatePropertyReferencesWithSpecificAccessor = false,
                     },
                     cancellationToken
                 )

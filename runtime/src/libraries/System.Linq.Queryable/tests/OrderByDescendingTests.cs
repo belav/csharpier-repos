@@ -17,14 +17,14 @@ namespace System.Linq.Tests
                 new { Name = "Alpha", Score = 90 },
                 new { Name = "Robert", Score = 45 },
                 new { Name = "Prakash", Score = 99 },
-                new { Name = "Bob", Score = 0 }
+                new { Name = "Bob", Score = 0 },
             };
             var expected = new[]
             {
                 new { Name = "Robert", Score = 45 },
                 new { Name = "Prakash", Score = 99 },
                 new { Name = "Bob", Score = 0 },
-                new { Name = "Alpha", Score = 90 }
+                new { Name = "Alpha", Score = 90 },
             };
 
             Assert.Equal(expected, source.AsQueryable().OrderByDescending(e => e.Name, null));

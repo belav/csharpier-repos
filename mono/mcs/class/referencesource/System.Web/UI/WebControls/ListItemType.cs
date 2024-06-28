@@ -61,6 +61,6 @@ namespace System.Web.UI.WebControls
         ///       with the <see cref='System.Web.UI.WebControls.DataGrid'/> control and is not
         ///       databound.</para>
         /// </devdoc>
-        Pager = 7
+        Pager = 7,
     }
 }

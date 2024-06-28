@@ -532,7 +532,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                     "Visual Studio",
                     "Comics",
                     "Computers",
-                    "Laptops"
+                    "Laptops",
                 }
             );
 

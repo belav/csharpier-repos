@@ -858,7 +858,7 @@ namespace System.Windows.Forms
         {
             Initial,
             Show,
-            Down
+            Down,
         }
 
         TipState state = TipState.Initial;

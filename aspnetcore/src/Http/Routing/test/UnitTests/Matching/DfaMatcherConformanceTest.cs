@@ -40,7 +40,7 @@ public class DfaMatcherConformanceTest : FullFeaturedMatcherConformanceTest
             EndpointFactory.CreateRouteEndpoint(
                 "{firstName}/{lastName}",
                 order: 0,
-                defaults: new { controller = "TestRoute", action = "Index", }
+                defaults: new { controller = "TestRoute", action = "Index" }
             ),
             EndpointFactory.CreateRouteEndpoint("middleware/{**_}", order: 0),
         };

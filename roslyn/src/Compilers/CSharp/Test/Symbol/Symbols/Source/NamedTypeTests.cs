@@ -129,7 +129,7 @@ using TIAttribute = System.Runtime.InteropServices.TypeIdentifierAttribute;
                 {
                     @"global using TI = System.Runtime.InteropServices.TypeIdentifierAttribute;",
                     @$"
-[TI] {type}"
+[TI] {type}",
                 }
             );
             var namedType = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -145,7 +145,7 @@ using TIAttribute = System.Runtime.InteropServices.TypeIdentifierAttribute;
                 {
                     @"global using TIAttribute = System.Runtime.InteropServices.TypeIdentifierAttribute;",
                     @$"
-[TIAttribute] {type}"
+[TIAttribute] {type}",
                 }
             );
             var namedType = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -161,7 +161,7 @@ using TIAttribute = System.Runtime.InteropServices.TypeIdentifierAttribute;
                 {
                     @"global using TIAttribute = System.Runtime.InteropServices.TypeIdentifierAttribute;",
                     @$"
-[TI] {type}"
+[TI] {type}",
                 }
             );
             var namedType = compilation.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
@@ -181,7 +181,7 @@ namespace N
 {{
     using X = TIAttribute;
     [X] {type}
-}}"
+}}",
                 }
             );
             var namedType = compilation
@@ -203,7 +203,7 @@ namespace N
 {{
     using XAttribute = TIAttribute;
     [XAttribute] {type}
-}}"
+}}",
                 }
             );
             var namedType = compilation
@@ -225,7 +225,7 @@ namespace N
 {{
     using XAttribute = TIAttribute;
     [X] {type}
-}}"
+}}",
                 }
             );
             var namedType = compilation

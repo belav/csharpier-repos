@@ -278,7 +278,7 @@ public class CookiePolicyTests
                         app.UseCookiePolicy(
                             new CookiePolicyOptions
                             {
-                                OnAppendCookie = ctx => ctx.CookieName = ctx.CookieValue = "Hao"
+                                OnAppendCookie = ctx => ctx.CookieName = ctx.CookieValue = "Hao",
                             }
                         );
                         app.Run(context =>
@@ -428,7 +428,7 @@ public class CookiePolicyTests
                             {
                                 HttpOnly = HttpOnlyPolicy.Always,
                                 Secure = CookieSecurePolicy.Always,
-                                OnAppendCookie = c => c.CookieOptions.Extensions.Add("extension")
+                                OnAppendCookie = c => c.CookieOptions.Extensions.Add("extension"),
                             }
                         );
                         app.UseAuthentication();
@@ -487,7 +487,7 @@ public class CookiePolicyTests
                             {
                                 HttpOnly = HttpOnlyPolicy.Always,
                                 Secure = CookieSecurePolicy.Always,
-                                OnAppendCookie = c => c.CookieOptions.Extensions.Add("ext")
+                                OnAppendCookie = c => c.CookieOptions.Extensions.Add("ext"),
                             }
                         );
                         app.UseAuthentication();

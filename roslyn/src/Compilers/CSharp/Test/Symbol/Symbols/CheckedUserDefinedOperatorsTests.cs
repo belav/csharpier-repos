@@ -850,7 +850,7 @@ class C
                 // /// See <see cref="operator ++"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator " + op)
                     .WithArguments("operator " + op)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -898,7 +898,7 @@ class C
                 // /// See <see cref="operator checked -"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
@@ -938,7 +938,7 @@ class C
                 // /// See <see cref="operator checked -"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked -")
                     .WithArguments("operator checked -")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1141,7 +1141,7 @@ class C
                 // /// See <see cref="operator --(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator " + op + "(C)")
                     .WithArguments("operator " + op + "(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1189,7 +1189,7 @@ class C
                 // /// See <see cref="operator checked -(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1232,7 +1232,7 @@ class C
                 // /// See <see cref="operator checked (C)"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "(")
                     .WithArguments("Overloadable operator expected", "1037")
-                    .WithLocation(3, 37)
+                    .WithLocation(3, 37),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1317,7 +1317,7 @@ class C
                 // /// See <see cref="operator (C)"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "(")
                     .WithArguments("Overloadable operator expected", "1037")
-                    .WithLocation(3, 29)
+                    .WithLocation(3, 29),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1395,7 +1395,7 @@ class C
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -1442,7 +1442,7 @@ class C
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -1618,7 +1618,7 @@ class C
                 // /// See <see cref="operator checked !"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1696,7 +1696,7 @@ class C
                 // /// See <see cref="operator checked true"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1779,7 +1779,7 @@ class C
                 // /// See <see cref="operator checked ~(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -1857,7 +1857,7 @@ class C
                 // /// See <see cref="operator checked true(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C)")
                     .WithArguments("operator checked " + op + "(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -2701,7 +2701,7 @@ class C
                 // /// See <see cref="operator +"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator " + op)
                     .WithArguments("operator " + op)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -2750,7 +2750,7 @@ class C
                 // /// See <see cref="operator checked -"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op)
                     .WithArguments("operator checked " + op)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
                 source,
@@ -2913,7 +2913,7 @@ class C
                 // /// See <see cref="operator "/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, @"""")
                     .WithArguments("Overloadable operator expected", "1037")
-                    .WithLocation(3, 29)
+                    .WithLocation(3, 29),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -3108,7 +3108,7 @@ class C
                 // /// See <see cref="operator -(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator " + op + "(C, C)")
                     .WithArguments("operator " + op + "(C, C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -3157,7 +3157,7 @@ class C
                 // /// See <see cref="operator checked -(C, C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + op + "(C, C)")
                     .WithArguments("operator checked " + op + "(C, C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -3200,7 +3200,7 @@ class C
                 // /// See <see cref="operator checked (C, C)"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "(")
                     .WithArguments("Overloadable operator expected", "1037")
-                    .WithLocation(3, 37)
+                    .WithLocation(3, 37),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -3310,7 +3310,7 @@ class C
                 // /// See <see cref="operator (C, C)"/>.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "(")
                     .WithArguments("Overloadable operator expected", "1037")
-                    .WithLocation(3, 29)
+                    .WithLocation(3, 29),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -3398,7 +3398,7 @@ class C
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -3578,7 +3578,7 @@ class C
                 // /// See <see cref="operator checked %"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + opForXml)
                     .WithArguments("operator checked " + opForXml)
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -3709,7 +3709,7 @@ class C
                 "<" => "{",
                 ">=" => "}=",
                 "<=" => "{=",
-                _ => op
+                _ => op,
             };
         }
 
@@ -3754,7 +3754,7 @@ class C
                 // /// See <see cref="operator checked %(C, int)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "operator checked " + opForXml + "(C, int)")
                     .WithArguments("operator checked " + opForXml + "(C, int)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4577,7 +4577,7 @@ class C
                 // /// See <see cref="explicit operator int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator int")
                     .WithArguments("explicit operator int")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4618,7 +4618,7 @@ class C
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int")
                     .WithArguments("explicit operator checked int")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4656,7 +4656,7 @@ class C
                 // /// See <see cref="implicit operator int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator int")
                     .WithArguments("implicit operator int")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4697,7 +4697,7 @@ class C
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int")
                     .WithArguments("explicit operator checked int")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4834,7 +4834,7 @@ class C
                 // /// See <see cref="explicit operator int(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator int(C)")
                     .WithArguments("explicit operator int(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4875,7 +4875,7 @@ class C
                 // /// See <see cref="explicit operator checked int(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int(C)")
                     .WithArguments("explicit operator checked int(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4913,7 +4913,7 @@ class C
                 // /// See <see cref="implicit operator int(C)"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator int(C)")
                     .WithArguments("implicit operator int(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4954,7 +4954,7 @@ class C
                 // /// See <see cref="explicit operator checked int"/>.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "explicit operator checked int(C)")
                     .WithArguments("explicit operator checked int(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -4985,7 +4985,7 @@ class C
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -5080,7 +5080,7 @@ class C
                 // /// See <see cref="implicit operator checked int" />.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator checked int")
                     .WithArguments("implicit operator checked int")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(
@@ -5156,7 +5156,7 @@ class C
                 // /// See <see cref="implicit operator checked int(C)" />.
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "implicit operator checked int(C)")
                     .WithArguments("implicit operator checked int(C)")
-                    .WithLocation(3, 20)
+                    .WithLocation(3, 20),
             };
 
             var compilation = CreateCompilationWithMscorlib40AndDocumentationComments(

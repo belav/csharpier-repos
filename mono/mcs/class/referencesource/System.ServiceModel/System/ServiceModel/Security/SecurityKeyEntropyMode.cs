@@ -10,7 +10,7 @@ namespace System.ServiceModel.Security
     {
         ClientEntropy,
         ServerEntropy,
-        CombinedEntropy
+        CombinedEntropy,
     }
 
     sealed class SecurityKeyEntropyModeHelper

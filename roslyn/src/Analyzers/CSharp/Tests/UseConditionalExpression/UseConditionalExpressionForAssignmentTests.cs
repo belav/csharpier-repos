@@ -838,7 +838,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {
                         CSharpCodeStyleOptions.VarForBuiltInTypes,
                         CodeStyleOption2.TrueWithSilentEnforcement
-                    }
+                    },
                 }
             );
         }
@@ -878,7 +878,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {
                         CSharpCodeStyleOptions.VarWhenTypeIsApparent,
                         CodeStyleOption2.TrueWithSilentEnforcement
-                    }
+                    },
                 }
             );
         }
@@ -918,7 +918,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {
                         CSharpCodeStyleOptions.VarElsewhere,
                         CodeStyleOption2.TrueWithSilentEnforcement
-                    }
+                    },
                 }
             );
         }
@@ -1652,8 +1652,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseConditionalExpressio
                     {
                         // /0/Test0.cs(6,9): hidden IDE0045: 'if' statement can be simplified
                         VerifyCS.Diagnostic().WithSpan(5, 9, 5, 11).WithSpan(5, 9, 6, 32),
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 

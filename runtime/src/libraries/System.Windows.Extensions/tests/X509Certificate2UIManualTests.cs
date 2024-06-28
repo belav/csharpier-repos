@@ -41,7 +41,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection collection = new X509Certificate2Collection()
                     {
                         cert,
-                        cert
+                        cert,
                     };
                     X509Certificate2Collection actual = X509Certificate2UI.SelectFromCollection(
                         collection,

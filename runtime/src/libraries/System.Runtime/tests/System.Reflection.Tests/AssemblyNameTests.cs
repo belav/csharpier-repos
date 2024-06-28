@@ -33,12 +33,12 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 "\u043F\u0440\u0438\u0432\u0435\u0442",
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 "\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B",
-                "\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B"
+                "\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B\uD83D\uDC3B",
             };
         }
 
@@ -233,7 +233,7 @@ namespace System.Reflection.Tests
                 "en-US",
                 null,
                 null,
-                "Test"
+                "Test",
             };
             yield return new object[]
             {
@@ -241,7 +241,7 @@ namespace System.Reflection.Tests
                 "en-US",
                 "",
                 "",
-                "Test, Culture=neutral"
+                "Test, Culture=neutral",
             };
             yield return new object[]
             {
@@ -249,7 +249,7 @@ namespace System.Reflection.Tests
                 null,
                 "en-US",
                 "en-US",
-                "Test, Culture=en-US"
+                "Test, Culture=en-US",
             };
             yield return new object[]
             {
@@ -257,7 +257,7 @@ namespace System.Reflection.Tests
                 null,
                 "En-US",
                 "en-US",
-                "Test, Culture=en-US"
+                "Test, Culture=en-US",
             };
         }
 
@@ -411,13 +411,13 @@ namespace System.Reflection.Tests
             {
                 new AssemblyName(typeof(AssemblyNameTests).Assembly.FullName),
                 new AssemblyName(typeof(AssemblyNameTests).Assembly.FullName),
-                true
+                true,
             };
             yield return new object[]
             {
                 new AssemblyName(typeof(AssemblyNameTests).Assembly.FullName),
                 new AssemblyName("System.Runtime"),
-                false
+                false,
             };
         }
 
@@ -707,7 +707,7 @@ namespace System.Reflection.Tests
             0x4d,
             0x5a,
             0xd2,
-            0x93
+            0x93,
         };
 
         [Fact]
@@ -769,11 +769,11 @@ namespace System.Reflection.Tests
             yield return new object[] { $"{VersionUnspecifiedStr}.{VersionUnspecifiedStr}" };
             yield return new object[]
             {
-                $"{VersionUnspecifiedStr}.{VersionUnspecifiedStr}.{VersionUnspecifiedStr}"
+                $"{VersionUnspecifiedStr}.{VersionUnspecifiedStr}.{VersionUnspecifiedStr}",
             };
             yield return new object[]
             {
-                $"{VersionUnspecifiedStr}.{VersionUnspecifiedStr}.{VersionUnspecifiedStr}.{VersionUnspecifiedStr}"
+                $"{VersionUnspecifiedStr}.{VersionUnspecifiedStr}.{VersionUnspecifiedStr}.{VersionUnspecifiedStr}",
             };
 
             // No major version
@@ -844,7 +844,7 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 new Version(65534, 65534, 65534, 65534),
-                "65534.65534.65534.65534"
+                "65534.65534.65534.65534",
             };
         }
 

@@ -98,7 +98,7 @@ class C
                 [
                     VirtualKeyCode.HOME,
                     (VirtualKeyCode.END, VirtualKeyCode.SHIFT),
-                    VirtualKeyCode.DELETE
+                    VirtualKeyCode.DELETE,
                 ],
                 HangMitigatingCancellationToken
             );

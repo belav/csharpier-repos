@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                 NotifyClientOfEvents = false,
 
                 // Only allow public methods (may be on internal types) to be invoked remotely.
-                AllowNonPublicInvocation = false
+                AllowNonPublicInvocation = false,
             };
 
         private readonly Type _replServiceProviderType;

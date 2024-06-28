@@ -282,7 +282,7 @@ public class RouterTest
         );
         var parameters = new Dictionary<string, object>
         {
-            { nameof(Router.AppAssembly), typeof(RouterTest).Assembly }
+            { nameof(Router.AppAssembly), typeof(RouterTest).Assembly },
         };
 
         // Act

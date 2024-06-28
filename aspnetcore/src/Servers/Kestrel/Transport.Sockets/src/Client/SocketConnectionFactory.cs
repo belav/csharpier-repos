@@ -83,7 +83,7 @@ internal sealed class SocketConnectionFactory : IConnectionFactory, IAsyncDispos
 
         var socket = new Socket(ipEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp)
         {
-            NoDelay = _options.NoDelay
+            NoDelay = _options.NoDelay,
         };
 
         await socket.ConnectAsync(ipEndPoint);

@@ -46,7 +46,7 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
             "FromSqlRaw" => AnalyzeFromSqlRawInvocation(invocation),
             "ExecuteSqlRaw" or "ExecuteSqlRawAsync" => AnalyzeExecuteSqlRawInvocation(invocation),
             "SqlQueryRaw" => AnalyzeSqlQueryRawInvocation(invocation),
-            _ => false
+            _ => false,
         };
 
         if (report)
@@ -96,7 +96,7 @@ public sealed class InterpolatedStringUsageInRawQueriesDiagnosticAnalyzer : Diag
             "ExecuteSqlRaw" => "ExecuteSql",
             "ExecuteSqlRawAsync" => "ExecuteSqlAsync",
             "SqlQueryRaw" => "SqlQuery",
-            _ => oldName
+            _ => oldName,
         };
 
     private static bool AnalyzeFromSqlRawInvocation(IInvocationOperation invocation)

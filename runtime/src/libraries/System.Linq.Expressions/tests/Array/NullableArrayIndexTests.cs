@@ -1053,7 +1053,7 @@ namespace System.Linq.Expressions.Tests
                 decimal.One,
                 decimal.MinusOne,
                 decimal.MinValue,
-                decimal.MaxValue
+                decimal.MaxValue,
             };
             decimal?[] result = new decimal?[size];
             for (int i = 0; i < size; i++)
@@ -1076,7 +1076,7 @@ namespace System.Linq.Expressions.Tests
                 double.Epsilon,
                 double.NegativeInfinity,
                 double.PositiveInfinity,
-                double.NaN
+                double.NaN,
             };
             double?[] result = new double?[size];
             for (int i = 0; i < size; i++)
@@ -1123,7 +1123,7 @@ namespace System.Linq.Expressions.Tests
                 float.Epsilon,
                 float.NegativeInfinity,
                 float.PositiveInfinity,
-                float.NaN
+                float.NaN,
             };
             float?[] result = new float?[size];
             for (int i = 0; i < size; i++)

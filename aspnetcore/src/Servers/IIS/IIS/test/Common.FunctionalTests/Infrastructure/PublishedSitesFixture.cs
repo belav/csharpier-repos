@@ -59,7 +59,7 @@ public class PublishedSitesFixture : IDisposable
                 RuntimeFlavor = RuntimeFlavor.CoreClr,
                 RuntimeArchitecture = RuntimeArchitecture.x64,
                 HostingModel = hostingModel,
-                TargetFramework = Tfm.Default
+                TargetFramework = Tfm.Default,
             }
         );
     }
@@ -72,7 +72,7 @@ public class PublishedSitesFixture : IDisposable
         return new IISDeploymentParameters(baseParameters)
         {
             ApplicationPublisher = publisher,
-            PublishApplicationBeforeDeployment = true
+            PublishApplicationBeforeDeployment = true,
         };
     }
 }

@@ -17,7 +17,7 @@ internal static class ManagedAlgorithmHelpers
         typeof(HMACSHA1),
         typeof(HMACSHA256),
         typeof(HMACSHA384),
-        typeof(HMACSHA512)
+        typeof(HMACSHA512),
     };
 
     // Any changes to this method should also be be reflected in FriendlyNameToType.

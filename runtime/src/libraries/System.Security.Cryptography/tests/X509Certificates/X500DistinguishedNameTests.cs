@@ -823,19 +823,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             new object[]
             {
                 "CN=\" Common Name\"",
-                "3017311530130603550403130C20436F6D6D6F6E204E616D65"
+                "3017311530130603550403130C20436F6D6D6F6E204E616D65",
             },
             // Tab
             new object[]
             {
                 "CN=\"\tCommon Name\"",
-                "30233121301F06035504031E1800090043006F006D006D006F006E0020004E00" + "61006D0065"
+                "30233121301F06035504031E1800090043006F006D006D006F006E0020004E00" + "61006D0065",
             },
             // Newline
             new object[]
             {
                 "CN=\"\nCommon Name\"",
-                "30233121301F06035504031E18000A0043006F006D006D006F006E0020004E00" + "61006D0065"
+                "30233121301F06035504031E18000A0043006F006D006D006F006E0020004E00" + "61006D0065",
             },
             // xUnit doesn't like \v in Assert.Equals, reports it as an invalid character.
             //new object[]
@@ -857,13 +857,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             new object[]
             {
                 "CN=\"\rCommon Name\"",
-                "30233121301F06035504031E18000D0043006F006D006D006F006E0020004E00" + "61006D0065"
+                "30233121301F06035504031E18000D0043006F006D006D006F006E0020004E00" + "61006D0065",
             },
             // em quad.  This is char.IsWhitespace, but is not quoted.
             new object[]
             {
                 "CN=\u2002Common Name",
-                "30233121301F06035504031E1820020043006F006D006D006F006E0020004E00" + "61006D0065"
+                "30233121301F06035504031E1820020043006F006D006D006F006E0020004E00" + "61006D0065",
             },
         };
 
@@ -873,19 +873,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             new object[]
             {
                 "CN=\"Common Name \"",
-                "3017311530130603550403130C436F6D6D6F6E204E616D6520"
+                "3017311530130603550403130C436F6D6D6F6E204E616D6520",
             },
             // Newline
             new object[]
             {
                 "CN=\"Common Name\t\"",
-                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D00650009"
+                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D00650009",
             },
             // Newline
             new object[]
             {
                 "CN=\"Common Name\n\"",
-                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D0065000A"
+                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D0065000A",
             },
             // xUnit doesn't like \v in Assert.Equals, reports it as an invalid character.
             //new object[]
@@ -907,13 +907,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             new object[]
             {
                 "CN=\"Common Name\r\"",
-                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D0065000D"
+                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D0065000D",
             },
             // em quad.  This is char.IsWhitespace, but is not quoted.
             new object[]
             {
                 "CN=Common Name\u2002",
-                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D00652002"
+                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D00652002",
             },
         };
 
@@ -925,19 +925,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             new object[]
             {
                 "CN=\"Common,Name\"",
-                "3016311430120603550403130B436F6D6D6F6E2C4E616D65"
+                "3016311430120603550403130B436F6D6D6F6E2C4E616D65",
             },
             // Plus (RDN component separator)
             new object[]
             {
                 "CN=\"Common+Name\"",
-                "3016311430120603550403130B436F6D6D6F6E2B4E616D65"
+                "3016311430120603550403130B436F6D6D6F6E2B4E616D65",
             },
             // Equal (Key/Value separator)
             new object[]
             {
                 "CN=\"Common=Name\"",
-                "3016311430120603550403130B436F6D6D6F6E3D4E616D65"
+                "3016311430120603550403130B436F6D6D6F6E3D4E616D65",
             },
             // Note: Double Quote has been removed from this set, it's a dedicated test suite.
 
@@ -945,37 +945,37 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             new object[]
             {
                 "CN=\"Common\nName\"",
-                "3021311F301D06035504031E160043006F006D006D006F006E000A004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E000A004E006100" + "6D0065",
             },
             // Carriage return is NOT quoted.
             new object[]
             {
                 "CN=Common\rName",
-                "3021311F301D06035504031E160043006F006D006D006F006E000D004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E000D004E006100" + "6D0065",
             },
             // Less-than
             new object[]
             {
                 "CN=\"Common<Name\"",
-                "3021311F301D06035504031E160043006F006D006D006F006E003C004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E003C004E006100" + "6D0065",
             },
             // Greater-than
             new object[]
             {
                 "CN=\"Common>Name\"",
-                "3021311F301D06035504031E160043006F006D006D006F006E003E004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E003E004E006100" + "6D0065",
             },
             // Octothorpe (Number Sign, Pound, Hash, whatever)
             new object[]
             {
                 "CN=\"Common#Name\"",
-                "3021311F301D06035504031E160043006F006D006D006F006E0023004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E0023004E006100" + "6D0065",
             },
             // Semi-colon
             new object[]
             {
                 "CN=\"Common;Name\"",
-                "3021311F301D06035504031E160043006F006D006D006F006E003B004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E003B004E006100" + "6D0065",
             },
         };
 
@@ -986,21 +986,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 "CN=\"Common\"\"Name\"", // Quoted
                 "CN=Common\"Name", // Not-Quoted
-                "3021311F301D06035504031E160043006F006D006D006F006E0022004E006100" + "6D0065"
+                "3021311F301D06035504031E160043006F006D006D006F006E0022004E006100" + "6D0065",
             },
             // Starts with a double quote
             new object[]
             {
                 "CN=\"\"\"Common Name\"", // Quoted
                 "CN=\"Common Name", // Not-Quoted
-                "30233121301F06035504031E1800220043006F006D006D006F006E0020004E00" + "61006D0065"
+                "30233121301F06035504031E1800220043006F006D006D006F006E0020004E00" + "61006D0065",
             },
             // Ends with a double quote
             new object[]
             {
                 "CN=\"Common Name\"\"\"", // Quoted
                 "CN=Common Name\"", // Not-Quoted
-                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D00650022"
+                "30233121301F06035504031E180043006F006D006D006F006E0020004E006100" + "6D00650022",
             },
         };
 
@@ -1015,7 +1015,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     + "69311830160603550407130f53656e64616920497a756d692d6b753117301506"
                     + "0355040a140e47726170654369747920696e632e311a3018060355040b141154"
                     + "6f6f6c7320446576656c6f706d656e74311730150603550403140e4772617065"
-                    + "4369747920696e632e"
+                    + "4369747920696e632e",
             },
             // Mono test case taken from old bug report
             new object[]
@@ -1028,7 +1028,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     + "2F302D060355040314264865646562792773204DF862656C68616E64656C202D"
                     + "2053616C6773616664656C696E67656E311E301C06092A864886F70D01090116"
                     + "0F76686D407573652E746573742E646B312630240603550405131D4356523A31"
-                    + "333437313936372D5549443A313231323132313231323132"
+                    + "333437313936372D5549443A313231323132313231323132",
             },
             // Valid UTF-8 string is interpreted as UTF-8
             new object[] { "C=\u00a2", "300D310B300906035504061402C2A2" },

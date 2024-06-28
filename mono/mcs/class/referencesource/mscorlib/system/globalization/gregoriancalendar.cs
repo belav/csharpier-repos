@@ -64,7 +64,7 @@ namespace System.Globalization
             273,
             304,
             334,
-            365
+            365,
         };
 
         internal static readonly int[] DaysToMonth366 =
@@ -81,7 +81,7 @@ namespace System.Globalization
             274,
             305,
             335,
-            366
+            366,
         };
 
         private static volatile Calendar s_defaultInstance;

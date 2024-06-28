@@ -36,6 +36,6 @@ namespace Cairo
     public enum FillRule
     {
         Winding,
-        EvenOdd
+        EvenOdd,
     }
 }

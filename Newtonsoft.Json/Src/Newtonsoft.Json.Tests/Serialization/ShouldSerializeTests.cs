@@ -85,20 +85,20 @@ namespace Newtonsoft.Json.Tests.Serialization
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } }
+                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } },
                         },
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } }
+                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } },
                         },
                         new Baz1()
                         {
                             name = Guid.NewGuid().ToString(),
-                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } }
+                            myFrob = new Frob1[] { new Frob1 { name = Guid.NewGuid().ToString() } },
                         },
-                    }
-                }
+                    },
+                },
             };
 
             var setFooJson = Serialize(setFoo);
@@ -435,7 +435,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         ContractResolver = ShouldDeserializeContractResolver.Instance,
-                        TraceWriter = traceWriter
+                        TraceWriter = traceWriter,
                     }
                 );
 
@@ -466,7 +466,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         ContractResolver = ShouldDeserializeContractResolver.Instance,
-                        TraceWriter = traceWriter
+                        TraceWriter = traceWriter,
                     }
                 );
 

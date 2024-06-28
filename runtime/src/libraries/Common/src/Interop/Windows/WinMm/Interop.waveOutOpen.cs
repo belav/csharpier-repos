@@ -12,7 +12,7 @@ internal static partial class Interop
         {
             MM_WOM_OPEN = 0x03BB,
             MM_WOM_CLOSE = 0x03BC,
-            MM_WOM_DONE = 0x03BD
+            MM_WOM_DONE = 0x03BD,
         }
 
         // Flag specifying the use of a callback window for sound messages

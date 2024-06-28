@@ -250,7 +250,7 @@ namespace System.Xml.Schema
             XdrGroup,
             XdrAttributeType,
             XdrAttribute,
-            XdrElementDatatype
+            XdrElementDatatype,
         };
         private static readonly int[] s_XDR_AttributeType_SubElements = { XdrAttributeDatatype };
         private static readonly int[] s_XDR_Group_SubElements = { XdrElement, XdrGroup };
@@ -269,7 +269,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaId,
                 XmlTokenizedType.QName,
                 new XdrBuildFunction(XDR_BuildRoot_ID)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_ElementType_Attributes =
@@ -314,7 +314,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaDtMinLength,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildElementType_DtMinLength)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_AttributeType_Attributes =
@@ -353,7 +353,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaDtMinLength,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_Element_Attributes =
@@ -373,7 +373,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaMaxOccurs,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildElement_MaxOccurs)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_Attribute_Attributes =
@@ -392,7 +392,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaDefault,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildAttribute_Default)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_Group_Attributes =
@@ -411,7 +411,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaMaxOccurs,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildGroup_MaxOccurs)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_ElementDataType_Attributes =
@@ -435,7 +435,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaDtMinLength,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildElementType_DtMinLength)
-            )
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_AttributeDataType_Attributes =
@@ -459,7 +459,7 @@ namespace System.Xml.Schema
                 SchemaNames.Token.SchemaDtMinLength,
                 XmlTokenizedType.CDATA,
                 new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength)
-            )
+            ),
         };
 
         //
@@ -547,7 +547,7 @@ namespace System.Xml.Schema
                 null,
                 new XdrEndChildFunction(XDR_EndAttributeDtType),
                 true
-            )
+            ),
         };
 
         private readonly SchemaInfo _SchemaInfo;

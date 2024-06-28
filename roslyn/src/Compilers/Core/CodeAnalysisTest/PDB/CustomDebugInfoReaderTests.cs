@@ -26,7 +26,7 @@ public class CustomDebugInfoReaderTests
 
     [Theory]
     [InlineData(new byte[] { 0x00 })]
-    [InlineData(new byte[] { (byte)'a', })]
+    [InlineData(new byte[] { (byte)'a' })]
     [InlineData(new byte[] { (byte)'a', 0x00, 0x00 })]
     public void DecodeForwardIteratorRecord_Invalid(byte[] bytes)
     {

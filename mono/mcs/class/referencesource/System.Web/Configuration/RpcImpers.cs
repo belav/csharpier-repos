@@ -28,6 +28,6 @@ namespace System.Web.Configuration
         Anonymous = 1,
         Identify = 2,
         Impersonate = 3,
-        Delegate = 4
+        Delegate = 4,
     }
 }

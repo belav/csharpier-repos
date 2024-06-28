@@ -134,7 +134,7 @@ public class DefaultViewComponentHelper : IViewComponentHelper, IViewContextAwar
                     comparer: StringComparer.OrdinalIgnoreCase
                 )
                 {
-                    { descriptor.Parameters[0].Name!, arguments }
+                    { descriptor.Parameters[0].Name!, arguments },
                 };
             }
         }

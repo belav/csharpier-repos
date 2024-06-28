@@ -382,7 +382,7 @@ namespace Microsoft.VisualBasic.Tests
                 TriState.UseDefault,
                 TriState.UseDefault,
                 TriState.UseDefault,
-                ""
+                "",
             };
             if (IsEnUS())
             {
@@ -393,7 +393,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$0"
+                    "$0",
                 };
                 yield return new object[]
                 {
@@ -402,7 +402,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$0.1"
+                    "$0.1",
                 };
                 yield return new object[]
                 {
@@ -411,7 +411,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$0.12"
+                    "$0.12",
                 };
                 yield return new object[]
                 {
@@ -420,7 +420,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$0.1230"
+                    "$0.1230",
                 };
                 yield return new object[]
                 {
@@ -429,7 +429,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.False,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$.12"
+                    "$.12",
                 };
                 yield return new object[]
                 {
@@ -438,7 +438,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.True,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$0.12"
+                    "$0.12",
                 };
                 yield return new object[]
                 {
@@ -447,7 +447,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.False,
                     TriState.UseDefault,
-                    "-$0.12"
+                    "-$0.12",
                 };
                 yield return new object[]
                 {
@@ -456,7 +456,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.True,
                     TriState.UseDefault,
-                    "($0.12)"
+                    "($0.12)",
                 };
                 yield return new object[]
                 {
@@ -465,7 +465,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "$1,234.50"
+                    "$1,234.50",
                 };
                 yield return new object[]
                 {
@@ -474,7 +474,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.False,
-                    "$1234.50"
+                    "$1234.50",
                 };
                 yield return new object[]
                 {
@@ -483,7 +483,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.True,
-                    "$1,234.50"
+                    "$1,234.50",
                 };
             }
         }
@@ -537,7 +537,7 @@ namespace Microsoft.VisualBasic.Tests
                 TriState.UseDefault,
                 TriState.UseDefault,
                 TriState.UseDefault,
-                ""
+                "",
             };
             if (IsEnUS())
             {
@@ -548,7 +548,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0"
+                    "0",
                 };
                 yield return new object[]
                 {
@@ -557,7 +557,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0.1"
+                    "0.1",
                 };
                 yield return new object[]
                 {
@@ -566,7 +566,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0.12"
+                    "0.12",
                 };
                 yield return new object[]
                 {
@@ -575,7 +575,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0.1230"
+                    "0.1230",
                 };
                 yield return new object[]
                 {
@@ -584,7 +584,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.False,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    ".12"
+                    ".12",
                 };
                 yield return new object[]
                 {
@@ -593,7 +593,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.True,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0.12"
+                    "0.12",
                 };
                 yield return new object[]
                 {
@@ -602,7 +602,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "-0.12"
+                    "-0.12",
                 };
                 yield return new object[]
                 {
@@ -611,7 +611,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.False,
                     TriState.UseDefault,
-                    "-0.12"
+                    "-0.12",
                 };
                 yield return new object[]
                 {
@@ -620,7 +620,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.True,
                     TriState.UseDefault,
-                    "(0.12)"
+                    "(0.12)",
                 };
                 yield return new object[]
                 {
@@ -629,7 +629,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "1,234.50"
+                    "1,234.50",
                 };
                 yield return new object[]
                 {
@@ -638,7 +638,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.False,
-                    "1234.50"
+                    "1234.50",
                 };
                 yield return new object[]
                 {
@@ -647,7 +647,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.True,
-                    "1,234.50"
+                    "1,234.50",
                 };
             }
         }
@@ -684,7 +684,7 @@ namespace Microsoft.VisualBasic.Tests
                 TriState.UseDefault,
                 TriState.UseDefault,
                 TriState.UseDefault,
-                ""
+                "",
             };
             if (IsEnUS())
             {
@@ -695,7 +695,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "12%"
+                    "12%",
                 };
                 yield return new object[]
                 {
@@ -704,7 +704,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "12.3%"
+                    "12.3%",
                 };
                 yield return new object[]
                 {
@@ -713,7 +713,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "12.30%"
+                    "12.30%",
                 };
                 yield return new object[]
                 {
@@ -722,7 +722,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "12.3000%"
+                    "12.3000%",
                 };
                 yield return new object[]
                 {
@@ -731,7 +731,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0.12%"
+                    "0.12%",
                 };
                 yield return new object[]
                 {
@@ -740,7 +740,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.False,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    ".12%"
+                    ".12%",
                 };
                 yield return new object[]
                 {
@@ -749,7 +749,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.True,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "0.12%"
+                    "0.12%",
                 };
                 yield return new object[]
                 {
@@ -758,7 +758,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "-12.30%"
+                    "-12.30%",
                 };
                 yield return new object[]
                 {
@@ -767,7 +767,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.False,
                     TriState.UseDefault,
-                    "-12.30%"
+                    "-12.30%",
                 };
                 yield return new object[]
                 {
@@ -776,7 +776,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.True,
                     TriState.UseDefault,
-                    "(12.30%)"
+                    "(12.30%)",
                 };
                 yield return new object[]
                 {
@@ -785,7 +785,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.UseDefault,
-                    "1,234.50%"
+                    "1,234.50%",
                 };
                 yield return new object[]
                 {
@@ -794,7 +794,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.False,
-                    "1234.50%"
+                    "1234.50%",
                 };
                 yield return new object[]
                 {
@@ -803,7 +803,7 @@ namespace Microsoft.VisualBasic.Tests
                     TriState.UseDefault,
                     TriState.UseDefault,
                     TriState.True,
-                    "1,234.50%"
+                    "1,234.50%",
                 };
             }
         }

@@ -37,9 +37,9 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
 
     public ShutdownTests()
     {
-        var handler = new SocketsHttpHandler { KeepAlivePingDelay = TimeSpan.MaxValue, };
+        var handler = new SocketsHttpHandler { KeepAlivePingDelay = TimeSpan.MaxValue };
         handler.SslOptions.RemoteCertificateValidationCallback = (_, _, _, _) => true;
-        Client = new HttpClient(handler) { DefaultRequestVersion = new Version(2, 0), };
+        Client = new HttpClient(handler) { DefaultRequestVersion = new Version(2, 0) };
     }
 
     [ConditionalFact]
@@ -203,7 +203,7 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
 
         var testContext = new TestServiceContext(LoggerFactory)
         {
-            MemoryPoolFactory = memoryPoolFactory.Create
+            MemoryPoolFactory = memoryPoolFactory.Create,
         };
 
         ThrowOnUngracefulShutdown = false;

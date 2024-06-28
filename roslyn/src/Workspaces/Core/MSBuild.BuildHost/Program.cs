@@ -18,7 +18,7 @@ internal static class Program
     {
         var propertyOption = new CliOption<string[]>("--property")
         {
-            Arity = ArgumentArity.ZeroOrMore
+            Arity = ArgumentArity.ZeroOrMore,
         };
         var binaryLogOption = new CliOption<string?>("--binlog") { Required = false };
         var command = new CliRootCommand { binaryLogOption, propertyOption };

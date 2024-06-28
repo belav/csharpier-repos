@@ -257,7 +257,7 @@ namespace System.Text.RegularExpressions.Symbolic
                                             SR.ExpressionDescription_PositiveLookaround,
                                         RegexNodeKind.Start =>
                                             SR.ExpressionDescription_ContiguousMatches,
-                                        _ => UnexpectedNodeType(node)
+                                        _ => UnexpectedNodeType(node),
                                     }
                                 )
                             );

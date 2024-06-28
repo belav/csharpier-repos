@@ -11,14 +11,14 @@ namespace System.DirectoryServices.ActiveDirectory
         External = 3,
         Forest = 4,
         Kerberos = 5,
-        Unknown = 6
+        Unknown = 6,
     }
 
     public enum TrustDirection
     {
         Inbound = 1,
         Outbound = 2,
-        Bidirectional = Outbound | Inbound
+        Bidirectional = Outbound | Inbound,
     }
 
     public class TrustRelationshipInformation

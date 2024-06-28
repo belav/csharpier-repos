@@ -133,9 +133,9 @@ and lower(UCC.owner) = :owner";
                                 ConName = r.GetString(1),
                                 TableName = r.GetString(2),
                                 ConType = r.GetString(3),
-                                RevCconName = r.GetAsString(4)
+                                RevCconName = r.GetAsString(4),
                             },
-                            Value = new { ColName = r.GetString(5), ColPos = r.GetInt32(6) }
+                            Value = new { ColName = r.GetString(5), ColPos = r.GetInt32(6) },
                         }
                     )
                     .GroupBy(
@@ -151,7 +151,7 @@ and lower(UCC.owner) = :owner";
                                 ReverseConstraintName = r.RevCconName,
                                 ColumnNames = rs.OrderBy(t => t.ColPos)
                                     .Select(t => t.ColName)
-                                    .ToList()
+                                    .ToList(),
                             }
                     )
             );

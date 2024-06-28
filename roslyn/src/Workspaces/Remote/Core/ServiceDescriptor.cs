@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Remote
                 NotifyClientOfEvents = false,
 
                 // Only allow public methods (may be on internal types) to be invoked remotely.
-                AllowNonPublicInvocation = false
+                AllowNonPublicInvocation = false,
             };
 
         internal readonly string ComponentName;

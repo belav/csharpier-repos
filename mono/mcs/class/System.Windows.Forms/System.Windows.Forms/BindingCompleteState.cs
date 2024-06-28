@@ -33,6 +33,6 @@ namespace System.Windows.Forms
     {
         Success = 0,
         DataError = 1,
-        Exception = 2
+        Exception = 2,
     }
 }

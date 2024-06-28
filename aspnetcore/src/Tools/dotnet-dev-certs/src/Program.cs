@@ -425,7 +425,7 @@ internal sealed class Program
                 1 =>
                     $"A {certificateState} certificate was found: {CertificateManager.GetDescription(certificates[0])}",
                 _ =>
-                    $"{certificates.Count} {certificateState} certificates were found: {CertificateManager.ToCertificateDescription(certificates)}"
+                    $"{certificates.Count} {certificateState} certificates were found: {CertificateManager.ToCertificateDescription(certificates)}",
             }
         );
     }

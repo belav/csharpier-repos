@@ -302,11 +302,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Symbol> GetMembers(string name)
         {
-            return (name == _constructor.Name)
-                ? ImmutableArray.Create<Symbol>(_constructor)
-                : (name == FixedElementFieldName)
-                    ? ImmutableArray.Create<Symbol>(_internalField)
-                    : ImmutableArray<Symbol>.Empty;
+            return (name == _constructor.Name) ? ImmutableArray.Create<Symbol>(_constructor)
+                : (name == FixedElementFieldName) ? ImmutableArray.Create<Symbol>(_internalField)
+                : ImmutableArray<Symbol>.Empty;
         }
 
         public override Accessibility DeclaredAccessibility

@@ -78,7 +78,7 @@ class Tests
             .Invoke(new object[] { new char[] { 'a', 'b', 'c' } });
 
         typeof(Assembly)
-            .GetMethod("GetType", new Type[] { typeof(string), })
+            .GetMethod("GetType", new Type[] { typeof(string) })
             .Invoke(typeof(int).Assembly, new object[] { "A" });
 
         return 0;

@@ -307,7 +307,7 @@ namespace System.Threading.Tasks.Tests
                 {
                     al.Value++;
                     calls++;
-                }
+                },
             };
 
             dsm.MoveNext();
@@ -340,7 +340,7 @@ namespace System.Threading.Tasks.Tests
                 {
                     al.Value++;
                     calls++;
-                }
+                },
             };
 
             dsm.MoveNext();

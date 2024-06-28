@@ -706,7 +706,7 @@ namespace System.Web.Mvc.Html
         {
             TagBuilder builder = new TagBuilder("option")
             {
-                InnerHtml = HttpUtility.HtmlEncode(item.Text)
+                InnerHtml = HttpUtility.HtmlEncode(item.Text),
             };
             if (item.Value != null)
             {
@@ -833,7 +833,7 @@ namespace System.Web.Mvc.Html
 
             TagBuilder tagBuilder = new TagBuilder("select")
             {
-                InnerHtml = listItemBuilder.ToString()
+                InnerHtml = listItemBuilder.ToString(),
             };
             tagBuilder.MergeAttributes(htmlAttributes);
             tagBuilder.MergeAttribute(
@@ -880,7 +880,7 @@ namespace System.Web.Mvc.Html
                         {
                             Text = optionLabel,
                             Value = String.Empty,
-                            Selected = false
+                            Selected = false,
                         }
                     )
                 );

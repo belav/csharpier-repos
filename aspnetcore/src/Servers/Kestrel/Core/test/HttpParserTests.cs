@@ -690,7 +690,7 @@ public class HttpParserTests : LoggedTest
                 0xca,
                 0xe0,
                 0xfd,
-                0x0a
+                0x0a,
             }
         );
 

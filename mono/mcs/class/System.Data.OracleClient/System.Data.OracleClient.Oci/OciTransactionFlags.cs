@@ -28,6 +28,6 @@ namespace System.Data.OracleClient.Oci
         ReadWrite = 0x200,
         Serializable = 0x400,
         Tight = 0x10000,
-        Loose = 0x20000
+        Loose = 0x20000,
     }
 }

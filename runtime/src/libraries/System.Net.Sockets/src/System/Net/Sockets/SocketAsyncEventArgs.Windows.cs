@@ -80,7 +80,7 @@ namespace System.Net.Sockets
         {
             None = 0,
             MultipleBuffer,
-            SendPackets
+            SendPackets,
         }
 
         [MemberNotNull(nameof(_preAllocatedOverlapped))]
@@ -451,7 +451,7 @@ namespace System.Net.Sockets
                     var wsaBuffer = new WSABuffer
                     {
                         Length = _count,
-                        Pointer = (IntPtr)(bufferPtr + _offset)
+                        Pointer = (IntPtr)(bufferPtr + _offset),
                     };
 
                     SocketFlags flags = _socketFlags;
@@ -552,7 +552,7 @@ namespace System.Net.Sockets
                     var wsaBuffer = new WSABuffer
                     {
                         Length = _count,
-                        Pointer = (IntPtr)(bufferPtr + _offset)
+                        Pointer = (IntPtr)(bufferPtr + _offset),
                     };
 
                     SocketFlags flags = _socketFlags;
@@ -795,7 +795,7 @@ namespace System.Net.Sockets
                     var wsaBuffer = new WSABuffer
                     {
                         Length = _count,
-                        Pointer = (IntPtr)(bufferPtr + _offset)
+                        Pointer = (IntPtr)(bufferPtr + _offset),
                     };
 
                     SocketError socketError = Interop.Winsock.WSASend(
@@ -1020,7 +1020,7 @@ namespace System.Net.Sockets
                     var wsaBuffer = new WSABuffer
                     {
                         Length = _count,
-                        Pointer = (IntPtr)(bufferPtr + _offset)
+                        Pointer = (IntPtr)(bufferPtr + _offset),
                     };
 
                     SocketError socketError = Interop.Winsock.WSASendTo(

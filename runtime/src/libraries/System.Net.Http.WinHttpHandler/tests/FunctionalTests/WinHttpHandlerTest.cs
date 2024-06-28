@@ -181,7 +181,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             {
                 new Cookie("hello", "world"),
                 new Cookie("foo", "bar"),
-                new Cookie("ABC", "123")
+                new Cookie("ABC", "123"),
             };
 
             WinHttpHandler handler = new WinHttpHandler();
@@ -201,7 +201,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Configuration.Http.Http2RemoteEchoServer
             )
             {
-                Version = HttpVersion20.Value
+                Version = HttpVersion20.Value,
             };
             request.Content = new StringContent(payload);
             using (var client = new HttpClient(handler))
@@ -216,7 +216,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     {
                         Method = "_",
                         BodyContent = "_",
-                        Cookies = new Dictionary<string, string>()
+                        Cookies = new Dictionary<string, string>(),
                     }
                 );
                 Assert.Equal("POST", responseContent.Method);
@@ -256,7 +256,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     Configuration.Http.Http2RemoteEchoServer
                 )
                 {
-                    Version = HttpVersion20.Value
+                    Version = HttpVersion20.Value,
                 };
                 byte[] payloadBytes = Encoding.UTF8.GetBytes(payloadText);
                 DelayedStream content = new DelayedStream(payloadBytes, delaySource.Task);
@@ -271,7 +271,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Configuration.Http.Http2RemoteEchoServer
             )
             {
-                Version = HttpVersion20.Value
+                Version = HttpVersion20.Value,
             };
             aboveLimitRequest.Content = new StringContent(
                 $"{payloadText}-{maxActiveStreamsLimit + 1}"
@@ -316,7 +316,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             {
                 TcpKeepAliveEnabled = true,
                 TcpKeepAliveTime = TimeSpan.FromSeconds(1),
-                TcpKeepAliveInterval = TimeSpan.FromMilliseconds(500)
+                TcpKeepAliveInterval = TimeSpan.FromMilliseconds(500),
             };
 
             using var client = new HttpClient(handler);

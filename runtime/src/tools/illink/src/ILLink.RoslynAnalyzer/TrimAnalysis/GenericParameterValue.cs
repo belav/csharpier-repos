@@ -25,7 +25,7 @@ namespace ILLink.Shared.TrimAnalysis
             new string[]
             {
                 GenericParameter.TypeParameterSymbol.Name,
-                GenericParameter.TypeParameterSymbol.ContainingSymbol.GetDisplayName()
+                GenericParameter.TypeParameterSymbol.ContainingSymbol.GetDisplayName(),
             };
 
         public override SingleValue DeepCopy() => this; // This value is immutable

@@ -154,19 +154,19 @@ namespace System.Web.Mvc.Test
                 {
                     Value = "A",
                     Text = "Alice",
-                    Group = "AB"
+                    Group = "AB",
                 },
                 new
                 {
                     Value = "B",
                     Text = "Bravo",
-                    Group = "AB"
+                    Group = "AB",
                 },
                 new
                 {
                     Value = "C",
                     Text = "Charlie",
-                    Group = "C"
+                    Group = "C",
                 },
             };
             object selectedValue = "A";
@@ -195,19 +195,19 @@ namespace System.Web.Mvc.Test
                 {
                     Value = "A",
                     Text = "Alice",
-                    Group = "AB"
+                    Group = "AB",
                 },
                 new
                 {
                     Value = "B",
                     Text = "Bravo",
-                    Group = "AB"
+                    Group = "AB",
                 },
                 new
                 {
                     Value = "C",
                     Text = "Charlie",
-                    Group = "C"
+                    Group = "C",
                 },
             };
             object selectedValue = "A";
@@ -246,19 +246,19 @@ namespace System.Web.Mvc.Test
                 {
                     Value = "A",
                     Text = "Alice",
-                    Group = "AB"
+                    Group = "AB",
                 },
                 new
                 {
                     Value = "B",
                     Text = "Bravo",
-                    Group = "AB"
+                    Group = "AB",
                 },
                 new
                 {
                     Value = "C",
                     Text = "Charlie",
-                    Group = "C"
+                    Group = "C",
                 },
             };
             object selectedValue = "A";

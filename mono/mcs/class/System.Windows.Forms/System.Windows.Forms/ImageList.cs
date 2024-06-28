@@ -169,7 +169,7 @@ namespace System.Windows.Forms
             {
                 None = 0,
                 UseTransparentColor = 1,
-                ImageStrip = 2
+                ImageStrip = 2,
             }
 
             private sealed class ImageListItem

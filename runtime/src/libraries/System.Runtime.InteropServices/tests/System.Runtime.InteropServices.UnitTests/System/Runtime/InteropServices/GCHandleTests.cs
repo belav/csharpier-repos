@@ -136,7 +136,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 GCHandle.Alloc(new object()),
                 GCHandle.Alloc(new object()),
-                false
+                false,
             };
 
             yield return new object[] { GCHandle.Alloc(new object()), new object(), false };

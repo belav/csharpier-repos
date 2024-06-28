@@ -108,7 +108,7 @@ namespace System.Net.Sockets.Tests
                 return new SocketReceiveFromResult
                 {
                     ReceivedBytes = received,
-                    RemoteEndPoint = endPoint
+                    RemoteEndPoint = endPoint,
                 };
             });
 
@@ -134,7 +134,7 @@ namespace System.Net.Sockets.Tests
                     ReceivedBytes = received,
                     SocketFlags = socketFlags,
                     RemoteEndPoint = endPoint,
-                    PacketInformation = ipPacketInformation
+                    PacketInformation = ipPacketInformation,
                 };
             });
 
@@ -281,7 +281,7 @@ namespace System.Net.Sockets.Tests
                             new SocketReceiveFromResult
                             {
                                 ReceivedBytes = receivedBytes,
-                                RemoteEndPoint = endPoint
+                                RemoteEndPoint = endPoint,
                             }
                         );
                     }
@@ -324,7 +324,7 @@ namespace System.Net.Sockets.Tests
                             ReceivedBytes = receivedBytes,
                             SocketFlags = socketFlags,
                             RemoteEndPoint = endPoint,
-                            PacketInformation = ipPacketInformation
+                            PacketInformation = ipPacketInformation,
                         };
                         tcs.TrySetResult(result);
                     }
@@ -637,7 +637,7 @@ namespace System.Net.Sockets.Tests
                 e => new SocketReceiveFromResult
                 {
                     ReceivedBytes = e.BytesTransferred,
-                    RemoteEndPoint = e.RemoteEndPoint
+                    RemoteEndPoint = e.RemoteEndPoint,
                 },
                 e =>
                 {
@@ -659,7 +659,7 @@ namespace System.Net.Sockets.Tests
                     ReceivedBytes = e.BytesTransferred,
                     RemoteEndPoint = e.RemoteEndPoint,
                     SocketFlags = e.SocketFlags,
-                    PacketInformation = e.ReceiveMessageFromPacketInfo
+                    PacketInformation = e.ReceiveMessageFromPacketInfo,
                 },
                 e =>
                 {
@@ -933,7 +933,7 @@ namespace System.Net.Sockets.Tests
                     ReceivedBytes = received,
                     SocketFlags = socketFlags,
                     RemoteEndPoint = endPoint,
-                    PacketInformation = ipPacketInformation
+                    PacketInformation = ipPacketInformation,
                 };
             });
 

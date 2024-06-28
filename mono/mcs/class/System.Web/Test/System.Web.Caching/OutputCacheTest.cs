@@ -383,7 +383,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
         static readonly byte[] fileResponseElement =
         {
@@ -642,7 +642,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
         static readonly byte[] substitutionResponseElement =
         {
@@ -1157,7 +1157,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
         static readonly byte[] badSubstitutionResponseElement =
         {
@@ -1672,7 +1672,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
 #else
         static readonly byte[] memoryResponseElement =
@@ -1932,7 +1932,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
         static readonly byte[] fileResponseElement =
         {
@@ -2447,7 +2447,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
         static readonly byte[] substitutionResponseElement =
         {
@@ -4498,7 +4498,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
         static readonly byte[] badSubstitutionResponseElement =
         {
@@ -6549,7 +6549,7 @@ namespace MonoTests.System.Web.Caching
             0x0,
             0x0,
             0x0,
-            0x0
+            0x0,
         };
 #endif
 
@@ -6573,7 +6573,7 @@ namespace MonoTests.System.Web.Caching
             (DateTime)DateTime.Now,
             (DBNull)DBNull.Value,
             (TestResponseElement)new TestResponseElement("text"),
-            (HeaderElement)new HeaderElement("name", "value")
+            (HeaderElement)new HeaderElement("name", "value"),
         };
 
         [Test]

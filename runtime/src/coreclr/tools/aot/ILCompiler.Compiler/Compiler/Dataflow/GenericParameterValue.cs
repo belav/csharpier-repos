@@ -34,7 +34,7 @@ namespace ILLink.Shared.TrimAnalysis
                 GenericParameter.GenericParameter.Name,
                 DiagnosticUtilities.GetGenericParameterDeclaringMemberDisplayName(
                     GenericParameter.GenericParameter
-                )
+                ),
             };
 
         public override SingleValue DeepCopy() => this; // This value is immutable

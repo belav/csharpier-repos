@@ -626,7 +626,7 @@ namespace System.ServiceModel
             "Faultcode",
             "Faultstring",
             "Faultactor",
-            "Detail"
+            "Detail",
         };
 
         static Constants()

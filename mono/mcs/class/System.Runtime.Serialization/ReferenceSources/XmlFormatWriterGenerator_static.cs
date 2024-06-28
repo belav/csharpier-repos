@@ -730,7 +730,7 @@ namespace System.Runtime.Serialization
                         {
                             writer,
                             memberType,
-                            DataContract.IsTypeSerializable(memberType)
+                            DataContract.IsTypeSerializable(memberType),
                         }
                     );
                 else
@@ -780,7 +780,7 @@ namespace System.Runtime.Serialization
                                 {
                                     writer,
                                     memberType,
-                                    DataContract.IsTypeSerializable(memberType)
+                                    DataContract.IsTypeSerializable(memberType),
                                 }
                             );
                         }
@@ -974,7 +974,7 @@ namespace System.Runtime.Serialization
                         {
                             type,
                             typeof(XmlDictionaryString),
-                            typeof(XmlDictionaryString)
+                            typeof(XmlDictionaryString),
                         },
                         null
                     )

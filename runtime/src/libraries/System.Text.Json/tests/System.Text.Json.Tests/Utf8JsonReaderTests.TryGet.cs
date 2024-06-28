@@ -1160,7 +1160,7 @@ namespace System.Text.Json.Tests
 
             var jsonNewtonsoft = new JsonTextReader(new StringReader(jsonString))
             {
-                MaxDepth = null
+                MaxDepth = null,
             };
             while (jsonNewtonsoft.Read())
             {

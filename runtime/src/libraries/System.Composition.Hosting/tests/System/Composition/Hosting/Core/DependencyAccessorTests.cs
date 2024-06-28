@@ -139,7 +139,7 @@ namespace System.Composition.Hosting.Core.Tests
             );
             var accessor = new SubAccessor
             {
-                Result = new ExportDescriptorPromise[] { target, target }
+                Result = new ExportDescriptorPromise[] { target, target },
             };
 
             var contract = new CompositionContract(typeof(int));

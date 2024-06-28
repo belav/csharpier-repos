@@ -143,7 +143,7 @@ public class TreeRouterTest
             { "/a", new object[] { "a", "2", "3", "4" } },
             { "/a/b", new object[] { "a", "b", "3", "4" } },
             { "/a/b/c", new object[] { "a", "b", "c", "4" } },
-            { "/a/b/c/d", new object[] { "a", "b", "c", "d" } }
+            { "/a/b/c/d", new object[] { "a", "b", "c", "d" } },
         };
 
     [Theory]
@@ -154,7 +154,7 @@ public class TreeRouterTest
     )
     {
         // Arrange
-        var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}", };
+        var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{parameter4=4}" };
 
         var expectedRouteGroup = CreateRouteGroup(
             0,
@@ -199,7 +199,7 @@ public class TreeRouterTest
             { "/10", new object[] { "10", "2", "3", "4" } },
             { "/10/11", new object[] { "10", "11", "3", "4" } },
             { "/10/11/12", new object[] { "10", "11", "12", "4" } },
-            { "/10/11/12/13", new object[] { "10", "11", "12", "13" } }
+            { "/10/11/12/13", new object[] { "10", "11", "12", "13" } },
         };
 
     [Theory]
@@ -255,7 +255,7 @@ public class TreeRouterTest
     public async Task TreeRouter_RouteAsync_MatchesCatchAllRoutesWithDefaults()
     {
         // Arrange
-        var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{*parameter4=4}", };
+        var routes = new[] { "{parameter1=1}/{parameter2=2}/{parameter3=3}/{*parameter4=4}" };
         var url = "/a/b/c";
         var routeValues = new[] { "a", "b", "c", "4" };
 
@@ -370,7 +370,7 @@ public class TreeRouterTest
     public async Task TreeRouter_RouteAsync_DoesNotMatchShorterUrl()
     {
         // Arrange
-        var routes = new[] { "Literal1/Literal2/Literal3", };
+        var routes = new[] { "Literal1/Literal2/Literal3" };
 
         var builder = CreateBuilder();
 
@@ -907,7 +907,7 @@ public class TreeRouterTest
         var values = new Dictionary<string, object>
         {
             { nameof(parameter), parameter },
-            { nameof(id), id }
+            { nameof(id), id },
         };
         var context = CreateVirtualPathContext(values: null, ambientValues: values);
 
@@ -938,7 +938,7 @@ public class TreeRouterTest
         var values = new Dictionary<string, object>
         {
             { nameof(parameter), parameter },
-            { nameof(id), id }
+            { nameof(id), id },
         };
         var context = CreateVirtualPathContext(values: null, ambientValues: values);
 
@@ -1455,7 +1455,7 @@ public class TreeRouterTest
             {
                 action = "Index",
                 controller = "Store",
-                area = "AwesomeCo"
+                area = "AwesomeCo",
             }
         );
 
@@ -1518,7 +1518,7 @@ public class TreeRouterTest
             {
                 action = "Index",
                 controller = "Store",
-                id = 5
+                id = 5,
             }
         );
 
@@ -1550,7 +1550,7 @@ public class TreeRouterTest
             {
                 action = "Index",
                 controller = "Store",
-                id = "heyyyy"
+                id = "heyyyy",
             }
         );
 
@@ -1645,7 +1645,7 @@ public class TreeRouterTest
             {
                 area = "Help",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry1.Precedence = 2;
@@ -1657,7 +1657,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry2.Precedence = 1;
@@ -1669,7 +1669,7 @@ public class TreeRouterTest
             {
                 area = "Help",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
 
@@ -1695,7 +1695,7 @@ public class TreeRouterTest
             {
                 area = "Help",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry1.Precedence = 1;
@@ -1707,7 +1707,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry2.Precedence = 2;
@@ -1719,7 +1719,7 @@ public class TreeRouterTest
             {
                 area = "Help",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
 
@@ -1745,7 +1745,7 @@ public class TreeRouterTest
             {
                 area = "Help",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry1.Precedence = 2;
@@ -1757,7 +1757,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry2.Precedence = 1;
@@ -1791,7 +1791,7 @@ public class TreeRouterTest
             {
                 area = "Help",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry1.Precedence = 2;
@@ -1803,7 +1803,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         entry2.Precedence = 1;
@@ -1841,7 +1841,7 @@ public class TreeRouterTest
                     {
                         val1 = "someval1",
                         val2 = "someval2",
-                        val3 = "someval3a"
+                        val3 = "someval3a",
                     },
                     new { val3 = "someval3v" },
                     "/Test/someval1/someval2.someval3v",
@@ -1854,7 +1854,7 @@ public class TreeRouterTest
                     {
                         val1 = "someval1",
                         val2 = "someval2",
-                        val3 = "someval3v"
+                        val3 = "someval3v",
                     },
                     "/Test/someval1/someval2.someval3v",
                 },
@@ -1886,7 +1886,7 @@ public class TreeRouterTest
                     new { val2 = "someval2" },
                     "/Test/.someval2",
                 },
-                new object[] { "Test/.{val2?}", null, null, "/Test/", },
+                new object[] { "Test/.{val2?}", null, null, "/Test/" },
                 new object[]
                 {
                     "Test/{val1}.{val2}",
@@ -2133,7 +2133,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         var route = builder.Build();
@@ -2142,7 +2142,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
 
@@ -2168,7 +2168,7 @@ public class TreeRouterTest
             {
                 area = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         var route = builder.Build();
@@ -2177,7 +2177,7 @@ public class TreeRouterTest
             {
                 area = "",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
 
@@ -2203,7 +2203,7 @@ public class TreeRouterTest
             {
                 foo = "",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         var route = builder.Build();
@@ -2212,7 +2212,7 @@ public class TreeRouterTest
             {
                 foo = (string)null,
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
 
@@ -2238,7 +2238,7 @@ public class TreeRouterTest
             {
                 foo = "",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
         var route = builder.Build();
@@ -2247,7 +2247,7 @@ public class TreeRouterTest
             {
                 foo = "",
                 action = "Edit",
-                controller = "Store"
+                controller = "Store",
             }
         );
 

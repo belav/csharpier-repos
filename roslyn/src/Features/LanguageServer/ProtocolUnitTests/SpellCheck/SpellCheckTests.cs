@@ -907,7 +907,7 @@ class {|Identifier:A|}
                     ?.Select(r => new VSInternalStreamingParams
                     {
                         PreviousResultId = r.resultId,
-                        TextDocument = new TextDocumentIdentifier { Uri = r.uri }
+                        TextDocument = new TextDocumentIdentifier { Uri = r.uri },
                     })
                     .ToArray(),
                 PartialResultToken = progress,

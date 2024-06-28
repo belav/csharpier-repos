@@ -24,7 +24,7 @@ public class StartupResourcesInClassLibrary
         var supportedCultures = new List<CultureInfo>()
         {
             new CultureInfo("en-US"),
-            new CultureInfo("fr-FR")
+            new CultureInfo("fr-FR"),
         };
 
         app.UseRequestLocalization(
@@ -32,7 +32,7 @@ public class StartupResourcesInClassLibrary
             {
                 DefaultRequestCulture = new RequestCulture("en-US"),
                 SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
+                SupportedUICultures = supportedCultures,
             }
         );
 

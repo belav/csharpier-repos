@@ -8,7 +8,7 @@ namespace System.ServiceModel
         Fault,
         Drop,
         Reject,
-        Move
+        Move,
     }
 
     static class ReceiveErrorHandlingHelper

@@ -2416,7 +2416,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
                 {
                     IDeclarationExpressionOperation declaration when i < lastIndexForSpilling =>
                         declaration.Expression,
-                    var value => value
+                    var value => value,
                 };
 
                 PushOperand(VisitRequired(argument));
@@ -4161,7 +4161,7 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             return new BasicBlockBuilder.Branch()
             {
                 Destination = destination,
-                Kind = ControlFlowBranchSemantics.Regular
+                Kind = ControlFlowBranchSemantics.Regular,
             };
         }
 

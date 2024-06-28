@@ -40,7 +40,7 @@ namespace crashbisector
                 Arguments = string.Join(" ", args),
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
             };
             startInfo.EnvironmentVariables.Add("MONO_DEBUG", "no-gdb-backtrace");
 
@@ -292,7 +292,7 @@ namespace crashbisector
             {
                 MonoPath = monoPath,
                 OptName = optName,
-                Args = args.Skip(argIndex)
+                Args = args.Skip(argIndex),
             };
             var success = bisectInfo.Bisect();
             Environment.Exit(success ? 0 : 1);

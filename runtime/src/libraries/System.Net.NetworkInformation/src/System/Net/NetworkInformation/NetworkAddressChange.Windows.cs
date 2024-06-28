@@ -234,7 +234,7 @@ namespace System.Net.NetworkInformation
                                 0
                             )
                             {
-                                Blocking = false
+                                Blocking = false,
                             };
                             s_ipv4WaitHandle = new AutoResetEvent(false);
                         }
@@ -247,7 +247,7 @@ namespace System.Net.NetworkInformation
                                 0
                             )
                             {
-                                Blocking = false
+                                Blocking = false,
                             };
                             s_ipv6WaitHandle = new AutoResetEvent(false);
                         }

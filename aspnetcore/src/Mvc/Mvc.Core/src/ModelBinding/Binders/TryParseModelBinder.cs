@@ -162,7 +162,7 @@ internal sealed class TryParseModelBinder : IModelBinder
             {
                 parsedValue,
                 modelValue,
-                ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr
+                ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr,
             },
             Expression.Assign(
                 ParameterBindingMethodCache.SharedExpressions.TempSourceStringExpr,

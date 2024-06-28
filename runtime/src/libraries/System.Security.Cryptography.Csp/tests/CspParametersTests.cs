@@ -79,7 +79,7 @@ namespace System.Security.Cryptography.Csp.Tests
                 {
                     KeyNumber = (int)KeyNumber.Exchange,
                     Flags = CspProviderFlags.UseExistingKey | CspProviderFlags.UseMachineKeyStore,
-                    KeyPassword = pwd
+                    KeyPassword = pwd,
                 };
 
                 Action sign = () =>

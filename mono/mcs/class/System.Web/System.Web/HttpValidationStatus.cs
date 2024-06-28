@@ -34,6 +34,6 @@ namespace System.Web
     {
         Invalid = 0x1,
         IgnoreThisRequest,
-        Valid
+        Valid,
     }
 }

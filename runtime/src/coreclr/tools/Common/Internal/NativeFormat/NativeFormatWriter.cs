@@ -94,7 +94,7 @@ namespace Internal.NativeFormat
         {
             Initial,
             Shrinking,
-            Growing
+            Growing,
         }
 
         private int _iteration;
@@ -709,7 +709,7 @@ namespace Internal.NativeFormat
         {
             Vertex,
             Unsigned,
-            Signed
+            Signed,
         }
 
         private struct Entry

@@ -68,7 +68,7 @@ namespace System.Security.Principal
                 WellKnownValue = WellKnownSidType.NullSid,
                 IsAbsolute = true,
                 Sid = "S-1-0-0",
-                Name = @"NULL SID"
+                Name = @"NULL SID",
             },
             new WellKnownAccount
             {
@@ -76,14 +76,14 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-1-0",
                 Name = @"Everyone",
-                SddlForm = "WD"
+                SddlForm = "WD",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.LocalSid,
                 IsAbsolute = true,
                 Sid = "S-1-2-0",
-                Name = @"LOCAL"
+                Name = @"LOCAL",
             },
             new WellKnownAccount
             {
@@ -91,7 +91,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-3-0",
                 Name = @"CREATOR OWNER",
-                SddlForm = "CO"
+                SddlForm = "CO",
             },
             new WellKnownAccount
             {
@@ -99,35 +99,35 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-3-1",
                 Name = @"CREATOR GROUP",
-                SddlForm = "CG"
+                SddlForm = "CG",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.CreatorOwnerServerSid,
                 IsAbsolute = true,
                 Sid = "S-1-3-2",
-                Name = @"CREATOR OWNER SERVER"
+                Name = @"CREATOR OWNER SERVER",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.CreatorGroupServerSid,
                 IsAbsolute = true,
                 Sid = "S-1-3-3",
-                Name = @"CREATOR GROUP SERVER"
+                Name = @"CREATOR GROUP SERVER",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.NTAuthoritySid,
                 IsAbsolute = true,
                 Sid = "S-1-5",
-                Name = null
+                Name = null,
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.DialupSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-1",
-                Name = @"NT AUTHORITY\DIALUP"
+                Name = @"NT AUTHORITY\DIALUP",
             },
             new WellKnownAccount
             {
@@ -135,14 +135,14 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-2",
                 Name = @"NT AUTHORITY\NETWORK",
-                SddlForm = "NU"
+                SddlForm = "NU",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.BatchSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-3",
-                Name = @"NT AUTHORITY\BATCH"
+                Name = @"NT AUTHORITY\BATCH",
             },
             new WellKnownAccount
             {
@@ -150,7 +150,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-4",
                 Name = @"NT AUTHORITY\INTERACTIVE",
-                SddlForm = "IU"
+                SddlForm = "IU",
             },
             new WellKnownAccount
             {
@@ -158,7 +158,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-6",
                 Name = @"NT AUTHORITY\SERVICE",
-                SddlForm = "SU"
+                SddlForm = "SU",
             },
             new WellKnownAccount
             {
@@ -166,14 +166,14 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-7",
                 Name = @"NT AUTHORITY\ANONYMOUS LOGON",
-                SddlForm = "AN"
+                SddlForm = "AN",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.ProxySid,
                 IsAbsolute = true,
                 Sid = "S-1-5-8",
-                Name = @"NT AUTHORITY\PROXY"
+                Name = @"NT AUTHORITY\PROXY",
             },
             new WellKnownAccount
             {
@@ -181,7 +181,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-9",
                 Name = @"NT AUTHORITY\ENTERPRISE DOMAIN CONTROLLERS",
-                SddlForm = "ED"
+                SddlForm = "ED",
             },
             new WellKnownAccount
             {
@@ -189,7 +189,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-10",
                 Name = @"NT AUTHORITY\SELF",
-                SddlForm = "PS"
+                SddlForm = "PS",
             },
             new WellKnownAccount
             {
@@ -197,7 +197,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-11",
                 Name = @"NT AUTHORITY\Authenticated Users",
-                SddlForm = "AU"
+                SddlForm = "AU",
             },
             new WellKnownAccount
             {
@@ -205,21 +205,21 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-12",
                 Name = @"NT AUTHORITY\RESTRICTED",
-                SddlForm = "RC"
+                SddlForm = "RC",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.TerminalServerSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-13",
-                Name = @"NT AUTHORITY\TERMINAL SERVER USER"
+                Name = @"NT AUTHORITY\TERMINAL SERVER USER",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.RemoteLogonIdSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-14",
-                Name = @"NT AUTHORITY\REMOTE INTERACTIVE LOGON"
+                Name = @"NT AUTHORITY\REMOTE INTERACTIVE LOGON",
             },
             new WellKnownAccount
             {
@@ -227,7 +227,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-18",
                 Name = @"NT AUTHORITY\SYSTEM",
-                SddlForm = "SY"
+                SddlForm = "SY",
             },
             new WellKnownAccount
             {
@@ -235,7 +235,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-19",
                 Name = @"NT AUTHORITY\LOCAL SERVICE",
-                SddlForm = "LS"
+                SddlForm = "LS",
             },
             new WellKnownAccount
             {
@@ -243,14 +243,14 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-20",
                 Name = @"NT AUTHORITY\NETWORK SERVICE",
-                SddlForm = "NS"
+                SddlForm = "NS",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.BuiltinDomainSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-32",
-                Name = null
+                Name = null,
             },
             new WellKnownAccount
             {
@@ -258,7 +258,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-544",
                 Name = @"BUILTIN\Administrators",
-                SddlForm = "BA"
+                SddlForm = "BA",
             },
             new WellKnownAccount
             {
@@ -266,7 +266,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-545",
                 Name = @"BUILTIN\Users",
-                SddlForm = "BU"
+                SddlForm = "BU",
             },
             new WellKnownAccount
             {
@@ -274,7 +274,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-546",
                 Name = @"BUILTIN\Guests",
-                SddlForm = "BG"
+                SddlForm = "BG",
             },
             new WellKnownAccount
             {
@@ -282,7 +282,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-547",
                 Name = null,
-                SddlForm = "PU"
+                SddlForm = "PU",
             },
             new WellKnownAccount
             {
@@ -290,7 +290,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-548",
                 Name = null,
-                SddlForm = "AO"
+                SddlForm = "AO",
             },
             new WellKnownAccount
             {
@@ -298,7 +298,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-549",
                 Name = null,
-                SddlForm = "SO"
+                SddlForm = "SO",
             },
             new WellKnownAccount
             {
@@ -306,7 +306,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-550",
                 Name = null,
-                SddlForm = "PO"
+                SddlForm = "PO",
             },
             new WellKnownAccount
             {
@@ -314,7 +314,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-551",
                 Name = null,
-                SddlForm = "BO"
+                SddlForm = "BO",
             },
             new WellKnownAccount
             {
@@ -322,7 +322,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-552",
                 Name = null,
-                SddlForm = "RE"
+                SddlForm = "RE",
             },
             new WellKnownAccount
             {
@@ -330,7 +330,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-554",
                 Name = null,
-                SddlForm = "RU"
+                SddlForm = "RU",
             },
             new WellKnownAccount
             {
@@ -338,7 +338,7 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-555",
                 Name = null,
-                SddlForm = "RD"
+                SddlForm = "RD",
             },
             new WellKnownAccount
             {
@@ -346,139 +346,139 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-556",
                 Name = null,
-                SddlForm = "NO"
+                SddlForm = "NO",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountAdministratorSid,
                 IsAbsolute = false,
                 Rid = "500",
-                SddlForm = "LA"
+                SddlForm = "LA",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountGuestSid,
                 IsAbsolute = false,
                 Rid = "501",
-                SddlForm = "LG"
+                SddlForm = "LG",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountKrbtgtSid,
                 IsAbsolute = false,
-                Rid = "502"
+                Rid = "502",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountDomainAdminsSid,
                 IsAbsolute = false,
                 Rid = "512",
-                SddlForm = "DA"
+                SddlForm = "DA",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountDomainUsersSid,
                 IsAbsolute = false,
                 Rid = "513",
-                SddlForm = "DU"
+                SddlForm = "DU",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountDomainGuestsSid,
                 IsAbsolute = false,
                 Rid = "514",
-                SddlForm = "DG"
+                SddlForm = "DG",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountComputersSid,
                 IsAbsolute = false,
                 Rid = "515",
-                SddlForm = "DC"
+                SddlForm = "DC",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountControllersSid,
                 IsAbsolute = false,
                 Rid = "516",
-                SddlForm = "DD"
+                SddlForm = "DD",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountCertAdminsSid,
                 IsAbsolute = false,
                 Rid = "517",
-                SddlForm = "CA"
+                SddlForm = "CA",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountSchemaAdminsSid,
                 IsAbsolute = false,
                 Rid = "518",
-                SddlForm = "SA"
+                SddlForm = "SA",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountEnterpriseAdminsSid,
                 IsAbsolute = false,
                 Rid = "519",
-                SddlForm = "EA"
+                SddlForm = "EA",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountPolicyAdminsSid,
                 IsAbsolute = false,
                 Rid = "520",
-                SddlForm = "PA"
+                SddlForm = "PA",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.AccountRasAndIasServersSid,
                 IsAbsolute = false,
                 Rid = "553",
-                SddlForm = "RS"
+                SddlForm = "RS",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.NtlmAuthenticationSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-64-10",
-                Name = @"NT AUTHORITY\NTLM Authentication"
+                Name = @"NT AUTHORITY\NTLM Authentication",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.DigestAuthenticationSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-64-21",
-                Name = @"NT AUTHORITY\Digest Authentication"
+                Name = @"NT AUTHORITY\Digest Authentication",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.SChannelAuthenticationSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-64-14",
-                Name = @"NT AUTHORITY\SChannel Authentication"
+                Name = @"NT AUTHORITY\SChannel Authentication",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.ThisOrganizationSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-15",
-                Name = @"NT AUTHORITY\This Organization"
+                Name = @"NT AUTHORITY\This Organization",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.OtherOrganizationSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-1000",
-                Name = @"NT AUTHORITY\Other Organization"
+                Name = @"NT AUTHORITY\Other Organization",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.BuiltinIncomingForestTrustBuildersSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-32-557",
-                Name = null
+                Name = null,
             },
             new WellKnownAccount
             {
@@ -486,70 +486,70 @@ namespace System.Security.Principal
                 IsAbsolute = true,
                 Sid = "S-1-5-32-558",
                 Name = @"BUILTIN\Performance Monitor Users",
-                SddlForm = "MU"
+                SddlForm = "MU",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.BuiltinPerformanceLoggingUsersSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-32-559",
-                Name = @"BUILTIN\Performance Log Users"
+                Name = @"BUILTIN\Performance Log Users",
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.BuiltinAuthorizationAccessSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-32-560",
-                Name = null
+                Name = null,
             },
             new WellKnownAccount
             {
                 WellKnownValue = WellKnownSidType.WinBuiltinTerminalServerLicenseServersSid,
                 IsAbsolute = true,
                 Sid = "S-1-5-32-561",
-                Name = null
+                Name = null,
             },
             new WellKnownAccount
             {
                 WellKnownValue = (WellKnownSidType)66,
                 IsAbsolute = false,
                 Rid = "4096",
-                SddlForm = "LW"
+                SddlForm = "LW",
             },
             new WellKnownAccount
             {
                 WellKnownValue = (WellKnownSidType)67,
                 IsAbsolute = false,
                 Rid = "8192",
-                SddlForm = "ME"
+                SddlForm = "ME",
             },
             new WellKnownAccount
             {
                 WellKnownValue = (WellKnownSidType)68,
                 IsAbsolute = false,
                 Rid = "12288",
-                SddlForm = "HI"
+                SddlForm = "HI",
             },
             new WellKnownAccount
             {
                 WellKnownValue = (WellKnownSidType)69,
                 IsAbsolute = false,
                 Rid = "16384",
-                SddlForm = "SI"
+                SddlForm = "SI",
             },
             new WellKnownAccount
             {
                 WellKnownValue = (WellKnownSidType)74,
                 IsAbsolute = false,
                 Rid = "521",
-                SddlForm = "RO"
+                SddlForm = "RO",
             },
             new WellKnownAccount
             {
                 WellKnownValue = (WellKnownSidType)78,
                 IsAbsolute = false,
                 Rid = "574",
-                SddlForm = "CD"
+                SddlForm = "CD",
             },
         };
     }

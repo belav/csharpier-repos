@@ -172,7 +172,7 @@ namespace System.Linq
             _equivalentTypeCache ??= new Dictionary<Type, Type>
             {
                 { typeof(IQueryable), typeof(IEnumerable) },
-                { typeof(IEnumerable), typeof(IEnumerable) }
+                { typeof(IEnumerable), typeof(IEnumerable) },
             };
             if (!_equivalentTypeCache.TryGetValue(type, out equiv))
             {

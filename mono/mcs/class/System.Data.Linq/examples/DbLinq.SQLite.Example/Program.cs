@@ -205,7 +205,7 @@ namespace DbLinq.SQLite.Example
                 {
                     EmployeeID = 1,
                     CustomerID = "ALFKI",
-                    OrderDate = DateTime.Now
+                    OrderDate = DateTime.Now,
                 }
             );
             db.SubmitChanges();
@@ -217,7 +217,7 @@ namespace DbLinq.SQLite.Example
                 {
                     EmployeeID = 1,
                     CustomerID = "ALFKI",
-                    OrderDate = DateTime.Now
+                    OrderDate = DateTime.Now,
                 }
             );
             db.SubmitChanges();

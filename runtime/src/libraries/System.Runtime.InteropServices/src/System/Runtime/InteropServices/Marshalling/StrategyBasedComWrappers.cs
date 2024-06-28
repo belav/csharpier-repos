@@ -131,7 +131,7 @@ namespace System.Runtime.InteropServices.Marshalling
                 (void*)externalComObject
             )
             {
-                UniqueInstance = flags.HasFlag(CreateObjectFlags.UniqueInstance)
+                UniqueInstance = flags.HasFlag(CreateObjectFlags.UniqueInstance),
             };
 
             return rcw;

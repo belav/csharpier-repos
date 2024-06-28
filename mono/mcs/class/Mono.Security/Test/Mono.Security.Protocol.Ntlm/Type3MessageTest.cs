@@ -183,7 +183,7 @@ namespace MonoTests.Mono.Security.Protocol.Ntlm
             0xe1,
             0xb0,
             0x00,
-            0xd3
+            0xd3,
         };
         static byte[] data2 =
         {
@@ -340,7 +340,7 @@ namespace MonoTests.Mono.Security.Protocol.Ntlm
             0x21,
             0x3a,
             0x9c,
-            0xc6
+            0xc6,
         };
 
         static Type3MessageTest()

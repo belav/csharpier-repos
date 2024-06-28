@@ -39,7 +39,7 @@ namespace MonoTests.System.ServiceModel.MetadataTests
         {
             Letter,
             Number,
-            HexNumer
+            HexNumer,
         }
 
         public TestLabel(string prefix)

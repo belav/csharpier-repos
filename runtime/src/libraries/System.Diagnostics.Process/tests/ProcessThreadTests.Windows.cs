@@ -43,7 +43,7 @@ namespace System.Diagnostics.Tests
                         {
                             ThreadPriorityLevel.AboveNormal,
                             ThreadPriorityLevel.BelowNormal,
-                            ThreadPriorityLevel.Normal
+                            ThreadPriorityLevel.Normal,
                         }
                     )
                     {

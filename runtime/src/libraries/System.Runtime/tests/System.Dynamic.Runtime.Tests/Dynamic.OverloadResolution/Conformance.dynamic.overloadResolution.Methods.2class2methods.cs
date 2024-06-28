@@ -1113,7 +1113,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Meth
     public enum E
     {
         first,
-        second
+        second,
     }
 
     public class Base

@@ -465,7 +465,7 @@ namespace HtmlAgilityPack
         private enum ParseState
         {
             Text,
-            Code
+            Code,
         }
 
         #endregion

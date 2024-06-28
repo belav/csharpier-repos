@@ -126,7 +126,7 @@ namespace System.Web.Http
             Func<string, string, User> echoUserMethod = _controller.AddAdmin;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
             _arguments["firstName"] = "test";
             _arguments["lastName"] = "unit";
@@ -172,7 +172,7 @@ namespace System.Web.Http
             Func<string, string, User> echoUserMethod = _controller.AddAdmin;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
 
             IEnumerable<IFilter> filters = actionDescriptor.GetCustomAttributes<IFilter>();
@@ -192,7 +192,7 @@ namespace System.Web.Http
             Func<string, string, User> echoUserMethod = _controller.EchoUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
 
             Collection<HttpParameterDescriptor> parameterDescriptors =
@@ -214,7 +214,7 @@ namespace System.Web.Http
             };
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = action.Method
+                MethodInfo = action.Method,
             };
 
             return Assert.ThrowsAsync<TaskCanceledException>(
@@ -228,7 +228,7 @@ namespace System.Web.Http
             Action deleteAllUsersMethod = _controller.DeleteAllUsers;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = deleteAllUsersMethod.Method
+                MethodInfo = deleteAllUsersMethod.Method,
             };
 
             object returnValue = await actionDescriptor.ExecuteAsync(
@@ -246,7 +246,7 @@ namespace System.Web.Http
             Func<string, string, User> echoUserMethod = _controller.EchoUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
             _arguments["firstName"] = "test";
             _arguments["lastName"] = "unit";
@@ -268,7 +268,7 @@ namespace System.Web.Http
             Func<Task> deleteAllUsersMethod = _controller.DeleteAllUsersAsync;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = deleteAllUsersMethod.Method
+                MethodInfo = deleteAllUsersMethod.Method,
             };
 
             object returnValue = await actionDescriptor.ExecuteAsync(
@@ -286,7 +286,7 @@ namespace System.Web.Http
             Func<string, string, Task<User>> echoUserMethod = _controller.EchoUserAsync;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
             _arguments["firstName"] = "test";
             _arguments["lastName"] = "unit";
@@ -308,7 +308,7 @@ namespace System.Web.Http
             Func<string, string, User> echoUserMethod = _controller.EchoUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
 
             Assert.ThrowsArgumentNull(
@@ -323,7 +323,7 @@ namespace System.Web.Http
             Func<string, string, User> echoUserMethod = _controller.EchoUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = echoUserMethod.Method
+                MethodInfo = echoUserMethod.Method,
             };
 
             await Assert.ThrowsAsync<ArgumentNullException>(
@@ -339,7 +339,7 @@ namespace System.Web.Http
             Func<int, User> retrieveUserMethod = _controller.RetriveUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = retrieveUserMethod.Method
+                MethodInfo = retrieveUserMethod.Method,
             };
             _arguments["id"] = null;
 
@@ -363,7 +363,7 @@ namespace System.Web.Http
             Func<int, User> retrieveUserMethod = _controller.RetriveUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = retrieveUserMethod.Method
+                MethodInfo = retrieveUserMethod.Method,
             };
             _arguments["otherId"] = 6;
 
@@ -387,7 +387,7 @@ namespace System.Web.Http
             Func<int, User> retrieveUserMethod = _controller.RetriveUser;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = retrieveUserMethod.Method
+                MethodInfo = retrieveUserMethod.Method,
             };
             _arguments["id"] = new DateTime();
 
@@ -412,7 +412,7 @@ namespace System.Web.Http
             Func<Task> method = _controller.WrappedTaskReturningMethod;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = method.Method
+                MethodInfo = method.Method,
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(
@@ -427,7 +427,7 @@ namespace System.Web.Http
             Func<object> method = _controller.TaskAsObjectReturningMethod;
             ReflectedHttpActionDescriptor actionDescriptor = new ReflectedHttpActionDescriptor
             {
-                MethodInfo = method.Method
+                MethodInfo = method.Method,
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(

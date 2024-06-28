@@ -325,7 +325,7 @@ namespace Mono.Unmanaged.Check
                     attributes = new DllImportAttribute[]
                     {
                         GetDllImportInfo(add),
-                        GetDllImportInfo(remove)
+                        GetDllImportInfo(remove),
                     };
                     methods = new MethodBase[] { add, remove };
                     break;

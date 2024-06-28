@@ -40,8 +40,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -76,8 +76,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -102,8 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         true,
                         NotificationOption2.Suggestion
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -132,8 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -172,8 +172,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -210,8 +210,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -246,8 +246,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -284,8 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -321,8 +321,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -364,8 +364,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -403,8 +403,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.EmbeddedStatem
                     {
                         CSharpCodeStyleOptions.AllowEmbeddedStatementsOnSameLine,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
     }

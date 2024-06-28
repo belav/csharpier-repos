@@ -48,6 +48,6 @@ namespace System.Windows.Forms.VisualStyles
         Russian = 204,
         Thai = 222,
         EastEurope = 238,
-        Oem = 255
+        Oem = 255,
     }
 }

@@ -21,7 +21,7 @@ namespace System.PrivateUri.Tests
             "zh-cn",
             "de-ch",
             "de-lu",
-            "ja-jp"
+            "ja-jp",
         };
 
         private const int MaxUriLength = 0xFFF0 - 1; // 65519
@@ -122,7 +122,7 @@ namespace System.PrivateUri.Tests
                 "http://www.conto.com/abcd/" + "%D7%F3%B1%A6%B9%F3",
                 "http://c.ontoso.co.mc/abcdefg/" + "%C6%F3%B8%AB%B1%CD%CD%FD%BB%D2",
                 "http://www.conto.com/abcd/" + "%D6%E2%BA%F3%B1%B8%BC%B1%B7%BD",
-                "http://www.conto.com/abcd/" + "%A1%B6%B4%F3%BA%BD%BA%A3%A1%B7"
+                "http://www.conto.com/abcd/" + "%A1%B6%B4%F3%BA%BD%BA%A3%A1%B7",
             };
 
             foreach (string uristring in sctiTeamReproUris)
@@ -416,72 +416,72 @@ namespace System.PrivateUri.Tests
             // : [ ] in host.
             {
                 "http://user@ser%3Aver.srv:123/path/path/resource.ext?query=expression#fragment",
-                null
+                null,
             },
             {
                 "http://user@server.srv%3A999/path/path/resource.ext?query=expression#fragment",
-                null
+                null,
             },
             {
                 "http://user@server.%5Bsrv:123/path/path/resource.ext?query=expression#fragment",
-                null
+                null,
             },
             {
                 "http://user@ser%5Dver.srv:123/path/path/resource.ext?query=expression#fragment",
-                null
+                null,
             },
             // [ ] in userinfo.
             {
                 "http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment",
-                "http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment"
+                "http://us%5Ber@server.srv:123/path/path/resource.ext?query=expression#fragment",
             },
             {
                 "http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment",
-                "http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment"
+                "http://u%5Dser@server.srv:123/path/path/resource.ext?query=expression#fragment",
             },
             {
                 "http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment",
-                "http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment"
+                "http://us%5B%5Der@server.srv:123/path/path/resource.ext?query=expression#fragment",
             },
             // [ ] : ' in path.
             {
                 "http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment",
-                "http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment"
+                "http://user@server.srv:123/path/pa%5B%3A%27th/resource.ext?query=expression#fragment",
             },
             {
                 "http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment",
-                "http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment"
+                "http://user@server.srv:123/pa%5D%3A%27th/path%5D%3A%27/resource.ext?query=expression#fragment",
             },
             {
                 "http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment",
-                "http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment"
+                "http://user@server.srv:123/path/p%5B%3A%27a%5D%3A%27th/resource.ext?query=expression#fragment",
             },
             // [ ] : ' in query.
             {
                 "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment",
-                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment"
+                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=expression#fragment",
             },
             {
                 "http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment",
-                "http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment"
+                "http://user@server.srv:123/path/path/resource.ext?query=exp%5D%3A%27ression#fragment",
             },
             {
                 "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment",
-                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment"
+                "http://user@server.srv:123/path/path/resource.ext?que%5B%3A%27ry=exp%5D%3A%27ression#fragment",
             },
             // [ ] : ' in fragment.
             {
                 "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment",
-                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment"
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment",
             },
             {
                 "http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27",
-                "http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27"
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fragment%5D%3A%27",
             },
             {
                 "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27",
-                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27"
-            }
+                "http://user@server.srv:123/path/path/resource.ext?query=expression#fr%5B%3A%27agment%5D%3A%27",
+            },
         };
 
         /// <summary>
@@ -593,12 +593,12 @@ namespace System.PrivateUri.Tests
                 "canada.c\u2100.microsoft.com", // Unicode U+2100 'Account Of' decomposes to 'a/c'
                 "canada.c\u2488.microsoft.com", // Unicode U+2488 'Digit One Full Stop" decomposes to '1.'
                 "canada.c\u2048.microsoft.com", // Unicode U+2048 'Question Exclamation Mark" decomposes to '?!'
-                "canada.c\uD83C\uDD00.microsoft.com"
+                "canada.c\uD83C\uDD00.microsoft.com",
             } // Unicode U+2488 'Digit Zero Full Stop" decomposes to '0.'
             from scheme in new[]
             {
                 "http", // Known scheme.
-                "test"
+                "test",
             } // Unknown scheme.
             select new object[] { scheme, host };
 
@@ -647,19 +647,19 @@ namespace System.PrivateUri.Tests
                 int len = ExpandedLengthLimit - 15 - (2 * 9) + 1;
                 yield return new object[]
                 {
-                    @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8"
+                    @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8",
                 }; // Userinfo
                 yield return new object[]
                 {
-                    @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2)
+                    @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2),
                 }; // Query
                 yield return new object[]
                 {
-                    @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2)
+                    @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2),
                 }; // Fragment
                 yield return new object[]
                 {
-                    @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2)
+                    @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2),
                 }; // Path
 
                 // Generate a string whose total length is just less than InitialLengthLimit
@@ -698,19 +698,19 @@ namespace System.PrivateUri.Tests
                 int len = ExpandedLengthLimit - 15 - (2 * 9);
                 yield return new object[]
                 {
-                    @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8"
+                    @"test://" + new string('a', len) + new string('\uD800', 2) + "@8.8.8.8",
                 }; // Userinfo
                 yield return new object[]
                 {
-                    @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2)
+                    @"test://8.8.8.8?" + new string('a', len) + new string('\uD800', 2),
                 }; // Query
                 yield return new object[]
                 {
-                    @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2)
+                    @"test://8.8.8.8#" + new string('a', len) + new string('\uD800', 2),
                 }; // Fragment
                 yield return new object[]
                 {
-                    @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2)
+                    @"test://8.8.8.8/" + new string('a', len) + new string('\uD800', 2),
                 }; // Path
 
                 // Validate the same behavior, but maximize the amount of expansion.

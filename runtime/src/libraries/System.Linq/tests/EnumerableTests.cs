@@ -407,7 +407,7 @@ namespace System.Linq.Tests
                 e => ForceNotCollection(e),
                 e => e.Concat(ForceNotCollection(Array.Empty<T>())),
                 e => e.Where(i => true),
-                e => ForceNotCollection(e).Skip(0)
+                e => ForceNotCollection(e).Skip(0),
             };
         }
 

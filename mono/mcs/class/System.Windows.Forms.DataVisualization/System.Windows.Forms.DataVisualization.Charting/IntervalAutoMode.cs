@@ -30,6 +30,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     public enum IntervalAutoMode
     {
         FixedCount = 0,
-        VariableCount = 1
+        VariableCount = 1,
     }
 }

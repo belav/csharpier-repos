@@ -81,9 +81,9 @@ namespace System.ServiceModel.Activities.Presentation
                                                     {
                                                         To = requestInTree,
                                                         Value = true,
-                                                    }
-                                                }
-                                            }
+                                                    },
+                                                },
+                                            },
                                         },
                                         new AssertValidation
                                         {
@@ -102,14 +102,14 @@ namespace System.ServiceModel.Activities.Presentation
                                                         .UnrootedRequestInSendReply,
                                                     sendReply.Get(ctx).DisplayName
                                                 )
-                                            )
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                            ),
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             };
         }
     }

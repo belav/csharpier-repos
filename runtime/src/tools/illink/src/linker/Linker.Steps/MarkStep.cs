@@ -2029,7 +2029,7 @@ namespace Mono.Linker.Steps
                     exportedType.Scope
                 )
                 {
-                    DeclaringType = declaringTypeReference
+                    DeclaringType = declaringTypeReference,
                 };
             }
         }
@@ -2501,12 +2501,11 @@ namespace Mono.Linker.Steps
                 var cctorReason = reason.Kind switch
                 {
                     // Report an edge directly from the method accessing the field to the static ctor it triggers
-                    DependencyKind.FieldAccess =>
-                        new DependencyInfo(
-                            DependencyKind.TriggersCctorThroughFieldAccess,
-                            reason.Source
-                        ),
-                    _ => new DependencyInfo(DependencyKind.CctorForField, field)
+                    DependencyKind.FieldAccess => new DependencyInfo(
+                        DependencyKind.TriggersCctorThroughFieldAccess,
+                        reason.Source
+                    ),
+                    _ => new DependencyInfo(DependencyKind.CctorForField, field),
                 };
                 MarkStaticConstructor(parent, cctorReason, ScopeStack.CurrentScope.Origin);
             }
@@ -5287,7 +5286,7 @@ namespace Mono.Linker.Steps
                         (FieldReference)instruction.Operand
                     ),
                 // Other field operations are not interesting as they don't need to be checked
-                _ => false
+                _ => false,
             };
 
         protected virtual void MarkInstruction(
@@ -5322,10 +5321,9 @@ namespace Mono.Linker.Steps
                         Code.Newobj => (DependencyKind.Newobj, false),
                         Code.Ldvirtftn => (DependencyKind.Ldvirtftn, true),
                         Code.Ldftn => (DependencyKind.Ldftn, true),
-                        _ =>
-                            throw new InvalidOperationException(
-                                $"unexpected opcode {instruction.OpCode}"
-                            )
+                        _ => throw new InvalidOperationException(
+                            $"unexpected opcode {instruction.OpCode}"
+                        ),
                     };
 
                     MethodReference methodReference = (MethodReference)instruction.Operand;

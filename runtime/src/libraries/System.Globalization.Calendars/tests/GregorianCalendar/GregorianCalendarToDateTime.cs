@@ -30,7 +30,7 @@ namespace System.Globalization.Tests
                 randomHour,
                 randomMinute,
                 randomSecond,
-                randomMillisecond
+                randomMillisecond,
             };
 
             // Minimum supported DateTime

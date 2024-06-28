@@ -3687,6 +3687,7 @@ namespace System.Data.SqlClient
             XmlSchemaCollectionName,
             UdtTypeName, // obsolete in Katmai.  Holds the actual typename if UDT, since TypeName didn't back then.
             DateTimeScale // new in Katmai
+            ,
         };
 
         // Yukon- column ordinals (this array indexed by ProcParamsColIndex

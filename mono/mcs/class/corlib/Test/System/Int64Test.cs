@@ -37,7 +37,7 @@ namespace MonoTests.System
             "-9223372036854775808",
             "-9,223,372,036,854,775,808.00",
             "-922,337,203,685,477,580,800.00 %",
-            "8000000000000000"
+            "8000000000000000",
         };
         private string[] Results2 =
         {
@@ -48,7 +48,7 @@ namespace MonoTests.System
             "9.2234e+18",
             "9,223,372,036,854,775,807.00000",
             "922,337,203,685,477,580,700.00000 %",
-            "7fffffffffffffff"
+            "7fffffffffffffff",
         };
         private string[] ResultsNfi1 =
         {
@@ -59,7 +59,7 @@ namespace MonoTests.System
             "-9223372036854775808",
             "-9,223,372,036,854,775,808.00",
             "-922,337,203,685,477,580,800.00 %",
-            "8000000000000000"
+            "8000000000000000",
         };
         private string[] ResultsNfi2 =
         {
@@ -70,7 +70,7 @@ namespace MonoTests.System
             "9.2234e+18",
             "9,223,372,036,854,775,807.00000",
             "922,337,203,685,477,580,700.00000 %",
-            "7fffffffffffffff"
+            "7fffffffffffffff",
         };
 
         private long[] vals =
@@ -84,7 +84,7 @@ namespace MonoTests.System
             1234L,
             -123L,
             1234567890123456L,
-            6543210987654321L
+            6543210987654321L,
         };
 
         private const long val1 = -1234567L;

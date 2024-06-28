@@ -25,7 +25,7 @@ public class RazorCompiledItemFeatureProviderTest
         part2
             .As<IRazorCompiledItemProvider>()
             .Setup(p => p.CompiledItems)
-            .Returns(new[] { item1, item2, });
+            .Returns(new[] { item1, item2 });
         var featureProvider = new RazorCompiledItemFeatureProvider();
         var feature = new ViewsFeature();
 
@@ -60,7 +60,7 @@ public class RazorCompiledItemFeatureProviderTest
         part2
             .As<IRazorCompiledItemProvider>()
             .Setup(p => p.CompiledItems)
-            .Returns(new[] { item1, item2, });
+            .Returns(new[] { item1, item2 });
         var featureProvider = new RazorCompiledItemFeatureProvider();
         var feature = new ViewsFeature();
 
@@ -82,15 +82,9 @@ public class RazorCompiledItemFeatureProviderTest
             i.Identifier == "Item" && i.Type == typeof(TestPage)
         );
         var part1 = new Mock<ApplicationPart>();
-        part1
-            .As<IRazorCompiledItemProvider>()
-            .Setup(p => p.CompiledItems)
-            .Returns(new[] { item1, });
+        part1.As<IRazorCompiledItemProvider>().Setup(p => p.CompiledItems).Returns(new[] { item1 });
         var part2 = new Mock<ApplicationPart>();
-        part2
-            .As<IRazorCompiledItemProvider>()
-            .Setup(p => p.CompiledItems)
-            .Returns(new[] { item2, });
+        part2.As<IRazorCompiledItemProvider>().Setup(p => p.CompiledItems).Returns(new[] { item2 });
         var featureProvider = new RazorCompiledItemFeatureProvider();
         var feature = new ViewsFeature();
 
@@ -118,7 +112,7 @@ public class RazorCompiledItemFeatureProviderTest
         part2
             .As<IRazorCompiledItemProvider>()
             .Setup(p => p.CompiledItems)
-            .Returns(new[] { item1, item2, });
+            .Returns(new[] { item1, item2 });
         var featureProvider = new RazorCompiledItemFeatureProvider();
         var feature = new ViewsFeature();
 
@@ -142,7 +136,7 @@ public class RazorCompiledItemFeatureProviderTest
 
         var applicationPart = new TestRazorCompiledItemProvider
         {
-            CompiledItems = new[] { item1, item2 }
+            CompiledItems = new[] { item1, item2 },
         };
         var featureProvider = new RazorCompiledItemFeatureProvider();
 

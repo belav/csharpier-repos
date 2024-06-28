@@ -54,8 +54,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = propertyValue1,
-                        ExistingValue = propertyValue1
-                    }
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Substring
                 new PropertyTestData[]
@@ -64,8 +64,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = propertyValue1.Remove(propertyValue1.Length - 1),
-                        ExistingValue = propertyValue1
-                    }
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Different in case only
                 new PropertyTestData[]
@@ -74,8 +74,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = propertyValue1.ToLower(),
-                        ExistingValue = propertyValue1
-                    }
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Different value
                 new PropertyTestData[]
@@ -84,8 +84,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = "NEW_PROPERTY_VALUE",
-                        ExistingValue = propertyValue1
-                    }
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // Different value (empty)
                 new PropertyTestData[]
@@ -94,8 +94,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = string.Empty,
-                        ExistingValue = propertyValue1
-                    }
+                        ExistingValue = propertyValue1,
+                    },
                 },
                 // New property
                 new PropertyTestData[]
@@ -104,8 +104,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = "NEW_PROPERTY_NAME",
                         NewValue = "NEW_PROPERTY_VALUE",
-                        ExistingValue = null
-                    }
+                        ExistingValue = null,
+                    },
                 },
                 // Match, new property
                 new PropertyTestData[]
@@ -114,14 +114,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = propertyValue1,
-                        ExistingValue = propertyValue1
+                        ExistingValue = propertyValue1,
                     },
                     new PropertyTestData
                     {
                         Name = "NEW_PROPERTY_NAME",
                         NewValue = "NEW_PROPERTY_VALUE",
-                        ExistingValue = null
-                    }
+                        ExistingValue = null,
+                    },
                 },
                 // One match, one different
                 new PropertyTestData[]
@@ -130,14 +130,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = propertyValue1,
-                        ExistingValue = propertyValue1
+                        ExistingValue = propertyValue1,
                     },
                     new PropertyTestData
                     {
                         Name = propertyName2,
                         NewValue = "NEW_PROPERTY_VALUE",
-                        ExistingValue = propertyValue2
-                    }
+                        ExistingValue = propertyValue2,
+                    },
                 },
                 // Both different
                 new PropertyTestData[]
@@ -146,14 +146,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     {
                         Name = propertyName1,
                         NewValue = "NEW_PROPERTY_VALUE",
-                        ExistingValue = propertyValue1
+                        ExistingValue = propertyValue1,
                     },
                     new PropertyTestData
                     {
                         Name = propertyName2,
                         NewValue = "NEW_PROPERTY_VALUE",
-                        ExistingValue = propertyValue2
-                    }
+                        ExistingValue = propertyValue2,
+                    },
                 },
             };
 
@@ -167,14 +167,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         {
                             Name = propertyName1,
                             NewValue = propertyValue1,
-                            ExistingValue = propertyValue1
+                            ExistingValue = propertyValue1,
                         },
                         new PropertyTestData
                         {
                             Name = propertyName2,
                             NewValue = propertyValue2,
-                            ExistingValue = propertyValue2
-                        }
+                            ExistingValue = propertyValue2,
+                        },
                     }
                 );
                 list.Add(
@@ -185,20 +185,20 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                         {
                             Name = propertyName1,
                             NewValue = propertyValue1,
-                            ExistingValue = propertyValue1
+                            ExistingValue = propertyValue1,
                         },
                         new PropertyTestData
                         {
                             Name = propertyName2,
                             NewValue = propertyValue2,
-                            ExistingValue = propertyValue2
+                            ExistingValue = propertyValue2,
                         },
                         new PropertyTestData
                         {
                             Name = "NEW_PROPERTY_NAME",
                             NewValue = "NEW_PROPERTY_VALUE",
-                            ExistingValue = null
-                        }
+                            ExistingValue = null,
+                        },
                     }
                 );
             }

@@ -74,7 +74,7 @@ namespace System.Text.Json.Tests
             )
             {
                 JsonElement root = doc.RootElement;
-                var options = new JsonWriterOptions { SkipValidation = skipValidation, };
+                var options = new JsonWriterOptions { SkipValidation = skipValidation };
 
                 const string CharLabel = "char";
                 using var writer = new Utf8JsonWriter(buffer, options);
@@ -139,7 +139,7 @@ namespace System.Text.Json.Tests
             )
             {
                 JsonElement root = doc.RootElement;
-                var options = new JsonWriterOptions { SkipValidation = skipValidation, };
+                var options = new JsonWriterOptions { SkipValidation = skipValidation };
 
                 using var writer = new Utf8JsonWriter(buffer, options);
                 writer.WriteStartObject();
@@ -1228,7 +1228,7 @@ null,
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
                 {
-                    var options = new JsonWriterOptions { Indented = indented, };
+                    var options = new JsonWriterOptions { Indented = indented };
 
                     using (var writer = new Utf8JsonWriter(buffer, options))
                     {
@@ -1270,7 +1270,7 @@ null,
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions { Indented = indented, };
+                var options = new JsonWriterOptions { Indented = indented };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1369,7 +1369,7 @@ null,
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions { Indented = indented, };
+                var options = new JsonWriterOptions { Indented = indented };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1395,7 +1395,7 @@ null,
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions { Indented = indented, };
+                var options = new JsonWriterOptions { Indented = indented };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1421,7 +1421,7 @@ null,
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions { Indented = indented, };
+                var options = new JsonWriterOptions { Indented = indented };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {
@@ -1447,7 +1447,7 @@ null,
 
             using (JsonDocument doc = PrepareDocument(jsonIn))
             {
-                var options = new JsonWriterOptions { Indented = indented, };
+                var options = new JsonWriterOptions { Indented = indented };
 
                 using (var writer = new Utf8JsonWriter(buffer, options))
                 {

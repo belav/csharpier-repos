@@ -393,7 +393,7 @@ public class AccountController : Controller
             {
                 Providers = factorOptions,
                 ReturnUrl = returnUrl,
-                RememberMe = rememberMe
+                RememberMe = rememberMe,
             }
         );
     }
@@ -451,7 +451,7 @@ public class AccountController : Controller
             {
                 Provider = model.SelectedProvider,
                 ReturnUrl = model.ReturnUrl,
-                RememberMe = model.RememberMe
+                RememberMe = model.RememberMe,
             }
         );
     }
@@ -477,7 +477,7 @@ public class AccountController : Controller
             {
                 Provider = provider,
                 ReturnUrl = returnUrl,
-                RememberMe = rememberMe
+                RememberMe = rememberMe,
             }
         );
     }

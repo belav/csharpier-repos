@@ -21,7 +21,7 @@ namespace System.Data
         Remoting = 2,
         WebService = 3,
         RemotingSkipSchema = 4,
-        WebServiceSkipSchema = 5
+        WebServiceSkipSchema = 5,
     }
 
     /// <summary>

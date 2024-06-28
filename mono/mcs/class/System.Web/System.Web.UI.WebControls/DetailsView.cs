@@ -2170,7 +2170,7 @@ namespace System.Web.UI.WebControls
                 dataKeyNames,
                 defaultMode,
                 (key == null ? null : ((IStateManager)key).SaveViewState()),
-                (oldEditValues == null ? null : ((IStateManager)oldEditValues).SaveViewState())
+                (oldEditValues == null ? null : ((IStateManager)oldEditValues).SaveViewState()),
             };
         }
 

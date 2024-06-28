@@ -163,7 +163,7 @@ namespace Microsoft.Interop
                 UnmanagedType.LPStr => TypeNames.AnsiStringMarshaller,
                 UnmanagedType.LPTStr or UnmanagedType.LPWStr => TypeNames.Utf16StringMarshaller,
                 MarshalAsInfo.UnmanagedType_LPUTF8Str => TypeNames.Utf8StringMarshaller,
-                _ => null
+                _ => null,
             };
 
             if (marshallerName is null)

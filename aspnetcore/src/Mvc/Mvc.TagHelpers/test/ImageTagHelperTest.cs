@@ -92,7 +92,7 @@ public class ImageTagHelperTest
                 { "data-extra", new HtmlString("something") },
                 { "title", new HtmlString("Image title") },
                 { "src", "testimage.png" },
-                { "asp-append-version", "true" }
+                { "asp-append-version", "true" },
             }
         );
         var output = MakeImageTagHelperOutput(
@@ -110,7 +110,7 @@ public class ImageTagHelperTest
                 { "alt", new HtmlString("alt text") },
                 { "data-extra", new HtmlString("something") },
                 { "title", new HtmlString("Image title") },
-                { "src", "testimage.png?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk" }
+                { "src", "testimage.png?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk" },
             }
         );
 
@@ -143,11 +143,11 @@ public class ImageTagHelperTest
             {
                 { "alt", new HtmlString("Alt image text") },
                 { "src", "/images/test-image.png" },
-                { "asp-append-version", "true" }
+                { "asp-append-version", "true" },
             }
         );
         var output = MakeImageTagHelperOutput(
-            attributes: new TagHelperAttributeList { { "alt", new HtmlString("Alt image text") }, }
+            attributes: new TagHelperAttributeList { { "alt", new HtmlString("Alt image text") } }
         );
         var hostingEnvironment = MakeHostingEnvironment();
         var viewContext = MakeViewContext();
@@ -179,11 +179,11 @@ public class ImageTagHelperTest
             {
                 { "alt", new HtmlString("Alt image text") },
                 { "src", "/images/test-image.png" },
-                { "asp-append-version", "false" }
+                { "asp-append-version", "false" },
             }
         );
         var output = MakeImageTagHelperOutput(
-            attributes: new TagHelperAttributeList { { "alt", new HtmlString("Alt image text") }, }
+            attributes: new TagHelperAttributeList { { "alt", new HtmlString("Alt image text") } }
         );
         var hostingEnvironment = MakeHostingEnvironment();
         var viewContext = MakeViewContext();
@@ -215,7 +215,7 @@ public class ImageTagHelperTest
             }
         );
         var output = MakeImageTagHelperOutput(
-            attributes: new TagHelperAttributeList { { "alt", new HtmlString("alt text") }, }
+            attributes: new TagHelperAttributeList { { "alt", new HtmlString("alt text") } }
         );
         var hostingEnvironment = MakeHostingEnvironment();
         var viewContext = MakeViewContext("/bar");

@@ -55,7 +55,7 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
                     lastModified.Minute,
                     lastModified.Second,
                     TimeSpan.FromSeconds(0)
-                )
+                ),
             };
         }
     }

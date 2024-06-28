@@ -39,13 +39,13 @@ namespace System.IO.Pipes.Tests
             PipeAccessRights.ChangePermissions,
             PipeAccessRights.TakeOwnership,
             PipeAccessRights.FullControl,
-            PipeAccessRights.AccessSystemSecurity
+            PipeAccessRights.AccessSystemSecurity,
         };
 
         protected static readonly PipeAccessRights[] s_bitWisePipeAccessRights = new[]
         {
             PipeAccessRights.ChangePermissions | PipeAccessRights.ReadPermissions,
-            PipeAccessRights.ReadExtendedAttributes | PipeAccessRights.WriteExtendedAttributes
+            PipeAccessRights.ReadExtendedAttributes | PipeAccessRights.WriteExtendedAttributes,
         };
 
         protected static IEnumerable<PipeAccessRights> s_combinedPipeAccessRights =
@@ -138,7 +138,7 @@ namespace System.IO.Pipes.Tests
                 (PipeDirection)(int.MinValue),
                 (PipeDirection)0,
                 (PipeDirection)4,
-                (PipeDirection)(int.MaxValue)
+                (PipeDirection)(int.MaxValue),
             }
             select new object[] { direction };
 
@@ -148,7 +148,7 @@ namespace System.IO.Pipes.Tests
                 (HandleInheritability)int.MinValue,
                 (HandleInheritability)(-1),
                 (HandleInheritability)2,
-                (HandleInheritability)int.MaxValue
+                (HandleInheritability)int.MaxValue,
             }
             select new object[] { inheritability };
 

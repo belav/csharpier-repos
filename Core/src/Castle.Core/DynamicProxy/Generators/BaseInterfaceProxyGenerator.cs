@@ -181,7 +181,7 @@ namespace Castle.DynamicProxy.Generators
                 (c, m) => NullExpression.Instance
             )
             {
-                Logger = Logger
+                Logger = Logger,
             };
         }
 
@@ -210,7 +210,7 @@ namespace Castle.DynamicProxy.Generators
             {
                 var mixinContributor = new MixinContributor(namingScope, AllowChangeTarget)
                 {
-                    Logger = Logger
+                    Logger = Logger,
                 };
                 contributorsList.Add(mixinContributor);
 

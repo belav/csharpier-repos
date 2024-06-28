@@ -754,7 +754,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         First,
         Second,
-        Third
+        Third,
     }
 
     public class Target
@@ -803,7 +803,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         First,
         Second,
-        Third
+        Third,
     }
 
     public class Target
@@ -852,7 +852,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     {
         First,
         Second,
-        Third
+        Third,
     }
 
     public class Target

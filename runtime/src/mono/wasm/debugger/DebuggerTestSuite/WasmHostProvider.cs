@@ -40,7 +40,7 @@ internal abstract class WasmHostProvider : IDisposable
             UseShellExecute = false,
             FileName = browserPath,
             RedirectStandardError = true,
-            RedirectStandardOutput = true
+            RedirectStandardOutput = true,
         };
 
     protected async Task<string?> LaunchHostAsync(

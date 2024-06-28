@@ -75,7 +75,7 @@ internal sealed class ControllerActionInvokerProvider : IActionInvokerProvider
                 // PERF: These are rarely going to be changed, so let's go copy-on-write.
                 ValueProviderFactories = new CopyOnWriteList<IValueProviderFactory>(
                     _valueProviderFactories
-                )
+                ),
             };
             controllerContext.ModelState.MaxAllowedErrors = _maxModelValidationErrors;
             controllerContext.ModelState.MaxValidationDepth = _maxValidationDepth;

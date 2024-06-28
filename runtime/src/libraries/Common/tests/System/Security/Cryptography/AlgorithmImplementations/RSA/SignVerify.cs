@@ -3074,7 +3074,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                     RSAParameters rsaParameters in new[]
                     {
                         TestData.RSA1024Params,
-                        TestData.RSA2048Params
+                        TestData.RSA2048Params,
                     }
                 )
                 {
@@ -3090,12 +3090,12 @@ namespace System.Security.Cryptography.Rsa.Tests
                 yield return new object[]
                 {
                     nameof(HashAlgorithmName.SHA384),
-                    TestData.RSA2048Params
+                    TestData.RSA2048Params,
                 };
                 yield return new object[]
                 {
                     nameof(HashAlgorithmName.SHA512),
-                    TestData.RSA2048Params
+                    TestData.RSA2048Params,
                 };
             }
         }

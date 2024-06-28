@@ -129,7 +129,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0x66,
             0x6F,
             0x72,
-            0x6D
+            0x6D,
         };
 
         private XmlDocument GetDoc()

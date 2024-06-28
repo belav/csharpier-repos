@@ -23,7 +23,7 @@ namespace System.Runtime.InteropServices
         Weak = 0,
         WeakTrackResurrection = 1,
         Normal = 2,
-        Pinned = 3
+        Pinned = 3,
     }
 
     // This class allows you to create an opaque, GC handle to any

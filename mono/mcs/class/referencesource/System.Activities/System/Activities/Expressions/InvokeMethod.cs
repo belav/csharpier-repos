@@ -46,7 +46,7 @@ namespace System.Activities.Expressions
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.genericTypeArguments;
@@ -70,7 +70,7 @@ namespace System.Activities.Expressions
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.parameters;
@@ -162,7 +162,7 @@ namespace System.Activities.Expressions
                 Parameters = this.Parameters,
                 Result = this.resultArgument,
                 ResultType = typeof(TResult),
-                Parent = this
+                Parent = this,
             };
         }
     }

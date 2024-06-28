@@ -52,7 +52,7 @@ namespace System.Security.Authentication.ExtendedProtection
                         {
                             typeof(PolicyEnforcement),
                             typeof(ProtectionScenario),
-                            typeof(ICollection)
+                            typeof(ICollection),
                         };
 
                         object[] customServiceNames = null;
@@ -69,7 +69,7 @@ namespace System.Security.Authentication.ExtendedProtection
                         {
                             policy.PolicyEnforcement,
                             policy.ProtectionScenario,
-                            customServiceNames
+                            customServiceNames,
                         };
                     }
 

@@ -28,12 +28,12 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 typeof(int).MakeByRefType(),
-                typeof(int).MakeByRefType().FullName
+                typeof(int).MakeByRefType().FullName,
             };
             yield return new object[]
             {
                 typeof(int).MakePointerType(),
-                typeof(int).MakePointerType().FullName
+                typeof(int).MakePointerType().FullName,
             };
             yield return new object[] { typeof(List<int>), typeof(List<>).FullName };
             yield return new object[] { typeof(List<>), typeof(List<>).FullName };
@@ -43,7 +43,7 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 typeof(ClassWithoutNamespace),
-                typeof(ClassWithoutNamespace).FullName
+                typeof(ClassWithoutNamespace).FullName,
             };
             yield return new object[] { typeof(Nullable), typeof(Nullable).FullName };
         }
@@ -107,7 +107,7 @@ namespace System.CodeDom.Tests
                 typeof(int).FullName,
                 null,
                 0,
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -115,7 +115,7 @@ namespace System.CodeDom.Tests
                 typeof(int).MakePointerType().FullName,
                 null,
                 0,
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -123,7 +123,7 @@ namespace System.CodeDom.Tests
                 typeof(int).MakeByRefType().FullName,
                 null,
                 0,
-                new string[0]
+                new string[0],
             };
             yield return new object[] { "NoSuchType", "NoSuchType", null, 0, new string[0] };
 
@@ -134,7 +134,7 @@ namespace System.CodeDom.Tests
                 typeof(int).FullName,
                 typeof(int).FullName,
                 1,
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -142,7 +142,7 @@ namespace System.CodeDom.Tests
                 typeof(int).FullName,
                 typeof(int).FullName,
                 2,
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -150,7 +150,7 @@ namespace System.CodeDom.Tests
                 typeof(int).FullName,
                 typeof(int).FullName,
                 1,
-                new string[0]
+                new string[0],
             };
 
             // Generic
@@ -160,7 +160,7 @@ namespace System.CodeDom.Tests
                 typeof(Dictionary<,>).FullName,
                 null,
                 0,
-                new string[] { "System.String", "System.Collections.Generic.List`1" }
+                new string[] { "System.String", "System.Collections.Generic.List`1" },
             };
             yield return new object[]
             {
@@ -168,7 +168,7 @@ namespace System.CodeDom.Tests
                 "System.Collections.Generic.List",
                 null,
                 0,
-                new string[] { "System.String" }
+                new string[] { "System.String" },
             };
 
             // Empty
@@ -191,7 +191,7 @@ namespace System.CodeDom.Tests
                 typeof(int).FullName,
                 null,
                 0,
-                new string[0]
+                new string[0],
             };
 
             // Invalid generic
@@ -201,7 +201,7 @@ namespace System.CodeDom.Tests
                 "System.Collections.Generic.Dictionary`2",
                 null,
                 0,
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -209,7 +209,7 @@ namespace System.CodeDom.Tests
                 "System.Collections.Generic.Dictionary`2",
                 null,
                 0,
-                new string[] { "System.String" }
+                new string[] { "System.String" },
             };
             yield return new object[]
             {
@@ -217,7 +217,7 @@ namespace System.CodeDom.Tests
                 "System.Collections.Generic.Dictionary`2[System.String,",
                 null,
                 0,
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -225,7 +225,7 @@ namespace System.CodeDom.Tests
                 "System.Collections.Generic.Dictionary`2",
                 null,
                 0,
-                new string[] { "System.String" }
+                new string[] { "System.String" },
             };
         }
 
@@ -312,7 +312,7 @@ namespace System.CodeDom.Tests
             {
                 "System.Int32",
                 new CodeTypeReference[] { new CodeTypeReference("System.String") },
-                "System.Int32`1"
+                "System.Int32`1",
             };
         }
 

@@ -204,7 +204,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x6E,
                 0xA6,
                 0x9C,
-                0xBC
+                0xBC,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -242,7 +242,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x90,
                 0xd3,
                 0x2c,
-                0x49
+                0x49,
             };
             byte[] EM =
             {
@@ -373,7 +373,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xB2,
                 0x01,
                 0x95,
-                0xA0
+                0xA0,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -415,7 +415,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             byte[] EM =
             {
@@ -546,7 +546,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xEC,
                 0x73,
                 0xC5,
-                0x8D
+                0x8D,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -697,7 +697,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xA9,
                 0x6C,
                 0xFC,
-                0xA4
+                0xA4,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -848,7 +848,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xEC,
                 0xA6,
                 0x35,
-                0x53
+                0x53,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -886,7 +886,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x90,
                 0xd3,
                 0x2c,
-                0x49
+                0x49,
             };
             byte[] EM =
             {
@@ -1017,7 +1017,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x8C,
                 0xC3,
                 0xF0,
-                0x57
+                0x57,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -1059,7 +1059,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             byte[] EM =
             {
@@ -1190,7 +1190,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x3A,
                 0xF0,
                 0xE5,
-                0x90
+                0x90,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);
@@ -1341,7 +1341,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xD8,
                 0x94,
                 0x04,
-                0x42
+                0x42,
             };
 
             AsymmetricKeyExchangeDeformatter keyback = new RSAOAEPKeyExchangeDeformatter(key);

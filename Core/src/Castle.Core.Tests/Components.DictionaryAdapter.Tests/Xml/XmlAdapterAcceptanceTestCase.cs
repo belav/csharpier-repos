@@ -911,7 +911,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 "Star Wars Episode I: The Phantom Menace",
                 "Star Wars Episode II: Attack of the Clones",
                 "Star Wars Episode III: Revenge of the Sith",
-                "Star Wars: The Clone Wars"
+                "Star Wars: The Clone Wars",
             };
 
             var books = starWars
@@ -951,7 +951,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
         {
             Male,
             Female,
-            Coed
+            Coed,
         }
 
         [
@@ -1069,7 +1069,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Supervisor = manager,
                 Job = new Employment { Title = "Consultant", Salary = 100000M },
                 Metadata = new Metadata { Tag = "Cool!" },
-                Key = new byte[] { 0x01, 0x02, 0x03 }
+                Key = new byte[] { 0x01, 0x02, 0x03 },
             };
             var group = new Group
             {
@@ -1079,7 +1079,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 Tags = new[] { "Primary", "Local" },
                 Codes = Enumerable.Range(1, 5).ToList(),
                 Comment = "Nothing important",
-                ExtraInfo = new object[] { 43, "Extra", manager }
+                ExtraInfo = new object[] { 43, "Extra", manager },
             };
 
             using (var stream = new MemoryStream())

@@ -57,7 +57,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x20,
                 0x02,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(aceBinary, buffer);
         }

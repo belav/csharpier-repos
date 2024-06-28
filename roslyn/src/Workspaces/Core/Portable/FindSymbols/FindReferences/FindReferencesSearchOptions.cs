@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             Default with
             {
                 AssociatePropertyReferencesWithSpecificAccessor = symbol.IsPropertyAccessor(),
-                UnidirectionalHierarchyCascade = true
+                UnidirectionalHierarchyCascade = true,
             };
     }
 }

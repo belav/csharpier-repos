@@ -302,7 +302,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                         succeeded: false,
                         FeaturesResources.Invalid_selection
                     ),
-                    OriginalSpan = adjustedSpan
+                    OriginalSpan = adjustedSpan,
                 };
             }
 
@@ -319,7 +319,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -336,7 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -352,7 +352,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -366,7 +366,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -381,7 +381,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                     ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -392,7 +392,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CommonRootFromOriginalSpan = commonRoot,
                 SelectionInExpression = selectionInExpression,
                 FirstTokenInOriginalSpan = firstTokenInSelection,
-                LastTokenInOriginalSpan = lastTokenInSelection
+                LastTokenInOriginalSpan = lastTokenInSelection,
             };
         }
 

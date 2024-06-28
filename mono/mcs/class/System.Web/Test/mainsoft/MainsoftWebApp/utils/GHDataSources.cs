@@ -29,7 +29,7 @@ namespace GHTTests
                 "seven",
                 "eight",
                 "nine",
-                "ten"
+                "ten",
             };
         }
 

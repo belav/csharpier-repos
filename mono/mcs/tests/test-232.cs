@@ -6,35 +6,35 @@ public class CtorInfoTest
     enum E
     {
         A = 0,
-        B = 1
+        B = 1,
     }
 
     public static void Main(string[] args)
     {
         // uses static initialization
         int[] iarray = // int array, int constants
-        { 0, 1, 2, 3, 4, 5, 6, };
+        { 0, 1, 2, 3, 4, 5, 6 };
 
         object[] oarray = // int array, int constants
-        { 0, E.A, null, "A", new int(), 1.1, -2m, };
+        { 0, E.A, null, "A", new int(), 1.1, -2m };
 
-        object[] ooarray = { null, new int[] { 0, 0 }, 0, new object[0], };
+        object[] ooarray = { null, new int[] { 0, 0 }, 0, new object[0] };
 
         // mcs used to throw with 7 or more elements in the array initializer
         ConstructorInfo[] ciarray = // ref array, null constants
-        { null, null, null, null, null, null, null, };
+        { null, null, null, null, null, null, null };
 
         string[] scarray = // string array, string constants
-        { "a", "b", "c", "d", "e", "f", "g", };
+        { "a", "b", "c", "d", "e", "f", "g" };
 
         string[] snarray = // string array, null constants
-        { null, null, null, null, null, null, null, };
+        { null, null, null, null, null, null, null };
 
         decimal[] darray = // decimal constants
-        { 0M, 1M, 2M, 3M, 4M, 5M, 6M, 7M, };
+        { 0M, 1M, 2M, 3M, 4M, 5M, 6M, 7M };
 
         IConvertible[] lcarray = // boxed integer constants
-        { 0, 1, 2, 3, 4, 5, 6, 7, };
+        { 0, 1, 2, 3, 4, 5, 6, 7 };
 
         System.Enum[] eatarray = // boxed enum constants
         {

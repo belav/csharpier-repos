@@ -325,7 +325,7 @@ namespace System.IO.Compression
 
             // sink states
             CheckingForIncompressible,
-            HandlingSmallData
+            HandlingSmallData,
         }
     } // internal class DeflaterManaged
 } // namespace System.IO.Compression

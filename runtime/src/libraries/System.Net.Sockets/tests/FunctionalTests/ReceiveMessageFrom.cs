@@ -48,7 +48,7 @@ namespace System.Net.Sockets.Tests
             {
                 Array = new byte[length],
                 Count = count,
-                Offset = offset
+                Offset = offset,
             }.ToActual();
 
             await AssertThrowsSynchronously<ArgumentOutOfRangeException>(
@@ -661,14 +661,14 @@ namespace System.Net.Sockets.Tests
                     case 1: // single buffer in buffer list
                         saea.BufferList = new List<ArraySegment<byte>>
                         {
-                            new ArraySegment<byte>(receiveBuffer)
+                            new ArraySegment<byte>(receiveBuffer),
                         };
                         break;
                     case 2: // multiple buffers in buffer list
                         saea.BufferList = new List<ArraySegment<byte>>
                         {
                             new ArraySegment<byte>(receiveBuffer, 0, 512),
-                            new ArraySegment<byte>(receiveBuffer, 512, 512)
+                            new ArraySegment<byte>(receiveBuffer, 512, 512),
                         };
                         break;
                 }

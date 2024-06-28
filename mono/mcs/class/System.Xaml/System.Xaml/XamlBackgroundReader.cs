@@ -143,7 +143,7 @@ namespace System.Xaml
                 )
             )
             {
-                Name = threadName
+                Name = threadName,
             };
             thread.Start();
         }

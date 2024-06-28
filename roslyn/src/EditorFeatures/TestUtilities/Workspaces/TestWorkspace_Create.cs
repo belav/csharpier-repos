@@ -189,7 +189,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                         GetSourceFileExtension(language, parseOptions)
                     ),
                     parseOptions: parseOptions
-                )
+                ),
             };
 
             var workspaceElement = CreateWorkspaceElement(

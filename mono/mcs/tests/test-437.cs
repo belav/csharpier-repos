@@ -7,7 +7,7 @@ class T2
     {
         A = Test.E.d,
         B = Test.E.a,
-        C = Test.Constant
+        C = Test.Constant,
     }
 }
 
@@ -25,7 +25,7 @@ class Test
         e,
         f = -Constant,
         g = checked(3 * 4),
-        h = unchecked((sbyte)(250 + 10))
+        h = unchecked((sbyte)(250 + 10)),
     }
 
     public static void Main()

@@ -116,7 +116,7 @@ namespace System.Net.Sockets.Tests
                 "Task" => new SocketHelperTask(),
                 "Apm" => new SocketHelperApm(),
                 "Eap" => new SocketHelperEap(),
-                _ => throw new ArgumentException(socketMethod)
+                _ => throw new ArgumentException(socketMethod),
             };
         }
 

@@ -779,7 +779,7 @@ public class @neutral
                     "snKey.snk",
                     () => new MemoryStream(TestResources.General.snKey, writable: false),
                     true
-                )
+                ),
             };
 
             CSharpCompilation compilation;
@@ -829,7 +829,7 @@ class Program
                             0x2D,
                             0xEE,
                             0x59,
-                            0xA8
+                            0xA8,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -857,7 +857,7 @@ class Program
                             0xB3,
                             0xC2,
                             0xA5,
-                            0x1D
+                            0x1D,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -918,7 +918,7 @@ class Program
                             0x2D,
                             0xEE,
                             0x59,
-                            0xA8
+                            0xA8,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -946,7 +946,7 @@ class Program
                             0xB3,
                             0xC2,
                             0xA5,
-                            0x1D
+                            0x1D,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -1002,7 +1002,7 @@ class Program
                             0xB2,
                             0xCA,
                             0x23,
-                            0xBC
+                            0xBC,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -1026,7 +1026,7 @@ class Program
                             0x9E,
                             0x29,
                             0x72,
-                            0xF1
+                            0xF1,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -1086,7 +1086,7 @@ class Program
                             0x2D,
                             0xEE,
                             0x59,
-                            0xA8
+                            0xA8,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -1114,7 +1114,7 @@ class Program
                             0xB3,
                             0xC2,
                             0xA5,
-                            0x1D
+                            0x1D,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -1189,7 +1189,7 @@ class Program
                             0xCF,
                             0x12,
                             0x05,
-                            0x35
+                            0x35,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -1229,7 +1229,7 @@ class Program
                             0x10,
                             0x1C,
                             0x10,
-                            0xAC
+                            0xAC,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -1320,7 +1320,7 @@ class Program
                             0xFC,
                             0x82,
                             0x38,
-                            0x95
+                            0x95,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -1376,7 +1376,7 @@ class Program
                             0x80,
                             0x68,
                             0xA3,
-                            0x17
+                            0x17,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -1484,7 +1484,7 @@ class Program
                             0x91,
                             0x53,
                             0x3D,
-                            0x84
+                            0x84,
                         },
                         reader.GetBlobBytes(file1.HashValue)
                     );
@@ -1556,7 +1556,7 @@ class Program
                             0x48,
                             0x63,
                             0x70,
-                            0xF2
+                            0xF2,
                         },
                         reader.GetBlobBytes(file2.HashValue)
                     );
@@ -2739,7 +2739,7 @@ class Program
                     netmodule0Ref,
                     netmodule1Ref,
                     netmodule2Ref,
-                    netmodule3Ref
+                    netmodule3Ref,
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -3030,7 +3030,7 @@ public class C { }
                         {
                             "System.Diagnostics.DebuggableAttribute(System.Diagnostics.DebuggableAttribute.DebuggingModes.IgnoreSymbolStoreSequencePoints)",
                             "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute(WrapNonExceptionThrows = false)",
-                            "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)"
+                            "System.Runtime.CompilerServices.CompilationRelaxationsAttribute(System.Runtime.CompilerServices.CompilationRelaxations.NoStringInterning)",
                         },
                         attrs
                     );
@@ -3416,7 +3416,7 @@ public class C { }
                 references: new MetadataReference[]
                 {
                     compMod1.EmitToImageReference(),
-                    compMod2.EmitToImageReference()
+                    compMod2.EmitToImageReference(),
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -3477,7 +3477,7 @@ public class C { }
                 references: new MetadataReference[]
                 {
                     compMod1.EmitToImageReference(),
-                    compMod2.EmitToImageReference()
+                    compMod2.EmitToImageReference(),
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -3534,7 +3534,7 @@ public class C { }
                 references: new MetadataReference[]
                 {
                     compMod1.EmitToImageReference(),
-                    compMod2.EmitToImageReference()
+                    compMod2.EmitToImageReference(),
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -3597,7 +3597,7 @@ public class C { }
                 references: new MetadataReference[]
                 {
                     compMod1.EmitToImageReference(),
-                    compMod2.EmitToImageReference()
+                    compMod2.EmitToImageReference(),
                 },
                 options: TestOptions.ReleaseDll
             );

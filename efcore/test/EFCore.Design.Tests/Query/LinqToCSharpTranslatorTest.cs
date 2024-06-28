@@ -2023,7 +2023,7 @@ catch
     public enum SomeEnum
     {
         One = 1,
-        Two = 2
+        Two = 2,
     }
 
     // ReSharper restore UnusedMember.Local

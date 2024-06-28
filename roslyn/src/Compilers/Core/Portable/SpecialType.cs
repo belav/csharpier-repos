@@ -266,6 +266,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Count of special types. This is not a count of enum members.
         /// </summary>
-        Count = System_Runtime_CompilerServices_InlineArrayAttribute
+        Count = System_Runtime_CompilerServices_InlineArrayAttribute,
     }
 }

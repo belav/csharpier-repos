@@ -331,8 +331,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             return statement switch
             {
                 IfStatementSyntax ifStatement => ifStatement.CloseParenToken.Equals(token),
-                SwitchStatementSyntax switchStatement =>
-                    switchStatement.CloseParenToken.Equals(token),
+                SwitchStatementSyntax switchStatement => switchStatement.CloseParenToken.Equals(
+                    token
+                ),
                 WhileStatementSyntax whileStatement => whileStatement.CloseParenToken.Equals(token),
                 DoStatementSyntax doStatement => doStatement.CloseParenToken.Equals(token),
                 ForStatementSyntax forStatement => forStatement.CloseParenToken.Equals(token),

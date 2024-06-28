@@ -120,7 +120,7 @@ namespace Tests.Collections
                     new object[] { -1, 16 },
                     new object[] { 0, 0 },
                     new object[] { 1, 1 },
-                    new object[] { 16, 16 }
+                    new object[] { 16, 16 },
                 };
             }
         }
@@ -204,7 +204,7 @@ namespace Tests.Collections
                 expectedExceptions = new[]
                 {
                     typeof(ArgumentOutOfRangeException),
-                    typeof(NotSupportedException)
+                    typeof(NotSupportedException),
                 };
             }
             else
@@ -254,7 +254,7 @@ namespace Tests.Collections
                             expectedExceptions = new[]
                             {
                                 typeof(ArgumentNullException),
-                                typeof(NotSupportedException)
+                                typeof(NotSupportedException),
                             };
                         }
                         else
@@ -267,7 +267,7 @@ namespace Tests.Collections
                         expectedExceptions = new[]
                         {
                             typeof(ArgumentException),
-                            typeof(NotSupportedException)
+                            typeof(NotSupportedException),
                         };
                     }
                     else
@@ -612,7 +612,7 @@ namespace Tests.Collections
                         expectedExceptions = new[]
                         {
                             typeof(ArgumentException),
-                            typeof(NotSupportedException)
+                            typeof(NotSupportedException),
                         };
                     }
                     else

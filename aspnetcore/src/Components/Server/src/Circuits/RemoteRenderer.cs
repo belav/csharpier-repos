@@ -337,13 +337,11 @@ internal partial class RemoteRenderer : WebRenderer
     ) =>
         renderMode switch
         {
-            InteractiveServerRenderMode
-            or InteractiveAutoRenderMode =>
+            InteractiveServerRenderMode or InteractiveAutoRenderMode =>
                 componentActivator.CreateInstance(componentType),
-            _ =>
-                throw new NotSupportedException(
-                    $"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by interactive server-side rendering."
-                ),
+            _ => throw new NotSupportedException(
+                $"Cannot create a component of type '{componentType}' because its render mode '{renderMode}' is not supported by interactive server-side rendering."
+            ),
         };
 
     private void ProcessPendingBatch(string? errorMessageOrNull, UnacknowledgedRenderBatch entry)

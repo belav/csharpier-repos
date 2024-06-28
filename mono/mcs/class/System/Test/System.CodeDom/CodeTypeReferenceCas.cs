@@ -173,7 +173,7 @@ namespace MonoCasTests.System.CodeDom
         {
             CodeTypeReference[] arguments = new CodeTypeReference[1]
             {
-                new CodeTypeReference("System.Int32")
+                new CodeTypeReference("System.Int32"),
             };
             CodeTypeReference ctr = new CodeTypeReference("System.Int32", arguments);
             Assert.IsNull(ctr.ArrayElementType, "ArrayElementType");

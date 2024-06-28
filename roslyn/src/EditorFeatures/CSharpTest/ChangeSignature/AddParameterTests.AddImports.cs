@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                         CallSiteKind.Todo
                     ),
                     "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>"
-                )
+                ),
             };
 
             var updatedCode = """
@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                         CallSiteKind.Todo
                     ),
                     "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>"
-                )
+                ),
             };
 
             var updatedCode = """
@@ -143,7 +143,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                         CallSiteKind.Todo
                     ),
                     "System.Collections.Generic.Dictionary<System.ConsoleColor, System.Threading.Tasks.Task<System.ComponentModel.AsyncOperation>>"
-                )
+                ),
             };
 
             var updatedCode = """

@@ -534,7 +534,7 @@ internal static class OutputCacheEntryFormatter
         "SAMEORIGIN",
         "DENY",
         // for X-Content-Type
-        "nosniff"
+        "nosniff",
 
         // if you add new options here, you should rev the api version
     };

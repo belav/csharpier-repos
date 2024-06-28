@@ -36,13 +36,14 @@ namespace System.Data.SqlClient
         PostLogin, // [POST-LOGIN PHASE]       End of the login phase; And post-login phase;
         Complete, // Marker for the succesful completion of the connection
         Count // ** This is to track the length of the enum. ** Do not add any phase after this. **
+        ,
     }
 
     internal enum SqlConnectionInternalSourceType
     {
         Principle,
         Failover,
-        RoutingDestination
+        RoutingDestination,
     }
 
     // DEVNOTE: Class to capture the duration spent in each SqlConnectionTimeoutErrorPhase.

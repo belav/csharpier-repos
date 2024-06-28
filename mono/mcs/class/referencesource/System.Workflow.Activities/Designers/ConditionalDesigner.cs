@@ -140,7 +140,7 @@ namespace System.Workflow.Activities
                 new Point(rectangle.Right - 1, rectangle.Top + rectangle.Height / 2),
                 new Point(rectangle.Left + rectangle.Width / 2, rectangle.Bottom - 1),
                 new Point(rectangle.Left, rectangle.Top + rectangle.Height / 2),
-                new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top)
+                new Point(rectangle.Left + rectangle.Width / 2, rectangle.Top),
             };
 
             GraphicsPath diamondPath = new GraphicsPath();

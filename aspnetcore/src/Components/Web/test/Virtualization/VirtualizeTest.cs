@@ -17,7 +17,7 @@ public class VirtualizeTest
     {
         var rootComponent = new VirtualizeTestHostcomponent
         {
-            InnerContent = BuildVirtualize(0f, EmptyItemsProvider<int>, null)
+            InnerContent = BuildVirtualize(0f, EmptyItemsProvider<int>, null),
         };
 
         var serviceProvider = new ServiceCollection()
@@ -38,7 +38,7 @@ public class VirtualizeTest
     {
         var rootComponent = new VirtualizeTestHostcomponent
         {
-            InnerContent = BuildVirtualize(10f, EmptyItemsProvider<int>, new List<int>())
+            InnerContent = BuildVirtualize(10f, EmptyItemsProvider<int>, new List<int>()),
         };
 
         var serviceProvider = new ServiceCollection()
@@ -59,7 +59,7 @@ public class VirtualizeTest
     {
         var rootComponent = new VirtualizeTestHostcomponent
         {
-            InnerContent = BuildVirtualize<int>(10f, null, null)
+            InnerContent = BuildVirtualize<int>(10f, null, null),
         };
 
         var serviceProvider = new ServiceCollection()
@@ -87,7 +87,7 @@ public class VirtualizeTest
                 AlwaysThrowsItemsProvider<int>,
                 null,
                 virtualize => renderedVirtualize = virtualize
-            )
+            ),
         };
 
         var serviceProvider = new ServiceCollection()

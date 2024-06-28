@@ -48,7 +48,7 @@ namespace C5
         /// <summary>
         /// A and B overlap, but neither is contained in the other
         /// </summary>
-        Overlapping
+        Overlapping,
     }
 
     #region View List Nested class

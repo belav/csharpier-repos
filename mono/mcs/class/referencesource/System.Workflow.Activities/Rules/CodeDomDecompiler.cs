@@ -423,6 +423,7 @@ namespace System.Workflow.Activities.Rules
             Unary, // -  !  (cast)
             Postfix, // field/property ref and method call
             NoParentheses // Highest
+            ,
         }
 
         private delegate Operation ComputePrecedence(CodeExpression expresssion);

@@ -1078,7 +1078,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest0()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTaskT,
@@ -1097,7 +1097,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTaskT,
@@ -1119,7 +1119,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTaskT,
@@ -1139,7 +1139,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Heavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTaskT,
@@ -1156,7 +1156,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest4()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTaskT,
@@ -1176,7 +1176,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTaskT_NEW,
@@ -1197,7 +1197,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTaskT_NEW,
@@ -1219,7 +1219,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTaskT_NEW,
@@ -1236,7 +1236,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest8()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Cancelled);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTaskT_NEW,
@@ -1256,7 +1256,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTask,
@@ -1278,7 +1278,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTask,
@@ -1301,7 +1301,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node4 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node6 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTask,
@@ -1318,7 +1318,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest12()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTask,
@@ -1337,7 +1337,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTask,
@@ -1359,7 +1359,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTask,
@@ -1377,7 +1377,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, };
+            TaskInfo[] allTasks = new[] { node1, node2 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT,
@@ -1394,7 +1394,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest16()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT,
@@ -1414,7 +1414,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT,
@@ -1435,7 +1435,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Exceptional);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskTContinueWithTaskT,
@@ -1454,7 +1454,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskTContinueWithTaskT,
@@ -1471,7 +1471,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest20()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1488,7 +1488,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest21()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Cancelled);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1508,7 +1508,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1527,7 +1527,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node2 = new TaskInfo(WorkloadType.Medium);
             TaskInfo node3 = new TaskInfo(WorkloadType.Light);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1549,7 +1549,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node4 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node5 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1566,7 +1566,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         public static void TaskContinueWithAllAnyTest25()
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, };
+            TaskInfo[] allTasks = new[] { node1 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTask,
@@ -1628,7 +1628,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node5 = new TaskInfo(WorkloadType.VeryLight);
             TaskInfo node6 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node7 = new TaskInfo(WorkloadType.Medium);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3, node4, node5, node6, node7 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTask,
@@ -1764,7 +1764,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTaskT_NEW,
@@ -1783,7 +1783,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1802,7 +1802,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1820,7 +1820,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
+            TaskInfo[] allTasks = new[] { node1, node2 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskTContinueWithTaskT_NEW,
@@ -1838,7 +1838,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
+            TaskInfo[] allTasks = new[] { node1, node2 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskContinueWithTask,
@@ -1857,7 +1857,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskContinueWithTaskT,
@@ -1876,7 +1876,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
             TaskInfo node1 = new TaskInfo(WorkloadType.Exceptional);
             TaskInfo node2 = new TaskInfo(WorkloadType.Cancelled);
             TaskInfo node3 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, node3, };
+            TaskInfo[] allTasks = new[] { node1, node2, node3 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTask,
@@ -1895,7 +1895,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
+            TaskInfo[] allTasks = new[] { node1, node2 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAny,
                 TaskType.TaskTContinueWithTaskT,
@@ -1914,7 +1914,7 @@ namespace System.Threading.Tasks.Tests.ContinueWithAllAny
         {
             TaskInfo node1 = new TaskInfo(WorkloadType.VeryHeavy);
             TaskInfo node2 = new TaskInfo(WorkloadType.VeryLight);
-            TaskInfo[] allTasks = new[] { node1, node2, };
+            TaskInfo[] allTasks = new[] { node1, node2 };
             TestParameters parameters = new TestParameters(
                 API.ContinueWhenAll,
                 TaskType.TaskTContinueWithTaskT_NEW,

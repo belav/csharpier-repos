@@ -15,13 +15,13 @@ public static class HubProtocolHelpers
     public static readonly List<string> AllProtocolNames = new List<string>
     {
         NewtonsoftJsonHubProtocol.Name,
-        MessagePackHubProtocol.Name
+        MessagePackHubProtocol.Name,
     };
 
     public static readonly IList<IHubProtocol> AllProtocols = new List<IHubProtocol>()
     {
         NewtonsoftJsonHubProtocol,
-        MessagePackHubProtocol
+        MessagePackHubProtocol,
     };
 
     public static IHubProtocol GetHubProtocol(string name)

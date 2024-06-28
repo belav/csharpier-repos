@@ -38,8 +38,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -63,8 +63,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -90,8 +90,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -177,8 +177,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -208,8 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -239,8 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -270,8 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -301,8 +301,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -333,8 +333,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -364,8 +364,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -399,8 +399,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -439,8 +439,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -469,8 +469,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.TrueWithSilentEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -509,8 +509,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -549,8 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -585,8 +585,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -629,8 +629,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -678,8 +678,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1055,8 +1055,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1250,8 +1250,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.NewLines.ConsecutiveSta
                     {
                         CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
                         CodeStyleOption2.FalseWithSuggestionEnforcement
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
     }

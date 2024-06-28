@@ -211,7 +211,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             SyntaxKind.LocalDeclarationStatement,
                             SyntaxKind.ForStatement,
                             SyntaxKind.UsingStatement,
-                            SyntaxKind.FixedStatement
+                            SyntaxKind.FixedStatement,
                         }.Contains(nodeToBind.Ancestors().OfType<StatementSyntax>().First().Kind())
                     || nodeToBind is ExpressionSyntax
             );

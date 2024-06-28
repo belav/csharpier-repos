@@ -41,6 +41,6 @@ namespace System.Windows.Forms
         ThumbTrack = 5,
         First = 6,
         Last = 7,
-        EndScroll = 8
+        EndScroll = 8,
     }
 }

@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 ErrorSeverity.Diagnostic => FaultSeverity.Diagnostic,
                 ErrorSeverity.General => FaultSeverity.General,
                 ErrorSeverity.Critical => FaultSeverity.Critical,
-                _ => FaultSeverity.Uncategorized
+                _ => FaultSeverity.Uncategorized,
             };
         }
 

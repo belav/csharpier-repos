@@ -11,7 +11,7 @@ public class NegCollect
         GCCollectionMode[] invalidInputs =
         {
             (GCCollectionMode)(GCCollectionMode.Default - 1),
-            (GCCollectionMode)(GCCollectionMode.Aggressive + 1)
+            (GCCollectionMode)(GCCollectionMode.Aggressive + 1),
         };
 
         for (int i = 0; i < invalidInputs.Length; i++)

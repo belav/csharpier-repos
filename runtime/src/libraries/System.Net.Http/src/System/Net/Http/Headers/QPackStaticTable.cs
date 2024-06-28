@@ -123,7 +123,11 @@ namespace System.Net.Http.Headers
                 (new HeaderDescriptor(KnownHeaders.UserAgent), ""), // 95
                 (new HeaderDescriptor("x-forwarded-for"), ""), // 96
                 (new HeaderDescriptor(KnownHeaders.XFrameOptions), "deny"), // 97
-                (new HeaderDescriptor(KnownHeaders.XFrameOptions), "sameorigin") // 98
+                (
+                    new HeaderDescriptor(KnownHeaders.XFrameOptions),
+                    "sameorigin"
+                ) // 98
+                ,
             };
     }
 }

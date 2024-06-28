@@ -62,7 +62,7 @@ namespace MonoTests.System.Security.Cryptography
             0x10,
             0x11,
             0x12,
-            0x13
+            0x13,
         };
         static byte[] sign =
         {
@@ -105,7 +105,7 @@ namespace MonoTests.System.Security.Cryptography
             0x7b,
             0xa3,
             0xb3,
-            0x82
+            0x82,
         };
 
         public DSASignatureDeformatterTest()
@@ -270,7 +270,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x7b,
                 0xa3,
                 0xb3,
-                0x82
+                0x82,
             };
             Assert.IsFalse(def.VerifySignature(hash, badSign));
         }

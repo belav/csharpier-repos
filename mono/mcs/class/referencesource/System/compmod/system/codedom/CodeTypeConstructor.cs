@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a static constructor for a class.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeTypeConstructor : CodeMemberMethod
     {
         /// <devdoc>

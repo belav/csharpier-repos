@@ -39,31 +39,31 @@ namespace System.CodeDom.Compiler.Tests
             cd.Members.Add(
                 new CodeMemberField(typeof(int), "_privateNumber")
                 {
-                    Attributes = MemberAttributes.Private
+                    Attributes = MemberAttributes.Private,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(string), "_internalString")
                 {
-                    Attributes = MemberAttributes.Assembly
+                    Attributes = MemberAttributes.Assembly,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(DateTime), "_protectedDateTime")
                 {
-                    Attributes = MemberAttributes.Family
+                    Attributes = MemberAttributes.Family,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(TimeSpan), "PublicTimeSpan")
                 {
-                    Attributes = MemberAttributes.Public
+                    Attributes = MemberAttributes.Public,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(Guid), "_protectedInternalGuid")
                 {
-                    Attributes = MemberAttributes.FamilyOrAssembly
+                    Attributes = MemberAttributes.FamilyOrAssembly,
                 }
             );
 
@@ -86,31 +86,31 @@ namespace System.CodeDom.Compiler.Tests
             cd.Members.Add(
                 new CodeMemberField(typeof(int), "s_privateNumber")
                 {
-                    Attributes = MemberAttributes.Private | MemberAttributes.Static
+                    Attributes = MemberAttributes.Private | MemberAttributes.Static,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(string), "s_internalString")
                 {
-                    Attributes = MemberAttributes.Assembly | MemberAttributes.Static
+                    Attributes = MemberAttributes.Assembly | MemberAttributes.Static,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(DateTime), "s_protectedDateTime")
                 {
-                    Attributes = MemberAttributes.Family | MemberAttributes.Static
+                    Attributes = MemberAttributes.Family | MemberAttributes.Static,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(TimeSpan), "PublicTimeSpan")
                 {
-                    Attributes = MemberAttributes.Public | MemberAttributes.Static
+                    Attributes = MemberAttributes.Public | MemberAttributes.Static,
                 }
             );
             cd.Members.Add(
                 new CodeMemberField(typeof(Guid), "s_protectedInternalGuid")
                 {
-                    Attributes = MemberAttributes.FamilyOrAssembly | MemberAttributes.Static
+                    Attributes = MemberAttributes.FamilyOrAssembly | MemberAttributes.Static,
                 }
             );
 
@@ -626,21 +626,21 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeTypeDeclaration("PublicClass")
                 {
                     IsClass = true,
-                    TypeAttributes = TypeAttributes.Public
+                    TypeAttributes = TypeAttributes.Public,
                 }
             );
             ns.Types.Add(
                 new CodeTypeDeclaration("PrivateClass")
                 {
                     IsClass = true,
-                    TypeAttributes = TypeAttributes.NotPublic
+                    TypeAttributes = TypeAttributes.NotPublic,
                 }
             );
             ns.Types.Add(
                 new CodeTypeDeclaration("SealedClass")
                 {
                     IsClass = true,
-                    TypeAttributes = TypeAttributes.Sealed
+                    TypeAttributes = TypeAttributes.Sealed,
                 }
             );
             ns.Types.Add(
@@ -726,7 +726,7 @@ namespace System.CodeDom.Compiler.Tests
                 new CodeMemberMethod()
                 {
                     Name = "MyMethod",
-                    PrivateImplementationType = new CodeTypeReference(type)
+                    PrivateImplementationType = new CodeTypeReference(type),
                 },
                 expectedResult
             );
@@ -1046,7 +1046,7 @@ namespace System.CodeDom.Compiler.Tests
                 var nestedClass = new CodeTypeDeclaration("NestedClass")
                 {
                     IsClass = true,
-                    TypeAttributes = TypeAttributes.NestedPublic
+                    TypeAttributes = TypeAttributes.NestedPublic,
                 };
                 nestedClass.CustomAttributes.Add(
                     new CodeAttributeDeclaration("System.Serializable")
@@ -1403,7 +1403,7 @@ namespace System.CodeDom.Compiler.Tests
                                         "System.Globalization.CultureInfo"
                                     ),
                                     "InvariantCulture"
-                                )
+                                ),
                             }
                         )
                     )
@@ -1640,11 +1640,11 @@ namespace System.CodeDom.Compiler.Tests
                     ),
                     new CodeStatement[]
                     {
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(5))
+                        new CodeMethodReturnStatement(new CodePrimitiveExpression(5)),
                     },
                     new CodeStatement[]
                     {
-                        new CodeMethodReturnStatement(new CodePrimitiveExpression(4))
+                        new CodeMethodReturnStatement(new CodePrimitiveExpression(4)),
                     }
                 )
             );
@@ -1744,7 +1744,7 @@ namespace System.CodeDom.Compiler.Tests
                         ),
                         new CodeExpression[]
                         {
-                            new CodeDefaultValueExpression(new CodeTypeReference(t))
+                            new CodeDefaultValueExpression(new CodeTypeReference(t)),
                         }
                     )
                 );
@@ -2200,7 +2200,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeExpression[]
                         {
                             new CodePrimitiveExpression(1),
-                            new CodePrimitiveExpression(-1)
+                            new CodePrimitiveExpression(-1),
                         }
                     )
                 )
@@ -2312,7 +2312,7 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeFieldReferenceExpression(
                                 new CodeTypeReferenceExpression("System.EventArgs"),
                                 "Empty"
-                            )
+                            ),
                         }
                     )
                 );
@@ -2333,7 +2333,7 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeFieldReferenceExpression(
                                 new CodeTypeReferenceExpression("System.EventArgs"),
                                 "Empty"
-                            )
+                            ),
                         }
                     )
                 );
@@ -2670,7 +2670,7 @@ namespace System.CodeDom.Compiler.Tests
                 {
                     MemberAttributes.Private,
                     MemberAttributes.Family,
-                    MemberAttributes.Assembly
+                    MemberAttributes.Assembly,
                 }
             )
             {
@@ -2848,7 +2848,7 @@ namespace System.CodeDom.Compiler.Tests
                                     new CodePrimitiveExpression(iNum)
                                 ),
                                 "ToString"
-                            )
+                            ),
                         }
                     )
                 );
@@ -2917,7 +2917,7 @@ namespace System.CodeDom.Compiler.Tests
                             new CodePrimitiveExpression("{0} + {1} = {2}"),
                             new CodePrimitiveExpression(1),
                             new CodePrimitiveExpression(2),
-                            new CodePrimitiveExpression(3)
+                            new CodePrimitiveExpression(3),
                         }
                     )
                 )
@@ -3270,7 +3270,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodePrimitiveExpression(0),
                     new CodePrimitiveExpression(0),
                     new CodePrimitiveExpression(0),
-                    new CodePrimitiveExpression(0)
+                    new CodePrimitiveExpression(0),
                 }
             );
             field.Attributes = MemberAttributes.Public | MemberAttributes.Final;
@@ -3329,7 +3329,7 @@ namespace System.CodeDom.Compiler.Tests
                                 new CodeVariableReferenceExpression("a"),
                                 CodeBinaryOperatorType.Add,
                                 new CodeVariableReferenceExpression("b")
-                            )
+                            ),
                         }
                     ),
                     new CodeVariableReferenceExpression("value")
@@ -3394,7 +3394,7 @@ namespace System.CodeDom.Compiler.Tests
                         new CodeExpression[]
                         {
                             new CodePrimitiveExpression(2),
-                            new CodePrimitiveExpression(4)
+                            new CodePrimitiveExpression(4),
                         }
                     ),
                     new CodePrimitiveExpression(83)
@@ -3413,7 +3413,7 @@ namespace System.CodeDom.Compiler.Tests
                             new CodeExpression[]
                             {
                                 new CodePrimitiveExpression(2),
-                                new CodePrimitiveExpression(4)
+                                new CodePrimitiveExpression(4),
                             }
                         )
                     )
@@ -4980,7 +4980,7 @@ namespace System.CodeDom.Compiler.Tests
                     new CodeTypeReference(
                         "List",
                         new CodeTypeReference[] { new CodeTypeReference("System.String") }
-                    )
+                    ),
                 }
             );
             methodMain.Statements.Add(

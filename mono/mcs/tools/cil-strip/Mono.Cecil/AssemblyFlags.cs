@@ -37,6 +37,6 @@ namespace Mono.Cecil
         SideBySideCompatible = 0x0000,
         Retargetable = 0x0100,
         EnableJITcompileTracking = 0x8000,
-        DisableJITcompileOptimizer = 0x4000
+        DisableJITcompileOptimizer = 0x4000,
     }
 }

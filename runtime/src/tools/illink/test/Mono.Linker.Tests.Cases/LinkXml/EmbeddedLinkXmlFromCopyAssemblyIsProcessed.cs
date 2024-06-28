@@ -13,7 +13,7 @@ namespace Mono.Linker.Tests.Cases.LinkXml
         new[] { "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/CopyLibrary.cs" },
         resources: new object[]
         {
-            "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/CopyLibrary.xml"
+            "Dependencies/EmbeddedLinkXmlFromCopyAssemblyIsProcessed/CopyLibrary.xml",
         }
     )]
     [IgnoreDescriptors(false)]

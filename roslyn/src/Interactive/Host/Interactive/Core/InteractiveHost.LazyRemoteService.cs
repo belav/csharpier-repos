@@ -184,11 +184,11 @@ namespace Microsoft.CodeAnalysis.Interactive
                         RedirectStandardOutput = true,
                         RedirectStandardError = true,
                         StandardErrorEncoding = OutputEncoding,
-                        StandardOutputEncoding = OutputEncoding
+                        StandardOutputEncoding = OutputEncoding,
                     },
 
                     // enables Process.Exited event to be raised:
-                    EnableRaisingEvents = true
+                    EnableRaisingEvents = true,
                 };
 
                 try
@@ -267,7 +267,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                                 nameof(Service.InitializeAsync),
                                 new object[]
                                 {
-                                    Host._replServiceProviderType.AssemblyQualifiedName
+                                    Host._replServiceProviderType.AssemblyQualifiedName,
                                 },
                                 cancellationToken
                             )

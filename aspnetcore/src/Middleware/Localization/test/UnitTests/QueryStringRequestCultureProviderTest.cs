@@ -28,12 +28,12 @@ public class QueryStringRequestCultureProviderTest
                                 DefaultRequestCulture = new RequestCulture("en-US"),
                                 SupportedCultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
+                                    new CultureInfo("ar-SA"),
                                 },
                                 SupportedUICultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-YE")
-                                }
+                                    new CultureInfo("ar-YE"),
+                                },
                             }
                         );
                         app.Run(context =>
@@ -71,7 +71,7 @@ public class QueryStringRequestCultureProviderTest
                         app.UseRequestLocalization(
                             new RequestLocalizationOptions
                             {
-                                DefaultRequestCulture = new RequestCulture("en-US")
+                                DefaultRequestCulture = new RequestCulture("en-US"),
                             }
                         );
                         app.Run(context =>
@@ -112,12 +112,12 @@ public class QueryStringRequestCultureProviderTest
                                 DefaultRequestCulture = new RequestCulture("en-US"),
                                 SupportedCultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
+                                    new CultureInfo("ar-SA"),
                                 },
                                 SupportedUICultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
-                                }
+                                    new CultureInfo("ar-SA"),
+                                },
                             }
                         );
                         app.Run(context =>
@@ -157,12 +157,12 @@ public class QueryStringRequestCultureProviderTest
                                 DefaultRequestCulture = new RequestCulture("en-US"),
                                 SupportedCultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
+                                    new CultureInfo("ar-SA"),
                                 },
                                 SupportedUICultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
-                                }
+                                    new CultureInfo("ar-SA"),
+                                },
                             }
                         );
                         app.Run(context =>
@@ -202,12 +202,12 @@ public class QueryStringRequestCultureProviderTest
                                 DefaultRequestCulture = new RequestCulture("en-US"),
                                 SupportedCultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
+                                    new CultureInfo("ar-SA"),
                                 },
                                 SupportedUICultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
-                                }
+                                    new CultureInfo("ar-SA"),
+                                },
                             }
                         );
                         app.Run(context =>
@@ -248,12 +248,12 @@ public class QueryStringRequestCultureProviderTest
                                 DefaultRequestCulture = new RequestCulture("en-US"),
                                 SupportedCultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
+                                    new CultureInfo("ar-SA"),
                                 },
                                 SupportedUICultures = new List<CultureInfo>
                                 {
-                                    new CultureInfo("ar-SA")
-                                }
+                                    new CultureInfo("ar-SA"),
+                                },
                             }
                         );
                         app.Run(context =>
@@ -292,7 +292,10 @@ public class QueryStringRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar-SA") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar-YE") }
+                            SupportedUICultures = new List<CultureInfo>
+                            {
+                                new CultureInfo("ar-YE"),
+                            },
                         };
                         var provider = new QueryStringRequestCultureProvider();
                         provider.QueryStringKey = "c";
@@ -335,7 +338,7 @@ public class QueryStringRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("FR") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("FR") }
+                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("FR") },
                         };
                         var provider = new QueryStringRequestCultureProvider();
 

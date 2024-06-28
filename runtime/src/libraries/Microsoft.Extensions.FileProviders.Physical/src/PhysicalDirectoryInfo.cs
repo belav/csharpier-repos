@@ -95,7 +95,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
                             FileInfo file => new PhysicalFileInfo(file),
                             DirectoryInfo dir => new PhysicalDirectoryInfo(dir),
                             // shouldn't happen unless BCL introduces new implementation of base type
-                            _ => throw new InvalidOperationException(SR.UnexpectedFileSystemInfo)
+                            _ => throw new InvalidOperationException(SR.UnexpectedFileSystemInfo),
                         }
                     );
             }

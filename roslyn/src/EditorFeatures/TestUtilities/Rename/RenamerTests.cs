@@ -160,8 +160,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
                 {
                     Text = startText,
                     DocumentName = defaultDocumentName,
-                    DocumentFilePath = defaultDocumentPath
-                }
+                    DocumentFilePath = defaultDocumentPath,
+                },
             };
 
             var endDocuments = new[]
@@ -170,8 +170,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
                 {
                     Text = expectedText,
                     DocumentName = newDocumentName,
-                    DocumentFilePath = newDocumentPath
-                }
+                    DocumentFilePath = newDocumentPath,
+                },
             };
 
             return TestRenameDocument(startDocuments, endDocuments, expectedErrors);
@@ -194,8 +194,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
                 {
                     Text = startText,
                     DocumentName = defaultDocumentName,
-                    DocumentFilePath = defaultDocumentPath
-                }
+                    DocumentFilePath = defaultDocumentPath,
+                },
             };
 
             var endDocuments = new[]
@@ -204,8 +204,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Renamer
                 {
                     Text = startText,
                     DocumentName = newDocumentName,
-                    DocumentFilePath = newDocumentPath
-                }
+                    DocumentFilePath = newDocumentPath,
+                },
             };
 
             using var workspace = new AdhocWorkspace();

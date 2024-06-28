@@ -290,7 +290,7 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         // with the datasource we want to test
         var requestDelegate = app.Build();
         requestDelegate(new DefaultHttpContext());
-        requestDelegate(new DefaultHttpContext() { Request = { Path = "/Foo", }, });
+        requestDelegate(new DefaultHttpContext() { Request = { Path = "/Foo" } });
 
         // Assert
         Assert.Equal(2, matcherEndpointDataSources.Count);

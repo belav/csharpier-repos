@@ -75,7 +75,7 @@ namespace System.ComponentModel.Composition
 
         private static readonly Type[] CtorArgumentTypes = new Type[]
         {
-            typeof(IDictionary<string, object>)
+            typeof(IDictionary<string, object>),
         };
         private static readonly MethodInfo _mdvDictionaryTryGet = CtorArgumentTypes[0]
             .GetMethod("TryGetValue")!;

@@ -205,7 +205,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Used for image maps
         /// </summary>
-        ImageMaps = 4
+        ImageMaps = 4,
     }
 
     #endregion
@@ -3541,7 +3541,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the x-coordinate of the mouse.
         /// </summary>
-        [SRDescription("DescriptionAttributeToolTipEventArgs_X"),]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_X")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -3555,7 +3555,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the result of the hit test.
         /// </summary>
-        [SRDescription("DescriptionAttributeToolTipEventArgs_HitTestResult"),]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_HitTestResult")]
         public HitTestResult HitTestResult
         {
             get { return result; }
@@ -3564,7 +3564,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the y-coordinate of the mouse.
         /// </summary>
-        [SRDescription("DescriptionAttributeToolTipEventArgs_Y"),]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_Y")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage(
             "Microsoft.Naming",
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
@@ -3578,7 +3578,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the text of the tooltip.
         /// </summary>
-        [SRDescription("DescriptionAttributeToolTipEventArgs_Text"),]
+        [SRDescription("DescriptionAttributeToolTipEventArgs_Text")]
         public string Text
         {
             get { return text; }

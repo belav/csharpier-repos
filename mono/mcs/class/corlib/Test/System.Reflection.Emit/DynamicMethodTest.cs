@@ -796,7 +796,7 @@ namespace MonoTests.System.Reflection.Emit
                 new object[0],
                 new PropertyInfo[]
                 {
-                    typeof(RuntimeCompatibilityAttribute).GetProperty("WrapNonExceptionThrows")
+                    typeof(RuntimeCompatibilityAttribute).GetProperty("WrapNonExceptionThrows"),
                 },
                 new object[] { true }
             );
@@ -838,7 +838,7 @@ namespace MonoTests.System.Reflection.Emit
                 0x6F,
                 0x77,
                 0x73,
-                0x01
+                0x01,
             };
             ab3.SetCustomAttribute(
                 typeof(RuntimeCompatibilityAttribute).GetConstructor(new Type[0]),

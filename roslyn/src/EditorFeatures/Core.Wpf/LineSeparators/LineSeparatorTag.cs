@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LineSeparators
                 BorderBrush = GetBrush(view),
                 BorderThickness = new Thickness(0, 0, 0, bottom: 1),
                 Height = 1,
-                Width = view.ViewportWidth
+                Width = view.ViewportWidth,
             };
 
             view.ViewportWidthChanged += ViewportWidthChangedHandler;

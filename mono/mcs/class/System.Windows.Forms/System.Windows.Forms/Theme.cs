@@ -43,7 +43,7 @@ namespace System.Windows.Forms
         MessageBoxWarning,
         MessageBoxInfo,
 
-        NormalFolder
+        NormalFolder,
     }
 
     internal struct CPColor

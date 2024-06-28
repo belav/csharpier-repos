@@ -37,6 +37,6 @@ namespace System.EnterpriseServices
         Default = 0,
         Delegate = 4,
         Identify = 2,
-        Impersonate = 3
+        Impersonate = 3,
     }
 }

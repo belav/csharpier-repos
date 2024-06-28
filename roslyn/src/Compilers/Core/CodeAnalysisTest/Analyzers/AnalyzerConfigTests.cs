@@ -48,7 +48,7 @@ my_prop = my_val
                 new[]
                 {
                     KeyValuePair.Create("my_global_prop", "my_global_val"),
-                    KeyValuePair.Create("root", "true")
+                    KeyValuePair.Create("root", "true"),
                 },
                 properties
             );
@@ -255,7 +255,7 @@ my_prop2 = my_val"
                 new[]
                 {
                     KeyValuePair.Create("my_prop1", ""),
-                    KeyValuePair.Create("my_prop2", "my_val")
+                    KeyValuePair.Create("my_prop2", "my_val"),
                 },
                 properties
             );
@@ -313,7 +313,7 @@ my_key2 = my:val"
                 new[]
                 {
                     KeyValuePair.Create("my", "key1 = my_val"),
-                    KeyValuePair.Create("my_key2", "my:val")
+                    KeyValuePair.Create("my_key2", "my:val"),
                 },
                 properties
             );
@@ -1007,7 +1007,7 @@ dotnet_diagnostic.cs000.severity = error",
                 {
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                    SyntaxTree.EmptyDiagnosticOptions
+                    SyntaxTree.EmptyDiagnosticOptions,
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1040,7 +1040,7 @@ dotnet_diagnostic.cs000.severity = error",
                 {
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                    SyntaxTree.EmptyDiagnosticOptions
+                    SyntaxTree.EmptyDiagnosticOptions,
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1076,7 +1076,7 @@ dotnet_diagnostic.cs000.severity = suggestion",
                 {
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
-                    SyntaxTree.EmptyDiagnosticOptions
+                    SyntaxTree.EmptyDiagnosticOptions,
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1165,7 +1165,7 @@ dotnet_diagnostic.cs001.severity = suggestion",
                     CreateImmutableDictionary(
                         ("cs000", ReportDiagnostic.Suppress),
                         ("cs001", ReportDiagnostic.Info)
-                    )
+                    ),
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1214,7 +1214,7 @@ dotnet_diagnostic.cs001.severity = error",
                     CreateImmutableDictionary(
                         ("cs000", ReportDiagnostic.Warn),
                         ("cs001", ReportDiagnostic.Info)
-                    )
+                    ),
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1258,7 +1258,7 @@ dotnet_diagnostic.cs001.severity = error",
                         ("cs000", ReportDiagnostic.Suppress),
                         ("cs001", ReportDiagnostic.Error)
                     ),
-                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress))
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1368,7 +1368,7 @@ dotnet_diagnostic.cs000.some_key = some_val",
                 new[]
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
-                    new (string, string)[] { }
+                    new (string, string)[] { },
                 },
                 options
             );
@@ -1408,7 +1408,7 @@ dotnet_diagnostic.cs000.some_key = some_val",
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
                     new (string, string)[] { },
-                    new[] { ("dotnet_diagnostic.cs000.bad_key", "bad_val") }
+                    new[] { ("dotnet_diagnostic.cs000.bad_key", "bad_val") },
                 },
                 options
             );
@@ -1446,7 +1446,7 @@ dotnet_diagnostic.cs000.some_key = b_val",
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "b_val") },
                     new[] { ("dotnet_diagnostic.cs000.some_key", "b_val") },
-                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") }
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") },
                 },
                 options
             );
@@ -1487,7 +1487,7 @@ dotnet_diagnostic.cs000.some_key = c_val",
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "c_val") },
                     new[] { ("dotnet_diagnostic.cs000.some_key", "b_val") },
-                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") }
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "a_val") },
                 },
                 options
             );
@@ -1531,7 +1531,7 @@ somekey = c_val",
                 {
                     new[] { ("somekey", "c_val") },
                     new[] { ("somekey", "b_val") },
-                    new[] { ("somekey", "a_val") }
+                    new[] { ("somekey", "a_val") },
                 },
                 options
             );
@@ -1541,7 +1541,7 @@ somekey = c_val",
                 {
                     new[] { ("cs000", ReportDiagnostic.Suppress) },
                     new[] { ("cs000", ReportDiagnostic.Error) },
-                    new[] { ("cs000", ReportDiagnostic.Warn) }
+                    new[] { ("cs000", ReportDiagnostic.Warn) },
                 },
                 options
             );
@@ -1573,9 +1573,9 @@ dotnet_diagnostic.cs001.some_key2 = some_val2
                     new[]
                     {
                         ("dotnet_diagnostic.cs000.some_key", "some_val"),
-                        ("dotnet_diagnostic.cs001.some_key2", "some_val2")
+                        ("dotnet_diagnostic.cs001.some_key2", "some_val2"),
                     },
-                    new[] { ("dotnet_diagnostic.cs001.some_key2", "some_val2") }
+                    new[] { ("dotnet_diagnostic.cs001.some_key2", "some_val2") },
                 },
                 options
             );
@@ -1612,7 +1612,7 @@ dotnet_diagnostic.cs000.some_key = some_other_val",
                 new[]
                 {
                     new[] { ("dotnet_diagnostic.cs000.some_key", "some_val") },
-                    new[] { ("dotnet_diagnostic.cs000.some_key", "some_other_val") }
+                    new[] { ("dotnet_diagnostic.cs000.some_key", "some_other_val") },
                 },
                 options
             );
@@ -1648,11 +1648,11 @@ dotnet_diagnostic..some_key = some_val",
                 )
             );
 
-            var options = GetAnalyzerConfigOptions(new[] { "/test.cs", }, configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
             Assert.Equal(
-                new[] { CreateImmutableDictionary(("", ReportDiagnostic.Warn)), },
+                new[] { CreateImmutableDictionary(("", ReportDiagnostic.Warn)) },
                 options.Select(o => o.TreeOptions).ToArray()
             );
 
@@ -1676,13 +1676,13 @@ dotnet_diagnostic.some_key = some_val",
                 )
             );
 
-            var options = GetAnalyzerConfigOptions(new[] { "/test.cs", }, configs);
+            var options = GetAnalyzerConfigOptions(new[] { "/test.cs" }, configs);
             configs.Free();
 
             Assert.Equal(
                 new ImmutableDictionary<string, ReportDiagnostic>[]
                 {
-                    SyntaxTree.EmptyDiagnosticOptions
+                    SyntaxTree.EmptyDiagnosticOptions,
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -1693,8 +1693,8 @@ dotnet_diagnostic.some_key = some_val",
                     new[]
                     {
                         ("dotnet_diagnostic.severity", "warn"),
-                        ("dotnet_diagnostic.some_key", "some_val")
-                    }
+                        ("dotnet_diagnostic.some_key", "some_val"),
+                    },
                 },
                 options
             );
@@ -1724,7 +1724,7 @@ dotnet_diagnostic.cs000.severity = warning",
                 {
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn)),
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn)),
-                    SyntaxTree.EmptyDiagnosticOptions
+                    SyntaxTree.EmptyDiagnosticOptions,
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -2073,7 +2073,7 @@ option1 = value1
                 {
                     new[] { ("option1", "value1") },
                     new[] { ("option1", "value1") },
-                    new[] { ("option1", "value1") }
+                    new[] { ("option1", "value1") },
                 },
                 options
             );
@@ -2114,7 +2114,7 @@ option4 = value4
                     new (string, string)[] { },
                     new (string, string)[] { },
                     new (string, string)[] { ("option1", "value1") },
-                    new (string, string)[] { }
+                    new (string, string)[] { },
                 },
                 options
             );
@@ -2180,10 +2180,14 @@ option2 = config3
                     {
                         ("option1", "global"),
                         ("option2", "config3"), // overridden by config3
-                        ("option3", "config2") // overridden by config2
+                        (
+                            "option3",
+                            "config2"
+                        ) // overridden by config2
+                        ,
                     },
                     new[] { ("option1", "global"), ("option2", "config1"), ("option3", "config2") },
-                    new[] { ("option1", "global"), ("option2", "config1") }
+                    new[] { ("option1", "global"), ("option2", "config1") },
                 },
                 options
             );
@@ -2368,7 +2372,7 @@ dotnet_diagnostic.cs000.severity = error
                 new[]
                 {
                     SyntaxTree.EmptyDiagnosticOptions,
-                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error))
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Error)),
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -2478,7 +2482,7 @@ dotnet_diagnostic.cs000.severity = warning
                 new[]
                 {
                     CreateImmutableDictionary(("cs000", ReportDiagnostic.Suppress)),
-                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn))
+                    CreateImmutableDictionary(("cs000", ReportDiagnostic.Warn)),
                 },
                 options.Select(o => o.TreeOptions).ToArray()
             );
@@ -2582,10 +2586,14 @@ option2 = config3
                     {
                         ("option1", "global"),
                         ("option2", "config3"), // overridden by config3
-                        ("option3", "global") // not overridden by config2, because config3 is root
+                        (
+                            "option3",
+                            "global"
+                        ) // not overridden by config2, because config3 is root
+                        ,
                     },
                     new[] { ("option1", "global"), ("option2", "config1"), ("option3", "config2") },
-                    new[] { ("option1", "global"), ("option2", "config1"), ("option3", "global") }
+                    new[] { ("option1", "global"), ("option2", "config1"), ("option3", "global") },
                 },
                 options
             );

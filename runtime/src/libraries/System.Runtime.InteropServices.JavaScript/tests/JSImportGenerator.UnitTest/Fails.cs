@@ -22,19 +22,19 @@ namespace JSImportGenerator.Unit.Tests
                     "Please annotate the argument with 'JSMarshalAsAttribute' to specify marshaling of long. The generated source will not handle marshalling of the return value of method 'Import1'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                     "Please annotate the argument with 'JSMarshalAsAttribute' to specify marshaling of long. The generated source will not handle marshalling of the return value of method 'Export1'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                 },
-                null
+                null,
             };
             yield return new object?[]
             {
                 CodeSnippets.DefaultReturnMarshaler<object>(),
                 null,
-                null
+                null,
             };
             yield return new object?[]
             {
                 CodeSnippets.DefaultReturnMarshaler("System.Func<string>"),
                 null,
-                null
+                null,
             };
             yield return new object?[]
             {
@@ -44,25 +44,25 @@ namespace JSImportGenerator.Unit.Tests
                     "Please annotate the argument with 'JSMarshalAsAttribute' to specify marshaling of global::System.Action. The generated source will not handle marshalling of the return value of method 'Import1'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                     "Please annotate the argument with 'JSMarshalAsAttribute' to specify marshaling of global::System.Action. The generated source will not handle marshalling of the return value of method 'Export1'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                 },
-                null
+                null,
             };
             yield return new object?[]
             {
                 CodeSnippets.DefaultReturnMarshaler("System.Span<byte>"),
                 null,
-                null
+                null,
             };
             yield return new object?[]
             {
                 CodeSnippets.DefaultReturnMarshaler("System.Span<long>"),
                 null,
-                null
+                null,
             };
             yield return new object?[]
             {
                 CodeSnippets.DefaultReturnMarshaler("System.ArraySegment<byte>"),
                 null,
-                null
+                null,
             };
             yield return new object?[]
             {
@@ -85,7 +85,7 @@ namespace JSImportGenerator.Unit.Tests
                     "Please annotate the argument with 'JSMarshalAsAttribute' to specify marshaling of global::System.Threading.Tasks.Task<long>. The generated source will not handle marshalling of parameter 'a14'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                     "Please annotate the argument with 'JSMarshalAsAttribute' to specify marshaling of global::System.Threading.Tasks.Task<long>. The generated source will not handle marshalling of parameter 'a15'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                 },
-                null
+                null,
             };
             yield return new object?[]
             {
@@ -96,7 +96,7 @@ namespace JSImportGenerator.Unit.Tests
                     "Parameters with 'in', 'out' and 'ref' modifiers are not supported by source-generated JavaScript interop. The generated source will not handle marshalling of parameter 'a2'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                     "Parameters with 'in', 'out' and 'ref' modifiers are not supported by source-generated JavaScript interop. The generated source will not handle marshalling of parameter 'a3'. For more information see https://aka.ms/dotnet-wasm-jsinterop",
                 },
-                null
+                null,
             };
         }
 

@@ -212,7 +212,7 @@ public partial class MvcAnalyzer : DiagnosticAnalyzer
         WellKnownType.Microsoft_AspNetCore_Mvc_HttpOptionsAttribute,
         WellKnownType.Microsoft_AspNetCore_Mvc_HttpPatchAttribute,
         WellKnownType.Microsoft_AspNetCore_Mvc_HttpPostAttribute,
-        WellKnownType.Microsoft_AspNetCore_Mvc_HttpPutAttribute
+        WellKnownType.Microsoft_AspNetCore_Mvc_HttpPutAttribute,
     };
 
     private static RouteUsageModel? GetRouteUsageModel(

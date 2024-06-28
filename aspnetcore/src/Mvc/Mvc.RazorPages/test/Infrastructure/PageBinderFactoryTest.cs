@@ -236,7 +236,7 @@ public class PageBinderFactoryTest
                     Name = nameof(PageWithProperty.PropertyWithNoValue),
                     ParameterType = typeof(string),
                     Property = type.GetProperty(nameof(PageWithProperty.PropertyWithNoValue)),
-                }
+                },
             },
             HandlerTypeInfo = type,
             PageTypeInfo = type,
@@ -249,7 +249,7 @@ public class PageBinderFactoryTest
             new Dictionary<string, object>
             {
                 { nameof(PageWithProperty.Id), 10 },
-                { nameof(PageWithProperty.RouteDifferentValue), "route-value" }
+                { nameof(PageWithProperty.RouteDifferentValue), "route-value" },
             }
         );
 
@@ -260,7 +260,7 @@ public class PageBinderFactoryTest
             actionDescriptor
         );
 
-        var page = new PageWithProperty { PageContext = GetPageContext(), };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         // Act
         await factory(page.PageContext, page);
@@ -298,7 +298,7 @@ public class PageBinderFactoryTest
                     Name = nameof(PageModelWithProperty.PropertyWithNoValue),
                     ParameterType = typeof(string),
                     Property = type.GetProperty(nameof(PageModelWithProperty.PropertyWithNoValue)),
-                }
+                },
             },
 
             HandlerTypeInfo = typeof(PageModelWithProperty).GetTypeInfo(),
@@ -310,7 +310,7 @@ public class PageBinderFactoryTest
             new Dictionary<string, object>
             {
                 { nameof(PageModelWithProperty.Id), 10 },
-                { nameof(PageModelWithProperty.RouteDifferentValue), "route-value" }
+                { nameof(PageModelWithProperty.RouteDifferentValue), "route-value" },
             }
         );
 
@@ -419,7 +419,7 @@ public class PageBinderFactoryTest
                             (IRequestPredicateProvider)
                                 new BindPropertyAttribute() { SupportsGet = true }
                         ).RequestPredicate,
-                    }
+                    },
                 },
                 new PageBoundPropertyDescriptor()
                 {
@@ -435,7 +435,7 @@ public class PageBinderFactoryTest
         };
 
         var binder = new TestParameterBinder(
-            new Dictionary<string, object>() { { "SupportsGet", "value" }, { "Default", "set" }, }
+            new Dictionary<string, object>() { { "SupportsGet", "value" }, { "Default", "set" } }
         );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -483,7 +483,7 @@ public class PageBinderFactoryTest
                             (IRequestPredicateProvider)
                                 new BindPropertyAttribute() { SupportsGet = true }
                         ).RequestPredicate,
-                    }
+                    },
                 },
                 new PageBoundPropertyDescriptor()
                 {
@@ -499,7 +499,7 @@ public class PageBinderFactoryTest
         };
 
         var binder = new TestParameterBinder(
-            new Dictionary<string, object>() { { "SupportsGet", "value" }, { "Default", "value" }, }
+            new Dictionary<string, object>() { { "SupportsGet", "value" }, { "Default", "value" } }
         );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -655,7 +655,7 @@ public class PageBinderFactoryTest
 
         // Act
         var parameterBinder = new TestParameterBinder(
-            new Dictionary<string, object>() { { "id", "value" }, }
+            new Dictionary<string, object>() { { "id", "value" } }
         );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -699,7 +699,7 @@ public class PageBinderFactoryTest
 
         // Act
         var parameterBinder = new TestParameterBinder(
-            new Dictionary<string, object>() { { "id", "value" }, }
+            new Dictionary<string, object>() { { "id", "value" } }
         );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -790,7 +790,7 @@ public class PageBinderFactoryTest
 
         // Act
         var parameterBinder = new TestParameterBinder(
-            new Dictionary<string, object>() { { "id", "value" }, }
+            new Dictionary<string, object>() { { "id", "value" } }
         );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -804,7 +804,7 @@ public class PageBinderFactoryTest
         );
 
         var pageContext = GetPageContext();
-        var page = new PageWithProperty { PageContext = pageContext, };
+        var page = new PageWithProperty { PageContext = pageContext };
 
         var valueProviderFactory = new Mock<IValueProviderFactory>();
         valueProviderFactory
@@ -851,7 +851,7 @@ public class PageBinderFactoryTest
                         {
                             ParameterInfo = parameterInfo,
                             ParameterType = parameterInfo.ParameterType,
-                            Name = parameterInfo.Name
+                            Name = parameterInfo.Name,
                         },
                     },
                 },
@@ -867,7 +867,7 @@ public class PageBinderFactoryTest
 
         var httpContext = new DefaultHttpContext()
         {
-            RequestServices = services.BuildServiceProvider()
+            RequestServices = services.BuildServiceProvider(),
         };
 
         if (httpMethod != null)

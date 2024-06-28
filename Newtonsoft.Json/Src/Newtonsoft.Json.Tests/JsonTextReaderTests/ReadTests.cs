@@ -1894,7 +1894,7 @@ third line",
 
             JsonLoadSettings settings = new JsonLoadSettings
             {
-                DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error
+                DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error,
             };
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));

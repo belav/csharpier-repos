@@ -38,7 +38,7 @@ namespace System.Net.Tests
                 new CookieCollection() { new Cookie() },
                 120,
                 null,
-                null
+                null,
             };
 
             yield return new object[]
@@ -46,7 +46,7 @@ namespace System.Net.Tests
                 new CookieCollection() { new Cookie(), new Cookie("name", "value") },
                 144,
                 "Set-Cookie: name=value",
-                null
+                null,
             };
 
             yield return new object[]
@@ -54,7 +54,7 @@ namespace System.Net.Tests
                 new CookieCollection() { new Cookie("name", "value") },
                 144,
                 "Set-Cookie: name=value",
-                null
+                null,
             };
 
             yield return new object[]
@@ -62,7 +62,7 @@ namespace System.Net.Tests
                 new CookieCollection() { new Cookie("foo bar", "value") },
                 147,
                 "Set-Cookie: foo bar=value",
-                null
+                null,
             };
 
             yield return new object[]
@@ -70,11 +70,11 @@ namespace System.Net.Tests
                 new CookieCollection()
                 {
                     new Cookie("name1", "value1"),
-                    new Cookie("name2", "value2")
+                    new Cookie("name2", "value2"),
                 },
                 160,
                 "Set-Cookie: name1=value1, name2=value2",
-                null
+                null,
             };
 
             yield return new object[]
@@ -86,7 +86,7 @@ namespace System.Net.Tests
                 },
                 207,
                 null,
-                "Set-Cookie2: name1=value1; Port=\"200\"; Version=1, name2=value2; Port=\"300\"; Version=1"
+                "Set-Cookie2: name1=value1; Port=\"200\"; Version=1, name2=value2; Port=\"300\"; Version=1",
             };
 
             yield return new object[]
@@ -98,7 +98,7 @@ namespace System.Net.Tests
                 },
                 196,
                 "Set-Cookie: name1=value1",
-                "Set-Cookie2: name2=value2; Port=\"300\"; Version=1"
+                "Set-Cookie2: name2=value2; Port=\"300\"; Version=1",
             };
         }
 

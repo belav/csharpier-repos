@@ -49,7 +49,7 @@ namespace ILCompiler
                 FieldSize = layoutFromMetadata.FieldSize,
                 Offsets = layoutFromMetadata.Offsets,
                 LayoutAbiStable = false, // Int128 parameter passing ABI is unstable at this time
-                IsInt128OrHasInt128Fields = true
+                IsInt128OrHasInt128Fields = true,
             };
         }
 

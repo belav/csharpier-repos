@@ -42,7 +42,7 @@ public class OAuthChallengePropertiesTest
     {
         var properties = new OpenIdConnectChallengeProperties()
         {
-            MaxAge = TimeSpan.FromSeconds(200)
+            MaxAge = TimeSpan.FromSeconds(200),
         };
         Assert.Equal(TimeSpan.FromSeconds(200), properties.MaxAge);
     }

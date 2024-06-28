@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             {
                 RenameDashboard dashboard => dashboard.ShouldReceiveKeyboardNavigation,
                 RenameFlyout => true, // Always receive keyboard navigation for the inline adornment
-                _ => false
+                _ => false,
             };
 
         protected override void SetFocusToTextView(ITextView textView)

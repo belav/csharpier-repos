@@ -119,7 +119,7 @@ public class HubProtocolVersionTests : FunctionalTestBase
                     new HttpConnectionOptions
                     {
                         Transports = transportType,
-                        DefaultTransferFormat = TransferFormat.Text
+                        DefaultTransferFormat = TransferFormat.Text,
                     }
                 ),
                 LoggerFactory

@@ -79,7 +79,7 @@ namespace System.ComponentModel.Tests
             var descriptors = new EventDescriptor[]
             {
                 new MockEventDescriptor("descriptor1"),
-                new MockEventDescriptor("descriptor2")
+                new MockEventDescriptor("descriptor2"),
             };
             var collection = new EventDescriptorCollection(descriptors);
 

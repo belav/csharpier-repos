@@ -2282,7 +2282,7 @@ namespace System.Xml
             string[] args = new string[]
             {
                 ((uint)hi).ToString("X", CultureInfo.InvariantCulture),
-                ((uint)low).ToString("X", CultureInfo.InvariantCulture)
+                ((uint)low).ToString("X", CultureInfo.InvariantCulture),
             };
             return CreateException(
                 Res.Xml_InvalidSurrogatePairWithArgs,

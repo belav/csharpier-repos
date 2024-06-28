@@ -30,28 +30,28 @@ namespace Mono.Linker.Tests.Cases.FeatureSettings
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret" })]
         static bool GlobalConditionMethod()
         {
             throw new NotImplementedException();
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "ret" })]
         static bool AssemblyConditionMethod()
         {
             throw new NotImplementedException();
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret" })]
         static bool TypeConditionMethod()
         {
             throw new NotImplementedException();
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "ret" })]
         static bool MethodConditionMethod()
         {
             throw new NotImplementedException();
@@ -67,7 +67,7 @@ namespace Mono.Linker.Tests.Cases.FeatureSettings
                 "nop",
                 "ldc.i4.1",
                 "stsfld System.Boolean Mono.Linker.Tests.Cases.FeatureSettings.FeatureSubstitutionsNested::FieldConditionField",
-                "ret"
+                "ret",
             }
         )]
         static FeatureSubstitutionsNested() { }

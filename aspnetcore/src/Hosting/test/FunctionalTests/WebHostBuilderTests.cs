@@ -38,7 +38,7 @@ public class WebHostBuilderTests : LoggedTest
             var deploymentParameters = new DeploymentParameters(variant)
             {
                 ApplicationPath = applicationPath,
-                StatusMessagesEnabled = false
+                StatusMessagesEnabled = false,
             };
 
             using (var deployer = new SelfHostDeployer(deploymentParameters, loggerFactory))

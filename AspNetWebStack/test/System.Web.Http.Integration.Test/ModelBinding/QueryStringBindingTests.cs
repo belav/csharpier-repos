@@ -38,7 +38,7 @@ namespace System.Web.Http.ModelBinding
                 RequestUri = new Uri(
                     BaseAddress + String.Format("ModelBinding/{0}{1}", action, queryString)
                 ),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             // Act
@@ -69,7 +69,7 @@ namespace System.Web.Http.ModelBinding
                 RequestUri = new Uri(
                     BaseAddress + String.Format("ModelBinding/{0}{1}", action, queryString)
                 ),
-                Method = HttpMethod.Post
+                Method = HttpMethod.Post,
             };
 
             // Act
@@ -102,14 +102,14 @@ namespace System.Web.Http.ModelBinding
                 RequestUri = new Uri(
                     BaseAddress + String.Format("ModelBinding/{0}?{1}", action, queryString)
                 ),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             ModelBindOrder expectedItem = new ModelBindOrder()
             {
                 ItemName = itemName,
                 Quantity = quantity,
-                Customer = new ModelBindCustomer { Name = customerName }
+                Customer = new ModelBindCustomer { Name = customerName },
             };
 
             // Act
@@ -142,13 +142,13 @@ namespace System.Web.Http.ModelBinding
                 RequestUri = new Uri(
                     BaseAddress + String.Format("ModelBinding/{0}?{1}", action, queryString)
                 ),
-                Method = HttpMethod.Post
+                Method = HttpMethod.Post,
             };
             ModelBindOrder expectedItem = new ModelBindOrder()
             {
                 ItemName = itemName,
                 Quantity = quantity,
-                Customer = new ModelBindCustomer { Name = customerName }
+                Customer = new ModelBindCustomer { Name = customerName },
             };
 
             // Act
@@ -177,7 +177,7 @@ namespace System.Web.Http.ModelBinding
                 RequestUri = new Uri(
                     BaseAddress + String.Format("ModelBinding/{0}?{1}", action, queryString)
                 ),
-                Method = HttpMethod.Post
+                Method = HttpMethod.Post,
             };
 
             // Act

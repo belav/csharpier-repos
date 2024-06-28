@@ -95,7 +95,7 @@ namespace System.DirectoryServices.Protocols
             var mod = new DirectoryAttributeModification()
             {
                 Operation = operation,
-                Name = attributeName
+                Name = attributeName,
             };
             if (values != null)
             {

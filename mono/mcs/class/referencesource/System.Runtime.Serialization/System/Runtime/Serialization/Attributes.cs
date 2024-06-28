@@ -38,13 +38,13 @@ namespace System.Runtime.Serialization
                 DictionaryGlobals.RefLocalName,
                 DictionaryGlobals.ClrTypeLocalName,
                 DictionaryGlobals.ClrAssemblyLocalName,
-                DictionaryGlobals.ISerializableFactoryTypeLocalName
+                DictionaryGlobals.ISerializableFactoryTypeLocalName,
             };
 
             schemaInstanceLocalNames = new XmlDictionaryString[]
             {
                 DictionaryGlobals.XsiNilLocalName,
-                DictionaryGlobals.XsiTypeLocalName
+                DictionaryGlobals.XsiTypeLocalName,
             };
         }
 

@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.DependencyModel
             var options = new JsonWriterOptions
             {
                 Indented = true,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             };
             using (var jsonWriter = new Utf8JsonWriter(stream, options))
             {

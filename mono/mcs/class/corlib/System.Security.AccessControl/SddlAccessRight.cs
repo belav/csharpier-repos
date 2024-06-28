@@ -69,55 +69,55 @@ namespace System.Security.AccessControl
             {
                 Name = "CC",
                 Value = 0x00000001,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "DC",
                 Value = 0x00000002,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "LC",
                 Value = 0x00000004,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "SW",
                 Value = 0x00000008,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "RP",
                 Value = 0x00000010,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "WP",
                 Value = 0x00000020,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "DT",
                 Value = 0x00000040,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "LO",
                 Value = 0x00000080,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight
             {
                 Name = "CR",
                 Value = 0x00000100,
-                ObjectType = 1
+                ObjectType = 1,
             },
             new SddlAccessRight { Name = "SD", Value = 0x00010000 },
             new SddlAccessRight { Name = "RC", Value = 0x00020000 },
@@ -131,49 +131,49 @@ namespace System.Security.AccessControl
             {
                 Name = "FA",
                 Value = 0x001F01FF,
-                ObjectType = 2
+                ObjectType = 2,
             },
             new SddlAccessRight
             {
                 Name = "FR",
                 Value = 0x00120089,
-                ObjectType = 2
+                ObjectType = 2,
             },
             new SddlAccessRight
             {
                 Name = "FW",
                 Value = 0x00120116,
-                ObjectType = 2
+                ObjectType = 2,
             },
             new SddlAccessRight
             {
                 Name = "FX",
                 Value = 0x001200A0,
-                ObjectType = 2
+                ObjectType = 2,
             },
             new SddlAccessRight
             {
                 Name = "KA",
                 Value = 0x000F003F,
-                ObjectType = 3
+                ObjectType = 3,
             },
             new SddlAccessRight
             {
                 Name = "KR",
                 Value = 0x00020019,
-                ObjectType = 3
+                ObjectType = 3,
             },
             new SddlAccessRight
             {
                 Name = "KW",
                 Value = 0x00020006,
-                ObjectType = 3
+                ObjectType = 3,
             },
             new SddlAccessRight
             {
                 Name = "KX",
                 Value = 0x00020019,
-                ObjectType = 3
+                ObjectType = 3,
             },
             new SddlAccessRight { Name = "NW", Value = 0x00000001 },
             new SddlAccessRight { Name = "NR", Value = 0x00000002 },

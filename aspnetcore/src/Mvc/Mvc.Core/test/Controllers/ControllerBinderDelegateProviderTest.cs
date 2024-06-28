@@ -36,7 +36,7 @@ public class ControllerBinderDelegateProviderTest
                 Name = "foo",
                 ParameterType = typeof(object),
                 BindingInfo = new BindingInfo(),
-                ParameterInfo = ParameterInfos.BindNeverParameterInfo
+                ParameterInfo = ParameterInfos.BindNeverParameterInfo,
             }
         );
 
@@ -85,7 +85,7 @@ public class ControllerBinderDelegateProviderTest
             new ParameterDescriptor
             {
                 Name = nameof(TestController.RequiredButBindNeverProperty),
-                ParameterType = typeof(object)
+                ParameterType = typeof(object),
             }
         );
 
@@ -273,7 +273,7 @@ public class ControllerBinderDelegateProviderTest
             {
                 Name = "foo",
                 ParameterType = typeof(object),
-                ParameterInfo = ParameterInfos.NoAttributesParameterInfo
+                ParameterInfo = ParameterInfos.NoAttributesParameterInfo,
             }
         );
 
@@ -378,7 +378,7 @@ public class ControllerBinderDelegateProviderTest
             {
                 Name = "foo",
                 ParameterType = typeof(object),
-                ParameterInfo = ParameterInfos.CustomValidationParameterInfo
+                ParameterInfo = ParameterInfos.CustomValidationParameterInfo,
             }
         );
 
@@ -639,7 +639,7 @@ public class ControllerBinderDelegateProviderTest
             {
                 Name = nameof(TestController.StringProperty),
                 BindingInfo = new BindingInfo(),
-                ParameterType = typeof(string)
+                ParameterType = typeof(string),
             }
         );
 
@@ -718,7 +718,7 @@ public class ControllerBinderDelegateProviderTest
             {
                 Name = nameof(TestController.NonNullableProperty),
                 BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
-                ParameterType = typeof(int)
+                ParameterType = typeof(int),
             }
         );
 
@@ -759,7 +759,7 @@ public class ControllerBinderDelegateProviderTest
             {
                 Name = "NullableProperty",
                 BindingInfo = new BindingInfo() { BindingSource = BindingSource.Custom },
-                ParameterType = typeof(int?)
+                ParameterType = typeof(int?),
             }
         );
 
@@ -809,7 +809,7 @@ public class ControllerBinderDelegateProviderTest
                         (IRequestPredicateProvider)new BindPropertyAttribute()
                     ).RequestPredicate,
                 },
-                ParameterType = typeof(string)
+                ParameterType = typeof(string),
             }
         );
 
@@ -826,7 +826,7 @@ public class ControllerBinderDelegateProviderTest
                         (IRequestPredicateProvider)new BindPropertyAttribute()
                     ).RequestPredicate,
                 },
-                ParameterType = typeof(string)
+                ParameterType = typeof(string),
             }
         );
 
@@ -879,7 +879,7 @@ public class ControllerBinderDelegateProviderTest
                         (IRequestPredicateProvider)new BindPropertyAttribute()
                     ).RequestPredicate,
                 },
-                ParameterType = typeof(string)
+                ParameterType = typeof(string),
             }
         );
 
@@ -896,7 +896,7 @@ public class ControllerBinderDelegateProviderTest
                         (IRequestPredicateProvider)new BindPropertyAttribute()
                     ).RequestPredicate,
                 },
-                ParameterType = typeof(string)
+                ParameterType = typeof(string),
             }
         );
 
@@ -1128,8 +1128,8 @@ public class ControllerBinderDelegateProviderTest
                     {
                         Name = "transferInfo",
                         ParameterType = typeof(TransferInfo),
-                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
-                    }
+                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+                    },
                 },
                 new List<ParameterDescriptor>()
                 {
@@ -1137,10 +1137,10 @@ public class ControllerBinderDelegateProviderTest
                     {
                         Name = "transferInfo",
                         ParameterType = typeof(TransferInfo),
-                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
+                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
                     },
-                    new ParameterDescriptor() { Name = "accountId", ParameterType = typeof(int) }
-                }
+                    new ParameterDescriptor() { Name = "accountId", ParameterType = typeof(int) },
+                },
             };
         }
     }
@@ -1156,7 +1156,7 @@ public class ControllerBinderDelegateProviderTest
         var actionDescriptor = new ControllerActionDescriptor()
         {
             BoundProperties = new List<ParameterDescriptor>(),
-            Parameters = parameters
+            Parameters = parameters,
         };
         var modelMetadataProvider = new EmptyModelMetadataProvider();
         var modelBinderProvider = new BodyModelBinderProvider(
@@ -1252,7 +1252,7 @@ public class ControllerBinderDelegateProviderTest
             BoundProperties = new List<ParameterDescriptor>(),
             Parameters = new[]
             {
-                new ParameterDescriptor { Name = "name", ParameterType = typeof(string) }
+                new ParameterDescriptor { Name = "name", ParameterType = typeof(string) },
             },
         };
         var modelMetadataProvider = new EmptyModelMetadataProvider();
@@ -1309,7 +1309,7 @@ public class ControllerBinderDelegateProviderTest
             ActionDescriptor = descriptor ?? GetActionDescriptor(),
             HttpContext = new DefaultHttpContext()
             {
-                RequestServices = services.BuildServiceProvider()
+                RequestServices = services.BuildServiceProvider(),
             },
             RouteData = new RouteData(),
         };
@@ -1326,7 +1326,7 @@ public class ControllerBinderDelegateProviderTest
             MethodInfo = method.GetMethodInfo(),
             ControllerTypeInfo = typeof(TestController).GetTypeInfo(),
             BoundProperties = new List<ParameterDescriptor>(),
-            Parameters = new List<ParameterDescriptor>()
+            Parameters = new List<ParameterDescriptor>(),
         };
     }
 

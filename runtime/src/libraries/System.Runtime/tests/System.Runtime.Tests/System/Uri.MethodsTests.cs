@@ -20,7 +20,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/"),
                 new Uri("http://www.domain.com/path1/path2/path3"),
-                new Uri("path1/path2/path3", UriKind.Relative)
+                new Uri("path1/path2/path3", UriKind.Relative),
             };
 
             // Path (forward x2)
@@ -28,7 +28,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/"),
                 new Uri("http://www.domain.com/path1/path2/path3"),
-                new Uri("path2/path3", UriKind.Relative)
+                new Uri("path2/path3", UriKind.Relative),
             };
 
             // Path (forward x1)
@@ -36,7 +36,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/"),
                 new Uri("http://www.domain.com/path1/path2/path3"),
-                new Uri("path3", UriKind.Relative)
+                new Uri("path3", UriKind.Relative),
             };
 
             // Path same
@@ -44,7 +44,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/path3"),
                 new Uri("http://www.domain.com/path1/path2/path3"),
-                new Uri("", UriKind.Relative)
+                new Uri("", UriKind.Relative),
             };
 
             // Same path (backward x1)
@@ -52,7 +52,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/"),
                 new Uri("http://www.domain.com/path1/"),
-                new Uri("../", UriKind.Relative)
+                new Uri("../", UriKind.Relative),
             };
 
             // Path (backward x1, forward x1)
@@ -60,7 +60,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/"),
                 new Uri("http://www.domain.com/path1/path3"),
-                new Uri("../path3", UriKind.Relative)
+                new Uri("../path3", UriKind.Relative),
             };
 
             // Path (backward x2)
@@ -68,7 +68,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/path3/"),
                 new Uri("http://www.domain.com/path1/"),
-                new Uri("../../", UriKind.Relative)
+                new Uri("../../", UriKind.Relative),
             };
 
             // Path (backward x2, forward x2)
@@ -76,7 +76,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/path3/"),
                 new Uri("http://www.domain.com/path1/path4/path5"),
-                new Uri("../../path4/path5", UriKind.Relative)
+                new Uri("../../path4/path5", UriKind.Relative),
             };
 
             // Path (backward x3)
@@ -84,7 +84,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path1/path2/path3/"),
                 new Uri("http://www.domain.com/"),
-                new Uri("../../../", UriKind.Relative)
+                new Uri("../../../", UriKind.Relative),
             };
 
             // Query
@@ -92,7 +92,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/"),
                 new Uri("http://www.domain.com/?query"),
-                new Uri("?query", UriKind.Relative)
+                new Uri("?query", UriKind.Relative),
             };
 
             // Fragment
@@ -100,7 +100,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/"),
                 new Uri("http://www.domain.com/#fragment"),
-                new Uri("#fragment", UriKind.Relative)
+                new Uri("#fragment", UriKind.Relative),
             };
 
             // Path, query, fragment
@@ -108,7 +108,7 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/"),
                 new Uri("http://www.domain.com/index.htm?query1=value#fragment"),
-                new Uri("index.htm?query1=value#fragment", UriKind.Relative)
+                new Uri("index.htm?query1=value#fragment", UriKind.Relative),
             };
 
             // Different scheme
@@ -116,7 +116,7 @@ namespace System.Tests
             {
                 new Uri("https://www.domain.com/"),
                 new Uri("http://www.domain.com/index.htm?query1=value"),
-                new Uri("http://www.domain.com/index.htm?query1=value")
+                new Uri("http://www.domain.com/index.htm?query1=value"),
             };
 
             // Different domain
@@ -124,7 +124,7 @@ namespace System.Tests
             {
                 new Uri("http://www.abc.com/"),
                 new Uri("http://www.xyz.com/index.htm?query1=value"),
-                new Uri("http://www.xyz.com/index.htm?query1=value")
+                new Uri("http://www.xyz.com/index.htm?query1=value"),
             };
 
             // Different port
@@ -132,7 +132,7 @@ namespace System.Tests
             {
                 new Uri("http://www.abc:80/"),
                 new Uri("http://www.abc:90/index.htm?query1=value"),
-                new Uri("http://www.abc:90/index.htm?query1=value")
+                new Uri("http://www.abc:90/index.htm?query1=value"),
             };
 
             // Ignores userinfo
@@ -140,7 +140,7 @@ namespace System.Tests
             {
                 new Uri("http://userinfo@domain.com/"),
                 new Uri("http://domain.com/path1/path2"),
-                new Uri("path1/path2", UriKind.Relative)
+                new Uri("path1/path2", UriKind.Relative),
             };
 
             // Urn (relative uris cannot have semicolons)
@@ -148,7 +148,7 @@ namespace System.Tests
             {
                 new Uri("urn:namespace:segment1:segment2"),
                 new Uri("urn:namespace:segment1:segment2:segment3"),
-                new Uri("./namespace:segment1:segment2:segment3", UriKind.Relative)
+                new Uri("./namespace:segment1:segment2:segment3", UriKind.Relative),
             };
 
             // Only UNC or DOS uris are case insensitive
@@ -156,26 +156,26 @@ namespace System.Tests
             {
                 new Uri("http://domain.com/PATH1/path2/PATH3"),
                 new Uri("http://domain.com/path1/path2/path3"),
-                new Uri("../../path1/path2/path3", UriKind.Relative)
+                new Uri("../../path1/path2/path3", UriKind.Relative),
             };
             yield return new object[]
             {
                 new Uri(@"\\servername\PATH1\path2\PATH3"),
                 new Uri(@"\\servername\path1\path2\path3"),
-                new Uri("", UriKind.Relative)
+                new Uri("", UriKind.Relative),
             };
             yield return new object[]
             {
                 new Uri("file://C:/PATH1/path2/PATH3"),
                 new Uri("file://C:/path1/path2/path3"),
-                new Uri("", UriKind.Relative)
+                new Uri("", UriKind.Relative),
             };
             // Unix paths are case sensitive
             yield return new object[]
             {
                 new Uri("file:///PATH1/path2/PATH3"),
                 new Uri("file:///path1/path2/path3"),
-                new Uri("../../path1/path2/path3", UriKind.Relative)
+                new Uri("../../path1/path2/path3", UriKind.Relative),
             };
             if (!s_isWindowsSystem) // Unix path
             {
@@ -183,7 +183,7 @@ namespace System.Tests
                 {
                     new Uri("/PATH1/path2/PATH3"),
                     new Uri("/path1/path2/path3"),
-                    new Uri("../../path1/path2/path3", UriKind.Relative)
+                    new Uri("../../path1/path2/path3", UriKind.Relative),
                 };
             }
 
@@ -192,7 +192,7 @@ namespace System.Tests
             {
                 new Uri("http://domain.com/path1/file"),
                 new Uri("http://domain.com/path1/"),
-                new Uri("./", UriKind.Relative)
+                new Uri("./", UriKind.Relative),
             };
 
             // Empty path
@@ -200,13 +200,13 @@ namespace System.Tests
             {
                 new Uri("unknownscheme:"),
                 new Uri("unknownscheme:path"),
-                new Uri("path", UriKind.Relative)
+                new Uri("path", UriKind.Relative),
             };
             yield return new object[]
             {
                 new Uri("unknownscheme:path"),
                 new Uri("unknownscheme:"),
-                new Uri("", UriKind.Relative)
+                new Uri("", UriKind.Relative),
             };
         }
 
@@ -304,97 +304,97 @@ namespace System.Tests
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/file?query"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/file/"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/#fragment"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/MoreDir/\""),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/OtherFile?Query"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path/file"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path?query"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path#fragment"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path2/path"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path2"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/path2/path3"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/path/File"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/?query"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("http://host/#fragment"),
-                false
+                false,
             };
 
             yield return new object[] { new Uri("http://host"), new Uri("https://host"), false }; // Different scheme
@@ -403,19 +403,19 @@ namespace System.Tests
             {
                 new Uri("host", UriKind.Relative),
                 new Uri("http://host"),
-                false
+                false,
             }; // Uri1 is relative
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("path/path/file?query", UriKind.Relative),
-                true
+                true,
             }; // Uri2 is relative
             yield return new object[]
             {
                 new Uri("http://host/path/path/file?query"),
                 new Uri("path/path/file", UriKind.Relative),
-                true
+                true,
             }; // Uri2 is relative
 
             // Uri1 is a file
@@ -423,50 +423,50 @@ namespace System.Tests
             {
                 new Uri("file://C:/path/path/file"),
                 new Uri("file://C:/path/path/path"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path/path/file"),
                 new Uri("file://D:/path/path/path"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path/path/file"),
                 new Uri("http://host/path/path/file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path/path/file"),
                 new Uri("path/path/file", UriKind.Relative),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 new Uri("https://user@domain.com"),
                 new Uri("https://domain.com"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("https://user@domain.com"),
                 new Uri("http://domain.com"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("https://user1@domain.com"),
                 new Uri("https://user2@domain.com"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("https://domain.com"),
                 new Uri("https://user@domain.com"),
-                true
+                true,
             };
         }
 
@@ -570,7 +570,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -579,7 +579,7 @@ namespace System.Tests
                 UriComponents.Query,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -588,7 +588,7 @@ namespace System.Tests
                 UriComponents.Fragment,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -597,7 +597,7 @@ namespace System.Tests
                 UriComponents.Query | UriComponents.Fragment,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                1
+                1,
             };
 
             yield return new object[]
@@ -607,7 +607,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -616,7 +616,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -625,7 +625,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                0
+                0,
             };
 
             yield return new object[]
@@ -635,7 +635,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -644,7 +644,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                0
+                0,
             };
             yield return new object[]
             {
@@ -653,7 +653,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -662,7 +662,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -671,7 +671,7 @@ namespace System.Tests
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
                 StringComparison.CurrentCulture,
-                -1
+                -1,
             };
         }
 
@@ -727,88 +727,88 @@ namespace System.Tests
             {
                 new Uri("http://domain.com"),
                 new Uri("http://domain.com"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("https://www.domain.com"),
                 new Uri("http://www.domain.com"),
-                false
+                false,
             }; // Different scheme
             yield return new object[]
             {
                 new Uri("http://domain.com"),
                 new Uri("http://www.domain.com"),
-                false
+                false,
             }; // Different domain
 
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#fragment"),
                 new Uri("http://www.domain.com/path?name#fragment"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name"),
                 new Uri("http://www.domain.com/path?name#fragment"),
-                true
+                true,
             }; // Fragments are ignored
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#fragment"),
                 new Uri("http://aaa.domain.com/path?bame#fragment"),
-                false
+                false,
             }; // Different domain
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#fragment"),
                 new Uri("http://www.domain.com/path?bame#fragment"),
-                false
+                false,
             }; // Different query
             yield return new object[]
             {
                 new Uri("http://www.domain.com/page.html"),
                 new Uri("http://www.username:password@domain.com/page.html"),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name"),
                 new Uri("http://www.domain.com/?name"),
-                false
+                false,
             }; // Different path
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 new Uri("http://www.domain.com/path1?name#slag"),
-                false
+                false,
             }; // Different path
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name"),
                 new Uri("http://www.domain.com/path/?name2"),
-                false
+                false,
             }; // Different query
 
             yield return new object[]
             {
                 new Uri("http://www.domain.com:100/path?name#fragment"),
                 new Uri("http://www.domain.com:100/path?name#fragment"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com:100/path?name#fragment"),
                 new Uri("http://www.domain.com:800/path?name#fragment"),
-                false
+                false,
             }; // Different port
             yield return new object[]
             {
                 new Uri("http://www.domain.com:100/path?name#fragment"),
                 new Uri("http://www.domain.com:80/path?name#fragment"),
-                false
+                false,
             }; // Different port
 
             // File paths
@@ -816,49 +816,49 @@ namespace System.Tests
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("file://C:/path1/path2/file"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("file://C:/path1/Path2/File"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("file://D:/path1/path2/file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("file://C:/path2/path2/file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("file://C:/path1/path1/file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("file://C:/path1/path2/file!"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri("http://domain.com"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("file://C:/path1/path2/file"),
                 new Uri(@"\\server\path1\path2\file"),
-                false
+                false,
             };
 
             // UNC share paths
@@ -866,31 +866,31 @@ namespace System.Tests
             {
                 new Uri(@"\\server\sharepath\path\file"),
                 new Uri(@"\\server\sharepath\path\file"),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri(@"\\server\sharepath\path\file"),
                 new Uri(@"\\server1\sharepath\path\file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri(@"\\server\sharepath\path\file"),
                 new Uri(@"\\server\sharepata\path\file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri(@"\\server\sharepath\path\file"),
                 new Uri(@"\\server\sharepath\pata\file"),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri(@"\\server\sharepath\path\file"),
                 new Uri(@"\\server\sharepath\path\file!"),
-                false
+                false,
             };
 
             // Unix path
@@ -901,37 +901,37 @@ namespace System.Tests
                 {
                     new Uri("/sharepath/path/file"),
                     new Uri("/sharepath/path/file"),
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     new Uri("/sharepath/path/file"),
                     new Uri("/sharepath/path/File"),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new Uri("/sharepath/path/file"),
                     new Uri("/sharepata/path/file"),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new Uri("/sharepath/path/file"),
                     new Uri("/sharepath/pata/file"),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new Uri("/sharepath/path/file"),
                     new Uri("/sharepath/path/file!"),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new Uri(@"/shar\path/path/file"),
                     new Uri("/shar/path/path/file"),
-                    false
+                    false,
                 };
             }
 
@@ -940,25 +940,25 @@ namespace System.Tests
             {
                 new Uri("/path1/path2/", UriKind.Relative),
                 new Uri("/path1/path2/", UriKind.Relative),
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("/path1/path2/", UriKind.Relative),
                 new Uri("/path1/path2", UriKind.Relative),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("/path1/path2/", UriKind.Relative),
                 new Uri("/path3/path4/", UriKind.Relative),
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("/domain/", UriKind.Relative),
                 new Uri("http://domain/"),
-                false
+                false,
             }; // Relative and absolute uris are never equal
 
             Uri uri = new Uri("http://domain.com/");
@@ -971,7 +971,7 @@ namespace System.Tests
             {
                 new Uri("", UriKind.Relative),
                 new Uri("", UriKind.Relative),
-                true
+                true,
             };
 
             // A uri can equal a string
@@ -979,37 +979,37 @@ namespace System.Tests
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 "http://www.domain.com/path?name#frag",
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 "http://www.domain.com/path?name#aaaa",
-                true
+                true,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 "http://www.domain.com/aaaaaaaaaaaaaa",
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 "http://www.domain.com/",
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 @"http://www.domain.com\",
-                false
+                false,
             };
             yield return new object[]
             {
                 new Uri("http://www.domain.com/path?name#frag"),
                 123,
-                false
+                false,
             };
         }
 
@@ -1152,7 +1152,7 @@ namespace System.Tests
             {
                 fullUri,
                 UriComponents.AbsoluteUri,
-                "http://userinfo@www.domain.com/path?query=value&query2=value2#fragment"
+                "http://userinfo@www.domain.com/path?query=value&query2=value2#fragment",
             };
             yield return new object[] { fullUri, UriComponents.Fragment, "fragment" };
             yield return new object[] { fullUri, UriComponents.Host, "www.domain.com" };
@@ -1161,7 +1161,7 @@ namespace System.Tests
             {
                 fullUri,
                 UriComponents.HttpRequestUrl,
-                "http://www.domain.com/path?query=value&query2=value2"
+                "http://www.domain.com/path?query=value&query2=value2",
             };
             yield return new object[] { fullUri, UriComponents.NormalizedHost, "www.domain.com" };
             yield return new object[] { fullUri, UriComponents.Path, "path" };
@@ -1169,7 +1169,7 @@ namespace System.Tests
             {
                 fullUri,
                 UriComponents.PathAndQuery,
-                "/path?query=value&query2=value2"
+                "/path?query=value&query2=value2",
             };
             yield return new object[] { fullUri, UriComponents.Port, "" };
             yield return new object[] { fullUri, UriComponents.Query, "query=value&query2=value2" };
@@ -1178,19 +1178,19 @@ namespace System.Tests
             {
                 fullUri,
                 UriComponents.SchemeAndServer,
-                "http://www.domain.com"
+                "http://www.domain.com",
             };
             yield return new object[]
             {
                 fullUri,
                 UriComponents.SerializationInfoString,
-                "http://userinfo@www.domain.com/path?query=value&query2=value2#fragment"
+                "http://userinfo@www.domain.com/path?query=value&query2=value2#fragment",
             };
             yield return new object[]
             {
                 fullUri,
                 UriComponents.StrongAuthority,
-                "userinfo@www.domain.com:80"
+                "userinfo@www.domain.com:80",
             };
             yield return new object[] { fullUri, UriComponents.StrongPort, "80" };
             yield return new object[] { fullUri, UriComponents.UserInfo, "userinfo" };
@@ -1202,13 +1202,13 @@ namespace System.Tests
             {
                 unicodeHostUri,
                 UriComponents.Host,
-                "\u043F\u0440\u0438\u0432\u0435\u0442.\u03B2\u03AD\u03BB\u03B1\u03C3\u03BC\u03B1"
+                "\u043F\u0440\u0438\u0432\u0435\u0442.\u03B2\u03AD\u03BB\u03B1\u03C3\u03BC\u03B1",
             };
             yield return new object[]
             {
                 unicodeHostUri,
                 UriComponents.NormalizedHost,
-                "\u043F\u0440\u0438\u0432\u0435\u0442.\u03B2\u03AD\u03BB\u03B1\u03C3\u03BC\u03B1"
+                "\u043F\u0440\u0438\u0432\u0435\u0442.\u03B2\u03AD\u03BB\u03B1\u03C3\u03BC\u03B1",
             };
 
             // Punicode
@@ -1217,13 +1217,13 @@ namespace System.Tests
             {
                 punicodeUriWithoutAscii,
                 UriComponents.Host,
-                "xn--b1agh1afp"
+                "xn--b1agh1afp",
             };
             yield return new object[]
             {
                 punicodeUriWithoutAscii,
                 UriComponents.NormalizedHost,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
 
             Uri punicodeUriWithAscii1 = new Uri("http://xn--b1agh1afp.xyza");
@@ -1231,13 +1231,13 @@ namespace System.Tests
             {
                 punicodeUriWithAscii1,
                 UriComponents.Host,
-                "xn--b1agh1afp.xyza"
+                "xn--b1agh1afp.xyza",
             };
             yield return new object[]
             {
                 punicodeUriWithAscii1,
                 UriComponents.NormalizedHost,
-                "\u043F\u0440\u0438\u0432\u0435\u0442.xyza"
+                "\u043F\u0440\u0438\u0432\u0435\u0442.xyza",
             };
 
             Uri punicodeUriWithAscii2 = new Uri("http://xn--b1agh1afp.ascii.xn--b1agh1afp");
@@ -1245,13 +1245,13 @@ namespace System.Tests
             {
                 punicodeUriWithAscii2,
                 UriComponents.Host,
-                "xn--b1agh1afp.ascii.xn--b1agh1afp"
+                "xn--b1agh1afp.ascii.xn--b1agh1afp",
             };
             yield return new object[]
             {
                 punicodeUriWithAscii2,
                 UriComponents.NormalizedHost,
-                "\u043F\u0440\u0438\u0432\u0435\u0442.ascii.\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442.ascii.\u043F\u0440\u0438\u0432\u0435\u0442",
             };
 
             Uri invalidPunicodeUri = new Uri("http://xn--\u1234pck.com");
@@ -1259,7 +1259,7 @@ namespace System.Tests
             {
                 invalidPunicodeUri,
                 UriComponents.Host,
-                "xn--\u1234pck.com"
+                "xn--\u1234pck.com",
             };
             if (PlatformDetection.IsNlsGlobalization) // expected platform differences, see https://github.com/dotnet/runtime/issues/17190
             {
@@ -1267,7 +1267,7 @@ namespace System.Tests
                 {
                     invalidPunicodeUri,
                     UriComponents.NormalizedHost,
-                    "xn--\u1234pck.com"
+                    "xn--\u1234pck.com",
                 };
             }
 
@@ -1277,7 +1277,7 @@ namespace System.Tests
             {
                 customPortUri,
                 UriComponents.AbsoluteUri,
-                "http://www.domain.com:50/"
+                "http://www.domain.com:50/",
             };
             yield return new object[] { customPortUri, UriComponents.Fragment, "" };
             yield return new object[] { customPortUri, UriComponents.Host, "www.domain.com" };
@@ -1285,13 +1285,13 @@ namespace System.Tests
             {
                 customPortUri,
                 UriComponents.HostAndPort,
-                "www.domain.com:50"
+                "www.domain.com:50",
             };
             yield return new object[]
             {
                 customPortUri,
                 UriComponents.HttpRequestUrl,
-                "http://www.domain.com:50/"
+                "http://www.domain.com:50/",
             };
             yield return new object[] { customPortUri, UriComponents.Path, "" };
             yield return new object[] { customPortUri, UriComponents.PathAndQuery, "/" };
@@ -1302,19 +1302,19 @@ namespace System.Tests
             {
                 customPortUri,
                 UriComponents.SchemeAndServer,
-                "http://www.domain.com:50"
+                "http://www.domain.com:50",
             };
             yield return new object[]
             {
                 customPortUri,
                 UriComponents.SerializationInfoString,
-                "http://www.domain.com:50/"
+                "http://www.domain.com:50/",
             };
             yield return new object[]
             {
                 customPortUri,
                 UriComponents.StrongAuthority,
-                "www.domain.com:50"
+                "www.domain.com:50",
             };
             yield return new object[] { customPortUri, UriComponents.StrongPort, "50" };
             yield return new object[] { customPortUri, UriComponents.UserInfo, "" };
@@ -1324,7 +1324,7 @@ namespace System.Tests
             {
                 new Uri("http://[1111:2222:3333::431%16]"),
                 UriComponents.SerializationInfoString,
-                "http://[1111:2222:3333::431%16]/"
+                "http://[1111:2222:3333::431%16]/",
             }; // With scope id
 
             // File
@@ -1332,7 +1332,7 @@ namespace System.Tests
             {
                 new Uri("file:///C|/path1/path2/file"),
                 UriComponents.AbsoluteUri,
-                "file:///C:/path1/path2/file"
+                "file:///C:/path1/path2/file",
             }; // Non canonical
 
             Uri uncUri = new Uri("\\\\\u1234\u2345");
@@ -1348,7 +1348,7 @@ namespace System.Tests
             {
                 unknownUri,
                 UriComponents.HttpRequestUrl,
-                "unknownscheme:"
+                "unknownscheme:",
             };
             yield return new object[] { unknownUri, UriComponents.Path, "" };
             yield return new object[] { unknownUri, UriComponents.PathAndQuery, "" };
@@ -1359,13 +1359,13 @@ namespace System.Tests
             {
                 unknownUri,
                 UriComponents.SchemeAndServer,
-                "unknownscheme:"
+                "unknownscheme:",
             };
             yield return new object[]
             {
                 unknownUri,
                 UriComponents.SerializationInfoString,
-                "unknownscheme:"
+                "unknownscheme:",
             };
             yield return new object[] { unknownUri, UriComponents.StrongAuthority, "" };
             yield return new object[] { unknownUri, UriComponents.StrongPort, "" };
@@ -1378,7 +1378,7 @@ namespace System.Tests
             {
                 urnUri,
                 UriComponents.SerializationInfoString,
-                "urn:namespace:identifier"
+                "urn:namespace:identifier",
             };
 
             // Relative
@@ -1386,7 +1386,7 @@ namespace System.Tests
             {
                 new Uri("", UriKind.Relative),
                 UriComponents.SerializationInfoString,
-                ""
+                "",
             };
         }
 
@@ -1409,112 +1409,112 @@ namespace System.Tests
                 unescapedUri,
                 UriComponents.AbsoluteUri,
                 UriFormat.UriEscaped,
-                "http://ab%E1%88%B4%E2%8D%85%E3%91%96cd@\u043F\u0440\u0438\u0432\u0435\u0442/%E4%95%A7/%E5%99%B8?%E6%9E%89#%E7%A2%90"
+                "http://ab%E1%88%B4%E2%8D%85%E3%91%96cd@\u043F\u0440\u0438\u0432\u0435\u0442/%E4%95%A7/%E5%99%B8?%E6%9E%89#%E7%A2%90",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Fragment,
                 UriFormat.UriEscaped,
-                "%E7%A2%90"
+                "%E7%A2%90",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Host,
                 UriFormat.UriEscaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.HostAndPort,
                 UriFormat.UriEscaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442:80"
+                "\u043F\u0440\u0438\u0432\u0435\u0442:80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.HttpRequestUrl,
                 UriFormat.UriEscaped,
-                "http://\u043F\u0440\u0438\u0432\u0435\u0442/%E4%95%A7/%E5%99%B8?%E6%9E%89"
+                "http://\u043F\u0440\u0438\u0432\u0435\u0442/%E4%95%A7/%E5%99%B8?%E6%9E%89",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.NormalizedHost,
                 UriFormat.UriEscaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Path,
                 UriFormat.UriEscaped,
-                "%E4%95%A7/%E5%99%B8"
+                "%E4%95%A7/%E5%99%B8",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.PathAndQuery,
                 UriFormat.UriEscaped,
-                "/%E4%95%A7/%E5%99%B8?%E6%9E%89"
+                "/%E4%95%A7/%E5%99%B8?%E6%9E%89",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Port,
                 UriFormat.UriEscaped,
-                ""
+                "",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Query,
                 UriFormat.UriEscaped,
-                "%E6%9E%89"
+                "%E6%9E%89",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Scheme,
                 UriFormat.UriEscaped,
-                "http"
+                "http",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.SchemeAndServer,
                 UriFormat.UriEscaped,
-                "http://\u043F\u0440\u0438\u0432\u0435\u0442"
+                "http://\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.SerializationInfoString,
                 UriFormat.UriEscaped,
-                "http://ab%E1%88%B4%E2%8D%85%E3%91%96cd@\u043F\u0440\u0438\u0432\u0435\u0442/%E4%95%A7/%E5%99%B8?%E6%9E%89#%E7%A2%90"
+                "http://ab%E1%88%B4%E2%8D%85%E3%91%96cd@\u043F\u0440\u0438\u0432\u0435\u0442/%E4%95%A7/%E5%99%B8?%E6%9E%89#%E7%A2%90",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.StrongAuthority,
                 UriFormat.UriEscaped,
-                "ab%E1%88%B4%E2%8D%85%E3%91%96cd@\u043F\u0440\u0438\u0432\u0435\u0442:80"
+                "ab%E1%88%B4%E2%8D%85%E3%91%96cd@\u043F\u0440\u0438\u0432\u0435\u0442:80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.StrongPort,
                 UriFormat.UriEscaped,
-                "80"
+                "80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.UserInfo,
                 UriFormat.UriEscaped,
-                "ab%E1%88%B4%E2%8D%85%E3%91%96cd"
+                "ab%E1%88%B4%E2%8D%85%E3%91%96cd",
             };
 
             yield return new object[]
@@ -1522,56 +1522,56 @@ namespace System.Tests
                 unescapedUri,
                 UriComponents.AbsoluteUri,
                 UriFormat.Unescaped,
-                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890"
+                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Fragment,
                 UriFormat.Unescaped,
-                "\u7890"
+                "\u7890",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Host,
                 UriFormat.Unescaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.HostAndPort,
                 UriFormat.Unescaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442:80"
+                "\u043F\u0440\u0438\u0432\u0435\u0442:80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.HttpRequestUrl,
                 UriFormat.Unescaped,
-                "http://\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789"
+                "http://\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.NormalizedHost,
                 UriFormat.Unescaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Path,
                 UriFormat.Unescaped,
-                "\u4567/\u5678"
+                "\u4567/\u5678",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.PathAndQuery,
                 UriFormat.Unescaped,
-                "/\u4567/\u5678?\u6789"
+                "/\u4567/\u5678?\u6789",
             };
             yield return new object[] { unescapedUri, UriComponents.Port, UriFormat.Unescaped, "" };
             yield return new object[]
@@ -1579,49 +1579,49 @@ namespace System.Tests
                 unescapedUri,
                 UriComponents.Query,
                 UriFormat.Unescaped,
-                "\u6789"
+                "\u6789",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Scheme,
                 UriFormat.Unescaped,
-                "http"
+                "http",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.SchemeAndServer,
                 UriFormat.Unescaped,
-                "http://\u043F\u0440\u0438\u0432\u0435\u0442"
+                "http://\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.SerializationInfoString,
                 UriFormat.Unescaped,
-                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890"
+                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.StrongAuthority,
                 UriFormat.Unescaped,
-                "ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442:80"
+                "ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442:80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.StrongPort,
                 UriFormat.Unescaped,
-                "80"
+                "80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.UserInfo,
                 UriFormat.Unescaped,
-                "ab\u1234\u2345\u3456cd"
+                "ab\u1234\u2345\u3456cd",
             };
 
             yield return new object[]
@@ -1629,112 +1629,112 @@ namespace System.Tests
                 unescapedUri,
                 UriComponents.AbsoluteUri,
                 UriFormat.SafeUnescaped,
-                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890"
+                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Fragment,
                 UriFormat.SafeUnescaped,
-                "\u7890"
+                "\u7890",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Host,
                 UriFormat.SafeUnescaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.HostAndPort,
                 UriFormat.SafeUnescaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442:80"
+                "\u043F\u0440\u0438\u0432\u0435\u0442:80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.HttpRequestUrl,
                 UriFormat.SafeUnescaped,
-                "http://\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789"
+                "http://\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.NormalizedHost,
                 UriFormat.SafeUnescaped,
-                "\u043F\u0440\u0438\u0432\u0435\u0442"
+                "\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Path,
                 UriFormat.SafeUnescaped,
-                "\u4567/\u5678"
+                "\u4567/\u5678",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.PathAndQuery,
                 UriFormat.SafeUnescaped,
-                "/\u4567/\u5678?\u6789"
+                "/\u4567/\u5678?\u6789",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Port,
                 UriFormat.SafeUnescaped,
-                ""
+                "",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Query,
                 UriFormat.SafeUnescaped,
-                "\u6789"
+                "\u6789",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.Scheme,
                 UriFormat.SafeUnescaped,
-                "http"
+                "http",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.SchemeAndServer,
                 UriFormat.SafeUnescaped,
-                "http://\u043F\u0440\u0438\u0432\u0435\u0442"
+                "http://\u043F\u0440\u0438\u0432\u0435\u0442",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.SerializationInfoString,
                 UriFormat.SafeUnescaped,
-                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890"
+                "http://ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442/\u4567/\u5678?\u6789#\u7890",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.StrongAuthority,
                 UriFormat.SafeUnescaped,
-                "ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442:80"
+                "ab\u1234\u2345\u3456cd@\u043F\u0440\u0438\u0432\u0435\u0442:80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.StrongPort,
                 UriFormat.SafeUnescaped,
-                "80"
+                "80",
             };
             yield return new object[]
             {
                 unescapedUri,
                 UriComponents.UserInfo,
                 UriFormat.SafeUnescaped,
-                "ab\u1234\u2345\u3456cd"
+                "ab\u1234\u2345\u3456cd",
             };
 
             // Relative
@@ -1743,28 +1743,28 @@ namespace System.Tests
                 new Uri("path/file?query1&query2=value#fragment", UriKind.Relative),
                 UriComponents.SerializationInfoString,
                 UriFormat.UriEscaped,
-                "path/file?query1&query2=value#fragment"
+                "path/file?query1&query2=value#fragment",
             };
             yield return new object[]
             {
                 new Uri("\u1234\u2345\u3456", UriKind.Relative),
                 UriComponents.SerializationInfoString,
                 UriFormat.UriEscaped,
-                "%E1%88%B4%E2%8D%85%E3%91%96"
+                "%E1%88%B4%E2%8D%85%E3%91%96",
             };
             yield return new object[]
             {
                 new Uri("\u1234\u2345\u3456", UriKind.Relative),
                 UriComponents.SerializationInfoString,
                 UriFormat.Unescaped,
-                "\u1234\u2345\u3456"
+                "\u1234\u2345\u3456",
             };
             yield return new object[]
             {
                 new Uri("\u1234\u2345\u3456", UriKind.Relative),
                 UriComponents.SerializationInfoString,
                 UriFormat.SafeUnescaped,
-                "\u1234\u2345\u3456"
+                "\u1234\u2345\u3456",
             };
         }
 

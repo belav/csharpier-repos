@@ -26,7 +26,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 new TransformManyBlock<int, int>(
                     i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
                     new ExecutionDataflowBlockOptions { MaxMessagesPerTask = 1 }
-                )
+                ),
             };
             foreach (var block in blocks)
             {
@@ -44,7 +44,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 new TransformManyBlock<int, int>(
                     i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
                     new ExecutionDataflowBlockOptions { CancellationToken = cts.Token }
-                )
+                ),
             };
             foreach (var block in blocks)
             {
@@ -109,9 +109,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new ExecutionDataflowBlockOptions
                         {
                             BoundedCapacity = 10,
-                            MaxMessagesPerTask = 1
+                            MaxMessagesPerTask = 1,
                         }
-                    )
+                    ),
             };
             foreach (var generator in generators)
             {
@@ -141,7 +141,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new TransformManyBlock<int, int>(
                         i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
                         new ExecutionDataflowBlockOptions { BoundedCapacity = bounded ? 1 : -1 }
-                    )
+                    ),
                 }
             )
             {
@@ -170,7 +170,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new TransformManyBlock<int, int>(DataflowTestHelpers.ToEnumerable),
                     new TransformManyBlock<int, int>(i =>
                         Task.Run(() => DataflowTestHelpers.ToEnumerable(i))
-                    )
+                    ),
                 }
             )
             {
@@ -208,7 +208,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new TransformManyBlock<int, int>(i => Enumerable.Repeat(i * 2, 1)),
                         new TransformManyBlock<int, int>(i =>
                             Task.Run(() => Enumerable.Repeat(i * 2, 1))
-                        )
+                        ),
                     }
                 )
                 {
@@ -262,7 +262,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 TaskScheduler scheduler in new[]
                 {
                     TaskScheduler.Default,
-                    new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler
+                    new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler,
                 }
             )
             foreach (int maxMessagesPerTask in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
@@ -277,7 +277,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     BoundedCapacity = boundedCapacity,
                     MaxDegreeOfParallelism = dop,
                     MaxMessagesPerTask = maxMessagesPerTask,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 };
                 TransformManyBlock<int, int> tb = sync
                     ? new TransformManyBlock<int, int>(
@@ -328,7 +328,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             {
                 var options = new ExecutionDataflowBlockOptions
                 {
-                    BoundedCapacity = boundedCapacity
+                    BoundedCapacity = boundedCapacity,
                 };
                 foreach (
                     var tb in new[]
@@ -337,7 +337,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new TransformManyBlock<int, int>(
                             i => Task.Run(() => DataflowTestHelpers.ToEnumerable(i)),
                             options
-                        )
+                        ),
                     }
                 )
                 {
@@ -749,7 +749,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new ExecutionDataflowBlockOptions
                     {
                         MaxDegreeOfParallelism = dop,
-                        BoundedCapacity = boundedCapacity
+                        BoundedCapacity = boundedCapacity,
                     }
                 );
 
@@ -779,14 +779,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     var dbo = new ExecutionDataflowBlockOptions
                     {
                         BoundedCapacity = boundedCapacity,
-                        MaxDegreeOfParallelism = dop
+                        MaxDegreeOfParallelism = dop,
                     };
                     foreach (
                         IList<int> list in new IList<int>[]
                         {
                             new int[1],
                             new List<int> { 0 },
-                            new Collection<int> { 0 }
+                            new Collection<int> { 0 },
                         }
                     )
                     {
@@ -856,7 +856,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var options = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = dop,
-                MaxMessagesPerTask = mmpt
+                MaxMessagesPerTask = mmpt,
             };
             if (EnsureOrdered == null)
             {
@@ -893,7 +893,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var options = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = dop,
-                MaxMessagesPerTask = mmpt
+                MaxMessagesPerTask = mmpt,
             };
             if (EnsureOrdered == null)
             {
@@ -927,7 +927,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var options = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded,
-                EnsureOrdered = false
+                EnsureOrdered = false,
             };
 
             var tasks = new TaskCompletionSource<IEnumerable<int>>[10];
@@ -962,7 +962,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var options = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = 2,
-                EnsureOrdered = false
+                EnsureOrdered = false,
             };
 
             var mres = new ManualResetEventSlim();
@@ -998,7 +998,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var options = new ExecutionDataflowBlockOptions
             {
                 MaxDegreeOfParallelism = 2,
-                EnsureOrdered = ensureOrdered
+                EnsureOrdered = ensureOrdered,
             };
 
             ManualResetEventSlim mres1 = new ManualResetEventSlim(),

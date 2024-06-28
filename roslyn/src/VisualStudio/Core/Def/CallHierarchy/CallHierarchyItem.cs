@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                 .NavigateToAsync(
                     NavigationOptions.Default with
                     {
-                        PreferProvisionalTab = true
+                        PreferProvisionalTab = true,
                     },
                     context.UserCancellationToken
                 )

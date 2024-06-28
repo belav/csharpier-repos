@@ -103,7 +103,7 @@ namespace System.Security.Cryptography
                 0xf5,
                 0xf5,
                 0xf5,
-                0xc1
+                0xc1,
             ];
 
         /// <summary>
@@ -2163,7 +2163,7 @@ namespace System.Security.Cryptography
             CRYPT_IMPL_SOFTWARE = 0x2,
             CRYPT_IMPL_MIXED = 0x3,
             CRYPT_IMPL_UNKNOWN = 0x4,
-            CRYPT_IMPL_REMOVABLE = 0x8
+            CRYPT_IMPL_REMOVABLE = 0x8,
         }
 
         //All the flags are capture here
@@ -2175,7 +2175,9 @@ namespace System.Security.Cryptography
             KP_MODE_BITS = 5,
             KP_EFFECTIVE_KEYLEN = 19,
             KP_KEYLEN = 9, // Length of key in bits
-            KP_ALGID = 7 // Key algorithm
+            KP_ALGID =
+                7 // Key algorithm
+            ,
         }
 
         internal enum CryptGenKeyFlags : int
@@ -2196,13 +2198,13 @@ namespace System.Security.Cryptography
             CRYPT_DATA_KEY = 0x00000800,
             CRYPT_VOLATILE = 0x00001000,
             CRYPT_SGCKEY = 0x00002000,
-            CRYPT_ARCHIVABLE = 0x00004000
+            CRYPT_ARCHIVABLE = 0x00004000,
         }
 
         internal enum CspAlgorithmType
         {
             Rsa = 0,
-            Dss = 1
+            Dss = 1,
         }
 
         internal enum ClrPropertyId

@@ -581,7 +581,7 @@ namespace System.Numerics.Tests
                     {
                         Op_Plus(a, expected);
                     }
-                )
+                ),
             };
 
             var nineOrderOperations = new Action<BigInteger, BigInteger, BigInteger>[]
@@ -711,7 +711,7 @@ namespace System.Numerics.Tests
                     {
                         Op_Add(a, b, expected);
                     }
-                )
+                ),
             };
 
             Stopwatch stopWatch = new Stopwatch();

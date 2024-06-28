@@ -728,7 +728,7 @@ namespace System.Security.Cryptography.Tests
                     ['c'] = 0.2,
                     ['h'] = 0.2,
                     ['e'] = 0.2,
-                    ['s'] = 0.4
+                    ['s'] = 0.4,
                 }
             );
         }

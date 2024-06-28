@@ -41,7 +41,7 @@ namespace System.Activities.DurableInstancing
                 {
                     ParameterName = "@surrogateLockOwnerId",
                     SqlDbType = SqlDbType.BigInt,
-                    Value = this.surrogateLockOwnerId
+                    Value = this.surrogateLockOwnerId,
                 }
             );
         }

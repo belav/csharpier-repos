@@ -432,7 +432,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             TrustedIntermediateUntrustedRoot,
             UntrustedIntermediateTrustedRoot,
             TrustedIntermediateTrustedRoot,
-            MultipleCalls
+            MultipleCalls,
         }
 
         public static IEnumerable<object[]> BuildChainCustomTrustStoreData()
@@ -449,7 +449,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 {
                     false,
                     flags,
-                    BuildChainCustomTrustStoreTestArguments.TrustedIntermediateUntrustedRoot
+                    BuildChainCustomTrustStoreTestArguments.TrustedIntermediateUntrustedRoot,
                 };
             }
 
@@ -457,19 +457,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 true,
                 X509ChainStatusFlags.NoError,
-                BuildChainCustomTrustStoreTestArguments.UntrustedIntermediateTrustedRoot
+                BuildChainCustomTrustStoreTestArguments.UntrustedIntermediateTrustedRoot,
             };
             yield return new object[]
             {
                 true,
                 X509ChainStatusFlags.NoError,
-                BuildChainCustomTrustStoreTestArguments.TrustedIntermediateTrustedRoot
+                BuildChainCustomTrustStoreTestArguments.TrustedIntermediateTrustedRoot,
             };
             yield return new object[]
             {
                 true,
                 X509ChainStatusFlags.NoError,
-                BuildChainCustomTrustStoreTestArguments.MultipleCalls
+                BuildChainCustomTrustStoreTestArguments.MultipleCalls,
             };
         }
 

@@ -29,7 +29,7 @@ namespace System.Tests
         [Fact]
         public void FromChar()
         {
-            char[] testValues = { 'A', char.MinValue, };
+            char[] testValues = { 'A', char.MinValue };
             sbyte[] expectedValues = { 65, (sbyte)char.MinValue };
             Verify(Convert.ToSByte, testValues, expectedValues);
         }
@@ -115,8 +115,8 @@ namespace System.Tests
         [Fact]
         public void FromSingle()
         {
-            float[] testValues = { 100.0f, -100.0f, 0.0f, };
-            sbyte[] expectedValues = { 100, -100, 0, };
+            float[] testValues = { 100.0f, -100.0f, 0.0f };
+            sbyte[] expectedValues = { 100, -100, 0 };
             Verify(Convert.ToSByte, testValues, expectedValues);
 
             float[] overflowValues = { float.MaxValue, float.MinValue };
@@ -132,7 +132,7 @@ namespace System.Tests
                 "-100",
                 "0",
                 SByte.MinValue.ToString(),
-                SByte.MaxValue.ToString()
+                SByte.MaxValue.ToString(),
             };
             sbyte[] expectedValues = { 100, -100, 0, sbyte.MinValue, sbyte.MaxValue };
             VerifyFromString(Convert.ToSByte, Convert.ToSByte, testValues, expectedValues);
@@ -175,7 +175,7 @@ namespace System.Tests
                 "80",
                 "-128",
                 "200",
-                "10000000"
+                "10000000",
             };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2 };
             sbyte[] expectedValues =
@@ -191,7 +191,7 @@ namespace System.Tests
                 sbyte.MinValue,
                 sbyte.MinValue,
                 sbyte.MinValue,
-                sbyte.MinValue
+                sbyte.MinValue,
             };
             VerifyFromStringWithBase(Convert.ToSByte, testValues, testBases, expectedValues);
 

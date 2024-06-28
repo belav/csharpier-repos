@@ -86,7 +86,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new short[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new short[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             Marshal.WriteInt16(structure, pointerOffset, 200);
@@ -141,7 +141,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 pointerValue = (IntPtr)100,
                 stringValue = "ABC",
-                byValueArray = new short[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }
+                byValueArray = new short[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
             };
 
             Assert.Equal(100, Marshal.ReadInt16(structure, pointerOffset));

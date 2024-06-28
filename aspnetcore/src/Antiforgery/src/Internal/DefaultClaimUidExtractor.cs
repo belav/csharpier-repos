@@ -71,7 +71,7 @@ internal sealed class DefaultClaimUidExtractor : IClaimUidExtractor
                 {
                     nameIdentifierClaim.Type,
                     nameIdentifierClaim.Value,
-                    nameIdentifierClaim.Issuer
+                    nameIdentifierClaim.Issuer,
                 };
             }
 

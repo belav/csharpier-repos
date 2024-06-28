@@ -68,9 +68,9 @@ public class FileProviderRazorProjectFileSystemTest
     {
         // Arrange
         var fileProvider = new TestFileProvider("BasePath");
-        var directory1 = new TestDirectoryFileInfo { Name = "Level1-Dir1", };
+        var directory1 = new TestDirectoryFileInfo { Name = "Level1-Dir1" };
         var file1 = fileProvider.AddFile("File1.cshtml", "content");
-        var directory2 = new TestDirectoryFileInfo { Name = "Level1-Dir2", };
+        var directory2 = new TestDirectoryFileInfo { Name = "Level1-Dir2" };
         fileProvider.AddDirectoryContent("/", new IFileInfo[] { directory1, file1, directory2 });
 
         var file2 = fileProvider.AddFile("/Level1-Dir1/File2.cshtml", "content");
@@ -147,9 +147,9 @@ public class FileProviderRazorProjectFileSystemTest
     {
         // Arrange
         var fileProvider = new TestFileProvider("BasePath");
-        var directory1 = new TestDirectoryFileInfo { Name = "Level1-Dir1", };
+        var directory1 = new TestDirectoryFileInfo { Name = "Level1-Dir1" };
         var file1 = fileProvider.AddFile("/File1.cshtml", "content");
-        var directory2 = new TestDirectoryFileInfo { Name = "Level1-Dir2", };
+        var directory2 = new TestDirectoryFileInfo { Name = "Level1-Dir2" };
         fileProvider.AddDirectoryContent("/", new IFileInfo[] { directory1, file1, directory2 });
 
         var file2 = fileProvider.AddFile("/Level1-Dir1/File2.cshtml", "content");

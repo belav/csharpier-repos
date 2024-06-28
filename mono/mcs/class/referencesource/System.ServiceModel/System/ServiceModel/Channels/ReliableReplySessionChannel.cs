@@ -521,7 +521,7 @@ namespace System.ServiceModel.Channels
                     new OperationWithTimeoutBeginCallback(this.session.BeginClose),
                     new OperationWithTimeoutBeginCallback(this.BeginCloseBinder),
                     new OperationWithTimeoutBeginCallback(this.BeginUnregisterChannel),
-                    new OperationWithTimeoutBeginCallback(base.OnBeginClose)
+                    new OperationWithTimeoutBeginCallback(base.OnBeginClose),
                 };
 
             OperationEndCallback[] endOperations = new OperationEndCallback[]
@@ -536,7 +536,7 @@ namespace System.ServiceModel.Channels
                 new OperationEndCallback(this.session.EndClose),
                 new OperationEndCallback(this.EndCloseBinder),
                 new OperationEndCallback(this.EndUnregisterChannel),
-                new OperationEndCallback(base.OnEndClose)
+                new OperationEndCallback(base.OnEndClose),
             };
 
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(

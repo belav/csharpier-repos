@@ -140,7 +140,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Formatting = Formatting.Indented,
                 ContractResolver = new CamelCasePropertyNamesContractResolver(),
-                Converters = { new IsoDateTimeConverter() }
+                Converters = { new IsoDateTimeConverter() },
             };
 
             string json = JsonConvert.SerializeObject(rootFolder, settings);
@@ -340,14 +340,14 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new EntityKeyMember(
                         "DateTimeId",
                         new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc)
-                    )
+                    ),
                 }
             );
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
             };
 
             string json = JsonConvert.SerializeObject(e, settings);
@@ -424,7 +424,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new EntityKeyMember(
                         "DateTimeId",
                         new DateTime(2000, 12, 10, 10, 50, 0, DateTimeKind.Utc)
-                    )
+                    ),
                 }
             );
 

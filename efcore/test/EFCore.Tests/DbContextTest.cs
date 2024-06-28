@@ -66,8 +66,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
 
@@ -105,8 +105,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
 
@@ -190,8 +190,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
 
@@ -302,8 +302,8 @@ public partial class DbContextTest
                 new()
                 {
                     Author = context.Users.First(),
-                    Answers = new List<Answer> { new() { Author = context.Users.Last() } }
-                }
+                    Answers = new List<Answer> { new() { Author = context.Users.Last() } },
+                },
             };
 
             if (async)
@@ -380,7 +380,7 @@ public partial class DbContextTest
                 typeof(Product).FullName,
                 typeof(ProductWithSentinel).FullName,
                 typeof(TheGu).FullName,
-                typeof(TheGuWithSentinel).FullName
+                typeof(TheGuWithSentinel).FullName,
             },
             context.Model.GetEntityTypes().Select(e => e.Name).ToArray()
         );
@@ -571,17 +571,17 @@ public partial class DbContextTest
                         Name = "Little Hedgehogs",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146"),
                         },
                         Tag = new Tag
                         {
                             Name = "Tanavast",
                             Stamp = new Stamp
                             {
-                                Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                                Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                             },
-                            Notes = new[] { "A", "B" }
-                        }
+                            Notes = new[] { "A", "B" },
+                        },
                     }
                 )
             ).Entity;
@@ -628,17 +628,17 @@ public partial class DbContextTest
                         Name = "Little Hedgehogs",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7146"),
                         },
                         Tag = new Tag
                         {
                             Name = "Tanavast",
                             Stamp = new Stamp
                             {
-                                Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                                Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                             },
-                            Notes = new[] { "A", "B" }
-                        }
+                            Notes = new[] { "A", "B" },
+                        },
                     }
                 )
             ).Entity;
@@ -709,8 +709,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             },
             new()
             {
@@ -720,9 +720,9 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
-            }
+                    Notes = new[] { "A", "B" },
+                },
+            },
         };
         var category = context
             .Attach(
@@ -736,10 +736,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -779,8 +779,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
 
@@ -820,8 +820,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
 
@@ -864,8 +864,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.Add(
@@ -880,10 +880,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
         );
         context.AddRange(
@@ -896,8 +896,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.AddRange(
@@ -910,8 +910,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.AddRange(
@@ -927,11 +927,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.AddRange(
@@ -947,11 +947,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         await context.AddAsync(
@@ -964,8 +964,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         await context.AddAsync(
@@ -980,10 +980,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
         );
         await context.AddRangeAsync(
@@ -996,8 +996,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         await context.AddRangeAsync(
@@ -1010,8 +1010,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         await context.AddRangeAsync(
@@ -1027,11 +1027,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         await context.AddRangeAsync(
@@ -1047,11 +1047,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.Attach(
@@ -1064,8 +1064,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.Attach(
@@ -1080,10 +1080,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
         );
         context.AttachRange(
@@ -1096,8 +1096,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.AttachRange(
@@ -1110,8 +1110,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.AttachRange(
@@ -1127,11 +1127,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.AttachRange(
@@ -1147,11 +1147,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.Update(
@@ -1164,8 +1164,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.Update(
@@ -1180,10 +1180,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
         );
         context.UpdateRange(
@@ -1196,8 +1196,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.UpdateRange(
@@ -1210,8 +1210,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.UpdateRange(
@@ -1227,11 +1227,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.UpdateRange(
@@ -1247,11 +1247,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.Remove(
@@ -1264,8 +1264,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.Remove(
@@ -1280,10 +1280,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
         );
         context.RemoveRange(
@@ -1296,8 +1296,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.RemoveRange(
@@ -1310,8 +1310,8 @@ public partial class DbContextTest
                 {
                     Name = "Tanavast",
                     Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                    Notes = new[] { "A", "B" }
-                }
+                    Notes = new[] { "A", "B" },
+                },
             }
         );
         context.RemoveRange(
@@ -1327,11 +1327,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
         context.RemoveRange(
@@ -1347,11 +1347,11 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
-                }
+                        Notes = new[] { "A", "B" },
+                    },
+                },
             }
         );
 
@@ -1492,7 +1492,7 @@ public partial class DbContextTest
             nameof(DbContext.ChangeTracker),
             nameof(DbContext.ContextId), // By-design, does not throw for disposed context
             nameof(DbContext.Database),
-            nameof(DbContext.Model)
+            nameof(DbContext.Model),
         };
 
         Assert.True(

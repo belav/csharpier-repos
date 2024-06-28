@@ -34,7 +34,7 @@ namespace SafeHandleTests
 
             var str = new SafeHandleNative.StructWithHandle
             {
-                handle = new TestSafeHandle(initialValue)
+                handle = new TestSafeHandle(initialValue),
             };
 
             SafeHandleNative.StructWithSafeHandleByValue(str, initialValue);

@@ -1,7 +1,7 @@
 enum ByteEnum : byte
 {
     One = 1,
-    Two = 2
+    Two = 2,
 }
 
 class X

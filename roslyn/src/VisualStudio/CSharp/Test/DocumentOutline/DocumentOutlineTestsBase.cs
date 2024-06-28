@@ -90,9 +90,9 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 {
                     DocumentSymbol = new LSP.DocumentSymbolSetting()
                     {
-                        HierarchicalDocumentSymbolSupport = true
-                    }
-                }
+                        HierarchicalDocumentSymbolSupport = true,
+                    },
+                },
             };
 
             var testLspServer = await CreateTestLspServerAsync(
@@ -183,7 +183,7 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.DocumentOutline
                 {
                     new TestAnalyzerReferenceByLanguage(
                         DiagnosticExtensions.GetCompilerDiagnosticAnalyzersMap()
-                    )
+                    ),
                 }
             );
             await workspace.ChangeSolutionAsync(solution);

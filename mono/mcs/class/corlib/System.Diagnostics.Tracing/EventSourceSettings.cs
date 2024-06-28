@@ -35,6 +35,6 @@ namespace System.Diagnostics.Tracing
         Default = 0,
         ThrowOnEventWriteErrors = 1,
         EtwManifestEventFormat = 4,
-        EtwSelfDescribingEventFormat = 8
+        EtwSelfDescribingEventFormat = 8,
     }
 }

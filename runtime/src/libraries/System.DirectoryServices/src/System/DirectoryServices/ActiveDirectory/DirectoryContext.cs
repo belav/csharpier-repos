@@ -18,7 +18,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Forest = 1,
         DirectoryServer = 2,
         ConfigurationSet = 3,
-        ApplicationPartition = 4
+        ApplicationPartition = 4,
     }
 
     public class DirectoryContext

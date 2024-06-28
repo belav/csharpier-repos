@@ -219,7 +219,7 @@ public interface I1
                         var reference in new[]
                         {
                             compilation1.ToMetadataReference(),
-                            compilation1.EmitToImageReference()
+                            compilation1.EmitToImageReference(),
                         }
                     )
                     {
@@ -2110,7 +2110,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation1.EmitToImageReference(),
-                    compilation1.ToMetadataReference()
+                    compilation1.ToMetadataReference(),
                 }
             )
             {
@@ -2201,7 +2201,7 @@ class Test2 : I2
                 var reference in new[]
                 {
                     compilation1.EmitToImageReference(),
-                    compilation1.ToMetadataReference()
+                    compilation1.ToMetadataReference(),
                 }
             )
             {
@@ -2893,7 +2893,7 @@ class Test1 : I2, I1<string?>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -2999,7 +2999,7 @@ class Test1 : I1<string?>, I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -3109,7 +3109,7 @@ class Test1 : I2, I3
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -3219,7 +3219,7 @@ class Test1 : I3, I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -8599,7 +8599,7 @@ class Test1 : I1
                     //     event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 25 + declModifiers.Length)
+                        .WithLocation(4, 25 + declModifiers.Length),
                 },
                 haveAdd: true,
                 haveRemove: false,
@@ -9000,7 +9000,7 @@ class Test1 : I1
                     //     event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 25 + declModifiers.Length)
+                        .WithLocation(4, 25 + declModifiers.Length),
                 },
                 haveAdd: false,
                 haveRemove: true,
@@ -9041,7 +9041,7 @@ class Test1 : I1
                     //     event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 25 + declModifiers.Length)
+                        .WithLocation(4, 25 + declModifiers.Length),
                 },
                 haveAdd: true,
                 haveRemove: false,
@@ -9082,7 +9082,7 @@ class Test1 : I1
                     //     event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 25 + declModifiers.Length)
+                        .WithLocation(4, 25 + declModifiers.Length),
                 },
                 haveAdd: false,
                 haveRemove: true,
@@ -9113,7 +9113,7 @@ class Test1 : I1
                     //     event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 25)
+                        .WithLocation(4, 25),
                 },
                 haveAdd: false,
                 haveRemove: false
@@ -9151,7 +9151,7 @@ class Test1 : I1
                     Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(6, 12),
                     // (7,15): error CS0073: An add or remove accessor must have a body
                     //         remove;
-                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(7, 15)
+                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(7, 15),
                 },
                 haveAdd: true,
                 haveRemove: true,
@@ -9198,7 +9198,8 @@ class Test1 : I1
                     Diagnostic(ErrorCode.ERR_AddOrRemoveExpected, "set").WithLocation(7, 9),
                     // (4,25): error CS0065: 'I1.E1': event property must have both add and remove accessors
                     //     event System.Action E1
-                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1").WithArguments("I1.E1")
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
+                        .WithArguments("I1.E1"),
                 },
                 haveAdd: false,
                 haveRemove: false,
@@ -9234,7 +9235,7 @@ class Test1 : I1
                 {
                     // (7,15): error CS0073: An add or remove accessor must have a body
                     //         remove;
-                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(7, 15)
+                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(7, 15),
                 },
                 haveAdd: true,
                 haveRemove: true,
@@ -9270,7 +9271,7 @@ class Test1 : I1
                 {
                     // (6,12): error CS0073: An add or remove accessor must have a body
                     //         add;
-                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(6, 12)
+                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(6, 12),
                 },
                 haveAdd: true,
                 haveRemove: true,
@@ -11846,7 +11847,7 @@ M3",
                     {
                         (name: "M1", access: Accessibility.Public),
                         (name: "M2", access: Accessibility.Internal),
-                        (name: "M3", access: Accessibility.Private)
+                        (name: "M3", access: Accessibility.Private),
                     }
                 )
                 {
@@ -12329,7 +12330,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -12664,7 +12665,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -13384,7 +13385,7 @@ class Test1 : Test2, I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -15590,7 +15591,7 @@ class Test1
                 var reference in new[]
                 {
                     compilation3.ToMetadataReference(),
-                    compilation3.EmitToImageReference()
+                    compilation3.EmitToImageReference(),
                 }
             )
             {
@@ -15664,7 +15665,7 @@ M2",
                     {
                         (name: "M1", access: Accessibility.Protected),
                         (name: "M2", access: Accessibility.ProtectedOrInternal),
-                        (name: "M3", access: Accessibility.ProtectedAndInternal)
+                        (name: "M3", access: Accessibility.ProtectedAndInternal),
                     }
                 )
                 {
@@ -15731,7 +15732,7 @@ class Test1 : I1
                 //         x.M1();
                 Diagnostic(ErrorCode.ERR_BadProtectedAccess, "M1")
                     .WithArguments("I1.M1()", "I1", "Test1")
-                    .WithLocation(7, 11)
+                    .WithLocation(7, 11),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -15798,7 +15799,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -15973,7 +15974,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -16162,7 +16163,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -16306,7 +16307,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -16406,7 +16407,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -16506,7 +16507,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -16858,7 +16859,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -16966,7 +16967,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -17074,7 +17075,7 @@ class Test1 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -18789,7 +18790,7 @@ set_P8",
                         (name: "P5", access: Accessibility.Internal),
                         (name: "P6", access: Accessibility.Internal),
                         (name: "P7", access: Accessibility.Internal),
-                        (name: "P8", access: Accessibility.Internal)
+                        (name: "P8", access: Accessibility.Internal),
                     }
                 )
                 {
@@ -19564,7 +19565,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -19823,7 +19824,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -20005,7 +20006,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -20800,7 +20801,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -21854,7 +21855,7 @@ class Test2 : I1, I2, I3, I4, I5
                     //     extern int P1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.P1.get")
-                        .WithLocation(4, 20)
+                        .WithLocation(4, 20),
                 },
                 // (4,20): error CS8501: Target runtime doesn't support default interface implementation.
                 //     extern int P1 {get;}
@@ -23643,7 +23644,7 @@ class Test66 : Test6 {}
                 var metadataImportOptions in new[]
                 {
                     MetadataImportOptions.All,
-                    MetadataImportOptions.Public
+                    MetadataImportOptions.Public,
                 }
             )
             {
@@ -23750,7 +23751,7 @@ set_P6
                     var reference in new[]
                     {
                         compilation2.ToMetadataReference(),
-                        compilation2.EmitToImageReference()
+                        compilation2.EmitToImageReference(),
                     }
                 )
                 {
@@ -24020,7 +24021,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -26264,7 +26265,7 @@ class Test1
                 var reference in new[]
                 {
                     compilation3.ToMetadataReference(),
-                    compilation3.EmitToImageReference()
+                    compilation3.EmitToImageReference(),
                 }
             )
             {
@@ -26438,7 +26439,7 @@ set_P6
                             access: Accessibility.Public,
                             getAccess: Accessibility.ProtectedAndInternal,
                             setAccess: Accessibility.Public
-                        )
+                        ),
                     }
                 )
                 {
@@ -26535,7 +26536,7 @@ class Test1 : I1
                             "set"
                         )
                         .WithArguments("Test1", "I1.P1.set", "Test1.P1.set", "9.0", "10.0")
-                        .WithLocation(17, 9)
+                        .WithLocation(17, 9),
                 },
                 // (2,15): error CS0535: 'Test2' does not implement interface member 'I1.P1'
                 // class Test2 : I1
@@ -26607,7 +26608,7 @@ class Test1 : I1
                             "set"
                         )
                         .WithArguments("Test1", "I1.P1.set", "Test1.P1.set", "9.0", "10.0")
-                        .WithLocation(17, 9)
+                        .WithLocation(17, 9),
                 },
                 // (2,15): error CS0535: 'Test2' does not implement interface member 'I1.P1'
                 // class Test2 : I1
@@ -30828,7 +30829,7 @@ class Test2 : I1, I2, I4, I5
                     //     extern int this[int x] {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.this[int].get")
-                        .WithLocation(4, 29)
+                        .WithLocation(4, 29),
                 },
                 // (4,29): error CS8501: Target runtime doesn't support default interface implementation.
                 //     extern int this[int x] {get;}
@@ -34604,7 +34605,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1 {}
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: false,
                 haveRemove: false
@@ -34632,7 +34633,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: true,
                 haveRemove: false
@@ -34657,7 +34658,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: true,
                 haveRemove: false
@@ -34682,7 +34683,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: true,
                 haveRemove: false
@@ -34710,7 +34711,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: false,
                 haveRemove: true
@@ -34735,7 +34736,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: false,
                 haveRemove: true
@@ -34760,7 +34761,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1
                     Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: false,
                 haveRemove: true
@@ -34787,7 +34788,7 @@ class Test1 : I1
                     Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";"),
                     // (7,15): error CS0073: An add or remove accessor must have a body
                     //         remove;
-                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(7, 15)
+                    Diagnostic(ErrorCode.ERR_AddRemoveMustHaveBody, ";").WithLocation(7, 15),
                 },
                 haveAdd: true,
                 haveRemove: true
@@ -34814,7 +34815,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: true,
                 haveRemove: true
@@ -34846,7 +34847,7 @@ class Test1 : I1
                     //     public virtual event System.Action E1 = null;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1")
                         .WithArguments("I1.E1")
-                        .WithLocation(4, 40)
+                        .WithLocation(4, 40),
                 },
                 haveAdd: true,
                 haveRemove: true
@@ -35128,7 +35129,7 @@ set_P3",
                     {
                         (name: "P1", access: Accessibility.Public),
                         (name: "P2", access: Accessibility.Internal),
-                        (name: "P3", access: Accessibility.Private)
+                        (name: "P3", access: Accessibility.Private),
                     }
                 )
                 {
@@ -35955,7 +35956,7 @@ class Test2 : I1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -36167,7 +36168,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -36344,7 +36345,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -37142,7 +37143,7 @@ set_P1",
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -39343,7 +39344,7 @@ class Test1
                 var reference in new[]
                 {
                     compilation3.ToMetadataReference(),
-                    compilation3.EmitToImageReference()
+                    compilation3.EmitToImageReference(),
                 }
             )
             {
@@ -39439,7 +39440,7 @@ set_P2",
                     {
                         (name: "P1", access: Accessibility.Protected),
                         (name: "P2", access: Accessibility.ProtectedOrInternal),
-                        (name: "P3", access: Accessibility.ProtectedAndInternal)
+                        (name: "P3", access: Accessibility.ProtectedAndInternal),
                     }
                 )
                 {
@@ -39536,7 +39537,7 @@ class Test1 : I1
                             "remove"
                         )
                         .WithArguments("Test1", "I1.P1.remove", "Test1.P1.remove", "9.0", "10.0")
-                        .WithLocation(16, 9)
+                        .WithLocation(16, 9),
                 },
                 // (2,15): error CS0535: 'Test2' does not implement interface member 'I1.P1'
                 // class Test2 : I1
@@ -40363,7 +40364,7 @@ class Test1
                 //     class Test2 : I1.T1
                 Diagnostic(ErrorCode.ERR_BadAccess, "T1")
                     .WithArguments("I1.T1")
-                    .WithLocation(14, 22)
+                    .WithLocation(14, 22),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -40381,7 +40382,7 @@ class Test1
                 var reference in new[]
                 {
                     compilation3.ToMetadataReference(),
-                    compilation3.EmitToImageReference()
+                    compilation3.EmitToImageReference(),
                 }
             )
             {
@@ -40572,7 +40573,7 @@ class Test1
                 var reference in new[]
                 {
                     compilation3.ToMetadataReference(),
-                    compilation3.EmitToImageReference()
+                    compilation3.EmitToImageReference(),
                 }
             )
             {
@@ -40751,7 +40752,7 @@ class Test1 : I1.T1
                 //         System.Console.WriteLine(new I1.T5(a.M1));
                 Diagnostic(ErrorCode.ERR_BadAccess, "M1")
                     .WithArguments("I1.T1.M1()")
-                    .WithLocation(11, 46)
+                    .WithLocation(11, 46),
             };
             compilation2.VerifyDiagnostics(expected);
 
@@ -41075,7 +41076,7 @@ class Test1
                 //     class Test2 : I1.T1
                 Diagnostic(ErrorCode.ERR_BadAccess, "T1")
                     .WithArguments("I1.T1")
-                    .WithLocation(14, 22)
+                    .WithLocation(14, 22),
             };
 
             compilation2.VerifyDiagnostics(expected);
@@ -41093,7 +41094,7 @@ class Test1
                 var reference in new[]
                 {
                     compilation3.ToMetadataReference(),
-                    compilation3.EmitToImageReference()
+                    compilation3.EmitToImageReference(),
                 }
             )
             {
@@ -43405,7 +43406,7 @@ public interface I6 : I1, I2, I3, I5
             var refs1 = new[]
             {
                 compilation1.ToMetadataReference(),
-                compilation1.EmitToImageReference()
+                compilation1.EmitToImageReference(),
             };
 
             var source2 =
@@ -43627,7 +43628,7 @@ class Test12 : I8
                 var refs2 = new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 };
 
                 var compilation4 = CreateCompilation(
@@ -44428,7 +44429,7 @@ class Test1 : I2, I3, I1<string>
                     "I1<System.String>",
                     "I3",
                     "I1<System.String?>",
-                    "I1<System.String>"
+                    "I1<System.String>",
                 },
                 test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
             );
@@ -44492,7 +44493,7 @@ class Test1 : I2, I3, I1<string>
                     "I1<System.String>",
                     "I3",
                     "I1<System.String?>",
-                    "I1<System.String>"
+                    "I1<System.String>",
                 },
                 test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
             );
@@ -44602,7 +44603,7 @@ class Test1 : I2, I3, I1<string>
                     "I1<System.String>",
                     "I3",
                     "I1<System.String?>",
-                    "I1<System.String>"
+                    "I1<System.String>",
                 },
                 test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
             );
@@ -44658,7 +44659,7 @@ class Test1 : I2, I3, I1<string>
                     "I1<System.String>",
                     "I3",
                     "I1<System.String?>",
-                    "I1<System.String>"
+                    "I1<System.String>",
                 },
                 test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
             );
@@ -45035,7 +45036,7 @@ class Test1 : I2, I3
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -45187,7 +45188,7 @@ class Test1 : I3, I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -45343,7 +45344,7 @@ class Test1 : I3, I4
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -45365,7 +45366,7 @@ class Test1 : I3, I4
                         "I1<System.String>",
                         "I4",
                         "I2<System.String?>",
-                        "I1<System.String?>"
+                        "I1<System.String?>",
                     },
                     test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
                 );
@@ -45510,7 +45511,7 @@ class Test1 : I4, I3
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -45532,7 +45533,7 @@ class Test1 : I4, I3
                         "I1<System.String?>",
                         "I3",
                         "I2<System.String>",
-                        "I1<System.String>"
+                        "I1<System.String>",
                     },
                     test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
                 );
@@ -45674,7 +45675,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -45813,7 +45814,7 @@ class Test1 : I2, I1<string?>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -45945,7 +45946,7 @@ class Test1 : I2, I1<string?>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -46088,7 +46089,7 @@ class Test1 : I2<string>, I3<string>, I4
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -46111,7 +46112,7 @@ class Test1 : I2<string>, I3<string>, I4
                         "I4",
                         "I2<System.String?>",
                         "I3<System.String?>",
-                        "I1<System.String?>"
+                        "I1<System.String?>",
                     },
                     test1.AllInterfacesNoUseSiteDiagnostics.Select(i => i.ToTestDisplayString())
                 );
@@ -46337,7 +46338,7 @@ I4.M1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -46378,7 +46379,7 @@ I4.M1
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -46568,7 +46569,7 @@ I4.M1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -46609,7 +46610,7 @@ I4.M1
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -46799,7 +46800,7 @@ I4.M1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -46840,7 +46841,7 @@ I4.M1
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -47067,7 +47068,7 @@ class Test1 : I1
                 var options in new[]
                 {
                     TestOptions.DebugExe,
-                    TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All)
+                    TestOptions.DebugExe.WithMetadataImportOptions(MetadataImportOptions.All),
                 }
             )
             {
@@ -47362,7 +47363,7 @@ class Test1 : I1
                     //         set
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "set")
                         .WithArguments("default interface implementation", "8.0")
-                        .WithLocation(24, 9)
+                        .WithLocation(24, 9),
                 },
                 // (6,15): error CS8506: 'I1.I2.M1.get' cannot implement interface member 'I2.M1.get' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
@@ -47463,7 +47464,7 @@ class Test1 : I1
                     //     static int I4.M1
                     Diagnostic(ErrorCode.ERR_InvalidModifierForLanguageVersion, "M1")
                         .WithArguments("static", "10.0", "11.0")
-                        .WithLocation(22, 19)
+                        .WithLocation(22, 19),
                 },
                 // (6,15): error CS8706: 'I1.I2.M1.get' cannot implement interface member 'I2.M1.get' in type 'Test1' because feature 'static abstract members in interfaces' is not available in C# 10.0. Please use language version '11.0' or greater.
                 // class Test1 : I1
@@ -47618,7 +47619,7 @@ class Test1 : I1
                             ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
                             "set"
                         )
-                        .WithLocation(29, 9)
+                        .WithLocation(29, 9),
                 },
                 // (6,15): error CS8502: 'I1.I2.M1.set' cannot implement interface member 'I2.M1.set' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
@@ -47777,7 +47778,7 @@ class Test1 : I1
                             ErrorCode.ERR_RuntimeDoesNotSupportStaticAbstractMembersInInterfaces,
                             "M1"
                         )
-                        .WithLocation(27, 19)
+                        .WithLocation(27, 19),
                 },
                 // (6,15): error CS8929: 'I1.I2.M1.get' cannot implement interface member 'I2.M1.get' in type 'Test1' because the target runtime doesn't support static abstract members in interfaces.
                 // class Test1 : I1
@@ -48387,7 +48388,7 @@ class Test1 : I1
                     //     extern int I2.M1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.M1.get")
-                        .WithLocation(9, 23)
+                        .WithLocation(9, 23),
                 },
                 new DiagnosticDescription[]
                 {
@@ -48400,7 +48401,7 @@ class Test1 : I1
                     //     extern int I2.M1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.M1.get")
-                        .WithLocation(9, 23)
+                        .WithLocation(9, 23),
                 },
                 new DiagnosticDescription[]
                 {
@@ -48415,7 +48416,7 @@ class Test1 : I1
                     //     extern int I2.M1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.M1.get")
-                        .WithLocation(9, 23)
+                        .WithLocation(9, 23),
                 },
                 // (10,7): error CS0179: 'I1.I2.M1.set' cannot be extern and declare a body
                 //     { set {}}
@@ -48586,7 +48587,7 @@ class Test1 : I1
                     //     static extern int I2.M1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.M1.get")
-                        .WithLocation(9, 30)
+                        .WithLocation(9, 30),
                 },
                 new DiagnosticDescription[]
                 {
@@ -48604,7 +48605,7 @@ class Test1 : I1
                     //     static extern int I2.M1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.M1.get")
-                        .WithLocation(9, 30)
+                        .WithLocation(9, 30),
                 },
                 new DiagnosticDescription[]
                 {
@@ -48626,7 +48627,7 @@ class Test1 : I1
                     //     static extern int I2.M1 {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.M1.get")
-                        .WithLocation(9, 30)
+                        .WithLocation(9, 30),
                 },
                 // (10,7): error CS0179: 'I1.I2.M1.set' cannot be extern and declare a body
                 //     { set {}}
@@ -49007,7 +49008,7 @@ I4.M1.set
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -49049,7 +49050,7 @@ I4.M1.set
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -49388,7 +49389,7 @@ class Test12 : I8
                     // class Test5 : I8
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I8")
                         .WithArguments("I1.M1", "I5.I1.M1", "I4.I1.M1")
-                        .WithLocation(14, 15)
+                        .WithLocation(14, 15),
                 }
             );
         }
@@ -49437,7 +49438,7 @@ class Test12 : I8
             var refs1 = new[]
             {
                 compilation1.ToMetadataReference(),
-                compilation1.EmitToImageReference()
+                compilation1.EmitToImageReference(),
             };
 
             var source2 =
@@ -49524,7 +49525,7 @@ class Test5 : I8
                 var refs2 = new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 };
 
                 var compilation4 = CreateCompilation(
@@ -49744,7 +49745,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType, "I2")
                         .WithArguments("Test1", "I1.M1", "Test1.M1", "int")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 }
             );
         }
@@ -52667,7 +52668,7 @@ public interface I6 : I1, I2, I3, I5
             var refs1 = new[]
             {
                 compilation1.ToMetadataReference(),
-                compilation1.EmitToImageReference()
+                compilation1.EmitToImageReference(),
             };
 
             var source2 =
@@ -52932,7 +52933,7 @@ class Test12 : I8
                 var refs2 = new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 };
 
                 var compilation4 = CreateCompilation(
@@ -53607,7 +53608,7 @@ I4.M1.remove
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -53650,7 +53651,7 @@ I4.M1.remove
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -53854,7 +53855,7 @@ I4.M1.remove
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -53897,7 +53898,7 @@ I4.M1.remove
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -54101,7 +54102,7 @@ I4.M1.remove
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -54144,7 +54145,7 @@ I4.M1.remove
                 var reference in new[]
                 {
                     compilation4.ToMetadataReference(),
-                    compilation4.EmitToImageReference()
+                    compilation4.EmitToImageReference(),
                 }
             )
             {
@@ -54291,7 +54292,7 @@ class Test1 : I1
                     //         set
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "set")
                         .WithArguments("default interface implementation", "8.0")
-                        .WithLocation(24, 9)
+                        .WithLocation(24, 9),
                 },
                 // (6,15): error CS8506: 'I1.I2.this[int].get' cannot implement interface member 'I2.this[int].get' in type 'Test1' because feature 'default interface implementation' is not available in C# 7.3. Please use language version '8.0' or greater.
                 // class Test1 : I1
@@ -54398,7 +54399,7 @@ class Test1 : I1
                             ErrorCode.ERR_RuntimeDoesNotSupportDefaultInterfaceImplementation,
                             "set"
                         )
-                        .WithLocation(29, 9)
+                        .WithLocation(29, 9),
                 },
                 // (6,15): error CS8502: 'I1.I2.this[int].set' cannot implement interface member 'I2.this[int].set' in type 'Test1' because the target runtime doesn't support default interface implementation.
                 // class Test1 : I1
@@ -54788,7 +54789,7 @@ class Test1 : I1
                     //     extern int I2.this[int x] {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.this[int].get")
-                        .WithLocation(9, 32)
+                        .WithLocation(9, 32),
                 },
                 new DiagnosticDescription[]
                 {
@@ -54801,7 +54802,7 @@ class Test1 : I1
                     //     extern int I2.this[int x] {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.this[int].get")
-                        .WithLocation(9, 32)
+                        .WithLocation(9, 32),
                 },
                 new DiagnosticDescription[]
                 {
@@ -54816,7 +54817,7 @@ class Test1 : I1
                     //     extern int I2.this[int x] {get;}
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "get")
                         .WithArguments("I1.I2.this[int].get")
-                        .WithLocation(9, 32)
+                        .WithLocation(9, 32),
                 },
                 // (10,7): error CS0179: 'I1.I2.this[int].set' cannot be extern and declare a body
                 //     { set {}}
@@ -55238,7 +55239,7 @@ class Test12 : I8
                     // class Test5 : I8
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I8")
                         .WithArguments("I1.this[int]", "I5.I1.this[int]", "I4.I1.this[int]")
-                        .WithLocation(14, 15)
+                        .WithLocation(14, 15),
                 },
                 new DiagnosticDescription[]
                 {
@@ -55266,7 +55267,7 @@ class Test12 : I8
                     // class Test5 : I8
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I8")
                         .WithArguments("I1.this[int]", "I5.I1.Item[int]", "I4.I1.Item[int]")
-                        .WithLocation(14, 15)
+                        .WithLocation(14, 15),
                 }
             );
         }
@@ -55314,7 +55315,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType, "I2")
                         .WithArguments("Test1", "I1.this[int]", "Test1.this[int]", "int")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 new DiagnosticDescription[]
                 {
@@ -55327,7 +55328,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_CloseUnimplementedInterfaceMemberWrongReturnType, "I2")
                         .WithArguments("Test1", "I1.this[int]", "Test1.this[int]", "int")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 }
             );
         }
@@ -56280,7 +56281,7 @@ class Test2 : I1
             var references = new[]
             {
                 compilation1.ToMetadataReference(),
-                compilation1.EmitToImageReference()
+                compilation1.EmitToImageReference(),
             };
 
             foreach (var reference in references)
@@ -58475,7 +58476,7 @@ class Test4 : Test1
                     (
                         comp0: compilation0.EmitToImageReference(),
                         comp1: compilation1.EmitToImageReference()
-                    )
+                    ),
                 }
             )
             {
@@ -58664,7 +58665,7 @@ class Test2 : Test1
                 var reference in new[]
                 {
                     compilation0.ToMetadataReference(),
-                    compilation0.EmitToImageReference()
+                    compilation0.EmitToImageReference(),
                 }
             )
             {
@@ -58850,7 +58851,7 @@ interface Test4 : I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -59096,7 +59097,7 @@ class Test4 : I1
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -59829,7 +59830,7 @@ true
                 //         x = x >>> 3;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "x >>> 3")
                     .WithArguments("unsigned right shift", "11.0")
-                    .WithLocation(31, 13)
+                    .WithLocation(31, 13),
             };
             compilation7.VerifyDiagnostics(expected7);
 
@@ -59876,7 +59877,7 @@ class Test3 : I1
                 //         x = x & y;
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "x & y")
                     .WithArguments("default interface implementation", "8.0")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
             compilation9.VerifyDiagnostics(expected9);
 
@@ -60418,7 +60419,7 @@ class Test2 : I2
                 //         I1 y = -x;
                 Diagnostic(ErrorCode.ERR_BadUnaryOp, "-x")
                     .WithArguments("-", "Test2")
-                    .WithLocation(8, 16)
+                    .WithLocation(8, 16),
             };
             compilation9.VerifyDiagnostics(expected9);
 
@@ -60674,7 +60675,7 @@ class Test2 : I2
                 //         var y = -x;
                 Diagnostic(ErrorCode.ERR_AmbigUnaryOp, "-x")
                     .WithArguments("-", "I2")
-                    .WithLocation(7, 17)
+                    .WithLocation(7, 17),
             };
 
             var compilation1 = CreateCompilation(
@@ -60950,7 +60951,7 @@ class Test2 : I3
                 //         var y = new C1() + x;
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "new C1() + x")
                     .WithArguments("+", "C1", "I3")
-                    .WithLocation(7, 17)
+                    .WithLocation(7, 17),
             };
 
             var compilation0 = CreateCompilation(
@@ -61127,7 +61128,7 @@ class Test2 : I3
                 //         var y = x + new C1();
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x + new C1()")
                     .WithArguments("+", "I3", "C1")
-                    .WithLocation(7, 17)
+                    .WithLocation(7, 17),
             };
 
             var compilation0 = CreateCompilation(
@@ -61301,7 +61302,7 @@ class Test2: I1, I2
                 //         z = y + x;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "y + x")
                     .WithArguments("+", "I2", "I1")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
 
             var compilation1 = CreateCompilation(
@@ -61386,7 +61387,7 @@ class Test2 : I2
                 //         z = x + y;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x + y")
                     .WithArguments("+", "I1", "I2")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
 
             var compilation1 = CreateCompilation(
@@ -61734,7 +61735,7 @@ class Test2 : I2
                 //         z = y + x;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "y + x")
                     .WithArguments("+", "C1", "Test2")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
             compilation9.VerifyDiagnostics(expected9);
 
@@ -62280,7 +62281,7 @@ class Test2 : I3
                 //         z = y + x;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "y + x")
                     .WithArguments("+", "I3", "I1")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
 
             var compilation1 = CreateCompilation(
@@ -62368,7 +62369,7 @@ class Test2 : I3
                 //         z = x + y;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "x + y")
                     .WithArguments("+", "I1", "I3")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
 
             var compilation1 = CreateCompilation(
@@ -62454,7 +62455,7 @@ class Test2 : I2
                 //         var y = x - x;
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x - x")
                     .WithArguments("-", "I2", "I2")
-                    .WithLocation(7, 17)
+                    .WithLocation(7, 17),
             };
 
             var compilation1 = CreateCompilation(
@@ -63496,7 +63497,7 @@ namespace System
                 var reference in new[]
                 {
                     compilation1.EmitToImageReference(),
-                    compilation1.ToMetadataReference()
+                    compilation1.ToMetadataReference(),
                 }
             )
             {
@@ -63632,7 +63633,7 @@ namespace System
                 var reference in new[]
                 {
                     compilation1.EmitToImageReference(),
-                    compilation1.ToMetadataReference()
+                    compilation1.ToMetadataReference(),
                 }
             )
             {
@@ -64642,7 +64643,7 @@ class UsePia
                 var reference in new[]
                 {
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             )
             {
@@ -64706,7 +64707,7 @@ class UsePia
                 var reference in new[]
                 {
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             )
             {
@@ -64902,7 +64903,7 @@ public interface ITest33
                 var reference2 in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -64973,7 +64974,7 @@ class UsePia
                 var reference in new[]
                 {
                     piaCompilation.ToMetadataReference(embedInteropTypes: true),
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             )
             {
@@ -65309,7 +65310,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -65507,7 +65508,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -65670,7 +65671,7 @@ class Test1 : I3
                 // class Test1 : I3
                 Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I3")
                     .WithArguments("Test1", "I1.M1()")
-                    .WithLocation(2, 15)
+                    .WithLocation(2, 15),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -65687,7 +65688,7 @@ class Test1 : I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -65855,7 +65856,7 @@ class Test1 : I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -66026,7 +66027,7 @@ class Test1 : I2, I3
                 // class Test1 : I2, I3
                 Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                     .WithArguments("I1.M1()", "I2.I1.M1()", "I3.I1.M1()")
-                    .WithLocation(2, 15)
+                    .WithLocation(2, 15),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -66043,7 +66044,7 @@ class Test1 : I2, I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -66206,7 +66207,7 @@ class Test1 : I4
                 // class Test1 : I4
                 Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I4")
                     .WithArguments("I1.M1()", "I2.I1.M1()", "I3.I1.M1()")
-                    .WithLocation(2, 15)
+                    .WithLocation(2, 15),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -66223,7 +66224,7 @@ class Test1 : I4
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -66358,7 +66359,7 @@ class Test1 : I4
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -67124,7 +67125,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -67378,7 +67379,7 @@ Test1.set_P1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -67588,7 +67589,7 @@ class Test1 : I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -67807,7 +67808,7 @@ I3.set_P1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -68045,7 +68046,7 @@ class Test1 : I2, I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -68268,7 +68269,7 @@ class Test1 : I4
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -68449,7 +68450,7 @@ I4.set_P1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -69362,7 +69363,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -73515,7 +73516,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -73742,7 +73743,7 @@ Test1.remove_P1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -73945,7 +73946,7 @@ class Test1 : I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -74148,7 +74149,7 @@ I3.remove_P1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -74368,7 +74369,7 @@ class Test1 : I2, I3
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -74573,7 +74574,7 @@ class Test1 : I4
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -74739,7 +74740,7 @@ I4.remove_P1
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -75861,7 +75862,7 @@ class Test1 : I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -76528,7 +76529,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -76574,7 +76575,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -76620,7 +76621,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -76668,7 +76669,7 @@ class Test1 : I4
                     // class Test1 : I4
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I4")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I4
@@ -77618,7 +77619,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -77664,7 +77665,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -77710,7 +77711,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -77758,7 +77759,7 @@ class Test1 : I4
                     // class Test1 : I4
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I4")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I4
@@ -78465,7 +78466,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -78511,7 +78512,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -78557,7 +78558,7 @@ class Test1 : I2, I3
                     // class Test1 : I2, I3
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I2")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I2, I3
@@ -78605,7 +78606,7 @@ class Test1 : I4
                     // class Test1 : I4
                     Diagnostic(ErrorCode.ERR_MostSpecificImplementationIsNotFound, "I4")
                         .WithArguments("I1.this[int]", "I2.I1.this[int]", "I3.I1.this[int]")
-                        .WithLocation(2, 15)
+                        .WithLocation(2, 15),
                 },
                 // (2,15): error CS8705: Interface member 'I1.this[int]' does not have a most specific implementation. Neither 'I2.I1.Item[int]', nor 'I3.I1.Item[int]' are most specific.
                 // class Test1 : I4
@@ -84892,7 +84893,7 @@ class C1 : I1<C1, C1, C1>, I1<C1, object, C1>.I2
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -85113,7 +85114,7 @@ class C1 : I1<C1, C1>
                 var reference in new[]
                 {
                     compilation1.ToMetadataReference(),
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 }
             )
             {
@@ -86433,7 +86434,7 @@ class C1 : C0, I1
                 {
                     TestOptions.Regular8,
                     TestOptions.Regular9,
-                    TestOptions.Regular
+                    TestOptions.Regular,
                 }
             )
             {
@@ -86728,7 +86729,7 @@ static void Test<T>(T x) where T : I1<T>
                     var reference in new[]
                     {
                         compilation1.ToMetadataReference(),
-                        compilation1.EmitToImageReference()
+                        compilation1.EmitToImageReference(),
                     }
                 )
                 {
@@ -87611,7 +87612,7 @@ class Test1 : I2<Test1>
             {
                 "true" => "false",
                 "false" => "true",
-                _ => null
+                _ => null,
             };
 
             const string signatureTemplate = "bool {1}operator {2}{3}({0} x)";
@@ -87691,7 +87692,7 @@ class Test1 : I2<Test1>
                 // class Test1 : I2<Test1>
                 Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I2<Test1>")
                     .WithArguments("Test1", "I1<Test1>.operator !=(Test1, int)")
-                    .WithLocation(2, 15)
+                    .WithLocation(2, 15),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -87708,7 +87709,7 @@ class Test1 : I2<Test1>
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {
@@ -87799,7 +87800,7 @@ class Test1 : I2<Test1>
                 // class Test1 : I2<Test1>
                 Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "I2<Test1>")
                     .WithArguments("Test1", "I1<Test1>.explicit operator checked int(Test1)")
-                    .WithLocation(2, 15)
+                    .WithLocation(2, 15),
             };
 
             compilation1.VerifyDiagnostics(expected);
@@ -87816,7 +87817,7 @@ class Test1 : I2<Test1>
                 var reference in new[]
                 {
                     compilation2.ToMetadataReference(),
-                    compilation2.EmitToImageReference()
+                    compilation2.EmitToImageReference(),
                 }
             )
             {

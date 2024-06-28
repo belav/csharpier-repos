@@ -197,7 +197,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     messageConsumed = false;
                     return default(T);
-                }
+                },
             };
             Assert.Equal(
                 expected: DataflowMessageStatus.NotAvailable,
@@ -280,7 +280,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     offeredMessage = messageHeader;
                     tcs.TrySetResult(true);
                     return DataflowMessageStatus.Postponed;
-                }
+                },
             };
             block.LinkTo(target);
             await tcs.Task;
@@ -334,7 +334,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     offeredMessage = messageHeader;
                     tcs.TrySetResult(true);
                     return DataflowMessageStatus.Postponed;
-                }
+                },
             };
             block.LinkTo(target);
             await tcs.Task;

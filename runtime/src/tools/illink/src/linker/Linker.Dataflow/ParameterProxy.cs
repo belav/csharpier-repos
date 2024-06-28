@@ -40,11 +40,10 @@ namespace ILLink.Shared.TypeSystemProxy
 
 #pragma warning disable RS0030 // MethodReference.Parameters is banned -- this class provides wrappers to use
         public partial string GetDisplayName() =>
-            IsImplicitThis
-                ? "this"
-                : !string.IsNullOrEmpty(Method.Method.Parameters[MetadataIndex].Name)
-                    ? Method.Method.Parameters[MetadataIndex].Name
-                    : $"#{Index}";
+            IsImplicitThis ? "this"
+            : !string.IsNullOrEmpty(Method.Method.Parameters[MetadataIndex].Name)
+                ? Method.Method.Parameters[MetadataIndex].Name
+            : $"#{Index}";
 #pragma warning restore RS0030 // Do not used banned APIs
 
         public ICustomAttributeProvider GetCustomAttributeProvider()

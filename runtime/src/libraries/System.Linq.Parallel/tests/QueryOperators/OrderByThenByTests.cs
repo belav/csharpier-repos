@@ -23,12 +23,12 @@ namespace System.Linq.Parallel.Tests
                 yield return new object[]
                 {
                     Labeled.Label("Array-Random", randomInput.AsParallel()),
-                    count
+                    count,
                 };
                 yield return new object[]
                 {
                     Labeled.Label("List-Random", randomInput.ToList().AsParallel()),
-                    count
+                    count,
                 };
                 yield return new object[]
                 {
@@ -36,7 +36,7 @@ namespace System.Linq.Parallel.Tests
                         "Partitioner-Random",
                         Partitioner.Create(randomInput).AsParallel()
                     ),
-                    count
+                    count,
                 };
             }
         }

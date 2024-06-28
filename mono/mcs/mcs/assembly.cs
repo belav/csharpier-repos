@@ -840,7 +840,7 @@ namespace Mono.CSharp
                         0x04,
                         0x80,
                         0x00,
-                        0x00
+                        0x00,
                     };
 
                     // Encode public key

@@ -138,7 +138,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 "World!\"",
                 "to",
                 "the",
-                "user."
+                "user.",
             };
             Assert.Equal(17, d.Length);
         }

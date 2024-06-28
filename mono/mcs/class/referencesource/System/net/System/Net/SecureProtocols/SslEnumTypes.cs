@@ -29,7 +29,7 @@ namespace System.Security.Authentication
         Tls = SchProtocols.Tls10,
         Tls11 = SchProtocols.Tls11,
         Tls12 = SchProtocols.Tls12,
-        Default = Ssl3 | Tls
+        Default = Ssl3 | Tls,
     }
 
     public enum ExchangeAlgorithmType
@@ -81,7 +81,11 @@ namespace System.Security.Authentication
 
         Aes256 = (Alg.ClassEncrypt | Alg.TypeBlock | Alg.NameAES_256),
 
-        Null = (Alg.ClassEncrypt) // 0-bit NULL cipher algorithm
+        Null =
+            (
+                Alg.ClassEncrypt
+            ) // 0-bit NULL cipher algorithm
+        ,
     }
 
     public enum HashAlgorithmType
@@ -96,6 +100,6 @@ namespace System.Security.Authentication
 
         Sha384 = (Alg.ClassHash | Alg.Any | Alg.NameSHA384),
 
-        Sha512 = (Alg.ClassHash | Alg.Any | Alg.NameSHA512)
+        Sha512 = (Alg.ClassHash | Alg.Any | Alg.NameSHA512),
     }
 }

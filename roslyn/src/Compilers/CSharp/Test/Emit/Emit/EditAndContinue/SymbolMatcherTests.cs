@@ -1918,7 +1918,7 @@ class C
                 {
                     "(3,2): <>f__AnonymousDelegate0<T1, T2, TResult>",
                     "(0,2): <>f__AnonymousDelegate1",
-                    "(0,2): <>f__AnonymousDelegate2"
+                    "(0,2): <>f__AnonymousDelegate2",
                 },
                 Inspect(synthesizedTypes0.AnonymousDelegatesWithIndexedNames)
             );
@@ -2005,7 +2005,7 @@ class C
                 {
                     "(3,2): <>f__AnonymousDelegate0<T1, T2, TResult>",
                     "(0,2): <>f__AnonymousDelegate1",
-                    "(0,2): <>f__AnonymousDelegate2"
+                    "(0,2): <>f__AnonymousDelegate2",
                 },
                 Inspect(synthesizedTypes0.AnonymousDelegatesWithIndexedNames)
             );

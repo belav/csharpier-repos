@@ -127,7 +127,7 @@ namespace System
                     "Unhandled exception: an unmanaged exception was thrown out of a managed-to-native transition",
                 RhFailFastReason.EnvironmentFailFast => "Environment.FailFast was called",
                 RhFailFastReason.AssertionFailure => "Assertion failure",
-                _ => "Unknown reason."
+                _ => "Unknown reason.",
             };
 
         // Used to report exceptions that *logically* go unhandled in the Fx code.  For example, an
@@ -291,7 +291,7 @@ namespace System
                             // Error code for unhandled exceptions is expected to come from the exception object above
                             // RhFailFastReason.UnhandledException or
                             // RhFailFastReason.UnhandledExceptionFromPInvoke
-                            _ => HResults.E_FAIL
+                            _ => HResults.E_FAIL,
                         };
             }
             else

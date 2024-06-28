@@ -17,13 +17,13 @@ public class HtmlHelperFormExtensionsTest
     private static readonly IEnumerable<string> _controllerNames = new List<string>
     {
         null,
-        "Product"
+        "Product",
     };
     private static readonly IEnumerable<object> _htmlAttributes = new List<object>
     {
         null,
         new { isprint = "false", showreviews = "false" },
-        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "true" }, },
+        new Dictionary<string, object> { { "isprint", "false" }, { "showreviews", "true" } },
     };
     private static readonly IEnumerable<FormMethod> _methods = new List<FormMethod>
     {

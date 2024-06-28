@@ -37,7 +37,7 @@ public static class RouteShortCircuitEndpointConventionBuilderExtensions
             401 => _401ShortCircuitMetadata,
             404 => _404ShortCircuitMetadata,
             null => _nullShortCircuitMetadata,
-            _ => new ShortCircuitMetadata(statusCode)
+            _ => new ShortCircuitMetadata(statusCode),
         };
 
         builder.Add(b => b.Metadata.Add(metadata));

@@ -36,7 +36,7 @@ public partial class VectorTest
         string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
             new Random().Next(),
         string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-        _ => DefaultSeed
+        _ => DefaultSeed,
     };
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

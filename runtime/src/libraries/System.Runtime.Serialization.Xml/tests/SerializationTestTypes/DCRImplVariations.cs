@@ -46,7 +46,7 @@ namespace SerializationTestTypes
             XQAArray = new XmlQualifiedName[]
             {
                 new XmlQualifiedName("Name1", "http://www.PlayForFun.com"),
-                new XmlQualifiedName("Name2", "http://www.FunPlay.com")
+                new XmlQualifiedName("Name2", "http://www.FunPlay.com"),
             };
             anyData = new Kid();
         }

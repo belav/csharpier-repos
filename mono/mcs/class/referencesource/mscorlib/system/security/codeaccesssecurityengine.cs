@@ -46,7 +46,7 @@ namespace System.Security
 
         // additional special flags
         SecurityControlEvidence = 16,
-        SecurityControlPrincipal = 17
+        SecurityControlPrincipal = 17,
     }
 
     internal static class CodeAccessSecurityEngine

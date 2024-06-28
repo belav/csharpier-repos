@@ -231,15 +231,15 @@ Parameter name: content",
                                     Property2 = 2,
                                     Property3 = 3,
                                     Property4 = 4,
-                                    Property5 = (object)null
-                                }
+                                    Property5 = (object)null,
+                                },
                             },
                             new { },
                             3,
                             null,
                             5,
-                            null
-                        }
+                            null,
+                        },
                     }
                 );
             var right = (JObject)
@@ -255,16 +255,16 @@ Parameter name: content",
                                     Property1 = (object)null,
                                     Property2 = 3,
                                     Property3 = new { },
-                                    Property5 = (object)null
-                                }
+                                    Property5 = (object)null,
+                                },
                             },
                             null,
                             null,
                             4,
                             5.1,
                             null,
-                            new { Property1 = 1 }
-                        }
+                            new { Property1 = 1 },
+                        },
                     }
                 );
 
@@ -316,8 +316,8 @@ Parameter name: content",
                         {
                             new { Property1 = 1 },
                             new { Property2 = 2 },
-                            new { Property3 = 3 }
-                        }
+                            new { Property3 = 3 },
+                        },
                     }
                 );
 
@@ -365,7 +365,7 @@ Parameter name: content",
                         new object[] { 1 },
                         new { Property1 = 1 },
                         1,
-                        new object[] { 1 }
+                        new object[] { 1 },
                     }
                 );
             var right = (JArray)
@@ -378,7 +378,7 @@ Parameter name: content",
                         new { Property1 = 1 },
                         true,
                         new { Property1 = 1 },
-                        null
+                        null,
                     }
                 );
 
@@ -423,7 +423,7 @@ Parameter name: content",
                         Property1 = new object[] { 1 },
                         Property2 = new object[] { 1 },
                         Property3 = true,
-                        Property4 = true
+                        Property4 = true,
                     }
                 );
             var right = (JObject)
@@ -433,7 +433,7 @@ Parameter name: content",
                         Property1 = new { Nested = true },
                         Property2 = true,
                         Property3 = new object[] { 1 },
-                        Property4 = (object)null
+                        Property4 = (object)null,
                     }
                 );
 
@@ -517,8 +517,8 @@ Parameter name: content",
                         {
                             new { Property1 = 1 },
                             new { Property2 = 2 },
-                            new { Property3 = 3 }
-                        }
+                            new { Property3 = 3 },
+                        },
                     }
                 );
 
@@ -643,7 +643,7 @@ Parameter name: content",
                 { "Property2", new JObject() },
                 { "Property3", JValue.CreateNull() },
                 { "Property4", JValue.CreateUndefined() },
-                { "Property5", new JArray() }
+                { "Property5", new JArray() },
             };
 
             var patch = JObject.Parse(
@@ -753,7 +753,7 @@ Parameter name: content",
                 {
                     MergeArrayHandling = MergeArrayHandling.Concat,
                     MergeNullValueHandling = MergeNullValueHandling.Merge,
-                    PropertyNameComparison = StringComparison.OrdinalIgnoreCase
+                    PropertyNameComparison = StringComparison.OrdinalIgnoreCase,
                 }
             );
 

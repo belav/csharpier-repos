@@ -79,7 +79,7 @@ IDynamicMemberReferenceOperation (Member Name: """", Containing Type: null) (Ope
             {
                 // CS1001: Identifier expected
                 //             int i = /*<bind>*/d./*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(11, 44)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(11, 44),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -164,7 +164,7 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
             {
                 // CS1001: Identifier expected
                 //             /*<bind>*/d.()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(9, 25)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(9, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -208,7 +208,7 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
             {
                 // CS1026: ) expected
                 //             /*<bind>*/d.GetValue(/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(9, 45)
+                Diagnostic(ErrorCode.ERR_CloseParenExpected, ";").WithLocation(9, 45),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -336,7 +336,7 @@ IDynamicMemberReferenceOperation (Member Name: ""GetValue"", Containing Type: nu
                 // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //             /*<bind>*/d.GetValue<int, C1>/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "d.GetValue<int, C1>")
-                    .WithLocation(9, 23)
+                    .WithLocation(9, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -382,7 +382,7 @@ IDynamicInvocationOperation (OperationKind.DynamicInvocation, Type: dynamic, IsI
             {
                 // CS1031: Type expected
                 //             /*<bind>*/d.GetValue<int,>()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(9, 38)
+                Diagnostic(ErrorCode.ERR_TypeExpected, ">").WithLocation(9, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -783,7 +783,7 @@ Block[B6] - Exit
                 //             p = (d1 ?? d2).Prop1<int>;
                 Diagnostic(ErrorCode.ERR_TypeArgsNotAllowed, "Prop1<int>")
                     .WithArguments("Prop1", "property")
-                    .WithLocation(10, 28)
+                    .WithLocation(10, 28),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

@@ -85,7 +85,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
@@ -150,7 +150,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
@@ -214,7 +214,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
@@ -288,7 +288,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
                 FormFieldName = "form-field-name",
-                SuppressXFrameOptionsHeader = suppressXFrameOptions
+                SuppressXFrameOptionsHeader = suppressXFrameOptions,
             };
 
             Mock<MockableAntiForgeryTokenSerializer> mockSerializer =

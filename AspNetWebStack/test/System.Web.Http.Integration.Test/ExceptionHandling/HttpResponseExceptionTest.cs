@@ -290,7 +290,7 @@ namespace System.Web.Http.ExceptionHandling
                     Content = new ObjectContent<string>(
                         String.Format("Error at {0}", stage),
                         new JsonMediaTypeFormatter()
-                    )
+                    ),
                 };
 
                 throw new HttpResponseException(response);

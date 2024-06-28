@@ -204,7 +204,7 @@ public class When_configuring_a_map_to_ignore_all_properties_with_an_inaccessibl
                 Id = 5,
                 CodeName = "007",
                 Nickname = "Jimmy",
-                ScreenName = "jbogard"
+                ScreenName = "jbogard",
             }
         );
     }
@@ -290,7 +290,7 @@ public class When_configuring_a_reverse_map_to_ignore_all_source_properties_with
             Id = 5,
             Name = "Bob",
             Age = 35,
-            Force = "With You"
+            Force = "With You",
         };
         source.Initialize();
         _destination = Mapper.Map<Source, Destination>(source);

@@ -97,7 +97,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
             };
 
             NotSupportedException ex = await Assert.ThrowsAsync<NotSupportedException>(
@@ -138,7 +138,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
             };
 
             JsonException ex = await Assert.ThrowsAsync<JsonException>(

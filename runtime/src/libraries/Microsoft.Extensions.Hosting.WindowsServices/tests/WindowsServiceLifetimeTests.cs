@@ -343,7 +343,7 @@ namespace Microsoft.Extensions.Hosting
                 )
                 {
                     ThrowOnStart = throwOnStart,
-                    ThrowOnStop = throwOnStop
+                    ThrowOnStop = throwOnStop,
                 };
 
             public ThrowingWindowsServiceLifetime(

@@ -41,6 +41,6 @@ namespace System.DirectoryServices.Protocols
         GatewayInternalError,
         AuthenticationFailed,
         UnresolvableUri,
-        Other
+        Other,
     }
 }

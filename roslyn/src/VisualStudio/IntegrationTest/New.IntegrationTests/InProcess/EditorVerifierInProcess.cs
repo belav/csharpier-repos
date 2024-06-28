@@ -166,7 +166,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 cancellationToken
             );

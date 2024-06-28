@@ -30,6 +30,6 @@ namespace System.Windows.Forms
     {
         AutoSize = 0,
         Absolute = 1,
-        Percent = 2
+        Percent = 2,
     }
 }

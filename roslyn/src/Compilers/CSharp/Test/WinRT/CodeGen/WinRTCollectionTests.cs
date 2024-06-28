@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
                     .GetReference(display: "WinRTTest"),
                 AssemblyMetadata
                     .CreateFromImage(TestMetadata.ResourcesNet451.SystemCore)
-                    .GetReference(display: "SystemCore")
+                    .GetReference(display: "SystemCore"),
             };
 
         [Fact, WorkItem(762316, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/762316")]

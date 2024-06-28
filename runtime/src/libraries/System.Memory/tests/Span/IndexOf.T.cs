@@ -214,7 +214,7 @@ namespace System.SpanTests
                 ReadOnlySpan<TwoBytes> noMatch2 = new TwoBytes[2]
                 {
                     new TwoBytes(10, NotTen),
-                    new TwoBytes(10, NotTen)
+                    new TwoBytes(10, NotTen),
                 };
                 Assert.Equal(-1, span.IndexOfAny(noMatch2));
                 Assert.Equal(-1, ros.IndexOfAny(noMatch2));
@@ -225,7 +225,7 @@ namespace System.SpanTests
                 {
                     new TwoBytes(10, NotTen),
                     new TwoBytes(10, NotTen),
-                    new TwoBytes(10, NotTen)
+                    new TwoBytes(10, NotTen),
                 };
                 Assert.Equal(-1, span.IndexOfAny(noMatch3));
                 Assert.Equal(-1, ros.IndexOfAny(noMatch3));
@@ -235,7 +235,7 @@ namespace System.SpanTests
                 ReadOnlySpan<TwoBytes> match2 = new TwoBytes[2]
                 {
                     new TwoBytes(0, Ten),
-                    new TwoBytes(0, Ten)
+                    new TwoBytes(0, Ten),
                 };
                 Assert.Equal(0, span.IndexOfAny(match2));
                 Assert.Equal(0, ros.IndexOfAny(match2));
@@ -246,7 +246,7 @@ namespace System.SpanTests
                 {
                     new TwoBytes(0, Ten),
                     new TwoBytes(0, Ten),
-                    new TwoBytes(0, Ten)
+                    new TwoBytes(0, Ten),
                 };
                 Assert.Equal(0, span.IndexOfAny(match3));
                 Assert.Equal(0, ros.IndexOfAny(match3));

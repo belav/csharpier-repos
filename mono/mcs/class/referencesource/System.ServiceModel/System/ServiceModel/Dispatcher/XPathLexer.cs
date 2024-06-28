@@ -334,7 +334,7 @@ namespace System.ServiceModel.Dispatcher
         Parent = 0x00000030 | XPathTokenID.Axis,
         Preceding = 0x00000031 | XPathTokenID.Axis,
         PrecedingSibling = 0x00000032 | XPathTokenID.Axis,
-        Self = 0x00000033 | XPathTokenID.Axis
+        Self = 0x00000033 | XPathTokenID.Axis,
     }
 
     // Represents a single token of an XPath expression

@@ -33,6 +33,6 @@ namespace System.Data.Services.Providers
     {
         EntityType = 0,
         ComplexType = 1,
-        Primitive = 2
+        Primitive = 2,
     }
 }

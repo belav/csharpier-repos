@@ -38,6 +38,6 @@ namespace System.ServiceProcess
         BatteryLow = 9,
         PowerStatusChange = 10,
         OemEvent = 11,
-        ResumeAutomatic = 18
+        ResumeAutomatic = 18,
     }
 }

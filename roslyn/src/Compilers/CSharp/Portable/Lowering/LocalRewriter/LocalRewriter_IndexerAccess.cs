@@ -975,7 +975,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             Length,
             SubtractFromLength,
             UseAsIs,
-            UseGetOffsetAPI
+            UseGetOffsetAPI,
         }
 
         /// <summary>

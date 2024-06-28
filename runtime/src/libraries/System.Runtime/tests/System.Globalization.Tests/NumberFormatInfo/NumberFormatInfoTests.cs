@@ -96,7 +96,7 @@ namespace System.Globalization.Tests
                 "\u0666",
                 "\u0667",
                 "\u0668",
-                "\u0669"
+                "\u0669",
             };
             nfi.NativeDigits = newDigits;
 
@@ -169,8 +169,8 @@ namespace System.Globalization.Tests
                     "\U0001E956",
                     "\U0001E957",
                     "\U0001E958",
-                    "\U0001E959"
-                }
+                    "\U0001E959",
+                },
             };
             yield return new object[]
             {
@@ -186,13 +186,13 @@ namespace System.Globalization.Tests
                     "\u0666",
                     "\u0667",
                     "\u0668",
-                    "\u0669"
-                }
+                    "\u0669",
+                },
             };
             yield return new object[]
             {
                 "en-US",
-                new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" }
+                new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" },
             };
             yield return new object[]
             {
@@ -208,8 +208,8 @@ namespace System.Globalization.Tests
                     "\u06F6",
                     "\u06F7",
                     "\u06F8",
-                    "\u06F9"
-                }
+                    "\u06F9",
+                },
             };
         }
 

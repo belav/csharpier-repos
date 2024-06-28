@@ -155,7 +155,7 @@ namespace System.Reflection.Tests
                         "Derived3",
                         "Derived4",
                         "Derived5",
-                        "Derived6"
+                        "Derived6",
                     }
                 )
                 {

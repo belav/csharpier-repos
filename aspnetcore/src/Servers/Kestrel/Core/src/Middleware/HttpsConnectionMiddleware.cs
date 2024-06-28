@@ -700,7 +700,7 @@ internal sealed class HttpsConnectionMiddleware
             ServerCertificate = httpsOptions.ServerCertificate,
             ApplicationProtocols = new List<SslApplicationProtocol>()
             {
-                SslApplicationProtocol.Http3
+                SslApplicationProtocol.Http3,
             },
             CertificateRevocationCheckMode = httpsOptions.CheckCertificateRevocation
                 ? X509RevocationMode.Online

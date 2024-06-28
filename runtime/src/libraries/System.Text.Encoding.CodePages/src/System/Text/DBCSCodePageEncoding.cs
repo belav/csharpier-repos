@@ -919,7 +919,7 @@ namespace System.Text
                     byte[] byteBuffer = new byte[]
                     {
                         unchecked((byte)(iBytes >> 8)),
-                        unchecked((byte)iBytes)
+                        unchecked((byte)iBytes),
                     };
                     charCount += fallbackHelper.InternalFallback(byteBuffer, bytes);
                 }
@@ -986,7 +986,7 @@ namespace System.Text
                             : new byte[]
                             {
                                 unchecked((byte)(iBytes >> 8)),
-                                unchecked((byte)iBytes)
+                                unchecked((byte)iBytes),
                             };
                     charCount += fallbackHelper.InternalFallback(byteBuffer, bytes);
                 }
@@ -1101,7 +1101,7 @@ namespace System.Text
                     byte[] byteBuffer = new byte[]
                     {
                         unchecked((byte)(iBytes >> 8)),
-                        unchecked((byte)iBytes)
+                        unchecked((byte)iBytes),
                     };
                     if (!fallbackHelper.InternalFallback(byteBuffer, bytes, ref chars))
                         ThrowCharsOverflow(decoder, true);
@@ -1174,7 +1174,7 @@ namespace System.Text
                             : new byte[]
                             {
                                 unchecked((byte)(iBytes >> 8)),
-                                unchecked((byte)iBytes)
+                                unchecked((byte)iBytes),
                             };
                     if (!fallbackHelper.InternalFallback(byteBuffer, bytes, ref chars))
                     {

@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.CodeLens
             FindReferencesSearchOptions.Default with
             {
                 Explicit = false,
-                UnidirectionalHierarchyCascade = true
+                UnidirectionalHierarchyCascade = true,
             };
 
         private static async Task<T?> FindAsync<T>(

@@ -36,6 +36,8 @@ namespace System.Web.Security
 
         DuplicateProviderUserKey = 10, // provider user key already exists
 
-        ProviderError = 11 // provider-specific error (couldn't map onto this enumeration)
+        ProviderError =
+            11 // provider-specific error (couldn't map onto this enumeration)
+        ,
     }
 }

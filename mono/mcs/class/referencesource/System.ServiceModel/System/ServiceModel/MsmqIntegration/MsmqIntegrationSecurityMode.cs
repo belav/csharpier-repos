@@ -6,7 +6,7 @@ namespace System.ServiceModel.MsmqIntegration
     public enum MsmqIntegrationSecurityMode
     {
         None,
-        Transport
+        Transport,
     }
 
     static class MsmqIntegrationSecurityModeHelper

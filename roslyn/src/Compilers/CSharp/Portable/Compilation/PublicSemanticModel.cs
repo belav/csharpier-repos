@@ -49,11 +49,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     or TypeParameterSyntax
                     or IndexerDeclarationSyntax
                     or AccessorDeclarationSyntax
-                    or DelegateDeclarationSyntax =>
-                        GetDeclaredSymbolForNode(targetSyntax).GetSymbol(),
-                    AnonymousFunctionExpressionSyntax anonymousFunction =>
-                        GetSymbolInfo(anonymousFunction).Symbol.GetSymbol(),
-                    _ => null
+                    or DelegateDeclarationSyntax => GetDeclaredSymbolForNode(targetSyntax)
+                        .GetSymbol(),
+                    AnonymousFunctionExpressionSyntax anonymousFunction => GetSymbolInfo(
+                        anonymousFunction
+                    )
+                        .Symbol.GetSymbol(),
+                    _ => null,
                 };
             }
         }

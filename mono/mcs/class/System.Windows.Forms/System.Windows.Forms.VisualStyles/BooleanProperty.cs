@@ -42,6 +42,6 @@ namespace System.Windows.Forms.VisualStyles
         UniformSizing = 2210,
         IntegralSizing = 2211,
         SourceGrow = 2212,
-        SourceShrink = 2213
+        SourceShrink = 2213,
     }
 }

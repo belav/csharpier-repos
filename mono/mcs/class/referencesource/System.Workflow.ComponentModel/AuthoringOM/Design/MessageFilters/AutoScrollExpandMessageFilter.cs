@@ -15,7 +15,7 @@
             Left = 2,
             Up = 4,
             Right = 8,
-            Down = 16
+            Down = 16,
         }
 
         private bool startAutoScroll = false;

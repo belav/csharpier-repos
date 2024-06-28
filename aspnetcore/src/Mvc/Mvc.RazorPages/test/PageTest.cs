@@ -31,7 +31,7 @@ public class PageTest
         var viewData = new ViewDataDictionary(modelMetadataProvider, modelState);
         var tempData = Mock.Of<ITempDataDictionary>();
 
-        var pageContext = new PageContext(actionContext) { ViewData = viewData, };
+        var pageContext = new PageContext(actionContext) { ViewData = viewData };
         var viewContext = new ViewContext(
             pageContext,
             NullView.Instance,
@@ -41,7 +41,7 @@ public class PageTest
             new HtmlHelperOptions()
         );
 
-        var page = new TestPage { PageContext = pageContext, ViewContext = viewContext, };
+        var page = new TestPage { PageContext = pageContext, ViewContext = viewContext };
 
         // Act & Assert
         Assert.Same(pageContext, page.PageContext);
@@ -1521,7 +1521,7 @@ public class PageTest
 
         var page = new TestPage()
         {
-            PageContext = new PageContext { HttpContext = mockHttpContext.Object }
+            PageContext = new PageContext { HttpContext = mockHttpContext.Object },
         };
 
         var fileStream = Stream.Null;
@@ -1544,7 +1544,7 @@ public class PageTest
 
         var page = new TestPage()
         {
-            PageContext = new PageContext { HttpContext = mockHttpContext.Object }
+            PageContext = new PageContext { HttpContext = mockHttpContext.Object },
         };
 
         var fileStream = Stream.Null;
@@ -1839,7 +1839,7 @@ public class PageTest
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()
         );
-        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData, }, };
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData } };
 
         // Act
         var result = page.ViewComponent("TagCloud");
@@ -1858,7 +1858,7 @@ public class PageTest
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()
         );
-        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData, }, };
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData } };
 
         // Act
         var result = page.ViewComponent(typeof(Guid));
@@ -1877,7 +1877,7 @@ public class PageTest
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()
         );
-        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData, }, };
+        var page = new TestPage { ViewContext = new ViewContext { ViewData = viewData } };
 
         var arguments = new { Arg1 = "Hi", Arg2 = "There" };
 
@@ -1906,7 +1906,7 @@ public class PageTest
             PageContext = new PageContext
             {
                 ValueProviderFactories = new[] { valueProviderFactory.Object },
-            }
+            },
         };
 
         var model = new object();
@@ -1926,7 +1926,7 @@ public class PageTest
     {
         get
         {
-            yield return new object[] { null, null, };
+            yield return new object[] { null, null };
 
             yield return new object[]
             {

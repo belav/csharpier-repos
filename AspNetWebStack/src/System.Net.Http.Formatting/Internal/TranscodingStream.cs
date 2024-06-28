@@ -563,11 +563,9 @@ namespace System.Text
             }
 
             int rentalLength =
-                buffer.Length < MinWriteRentedArraySize
-                    ? MinWriteRentedArraySize
-                    : buffer.Length > MaxWriteRentedArraySize
-                        ? MaxWriteRentedArraySize
-                        : buffer.Length;
+                buffer.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize
+                : buffer.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize
+                : buffer.Length;
 
             char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
             byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
@@ -632,11 +630,9 @@ namespace System.Text
             }
 
             int rentalLength =
-                buffer.Length < MinWriteRentedArraySize
-                    ? MinWriteRentedArraySize
-                    : buffer.Length > MaxWriteRentedArraySize
-                        ? MaxWriteRentedArraySize
-                        : buffer.Length;
+                buffer.Length < MinWriteRentedArraySize ? MinWriteRentedArraySize
+                : buffer.Length > MaxWriteRentedArraySize ? MaxWriteRentedArraySize
+                : buffer.Length;
 
             char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
             byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
@@ -746,9 +742,9 @@ namespace System.Text
                 int rentalLength =
                     remainingOuterEncodedBytes.Length < MinWriteRentedArraySize
                         ? MinWriteRentedArraySize
-                        : remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize
-                            ? MaxWriteRentedArraySize
-                            : remainingOuterEncodedBytes.Length;
+                    : remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize
+                        ? MaxWriteRentedArraySize
+                    : remainingOuterEncodedBytes.Length;
 
                 char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
                 byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);
@@ -837,9 +833,9 @@ namespace System.Text
                 int rentalLength =
                     remainingOuterEncodedBytes.Length < MinWriteRentedArraySize
                         ? MinWriteRentedArraySize
-                        : remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize
-                            ? MaxWriteRentedArraySize
-                            : remainingOuterEncodedBytes.Length;
+                    : remainingOuterEncodedBytes.Length > MaxWriteRentedArraySize
+                        ? MaxWriteRentedArraySize
+                    : remainingOuterEncodedBytes.Length;
 
                 char[] scratchChars = ArrayPool<char>.Shared.Rent(rentalLength);
                 byte[] scratchBytes = ArrayPool<byte>.Shared.Rent(rentalLength);

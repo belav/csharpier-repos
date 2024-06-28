@@ -23,6 +23,6 @@ namespace System.Data.SqlClient
 
         // use negative values for client-only-generated values
         Unknown = -1,
-        Client = -2
+        Client = -2,
     }
 }

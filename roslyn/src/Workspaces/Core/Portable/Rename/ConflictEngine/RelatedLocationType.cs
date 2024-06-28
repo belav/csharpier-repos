@@ -35,6 +35,6 @@ namespace Microsoft.CodeAnalysis.Rename.ConflictEngine
         /// </summary>
         UnresolvableConflict = 0x8,
 
-        UnresolvedConflict = PossiblyResolvableConflict | UnresolvableConflict
+        UnresolvedConflict = PossiblyResolvableConflict | UnresolvableConflict,
     }
 }

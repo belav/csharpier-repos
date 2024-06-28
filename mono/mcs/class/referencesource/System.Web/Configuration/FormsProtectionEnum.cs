@@ -17,6 +17,6 @@ namespace System.Web.Configuration
         All,
         None,
         Encryption,
-        Validation
+        Validation,
     }
 }

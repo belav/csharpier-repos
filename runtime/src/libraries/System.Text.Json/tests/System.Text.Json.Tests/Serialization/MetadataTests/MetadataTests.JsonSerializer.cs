@@ -84,11 +84,11 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     {
                         "Cold",
-                        new HighLowTemps { High = 20, Low = -10, }
+                        new HighLowTemps { High = 20, Low = -10 }
                     },
                     {
                         "Hot",
-                        new HighLowTemps { High = 60, Low = 20, }
+                        new HighLowTemps { High = 60, Low = 20 }
                     },
                 },
                 SummaryWords = new string[] { "Cool", "Windy", "Humid" },

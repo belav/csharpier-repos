@@ -52,7 +52,7 @@ public class InMemoryUserStore<TUser>
                 {
                     ClaimType = claim.Type,
                     ClaimValue = claim.Value,
-                    UserId = user.Id
+                    UserId = user.Id,
                 }
             );
         }
@@ -237,7 +237,7 @@ public class InMemoryUserStore<TUser>
                 UserId = user.Id,
                 ProviderKey = login.ProviderKey,
                 LoginProvider = login.LoginProvider,
-                ProviderDisplayName = login.ProviderDisplayName
+                ProviderDisplayName = login.ProviderDisplayName,
             }
         );
         _logins[GetLoginKey(login.LoginProvider, login.ProviderKey)] = user;
@@ -526,7 +526,7 @@ public class InMemoryUserStore<TUser>
                     UserId = user.Id,
                     LoginProvider = loginProvider,
                     TokenName = name,
-                    TokenValue = value
+                    TokenValue = value,
                 }
             );
         }

@@ -318,7 +318,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 MethodDesc method => method.OwningType as MetadataType,
                 PropertyPseudoDesc prop => prop.OwningType,
                 EventPseudoDesc e => e.OwningType,
-                _ => null
+                _ => null,
             };
         }
 
@@ -327,7 +327,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
             return entity switch
             {
                 MetadataType type => type.Module.ToString(),
-                _ => GetOwningType(entity)?.Module.ToString()
+                _ => GetOwningType(entity)?.Module.ToString(),
             };
         }
 
@@ -523,11 +523,10 @@ namespace Mono.Linker.Tests.TestCasesRunner
             }
             else
             {
-                var defaultBaseType = src.IsEnum
-                    ? "System.Enum"
-                    : src.IsValueType
-                        ? "System.ValueType"
-                        : "System.Object";
+                var defaultBaseType =
+                    src.IsEnum ? "System.Enum"
+                    : src.IsValueType ? "System.ValueType"
+                    : "System.Object";
                 expectedBaseName =
                     GetCustomAttributeCtorValues<object>(src, nameof(KeptBaseTypeAttribute))
                         .FirstOrDefault()
@@ -987,7 +986,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                 FieldReference fieldRef => fieldRef.FullName,
                                 MethodReference methodRef => methodRef.FullName,
                                 TypeReference typeRef => typeRef.FullName,
-                                _ => null
+                                _ => null,
                             };
                             break;
                     }

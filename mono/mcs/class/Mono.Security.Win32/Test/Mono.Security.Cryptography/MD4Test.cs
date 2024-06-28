@@ -77,7 +77,7 @@ namespace MonoTests.Security.Cryptography
                 0xe0,
                 0xc0,
                 0x89,
-                0xc0
+                0xc0,
             };
             byte[] input = new byte[0];
 
@@ -111,7 +111,7 @@ namespace MonoTests.Security.Cryptography
                 0xdb,
                 0xd6,
                 0xfb,
-                0x24
+                0x24,
             };
             byte[] input = Encoding.Default.GetBytes("a");
 
@@ -145,7 +145,7 @@ namespace MonoTests.Security.Cryptography
                 0x7a,
                 0xa6,
                 0x72,
-                0x9d
+                0x9d,
             };
             byte[] input = Encoding.Default.GetBytes("abc");
 
@@ -179,7 +179,7 @@ namespace MonoTests.Security.Cryptography
                 0xe1,
                 0xc7,
                 0x01,
-                0x4b
+                0x4b,
             };
             byte[] input = Encoding.Default.GetBytes("message digest");
 
@@ -213,7 +213,7 @@ namespace MonoTests.Security.Cryptography
                 0xdf,
                 0x41,
                 0x2d,
-                0xa9
+                0xa9,
             };
             byte[] input = Encoding.Default.GetBytes("abcdefghijklmnopqrstuvwxyz");
 
@@ -248,7 +248,7 @@ namespace MonoTests.Security.Cryptography
                 0x53,
                 0xe7,
                 0xf0,
-                0xe4
+                0xe4,
             };
             byte[] input = Encoding.Default.GetBytes(
                 "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
@@ -285,7 +285,7 @@ namespace MonoTests.Security.Cryptography
                 0x4f,
                 0xcc,
                 0x05,
-                0x36
+                0x36,
             };
             byte[] input = Encoding.Default.GetBytes(
                 "12345678901234567890123456789012345678901234567890123456789012345678901234567890"

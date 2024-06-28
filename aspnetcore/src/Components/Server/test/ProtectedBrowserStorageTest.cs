@@ -347,7 +347,7 @@ public class ProtectedBrowserStorageTest
         {
             $"{typeName}:testStore:key 1",
             $"{typeName}:testStore:key 2",
-            $"{typeName}:testStore:key 3"
+            $"{typeName}:testStore:key 3",
         };
         Assert.Equal(expectedPurposes, dataProtectionProvider.ProtectorsCreated.ToArray());
 

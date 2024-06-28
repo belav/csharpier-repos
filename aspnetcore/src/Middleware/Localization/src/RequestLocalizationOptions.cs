@@ -25,7 +25,7 @@ public class RequestLocalizationOptions
         {
             new QueryStringRequestCultureProvider { Options = this },
             new CookieRequestCultureProvider { Options = this },
-            new AcceptLanguageHeaderRequestCultureProvider { Options = this }
+            new AcceptLanguageHeaderRequestCultureProvider { Options = this },
         };
     }
 

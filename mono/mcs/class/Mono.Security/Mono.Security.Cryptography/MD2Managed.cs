@@ -309,7 +309,7 @@ namespace Mono.Security.Cryptography
             159,
             17,
             131,
-            20
+            20,
         };
 
         private byte[] Padding(int nLength)

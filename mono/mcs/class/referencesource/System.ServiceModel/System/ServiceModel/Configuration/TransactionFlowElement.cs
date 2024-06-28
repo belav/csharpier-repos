@@ -64,7 +64,7 @@ namespace System.ServiceModel.Configuration
         {
             return new TransactionFlowBindingElement(true, TransactionProtocol)
             {
-                AllowWildcardAction = this.AllowWildcardAction
+                AllowWildcardAction = this.AllowWildcardAction,
             };
         }
 

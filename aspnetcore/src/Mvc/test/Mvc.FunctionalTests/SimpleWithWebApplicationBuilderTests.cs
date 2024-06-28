@@ -158,7 +158,7 @@ public class SimpleWithWebApplicationBuilderTests
         {
             builder.ConfigureAppConfiguration(builder =>
             {
-                var config = new[] { KeyValuePair.Create("Greeting", "Bonjour tout le monde"), };
+                var config = new[] { KeyValuePair.Create("Greeting", "Bonjour tout le monde") };
 
                 builder.AddInMemoryCollection(config);
             });

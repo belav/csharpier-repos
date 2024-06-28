@@ -3535,7 +3535,7 @@ record struct S
                 // (10,15): error CS8983: A 'struct' with field initializers must include an explicitly declared constructor.
                 // record struct S
                 Diagnostic(ErrorCode.ERR_StructHasInitializersAndNoDeclaredConstructor, "S")
-                    .WithLocation(10, 15)
+                    .WithLocation(10, 15),
             };
 
             var comp = CreateCompilation(

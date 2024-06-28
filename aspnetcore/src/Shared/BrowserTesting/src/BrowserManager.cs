@@ -74,13 +74,16 @@ public class BrowserManager
 
                     var browser = options.BrowserKind switch
                     {
-                        BrowserKind.Chromium =>
-                            await Playwright.Chromium.LaunchAsync(effectiveLaunchOptions),
-                        BrowserKind.Firefox =>
-                            await Playwright.Firefox.LaunchAsync(effectiveLaunchOptions),
-                        BrowserKind.Webkit =>
-                            await Playwright.Webkit.LaunchAsync(effectiveLaunchOptions),
-                        _ => throw new InvalidOperationException("Unsupported browser type.")
+                        BrowserKind.Chromium => await Playwright.Chromium.LaunchAsync(
+                            effectiveLaunchOptions
+                        ),
+                        BrowserKind.Firefox => await Playwright.Firefox.LaunchAsync(
+                            effectiveLaunchOptions
+                        ),
+                        BrowserKind.Webkit => await Playwright.Webkit.LaunchAsync(
+                            effectiveLaunchOptions
+                        ),
+                        _ => throw new InvalidOperationException("Unsupported browser type."),
                     };
 
                     _launchBrowsers.Add(browserName, browser);

@@ -241,7 +241,7 @@ namespace System.Workflow.ComponentModel
                                                 .GetEnclosingActivity(exceptionHandlers)
                                                 .GetType()
                                                 .Name,
-                                            catchType.FullName
+                                            catchType.FullName,
                                         }
                                     ),
                                     ErrorNumbers.Error_ScopeDuplicateFaultHandlerActivityFor

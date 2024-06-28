@@ -37,7 +37,7 @@ namespace System.Text.Json.Serialization.Tests
             MyHashtableWrapper = new HashtableWrapper(
                 new List<KeyValuePair<string, object>>
                 {
-                    new KeyValuePair<string, object>("key", "value")
+                    new KeyValuePair<string, object>("key", "value"),
                 }
             );
             MyArrayListWrapper = new ArrayListWrapper() { "Hello" };

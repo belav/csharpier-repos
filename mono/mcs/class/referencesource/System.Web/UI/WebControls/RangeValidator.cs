@@ -173,7 +173,7 @@ namespace System.Web.UI.WebControls
                             maximumValue,
                             "MaximumValue",
                             ID,
-                            PropertyConverter.EnumToString(typeof(ValidationDataType), Type)
+                            PropertyConverter.EnumToString(typeof(ValidationDataType), Type),
                         }
                     )
                 );
@@ -189,7 +189,7 @@ namespace System.Web.UI.WebControls
                             minumumValue,
                             "MinimumValue",
                             ID,
-                            PropertyConverter.EnumToString(typeof(ValidationDataType), Type)
+                            PropertyConverter.EnumToString(typeof(ValidationDataType), Type),
                         }
                     )
                 );
@@ -209,7 +209,7 @@ namespace System.Web.UI.WebControls
                 throw new HttpException(
                     SR.GetString(
                         SR.Validator_range_overalap,
-                        new string[] { maximumValue, minumumValue, ID, }
+                        new string[] { maximumValue, minumumValue, ID }
                     )
                 );
             }

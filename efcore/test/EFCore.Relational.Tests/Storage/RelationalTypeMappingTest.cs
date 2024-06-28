@@ -129,7 +129,7 @@ public abstract class RelationalTypeMappingTest
                         size: 33,
                         fixedLength: true,
                         storeTypePostfix: StoreTypePostfix.Size
-                    )
+                    ),
                 }
                     .Concat(additionalArgs)
                     .ToArray(),
@@ -199,7 +199,7 @@ public abstract class RelationalTypeMappingTest
                         unicode: false,
                         fixedLength: true,
                         storeTypePostfix: StoreTypePostfix.Size
-                    )
+                    ),
                 }
                     .Concat(additionalArgs)
                     .ToArray(),
@@ -652,7 +652,7 @@ public abstract class RelationalTypeMappingTest
         var parameters = new[]
         {
             Expression.Parameter(typeof(DateTimeOffset)),
-            Expression.Parameter(typeof(DateTimeOffset))
+            Expression.Parameter(typeof(DateTimeOffset)),
         };
         var equalsBody = typeMapping.Comparer.ExtractEqualsBody(parameters[0], parameters[1]);
         var equalsComparer = Expression

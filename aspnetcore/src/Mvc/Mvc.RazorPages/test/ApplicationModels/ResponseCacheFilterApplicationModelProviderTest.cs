@@ -102,7 +102,7 @@ public class ResponseCacheFilterApplicationModelProviderTest
         var options = Options.Create(new MvcOptions());
         options.Value.CacheProfiles.Add(
             "TestCacheProfile",
-            new CacheProfile { Duration = 14, VaryByQueryKeys = new[] { "A" }, }
+            new CacheProfile { Duration = 14, VaryByQueryKeys = new[] { "A" } }
         );
         var provider = new ResponseCacheFilterApplicationModelProvider(
             options,

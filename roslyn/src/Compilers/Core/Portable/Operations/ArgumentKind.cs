@@ -28,6 +28,6 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// Argument is a default value supplied automatically by the compilers.
         /// </summary>
-        DefaultValue = 0x3
+        DefaultValue = 0x3,
     }
 }

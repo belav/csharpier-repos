@@ -20,7 +20,7 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
     private readonly JwtSecurityTokenHandler _defaultHandler = new JwtSecurityTokenHandler();
     private readonly JsonWebTokenHandler _defaultTokenHandler = new JsonWebTokenHandler
     {
-        MapInboundClaims = JwtSecurityTokenHandler.DefaultMapInboundClaims
+        MapInboundClaims = JwtSecurityTokenHandler.DefaultMapInboundClaims,
     };
 
     private bool _mapInboundClaims = JwtSecurityTokenHandler.DefaultMapInboundClaims;
@@ -197,7 +197,7 @@ public class OpenIdConnectOptions : RemoteAuthenticationOptions
         new OpenIdConnectProtocolValidator()
         {
             RequireStateValidation = false,
-            NonceLifetime = TimeSpan.FromMinutes(15)
+            NonceLifetime = TimeSpan.FromMinutes(15),
         };
 
     /// <summary>

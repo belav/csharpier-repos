@@ -135,7 +135,7 @@ namespace Microsoft.Extensions.FileProviders.Physical
             // Act - 2
             directoryInfo
                 .Setup(d => d.EnumerateFileSystemInfos())
-                .Returns(new[] { CreateFile(filePath1), });
+                .Returns(new[] { CreateFile(filePath1) });
             clock.Increment();
             var result2 = token.HasChanged;
 

@@ -24,26 +24,26 @@ namespace System.Tests
             {
                 @"http://host/path1\path2",
                 "http://host/path1/path2",
-                "http://host/path1/path2"
+                "http://host/path1/path2",
             };
 
             yield return new object[]
             {
                 "http://userinfo@host:90/path?query#fragment",
                 "http://userinfo@host:90/path?query#fragment",
-                "http://userinfo@host:90/path?query#fragment"
+                "http://userinfo@host:90/path?query#fragment",
             };
             yield return new object[]
             {
                 "http://userinfo@host:80/path?query#fragment",
                 "http://userinfo@host/path?query#fragment",
-                "http://userinfo@host/path?query#fragment"
+                "http://userinfo@host/path?query#fragment",
             };
             yield return new object[]
             {
                 "http://userinfo@host:90/path?query#fragment",
                 "http://userinfo@host:90/path?query#fragment",
-                "http://userinfo@host:90/path?query#fragment"
+                "http://userinfo@host:90/path?query#fragment",
             };
 
             // Escaped and non-ascii
@@ -51,13 +51,13 @@ namespace System.Tests
             {
                 "http://userinfo%%%2F%3F%23%5B%5D%40%3B%26%2B%2C%5C%2g%2G@host",
                 "http://userinfo%25%25%2F%3F%23%5B%5D%40%3B%26%2B%2C%5C%252g%252G@host/",
-                "http://userinfo%%%2F%3F%23%5B%5D%40%3B%26%2B%2C%5C%2g%2G@host/"
+                "http://userinfo%%%2F%3F%23%5B%5D%40%3B%26%2B%2C%5C%2g%2G@host/",
             };
             yield return new object[]
             {
                 "http://\u1234\u2345/\u1234\u2345?\u1234\u2345#\u1234\u2345",
                 "http://\u1234\u2345/%E1%88%B4%E2%8D%85?%E1%88%B4%E2%8D%85#%E1%88%B4%E2%8D%85",
-                "http://\u1234\u2345/\u1234\u2345?\u1234\u2345#\u1234\u2345"
+                "http://\u1234\u2345/\u1234\u2345?\u1234\u2345#\u1234\u2345",
             };
 
             // IP
@@ -65,13 +65,13 @@ namespace System.Tests
             {
                 "http://192.168.0.1",
                 "http://192.168.0.1/",
-                "http://192.168.0.1/"
+                "http://192.168.0.1/",
             };
             yield return new object[]
             {
                 "http://192.168.0.1/",
                 "http://192.168.0.1/",
-                "http://192.168.0.1/"
+                "http://192.168.0.1/",
             };
             yield return new object[] { "http://[::1]", "http://[::1]/", "http://[::1]/" };
             yield return new object[] { "http://[::1]/", "http://[::1]/", "http://[::1]/" };
@@ -88,7 +88,7 @@ namespace System.Tests
             {
                 @"\\\/\/servername\sharename\path\filename",
                 "file://servername/sharename/path/filename",
-                "file://servername/sharename/path/filename"
+                "file://servername/sharename/path/filename",
             };
 
             // Explicit UNC
@@ -122,7 +122,7 @@ namespace System.Tests
                 {
                     "/path/filename",
                     "file:///path/filename",
-                    "file:///path/filename"
+                    "file:///path/filename",
                 };
             }
 
@@ -131,7 +131,7 @@ namespace System.Tests
             {
                 "http://host/path1/../path2",
                 "http://host/path2",
-                "http://host/path2"
+                "http://host/path2",
             };
             yield return new object[] { "http://host/../", "http://host/", "http://host/" };
         }
@@ -168,7 +168,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -179,7 +179,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -190,7 +190,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -201,7 +201,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -212,7 +212,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -223,7 +223,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -234,7 +234,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -245,7 +245,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -256,7 +256,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -267,7 +267,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -278,7 +278,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -289,7 +289,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -300,7 +300,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -311,7 +311,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -322,7 +322,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -333,7 +333,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -344,7 +344,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -355,7 +355,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -366,7 +366,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -377,7 +377,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -388,7 +388,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -399,7 +399,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -410,7 +410,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -421,7 +421,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -432,7 +432,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -443,7 +443,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -454,7 +454,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 0,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -465,7 +465,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -476,7 +476,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 65535,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -487,7 +487,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -498,7 +498,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -509,7 +509,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -520,7 +520,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -531,7 +531,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -542,7 +542,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -553,7 +553,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 443,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -564,7 +564,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -575,7 +575,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -586,7 +586,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -597,7 +597,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -608,7 +608,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
 
             // IPv4 host - decimal
@@ -621,7 +621,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -632,7 +632,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -643,7 +643,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -654,7 +654,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -665,7 +665,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -676,7 +676,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -687,7 +687,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -698,7 +698,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -709,7 +709,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -720,7 +720,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -731,7 +731,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
 
             // IPv4 host - hex
@@ -744,7 +744,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -755,7 +755,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -766,7 +766,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -777,7 +777,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -788,7 +788,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -799,7 +799,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -810,7 +810,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -821,7 +821,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -832,7 +832,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -843,7 +843,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
 
             // IPv4 host - octet
@@ -856,7 +856,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                false
+                false,
             };
 
             // IPv4 host - implicit UNC
@@ -871,7 +871,7 @@ namespace System.Tests
                     UriHostNameType.IPv4,
                     -1,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
@@ -882,7 +882,7 @@ namespace System.Tests
                     UriHostNameType.IPv4,
                     -1,
                     true,
-                    false
+                    false,
                 };
             }
             yield return new object[]
@@ -894,7 +894,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -905,7 +905,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 -1,
                 true,
-                false
+                false,
             };
 
             // IPv4 host - explicit UNC
@@ -918,7 +918,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 -1,
                 true,
-                false
+                false,
             };
             if (s_isWindowsSystem) // Unc can only start with '/' on Windows
             {
@@ -931,7 +931,7 @@ namespace System.Tests
                     UriHostNameType.IPv4,
                     -1,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
@@ -942,7 +942,7 @@ namespace System.Tests
                     UriHostNameType.IPv4,
                     -1,
                     true,
-                    false
+                    false,
                 };
             }
             yield return new object[]
@@ -954,7 +954,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 -1,
                 true,
-                false
+                false,
             };
 
             // IPv4 host - other
@@ -967,7 +967,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -978,7 +978,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 21,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -989,7 +989,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1000,7 +1000,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 -1,
                 true,
-                false
+                false,
             };
 
             // IPv6 host
@@ -1013,7 +1013,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1024,7 +1024,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1035,7 +1035,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 90,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1046,7 +1046,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1057,7 +1057,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1068,7 +1068,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1079,7 +1079,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             }; // SIIT
             yield return new object[]
             {
@@ -1090,7 +1090,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             }; // SIIT (invalid)
             yield return new object[]
             {
@@ -1101,7 +1101,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             }; // ISATAP
             yield return new object[]
             {
@@ -1112,7 +1112,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             }; // Prefix
 
             // IPv6 Host - implicit UNC
@@ -1127,7 +1127,7 @@ namespace System.Tests
                     UriHostNameType.IPv6,
                     -1,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
@@ -1138,7 +1138,7 @@ namespace System.Tests
                     UriHostNameType.IPv6,
                     -1,
                     true,
-                    false
+                    false,
                 };
             }
             yield return new object[]
@@ -1150,7 +1150,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1161,7 +1161,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1172,7 +1172,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
 
             // IPv6 host - explicit UNC
@@ -1185,7 +1185,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1196,7 +1196,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1207,7 +1207,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
 
             // IPv6 Host - other
@@ -1220,7 +1220,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1231,7 +1231,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 21,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1242,7 +1242,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1253,7 +1253,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 -1,
                 true,
-                false
+                false,
             };
 
             // File - empty path
@@ -1266,7 +1266,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1277,7 +1277,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             // File - host
 
@@ -1290,7 +1290,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1301,7 +1301,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // File - explicit with windows drive with empty path
@@ -1314,7 +1314,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1325,7 +1325,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1336,7 +1336,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1347,7 +1347,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // File - explicit with windows drive with path
@@ -1360,7 +1360,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1371,7 +1371,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1382,7 +1382,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1393,7 +1393,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // File - '/' + windows drive with empty path
@@ -1406,7 +1406,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1417,7 +1417,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1428,7 +1428,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1439,7 +1439,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // File - '/' + windows drive with path
@@ -1452,7 +1452,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1463,7 +1463,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1474,7 +1474,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1485,7 +1485,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // File - implicit with empty path
@@ -1498,7 +1498,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1509,7 +1509,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1520,7 +1520,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1531,7 +1531,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // File - implicit with path
@@ -1544,7 +1544,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1555,7 +1555,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1566,7 +1566,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1577,7 +1577,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // UNC - implicit with empty path
@@ -1592,7 +1592,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
@@ -1603,7 +1603,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    false
+                    false,
                 };
             }
             yield return new object[]
@@ -1615,7 +1615,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1626,7 +1626,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
 
             // UNC - implicit with path
@@ -1641,7 +1641,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
@@ -1652,7 +1652,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    false
+                    false,
                 };
             }
             yield return new object[]
@@ -1664,7 +1664,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1675,7 +1675,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1686,7 +1686,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
 
             // UNC - explicit with empty host and empty path
@@ -1699,7 +1699,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1710,7 +1710,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1721,7 +1721,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1732,7 +1732,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // UNC - explicit with empty host and non empty path
@@ -1745,7 +1745,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1756,7 +1756,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1767,7 +1767,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1778,7 +1778,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // UNC - explicit with empty host and query
@@ -1791,7 +1791,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1802,7 +1802,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1813,7 +1813,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1824,7 +1824,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1835,7 +1835,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1846,7 +1846,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // UNC - explicit with empty host and fragment
@@ -1859,7 +1859,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1870,7 +1870,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1881,7 +1881,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -1892,7 +1892,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // UNC - explicit with non empty host and empty path
@@ -1905,7 +1905,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1916,7 +1916,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1927,7 +1927,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1938,7 +1938,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
 
             // UNC - explicit with path
@@ -1951,7 +1951,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1962,7 +1962,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1973,7 +1973,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -1984,7 +1984,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
 
             // UNC - explicit with windows drive
@@ -1997,7 +1997,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2008,7 +2008,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2019,7 +2019,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2030,7 +2030,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // Unix path
@@ -2046,7 +2046,7 @@ namespace System.Tests
                     UriHostNameType.Basic,
                     -1,
                     true,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
@@ -2057,7 +2057,7 @@ namespace System.Tests
                     UriHostNameType.Basic,
                     -1,
                     true,
-                    true
+                    true,
                 };
             }
 
@@ -2071,7 +2071,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
 
             yield return new object[]
@@ -2083,7 +2083,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2094,7 +2094,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2105,7 +2105,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2116,7 +2116,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2127,7 +2127,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // Mailto
@@ -2140,7 +2140,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 25,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2151,7 +2151,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 25,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2162,7 +2162,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 25,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2173,7 +2173,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 25,
                 true,
-                true
+                true,
             };
 
             // FTP
@@ -2186,7 +2186,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 21,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2197,7 +2197,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 21,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2208,7 +2208,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 21,
                 true,
-                false
+                false,
             };
 
             // Telnet
@@ -2221,7 +2221,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2232,7 +2232,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2243,7 +2243,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2254,7 +2254,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2265,7 +2265,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2276,7 +2276,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2287,7 +2287,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2298,7 +2298,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 23,
                 true,
-                true
+                true,
             };
 
             // Unknown
@@ -2311,7 +2311,7 @@ namespace System.Tests
                 UriHostNameType.Unknown,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2322,7 +2322,7 @@ namespace System.Tests
                 UriHostNameType.Unknown,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2333,7 +2333,7 @@ namespace System.Tests
                 UriHostNameType.Unknown,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2344,7 +2344,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2355,7 +2355,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2366,7 +2366,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2377,7 +2377,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2388,7 +2388,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2399,7 +2399,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2410,7 +2410,7 @@ namespace System.Tests
                 UriHostNameType.Basic,
                 -1,
                 true,
-                true
+                true,
             };
 
             // Loopback - HTTP
@@ -2423,7 +2423,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2434,7 +2434,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                true
+                true,
             };
 
             // Loopback - implicit UNC with localhost
@@ -2449,7 +2449,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
@@ -2460,7 +2460,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    true
+                    true,
                 };
             }
             yield return new object[]
@@ -2472,7 +2472,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2483,7 +2483,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             // Loopback - explicit UNC with localhost
             yield return new object[]
@@ -2495,7 +2495,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2506,7 +2506,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2517,7 +2517,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2528,7 +2528,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             // Loopback - implicit UNC with loopback
             if (s_isWindowsSystem) // Unc can only start with '/' on Windows
@@ -2542,7 +2542,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
@@ -2553,7 +2553,7 @@ namespace System.Tests
                     UriHostNameType.Dns,
                     -1,
                     true,
-                    true
+                    true,
                 };
             }
             yield return new object[]
@@ -2565,7 +2565,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2576,7 +2576,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             // Loopback - explicit UNC with loopback
             yield return new object[]
@@ -2588,7 +2588,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2599,7 +2599,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2610,7 +2610,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2621,7 +2621,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
             // Loopback - IpV4
             yield return new object[]
@@ -2633,7 +2633,7 @@ namespace System.Tests
                 UriHostNameType.IPv4,
                 80,
                 true,
-                true
+                true,
             };
             // Loopback - IpV6
             yield return new object[]
@@ -2645,7 +2645,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2656,7 +2656,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                true
+                true,
             };
             // Loopback - File
             yield return new object[]
@@ -2668,7 +2668,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 -1,
                 true,
-                true
+                true,
             };
 
             // RFC incompatibility
@@ -2682,7 +2682,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2693,7 +2693,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2704,7 +2704,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2715,7 +2715,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2726,7 +2726,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2737,7 +2737,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2748,7 +2748,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2759,7 +2759,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
         }
 
@@ -2809,7 +2809,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2822,7 +2822,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2835,7 +2835,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -2848,7 +2848,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
 
             yield return new object[]
@@ -2862,7 +2862,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 50,
                 false,
-                false
+                false,
             }; // Scope ID
             yield return new object[]
             {
@@ -2875,7 +2875,7 @@ namespace System.Tests
                 UriHostNameType.IPv6,
                 80,
                 true,
-                false
+                false,
             }; // Scope ID and prefix
 
             yield return new object[]
@@ -2889,7 +2889,7 @@ namespace System.Tests
                 UriHostNameType.Dns,
                 80,
                 true,
-                false
+                false,
             };
         }
 
@@ -2946,7 +2946,7 @@ namespace System.Tests
                 "http://host/PATH?QUERY#FRAGMENT",
                 "/PATH",
                 "?QUERY",
-                "#FRAGMENT"
+                "#FRAGMENT",
             };
             yield return new object[] { "http://host/", "/", "", "" };
             yield return new object[] { "http://host/path1/path2", "/path1/path2", "", "" };
@@ -2957,7 +2957,7 @@ namespace System.Tests
                 "http://host/path1/path2/?query",
                 "/path1/path2/",
                 "?query",
-                ""
+                "",
             };
             yield return new object[] { "http://host/#fragment", "/", "", "#fragment" };
             yield return new object[]
@@ -2965,7 +2965,7 @@ namespace System.Tests
                 "http://host/path1/path2/#fragment",
                 "/path1/path2/",
                 "",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[] { "http://host/?query#fragment", "/", "?query", "#fragment" };
             yield return new object[]
@@ -2973,7 +2973,7 @@ namespace System.Tests
                 "http://host/path1/path2/?query#fragment",
                 "/path1/path2/",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[] { "http://host/?#fragment", "/", "?", "#fragment" };
             yield return new object[]
@@ -2981,7 +2981,7 @@ namespace System.Tests
                 "http://host/path1/path2/?#fragment",
                 "/path1/path2/",
                 "?",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[] { "http://host/?query#", "/", "?query", "#" };
             yield return new object[]
@@ -2989,7 +2989,7 @@ namespace System.Tests
                 "http://host/path1/path2/?query#",
                 "/path1/path2/",
                 "?query",
-                "#"
+                "#",
             };
             yield return new object[] { "http://host/?", "/", "?", "" };
             yield return new object[] { "http://host/path1/path2/?", "/path1/path2/", "?", "" };
@@ -3002,14 +3002,14 @@ namespace System.Tests
                 "http://host/?query1?query2#fragment1#fragment2?query3",
                 "/",
                 "?query1?query2",
-                "#fragment1#fragment2?query3"
+                "#fragment1#fragment2?query3",
             };
             yield return new object[]
             {
                 "http://host/?query1=value&query2",
                 "/",
                 "?query1=value&query2",
-                ""
+                "",
             };
             yield return new object[] { "http://host/?:@?/", "/", "?:@?/", "" };
             yield return new object[]
@@ -3017,63 +3017,63 @@ namespace System.Tests
                 @"http://host/path1\path2/path3\path4",
                 "/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"http://host/path1\path2/path3\path4\",
                 "/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/path    \t \r \n  \x0009 \x000A \x000D",
                 "/path",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/path?query    \t \r \n  \x0009 \x000A \x000D",
                 "/path",
                 "?query",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/path#fragment    \t \r \n  \x0009 \x000A \x000D",
                 "/path",
                 "",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "http://192.168.0.1:50/path1/page?query#fragment",
                 "/path1/page",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "http://192.168.0.1:80/\u1234\u2345/\u4567\u5678?query#fragment",
                 "/%E1%88%B4%E2%8D%85/%E4%95%A7%E5%99%B8",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "http://[1111:2222:3333::431]/path1/page?query#fragment",
                 "/path1/page",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "http://[1111:2222:3333::431]/\u1234\u2345/\u4567\u5678?query#fragment",
                 "/%E1%88%B4%E2%8D%85/%E4%95%A7%E5%99%B8",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
 
             // File with empty path
@@ -3095,28 +3095,28 @@ namespace System.Tests
                 @"file://C:/path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"file://C|/path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"file://C:\path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"file://C|\path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             // File with windows drive ending with backslash
             yield return new object[]
@@ -3124,28 +3124,28 @@ namespace System.Tests
                 @"file://C:/path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"file://C|/path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"file://C:\path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"file://C|\path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             // File with host
             yield return new object[] { "file://path1/path2", "/path2", "", "" };
@@ -3157,28 +3157,28 @@ namespace System.Tests
                     @"file:///path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:///path1\path2/path3%5Cpath4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://localhost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://localhost/path1%5Cpath2",
                     "/path1/path2",
                     "",
-                    ""
+                    "",
                 };
             }
             else // Unix paths preserve backslash
@@ -3188,28 +3188,28 @@ namespace System.Tests
                     @"file:///path1\path2/path3\path4",
                     @"/path1%5Cpath2/path3%5Cpath4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:///path1%5Cpath2\path3",
                     @"/path1%5Cpath2%5Cpath3",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://localhost/path1\path2/path3\path4\",
                     @"/path1%5Cpath2/path3%5Cpath4%5C",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://localhost/path1%5Cpath2\path3",
                     @"/path1%5Cpath2%5Cpath3",
                     "",
-                    ""
+                    "",
                 };
             }
             // Implicit file with empty path
@@ -3228,28 +3228,28 @@ namespace System.Tests
                 @"C:/path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"C|/path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"C:\path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"C|\path1\path2/path3\path4",
                 "C:/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             // Implicit file ending with backlash
             yield return new object[]
@@ -3257,28 +3257,28 @@ namespace System.Tests
                 @"C:/path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"C|/path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"C:\path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"C|\path1\path2/path3\path4\",
                 "C:/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
 
             // Implicit UNC with empty path
@@ -3306,14 +3306,14 @@ namespace System.Tests
                     @"//unchost/path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"/\unchost/path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
             }
             yield return new object[]
@@ -3321,21 +3321,21 @@ namespace System.Tests
                 @"\\unchost/path1\path2/path3\path4",
                 "/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"\/unchost/path1\path2/path3\path4",
                 "/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"\\\/\/servername\sharename\path\filename",
                 "/sharename/path/filename",
                 "",
-                ""
+                "",
             };
             // Implicit UNC ending with backslash
             if (s_isWindowsSystem) // Unix UNC paths must start with '\'
@@ -3345,14 +3345,14 @@ namespace System.Tests
                     @"//unchost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"/\unchost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
             }
             yield return new object[]
@@ -3360,14 +3360,14 @@ namespace System.Tests
                 @"\\unchost/path1\path2/path3\path4\",
                 "/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"\/unchost/path1\path2/path3\path4\",
                 "/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
             // Explicit UNC with empty path
             yield return new object[] { @"file://\\unchost", "/", "", "" };
@@ -3407,28 +3407,28 @@ namespace System.Tests
                 @"file://\\unchost/path1/path2?query#fragment",
                 "/path1/path2",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "file:////unchost/path1/path2?query#fragment",
                 "/path1/path2",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 @"file:///\unchost/path1/path2?query#fragment",
                 "/path1/path2",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 @"file://\/unchost/path1/path2?query#fragment",
                 "/path1/path2",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             // Explicit UNC with a windows drive as host
             yield return new object[] { @"file://\\C:/path1/path2", "C:/path1/path2", "", "" };
@@ -3442,7 +3442,7 @@ namespace System.Tests
                 "file://host/path?query#fragment",
                 "/path",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
 
             if (s_isWindowsSystem)
@@ -3453,28 +3453,28 @@ namespace System.Tests
                     @"file://\\unchost/path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:////unchost/path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:///\unchost/path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://\/unchost/path1\path2/path3\path4",
                     "/path1/path2/path3/path4",
                     "",
-                    ""
+                    "",
                 };
                 // Explicit UNC ending with backslash
                 yield return new object[]
@@ -3482,28 +3482,28 @@ namespace System.Tests
                     @"file://\\unchost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:////unchost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:///\unchost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://\/unchost/path1\path2/path3\path4\",
                     "/path1/path2/path3/path4/",
                     "",
-                    ""
+                    "",
                 };
             }
             else
@@ -3517,7 +3517,7 @@ namespace System.Tests
                     @"/path1\path2/path3\path4",
                     "/path1%5Cpath2/path3%5Cpath4",
                     "",
-                    ""
+                    "",
                 };
                 // Implicit file ending with backlash
                 yield return new object[]
@@ -3525,7 +3525,7 @@ namespace System.Tests
                     @"/path1\path2/path3\path4\",
                     "/path1%5Cpath2/path3%5Cpath4%5C",
                     "",
-                    ""
+                    "",
                 };
                 // Explicit UNC with backslash in path
                 yield return new object[]
@@ -3533,28 +3533,28 @@ namespace System.Tests
                     @"file://\\unchost/path1\path2/path3\path4",
                     @"/path1%5Cpath2/path3%5Cpath4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:////unchost/path1\path2/path3\path4",
                     @"/path1%5Cpath2/path3%5Cpath4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:///\unchost/path1\path2/path3\path4",
                     @"/path1%5Cpath2/path3%5Cpath4",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://\/unchost/path1\path2/path3\path4",
                     @"/path1%5Cpath2/path3%5Cpath4",
                     "",
-                    ""
+                    "",
                 };
                 // Explicit UNC ending with backslash
                 yield return new object[]
@@ -3562,28 +3562,28 @@ namespace System.Tests
                     @"file://\\unchost/path1\path2/path3\path4\",
                     @"/path1%5Cpath2/path3%5Cpath4%5C",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:////unchost/path1\path2/path3\path4\",
                     @"/path1%5Cpath2/path3%5Cpath4%5C",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file:///\unchost/path1\path2/path3\path4\",
                     @"/path1%5Cpath2/path3%5Cpath4%5C",
                     "",
-                    ""
+                    "",
                 };
                 yield return new object[]
                 {
                     @"file://\/unchost/path1\path2/path3\path4\",
                     @"/path1%5Cpath2/path3%5Cpath4%5C",
                     "",
-                    ""
+                    "",
                 };
             }
 
@@ -3594,28 +3594,28 @@ namespace System.Tests
                 "mailto:someone@example.com?query#fragment",
                 "",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "mailto:/someone@example.com",
                 "/someone@example.com",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "mailto://someone@example.com",
                 "//someone@example.com",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "mailto://someone@example.com?query#fragment",
                 "//someone@example.com",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
 
             // Ftp
@@ -3626,28 +3626,28 @@ namespace System.Tests
                 "ftp://host/?query#fragment",
                 "/%3Fquery",
                 "",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "ftp://userinfo@host/?query#fragment",
                 "/%3Fquery",
                 "",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 @"ftp://host/path1\path2/path3\path4",
                 "/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"ftp://host/path1\path2/path3\path4\",
                 "/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
 
             // Telnet
@@ -3657,28 +3657,28 @@ namespace System.Tests
                 "telnet://userinfo@host?query#fragment",
                 "/%3Fquery",
                 "",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 "telnet://userinfo@host/?query#fragment",
                 "/%3Fquery",
                 "",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 @"telnet://host/path1\path2/path3\path4",
                 "/path1%5Cpath2/path3%5Cpath4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"telnet://host/path1\path2/path3\path4\",
                 "/path1%5Cpath2/path3%5Cpath4%5C",
                 "",
-                ""
+                "",
             };
 
             // Unknown
@@ -3687,7 +3687,7 @@ namespace System.Tests
                 "urn:namespace:segment1:segment2:segment3",
                 "namespace:segment1:segment2:segment3",
                 "",
-                ""
+                "",
             };
             yield return new object[] { "unknown:", "", "", "" };
             yield return new object[] { "unknown:path", "path", "", "" };
@@ -3697,7 +3697,7 @@ namespace System.Tests
                 "unknown:path?query#fragment",
                 "path",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[] { "unknown:?query#fragment", "", "?query", "#fragment" };
             yield return new object[] { "unknown://./", "/", "", "" };
@@ -3709,21 +3709,21 @@ namespace System.Tests
                 "unknown://host/path?query#fragment",
                 "/path",
                 "?query",
-                "#fragment"
+                "#fragment",
             };
             yield return new object[]
             {
                 @"unknown://host/path1\path2/path3\path4",
                 "/path1/path2/path3/path4",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 @"unknown://host/path1\path2/path3\path4\",
                 "/path1/path2/path3/path4/",
                 "",
-                ""
+                "",
             };
 
             // Does not need to be escaped
@@ -3732,21 +3732,21 @@ namespace System.Tests
                 "http://host/path!~+-_*()[]@:;&$=123PATH",
                 "/path!~+-_*()[]@:;&$=123PATH",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/?query!~+-_*()[]@:;&$=123QUERY",
                 "/",
                 "?query!~+-_*()[]@:;&$=123QUERY",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/#fragment!~+-_*()[]@:;&$=123FRAGMENT",
                 "/",
                 "",
-                "#fragment!~+-_*()[]@:;&$=123FRAGMENT"
+                "#fragment!~+-_*()[]@:;&$=123FRAGMENT",
             };
             // Unescaped
             yield return new object[]
@@ -3754,70 +3754,70 @@ namespace System.Tests
                 "http://host/\u1234\u2345\u3456",
                 "/%E1%88%B4%E2%8D%85%E3%91%96",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/abc\u1234\u2345\u3456",
                 "/abc%E1%88%B4%E2%8D%85%E3%91%96",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/\u1234abc\u2345\u3456",
                 "/%E1%88%B4abc%E2%8D%85%E3%91%96",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/\u1234\u2345\u3456abc",
                 "/%E1%88%B4%E2%8D%85%E3%91%96abc",
                 "",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/?abc\u1234\u2345\u3456",
                 "/",
                 "?abc%E1%88%B4%E2%8D%85%E3%91%96",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/?\u1234abc\u2345\u3456",
                 "/",
                 "?%E1%88%B4abc%E2%8D%85%E3%91%96",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/?\u1234\u2345\u3456abc",
                 "/",
                 "?%E1%88%B4%E2%8D%85%E3%91%96abc",
-                ""
+                "",
             };
             yield return new object[]
             {
                 "http://host/#abc\u1234\u2345\u3456",
                 "/",
                 "",
-                "#abc%E1%88%B4%E2%8D%85%E3%91%96"
+                "#abc%E1%88%B4%E2%8D%85%E3%91%96",
             };
             yield return new object[]
             {
                 "http://host/#\u1234abc\u2345\u3456",
                 "/",
                 "",
-                "#%E1%88%B4abc%E2%8D%85%E3%91%96"
+                "#%E1%88%B4abc%E2%8D%85%E3%91%96",
             };
             yield return new object[]
             {
                 "http://host/#\u1234\u2345\u3456abc",
                 "/",
                 "",
-                "#%E1%88%B4%E2%8D%85%E3%91%96abc"
+                "#%E1%88%B4%E2%8D%85%E3%91%96abc",
             };
             yield return new object[] { "http://host/\0?\0#\0", "/%00", "?%00", "#%00" };
             // Unnecessarily escaped (upper case hex letters)
@@ -4299,7 +4299,7 @@ namespace System.Tests
             yield return new object[]
             {
                 "http://\u043F\u0440\u0438\u0432\u0435\u0442" + (char)0,
-                UriKind.Absolute
+                UriKind.Absolute,
             };
             yield return new object[] { "http://%", UriKind.Absolute };
             yield return new object[] { "http://@", UriKind.Absolute };

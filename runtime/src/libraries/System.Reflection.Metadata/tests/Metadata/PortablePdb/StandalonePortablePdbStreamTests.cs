@@ -71,7 +71,7 @@ namespace System.Reflection.Metadata.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
 
@@ -98,7 +98,7 @@ namespace System.Reflection.Metadata.Tests
                     0x10,
                     0x11,
                     0x12,
-                    0x13
+                    0x13,
                 },
                 header.Id
             );
@@ -145,7 +145,7 @@ namespace System.Reflection.Metadata.Tests
                             0x00,
                             0x00,
                             0x00,
-                            0x00
+                            0x00,
                         }
                     )
             );
@@ -192,7 +192,7 @@ namespace System.Reflection.Metadata.Tests
                             0x00,
                             0x00,
                             0x00,
-                            0x00
+                            0x00,
                         }
                     )
             );

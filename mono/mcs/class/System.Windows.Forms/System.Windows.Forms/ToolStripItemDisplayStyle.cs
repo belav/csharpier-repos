@@ -34,6 +34,6 @@ namespace System.Windows.Forms
         None = 0,
         Text = 1,
         Image = 2,
-        ImageAndText = 3
+        ImageAndText = 3,
     }
 }

@@ -26,7 +26,7 @@ namespace System.ComponentModel
             {
                 ExtenderProperty = extenderProperty,
                 ReceiverType = receiverType,
-                Provider = provider
+                Provider = provider,
             };
         }
 

@@ -33,6 +33,6 @@ namespace System.Web.Services.Protocols
     public enum LogicalMethodTypes
     {
         Async = 0x2,
-        Sync = 0x1
+        Sync = 0x1,
     }
 }

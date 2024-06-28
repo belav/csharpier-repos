@@ -58,7 +58,7 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
                 await response.Content.ReadAsStringAsync(),
                 new JsonSerializerSettings
                 {
-                    Converters = { new ValidationProblemDetailsConverter() }
+                    Converters = { new ValidationProblemDetailsConverter() },
                 }
             );
 
@@ -147,7 +147,7 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
     private async Task ActionsWithApiBehaviorInferFromBodyParameters(string action)
     {
         // Arrange
-        var input = new Contact { ContactId = 13, Name = "Test123", };
+        var input = new Contact { ContactId = 13, Name = "Test123" };
 
         // Act
         var response = await Client.PostAsJsonAsync($"/contact/{action}", input);
@@ -165,7 +165,7 @@ public abstract class ApiBehaviorTestBase<TStartup> : IClassFixture<MvcTestFixtu
     public async Task ActionsWithApiBehavior_DoesNotInferFromBodyForCompositeComplexTypesParameters()
     {
         // Arrange
-        var input = new Contact { ContactId = 13, Name = "Test123", };
+        var input = new Contact { ContactId = 13, Name = "Test123" };
         var requestId = 1;
 
         // Act
@@ -466,10 +466,10 @@ public class ApiBehaviorTestNewtonsoftJson
                 "Name",
                 new[]
                 {
-                    "The field Name must be a string with a minimum length of 5 and a maximum length of 30."
+                    "The field Name must be a string with a minimum length of 5 and a maximum length of 30.",
                 }
             },
-            { "Zip", new[] { @"The field Zip must match the regular expression '\d{5}'." } }
+            { "Zip", new[] { @"The field Zip must match the regular expression '\d{5}'." } },
         };
 
         // Act

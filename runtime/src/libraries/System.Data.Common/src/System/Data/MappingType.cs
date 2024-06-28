@@ -8,6 +8,8 @@ namespace System.Data
         Element = 1, // Element column
         Attribute = 2, // Attribute column
         SimpleContent = 3, // SimpleContent column
-        Hidden = 4 // Internal mapping
+        Hidden =
+            4 // Internal mapping
+        ,
     }
 }

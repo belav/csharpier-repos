@@ -65,7 +65,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
             return new LocalStateAndContext<TValue, TContext>
             {
                 LocalState = LocalStateLattice.Meet(left.LocalState, right.LocalState),
-                Context = ContextLattice.Meet(left.Context, right.Context)
+                Context = ContextLattice.Meet(left.Context, right.Context),
             };
         }
     }

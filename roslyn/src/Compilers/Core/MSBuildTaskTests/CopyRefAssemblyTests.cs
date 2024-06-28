@@ -32,7 +32,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             var task = new CopyRefAssembly()
             {
                 BuildEngine = engine,
-                SourcePath = Path.Combine(dir.Path, "does_not_exist.dll")
+                SourcePath = Path.Combine(dir.Path, "does_not_exist.dll"),
             };
 
             Assert.False(task.Execute());

@@ -306,7 +306,7 @@ public class ManifestEmbeddedFileProviderTests
         {
             CreateTestFileInfo("jquery.validate.js"),
             CreateTestFileInfo("jquery.min.js"),
-            CreateTestFileInfo("site.css")
+            CreateTestFileInfo("site.css"),
         };
 
         // Act
@@ -360,7 +360,7 @@ public class ManifestEmbeddedFileProviderTests
         var expectedContents = new[]
         {
             CreateTestFileInfo("wwwroot", isDirectory: true),
-            CreateTestFileInfo("site.css")
+            CreateTestFileInfo("site.css"),
         };
 
         // Act

@@ -4024,7 +4024,7 @@ namespace MonoTests.System.Diagnostics
             0x7f,
             0x00,
             0xb0,
-            0x04
+            0x04,
         };
 
         private static byte[] version_res2 =
@@ -4584,7 +4584,7 @@ namespace MonoTests.System.Diagnostics
             0x7f,
             0x00,
             0xb0,
-            0x04
+            0x04,
         };
 
         private static byte[] version_res3 =
@@ -4744,7 +4744,7 @@ namespace MonoTests.System.Diagnostics
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         private static byte[] version_res4 =
@@ -4780,7 +4780,7 @@ namespace MonoTests.System.Diagnostics
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 #endif
     }

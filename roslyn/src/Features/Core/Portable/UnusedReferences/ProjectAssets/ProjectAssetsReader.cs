@@ -146,7 +146,7 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
                 {
                     "package" => ReferenceType.Package,
                     "project" => ReferenceType.Project,
-                    _ => ReferenceType.Assembly
+                    _ => ReferenceType.Assembly,
                 };
 
                 if (referenceType == ReferenceType.Project && library.Path is not null)

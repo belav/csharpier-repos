@@ -38,6 +38,6 @@ namespace Mono.Data.Tds
         Input,
         Output,
         InputOutput,
-        ReturnValue
+        ReturnValue,
     }
 }

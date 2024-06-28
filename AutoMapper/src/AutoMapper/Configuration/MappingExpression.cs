@@ -17,7 +17,7 @@ public class MappingExpression
         var reversedTypes = new TypePair(DestinationType, SourceType);
         var reverseMap = new MappingExpression(reversedTypes, MemberList.None)
         {
-            IsReverseMap = true
+            IsReverseMap = true,
         };
         ReverseMapCore(reverseMap);
         reverseMap.IncludeMembers(
@@ -211,7 +211,7 @@ public class MappingExpression<TSource, TDestination>
             SourceType
         )
         {
-            IsReverseMap = true
+            IsReverseMap = true,
         };
         ReverseMapCore(reverseMap);
         reverseMap.IncludeMembersCore(

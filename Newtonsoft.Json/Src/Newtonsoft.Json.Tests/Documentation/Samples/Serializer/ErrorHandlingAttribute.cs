@@ -83,7 +83,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Name = "George Michael Bluth",
                 Age = 16,
                 Roles = null,
-                Title = "Mister Manager"
+                Title = "Mister Manager",
             };
 
             string json = JsonConvert.SerializeObject(person, Formatting.Indented);

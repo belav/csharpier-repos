@@ -49,7 +49,7 @@ namespace Novell.Directory.Ldap.Events.Edir
         EDIR_TAG_CHANGE_CONFIG_PARAM,
         EDIR_TAG_NO_DATA,
         EDIR_TAG_STATUS_LOG,
-        EDIR_TAG_DEBUG_EVENT_DATA
+        EDIR_TAG_DEBUG_EVENT_DATA,
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ namespace Novell.Directory.Ldap.Events.Edir
     {
         EVT_STATUS_ALL,
         EVT_STATUS_SUCCESS,
-        EVT_STATUS_FAILURE
+        EVT_STATUS_FAILURE,
     }
 
     /// <summary>
@@ -284,7 +284,7 @@ namespace Novell.Directory.Ldap.Events.Edir
         EVT_DB_SEARCH_DETAIL = 240,
         EVT_STATUS_LOG = 241,
         EVT_DB_NPKI_API = 242,
-        EVT_MAX_EVENTS
+        EVT_MAX_EVENTS,
     }
 
     /// <summary>
@@ -298,7 +298,7 @@ namespace Novell.Directory.Ldap.Events.Edir
         INTEGER,
         ADDRESS,
         TIMESTAMP,
-        TIMEVECTOR
+        TIMEVECTOR,
     }
 
     /// <summary>
@@ -312,7 +312,7 @@ namespace Novell.Directory.Ldap.Events.Edir
         EVT_TAG_GEN_CURRPROC,
         EVT_TAG_GEN_PERP,
         EVT_TAG_GEN_INTEGERS,
-        EVT_TAG_GEN_STRINGS
+        EVT_TAG_GEN_STRINGS,
     }
 
     public class EventOids

@@ -471,7 +471,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                                             @checked: false
                                         )
                                         {
-                                            WasCompilerGenerated = true
+                                            WasCompilerGenerated = true,
                                         };
                                     }
                                 );
@@ -876,7 +876,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         @checked: false
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             );
@@ -912,7 +912,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         @checked: false
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             );
@@ -945,7 +945,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         @checked: false
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             );
@@ -984,7 +984,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                         @checked: false
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                     properties = default;
                     return statement;
@@ -1077,7 +1077,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 );
                 return new BoundExpressionStatement(syntax, expression)
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
             else if (expressionType.SpecialType == SpecialType.System_Boolean)
@@ -1096,7 +1096,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             );
             return new BoundReturnStatement(syntax, RefKind.None, expression, @checked: false)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -1175,7 +1175,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
             return new BoundExpressionStatement(expression.Syntax, expression)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 

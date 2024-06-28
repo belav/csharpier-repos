@@ -41,7 +41,7 @@ namespace System.Linq.Expressions
         /// <summary>
         /// A binding that represents initializing a member of type <see cref="System.Collections.IList"/> or <see cref="System.Collections.Generic.ICollection{T}"/> from a list of elements.
         /// </summary>
-        ListBinding
+        ListBinding,
     }
 
     /// <summary>

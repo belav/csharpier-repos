@@ -69,7 +69,7 @@ namespace MonoTests.System.CodeDom
             CodeTypeParameter[] typeParams = new CodeTypeParameter[]
             {
                 new CodeTypeParameter(),
-                null
+                null,
             };
 
             CodeTypeParameterCollection coll = new CodeTypeParameterCollection(typeParams);

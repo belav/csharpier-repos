@@ -17,7 +17,7 @@ public class OverrideDestinationMappingsTest
                 {
                     new Entity { Child = new ChildEntity { SomeValue = "Alain Brito" } },
                     new Entity { Child = new ChildEntity { SomeValue = "Jimmy Bogard" } },
-                    new Entity { Child = new ChildEntity { SomeValue = "Bill Gates" } }
+                    new Entity { Child = new ChildEntity { SomeValue = "Bill Gates" } },
                 }
             );
             base.Seed(context);

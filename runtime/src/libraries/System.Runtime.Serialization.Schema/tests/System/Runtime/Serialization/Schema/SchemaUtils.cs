@@ -146,7 +146,7 @@ namespace System.Runtime.Serialization.Schema.Tests
                     new XmlQualifiedName(
                         "InvalidTopLevelElementType",
                         "http://schemas.datacontract.org/2004/07/foo"
-                    )
+                    ),
                 },
                 @"<?xml version='1.0' encoding='utf-8'?><schema elementFormDefault='qualified' targetNamespace='http://schemas.datacontract.org/2004/07/foo' xmlns:tns='http://schemas.datacontract.org/2004/07/foo' xmlns:ser='http://schemas.microsoft.com/2003/10/Serialization/' xmlns='http://www.w3.org/2001/XMLSchema'>
                   <complexType name='InvalidTopLevelElementType' />
@@ -159,7 +159,10 @@ namespace System.Runtime.Serialization.Schema.Tests
                 false,
                 new XmlQualifiedName[]
                 {
-                    new XmlQualifiedName("ValidType", "http://schemas.datacontract.org/2004/07/foo")
+                    new XmlQualifiedName(
+                        "ValidType",
+                        "http://schemas.datacontract.org/2004/07/foo"
+                    ),
                 },
                 @"<?xml version='1.0' encoding='utf-8'?><schema elementFormDefault='qualified' targetNamespace='http://schemas.datacontract.org/2004/07/foo' xmlns:tns='http://schemas.datacontract.org/2004/07/foo' xmlns:ser='http://schemas.microsoft.com/2003/10/Serialization/' xmlns='http://www.w3.org/2001/XMLSchema'>
                   <complexType name='InvalidType'><attribute name='j' type='int' /></complexType>
@@ -227,7 +230,7 @@ namespace System.Runtime.Serialization.Schema.Tests
                     new XmlQualifiedName(
                         "TypeWithExtraAttributes",
                         "http://schemas.datacontract.org/2004/07/foo"
-                    )
+                    ),
                 },
                 @"<?xml version='1.0' encoding='utf-8'?><schema elementFormDefault='qualified' targetNamespace='http://schemas.datacontract.org/2004/07/foo' xmlns:tns='http://schemas.datacontract.org/2004/07/foo' xmlns:ser='http://schemas.microsoft.com/2003/10/Serialization/' xmlns='http://www.w3.org/2001/XMLSchema'>
                   <complexType name='TypeWithExtraAttributes'><sequence><element name='i' type='int' /></sequence><attribute name='j' type='int' /></complexType>
@@ -242,7 +245,7 @@ namespace System.Runtime.Serialization.Schema.Tests
                     new XmlQualifiedName(
                         "Address",
                         "http://schemas.datacontract.org/2004/07/Suites.SchemaImport.Classes"
-                    )
+                    ),
                 },
                 @"<?xml version='1.0' encoding='utf-8'?><schema xmlns:tns='http://schemas.datacontract.org/2004/07/Suites.SchemaImport.Classes' xmlns:ser='http://schemas.microsoft.com/2003/10/Serialization/' elementFormDefault='qualified' targetNamespace='http://schemas.datacontract.org/2004/07/Suites.SchemaImport.Classes' xmlns='http://www.w3.org/2001/XMLSchema'>
                   <import namespace='http://schemas.microsoft.com/2003/10/Serialization/' />

@@ -1374,7 +1374,7 @@ namespace System.Activities.Core.Presentation
             {
                 widthFraction,
                 heightFraction,
-                element.Margin
+                element.Margin,
             };
             return bindings;
         }
@@ -2596,7 +2596,7 @@ namespace System.Activities.Core.Presentation
                                     new State()
                                     {
                                         DisplayName = DefaultFinalStateDisplayName,
-                                        IsFinal = true
+                                        IsFinal = true,
                                     }
                                 );
                             }
@@ -3221,7 +3221,7 @@ namespace System.Activities.Core.Presentation
                         DisplayName = StateContainerEditor.GenerateTransitionName(
                             stateMachineModelItem
                         ),
-                        To = droppedModelItem.GetCurrentValue() as State
+                        To = droppedModelItem.GetCurrentValue() as State,
                     };
                     if (transitionToCopy != null)
                     {
@@ -3479,7 +3479,7 @@ namespace System.Activities.Core.Presentation
                     DstModelItem = this.DstModelItem,
                     OldViewState = this.NewViewState,
                     NewViewState = this.OldViewState,
-                    ShouldCreateConnector = false
+                    ShouldCreateConnector = false,
                 };
             }
         }
@@ -3572,7 +3572,7 @@ namespace System.Activities.Core.Presentation
                                     DisplayName = StateContainerEditor.GenerateTransitionName(
                                         stateMachineModelItem
                                     ),
-                                    To = destinationModelItem.GetCurrentValue() as State
+                                    To = destinationModelItem.GetCurrentValue() as State,
                                 }
                             );
                         autoSplit = true;
@@ -3636,7 +3636,7 @@ namespace System.Activities.Core.Presentation
             CannotCreateTransitionFromAncestorToDescendant,
             CannotSetCompositeStateAsInitialState,
             CannotSetFinalStateAsInitialState,
-            OtherFailure
+            OtherFailure,
         }
     }
 }

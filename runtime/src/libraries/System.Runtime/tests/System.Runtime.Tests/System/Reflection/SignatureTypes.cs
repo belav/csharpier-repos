@@ -50,12 +50,12 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     Type.MakeGenericSignatureType(typeof(List<>), typeof(int)),
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     Type.MakeGenericSignatureType(typeof(List<>), sigType),
-                    true
+                    true,
                 };
             }
         }
@@ -185,7 +185,7 @@ namespace System.Reflection.Tests
             Type[] args =
             {
                 Type.MakeGenericMethodParameter(0),
-                Type.MakeGenericMethodParameter(1).MakeArrayType()
+                Type.MakeGenericMethodParameter(1).MakeArrayType(),
             };
             MethodInfo moo = t.GetMethod("Moo", 2, bf, null, args, null);
             AssertIsMarked(moo, 3);
@@ -254,7 +254,7 @@ namespace System.Reflection.Tests
             Type[] args =
             {
                 typeof(TestClass4<>).MakeGenericType(Type.MakeGenericMethodParameter(1)),
-                Type.MakeGenericMethodParameter(500)
+                Type.MakeGenericMethodParameter(500),
             };
             CountingBinder binder = new CountingBinder();
             Assert.Null(
@@ -427,7 +427,7 @@ namespace System.Reflection.Tests
             Type[] testTypes =
             {
                 genericTypeDefinition.MakeGenericType(gmp),
-                Type.MakeGenericSignatureType(genericTypeDefinition, gmp)
+                Type.MakeGenericSignatureType(genericTypeDefinition, gmp),
             };
             Assert.All(
                 testTypes,

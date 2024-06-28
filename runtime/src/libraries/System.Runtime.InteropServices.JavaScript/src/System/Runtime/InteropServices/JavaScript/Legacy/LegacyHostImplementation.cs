@@ -211,7 +211,7 @@ namespace System.Runtime.InteropServices.JavaScript
             STRING_INTERNED = 29,
             VOID = 30,
             ENUM64 = 31,
-            POINTER = 32
+            POINTER = 32,
         }
 
         // see src/mono/wasm/driver.c MARSHAL_ERROR_xxx
@@ -221,7 +221,7 @@ namespace System.Runtime.InteropServices.JavaScript
             NULL_CLASS_POINTER = 513,
             NULL_TYPE_POINTER = 514,
             UNSUPPORTED_TYPE = 515,
-            FIRST = BUFFER_TOO_SMALL
+            FIRST = BUFFER_TOO_SMALL,
         }
 
         // please keep BINDING wasm_type_symbol in sync

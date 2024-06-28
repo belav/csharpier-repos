@@ -25,7 +25,7 @@ public class ItemsDictionaryTests
         var dict = new ItemsDictionary();
         var pairs = new KeyValuePair<object, object>[]
         {
-            new KeyValuePair<object, object>("first", "value")
+            new KeyValuePair<object, object>("first", "value"),
         };
 
         // Act and Assert

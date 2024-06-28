@@ -32,7 +32,7 @@ namespace Mono.Btls
     {
         PEM = 1,
         ASN1 = 2,
-        DEFAULT = 3
+        DEFAULT = 3,
     }
 }
 #endif

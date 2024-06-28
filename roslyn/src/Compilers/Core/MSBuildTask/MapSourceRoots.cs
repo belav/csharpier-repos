@@ -75,7 +75,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks
                 NestedRoot,
                 ContainingRoot,
                 MappedPath,
-                SourceLinkUrl
+                SourceLinkUrl,
             };
         }
 

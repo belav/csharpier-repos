@@ -93,7 +93,7 @@ namespace tests.system_data_dll.System_Data
             ds.Tables[0].PrimaryKey = new DataColumn[]
             {
                 ds.Tables[0].Columns[0],
-                ds.Tables[0].Columns[1]
+                ds.Tables[0].Columns[1],
             };
 
             //copy schema only, no data

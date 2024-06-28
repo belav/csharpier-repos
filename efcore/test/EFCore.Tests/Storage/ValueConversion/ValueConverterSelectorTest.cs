@@ -298,7 +298,7 @@ public class ValueConverterSelectorTest
             typeof(byte),
             typeof(decimal),
             typeof(double),
-            typeof(float)
+            typeof(float),
         };
 
         foreach (var fromType in types)
@@ -776,7 +776,7 @@ public class ValueConverterSelectorTest
         Freddie,
         Brian,
         Rodger,
-        John
+        John,
     }
 
     private enum Nwa : byte
@@ -785,7 +785,7 @@ public class ValueConverterSelectorTest
         Dre,
         Eazy,
         Cube,
-        Ren
+        Ren,
     }
 
     private enum Gnr : ulong
@@ -794,7 +794,7 @@ public class ValueConverterSelectorTest
         Duff,
         Slash,
         Izzy,
-        Stephen
+        Stephen,
     }
 
     private enum Velvets : long
@@ -802,6 +802,6 @@ public class ValueConverterSelectorTest
         Lou,
         John,
         Sterling,
-        Maureen
+        Maureen,
     }
 }

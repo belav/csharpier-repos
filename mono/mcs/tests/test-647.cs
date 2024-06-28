@@ -2,7 +2,7 @@ using System;
 
 enum DT : byte
 {
-    Foop
+    Foop,
 }
 
 public class Foo

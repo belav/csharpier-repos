@@ -102,7 +102,7 @@ namespace System.Xml.Serialization
         CodeGenOnly,
         ReflectionOnly,
         ReflectionAsBackup,
-        PreGenOnly
+        PreGenOnly,
     }
 
     public class XmlSerializer
@@ -141,7 +141,7 @@ namespace System.Xml.Serialization
         private static readonly XmlWriterSettings s_writerSettings = new XmlWriterSettings()
         {
             Encoding = new UTF8Encoding(false),
-            Indent = true
+            Indent = true,
         };
 
         private static XmlSerializerNamespaces DefaultNamespaces

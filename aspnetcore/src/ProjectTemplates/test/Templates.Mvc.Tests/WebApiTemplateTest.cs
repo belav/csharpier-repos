@@ -46,7 +46,7 @@ public class WebApiTemplateTest : LoggedTest
         new[]
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData(
@@ -55,7 +55,7 @@ public class WebApiTemplateTest : LoggedTest
         {
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     public Task WebApiTemplateCSharp_IdentityWeb_IndividualB2C_BuildsAndPublishes(
@@ -76,7 +76,7 @@ public class WebApiTemplateTest : LoggedTest
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -86,7 +86,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     public Task WebApiTemplateCSharp_IdentityWeb_IndividualB2C_NoHttps_BuildsAndPublishes(
@@ -110,7 +110,7 @@ public class WebApiTemplateTest : LoggedTest
         {
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData(
@@ -120,7 +120,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     public Task WebApiTemplateCSharp_IdentityWeb_IndividualB2C_ProgramMain_BuildsAndPublishes(
@@ -145,7 +145,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -156,7 +156,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     public Task WebApiTemplateCSharp_IdentityWeb_IndividualB2C_ProgramMain_NoHttps_BuildsAndPublishes(
@@ -176,7 +176,7 @@ public class WebApiTemplateTest : LoggedTest
         new[]
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData(
@@ -185,7 +185,7 @@ public class WebApiTemplateTest : LoggedTest
         {
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData("SingleOrg", new[] { ArgConstants.CallsGraph })]
@@ -208,7 +208,7 @@ public class WebApiTemplateTest : LoggedTest
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -218,7 +218,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData("SingleOrg", new[] { ArgConstants.CallsGraph, ArgConstants.NoHttps })]
@@ -244,7 +244,7 @@ public class WebApiTemplateTest : LoggedTest
         {
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData(
@@ -254,7 +254,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData("SingleOrg", new[] { ArgConstants.UseProgramMain, ArgConstants.CallsGraph })]
@@ -285,7 +285,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -296,7 +296,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseControllers,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -310,7 +310,7 @@ public class WebApiTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.UseControllers,
             ArgConstants.CallsGraph,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     public Task WebApiTemplateCSharp_IdentityWeb_SingleOrg_ProgramMain_NoHttps_BuildsAndPublishes(
@@ -401,7 +401,7 @@ public class WebApiTemplateTest : LoggedTest
             {
                 ArgConstants.UseProgramMain,
                 ArgConstants.UseControllers,
-                ArgConstants.NoHttps
+                ArgConstants.NoHttps,
             }
         );
 
@@ -424,7 +424,7 @@ public class WebApiTemplateTest : LoggedTest
                 {
                     ArgConstants.UseProgramMain,
                     ArgConstants.UseControllers,
-                    ArgConstants.NoOpenApi
+                    ArgConstants.NoOpenApi,
                 }
                 : new[] { ArgConstants.UseProgramMain, ArgConstants.NoOpenApi }
             : useControllers
@@ -470,20 +470,20 @@ public class WebApiTemplateTest : LoggedTest
                     ArgConstants.UseProgramMain,
                     ArgConstants.UseControllers,
                     ArgConstants.NoOpenApi,
-                    ArgConstants.NoHttps
+                    ArgConstants.NoHttps,
                 }
                 : new[]
                 {
                     ArgConstants.UseProgramMain,
                     ArgConstants.NoOpenApi,
-                    ArgConstants.NoHttps
+                    ArgConstants.NoHttps,
                 }
             : useControllers
                 ? new[]
                 {
                     ArgConstants.UseControllers,
                     ArgConstants.NoOpenApi,
-                    ArgConstants.NoHttps
+                    ArgConstants.NoHttps,
                 }
                 : new[] { ArgConstants.NoOpenApi, ArgConstants.NoHttps };
         await project.RunDotNetNewAsync("webapi", args: args);
@@ -529,11 +529,10 @@ public class WebApiTemplateTest : LoggedTest
             string.Equals(auth, "IndividualB2C", StringComparison.OrdinalIgnoreCase)
             || string.Equals(auth, "SingleOrg", StringComparison.OrdinalIgnoreCase);
         var noHttps = args?.Contains(ArgConstants.NoHttps) ?? false;
-        var expectedLaunchProfileNames = requiresHttps
-            ? new[] { "https", "IIS Express" }
-            : noHttps
-                ? new[] { "http", "IIS Express" }
-                : new[] { "http", "https", "IIS Express" };
+        var expectedLaunchProfileNames =
+            requiresHttps ? new[] { "https", "IIS Express" }
+            : noHttps ? new[] { "http", "IIS Express" }
+            : new[] { "http", "https", "IIS Express" };
         await project.VerifyLaunchSettings(expectedLaunchProfileNames);
 
         // Avoid the F# compiler. See https://github.com/dotnet/aspnetcore/issues/14022

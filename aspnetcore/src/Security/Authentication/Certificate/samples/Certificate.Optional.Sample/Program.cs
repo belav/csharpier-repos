@@ -55,7 +55,7 @@ public class Program
                                                     new SslServerAuthenticationOptions()
                                                     {
                                                         ServerCertificate = serverCertificate,
-                                                        ClientCertificateRequired = false
+                                                        ClientCertificateRequired = false,
                                                     }
                                                 );
                                             }
@@ -71,10 +71,10 @@ public class Program
                                                         certificate,
                                                         chain,
                                                         sslPolicyErrors
-                                                    ) => certificate is not null
+                                                    ) => certificate is not null,
                                                 }
                                             );
-                                        }
+                                        },
                                     }
                                 );
                             }

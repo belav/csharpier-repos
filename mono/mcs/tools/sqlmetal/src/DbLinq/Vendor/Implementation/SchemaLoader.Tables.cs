@@ -41,7 +41,7 @@ namespace DbLinq.Vendor.Implementation
             var dataName = new DataName
             {
                 Name = dataRecord.GetAsString(0),
-                Schema = dataRecord.GetAsString(1)
+                Schema = dataRecord.GetAsString(1),
             };
             return dataName;
         }

@@ -27,7 +27,7 @@ namespace System.Management
         /// XML WMI DTD that corresponds to CIM DTD version 2.0.
         /// Using this value enables a few WMI-specific extensions, like embedded objects.
         /// </summary>
-        WmiDtd20 = 2
+        WmiDtd20 = 2,
     };
 
     /// <summary>
@@ -181,14 +181,14 @@ namespace System.Management
         ///       qualifier values into account, but ignores flavor distinctions such as
         ///       propagation rules and override restrictions.</para>
         /// </summary>
-        IgnoreFlavor = 0x20
+        IgnoreFlavor = 0x20,
     };
 
     internal enum QualifierType
     {
         ObjectQualifier,
         PropertyQualifier,
-        MethodQualifier
+        MethodQualifier,
     }
 
     //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC//

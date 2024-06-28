@@ -100,14 +100,14 @@ namespace Microsoft.Build.Tasks.Xaml
                                 new ProjectProperty()
                                 {
                                     Name = "AssemblyName",
-                                    Value = this.AssemblyName
+                                    Value = this.AssemblyName,
                                 },
                                 new ProjectProperty()
                                 {
                                     Name = "Utf8Output",
                                     Value = "true",
-                                    Condition = "'$(Utf8Output)' == ''"
-                                }
+                                    Condition = "'$(Utf8Output)' == ''",
+                                },
                             }
                         );
                     }

@@ -394,7 +394,7 @@ class C
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -430,7 +430,7 @@ indent_size = 2
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -458,7 +458,7 @@ indent_size = 2
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );

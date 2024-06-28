@@ -192,7 +192,7 @@ namespace Microsoft.Extensions.Logging.Test
                         new object[]
                         {
                             "Index",
-                            new[] { "Views/Home/Index.cshtml", "Views/Shared/Index.cshtml" }
+                            new[] { "Views/Home/Index.cshtml", "Views/Shared/Index.cshtml" },
                         },
                         "The view 'Index' was not found. Searched locations: "
                             + "Views/Home/Index.cshtml, Views/Shared/Index.cshtml"
@@ -207,8 +207,8 @@ namespace Microsoft.Extensions.Logging.Test
                             new[]
                             {
                                 new MediaType("text", "foo"),
-                                new MediaType("application", "xml")
-                            }
+                                new MediaType("application", "xml"),
+                            },
                         },
                         "Media type 'application/blah' did not match any of the supported media types."
                             + "Supported media types: text/foo, application/xml"
@@ -219,7 +219,7 @@ namespace Microsoft.Extensions.Logging.Test
                         new object[]
                         {
                             "Index",
-                            new[] { "Home/Index.cshtml", "Shared/Index.cshtml" }.ToList()
+                            new[] { "Home/Index.cshtml", "Shared/Index.cshtml" }.ToList(),
                         },
                         "The view 'Index' was not found. Searched locations: "
                             + "Home/Index.cshtml, Shared/Index.cshtml"
@@ -230,7 +230,7 @@ namespace Microsoft.Extensions.Logging.Test
                         new object[]
                         {
                             "Index",
-                            new[] { new[] { "abc", "def" }, new[] { "ghi", "jkl" } }
+                            new[] { new[] { "abc", "def" }, new[] { "ghi", "jkl" } },
                         },
                         "The view 'Index' was not found. Searched locations: "
                             + "System.String[], System.String[]"
@@ -241,7 +241,7 @@ namespace Microsoft.Extensions.Logging.Test
                         new object[]
                         {
                             "Index",
-                            new Uri[][] { null, new[] { new Uri("http://def") } }
+                            new Uri[][] { null, new[] { new Uri("http://def") } },
                         },
                         "The view 'Index' was not found. Searched locations: "
                             + "(null), System.Uri[]"
@@ -252,11 +252,11 @@ namespace Microsoft.Extensions.Logging.Test
                         new object[]
                         {
                             "Index",
-                            new[] { new Uri[] { null }, new[] { new Uri("http://def") } }
+                            new[] { new Uri[] { null }, new[] { new Uri("http://def") } },
                         },
                         "The view 'Index' was not found. Searched locations: "
                             + "System.Uri[], System.Uri[]"
-                    }
+                    },
                 };
             }
         }

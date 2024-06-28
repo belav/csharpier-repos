@@ -237,7 +237,7 @@ namespace Microsoft.Diagnostics.JitTrace
                         }
                         membersFound = new RuntimeMethodHandle[]
                         {
-                            owningType.TypeInitializer.MethodHandle
+                            owningType.TypeInitializer.MethodHandle,
                         };
                     }
                     else

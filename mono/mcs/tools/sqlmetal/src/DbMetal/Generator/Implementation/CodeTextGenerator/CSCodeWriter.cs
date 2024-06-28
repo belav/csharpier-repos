@@ -635,7 +635,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
             "sizeof",
             "stackalloc",
             "throw",
-            "typeof"
+            "typeof",
         };
 
         protected virtual bool IsKeyword(string name)

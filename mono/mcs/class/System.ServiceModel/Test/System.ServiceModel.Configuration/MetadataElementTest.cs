@@ -109,7 +109,7 @@ namespace MonoTests.System.ServiceModel.Configuration
                 typeof(SecurityBindingElementImporter),
                 typeof(TransactionFlowBindingElementImporter),
                 typeof(TransportBindingElementImporter),
-                typeof(UseManagedPresentationBindingElementImporter)
+                typeof(UseManagedPresentationBindingElementImporter),
             };
             foreach (Type type in types)
             {
@@ -133,7 +133,7 @@ namespace MonoTests.System.ServiceModel.Configuration
                 typeof(StandardBindingImporter),
                 typeof(TransportBindingElementImporter),
                 typeof(DataContractSerializerMessageContractImporter),
-                typeof(XmlSerializerMessageContractImporter)
+                typeof(XmlSerializerMessageContractImporter),
             };
             foreach (Type type in types)
             {

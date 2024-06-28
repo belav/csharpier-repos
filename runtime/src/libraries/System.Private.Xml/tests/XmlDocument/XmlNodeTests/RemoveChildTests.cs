@@ -13,13 +13,13 @@ namespace System.Xml.XmlDocumentTests
             XmlNodeType.SignificantWhitespace,
             XmlNodeType.CDATA,
             XmlNodeType.Text,
-            XmlNodeType.Comment
+            XmlNodeType.Comment,
         };
 
         private enum InsertType
         {
             InsertBefore,
-            InsertAfter
+            InsertAfter,
         }
 
         [Fact]
@@ -195,7 +195,7 @@ namespace System.Xml.XmlDocumentTests
                 {
                     XmlNodeType.Whitespace,
                     XmlNodeType.Whitespace,
-                    XmlNodeType.Whitespace
+                    XmlNodeType.Whitespace,
                 }
             );
         }
@@ -208,7 +208,7 @@ namespace System.Xml.XmlDocumentTests
                 {
                     XmlNodeType.SignificantWhitespace,
                     XmlNodeType.SignificantWhitespace,
-                    XmlNodeType.SignificantWhitespace
+                    XmlNodeType.SignificantWhitespace,
                 }
             );
         }
@@ -232,7 +232,7 @@ namespace System.Xml.XmlDocumentTests
                     XmlNodeType.Text,
                     XmlNodeType.CDATA,
                     XmlNodeType.SignificantWhitespace,
-                    XmlNodeType.SignificantWhitespace
+                    XmlNodeType.SignificantWhitespace,
                 }
             );
         }

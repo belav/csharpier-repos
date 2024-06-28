@@ -19,6 +19,6 @@ namespace System.ServiceModel.Transactions
         RetainBoth = IsolationFlags.RetainCommit | IsolationFlags.RetainAbort,
         RetainNone = IsolationFlags.RetainCommitNo | IsolationFlags.RetainAbortNo,
         Optimistic = 0x00000010,
-        ReadOnly = 0x00000020
+        ReadOnly = 0x00000020,
     }
 }

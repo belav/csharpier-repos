@@ -22,7 +22,7 @@ namespace System.Globalization.Tests
                 random.Next(0, 24),
                 random.Next(0, 60),
                 random.Next(0, 60),
-                random.Next(0, 1000)
+                random.Next(0, 1000),
             };
         }
 

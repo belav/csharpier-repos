@@ -51,13 +51,13 @@ internal sealed partial class UrlGroup : IDisposable
         var connectionLimit = new HTTP_CONNECTION_LIMIT_INFO
         {
             Flags = HttpApi.HTTP_PROPERTY_FLAGS_PRESENT,
-            MaxConnections = (uint)maxConnections
+            MaxConnections = (uint)maxConnections,
         };
 
         var qosSettings = new HTTP_QOS_SETTING_INFO
         {
             QosType = HTTP_QOS_SETTING_TYPE.HttpQosSettingTypeConnectionLimit,
-            QosSetting = &connectionLimit
+            QosSetting = &connectionLimit,
         };
 
         SetProperty(
@@ -72,7 +72,7 @@ internal sealed partial class UrlGroup : IDisposable
         var propertyInfo = new HTTP_BINDING_INFO
         {
             Flags = HttpApi.HTTP_PROPERTY_FLAGS_PRESENT,
-            RequestQueueHandle = (HANDLE)destination.Handle.DangerousGetHandle()
+            RequestQueueHandle = (HANDLE)destination.Handle.DangerousGetHandle(),
         };
 
         SetProperty(
@@ -86,7 +86,7 @@ internal sealed partial class UrlGroup : IDisposable
     {
         var propertyInfo = new HTTP_BINDING_INFO
         {
-            RequestQueueHandle = (HANDLE)destination.Handle.DangerousGetHandle()
+            RequestQueueHandle = (HANDLE)destination.Handle.DangerousGetHandle(),
         };
 
         SetProperty(
@@ -129,7 +129,7 @@ internal sealed partial class UrlGroup : IDisposable
         var info = new HTTP_BINDING_INFO
         {
             Flags = HttpApi.HTTP_PROPERTY_FLAGS_PRESENT,
-            RequestQueueHandle = (HANDLE)_requestQueue.Handle.DangerousGetHandle()
+            RequestQueueHandle = (HANDLE)_requestQueue.Handle.DangerousGetHandle(),
         };
 
         var infoptr = new IntPtr(&info);

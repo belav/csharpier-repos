@@ -60,7 +60,7 @@ namespace System.Tests
                 typeof(Outside),
                 typeof(Outside<int>),
                 typeof(Outside<>).GetTypeInfo().GenericTypeParameters[0],
-                new object().GetType().GetType()
+                new object().GetType().GetType(),
             };
 
             if (PlatformDetection.IsBuiltInComEnabled)
@@ -169,7 +169,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterName,
                 "HelloWorld",
-                0
+                0,
             };
             yield return new object[]
             {
@@ -177,7 +177,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterName,
                 "FilterName_Invoke_DelegateFiltersExpectedMembers",
-                1
+                1,
             };
             yield return new object[]
             {
@@ -185,7 +185,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterName,
                 "FilterName_Invoke_Delegate*",
-                1
+                1,
             };
             yield return new object[]
             {
@@ -193,7 +193,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterName,
                 "filterName_Invoke_Delegate*",
-                0
+                0,
             };
 
             yield return new object[]
@@ -202,7 +202,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterNameIgnoreCase,
                 "HelloWorld",
-                0
+                0,
             };
             yield return new object[]
             {
@@ -210,7 +210,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterNameIgnoreCase,
                 "FilterName_Invoke_DelegateFiltersExpectedMembers",
-                1
+                1,
             };
             yield return new object[]
             {
@@ -218,7 +218,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterNameIgnoreCase,
                 "FilterName_Invoke_Delegate*",
-                1
+                1,
             };
             yield return new object[]
             {
@@ -226,7 +226,7 @@ namespace System.Tests
                 BindingFlags.Public | BindingFlags.Instance,
                 Type.FilterNameIgnoreCase,
                 "filterName_Invoke_Delegate*",
-                1
+                1,
             };
         }
 
@@ -314,7 +314,7 @@ namespace System.Tests
                 new object[] { typeof(GenericStruct<int>), typeof(GenericStruct<int>[]) },
                 new object[] { typeof(NonGenericInterface), typeof(NonGenericInterface[]) },
                 new object[] { typeof(GenericInterface<int>), typeof(GenericInterface<int>[]) },
-                new object[] { typeof(AbstractClass), typeof(AbstractClass[]) }
+                new object[] { typeof(AbstractClass), typeof(AbstractClass[]) },
             };
         }
 
@@ -340,11 +340,11 @@ namespace System.Tests
             yield return new object[] { typeof(GenericClass<>) };
             yield return new object[]
             {
-                typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>))
+                typeof(GenericClass<>).MakeGenericType(typeof(GenericClass<>)),
             };
             yield return new object[]
             {
-                typeof(GenericClass<>).GetTypeInfo().GetGenericArguments()[0]
+                typeof(GenericClass<>).GetTypeInfo().GetGenericArguments()[0],
             };
         }
 
@@ -991,14 +991,14 @@ namespace System.Tests
                     typeof(DummyGenericClassForTypeTests<>),
                     false,
                     false,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     typeof(DummyGenericClassForTypeTests<int>),
                     false,
                     false,
-                    false
+                    false,
                 };
                 if (PlatformDetection.IsBuiltInComEnabled) // GetTypeFromCLSID = built-in COM
                 {
@@ -1007,7 +1007,7 @@ namespace System.Tests
                         Type.GetTypeFromCLSID(default(Guid)),
                         false,
                         false,
-                        false
+                        false,
                     };
                 }
 
@@ -1198,8 +1198,8 @@ namespace System.Tests
                     new Tuple<MethodInfo, MethodInfo>(
                         typeof(ISimpleInterface).GetMethod("GenericMethod"),
                         typeof(SimpleType).GetMethod("GenericMethod")
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1214,8 +1214,8 @@ namespace System.Tests
                     new Tuple<MethodInfo, MethodInfo>(
                         typeof(ISimpleInterface).GetMethod("GenericMethod"),
                         typeof(AbstractSimpleType).GetMethod("GenericMethod")
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1227,7 +1227,7 @@ namespace System.Tests
                         typeof(IGenericInterface<object>).GetMethod("Method"),
                         typeof(DerivedType).GetMethod("Method", new Type[] { typeof(object) })
                     ),
-                }
+                },
             };
             yield return new object[]
             {
@@ -1239,7 +1239,7 @@ namespace System.Tests
                         typeof(IGenericInterface<string>).GetMethod("Method"),
                         typeof(DerivedType).GetMethod("Method", new Type[] { typeof(string) })
                     ),
-                }
+                },
             };
             yield return new object[]
             {
@@ -1250,8 +1250,8 @@ namespace System.Tests
                     new Tuple<MethodInfo, MethodInfo>(
                         typeof(DIMs.I1).GetMethod("M"),
                         typeof(DIMs.I1).GetMethod("M")
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1265,8 +1265,8 @@ namespace System.Tests
                             BindingFlags.Instance | BindingFlags.NonPublic
                         ),
                         null
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1277,8 +1277,8 @@ namespace System.Tests
                     new Tuple<MethodInfo, MethodInfo>(
                         typeof(DIMs.I1).GetMethod("M"),
                         typeof(DIMs.C2).GetMethod("M")
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1295,8 +1295,8 @@ namespace System.Tests
                             "System.Tests.TypeTestsExtended.DIMs.I1.M",
                             BindingFlags.Instance | BindingFlags.NonPublic
                         )
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1310,8 +1310,8 @@ namespace System.Tests
                             BindingFlags.Instance | BindingFlags.NonPublic
                         ),
                         null
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1325,8 +1325,8 @@ namespace System.Tests
                             "System.Tests.TypeTestsExtended.DIMs.I1.M",
                             BindingFlags.Instance | BindingFlags.NonPublic
                         )
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1340,8 +1340,8 @@ namespace System.Tests
                             BindingFlags.Instance | BindingFlags.NonPublic
                         ),
                         null
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1358,8 +1358,8 @@ namespace System.Tests
                             "System.Tests.TypeTestsExtended.DIMs.I1.M",
                             BindingFlags.Instance | BindingFlags.NonPublic
                         )
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1373,8 +1373,8 @@ namespace System.Tests
                             BindingFlags.Instance | BindingFlags.NonPublic
                         ),
                         null
-                    )
-                }
+                    ),
+                },
             };
             yield return new object[]
             {
@@ -1385,8 +1385,8 @@ namespace System.Tests
                     new Tuple<MethodInfo, MethodInfo>(
                         typeof(DIMs.I1).GetMethod("M"),
                         typeof(DIMs.C4).GetMethod("M")
-                    )
-                }
+                    ),
+                },
             };
 
             // Test all combinations of the following:
@@ -1553,8 +1553,8 @@ namespace System.Tests
                         new Tuple<MethodInfo, MethodInfo>[]
                         {
                             new Tuple<MethodInfo, MethodInfo>(MInterface, MTarget),
-                            new Tuple<MethodInfo, MethodInfo>(GInterface, GTarget)
-                        }
+                            new Tuple<MethodInfo, MethodInfo>(GInterface, GTarget),
+                        },
                     };
                 }
 
@@ -1567,13 +1567,13 @@ namespace System.Tests
                     {
                         typeof(SIMs.I2),
                         classType.Type,
-                        new Tuple<MethodInfo, MethodInfo>[0]
+                        new Tuple<MethodInfo, MethodInfo>[0],
                     };
                     yield return new object[]
                     {
                         level2GenericInterface,
                         classType.Type,
-                        new Tuple<MethodInfo, MethodInfo>[0]
+                        new Tuple<MethodInfo, MethodInfo>[0],
                     };
                 }
 
@@ -1607,8 +1607,8 @@ namespace System.Tests
                             new Tuple<MethodInfo, MethodInfo>[]
                             {
                                 new Tuple<MethodInfo, MethodInfo>(MInterface, null),
-                                new Tuple<MethodInfo, MethodInfo>(GInterface, null)
-                            }
+                                new Tuple<MethodInfo, MethodInfo>(GInterface, null),
+                            },
                         };
                     }
                 }
@@ -1896,7 +1896,7 @@ namespace System.Tests
         {
             A,
             B,
-            C
+            C,
         }
 
         public class TestClass { }
@@ -1907,7 +1907,7 @@ namespace System.Tests
             {
                 A,
                 B,
-                C
+                C,
             }
         }
     }

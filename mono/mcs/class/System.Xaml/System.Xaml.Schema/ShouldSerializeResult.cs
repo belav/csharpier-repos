@@ -29,6 +29,6 @@ namespace System.Xaml.Schema
     {
         Default,
         True,
-        False
+        False,
     }
 }

@@ -71,7 +71,7 @@ public partial class Math
 
         var list_arr = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[]
         {
-            new System.Collections.Generic.Dictionary<Math[], IsMathNull>()
+            new System.Collections.Generic.Dictionary<Math[], IsMathNull>(),
         };
         System.Collections.Generic.Dictionary<Math[], IsMathNull>[] list_arr_null = null;
 
@@ -84,7 +84,7 @@ public partial class Math
 
         var list_arr_unused = new System.Collections.Generic.Dictionary<Math[], IsMathNull>[]
         {
-            new System.Collections.Generic.Dictionary<Math[], IsMathNull>()
+            new System.Collections.Generic.Dictionary<Math[], IsMathNull>(),
         };
         System.Collections.Generic.Dictionary<Math[], IsMathNull>[] list_arr_null_unused = null;
 
@@ -193,7 +193,7 @@ public partial class Math
             GenericStruct<bool[]>
         >[]
         {
-            (m, gs) => new GenericStruct<bool[]>()
+            (m, gs) => new GenericStruct<bool[]>(),
         };
 
         Math.DelegateForSignatureTest fn_del = GenericStruct<int>.DelegateTargetForSignatureTest;
@@ -203,7 +203,7 @@ public partial class Math
         {
             GenericStruct<int>.DelegateTargetForSignatureTest,
             (m, gs) =>
-                new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" }
+                new GenericStruct<bool[]> { StringField = "fn_del_arr#1#lambda" },
         };
         var m_obj = new Math();
         Math.DelegateForSignatureTest fn_del_null = null;
@@ -212,14 +212,14 @@ public partial class Math
             List = new System.Collections.Generic.List<GenericStruct<int[]>>
             {
                 new GenericStruct<int[]> { StringField = "gs#List#0#StringField" },
-                new GenericStruct<int[]> { StringField = "gs#List#1#StringField" }
-            }
+                new GenericStruct<int[]> { StringField = "gs#List#1#StringField" },
+            },
         };
 
         Math.DelegateWithVoidReturn fn_void_del = Math.DelegateTargetWithVoidReturn;
         var fn_void_del_arr = new Math.DelegateWithVoidReturn[]
         {
-            Math.DelegateTargetWithVoidReturn
+            Math.DelegateTargetWithVoidReturn,
         };
         Math.DelegateWithVoidReturn fn_void_del_null = null;
 
@@ -230,7 +230,7 @@ public partial class Math
             fn_del(m_obj, gs_gs),
             fn_del_l(m_obj, gs_gs),
             fn_del_arr[0](m_obj, gs_gs),
-            fn_func_arr[0](m_obj, gs_gs)
+            fn_func_arr[0](m_obj, gs_gs),
         };
 
         var gs = new GenericStruct<int[]>();
@@ -254,7 +254,7 @@ public partial class Math
         {
             (gs) => new GenericStruct<int[]>(),
             Math.DelegateTargetWithVoidReturn,
-            null
+            null,
         };
 
         var gs = new GenericStruct<int[]>();
@@ -278,12 +278,12 @@ public partial class Math
             (gs) =>
             {
                 return true;
-            }
+            },
         };
 
         var fn_del_arr = new Func<Func<int, bool>, bool>[]
         {
-            DelegateTargetForNestedFunc<Func<int, bool>>
+            DelegateTargetForNestedFunc<Func<int, bool>>,
         };
         var m_obj = new Math();
         Func<Func<int, bool>, bool> fn_del_null = null;
@@ -300,7 +300,7 @@ public partial class Math
         var _dst_arr = new DelegateForSignatureTest[]
         {
             GenericStruct<int>.DelegateTargetForSignatureTest,
-            (m, gs) => new GenericStruct<bool[]>()
+            (m, gs) => new GenericStruct<bool[]>(),
         };
         Func<char[], bool> _fn_func = (cs) => cs.Length == 0;
         Action<GenericStruct<int>[]> _fn_action = (gss) => { };
@@ -328,7 +328,7 @@ public partial class Math
         var _dst_arr = new DelegateForSignatureTest[]
         {
             GenericStruct<int>.DelegateTargetForSignatureTest,
-            (m, gs) => new GenericStruct<bool[]>()
+            (m, gs) => new GenericStruct<bool[]>(),
         };
         Func<char[], bool> _fn_func = (cs) => cs.Length == 0;
         Action<GenericStruct<int>[]> _fn_action = (gss) => { };
@@ -408,7 +408,7 @@ public partial class DebuggerTest
         DebuggerTests.ValueTypesTest.GenericStruct<int>? n_gs =
             new DebuggerTests.ValueTypesTest.GenericStruct<int>
             {
-                StringField = "n_gs#StringField"
+                StringField = "n_gs#StringField",
             };
         object o_gs = n_gs.Value;
         object o_n_gs = n_gs;
@@ -433,7 +433,7 @@ public partial class DebuggerTest
         DebuggerTests.ValueTypesTest.GenericStruct<int>? n_gs =
             new DebuggerTests.ValueTypesTest.GenericStruct<int>
             {
-                StringField = "n_gs#StringField"
+                StringField = "n_gs#StringField",
             };
         object o_gs = n_gs.Value;
         object o_n_gs = n_gs;

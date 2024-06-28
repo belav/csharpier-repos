@@ -159,29 +159,29 @@ namespace System.Security.Cryptography.Xml.Tests
                 new[] { "<KeyValue><RSAKeyValue></RSAKeyValue></KeyValue>" },
                 new[]
                 {
-                    "<KeyValue><RSAKeyValue><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue>"
+                    "<KeyValue><RSAKeyValue><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue>",
                 },
                 new[]
                 {
-                    "<KeyValue><RSAKeyValue><Modulus>ogZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus></RSAKeyValue></KeyValue>"
+                    "<KeyValue><RSAKeyValue><Modulus>ogZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus></RSAKeyValue></KeyValue>",
                 },
                 // Invalid length
                 new[]
                 {
-                    "<KeyValue><RSAKeyValue><Modulus>gZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus></RSAKeyValue></KeyValue>"
+                    "<KeyValue><RSAKeyValue><Modulus>gZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus></RSAKeyValue></KeyValue>",
                 },
                 new[]
                 {
-                    "<KeyValue><RSAKeyValue><Exponent>1AQAB</Exponent></RSAKeyValue></KeyValue>"
+                    "<KeyValue><RSAKeyValue><Exponent>1AQAB</Exponent></RSAKeyValue></KeyValue>",
                 },
                 // Invalid namespace
                 new[]
                 {
-                    "<KeyValue><RSAKeyValue><Modulus>ogZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue>"
+                    "<KeyValue><RSAKeyValue><Modulus>ogZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue>",
                 },
                 new[]
                 {
-                    "<KeyValue xlmns=\"http://randomnamespace.org\"><RSAKeyValue><Modulus>ogZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue>"
+                    "<KeyValue xlmns=\"http://randomnamespace.org\"><RSAKeyValue><Modulus>ogZ1/O7iks9ncETqNxLDKoPvgrT4nFx1a3lOmpywEmgbc5+8vI5dSzReH4v0YrflY75rIJx13CYWMsaHfQ78GtXvaeshHlQ3lLTuSdYEJceKll/URlBoKQtOj5qYIVSFOIVGHv4Y/0lnLftOzIydem29KKH6lJQlJawBBssR12s=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue>",
                 },
             };
         }
@@ -215,13 +215,13 @@ namespace System.Security.Cryptography.Xml.Tests
                 {
                     $"<KeyValue xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><RSAKeyValue><Modulus>{modulus1}</Modulus><Exponent>{exponent}</Exponent></RSAKeyValue></KeyValue>",
                     Convert.FromBase64String(modulus1),
-                    Convert.FromBase64String(exponent)
+                    Convert.FromBase64String(exponent),
                 },
                 new object[]
                 {
                     $"<KeyValue xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\" xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><ds:RSAKeyValue><ds:Modulus>{modulus2}</ds:Modulus><ds:Exponent>{exponent}</ds:Exponent></ds:RSAKeyValue></KeyValue>",
                     Convert.FromBase64String(modulus2),
-                    Convert.FromBase64String(exponent)
+                    Convert.FromBase64String(exponent),
                 },
             };
         }

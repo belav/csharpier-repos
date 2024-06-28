@@ -186,7 +186,7 @@ public class DefaultModelValidatorProviderTest
     {
         // Arrange
         var validatorProvider = new DefaultModelValidatorProvider();
-        var attributes = new object[] { new RequiredAttribute(), new BindRequiredAttribute(), };
+        var attributes = new object[] { new RequiredAttribute(), new BindRequiredAttribute() };
 
         // Act
         var result = validatorProvider.HasValidators(typeof(object), attributes);

@@ -254,7 +254,7 @@ namespace System
                     GetApexTimeDataRoot() + "/etc/tz/", // Android 10+, TimeData module where the updates land
                     GetApexRuntimeRoot() + "/etc/tz/", // Android 10+, Fallback location if the above isn't found or corrupted
                     Environment.GetEnvironmentVariable("ANDROID_DATA") + "/misc/zoneinfo/",
-                    Environment.GetEnvironmentVariable("ANDROID_ROOT") + DefaultTimeZoneDirectory
+                    Environment.GetEnvironmentVariable("ANDROID_ROOT") + DefaultTimeZoneDirectory,
                 };
                 foreach (var tzFileDir in tzFileDirList)
                 {

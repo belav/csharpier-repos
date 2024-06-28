@@ -2222,7 +2222,7 @@ namespace MonoTests.System.Data.Connected.Odbc
                     0x66,
                     0x06,
                     0x66,
-                    0x98
+                    0x98,
                 };
 
                 cmd = (OdbcCommand)conn.CreateCommand();
@@ -3456,7 +3456,7 @@ namespace MonoTests.System.Data.Connected.Odbc
                     0x39,
                     0x00,
                     0x44,
-                    0x53
+                    0x53,
                 };
 
                 cmd = (OdbcCommand)conn.CreateCommand();
@@ -3491,7 +3491,7 @@ namespace MonoTests.System.Data.Connected.Odbc
                     0x31,
                     0x32,
                     0x33,
-                    0x34
+                    0x34,
                 };
 
                 cmd = (OdbcCommand)conn.CreateCommand();

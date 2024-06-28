@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis
                 | PUBLIC_KEY_TOKEN
                 | RETARGET
                 | PROCESSORARCHITECTURE
-                | CONTENT_TYPE
+                | CONTENT_TYPE,
         }
 
         internal enum PropertyId
@@ -72,6 +72,7 @@ namespace Microsoft.CodeAnalysis
             ARCHITECTURE, // 27
             CONTENT_TYPE, // 28
             MAX_PARAMS // 29
+            ,
         }
 
         private static class CANOF

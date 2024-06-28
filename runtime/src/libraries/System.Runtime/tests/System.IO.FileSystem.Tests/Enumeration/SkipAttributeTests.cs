@@ -21,7 +21,7 @@ namespace System.IO.Tests.Enumeration
                 ShouldIncludePredicate = (ref FileSystemEntry entry) =>
                 {
                     return !entry.IsDirectory;
-                }
+                },
             }.ToArray();
         }
 
@@ -142,7 +142,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions
                 {
                     AttributesToSkip = FileAttributes.Directory,
-                    RecurseSubdirectories = true
+                    RecurseSubdirectories = true,
                 }
             );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, paths);

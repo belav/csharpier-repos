@@ -30,6 +30,6 @@ namespace Internal.IL
         ObjRef,
 
         /// <summary>A value type which is not any of the primitive one.</summary>
-        ValueType
+        ValueType,
     }
 }

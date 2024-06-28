@@ -106,7 +106,7 @@ namespace System.Web.Query.Dynamic
                 throw new ArgumentNullException("ordering");
             ParameterExpression[] parameters = new ParameterExpression[]
             {
-                Expression.Parameter(source.ElementType, "")
+                Expression.Parameter(source.ElementType, ""),
             };
             ExpressionParser parser = new ExpressionParser(parameters, ordering, values);
             IEnumerable<DynamicOrdering> orderings = parser.ParseOrdering();
@@ -281,7 +281,7 @@ namespace System.Web.Query.Dynamic
             typeof(Func<,>),
             typeof(Func<,,>),
             typeof(Func<,,,>),
-            typeof(Func<,,,,>)
+            typeof(Func<,,,,>),
         };
 
         public static Expression Parse(Type resultType, string expression, params object[] values)
@@ -717,7 +717,7 @@ namespace System.Web.Query.Dynamic
             LessGreater,
             DoubleEqual,
             GreaterThanEqual,
-            DoubleBar
+            DoubleBar,
         }
 
         interface ILogicalSignatures
@@ -857,7 +857,7 @@ namespace System.Web.Query.Dynamic
             typeof(TimeSpan),
             typeof(Guid),
             typeof(Math),
-            typeof(Convert)
+            typeof(Convert),
         };
 
         static readonly Expression trueLiteral = Expression.Constant(true);

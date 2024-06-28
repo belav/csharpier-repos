@@ -62,7 +62,7 @@ namespace System.IdentityModel.Selectors
                 FeedbackSizeValue = m_parameters.feedbackSize;
                 LegalBlockSizesValue = new KeySizes[]
                 {
-                    new KeySizes(BlockSizeValue, BlockSizeValue, 0)
+                    new KeySizes(BlockSizeValue, BlockSizeValue, 0),
                 };
                 LegalKeySizesValue = new KeySizes[] { new KeySizes(KeySizeValue, KeySizeValue, 0) };
             }
@@ -138,7 +138,7 @@ namespace System.IdentityModel.Selectors
             public enum Direction
             {
                 Encrypt = 1,
-                Decrypt = 2
+                Decrypt = 2,
             };
 
             TransformCryptoHandle m_transCryptoHandle;

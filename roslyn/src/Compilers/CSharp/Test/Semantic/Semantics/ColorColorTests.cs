@@ -2448,7 +2448,7 @@ class M
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(refLib),
-                    TestMetadata.Net451.mscorlib
+                    TestMetadata.Net451.mscorlib,
                 }
             );
 
@@ -2505,7 +2505,7 @@ class C
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(refLib),
-                    TestMetadata.Net451.mscorlib
+                    TestMetadata.Net451.mscorlib,
                 }
             );
 

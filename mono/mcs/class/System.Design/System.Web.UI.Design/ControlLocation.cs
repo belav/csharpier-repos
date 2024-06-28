@@ -38,6 +38,6 @@ namespace System.Web.UI.Design
         First,
         Last,
         FirstChild,
-        LastChild
+        LastChild,
     }
 }

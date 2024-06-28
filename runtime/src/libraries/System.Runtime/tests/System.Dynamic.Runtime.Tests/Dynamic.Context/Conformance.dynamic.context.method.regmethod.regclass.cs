@@ -25,7 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass
@@ -609,7 +609,7 @@ namespace System.Dynamic.Runtime.Tests
             {
                 ms = dy.Method_ReturnMyStruct(),
                 BoolProperty = dy.Method_ReturnBoolNullable((short?)3),
-                ByteArray = dy.Method_ReturnByteArr(0, 1, 2, 3, 4)
+                ByteArray = dy.Method_ReturnByteArr(0, 1, 2, 3, 4),
             };
 
             Assert.Equal(3, tc.ms.Number);
@@ -653,7 +653,7 @@ namespace System.Dynamic.Runtime.Tests
             var list = new List<char?>
             {
                 (char?)mc.Method_ReturnCharNullable(),
-                (char?)mc.Method_ReturnCharNullable(dec, ref p2, ref p3)
+                (char?)mc.Method_ReturnCharNullable(dec, ref p2, ref p3),
             };
 
             Assert.Equal(3, ((MyClass)p2).Field);
@@ -823,7 +823,7 @@ namespace System.Dynamic.Runtime.Tests
                             new MyStruct[]
                             {
                                 new MyStruct() { Number = 0 },
-                                new MyStruct() { Number = 1 }
+                                new MyStruct() { Number = 1 },
                             }
                         );
                     break;
@@ -861,7 +861,7 @@ namespace System.Dynamic.Runtime.Tests
             dynamic mc = new MemberClass();
             List<Test> list = new List<Test>()
             {
-                new Test() { _myclass = mc.Method_ReturnMyClass(11) }
+                new Test() { _myclass = mc.Method_ReturnMyClass(11) },
             };
             Assert.Equal(1, list.Count);
             Assert.Equal(11, list[0]._myclass.Field);
@@ -1083,7 +1083,7 @@ namespace System.Dynamic.Runtime.Tests
             var array = new char[]
             {
                 (char)mc.Method_ReturnChar(ref p1, null, null),
-                (char)mc.Method_ReturnChar(ref p1, 1, null)
+                (char)mc.Method_ReturnChar(ref p1, 1, null),
             };
             Assert.Equal("test", p1);
             Assert.Equal(new char[] { 'c', 'c' }, array);
@@ -1112,7 +1112,7 @@ namespace System.Dynamic.Runtime.Tests
             dynamic mc = new MemberClass();
             Test t1 = new Test()
             {
-                _field = (decimal)mc.Method_ReturnDecimal(out p1, ref p2, null, 'a')
+                _field = (decimal)mc.Method_ReturnDecimal(out p1, ref p2, null, 'a'),
             };
             Test t2 = new Test() { _field = (decimal)mc.Method_ReturnDecimal(null, null, 0) };
             Test t3 = t1 + t2;
@@ -1193,7 +1193,7 @@ namespace System.Dynamic.Runtime.Tests
             List<Test> list = new List<Test>()
             {
                 new Test() { _floatField = (float)mc.Method_ReturnFloat() },
-                new Test() { _floatField = (float)mc.Method_ReturnFloat(myInt) }
+                new Test() { _floatField = (float)mc.Method_ReturnFloat(myInt) },
             };
 
             Assert.Equal(2, list.Count);
@@ -2331,7 +2331,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
                 dy.Method_ReturnObject(),
                 dy.Method_ReturnObject(new byte?[0]),
                 dy.Method_ReturnObject(p1, -1, ref p3),
-                dy.Method_ReturnObject(new bool?[4])
+                dy.Method_ReturnObject(new bool?[4]),
             };
             if (
                 result.Length == 4
@@ -2970,7 +2970,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             Test t = new Test()
             {
                 _field1 = (long)mc.Method_ReturnUlong(p1),
-                _field2 = (long?)mc.Method_ReturnUlongNullable()
+                _field2 = (long?)mc.Method_ReturnUlongNullable(),
             };
             if (p1.Field == 0 && t._field1 == p1.ToString().Length && t._field2 == 1L)
                 return 0;
@@ -3008,7 +3008,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
             {
                 (long?)mc.Method_ReturnUlongNullable(0),
                 (long?)mc.Method_ReturnUlongNullable(out p1, out p2, out p3),
-                (long?)mc.Method_ReturnUlongNullable('a', 'b', null)
+                (long?)mc.Method_ReturnUlongNullable('a', 'b', null),
             };
             if (
                 result.Length == 3
@@ -3117,7 +3117,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.regmetho
                 new MyStruct[]
                 {
                     new MyStruct(),
-                    new MyStruct() { Number = -1 }
+                    new MyStruct() { Number = -1 },
                 }
             );
             return 0;

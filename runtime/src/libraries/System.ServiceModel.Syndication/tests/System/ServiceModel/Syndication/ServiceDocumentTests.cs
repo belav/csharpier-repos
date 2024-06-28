@@ -30,7 +30,7 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[] { new Workspace[0] };
             yield return new object[]
             {
-                new Workspace[] { new Workspace("title", new ResourceCollectionInfo[0]) }
+                new Workspace[] { new Workspace("title", new ResourceCollectionInfo[0]) },
             };
         }
 

@@ -609,7 +609,7 @@ namespace System.Web.UI
                         string[] attribs = new string[]
                         {
                             GetAttributeName(HtmlTextWriterAttribute.Align),
-                            alignment
+                            alignment,
                         };
 
                         AppendOtherTag(

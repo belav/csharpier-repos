@@ -989,9 +989,9 @@ public class EntityFinder<TEntity> : IEntityFinder<TEntity>
                 entityType,
                 ownership.PrincipalToDependent!.Name
             )
-            : entityType.HasSharedClrType
-                ? (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
-                : (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.ClrType);
+        : entityType.HasSharedClrType
+            ? (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.Name, entityType.ClrType)
+        : (IQueryable)_setCache.GetOrAddSet(_setSource, entityType.ClrType);
 
     private IQueryable BuildQueryRoot(
         IEntityType ownerEntityType,

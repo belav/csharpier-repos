@@ -1743,7 +1743,7 @@ class C
             {
                 SymbolStartEnd,
                 SemanticModel,
-                Operation
+                Operation,
             }
 
             public static readonly DiagnosticDescriptor Descriptor =

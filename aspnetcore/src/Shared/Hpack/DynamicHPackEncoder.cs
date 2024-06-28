@@ -394,5 +394,5 @@ internal enum HeaderEncodingHint
 {
     Index,
     IgnoreIndex,
-    NeverIndex
+    NeverIndex,
 }

@@ -1861,7 +1861,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x02,
             0x02,
             0x07,
-            0xD0
+            0xD0,
         };
 
         private X509Certificate2 GetCertificate(bool includePrivateKey)

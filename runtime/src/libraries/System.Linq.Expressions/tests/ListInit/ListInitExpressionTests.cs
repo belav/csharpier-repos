@@ -152,25 +152,25 @@ namespace System.Linq.Expressions.Tests
             yield return new object[] { Expression.ListInit(validNew, new Expression[0]) };
             yield return new object[]
             {
-                Expression.ListInit(validNew, Enumerable.Empty<Expression>())
+                Expression.ListInit(validNew, Enumerable.Empty<Expression>()),
             };
             yield return new object[] { Expression.ListInit(validNew, new ElementInit[0]) };
             yield return new object[]
             {
-                Expression.ListInit(validNew, Enumerable.Empty<ElementInit>())
+                Expression.ListInit(validNew, Enumerable.Empty<ElementInit>()),
             };
 
             MethodInfo validMethod = typeof(List<int>).GetMethod("Add");
             yield return new object[] { Expression.ListInit(validNew, validMethod) };
             yield return new object[]
             {
-                Expression.ListInit(validNew, validMethod, Enumerable.Empty<Expression>())
+                Expression.ListInit(validNew, validMethod, Enumerable.Empty<Expression>()),
             };
 
             yield return new object[] { Expression.ListInit(validNew, null, new Expression[0]) };
             yield return new object[]
             {
-                Expression.ListInit(validNew, null, Enumerable.Empty<Expression>())
+                Expression.ListInit(validNew, null, Enumerable.Empty<Expression>()),
             };
         }
 
@@ -320,7 +320,7 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression.Constant(1),
                 Expression.Constant(2),
-                Expression.Constant(int.MaxValue)
+                Expression.Constant(int.MaxValue),
             };
             ListInitExpression listInit = Expression.ListInit(newExp, expressions);
             Assert.Equal(expressions, listInit.Initializers.Select(i => i.GetArgument(0)));
@@ -364,14 +364,14 @@ namespace System.Linq.Expressions.Tests
                 {
                     { "a", 1 },
                     { "b", 2 },
-                    { "c", 3 }
+                    { "c", 3 },
                 };
             Func<Dictionary<string, int>> func = dictInit.Compile(useInterpreter);
             var expected = new Dictionary<string, int>
             {
                 { "a", 1 },
                 { "b", 2 },
-                { "c", 3 }
+                { "c", 3 },
             };
             Assert.Equal(expected.OrderBy(kvp => kvp.Key), func().OrderBy(kvp => kvp.Key));
         }
@@ -427,14 +427,14 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression.ElementInit(meth, Expression.Constant(1)),
                 Expression.ElementInit(meth, Expression.Constant(2)),
-                Expression.ElementInit(meth, Expression.Constant(3))
+                Expression.ElementInit(meth, Expression.Constant(3)),
             };
             ListInitExpression init = Expression.ListInit(Expression.New(typeof(List<int>)), inits);
             inits = new[]
             {
                 Expression.ElementInit(meth, Expression.Constant(1)),
                 Expression.ElementInit(meth, Expression.Constant(2)),
-                Expression.ElementInit(meth, Expression.Constant(3))
+                Expression.ElementInit(meth, Expression.Constant(3)),
             };
             Assert.NotSame(init, init.Update(init.NewExpression, inits));
         }
@@ -447,7 +447,7 @@ namespace System.Linq.Expressions.Tests
             {
                 Expression.ElementInit(meth, Expression.Constant(1)),
                 Expression.ElementInit(meth, Expression.Constant(2)),
-                Expression.ElementInit(meth, Expression.Constant(3))
+                Expression.ElementInit(meth, Expression.Constant(3)),
             };
             ListInitExpression init = Expression.ListInit(Expression.New(typeof(List<int>)), inits);
             IEnumerable<ElementInit> newInits = new RunOnceEnumerable<ElementInit>(
@@ -455,7 +455,7 @@ namespace System.Linq.Expressions.Tests
                 {
                     Expression.ElementInit(meth, Expression.Constant(1)),
                     Expression.ElementInit(meth, Expression.Constant(2)),
-                    Expression.ElementInit(meth, Expression.Constant(3))
+                    Expression.ElementInit(meth, Expression.Constant(3)),
                 }
             );
             Assert.NotSame(init, init.Update(init.NewExpression, newInits));

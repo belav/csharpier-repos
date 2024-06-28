@@ -20,7 +20,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass
@@ -220,7 +220,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             var loc = new MyStruct?[]
             {
                 (MyStruct?)dy1.Property_MyStructNull,
-                (MyStruct?)dy2.Property_MyStructNull
+                (MyStruct?)dy2.Property_MyStructNull,
             };
             if (loc.Length == 2 && loc[0] == null && loc[1].Value.Number == 1)
                 return 0;
@@ -287,7 +287,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             mc.Property_MyStructArr = new MyStruct[]
             {
                 new MyStruct() { Number = 0 },
-                new MyStruct() { Number = 1 }
+                new MyStruct() { Number = 1 },
             };
             dynamic dy = mc;
             string s1 = ((string)dy.Property_string) ?? string.Empty;
@@ -537,7 +537,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             mc.Property_MyClassArr = new MyClass[]
             {
                 null,
-                new MyClass() { Field = -1 }
+                new MyClass() { Field = -1 },
             };
             dynamic dy = mc;
             List<MyClass> list = new List<MyClass>();
@@ -960,7 +960,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             mc.Property_MyStructNullArr = new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = 10 }
+                new MyStruct() { Number = 10 },
             };
             dynamic dy = mc;
             return (int)dy.Property_MyStructNullArr.Length == 2 ? 0 : 1;
@@ -973,7 +973,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
             dy.Property_MyStructNullArr = new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = 10 }
+                new MyStruct() { Number = 10 },
             };
             mc = dy;
             return (int)dy.Property_MyStructNullArr.Length == 2 ? 0 : 1;
@@ -1266,7 +1266,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.property.autopr
                 float.MinValue,
                 float.NaN,
                 float.NegativeInfinity,
-                float.PositiveInfinity
+                float.PositiveInfinity,
             };
             if (
                 dy.Property_FloatNullArr.Length == 6

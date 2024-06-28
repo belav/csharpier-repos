@@ -247,7 +247,7 @@ namespace Internal.Runtime
         NullableValueOffset,
 
         // Number of field types we support
-        Count
+        Count,
     }
 
     // Keep this synchronized with GenericVarianceType in rhbinder.h.

@@ -105,7 +105,7 @@ namespace Microsoft.Data.Sqlite
         {
             Active,
             Idle,
-            Disabled
+            Disabled,
         }
     }
 }

@@ -127,7 +127,7 @@ public abstract class AuthorizationTests<TStartup, TContext>
             "/Identity/Account/Register",
             "/Identity/Account/Login",
             "/Identity/Account/ForgotPassword",
-            "/Identity/Account/Logout"
+            "/Identity/Account/Logout",
         };
 
     [Theory]

@@ -35,7 +35,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor()
@@ -44,7 +44,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "About" }
+                    { "action", "About" },
                 },
             },
         };
@@ -84,7 +84,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "About" }
+                    { "action", "About" },
                 },
             },
         };
@@ -117,7 +117,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor()
@@ -126,7 +126,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
         };
@@ -155,7 +155,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor()
@@ -164,7 +164,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "About" }
+                    { "action", "About" },
                 },
             },
         };
@@ -193,9 +193,9 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
-                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home", }
+                AttributeRouteInfo = new AttributeRouteInfo() { Template = "/Home" },
             },
         };
 
@@ -226,7 +226,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor()
@@ -235,7 +235,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor() // This won't match the request
@@ -244,7 +244,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "About" }
+                    { "action", "About" },
                 },
             },
         };
@@ -278,7 +278,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor()
@@ -287,7 +287,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
             },
             new ActionDescriptor() // This won't match the request
@@ -296,7 +296,7 @@ public class ActionSelectorTest
                 RouteValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                 {
                     { "controller", "Home" },
-                    { "action", "About" }
+                    { "action", "About" },
                 },
             },
         };
@@ -328,9 +328,9 @@ public class ActionSelectorTest
                 {
                     { "area", null },
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
-            }
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -362,9 +362,9 @@ public class ActionSelectorTest
                 {
                     { "area", null },
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
-            }
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -396,9 +396,9 @@ public class ActionSelectorTest
                 {
                     { "area", null },
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
-            }
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -430,9 +430,9 @@ public class ActionSelectorTest
                 {
                     { "foo", "" },
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
-            }
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -464,9 +464,9 @@ public class ActionSelectorTest
                 {
                     { "foo", "" },
                     { "controller", "Home" },
-                    { "action", "Index" }
+                    { "action", "Index" },
                 },
-            }
+            },
         };
 
         var selector = CreateSelector(actions);
@@ -559,7 +559,7 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = false, },
+                new BooleanConstraint() { Pass = false },
             },
         };
 
@@ -567,7 +567,7 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = false, },
+                new BooleanConstraint() { Pass = false },
             },
         };
 
@@ -625,8 +625,8 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new ConstraintFactory() { Constraint = new BooleanConstraint() { Pass = true }, },
-            }
+                new ConstraintFactory() { Constraint = new BooleanConstraint() { Pass = true } },
+            },
         };
 
         var actionWithoutConstraints = new ActionDescriptor()
@@ -655,7 +655,7 @@ public class ActionSelectorTest
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
                 new ConstraintFactory() { },
-            }
+            },
         };
 
         var actions = new ActionDescriptor[] { nullConstraint };
@@ -680,7 +680,7 @@ public class ActionSelectorTest
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
                 new BooleanConstraintMarker() { Pass = true },
-            }
+            },
         };
 
         var actionWithoutConstraints = new ActionDescriptor()
@@ -688,7 +688,7 @@ public class ActionSelectorTest
             Parameters = new List<ParameterDescriptor>(),
         };
 
-        var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints, };
+        var actions = new ActionDescriptor[] { actionWithConstraints, actionWithoutConstraints };
 
         var selector = CreateSelector(actions);
         var context = CreateRouteContext("POST");
@@ -709,7 +709,7 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = true, Order = 0, },
+                new BooleanConstraint() { Pass = true, Order = 0 },
             },
         };
 
@@ -717,7 +717,7 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = true, Order = 1, },
+                new BooleanConstraint() { Pass = true, Order = 1 },
             },
         };
 
@@ -742,9 +742,9 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = true, Order = 0, },
-                new BooleanConstraint() { Pass = true, Order = 1, },
-                new BooleanConstraint() { Pass = true, Order = 2, },
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = true, Order = 2 },
             },
         };
 
@@ -752,9 +752,9 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = true, Order = 0, },
-                new BooleanConstraint() { Pass = true, Order = 1, },
-                new BooleanConstraint() { Pass = true, Order = 3, },
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = true, Order = 3 },
             },
         };
 
@@ -778,9 +778,9 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = true, Order = 0, },
-                new BooleanConstraint() { Pass = true, Order = 1, },
-                new BooleanConstraint() { Pass = false, Order = 2, },
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = false, Order = 2 },
             },
         };
 
@@ -788,9 +788,9 @@ public class ActionSelectorTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>()
             {
-                new BooleanConstraint() { Pass = true, Order = 0, },
-                new BooleanConstraint() { Pass = true, Order = 1, },
-                new BooleanConstraint() { Pass = false, Order = 3, },
+                new BooleanConstraint() { Pass = true, Order = 0 },
+                new BooleanConstraint() { Pass = true, Order = 1 },
+                new BooleanConstraint() { Pass = false, Order = 3 },
             },
         };
 
@@ -992,7 +992,7 @@ public class ActionSelectorTest
             NullLogger<DefaultActionDescriptorCollectionProvider>.Instance
         );
 
-        var actionConstraintProviders = new[] { new DefaultActionConstraintProvider(), };
+        var actionConstraintProviders = new[] { new DefaultActionConstraintProvider() };
 
         var actionSelector = new ActionSelector(
             actionDescriptorCollectionProvider,
@@ -1138,7 +1138,7 @@ public class ActionSelectorTest
         httpContext.SetupGet(c => c.Request).Returns(request.Object);
         httpContext.SetupGet(c => c.RequestServices).Returns(serviceProvider);
 
-        return new RouteContext(httpContext.Object) { RouteData = routeData, };
+        return new RouteContext(httpContext.Object) { RouteData = routeData };
     }
 
     private static ActionDescriptor CreateAction(string area, string controller, string action)

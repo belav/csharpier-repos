@@ -64,7 +64,7 @@ internal static class BrowserLocator
                 "/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary",
                 "/usr/bin/chromium",
                 "C:/Program Files/Google/Chrome/Application/chrome.exe",
-                "/usr/bin/chromium-browser"
+                "/usr/bin/chromium-browser",
             }
         );
 

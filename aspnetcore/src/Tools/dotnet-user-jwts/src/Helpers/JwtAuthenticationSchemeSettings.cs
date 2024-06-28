@@ -33,7 +33,7 @@ internal sealed record JwtAuthenticationSchemeSettings(
             [nameof(TokenValidationParameters.ValidAudiences)] = new JsonArray(
                 Audiences.Select(aud => JsonValue.Create(aud)).ToArray()
             ),
-            [nameof(TokenValidationParameters.ValidIssuer)] = ClaimsIssuer
+            [nameof(TokenValidationParameters.ValidIssuer)] = ClaimsIssuer,
         };
 
         if (config[AuthenticationKey] is JsonObject authentication)
@@ -53,14 +53,14 @@ internal sealed record JwtAuthenticationSchemeSettings(
         {
             config[AuthenticationKey] = new JsonObject
             {
-                [SchemesKey] = new JsonObject { [SchemeName] = settingsObject }
+                [SchemesKey] = new JsonObject { [SchemeName] = settingsObject },
             };
         }
 
         var streamOptions = new FileStreamOptions
         {
             Access = FileAccess.Write,
-            Mode = FileMode.Create
+            Mode = FileMode.Create,
         };
         if (!OperatingSystem.IsWindows())
         {

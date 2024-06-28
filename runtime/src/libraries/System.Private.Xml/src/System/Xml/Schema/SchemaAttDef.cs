@@ -18,7 +18,7 @@ namespace System.Xml.Schema
         {
             None,
             XmlSpace,
-            XmlLang
+            XmlLang,
         };
 
         private string? _defExpanded; // default value in its expanded form

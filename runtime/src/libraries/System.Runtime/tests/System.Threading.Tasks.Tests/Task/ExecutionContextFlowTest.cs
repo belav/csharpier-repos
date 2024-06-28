@@ -47,14 +47,14 @@ namespace System.Threading.Tasks.Tests
             {
                 var state = new InvokeActionOnFinalization
                 {
-                    Action = () => Volatile.Write(ref finalized, true)
+                    Action = () => Volatile.Write(ref finalized, true),
                 };
                 var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
                 t = Task.Run(() => { }); // run a task that'll capture EC
                 al.Value = null;
             })
             {
-                IsBackground = true
+                IsBackground = true,
             };
 
             runner.Start();
@@ -80,13 +80,13 @@ namespace System.Threading.Tasks.Tests
         {
             yield return new object[]
             {
-                new Func<TaskCompletionSource<int>>(() => new TaskCompletionSource<int>())
+                new Func<TaskCompletionSource<int>>(() => new TaskCompletionSource<int>()),
             };
             yield return new object[]
             {
                 new Func<TaskCompletionSource<int>>(
                     () => new TaskCompletionSource<int>(new object())
-                )
+                ),
             };
             yield return new object[]
             {
@@ -95,7 +95,7 @@ namespace System.Threading.Tasks.Tests
                         new TaskCompletionSource<int>(
                             TaskCreationOptions.RunContinuationsAsynchronously
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -105,7 +105,7 @@ namespace System.Threading.Tasks.Tests
                             new object(),
                             TaskCreationOptions.RunContinuationsAsynchronously
                         )
-                )
+                ),
             };
         }
 

@@ -43,7 +43,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
             return new DerivedDataContractType[]
             {
                 new DerivedDataContractType(),
-                new DerivedDataContractType(1, "SomeName", new WcfPocoType(2, "SomeOtherName"))
+                new DerivedDataContractType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")),
             };
         }
 
@@ -57,7 +57,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
                     1,
                     "SomeName",
                     new DerivedWcfPocoType(2, "SomeOtherName", null)
-                )
+                ),
             };
         }
     }

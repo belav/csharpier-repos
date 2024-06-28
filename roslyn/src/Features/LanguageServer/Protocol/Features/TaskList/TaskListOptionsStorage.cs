@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.TaskList
             new()
             {
                 Descriptors = globalOptions.GetOption(Descriptors),
-                ComputeForClosedFiles = globalOptions.GetOption(ComputeTaskListItemsForClosedFiles)
+                ComputeForClosedFiles = globalOptions.GetOption(ComputeTaskListItemsForClosedFiles),
             };
     }
 }

@@ -36,6 +36,6 @@ namespace System.Messaging
     {
         Acknowledgment = 1,
         Normal = 2,
-        Report = 3
+        Report = 3,
     }
 }

@@ -161,7 +161,7 @@ namespace System.Activities.Core.Presentation
                 wrapper = new ExpandableItemWrapper()
                 {
                     Item = this.ModelItem,
-                    IsExpanded = expandTargetTransition
+                    IsExpanded = expandTargetTransition,
                 };
                 ModelItem triggerModelItem = this.ModelItem.Properties[TriggerPropertyName].Value;
                 if (triggerModelItem != null)
@@ -194,7 +194,7 @@ namespace System.Activities.Core.Presentation
                                     new ExpandableItemWrapper()
                                     {
                                         Item = transitionModelItem,
-                                        IsExpanded = expandTransition
+                                        IsExpanded = expandTransition,
                                     }
                                 );
                             }
@@ -254,7 +254,7 @@ namespace System.Activities.Core.Presentation
                                             new ExpandableItemWrapper()
                                             {
                                                 Item = transitionModelItem,
-                                                IsExpanded = expandTransition
+                                                IsExpanded = expandTransition,
                                             }
                                         );
                                     }
@@ -618,7 +618,7 @@ namespace System.Activities.Core.Presentation
                             DisplayName = StateContainerEditor.GenerateTransitionName(
                                 stateMachineModelItem
                             ),
-                            To = toState
+                            To = toState,
                         }
                     );
 
@@ -635,7 +635,10 @@ namespace System.Activities.Core.Presentation
                     {
                         PointCollection newTransitionViewState = new PointCollection
                         {
-                            thisPointCollection[0] // start point
+                            thisPointCollection[
+                                0
+                            ] // start point
+                            ,
                         };
 
                         if (toState == this.parentStateModelItem.GetCurrentValue())

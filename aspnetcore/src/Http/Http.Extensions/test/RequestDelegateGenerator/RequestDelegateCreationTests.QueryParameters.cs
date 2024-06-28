@@ -23,7 +23,7 @@ public abstract partial class RequestDelegateCreationTests
                     "name",
                     "TestName",
                     false,
-                    "Hello TestName!"
+                    "Hello TestName!",
                 },
                 new object[]
                 {
@@ -31,7 +31,7 @@ public abstract partial class RequestDelegateCreationTests
                     "name",
                     null,
                     false,
-                    "Hello DefaultName!"
+                    "Hello DefaultName!",
                 },
                 new object[]
                 {
@@ -39,7 +39,7 @@ public abstract partial class RequestDelegateCreationTests
                     "name",
                     "TestName",
                     false,
-                    "Hello TestName!"
+                    "Hello TestName!",
                 },
                 new object[]
                 {
@@ -47,7 +47,7 @@ public abstract partial class RequestDelegateCreationTests
                     "name",
                     null,
                     false,
-                    "Hello !"
+                    "Hello !",
                 },
                 new object[]
                 {
@@ -55,7 +55,7 @@ public abstract partial class RequestDelegateCreationTests
                     "name",
                     "TestName",
                     false,
-                    "Hello TestName!"
+                    "Hello TestName!",
                 },
                 new object[] { @"(int age) => $""Age: {age}""", "age", null, true, null },
                 new object[] { @"(int age) => $""Age: {age}""", "age", "42", false, "Age: 42" },
@@ -65,7 +65,7 @@ public abstract partial class RequestDelegateCreationTests
                     "age",
                     null,
                     false,
-                    "Age: 12"
+                    "Age: 12",
                 },
                 new object[]
                 {
@@ -73,7 +73,7 @@ public abstract partial class RequestDelegateCreationTests
                     "age",
                     "42",
                     false,
-                    "Age: 42"
+                    "Age: 42",
                 },
                 new object[] { @"(int? age) => $""Age: {age}""", "age", null, false, "Age: " },
                 new object[] { @"(int? age) => $""Age: {age}""", "age", "42", false, "Age: 42" },

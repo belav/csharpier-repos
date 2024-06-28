@@ -389,7 +389,7 @@ namespace System.Diagnostics.Eventing.Reader
             Level = 0,
             Opcode = 1,
             Task = 2,
-            Keyword = 3
+            Keyword = 3,
         }
 
         internal string FindStandardLevelDisplayName(string name, uint value)

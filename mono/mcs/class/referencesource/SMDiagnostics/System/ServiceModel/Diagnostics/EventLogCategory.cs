@@ -22,6 +22,6 @@ namespace System.ServiceModel.Diagnostics
         StateMachine,
         Wsat,
         SharingService,
-        ListenerAdapter
+        ListenerAdapter,
     }
 }

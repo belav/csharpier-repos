@@ -84,35 +84,35 @@ namespace System.Reflection.Tests
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.s_intField),
                 new FieldInfoTests(),
-                100
+                100,
             };
             yield return new object[]
             {
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.s_intField),
                 null,
-                100
+                100,
             };
             yield return new object[]
             {
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.intField),
                 new FieldInfoTests(),
-                101
+                101,
             };
             yield return new object[]
             {
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.s_stringField),
                 new FieldInfoTests(),
-                "static"
+                "static",
             };
             yield return new object[]
             {
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.stringField),
                 new FieldInfoTests(),
-                "non static"
+                "non static",
             };
         }
 
@@ -131,14 +131,14 @@ namespace System.Reflection.Tests
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.stringField),
                 null,
-                typeof(TargetException)
+                typeof(TargetException),
             };
             yield return new object[]
             {
                 typeof(FieldInfoTests),
                 nameof(FieldInfoTests.stringField),
                 new object(),
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
         }
 
@@ -158,7 +158,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.s_intField),
                 new FieldInfoTests(),
                 1000,
-                1000
+                1000,
             };
             yield return new object[]
             {
@@ -166,7 +166,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.s_intField),
                 null,
                 1000,
-                1000
+                1000,
             };
             yield return new object[]
             {
@@ -174,7 +174,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.intField),
                 new FieldInfoTests(),
                 1000,
-                1000
+                1000,
             };
             yield return new object[]
             {
@@ -182,7 +182,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.s_stringField),
                 new FieldInfoTests(),
                 "new",
-                "new"
+                "new",
             };
             yield return new object[]
             {
@@ -190,7 +190,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.stringField),
                 new FieldInfoTests(),
                 "new",
-                "new"
+                "new",
             };
             yield return new object[]
             {
@@ -198,7 +198,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.shortEnumField),
                 new FieldInfoTests(),
                 (byte)1,
-                (ShortEnum)1
+                (ShortEnum)1,
             };
             yield return new object[]
             {
@@ -206,7 +206,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.intEnumField),
                 new FieldInfoTests(),
                 (short)2,
-                (IntEnum)2
+                (IntEnum)2,
             };
             yield return new object[]
             {
@@ -214,7 +214,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.longEnumField),
                 new FieldInfoTests(),
                 (int)3,
-                (LongEnum)3
+                (LongEnum)3,
             };
         }
 
@@ -243,7 +243,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.stringField),
                 null,
                 "new",
-                typeof(TargetException)
+                typeof(TargetException),
             };
             yield return new object[]
             {
@@ -251,7 +251,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.stringField),
                 new object(),
                 "new",
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[]
             {
@@ -259,7 +259,7 @@ namespace System.Reflection.Tests
                 nameof(FieldInfoTests.stringField),
                 new FieldInfoTests(),
                 100,
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
         }
 
@@ -460,27 +460,27 @@ namespace System.Reflection.Tests
             FI_BaseClass[] ATypeWithMixedAB = new FI_BaseClass[]
             {
                 new FI_BaseClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             FI_BaseClass[] ATypeWithAllA = new FI_BaseClass[]
             {
                 new FI_BaseClass(),
-                new FI_BaseClass()
+                new FI_BaseClass(),
             };
             FI_BaseClass[] ATypeWithAllB = new FI_BaseClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             FI_SubClass[] BTypeWithAllB = new FI_SubClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             FI_BaseClass[] BTypeWithAllB_Contra = new FI_SubClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
 
             Type type = typeof(FI_FieldArray);
@@ -509,27 +509,27 @@ namespace System.Reflection.Tests
             FI_BaseClass[] ATypeWithMixedAB = new FI_BaseClass[]
             {
                 new FI_BaseClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             FI_BaseClass[] ATypeWithAllA = new FI_BaseClass[]
             {
                 new FI_BaseClass(),
-                new FI_BaseClass()
+                new FI_BaseClass(),
             };
             FI_BaseClass[] ATypeWithAllB = new FI_BaseClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             FI_SubClass[] BTypeWithAllB = new FI_SubClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             FI_BaseClass[] BTypeWithAllB_Contra = new FI_SubClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
 
             Type type = typeof(FI_FieldArray);
@@ -566,7 +566,7 @@ namespace System.Reflection.Tests
             FI_Interface[] mixedMN = new FI_Interface[]
             {
                 new FI_ClassWithInterface1(),
-                new FI_ClassWithInterface2()
+                new FI_ClassWithInterface2(),
             };
             fieldInfo.SetValue(obj, mixedMN);
             Assert.Equal(mixedMN, fieldInfo.GetValue(obj));
@@ -599,7 +599,7 @@ namespace System.Reflection.Tests
             FI_Interface[] mixedMN = new FI_Interface[]
             {
                 new FI_ClassWithInterface1(),
-                new FI_ClassWithInterface2()
+                new FI_ClassWithInterface2(),
             };
             fieldInfo.SetValue(obj, mixedMN);
             Assert.Equal(mixedMN, fieldInfo.GetValue(obj));
@@ -607,7 +607,7 @@ namespace System.Reflection.Tests
             FI_BaseClass[] BTypeWithAllB_Contra = new FI_SubClass[]
             {
                 new FI_SubClass(),
-                new FI_SubClass()
+                new FI_SubClass(),
             };
             fieldInfo.SetValue(obj, BTypeWithAllB_Contra);
             Assert.Equal(BTypeWithAllB_Contra, fieldInfo.GetValue(obj));
@@ -628,7 +628,7 @@ namespace System.Reflection.Tests
                 Type genericType in new Type[]
                 {
                     typeof(FI_GenericClassField<>),
-                    typeof(FI_StaticGenericField<>)
+                    typeof(FI_StaticGenericField<>),
                 }
             )
             {
@@ -640,7 +640,7 @@ namespace System.Reflection.Tests
                     typeof(int),
                     "gparrayField",
                     null,
-                    gpa_int
+                    gpa_int,
                 };
                 yield return new object[] { genericType, typeof(int), "arrayField", null, ga_int };
 
@@ -650,7 +650,7 @@ namespace System.Reflection.Tests
                     typeof(string),
                     "genparamField",
                     null,
-                    "hello   !"
+                    "hello   !",
                 };
                 yield return new object[]
                 {
@@ -658,7 +658,7 @@ namespace System.Reflection.Tests
                     typeof(string),
                     "dependField",
                     null,
-                    g_string
+                    g_string,
                 };
                 yield return new object[]
                 {
@@ -666,7 +666,7 @@ namespace System.Reflection.Tests
                     typeof(string),
                     "gparrayField",
                     null,
-                    gpa_string
+                    gpa_string,
                 };
                 yield return new object[]
                 {
@@ -674,7 +674,7 @@ namespace System.Reflection.Tests
                     typeof(string),
                     "arrayField",
                     null,
-                    ga_string
+                    ga_string,
                 };
 
                 yield return new object[]
@@ -683,7 +683,7 @@ namespace System.Reflection.Tests
                     typeof(object),
                     "genparamField",
                     null,
-                    300
+                    300,
                 };
                 yield return new object[]
                 {
@@ -691,7 +691,7 @@ namespace System.Reflection.Tests
                     typeof(object),
                     "dependField",
                     null,
-                    g_object
+                    g_object,
                 };
                 yield return new object[]
                 {
@@ -699,7 +699,7 @@ namespace System.Reflection.Tests
                     typeof(object),
                     "gparrayField",
                     null,
-                    gpa_object
+                    gpa_object,
                 };
                 yield return new object[]
                 {
@@ -707,7 +707,7 @@ namespace System.Reflection.Tests
                     typeof(object),
                     "arrayField",
                     null,
-                    ga_object
+                    ga_object,
                 };
 
                 yield return new object[]
@@ -716,7 +716,7 @@ namespace System.Reflection.Tests
                     typeof(FI_GenericClass<object>),
                     "genparamField",
                     null,
-                    g_object
+                    g_object,
                 };
                 yield return new object[]
                 {
@@ -724,7 +724,7 @@ namespace System.Reflection.Tests
                     typeof(FI_GenericClass<object>),
                     "dependField",
                     null,
-                    g_g_object
+                    g_g_object,
                 };
                 yield return new object[]
                 {
@@ -732,7 +732,7 @@ namespace System.Reflection.Tests
                     typeof(FI_GenericClass<object>),
                     "gparrayField",
                     null,
-                    gpa_g_object
+                    gpa_g_object,
                 };
                 yield return new object[]
                 {
@@ -740,7 +740,7 @@ namespace System.Reflection.Tests
                     typeof(FI_GenericClass<object>),
                     "arrayField",
                     null,
-                    ga_g_object
+                    ga_g_object,
                 };
             }
 
@@ -750,7 +750,7 @@ namespace System.Reflection.Tests
                 typeof(int),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                pfg_int
+                pfg_int,
             };
             yield return new object[]
             {
@@ -758,7 +758,7 @@ namespace System.Reflection.Tests
                 typeof(string),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                pfg_string
+                pfg_string,
             };
             yield return new object[]
             {
@@ -766,7 +766,7 @@ namespace System.Reflection.Tests
                 typeof(object),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                pfg_object
+                pfg_object,
             };
             yield return new object[]
             {
@@ -774,7 +774,7 @@ namespace System.Reflection.Tests
                 typeof(FI_GenericClass<object>),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                pfg_g_object
+                pfg_g_object,
             };
 
             yield return new object[]
@@ -783,7 +783,7 @@ namespace System.Reflection.Tests
                 typeof(int),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                sfg_int
+                sfg_int,
             };
             yield return new object[]
             {
@@ -791,7 +791,7 @@ namespace System.Reflection.Tests
                 typeof(string),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                sfg_string
+                sfg_string,
             };
             yield return new object[]
             {
@@ -799,7 +799,7 @@ namespace System.Reflection.Tests
                 typeof(object),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                sfg_object
+                sfg_object,
             };
             yield return new object[]
             {
@@ -807,7 +807,7 @@ namespace System.Reflection.Tests
                 typeof(FI_GenericClass<object>),
                 nameof(FI_GenericClassField<int>.selfField),
                 null,
-                sfg_g_object
+                sfg_g_object,
             };
         }
 
@@ -921,7 +921,7 @@ namespace System.Reflection.Tests
         public static FI_GenericClass<string>[] ga_string = new FI_GenericClass<string>[]
         {
             g_string,
-            g_string
+            g_string,
         };
 
         public static FI_GenericClass<object> g_object = new FI_GenericClass<object>();
@@ -933,7 +933,7 @@ namespace System.Reflection.Tests
         {
             g_object,
             g_object,
-            g_object
+            g_object,
         };
 
         public static FI_GenericClass<FI_GenericClass<object>> g_g_object =
@@ -945,7 +945,7 @@ namespace System.Reflection.Tests
         public static FI_GenericClass<object>[] gpa_g_object = new FI_GenericClass<object>[]
         {
             g_object,
-            g_object
+            g_object,
         };
         public static FI_GenericClass<FI_GenericClass<object>>[] ga_g_object = new FI_GenericClass<
             FI_GenericClass<object>
@@ -954,7 +954,7 @@ namespace System.Reflection.Tests
             g_g_object,
             g_g_object,
             g_g_object,
-            g_g_object
+            g_g_object,
         };
 
         public class FI_BaseClass { }

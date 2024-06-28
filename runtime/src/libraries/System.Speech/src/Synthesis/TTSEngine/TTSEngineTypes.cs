@@ -633,7 +633,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Strong,
         Moderate,
         None,
-        Reduced
+        Reduced,
     }
 
     public enum EmphasisBreak : int
@@ -658,7 +658,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Low,
         Medium,
         High,
-        ExtraHigh
+        ExtraHigh,
     }
 
     public enum ProsodyRange
@@ -668,7 +668,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Low,
         Medium,
         High,
-        ExtraHigh
+        ExtraHigh,
     }
 
     public enum ProsodyRate
@@ -678,7 +678,7 @@ namespace System.Speech.Synthesis.TtsEngine
         Slow,
         Medium,
         Fast,
-        ExtraFast
+        ExtraFast,
     }
 
     public enum ProsodyVolume : int
@@ -689,14 +689,14 @@ namespace System.Speech.Synthesis.TtsEngine
         Soft = -4,
         Medium = -5,
         Loud = -6,
-        ExtraLoud = -7
+        ExtraLoud = -7,
     }
 
     public enum ProsodyUnit : int
     {
         Default,
         Hz,
-        Semitone
+        Semitone,
     }
 
     public enum TtsEventId
@@ -718,19 +718,19 @@ namespace System.Speech.Synthesis.TtsEngine
         Token = 0x0001,
         Object = 0x0002,
         Pointer = 0x0003,
-        String = 0x0004
+        String = 0x0004,
     }
 
     public enum SpeakOutputFormat
     {
         WaveFormat = 0,
-        Text = 1
+        Text = 1,
     }
 
     public enum ContourPointChangeType
     {
         Hz = 0,
-        Percentage = 1
+        Percentage = 1,
     }
 
     #endregion

@@ -363,7 +363,7 @@ namespace ILCompiler.Logging
                                 {
                                     info.Scope ?? "",
                                     module.GetName().Name,
-                                    info.Target ?? ""
+                                    info.Target ?? "",
                                 }
                             )
                         );

@@ -119,7 +119,7 @@ namespace System.Windows.Forms
                     three_page,
                     four_page,
                     six_page,
-                    separator2
+                    separator2,
                 }
             );
             toolbar.ButtonClick += new ToolBarButtonClickEventHandler(OnClickToolBarButton);

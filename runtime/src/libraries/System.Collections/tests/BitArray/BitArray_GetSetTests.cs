@@ -22,7 +22,7 @@ namespace System.Collections.Tests
                     BitsPerByte,
                     BitsPerByte * 2,
                     BitsPerInt32,
-                    BitsPerInt32 * 2
+                    BitsPerInt32 * 2,
                 }
             )
             {
@@ -33,7 +33,7 @@ namespace System.Collections.Tests
                     yield return new object[]
                     {
                         def,
-                        Enumerable.Range(0, size).Select(i => i % 2 == 1).ToArray()
+                        Enumerable.Range(0, size).Select(i => i % 2 == 1).ToArray(),
                     };
                 }
             }
@@ -145,7 +145,7 @@ namespace System.Collections.Tests
                     BitsPerByte,
                     BitsPerByte + 1,
                     BitsPerInt32,
-                    BitsPerInt32 + 1
+                    BitsPerInt32 + 1,
                 }
             )
             {
@@ -153,7 +153,7 @@ namespace System.Collections.Tests
                 {
                     yield return new object[]
                     {
-                        Enumerable.Range(0, size).Select(i => lead ^ (i % 2 == 0)).ToArray()
+                        Enumerable.Range(0, size).Select(i => lead ^ (i % 2 == 0)).ToArray(),
                     };
                 }
             }
@@ -300,7 +300,7 @@ namespace System.Collections.Tests
                     BitsPerInt32 * 2,
                     BitsPerInt32 * 4,
                     BitsPerInt32 * 8,
-                    BitsPerInt32 * 16
+                    BitsPerInt32 * 16,
                 }
             )
             {
@@ -318,7 +318,7 @@ namespace System.Collections.Tests
                         (bitArraySize, 0),
                         (bitArraySize * 2 + 1, 0),
                         (bitArraySize * 2 + 1, bitArraySize + 1),
-                        (bitArraySize * 2 + 1, bitArraySize / 2 + 1)
+                        (bitArraySize * 2 + 1, bitArraySize / 2 + 1),
                     }
                 )
                 {
@@ -328,7 +328,7 @@ namespace System.Collections.Tests
                         arraySize,
                         startIndex,
                         Enumerable.Repeat(true, bitArraySize).ToArray(),
-                        default(bool)
+                        default(bool),
                     };
                     yield return new object[]
                     {
@@ -336,7 +336,7 @@ namespace System.Collections.Tests
                         arraySize,
                         startIndex,
                         Enumerable.Repeat(false, bitArraySize).ToArray(),
-                        default(bool)
+                        default(bool),
                     };
                     yield return new object[]
                     {
@@ -344,7 +344,7 @@ namespace System.Collections.Tests
                         arraySize,
                         startIndex,
                         Enumerable.Range(0, bitArraySize).Select(i => i % 2 == 1).ToArray(),
-                        default(bool)
+                        default(bool),
                     };
 
                     bool[] randomBools = new bool[bitArraySize];
@@ -360,7 +360,7 @@ namespace System.Collections.Tests
                         arraySize,
                         startIndex,
                         randomBools,
-                        default(bool)
+                        default(bool),
                     };
 
                     if (bitArraySize >= BitsPerByte)
@@ -371,7 +371,7 @@ namespace System.Collections.Tests
                             arraySize / BitsPerByte,
                             startIndex / BitsPerByte,
                             Enumerable.Repeat((byte)0xff, bitArraySize / BitsPerByte).ToArray(),
-                            default(byte)
+                            default(byte),
                         };
                         yield return new object[]
                         {
@@ -379,7 +379,7 @@ namespace System.Collections.Tests
                             arraySize / BitsPerByte,
                             startIndex / BitsPerByte,
                             Enumerable.Repeat((byte)0x00, bitArraySize / BitsPerByte).ToArray(),
-                            default(byte)
+                            default(byte),
                         };
                         yield return new object[]
                         {
@@ -387,7 +387,7 @@ namespace System.Collections.Tests
                             arraySize / BitsPerByte,
                             startIndex / BitsPerByte,
                             Enumerable.Repeat((byte)0xaa, bitArraySize / BitsPerByte).ToArray(),
-                            default(byte)
+                            default(byte),
                         };
                     }
 
@@ -401,7 +401,7 @@ namespace System.Collections.Tests
                             Enumerable
                                 .Repeat(unchecked((int)0xffffffff), bitArraySize / BitsPerInt32)
                                 .ToArray(),
-                            default(int)
+                            default(int),
                         };
                         yield return new object[]
                         {
@@ -409,7 +409,7 @@ namespace System.Collections.Tests
                             arraySize / BitsPerInt32,
                             startIndex / BitsPerInt32,
                             Enumerable.Repeat(0x00000000, bitArraySize / BitsPerInt32).ToArray(),
-                            default(int)
+                            default(int),
                         };
                         yield return new object[]
                         {
@@ -419,7 +419,7 @@ namespace System.Collections.Tests
                             Enumerable
                                 .Repeat(unchecked((int)0xaaaaaaaa), bitArraySize / BitsPerInt32)
                                 .ToArray(),
-                            default(int)
+                            default(int),
                         };
                     }
                 }
@@ -438,7 +438,7 @@ namespace System.Collections.Tests
                         (bitArraySize, 0),
                         (bitArraySize * 2 + 1, 0),
                         (bitArraySize * 2 + 1, bitArraySize + 1),
-                        (bitArraySize * 2 + 1, bitArraySize / 2 + 1)
+                        (bitArraySize * 2 + 1, bitArraySize / 2 + 1),
                     }
                 )
                 {
@@ -453,7 +453,7 @@ namespace System.Collections.Tests
                                 .Repeat(unchecked((int)0xffffffff), bitArraySize / BitsPerInt32)
                                 .Concat(new[] { unchecked((int)(0xffffffffu >> 1)) })
                                 .ToArray(),
-                            default(int)
+                            default(int),
                         };
                         yield return new object[]
                         {
@@ -463,7 +463,7 @@ namespace System.Collections.Tests
                             Enumerable
                                 .Repeat(0x00000000, bitArraySize / BitsPerInt32 + 1)
                                 .ToArray(),
-                            default(int)
+                            default(int),
                         };
                         yield return new object[]
                         {
@@ -474,7 +474,7 @@ namespace System.Collections.Tests
                                 .Repeat(unchecked((int)0xaaaaaaaa), bitArraySize / BitsPerInt32)
                                 .Concat(new[] { unchecked((int)(0xaaaaaaaau >> 2)) })
                                 .ToArray(),
-                            default(int)
+                            default(int),
                         };
                     }
                 }
@@ -692,17 +692,17 @@ namespace System.Collections.Tests
             yield return new object[] { "SetAll", setAll };
             BitArray lengthShort = new BitArray(BitsPerInt32, true)
             {
-                Length = BitsPerInt32 / 2 - 3
+                Length = BitsPerInt32 / 2 - 3,
             };
             yield return new object[] { "Length-Short", lengthShort };
             BitArray lengthLong = new BitArray(2 * BitsPerInt32, true)
             {
-                Length = BitsPerInt32 - 3
+                Length = BitsPerInt32 - 3,
             };
             yield return new object[] { "Length-Long < 32", lengthLong };
             BitArray lengthLong2 = new BitArray(2 * BitsPerInt32, true)
             {
-                Length = BitsPerInt32 + 3
+                Length = BitsPerInt32 + 3,
             };
             yield return new object[] { "Length-Long > 32", lengthLong2 };
             // aligned test cases
@@ -782,7 +782,7 @@ namespace System.Collections.Tests
                     new object[]
                     {
                         ((bool[])parameters[0]).Select(bit => !bit).ToArray(),
-                        !(bool)parameters[1]
+                        !(bool)parameters[1],
                     }
                 );
 
@@ -797,7 +797,7 @@ namespace System.Collections.Tests
                     BitsPerInt32 - 1,
                     BitsPerInt32,
                     BitsPerInt32 + 1,
-                    BitsPerInt32 * 2 - 1
+                    BitsPerInt32 * 2 - 1,
                 }
             )
             {

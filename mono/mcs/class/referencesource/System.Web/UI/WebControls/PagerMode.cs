@@ -26,6 +26,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    <para> Uses numbered buttons for accessing pages directly.</para>
         /// </devdoc>
-        NumericPages = 1
+        NumericPages = 1,
     }
 }

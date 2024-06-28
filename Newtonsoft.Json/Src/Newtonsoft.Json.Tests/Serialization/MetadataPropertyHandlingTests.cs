@@ -67,7 +67,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     TypeNameHandling = TypeNameHandling.All,
                     // no longer needs to be first
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                 }
             );
 
@@ -114,7 +114,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         new JsonSerializerSettings
                         {
                             PreserveReferencesHandling = PreserveReferencesHandling.All,
-                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                         }
                     );
                 },
@@ -135,7 +135,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Formatting = Formatting.Indented,
                 TypeNameHandling = TypeNameHandling.All,
-                MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
             };
             string serializedString = JsonConvert.SerializeObject(
                 inputContext,
@@ -173,7 +173,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Latitude = 33.657145,
                 Longitude = -117.766684,
                 TimeStamp = new DateTime(2000, 3, 1, 23, 59, 59, DateTimeKind.Utc),
-                Payload = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+                Payload = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
             };
 
             string jsonString = JsonConvert.SerializeObject(expected, Formatting.Indented);
@@ -203,7 +203,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 jsonString,
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                 }
             );
 
@@ -249,7 +249,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         PreserveReferencesHandling = PreserveReferencesHandling.All,
-                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     }
                 );
 
@@ -281,7 +281,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                         new JsonSerializerSettings
                         {
                             TypeNameHandling = TypeNameHandling.Objects,
-                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                         }
                     );
                 },
@@ -323,7 +323,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                 }
             );
 
@@ -357,7 +357,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                 }
             );
 
@@ -393,7 +393,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JsonSerializer.Create(
                     new JsonSerializerSettings
                     {
-                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     }
                 )
             );
@@ -453,7 +453,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 #pragma warning disable 618
                             TypeNameAssemblyFormat = FormatterAssemblyStyle.Full,
 #pragma warning restore 618
-                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                            MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                         }
                     );
 
@@ -486,7 +486,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new TypeNameHandlingTests.TypeNameProperty
                 {
                     Name = "Name!",
-                    Value = new List<int> { 1, 2, 3, 4, 5 }
+                    Value = new List<int> { 1, 2, 3, 4, 5 },
                 };
 
             string json = JsonConvert.SerializeObject(typeNameProperty, Formatting.Indented);
@@ -515,7 +515,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     json,
                     new JsonSerializerSettings
                     {
-                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     }
                 );
             Assert.AreEqual("Name!", deserialized.Name);
@@ -558,7 +558,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Ref = "Ref!",
                 Type = "Type!",
                 Value = "Value!",
-                Values = "Values!"
+                Values = "Values!",
             };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
@@ -579,7 +579,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     json,
                     new JsonSerializerSettings
                     {
-                        MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                     }
                 );
 
@@ -600,7 +600,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     json,
                     new JsonSerializerSettings
                     {
-                        MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                     }
                 );
 
@@ -624,7 +624,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 }",
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                 }
             );
 
@@ -645,7 +645,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 }",
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                 }
             );
 
@@ -674,7 +674,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings
                     {
                         MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                        TypeNameHandling = TypeNameHandling.All
+                        TypeNameHandling = TypeNameHandling.All,
                     }
                 );
 
@@ -700,7 +700,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 }",
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                    MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                 }
             );
 
@@ -738,7 +738,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.Auto,
-                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                 }
             );
 
@@ -761,7 +761,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 c,
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                    MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
                 }
             );
 

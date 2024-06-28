@@ -20,7 +20,7 @@ namespace Mono.Linker.Tests.Cases.PreserveDependencies
         references: new[] { "base.dll" },
         resources: new object[]
         {
-            "Dependencies/PreserveDependencyMethodInNonReferencedAssemblyLibrary.xml"
+            "Dependencies/PreserveDependencyMethodInNonReferencedAssemblyLibrary.xml",
         },
         addAsReference: false
     )]

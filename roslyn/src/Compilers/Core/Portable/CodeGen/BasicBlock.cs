@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
             Filter,
             Finally,
             Fault,
-            Switch
+            Switch,
         }
 
         internal enum Reachability : byte

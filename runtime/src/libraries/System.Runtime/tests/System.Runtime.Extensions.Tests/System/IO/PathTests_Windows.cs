@@ -70,12 +70,12 @@ namespace System.IO.Tests
             yield return new string[]
             {
                 @"C:\Users\someuser\AppData\Local\Temp\",
-                @"C:\Users\someuser\AppData\Local\Temp"
+                @"C:\Users\someuser\AppData\Local\Temp",
             };
             yield return new string[]
             {
                 @"C:\Users\someuser\AppData\Local\Temp\",
-                @"C:\Users\someuser\AppData\Local\Temp\"
+                @"C:\Users\someuser\AppData\Local\Temp\",
             };
             yield return new string[] { @"C:\", @"C:\" };
             yield return new string[] { @"C:\tmp\", @"C:\tmp" };
@@ -735,7 +735,7 @@ namespace System.IO.Tests
                 { @"\\?\UNC\", @"\\?\UNC\" },
                 { @"\\?\UNC\a\", @"\\?\UNC\a\" },
                 { @"\\?\UNC\a\folder\", @"\\?\UNC\a\folder" },
-                { null, null }
+                { null, null },
             };
 
         public static TheoryData<string, bool> TestData_EndsInDirectorySeparator =>
@@ -756,7 +756,7 @@ namespace System.IO.Tests
                 { @"folder\", true },
                 { @"folder", false },
                 { @"", false },
-                { null, false }
+                { null, false },
             };
 
         [Theory, MemberData(nameof(TestData_TrimEndingDirectorySeparator))]

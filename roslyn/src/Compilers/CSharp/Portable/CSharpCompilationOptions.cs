@@ -564,7 +564,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         ) =>
             new CSharpCompilationOptions(this)
             {
-                SpecificDiagnosticOptions = values.ToImmutableDictionaryOrEmpty()
+                SpecificDiagnosticOptions = values.ToImmutableDictionaryOrEmpty(),
             };
 
         public new CSharpCompilationOptions WithReportSuppressedDiagnostics(
@@ -578,7 +578,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return new CSharpCompilationOptions(this)
             {
-                ReportSuppressedDiagnostics = reportSuppressedDiagnostics
+                ReportSuppressedDiagnostics = reportSuppressedDiagnostics,
             };
         }
 

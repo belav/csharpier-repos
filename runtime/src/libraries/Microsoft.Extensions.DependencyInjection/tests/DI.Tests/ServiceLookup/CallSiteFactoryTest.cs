@@ -521,7 +521,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     typeof(ClassInheritingClassInheritingAbstractClass),
                     new ClassInheritingClassInheritingAbstractClass()
                 ),
-                notMatchingDescriptor
+                notMatchingDescriptor,
             };
             var callSiteFactory = GetCallSiteFactory(descriptors);
             // Act
@@ -534,7 +534,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 classInheritingAbstractClassImplementationType,
                 classAlsoInheritingAbstractClassImplementationType,
-                classInheritingClassInheritingAbstractClassImplementationType
+                classInheritingClassInheritingAbstractClassImplementationType,
             };
             Assert.Equal(matchingTypes.Length, enumerableCall.ServiceCallSites.Length);
             Assert.Equal(
@@ -552,7 +552,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 typeof(FakeOpenGenericService<int>),
                 typeof(ClassWithStructConstraint<int>),
                 typeof(ClassWithNewConstraint<int>),
-                typeof(ClassWithSelfReferencingConstraint<int>)
+                typeof(ClassWithSelfReferencingConstraint<int>),
             }
         )]
         [InlineData(
@@ -563,7 +563,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 typeof(FakeOpenGenericService<string>),
                 typeof(ClassWithClassConstraint<string>),
                 typeof(ClassWithInterfaceConstraint<string>),
-                typeof(ClassWithSelfReferencingConstraint<string>)
+                typeof(ClassWithSelfReferencingConstraint<string>),
             }
         )]
         [InlineData(
@@ -573,7 +573,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
             {
                 typeof(FakeOpenGenericService<int[]>),
                 typeof(ClassWithClassConstraint<int[]>),
-                typeof(ClassWithInterfaceConstraint<int[]>)
+                typeof(ClassWithInterfaceConstraint<int[]>),
             }
         )]
         public void CreateCallSite_ReturnsMatchingTypesThatMatchCorrectConstraints(
@@ -711,7 +711,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     {
                         typeof(IFakeService),
                         typeof(IFakeMultipleService),
-                        typeof(IFactoryService)
+                        typeof(IFactoryService),
                     }
                 },
                 {
@@ -735,7 +735,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         typeof(IFakeMultipleService),
                         typeof(IFactoryService),
                         typeof(IFakeService),
-                        typeof(IFakeScopedService)
+                        typeof(IFakeScopedService),
                     }
                 },
                 {
@@ -759,7 +759,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         typeof(IFakeMultipleService),
                         typeof(IFactoryService),
                         typeof(IFakeService),
-                        typeof(IFakeScopedService)
+                        typeof(IFakeScopedService),
                     }
                 },
                 {
@@ -811,9 +811,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     {
                         typeof(IFakeService),
                         typeof(IFactoryService),
-                        typeof(IFakeOpenGenericService<IFakeService>)
+                        typeof(IFakeOpenGenericService<IFakeService>),
                     }
-                }
+                },
             };
 
         [Theory]
@@ -887,7 +887,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         )
                     ),
                     new[] { typeof(IFactoryService), typeof(IFakeScopedService) }
-                }
+                },
             };
 
         [Theory]
@@ -940,7 +940,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 ServiceDescriptor.Singleton<ICustomService, CustomService2>(),
                 ServiceDescriptor.Singleton<ICustomService, CustomService3>(),
                 ServiceDescriptor.Singleton<ICustomService, CustomService4>(),
-                ServiceDescriptor.Singleton<ICustomService, CustomService5>()
+                ServiceDescriptor.Singleton<ICustomService, CustomService5>(),
             };
 
             var callsiteFactory = new CallSiteFactory(
@@ -1022,7 +1022,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     new[]
                     {
                         new[] { typeof(IFakeMultipleService), typeof(IFakeService) },
-                        new[] { typeof(IFactoryService), typeof(IFakeScopedService) }
+                        new[] { typeof(IFactoryService), typeof(IFakeScopedService) },
                     }
                 },
                 {
@@ -1081,9 +1081,9 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         {
                             typeof(IFakeScopedService),
                             typeof(IFakeService),
-                            typeof(IFakeMultipleService)
+                            typeof(IFakeMultipleService),
                         },
-                        new[] { typeof(IFakeOuterService) }
+                        new[] { typeof(IFakeOuterService) },
                     }
                 },
                 {
@@ -1103,7 +1103,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     new[]
                     {
                         new[] { typeof(IFakeService) },
-                        new[] { typeof(IEnumerable<IFakeService>) }
+                        new[] { typeof(IEnumerable<IFakeService>) },
                     }
                 },
                 {
@@ -1123,7 +1123,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     new[]
                     {
                         new[] { typeof(IEnumerable<IFakeService>) },
-                        new[] { typeof(IFactoryService) }
+                        new[] { typeof(IFactoryService) },
                     }
                 },
             };
@@ -1248,7 +1248,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                         ),
                     },
                     CallSiteResultCacheLocation.Root
-                }
+                },
             };
 
         [Theory]
@@ -1284,7 +1284,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 typeof(Class2),
                 typeof(Class3),
                 typeof(Class4),
-                typeof(Class5)
+                typeof(Class5),
             };
 
             for (int i = 0; i < 100; i++)
@@ -1329,7 +1329,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                 typeof(ClassB),
                 typeof(ClassC<>),
                 typeof(ClassD),
-                typeof(ClassE)
+                typeof(ClassE),
             };
 
             for (int i = 0; i < 100; i++)
@@ -1401,7 +1401,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                                 serviceType,
                                 implementationType,
                                 ServiceLifetime.Singleton
-                            )
+                            ),
                         };
 
                         Assert.Throws<ArgumentException>(
@@ -1433,7 +1433,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                                 serviceType,
                                 implementationType,
                                 ServiceLifetime.Singleton
-                            )
+                            ),
                         };
 
                         Assert.NotNull(new CallSiteFactory(serviceDescriptors));

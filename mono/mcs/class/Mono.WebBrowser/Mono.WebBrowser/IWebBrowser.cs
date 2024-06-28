@@ -106,14 +106,14 @@ namespace Mono.WebBrowser
     {
         None = 0,
         Proxy = 1,
-        Full = 2
+        Full = 2,
     }
 
     public enum FocusOption
     {
         None = 0,
         FocusFirstElement = 1,
-        FocusLastElement = 2
+        FocusLastElement = 2,
     }
 
     [Flags]
@@ -134,7 +134,7 @@ namespace Mono.WebBrowser
         BUTTON_POS_1_DEFAULT = 16777216,
         BUTTON_POS_2_DEFAULT = 33554432,
         BUTTON_DELAY_ENABLE = 67108864,
-        STD_OK_CANCEL_BUTTONS = 513
+        STD_OK_CANCEL_BUTTONS = 513,
     }
 
     public enum DialogType
@@ -147,21 +147,21 @@ namespace Mono.WebBrowser
         Prompt = 6,
         PromptUsernamePassword = 7,
         PromptPassword = 8,
-        Select = 9
+        Select = 9,
     }
 
     public enum Platform
     {
         Unknown = 0,
         Winforms = 1,
-        Gtk = 2
+        Gtk = 2,
     }
 
     public enum SecurityLevel
     {
         Insecure = 1,
         Mixed = 2,
-        Secure = 3
+        Secure = 3,
     }
 
     #region Window Events

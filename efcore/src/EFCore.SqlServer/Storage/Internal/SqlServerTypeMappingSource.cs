@@ -162,7 +162,7 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
             { typeof(decimal), SqlServerDecimalTypeMapping.Default },
             { typeof(TimeOnly), SqlServerTimeOnlyTypeMapping.Default },
             { typeof(TimeSpan), SqlServerTimeSpanTypeMapping.Default },
-            { typeof(JsonElement), SqlServerJsonTypeMapping.Default }
+            { typeof(JsonElement), SqlServerJsonTypeMapping.Default },
         };
 
         _clrNoFacetTypeMappings = new Dictionary<Type, RelationalTypeMapping>
@@ -172,7 +172,7 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
             { typeof(TimeOnly), TimeAlias },
             { typeof(double), DoubleAlias },
             { typeof(float), RealAlias },
-            { typeof(decimal), DecimalAlias }
+            { typeof(decimal), DecimalAlias },
         };
 
         // ReSharper disable CoVariantArrayConversion
@@ -226,7 +226,7 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
                 new RelationalTypeMapping[]
                 {
                     SqlServerTimeOnlyTypeMapping.Default,
-                    SqlServerTimeSpanTypeMapping.Default
+                    SqlServerTimeSpanTypeMapping.Default,
                 }
             },
             { "timestamp", new[] { Rowversion } },
@@ -236,7 +236,7 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
             { "varbinary(max)", new[] { VariableLengthMaxBinary } },
             { "varchar", new[] { SqlServerStringTypeMapping.Default } },
             { "varchar(max)", new[] { VariableLengthMaxAnsiString } },
-            { "xml", new[] { Xml } }
+            { "xml", new[] { Xml } },
         };
         // ReSharper restore CoVariantArrayConversion
     }
@@ -434,7 +434,7 @@ public class SqlServerTypeMappingSource : RelationalTypeMappingSource
             "datetimeoffset",
             "double precision",
             "float",
-            "time"
+            "time",
         };
 
     /// <summary>

@@ -4560,7 +4560,7 @@ namespace MonoTests.System.Windows.Forms
                     listView1,
                     treeView1,
                     vScrollBar1,
-                    hScrollBar1
+                    hScrollBar1,
                 }
             );
 

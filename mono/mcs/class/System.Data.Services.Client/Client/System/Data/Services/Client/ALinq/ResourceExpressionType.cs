@@ -29,6 +29,6 @@ namespace System.Data.Services.Client
 
         InputReference,
 
-        ProjectionQueryOption
+        ProjectionQueryOption,
     }
 }

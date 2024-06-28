@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Manages a collection of <see cref='System.CodeDom.CodeNamespaceImport'/> objects.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeNamespaceImportCollection : IList
     {
         private ArrayList data = new ArrayList();

@@ -1087,7 +1087,7 @@ class Test
                 // void M(ref scoped readonly int p);
                 Diagnostic(ErrorCode.ERR_SyntaxError, "readonly")
                     .WithArguments(",")
-                    .WithLocation(1, 19)
+                    .WithLocation(1, 19),
             };
 
             UsingDeclaration(source, TestOptions.Regular11, expectedDiagnostics);
@@ -1151,7 +1151,7 @@ class Test
                 // void M(readonly scoped ref int p);
                 Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
                     .WithArguments(",")
-                    .WithLocation(1, 24)
+                    .WithLocation(1, 24),
             };
 
             UsingDeclaration(source, TestOptions.Regular11, expectedDiagnostics);
@@ -1215,7 +1215,7 @@ class Test
                 // void M(scoped readonly int p);
                 Diagnostic(ErrorCode.ERR_SyntaxError, "readonly")
                     .WithArguments(",")
-                    .WithLocation(1, 15)
+                    .WithLocation(1, 15),
             };
 
             UsingDeclaration(source, TestOptions.Regular11, expectedDiagnostics);
@@ -1278,7 +1278,7 @@ class Test
                 // void M(scoped readonly ref int p);
                 Diagnostic(ErrorCode.ERR_SyntaxError, "readonly")
                     .WithArguments(",")
-                    .WithLocation(1, 15)
+                    .WithLocation(1, 15),
             };
 
             UsingDeclaration(source, TestOptions.Regular11, expectedDiagnostics);

@@ -403,7 +403,7 @@ namespace System.Buffers.Text.Tests
                 1610612730,
                 1610612731,
                 1610612732,
-                1610612733
+                1610612733,
             };
             int[] expected =
             {
@@ -419,7 +419,7 @@ namespace System.Buffers.Text.Tests
                 2147483640,
                 2147483644,
                 2147483644,
-                2147483644
+                2147483644,
             };
             for (int i = 0; i < input.Length; i++)
             {

@@ -267,39 +267,39 @@ namespace System.Tests
             {
                 new ArraySegment<int>(intArray1),
                 new ArraySegment<int>(intArray1),
-                true
+                true,
             };
             yield return new object[]
             {
                 new ArraySegment<int>(intArray1),
                 new ArraySegment<int>(intArray1, 0, intArray1.Length),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 new ArraySegment<int>(intArray1, 2, 3),
                 new ArraySegment<int>(intArray1, 2, 3),
-                true
+                true,
             };
             yield return new object[]
             {
                 new ArraySegment<int>(intArray1, 3, 3),
                 new ArraySegment<int>(intArray1, 2, 3),
-                false
+                false,
             };
             yield return new object[]
             {
                 new ArraySegment<int>(intArray1, 2, 4),
                 new ArraySegment<int>(intArray1, 2, 3),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new ArraySegment<int>(intArray1, 2, 4),
                 new ArraySegment<int>(intArray2, 2, 3),
-                false
+                false,
             };
 
             yield return new object[] { new ArraySegment<int>(intArray1), intArray1, false };
@@ -834,13 +834,13 @@ namespace System.Tests
                 {
                     arraySegment,
                     arraySegment.Count / 2,
-                    arraySegment.Count / 2
+                    arraySegment.Count / 2,
                 }; // Start at middle, multiple items, end at middle (due to integer division truncation) or preserve end
                 yield return new object[]
                 {
                     arraySegment,
                     arraySegment.Count / 4,
-                    arraySegment.Count / 2
+                    arraySegment.Count / 2,
                 }; // Start at middle, multiple items, end at middle
             }
         }
@@ -872,25 +872,25 @@ namespace System.Tests
             {
                 arraySegment,
                 -arraySegment.Offset,
-                arraySegment.Offset + arraySegment.Count
+                arraySegment.Offset + arraySegment.Count,
             };
             yield return new object[]
             {
                 arraySegment,
                 -arraySegment.Offset,
-                arraySegment.Array.Length
+                arraySegment.Array.Length,
             };
             yield return new object[]
             {
                 arraySegment,
                 0,
-                arraySegment.Array.Length - arraySegment.Offset
+                arraySegment.Array.Length - arraySegment.Offset,
             };
             yield return new object[]
             {
                 arraySegment,
                 arraySegment.Count,
-                arraySegment.Array.Length - arraySegment.Offset - arraySegment.Count
+                arraySegment.Array.Length - arraySegment.Offset - arraySegment.Count,
             };
         }
 
@@ -915,7 +915,12 @@ namespace System.Tests
                 (array: new[] { 3, 4, 5, 6 }, index: 0, count: 3), // Starts at beginning, ends in middle
                 (array: new[] { 3, 4, 5, 6 }, index: 1, count: 3), // Starts in middle, ends at end
                 (array: new[] { 3, 4, 5, 6 }, index: 1, count: 2), // Starts in middle, ends in middle
-                (array: new[] { 3, 4, 5, 6 }, index: 1, count: 0) // Non-empty array, count == 0
+                (
+                    array: new[] { 3, 4, 5, 6 },
+                    index: 1,
+                    count: 0
+                ) // Non-empty array, count == 0
+                ,
             };
 
             return arraySegments.Select(aseg =>

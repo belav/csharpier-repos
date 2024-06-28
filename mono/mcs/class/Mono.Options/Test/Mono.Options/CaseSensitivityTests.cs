@@ -49,7 +49,7 @@ namespace MonoTests.Mono.Options
 
             var opts = new OptionSet() { { "MiXeDcAsE=", "arg desc", v => argValue = v } };
 
-            var args = new string[] { "/MiXeDcAsE=Arg Value", };
+            var args = new string[] { "/MiXeDcAsE=Arg Value" };
 
             opts.Parse(args);
 
@@ -63,7 +63,7 @@ namespace MonoTests.Mono.Options
 
             var opts = new OptionSet() { { "MiXeDcAsE=", "arg desc", v => argValue = v } };
 
-            var args = new string[] { "/MixedCase=Arg Value", };
+            var args = new string[] { "/MixedCase=Arg Value" };
 
             opts.Parse(args);
 
@@ -77,10 +77,10 @@ namespace MonoTests.Mono.Options
 
             var opts = new OptionSet(StringComparer.Ordinal)
             {
-                { "MiXeDcAsE=", "arg desc", v => argValue = v }
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[] { "/MiXeDcAsE=Arg Value", };
+            var args = new string[] { "/MiXeDcAsE=Arg Value" };
 
             opts.Parse(args);
 
@@ -94,10 +94,10 @@ namespace MonoTests.Mono.Options
 
             var opts = new OptionSet(StringComparer.Ordinal)
             {
-                { "MiXeDcAsE=", "arg desc", v => argValue = v }
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[] { "/MixedCase=Arg Value", };
+            var args = new string[] { "/MixedCase=Arg Value" };
 
             opts.Parse(args);
 
@@ -111,10 +111,10 @@ namespace MonoTests.Mono.Options
 
             var opts = new OptionSet(StringComparer.OrdinalIgnoreCase)
             {
-                { "MiXeDcAsE=", "arg desc", v => argValue = v }
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[] { "/MiXeDcAsE=Arg Value", };
+            var args = new string[] { "/MiXeDcAsE=Arg Value" };
 
             opts.Parse(args);
 
@@ -128,10 +128,10 @@ namespace MonoTests.Mono.Options
 
             var opts = new OptionSet(StringComparer.OrdinalIgnoreCase)
             {
-                { "MiXeDcAsE=", "arg desc", v => argValue = v }
+                { "MiXeDcAsE=", "arg desc", v => argValue = v },
             };
 
-            var args = new string[] { "/MixedCase=Arg Value", };
+            var args = new string[] { "/MixedCase=Arg Value" };
 
             opts.Parse(args);
 

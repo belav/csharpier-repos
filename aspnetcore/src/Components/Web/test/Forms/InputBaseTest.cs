@@ -16,7 +16,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -36,7 +36,7 @@ public class InputBaseTest
         var model = new TestModel();
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
-            EditContext = new EditContext(model)
+            EditContext = new EditContext(model),
         };
 
         // Act/Assert
@@ -58,7 +58,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             Value = "some value",
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
 
         // Act
@@ -77,7 +77,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             Value = "some value",
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
 
         // Act
@@ -96,7 +96,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             Value = "some value",
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
 
         // Act
@@ -118,7 +118,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             Value = "initial value",
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
         Assert.Equal("initial value", inputComponent.CurrentValue);
@@ -139,7 +139,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             Value = value,
-            ValueExpression = () => value
+            ValueExpression = () => value,
         };
 
         // Act/Assert
@@ -158,7 +158,7 @@ public class InputBaseTest
             EditContext = new EditContext(model),
             Value = "initial value",
             ValueChanged = val => valueChangedCallLog.Add(val),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
         Assert.Empty(valueChangedCallLog);
@@ -181,7 +181,7 @@ public class InputBaseTest
             EditContext = new EditContext(model),
             Value = "initial value",
             ValueChanged = val => valueChangedCallLog.Add(val),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
         Assert.Empty(valueChangedCallLog);
@@ -202,7 +202,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             Value = "initial value",
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
         Assert.False(rootComponent.EditContext.IsModified(() => model.StringProperty));
@@ -222,7 +222,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.StringProperty);
 
@@ -260,7 +260,7 @@ public class InputBaseTest
                 { "class", "my-class other-class" },
             },
             EditContext = new EditContext(model),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.StringProperty);
 
@@ -282,7 +282,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             Value = new DateTime(1915, 3, 2),
-            ValueExpression = () => model.DateProperty
+            ValueExpression = () => model.DateProperty,
         };
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -300,7 +300,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             ValueChanged = valueChangedArgs.Add,
-            ValueExpression = () => model.DateProperty
+            ValueExpression = () => model.DateProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.DateProperty);
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
@@ -333,7 +333,7 @@ public class InputBaseTest
         {
             EditContext = new EditContext(model),
             ValueChanged = valueChangedArgs.Add,
-            ValueExpression = () => model.DateProperty
+            ValueExpression = () => model.DateProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.DateProperty);
         var inputComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
@@ -372,7 +372,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.StringProperty);
         var renderer = new TestRenderer();
@@ -410,7 +410,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.StringProperty);
         var renderer = new TestRenderer();
@@ -444,7 +444,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = invalidContext,
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
 
         var fieldIdentifier = FieldIdentifier.Create(() => model.StringProperty);
@@ -477,7 +477,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = invalidContext,
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         rootComponent.AdditionalAttributes = new Dictionary<string, object>();
         rootComponent.AdditionalAttributes["aria-invalid"] = "userSpecifiedValue";
@@ -509,7 +509,7 @@ public class InputBaseTest
         var rootComponent = new TestInputHostComponent<string, TestInputComponent<string>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.StringProperty
+            ValueExpression = () => model.StringProperty,
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.StringProperty);
         var renderer = new TestRenderer();

@@ -691,7 +691,7 @@ public class ViewViewComponentResultTest
         {
             ShortName = "Invoke",
             TypeInfo = typeof(object).GetTypeInfo(),
-            MethodInfo = typeof(object).GetTypeInfo().DeclaredMethods.First()
+            MethodInfo = typeof(object).GetTypeInfo().DeclaredMethods.First(),
         };
 
         var viewComponentContext = new ViewComponentContext(

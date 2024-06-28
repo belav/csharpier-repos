@@ -41,7 +41,7 @@ namespace Grpc.Testing
 
             var response = new SimpleResponse
             {
-                Payload = CreateZerosPayload(request.ResponseSize)
+                Payload = CreateZerosPayload(request.ResponseSize),
             };
             return response;
         }
@@ -66,7 +66,7 @@ namespace Grpc.Testing
 
                 var response = new StreamingOutputCallResponse
                 {
-                    Payload = CreateZerosPayload(responseParam.Size)
+                    Payload = CreateZerosPayload(responseParam.Size),
                 };
                 await responseStream.WriteAsync(response);
             }
@@ -106,7 +106,7 @@ namespace Grpc.Testing
                 {
                     var response = new StreamingOutputCallResponse
                     {
-                        Payload = CreateZerosPayload(responseParam.Size)
+                        Payload = CreateZerosPayload(responseParam.Size),
                     };
                     await responseStream.WriteAsync(response);
                 }

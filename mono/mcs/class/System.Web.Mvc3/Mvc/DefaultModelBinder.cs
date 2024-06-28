@@ -106,7 +106,7 @@
                     ModelName = bindingContext.ModelName,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
-                    ValueProvider = bindingContext.ValueProvider
+                    ValueProvider = bindingContext.ValueProvider,
                 };
                 IList list = (IList)UpdateCollection(
                     controllerContext,
@@ -149,7 +149,7 @@
                     ModelName = bindingContext.ModelName,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
-                    ValueProvider = bindingContext.ValueProvider
+                    ValueProvider = bindingContext.ValueProvider,
                 };
                 object dictionary = UpdateDictionary(
                     controllerContext,
@@ -180,7 +180,7 @@
                         ModelName = bindingContext.ModelName,
                         ModelState = bindingContext.ModelState,
                         PropertyFilter = bindingContext.PropertyFilter,
-                        ValueProvider = bindingContext.ValueProvider
+                        ValueProvider = bindingContext.ValueProvider,
                     };
                     object collection = UpdateCollection(
                         controllerContext,
@@ -222,7 +222,7 @@
                         ModelMetadata = bindingContext.ModelMetadata,
                         ModelState = bindingContext.ModelState,
                         PropertyFilter = bindingContext.PropertyFilter,
-                        ValueProvider = bindingContext.ValueProvider
+                        ValueProvider = bindingContext.ValueProvider,
                     };
                     performedFallback = true;
                 }
@@ -301,7 +301,7 @@
                 ModelMetadata = propertyMetadata,
                 ModelName = fullPropertyKey,
                 ModelState = bindingContext.ModelState,
-                ValueProvider = bindingContext.ValueProvider
+                ValueProvider = bindingContext.ValueProvider,
             };
             object newPropertyValue = GetPropertyValue(
                 controllerContext,
@@ -541,7 +541,7 @@
                 ModelName = bindingContext.ModelName,
                 ModelState = bindingContext.ModelState,
                 PropertyFilter = newPropertyFilter,
-                ValueProvider = bindingContext.ValueProvider
+                ValueProvider = bindingContext.ValueProvider,
             };
 
             return newBindingContext;
@@ -986,7 +986,7 @@
                     ModelName = subIndexKey,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
-                    ValueProvider = bindingContext.ValueProvider
+                    ValueProvider = bindingContext.ValueProvider,
                 };
                 object thisElement = elementBinder.BindModel(controllerContext, innerContext);
 
@@ -1062,7 +1062,7 @@
                     ),
                     ModelName = keyFieldKey,
                     ModelState = bindingContext.ModelState,
-                    ValueProvider = bindingContext.ValueProvider
+                    ValueProvider = bindingContext.ValueProvider,
                 };
                 object thisKey = keyBinder.BindModel(controllerContext, keyBindingContext);
 
@@ -1090,7 +1090,7 @@
                     ModelName = valueFieldKey,
                     ModelState = bindingContext.ModelState,
                     PropertyFilter = bindingContext.PropertyFilter,
-                    ValueProvider = bindingContext.ValueProvider
+                    ValueProvider = bindingContext.ValueProvider,
                 };
                 object thisValue = valueBinder.BindModel(controllerContext, valueBindingContext);
 

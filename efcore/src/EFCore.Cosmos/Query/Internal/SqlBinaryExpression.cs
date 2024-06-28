@@ -32,7 +32,7 @@ public class SqlBinaryExpression : SqlExpression
         ExpressionType.NotEqual,
         ExpressionType.ExclusiveOr,
         ExpressionType.RightShift,
-        ExpressionType.LeftShift
+        ExpressionType.LeftShift,
     };
 
     private static ExpressionType VerifyOperator(ExpressionType operatorType) =>

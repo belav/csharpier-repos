@@ -107,7 +107,7 @@ public class HealthCheckEndpointRouteBuilderExtensionsTest
                                     {
                                         context.Response.ContentType = "text/plain";
                                         await context.Response.WriteAsync("Custom!");
-                                    }
+                                    },
                                 }
                             );
                         });

@@ -514,7 +514,7 @@ namespace System.Numerics.Tests
                 244,
                 222,
                 198,
-                205
+                205,
             };
             VerifyIdentityString(
                 Print(tempByteArray3) + Print(tempByteArray2) + Print(tempByteArray1) + "tModPow",
@@ -659,7 +659,7 @@ namespace System.Numerics.Tests
                 0x43,
                 0x76,
                 0xF8,
-                0x00
+                0x00,
             };
             byte[] tempByteArray2 =
             {
@@ -791,7 +791,7 @@ namespace System.Numerics.Tests
                 0xA3,
                 0xD5,
                 0xD8,
-                0x00
+                0x00,
             };
             byte[] tempByteArray3 = { 0xDF, 0x05, 0xE4, 0x4A, 0xAD, 0x93, 0xC6, 0xD7, 0x00 };
             byte[] tempByteArray4 = { 0xC6, 0x57, 0x30, 0x3F, 0xCE, 0x21, 0xA0, 0x3D };

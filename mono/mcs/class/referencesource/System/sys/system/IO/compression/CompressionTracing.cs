@@ -6,7 +6,7 @@ namespace System.IO.Compression
     {
         Off = 0,
         Informational = 1,
-        Verbose = 2
+        Verbose = 2,
     }
 
     // No tracing on Silverlight nor Windows Phone 7.

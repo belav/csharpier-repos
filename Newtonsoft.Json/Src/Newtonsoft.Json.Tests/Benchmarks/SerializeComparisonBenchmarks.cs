@@ -56,7 +56,7 @@ namespace Newtonsoft.Json.Tests.Benchmarks
             {
                 { "Val & asd1", 1 },
                 { "Val2 & asd1", 3 },
-                { "Val3 & asd1", 4 }
+                { "Val3 & asd1", 4 },
             };
 
             test.Address1.Street = "fff Street";

@@ -21,7 +21,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo() { BinderType = typeof(NullModelBinder) },
 
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         // No data is passed.
@@ -52,7 +52,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo() { BinderType = typeof(NullModelNotSetModelBinder) },
 
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         // No data is passed.
@@ -85,10 +85,10 @@ public class BinderTypeBasedModelBinderIntegrationTest
             BindingInfo = new BindingInfo()
             {
                 BinderType = typeof(SuccessModelBinder),
-                BinderModelName = "CustomParameter"
+                BinderModelName = "CustomParameter",
             },
 
-            ParameterType = typeof(Person2)
+            ParameterType = typeof(Person2),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -124,7 +124,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
 
     public static TheoryData<BindingInfo> NullAndEmptyBindingInfo
     {
-        get { return new TheoryData<BindingInfo> { null, new BindingInfo(), }; }
+        get { return new TheoryData<BindingInfo> { null, new BindingInfo() }; }
     }
 
     // Make sure the metadata is honored when a [ModelBinder] attribute is associated with an action parameter's
@@ -236,7 +236,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -272,7 +272,7 @@ public class BinderTypeBasedModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();

@@ -21,7 +21,7 @@
                     errorMessage,
                     Attribute.Minimum,
                     Attribute.Maximum
-                )
+                ),
             };
         }
     }

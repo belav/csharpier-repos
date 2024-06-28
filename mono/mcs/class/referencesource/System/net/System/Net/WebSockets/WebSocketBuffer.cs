@@ -217,7 +217,7 @@ namespace System.Net.WebSockets
             {
                 Type = WebSocketProtocolComponent.PropertyType.ReceiveBufferSize,
                 PropertySize = (uint)s_SizeOfUInt,
-                PropertyData = IntPtr.Add(internalBufferPtr, offset)
+                PropertyData = IntPtr.Add(internalBufferPtr, offset),
             };
             offset += s_SizeOfUInt;
 
@@ -225,7 +225,7 @@ namespace System.Net.WebSockets
             {
                 Type = WebSocketProtocolComponent.PropertyType.SendBufferSize,
                 PropertySize = (uint)s_SizeOfUInt,
-                PropertyData = IntPtr.Add(internalBufferPtr, offset)
+                PropertyData = IntPtr.Add(internalBufferPtr, offset),
             };
             offset += s_SizeOfUInt;
 
@@ -233,7 +233,7 @@ namespace System.Net.WebSockets
             {
                 Type = WebSocketProtocolComponent.PropertyType.AllocatedBuffer,
                 PropertySize = (uint)m_NativeBuffer.Count,
-                PropertyData = IntPtr.Add(internalBufferPtr, offset)
+                PropertyData = IntPtr.Add(internalBufferPtr, offset),
             };
             offset += IntPtr.Size;
 
@@ -243,7 +243,7 @@ namespace System.Net.WebSockets
                 {
                     Type = WebSocketProtocolComponent.PropertyType.DisableMasking,
                     PropertySize = (uint)s_SizeOfBool,
-                    PropertyData = IntPtr.Add(internalBufferPtr, offset)
+                    PropertyData = IntPtr.Add(internalBufferPtr, offset),
                 };
             }
 

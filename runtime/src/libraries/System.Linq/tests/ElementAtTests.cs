@@ -37,7 +37,7 @@ namespace System.Linq.Tests
                         "",
                         "Calling Twice",
                         "SoS",
-                        string.Empty
+                        string.Empty,
                     }
                     where !string.IsNullOrEmpty(x)
                     select x,

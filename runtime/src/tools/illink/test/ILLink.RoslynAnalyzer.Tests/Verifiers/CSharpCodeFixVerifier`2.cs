@@ -136,7 +136,7 @@ namespace ILLink.RoslynAnalyzer.Tests
             string fixedSource
         )
         {
-            var test = new Test { TestCode = source, FixedCode = fixedSource, };
+            var test = new Test { TestCode = source, FixedCode = fixedSource };
 
             test.ExpectedDiagnostics.AddRange(expected);
             return test.RunAsync(CancellationToken.None);

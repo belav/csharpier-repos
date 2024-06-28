@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         {
             MscorlibRef_v4_0_30316_17626,
             SystemRef_v4_0_30319_17929,
-            SystemCoreRef_v4_0_30319_17929
+            SystemCoreRef_v4_0_30319_17929,
         };
 
         public CodeGenAsyncLocalsTests() { }
@@ -272,7 +272,7 @@ class C
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
-                        new[] { "<>1__state", "<>t__builder", "x", "z", "y", "<>u__1", },
+                        new[] { "<>1__state", "<>t__builder", "x", "z", "y", "<>u__1" },
                         module.GetFieldNames("C.<M>d__1")
                     );
                 }
@@ -284,7 +284,7 @@ class C
                 symbolValidator: module =>
                 {
                     AssertEx.Equal(
-                        new[] { "<>1__state", "<>t__builder", "x", "y", "z", "<>u__1", },
+                        new[] { "<>1__state", "<>t__builder", "x", "y", "z", "<>u__1" },
                         module.GetFieldNames("C.<M>d__1")
                     );
                 }

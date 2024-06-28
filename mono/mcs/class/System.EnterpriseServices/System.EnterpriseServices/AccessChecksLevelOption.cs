@@ -34,6 +34,6 @@ namespace System.EnterpriseServices
     public enum AccessChecksLevelOption
     {
         Application,
-        ApplicationComponent
+        ApplicationComponent,
     }
 }

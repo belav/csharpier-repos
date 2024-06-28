@@ -161,7 +161,7 @@ ISwitchExpressionOperation (0 arms, IsExhaustive: False) (OperationKind.SwitchEx
                 //         y = /*<bind>*/x switch { }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")
                     .WithArguments("_")
-                    .WithLocation(7, 25)
+                    .WithLocation(7, 25),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -204,7 +204,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: False) (OperationKind.SwitchEx
             {
                 // file.cs(7,34): error CS8504: Pattern missing
                 //         y = /*<bind>*/x switch { => 5 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(7, 34)
+                Diagnostic(ErrorCode.ERR_MissingPattern, "=>").WithLocation(7, 34),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -261,7 +261,7 @@ ISwitchExpressionOperation (3 arms, IsExhaustive: True) (OperationKind.SwitchExp
                 //         y = /*<bind>*/x switch { 1 => 2, 3 => 4, _ => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 23)
+                    .WithLocation(7, 23),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -362,7 +362,8 @@ class X
             {
                 // file.cs(7,29): error CS8506: No best type was found for the switch expression.
                 //         var z = /*<bind>*/x switch { 1 => 2, _ => "Z" }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(7, 29)
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
+                    .WithLocation(7, 29),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -402,7 +403,9 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExp
             {
                 // file.cs(7,43): error CS1003: Syntax error, '=>' expected
                 //         y = /*<bind>*/x switch { _ /*=>*/ 5 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "5").WithArguments("=>").WithLocation(7, 43)
+                Diagnostic(ErrorCode.ERR_SyntaxError, "5")
+                    .WithArguments("=>")
+                    .WithLocation(7, 43),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -445,7 +448,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExp
                 //         y = /*<bind>*/x switch { _ => /*5*/ }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
                     .WithArguments("}")
-                    .WithLocation(7, 45)
+                    .WithLocation(7, 45),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -493,7 +496,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: False) (OperationKind.SwitchEx
                 //         y = /*<bind>*/x switch { NotFound => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "NotFound")
                     .WithArguments("NotFound")
-                    .WithLocation(7, 34)
+                    .WithLocation(7, 34),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -536,7 +539,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: True) (OperationKind.SwitchExp
                 //         y = /*<bind>*/x switch { _ => NotFound }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "NotFound")
                     .WithArguments("NotFound")
-                    .WithLocation(7, 39)
+                    .WithLocation(7, 39),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -583,7 +586,7 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: True) (OperationKind.SwitchExp
             {
                 // file.cs(7,42): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match.
                 //         y = /*<bind>*/x switch { _ => 5, 1 => 2 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "1").WithLocation(7, 42)
+                Diagnostic(ErrorCode.ERR_SwitchArmSubsumed, "1").WithLocation(7, 42),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -678,7 +681,7 @@ ISwitchExpressionOperation (2 arms, IsExhaustive: False) (OperationKind.SwitchEx
                 //         y = /*<bind>*/x switch { 1 => 2, _ when false => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustiveWithWhen, "switch")
                     .WithArguments("0")
-                    .WithLocation(7, 25)
+                    .WithLocation(7, 25),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -770,7 +773,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: False) (OperationKind.SwitchEx
                 //         y = /*<bind>*/x switch { _ when NotFound => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "NotFound")
                     .WithArguments("NotFound")
-                    .WithLocation(7, 41)
+                    .WithLocation(7, 41),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -823,7 +826,7 @@ ISwitchExpressionOperation (1 arms, IsExhaustive: False) (OperationKind.SwitchEx
                 //         y = /*<bind>*/x switch { int z when x is int z => 5 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_LocalDuplicate, "z")
                     .WithArguments("z")
-                    .WithLocation(7, 54)
+                    .WithLocation(7, 54),
             };
             VerifyOperationTreeAndDiagnosticsForTest<SwitchExpressionSyntax>(
                 source,
@@ -1352,7 +1355,7 @@ public sealed class MyClass
                 //         result = NotFound switch
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "NotFound")
                     .WithArguments("NotFound")
-                    .WithLocation(7, 18)
+                    .WithLocation(7, 18),
             };
             string expectedFlowGraph =
                 @"
@@ -1586,7 +1589,7 @@ public sealed class MyClass
                 //                 (a ? input1 : input2) => true
                 Diagnostic(ErrorCode.ERR_ConstantValueOfTypeExpected, "a ? input1 : input2")
                     .WithArguments("int")
-                    .WithLocation(9, 18)
+                    .WithLocation(9, 18),
             };
             string expectedFlowGraph =
                 @"

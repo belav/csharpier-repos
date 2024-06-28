@@ -232,7 +232,7 @@ class Test
                 references: new MetadataReference[]
                 {
                     TestReferences.MetadataTests.InterfaceAndClass.VBInterfaces01,
-                    new CSharpCompilationReference(comp1)
+                    new CSharpCompilationReference(comp1),
                 },
                 assemblyName: "OHI_ExpImpImpl002",
                 options: TestOptions.ReleaseExe
@@ -400,7 +400,7 @@ class Test
                 references: new MetadataReference[]
                 {
                     asm01,
-                    new CSharpCompilationReference(comp1)
+                    new CSharpCompilationReference(comp1),
                 },
                 assemblyName: "OHI_ExpImpPropImpl002",
                 options: TestOptions.ReleaseExe
@@ -482,7 +482,7 @@ Class2.Method(4, 5, c)",
                         "Class3",
                         "I1<System.String>.Method",
                         ".method private hidebysig newslot virtual final instance System.Void I1<System.String>.Method([opt] System.Int32 a = 4, [opt] System.Int64 b = 3, [opt] System.String c = \"\", [opt] System.Collections.Generic.List`1[System.String][] d) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -713,7 +713,7 @@ Derived6.Method",
                         "Outer`1+Inner`1+Derived4+Derived5+Derived6",
                         "Outer<System.Collections.Generic.List<T>>.Inner<U>.Interface<System.Collections.Generic.List<U>,T>.Method",
                         ".method private hidebysig newslot virtual final instance System.Void Outer<System.Collections.Generic.List<T>>.Inner<U>.Interface<System.Collections.Generic.List<U>,T>.Method<K>(System.Collections.Generic.List`1[T] AA, U[] b, System.Collections.Generic.List`1[System.Collections.Generic.List`1[U]] c, System.Collections.Generic.Dictionary`2[T,K] d) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -1137,7 +1137,7 @@ class C : Q::I
                 source,
                 new[]
                 {
-                    new CSharpCompilationReference(libComp, aliases: ImmutableArray.Create("Q"))
+                    new CSharpCompilationReference(libComp, aliases: ImmutableArray.Create("Q")),
                 }
             );
             comp.VerifyDiagnostics();
@@ -1208,7 +1208,7 @@ class C : A::I, B::I
                 new[]
                 {
                     new CSharpCompilationReference(libComp1, aliases: ImmutableArray.Create("A")),
-                    new CSharpCompilationReference(libComp1, aliases: ImmutableArray.Create("B"))
+                    new CSharpCompilationReference(libComp1, aliases: ImmutableArray.Create("B")),
                 }
             );
             comp1.VerifyDiagnostics(
@@ -1238,7 +1238,7 @@ class C : A::I, B::I
                 new[]
                 {
                     new CSharpCompilationReference(libComp1, aliases: ImmutableArray.Create("A")),
-                    new CSharpCompilationReference(libComp2, aliases: ImmutableArray.Create("B"))
+                    new CSharpCompilationReference(libComp2, aliases: ImmutableArray.Create("B")),
                 }
             );
             var verifier2 = CompileAndVerify(

@@ -26,7 +26,7 @@ public class StartupGetAllStrings
             {
                 DefaultRequestCulture = new RequestCulture("en-US"),
                 SupportedCultures = new List<CultureInfo>() { new CultureInfo("fr-FR") },
-                SupportedUICultures = new List<CultureInfo>() { new CultureInfo("fr-FR") }
+                SupportedUICultures = new List<CultureInfo>() { new CultureInfo("fr-FR") },
             }
         );
 

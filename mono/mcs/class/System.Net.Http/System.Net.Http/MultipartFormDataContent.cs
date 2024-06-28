@@ -77,7 +77,7 @@ namespace System.Net.Http
             {
                 Name = name,
                 FileName = fileName,
-                FileNameStar = fileName
+                FileNameStar = fileName,
             };
         }
     }

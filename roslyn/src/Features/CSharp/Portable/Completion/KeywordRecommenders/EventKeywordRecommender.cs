@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             SyntaxKind.OverrideKeyword,
             SyntaxKind.AbstractKeyword,
             SyntaxKind.ExternKeyword,
-            SyntaxKind.UnsafeKeyword
+            SyntaxKind.UnsafeKeyword,
         };
 
         private static readonly ISet<SyntaxKind> s_validStructModifiers = new HashSet<SyntaxKind>(

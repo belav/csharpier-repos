@@ -96,7 +96,7 @@ namespace System.Net.Http.Formatting
                             "*;q=0.4",
                             "text;q=0",
                         }
-                    }
+                    },
                 };
             }
         }

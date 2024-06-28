@@ -1811,7 +1811,7 @@ namespace Internal.JitInterface
             HandlerEnd = 4,
             ClassTokenOrOffset = 5,
 
-            Length
+            Length,
         }
 
         private ObjectNode.ObjectData EncodeEHInfo()

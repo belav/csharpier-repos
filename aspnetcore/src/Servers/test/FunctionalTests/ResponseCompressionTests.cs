@@ -162,7 +162,7 @@ public class ResponseCompressionTests : LoggedTest
                 var deploymentResult = await deployer.DeployAsync();
                 var httpClientHandler = new HttpClientHandler()
                 {
-                    AutomaticDecompression = DecompressionMethods.None
+                    AutomaticDecompression = DecompressionMethods.None,
                 };
                 Assert.True(httpClientHandler.SupportsAutomaticDecompression);
                 var httpClient = deploymentResult.CreateHttpClient(httpClientHandler);

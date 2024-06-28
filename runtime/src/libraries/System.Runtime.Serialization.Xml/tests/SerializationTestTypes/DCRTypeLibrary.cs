@@ -189,7 +189,7 @@ namespace SerializationTestTypes
         [DataMember]
         private Dictionary<int, object> _dictionary = new Dictionary<int, object>()
         {
-            { 001, new CharClass() }
+            { 001, new CharClass() },
         };
 
         [DataMember]

@@ -32,7 +32,7 @@ public class FileStreamResultTest : FileStreamResultTestBase
         {
             LastModified = lastModified,
             EntityTag = entityTag,
-            EnableRangeProcessing = enableRangeProcessing
+            EnableRangeProcessing = enableRangeProcessing,
         };
 
         return fileStreamResult.ExecuteResultAsync(actionContext);

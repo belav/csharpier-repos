@@ -452,7 +452,7 @@ public class RouteCollectionTest
                 "{controller}/{action}",
                 new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } },
                 "/home/index",
-                true
+                true,
             };
 
             yield return new object[]
@@ -460,7 +460,7 @@ public class RouteCollectionTest
                 "{controller}/{action}/",
                 new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } },
                 "/Home/Index",
-                false
+                false,
             };
 
             yield return new object[]
@@ -468,7 +468,7 @@ public class RouteCollectionTest
                 "api/{action}/",
                 new RouteValueDictionary { { "action", "Create" } },
                 "/api/create",
-                true
+                true,
             };
 
             yield return new object[]
@@ -479,10 +479,10 @@ public class RouteCollectionTest
                     { "action", "Create" },
                     { "id", "23" },
                     { "Param1", "Value1" },
-                    { "Param2", "Value2" }
+                    { "Param2", "Value2" },
                 },
                 "/api/create/23?Param1=Value1&Param2=Value2",
-                true
+                true,
             };
 
             yield return new object[]
@@ -493,10 +493,10 @@ public class RouteCollectionTest
                     { "action", "Create" },
                     { "id", "23" },
                     { "Param1", "Value1" },
-                    { "Param2", "Value2" }
+                    { "Param2", "Value2" },
                 },
                 "/api/Create/23?Param1=Value1&Param2=Value2",
-                false
+                false,
             };
         }
     }
@@ -536,11 +536,11 @@ public class RouteCollectionTest
                 new Route[]
                 {
                     CreateTemplateRoute("{area?}/{controller=Home}/{action=Index}/{id?}", "1"),
-                    CreateTemplateRoute("{controller=Home}/{action=Index}/{id?}", "2")
+                    CreateTemplateRoute("{controller=Home}/{action=Index}/{id?}", "2"),
                 },
                 new RouteValueDictionary(new { controller = "Test", action = "Index" }),
                 "/Test",
-                "2"
+                "2",
             };
 
             // Here the segment 'a' is valid but 'b' is not as it would be empty. This would be an invalid route match, but
@@ -550,11 +550,11 @@ public class RouteCollectionTest
                 new[]
                 {
                     CreateTemplateRoute("{a}/{b?}/{c}", "1"),
-                    CreateTemplateRoute("{a=Home}/{b=Index}", "2")
+                    CreateTemplateRoute("{a=Home}/{b=Index}", "2"),
                 },
                 new RouteValueDictionary(new { a = "Test", c = "Foo" }),
                 "/Test?c=Foo",
-                "2"
+                "2",
             };
         }
     }
@@ -621,7 +621,7 @@ public class RouteCollectionTest
             yield return new object[]
             {
                 new RouteValueDictionary() { { "tokenKey", "tokenValue" } },
-                null
+                null,
             };
 
             yield return new object[] { null, "routerA" };
@@ -629,7 +629,7 @@ public class RouteCollectionTest
             yield return new object[]
             {
                 new RouteValueDictionary() { { "tokenKey", "tokenValue" } },
-                "routerA"
+                "routerA",
             };
         }
     }
@@ -776,7 +776,7 @@ public class RouteCollectionTest
             services.Configure<RouteOptions>(options);
         }
 
-        var context = new DefaultHttpContext { RequestServices = services.BuildServiceProvider(), };
+        var context = new DefaultHttpContext { RequestServices = services.BuildServiceProvider() };
 
         return new VirtualPathContext(
             context,

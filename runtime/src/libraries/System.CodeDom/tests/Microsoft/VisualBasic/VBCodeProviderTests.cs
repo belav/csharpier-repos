@@ -24,15 +24,15 @@ namespace System.CodeDom.Compiler.Tests
             yield return new object[] { new Dictionary<string, string>() };
             yield return new object[]
             {
-                new Dictionary<string, string>() { { "option", "value" } }
+                new Dictionary<string, string>() { { "option", "value" } },
             };
             yield return new object[]
             {
                 new Dictionary<string, string>()
                 {
                     { "option1", "value1" },
-                    { "option2", "value2" }
-                }
+                    { "option2", "value2" },
+                },
             };
             yield return new object[] { new Dictionary<string, string>() { { "option", null } } };
         }

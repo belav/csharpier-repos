@@ -94,7 +94,7 @@ namespace System.ServiceModel.Description
                     {
                         MaxConcurrentCalls = this.MaxConcurrentCalls,
                         MaxConcurrentSessions = this.MaxConcurrentSessions,
-                        MaxConcurrentInstances = this.MaxConcurrentInstances
+                        MaxConcurrentInstances = this.MaxConcurrentInstances,
                     };
             }
         }

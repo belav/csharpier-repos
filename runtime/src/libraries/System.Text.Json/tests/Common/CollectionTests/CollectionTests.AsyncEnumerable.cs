@@ -228,7 +228,7 @@ namespace System.Text.Json.Serialization.Tests
                 new AsyncEnumerableDtoWithTwoProperties<TElement>
                 {
                     Data1 = asyncEnumerable,
-                    Data2 = asyncEnumerable
+                    Data2 = asyncEnumerable,
                 },
                 options
             );

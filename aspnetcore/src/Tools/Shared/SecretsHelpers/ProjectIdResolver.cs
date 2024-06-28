@@ -66,14 +66,14 @@ internal sealed class ProjectIdResolver
                     "/p:CustomAfterMicrosoftCommonTargets=" + _targetsFile,
                     "/p:CustomAfterMicrosoftCommonCrossTargetingTargets=" + _targetsFile,
                     "-verbosity:detailed",
-                }
+                },
             };
 
 #if DEBUG
             _reporter.Verbose($"Invoking '{psi.FileName} {psi.Arguments}'");
 #endif
 
-            using var process = new Process() { StartInfo = psi, };
+            using var process = new Process() { StartInfo = psi };
 
             var outputBuilder = new StringBuilder();
             var errorBuilder = new StringBuilder();

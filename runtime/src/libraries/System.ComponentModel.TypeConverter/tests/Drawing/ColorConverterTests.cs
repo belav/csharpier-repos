@@ -356,7 +356,7 @@ namespace System.ComponentModel.TypeConverterTests
             );
 
             Assert.Null(
-                conv.CreateInstance(new Dictionary<string, object> { ["Name"] = "ForestGreen", })
+                conv.CreateInstance(new Dictionary<string, object> { ["Name"] = "ForestGreen" })
             );
         }
 

@@ -33,7 +33,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-        WriteIndented = true
+        WriteIndented = true,
     };
 
     // <summary>
@@ -109,7 +109,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
         var bootConfig = new BootJsonData()
         {
             mainAssemblyName = MainAssemblyName,
-            globalizationMode = GetGlobalizationMode().ToString().ToLowerInvariant()
+            globalizationMode = GetGlobalizationMode().ToString().ToLowerInvariant(),
         };
 
         if (CacheBootResources)
@@ -368,7 +368,7 @@ public class WasmAppBuilder : WasmAppBuilderBaseTask
 
                 vfs[targetPath] = new()
                 {
-                    [$"supportFiles/{generatedFileName}"] = Utils.ComputeIntegrity(vfsPath)
+                    [$"supportFiles/{generatedFileName}"] = Utils.ComputeIntegrity(vfsPath),
                 };
             }
 

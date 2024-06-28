@@ -602,7 +602,7 @@ public class RelationalMetadataExtensionsTest
     {
         Son,
         Mon,
-        Tue
+        Tue,
     }
 
     private class Customer

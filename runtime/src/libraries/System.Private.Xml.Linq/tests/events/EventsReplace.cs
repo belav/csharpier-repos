@@ -18,16 +18,16 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[]
             {
                 new XElement("parent", new XElement("child", "child text")),
-                new XElement("element")
+                new XElement("element"),
             },
             new object[] { new XDocumentType("root", "", "", ""), new XComment("Comment") },
             new object[]
             {
                 new XProcessingInstruction("PI", "Data"),
-                new XDocumentType("root", "", "", "")
+                new XDocumentType("root", "", "", ""),
             },
             new object[] { new XComment("Comment"), new XText("\t") },
-            new object[] { new XText(" "), XElement.Parse(@"<a></a>") }
+            new object[] { new XText(" "), XElement.Parse(@"<a></a>") },
         };
 
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
@@ -58,16 +58,16 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[]
             {
                 new XElement("parent", new XElement("child", "child text")),
-                new XElement("element")
+                new XElement("element"),
             },
             new object[] { new XCData("x+y >= z-m"), new XComment("Comment") },
             new object[]
             {
                 new XProcessingInstruction("PI", "Data"),
-                new XElement("element", new XAttribute("a", "aa"))
+                new XElement("element", new XAttribute("a", "aa")),
             },
             new object[] { new XComment("Comment"), new XText("\t") },
-            new object[] { new XText("\t"), XElement.Parse(@"<a></a>") }
+            new object[] { new XText("\t"), XElement.Parse(@"<a></a>") },
         };
 
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
@@ -113,7 +113,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XElement("parent", new XElement("child", "child text")) },
             new object[] { new XDocumentType("root", "", "", "") },
             new object[] { new XProcessingInstruction("PI", "Data") },
-            new object[] { new XComment("Comment") }
+            new object[] { new XComment("Comment") },
         };
 
         [Theory, MemberData(nameof(ExecuteXDocumentVariationParams))]
@@ -151,7 +151,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XCData("x+y >= z-m") },
             new object[] { new XProcessingInstruction("PI", "Data") },
             new object[] { new XComment("Comment") },
-            new object[] { new XText("") }
+            new object[] { new XText("") },
         };
 
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]
@@ -221,7 +221,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                                     XObjectChange.Remove,
                                     XObjectChange.Remove,
                                     XObjectChange.Remove,
-                                    XObjectChange.Add
+                                    XObjectChange.Add,
                                 }
                             );
                         }
@@ -231,7 +231,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                                 XObjectChange.Remove,
                                 XObjectChange.Remove,
                                 XObjectChange.Remove,
-                                XObjectChange.Add
+                                XObjectChange.Add,
                             }
                         );
                     }
@@ -269,20 +269,20 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XAttribute[] { new XAttribute("{a}xxx", "a_yyy") } },
             new object[]
             {
-                new XAttribute[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") }
+                new XAttribute[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") },
             },
             new object[]
             {
                 new XAttribute[]
                 {
                     new XAttribute("{b}xxx", "b_yyy"),
-                    new XAttribute("{a}xxx", "a_yyy")
-                }
+                    new XAttribute("{a}xxx", "a_yyy"),
+                },
             },
             new object[]
             {
-                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray()
-            }
+                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray(),
+            },
         };
 
         [Theory, MemberData(nameof(ExecuteXAttributeVariationParams))]
@@ -328,7 +328,7 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XObject[] { new XElement("element") } },
             new object[]
             {
-                new XObject[] { new XElement("parent", new XElement("child", "child text")) }
+                new XObject[] { new XElement("parent", new XElement("child", "child text")) },
             },
             new object[] { new XObject[] { new XCData("x+y >= z-m") } },
             new object[] { new XObject[] { new XProcessingInstruction("PI", "Data") } },
@@ -339,28 +339,28 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
             new object[] { new XObject[] { new XAttribute("{a}xxx", "a_yyy") } },
             new object[]
             {
-                new XObject[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") }
+                new XObject[] { new XAttribute("xxx", "yyy"), new XAttribute("a", "aa") },
             },
             new object[]
             {
                 new XObject[]
                 {
                     new XAttribute("{b}xxx", "b_yyy"),
-                    new XAttribute("{a}xxx", "a_yyy")
-                }
+                    new XAttribute("{a}xxx", "a_yyy"),
+                },
             },
             new object[]
             {
-                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray()
+                InputSpace.GetAttributeElement(10, 1000).Elements().Attributes().ToArray(),
             },
             new object[]
             {
                 new XObject[]
                 {
                     new XAttribute("{b}xxx", "b_yyy"),
-                    new XElement("parent", new XElement("child", "child text"))
-                }
-            }
+                    new XElement("parent", new XElement("child", "child text")),
+                },
+            },
         };
 
         [Theory, MemberData(nameof(ExecuteXElementVariationParams))]

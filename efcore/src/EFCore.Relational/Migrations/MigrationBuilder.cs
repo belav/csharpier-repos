@@ -111,7 +111,7 @@ public class MigrationBuilder
             Collation = collation,
             Precision = precision,
             Scale = scale,
-            IsStored = stored
+            IsStored = stored,
         };
         Operations.Add(operation);
 
@@ -210,7 +210,7 @@ public class MigrationBuilder
             PrincipalTable = principalTable,
             PrincipalColumns = principalColumns,
             OnUpdate = onUpdate,
-            OnDelete = onDelete
+            OnDelete = onDelete,
         };
         Operations.Add(operation);
 
@@ -262,7 +262,7 @@ public class MigrationBuilder
             Schema = schema,
             Table = table,
             Name = name,
-            Columns = columns
+            Columns = columns,
         };
         Operations.Add(operation);
 
@@ -314,7 +314,7 @@ public class MigrationBuilder
             Schema = schema,
             Table = table,
             Name = name,
-            Columns = columns
+            Columns = columns,
         };
         Operations.Add(operation);
 
@@ -477,8 +477,8 @@ public class MigrationBuilder
                 Collation = oldCollation,
                 Precision = oldPrecision,
                 Scale = oldScale,
-                IsStored = oldStored
-            }
+                IsStored = oldStored,
+            },
         };
 
         Operations.Add(operation);
@@ -503,7 +503,7 @@ public class MigrationBuilder
         var operation = new AlterDatabaseOperation
         {
             Collation = collation,
-            OldDatabase = { Collation = oldCollation }
+            OldDatabase = { Collation = oldCollation },
         };
         Operations.Add(operation);
 
@@ -555,8 +555,8 @@ public class MigrationBuilder
                 IncrementBy = oldIncrementBy,
                 MinValue = oldMinValue,
                 MaxValue = oldMaxValue,
-                IsCyclic = oldCyclic
-            }
+                IsCyclic = oldCyclic,
+            },
         };
         Operations.Add(operation);
 
@@ -588,7 +588,7 @@ public class MigrationBuilder
             Schema = schema,
             Name = name,
             Comment = comment,
-            OldTable = new CreateTableOperation { Comment = oldComment }
+            OldTable = new CreateTableOperation { Comment = oldComment },
         };
         Operations.Add(operation);
 
@@ -671,7 +671,7 @@ public class MigrationBuilder
             Columns = columns,
             IsUnique = unique,
             IsDescending = descending,
-            Filter = filter
+            Filter = filter,
         };
 
         Operations.Add(operation);
@@ -757,7 +757,7 @@ public class MigrationBuilder
             IncrementBy = incrementBy,
             MinValue = minValue,
             MaxValue = maxValue,
-            IsCyclic = cyclic
+            IsCyclic = cyclic,
         };
         Operations.Add(operation);
 
@@ -814,7 +814,7 @@ public class MigrationBuilder
             Schema = schema,
             Name = name,
             Table = table,
-            Sql = sql
+            Sql = sql,
         };
         Operations.Add(operation);
 
@@ -853,7 +853,7 @@ public class MigrationBuilder
         {
             Schema = schema,
             Name = name,
-            Comment = comment
+            Comment = comment,
         };
 
         var columnsBuilder = new ColumnsBuilder(createTableOperation);
@@ -902,7 +902,7 @@ public class MigrationBuilder
         {
             Schema = schema,
             Table = table,
-            Name = name
+            Name = name,
         };
         Operations.Add(operation);
 
@@ -932,7 +932,7 @@ public class MigrationBuilder
         {
             Schema = schema,
             Table = table,
-            Name = name
+            Name = name,
         };
         Operations.Add(operation);
 
@@ -961,7 +961,7 @@ public class MigrationBuilder
         {
             Schema = schema,
             Table = table,
-            Name = name
+            Name = name,
         };
         Operations.Add(operation);
 
@@ -991,7 +991,7 @@ public class MigrationBuilder
         {
             Schema = schema,
             Table = table,
-            Name = name
+            Name = name,
         };
         Operations.Add(operation);
 
@@ -1060,7 +1060,7 @@ public class MigrationBuilder
         {
             Name = name,
             Table = table,
-            Schema = schema
+            Schema = schema,
         };
         Operations.Add(operation);
 
@@ -1112,7 +1112,7 @@ public class MigrationBuilder
         {
             Schema = schema,
             Table = table,
-            Name = name
+            Name = name,
         };
         Operations.Add(operation);
 
@@ -1146,7 +1146,7 @@ public class MigrationBuilder
             Name = name,
             Schema = schema,
             Table = table,
-            NewName = newName
+            NewName = newName,
         };
         Operations.Add(operation);
 
@@ -1179,7 +1179,7 @@ public class MigrationBuilder
             Schema = schema,
             Table = table,
             Name = name,
-            NewName = newName
+            NewName = newName,
         };
 
         Operations.Add(operation);
@@ -1212,7 +1212,7 @@ public class MigrationBuilder
             Name = name,
             Schema = schema,
             NewName = newName,
-            NewSchema = newSchema
+            NewSchema = newSchema,
         };
         Operations.Add(operation);
 
@@ -1244,7 +1244,7 @@ public class MigrationBuilder
             Schema = schema,
             Name = name,
             NewName = newName,
-            NewSchema = newSchema
+            NewSchema = newSchema,
         };
         Operations.Add(operation);
 
@@ -1276,7 +1276,7 @@ public class MigrationBuilder
         {
             Name = name,
             Schema = schema,
-            StartValue = startValue
+            StartValue = startValue,
         };
         Operations.Add(operation);
 
@@ -1525,7 +1525,7 @@ public class MigrationBuilder
             Schema = schema,
             Columns = columns,
             ColumnTypes = columnTypes,
-            Values = values
+            Values = values,
         };
         Operations.Add(operation);
 
@@ -1770,7 +1770,7 @@ public class MigrationBuilder
             Schema = schema,
             KeyColumns = keyColumns,
             KeyColumnTypes = keyColumnTypes,
-            KeyValues = keyValues
+            KeyValues = keyValues,
         };
         Operations.Add(operation);
 
@@ -2143,7 +2143,7 @@ public class MigrationBuilder
             KeyValues = keyValues,
             Columns = columns,
             ColumnTypes = columnTypes,
-            Values = values
+            Values = values,
         };
         Operations.Add(operation);
 

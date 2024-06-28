@@ -106,7 +106,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     new RuntimeResolverContext
                     {
                         Scope = serviceProviderEngine,
-                        AcquiredLocks = context.AcquiredLocks | lockType
+                        AcquiredLocks = context.AcquiredLocks | lockType,
                     }
                 );
                 serviceProviderEngine.CaptureDisposable(resolved);
@@ -161,7 +161,7 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
                     new RuntimeResolverContext
                     {
                         Scope = serviceProviderEngine,
-                        AcquiredLocks = context.AcquiredLocks | lockType
+                        AcquiredLocks = context.AcquiredLocks | lockType,
                     }
                 );
                 serviceProviderEngine.CaptureDisposable(resolved);
@@ -246,6 +246,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
     internal enum RuntimeResolverLock
     {
         Scope = 1,
-        Root = 2
+        Root = 2,
     }
 }

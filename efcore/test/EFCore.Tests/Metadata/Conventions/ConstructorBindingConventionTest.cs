@@ -325,7 +325,7 @@ public class ConstructorBindingConventionTest
                 new[]
                 {
                     new PropertyParameterBinding((IProperty)e.FindProperty(nameof(Blog.Title))),
-                    new PropertyParameterBinding((IProperty)e.FindProperty(nameof(Blog.Id)))
+                    new PropertyParameterBinding((IProperty)e.FindProperty(nameof(Blog.Id))),
                 }
             )
         );
@@ -611,7 +611,7 @@ public class ConstructorBindingConventionTest
                 + CoreStrings.ConstructorBindingFailed(
                     "dummy', 'description",
                     "BlogNone(string title, Guid? shadow, bool dummy, int id, string description)"
-                )
+                ),
         };
 
         Assert.Equal(

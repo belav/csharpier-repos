@@ -65,7 +65,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     modelType
                 ),
                 ModelName = "theModelName",
-                ValueProvider = new SimpleHttpValueProvider { { "theModelName", "someValue" } }
+                ValueProvider = new SimpleHttpValueProvider { { "theModelName", "someValue" } },
             };
         }
     }

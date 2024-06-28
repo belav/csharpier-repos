@@ -910,7 +910,7 @@ namespace MonoTests.System
             0x00,
             0x00,
             0x00,
-            0x0B
+            0x0B,
         };
 
         [Test]

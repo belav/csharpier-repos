@@ -311,7 +311,7 @@ namespace DbLinq.SqlServer
             { typeof(char[]), "varchar" },
             { typeof(char), "char" },
             { typeof(DateTime), "datetime" },
-            { typeof(Guid), "uniqueidentifier" }
+            { typeof(Guid), "uniqueidentifier" },
 
             // there are more types: timestamps, images ... TODO: check what is the official behaviour
         };

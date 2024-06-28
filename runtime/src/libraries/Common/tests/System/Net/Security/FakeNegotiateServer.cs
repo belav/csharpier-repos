@@ -22,7 +22,7 @@ namespace System.Net.Security
         private enum NegotiationToken
         {
             NegTokenInit = 0,
-            NegTokenResp = 1
+            NegTokenResp = 1,
         }
 
         private enum NegTokenInit
@@ -30,7 +30,7 @@ namespace System.Net.Security
             MechTypes = 0,
             ReqFlags = 1,
             MechToken = 2,
-            MechListMIC = 3
+            MechListMIC = 3,
         }
 
         private enum NegTokenResp
@@ -38,7 +38,7 @@ namespace System.Net.Security
             NegState = 0,
             SupportedMech = 1,
             ResponseToken = 2,
-            MechListMIC = 3
+            MechListMIC = 3,
         }
 
         private enum NegState
@@ -46,7 +46,7 @@ namespace System.Net.Security
             AcceptCompleted = 0,
             AcceptIncomplete = 1,
             Reject = 2,
-            RequestMic = 3
+            RequestMic = 3,
         }
 
         private const string SpnegoOid = "1.3.6.1.5.5.2";

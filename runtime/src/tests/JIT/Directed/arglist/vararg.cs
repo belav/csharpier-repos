@@ -5605,7 +5605,7 @@ namespace NativeVarargTest
                         901,
                         501,
                         1001,
-                        1002
+                        1002,
                     }
                 ),
                 "TestPassingManyIntsManaged",
@@ -5657,7 +5657,7 @@ namespace NativeVarargTest
                         901L,
                         501L,
                         1001L,
-                        1002L
+                        1002L,
                     }
                 ),
                 "TestPassingManyLongsManaged",
@@ -5709,7 +5709,7 @@ namespace NativeVarargTest
                         901,
                         501,
                         1001,
-                        1002
+                        1002,
                     }
                 ),
                 "TestPassingManyFloatsManaged",
@@ -5761,7 +5761,7 @@ namespace NativeVarargTest
                         901,
                         501,
                         1001,
-                        1002
+                        1002,
                     }
                 ),
                 "TestPassingManyDoublesManaged",
@@ -5907,7 +5907,7 @@ namespace NativeVarargTest
                         901,
                         501,
                         1001,
-                        1002
+                        1002,
                     }
                 ),
                 "TestPassingManyInts",
@@ -5959,7 +5959,7 @@ namespace NativeVarargTest
                         901L,
                         501L,
                         1001L,
-                        1002L
+                        1002L,
                     }
                 ),
                 "TestPassingManyLongs",
@@ -6012,7 +6012,7 @@ namespace NativeVarargTest
                         901,
                         501,
                         1001,
-                        1002
+                        1002,
                     }
                 ),
                 "TestPassingManyFloats",
@@ -6064,7 +6064,7 @@ namespace NativeVarargTest
                         901,
                         501,
                         1001,
-                        1002
+                        1002,
                     }
                 ),
                 "TestPassingManyDoubles",

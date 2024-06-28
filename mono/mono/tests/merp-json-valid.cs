@@ -45,7 +45,7 @@ class C
             merpGUIPath,
             eventType,
             appPath,
-            configDir
+            configDir,
         };
 
         m.Invoke(null, m_params);

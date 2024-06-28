@@ -34,7 +34,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                 MessageSequence = DiscoveryMessageSequenceApril2005.FromDiscoveryMessageSequence(
                     messageSequence
                 ),
-                ProbeMatches = ProbeMatchesApril2005.Create(endpointDiscoveryMetadata)
+                ProbeMatches = ProbeMatchesApril2005.Create(endpointDiscoveryMetadata),
             };
         }
     }

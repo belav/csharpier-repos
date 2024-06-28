@@ -76,7 +76,9 @@ namespace Mono.AppleTls
         BadConfiguration = -9848,
         UnexpectedRecord = -9849,
         SSLWeakPeerEphemeralDHKey = -9850,
-        ClientHelloReceived = -9851 // non falta
+        ClientHelloReceived =
+            -9851 // non falta
+        ,
     }
 
     // Security.framework/Headers/SecureTransport.h
@@ -134,7 +136,7 @@ namespace Mono.AppleTls
         Handshake,
         Connected,
         Closed,
-        Aborted
+        Aborted,
     }
 
     // Security.framework/Headers/SecureTransport.h
@@ -144,7 +146,7 @@ namespace Mono.AppleTls
         None,
         Requested,
         Sent,
-        Rejected
+        Rejected,
     }
 
     // Security.framework/Headers/CipherSuite.h

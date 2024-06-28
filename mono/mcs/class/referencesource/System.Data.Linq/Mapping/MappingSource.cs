@@ -441,7 +441,7 @@ namespace System.Data.Linq.Mapping
                 {
                     XmlMappingConstant.Name,
                     XmlMappingConstant.Method,
-                    XmlMappingConstant.IsComposable
+                    XmlMappingConstant.IsComposable,
                 }
             );
 
@@ -548,7 +548,7 @@ namespace System.Data.Linq.Mapping
                     XmlMappingConstant.Name,
                     XmlMappingConstant.DbType,
                     XmlMappingConstant.Parameter,
-                    XmlMappingConstant.Direction
+                    XmlMappingConstant.Direction,
                 }
             );
 
@@ -697,7 +697,7 @@ namespace System.Data.Linq.Mapping
                 {
                     XmlMappingConstant.Name,
                     XmlMappingConstant.InheritanceCode,
-                    XmlMappingConstant.IsInheritanceDefault
+                    XmlMappingConstant.IsInheritanceDefault,
                 }
             );
 
@@ -838,7 +838,7 @@ namespace System.Data.Linq.Mapping
                     XmlMappingConstant.Expression,
                     XmlMappingConstant.CanBeNull,
                     XmlMappingConstant.UpdateCheck,
-                    XmlMappingConstant.AutoSync
+                    XmlMappingConstant.AutoSync,
                 }
             );
 

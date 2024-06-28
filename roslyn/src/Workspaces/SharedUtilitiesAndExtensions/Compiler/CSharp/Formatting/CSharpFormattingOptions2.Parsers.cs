@@ -95,11 +95,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             (NewLineBeforeOpenBracePlacement)ParseEditorConfigFlags(
                 list,
                 static s =>
-                    s_newLineOptionsEditorConfigMap.TryGetValue(s, out var v)
-                        ? (int)v
-                        : s_legacyNewLineOptionsEditorConfigMap.TryGetValue(s, out v)
-                            ? (int)v
-                            : 0,
+                    s_newLineOptionsEditorConfigMap.TryGetValue(s, out var v) ? (int)v
+                    : s_legacyNewLineOptionsEditorConfigMap.TryGetValue(s, out v) ? (int)v
+                    : 0,
                 noneToken: "none",
                 allToken: "all",
                 allValue: (int)NewLineBeforeOpenBracePlacement.All
@@ -110,12 +108,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
             {
                 NewLineBeforeOpenBracePlacement.None => "none",
                 NewLineBeforeOpenBracePlacement.All => "all",
-                _ =>
-                    ToEditorConfigFlagList(
-                        (int)value,
-                        static v =>
-                            s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v]
-                    )
+                _ => ToEditorConfigFlagList(
+                    (int)value,
+                    static v => s_newLineOptionsEditorConfigMap[(NewLineBeforeOpenBracePlacement)v]
+                ),
             };
 
         internal static BinaryOperatorSpacingOptions ParseEditorConfigSpacingAroundBinaryOperator(

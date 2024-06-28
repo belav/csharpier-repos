@@ -43,6 +43,6 @@ namespace Newtonsoft.Json.Linq
         /// <summary>
         /// Throw a <see cref="JsonReaderException"/> when a duplicate property is encountered.
         /// </summary>
-        Error = 2
+        Error = 2,
     }
 }

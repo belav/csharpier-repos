@@ -112,7 +112,7 @@ internal static partial class Interop
                             new()
                             {
                                 MulticastAddress = new byte[MulticastAddressLength],
-                                InterfaceIndex = _interfaceIndex
+                                InterfaceIndex = _interfaceIndex,
                             };
                         MemoryMarshal
                             .CreateReadOnlySpan(ref _multicastAddress[0], MulticastAddressLength)

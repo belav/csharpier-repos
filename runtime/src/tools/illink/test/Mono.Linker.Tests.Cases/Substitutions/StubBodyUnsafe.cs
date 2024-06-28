@@ -14,7 +14,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "conv.i", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "conv.i", "ret" })]
         static unsafe byte* TestMethod_1()
         {
             throw new NotImplementedException();

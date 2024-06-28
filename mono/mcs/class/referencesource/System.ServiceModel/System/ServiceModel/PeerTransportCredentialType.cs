@@ -6,7 +6,7 @@ namespace System.ServiceModel
     public enum PeerTransportCredentialType
     {
         Password,
-        Certificate
+        Certificate,
     }
 
     static class PeerTransportCredentialTypeHelper

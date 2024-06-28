@@ -28,7 +28,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         enum TestEnum
         {
             [Kept]
-            E = 3
+            E = 3,
         }
 
         [Kept]
@@ -112,7 +112,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
                 "pop",
                 "ldsfld System.DateTime System.DateTime::MinValue",
                 "call System.Void System.Console::WriteLine()",
-                "ret"
+                "ret",
             }
         )]
         static DateTime Test3b()
@@ -141,7 +141,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
                 "pop",
                 "call System.Void System.Console::WriteLine()",
                 "ldc.i4.3",
-                "ret"
+                "ret",
             }
         )]
         static TestEnum Test4()

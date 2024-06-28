@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                         descriptor.Value.descriptor64,
                         descriptor.Value.descriptor64ServerGC,
                         descriptor.Value.descriptorCoreClr64,
-                        descriptor.Value.descriptorCoreClr64ServerGC
+                        descriptor.Value.descriptorCoreClr64ServerGC,
                     }
                 );
 
@@ -256,7 +256,7 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 LineFormattingOptions.Default,
                 DocumentFormattingOptions.Default,
                 HighlightingOptions.Default,
-                DocumentationCommentOptions.Default
+                DocumentationCommentOptions.Default,
             };
 
             foreach (var original in options)
@@ -303,11 +303,14 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                 new CSharpSyntaxFormattingOptions()
                 {
                     AccessibilityModifiersRequired = AccessibilityModifiersRequired.Always,
-                    Indentation = IndentationPlacement.SwitchSection
+                    Indentation = IndentationPlacement.SwitchSection,
                 },
                 new CSharpSimplifierOptions()
                 {
-                    QualifyFieldAccess = new CodeStyleOption2<bool>(true, NotificationOption2.Error)
+                    QualifyFieldAccess = new CodeStyleOption2<bool>(
+                        true,
+                        NotificationOption2.Error
+                    ),
                 },
                 new CSharpCodeGenerationOptions()
                 {
@@ -315,12 +318,12 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     PreferExpressionBodiedIndexers = new CodeStyleOption2<ExpressionBodyPreference>(
                         ExpressionBodyPreference.WhenOnSingleLine,
                         NotificationOption2.Error
-                    )
+                    ),
                 },
                 new CSharpSyntaxFormattingOptions()
                 {
                     AccessibilityModifiersRequired = AccessibilityModifiersRequired.Always,
-                    NewLines = NewLinePlacement.BeforeFinally
+                    NewLines = NewLinePlacement.BeforeFinally,
                 },
                 new CSharpIdeCodeStyleOptions()
                 {
@@ -331,19 +334,22 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     PreferConditionalDelegateCall = new CodeStyleOption2<bool>(
                         false,
                         NotificationOption2.Error
-                    )
+                    ),
                 },
                 new VisualBasicSyntaxFormattingOptions()
                 {
-                    AccessibilityModifiersRequired = AccessibilityModifiersRequired.Always
+                    AccessibilityModifiersRequired = AccessibilityModifiersRequired.Always,
                 },
                 new VisualBasicSimplifierOptions()
                 {
-                    QualifyFieldAccess = new CodeStyleOption2<bool>(true, NotificationOption2.Error)
+                    QualifyFieldAccess = new CodeStyleOption2<bool>(
+                        true,
+                        NotificationOption2.Error
+                    ),
                 },
                 new VisualBasicCodeGenerationOptions()
                 {
-                    NamingStyle = OptionsTestHelpers.GetNonDefaultNamingStylePreference()
+                    NamingStyle = OptionsTestHelpers.GetNonDefaultNamingStylePreference(),
                 },
                 new VisualBasicIdeCodeStyleOptions()
                 {
@@ -354,8 +360,8 @@ namespace Microsoft.CodeAnalysis.Remote.UnitTests
                     PreferredModifierOrder = new CodeStyleOption2<string>(
                         "Public Private",
                         NotificationOption2.Error
-                    )
-                }
+                    ),
+                },
             };
 
             foreach (var original in options)

@@ -108,7 +108,7 @@ public sealed class SocketConnectionContextFactory : IDisposable
                     ),
                     SocketSenderPool = new SocketSenderPool(PipeScheduler.Inline),
                     MemoryPool = memoryPool,
-                }
+                },
             };
             _settingsCount = 1;
         }

@@ -4,7 +4,7 @@ using System;
 
 enum MyEnum : short
 {
-    V_4 = 4
+    V_4 = 4,
 }
 
 class ConstantPattern

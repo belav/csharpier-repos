@@ -280,7 +280,7 @@ namespace System.ServiceModel.Channels
                     : default(OperationWithTimeoutBeginCallback),
                 this.shutdownHandle.BeginWait,
                 this.sendGuard.BeginClose,
-                this.beginSendAckRequestedHandler
+                this.beginSendAckRequestedHandler,
             };
 
             endCallbacks = new OperationEndCallback[]
@@ -288,7 +288,7 @@ namespace System.ServiceModel.Channels
                 completeTransfer ? this.EndCompleteTransfer : default(OperationEndCallback),
                 this.shutdownHandle.EndWait,
                 this.sendGuard.EndClose,
-                this.endSendAckRequestedHandler
+                this.endSendAckRequestedHandler,
             };
 
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(

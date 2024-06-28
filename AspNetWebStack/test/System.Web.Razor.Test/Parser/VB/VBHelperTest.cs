@@ -140,7 +140,7 @@ namespace System.Web.Razor.Test.Parser.VB
                         16,
                         1,
                         7
-                    )
+                    ),
                 }
             );
         }
@@ -186,7 +186,7 @@ namespace System.Web.Razor.Test.Parser.VB
                         15,
                         0,
                         15
-                    )
+                    ),
                 }
             );
         }
@@ -498,7 +498,7 @@ namespace System.Web.Razor.Test.Parser.VB
                 designTimeParser: true,
                 expectedErrors: new[]
                 {
-                    new RazorError(RazorResources.ParseError_Helpers_Cannot_Be_Nested, 30, 1, 5)
+                    new RazorError(RazorResources.ParseError_Helpers_Cannot_Be_Nested, 30, 1, 5),
                 }
             );
         }

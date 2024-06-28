@@ -143,7 +143,7 @@
                     WorkflowMenuCommands.ZoomIn,
                     WorkflowMenuCommands.ZoomOut,
                     WorkflowMenuCommands.Pan,
-                    WorkflowMenuCommands.DefaultFilter
+                    WorkflowMenuCommands.DefaultFilter,
                 };
                 foreach (CommandID affectedCommand in affectedCommands)
                 {

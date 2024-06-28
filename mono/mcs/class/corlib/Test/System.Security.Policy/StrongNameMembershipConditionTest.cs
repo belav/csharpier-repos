@@ -221,7 +221,7 @@ namespace MonoTests.System.Security.Policy
             0x4D,
             0x5A,
             0xD2,
-            0x93
+            0x93,
         };
 
         private Evidence CreateHostEvidence(object o)

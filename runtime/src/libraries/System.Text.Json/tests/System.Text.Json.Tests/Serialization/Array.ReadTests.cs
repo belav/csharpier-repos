@@ -241,49 +241,49 @@ namespace System.Text.Json.Serialization.Tests
                     $"[null, null, {SimpleTestClass.s_json}]",
                     true,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     $"[null, {SimpleTestClass.s_json}, null]",
                     true,
                     false,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     $"[null, {SimpleTestClass.s_json}, {SimpleTestClass.s_json}]",
                     true,
                     false,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     $"[{SimpleTestClass.s_json}, {SimpleTestClass.s_json}, {SimpleTestClass.s_json}]",
                     false,
                     false,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     $"[{SimpleTestClass.s_json}, {SimpleTestClass.s_json}, null]",
                     false,
                     false,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     $"[{SimpleTestClass.s_json}, null, {SimpleTestClass.s_json}]",
                     false,
                     true,
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     $"[{SimpleTestClass.s_json}, null, null]",
                     false,
                     true,
-                    true
+                    true,
                 };
             }
         }
@@ -805,7 +805,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             Dealer dealer = new Dealer
             {
-                NetworkCodeList = new List<string> { "Network1", "Network2" }
+                NetworkCodeList = new List<string> { "Network1", "Network2" },
             };
 
             string serialized = JsonSerializer.Serialize(dealer);

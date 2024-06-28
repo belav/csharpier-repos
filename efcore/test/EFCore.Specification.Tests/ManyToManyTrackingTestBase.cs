@@ -57,7 +57,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
                     context
                         .Set<EntityLeaf>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
                 leftEntities[0].LeafSkipFull = CreateCollection<EntityLeaf>();
@@ -699,7 +699,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
                     context
                         .Set<EntityRoot>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
                 leftEntities[0].RootSkipShared = CreateCollection<EntityRoot>();
@@ -850,7 +850,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                 e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
                                 e.Name = "Z7724";
                             }
-                        )
+                        ),
                 };
 
                 leftEntities[0].RootSkipShared.Add(roots[0]);
@@ -1275,7 +1275,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                 e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
                                 e.Name = "Z7723";
                             }
-                        )
+                        ),
                 };
 
                 leftEntities[0].ThreeSkipFull = CreateCollection<EntityThree>();
@@ -1448,7 +1448,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                 e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
                                 e.Name = "Z7724";
                             }
-                        )
+                        ),
                 };
 
                 var composites = new[]
@@ -1484,7 +1484,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             e.Key2 = "Z7714";
                             e.Key3 = new DateTime(7714, 1, 1);
                         }
-                    )
+                    ),
                 };
 
                 leftEntities[0].ThreeSkipFull.Add(threes[0]);
@@ -1891,7 +1891,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -1903,7 +1903,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].SelfSkipSharedLeft = CreateCollection<EntityTwo>();
@@ -2076,7 +2076,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
                             e.Name = "Z7714";
                         }
-                    )
+                    ),
                 };
 
                 leftEntities[0].SelfSkipSharedRight.Add(twos[0]);
@@ -2268,7 +2268,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -2280,7 +2280,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityThrees.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].ThreeSkipFull = CreateCollection<EntityThree>();
@@ -2649,7 +2649,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
                     context
                         .Set<EntityBranch>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
                 leftEntities[0].BranchSkip = CreateCollection<EntityBranch>();
@@ -2987,7 +2987,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -2999,7 +2999,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].SelfSkipPayloadLeft = CreateCollection<EntityOne>();
@@ -3195,7 +3195,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             e.Id = Fixture.UseGeneratedKeys ? 0 : 7714;
                             e.Name = "Z7714";
                         }
-                    )
+                    ),
                 };
 
                 leftEntities[0].SelfSkipPayloadRight.Add(ones[0]);
@@ -3437,7 +3437,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -3449,7 +3449,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityThrees.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].ThreeSkipPayloadFullShared = CreateCollection<EntityThree>();
@@ -3876,7 +3876,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -3888,7 +3888,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].TwoSkipShared = CreateCollection<EntityTwo>();
@@ -4216,7 +4216,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -4228,7 +4228,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityThrees.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].ThreeSkipPayloadFull = CreateCollection<EntityThree>();
@@ -4868,7 +4868,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -4880,7 +4880,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].TwoSkip = CreateCollection<EntityTwo>();
@@ -5003,7 +5003,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -5015,7 +5015,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].TwoSkip = CreateCollection<EntityTwo>();
@@ -5244,7 +5244,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityOnes.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -5256,7 +5256,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     ),
                     context.EntityTwos.CreateInstance(
                         (e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723
-                    )
+                    ),
                 };
 
                 leftEntities[0].TwoSkip = CreateCollection<EntityTwo>();
@@ -5438,7 +5438,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             e.Id = Fixture.UseGeneratedKeys ? 0 : 7724;
                             e.Name = "Z7724";
                         }
-                    )
+                    ),
                 };
 
                 var ones = new[]
@@ -5777,7 +5777,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
                     context
                         .Set<ImplicitManyToManyA>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
@@ -5789,7 +5789,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
                     context
                         .Set<ImplicitManyToManyB>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
                 leftEntities[0].Bs.Add(rightEntities[0]); // 11 - 21
@@ -5904,13 +5904,13 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                 {
                     context.Set<GeneratedKeysLeft>().CreateInstance(),
                     context.Set<GeneratedKeysLeft>().CreateInstance(),
-                    context.Set<GeneratedKeysLeft>().CreateInstance()
+                    context.Set<GeneratedKeysLeft>().CreateInstance(),
                 };
                 var rightEntities = new[]
                 {
                     context.Set<GeneratedKeysRight>().CreateInstance(),
                     context.Set<GeneratedKeysRight>().CreateInstance(),
-                    context.Set<GeneratedKeysRight>().CreateInstance()
+                    context.Set<GeneratedKeysRight>().CreateInstance(),
                 };
 
                 leftEntities[0].Rights.Add(rightEntities[0]); // 11 - 21
@@ -6053,7 +6053,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .Set<GeneratedKeysLeft>()
                         .CreateInstance((e, p) => e.Id = existingLeftId),
                     context.Set<GeneratedKeysLeft>().CreateInstance(),
-                    context.Set<GeneratedKeysLeft>().CreateInstance()
+                    context.Set<GeneratedKeysLeft>().CreateInstance(),
                 };
                 var rightEntities = new[]
                 {
@@ -6061,7 +6061,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .Set<GeneratedKeysRight>()
                         .CreateInstance((e, p) => e.Id = existingRightId),
                     context.Set<GeneratedKeysRight>().CreateInstance(),
-                    context.Set<GeneratedKeysRight>().CreateInstance()
+                    context.Set<GeneratedKeysRight>().CreateInstance(),
                 };
 
                 leftEntities[0].Rights.Add(rightEntities[0]); // 11 - 21
@@ -6212,7 +6212,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7712),
                     context
                         .Set<ImplicitManyToManyA>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7713),
                 };
                 var rightEntities = new[]
                 {
@@ -6224,7 +6224,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                         .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7722),
                     context
                         .Set<ImplicitManyToManyB>()
-                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723)
+                        .CreateInstance((e, p) => e.Id = Fixture.UseGeneratedKeys ? 0 : 7723),
                 };
 
                 leftEntities[0].Bs.Add(rightEntities[0]); // 11 - 21
@@ -6323,7 +6323,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                     1 => (IQueryable<object>)context.Set<EntityOne>(),
                     2 => context.Set<EntityTwo>(),
                     3 => context.Set<JoinOneToTwo>(),
-                    _ => throw new ArgumentException()
+                    _ => throw new ArgumentException(),
                 }
             ).Load();
         }
@@ -6516,7 +6516,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             e.Id = Fixture.UseGeneratedKeys ? 0 : 7713;
                             e.Name = "Z7713";
                         }
-                    )
+                    ),
                 };
                 var rightEntities = new[]
                 {
@@ -6540,7 +6540,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             e.Id = Fixture.UseGeneratedKeys ? 0 : 7723;
                             e.Name = "Z7723";
                         }
-                    )
+                    ),
                 };
 
                 var joinEntities = new[]
@@ -6589,7 +6589,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                 e.Two = leftEntities[2];
                                 e.Three = rightEntities[0];
                             }
-                        )
+                        ),
                 };
 
                 if (async)
@@ -6854,7 +6854,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             new Dictionary<string, object>
                             {
                                 ["SelfSkipSharedLeftId"] = leftId,
-                                ["SelfSkipSharedRightId"] = rightId
+                                ["SelfSkipSharedRightId"] = rightId,
                             }
                         );
                 }
@@ -6985,7 +6985,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                     CompositeId1 = leftKey1,
                                     CompositeId2 = leftKey2,
                                     CompositeId3 = leftKey3,
-                                    LeafId = rightId
+                                    LeafId = rightId,
                                 }
                             : useNavs
                                 ? context.CreateProxy<JoinCompositeKeyToLeaf>(e =>
@@ -7137,14 +7137,14 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                 ? new JoinThreeToCompositeKeyFull
                                 {
                                     Composite = left,
-                                    Three = right
+                                    Three = right,
                                 }
                                 : new JoinThreeToCompositeKeyFull
                                 {
                                     CompositeId1 = leftKey1,
                                     CompositeId2 = leftKey2,
                                     CompositeId3 = leftKey3,
-                                    ThreeId = rightId
+                                    ThreeId = rightId,
                                 }
                             : useNavs
                                 ? context.CreateProxy<JoinThreeToCompositeKeyFull>(e =>
@@ -7396,7 +7396,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             new Dictionary<string, object>
                             {
                                 ["OneId"] = leftId,
-                                ["ThreeId"] = rightId
+                                ["ThreeId"] = rightId,
                             }
                         );
                 }
@@ -7512,7 +7512,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                             new Dictionary<string, object>
                             {
                                 ["OneSkipSharedId"] = leftId,
-                                ["TwoSkipSharedId"] = rightId
+                                ["TwoSkipSharedId"] = rightId,
                             }
                         );
                 }
@@ -7630,7 +7630,7 @@ public abstract partial class ManyToManyTrackingTestBase<TFixture> : IClassFixtu
                                 : new JoinOneToThreePayloadFull
                                 {
                                     OneId = leftId,
-                                    ThreeId = rightId
+                                    ThreeId = rightId,
                                 }
                             : useNavs
                                 ? context.CreateProxy<JoinOneToThreePayloadFull>(e =>

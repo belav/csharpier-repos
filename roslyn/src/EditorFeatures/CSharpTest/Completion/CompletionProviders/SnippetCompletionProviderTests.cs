@@ -270,7 +270,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         PreProcessorSnippetTitle,
                         PreProcessorSnippetDescription,
                         PreProcessorSnippetPath
-                    )
+                    ),
                 };
 
             public bool SnippetShortcutExists_NonBlocking(string shortcut) =>

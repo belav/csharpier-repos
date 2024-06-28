@@ -219,7 +219,7 @@ namespace System.Xml.Xsl
                 {
                     sourceUri,
                     lineNumber.ToString(CultureInfo.InvariantCulture),
-                    linePosition.ToString(CultureInfo.InvariantCulture)
+                    linePosition.ToString(CultureInfo.InvariantCulture),
                 },
                 sourceUri,
                 lineNumber,

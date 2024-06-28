@@ -30,7 +30,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("Get")
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
                 }
             );
             CancellationToken cancellationToken = new CancellationToken();
@@ -55,18 +55,18 @@ namespace System.Web.Http.ModelBinding
             {
                 FirstName = "FirstName",
                 LastName = "LastName",
-                Id = 1
+                Id = 1,
             };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
             context.ControllerContext.Request = new HttpRequestMessage
             {
-                Content = new ObjectContent<ActionValueItem>(cust, new JsonMediaTypeFormatter())
+                Content = new ObjectContent<ActionValueItem>(cust, new JsonMediaTypeFormatter()),
             };
             CancellationToken cancellationToken = new CancellationToken();
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
@@ -93,12 +93,12 @@ namespace System.Web.Http.ModelBinding
                     new HttpRequestMessage()
                     {
                         Method = HttpMethod.Get,
-                        RequestUri = new Uri("http://localhost?A1=&A2=&A3=&A4=")
+                        RequestUri = new Uri("http://localhost?A1=&A2=&A3=&A4="),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetTestEmptyString")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetTestEmptyString"),
                 }
             );
 
@@ -130,12 +130,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("Get")
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
                 }
             );
 
@@ -168,12 +168,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromUri"),
                 }
             );
 
@@ -206,12 +206,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
                 }
             );
 
@@ -245,12 +245,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?id=5&firstName=queryFirstName&lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexTypeUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexTypeUri"),
                 }
             );
 
@@ -284,12 +284,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?items[0].id=5&items[0].firstName=queryFirstName&items[0].lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri"),
                 }
             );
 
@@ -324,12 +324,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?id=5&firstName=queryFirstName&items.lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerableUri"),
                 }
             );
 
@@ -361,12 +361,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?item.id=5&item.firstName=queryFirstName&item.lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
                 }
             );
 
@@ -399,12 +399,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?item.id=5&item.firstName=queryFirstName&item.lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri"),
                 }
             );
 
@@ -436,7 +436,7 @@ namespace System.Web.Http.ModelBinding
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromCustom")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromCustom"),
                 }
             );
 
@@ -469,13 +469,13 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?custid=5&first=renamedFirstName&last=renamedLastName"
-                        )
+                        ),
                         // notice the query string names match the prefixes in GetFromNamed() and not the actual parameter names
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromNamed")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromNamed"),
                 }
             );
 
@@ -508,12 +508,12 @@ namespace System.Web.Http.ModelBinding
                         Method = HttpMethod.Get,
                         RequestUri = new Uri(
                             "http://localhost?id=100&firstName=queryFirstName&lastName=queryLastName"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
                 }
             );
 
@@ -546,12 +546,12 @@ namespace System.Web.Http.ModelBinding
                     new HttpRequestMessage()
                     {
                         Method = HttpMethod.Get,
-                        RequestUri = new Uri("http://localhost")
+                        RequestUri = new Uri("http://localhost"),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("Get")
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
                 }
             );
 
@@ -588,12 +588,12 @@ namespace System.Web.Http.ModelBinding
                     new HttpRequestMessage()
                     {
                         Method = HttpMethod.Get,
-                        RequestUri = new Uri("http://localhost")
+                        RequestUri = new Uri("http://localhost"),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("Get")
+                    MethodInfo = typeof(ActionValueController).GetMethod("Get"),
                 }
             );
 
@@ -630,12 +630,12 @@ namespace System.Web.Http.ModelBinding
                     new HttpRequestMessage()
                     {
                         Method = HttpMethod.Get,
-                        RequestUri = new Uri("http://localhost")
+                        RequestUri = new Uri("http://localhost"),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItem"),
                 }
             );
 
@@ -672,12 +672,12 @@ namespace System.Web.Http.ModelBinding
                     new HttpRequestMessage()
                     {
                         Method = HttpMethod.Get,
-                        RequestUri = new Uri("http://localhost")
+                        RequestUri = new Uri("http://localhost"),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetItemFromUri"),
                 }
             );
 
@@ -712,7 +712,9 @@ namespace System.Web.Http.ModelBinding
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetFromCancellationToken")
+                    MethodInfo = typeof(ActionValueController).GetMethod(
+                        "GetFromCancellationToken"
+                    ),
                 }
             );
 
@@ -749,7 +751,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -786,7 +788,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -816,7 +818,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -852,7 +854,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -875,7 +877,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = 7,
                 FirstName = "testFirstName",
-                LastName = "testLastName"
+                LastName = "testLastName",
             };
             ObjectContent<ActionValueItem> tempContent = new ObjectContent<ActionValueItem>(
                 item,
@@ -888,7 +890,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -930,7 +932,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -959,7 +961,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = 101,
                 FirstName = "testFirstName",
-                LastName = "testLastName"
+                LastName = "testLastName",
             };
             var tempContent = new ObjectContent<ActionValueItem>(item, new XmlMediaTypeFormatter());
             StringContent stringContent = new StringContent(await tempContent.ReadAsStringAsync());
@@ -969,7 +971,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -991,7 +993,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
 
@@ -1021,14 +1023,14 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage()
             {
                 RequestUri = new Uri("http://localhost/ActionValueController/PostFromBody?id=123"),
-                Content = stringContent
+                Content = stringContent,
             };
 
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostFromBodyAndUri")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostFromBodyAndUri"),
                 }
             );
 
@@ -1068,7 +1070,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostFromBody")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostFromBody"),
                 }
             );
 
@@ -1105,7 +1107,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostComplexType"),
                 }
             );
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
@@ -1142,7 +1144,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerable")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostEnumerable"),
                 }
             );
 
@@ -1172,7 +1174,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = 7,
                 FirstName = "testFirstName",
-                LastName = "testLastName"
+                LastName = "testLastName",
             };
             string json = "{\"a\":123,\"b\":[false,null,12.34]}";
             JToken jt = JToken.Parse(json);
@@ -1184,7 +1186,7 @@ namespace System.Web.Http.ModelBinding
                 ContextUtil.CreateControllerContext(request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostJsonValue")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostJsonValue"),
                 }
             );
 
@@ -1214,12 +1216,12 @@ namespace System.Web.Http.ModelBinding
                         Method = new HttpMethod("Patch"),
                         RequestUri = new Uri(
                             "http://localhost?x=123&y=456&data.description=mypoint"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("Patch")
+                    MethodInfo = typeof(ActionValueController).GetMethod("Patch"),
                 }
             );
 
@@ -1234,7 +1236,7 @@ namespace System.Web.Http.ModelBinding
             {
                 X = 123,
                 Y = 456,
-                Data = new Data { Description = "mypoint" }
+                Data = new Data { Description = "mypoint" },
             };
             Assert.Equal(
                 expectedResult,
@@ -1255,12 +1257,12 @@ namespace System.Web.Http.ModelBinding
                         Method = new HttpMethod("Options"),
                         RequestUri = new Uri(
                             "http://localhost?x=123&y=456&data.description=mypoint"
-                        )
+                        ),
                     }
                 ),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("Options")
+                    MethodInfo = typeof(ActionValueController).GetMethod("Options"),
                 }
             );
 
@@ -1275,7 +1277,7 @@ namespace System.Web.Http.ModelBinding
             {
                 X = 123,
                 Y = 456,
-                Data = new Data { Description = "mypoint" }
+                Data = new Data { Description = "mypoint" },
             };
             Assert.Equal(
                 expectedResult,
@@ -1293,7 +1295,7 @@ namespace System.Web.Http.ModelBinding
 
             HttpRequestMessage request = new HttpRequestMessage()
             {
-                RequestUri = new Uri("http://localhost")
+                RequestUri = new Uri("http://localhost"),
             };
 
             HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
@@ -1304,7 +1306,7 @@ namespace System.Web.Http.ModelBinding
                 controllerContext,
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("GetData")
+                    MethodInfo = typeof(ActionValueController).GetMethod("GetData"),
                 }
             );
 
@@ -1330,7 +1332,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = 7,
                 FirstName = "testFirstName",
-                LastName = "testLastName"
+                LastName = "testLastName",
             };
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -1338,13 +1340,13 @@ namespace System.Web.Http.ModelBinding
                     typeof(ActionValueItem),
                     item,
                     config.Formatters.JsonFormatter
-                )
+                ),
             };
             HttpActionContext context = ContextUtil.CreateActionContext(
                 ContextUtil.CreateControllerContext(config, request),
                 new ReflectedHttpActionDescriptor()
                 {
-                    MethodInfo = typeof(ActionValueController).GetMethod("PostItem")
+                    MethodInfo = typeof(ActionValueController).GetMethod("PostItem"),
                 }
             );
             DefaultActionValueBinder provider = new DefaultActionValueBinder();
@@ -1425,7 +1427,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = id,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
             };
         }
 
@@ -1440,7 +1442,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = id,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
             };
         }
 
@@ -1467,7 +1469,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = id,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
             };
         }
 
@@ -1492,7 +1494,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = id,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
             };
         }
 
@@ -1558,7 +1560,7 @@ namespace System.Web.Http.ModelBinding
             {
                 Id = id,
                 FirstName = firstName,
-                LastName = lastName
+                LastName = lastName,
             };
         }
 

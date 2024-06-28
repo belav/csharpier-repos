@@ -97,28 +97,28 @@ namespace System.Tests
             new object[]
             {
                 new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
-                new ConsoleKeyInfo('b', ConsoleKey.A, true, true, true)
+                new ConsoleKeyInfo('b', ConsoleKey.A, true, true, true),
             },
             new object[]
             {
                 new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
-                new ConsoleKeyInfo('a', ConsoleKey.B, true, true, true)
+                new ConsoleKeyInfo('a', ConsoleKey.B, true, true, true),
             },
             new object[]
             {
                 new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
-                new ConsoleKeyInfo('a', ConsoleKey.A, false, true, true)
+                new ConsoleKeyInfo('a', ConsoleKey.A, false, true, true),
             },
             new object[]
             {
                 new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
-                new ConsoleKeyInfo('a', ConsoleKey.A, true, false, true)
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, false, true),
             },
             new object[]
             {
                 new ConsoleKeyInfo('a', ConsoleKey.A, true, true, true),
-                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, false)
-            }
+                new ConsoleKeyInfo('a', ConsoleKey.A, true, true, false),
+            },
         };
 
         public static readonly object[][] SampleConsoleKeyInfos =

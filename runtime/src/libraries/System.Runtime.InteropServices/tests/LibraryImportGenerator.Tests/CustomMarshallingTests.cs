@@ -221,7 +221,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = true,
                 b2 = false,
-                b3 = true
+                b3 = true,
             };
 
             NativeExportsNE.Stateless.NegateBools(boolStruct, out BoolStruct boolStructNegated);
@@ -251,7 +251,7 @@ namespace LibraryImportGenerator.IntegrationTests
             var expected = new StringContainer
             {
                 str1 = ReverseUTF8Bytes(stringContainer.str1),
-                str2 = ReverseUTF8Bytes(stringContainer.str2)
+                str2 = ReverseUTF8Bytes(stringContainer.str2),
             };
 
             var stringContainerCopy = stringContainer;
@@ -276,7 +276,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = b1,
                 b2 = b2,
-                b3 = b3
+                b3 = b3,
             };
 
             Assert.Equal(b1 && b2 && b3, NativeExportsNE.Stateless.AndBoolsRef(container));
@@ -353,7 +353,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = true,
                 b2 = false,
-                b3 = true
+                b3 = true,
             };
 
             NativeExportsNE.Stateful.NegateBools(boolStruct, out BoolStruct boolStructNegated);
@@ -378,7 +378,7 @@ namespace LibraryImportGenerator.IntegrationTests
             {
                 b1 = b1,
                 b2 = b2,
-                b3 = b3
+                b3 = b3,
             };
 
             Assert.Equal(b1 && b2 && b3, NativeExportsNE.Stateful.AndBoolsRef(container));

@@ -261,7 +261,7 @@ namespace System.IO.Tests
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
-                    AutoFlush = autoFlush
+                    AutoFlush = autoFlush,
                 }
             )
             {
@@ -300,7 +300,7 @@ namespace System.IO.Tests
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
-                    AutoFlush = autoFlush
+                    AutoFlush = autoFlush,
                 }
             )
             {
@@ -339,7 +339,7 @@ namespace System.IO.Tests
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
-                    AutoFlush = autoFlush
+                    AutoFlush = autoFlush,
                 }
             )
             {
@@ -381,7 +381,7 @@ namespace System.IO.Tests
             using (
                 var writer = new StreamWriter(s, Encoding.ASCII, writerBufferSize)
                 {
-                    AutoFlush = autoFlush
+                    AutoFlush = autoFlush,
                 }
             )
             {

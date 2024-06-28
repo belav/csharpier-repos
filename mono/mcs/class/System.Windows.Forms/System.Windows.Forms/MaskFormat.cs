@@ -34,6 +34,6 @@ namespace System.Windows.Forms
         ExcludePromptAndLiterals = 0,
         IncludePrompt = 1,
         IncludeLiterals = 2,
-        IncludePromptAndLiterals = 3
+        IncludePromptAndLiterals = 3,
     }
 }

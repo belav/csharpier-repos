@@ -215,7 +215,7 @@ namespace System.Web.WebPages.Deployment.Test
                 "System.Web.WebPages.Administration, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
                 "System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
                 "WebMatrix.Data, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
-                "WebMatrix.WebData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+                "WebMatrix.WebData, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
             };
 
             // Act
@@ -294,14 +294,14 @@ namespace System.Web.WebPages.Deployment.Test
                     @"x:\site\bin\A.dll",
                     new List<string>
                     {
-                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null"
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=null",
                     }
                 },
                 {
                     @"x:\site\bin\B.dll",
                     new List<string>
                     {
-                        "System.Web.Mvc, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+                        "System.Web.Mvc, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
                     }
                 },
             };
@@ -371,7 +371,7 @@ namespace System.Web.WebPages.Deployment.Test
                             CultureInfo.InvariantCulture,
                             "System.Web.Helpers, Version={0}, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
                             AssemblyUtils.ThisAssemblyName.Version
-                        )
+                        ),
                     }
                 },
                 {

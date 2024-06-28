@@ -31,7 +31,7 @@ namespace Microsoft.AspNet.Facebook.Test
                     {
                         "signed_request",
                         "x1yDEgacN3N5iu23Ji8NLYp9LGO1-cUXKHTJQrMqzVQ.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImV4cGlyZXMiOjEzNTM5MTMyMDAsImlzc3VlZF9hdCI6MTM1MzkwNzQ5Miwib2F1dGhfdG9rZW4iOiJBQUFGUlJPcWtwZ01CQURBSjNQZk5vNldXMlJ5WkFSQ1hjU0daQlhpNTBLTG9wRzFwYmFwc2M2aThKY3h6WkFQN1pDSnlpcXVHYlc3WXlCam1aQjh0UWpyelZ2VTNrYm44b3N3WXR5czkzTWdaRFpEIiwidXNlciI6eyJjb3VudHJ5IjoidXMiLCJsb2NhbGUiOiJlbl9VUyIsImFnZSI6eyJtaW4iOjIxfX0sInVzZXJfaWQiOiIxNzgyNTkwMSJ9"
-                    }
+                    },
                 }
             );
             ModelBindingContext modelBindingContext = new ModelBindingContext();
@@ -59,7 +59,7 @@ namespace Microsoft.AspNet.Facebook.Test
                     {
                         "signed_request",
                         "x1yDEgacN3N5iu23Ji8NLYp9LGO1-cUXKHTJQrMqzVQ.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImV4cGlyZXMiOjEzNTM5MTMyMDAsImlzc3VlZF9hdCI6MTM1MzkwNzQ5Miwib2F1dGhfdG9rZW4iOiJBQUFGUlJPcWtwZ01CQURBSjNQZk5vNldXMlJ5WkFSQ1hjU0daQlhpNTBLTG9wRzFwYmFwc2M2aThKY3h6WkFQN1pDSnlpcXVHYlc3WXlCam1aQjh0UWpyelZ2VTNrYm44b3N3WXR5czkzTWdaRFpEIiwidXNlciI6eyJjb3VudHJ5IjoidXMiLCJsb2NhbGUiOiJlbl9VUyIsImFnZSI6eyJtaW4iOjIxfX0sInVzZXJfaWQiOiIxNzgyNTkwMSJ9"
-                    }
+                    },
                 }
             );
 

@@ -64,7 +64,7 @@ namespace System.Net.Http.Functional.Tests
                             var contentSending = new TaskCompletionSource<bool>();
                             var req = new HttpRequestMessage(HttpMethod.Post, uri)
                             {
-                                Version = UseVersion
+                                Version = UseVersion,
                             };
                             req.Content = new ByteAtATimeContent(
                                 int.MaxValue,
@@ -162,7 +162,7 @@ namespace System.Net.Http.Functional.Tests
                         {
                             var req = new HttpRequestMessage(HttpMethod.Get, url)
                             {
-                                Version = UseVersion
+                                Version = UseVersion,
                             };
                             req.Headers.ConnectionClose = connectionClose;
 
@@ -248,7 +248,7 @@ namespace System.Net.Http.Functional.Tests
                         {
                             var req = new HttpRequestMessage(HttpMethod.Get, url)
                             {
-                                Version = UseVersion
+                                Version = UseVersion,
                             };
                             req.Headers.ConnectionClose = connectionClose;
 
@@ -344,7 +344,7 @@ namespace System.Net.Http.Functional.Tests
 
                         var req = new HttpRequestMessage(HttpMethod.Get, url)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         req.Headers.ConnectionClose = connectionClose;
 
@@ -426,7 +426,7 @@ namespace System.Net.Http.Functional.Tests
                                 HttpStatusCode.OK,
                                 headers: new HttpHeaderData[]
                                 {
-                                    new HttpHeaderData("Content-Length", contentLength.ToString())
+                                    new HttpHeaderData("Content-Length", contentLength.ToString()),
                                 },
                                 isFinal: false
                             );
@@ -757,7 +757,7 @@ namespace System.Net.Http.Functional.Tests
                         var req = new HttpRequestMessage(HttpMethod.Post, uri)
                         {
                             Content = content,
-                            Version = UseVersion
+                            Version = UseVersion,
                         }
                     )
                         try
@@ -833,7 +833,7 @@ namespace System.Net.Http.Functional.Tests
         {
             Token = 0x1,
             CancelPendingRequests = 0x2,
-            DisposeHttpClient = 0x4
+            DisposeHttpClient = 0x4,
         }
 
         public static IEnumerable<object[]> OneBoolAndCancellationMode() =>
@@ -843,7 +843,7 @@ namespace System.Net.Http.Functional.Tests
                 CancellationMode.Token,
                 CancellationMode.CancelPendingRequests,
                 CancellationMode.DisposeHttpClient,
-                CancellationMode.Token | CancellationMode.CancelPendingRequests
+                CancellationMode.Token | CancellationMode.CancelPendingRequests,
             }
             select new object[] { first, mode };
 
@@ -855,7 +855,7 @@ namespace System.Net.Http.Functional.Tests
                 CancellationMode.Token,
                 CancellationMode.CancelPendingRequests,
                 CancellationMode.DisposeHttpClient,
-                CancellationMode.Token | CancellationMode.CancelPendingRequests
+                CancellationMode.Token | CancellationMode.CancelPendingRequests,
             }
             select new object[] { first, second, mode };
 

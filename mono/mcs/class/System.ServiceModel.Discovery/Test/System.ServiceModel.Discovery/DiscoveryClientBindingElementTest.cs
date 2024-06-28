@@ -253,7 +253,7 @@ namespace MonoTests.System.ServiceModel.Discovery
         {
             var be = new DiscoveryClientBindingElement()
             {
-                DiscoveryEndpointProvider = new MyDiscoveryEndpointProvider()
+                DiscoveryEndpointProvider = new MyDiscoveryEndpointProvider(),
             };
             var bc = new BindingContext(
                 new CustomBinding(be, new HttpTransportBindingElement()),

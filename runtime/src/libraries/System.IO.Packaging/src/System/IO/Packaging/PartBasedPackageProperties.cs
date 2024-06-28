@@ -935,7 +935,7 @@ namespace System.IO.Packaging
             PackageXmlEnum.LastModifiedBy,
             PackageXmlEnum.ContentStatus,
             PackageXmlEnum.Revision,
-            PackageXmlEnum.LastPrinted
+            PackageXmlEnum.LastPrinted,
         };
 
         // Array of formats to supply to XmlConvert.ToDateTime or DateTime.ParseExact.

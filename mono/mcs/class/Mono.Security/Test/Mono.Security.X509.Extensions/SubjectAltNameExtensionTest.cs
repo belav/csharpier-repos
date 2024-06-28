@@ -722,7 +722,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
                 0x15,
                 0x5C,
                 0x61,
-                0x0A
+                0x0A,
             };
 
             X509Certificate cert = new X509Certificate(certificate_with_ip_subjectaltname);
@@ -2286,7 +2286,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
             0x38,
             0x9A,
             0xAD,
-            0x6E
+            0x6E,
         };
 
         [Test]

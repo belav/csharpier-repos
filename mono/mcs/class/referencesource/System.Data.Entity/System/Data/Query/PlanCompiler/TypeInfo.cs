@@ -37,7 +37,7 @@ namespace System.Data.Query.PlanCompiler
     internal enum TypeIdKind
     {
         UserSpecified = 0,
-        Generated
+        Generated,
     }
 
     /// <summary>

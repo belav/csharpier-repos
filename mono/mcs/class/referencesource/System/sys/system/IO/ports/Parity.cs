@@ -23,6 +23,6 @@ namespace System.IO.Ports
         Odd = NativeMethods.ODDPARITY,
         Even = NativeMethods.EVENPARITY,
         Mark = NativeMethods.MARKPARITY,
-        Space = NativeMethods.SPACEPARITY
+        Space = NativeMethods.SPACEPARITY,
     };
 }

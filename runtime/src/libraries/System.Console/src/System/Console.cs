@@ -255,7 +255,7 @@ namespace System
                         leaveOpen: true
                     )
                     {
-                        AutoFlush = true
+                        AutoFlush = true,
                     }
                 );
         }

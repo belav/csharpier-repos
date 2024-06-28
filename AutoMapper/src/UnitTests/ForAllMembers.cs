@@ -101,7 +101,7 @@ public class When_conditionally_applying_a_resolver_per_profile : AutoMapperSpec
         var source = new Source
         {
             SomeDate = new DateTime(2000, 1, 1),
-            OtherDate = new DateTime(2000, 1, 1)
+            OtherDate = new DateTime(2000, 1, 1),
         };
         var dest = Mapper.Map<Source, Dest>(source);
         dest.SomeDate.ShouldBe(source.SomeDate);
@@ -121,7 +121,7 @@ public class ForAllPropertyMaps_ConvertUsing : AutoMapperSpecBase
     {
         None,
         SendState,
-        NotSendZeroWhenOpen
+        NotSendZeroWhenOpen,
     }
 
     public class PostPutWellViewModel

@@ -115,7 +115,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var objectToBeValidated = new ToBeValidated()
             {
                 PropertyToBeTested = "Invalid Value",
-                PropertyWithRequiredAttribute = "Valid Value"
+                PropertyWithRequiredAttribute = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             Assert.False(
@@ -168,7 +168,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new ToBeValidated()
             {
-                PropertyWithRequiredAttribute = "Invalid Value"
+                PropertyWithRequiredAttribute = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             Assert.True(
@@ -214,7 +214,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new ToBeValidated()
             {
-                PropertyWithRequiredAttribute = "Valid Value"
+                PropertyWithRequiredAttribute = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             Assert.True(
@@ -238,7 +238,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new InvalidToBeValidated()
             {
-                PropertyWithRequiredAttribute = "Valid Value"
+                PropertyWithRequiredAttribute = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             Assert.False(
@@ -346,7 +346,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
-                PropertyToBeTested = "Valid Value"
+                PropertyToBeTested = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -379,7 +379,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
                 PropertyToBeTested = "Valid Value",
-                SecondPropertyToBeTested = "Invalid Value"
+                SecondPropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -411,7 +411,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeWithUnmatchedProperties()
             {
-                PropertyToBeTested = "Valid Value"
+                PropertyToBeTested = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -443,7 +443,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
-                PropertyToBeTested = "Invalid Value"
+                PropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -481,7 +481,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeWithComplementaryRequirements()
             {
-                SecondPropertyToBeTested = "Invalid Value"
+                SecondPropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -522,7 +522,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var objectToBeValidated = new SelfMetadataType()
             {
                 PropertyToBeTested = "Invalid Value",
-                SecondPropertyToBeTested = "Invalid Value"
+                SecondPropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -640,7 +640,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var objectToBeValidated = new ToBeValidated()
             {
                 PropertyToBeTested = "Invalid Value",
-                PropertyWithRequiredAttribute = "Valid Value"
+                PropertyWithRequiredAttribute = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             var exception = Assert.Throws<ValidationException>(
@@ -660,7 +660,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new ToBeValidated()
             {
-                PropertyWithRequiredAttribute = "Invalid Value"
+                PropertyWithRequiredAttribute = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             Validator.ValidateObject(objectToBeValidated, validationContext, false);
@@ -685,7 +685,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new ToBeValidated()
             {
-                PropertyWithRequiredAttribute = "Valid Value"
+                PropertyWithRequiredAttribute = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             Validator.ValidateObject(objectToBeValidated, validationContext, true);
@@ -696,7 +696,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new InvalidToBeValidated()
             {
-                PropertyWithRequiredAttribute = "Valid Value"
+                PropertyWithRequiredAttribute = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             var exception = Assert.Throws<ValidationException>(
@@ -745,7 +745,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
-                PropertyToBeTested = "Valid Value"
+                PropertyToBeTested = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -771,7 +771,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
                 PropertyToBeTested = "Valid Value",
-                SecondPropertyToBeTested = "Invalid Value"
+                SecondPropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -797,7 +797,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
                 PropertyToBeTested = "Valid Value",
-                SecondPropertyToBeTested = "TypeInvalid"
+                SecondPropertyToBeTested = "TypeInvalid",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -822,7 +822,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeWithUnmatchedProperties()
             {
-                PropertyToBeTested = "Valid Value"
+                PropertyToBeTested = "Valid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -847,7 +847,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeToBeValidated()
             {
-                PropertyToBeTested = "Invalid Value"
+                PropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -872,7 +872,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new HasMetadataTypeWithComplementaryRequirements()
             {
-                PropertyToBeTested = "Invalid Value"
+                PropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -918,7 +918,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var objectToBeValidated = new SelfMetadataType()
             {
-                PropertyToBeTested = "Invalid Value"
+                PropertyToBeTested = "Invalid Value",
             };
             var validationContext = new ValidationContext(objectToBeValidated);
             TypeDescriptor.AddProviderTransparent(
@@ -1679,7 +1679,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attributesToValidate = new ValidationAttribute[]
             {
                 new RequiredAttribute(),
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Assert.False(
                 Validator.TryValidateValue(null, validationContext, null, attributesToValidate)
@@ -1706,7 +1706,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attributesToValidate = new ValidationAttribute[]
             {
                 new RequiredAttribute(),
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Assert.False(
                 Validator.TryValidateValue(
@@ -1743,7 +1743,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             ValidationAttribute[] attributesToValidate =
             {
                 new ValidValueStringPropertyAttribute(),
-                new ValidValueStringPropertyDuplicateAttribute()
+                new ValidValueStringPropertyDuplicateAttribute(),
             };
 
             List<ValidationResult> results = new List<ValidationResult>();
@@ -1766,7 +1766,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attributesToValidate = new ValidationAttribute[]
             {
                 new RequiredAttribute(),
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Assert.True(
                 Validator.TryValidateValue(
@@ -1796,7 +1796,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             validationContext.MemberName = "PropertyWithRequiredAttribute";
             var attributesToValidate = new ValidationAttribute[]
             {
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Assert.False(
                 Validator.TryValidateValue(
@@ -1830,7 +1830,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             validationContext.MemberName = "PropertyToBeTested";
             var attributesToValidate = new ValidationAttribute[]
             {
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Assert.True(
                 Validator.TryValidateValue(
@@ -1911,7 +1911,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attributesToValidate = new ValidationAttribute[]
             {
                 new RequiredAttribute(),
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             var exception = Assert.Throws<ValidationException>(
                 () => Validator.ValidateValue(null, validationContext, attributesToValidate)
@@ -1930,7 +1930,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attributesToValidate = new ValidationAttribute[]
             {
                 new RequiredAttribute(),
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             var exception = Assert.Throws<ValidationException>(
                 () =>
@@ -1956,7 +1956,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attributesToValidate = new ValidationAttribute[]
             {
                 new RequiredAttribute(),
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Validator.ValidateValue("Valid Value", validationContext, attributesToValidate);
         }
@@ -1969,7 +1969,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             validationContext.MemberName = "PropertyWithRequiredAttribute";
             var attributesToValidate = new ValidationAttribute[]
             {
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             var exception = Assert.Throws<ValidationException>(
                 () =>
@@ -1994,7 +1994,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             validationContext.MemberName = "PropertyToBeTested";
             var attributesToValidate = new ValidationAttribute[]
             {
-                new ValidValueStringPropertyAttribute()
+                new ValidValueStringPropertyAttribute(),
             };
             Validator.ValidateValue("Valid Value", validationContext, attributesToValidate);
         }
@@ -2159,7 +2159,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
 
         public enum TestEnum
         {
-            A = 0
+            A = 0,
         }
 
         [ValidClass]

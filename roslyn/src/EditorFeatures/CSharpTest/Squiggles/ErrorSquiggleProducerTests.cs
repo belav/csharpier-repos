@@ -144,7 +144,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Squiggles
                         new CSharpRemoveUnnecessaryImportsDiagnosticAnalyzer(),
                         new ReportOnClassWithLink()
                     )
-                }
+                },
             };
 
             var diagnosticsAndSpans = await TestDiagnosticTagProducer<

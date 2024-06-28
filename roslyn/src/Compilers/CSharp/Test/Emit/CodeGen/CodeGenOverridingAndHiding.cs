@@ -175,7 +175,7 @@ Derived.Property.set(10)",
                         "Derived2",
                         "Method",
                         ".method public hidebysig virtual instance System.Void Method(System.Int32 b, System.Exception c) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -295,7 +295,7 @@ DerivedClass.Equals(5, 6)",
                         "DerivedClass",
                         "GetHashCode",
                         ".method public hidebysig virtual instance System.Int64 GetHashCode(System.Int32 y) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -451,7 +451,7 @@ Class5.Member2",
                         "Class5+Class7",
                         "Member2",
                         ".method public hidebysig virtual instance System.Void Member2() cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -539,7 +539,7 @@ Derived2.virtual2",
                         "Derived2`2",
                         "virtual",
                         ".method public hidebysig virtual instance System.Collections.Generic.List`1[X] virtual<T, U>(X a, Y b, System.Int32 c, T d, U e) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -651,7 +651,7 @@ Derived.Method3([6], [7])",
                         "NS.Derived",
                         "Method3",
                         ".method public hidebysig virtual instance System.Void Method3(System.Int32[] B1, [System.ParamArrayAttribute()] System.Int32[] b2) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -808,7 +808,7 @@ Base.get_Property",
                         "Base4`2",
                         "set_Property",
                         ".method public hidebysig specialname virtual instance System.Void set_Property(U value) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -1229,7 +1229,7 @@ Derived2.Finalize()
                         "Derived2",
                         "Finalize",
                         ".method family hidebysig virtual instance System.Void Finalize() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -1553,16 +1553,14 @@ Derived.Method(BASEREF List<int> a)
                         }
                         var (m1, m2) = i switch
                         {
-                            0 =>
-                                (
-                                    "Base<T, U>.Method(ref List<T> x, out List<U> y)",
-                                    "Derived.Method(ref List<int> a, out List<int> b)"
-                                ),
-                            _ =>
-                                (
-                                    "Derived.Method(ref List<int> a, out List<int> b)",
-                                    "Base<T, U>.Method(out List<U> y, ref List<T> x)"
-                                ),
+                            0 => (
+                                "Base<T, U>.Method(ref List<T> x, out List<U> y)",
+                                "Derived.Method(ref List<int> a, out List<int> b)"
+                            ),
+                            _ => (
+                                "Derived.Method(ref List<int> a, out List<int> b)",
+                                "Base<T, U>.Method(out List<U> y, ref List<T> x)"
+                            ),
                         };
                         expectedOutput =
                             $@"
@@ -1655,7 +1653,7 @@ Base.P.Set(2)",
                         "Derived",
                         "set_P",
                         ".method public hidebysig specialname virtual final instance System.Void set_P(System.Int32 value) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -1719,7 +1717,7 @@ Derived.P.Set(2)",
                         "Derived",
                         "get_P",
                         ".method public hidebysig specialname virtual final instance System.Int32 get_P() cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -1799,7 +1797,7 @@ Derived.set_Property3",
                         "Base+Derived",
                         "set_Property3",
                         ".method public hidebysig specialname virtual final instance System.Void set_Property3(System.Single value) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -1910,7 +1908,7 @@ Derived.set_Property2",
                         "Derived",
                         "set_Property2",
                         ".method public hidebysig specialname virtual instance System.Void set_Property2(System.Int64 value) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -2054,7 +2052,7 @@ Derived.set_Property3",
                         "Derived",
                         "set_Property3",
                         ".method public hidebysig specialname virtual instance System.Void set_Property3(System.Int64 value) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -2521,7 +2519,7 @@ class Derived2 : Base2
                         "Derived2",
                         "Method",
                         ".method public hidebysig virtual instance System.Void Method([out] System.Int64& x) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -2634,7 +2632,7 @@ class Derived : Base2<int>
                         "Derived",
                         "Method2",
                         ".method famorassem hidebysig virtual final instance System.Collections.Generic.List`1[System.Int32] Method2() cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -2691,7 +2689,7 @@ class Derived : Base2<int>
                         "Derived",
                         "Method2",
                         ".method family hidebysig virtual final instance System.Collections.Generic.List`1[System.Int32] Method2() cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -2910,7 +2908,7 @@ class Derived : Base2<int>
                         "Derived",
                         "set_Property6",
                         ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] assembly hidebysig specialname virtual final instance System.Void set_Property6(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3004,7 +3002,7 @@ class Derived : Base<int>
                         "Derived",
                         "set_Property5",
                         ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] famorassem hidebysig specialname virtual final instance System.Void set_Property5(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3085,7 +3083,7 @@ public class Derived2 : Base<int>
                         "Derived2",
                         "set_Property2",
                         ".method public hidebysig specialname virtual final instance System.Void set_Property2(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3179,7 +3177,7 @@ class Derived : Base<int>
                         "Derived",
                         "set_Property5",
                         ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] family hidebysig specialname virtual final instance System.Void set_Property5(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3251,7 +3249,7 @@ class Derived : Base<int>
                         "Derived",
                         "set_Property5",
                         ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] public hidebysig specialname virtual final instance System.Void set_Property5(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3307,7 +3305,7 @@ class Derived : Base2<int>
                         "Derived",
                         "Method",
                         ".method public hidebysig virtual instance System.Void Method<T>(System.Int32 x) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3415,7 +3413,7 @@ Derived.set_Property",
                         "Derived",
                         "set_Property",
                         ".method public hidebysig specialname virtual instance System.Void set_Property(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -3672,7 +3670,7 @@ Derived.set_Property",
                         "Derived",
                         "set_Property",
                         ".method public hidebysig specialname virtual instance System.Void set_Property(System.Collections.Generic.List`1[System.Int32] value) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -4022,7 +4020,7 @@ class Test
                 {
                     asm01,
                     asm02,
-                    new CSharpCompilationReference(comp1)
+                    new CSharpCompilationReference(comp1),
                 },
                 options: TestOptions.ReleaseExe,
                 assemblyName: "OHI_DeriveBaseInMetadataProp002"
@@ -4296,7 +4294,7 @@ partial class Test
                         "D",
                         "IMeth03.INested.NestedFunc",
                         ".method private hidebysig newslot virtual final instance System.String IMeth03.INested.NestedFunc(System.Object& p) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -4388,7 +4386,7 @@ Derived2.Method",
                         "Derived1`2+Derived2",
                         "Method",
                         ".method assembly hidebysig strict virtual instance System.Void Method<K>(System.String a, System.Int32[] b, System.Collections.Generic.List`1[System.Int64] c, System.Collections.Generic.Dictionary`2[System.String,K] d) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -4471,7 +4469,7 @@ class Test
                 {
                     asm01,
                     asm02,
-                    new CSharpCompilationReference(comp1)
+                    new CSharpCompilationReference(comp1),
                 },
                 assemblyName: "OHI_OverloadGetSetMethodWithProp002"
             );
@@ -4483,7 +4481,7 @@ class Test
                     asm01,
                     asm02,
                     new CSharpCompilationReference(comp1),
-                    new CSharpCompilationReference(comp2)
+                    new CSharpCompilationReference(comp2),
                 },
                 options: TestOptions.ReleaseExe,
                 assemblyName: "OHI_OverloadGetSetMethodWithProp003"
@@ -4598,7 +4596,7 @@ class Test
                 {
                     asmfile,
                     new CSharpCompilationReference(comp1),
-                    new CSharpCompilationReference(comp2)
+                    new CSharpCompilationReference(comp2),
                 },
                 options: TestOptions.ReleaseExe,
                 assemblyName: "OHI_ClassOverrideNewVBNested003"
@@ -4722,7 +4720,7 @@ public class Test
                         "Derived",
                         "M",
                         ".method public hidebysig virtual final instance modopt(System.Runtime.CompilerServices.IsConst) System.Byte M(System.Byte t, System.Byte v) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -4802,7 +4800,7 @@ Derived1.Method`2",
                         "Outer`1+Inner`1+Derived1`2",
                         "Method",
                         ".method assembly hidebysig virtual final instance System.Void Method<X, Y>(System.Int64 A, System.Int32[] b, System.Collections.Generic.List`1[X] C, System.Collections.Generic.Dictionary`2[Y,Y] d) cil managed"
-                    )
+                    ),
                 }
             );
 
@@ -4870,7 +4868,7 @@ class Test
                         "D2",
                         "M",
                         @".method public hidebysig instance System.Void M(System.UInt32 x) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -5194,7 +5192,7 @@ class Program
 
             var references = new MetadataReference[]
             {
-                TestReferences.SymbolsTests.Methods.ILMethods
+                TestReferences.SymbolsTests.Methods.ILMethods,
             };
             var verifier = CompileAndVerify(
                 source,
@@ -5474,7 +5472,7 @@ public class Program
                 {
                     vb1Compilation,
                     cs1Compilation,
-                    vb2Compilation
+                    vb2Compilation,
                 }
             );
             var cs2Verifier = CompileAndVerify(cs2Compilation, expectedOutput: @"C3");
@@ -5562,7 +5560,7 @@ public class Program
                 {
                     vb1Compilation,
                     cs1Compilation,
-                    vb2Compilation
+                    vb2Compilation,
                 }
             );
             var cs2Verifier = CompileAndVerify(
@@ -5671,7 +5669,7 @@ Derived.M(y:2)"
                 references: new[]
                 {
                     new CSharpCompilationReference(B),
-                    new CSharpCompilationReference(C)
+                    new CSharpCompilationReference(C),
                 },
                 assemblyName: "D"
             );
@@ -5758,7 +5756,7 @@ public class C6 : C2
                 {
                     vb1Compilation,
                     cs1Compilation,
-                    vb2Compilation
+                    vb2Compilation,
                 }
             );
 

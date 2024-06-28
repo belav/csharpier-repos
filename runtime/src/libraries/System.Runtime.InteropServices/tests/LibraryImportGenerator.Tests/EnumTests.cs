@@ -62,7 +62,7 @@ namespace LibraryImportGenerator.IntegrationTests
             One,
             Two,
             Three,
-            Max = int.MaxValue
+            Max = int.MaxValue,
         }
 
         internal enum ByteEnum : byte
@@ -71,7 +71,7 @@ namespace LibraryImportGenerator.IntegrationTests
             One,
             Two,
             Three,
-            Max = byte.MaxValue
+            Max = byte.MaxValue,
         }
 
         [Fact]

@@ -30,7 +30,7 @@ namespace System.Linq.Expressions.Compiler
 
             EmitExpressionStartMask = 0x000f,
             EmitAsTypeMask = 0x00f0,
-            EmitAsTailCallMask = 0x0f00
+            EmitAsTailCallMask = 0x0f00,
         }
 
         /// <summary>

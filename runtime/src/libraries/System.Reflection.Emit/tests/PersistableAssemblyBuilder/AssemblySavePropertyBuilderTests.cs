@@ -231,7 +231,7 @@ namespace System.Reflection.Emit.Tests
             yield return new object[]
             {
                 typeof(PropertyBuilderTest11.Colors),
-                PropertyBuilderTest11.Colors.Blue
+                PropertyBuilderTest11.Colors.Blue,
             };
             yield return new object[] { typeof(object), null };
             yield return new object[] { typeof(object), "a" };

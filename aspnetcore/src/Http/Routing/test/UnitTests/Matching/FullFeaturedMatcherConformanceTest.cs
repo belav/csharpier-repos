@@ -11,14 +11,14 @@ namespace Microsoft.AspNetCore.Routing.Matching;
 public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTest
 {
     [Theory]
-    [InlineData("/a/{b=15}", "/a/b", new string[] { "b", }, new string[] { "b", })]
-    [InlineData("/a/{b=15}", "/a/", new string[] { "b", }, new string[] { "15", })]
-    [InlineData("/a/{b=15}", "/a", new string[] { "b", }, new string[] { "15", })]
-    [InlineData("/{a}/{b=15}", "/54/b", new string[] { "a", "b", }, new string[] { "54", "b", })]
-    [InlineData("/{a=19}/{b=15}", "/54/b", new string[] { "a", "b", }, new string[] { "54", "b", })]
-    [InlineData("/{a=19}/{b=15}", "/54/", new string[] { "a", "b", }, new string[] { "54", "15", })]
-    [InlineData("/{a=19}/{b=15}", "/54", new string[] { "a", "b", }, new string[] { "54", "15", })]
-    [InlineData("/{a=19}/{b=15}", "/", new string[] { "a", "b", }, new string[] { "19", "15", })]
+    [InlineData("/a/{b=15}", "/a/b", new string[] { "b" }, new string[] { "b" })]
+    [InlineData("/a/{b=15}", "/a/", new string[] { "b" }, new string[] { "15" })]
+    [InlineData("/a/{b=15}", "/a", new string[] { "b" }, new string[] { "15" })]
+    [InlineData("/{a}/{b=15}", "/54/b", new string[] { "a", "b" }, new string[] { "54", "b" })]
+    [InlineData("/{a=19}/{b=15}", "/54/b", new string[] { "a", "b" }, new string[] { "54", "b" })]
+    [InlineData("/{a=19}/{b=15}", "/54/", new string[] { "a", "b" }, new string[] { "54", "15" })]
+    [InlineData("/{a=19}/{b=15}", "/54", new string[] { "a", "b" }, new string[] { "54", "15" })]
+    [InlineData("/{a=19}/{b=15}", "/", new string[] { "a", "b" }, new string[] { "19", "15" })]
     public virtual async Task Match_DefaultValues(
         string template,
         string path,
@@ -41,7 +41,7 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     public virtual async Task Match_NonInlineDefaultValues()
     {
         // Arrange
-        var endpoint = CreateEndpoint("/a/{b}/{c}", new { b = "17", c = "18", });
+        var endpoint = CreateEndpoint("/a/{b}/{c}", new { b = "17", c = "18" });
         var matcher = CreateMatcher(endpoint);
         var httpContext = CreateContext("/a");
 
@@ -49,7 +49,7 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
         await matcher.MatchAsync(httpContext);
 
         // Assert
-        MatcherAssert.AssertMatch(httpContext, endpoint, new { b = "17", c = "18", });
+        MatcherAssert.AssertMatch(httpContext, endpoint, new { b = "17", c = "18" });
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
             {
                 b = "17",
                 c = "18",
-                d = "19"
+                d = "19",
             }
         );
         var matcher = CreateMatcher(endpoint);
@@ -79,7 +79,7 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
             {
                 b = "17",
                 c = "18",
-                d = "19"
+                d = "19",
             }
         );
     }
@@ -111,32 +111,32 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
 
     [Theory]
     [InlineData("/{a?}/{b?}/{c?}", "/", null, null)]
-    [InlineData("/{a?}/{b?}/{c?}", "/a", new[] { "a", }, new[] { "a", })]
-    [InlineData("/{a?}/{b?}/{c?}", "/a/", new[] { "a", }, new[] { "a", })]
-    [InlineData("/{a?}/{b?}/{c?}", "/a/b", new[] { "a", "b", }, new[] { "a", "b", })]
-    [InlineData("/{a?}/{b?}/{c?}", "/a/b/", new[] { "a", "b", }, new[] { "a", "b", })]
-    [InlineData("/{a?}/{b?}/{c?}", "/a/b/c", new[] { "a", "b", "c", }, new[] { "a", "b", "c", })]
-    [InlineData("/{a?}/{b?}/{c?}", "/a/b/c/", new[] { "a", "b", "c", }, new[] { "a", "b", "c", })]
-    [InlineData("/{c}/{a?}", "/h/i", new[] { "c", "a", }, new[] { "h", "i", })]
-    [InlineData("/{c}/{a?}", "/h/", new[] { "c", }, new[] { "h", })]
-    [InlineData("/{c}/{a?}", "/h", new[] { "c", }, new[] { "h", })]
+    [InlineData("/{a?}/{b?}/{c?}", "/a", new[] { "a" }, new[] { "a" })]
+    [InlineData("/{a?}/{b?}/{c?}", "/a/", new[] { "a" }, new[] { "a" })]
+    [InlineData("/{a?}/{b?}/{c?}", "/a/b", new[] { "a", "b" }, new[] { "a", "b" })]
+    [InlineData("/{a?}/{b?}/{c?}", "/a/b/", new[] { "a", "b" }, new[] { "a", "b" })]
+    [InlineData("/{a?}/{b?}/{c?}", "/a/b/c", new[] { "a", "b", "c" }, new[] { "a", "b", "c" })]
+    [InlineData("/{a?}/{b?}/{c?}", "/a/b/c/", new[] { "a", "b", "c" }, new[] { "a", "b", "c" })]
+    [InlineData("/{c}/{a?}", "/h/i", new[] { "c", "a" }, new[] { "h", "i" })]
+    [InlineData("/{c}/{a?}", "/h/", new[] { "c" }, new[] { "h" })]
+    [InlineData("/{c}/{a?}", "/h", new[] { "c" }, new[] { "h" })]
     [InlineData("/{c?}/{a?}", "/", null, null)]
-    [InlineData("/{c}/{a?}/{id?}", "/h/i/18", new[] { "c", "a", "id", }, new[] { "h", "i", "18", })]
-    [InlineData("/{c}/{a?}/{id?}", "/h/i", new[] { "c", "a", }, new[] { "h", "i", })]
-    [InlineData("/{c}/{a?}/{id?}", "/h", new[] { "c", }, new[] { "h", })]
-    [InlineData("template/{p:int?}", "/template/5", new[] { "p", }, new[] { "5", })]
+    [InlineData("/{c}/{a?}/{id?}", "/h/i/18", new[] { "c", "a", "id" }, new[] { "h", "i", "18" })]
+    [InlineData("/{c}/{a?}/{id?}", "/h/i", new[] { "c", "a" }, new[] { "h", "i" })]
+    [InlineData("/{c}/{a?}/{id?}", "/h", new[] { "c" }, new[] { "h" })]
+    [InlineData("template/{p:int?}", "/template/5", new[] { "p" }, new[] { "5" })]
     [InlineData("template/{p:int?}", "/template", null, null)]
     [InlineData(
         "a/{b=3}/c/{d?}/e/{*f}",
         "/a/b/c/d/e",
         new[] { "b", "d", "f" },
-        new[] { "b", "d", null, }
+        new[] { "b", "d", null }
     )]
     [InlineData(
         "a/{b=3}/c/{d?}/e/{*f}",
         "/a/b/c/d/e/f",
-        new[] { "b", "d", "f", },
-        new[] { "b", "d", "f", }
+        new[] { "b", "d", "f" },
+        new[] { "b", "d", "f" }
     )]
     public virtual async Task Match_OptionalParameter(
         string template,
@@ -180,31 +180,26 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     }
 
     [Theory]
-    [InlineData("/{a}/{*b}", "/a", new[] { "a", "b", }, new[] { "a", null, })]
-    [InlineData("/{a}/{*b}", "/a/", new[] { "a", "b", }, new[] { "a", null, })]
-    [InlineData("/{a}/{*b=b}", "/a", new[] { "a", "b", }, new[] { "a", "b", })]
-    [InlineData("/{a}/{*b=b}", "/a/", new[] { "a", "b", }, new[] { "a", "b", })]
-    [InlineData("/{a}/{*b=b}", "/a/hello", new[] { "a", "b", }, new[] { "a", "hello", })]
+    [InlineData("/{a}/{*b}", "/a", new[] { "a", "b" }, new[] { "a", null })]
+    [InlineData("/{a}/{*b}", "/a/", new[] { "a", "b" }, new[] { "a", null })]
+    [InlineData("/{a}/{*b=b}", "/a", new[] { "a", "b" }, new[] { "a", "b" })]
+    [InlineData("/{a}/{*b=b}", "/a/", new[] { "a", "b" }, new[] { "a", "b" })]
+    [InlineData("/{a}/{*b=b}", "/a/hello", new[] { "a", "b" }, new[] { "a", "hello" })]
     [InlineData(
         "/{a}/{*b=b}",
         "/a/hello/goodbye",
-        new[] { "a", "b", },
-        new[] { "a", "hello/goodbye", }
+        new[] { "a", "b" },
+        new[] { "a", "hello/goodbye" }
     )]
-    [InlineData("/{a}/{*b=b}", "/a/b//", new[] { "a", "b", }, new[] { "a", "b//", })]
-    [InlineData("/{a}/{*b=b}", "/a/b/c/", new[] { "a", "b", }, new[] { "a", "b/c/", })]
+    [InlineData("/{a}/{*b=b}", "/a/b//", new[] { "a", "b" }, new[] { "a", "b//" })]
+    [InlineData("/{a}/{*b=b}", "/a/b/c/", new[] { "a", "b" }, new[] { "a", "b/c/" })]
     [InlineData(
         "/{a=1}/{b=2}/{c=3}/{d=4}",
         "/a/b/c",
-        new[] { "a", "b", "c", "d", },
-        new[] { "a", "b", "c", "4", }
+        new[] { "a", "b", "c", "d" },
+        new[] { "a", "b", "c", "4" }
     )]
-    [InlineData(
-        "a/{*path:regex(10/20/30)}",
-        "/a/10/20/30",
-        new[] { "path", },
-        new[] { "10/20/30" }
-    )]
+    [InlineData("a/{*path:regex(10/20/30)}", "/a/10/20/30", new[] { "path" }, new[] { "10/20/30" })]
     public virtual async Task Match_CatchAllParameter(
         string template,
         string path,
@@ -228,8 +223,8 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     // weird and inconsistent with the intent of using a catch all. The DfaMatcher
     // fixes this issue.
     [Theory]
-    [InlineData("/{a}/{*b=b}", "/a///", new[] { "a", "b", }, new[] { "a", "//" })]
-    [InlineData("/{a}/{*b=b}", "/a//c/", new[] { "a", "b", }, new[] { "a", "/c/" })]
+    [InlineData("/{a}/{*b=b}", "/a///", new[] { "a", "b" }, new[] { "a", "//" })]
+    [InlineData("/{a}/{*b=b}", "/a//c/", new[] { "a", "b" }, new[] { "a", "/c/" })]
     public virtual async Task Quirks_CatchAllParameter(
         string template,
         string path,
@@ -254,62 +249,62 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     }
 
     [Theory]
-    [InlineData("{p}x{s}", "/xxxxxxxxxx", new[] { "p", "s" }, new[] { "xxxxxxxx", "x", })]
+    [InlineData("{p}x{s}", "/xxxxxxxxxx", new[] { "p", "s" }, new[] { "xxxxxxxx", "x" })]
     [InlineData(
         "{p}xyz{s}",
         "/xxxxyzxyzxxxxxxyz",
         new[] { "p", "s" },
-        new[] { "xxxxyz", "xxxxxxyz", }
+        new[] { "xxxxyz", "xxxxxxyz" }
     )]
     [InlineData(
         "{p}xyz{s}",
         "/abcxxxxyzxyzxxxxxxyzxx",
         new[] { "p", "s" },
-        new[] { "abcxxxxyzxyzxxxxx", "xx", }
+        new[] { "abcxxxxyzxyzxxxxx", "xx" }
     )]
-    [InlineData("{p}xyz{s}", "/xyzxyzxyzxyzxyz", new[] { "p", "s" }, new[] { "xyzxyzxyz", "xyz", })]
+    [InlineData("{p}xyz{s}", "/xyzxyzxyzxyzxyz", new[] { "p", "s" }, new[] { "xyzxyzxyz", "xyz" })]
     [InlineData(
         "{p}xyz{s}",
         "/xyzxyzxyzxyzxyz1",
         new[] { "p", "s" },
-        new[] { "xyzxyzxyzxyz", "1", }
+        new[] { "xyzxyzxyzxyz", "1" }
     )]
-    [InlineData("{p}xyz{s}", "/xyzxyzxyz", new[] { "p", "s" }, new[] { "xyz", "xyz", })]
-    [InlineData("{p}aa{s}", "/aaaaa", new[] { "p", "s" }, new[] { "aa", "a", })]
-    [InlineData("{p}aaa{s}", "/aaaaa", new[] { "p", "s" }, new[] { "a", "a", })]
+    [InlineData("{p}xyz{s}", "/xyzxyzxyz", new[] { "p", "s" }, new[] { "xyz", "xyz" })]
+    [InlineData("{p}aa{s}", "/aaaaa", new[] { "p", "s" }, new[] { "aa", "a" })]
+    [InlineData("{p}aaa{s}", "/aaaaa", new[] { "p", "s" }, new[] { "a", "a" })]
     [InlineData(
         "language/{lang=en}-{region=US}",
         "/language/xx-yy",
         new[] { "lang", "region" },
-        new[] { "xx", "yy", }
+        new[] { "xx", "yy" }
     )]
     [InlineData(
         "language/{lang}-{region}",
         "/language/en-US",
         new[] { "lang", "region" },
-        new[] { "en", "US", }
+        new[] { "en", "US" }
     )]
     [InlineData(
         "language/{lang}-{region}a",
         "/language/en-USa",
         new[] { "lang", "region" },
-        new[] { "en", "US", }
+        new[] { "en", "US" }
     )]
     [InlineData(
         "language/a{lang}-{region}",
         "/language/aen-US",
         new[] { "lang", "region" },
-        new[] { "en", "US", }
+        new[] { "en", "US" }
     )]
     [InlineData(
         "language/a{lang}-{region}a",
         "/language/aen-USa",
         new[] { "lang", "region" },
-        new[] { "en", "US", }
+        new[] { "en", "US" }
     )]
-    [InlineData("language/{lang}-", "/language/en-", new[] { "lang", }, new[] { "en", })]
-    [InlineData("language/a{lang}", "/language/aen", new[] { "lang", }, new[] { "en", })]
-    [InlineData("language/a{lang}a", "/language/aena", new[] { "lang", }, new[] { "en", })]
+    [InlineData("language/{lang}-", "/language/en-", new[] { "lang" }, new[] { "en" })]
+    [InlineData("language/a{lang}", "/language/aen", new[] { "lang" }, new[] { "en" })]
+    [InlineData("language/a{lang}a", "/language/aena", new[] { "lang" }, new[] { "en" })]
     public virtual async Task Match_ComplexSegment(
         string template,
         string path,
@@ -349,24 +344,24 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     }
 
     [Theory]
-    [InlineData("moo/{p1}.{p2?}", "/moo/foo.bar", new[] { "p1", "p2", }, new[] { "foo", "bar" })]
-    [InlineData("moo/{p1}.{p2?}", "/moo/foo", new[] { "p1", }, new[] { "foo", })]
-    [InlineData("moo/{p1}.{p2?}", "/moo/.foo", new[] { "p1", }, new[] { ".foo", })]
-    [InlineData("moo/{p1}.{p2?}", "/moo/foo..bar", new[] { "p1", "p2", }, new[] { "foo.", "bar" })]
+    [InlineData("moo/{p1}.{p2?}", "/moo/foo.bar", new[] { "p1", "p2" }, new[] { "foo", "bar" })]
+    [InlineData("moo/{p1}.{p2?}", "/moo/foo", new[] { "p1" }, new[] { "foo" })]
+    [InlineData("moo/{p1}.{p2?}", "/moo/.foo", new[] { "p1" }, new[] { ".foo" })]
+    [InlineData("moo/{p1}.{p2?}", "/moo/foo..bar", new[] { "p1", "p2" }, new[] { "foo.", "bar" })]
     [InlineData(
         "moo/{p1}.{p2?}",
         "/moo/foo.moo.bar",
-        new[] { "p1", "p2", },
+        new[] { "p1", "p2" },
         new[] { "foo.moo", "bar" }
     )]
-    [InlineData("moo/foo.{p1}.{p2?}", "/moo/foo.moo", new[] { "p1", }, new[] { "moo", })]
+    [InlineData("moo/foo.{p1}.{p2?}", "/moo/foo.moo", new[] { "p1" }, new[] { "moo" })]
     [InlineData(
         "moo/foo.{p1}.{p2?}",
         "/moo/foo.foo.bar",
-        new[] { "p1", "p2", },
+        new[] { "p1", "p2" },
         new[] { "foo", "bar" }
     )]
-    [InlineData("moo/.{p2?}", "/moo/.foo", new[] { "p2", }, new[] { "foo", })]
+    [InlineData("moo/.{p2?}", "/moo/.foo", new[] { "p2" }, new[] { "foo" })]
     [InlineData(
         "moo/{p1}.{p2}.{p3?}",
         "/moo/foo.moo.bar",
@@ -376,7 +371,7 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     [InlineData(
         "moo/{p1}.{p2}.{p3?}",
         "/moo/foo.moo",
-        new[] { "p1", "p2", },
+        new[] { "p1", "p2" },
         new[] { "foo", "moo" }
     )]
     [InlineData(
@@ -472,14 +467,14 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
     [InlineData(
         "../{Controller}.mvc",
         "/../Home.mvc",
-        new string[] { "Controller", },
-        new string[] { "Home", }
+        new string[] { "Controller" },
+        new string[] { "Home" }
     )]
     [InlineData(
         @"\{Controller}.mvc",
         @"/\Home.mvc",
-        new string[] { "Controller", },
-        new string[] { "Home", }
+        new string[] { "Controller" },
+        new string[] { "Home" }
     )]
     [InlineData(
         @"{Controller}.mvc\{id}\{Param1}",
@@ -655,14 +650,14 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
             EndpointFactory.CreateRouteEndpoint(
                 "{controller}/folder/{*path}",
                 order: 0,
-                defaults: new { controller = "File", action = "Folder", },
-                requiredValues: new { controller = "File", }
+                defaults: new { controller = "File", action = "Folder" },
+                requiredValues: new { controller = "File" }
             ),
             EndpointFactory.CreateRouteEndpoint(
                 "{controller}/{action}/{filename}",
                 order: 1,
-                defaults: new { controller = "File", action = "Index", },
-                requiredValues: new { controller = "File", action = "Index", }
+                defaults: new { controller = "File", action = "Index" },
+                requiredValues: new { controller = "File", action = "Index" }
             ),
         };
 
@@ -687,14 +682,14 @@ public abstract class FullFeaturedMatcherConformanceTest : MatcherConformanceTes
             EndpointFactory.CreateRouteEndpoint(
                 "{controller}/{action}/{filename}",
                 order: 0,
-                defaults: new { controller = "File", action = "Index", },
-                requiredValues: new { controller = "File", action = "Index", }
+                defaults: new { controller = "File", action = "Index" },
+                requiredValues: new { controller = "File", action = "Index" }
             ),
             EndpointFactory.CreateRouteEndpoint(
                 "{controller}/folder/{*path}",
                 order: 1,
-                defaults: new { controller = "File", action = "Folder", },
-                requiredValues: new { controller = "File", }
+                defaults: new { controller = "File", action = "Folder" },
+                requiredValues: new { controller = "File" }
             ),
         };
 

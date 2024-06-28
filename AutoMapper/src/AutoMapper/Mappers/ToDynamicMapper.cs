@@ -46,7 +46,7 @@ public class ToDynamicMapper : IObjectMapper
             new[]
             {
                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
             }
         );
         var callsite = CallSite<Func<CallSite, object, object, object>>.Create(binder);

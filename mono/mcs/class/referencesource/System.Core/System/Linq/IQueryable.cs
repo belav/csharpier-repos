@@ -277,7 +277,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Quote(collectionSelector),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -303,7 +303,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Quote(collectionSelector),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -352,7 +352,7 @@ namespace System.Linq
                         GetSourceExpression(inner),
                         Expression.Quote(outerKeySelector),
                         Expression.Quote(innerKeySelector),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -396,7 +396,7 @@ namespace System.Linq
                         Expression.Quote(outerKeySelector),
                         Expression.Quote(innerKeySelector),
                         Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>)),
                     }
                 )
             );
@@ -437,7 +437,7 @@ namespace System.Linq
                         GetSourceExpression(inner),
                         Expression.Quote(outerKeySelector),
                         Expression.Quote(innerKeySelector),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -481,7 +481,7 @@ namespace System.Linq
                         Expression.Quote(outerKeySelector),
                         Expression.Quote(innerKeySelector),
                         Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>)),
                     }
                 )
             );
@@ -525,7 +525,7 @@ namespace System.Linq
                         {
                             source.Expression,
                             Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                            Expression.Constant(comparer, typeof(IComparer<TKey>)),
                         }
                     )
                 );
@@ -569,7 +569,7 @@ namespace System.Linq
                         {
                             source.Expression,
                             Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                            Expression.Constant(comparer, typeof(IComparer<TKey>)),
                         }
                     )
                 );
@@ -613,7 +613,7 @@ namespace System.Linq
                         {
                             source.Expression,
                             Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                            Expression.Constant(comparer, typeof(IComparer<TKey>)),
                         }
                     )
                 );
@@ -657,7 +657,7 @@ namespace System.Linq
                         {
                             source.Expression,
                             Expression.Quote(keySelector),
-                            Expression.Constant(comparer, typeof(IComparer<TKey>))
+                            Expression.Constant(comparer, typeof(IComparer<TKey>)),
                         }
                     )
                 );
@@ -799,7 +799,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Quote(keySelector),
-                        Expression.Quote(elementSelector)
+                        Expression.Quote(elementSelector),
                     }
                 )
             );
@@ -823,7 +823,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Quote(keySelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>)),
                     }
                 )
             );
@@ -857,7 +857,7 @@ namespace System.Linq
                         source.Expression,
                         Expression.Quote(keySelector),
                         Expression.Quote(elementSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>)),
                     }
                 )
             );
@@ -893,7 +893,7 @@ namespace System.Linq
                         source.Expression,
                         Expression.Quote(keySelector),
                         Expression.Quote(elementSelector),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -919,7 +919,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Quote(keySelector),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -947,7 +947,7 @@ namespace System.Linq
                         source.Expression,
                         Expression.Quote(keySelector),
                         Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>)),
                     }
                 )
             );
@@ -986,7 +986,7 @@ namespace System.Linq
                         Expression.Quote(keySelector),
                         Expression.Quote(elementSelector),
                         Expression.Quote(resultSelector),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TKey>)),
                     }
                 )
             );
@@ -1019,7 +1019,7 @@ namespace System.Linq
                     new Expression[]
                     {
                         source.Expression,
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>)),
                     }
                 )
             );
@@ -1063,7 +1063,7 @@ namespace System.Linq
                     {
                         source1.Expression,
                         GetSourceExpression(source2),
-                        Expression.Quote(resultSelector)
+                        Expression.Quote(resultSelector),
                     }
                 )
             );
@@ -1105,7 +1105,7 @@ namespace System.Linq
                     {
                         source1.Expression,
                         GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>)),
                     }
                 )
             );
@@ -1147,7 +1147,7 @@ namespace System.Linq
                     {
                         source1.Expression,
                         GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>)),
                     }
                 )
             );
@@ -1189,7 +1189,7 @@ namespace System.Linq
                     {
                         source1.Expression,
                         GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>)),
                     }
                 )
             );
@@ -1439,7 +1439,7 @@ namespace System.Linq
                     new Expression[]
                     {
                         source.Expression,
-                        Expression.Constant(defaultValue, typeof(TSource))
+                        Expression.Constant(defaultValue, typeof(TSource)),
                     }
                 )
             );
@@ -1456,7 +1456,7 @@ namespace System.Linq
                     new Expression[]
                     {
                         source.Expression,
-                        Expression.Constant(item, typeof(TSource))
+                        Expression.Constant(item, typeof(TSource)),
                     }
                 )
             );
@@ -1478,7 +1478,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Constant(item, typeof(TSource)),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>)),
                     }
                 )
             );
@@ -1533,7 +1533,7 @@ namespace System.Linq
                     {
                         source1.Expression,
                         GetSourceExpression(source2),
-                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>))
+                        Expression.Constant(comparer, typeof(IEqualityComparer<TSource>)),
                     }
                 )
             );
@@ -2368,7 +2368,7 @@ namespace System.Linq
                     {
                         source.Expression,
                         Expression.Constant(seed),
-                        Expression.Quote(func)
+                        Expression.Quote(func),
                     }
                 )
             );
@@ -2396,7 +2396,7 @@ namespace System.Linq
                         source.Expression,
                         Expression.Constant(seed),
                         Expression.Quote(func),
-                        Expression.Quote(selector)
+                        Expression.Quote(selector),
                     }
                 )
             );

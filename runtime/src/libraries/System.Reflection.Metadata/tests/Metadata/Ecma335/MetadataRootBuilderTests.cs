@@ -899,7 +899,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x78,
                     0x78,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 builder.Slice(12, -132)
             );

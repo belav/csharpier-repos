@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void GenericMethodCallInArgumentList_StaysCall2()
         {
-            foreach (var r in new[] { "&&", "||", })
+            foreach (var r in new[] { "&&", "||" })
             {
                 VerifyReplace(
                     @"class C { void M() { F(G<A, B>",
@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.IncrementalParsing
         [Fact]
         public void GenericMethodCallInArgumentList_ToCall4()
         {
-            foreach (var r in new[] { "&&", "||", })
+            foreach (var r in new[] { "&&", "||" })
             {
                 VerifyReplace(
                     @"class C { void M() { F(G<A, B>",

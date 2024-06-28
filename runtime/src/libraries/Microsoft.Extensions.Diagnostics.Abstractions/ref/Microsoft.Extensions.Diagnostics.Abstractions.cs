@@ -67,7 +67,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics
     {
         None = 0,
         Global,
-        Local
+        Local,
     }
 
     public static class MetricsBuilderExtensions

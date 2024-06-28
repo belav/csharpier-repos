@@ -197,7 +197,7 @@ namespace System.Web.UI.WebControls
             set { ((TableStyle)ControlStyle).BackImageUrl = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual FormViewRow BottomPagerRow
         {
             get
@@ -588,7 +588,7 @@ namespace System.Web.UI.WebControls
             set { ViewState["FirstDisplayedPageIndex"] = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual FormViewRow FooterRow
         {
             get
@@ -686,7 +686,7 @@ namespace System.Web.UI.WebControls
             set { ((TableStyle)ControlStyle).GridLines = value; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual FormViewRow HeaderRow
         {
             get
@@ -1077,7 +1077,7 @@ namespace System.Web.UI.WebControls
             get { return HtmlTextWriterTag.Table; }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual FormViewRow TopPagerRow
         {
             get

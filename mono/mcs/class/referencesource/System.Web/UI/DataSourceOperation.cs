@@ -21,6 +21,6 @@ namespace System.Web.UI
 
         Update = 3,
 
-        SelectCount = 4
+        SelectCount = 4,
     }
 }

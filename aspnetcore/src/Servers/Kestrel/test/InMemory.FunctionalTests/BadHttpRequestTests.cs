@@ -76,7 +76,7 @@ public class BadHttpRequestTests : LoggedTest
             "Hea\0der: value".EscapeNonPrintable(),
             "Header: va\0lue".EscapeNonPrintable(),
             "Head\x80r: value".EscapeNonPrintable(),
-            "Header: valu\x80".EscapeNonPrintable()
+            "Header: valu\x80".EscapeNonPrintable(),
         };
 
     [Theory]
@@ -176,7 +176,7 @@ public class BadHttpRequestTests : LoggedTest
             },
             new TestServiceContext(LoggerFactory)
             {
-                ServerOptions = new KestrelServerOptions() { AllowHostHeaderOverride = true, }
+                ServerOptions = new KestrelServerOptions() { AllowHostHeaderOverride = true },
             }
         );
         using var client = server.CreateConnection();
@@ -317,7 +317,7 @@ public class BadHttpRequestTests : LoggedTest
             provider switch
             {
                 "Microsoft.AspNetCore.Server.Kestrel.BadRequest" => true,
-                _ => false
+                _ => false,
             };
 
         public void OnNext(KeyValuePair<string, object> pair)
@@ -627,7 +627,7 @@ public class BadHttpRequestTests : LoggedTest
             $"Date: {expectedDateHeaderValue}",
             expectedAllowHeader,
             "",
-            ""
+            "",
         };
 
         await connection.ReceiveEnd(lines.Where(f => f != null).ToArray());

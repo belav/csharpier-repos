@@ -111,7 +111,7 @@ namespace JitTest_lcsmax_lcs_cs
                 "bcfdc",
                 "bddsc",
                 "bdccca",
-                "bbdc"
+                "bbdc",
             };
 
             int[] len = new int[RANK];

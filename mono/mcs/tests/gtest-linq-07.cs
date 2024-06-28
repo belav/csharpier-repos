@@ -38,7 +38,7 @@ class SelectMany
             {
                 pp = 9,
                 i1,
-                i3
+                i3,
             };
 
         id = 0;

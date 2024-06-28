@@ -30,7 +30,7 @@ public class MarshalStructTest
         S9Id,
         IncludeOuterIntegerStructSequentialId,
         S11Id,
-        ComplexStructId
+        ComplexStructId,
     }
 
     private static void testMethod(S9 s9)

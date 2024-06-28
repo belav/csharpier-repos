@@ -56,11 +56,11 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 {
                     formatOptions = formatOptions with
                     {
-                        AnalyzerSeverity = GetSeverity(defaultSeverity)
+                        AnalyzerSeverity = GetSeverity(defaultSeverity),
                     };
                     formatOptions = formatOptions with
                     {
-                        CodeStyleSeverity = GetSeverity(defaultSeverity)
+                        CodeStyleSeverity = GetSeverity(defaultSeverity),
                     };
                 }
 
@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 {
                     formatOptions = formatOptions with
                     {
-                        Diagnostics = diagnostics.ToImmutableHashSet()
+                        Diagnostics = diagnostics.ToImmutableHashSet(),
                     };
                 }
 
@@ -84,14 +84,14 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 {
                     formatOptions = formatOptions with
                     {
-                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet()
+                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet(),
                     };
                 }
 
                 formatOptions = formatOptions with
                 {
                     FixCategory =
-                        FixCategory.Whitespace | FixCategory.CodeStyle | FixCategory.Analyzers
+                        FixCategory.Whitespace | FixCategory.CodeStyle | FixCategory.Analyzers,
                 };
 
                 return await FormatAsync(formatOptions, logger, cancellationToken)

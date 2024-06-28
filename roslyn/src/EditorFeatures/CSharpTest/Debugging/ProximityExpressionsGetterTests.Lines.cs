@@ -370,7 +370,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "expression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -395,7 +395,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "expression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -420,7 +420,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "expression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -445,7 +445,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "expression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -473,7 +473,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "CollectExpressionTerms",
                     "ExpressionType",
-                    "ExpressionType.Invalid"
+                    "ExpressionType.Invalid",
                 },
                 terms
             );
@@ -501,7 +501,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -529,7 +529,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -575,7 +575,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -602,7 +602,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -629,7 +629,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -672,7 +672,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -903,7 +903,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -929,7 +929,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -955,7 +955,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -981,7 +981,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1058,7 +1058,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidTerm",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1084,7 +1084,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidTerm",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1241,7 +1241,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1267,7 +1267,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1293,7 +1293,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1319,7 +1319,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1397,7 +1397,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "CollectExpressionTerms",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1424,7 +1424,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "CollectExpressionTerms",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1451,7 +1451,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "CollectExpressionTerms",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1478,7 +1478,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "CollectExpressionTerms",
                     "expression",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1504,7 +1504,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -1579,7 +1579,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectMemberAccessExpressionTerms",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1605,7 +1605,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectMemberAccessExpressionTerms"
+                    "CollectMemberAccessExpressionTerms",
                 },
                 terms
             );
@@ -1664,7 +1664,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectObjectCreationExpressionTerms",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1690,7 +1690,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectObjectCreationExpressionTerms"
+                    "CollectObjectCreationExpressionTerms",
                 },
                 terms
             );
@@ -1749,7 +1749,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectArrayCreationExpressionTerms",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1775,7 +1775,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectArrayCreationExpressionTerms"
+                    "CollectArrayCreationExpressionTerms",
                 },
                 terms
             );
@@ -1834,7 +1834,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectInvocationExpressionTerms",
-                    "expression.Kind"
+                    "expression.Kind",
                 },
                 terms
             );
@@ -1860,7 +1860,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectInvocationExpressionTerms"
+                    "CollectInvocationExpressionTerms",
                 },
                 terms
             );
@@ -2014,7 +2014,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectPrefixUnaryExpressionTerms",
-                    "PrefixUnaryExpressionSyntax"
+                    "PrefixUnaryExpressionSyntax",
                 },
                 terms
             );
@@ -2040,7 +2040,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectPrefixUnaryExpressionTerms"
+                    "CollectPrefixUnaryExpressionTerms",
                 },
                 terms
             );
@@ -2079,7 +2079,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                 {
                     "expression",
                     "PostfixUnaryExpressionSyntax",
-                    "PrefixUnaryExpressionSyntax"
+                    "PrefixUnaryExpressionSyntax",
                 },
                 terms
             );
@@ -2103,7 +2103,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                 {
                     "expression",
                     "PostfixUnaryExpressionSyntax",
-                    "PrefixUnaryExpressionSyntax"
+                    "PrefixUnaryExpressionSyntax",
                 },
                 terms
             );
@@ -2146,7 +2146,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectPostfixUnaryExpressionTerms",
-                    "PostfixUnaryExpressionSyntax"
+                    "PostfixUnaryExpressionSyntax",
                 },
                 terms
             );
@@ -2172,7 +2172,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectPostfixUnaryExpressionTerms"
+                    "CollectPostfixUnaryExpressionTerms",
                 },
                 terms
             );
@@ -2268,7 +2268,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "expressionType",
                     "CollectBinaryExpressionTerms",
-                    "BinaryExpressionSyntax"
+                    "BinaryExpressionSyntax",
                 },
                 terms
             );
@@ -2294,7 +2294,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "terms",
                     "expressionType",
-                    "CollectBinaryExpressionTerms"
+                    "CollectBinaryExpressionTerms",
                 },
                 terms
             );
@@ -2335,7 +2335,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.Invalid",
                     "expression",
-                    "BinaryExpressionSyntax"
+                    "BinaryExpressionSyntax",
                 },
                 terms
             );
@@ -2361,7 +2361,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.Invalid",
                     "expression",
-                    "BinaryExpressionSyntax"
+                    "BinaryExpressionSyntax",
                 },
                 terms
             );
@@ -2454,7 +2454,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "position",
                     "expression",
                     "terms",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -2481,7 +2481,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "memberAccess"
+                    "memberAccess",
                 },
                 terms
             );
@@ -2508,7 +2508,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "memberAccess"
+                    "memberAccess",
                 },
                 terms
             );
@@ -2535,7 +2535,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "memberAccess"
+                    "memberAccess",
                 },
                 terms
             );
@@ -2562,7 +2562,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "memberAccess"
+                    "memberAccess",
                 },
                 terms
             );
@@ -2589,7 +2589,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "memberAccess"
+                    "memberAccess",
                 },
                 terms
             );
@@ -2618,7 +2618,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(MemberAccessExpressionSyntax)expression"
+                    "(MemberAccessExpressionSyntax)expression",
                 },
                 terms
             );
@@ -2651,7 +2651,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2684,7 +2684,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2717,7 +2717,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2750,7 +2750,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2783,7 +2783,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2816,7 +2816,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2849,7 +2849,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "memberAccess",
                     "memberAccess.Expression",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -2877,7 +2877,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "SyntaxKind",
                     "SyntaxKind.MemberAccessExpression",
-                    "SyntaxKind.PointerMemberAccessExpression"
+                    "SyntaxKind.PointerMemberAccessExpression",
                 },
                 terms
             );
@@ -2909,7 +2909,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "SyntaxKind",
                     "SyntaxKind.MemberAccessExpression",
-                    "SyntaxKind.PointerMemberAccessExpression"
+                    "SyntaxKind.PointerMemberAccessExpression",
                 },
                 terms
             );
@@ -2962,7 +2962,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "memberAccess",
                     "memberAccess.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -2996,7 +2996,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "memberAccess",
                     "memberAccess.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -3030,7 +3030,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "memberAccess",
                     "memberAccess.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -3064,7 +3064,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "memberAccess",
                     "memberAccess.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -3098,7 +3098,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "memberAccess",
                     "memberAccess.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -3125,7 +3125,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidExpression",
                     "expression",
                     "SyntaxKind",
-                    "SyntaxKind.InvocationExpression"
+                    "SyntaxKind.InvocationExpression",
                 },
                 terms
             );
@@ -3154,7 +3154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidExpression",
                     "expression",
                     "SyntaxKind",
-                    "SyntaxKind.InvocationExpression"
+                    "SyntaxKind.InvocationExpression",
                 },
                 terms
             );
@@ -3207,7 +3207,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "memberAccess",
                     "memberAccess.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -3234,7 +3234,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidExpression",
                     "expression",
                     "SyntaxKind",
-                    "SyntaxKind.InvocationExpression"
+                    "SyntaxKind.InvocationExpression",
                 },
                 terms
             );
@@ -3262,7 +3262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "expression",
                     "SyntaxKind",
-                    "SyntaxKind.InvocationExpression"
+                    "SyntaxKind.InvocationExpression",
                 },
                 terms
             );
@@ -3310,7 +3310,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "SyntaxKind",
                     "SyntaxKind.InvocationExpression",
                     "expressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -3383,7 +3383,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -3410,7 +3410,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -3437,7 +3437,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -3464,7 +3464,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -3491,7 +3491,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "expressionType",
                     "ExpressionType.Invalid",
-                    "objectionCreation"
+                    "objectionCreation",
                 },
                 terms
             );
@@ -3518,7 +3518,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "expressionType",
                     "ExpressionType.Invalid",
-                    "objectionCreation"
+                    "objectionCreation",
                 },
                 terms
             );
@@ -3543,7 +3543,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "objectionCreation",
                     "objectionCreation.ArgumentListOpt",
                     "expression",
-                    "(ObjectCreationExpressionSyntax)expression"
+                    "(ObjectCreationExpressionSyntax)expression",
                 },
                 terms
             );
@@ -3588,7 +3588,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "objectionCreation",
                     "objectionCreation.ArgumentListOpt",
-                    "flags"
+                    "flags",
                 },
                 terms
             );
@@ -3617,7 +3617,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectArgumentTerms",
                     "ExpressionType",
-                    "ExpressionType.Invalid"
+                    "ExpressionType.Invalid",
                 },
                 terms
             );
@@ -3646,7 +3646,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "objectionCreation.ArgumentListOpt",
                     "terms",
                     "flags",
-                    "CollectArgumentTerms"
+                    "CollectArgumentTerms",
                 },
                 terms
             );
@@ -3675,7 +3675,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "objectionCreation.ArgumentListOpt",
                     "terms",
                     "flags",
-                    "CollectArgumentTerms"
+                    "CollectArgumentTerms",
                 },
                 terms
             );
@@ -3704,7 +3704,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "objectionCreation.ArgumentListOpt",
                     "terms",
                     "flags",
-                    "CollectArgumentTerms"
+                    "CollectArgumentTerms",
                 },
                 terms
             );
@@ -3733,7 +3733,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "objectionCreation.ArgumentListOpt",
                     "terms",
                     "flags",
-                    "CollectArgumentTerms"
+                    "CollectArgumentTerms",
                 },
                 terms
             );
@@ -3778,7 +3778,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.ValidExpression",
                     "flags",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -3823,7 +3823,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType.ValidTerm",
                     "expressionType",
-                    "ExpressionType.ValidExpression"
+                    "ExpressionType.ValidExpression",
                 },
                 terms
             );
@@ -3849,7 +3849,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "objectionCreation.ArgumentListOpt",
                     "ExpressionType",
                     "expressionType",
-                    "ExpressionType.ValidExpression"
+                    "ExpressionType.ValidExpression",
                 },
                 terms
             );
@@ -3939,7 +3939,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expression",
                     "(ArrayCreationExpressionSyntax)expression",
                     "validTerm",
-                    "arrayCreation"
+                    "arrayCreation",
                 },
                 terms
             );
@@ -3964,7 +3964,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arrayCreation",
                     "arrayCreation.InitializerOpt",
                     "expression",
-                    "(ArrayCreationExpressionSyntax)expression"
+                    "(ArrayCreationExpressionSyntax)expression",
                 },
                 terms
             );
@@ -3989,7 +3989,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arrayCreation",
                     "arrayCreation.InitializerOpt",
                     "expression",
-                    "(ArrayCreationExpressionSyntax)expression"
+                    "(ArrayCreationExpressionSyntax)expression",
                 },
                 terms
             );
@@ -4031,7 +4031,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "arrayCreation",
                     "arrayCreation.InitializerOpt",
-                    "flags"
+                    "flags",
                 },
                 terms
             );
@@ -4056,7 +4056,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arrayCreation.InitializerOpt.Expressions",
                     "flags",
                     "ExpressionType",
-                    "ExpressionType.Invalid"
+                    "ExpressionType.Invalid",
                 },
                 terms
             );
@@ -4082,7 +4082,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType.ValidTerm",
                     "validTerm",
-                    "arrayCreation.InitializerOpt.Expressions"
+                    "arrayCreation.InitializerOpt.Expressions",
                 },
                 terms
             );
@@ -4108,7 +4108,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType.ValidTerm",
                     "validTerm",
-                    "arrayCreation.InitializerOpt.Expressions"
+                    "arrayCreation.InitializerOpt.Expressions",
                 },
                 terms
             );
@@ -4154,7 +4154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arrayCreation.InitializerOpt",
                     "ExpressionType",
                     "flags",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -4181,7 +4181,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arrayCreation.InitializerOpt",
                     "ExpressionType",
                     "flags",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -4222,7 +4222,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "expressionType",
                     "ExpressionType.ValidExpression",
-                    "validTerm"
+                    "validTerm",
                 },
                 terms
             );
@@ -4268,7 +4268,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arrayCreation.InitializerOpt",
                     "ExpressionType",
                     "flags",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -4348,7 +4348,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "expressionType",
                     "ExpressionType.ValidExpression",
-                    "ExpressionType.Invalid"
+                    "ExpressionType.Invalid",
                 },
                 terms
             );
@@ -4421,7 +4421,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -4448,7 +4448,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -4475,7 +4475,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -4501,7 +4501,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "expressionType",
                     "leftFlags",
-                    "rightFlags"
+                    "rightFlags",
                 },
                 terms
             );
@@ -4529,7 +4529,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "rightFlags",
-                    "invocation"
+                    "invocation",
                 },
                 terms
             );
@@ -4557,7 +4557,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "rightFlags",
-                    "invocation"
+                    "invocation",
                 },
                 terms
             );
@@ -4586,7 +4586,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "leftFlags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(InvocationExpressionSyntax)expression"
+                    "(InvocationExpressionSyntax)expression",
                 },
                 terms
             );
@@ -4616,7 +4616,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "CollectArgumentTerms",
                     "invocation.Expression",
                     "leftFlags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -4646,7 +4646,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "invocation.ArgumentList",
                     "terms",
                     "rightFlags",
-                    "CollectArgumentTerms"
+                    "CollectArgumentTerms",
                 },
                 terms
             );
@@ -4676,7 +4676,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "invocation.ArgumentList",
                     "terms",
                     "rightFlags",
-                    "CollectArgumentTerms"
+                    "CollectArgumentTerms",
                 },
                 terms
             );
@@ -4723,7 +4723,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ConvertToString",
                     "ExpressionType",
                     "leftFlags",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -4773,7 +4773,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "invocation",
                     "invocation.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -4804,7 +4804,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "invocation",
                     "invocation.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -4835,7 +4835,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "invocation",
                     "invocation.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -4861,7 +4861,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "rightFlags",
                     "ExpressionType",
                     "ExpressionType.ValidExpression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -4934,7 +4934,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -4980,7 +4980,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "prefixUnaryExpression"
+                    "prefixUnaryExpression",
                 },
                 terms
             );
@@ -5009,7 +5009,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(PrefixUnaryExpressionSyntax)expression"
+                    "(PrefixUnaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -5038,7 +5038,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(PrefixUnaryExpressionSyntax)expression"
+                    "(PrefixUnaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -5067,7 +5067,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(PrefixUnaryExpressionSyntax)expression"
+                    "(PrefixUnaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -5096,7 +5096,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "prefixUnaryExpression.Operand",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -5125,7 +5125,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "prefixUnaryExpression.Operand",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -5154,7 +5154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "prefixUnaryExpression.Operand",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -5201,7 +5201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "prefixUnaryExpression.Operand",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -5226,7 +5226,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "prefixUnaryExpression",
                     "prefixUnaryExpression.Operand",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -5260,7 +5260,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "prefixUnaryExpression",
                     "prefixUnaryExpression.Operand",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -5294,7 +5294,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "prefixUnaryExpression",
                     "prefixUnaryExpression.Operand",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -5321,7 +5321,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "SyntaxKind.LogicalNotExpression",
                     "SyntaxKind.BitwiseNotExpression",
                     "SyntaxKind.NegateExpression",
-                    "SyntaxKind.PlusExpression"
+                    "SyntaxKind.PlusExpression",
                 },
                 terms
             );
@@ -5352,7 +5352,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "SyntaxKind.LogicalNotExpression",
                     "SyntaxKind.BitwiseNotExpression",
                     "SyntaxKind.NegateExpression",
-                    "SyntaxKind.PlusExpression"
+                    "SyntaxKind.PlusExpression",
                 },
                 terms
             );
@@ -5383,7 +5383,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "SyntaxKind.LogicalNotExpression",
                     "SyntaxKind.BitwiseNotExpression",
                     "SyntaxKind.NegateExpression",
-                    "SyntaxKind.PlusExpression"
+                    "SyntaxKind.PlusExpression",
                 },
                 terms
             );
@@ -5408,7 +5408,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "flags",
                     "ExpressionType.ValidExpression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -5439,7 +5439,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "flags",
                     "ExpressionType.ValidExpression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -5512,7 +5512,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -5539,7 +5539,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -5566,7 +5566,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.Invalid",
                     "position",
                     "expression",
-                    "terms"
+                    "terms",
                 },
                 terms
             );
@@ -5631,7 +5631,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "ExpressionType",
                     "ExpressionType.Invalid",
-                    "postfixUnaryExpression"
+                    "postfixUnaryExpression",
                 },
                 terms
             );
@@ -5660,7 +5660,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(PostfixUnaryExpressionSyntax)expression"
+                    "(PostfixUnaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -5689,7 +5689,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(PostfixUnaryExpressionSyntax)expression"
+                    "(PostfixUnaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -5718,7 +5718,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(PostfixUnaryExpressionSyntax)expression"
+                    "(PostfixUnaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -5747,7 +5747,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "postfixUnaryExpression.Operand",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -5776,7 +5776,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "postfixUnaryExpression.Operand",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -5805,7 +5805,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "postfixUnaryExpression.Operand",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -5852,7 +5852,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "postfixUnaryExpression.Operand",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -5877,7 +5877,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "postfixUnaryExpression",
                     "postfixUnaryExpression.Operand",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -5905,7 +5905,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "postfixUnaryExpression",
                     "postfixUnaryExpression.Operand",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -5980,7 +5980,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "position",
                     "expression",
                     "terms",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -6008,7 +6008,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "rightFlags",
-                    "binaryExpression"
+                    "binaryExpression",
                 },
                 terms
             );
@@ -6036,7 +6036,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "ExpressionType.Invalid",
                     "rightFlags",
-                    "binaryExpression"
+                    "binaryExpression",
                 },
                 terms
             );
@@ -6065,7 +6065,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "leftFlags",
                     "CollectExpressionTerms",
                     "expression",
-                    "(BinaryExpressionSyntax)expression"
+                    "(BinaryExpressionSyntax)expression",
                 },
                 terms
             );
@@ -6094,7 +6094,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "rightFlags",
                     "CollectExpressionTerms",
                     "binaryExpression.Left",
-                    "leftFlags"
+                    "leftFlags",
                 },
                 terms
             );
@@ -6124,7 +6124,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "binaryExpression.Right",
                     "terms",
                     "rightFlags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -6154,7 +6154,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "binaryExpression.Right",
                     "terms",
                     "rightFlags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -6201,7 +6201,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "binaryExpression.Left",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -6249,7 +6249,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "binaryExpression",
                     "binaryExpression.Left",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6278,7 +6278,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "binaryExpression",
                     "binaryExpression.Left",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6325,7 +6325,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "binaryExpression.Right",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -6373,7 +6373,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6402,7 +6402,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6431,7 +6431,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6460,7 +6460,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6489,7 +6489,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6518,7 +6518,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6547,7 +6547,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6576,7 +6576,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6606,7 +6606,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6634,7 +6634,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidExpression",
                     "expressionType",
                     "binaryExpression",
-                    "binaryExpression.Kind"
+                    "binaryExpression.Kind",
                 },
                 terms
             );
@@ -6662,7 +6662,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidExpression",
                     "expressionType",
                     "binaryExpression",
-                    "binaryExpression.Kind"
+                    "binaryExpression.Kind",
                 },
                 terms
             );
@@ -6688,7 +6688,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "rightFlags",
                     "ExpressionType",
                     "ExpressionType.ValidExpression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -6717,7 +6717,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6746,7 +6746,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -6772,7 +6772,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "ExpressionType.Invalid",
                     "binaryExpression",
-                    "binaryExpression.Kind"
+                    "binaryExpression.Kind",
                 },
                 terms
             );
@@ -6820,7 +6820,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType.ValidTerm",
                     "terms",
                     "binaryExpression.Right",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -7023,7 +7023,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arg",
                     "argumentList",
                     "argumentList.Arguments",
-                    "flags"
+                    "flags",
                 },
                 terms
             );
@@ -7052,7 +7052,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "ExpressionType",
-                    "ExpressionType.Invalid"
+                    "ExpressionType.Invalid",
                 },
                 terms
             );
@@ -7081,7 +7081,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "flags",
                     "CollectExpressionTerms",
                     "ExpressionType",
-                    "ExpressionType.Invalid"
+                    "ExpressionType.Invalid",
                 },
                 terms
             );
@@ -7110,7 +7110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arg.Expression",
                     "terms",
                     "flags",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -7157,7 +7157,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "arg.Expression",
                     "ConvertToString",
                     "ExpressionType",
-                    "ExpressionType.ValidTerm"
+                    "ExpressionType.ValidTerm",
                 },
                 terms
             );
@@ -7203,7 +7203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "arg",
                     "arg.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -7233,7 +7233,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "terms",
                     "arg",
                     "arg.Expression",
-                    "ConvertToString"
+                    "ConvertToString",
                 },
                 terms
             );
@@ -7281,7 +7281,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "arg",
                     "argumentList",
-                    "argumentList.Arguments"
+                    "argumentList.Arguments",
                 },
                 terms
             );
@@ -7310,7 +7310,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "arg",
                     "argumentList",
-                    "argumentList.Arguments"
+                    "argumentList.Arguments",
                 },
                 terms
             );
@@ -7339,7 +7339,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "arg",
                     "argumentList",
-                    "argumentList.Arguments"
+                    "argumentList.Arguments",
                 },
                 terms
             );
@@ -7368,7 +7368,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "expressionType",
                     "arg",
                     "argumentList",
-                    "argumentList.Arguments"
+                    "argumentList.Arguments",
                 },
                 terms
             );
@@ -7393,7 +7393,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "ExpressionType",
                     "validExpr",
                     "ExpressionType.ValidExpression",
-                    "expressionType"
+                    "expressionType",
                 },
                 terms
             );
@@ -7533,7 +7533,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "declarator.InitializerOpt.Value",
                     "terms",
                     "CollectExpressionTerms",
-                    "declarator"
+                    "declarator",
                 },
                 terms
             );
@@ -7559,7 +7559,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "declarator.InitializerOpt",
                     "declarator.InitializerOpt.Value",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -7586,7 +7586,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "position",
                     "declarator.InitializerOpt.Value",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );
@@ -7614,7 +7614,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Debugging
                     "declarator.InitializerOpt",
                     "declarator.InitializerOpt.Value",
                     "terms",
-                    "CollectExpressionTerms"
+                    "CollectExpressionTerms",
                 },
                 terms
             );

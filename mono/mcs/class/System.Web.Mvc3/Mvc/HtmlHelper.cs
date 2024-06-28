@@ -342,7 +342,7 @@
                 InnerHtml =
                     (!String.IsNullOrEmpty(linkText))
                         ? HttpUtility.HtmlEncode(linkText)
-                        : String.Empty
+                        : String.Empty,
             };
             tagBuilder.MergeAttributes(htmlAttributes);
             tagBuilder.MergeAttribute("href", url);

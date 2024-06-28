@@ -153,7 +153,7 @@ namespace System.Net.Http.Functional.Tests
                     ConnectCallback = delegate
                     {
                         return ValueTask.FromResult(httpConnection);
-                    }
+                    },
                 }
             );
             Task<HttpResponseMessage> clientTask = hc.SendAsync(
@@ -213,7 +213,7 @@ namespace System.Net.Http.Functional.Tests
                     ConnectCallback = delegate
                     {
                         return ValueTask.FromResult(httpConnection);
-                    }
+                    },
                 }
             );
             Task<Stream> clientTask = hc.GetStreamAsync($"http://doesntmatter:12345/");

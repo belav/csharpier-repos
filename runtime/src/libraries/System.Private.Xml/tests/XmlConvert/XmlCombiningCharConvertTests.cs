@@ -136,7 +136,7 @@ namespace System.Xml.XmlConvertTests
             "_x20E2_",
             "_x3030_",
             "_x3098_",
-            "_x309B_"
+            "_x309B_",
         };
 
         public static byte[] _byte_CombiningChar =
@@ -392,7 +392,7 @@ namespace System.Xml.XmlConvertTests
             0x98,
             0x30,
             0x9B,
-            0x30
+            0x30,
         };
 
         #endregion

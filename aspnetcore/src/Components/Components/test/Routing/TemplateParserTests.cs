@@ -350,7 +350,7 @@ public class RoutePatternParserTests
                                         : RoutePatternParameterKind.Standard
                                 ),
                             Array.Empty<RoutePatternParameterPolicyReference>()
-                        )
+                        ),
                     }
                 )
             );
@@ -401,14 +401,13 @@ public class RoutePatternParserTests
                     (
                         RoutePatternParameterPart xParameterPart,
                         RoutePatternParameterPart yParameterPart
-                    ) =>
-                        string.Equals(
-                            xParameterPart.Name,
-                            yParameterPart.Name,
-                            StringComparison.OrdinalIgnoreCase
-                        )
-                            && xParameterPart.IsOptional == yParameterPart.IsOptional
-                            && xParameterPart.IsCatchAll == yParameterPart.IsCatchAll,
+                    ) => string.Equals(
+                        xParameterPart.Name,
+                        yParameterPart.Name,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                        && xParameterPart.IsOptional == yParameterPart.IsOptional
+                        && xParameterPart.IsCatchAll == yParameterPart.IsCatchAll,
                     (RoutePatternLiteralPart xLiteralPart, RoutePatternLiteralPart yLiteralPart) =>
                         string.Equals(
                             xLiteralPart.Content,

@@ -158,7 +158,7 @@ namespace System.Xml
                 4,
                 4,
                 4,
-                4
+                4,
             ];
 
         private static byte CLenFromPrec(byte bPrec)
@@ -361,7 +361,7 @@ namespace System.Xml
         private const int MaxFractionDigits = 7;
 
         internal static ReadOnlySpan<int> KatmaiTimeScaleMultiplicator =>
-            [10000000, 1000000, 100000, 10000, 1000, 100, 10, 1,];
+            [10000000, 1000000, 100000, 10000, 1000, 100, 10, 1];
 
         private static void Write2Dig(StringBuilder sb, int val)
         {

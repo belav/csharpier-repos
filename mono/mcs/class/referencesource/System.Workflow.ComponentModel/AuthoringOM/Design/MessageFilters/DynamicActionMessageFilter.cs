@@ -430,7 +430,7 @@ namespace System.Workflow.ComponentModel.Design
             new Size(24, 24),
             new Size(28, 28),
             new Size(32, 32),
-            new Size(36, 36)
+            new Size(36, 36),
         };
         private static Size[] Margins = new Size[]
         {
@@ -438,7 +438,7 @@ namespace System.Workflow.ComponentModel.Design
             new Size(1, 1),
             new Size(2, 2),
             new Size(2, 2),
-            new Size(3, 3)
+            new Size(3, 3),
         };
 
         internal enum ButtonSizes
@@ -447,13 +447,13 @@ namespace System.Workflow.ComponentModel.Design
             SmallMedium = 1,
             Medium = 2,
             MediumLarge = 3,
-            Large = 4
+            Large = 4,
         };
 
         internal enum ActionTypes
         {
             Standard = 1,
-            TwoState = 2
+            TwoState = 2,
         };
 
         private ItemList<ActionButton> buttons = null;
@@ -658,7 +658,7 @@ namespace System.Workflow.ComponentModel.Design
             Normal = 0,
             Highlight = 1,
             Pressed = 2,
-            Disabled = 3
+            Disabled = 3,
         };
 
         internal event EventHandler StateChanged;

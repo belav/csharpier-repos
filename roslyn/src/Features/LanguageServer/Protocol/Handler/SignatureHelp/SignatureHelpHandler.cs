@@ -96,7 +96,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                         {
                             sigInfo = new LSP.VSInternalSignatureInformation
                             {
-                                ColorizedLabel = GetSignatureClassifiedText(item)
+                                ColorizedLabel = GetSignatureClassifiedText(item),
                             };
                         }
                         else
@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                         sigInfo.Documentation = new LSP.MarkupContent
                         {
                             Kind = LSP.MarkupKind.PlainText,
-                            Value = item.DocumentationFactory(cancellationToken).GetFullText()
+                            Value = item.DocumentationFactory(cancellationToken).GetFullText(),
                         };
                         sigInfo.Parameters = item
                             .Parameters.Select(p => new LSP.ParameterInformation
@@ -117,8 +117,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                                 Documentation = new LSP.MarkupContent
                                 {
                                     Kind = LSP.MarkupKind.PlainText,
-                                    Value = p.DocumentationFactory(cancellationToken).GetFullText()
-                                }
+                                    Value = p.DocumentationFactory(cancellationToken).GetFullText(),
+                                },
                             })
                             .ToArray();
                         sigInfos.Add(sigInfo);
@@ -128,7 +128,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                     {
                         ActiveSignature = GetActiveSignature(items),
                         ActiveParameter = items.ArgumentIndex,
-                        Signatures = sigInfos.ToArrayAndFree()
+                        Signatures = sigInfos.ToArrayAndFree(),
                     };
 
                     return sigHelp;

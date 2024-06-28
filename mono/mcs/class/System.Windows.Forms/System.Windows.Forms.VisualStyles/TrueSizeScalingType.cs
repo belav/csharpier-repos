@@ -32,6 +32,6 @@ namespace System.Windows.Forms.VisualStyles
     {
         None = 0,
         Size = 1,
-        Dpi = 2
+        Dpi = 2,
     }
 }

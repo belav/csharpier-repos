@@ -902,7 +902,7 @@ namespace System.StubHelpers
             Array,
             Layout,
             StringBuilderAnsi,
-            StringBuilderUnicode
+            StringBuilderUnicode,
         }
 
         // Pointer to MngdNativeArrayMarshaler, ownership not assumed.
@@ -924,7 +924,7 @@ namespace System.StubHelpers
             Out = 0x20000000,
             IsAnsi = 0x00FF0000,
             IsThrowOn = 0x0000FF00,
-            IsBestFit = 0x000000FF
+            IsBestFit = 0x000000FF,
         }
 
         private static bool IsIn(int dwFlags) => (dwFlags & (int)AsAnyFlags.In) != 0;

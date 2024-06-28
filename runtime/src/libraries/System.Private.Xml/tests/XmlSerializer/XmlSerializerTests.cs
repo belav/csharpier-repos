@@ -55,7 +55,7 @@ public static partial class XmlSerializerTests
         DateTime localTime = new DateTime(549269870000L, DateTimeKind.Local);
         TypeWithDateTimePropertyAsXmlTime localTimeObject = new TypeWithDateTimePropertyAsXmlTime()
         {
-            Value = localTime
+            Value = localTime,
         };
 
         // This is how we convert DateTime from time to string.
@@ -77,7 +77,7 @@ public static partial class XmlSerializerTests
 
         TypeWithDateTimePropertyAsXmlTime utcTimeObject = new TypeWithDateTimePropertyAsXmlTime()
         {
-            Value = new DateTime(549269870000L, DateTimeKind.Utc)
+            Value = new DateTime(549269870000L, DateTimeKind.Utc),
         };
 
         TypeWithDateTimePropertyAsXmlTime utcTimeRoundTrip = SerializeAndDeserialize(
@@ -101,9 +101,9 @@ public static partial class XmlSerializerTests
             A = new[]
             {
                 new SerializationTypes.TypeNameClashA.TypeNameClash { Name = "N1" },
-                new SerializationTypes.TypeNameClashA.TypeNameClash { Name = "N2" }
+                new SerializationTypes.TypeNameClashA.TypeNameClash { Name = "N2" },
             },
-            B = new[] { new SerializationTypes.TypeNameClashB.TypeNameClash { Name = "N3" } }
+            B = new[] { new SerializationTypes.TypeNameClashB.TypeNameClash { Name = "N3" } },
         };
 
         var xml =
@@ -140,15 +140,15 @@ public static partial class XmlSerializerTests
             F1 = new SimpleType[]
             {
                 new SimpleType { P1 = "ab", P2 = 1 },
-                new SimpleType { P1 = "cd", P2 = 2 }
+                new SimpleType { P1 = "cd", P2 = 2 },
             },
             F2 = new int[] { -1, 3 },
             P1 = new SimpleType[]
             {
                 new SimpleType { P1 = "ef", P2 = 5 },
-                new SimpleType { P1 = "gh", P2 = 7 }
+                new SimpleType { P1 = "gh", P2 = 7 },
             },
-            P2 = new int[] { 11, 12 }
+            P2 = new int[] { 11, 12 },
         };
         TypeWithGetSetArrayMembers y = SerializeAndDeserialize<TypeWithGetSetArrayMembers>(
             x,
@@ -358,7 +358,7 @@ public static partial class XmlSerializerTests
             null,
             typeof(InvalidOperationException),
             arrayOfInt,
-            "Specified method is not supported."
+            "Specified method is not supported.",
         };
         yield return new object[]
         {
@@ -367,7 +367,7 @@ public static partial class XmlSerializerTests
             null,
             typeof(InvalidOperationException),
             arrayOfAny,
-            "Specified method is not supported."
+            "Specified method is not supported.",
         };
         yield return new object[]
         {
@@ -376,7 +376,7 @@ public static partial class XmlSerializerTests
             null,
             typeof(InvalidOperationException),
             arrayOfInt,
-            "Specified method is not supported."
+            "Specified method is not supported.",
         };
         yield return new object[]
         {
@@ -385,7 +385,7 @@ public static partial class XmlSerializerTests
             typeof(InvalidOperationException),
             null,
             arrayOfInt,
-            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add"
+            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add",
         };
         yield return new object[]
         {
@@ -394,7 +394,7 @@ public static partial class XmlSerializerTests
             typeof(InvalidOperationException),
             null,
             arrayOfInt,
-            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add"
+            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add",
         };
         yield return new object[]
         {
@@ -403,7 +403,7 @@ public static partial class XmlSerializerTests
             typeof(InvalidOperationException),
             null,
             null,
-            "is not supported because it implements IDictionary."
+            "is not supported because it implements IDictionary.",
         };
 #else
         yield return new object[]
@@ -413,7 +413,7 @@ public static partial class XmlSerializerTests
             null,
             typeof(InvalidOperationException),
             arrayOfInt,
-            "Parameterless constructor is required for collections and enumerators."
+            "Parameterless constructor is required for collections and enumerators.",
         };
         yield return new object[]
         {
@@ -422,7 +422,7 @@ public static partial class XmlSerializerTests
             null,
             typeof(InvalidOperationException),
             arrayOfAny,
-            "Parameterless constructor is required for collections and enumerators."
+            "Parameterless constructor is required for collections and enumerators.",
         };
         yield return new object[]
         {
@@ -430,7 +430,7 @@ public static partial class XmlSerializerTests
             ImmutableList.Create(42),
             null,
             null,
-            arrayOfInt
+            arrayOfInt,
         };
         yield return new object[]
         {
@@ -439,7 +439,7 @@ public static partial class XmlSerializerTests
             typeof(InvalidOperationException),
             null,
             arrayOfInt,
-            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add"
+            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add",
         };
         yield return new object[]
         {
@@ -448,7 +448,7 @@ public static partial class XmlSerializerTests
             typeof(InvalidOperationException),
             null,
             arrayOfInt,
-            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add"
+            "To be XML serializable, types which inherit from IEnumerable must have an implementation of Add",
         };
         // IDictionary types are denied right from the start with a NotSupportedExcpetion
         yield return new object[]
@@ -458,7 +458,7 @@ public static partial class XmlSerializerTests
             typeof(NotSupportedException),
             null,
             null,
-            "is not supported because it implements IDictionary."
+            "is not supported because it implements IDictionary.",
         };
 #endif
     }
@@ -627,7 +627,7 @@ public static partial class XmlSerializerTests
         SerializeAndDeserialize<__TypeNameWithSpecialCharacters\u6F22\u00F1>(
             new __TypeNameWithSpecialCharacters\u6F22\u00F1()
             {
-                PropertyNameWithSpecialCharacters\u6F22\u00F1 = "Test"
+                PropertyNameWithSpecialCharacters\u6F22\u00F1 = "Test",
             },
             "<?xml version=\"1.0\"?><__TypeNameWithSpecialCharacters\u6F22\u00F1 xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">  <PropertyNameWithSpecialCharacters\u6F22\u00F1>Test</PropertyNameWithSpecialCharacters\u6F22\u00F1></__TypeNameWithSpecialCharacters\u6F22\u00F1>"
         );
@@ -639,7 +639,7 @@ public static partial class XmlSerializerTests
         KnownTypesThroughConstructor value = new KnownTypesThroughConstructor()
         {
             EnumValue = MyEnum.One,
-            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" }
+            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" },
         };
         KnownTypesThroughConstructor actual = SerializeAndDeserialize<KnownTypesThroughConstructor>(
             value,
@@ -674,7 +674,7 @@ public static partial class XmlSerializerTests
             DateTimeProperty = new DateTime(100),
             IntProperty = 5,
             StringProperty = "TestString",
-            ListProperty = new List<string>()
+            ListProperty = new List<string>(),
         };
         value.ListProperty.AddRange(new string[] { "one", "two", "three" });
 
@@ -722,7 +722,7 @@ public static partial class XmlSerializerTests
             ClassID = "ClassID",
             DisplayName = "DisplayName",
             Id = "Id",
-            IsLoaded = true
+            IsLoaded = true,
         };
         ClassImplementsInterface actual = SerializeAndDeserialize<ClassImplementsInterface>(
             value,
@@ -808,7 +808,7 @@ public static partial class XmlSerializerTests
     {
         var value = new WithStruct
         {
-            Some = new SomeStruct { A = 1, B = 2 }
+            Some = new SomeStruct { A = 1, B = 2 },
         };
         var result = SerializeAndDeserialize(
             value,
@@ -849,7 +849,7 @@ public static partial class XmlSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct { A = 1, B = 2 },
         };
         var actual = SerializeAndDeserialize(
             item,
@@ -898,7 +898,7 @@ public static partial class XmlSerializerTests
             MyField = "MyField",
             MyFieldIgnored = 99,
             MyFieldSpecified = true,
-            MyFieldIgnoredSpecified = false
+            MyFieldIgnoredSpecified = false,
         };
         var actual = SerializeAndDeserialize<TypeWithPropertyNameSpecified>(
             value,
@@ -915,7 +915,7 @@ public static partial class XmlSerializerTests
         {
             NoneSchemaFormListProperty = new List<string> { "abc" },
             QualifiedSchemaFormListProperty = new List<bool> { true },
-            UnqualifiedSchemaFormListProperty = new List<int> { 1 }
+            UnqualifiedSchemaFormListProperty = new List<int> { 1 },
         };
         var actual = SerializeAndDeserialize<TypeWithXmlSchemaFormAttribute>(
             value,
@@ -961,7 +961,7 @@ public static partial class XmlSerializerTests
     {
         var original = new TypeWithXmlTextAttributeOnArray()
         {
-            Text = new string[] { "val1", "val2" }
+            Text = new string[] { "val1", "val2" },
         };
 
         var actual = SerializeAndDeserialize<TypeWithXmlTextAttributeOnArray>(
@@ -996,7 +996,7 @@ public static partial class XmlSerializerTests
         categoryElement.InnerText = "Category innertext";
         var expected = new TypeWithXmlElementProperty()
         {
-            Elements = new[] { productElement, categoryElement }
+            Elements = new[] { productElement, categoryElement },
         };
         var actual = SerializeAndDeserialize(
             expected,
@@ -1367,7 +1367,7 @@ public static partial class XmlSerializerTests
     {
         var obj = new TypeWithXmlNodeArrayProperty()
         {
-            CDATA = new[] { new XmlDocument().CreateCDataSection("test&test") }
+            CDATA = new[] { new XmlDocument().CreateCDataSection("test&test") },
         };
         var deserializedObj = SerializeAndDeserialize<TypeWithXmlNodeArrayProperty>(
             obj,
@@ -1454,7 +1454,7 @@ public static partial class XmlSerializerTests
                 (byte)'?',
                 (byte)'x',
                 (byte)'m',
-                (byte)'l'
+                (byte)'l',
             };
             byte[] firstBytes = new byte[5];
             ms.Position = 0;
@@ -1479,7 +1479,7 @@ public static partial class XmlSerializerTests
             DateTimeProperty = new DateTime(100, DateTimeKind.Utc),
             IntProperty = 5,
             StringProperty = "TestString",
-            ListProperty = new List<string>()
+            ListProperty = new List<string>(),
         };
         value.ListProperty.AddRange(new string[] { "one", "two", "three" });
 
@@ -1512,7 +1512,7 @@ public static partial class XmlSerializerTests
             StringProperty = "DefaultString",
             EmptyStringProperty = "",
             IntProperty = 11,
-            CharProperty = 'm'
+            CharProperty = 'm',
         };
 
         var actual = SerializeAndDeserialize(
@@ -1535,7 +1535,7 @@ public static partial class XmlSerializerTests
             StringProperty = "NonDefaultValue",
             EmptyStringProperty = "NonEmpty",
             IntProperty = 12,
-            CharProperty = 'n'
+            CharProperty = 'n',
         };
 
         var actual = SerializeAndDeserialize(
@@ -1576,7 +1576,7 @@ public static partial class XmlSerializerTests
     {
         var value = new TypeWithEnumFlagPropertyHavingDefaultValue()
         {
-            EnumProperty = EnumFlags.Two | EnumFlags.Three
+            EnumProperty = EnumFlags.Two | EnumFlags.Three,
         };
         var actual = SerializeAndDeserialize(
             value,
@@ -1606,7 +1606,7 @@ public static partial class XmlSerializerTests
 
         var value = new TypeWithEnumFlagPropertyHavingDefaultValue()
         {
-            EnumProperty = EnumFlags.Two | EnumFlags.Three
+            EnumProperty = EnumFlags.Two | EnumFlags.Three,
         };
         var actual = SerializeAndDeserialize(
             value,
@@ -1700,7 +1700,7 @@ public static partial class XmlSerializerTests
         var value = new KnownTypesThroughConstructorWithArrayProperties()
         {
             IntArrayValue = intArray,
-            StringArrayValue = stringArray
+            StringArrayValue = stringArray,
         };
         var actual = SerializeAndDeserialize(
             value,
@@ -1755,7 +1755,7 @@ public static partial class XmlSerializerTests
     {
         var value = new KnownTypesThroughConstructorWithValue()
         {
-            Value = new XmlQualifiedName("foo")
+            Value = new XmlQualifiedName("foo"),
         };
         var actual = SerializeAndDeserialize(
             value,
@@ -1851,7 +1851,7 @@ public static partial class XmlSerializerTests
         var value = new TypeWithArrayPropertyHavingChoice()
         {
             ManyChoices = choices,
-            ChoiceArray = itemChoices
+            ChoiceArray = itemChoices,
         };
 
         var actual = SerializeAndDeserialize(
@@ -1888,7 +1888,7 @@ public static partial class XmlSerializerTests
             IntField1 = 1,
             IntField2 = 2,
             StringField1 = "foo1",
-            StringField2 = "foo2"
+            StringField2 = "foo2",
         };
 
         var actual = SerializeAndDeserialize(
@@ -1914,7 +1914,7 @@ public static partial class XmlSerializerTests
         {
             Name = "Bear",
             Age = 5,
-            Breed = DogBreed.GermanShepherd
+            Breed = DogBreed.GermanShepherd,
         };
         var dog2 = SerializeAndDeserialize(dog1, baseline, serializerfunc);
         Assert.Equal(dog1.Name, dog2.Name);
@@ -2274,7 +2274,7 @@ public static partial class XmlSerializerTests
         {
             FirstName = "Harry",
             MiddleName = "James",
-            LastName = "Potter"
+            LastName = "Potter",
         };
 
         var actual = SerializeAndDeserialize(
@@ -2369,7 +2369,7 @@ public static partial class XmlSerializerTests
         {
             Name = "TrumpetKeyC",
             IsValved = false,
-            Modulation = 'C'
+            Modulation = 'C',
         };
         band.Instruments = new Instrument[2] { brass, trumpet };
 
@@ -2684,7 +2684,7 @@ public static partial class XmlSerializerTests
                 var overrides = new XmlAttributeOverrides();
                 var parametersXmlAttribute = new XmlAttributes
                 {
-                    XmlType = new XmlTypeAttribute("stringParameter")
+                    XmlType = new XmlTypeAttribute("stringParameter"),
                 };
                 overrides.Add(typeof(Parameter<string>), parametersXmlAttribute);
 
@@ -2778,7 +2778,7 @@ public static partial class XmlSerializerTests
     {
         XElementArrayWrapper xarray = new XElementArrayWrapper
         {
-            xelements = new XElement[] { new XElement("Root"), new XElement("Member") }
+            xelements = new XElement[] { new XElement("Root"), new XElement("Member") },
         };
 
         XElementArrayWrapper retarray = SerializeAndDeserialize<XElementArrayWrapper>(

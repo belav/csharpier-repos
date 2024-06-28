@@ -72,7 +72,7 @@ namespace System.Web.Razor.Test
 
             var mockHost = new Mock<RazorEngineHost>(new CSharpRazorCodeLanguage())
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHost
                 .Setup(h => h.DecorateCodeParser(It.IsAny<CSharpCodeParser>()))
@@ -96,7 +96,7 @@ namespace System.Web.Razor.Test
             // Arrange
             var mockHost = new Mock<RazorEngineHost>(new CSharpRazorCodeLanguage())
             {
-                CallBase = true
+                CallBase = true,
             };
 
             RazorCodeGenerator expected = new Mock<RazorCodeGenerator>(
@@ -228,7 +228,7 @@ namespace System.Web.Razor.Test
         {
             return new RazorEngineHost(new CSharpRazorCodeLanguage())
             {
-                DesignTimeMode = designTime
+                DesignTimeMode = designTime,
             };
         }
     }

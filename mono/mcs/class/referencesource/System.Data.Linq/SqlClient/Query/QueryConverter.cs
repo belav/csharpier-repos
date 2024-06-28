@@ -22,7 +22,7 @@ namespace System.Data.Linq.SqlClient
     enum ConverterSpecialTypes
     {
         Row,
-        Table
+        Table,
     }
 
     [Flags]
@@ -34,7 +34,7 @@ namespace System.Data.Linq.SqlClient
         CanUseOuterApply = 0x4,
         CanUseRowStatus = 0x8,
         CanUseJoinOn = 0x10, // Whether or not to use ON clause of JOIN.
-        CanOutputFromInsert = 0x20
+        CanOutputFromInsert = 0x20,
     }
 
     [SuppressMessage(
@@ -1014,7 +1014,7 @@ namespace System.Data.Linq.SqlClient
             Treat,
             Ignore,
             Convert,
-            Lift
+            Lift,
         }
 
         private ConversionMethod ChooseConversionMethod(Type fromType, Type toType)
@@ -2178,7 +2178,7 @@ namespace System.Data.Linq.SqlClient
                 this.gmap[kgAliasRef] = new GroupInfo
                 {
                     SelectWithGroup = gsel,
-                    ElementOnGroupSource = elemOnGroupSource
+                    ElementOnGroupSource = elemOnGroupSource,
                 };
 
                 SqlExpression resultExpr = this.VisitExpression(resultSelector.Body);
@@ -2188,7 +2188,7 @@ namespace System.Data.Linq.SqlClient
                 this.gmap[resultExpr] = new GroupInfo
                 {
                     SelectWithGroup = gsel,
-                    ElementOnGroupSource = elemOnGroupSource
+                    ElementOnGroupSource = elemOnGroupSource,
                 };
             }
             else
@@ -2213,7 +2213,7 @@ namespace System.Data.Linq.SqlClient
                 this.gmap[resultExpr] = new GroupInfo
                 {
                     SelectWithGroup = gsel,
-                    ElementOnGroupSource = elemOnGroupSource
+                    ElementOnGroupSource = elemOnGroupSource,
                 };
             }
 
@@ -2380,11 +2380,9 @@ namespace System.Data.Linq.SqlClient
                     this.GetAggregate(
                         aggType,
                         returnType,
-                        isCount
-                            ? null
-                            : (lambda == null)
-                                ? aref
-                                : exp
+                        isCount ? null
+                            : (lambda == null) ? aref
+                            : exp
                     ),
                     alias,
                     this.dominatingExpression
@@ -3590,7 +3588,7 @@ namespace System.Data.Linq.SqlClient
                         ParameterExpression p = Expression.Parameter(id.Type, "p");
                         Expression[] init = new Expression[1]
                         {
-                            Expression.Convert(p, typeof(object))
+                            Expression.Convert(p, typeof(object)),
                         };
                         NewArrayExpression arrExp = Expression.NewArrayInit(typeof(object), init);
                         LambdaExpression rs = Expression.Lambda(arrExp, p);

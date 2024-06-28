@@ -48,8 +48,8 @@ namespace System.Web.Http.WebHost
                 {
                     new HttpMessageContent(
                         new HttpRequestMessage(HttpMethod.Post, "http://contoso.com/values/  space")
-                    )
-                }
+                    ),
+                },
             };
 
             // Arrange

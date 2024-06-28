@@ -192,7 +192,7 @@ namespace MonoTests.System.Security.Cryptography
             0x47,
             0x62,
             0x65,
-            0x56
+            0x56,
         };
         public static byte[] dsaJ =
         {
@@ -307,7 +307,7 @@ namespace MonoTests.System.Security.Cryptography
             0xEA,
             0xE1,
             0x16,
-            0x32
+            0x32,
         };
         public static byte[] dsaP =
         {
@@ -438,7 +438,7 @@ namespace MonoTests.System.Security.Cryptography
             0xED,
             0xC6,
             0x7B,
-            0xD3
+            0xD3,
         };
         public static byte[] dsaQ =
         {
@@ -461,7 +461,7 @@ namespace MonoTests.System.Security.Cryptography
             0x62,
             0x83,
             0x73,
-            0x51
+            0x51,
         };
         public static byte[] dsaX =
         {
@@ -484,7 +484,7 @@ namespace MonoTests.System.Security.Cryptography
             0xF6,
             0x0A,
             0x2F,
-            0xB1
+            0xB1,
         };
         public static byte[] dsaY =
         {
@@ -615,7 +615,7 @@ namespace MonoTests.System.Security.Cryptography
             0x89,
             0x03,
             0xC7,
-            0xBB
+            0xBB,
         };
         public static int dsaCounter = 224;
         public static byte[] dsaSeed =
@@ -639,7 +639,7 @@ namespace MonoTests.System.Security.Cryptography
             0xE9,
             0x1B,
             0xAF,
-            0x9B
+            0x9B,
         };
 
         public static DSAParameters GetKey(bool includePrivateKey)
@@ -788,7 +788,7 @@ namespace MonoTests.System.Security.Cryptography
             0x09,
             0x1d,
             0xbd,
-            0xcb
+            0xcb,
         };
         static byte[] rsaExponent = { 0x11 };
         static byte[] rsaP =
@@ -856,7 +856,7 @@ namespace MonoTests.System.Security.Cryptography
             0x58,
             0xfb,
             0x65,
-            0x99
+            0x99,
         };
         static byte[] rsaQ =
         {
@@ -923,7 +923,7 @@ namespace MonoTests.System.Security.Cryptography
             0xaf,
             0x46,
             0x15,
-            0x03
+            0x03,
         };
         static byte[] rsaDP =
         {
@@ -990,7 +990,7 @@ namespace MonoTests.System.Security.Cryptography
             0x1f,
             0x67,
             0xc9,
-            0x81
+            0x81,
         };
         static byte[] rsaDQ =
         {
@@ -1057,7 +1057,7 @@ namespace MonoTests.System.Security.Cryptography
             0x98,
             0x36,
             0xda,
-            0x3d
+            0x3d,
         };
         static byte[] rsaInverseQ =
         {
@@ -1124,7 +1124,7 @@ namespace MonoTests.System.Security.Cryptography
             0x79,
             0x80,
             0x39,
-            0xf7
+            0xf7,
         };
         static byte[] rsaD =
         {
@@ -1255,7 +1255,7 @@ namespace MonoTests.System.Security.Cryptography
             0x5b,
             0x1c,
             0xb3,
-            0xc1
+            0xc1,
         };
 
         public static RSAParameters GetRsaKey(bool includePrivateKey)

@@ -718,7 +718,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                                 message: ""
                             )
                             {
-                                ReferencedCompilerVersion = referencedAssemblyName.Version
+                                ReferencedCompilerVersion = referencedAssemblyName.Version,
                             }
                         );
                         return true;

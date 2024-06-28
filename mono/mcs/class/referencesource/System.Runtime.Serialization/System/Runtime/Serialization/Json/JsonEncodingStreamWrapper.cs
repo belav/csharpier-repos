@@ -93,7 +93,7 @@ namespace System.Runtime.Serialization.Json
             UTF8,
             UTF16LE,
             UTF16BE,
-            None
+            None,
         }
 
         // This stream wrapper does not support duplex

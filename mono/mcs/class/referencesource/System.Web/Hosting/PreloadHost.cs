@@ -41,7 +41,7 @@ namespace System.Web.Hosting
                                 SR.GetString(
                                     SR.Failure_Create_Application_Preload_Provider_Type,
                                     preloadObjTypeName
-                                )
+                                ),
                             }
                         )
                     );

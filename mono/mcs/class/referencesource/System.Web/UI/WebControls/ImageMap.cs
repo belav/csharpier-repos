@@ -90,7 +90,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// <para>Gets or sets the name of the window for navigation.</para>
         /// </devdoc>
-        [WebCategory("Behavior"), DefaultValue(""), WebSysDescription(SR.HotSpot_Target),]
+        [WebCategory("Behavior"), DefaultValue(""), WebSysDescription(SR.HotSpot_Target)]
         public virtual string Target
         {
             get

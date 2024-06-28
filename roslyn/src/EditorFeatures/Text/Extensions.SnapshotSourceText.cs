@@ -363,7 +363,7 @@ namespace Microsoft.CodeAnalysis.Text
                     {
                         return new[]
                         {
-                            new TextChangeRange(new TextSpan(0, oldText.Length), this.Length)
+                            new TextChangeRange(new TextSpan(0, oldText.Length), this.Length),
                         };
                     }
 
@@ -500,7 +500,7 @@ namespace Microsoft.CodeAnalysis.Text
 
                             return new[]
                             {
-                                GetChangeRanges(oldSnapshot.Version, newSnapshot.Version, forward)
+                                GetChangeRanges(oldSnapshot.Version, newSnapshot.Version, forward),
                             };
                         }
                         else

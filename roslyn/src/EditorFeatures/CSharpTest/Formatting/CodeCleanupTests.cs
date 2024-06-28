@@ -636,7 +636,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                 {
                     "CS0219" => explicitlyIncludeCompilerId,
                     "ApplyAllAnalyzerFixersId" => applyAllAnalyzerFixersId,
-                    _ => false
+                    _ => false,
                 };
 
             var diagnosticIdsWithSeverity = new[] { ("CS0219", severity) };
@@ -879,7 +879,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
 
             var map = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
-                { LanguageNames.CSharp, ImmutableArray.Create(analyzer) }
+                { LanguageNames.CSharp, ImmutableArray.Create(analyzer) },
             };
 
             project = project.AddAnalyzerReference(new TestAnalyzerReferenceByLanguage(map));
@@ -1037,7 +1037,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Formatting
                     new AnalyzerFileReference(
                         typeof(UseExpressionBodyDiagnosticAnalyzer).Assembly.Location,
                         TestAnalyzerAssemblyLoader.LoadFromFile
-                    )
+                    ),
                 }
             );
 

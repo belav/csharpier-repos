@@ -37,7 +37,7 @@ namespace System.Workflow.ComponentModel
                     {
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Content
-                        )
+                        ),
                     }
                 )
             );

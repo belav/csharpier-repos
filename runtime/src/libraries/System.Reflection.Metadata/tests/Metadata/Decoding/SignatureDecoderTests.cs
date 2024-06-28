@@ -34,14 +34,14 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0x0F,
                 0x20,
                 0x55,
-                0x03
+                0x03,
             };
             var types = new string[]
             {
                 "int32 modopt(100001A) modopt(1000011)",
                 "char*",
                 "uint32",
-                "char modopt(1000015)*"
+                "char modopt(1000015)*",
             };
 
             fixed (byte* testSignaturePtr = &testSignature[0])
@@ -77,6 +77,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0x8 /*I4*/
                 ,
                 0xE /*STRING*/
+                ,
             }
         )]
         public unsafe void DecodeValidMethodSpecificationSignature(
@@ -111,6 +112,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0x0A /*GENERICINST*/
                 ,
                 0 /*count*/
+                ,
             }
         )] // no type parameters
         public unsafe void DecodeInvalidMethodSpecificationSignature(byte[] testSignature)
@@ -573,6 +575,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0x12 /*CLASS*/
                 ,
                 0x06 /*encoded type spec*/
+                ,
             }
         )] // not def or ref
         [InlineData(
@@ -581,6 +584,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0x11 /*VALUETYPE*/
                 ,
                 0x06 /*encoded type spec*/
+                ,
             }
         )] // not def or ref
         [InlineData(new byte[] { 0x60 })] // Bad type code
@@ -612,6 +616,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0 /*parameters count*/
                 ,
                 0x1 /* return type (VOID)*/
+                ,
             }
         )]
         [InlineData(
@@ -627,6 +632,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0 /*sizes*/
                 ,
                 0 /*lower bounds*/
+                ,
             }
         )]
         [InlineData(
@@ -642,6 +648,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 0 /*sizes*/
                 ,
                 0 /*lower bounds*/
+                ,
             }
         )]
         [InlineData(
@@ -661,6 +668,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 1 /*lower bounds*/
                 ,
                 0x7F /*lower bound (compressed -1)*/
+                ,
             }
         )]
         [InlineData(
@@ -678,6 +686,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
                 1 /*lower bounds*/
                 ,
                 2 /*lower bound (compressed +1)*/
+                ,
             }
         )]
         public unsafe void ExoticTypeSignature(string expected, byte[] signature)

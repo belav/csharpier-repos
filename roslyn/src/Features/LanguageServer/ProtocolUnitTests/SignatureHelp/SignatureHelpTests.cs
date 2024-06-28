@@ -48,8 +48,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
                 ActiveSignature = 0,
                 Signatures =
                 [
-                    CreateSignatureInformation("int A.M2(string a)", "M2 is a method.", "a", "")
-                ]
+                    CreateSignatureInformation("int A.M2(string a)", "M2 is a method.", "a", ""),
+                ],
             };
 
             var results = await RunGetSignatureHelpAsync(
@@ -84,7 +84,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
             {
                 Documentation = CreateMarkupContent(LSP.MarkupKind.PlainText, methodDocumentation),
                 Label = methodLabal,
-                Parameters = [CreateParameterInformation(parameterLabel, parameterDocumentation)]
+                Parameters = [CreateParameterInformation(parameterLabel, parameterDocumentation)],
             };
 
         private static LSP.ParameterInformation CreateParameterInformation(
@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.SignatureHelp
             new LSP.ParameterInformation()
             {
                 Documentation = CreateMarkupContent(LSP.MarkupKind.PlainText, documentation),
-                Label = parameter
+                Label = parameter,
             };
     }
 }

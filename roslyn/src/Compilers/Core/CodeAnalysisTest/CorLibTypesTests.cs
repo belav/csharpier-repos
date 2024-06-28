@@ -123,7 +123,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var knownMissingTypes = new HashSet<SpecialType>()
             {
-                SpecialType.System_Runtime_CompilerServices_InlineArrayAttribute
+                SpecialType.System_Runtime_CompilerServices_InlineArrayAttribute,
             };
 
             for (

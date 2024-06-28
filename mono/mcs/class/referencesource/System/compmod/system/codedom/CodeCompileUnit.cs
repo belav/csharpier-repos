@@ -22,7 +22,7 @@ namespace System.CodeDom
     ///       compilation unit declaration.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeCompileUnit : CodeObject
     {
         private CodeNamespaceCollection namespaces = new CodeNamespaceCollection();

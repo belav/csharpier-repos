@@ -37,6 +37,6 @@ namespace System.Windows.Forms
         Enabled = 2,
         Visible = 4,
         TabStop = 8,
-        ImmediateChildren = 16
+        ImmediateChildren = 16,
     }
 }

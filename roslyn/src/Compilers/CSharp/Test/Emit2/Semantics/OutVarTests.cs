@@ -24510,7 +24510,7 @@ public class X
             {
                 (int)ErrorCode.ERR_BadVarDecl,
                 (int)ErrorCode.ERR_SyntaxError,
-                (int)ErrorCode.WRN_UnreferencedVar
+                (int)ErrorCode.WRN_UnreferencedVar,
             };
 
             compilation
@@ -24644,7 +24644,7 @@ public class X
             {
                 (int)ErrorCode.ERR_BadVarDecl,
                 (int)ErrorCode.ERR_SyntaxError,
-                (int)ErrorCode.WRN_UnreferencedVar
+                (int)ErrorCode.WRN_UnreferencedVar,
             };
 
             compilation
@@ -24765,7 +24765,7 @@ public class X
                 (int)ErrorCode.ERR_BadVarDecl,
                 (int)ErrorCode.ERR_SyntaxError,
                 (int)ErrorCode.WRN_UnreferencedVar,
-                (int)ErrorCode.ERR_CloseParenExpected
+                (int)ErrorCode.ERR_CloseParenExpected,
             };
 
             compilation
@@ -24880,7 +24880,7 @@ public class X
                 (int)ErrorCode.ERR_SyntaxError,
                 (int)ErrorCode.ERR_UnexpectedToken,
                 (int)ErrorCode.WRN_UnreferencedVar,
-                (int)ErrorCode.ERR_CloseParenExpected
+                (int)ErrorCode.ERR_CloseParenExpected,
             };
 
             compilation
@@ -25046,7 +25046,7 @@ public class X
             {
                 (int)ErrorCode.ERR_BadVarDecl,
                 (int)ErrorCode.ERR_SyntaxError,
-                (int)ErrorCode.WRN_UnreferencedVar
+                (int)ErrorCode.WRN_UnreferencedVar,
             };
 
             compilation
@@ -25297,7 +25297,7 @@ public class X
                 (int)ErrorCode.ERR_SyntaxError,
                 (int)ErrorCode.ERR_UnexpectedToken,
                 (int)ErrorCode.WRN_UnreferencedVar,
-                (int)ErrorCode.ERR_UseDefViolation
+                (int)ErrorCode.ERR_UseDefViolation,
             };
 
             compilation
@@ -25490,7 +25490,7 @@ public class X
                 (int)ErrorCode.ERR_SyntaxError,
                 (int)ErrorCode.ERR_UnexpectedToken,
                 (int)ErrorCode.WRN_UnreferencedVar,
-                (int)ErrorCode.ERR_CloseParenExpected
+                (int)ErrorCode.ERR_CloseParenExpected,
             };
 
             compilation
@@ -25710,7 +25710,7 @@ public class X
                 (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
                 (int)ErrorCode.ERR_FixedMustInit,
                 (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
-                (int)ErrorCode.ERR_UseDefViolation
+                (int)ErrorCode.ERR_UseDefViolation,
             };
 
             compilation
@@ -25889,7 +25889,7 @@ public class X
                 (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
                 (int)ErrorCode.ERR_FixedMustInit,
                 (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
-                (int)ErrorCode.ERR_UseDefViolation
+                (int)ErrorCode.ERR_UseDefViolation,
             };
 
             compilation
@@ -25997,7 +25997,7 @@ public class X
                 (int)ErrorCode.WRN_UnreferencedVar,
                 (int)ErrorCode.ERR_FixedMustInit,
                 (int)ErrorCode.ERR_UseDefViolation,
-                (int)ErrorCode.ERR_CloseParenExpected
+                (int)ErrorCode.ERR_CloseParenExpected,
             };
 
             compilation
@@ -26179,7 +26179,7 @@ public unsafe class X
                 (int)ErrorCode.ERR_UnexpectedToken,
                 (int)ErrorCode.WRN_UnreferencedVar,
                 (int)ErrorCode.ERR_FixedMustInit,
-                (int)ErrorCode.ERR_UseDefViolation
+                (int)ErrorCode.ERR_UseDefViolation,
             };
 
             compilation
@@ -26374,7 +26374,7 @@ public unsafe class X
                 (int)ErrorCode.WRN_UnreferencedVar,
                 (int)ErrorCode.ERR_FixedMustInit,
                 (int)ErrorCode.ERR_UseDefViolation,
-                (int)ErrorCode.ERR_CloseParenExpected
+                (int)ErrorCode.ERR_CloseParenExpected,
             };
 
             compilation
@@ -26489,7 +26489,7 @@ public class X
             {
                 (int)ErrorCode.ERR_CStyleArray,
                 (int)ErrorCode.ERR_ArraySizeInDeclaration,
-                (int)ErrorCode.WRN_UnreferencedField
+                (int)ErrorCode.WRN_UnreferencedField,
             };
 
             compilation
@@ -26630,7 +26630,7 @@ public unsafe struct X
                 (int)ErrorCode.ERR_CStyleArray,
                 (int)ErrorCode.ERR_ArraySizeInDeclaration,
                 (int)ErrorCode.WRN_UnreferencedField,
-                (int)ErrorCode.ERR_NoImplicitConv
+                (int)ErrorCode.ERR_NoImplicitConv,
             };
 
             compilation
@@ -26738,7 +26738,7 @@ public class X
             int[] exclude = new int[]
             {
                 (int)ErrorCode.ERR_CStyleArray,
-                (int)ErrorCode.ERR_ArraySizeInDeclaration
+                (int)ErrorCode.ERR_ArraySizeInDeclaration,
             };
 
             compilation
@@ -26833,7 +26833,7 @@ public class X
                 (int)ErrorCode.ERR_CStyleArray,
                 (int)ErrorCode.ERR_ArraySizeInDeclaration,
                 (int)ErrorCode.ERR_EventNotDelegate,
-                (int)ErrorCode.WRN_UnreferencedEvent
+                (int)ErrorCode.WRN_UnreferencedEvent,
             };
 
             compilation
@@ -26903,7 +26903,7 @@ public unsafe struct X
                 options: TestOptions.DebugExe.WithAllowUnsafe(true),
                 parseOptions: TestOptions.Regular
             );
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl, };
+            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl };
 
             compilation
                 .GetDiagnostics()

@@ -28,7 +28,7 @@ public class CertificateValidationCache : ICertificateValidationCache
             new MemoryCacheOptions
             {
                 SizeLimit = _options.CacheSize,
-                Clock = new CachingClock(timeProvider)
+                Clock = new CachingClock(timeProvider),
             }
         );
         _timeProvider = timeProvider;

@@ -892,56 +892,56 @@ public class NavigationFixerTest
             Id = 1,
             ProductId = 1,
             PhotoId = "Photo1",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag2 = new ProductTag
         {
             Id = 2,
             ProductId = 1,
             PhotoId = "Photo1",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
         var tag3 = new ProductTag
         {
             Id = 3,
             ProductId = 1,
             PhotoId = "Photo2",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag4 = new ProductTag
         {
             Id = 4,
             ProductId = 1,
             PhotoId = "Photo2",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
         var tag5 = new ProductTag
         {
             Id = 5,
             ProductId = 2,
             PhotoId = "Photo1",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag6 = new ProductTag
         {
             Id = 6,
             ProductId = 2,
             PhotoId = "Photo1",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
         var tag7 = new ProductTag
         {
             Id = 7,
             ProductId = 2,
             PhotoId = "Photo2",
-            ReviewId = reviewId1
+            ReviewId = reviewId1,
         };
         var tag8 = new ProductTag
         {
             Id = 8,
             ProductId = 2,
             PhotoId = "Photo2",
-            ReviewId = reviewId2
+            ReviewId = reviewId2,
         };
 
         var photoEntry1 = manager.StartTracking(manager.GetOrCreateEntry(photo1));

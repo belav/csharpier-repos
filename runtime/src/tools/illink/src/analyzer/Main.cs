@@ -112,7 +112,7 @@ namespace LinkerAnalyzer
             ConsoleDependencyGraph deps = new ConsoleDependencyGraph()
             {
                 Tree = reduceToTree,
-                FlatDeps = flatDeps
+                FlatDeps = flatDeps,
             };
             deps.Load(dependencyFile);
 

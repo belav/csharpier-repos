@@ -329,7 +329,7 @@ public class MvcServiceCollectionExtensionsTest
         var providers = new IApplicationFeatureProvider[]
         {
             new ControllerFeatureProvider(),
-            new ViewComponentFeatureProvider()
+            new ViewComponentFeatureProvider(),
         };
 
         // Act
@@ -365,7 +365,7 @@ public class MvcServiceCollectionExtensionsTest
         var providers = new IApplicationFeatureProvider[]
         {
             new ControllerFeatureProvider(),
-            new ViewComponentFeatureProvider()
+            new ViewComponentFeatureProvider(),
         };
 
         // Act
@@ -400,7 +400,7 @@ public class MvcServiceCollectionExtensionsTest
         var providers = new IApplicationFeatureProvider[]
         {
             new ControllerFeatureProvider(),
-            new ViewComponentFeatureProvider()
+            new ViewComponentFeatureProvider(),
         };
 
         // Act
@@ -560,11 +560,11 @@ public class MvcServiceCollectionExtensionsTest
                 },
                 {
                     typeof(IConfigureOptions<ApiBehaviorOptions>),
-                    new Type[] { typeof(ApiBehaviorOptionsSetup), }
+                    new Type[] { typeof(ApiBehaviorOptionsSetup) }
                 },
                 {
                     typeof(IConfigureOptions<MvcViewOptions>),
-                    new Type[] { typeof(MvcViewOptionsSetup), typeof(MvcRazorMvcViewOptionsSetup), }
+                    new Type[] { typeof(MvcViewOptionsSetup), typeof(MvcRazorMvcViewOptionsSetup) }
                 },
                 {
                     typeof(IConfigureOptions<RazorViewEngineOptions>),
@@ -576,11 +576,11 @@ public class MvcServiceCollectionExtensionsTest
                 },
                 {
                     typeof(IPostConfigureOptions<MvcOptions>),
-                    new[] { typeof(MvcCoreMvcOptionsSetup), }
+                    new[] { typeof(MvcCoreMvcOptionsSetup) }
                 },
                 {
                     typeof(IActionConstraintProvider),
-                    new Type[] { typeof(DefaultActionConstraintProvider), }
+                    new Type[] { typeof(DefaultActionConstraintProvider) }
                 },
                 {
                     typeof(IActionDescriptorProvider),
@@ -603,10 +603,10 @@ public class MvcServiceCollectionExtensionsTest
                     new Type[]
                     {
                         typeof(PageRequestDelegateFactory),
-                        typeof(ControllerRequestDelegateFactory)
+                        typeof(ControllerRequestDelegateFactory),
                     }
                 },
-                { typeof(IFilterProvider), new Type[] { typeof(DefaultFilterProvider), } },
+                { typeof(IFilterProvider), new Type[] { typeof(DefaultFilterProvider) } },
                 {
                     typeof(IControllerPropertyActivator),
                     new Type[]
@@ -625,16 +625,16 @@ public class MvcServiceCollectionExtensionsTest
                         typeof(TempDataApplicationModelProvider),
                         typeof(ViewDataAttributeApplicationModelProvider),
                         typeof(ApiBehaviorApplicationModelProvider),
-                        typeof(AntiforgeryApplicationModelProvider)
+                        typeof(AntiforgeryApplicationModelProvider),
                     }
                 },
                 {
                     typeof(IApiDescriptionProvider),
-                    new Type[] { typeof(DefaultApiDescriptionProvider), }
+                    new Type[] { typeof(DefaultApiDescriptionProvider) }
                 },
                 {
                     typeof(IPageRouteModelProvider),
-                    new[] { typeof(CompiledPageRouteModelProvider), }
+                    new[] { typeof(CompiledPageRouteModelProvider) }
                 },
                 {
                     typeof(IPageApplicationModelProvider),

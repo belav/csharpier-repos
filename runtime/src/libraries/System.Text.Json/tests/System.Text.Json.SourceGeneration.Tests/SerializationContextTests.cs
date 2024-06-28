@@ -813,7 +813,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 new ClassWithEnumAndNullable()
                 {
                     Day = DayOfWeek.Monday,
-                    NullableDay = DayOfWeek.Tuesday
+                    NullableDay = DayOfWeek.Tuesday,
                 }
             );
             RunTest(new ClassWithEnumAndNullable());
@@ -847,7 +847,7 @@ namespace System.Text.Json.SourceGeneration.Tests
 
                     NullableUri = new Uri("http://contoso.com"),
                     NullableArray = new int[] { 42 },
-                    NullablePoco = new ClassWithNullableProperties.MyPoco()
+                    NullablePoco = new ClassWithNullableProperties.MyPoco(),
                 }
             );
 

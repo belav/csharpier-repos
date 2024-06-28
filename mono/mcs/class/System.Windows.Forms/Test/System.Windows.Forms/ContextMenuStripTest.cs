@@ -28,14 +28,14 @@ namespace MonoTests.System.Windows.Forms
         static readonly Lazy<Control>[] testCaseExplicitMenuSources = new Lazy<Control>[]
         {
             new Lazy<Control>(() => null),
-            new Lazy<Control>(() => explicitMenuSrcLabel)
+            new Lazy<Control>(() => explicitMenuSrcLabel),
         }; // Involve `Lazy` to use `TestCaseSource` attribute.
 
         static readonly Lazy<ITestExtendedControl>[] testCaseAssociatedControls =
             new Lazy<ITestExtendedControl>[]
             {
                 new Lazy<ITestExtendedControl>(() => form),
-                new Lazy<ITestExtendedControl>(() => testExtendedLabel)
+                new Lazy<ITestExtendedControl>(() => testExtendedLabel),
             }; // Involve `Lazy` to use `TestCaseSource` attribute.
 
         [SetUp]

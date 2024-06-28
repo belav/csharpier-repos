@@ -45,7 +45,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
                         _lazyToolTipTextBlock = new[]
                         {
-                            new TaggedText(TextTags.Text, member.TopLevelDisplayText)
+                            new TaggedText(TextTags.Text, member.TopLevelDisplayText),
                         }.ToTextBlock(_classificationFormatMap, _classificationTypeMap);
                     }
                     else if (members.Length == 1)
@@ -79,7 +79,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                     {
                         _lazyToolTipTextBlock = new TextBlock
                         {
-                            Text = ServicesVSResources.Multiple_members_are_inherited
+                            Text = ServicesVSResources.Multiple_members_are_inherited,
                         };
                     }
                 }

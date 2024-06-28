@@ -26,7 +26,7 @@ namespace System.Diagnostics.CodeAnalysis.Tests
                 Justification = justification,
                 MessageId = messageId,
                 Scope = scope,
-                Target = target
+                Target = target,
             };
 
             Assert.Equal(category, sma.Category);

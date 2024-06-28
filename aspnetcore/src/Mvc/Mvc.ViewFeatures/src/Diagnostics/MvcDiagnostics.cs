@@ -58,13 +58,12 @@ public sealed class BeforeViewComponentEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1 =>
-                new KeyValuePair<string, object>(
-                    nameof(ViewComponentContext),
-                    ViewComponentContext
-                ),
+            1 => new KeyValuePair<string, object>(
+                nameof(ViewComponentContext),
+                ViewComponentContext
+            ),
             2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -126,14 +125,13 @@ public sealed class AfterViewComponentEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1 =>
-                new KeyValuePair<string, object>(
-                    nameof(ViewComponentContext),
-                    ViewComponentContext
-                ),
+            1 => new KeyValuePair<string, object>(
+                nameof(ViewComponentContext),
+                ViewComponentContext
+            ),
             2 => new KeyValuePair<string, object>(nameof(ViewComponent), ViewComponent),
             3 => new KeyValuePair<string, object>(nameof(ViewComponentResult), ViewComponentResult),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -187,13 +185,12 @@ public sealed class ViewComponentBeforeViewExecuteEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1 =>
-                new KeyValuePair<string, object>(
-                    nameof(ViewComponentContext),
-                    ViewComponentContext
-                ),
+            1 => new KeyValuePair<string, object>(
+                nameof(ViewComponentContext),
+                ViewComponentContext
+            ),
             2 => new KeyValuePair<string, object>(nameof(View), View),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -247,13 +244,12 @@ public sealed class ViewComponentAfterViewExecuteEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-            1 =>
-                new KeyValuePair<string, object>(
-                    nameof(ViewComponentContext),
-                    ViewComponentContext
-                ),
+            1 => new KeyValuePair<string, object>(
+                nameof(ViewComponentContext),
+                ViewComponentContext
+            ),
             2 => new KeyValuePair<string, object>(nameof(View), View),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -297,7 +293,7 @@ public sealed class BeforeViewEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(View), View),
             1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -341,7 +337,7 @@ public sealed class AfterViewEventData : EventData
         {
             0 => new KeyValuePair<string, object>(nameof(View), View),
             1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -415,15 +411,14 @@ public sealed class ViewFoundEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-            1 =>
-                new KeyValuePair<string, object>(
-                    nameof(IsMainPage),
-                    IsMainPage ? BoxedTrue : BoxedFalse
-                ),
+            1 => new KeyValuePair<string, object>(
+                nameof(IsMainPage),
+                IsMainPage ? BoxedTrue : BoxedFalse
+            ),
             2 => new KeyValuePair<string, object>(nameof(Result), Result),
             3 => new KeyValuePair<string, object>(nameof(ViewName), ViewName),
             4 => new KeyValuePair<string, object>(nameof(View), View),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }
 
@@ -497,14 +492,13 @@ public sealed class ViewNotFoundEventData : EventData
         index switch
         {
             0 => new KeyValuePair<string, object>(nameof(ActionContext), ActionContext),
-            1 =>
-                new KeyValuePair<string, object>(
-                    nameof(IsMainPage),
-                    IsMainPage ? BoxedTrue : BoxedFalse
-                ),
+            1 => new KeyValuePair<string, object>(
+                nameof(IsMainPage),
+                IsMainPage ? BoxedTrue : BoxedFalse
+            ),
             2 => new KeyValuePair<string, object>(nameof(Result), Result),
             3 => new KeyValuePair<string, object>(nameof(ViewName), ViewName),
             4 => new KeyValuePair<string, object>(nameof(SearchedLocations), SearchedLocations),
-            _ => throw new ArgumentOutOfRangeException(nameof(index))
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
         };
 }

@@ -20,7 +20,7 @@ public class ParseErrorReportingTests
         var root = new CliRootCommand { new CliCommand("inner"), new HelpOption() };
 
         var output = new StringWriter();
-        var parseResult = root.Parse("", new CliConfiguration(root) { Output = output, });
+        var parseResult = root.Parse("", new CliConfiguration(root) { Output = output });
 
         parseResult.Errors.Should().NotBeEmpty();
 
@@ -79,7 +79,7 @@ public class ParseErrorReportingTests
 
         var rootCommand = new CliRootCommand
         {
-            new CliCommand("child") { new CliCommand("grandchild") }
+            new CliCommand("child") { new CliCommand("grandchild") },
         };
 
         rootCommand.Options.OfType<HelpOption>().Single().Action = new SynchronousTestAction(_ =>

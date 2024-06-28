@@ -1218,7 +1218,7 @@ namespace System.ComponentModel.Tests
                 mockDescriptor1.Object,
                 mockDescriptor2.Object,
                 null,
-                notADescriptor1
+                notADescriptor1,
             };
             TypeDescriptor.SortDescriptorArray(infos);
             Assert.True(

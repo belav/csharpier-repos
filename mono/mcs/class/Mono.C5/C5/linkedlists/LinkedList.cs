@@ -697,11 +697,9 @@ namespace C5
                 int t1 = taggroup.tag;
                 int t2 = that.taggroup.tag;
 
-                return t1 < t2
-                    ? true
-                    : t1 > t2
-                        ? false
-                        : tag < that.tag;
+                return t1 < t2 ? true
+                    : t1 > t2 ? false
+                    : tag < that.tag;
             }
 #endif
             #endregion
@@ -1045,11 +1043,9 @@ namespace C5
             public int Compare(Position a, Position b)
             {
 #if HASHINDEX
-                return a.Endpoint == b.Endpoint
-                    ? 0
-                    : a.Endpoint.precedes(b.Endpoint)
-                        ? -1
-                        : 1;
+                return a.Endpoint == b.Endpoint ? 0
+                    : a.Endpoint.precedes(b.Endpoint) ? -1
+                    : 1;
 #else
                 return a.Index.CompareTo(b.Index);
 #endif
@@ -2181,7 +2177,7 @@ namespace C5
                         underlying.startsentinel,
                         startsentinel,
                         endsentinel,
-                        underlying.endsentinel
+                        underlying.endsentinel,
                     }
                 );
             }

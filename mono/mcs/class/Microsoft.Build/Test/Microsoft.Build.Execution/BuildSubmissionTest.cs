@@ -84,7 +84,7 @@ namespace MonoTests.Microsoft.Build.Execution
                 proj.Build(
                     new ILogger[]
                     {
-                        new ConsoleLogger(LoggerVerbosity.Diagnostic, sw.WriteLine, null, null)
+                        new ConsoleLogger(LoggerVerbosity.Diagnostic, sw.WriteLine, null, null),
                     }
                 ),
                 "#1"

@@ -395,7 +395,7 @@ IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInv
                 //         F e2 = new() { "" };
                 Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }")
                     .WithArguments("F")
-                    .WithLocation(22, 22)
+                    .WithLocation(22, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -720,7 +720,7 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.In
                 //     private readonly int field;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
                     .WithArguments("C.field", "0")
-                    .WithLocation(5, 26)
+                    .WithLocation(5, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1121,7 +1121,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //     int[] a;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
                     .WithArguments("C.a")
-                    .WithLocation(4, 11)
+                    .WithLocation(4, 11),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1265,7 +1265,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //         C x1 = /*<bind>*/new() { MissingMember = 1 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingMember")
                     .WithArguments("C", "MissingMember")
-                    .WithLocation(6, 34)
+                    .WithLocation(6, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1323,7 +1323,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //         C x1 = /*<bind>*/new(){ MissingField = { x = 1 } }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
                     .WithArguments("C", "MissingField")
-                    .WithLocation(6, 33)
+                    .WithLocation(6, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1385,7 +1385,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //         C x1 = /*<bind>*/new(){ MissingField = new List<int>() { 1 }}/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
                     .WithArguments("C", "MissingField")
-                    .WithLocation(7, 33)
+                    .WithLocation(7, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1492,7 +1492,7 @@ Block[B4] - Exit
                 // _ = new int[/*<bind>*/new(bad)/*</bind>*/];
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
                     .WithArguments("bad")
-                    .WithLocation(1, 27)
+                    .WithLocation(1, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1524,7 +1524,7 @@ if (/*<bind>*/new(bad)/*</bind>*/) {}
                 // if (/*<bind>*/new(bad)/*</bind>*/) {}
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
                     .WithArguments("bad")
-                    .WithLocation(2, 19)
+                    .WithLocation(2, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1559,7 +1559,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
                 //         _ = /*<bind>*/new(bad)/*</bind>*/ ? null : new object();
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
                     .WithArguments("bad")
-                    .WithLocation(5, 27)
+                    .WithLocation(5, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1594,7 +1594,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
                 //         _ = (/*<bind>*/new(bad)/*</bind>*/, null) ? null : new object();
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
                     .WithArguments("bad")
-                    .WithLocation(5, 28)
+                    .WithLocation(5, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -1629,7 +1629,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'new(bad)
                 //         _ = i switch { 1 => /*<bind>*/new(bad)/*</bind>*/, _ => null } ? null : new object();
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "bad")
                     .WithArguments("bad")
-                    .WithLocation(5, 43)
+                    .WithLocation(5, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitObjectCreationExpressionSyntax>(
@@ -2077,7 +2077,7 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3")
                     .WithArguments("C.Add(ref int)")
-                    .WithLocation(9, 39)
+                    .WithLocation(9, 39),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
@@ -2376,7 +2376,7 @@ class C : IEnumerable<int>
                 //         C c = new() /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3")
                     .WithArguments("C.Add(int)")
-                    .WithLocation(9, 39)
+                    .WithLocation(9, 39),
             };
 
             string expectedOperationTree =
@@ -2943,7 +2943,7 @@ IBlockOperation (7 statements, 7 locals) (OperationKind.Block, Type: null, IsInv
                 //         var e2 = new F() { "" };
                 Diagnostic(ErrorCode.ERR_CollectionInitRequiresIEnumerable, @"{ """" }")
                     .WithArguments("F")
-                    .WithLocation(25, 26)
+                    .WithLocation(25, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -3011,7 +3011,7 @@ IObjectCreationOperation (Constructor: System.Collections.Generic.List<System.In
                 //     private readonly int field;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "field")
                     .WithArguments("C.field", "0")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -3285,7 +3285,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //     int[] a;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "a")
                     .WithArguments("C.a")
-                    .WithLocation(4, 11)
+                    .WithLocation(4, 11),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -3332,7 +3332,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //         var x1 = /*<bind>*/new C() { MissingMember = 1 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingMember")
                     .WithArguments("C", "MissingMember")
-                    .WithLocation(6, 38)
+                    .WithLocation(6, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -3389,7 +3389,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //         var x1 = /*<bind>*/new C(){ MissingField = { x = 1 } }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
                     .WithArguments("C", "MissingField")
-                    .WithLocation(6, 37)
+                    .WithLocation(6, 37),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -3450,7 +3450,7 @@ IObjectCreationOperation (Constructor: C..ctor()) (OperationKind.ObjectCreation,
                 //         var x1 = /*<bind>*/new C(){ MissingField = new List<int>() { 1 }}/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "MissingField")
                     .WithArguments("C", "MissingField")
-                    .WithLocation(8, 37)
+                    .WithLocation(8, 37),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -3774,7 +3774,7 @@ IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitial
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasParamModifiers, "3")
                     .WithArguments("C.Add(ref int)")
-                    .WithLocation(10, 41)
+                    .WithLocation(10, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
@@ -4084,7 +4084,7 @@ class C : IEnumerable<int>
                 //         var c = new C /*<bind>*/{ 1, 2, 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InitializerAddHasWrongSignature, "3")
                     .WithArguments("C.Add(int)")
-                    .WithLocation(10, 41)
+                    .WithLocation(10, 41),
             };
 
             string expectedOperationTree =
@@ -5764,7 +5764,7 @@ class C3
                 //         var x = new C1 { C2 = { C31 = { P1 = 1, P2 = 2 }, C32 = b ? ({ P1 = 3, P2 = 4 }) : ({ P1 = 3, P2 = 4 })
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "P2")
                     .WithArguments("P2")
-                    .WithLocation(8, 103)
+                    .WithLocation(8, 103),
             };
 
             string expectedFlowGraph =
@@ -7503,7 +7503,7 @@ class C1
                         ErrorCode.ERR_InvalidInitializerElementInitializer,
                         "O[b ? 1 : 2] = null"
                     )
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             string expectedFlowGraph =
@@ -7944,7 +7944,7 @@ class C3
                 //     public C3 C32;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C32")
                     .WithArguments("C2.C32", "null")
-                    .WithLocation(19, 15)
+                    .WithLocation(19, 15),
             };
 
             string expectedFlowGraph =
@@ -9193,7 +9193,7 @@ class C3
                 //     public C3 C32;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "C32")
                     .WithArguments("C2.C32", "null")
-                    .WithLocation(21, 15)
+                    .WithLocation(21, 15),
             };
 
             string expectedFlowGraph =
@@ -9379,7 +9379,7 @@ class C1
                 //     public event EventHandler<object> ev;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev")
                     .WithArguments("C1.ev")
-                    .WithLocation(6, 39)
+                    .WithLocation(6, 39),
             };
 
             string expectedFlowGraph =
@@ -9460,7 +9460,7 @@ class C1
                 //     public event EventHandler<object> ev;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev")
                     .WithArguments("C1.ev")
-                    .WithLocation(6, 39)
+                    .WithLocation(6, 39),
             };
 
             string expectedFlowGraph =
@@ -9594,7 +9594,7 @@ class C2
                 //     public event EventHandler<object> ev;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "ev")
                     .WithArguments("C2.ev")
-                    .WithLocation(16, 39)
+                    .WithLocation(16, 39),
             };
 
             string expectedFlowGraph =
@@ -9727,7 +9727,7 @@ class C1
                 // CS0747: Invalid initializer member declarator
                 //         var x = new C1 { P1 = null, (P1 ?? P2) = null };
                 Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "(P1 ?? P2) = null")
-                    .WithLocation(11, 37)
+                    .WithLocation(11, 37),
             };
 
             string expectedFlowGraph =
@@ -9880,7 +9880,7 @@ class C1
                 //     public object P2;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "P2")
                     .WithArguments("C1.P2", "null")
-                    .WithLocation(7, 19)
+                    .WithLocation(7, 19),
             };
 
             string expectedFlowGraph =
@@ -10173,7 +10173,7 @@ class C2
                         ErrorCode.ERR_InvalidInitializerElementInitializer,
                         "(C21 ?? C22).I1 = 1"
                     )
-                    .WithLocation(8, 31)
+                    .WithLocation(8, 31),
             };
 
             string expectedFlowGraph =
@@ -10471,7 +10471,7 @@ internal class Class
                 //         Class c = new Class { C21 = { I1 = 1, I2 = 2 } };
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "C21")
                     .WithArguments("Class", "C21")
-                    .WithLocation(6, 31)
+                    .WithLocation(6, 31),
             };
 
             string expectedFlowGraph =
@@ -10566,7 +10566,7 @@ internal class Class
                 //         Class c = new Class { [GetInt()] = { I1 = 1, I2 = 2 } };
                 Diagnostic(ErrorCode.ERR_BadIndexLHS, "[GetInt()]")
                     .WithArguments("Class")
-                    .WithLocation(6, 31)
+                    .WithLocation(6, 31),
             };
 
             string expectedFlowGraph =
@@ -10665,7 +10665,7 @@ internal class Class
                 //         Class c = new Class { [GetInt() ?? 1] = { I1 = 1, I2 = 2 } };
                 Diagnostic(ErrorCode.ERR_BadIndexLHS, "[GetInt() ?? 1]")
                     .WithArguments("Class")
-                    .WithLocation(6, 31)
+                    .WithLocation(6, 31),
             };
 
             string expectedFlowGraph =
@@ -12299,7 +12299,7 @@ internal class Class
             {
                 // CS0443: Syntax error; value expected
                 //         c = new Class { P1 = { [] = 3 } };
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 33)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 33),
             };
 
             string expectedFlowGraph =
@@ -14718,7 +14718,7 @@ class C1 : IEnumerable<int>
                 //         c = new C1 { i1 };
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "C1")
                     .WithArguments("x", "C1.C1(int)")
-                    .WithLocation(11, 17)
+                    .WithLocation(11, 17),
             };
 
             string expectedFlowGraph =
@@ -14800,7 +14800,7 @@ class C1
                 //         c = new C1(i1) { F = i2 };
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1")
                     .WithArguments("C1", "1")
-                    .WithLocation(9, 17)
+                    .WithLocation(9, 17),
             };
 
             string expectedFlowGraph =
@@ -14882,7 +14882,7 @@ class C1
                 //         c = new C1(i1, c1 ?? c2) { F = i2 };
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1")
                     .WithArguments("C1", "2")
-                    .WithLocation(9, 17)
+                    .WithLocation(9, 17),
             };
 
             string expectedFlowGraph =
@@ -15027,7 +15027,7 @@ class C1
                 //         c = new C1(i1) { F = c1 ?? c2 };
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "C1")
                     .WithArguments("C1", "1")
-                    .WithLocation(9, 17)
+                    .WithLocation(9, 17),
             };
 
             string expectedFlowGraph =
@@ -15161,7 +15161,7 @@ public class MemberInitializerTest
                 // file.cs(7,52): error CS0747: Invalid initializer member declarator
                 //         var i = new MemberInitializerTest { x = 0, y++ };
                 Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "y++")
-                    .WithLocation(7, 52)
+                    .WithLocation(7, 52),
             };
 
             string expectedFlowGraph =
@@ -15740,7 +15740,7 @@ class C
                 //     static int i1;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "i1")
                     .WithArguments("C.i1")
-                    .WithLocation(4, 16)
+                    .WithLocation(4, 16),
             };
 
             string expectedFlowGraph =
@@ -16002,7 +16002,7 @@ class C
                 //         x2 = new T2 { };
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T2 { }")
                     .WithArguments("T2")
-                    .WithLocation(7, 14)
+                    .WithLocation(7, 14),
             };
 
             var expectedOperationTree =
@@ -16358,7 +16358,7 @@ Block[B5] - Exit
                 // (1,76): error CS0747: Invalid initializer member declarator
                 // var c = /*<bind>*/new C() { F1 = 1, $"{asdf}", true switch { _ => false }, new() }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidInitializerElementInitializer, "new()")
-                    .WithLocation(1, 76)
+                    .WithLocation(1, 76),
             };
 
             var comp = CreateCompilation(source);

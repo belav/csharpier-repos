@@ -18,6 +18,6 @@ namespace System.Web.UI
 
         /// <devdoc>
         /// </devdoc>
-        Single = 1
+        Single = 1,
     }
 }

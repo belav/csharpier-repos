@@ -272,7 +272,7 @@ UnicodeDataTypes.StringUnicode ---> [nullable varbinary] [MaxLength = -1]
                 { "binary", _fixedLengthBinary },
                 { "image", _variableLengthBinary },
                 { "rowversion", _rowversion },
-                { "varbinary", _variableLengthBinary }
+                { "varbinary", _variableLengthBinary },
             };
         }
 

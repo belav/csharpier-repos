@@ -4451,7 +4451,7 @@ class Program
                 {
                     MscorlibRef_v4_0_30316_17626,
                     SystemRef_v4_0_30319_17929,
-                    SystemCoreRef_v4_0_30319_17929
+                    SystemCoreRef_v4_0_30319_17929,
                 }
             );
             compilation.VerifyDiagnostics();
@@ -5647,6 +5647,7 @@ public class Program738490379
                 "double.NaN", // a scary constant
                 "1.1", // a double constant
                 "NotFound" // an unbindable expression
+                ,
             };
             string Expression()
             {
@@ -5661,7 +5662,7 @@ public class Program738490379
                 "int?",
                 "double",
                 "string",
-                "NotFound"
+                "NotFound",
             };
             string Type() => types[r.Next(types.Length)];
             string Pattern(int d = 5)

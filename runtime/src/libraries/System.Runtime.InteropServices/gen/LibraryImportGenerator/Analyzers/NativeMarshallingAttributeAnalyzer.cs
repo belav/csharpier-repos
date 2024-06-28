@@ -215,7 +215,7 @@ namespace Microsoft.Interop.Analyzers
                     IParameterSymbol param => param.Type,
                     IFieldSymbol field => field.Type,
                     ITypeSymbol type => type,
-                    _ => throw new InvalidOperationException()
+                    _ => throw new InvalidOperationException(),
                 };
             }
         }

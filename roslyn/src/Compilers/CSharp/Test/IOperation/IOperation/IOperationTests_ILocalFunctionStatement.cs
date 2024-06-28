@@ -379,7 +379,7 @@ ILocalFunctionOperation (Symbol: void F()) (OperationKind.LocalFunction, Type: n
                 //         F();
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "F()")
                     .WithArguments("x")
-                    .WithLocation(6, 9)
+                    .WithLocation(6, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
@@ -471,7 +471,7 @@ ILocalFunctionOperation (Symbol: void F(out System.Int32 y)) (OperationKind.Loca
                 //         /*<bind>*/void F(out int y) => ;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F")
                     .WithArguments("F")
-                    .WithLocation(6, 24)
+                    .WithLocation(6, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
@@ -512,7 +512,7 @@ ILocalFunctionOperation (Symbol: void F()) (OperationKind.LocalFunction, Type: n
                 //         /*<bind>*/void F( { }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F")
                     .WithArguments("F")
-                    .WithLocation(6, 24)
+                    .WithLocation(6, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
@@ -557,7 +557,7 @@ ILocalFunctionOperation (Symbol: X F()) (OperationKind.LocalFunction, Type: null
                 //         /*<bind>*/X F() { }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F")
                     .WithArguments("F")
-                    .WithLocation(6, 21)
+                    .WithLocation(6, 21),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
@@ -603,7 +603,7 @@ ILocalFunctionOperation (Symbol: System.Object F()) (OperationKind.LocalFunction
                 //         /*<bind>*/object F() => new object(); { return new object(); }/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F")
                     .WithArguments("F")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
@@ -660,7 +660,7 @@ ILocalFunctionOperation (Symbol: System.Object F()) (OperationKind.LocalFunction
                 //         /*<bind>*/object F() { return new object(); } => null;/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "F")
                     .WithArguments("F")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
@@ -767,7 +767,7 @@ ILocalFunctionOperation (Symbol: System.Int32 Local(System.Int32 y)) (OperationK
                 //             return x;
                 Diagnostic(ErrorCode.ERR_StaticLocalFunctionCannotCaptureVariable, "x")
                     .WithArguments("x")
-                    .WithLocation(14, 20)
+                    .WithLocation(14, 20),
             };
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
                 source,
@@ -838,7 +838,7 @@ ILocalFunctionOperation (Symbol: System.Object Local()) (OperationKind.LocalFunc
                 // (7,68): error CS8422: A static local function cannot contain a reference to 'this' or 'base'.
                 //         static object Local() => ToString() + this.GetHashCode() + base.GetHashCode();
                 Diagnostic(ErrorCode.ERR_StaticLocalFunctionCannotCaptureThis, "base")
-                    .WithLocation(7, 68)
+                    .WithLocation(7, 68),
             };
             VerifyOperationTreeAndDiagnosticsForTest<LocalFunctionStatementSyntax>(
                 source,
@@ -1058,7 +1058,7 @@ Block[B2] - Exit
                 //         void local(bool result, bool input)
                 Diagnostic(ErrorCode.ERR_LocalFunctionMissingBody, "local")
                     .WithArguments("local(bool, bool)")
-                    .WithLocation(7, 14)
+                    .WithLocation(7, 14),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1160,7 +1160,7 @@ Block[B2] - Exit
         } 
         => result = input2;"
                     )
-                    .WithLocation(7, 9)
+                    .WithLocation(7, 9),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -2272,7 +2272,7 @@ Block[B2] - Exit
                 //         static object Local(string y, object z) => x ?? y ?? z;
                 Diagnostic(ErrorCode.ERR_StaticLocalFunctionCannotCaptureVariable, "x")
                     .WithArguments("x")
-                    .WithLocation(10, 52)
+                    .WithLocation(10, 52),
             };
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
                 source,

@@ -19,7 +19,7 @@ internal static partial class Interop
             PP_KEYSET_TYPE = 27,
             PP_KEYEXCHANGE_PIN = 32,
             PP_SIGNATURE_PIN = 33,
-            PP_UNIQUE_CONTAINER = 36
+            PP_UNIQUE_CONTAINER = 36,
         }
 
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]

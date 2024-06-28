@@ -11,7 +11,7 @@ namespace System.Web.UI.WebControls
     using System.Web.UI;
     using System.Web.Util;
 
-    [ToolboxItem(false), SupportsEventValidation,]
+    [ToolboxItem(false), SupportsEventValidation]
     /// <internalonly/>
     /// <devdoc>
     ///   Used by composite controls that are based on a table, that only render

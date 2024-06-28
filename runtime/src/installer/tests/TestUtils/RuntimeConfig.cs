@@ -97,7 +97,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
                             Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName
                         ],
                     ApplyPatches = (bool?)
-                        jobject[Constants.ApplyPatchesSetting.RuntimeConfigPropertyName]
+                        jobject[Constants.ApplyPatchesSetting.RuntimeConfigPropertyName],
                 };
             }
         }

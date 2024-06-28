@@ -30,7 +30,7 @@ namespace Microsoft.Interop
                         generatedComInterfaceAttr.StringMarshallingCustomType
                     )
                     : null,
-                Options = generatedComInterfaceAttr.Options
+                Options = generatedComInterfaceAttr.Options,
             };
     }
 
@@ -88,7 +88,7 @@ namespace Microsoft.Interop
             {
                 generatedComInterfaceAttributeData = generatedComInterfaceAttributeData with
                 {
-                    Options = (ComInterfaceOptions)options.Value
+                    Options = (ComInterfaceOptions)options.Value,
                 };
             }
             return generatedComInterfaceAttributeData;

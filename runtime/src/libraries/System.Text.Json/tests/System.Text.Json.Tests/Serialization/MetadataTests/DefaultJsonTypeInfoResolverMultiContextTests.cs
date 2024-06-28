@@ -65,7 +65,7 @@ namespace System.Text.Json.Serialization.Tests
             // note: TypeInfoResolver not set
             JsonTypeInfo<SomeClass> ti =
                 (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
-            SomeClass obj = new() { ObjProp = "test", IntProp = 42, };
+            SomeClass obj = new() { ObjProp = "test", IntProp = 42 };
 
             // TODO: reassess if this is expected behavior
             await Assert.ThrowsAsync<InvalidOperationException>(
@@ -97,7 +97,7 @@ namespace System.Text.Json.Serialization.Tests
             o.TypeInfoResolver = r;
             JsonTypeInfo<SomeClass> ti =
                 (JsonTypeInfo<SomeClass>)r.GetTypeInfo(typeof(SomeClass), o);
-            SomeClass obj = new() { ObjProp = "test", IntProp = 42, };
+            SomeClass obj = new() { ObjProp = "test", IntProp = 42 };
 
             string json = await Serializer.SerializeWrapper(obj, ti);
             Assert.Equal("""{"ObjProp":"test","IntProp":42}""", json);
@@ -125,7 +125,7 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[]
             {
                 new SomeClass() { IntProp = 15, ObjProp = 17m },
-                @"{""ObjProp"":17,""IntProp"":15}"
+                @"{""ObjProp"":17,""IntProp"":15}",
             };
         }
 

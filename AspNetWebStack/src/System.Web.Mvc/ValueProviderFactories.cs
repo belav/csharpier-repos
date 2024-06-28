@@ -14,7 +14,7 @@ namespace System.Web.Mvc
                 new RouteDataValueProviderFactory(),
                 new QueryStringValueProviderFactory(),
                 new HttpFileCollectionValueProviderFactory(),
-                new JQueryFormValueProviderFactory()
+                new JQueryFormValueProviderFactory(),
             };
 
         public static ValueProviderFactoryCollection Factories

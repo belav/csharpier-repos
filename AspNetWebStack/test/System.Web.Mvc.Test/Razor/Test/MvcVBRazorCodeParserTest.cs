@@ -39,7 +39,7 @@ namespace System.Web.Mvc.Razor.Test
                     .CodeTransition(SyntaxConstants.TransitionString)
                     .Accepts(AcceptedCharacters.None),
                 factory.MetaCode("ModelType    ").Accepts(AcceptedCharacters.None),
-                factory.Code("Foo").As(new SetModelTypeCodeGenerator("Foo", "{0}(Of {1})"))
+                factory.Code("Foo").As(new SetModelTypeCodeGenerator("Foo", "{0}(Of {1})")),
             };
             Assert.Equal(expectedSpans, spans.ToArray());
         }
@@ -61,7 +61,7 @@ namespace System.Web.Mvc.Razor.Test
                     .Accepts(AcceptedCharacters.None),
                 factory.MetaCode("ModelType ").Accepts(AcceptedCharacters.None),
                 factory.Code("Foo?\r\n").As(new SetModelTypeCodeGenerator("Foo?", "{0}(Of {1})")),
-                factory.Markup("Bar")
+                factory.Markup("Bar"),
             };
             Assert.Equal(expectedSpans, spans.ToArray());
         }
@@ -85,7 +85,7 @@ namespace System.Web.Mvc.Razor.Test
                 factory
                     .Code("Foo(())()\r\n")
                     .As(new SetModelTypeCodeGenerator("Foo(())()", "{0}(Of {1})")),
-                factory.Markup("Bar")
+                factory.Markup("Bar"),
             };
             Assert.Equal(expectedSpans, spans.ToArray());
         }
@@ -108,7 +108,7 @@ namespace System.Web.Mvc.Razor.Test
                 factory.MetaCode("ModelType ").Accepts(AcceptedCharacters.None),
                 factory
                     .Code("$rootnamespace$.MyModel")
-                    .As(new SetModelTypeCodeGenerator("$rootnamespace$.MyModel", "{0}(Of {1})"))
+                    .As(new SetModelTypeCodeGenerator("$rootnamespace$.MyModel", "{0}(Of {1})")),
             };
             Assert.Equal(expectedSpans, spans.ToArray());
         }
@@ -133,7 +133,7 @@ namespace System.Web.Mvc.Razor.Test
                 factory
                     .EmptyVB()
                     .As(new SetModelTypeCodeGenerator(String.Empty, "{0}(Of {1})"))
-                    .Accepts(AcceptedCharacters.Any)
+                    .Accepts(AcceptedCharacters.Any),
             };
             var expectedErrors = new[]
             {
@@ -141,7 +141,7 @@ namespace System.Web.Mvc.Razor.Test
                     "The 'ModelType' keyword must be followed by a type name on the same line.",
                     new SourceLocation(10, 0, 10),
                     1
-                )
+                ),
             };
             Assert.Equal(expectedSpans, spans.ToArray());
             Assert.Equal(expectedErrors, errors.ToArray());
@@ -168,7 +168,7 @@ namespace System.Web.Mvc.Razor.Test
                     .Code("foo")
                     .As(new SetModelTypeCodeGenerator("foo", "{0}(Of {1})"))
                     .Accepts(AcceptedCharacters.Any),
-                factory.Markup("\r\n")
+                factory.Markup("\r\n"),
             };
             Assert.Equal(expectedSpans, spans.ToArray());
             Assert.Empty(errors);
@@ -196,7 +196,7 @@ namespace System.Web.Mvc.Razor.Test
                     .CodeTransition(SyntaxConstants.TransitionString)
                     .Accepts(AcceptedCharacters.None),
                 factory.MetaCode("ModelType ").Accepts(AcceptedCharacters.None),
-                factory.Code("Bar").As(new SetModelTypeCodeGenerator("Bar", "{0}(Of {1})"))
+                factory.Code("Bar").As(new SetModelTypeCodeGenerator("Bar", "{0}(Of {1})")),
             };
 
             var expectedErrors = new[]
@@ -205,7 +205,7 @@ namespace System.Web.Mvc.Razor.Test
                     "Only one 'ModelType' statement is allowed in a file.",
                     new SourceLocation(26, 1, 10),
                     1
-                )
+                ),
             };
             expectedSpans
                 .Zip(spans, (exp, span) => new { expected = exp, span = span })
@@ -237,7 +237,7 @@ namespace System.Web.Mvc.Razor.Test
                     .CodeTransition(SyntaxConstants.TransitionString)
                     .Accepts(AcceptedCharacters.None),
                 factory.MetaCode("Inherits ").Accepts(AcceptedCharacters.None),
-                factory.Code("Bar").As(new SetBaseTypeCodeGenerator("Bar"))
+                factory.Code("Bar").As(new SetBaseTypeCodeGenerator("Bar")),
             };
 
             var expectedErrors = new[]
@@ -246,7 +246,7 @@ namespace System.Web.Mvc.Razor.Test
                     "The 'inherits' keyword is not allowed when a 'ModelType' keyword is used.",
                     new SourceLocation(25, 1, 9),
                     1
-                )
+                ),
             };
             expectedSpans
                 .Zip(spans, (exp, span) => new { expected = exp, span = span })
@@ -278,7 +278,7 @@ namespace System.Web.Mvc.Razor.Test
                     .CodeTransition(SyntaxConstants.TransitionString)
                     .Accepts(AcceptedCharacters.None),
                 factory.MetaCode("ModelType ").Accepts(AcceptedCharacters.None),
-                factory.Code("Foo").As(new SetModelTypeCodeGenerator("Foo", "{0}(Of {1})"))
+                factory.Code("Foo").As(new SetModelTypeCodeGenerator("Foo", "{0}(Of {1})")),
             };
 
             var expectedErrors = new[]
@@ -287,7 +287,7 @@ namespace System.Web.Mvc.Razor.Test
                     "The 'inherits' keyword is not allowed when a 'ModelType' keyword is used.",
                     new SourceLocation(9, 0, 9),
                     1
-                )
+                ),
             };
             expectedSpans
                 .Zip(spans, (exp, span) => new { expected = exp, span = span })

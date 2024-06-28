@@ -18,7 +18,7 @@ namespace System.Globalization.Tests
                 "Wednesday",
                 "Thursday",
                 "Friday",
-                "Saturday"
+                "Saturday",
             };
             yield return new object[] { DateTimeFormatInfo.InvariantInfo, englishDayNames };
             yield return new object[] { new CultureInfo("en-US").DateTimeFormat, englishDayNames };
@@ -29,7 +29,7 @@ namespace System.Globalization.Tests
                 yield return new object[]
                 {
                     new CultureInfo("fr-FR").DateTimeFormat,
-                    DateTimeFormatInfoData.FrFRDayNames()
+                    DateTimeFormatInfoData.FrFRDayNames(),
                 };
             }
         }
@@ -46,7 +46,7 @@ namespace System.Globalization.Tests
                 DayOfWeek.Wednesday,
                 DayOfWeek.Thursday,
                 DayOfWeek.Friday,
-                DayOfWeek.Saturday
+                DayOfWeek.Saturday,
             };
 
             for (int i = 0; i < values.Length; ++i)

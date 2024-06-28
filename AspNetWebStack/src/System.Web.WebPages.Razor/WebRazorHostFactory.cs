@@ -185,7 +185,7 @@ namespace System.Web.WebPages.Razor
                 Host = (HostSection)
                     WebConfigurationManager.GetSection(HostSection.SectionName, virtualPath),
                 Pages = (RazorPagesSection)
-                    WebConfigurationManager.GetSection(RazorPagesSection.SectionName, virtualPath)
+                    WebConfigurationManager.GetSection(RazorPagesSection.SectionName, virtualPath),
             };
         }
 

@@ -18,21 +18,18 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 var underlyingType = (type as INamedTypeSymbol)?.TypeArguments.FirstOrDefault();
                 return underlyingType?.TypeKind switch
                 {
-                    TypeKind.TypeParameter =>
-                        new NullableValueWithDynamicallyAccessedMembers(
-                            new TypeProxy(type),
-                            new GenericParameterValue((ITypeParameterSymbol)underlyingType)
-                        ),
+                    TypeKind.TypeParameter => new NullableValueWithDynamicallyAccessedMembers(
+                        new TypeProxy(type),
+                        new GenericParameterValue((ITypeParameterSymbol)underlyingType)
+                    ),
                     // typeof(Nullable<>)
                     TypeKind.Error => new SystemTypeValue(new TypeProxy(type)),
-                    TypeKind.Class
-                    or TypeKind.Struct
-                    or TypeKind.Interface =>
+                    TypeKind.Class or TypeKind.Struct or TypeKind.Interface =>
                         new NullableSystemTypeValue(
                             new TypeProxy(type),
                             new SystemTypeValue(new TypeProxy(underlyingType))
                         ),
-                    _ => UnknownValue.Instance
+                    _ => UnknownValue.Instance,
                 };
             }
             return type.Kind switch
@@ -42,7 +39,7 @@ namespace ILLink.RoslynAnalyzer.TrimAnalysis
                 // If the symbol is an Array type, the BaseType is System.Array
                 SymbolKind.ArrayType => new SystemTypeValue(new TypeProxy(type.BaseType!)),
                 SymbolKind.ErrorType => UnknownValue.Instance,
-                _ => null
+                _ => null,
             };
         }
     }

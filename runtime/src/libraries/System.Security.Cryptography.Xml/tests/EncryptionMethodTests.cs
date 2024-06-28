@@ -66,19 +66,19 @@ namespace System.Security.Cryptography.Xml.Tests
             yield return new object[]
             {
                 new EncryptionMethod(),
-                "<EncryptionMethod xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />"
+                "<EncryptionMethod xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />",
             };
 
             yield return new object[]
             {
                 new EncryptionMethod("algorithm"),
-                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />"
+                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\" />",
             };
 
             yield return new object[]
             {
                 new EncryptionMethod("algorithm") { KeySize = 1 },
-                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></EncryptionMethod>"
+                "<EncryptionMethod Algorithm=\"algorithm\" xmlns=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></EncryptionMethod>",
             };
         }
 
@@ -117,19 +117,19 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>1</enc:KeySize></name>",
                 null,
-                1
+                1,
             };
             yield return new object[]
             {
                 "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><enc:KeySize>  1   </enc:KeySize></name>",
                 null,
-                1
+                1,
             };
             yield return new object[]
             {
                 "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" Algorithm=\"algorithm\" ><enc:KeySize>1</enc:KeySize></name>",
                 "algorithm",
-                1
+                1,
             };
 
             // Custom namespace
@@ -137,31 +137,31 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" enc:Algorithm=\"algorithm\"/>",
                 "algorithm",
-                0
+                0,
             };
             yield return new object[]
             {
                 "<name xmlns:abc=\"http://www.w3.org/2001/04/xmlenc#\" abc:Algorithm=\"algorithm\"/>",
                 "algorithm",
-                0
+                0,
             };
             yield return new object[]
             {
                 "<name xmlns:abc=\"http://www.w3.org/2001/04/xmlenc#\"><abc:KeySize>1</abc:KeySize></name>",
                 null,
-                1
+                1,
             };
             yield return new object[]
             {
                 "<name Algorithm=\"originalAlgorithm\" xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\" enc:Algorithm=\"namespacedAlgorithm\"/>",
                 "originalAlgorithm",
-                0
+                0,
             };
             yield return new object[]
             {
                 "<name xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:Algorithm=\"algorithm\"/>",
                 null,
-                0
+                0,
             };
 
             yield return new object[] { "<name algorithm=\"algorithm\"/>", null, 0 };
@@ -169,13 +169,13 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 "<name Algorithm=\"algorithm\"><KeySize>1</KeySize></name>",
                 "algorithm",
-                0
+                0,
             };
             yield return new object[]
             {
                 "<name xmlns:enc=\"http://www.w3.org/2001/04/xmlenc#\"><KeySize>1</KeySize></name>",
                 null,
-                0
+                0,
             };
         }
 

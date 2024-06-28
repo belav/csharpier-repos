@@ -79,7 +79,7 @@ namespace System.Xaml
 
         static readonly XmlReaderSettings file_reader_settings = new XmlReaderSettings()
         {
-            CloseInput = true
+            CloseInput = true,
         };
 
         public XamlXmlReader(
@@ -240,7 +240,7 @@ namespace System.Xaml
                 CloseInput = this.settings.CloseInput,
                 IgnoreComments = true,
                 IgnoreProcessingInstructions = true,
-                IgnoreWhitespace = true
+                IgnoreWhitespace = true,
             };
 
             r = XmlReader.Create(xmlReader, xrs);
@@ -478,7 +478,7 @@ namespace System.Xaml
                 Namespace = ns,
                 TypeName = xtn,
                 Members = members,
-                Attributes = atts
+                Attributes = atts,
             };
         }
 
@@ -701,7 +701,7 @@ namespace System.Xaml
                     )
                     {
                         LineNumber = this.LineNumber,
-                        LinePosition = this.LinePosition
+                        LinePosition = this.LinePosition,
                     };
             }
             else

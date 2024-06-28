@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents an array indexer expression.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeIndexerExpression : CodeExpression
     {
         private CodeExpression targetObject;

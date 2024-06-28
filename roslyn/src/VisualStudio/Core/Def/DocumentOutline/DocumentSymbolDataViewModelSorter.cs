@@ -43,7 +43,7 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
                 SortOption.Name => NameComparer.Instance,
                 SortOption.Type => TypeComparer.Instance,
                 SortOption.Location => LocationComparer.Instance,
-                _ => throw ExceptionUtilities.UnexpectedValue(sortOption)
+                _ => throw ExceptionUtilities.UnexpectedValue(sortOption),
             };
 
         public object[] ConvertBack(

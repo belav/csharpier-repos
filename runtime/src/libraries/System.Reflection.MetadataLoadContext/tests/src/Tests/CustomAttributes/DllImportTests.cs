@@ -92,17 +92,17 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     "F4",
-                    new MarshalAsAttribute(UnmanagedType.IDispatch) { IidParameterIndex = 42, },
+                    new MarshalAsAttribute(UnmanagedType.IDispatch) { IidParameterIndex = 42 },
                 };
                 yield return new object[]
                 {
                     "F5",
-                    new MarshalAsAttribute(UnmanagedType.ByValArray) { SizeConst = 1, },
+                    new MarshalAsAttribute(UnmanagedType.ByValArray) { SizeConst = 1 },
                 };
                 yield return new object[]
                 {
                     "F6",
-                    new MarshalAsAttribute(UnmanagedType.ByValArray) { SizeConst = 5, },
+                    new MarshalAsAttribute(UnmanagedType.ByValArray) { SizeConst = 5 },
                 };
                 yield return new object[]
                 {

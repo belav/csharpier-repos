@@ -215,7 +215,7 @@ namespace System.Web.Security.AntiXss
             | LatinExtendedB
             | SpacingModifierLetters
             | IpaExtensions
-            | CombiningDiacriticalMarks
+            | CombiningDiacriticalMarks,
     }
 
     /// <summary>
@@ -413,7 +413,7 @@ namespace System.Web.Security.AntiXss
         /// The Latin Extended Additional code table.
         /// </summary>
         /// <remarks>http://www.unicode.org/charts/PDF/U1E00.pdf</remarks>
-        LatinExtendedAdditional = 1 << 0x1E
+        LatinExtendedAdditional = 1 << 0x1E,
     }
 
     /// <summary>

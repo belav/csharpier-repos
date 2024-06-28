@@ -34,7 +34,7 @@ namespace XPathTests.FunctionalTests
                     LocalName = "Line",
                     Name = "Line",
                     HasNameTable = true,
-                    Value = "Porsche 911"
+                    Value = "Porsche 911",
                 }
             );
 
@@ -69,7 +69,7 @@ namespace XPathTests.FunctionalTests
                     LocalName = "Line",
                     Name = "Line",
                     HasNameTable = true,
-                    Value = "Porsche 911"
+                    Value = "Porsche 911",
                 }
             );
 
@@ -106,7 +106,7 @@ namespace XPathTests.FunctionalTests
                     Name = "Chapter",
                     HasNameTable = true,
                     Value =
-                        "\n        \n            Almond Chicken\n            Sesame Chicken\n            Crispy Duck\n        \n        \n            Mashed potatoes with overcooked veggies and fat meat topped with some rich gravy\n            That's it!\n        \n        \n            Triple Bacon Cheeseburger\n            Double Bacon Cheeseburger\n            Bacon Cheeseburger\n        \n    "
+                        "\n        \n            Almond Chicken\n            Sesame Chicken\n            Crispy Duck\n        \n        \n            Mashed potatoes with overcooked veggies and fat meat topped with some rich gravy\n            That's it!\n        \n        \n            Triple Bacon Cheeseburger\n            Double Bacon Cheeseburger\n            Bacon Cheeseburger\n        \n    ",
                 }
             );
 
@@ -143,7 +143,7 @@ namespace XPathTests.FunctionalTests
                     Name = "Chapter",
                     HasNameTable = true,
                     Value =
-                        "\n        \n            Almond Chicken\n            Sesame Chicken\n            Crispy Duck\n        \n        \n            Mashed potatoes with overcooked veggies and fat meat topped with some rich gravy\n            That's it!\n        \n        \n            Triple Bacon Cheeseburger\n            Double Bacon Cheeseburger\n            Bacon Cheeseburger\n        \n    "
+                        "\n        \n            Almond Chicken\n            Sesame Chicken\n            Crispy Duck\n        \n        \n            Mashed potatoes with overcooked veggies and fat meat topped with some rich gravy\n            That's it!\n        \n        \n            Triple Bacon Cheeseburger\n            Double Bacon Cheeseburger\n            Bacon Cheeseburger\n        \n    ",
                 },
                 new XPathResultToken
                 {
@@ -154,7 +154,7 @@ namespace XPathTests.FunctionalTests
                     Name = "Chapter",
                     HasNameTable = true,
                     Value =
-                        "\n        \n            BMW M5\n            Mercedes S Class\n            Porsche 911\n        \n        \n            Acura CL 3.2\n            Lexus RX300\n            Infiniti QX4\n        \n        \n    "
+                        "\n        \n            BMW M5\n            Mercedes S Class\n            Porsche 911\n        \n        \n            Acura CL 3.2\n            Lexus RX300\n            Infiniti QX4\n        \n        \n    ",
                 }
             );
 

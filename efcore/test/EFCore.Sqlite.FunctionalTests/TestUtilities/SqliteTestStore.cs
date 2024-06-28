@@ -40,7 +40,7 @@ public class SqliteTestStore : RelationalTestStore
         ConnectionString = new SqliteConnectionStringBuilder
         {
             DataSource = Name + ".db",
-            Cache = sharedCache ? SqliteCacheMode.Shared : SqliteCacheMode.Private
+            Cache = sharedCache ? SqliteCacheMode.Shared : SqliteCacheMode.Private,
         }.ToString();
 
         var connection = new SqliteConnection(ConnectionString);

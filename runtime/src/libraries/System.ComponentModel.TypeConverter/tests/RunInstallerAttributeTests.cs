@@ -57,13 +57,13 @@ namespace System.ComponentModel.Tests
             {
                 new RunInstallerAttribute(false),
                 new RunInstallerAttribute(false),
-                true
+                true,
             };
             yield return new object[]
             {
                 new RunInstallerAttribute(false),
                 new RunInstallerAttribute(true),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

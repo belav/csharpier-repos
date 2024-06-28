@@ -59,7 +59,7 @@ namespace System.ServiceModel.Dispatcher
         {
             None,
             Save,
-            Tron
+            Tron,
         };
 
         CodeGenTrace codeGenTrace;

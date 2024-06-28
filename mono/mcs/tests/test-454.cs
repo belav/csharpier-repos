@@ -4,7 +4,7 @@ using System;
 enum EnumType
 {
     X,
-    Y
+    Y,
 };
 
 class FooAttribute : Attribute

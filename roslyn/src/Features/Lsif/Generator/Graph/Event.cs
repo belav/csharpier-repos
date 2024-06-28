@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
             {
                 EventKind.Begin => "begin",
                 EventKind.End => "end",
-                _ => throw new ArgumentException(nameof(kind))
+                _ => throw new ArgumentException(nameof(kind)),
             };
             this.Scope = scope;
             this.Data = data;
@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Graph
         public enum EventKind
         {
             Begin,
-            End
+            End,
         }
     }
 }

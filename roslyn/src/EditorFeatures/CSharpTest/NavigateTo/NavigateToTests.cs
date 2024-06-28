@@ -1852,7 +1852,7 @@ public class Goo
                     {
                         expecteditem1,
                         expecteditem2,
-                        expecteditem3
+                        expecteditem3,
                     };
 
                     var items = await _aggregator.GetItemsAsync("GK");
@@ -2034,7 +2034,7 @@ public class Goo
                             null,
                             s_emptySubstringPatternMatch_NotCaseSensitive,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("get word");
@@ -2128,7 +2128,7 @@ public class Goo
                             null,
                             s_emptyPrefixPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("B.Q");
@@ -2179,7 +2179,7 @@ public class Goo
                             null,
                             s_emptyPrefixPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("B.B.Q");
@@ -2210,7 +2210,7 @@ public class Goo
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("Baz.Quux");
@@ -2241,7 +2241,7 @@ public class Goo
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("G.B.B.Quux");
@@ -2293,7 +2293,7 @@ public class Goo
                             null,
                             s_emptyPrefixPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("Baz.Q");
@@ -2334,7 +2334,7 @@ public class Goo
                             null,
                             s_emptyPrefixPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     var items = await _aggregator.GetItemsAsync("Console.Write");
@@ -2399,7 +2399,7 @@ public class Goo
                     null,
                     s_emptyPrefixPatternMatch,
                     null
-                )
+                ),
             };
 
             // The pattern matcher should match 'VisibleMethod' to both 'VisibleMethod' and 'VisibleMethod_Not', except that
@@ -3054,7 +3054,7 @@ record Goo(int Member)
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     VerifyNavigateToResultItems(expectedItems, items);
@@ -3129,7 +3129,7 @@ record Goo(int Member)
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     VerifyNavigateToResultItems(expectedItems, items);
@@ -3204,7 +3204,7 @@ record Goo(int Member)
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     VerifyNavigateToResultItems(expectedItems, items);
@@ -3279,7 +3279,7 @@ record Goo(int Member)
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     VerifyNavigateToResultItems(expectedItems, items);
@@ -3354,7 +3354,7 @@ record Goo(int Member)
                             null,
                             s_emptyExactPatternMatch,
                             null
-                        )
+                        ),
                     };
 
                     VerifyNavigateToResultItems(expectedItems, items);

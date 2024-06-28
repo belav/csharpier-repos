@@ -181,7 +181,7 @@ namespace ILCompiler.Dataflow
                 string str => new KnownStringValue(str),
                 null => NullValue.Instance,
                 // We shouldn't have gotten a None annotation from flow annotations since only string/Type can have annotations
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
 
         private void RequireDynamicallyAccessedMembers(

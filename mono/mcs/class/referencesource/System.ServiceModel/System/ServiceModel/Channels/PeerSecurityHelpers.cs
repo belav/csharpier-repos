@@ -815,7 +815,7 @@ namespace System.ServiceModel.Channels
         {
             Created,
             Authenticated,
-            Failed
+            Failed,
         }
 
         public PeerChannelAuthenticatorExtension(
@@ -1122,6 +1122,6 @@ namespace System.ServiceModel.Channels
     {
         None = 0,
         Password = 1,
-        MutualCertificate = 2
+        MutualCertificate = 2,
     }
 }

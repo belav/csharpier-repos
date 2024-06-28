@@ -21,7 +21,7 @@ public class PathStringBenchmark
         {
             new Uri($"https://localhost:5001/{TestPath}"),
             new Uri($"https://localhost:5001/{LongTestPath}"),
-            new Uri($"https://localhost:5001/{LongTestPathEarlyPercent}")
+            new Uri($"https://localhost:5001/{LongTestPathEarlyPercent}"),
         };
 
     [Benchmark]

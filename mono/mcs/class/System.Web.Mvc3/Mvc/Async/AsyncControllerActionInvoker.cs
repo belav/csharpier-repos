@@ -265,7 +265,7 @@
                             null /* exception */
                         )
                         {
-                            Result = EndInvokeActionMethod(innerAsyncResult)
+                            Result = EndInvokeActionMethod(innerAsyncResult),
                         };
                 };
 
@@ -420,7 +420,7 @@
                     null /* exception */
                 )
                 {
-                    Result = preContext.Result
+                    Result = preContext.Result,
                 };
                 return () => shortCircuitedPostContext;
             }

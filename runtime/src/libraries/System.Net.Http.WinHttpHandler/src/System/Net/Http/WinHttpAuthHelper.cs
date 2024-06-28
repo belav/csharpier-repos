@@ -32,7 +32,7 @@ namespace System.Net.Http
             null,
             null,
             null,
-            "Negotiate"
+            "Negotiate",
         ];
 
         private static ReadOnlySpan<uint> AuthSchemePriorityOrder =>
@@ -40,7 +40,7 @@ namespace System.Net.Http
                 Interop.WinHttp.WINHTTP_AUTH_SCHEME_NEGOTIATE,
                 Interop.WinHttp.WINHTTP_AUTH_SCHEME_NTLM,
                 Interop.WinHttp.WINHTTP_AUTH_SCHEME_DIGEST,
-                Interop.WinHttp.WINHTTP_AUTH_SCHEME_BASIC
+                Interop.WinHttp.WINHTTP_AUTH_SCHEME_BASIC,
             ];
 
         private readonly CredentialCache _credentialCache = new CredentialCache();

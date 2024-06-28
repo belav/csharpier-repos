@@ -33,7 +33,7 @@ namespace System.Web.Util
     {
         CommitPending = 0,
         AbortPending = 1,
-        Error = 2
+        Error = 2,
     }
 
     internal delegate int TransactedExecCallback(); // return value 'int' for interop

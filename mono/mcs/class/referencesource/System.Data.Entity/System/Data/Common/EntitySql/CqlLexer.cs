@@ -763,7 +763,7 @@ namespace System.Data.Common.EntitySql
         private static string[] yy_error_string = new string[]
         {
             "Error: Internal error.\n",
-            "Error: Unmatched input.\n"
+            "Error: Unmatched input.\n",
         };
 
         private void yy_error(int code, bool fatal)
@@ -863,7 +863,7 @@ namespace System.Data.Common.EntitySql
             /* 81 */YY_NO_ANCHOR,
             /* 82 */YY_NO_ANCHOR,
             /* 83 */YY_NO_ANCHOR,
-            /* 84 */YY_NO_ANCHOR
+            /* 84 */YY_NO_ANCHOR,
         };
         private static int[] yy_cmap = new int[]
         {
@@ -996,7 +996,7 @@ namespace System.Data.Common.EntitySql
             11,
             11,
             0,
-            41
+            41,
         };
         private static int[] yy_rmap = new int[]
         {
@@ -1084,7 +1084,7 @@ namespace System.Data.Common.EntitySql
             67,
             68,
             11,
-            69
+            69,
         };
         private static int[,] yy_nxt = new int[,]
         {
@@ -1130,7 +1130,7 @@ namespace System.Data.Common.EntitySql
                 32,
                 32,
                 27,
-                1
+                1,
             },
             {
                 -1,
@@ -1174,7 +1174,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1218,7 +1218,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1262,7 +1262,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1306,7 +1306,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1350,7 +1350,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1394,7 +1394,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1438,7 +1438,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1482,7 +1482,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1526,7 +1526,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1570,7 +1570,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1614,7 +1614,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1658,7 +1658,7 @@ namespace System.Data.Common.EntitySql
                 19,
                 19,
                 19,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1702,7 +1702,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1746,7 +1746,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1790,7 +1790,7 @@ namespace System.Data.Common.EntitySql
                 24,
                 24,
                 24,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1834,7 +1834,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1878,7 +1878,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1922,7 +1922,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -1966,7 +1966,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2010,7 +2010,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2054,7 +2054,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2098,7 +2098,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2142,7 +2142,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2186,7 +2186,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2230,7 +2230,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2274,7 +2274,7 @@ namespace System.Data.Common.EntitySql
                 38,
                 38,
                 38,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2318,7 +2318,7 @@ namespace System.Data.Common.EntitySql
                 42,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2362,7 +2362,7 @@ namespace System.Data.Common.EntitySql
                 41,
                 41,
                 41,
-                13
+                13,
             },
             {
                 -1,
@@ -2406,7 +2406,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2450,7 +2450,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2494,7 +2494,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2538,7 +2538,7 @@ namespace System.Data.Common.EntitySql
                 45,
                 45,
                 45,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2582,7 +2582,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2626,7 +2626,7 @@ namespace System.Data.Common.EntitySql
                 47,
                 47,
                 47,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2670,7 +2670,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2714,7 +2714,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2758,7 +2758,7 @@ namespace System.Data.Common.EntitySql
                 50,
                 50,
                 50,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2802,7 +2802,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2846,7 +2846,7 @@ namespace System.Data.Common.EntitySql
                 52,
                 52,
                 52,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2890,7 +2890,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2934,7 +2934,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -2978,7 +2978,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3022,7 +3022,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3066,7 +3066,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3110,7 +3110,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3154,7 +3154,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3198,7 +3198,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3242,7 +3242,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3286,7 +3286,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3330,7 +3330,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3374,7 +3374,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3418,7 +3418,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3462,7 +3462,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3506,7 +3506,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3550,7 +3550,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3594,7 +3594,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3638,7 +3638,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3682,7 +3682,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3726,7 +3726,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3770,7 +3770,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3814,7 +3814,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3858,7 +3858,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3902,7 +3902,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3946,7 +3946,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -3990,7 +3990,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -4034,7 +4034,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -4078,7 +4078,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -4122,7 +4122,7 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
+                -1,
             },
             {
                 -1,
@@ -4166,8 +4166,8 @@ namespace System.Data.Common.EntitySql
                 -1,
                 -1,
                 -1,
-                -1
-            }
+                -1,
+            },
         };
 
         internal CqlLexer.Token yylex()

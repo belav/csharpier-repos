@@ -202,7 +202,7 @@ namespace System.Reflection.Metadata.Tests
             0x82,
             0x00,
             0x11,
-            0xcf
+            0xcf,
         };
     }
 
@@ -830,7 +830,7 @@ namespace System.Reflection.Metadata.Tests
                                 0x31,
                                 0x31,
                                 0x31,
-                                0x31
+                                0x31,
                             }
                         )
                     )
@@ -850,7 +850,7 @@ namespace System.Reflection.Metadata.Tests
                                 0x32,
                                 0x32,
                                 0x32,
-                                0x32
+                                0x32,
                             }
                         )
                     )
@@ -870,7 +870,7 @@ namespace System.Reflection.Metadata.Tests
                                 0x33,
                                 0x33,
                                 0x33,
-                                0x33
+                                0x33,
                             }
                         )
                     ),

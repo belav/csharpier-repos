@@ -93,7 +93,7 @@ public class Http2TestBase
         new KeyValuePair<string, string>("a", _4kHeaderValue),
         new KeyValuePair<string, string>("b", _4kHeaderValue),
         new KeyValuePair<string, string>("c", _4kHeaderValue),
-        new KeyValuePair<string, string>("d", _4kHeaderValue)
+        new KeyValuePair<string, string>("d", _4kHeaderValue),
     };
 
     protected static readonly IEnumerable<

@@ -420,7 +420,7 @@ public class SqlServerTestStore : RelationalTestStore
                 execute,
                 sql,
                 useTransaction,
-                parameters
+                parameters,
             },
             state =>
                 ExecuteCommand(
@@ -483,7 +483,7 @@ public class SqlServerTestStore : RelationalTestStore
                 executeAsync,
                 sql,
                 useTransaction,
-                parameters
+                parameters,
             },
             state =>
                 ExecuteCommandAsync(
@@ -580,7 +580,7 @@ public class SqlServerTestStore : RelationalTestStore
         var builder = new SqlConnectionStringBuilder(TestEnvironment.DefaultConnection)
         {
             MultipleActiveResultSets = multipleActiveResultSets ?? Random.Shared.Next(0, 2) == 1,
-            InitialCatalog = name
+            InitialCatalog = name,
         };
         if (fileName != null)
         {

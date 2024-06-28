@@ -46,7 +46,7 @@ namespace System.ComponentModel
         {
             None,
             ToLower,
-            ToUpper
+            ToUpper,
         }
 
         /// <summary>
@@ -59,7 +59,9 @@ namespace System.ComponentModel
             EditRequired = 0x02, // editable char  ('#', '9', 'A', 'a', etc) required.
             Separator = 0x04, // separator char ('.', ',', ':', '$').
             Literal = 0x08, // literal char   ('\\', '-', etc)
-            Modifier = 0x10 // char modifier  ('>', '<')
+            Modifier =
+                0x10 // char modifier  ('>', '<')
+            ,
         }
 
         /// <summary>
@@ -506,7 +508,7 @@ namespace System.ComponentModel
                     AllowPromptAsInput,
                     PromptChar,
                     PasswordChar,
-                    AsciiOnly
+                    AsciiOnly,
                 };
 
                 clonedProvider = (

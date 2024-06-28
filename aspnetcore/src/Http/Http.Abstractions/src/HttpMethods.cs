@@ -186,7 +186,7 @@ public static class HttpMethods
             string _ when IsPatch(method) => Patch,
             string _ when IsTrace(method) => Trace,
             string _ when IsConnect(method) => Connect,
-            string _ => method
+            string _ => method,
         };
 
     /// <summary>

@@ -39,7 +39,7 @@ namespace Mono.Globalization.Unicode
                 0x1d000,
                 0x2f800,
                 0xe0000,
-                0x110000
+                0x110000,
             };
             int[] ends = new int[]
             {
@@ -51,7 +51,7 @@ namespace Mono.Globalization.Unicode
                 0x1d800,
                 0x2fa20,
                 0xe0200,
-                0x110000
+                0x110000,
             };
             Indexer = new CodePointIndexer(starts, ends, 0, 0);
         }

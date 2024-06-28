@@ -63,7 +63,7 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
                 {
                     guid,
                     new JObject() { { "assembly", assemblyName }, { "type", typeName } }
-                }
+                },
             };
 
             string clsidmapPath = Path.Combine(directory.Path, "test.clsidmap");
@@ -112,9 +112,9 @@ namespace Microsoft.NET.HostModel.ComHost.Tests
                     {
                         { "assembly", assemblyName },
                         { "type", typeName },
-                        { "progid", progId }
+                        { "progid", progId },
                     }
-                }
+                },
             };
 
             string clsidmapPath = Path.Combine(directory.Path, "test.clsidmap");

@@ -12,73 +12,73 @@ namespace System.Xml.XmlConvertTests
             AddChild(
                 new CVariation(v10)
                 {
-                    Attribute = new Variation("VerifyNMTOKEN.high surrogate") { Param = 1 }
+                    Attribute = new Variation("VerifyNMTOKEN.high surrogate") { Param = 1 },
                 }
             );
             AddChild(
                 new CVariation(v10)
                 {
-                    Attribute = new Variation("VerifyXmlChars.high surrogate") { Param = 5 }
+                    Attribute = new Variation("VerifyXmlChars.high surrogate") { Param = 5 },
                 }
             );
             AddChild(
                 new CVariation(v10)
                 {
-                    Attribute = new Variation("VerifyPublicId.high surrogate") { Param = 6 }
+                    Attribute = new Variation("VerifyPublicId.high surrogate") { Param = 6 },
                 }
             );
             AddChild(
                 new CVariation(v10)
                 {
-                    Attribute = new Variation("VerifyWhitespace.high surrogate") { Param = 7 }
+                    Attribute = new Variation("VerifyWhitespace.high surrogate") { Param = 7 },
                 }
             );
             AddChild(
                 new CVariation(v10)
                 {
-                    Attribute = new Variation("VerifyName.high surrogate") { Param = 2 }
+                    Attribute = new Variation("VerifyName.high surrogate") { Param = 2 },
                 }
             );
             AddChild(
                 new CVariation(v10)
                 {
-                    Attribute = new Variation("VerifyNCName.high surrogate") { Param = 3 }
+                    Attribute = new Variation("VerifyNCName.high surrogate") { Param = 3 },
                 }
             );
             AddChild(
                 new CVariation(v11)
                 {
-                    Attribute = new Variation("VerifyPublicId.low surrogate") { Param = 6 }
+                    Attribute = new Variation("VerifyPublicId.low surrogate") { Param = 6 },
                 }
             );
             AddChild(
                 new CVariation(v11)
                 {
-                    Attribute = new Variation("VerifyWhitespace.low surrogate") { Param = 7 }
+                    Attribute = new Variation("VerifyWhitespace.low surrogate") { Param = 7 },
                 }
             );
             AddChild(
                 new CVariation(v11)
                 {
-                    Attribute = new Variation("VerifyName.low surrogate") { Param = 2 }
+                    Attribute = new Variation("VerifyName.low surrogate") { Param = 2 },
                 }
             );
             AddChild(
                 new CVariation(v11)
                 {
-                    Attribute = new Variation("VerifyNCName.low surrogate") { Param = 3 }
+                    Attribute = new Variation("VerifyNCName.low surrogate") { Param = 3 },
                 }
             );
             AddChild(
                 new CVariation(v11)
                 {
-                    Attribute = new Variation("VerifyXmlChars.low surrogate") { Param = 5 }
+                    Attribute = new Variation("VerifyXmlChars.low surrogate") { Param = 5 },
                 }
             );
             AddChild(
                 new CVariation(v11)
                 {
-                    Attribute = new Variation("VerifyNMTOKEN.low surrogate") { Param = 1 }
+                    Attribute = new Variation("VerifyNMTOKEN.low surrogate") { Param = 1 },
                 }
             );
             AddChild(
@@ -86,8 +86,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("VerifyWhitespace.special symbols")
                     {
-                        Params = new object[] { 7, true }
-                    }
+                        Params = new object[] { 7, true },
+                    },
                 }
             );
             AddChild(
@@ -95,8 +95,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("VerifyPublicId.special symbols")
                     {
-                        Params = new object[] { 6, true }
-                    }
+                        Params = new object[] { 6, true },
+                    },
                 }
             );
             AddChild(
@@ -104,8 +104,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("VerifyNMTOKEN.special symbols")
                     {
-                        Params = new object[] { 1, true }
-                    }
+                        Params = new object[] { 1, true },
+                    },
                 }
             );
             AddChild(
@@ -113,8 +113,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("VerifyName.special symbols")
                     {
-                        Params = new object[] { 2, true }
-                    }
+                        Params = new object[] { 2, true },
+                    },
                 }
             );
             AddChild(
@@ -122,8 +122,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("VerifyNCName.special symbols")
                     {
-                        Params = new object[] { 3, true }
-                    }
+                        Params = new object[] { 3, true },
+                    },
                 }
             );
             AddChild(
@@ -131,8 +131,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("VerifyXmlChars.special symbols")
                     {
-                        Params = new object[] { 5, false }
-                    }
+                        Params = new object[] { 5, false },
+                    },
                 }
             );
             AddChild(
@@ -140,8 +140,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd\ralfafkjha)")
                     {
-                        Params = new object[] { "abcd\ralfafkjha", "invalid" }
-                    }
+                        Params = new object[] { "abcd\ralfafkjha", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -149,8 +149,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd)")
                     {
-                        Params = new object[] { "abcd", "valid" }
-                    }
+                        Params = new object[] { "abcd", "valid" },
+                    },
                 }
             );
             AddChild(
@@ -158,8 +158,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd  def)")
                     {
-                        Params = new object[] { "abcd  def", "invalid" }
-                    }
+                        Params = new object[] { "abcd  def", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -167,8 +167,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd\tdef)")
                     {
-                        Params = new object[] { "abcd\tdef", "invalid" }
-                    }
+                        Params = new object[] { "abcd\tdef", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -176,8 +176,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN( \b)")
                     {
-                        Params = new object[] { " \b", "invalid" }
-                    }
+                        Params = new object[] { " \b", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -185,8 +185,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd efgh)")
                     {
-                        Params = new object[] { "abcd efgh", "invalid" }
-                    }
+                        Params = new object[] { "abcd efgh", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -194,8 +194,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN()")
                     {
-                        Params = new object[] { "", "invalid" }
-                    }
+                        Params = new object[] { "", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -203,8 +203,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN( abcd)")
                     {
-                        Params = new object[] { " abcd", "invalid" }
-                    }
+                        Params = new object[] { " abcd", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -212,8 +212,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd\nalfafkjha)")
                     {
-                        Params = new object[] { "abcd ", "invalid" }
-                    }
+                        Params = new object[] { "abcd ", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -221,8 +221,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("Test for VerifyNMTOKEN(abcd\nalfafkjha)")
                     {
-                        Params = new object[] { "abcd\nalfafkjha", "invalid" }
-                    }
+                        Params = new object[] { "abcd\nalfafkjha", "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -230,8 +230,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("23.Test for VerifyName(:a\ud801\udc01b)")
                     {
-                        Params = new object[] { 23, "invalid" }
-                    }
+                        Params = new object[] { 23, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -239,8 +239,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("5.Test for VerifyName(abcd\nalfafkjha)")
                     {
-                        Params = new object[] { 5, "invalid" }
-                    }
+                        Params = new object[] { 5, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -248,8 +248,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("8.Test for VerifyName(abcd\tdef)")
                     {
-                        Params = new object[] { 8, "invalid" }
-                    }
+                        Params = new object[] { 8, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -257,8 +257,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("9.Test for VerifyName( \b)")
                     {
-                        Params = new object[] { 9, "invalid" }
-                    }
+                        Params = new object[] { 9, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -266,8 +266,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("10.Test for VerifyName(\ud801\udc01)")
                     {
-                        Params = new object[] { 10, "invalid" }
-                    }
+                        Params = new object[] { 10, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -275,8 +275,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("11.Test for VerifyName( \ud801\udc01)")
                     {
-                        Params = new object[] { 11, "invalid" }
-                    }
+                        Params = new object[] { 11, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -284,8 +284,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("12.Test for VerifyName(\ud801\udc01 )")
                     {
-                        Params = new object[] { 12, "invalid" }
-                    }
+                        Params = new object[] { 12, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -293,8 +293,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("13.Test for VerifyName(\ud801 \udc01)")
                     {
-                        Params = new object[] { 13, "invalid" }
-                    }
+                        Params = new object[] { 13, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -302,8 +302,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("14.Test for VerifyName(\ud801  \udc01)")
                     {
-                        Params = new object[] { 14, "invalid" }
-                    }
+                        Params = new object[] { 14, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -311,8 +311,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("15.Test for VerifyName(\ud801\r\udc01)")
                     {
-                        Params = new object[] { 15, "invalid" }
-                    }
+                        Params = new object[] { 15, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -320,8 +320,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("16.Test for VerifyName(\ud801\n\udc01)")
                     {
-                        Params = new object[] { 16, "invalid" }
-                    }
+                        Params = new object[] { 16, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -329,8 +329,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("17.Test for VerifyName(\ud801\t\udc001)")
                     {
-                        Params = new object[] { 17, "invalid" }
-                    }
+                        Params = new object[] { 17, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -338,8 +338,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("18.Test for VerifyName(a\ud801\udc01b)")
                     {
-                        Params = new object[] { 18, "invalid" }
-                    }
+                        Params = new object[] { 18, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -347,8 +347,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("19.Test for VerifyName(a\udc01\ud801b)")
                     {
-                        Params = new object[] { 19, "invalid" }
-                    }
+                        Params = new object[] { 19, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -356,8 +356,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("20.Test for VerifyName(a\ud801b)")
                     {
-                        Params = new object[] { 20, "invalid" }
-                    }
+                        Params = new object[] { 20, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -365,8 +365,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("21.Test for VerifyName(a\udc01b)")
                     {
-                        Params = new object[] { 21, "invalid" }
-                    }
+                        Params = new object[] { 21, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -374,8 +374,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("22.Test for VerifyName(\ud801\udc01:)")
                     {
-                        Params = new object[] { 22, "invalid" }
-                    }
+                        Params = new object[] { 22, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -383,8 +383,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("1.Test for VerifyName(abcd)")
                     {
-                        Params = new object[] { 1, "valid" }
-                    }
+                        Params = new object[] { 1, "valid" },
+                    },
                 }
             );
             AddChild(
@@ -392,8 +392,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("24.Test for VerifyName(a\ud801\udc01:b)")
                     {
-                        Params = new object[] { 24, "invalid" }
-                    }
+                        Params = new object[] { 24, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -401,8 +401,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("25.Test for VerifyName(a\udbff\udc01\b)")
                     {
-                        Params = new object[] { 25, "invalid" }
-                    }
+                        Params = new object[] { 25, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -410,8 +410,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("6.Test for VerifyName(abcd\ralfafkjha)")
                     {
-                        Params = new object[] { 6, "invalid" }
-                    }
+                        Params = new object[] { 6, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -419,8 +419,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("7.Test for VerifyName(abcd  def)")
                     {
-                        Params = new object[] { 7, "invalid" }
-                    }
+                        Params = new object[] { 7, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -428,8 +428,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("2.Test for VerifyName(abcd efgh)")
                     {
-                        Params = new object[] { 2, "invalid" }
-                    }
+                        Params = new object[] { 2, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -437,8 +437,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("3.Test for VerifyName( abcd)")
                     {
-                        Params = new object[] { 3, "invalid" }
-                    }
+                        Params = new object[] { 3, "invalid" },
+                    },
                 }
             );
             AddChild(
@@ -446,8 +446,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("4.Test for VerifyName(abcd\nalfafkjha)")
                     {
-                        Params = new object[] { 4, "invalid" }
-                    }
+                        Params = new object[] { 4, "invalid" },
+                    },
                 }
             );
         }

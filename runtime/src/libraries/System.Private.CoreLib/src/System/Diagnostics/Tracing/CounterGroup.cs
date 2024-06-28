@@ -181,7 +181,7 @@ namespace System.Diagnostics.Tracing
                     s_pollingThread = new Thread(PollForValues)
                     {
                         IsBackground = true,
-                        Name = ".NET Counter Poller"
+                        Name = ".NET Counter Poller",
                     };
                     s_pollingThread.InternalUnsafeStart();
                 }

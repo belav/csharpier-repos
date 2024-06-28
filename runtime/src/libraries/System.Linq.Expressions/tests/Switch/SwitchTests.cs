@@ -1400,7 +1400,7 @@ namespace System.Linq.Expressions.Tests
             SwitchCase[] cases =
             {
                 Expression.SwitchCase(Expression.Constant(1), Expression.Constant(1)),
-                Expression.SwitchCase(Expression.Constant(2), Expression.Constant(2))
+                Expression.SwitchCase(Expression.Constant(2), Expression.Constant(2)),
             };
 
             SwitchExpression sw = Expression.Switch(
@@ -1450,7 +1450,7 @@ namespace System.Linq.Expressions.Tests
             SwitchCase[] newCases = new[]
             {
                 Expression.SwitchCase(Expression.Constant(1), Expression.Constant(1)),
-                Expression.SwitchCase(Expression.Constant(2), Expression.Constant(2))
+                Expression.SwitchCase(Expression.Constant(2), Expression.Constant(2)),
             };
 
             Assert.NotSame(sw, sw.Update(sw.SwitchValue, newCases, sw.DefaultBody));
@@ -1470,7 +1470,7 @@ namespace System.Linq.Expressions.Tests
                 new SwitchCase[]
                 {
                     Expression.SwitchCase(Expression.Constant(1), Expression.Constant(1)),
-                    Expression.SwitchCase(Expression.Constant(2), Expression.Constant(2))
+                    Expression.SwitchCase(Expression.Constant(2), Expression.Constant(2)),
                 }
             );
 
@@ -1513,7 +1513,7 @@ namespace System.Linq.Expressions.Tests
                 "fred",
                 "plugh",
                 "xyzzy",
-                "thud"
+                "thud",
             };
 
             for (var i = 1; i <= values.Length; i++)
@@ -1571,7 +1571,7 @@ namespace System.Linq.Expressions.Tests
                 "plugh",
                 "xyzzy",
                 "thud",
-                null
+                null,
             };
 
             for (var i = 1; i <= values.Length; i++)

@@ -235,7 +235,7 @@ public class FormPipeReaderTests
         var formReader = new FormPipeReader(null!)
         {
             ValueLengthLimit = valueLengthLimit,
-            KeyLengthLimit = keyLengthLimit
+            KeyLengthLimit = keyLengthLimit,
         };
         var exception = Assert.Throws<InvalidDataException>(
             () =>
@@ -708,7 +708,7 @@ public class FormPipeReaderTests
                     Encoding.UTF8.GetBytes("a")
                 )
             },
-            { new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("fo=bar&ba")) }
+            { new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("fo=bar&ba")) },
         };
 
     public static TheoryData<ReadOnlySequence<byte>> IncompleteFormValues =>
@@ -720,7 +720,7 @@ public class FormPipeReaderTests
                     Encoding.UTF8.GetBytes("=")
                 )
             },
-            { new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("fo=bar&b=")) }
+            { new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("fo=bar&b=")) },
         };
 
     public static TheoryData<Encoding> Encodings =>
@@ -729,7 +729,7 @@ public class FormPipeReaderTests
             { Encoding.UTF8 },
             { Encoding.UTF32 },
             { Encoding.ASCII },
-            { Encoding.Unicode }
+            { Encoding.Unicode },
         };
 
     internal virtual Task<Dictionary<string, StringValues>> ReadFormAsync(FormPipeReader reader)

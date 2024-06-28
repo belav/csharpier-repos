@@ -35,7 +35,7 @@ namespace System.Configuration
             {
                 s_propName,
                 s_propConnectionString,
-                s_propProviderName
+                s_propProviderName,
             };
 
         public ConnectionStringSettings() { }

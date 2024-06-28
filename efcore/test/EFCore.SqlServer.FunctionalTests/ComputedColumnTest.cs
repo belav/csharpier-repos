@@ -21,7 +21,7 @@ public class ComputedColumnTest : IDisposable
                 {
                     P1 = 20,
                     P2 = 30,
-                    P3 = 80
+                    P3 = 80,
                 }
             )
             .Entity;
@@ -94,7 +94,7 @@ public class ComputedColumnTest : IDisposable
     {
         None = 0x0,
         AValue = 0x1,
-        BValue = 0x2
+        BValue = 0x2,
     }
 
     public class EnumItem

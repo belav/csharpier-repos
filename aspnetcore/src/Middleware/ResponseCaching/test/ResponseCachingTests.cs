@@ -377,7 +377,7 @@ public class ResponseCachingTests
             context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
             {
                 "QueryA",
-                "queryb"
+                "queryb",
             }
         );
 
@@ -429,7 +429,7 @@ public class ResponseCachingTests
             context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
             {
                 "QueryB",
-                "QueryA"
+                "QueryA",
             }
         );
 
@@ -505,7 +505,7 @@ public class ResponseCachingTests
             context.Features.Get<IResponseCachingFeature>().VaryByQueryKeys = new[]
             {
                 "QueryA",
-                "QueryB"
+                "QueryB",
             }
         );
 
@@ -568,7 +568,7 @@ public class ResponseCachingTests
                 client.DefaultRequestHeaders.CacheControl =
                     new System.Net.Http.Headers.CacheControlHeaderValue()
                     {
-                        MaxAge = TimeSpan.FromSeconds(0)
+                        MaxAge = TimeSpan.FromSeconds(0),
                     };
                 var subsequentResponse = await client.GetAsync("");
 

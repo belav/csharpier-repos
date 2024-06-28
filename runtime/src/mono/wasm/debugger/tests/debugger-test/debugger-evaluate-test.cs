@@ -627,17 +627,17 @@ namespace DebuggerTests
             {
                 { "1", true },
                 { "111", false },
-                { "true", true }
+                { "true", true },
             };
             public Dictionary<char, string> indexedByChar = new Dictionary<char, string>()
             {
                 { 'i', "I" },
-                { '5', "5" }
+                { '5', "5" },
             };
             public Dictionary<bool, string> indexedByBool = new Dictionary<bool, string>()
             {
                 { true, "TRUE" },
-                { false, "FALSE" }
+                { false, "FALSE" },
             };
             public int idx0 = 0;
             public int idx1 = 1;
@@ -721,24 +721,24 @@ namespace DebuggerTests
                     { 1, 2 },
                     { 3, 4 },
                     { 5, 6 },
-                    { 7, 8 }
+                    { 7, 8 },
                 };
                 textArray2D = new string[3, 2]
                 {
                     { "one", "two" },
                     { "three", "four" },
-                    { "five", "six" }
+                    { "five", "six" },
                 };
                 numArray3D = new int[,,]
                 {
                     {
                         { 1, 2, 3 },
-                        { 4, 5, 6 }
+                        { 4, 5, 6 },
                     },
                     {
                         { 7, 8, 9 },
-                        { 10, 11, 12 }
-                    }
+                        { 10, 11, 12 },
+                    },
                 };
                 idx0 = 0;
                 idx1 = 1;
@@ -766,7 +766,7 @@ namespace DebuggerTests
     public enum SampleEnum
     {
         yes = 0,
-        no = 1
+        no = 1,
     }
 
     public class SampleClass

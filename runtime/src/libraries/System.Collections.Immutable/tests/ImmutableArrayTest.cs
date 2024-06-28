@@ -327,25 +327,25 @@ namespace System.Collections.Immutable.Tests
             {
                 new int[] { },
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
                 new[] { 4, 5, 6, 7 },
                 new Func<int, float, float>((x, y) => x + y),
-                0.5f
+                0.5f,
             };
             yield return new object[]
             {
                 new[] { 4, 5, 6, 7 },
                 new Func<int, int, int>((x, y) => x + y),
-                1
+                1,
             };
             yield return new object[]
             {
                 new[] { 4, 5, 6, 7 },
                 new Func<int, object, int>((x, y) => x),
-                null
+                null,
             };
         }
 
@@ -396,14 +396,14 @@ namespace System.Collections.Immutable.Tests
                 new[] { 4, 5, 6, 7 },
                 0,
                 0,
-                new Func<int, float>(i => i + 0.5f)
+                new Func<int, float>(i => i + 0.5f),
             };
             yield return new object[]
             {
                 new[] { 4, 5, 6, 7 },
                 0,
                 0,
-                new Func<int, double>(i => i + 0.5d)
+                new Func<int, double>(i => i + 0.5d),
             };
             yield return new object[] { new[] { 4, 5, 6, 7 }, 0, 0, new Func<int, int>(i => i) };
             yield return new object[]
@@ -411,14 +411,14 @@ namespace System.Collections.Immutable.Tests
                 new[] { 4, 5, 6, 7 },
                 0,
                 1,
-                new Func<int, int>(i => i * 2)
+                new Func<int, int>(i => i * 2),
             };
             yield return new object[]
             {
                 new[] { 4, 5, 6, 7 },
                 0,
                 2,
-                new Func<int, int>(i => i + 1)
+                new Func<int, int>(i => i + 1),
             };
             yield return new object[] { new[] { 4, 5, 6, 7 }, 0, 4, new Func<int, int>(i => i) };
             yield return new object[] { new[] { 4, 5, 6, 7 }, 3, 1, new Func<int, int>(i => i) };
@@ -497,7 +497,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 0,
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
@@ -505,7 +505,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 0,
                 new Func<int, float, float>((x, y) => x + y),
-                0.5f
+                0.5f,
             };
             yield return new object[]
             {
@@ -513,7 +513,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 0,
                 new Func<int, double, double>((x, y) => x + y),
-                0.5d
+                0.5d,
             };
             yield return new object[]
             {
@@ -521,7 +521,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 0,
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
@@ -529,7 +529,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 1,
                 new Func<int, int, int>((x, y) => x * y),
-                2
+                2,
             };
             yield return new object[]
             {
@@ -537,7 +537,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 2,
                 new Func<int, int, int>((x, y) => x + y),
-                1
+                1,
             };
             yield return new object[]
             {
@@ -545,7 +545,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 4,
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
@@ -553,7 +553,7 @@ namespace System.Collections.Immutable.Tests
                 3,
                 1,
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
@@ -561,7 +561,7 @@ namespace System.Collections.Immutable.Tests
                 3,
                 0,
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
@@ -569,7 +569,7 @@ namespace System.Collections.Immutable.Tests
                 4,
                 0,
                 new Func<int, int, int>((x, y) => x + y),
-                0
+                0,
             };
             yield return new object[]
             {
@@ -577,7 +577,7 @@ namespace System.Collections.Immutable.Tests
                 0,
                 1,
                 new Func<int, object, int>((x, y) => x),
-                null
+                null,
             };
         }
 
@@ -1358,7 +1358,7 @@ namespace System.Collections.Immutable.Tests
                 {
                     array,
                     enumerable.ToImmutableArray(),
-                    !enumerable.Any() || enumerable is ImmutableArray<int>
+                    !enumerable.Any() || enumerable is ImmutableArray<int>,
                 };
             }
 
@@ -1960,7 +1960,7 @@ namespace System.Collections.Immutable.Tests
                         new object[] { s_manyElements, 4, comparer },
                         new object[] { new int[0], 4, comparer },
                         new object[] { new int[] { 1, 4 }, 4, comparer },
-                        new object[] { s_oneElement, 1, comparer }
+                        new object[] { s_oneElement, 1, comparer },
                     }
                 );
         }
@@ -2081,7 +2081,7 @@ namespace System.Collections.Immutable.Tests
                         {
                             Enumerable.Range(1, 5).Cast<int?>(),
                             Enumerable.Range(6, 5).Cast<int?>(),
-                            comparer
+                            comparer,
                         },
                         new object[] { new int?[] { 1, 2, 3 }, new int?[] { 2 }, comparer },
                         new object[] { new int?[] { 1, 2, 3 }, new int?[] { 1, 3, 5 }, comparer },
@@ -2089,13 +2089,13 @@ namespace System.Collections.Immutable.Tests
                         {
                             Enumerable.Range(1, 10).Cast<int?>(),
                             new int?[] { 2, 4, 5, 7, 10 },
-                            comparer
+                            comparer,
                         },
                         new object[]
                         {
                             Enumerable.Range(1, 10).Cast<int?>(),
                             new int?[] { 1, 2, 4, 5, 7, 10 },
-                            comparer
+                            comparer,
                         },
                         new object[] { new int?[] { 1, 2, 3 }, new int?[] { 5 }, comparer },
                         new object[] { new int?[] { 1, 2, 2, 3 }, new int?[] { 2 }, comparer },
@@ -2104,7 +2104,7 @@ namespace System.Collections.Immutable.Tests
                         {
                             new int?[] { 1, 2, 2, 3 },
                             new int?[] { 2, 2, 2 },
-                            comparer
+                            comparer,
                         },
                         new object[] { new int?[] { 1, 2, 3 }, new int?[] { 42 }, comparer },
                         new object[] { new int?[] { 1, 2, 3 }, new int?[] { 42, 42 }, comparer },
@@ -2112,7 +2112,7 @@ namespace System.Collections.Immutable.Tests
                         {
                             new int?[] { 1, 2, 3 },
                             new int?[] { 42, 42, 42 },
-                            comparer
+                            comparer,
                         },
                         new object[] { new int?[] { null }, new int?[] { 1 }, comparer },
                         new object[] { new int?[] { 1 }, new int?[] { null }, comparer },
@@ -2120,19 +2120,19 @@ namespace System.Collections.Immutable.Tests
                         {
                             new int?[] { 1, null, 2, null },
                             new int?[] { 1, null },
-                            comparer
+                            comparer,
                         },
                         new object[]
                         {
                             new int?[] { 1, null, 2 },
                             new int?[] { 1, null, null },
-                            comparer
+                            comparer,
                         },
                         new object[]
                         {
                             new int?[] { 1, null, 2, null },
                             new int?[] { 1, null, null },
-                            comparer
+                            comparer,
                         },
                     }
                 );
@@ -2343,12 +2343,12 @@ namespace System.Collections.Immutable.Tests
             yield return new object[]
             {
                 Enumerable.Range(1, 10),
-                new Predicate<int>(i => i % 2 == 0)
+                new Predicate<int>(i => i % 2 == 0),
             };
             yield return new object[]
             {
                 Enumerable.Range(1, 10),
-                new Predicate<int>(i => i % 2 == 1)
+                new Predicate<int>(i => i % 2 == 1),
             };
             yield return new object[] { Enumerable.Range(1, 10), new Predicate<int>(i => true) };
             yield return new object[] { Enumerable.Range(1, 10), new Predicate<int>(i => false) };
@@ -2421,7 +2421,7 @@ namespace System.Collections.Immutable.Tests
                         new object[] { s_manyElements, 2, 6, comparer },
                         new object[] { s_manyElements, 3, 6, comparer },
                         new object[] { new[] { 1, 3, 3, 4 }, 3, 2, comparer },
-                        new object[] { s_manyElements, 2, 10, comparer }
+                        new object[] { s_manyElements, 2, 10, comparer },
                     }
                 );
         }
@@ -2880,10 +2880,10 @@ namespace System.Collections.Immutable.Tests
                             new[] { "c", "B", "a" },
                             0,
                             3,
-                            StringComparer.OrdinalIgnoreCase
+                            StringComparer.OrdinalIgnoreCase,
                         },
                         new object[] { new[] { "c", "B", "a" }, 0, 3, StringComparer.Ordinal },
-                        new object[] { new[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10 }, 4, 2, comparer }
+                        new object[] { new[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10 }, 4, 2, comparer },
                     }
                 );
         }
@@ -2997,14 +2997,14 @@ namespace System.Collections.Immutable.Tests
                 new[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10 },
                 0,
                 5,
-                Comparer<int>.Default
+                Comparer<int>.Default,
             };
             yield return new object[]
             {
                 new[] { 1, 2, 3, 4, 6, 5, 7, 8, 9, 10 },
                 5,
                 5,
-                Comparer<int>.Default
+                Comparer<int>.Default,
             };
 
             yield return new object[]
@@ -3012,35 +3012,35 @@ namespace System.Collections.Immutable.Tests
                 new[] { 1, 5, 2 },
                 0,
                 3,
-                Comparer<int>.Create((x, y) => 0)
+                Comparer<int>.Create((x, y) => 0),
             };
             yield return new object[]
             {
                 new[] { 1, 5, 2 },
                 1,
                 2,
-                Comparer<int>.Create((x, y) => 0)
+                Comparer<int>.Create((x, y) => 0),
             };
             yield return new object[]
             {
                 new[] { 1, 5, 2 },
                 1,
                 1,
-                Comparer<int>.Create((x, y) => 0)
+                Comparer<int>.Create((x, y) => 0),
             };
             yield return new object[]
             {
                 new[] { 1, 5, 2 },
                 0,
                 2,
-                Comparer<int>.Create((x, y) => 0)
+                Comparer<int>.Create((x, y) => 0),
             };
             yield return new object[]
             {
                 new[] { 1, 5, 2, 4 },
                 1,
                 2,
-                Comparer<int>.Create((x, y) => 0)
+                Comparer<int>.Create((x, y) => 0),
             };
         }
 
@@ -3103,14 +3103,14 @@ namespace System.Collections.Immutable.Tests
             var optimisticComparers = new IEqualityComparer[]
             {
                 EqualityComparer<int>.Default,
-                new DelegateEqualityComparer<object>(objectEquals: (x, y) => true)
+                new DelegateEqualityComparer<object>(objectEquals: (x, y) => true),
             };
 
             // The comparers here must not consider two arrays structurally equal if the default comparer doesn't.
             var pessimisticComparers = new IEqualityComparer[]
             {
                 EqualityComparer<int>.Default,
-                new DelegateEqualityComparer<object>(objectEquals: (x, y) => false)
+                new DelegateEqualityComparer<object>(objectEquals: (x, y) => false),
             };
 
             foreach (IEqualityComparer comparer in optimisticComparers)
@@ -3123,21 +3123,21 @@ namespace System.Collections.Immutable.Tests
                     new[] { 1, 2, 3 },
                     ImmutableArray.Create(1, 2, 3),
                     comparer,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     new[] { 1, 2, 3 },
                     new object[] { 1, 2, 3 },
                     comparer,
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     new[] { 1, 2, 3 },
                     ImmutableArray.Create<object>(1, 2, 3),
                     comparer,
-                    true
+                    true,
                 };
             }
 
@@ -3150,7 +3150,7 @@ namespace System.Collections.Immutable.Tests
                     new[] { 1, 2, 3 },
                     new List<int> { 1, 2, 3 },
                     comparer,
-                    false
+                    false,
                 };
                 yield return new object[] { new[] { 1, 2, 3 }, new object(), comparer, false };
                 yield return new object[] { new[] { 1, 2, 3 }, null, comparer, false };
@@ -3160,7 +3160,7 @@ namespace System.Collections.Immutable.Tests
                     new[] { 1, 2, 3 },
                     ImmutableArray.Create(1, 2, 4),
                     comparer,
-                    false
+                    false,
                 };
                 yield return new object[] { new[] { 1, 2, 3 }, new string[3], comparer, false };
                 yield return new object[]
@@ -3168,7 +3168,7 @@ namespace System.Collections.Immutable.Tests
                     new[] { 1, 2, 3 },
                     ImmutableArray.Create(new string[3]),
                     comparer,
-                    false
+                    false,
                 };
             }
         }
@@ -3186,7 +3186,7 @@ namespace System.Collections.Immutable.Tests
                 s_emptyDefault,
                 ImmutableArray.Create(1, 2, 3),
                 null,
-                false
+                false,
             };
 
             yield return new object[] { new int[0], null, null, false }; // Array short-circuits because `other` is null
@@ -3367,7 +3367,7 @@ namespace System.Collections.Immutable.Tests
             yield return new object[]
             {
                 ImmutableArray.Create<int>(),
-                ImmutableArray.Create(1, 2, 3)
+                ImmutableArray.Create(1, 2, 3),
             };
             yield return new object[] { new[] { 1, 2, 3 }, null };
         }
@@ -3437,14 +3437,14 @@ namespace System.Collections.Immutable.Tests
                 new[] { 1, 2, 3 },
                 new[] { 1, 2, 3 },
                 Comparer<int>.Default,
-                0
+                0,
             };
             yield return new object[]
             {
                 new[] { 1, 2, 3 },
                 new[] { 1, 2, 3 },
                 Comparer<object>.Default,
-                0
+                0,
             };
 
             yield return new object[]
@@ -3452,14 +3452,14 @@ namespace System.Collections.Immutable.Tests
                 new[] { 1, 2, 3 },
                 ImmutableArray.Create(1, 2, 3),
                 Comparer<int>.Default,
-                0
+                0,
             };
             yield return new object[]
             {
                 new[] { 1, 2, 3 },
                 ImmutableArray.Create(1, 2, 3),
                 Comparer<object>.Default,
-                0
+                0,
             };
 
             // The comparands are the same instance, so Array can short-circuit.
@@ -3516,14 +3516,14 @@ namespace System.Collections.Immutable.Tests
                         {
                             new[] { 1, 2, 3 },
                             ImmutableArray.Create(1, 2, 3, 4),
-                            comparer
+                            comparer,
                         },
                         new object[]
                         {
                             new[] { 1, 2, 3 },
                             new List<int> { 1, 2, 3 },
-                            comparer
-                        }
+                            comparer,
+                        },
                     }
                 );
         }

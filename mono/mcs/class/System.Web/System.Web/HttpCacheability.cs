@@ -37,6 +37,6 @@ namespace System.Web
         Server,
         Public,
         ServerAndPrivate,
-        ServerAndNoCache = 0x3
+        ServerAndNoCache = 0x3,
     }
 }

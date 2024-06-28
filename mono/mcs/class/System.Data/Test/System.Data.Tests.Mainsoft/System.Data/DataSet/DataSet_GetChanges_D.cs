@@ -148,7 +148,7 @@ namespace tests.system_data_dll.System_Data
                     dr[2, DataRowVersion.Original],
                     dr[3, DataRowVersion.Original],
                     dr[4, DataRowVersion.Original],
-                    dr[5, DataRowVersion.Original]
+                    dr[5, DataRowVersion.Original],
                 };
                 Compare(tmp, arrDeleted);
             }

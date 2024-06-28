@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
                 .Select(location => new LSP.TextEdit()
                 {
                     NewText = renameValue,
-                    Range = location.Range
+                    Range = location.Range,
                 });
 
             var results = await RunRenameAsync(
@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
                 .Select(location => new LSP.TextEdit()
                 {
                     NewText = renameValue,
-                    Range = location.Range
+                    Range = location.Range,
                 });
 
             var results = await RunRenameAsync(
@@ -185,7 +185,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
                 .Select(location => new LSP.TextEdit()
                 {
                     NewText = renameValue,
-                    Range = location.Range
+                    Range = location.Range,
                 });
 
             var results = await RunRenameAsync(
@@ -228,7 +228,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
                     Uri = ProtocolConversions.CreateAbsoluteUri(
                         $"C:\\{TestSpanMapper.GeneratedFileName}"
                     ),
-                    Range = new LSP.Range { Start = startPosition, End = endPosition }
+                    Range = new LSP.Range { Start = startPosition, End = endPosition },
                 },
                 "RENAME"
             );
@@ -253,7 +253,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Rename
             {
                 NewName = newName,
                 Position = location.Range.Start,
-                TextDocument = CreateTextDocumentIdentifier(location.Uri)
+                TextDocument = CreateTextDocumentIdentifier(location.Uri),
             };
 
         private static async Task<WorkspaceEdit> RunRenameAsync(

@@ -93,7 +93,7 @@ namespace System.Web.Http.ModelBinding
                 typeof(CustomValueProviderFactory)
             )
             {
-                BinderType = typeof(CustomModelBinderProvider)
+                BinderType = typeof(CustomModelBinderProvider),
             };
             IEnumerable<ValueProviderFactory> vpfs = attr.GetValueProviderFactories(config);
 
@@ -128,7 +128,7 @@ namespace System.Web.Http.ModelBinding
             HttpConfiguration config = new HttpConfiguration();
             ModelBinderAttribute attr = new ModelBinderAttribute
             {
-                BinderType = typeof(CustomModelBinder)
+                BinderType = typeof(CustomModelBinder),
             };
 
             // Act
@@ -145,7 +145,7 @@ namespace System.Web.Http.ModelBinding
             HttpConfiguration config = new HttpConfiguration();
             ModelBinderAttribute attr = new ModelBinderAttribute
             {
-                BinderType = typeof(CustomModelBinderProvider)
+                BinderType = typeof(CustomModelBinderProvider),
             };
 
             // Act

@@ -341,7 +341,7 @@ class B {
             Items.Add(
                 new HeaderItemViewModel()
                 {
-                    Header = CSharpVSResources.New_line_options_for_keywords
+                    Header = CSharpVSResources.New_line_options_for_keywords,
                 }
             );
 
@@ -376,7 +376,7 @@ class B {
             Items.Add(
                 new HeaderItemViewModel()
                 {
-                    Header = CSharpVSResources.New_line_options_for_expressions
+                    Header = CSharpVSResources.New_line_options_for_expressions,
                 }
             );
 

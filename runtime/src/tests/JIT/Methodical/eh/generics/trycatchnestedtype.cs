@@ -88,7 +88,7 @@ public class Test_trycatchnestedtype
                         >
                     >
                 >
-            >()
+            >(),
         };
         for (int i = 0; i < expList.Length; i++)
         {
@@ -157,7 +157,7 @@ public class Test_trycatchnestedtype
                         >
                     >
                 >
-            >()
+            >(),
         };
 
         // run test

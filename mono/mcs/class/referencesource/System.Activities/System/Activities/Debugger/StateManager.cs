@@ -34,7 +34,7 @@ namespace System.Activities.Debugger
 
         static readonly LocalsItemDescription[] debugInfoDescriptions = new LocalsItemDescription[]
         {
-            new LocalsItemDescription("debugInfo", typeof(DebugInfo))
+            new LocalsItemDescription("debugInfo", typeof(DebugInfo)),
         };
 
         static Type threadWorkerControllerType = typeof(ThreadWorkerController);
@@ -796,7 +796,7 @@ namespace System.Activities.Debugger
                     new object[]
                     {
                         DebuggableAttribute.DebuggingModes.DisableOptimizations
-                            | DebuggableAttribute.DebuggingModes.Default
+                            | DebuggableAttribute.DebuggingModes.Default,
                     }
                 );
                 assemblyBuilder.SetCustomAttribute(builder);

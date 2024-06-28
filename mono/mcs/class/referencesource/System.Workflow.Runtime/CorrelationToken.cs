@@ -43,7 +43,7 @@ namespace System.Workflow.Runtime
                     DependencyPropertyOptions.Metadata,
                     new Attribute[]
                     {
-                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter))
+                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)),
                     }
                 )
             );
@@ -60,7 +60,7 @@ namespace System.Workflow.Runtime
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );
@@ -82,7 +82,7 @@ namespace System.Workflow.Runtime
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );

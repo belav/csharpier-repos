@@ -45,7 +45,7 @@ namespace System.ServiceModel.Security
                 typeof(SamlAuthenticationClaimResource),
                 typeof(SamlAccessDecision),
                 typeof(SamlAuthorityBinding),
-                typeof(SamlNameIdentifierClaimResource)
+                typeof(SamlNameIdentifierClaimResource),
             }
         );
         SecurityStateEncoder encoder = new DataProtectionSecurityStateEncoder();

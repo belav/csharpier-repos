@@ -129,7 +129,7 @@ public class MigrationsEndPointMiddlewareTest
                         new KeyValuePair<string, string>(
                             "context",
                             typeof(BloggingContextWithMigrations).AssemblyQualifiedName
-                        )
+                        ),
                     }
                 );
 
@@ -213,7 +213,7 @@ public class MigrationsEndPointMiddlewareTest
         var formData = new FormUrlEncodedContent(
             new List<KeyValuePair<string, string>>
             {
-                new KeyValuePair<string, string>("context", typeName)
+                new KeyValuePair<string, string>("context", typeName),
             }
         );
 
@@ -256,7 +256,7 @@ public class MigrationsEndPointMiddlewareTest
                 new KeyValuePair<string, string>(
                     "context",
                     typeof(BloggingContext).AssemblyQualifiedName
-                )
+                ),
             }
         );
 
@@ -311,7 +311,7 @@ public class MigrationsEndPointMiddlewareTest
                     new KeyValuePair<string, string>(
                         "context",
                         typeof(BloggingContextWithSnapshotThatThrows).AssemblyQualifiedName
-                    )
+                    ),
                 }
             );
 

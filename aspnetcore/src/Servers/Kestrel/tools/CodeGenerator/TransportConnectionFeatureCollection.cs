@@ -24,7 +24,7 @@ public class TransportConnectionFeatureCollection
             "IStreamIdFeature",
             "IStreamAbortFeature",
             "IStreamClosedFeature",
-            "IConnectionMetricsTagsFeature"
+            "IConnectionMetricsTagsFeature",
         };
 
         var implementedFeatures = new[]
@@ -33,7 +33,7 @@ public class TransportConnectionFeatureCollection
             "IConnectionTransportFeature",
             "IConnectionItemsFeature",
             "IMemoryPoolFeature",
-            "IConnectionLifetimeFeature"
+            "IConnectionLifetimeFeature",
         };
 
         var usings =

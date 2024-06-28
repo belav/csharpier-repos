@@ -10,7 +10,7 @@ namespace System.Reflection.Metadata.ApplyUpdate.Test
         {
             _doubleField2 = 5.5;
             _stringField2 = "New Initial Value";
-            NewStructField = new NewStruct { D = -1985.0, O = new int[2] { 15, 17 }, };
+            NewStructField = new NewStruct { D = -1985.0, O = new int[2] { 15, 17 } };
             // a little bit ldflda testing
             IncRefDouble(ref NewStructField.D);
             IncRefDouble(ref _doubleField2);

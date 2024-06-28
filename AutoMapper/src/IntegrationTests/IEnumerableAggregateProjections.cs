@@ -44,8 +44,8 @@ public class IEnumerableAggregateProjections
                     {
                         new Item { Code = 1 },
                         new Item { Code = 3 },
-                        new Item { Code = 5 }
-                    }
+                        new Item { Code = 5 },
+                    },
                 }
             );
 
@@ -69,7 +69,7 @@ public class IEnumerableAggregateProjections
             var result = ProjectTo<CustomerViewModel>(
                     context.Customers.Select(customer => new CustomerItemCodes
                     {
-                        ItemCodes = customer.Items.Select(item => item.Code)
+                        ItemCodes = customer.Items.Select(item => item.Code),
                     })
                 )
                 .Single();

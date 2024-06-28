@@ -34,7 +34,7 @@ internal static partial class Interop
         internal enum LogonFlags
         {
             LOGON_WITH_PROFILE = 0x00000001,
-            LOGON_NETCREDENTIALS_ONLY = 0x00000002
+            LOGON_NETCREDENTIALS_ONLY = 0x00000002,
         }
     }
 }

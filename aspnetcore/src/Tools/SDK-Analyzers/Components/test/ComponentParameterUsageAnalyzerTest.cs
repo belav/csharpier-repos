@@ -56,7 +56,7 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) },
             }
         );
     }
@@ -90,7 +90,7 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) },
             }
         );
     }
@@ -124,7 +124,7 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'TestProperty' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) },
             }
         );
     }
@@ -158,7 +158,7 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'TestInt' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) },
             }
         );
     }
@@ -192,7 +192,7 @@ public class ComponentParameterUsageAnalyzerTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'TestInt' should not be set outside of its component.",
                 Severity = DiagnosticSeverity.Warning,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 11, 17) },
             }
         );
     }

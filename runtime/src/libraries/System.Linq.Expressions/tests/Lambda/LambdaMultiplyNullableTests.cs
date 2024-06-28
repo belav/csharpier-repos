@@ -19,7 +19,7 @@ namespace System.Linq.Expressions.Tests
                 decimal.One,
                 decimal.MinusOne,
                 decimal.MinValue,
-                decimal.MaxValue
+                decimal.MaxValue,
             };
             for (int i = 0; i < values.Length; i++)
             {
@@ -44,7 +44,7 @@ namespace System.Linq.Expressions.Tests
                 double.Epsilon,
                 double.NegativeInfinity,
                 double.PositiveInfinity,
-                double.NaN
+                double.NaN,
             };
             for (int i = 0; i < values.Length; i++)
             {
@@ -69,7 +69,7 @@ namespace System.Linq.Expressions.Tests
                 float.Epsilon,
                 float.NegativeInfinity,
                 float.PositiveInfinity,
-                float.NaN
+                float.NaN,
             };
             for (int i = 0; i < values.Length; i++)
             {
@@ -196,7 +196,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(decimal?)),
-                        Expression.Constant(b, typeof(decimal?))
+                        Expression.Constant(b, typeof(decimal?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -352,7 +352,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(double?)),
-                        Expression.Constant(b, typeof(double?))
+                        Expression.Constant(b, typeof(double?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -466,7 +466,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(float?)),
-                        Expression.Constant(b, typeof(float?))
+                        Expression.Constant(b, typeof(float?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -580,7 +580,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(int?)),
-                        Expression.Constant(b, typeof(int?))
+                        Expression.Constant(b, typeof(int?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -692,7 +692,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(long?)),
-                        Expression.Constant(b, typeof(long?))
+                        Expression.Constant(b, typeof(long?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -803,7 +803,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(short?)),
-                        Expression.Constant(b, typeof(short?))
+                        Expression.Constant(b, typeof(short?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -917,7 +917,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(uint?)),
-                        Expression.Constant(b, typeof(uint?))
+                        Expression.Constant(b, typeof(uint?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -1029,7 +1029,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(ulong?)),
-                        Expression.Constant(b, typeof(ulong?))
+                        Expression.Constant(b, typeof(ulong?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()
@@ -1143,7 +1143,7 @@ namespace System.Linq.Expressions.Tests
                     new Expression[]
                     {
                         Expression.Constant(a, typeof(ushort?)),
-                        Expression.Constant(b, typeof(ushort?))
+                        Expression.Constant(b, typeof(ushort?)),
                     }
                 ),
                 Enumerable.Empty<ParameterExpression>()

@@ -22,14 +22,14 @@ public class AssetsComputingHelper
     {
         "dotnet",
         "dotnet.native",
-        "dotnet.runtime"
+        "dotnet.runtime",
     };
 
     private static readonly string[] icuShardsFromRuntimePack = new[]
     {
         "icudt_EFIGS",
         "icudt_CJK",
-        "icudt_no_CJK"
+        "icudt_no_CJK",
     };
 
     public static bool ShouldFilterCandidate(
@@ -89,11 +89,10 @@ public class AssetsComputingHelper
                     && !(
                         dotnetJsSingleThreadNames.Contains(fileName)
                         || (enableThreads && fileName == "dotnet.native.worker")
-                    ) =>
-                $"{fileName}{extension} is not used by Blazor",
+                    ) => $"{fileName}{extension} is not used by Blazor",
             ".pdb" when !copySymbols => "copying symbols is disabled",
             ".symbols" when fromMonoPackage => "extension .symbols is not required.",
-            _ => null
+            _ => null,
         };
 
         return reason != null;

@@ -21,105 +21,105 @@ namespace Microsoft.Interop.JavaScript
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.VoidKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Boolean }:
                     return new JSSimpleTypeInfo(KnownManagedType.Boolean)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.BoolKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Byte }:
                     return new JSSimpleTypeInfo(KnownManagedType.Byte)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.ByteKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Char }:
                     return new JSSimpleTypeInfo(KnownManagedType.Char)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.CharKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Int16 }:
                     return new JSSimpleTypeInfo(KnownManagedType.Int16)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.ShortKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Int32 }:
                     return new JSSimpleTypeInfo(KnownManagedType.Int32)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.IntKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Int64 }:
                     return new JSSimpleTypeInfo(KnownManagedType.Int64)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.LongKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Single }:
                     return new JSSimpleTypeInfo(KnownManagedType.Single)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.FloatKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_Double }:
                     return new JSSimpleTypeInfo(KnownManagedType.Double)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.DoubleKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_IntPtr }:
                 case IPointerTypeSymbol { PointedAtType.SpecialType: SpecialType.System_Void }:
                     return new JSSimpleTypeInfo(KnownManagedType.IntPtr)
                     {
-                        Syntax = SyntaxFactory.IdentifierName("nint")
+                        Syntax = SyntaxFactory.IdentifierName("nint"),
                     };
                 case { SpecialType: SpecialType.System_DateTime }:
                     return new JSSimpleTypeInfo(KnownManagedType.DateTime)
                     {
-                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim())
+                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim()),
                     };
                 case ITypeSymbol when fullTypeName == "global::System.DateTimeOffset":
                     return new JSSimpleTypeInfo(KnownManagedType.DateTimeOffset)
                     {
-                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim())
+                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim()),
                     };
                 case ITypeSymbol when fullTypeName == "global::System.Exception":
                     return new JSSimpleTypeInfo(KnownManagedType.Exception)
                     {
-                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim())
+                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim()),
                     };
                 case { SpecialType: SpecialType.System_Object }:
                     return new JSSimpleTypeInfo(KnownManagedType.Object)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.ObjectKeyword)
-                        )
+                        ),
                     };
                 case { SpecialType: SpecialType.System_String }:
                     return new JSSimpleTypeInfo(KnownManagedType.String)
                     {
                         Syntax = SyntaxFactory.PredefinedType(
                             SyntaxFactory.Token(SyntaxKind.StringKeyword)
-                        )
+                        ),
                     };
                 case ITypeSymbol
                     when fullTypeName
                         == "global::System.Runtime.InteropServices.JavaScript.JSObject":
                     return new JSSimpleTypeInfo(KnownManagedType.JSObject)
                     {
-                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim())
+                        Syntax = SyntaxFactory.ParseTypeName(fullTypeName.Trim()),
                     };
 
                 //nullable

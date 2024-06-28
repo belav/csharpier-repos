@@ -28,7 +28,7 @@ namespace Blah
         {
             Lemon,
             Lime,
-            Orange
+            Orange,
         }
     }
 }

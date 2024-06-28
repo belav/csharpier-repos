@@ -98,7 +98,7 @@ namespace Novell.Directory.Ldap
             CertREVOCATION_FAILURE = 0x800B010E,
             CertCN_NO_MATCH = 0x800B010F,
             CertWRONG_USAGE = 0x800B0110,
-            CertUNTRUSTEDCA = 0x800B0112
+            CertUNTRUSTEDCA = 0x800B0112,
         }
 
         private static String GetProblemMessage(CertificateProblem Problem)
@@ -1499,7 +1499,7 @@ namespace Novell.Directory.Ldap
                                         new System.Object[]
                                         {
                                             this.enclosingInstance.host,
-                                            this.enclosingInstance.port
+                                            this.enclosingInstance.port,
                                         },
                                         LdapException.CONNECT_ERROR,
                                         null,
@@ -1546,7 +1546,7 @@ namespace Novell.Directory.Ldap
                             new System.Object[]
                             {
                                 this.enclosingInstance.host,
-                                this.enclosingInstance.port
+                                this.enclosingInstance.port,
                             },
                             LdapException.CONNECT_ERROR,
                             ioe,

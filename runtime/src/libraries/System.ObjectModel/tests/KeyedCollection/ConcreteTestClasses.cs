@@ -15,7 +15,7 @@ namespace System.Collections.ObjectModel.Tests
             )
             {
                 new KeyedItem<string, int>("foo", 0),
-                new KeyedItem<string, int>("bar", 1)
+                new KeyedItem<string, int>("bar", 1),
             };
             AssertExtensions.Throws<ArgumentException>(
                 "key",

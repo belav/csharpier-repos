@@ -522,7 +522,7 @@ namespace System.Web.Http.SelfHost
                 ReceiveTimeout = new TimeSpan(1, 0, 0),
                 SendTimeout = new TimeSpan(1, 0, 0),
                 TransferMode = TransferMode.StreamedResponse,
-                HostNameComparisonMode = HostNameComparisonMode.WeakWildcard
+                HostNameComparisonMode = HostNameComparisonMode.WeakWildcard,
             };
 
             // Act
@@ -562,7 +562,7 @@ namespace System.Web.Http.SelfHost
             HttpBinding binding = new HttpBinding();
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
             {
-                ClientCredentialType = clientCredentialType
+                ClientCredentialType = clientCredentialType,
             };
 
             // Act
@@ -585,7 +585,7 @@ namespace System.Web.Http.SelfHost
             HttpBinding binding = new HttpBinding();
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
             {
-                UserNamePasswordValidator = new CustomUsernamePasswordValidator()
+                UserNamePasswordValidator = new CustomUsernamePasswordValidator(),
             };
 
             config.ClientCredentialType = clientCredentialType;
@@ -610,7 +610,7 @@ namespace System.Web.Http.SelfHost
             HttpBinding binding = new HttpBinding();
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
             {
-                UserNamePasswordValidator = new CustomUsernamePasswordValidator()
+                UserNamePasswordValidator = new CustomUsernamePasswordValidator(),
             };
 
             config.ClientCredentialType = clientCredentialType;
@@ -632,7 +632,7 @@ namespace System.Web.Http.SelfHost
             HttpBinding binding = new HttpBinding();
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
             {
-                X509CertificateValidator = new Mock<X509CertificateValidator>().Object
+                X509CertificateValidator = new Mock<X509CertificateValidator>().Object,
             };
 
             config.ClientCredentialType = clientCredentialType;
@@ -657,7 +657,7 @@ namespace System.Web.Http.SelfHost
             HttpBinding binding = new HttpBinding();
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
             {
-                X509CertificateValidator = new Mock<X509CertificateValidator>().Object
+                X509CertificateValidator = new Mock<X509CertificateValidator>().Object,
             };
 
             config.ClientCredentialType = clientCredentialType;
@@ -679,7 +679,7 @@ namespace System.Web.Http.SelfHost
             UserNamePasswordValidator validator = new Mock<UserNamePasswordValidator>().Object;
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(address)
             {
-                UserNamePasswordValidator = validator
+                UserNamePasswordValidator = validator,
             };
 
             // Act

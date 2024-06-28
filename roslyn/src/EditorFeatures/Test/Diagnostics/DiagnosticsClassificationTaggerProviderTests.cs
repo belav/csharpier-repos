@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var analyzer = new Analyzer(diagnosticId: "test", throughAdditionalLocations);
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
-                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) }
+                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) },
             };
 
             using var workspace = TestWorkspace.CreateCSharp(
@@ -170,7 +170,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
             var analyzer = new Analyzer(diagnosticId, throughAdditionalLocations: false);
             var analyzerMap = new Dictionary<string, ImmutableArray<DiagnosticAnalyzer>>
             {
-                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) }
+                { LanguageNames.CSharp, ImmutableArray.Create<DiagnosticAnalyzer>(analyzer) },
             };
 
             using var workspace = TestWorkspace.CreateCSharp(

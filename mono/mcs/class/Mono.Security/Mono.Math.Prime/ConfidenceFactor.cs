@@ -70,6 +70,6 @@ namespace Mono.Math.Prime
         /// <summary>
         /// Only use methods which generate provable primes. Not yet implemented.
         /// </summary>
-        Provable
+        Provable,
     }
 }

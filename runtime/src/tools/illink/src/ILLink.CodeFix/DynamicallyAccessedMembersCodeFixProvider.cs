@@ -180,7 +180,7 @@ namespace ILLink.CodeFix
             DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsMethodReturnType.AsString(),
             DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsField.AsString(),
             DiagnosticId.DynamicallyAccessedMembersMismatchMethodReturnTypeTargetsThisParameter.AsString(),
-            DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides.AsString()
+            DiagnosticId.DynamicallyAccessedMembersMismatchOnMethodReturnValueBetweenOverrides.AsString(),
         };
 
         private static readonly string[] AttributeOnGeneric =
@@ -190,7 +190,7 @@ namespace ILLink.CodeFix
             DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsField.AsString(),
             DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsThisParameter.AsString(),
             DiagnosticId.DynamicallyAccessedMembersMismatchTypeArgumentTargetsGenericParameter.AsString(),
-            DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides.AsString()
+            DiagnosticId.DynamicallyAccessedMembersMismatchOnGenericParameterBetweenOverrides.AsString(),
         };
 
         public sealed override FixAllProvider GetFixAllProvider()
@@ -279,7 +279,7 @@ namespace ILLink.CodeFix
                         ),
                         stringArguments
                     )
-                )
+                ),
             };
             var attribute = generator
                 .Attribute(generator.TypeExpression(attributeSymbol), attributeArguments)

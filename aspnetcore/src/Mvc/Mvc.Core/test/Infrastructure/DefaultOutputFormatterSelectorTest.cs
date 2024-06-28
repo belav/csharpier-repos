@@ -81,7 +81,7 @@ public class DefaultObjectResultExecutorTest
     public void SelectFormatter_WithOneProvidedContentType_NoFallback()
     {
         // Arrange
-        var formatters = new List<IOutputFormatter> { new TestXmlOutputFormatter(), };
+        var formatters = new List<IOutputFormatter> { new TestXmlOutputFormatter() };
         var selector = CreateSelector(formatters);
 
         var context = new OutputFormatterWriteContext(
@@ -245,7 +245,7 @@ public class DefaultObjectResultExecutorTest
         var options = new MvcOptions()
         {
             ReturnHttpNotAcceptable = true,
-            OutputFormatters = { new TestXmlOutputFormatter(), new TestJsonOutputFormatter(), },
+            OutputFormatters = { new TestXmlOutputFormatter(), new TestJsonOutputFormatter() },
         };
 
         var selector = CreateSelector(options);

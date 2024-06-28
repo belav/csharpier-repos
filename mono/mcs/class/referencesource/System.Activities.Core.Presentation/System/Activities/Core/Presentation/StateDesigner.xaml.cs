@@ -126,7 +126,7 @@ namespace System.Activities.Core.Presentation
                         }
 
                         return null;
-                    }
+                    },
                 }
             );
         }

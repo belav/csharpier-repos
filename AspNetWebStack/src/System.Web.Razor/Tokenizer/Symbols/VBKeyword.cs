@@ -179,6 +179,6 @@ namespace System.Web.Razor.Tokenizer.Symbols
         UInteger,
         Variant,
         Widening,
-        Xor
+        Xor,
     }
 }

@@ -36,49 +36,49 @@ public class Program
         cmd.AddOption(
             new Option("-n", "Max number of requests to make concurrently.")
             {
-                Argument = new Argument<int>("numWorkers", 1)
+                Argument = new Argument<int>("numWorkers", 1),
             }
         );
         cmd.AddOption(
             new Option("-maxContentLength", "Max content length for request and response bodies.")
             {
-                Argument = new Argument<int>("numBytes", 1000)
+                Argument = new Argument<int>("numBytes", 1000),
             }
         );
         cmd.AddOption(
             new Option("-http", "HTTP version (1.1 or 2.0)")
             {
-                Argument = new Argument<Version[]>("version", new[] { HttpVersion.Version20 })
+                Argument = new Argument<Version[]>("version", new[] { HttpVersion.Version20 }),
             }
         );
         cmd.AddOption(
             new Option("-connectionLifetime", "Max connection lifetime length (milliseconds).")
             {
-                Argument = new Argument<int?>("connectionLifetime", null)
+                Argument = new Argument<int?>("connectionLifetime", null),
             }
         );
         cmd.AddOption(
             new Option("-ops", "Indices of the operations to use")
             {
-                Argument = new Argument<int[]>("space-delimited indices", null)
+                Argument = new Argument<int[]>("space-delimited indices", null),
             }
         );
         cmd.AddOption(
             new Option("-trace", "Enable Microsoft-System-Net-Http tracing.")
             {
-                Argument = new Argument<string>("\"console\" or path")
+                Argument = new Argument<string>("\"console\" or path"),
             }
         );
         cmd.AddOption(
             new Option("-aspnetlog", "Enable ASP.NET warning and error logging.")
             {
-                Argument = new Argument<bool>("enable", false)
+                Argument = new Argument<bool>("enable", false),
             }
         );
         cmd.AddOption(
             new Option("-listOps", "List available options.")
             {
-                Argument = new Argument<bool>("enable", false)
+                Argument = new Argument<bool>("enable", false),
             }
         );
         cmd.AddOption(
@@ -87,7 +87,7 @@ public class Program
                 "Seed for generating pseudo-random parameters for a given -n argument."
             )
             {
-                Argument = new Argument<int?>("seed", null)
+                Argument = new Argument<int?>("seed", null),
             }
         );
 
@@ -191,7 +191,7 @@ public class Program
                     using (
                         var req = new HttpRequestMessage(HttpMethod.Get, serverUri + path)
                         {
-                            Version = httpVersion
+                            Version = httpVersion,
                         }
                     )
                     {
@@ -252,7 +252,7 @@ public class Program
                     using (
                         var req = new HttpRequestMessage(HttpMethod.Get, serverUri)
                         {
-                            Version = httpVersion
+                            Version = httpVersion,
                         }
                     )
                     using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
@@ -287,7 +287,7 @@ public class Program
                     using (
                         var req = new HttpRequestMessage(HttpMethod.Get, serverUri + "/headers")
                         {
-                            Version = httpVersion
+                            Version = httpVersion,
                         }
                     )
                     using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
@@ -305,7 +305,7 @@ public class Program
                     using (
                         var req = new HttpRequestMessage(HttpMethod.Get, serverUri)
                         {
-                            Version = httpVersion
+                            Version = httpVersion,
                         }
                     )
                     {
@@ -342,7 +342,7 @@ public class Program
                         var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
                         {
                             Version = httpVersion,
-                            Content = new StringDuplexContent(content)
+                            Content = new StringDuplexContent(content),
                         }
                     )
                     using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
@@ -363,7 +363,7 @@ public class Program
                         var req = new HttpRequestMessage(HttpMethod.Post, serverUri + "/duplex")
                         {
                             Version = httpVersion,
-                            Content = new StringDuplexContent(content)
+                            Content = new StringDuplexContent(content),
                         }
                     )
                     using (
@@ -391,7 +391,7 @@ public class Program
                             Version = httpVersion,
                             Content = new ByteAtATimeNoLengthContent(
                                 Encoding.ASCII.GetBytes(content)
-                            )
+                            ),
                         }
                     )
                     using (
@@ -417,7 +417,7 @@ public class Program
                         var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
                         {
                             Version = httpVersion,
-                            Content = new StringContent(content)
+                            Content = new StringContent(content),
                         }
                     )
                     {
@@ -446,7 +446,7 @@ public class Program
                         var req = new HttpRequestMessage(HttpMethod.Post, serverUri)
                         {
                             Version = httpVersion,
-                            Content = new StringContent(content)
+                            Content = new StringContent(content),
                         }
                     )
                     {
@@ -479,7 +479,7 @@ public class Program
                     using (
                         var req = new HttpRequestMessage(HttpMethod.Head, serverUri)
                         {
-                            Version = httpVersion
+                            Version = httpVersion,
                         }
                     )
                     using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
@@ -510,7 +510,7 @@ public class Program
                         var req = new HttpRequestMessage(HttpMethod.Put, serverUri)
                         {
                             Version = httpVersion,
-                            Content = new StringContent(content)
+                            Content = new StringContent(content),
                         }
                     )
                     using (HttpResponseMessage m = await ctx.HttpClient.SendAsync(req))
@@ -551,11 +551,9 @@ public class Program
         Console.WriteLine(
             "       Tracing: "
                 + (
-                    logPath == null
-                        ? (object)false
-                        : logPath.Length == 0
-                            ? (object)true
-                            : logPath
+                    logPath == null ? (object)false
+                    : logPath.Length == 0 ? (object)true
+                    : logPath
                 )
         );
         Console.WriteLine("   ASP.NET Log: " + aspnetLog);
@@ -785,8 +783,8 @@ public class Program
                 RemoteCertificateValidationCallback = delegate
                 {
                     return true;
-                }
-            }
+                },
+            },
         };
         //var handler = new WinHttpHandler()
         //{
@@ -855,7 +853,7 @@ public class Program
                 }
             })
             {
-                IsBackground = true
+                IsBackground = true,
             }.Start();
 
             // Start N workers, each of which sits in a loop making requests.

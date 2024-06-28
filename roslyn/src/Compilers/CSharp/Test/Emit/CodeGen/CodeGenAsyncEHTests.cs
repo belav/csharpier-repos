@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         {
             MscorlibRef_v4_0_30316_17626,
             SystemRef_v4_0_30319_17929,
-            SystemCoreRef_v4_0_30319_17929
+            SystemCoreRef_v4_0_30319_17929,
         };
 
         public CodeGenAsyncEHTests() { }

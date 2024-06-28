@@ -79,7 +79,7 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage();
             HttpActionContext actionContext = new HttpActionContext
             {
-                ControllerContext = new HttpControllerContext { Request = request }
+                ControllerContext = new HttpControllerContext { Request = request },
             };
             CancellationTokenSource cts = new CancellationTokenSource();
 

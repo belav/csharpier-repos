@@ -113,7 +113,7 @@ namespace IntelHardwareIntrinsicTest._Popcnt.X64
             new POPCNT<ulong, ulong>(0x0000000000000001UL, 1UL),
             new POPCNT<ulong, ulong>(0xffffffffffffffffUL, 64UL),
             new POPCNT<ulong, ulong>(0x8000000000000000UL, 1UL),
-            new POPCNT<ulong, ulong>(0x00050000000f423fUL, 14UL)
+            new POPCNT<ulong, ulong>(0x00050000000f423fUL, 14UL),
         };
     }
 }

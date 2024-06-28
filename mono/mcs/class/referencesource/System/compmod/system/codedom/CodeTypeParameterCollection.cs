@@ -12,7 +12,7 @@ namespace System.CodeDom
     using System.Collections;
     using System.Runtime.InteropServices;
 
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeTypeParameterCollection : CollectionBase
     {
         public CodeTypeParameterCollection() { }

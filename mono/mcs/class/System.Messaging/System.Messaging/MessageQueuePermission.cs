@@ -188,7 +188,7 @@ namespace System.Messaging
             '\r',
             ' ',
             '\\',
-            '\x160'
+            '\x160',
         };
 
         internal static void ValidateMachineName(string name)

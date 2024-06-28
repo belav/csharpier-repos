@@ -814,7 +814,7 @@ namespace System.Xml
             if (ch > char.MaxValue)
             {
                 SurrogateChar sch = new SurrogateChar(ch);
-                char[] chars = new char[2] { sch.HighChar, sch.LowChar, };
+                char[] chars = new char[2] { sch.HighChar, sch.LowChar };
                 WriteText(chars, 0, 2);
             }
             else

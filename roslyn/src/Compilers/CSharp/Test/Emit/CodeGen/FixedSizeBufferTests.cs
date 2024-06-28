@@ -639,7 +639,7 @@ class Program
                     options: TestOptions.UnsafeReleaseExe,
                     references: new MetadataReference[]
                     {
-                        MetadataReference.CreateFromStream(comp1.EmitToStream())
+                        MetadataReference.CreateFromStream(comp1.EmitToStream()),
                     },
                     expectedOutput: "12",
                     verify: Verification.Fails
@@ -1093,7 +1093,7 @@ class Program
                         CharSet.Ansi,
                         CharSet.Auto,
                         CharSet.None,
-                        CharSet.Unicode
+                        CharSet.Unicode,
                     }
                 )
                 {

@@ -4382,7 +4382,7 @@ class Program
     {
         public int this[int i] { get { return i; } set {} }
     }
-}"
+}",
                 },
                 new[] { MscorlibRef }
             );

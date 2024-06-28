@@ -676,7 +676,7 @@ WHERE (
     private enum MyEnum
     {
         Label1,
-        Label2
+        Label2,
     }
 
     private async Task TestOrderedArray<TElement>(
@@ -836,7 +836,7 @@ WHERE JSON_VALUE(JSON_VALUE([t].[Owned], '$.Strings'), '$[1]') = N'bar'
         var dateTimes = new[]
         {
             new DateTime(2020, 1, 1, 12, 30, 00),
-            new DateTime(2020, 1, 2, 12, 30, 00)
+            new DateTime(2020, 1, 2, 12, 30, 00),
         };
 
         _ = await context
@@ -878,7 +878,7 @@ WHERE [t].[DateTime] IN (
         {
             new DateTime(2020, 1, 1, 12, 30, 00),
             new DateTime(2020, 1, 2, 12, 30, 00),
-            null
+            null,
         };
 
         _ = await context
@@ -915,7 +915,7 @@ WHERE EXISTS (
         {
             new DateTime(2020, 1, 1, 12, 30, 00),
             new DateTime(2020, 1, 2, 12, 30, 00),
-            null
+            null,
         };
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -949,7 +949,7 @@ WHERE EXISTS (
         var dateTimes = new[]
         {
             new DateTime(2020, 1, 1, 12, 30, 00),
-            new DateTime(2020, 1, 2, 12, 30, 00)
+            new DateTime(2020, 1, 2, 12, 30, 00),
         };
 
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(

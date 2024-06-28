@@ -96,7 +96,7 @@ namespace Roslyn.Test.Utilities
                 {
                     IndentChars = expectedIsXmlLiteral ? "    " : "  ",
                     OmitXmlDeclaration = true,
-                    Indent = true
+                    Indent = true,
                 };
 
                 using (var w = XmlWriter.Create(sw, ws))

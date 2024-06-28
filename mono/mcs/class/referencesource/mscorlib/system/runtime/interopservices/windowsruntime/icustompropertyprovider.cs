@@ -129,7 +129,9 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         IVector = 0x2, // IBindableVector -> IVector<T>
         IBindableVectorView = 0x4, // IBindableVectorView -> IBindableVectorView
         IVectorView = 0x8, // IBindableVectorView -> IVectorView<T>
-        IBindableIterableOrIIterable = 0x10 // IBindableIterable -> IBindableIterable/IIterable<T>
+        IBindableIterableOrIIterable =
+            0x10 // IBindableIterable -> IBindableIterable/IIterable<T>
+        ,
     }
 
     //

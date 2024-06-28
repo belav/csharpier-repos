@@ -162,7 +162,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                         accessibilityContext,
                         new CSharpArgumentInfo[]
                         {
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -176,7 +176,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                     accessibilityContext,
                     new CSharpArgumentInfo[]
                     {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -349,7 +349,7 @@ namespace Microsoft.CSharp.RuntimeBinder
                 accessibilityContext,
                 new CSharpArgumentInfo[]
                 {
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                 }
             );
 

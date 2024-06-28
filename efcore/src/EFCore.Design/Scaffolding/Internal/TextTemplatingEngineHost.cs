@@ -64,7 +64,7 @@ public class TextTemplatingEngineHost
         new[]
         {
             typeof(ITextTemplatingEngineHost).Assembly.Location,
-            typeof(CompilerErrorCollection).Assembly.Location
+            typeof(CompilerErrorCollection).Assembly.Location,
         };
 
     /// <summary>

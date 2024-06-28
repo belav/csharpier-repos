@@ -20,14 +20,14 @@ namespace Microsoft.Web.Mvc.Test
             mockSerializer.Setup(o => o.Deserialize("some-value")).Returns(42);
             DeserializeAttribute attr = new DeserializeAttribute()
             {
-                Serializer = mockSerializer.Object
+                Serializer = mockSerializer.Object,
             };
 
             IModelBinder binder = attr.GetBinder();
             ModelBindingContext mbContext = new ModelBindingContext
             {
                 ModelName = "someKey",
-                ValueProvider = new SimpleValueProvider { { "someKey", "some-value" } }
+                ValueProvider = new SimpleValueProvider { { "someKey", "some-value" } },
             };
 
             // Act
@@ -46,7 +46,7 @@ namespace Microsoft.Web.Mvc.Test
             ModelBindingContext mbContext = new ModelBindingContext
             {
                 ModelName = "someKey",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             // Act
@@ -83,14 +83,17 @@ namespace Microsoft.Web.Mvc.Test
                 .Throws(new SerializationException());
             DeserializeAttribute attr = new DeserializeAttribute
             {
-                Serializer = mockSerializer.Object
+                Serializer = mockSerializer.Object,
             };
 
             IModelBinder binder = attr.GetBinder();
             ModelBindingContext mbContext = new ModelBindingContext
             {
                 ModelName = "someKey",
-                ValueProvider = new SimpleValueProvider { { "someKey", "This data is corrupted." } }
+                ValueProvider = new SimpleValueProvider
+                {
+                    { "someKey", "This data is corrupted." },
+                },
             };
 
             // Act & assert

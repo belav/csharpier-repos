@@ -52,7 +52,7 @@ class C
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -87,7 +87,7 @@ class C
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -126,7 +126,7 @@ class C
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -163,7 +163,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -188,7 +188,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -203,7 +203,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -233,7 +233,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -270,7 +270,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -300,7 +300,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -335,7 +335,7 @@ class Program2
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 ],
                 HangMitigatingCancellationToken
             );

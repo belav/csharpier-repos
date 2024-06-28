@@ -160,7 +160,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
     {
         Customer = 1,
         Employee = 2,
-        Supplier = 3
+        Supplier = 3,
     }
 
     public partial class Order
@@ -186,7 +186,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         FacebookId = "9988998877662222111",
                         SubscriptionType = 2,
                         IsNew = true,
-                        IsEmployee = false
+                        IsEmployee = false,
                     },
                     ShippingInfo = new List<ShippingInfo>
                     {
@@ -204,7 +204,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                                 UpdatedAt = new DateTime(),
                                 TwitterId = string.Empty,
                                 SubscriptionType = 0,
-                                IsEmployee = true
+                                IsEmployee = true,
                             },
                             CarrierId = "TTT123999MMM",
                             ShippingType = "Ground",
@@ -214,8 +214,8 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                             HandlingInstruction =
                                 "Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats. Do cats eat bats? Do cats eat bats",
                             CurrentStatus = "Out for delivery",
-                            IsDangerous = false
-                        }
+                            IsDangerous = false,
+                        },
                     },
                     OneTime = true,
                     Cancelled = false,
@@ -243,13 +243,13 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                                 FacebookId = "9988998877662222111",
                                 SubscriptionType = 2,
                                 IsNew = true,
-                                IsEmployee = false
+                                IsEmployee = false,
                             },
                             Title = "Green Field",
                             Message =
                                 "Down, down, down. Would the fall never come to an end! 'I wonder how many miles I've fallen by this time. I think-' (for, you see, Alice had learnt several things of this sort in her lessons in the schoolroom, and though this was not a very good opportunity for showing off her knowledge, as there was no one to listen to her, still it was good practice to say it over) '-yes, that's about the right distance-but then I wonder what Latitude or Longitude I've got to",
-                            Responses = new List<Comment>()
-                        }
+                            Responses = new List<Comment>(),
+                        },
                     },
                     Created = new DateTime(2019, 11, 10),
                     Confirmed = new DateTime(2019, 11, 11),
@@ -266,8 +266,8 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         UpdatedAt = new DateTime(),
                         TwitterId = string.Empty,
                         SubscriptionType = 0,
-                        IsEmployee = true
-                    }
+                        IsEmployee = true,
+                    },
                 };
                 List<Product> products = new List<Product>();
                 for (int j = 0; j < i % 4; j++)
@@ -306,7 +306,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                         GuaranteeStartsAt = new DateTime(),
                         GuaranteeEndsAt = new DateTime(),
                         IsActive = true,
-                        RelatedProducts = new List<Product>()
+                        RelatedProducts = new List<Product>(),
                     };
                     product.SalesInfo.Initialize();
                     List<Review> reviews = new List<Review>();
@@ -322,7 +322,7 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                                 CreatedAt = new DateTime(),
                                 ImageId = string.Empty,
                                 UserType = UserType.Customer,
-                                SubscriptionType = k
+                                SubscriptionType = k,
                             },
                             ProductSku = product.SKU,
                             CustomerName = "Customer" + i + k,
@@ -332,9 +332,9 @@ namespace System.Text.Json.Serialization.Tests.Schemas.OrderPayload
                             Images = new List<Uri>
                             {
                                 new Uri($"http://dotnet.test/link/images/image/{k}"),
-                                new Uri($"http://dotnet.test/link/images/image/{j}")
+                                new Uri($"http://dotnet.test/link/images/image/{j}"),
                             },
-                            ReviewId = i + j + k
+                            ReviewId = i + j + k,
                         };
                         reviews.Add(review);
                     }

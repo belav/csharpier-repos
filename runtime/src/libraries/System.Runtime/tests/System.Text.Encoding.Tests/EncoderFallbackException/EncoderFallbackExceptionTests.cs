@@ -50,7 +50,7 @@ namespace System.Text.Tests
             yield return new object[]
             {
                 "Test message.",
-                new InvalidOperationException("Inner exception message.")
+                new InvalidOperationException("Inner exception message."),
             };
             yield return new object[] { "", null };
         }

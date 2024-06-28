@@ -488,7 +488,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.Common
         Ocsp = 0b1,
         Crl = 0b10,
         Aia = 0b100,
-        All = 0b11111111
+        All = 0b11111111,
     }
 
     public enum AiaResponseKind

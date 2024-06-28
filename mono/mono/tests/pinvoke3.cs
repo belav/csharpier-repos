@@ -294,7 +294,7 @@ public class Tests
             a = true,
             b = false,
             c = true,
-            d = "TEST2"
+            d = "TEST2",
         };
         InStructDelegate d = new InStructDelegate(delegate_test_struct_in);
 
@@ -442,7 +442,7 @@ public class Tests
     {
         Foo1,
         Foo2,
-        Foo3
+        Foo3,
     };
 
     public delegate FooEnum ReturnEnumDelegate(FooEnum e);

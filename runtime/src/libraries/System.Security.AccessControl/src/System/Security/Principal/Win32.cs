@@ -82,12 +82,14 @@ namespace System.Security.Principal
     {
         Thread = 1, // OpenAsSelf = false
         Process = 2, // OpenAsSelf = true
-        Both = 3 // OpenAsSelf = true, then OpenAsSelf = false
+        Both =
+            3 // OpenAsSelf = true, then OpenAsSelf = false
+        ,
     }
 
     internal enum TokenType : int
     {
         TokenPrimary = 1,
-        TokenImpersonation
+        TokenImpersonation,
     }
 }

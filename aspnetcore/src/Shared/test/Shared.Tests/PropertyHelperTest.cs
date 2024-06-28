@@ -625,7 +625,7 @@ public class PropertyHelperTest
                 {
                     new { SelECTeD = false, SeLECTED = true },
                     new KeyValuePair<string, object>("SelECTeD", true)
-                }
+                },
             };
         }
     }
@@ -728,7 +728,7 @@ public class PropertyHelperTest
         {
             X = 5,
             Y = 10,
-            Z = 17
+            Z = 17,
         };
 
         // Act

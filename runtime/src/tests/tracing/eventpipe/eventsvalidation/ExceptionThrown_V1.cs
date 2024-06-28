@@ -23,7 +23,7 @@ namespace Tracing.Tests.ExceptionThrown_V1
                     "Microsoft-Windows-DotNETRuntime",
                     EventLevel.Warning,
                     0b1000_0000_0000_0000
-                )
+                ),
             };
 
             bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
@@ -47,12 +47,12 @@ namespace Tracing.Tests.ExceptionThrown_V1
             {
                 { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
                 { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
-                { "Microsoft-DotNETCore-SampleProfiler", -1 }
+                { "Microsoft-DotNETCore-SampleProfiler", -1 },
             };
         private static Dictionary<string, ExpectedEventCount> _expectedEventCountsNativeAOT =
             new Dictionary<string, ExpectedEventCount>()
             {
-                { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) }
+                { "Microsoft-Windows-DotNETRuntime", new ExpectedEventCount(1000, 0.2f) },
             };
         private static Action _eventGeneratingAction = () =>
         {

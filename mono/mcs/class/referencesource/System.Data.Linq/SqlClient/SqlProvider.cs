@@ -99,7 +99,7 @@ namespace System.Data.Linq.SqlClient
             Sql2000,
             Sql2005,
             Sql2008,
-            SqlCE
+            SqlCE,
         }
 
         const string SqlCeProviderInvariantName = "System.Data.SqlServerCe.3.5";
@@ -1865,7 +1865,7 @@ namespace System.Data.Linq.SqlClient
             Return,
             Singleton,
             Sequence,
-            MultipleResults
+            MultipleResults,
         }
 
         private ResultShape GetResultShape(Expression query)
@@ -2243,7 +2243,7 @@ namespace System.Data.Linq.SqlClient
                 string commandText = formatter.Format(node);
                 return new QueryInfo[]
                 {
-                    new QueryInfo(node, commandText, parameters, resultShape, resultType)
+                    new QueryInfo(node, commandText, parameters, resultShape, resultType),
                 };
             }
         }

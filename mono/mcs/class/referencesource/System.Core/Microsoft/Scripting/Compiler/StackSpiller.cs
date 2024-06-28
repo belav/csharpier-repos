@@ -43,7 +43,7 @@ namespace System.Linq.Expressions.Compiler
         private enum Stack
         {
             Empty,
-            NonEmpty
+            NonEmpty,
         };
 
         // Should the parent nodes be rewritten, and in what way?

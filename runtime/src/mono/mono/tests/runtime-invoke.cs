@@ -20,13 +20,13 @@ public class D
 enum Enum1
 {
     A,
-    B
+    B,
 }
 
 enum Enum2
 {
     C,
-    D
+    D,
 }
 
 struct AStruct

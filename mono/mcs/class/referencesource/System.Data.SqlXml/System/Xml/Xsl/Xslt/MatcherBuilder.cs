@@ -245,11 +245,9 @@ namespace System.Xml.Xsl.Xslt
                 Debug.Assert(!double.IsNaN(x.priority));
                 Debug.Assert(!double.IsNaN(y.priority));
                 return (
-                    x.priority > y.priority
-                        ? 1
-                        : x.priority < y.priority
-                            ? -1
-                            : x.template.OrderNumber - y.template.OrderNumber
+                    x.priority > y.priority ? 1
+                    : x.priority < y.priority ? -1
+                    : x.template.OrderNumber - y.template.OrderNumber
                 );
             }
         }

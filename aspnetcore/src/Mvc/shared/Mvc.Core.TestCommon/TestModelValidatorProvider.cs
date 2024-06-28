@@ -25,7 +25,7 @@ public class TestModelValidatorProvider : CompositeModelValidatorProvider
                 new ValidationAttributeAdapterProvider(),
                 options,
                 stringLocalizerFactory
-            )
+            ),
         };
 
         return new TestModelValidatorProvider(providers);

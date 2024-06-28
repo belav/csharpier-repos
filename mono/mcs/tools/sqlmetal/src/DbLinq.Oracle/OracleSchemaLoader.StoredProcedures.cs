@@ -105,7 +105,7 @@ from all_arguments where lower(owner) = :db order by object_id, position";
                     function = new Function
                     {
                         Name = procedureName.DbName,
-                        Method = procedureName.MethodName
+                        Method = procedureName.MethodName,
                     };
                     schema.Functions.Add(function);
                 }

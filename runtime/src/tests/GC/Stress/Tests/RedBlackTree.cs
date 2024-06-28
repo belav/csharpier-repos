@@ -14,14 +14,14 @@ using System;
 public enum Color
 {
     Red,
-    Black
+    Black,
 }
 
 public enum Child
 {
     Left,
     Right,
-    None
+    None,
 }
 
 [System.Diagnostics.DebuggerDisplay("key={key};l={left.key};r={right.key};p={parent.key}")]

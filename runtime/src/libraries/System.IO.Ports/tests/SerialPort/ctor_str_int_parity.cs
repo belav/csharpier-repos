@@ -14,7 +14,7 @@ namespace System.IO.Ports.Tests
         private enum ThrowAt
         {
             Set,
-            Open
+            Open,
         };
 
         [Fact]

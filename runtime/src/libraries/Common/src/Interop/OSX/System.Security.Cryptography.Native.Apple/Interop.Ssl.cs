@@ -35,16 +35,16 @@ internal static partial class Interop
 
         private static readonly IntPtr[] s_cfAlpnHttp2Protocol = new IntPtr[]
         {
-            s_cfHttp2Str.DangerousGetHandle()
+            s_cfHttp2Str.DangerousGetHandle(),
         };
         private static readonly IntPtr[] s_cfAlpnHttp11Protocol = new IntPtr[]
         {
-            s_cfHttp11Str.DangerousGetHandle()
+            s_cfHttp11Str.DangerousGetHandle(),
         };
         private static readonly IntPtr[] s_cfAlpnHttp211Protocol = new IntPtr[]
         {
             s_cfHttp2Str.DangerousGetHandle(),
-            s_cfHttp11Str.DangerousGetHandle()
+            s_cfHttp11Str.DangerousGetHandle(),
         };
 
         private static readonly SafeCreateHandle s_cfAlpnHttp11Protocols =

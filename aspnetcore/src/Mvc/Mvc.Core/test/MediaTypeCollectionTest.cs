@@ -29,7 +29,7 @@ public class MediaTypeCollectionTest
         var collection = new MediaTypeCollection
         {
             MediaTypeHeaderValue.Parse("text/plain"),
-            MediaTypeHeaderValue.Parse("text/xml")
+            MediaTypeHeaderValue.Parse("text/xml"),
         };
 
         // Act
@@ -46,7 +46,7 @@ public class MediaTypeCollectionTest
         var collection = new MediaTypeCollection
         {
             MediaTypeHeaderValue.Parse("text/plain"),
-            MediaTypeHeaderValue.Parse("text/xml")
+            MediaTypeHeaderValue.Parse("text/xml"),
         };
 
         // Act

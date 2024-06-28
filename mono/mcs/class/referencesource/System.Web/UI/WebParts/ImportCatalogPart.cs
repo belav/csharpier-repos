@@ -54,7 +54,7 @@ namespace System.Web.UI.WebControls.WebParts
                         ),
                         null,
                         null
-                    )
+                    ),
                 }
             );
 
@@ -108,7 +108,7 @@ namespace System.Web.UI.WebControls.WebParts
             set { ViewState["PartImportErrorLabelText"] = value; }
         }
 
-        [WebSysDefaultValue(SR.ImportCatalogPart_PartTitle),]
+        [WebSysDefaultValue(SR.ImportCatalogPart_PartTitle)]
         public override string Title
         {
             get
@@ -375,7 +375,7 @@ namespace System.Web.UI.WebControls.WebParts
                         _availableWebPartDescriptions = new WebPartDescriptionCollection(
                             new WebPartDescription[]
                             {
-                                new WebPartDescription(ImportedWebPartID, title, description, icon)
+                                new WebPartDescription(ImportedWebPartID, title, description, icon),
                             }
                         );
                     }

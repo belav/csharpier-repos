@@ -40,6 +40,6 @@ namespace System.ComponentModel.Design.Serialization
     {
         None,
         PropertyAssignment,
-        PropertyReflection
+        PropertyReflection,
     }
 }

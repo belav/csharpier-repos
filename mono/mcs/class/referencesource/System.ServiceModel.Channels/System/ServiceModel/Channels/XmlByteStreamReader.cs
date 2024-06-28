@@ -369,7 +369,7 @@ namespace System.ServiceModel.Channels
             StartElement,
             Content,
             EndElement,
-            EOF
+            EOF,
         }
     }
 }

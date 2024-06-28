@@ -41,7 +41,7 @@ namespace DbMetal_Test_Sqlite
             AppRunner.WithinAppDomain(
                 "Northwind.Sqlite-{0}.dbml",
                 created,
-                new[] { "/dbml:" + created, }
+                new[] { "/dbml:" + created }
             );
         }
 
@@ -52,7 +52,7 @@ namespace DbMetal_Test_Sqlite
             AppRunner.WithDbSchemaLoader(
                 "Northwind.Sqlite+DbSchemaLoader-{0}.dbml",
                 created,
-                new[] { "/dbml:" + created, }
+                new[] { "/dbml:" + created }
             );
         }
     }

@@ -30,6 +30,6 @@ namespace System.Windows.Forms
         NotSet = 0,
         Normal = 1,
         Stretch = 2,
-        Zoom = 3
+        Zoom = 3,
     }
 }

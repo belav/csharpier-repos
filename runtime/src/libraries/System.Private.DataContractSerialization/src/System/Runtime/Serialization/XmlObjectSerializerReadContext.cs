@@ -856,7 +856,7 @@ namespace System.Runtime.Serialization
         {
             var member = new ExtensionDataMember(xmlReader.LocalName, xmlReader.NamespaceURI)
             {
-                MemberIndex = memberIndex
+                MemberIndex = memberIndex,
             };
 
             member.Value =

@@ -30,13 +30,21 @@ namespace System.Security.Cryptography
         internal enum AlgorithmClass
         {
             DataEncryption = (3 << 13), // ALG_CLASS_DATA_ENCRYPT
-            Hash = (4 << 13) // ALG_CLASS_HASH
+            Hash =
+                (
+                    4 << 13
+                ) // ALG_CLASS_HASH
+            ,
         }
 
         internal enum AlgorithmType
         {
             Any = (0 << 9), // ALG_TYPE_ANY
-            Block = (3 << 9) // ALG_TYPE_BLOCK
+            Block =
+                (
+                    3 << 9
+                ) // ALG_TYPE_BLOCK
+            ,
         }
 
         internal enum AlgorithmSubId
@@ -49,7 +57,9 @@ namespace System.Security.Cryptography
 
             Aes128 = 14, // ALG_SID_AES_128
             Aes192 = 15, // ALG_SID_AES_192
-            Aes256 = 16 // ALG_SID_AES_256
+            Aes256 =
+                16 // ALG_SID_AES_256
+            ,
         }
 
         internal enum AlgorithmId
@@ -64,7 +74,11 @@ namespace System.Security.Cryptography
             Sha1 = (AlgorithmClass.Hash | AlgorithmType.Any | AlgorithmSubId.Sha1), // CALG_SHA1
             Sha256 = (AlgorithmClass.Hash | AlgorithmType.Any | AlgorithmSubId.Sha256), // CALG_SHA_256
             Sha384 = (AlgorithmClass.Hash | AlgorithmType.Any | AlgorithmSubId.Sha384), // CALG_SHA_384
-            Sha512 = (AlgorithmClass.Hash | AlgorithmType.Any | AlgorithmSubId.Sha512) // CALG_SHA_512
+            Sha512 =
+                (
+                    AlgorithmClass.Hash | AlgorithmType.Any | AlgorithmSubId.Sha512
+                ) // CALG_SHA_512
+            ,
         }
 
         /// <summary>
@@ -74,7 +88,11 @@ namespace System.Security.Cryptography
         internal enum CryptAcquireContextFlags
         {
             None = 0x00000000,
-            VerifyContext = unchecked((int)0xF0000000) // CRYPT_VERIFYCONTEXT
+            VerifyContext =
+                unchecked(
+                    (int)0xF0000000
+                ) // CRYPT_VERIFYCONTEXT
+            ,
         }
 
         /// <summary>
@@ -88,7 +106,11 @@ namespace System.Security.Cryptography
             BadData = unchecked((int)0x80090005), // NTE_BAD_DATA
             BadAlgorithmId = unchecked((int)0x80090008), // NTE_BAD_ALGID
             ProviderTypeNotDefined = unchecked((int)0x80090017), // NTE_PROV_TYPE_NOT_DEF
-            KeysetNotDefined = unchecked((int)0x80090019) // NTE_KEYSET_NOT_DEF
+            KeysetNotDefined =
+                unchecked(
+                    (int)0x80090019
+                ) // NTE_KEYSET_NOT_DEF
+            ,
         }
 
         /// <summary>
@@ -99,7 +121,9 @@ namespace System.Security.Cryptography
             None = 0x0000,
             AlgorithmId = 0x0001, // HP_ALGID
             HashValue = 0x0002, // HP_HASHVAL
-            HashSize = 0x0004 // HP_HASHSIZE
+            HashSize =
+                0x0004 // HP_HASHSIZE
+            ,
         }
 
         /// <summary>
@@ -107,7 +131,9 @@ namespace System.Security.Cryptography
         /// </summary>
         internal enum KeyBlobType : byte
         {
-            PlainText = 0x8 // PLAINTEXTKEYBLOB
+            PlainText =
+                0x8 // PLAINTEXTKEYBLOB
+            ,
         }
 
         /// <summary>
@@ -117,7 +143,9 @@ namespace System.Security.Cryptography
         internal enum KeyFlags
         {
             None = 0x0000,
-            Exportable = 0x0001 // CRYPT_EXPORTABLE
+            Exportable =
+                0x0001 // CRYPT_EXPORTABLE
+            ,
         }
 
         /// <summary>
@@ -128,7 +156,9 @@ namespace System.Security.Cryptography
             None = 0,
             IV = 1, // KP_IV
             Mode = 4, // KP_MODE
-            ModeBits = 5 // KP_MODE_BITS
+            ModeBits =
+                5 // KP_MODE_BITS
+            ,
         }
 
         /// <summary>
@@ -149,7 +179,9 @@ namespace System.Security.Cryptography
         internal enum ProviderParameter
         {
             None = 0,
-            EnumerateAlgorithms = 1 // PP_ENUMALGS
+            EnumerateAlgorithms =
+                1 // PP_ENUMALGS
+            ,
         }
 
         /// <summary>
@@ -159,7 +191,9 @@ namespace System.Security.Cryptography
         internal enum ProviderParameterFlags
         {
             None = 0x00000000,
-            RestartEnumeration = 0x00000001 // CRYPT_FIRST
+            RestartEnumeration =
+                0x00000001 // CRYPT_FIRST
+            ,
         }
 
         /// <summary>
@@ -169,7 +203,9 @@ namespace System.Security.Cryptography
         internal enum ProviderType
         {
             None = 0,
-            RsaAes = 24 // PROV_RSA_AES
+            RsaAes =
+                24 // PROV_RSA_AES
+            ,
         }
 
         [StructLayout(LayoutKind.Sequential)]

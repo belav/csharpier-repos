@@ -33,107 +33,107 @@ namespace System.Formats.Asn1.Tests.Writer
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 999, TimeSpan.Zero),
                     false,
-                    "1331393939313233313233353935392E3939395A"
+                    "1331393939313233313233353935392E3939395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 999, TimeSpan.Zero),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 880, TimeSpan.Zero),
                     false,
-                    "1231393939313233313233353935392E38385A"
+                    "1231393939313233313233353935392E38385A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 880, TimeSpan.Zero),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 700, TimeSpan.Zero),
                     false,
-                    "1131393939313233313233353935392E375A"
+                    "1131393939313233313233353935392E375A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 700, TimeSpan.Zero),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 123, TimeSpan.Zero)
                         + TimeSpan.FromTicks(4567),
                     false,
-                    "1731393939313233313233353935392E313233343536375A"
+                    "1731393939313233313233353935392E313233343536375A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 123, TimeSpan.Zero)
                         + TimeSpan.FromTicks(4567),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 12, TimeSpan.Zero)
                         + TimeSpan.FromTicks(3450),
                     false,
-                    "1631393939313233313233353935392E3031323334355A"
+                    "1631393939313233313233353935392E3031323334355A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 12, TimeSpan.Zero)
                         + TimeSpan.FromTicks(3450),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 1, TimeSpan.Zero)
                         + TimeSpan.FromTicks(2300),
                     false,
-                    "1531393939313233313233353935392E30303132335A"
+                    "1531393939313233313233353935392E30303132335A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 1, TimeSpan.Zero)
                         + TimeSpan.FromTicks(2300),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 0, TimeSpan.Zero)
                         + TimeSpan.FromTicks(1000),
                     false,
-                    "1431393939313233313233353935392E303030315A"
+                    "1431393939313233313233353935392E303030315A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, 0, TimeSpan.Zero)
                         + TimeSpan.FromTicks(1000),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, TimeSpan.Zero)
                         + TimeSpan.FromTicks(1),
                     false,
-                    "1731393939313233313233353935392E303030303030315A"
+                    "1731393939313233313233353935392E303030303030315A",
                 },
                 new object[]
                 {
                     new DateTimeOffset(1999, 12, 31, 23, 59, 59, TimeSpan.Zero)
                         + TimeSpan.FromTicks(1),
                     true,
-                    "0F31393939313233313233353935395A"
+                    "0F31393939313233313233353935395A",
                 },
             };
 

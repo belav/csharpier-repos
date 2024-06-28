@@ -53,7 +53,7 @@ class A
                 CreateDocumentHighlight(
                     LSP.DocumentHighlightKind.Write,
                     testLspServer.GetLocations("write").Single()
-                )
+                ),
             };
 
             var results = await RunGetDocumentHighlightAsync(

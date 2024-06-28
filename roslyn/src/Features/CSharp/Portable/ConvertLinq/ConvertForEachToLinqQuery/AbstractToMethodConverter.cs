@@ -232,7 +232,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery
                             GetTriviaFromVariableDeclarator(
                                 localDeclaration.Declaration.Variables[0]
                             ),
-                            SyntaxNodeOrTokenExtensions.GetTrivia(localDeclaration.SemicolonToken)
+                            SyntaxNodeOrTokenExtensions.GetTrivia(localDeclaration.SemicolonToken),
                         }
                             .Flatten()
                             .ToArray();

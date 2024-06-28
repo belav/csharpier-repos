@@ -371,11 +371,9 @@ namespace System.Web.Services.Diagnostics
                 return;
             string xml = RuntimeUtils.ElementString(e.Element);
             string format =
-                e.ExpectedElements == null
-                    ? Res.WebUnknownElement
-                    : e.ExpectedElements.Length == 0
-                        ? Res.WebUnknownElement1
-                        : Res.WebUnknownElement2;
+                e.ExpectedElements == null ? Res.WebUnknownElement
+                : e.ExpectedElements.Length == 0 ? Res.WebUnknownElement1
+                : Res.WebUnknownElement2;
             TraceEvent(TraceEventType.Warning, Res.GetString(format, xml, e.ExpectedElements));
         }
 
@@ -389,11 +387,9 @@ namespace System.Web.Services.Diagnostics
             if (RuntimeUtils.IsKnownNamespace(e.Attr.NamespaceURI))
                 return;
             string format =
-                e.ExpectedAttributes == null
-                    ? Res.WebUnknownAttribute
-                    : e.ExpectedAttributes.Length == 0
-                        ? Res.WebUnknownAttribute2
-                        : Res.WebUnknownAttribute3;
+                e.ExpectedAttributes == null ? Res.WebUnknownAttribute
+                : e.ExpectedAttributes.Length == 0 ? Res.WebUnknownAttribute2
+                : Res.WebUnknownAttribute3;
             TraceEvent(
                 TraceEventType.Warning,
                 Res.GetString(format, e.Attr.Name, e.Attr.Value, e.ExpectedAttributes)

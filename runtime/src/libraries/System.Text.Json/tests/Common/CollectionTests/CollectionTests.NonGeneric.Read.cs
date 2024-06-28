@@ -617,13 +617,13 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     typeof(SimpleTestClassWithIEnumerableWrapper),
                     SimpleTestClassWithIEnumerableWrapper.s_json,
-                    typeof(WrapperForIEnumerable)
+                    typeof(WrapperForIEnumerable),
                 };
                 yield return new object[]
                 {
                     typeof(SimpleTestClassWithICollectionWrapper),
                     SimpleTestClassWithICollectionWrapper.s_json,
-                    typeof(WrapperForICollection)
+                    typeof(WrapperForICollection),
                 };
             }
         }

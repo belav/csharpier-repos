@@ -82,7 +82,7 @@ namespace WebMatrix.Data.Test
                 .Returns(new MockConnectionConfiguration("some file based connection"));
             var handlers = new Dictionary<string, IDbFileHandler>
             {
-                { ".foo", mockHandler.Object }
+                { ".foo", mockHandler.Object },
             };
 
             // Act

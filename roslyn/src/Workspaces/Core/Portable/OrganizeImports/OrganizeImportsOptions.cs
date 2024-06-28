@@ -60,7 +60,7 @@ internal static class OrganizeImportsOptionsProviders
                 FormattingOptions2.NewLine,
                 language,
                 fallbackOptions.Value.NewLine
-            )
+            ),
         };
     }
 

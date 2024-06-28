@@ -114,12 +114,12 @@ namespace System.Net
                 descrs[3] = new EventData
                 {
                     DataPointer = (IntPtr)string4Bytes,
-                    Size = ((arg4.Length + 1) * 2)
+                    Size = ((arg4.Length + 1) * 2),
                 };
                 descrs[4] = new EventData
                 {
                     DataPointer = (IntPtr)string5Bytes,
-                    Size = ((arg5.Length + 1) * 2)
+                    Size = ((arg5.Length + 1) * 2),
                 };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);

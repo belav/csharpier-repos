@@ -616,7 +616,7 @@ namespace MonoTests.System.Reflection
             0x83,
             0x4E,
             0xF5,
-            0x6C
+            0x6C,
         };
 
         static byte[] pk =
@@ -780,7 +780,7 @@ namespace MonoTests.System.Reflection
             0xF8,
             0xFF,
             0xA4,
-            0xCB
+            0xCB,
         };
 
         static byte[] ecma =
@@ -800,7 +800,7 @@ namespace MonoTests.System.Reflection
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         private StrongNameKeyPair snpk;

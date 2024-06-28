@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a snippet expression.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeSnippetExpression : CodeExpression
     {
         private string value;

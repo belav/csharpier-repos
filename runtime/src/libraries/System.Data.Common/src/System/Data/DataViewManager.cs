@@ -364,18 +364,15 @@ namespace System.Data
                         ListChangedType.PropertyDescriptorAdded,
                         new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)
                     )
-                    : e.Action == CollectionChangeAction.Refresh
-                        ? new ListChangedEventArgs(
-                            ListChangedType.PropertyDescriptorChanged,
-                            NullProp
-                        )
-                        : e.Action == CollectionChangeAction.Remove
-                            ? new ListChangedEventArgs(
-                                ListChangedType.PropertyDescriptorDeleted,
-                                new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)
-                            )
-                            :
-                            /*default*/null! // TODO: This is very likely wrong
+                : e.Action == CollectionChangeAction.Refresh
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                : e.Action == CollectionChangeAction.Remove
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataTablePropertyDescriptor((System.Data.DataTable)e.Element!)
+                    )
+                :
+                /*default*/null! // TODO: This is very likely wrong
             );
         }
 
@@ -391,20 +388,15 @@ namespace System.Data
                         ListChangedType.PropertyDescriptorAdded,
                         new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
                     )
-                    : e.Action == CollectionChangeAction.Refresh
-                        ? new ListChangedEventArgs(
-                            ListChangedType.PropertyDescriptorChanged,
-                            NullProp
-                        )
-                        : e.Action == CollectionChangeAction.Remove
-                            ? new ListChangedEventArgs(
-                                ListChangedType.PropertyDescriptorDeleted,
-                                new DataRelationPropertyDescriptor(
-                                    (System.Data.DataRelation)e.Element!
-                                )
-                            )
-                            :
-                            /*default*/null! // TODO: This is very likely wrong
+                : e.Action == CollectionChangeAction.Refresh
+                    ? new ListChangedEventArgs(ListChangedType.PropertyDescriptorChanged, NullProp)
+                : e.Action == CollectionChangeAction.Remove
+                    ? new ListChangedEventArgs(
+                        ListChangedType.PropertyDescriptorDeleted,
+                        new DataRelationPropertyDescriptor((System.Data.DataRelation)e.Element!)
+                    )
+                :
+                /*default*/null! // TODO: This is very likely wrong
             );
         }
     }

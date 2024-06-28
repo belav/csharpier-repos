@@ -22,7 +22,7 @@ public class StartupContentLanguageHeader
                 DefaultRequestCulture = new RequestCulture("en-US"),
                 SupportedCultures = new List<CultureInfo>() { new CultureInfo("ar-YE") },
                 SupportedUICultures = new List<CultureInfo>() { new CultureInfo("ar-YE") },
-                ApplyCurrentCultureToResponseHeaders = true
+                ApplyCurrentCultureToResponseHeaders = true,
             }
         );
 

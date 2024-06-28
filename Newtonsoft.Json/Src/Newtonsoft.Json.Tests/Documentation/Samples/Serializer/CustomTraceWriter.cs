@@ -61,7 +61,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 {
                     Message = message,
                     Level = GetLogLevel(level),
-                    Exception = ex
+                    Exception = ex,
                 };
 
                 // log Json.NET message to NLog
@@ -96,7 +96,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 "New Zealand",
                 "Australia",
                 "Denmark",
-                "China"
+                "China",
             };
 
             string json = JsonConvert.SerializeObject(

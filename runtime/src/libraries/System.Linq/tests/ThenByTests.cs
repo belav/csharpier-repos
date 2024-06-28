@@ -37,7 +37,7 @@ namespace System.Linq.Tests
                     null,
                     "Calling Twice",
                     "SoS",
-                    string.Empty
+                    string.Empty,
                 }
                 where !string.IsNullOrEmpty(x2)
                 select new { a1 = x1, a2 = x2 };
@@ -65,32 +65,32 @@ namespace System.Linq.Tests
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Tim",
                     City = "Seattle",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Philip",
                     City = "Orlando",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Chris",
                     City = "London",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Rob",
                     City = "Kent",
-                    Country = "UK"
-                }
+                    Country = "UK",
+                },
             };
             var expected = new[]
             {
@@ -98,32 +98,32 @@ namespace System.Linq.Tests
                 {
                     Name = "Rob",
                     City = "Kent",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Chris",
                     City = "London",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Philip",
                     City = "Orlando",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Tim",
                     City = "Seattle",
-                    Country = "USA"
-                }
+                    Country = "USA",
+                },
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Country).ThenBy(e => e.City));
@@ -138,20 +138,20 @@ namespace System.Linq.Tests
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Prakash",
                     City = "Chennai",
-                    Country = "India"
+                    Country = "India",
                 },
                 new
                 {
                     Name = "Rob",
                     City = "Kent",
-                    Country = "UK"
-                }
+                    Country = "UK",
+                },
             };
             var expected = new[]
             {
@@ -159,20 +159,20 @@ namespace System.Linq.Tests
                 {
                     Name = "Prakash",
                     City = "Chennai",
-                    Country = "India"
+                    Country = "India",
                 },
                 new
                 {
                     Name = "Rob",
                     City = "Kent",
-                    Country = "UK"
+                    Country = "UK",
                 },
                 new
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
-                }
+                    Country = "USA",
+                },
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Country).ThenBy(e => e.Country, null));
@@ -187,32 +187,32 @@ namespace System.Linq.Tests
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Tim",
                     City = "Seattle",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Philip",
                     City = "Orlando",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Chris",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Rob",
                     City = "Seattle",
-                    Country = "USA"
-                }
+                    Country = "USA",
+                },
             };
             var expected = new[]
             {
@@ -220,32 +220,32 @@ namespace System.Linq.Tests
                 {
                     Name = "Chris",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Jim",
                     City = "Minneapolis",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Philip",
                     City = "Orlando",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Rob",
                     City = "Seattle",
-                    Country = "USA"
+                    Country = "USA",
                 },
                 new
                 {
                     Name = "Tim",
                     City = "Seattle",
-                    Country = "USA"
-                }
+                    Country = "USA",
+                },
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Name).ThenBy(e => e.City, null));
@@ -279,7 +279,7 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
                 "Because",
                 "Carriage",
                 "Ourselves",
-                "Immortality."
+                "Immortality.",
             };
 
             Assert.Equal(
@@ -316,7 +316,7 @@ And Immortality.".Split(new[] { ' ', '\n', '\r', '-' }, StringSplitOptions.Remov
                 "Because",
                 "Carriage",
                 "Ourselves",
-                "Immortality."
+                "Immortality.",
             };
 
             Assert.Equal(

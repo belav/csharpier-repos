@@ -3106,7 +3106,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         internal static byte[] smallspcexe =
@@ -10702,7 +10702,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         private static byte[] motus =
@@ -11497,7 +11497,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x35,
             0xF6,
             0x2A,
-            0x3E
+            0x3E,
         };
 
         private void WriteFile(string filename, byte[] content)

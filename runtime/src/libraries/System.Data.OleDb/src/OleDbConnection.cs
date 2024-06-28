@@ -59,7 +59,7 @@ namespace System.Data.OleDb
             get { return (OleDbConnectionString?)ConnectionOptions; }
         }
 
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override int ConnectionTimeout
         {
             get
@@ -191,7 +191,7 @@ namespace System.Data.OleDb
             }
         }
 
-        [Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(true), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Provider
         {
             get

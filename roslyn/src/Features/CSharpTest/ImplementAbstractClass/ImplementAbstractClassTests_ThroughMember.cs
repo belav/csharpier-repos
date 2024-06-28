@@ -1027,7 +1027,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 new[]
                 {
                     FeaturesResources.Implement_abstract_class,
-                    string.Format(FeaturesResources.Implement_through_0, "_base")
+                    string.Format(FeaturesResources.Implement_through_0, "_base"),
                 }
             );
         }
@@ -1051,7 +1051,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 new[]
                 {
                     FeaturesResources.Implement_abstract_class,
-                    string.Format(FeaturesResources.Implement_through_0, "_base")
+                    string.Format(FeaturesResources.Implement_through_0, "_base"),
                 }
             );
         }
@@ -1075,7 +1075,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 new[]
                 {
                     FeaturesResources.Implement_abstract_class,
-                    string.Format(FeaturesResources.Implement_through_0, "B")
+                    string.Format(FeaturesResources.Implement_through_0, "B"),
                 }
             );
         }
@@ -1099,7 +1099,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ImplementAbstractClass
                 new[]
                 {
                     FeaturesResources.Implement_abstract_class,
-                    string.Format(FeaturesResources.Implement_through_0, "B")
+                    string.Format(FeaturesResources.Implement_through_0, "B"),
                 }
             );
         }

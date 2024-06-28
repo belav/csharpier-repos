@@ -755,7 +755,7 @@ namespace System.Net.Http
             config.Formatters.Clear();
             Mock<MediaTypeFormatter> formatterMock = new Mock<MediaTypeFormatter>
             {
-                CallBase = true
+                CallBase = true,
             };
             var formatter = formatterMock.Object;
             formatterMock.Setup(f => f.CanWriteType(typeof(object))).Returns(true).Verifiable();

@@ -21,7 +21,7 @@ public class SqliteNTSApiConsistencyTest
             new()
             {
                 typeof(SqliteNetTopologySuiteDbContextOptionsBuilderExtensions),
-                typeof(SqliteNetTopologySuiteServiceCollectionExtensions)
+                typeof(SqliteNetTopologySuiteServiceCollectionExtensions),
             };
     }
 }

@@ -162,13 +162,13 @@ namespace System.Runtime.Serialization.Schema.Tests
             {
                 SchemaUtils.PositiveSchemas,
                 SchemaUtils.ValidTypeNames[1],
-                new Type[] { typeof(AnotherValidType) }
+                new Type[] { typeof(AnotherValidType) },
             };
             yield return new object[]
             {
                 SchemaUtils.PositiveSchemas,
                 SchemaUtils.ValidTypeNames[2],
-                new Type[] { typeof(NonAttributedSquare) }
+                new Type[] { typeof(NonAttributedSquare) },
             };
             yield return new object[]
             {
@@ -176,20 +176,20 @@ namespace System.Runtime.Serialization.Schema.Tests
                 SchemaUtils.ValidTypeNames[1],
                 new Type[] { typeof(AnotherValidType), typeof(ConflictingAnotherValidType) },
                 typeof(InvalidOperationException),
-                @"List of referenced types contains more than one type with data contract name 'AnotherValidType' in namespace 'http://schemas.datacontract.org/2004/07/barNs'. Need to exclude all but one of the following types. Only matching types can be valid references:"
+                @"List of referenced types contains more than one type with data contract name 'AnotherValidType' in namespace 'http://schemas.datacontract.org/2004/07/barNs'. Need to exclude all but one of the following types. Only matching types can be valid references:",
             };
             // These last two are described as "negative" in the original NetFx XsdDCImporterApi test code... but they don't fail here or there.
             yield return new object[]
             {
                 SchemaUtils.IsReferenceSchemas,
                 SchemaUtils.ValidTypeNames[3],
-                new Type[] { typeof(NonRefType) }
+                new Type[] { typeof(NonRefType) },
             };
             yield return new object[]
             {
                 SchemaUtils.IsReferenceSchemas,
                 SchemaUtils.ValidTypeNames[4],
-                new Type[] { typeof(RefType1) }
+                new Type[] { typeof(RefType1) },
             };
         }
     }

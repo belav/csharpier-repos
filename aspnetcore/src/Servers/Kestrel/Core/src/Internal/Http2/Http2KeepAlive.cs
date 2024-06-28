@@ -10,7 +10,7 @@ internal enum KeepAliveState
     None,
     SendPing,
     PingSent,
-    Timeout
+    Timeout,
 }
 
 internal sealed class Http2KeepAlive

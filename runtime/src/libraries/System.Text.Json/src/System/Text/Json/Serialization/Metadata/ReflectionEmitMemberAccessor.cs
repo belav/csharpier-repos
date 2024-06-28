@@ -172,7 +172,7 @@ namespace System.Text.Json.Serialization.Metadata
                         1 => OpCodes.Ldarg_1,
                         2 => OpCodes.Ldarg_2,
                         3 => OpCodes.Ldarg_3,
-                        _ => throw new InvalidOperationException()
+                        _ => throw new InvalidOperationException(),
                     }
                 );
             }

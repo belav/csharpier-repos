@@ -234,7 +234,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     .HasForeignKey<RequiredSingleComposite2>(e => new
                     {
                         e.BackId,
-                        e.BackAlternateId
+                        e.BackAlternateId,
                     })
                     .HasPrincipalKey<RequiredSingleAk1>(e => new { e.Id, e.AlternateId });
             });
@@ -254,7 +254,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     .HasForeignKey<OptionalSingleComposite2>(e => new
                     {
                         e.BackId,
-                        e.ParentAlternateId
+                        e.ParentAlternateId,
                     })
                     .HasPrincipalKey<OptionalSingleAk1>(e => new { e.Id, e.AlternateId });
             });
@@ -390,7 +390,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                         )
                         {
                             context.Set<Required2>().CreateProxy(),
-                            context.Set<Required2>().CreateProxy()
+                            context.Set<Required2>().CreateProxy(),
                         };
                     }),
                     context.CreateProxy<Required1>(e =>
@@ -400,9 +400,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                         )
                         {
                             context.Set<Required2>().CreateProxy(),
-                            context.Set<Required2>().CreateProxy()
+                            context.Set<Required2>().CreateProxy(),
                         };
-                    })
+                    }),
                 };
 
                 e.OptionalChildren = new ObservableHashSet<Optional1>(
@@ -418,7 +418,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.Set<Optional2>().CreateProxy(),
-                                context.Set<Optional2>().CreateProxy()
+                                context.Set<Optional2>().CreateProxy(),
                             };
 
                             e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
@@ -434,13 +434,13 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.Set<Optional2>().CreateProxy(),
-                                context.Set<Optional2>().CreateProxy()
+                                context.Set<Optional2>().CreateProxy(),
                             };
 
                             e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                                 ReferenceEqualityComparer.Instance
                             );
-                        })
+                        }),
                 };
 
                 e.RequiredSingle = context.CreateProxy<RequiredSingle1>(e =>
@@ -496,7 +496,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                                     .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                                 context
                                     .Set<RequiredAk2>()
-                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                             };
 
                             e.CompositeChildren = new ObservableHashSet<RequiredComposite2>(
@@ -504,7 +504,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.Set<RequiredComposite2>().CreateProxy(),
-                                context.Set<RequiredComposite2>().CreateProxy()
+                                context.Set<RequiredComposite2>().CreateProxy(),
                             };
                         }),
                     context
@@ -522,7 +522,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                                     .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                                 context
                                     .Set<RequiredAk2>()
-                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                             };
 
                             e.CompositeChildren = new ObservableHashSet<RequiredComposite2>(
@@ -530,9 +530,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.Set<RequiredComposite2>().CreateProxy(),
-                                context.Set<RequiredComposite2>().CreateProxy()
+                                context.Set<RequiredComposite2>().CreateProxy(),
                             };
-                        })
+                        }),
                 };
 
                 e.OptionalChildrenAk = new ObservableHashSet<OptionalAk1>(
@@ -554,14 +554,14 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                                     .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                                 context
                                     .Set<OptionalAk2>()
-                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                             };
                             e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                                 ReferenceEqualityComparer.Instance
                             )
                             {
                                 context.Set<OptionalComposite2>().CreateProxy(),
-                                context.Set<OptionalComposite2>().CreateProxy()
+                                context.Set<OptionalComposite2>().CreateProxy(),
                             };
                         }),
                     context
@@ -579,7 +579,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                                     .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                                 context
                                     .Set<OptionalAk2>()
-                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid())
+                                    .CreateProxy(e => e.AlternateId = Guid.NewGuid()),
                             };
 
                             e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
@@ -587,9 +587,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.Set<OptionalComposite2>().CreateProxy(),
-                                context.Set<OptionalComposite2>().CreateProxy()
+                                context.Set<OptionalComposite2>().CreateProxy(),
                             };
-                        })
+                        }),
                 };
 
                 e.RequiredSingleAk = context.CreateProxy<RequiredSingleAk1>(e =>
@@ -673,7 +673,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.CreateProxy<OptionalOverlapping2>(e => e.Id = 1),
-                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 2)
+                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 2),
                             };
                         }),
                     context
@@ -687,9 +687,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                             )
                             {
                                 context.CreateProxy<OptionalOverlapping2>(e => e.Id = 3),
-                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 4)
+                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 4),
                             };
-                        })
+                        }),
                 };
             });
 
@@ -744,7 +744,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     {
         Dependent = 1,
         Principal = 2,
-        Fk = 4
+        Fk = 4,
     }
 
     protected Expression<Func<Root, bool>> IsTheRoot => r => r.AlternateId == Fixture.RootAK;

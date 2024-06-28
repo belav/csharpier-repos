@@ -30,6 +30,6 @@ namespace System.DirectoryServices
         ObjectSecurity = 1L,
         ParentsFirst = 2048L,
         PublicDataOnly = 8192L,
-        IncrementalValues = 2147483648L
+        IncrementalValues = 2147483648L,
     }
 }

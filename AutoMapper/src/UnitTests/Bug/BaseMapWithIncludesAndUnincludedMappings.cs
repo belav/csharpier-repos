@@ -84,7 +84,7 @@ public class BaseMapChildProperty
             .Map<Container, Container2>(
                 new Container()
                 {
-                    Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" }
+                    Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" },
                 }
             );
         Assert.IsType<SubB>(mapped.Item);
@@ -120,7 +120,7 @@ public class BaseMapChildProperty
             .Map<Container, Container2>(
                 new Container()
                 {
-                    Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" }
+                    Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" },
                 }
             );
         Assert.IsType<SubB>(mapped.Item);

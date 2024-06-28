@@ -42,7 +42,7 @@ namespace ILLink.Tasks.Tests
                     "#endif // FEATURE_BOTH",
                     "#if FOR_ILLINK",
                     "DEFINE_METHOD(TESTCLASS, TESTMETHODFORILLINK, TestMethodForILLink, 5)",
-                    "#endif"
+                    "#endif",
                 }
             );
 
@@ -60,7 +60,7 @@ namespace ILLink.Tasks.Tests
                     "#endif",
                     "#ifdef FEATURE_OFF",
                     "DEFINE_EXCEPTION(g_TestNS, TestFeatureOffException, false, C)",
-                    "#endif"
+                    "#endif",
                 }
             );
 
@@ -84,9 +84,9 @@ namespace ILLink.Tasks.Tests
                     new TaskItem("FOR_ILLINK"),
                     new TaskItem("_TEST"),
                     new TaskItem("FEATURE_ON"),
-                    new TaskItem("FEATURE_BOTH")
+                    new TaskItem("FEATURE_BOTH"),
                 },
-                RuntimeRootDescriptorFilePath = new TaskItem("Test.ILLink.Descriptors.xml")
+                RuntimeRootDescriptorFilePath = new TaskItem("Test.ILLink.Descriptors.xml"),
             };
 
             Assert.True(task.Execute());
@@ -164,7 +164,7 @@ namespace ILLink.Tasks.Tests
                     "DEFINE_CLASS(TESTCLASS)",
                     "DEFINE_METHOD(TESTCLASS, TESTMETHODFEATURE2, TestMethodFeature2, 6)",
                     "#endif",
-                    "END_ILLINK_FEATURE_SWITCH()"
+                    "END_ILLINK_FEATURE_SWITCH()",
                 }
             );
 
@@ -182,7 +182,7 @@ namespace ILLink.Tasks.Tests
                     "#endif",
                     "#ifdef FEATURE_OFF",
                     "DEFINE_EXCEPTION(g_TestNS, TestFeatureOffException, false, C)",
-                    "#endif"
+                    "#endif",
                 }
             );
 
@@ -206,9 +206,9 @@ namespace ILLink.Tasks.Tests
                     new TaskItem("FOR_ILLINK"),
                     new TaskItem("_TEST"),
                     new TaskItem("FEATURE_ON"),
-                    new TaskItem("FEATURE_BOTH")
+                    new TaskItem("FEATURE_BOTH"),
                 },
-                RuntimeRootDescriptorFilePath = new TaskItem("Test.ILLink.Descriptors.xml")
+                RuntimeRootDescriptorFilePath = new TaskItem("Test.ILLink.Descriptors.xml"),
             };
 
             Assert.True(task.Execute());

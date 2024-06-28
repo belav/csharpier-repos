@@ -81,12 +81,12 @@ namespace System.Web.UI.Design.MobileControls
             _schemasFriendly = new String[]
             {
                 SR.GetString(SR.TemplatingOptionsDialog_HTMLSchemaFriendly),
-                SR.GetString(SR.TemplatingOptionsDialog_CHTMLSchemaFriendly)
+                SR.GetString(SR.TemplatingOptionsDialog_CHTMLSchemaFriendly),
             };
             _schemasUrl = new String[]
             {
                 SR.GetString(SR.MarkupSchema_HTML32),
-                SR.GetString(SR.MarkupSchema_cHTML10)
+                SR.GetString(SR.MarkupSchema_cHTML10),
             };
 
             int tabOffset = GenericUI.InitDialog(this, _dsd, _mergingContext);
@@ -170,7 +170,7 @@ namespace System.Web.UI.Design.MobileControls
                     this._lblSchemas,
                     this._btnEditChoices,
                     this._lblChoices,
-                    this._cmbChoices
+                    this._cmbChoices,
                 }
             );
             this._pnlMain.Location = new System.Drawing.Point(6, 5);

@@ -48,7 +48,7 @@ public class DefaultHubLifetimeManagerBenchmark
             var connectionContext = new TestConnectionContext
             {
                 ConnectionId = connectionId,
-                Transport = new TestDuplexPipe(ForceAsync)
+                Transport = new TestDuplexPipe(ForceAsync),
             };
             var contextOptions = new HubConnectionContextOptions()
             {

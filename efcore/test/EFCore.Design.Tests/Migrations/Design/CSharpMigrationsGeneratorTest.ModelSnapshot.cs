@@ -277,7 +277,7 @@ namespace MyNamespace
     {
         Default = 0,
         One = 1,
-        Two = 2
+        Two = 2,
     }
 
     private class EntityWithManyProperties
@@ -333,42 +333,42 @@ namespace MyNamespace
 
     private enum Enum64 : long
     {
-        SomeValue = 1
+        SomeValue = 1,
     }
 
     private enum Enum32
     {
-        SomeValue = 1
+        SomeValue = 1,
     }
 
     private enum Enum16 : short
     {
-        SomeValue = 1
+        SomeValue = 1,
     }
 
     private enum Enum8 : byte
     {
-        SomeValue = 1
+        SomeValue = 1,
     }
 
     private enum EnumU64 : ulong
     {
-        SomeValue = 1234567890123456789UL
+        SomeValue = 1234567890123456789UL,
     }
 
     private enum EnumU32 : uint
     {
-        SomeValue = uint.MaxValue
+        SomeValue = uint.MaxValue,
     }
 
     private enum EnumU16 : ushort
     {
-        SomeValue = ushort.MaxValue
+        SomeValue = ushort.MaxValue,
     }
 
     private enum EnumS8 : sbyte
     {
-        SomeValue = sbyte.MinValue
+        SomeValue = sbyte.MinValue,
     }
 
     private class EntityWithOneProperty
@@ -476,7 +476,7 @@ namespace MyNamespace
     {
         Value0 = 0,
         Value1,
-        Value2
+        Value2,
     }
 
     private abstract class AbstractBase
@@ -543,7 +543,7 @@ namespace MyNamespace
         Wed,
         Thu,
         Fri,
-        Sat
+        Sat,
     }
 
     private class EntityWithEnumType
@@ -6955,7 +6955,7 @@ namespace RootNamespace
                         {
                             t.X,
                             t.Y,
-                            t.Z
+                            t.Z,
                         },
                         "IX_unspecified"
                     );
@@ -6964,7 +6964,7 @@ namespace RootNamespace
                             {
                                 t.X,
                                 t.Y,
-                                t.Z
+                                t.Z,
                             },
                             "IX_empty"
                         )
@@ -6974,7 +6974,7 @@ namespace RootNamespace
                             {
                                 t.X,
                                 t.Y,
-                                t.Z
+                                t.Z,
                             },
                             "IX_all_ascending"
                         )
@@ -6984,7 +6984,7 @@ namespace RootNamespace
                             {
                                 t.X,
                                 t.Y,
-                                t.Z
+                                t.Z,
                             },
                             "IX_all_descending"
                         )
@@ -6994,7 +6994,7 @@ namespace RootNamespace
                             {
                                 t.X,
                                 t.Y,
-                                t.Z
+                                t.Z,
                             },
                             "IX_mixed"
                         )
@@ -8604,11 +8604,11 @@ namespace RootNamespace
                 new Coordinate(1.1, 2.2),
                 new Coordinate(2.2, 2.2),
                 new Coordinate(2.2, 1.1),
-                new Coordinate(7.1, 7.2)
+                new Coordinate(7.1, 7.2),
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         var lineString2 = new LineString(
@@ -8617,18 +8617,18 @@ namespace RootNamespace
                 new Coordinate(7.1, 7.2),
                 new Coordinate(20.2, 20.2),
                 new Coordinate(20.20, 1.1),
-                new Coordinate(70.1, 70.2)
+                new Coordinate(70.1, 70.2),
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         var multiPoint = new MultiPoint(
             new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         var polygon1 = new Polygon(
@@ -8638,12 +8638,12 @@ namespace RootNamespace
                     new Coordinate(1.1, 2.2),
                     new Coordinate(2.2, 2.2),
                     new Coordinate(2.2, 1.1),
-                    new Coordinate(1.1, 2.2)
+                    new Coordinate(1.1, 2.2),
                 }
             )
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         var polygon2 = new Polygon(
@@ -8653,19 +8653,19 @@ namespace RootNamespace
                     new Coordinate(10.1, 20.2),
                     new Coordinate(20.2, 20.2),
                     new Coordinate(20.2, 10.1),
-                    new Coordinate(10.1, 20.2)
+                    new Coordinate(10.1, 20.2),
                 }
             )
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         var point1 = new Point(1.1, 2.2, 3.3) { SRID = 4326 };
 
         var multiLineString = new MultiLineString(new[] { lineString1, lineString2 })
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         var multiPolygon = new MultiPolygon(new[] { polygon2, polygon1 }) { SRID = 4326 };
@@ -8680,11 +8680,11 @@ namespace RootNamespace
                 polygon2,
                 point1,
                 multiLineString,
-                multiPolygon
+                multiPolygon,
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
         Test(
@@ -8747,10 +8747,10 @@ namespace RootNamespace
                             DateTimeCollection = new[]
                             {
                                 new DateTime(2023, 9, 7),
-                                new DateTime(2023, 11, 14)
+                                new DateTime(2023, 11, 14),
                             },
                             BoolCollection = new[] { true, false },
-                            BytesCollection = new[] { new byte[] { 1, 2 }, new byte[] { 3, 4 } }
+                            BytesCollection = new[] { new byte[] { 1, 2 }, new byte[] { 3, 4 } },
                         },
                         new
                         {
@@ -8783,7 +8783,7 @@ namespace RootNamespace
                             EnumU64 = EnumU64.SomeValue,
                             EnumU32 = EnumU32.SomeValue,
                             EnumU16 = EnumU16.SomeValue,
-                            EnumS8 = EnumS8.SomeValue
+                            EnumS8 = EnumS8.SomeValue,
                         }
                     );
                 });
@@ -9234,7 +9234,7 @@ namespace RootNamespace
             BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"),
             BuildReference.ByName("Microsoft.EntityFrameworkCore.SqlServer"),
             BuildReference.ByName("Microsoft.EntityFrameworkCore.Design.Tests"),
-            BuildReference.ByName("NetTopologySuite")
+            BuildReference.ByName("NetTopologySuite"),
         };
 
     protected virtual string AddBoilerPlate(
@@ -9395,7 +9395,7 @@ namespace RootNamespace
                 {
                     new SqlServerNetTopologySuiteTypeMappingSourcePlugin(
                         NtsGeometryServices.Instance
-                    )
+                    ),
                 }
             )
         );

@@ -11,7 +11,7 @@ namespace System.ServiceModel.Security
         Signed,
         Endorsing,
         SignedEndorsing,
-        SignedEncrypted
+        SignedEncrypted,
     }
 
     static class SecurityTokenAttachmentModeHelper

@@ -271,7 +271,7 @@ namespace RunTests
                 var knownEnvironmentVariables = new[]
                 {
                     "ROSLYN_TEST_IOPERATION",
-                    "ROSLYN_TEST_USEDASSEMBLIES"
+                    "ROSLYN_TEST_USEDASSEMBLIES",
                 };
                 foreach (var knownEnvironmentVariable in knownEnvironmentVariables)
                 {
@@ -299,10 +299,10 @@ namespace RunTests
                         kvp =>
                             kvp.Key with
                             {
-                                AssemblyPath = GetHelixRelativeAssemblyPath(kvp.Key.AssemblyPath)
+                                AssemblyPath = GetHelixRelativeAssemblyPath(kvp.Key.AssemblyPath),
                             },
                         kvp => kvp.Value
-                    )
+                    ),
                 };
 
                 AddRehydrateTestFoldersCommand(command, workItemInfo, isUnix);
@@ -573,7 +573,7 @@ namespace RunTests
                 var startInfo = new ProcessStartInfo()
                 {
                     FileName = htmlResultsFilePath,
-                    UseShellExecute = true
+                    UseShellExecute = true,
                 };
                 Process.Start(startInfo);
             }

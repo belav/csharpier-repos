@@ -17,7 +17,7 @@ namespace System.Web.UI.WebControls
     /// Represents a parameter to a DataSourceControl.
     /// Parameters can be session variables, web request parameters, or of custom types.
     /// </devdoc>
-    [DefaultProperty("DefaultValue"),]
+    [DefaultProperty("DefaultValue")]
     public class Parameter : ICloneable, IStateManager
     {
         private ParameterCollection _owner;
@@ -184,7 +184,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Gets/sets the name of the parameter.
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Parameter"), WebSysDescription(SR.Parameter_Name),]
+        [DefaultValue(""), WebCategory("Parameter"), WebSysDescription(SR.Parameter_Name)]
         public string Name
         {
             get
@@ -207,7 +207,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Returns the value of parameter after converting it to the proper type.
         /// </devdoc>
-        [Browsable(false),]
+        [Browsable(false)]
         internal object ParameterValue
         {
             get { return GetValue(ViewState["ParameterValue"], false); }
@@ -398,7 +398,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Gets/sets the size of the parameter.
         /// </devdoc>
-        [DefaultValue(0), WebCategory("Parameter"), WebSysDescription(SR.Parameter_Size),]
+        [DefaultValue(0), WebCategory("Parameter"), WebSysDescription(SR.Parameter_Size)]
         public int Size
         {
             get
@@ -482,10 +482,7 @@ namespace System.Web.UI.WebControls
         /// Indicates a dictionary of state information that allows you to save and restore
         /// the state of a Parameter across multiple requests for the same page.
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected StateBag ViewState
         {
             get

@@ -20,7 +20,7 @@ public abstract class StoreValueGenerationFixtureBase
             var name in new[]
             {
                 nameof(StoreValueGenerationContext.WithNoDatabaseGenerated),
-                nameof(StoreValueGenerationContext.WithNoDatabaseGenerated2)
+                nameof(StoreValueGenerationContext.WithNoDatabaseGenerated2),
             }
         )
         {
@@ -34,7 +34,7 @@ public abstract class StoreValueGenerationFixtureBase
             var name in new[]
             {
                 nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated),
-                nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2)
+                nameof(StoreValueGenerationContext.WithSomeDatabaseGenerated2),
             }
         )
         {
@@ -51,7 +51,7 @@ public abstract class StoreValueGenerationFixtureBase
             var name in new[]
             {
                 nameof(StoreValueGenerationContext.WithAllDatabaseGenerated),
-                nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2)
+                nameof(StoreValueGenerationContext.WithAllDatabaseGenerated2),
             }
         )
         {
@@ -83,13 +83,13 @@ public abstract class StoreValueGenerationFixtureBase
             {
                 Id = 1,
                 Data1 = 10,
-                Data2 = 20
+                Data2 = 20,
             },
             new StoreValueGenerationData
             {
                 Id = 2,
                 Data1 = 11,
-                Data2 = 21
+                Data2 = 21,
             }
         );
         context.WithNoDatabaseGenerated2.AddRange(
@@ -97,13 +97,13 @@ public abstract class StoreValueGenerationFixtureBase
             {
                 Id = 1,
                 Data1 = 10,
-                Data2 = 20
+                Data2 = 20,
             },
             new StoreValueGenerationData
             {
                 Id = 2,
                 Data1 = 11,
-                Data2 = 21
+                Data2 = 21,
             }
         );
 

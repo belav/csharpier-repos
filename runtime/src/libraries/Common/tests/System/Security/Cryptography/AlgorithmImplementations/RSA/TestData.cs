@@ -71,7 +71,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0xD9,
                 0xF5,
             },
-            Exponent = new byte[] { 0x01, 0x00, 0x01, },
+            Exponent = new byte[] { 0x01, 0x00, 0x01 },
             D = new byte[]
             {
                 0x7A,
@@ -393,7 +393,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0x68,
                 0xBD,
             },
-            Exponent = new byte[] { 0x01, 0x00, 0x01, },
+            Exponent = new byte[] { 0x01, 0x00, 0x01 },
             D = new byte[]
             {
                 0x4A,
@@ -996,7 +996,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0x55,
                 0x09,
             },
-            Exponent = new byte[] { 0x01, 0x00, 0x01, },
+            Exponent = new byte[] { 0x01, 0x00, 0x01 },
             D = new byte[]
             {
                 0x9E,
@@ -1732,7 +1732,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0x08,
                 0x99,
             },
-            Exponent = new byte[] { 0x01, 0x00, 0x01, },
+            Exponent = new byte[] { 0x01, 0x00, 0x01 },
             D = new byte[]
             {
                 0x2C,
@@ -4702,7 +4702,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0xBF,
                 0x33,
             },
-            Exponent = new byte[] { 0x01, 0x00, 0x01, },
+            Exponent = new byte[] { 0x01, 0x00, 0x01 },
             D = new byte[]
             {
                 0x36,
@@ -11960,7 +11960,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0x06,
                 0x15,
             },
-            Exponent = new byte[] { 0x01, 0x00, 0x01, },
+            Exponent = new byte[] { 0x01, 0x00, 0x01 },
             D = new byte[]
             {
                 0xAF,
@@ -12203,7 +12203,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0x86,
                 0x81,
                 0x0B,
-            }
+            },
         };
 
         public static readonly RSAParameters UnusualExponentParameters = new RSAParameters()
@@ -12339,7 +12339,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 0x8E,
                 0x93,
             },
-            Exponent = new byte[] { 0x01, 0xB1, },
+            Exponent = new byte[] { 0x01, 0xB1 },
             D = new byte[]
             {
                 0x7D,
@@ -12860,7 +12860,7 @@ namespace System.Security.Cryptography.Rsa.Tests
                 + "0CE01B7A1CD1A4326DC75883DFF93110AB065AAED140C9B98176A8810809ADEC"
                 + "75E86764A0951597EF467FA8FD509181CD2E491E43BE41084E5BE1B562EE76E9"
                 + "F92C9AB1E5AEAD9D291A6337E4DE85BDE67A0D72B4E55ADCF207F7A5A5225E15"
-            ).HexToByteArray()
+            ).HexToByteArray(),
         };
 
         public static readonly RSAParameters CspTestKey = new RSAParameters

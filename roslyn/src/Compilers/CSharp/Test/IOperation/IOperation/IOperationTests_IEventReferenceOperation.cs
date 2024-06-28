@@ -43,7 +43,7 @@ IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationK
                 //     static event EventHandler Event;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
                     .WithArguments("C.Event")
-                    .WithLocation(7, 31)
+                    .WithLocation(7, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -89,7 +89,7 @@ IEventReferenceOperation: event System.EventHandler C.Event (OperationKind.Event
                 //     event EventHandler Event;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
                     .WithArguments("C.Event")
-                    .WithLocation(7, 24)
+                    .WithLocation(7, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -136,7 +136,7 @@ IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationK
                 //     static event EventHandler Event;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
                     .WithArguments("C.Event")
-                    .WithLocation(7, 31)
+                    .WithLocation(7, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -209,7 +209,7 @@ IEventReferenceOperation: event System.EventHandler C.Event (OperationKind.Event
                 //         /*<bind>*/C.Event/*</bind>*/(null, null);
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "C.Event")
                     .WithArguments("C.Event")
-                    .WithLocation(10, 19)
+                    .WithLocation(10, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -250,7 +250,7 @@ IEventReferenceOperation: event System.EventHandler C.Event (Static) (OperationK
                 //         /*<bind>*/c.Event/*</bind>*/(null, null);
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "c.Event")
                     .WithArguments("C.Event")
-                    .WithLocation(11, 19)
+                    .WithLocation(11, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<MemberAccessExpressionSyntax>(
@@ -507,7 +507,7 @@ Block[B2] - Exit
                 //         handler2 = (c1 ?? c2).Event1;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).Event1")
                     .WithArguments("C.Event1")
-                    .WithLocation(13, 20)
+                    .WithLocation(13, 20),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

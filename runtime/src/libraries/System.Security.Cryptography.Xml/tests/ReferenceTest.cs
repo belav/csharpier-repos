@@ -232,7 +232,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     0x63,
                     0xB2,
                     0xFD,
-                    0x52
+                    0x52,
                 },
                 reference.DigestValue
             );

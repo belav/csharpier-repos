@@ -921,7 +921,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=p_OldValueInsert1",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -966,7 +966,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=p_OldValueInsert1",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1011,7 +1011,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@OtherValue=p_OtherValueInsert1",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1056,7 +1056,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=k_1001",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1101,7 +1101,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=ov_1001",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1146,7 +1146,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=k_1001",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1191,7 +1191,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=ov_1001",
-                "String:@ID=n_1001"
+                "String:@ID=n_1001",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1237,7 +1237,7 @@ namespace MonoTests.System.Web.UI.WebControls
             {
                 "String:@oldvalue_ID=k_1001",
                 "String:@ID=n_1001",
-                "String:@OtherValue=p_OtherValueUpdate1"
+                "String:@OtherValue=p_OtherValueUpdate1",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
@@ -1279,7 +1279,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "DeleteParameters_ParametersChanged"
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
-            string[] expectedParams = new string[] { "String:@oldvalue_ID=k_1001", };
+            string[] expectedParams = new string[] { "String:@oldvalue_ID=k_1001" };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
                 StringSplitOptions.RemoveEmptyEntries
@@ -1320,7 +1320,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "DeleteParameters_ParametersChanged"
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
-            string[] expectedParams = new string[] { "String:@oldvalue_ID=ov_1001", };
+            string[] expectedParams = new string[] { "String:@oldvalue_ID=ov_1001" };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
                 StringSplitOptions.RemoveEmptyEntries
@@ -1361,7 +1361,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "DeleteParameters_ParametersChanged"
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
-            string[] expectedParams = new string[] { "String:@oldvalue_ID=k_1001", };
+            string[] expectedParams = new string[] { "String:@oldvalue_ID=k_1001" };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
                 StringSplitOptions.RemoveEmptyEntries
@@ -1402,7 +1402,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 "DeleteParameters_ParametersChanged"
             );
             Assert.AreEqual("view_Deleting", eventsCalled[1], "view_Deleting");
-            string[] expectedParams = new string[] { "String:@oldvalue_ID=ov_1001", };
+            string[] expectedParams = new string[] { "String:@oldvalue_ID=ov_1001" };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },
                 StringSplitOptions.RemoveEmptyEntries
@@ -1446,7 +1446,7 @@ namespace MonoTests.System.Web.UI.WebControls
             string[] expectedParams = new string[]
             {
                 "String:@oldvalue_ID=k_1001",
-                "String:@OtherValue=p_OtherValueDelete1"
+                "String:@OtherValue=p_OtherValueDelete1",
             };
             string[] actualValues = ((string)eventsCalled[2]).Split(
                 new string[] { ", " },

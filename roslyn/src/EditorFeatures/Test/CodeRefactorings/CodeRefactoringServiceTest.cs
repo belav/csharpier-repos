@@ -406,7 +406,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             DocumentKinds = new[]
             {
                 nameof(TextDocumentKind.AdditionalDocument),
-                nameof(TextDocumentKind.AnalyzerConfigDocument)
+                nameof(TextDocumentKind.AnalyzerConfigDocument),
             },
             DocumentExtensions = new[] { ".txt", ".editorconfig" }
         )]
@@ -423,7 +423,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeRefactoringService
             DocumentKinds = new[]
             {
                 nameof(TextDocumentKind.AdditionalDocument),
-                nameof(TextDocumentKind.AnalyzerConfigDocument)
+                nameof(TextDocumentKind.AnalyzerConfigDocument),
             }
         )]
         [Shared]

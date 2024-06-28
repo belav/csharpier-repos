@@ -246,7 +246,7 @@ public class MapperConfiguration : IGlobalConfiguration
                     mapRequest.RuntimeTypes
                 )
                 {
-                    MemberMap = mapRequest.MemberMap
+                    MemberMap = mapRequest.MemberMap,
                 };
                 fullExpression = Throw(Constant(exception), runtimeDestinationType);
             }
@@ -357,7 +357,7 @@ public class MapperConfiguration : IGlobalConfiguration
     ) =>
         new("Error mapping types.", innerException, mapRequest.RuntimeTypes)
         {
-            MemberMap = mapRequest.MemberMap
+            MemberMap = mapRequest.MemberMap,
         };
 
     IReadOnlyCollection<TypeMap> IGlobalConfiguration.GetAllTypeMaps() => _configuredMaps.Values;

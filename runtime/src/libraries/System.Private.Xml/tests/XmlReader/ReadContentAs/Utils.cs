@@ -13,7 +13,7 @@ namespace System.Xml.XmlReaderTests
             {
                 DtdProcessing = DtdProcessing.Ignore,
                 CheckCharacters = false,
-                ConformanceLevel = ConformanceLevel.Fragment
+                ConformanceLevel = ConformanceLevel.Fragment,
             };
 
             var stream = new StringReader(fragment);

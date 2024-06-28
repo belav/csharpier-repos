@@ -103,7 +103,7 @@ namespace System.Net.Http.Functional.Tests
             var options = new LoopbackProxyServer.Options
             {
                 AuthenticationSchemes = proxyAuthScheme,
-                ConnectionCloseAfter407 = proxyClosesConnectionAfterFirst407Response
+                ConnectionCloseAfter407 = proxyClosesConnectionAfterFirst407Response,
             };
             using (LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options))
             {
@@ -139,7 +139,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var options = new LoopbackProxyServer.Options
                         {
-                            AddViaRequestHeader = true
+                            AddViaRequestHeader = true,
                         };
                         using (
                             LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options)
@@ -231,7 +231,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 AuthenticationSchemes =
                     cred != null ? AuthenticationSchemes.Basic : AuthenticationSchemes.None,
-                ConnectionCloseAfter407 = connectionCloseAfter407
+                ConnectionCloseAfter407 = connectionCloseAfter407,
             };
 
             using (LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options))
@@ -245,7 +245,7 @@ namespace System.Net.Http.Functional.Tests
                         proxyServer.Uri,
                         BasicAuth,
                         wrapCredsInCache
-                    )
+                    ),
                 };
 
                 using (
@@ -285,7 +285,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 AuthenticationSchemes =
                     cred != null ? AuthenticationSchemes.Basic : AuthenticationSchemes.None,
-                ConnectionCloseAfter407 = connectionCloseAfter407
+                ConnectionCloseAfter407 = connectionCloseAfter407,
             };
 
             using (LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options))
@@ -299,7 +299,7 @@ namespace System.Net.Http.Functional.Tests
                         proxyServer.Uri,
                         BasicAuth,
                         wrapCredsInCache
-                    )
+                    ),
                 };
 
                 using (
@@ -353,7 +353,7 @@ namespace System.Net.Http.Functional.Tests
         {
             var options = new LoopbackProxyServer.Options
             {
-                AuthenticationSchemes = AuthenticationSchemes.Basic
+                AuthenticationSchemes = AuthenticationSchemes.Basic,
             };
 
             using (LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options))
@@ -543,7 +543,7 @@ namespace System.Net.Http.Functional.Tests
                         proxyServer.Uri,
                         BasicAuth,
                         true
-                    )
+                    ),
                 };
                 using (HttpClient client = CreateHttpClient(handler))
                 {
@@ -596,7 +596,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 IsProxy = true,
                 Username = expectedUsername,
-                Password = expectedPassword
+                Password = expectedPassword,
             };
             var proxyCreds = new NetworkCredential(expectedUsername, expectedPassword);
 
@@ -957,7 +957,7 @@ namespace System.Net.Http.Functional.Tests
                 new UseSpecifiedUriWebProxy(
                     new Uri($"http://{Guid.NewGuid().ToString().Substring(0, 15)}:12345"),
                     bypass: true
-                )
+                ),
             };
         }
 
@@ -972,13 +972,13 @@ namespace System.Net.Http.Functional.Tests
                     {
                         new NetworkCredential("username", "password"),
                         wrapCredsInCache,
-                        connectionCloseAfter407
+                        connectionCloseAfter407,
                     };
                     yield return new object[]
                     {
                         new NetworkCredential("username", "password", "domain"),
                         wrapCredsInCache,
-                        connectionCloseAfter407
+                        connectionCloseAfter407,
                     };
                 }
             }

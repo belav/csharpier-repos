@@ -147,7 +147,7 @@ namespace System.Reflection.TypeLoading
 
                 CustomAttributeTypedArgument[] cats =
                 {
-                    new CustomAttributeTypedArgument(ct[CoreType.UnmanagedType]!, (int)(ma.Value))
+                    new CustomAttributeTypedArgument(ct[CoreType.UnmanagedType]!, (int)(ma.Value)),
                 };
                 List<CustomAttributeNamedArgument> cans = new List<CustomAttributeNamedArgument>();
                 cans.AddRange(

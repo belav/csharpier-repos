@@ -123,7 +123,7 @@ class C
                 new[]
                 {
                     "Offset=0 Ordinal=0 Kind=LambdaDisplayClass",
-                    "Offset=33 Ordinal=0 Kind=UserDefined"
+                    "Offset=33 Ordinal=0 Kind=UserDefined",
                 },
                 debugInfo.InspectLocalSlots()
             );

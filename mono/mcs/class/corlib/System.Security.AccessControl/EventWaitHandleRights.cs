@@ -37,6 +37,8 @@ namespace System.Security.AccessControl
         ChangePermissions = 0x040000,
         TakeOwnership = 0x080000,
         Synchronize = 0x100000,
-        FullControl = 0x1F0003 /* not 0x1F0002 according to corcompare */
+        FullControl =
+            0x1F0003 /* not 0x1F0002 according to corcompare */
+        ,
     }
 }

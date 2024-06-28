@@ -73,7 +73,7 @@ public class C
                 new DiagnosticAnalyzer[]
                 {
                     new WarningOnNamePrefixDeclarationAnalyzer("C"),
-                    new WarningOnTypeDeclarationAnalyzer()
+                    new WarningOnTypeDeclarationAnalyzer(),
                 }
             );
         }
@@ -447,7 +447,7 @@ public class E
                 new DiagnosticAnalyzer[]
                 {
                     new WarningOnNamePrefixDeclarationAnalyzer("E"),
-                    new WarningOnTypeDeclarationAnalyzer()
+                    new WarningOnTypeDeclarationAnalyzer(),
                 }
             );
         }

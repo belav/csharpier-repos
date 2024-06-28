@@ -135,7 +135,7 @@ public class LG1Controller : Controller
             scheme: "https",
             host: new HostString("www.example.com"),
             routeName: "routewithnomvcparameters",
-            values: new { custom = custom, }
+            values: new { custom = custom }
         );
     }
 

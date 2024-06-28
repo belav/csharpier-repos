@@ -661,7 +661,7 @@ namespace System.Text.Json.Serialization.Metadata
         {
             NotConfigured = 0,
             Configuring = 1,
-            Configured = 2
+            Configured = 2,
         };
 
         private ExceptionDispatchInfo? _cachedConfigureError;
@@ -1014,7 +1014,7 @@ namespace System.Text.Json.Serialization.Metadata
                         parameterTypes: new Type[]
                         {
                             typeof(JsonConverter),
-                            typeof(JsonSerializerOptions)
+                            typeof(JsonSerializerOptions),
                         },
                         parameters: new object[] { converter, options }
                     )!;

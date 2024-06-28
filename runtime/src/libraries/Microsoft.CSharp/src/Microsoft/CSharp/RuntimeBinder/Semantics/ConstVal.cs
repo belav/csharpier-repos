@@ -20,7 +20,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         Decimal,
         IntPtr,
         Float,
-        Boolean
+        Boolean,
     }
 
     internal readonly struct ConstVal

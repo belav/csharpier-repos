@@ -118,7 +118,7 @@ namespace System.Web.Mvc.Test
             var pageAttributes = new Dictionary<string, string> { { "inherits", "foobar<baz>" } };
             var importAttributes = new Dictionary<string, string>
             {
-                { "inherits", "dummyvalue<baz>" }
+                { "inherits", "dummyvalue<baz>" },
             };
             var builder = new MvcBuilder();
 
@@ -194,11 +194,11 @@ namespace System.Web.Mvc.Test
             var filter = new ViewTypeParserFilter();
             var pageAttributes = new Dictionary<string, string>
             {
-                { "inherits", "foobar(of baz)" }
+                { "inherits", "foobar(of baz)" },
             };
             var importAttributes = new Dictionary<string, string>
             {
-                { "inherits", "dummyvalue(of baz)" }
+                { "inherits", "dummyvalue(of baz)" },
             };
             var builder = new MvcBuilder();
 

@@ -212,7 +212,7 @@ class C
                     SymWriterFactory =
                         metadataProvider => new SymUnmanagedWriterWithoutSourceLinkSupport(
                             metadataProvider
-                        )
+                        ),
                 }
             );
 

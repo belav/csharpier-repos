@@ -565,6 +565,6 @@ namespace System.Linq.Expressions.Tests
 
     public enum ConstantsEnum
     {
-        A
+        A,
     }
 }

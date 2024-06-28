@@ -71,7 +71,7 @@ namespace Microsoft.Interop
             return new VariableDeclarations
             {
                 Initializations = initializations.ToImmutable(),
-                Variables = variables.ToImmutable()
+                Variables = variables.ToImmutable(),
             };
 
             static void AppendVariableDeclarations(
@@ -163,7 +163,7 @@ namespace Microsoft.Interop
             return new VariableDeclarations
             {
                 Initializations = initializations.ToImmutable(),
-                Variables = variables.ToImmutable()
+                Variables = variables.ToImmutable(),
             };
 
             static void AppendVariableDeclarations(

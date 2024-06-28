@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.FileProviders
             using var provider = new PhysicalFileProvider(rootOfLink.Path)
             {
                 UsePollingFileWatcher = true,
-                UseActivePolling = true
+                UseActivePolling = true,
             };
             IChangeToken token = provider.Watch(useWildcard ? "*" : linkName);
 
@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.FileProviders
             using var provider = new PhysicalFileProvider(rootOfLink.Path)
             {
                 UsePollingFileWatcher = true,
-                UseActivePolling = true
+                UseActivePolling = true,
             };
             IChangeToken token = provider.Watch(useWildcard ? "*" : linkName);
 
@@ -128,7 +128,7 @@ namespace Microsoft.Extensions.FileProviders
             using var provider = new PhysicalFileProvider(rootOfLink.Path)
             {
                 UsePollingFileWatcher = true,
-                UseActivePolling = true
+                UseActivePolling = true,
             };
             IChangeToken token = provider.Watch(filter);
 
@@ -185,7 +185,7 @@ namespace Microsoft.Extensions.FileProviders
             using var provider = new PhysicalFileProvider(rootOfLink.Path)
             {
                 UsePollingFileWatcher = true,
-                UseActivePolling = true
+                UseActivePolling = true,
             };
             IChangeToken token = provider.Watch(filter);
 

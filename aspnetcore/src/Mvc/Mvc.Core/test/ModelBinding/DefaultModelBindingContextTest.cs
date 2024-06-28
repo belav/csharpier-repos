@@ -160,7 +160,7 @@ public class DefaultModelBindingContextTest
         // Act
         var bindingContext = new DefaultModelBindingContext
         {
-            ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(int))
+            ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(typeof(int)),
         };
 
         // Assert
@@ -176,8 +176,8 @@ public class DefaultModelBindingContextTest
         {
             HttpContext = new DefaultHttpContext()
             {
-                RequestServices = services.BuildServiceProvider()
-            }
+                RequestServices = services.BuildServiceProvider(),
+            },
         };
     }
 

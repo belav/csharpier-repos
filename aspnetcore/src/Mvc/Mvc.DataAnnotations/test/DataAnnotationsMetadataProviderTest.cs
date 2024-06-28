@@ -17,7 +17,7 @@ namespace Microsoft.AspNetCore.Mvc.DataAnnotations;
 public enum TestEnum
 {
     [Display(Name = "DisplayNameValue")]
-    DisplayNameValue
+    DisplayNameValue,
 }
 
 public class DataAnnotationsMetadataProviderTest
@@ -78,7 +78,7 @@ public class DataAnnotationsMetadataProviderTest
                     new DisplayFormatAttribute()
                     {
                         DataFormatString = "{0:G}",
-                        ApplyFormatInEditMode = true
+                        ApplyFormatInEditMode = true,
                     },
                     d => d.EditFormatString,
                     "{0:G}"
@@ -87,7 +87,7 @@ public class DataAnnotationsMetadataProviderTest
                     new DisplayFormatAttribute()
                     {
                         DataFormatString = "{0:G}",
-                        ApplyFormatInEditMode = true
+                        ApplyFormatInEditMode = true,
                     },
                     d => d.EditFormatStringProvider(),
                     "{0:G}"
@@ -96,7 +96,7 @@ public class DataAnnotationsMetadataProviderTest
                     new DisplayFormatAttribute()
                     {
                         DataFormatString = "{0:G}",
-                        ApplyFormatInEditMode = true
+                        ApplyFormatInEditMode = true,
                     },
                     d => d.HasNonDefaultEditFormat,
                     true
@@ -167,7 +167,7 @@ public class DataAnnotationsMetadataProviderTest
         var dataType = new DataTypeAttribute(DataType.Currency);
         var displayFormat = dataType.DisplayFormat; // Non-null for DataType.Currency.
 
-        var attributes = new[] { dataType, };
+        var attributes = new[] { dataType };
         var key = ModelMetadataIdentity.ForType(typeof(string));
         var context = new DisplayMetadataProviderContext(key, GetModelAttributes(attributes));
 
@@ -190,7 +190,7 @@ public class DataAnnotationsMetadataProviderTest
             DataFormatString = "Cool {0}",
         };
 
-        var attributes = new Attribute[] { dataType, displayFormat, };
+        var attributes = new Attribute[] { dataType, displayFormat };
         var key = ModelMetadataIdentity.ForType(typeof(string));
         var context = new DisplayMetadataProviderContext(key, GetModelAttributes(attributes));
 
@@ -670,7 +670,7 @@ public class DataAnnotationsMetadataProviderTest
         {
             Name = "Model_Name",
             Description = "Model_Description",
-            Prompt = "Model_Prompt"
+            Prompt = "Model_Prompt",
         };
 
         var attributes = new Attribute[] { display };
@@ -1858,14 +1858,14 @@ public class DataAnnotationsMetadataProviderTest
             attributes: new List<ValidationAttribute>
             {
                 new RequiredAttribute(),
-                new StringLengthAttribute(5)
+                new StringLengthAttribute(5),
             }
         );
 
         var attributes = new Attribute[]
         {
             new EmailAddressAttribute(),
-            validationProviderAttribute
+            validationProviderAttribute,
         };
         var property = typeof(string).GetProperty(nameof(string.Length));
         var key = ModelMetadataIdentity.ForProperty(property, typeof(int), typeof(string));
@@ -1882,7 +1882,7 @@ public class DataAnnotationsMetadataProviderTest
         {
             new EmailAddressAttribute(),
             new RequiredAttribute(),
-            new StringLengthAttribute(5)
+            new StringLengthAttribute(5),
         };
 
         Assert.Equal(expected, actual: context.ValidationMetadata.ValidatorMetadata);
@@ -2263,7 +2263,7 @@ public class DataAnnotationsMetadataProviderTest
             Name = nameof(TestResources.Type_Three_Name),
             ResourceType = typeof(TestResources)
         )]
-        Three = 3
+        Three = 3,
     }
 
     private enum EmptyEnum { }

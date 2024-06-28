@@ -336,7 +336,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         MakeCollectionInitializer(rewrittenReceiver, collectionInitializer),
                     BoundDynamicCollectionElementInitializer dynamicInitializer =>
                         MakeDynamicCollectionInitializer(rewrittenReceiver, dynamicInitializer),
-                    var e => throw ExceptionUtilities.UnexpectedValue(e)
+                    var e => throw ExceptionUtilities.UnexpectedValue(e),
                 };
             }
         }
@@ -414,7 +414,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         fieldValue
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             }
@@ -589,7 +589,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 );
                 var assignment = new BoundAssignmentOperator(syntax, call, element, type: call.Type)
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 sideEffects.Add(assignment);
             }
@@ -712,7 +712,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     arrayType
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
 

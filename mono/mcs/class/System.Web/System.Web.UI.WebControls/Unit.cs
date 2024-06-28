@@ -44,7 +44,7 @@ namespace System.Web.UI.WebControls
             SignOrSep,
             DigitOrSep,
             DigitOrUnit,
-            Unit
+            Unit,
         }
 
         UnitType type;

@@ -186,7 +186,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(g => new
                     {
                         City = g.Key,
-                        Customers = string.Join("|", g.Select(e => e.CustomerID))
+                        Customers = string.Join("|", g.Select(e => e.CustomerID)),
                     }),
             elementSorter: x => x.City,
             elementAsserter: (e, a) =>
@@ -215,7 +215,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                         Customers = string.Join(
                             "|",
                             g.Where(e => e.ContactName.Length > 10).Select(e => e.CustomerID)
-                        )
+                        ),
                     }),
             elementSorter: x => x.City,
             elementAsserter: (e, a) =>
@@ -244,7 +244,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                         Customers = string.Join(
                             "|",
                             g.OrderByDescending(e => e.CustomerID).Select(e => e.CustomerID)
-                        )
+                        ),
                     }),
             elementSorter: x => x.City
         );
@@ -260,7 +260,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(g => new
                     {
                         City = g.Key,
-                        Regions = string.Join("|", g.Select(e => e.Region))
+                        Regions = string.Join("|", g.Select(e => e.Region)),
                     }),
             elementSorter: x => x.City,
             elementAsserter: (e, a) =>
@@ -286,7 +286,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(g => new
                     {
                         City = g.Key,
-                        Customers = string.Concat(g.Select(e => e.CustomerID))
+                        Customers = string.Concat(g.Select(e => e.CustomerID)),
                     }),
             elementSorter: x => x.City,
             elementAsserter: (e, a) =>
@@ -1037,7 +1037,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(o => new
                     {
                         o.OrderID,
-                        Sum = o.OrderDetails.Sum(i => Math.Round(i.UnitPrice, 2))
+                        Sum = o.OrderDetails.Sum(i => Math.Round(i.UnitPrice, 2)),
                     }),
             elementSorter: e => e.OrderID,
             elementAsserter: (e, a) =>
@@ -1060,7 +1060,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                         o.OrderID,
                         Sum = o
                             .OrderDetails.Select(i => i.UnitPrice * i.UnitPrice)
-                            .Sum(i => Math.Round(i, 2))
+                            .Sum(i => Math.Round(i, 2)),
                     }),
             elementSorter: e => e.OrderID,
             elementAsserter: (e, a) =>
@@ -1081,7 +1081,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(o => new
                     {
                         o.OrderID,
-                        Sum = o.OrderDetails.Sum(i => Math.Truncate(i.UnitPrice))
+                        Sum = o.OrderDetails.Sum(i => Math.Truncate(i.UnitPrice)),
                     }),
             elementSorter: e => e.OrderID,
             elementAsserter: (e, a) =>
@@ -1104,7 +1104,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                         o.OrderID,
                         Sum = o
                             .OrderDetails.Select(i => i.UnitPrice * i.UnitPrice)
-                            .Sum(i => Math.Truncate(i))
+                            .Sum(i => Math.Truncate(i)),
                     }),
             elementSorter: e => e.OrderID,
             elementAsserter: (e, a) =>
@@ -1714,7 +1714,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToByte(Convert.ToInt16(o.OrderID % 1)) >= 0,
             o => Convert.ToByte(Convert.ToInt32(o.OrderID % 1)) >= 0,
             o => Convert.ToByte(Convert.ToInt64(o.OrderID % 1)) >= 0,
-            o => Convert.ToByte(Convert.ToString(o.OrderID % 1)) >= 0
+            o => Convert.ToByte(Convert.ToString(o.OrderID % 1)) >= 0,
         };
 
         foreach (var convertMethod in convertMethods)
@@ -1740,7 +1740,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToDecimal(Convert.ToInt16(o.OrderID % 1)) >= 0,
             o => Convert.ToDecimal(Convert.ToInt32(o.OrderID % 1)) >= 0,
             o => Convert.ToDecimal(Convert.ToInt64(o.OrderID % 1)) >= 0,
-            o => Convert.ToDecimal(Convert.ToString(o.OrderID % 1)) >= 0
+            o => Convert.ToDecimal(Convert.ToString(o.OrderID % 1)) >= 0,
         };
 
         foreach (var convertMethod in convertMethods)
@@ -1766,7 +1766,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToDouble(Convert.ToInt16(o.OrderID % 1)) >= 0,
             o => Convert.ToDouble(Convert.ToInt32(o.OrderID % 1)) >= 0,
             o => Convert.ToDouble(Convert.ToInt64(o.OrderID % 1)) >= 0,
-            o => Convert.ToDouble(Convert.ToString(o.OrderID % 1)) >= 0
+            o => Convert.ToDouble(Convert.ToString(o.OrderID % 1)) >= 0,
         };
 
         foreach (var convertMethod in convertMethods)
@@ -1792,7 +1792,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToInt16(Convert.ToInt16(o.OrderID % 1)) >= 0,
             o => Convert.ToInt16(Convert.ToInt32(o.OrderID % 1)) >= 0,
             o => Convert.ToInt16(Convert.ToInt64(o.OrderID % 1)) >= 0,
-            o => Convert.ToInt16(Convert.ToString(o.OrderID % 1)) >= 0
+            o => Convert.ToInt16(Convert.ToString(o.OrderID % 1)) >= 0,
         };
 
         foreach (var convertMethod in convertMethods)
@@ -1818,7 +1818,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToInt32(Convert.ToInt16(o.OrderID % 1)) >= 0,
             o => Convert.ToInt32(Convert.ToInt32(o.OrderID % 1)) >= 0,
             o => Convert.ToInt32(Convert.ToInt64(o.OrderID % 1)) >= 0,
-            o => Convert.ToInt32(Convert.ToString(o.OrderID % 1)) >= 0
+            o => Convert.ToInt32(Convert.ToString(o.OrderID % 1)) >= 0,
         };
 
         foreach (var convertMethod in convertMethods)
@@ -1844,7 +1844,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToInt64(Convert.ToInt16(o.OrderID % 1)) >= 0,
             o => Convert.ToInt64(Convert.ToInt32(o.OrderID % 1)) >= 0,
             o => Convert.ToInt64(Convert.ToInt64(o.OrderID % 1)) >= 0,
-            o => Convert.ToInt64(Convert.ToString(o.OrderID % 1)) >= 0
+            o => Convert.ToInt64(Convert.ToString(o.OrderID % 1)) >= 0,
         };
 
         foreach (var convertMethod in convertMethods)
@@ -1873,7 +1873,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
             o => Convert.ToString(Convert.ToString(o.OrderID % 1)) != "10",
             o =>
                 Convert.ToString(o.OrderDate.Value).Contains("1997")
-                || Convert.ToString(o.OrderDate.Value).Contains("1998")
+                || Convert.ToString(o.OrderDate.Value).Contains("1998"),
         };
 
         foreach (var convertMethod in convertMethods)
@@ -2074,7 +2074,7 @@ public abstract class NorthwindFunctionsQueryTestBase<TFixture> : QueryTestBase<
                     .Select(c => new
                     {
                         Id = c.CustomerID,
-                        Value = !string.IsNullOrEmpty(c.Region)
+                        Value = !string.IsNullOrEmpty(c.Region),
                     }),
             elementSorter: e => e.Id
         );

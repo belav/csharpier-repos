@@ -34,6 +34,6 @@ namespace Microsoft.Build.Utilities
         UseHostObjectToExecute,
         UseAlternateToolToExecute,
         NoActionReturnSuccess,
-        NoActionReturnFailure
+        NoActionReturnFailure,
     }
 }

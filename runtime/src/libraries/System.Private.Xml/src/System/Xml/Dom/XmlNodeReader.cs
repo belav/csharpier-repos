@@ -58,13 +58,13 @@ namespace System.Xml
         {
             new VirtualAttribute(null, null),
             new VirtualAttribute(null, null),
-            new VirtualAttribute(null, null)
+            new VirtualAttribute(null, null),
         };
 
         internal VirtualAttribute[] docTypeNodeAttributes =
         {
             new VirtualAttribute(null, null),
-            new VirtualAttribute(null, null)
+            new VirtualAttribute(null, null),
         };
 
         private bool _bOnAttrVal;
@@ -529,10 +529,12 @@ namespace System.Xml
             {
                 XmlNodeType.Element => GetAttributeFromElement((XmlElement)_curNode, name, ns),
                 XmlNodeType.Attribute => GetAttributeFromElement((XmlElement)_elemNode!, name, ns),
-                XmlNodeType.XmlDeclaration =>
-                    (ns.Length == 0) ? GetDeclarationAttr((XmlDeclaration)_curNode, name) : null,
-                XmlNodeType.DocumentType =>
-                    (ns.Length == 0) ? GetDocumentTypeAttr((XmlDocumentType)_curNode, name) : null,
+                XmlNodeType.XmlDeclaration => (ns.Length == 0)
+                    ? GetDeclarationAttr((XmlDeclaration)_curNode, name)
+                    : null,
+                XmlNodeType.DocumentType => (ns.Length == 0)
+                    ? GetDocumentTypeAttr((XmlDocumentType)_curNode, name)
+                    : null,
                 _ => null,
             };
         }

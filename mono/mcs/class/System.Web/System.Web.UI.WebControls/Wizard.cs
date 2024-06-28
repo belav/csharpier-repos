@@ -1362,7 +1362,7 @@ namespace System.Web.UI.WebControls
                     ButtonType.Link,
                     causesValidation,
                     validationGroup
-                )
+                ),
             };
         }
 

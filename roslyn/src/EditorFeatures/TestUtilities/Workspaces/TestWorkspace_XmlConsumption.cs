@@ -367,11 +367,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 filePath =
                     projectName
                     + (
-                        language == LanguageNames.CSharp
-                            ? ".csproj"
-                            : language == LanguageNames.VisualBasic
-                                ? ".vbproj"
-                                : ("." + language)
+                        language == LanguageNames.CSharp ? ".csproj"
+                        : language == LanguageNames.VisualBasic ? ".vbproj"
+                        : ("." + language)
                     );
             }
 
@@ -688,11 +686,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
             var language = GetLanguage(workspace, projectElement);
 
             projectId++;
-            return language == LanguageNames.CSharp
-                ? "CSharpAssembly" + projectId
-                : language == LanguageNames.VisualBasic
-                    ? "VisualBasicAssembly" + projectId
-                    : language + "Assembly" + projectId;
+            return language == LanguageNames.CSharp ? "CSharpAssembly" + projectId
+                : language == LanguageNames.VisualBasic ? "VisualBasicAssembly" + projectId
+                : language + "Assembly" + projectId;
         }
 
         private static string GetLanguage(TestWorkspace workspace, XElement projectElement)
@@ -1417,7 +1413,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     TestBase.MscorlibRef_v4_0_30316_17626,
                     TestBase.SystemRef_v4_0_30319_17929,
                     TestBase.SystemCoreRef_v4_0_30319_17929,
-                    TestBase.SystemRuntimeSerializationRef_v4_0_30319_17929
+                    TestBase.SystemRuntimeSerializationRef_v4_0_30319_17929,
                 };
                 if (GetLanguage(workspace, element) == LanguageNames.VisualBasic)
                 {
@@ -1440,7 +1436,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                     TestBase.SystemRef_v46,
                     TestBase.SystemCoreRef_v46,
                     TestBase.ValueTupleRef,
-                    TestBase.SystemRuntimeFacadeRef
+                    TestBase.SystemRuntimeFacadeRef,
                 };
                 if (GetLanguage(workspace, element) == LanguageNames.VisualBasic)
                 {
@@ -1463,7 +1459,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
                 {
                     TestBase.MscorlibRef_v46,
                     TestBase.SystemRef_v46,
-                    TestBase.SystemCoreRef_v46
+                    TestBase.SystemCoreRef_v46,
                 };
             }
 

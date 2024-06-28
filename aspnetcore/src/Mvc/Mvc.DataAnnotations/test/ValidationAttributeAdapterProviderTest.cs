@@ -28,7 +28,7 @@ public class ValidationAttributeAdapterProviderTest
                 {
                     new CustomRegularExpressionAttribute("abc"),
                     typeof(RegularExpressionAttributeAdapter)
-                }
+                },
             };
         }
     }
@@ -59,7 +59,7 @@ public class ValidationAttributeAdapterProviderTest
                 { new UrlAttribute(), "data-val-url" },
                 { new CreditCardAttribute(), "data-val-creditcard" },
                 { new EmailAddressAttribute(), "data-val-email" },
-                { new PhoneAttribute(), "data-val-phone" }
+                { new PhoneAttribute(), "data-val-phone" },
             };
         }
     }

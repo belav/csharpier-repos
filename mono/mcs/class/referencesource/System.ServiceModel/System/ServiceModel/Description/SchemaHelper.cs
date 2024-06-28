@@ -230,7 +230,7 @@ namespace System.ServiceModel.Description
             "integer",
             "positiveInteger",
             "negativeInteger",
-            "nonPositiveInteger"
+            "nonPositiveInteger",
         };
 
         static IList<string> dataContractPrimitives = new string[] { "char", "guid" };

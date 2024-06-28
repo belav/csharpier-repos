@@ -104,7 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                     }
                     """,
                 CodeActionIndex = 1,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -202,7 +202,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Confusing
                                     }
                                 }
                             }
-                            """
+                            """,
                     },
                 },
                 CodeActionIndex = 1,

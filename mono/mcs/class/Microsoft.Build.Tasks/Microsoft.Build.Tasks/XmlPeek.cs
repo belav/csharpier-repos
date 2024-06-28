@@ -400,7 +400,7 @@ namespace Microsoft.Build.Tasks
                 /// <summary>
                 /// If the mode is a raw XML.
                 /// </summary>
-                Xml
+                Xml,
             }
 
             /// <summary>

@@ -44,7 +44,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Area = e.Polygon == null ? (double?)null : e.Polygon.Area
+                        Area = e.Polygon == null ? (double?)null : e.Polygon.Area,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -73,7 +73,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Binary = e.Point == null ? null : e.Point.AsBinary()
+                        Binary = e.Point == null ? null : e.Point.AsBinary(),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -93,7 +93,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Binary = e.Point == null ? null : e.Point.AsBinary()
+                        Binary = e.Point == null ? null : e.Point.AsBinary(),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -130,7 +130,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Boundary = e.Polygon == null ? null : e.Polygon.Boundary
+                        Boundary = e.Polygon == null ? null : e.Polygon.Boundary,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -151,7 +151,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Buffer = e.Polygon == null ? null : e.Polygon.Buffer(1.0)
+                        Buffer = e.Polygon == null ? null : e.Polygon.Buffer(1.0),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -183,7 +183,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Buffer = e.Polygon == null ? null : e.Polygon.Buffer(1.0, 8)
+                        Buffer = e.Polygon == null ? null : e.Polygon.Buffer(1.0, 8),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -212,7 +212,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Centroid = e.Polygon == null ? null : e.Polygon.Centroid
+                        Centroid = e.Polygon == null ? null : e.Polygon.Centroid,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -234,7 +234,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(g => new
                     {
                         Id = g.Key,
-                        Combined = GeometryCombiner.Combine(g.Select(e => e.Point))
+                        Combined = GeometryCombiner.Combine(g.Select(e => e.Point)),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -262,7 +262,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(g => new
                     {
                         Id = g.Key,
-                        Combined = EnvelopeCombiner.CombineAsGeometry(g.Select(e => e.Point))
+                        Combined = EnvelopeCombiner.CombineAsGeometry(g.Select(e => e.Point)),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -288,7 +288,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Contains = e.Polygon == null ? (bool?)null : e.Polygon.Contains(point)
+                        Contains = e.Polygon == null ? (bool?)null : e.Polygon.Contains(point),
                     }),
             elementSorter: x => x.Id
         );
@@ -307,7 +307,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        ConvexHull = e.Polygon == null ? null : e.Polygon.ConvexHull()
+                        ConvexHull = e.Polygon == null ? null : e.Polygon.ConvexHull(),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -331,7 +331,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         Id = g.Key,
                         ConvexHull = NetTopologySuite.Algorithm.ConvexHull.Create(
                             g.Select(e => e.Point)
-                        )
+                        ),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -351,7 +351,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Count = e.MultiLineString == null ? (int?)null : e.MultiLineString.Count
+                        Count = e.MultiLineString == null ? (int?)null : e.MultiLineString.Count,
                     }),
             elementSorter: x => x.Id
         );
@@ -366,7 +366,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Count = e.LineString == null ? (int?)null : e.LineString.Count
+                        Count = e.LineString == null ? (int?)null : e.LineString.Count,
                     }),
             elementSorter: x => x.Id
         );
@@ -382,7 +382,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(2, -1),
                 new Coordinate(2, 2),
                 new Coordinate(-1, 2),
-                new Coordinate(-1, -1)
+                new Coordinate(-1, -1),
             }
         );
 
@@ -396,7 +396,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        CoveredBy = e.Point == null ? (bool?)null : e.Point.CoveredBy(polygon)
+                        CoveredBy = e.Point == null ? (bool?)null : e.Point.CoveredBy(polygon),
                     }),
             elementSorter: x => x.Id
         );
@@ -418,7 +418,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Covers = e.Polygon == null ? (bool?)null : e.Polygon.Covers(point)
+                        Covers = e.Polygon == null ? (bool?)null : e.Polygon.Covers(point),
                     }),
             elementSorter: x => x.Id
         );
@@ -444,7 +444,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Crosses = e.LineString == null
                             ? (bool?)null
-                            : e.LineString.Crosses(lineString)
+                            : e.LineString.Crosses(lineString),
                     }),
             elementSorter: x => x.Id
         );
@@ -460,7 +460,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 0),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 0)
+                new Coordinate(0, 0),
             }
         );
 
@@ -474,7 +474,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Difference = e.Polygon == null ? null : e.Polygon.Difference(polygon)
+                        Difference = e.Polygon == null ? null : e.Polygon.Difference(polygon),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -495,7 +495,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Dimension = e.Point == null ? (Dimension?)null : e.Point.Dimension
+                        Dimension = e.Point == null ? (Dimension?)null : e.Point.Dimension,
                     }),
             elementSorter: x => x.Id
         );
@@ -516,7 +516,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Disjoint = e.Polygon == null ? (bool?)null : e.Polygon.Disjoint(point)
+                        Disjoint = e.Polygon == null ? (bool?)null : e.Polygon.Disjoint(point),
                     }),
             elementSorter: x => x.Id
         );
@@ -535,7 +535,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Disjoint = e.Polygon == null ? (bool?)null : e.Polygon.Disjoint(point)
+                        Disjoint = e.Polygon == null ? (bool?)null : e.Polygon.Disjoint(point),
                     }),
             elementSorter: x => x.Id
         );
@@ -557,7 +557,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = (e.Point == null ? (double?)null : e.Point.Distance(point))
+                        Distance = (e.Point == null ? (double?)null : e.Point.Distance(point)),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -592,7 +592,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = e.Point == null ? (double?)null : e.Point.Distance(point)
+                        Distance = e.Point == null ? (double?)null : e.Point.Distance(point),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -627,7 +627,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = e.Geometry == null ? (double?)null : e.Geometry.Distance(point)
+                        Distance = e.Geometry == null ? (double?)null : e.Geometry.Distance(point),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -656,7 +656,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = (double?)e.Point.Distance(new Point(0, 1))
+                        Distance = (double?)e.Point.Distance(new Point(0, 1)),
                     }),
             ss =>
                 ss.Set<PointEntity>()
@@ -665,7 +665,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Distance = e.Point == null
                             ? (double?)null
-                            : e.Point.Distance(new Point(0, 1))
+                            : e.Point.Distance(new Point(0, 1)),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -693,7 +693,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = (double?)e.Point.Distance(new Point(1, 1) { SRID = 4326 })
+                        Distance = (double?)e.Point.Distance(new Point(1, 1) { SRID = 4326 }),
                     }),
             ss =>
                 ss.Set<PointEntity>()
@@ -702,7 +702,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Distance = e.Point == null
                             ? (double?)null
-                            : e.Point.Distance(new Point(1, 1) { SRID = 4326 })
+                            : e.Point.Distance(new Point(1, 1) { SRID = 4326 }),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -730,7 +730,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = (double?)new Point(0, 1).Distance(e.Point)
+                        Distance = (double?)new Point(0, 1).Distance(e.Point),
                     }),
             ss =>
                 ss.Set<PointEntity>()
@@ -739,7 +739,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Distance = e.Point == null
                             ? (double?)null
-                            : new Point(0, 1).Distance(e.Point)
+                            : new Point(0, 1).Distance(e.Point),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -843,7 +843,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        EndPoint = e.LineString == null ? null : e.LineString.EndPoint
+                        EndPoint = e.LineString == null ? null : e.LineString.EndPoint,
                     }),
             elementSorter: e => e.Id
         );
@@ -858,7 +858,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Envelope = e.Polygon == null ? null : e.Polygon.Envelope
+                        Envelope = e.Polygon == null ? null : e.Polygon.Envelope,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -881,7 +881,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        EqualsTopologically = (bool?)e.Point.EqualsTopologically(point)
+                        EqualsTopologically = (bool?)e.Point.EqualsTopologically(point),
                     }),
             ss =>
                 ss.Set<PointEntity>()
@@ -890,7 +890,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         EqualsTopologically = e.Point == null
                             ? (bool?)null
-                            : e.Point.EqualsTopologically(point)
+                            : e.Point.EqualsTopologically(point),
                     }),
             elementSorter: x => x.Id
         );
@@ -906,7 +906,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        ExteriorRing = e.Polygon == null ? null : e.Polygon.ExteriorRing
+                        ExteriorRing = e.Polygon == null ? null : e.Polygon.ExteriorRing,
                     }),
             elementSorter: x => x.Id
         );
@@ -921,7 +921,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        GeometryType = e.Point == null ? null : e.Point.GeometryType
+                        GeometryType = e.Point == null ? null : e.Point.GeometryType,
                     }),
             elementSorter: x => x.Id
         );
@@ -941,7 +941,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Geometry0 = e.MultiLineString == null
                             ? null
-                            : e.MultiLineString.GetGeometryN(0)
+                            : e.MultiLineString.GetGeometryN(0),
                     }),
             elementSorter: x => x.Id
         );
@@ -958,7 +958,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Geometry0 = e.MultiLineString.GetGeometryN(
                             ss.Set<MultiLineStringEntity>().Where(ee => false).Max(ee => ee.Id)
-                        )
+                        ),
                     }),
             ss =>
                 ss.Set<MultiLineStringEntity>()
@@ -978,7 +978,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         InteriorRing0 = e.Polygon.NumInteriorRings == 0
                             ? null
-                            : e.Polygon.GetInteriorRingN(0)
+                            : e.Polygon.GetInteriorRingN(0),
                     }),
             ss =>
                 ss.Set<PolygonEntity>()
@@ -987,7 +987,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         InteriorRing0 = e.Polygon == null || e.Polygon.NumInteriorRings == 0
                             ? null
-                            : e.Polygon.GetInteriorRingN(0)
+                            : e.Polygon.GetInteriorRingN(0),
                     }),
             elementSorter: x => x.Id
         );
@@ -1005,7 +1005,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Point0 = e.LineString == null ? null : e.LineString.GetPointN(0)
+                        Point0 = e.LineString == null ? null : e.LineString.GetPointN(0),
                     }),
             elementSorter: x => x.Id
         );
@@ -1021,7 +1021,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         e.Id,
                         InteriorPoint = e.Polygon == null ? null : e.Polygon.InteriorPoint,
-                        e.Polygon
+                        e.Polygon,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1049,7 +1049,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 0),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 0)
+                new Coordinate(0, 0),
             }
         );
 
@@ -1063,7 +1063,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Intersection = e.Polygon == null ? null : e.Polygon.Intersection(polygon)
+                        Intersection = e.Polygon == null ? null : e.Polygon.Intersection(polygon),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1089,7 +1089,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Intersects = (bool?)e.LineString.Intersects(lineString)
+                        Intersects = (bool?)e.LineString.Intersects(lineString),
                     }),
             ss =>
                 ss.Set<LineStringEntity>()
@@ -1098,7 +1098,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Intersects = e.LineString == null
                             ? (bool?)null
-                            : e.LineString.Intersects(lineString)
+                            : e.LineString.Intersects(lineString),
                     }),
             elementSorter: x => x.Id
         );
@@ -1114,7 +1114,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        IsClosed = e.LineString == null ? (bool?)null : e.LineString.IsClosed
+                        IsClosed = e.LineString == null ? (bool?)null : e.LineString.IsClosed,
                     }),
             elementSorter: x => x.Id
         );
@@ -1131,7 +1131,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         IsClosed = e.MultiLineString == null
                             ? (bool?)null
-                            : e.MultiLineString.IsClosed
+                            : e.MultiLineString.IsClosed,
                     }),
             elementSorter: x => x.Id
         );
@@ -1148,7 +1148,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         IsEmpty = e.MultiLineString == null
                             ? (bool?)null
-                            : e.MultiLineString.IsEmpty
+                            : e.MultiLineString.IsEmpty,
                     }),
             elementSorter: x => x.Id
         );
@@ -1163,7 +1163,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        IsRing = e.LineString == null ? (bool?)null : e.LineString.IsRing
+                        IsRing = e.LineString == null ? (bool?)null : e.LineString.IsRing,
                     }),
             elementSorter: x => x.Id
         );
@@ -1178,7 +1178,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        IsSimple = e.LineString == null ? (bool?)null : e.LineString.IsSimple
+                        IsSimple = e.LineString == null ? (bool?)null : e.LineString.IsSimple,
                     }),
             elementSorter: x => x.Id
         );
@@ -1193,7 +1193,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        IsValid = e.Point == null ? (bool?)null : e.Point.IsValid
+                        IsValid = e.Point == null ? (bool?)null : e.Point.IsValid,
                     }),
             elementSorter: x => x.Id
         );
@@ -1211,7 +1211,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        IsWithinDistance = (bool?)e.Point.IsWithinDistance(point, 1)
+                        IsWithinDistance = (bool?)e.Point.IsWithinDistance(point, 1),
                     }),
             ss =>
                 ss.Set<PointEntity>()
@@ -1220,7 +1220,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         IsWithinDistance = e.Point == null
                             ? (bool?)null
-                            : e.Point.IsWithinDistance(point, 1)
+                            : e.Point.IsWithinDistance(point, 1),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -1252,7 +1252,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Item0 = e.MultiLineString == null ? null : e.MultiLineString[0]
+                        Item0 = e.MultiLineString == null ? null : e.MultiLineString[0],
                     }),
             elementSorter: x => x.Id
         );
@@ -1267,7 +1267,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Length = e.LineString == null ? (double?)null : e.LineString.Length
+                        Length = e.LineString == null ? (double?)null : e.LineString.Length,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1322,7 +1322,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Normalized = e.Polygon == null ? null : e.Polygon.Normalized()
+                        Normalized = e.Polygon == null ? null : e.Polygon.Normalized(),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1344,7 +1344,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         NumGeometries = e.MultiLineString == null
                             ? (int?)null
-                            : e.MultiLineString.NumGeometries
+                            : e.MultiLineString.NumGeometries,
                     }),
             elementSorter: x => x.Id
         );
@@ -1361,7 +1361,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         NumInteriorRings = e.Polygon == null
                             ? (int?)null
-                            : e.Polygon.NumInteriorRings
+                            : e.Polygon.NumInteriorRings,
                     }),
             elementSorter: x => x.Id
         );
@@ -1376,7 +1376,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        NumPoints = e.LineString == null ? (int?)null : e.LineString.NumPoints
+                        NumPoints = e.LineString == null ? (int?)null : e.LineString.NumPoints,
                     }),
             elementSorter: x => x.Id
         );
@@ -1393,7 +1393,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         OgcGeometryType = e.Point == null
                             ? (OgcGeometryType?)null
-                            : e.Point.OgcGeometryType
+                            : e.Point.OgcGeometryType,
                     }),
             elementSorter: x => x.Id
         );
@@ -1408,7 +1408,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 0),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 0)
+                new Coordinate(0, 0),
             }
         );
 
@@ -1422,7 +1422,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Overlaps = e.Polygon == null ? (bool?)null : e.Polygon.Overlaps(polygon)
+                        Overlaps = e.Polygon == null ? (bool?)null : e.Polygon.Overlaps(polygon),
                     }),
             elementSorter: x => x.Id
         );
@@ -1439,7 +1439,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         e.Id,
                         PointOnSurface = e.Polygon == null ? null : e.Polygon.PointOnSurface,
-                        e.Polygon
+                        e.Polygon,
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1467,7 +1467,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 0),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 0)
+                new Coordinate(0, 0),
             }
         );
 
@@ -1478,7 +1478,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Relate = (bool?)e.Polygon.Relate(polygon, "212111212")
+                        Relate = (bool?)e.Polygon.Relate(polygon, "212111212"),
                     }),
             ss =>
                 ss.Set<PolygonEntity>()
@@ -1487,7 +1487,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         Relate = e.Polygon == null
                             ? (bool?)null
-                            : e.Polygon.Relate(polygon, "212111212")
+                            : e.Polygon.Relate(polygon, "212111212"),
                     }),
             elementSorter: x => x.Id
         );
@@ -1506,7 +1506,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Reverse = e.LineString == null ? null : e.LineString.Reverse()
+                        Reverse = e.LineString == null ? null : e.LineString.Reverse(),
                     }),
             elementSorter: x => x.Id
         );
@@ -1532,7 +1532,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        SRID = e.Geometry == null ? (int?)null : e.Geometry.SRID
+                        SRID = e.Geometry == null ? (int?)null : e.Geometry.SRID,
                     }),
             elementSorter: x => x.Id
         );
@@ -1547,7 +1547,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        StartPoint = e.LineString == null ? null : e.LineString.StartPoint
+                        StartPoint = e.LineString == null ? null : e.LineString.StartPoint,
                     }),
             elementSorter: x => x.Id
         );
@@ -1562,7 +1562,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 0),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 0)
+                new Coordinate(0, 0),
             }
         );
 
@@ -1573,7 +1573,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        SymmetricDifference = e.Polygon.SymmetricDifference(polygon)
+                        SymmetricDifference = e.Polygon.SymmetricDifference(polygon),
                     }),
             ss =>
                 ss.Set<PolygonEntity>()
@@ -1582,7 +1582,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         e.Id,
                         SymmetricDifference = e.Polygon == null
                             ? null
-                            : e.Polygon.SymmetricDifference(polygon)
+                            : e.Polygon.SymmetricDifference(polygon),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1608,7 +1608,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Binary = e.Point == null ? null : e.Point.ToBinary()
+                        Binary = e.Point == null ? null : e.Point.ToBinary(),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -1645,7 +1645,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 1),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 1)
+                new Coordinate(0, 1),
             }
         );
 
@@ -1659,7 +1659,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Touches = e.Polygon == null ? (bool?)null : e.Polygon.Touches(polygon)
+                        Touches = e.Polygon == null ? (bool?)null : e.Polygon.Touches(polygon),
                     }),
             elementSorter: x => x.Id
         );
@@ -1675,7 +1675,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(0, 0),
                 new Coordinate(1, 0),
                 new Coordinate(1, 1),
-                new Coordinate(0, 0)
+                new Coordinate(0, 0),
             }
         );
 
@@ -1688,7 +1688,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Union = e.Polygon == null ? null : e.Polygon.Union(polygon)
+                        Union = e.Polygon == null ? null : e.Polygon.Union(polygon),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1711,7 +1711,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(g => new
                     {
                         Id = g.Key,
-                        Union = UnaryUnionOp.Union(g.Select(e => e.Point))
+                        Union = UnaryUnionOp.Union(g.Select(e => e.Point)),
                     }),
             elementSorter: x => x.Id,
             elementAsserter: (e, a) =>
@@ -1734,7 +1734,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Union = e.MultiLineString == null ? null : e.MultiLineString.Union()
+                        Union = e.MultiLineString == null ? null : e.MultiLineString.Union(),
                     }),
             elementSorter: x => x.Id
         );
@@ -1750,7 +1750,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 new Coordinate(2, -1),
                 new Coordinate(2, 2),
                 new Coordinate(-1, 2),
-                new Coordinate(-1, -1)
+                new Coordinate(-1, -1),
             }
         );
 
@@ -1764,7 +1764,7 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(e => new
                     {
                         e.Id,
-                        Within = e.Point == null ? (bool?)null : e.Point.Within(polygon)
+                        Within = e.Point == null ? (bool?)null : e.Point.Within(polygon),
                     }),
             elementSorter: x => x.Id
         );
@@ -1830,9 +1830,9 @@ public abstract class SpatialQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         I = new
                         {
                             X = e.Point == null ? (double?)null : e.Point.X,
-                            Y = e.Point == null ? (double?)null : e.Point.Y
+                            Y = e.Point == null ? (double?)null : e.Point.Y,
                         },
-                        List = ss.Set<PointEntity>().Where(i => i.Id == e.Id).ToList()
+                        List = ss.Set<PointEntity>().Where(i => i.Id == e.Id).ToList(),
                     }),
             asserter: (e, a) =>
             {

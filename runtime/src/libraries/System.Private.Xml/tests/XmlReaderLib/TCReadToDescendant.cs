@@ -19,8 +19,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Simple positive test")
                         {
                             Params = new object[] { "NNS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
                 this.AddChild(
@@ -29,8 +29,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Simple positive test")
                         {
                             Params = new object[] { "NS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
                 this.AddChild(
@@ -39,8 +39,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Simple positive test")
                         {
                             Params = new object[] { "DNS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -54,8 +54,8 @@ namespace System.Xml.Tests
                             "Read on a deep tree at least more than 4K boundary"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -69,8 +69,8 @@ namespace System.Xml.Tests
                             "Read on a deep tree at least more than 65535 boundary"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -83,8 +83,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Read on descendant with same names")
                         {
                             Params = new object[] { "DNS" },
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -93,8 +93,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Read on descendant with same names")
                         {
                             Params = new object[] { "NS" },
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -103,8 +103,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("Read on descendant with same names")
                         {
                             Params = new object[] { "NNS" },
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -118,8 +118,8 @@ namespace System.Xml.Tests
                             "If name not found, stop at end element of the subtree"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -133,8 +133,8 @@ namespace System.Xml.Tests
                             "Positioning on a level and try to find the name which is on a level higher"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -148,8 +148,8 @@ namespace System.Xml.Tests
                             "Read to Descendant on one level and again to level below it"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -163,8 +163,8 @@ namespace System.Xml.Tests
                             "Read to Descendant on one level and again to level below it, with namespace"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -178,8 +178,8 @@ namespace System.Xml.Tests
                             "Read to Descendant on one level and again to level below it, with prefix"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -193,8 +193,8 @@ namespace System.Xml.Tests
                             "Multiple Reads to children and then next siblings, NNS"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -208,8 +208,8 @@ namespace System.Xml.Tests
                             "Multiple Reads to children and then next siblings, DNS"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -223,8 +223,8 @@ namespace System.Xml.Tests
                             "Multiple Reads to children and then next siblings, NS"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -234,7 +234,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v12)
                     {
-                        Attribute = new Variation("Call from different nodetypes") { Pri = 1 }
+                        Attribute = new Variation("Call from different nodetypes") { Pri = 1 },
                     }
                 );
             }
@@ -244,7 +244,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v13)
                     {
-                        Attribute = new Variation("Interaction with MoveToContent") { Pri = 2 }
+                        Attribute = new Variation("Interaction with MoveToContent") { Pri = 2 },
                     }
                 );
             }
@@ -256,8 +256,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Only child has namespaces and read to it")
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -271,8 +271,8 @@ namespace System.Xml.Tests
                             "Pass null to both arguments throws ArgumentException"
                         )
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -284,8 +284,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Different names, same uri works correctly")
                         {
-                            Pri = 2
-                        }
+                            Pri = 2,
+                        },
                     }
                 );
             }
@@ -298,8 +298,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("On Root Node")
                         {
                             Params = new object[] { "DNS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
                 this.AddChild(
@@ -308,8 +308,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("On Root Node")
                         {
                             Params = new object[] { "NNS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
                 this.AddChild(
@@ -318,8 +318,8 @@ namespace System.Xml.Tests
                         Attribute = new Variation("On Root Node")
                         {
                             Params = new object[] { "NS" },
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -333,8 +333,8 @@ namespace System.Xml.Tests
                             "427176	Assertion failed when call XmlReader.ReadToDescendant() for non-existing node"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }

@@ -130,7 +130,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                             ? existingCommentText
                             : $" {existingCommentText}"
                     ),
-                "/// </summary>"
+                "/// </summary>",
             };
 
             var typeParameterList = member.GetTypeParameterList();
@@ -204,7 +204,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DocumentationComments
                 {
                     ThrowExpressionSyntax throwExpression => throwExpression.Expression,
                     ThrowStatementSyntax throwStatement => throwStatement.Expression,
-                    _ => throw ExceptionUtilities.Unreachable()
+                    _ => throw ExceptionUtilities.Unreachable(),
                 };
 
                 if (expression.IsKind(SyntaxKind.NullLiteralExpression))

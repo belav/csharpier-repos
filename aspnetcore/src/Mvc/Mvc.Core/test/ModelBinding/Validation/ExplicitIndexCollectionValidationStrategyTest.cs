@@ -143,7 +143,7 @@ public class ExplicitIndexCollectionValidationStrategyTest
             .GetMetadataForType(typeof(List<int>));
 
         var strategy = new ExplicitIndexCollectionValidationStrategy(
-            new string[] { "zero", "one", }
+            new string[] { "zero", "one" }
         );
 
         // Act
@@ -171,7 +171,7 @@ public class ExplicitIndexCollectionValidationStrategyTest
     public void EnumerateElements_RunOutOfElements()
     {
         // Arrange
-        var model = new List<int>() { 2, 3, };
+        var model = new List<int>() { 2, 3 };
 
         var metadata = TestModelMetadataProvider
             .CreateDefaultProvider()

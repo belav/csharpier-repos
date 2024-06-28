@@ -779,11 +779,9 @@ namespace System.Text.RegularExpressions
                             cc.AddCharClass(setCc);
                             setSuccess = true;
                         }
-                        return !setSuccess
-                            ? false
-                            : node.Kind is RegexNodeKind.Set || node.M > 0
-                                ? true
-                                : null;
+                        return !setSuccess ? false
+                            : node.Kind is RegexNodeKind.Set || node.M > 0 ? true
+                            : null;
                     }
 
                     case RegexNodeKind.Multi:
@@ -975,11 +973,10 @@ namespace System.Text.RegularExpressions
                 // The literal can be searched for as either a single char or as a string.
                 // But we need to make sure that its starting character isn't part of the preceding
                 // set, as then we can't know for certain where the set loop ends.
-                return RegexCharClass.CharInClass(prefix[0], firstChild.Str!)
-                    ? null
+                return RegexCharClass.CharInClass(prefix[0], firstChild.Str!) ? null
                     : prefix.Length == 1
                         ? (firstChild, (prefix[0], null, StringComparison.Ordinal, null))
-                        : (firstChild, ('\0', prefix, StringComparison.Ordinal, null));
+                    : (firstChild, ('\0', prefix, StringComparison.Ordinal, null));
             }
 
             // Is the set loop followed by an ordinal case-insensitive string we can search for? We could

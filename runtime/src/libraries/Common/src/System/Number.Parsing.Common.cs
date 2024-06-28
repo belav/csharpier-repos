@@ -387,7 +387,7 @@ namespace System
         {
             OK,
             Failed,
-            Overflow
+            Overflow,
         }
 
         private static bool IsSpaceReplacingChar(char c) => c == '\u00a0' || c == '\u202f';
@@ -460,9 +460,8 @@ namespace System
                     or // Heavy Minus Sign
                     '\uFE63'
                     or // Small Hyphen-Minus
-                    '\uFF0D' =>
-                        true, // Fullwidth Hyphen-Minus
-                    _ => false
+                    '\uFF0D' => true, // Fullwidth Hyphen-Minus
+                    _ => false,
                 };
         }
 #endif

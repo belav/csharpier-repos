@@ -156,7 +156,7 @@ namespace System.ComponentModel.Tests
             yield return new object[] { null };
             yield return new object[]
             {
-                new Mock<EventDescriptor>(MockBehavior.Strict, "Event", new Attribute[0]).Object
+                new Mock<EventDescriptor>(MockBehavior.Strict, "Event", new Attribute[0]).Object,
             };
         }
 
@@ -198,7 +198,7 @@ namespace System.ComponentModel.Tests
                     MockBehavior.Strict,
                     "Property",
                     new Attribute[0]
-                ).Object
+                ).Object,
             };
         }
 
@@ -279,7 +279,7 @@ namespace System.ComponentModel.Tests
             yield return new object[] { null };
             yield return new object[]
             {
-                new EventDescriptorCollection(new EventDescriptor[] { null })
+                new EventDescriptorCollection(new EventDescriptor[] { null }),
             };
         }
 
@@ -325,7 +325,7 @@ namespace System.ComponentModel.Tests
                 EventDescriptorCollection result in new EventDescriptorCollection[]
                 {
                     null,
-                    new EventDescriptorCollection(new EventDescriptor[] { null })
+                    new EventDescriptorCollection(new EventDescriptor[] { null }),
                 }
             )
             {
@@ -333,7 +333,7 @@ namespace System.ComponentModel.Tests
                 yield return new object[]
                 {
                     new Attribute[] { new EditorBrowsableAttribute() },
-                    result
+                    result,
                 };
             }
         }
@@ -375,7 +375,7 @@ namespace System.ComponentModel.Tests
             yield return new object[] { null };
             yield return new object[]
             {
-                new PropertyDescriptorCollection(new PropertyDescriptor[] { null })
+                new PropertyDescriptorCollection(new PropertyDescriptor[] { null }),
             };
         }
 
@@ -423,7 +423,7 @@ namespace System.ComponentModel.Tests
                 PropertyDescriptorCollection result in new PropertyDescriptorCollection[]
                 {
                     null,
-                    new PropertyDescriptorCollection(new PropertyDescriptor[] { null })
+                    new PropertyDescriptorCollection(new PropertyDescriptor[] { null }),
                 }
             )
             {
@@ -431,7 +431,7 @@ namespace System.ComponentModel.Tests
                 yield return new object[]
                 {
                     new Attribute[] { new EditorBrowsableAttribute() },
-                    result
+                    result,
                 };
             }
         }
@@ -466,7 +466,7 @@ namespace System.ComponentModel.Tests
             yield return new object[] { null };
             yield return new object[]
             {
-                new Mock<PropertyDescriptor>(MockBehavior.Strict, "Name", new Attribute[0]).Object
+                new Mock<PropertyDescriptor>(MockBehavior.Strict, "Name", new Attribute[0]).Object,
             };
         }
 
@@ -497,7 +497,7 @@ namespace System.ComponentModel.Tests
                         "Name",
                         new Attribute[0]
                     ).Object,
-                    result
+                    result,
                 };
             }
         }

@@ -43,7 +43,7 @@ namespace ILLink.Tasks
             XmlWriterSettings xws = new XmlWriterSettings
             {
                 Indent = true,
-                OmitXmlDeclaration = true
+                OmitXmlDeclaration = true,
             };
 
             using (XmlWriter xw = XmlWriter.Create(CombinedLinkerXmlFile, xws))

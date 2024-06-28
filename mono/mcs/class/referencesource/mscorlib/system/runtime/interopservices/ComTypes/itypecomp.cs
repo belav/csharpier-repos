@@ -25,7 +25,7 @@ namespace System.Runtime.InteropServices.ComTypes
         DESCKIND_VARDESC = DESCKIND_FUNCDESC + 1,
         DESCKIND_TYPECOMP = DESCKIND_VARDESC + 1,
         DESCKIND_IMPLICITAPPOBJ = DESCKIND_TYPECOMP + 1,
-        DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1
+        DESCKIND_MAX = DESCKIND_IMPLICITAPPOBJ + 1,
     }
 
     [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]

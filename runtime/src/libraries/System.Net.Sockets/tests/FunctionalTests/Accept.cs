@@ -422,7 +422,7 @@ namespace System.Net.Sockets.Tests
                 { IPAddress.Loopback.MapToIPv6(), true },
                 { IPAddress.Loopback, false },
                 { IPAddress.IPv6Loopback, false },
-                { IPAddress.Loopback.MapToIPv6(), false }
+                { IPAddress.Loopback.MapToIPv6(), false },
             };
 
         [Theory]

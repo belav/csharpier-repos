@@ -17,10 +17,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             4,
-                            "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>"
+                            "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -31,10 +31,10 @@ namespace XLinqTests
                         Params = new object[]
                         {
                             2,
-                            "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>"
+                            "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>",
                         },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -45,8 +45,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { 1, "<A>I_am_the_text</A>" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -60,10 +60,10 @@ namespace XLinqTests
                         {
                             2,
                             "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>",
-                            true
+                            true,
                         },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -74,8 +74,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { 4, "<A>I_am_the_text</A>" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -86,8 +86,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { 1, "<A><x/></A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -101,10 +101,10 @@ namespace XLinqTests
                         {
                             4,
                             "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>",
-                            true
+                            true,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -118,10 +118,10 @@ namespace XLinqTests
                         {
                             2,
                             "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>",
-                            false
+                            false,
                         },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -132,8 +132,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { 4, "<A><?Pi data?></A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -147,10 +147,10 @@ namespace XLinqTests
                         {
                             4,
                             "<A xmlns='ns1' xmlns:p='nsp'><e1/>text1<p:e2>innertext<innerelem/></p:e2>text2<!--comment-->text3<?PI clicl?></A>",
-                            false
+                            false,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
         }

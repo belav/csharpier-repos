@@ -78,7 +78,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Storage
                         ActivationArguments = ImmutableDictionary<string, string>.Empty.Add(
                             "RelativePathBase",
                             solutionFolder
-                        )
+                        ),
                     },
                     cancellationToken
                 )

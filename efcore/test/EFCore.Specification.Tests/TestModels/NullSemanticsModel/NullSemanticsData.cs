@@ -80,7 +80,7 @@ public class NullSemanticsData : ISetSource
                         IntC = intValues[k],
                         NullableIntA = nullableIntValues[i],
                         NullableIntB = nullableIntValues[j],
-                        NullableIntC = nullableIntValues[k]
+                        NullableIntC = nullableIntValues[k],
                     };
 
                     entities.Add(entity);

@@ -19,7 +19,7 @@ internal sealed unsafe class AsyncAcceptContext : IValueTaskSource<RequestContex
         new()
         {
             // We want to run continuations on the IO threads
-            RunContinuationsAsynchronously = false
+            RunContinuationsAsynchronously = false,
         };
 
     private RequestContext? _requestContext;

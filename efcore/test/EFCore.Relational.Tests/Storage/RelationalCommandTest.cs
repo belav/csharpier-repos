@@ -622,7 +622,7 @@ public class RelationalCommandTest
                 ),
                 DbCommandMethod.ExecuteReader,
                 true
-            }
+            },
         };
 
     [ConditionalTheory]
@@ -657,7 +657,7 @@ public class RelationalCommandTest
                     "ThirdParameter",
                     RelationalTypeMapping.NullMapping,
                     null
-                )
+                ),
             }
         );
 
@@ -729,14 +729,14 @@ public class RelationalCommandTest
                     "ThirdParameter",
                     RelationalTypeMapping.NullMapping,
                     null
-                )
+                ),
             }
         );
 
         var parameterValues = new Dictionary<string, object>
         {
             { "FirstInvariant", 17 },
-            { "SecondInvariant", 18L }
+            { "SecondInvariant", 18L },
         };
 
         if (async)
@@ -807,7 +807,7 @@ public class RelationalCommandTest
                     "ThirdParameter",
                     RelationalTypeMapping.NullMapping,
                     null
-                )
+                ),
             }
         );
 
@@ -815,7 +815,7 @@ public class RelationalCommandTest
         {
             { "FirstInvariant", 17 },
             { "SecondInvariant", 18L },
-            { "ThirdInvariant", null }
+            { "ThirdInvariant", null },
         };
 
         if (async)
@@ -902,15 +902,15 @@ public class RelationalCommandTest
                             "ThirdParameter",
                             RelationalTypeMapping.NullMapping,
                             null
-                        )
+                        ),
                     }
-                )
+                ),
             }
         );
 
         var parameterValues = new Dictionary<string, object>
         {
-            { "CompositeInvariant", new object[] { 17, 18L, null } }
+            { "CompositeInvariant", new object[] { 17, 18L, null } },
         };
 
         if (async)
@@ -997,15 +997,15 @@ public class RelationalCommandTest
                             "ThirdParameter",
                             RelationalTypeMapping.NullMapping,
                             null
-                        )
+                        ),
                     }
-                )
+                ),
             }
         );
 
         var parameterValues = new Dictionary<string, object>
         {
-            { "CompositeInvariant", new object[] { 17, 18L } }
+            { "CompositeInvariant", new object[] { 17, 18L } },
         };
 
         if (async)
@@ -1068,9 +1068,9 @@ public class RelationalCommandTest
                             "FirstParameter",
                             new IntTypeMapping("int", DbType.Int32),
                             false
-                        )
+                        ),
                     }
-                )
+                ),
             }
         );
 
@@ -1401,7 +1401,7 @@ public class RelationalCommandTest
                     "FirstParameter",
                     new IntTypeMapping("int", DbType.Int32),
                     false
-                )
+                ),
             }
         );
 
@@ -1483,7 +1483,7 @@ public class RelationalCommandTest
                     "FirstParameter",
                     new IntTypeMapping("int", DbType.Int32),
                     false
-                )
+                ),
             }
         );
 
@@ -1565,7 +1565,7 @@ public class RelationalCommandTest
                     "FirstParameter",
                     new IntTypeMapping("int", DbType.Int32),
                     false
-                )
+                ),
             }
         );
 
@@ -1659,7 +1659,7 @@ public class RelationalCommandTest
                     "FirstParameter",
                     new IntTypeMapping("int", DbType.Int32),
                     false
-                )
+                ),
             }
         );
 
@@ -1761,7 +1761,7 @@ public class RelationalCommandTest
                     "FirstParameter",
                     new IntTypeMapping("int", DbType.Int32),
                     false
-                )
+                ),
             }
         );
 
@@ -1887,6 +1887,6 @@ public class RelationalCommandTest
     public static IEnumerable<object[]> IsAsyncData = new[]
     {
         new object[] { false },
-        new object[] { true }
+        new object[] { true },
     };
 }

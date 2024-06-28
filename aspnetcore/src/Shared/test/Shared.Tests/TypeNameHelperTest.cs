@@ -210,7 +210,7 @@ public class TypeNameHelperTest
                 closedInnerType,
                 true,
                 "Microsoft.Extensions.Internal.TypeNameHelperTest+OuterGeneric<>+InnerNonGeneric+InnerGeneric<,>+InnerGenericLeafNode<bool>"
-            }
+            },
         };
     }
 
@@ -321,7 +321,7 @@ public class TypeNameHelperTest
                 {
                     typeof(Outer<int>.E<Outer<int>.E<string>>),
                     "Microsoft.Extensions.Internal.TypeNameHelperTest.Outer.E"
-                }
+                },
             };
         }
     }

@@ -83,7 +83,7 @@ namespace System.Workflow.Activities
                     new Point[]
                     {
                         points[0],
-                        new Point(bounds.Left + bounds.Width / 2, bounds.Bottom)
+                        new Point(bounds.Left + bounds.Width / 2, bounds.Bottom),
                     },
                     LineAnchor.None,
                     LineAnchor.None

@@ -16,6 +16,6 @@ namespace System.Transactions
     {
         None,
         Automatic,
-        Full
+        Full,
     }
 }

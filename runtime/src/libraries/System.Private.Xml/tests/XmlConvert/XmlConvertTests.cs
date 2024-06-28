@@ -23,13 +23,21 @@ namespace System.Xml.XmlConvertTests
             module.AddChild(
                 new EncodeDecodeTests
                 {
-                    Attribute = new TestCase { Name = "EncodeName/DecodeName", Desc = "XmlConvert" }
+                    Attribute = new TestCase
+                    {
+                        Name = "EncodeName/DecodeName",
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
                 new MiscellaneousTests
                 {
-                    Attribute = new TestCase { Name = "Misc. Bug Regressions", Desc = "XmlConvert" }
+                    Attribute = new TestCase
+                    {
+                        Name = "Misc. Bug Regressions",
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -39,8 +47,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "2. XmlConvert (SQL-XML EncodeName) EncodeNmToken-EncodeLocalNmToken",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -49,8 +57,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "1. XmlConvert (SQL-XML EncodeName) EncodeName-EncodeLocalName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -59,8 +67,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "2. XmlConvert (SQL-XML EncodeName) EncodeName-DecodeName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -69,8 +77,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "3. XmlConvert (SQL-XML EncodeName) EncodeLocalName only",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -79,8 +87,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "XmlConvert type conversion functions",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -90,8 +98,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "VerifyName,VerifyNCName,VerifyNMTOKEN,VerifyXmlChar,VerifyWhitespace,VerifyPublicId",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -101,8 +109,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "VerifyName,VerifyNCName,VerifyNMTOKEN,VerifyXmlChar,VerifyWhitespace,VerifyPublicId",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -112,8 +120,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "VerifyName,VerifyNCName,VerifyNMTOKEN,VerifyXmlChar,VerifyWhitespace,VerifyPublicId",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -123,8 +131,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "VerifyName,VerifyNCName,VerifyNMTOKEN,VerifyXmlChar,VerifyWhitespace,VerifyPublicId",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -134,8 +142,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "VerifyName,VerifyNCName,VerifyNMTOKEN,VerifyXmlChar,VerifyWhitespace,VerifyPublicId",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -144,8 +152,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "1. XmlConvert (Boundary Base Char) EncodeName-EncodeLocalName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -155,8 +163,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "2. XmlConvert (Boundary Base Char) EncodeNmToken-EncodeLocalNmToken",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -165,8 +173,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "3. XmlConvert (Boundary Base Char) EncodeName-DecodeName ",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -175,8 +183,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "1. XmlConvert (Boundary Combining Char) EncodeName-EncodeLocalName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -186,8 +194,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "2. XmlConvert (Boundary Combining Char) EncodeNmToken-EncodeLocalNmToken",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -196,8 +204,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "3. XmlConvert (Boundary Combining Char) EncodeName-DecodeName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -206,8 +214,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "1. XmlConvert (Boundary Digit Char) EncodeName-EncodeLocalName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -217,8 +225,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "2. XmlConvert (Boundary Digit Char) EncodeNmToken-EncodeLocalNmToken",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -227,8 +235,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "3. XmlConvert (Boundary Digit Char) EncodeName-DecodeName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -237,8 +245,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "1. XmlConvert (EmbeddedNull Char) EncodeName-EncodeLocalName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -247,8 +255,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "2. XmlConvert (EmbeddedNull Char) EncodeNmToken-EncodeLocalNmToken",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -257,8 +265,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "3. XmlConvert (EmbeddedNull Char) EncodeName-DecodeName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -268,8 +276,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "1. XmlConvert (Boundary Ideographic Char) EncodeName-EncodeLocalName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -279,8 +287,8 @@ namespace System.Xml.XmlConvertTests
                     {
                         Name =
                             "2. XmlConvert  (Boundary Ideographic Char) EncodeNmToken-EncodeLocalNmToken",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
             module.AddChild(
@@ -289,8 +297,8 @@ namespace System.Xml.XmlConvertTests
                     Attribute = new TestCase
                     {
                         Name = "3. XmlConvert (Boundary Ideographic Char) EncodeName-DecodeName",
-                        Desc = "XmlConvert"
-                    }
+                        Desc = "XmlConvert",
+                    },
                 }
             );
 

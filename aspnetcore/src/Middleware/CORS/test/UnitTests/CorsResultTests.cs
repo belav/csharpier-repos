@@ -47,7 +47,7 @@ public class CorsResultTest
         {
             SupportsCredentials = true,
             PreflightMaxAge = TimeSpan.FromSeconds(30),
-            AllowedOrigin = "*"
+            AllowedOrigin = "*",
         };
         corsResult.AllowedExposedHeaders.Add("foo");
         corsResult.AllowedHeaders.Add("bar");

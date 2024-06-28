@@ -61,7 +61,7 @@ namespace System.Web.Http.Filters
             HttpActionContext context = ContextUtil.CreateActionContext();
             Mock<AuthorizationFilterAttribute> filterMock = new Mock<AuthorizationFilterAttribute>()
             {
-                CallBase = true
+                CallBase = true,
             };
             bool onActionExecutingInvoked = false;
             filterMock
@@ -169,7 +169,7 @@ namespace System.Web.Http.Filters
             HttpActionContext context = ContextUtil.CreateActionContext();
             Mock<AuthorizationFilterAttribute> filterMock = new Mock<AuthorizationFilterAttribute>()
             {
-                CallBase = true
+                CallBase = true,
             };
             var filter = (IAuthorizationFilter)filterMock.Object;
 

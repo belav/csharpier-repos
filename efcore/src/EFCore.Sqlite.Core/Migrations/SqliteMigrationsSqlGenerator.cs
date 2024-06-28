@@ -188,7 +188,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                             {
                                 Table = renameIndexOperation.Table,
                                 Schema = renameIndexOperation.Schema,
-                                Name = renameIndexOperation.Name
+                                Name = renameIndexOperation.Name,
                             }
                         );
 
@@ -353,7 +353,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
             {
                 Name = "ef_temp_" + table.Name,
                 Schema = table.Schema,
-                Comment = table.Comment
+                Comment = table.Comment,
             };
 
             var primaryKey = table.PrimaryKey;
@@ -391,7 +391,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     IsStored = column.IsStored,
                     Comment = column.Comment,
                     Collation = column.Collation,
-                    Table = createTableOperation.Name
+                    Table = createTableOperation.Name,
                 };
                 addColumnOperation.AddAnnotations(column.GetAnnotations());
                 createTableOperation.Columns.Add(addColumnOperation);
@@ -521,7 +521,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                         .Append("FROM ")
                         .Append(Dependencies.SqlGenerationHelper.DelimitIdentifier(table.Name))
                         .Append(Dependencies.SqlGenerationHelper.StatementTerminator)
-                        .ToString()
+                        .ToString(),
                 }
             );
         }
@@ -547,7 +547,7 @@ public class SqliteMigrationsSqlGenerator : MigrationsSqlGenerator
                     Name = "ef_temp_" + table,
                     Schema = schema,
                     NewName = table,
-                    NewSchema = schema
+                    NewSchema = schema,
                 }
             );
         }

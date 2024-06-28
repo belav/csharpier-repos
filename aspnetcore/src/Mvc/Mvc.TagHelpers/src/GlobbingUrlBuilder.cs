@@ -23,7 +23,7 @@ public class GlobbingUrlBuilder
         '\n',
         '\u000C',
         '\r',
-        ' '
+        ' ',
     };
     private static readonly PathComparer DefaultPathComparer = new PathComparer();
     private static readonly char[] PatternSeparator = new[] { ',' };

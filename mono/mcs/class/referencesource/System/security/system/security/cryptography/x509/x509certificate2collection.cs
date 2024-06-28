@@ -38,7 +38,7 @@ namespace System.Security.Cryptography.X509Certificates
         FindByCertificatePolicy = 11,
         FindByExtension = 12,
         FindByKeyUsage = 13,
-        FindBySubjectKeyIdentifier = 14
+        FindBySubjectKeyIdentifier = 14,
     }
 
     public class X509Certificate2Collection : X509CertificateCollection
@@ -738,7 +738,7 @@ namespace System.Security.Cryptography.X509Certificates
                             new CAPI.KEY_USAGE_STRUCT(
                                 "DecipherOnly",
                                 CAPI.CERT_DECIPHER_ONLY_KEY_USAGE
-                            )
+                            ),
                         };
 
                         for (uint index = 0; index < KeyUsages.Length; index++)

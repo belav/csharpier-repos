@@ -66,7 +66,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
             capabilities.CodeActionProvider = new CodeActionOptions
             {
                 CodeActionKinds = [CodeActionKind.QuickFix, CodeActionKind.Refactor],
-                ResolveProvider = true
+                ResolveProvider = true,
             };
 
             return capabilities;

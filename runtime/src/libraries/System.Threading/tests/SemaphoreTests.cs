@@ -79,7 +79,7 @@ namespace System.Threading.Tests
                 new Semaphore(1, 1),
                 new Semaphore(1, 1),
                 new Semaphore(1, 1),
-                new Semaphore(1, 1)
+                new Semaphore(1, 1),
             };
             Assert.Equal(0, WaitHandle.WaitAny(ss, 0));
             for (int i = 0; i < ss.Length; ++i)
@@ -129,7 +129,7 @@ namespace System.Threading.Tests
                 new Semaphore(0, 1),
                 new Semaphore(1, 1),
                 new Semaphore(1, 1),
-                new Semaphore(0, 1)
+                new Semaphore(0, 1),
             };
             Assert.Equal(1, WaitHandle.WaitAny(ss, 0));
             for (int i = 0; i < ss.Length; ++i)
@@ -164,7 +164,7 @@ namespace System.Threading.Tests
                 new Semaphore(0, 1),
                 new Semaphore(0, 1),
                 new Semaphore(0, 1),
-                new Semaphore(0, 1)
+                new Semaphore(0, 1),
             };
             Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(ss, 0));
             Assert.Equal(

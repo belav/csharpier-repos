@@ -178,7 +178,7 @@ namespace System.ServiceModel.Activities.Presentation
                                 Value =
                                     wrapper.Value != null
                                         ? wrapper.Value.GetCurrentValue() as InArgument<string>
-                                        : null
+                                        : null,
                             }
                         );
                     }

@@ -102,7 +102,7 @@ class B
                             baseList: null,
                             constraintClauses: default,
                             members: default
-                        )
+                        ),
                     }
                 )
             );
@@ -240,7 +240,7 @@ public class SomeAttribute : System.Attribute { }
                             members: SyntaxFactory.List(
                                 new MemberDeclarationSyntax[] { property, property }
                             )
-                        )
+                        ),
                     }
                 )
             );

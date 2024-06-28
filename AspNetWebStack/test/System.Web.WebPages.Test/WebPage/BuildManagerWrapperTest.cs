@@ -337,7 +337,7 @@ namespace System.Web.WebPages.Test
                 GetVirtualPathUtility()
             )
             {
-                SupportedExtensions = supportedExtensions ?? new[] { "cshtml", "vbhtml" }
+                SupportedExtensions = supportedExtensions ?? new[] { "cshtml", "vbhtml" },
             };
         }
 

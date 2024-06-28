@@ -208,7 +208,7 @@ namespace System.ServiceModel
             this.messageEncoding = NetHttpBindingDefaults.MessageEncoding;
             this.binaryMessageEncodingBindingElement = new BinaryMessageEncodingBindingElement()
             {
-                MessageVersion = MessageVersion.Soap12WSAddressing10
+                MessageVersion = MessageVersion.Soap12WSAddressing10,
             };
             this.TextMessageEncodingBindingElement.MessageVersion =
                 MessageVersion.Soap12WSAddressing10;

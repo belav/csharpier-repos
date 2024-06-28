@@ -92,7 +92,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 .AddInMemoryCollection(
                     new[]
                     {
-                        new KeyValuePair<string, string>("Console:FormatterName", formatterName)
+                        new KeyValuePair<string, string>("Console:FormatterName", formatterName),
                     }
                 )
                 .Build();
@@ -435,7 +435,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                             o.JsonWriterOptions = new JsonWriterOptions()
                             {
                                 Indented = false,
-                                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                             };
                         })
                 )

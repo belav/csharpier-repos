@@ -26,19 +26,19 @@ namespace System.ComponentModel.Primitives.Tests
             {
                 RefreshPropertiesAttribute.All,
                 RefreshPropertiesAttribute.All,
-                true
+                true,
             };
             yield return new object[]
             {
                 RefreshPropertiesAttribute.All,
                 new RefreshPropertiesAttribute(RefreshProperties.All),
-                true
+                true,
             };
             yield return new object[]
             {
                 RefreshPropertiesAttribute.All,
                 RefreshPropertiesAttribute.Repaint,
-                false
+                false,
             };
 
             yield return new object[] { RefreshPropertiesAttribute.All, new object(), false };
@@ -66,19 +66,19 @@ namespace System.ComponentModel.Primitives.Tests
             {
                 RefreshPropertiesAttribute.Default,
                 RefreshProperties.None,
-                true
+                true,
             };
             yield return new object[]
             {
                 RefreshPropertiesAttribute.All,
                 RefreshProperties.All,
-                false
+                false,
             };
             yield return new object[]
             {
                 RefreshPropertiesAttribute.Repaint,
                 RefreshProperties.Repaint,
-                false
+                false,
             };
         }
 

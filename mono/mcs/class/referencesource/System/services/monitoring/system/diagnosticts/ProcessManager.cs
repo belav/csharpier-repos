@@ -1348,7 +1348,7 @@ namespace System.Diagnostics
             PrivilegedTime,
             StartAddress,
             ThreadState,
-            ThreadWaitReason
+            ThreadWaitReason,
         }
     }
 

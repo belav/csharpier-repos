@@ -411,7 +411,7 @@ public enum MyEnum
 {
     Apple = 1,
     Banana = 2,
-    Orange = 3
+    Orange = 3,
 }
 
 public class ILInliningTest

@@ -68,8 +68,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                     Title = "Episode VII",
                     Description = "Episode VII production",
                     Categories = new List<string> { "episode-vii", "movie" },
-                    Link = "episode-vii-production.aspx"
-                }
+                    Link = "episode-vii-production.aspx",
+                },
             };
 
             JObject o = JObject.FromObject(
@@ -87,9 +87,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                             title = p.Title,
                             description = p.Description,
                             link = p.Link,
-                            category = p.Categories
-                        }
-                    }
+                            category = p.Categories,
+                        },
+                    },
                 }
             );
 

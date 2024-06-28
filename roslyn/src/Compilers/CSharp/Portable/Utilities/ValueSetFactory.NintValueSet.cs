@@ -78,7 +78,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         LessThan => true,
                         LessThanOrEqual => true,
-                        _ => false
+                        _ => false,
                     }
                 )
                     return false;
@@ -88,7 +88,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         GreaterThan => true,
                         GreaterThanOrEqual => true,
-                        _ => false
+                        _ => false,
                     }
                 )
                     return false;
@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         LessThan => true,
                         LessThanOrEqual => true,
-                        _ => false
+                        _ => false,
                     }
                 )
                     return true;
@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     {
                         GreaterThan => true,
                         GreaterThanOrEqual => true,
-                        _ => false
+                        _ => false,
                     }
                 )
                     return true;

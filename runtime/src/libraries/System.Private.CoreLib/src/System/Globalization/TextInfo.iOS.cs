@@ -43,9 +43,9 @@ namespace System.Globalization
                 throw new Exception(
                     result == (int)Interop.Globalization.ResultCode.InvalidCodePoint
                         ? "Invalid code point while case changing"
-                        : result == (int)Interop.Globalization.ResultCode.InsufficientBuffer
-                            ? "Insufficiently sized destination buffer"
-                            : "Exception occurred while case changing"
+                    : result == (int)Interop.Globalization.ResultCode.InsufficientBuffer
+                        ? "Insufficiently sized destination buffer"
+                    : "Exception occurred while case changing"
                 );
         }
     }

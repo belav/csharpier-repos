@@ -64,7 +64,7 @@ public class UserStoreWithGenericsTest
             Email = email,
             PhoneNumber = phoneNumber,
             LockoutEnabled = lockoutEnabled,
-            LockoutEnd = lockoutEnd
+            LockoutEnd = lockoutEnd,
         };
     }
 
@@ -137,7 +137,7 @@ public class UserStoreWithGenericsTest
         {
             new Claim("c1", "v1", null, "i1"),
             new Claim("c2", "v2", null, "i2"),
-            new Claim("c2", "v3", null, "i3")
+            new Claim("c2", "v3", null, "i3"),
         };
         foreach (Claim c in claims)
         {
@@ -172,7 +172,7 @@ public class UserStoreWithGenericsTest
         {
             new Claim("c", "v", null, "i1"),
             new Claim("c2", "v2", null, "i2"),
-            new Claim("c2", "v3", null, "i3")
+            new Claim("c2", "v3", null, "i3"),
         };
         foreach (Claim c in claims)
         {
@@ -270,7 +270,7 @@ public class UserStoreWithGenerics
         {
             RoleId = role.Id,
             UserId = user.Id,
-            Created = DateTime.UtcNow
+            Created = DateTime.UtcNow,
         };
     }
 
@@ -284,7 +284,7 @@ public class UserStoreWithGenerics
             UserId = user.Id,
             ClaimType = claim.Type,
             ClaimValue = claim.Value,
-            Issuer = claim.Issuer
+            Issuer = claim.Issuer,
         };
     }
 
@@ -299,7 +299,7 @@ public class UserStoreWithGenerics
             ProviderKey = login.ProviderKey,
             LoginProvider = login.LoginProvider,
             ProviderDisplayName = login.ProviderDisplayName,
-            Context = LoginContext
+            Context = LoginContext,
         };
     }
 
@@ -316,7 +316,7 @@ public class UserStoreWithGenerics
             LoginProvider = loginProvider,
             Name = name,
             Value = value,
-            Stuff = "stuff"
+            Stuff = "stuff",
         };
     }
 }
@@ -345,7 +345,7 @@ public class RoleStoreWithGenerics
             RoleId = role.Id,
             ClaimType = claim.Type,
             ClaimValue = claim.Value,
-            Issuer = claim.Issuer
+            Issuer = claim.Issuer,
         };
     }
 }

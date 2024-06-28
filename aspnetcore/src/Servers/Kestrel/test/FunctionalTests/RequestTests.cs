@@ -53,7 +53,7 @@ public class RequestTests : LoggedTest
             {
                 "PassThrough",
                 () => new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
-            }
+            },
         };
 
     public static TheoryData<string> ConnectionMiddlewareDataName =>
@@ -1107,8 +1107,8 @@ public class RequestTests : LoggedTest
                     MaxRequestBufferSize = maxRequestBufferSize,
                     MaxRequestLineSize = maxRequestBufferSize,
                     MaxRequestHeadersTotalSize = maxRequestBufferSize,
-                }
-            }
+                },
+            },
         };
 
         var scratchBuffer = new byte[maxRequestBufferSize * 8];
@@ -1259,7 +1259,7 @@ public class RequestTests : LoggedTest
                                         RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
                                         RemotePort = connection.RemotePort,
                                         LocalIPAddress = connection.LocalIpAddress?.ToString(),
-                                        LocalPort = connection.LocalPort
+                                        LocalPort = connection.LocalPort,
                                     }
                                 )
                             );

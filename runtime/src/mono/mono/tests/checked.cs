@@ -120,7 +120,7 @@ namespace test
                     new int[] { -3, -5, 15 },
                     new int[] { -3, 5, -15 },
                     new int[] { -1, 32767, -32767 },
-                    new int[] { 32767, -1, -32767 }
+                    new int[] { 32767, -1, -32767 },
                 };
 
                 for (int j = 0; j < cases.Length; ++j)
@@ -190,7 +190,7 @@ namespace test
                     new long[] { -3, -5, 15 },
                     new long[] { -3, 5, -15 },
                     new long[] { -1, 2147483647, -2147483647 },
-                    new long[] { 2147483647, -1, -2147483647 }
+                    new long[] { 2147483647, -1, -2147483647 },
                 };
 
                 for (int j = 0; j < cases.Length; ++j)

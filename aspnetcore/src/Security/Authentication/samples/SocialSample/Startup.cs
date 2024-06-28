@@ -158,7 +158,7 @@ public class Startup
                             {
                                 context.RunClaimActions(user.RootElement);
                             }
-                        }
+                        },
                     };
                 }
             )
@@ -239,7 +239,7 @@ public class Startup
                             {
                                 context.RunClaimActions(user.RootElement);
                             }
-                        }
+                        },
                     };
                 }
             );
@@ -389,7 +389,7 @@ public class Startup
                             { "client_id", options.ClientId },
                             { "client_secret", options.ClientSecret },
                             { "grant_type", "refresh_token" },
-                            { "refresh_token", refreshToken }
+                            { "refresh_token", refreshToken },
                         };
                         var content = new FormUrlEncodedContent(pairs);
                         var refreshResponse = await options.Backchannel.PostAsync(

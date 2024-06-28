@@ -1,6 +1,6 @@
 enum Foo
 {
-    Bar
+    Bar,
 };
 
 class BazAttribute : System.Attribute

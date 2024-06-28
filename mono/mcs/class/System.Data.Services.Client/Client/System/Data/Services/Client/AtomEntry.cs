@@ -48,7 +48,7 @@ namespace System.Data.Services.Client
 
             EntityPropertyMappingsApplied = 0x20,
 
-            IsNull = 0x40
+            IsNull = 0x40,
         }
 
         #endregion Private fields.

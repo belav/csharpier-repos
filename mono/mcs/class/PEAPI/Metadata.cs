@@ -16,7 +16,7 @@ namespace PEAPI
         CF_IL_ONLY = 1,
         CF_32_BITREQUIRED = 2,
         CF_STRONGNAMESIGNED = 8,
-        CF_TRACKDEBUGDATA = 0x10000
+        CF_TRACKDEBUGDATA = 0x10000,
     }
 
     /// <summary>
@@ -30,7 +30,7 @@ namespace PEAPI
         OS2_CUI = 5,
         POSIX_CUI = 7,
         Native_Windows = 8,
-        Windows_CE_GUI = 9
+        Windows_CE_GUI = 9,
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace PEAPI
     public enum HashAlgorithm
     {
         None,
-        SHA1
+        SHA1,
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace PEAPI
     {
         Retargetable = 0x100,
         EnableJITCompileTracking = 0x8000,
-        DisableJITCompileOptimizer = 0x4000
+        DisableJITCompileOptimizer = 0x4000,
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ namespace PEAPI
         Vararg,
         Instance = 0x20,
         Generic = 0x10,
-        InstanceExplicit = 0x60
+        InstanceExplicit = 0x60,
     }
 
     /// <summary>
@@ -75,7 +75,7 @@ namespace PEAPI
     public enum CustomModifier
     {
         modreq = 0x1F,
-        modopt
+        modopt,
     };
 
     /// <summary>
@@ -108,7 +108,7 @@ namespace PEAPI
         HasSecurity = 0x40000,
         BeforeFieldInit = 0x100000,
         Forwarder = 0x200000,
-        VisibilityMask = 0x07
+        VisibilityMask = 0x07,
     }
 
     /// <summary>
@@ -130,7 +130,7 @@ namespace PEAPI
         Notserialized = 0x80,
         SpecialName = 0x200,
         RTSpecialName = 0x400,
-        HasFieldMarshal = 0x1000
+        HasFieldMarshal = 0x1000,
     }
 
     /// <summary>
@@ -160,7 +160,7 @@ namespace PEAPI
         RTSpecialName = 0x1000,
         SpecialRTSpecialName = 0x1800,
         HasSecurity = 0x4000,
-        RequireSecObject = 0x8000
+        RequireSecObject = 0x8000,
     }
 
     /// <summary>
@@ -182,7 +182,7 @@ namespace PEAPI
         thiscall = 0x0400,
         fastcall = 0x0500,
         charmaperror_on = 0x1000,
-        charmaperror_off = 0x2000
+        charmaperror_off = 0x2000,
     }
 
     /// <summary>
@@ -202,7 +202,7 @@ namespace PEAPI
         NoInLining = 0x0008,
         NoOptimization = 0x0040,
         Optil = 0x0002,
-        AggressiveInlining = 0x0100
+        AggressiveInlining = 0x0100,
     }
 
     /// <summary>
@@ -212,7 +212,7 @@ namespace PEAPI
     {
         Data,
         TLS,
-        CIL
+        CIL,
     }
 
     /// <summary>
@@ -225,7 +225,7 @@ namespace PEAPI
         Out,
         Opt = 16,
         HasDefault = 0x1000,
-        HasFieldMarshal = 0x2000
+        HasFieldMarshal = 0x2000,
     }
 
     /// <summary>
@@ -371,7 +371,7 @@ namespace PEAPI
         initblk,
         rethrow = 0xFE1A,
         refanytype = 0xFE1D,
-        readonly_ = 0xFE1E
+        readonly_ = 0xFE1E,
     }
 
     /// <summary>
@@ -393,7 +393,7 @@ namespace PEAPI
         ldloc,
         ldloca,
         stloc,
-        unaligned = 0xFE12
+        unaligned = 0xFE12,
     }
 
     /// <summary>
@@ -407,7 +407,7 @@ namespace PEAPI
         ldsfld,
         ldsflda,
         stsfld,
-        ldtoken = 0xD0
+        ldtoken = 0xD0,
     }
 
     /// <summary>
@@ -421,7 +421,7 @@ namespace PEAPI
         newobj = 0x73,
         ldtoken = 0xD0,
         ldftn = 0xFE06,
-        ldvirtfn
+        ldvirtfn,
     }
 
     /// <summary>
@@ -446,7 +446,7 @@ namespace PEAPI
         sizeOf = 0xFE1C,
         ldelem = 0xA3,
         stelem = 0xA4,
-        unbox_any
+        unbox_any,
     }
 
     /// <summary>
@@ -485,7 +485,7 @@ namespace PEAPI
         blt_un,
 
         leave = 0xDD,
-        leave_s
+        leave_s,
     }
 
     /// <summary>
@@ -530,7 +530,7 @@ namespace PEAPI
         NestedClass,
         GenericParam,
         MethodSpec,
-        GenericParamConstraint
+        GenericParamConstraint,
     }
 
     public enum SafeArrayType
@@ -553,7 +553,7 @@ namespace PEAPI
         uint16,
         uint32,
         Int = 22,
-        UInt
+        UInt,
     }
 
     internal enum CIx
@@ -571,26 +571,26 @@ namespace PEAPI
         CustomAttributeType,
         ResolutionScope,
         TypeOrMethodDef,
-        MaxCIx
+        MaxCIx,
     }
 
     internal enum MapType
     {
         eventMap,
         propertyMap,
-        nestedClass
+        nestedClass,
     }
 
     public enum ValueClass
     {
         ValueType,
-        Enum
+        Enum,
     }
 
     public enum GenParamType : byte
     {
         Var = 0x13,
-        MVar = 0x1E
+        MVar = 0x1E,
     }
 
     [Flags]
@@ -604,7 +604,7 @@ namespace PEAPI
         SpecialConstraintMask = 0x001c,
         ReferenceTypeConstraint = 0x0004,
         NotNullableValueTypeConstraint = 0x0008,
-        DefaultConstructorConstrait = 0x0010
+        DefaultConstructorConstrait = 0x0010,
     }
 
     /* Taken from Mono.Cecil */
@@ -627,7 +627,7 @@ namespace PEAPI
         NonCasInheritance = 15,
         LinkDemandChoice = 16,
         InheritDemandChoice = 17,
-        DemandChoice = 18
+        DemandChoice = 18,
     }
 
     #endregion
@@ -4104,7 +4104,7 @@ namespace PEAPI
             Other = 0x04,
             AddOn = 0x08,
             RemoveOn = 0x10,
-            Fire = 0x20
+            Fire = 0x20,
         }
 
         private static readonly int INITSIZE = 5;
@@ -5658,7 +5658,7 @@ namespace PEAPI
             PrimitiveType.UIntPtr.GetName().GetHashCode(),
             PrimitiveType.Object.GetName().GetHashCode(),
             PrimitiveType.ValueType.GetName().GetHashCode(),
-            "Enum".GetHashCode()
+            "Enum".GetHashCode(),
         };
 
         internal MSCorLib(MetaData md)
@@ -5883,7 +5883,7 @@ namespace PEAPI
             '\0',
             '\0',
             '\0',
-            '\0'
+            '\0',
         };
         private static readonly char[] usName = { '#', 'U', 'S', '\0' };
         private static readonly char[] guidName = { '#', 'G', 'U', 'I', 'D', '\0', '\0', '\0' };

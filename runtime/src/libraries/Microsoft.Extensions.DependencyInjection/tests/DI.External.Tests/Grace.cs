@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             {
                 "ResolvesMixedOpenClosedGenericsAsEnumerable",
                 "ServiceScopeFactoryIsSingleton",
-                "TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults"
+                "TypeActivatorWorksWithCtorWithOptionalArgs_WithStructDefaults",
             };
 
         protected override IServiceProvider CreateServiceProviderImpl(

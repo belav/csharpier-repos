@@ -20,7 +20,7 @@ public class IModelConverter : JsonConverter
         JsonSerializer serializer
     )
     {
-        return new DerivedModel { DerivedProperty = reader.Value.ToString(), };
+        return new DerivedModel { DerivedProperty = reader.Value.ToString() };
     }
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

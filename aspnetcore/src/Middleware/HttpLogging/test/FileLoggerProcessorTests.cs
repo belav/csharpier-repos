@@ -160,7 +160,7 @@ public class FileLoggerProcessorTests
             {
                 LogDirectory = path,
                 RetainedFileCountLimit = 3,
-                FileSizeLimit = 5
+                FileSizeLimit = 5,
             };
             await using (
                 var logger = new FileLoggerProcessor(
@@ -222,7 +222,7 @@ public class FileLoggerProcessorTests
             {
                 LogDirectory = path,
                 FileSizeLimit = 5,
-                RetainedFileCountLimit = 10000
+                RetainedFileCountLimit = 10000,
             };
             var testSink = new TestSink();
             var testLogger = new TestLoggerFactory(testSink, enabled: true);
@@ -295,7 +295,7 @@ public class FileLoggerProcessorTests
             {
                 LogDirectory = path,
                 RetainedFileCountLimit = 10,
-                FileSizeLimit = 5
+                FileSizeLimit = 5,
             };
             await using (
                 var logger = new FileLoggerProcessor(

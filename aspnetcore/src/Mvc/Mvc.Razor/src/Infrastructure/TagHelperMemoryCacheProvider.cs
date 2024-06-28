@@ -19,7 +19,11 @@ public sealed class TagHelperMemoryCacheProvider
         new MemoryCache(
             new MemoryCacheOptions
             {
-                SizeLimit = 10 * 1024 * 1024 // 10MB
+                SizeLimit =
+                    10
+                    * 1024
+                    * 1024 // 10MB
+                ,
             }
         );
 }

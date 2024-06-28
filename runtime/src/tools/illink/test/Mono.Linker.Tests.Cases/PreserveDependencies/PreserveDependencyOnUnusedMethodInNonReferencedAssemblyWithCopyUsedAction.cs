@@ -13,7 +13,7 @@ namespace Mono.Linker.Tests.Cases.PreserveDependencies
         "library.dll",
         new[]
         {
-            "Dependencies/PreserveDependencyOnUnusedMethodInNonReferencedAssemblyWithCopyUsedAction_Lib.cs"
+            "Dependencies/PreserveDependencyOnUnusedMethodInNonReferencedAssemblyWithCopyUsedAction_Lib.cs",
         },
         addAsReference: false
     )]

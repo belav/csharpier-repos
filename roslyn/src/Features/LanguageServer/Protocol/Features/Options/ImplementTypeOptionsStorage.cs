@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.ImplementType
                 PropertyGenerationBehavior = globalOptions.GetOption(
                     PropertyGenerationBehavior,
                     language
-                )
+                ),
             };
 
         public static ImplementTypeGenerationOptions GetImplementTypeGenerationOptions(

@@ -45,7 +45,7 @@ namespace Microsoft.VisualBasic.Tests
             {
                 { DateTime.Now },
                 { 'c' },
-                { Guid.Empty }
+                { Guid.Empty },
             };
 
         [Theory]
@@ -80,7 +80,7 @@ namespace Microsoft.VisualBasic.Tests
                 { false, "&O00" },
                 { true, "&H01" },
                 { true, "&O01" },
-                { true, "9999999999999999999999999999999999999" }
+                { true, "9999999999999999999999999999999999999" },
             };
 
         public static TheoryData<bool, object> BoolObjectData =>
@@ -104,7 +104,7 @@ namespace Microsoft.VisualBasic.Tests
                 { false, (double)0 },
                 { true, (double)1 },
                 { false, (decimal)0 },
-                { true, (decimal)1 }
+                { true, (decimal)1 },
             };
     }
 }

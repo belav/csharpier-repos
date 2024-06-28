@@ -32,7 +32,7 @@ namespace System.CommandLine
             RootCommand switch
             {
                 CliRootCommand root => root.Directives.Count > 0,
-                _ => false
+                _ => false,
             };
 
         /// <summary>

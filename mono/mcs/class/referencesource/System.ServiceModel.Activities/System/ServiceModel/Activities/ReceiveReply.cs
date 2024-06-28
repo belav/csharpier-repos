@@ -49,8 +49,8 @@ namespace System.ServiceModel.Activities
                         Body = new Sequence
                         {
                             Variables = { response },
-                            Activities = { this.internalReceive, this.responseFormatter, }
-                        }
+                            Activities = { this.internalReceive, this.responseFormatter },
+                        },
                     };
                 }
             };
@@ -244,7 +244,7 @@ namespace System.ServiceModel.Activities
             {
                 IsOneWay = false,
                 IsReceiveReply = true,
-                OwnerDisplayName = this.DisplayName
+                OwnerDisplayName = this.DisplayName,
             };
 
             if (this.correlationInitializers != null)

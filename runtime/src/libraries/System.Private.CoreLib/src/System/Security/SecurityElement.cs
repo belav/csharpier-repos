@@ -31,7 +31,7 @@ namespace System.Security
             "\'",
             "&apos;",
             "&",
-            "&amp;"
+            "&amp;",
         };
 
         //-------------------------- Constructors ---------------------------

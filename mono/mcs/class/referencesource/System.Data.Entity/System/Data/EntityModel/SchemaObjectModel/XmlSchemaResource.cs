@@ -75,7 +75,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 new XmlSchemaResource(
                     XmlConstants.EntityStoreSchemaGeneratorNamespace,
                     "System.Data.Resources.EntityStoreSchemaGenerator.xsd"
-                )
+                ),
             };
 
             XmlSchemaResource ssdlSchema = new XmlSchemaResource(
@@ -170,7 +170,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 new XmlSchemaResource(
                     XmlConstants.CodeGenerationSchemaNamespace,
                     "System.Data.Resources.CodeGenerationSchema.xsd"
-                )
+                ),
             };
 
             XmlSchemaResource[] csdl2Imports =
@@ -182,7 +182,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 new XmlSchemaResource(
                     XmlConstants.AnnotationNamespace,
                     "System.Data.Resources.AnnotationSchema.xsd"
-                )
+                ),
             };
 
             XmlSchemaResource[] csdl3Imports =
@@ -194,7 +194,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 new XmlSchemaResource(
                     XmlConstants.AnnotationNamespace,
                     "System.Data.Resources.AnnotationSchema.xsd"
-                )
+                ),
             };
 
             XmlSchemaResource csdlSchema_1 = new XmlSchemaResource(

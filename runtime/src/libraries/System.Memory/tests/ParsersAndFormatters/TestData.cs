@@ -19,7 +19,7 @@ namespace System.Buffers.Text.Tests
             1,
             3,
             10,
-            StandardFormat.MaxPrecision
+            StandardFormat.MaxPrecision,
         };
 
         public static IEnumerable<object[]> IntegerTypesTheoryData =>
@@ -243,7 +243,7 @@ namespace System.Buffers.Text.Tests
                         High = 0,
                         Mid = 0,
                         Low = 0,
-                        IsNegative = true
+                        IsNegative = true,
                     }
                 ).ToDecimal();
 
@@ -659,7 +659,7 @@ namespace System.Buffers.Text.Tests
                         2013,
                         2014,
                         2,
-                        9999
+                        9999,
                     }
                 )
                 {

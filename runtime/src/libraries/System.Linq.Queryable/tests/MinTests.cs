@@ -240,7 +240,7 @@ namespace System.Linq.Tests
                 9.4m,
                 decimal.MinValue,
                 10.9m,
-                decimal.MinValue
+                decimal.MinValue,
             };
             Assert.Equal(decimal.MinValue, source.AsQueryable().Min());
         }
@@ -291,7 +291,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 10 },
                 new { name = "John", num = -105 },
-                new { name = "Bob", num = -30 }
+                new { name = "Bob", num = -30 },
             };
             Assert.Equal(-105, source.AsQueryable().Min(e => e.num));
         }
@@ -330,7 +330,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 10L },
                 new { name = "John", num = long.MinValue },
-                new { name = "Bob", num = -10L }
+                new { name = "Bob", num = -10L },
             };
 
             Assert.Equal(long.MinValue, source.AsQueryable().Min(e => e.num));
@@ -387,7 +387,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = -45.5f },
                 new { name = "John", num = -132.5f },
-                new { name = "Bob", num = 20.45f }
+                new { name = "Bob", num = 20.45f },
             };
             Assert.Equal(-132.5f, source.AsQueryable().Min(e => e.num));
         }
@@ -399,7 +399,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = -45.5 },
                 new { name = "John", num = -132.5 },
-                new { name = "Bob", num = 20.45 }
+                new { name = "Bob", num = 20.45 },
             };
             Assert.Equal(-132.5, source.AsQueryable().Min(e => e.num));
         }
@@ -438,7 +438,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 100.45m },
                 new { name = "John", num = 10.5m },
-                new { name = "Bob", num = 0.05m }
+                new { name = "Bob", num = 0.05m },
             };
             Assert.Equal(0.05m, source.AsQueryable().Min(e => e.num));
         }
@@ -477,7 +477,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (int?)10 },
                 new { name = "John", num = default(int?) },
-                new { name = "Bob", num = (int?)-30 }
+                new { name = "Bob", num = (int?)-30 },
             };
             Assert.Equal(-30, source.AsQueryable().Min(e => e.num));
         }
@@ -508,7 +508,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = default(long?) },
                 new { name = "John", num = (long?)long.MinValue },
-                new { name = "Bob", num = (long?)-10L }
+                new { name = "Bob", num = (long?)-10L },
             };
             Assert.Equal(long.MinValue, source.AsQueryable().Min(e => e.num));
         }
@@ -539,7 +539,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (float?)-45.5f },
                 new { name = "John", num = (float?)-132.5f },
-                new { name = "Bob", num = default(float?) }
+                new { name = "Bob", num = default(float?) },
             };
 
             Assert.Equal(-132.5f, source.AsQueryable().Min(e => e.num));
@@ -571,7 +571,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (double?)-45.5 },
                 new { name = "John", num = (double?)-132.5 },
-                new { name = "Bob", num = default(double?) }
+                new { name = "Bob", num = default(double?) },
             };
             Assert.Equal(-132.5, source.AsQueryable().Min(e => e.num));
         }
@@ -602,7 +602,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (decimal?)100.45m },
                 new { name = "John", num = (decimal?)10.5m },
-                new { name = "Bob", num = default(decimal?) }
+                new { name = "Bob", num = default(decimal?) },
             };
             Assert.Equal(10.5m, source.AsQueryable().Min(e => e.num));
         }
@@ -660,7 +660,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 100.45m },
                 new { name = "John", num = 10.5m },
-                new { name = "Bob", num = 0.05m }
+                new { name = "Bob", num = 0.05m },
             };
             Assert.Equal("Bob", source.AsQueryable().Min(e => e.name));
         }

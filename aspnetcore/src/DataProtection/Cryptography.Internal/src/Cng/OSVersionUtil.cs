@@ -55,6 +55,6 @@ internal static class OSVersionUtil
     {
         NotWindows = 0,
         Win7OrLater = 1,
-        Win8OrLater = 2
+        Win8OrLater = 2,
     }
 }

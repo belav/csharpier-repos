@@ -54,7 +54,7 @@ public class DefaultViewComponentDescriptorProvider : IViewComponentDescriptorPr
             ShortName = ViewComponentConventions.GetComponentName(typeInfo),
             TypeInfo = typeInfo,
             MethodInfo = methodInfo,
-            Parameters = methodInfo.GetParameters()
+            Parameters = methodInfo.GetParameters(),
         };
 
         return candidate;

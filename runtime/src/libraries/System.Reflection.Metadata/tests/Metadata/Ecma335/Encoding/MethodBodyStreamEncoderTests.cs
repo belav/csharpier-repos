@@ -134,7 +134,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x02,
                     0x02,
                     0x02,
-                    0x02
+                    0x02,
                 },
                 streamBuilder.ToArray()
             );
@@ -235,7 +235,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x02,
                     0x02,
                     0x02,
-                    0x02
+                    0x02,
                 },
                 streamBuilder.ToArray()
             );
@@ -291,7 +291,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x02,
                     0x02,
                     0x02,
-                    0x02
+                    0x02,
                 },
                 streamBuilder.ToArray()
             );
@@ -353,6 +353,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xF4,
                     0xFF,
                     0xFF // size fo the table
+                    ,
                 },
                 streamBuilder.ToArray()
             );
@@ -462,7 +463,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x01,
                     0x01,
                     0x2B,
-                    0xFE
+                    0xFE,
                 },
                 bodyBytes
             );
@@ -543,7 +544,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                         0x01,
                         0x01,
                         0x2B,
-                        0xFE
+                        0xFE,
                     },
                     ilBytes
                 );
@@ -665,7 +666,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x01,
                     0x01,
                     0x2B,
-                    0xFE
+                    0xFE,
                 },
                 bodyBytes
             );
@@ -747,7 +748,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                         0x01,
                         0x01,
                         0x2B,
-                        0xFE
+                        0xFE,
                     },
                     ilBytes
                 );
@@ -772,6 +773,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                 0x00,
                 0x06, // call 0x06000001
                 0x2A // ret
+                ,
             };
 
             var streamEncoder = new MethodBodyStreamEncoder(streamBuilder);
@@ -815,6 +817,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x06, // call 0x06000001
                     0x2A // ret
+                    ,
                 },
                 bodyBytes
             );
@@ -869,6 +872,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x06, // call 0x06000001
                     0x2A // ret
+                    ,
                 },
                 bodyBytes
             );
@@ -896,6 +900,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                         0x00,
                         0x06, // call 0x06000001
                         0x2A // ret
+                        ,
                     },
                     ilBytes
                 );

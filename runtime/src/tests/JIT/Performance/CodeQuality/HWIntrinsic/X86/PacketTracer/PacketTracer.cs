@@ -330,13 +330,13 @@ internal class Packet256Tracer
                 (new VectorPacket256(0, 1, 0)),
                 Vector256.Create(0f),
                 Surfaces.CheckerBoard
-            )
+            ),
         };
 
         LightPacket256[] lights =
         {
             new LightPacket256(new Vector(-2f, 2.5f, 0f), new Color(.5f, .45f, .41f)),
-            new LightPacket256(new Vector(2, 4.5f, 2), new Color(.99f, .95f, .8f))
+            new LightPacket256(new Vector(2, 4.5f, 2), new Color(.99f, .95f, .8f)),
         };
 
         Camera camera = Camera.Create(

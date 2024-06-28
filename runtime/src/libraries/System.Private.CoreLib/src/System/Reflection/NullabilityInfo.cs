@@ -70,6 +70,6 @@ namespace System.Reflection
         /// <summary>
         /// Nullable value or reference type
         /// </summary>
-        Nullable
+        Nullable,
     }
 }

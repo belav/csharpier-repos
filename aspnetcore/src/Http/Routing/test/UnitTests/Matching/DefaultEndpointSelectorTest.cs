@@ -30,8 +30,8 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_NoValidCandidates_DoesNothing()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test"), };
-        var scores = new int[] { 0, };
+        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test") };
+        var scores = new int[] { 0 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
         candidateSet[0].Values = new RouteValueDictionary();
@@ -51,8 +51,8 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_SingleCandidate_ChoosesCandidate()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test"), };
-        var scores = new int[] { 0, };
+        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test") };
+        var scores = new int[] { 0 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 
         candidateSet[0].Values = new RouteValueDictionary();
@@ -72,7 +72,7 @@ public class DefaultEndpointSelectorTest
     public async Task SelectAsync_SingleValidCandidate_ChoosesCandidate()
     {
         // Arrange
-        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test1"), CreateEndpoint("/test2"), };
+        var endpoints = new RouteEndpoint[] { CreateEndpoint("/test1"), CreateEndpoint("/test2") };
         var scores = new int[] { 0, 0 };
         var candidateSet = CreateCandidateSet(endpoints, scores);
 

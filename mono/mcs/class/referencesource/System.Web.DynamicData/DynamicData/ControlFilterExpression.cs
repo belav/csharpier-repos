@@ -198,7 +198,7 @@ namespace System.Web.DynamicData
                 ControlParameter controlParameter = new ControlParameter()
                 {
                     Name = parameterName,
-                    ControlID = control.UniqueID
+                    ControlID = control.UniqueID,
                 };
                 if (target != null)
                 {

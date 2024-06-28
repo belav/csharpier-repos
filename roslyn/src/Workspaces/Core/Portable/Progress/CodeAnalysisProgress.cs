@@ -37,7 +37,7 @@ public sealed class CodeAnalysisProgress
     public static CodeAnalysisProgress Description(string description) =>
         new()
         {
-            DescriptionValue = description ?? throw new ArgumentNullException(nameof(description))
+            DescriptionValue = description ?? throw new ArgumentNullException(nameof(description)),
         };
 
     /// <summary>

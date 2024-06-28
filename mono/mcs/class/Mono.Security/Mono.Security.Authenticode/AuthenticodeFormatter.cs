@@ -225,7 +225,7 @@ namespace Mono.Security.Authenticode
             0x00,
             0x3E,
             0x00,
-            0x3E
+            0x3E,
         };
 
         private byte[] Header(byte[] fileHash, string hashAlgorithm)

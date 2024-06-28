@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                     }
                 }
                 """;
-            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
 
         [Fact]
@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EmbeddedLanguages
                     }
                 }
                 """;
-            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code }.RunAsync();
         }
     }
 }

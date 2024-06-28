@@ -1037,7 +1037,7 @@ namespace System.Windows.Forms
                 MaximizeButton,
                 RestoreButton,
                 CloseButton,
-                HelpButton
+                HelpButton,
             };
         }
 

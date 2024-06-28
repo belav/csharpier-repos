@@ -34,21 +34,21 @@ namespace System.Data.Tests
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 2, null),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 3, null),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 2, "abc"),
-                false
+                false,
             };
 
             // DBNull
@@ -56,14 +56,14 @@ namespace System.Data.Tests
             {
                 table1.Rows.Add(1, 2, null),
                 table1.Rows.Add(1, 2, DBNull.Value),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 table1.Rows.Add(1, 2, DBNull.Value),
                 table1.Rows.Add(1, 2, "abc"),
-                false
+                false,
             };
 
             // Array
@@ -80,147 +80,147 @@ namespace System.Data.Tests
             {
                 ArrayRow(new byte[] { 1, 2, 3 }),
                 ArrayRow(new byte[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new byte[] { 1, 2, 3 }),
                 ArrayRow(new byte[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new short[] { 1, 2, 3 }),
                 ArrayRow(new short[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new short[] { 1, 2, 3 }),
                 ArrayRow(new short[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new string[] { "a", "b" }),
                 ArrayRow(new string[] { "a", "b" }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new string[] { "a", "b" }),
                 ArrayRow(new string[] { "a", "c" }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 1, "a", null }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 1, "a", DBNull.Value }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 2, "a", null }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new object[] { 1, "a", null }),
                 ArrayRow(new object[] { 1, "a", "b" }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new ushort[] { 1, 2, 3 }),
                 ArrayRow(new ushort[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new ushort[] { 1, 2, 3 }),
                 ArrayRow(new ushort[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new uint[] { 1, 2, 3 }),
                 ArrayRow(new uint[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new uint[] { 1, 2, 3 }),
                 ArrayRow(new uint[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new long[] { 1, 2, 3 }),
                 ArrayRow(new long[] { 1, 2, 3 }),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ArrayRow(new long[] { 1, 2, 3 }),
                 ArrayRow(new long[] { 1, 2, 4 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new long[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2, 3 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[] { 1, 2 }),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 ArrayRow(new int[] { 1, 2, 3 }),
                 ArrayRow(new int[2, 2]),
-                false
+                false,
             };
 
             yield return new object[] { ArrayRow(new int[2, 2]), ArrayRow(new int[2, 2]), false };
@@ -309,12 +309,12 @@ namespace System.Data.Tests
             Array multidimensionalArray = new int[,]
             {
                 { 1, 2 },
-                { 3, 4 }
+                { 3, 4 },
             };
             yield return new object[]
             {
                 multidimensionalArray,
-                multidimensionalArray.GetHashCode()
+                multidimensionalArray.GetHashCode(),
             };
         }
 

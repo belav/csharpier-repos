@@ -239,7 +239,7 @@ namespace System.IO.Pipelines
 
             // Marks that operation is canceled. Set in Cancel reset in ObserveCancellation (GetResult)
             Canceled = 4,
-            UseSynchronizationContext = 8
+            UseSynchronizationContext = 8,
         }
 
         private sealed class SchedulingContext

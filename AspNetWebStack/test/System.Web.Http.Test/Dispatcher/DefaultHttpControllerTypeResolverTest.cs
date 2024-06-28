@@ -26,7 +26,7 @@ namespace System.Web.Http.Dispatcher
                     typeof(ControllerWrapper.ValidNestedController),
                     typeof(ControllerWrapper.ValidInheritedNestedController),
                     typeof(ControllerWrapper.ControllerNestedWrapper.ValidNestedNestedController),
-                    typeof(InheritedControllerHidingWrapper.ValidNestedController)
+                    typeof(InheritedControllerHidingWrapper.ValidNestedController),
                 };
             }
         }
@@ -41,7 +41,7 @@ namespace System.Web.Http.Dispatcher
                     typeof(ControllerWrapper.InvalidAbstractNestedController),
                     ControllerWrapper.TypeOfInvalidProtectedNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidProtectedNestedController),
                     ControllerWrapper.TypeOfInvalidPrivateNestedController(), // NOTE: Unable to get through typeof(ControllerWrapper.InvalidPrivateNestedController),
-                    typeof(ControllerWrapper.InvalidInternalNestedController)
+                    typeof(ControllerWrapper.InvalidInternalNestedController),
                 };
             }
         }
@@ -57,7 +57,7 @@ namespace System.Web.Http.Dispatcher
                     typeof(ControllerPrefix),
                     typeof(InvalidControllerStruct),
                     typeof(InvalidControllerWithInconsistentName),
-                    typeof(InvalidControllerWithNoBaseType)
+                    typeof(InvalidControllerWithNoBaseType),
                 };
             }
         }
@@ -155,7 +155,7 @@ namespace System.Web.Http.Dispatcher
                             typeof(InvalidControllerStruct),
                             typeof(InvalidControllerWithInconsistentName),
                             typeof(InvalidControllerWithNoBaseType)
-                        )
+                        ),
                     }
                 );
 

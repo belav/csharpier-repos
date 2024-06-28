@@ -119,21 +119,21 @@ public class SqliteMathTranslator : IMethodCallTranslator
                     new[] { typeof(float) }
                 )!,
                 "degrees"
-            }
+            },
         };
 
     private static readonly List<MethodInfo> _roundWithDecimalMethods =
         new()
         {
             typeof(Math).GetMethod(nameof(Math.Round), new[] { typeof(double), typeof(int) })!,
-            typeof(MathF).GetMethod(nameof(MathF.Round), new[] { typeof(float), typeof(int) })!
+            typeof(MathF).GetMethod(nameof(MathF.Round), new[] { typeof(float), typeof(int) })!,
         };
 
     private static readonly List<MethodInfo> _logWithBaseMethods =
         new()
         {
             typeof(Math).GetMethod(nameof(Math.Log), new[] { typeof(double), typeof(double) })!,
-            typeof(MathF).GetMethod(nameof(MathF.Log), new[] { typeof(float), typeof(float) })!
+            typeof(MathF).GetMethod(nameof(MathF.Log), new[] { typeof(float), typeof(float) })!,
         };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -202,7 +202,7 @@ public class SqliteMathTranslator : IMethodCallTranslator
                 new[]
                 {
                     _sqlExpressionFactory.ApplyTypeMapping(newBase, typeMapping),
-                    _sqlExpressionFactory.ApplyTypeMapping(a, typeMapping)
+                    _sqlExpressionFactory.ApplyTypeMapping(a, typeMapping),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true },

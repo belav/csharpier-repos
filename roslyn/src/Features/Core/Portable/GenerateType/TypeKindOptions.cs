@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
         MemberAccessWithNamespace = Class | Structure | Enum | Module,
 
         // Enum and Modules are incompatible with Generics
-        GenericInCompatibleTypes = Enum | Module
+        GenericInCompatibleTypes = Enum | Module,
     }
 
     internal class TypeKindOptionsHelper

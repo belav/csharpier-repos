@@ -50,7 +50,7 @@ namespace System.Net.Http.Formatting
             {
                 FirstName = "John",
                 LastName = "Smith",
-                Item = "Socks"
+                Item = "Socks",
             };
             return SerializerConsistencyHepers.TestAsync(source);
         }
@@ -71,7 +71,7 @@ namespace System.Net.Http.Formatting
             {
                 FirstName = string.Empty,
                 LastName = null,
-                Item = "   "
+                Item = "   ",
             };
 
             return SerializerConsistencyHepers.TestAsync(source);

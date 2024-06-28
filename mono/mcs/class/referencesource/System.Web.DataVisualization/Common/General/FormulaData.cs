@@ -253,7 +253,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// William's %R is a momentum indicator, and is used to measure overbought and oversold levels.
         /// </summary>
-        WilliamsR
+        WilliamsR,
     }
 
     #endregion  // Financial Formula Name enumeration

@@ -381,7 +381,7 @@ public class ParameterExtractingExpressionVisitor : ExpressionVisitor
             cachedValue = new EvaluatedValues
             {
                 CandidateParameterName = parameterName,
-                Value = parameterValue
+                Value = parameterValue,
             };
             _evaluatedValues[expression] = cachedValue;
         }

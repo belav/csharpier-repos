@@ -6,7 +6,7 @@ class XX
 {
     enum X
     {
-        A = 1
+        A = 1,
     }
 
     public static int Main()

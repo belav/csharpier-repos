@@ -122,7 +122,7 @@ public class Test
         ResolvingEvent,
         LoadOverride,
         ResolvingEventInNonCollectible,
-        LoadOverrideInNonCollectible
+        LoadOverrideInNonCollectible,
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

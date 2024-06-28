@@ -76,7 +76,7 @@ namespace System.Activities.Core.Presentation
                 {
                     Source = this,
                     Path = new PropertyPath(FlowSwitchCaseEditorDialog.caseProperty),
-                    Mode = BindingMode.TwoWay
+                    Mode = BindingMode.TwoWay,
                 }
             );
             caseKeyBox.CaseKeyValidationCallback = this.ValidateCaseKey;

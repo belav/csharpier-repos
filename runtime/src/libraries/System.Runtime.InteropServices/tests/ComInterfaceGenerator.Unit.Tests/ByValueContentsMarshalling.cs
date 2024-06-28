@@ -74,25 +74,25 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In, "int", p),
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In, "byte", p),
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + MarshalAsU4, "bool", p),
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + MarshalAsU2, "char", p),
-                InIsNotSupported
+                InIsNotSupported,
             };
 
             yield return new object[]
@@ -104,14 +104,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In, "IntClass", p)
                     + CodeSnippets.IntClassAndMarshaller,
-                InIsNotSupported
+                InIsNotSupported,
             };
 
             DiagnosticResult[] OutIsNotSupported = [outAttributeNotSupported];
@@ -119,26 +119,26 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Out, "int", p),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Out, "IntStruct", p)
                     + CodeSnippets.IntStructAndMarshaller,
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Out + MarshalAsU4, "bool", p),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Out + MarshalAsU2, "char", p),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
 
             yield return new object[]
@@ -150,14 +150,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Out, "IntClass", p)
                     + CodeSnippets.IntClassAndMarshaller,
-                OutIsNotSupported
+                OutIsNotSupported,
             };
 
             DiagnosticResult[] InOutIsNotSupported = [inOutAttributeNotSupported];
@@ -165,26 +165,26 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Out, "int", p),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Out, "IntStruct", p)
                     + CodeSnippets.IntStructAndMarshaller,
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Out + MarshalAsU4, "bool", p),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Out + MarshalAsU2, "char", p),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
 
             yield return new object[]
@@ -196,14 +196,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Out, "IntClass", p)
                     + CodeSnippets.IntClassAndMarshaller,
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
 
             // Any ref keyword is okay for non-collection types
@@ -213,25 +213,25 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("out", "IntStruct", p)
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("out", "byte", p),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalAsU4 + "out", "bool", p),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalAsU2 + "out", "char", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -242,14 +242,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("out", "IntClass", p)
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             yield return new object[]
@@ -257,25 +257,25 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("in", "IntStruct", p)
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("in", "byte", p),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalAsU4 + "in", "bool", p),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalAsU2 + "in", "char", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -286,14 +286,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("in", "IntClass", p)
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             yield return new object[]
@@ -301,25 +301,25 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("ref", "IntStruct", p)
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("ref", "byte", p),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalAsU4 + "ref", "bool", p),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalAsU2 + "ref", "char", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -330,14 +330,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType("ref", "IntClass", p)
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
         }
 
@@ -366,7 +366,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Count, "int[]", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -377,7 +377,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -388,7 +388,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -398,7 +398,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "int[]",
                     p
                 ) + CodeSnippets.IntMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -409,7 +409,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -420,7 +420,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -430,7 +430,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -440,14 +440,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(In + Out + Count, "int[]", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -458,7 +458,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -469,7 +469,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -479,7 +479,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "int[]",
                     p
                 ) + CodeSnippets.IntMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -490,7 +490,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -501,7 +501,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -511,7 +511,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -521,14 +521,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Out + Count, "int[]", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -539,7 +539,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -550,7 +550,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -560,7 +560,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "int[]",
                     p
                 ) + CodeSnippets.IntMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -571,7 +571,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -582,7 +582,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -592,7 +592,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -602,7 +602,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             // Array parameters without [In] or [Out] should provide an Info diagnostic
@@ -616,7 +616,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Count, "int[]", p),
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
@@ -627,7 +627,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
@@ -638,14 +638,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(MarshalUsingIntMarshaller + Count, "int[]", p)
                     + CodeSnippets.IntMarshaller,
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
@@ -656,7 +656,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
@@ -667,7 +667,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
@@ -677,7 +677,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
             yield return new object[]
             {
@@ -687,7 +687,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                PreferInOutAttributes
+                PreferInOutAttributes,
             };
 
             // Ref Kinds shouldn't warn
@@ -695,7 +695,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Count, "in int[]", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -706,7 +706,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -717,7 +717,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -727,7 +727,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "in int[]",
                     p
                 ) + CodeSnippets.IntMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -738,7 +738,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -749,7 +749,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -759,7 +759,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "in IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -769,14 +769,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "in IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Count, "out int[]", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -787,7 +787,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -798,7 +798,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -808,7 +808,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "out int[]",
                     p
                 ) + CodeSnippets.IntMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -819,7 +819,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -830,7 +830,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -840,7 +840,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "out IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -850,14 +850,14 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "out IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
 
             yield return new object[]
             {
                 ID(),
                 codeSnippets.ByValueMarshallingOfType(Count, "ref int[]", p),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -868,7 +868,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -879,7 +879,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -889,7 +889,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "ref int[]",
                     p
                 ) + CodeSnippets.IntMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -900,7 +900,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf16, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -911,7 +911,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     p,
                     (StringMarshalling.Utf8, null)
                 ),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -921,7 +921,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "ref IntStruct[]",
                     p
                 ) + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
@@ -931,7 +931,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     "ref IntClass[]",
                     p
                 ) + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
         }
 
@@ -971,32 +971,32 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 Source(MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 Source(MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 Source("", "string", (StringMarshalling.Utf16, null)),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 Source("", "string", (StringMarshalling.Utf8, null)),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 Source(MarshalCollection(1), CodeSnippets.GetCustomCollectionType("int")),
-                None
+                None,
             };
 
             // [In] and [Out] are not allowed on custom collections
@@ -1007,32 +1007,32 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 Source(In + MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In + MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In, "string", (StringMarshalling.Utf16, null)),
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In, "string", (StringMarshalling.Utf8, null)),
-                InIsNotSupported
+                InIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In + MarshalCollection(1), CodeSnippets.GetCustomCollectionType("int")),
-                InIsNotSupported
+                InIsNotSupported,
             };
 
             yield return new object[] { ID(), Source(Out, "int"), OutIsNotSupported };
@@ -1042,32 +1042,32 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 Source(Out + MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(Out + MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(Out, "string", (StringMarshalling.Utf16, null)),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(Out, "string", (StringMarshalling.Utf8, null)),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(Out + MarshalCollection(1), CodeSnippets.GetCustomCollectionType("int")),
-                OutIsNotSupported
+                OutIsNotSupported,
             };
 
             yield return new object[] { ID(), Source(In + Out, "int"), InOutIsNotSupported };
@@ -1077,26 +1077,26 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 Source(In + Out + MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In + Out + MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In + Out, "string", (StringMarshalling.Utf16, null)),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
                 ID(),
                 Source(In + Out, "string", (StringMarshalling.Utf8, null)),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
             yield return new object[]
             {
@@ -1105,7 +1105,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     In + Out + MarshalCollection(1),
                     CodeSnippets.GetCustomCollectionType("int")
                 ),
-                InOutIsNotSupported
+                InOutIsNotSupported,
             };
 
             // RefKind modifiers are okay
@@ -1116,26 +1116,26 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 SourceWithRefKind("in", MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("in", MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("in", "", "string", (StringMarshalling.Utf16, null)),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("in", "", "string", (StringMarshalling.Utf8, null)),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -1145,7 +1145,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     MarshalCollection(1),
                     CodeSnippets.GetCustomCollectionType("int")
                 ),
-                None
+                None,
             };
 
             yield return new object[] { ID(), SourceWithRefKind("out", "", "int"), None };
@@ -1155,26 +1155,26 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 SourceWithRefKind("out", MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("out", MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("out", "", "string", (StringMarshalling.Utf16, null)),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("out", "", "string", (StringMarshalling.Utf8, null)),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -1184,7 +1184,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     MarshalCollection(1),
                     CodeSnippets.GetCustomCollectionType("int")
                 ),
-                None
+                None,
             };
 
             yield return new object[] { ID(), SourceWithRefKind("ref", "", "int"), None };
@@ -1194,26 +1194,26 @@ namespace ComInterfaceGenerator.Unit.Tests
                 ID(),
                 SourceWithRefKind("ref", MarshalUsing("IntClassMarshaller", 1), "IntClass")
                     + CodeSnippets.IntClassAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("ref", MarshalUsing("IntStructMarshaller", 1), "IntStruct")
                     + CodeSnippets.IntStructAndMarshaller,
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("ref", "", "string", (StringMarshalling.Utf16, null)),
-                None
+                None,
             };
             yield return new object[]
             {
                 ID(),
                 SourceWithRefKind("ref", "", "string", (StringMarshalling.Utf8, null)),
-                None
+                None,
             };
             yield return new object[]
             {
@@ -1223,7 +1223,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                     MarshalCollection(1),
                     CodeSnippets.GetCustomCollectionType("int")
                 ),
-                None
+                None,
             };
 
             string Source(

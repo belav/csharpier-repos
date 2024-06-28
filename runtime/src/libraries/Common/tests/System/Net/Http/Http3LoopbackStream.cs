@@ -409,7 +409,7 @@ namespace System.Net.Test.Common
         {
             HttpRequestData request = new HttpRequestData
             {
-                RequestId = Http3LoopbackConnection.GetRequestId(_stream)
+                RequestId = Http3LoopbackConnection.GetRequestId(_stream),
             };
 
             (int prefixLength, int requiredInsertCount, int deltaBase) =

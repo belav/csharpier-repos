@@ -174,7 +174,7 @@ namespace System.Net
         {
             None = 0,
             SkipCompletionPortOnSuccess = 1,
-            SkipSetEventOnHandle = 2
+            SkipSetEventOnHandle = 2,
         }
 
 #if STRESS || !DEBUG
@@ -690,7 +690,7 @@ namespace System.Net
                 RASCS_PasswordExpired,
                 RASCS_InvokeEapUI,
                 RASCS_Connected = RASCS_DONE,
-                RASCS_Disconnected
+                RASCS_Disconnected,
             }
         }
 
@@ -1231,7 +1231,7 @@ namespace System.Net
                 None = 0x00,
                 Memory = 0x01,
                 File = 0x02,
-                EndOfPacket = 0x04
+                EndOfPacket = 0x04,
             }
 
             // Structure equivalent to TRANSMIT_PACKETS_ELEMENT
@@ -2181,14 +2181,16 @@ namespace System.Net
                 AutoDetect = 0x00000001, // WINHTTP_AUTOPROXY_AUTO_DETECT
                 AutoProxyConfigUrl = 0x00000002, // WINHTTP_AUTOPROXY_CONFIG_URL
                 RunInProcess = 0x00010000, // WINHTTP_AUTOPROXY_RUN_INPROCESS
-                RunOutProcessOnly = 0x00020000 // WINHTTP_AUTOPROXY_RUN_OUTPROCESS_ONLY
+                RunOutProcessOnly =
+                    0x00020000 // WINHTTP_AUTOPROXY_RUN_OUTPROCESS_ONLY
+                ,
             }
 
             internal enum AccessType
             {
                 DefaultProxy = 0,
                 NoProxy = 1,
-                NamedProxy = 3
+                NamedProxy = 3,
             }
 
             [Flags]
@@ -2938,7 +2940,7 @@ namespace System.Net
                 HttpRequestInfoTypeChannelBind,
                 HttpRequestInfoTypeSslProtocol,
                 HttpRequestInfoTypeSslTokenBindingDraft,
-                HttpRequestInfoTypeSslTokenBinding
+                HttpRequestInfoTypeSslTokenBinding,
             }
 
             internal enum HTTP_RESPONSE_INFO_TYPE
@@ -3044,7 +3046,7 @@ namespace System.Net
             {
                 HttpServiceBindingTypeNone = 0,
                 HttpServiceBindingTypeW,
-                HttpServiceBindingTypeA
+                HttpServiceBindingTypeA,
             }
 
             [StructLayout(LayoutKind.Sequential)]
@@ -3546,7 +3548,7 @@ namespace System.Net
 
                     HttpHeaderResponseMaximum = 30,
 
-                    HttpHeaderMaximum = 41
+                    HttpHeaderMaximum = 41,
                 }
 
                 private static string[] m_Strings =

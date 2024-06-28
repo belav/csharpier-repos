@@ -63,7 +63,7 @@ public class StatePersistenceTest
             var t when t == typeof(InteractiveServerRenderMode) => "server",
             var t when t == typeof(InteractiveWebAssemblyRenderMode) => "wasm",
             var t when t == typeof(InteractiveAutoRenderMode) => "auto",
-            _ => throw new ArgumentException($"Unknown render mode: {renderMode.Name}")
+            _ => throw new ArgumentException($"Unknown render mode: {renderMode.Name}"),
         };
 
         if (!suppressEnhancedNavigation)
@@ -280,16 +280,15 @@ public class StatePersistenceTest
         );
         if (streamingId == null || streamingCompleted)
         {
-            interactiveRuntime = !interactive
-                ? "none"
-                : mode == "server" || mode == "wasm"
-                    ? mode
-                    : (
-                        interactiveRuntime
-                        ?? throw new InvalidOperationException(
-                            "Specify interactiveRuntime for auto mode"
-                        )
-                    );
+            interactiveRuntime =
+                !interactive ? "none"
+                : mode == "server" || mode == "wasm" ? mode
+                : (
+                    interactiveRuntime
+                    ?? throw new InvalidOperationException(
+                        "Specify interactiveRuntime for auto mode"
+                    )
+                );
 
             Browser.Equal(
                 $"Interactive runtime: {interactiveRuntime}",

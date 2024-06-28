@@ -67,7 +67,7 @@ namespace Microsoft.Scripting
             BindingSlow,
             BindingFast,
             BindingTarget, // a rule was bound against a target of a specific type
-            Count
+            Count,
         }
 
         [MultiRuntimeAware]

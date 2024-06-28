@@ -387,7 +387,7 @@ namespace System.Web.UI.WebControls
         {
             Insert = 0,
             Remove = 1,
-            Clear = 2
+            Clear = 2,
         }
 
         // This is a copy of the ArrayListEnumeratorSimple in ArrayList.cs

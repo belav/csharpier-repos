@@ -11,9 +11,9 @@ public class NoNamespaceTests
     [Fact]
     public void Invalid()
     {
-        var thirdModel = new ThirdModelNoNamespace { P5 = "1234", };
+        var thirdModel = new ThirdModelNoNamespace { P5 = "1234" };
 
-        var secondModel = new SecondModelNoNamespace { P4 = "1234", };
+        var secondModel = new SecondModelNoNamespace { P4 = "1234" };
 
         var firstModel = new FirstModelNoNamespace
         {
@@ -31,9 +31,9 @@ public class NoNamespaceTests
     [Fact]
     public void Valid()
     {
-        var thirdModel = new ThirdModelNoNamespace { P5 = "12345", };
+        var thirdModel = new ThirdModelNoNamespace { P5 = "12345" };
 
-        var secondModel = new SecondModelNoNamespace { P4 = "12345", };
+        var secondModel = new SecondModelNoNamespace { P4 = "12345" };
 
         var firstModel = new FirstModelNoNamespace
         {

@@ -62,7 +62,7 @@ namespace DebuggerTests
                             ltp = TString(ltp),
                             sdp = TString(sdp),
                             stp = TString(stp),
-                            dt = TDateTime(new DateTime(2020, 1, 2, 3, 4, 5))
+                            dt = TDateTime(new DateTime(2020, 1, 2, 3, 4, 5)),
                         },
                         "locals",
                         num_fields: 8
@@ -141,7 +141,7 @@ namespace DebuggerTests
                             ltp = TString(ltp),
                             sdp = TString(sdp),
                             stp = TString(stp),
-                            dt = TDateTime(new DateTime(2020, 1, 2, 3, 4, 5))
+                            dt = TDateTime(new DateTime(2020, 1, 2, 3, 4, 5)),
                         },
                         "locals",
                         num_fields: 8

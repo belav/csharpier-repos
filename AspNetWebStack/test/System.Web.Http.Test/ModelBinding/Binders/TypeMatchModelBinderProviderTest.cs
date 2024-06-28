@@ -16,7 +16,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = GetBindingContext();
             bindingContext.ValueProvider = new SimpleHttpValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeMatchModelBinderProvider provider = new TypeMatchModelBinderProvider();
@@ -58,7 +58,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     null,
                     modelType
                 ),
-                ModelName = "theModelName"
+                ModelName = "theModelName",
             };
         }
     }

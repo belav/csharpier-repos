@@ -88,7 +88,7 @@ namespace System.Web.Http.Tracing.Tracers
             JsonSerializerSettings serializerSettings = new JsonSerializerSettings();
             JsonMediaTypeFormatter innerFormatter = new JsonMediaTypeFormatter()
             {
-                SerializerSettings = serializerSettings
+                SerializerSettings = serializerSettings,
             };
             JsonMediaTypeFormatterTracer tracer = new JsonMediaTypeFormatterTracer(
                 innerFormatter,
@@ -158,7 +158,7 @@ namespace System.Web.Http.Tracing.Tracers
                                 Kind = TraceKind.Begin,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Type='SampleType', content-type='application/json'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
                             new TraceRecord(
                                 request,
@@ -169,11 +169,11 @@ namespace System.Web.Http.Tracing.Tracers
                                 Kind = TraceKind.End,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Value read='System.Net.Http.Formatting.SampleType'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
                         },
                         request,
-                        "{\"Number\":42}"
+                        "{\"Number\":42}",
                     },
                     new object[]
                     {
@@ -188,7 +188,7 @@ namespace System.Web.Http.Tracing.Tracers
                                 Kind = TraceKind.Begin,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Type='SampleType', content-type='application/json'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
                             new TraceRecord(
                                 request,
@@ -201,7 +201,7 @@ namespace System.Web.Http.Tracing.Tracers
                                 Operator = "JsonMediaTypeFormatter",
                                 Exception = new JsonReaderException(
                                     "Unterminated string. Expected delimiter: \". Path '', line 1, position 12."
-                                )
+                                ),
                             },
                             new TraceRecord(
                                 request,
@@ -212,12 +212,12 @@ namespace System.Web.Http.Tracing.Tracers
                                 Kind = TraceKind.End,
                                 Operation = "ReadFromStreamAsync",
                                 Message = "Value read='null'",
-                                Operator = "JsonMediaTypeFormatter"
+                                Operator = "JsonMediaTypeFormatter",
                             },
                         },
                         request,
-                        "{\"Number:42}"
-                    }
+                        "{\"Number:42}",
+                    },
                 };
             }
         }

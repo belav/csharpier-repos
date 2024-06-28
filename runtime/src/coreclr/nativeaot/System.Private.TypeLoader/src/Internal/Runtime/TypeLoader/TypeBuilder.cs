@@ -405,7 +405,7 @@ namespace Internal.Runtime.TypeLoader
                 _typeSystemContext = method.Context,
                 _typeArgumentHandles = method.OwningType.Instantiation,
                 _methodArgumentHandles = method.Instantiation,
-                _module = nativeLayoutModule
+                _module = nativeLayoutModule,
             };
 
             BagElementKind kind;
@@ -1066,7 +1066,7 @@ namespace Internal.Runtime.TypeLoader
                     ),
                     _instantiatedTypeHandle = typeAsDefType
                         .GetTypeBuilderState()
-                        .HalfBakedRuntimeTypeHandle
+                        .HalfBakedRuntimeTypeHandle,
                 };
             }
         }
@@ -1081,7 +1081,7 @@ namespace Internal.Runtime.TypeLoader
                     _declaringTypeHandle = GetRuntimeTypeHandle(method.OwningType),
                     _genericMethodArgumentHandles = GetRuntimeTypeHandles(method.Instantiation),
                     _methodNameAndSignature = method.NameAndSignature,
-                    _methodDictionary = method.RuntimeMethodDictionary
+                    _methodDictionary = method.RuntimeMethodDictionary,
                 };
             }
         }

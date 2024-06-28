@@ -111,7 +111,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 "https://ocsp.some.example",
             };
 
-            string[] expectedCaIssuers = { "potato", "salad", };
+            string[] expectedCaIssuers = { "potato", "salad" };
 
             Assert.Equal(expectedOcsp, aia.EnumerateOcspUris());
             Assert.Equal(expectedCaIssuers, aia.EnumerateCAIssuersUris());
@@ -156,7 +156,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             X509AuthorityInformationAccessExtension aia =
                 new X509AuthorityInformationAccessExtension(
-                    new[] { "ocsp1", "ocsp2", },
+                    new[] { "ocsp1", "ocsp2" },
                     Enumerable.Empty<string>()
                 );
 
@@ -178,7 +178,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             X509AuthorityInformationAccessExtension aia =
                 new X509AuthorityInformationAccessExtension(
                     Enumerable.Empty<string>(),
-                    new[] { "ca1", "ca2", "ca3", },
+                    new[] { "ca1", "ca2", "ca3" },
                     true
                 );
 
@@ -199,8 +199,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             X509AuthorityInformationAccessExtension aia =
                 new X509AuthorityInformationAccessExtension(
-                    new[] { "A", "B", "C", },
-                    new[] { "D", },
+                    new[] { "A", "B", "C" },
+                    new[] { "D" },
                     false
                 );
 

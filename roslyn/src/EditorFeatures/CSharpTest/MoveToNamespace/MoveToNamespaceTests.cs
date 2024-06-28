@@ -116,7 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "A",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.B.C.MyClass", "A.MyClass" }
+                    { "A.B.C.MyClass", "A.MyClass" },
                 }
             );
 
@@ -144,7 +144,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyClass", "B.MyClass" }
+                    { "A.MyClass", "B.MyClass" },
                 }
             );
 
@@ -172,7 +172,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.B.C.MyClass", "B.MyClass" }
+                    { "A.B.C.MyClass", "B.MyClass" },
                 }
             );
 
@@ -200,7 +200,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyClass", "B.MyClass" }
+                    { "A.MyClass", "B.MyClass" },
                 }
             );
 
@@ -228,7 +228,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyClass", "B.MyClass" }
+                    { "A.MyClass", "B.MyClass" },
                 }
             );
 
@@ -311,7 +311,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
                     { "A.MyClass", "B.MyClass" },
-                    { "A.MyOtherClass", "B.MyOtherClass" }
+                    { "A.MyOtherClass", "B.MyOtherClass" },
                 }
             );
 
@@ -384,7 +384,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                     { "A.MyStruct", "B.MyStruct" },
                     { "A.MyInterface", "B.MyInterface" },
                     { "A.MyClass", "B.MyClass" },
-                    { "A.MyOtherClass", "B.MyOtherClass" }
+                    { "A.MyOtherClass", "B.MyOtherClass" },
                 }
             );
 
@@ -459,7 +459,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType", "B.MyType" }
+                    { "A.MyType", "B.MyType" },
                 }
             );
 
@@ -482,7 +482,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MoveToNamespace
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType", "B.MyType" }
+                    { "A.MyType", "B.MyType" },
                 }
             );
 
@@ -516,7 +516,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType", "B.MyType" }
+                    { "A.MyType", "B.MyType" },
                 }
             );
 
@@ -555,7 +555,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyClass", "B.MyClass" }
+                    { "A.MyClass", "B.MyClass" },
                 }
             );
 
@@ -589,7 +589,7 @@ namespace {{|Warning:B|}}
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType2", "B.MyType2" }
+                    { "A.MyType2", "B.MyType2" },
                 }
             );
 
@@ -628,7 +628,7 @@ namespace {{|Warning:B|}}
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.IMyClass", "B.IMyClass" }
+                    { "A.IMyClass", "B.IMyClass" },
                 }
             );
 
@@ -673,7 +673,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType2", "B.MyType2" }
+                    { "A.MyType2", "B.MyType2" },
                 }
             );
 
@@ -718,7 +718,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType2", "B.MyType2" }
+                    { "A.MyType2", "B.MyType2" },
                 }
             );
 
@@ -763,7 +763,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType2", "B.MyType2" }
+                    { "A.MyType2", "B.MyType2" },
                 }
             );
 
@@ -808,7 +808,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyType2", "B.MyType2" }
+                    { "A.MyType2", "B.MyType2" },
                 }
             );
 
@@ -877,7 +877,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.IMyClass", "B.IMyClass" }
+                    { "A.IMyClass", "B.IMyClass" },
                 }
             );
 
@@ -935,7 +935,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyClass3", "B.MyClass3" }
+                    { "A.MyClass3", "B.MyClass3" },
                 }
             );
 
@@ -1060,7 +1060,7 @@ namespace A
                 targetNamespace: "My.New.Namespace",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.B.C.MyClass3", "My.New.Namespace.MyClass3" }
+                    { "A.B.C.MyClass3", "My.New.Namespace.MyClass3" },
                 }
             );
 
@@ -1118,7 +1118,7 @@ namespace A
                 targetNamespace: "My.New.Namespace",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.MyClass3", "My.New.Namespace.MyClass3" }
+                    { "A.MyClass3", "My.New.Namespace.MyClass3" },
                 }
             );
 
@@ -1176,7 +1176,7 @@ namespace A
                 targetNamespace: "B",
                 expectedSymbolChanges: new Dictionary<string, string>()
                 {
-                    { "A.B.C.MyClass3", "B.MyClass3" }
+                    { "A.B.C.MyClass3", "B.MyClass3" },
                 }
             );
 

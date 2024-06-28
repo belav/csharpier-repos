@@ -71,7 +71,7 @@ namespace System
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(c1),
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -83,7 +83,7 @@ namespace System
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(c2),
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -103,7 +103,7 @@ namespace System
                 {
                     new CSharpCompilationReference(c1),
                     new CSharpCompilationReference(c2),
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -135,7 +135,7 @@ namespace System
                     MscorlibRef,
                     MetadataReference.CreateFromImage(
                         File.ReadAllBytes(typeof(TypeTests).GetTypeInfo().Assembly.Location)
-                    )
+                    ),
                 }
             );
 
@@ -209,7 +209,7 @@ namespace System
                 references: new[]
                 {
                     new CSharpCompilationReference(c1),
-                    new CSharpCompilationReference(c2)
+                    new CSharpCompilationReference(c2),
                 }
             );
 

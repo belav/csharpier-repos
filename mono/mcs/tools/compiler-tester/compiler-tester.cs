@@ -919,7 +919,7 @@ namespace TestRunner
             Success,
             ILError,
             DebugError,
-            MethodAttributesError
+            MethodAttributesError,
         }
 
         public PositiveChecker(ITester tester, string verif_file)
@@ -1570,7 +1570,7 @@ namespace TestRunner
             Missing,
             WrongMessage,
             MissingLocation,
-            Duplicate
+            Duplicate,
         }
 
         public NegativeChecker(ITester tester, bool check_msg)

@@ -651,7 +651,7 @@ namespace System.Reflection
                 new CustomAttributeNamedArgument(
                     attrType.GetField("ThrowOnUnmappableChar"),
                     throwOnUnmappableChar
-                )
+                ),
             };
 
             return new CustomAttributeData(

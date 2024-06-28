@@ -213,7 +213,7 @@ namespace AutoMapper.UnitTests
                 _model = new[]
                 {
                     new ModelObject { SomeValue = "First" },
-                    new ModelObject { SomeValue = "Second" }
+                    new ModelObject { SomeValue = "Second" },
                 };
                 _dto = (ModelDto[])Mapper.Map(_model, typeof(ModelObject[]), typeof(ModelDto[]));
             }
@@ -258,7 +258,7 @@ namespace AutoMapper.UnitTests
                 _model = new List<ModelObject>
                 {
                     new ModelObject { SomeValue = "First" },
-                    new ModelObject { SomeValue = "Second" }
+                    new ModelObject { SomeValue = "Second" },
                 };
                 _dto = (ModelDto[])
                     Mapper.Map(_model, typeof(List<ModelObject>), typeof(ModelDto[]));

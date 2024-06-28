@@ -59,6 +59,6 @@ namespace System
         Double = 14,
         Decimal = 15,
         DateTime = 16,
-        String = 18
+        String = 18,
     }
 }

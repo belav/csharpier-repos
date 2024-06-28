@@ -640,7 +640,7 @@ namespace Roslyn.Utilities
         {
             VolumeSeparatorChar,
             DirectorySeparatorChar,
-            AltDirectorySeparatorChar
+            AltDirectorySeparatorChar,
         };
 
         private static string[] GetPathParts(string path)
@@ -745,11 +745,9 @@ namespace Roslyn.Utilities
                     // Normalize the path separators if used uniformly in the replacement
                     bool hasSlash = replacementPrefix.IndexOf('/') >= 0;
                     bool hasBackslash = replacementPrefix.IndexOf('\\') >= 0;
-                    return (hasSlash && !hasBackslash)
-                        ? replacement.Replace('\\', '/')
-                        : (hasBackslash && !hasSlash)
-                            ? replacement.Replace('/', '\\')
-                            : replacement;
+                    return (hasSlash && !hasBackslash) ? replacement.Replace('\\', '/')
+                        : (hasBackslash && !hasSlash) ? replacement.Replace('/', '\\')
+                        : replacement;
                 }
             }
 

@@ -333,7 +333,7 @@ public class Http2WebSocketTests : Http2TestBase
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT"),
             new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "WebSocket"),
-            new KeyValuePair<string, string>(headerName, value)
+            new KeyValuePair<string, string>(headerName, value),
         };
         await SendHeadersAsync(
             1,
@@ -361,7 +361,7 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "example.com"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "WebSocket")
+            new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "WebSocket"),
         };
         await SendHeadersAsync(
             1,

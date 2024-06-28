@@ -312,7 +312,7 @@ namespace LibraryImportGenerator.UnitTests
                     {
                         ConvertToLibraryImportFixer.SelectedSuffixOption,
                         new Option.String(suffix.ToString())
-                    }
+                    },
                 }
             );
         }
@@ -357,7 +357,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
             string fixedSourceWithWSuffix = """
@@ -374,7 +374,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithWSuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") },
                 }
             );
         }
@@ -419,7 +419,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -452,7 +452,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -483,7 +483,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -516,7 +516,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -547,7 +547,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -623,7 +623,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -668,7 +668,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithASuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("W") },
                 }
             );
         }
@@ -699,7 +699,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSourceWithNoAdditionalSuffix,
                 new Dictionary<string, Option>
                 {
-                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") }
+                    { ConvertToLibraryImportFixer.SelectedSuffixOption, new Option.String("A") },
                 }
             );
         }
@@ -1062,7 +1062,7 @@ namespace LibraryImportGenerator.UnitTests
                 fixedSource,
                 new Dictionary<string, Option>
                 {
-                    { Option.MayRequireAdditionalWork, new Option.Bool(true) }
+                    { Option.MayRequireAdditionalWork, new Option.Bool(true) },
                 }
             );
         }
@@ -1218,7 +1218,7 @@ namespace LibraryImportGenerator.UnitTests
                 allFixedSource,
                 new Dictionary<string, Option>
                 {
-                    { Option.MayRequireAdditionalWork, new Option.Bool(true) }
+                    { Option.MayRequireAdditionalWork, new Option.Bool(true) },
                 }
             );
         }
@@ -1277,7 +1277,7 @@ namespace LibraryImportGenerator.UnitTests
 
         private static async Task VerifyCodeFixAsync(string source, string fixedSource)
         {
-            var test = new VerifyCS.Test { TestCode = source, FixedCode = fixedSource, };
+            var test = new VerifyCS.Test { TestCode = source, FixedCode = fixedSource };
 
             await test.RunAsync();
         }

@@ -206,7 +206,7 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[]
             {
                 CreateVariant(VT_ARRAY, new UnionTypes { _parray = IntPtr.Zero }),
-                null
+                null,
             };
         }
 
@@ -367,7 +367,7 @@ namespace System.Runtime.InteropServices.Tests
                     VT_RECORD,
                     new UnionTypes
                     {
-                        _record = new Record { _record = pRecord, _recordInfo = pRecordInfo }
+                        _record = new Record { _record = pRecord, _recordInfo = pRecordInfo },
                     }
                 );
                 AssertExtensions.Throws<ArgumentException>(

@@ -608,7 +608,7 @@ namespace System.Web
             (byte)'\r',
             (byte)'\n',
             (byte)'\r',
-            (byte)'\n'
+            (byte)'\n',
         };
 
         private void Flush(bool finalFlush, bool async = false)
@@ -2976,6 +2976,7 @@ namespace System.Web
             NotAttempted, // Redirect or rewrite was not attempted, possibly because no redirect URL was specified
             Success, // Redirect or rewrite was attempted and succeeded
             Failed // Redirect or rewrite was attempted and failed, possibly due to the error page throwing
+            ,
         }
 
         // Implementation of the DefaultHttpHandler for IIS6+
@@ -4233,7 +4234,7 @@ namespace System.Web
     {
         Files,
         CacheItems,
-        VirtualPaths
+        VirtualPaths,
     }
 
     struct ResponseDependencyList

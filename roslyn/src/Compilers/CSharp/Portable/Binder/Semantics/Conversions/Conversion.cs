@@ -154,9 +154,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             _kind =
                 conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
                     ? ConversionKind.NoConversion
-                    : isImplicit
-                        ? ConversionKind.ImplicitUserDefined
-                        : ConversionKind.ExplicitUserDefined;
+                : isImplicit ? ConversionKind.ImplicitUserDefined
+                : ConversionKind.ExplicitUserDefined;
 
             _uncommonData =
                 conversionResult.Kind == UserDefinedConversionResultKind.NoApplicableOperators
@@ -445,30 +444,24 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return nestedConversion.Kind switch
             {
-                ConversionKind.Identity =>
-                    kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithIdentityUnderlying
-                        : ExplicitNullableWithIdentityUnderlying,
-                ConversionKind.ImplicitConstant =>
-                    kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithImplicitConstantUnderlying
-                        : ExplicitNullableWithImplicitConstantUnderlying,
-                ConversionKind.ImplicitNumeric =>
-                    kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithImplicitNumericUnderlying
-                        : ExplicitNullableWithImplicitNumericUnderlying,
-                ConversionKind.ExplicitNumeric =>
-                    kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithExplicitNumericUnderlying
-                        : ExplicitNullableWithExplicitNumericUnderlying,
-                ConversionKind.ExplicitEnumeration =>
-                    kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithExplicitEnumerationUnderlying
-                        : ExplicitNullableWithExplicitEnumerationUnderlying,
-                ConversionKind.ExplicitPointerToInteger =>
-                    kind == ConversionKind.ImplicitNullable
-                        ? ImplicitNullableWithPointerToIntegerUnderlying
-                        : ExplicitNullableWithPointerToIntegerUnderlying,
+                ConversionKind.Identity => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithIdentityUnderlying
+                    : ExplicitNullableWithIdentityUnderlying,
+                ConversionKind.ImplicitConstant => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithImplicitConstantUnderlying
+                    : ExplicitNullableWithImplicitConstantUnderlying,
+                ConversionKind.ImplicitNumeric => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithImplicitNumericUnderlying
+                    : ExplicitNullableWithImplicitNumericUnderlying,
+                ConversionKind.ExplicitNumeric => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithExplicitNumericUnderlying
+                    : ExplicitNullableWithExplicitNumericUnderlying,
+                ConversionKind.ExplicitEnumeration => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithExplicitEnumerationUnderlying
+                    : ExplicitNullableWithExplicitEnumerationUnderlying,
+                ConversionKind.ExplicitPointerToInteger => kind == ConversionKind.ImplicitNullable
+                    ? ImplicitNullableWithPointerToIntegerUnderlying
+                    : ExplicitNullableWithPointerToIntegerUnderlying,
                 _ => new Conversion(kind, ImmutableArray.Create(nestedConversion)),
             };
         }
@@ -1316,7 +1309,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             {
                                 BoundTreeDumperNodeProducer.MakeTree(
                                     self.DeconstructionInfo.Invocation
-                                )
+                                ),
                             }
                         )
                     );

@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.Completion
             new()
             {
                 FilterOutOfScopeLocals = FilterOutOfScopeLocals,
-                HideAdvancedMembers = HideAdvancedMembers
+                HideAdvancedMembers = HideAdvancedMembers,
             };
 
         /// <summary>

@@ -55,7 +55,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             123,
                             127,
                             5,
-                            255
+                            255,
                         }
                     )
                 )
@@ -106,7 +106,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             11,
                             127,
                             5,
-                            -9
+                            -9,
                         }
                     )
                 )

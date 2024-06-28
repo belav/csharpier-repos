@@ -349,7 +349,7 @@ public class ChunkedRequestTests : LoggedTest
                     "Content-Length: 11",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "Hello World"
+                    "Hello World",
                 }
             );
 
@@ -367,7 +367,7 @@ public class ChunkedRequestTests : LoggedTest
                 "C",
                 "HelloChunked",
                 "0",
-                ""
+                "",
             };
 
             for (var i = 1; i < requestCount; i++)
@@ -384,7 +384,7 @@ public class ChunkedRequestTests : LoggedTest
                         $"HelloChunk{i:00}",
                         "0",
                         string.Concat("X-Trailer-Header: ", new string('a', i)),
-                        ""
+                        "",
                     }
                 );
             }
@@ -510,7 +510,7 @@ public class ChunkedRequestTests : LoggedTest
                     "Content-Length: 11",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "Hello World"
+                    "Hello World",
                 }
             );
 
@@ -528,7 +528,7 @@ public class ChunkedRequestTests : LoggedTest
                 "C",
                 "HelloChunked",
                 "0",
-                ""
+                "",
             };
 
             for (var i = 1; i < requestCount; i++)
@@ -545,7 +545,7 @@ public class ChunkedRequestTests : LoggedTest
                         $"HelloChunk{i:00}",
                         "0",
                         string.Concat("X-Trailer-Header: ", new string('a', i)),
-                        ""
+                        "",
                     }
                 );
             }
@@ -721,7 +721,7 @@ public class ChunkedRequestTests : LoggedTest
                     "Content-Length: 11",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "Hello World"
+                    "Hello World",
                 }
             );
 
@@ -739,7 +739,7 @@ public class ChunkedRequestTests : LoggedTest
                 "C;hello there",
                 "HelloChunked",
                 "0;hello there",
-                ""
+                "",
             };
 
             for (var i = 1; i < requestCount; i++)
@@ -755,7 +755,7 @@ public class ChunkedRequestTests : LoggedTest
                         $"HelloChunk{i:00}",
                         "0;hello there",
                         string.Concat("X-Trailer-Header: ", new string('a', i)),
-                        ""
+                        "",
                     }
                 );
             }

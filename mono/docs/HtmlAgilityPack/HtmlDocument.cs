@@ -2033,7 +2033,7 @@ namespace HtmlAgilityPack
             Comment,
             QuotedAttributeValue,
             ServerSideCode,
-            PcData
+            PcData,
         }
 
         #endregion

@@ -79,7 +79,7 @@ namespace System.IO
                     // ReadFile returns FALSE and GetLastError returns ERROR_HANDLE_EOF"
                     Interop.Errors.ERROR_HANDLE_EOF => numBytesRead,
                     _ when IsEndOfFile(errorCode, handle, fileOffset) => 0,
-                    _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, handle.Path)
+                    _ => throw Win32Marshal.GetExceptionForWin32Error(errorCode, handle.Path),
                 };
             }
         }

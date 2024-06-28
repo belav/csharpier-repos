@@ -2861,7 +2861,7 @@ namespace System.Windows.Forms
                 None,
                 Normal,
                 Shift,
-                Control
+                Control,
             }
 
             BoxSelect box_select_mode = BoxSelect.None;

@@ -197,7 +197,7 @@ namespace System.Linq.Expressions.Tests
                     2U,
                     (ulong)long.MaxValue,
                     1UL + long.MaxValue,
-                    ulong.MaxValue
+                    ulong.MaxValue,
                 };
             }
         }
@@ -272,7 +272,7 @@ namespace System.Linq.Expressions.Tests
                     float.MinValue,
                     float.MaxValue,
                     float.NegativeInfinity,
-                    float.PositiveInfinity
+                    float.PositiveInfinity,
                 };
             }
         }
@@ -313,7 +313,7 @@ namespace System.Linq.Expressions.Tests
                     double.MinValue,
                     double.MaxValue,
                     double.NegativeInfinity,
-                    double.PositiveInfinity
+                    double.PositiveInfinity,
                 };
             }
         }

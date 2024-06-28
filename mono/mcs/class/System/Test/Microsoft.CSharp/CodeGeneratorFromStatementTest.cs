@@ -205,7 +205,7 @@ namespace MonoTests.Microsoft.CSharp
                 new CodeExpressionStatement(new CodeSnippetExpression("DoB()")),
                 new CodeExpressionStatement(new CodeSnippetExpression("")),
                 new CodeSnippetStatement("A"),
-                new CodeExpressionStatement(new CodeSnippetExpression("DoC()"))
+                new CodeExpressionStatement(new CodeSnippetExpression("DoC()")),
             };
 
             CodeStatement[] falseStatements = new CodeStatement[]
@@ -215,7 +215,7 @@ namespace MonoTests.Microsoft.CSharp
                 new CodeExpressionStatement(new CodeSnippetExpression(";")),
                 new CodeExpressionStatement(new CodeSnippetExpression("DoE()")),
                 new CodeExpressionStatement(new CodeSnippetExpression("")),
-                new CodeExpressionStatement(new CodeSnippetExpression("DoF()"))
+                new CodeExpressionStatement(new CodeSnippetExpression("DoF()")),
             };
 
             CodeConditionStatement conditionStatement = new CodeConditionStatement();
@@ -455,7 +455,7 @@ namespace MonoTests.Microsoft.CSharp
                     new CodeLabeledStatement("test", new CodeSnippetStatement("C")),
                     new CodeExpressionStatement(new CodeSnippetExpression("")),
                     new CodeSnippetStatement("A"),
-                    new CodeExpressionStatement(new CodeSnippetExpression("DoC()"))
+                    new CodeExpressionStatement(new CodeSnippetExpression("DoC()")),
                 }
             );
             Assert.AreEqual(

@@ -270,7 +270,7 @@ namespace System.Net
                             {
                                 HostName = hostName ?? state.HostName,
                                 Aliases = Array.Empty<string>(),
-                                AddressList = addresses
+                                AddressList = addresses,
                             }
                     );
                 }

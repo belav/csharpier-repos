@@ -133,21 +133,21 @@ namespace System.Net.Configuration
         {
             Unspecified = -1,
             True = 1,
-            False = 0
+            False = 0,
         }
 
         public enum UseSystemDefaultValues
         {
             Unspecified = -1,
             True = 1,
-            False = 0
+            False = 0,
         }
 
         public enum AutoDetectValues
         {
             Unspecified = -1,
             True = 1,
-            False = 0
+            False = 0,
         }
     }
 }

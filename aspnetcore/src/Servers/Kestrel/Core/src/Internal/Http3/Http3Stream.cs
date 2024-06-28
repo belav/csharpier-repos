@@ -247,7 +247,7 @@ internal abstract partial class Http3Stream
         Static,
         StaticAndValue,
         Dynamic,
-        NameAndValue
+        NameAndValue,
     }
 
     public override void OnHeader(
@@ -565,7 +565,7 @@ internal abstract partial class Http3Stream
             69 => PseudoHeaderFields.Status,
             70 => PseudoHeaderFields.Status,
             71 => PseudoHeaderFields.Status,
-            _ => PseudoHeaderFields.None
+            _ => PseudoHeaderFields.None,
         };
 
         return headerField;
@@ -882,21 +882,17 @@ internal abstract partial class Http3Stream
             Http3FrameType.Settings
             or Http3FrameType.CancelPush
             or Http3FrameType.GoAway
-            or Http3FrameType.MaxPushId =>
-                throw new Http3ConnectionErrorException(
-                    CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
-                        _incomingFrame.FormattedType
-                    ),
-                    Http3ErrorCode.UnexpectedFrame
+            or Http3FrameType.MaxPushId => throw new Http3ConnectionErrorException(
+                CoreStrings.FormatHttp3ErrorUnsupportedFrameOnRequestStream(
+                    _incomingFrame.FormattedType
                 ),
+                Http3ErrorCode.UnexpectedFrame
+            ),
             // The server should never receive push promise
-            Http3FrameType.PushPromise =>
-                throw new Http3ConnectionErrorException(
-                    CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(
-                        _incomingFrame.FormattedType
-                    ),
-                    Http3ErrorCode.UnexpectedFrame
-                ),
+            Http3FrameType.PushPromise => throw new Http3ConnectionErrorException(
+                CoreStrings.FormatHttp3ErrorUnsupportedFrameOnServer(_incomingFrame.FormattedType),
+                Http3ErrorCode.UnexpectedFrame
+            ),
             _ => ProcessUnknownFrameAsync(),
         };
     }
@@ -1488,7 +1484,7 @@ internal abstract partial class Http3Stream
         PseudoHeaderFields,
         Headers,
         Body,
-        Trailers
+        Trailers,
     }
 
     [Flags]
@@ -1501,7 +1497,7 @@ internal abstract partial class Http3Stream
         Scheme = 0x8,
         Status = 0x10,
         Protocol = 0x20,
-        Unknown = 0x40000000
+        Unknown = 0x40000000,
     }
 
     private static class GracefulCloseInitiator

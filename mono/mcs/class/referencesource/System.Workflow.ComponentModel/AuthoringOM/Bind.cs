@@ -505,7 +505,7 @@ namespace System.Workflow.ComponentModel
     {
         Field = 1,
         Property = 2,
-        Method = 3
+        Method = 3,
     };
 
     [Browsable(true)]
@@ -1468,14 +1468,14 @@ namespace System.Workflow.ComponentModel
         Event,
         Property,
         IndexedProperty,
-        Index
+        Index,
     }
 
     internal enum PathWalkAction
     {
         Continue,
         Stop,
-        Cancel
+        Cancel,
     }; //stop returns true, while cancel returns false
 
     internal class PathMemberInfoEventArgs : EventArgs
@@ -2087,13 +2087,13 @@ namespace System.Workflow.ComponentModel
     internal enum SourceValueType
     {
         Property,
-        Indexer
+        Indexer,
     };
 
     internal enum DrillIn
     {
         Never,
-        IfNeeded
+        IfNeeded,
     };
 
     internal struct SourceValueInfo
@@ -2127,7 +2127,7 @@ namespace System.Workflow.ComponentModel
         {
             Init,
             Prop,
-            Done
+            Done,
         };
 
         internal String Error

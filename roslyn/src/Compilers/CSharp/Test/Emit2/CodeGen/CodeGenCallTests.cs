@@ -1968,7 +1968,7 @@ Position GetName for item '2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.ReleaseExe,
                     expectedOutput: expectedOutput
@@ -2059,7 +2059,7 @@ Position GetName for item '2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.DebugExe,
                     expectedOutput: expectedOutput
@@ -2151,7 +2151,7 @@ Position GetName for item '-2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.ReleaseExe,
                     expectedOutput: expectedOutput
@@ -2197,7 +2197,7 @@ Position GetName for item '-2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.DebugExe,
                     expectedOutput: expectedOutput
@@ -2289,7 +2289,7 @@ Position GetName for item '2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.ReleaseExe,
                     expectedOutput: expectedOutput
@@ -2385,7 +2385,7 @@ Position GetName for item '2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.DebugExe,
                     expectedOutput: expectedOutput
@@ -2477,7 +2477,7 @@ Position GetName for item '-2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.ReleaseExe,
                     expectedOutput: expectedOutput
@@ -2523,7 +2523,7 @@ Position GetName for item '-2'
                     {
                         source,
                         InterpolatedStringHandlerAttribute,
-                        InterpolatedStringHandlerArgumentAttribute
+                        InterpolatedStringHandlerArgumentAttribute,
                     },
                     options: TestOptions.DebugExe,
                     expectedOutput: expectedOutput

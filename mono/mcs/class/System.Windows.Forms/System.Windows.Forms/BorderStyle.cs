@@ -34,6 +34,6 @@ namespace System.Windows.Forms
     {
         None = 0,
         FixedSingle = 1,
-        Fixed3D = 2
+        Fixed3D = 2,
     }
 }

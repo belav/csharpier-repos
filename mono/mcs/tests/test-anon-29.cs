@@ -7,7 +7,7 @@ public class X
     string[,] EFGH =
     {
         { "E", "F" },
-        { "G", "H" }
+        { "G", "H" },
     };
 
     delegate string Foo();

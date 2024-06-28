@@ -31,6 +31,6 @@ namespace System.Net.Security
     {
         RequireEncryption = 0,
         AllowNoEncryption,
-        NoEncryption
+        NoEncryption,
     }
 }

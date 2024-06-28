@@ -38,7 +38,7 @@ namespace System.Text.Tests
             {
                 Encoding.UTF8,
                 Encoding.Unicode,
-                Encoding.BigEndianUnicode
+                Encoding.BigEndianUnicode,
             };
             foreach (Encoding srcEncoding in encodings)
             {

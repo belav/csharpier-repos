@@ -51,7 +51,7 @@ namespace System.SpanTests
                     16,
                     17,
                     18,
-                    19
+                    19,
                 };
 
                 ReadOnlySpan<int> source = a.AsSpan(7, 5);
@@ -141,7 +141,7 @@ namespace System.SpanTests
                     16,
                     17,
                     18,
-                    19
+                    19,
                 };
 
                 ReadOnlySpan<int> source = a.AsSpan(7, 5);

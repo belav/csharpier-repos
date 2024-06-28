@@ -156,7 +156,7 @@ namespace System.ComponentModel
                             typeof(int),
                             typeof(int),
                             typeof(int),
-                            typeof(int)
+                            typeof(int),
                         }
                     ),
                     new object[]
@@ -167,7 +167,7 @@ namespace System.ComponentModel
                         dt.Hour,
                         dt.Minute,
                         dt.Second,
-                        dt.Millisecond
+                        dt.Millisecond,
                     }
                 );
             }

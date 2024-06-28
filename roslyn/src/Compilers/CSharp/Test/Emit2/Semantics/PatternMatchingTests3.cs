@@ -1615,7 +1615,7 @@ public static class C {
                 //         _= (C)(o switch { _ => throw null! });
                 Diagnostic(ErrorCode.ERR_ConvertToStaticClass, "(C)(o switch { _ => throw null! })")
                     .WithArguments("C")
-                    .WithLocation(8, 12)
+                    .WithLocation(8, 12),
             };
             string expectedFlowGraph =
                 @"
@@ -6309,8 +6309,7 @@ static class Assert
                 "C.L",
                 type switch
                 {
-                    "nint" =>
-                        @"
+                    "nint" => @"
     {
       // Code size      145 (0x91)
       .maxstack  3
@@ -6399,8 +6398,7 @@ static class Assert
       IL_0090:  ret
     }
 ",
-                    "nuint" =>
-                        @"
+                    "nuint" => @"
     {
       // Code size      135 (0x87)
       .maxstack  3

@@ -21,14 +21,14 @@ namespace OrderByBugExample
                 {
                     Name = "b",
                     Value1 = 37,
-                    Value2 = 2
+                    Value2 = 2,
                 },
                 new Foo
                 {
                     Name = "b",
                     Value1 = 37,
-                    Value2 = 1
-                }
+                    Value2 = 1,
+                },
             };
 
             // Sort using a linq expression. Mono 2.6.1 ignores item.Value2, which is incorrect behaviour.

@@ -218,7 +218,7 @@ namespace System.Threading.Tasks.Tests.Status
             {
                 new FormatException(),
                 new InvalidOperationException(),
-                new ArgumentException()
+                new ArgumentException(),
             };
             var tcs = new TaskCompletionSource<object>();
             Assert.Equal(TaskStatus.WaitingForActivation, tcs.Task.Status);

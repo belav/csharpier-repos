@@ -1495,7 +1495,7 @@ namespace MonoTests.System.Net.Security
             2,
             2,
             7,
-            208
+            208,
         };
         byte[] m_clientCertRaw =
         {
@@ -2955,7 +2955,7 @@ namespace MonoTests.System.Net.Security
             2,
             2,
             7,
-            208
+            208,
         };
         X509Certificate2 m_serverCert;
         X509Certificate2 m_clientCert;

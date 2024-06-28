@@ -78,7 +78,7 @@ public class TemporaryCSharpProject
             {
                 Name = itemName,
                 Include = include,
-                Condition = condition
+                Condition = condition,
             }
         );
 
@@ -133,7 +133,7 @@ public class TemporaryCSharpProject
             {
                 Name = "ProjectReference",
                 Include = reference.Path,
-                Watch = watch
+                Watch = watch,
             }
         );
     }

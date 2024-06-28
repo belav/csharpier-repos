@@ -209,7 +209,7 @@ namespace Microsoft.VisualBasic
                 "readonly",
                 "synclock",
                 "uinteger",
-                "widening"
+                "widening",
             },
             new string[]
             { // 9 characters
@@ -254,7 +254,7 @@ namespace Microsoft.VisualBasic
                 "notoverridable",
             },
             null, // 15 characters
-            new string[] { "class_initialize", }
+            new string[] { "class_initialize" },
         };
 
         internal VBCodeGenerator() { }

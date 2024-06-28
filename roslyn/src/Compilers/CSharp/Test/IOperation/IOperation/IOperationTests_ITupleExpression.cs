@@ -646,7 +646,7 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int16 A, System.String B)) (
                 //         (short, string) t = /*<bind>*/(A: 1, B: null)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null")
                     .WithArguments("B", "(short, string)")
-                    .WithLocation(8, 46)
+                    .WithLocation(8, 46),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
@@ -709,7 +709,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/(short, string) t = (A: 1, B: null)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "B: null")
                     .WithArguments("B", "(short, string)")
-                    .WithLocation(8, 46)
+                    .WithLocation(8, 46),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -1154,7 +1154,7 @@ ITupleOperation (OperationKind.Tuple, Type: (System.Int16, System.String c1), Is
                 //         (short, string) t = /*<bind>*/(new C(0), c1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C(0)")
                     .WithArguments("C", "short")
-                    .WithLocation(29, 40)
+                    .WithLocation(29, 40),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<TupleExpressionSyntax>(
@@ -1243,7 +1243,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/(short, string) t = (new C(0), c1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C(0)")
                     .WithArguments("C", "short")
-                    .WithLocation(29, 40)
+                    .WithLocation(29, 40),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -1520,7 +1520,7 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                 //         var t = /*<bind>*/((int, (long c, int d)))(1, (a: 2, b: 3))/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_TupleLiteralNameMismatch, "b: 3")
                     .WithArguments("b", "(long c, int d)")
-                    .WithLocation(8, 62)
+                    .WithLocation(8, 62),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -1550,7 +1550,7 @@ class C
                 //         (int, int) t = (1, b ? 2 : 3);
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
                     .WithArguments("t")
-                    .WithLocation(6, 20)
+                    .WithLocation(6, 20),
             };
 
             string expectedFlowGraph =
@@ -1639,7 +1639,7 @@ class C
                 //         var t = (1, (2, b ? 2 : 3));
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
                     .WithArguments("t")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             string expectedFlowGraph =
@@ -1829,7 +1829,7 @@ class C
             {
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (i1, b ? i2 : i3) = (1, 2);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? i2 : i3").WithLocation(6, 14)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? i2 : i3").WithLocation(6, 14),
             };
 
             string expectedFlowGraph =
@@ -2015,7 +2015,7 @@ class C
                 //         (int, int) t = (b ? 2 : 3, 1);
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
                     .WithArguments("t")
-                    .WithLocation(6, 20)
+                    .WithLocation(6, 20),
             };
 
             string expectedFlowGraph =
@@ -2100,7 +2100,7 @@ class C
                 // CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (b ? (i1, i2) : (i3, i4)) = (i5, i6);
                 Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "b ? (i1, i2) : (i3, i4)")
-                    .WithLocation(6, 10)
+                    .WithLocation(6, 10),
             };
 
             string expectedFlowGraph =
@@ -2223,7 +2223,7 @@ class C
                         ErrorCode.ERR_AssgLvalueExpected,
                         "b ? (var i1, var i2) : (var i3, var i4)"
                     )
-                    .WithLocation(6, 10)
+                    .WithLocation(6, 10),
             };
 
             string expectedFlowGraph =
@@ -2524,7 +2524,7 @@ class C
                 //         /*<bind>*/(var ((a,b), c), int d);/*</bind>*/
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "int d")
                     .WithArguments("d")
-                    .WithLocation(6, 36)
+                    .WithLocation(6, 36),
             };
 
             var expectedTree =

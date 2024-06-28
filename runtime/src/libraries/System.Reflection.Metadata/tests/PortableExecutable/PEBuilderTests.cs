@@ -325,7 +325,7 @@ namespace System.Reflection.PortableExecutable.Tests
                         0x03,
                         0x7D,
                         0xF8,
-                        0x89
+                        0x89,
                     }
                 );
             }
@@ -1000,7 +1000,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     "2: [0, 1)",
                     "4: [0, 2)",
                     "4: [3, 16)",
-                    "5: [0, 10)"
+                    "5: [0, 10)",
                 },
                 GetBlobRanges(
                     builder,
@@ -1038,7 +1038,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     "4: [0, 0)",
                     "4: [16, 16)",
                     "5: [0, 16)",
-                    "6: [0, 1)"
+                    "6: [0, 1)",
                 },
                 GetBlobRanges(
                     builder,

@@ -16,21 +16,21 @@ namespace System.Text.Tests
                 "\t\n\rXYZabc123",
                 0,
                 12,
-                new byte[] { 9, 10, 13, 88, 89, 90, 97, 98, 99, 49, 50, 51 }
+                new byte[] { 9, 10, 13, 88, 89, 90, 97, 98, 99, 49, 50, 51 },
             };
             yield return new object[]
             {
                 "A\t\r\n /z",
                 0,
                 7,
-                new byte[] { 0x41, 0x09, 0x0D, 0x0A, 0x20, 0x2F, 0x7A }
+                new byte[] { 0x41, 0x09, 0x0D, 0x0A, 0x20, 0x2F, 0x7A },
             };
             yield return new object[]
             {
                 "\u000C",
                 0,
                 1,
-                new byte[] { 0x2B, 0x41, 0x41, 0x77, 0x2D }
+                new byte[] { 0x2B, 0x41, 0x41, 0x77, 0x2D },
             };
 
             string chars2 = "UTF7 Encoding Example";
@@ -42,7 +42,7 @@ namespace System.Text.Tests
                 "\u0E59\u05D1",
                 0,
                 2,
-                new byte[] { 0x2B, 0x44, 0x6C, 0x6B, 0x46, 0x30, 0x51, 0x2D }
+                new byte[] { 0x2B, 0x44, 0x6C, 0x6B, 0x46, 0x30, 0x51, 0x2D },
             };
 
             yield return new object[]
@@ -50,14 +50,14 @@ namespace System.Text.Tests
                 "\u212B",
                 0,
                 1,
-                new byte[] { 0x2B, 0x49, 0x53, 0x73, 0x2D }
+                new byte[] { 0x2B, 0x49, 0x53, 0x73, 0x2D },
             };
             yield return new object[]
             {
                 "\u03a0\u03a3",
                 0,
                 2,
-                new byte[] { 43, 65, 54, 65, 68, 111, 119, 45 }
+                new byte[] { 43, 65, 54, 65, 68, 111, 119, 45 },
             };
 
             // Surrogate pairs
@@ -66,14 +66,14 @@ namespace System.Text.Tests
                 "\uD800\uDC00",
                 0,
                 2,
-                new byte[] { 43, 50, 65, 68, 99, 65, 65, 45 }
+                new byte[] { 43, 50, 65, 68, 99, 65, 65, 45 },
             };
             yield return new object[]
             {
                 "a\uD800\uDC00b",
                 0,
                 4,
-                new byte[] { 97, 43, 50, 65, 68, 99, 65, 65, 45, 98 }
+                new byte[] { 97, 43, 50, 65, 68, 99, 65, 65, 45, 98 },
             };
 
             yield return new object[]
@@ -81,7 +81,7 @@ namespace System.Text.Tests
                 "\uD800\uDFFF",
                 0,
                 2,
-                new byte[] { 0x2B, 0x32, 0x41, 0x44, 0x66, 0x2F, 0x77, 0x2D }
+                new byte[] { 0x2B, 0x32, 0x41, 0x44, 0x66, 0x2F, 0x77, 0x2D },
             };
 
             // Plus and minus
@@ -102,7 +102,7 @@ namespace System.Text.Tests
                 "\uDFFF",
                 0,
                 1,
-                new byte[] { 0x2B, 0x33, 0x2F, 0x38, 0x2D }
+                new byte[] { 0x2B, 0x33, 0x2F, 0x38, 0x2D },
             }; // Lone low surrogate
             yield return new object[] { "\uD800\uDC00", 0, 1, new byte[] { 43, 50, 65, 65, 45 } }; // Surrogate pair out of range
             yield return new object[] { "\uD800\uDC00", 1, 1, new byte[] { 43, 51, 65, 65, 45 } }; // Surrogate pair out of range
@@ -112,21 +112,21 @@ namespace System.Text.Tests
                 "\uD800\uD800",
                 0,
                 2,
-                new byte[] { 43, 50, 65, 68, 89, 65, 65, 45 }
+                new byte[] { 43, 50, 65, 68, 89, 65, 65, 45 },
             }; // High, high
             yield return new object[]
             {
                 "\uDC00\uD800",
                 0,
                 2,
-                new byte[] { 43, 51, 65, 68, 89, 65, 65, 45 }
+                new byte[] { 43, 51, 65, 68, 89, 65, 65, 45 },
             }; // Low, high
             yield return new object[]
             {
                 "\uDC00\uDC00",
                 0,
                 2,
-                new byte[] { 43, 51, 65, 68, 99, 65, 65, 45 }
+                new byte[] { 43, 51, 65, 68, 99, 65, 65, 45 },
             }; // Low, low
 
             // High BMP non-chars
@@ -219,7 +219,7 @@ namespace System.Text.Tests
                 65,
                 102,
                 81,
-                45
+                45,
             };
             byte[] optionalTrueBytes = new byte[]
             {
@@ -242,7 +242,7 @@ namespace System.Text.Tests
                 96,
                 123,
                 124,
-                125
+                125,
             };
 
             yield return new object[]
@@ -251,7 +251,7 @@ namespace System.Text.Tests
                 optionalChars1,
                 0,
                 optionalChars1.Length,
-                optionalFalseBytes
+                optionalFalseBytes,
             };
             yield return new object[]
             {
@@ -259,7 +259,7 @@ namespace System.Text.Tests
                 optionalChars1,
                 0,
                 optionalChars1.Length,
-                optionalTrueBytes
+                optionalTrueBytes,
             };
 
             yield return new object[]
@@ -268,7 +268,7 @@ namespace System.Text.Tests
                 "\u0023\u0025\u03a0\u03a3",
                 1,
                 2,
-                new byte[] { 43, 65, 67, 85, 68, 111, 65, 45 }
+                new byte[] { 43, 65, 67, 85, 68, 111, 65, 45 },
             };
             yield return new object[]
             {
@@ -276,7 +276,7 @@ namespace System.Text.Tests
                 "\u0023\u0025\u03a0\u03a3",
                 1,
                 2,
-                new byte[] { 37, 43, 65, 54, 65, 45 }
+                new byte[] { 37, 43, 65, 54, 65, 45 },
             };
 
             yield return new object[]
@@ -285,7 +285,7 @@ namespace System.Text.Tests
                 "!}",
                 0,
                 2,
-                new byte[] { 0x2B, 0x41, 0x43, 0x45, 0x41, 0x66, 0x51, 0x2D }
+                new byte[] { 0x2B, 0x41, 0x43, 0x45, 0x41, 0x66, 0x51, 0x2D },
             };
             yield return new object[]
             {
@@ -293,7 +293,7 @@ namespace System.Text.Tests
                 "!}",
                 1,
                 1,
-                new byte[] { 0x2B, 0x41, 0x48, 0x30, 0x2D }
+                new byte[] { 0x2B, 0x41, 0x48, 0x30, 0x2D },
             };
 
             yield return new object[]
@@ -321,8 +321,8 @@ namespace System.Text.Tests
                     0x46,
                     0x30,
                     0x51,
-                    0x2D
-                }
+                    0x2D,
+                },
             };
         }
 

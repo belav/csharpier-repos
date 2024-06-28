@@ -17,5 +17,6 @@ namespace Microsoft.NET.HostModel.Bundle
         DepsJson, // .deps.json configuration file
         RuntimeConfigJson, // .runtimeconfig.json configuration file
         Symbols // PDB Files
+        ,
     };
 }

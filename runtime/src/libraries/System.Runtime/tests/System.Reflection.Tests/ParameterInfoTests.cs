@@ -19,49 +19,49 @@ namespace System.Reflection.Tests
                 typeof(ParameterInfoMetadata),
                 "Method1",
                 new string[] { "str", "iValue", "lValue" },
-                new Type[] { typeof(string), typeof(int), typeof(long) }
+                new Type[] { typeof(string), typeof(int), typeof(long) },
             };
             yield return new object[]
             {
                 typeof(ParameterInfoMetadata),
                 "Method2",
                 new string[0],
-                new Type[0]
+                new Type[0],
             };
             yield return new object[]
             {
                 typeof(ParameterInfoMetadata),
                 "MethodWithArray",
                 new string[] { "strArray" },
-                new Type[] { typeof(string[]) }
+                new Type[] { typeof(string[]) },
             };
             yield return new object[]
             {
                 typeof(ParameterInfoMetadata),
                 "VirtualMethod",
                 new string[] { "data" },
-                new Type[] { typeof(long) }
+                new Type[] { typeof(long) },
             };
             yield return new object[]
             {
                 typeof(ParameterInfoMetadata),
                 "MethodWithRefParameter",
                 new string[] { "str" },
-                new Type[] { typeof(string).MakeByRefType() }
+                new Type[] { typeof(string).MakeByRefType() },
             };
             yield return new object[]
             {
                 typeof(ParameterInfoMetadata),
                 "MethodWithOutParameter",
                 new string[] { "i", "str" },
-                new Type[] { typeof(int), typeof(string).MakeByRefType() }
+                new Type[] { typeof(int), typeof(string).MakeByRefType() },
             };
             yield return new object[]
             {
                 typeof(GenericClass<string>),
                 "GenericMethod",
                 new string[] { "t" },
-                new Type[] { typeof(string) }
+                new Type[] { typeof(string) },
             };
         }
 

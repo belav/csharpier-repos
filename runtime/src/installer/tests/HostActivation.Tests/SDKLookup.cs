@@ -505,21 +505,21 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                 yield return new object[]
                 {
                     "{ sdk: { \"version\": \"9999.0.100\" } }",
-                    new[] { "A JSON parsing exception occurred", IgnoringSDKSettings }
+                    new[] { "A JSON parsing exception occurred", IgnoringSDKSettings },
                 };
 
                 // Use something other than a JSON object
                 yield return new object[]
                 {
                     "true",
-                    new[] { "Expected a JSON object", IgnoringSDKSettings }
+                    new[] { "Expected a JSON object", IgnoringSDKSettings },
                 };
 
                 // Use a non-string version
                 yield return new object[]
                 {
                     "{ \"sdk\": { \"version\": 1 } }",
-                    new[] { "Expected a string for the 'sdk/version' value", IgnoringSDKSettings }
+                    new[] { "Expected a string for the 'sdk/version' value", IgnoringSDKSettings },
                 };
 
                 // Use an invalid version value
@@ -529,8 +529,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     new[]
                     {
                         "Version 'invalid' is not valid for the 'sdk/version' value",
-                        IgnoringSDKSettings
-                    }
+                        IgnoringSDKSettings,
+                    },
                 };
 
                 // Use a non-string policy
@@ -540,8 +540,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     new[]
                     {
                         "Expected a string for the 'sdk/rollForward' value",
-                        IgnoringSDKSettings
-                    }
+                        IgnoringSDKSettings,
+                    },
                 };
 
                 // Use a policy but no version
@@ -551,8 +551,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     new[]
                     {
                         "The roll-forward policy 'latestPatch' requires a 'sdk/version' value",
-                        IgnoringSDKSettings
-                    }
+                        IgnoringSDKSettings,
+                    },
                 };
 
                 // Use an invalid policy value
@@ -562,8 +562,8 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     new[]
                     {
                         "The roll-forward policy 'invalid' is not supported for the 'sdk/rollForward' value",
-                        IgnoringSDKSettings
-                    }
+                        IgnoringSDKSettings,
+                    },
                 };
 
                 // Use a non-boolean allow prerelease
@@ -573,15 +573,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     new[]
                     {
                         "Expected a boolean for the 'sdk/allowPrerelease' value",
-                        IgnoringSDKSettings
-                    }
+                        IgnoringSDKSettings,
+                    },
                 };
 
                 // Use a prerelease version and allowPrerelease = false
                 yield return new object[]
                 {
                     FormatGlobalJson(version: "9999.1.402-preview1", allowPrerelease: false),
-                    new[] { "Ignoring the 'sdk/allowPrerelease' value" }
+                    new[] { "Ignoring the 'sdk/allowPrerelease' value" },
                 };
             }
         }
@@ -592,7 +592,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             {
                 const string Requested = "9999.1.501";
 
-                var installed = new string[] { "9999.1.500", };
+                var installed = new string[] { "9999.1.500" };
 
                 // Array of (policy, expected) tuples
                 var policies = new[]
@@ -619,10 +619,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         true, // allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
-                installed = new string[] { "9999.1.500", "9999.2.100-preview1", };
+                installed = new string[] { "9999.1.500", "9999.2.100-preview1" };
 
                 // Array of (policy, expected) tuples
                 policies = new[]
@@ -649,6 +650,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         false, // do not allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -688,6 +690,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         true, // allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -727,6 +730,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         false, // don't allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -745,7 +749,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     "9999.2.203-preview1",
                     "9999.2.203",
                     "10000.0.100",
-                    "10000.1.100-preview1"
+                    "10000.1.100-preview1",
                 };
 
                 // Array of (policy, expected) tuples
@@ -773,6 +777,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         true, // allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -791,7 +796,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     "9999.2.203-preview1",
                     "9999.2.203",
                     "10000.0.100",
-                    "10000.1.100-preview1"
+                    "10000.1.100-preview1",
                 };
 
                 // Array of (policy, expected) tuples
@@ -819,6 +824,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         false, // don't allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -865,6 +871,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         true, // allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -911,6 +918,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         false, // don't allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -925,7 +933,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     "9999.3.501",
                     "9999.4.205-preview3",
                     "10000.0.100",
-                    "10000.1.100-preview1"
+                    "10000.1.100-preview1",
                 };
 
                 // Array of (policy, expected) tuples
@@ -953,6 +961,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         true, // allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -967,7 +976,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                     "9999.3.501",
                     "9999.4.205-preview3",
                     "10000.0.100",
-                    "10000.1.100-preview1"
+                    "10000.1.100-preview1",
                 };
 
                 // Array of (policy, expected) tuples
@@ -995,6 +1004,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         false, // don't allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -1037,6 +1047,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         true, // allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
 
@@ -1079,6 +1090,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
                         false, // don't allow prerelease
                         policy.Item2, // expected
                         installed // installed
+                        ,
                     };
                 }
             }

@@ -140,7 +140,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x22,
                     0x11,
                     0x00,
-                    0x11
+                    0x11,
                 },
                 builder.ToArray()
             );
@@ -194,7 +194,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -239,7 +239,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -296,7 +296,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x01,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 builder.ToArray()
             );
@@ -381,7 +381,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 builder.ToArray()
             );
@@ -424,7 +424,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -470,7 +470,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -520,7 +520,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -566,7 +566,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -616,7 +616,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -666,7 +666,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 builder.ToArray()
             );
@@ -864,7 +864,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xff,
                     0xff,
                     0xff,
-                    0xff
+                    0xff,
                 },
                 builder.ToArray()
             );

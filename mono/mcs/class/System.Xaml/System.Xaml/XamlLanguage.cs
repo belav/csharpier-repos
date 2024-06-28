@@ -136,7 +136,7 @@ namespace System.Xaml
                     TimeSpan,
                     Type,
                     Uri,
-                    XData
+                    XData,
                 }
             );
 
@@ -312,7 +312,7 @@ namespace System.Xaml
                 AllowedMemberLocations.MemberElement
             )
             {
-                InternalIsUnknown = true
+                InternalIsUnknown = true,
             };
 
             AllDirectives = new ReadOnlyCollection<XamlDirective>(
@@ -341,7 +341,7 @@ namespace System.Xaml
                     Shared,
                     TypeArguments,
                     Uid,
-                    UnknownContent
+                    UnknownContent,
                 }
             );
 

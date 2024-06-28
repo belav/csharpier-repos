@@ -87,7 +87,7 @@ namespace System.Data.Common.Internal.Materialization
                         this.DataRecordInfo,
                         this.GatherData,
                         this.PropertyNames,
-                        this.TypeUsages
+                        this.TypeUsages,
                     }
                 );
             return result;

@@ -74,7 +74,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             typeof(System.Decimal),
             typeof(System.SByte),
             typeof(MyPrivateClass),
-            typeof(System.String)
+            typeof(System.String),
         };
 
         private void Page_Load(object sender, System.EventArgs e)

@@ -300,7 +300,7 @@ namespace System.IO.MemoryMappedFiles.Tests
                 256,
                 -1 /*pagesize*/
                 ,
-                10000
+                10000,
             },
             new MemoryMappedFileAccess[]
             {
@@ -308,17 +308,17 @@ namespace System.IO.MemoryMappedFiles.Tests
                 MemoryMappedFileAccess.ReadExecute,
                 MemoryMappedFileAccess.ReadWrite,
                 MemoryMappedFileAccess.ReadWriteExecute,
-                MemoryMappedFileAccess.CopyOnWrite
+                MemoryMappedFileAccess.CopyOnWrite,
             },
             new MemoryMappedFileOptions[]
             {
                 MemoryMappedFileOptions.None,
-                MemoryMappedFileOptions.DelayAllocatePages
+                MemoryMappedFileOptions.DelayAllocatePages,
             },
             new HandleInheritability[]
             {
                 HandleInheritability.None,
-                HandleInheritability.Inheritable
+                HandleInheritability.Inheritable,
             }
         )]
         [ActiveIssue(
@@ -407,7 +407,7 @@ namespace System.IO.MemoryMappedFiles.Tests
                                     capacity,
                                     access,
                                     option,
-                                    inheritability
+                                    inheritability,
                                 };
                             }
                         }

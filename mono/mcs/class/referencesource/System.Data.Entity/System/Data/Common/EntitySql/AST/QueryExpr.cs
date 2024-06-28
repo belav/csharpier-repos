@@ -20,7 +20,7 @@ namespace System.Data.Common.EntitySql.AST
     internal enum SelectKind
     {
         Value,
-        Row
+        Row,
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace System.Data.Common.EntitySql.AST
         Inner,
         LeftOuter,
         FullOuter,
-        RightOuter
+        RightOuter,
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ namespace System.Data.Common.EntitySql.AST
     {
         None,
         Asc,
-        Desc
+        Desc,
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ namespace System.Data.Common.EntitySql.AST
     {
         None,
         All,
-        Distinct
+        Distinct,
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ namespace System.Data.Common.EntitySql.AST
     internal enum ApplyKind
     {
         Cross,
-        Outer
+        Outer,
     }
 
     /// <summary>
@@ -265,7 +265,7 @@ namespace System.Data.Common.EntitySql.AST
     {
         AliasedFromClause,
         JoinFromClause,
-        ApplyFromClause
+        ApplyFromClause,
     }
 
     /// <summary>

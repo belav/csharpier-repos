@@ -147,7 +147,7 @@ public class ZipFile_Extract_Stream : ZipFileTestBase
         {
             "TestText______________________________________.txt",
             "Test______________________________________/TestText1______________________________________.txt",
-            "Test/normalText.txt"
+            "Test/normalText.txt",
         }
     )]
     [InlineData("NullCharFileName_FromWindows.zip", new string[] { "a_6b6d" })]

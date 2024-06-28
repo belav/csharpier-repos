@@ -118,7 +118,7 @@ namespace MonoTests.System.Resources.Tools
             "virtual",
             "volatile",
             "void",
-            "while"
+            "while",
         };
         static char[] specialChars =
         {
@@ -151,7 +151,7 @@ namespace MonoTests.System.Resources.Tools
             '\"',
             '\'',
             ':',
-            '!'
+            '!',
         };
         CSharpCodeProvider provider = new CSharpCodeProvider();
 

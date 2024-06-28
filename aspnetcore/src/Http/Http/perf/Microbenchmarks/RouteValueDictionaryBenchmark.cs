@@ -27,7 +27,7 @@ public class RouteValueDictionaryBenchmark
             {
                 action = "Index",
                 controller = "Home",
-                id = "17"
+                id = "17",
             }
         );
     }
@@ -58,7 +58,7 @@ public class RouteValueDictionaryBenchmark
         {
             { "action", "Index" },
             { "controller", "Home" },
-            { "id", "15" }
+            { "id", "15" },
         };
         return dictionary;
     }
@@ -96,7 +96,7 @@ public class RouteValueDictionaryBenchmark
                 action = "Index",
                 controller = "Home",
                 id = "17",
-                area = "root"
+                area = "root",
             }
         );
         propertyValues.TryAdd("id", "15");
@@ -111,7 +111,7 @@ public class RouteValueDictionaryBenchmark
                 action = "Index",
                 controller = "Home",
                 id = "17",
-                area = "root"
+                area = "root",
             }
         );
         _propertyValues.TryAdd("name", "Service");
@@ -125,7 +125,7 @@ public class RouteValueDictionaryBenchmark
             {
                 action = "Index",
                 controller = "Home",
-                id = "17"
+                id = "17",
             }
         );
         propertyValues.TryAdd("id", "15");
@@ -139,7 +139,7 @@ public class RouteValueDictionaryBenchmark
             {
                 action = "Index",
                 controller = "Home",
-                id = "17"
+                id = "17",
             }
         );
         _propertyValues.TryAdd("name", "Service");
@@ -153,7 +153,7 @@ public class RouteValueDictionaryBenchmark
             { "action", "Index" },
             { "controller", "Home" },
             { "id", "17" },
-            { "area", "root" }
+            { "area", "root" },
         };
         arrayValues.TryAdd("id", "15");
     }
@@ -166,7 +166,7 @@ public class RouteValueDictionaryBenchmark
             { "action", "Index" },
             { "controller", "Home" },
             { "id", "17" },
-            { "area", "root" }
+            { "area", "root" },
         };
         arrayValues.TryAdd("name", "Service");
     }
@@ -178,7 +178,7 @@ public class RouteValueDictionaryBenchmark
         {
             { "action", "Index" },
             { "controller", "Home" },
-            { "id", "17" }
+            { "id", "17" },
         };
         arrayValues.TryAdd("id", "15");
     }
@@ -219,7 +219,7 @@ public class RouteValueDictionaryBenchmark
             {
                 action = "Index",
                 controller = "Home",
-                id = "17"
+                id = "17",
             }
         );
 
@@ -328,7 +328,7 @@ public class RouteValueDictionaryBenchmark
         {
             ["action"] = "Index",
             ["controller"] = "Home",
-            ["id"] = "15"
+            ["id"] = "15",
         };
         return dictionary;
     }

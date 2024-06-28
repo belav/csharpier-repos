@@ -148,7 +148,7 @@ namespace System.Data.Spatial
             {
                 CoordinateSystemId = backingValue.CoordinateSystemId,
                 WellKnownBinary = backingValue.CloneBinary(),
-                WellKnownText = backingValue.Text
+                WellKnownText = backingValue.Text,
             };
         }
 
@@ -604,7 +604,7 @@ namespace System.Data.Spatial
             {
                 CoordinateSystemId = backingValue.CoordinateSystemId,
                 WellKnownBinary = backingValue.CloneBinary(),
-                WellKnownText = backingValue.Text
+                WellKnownText = backingValue.Text,
             };
         }
 

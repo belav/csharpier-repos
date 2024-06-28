@@ -91,7 +91,7 @@ namespace System.Web.Http
             HttpActionContext product = new HttpActionContext();
             product.ControllerContext = new HttpControllerContext
             {
-                RequestContext = expectedRequestContext
+                RequestContext = expectedRequestContext,
             };
 
             // Act

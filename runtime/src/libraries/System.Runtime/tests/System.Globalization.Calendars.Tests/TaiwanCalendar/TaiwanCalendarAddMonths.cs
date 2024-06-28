@@ -26,7 +26,7 @@ namespace System.Globalization.Tests
                     random.Next(
                         1,
                         (calendar.MaxSupportedDateTime.Year - randomDateTime.Year - 1911) * 12
-                    )
+                    ),
                 };
             }
 
@@ -39,7 +39,7 @@ namespace System.Globalization.Tests
                 yield return new object[]
                 {
                     randomDateTime,
-                    random.Next((calendar.MinSupportedDateTime.Year - randomDateTime.Year) * 12, 0)
+                    random.Next((calendar.MinSupportedDateTime.Year - randomDateTime.Year) * 12, 0),
                 };
             }
 

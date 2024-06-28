@@ -33,7 +33,7 @@ namespace Mono.Btls
         UNKNOWN = 0,
         FILE,
         HASH_DIR,
-        MONO
+        MONO,
     }
 }
 #endif

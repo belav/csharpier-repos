@@ -476,7 +476,7 @@ namespace System.Web.Http.Routing
             return new BoundRouteTemplate
             {
                 BoundTemplate = uri.ToString(),
-                Values = acceptedValues
+                Values = acceptedValues,
             };
         }
 

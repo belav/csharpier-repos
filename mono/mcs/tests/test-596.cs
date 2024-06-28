@@ -2,7 +2,7 @@ using System;
 
 enum E
 {
-    A
+    A,
 }
 
 class C

@@ -61,7 +61,7 @@ namespace System.Xml
         Char,
         Unicode,
         QName,
-        ConstString
+        ConstString,
     }
 
     internal sealed class ValueHandle

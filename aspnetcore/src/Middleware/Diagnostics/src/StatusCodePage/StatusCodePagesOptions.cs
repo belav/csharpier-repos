@@ -32,7 +32,7 @@ public class StatusCodePagesOptions
                     new()
                     {
                         HttpContext = context.HttpContext,
-                        ProblemDetails = { Status = statusCode }
+                        ProblemDetails = { Status = statusCode },
                     }
                 )
             )

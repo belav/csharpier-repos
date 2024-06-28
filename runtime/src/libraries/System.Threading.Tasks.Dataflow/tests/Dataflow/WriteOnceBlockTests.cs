@@ -22,7 +22,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     null,
                     new DataflowBlockOptions
                     {
-                        CancellationToken = new CancellationTokenSource().Token
+                        CancellationToken = new CancellationTokenSource().Token,
                     }
                 ),
                 new WriteOnceBlock<int>(null, new DataflowBlockOptions { MaxMessagesPerTask = 1 }),
@@ -31,7 +31,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     null,
                     new DataflowBlockOptions
                     {
-                        TaskScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler
+                        TaskScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler,
                     }
                 ),
             };
@@ -91,7 +91,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     MaxMessages = maxMessages,
                     Append = append,
-                    PropagateCompletion = propagateCompletion
+                    PropagateCompletion = propagateCompletion,
                 };
 
                 for (int i = 0; i < Count / 2; i++)
@@ -136,7 +136,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new WriteOnceBlock<int>(
                         i => i,
                         new DataflowBlockOptions { BoundedCapacity = 10, MaxMessagesPerTask = 1 }
-                    )
+                    ),
             };
             foreach (var generator in generators)
             {
@@ -400,7 +400,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     OfferMessageDelegate = delegate
                     {
                         throw new FormatException();
-                    }
+                    },
                 }
             );
             wob.Post(42);
@@ -419,8 +419,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         QueueTaskDelegate = delegate
                         {
                             throw new InvalidCastException();
-                        }
-                    }
+                        },
+                    },
                 }
             );
             wob.LinkTo(DataflowBlock.NullTarget<int>());

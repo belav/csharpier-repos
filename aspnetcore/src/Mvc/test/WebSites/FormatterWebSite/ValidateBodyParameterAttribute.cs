@@ -32,7 +32,7 @@ public class ValidateBodyParameterAttribute : ActionFilterAttribute
                         ).ActionName,
                         ParameterName = bodyParameter.Name,
                         Errors = parameterBindingErrors.Select(x => x.ErrorMessage).ToList(),
-                        Source = "filter"
+                        Source = "filter",
                     };
 
                     context.Result = new ObjectResult(errorInfo);

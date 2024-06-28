@@ -356,7 +356,7 @@ public class ClrPropertySetterFactoryTest
     private enum Flag
     {
         One,
-        Two
+        Two,
     }
 
     private class Customer

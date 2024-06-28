@@ -37,7 +37,7 @@ namespace Tracing.Tests.BufferValidation
 
             var providers = new List<EventPipeProvider>()
             {
-                new EventPipeProvider("MyEventSource", EventLevel.Verbose)
+                new EventPipeProvider("MyEventSource", EventLevel.Verbose),
             };
 
             var buffersizes = new int[] { 0, 2 }.Select(x => (int)Math.Pow(2, x));
@@ -66,7 +66,7 @@ namespace Tracing.Tests.BufferValidation
             // especially on the resource strapped CI machines.  Since the number of dropped events
             // can be quite large depending on the OS x Arch configuration, we'll only check
             // for presence and leave counting events to the providervalidation test.
-            { "MyEventSource", -1 }
+            { "MyEventSource", -1 },
         };
 
         private static Action _eventGeneratingAction = () =>

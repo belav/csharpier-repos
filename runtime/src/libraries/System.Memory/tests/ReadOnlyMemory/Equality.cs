@@ -270,8 +270,8 @@ namespace System.MemoryTests
                     {
                         Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray(),
                         0,
-                        100000
-                    }
+                        100000,
+                    },
                 };
             }
         }
@@ -285,7 +285,7 @@ namespace System.MemoryTests
                     new object[] { new byte[1] { 0 } },
                     new object[] { new byte[2] { 0, 0 } },
                     new object[] { new byte[3] { 0, 0, 0 } },
-                    new object[] { Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray() }
+                    new object[] { Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray() },
                 };
             }
         }

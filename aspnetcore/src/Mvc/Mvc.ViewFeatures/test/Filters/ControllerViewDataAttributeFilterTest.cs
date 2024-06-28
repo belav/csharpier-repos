@@ -72,7 +72,7 @@ public class ControllerViewDataAttributeFilterTest
         };
 
         var controller = new TestController();
-        var filter = new ControllerViewDataAttributeFilter(properties) { Subject = controller, };
+        var filter = new ControllerViewDataAttributeFilter(properties) { Subject = controller };
         var viewData = new ViewDataDictionary(
             new EmptyModelMetadataProvider(),
             new ModelStateDictionary()

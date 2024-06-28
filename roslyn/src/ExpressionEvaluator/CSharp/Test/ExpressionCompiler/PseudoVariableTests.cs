@@ -1310,7 +1310,7 @@ class C
                     0x81,
                     0xF1,
                     0x8B,
-                    0xCD
+                    0xCD,
                 }
             );
 
@@ -1468,7 +1468,7 @@ class B
                     MscorlibRef.ToModuleInstance(),
                     moduleA,
                     moduleB,
-                    ExpressionCompilerTestHelpers.IntrinsicAssemblyReference.ToModuleInstance()
+                    ExpressionCompilerTestHelpers.IntrinsicAssemblyReference.ToModuleInstance(),
                 }
             );
 

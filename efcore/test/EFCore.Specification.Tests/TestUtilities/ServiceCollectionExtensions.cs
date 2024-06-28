@@ -33,7 +33,7 @@ public static class ServiceCollectionExtensions
                         serviceCollection,
                         optionsAction,
                         contextLifetime,
-                        optionsLifetime
+                        optionsLifetime,
                     }
                 );
 

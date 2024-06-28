@@ -19,7 +19,7 @@ namespace System.DirectoryServices.ActiveDirectory
         CheckServerAlivenessOnly = 0x8,
         SkipInitialCheck = 0x10,
         PushChangeOutward = 0x20,
-        CrossSite = 0x40
+        CrossSite = 0x40,
     }
 
     public enum SyncFromAllServersEvent
@@ -27,14 +27,14 @@ namespace System.DirectoryServices.ActiveDirectory
         Error = 0,
         SyncStarted = 1,
         SyncCompleted = 2,
-        Finished = 3
+        Finished = 3,
     }
 
     public enum SyncFromAllServersErrorCategory
     {
         ErrorContactingServer = 0,
         ErrorReplicating = 1,
-        ServerUnreachable = 2
+        ServerUnreachable = 2,
     }
 
     public delegate bool SyncUpdateCallback(

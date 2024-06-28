@@ -40,7 +40,7 @@ namespace Novell.Directory.Ldap.Events
     {
         CLASSIFICATION_UNKNOWN = -1,
         CLASSIFICATION_LDAP_PSEARCH = 0,
-        CLASSIFICATION_EDIR_EVENT = 1
+        CLASSIFICATION_EDIR_EVENT = 1,
     }
 
     /// <summary>
@@ -54,6 +54,6 @@ namespace Novell.Directory.Ldap.Events
         LDAP_PSEARCH_MODIFY = LdapPersistSearchControl.MODIFY,
         LDAP_PSEARCH_MODDN = LdapPersistSearchControl.MODDN,
         LDAP_PSEARCH_ANY =
-            LDAP_PSEARCH_ADD | LDAP_PSEARCH_DELETE | LDAP_PSEARCH_MODIFY | LDAP_PSEARCH_MODDN
+            LDAP_PSEARCH_ADD | LDAP_PSEARCH_DELETE | LDAP_PSEARCH_MODIFY | LDAP_PSEARCH_MODDN,
     }
 }

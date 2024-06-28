@@ -64,7 +64,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     SyntaxFactory.ParseExpression("A "),
                     SyntaxFactory.ParseExpression("B "),
-                    SyntaxFactory.ParseExpression("C ")
+                    SyntaxFactory.ParseExpression("C "),
                 }
             );
 
@@ -301,7 +301,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     SyntaxFactory.ParseExpression("A+B"),
                     SyntaxFactory.IdentifierName("B"),
-                    SyntaxFactory.ParseExpression("1")
+                    SyntaxFactory.ParseExpression("1"),
                 }
             );
 

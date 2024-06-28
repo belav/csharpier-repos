@@ -18,7 +18,7 @@ namespace System.CodeDom
     ///    <para> Represents
     ///       an expression that creates an array.</para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeArrayCreateExpression : CodeExpression
     {
         private CodeTypeReference createType;

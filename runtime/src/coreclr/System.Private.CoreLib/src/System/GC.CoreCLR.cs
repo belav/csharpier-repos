@@ -58,7 +58,7 @@ namespace System
         Failed = 1,
         Canceled = 2,
         Timeout = 3,
-        NotApplicable = 4
+        NotApplicable = 4,
     }
 
     public static partial class GC
@@ -480,7 +480,7 @@ namespace System
             Succeeded = 0,
             NotEnoughMemory = 1,
             AmountTooLarge = 2,
-            AlreadyInProgress = 3
+            AlreadyInProgress = 3,
         }
 
         private enum EndNoGCRegionStatus
@@ -488,7 +488,7 @@ namespace System
             Succeeded = 0,
             NotInProgress = 1,
             GCInduced = 2,
-            AllocationExceeded = 3
+            AllocationExceeded = 3,
         }
 
         private static bool StartNoGCRegionWorker(
@@ -947,7 +947,7 @@ namespace System
         {
             GCConfigurationContext context = new GCConfigurationContext
             {
-                Configurations = new Dictionary<string, object>()
+                Configurations = new Dictionary<string, object>(),
             };
 
             _EnumerateConfigurationValues(Unsafe.AsPointer(ref context), &ConfigCallback);
@@ -959,7 +959,7 @@ namespace System
         {
             Int64,
             StringUtf8,
-            Boolean
+            Boolean,
         }
 
         [LibraryImport(

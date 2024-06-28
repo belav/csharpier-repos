@@ -42,7 +42,7 @@ public class HttpProtocolFeatureCollection
             "IHttpWebSocketFeature",
             "IHttpWebTransportFeature",
             "IBadRequestExceptionFeature",
-            "IHttpRequestTimeoutFeature"
+            "IHttpRequestTimeoutFeature",
         };
         var maybeFeatures = new[]
         {
@@ -54,7 +54,7 @@ public class HttpProtocolFeatureCollection
             "IHttpBodyControlFeature",
             "IHttpRequestBodyDetectionFeature",
             "IHttpResetFeature",
-            "IPersistentStateFeature"
+            "IPersistentStateFeature",
         };
 
         var allFeatures = alwaysFeatures
@@ -83,7 +83,7 @@ public class HttpProtocolFeatureCollection
             "IHttpMaxRequestBodySizeFeature",
             "IHttpRequestBodyDetectionFeature",
             "IHttpWebTransportFeature",
-            "IBadRequestExceptionFeature"
+            "IBadRequestExceptionFeature",
         };
 
         var usings =

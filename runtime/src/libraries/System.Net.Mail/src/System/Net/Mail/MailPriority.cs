@@ -12,7 +12,7 @@ namespace System.Net.Mail
     {
         Normal = 0,
         Low = 1,
-        High = 2
+        High = 2,
     }
 
     internal sealed class Message

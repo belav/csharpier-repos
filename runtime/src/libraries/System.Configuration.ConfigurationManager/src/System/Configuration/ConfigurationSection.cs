@@ -67,7 +67,7 @@ namespace System.Configuration
             {
                 Formatting = Formatting.Indented,
                 Indentation = 4,
-                IndentChar = ' '
+                IndentChar = ' ',
             };
 
             tempElement.DataToWriteInternal = saveMode != ConfigurationSaveMode.Minimal;

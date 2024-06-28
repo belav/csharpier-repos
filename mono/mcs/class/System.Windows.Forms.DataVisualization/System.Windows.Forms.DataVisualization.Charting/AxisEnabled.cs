@@ -31,6 +31,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         Auto = 0,
         True = 1,
-        False = 2
+        False = 2,
     }
 }

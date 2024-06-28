@@ -37,7 +37,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             Flat = 0, // Flat file mapping - file is mapped as data file (code:SEC_IMAGE flag was not
 
             // passed to code:CreateFileMapping).
-            ExecutableImage = 1 // Executable image file mapping - file is mapped for execution
+            ExecutableImage =
+                1 // Executable image file mapping - file is mapped for execution
+            ,
             // (either via code:LoadLibrary or code:CreateFileMapping with code:SEC_IMAGE flag).
         }
 
@@ -54,7 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             TakeOwnership = 32,
 
             CacheImage = 4,
-            NoTypeLib = 128
+            NoTypeLib = 128,
         }
     }
 }

@@ -36,7 +36,7 @@ namespace System.Formats.Tar
                     UnixCreateMode = OwnershipPermissions,
                     Options = FileOptions.DeleteOnClose,
                     Access = FileAccess.Write,
-                    BufferSize = 0
+                    BufferSize = 0,
                 };
             using var fs = new FileStream(filename, options);
             UnixFileMode actual = File.GetUnixFileMode(fs.SafeFileHandle);

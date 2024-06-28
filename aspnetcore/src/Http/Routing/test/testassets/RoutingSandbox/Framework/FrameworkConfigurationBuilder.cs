@@ -31,7 +31,7 @@ public class FrameworkConfigurationBuilder
             {
                 Hub = hub,
                 Method = method,
-                RequestDelegate = requestDelegate
+                RequestDelegate = requestDelegate,
             }
         );
     }

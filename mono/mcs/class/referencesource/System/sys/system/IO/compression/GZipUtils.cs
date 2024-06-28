@@ -38,7 +38,7 @@ namespace System.IO.Compression
             // 4 = compressor used fastest algorithm
             GZipConstants.Xfl_FastestAlgorithm,
             // OS: 0 = FAT filesystem (MS-DOS, OS/2, NT/Win32)
-            0
+            0,
         };
 
         private uint _crc32;

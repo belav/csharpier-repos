@@ -392,7 +392,7 @@ namespace System.Web.UI
                     Name = resourceName,
                     Assembly = assembly.FullName,
                     IsDirectRegistration = true,
-                    ClientUrlResolver = sm
+                    ClientUrlResolver = sm,
                 };
                 string resourceUrl = script.GetUrlInternal(sm, sm.Zip);
                 control.Page.ClientScript.RegisterClientScriptInclude(

@@ -28,13 +28,13 @@ namespace System.Collections.Tests
             {
                 "abc",
                 "def",
-                PlatformDetection.IsInvariantGlobalization ? -3 : -1
+                PlatformDetection.IsInvariantGlobalization ? -3 : -1,
             };
             yield return new object[]
             {
                 "def",
                 "abc",
-                PlatformDetection.IsInvariantGlobalization ? 3 : 1
+                PlatformDetection.IsInvariantGlobalization ? 3 : 1,
             };
             yield return new object[] { new StructuralObject(), "abc", 5 };
             yield return new object[] { new StructuralObject(), 123, -5 };

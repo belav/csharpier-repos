@@ -29,7 +29,7 @@ namespace System.Web.UI.HtmlControls
     /// allows programmatic access to the
     /// HTML &lt;a&gt; element on the server.</para>
     /// </devdoc>
-    [DefaultEvent("ServerClick"), SupportsEventValidation,]
+    [DefaultEvent("ServerClick"), SupportsEventValidation]
     public class HtmlAnchor : HtmlContainerControl, IPostBackEventHandler
     {
         private static readonly object EventServerClick = new object();
@@ -44,7 +44,7 @@ namespace System.Web.UI.HtmlControls
         public HtmlAnchor()
             : base("a") { }
 
-        [WebCategory("Behavior"), DefaultValue(true),]
+        [WebCategory("Behavior"), DefaultValue(true)]
         public virtual bool CausesValidation
         {
             get

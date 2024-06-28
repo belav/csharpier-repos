@@ -230,37 +230,37 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.NonPublicValidationMethod)
+                nameof(CustomValidator.NonPublicValidationMethod),
             };
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.NonStaticValidationMethod)
+                nameof(CustomValidator.NonStaticValidationMethod),
             };
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.ValidationMethodDoesNotReturnValidationResult)
+                nameof(CustomValidator.ValidationMethodDoesNotReturnValidationResult),
             };
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.ValidationMethodWithNoArgs)
+                nameof(CustomValidator.ValidationMethodWithNoArgs),
             };
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.ValidationMethodWithByRefArg)
+                nameof(CustomValidator.ValidationMethodWithByRefArg),
             };
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.ValidationMethodTwoArgsButSecondIsNotValidationContext)
+                nameof(CustomValidator.ValidationMethodTwoArgsButSecondIsNotValidationContext),
             };
             yield return new object[]
             {
                 typeof(CustomValidator),
-                nameof(CustomValidator.ValidationMethodThreeArgs)
+                nameof(CustomValidator.ValidationMethodThreeArgs),
             };
         }
 
@@ -508,7 +508,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
                 "Some Error"
             )
             {
-                AdditionalData = "Additional Data"
+                AdditionalData = "Additional Data",
             };
 
             public string AdditionalData { get; set; }

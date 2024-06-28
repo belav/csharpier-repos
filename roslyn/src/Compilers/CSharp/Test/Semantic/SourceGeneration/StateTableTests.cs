@@ -689,7 +689,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 {
                     (1, EntryState.Cached, 0),
                     (2, EntryState.Cached, 1),
-                    (3, EntryState.Cached, 2)
+                    (3, EntryState.Cached, 2),
                 }
             );
         }
@@ -764,7 +764,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     (2, EntryState.Cached, 1),
                     (3, EntryState.Cached, 2),
                     (5, EntryState.Cached, 0),
-                    (6, EntryState.Cached, 1)
+                    (6, EntryState.Cached, 1),
                 }
             );
         }
@@ -1367,7 +1367,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     (3, EntryState.Removed, 0),
                     (4, EntryState.Added, 0),
                     (5, EntryState.Added, 0),
-                    (6, EntryState.Added, 0)
+                    (6, EntryState.Added, 0),
                 }
             );
 
@@ -1589,7 +1589,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                 {
                     (1, EntryState.Cached, 0),
                     new(2, EntryState.Cached, 0),
-                    new(3, EntryState.Cached, 0)
+                    new(3, EntryState.Cached, 0),
                 }
             );
         }
@@ -1976,7 +1976,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     {
                         "1" => ImmutableArray.Create("1.1", "1.2"),
                         "2" => ImmutableArray.Create("2.1", "2.2"),
-                        _ => ImmutableArray.Create("1.1", "inserted", "1.2")
+                        _ => ImmutableArray.Create("1.1", "inserted", "1.2"),
                     };
                 },
                 name: "Select"
@@ -2059,7 +2059,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     {
                         "1" => ImmutableArray.Create("1.1", "1.2"),
                         "2" => ImmutableArray.Create("2.1", "2.2"),
-                        _ => ImmutableArray.Create("inserted", "1.1", "1.2")
+                        _ => ImmutableArray.Create("inserted", "1.1", "1.2"),
                     };
                 },
                 name: "Select"
@@ -2142,7 +2142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     {
                         "1" => ImmutableArray.Create("1.1", "1.2"),
                         "2" => ImmutableArray.Create("2.1", "2.2"),
-                        _ => ImmutableArray.Create("1.1", "1.2", "inserted")
+                        _ => ImmutableArray.Create("1.1", "1.2", "inserted"),
                     };
                 },
                 name: "Select"
@@ -2225,7 +2225,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     {
                         "1" => ImmutableArray.Create("1.1", "1.2"),
                         "2" => ImmutableArray.Create("2.1", "2.2"),
-                        _ => ImmutableArray.Create("2.1", "inserted", "2.2")
+                        _ => ImmutableArray.Create("2.1", "inserted", "2.2"),
                     };
                 },
                 name: "Select"
@@ -2309,7 +2309,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                         "1" => ImmutableArray.Create("1.1", "1.2"),
                         "2" => ImmutableArray.Create("2.1", "2.2"),
                         "3" => ImmutableArray.Create("3.1", "3.2"),
-                        _ => ImmutableArray.Create("2.1", "inserted", "2.2")
+                        _ => ImmutableArray.Create("2.1", "inserted", "2.2"),
                     };
                 },
                 name: "Select"
@@ -2400,7 +2400,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Semantic.UnitTests.SourceGeneration
                     {
                         "1" => ImmutableArray.Create("1.1", "1.2"),
                         "2" => ImmutableArray.Create("2.1", "2.2"),
-                        _ => ImmutableArray.Create("1.1")
+                        _ => ImmutableArray.Create("1.1"),
                     };
                 },
                 name: "Select"

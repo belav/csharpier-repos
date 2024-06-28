@@ -90,7 +90,7 @@ internal class CommandLineApplication
         var command = new CommandLineApplication(throwOnUnexpectedArg)
         {
             Name = name,
-            Parent = this
+            Parent = this,
         };
         Commands.Add(command);
         configuration(command);
@@ -128,7 +128,7 @@ internal class CommandLineApplication
         var option = new CommandOption(template, optionType)
         {
             Description = description,
-            Inherited = inherited
+            Inherited = inherited,
         };
         Options.Add(option);
         configuration(option);
@@ -162,7 +162,7 @@ internal class CommandLineApplication
         {
             Name = name,
             Description = description,
-            MultipleValues = multipleValues
+            MultipleValues = multipleValues,
         };
         Arguments.Add(argument);
         configuration(argument);

@@ -376,7 +376,7 @@ public class SqliteValueGenerationScenariosTest
                     Name = "Two Unicorns",
                     CreatedOn = new DateTime(1969, 8, 3, 0, 10, 0),
                     NeedsConverter = new NeedsConverter(111),
-                }
+                },
             };
 
             context.AddRange(blogs);

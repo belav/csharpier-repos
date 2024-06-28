@@ -606,7 +606,7 @@ public abstract class SqlServerValueGenerationScenariosTestBase
     public enum ULongKey : ulong
     {
         Zero,
-        Sentinel
+        Sentinel,
     }
 
     [ConditionalFact]
@@ -797,15 +797,15 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                     Id = IntSentinel,
                     Name = "One Unicorn",
                     CreatedOn = DateTimeSentinel,
-                    NeedsConverter = NeedsConverterSentinel
+                    NeedsConverter = NeedsConverterSentinel,
                 },
                 new()
                 {
                     Id = IntSentinel,
                     Name = "Two Unicorns",
                     CreatedOn = new DateTime(1969, 8, 3, 0, 10, 0),
-                    NeedsConverter = new NeedsConverter(111)
-                }
+                    NeedsConverter = new NeedsConverter(111),
+                },
             };
 
             context.AddRange(blogs);
@@ -868,7 +868,7 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                 {
                     Id = IntSentinel,
                     Name = "One Unicorn",
-                    GeometryCollection = GeometryCollectionSentinel
+                    GeometryCollection = GeometryCollectionSentinel,
                 },
                 new()
                 {
@@ -876,8 +876,8 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                     Name = "Two Unicorns",
                     GeometryCollection = GeometryFactory.CreateGeometryCollection(
                         new Geometry[] { GeometryFactory.CreatePoint(new Coordinate(1, 3)) }
-                    )
-                }
+                    ),
+                },
             };
 
             context.AddRange(blogs);
@@ -981,7 +981,7 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                         Name = "W Unicorns",
                         GeometryCollection = GeometryFactory.CreateGeometryCollection(
                             new Geometry[] { GeometryFactory.CreatePoint(new Coordinate(1, 2)) }
-                        )
+                        ),
                     }
                 );
             });
@@ -1008,13 +1008,13 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                 {
                     Id = IntSentinel,
                     Name = "One Unicorn",
-                    CreatedOn = DateTimeSentinel
+                    CreatedOn = DateTimeSentinel,
                 },
                 new Blog
                 {
                     Id = IntSentinel,
                     Name = "Two Unicorns",
-                    CreatedOn = DateTimeSentinel
+                    CreatedOn = DateTimeSentinel,
                 }
             );
 
@@ -1118,7 +1118,7 @@ public abstract class SqlServerValueGenerationScenariosTestBase
                         Id = IntSentinel,
                         FirstName = "One",
                         LastName = "Unicorn",
-                        FullName = StringSentinel
+                        FullName = StringSentinel,
                     }
                 )
                 .Entity;
@@ -1242,7 +1242,7 @@ RETURNS NVARCHAR(MAX) WITH SCHEMABINDING AS BEGIN RETURN @First + @Second END"
                         Id = IntSentinel,
                         FirstName = "One",
                         LastName = "Unicorn",
-                        FullName = StringSentinel
+                        FullName = StringSentinel,
                     }
                 )
                 .Entity;
@@ -1361,7 +1361,7 @@ END"
                             Id = IntSentinel,
                             FirstName = "One",
                             LastName = "Unicorn",
-                            FullName = StringSentinel
+                            FullName = StringSentinel,
                         }
                     )
                     .Entity;
@@ -1407,7 +1407,7 @@ END"
                             Id = IntSentinel,
                             FirstName = "Hank",
                             LastName = "Unicorn",
-                            FullName = StringSentinel
+                            FullName = StringSentinel,
                         }
                     )
                     .Entity;
@@ -1419,7 +1419,7 @@ END"
                             Id = IntSentinel,
                             FirstName = "Jeff",
                             LastName = "Unicorn",
-                            FullName = StringSentinel
+                            FullName = StringSentinel,
                         }
                     )
                     .Entity;
@@ -1609,7 +1609,7 @@ END"
                     {
                         Id = GuidSentinel,
                         Name = "One Unicorn",
-                        NotId = GuidSentinel
+                        NotId = GuidSentinel,
                     }
                 )
                 .Entity;
@@ -1686,7 +1686,7 @@ END"
                 {
                     Id = GuidSentinel,
                     Name = "One Unicorn",
-                    NotId = GuidSentinel
+                    NotId = GuidSentinel,
                 }
             )
             .Entity;
@@ -1745,7 +1745,7 @@ END"
                     {
                         Id = GuidSentinel,
                         Name = "One Unicorn",
-                        NotId = GuidSentinel
+                        NotId = GuidSentinel,
                     }
                 )
                 .Entity;
@@ -1991,13 +1991,13 @@ END"
             {
                 Id = IntSentinel,
                 Name = "One Unicorn",
-                CreatedOn = DateTimeSentinel
+                CreatedOn = DateTimeSentinel,
             },
             new Blog
             {
                 Id = IntSentinel,
                 Name = "Two Unicorns",
-                CreatedOn = new DateTime(1969, 8, 3, 0, 10, 0)
+                CreatedOn = new DateTime(1969, 8, 3, 0, 10, 0),
             }
         );
 
@@ -2027,7 +2027,7 @@ END"
                 Id = IntSentinel,
                 FirstName = "One",
                 LastName = "Unicorn",
-                FullName = "Gerald"
+                FullName = "Gerald",
             }
         );
 
@@ -2060,7 +2060,7 @@ END"
                     Id = IntSentinel,
                     FirstName = "One",
                     LastName = "Unicorn",
-                    FullName = StringSentinel
+                    FullName = StringSentinel,
                 }
             );
 
@@ -2108,7 +2108,7 @@ END"
                 {
                     Id = IntSentinel,
                     Name = "One Unicorn",
-                    Timestamp = TimestampSentinel
+                    Timestamp = TimestampSentinel,
                 }
             )
             .Entity;
@@ -2184,7 +2184,7 @@ END"
             Name = name,
             CreatedOn = DateTimeSentinel,
             NeedsConverter = NeedsConverterSentinel,
-            OtherId = NullableIntSentinel
+            OtherId = NullableIntSentinel,
         };
 
     public class Blog
@@ -2303,6 +2303,6 @@ END"
     public static IEnumerable<object[]> IsAsyncData = new[]
     {
         new object[] { false },
-        new object[] { true }
+        new object[] { true },
     };
 }

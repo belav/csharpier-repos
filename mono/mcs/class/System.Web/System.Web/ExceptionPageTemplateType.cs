@@ -38,6 +38,6 @@ namespace System.Web
         Htmlized = 0x0004,
         SourceError = 0x0008,
         CompilerOutput = 0x0010,
-        Any = 0xFFFF
+        Any = 0xFFFF,
     }
 }

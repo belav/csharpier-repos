@@ -150,7 +150,7 @@ namespace System.Text
                 372, // x-unicode-1-1-utf-8 (65001)
                 391, // x-unicode-2-0-utf-7 (65000)
                 410, // x-unicode-2-0-utf-8 (65001)
-                429
+                429,
             ];
 
         //
@@ -204,6 +204,7 @@ namespace System.Text
                 65001, // x-unicode-1-1-utf-8
                 65000, // x-unicode-2-0-utf-7
                 65001 // x-unicode-2-0-utf-8
+                ,
             ];
 
         //
@@ -226,6 +227,7 @@ namespace System.Text
                 28591, // iso-8859-1
                 65000, // utf-7
                 65001 // utf-8
+                ,
             ];
 
         //
@@ -273,7 +275,7 @@ namespace System.Text
                 36, // iso-8859-1 (28591)
                 46, // utf-7 (65000)
                 51, // utf-8 (65001)
-                56
+                56,
             ];
 
         // redeclaring these constants here for readability below
@@ -298,7 +300,7 @@ namespace System.Text
                 MIMECONTF_MAILNEWS
                     | MIMECONTF_BROWSER
                     | MIMECONTF_SAVABLE_MAILNEWS
-                    | MIMECONTF_SAVABLE_BROWSER
+                    | MIMECONTF_SAVABLE_BROWSER,
             ];
     }
 }

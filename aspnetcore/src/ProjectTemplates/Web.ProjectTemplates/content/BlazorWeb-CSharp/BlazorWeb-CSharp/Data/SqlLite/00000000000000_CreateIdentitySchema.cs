@@ -22,7 +22,7 @@ namespace BlazorWeb_CSharp.Migrations
                         maxLength: 256,
                         nullable: true
                     ),
-                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true)
+                    ConcurrencyStamp = table.Column<string>(type: "TEXT", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -56,7 +56,7 @@ namespace BlazorWeb_CSharp.Migrations
                     TwoFactorEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "TEXT", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "INTEGER", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false)
+                    AccessFailedCount = table.Column<int>(type: "INTEGER", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -73,7 +73,7 @@ namespace BlazorWeb_CSharp.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     RoleId = table.Column<string>(type: "TEXT", nullable: false),
                     ClaimType = table.Column<string>(type: "TEXT", nullable: true),
-                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -97,7 +97,7 @@ namespace BlazorWeb_CSharp.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
                     ClaimType = table.Column<string>(type: "TEXT", nullable: true),
-                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true)
+                    ClaimValue = table.Column<string>(type: "TEXT", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -119,7 +119,7 @@ namespace BlazorWeb_CSharp.Migrations
                     LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
                     ProviderKey = table.Column<string>(type: "TEXT", nullable: false),
                     ProviderDisplayName = table.Column<string>(type: "TEXT", nullable: true),
-                    UserId = table.Column<string>(type: "TEXT", nullable: false)
+                    UserId = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -142,7 +142,7 @@ namespace BlazorWeb_CSharp.Migrations
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
-                    RoleId = table.Column<string>(type: "TEXT", nullable: false)
+                    RoleId = table.Column<string>(type: "TEXT", nullable: false),
                 },
                 constraints: table =>
                 {
@@ -171,7 +171,7 @@ namespace BlazorWeb_CSharp.Migrations
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
                     LoginProvider = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Value = table.Column<string>(type: "TEXT", nullable: true)
+                    Value = table.Column<string>(type: "TEXT", nullable: true),
                 },
                 constraints: table =>
                 {
@@ -181,7 +181,7 @@ namespace BlazorWeb_CSharp.Migrations
                         {
                             x.UserId,
                             x.LoginProvider,
-                            x.Name
+                            x.Name,
                         }
                     );
                     table.ForeignKey(

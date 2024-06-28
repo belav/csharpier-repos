@@ -14,7 +14,7 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             Binary,
             Text,
             WebData,
-            WrappedWebData
+            WrappedWebData,
         };
 
         public static XmlReader CreateXmlReader(

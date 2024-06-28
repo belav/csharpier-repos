@@ -78,7 +78,7 @@ namespace System.Memory.Tests.SequenceReader
                     new byte[] { 0 },
                     new byte[] { 1, 2 },
                     new byte[] { 3, 4 },
-                    new byte[] { 5, 6, 7, 8 }
+                    new byte[] { 5, 6, 7, 8 },
                 }
             );
 

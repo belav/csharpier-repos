@@ -750,7 +750,7 @@ namespace System.PrivateUri.Tests
                 '+',
                 ',',
                 ';',
-                '='
+                '=',
             };
 
             // https://tools.ietf.org/html/rfc3987#page-18 (LRM, RLM, LRE, RLE, LRO, RLO, and PDF)
@@ -762,7 +762,7 @@ namespace System.PrivateUri.Tests
                 '\u202B',
                 '\u202D',
                 '\u202E',
-                '\u202C'
+                '\u202C',
             };
 
             public static string IriEscapeAll(string input)

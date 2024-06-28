@@ -20,7 +20,7 @@ public class DefaultPageLoaderTest
     private readonly IOptions<RazorPagesOptions> RazorPagesOptions = Options.Create(
         new RazorPagesOptions
         {
-            Conventions = new PageConventionCollection(Mock.Of<IServiceProvider>())
+            Conventions = new PageConventionCollection(Mock.Of<IServiceProvider>()),
         }
     );
     private readonly IActionDescriptorCollectionProvider ActionDescriptorCollectionProvider;
@@ -136,7 +136,7 @@ public class DefaultPageLoaderTest
         // Arrange
         var descriptor = new PageActionDescriptor()
         {
-            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test" },
         };
 
         var transformer = new Mock<RoutePatternTransformer>();
@@ -172,7 +172,7 @@ public class DefaultPageLoaderTest
             )
             .Verifiable();
 
-        var providers = new[] { provider.Object, };
+        var providers = new[] { provider.Object };
 
         var loader = new DefaultPageLoader(
             providers,
@@ -280,7 +280,7 @@ public class DefaultPageLoaderTest
         // Arrange
         var descriptor = new PageActionDescriptor()
         {
-            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test" },
         };
 
         var transformer = new Mock<RoutePatternTransformer>();
@@ -316,7 +316,7 @@ public class DefaultPageLoaderTest
             )
             .Verifiable();
 
-        var providers = new[] { provider.Object, };
+        var providers = new[] { provider.Object };
 
         var loader = new DefaultPageLoader(
             providers,
@@ -340,12 +340,12 @@ public class DefaultPageLoaderTest
         // Arrange
         var descriptor = new PageActionDescriptor()
         {
-            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test" },
         };
 
         var descriptor2 = new PageActionDescriptor()
         {
-            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test", },
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = "/test" },
         };
 
         var transformer = new Mock<RoutePatternTransformer>();
@@ -379,7 +379,7 @@ public class DefaultPageLoaderTest
             )
             .Verifiable();
 
-        var providers = new[] { provider.Object, };
+        var providers = new[] { provider.Object };
 
         var loader = new DefaultPageLoader(
             providers,

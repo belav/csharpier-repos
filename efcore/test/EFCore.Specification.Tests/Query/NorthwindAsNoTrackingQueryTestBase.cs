@@ -65,7 +65,7 @@ public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : QueryTestBa
                     c.CustomerID,
                     c,
                     ocid = o.CustomerID,
-                    o
+                    o,
                 },
             elementSorter: e => (e.CustomerID, e.o.OrderID)
         );

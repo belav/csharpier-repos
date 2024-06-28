@@ -654,42 +654,42 @@ namespace System.Reflection.Metadata.Decoding.Tests
 
         public enum SByteEnum : sbyte
         {
-            Value = -1
+            Value = -1,
         }
 
         public enum Int16Enum : short
         {
-            Value = -2
+            Value = -2,
         }
 
         public enum Int32Enum : int
         {
-            Value = -3
+            Value = -3,
         }
 
         public enum Int64Enum : long
         {
-            Value = -4
+            Value = -4,
         }
 
         public enum ByteEnum : sbyte
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum UInt16Enum : ushort
         {
-            Value = 2
+            Value = 2,
         }
 
         public enum UInt32Enum : uint
         {
-            Value = 3
+            Value = 3,
         }
 
         public enum UInt64Enum : ulong
         {
-            Value = 4
+            Value = 4,
         }
 
         [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
@@ -909,7 +909,7 @@ namespace System.Reflection.Metadata.Decoding.Tests
         public enum MyEnum
         {
             Ctor,
-            Property
+            Property,
         }
 
         private class CustomAttributeTypeProvider

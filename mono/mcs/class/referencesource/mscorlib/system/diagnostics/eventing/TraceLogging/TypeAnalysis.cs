@@ -57,11 +57,9 @@ namespace System.Diagnostics.Tracing
                 var fieldAttribute = Statics.GetCustomAttribute<EventFieldAttribute>(propertyInfo);
 
                 string propertyName =
-                    fieldAttribute != null && fieldAttribute.Name != null
-                        ? fieldAttribute.Name
-                        : Statics.ShouldOverrideFieldName(propertyInfo.Name)
-                            ? propertyTypeInfo.Name
-                            : propertyInfo.Name;
+                    fieldAttribute != null && fieldAttribute.Name != null ? fieldAttribute.Name
+                    : Statics.ShouldOverrideFieldName(propertyInfo.Name) ? propertyTypeInfo.Name
+                    : propertyInfo.Name;
                 propertyList.Add(
                     new PropertyAnalysis(propertyName, getterInfo, propertyTypeInfo, fieldAttribute)
                 );

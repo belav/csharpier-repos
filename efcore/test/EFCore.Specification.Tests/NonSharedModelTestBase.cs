@@ -11,7 +11,7 @@ public abstract class NonSharedModelTestBase : IDisposable, IAsyncLifetime
     public static IEnumerable<object[]> IsAsyncData = new[]
     {
         new object[] { false },
-        new object[] { true }
+        new object[] { true },
     };
 
     protected abstract string StoreName { get; }

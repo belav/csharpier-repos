@@ -112,7 +112,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     {
                         ValidationType = ValidationType.None,
                         DtdProcessing = DtdProcessing.Parse,
-                        XmlResolver = resolver
+                        XmlResolver = resolver,
                     }
                 )
             )

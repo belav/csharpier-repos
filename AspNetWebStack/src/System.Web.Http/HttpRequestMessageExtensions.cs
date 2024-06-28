@@ -449,7 +449,7 @@ namespace System.Net.Http
                 statusCode,
                 includeErrorDetail => new HttpError(exception, includeErrorDetail)
                 {
-                    Message = message
+                    Message = message,
                 }
             );
         }

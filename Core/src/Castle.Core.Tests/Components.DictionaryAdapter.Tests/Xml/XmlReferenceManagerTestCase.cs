@@ -468,7 +468,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
             {
                 ProceedUntracked,
                 ProceedTracked,
-                Return
+                Return,
             }
 
             protected IXmlCursor SelectChild(IXmlNode node, string name)

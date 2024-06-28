@@ -32,26 +32,26 @@ namespace System.ComponentModel.Tests
             {
                 new ParenthesizePropertyNameAttribute(true),
                 new ParenthesizePropertyNameAttribute(true),
-                true
+                true,
             };
             yield return new object[]
             {
                 new ParenthesizePropertyNameAttribute(true),
                 new ParenthesizePropertyNameAttribute(false),
-                false
+                false,
             };
             yield return new object[]
             {
                 ParenthesizePropertyNameAttribute.Default,
                 ParenthesizePropertyNameAttribute.Default,
-                true
+                true,
             };
 
             yield return new object[]
             {
                 ParenthesizePropertyNameAttribute.Default,
                 new object(),
-                false
+                false,
             };
             yield return new object[] { ParenthesizePropertyNameAttribute.Default, null, false };
         }

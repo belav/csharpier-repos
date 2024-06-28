@@ -1453,7 +1453,7 @@ namespace System.Runtime.Remoting.Messaging
             "__ActivationType", //7
             "__ContextProperties", //8
             "__Activator", //9
-            "__ActivationTypeName"
+            "__ActivationTypeName",
         }; //10
 
         internal IConstructionCallMessage _ccmsg; // back pointer to message object
@@ -1553,7 +1553,7 @@ namespace System.Runtime.Remoting.Messaging
             "__MethodName",
             "__MethodSignature",
             "__TypeName",
-            "__CallContext"
+            "__CallContext",
         };
         public static String[] CRMkeysNoFault =
         {
@@ -1563,7 +1563,7 @@ namespace System.Runtime.Remoting.Messaging
             "__TypeName",
             "__Return",
             "__OutArgs",
-            "__CallContext"
+            "__CallContext",
         };
         internal IConstructionReturnMessage _crmsg;
         internal bool fault;
@@ -1691,7 +1691,7 @@ namespace System.Runtime.Remoting.Messaging
             "__MethodSignature",
             "__TypeName",
             "__Args",
-            "__CallContext"
+            "__CallContext",
         };
 
         internal IMethodCallMessage _mcmsg; // back pointer to message object
@@ -1808,7 +1808,7 @@ namespace System.Runtime.Remoting.Messaging
             "__TypeName",
             "__Return",
             "__OutArgs",
-            "__CallContext"
+            "__CallContext",
         };
 
         internal IMethodReturnMessage _mrmsg;

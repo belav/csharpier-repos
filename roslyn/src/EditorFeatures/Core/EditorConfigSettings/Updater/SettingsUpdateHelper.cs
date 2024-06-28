@@ -87,7 +87,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                         ReportDiagnostic.Info => "suggestion",
                         ReportDiagnostic.Warn => "warning",
                         ReportDiagnostic.Error => "error",
-                        _ => string.Empty
+                        _ => string.Empty,
                     };
                     optionValue = $"{optionValue}:{severity}";
                 }
@@ -100,10 +100,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Updater
                         LanguageNames.CSharp => Language.CSharp,
                         LanguageNames.VisualBasic => Language.VisualBasic,
                         null => Language.CSharp | Language.VisualBasic,
-                        _ =>
-                            throw ExceptionUtilities.UnexpectedValue(
-                                singleValuedOption.LanguageName
-                            ),
+                        _ => throw ExceptionUtilities.UnexpectedValue(
+                            singleValuedOption.LanguageName
+                        ),
                     };
                 }
                 else if (option.IsPerLanguage)

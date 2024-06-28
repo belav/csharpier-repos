@@ -13,7 +13,7 @@ class Test
     {
         int[,] s = new int[,]
         {
-            { 1, 2, 3 }
+            { 1, 2, 3 },
         };
         foreach (int i in Create(s))
             Console.WriteLine(i);

@@ -114,12 +114,11 @@ public class JSComponentInterop
                 // It's a statically-declared parameter, so we can parse it into a known .NET type.
                 parameterValue = parameterInfo.Kind switch
                 {
-                    ParameterKind.Value =>
-                        JsonSerializer.Deserialize(
-                            parameterJsonValue,
-                            parameterInfo.Type,
-                            jsonOptions
-                        ),
+                    ParameterKind.Value => JsonSerializer.Deserialize(
+                        parameterJsonValue,
+                        parameterInfo.Type,
+                        jsonOptions
+                    ),
                     ParameterKind.EventCallbackWithNoParameters =>
                         CreateEventCallbackWithNoParameters(
                             JsonSerializer.Deserialize<IJSObjectReference>(
@@ -135,10 +134,9 @@ public class JSComponentInterop
                                 jsonOptions
                             )
                         ),
-                    var x =>
-                        throw new InvalidOperationException(
-                            $"Invalid {nameof(ParameterKind)} '{x}'."
-                        )
+                    var x => throw new InvalidOperationException(
+                        $"Invalid {nameof(ParameterKind)} '{x}'."
+                    ),
                 };
             }
             else
@@ -271,7 +269,7 @@ public class JSComponentInterop
     {
         Value,
         EventCallbackWithNoParameters,
-        EventCallbackWithSingleParameter
+        EventCallbackWithSingleParameter,
     }
 
     internal readonly struct ParameterInfo

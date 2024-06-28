@@ -33,6 +33,6 @@ namespace Mono.ServiceModel.IdentitySelectors.Win32
         Asymmetric = 1,
         Symmetric,
         Transform,
-        Hash
+        Hash,
     }
 }

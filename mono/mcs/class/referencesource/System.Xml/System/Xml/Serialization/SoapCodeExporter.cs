@@ -162,7 +162,7 @@ namespace System.Xml.Serialization
                                 typeof(DesignerCategoryAttribute).FullName,
                                 new CodeAttributeArgument[]
                                 {
-                                    new CodeAttributeArgument(new CodePrimitiveExpression("code"))
+                                    new CodeAttributeArgument(new CodePrimitiveExpression("code")),
                                 }
                             )
                         );

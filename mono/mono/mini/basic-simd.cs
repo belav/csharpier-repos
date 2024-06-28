@@ -274,7 +274,7 @@ public class SimdTests
             17,
             18,
             19,
-            20
+            20,
         };
         fixed (float* ptr = &array[0])
         {

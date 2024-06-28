@@ -703,7 +703,7 @@ namespace System.Workflow.ComponentModel.Design
                         {
                             this.bufferedTheme.GetDesignerTheme(
                                 previewedDesigner as ActivityDesigner
-                            )
+                            ),
                         }
                         : null;
             }
@@ -1315,7 +1315,7 @@ namespace System.Workflow.ComponentModel.Design
                         if (components == null)
                             components = new IComponent[]
                             {
-                                Activator.CreateInstance(activityType) as IComponent
+                                Activator.CreateInstance(activityType) as IComponent,
                             };
 
                         Activity activity =

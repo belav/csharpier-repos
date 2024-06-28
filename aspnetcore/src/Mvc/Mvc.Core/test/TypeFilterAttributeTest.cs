@@ -43,7 +43,7 @@ public class TypeFilterAttributeTest
 
         var typeFilter = new TypeFilterAttribute(typeof(TestFilter))
         {
-            Arguments = new[] { value, }
+            Arguments = new[] { value },
         };
 
         // Act
@@ -68,7 +68,7 @@ public class TypeFilterAttributeTest
 
         var typeFilter = new TypeFilterAttribute(typeof(TestFilterFactory))
         {
-            Arguments = new[] { value, }
+            Arguments = new[] { value },
         };
 
         // Act

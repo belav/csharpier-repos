@@ -1507,7 +1507,7 @@ namespace System.Globalization
             '\u0553',
             '\u0554',
             '\u0555',
-            '\u0556'
+            '\u0556',
         };
         public static readonly char[] range_1e01_1ff3 = new char[]
         {
@@ -2009,7 +2009,7 @@ namespace System.Globalization
             '\u1ff0',
             '\u1ff1',
             '\u1ff2',
-            '\u1ffc'
+            '\u1ffc',
         };
         public static readonly char[] range_2170_2184 = new char[]
         {
@@ -2033,7 +2033,7 @@ namespace System.Globalization
             '\u2181',
             '\u2182',
             '\u2183',
-            '\u2183'
+            '\u2183',
         };
         public static readonly char[] range_24d0_24e9 = new char[]
         {
@@ -2062,7 +2062,7 @@ namespace System.Globalization
             '\u24cc',
             '\u24cd',
             '\u24ce',
-            '\u24cf'
+            '\u24cf',
         };
         public static readonly char[] range_2c30_2ce3 = new char[]
         {
@@ -2245,7 +2245,7 @@ namespace System.Globalization
             '\u2ce0',
             '\u2ce0',
             '\u2ce2',
-            '\u2ce2'
+            '\u2ce2',
         };
         public static readonly char[] range_2d00_2d25 = new char[]
         {
@@ -2286,7 +2286,7 @@ namespace System.Globalization
             '\u10c2',
             '\u10c3',
             '\u10c4',
-            '\u10c5'
+            '\u10c5',
         };
         public static readonly char[] range_a641_a697 = new char[]
         {
@@ -2376,7 +2376,7 @@ namespace System.Globalization
             '\ua694',
             '\ua694',
             '\ua696',
-            '\ua696'
+            '\ua696',
         };
         public static readonly char[] range_a723_a78c = new char[]
         {
@@ -2485,7 +2485,7 @@ namespace System.Globalization
             '\ua789',
             '\ua78a',
             '\ua78b',
-            '\ua78b'
+            '\ua78b',
         };
     }
 
@@ -3667,7 +3667,7 @@ namespace System.Globalization
             '\u0583',
             '\u0584',
             '\u0585',
-            '\u0586'
+            '\u0586',
         };
         public static readonly char[] range_10a0_10c5 = new char[]
         {
@@ -3708,7 +3708,7 @@ namespace System.Globalization
             '\u2d22',
             '\u2d23',
             '\u2d24',
-            '\u2d25'
+            '\u2d25',
         };
         public static readonly char[] range_1e00_1ffc = new char[]
         {
@@ -4220,7 +4220,7 @@ namespace System.Globalization
             '\u1f79',
             '\u1f7c',
             '\u1f7d',
-            '\u1ff3'
+            '\u1ff3',
         };
         public static readonly char[] range_2160_216f = new char[]
         {
@@ -4239,7 +4239,7 @@ namespace System.Globalization
             '\u217c',
             '\u217d',
             '\u217e',
-            '\u217f'
+            '\u217f',
         };
         public static readonly char[] range_24b6_24cf = new char[]
         {
@@ -4268,7 +4268,7 @@ namespace System.Globalization
             '\u24e6',
             '\u24e7',
             '\u24e8',
-            '\u24e9'
+            '\u24e9',
         };
         public static readonly char[] range_2c00_2c2e = new char[]
         {
@@ -4318,7 +4318,7 @@ namespace System.Globalization
             '\u2c5b',
             '\u2c5c',
             '\u2c5d',
-            '\u2c5e'
+            '\u2c5e',
         };
         public static readonly char[] range_2c60_2ce2 = new char[]
         {
@@ -4452,7 +4452,7 @@ namespace System.Globalization
             '\u2cdf',
             '\u2ce1',
             '\u2ce1',
-            '\u2ce3'
+            '\u2ce3',
         };
         public static readonly char[] range_a640_a696 = new char[]
         {
@@ -4542,7 +4542,7 @@ namespace System.Globalization
             '\ua693',
             '\ua695',
             '\ua695',
-            '\ua697'
+            '\ua697',
         };
         public static readonly char[] range_a722_a78b = new char[]
         {
@@ -4651,7 +4651,7 @@ namespace System.Globalization
             '\ua788',
             '\ua789',
             '\ua78a',
-            '\ua78c'
+            '\ua78c',
         };
     }
 }

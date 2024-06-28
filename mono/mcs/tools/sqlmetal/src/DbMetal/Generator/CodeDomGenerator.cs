@@ -86,7 +86,7 @@ namespace DbMetal.Generator
                 .GenerateCodeFromNamespace(
                     GenerateCodeDomModel(dbSchema),
                     textWriter,
-                    new CodeGeneratorOptions() { BracingStyle = "C", IndentString = "\t", }
+                    new CodeGeneratorOptions() { BracingStyle = "C", IndentString = "\t" }
                 );
         }
 
@@ -119,7 +119,7 @@ namespace DbMetal.Generator
 
             if (prototype == null)
             {
-                var method = new CodeMemberMethod() { Name = methodName, };
+                var method = new CodeMemberMethod() { Name = methodName };
                 method.Parameters.AddRange(parameters);
                 return method;
             }
@@ -291,7 +291,7 @@ namespace DbMetal.Generator
                 IsClass = true,
                 IsPartial = true,
                 Name = database.Class,
-                TypeAttributes = TypeAttributes.Public
+                TypeAttributes = TypeAttributes.Public,
             };
 
             _class.BaseTypes.Add(GetContextBaseType(database.BaseType));
@@ -355,7 +355,7 @@ namespace DbMetal.Generator
                 Attributes = MemberAttributes.Public,
                 Parameters =
                 {
-                    new CodeParameterDeclarationExpression(typeof(string), "connectionString")
+                    new CodeParameterDeclarationExpression(typeof(string), "connectionString"),
                 },
             };
             constructor.BaseConstructorArgs.Add(
@@ -375,7 +375,7 @@ namespace DbMetal.Generator
                 Attributes = MemberAttributes.Public,
                 Parameters =
                 {
-                    new CodeParameterDeclarationExpression("IDbConnection", "connection")
+                    new CodeParameterDeclarationExpression("IDbConnection", "connection"),
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
@@ -437,7 +437,7 @@ namespace DbMetal.Generator
                 IsClass = true,
                 IsPartial = true,
                 Name = database.Class,
-                TypeAttributes = TypeAttributes.Public
+                TypeAttributes = TypeAttributes.Public,
             };
             AddConditionalIfElseBlocks(contextType, "MONO_STRICT");
 
@@ -447,7 +447,7 @@ namespace DbMetal.Generator
                 Attributes = MemberAttributes.Public,
                 Parameters =
                 {
-                    new CodeParameterDeclarationExpression("IDbConnection", "connection")
+                    new CodeParameterDeclarationExpression("IDbConnection", "connection"),
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
@@ -527,7 +527,7 @@ namespace DbMetal.Generator
                 IsClass = true,
                 IsPartial = true,
                 Name = database.Class,
-                TypeAttributes = TypeAttributes.Public
+                TypeAttributes = TypeAttributes.Public,
             };
             AddConditionalEndifBlocks(contextType, "MONO_STRICT");
 
@@ -537,7 +537,7 @@ namespace DbMetal.Generator
                 Attributes = MemberAttributes.Public,
                 Parameters =
                 {
-                    new CodeParameterDeclarationExpression("IDbConnection", "connection")
+                    new CodeParameterDeclarationExpression("IDbConnection", "connection"),
                 },
             };
             constructor.BaseConstructorArgs.Add(new CodeArgumentReferenceExpression("connection"));
@@ -754,7 +754,7 @@ namespace DbMetal.Generator
             if (t.IsValueType)
                 return new CodeTypeReference(typeof(Nullable<>))
                 {
-                    TypeArguments = { new CodeTypeReference(t), },
+                    TypeArguments = { new CodeTypeReference(t) },
                 };
             return new CodeTypeReference(t);
         }
@@ -1044,7 +1044,7 @@ namespace DbMetal.Generator
                     Context.ExtendedTypes[column] = new GenerationContext.ExtendedTypeAndName
                     {
                         Type = column.ExtendedType,
-                        Table = table
+                        Table = table,
                     };
                 }
             }
@@ -1105,7 +1105,7 @@ namespace DbMetal.Generator
                         int currentValue = 1;
                         foreach (var nameValue in orderedValues)
                         {
-                            var field = new CodeMemberField() { Name = nameValue.Key, };
+                            var field = new CodeMemberField() { Name = nameValue.Key };
                             enumType.Members.Add(field);
                             if (nameValue.Value != currentValue)
                             {
@@ -1314,8 +1314,8 @@ namespace DbMetal.Generator
                 Name = "SendPropertyChanged",
                 Parameters =
                 {
-                    new CodeParameterDeclarationExpression(typeof(System.String), "propertyName")
-                }
+                    new CodeParameterDeclarationExpression(typeof(System.String), "propertyName"),
+                },
             };
             method.Statements.Add(
                 new CodeVariableDeclarationStatement(typeof(PropertyChangedEventHandler), "h")
@@ -1771,7 +1771,7 @@ namespace DbMetal.Generator
                 var attach = new CodeMemberMethod()
                 {
                     Name = child.Member + "_Attach",
-                    Parameters = { new CodeParameterDeclarationExpression(child.Type, "entity"), },
+                    Parameters = { new CodeParameterDeclarationExpression(child.Type, "entity") },
                 };
                 handlers.Add(attach);
                 if (havePrimaryKeys)
@@ -1789,7 +1789,7 @@ namespace DbMetal.Generator
                 var detach = new CodeMemberMethod()
                 {
                     Name = child.Member + "_Detach",
-                    Parameters = { new CodeParameterDeclarationExpression(child.Type, "entity"), },
+                    Parameters = { new CodeParameterDeclarationExpression(child.Type, "entity") },
                 };
                 handlers.Add(detach);
                 if (havePrimaryKeys)
@@ -1995,7 +1995,7 @@ namespace DbMetal.Generator
                                         ),
                                         thisReference
                                     )
-                                )
+                                ),
                                 // 5.2
                             }
                                 .Concat(

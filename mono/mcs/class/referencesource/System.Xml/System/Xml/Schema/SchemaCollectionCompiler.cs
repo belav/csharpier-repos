@@ -1421,11 +1421,9 @@ namespace System.Xml.Schema
                 return XmlSchemaParticle.Empty;
             }
             XmlSchemaGroupBase groupRefBase = (
-                (groupBase is XmlSchemaSequence)
-                    ? (XmlSchemaGroupBase)new XmlSchemaSequence()
-                    : (groupBase is XmlSchemaChoice)
-                        ? (XmlSchemaGroupBase)new XmlSchemaChoice()
-                        : (XmlSchemaGroupBase)new XmlSchemaAll()
+                (groupBase is XmlSchemaSequence) ? (XmlSchemaGroupBase)new XmlSchemaSequence()
+                : (groupBase is XmlSchemaChoice) ? (XmlSchemaGroupBase)new XmlSchemaChoice()
+                : (XmlSchemaGroupBase)new XmlSchemaAll()
             );
             groupRefBase.MinOccurs = groupRef.MinOccurs;
             groupRefBase.MaxOccurs = groupRef.MaxOccurs;

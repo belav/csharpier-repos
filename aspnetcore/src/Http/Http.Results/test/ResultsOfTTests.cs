@@ -82,7 +82,7 @@ public partial class ResultsOfTTests
 
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = services.BuildServiceProvider()
+            RequestServices = services.BuildServiceProvider(),
         };
 
         return httpContext;

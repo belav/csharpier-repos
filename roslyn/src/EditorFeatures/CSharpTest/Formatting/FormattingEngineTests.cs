@@ -1202,7 +1202,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
             """;
         var globalOptions = new OptionsCollection(LanguageNames.CSharp)
         {
-            { IndentationOptionsStorage.SmartIndent, FormattingOptions2.IndentStyle.None }
+            { IndentationOptionsStorage.SmartIndent, FormattingOptions2.IndentStyle.None },
         };
         AssertFormatAfterTypeChar(code, expected, globalOptions);
     }
@@ -1235,7 +1235,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
 
         var globalOptions = new OptionsCollection(LanguageNames.CSharp)
         {
-            { AutoFormattingOptionsStorage.FormatOnCloseBrace, false }
+            { AutoFormattingOptionsStorage.FormatOnCloseBrace, false },
         };
 
         AssertFormatAfterTypeChar(code, expected, globalOptions);
@@ -1269,7 +1269,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
 
         var globalOptions = new OptionsCollection(LanguageNames.CSharp)
         {
-            { AutoFormattingOptionsStorage.FormatOnTyping, false }
+            { AutoFormattingOptionsStorage.FormatOnTyping, false },
         };
 
         AssertFormatAfterTypeChar(code, expected, globalOptions);
@@ -1303,7 +1303,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
 
         var globalOptions = new OptionsCollection(LanguageNames.CSharp)
         {
-            { AutoFormattingOptionsStorage.FormatOnTyping, false }
+            { AutoFormattingOptionsStorage.FormatOnTyping, false },
         };
 
         AssertFormatAfterTypeChar(code, expected, globalOptions);
@@ -1364,7 +1364,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
 
         var globalOptions = new OptionsCollection(LanguageNames.CSharp)
         {
-            { AutoFormattingOptionsStorage.FormatOnSemicolon, false }
+            { AutoFormattingOptionsStorage.FormatOnSemicolon, false },
         };
 
         AssertFormatAfterTypeChar(code, expected, globalOptions);
@@ -1396,7 +1396,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
 
         var globalOptions = new OptionsCollection(LanguageNames.CSharp)
         {
-            { AutoFormattingOptionsStorage.FormatOnTyping, false }
+            { AutoFormattingOptionsStorage.FormatOnTyping, false },
         };
 
         AssertFormatAfterTypeChar(code, expected, globalOptions);
@@ -2394,7 +2394,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
             code,
             new OptionsCollection(LanguageNames.CSharp)
             {
-                { GenerationOptions.SeparateImportDirectiveGroups, true }
+                { GenerationOptions.SeparateImportDirectiveGroups, true },
             }
         );
     }
@@ -2431,7 +2431,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
             code,
             new OptionsCollection(LanguageNames.CSharp)
             {
-                { GenerationOptions.SeparateImportDirectiveGroups, true }
+                { GenerationOptions.SeparateImportDirectiveGroups, true },
             }
         );
     }
@@ -2460,7 +2460,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
             code,
             new OptionsCollection(LanguageNames.CSharp)
             {
-                { GenerationOptions.SeparateImportDirectiveGroups, true }
+                { GenerationOptions.SeparateImportDirectiveGroups, true },
             }
         );
     }
@@ -2490,7 +2490,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
             code,
             new OptionsCollection(LanguageNames.CSharp)
             {
-                { GenerationOptions.SeparateImportDirectiveGroups, true }
+                { GenerationOptions.SeparateImportDirectiveGroups, true },
             }
         );
     }
@@ -2520,7 +2520,7 @@ public class FormattingEngineTests : CSharpFormattingEngineTestBase
             code,
             new OptionsCollection(LanguageNames.CSharp)
             {
-                { GenerationOptions.SeparateImportDirectiveGroups, true }
+                { GenerationOptions.SeparateImportDirectiveGroups, true },
             }
         );
     }

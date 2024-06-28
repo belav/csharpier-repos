@@ -49,6 +49,6 @@ namespace System.Messaging
         ReceiveMessage = 3,
         SetQueueProperties = 16,
         TakeQueueOwnership = 524288,
-        WriteMessage = 4
+        WriteMessage = 4,
     }
 }

@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.Configuration.Test
                 {
                     { "Mem1:", "NoKeyValue1" },
                     { "Mem1:KeyInMem1", "ValueInMem1" },
-                    { "Mem1:KeyInMem1:Deep1", "ValueDeep1" }
+                    { "Mem1:KeyInMem1:Deep1", "ValueDeep1" },
                 }
             );
 
@@ -66,7 +66,7 @@ namespace Microsoft.Extensions.Configuration.Test
                     { "Mem1:KeyInMem1", "ValueInMem1" },
                     { "Mem1:KeyInMem1:", "NoKeyValue2" },
                     { "Mem1:KeyInMem1:Deep1", "ValueDeep1" },
-                    { "Mem1:KeyInMem2", "ValueInMem1" }
+                    { "Mem1:KeyInMem2", "ValueInMem1" },
                 }
             );
 
@@ -98,14 +98,14 @@ namespace Microsoft.Extensions.Configuration.Test
                 new Dictionary<string, string>
                 {
                     { "Mem1:", "NoKeyValue1" },
-                    { "Key1", "ValueInMem1" }
+                    { "Key1", "ValueInMem1" },
                 }
             );
             var provider2 = new TestMemorySourceProvider(
                 new Dictionary<string, string>
                 {
                     { "Mem2:", "NoKeyValue2" },
-                    { "Key2", "ValueInMem2" }
+                    { "Key2", "ValueInMem2" },
                 }
             );
 

@@ -359,7 +359,7 @@ class C { void M() { } }
 
 ",
                         @"C:\a\..\b.cs"
-                    )
+                    ),
                 },
                 new[] { MscorlibRef },
                 TestOptions.DebugDll.WithSourceReferenceResolver(null)

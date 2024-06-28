@@ -102,7 +102,7 @@ namespace System.Tests
                     (byte)123,
                     "D99",
                     emptyFormat,
-                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123"
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123",
                 };
 
                 yield return new object[] { (byte)0, "x", emptyFormat, "0" };
@@ -116,7 +116,7 @@ namespace System.Tests
                     (byte)24,
                     "N",
                     emptyFormat,
-                    string.Format("{0:N}", 24.00)
+                    string.Format("{0:N}", 24.00),
                 };
             }
 
@@ -126,56 +126,56 @@ namespace System.Tests
                 (byte)32,
                 "C100",
                 invariantFormat,
-                "\u00A432.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                "\u00A432.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             };
             yield return new object[]
             {
                 (byte)32,
                 "P100",
                 invariantFormat,
-                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %"
+                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %",
             };
             yield return new object[]
             {
                 (byte)32,
                 "D100",
                 invariantFormat,
-                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032"
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032",
             };
             yield return new object[]
             {
                 (byte)32,
                 "E100",
                 invariantFormat,
-                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001"
+                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001",
             };
             yield return new object[]
             {
                 (byte)32,
                 "F100",
                 invariantFormat,
-                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             };
             yield return new object[]
             {
                 (byte)32,
                 "N100",
                 invariantFormat,
-                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
             };
             yield return new object[]
             {
                 (byte)32,
                 "X100",
                 invariantFormat,
-                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020"
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020",
             };
             yield return new object[]
             {
                 (byte)32,
                 "B100",
                 invariantFormat,
-                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000"
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000100000",
             };
 
             var customFormat = new NumberFormatInfo()
@@ -188,7 +188,7 @@ namespace System.Tests
                 PercentSymbol = "@",
                 PercentGroupSeparator = ",",
                 PercentDecimalSeparator = ".",
-                PercentDecimalDigits = 5
+                PercentDecimalDigits = 5,
             };
             yield return new object[] { (byte)24, "N", customFormat, "24~00" };
             yield return new object[] { (byte)123, "E", customFormat, "1~230000E&002" };
@@ -270,21 +270,21 @@ namespace System.Tests
                 "10010",
                 NumberStyles.BinaryNumber,
                 emptyFormat,
-                (byte)0b10010
+                (byte)0b10010,
             };
             yield return new object[]
             {
                 "10101011",
                 NumberStyles.BinaryNumber,
                 emptyFormat,
-                (byte)0b10101011
+                (byte)0b10101011,
             };
             yield return new object[]
             {
                 "10101011",
                 NumberStyles.BinaryNumber,
                 null,
-                (byte)0b10101011
+                (byte)0b10101011,
             };
             yield return new object[] { "$100", NumberStyles.Currency, customFormat, (byte)100 };
         }
@@ -345,21 +345,21 @@ namespace System.Tests
                 "256",
                 NumberStyles.Integer,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 "100",
                 NumberStyles.HexNumber,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 "100000000",
                 NumberStyles.BinaryNumber,
                 null,
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
         }
 
@@ -437,7 +437,7 @@ namespace System.Tests
                     ((string)inputs[0]).Length,
                     inputs[1],
                     inputs[2],
-                    inputs[3]
+                    inputs[3],
                 };
             }
 
@@ -453,7 +453,7 @@ namespace System.Tests
                 4,
                 NumberStyles.BinaryNumber,
                 null,
-                (byte)0b10
+                (byte)0b10,
             };
             yield return new object[] { "10", 0, 1, NumberStyles.AllowThousands, null, (byte)1 };
             yield return new object[]
@@ -463,7 +463,7 @@ namespace System.Tests
                 2,
                 NumberStyles.Currency,
                 new NumberFormatInfo() { CurrencySymbol = "$" },
-                (byte)1
+                (byte)1,
             };
         }
 

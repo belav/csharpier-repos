@@ -77,7 +77,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 "content-type",
                 "text/plain; charset=utf-8",
-                "\u000f\u0010\u0019text/plain; charset=utf-8"u8.ToArray()
+                "\u000f\u0010\u0019text/plain; charset=utf-8"u8.ToArray(),
             };
 
             // Literal name, literal value.
@@ -85,7 +85,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 LiteralHeaderName,
                 LiteralHeaderValue,
-                "\0\u0010x-literal-header\vtesting 456"u8.ToArray()
+                "\0\u0010x-literal-header\vtesting 456"u8.ToArray(),
             };
         }
     }

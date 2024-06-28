@@ -233,7 +233,7 @@ public class StartupManagerTests
                 services.Services.TryAddSingleton(
                     new ServiceBefore
                     {
-                        Message = $"ConfigureContainerFilter Before {AdditionalData}"
+                        Message = $"ConfigureContainerFilter Before {AdditionalData}",
                     }
                 );
 
@@ -245,7 +245,7 @@ public class StartupManagerTests
                     services.Services.AddSingleton(
                         new ServiceAfter
                         {
-                            Message = $"ConfigureContainerFilter After {AdditionalData}"
+                            Message = $"ConfigureContainerFilter After {AdditionalData}",
                         }
                     );
                 }
@@ -254,7 +254,7 @@ public class StartupManagerTests
                     services.Services.TryAddSingleton(
                         new ServiceAfter
                         {
-                            Message = $"ConfigureContainerFilter After {AdditionalData}"
+                            Message = $"ConfigureContainerFilter After {AdditionalData}",
                         }
                     );
                 }
@@ -304,7 +304,7 @@ public class StartupManagerTests
                     services.AddSingleton(
                         new ServiceAfter
                         {
-                            Message = $"StartupServicesFilter After {AdditionalData}"
+                            Message = $"StartupServicesFilter After {AdditionalData}",
                         }
                     );
                 }
@@ -313,7 +313,7 @@ public class StartupManagerTests
                     services.TryAddSingleton(
                         new ServiceAfter
                         {
-                            Message = $"StartupServicesFilter After {AdditionalData}"
+                            Message = $"StartupServicesFilter After {AdditionalData}",
                         }
                     );
                 }

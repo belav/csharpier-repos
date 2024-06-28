@@ -13,7 +13,7 @@ public struct EventInitializerTest
         {
             a = null,
             b = delegate { },
-            c = d
+            c = d,
         };
     }
 }

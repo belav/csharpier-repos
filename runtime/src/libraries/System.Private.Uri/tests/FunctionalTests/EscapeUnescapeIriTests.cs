@@ -21,17 +21,17 @@ namespace System.PrivateUri.Tests
             yield return new object[]
             {
                 LowSurrogate + HighSurrogate,
-                UrlEncodedReplacementChar + UrlEncodedReplacementChar
+                UrlEncodedReplacementChar + UrlEncodedReplacementChar,
             };
             yield return new object[]
             {
                 LowSurrogate + LowSurrogate,
-                UrlEncodedReplacementChar + UrlEncodedReplacementChar
+                UrlEncodedReplacementChar + UrlEncodedReplacementChar,
             };
             yield return new object[]
             {
                 HighSurrogate + HighSurrogate,
-                UrlEncodedReplacementChar + UrlEncodedReplacementChar
+                UrlEncodedReplacementChar + UrlEncodedReplacementChar,
             };
         }
 

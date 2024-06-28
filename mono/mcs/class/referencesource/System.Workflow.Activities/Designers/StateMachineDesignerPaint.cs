@@ -185,7 +185,7 @@ namespace System.Workflow.Activities
                 Point[] endSegment = new Point[]
                 {
                     points[points.GetLength(0) - 2],
-                    points[points.GetLength(0) - 1]
+                    points[points.GetLength(0) - 1],
                 };
                 int capSize =
                     (endSegment[0].Y == endSegment[1].Y)

@@ -30,6 +30,6 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///    Do nothing when clicking on a node
         /// </devdoc>
-        None = 3
+        None = 3,
     }
 }

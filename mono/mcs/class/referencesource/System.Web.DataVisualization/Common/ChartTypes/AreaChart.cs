@@ -1402,7 +1402,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                     SurfaceNames.Top,
                     SurfaceNames.Left,
                     SurfaceNames.Right,
-                    SurfaceNames.Front
+                    SurfaceNames.Front,
                 };
                 LineSegmentType lineSegmentType = LineSegmentType.Middle;
                 foreach (SurfaceNames currentSurface in surfacesOrder)

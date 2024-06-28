@@ -211,7 +211,7 @@ public class TestClass
                 { "MSBuildSDKsPath", sdksDir },
                 { "DOTNET_MSBUILD_SDK_RESOLVER_SDKS_DIR", sdksDir },
                 // Disable the server until it's production ready so it doesn't cause CI flakiness
-                { "DOTNET_CLI_DO_NOT_USE_MSBUILD_SERVER", "1" }
+                { "DOTNET_CLI_DO_NOT_USE_MSBUILD_SERVER", "1" },
             };
 
             RunMSBuild(

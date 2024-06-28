@@ -227,31 +227,25 @@ namespace Microsoft.Interop
         {
             return callConv switch
             {
-                "Cdecl" =>
-                    _CallConvCdecl ??= ParseTypeName(
-                        TypeNames.GlobalAlias + TypeNames.CallConvCdeclName
-                    ),
-                "Fastcall" =>
-                    _CallConvFastcall ??= ParseTypeName(
-                        TypeNames.GlobalAlias + TypeNames.CallConvFastcallName
-                    ),
-                "MemberFunction" =>
-                    _CallConvMemberFunction ??= ParseTypeName(
-                        TypeNames.GlobalAlias + TypeNames.CallConvMemberFunctionName
-                    ),
-                "Stdcall" =>
-                    _CallConvStdcall ??= ParseTypeName(
-                        TypeNames.GlobalAlias + TypeNames.CallConvStdcallName
-                    ),
-                "SuppressGCTransition" =>
-                    _CallConvSuppressGCTransition ??= ParseTypeName(
-                        TypeNames.GlobalAlias + TypeNames.CallConvSuppressGCTransitionName
-                    ),
-                "Thiscall" =>
-                    _CallConvThiscall ??= ParseTypeName(
-                        TypeNames.GlobalAlias + TypeNames.CallConvThiscallName
-                    ),
-                _ => throw new ArgumentException($"Unexpected CallConv: {callConv}")
+                "Cdecl" => _CallConvCdecl ??= ParseTypeName(
+                    TypeNames.GlobalAlias + TypeNames.CallConvCdeclName
+                ),
+                "Fastcall" => _CallConvFastcall ??= ParseTypeName(
+                    TypeNames.GlobalAlias + TypeNames.CallConvFastcallName
+                ),
+                "MemberFunction" => _CallConvMemberFunction ??= ParseTypeName(
+                    TypeNames.GlobalAlias + TypeNames.CallConvMemberFunctionName
+                ),
+                "Stdcall" => _CallConvStdcall ??= ParseTypeName(
+                    TypeNames.GlobalAlias + TypeNames.CallConvStdcallName
+                ),
+                "SuppressGCTransition" => _CallConvSuppressGCTransition ??= ParseTypeName(
+                    TypeNames.GlobalAlias + TypeNames.CallConvSuppressGCTransitionName
+                ),
+                "Thiscall" => _CallConvThiscall ??= ParseTypeName(
+                    TypeNames.GlobalAlias + TypeNames.CallConvThiscallName
+                ),
+                _ => throw new ArgumentException($"Unexpected CallConv: {callConv}"),
             };
         }
     }

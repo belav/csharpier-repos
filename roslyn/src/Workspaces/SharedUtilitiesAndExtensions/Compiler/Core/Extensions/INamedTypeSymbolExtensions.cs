@@ -874,7 +874,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                         {
                             Name: nameof(System.Runtime),
                             ContainingNamespace:
-                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true, }
+                            { Name: nameof(System), ContainingNamespace.IsGlobalNamespace: true }
                         }
                     }
                 };

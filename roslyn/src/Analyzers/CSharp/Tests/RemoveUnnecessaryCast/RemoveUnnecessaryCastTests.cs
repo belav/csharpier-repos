@@ -597,8 +597,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { source }, },
-                FixedState = { Sources = { fixedSource }, },
+                TestState = { Sources = { source } },
+                FixedState = { Sources = { fixedSource } },
             }.RunAsync();
         }
 
@@ -628,8 +628,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { source }, },
-                FixedState = { Sources = { fixedSource }, },
+                TestState = { Sources = { source } },
+                FixedState = { Sources = { fixedSource } },
             }.RunAsync();
         }
 
@@ -661,8 +661,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryCast
 
             await new VerifyCS.Test
             {
-                TestState = { Sources = { source }, },
-                FixedState = { Sources = { fixedSource }, },
+                TestState = { Sources = { source } },
+                FixedState = { Sources = { fixedSource } },
             }.RunAsync();
         }
 
@@ -5651,7 +5651,7 @@ enum Sign
             await new VerifyCS.Test
             {
                 TestCode = source,
-                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow, },
+                FixedState = { Sources = { fixedSource }, MarkupHandling = MarkupMode.Allow },
                 CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
             }.RunAsync();
         }
@@ -5692,7 +5692,7 @@ enum Sign
                 }
                 """;
 
-            await new VerifyCS.Test { TestCode = source, FixedCode = fixedSource, }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = fixedSource }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/18510")]
@@ -5715,7 +5715,7 @@ enum Sign
                     }
                 """;
 
-            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25456#issuecomment-373549735")]
@@ -8243,7 +8243,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -8291,7 +8291,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -8435,7 +8435,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -8483,7 +8483,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -8531,7 +8531,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -9522,7 +9522,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9543,7 +9543,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9571,7 +9571,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = fixedCode,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9592,7 +9592,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9613,7 +9613,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9694,7 +9694,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9717,7 +9717,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9740,7 +9740,7 @@ enum Sign
             {
                 TestCode = source,
                 FixedCode = source,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9769,7 +9769,7 @@ enum Sign
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -9798,7 +9798,7 @@ enum Sign
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             };
 
             await test.RunAsync();
@@ -12045,7 +12045,7 @@ enum Sign
                         Boolean.TryParse("", out var b) ? b : (bool?)default;
                 }
                 """;
-            await new VerifyCS.Test { TestCode = source, FixedCode = source, }.RunAsync();
+            await new VerifyCS.Test { TestCode = source, FixedCode = source }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34509")]
@@ -12597,7 +12597,7 @@ enum Sign
                 """;
             await new VerifyCS.Test
             {
-                TestState = { OutputKind = OutputKind.ConsoleApplication, },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp10,
@@ -12946,7 +12946,7 @@ class C
                     int y = x;
                     """,
                 LanguageVersion = LanguageVersion.CSharp10,
-                TestState = { OutputKind = OutputKind.ConsoleApplication, },
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
             };
 
             await test.RunAsync();

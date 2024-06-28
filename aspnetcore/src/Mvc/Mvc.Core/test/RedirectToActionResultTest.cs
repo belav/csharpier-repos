@@ -70,7 +70,7 @@ public class RedirectToActionResultTest
         );
 
         var urlHelper = GetMockUrlHelper(returnValue: null);
-        var result = new RedirectToActionResult(null, null, null) { UrlHelper = urlHelper, };
+        var result = new RedirectToActionResult(null, null, null) { UrlHelper = urlHelper };
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(

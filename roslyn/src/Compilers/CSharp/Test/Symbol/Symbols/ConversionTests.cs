@@ -152,7 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Irf,
                     Irf,
                     Irf,
-                    Irf
+                    Irf,
                 },
                 /*str*/
                 {
@@ -197,7 +197,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Xrf
+                    Xrf,
                 },
                 /*arr*/
                 {
@@ -242,7 +242,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*i64*/
                 {
@@ -287,7 +287,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*u64*/
                 {
@@ -332,7 +332,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*i32*/
                 {
@@ -377,7 +377,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*u32*/
                 {
@@ -422,7 +422,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*i16*/
                 {
@@ -467,7 +467,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*u16*/
                 {
@@ -512,7 +512,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*i08*/
                 {
@@ -557,7 +557,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*u08*/
                 {
@@ -602,7 +602,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*r64*/
                 {
@@ -647,7 +647,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*r32*/
                 {
@@ -692,7 +692,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*dec*/
                 {
@@ -737,7 +737,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*chr*/
                 {
@@ -782,7 +782,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*ni64*/
                 {
@@ -827,7 +827,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nu64*/
                 {
@@ -872,7 +872,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*ni32*/
                 {
@@ -917,7 +917,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nu32*/
                 {
@@ -962,7 +962,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*ni16*/
                 {
@@ -1007,7 +1007,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nu16*/
                 {
@@ -1052,7 +1052,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*ni8*/
                 {
@@ -1097,7 +1097,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nu8*/
                 {
@@ -1142,7 +1142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nr64*/
                 {
@@ -1187,7 +1187,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nr32*/
                 {
@@ -1232,7 +1232,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*ndc*/
                 {
@@ -1277,7 +1277,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*nch*/
                 {
@@ -1322,7 +1322,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Ubx
+                    Ubx,
                 },
                 /*exc*/
                 {
@@ -1367,7 +1367,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*ien*/
                 {
@@ -1412,7 +1412,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*ieo*/
                 {
@@ -1457,7 +1457,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*ies*/
                 {
@@ -1502,7 +1502,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*iec*/
                 {
@@ -1547,7 +1547,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*ars*/
                 {
@@ -1592,7 +1592,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Non
+                    Non,
                 },
                 /*aro*/
                 {
@@ -1637,7 +1637,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Non,
-                    Non
+                    Non,
                 },
                 /*ils*/
                 {
@@ -1682,7 +1682,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*ilo*/
                 {
@@ -1727,7 +1727,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*aex*/
                 {
@@ -1772,7 +1772,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*del*/
                 {
@@ -1817,7 +1817,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Irf,
                     Irf,
                     Xrf,
-                    Xrf
+                    Xrf,
                 },
                 /*fee*/
                 {
@@ -1862,7 +1862,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Idn,
                     Xrf,
                     Xrf,
-                    Non
+                    Non,
                 },
                 /*fao*/
                 {
@@ -1907,7 +1907,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Irf,
                     Idn,
                     Xrf,
-                    Non
+                    Non,
                 },
                 /*ser*/
                 {
@@ -1952,7 +1952,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Irf,
                     Irf,
                     Idn,
-                    Xrf
+                    Xrf,
                 },
                 /*cmp*/
                 {
@@ -1997,7 +1997,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Non,
                     Non,
                     Xrf,
-                    Idn
+                    Idn,
                 },
             };
 

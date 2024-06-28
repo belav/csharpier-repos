@@ -180,7 +180,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
             Expression<Func<Record, string>> keySelector = null;
 
@@ -248,7 +248,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Expression<Func<Record, int>> elementSelector = null;
@@ -293,7 +293,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Expression<Func<string, IEnumerable<int>, long>> resultSelector = null;
@@ -322,7 +322,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Expression<Func<string, IEnumerable<int>, long>> resultSelector = null;
@@ -343,7 +343,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Expression<Func<string, IEnumerable<Record>, long>> resultSelector = null;
@@ -399,7 +399,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record { Name = "miT", Score = 25 },
             };
             long[] expected = { 240, 365, -600, 63 };
 
@@ -428,7 +428,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = null, Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record { Name = "miT", Score = 25 },
             };
             long[] expected = { 165, 58, -600, 120, 75 };
 
@@ -451,7 +451,7 @@ namespace System.Linq.Tests
             string[] key = { "Tim" };
             Record[] source =
             {
-                new Record { Name = key[0], Score = 60 }
+                new Record { Name = key[0], Score = 60 },
             };
 
             AssertGroupingCorrect(
@@ -486,7 +486,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Tim", Score = element[0] },
                 new Record { Name = "Tim", Score = element[1] },
                 new Record { Name = "miT", Score = element[2] },
-                new Record { Name = "miT", Score = element[3] }
+                new Record { Name = "miT", Score = element[3] },
             };
 
             Assert.Equal(

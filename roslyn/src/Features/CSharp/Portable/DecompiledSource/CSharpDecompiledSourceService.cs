@@ -145,7 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.DecompiledSource
                     SyntaxFactory.CarriageReturnLineFeed,
                     SyntaxFactory.Trivia(SyntaxFactory.EndRegionDirectiveTrivia(true)),
                     SyntaxFactory.CarriageReturnLineFeed,
-                    SyntaxFactory.CarriageReturnLineFeed
+                    SyntaxFactory.CarriageReturnLineFeed,
                 }
             );
 

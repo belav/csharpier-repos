@@ -105,7 +105,7 @@ namespace System.Memory.Tests
                     (char)6,
                     (char)7,
                     (char)8,
-                    (char)9
+                    (char)9,
                 }
             );
             ReadOnlySequence<char> slice = func(buffer);

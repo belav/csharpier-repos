@@ -2699,7 +2699,7 @@ namespace System.Web.UI.WebControls
                 (oldEditValues == null ? null : ((IStateManager)oldEditValues).SaveViewState()),
                 pageCount,
                 ClientIDRowSuffix,
-                SaveDataKeyArrayState(rowSuffixKeys)
+                SaveDataKeyArrayState(rowSuffixKeys),
             };
         }
 
@@ -2829,7 +2829,10 @@ namespace System.Web.UI.WebControls
                     : ((IStateManager)sortedDescendingCellStyle).SaveViewState(), // 14
                 sortedDescendingHeaderStyle == null
                     ? null
-                    : ((IStateManager)sortedDescendingHeaderStyle).SaveViewState() // 15
+                    : (
+                        (IStateManager)sortedDescendingHeaderStyle
+                    ).SaveViewState() // 15
+                ,
             };
 
             for (int i = states.Length - 1; i >= 0; i--)

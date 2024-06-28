@@ -72,7 +72,7 @@ namespace System.Net.Http.Formatting
             Dictionary<string, string> pairs = new Dictionary<string, string>
             {
                 { "x", "1" },
-                { "y", "2" }
+                { "y", "2" },
             };
 
             var form = new FormDataCollection(pairs);

@@ -94,13 +94,13 @@ namespace System.Net.Http.Unit.Tests.HPack
             {
                 int.MaxValue,
                 1,
-                new byte[] { 0x01, 0xfe, 0xff, 0xff, 0xff, 0x07 }
+                new byte[] { 0x01, 0xfe, 0xff, 0xff, 0xff, 0x07 },
             };
             yield return new object[]
             {
                 int.MaxValue,
                 8,
-                new byte[] { 0xff, 0x80, 0xfe, 0xff, 0xff, 0x07 }
+                new byte[] { 0xff, 0x80, 0xfe, 0xff, 0xff, 0x07 },
             };
         }
 

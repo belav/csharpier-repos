@@ -1197,7 +1197,7 @@ namespace System.Runtime.Remoting.Channels
     internal enum RemotingProfilerEvent
     {
         ClientSend,
-        ClientReceive
+        ClientReceive,
     } // RemotingProfilerEvent
 
     internal class RegisteredChannel

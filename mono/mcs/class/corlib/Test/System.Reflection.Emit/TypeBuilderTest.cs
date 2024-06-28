@@ -9659,7 +9659,7 @@ namespace MonoTests.System.Reflection.Emit
             {
                 SecurityAction.RequestMinimum,
                 SecurityAction.RequestOptional,
-                SecurityAction.RequestRefuse
+                SecurityAction.RequestRefuse,
             };
             PermissionSet set = new PermissionSet(PermissionState.Unrestricted);
 

@@ -27,7 +27,7 @@ public class TestDiagnosticListener
         {
             ActionDescriptor = actionDescriptor,
             ExecutingContext = resourceExecutingContext,
-            Filter = filter
+            Filter = filter,
         };
     }
 
@@ -51,7 +51,7 @@ public class TestDiagnosticListener
         {
             ActionDescriptor = actionDescriptor,
             ExecutedContext = resourceExecutedContext,
-            Filter = filter
+            Filter = filter,
         };
     }
 
@@ -255,7 +255,7 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.BeforeView")]
     public virtual void OnBeforeView(IProxyView view, IProxyViewContext viewContext)
     {
-        BeforeView = new OnBeforeViewEventData() { View = view, ViewContext = viewContext, };
+        BeforeView = new OnBeforeViewEventData() { View = view, ViewContext = viewContext };
     }
 
     public class OnAfterViewEventData
@@ -269,7 +269,7 @@ public class TestDiagnosticListener
     [DiagnosticName("Microsoft.AspNetCore.Mvc.AfterView")]
     public virtual void OnAfterView(IProxyView view, IProxyViewContext viewContext)
     {
-        AfterView = new OnAfterViewEventData() { View = view, ViewContext = viewContext, };
+        AfterView = new OnAfterViewEventData() { View = view, ViewContext = viewContext };
     }
 
     public class OnBeforeViewPageEventData
@@ -348,7 +348,7 @@ public class TestDiagnosticListener
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
-            ViewComponent = viewComponent
+            ViewComponent = viewComponent,
         };
     }
 
@@ -378,7 +378,7 @@ public class TestDiagnosticListener
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
             ViewComponentResult = viewComponentResult,
-            ViewComponent = viewComponent
+            ViewComponent = viewComponent,
         };
     }
 
@@ -404,7 +404,7 @@ public class TestDiagnosticListener
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
-            View = view
+            View = view,
         };
     }
 
@@ -430,7 +430,7 @@ public class TestDiagnosticListener
         {
             ActionDescriptor = actionDescriptor,
             ViewComponentContext = viewComponentContext,
-            View = view
+            View = view,
         };
     }
 
@@ -487,7 +487,7 @@ public class TestDiagnosticListener
     )
     {
         PageInstrumentationData.Add(
-            new EndPageInstrumentationData { HttpContext = httpContext, Path = path, }
+            new EndPageInstrumentationData { HttpContext = httpContext, Path = path }
         );
     }
 }

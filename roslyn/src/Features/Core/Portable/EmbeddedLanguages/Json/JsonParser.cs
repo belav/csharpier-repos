@@ -398,7 +398,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                 JsonKind.CloseBraceToken => !_inObject,
                 JsonKind.CloseBracketToken => !_inArray,
                 JsonKind.CloseParenToken => !_inConstructor,
-                _ => true
+                _ => true,
             };
 
         private JsonValueNode ParseValue()

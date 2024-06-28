@@ -13,6 +13,6 @@ namespace System.ServiceModel.Channels
     public enum ContextExchangeMechanism
     {
         ContextSoapHeader,
-        HttpCookie
+        HttpCookie,
     }
 }

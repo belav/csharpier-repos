@@ -1023,7 +1023,9 @@ namespace System.Workflow.ComponentModel.Design
             Constant = 8,
             Event = 12,
             Delegate = 16,
-            Index = 20 //Index doesnt have any image
+            Index =
+                20 //Index doesnt have any image
+            ,
         };
 
         //tree node to be used in the activity bind form for activity nodes
@@ -1081,11 +1083,9 @@ namespace System.Workflow.ComponentModel.Design
                         (fieldInfo.IsPublic)
                             ? BindMemberAccessKind.Public
                             : (
-                                (fieldInfo.IsFamily)
-                                    ? BindMemberAccessKind.Internal
-                                    : (fieldInfo.IsPrivate)
-                                        ? BindMemberAccessKind.Private
-                                        : BindMemberAccessKind.Protected
+                                (fieldInfo.IsFamily) ? BindMemberAccessKind.Internal
+                                : (fieldInfo.IsPrivate) ? BindMemberAccessKind.Private
+                                : BindMemberAccessKind.Protected
                             );
                 }
                 else if (this.pathInfo.MemberInfo is PropertyInfo)
@@ -1564,17 +1564,13 @@ namespace System.Workflow.ComponentModel.Design
                 MethodInfo methodInfo2 = member2 as MethodInfo;
 
                 ParameterInfo[] parameters1 =
-                    (property1 != null)
-                        ? property1.GetIndexParameters()
-                        : (methodInfo1 != null)
-                            ? methodInfo1.GetParameters()
-                            : null;
+                    (property1 != null) ? property1.GetIndexParameters()
+                    : (methodInfo1 != null) ? methodInfo1.GetParameters()
+                    : null;
                 ParameterInfo[] parameters2 =
-                    (property2 != null)
-                        ? property2.GetIndexParameters()
-                        : (methodInfo2 != null)
-                            ? methodInfo2.GetParameters()
-                            : null;
+                    (property2 != null) ? property2.GetIndexParameters()
+                    : (methodInfo2 != null) ? methodInfo2.GetParameters()
+                    : null;
 
                 if (
                     parameters1 == null

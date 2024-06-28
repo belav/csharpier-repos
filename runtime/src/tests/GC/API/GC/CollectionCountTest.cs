@@ -23,7 +23,7 @@ public class CollectionCountTest
         GC.MaxGeneration + 1,
         Int32.MaxValue / 2,
         Int32.MaxValue - 1,
-        Int32.MaxValue
+        Int32.MaxValue,
     };
 
     private CollectionCountTest() { }

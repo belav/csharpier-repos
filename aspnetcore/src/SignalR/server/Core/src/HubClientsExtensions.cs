@@ -80,7 +80,7 @@ public static class HubClientsExtensions
                 excludedConnectionId1,
                 excludedConnectionId2,
                 excludedConnectionId3,
-                excludedConnectionId4
+                excludedConnectionId4,
             }
         );
     }
@@ -111,7 +111,7 @@ public static class HubClientsExtensions
                 excludedConnectionId2,
                 excludedConnectionId3,
                 excludedConnectionId4,
-                excludedConnectionId5
+                excludedConnectionId5,
             }
         );
     }
@@ -145,7 +145,7 @@ public static class HubClientsExtensions
                 excludedConnectionId3,
                 excludedConnectionId4,
                 excludedConnectionId5,
-                excludedConnectionId6
+                excludedConnectionId6,
             }
         );
     }
@@ -182,7 +182,7 @@ public static class HubClientsExtensions
                 excludedConnectionId4,
                 excludedConnectionId5,
                 excludedConnectionId6,
-                excludedConnectionId7
+                excludedConnectionId7,
             }
         );
     }
@@ -222,7 +222,7 @@ public static class HubClientsExtensions
                 excludedConnectionId5,
                 excludedConnectionId6,
                 excludedConnectionId7,
-                excludedConnectionId8
+                excludedConnectionId8,
             }
         );
     }
@@ -388,7 +388,7 @@ public static class HubClientsExtensions
                 connection4,
                 connection5,
                 connection6,
-                connection7
+                connection7,
             }
         );
     }
@@ -428,7 +428,7 @@ public static class HubClientsExtensions
                 connection5,
                 connection6,
                 connection7,
-                connection8
+                connection8,
             }
         );
     }
@@ -704,7 +704,7 @@ public static class HubClientsExtensions
                 excludedConnectionId1,
                 excludedConnectionId2,
                 excludedConnectionId3,
-                excludedConnectionId4
+                excludedConnectionId4,
             }
         );
     }
@@ -738,7 +738,7 @@ public static class HubClientsExtensions
                 excludedConnectionId2,
                 excludedConnectionId3,
                 excludedConnectionId4,
-                excludedConnectionId5
+                excludedConnectionId5,
             }
         );
     }
@@ -775,7 +775,7 @@ public static class HubClientsExtensions
                 excludedConnectionId3,
                 excludedConnectionId4,
                 excludedConnectionId5,
-                excludedConnectionId6
+                excludedConnectionId6,
             }
         );
     }
@@ -815,7 +815,7 @@ public static class HubClientsExtensions
                 excludedConnectionId4,
                 excludedConnectionId5,
                 excludedConnectionId6,
-                excludedConnectionId7
+                excludedConnectionId7,
             }
         );
     }
@@ -858,7 +858,7 @@ public static class HubClientsExtensions
                 excludedConnectionId5,
                 excludedConnectionId6,
                 excludedConnectionId7,
-                excludedConnectionId8
+                excludedConnectionId8,
             }
         );
     }

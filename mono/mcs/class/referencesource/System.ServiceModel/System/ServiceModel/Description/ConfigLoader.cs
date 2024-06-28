@@ -405,7 +405,7 @@ namespace System.ServiceModel.Description
                 {
                     { "ConfigurationElementName", behaviorExtension.ConfigurationElementName },
                     { "ConfigurationType", type.AssemblyQualifiedName },
-                    { "BehaviorType", behaviorType.AssemblyQualifiedName }
+                    { "BehaviorType", behaviorType.AssemblyQualifiedName },
                 };
                 TraceUtility.TraceEvent(
                     TraceEventType.Warning,

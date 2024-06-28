@@ -54,24 +54,25 @@ namespace System.Data.SqlTypes.Tests
                     '\uDBFF',
                     '\uDFCC',
                     '\uDBFF',
-                    '\uDFFF'
+                    '\uDFFF',
                 }
             ) // surrogate pairs
+            ,
         };
 
         private static readonly string[,] s_specialMatchingString = new string[4, 2]
         {
             {
                 "Lorem ipsum dolor sit amet",
-                "\uFF2C\uFF4F\uFF52\uFF45\uFF4D\u3000\uFF49\uFF50\uFF53\uFF55\uFF4D\u3000\uFF44\uFF4F\uFF4C\uFF4F\uFF52\u3000\uFF53\uFF49\uFF54\u3000\uFF41\uFF4D\uFF45\uFF54"
+                "\uFF2C\uFF4F\uFF52\uFF45\uFF4D\u3000\uFF49\uFF50\uFF53\uFF55\uFF4D\u3000\uFF44\uFF4F\uFF4C\uFF4F\uFF52\u3000\uFF53\uFF49\uFF54\u3000\uFF41\uFF4D\uFF45\uFF54",
             },
             { "\u304B\u305F\u304B\u306A", "\u30AB\u30BF\u30AB\u30CA" },
             { "engine", "eNGine" },
             // Keep the following item at the end of the array as some tests need to exclude it.
             {
                 "\uFF8C\uFF67\uFF7D\uFF9E\uFF65\uFF77\uFF9E\uFF80\uFF70",
-                "\u30D5\u30A1\u30BA\u30FB\u30AE\u30BF\u30FC"
-            }
+                "\u30D5\u30A1\u30BA\u30FB\u30AE\u30BF\u30FC",
+            },
         };
 
         private static readonly int s_sampleStringCount = s_sampleString.Length - 1;
@@ -126,7 +127,7 @@ namespace System.Data.SqlTypes.Tests
                     SqlCompareOptions.None,
                     SqlCompareOptions.BinarySort,
                     SqlCompareOptions.BinarySort2,
-                    DefaultCompareOption
+                    DefaultCompareOption,
                 }
             )
             {

@@ -34,7 +34,7 @@ namespace System.Web
         Removed = 2,
         Modified = 3,
         RenamedOldName = 4,
-        RenamedNewName = 5
+        RenamedNewName = 5,
     }
 
     // Event data for a file change notification
@@ -1922,7 +1922,7 @@ namespace System.Web
             HttpRuntime.ResourcesDirectoryName,
             HttpRuntime.CodeDirectoryName,
             HttpRuntime.WebRefDirectoryName,
-            HttpRuntime.BrowsersDirectoryName
+            HttpRuntime.BrowsersDirectoryName,
         };
 
         internal const int MAX_PATH = 260;

@@ -499,7 +499,7 @@ namespace System.Net
                 {
                     IPAddress a => a,
                     KeyValuePair<IPAddress, AddressFamily> t => t.Key,
-                    _ => null
+                    _ => null,
                 };
 
                 if (address is null)
@@ -581,7 +581,7 @@ namespace System.Net
                     {
                         AddressList = addresses,
                         HostName = newHostName!,
-                        Aliases = aliases
+                        Aliases = aliases,
                     };
             }
             catch (Exception ex) when (LogFailure(hostName, startingTimestamp, ex))
@@ -694,7 +694,7 @@ namespace System.Net
                     {
                         HostName = hostName!,
                         Aliases = aliases,
-                        AddressList = addresses
+                        AddressList = addresses,
                     };
             }
             catch (Exception ex) when (LogFailure(name, startingTimestamp, ex))
@@ -845,23 +845,27 @@ namespace System.Net
                     static (s, startingTimestamp) =>
                         s switch
                         {
-                            string h =>
-                                GetHostAddressesCore(
-                                    h,
-                                    AddressFamily.Unspecified,
-                                    startingTimestamp
-                                ),
-                            KeyValuePair<string, AddressFamily> t =>
-                                GetHostAddressesCore(t.Key, t.Value, startingTimestamp),
-                            IPAddress a =>
-                                GetHostAddressesCore(
-                                    a,
-                                    AddressFamily.Unspecified,
-                                    startingTimestamp
-                                ),
-                            KeyValuePair<IPAddress, AddressFamily> t =>
-                                GetHostAddressesCore(t.Key, t.Value, startingTimestamp),
-                            _ => null
+                            string h => GetHostAddressesCore(
+                                h,
+                                AddressFamily.Unspecified,
+                                startingTimestamp
+                            ),
+                            KeyValuePair<string, AddressFamily> t => GetHostAddressesCore(
+                                t.Key,
+                                t.Value,
+                                startingTimestamp
+                            ),
+                            IPAddress a => GetHostAddressesCore(
+                                a,
+                                AddressFamily.Unspecified,
+                                startingTimestamp
+                            ),
+                            KeyValuePair<IPAddress, AddressFamily> t => GetHostAddressesCore(
+                                t.Key,
+                                t.Value,
+                                startingTimestamp
+                            ),
+                            _ => null,
                         },
                     asyncState,
                     cancellationToken
@@ -873,15 +877,27 @@ namespace System.Net
                     static (s, startingTimestamp) =>
                         s switch
                         {
-                            string h =>
-                                GetHostEntryCore(h, AddressFamily.Unspecified, startingTimestamp),
-                            KeyValuePair<string, AddressFamily> t =>
-                                GetHostEntryCore(t.Key, t.Value, startingTimestamp),
-                            IPAddress a =>
-                                GetHostEntryCore(a, AddressFamily.Unspecified, startingTimestamp),
-                            KeyValuePair<IPAddress, AddressFamily> t =>
-                                GetHostEntryCore(t.Key, t.Value, startingTimestamp),
-                            _ => null
+                            string h => GetHostEntryCore(
+                                h,
+                                AddressFamily.Unspecified,
+                                startingTimestamp
+                            ),
+                            KeyValuePair<string, AddressFamily> t => GetHostEntryCore(
+                                t.Key,
+                                t.Value,
+                                startingTimestamp
+                            ),
+                            IPAddress a => GetHostEntryCore(
+                                a,
+                                AddressFamily.Unspecified,
+                                startingTimestamp
+                            ),
+                            KeyValuePair<IPAddress, AddressFamily> t => GetHostEntryCore(
+                                t.Key,
+                                t.Value,
+                                startingTimestamp
+                            ),
+                            _ => null,
                         },
                     asyncState,
                     cancellationToken
@@ -943,7 +959,7 @@ namespace System.Net
             {
                 HostName = address.ToString(),
                 Aliases = Array.Empty<string>(),
-                AddressList = new IPAddress[] { address }
+                AddressList = new IPAddress[] { address },
             };
 
         private static void ValidateHostName(string hostName)

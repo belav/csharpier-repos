@@ -744,7 +744,7 @@ public abstract partial class ModelBuilderTest
             Array = 0,
             Enumerable = 1,
             Generic = 2,
-            Params = 4
+            Params = 4,
         }
 
         [ConditionalTheory]

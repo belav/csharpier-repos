@@ -41,6 +41,6 @@ namespace System.Windows.Forms.RTF
         Text = 2,
         Control = 3,
         EOF = 4,
-        MaxClass = 5
+        MaxClass = 5,
     }
 }

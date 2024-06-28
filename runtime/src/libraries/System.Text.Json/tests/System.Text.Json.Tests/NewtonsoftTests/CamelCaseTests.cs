@@ -108,7 +108,7 @@ namespace System.Text.Json.Tests
                 ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
-                Sizes = new[] { "Small", "Medium", "Large" }
+                Sizes = new[] { "Small", "Medium", "Large" },
             };
 
             string json = JsonSerializer.Serialize(product, s_camelCaseAndIndentedOption);

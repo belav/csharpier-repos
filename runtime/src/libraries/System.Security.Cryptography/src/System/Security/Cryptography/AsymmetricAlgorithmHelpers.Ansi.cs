@@ -57,7 +57,7 @@ namespace System.Security.Cryptography
             ret.Q = new ECPoint
             {
                 X = ansiKey.Slice(1, fieldSize).ToArray(),
-                Y = ansiKey.Slice(1 + fieldSize, fieldSize).ToArray()
+                Y = ansiKey.Slice(1 + fieldSize, fieldSize).ToArray(),
             };
 
             if (hasPrivateKey)

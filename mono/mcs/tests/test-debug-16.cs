@@ -10,7 +10,7 @@ class C
 
     void Test_1()
     {
-        var o = new Dictionary<string, int>() { { "Foo", 3 }, { "Bar", 1 }, };
+        var o = new Dictionary<string, int>() { { "Foo", 3 }, { "Bar", 1 } };
     }
 
     void Test_2()

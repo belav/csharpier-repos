@@ -745,7 +745,7 @@ namespace MonoTests.System.Transactions
             var rm = new IntResourceManager(1)
             {
                 UseSingle = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             using (var ts = new TransactionScope())
@@ -770,7 +770,7 @@ namespace MonoTests.System.Transactions
         {
             bool called = false;
             TransactionStatus status = TransactionStatus.Active;
-            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile, };
+            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
 
             using (var ts = new TransactionScope())
             {
@@ -794,7 +794,7 @@ namespace MonoTests.System.Transactions
         {
             bool called = false;
             TransactionStatus status = TransactionStatus.Active;
-            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile, };
+            var rm = new IntResourceManager(1) { Type = ResourceManagerType.Volatile };
 
             using (var ts = new TransactionScope())
             {
@@ -825,7 +825,7 @@ namespace MonoTests.System.Transactions
                 UseSingle = true,
                 FailSPC = true,
                 FailWithException = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try
@@ -875,7 +875,7 @@ namespace MonoTests.System.Transactions
             {
                 FailCommit = true,
                 FailWithException = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try
@@ -931,7 +931,7 @@ namespace MonoTests.System.Transactions
             {
                 FailRollback = true,
                 FailWithException = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try
@@ -972,7 +972,7 @@ namespace MonoTests.System.Transactions
             {
                 FailPrepare = true,
                 FailWithException = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try
@@ -1022,12 +1022,12 @@ namespace MonoTests.System.Transactions
             var rm1 = new IntResourceManager(1)
             {
                 UseSingle = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
             var rm2 = new IntResourceManager(2)
             {
                 UseSingle = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             using (var ts = new TransactionScope())
@@ -1190,7 +1190,7 @@ namespace MonoTests.System.Transactions
                 FailCommit = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm1"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
             var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
@@ -1252,7 +1252,7 @@ namespace MonoTests.System.Transactions
                 FailRollback = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm1"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
             var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
@@ -1299,7 +1299,7 @@ namespace MonoTests.System.Transactions
                 FailPrepare = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm1"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
             var rm2 = new IntResourceManager(2) { Type = ResourceManagerType.Volatile };
 
@@ -1354,7 +1354,7 @@ namespace MonoTests.System.Transactions
             {
                 FailPrepare = true,
                 FailWithException = true,
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try
@@ -1408,14 +1408,14 @@ namespace MonoTests.System.Transactions
                 FailPrepare = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm1"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
             var rm2 = new IntResourceManager(2)
             {
                 FailRollback = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm2"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try
@@ -1480,14 +1480,14 @@ namespace MonoTests.System.Transactions
                 FailRollback = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm1"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
             var rm2 = new IntResourceManager(2)
             {
                 FailPrepare = true,
                 FailWithException = true,
                 ThrowThisException = new InvalidOperationException("rm2"),
-                Type = ResourceManagerType.Volatile
+                Type = ResourceManagerType.Volatile,
             };
 
             try

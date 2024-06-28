@@ -341,7 +341,7 @@ namespace System.DirectoryServices.AccountManagement
             None,
             ResultSet,
             InsertedValuesCompleted,
-            InsertedValuesPending
+            InsertedValuesPending,
         }
 
         private CurrentEnumeratorMode _currentMode = CurrentEnumeratorMode.None;

@@ -36,6 +36,6 @@ namespace System.Windows.Forms
         Pushed = 0x00000200,
         Checked = 0x00000400,
         Flat = 0x00004000,
-        All = 0x00004700
+        All = 0x00004700,
     }
 }

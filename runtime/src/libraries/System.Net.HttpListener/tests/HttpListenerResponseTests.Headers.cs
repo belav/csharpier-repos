@@ -920,7 +920,7 @@ namespace System.Net.Tests
                 {
                     { "Name1", "Value1" },
                     { "Name2", "Value2" },
-                    { "Name3", "" }
+                    { "Name3", "" },
                 };
                 response.Headers = headers;
                 Assert.Equal(headers, response.Headers);

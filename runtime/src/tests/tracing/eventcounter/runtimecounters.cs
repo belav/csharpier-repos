@@ -45,7 +45,7 @@ namespace RuntimeEventCounterTests
                 { "assembly-count", false },
                 { "il-bytes-jitted", false },
                 { "methods-jitted-count", false },
-                { "time-in-jit", false }
+                { "time-in-jit", false },
             };
         }
 

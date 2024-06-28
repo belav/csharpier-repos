@@ -102,7 +102,7 @@ namespace System.IO.Tests
             SyncAPM,
 
             /// <summary>Task.Factory.FromAsync(s.BeginRead, s.EndRead, ...) / Task.Factory.FromAsync(s.BeginWrite, s.EndWrite, ...)</summary>
-            AsyncAPM
+            AsyncAPM,
         }
 
         public static IEnumerable<object[]> AllReadWriteModes() =>
@@ -161,21 +161,27 @@ namespace System.IO.Tests
             {
                 ReadWriteMode.SyncArray => stream.Read(buffer, offset, count),
                 ReadWriteMode.SyncSpan => stream.Read(buffer.AsSpan(offset, count)),
-                ReadWriteMode.AsyncArray =>
-                    await stream.ReadAsync(buffer, offset, count, cancellationToken),
-                ReadWriteMode.AsyncMemory =>
-                    await stream.ReadAsync(buffer.AsMemory(offset, count), cancellationToken),
-                ReadWriteMode.SyncAPM =>
-                    stream.EndRead(stream.BeginRead(buffer, offset, count, null, null)),
-                ReadWriteMode.AsyncAPM =>
-                    await Task.Factory.FromAsync(
-                        stream.BeginRead,
-                        stream.EndRead,
-                        buffer,
-                        offset,
-                        count,
-                        null
-                    ),
+                ReadWriteMode.AsyncArray => await stream.ReadAsync(
+                    buffer,
+                    offset,
+                    count,
+                    cancellationToken
+                ),
+                ReadWriteMode.AsyncMemory => await stream.ReadAsync(
+                    buffer.AsMemory(offset, count),
+                    cancellationToken
+                ),
+                ReadWriteMode.SyncAPM => stream.EndRead(
+                    stream.BeginRead(buffer, offset, count, null, null)
+                ),
+                ReadWriteMode.AsyncAPM => await Task.Factory.FromAsync(
+                    stream.BeginRead,
+                    stream.EndRead,
+                    buffer,
+                    offset,
+                    count,
+                    null
+                ),
                 _ => throw new Exception($"Unknown mode: {mode}"),
             };
         }
@@ -448,7 +454,7 @@ namespace System.IO.Tests
                     {
                         (1, 1),
                         (2, 0),
-                        (int.MaxValue, int.MaxValue)
+                        (int.MaxValue, int.MaxValue),
                     }
                 )
                 {
@@ -777,7 +783,7 @@ namespace System.IO.Tests
                     {
                         (1, 1),
                         (2, 0),
-                        (int.MaxValue, int.MaxValue)
+                        (int.MaxValue, int.MaxValue),
                     }
                 )
                 {
@@ -1417,7 +1423,7 @@ namespace System.IO.Tests
                     (byte)'l',
                     (byte)'o',
                     (byte)'c',
-                    (byte)'d'
+                    (byte)'d',
                 },
                 2,
                 5
@@ -1877,11 +1883,10 @@ namespace System.IO.Tests
                     origin switch
                     {
                         SeekOrigin.Begin => rand.Next(0, (int)stream.Length - bytesToRead),
-                        SeekOrigin.Current =>
-                            rand.Next(
-                                -(int)stream.Position + bytesToRead,
-                                (int)stream.Length - (int)stream.Position - bytesToRead
-                            ),
+                        SeekOrigin.Current => rand.Next(
+                            -(int)stream.Position + bytesToRead,
+                            (int)stream.Length - (int)stream.Position - bytesToRead
+                        ),
                         _ => -rand.Next(bytesToRead, (int)stream.Length),
                     },
                     origin
@@ -2471,7 +2476,7 @@ namespace System.IO.Tests
                 CancellationToken nonCanceledToken in new[]
                 {
                     CancellationToken.None,
-                    new CancellationTokenSource().Token
+                    new CancellationTokenSource().Token,
                 }
             )
             {
@@ -2562,7 +2567,7 @@ namespace System.IO.Tests
                 CancellationToken nonCanceledToken in new[]
                 {
                     CancellationToken.None,
-                    new CancellationTokenSource().Token
+                    new CancellationTokenSource().Token,
                 }
             )
             {
@@ -2730,7 +2735,7 @@ namespace System.IO.Tests
                 (byte)'l',
                 (byte)'o',
                 (byte)'\0',
-                (byte)'\0'
+                (byte)'\0',
             };
             const int Offset = 2,
                 Count = 5;
@@ -3149,7 +3154,7 @@ namespace System.IO.Tests
                 Array.Empty<byte>(),
                 "hello"u8.ToArray(),
                 Array.Empty<byte>(),
-                "world"u8.ToArray()
+                "world"u8.ToArray(),
             };
 
             using StreamPair streams = await CreateConnectedStreamsAsync();

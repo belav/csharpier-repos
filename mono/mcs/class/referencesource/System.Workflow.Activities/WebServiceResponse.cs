@@ -53,7 +53,7 @@ namespace System.Workflow.Activities
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Content
-                        )
+                        ),
                     }
                 )
             );

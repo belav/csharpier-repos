@@ -368,8 +368,8 @@ internal sealed class ExtractMethodCommandHandler : ICommandHandler<ExtractMetho
                     {
                         ExtractOptions = options.ExtractOptions with
                         {
-                            DoNotPutOutOrRefOnStruct = true
-                        }
+                            DoNotPutOutOrRefOnStruct = true,
+                        },
                     },
                     cancellationToken
                 )

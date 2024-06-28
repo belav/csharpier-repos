@@ -118,7 +118,7 @@ namespace System.ComponentModel.Tests
                             typeof(int),
                             typeof(int),
                             typeof(int),
-                            typeof(int)
+                            typeof(int),
                         }
                     ),
                     new object[] { 10, 30, 50, 0, 0 }

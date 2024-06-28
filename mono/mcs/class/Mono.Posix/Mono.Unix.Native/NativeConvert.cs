@@ -432,7 +432,7 @@ namespace Mono.Unix.Native
             {
                 "Can't Read+Create",
                 "wb",
-                "w+b"
+                "w+b",
             },
             /*       FileMode.Create: */new string[] { "Can't Read+Create", "wb", "w+b" },
             /*         FileMode.Open: */new string[] { "rb", "wb", "r+b" },

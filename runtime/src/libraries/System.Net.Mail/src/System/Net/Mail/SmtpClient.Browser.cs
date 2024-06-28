@@ -17,7 +17,7 @@ namespace System.Net.Mail
     {
         Network,
         SpecifiedPickupDirectory,
-        PickupDirectoryFromIis
+        PickupDirectoryFromIis,
     }
 
     // EAI Settings

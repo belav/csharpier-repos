@@ -186,7 +186,7 @@ namespace System.Windows.Forms
                                 new Point(7, 5),
                                 new Point(13, 5),
                                 new Point(13, 10),
-                                new Point(11, 10)
+                                new Point(11, 10),
                             }
                         );
                         g.DrawLine(Pens.Black, 7, 6, 12, 6);
@@ -224,7 +224,7 @@ namespace System.Windows.Forms
         {
             Close,
             Min,
-            Max
+            Max,
         }
     }
 }

@@ -34,7 +34,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 MessageSequence = DiscoveryMessageSequenceCD1.FromDiscoveryMessageSequence(
                     messageSequence
                 ),
-                ProbeMatches = ProbeMatchesCD1.Create(endpointDiscoveryMetadata)
+                ProbeMatches = ProbeMatchesCD1.Create(endpointDiscoveryMetadata),
             };
         }
 
@@ -48,7 +48,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 MessageSequence = DiscoveryMessageSequenceCD1.FromDiscoveryMessageSequence(
                     messageSequence
                 ),
-                ProbeMatches = ProbeMatchesCD1.Create(endpointDiscoveryMetadatas)
+                ProbeMatches = ProbeMatchesCD1.Create(endpointDiscoveryMetadatas),
             };
         }
     }

@@ -157,7 +157,7 @@ public class AuthTestController : ControllerBase
         result = await client.SendAsync(
             new HttpRequestMessage(HttpMethod.Get, "auth/Unrestricted")
             {
-                Version = GetProtocolVersion(protocol2)
+                Version = GetProtocolVersion(protocol2),
             }
         );
         body = await result.Content.ReadAsStringAsync();
@@ -208,7 +208,7 @@ public class AuthTestController : ControllerBase
         result = await client.SendAsync(
             new HttpRequestMessage(HttpMethod.Get, "auth/Unrestricted")
             {
-                Version = GetProtocolVersion(protocol2)
+                Version = GetProtocolVersion(protocol2),
             }
         );
         body = await result.Content.ReadAsStringAsync();
@@ -259,7 +259,7 @@ public class AuthTestController : ControllerBase
         result = await client.SendAsync(
             new HttpRequestMessage(HttpMethod.Get, "auth/Authorized")
             {
-                Version = GetProtocolVersion(protocol2)
+                Version = GetProtocolVersion(protocol2),
             }
         );
         body = await result.Content.ReadAsStringAsync();
@@ -465,7 +465,7 @@ public class AuthTestController : ControllerBase
             }
         )
         {
-            BaseAddress = new Uri(remote)
+            BaseAddress = new Uri(remote),
         };
     }
 

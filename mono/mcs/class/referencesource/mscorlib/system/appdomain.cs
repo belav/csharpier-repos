@@ -4283,7 +4283,7 @@ namespace System
                 initializerInfo,
                 sandboxName,
                 propertyNames,
-                propertyValues
+                propertyValues,
             };
         } // PrepareDataForSetup
 

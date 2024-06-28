@@ -37,6 +37,6 @@ namespace System.Windows.Forms
         Bit40 = 3,
         Bit56 = 4,
         Fortezza = 5,
-        Bit128 = 6
+        Bit128 = 6,
     }
 }

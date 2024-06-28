@@ -165,7 +165,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
                 await GenerateAssemblyAsync(
                     GenerateAnalyzerCode("DiagnosticAnalyzer1", "DiagnosticAnalyzerId"),
                     GenerateCodeFix("CodeFixProvider1", "DiagnosticAnalyzerId")
-                )
+                ),
             };
 
             var analyzers = assemblies

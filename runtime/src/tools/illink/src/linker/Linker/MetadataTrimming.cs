@@ -11,6 +11,6 @@ namespace Mono.Linker
         None = 0,
         ParameterName = 1,
 
-        Any = ParameterName
+        Any = ParameterName,
     }
 }

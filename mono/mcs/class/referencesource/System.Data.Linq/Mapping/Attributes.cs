@@ -194,7 +194,7 @@ namespace System.Data.Linq.Mapping
     {
         Always,
         Never,
-        WhenChanged
+        WhenChanged,
     }
 
     /// <summary>
@@ -207,7 +207,7 @@ namespace System.Data.Linq.Mapping
         Always = 1,
         Never = 2,
         OnInsert = 3,
-        OnUpdate = 4
+        OnUpdate = 4,
     }
 
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false)]

@@ -22,7 +22,7 @@ namespace System.Net.Http.HPack
                 400 => 12,
                 404 => 13,
                 500 => 14,
-                _ => -1
+                _ => -1,
             };
 
             return index != -1;
@@ -90,7 +90,7 @@ namespace System.Net.Http.HPack
             CreateHeaderField(58, "user-agent", ""),
             CreateHeaderField(59, "vary", ""),
             CreateHeaderField(60, "via", ""),
-            CreateHeaderField(61, "www-authenticate", "")
+            CreateHeaderField(61, "www-authenticate", ""),
         };
 
         // TODO: The HeaderField constructor will allocate and copy again. We should avoid this.

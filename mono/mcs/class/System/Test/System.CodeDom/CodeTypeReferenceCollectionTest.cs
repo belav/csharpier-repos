@@ -68,7 +68,7 @@ namespace MonoTests.System.CodeDom
             CodeTypeReference[] refs = new CodeTypeReference[]
             {
                 new CodeTypeReference(string.Empty),
-                null
+                null,
             };
 
             CodeTypeReferenceCollection coll = new CodeTypeReferenceCollection(refs);

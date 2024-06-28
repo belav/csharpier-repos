@@ -602,7 +602,7 @@ namespace System.ServiceModel.Discovery
                         {
                             new DiscoveryChannelBuilderAsyncResult.AsyncCatch<TimeoutException>(
                                 HandleTimeoutException
-                            )
+                            ),
                         }
                     );
                 }
@@ -628,7 +628,7 @@ namespace System.ServiceModel.Discovery
                             ),
                             new DiscoveryChannelBuilderAsyncResult.AsyncCatch<Exception>(
                                 HandleException
-                            )
+                            ),
                         }
                     );
                 }

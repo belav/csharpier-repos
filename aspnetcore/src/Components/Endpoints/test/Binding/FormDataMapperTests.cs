@@ -25,7 +25,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues(value)
+            ["value"] = new StringValues(value),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -48,7 +48,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues(value)
+            ["value"] = new StringValues(value),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -71,7 +71,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues(value)
+            ["value"] = new StringValues(value),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -136,7 +136,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues("abc")
+            ["value"] = new StringValues("abc"),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -161,7 +161,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues("abc")
+            ["value"] = new StringValues("abc"),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         var errors = new List<FormDataMappingError>();
@@ -193,7 +193,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues(value)
+            ["value"] = new StringValues(value),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -230,7 +230,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues(value)
+            ["value"] = new StringValues(value),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -250,7 +250,7 @@ public class FormDataMapperTests
         // Arrange
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value.Slug"] = new StringValues(value)
+            ["value.Slug"] = new StringValues(value),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -280,7 +280,7 @@ public class FormDataMapperTests
         var expected = new Point { X = 1, Y = 1 };
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues("(1,1)")
+            ["value"] = new StringValues("(1,1)"),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -301,7 +301,7 @@ public class FormDataMapperTests
         var expected = new ValuePoint { X = 1, Y = 1 };
         var collection = new Dictionary<string, StringValues>()
         {
-            ["value"] = new StringValues("(1,1)")
+            ["value"] = new StringValues("(1,1)"),
         };
         var reader = CreateFormDataReader(collection, CultureInfo.InvariantCulture);
         reader.PushPrefix("value");
@@ -370,7 +370,7 @@ public class FormDataMapperTests
         // Arrange
         var data = new Dictionary<string, StringValues>()
         {
-            ["values"] = new StringValues(new[] { "10", "11" })
+            ["values"] = new StringValues(new[] { "10", "11" }),
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
@@ -389,7 +389,7 @@ public class FormDataMapperTests
         // Arrange
         var data = new Dictionary<string, StringValues>()
         {
-            ["values"] = new StringValues(new[] { "Red", "Blue" })
+            ["values"] = new StringValues(new[] { "Red", "Blue" }),
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
@@ -412,7 +412,7 @@ public class FormDataMapperTests
         // Arrange
         var data = new Dictionary<string, StringValues>()
         {
-            ["values"] = new StringValues(new[] { "Red", "Blue" })
+            ["values"] = new StringValues(new[] { "Red", "Blue" }),
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
@@ -435,7 +435,7 @@ public class FormDataMapperTests
         // Arrange
         var data = new Dictionary<string, StringValues>()
         {
-            ["values"] = new StringValues(new[] { "10", "a" })
+            ["values"] = new StringValues(new[] { "10", "a" }),
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
@@ -466,7 +466,7 @@ public class FormDataMapperTests
         // Arrange
         var data = new Dictionary<string, StringValues>()
         {
-            ["values"] = new StringValues(new[] { "10", "a", "11" })
+            ["values"] = new StringValues(new[] { "10", "a", "11" }),
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("values");
@@ -1581,7 +1581,7 @@ public class FormDataMapperTests
             City = "Redmond",
             Street = "1 Microsoft Way",
             Country = "United States",
-            ZipCode = 98052
+            ZipCode = 98052,
         };
         var data = new Dictionary<string, StringValues>()
         {
@@ -1612,7 +1612,7 @@ public class FormDataMapperTests
             Age = 20,
             Name = "John Doe",
             Email = "john.doe@example.com",
-            IsPreferred = true
+            IsPreferred = true,
         };
         var data = new Dictionary<string, StringValues>()
         {
@@ -1787,7 +1787,7 @@ public class FormDataMapperTests
             expected = new RecursiveTree()
             {
                 Value = i,
-                Children = new List<RecursiveTree>() { expected }
+                Children = new List<RecursiveTree>() { expected },
             };
         }
 
@@ -1973,7 +1973,7 @@ public class FormDataMapperTests
             expected = new RecursiveDictionaryTree()
             {
                 Value = i,
-                Children = new Dictionary<int, RecursiveDictionaryTree>() { [0] = expected }
+                Children = new Dictionary<int, RecursiveDictionaryTree>() { [0] = expected },
             };
         }
 
@@ -2157,7 +2157,7 @@ public class FormDataMapperTests
             Age = 0,
             Name = "John Doe",
             Email = "john.doe@example.com",
-            IsPreferred = true
+            IsPreferred = true,
         };
         var data = new Dictionary<string, StringValues>()
         {
@@ -2205,7 +2205,7 @@ public class FormDataMapperTests
             IsPreferred = true,
             TotalVisits = 10,
             PreferredStore = "Redmond",
-            MonthlyFrequency = 0.8
+            MonthlyFrequency = 0.8,
         };
         var data = new Dictionary<string, StringValues>()
         {
@@ -2238,7 +2238,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new KeyValuePair<string, int>("Age", 20);
-        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20", };
+        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -2253,7 +2253,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new ClassRecordType("Age", 20);
-        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20", };
+        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -2268,7 +2268,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new StructRecordType("Age", 20);
-        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20", };
+        var data = new Dictionary<string, StringValues>() { ["Key"] = "Age", ["Value"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -2353,7 +2353,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new TypeRequiredProperties() { Name = null, Age = 20 };
-        var data = new Dictionary<string, StringValues>() { ["Age"] = "20", };
+        var data = new Dictionary<string, StringValues>() { ["Age"] = "20" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var errors = new List<FormDataMappingError>();
@@ -2375,7 +2375,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new Tuple<int, string>(1, "John");
-        var data = new Dictionary<string, StringValues>() { ["Item1"] = "1", ["Item2"] = "John", };
+        var data = new Dictionary<string, StringValues>() { ["Item1"] = "1", ["Item2"] = "John" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -2391,7 +2391,7 @@ public class FormDataMapperTests
     {
         // Arrange
         var expected = new ValueTuple<int, string>(1, "John");
-        var data = new Dictionary<string, StringValues>() { ["Item1"] = "1", ["Item2"] = "John", };
+        var data = new Dictionary<string, StringValues>() { ["Item1"] = "1", ["Item2"] = "John" };
 
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         var options = new FormDataMapperOptions();
@@ -2552,7 +2552,7 @@ public class FormDataMapperTests
         // Arrange
         var expected = new FormFileCollection
         {
-            new FormFile(Stream.Null, 0, 10, "file", "file.txt")
+            new FormFile(Stream.Null, 0, 10, "file", "file.txt"),
         };
         var data = new Dictionary<string, StringValues>();
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture, expected);
@@ -2584,7 +2584,7 @@ public class FormDataMapperTests
                 expectedString.Length,
                 "file",
                 "file.txt"
-            )
+            ),
         };
         var data = new Dictionary<string, StringValues>();
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture, expected);
@@ -2629,7 +2629,7 @@ public class FormDataMapperTests
                 expectedString2.Length,
                 "file",
                 "file2.txt"
-            )
+            ),
         };
         var data = new Dictionary<string, StringValues>();
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture, expected);
@@ -2670,7 +2670,7 @@ public class FormDataMapperTests
         {
             ["customerId"] = "20",
             ["customer[Id]"] = "20",
-            ["customer.Id"] = "20"
+            ["customer.Id"] = "20",
         };
         var reader = CreateFormDataReader(data, CultureInfo.InvariantCulture);
         reader.PushPrefix("customer");
@@ -2821,7 +2821,7 @@ public class FormDataMapperTests
                     "a55eb3df-e984-42b5-85ca-4f68da8567d1",
                     typeof(Guid),
                     new Guid("a55eb3df-e984-42b5-85ca-4f68da8567d1")
-                }
+                },
             };
 
             return result;
@@ -3004,7 +3004,7 @@ public enum Colors
 {
     Red,
     Green,
-    Blue
+    Blue,
 }
 
 internal struct Address

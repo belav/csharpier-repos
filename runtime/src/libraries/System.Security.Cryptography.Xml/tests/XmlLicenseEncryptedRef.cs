@@ -179,7 +179,7 @@ namespace System.Security.Cryptography.Xml.Tests
                             CipherData = new CipherData(
                                 EncryptedXml.EncryptKey(sessionKey.Key, key, useOAEP: true)
                             ),
-                            EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncRSAOAEPUrl)
+                            EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncRSAOAEPUrl),
                         }
                     )
                 );

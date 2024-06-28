@@ -115,9 +115,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                         LanguageNames.CSharp,
                         documents: new[]
                         {
-                            DocumentInfo.Create(DocumentId.CreateNewId(projectId), "D1")
+                            DocumentInfo.Create(DocumentId.CreateNewId(projectId), "D1"),
                         }
-                    )
+                    ),
                 }
             );
 
@@ -292,7 +292,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 documents: new List<DocumentInfo>
                 {
                     DocumentInfo.Create(DocumentId.CreateNewId(projectId), "D1"),
-                    DocumentInfo.Create(DocumentId.CreateNewId(projectId), "D2")
+                    DocumentInfo.Create(DocumentId.CreateNewId(projectId), "D2"),
                 }
             );
 
@@ -1454,15 +1454,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 (
                     BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                     _
-                ) =>
-                    1,
+                ) => 1,
                 (
                     BackgroundAnalysisScope.OpenFiles
                         or BackgroundAnalysisScope.FullSolution
                         or BackgroundAnalysisScope.None,
                     _
-                ) =>
-                    0,
+                ) => 0,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
@@ -1471,15 +1469,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.SolutionCrawler
                 (
                     BackgroundAnalysisScope.VisibleFilesAndOpenFilesWithPreviouslyReportedDiagnostics,
                     _
-                ) =>
-                    1,
+                ) => 1,
                 (
                     BackgroundAnalysisScope.OpenFiles
                         or BackgroundAnalysisScope.FullSolution
                         or BackgroundAnalysisScope.None,
                     _
-                ) =>
-                    0,
+                ) => 0,
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
@@ -2023,7 +2019,7 @@ class C
                         "P3",
                         LanguageNames.CSharp,
                         documents: GetDocuments(projectId3, count: 5)
-                    )
+                    ),
                 }
             );
 
@@ -2294,7 +2290,7 @@ class C
                         LanguageNames.CSharp,
                         documents: new[]
                         {
-                            DocumentInfo.Create(DocumentId.CreateNewId(projectId1), "D1")
+                            DocumentInfo.Create(DocumentId.CreateNewId(projectId1), "D1"),
                         }
                     ),
                     ProjectInfo.Create(
@@ -2305,7 +2301,7 @@ class C
                         LanguageNames.CSharp,
                         documents: new[]
                         {
-                            DocumentInfo.Create(DocumentId.CreateNewId(projectId2), "D2")
+                            DocumentInfo.Create(DocumentId.CreateNewId(projectId2), "D2"),
                         },
                         projectReferences: new[] { new ProjectReference(projectId1) }
                     ),
@@ -2317,7 +2313,7 @@ class C
                         LanguageNames.CSharp,
                         documents: new[]
                         {
-                            DocumentInfo.Create(DocumentId.CreateNewId(projectId3), "D3")
+                            DocumentInfo.Create(DocumentId.CreateNewId(projectId3), "D3"),
                         },
                         projectReferences: new[] { new ProjectReference(projectId2) }
                     ),
@@ -2329,7 +2325,7 @@ class C
                         LanguageNames.CSharp,
                         documents: new[]
                         {
-                            DocumentInfo.Create(DocumentId.CreateNewId(projectId4), "D4")
+                            DocumentInfo.Create(DocumentId.CreateNewId(projectId4), "D4"),
                         }
                     ),
                     ProjectInfo.Create(
@@ -2340,7 +2336,7 @@ class C
                         LanguageNames.CSharp,
                         documents: new[]
                         {
-                            DocumentInfo.Create(DocumentId.CreateNewId(projectId5), "D5")
+                            DocumentInfo.Create(DocumentId.CreateNewId(projectId5), "D5"),
                         },
                         projectReferences: new[] { new ProjectReference(projectId4) }
                     ),
@@ -2375,7 +2371,7 @@ class C
                         "P2",
                         LanguageNames.CSharp,
                         documents: GetDocuments(projectId2, count: 5)
-                    )
+                    ),
                 }
             );
         }
@@ -2546,7 +2542,7 @@ class C
                     {
                         { "WorkspaceKinds", new[] { SolutionCrawlerWorkspaceKind } },
                         { "HighPriorityForActiveFile", false },
-                        { "Name", "TestAnalyzer" }
+                        { "Name", "TestAnalyzer" },
                     }
                 );
         }

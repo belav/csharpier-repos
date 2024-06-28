@@ -39,6 +39,6 @@ namespace System.Windows.Forms
         FileSystemDirectories = 32,
         CustomSource = 64,
         None = 128,
-        ListItems = 256
+        ListItems = 256,
     }
 }

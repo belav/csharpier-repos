@@ -748,23 +748,16 @@ public abstract class JsonQueryFixtureBase
                         .HasConversion(
                             new ValueConverter<JsonEnum?, string>(
                                 x =>
-                                    x == null
-                                        ? "Null"
-                                        : x == JsonEnum.One
-                                            ? "One"
-                                            : x == JsonEnum.Two
-                                                ? "Two"
-                                                : x == JsonEnum.Three
-                                                    ? "Three"
-                                                    : "INVALID",
+                                    x == null ? "Null"
+                                    : x == JsonEnum.One ? "One"
+                                    : x == JsonEnum.Two ? "Two"
+                                    : x == JsonEnum.Three ? "Three"
+                                    : "INVALID",
                                 x =>
-                                    x == "One"
-                                        ? JsonEnum.One
-                                        : x == "Two"
-                                            ? JsonEnum.Two
-                                            : x == "Three"
-                                                ? JsonEnum.Three
-                                                : null,
+                                    x == "One" ? JsonEnum.One
+                                    : x == "Two" ? JsonEnum.Two
+                                    : x == "Three" ? JsonEnum.Three
+                                    : null,
                                 convertsNulls: true
                             )
                         );
@@ -785,23 +778,16 @@ public abstract class JsonQueryFixtureBase
                         .HasConversion(
                             new ValueConverter<JsonEnum?, string>(
                                 x =>
-                                    x == null
-                                        ? "Null"
-                                        : x == JsonEnum.One
-                                            ? "One"
-                                            : x == JsonEnum.Two
-                                                ? "Two"
-                                                : x == JsonEnum.Three
-                                                    ? "Three"
-                                                    : "INVALID",
+                                    x == null ? "Null"
+                                    : x == JsonEnum.One ? "One"
+                                    : x == JsonEnum.Two ? "Two"
+                                    : x == JsonEnum.Three ? "Three"
+                                    : "INVALID",
                                 x =>
-                                    x == "One"
-                                        ? JsonEnum.One
-                                        : x == "Two"
-                                            ? JsonEnum.Two
-                                            : x == "Three"
-                                                ? JsonEnum.Three
-                                                : null,
+                                    x == "One" ? JsonEnum.One
+                                    : x == "Two" ? JsonEnum.Two
+                                    : x == "Three" ? JsonEnum.Three
+                                    : null,
                                 convertsNulls: true
                             )
                         );

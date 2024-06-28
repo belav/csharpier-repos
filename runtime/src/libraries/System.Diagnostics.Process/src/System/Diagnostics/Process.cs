@@ -1828,7 +1828,7 @@ namespace System.Diagnostics
         {
             Undefined,
             SyncMode,
-            AsyncMode
+            AsyncMode,
         }
 
         /// <summary>A desired internal state.</summary>

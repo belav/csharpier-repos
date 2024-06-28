@@ -386,7 +386,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                         {
                             Id = -1,
                             Name = "Wubbsy Racing",
-                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
+                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
                         }
                     );
 
@@ -397,7 +397,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                         {
                             Id = -1,
                             Name = "Wubbsy Racing",
-                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" }
+                            Chassis = new Chassis { TeamId = -1, Name = "Wubbsy" },
                         }
                     );
 
@@ -569,7 +569,7 @@ public abstract class OptimisticConcurrencyTestBase<TFixture, TRowVersion> : ICl
                             {
                                 Id = 676,
                                 Name = "Larry David",
-                                TeamId = Team.Ferrari
+                                TeamId = Team.Ferrari,
                             }
                         );
 

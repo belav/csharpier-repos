@@ -42,8 +42,8 @@ public abstract class XmlApiControllerBase : ControllerBase
             {
                 Detail = "some detail",
                 Type = "some type",
-                Extensions = { ["CorrelationId"] = "correlation", },
-                Errors = { ["Error1"] = new[] { "ErrorValue" }, },
+                Extensions = { ["CorrelationId"] = "correlation" },
+                Errors = { ["Error1"] = new[] { "ErrorValue" } },
             }
         );
     }

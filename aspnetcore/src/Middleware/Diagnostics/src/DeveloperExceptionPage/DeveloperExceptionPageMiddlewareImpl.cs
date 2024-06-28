@@ -102,7 +102,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
             Error = errorContext.Exception,
             Path = httpContext.Request.Path.ToString(),
             Endpoint = httpContext.GetEndpoint(),
-            RouteValues = httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues
+            RouteValues = httpContext.Features.Get<IRouteValuesFeature>()?.RouteValues,
         };
 
         httpContext.Features.Set<IExceptionHandlerFeature>(exceptionHandlerFeature);
@@ -236,7 +236,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 {
                     HttpContext = httpContext,
                     ProblemDetails = CreateProblemDetails(errorContext, httpContext),
-                    Exception = errorContext.Exception
+                    Exception = errorContext.Exception,
                 }
             )
         )
@@ -263,7 +263,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
         {
             Title = TypeNameHelper.GetTypeDisplayName(errorContext.Exception.GetType()),
             Detail = errorContext.Exception.Message,
-            Status = httpContext.Response.StatusCode
+            Status = httpContext.Response.StatusCode,
         };
 
         // Problem details source gen serialization doesn't know about IHeaderDictionary or RouteValueDictionary.
@@ -332,7 +332,7 @@ internal class DeveloperExceptionPageMiddlewareImpl
                 {
                     File = compilationFailure.SourceFilePath,
                     Line = item.StartLine,
-                    Function = string.Empty
+                    Function = string.Empty,
                 };
 
                 if (sourceLines != null)

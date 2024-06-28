@@ -22,34 +22,34 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         typeof(DropIndexOperation),
         typeof(DropPrimaryKeyOperation),
         typeof(DropUniqueConstraintOperation),
-        typeof(DropCheckConstraintOperation)
+        typeof(DropCheckConstraintOperation),
     };
 
     private static readonly Type[] AlterOperationTypes =
     {
         typeof(AddPrimaryKeyOperation),
         typeof(AddUniqueConstraintOperation),
-        typeof(AlterSequenceOperation)
+        typeof(AlterSequenceOperation),
     };
 
     private static readonly Type[] RenameOperationTypes =
     {
         typeof(RenameColumnOperation),
         typeof(RenameIndexOperation),
-        typeof(RenameSequenceOperation)
+        typeof(RenameSequenceOperation),
     };
 
     private static readonly Type[] ColumnOperationTypes =
     {
         typeof(AddColumnOperation),
-        typeof(AlterColumnOperation)
+        typeof(AlterColumnOperation),
     };
 
     private static readonly Type[] ConstraintOperationTypes =
     {
         typeof(AddForeignKeyOperation),
         typeof(CreateIndexOperation),
-        typeof(AddCheckConstraintOperation)
+        typeof(AddCheckConstraintOperation),
     };
 
     private Dictionary<ITable, IRowIdentityMap>? _sourceIdentityMaps;
@@ -416,7 +416,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 var alterDatabaseOperation = new AlterDatabaseOperation
                 {
                     Collation = target.Collation,
-                    OldDatabase = { Collation = source.Collation }
+                    OldDatabase = { Collation = source.Collation },
                 };
 
                 alterDatabaseOperation.AddAnnotations(targetMigrationsAnnotations);
@@ -440,11 +440,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         else
         {
             operations =
-                target != null
-                    ? Add(target, diffContext)
-                    : source != null
-                        ? Remove(source, diffContext)
-                        : Enumerable.Empty<MigrationOperation>();
+                target != null ? Add(target, diffContext)
+                : source != null ? Remove(source, diffContext)
+                : Enumerable.Empty<MigrationOperation>();
         }
 
         return operations.Concat(GetDataOperations(source, target, diffContext));
@@ -650,7 +648,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = source.Schema,
                 Name = source.Name,
                 NewSchema = target.Schema,
-                NewName = target.Name
+                NewName = target.Name,
             };
 
             renameTableOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -671,7 +669,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Name = target.Name,
                 Schema = target.Schema,
                 Comment = target.Comment,
-                OldTable = { Comment = source.Comment }
+                OldTable = { Comment = source.Comment },
             };
 
             alterTableOperation.AddAnnotations(targetMigrationsAnnotations);
@@ -708,7 +706,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Schema = target.Schema,
             Name = target.Name,
-            Comment = target.Comment
+            Comment = target.Comment,
         };
         createTableOperation.AddAnnotations(target.GetAnnotations());
 
@@ -1208,7 +1206,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = table.Schema,
                 Table = table.Name,
                 Name = source.Name,
-                NewName = target.Name
+                NewName = target.Name,
             };
 
             renameColumnOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -1259,7 +1257,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = table.Schema,
                 Table = table.Name,
                 Name = target.Name,
-                IsDestructiveChange = isDestructiveChange
+                IsDestructiveChange = isDestructiveChange,
             };
 
             InitializeColumnHelper(alterColumnOperation, target, inline: !source.IsNullable);
@@ -1337,7 +1335,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Schema = table.Schema,
             Table = table.Name,
-            Name = target.Name
+            Name = target.Name,
         };
 
         InitializeColumnHelper(operation, target, inline);
@@ -1369,7 +1367,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Schema = table.Schema,
             Table = table.Name,
-            Name = source.Name
+            Name = source.Name,
         };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1549,7 +1547,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = table.Schema,
                 Table = table.Name,
-                Name = source.Name
+                Name = source.Name,
             };
         }
         else
@@ -1558,7 +1556,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = table.Schema,
                 Table = table.Name,
-                Name = source.Name
+                Name = source.Name,
             };
         }
 
@@ -1666,7 +1664,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = sourceTable.Schema,
                 Table = sourceTable.Name,
-                Name = source.Name
+                Name = source.Name,
             };
             operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1745,7 +1743,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = targetTable.Schema,
                 Table = targetTable.Name,
                 Name = sourceName,
-                NewName = targetName
+                NewName = targetName,
             };
 
             renameIndexOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -1785,7 +1783,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Name = source.Name,
             Schema = sourceTable.Schema,
-            Table = sourceTable.Name
+            Table = sourceTable.Name,
         };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1865,7 +1863,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Name = source.Name!,
             Schema = sourceEntityType.GetSchema(),
-            Table = sourceEntityType.GetTableName()!
+            Table = sourceEntityType.GetTableName()!,
         };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1922,7 +1920,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = source.Schema,
                 Name = source.Name,
                 NewSchema = target.Schema,
-                NewName = target.Name
+                NewName = target.Name,
             };
 
             renameSequenceOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -1936,7 +1934,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = target.Schema,
                 Name = target.Name,
-                StartValue = target.StartValue
+                StartValue = target.StartValue,
             };
         }
 
@@ -1960,7 +1958,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             var alterSequenceOperation = new AlterSequenceOperation
             {
                 Schema = target.Schema,
-                Name = target.Name
+                Name = target.Name,
             };
             Initialize(alterSequenceOperation, target, targetMigrationsAnnotations);
 
@@ -1983,7 +1981,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Schema = target.Schema,
             Name = target.Name,
             ClrType = target.Type,
-            StartValue = target.StartValue
+            StartValue = target.StartValue,
         };
 
         yield return Initialize(
@@ -2665,7 +2663,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                                     .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
                                     .Select(col => col.Value)
                                     .ToList()
-                            )
+                            ),
                         };
                         break;
                     case EntityState.Modified:
@@ -2705,7 +2703,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                                     .Select(col => col.Value)
                                     .ToList()
                             ),
-                            IsDestructiveChange = true
+                            IsDestructiveChange = true,
                         };
                         break;
                     case EntityState.Deleted:
@@ -2742,7 +2740,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                                     .Select(col => col.Value)
                                     .ToArray()
                             ),
-                            IsDestructiveChange = true
+                            IsDestructiveChange = true,
                         };
 
                         break;
@@ -2885,11 +2883,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected virtual object? GetDefaultValue(Type type) =>
-        type == typeof(string)
-            ? string.Empty
-            : type.IsArray
-                ? Array.CreateInstance(type.GetElementType()!, 0)
-                : type.UnwrapNullableType().GetDefaultValue();
+        type == typeof(string) ? string.Empty
+        : type.IsArray ? Array.CreateInstance(type.GetElementType()!, 0)
+        : type.UnwrapNullableType().GetDefaultValue();
 
     private static ValueConverter? GetValueConverter(
         IProperty property,
@@ -3038,11 +3034,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         /// </summary>
         public virtual T? FindSource<T>(T? target)
             where T : class =>
-            target == null
-                ? null
-                : _targetToSource.TryGetValue(target, out var source)
-                    ? (T)source
-                    : null;
+            target == null ? null
+            : _targetToSource.TryGetValue(target, out var source) ? (T)source
+            : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -3052,11 +3046,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         /// </summary>
         public virtual T? FindTarget<T>(T? source)
             where T : class =>
-            source == null
-                ? null
-                : _sourceToTarget.TryGetValue(source, out var target)
-                    ? (T)target
-                    : null;
+            source == null ? null
+            : _sourceToTarget.TryGetValue(source, out var target) ? (T)target
+            : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

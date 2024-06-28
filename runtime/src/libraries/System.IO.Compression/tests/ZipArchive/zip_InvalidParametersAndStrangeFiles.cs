@@ -971,7 +971,7 @@ namespace System.IO.Compression.Tests
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
         private static readonly byte[] s_emptyFileCompressedWrongSize =
         {
@@ -1120,12 +1120,12 @@ namespace System.IO.Compression.Tests
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
         public static IEnumerable<object[]> EmptyFiles = new List<object[]>()
         {
             new object[] { s_emptyFileCompressedWithEtx },
-            new object[] { s_emptyFileCompressedWrongSize }
+            new object[] { s_emptyFileCompressedWrongSize },
         };
 
         /// <summary>
@@ -1720,7 +1720,7 @@ namespace System.IO.Compression.Tests
             0x00,
             // comment length
             0x00,
-            0x00
+            0x00,
         };
 
         private static readonly byte[] s_zip64WithBigStartDiskNumber =
@@ -2122,7 +2122,7 @@ namespace System.IO.Compression.Tests
             0x00,
             // comment length
             0x00,
-            0x00
+            0x00,
         };
     }
 }

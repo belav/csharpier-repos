@@ -553,7 +553,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                     {
                         HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
                         sampleGenerator.GetSample(null, SampleDirection.Request);
-                    }
+                    },
                 };
             }
         }
@@ -576,7 +576,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                             SampleDirection.Request,
                             out formatters
                         );
-                    }
+                    },
                 };
             }
         }
@@ -596,7 +596,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                             typeof(string),
                             new MediaTypeHeaderValue("text/xml")
                         );
-                    }
+                    },
                 };
                 yield return new Action[]
                 {
@@ -609,7 +609,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                             typeof(string),
                             null
                         );
-                    }
+                    },
                 };
             }
         }

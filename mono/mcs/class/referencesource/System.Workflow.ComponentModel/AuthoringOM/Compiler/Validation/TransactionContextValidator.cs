@@ -123,7 +123,7 @@ namespace System.Workflow.ComponentModel.Compiler
                             new object[]
                             {
                                 atomicTransaction.TimeoutDuration.ToString(),
-                                "TimeoutDuration"
+                                "TimeoutDuration",
                             }
                         ),
                         ErrorNumbers.Error_NegativeValue

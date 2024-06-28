@@ -59,7 +59,7 @@ namespace Mono.Security.Interface
         AllowNoEncryption,
 
         // Request null ciphers only
-        NoEncryption
+        NoEncryption,
     }
 
     public delegate bool MonoRemoteCertificateValidationCallback(

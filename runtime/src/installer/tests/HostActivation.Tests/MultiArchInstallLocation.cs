@@ -181,7 +181,7 @@ namespace HostActivation.Tests
             {
                 ("arm64", "/arm64/dotnet/root"),
                 ("x64", "/x64/dotnet/root"),
-                ("x86", "/x86/dotnet/root")
+                ("x86", "/x86/dotnet/root"),
             };
             foreach (var envVar in envVars)
             {
@@ -372,7 +372,7 @@ namespace HostActivation.Tests
                     {
                         ("arm64", "/arm64/install/path"),
                         ("x64", "/x64/install/path"),
-                        ("x86", "/x86/install/path")
+                        ("x86", "/x86/install/path"),
                     };
                     (string Architecture, string Path) unknownArchInstall = (
                         "unknown",

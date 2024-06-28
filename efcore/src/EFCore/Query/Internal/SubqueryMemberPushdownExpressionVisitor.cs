@@ -27,7 +27,7 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             QueryableMethods.LastOrDefaultWithPredicate,
             QueryableMethods.LastOrDefaultWithoutPredicate,
             QueryableMethods.ElementAt,
-            QueryableMethods.ElementAtOrDefault
+            QueryableMethods.ElementAtOrDefault,
         };
 
     private static readonly IDictionary<MethodInfo, MethodInfo> PredicateLessMethodInfo =
@@ -47,7 +47,7 @@ public class SubqueryMemberPushdownExpressionVisitor : ExpressionVisitor
             {
                 QueryableMethods.LastOrDefaultWithPredicate,
                 QueryableMethods.LastOrDefaultWithoutPredicate
-            }
+            },
         };
 
     private readonly IModel _model;

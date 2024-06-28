@@ -14,7 +14,7 @@ namespace System.Globalization.Tests
             {
                 new string[]
                 { /* empty */
-                }
+                },
             };
             yield return new object[] { new string[] { "H", "e", "l", "l", "o" } };
 
@@ -30,8 +30,8 @@ namespace System.Globalization.Tests
                     "\uD800\uDC00",
                     "\u0061\u0300",
                     "\u0061\u0300",
-                    "\u00C6"
-                }
+                    "\u00C6",
+                },
             };
         }
 

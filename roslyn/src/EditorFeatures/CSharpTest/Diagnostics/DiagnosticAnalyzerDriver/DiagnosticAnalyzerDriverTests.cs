@@ -712,7 +712,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 {
                     (Diagnostic("A", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
                     (Diagnostic("B", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
-                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer))
+                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
                 }
             );
 
@@ -781,7 +781,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 {
                     (Diagnostic("A", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
                     (Diagnostic("B", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
-                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer))
+                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
                 }
             );
 
@@ -801,7 +801,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 {
                     (Diagnostic("A", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
                     (Diagnostic("B", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
-                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer))
+                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
                 }
             );
 
@@ -822,7 +822,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                 {
                     (Diagnostic("A", "Class").WithLocation(1, 7), nameof(VsixAnalyzer)),
                     (Diagnostic("B", "Class").WithLocation(1, 7), nameof(NuGetAnalyzer)),
-                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(VsixAnalyzer))
+                    (Diagnostic("C", "Class").WithLocation(1, 7), nameof(VsixAnalyzer)),
                 }
             );
         }
@@ -887,7 +887,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     (
                         Diagnostic("Z", "Class", isSuppressed: true).WithLocation(1, 7),
                         nameof(VsixAnalyzer)
-                    )
+                    ),
                 }
             );
 
@@ -920,7 +920,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     (
                         Diagnostic("Z", "Class", isSuppressed: true).WithLocation(1, 7),
                         nameof(VsixAnalyzer)
-                    )
+                    ),
                 }
             );
 
@@ -951,7 +951,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     (
                         Diagnostic("Z", "Class", isSuppressed: true).WithLocation(1, 7),
                         nameof(VsixAnalyzer)
-                    )
+                    ),
                 }
             );
 
@@ -983,7 +983,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     (
                         Diagnostic("Z", "Class", isSuppressed: true).WithLocation(1, 7),
                         nameof(VsixAnalyzer)
-                    )
+                    ),
                 }
             );
 
@@ -1015,7 +1015,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     (
                         Diagnostic("Z", "Class", isSuppressed: true).WithLocation(1, 7),
                         nameof(VsixAnalyzer)
-                    )
+                    ),
                 }
             );
         }
@@ -1091,7 +1091,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.UserDiagnos
                     workspace.CurrentSolution.WithAnalyzerReferences(
                         new[]
                         {
-                            new AnalyzerImageReference(vsixAnalyzerReferences.ToImmutableArray())
+                            new AnalyzerImageReference(vsixAnalyzerReferences.ToImmutableArray()),
                         }
                     )
                 )

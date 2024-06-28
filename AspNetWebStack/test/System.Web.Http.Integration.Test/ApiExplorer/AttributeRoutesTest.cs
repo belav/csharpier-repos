@@ -31,8 +31,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "attribute/mixed",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
-                    }
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
@@ -45,7 +45,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "controller/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -53,7 +53,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "controller/{name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -61,7 +61,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "controller/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -69,7 +69,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "controller/{id}?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -77,7 +77,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "optional/{opt1}/{opt2}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -85,7 +85,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "optionalwconstraint/{opt}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -93,7 +93,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "default/{default1}/{default2}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -101,7 +101,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "wildcard/{wildcard}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -109,7 +109,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "multiverb",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -117,7 +117,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "multiverb",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -125,7 +125,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "multi1",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -133,7 +133,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "multi2",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -147,7 +147,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -155,7 +155,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -163,7 +163,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -177,7 +177,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix2/defaultroute/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -185,7 +185,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix2",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -193,7 +193,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix2/defaultrouteoverride/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -207,7 +207,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/default2/getallcustomers1",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -215,7 +215,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/default2/getallcustomers2",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -223,7 +223,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/resource/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -237,7 +237,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "partial/doop1",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -245,7 +245,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "partial/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -259,7 +259,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "apioptional",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -267,7 +267,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "apioptional/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -281,7 +281,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "apioverload/{name}?age={age}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -289,7 +289,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "apioverload/{id}?score={score}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -303,7 +303,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "baseclass?id={id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -317,7 +317,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "baseclassprefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -325,7 +325,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "baseclassprefix/base/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -339,7 +339,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "subclassroute",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -347,7 +347,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "subclassroute?id={id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -355,7 +355,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "subclassroute?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -397,7 +397,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/Mixed?name={name}&series={series}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 2
+                        NumberOfParameters = 2,
                     },
                     new
                     {
@@ -405,7 +405,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "attribute/mixed",
                         HasRequestFormatters = true,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -413,8 +413,8 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/Mixed/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 1
-                    }
+                        NumberOfParameters = 1,
+                    },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
 
@@ -427,7 +427,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -435,7 +435,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -443,7 +443,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "prefix/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -451,7 +451,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/prefixed",
                         HasRequestFormatters = false,
                         HasResponseFormatters = false,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -465,7 +465,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "subclass?id={id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -473,7 +473,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "subclass?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -487,7 +487,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassnoroute/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -495,7 +495,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassnoroute?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -509,7 +509,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassnoprefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -517,7 +517,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassnoprefix/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -525,7 +525,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassnoprefix?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };
@@ -539,7 +539,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassprefix",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 0
+                        NumberOfParameters = 0,
                     },
                     new
                     {
@@ -547,7 +547,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "api/subclassprefix/{id}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                     new
                     {
@@ -555,7 +555,7 @@ namespace System.Web.Http.ApiExplorer
                         RelativePath = "subclassprefix?name={name}",
                         HasRequestFormatters = false,
                         HasResponseFormatters = true,
-                        NumberOfParameters = 1
+                        NumberOfParameters = 1,
                     },
                 };
                 yield return new[] { controllerType, expectedApiDescriptions };

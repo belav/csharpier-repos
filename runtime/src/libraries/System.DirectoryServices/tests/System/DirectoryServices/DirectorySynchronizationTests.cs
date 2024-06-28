@@ -35,7 +35,7 @@ namespace System.DirectoryServices.Tests
         [Theory]
         [InlineData(null)]
         [InlineData(new byte[0])]
-        [InlineData(new byte[] { 1, 2, 3, })]
+        [InlineData(new byte[] { 1, 2, 3 })]
         public void Ctor_Cookie(byte[] cookie)
         {
             var synchronization = new DirectorySynchronization(cookie);
@@ -89,7 +89,7 @@ namespace System.DirectoryServices.Tests
                 new DirectorySynchronization(
                     DirectorySynchronizationOptions.ObjectSecurity,
                     new byte[] { 1, 2, 3 }
-                )
+                ),
             };
         }
 

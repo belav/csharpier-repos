@@ -76,7 +76,7 @@ namespace System.Runtime
                 0xf7537e82,
                 0xbd3af235,
                 0x2ad7d2bb,
-                0xeb86d391
+                0xeb86d391,
             };
 
             int blocks = (buffer.Length + 8) / 64 + 1;
@@ -190,7 +190,7 @@ namespace System.Runtime
                 (byte)dd,
                 (byte)(dd >> 8),
                 (byte)(dd >> 16),
-                (byte)(dd >> 24)
+                (byte)(dd >> 24),
             };
         }
     }

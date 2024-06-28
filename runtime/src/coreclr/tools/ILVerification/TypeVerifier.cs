@@ -81,7 +81,7 @@ namespace Internal.TypeVerifier
                 InterfaceMetadataObjects imo = new InterfaceMetadataObjects
                 {
                     InterfaceType = interfaceTypeDesc,
-                    InterfaceImplementation = interfaceImplementation
+                    InterfaceImplementation = interfaceImplementation,
                 };
 
                 if (!implementedInterfaces.Contains(imo))

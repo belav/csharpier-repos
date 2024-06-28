@@ -548,7 +548,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 //         var a = /*<bind>*/args[c]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c")
                     .WithArguments("C", "int")
-                    .WithLocation(6, 32)
+                    .WithLocation(6, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -594,7 +594,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 //         var a = /*<bind>*/args[c]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c")
                     .WithArguments("C", "int")
-                    .WithLocation(6, 32)
+                    .WithLocation(6, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -632,7 +632,7 @@ ICollectionExpressionOperation (1 elements, ConstructMethod: null) (OperationKin
                 // (6,27): error CS9176: There is no target type for the collection expression.
                 //         var a = /*<bind>*/[0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[0]")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CollectionExpressionSyntax>(
@@ -673,7 +673,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?) (Syntax: '[0]')
                     .WithLocation(6, 17),
                 // (6,18): error CS1001: Identifier expected
                 //         var a = .?/*<bind>*/[0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "?").WithLocation(6, 18)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "?").WithLocation(6, 18),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementBindingExpressionSyntax>(
@@ -710,7 +710,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
             {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 32)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -749,7 +749,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'c[0]')
                 //         var a = /*<bind>*/c[0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadIndexLHS, "c[0]")
                     .WithArguments("C")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -788,7 +788,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 //         var a = /*<bind>*/args[0, 0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadIndexCount, "args[0, 0]")
                     .WithArguments("1")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -828,7 +828,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Char, IsInvalid) (Syntax:
             {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[0][]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 35)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -866,7 +866,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'ErrorExp
                 //         var a = /*<bind>*/ErrorExpression[0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "ErrorExpression")
                     .WithArguments("ErrorExpression")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -908,7 +908,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 //         var a = /*<bind>*/args[ErrorExpression]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "ErrorExpression")
                     .WithArguments("ErrorExpression")
-                    .WithLocation(6, 32)
+                    .WithLocation(6, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -946,7 +946,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
             {
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[0,]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 34)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -986,7 +986,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 //         var a = /*<bind>*/args[/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadIndexCount, "args[/*</bind>*/")
                     .WithArguments("1")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -1022,7 +1022,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
             {
                 // CS1003: Syntax error, ']' expected
                 //         var a = /*<bind>*/args[0/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments("]").WithLocation(6, 44)
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments("]").WithLocation(6, 44),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -1079,7 +1079,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'args[y][
                 Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 37),
                 // CS0443: Syntax error; value expected
                 //         var a = /*<bind>*/args[y][][][][x]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 39)
+                Diagnostic(ErrorCode.ERR_ValueExpected, "]").WithLocation(6, 39),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -1116,7 +1116,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 // CS1742: An array access may not have a named argument specifier
                 //         var a = /*<bind>*/args[name: 0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NamedArgumentForArray, "args[name: 0]")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -1165,7 +1165,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
                 //     public void F(string[,] args, ref int x, out int y)
                 Diagnostic(ErrorCode.ERR_ParamUnassigned, "F")
                     .WithArguments("y")
-                    .WithLocation(4, 17)
+                    .WithLocation(4, 17),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
@@ -1203,7 +1203,7 @@ IArrayElementReferenceOperation (OperationKind.ArrayElementReference, Type: Syst
             {
                 // CS0251: Indexing an array with a negative index (array indices always start at zero)
                 //         var a = /*<bind>*/args[-1]/*</bind>*/;
-                Diagnostic(ErrorCode.WRN_NegativeArrayIndex, "-1").WithLocation(6, 32)
+                Diagnostic(ErrorCode.WRN_NegativeArrayIndex, "-1").WithLocation(6, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(

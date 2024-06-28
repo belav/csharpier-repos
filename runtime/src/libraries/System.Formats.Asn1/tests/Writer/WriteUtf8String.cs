@@ -11,8 +11,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public static IEnumerable<object[]> ShortValidCases { get; } =
             new object[][]
             {
-                new object[] { string.Empty, "00", },
-                new object[] { "hi", "026869", },
+                new object[] { string.Empty, "00" },
+                new object[] { "hi", "026869" },
                 new object[]
                 {
                     "Dr. & Mrs. Smith\u2010Jones \uFE60 children",
@@ -33,7 +33,7 @@ namespace System.Formats.Asn1.Tests.Writer
         public static IEnumerable<object[]> CERSegmentedCases { get; } =
             new object[][]
             {
-                new object[] { GettysburgAddress, 1458, },
+                new object[] { GettysburgAddress, 1458 },
                 new object[]
                 {
                     // A whole bunch of "small ampersand" values (3 bytes each UTF-8),

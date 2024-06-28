@@ -154,7 +154,7 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
         {
             ViewName = viewName,
             ViewData = ViewData,
-            TempData = TempData
+            TempData = TempData,
         };
     }
 
@@ -207,7 +207,7 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
         {
             ViewName = viewName,
             ViewData = ViewData,
-            TempData = TempData
+            TempData = TempData,
         };
     }
 
@@ -258,7 +258,7 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
             ViewComponentName = componentName,
             Arguments = arguments,
             ViewData = ViewData,
-            TempData = TempData
+            TempData = TempData,
         };
     }
 
@@ -281,7 +281,7 @@ public abstract class Controller : ControllerBase, IActionFilter, IAsyncActionFi
             ViewComponentType = componentType,
             Arguments = arguments,
             ViewData = ViewData,
-            TempData = TempData
+            TempData = TempData,
         };
     }
 

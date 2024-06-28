@@ -824,7 +824,7 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.String,
                 PrimitiveTypeKind.Binary,
                 PrimitiveTypeKind.Time,
-                PrimitiveTypeKind.DateTimeOffset
+                PrimitiveTypeKind.DateTimeOffset,
             };
 
             functions.ForTypes(parameterTypes, type => functions.AddAggregate("Max", type));
@@ -836,7 +836,7 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Decimal,
                 PrimitiveTypeKind.Double,
                 PrimitiveTypeKind.Int32,
-                PrimitiveTypeKind.Int64
+                PrimitiveTypeKind.Int64,
             };
 
             functions.ForTypes(parameterTypes, type => functions.AddAggregate("Avg", type));
@@ -848,7 +848,7 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Decimal,
                 PrimitiveTypeKind.Double,
                 PrimitiveTypeKind.Int32,
-                PrimitiveTypeKind.Int64
+                PrimitiveTypeKind.Int64,
             };
 
             functions.ForTypes(
@@ -920,7 +920,7 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Int16,
                 PrimitiveTypeKind.Int32,
                 PrimitiveTypeKind.Int64,
-                PrimitiveTypeKind.SByte
+                PrimitiveTypeKind.SByte,
             };
 
             functions.ForTypes(
@@ -1030,7 +1030,7 @@ namespace System.Data.Metadata.Edm
             PrimitiveTypeKind[] dateTimeParameterTypes =
             {
                 PrimitiveTypeKind.DateTimeOffset,
-                PrimitiveTypeKind.DateTime
+                PrimitiveTypeKind.DateTime,
             };
             functions.ForTypes(
                 dateTimeParameterTypes,
@@ -1054,7 +1054,7 @@ namespace System.Data.Metadata.Edm
             {
                 PrimitiveTypeKind.DateTimeOffset,
                 PrimitiveTypeKind.DateTime,
-                PrimitiveTypeKind.Time
+                PrimitiveTypeKind.Time,
             };
             functions.ForTypes(
                 timeParameterTypes,
@@ -1371,7 +1371,7 @@ namespace System.Data.Metadata.Edm
             {
                 PrimitiveTypeKind.Single,
                 PrimitiveTypeKind.Double,
-                PrimitiveTypeKind.Decimal
+                PrimitiveTypeKind.Decimal,
             };
             functions.ForTypes(
                 parameterTypes,
@@ -1422,7 +1422,7 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Int32,
                 PrimitiveTypeKind.Int64,
                 PrimitiveTypeKind.Byte,
-                PrimitiveTypeKind.Single
+                PrimitiveTypeKind.Single,
             };
             functions.ForTypes(
                 parameterTypes,
@@ -1435,14 +1435,14 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Decimal,
                 PrimitiveTypeKind.Double,
                 PrimitiveTypeKind.Int32,
-                PrimitiveTypeKind.Int64
+                PrimitiveTypeKind.Int64,
             };
 
             PrimitiveTypeKind[] powerSecondParameterTypes =
             {
                 PrimitiveTypeKind.Decimal,
                 PrimitiveTypeKind.Double,
-                PrimitiveTypeKind.Int64
+                PrimitiveTypeKind.Int64,
             };
 
             foreach (PrimitiveTypeKind kind1 in powerFirstParameterTypes)
@@ -1463,7 +1463,7 @@ namespace System.Data.Metadata.Edm
                 PrimitiveTypeKind.Int16,
                 PrimitiveTypeKind.Int32,
                 PrimitiveTypeKind.Int64,
-                PrimitiveTypeKind.Byte
+                PrimitiveTypeKind.Byte,
             };
 
             functions.ForTypes(
@@ -1558,7 +1558,7 @@ namespace System.Data.Metadata.Edm
                         _primitiveTypes[(int)PrimitiveTypeKind.Int64],
                         _primitiveTypes[(int)PrimitiveTypeKind.Decimal],
                         _primitiveTypes[(int)PrimitiveTypeKind.Single],
-                        _primitiveTypes[(int)PrimitiveTypeKind.Double]
+                        _primitiveTypes[(int)PrimitiveTypeKind.Double],
                     }
                 );
 
@@ -1574,7 +1574,7 @@ namespace System.Data.Metadata.Edm
                         _primitiveTypes[(int)PrimitiveTypeKind.Int64],
                         _primitiveTypes[(int)PrimitiveTypeKind.Decimal],
                         _primitiveTypes[(int)PrimitiveTypeKind.Single],
-                        _primitiveTypes[(int)PrimitiveTypeKind.Double]
+                        _primitiveTypes[(int)PrimitiveTypeKind.Double],
                     }
                 );
 
@@ -1589,7 +1589,7 @@ namespace System.Data.Metadata.Edm
                         _primitiveTypes[(int)PrimitiveTypeKind.Int64],
                         _primitiveTypes[(int)PrimitiveTypeKind.Decimal],
                         _primitiveTypes[(int)PrimitiveTypeKind.Single],
-                        _primitiveTypes[(int)PrimitiveTypeKind.Double]
+                        _primitiveTypes[(int)PrimitiveTypeKind.Double],
                     }
                 );
 
@@ -1603,7 +1603,7 @@ namespace System.Data.Metadata.Edm
                         _primitiveTypes[(int)PrimitiveTypeKind.Int64],
                         _primitiveTypes[(int)PrimitiveTypeKind.Decimal],
                         _primitiveTypes[(int)PrimitiveTypeKind.Single],
-                        _primitiveTypes[(int)PrimitiveTypeKind.Double]
+                        _primitiveTypes[(int)PrimitiveTypeKind.Double],
                     }
                 );
 
@@ -1615,7 +1615,7 @@ namespace System.Data.Metadata.Edm
                     new PrimitiveType[]
                     {
                         _primitiveTypes[(int)PrimitiveTypeKind.Single],
-                        _primitiveTypes[(int)PrimitiveTypeKind.Double]
+                        _primitiveTypes[(int)PrimitiveTypeKind.Double],
                     }
                 );
 
@@ -1629,7 +1629,7 @@ namespace System.Data.Metadata.Edm
                     PrimitiveTypeKind.GeographyMultiPoint,
                     PrimitiveTypeKind.GeographyMultiLineString,
                     PrimitiveTypeKind.GeographyMultiPolygon,
-                    PrimitiveTypeKind.GeographyCollection
+                    PrimitiveTypeKind.GeographyCollection,
                 },
                 PrimitiveTypeKind.Geography
             );
@@ -1644,7 +1644,7 @@ namespace System.Data.Metadata.Edm
                     PrimitiveTypeKind.GeometryMultiPoint,
                     PrimitiveTypeKind.GeometryMultiLineString,
                     PrimitiveTypeKind.GeometryMultiPolygon,
-                    PrimitiveTypeKind.GeometryCollection
+                    PrimitiveTypeKind.GeometryCollection,
                 },
                 PrimitiveTypeKind.Geometry
             );
@@ -1669,7 +1669,7 @@ namespace System.Data.Metadata.Edm
                         new PrimitiveType[]
                         {
                             _primitiveTypes[(int)promotableKind],
-                            _primitiveTypes[(int)baseKind]
+                            _primitiveTypes[(int)baseKind],
                         }
                     );
             }

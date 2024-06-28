@@ -262,7 +262,7 @@ namespace Mono.Data.Tds.Protocol
                 0x09,
                 0x04,
                 0x00,
-                0x00
+                0x00,
             };
             byte[] sqlserverMagic =
             {
@@ -286,7 +286,7 @@ namespace Mono.Data.Tds.Protocol
                 0x0,
                 0x0,
                 0x0,
-                0x0
+                0x0,
             };
             byte[] magic = null;
 

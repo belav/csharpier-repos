@@ -414,7 +414,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     {
                         typeof(Vector256<Int32>),
                         typeof(Vector256<Byte>),
-                        typeof(Vector256<SByte>)
+                        typeof(Vector256<SByte>),
                     }
                 )
                 .Invoke(
@@ -423,7 +423,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     {
                         Unsafe.Read<Vector256<Int32>>(_dataTable.inArray0Ptr),
                         Unsafe.Read<Vector256<Byte>>(_dataTable.inArray1Ptr),
-                        Unsafe.Read<Vector256<SByte>>(_dataTable.inArray2Ptr)
+                        Unsafe.Read<Vector256<SByte>>(_dataTable.inArray2Ptr),
                     }
                 );
 
@@ -447,7 +447,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     {
                         typeof(Vector256<Int32>),
                         typeof(Vector256<Byte>),
-                        typeof(Vector256<SByte>)
+                        typeof(Vector256<SByte>),
                     }
                 )
                 .Invoke(
@@ -456,7 +456,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     {
                         Avx.LoadVector256((Int32*)(_dataTable.inArray0Ptr)),
                         Avx.LoadVector256((Byte*)(_dataTable.inArray1Ptr)),
-                        Avx.LoadVector256((SByte*)(_dataTable.inArray2Ptr))
+                        Avx.LoadVector256((SByte*)(_dataTable.inArray2Ptr)),
                     }
                 );
 
@@ -480,7 +480,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     {
                         typeof(Vector256<Int32>),
                         typeof(Vector256<Byte>),
-                        typeof(Vector256<SByte>)
+                        typeof(Vector256<SByte>),
                     }
                 )
                 .Invoke(
@@ -489,7 +489,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni
                     {
                         Avx.LoadAlignedVector256((Int32*)(_dataTable.inArray0Ptr)),
                         Avx.LoadAlignedVector256((Byte*)(_dataTable.inArray1Ptr)),
-                        Avx.LoadAlignedVector256((SByte*)(_dataTable.inArray2Ptr))
+                        Avx.LoadAlignedVector256((SByte*)(_dataTable.inArray2Ptr)),
                     }
                 );
 

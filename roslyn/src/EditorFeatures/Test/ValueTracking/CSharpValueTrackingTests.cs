@@ -46,7 +46,7 @@ class C
             //
             await ValidateItemsAsync(
                 workspace,
-                itemInfo: new[] { (7, "s"), (3, "public string S { get; set; } = \"\";"), }
+                itemInfo: new[] { (7, "s"), (3, "public string S { get; set; } = \"\";") }
             );
         }
 
@@ -77,7 +77,7 @@ class C
             //
             await ValidateItemsAsync(
                 workspace,
-                itemInfo: new[] { (7, "s"), (3, "public string S { get; set; } = \"\";"), }
+                itemInfo: new[] { (7, "s"), (3, "public string S { get; set; } = \"\";") }
             );
         }
 
@@ -337,7 +337,11 @@ class Other
                     (22, "c"), // |> CallS([|c|], CalculateDefault(c)) [Code.cs:22]
                     (22, "c"), // |> CallS(c, CalculateDefault([|c|])) [Code.cs:22]
                     (22, "CalculateDefault(c)"), // |> CallS(c, [|CalculateDefault(c)|]) [Code.cs:22]
-                    (22, "CallS(c, CalculateDefault(c))") // |> [|CallS(c, CalculateDefault(c))|] [Code.cs:22]
+                    (
+                        22,
+                        "CallS(c, CalculateDefault(c))"
+                    ) // |> [|CallS(c, CalculateDefault(c))|] [Code.cs:22]
+                    ,
                 }
             );
 
@@ -483,10 +487,7 @@ class Program
             var children = await ValidateChildrenAsync(
                 workspace,
                 items[0],
-                childInfo: new[]
-                {
-                    (53, "other.CallS(c)"), // |> other.CallS([|c|]); [Code.cs:53]
-                }
+                childInfo: new[] { (53, "other.CallS(c)") }
             );
 
             await ValidateChildrenEmptyAsync(workspace, children);
@@ -495,10 +496,7 @@ class Program
             children = await ValidateChildrenAsync(
                 workspace,
                 items[2],
-                childInfo: new[]
-                {
-                    (53, "other.CallS(c)"), // |> other.CallS([|c|]); [Code.cs:53]
-                }
+                childInfo: new[] { (53, "other.CallS(c)") }
             );
 
             await ValidateChildrenEmptyAsync(workspace, children);
@@ -507,10 +505,7 @@ class Program
             children = await ValidateChildrenAsync(
                 workspace,
                 items[1],
-                childInfo: new[]
-                {
-                    (18, "adornment"), // |> _adornment = [|adornment|] [Code.cs:18]
-                }
+                childInfo: new[] { (18, "adornment") }
             );
 
             children = await ValidateChildrenAsync(
@@ -518,7 +513,11 @@ class Program
                 children.Single(),
                 childInfo: new[]
                 {
-                    (51, "\"some value\"") // |> var other = new Other([|"some value"|]); [Code.cs:51]
+                    (
+                        51,
+                        "\"some value\""
+                    ) // |> var other = new Other([|"some value"|]); [Code.cs:51]
+                    ,
                 }
             );
             await ValidateChildrenEmptyAsync(workspace, children);
@@ -588,7 +587,11 @@ namespace N
                 {
                     (17, "x"), // |> x = await AddAsync([|x|], x) [Code.cs:17]
                     (17, "x"), // |> x = await AddAsync(x, [|x|]) [Code.cs:17]
-                    (17, "AddAsync(x, x)") // |> x = await [|AddAsync(x, x)|] [Code.cs:17]
+                    (
+                        17,
+                        "AddAsync(x, x)"
+                    ) // |> x = await [|AddAsync(x, x)|] [Code.cs:17]
+                    ,
                 }
             );
 
@@ -614,7 +617,11 @@ namespace N
                 children[2],
                 childInfo: new[]
                 {
-                    (10, "x") // |> return x [Code.cs:10]
+                    (
+                        10,
+                        "x"
+                    ) // |> return x [Code.cs:10]
+                    ,
                 }
             );
         }
@@ -687,7 +694,11 @@ class C
                 children[1],
                 childInfo: new[]
                 {
-                    (5, "i") // |> if (int.TryParse(o.ToString(), out [|i|])) [Code.cs:5]
+                    (
+                        5,
+                        "i"
+                    ) // |> if (int.TryParse(o.ToString(), out [|i|])) [Code.cs:5]
+                    ,
                 }
             );
 
@@ -727,7 +738,11 @@ class Test
                 workspace,
                 itemInfo: new[]
                 {
-                    (7, "x") // |> var y = [|x|] + 1; [Code.cs:7]
+                    (
+                        7,
+                        "x"
+                    ) // |> var y = [|x|] + 1; [Code.cs:7]
+                    ,
                 }
             );
 
@@ -736,7 +751,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (5, "GetM()") // |> int x = [|GetM()|] [Code.cs:5]
+                    (
+                        5,
+                        "GetM()"
+                    ) // |> int x = [|GetM()|] [Code.cs:5]
+                    ,
                 }
             );
 
@@ -745,7 +764,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (13, "x") // |> return [|x|]; [Code.cs:13]
+                    (
+                        13,
+                        "x"
+                    ) // |> return [|x|]; [Code.cs:13]
+                    ,
                 }
             );
 
@@ -754,7 +777,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (12, "0") // |> var x = [|0|]; [Code.cs:12]
+                    (
+                        12,
+                        "0"
+                    ) // |> var x = [|0|]; [Code.cs:12]
+                    ,
                 }
             );
 
@@ -794,7 +821,11 @@ class Test
                 workspace,
                 itemInfo: new[]
                 {
-                    (6, "x") // |> Console.Write([|x|]); [Code.cs:7]
+                    (
+                        6,
+                        "x"
+                    ) // |> Console.Write([|x|]); [Code.cs:7]
+                    ,
                 }
             );
 
@@ -803,7 +834,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (5, "GetM()") // |> int x = [|GetM()|] [Code.cs:5]
+                    (
+                        5,
+                        "GetM()"
+                    ) // |> int x = [|GetM()|] [Code.cs:5]
+                    ,
                 }
             );
 
@@ -812,7 +847,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (13, "x") // |> return [|x|]; [Code.cs:13]
+                    (
+                        13,
+                        "x"
+                    ) // |> return [|x|]; [Code.cs:13]
+                    ,
                 }
             );
 
@@ -821,7 +860,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (12, "0") // |> var x = [|0|]; [Code.cs:12]
+                    (
+                        12,
+                        "0"
+                    ) // |> var x = [|0|]; [Code.cs:12]
+                    ,
                 }
             );
 
@@ -865,7 +908,11 @@ class Test
                 workspace,
                 itemInfo: new[]
                 {
-                    (6, "x") // |> Console.Write([|x|]); [Code.cs:7]
+                    (
+                        6,
+                        "x"
+                    ) // |> Console.Write([|x|]); [Code.cs:7]
+                    ,
                 }
             );
 
@@ -886,7 +933,11 @@ class Test
                 items[1],
                 childInfo: new[]
                 {
-                    (16, "x") // |> return [|x|]; [Code.cs:13]
+                    (
+                        16,
+                        "x"
+                    ) // |> return [|x|]; [Code.cs:13]
+                    ,
                 }
             );
 
@@ -895,7 +946,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (15, "0") // |> var x = [|0|]; [Code.cs:12]
+                    (
+                        15,
+                        "0"
+                    ) // |> var x = [|0|]; [Code.cs:12]
+                    ,
                 }
             );
 
@@ -939,7 +994,11 @@ class Test
                 workspace,
                 itemInfo: new[]
                 {
-                    (6, "x") // |> Console.Write([|x|]); [Code.cs:7]
+                    (
+                        6,
+                        "x"
+                    ) // |> Console.Write([|x|]); [Code.cs:7]
+                    ,
                 }
             );
 
@@ -960,7 +1019,11 @@ class Test
                 items[1],
                 childInfo: new[]
                 {
-                    (16, "x") // |> return [|x|]; [Code.cs:13]
+                    (
+                        16,
+                        "x"
+                    ) // |> return [|x|]; [Code.cs:13]
+                    ,
                 }
             );
 
@@ -969,7 +1032,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (15, "0") // |> var x = [|0|]; [Code.cs:12]
+                    (
+                        15,
+                        "0"
+                    ) // |> var x = [|0|]; [Code.cs:12]
+                    ,
                 }
             );
 
@@ -1006,7 +1073,11 @@ class Test
                 workspace,
                 itemInfo: new[]
                 {
-                    (3, "string key") // |>public int this[[|string key|]] => 0; [Code.cs:4]
+                    (
+                        3,
+                        "string key"
+                    ) // |>public int this[[|string key|]] => 0; [Code.cs:4]
+                    ,
                 }
             );
 
@@ -1059,7 +1130,11 @@ class Test
                 workspace,
                 itemInfo: new[]
                 {
-                    (9, "value") // _i = [|value|]; [Code.cs:9]
+                    (
+                        9,
+                        "value"
+                    ) // _i = [|value|]; [Code.cs:9]
+                    ,
                 }
             );
 
@@ -1068,7 +1143,11 @@ class Test
                 items.Single(),
                 childInfo: new[]
                 {
-                    (15, "5") // localTest.I = [|5|]; [Code.cs:15]
+                    (
+                        15,
+                        "5"
+                    ) // localTest.I = [|5|]; [Code.cs:15]
+                    ,
                 }
             );
 

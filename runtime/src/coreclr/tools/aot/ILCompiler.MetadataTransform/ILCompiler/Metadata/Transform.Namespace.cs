@@ -30,7 +30,7 @@ namespace ILCompiler.Metadata
 
             if (namespaceString.Length == 0)
             {
-                var rootNamespace = new NamespaceDefinition { Name = null, };
+                var rootNamespace = new NamespaceDefinition { Name = null };
                 _namespaceDefs.Add(key, rootNamespace);
                 ScopeDefinition rootScope = HandleScopeDefinition(parentScope);
                 rootScope.RootNamespaceDefinition = rootNamespace;
@@ -56,7 +56,7 @@ namespace ILCompiler.Metadata
                     nextNamespace = new NamespaceDefinition
                     {
                         Name = HandleString(segment.Length == 0 ? null : segment),
-                        ParentScopeOrNamespace = currentNamespace
+                        ParentScopeOrNamespace = currentNamespace,
                     };
 
                     _namespaceDefs.Add(key, nextNamespace);
@@ -119,7 +119,7 @@ namespace ILCompiler.Metadata
                     nextNamespace = new NamespaceReference
                     {
                         Name = HandleString(segment.Length == 0 ? null : segment),
-                        ParentScopeOrNamespace = currentNamespace
+                        ParentScopeOrNamespace = currentNamespace,
                     };
 
                     _namespaceRefs.Add(key, nextNamespace);

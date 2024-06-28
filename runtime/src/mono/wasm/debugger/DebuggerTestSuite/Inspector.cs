@@ -561,6 +561,6 @@ namespace DebuggerTests
     public enum ProtocolEventHandlerReturn
     {
         KeepHandler,
-        RemoveHandler
+        RemoveHandler,
     }
 }

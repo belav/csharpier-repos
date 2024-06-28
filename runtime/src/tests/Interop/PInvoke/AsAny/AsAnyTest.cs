@@ -708,25 +708,25 @@ public class AsAnyTests
         {
             new UIntPtr(0),
             new UIntPtr(1),
-            new UIntPtr(2)
+            new UIntPtr(2),
         };
         UIntPtr[] uIntPtrArray_InOut = new UIntPtr[]
         {
             new UIntPtr(0),
             new UIntPtr(1),
-            new UIntPtr(2)
+            new UIntPtr(2),
         };
         UIntPtr[] uIntPtrArray_Out = new UIntPtr[]
         {
             new UIntPtr(0),
             new UIntPtr(1),
-            new UIntPtr(2)
+            new UIntPtr(2),
         };
         UIntPtr[] uIntPtrArray_Back = new UIntPtr[]
         {
             new UIntPtr(10),
             new UIntPtr(11),
-            new UIntPtr(12)
+            new UIntPtr(12),
         };
         UIntPtr[] expected = new UIntPtr[] { new UIntPtr(0), new UIntPtr(1), new UIntPtr(2) };
         Assert.True(

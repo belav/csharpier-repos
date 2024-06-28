@@ -1530,7 +1530,7 @@ namespace System.Net.Sockets
         {
             socketInformation = new SocketInformation
             {
-                ProtocolInformation = new byte[sizeof(Interop.Winsock.WSAPROTOCOL_INFOW)]
+                ProtocolInformation = new byte[sizeof(Interop.Winsock.WSAPROTOCOL_INFOW)],
             };
 
             fixed (byte* protocolInfoBytes = socketInformation.ProtocolInformation)

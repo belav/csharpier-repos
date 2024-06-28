@@ -30,13 +30,13 @@ namespace System.ComponentModel.Tests
             {
                 new DefaultPropertyAttribute(null),
                 new DefaultPropertyAttribute(null),
-                true
+                true,
             };
             yield return new object[]
             {
                 new DefaultPropertyAttribute(null),
                 new DefaultPropertyAttribute("name"),
-                false
+                false,
             };
             yield return new object[] { new DefaultPropertyAttribute(null), null, false };
 

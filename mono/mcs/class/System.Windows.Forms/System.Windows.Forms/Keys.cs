@@ -233,6 +233,6 @@ namespace System.Windows.Forms
         Oem6 = 0x000000DD,
         Oem7 = 0x000000DE,
         Packet = 0x000000E7,
-        Sleep = 0x0000005F
+        Sleep = 0x0000005F,
     }
 }

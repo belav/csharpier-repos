@@ -23,12 +23,12 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 new CodePrimitiveExpression(""),
-                new CodeExpression[] { new CodePrimitiveExpression() }
+                new CodeExpression[] { new CodePrimitiveExpression() },
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression("Hello"),
-                new CodeExpression[] { new CodePrimitiveExpression("Value1") }
+                new CodeExpression[] { new CodePrimitiveExpression("Value1") },
             };
         }
 

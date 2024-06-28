@@ -35,5 +35,5 @@ internal enum OmniSharpNavigateToMatchKind
     CamelCaseNonContiguousPrefix = 7,
     CamelCaseSubstring = 8,
     CamelCaseNonContiguousSubstring = 9,
-    Fuzzy = 10
+    Fuzzy = 10,
 }

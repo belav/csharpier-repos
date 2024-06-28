@@ -75,7 +75,7 @@ namespace System.Threading
                 SemaphoreWaitState state =
                     new(threadPoolInstance, threadAdjustmentLock, keepaliveToken)
                     {
-                        SpinWait = true
+                        SpinWait = true,
                     };
                 // set up the callbacks for semaphore waits, tell
                 // emscripten to keep the thread alive, and return to

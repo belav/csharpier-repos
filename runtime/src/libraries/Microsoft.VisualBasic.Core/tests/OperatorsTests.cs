@@ -117,7 +117,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (ulong)15,
                 ulong.MaxValue,
-                decimal.Parse("18446744073709551630", CultureInfo.InvariantCulture)
+                decimal.Parse("18446744073709551630", CultureInfo.InvariantCulture),
             };
 
             // long + primitives.
@@ -132,7 +132,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (long)15,
                 long.MaxValue,
-                decimal.Parse("9223372036854775822", CultureInfo.InvariantCulture)
+                decimal.Parse("9223372036854775822", CultureInfo.InvariantCulture),
             };
 
             // float + primitives
@@ -156,13 +156,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (double)15,
                 double.PositiveInfinity,
-                double.PositiveInfinity
+                double.PositiveInfinity,
             };
             yield return new object[]
             {
                 (double)15,
                 double.NegativeInfinity,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             yield return new object[] { (double)15, double.NaN, double.NaN };
 
@@ -1218,13 +1218,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new ConcatenateObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new ConcatenateObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
         }
 
@@ -1467,13 +1467,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 double.PositiveInfinity,
                 (double)2,
-                double.PositiveInfinity
+                double.PositiveInfinity,
             };
             yield return new object[]
             {
                 double.NegativeInfinity,
                 (double)2,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             yield return new object[] { double.NaN, (double)2, double.NaN };
 
@@ -1495,7 +1495,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 decimal.MaxValue,
                 (decimal)0.5,
-                float.Parse("1.58456325028529E+29", NumberStyles.Any, CultureInfo.InvariantCulture)
+                float.Parse("1.58456325028529E+29", NumberStyles.Any, CultureInfo.InvariantCulture),
             };
 
             // string + primitives
@@ -1816,13 +1816,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new ExponentObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new ExponentObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
         }
 
@@ -2111,13 +2111,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new IntDivideObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new IntDivideObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
         }
 
@@ -2474,13 +2474,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new LeftShiftObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new LeftShiftObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
         }
 
@@ -2642,7 +2642,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 uint.MaxValue,
                 uint.MaxValue,
-                (decimal)18446744065119617025
+                (decimal)18446744065119617025,
             };
 
             // int.
@@ -2682,7 +2682,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (ulong)15,
                 ulong.MaxValue,
-                decimal.Parse("276701161105643274225", CultureInfo.InvariantCulture)
+                decimal.Parse("276701161105643274225", CultureInfo.InvariantCulture),
             };
             yield return new object[]
             {
@@ -2692,7 +2692,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     "3.4028236692093846E+38",
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture
-                )
+                ),
             };
 
             // long + primitives.
@@ -2714,7 +2714,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (long)15,
                 long.MaxValue,
-                decimal.Parse("138350580552821637105", CultureInfo.InvariantCulture)
+                decimal.Parse("138350580552821637105", CultureInfo.InvariantCulture),
             };
             yield return new object[]
             {
@@ -2724,7 +2724,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     "8.5070591730234616E+37",
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture
-                )
+                ),
             };
 
             // float + primitives
@@ -2750,7 +2750,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     "5.1042351995779329E+39",
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture
-                )
+                ),
             };
             yield return new object[]
             {
@@ -2760,7 +2760,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     "1.1579207543382391E+77",
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture
-                )
+                ),
             };
             yield return new object[] { (float)15, float.PositiveInfinity, float.PositiveInfinity };
             yield return new object[] { (float)15, float.NegativeInfinity, float.NegativeInfinity };
@@ -2790,26 +2790,26 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (double)15,
                 double.PositiveInfinity,
-                double.PositiveInfinity
+                double.PositiveInfinity,
             };
             yield return new object[]
             {
                 (double)15,
                 double.NegativeInfinity,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             yield return new object[] { (double)15, double.NaN, double.NaN };
             yield return new object[]
             {
                 double.PositiveInfinity,
                 (double)2,
-                double.PositiveInfinity
+                double.PositiveInfinity,
             };
             yield return new object[]
             {
                 double.NegativeInfinity,
                 (double)2,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             yield return new object[] { double.NaN, (double)2, double.NaN };
 
@@ -2836,7 +2836,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     "1.1884224377139651E+30",
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture
-                )
+                ),
             };
 
             // string + primitives
@@ -2894,13 +2894,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new MultiplyObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new MultiplyObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
         }
 
@@ -3707,7 +3707,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[]
             {
                 ulong.MaxValue,
-                decimal.Parse("-18446744073709551615", CultureInfo.InvariantCulture)
+                decimal.Parse("-18446744073709551615", CultureInfo.InvariantCulture),
             };
 
             // long.
@@ -3716,7 +3716,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[]
             {
                 long.MinValue,
-                decimal.Parse("9223372036854775808", CultureInfo.InvariantCulture)
+                decimal.Parse("9223372036854775808", CultureInfo.InvariantCulture),
             };
             yield return new object[] { long.MaxValue, (long)(-9223372036854775807) };
 
@@ -4802,13 +4802,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new RightShiftObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new RightShiftObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
         }
 
@@ -4999,7 +4999,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (ulong)16,
                 ulong.MaxValue,
-                decimal.Parse("-18446744073709551599", CultureInfo.InvariantCulture)
+                decimal.Parse("-18446744073709551599", CultureInfo.InvariantCulture),
             };
 
             // long.
@@ -5021,7 +5021,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (long)(-2),
                 long.MaxValue,
-                decimal.Parse("-9223372036854775809", CultureInfo.InvariantCulture)
+                decimal.Parse("-9223372036854775809", CultureInfo.InvariantCulture),
             };
 
             // float.
@@ -5043,7 +5043,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 float.MinValue,
                 float.MaxValue,
-                (double)float.MinValue - (double)float.MaxValue
+                (double)float.MinValue - (double)float.MaxValue,
             };
             yield return new object[] { (float)16, float.PositiveInfinity, float.NegativeInfinity };
             yield return new object[] { (float)17, float.NegativeInfinity, float.PositiveInfinity };
@@ -5072,26 +5072,26 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 (double)16,
                 double.PositiveInfinity,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             yield return new object[]
             {
                 (double)17,
                 double.NegativeInfinity,
-                double.PositiveInfinity
+                double.PositiveInfinity,
             };
             yield return new object[] { (double)18, double.NaN, double.NaN };
             yield return new object[]
             {
                 double.PositiveInfinity,
                 (double)2,
-                double.PositiveInfinity
+                double.PositiveInfinity,
             };
             yield return new object[]
             {
                 double.NegativeInfinity,
                 (double)2,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             yield return new object[] { double.NaN, (double)2, double.NaN };
 
@@ -5118,7 +5118,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                     "-1.5845632502852868E+29",
                     NumberStyles.Any,
                     CultureInfo.InvariantCulture
-                )
+                ),
             };
 
             // string.
@@ -5177,13 +5177,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new SubtractObject(),
                 new OperatorsTests(),
-                "customobject"
+                "customobject",
             };
             yield return new object[]
             {
                 new OperatorsTests(),
                 new SubtractObject(),
-                "tcejbomotsuc"
+                "tcejbomotsuc",
             };
 
             // DateTime.
@@ -5834,82 +5834,82 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         public enum ByteEnum : byte
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum ByteEnum2 : byte
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum SByteEnum : sbyte
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum SByteEnum2 : sbyte
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum UShortEnum : ushort
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum UShortEnum2 : ushort
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum ShortEnum : short
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum ShortEnum2 : short
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum UIntEnum : uint
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum UIntEnum2 : uint
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum IntEnum : int
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum IntEnum2 : int
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum ULongEnum : ulong
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum ULongEnum2 : ulong
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum LongEnum : long
         {
-            Value = 1
+            Value = 1,
         }
 
         public enum LongEnum2 : long
         {
-            Value = 1
+            Value = 1,
         }
     }
 }

@@ -671,7 +671,7 @@ namespace MonoTests.System.Security.Cryptography.Xml
             0x59,
             0x98,
             0x41,
-            0x89
+            0x89,
         };
 
         [Test]

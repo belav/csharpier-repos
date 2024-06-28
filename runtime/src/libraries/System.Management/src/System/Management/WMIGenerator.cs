@@ -41,7 +41,7 @@ namespace System.Management
         /// <summary>
         ///    <para>A value for generating Managed C++ code.</para>
         /// </summary>
-        Mcpp
+        Mcpp,
     };
 
     /// <summary>
@@ -6756,7 +6756,7 @@ namespace System.Management
                 new CodePropertyReferenceExpression(
                     new CodeTypeReferenceExpression("System.Globalization.CultureInfo"),
                     "InvariantCulture"
-                )
+                ),
             };
 
             cmie = new CodeMethodInvokeExpression(
@@ -6848,7 +6848,7 @@ namespace System.Management
                 new CodePropertyReferenceExpression(
                     new CodeTypeReferenceExpression("System.Globalization.CultureInfo"),
                     "InvariantCulture"
-                )
+                ),
             };
 
             cmie = new CodeMethodInvokeExpression(
@@ -6944,7 +6944,7 @@ namespace System.Management
                 new CodePropertyReferenceExpression(
                     new CodeTypeReferenceExpression("System.Globalization.CultureInfo"),
                     "InvariantCulture"
-                )
+                ),
             };
 
             CodeMethodInvokeExpression cmie2 = new CodeMethodInvokeExpression(

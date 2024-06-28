@@ -74,7 +74,7 @@ namespace Newtonsoft.Json.Bson
             CodeWScopeCode = 5,
             CodeWScopeScope = 6,
             CodeWScopeScopeObject = 7,
-            CodeWScopeScopeEnd = 8
+            CodeWScopeScopeEnd = 8,
         }
 
         private class ContainerContext

@@ -90,7 +90,7 @@ namespace System.ServiceModel.Channels
             //Register this handler
             PeerMessageFilter[] filters = new PeerMessageFilter[]
             {
-                new PeerMessageFilter(via, filterTo)
+                new PeerMessageFilter(via, filterTo),
             };
             peerNode.RegisterMessageFilter(
                 this,

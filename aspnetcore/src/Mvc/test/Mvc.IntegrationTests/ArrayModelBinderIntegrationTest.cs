@@ -18,7 +18,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(int[])
+            ParameterType = typeof(int[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -58,8 +58,8 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(int[])
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(int[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -99,7 +99,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(int[])
+            ParameterType = typeof(int[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -139,7 +139,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(int[])
+            ParameterType = typeof(int[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -174,7 +174,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Person[])
+            ParameterType = typeof(Person[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -215,8 +215,8 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(Person[])
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Person[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -257,7 +257,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Person[])
+            ParameterType = typeof(Person[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -298,7 +298,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Person[])
+            ParameterType = typeof(Person[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -335,7 +335,7 @@ public class ArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(PersonWithReadOnlyAndInitializedProperty)
+            ParameterType = typeof(PersonWithReadOnlyAndInitializedProperty),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>

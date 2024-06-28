@@ -217,7 +217,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     "ToString",
                     null,
                     null,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
                 )
             );
             Func<CallSite, SomeValueType?, object> target = site.Target;
@@ -230,7 +230,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     "GetValueOrDefault",
                     null,
                     GetType(),
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
                 )
             );
             target = site.Target;
@@ -243,7 +243,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     "GetValueOrDefault",
                     null,
                     null,
-                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null), }
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
                 )
             );
             target = site.Target;

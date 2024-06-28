@@ -29,7 +29,7 @@ public class Runtime_61037
     {
         var vr1 = new C0[,]
         {
-            { new C0() }
+            { new C0() },
         };
         return 0;
     }

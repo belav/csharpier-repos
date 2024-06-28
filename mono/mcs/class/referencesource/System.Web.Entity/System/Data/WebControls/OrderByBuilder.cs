@@ -197,12 +197,12 @@ namespace System.Web.UI.WebControls
         private static readonly string[] ascendingTails = new string[]
         {
             c_esqlAscendingTail,
-            " ascending"
+            " ascending",
         };
         private static readonly string[] descendingTails = new string[]
         {
             c_esqlDescendingTail,
-            " descending"
+            " descending",
         };
 
         private static string ParseStatement(string statement, out bool isAscending)
@@ -264,7 +264,7 @@ namespace System.Web.UI.WebControls
                     new Expression[]
                     {
                         expression,
-                        Expression.Quote(DynamicExpression.Lambda(memberExpression, parameter))
+                        Expression.Quote(DynamicExpression.Lambda(memberExpression, parameter)),
                     }
                 );
             }

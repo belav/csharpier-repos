@@ -76,7 +76,7 @@ namespace System.ServiceModel.Activities.Configuration
         {
             EtwTrackingBehavior trackingBehavior = new EtwTrackingBehavior
             {
-                ProfileName = this.ProfileName
+                ProfileName = this.ProfileName,
             };
 
             return trackingBehavior;

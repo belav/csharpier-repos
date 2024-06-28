@@ -55,7 +55,7 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var request = new ModifyDNRequest
             {
-                NewParentDistinguishedName = "NewParentDistinguishedName"
+                NewParentDistinguishedName = "NewParentDistinguishedName",
             };
             Assert.Equal("NewParentDistinguishedName", request.NewParentDistinguishedName);
         }

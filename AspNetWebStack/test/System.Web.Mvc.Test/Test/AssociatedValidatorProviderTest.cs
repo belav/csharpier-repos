@@ -22,7 +22,7 @@ namespace System.Web.Mvc.Test
             );
             Mock<AssociatedValidatorProvider> provider = new Mock<AssociatedValidatorProvider>
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // Act & Assert

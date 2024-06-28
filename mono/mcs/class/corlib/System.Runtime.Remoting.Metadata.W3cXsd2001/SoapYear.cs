@@ -47,7 +47,7 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
             "'-'yyyy",
             "yyyyzzz",
             "'+'yyyyzzz",
-            "'-'yyyyzzz"
+            "'-'yyyyzzz",
         };
 
         int _sign;

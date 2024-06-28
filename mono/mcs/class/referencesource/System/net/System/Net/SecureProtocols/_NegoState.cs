@@ -372,12 +372,12 @@ namespace System.Net.Security
             {
                 // according to lzhu we should suppress dlegate flag in NTLM case
                 return (
-                    _Context.IsDelegationFlag && _Context.ProtocolName != NegotiationInfoClass.NTLM
-                )
-                    ? TokenImpersonationLevel.Delegation
-                    : _Context.IsIdentifyFlag
-                        ? TokenImpersonationLevel.Identification
-                        : TokenImpersonationLevel.Impersonation;
+                        _Context.IsDelegationFlag
+                        && _Context.ProtocolName != NegotiationInfoClass.NTLM
+                    )
+                        ? TokenImpersonationLevel.Delegation
+                    : _Context.IsIdentifyFlag ? TokenImpersonationLevel.Identification
+                    : TokenImpersonationLevel.Impersonation;
             }
         }
 
@@ -651,11 +651,10 @@ namespace System.Net.Security
                     return;
                 }
 
-                ProtectionLevel result = _Context.IsConfidentialityFlag
-                    ? ProtectionLevel.EncryptAndSign
-                    : _Context.IsIntegrityFlag
-                        ? ProtectionLevel.Sign
-                        : ProtectionLevel.None;
+                ProtectionLevel result =
+                    _Context.IsConfidentialityFlag ? ProtectionLevel.EncryptAndSign
+                    : _Context.IsIntegrityFlag ? ProtectionLevel.Sign
+                    : ProtectionLevel.None;
 
                 if (result < _ExpectedProtectionLevel)
                 {

@@ -372,7 +372,7 @@ namespace System.ComponentModel.Composition
                 {
                     typeof(ExportValueTypeSingleton),
                     typeof(string),
-                    typeof(ExportValueTypeSingleton)
+                    typeof(ExportValueTypeSingleton),
                 },
                 GetDisplayName(
                     false,
@@ -397,7 +397,7 @@ namespace System.ComponentModel.Composition
                 {
                     typeof(ExportValueTypeSingleton),
                     typeof(ExportValueTypeFactory),
-                    typeof(CallbackExecuteCodeDuringCompose)
+                    typeof(CallbackExecuteCodeDuringCompose),
                 },
                 GetDisplayName(
                     true,

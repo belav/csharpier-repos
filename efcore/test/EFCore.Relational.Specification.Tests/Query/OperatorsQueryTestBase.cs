@@ -45,7 +45,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
             {
                 Value1 = o1.Value,
                 Value2 = o2.Value,
-                Value3 = o3.Value
+                Value3 = o3.Value,
             }
         ).ToList();
 
@@ -58,7 +58,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
             {
                 Value1 = o1.Value,
                 Value2 = o2.Value,
-                Value3 = o3.Value
+                Value3 = o3.Value,
             }
         ).ToList();
 
@@ -94,7 +94,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
                 Value0 = e0.Value,
                 Value1 = e1.Value,
                 Value2 = e2.Value,
-                Value3 = e3.Value
+                Value3 = e3.Value,
             }
         ).ToList();
 
@@ -115,7 +115,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
                 Value0 = e0.Value,
                 Value1 = e1.Value,
                 Value2 = e2.Value,
-                Value3 = e3.Value
+                Value3 = e3.Value,
             }
         ).ToList();
 
@@ -148,7 +148,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
             {
                 Value0 = e0.Value,
                 Value1 = e1.Value,
-                Value2 = e2.Value
+                Value2 = e2.Value,
             }
         ).ToList();
 
@@ -165,7 +165,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
             {
                 Value0 = e0.Value,
                 Value1 = e1.Value,
-                Value2 = e2.Value
+                Value2 = e2.Value,
             }
         ).ToList();
 
@@ -200,7 +200,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
                 Id2 = e2.Id,
                 Id3 = e3.Id,
                 Id4 = e4.Id,
-                Id5 = e5.Id
+                Id5 = e5.Id,
             }
         ).ToList();
 
@@ -220,7 +220,7 @@ public abstract class OperatorsQueryTestBase : NonSharedModelTestBase
                 Id2 = e2.Id,
                 Id3 = e3.Id,
                 Id4 = e4.Id,
-                Id5 = e5.Id
+                Id5 = e5.Id,
             }
         ).ToList();
 

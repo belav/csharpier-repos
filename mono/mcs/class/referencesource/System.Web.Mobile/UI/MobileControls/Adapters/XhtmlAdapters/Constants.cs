@@ -37,7 +37,7 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         XhtmlMobileProfile,
 
         /// <include file='doc\Constants.uex' path='docs/doc[@for="Doctype.Wml20"]/*' />
-        Wml20
+        Wml20,
     }
 
     [Obsolete(
@@ -117,6 +117,7 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
 
         /// <include file='doc\Constants.uex' path='docs/doc[@for="StyleSheetLocation.None // currently not used"]/*' />
         None // currently not used
+        ,
     }
 
     [Flags]
@@ -134,6 +135,6 @@ namespace System.Web.UI.MobileControls.Adapters.XhtmlAdapters
         ForegroundColor = 0x00000020,
 
         Wrapping = 0x00000040,
-        Alignment = 0x00000080
+        Alignment = 0x00000080,
     }
 }

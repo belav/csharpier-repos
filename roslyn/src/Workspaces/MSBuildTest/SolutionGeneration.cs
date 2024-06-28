@@ -140,7 +140,7 @@ EndGlobal
                 Name = projectName?.Name,
                 Documents = documents,
                 ProjectReferences = projectReferences,
-                Properties = properties
+                Properties = properties,
             };
         }
 
@@ -174,7 +174,7 @@ EndGlobal
             {
                 FilePath = filePath,
                 Content = content,
-                ItemType = itemType
+                ItemType = itemType,
             };
         }
 

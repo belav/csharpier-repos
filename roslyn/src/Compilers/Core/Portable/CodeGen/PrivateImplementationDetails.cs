@@ -334,7 +334,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         2 => hex + "2",
                         4 => hex + "4",
                         8 => hex + "8",
-                        _ => hex
+                        _ => hex,
                     };
 
                     return new MappedField(name, this, type, key.Data);

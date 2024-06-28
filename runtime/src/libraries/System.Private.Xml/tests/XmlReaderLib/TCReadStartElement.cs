@@ -20,8 +20,8 @@ namespace System.Xml.Tests
                             "ReadStartElement on Regular Element, no namespace"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -33,8 +33,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadStartElement on Empty Element, no namespace")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -48,8 +48,8 @@ namespace System.Xml.Tests
                             "ReadStartElement on regular Element, with namespace"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -63,8 +63,8 @@ namespace System.Xml.Tests
                             "Passing ns=String.EmptyErrorCase: ReadStartElement on regular Element, with namespace"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -78,8 +78,8 @@ namespace System.Xml.Tests
                             "Passing no ns: ReadStartElement on regular Element, with namespace"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -89,7 +89,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadStartElement6)
                     {
-                        Attribute = new Variation("ReadStartElement on Empty Tag, with namespace")
+                        Attribute = new Variation("ReadStartElement on Empty Tag, with namespace"),
                     }
                 );
             }
@@ -101,7 +101,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ErrorCase: ReadStartElement on Empty Tag, with namespace, passing ns=String.Empty"
-                        )
+                        ),
                     }
                 );
             }
@@ -113,7 +113,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement on Empty Tag, with namespace, passing no ns"
-                        )
+                        ),
                     }
                 );
             }
@@ -123,7 +123,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadStartElement9)
                     {
-                        Attribute = new Variation("ReadStartElement with Name=String.Empty")
+                        Attribute = new Variation("ReadStartElement with Name=String.Empty"),
                     }
                 );
             }
@@ -135,7 +135,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement on Empty Element with Name and Namespace=String.Empty"
-                        )
+                        ),
                     }
                 );
             }
@@ -145,7 +145,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadStartElement11)
                     {
-                        Attribute = new Variation("ReadStartElement on CDATA")
+                        Attribute = new Variation("ReadStartElement on CDATA"),
                     }
                 );
             }
@@ -155,7 +155,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadStartElement12)
                     {
-                        Attribute = new Variation("ReadStartElement() on EndElement, no namespace")
+                        Attribute = new Variation("ReadStartElement() on EndElement, no namespace"),
                     }
                 );
             }
@@ -165,7 +165,9 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadStartElement13)
                     {
-                        Attribute = new Variation("ReadStartElement(n) on EndElement, no namespace")
+                        Attribute = new Variation(
+                            "ReadStartElement(n) on EndElement, no namespace"
+                        ),
                     }
                 );
             }
@@ -177,7 +179,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement(n, String.Empty) on EndElement, no namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -189,7 +191,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement() on EndElement, with namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -201,7 +203,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadStartElement(n,ns) on EndElement, with namespace"
-                        )
+                        ),
                     }
                 );
             }

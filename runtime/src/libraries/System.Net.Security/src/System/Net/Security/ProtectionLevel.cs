@@ -11,6 +11,6 @@ namespace System.Net.Security
         Sign = 1,
 
         // Both data confidentiality and integrity
-        EncryptAndSign = 2
+        EncryptAndSign = 2,
     }
 }

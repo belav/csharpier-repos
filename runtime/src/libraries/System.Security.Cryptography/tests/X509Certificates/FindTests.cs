@@ -1089,7 +1089,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var noKeyUsages2 = new X509Certificate2(TestFiles.TestCertFile))
             using (var keyUsages = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                var coll = new X509Certificate2Collection { noKeyUsages, noKeyUsages2, keyUsages, };
+                var coll = new X509Certificate2Collection { noKeyUsages, noKeyUsages2, keyUsages };
                 X509Certificate2Collection results = coll.Find(
                     X509FindType.FindByKeyUsage,
                     matchCriteria,
@@ -1148,7 +1148,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     "only",
                     "high",
                     "lttr",
-                    "vlus"
+                    "vlus",
                 };
                 string gluedTogether = string.Join("", nonHexWords);
                 string withSpaces = string.Join(" ", nonHexWords);
@@ -1209,7 +1209,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             get
             {
-                X509FindType[] oidTypes = { X509FindType.FindByApplicationPolicy, };
+                X509FindType[] oidTypes = { X509FindType.FindByApplicationPolicy };
 
                 string[] invalidOids =
                 {

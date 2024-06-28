@@ -5164,7 +5164,7 @@ namespace MonoTests.System
                     '\u064A',
                     '\u064F',
                     '\u0648',
-                    '\u0654'
+                    '\u0654',
                 }
             );
 
@@ -5182,7 +5182,7 @@ namespace MonoTests.System
                     '\u064a',
                     '\u064f',
                     '\u0648',
-                    '\u0654'
+                    '\u0654',
                 }
             );
             var formKC = new string(
@@ -5199,7 +5199,7 @@ namespace MonoTests.System
                     '\u064a',
                     '\u064f',
                     '\u0648',
-                    '\u0654'
+                    '\u0654',
                 }
             );
 

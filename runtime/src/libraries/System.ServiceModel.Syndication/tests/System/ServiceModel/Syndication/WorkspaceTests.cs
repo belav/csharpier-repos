@@ -32,8 +32,8 @@ namespace System.ServiceModel.Syndication.Tests
                 "title",
                 new ResourceCollectionInfo[]
                 {
-                    new ResourceCollectionInfo("title", new Uri("http://microsoft.com"))
-                }
+                    new ResourceCollectionInfo("title", new Uri("http://microsoft.com")),
+                },
             };
         }
 
@@ -63,15 +63,15 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 new TextSyndicationContent("", TextSyndicationContentKind.Html),
-                new ResourceCollectionInfo[0]
+                new ResourceCollectionInfo[0],
             };
             yield return new object[]
             {
                 new TextSyndicationContent("title", TextSyndicationContentKind.Html),
                 new ResourceCollectionInfo[]
                 {
-                    new ResourceCollectionInfo("title", new Uri("http://microsoft.com"))
-                }
+                    new ResourceCollectionInfo("title", new Uri("http://microsoft.com")),
+                },
             };
         }
 

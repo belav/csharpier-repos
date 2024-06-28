@@ -41,7 +41,7 @@ namespace MonoTests.System
             "-128",
             "-128.00",
             "-12,800.00 %",
-            "80"
+            "80",
         };
         private string[] ResultsNfi2 =
         {
@@ -52,7 +52,7 @@ namespace MonoTests.System
             "127",
             "127.00000",
             "12,700.00000 %",
-            "0007f"
+            "0007f",
         };
         private NumberFormatInfo Nfi = NumberFormatInfo.InvariantInfo;
 

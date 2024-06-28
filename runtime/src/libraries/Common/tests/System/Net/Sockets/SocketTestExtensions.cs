@@ -90,7 +90,7 @@ namespace System.Net.Sockets.Tests
             using var sea = new SocketAsyncEventArgs()
             {
                 RemoteEndPoint = remoteEndpoint,
-                UserToken = mre
+                UserToken = mre,
             };
 
             sea.Completed += (s, e) => ((ManualResetEventSlim)e.UserToken).Set();

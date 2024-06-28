@@ -28,7 +28,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     var obj = await StreamingSerializer.DeserializeWrapper<T>(stream, options);
@@ -250,7 +250,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     value = await StreamingSerializer.DeserializeWrapper<T>(stream, options);
@@ -260,7 +260,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     value = await StreamingSerializer.DeserializeWrapper<T>(stream, options);
@@ -335,7 +335,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     ClassWithStrings obj =

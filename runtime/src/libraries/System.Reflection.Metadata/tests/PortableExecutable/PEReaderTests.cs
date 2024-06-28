@@ -351,7 +351,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0xD0,
                     0x38,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 relocBlob1
             );

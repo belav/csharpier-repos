@@ -20,7 +20,7 @@ namespace System.Xml.Schema
     {
         Atomic,
         List,
-        Union
+        Union,
     }
 
     internal sealed class XsdSimpleValue
@@ -917,7 +917,7 @@ namespace System.Xml.Schema
             s_ENUMERATION, // ENUMERATION
             s_QNameXdr, // QName
             s_NCName, // NCName
-            null
+            null,
         };
 
         private static readonly DatatypeImplementation?[] s_tokenizedTypesXsd =
@@ -934,7 +934,7 @@ namespace System.Xml.Schema
             s_ENUMERATION, // ENUMERATION
             s_QName, // QName
             s_NCName, // NCName
-            null
+            null,
         };
 
         private static readonly SchemaDatatypeMap[] s_xdrTypes =
@@ -976,7 +976,7 @@ namespace System.Xml.Schema
             new SchemaDatatypeMap("ui4", s_unsignedInt),
             new SchemaDatatypeMap("ui8", s_unsignedLong),
             new SchemaDatatypeMap("uri", s_anyURI),
-            new SchemaDatatypeMap("uuid", s_uuid)
+            new SchemaDatatypeMap("uuid", s_uuid),
         };
 
         private static readonly SchemaDatatypeMap[] s_xsdTypes =

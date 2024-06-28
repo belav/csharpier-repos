@@ -1502,7 +1502,7 @@ namespace System.Threading.Channels.Tests
                 completeBeforeOnCompleted,
                 flowExecutionContext,
                 continueOnCapturedContext,
-                setNonDefaultTaskScheduler
+                setNonDefaultTaskScheduler,
             };
 
         [Theory]
@@ -1622,7 +1622,7 @@ namespace System.Threading.Channels.Tests
                 completeBeforeOnCompleted,
                 flowExecutionContext,
                 continueOnCapturedContext,
-                setDefaultSyncContext
+                setDefaultSyncContext,
             };
 
         [Theory]

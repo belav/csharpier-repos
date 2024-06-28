@@ -281,7 +281,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     return new ServiceAccessor
                     {
                         CallSite = callSite,
-                        RealizedService = scope => value
+                        RealizedService = scope => value,
                     };
                 }
 
@@ -291,7 +291,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new ServiceAccessor
                 {
                     CallSite = callSite,
-                    RealizedService = realizedService
+                    RealizedService = realizedService,
                 };
             }
             return new ServiceAccessor { CallSite = callSite, RealizedService = _ => null };

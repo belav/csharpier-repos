@@ -66,7 +66,7 @@ namespace System.IO
             (char)28,
             (char)29,
             (char)30,
-            (char)31
+            (char)31,
         };
 
         /// <summary>
@@ -395,11 +395,10 @@ namespace System.IO
         internal static bool HasWildCardCharacters(string path)
         {
             // Question mark is part of some device paths
-            int startIndex = AppContextSwitches.UseLegacyPathHandling
-                ? 0
-                : IsDevice(path)
-                    ? ExtendedPathPrefix.Length
-                    : 0;
+            int startIndex =
+                AppContextSwitches.UseLegacyPathHandling ? 0
+                : IsDevice(path) ? ExtendedPathPrefix.Length
+                : 0;
             return AnyPathHasWildCardCharacters(path, startIndex: startIndex);
         }
 

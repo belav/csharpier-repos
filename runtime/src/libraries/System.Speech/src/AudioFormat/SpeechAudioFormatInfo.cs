@@ -253,13 +253,13 @@ namespace System.Speech.AudioFormat
     public enum AudioChannel
     {
         Mono = 1,
-        Stereo = 2
+        Stereo = 2,
     }
 
     public enum AudioBitsPerSample
     {
         Eight = 8,
-        Sixteen = 16
+        Sixteen = 16,
     }
 
     #endregion

@@ -925,28 +925,28 @@ public class HttpResponseStreamWriterTest
             null,
             Encoding.UTF8,
             ArrayPool<byte>.Shared,
-            ArrayPool<char>.Shared
+            ArrayPool<char>.Shared,
         };
         yield return new object?[]
         {
             new MemoryStream(),
             null,
             ArrayPool<byte>.Shared,
-            ArrayPool<char>.Shared
+            ArrayPool<char>.Shared,
         };
         yield return new object?[]
         {
             new MemoryStream(),
             Encoding.UTF8,
             null,
-            ArrayPool<char>.Shared
+            ArrayPool<char>.Shared,
         };
         yield return new object?[]
         {
             new MemoryStream(),
             Encoding.UTF8,
             ArrayPool<byte>.Shared,
-            null
+            null,
         };
     }
 
@@ -959,7 +959,7 @@ public class HttpResponseStreamWriterTest
                 {
                     httpResponseStreamWriter.Write('a');
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -968,7 +968,7 @@ public class HttpResponseStreamWriterTest
                 {
                     httpResponseStreamWriter.Write(new char[] { 'a', 'b' }, 0, 1);
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -977,7 +977,7 @@ public class HttpResponseStreamWriterTest
                 {
                     httpResponseStreamWriter.Write("hello");
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -986,7 +986,7 @@ public class HttpResponseStreamWriterTest
                 {
                     httpResponseStreamWriter.Write(new ReadOnlySpan<char>(new char[] { 'a', 'b' }));
                 }
-            )
+            ),
         };
 
         yield return new object[]
@@ -996,7 +996,7 @@ public class HttpResponseStreamWriterTest
                 {
                     httpResponseStreamWriter.Flush();
                 }
-            )
+            ),
         };
     }
 
@@ -1009,7 +1009,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.WriteAsync('a');
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1018,7 +1018,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.WriteAsync(new char[] { 'a', 'b' }, 0, 1);
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1027,7 +1027,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.WriteAsync("hello");
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1038,7 +1038,7 @@ public class HttpResponseStreamWriterTest
                         new ReadOnlyMemory<char>(new char[] { 'a', 'b' })
                     );
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1049,7 +1049,7 @@ public class HttpResponseStreamWriterTest
                         new ReadOnlyMemory<char>(new char[] { 'a', 'b' })
                     );
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1058,7 +1058,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.WriteLineAsync(new char[] { 'a', 'b' }, 0, 1);
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1067,7 +1067,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.WriteLineAsync('a');
                 }
-            )
+            ),
         };
         yield return new object[]
         {
@@ -1076,7 +1076,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.WriteLineAsync("hello");
                 }
-            )
+            ),
         };
 
         yield return new object[]
@@ -1086,7 +1086,7 @@ public class HttpResponseStreamWriterTest
                 {
                     await httpResponseStreamWriter.FlushAsync();
                 }
-            )
+            ),
         };
     }
 }

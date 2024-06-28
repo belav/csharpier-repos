@@ -31,7 +31,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
                 },
                 duringExecution: async (_) =>
                 {
@@ -62,7 +62,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
                 },
                 duringExecution: async (pid) =>
                 {
@@ -145,7 +145,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
                 },
                 duringExecution: async (pid) =>
                 {
@@ -299,7 +299,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
                 },
                 duringExecution: async (pid) =>
                 {
@@ -316,7 +316,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                                 "Microsoft-Windows-DotNETRuntime",
                                 UInt64.MaxValue,
                                 EventLevel.Verbose
-                            )
+                            ),
                         }
                     );
 
@@ -390,7 +390,7 @@ namespace Tracing.Tests.PauseOnStartValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" }
+                    { Utils.DiagnosticPortsEnvKey, $"{serverName}" },
                 },
                 duringExecution: async (pid) =>
                 {

@@ -14,7 +14,7 @@ namespace System.Web.UI.WebControls
     /// <devdoc>
     /// Represents a Parameter that gets its value from a control's property.
     /// </devdoc>
-    [DefaultProperty("ControlID"),]
+    [DefaultProperty("ControlID")]
     public class ControlParameter : Parameter
     {
         /// <devdoc>

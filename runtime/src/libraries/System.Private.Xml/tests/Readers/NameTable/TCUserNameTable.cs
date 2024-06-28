@@ -16,7 +16,7 @@ namespace System.Xml.NameTableTests
                 this.AddChild(
                     new CVariation(v1)
                     {
-                        Attribute = new Variation("Read xml file using custom name table")
+                        Attribute = new Variation("Read xml file using custom name table"),
                     }
                 );
             }

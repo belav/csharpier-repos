@@ -30,7 +30,7 @@ public class ControllerActionDescriptorProviderTests
         var actionNames = descriptors.Select(ad => ad.ActionName);
 
         // Assert
-        Assert.Equal(new[] { "GetPerson", "ShowPeople", }, actionNames);
+        Assert.Equal(new[] { "GetPerson", "ShowPeople" }, actionNames);
     }
 
     [Fact]
@@ -60,7 +60,7 @@ public class ControllerActionDescriptorProviderTests
         var globalFilter = new MyFilterAttribute(1);
         var provider = GetProvider(
             typeof(FiltersController).GetTypeInfo(),
-            new IFilterMetadata[] { globalFilter, }
+            new IFilterMetadata[] { globalFilter }
         );
 
         // Act
@@ -1558,13 +1558,13 @@ public class ControllerActionDescriptorProviderTests
                 {
                     { "controller", "Home" },
                     { "action", "Index" },
-                }
+                },
             }
         );
         context.Results.Add(
             new ActionDescriptor()
             {
-                RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } }
+                RouteValues = new Dictionary<string, string>() { { "page", "/Some/Page" } },
             }
         );
 
@@ -2217,7 +2217,7 @@ public class ControllerActionDescriptorProviderTests
             action.Selectors.Add(
                 new SelectorModel()
                 {
-                    AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!", }
+                    AttributeRouteModel = new AttributeRouteModel() { Template = "/!!!" },
                 }
             );
         }

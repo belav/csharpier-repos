@@ -309,7 +309,7 @@ namespace System.Web.Helpers.Test
             {
                 new { GroupBy = "1", YValue = 1 },
                 new { GroupBy = "1", YValue = 2 },
-                new { GroupBy = "2", YValue = 1 }
+                new { GroupBy = "2", YValue = 1 },
             };
             var chart = new Chart(
                 GetContext(),
@@ -420,7 +420,7 @@ namespace System.Web.Helpers.Test
             {
                 new { XValue = "1", YValue = 1 },
                 new { XValue = "2", YValue = 2 },
-                new { XValue = "3", YValue = 3 }
+                new { XValue = "3", YValue = 3 },
             };
             var chart = new Chart(GetContext(), GetVirtualPathProvider(), 100, 100).DataBindTable(
                 data,

@@ -177,7 +177,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                 typeof(X509Certificate2Collection),
                 typeof(string),
                 typeof(string),
-                typeof(X509SelectionFlag)
+                typeof(X509SelectionFlag),
             };
             MethodInfo mi = typeof(X509Certificate2UI).GetMethod("SelectFromCollection", types);
             mi.Invoke(
@@ -198,7 +198,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                 typeof(string),
                 typeof(string),
                 typeof(X509SelectionFlag),
-                typeof(IntPtr)
+                typeof(IntPtr),
             };
             MethodInfo mi = typeof(X509Certificate2UI).GetMethod("SelectFromCollection", types);
             mi.Invoke(
@@ -209,7 +209,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                     null,
                     null,
                     X509SelectionFlag.MultiSelection,
-                    IntPtr.Zero
+                    IntPtr.Zero,
                 }
             );
         }
@@ -226,7 +226,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                 typeof(string),
                 typeof(string),
                 typeof(X509SelectionFlag),
-                typeof(IntPtr)
+                typeof(IntPtr),
             };
             MethodInfo mi = typeof(X509Certificate2UI).GetMethod("SelectFromCollection", types);
             mi.Invoke(
@@ -237,7 +237,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                     null,
                     null,
                     X509SelectionFlag.MultiSelection,
-                    IntPtr.Zero
+                    IntPtr.Zero,
                 }
             );
         }

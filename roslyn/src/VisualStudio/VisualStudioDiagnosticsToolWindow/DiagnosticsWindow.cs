@@ -39,19 +39,19 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
             var perfMarginPanel = new TabItem()
             {
                 Header = "Perf",
-                Content = new PerfMarginPanel()
+                Content = new PerfMarginPanel(),
             };
 
             var telemetryPanel = new TabItem()
             {
                 Header = "Telemetry",
-                Content = new TelemetryPanel()
+                Content = new TelemetryPanel(),
             };
 
             var workspacePanel = new TabItem()
             {
                 Header = "Workspace",
-                Content = new WorkspacePanel(this)
+                Content = new WorkspacePanel(this),
             };
 
             var tabControl = new TabControl { TabStripPlacement = Dock.Bottom };

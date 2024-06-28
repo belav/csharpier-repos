@@ -789,14 +789,14 @@ namespace System.Data.OleDb
                             typeof(string),
                             typeof(OleDbType),
                             typeof(int),
-                            typeof(string)
+                            typeof(string),
                         };
                         ctorValues = new object[]
                         {
                             p.ParameterName,
                             p.OleDbType,
                             p.Size,
-                            p.SourceColumn
+                            p.SourceColumn,
                         };
                         break;
                     case 8: // Value
@@ -817,7 +817,7 @@ namespace System.Data.OleDb
                                 typeof(byte),
                                 typeof(string),
                                 typeof(DataRowVersion),
-                                typeof(object)
+                                typeof(object),
                             };
                             ctorValues = new object[]
                             {
@@ -830,7 +830,7 @@ namespace System.Data.OleDb
                                 p.ScaleInternal,
                                 p.SourceColumn,
                                 p.SourceVersion,
-                                p.Value
+                                p.Value,
                             };
                         }
                         else
@@ -846,7 +846,7 @@ namespace System.Data.OleDb
                                 typeof(string),
                                 typeof(DataRowVersion),
                                 typeof(bool),
-                                typeof(object)
+                                typeof(object),
                             };
                             ctorValues = new object[]
                             {
@@ -859,7 +859,7 @@ namespace System.Data.OleDb
                                 p.SourceColumn,
                                 p.SourceVersion,
                                 p.SourceColumnNullMapping,
-                                p.Value
+                                p.Value,
                             };
                         }
                         break;

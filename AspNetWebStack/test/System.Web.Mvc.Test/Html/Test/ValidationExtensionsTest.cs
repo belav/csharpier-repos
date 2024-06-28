@@ -34,7 +34,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -148,7 +148,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -519,7 +519,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -586,7 +586,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -642,7 +642,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -709,7 +709,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -778,7 +778,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .ValidationMessage(modelName: "name", htmlAttributes: new { attribute = text, })
+                .ValidationMessage(modelName: "name", htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -988,7 +988,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .ValidationMessage(modelName: "name", htmlAttributes: new { attribute = text, })
+                .ValidationMessage(modelName: "name", htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -1437,7 +1437,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -1505,7 +1505,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule[]
                     {
                         new ModelClientValidationRule() { ValidationType = "ValidationRule1" },
-                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" }
+                        new ModelClientValidationRule() { ValidationType = "ValidationRule2" },
                     };
 
                 Mock<ModelValidator> mockValidator = new Mock<ModelValidator>(
@@ -1580,7 +1580,7 @@ namespace System.Web.Mvc.Html.Test
                 .ValidationMessageFor(
                     m => name,
                     validationMessage: null,
-                    htmlAttributes: new { attribute = text, }
+                    htmlAttributes: new { attribute = text }
                 )
                 .ToHtmlString();
 
@@ -1772,7 +1772,7 @@ namespace System.Web.Mvc.Html.Test
                 .ValidationMessageFor(
                     m => name,
                     validationMessage: null,
-                    htmlAttributes: new { attribute = text, }
+                    htmlAttributes: new { attribute = text }
                 )
                 .ToHtmlString();
 
@@ -2458,7 +2458,7 @@ namespace System.Web.Mvc.Html.Test
                 .ValidationSummary(
                     excludePropertyErrors: true,
                     message: null,
-                    htmlAttributes: new { attribute = text, }
+                    htmlAttributes: new { attribute = text }
                 )
                 .ToHtmlString();
 

@@ -51,7 +51,7 @@ namespace Samples.Common
                 "Rectangle",
                 "Rectangles",
                 "String",
-                "Complex (AddPath)"
+                "Complex (AddPath)",
             };
         }
 
@@ -124,7 +124,7 @@ namespace Samples.Common
                     new Point(180, 100),
                     new Point(200, 100),
                     new Point(240, 240),
-                    new Point(20, 100)
+                    new Point(20, 100),
                 }
             );
             return path;
@@ -139,7 +139,7 @@ namespace Samples.Common
                     new Point(20, 100),
                     new Point(70, 10),
                     new Point(130, 200),
-                    new Point(180, 100)
+                    new Point(180, 100),
                 }
             );
             return path;
@@ -154,7 +154,7 @@ namespace Samples.Common
                     new Point(20, 100),
                     new Point(70, 10),
                     new Point(130, 200),
-                    new Point(180, 100)
+                    new Point(180, 100),
                 }
             );
             return path;
@@ -183,7 +183,7 @@ namespace Samples.Common
                     new Point(20, 100),
                     new Point(70, 10),
                     new Point(130, 200),
-                    new Point(180, 100)
+                    new Point(180, 100),
                 }
             );
             return path;
@@ -205,7 +205,7 @@ namespace Samples.Common
                     new Point(20, 100),
                     new Point(70, 10),
                     new Point(130, 200),
-                    new Point(180, 100)
+                    new Point(180, 100),
                 }
             );
             return path;
@@ -225,7 +225,7 @@ namespace Samples.Common
                 new Rectangle[2]
                 {
                     new Rectangle(20, 20, 100, 100),
-                    new Rectangle(100, 100, 20, 20)
+                    new Rectangle(100, 100, 20, 20),
                 }
             );
             return path;

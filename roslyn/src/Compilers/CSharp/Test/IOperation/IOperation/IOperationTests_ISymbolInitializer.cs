@@ -70,7 +70,7 @@ IFieldInitializerOperation (Field: System.Int32 C.s1) (OperationKind.FieldInitia
                 //     static int s1 /*<bind>*/= 1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "s1")
                     .WithArguments("C.s1")
-                    .WithLocation(4, 16)
+                    .WithLocation(4, 16),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -107,7 +107,7 @@ IFieldInitializerOperation (Field: System.Int32 C.i2) (OperationKind.FieldInitia
                 //     int i1 = 1, i2 /*<bind>*/= 2/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "i1")
                     .WithArguments("C.i1")
-                    .WithLocation(4, 9)
+                    .WithLocation(4, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -163,7 +163,7 @@ IParameterInitializerOperation (Parameter: [System.Int32 p1 = 0]) (OperationKind
                 // CS1751: Cannot specify a default value for a parameter array
                 //     void M(int p1 /*<bind>*/= 0/*</bind>*/, params int[] p2 = null) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params")
-                    .WithLocation(4, 45)
+                    .WithLocation(4, 45),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -197,7 +197,7 @@ IParameterInitializerOperation (Parameter: params System.Int32[] p2) (OperationK
                 // CS1751: Cannot specify a default value for a parameter array
                 //     void M(int p1 = 0, params int[] p2 /*<bind>*/= null/*</bind>*/) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueForParamsParameter, "params")
-                    .WithLocation(4, 24)
+                    .WithLocation(4, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -355,7 +355,7 @@ IFieldInitializerOperation (Field: System.Int32 C.s1) (OperationKind.FieldInitia
                 //     int i2 = 2;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "i2")
                     .WithArguments("C.i2")
-                    .WithLocation(11, 9)
+                    .WithLocation(11, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -409,7 +409,7 @@ IFieldInitializerOperation (Field: System.Int32 C.i2) (OperationKind.FieldInitia
                 //     int i1 = 1;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "i1")
                     .WithArguments("C.i1")
-                    .WithLocation(5, 9)
+                    .WithLocation(5, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -517,7 +517,7 @@ IFieldInitializerOperation (Field: System.Single C.f) (OperationKind.FieldInitia
                 //     private float f /*<bind>*/= 0.0/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f")
                     .WithArguments("C.f")
-                    .WithLocation(4, 19)
+                    .WithLocation(4, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -552,7 +552,7 @@ IFieldInitializerOperation (Field: System.Single C.f) (OperationKind.FieldInitia
                 //     private float f /*<bind>*/= 0/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f")
                     .WithArguments("C.f")
-                    .WithLocation(4, 19)
+                    .WithLocation(4, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -777,7 +777,7 @@ Block[B2] - Exit
                 //     public const int c1 /*<bind>*/= M()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "M()")
                     .WithArguments("C.c1")
-                    .WithLocation(4, 37)
+                    .WithLocation(4, 37),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -1190,7 +1190,7 @@ Block[B5] - Exit
                 //     public const int c1 /*<bind>*/= M() ?? M2()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "M() ?? M2()")
                     .WithArguments("C.c1")
-                    .WithLocation(4, 37)
+                    .WithLocation(4, 37),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -1407,7 +1407,7 @@ Block[B2] - Exit
                 //     public int s1 /*<bind>*/= /*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(4, 42)
+                    .WithLocation(4, 42),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -1988,7 +1988,7 @@ Block[B2] - Exit
                 //     public int P1 { get; } /*<bind>*/= /*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(4, 51)
+                    .WithLocation(4, 51),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -2077,7 +2077,7 @@ Block[B2] - Exit
                 //     public void M(int x /*<bind>*/= M2()/*</bind>*/) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M2()")
                     .WithArguments("x")
-                    .WithLocation(4, 37)
+                    .WithLocation(4, 37),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -2178,7 +2178,7 @@ Block[B5] - Exit
                 //     public void M(int x /*<bind>*/= M1() ?? M2()/*</bind>*/) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M1() ?? M2()")
                     .WithArguments("x")
-                    .WithLocation(4, 37)
+                    .WithLocation(4, 37),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -2245,7 +2245,7 @@ Block[B2] - Exit
                 //     public void M(int x /*<bind>*/= M1(out int local)/*</bind>*/) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M1(out int local)")
                     .WithArguments("x")
-                    .WithLocation(4, 37)
+                    .WithLocation(4, 37),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -2356,7 +2356,7 @@ Block[B5] - Exit
                 //     public void M(int x /*<bind>*/= M1(out int local) ?? M2()/*</bind>*/) { }
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M1(out int local) ?? M2()")
                     .WithArguments("x")
-                    .WithLocation(4, 37)
+                    .WithLocation(4, 37),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -2403,7 +2403,7 @@ Block[B2] - Exit
                 //     public void M(int x /*<bind>*/= /*</bind>*/) { }
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
                     .WithArguments(")")
-                    .WithLocation(4, 48)
+                    .WithLocation(4, 48),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<EqualsValueClauseSyntax>(

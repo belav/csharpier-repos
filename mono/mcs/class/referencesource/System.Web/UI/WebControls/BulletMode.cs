@@ -43,7 +43,7 @@ namespace System.Web.UI.WebControls
         ///    <para>The style that matches the Image type.</para>
         /// </devdoc>
 
-        CustomImage = 9
+        CustomImage = 9,
     }
 
     /// <devdoc>
@@ -55,6 +55,6 @@ namespace System.Web.UI.WebControls
 
         HyperLink = 1,
 
-        LinkButton = 2
+        LinkButton = 2,
     }
 }

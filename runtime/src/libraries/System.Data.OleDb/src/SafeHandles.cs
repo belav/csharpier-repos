@@ -208,7 +208,7 @@ namespace System.Data.OleDb
         XACTTC_SYNC_PHASETWO = 0x0002,
         XACTTC_SYNC = 0x0002,
         XACTTC_ASYNC_PHASEONE = 0x0004,
-        XACTTC_ASYNC = 0x0004
+        XACTTC_ASYNC = 0x0004,
     }
 
     #region PROPVARIANT

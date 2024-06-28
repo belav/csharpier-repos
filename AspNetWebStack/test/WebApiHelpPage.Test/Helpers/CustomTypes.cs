@@ -139,7 +139,7 @@ namespace WebApiHelpPageWebHost.UnitTest
     {
         [EnumMember]
         Value,
-        NoValue
+        NoValue,
     }
 
     [DataContract]

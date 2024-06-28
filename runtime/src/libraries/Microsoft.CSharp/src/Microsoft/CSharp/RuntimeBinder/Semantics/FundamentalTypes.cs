@@ -24,5 +24,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         FT_PTR, // pointer to unmanaged memory
         FT_VAR, // polymorphic, unbounded, not yet committed
         FT_COUNT // number of enumerators.
+        ,
     }
 }

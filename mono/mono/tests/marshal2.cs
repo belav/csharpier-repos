@@ -357,7 +357,7 @@ public class Tests
             new[,]
             {
                 { 1, 2, 3 },
-                { 4, 5, 6 }
+                { 4, 5, 6 },
             }
         );
         var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(structToMarshal));
@@ -398,7 +398,7 @@ public class Tests
     {
         var structToMarshal = new StructWithNonGenericField()
         {
-            ngs = new NonGenericStruct { t1 = 1, t2 = 2 }
+            ngs = new NonGenericStruct { t1 = 1, t2 = 2 },
         };
         var ptr = Marshal.AllocHGlobal(Marshal.SizeOf(structToMarshal));
         Marshal.StructureToPtr(structToMarshal, ptr, false);

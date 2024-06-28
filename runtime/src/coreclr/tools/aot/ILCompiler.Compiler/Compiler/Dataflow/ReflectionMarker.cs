@@ -37,7 +37,7 @@ namespace ILCompiler.Dataflow
         {
             Unspecified,
             DynamicallyAccessedMembersMark,
-            TokenAccess
+            TokenAccess,
         }
 
         public ReflectionMarker(

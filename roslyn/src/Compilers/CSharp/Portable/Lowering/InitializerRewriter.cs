@@ -139,11 +139,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     isRef: field.RefKind != RefKind.None
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 }
             )
             {
-                WasCompilerGenerated = !fieldInit.Locals.IsEmpty || fieldInit.WasCompilerGenerated
+                WasCompilerGenerated = !fieldInit.Locals.IsEmpty || fieldInit.WasCompilerGenerated,
             };
 
             if (!fieldInit.Locals.IsEmpty)
@@ -154,7 +154,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray.Create(boundStatement)
                 )
                 {
-                    WasCompilerGenerated = fieldInit.WasCompilerGenerated
+                    WasCompilerGenerated = fieldInit.WasCompilerGenerated,
                 };
             }
 

@@ -89,11 +89,9 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return _node == null
-                    ? 0
-                    : _node.Green.IsList
-                        ? _node.SlotCount
-                        : 1;
+                return _node == null ? 0
+                    : _node.Green.IsList ? _node.SlotCount
+                    : 1;
             }
         }
 

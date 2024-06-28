@@ -39,7 +39,7 @@ namespace MonoTests.System.Configuration
         enum FooEnum
         {
             Foo = 1,
-            Bar = 2
+            Bar = 2,
         }
 
         [Fact]

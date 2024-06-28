@@ -29,7 +29,7 @@ namespace System.Data.Mapping.Update.Internal
             new Dictionary<EntityKey, int>();
         private readonly List<IdentifierInfo> _identifiers = new List<IdentifierInfo>()
         {
-            new IdentifierInfo()
+            new IdentifierInfo(),
         };
         private readonly UpdateTranslator _translator;
         private const NodeColor White = 0;

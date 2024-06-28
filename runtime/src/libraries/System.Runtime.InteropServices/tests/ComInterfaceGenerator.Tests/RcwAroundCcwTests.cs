@@ -153,7 +153,7 @@ namespace ComInterfaceGenerator.Tests
             {
                 new int[] { 1, 2, 3 },
                 new int[] { 4, 5 },
-                new int[] { 6, 7, 8, 9 }
+                new int[] { 6, 7, 8, 9 },
             };
             int[] widths = new int[] { 3, 2, 4 };
             int length = data.Length;
@@ -346,8 +346,8 @@ namespace ComInterfaceGenerator.Tests
             var array = new int[][]
             {
                 new int[] { 1, 2, 3 },
-                new int[] { 4, 5, },
-                new int[] { 6, 7, 8, 9 }
+                new int[] { 4, 5 },
+                new int[] { 6, 7, 8, 9 },
             };
             var widths = new int[] { 3, 2, 4 };
             var length = 3;

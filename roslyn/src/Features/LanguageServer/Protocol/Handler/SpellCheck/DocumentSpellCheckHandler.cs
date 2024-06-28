@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SpellCheck
             TextDocumentIdentifier identifier,
             int[]? ranges,
             string? resultId
-        ) => new() { Ranges = ranges, ResultId = resultId, };
+        ) => new() { Ranges = ranges, ResultId = resultId };
 
         protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
             VSInternalDocumentSpellCheckableParams requestParams

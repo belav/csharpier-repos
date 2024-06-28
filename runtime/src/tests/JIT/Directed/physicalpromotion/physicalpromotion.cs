@@ -83,14 +83,14 @@ public class PhysicalPromotion
     private static VeryOverlapping _overlappy1 = new VeryOverlapping
     {
         F0 = 0x12345678,
-        F4 = 0xdeadbeef
+        F4 = 0xdeadbeef,
     };
     private static VeryOverlapping _overlappy2 = new VeryOverlapping
     {
         F1 = 0xde,
         F2 = 0x1357,
         F5 = 0x17,
-        F7 = 0x42
+        F7 = 0x42,
     };
 
     [Fact]

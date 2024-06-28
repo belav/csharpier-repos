@@ -52,13 +52,13 @@ internal partial class HubServerProxyGenerator
         ClientToServer = 1,
         ServerToClient = 2,
         AsyncEnumerable = 4,
-        Bidirectional = ClientToServer | ServerToClient
+        Bidirectional = ClientToServer | ServerToClient,
     }
 
     public enum SupportClassification
     {
         Supported,
-        UnsupportedReturnType
+        UnsupportedReturnType,
     }
 
     public sealed class ArgumentSpec

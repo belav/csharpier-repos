@@ -264,7 +264,7 @@ class C{i}
             var updatedSignature = new[]
             {
                 new AddedParameterOrExistingIndex(0),
-                new AddedParameterOrExistingIndex(2)
+                new AddedParameterOrExistingIndex(2),
             };
 
             using var testState = ChangeSignatureTestState.Create(XElement.Parse(workspaceXml));
@@ -372,7 +372,7 @@ class C{i}
                         callSiteValue: "123"
                     ),
                     "int"
-                )
+                ),
             };
 
             using var testState = ChangeSignatureTestState.Create(XElement.Parse(workspaceXml));

@@ -50,7 +50,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 236,
                 FFReplacementChar = 65,
                 A0Char = '\u00e1',
-                A8Char = '\u00bf'
+                A8Char = '\u00bf',
             },
             new CodePageTestInfo
             {
@@ -63,7 +63,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00e1',
-                A8Char = '\u00bf'
+                A8Char = '\u00bf',
             },
             new CodePageTestInfo
             {
@@ -76,7 +76,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 236,
                 FFReplacementChar = 63,
                 A0Char = '\u00e1',
-                A8Char = '\u00bf'
+                A8Char = '\u00bf',
             },
             new CodePageTestInfo
             {
@@ -89,7 +89,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 236,
                 FFReplacementChar = 63,
                 A0Char = '\u00e1',
-                A8Char = '\u00bf'
+                A8Char = '\u00bf',
             },
             new CodePageTestInfo
             {
@@ -102,7 +102,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 236,
                 FFReplacementChar = 63,
                 A0Char = '\u00a6',
-                A8Char = '\u00ce'
+                A8Char = '\u00ce',
             },
             new CodePageTestInfo
             {
@@ -115,7 +115,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 236,
                 FFReplacementChar = 63,
                 A0Char = '\u00e1',
-                A8Char = '\u00bf'
+                A8Char = '\u00bf',
             },
             new CodePageTestInfo
             {
@@ -128,7 +128,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u00a8'
+                A8Char = '\u00a8',
             },
             new CodePageTestInfo
             {
@@ -141,7 +141,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u00a8'
+                A8Char = '\u00a8',
             },
             new CodePageTestInfo
             {
@@ -154,7 +154,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u00a8'
+                A8Char = '\u00a8',
             },
             new CodePageTestInfo
             {
@@ -167,7 +167,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 176,
                 FFReplacementChar = 63,
                 A0Char = '\u2020',
-                A8Char = '\u00ae'
+                A8Char = '\u00ae',
             },
             new CodePageTestInfo
             {
@@ -180,7 +180,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 176,
                 FFReplacementChar = 63,
                 A0Char = '\u00dd',
-                A8Char = '\u00ae'
+                A8Char = '\u00ae',
             },
             new CodePageTestInfo
             {
@@ -193,7 +193,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u00a8'
+                A8Char = '\u00a8',
             },
             new CodePageTestInfo
             {
@@ -206,7 +206,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u00a8'
+                A8Char = '\u00a8',
             },
             new CodePageTestInfo
             {
@@ -219,7 +219,7 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u00a8'
+                A8Char = '\u00a8',
             },
             new CodePageTestInfo
             {
@@ -232,8 +232,8 @@ namespace MonoTests.I18N.West
                 InfinityReplacementChar = 63,
                 FFReplacementChar = 63,
                 A0Char = '\u00a0',
-                A8Char = '\u0161'
-            }
+                A8Char = '\u0161',
+            },
         };
     }
 }

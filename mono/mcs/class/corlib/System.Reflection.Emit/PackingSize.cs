@@ -65,6 +65,6 @@ namespace System.Reflection.Emit
 
         Size64 = 64,
 
-        Size128 = 128
+        Size128 = 128,
     }
 }

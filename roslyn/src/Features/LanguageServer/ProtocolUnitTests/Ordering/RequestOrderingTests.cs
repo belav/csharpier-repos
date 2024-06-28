@@ -310,7 +310,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
         {
             var didOpenParams = new LSP.DidOpenTextDocumentParams
             {
-                TextDocument = new LSP.TextDocumentItem { Uri = documentUri, Text = "// hi there" }
+                TextDocument = new LSP.TextDocumentItem { Uri = documentUri, Text = "// hi there" },
             };
             await testLspServer.ExecuteRequestAsync<LSP.DidOpenTextDocumentParams, object>(
                 Methods.TextDocumentDidOpenName,

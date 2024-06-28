@@ -1934,7 +1934,7 @@ namespace MonoTests.System.Windows.Forms
             var label1 = new Label
             {
                 AutoSize = true,
-                Text = @"This line spans all three columns in the table!"
+                Text = @"This line spans all three columns in the table!",
             };
             tlp.Controls.Add(label1, 0, 0);
             tlp.SetColumnSpan(label1, 3);
@@ -1943,7 +1943,7 @@ namespace MonoTests.System.Windows.Forms
             var label2 = new Label
             {
                 AutoSize = true,
-                Text = @"This line spans columns two and three."
+                Text = @"This line spans columns two and three.",
             };
             tlp.Controls.Add(label2, 1, 1);
             tlp.SetColumnSpan(label2, 2);
@@ -1969,7 +1969,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 AutoSize = true,
                 Dock = DockStyle.Fill,
-                Text = label
+                Text = label,
             };
             tlp.Controls.Add(first, 0, row);
             var second = new TextBox
@@ -1977,7 +1977,7 @@ namespace MonoTests.System.Windows.Forms
                 AutoSize = true,
                 Text = text,
                 Dock = DockStyle.Fill,
-                Multiline = true
+                Multiline = true,
             };
             tlp.Controls.Add(second, 1, row);
             var third = new Button { Text = @"DEL", Dock = DockStyle.Fill };

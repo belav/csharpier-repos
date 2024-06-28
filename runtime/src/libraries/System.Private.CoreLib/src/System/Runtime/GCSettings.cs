@@ -8,7 +8,7 @@ namespace System.Runtime
     public enum GCLargeObjectHeapCompactionMode
     {
         Default = 1,
-        CompactOnce = 2
+        CompactOnce = 2,
     }
 
     // These settings are the same format as in the GC in the runtime.
@@ -18,7 +18,7 @@ namespace System.Runtime
         Interactive = 1,
         LowLatency = 2,
         SustainedLowLatency = 3,
-        NoGCRegion = 4
+        NoGCRegion = 4,
     }
 
     public static partial class GCSettings
@@ -26,7 +26,9 @@ namespace System.Runtime
         private enum SetLatencyModeStatus
         {
             Succeeded = 0,
-            NoGCInProgress = 1 // NoGCRegion is in progress, can't change pause mode.
+            NoGCInProgress =
+                1 // NoGCRegion is in progress, can't change pause mode.
+            ,
         }
 
         public static GCLatencyMode LatencyMode

@@ -37,7 +37,7 @@ public class ResponseCookiesTest
         var cookies = new ResponseCookies(features);
         var testCookie = "TestCookie";
 
-        cookies.Append(testCookie, "value", new CookieOptions() { SameSite = SameSiteMode.None, });
+        cookies.Append(testCookie, "value", new CookieOptions() { SameSite = SameSiteMode.None });
 
         var cookieHeaderValues = headers.SetCookie;
         Assert.Single(cookieHeaderValues);
@@ -234,7 +234,7 @@ public class ResponseCookiesTest
             Expires = time,
             Domain = "example.com",
             SameSite = SameSiteMode.Lax,
-            Extensions = { "extension" }
+            Extensions = { "extension" },
         };
 
         cookies.Delete(testCookie, options);

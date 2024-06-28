@@ -80,7 +80,7 @@ public class BuiltInDataTypesSqliteTest
             Real = 84.4,
             SomeString = "don't",
             Text = "G",
-            Blob = new byte[] { 86 }
+            Blob = new byte[] { 86 },
         };
 
     [ConditionalFact]
@@ -121,7 +121,7 @@ public class BuiltInDataTypesSqliteTest
             Real = 84.4,
             SomeString = "don't",
             Text = "G",
-            Blob = new byte[] { 86 }
+            Blob = new byte[] { 86 },
         };
 
     [ConditionalFact]
@@ -187,7 +187,7 @@ public class BuiltInDataTypesSqliteTest
         {
             Id = id,
             Nvarchar = "Into",
-            Binary = new byte[] { 10, 11, 12, 13 }
+            Binary = new byte[] { 10, 11, 12, 13 },
         };
 
     [ConditionalFact]
@@ -259,7 +259,7 @@ public class BuiltInDataTypesSqliteTest
                 TimeSpan.Zero
             ),
             Datetime2 = new DateTime(2017, 1, 2, 12, 11, 12),
-            Decimal = 101.1m
+            Decimal = 101.1m,
         };
 
     [ConditionalFact]
@@ -325,7 +325,7 @@ public class BuiltInDataTypesSqliteTest
             Real = 84.4,
             SomeString = "don't",
             Text = "G",
-            Blob = new byte[] { 86 }
+            Blob = new byte[] { 86 },
         };
 
     [ConditionalFact]
@@ -373,7 +373,7 @@ public class BuiltInDataTypesSqliteTest
             Real = 84.4,
             SomeString = "don't",
             Text = "G",
-            Blob = new byte[] { 86 }
+            Blob = new byte[] { 86 },
         };
 
     [ConditionalFact]
@@ -451,7 +451,7 @@ public class BuiltInDataTypesSqliteTest
         {
             AltId = id,
             Nvarchar = "Into",
-            Binary = new byte[] { 10, 11, 12, 13 }
+            Binary = new byte[] { 10, 11, 12, 13 },
         };
 
     [ConditionalFact]
@@ -535,7 +535,7 @@ public class BuiltInDataTypesSqliteTest
                 TimeSpan.Zero
             ),
             Datetime2 = new DateTime(2017, 1, 2, 12, 11, 12),
-            Decimal = 101.1m
+            Decimal = 101.1m,
         };
 
     [ConditionalFact]
@@ -551,7 +551,7 @@ public class BuiltInDataTypesSqliteTest
                     new MappedPrecisionAndScaledDataTypesWithIdentity
                     {
                         AltId = 77,
-                        Decimal = 101.1m
+                        Decimal = 101.1m,
                     }
                 );
 
@@ -994,7 +994,7 @@ public class BuiltInDataTypesSqliteTest
                     new MappedPrecisionAndScaledDataTypesWithIdentity
                     {
                         AltId = 177,
-                        Decimal = 101.1m
+                        Decimal = 101.1m,
                     }
                 );
             context
@@ -1003,7 +1003,7 @@ public class BuiltInDataTypesSqliteTest
                     new MappedPrecisionAndScaledDataTypesWithIdentity
                     {
                         AltId = 178,
-                        Decimal = 101.1m
+                        Decimal = 101.1m,
                     }
                 );
             context
@@ -1012,7 +1012,7 @@ public class BuiltInDataTypesSqliteTest
                     new MappedPrecisionAndScaledDataTypesWithIdentity
                     {
                         AltId = 179,
-                        Decimal = 101.1m
+                        Decimal = 101.1m,
                     }
                 );
 
@@ -1074,7 +1074,7 @@ public class BuiltInDataTypesSqliteTest
             TestNullableDecimal = 2.000000000000001m,
             TestNullableDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
             TestNullableTimeSpan = TimeSpan.FromDays(2),
-            TestNullableUnsignedInt64 = 0
+            TestNullableUnsignedInt64 = 0,
         };
         context.Add(min);
 
@@ -1093,7 +1093,7 @@ public class BuiltInDataTypesSqliteTest
                 TimeSpan.FromHours(-2)
             ),
             TestNullableTimeSpan = TimeSpan.FromDays(10),
-            TestNullableUnsignedInt64 = long.MaxValue + 1ul
+            TestNullableUnsignedInt64 = long.MaxValue + 1ul,
         };
         context.Add(max);
 
@@ -1164,7 +1164,7 @@ public class BuiltInDataTypesSqliteTest
             TestNullableDecimal = 2.000000000000001m,
             TestNullableDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
             TestNullableTimeSpan = TimeSpan.FromDays(2),
-            TestNullableUnsignedInt64 = 0
+            TestNullableUnsignedInt64 = 0,
         };
         context.Add(min);
 
@@ -1183,7 +1183,7 @@ public class BuiltInDataTypesSqliteTest
                 TimeSpan.FromHours(-2)
             ),
             TestNullableTimeSpan = TimeSpan.FromDays(10),
-            TestNullableUnsignedInt64 = long.MaxValue + 1ul
+            TestNullableUnsignedInt64 = long.MaxValue + 1ul,
         };
         context.Add(max);
 
@@ -1252,7 +1252,7 @@ public class BuiltInDataTypesSqliteTest
             {
                 Id = 205,
                 PartitionId = 202,
-                TestNullableDecimal = 1.000000000000003m
+                TestNullableDecimal = 1.000000000000003m,
             }
         );
 
@@ -1261,7 +1261,7 @@ public class BuiltInDataTypesSqliteTest
             {
                 Id = 206,
                 PartitionId = 202,
-                TestNullableDecimal = 1.000000000000001m
+                TestNullableDecimal = 1.000000000000001m,
             }
         );
 
@@ -1293,7 +1293,7 @@ public class BuiltInDataTypesSqliteTest
             {
                 Id = 205,
                 PartitionId = 203,
-                TestDecimal = 1.000000000000001m
+                TestDecimal = 1.000000000000001m,
             }
         );
 
@@ -1302,7 +1302,7 @@ public class BuiltInDataTypesSqliteTest
             {
                 Id = 206,
                 PartitionId = 203,
-                TestDecimal = 1.000000000000001m
+                TestDecimal = 1.000000000000001m,
             }
         );
 
@@ -1335,7 +1335,7 @@ public class BuiltInDataTypesSqliteTest
                 Id = 207,
                 PartitionId = 204,
                 TestDecimal = 1.000000000000001m,
-                TestTimeSpan = TimeSpan.FromMinutes(1)
+                TestTimeSpan = TimeSpan.FromMinutes(1),
             }
         );
 
@@ -1347,7 +1347,7 @@ public class BuiltInDataTypesSqliteTest
             {
                 Id = e.Id,
                 TestDecimal = -e.TestDecimal,
-                TestTimeSpan = -e.TestTimeSpan
+                TestTimeSpan = -e.TestTimeSpan,
             })
             .First(e => e.Id == 207);
 
@@ -1368,7 +1368,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTime = new DateTime(2018, 1, 1, 0, 0, 0),
                 TestDateTimeOffset = new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 TestTimeSpan = TimeSpan.FromMinutes(1),
-                TestUnsignedInt64 = ulong.MaxValue - 1ul
+                TestUnsignedInt64 = ulong.MaxValue - 1ul,
             }
         );
 
@@ -1383,7 +1383,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTime = e.TestDateTime + new TimeSpan(0, 1, 0),
                 TestDateTimeOffset = e.TestDateTimeOffset + new TimeSpan(0, 1, 0),
                 TestTimeSpan = e.TestTimeSpan + new TimeSpan(0, 1, 0),
-                TestUnsignedInt64 = e.TestUnsignedInt64 + 1ul
+                TestUnsignedInt64 = e.TestUnsignedInt64 + 1ul,
             })
             .First(e => e.Id == 208);
 
@@ -1410,7 +1410,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTime = new DateTime(2018, 1, 1, 0, 1, 0),
                 TestDateTimeOffset = new DateTimeOffset(2018, 1, 1, 0, 1, 0, TimeSpan.Zero),
                 TestTimeSpan = TimeSpan.FromMinutes(2),
-                TestUnsignedInt64 = ulong.MaxValue
+                TestUnsignedInt64 = ulong.MaxValue,
             }
         );
 
@@ -1428,7 +1428,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTimeOffset2 = e.TestDateTimeOffset
                     - new DateTimeOffset(2018, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 TestTimeSpan = e.TestTimeSpan - new TimeSpan(0, 1, 0),
-                TestUnsignedInt64 = e.TestUnsignedInt64 - 1ul
+                TestUnsignedInt64 = e.TestUnsignedInt64 - 1ul,
             })
             .First(e => e.Id == 209);
 
@@ -1458,7 +1458,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
                 TestTimeSpan = TimeSpan.FromDays(2),
                 TestUnsignedInt64 = 0,
-                TestCharacter = 'A'
+                TestCharacter = 'A',
             }
         );
 
@@ -1475,7 +1475,7 @@ public class BuiltInDataTypesSqliteTest
                     < new DateTimeOffset(2018, 1, 1, 11, 0, 0, TimeSpan.FromHours(-2)),
                 TestTimeSpan = e.TestTimeSpan < new TimeSpan(10, 0, 0, 0),
                 TestUnsignedInt64 = e.TestUnsignedInt64 < ulong.MaxValue,
-                TestCharacter = e.TestCharacter < 'B'
+                TestCharacter = e.TestCharacter < 'B',
             })
             .First(e => e.Id == 210);
 
@@ -1501,7 +1501,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
                 TestTimeSpan = TimeSpan.FromDays(2),
                 TestUnsignedInt64 = 0,
-                TestCharacter = 'A'
+                TestCharacter = 'A',
             }
         );
 
@@ -1518,7 +1518,7 @@ public class BuiltInDataTypesSqliteTest
                     <= new DateTimeOffset(2018, 1, 1, 11, 0, 0, TimeSpan.FromHours(-2)),
                 TestTimeSpan = e.TestTimeSpan <= new TimeSpan(10, 0, 0, 0),
                 TestUnsignedInt64 = e.TestUnsignedInt64 <= ulong.MaxValue,
-                TestCharacter = e.TestCharacter <= 'B'
+                TestCharacter = e.TestCharacter <= 'B',
             })
             .First(e => e.Id == 211);
 
@@ -1544,7 +1544,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
                 TestTimeSpan = TimeSpan.FromDays(2),
                 TestUnsignedInt64 = 0,
-                TestCharacter = 'A'
+                TestCharacter = 'A',
             }
         );
 
@@ -1561,7 +1561,7 @@ public class BuiltInDataTypesSqliteTest
                     > new DateTimeOffset(2018, 1, 1, 11, 0, 0, TimeSpan.FromHours(-2)),
                 TestTimeSpan = e.TestTimeSpan > new TimeSpan(10, 0, 0, 0),
                 TestUnsignedInt64 = e.TestUnsignedInt64 > ulong.MaxValue,
-                TestCharacter = e.TestCharacter > 'B'
+                TestCharacter = e.TestCharacter > 'B',
             })
             .First(e => e.Id == 212);
 
@@ -1587,7 +1587,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
                 TestTimeSpan = TimeSpan.FromDays(2),
                 TestUnsignedInt64 = 0,
-                TestCharacter = 'A'
+                TestCharacter = 'A',
             }
         );
 
@@ -1604,7 +1604,7 @@ public class BuiltInDataTypesSqliteTest
                     >= new DateTimeOffset(2018, 1, 1, 11, 0, 0, TimeSpan.FromHours(-2)),
                 TestTimeSpan = e.TestTimeSpan >= new TimeSpan(10, 0, 0, 0),
                 TestUnsignedInt64 = e.TestUnsignedInt64 >= ulong.MaxValue,
-                TestCharacter = e.TestCharacter >= 'B'
+                TestCharacter = e.TestCharacter >= 'B',
             })
             .First(e => e.Id == 213);
 
@@ -1627,7 +1627,7 @@ public class BuiltInDataTypesSqliteTest
                 PartitionId = 204,
                 TestDecimal = 2.000000000000002m,
                 TestTimeSpan = TimeSpan.FromMinutes(2),
-                TestUnsignedInt64 = ulong.MaxValue
+                TestUnsignedInt64 = ulong.MaxValue,
             }
         );
 
@@ -1641,7 +1641,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDecimal = e.TestDecimal / 2m,
                 TestTimeSpan1 = e.TestTimeSpan / 2.0,
                 TestTimeSpan2 = e.TestTimeSpan / new TimeSpan(0, 2, 0),
-                TestUnsignedInt64 = e.TestUnsignedInt64 / 5ul
+                TestUnsignedInt64 = e.TestUnsignedInt64 / 5ul,
             })
             .First(e => e.Id == 214);
 
@@ -1662,7 +1662,7 @@ public class BuiltInDataTypesSqliteTest
                 PartitionId = 204,
                 TestDecimal = 1.000000000000001m,
                 TestTimeSpan = TimeSpan.FromMinutes(1),
-                TestUnsignedInt64 = ulong.MaxValue / 5
+                TestUnsignedInt64 = ulong.MaxValue / 5,
             }
         );
 
@@ -1676,7 +1676,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDecimal = e.TestDecimal * 2m,
                 TestTimeSpan1 = e.TestTimeSpan * 2.0,
                 TestTimeSpan2 = 2.0 * e.TestTimeSpan,
-                TestUnsignedInt64 = e.TestUnsignedInt64 * 5ul
+                TestUnsignedInt64 = e.TestUnsignedInt64 * 5ul,
             })
             .First(e => e.Id == 215);
 
@@ -1698,7 +1698,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDecimal = 3.000000000000003m,
                 TestDouble = 1.5,
                 TestSingle = 1.5f,
-                TestUnsignedInt64 = 10000000000000000001
+                TestUnsignedInt64 = 10000000000000000001,
             }
         );
 
@@ -1712,7 +1712,7 @@ public class BuiltInDataTypesSqliteTest
                 TestDecimal = e.TestDecimal % 2.000000000000002m,
                 TestDouble = e.TestDouble % 1.0,
                 TestSingle = e.TestSingle % 1.0f,
-                TestUnsignedInt64 = e.TestUnsignedInt64 % 10000000000000000000
+                TestUnsignedInt64 = e.TestUnsignedInt64 % 10000000000000000000,
             })
             .First(e => e.Id == 216);
 
@@ -1733,7 +1733,7 @@ public class BuiltInDataTypesSqliteTest
             TestNullableDecimal = 2.000000000000001m,
             TestNullableDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
             TestNullableTimeSpan = TimeSpan.FromDays(2),
-            TestNullableUnsignedInt64 = 0
+            TestNullableUnsignedInt64 = 0,
         };
         context.Add(min);
 
@@ -1752,7 +1752,7 @@ public class BuiltInDataTypesSqliteTest
                 TimeSpan.FromHours(-2)
             ),
             TestNullableTimeSpan = TimeSpan.FromDays(10),
-            TestNullableUnsignedInt64 = long.MaxValue + 1ul
+            TestNullableUnsignedInt64 = long.MaxValue + 1ul,
         };
         context.Add(max);
 
@@ -1792,7 +1792,7 @@ public class BuiltInDataTypesSqliteTest
             TestNullableDecimal = 2.000000000000001m,
             TestNullableDateTimeOffset = new DateTimeOffset(2018, 1, 1, 12, 0, 0, TimeSpan.Zero),
             TestNullableTimeSpan = TimeSpan.FromDays(2),
-            TestNullableUnsignedInt64 = 0
+            TestNullableUnsignedInt64 = 0,
         };
         context.Add(min);
 
@@ -1811,7 +1811,7 @@ public class BuiltInDataTypesSqliteTest
                 TimeSpan.FromHours(-2)
             ),
             TestNullableTimeSpan = TimeSpan.FromDays(10),
-            TestNullableUnsignedInt64 = long.MaxValue + 1ul
+            TestNullableUnsignedInt64 = long.MaxValue + 1ul,
         };
         context.Add(max);
 
@@ -2060,7 +2060,7 @@ WHERE "b"."Id" = 13
                 Int = (int)b.TestCharacter,
                 Uint = (uint)b.TestCharacter,
                 Long = (long)b.TestCharacter,
-                Ulong = (ulong)b.TestCharacter
+                Ulong = (ulong)b.TestCharacter,
             })
             .First();
 
@@ -2078,7 +2078,7 @@ WHERE "b"."Id" = 13
                 Int = (int)b.TestCharacter,
                 Uint = (uint)b.TestCharacter,
                 Long = (long)b.TestCharacter,
-                Ulong = (ulong)b.TestCharacter
+                Ulong = (ulong)b.TestCharacter,
             })
             .ToList();
 
@@ -2117,7 +2117,7 @@ WHERE "b"."Id" = 290
                 TestInt32 = 0,
                 TestUnsignedInt32 = 0,
                 TestInt64 = 0,
-                TestUnsignedInt64 = 0
+                TestUnsignedInt64 = 0,
             }
         );
 
@@ -2136,7 +2136,7 @@ WHERE "b"."Id" = 290
                 Int = (char)b.TestInt32,
                 Uint = (char)b.TestUnsignedInt32,
                 Long = (char)b.TestInt64,
-                Ulong = (char)b.TestUnsignedInt64
+                Ulong = (char)b.TestUnsignedInt64,
             })
             .First();
 
@@ -2154,7 +2154,7 @@ WHERE "b"."Id" = 290
                 Int = (char)b.TestInt32,
                 Uint = (char)b.TestUnsignedInt32,
                 Long = (char)b.TestInt64,
-                Ulong = (char)b.TestUnsignedInt64
+                Ulong = (char)b.TestUnsignedInt64,
             })
             .ToList();
 
@@ -2192,7 +2192,7 @@ WHERE "b"."Id" = 291
                 subtract = dt1.TestDecimal - dt2.TestDecimal,
                 multiply = dt1.TestDecimal * dt2.TestDecimal,
                 divide = dt1.TestDecimal / dt2.TestDecimal,
-                negate = -dt1.TestDecimal
+                negate = -dt1.TestDecimal,
             }
         ).ToList();
 
@@ -2209,7 +2209,7 @@ WHERE "b"."Id" = 291
                 subtract = dt1.TestDecimal - dt2.TestDecimal,
                 multiply = dt1.TestDecimal * dt2.TestDecimal,
                 divide = dt1.TestDecimal / dt2.TestDecimal,
-                negate = -dt1.TestDecimal
+                negate = -dt1.TestDecimal,
             }
         ).ToList();
 

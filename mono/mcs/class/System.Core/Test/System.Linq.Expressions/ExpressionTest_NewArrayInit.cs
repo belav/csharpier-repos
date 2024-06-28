@@ -119,7 +119,7 @@ namespace MonoTests.System.Linq.Expressions
             Jan,
             Feb,
             Mar,
-            Apr
+            Apr,
         };
 
         [Test]

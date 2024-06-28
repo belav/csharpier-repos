@@ -262,7 +262,7 @@ internal class TestUtils
             EnableOutputCaching = true,
             AllowCacheStorage = true,
             AllowCacheLookup = true,
-            ResponseTime = DateTimeOffset.UtcNow
+            ResponseTime = DateTimeOffset.UtcNow,
         };
     }
 
@@ -291,7 +291,7 @@ internal class TestUtils
         httpContext ??= new DefaultHttpContext();
         httpContext.RequestServices = serviceProvider.Object;
 
-        return new OutputCacheContext() { HttpContext = httpContext, };
+        return new OutputCacheContext() { HttpContext = httpContext };
     }
 
     internal static void AssertLoggedMessages(

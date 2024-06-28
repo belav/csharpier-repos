@@ -36,7 +36,7 @@ namespace System.Security.Cryptography.X509Certificates
 #endif // !FEATURE_PAL
         SerializedStore = 0x04,
         Pkcs7 = 0x05,
-        Authenticode = 0x06
+        Authenticode = 0x06,
     }
 
     // DefaultKeySet, UserKeySet and MachineKeySet are mutually exclusive
@@ -50,7 +50,7 @@ namespace System.Security.Cryptography.X509Certificates
         MachineKeySet = 0x02,
         Exportable = 0x04,
         UserProtected = 0x08,
-        PersistKeySet = 0x10
+        PersistKeySet = 0x10,
     }
 
     [Serializable]

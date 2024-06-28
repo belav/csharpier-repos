@@ -60,7 +60,7 @@ internal class RequestContextFactory : IRequestContextFactory<RequestContext>, I
         )
         {
             var uri = uHandler.GetTextDocumentIdentifier(requestParam);
-            textDocumentIdentifier = new TextDocumentIdentifier { Uri = uri, };
+            textDocumentIdentifier = new TextDocumentIdentifier { Uri = uri };
         }
         else if (textDocumentIdentifierHandler is null)
         {

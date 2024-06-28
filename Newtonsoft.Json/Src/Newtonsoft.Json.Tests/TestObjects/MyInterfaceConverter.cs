@@ -41,7 +41,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
         private readonly List<IMyInterface> _writers = new List<IMyInterface>
         {
             new ConsoleWriter(),
-            new TraceWriter()
+            new TraceWriter(),
         };
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)

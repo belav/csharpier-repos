@@ -32,8 +32,8 @@ public class RecursiveQuery : AutoMapperSpecBase
                 Parent = new Source
                 {
                     Id = 2,
-                    Parent = new Source { }
-                }
+                    Parent = new Source { },
+                },
             },
             new Source
             {
@@ -41,9 +41,9 @@ public class RecursiveQuery : AutoMapperSpecBase
                 Parent = new Source
                 {
                     Id = 4,
-                    Parent = new Source { }
-                }
-            }
+                    Parent = new Source { },
+                },
+            },
         };
         var result = ProjectTo<Destination>(source.AsQueryable()).ToArray();
         result[0].Id.ShouldBe(1);

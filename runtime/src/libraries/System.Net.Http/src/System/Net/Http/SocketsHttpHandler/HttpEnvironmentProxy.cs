@@ -35,11 +35,9 @@ namespace System.Net.Http
             {
                 return null;
             }
-            return uri.Equals(_httpProxy)
-                ? _httpCred
-                : uri.Equals(_httpsProxy)
-                    ? _httpsCred
-                    : null;
+            return uri.Equals(_httpProxy) ? _httpCred
+                : uri.Equals(_httpsProxy) ? _httpsCred
+                : null;
         }
 
         public static HttpEnvironmentProxyCredentials? TryCreate(Uri? httpProxy, Uri? httpsProxy)

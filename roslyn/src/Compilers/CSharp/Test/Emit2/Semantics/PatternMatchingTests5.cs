@@ -664,7 +664,7 @@ struct C { public object Field3; }
                 // struct C { public object Field3; }
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Field3")
                     .WithArguments("C.Field3", "null")
-                    .WithLocation(11, 26)
+                    .WithLocation(11, 26),
             };
             var comp = CreateCompilation(
                 src,

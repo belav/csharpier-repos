@@ -46,7 +46,7 @@ namespace Microsoft.Interop
                             ? new
                             {
                                 Syntax = (MethodDeclarationSyntax)context.TargetNode,
-                                Symbol = methodSymbol
+                                Symbol = methodSymbol,
                             }
                             : null
                 )
@@ -63,7 +63,7 @@ namespace Microsoft.Interop
                     {
                         data.Syntax,
                         data.Symbol,
-                        Diagnostic = diagnostic
+                        Diagnostic = diagnostic,
                     };
                 }
             );
@@ -95,7 +95,7 @@ namespace Microsoft.Interop
                             {
                                 data.Left.Syntax,
                                 data.Left.Symbol,
-                                Environment = data.Right
+                                Environment = data.Right,
                             }
                     )
                     .Select(

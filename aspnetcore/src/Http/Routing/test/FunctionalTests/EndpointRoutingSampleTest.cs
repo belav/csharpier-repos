@@ -17,7 +17,7 @@ public class EndpointRoutingSampleTest : IDisposable
 
     public EndpointRoutingSampleTest()
     {
-        var hostBuilder = Program.GetHostBuilder(new[] { Program.EndpointRoutingScenario, });
+        var hostBuilder = Program.GetHostBuilder(new[] { Program.EndpointRoutingScenario });
         _host = hostBuilder.Build();
 
         _testServer = _host.GetTestServer();

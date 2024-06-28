@@ -38,7 +38,7 @@ public class SingletonCosmosClientWrapper : ISingletonCosmosClientWrapper
         var configuration = new CosmosClientOptions
         {
             ApplicationName = UserAgent,
-            Serializer = new JsonCosmosSerializer()
+            Serializer = new JsonCosmosSerializer(),
         };
 
         if (options.Region != null)

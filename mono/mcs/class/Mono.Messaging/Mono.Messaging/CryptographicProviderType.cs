@@ -45,6 +45,6 @@ namespace Mono.Messaging
         SttBrnd = 9,
         SttIss = 11,
         SttMer = 7,
-        SttRoot = 10
+        SttRoot = 10,
     }
 }

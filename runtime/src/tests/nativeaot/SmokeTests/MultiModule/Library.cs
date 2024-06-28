@@ -65,6 +65,6 @@ public class MultiModuleLibrary
     public enum MyEnum
     {
         One,
-        Two
+        Two,
     }
 }

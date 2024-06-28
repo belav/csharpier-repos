@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractInterface
         public enum OmniSharpExtractLocation
         {
             SameFile,
-            NewFile
+            NewFile,
         }
 
         public bool IsCancelled { get; }

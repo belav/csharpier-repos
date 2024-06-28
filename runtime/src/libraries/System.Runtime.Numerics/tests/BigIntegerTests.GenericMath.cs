@@ -52,7 +52,7 @@ namespace System.Numerics.Tests
         );
 
         internal static readonly BigInteger Int64MinValueTimesTwo = new BigInteger(
-            new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF, }
+            new byte[] { 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0xFF, 0xFF }
         );
 
         internal static readonly BigInteger Int128MaxValue = new BigInteger(
@@ -144,7 +144,7 @@ namespace System.Numerics.Tests
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             }
         );
 
@@ -1058,7 +1058,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1089,7 +1089,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1124,7 +1124,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.Slice(0, 20).ToArray()
             );
@@ -1155,7 +1155,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1190,7 +1190,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.Slice(0, 20).ToArray()
             );
@@ -1221,7 +1221,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1252,7 +1252,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1287,7 +1287,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -1407,7 +1407,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0x7F
+                    0x7F,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1438,7 +1438,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x80
+                    0x80,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1473,7 +1473,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.Slice(0, 20).ToArray()
             );
@@ -1504,7 +1504,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x80
+                    0x80,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1539,7 +1539,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.Slice(0, 20).ToArray()
             );
@@ -1570,7 +1570,7 @@ namespace System.Numerics.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x80
+                    0x80,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1601,7 +1601,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.Slice(0, 16).ToArray()
             );
@@ -1636,7 +1636,7 @@ namespace System.Numerics.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );

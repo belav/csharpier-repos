@@ -48,7 +48,7 @@ struct S
                 //         if (s != null) { }
                 Diagnostic(ErrorCode.WRN_NubExprIsConstBool2, "s != null")
                     .WithArguments("true", "S", "S?")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
             CreateCompilation(
                     source,
@@ -93,7 +93,7 @@ static class SC { }
                 //             _ = o as SC;
                 Diagnostic(ErrorCode.WRN_StaticInAsOrIs, "o as SC")
                     .WithArguments("SC")
-                    .WithLocation(7, 17)
+                    .WithLocation(7, 17),
             };
             CreateCompilation(
                     source,
@@ -145,7 +145,7 @@ class P
                 //         var i = ()=>{} + x;
                 Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+")
                     .WithArguments("+")
-                    .WithLocation(20, 24)
+                    .WithLocation(20, 24),
             };
             CreateCompilation(
                     source,

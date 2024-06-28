@@ -26,7 +26,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
                 iStartLine = startLine,
                 iStartIndex = startCharacterIndex,
                 iEndLine = endLine,
-                iEndIndex = endCharacterIndex
+                iEndIndex = endCharacterIndex,
             };
         }
     }

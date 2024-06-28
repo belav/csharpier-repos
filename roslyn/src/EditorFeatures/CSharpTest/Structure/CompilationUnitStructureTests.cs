@@ -187,7 +187,7 @@ public class CompilationUnitStructureTests
 
         var options = GetDefaultOptions() with
         {
-            CollapseImportsWhenFirstOpened = collapseUsingsByDefault
+            CollapseImportsWhenFirstOpened = collapseUsingsByDefault,
         };
 
         await VerifyBlockSpansAsync(

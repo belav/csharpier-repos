@@ -77,7 +77,9 @@ namespace System.Speech.Internal.SapiInterop
         // SPEI_MAX_SR = 56,
         SPEI_RESERVED1 = 30, // do not use
         SPEI_RESERVED2 = 33, // do not use
-        SPEI_RESERVED3 = 63 // do not use
+        SPEI_RESERVED3 =
+            63 // do not use
+        ,
     }
 
     [

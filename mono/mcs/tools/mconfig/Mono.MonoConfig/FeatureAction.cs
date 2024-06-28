@@ -40,13 +40,13 @@ namespace Mono.MonoConfig
     {
         Message,
         ShellScript,
-        Exec
+        Exec,
     }
 
     public enum ActionWhen
     {
         Before,
-        After
+        After,
     }
 
     public class FeatureAction

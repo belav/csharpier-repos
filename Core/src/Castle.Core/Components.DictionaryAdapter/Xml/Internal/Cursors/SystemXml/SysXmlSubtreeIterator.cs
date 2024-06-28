@@ -93,7 +93,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             Initial,
             Current,
-            End
+            End,
         }
     }
 }

@@ -1182,7 +1182,7 @@ public class UseCollectionExpressionForCreateTests
                 + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -1213,7 +1213,7 @@ public class UseCollectionExpressionForCreateTests
                 + s_basicCollectionApi,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net70,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 

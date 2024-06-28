@@ -744,7 +744,7 @@ namespace MonoTests.System.Configuration
             var settings = new Bug15818Settings2
             {
                 Text = "foo",
-                MyObject = new Bug15818Class { Name = "Some Name", Value = 15818 }
+                MyObject = new Bug15818Class { Name = "Some Name", Value = 15818 },
             };
             settings.Save();
 
@@ -761,7 +761,7 @@ namespace MonoTests.System.Configuration
             var settings = new Bug15818Settings2
             {
                 Text = "foo",
-                MyObject = new Bug15818Class { Name = "Some Name", Value = 15818 }
+                MyObject = new Bug15818Class { Name = "Some Name", Value = 15818 },
             };
             settings.Save();
 

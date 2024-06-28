@@ -181,7 +181,7 @@ namespace Mono.Linker
         public enum FileOutputKind
         {
             CSharp,
-            Xml
+            Xml,
         };
     }
 }

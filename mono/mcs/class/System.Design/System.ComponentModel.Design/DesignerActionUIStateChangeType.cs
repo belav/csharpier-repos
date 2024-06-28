@@ -37,6 +37,6 @@ namespace System.ComponentModel.Design
     {
         Show,
         Hide,
-        Refresh
+        Refresh,
     }
 }

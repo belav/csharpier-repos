@@ -326,7 +326,7 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
             IStoreStoredProcedureParameter storedProcedureParameter =>
                 storedProcedureParameter.Direction,
             IStoreStoredProcedureReturnValue => ParameterDirection.Output,
-            _ => ParameterDirection.Input
+            _ => ParameterDirection.Input,
         };
 
         // For the case where the same modification has both current and original value parameters, and corresponds to an in/out parameter,
@@ -341,11 +341,9 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
         {
             AddParameterCore(
                 columnModification.ParameterName,
-                columnModification.UseCurrentValue
-                    ? columnModification.Value
-                    : direction == ParameterDirection.InputOutput
-                        ? DBNull.Value
-                        : null
+                columnModification.UseCurrentValue ? columnModification.Value
+                    : direction == ParameterDirection.InputOutput ? DBNull.Value
+                    : null
             );
         }
 

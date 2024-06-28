@@ -56,7 +56,7 @@ namespace Microsoft.DotNet.CoreSetup.Test
             var (location, parentPath) = GetNewTestArtifactPath(appName);
             return new SingleFileTestApp(appName, selfContained, location)
             {
-                DirectoryToDelete = parentPath
+                DirectoryToDelete = parentPath,
             };
         }
 

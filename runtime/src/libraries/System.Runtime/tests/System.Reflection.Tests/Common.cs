@@ -9,7 +9,7 @@ namespace System.Reflection.Tests
     {
         Case1 = 1,
         Case2 = 2,
-        Case3 = 3
+        Case3 = 3,
     }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = false)]

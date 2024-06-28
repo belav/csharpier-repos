@@ -31,7 +31,7 @@ public class SqliteDatabaseModelFactory : DatabaseModelFactory
             "MEDIUMUINT",
             "UINT",
             "UINT32",
-            "UNSIGNEDINTEGER32"
+            "UNSIGNEDINTEGER32",
         };
 
     private static readonly HashSet<string> _ulongTypes =
@@ -41,7 +41,7 @@ public class SqliteDatabaseModelFactory : DatabaseModelFactory
             "UINT64",
             "ULONG",
             "UNSIGNEDINTEGER",
-            "UNSIGNEDINTEGER64"
+            "UNSIGNEDINTEGER64",
         };
 
     private static readonly HashSet<string> _byteTypes =
@@ -68,7 +68,7 @@ public class SqliteDatabaseModelFactory : DatabaseModelFactory
             "SMALLUINT",
             "UINT16",
             "UNSIGNEDINTEGER16",
-            "USHORT"
+            "USHORT",
         };
 
     private static readonly HashSet<string> _timeOnlyTypes =
@@ -95,7 +95,7 @@ public class SqliteDatabaseModelFactory : DatabaseModelFactory
         { "TIMESTAMP", typeof(DateTime) },
         { "UNIQUEIDENTIFIER", typeof(Guid) },
         { "UUID", typeof(Guid) },
-        { "XML", typeof(string) }
+        { "XML", typeof(string) },
     }
         .Concat(_boolTypes.Select(t => KeyValuePair.Create(t, typeof(bool))))
         .Concat(_byteTypes.Select(t => KeyValuePair.Create(t, typeof(byte))))
@@ -375,7 +375,7 @@ ORDER BY "cid"
                         StringComparison.OrdinalIgnoreCase
                     )
                         ? null
-                        : collation
+                        : collation,
                 }
             );
         }
@@ -913,7 +913,7 @@ ORDER BY "seq"
         var primaryKey = new DatabasePrimaryKey
         {
             Table = table,
-            Name = name.StartsWith("sqlite_", StringComparison.Ordinal) ? string.Empty : name
+            Name = name.StartsWith("sqlite_", StringComparison.Ordinal) ? string.Empty : name,
         };
 
         _logger.PrimaryKeyFound(name, table.Name);
@@ -978,7 +978,7 @@ WHERE "pk" = 1
         {
             Table = table,
             Name = string.Empty,
-            Columns = { column }
+            Columns = { column },
         };
     }
 
@@ -1006,7 +1006,7 @@ ORDER BY "seq"
                 Table = table,
                 Name = constraintName.StartsWith("sqlite_", StringComparison.Ordinal)
                     ? string.Empty
-                    : constraintName
+                    : constraintName,
             };
 
             _logger.UniqueConstraintFound(constraintName, table.Name);
@@ -1065,7 +1065,7 @@ ORDER BY "seq"
             {
                 Table = table,
                 Name = reader1.GetString(0),
-                IsUnique = reader1.GetBoolean(1)
+                IsUnique = reader1.GetBoolean(1),
             };
 
             _logger.IndexFound(index.Name, table.Name, index.IsUnique);
@@ -1151,7 +1151,7 @@ ORDER BY "id"
                 Table = table,
                 Name = string.Empty,
                 PrincipalTable = principalTable,
-                OnDelete = ConvertToReferentialAction(onDelete)
+                OnDelete = ConvertToReferentialAction(onDelete),
             };
 
             using var command2 = connection.CreateCommand();
@@ -1239,6 +1239,6 @@ ORDER BY "seq"
             "SET NULL" => ReferentialAction.SetNull,
             "SET DEFAULT" => ReferentialAction.SetDefault,
             "NO ACTION" => ReferentialAction.NoAction,
-            _ => null
+            _ => null,
         };
 }

@@ -2346,7 +2346,7 @@ namespace System.Text.RegularExpressions
                 '\uFF39',
                 '\uFF59',
                 '\uFF3A',
-                '\uFF5A'
+                '\uFF5A',
             ];
 
         private static ReadOnlySpan<ushort> EquivalenceFirstLevelLookup => // 64
@@ -2414,7 +2414,7 @@ namespace System.Text.RegularExpressions
                 0xffff,
                 0xffff,
                 0xffff,
-                0x2400
+                0x2400,
             ];
 
         private static ReadOnlySpan<ushort> EquivalenceCasingMap => // 10240
@@ -12658,7 +12658,7 @@ namespace System.Text.RegularExpressions
                 0xffff,
                 0xffff,
                 0xffff,
-                0xffff
+                0xffff,
             ];
     }
 }

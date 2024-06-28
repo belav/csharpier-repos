@@ -427,7 +427,7 @@ public class ManyToManyJoinEntityTypeConventionTest
             .Instance.CreateContextServices()
             .GetRequiredService<ProviderConventionSetBuilderDependencies>() with
         {
-            Logger = CreateLogger()
+            Logger = CreateLogger(),
         };
 
     private InternalModelBuilder CreateInternalModeBuilder() => new Model().Builder;

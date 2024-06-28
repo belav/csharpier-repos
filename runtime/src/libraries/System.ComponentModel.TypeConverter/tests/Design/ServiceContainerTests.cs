@@ -59,7 +59,7 @@ namespace System.ComponentModel.Design.Tests
                     null,
                     nullServiceProvider,
                     invalidServiceProvider,
-                    validServiceProvider
+                    validServiceProvider,
                 }
             )
             {
@@ -107,7 +107,7 @@ namespace System.ComponentModel.Design.Tests
                         null,
                         nullServiceProvider,
                         invalidServiceProvider,
-                        validServiceProvider
+                        validServiceProvider,
                     }
                 )
                 {
@@ -123,7 +123,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(object),
                         "abc",
                         promote,
-                        "abc"
+                        "abc",
                     };
                     yield return new object[]
                     {
@@ -131,7 +131,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(string),
                         "abc",
                         promote,
-                        "abc"
+                        "abc",
                     };
                 }
             }
@@ -382,7 +382,7 @@ namespace System.ComponentModel.Design.Tests
                     null,
                     nullServiceProvider,
                     invalidServiceProvider,
-                    validServiceProvider
+                    validServiceProvider,
                 }
             )
             {
@@ -441,7 +441,7 @@ namespace System.ComponentModel.Design.Tests
                         null,
                         nullServiceProvider,
                         invalidServiceProvider,
-                        validServiceProvider
+                        validServiceProvider,
                     }
                 )
                 {
@@ -456,7 +456,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(object),
                         callback,
                         promote,
-                        "abc"
+                        "abc",
                     };
                     yield return new object[]
                     {
@@ -464,7 +464,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(string),
                         callback,
                         promote,
-                        "abc"
+                        "abc",
                     };
                     yield return new object[]
                     {
@@ -472,7 +472,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(int),
                         callback,
                         promote,
-                        null
+                        null,
                     };
 
                     yield return new object[]
@@ -481,7 +481,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(object),
                         nullCallback,
                         promote,
-                        null
+                        null,
                     };
                     yield return new object[]
                     {
@@ -489,7 +489,7 @@ namespace System.ComponentModel.Design.Tests
                         typeof(int),
                         nullCallback,
                         promote,
-                        null
+                        null,
                     };
                 }
 
@@ -502,7 +502,7 @@ namespace System.ComponentModel.Design.Tests
                     typeof(int),
                     callback,
                     promote,
-                    o
+                    o,
                 };
             }
         }

@@ -58,7 +58,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     new byte[] { 1 },
                     new byte[] { 2 },
                     new byte[] { 3 },
-                    new byte[] { 4 }
+                    new byte[] { 4 },
                 }
             },
             {
@@ -68,7 +68,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     _dateTimeOffset1,
                     _dateTimeOffset2,
                     _dateTimeOffset1,
-                    _dateTimeOffset2
+                    _dateTimeOffset2,
                 }
             },
             { typeof(DateTime), new object?[] { _dateTime1, _dateTime2, _dateTime1, _dateTime2 } },
@@ -80,7 +80,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     TheExperience.Jimi,
                     TheExperience.Mitch,
                     TheExperience.Noel,
-                    TheExperience.Jimi
+                    TheExperience.Jimi,
                 }
             },
             {
@@ -100,7 +100,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     _physicalAddress1,
                     _physicalAddress2,
                     _physicalAddress1,
-                    _physicalAddress2
+                    _physicalAddress2,
                 }
             },
             { typeof(TimeSpan), new object?[] { _timeSpan1, _timeSpan2, _timeSpan1, _timeSpan2 } },
@@ -140,7 +140,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     _dateTimeOffset1.ToString(_dateTimeOffsetFormat),
                     _dateTimeOffset2.ToString(_dateTimeOffsetFormat),
                     _dateTimeOffset1.ToString(_dateTimeOffsetFormat),
-                    _dateTimeOffset2.ToString(_dateTimeOffsetFormat)
+                    _dateTimeOffset2.ToString(_dateTimeOffsetFormat),
                 }
             },
             {
@@ -150,7 +150,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     _dateTime1.ToString(_dateTimeFormat),
                     _dateTime2.ToString(_dateTimeFormat),
                     _dateTime1.ToString(_dateTimeFormat),
-                    _dateTime2.ToString(_dateTimeFormat)
+                    _dateTime2.ToString(_dateTimeFormat),
                 }
             },
             {
@@ -160,7 +160,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     _dateOnly1.ToString(_dateOnlyFormat),
                     _dateOnly2.ToString(_dateOnlyFormat),
                     _dateOnly1.ToString(_dateOnlyFormat),
-                    _dateOnly2.ToString(_dateOnlyFormat)
+                    _dateOnly2.ToString(_dateOnlyFormat),
                 }
             },
             { typeof(string), new object?[] { "A", "<null>", "C", "<null>" } },
@@ -171,7 +171,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     nameof(TheExperience.Jimi),
                     nameof(TheExperience.Mitch),
                     nameof(TheExperience.Noel),
-                    nameof(TheExperience.Jimi)
+                    nameof(TheExperience.Jimi),
                 }
             },
             {
@@ -181,7 +181,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     Guid.NewGuid().ToString(),
                     Guid.NewGuid().ToString(),
                     Guid.NewGuid().ToString(),
-                    Guid.NewGuid().ToString()
+                    Guid.NewGuid().ToString(),
                 }
             },
             { typeof(ulong), new object?[] { "77", "0", "78", "0" } },
@@ -194,7 +194,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
                     _timeSpan1.ToString(),
                     _timeSpan2.ToString(),
                     _timeSpan1.ToString(),
-                    _timeSpan2.ToString()
+                    _timeSpan2.ToString(),
                 }
             },
         };
@@ -1145,7 +1145,7 @@ public abstract class ValueConvertersEndToEndTestBase<TFixture> : IClassFixture<
     {
         Jimi,
         Noel,
-        Mitch
+        Mitch,
     }
 
     protected class ListOfIntToJsonConverter : ValueConverter<List<int>, string>

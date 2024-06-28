@@ -30,7 +30,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             params DiagnosticResult[] expected
         )
         {
-            var test = new Test { TestCode = source, };
+            var test = new Test { TestCode = source };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync(CancellationToken.None);

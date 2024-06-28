@@ -1869,7 +1869,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x02,
             0x02,
             0x07,
-            0xD0
+            0xD0,
         };
 
         public static byte[] intca_cer =
@@ -2438,7 +2438,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0xE0,
             0x21,
             0xA0,
-            0xFB
+            0xFB,
         };
 
         public static byte[] root_cer =
@@ -2987,7 +2987,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0xF8,
             0x7B,
             0xA9,
-            0xA8
+            0xA8,
         };
 
         private void DefaultProperties(SignedCms sp, int version)
@@ -4202,7 +4202,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x78,
                 0x6F,
                 0x97,
-                0x67
+                0x67,
             };
             SignedCms sp = new SignedCms();
             sp.Decode(signature);
@@ -5022,7 +5022,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x78,
                 0x6F,
                 0x97,
-                0x67
+                0x67,
             };
             SignedCms sp = new SignedCms();
             sp.Decode(signature);
@@ -5882,7 +5882,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x78,
                 0x6F,
                 0x97,
-                0x67
+                0x67,
             };
             SignedCms sp = new SignedCms();
             sp.Decode(signature);

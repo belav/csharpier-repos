@@ -402,35 +402,35 @@ namespace System.Net.Http.Tests
                     i == 0,
                     "http://proxy.com",
                     "http://request.com",
-                    "http://proxy.com"
+                    "http://proxy.com",
                 };
                 yield return new object[]
                 {
                     i == 0,
                     "http://proxy.com https://secure-proxy.com",
                     "http://request.com",
-                    "http://proxy.com"
+                    "http://proxy.com",
                 };
                 yield return new object[]
                 {
                     i == 0,
                     "http://proxy-a.com https://secure-proxy.com http://proxy-b.com",
                     "http://request.com",
-                    "http://proxy-a.com;http://proxy-b.com"
+                    "http://proxy-a.com;http://proxy-b.com",
                 };
                 yield return new object[]
                 {
                     i == 0,
                     "http://proxy-a.com https://secure-proxy.com http://proxy-b.com",
                     "https://request.com",
-                    "http://secure-proxy.com"
+                    "http://secure-proxy.com",
                 };
                 yield return new object[]
                 {
                     i == 0,
                     "http://proxy-a.com https://secure-proxy-a.com http://proxy-b.com  https://secure-proxy-b.com  https://secure-proxy-c.com",
                     "https://request.com",
-                    "http://secure-proxy-a.com;http://secure-proxy-b.com;http://secure-proxy-c.com"
+                    "http://secure-proxy-a.com;http://secure-proxy-b.com;http://secure-proxy-c.com",
                 };
             }
         }

@@ -42,5 +42,5 @@ public class Test_Dev11_457559
 
 public enum MyEnum
 {
-    Value0 = 0
+    Value0 = 0,
 }

@@ -76,7 +76,7 @@ namespace RabbitMQ.Client.Content
         Single = 0x08,
         Double = 0x09,
         String = 0x0A,
-        Null = 0x0B
+        Null = 0x0B,
     };
 
     ///<summary>Internal support class for use in reading and writing

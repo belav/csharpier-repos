@@ -16,7 +16,7 @@ public class ControllerLinkGeneratorExtensionsTest
     {
         var endpoint1 = CreateEndpoint(
             "Home/Index/{id}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
 
@@ -50,18 +50,18 @@ public class ControllerLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "Home/Index/{id}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
         var endpoint2 = CreateEndpoint(
             "Home/Index/{id?}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
-        var httpContext = CreateHttpContext(new { controller = "Home", });
+        var httpContext = CreateHttpContext(new { controller = "Home" });
         httpContext.Request.PathBase = new PathString("/Foo/Bar?encodeme?");
 
         // Act
@@ -70,7 +70,7 @@ public class ControllerLinkGeneratorExtensionsTest
             action: "Index",
             values: new RouteValueDictionary(new { query = "some?query" }),
             fragment: new FragmentString("#Fragment?"),
-            options: new LinkOptions() { AppendTrailingSlash = true, }
+            options: new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -83,12 +83,12 @@ public class ControllerLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "Home/Index/{id}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
         var endpoint2 = CreateEndpoint(
             "Home/Index/{id?}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
 
@@ -101,7 +101,7 @@ public class ControllerLinkGeneratorExtensionsTest
             values: new RouteValueDictionary(new { query = "some?query" }),
             new PathString("/Foo/Bar?encodeme?"),
             new FragmentString("#Fragment?"),
-            new LinkOptions() { AppendTrailingSlash = true, }
+            new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -114,12 +114,12 @@ public class ControllerLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "Home/Index/{id}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
         var endpoint2 = CreateEndpoint(
             "Home/Index/{id?}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
 
@@ -135,7 +135,7 @@ public class ControllerLinkGeneratorExtensionsTest
             controller: "Home",
             values: new RouteValueDictionary(new { query = "some?query" }),
             fragment: new FragmentString("#Fragment?"),
-            options: new LinkOptions() { AppendTrailingSlash = true, }
+            options: new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -148,12 +148,12 @@ public class ControllerLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "Home/Index/{id}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
         var endpoint2 = CreateEndpoint(
             "Home/Index/{id?}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
 
@@ -168,7 +168,7 @@ public class ControllerLinkGeneratorExtensionsTest
             new HostString("example.com"),
             new PathString("/Foo/Bar?encodeme?"),
             new FragmentString("#Fragment?"),
-            new LinkOptions() { AppendTrailingSlash = true, }
+            new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert
@@ -184,18 +184,18 @@ public class ControllerLinkGeneratorExtensionsTest
         // Arrange
         var endpoint1 = CreateEndpoint(
             "Home/Index/{id}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
         var endpoint2 = CreateEndpoint(
             "Home/Index/{id?}",
-            defaults: new { controller = "Home", action = "Index", },
+            defaults: new { controller = "Home", action = "Index" },
             requiredValues: new { controller = "Home", action = "Index" }
         );
 
         var linkGenerator = CreateLinkGenerator(endpoint1, endpoint2);
 
-        var httpContext = CreateHttpContext(new { controller = "Home", action = "Index", });
+        var httpContext = CreateHttpContext(new { controller = "Home", action = "Index" });
         httpContext.Request.Scheme = "http";
         httpContext.Request.Host = new HostString("example.com");
         httpContext.Request.PathBase = new PathString("/Foo/Bar?encodeme?");
@@ -205,7 +205,7 @@ public class ControllerLinkGeneratorExtensionsTest
             httpContext,
             values: new RouteValueDictionary(new { query = "some?query" }),
             fragment: new FragmentString("#Fragment?"),
-            options: new LinkOptions() { AppendTrailingSlash = true, }
+            options: new LinkOptions() { AppendTrailingSlash = true }
         );
 
         // Assert

@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ',',
                 '&',
                 '*',
-                '`'
+                '`',
             };
             private static readonly string[] s_callingConventionStrings =
             {
@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 "[cdecl]",
                 "[fastcall]",
                 "[stdcall]",
-                "[thiscall]"
+                "[thiscall]",
             };
 
             private static readonly ParameterInfo[] s_noParameters = Array.Empty<ParameterInfo>();

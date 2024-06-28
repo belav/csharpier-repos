@@ -18,7 +18,7 @@ public class ProtobufWeatherStreamFormatter : IStreamFormatter<SocialWeather.Wea
                 Temperature = protoWeatherReport.Temperature,
                 ReportTime = protoWeatherReport.ReportTime,
                 Weather = (Weather)(int)protoWeatherReport.Weather,
-                ZipCode = protoWeatherReport.ZipCode
+                ZipCode = protoWeatherReport.ZipCode,
             }
         );
     }
@@ -31,7 +31,7 @@ public class ProtobufWeatherStreamFormatter : IStreamFormatter<SocialWeather.Wea
             Temperature = weatherReport.Temperature,
             ReportTime = weatherReport.ReportTime,
             Weather = (Protobuf.WeatherReport.Types.WeatherKind)(int)weatherReport.Weather,
-            ZipCode = weatherReport.ZipCode
+            ZipCode = weatherReport.ZipCode,
         };
 
         outputStream.WriteMessage(protoWeatherReport);

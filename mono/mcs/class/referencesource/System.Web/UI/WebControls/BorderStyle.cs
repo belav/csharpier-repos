@@ -83,6 +83,6 @@ namespace System.Web.UI.WebControls
         ///       An outset line border.
         ///    </para>
         /// </devdoc>
-        Outset = 9
+        Outset = 9,
     }
 }

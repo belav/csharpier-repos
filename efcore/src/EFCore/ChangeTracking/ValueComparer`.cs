@@ -243,17 +243,16 @@ public class ValueComparer<
         }
 
         var expression =
-            type == typeof(int)
-                ? param
-                : unwrappedType == typeof(int)
-                || unwrappedType == typeof(short)
-                || unwrappedType == typeof(byte)
-                || unwrappedType == typeof(uint)
-                || unwrappedType == typeof(ushort)
-                || unwrappedType == typeof(sbyte)
-                || unwrappedType == typeof(char)
-                    ? (Expression)Expression.Convert(param, typeof(int))
-                    : Expression.Call(param, ObjectGetHashCodeMethod);
+            type == typeof(int) ? param
+            : unwrappedType == typeof(int)
+            || unwrappedType == typeof(short)
+            || unwrappedType == typeof(byte)
+            || unwrappedType == typeof(uint)
+            || unwrappedType == typeof(ushort)
+            || unwrappedType == typeof(sbyte)
+            || unwrappedType == typeof(char)
+                ? (Expression)Expression.Convert(param, typeof(int))
+            : Expression.Call(param, ObjectGetHashCodeMethod);
 
         return Expression.Lambda<Func<T, int>>(expression, param);
     }

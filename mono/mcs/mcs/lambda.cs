@@ -42,7 +42,7 @@ namespace Mono.CSharp
                 ec.BuiltinTypes.Void
             )
             {
-                CurrentAnonymousMethod = ec.CurrentAnonymousMethod
+                CurrentAnonymousMethod = ec.CurrentAnonymousMethod,
             };
 
             Expression args = Parameters.CreateExpressionTree(bc, loc);

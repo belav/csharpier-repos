@@ -38,24 +38,24 @@ namespace System.ComponentModel.Tests
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorAdded,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorDeleted,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorChanged,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[] { ListChangedType.Reset, new MockPropertyDescriptor() };
             yield return new object[] { ListChangedType.Reset - 1, new MockPropertyDescriptor() };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorChanged + 1,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
         }
 
@@ -104,50 +104,50 @@ namespace System.ComponentModel.Tests
             {
                 ListChangedType.ItemChanged,
                 0,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.ItemDeleted,
                 1,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.ItemMoved,
                 2,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorAdded,
                 3,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorDeleted,
                 4,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorChanged,
                 5,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[] { ListChangedType.Reset, 6, new MockPropertyDescriptor() };
             yield return new object[]
             {
                 ListChangedType.Reset - 1,
                 7,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
             yield return new object[]
             {
                 ListChangedType.PropertyDescriptorChanged + 1,
                 8,
-                new MockPropertyDescriptor()
+                new MockPropertyDescriptor(),
             };
         }
 

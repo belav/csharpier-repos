@@ -20,8 +20,8 @@ namespace System.Xml.NameTableTests
                             "Add a new atomized string (padded with chars at the end), valid offset and length = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -35,8 +35,8 @@ namespace System.Xml.NameTableTests
                             "Add a new atomized string (padded with chars at both front and end), valid offset and length = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -50,8 +50,8 @@ namespace System.Xml.NameTableTests
                             "Add a new atomized string (padded with chars at the front), valid offset and length = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -65,8 +65,8 @@ namespace System.Xml.NameTableTests
                             "Add a new atomized string (padded a char at the end), valid offset and length = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -80,8 +80,8 @@ namespace System.Xml.NameTableTests
                             "Add a new atomized string (padded with a char at both front and end), valid offset and length = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -95,8 +95,8 @@ namespace System.Xml.NameTableTests
                             "Add a new atomized string (padded with a char at the front), valid offset and length = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -108,7 +108,7 @@ namespace System.Xml.NameTableTests
                     {
                         Attribute = new Variation(
                             "Add new string between 1M - 2M in size, valid offset and length"
-                        )
+                        ),
                     }
                 );
             }
@@ -120,7 +120,7 @@ namespace System.Xml.NameTableTests
                     {
                         Attribute = new Variation(
                             "Add an existing atomized string (with Max string for test: 1-2M), valid offset and valid length"
-                        )
+                        ),
                     }
                 );
             }
@@ -134,8 +134,8 @@ namespace System.Xml.NameTableTests
                             "Add new string, and do Get with a combination of the same string in different order"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -149,8 +149,8 @@ namespace System.Xml.NameTableTests
                             "Add new string, and Add a combination of the same string in different case, all are different objects"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -164,8 +164,8 @@ namespace System.Xml.NameTableTests
                             "Add 1M new string, and do Get with the last char different than the original string"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -179,8 +179,8 @@ namespace System.Xml.NameTableTests
                             "Add new alpha numeric, valid offset, valid length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -192,8 +192,8 @@ namespace System.Xml.NameTableTests
                     {
                         Attribute = new Variation("Add new alpha numeric, valid offset, length= 0")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -207,8 +207,8 @@ namespace System.Xml.NameTableTests
                             "Add new with whitespace, valid offset, valid length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -222,8 +222,8 @@ namespace System.Xml.NameTableTests
                             "Add new with sign characters, valid offset, valid length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -237,8 +237,8 @@ namespace System.Xml.NameTableTests
                             "Add new string between 1M - 2M in size, valid offset and length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -252,8 +252,8 @@ namespace System.Xml.NameTableTests
                             "Add new string, get object using permutations of upper & lowercase, should be null"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -267,8 +267,8 @@ namespace System.Xml.NameTableTests
                             "Add an empty atomized string, valid offset and length = 0"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -282,8 +282,8 @@ namespace System.Xml.NameTableTests
                             "Add an empty atomized string (array char only), valid offset and length = 1"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -297,8 +297,8 @@ namespace System.Xml.NameTableTests
                             "Add a NULL atomized string, valid offset and length = 0"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -312,8 +312,8 @@ namespace System.Xml.NameTableTests
                             "Add a NULL atomized string, valid offset and length = 1"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -327,8 +327,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid offset and length = 0"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -342,8 +342,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid offset and length > valid_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -357,8 +357,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid offset and length = max_int"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -372,8 +372,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid offset and length = - 1"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -387,8 +387,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid length and offset > str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -402,8 +402,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid length and offset = max_int"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -417,8 +417,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid length and offset = str_length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -432,8 +432,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, valid length and offset = - 1"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -447,8 +447,8 @@ namespace System.Xml.NameTableTests
                             "Add a valid atomized string, with both invalid offset and length"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }

@@ -237,8 +237,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                         objectCreationExpression,
                         cancellationToken
                     ),
-                PrimaryConstructorBaseTypeSyntax baseType =>
-                    GetPrimaryConstructorParameterLists(semanticModel, baseType, cancellationToken),
+                PrimaryConstructorBaseTypeSyntax baseType => GetPrimaryConstructorParameterLists(
+                    semanticModel,
+                    baseType,
+                    cancellationToken
+                ),
                 _ => null,
             };
         }

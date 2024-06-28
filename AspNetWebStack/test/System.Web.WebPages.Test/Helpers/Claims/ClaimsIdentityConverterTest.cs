@@ -39,7 +39,7 @@ namespace System.Web.Helpers.Claims.Test
                 new Func<IIdentity, ClaimsIdentity>[]
                 {
                     _ => null,
-                    i => (i == identity) ? claimsIdentity : null
+                    i => (i == identity) ? claimsIdentity : null,
                 }
             );
 
@@ -61,7 +61,7 @@ namespace System.Web.Helpers.Claims.Test
                     _ =>
                     {
                         throw new Exception("Should never be called.");
-                    }
+                    },
                 }
             );
 

@@ -101,7 +101,7 @@ public class RemoteAuthenticationService<
         _loggingOptions = new RemoteAuthenticationServiceJavaScriptLoggingOptions
         {
             DebugEnabled = logger?.IsEnabled(LogLevel.Debug) ?? false,
-            TraceEnabled = logger?.IsEnabled(LogLevel.Trace) ?? false
+            TraceEnabled = logger?.IsEnabled(LogLevel.Trace) ?? false,
         };
     }
 
@@ -183,7 +183,7 @@ public class RemoteAuthenticationService<
                 ? new InteractiveRequestOptions
                 {
                     Interaction = InteractionType.GetToken,
-                    ReturnUrl = GetReturnUrl(null)
+                    ReturnUrl = GetReturnUrl(null),
                 }
                 : null
         );

@@ -815,7 +815,7 @@ public abstract class ControllerBase
         string? fragment
     )
     {
-        return new RedirectToRouteResult(routeName, routeValues, fragment) { UrlHelper = Url, };
+        return new RedirectToRouteResult(routeName, routeValues, fragment) { UrlHelper = Url };
     }
 
     /// <summary>

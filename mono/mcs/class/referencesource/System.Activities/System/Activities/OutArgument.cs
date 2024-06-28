@@ -102,7 +102,7 @@ namespace System.Activities
             {
                 this.Expression = new DelegateArgumentReference<T>
                 {
-                    DelegateArgument = delegateArgument
+                    DelegateArgument = delegateArgument,
                 };
             }
         }

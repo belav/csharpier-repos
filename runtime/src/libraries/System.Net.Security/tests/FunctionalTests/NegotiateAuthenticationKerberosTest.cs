@@ -40,7 +40,7 @@ namespace System.Net.Security.Tests
                             KerberosExecutor.DefaultUserPassword,
                             "LINUX.CONTOSO.COM"
                         ),
-                        TargetName = $"HTTP/linux.contoso.com"
+                        TargetName = $"HTTP/linux.contoso.com",
                     };
                 NegotiateAuthenticationServerOptions serverOptions = new() { };
                 NegotiateAuthentication clientNegotiateAuthentication = new(clientOptions);

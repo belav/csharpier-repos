@@ -71,7 +71,7 @@ public class RazorComponentEndpointDataSourceTest
                 new IComponentRenderMode[]
                 {
                     RenderMode.InteractiveServer,
-                    RenderMode.InteractiveWebAssembly
+                    RenderMode.InteractiveWebAssembly,
                 },
                 new[] { typeof(ServerEndpointProvider), typeof(WebassemblyEndpointProvider) },
                 new[] { typeof(AutoComponent) },
@@ -104,7 +104,7 @@ public class RazorComponentEndpointDataSourceTest
                 new IComponentRenderMode[]
                 {
                     RenderMode.InteractiveServer,
-                    RenderMode.InteractiveWebAssembly
+                    RenderMode.InteractiveWebAssembly,
                 },
                 new[] { typeof(ServerEndpointProvider), typeof(WebassemblyEndpointProvider) },
                 new[] { typeof(WebAssemblyComponent) },
@@ -137,7 +137,7 @@ public class RazorComponentEndpointDataSourceTest
                 new IComponentRenderMode[]
                 {
                     RenderMode.InteractiveServer,
-                    RenderMode.InteractiveWebAssembly
+                    RenderMode.InteractiveWebAssembly,
                 },
                 new[] { typeof(ServerEndpointProvider), typeof(WebassemblyEndpointProvider) },
                 new[] { typeof(ServerComponent) },
@@ -217,7 +217,7 @@ public class RazorComponentEndpointDataSourceTest
                     {
                         AssemblyName = "TestAssembly",
                         ComponentType = t,
-                        RenderMode = t.GetCustomAttribute<RenderModeAttribute>()
+                        RenderMode = t.GetCustomAttribute<RenderModeAttribute>(),
                     })
                     .ToArray()
             )

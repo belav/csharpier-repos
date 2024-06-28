@@ -252,7 +252,7 @@ namespace MonoTests.System.Linq.Expressions
         enum Foo
         {
             Bar,
-            Baz
+            Baz,
         }
 
         [Test]

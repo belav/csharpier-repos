@@ -19,7 +19,7 @@ public class BuildSource
             BuildReference.ByName("System.Linq.Expressions"),
             BuildReference.ByName("System.Runtime"),
             BuildReference.ByName("System.Runtime.Extensions"),
-            BuildReference.ByName("System.Text.RegularExpressions")
+            BuildReference.ByName("System.Text.RegularExpressions"),
         };
 
     public string TargetDir { get; set; }
@@ -226,7 +226,7 @@ All diagnostics:
                 // Assembly 'AssemblyName1' uses 'TypeName' which has a higher version than referenced assembly 'AssemblyName2'
                 { "CS1705", ReportDiagnostic.Suppress },
                 // Unnecessary using directive.
-                { "CS8019", ReportDiagnostic.Suppress }
+                { "CS8019", ReportDiagnostic.Suppress },
             }
         );
 }

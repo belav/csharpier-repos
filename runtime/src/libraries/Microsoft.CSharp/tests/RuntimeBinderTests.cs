@@ -94,7 +94,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     typeof(Microsoft.CSharp.RuntimeBinder.RuntimeBinderException),
                     new CSharpArgumentInfo[]
                     {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -113,7 +113,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     typeof(System.Exception),
                     new CSharpArgumentInfo[]
                     {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -300,7 +300,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                 }
             );
             CallSite<Func<CallSite, object, object, object>> site = CallSite<
@@ -322,7 +322,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                 }
             );
             CallSite<Func<CallSite, object, object, object>> site = CallSite<
@@ -386,7 +386,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -417,7 +417,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
                             ),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -438,7 +438,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     GetType(),
                     new[]
                     {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );

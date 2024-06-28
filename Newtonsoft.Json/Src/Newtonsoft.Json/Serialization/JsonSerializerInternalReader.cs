@@ -58,7 +58,7 @@ namespace Newtonsoft.Json.Serialization
         {
             None = 0,
             Null = 1,
-            Value = 2
+            Value = 2,
         }
 
         public JsonSerializerInternalReader(JsonSerializer serializer)
@@ -3133,7 +3133,7 @@ namespace Newtonsoft.Json.Serialization
                                 new CreatorPropertyContext(property.PropertyName!)
                                 {
                                     Property = property,
-                                    Presence = PropertyPresence.None
+                                    Presence = PropertyPresence.None,
                                 }
                             );
                         }
@@ -3464,7 +3464,7 @@ namespace Newtonsoft.Json.Serialization
                         {
                             ConstructorProperty =
                                 contract.CreatorParameters.GetClosestMatchProperty(memberName),
-                            Property = contract.Properties.GetClosestMatchProperty(memberName)
+                            Property = contract.Properties.GetClosestMatchProperty(memberName),
                         };
                         propertyValues.Add(creatorPropertyContext);
 

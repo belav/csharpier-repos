@@ -500,7 +500,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                         DiagnosticTag.Unnecessary,
                         VSDiagnosticTags.HiddenInEditor,
                         VSDiagnosticTags.HiddenInErrorList,
-                        VSDiagnosticTags.SuppressEditorToolTip
+                        VSDiagnosticTags.SuppressEditorToolTip,
                     ];
                     diagnosticsBuilder.Add(additionalDiagnostic);
                 }
@@ -519,9 +519,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                         Location = new LSP.Location
                         {
                             Range = GetRange(l),
-                            Uri = ProtocolConversions.CreateAbsoluteUri(l.UnmappedFileSpan.Path)
+                            Uri = ProtocolConversions.CreateAbsoluteUri(l.UnmappedFileSpan.Path),
                         },
-                        Message = diagnostic.Message
+                        Message = diagnostic.Message,
                     })
                     .ToArray();
                 diagnostic.RelatedInformation = diagnosticRelatedInformation;
@@ -551,7 +551,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     Severity = ConvertDiagnosticSeverity(diagnosticData.Severity, capabilities),
                     Tags = ConvertTags(diagnosticData, diagnosticSource.IsLiveSource()),
                     DiagnosticRank = ConvertRank(diagnosticData),
-                    Range = GetRange(diagnosticData.DataLocation)
+                    Range = GetRange(diagnosticData.DataLocation),
                 };
 
                 if (capabilities.HasVisualStudioLspCapability())
@@ -605,7 +605,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     {
                         Character = dataLocation.UnmappedFileSpan.EndLinePosition.Character,
                         Line = dataLocation.UnmappedFileSpan.EndLinePosition.Line,
-                    }
+                    },
                 };
             }
 
@@ -677,10 +677,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 // that will hide the item in a client that knows about those tags.
                 DiagnosticSeverity.Hidden => LSP.DiagnosticSeverity.Hint,
                 // VSCode shows information diagnostics as blue squiggles, and hint diagnostics as 3 dots.  We prefer the latter rendering so we return hint diagnostics in vscode.
-                DiagnosticSeverity.Info =>
-                    clientCapabilities.HasVisualStudioLspCapability()
-                        ? LSP.DiagnosticSeverity.Information
-                        : LSP.DiagnosticSeverity.Hint,
+                DiagnosticSeverity.Info => clientCapabilities.HasVisualStudioLspCapability()
+                    ? LSP.DiagnosticSeverity.Information
+                    : LSP.DiagnosticSeverity.Hint,
                 DiagnosticSeverity.Warning => LSP.DiagnosticSeverity.Warning,
                 DiagnosticSeverity.Error => LSP.DiagnosticSeverity.Error,
                 _ => throw ExceptionUtilities.UnexpectedValue(severity),

@@ -79,7 +79,7 @@ namespace MonoTests.System.Reflection
         {
             None = 0,
             Foo = 1,
-            Bar = 2
+            Bar = 2,
         };
 
         public static void paramMethod(

@@ -118,7 +118,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
                 ["name"] = name,
                 ["outputDir"] = outputDir,
                 ["contextType"] = contextType,
-                ["namespace"] = @namespace
+                ["namespace"] = @namespace,
             }
         );
 
@@ -139,7 +139,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
             {
                 ["contextType"] = contextType,
                 ["connectionString"] = connectionString,
-                ["noConnect"] = noConnect
+                ["noConnect"] = noConnect,
             }
         );
 
@@ -162,7 +162,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
             {
                 ["targetMigration"] = migration,
                 ["connectionString"] = connectionString,
-                ["contextType"] = contextType
+                ["contextType"] = contextType,
             }
         );
 
@@ -176,7 +176,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
             {
                 ["outputDir"] = outputDir,
                 ["modelNamespace"] = modelNamespace,
-                ["contextType"] = contextType
+                ["contextType"] = contextType,
             }
         );
 
@@ -213,7 +213,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
                 ["modelNamespace"] = modelNamespace,
                 ["contextNamespace"] = contextNamespace,
                 ["suppressOnConfiguring"] = suppressOnConfiguring,
-                ["noPluralize"] = noPluralize
+                ["noPluralize"] = noPluralize,
             }
         );
 
@@ -232,7 +232,7 @@ internal abstract class OperationExecutorBase : IOperationExecutor
                 ["toMigration"] = toMigration,
                 ["idempotent"] = idempotent,
                 ["noTransactions"] = noTransactions,
-                ["contextType"] = contextType
+                ["contextType"] = contextType,
             }
         );
 

@@ -43,21 +43,21 @@ namespace System.Linq.Parallel.Tests
                     ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
                     parms[1],
                     ((Labeled<ParallelQuery<int>>)parms[2]).Order(),
-                    parms[3]
+                    parms[3],
                 };
                 yield return new object[]
                 {
                     ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
                     parms[1],
                     parms[2],
-                    parms[3]
+                    parms[3],
                 };
                 yield return new object[]
                 {
                     parms[0],
                     parms[1],
                     ((Labeled<ParallelQuery<int>>)parms[2]).Order(),
-                    parms[3]
+                    parms[3],
                 };
             }
         }

@@ -190,7 +190,7 @@ public class InMemoryStore<TUser, TRole>
             {
                 ClaimType = claim.Type,
                 ClaimValue = claim.Value,
-                RoleId = role.Id
+                RoleId = role.Id,
             }
         );
         return Task.FromResult(0);

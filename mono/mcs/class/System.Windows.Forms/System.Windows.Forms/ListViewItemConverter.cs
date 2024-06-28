@@ -110,7 +110,7 @@ namespace System.Windows.Forms
                     typeof(string),
                     typeof(Color),
                     typeof(Color),
-                    typeof(Font)
+                    typeof(Font),
                 };
 
                 constructor_info = typeof(ListViewItem.ListViewSubItem).GetConstructor(type);
@@ -121,7 +121,7 @@ namespace System.Windows.Forms
                         sub_item.Text,
                         sub_item.ForeColor,
                         sub_item.BackColor,
-                        sub_item.Font
+                        sub_item.Font,
                     };
                     return new InstanceDescriptor(constructor_info, (ICollection)arguments, true);
                 }

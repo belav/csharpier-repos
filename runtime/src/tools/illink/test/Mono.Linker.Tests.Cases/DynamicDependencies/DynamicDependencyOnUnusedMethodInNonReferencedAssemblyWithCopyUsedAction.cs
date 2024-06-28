@@ -9,7 +9,7 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
         "library.dll",
         new[]
         {
-            "Dependencies/DynamicDependencyOnUnusedMethodInNonReferencedAssemblyWithCopyUsedAction_Lib.cs"
+            "Dependencies/DynamicDependencyOnUnusedMethodInNonReferencedAssemblyWithCopyUsedAction_Lib.cs",
         },
         addAsReference: false
     )]

@@ -68,12 +68,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             capabilities.DefinitionProvider = true;
             capabilities.DocumentHighlightProvider = true;
-            capabilities.RenameProvider = new RenameOptions { PrepareProvider = true, };
+            capabilities.RenameProvider = new RenameOptions { PrepareProvider = true };
             capabilities.ImplementationProvider = true;
             capabilities.CodeActionProvider = new CodeActionOptions
             {
                 CodeActionKinds = [CodeActionKind.QuickFix, CodeActionKind.Refactor],
-                ResolveProvider = true
+                ResolveProvider = true,
             };
             capabilities.CompletionProvider =
                 new VisualStudio.LanguageServer.Protocol.CompletionOptions
@@ -85,7 +85,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
             capabilities.SignatureHelpProvider = new SignatureHelpOptions
             {
-                TriggerCharacters = ["(", ","]
+                TriggerCharacters = ["(", ","],
             };
             capabilities.DocumentSymbolProvider = true;
             capabilities.WorkspaceSymbolProvider = true;
@@ -94,19 +94,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             capabilities.DocumentOnTypeFormattingProvider = new DocumentOnTypeFormattingOptions
             {
                 FirstTriggerCharacter = "}",
-                MoreTriggerCharacter = [";", "\n"]
+                MoreTriggerCharacter = [";", "\n"],
             };
-            capabilities.ReferencesProvider = new ReferenceOptions { WorkDoneProgress = true, };
+            capabilities.ReferencesProvider = new ReferenceOptions { WorkDoneProgress = true };
 
             capabilities.FoldingRangeProvider = true;
             capabilities.ExecuteCommandProvider = new ExecuteCommandOptions()
             {
-                Commands = Array.Empty<string>()
+                Commands = Array.Empty<string>(),
             };
             capabilities.TextDocumentSync = new TextDocumentSyncOptions
             {
                 Change = TextDocumentSyncKind.Incremental,
-                OpenClose = true
+                OpenClose = true,
             };
 
             capabilities.HoverProvider = true;
@@ -124,8 +124,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                     TokenTypes = SemanticTokensSchema
                         .GetSchema(clientCapabilities.HasVisualStudioLspCapability())
                         .AllTokenTypes.ToArray(),
-                    TokenModifiers = SemanticTokensSchema.TokenModifiers
-                }
+                    TokenModifiers = SemanticTokensSchema.TokenModifiers,
+                },
             };
 
             capabilities.CodeLensProvider = new CodeLensOptions
@@ -145,7 +145,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             // Using VS server capabilities because we have our own custom client.
             capabilities.OnAutoInsertProvider = new VSInternalDocumentOnAutoInsertOptions
             {
-                TriggerCharacters = ["'", "/", "\n"]
+                TriggerCharacters = ["'", "/", "\n"],
             };
 
             if (!supportsVsExtensions)

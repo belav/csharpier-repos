@@ -253,7 +253,7 @@ namespace System.Linq.Parallel.Tests
                     "ThrowOnFirstEnumeration",
                     Enumerables<int>.ThrowOnEnumeration().AsParallel()
                 ),
-                8
+                8,
             };
         }
 

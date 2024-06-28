@@ -17,13 +17,13 @@ namespace System.Speech.Internal.SapiInterop
         SPRST_ACTIVE = 0x00000001,
         SPRST_ACTIVE_ALWAYS = 0x00000002,
         SPRST_INACTIVE_WITH_PURGE = 0x00000003,
-        SPRST_NUM_STATES = 0x00000004
+        SPRST_NUM_STATES = 0x00000004,
     }
 
     internal enum SPLOADOPTIONS
     {
         SPLO_STATIC = 0x00000000,
-        SPLO_DYNAMIC = 0x00000001
+        SPLO_DYNAMIC = 0x00000001,
     }
 
     internal enum SPRULESTATE
@@ -31,7 +31,7 @@ namespace System.Speech.Internal.SapiInterop
         SPRS_INACTIVE = 0x00000000,
         SPRS_ACTIVE = 0x00000001,
         SPRS_ACTIVE_WITH_AUTO_PAUSE = 0x00000003,
-        SPRS_ACTIVE_USER_DELIMITED = 0x00000004
+        SPRS_ACTIVE_USER_DELIMITED = 0x00000004,
     }
 
     internal enum SPGRAMMAROPTIONS
@@ -57,13 +57,13 @@ namespace System.Speech.Internal.SapiInterop
             | SPGO_FILE
             | SPGO_HTTP
             | SPGO_RES
-            | SPGO_OBJECT
+            | SPGO_OBJECT,
     }
 
     internal enum SPSTREAMFORMATTYPE
     {
         SPWF_INPUT = 0x00000000,
-        SPWF_SRENGINE = 0x00000001
+        SPWF_SRENGINE = 0x00000001,
     }
 
     [Flags]
@@ -74,7 +74,7 @@ namespace System.Speech.Internal.SapiInterop
         SECFIgnoreWidth = 0x00020000,
         SECFNoSpecialChars = 0x20000000,
         SECFEmulateResult = 0x40000000,
-        SECFDefault = SECFIgnoreCase | SECFIgnoreKanaType | SECFIgnoreWidth
+        SECFDefault = SECFIgnoreCase | SECFIgnoreKanaType | SECFIgnoreWidth,
     }
 
     [Flags]
@@ -84,7 +84,7 @@ namespace System.Speech.Internal.SapiInterop
         SPADS_CurrentRecognizer = 0x0001,
         SPADS_RecoProfile = 0x0002,
         SPADS_Immediate = 0x0004,
-        SPADS_Reset = 0x0008
+        SPADS_Reset = 0x0008,
     }
 
     internal enum SPADAPTATIONRELEVANCE
@@ -92,7 +92,7 @@ namespace System.Speech.Internal.SapiInterop
         SPAR_Unknown = 0,
         SPAR_Low = 1,
         SPAR_Medium = 2,
-        SPAR_High = 3
+        SPAR_High = 3,
     }
 
     [Flags]
@@ -104,7 +104,7 @@ namespace System.Speech.Internal.SapiInterop
         SPREF_ExtendableParse = 0x0008,
         SPREF_ReSent = 0x0010,
         SPREF_Hypothesis = 0x0020,
-        SPREF_FalseRecognition = 0x0040
+        SPREF_FalseRecognition = 0x0040,
     }
 
     [Flags]
@@ -113,13 +113,13 @@ namespace System.Speech.Internal.SapiInterop
         SPBO_NONE = 0x0000,
         SPBO_PAUSE = 0x0001,
         SPBO_AHEAD = 0x0002,
-        SPBO_TIME_UNITS = 0x0004
+        SPBO_TIME_UNITS = 0x0004,
     }
 
     internal enum SPAUDIOOPTIONS
     {
         SPAO_NONE = 0,
-        SPAO_RETAIN_AUDIO = 1
+        SPAO_RETAIN_AUDIO = 1,
     }
 
     [Flags]
@@ -127,7 +127,7 @@ namespace System.Speech.Internal.SapiInterop
     {
         SPESF_NONE = 0x00,
         SPESF_STREAM_RELEASED = 0x01,
-        SPESF_EMULATED = 0x02
+        SPESF_EMULATED = 0x02,
     };
 
     [Flags]
@@ -135,7 +135,7 @@ namespace System.Speech.Internal.SapiInterop
     {
         SPCF_NONE = 0x00,
         SPCF_ADD_TO_USER_LEXICON = 0x01,
-        SPCF_DEFINITE_CORRECTION = 0x02
+        SPCF_DEFINITE_CORRECTION = 0x02,
     };
 
     internal enum SPAUDIOSTATE
@@ -143,19 +143,19 @@ namespace System.Speech.Internal.SapiInterop
         SPAS_CLOSED = 0,
         SPAS_STOP = 1,
         SPAS_PAUSE = 2,
-        SPAS_RUN = 3
+        SPAS_RUN = 3,
     }
 
     internal enum SPXMLRESULTOPTIONS
     {
         SPXRO_SML = 0x00000000,
-        SPXRO_Alternates_SML = 0x00000001
+        SPXRO_Alternates_SML = 0x00000001,
     }
 
     internal enum SPCONTEXTSTATE
     {
         SPCS_DISABLED = 0,
-        SPCS_ENABLED = 1
+        SPCS_ENABLED = 1,
     }
 
     internal enum SPINTERFERENCE
@@ -166,14 +166,14 @@ namespace System.Speech.Internal.SapiInterop
         SPINTERFERENCE_TOOLOUD = 3,
         SPINTERFERENCE_TOOQUIET = 4,
         SPINTERFERENCE_TOOFAST = 5,
-        SPINTERFERENCE_TOOSLOW = 6
+        SPINTERFERENCE_TOOSLOW = 6,
     }
 
     internal enum SPGRAMMARSTATE
     {
         SPGS_DISABLED = 0,
         SPGS_ENABLED = 1,
-        SPGS_EXCLUSIVE = 3
+        SPGS_EXCLUSIVE = 3,
     }
 
     [Flags]
@@ -181,7 +181,7 @@ namespace System.Speech.Internal.SapiInterop
     {
         SPRA_NONE = 0,
         SPRA_APP_UPS = 0x0001,
-        SPRA_ENGINE_UPS = 0x0002
+        SPRA_ENGINE_UPS = 0x0002,
     }
 
     #endregion
@@ -509,7 +509,7 @@ namespace System.Speech.Internal.SapiInterop
                         ),
                         ulAudioSizeTime = unchecked(
                             (uint)(word._audioDuration.Ticks * 10000 / TimeSpan.TicksPerMillisecond)
-                        )
+                        ),
                     };
 
                     // DLP information

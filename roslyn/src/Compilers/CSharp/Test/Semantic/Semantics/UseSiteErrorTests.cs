@@ -2459,6 +2459,7 @@ class C
                     new[]
                     {
                         libRef /* and not missingRef */
+                        ,
                     }
                 )
                 .VerifyDiagnostics(
@@ -2574,6 +2575,7 @@ class Derived : Base
                     new[]
                     {
                         libRef /* and not missingRef */
+                        ,
                     }
                 )
                 .VerifyDiagnostics(
@@ -2648,6 +2650,7 @@ class Test
                     new[]
                     {
                         libRef /* and not missingRef */
+                        ,
                     }
                 )
                 .VerifyDiagnostics(
@@ -2729,6 +2732,7 @@ class Test
                     new[]
                     {
                         libRef /* and not missingRef */
+                        ,
                     }
                 )
                 .VerifyDiagnostics(
@@ -2810,6 +2814,7 @@ class Test
                     new[]
                     {
                         libRef /* and not missingRef */
+                        ,
                     }
                 )
                 .VerifyDiagnostics(
@@ -2890,6 +2895,7 @@ class Test
                     new[]
                     {
                         libRef /* and not missingRef */
+                        ,
                     }
                 )
                 .VerifyDiagnostics(
@@ -3210,7 +3216,7 @@ class Test
                         "GeneralException",
                         "Base, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
-                    .WithLocation(11, 20)
+                    .WithLocation(11, 20),
             };
 
             comp3.VerifyDiagnostics(expected);
@@ -3281,7 +3287,7 @@ namespace System
                 {
                     unavailableAssemblyReference,
                     csharpAssemblyReference,
-                    ilAssemblyReference
+                    ilAssemblyReference,
                 }
             );
             successfulCompilation.VerifyDiagnostics(); // No diagnostics when reference is present

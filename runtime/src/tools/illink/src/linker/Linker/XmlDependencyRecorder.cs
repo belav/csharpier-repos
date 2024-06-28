@@ -52,7 +52,7 @@ namespace Mono.Linker
             XmlWriterSettings settings = new XmlWriterSettings
             {
                 Indent = true,
-                IndentChars = "\t"
+                IndentChars = "\t",
             };
 
             fileName ??= DefaultDependenciesFileName;

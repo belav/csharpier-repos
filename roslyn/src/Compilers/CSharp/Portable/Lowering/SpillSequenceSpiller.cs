@@ -170,7 +170,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     AddStatement(
                         new BoundExpressionStatement(expression.Syntax, expression)
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         }
                     );
                 }
@@ -196,10 +196,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             null,
                             new TreeDumperNode[]
                             {
-                                BoundTreeDumperNodeProducer.MakeTree(this.Value)
+                                BoundTreeDumperNodeProducer.MakeTree(this.Value),
                             }
                         ),
-                        new TreeDumperNode("type", this.Type, null)
+                        new TreeDumperNode("type", this.Type, null),
                     }
                 );
                 return TreeDumper.DumpCompact(node);
@@ -358,7 +358,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 builder.GetStatements()
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
 
             builder.Free();
@@ -732,7 +732,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                                 RefKind: RefKind.Ref
                                             } originalReceiverReference
                                         }
-                                    }
+                                    },
                                 ],
                                 Value: BoundLocal
                                 {
@@ -1390,7 +1390,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 receiverType
                             )
                             {
-                                WasCompilerGenerated = true
+                                WasCompilerGenerated = true,
                             }
                         )
                     );

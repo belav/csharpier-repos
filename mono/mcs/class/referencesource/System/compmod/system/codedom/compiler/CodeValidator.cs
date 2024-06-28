@@ -27,7 +27,7 @@ namespace System.CodeDom.Compiler
             '\n',
             '\u2028',
             '\u2029',
-            '\u0085'
+            '\u0085',
         };
 
         internal void ValidateIdentifiers(CodeObject e)

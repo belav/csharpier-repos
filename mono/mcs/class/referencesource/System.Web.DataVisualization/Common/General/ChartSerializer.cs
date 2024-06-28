@@ -68,7 +68,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Binary serializer format.
         /// </summary>
-        Binary
+        Binary,
     }
 
     /// <summary>
@@ -95,7 +95,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// All content is serialized.
         /// </summary>
-        All = Default | Data | Appearance
+        All = Default | Data | Appearance,
     }
 
     #endregion

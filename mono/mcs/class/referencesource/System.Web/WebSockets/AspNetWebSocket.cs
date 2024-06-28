@@ -826,6 +826,7 @@ namespace System.Web.WebSockets
             Ready, // this channel is available for transmitting new frames
             Busy, // the channel is already busy transmitting frames
             Closed // this channel has been closed
+            ,
         }
     }
 }

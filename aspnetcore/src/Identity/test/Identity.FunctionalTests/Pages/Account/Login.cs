@@ -96,7 +96,7 @@ public class Login : DefaultUIPage
             new Dictionary<string, string>()
             {
                 ["Input_Email"] = userName,
-                ["Input_Password"] = password
+                ["Input_Password"] = password,
             }
         );
     }

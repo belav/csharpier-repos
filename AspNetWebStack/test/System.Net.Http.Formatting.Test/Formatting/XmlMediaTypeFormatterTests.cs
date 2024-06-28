@@ -45,11 +45,11 @@ namespace System.Net.Http.Formatting
             );
 
         public static readonly TheoryDataSet<Type> AFewValidTypes =
-            new() { typeof(bool), typeof(int), typeof(string), };
+            new() { typeof(bool), typeof(int), typeof(string) };
 
         public static IEnumerable<TestData> BunchOfTypedObjectsTestDataCollection
         {
-            get { return new TestData[] { BunchOfTypedObjectsTestData, }; }
+            get { return new TestData[] { BunchOfTypedObjectsTestData }; }
         }
 
         public override IEnumerable<MediaTypeHeaderValue> ExpectedSupportedMediaTypes
@@ -81,7 +81,7 @@ namespace System.Net.Http.Formatting
             {
                 Indent = true,
                 MaxDepth = 42,
-                UseXmlSerializer = true
+                UseXmlSerializer = true,
             };
 
             TestXmlMediaTypeFormatter derivedFormatter = new TestXmlMediaTypeFormatter(formatter);
@@ -163,7 +163,7 @@ namespace System.Net.Http.Formatting
         {
             XmlMediaTypeFormatter xmlFormatter = new XmlMediaTypeFormatter
             {
-                UseXmlSerializer = false
+                UseXmlSerializer = false,
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
@@ -193,7 +193,7 @@ namespace System.Net.Http.Formatting
         {
             XmlMediaTypeFormatter xmlFormatter = new XmlMediaTypeFormatter
             {
-                UseXmlSerializer = false
+                UseXmlSerializer = false,
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
@@ -228,7 +228,7 @@ namespace System.Net.Http.Formatting
             XmlMediaTypeFormatter xmlFormatter = new XmlMediaTypeFormatter
             {
                 UseXmlSerializer = false,
-                Indent = true
+                Indent = true,
             };
             MemoryStream memoryStream = new MemoryStream();
             HttpContent content = new StringContent(String.Empty);
@@ -595,7 +595,7 @@ namespace System.Net.Http.Formatting
                 TestXmlMediaTypeFormatter formatter = new TestXmlMediaTypeFormatter();
                 formatter.SetSerializer(
                     variationType,
-                    new XmlSerializer(variationType, new Type[] { typeof(DBNull), })
+                    new XmlSerializer(variationType, new Type[] { typeof(DBNull) })
                 );
 
                 // Arrange & Act & Assert
@@ -679,7 +679,7 @@ namespace System.Net.Http.Formatting
                 TestXmlMediaTypeFormatter formatter = new TestXmlMediaTypeFormatter();
                 formatter.SetSerializer(
                     variationType,
-                    new DataContractSerializer(variationType, new Type[] { typeof(DBNull), })
+                    new DataContractSerializer(variationType, new Type[] { typeof(DBNull) })
                 );
 
                 // Arrange & Act & Assert
@@ -806,7 +806,7 @@ namespace System.Net.Http.Formatting
             Type variationType = typeof(string);
             formatter.SetSerializer(
                 variationType,
-                new DataContractSerializer(variationType, new Type[] { typeof(DBNull), })
+                new DataContractSerializer(variationType, new Type[] { typeof(DBNull) })
             );
             object testData = DBNull.Value;
 

@@ -58,7 +58,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Videogame starcraft = new Videogame
             {
                 Name = "Starcraft",
-                ReleaseDate = new DateTime(1998, 1, 1)
+                ReleaseDate = new DateTime(1998, 1, 1),
             };
 
             string json = JsonConvert.SerializeObject(starcraft, Formatting.Indented);

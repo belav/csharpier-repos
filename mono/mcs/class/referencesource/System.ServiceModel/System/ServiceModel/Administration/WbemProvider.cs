@@ -1207,7 +1207,7 @@ namespace System.ServiceModel.Administration
                                 ts.Minutes,
                                 ts.Seconds,
                                 ts.Milliseconds,
-                                microSeconds
+                                microSeconds,
                             }
                         );
                     }

@@ -635,7 +635,7 @@ namespace Microsoft.CodeAnalysis.Emit
 
             return new EmitOptions(this)
             {
-                FallbackSourceFileEncoding = fallbackSourceFileEncoding
+                FallbackSourceFileEncoding = fallbackSourceFileEncoding,
             };
         }
     }

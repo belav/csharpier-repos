@@ -64,7 +64,7 @@ namespace R2RTest
                 WorkingDirectory = workingDirectory,
                 Arguments = arguments,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
             };
 
             Process p = new Process();

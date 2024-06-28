@@ -150,8 +150,8 @@ class Test2
         var typeName4 = [|typeof(Double).Name|];
     }
 }
-"
-                    }
+",
+                    },
                 },
                 FixedState =
                 {
@@ -182,8 +182,8 @@ class Test2
     }
 }
 ",
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -222,7 +222,7 @@ class Test2
         var typeName4 = [|typeof(Double).Name|];
     }
 }
-"
+",
                     },
                     AdditionalProjects =
                     {
@@ -238,10 +238,10 @@ class Test3
         var typeName2 = [|typeof(int).Name|]; var typeName3 = [|typeof(System.String).Name|];
     }
 }
-"
-                            }
-                        }
-                    }
+",
+                            },
+                        },
+                    },
                 },
                 FixedState =
                 {
@@ -271,7 +271,7 @@ class Test2
         var typeName4 = nameof(Double);
     }
 }
-"
+",
                     },
                     AdditionalProjects =
                     {
@@ -287,11 +287,11 @@ class Test3
         var typeName2 = nameof(System.Int32); var typeName3 = nameof(System.String);
     }
 }
-"
-                            }
-                        }
-                    }
-                }
+",
+                            },
+                        },
+                    },
+                },
             }.RunAsync();
         }
     }

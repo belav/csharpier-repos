@@ -29,7 +29,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "nop", "ldc.i4 0x0", "brfalse.s il_8", "ret", })]
+        [ExpectedInstructionSequence(new[] { "nop", "ldc.i4 0x0", "brfalse.s il_8", "ret" })]
         static void TestSimpleStaticCall()
         {
             if (StaticBool(4))
@@ -122,7 +122,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
 
         [Kept]
         [ExpectedInstructionSequence(
-            new[] { "nop", "ldc.i4.s 0x9", "ldc.i4.1", "bne.un.s il_6", "ret", }
+            new[] { "nop", "ldc.i4.s 0x9", "ldc.i4.1", "bne.un.s il_6", "ret" }
         )]
         static void TestConditionalStaticCall()
         {
@@ -184,7 +184,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "nop", "ldnull", "brfalse.s il_4", "ret", })]
+        [ExpectedInstructionSequence(new[] { "nop", "ldnull", "brfalse.s il_4", "ret" })]
         static void TestNullPropagation()
         {
             if (GetNull(2) is not null)
@@ -229,7 +229,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
 
         [Kept]
         [ExpectedInstructionSequence(
-            new[] { "nop", "ldc.i4.0", "ldc.i4.1", "bne.un.s il_5", "ret", }
+            new[] { "nop", "ldc.i4.0", "ldc.i4.1", "bne.un.s il_5", "ret" }
         )]
         static void TestRecursionFromDeadCode()
         {

@@ -102,7 +102,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <summary>
         /// Serialize as XML element
         /// </summary>
-        Element
+        Element,
     }
 
     /// <summary>
@@ -128,7 +128,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
         /// <summary>
         /// Chart is resetting
         /// </summary>
-        Resetting
+        Resetting,
     }
 
     #endregion
@@ -2699,7 +2699,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
                 '\0',
                 '\0',
                 '\0',
-                '\0'
+                '\0',
             };
             writer.Write(header);
 

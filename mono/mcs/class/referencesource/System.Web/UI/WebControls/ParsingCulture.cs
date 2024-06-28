@@ -18,6 +18,6 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// <see cref='System.Globalization.CultureInfo.CurrentCulture'/> is used.
         /// </summary>
-        Current
+        Current,
     }
 }

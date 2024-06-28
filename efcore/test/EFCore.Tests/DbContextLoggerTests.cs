@@ -180,7 +180,7 @@ public class DbContextLoggerTests
                         CoreEventId.StartedTracking,
                         CoreEventId.StateChanged,
                         CoreEventId.ValueGenerated,
-                        CoreEventId.CascadeDelete
+                        CoreEventId.CascadeDelete,
                     }
                 )
         );

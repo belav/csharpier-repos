@@ -243,7 +243,7 @@ public class ApiBehaviorApplicationModelProviderTest
     )
     {
         options =
-            options ?? new ApiBehaviorOptions { InvalidModelStateResponseFactory = _ => null, };
+            options ?? new ApiBehaviorOptions { InvalidModelStateResponseFactory = _ => null };
         var optionsAccessor = Options.Create(options);
 
         return new ApiBehaviorApplicationModelProvider(

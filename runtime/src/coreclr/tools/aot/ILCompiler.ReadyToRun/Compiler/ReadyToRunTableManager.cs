@@ -28,7 +28,7 @@ namespace ILCompiler
     {
         NonInstantiated,
         Instantiated,
-        All
+        All,
     }
 
     // TODO-REFACTOR: merge with the table manager

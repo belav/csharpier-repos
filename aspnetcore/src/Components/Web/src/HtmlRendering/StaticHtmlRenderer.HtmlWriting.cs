@@ -28,7 +28,7 @@ public partial class StaticHtmlRenderer
         "param",
         "source",
         "track",
-        "wbr"
+        "wbr",
     };
 
     private static readonly CascadingParameterInfo _findFormMappingContext =

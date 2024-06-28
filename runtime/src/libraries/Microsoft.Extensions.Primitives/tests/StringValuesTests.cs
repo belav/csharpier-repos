@@ -21,7 +21,7 @@ namespace Microsoft.Extensions.Primitives
                     new StringValues((string)null),
                     new StringValues((string[])null),
                     (string)null,
-                    (string[])null
+                    (string[])null,
                 };
             }
         }
@@ -34,7 +34,7 @@ namespace Microsoft.Extensions.Primitives
                 {
                     StringValues.Empty,
                     new StringValues(new string[0]),
-                    new string[0]
+                    new string[0],
                 };
             }
         }
@@ -52,7 +52,7 @@ namespace Microsoft.Extensions.Primitives
                     "abc",
                     new[] { "abc" },
                     new[] { "abc", "bcd" },
-                    new[] { "abc", "bcd", "foo" }
+                    new[] { "abc", "bcd", "foo" },
                 };
             }
         }
@@ -68,7 +68,7 @@ namespace Microsoft.Extensions.Primitives
                     { new StringValues(new string[] { }), (string)null },
                     { new StringValues(string.Empty), string.Empty },
                     { new StringValues(new string[] { string.Empty }), string.Empty },
-                    { new StringValues("abc"), "abc" }
+                    { new StringValues("abc"), "abc" },
                 };
             }
         }
@@ -85,7 +85,7 @@ namespace Microsoft.Extensions.Primitives
                     { new StringValues("abc"), (object)"abc" },
                     { new StringValues("abc"), (object)new[] { "abc" } },
                     { new StringValues(new[] { "abc" }), (object)new[] { "abc" } },
-                    { new StringValues(new[] { "abc", "bcd" }), (object)new[] { "abc", "bcd" } }
+                    { new StringValues(new[] { "abc", "bcd" }), (object)new[] { "abc", "bcd" } },
                 };
             }
         }
@@ -125,7 +125,7 @@ namespace Microsoft.Extensions.Primitives
                     {
                         new[] { "abc", "bcd", "foo", string.Empty },
                         new[] { "abc", "bcd", "foo", string.Empty }
-                    }
+                    },
                 };
             }
         }
@@ -157,7 +157,7 @@ namespace Microsoft.Extensions.Primitives
                     { new[] { string.Empty, "abc", "bcd", "foo" }, "abc,bcd,foo" },
                     { new[] { "abc", string.Empty, "bcd", "foo" }, "abc,bcd,foo" },
                     { new[] { "abc", "bcd", "foo", string.Empty }, "abc,bcd,foo" },
-                    { new[] { "abc", "bcd", "foo", string.Empty, null }, "abc,bcd,foo" }
+                    { new[] { "abc", "bcd", "foo", string.Empty, null }, "abc,bcd,foo" },
                 };
             }
         }

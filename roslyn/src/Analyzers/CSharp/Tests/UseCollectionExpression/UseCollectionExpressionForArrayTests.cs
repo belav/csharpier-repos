@@ -1034,7 +1034,7 @@ public class UseCollectionExpressionForArrayTests
                         .WithSpan(5, 22, 5, 39)
                         .WithSpan(5, 22, 5, 27)
                         .WithSeverity(DiagnosticSeverity.Hidden),
-                }
+                },
             },
             LanguageVersion = LanguageVersion.CSharp12,
             CodeFixTestBehaviors = CodeFixTestBehaviors.FixOne,
@@ -2731,7 +2731,7 @@ public class UseCollectionExpressionForArrayTests
                 int[] i = [1, 2, 3];
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -2757,7 +2757,7 @@ public class UseCollectionExpressionForArrayTests
                 ];
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -2785,7 +2785,7 @@ public class UseCollectionExpressionForArrayTests
                 ];
                 """.ReplaceLineEndings(endOfLine),
             LanguageVersion = LanguageVersion.CSharp12,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 

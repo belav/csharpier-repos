@@ -132,7 +132,7 @@ public class WsFederationHandler
 
         var redirectContext = new RedirectContext(Context, Scheme, Options, properties)
         {
-            ProtocolMessage = wsFederationMessage
+            ProtocolMessage = wsFederationMessage,
         };
         await Events.RedirectToIdentityProvider(redirectContext);
 
@@ -238,7 +238,7 @@ public class WsFederationHandler
                 properties
             )
             {
-                ProtocolMessage = wsFederationMessage
+                ProtocolMessage = wsFederationMessage,
             };
             await Events.MessageReceived(messageReceivedContext);
             if (messageReceivedContext.Result != null)
@@ -280,7 +280,7 @@ public class WsFederationHandler
                 properties
             )
             {
-                ProtocolMessage = wsFederationMessage
+                ProtocolMessage = wsFederationMessage,
             };
             await Events.SecurityTokenReceived(securityTokenReceivedContext);
             if (securityTokenReceivedContext.Result != null)
@@ -433,7 +433,7 @@ public class WsFederationHandler
             )
             {
                 ProtocolMessage = wsFederationMessage,
-                Exception = exception
+                Exception = exception,
             };
 
             await Events.AuthenticationFailed(authenticationFailedContext);
@@ -542,7 +542,7 @@ public class WsFederationHandler
 
         var redirectContext = new RedirectContext(Context, Scheme, Options, properties)
         {
-            ProtocolMessage = wsFederationMessage
+            ProtocolMessage = wsFederationMessage,
         };
         await Events.RedirectToIdentityProvider(redirectContext);
 

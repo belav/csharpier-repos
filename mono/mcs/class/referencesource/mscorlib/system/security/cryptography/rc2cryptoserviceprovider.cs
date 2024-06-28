@@ -22,7 +22,12 @@ namespace System.Security.Cryptography
 
         private static KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(40, 128, 8) // cryptoAPI implementation only goes up to 128
+            new KeySizes(
+                40,
+                128,
+                8
+            ) // cryptoAPI implementation only goes up to 128
+            ,
         };
 
         //

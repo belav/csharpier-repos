@@ -303,7 +303,7 @@ public static partial class HubConnectionExtensions
                 typeof(T4),
                 typeof(T5),
                 typeof(T6),
-                typeof(T7)
+                typeof(T7),
             },
             args =>
                 handler(
@@ -354,7 +354,7 @@ public static partial class HubConnectionExtensions
                 typeof(T5),
                 typeof(T6),
                 typeof(T7),
-                typeof(T8)
+                typeof(T8),
             },
             args =>
                 handler(
@@ -573,7 +573,7 @@ public static partial class HubConnectionExtensions
                 typeof(T4),
                 typeof(T5),
                 typeof(T6),
-                typeof(T7)
+                typeof(T7),
             },
             args =>
                 handler(
@@ -624,7 +624,7 @@ public static partial class HubConnectionExtensions
                 typeof(T5),
                 typeof(T6),
                 typeof(T7),
-                typeof(T8)
+                typeof(T8),
             },
             args =>
                 handler(

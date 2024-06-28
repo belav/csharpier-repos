@@ -143,7 +143,7 @@ internal class RootCommand : CommandBase
                     {
                         "x86" => "win-x86",
                         "ARM64" => "win-arm64",
-                        _ => "any"
+                        _ => "any",
                     },
                     "ef.exe"
                 );

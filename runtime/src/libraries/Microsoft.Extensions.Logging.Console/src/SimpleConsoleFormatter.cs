@@ -185,7 +185,7 @@ namespace Microsoft.Extensions.Logging.Console
                 LogLevel.Warning => "warn",
                 LogLevel.Error => "fail",
                 LogLevel.Critical => "crit",
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel))
+                _ => throw new ArgumentOutOfRangeException(nameof(logLevel)),
             };
         }
 
@@ -209,12 +209,14 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 LogLevel.Trace => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
                 LogLevel.Debug => new ConsoleColors(ConsoleColor.Gray, ConsoleColor.Black),
-                LogLevel.Information =>
-                    new ConsoleColors(ConsoleColor.DarkGreen, ConsoleColor.Black),
+                LogLevel.Information => new ConsoleColors(
+                    ConsoleColor.DarkGreen,
+                    ConsoleColor.Black
+                ),
                 LogLevel.Warning => new ConsoleColors(ConsoleColor.Yellow, ConsoleColor.Black),
                 LogLevel.Error => new ConsoleColors(ConsoleColor.Black, ConsoleColor.DarkRed),
                 LogLevel.Critical => new ConsoleColors(ConsoleColor.White, ConsoleColor.DarkRed),
-                _ => new ConsoleColors(null, null)
+                _ => new ConsoleColors(null, null),
             };
         }
 

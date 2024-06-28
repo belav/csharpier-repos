@@ -144,7 +144,7 @@ class C1
                 //         t1 = /*<bind>*/new T() { 1, b ? 2 : 3 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, b ? 2 : 3 }")
                     .WithArguments("T")
-                    .WithLocation(9, 24)
+                    .WithLocation(9, 24),
             };
 
             // Asserts that no ITypeParameterObjectCreationOperation is generated in this tree
@@ -537,7 +537,7 @@ class C1
                 //         t1 = /*<bind>*/new T() { 1, b ? 2 : 3 };
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "new T() { 1, 2 }")
                     .WithArguments("T")
-                    .WithLocation(9, 14)
+                    .WithLocation(9, 14),
             };
 
             string expectedFlowGraph =

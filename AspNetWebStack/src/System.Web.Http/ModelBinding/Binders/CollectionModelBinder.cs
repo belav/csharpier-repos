@@ -61,7 +61,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     ModelMetadata = actionContext
                         .GetMetadataProvider()
                         .GetMetadataForType(null, typeof(TElement)),
-                    ModelName = fullChildName
+                    ModelName = fullChildName,
                 };
 
                 bool didBind = false;
@@ -150,8 +150,8 @@ namespace System.Web.Http.ModelBinding.Binders
                             rawValueElement,
                             culture
                         ), // our temporary provider goes at the front of the list
-                        bindingContext.ValueProvider
-                    }
+                        bindingContext.ValueProvider,
+                    },
                 };
 
                 object boundValue = null;

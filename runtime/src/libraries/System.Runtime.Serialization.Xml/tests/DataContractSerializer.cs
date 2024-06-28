@@ -63,7 +63,7 @@ public static partial class DataContractSerializerTests
             ),
             new DateTimeOffset(new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Utc)),
             new DateTimeOffset(DateTime.SpecifyKind(DateTime.MinValue, DateTimeKind.Utc)),
-            new DateTimeOffset(DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc))
+            new DateTimeOffset(DateTime.SpecifyKind(DateTime.MaxValue, DateTimeKind.Utc)),
         };
         var serializedStrings = new string[]
         {
@@ -81,7 +81,7 @@ public static partial class DataContractSerializerTests
             ),
             @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>2013-01-02T03:04:05.006Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>",
             @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>0001-01-01T00:00:00Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>",
-            @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>9999-12-31T23:59:59.9999999Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>"
+            @"<DateTimeOffset xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System""><DateTime>9999-12-31T23:59:59.9999999Z</DateTime><OffsetMinutes>0</OffsetMinutes></DateTimeOffset>",
         };
         for (int i = 0; i < objs.Length; ++i)
         {
@@ -277,7 +277,7 @@ public static partial class DataContractSerializerTests
                 (decimal)0,
                 (decimal)2.3,
                 decimal.MinValue,
-                decimal.MaxValue
+                decimal.MaxValue,
             }
         )
         {
@@ -496,7 +496,7 @@ public static partial class DataContractSerializerTests
                 (short)0,
                 (short)2.3,
                 short.MinValue,
-                short.MaxValue
+                short.MaxValue,
             }
         )
         {
@@ -691,7 +691,7 @@ public static partial class DataContractSerializerTests
         SimpleType[] x = new SimpleType[]
         {
             new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType { P1 = "def", P2 = 12 },
         };
         SimpleType[] y = DataContractSerializerHelper.SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -716,15 +716,15 @@ public static partial class DataContractSerializerTests
             F1 = new SimpleType[]
             {
                 new SimpleType { P1 = "ab", P2 = 1 },
-                new SimpleType { P1 = "cd", P2 = 2 }
+                new SimpleType { P1 = "cd", P2 = 2 },
             },
             F2 = new int[] { -1, 3 },
             P1 = new SimpleType[]
             {
                 new SimpleType { P1 = "ef", P2 = 5 },
-                new SimpleType { P1 = "gh", P2 = 7 }
+                new SimpleType { P1 = "gh", P2 = 7 },
             },
-            P2 = new int[] { 11, 12 }
+            P2 = new int[] { 11, 12 },
         };
         TypeWithGetSetArrayMembers y =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithGetSetArrayMembers>(
@@ -808,7 +808,7 @@ public static partial class DataContractSerializerTests
             F1 = new Dictionary<string, int>(),
             F2 = new Dictionary<string, int>(),
             P1 = new Dictionary<string, int>(),
-            P2 = new Dictionary<string, int>()
+            P2 = new Dictionary<string, int>(),
         };
         x.F1.Add("ab", 12);
         x.F1.Add("cd", 15);
@@ -1209,7 +1209,7 @@ public static partial class DataContractSerializerTests
             F1 = new MyEnumerable<string>("a1", "a2"),
             F2 = new MyEnumerable<string>("b1", "b2"),
             P1 = new MyEnumerable<string>("c1", "c2"),
-            P2 = new MyEnumerable<string>("d1", "d2")
+            P2 = new MyEnumerable<string>("d1", "d2"),
         };
         x.RO1.Add("abc");
 
@@ -1250,7 +1250,7 @@ public static partial class DataContractSerializerTests
             F1 = new MyCollection('a', 45),
             F2 = new MyCollection("ab", true),
             P1 = new MyCollection("x", "y"),
-            P2 = new MyCollection(false, true)
+            P2 = new MyCollection(false, true),
         };
         x.RO1.Add("abc");
 
@@ -1306,7 +1306,7 @@ public static partial class DataContractSerializerTests
             F1 = new MyEnumerable('a', 45),
             F2 = new MyEnumerable("ab", true),
             P1 = new MyEnumerable("x", "y"),
-            P2 = new MyEnumerable(false, true)
+            P2 = new MyEnumerable(false, true),
         };
         x.RO1.Add('x');
 
@@ -1345,7 +1345,7 @@ public static partial class DataContractSerializerTests
             F1 = new MyEnumerable('a', 45),
             F2 = new List<string> { "a", "b", "c" }.OrderBy(x => x),
             P1 = new MyEnumerable("x", "y"),
-            P2 = Enumerable.Empty<int>()
+            P2 = Enumerable.Empty<int>(),
         };
 
         var dcs = new DataContractSerializer(typeof(TypeWithEnumerableMembers));
@@ -1399,7 +1399,7 @@ public static partial class DataContractSerializerTests
     public static void DCS_TypeWithPrivateFieldAndPrivateGetPublicSetProperty()
     {
         TypeWithPrivateFieldAndPrivateGetPublicSetProperty x =
-            new TypeWithPrivateFieldAndPrivateGetPublicSetProperty { Name = "foo", };
+            new TypeWithPrivateFieldAndPrivateGetPublicSetProperty { Name = "foo" };
 
         TypeWithPrivateFieldAndPrivateGetPublicSetProperty y =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithPrivateFieldAndPrivateGetPublicSetProperty>(
@@ -1447,10 +1447,10 @@ public static partial class DataContractSerializerTests
                 P5 = 10,
                 MyDataMemberInAnotherNamespace = new MyDataContractClass04_1()
                 {
-                    MyDataMember = "Test"
+                    MyDataMember = "Test",
                 },
                 Order100 = true,
-                OrderMaxValue = false
+                OrderMaxValue = false,
             },
             @"<DMA_1 xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><MyDataMemberInAnotherNamespace xmlns:a=""http://MyDataContractClass04_1.com/""><a:MyDataMember>Test</a:MyDataMember></MyDataMemberInAnotherNamespace><P1>abc</P1><P4>97</P4><P5>10</P5><xyz>12</xyz><P3>true</P3><Order100>true</Order100><OrderMaxValue>false</OrderMaxValue></DMA_1>"
         );
@@ -1463,7 +1463,7 @@ public static partial class DataContractSerializerTests
         {
             MyDataMember = "MyDataMember",
             MyIgnoreDataMember = "MyIgnoreDataMember",
-            MyUnsetDataMember = "MyUnsetDataMember"
+            MyUnsetDataMember = "MyUnsetDataMember",
         };
         IDMA_1 y = DataContractSerializerHelper.SerializeAndDeserialize<IDMA_1>(
             x,
@@ -1799,7 +1799,7 @@ public static partial class DataContractSerializerTests
             Name2 = "Name2",
             Name3 = "Name3",
             Name4 = "Name4",
-            Name5 = "Name5"
+            Name5 = "Name5",
         };
         var y =
             DataContractSerializerHelper.SerializeAndDeserialize<DerivedTypeWithDifferentOverrides>(
@@ -1819,7 +1819,7 @@ public static partial class DataContractSerializerTests
     {
         var x = new __TypeNameWithSpecialCharacters\u6F22\u00F1()
         {
-            PropertyNameWithSpecialCharacters\u6F22\u00F1 = "Test"
+            PropertyNameWithSpecialCharacters\u6F22\u00F1 = "Test",
         };
         var y =
             DataContractSerializerHelper.SerializeAndDeserialize<__TypeNameWithSpecialCharacters\u6F22\u00F1>(
@@ -1944,7 +1944,7 @@ public static partial class DataContractSerializerTests
         {
             new int[] { 1, 3, 5, 7, 9 },
             new int[] { 0, 2, 4, 6 },
-            new int[] { 11, 22 }
+            new int[] { 11, 22 },
         };
         var actualJaggedIntegerArray =
             DataContractSerializerHelper.SerializeAndDeserialize<int[][]>(
@@ -1960,7 +1960,7 @@ public static partial class DataContractSerializerTests
         {
             new string[] { "1", "3", "5", "7", "9" },
             new string[] { "0", "2", "4", "6" },
-            new string[] { "11", "22" }
+            new string[] { "11", "22" },
         };
         var actualJaggedStringArray =
             DataContractSerializerHelper.SerializeAndDeserialize<string[][]>(
@@ -1979,7 +1979,7 @@ public static partial class DataContractSerializerTests
             1.0,
             "string",
             Guid.Parse("2054fd3e-e118-476a-9962-1a882be51860"),
-            new DateTime(2013, 1, 2)
+            new DateTime(2013, 1, 2),
         };
         var actualObjectArray = DataContractSerializerHelper.SerializeAndDeserialize<object[]>(
             objectArray,
@@ -1999,7 +1999,7 @@ public static partial class DataContractSerializerTests
         {
             new int[][] { new int[] { 1 }, new int[] { 3 } },
             new int[][] { new int[] { 0 } },
-            new int[][] { new int[] { } }
+            new int[][] { new int[] { } },
         };
         var actualJaggedIntegerArray2 =
             DataContractSerializerHelper.SerializeAndDeserialize<int[][][]>(
@@ -2021,7 +2021,7 @@ public static partial class DataContractSerializerTests
         var settings = new DataContractSerializerSettings()
         {
             DataContractResolver = myresolver,
-            KnownTypes = new Type[] { typeof(MyOtherType) }
+            KnownTypes = new Type[] { typeof(MyOtherType) },
         };
         var input = new MyType() { Value = new MyOtherType() { Str = "Hello World" } };
         var output = DataContractSerializerHelper.SerializeAndDeserialize<MyType>(
@@ -2051,7 +2051,7 @@ public static partial class DataContractSerializerTests
         var settings = new DataContractSerializerSettings()
         {
             DataContractResolver = null,
-            KnownTypes = new Type[] { typeof(MyOtherType) }
+            KnownTypes = new Type[] { typeof(MyOtherType) },
         };
         var dcs = new DataContractSerializer(typeof(MyType), settings);
 
@@ -2135,7 +2135,7 @@ public static partial class DataContractSerializerTests
             DateTimeProperty = new DateTime(100),
             IntProperty = 5,
             StringProperty = "TestString",
-            ListProperty = new List<string>()
+            ListProperty = new List<string>(),
         };
         value.ListProperty.AddRange(new string[] { "one", "two", "three" });
         var actual =
@@ -2216,7 +2216,7 @@ public static partial class DataContractSerializerTests
             ClassID = "ClassID",
             DisplayName = "DisplayName",
             Id = "Id",
-            IsLoaded = true
+            IsLoaded = true,
         };
         var actual = DataContractSerializerHelper.SerializeAndDeserialize<ClassImplementsInterface>(
             value,
@@ -2238,7 +2238,7 @@ public static partial class DataContractSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct { A = 1, B = 2 },
         };
 
         // Act
@@ -2379,7 +2379,7 @@ public static partial class DataContractSerializerTests
         var settings = new DataContractSerializerSettings()
         {
             RootName = xmlDictionary.Add("ChangedRoot"),
-            RootNamespace = xmlDictionary.Add("http://changedNamespace")
+            RootNamespace = xmlDictionary.Add("http://changedNamespace"),
         };
         Func<DataContractSerializer> serializerFactory = () =>
             new DataContractSerializer(typeof(MyOtherType), settings);
@@ -2400,7 +2400,7 @@ public static partial class DataContractSerializerTests
         var obj = new MyOtherType() { Str = "Hello" };
         var settings = new DataContractSerializerSettings()
         {
-            RootName = xmlDictionary.Add("ChangedRoot")
+            RootName = xmlDictionary.Add("ChangedRoot"),
         };
         Func<DataContractSerializer> serializerFactory = () =>
             new DataContractSerializer(typeof(MyOtherType), settings);
@@ -2421,7 +2421,7 @@ public static partial class DataContractSerializerTests
         var value = new KnownTypesThroughConstructor()
         {
             EnumValue = MyEnum.One,
-            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" }
+            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" },
         };
         var actual =
             DataContractSerializerHelper.SerializeAndDeserialize<KnownTypesThroughConstructor>(
@@ -2481,7 +2481,7 @@ public static partial class DataContractSerializerTests
         var value = new KnownTypesThroughConstructor()
         {
             EnumValue = MyEnum.One,
-            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" }
+            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" },
         };
         var actual =
             DataContractSerializerHelper.SerializeAndDeserialize<KnownTypesThroughConstructor>(
@@ -2489,7 +2489,7 @@ public static partial class DataContractSerializerTests
                 @"<KnownTypesThroughConstructor xmlns=""http://schemas.datacontract.org/2004/07/SerializationTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><EnumValue i:type=""MyEnum"">One</EnumValue><SimpleTypeValue i:type=""SimpleKnownTypeValue""><StrProperty>PropertyValue</StrProperty></SimpleTypeValue></KnownTypesThroughConstructor>",
                 new DataContractSerializerSettings()
                 {
-                    KnownTypes = new Type[] { typeof(MyEnum), typeof(SimpleKnownTypeValue) }
+                    KnownTypes = new Type[] { typeof(MyEnum), typeof(SimpleKnownTypeValue) },
                 }
             );
 
@@ -2505,7 +2505,7 @@ public static partial class DataContractSerializerTests
         var value = new KnownTypesThroughConstructor()
         {
             EnumValue = MyEnum.One,
-            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" }
+            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" },
         };
         var actual =
             DataContractSerializerHelper.SerializeAndDeserialize<KnownTypesThroughConstructor>(
@@ -2536,7 +2536,7 @@ public static partial class DataContractSerializerTests
         var value = new KnownTypesThroughConstructor()
         {
             EnumValue = MyEnum.One,
-            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" }
+            SimpleTypeValue = new SimpleKnownTypeValue() { StrProperty = "PropertyValue" },
         };
         var actual =
             DataContractSerializerHelper.SerializeAndDeserialize<KnownTypesThroughConstructor>(
@@ -2654,7 +2654,7 @@ public static partial class DataContractSerializerTests
         {
             ModifiedTime = new DateTimeOffset(
                 new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Utc)
-            )
+            ),
         };
         var actual = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -2671,7 +2671,7 @@ public static partial class DataContractSerializerTests
         {
             ModifiedTime = new DateTimeOffset(
                 new DateTime(2013, 1, 2, 3, 4, 5, 6).AddMinutes(offsetMinutes)
-            )
+            ),
         };
         actual = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -2686,7 +2686,7 @@ public static partial class DataContractSerializerTests
         {
             ModifiedTime = new DateTimeOffset(
                 new DateTime(2013, 1, 2, 3, 4, 5, 6, DateTimeKind.Local).AddMinutes(offsetMinutes)
-            )
+            ),
         };
         actual = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -2936,7 +2936,7 @@ public static partial class DataContractSerializerTests
         TypeWithCommonTypeProperties value = new TypeWithCommonTypeProperties
         {
             Ts = new TimeSpan(1, 1, 1),
-            Id = new Guid("ad948f1e-9ba9-44c8-8e2e-b6ba969ec987")
+            Id = new Guid("ad948f1e-9ba9-44c8-8e2e-b6ba969ec987"),
         };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithCommonTypeProperties>(
@@ -3087,7 +3087,7 @@ public static partial class DataContractSerializerTests
     {
         DerivedTypeWithDataMemberInBaseType value = new DerivedTypeWithDataMemberInBaseType()
         {
-            EmbeddedDataMember = new TypeAsEmbeddedDataMember { Name = "Foo" }
+            EmbeddedDataMember = new TypeAsEmbeddedDataMember { Name = "Foo" },
         };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<DerivedTypeWithDataMemberInBaseType>(
@@ -3104,7 +3104,7 @@ public static partial class DataContractSerializerTests
         PocoDerivedTypeWithDataMemberInBaseType value =
             new PocoDerivedTypeWithDataMemberInBaseType()
             {
-                EmbeddedDataMember = new PocoTypeAsEmbeddedDataMember { Name = "Foo" }
+                EmbeddedDataMember = new PocoTypeAsEmbeddedDataMember { Name = "Foo" },
             };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<PocoDerivedTypeWithDataMemberInBaseType>(
@@ -3120,7 +3120,7 @@ public static partial class DataContractSerializerTests
     {
         ClassImplementingIXmlSerialiable value = new ClassImplementingIXmlSerialiable()
         {
-            StringValue = "Foo"
+            StringValue = "Foo",
         };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<ClassImplementingIXmlSerialiable>(
@@ -3136,7 +3136,7 @@ public static partial class DataContractSerializerTests
         TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool> value =
             new TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>()
             {
-                StringValue = "Foo"
+                StringValue = "Foo",
             };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithNestedGenericClassImplementingIXmlSerialiable.NestedGenericClassImplementingIXmlSerialiable<bool>>(
@@ -3153,7 +3153,7 @@ public static partial class DataContractSerializerTests
             new GenericTypeWithNestedGenerics<int>.InnerGeneric<double>()
             {
                 data1 = 123,
-                data2 = 4.56
+                data2 = 4.56,
             };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<GenericTypeWithNestedGenerics<int>.InnerGeneric<double>>(
@@ -3307,7 +3307,7 @@ public static partial class DataContractSerializerTests
     {
         DataContractWithMinusSignInName value = new DataContractWithMinusSignInName()
         {
-            Name = "Foo"
+            Name = "Foo",
         };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<DataContractWithMinusSignInName>(
@@ -3324,7 +3324,7 @@ public static partial class DataContractSerializerTests
     {
         DataContractWithOperatorsInName value = new DataContractWithOperatorsInName()
         {
-            Name = "Foo"
+            Name = "Foo",
         };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<DataContractWithOperatorsInName>(
@@ -3341,7 +3341,7 @@ public static partial class DataContractSerializerTests
     {
         DataContractWithOtherSymbolsInName value = new DataContractWithOtherSymbolsInName()
         {
-            Name = "Foo"
+            Name = "Foo",
         };
         var deserializedValue =
             DataContractSerializerHelper.SerializeAndDeserialize<DataContractWithOtherSymbolsInName>(
@@ -3498,13 +3498,13 @@ public static partial class DataContractSerializerTests
                 new object[]
                 {
                     new XmlDictionaryReaderQuotas() { MaxDepth = 1 },
-                    false
+                    false,
                 },
                 new object[]
                 {
                     new XmlDictionaryReaderQuotas() { MaxStringContentLength = 1 },
-                    false
-                }
+                    false,
+                },
             };
         }
     }
@@ -3576,7 +3576,7 @@ public static partial class DataContractSerializerTests
         categoryElement.InnerText = "Category innertext";
         var expected = new TypeWithXmlElementProperty()
         {
-            Elements = new[] { productElement, categoryElement }
+            Elements = new[] { productElement, categoryElement },
         };
         var actual = DataContractSerializerHelper.SerializeAndDeserialize(
             expected,
@@ -3599,7 +3599,7 @@ public static partial class DataContractSerializerTests
         x[1] = simpleObject1;
         x[2] = simpleObject2;
 
-        var settings = new DataContractSerializerSettings { PreserveObjectReferences = true, };
+        var settings = new DataContractSerializerSettings { PreserveObjectReferences = true };
 
         var y = DataContractSerializerHelper.SerializeAndDeserialize(
             x,
@@ -3629,7 +3629,7 @@ public static partial class DataContractSerializerTests
         x[1] = simpleObject1;
         x[2] = simpleObject2;
 
-        var settings = new DataContractSerializerSettings { PreserveObjectReferences = false, };
+        var settings = new DataContractSerializerSettings { PreserveObjectReferences = false };
 
         var y = DataContractSerializerHelper.SerializeAndDeserialize(
             x,
@@ -3664,7 +3664,7 @@ public static partial class DataContractSerializerTests
             typeOfReferenceChildA,
         };
 
-        var settings = new DataContractSerializerSettings { PreserveObjectReferences = true, };
+        var settings = new DataContractSerializerSettings { PreserveObjectReferences = true };
 
         var root2 = DataContractSerializerHelper.SerializeAndDeserialize(
             root,
@@ -3706,7 +3706,7 @@ public static partial class DataContractSerializerTests
             typeOfReferenceChildA,
         };
 
-        var settings = new DataContractSerializerSettings { PreserveObjectReferences = false, };
+        var settings = new DataContractSerializerSettings { PreserveObjectReferences = false };
 
         var root2 = DataContractSerializerHelper.SerializeAndDeserialize(
             root,
@@ -3779,7 +3779,7 @@ public static partial class DataContractSerializerTests
             GuidMember = Guid.Parse("2054fd3e-e118-476a-9962-1a882be51860"),
             //public byte[] HexBinaryMember
             StringMember = "abc",
-            IntMember = 123
+            IntMember = 123,
         };
         TypeWithAllPrimitiveProperties y =
             DataContractSerializerHelper.SerializeAndDeserialize<TypeWithAllPrimitiveProperties>(
@@ -3818,7 +3818,7 @@ public static partial class DataContractSerializerTests
         var value = new DateTime[]
         {
             new DateTime(2000, 1, 2, 3, 4, 5, DateTimeKind.Utc),
-            new DateTime(2011, 2, 3, 4, 5, 6, DateTimeKind.Utc)
+            new DateTime(2011, 2, 3, 4, 5, 6, DateTimeKind.Utc),
         };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -3975,7 +3975,7 @@ public static partial class DataContractSerializerTests
         var value = new TypeImplementsGenericICollection<decimal>()
         {
             new decimal(1, 2, 3, false, 1),
-            new decimal(4, 5, 6, true, 2)
+            new decimal(4, 5, 6, true, 2),
         };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -4011,7 +4011,7 @@ public static partial class DataContractSerializerTests
         {
             123,
             long.MaxValue,
-            long.MinValue
+            long.MinValue,
         };
         var deserialized = DataContractSerializerHelper.SerializeAndDeserialize(
             value,
@@ -4231,7 +4231,7 @@ public static partial class DataContractSerializerTests
         {
             var settings = new DataContractSerializerSettings()
             {
-                DataContractResolver = new DTOResolver()
+                DataContractResolver = new DTOResolver(),
             };
 
             var serializer = new DataContractSerializer(typeof(ObjectContainer), settings);
@@ -4445,7 +4445,7 @@ public static partial class DataContractSerializerTests
         {
             MaxItemsInObjectGraph = int.MaxValue,
             IgnoreExtensionDataObject = false,
-            PreserveObjectReferences = false
+            PreserveObjectReferences = false,
         };
         string baseline1 =
             @"<EmptyNsContainer xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Name>P1</Name><address i:type=""EmptyNSAddress"" xmlns=""""><street>downing street</street></address></EmptyNsContainer>";
@@ -4461,7 +4461,7 @@ public static partial class DataContractSerializerTests
             DataContractResolver = new SerializationTestTypes.EmptyNamespaceResolver(),
             MaxItemsInObjectGraph = int.MaxValue,
             IgnoreExtensionDataObject = false,
-            PreserveObjectReferences = false
+            PreserveObjectReferences = false,
         };
         result = DataContractSerializerHelper.SerializeAndDeserialize(
             instance,
@@ -4494,7 +4494,7 @@ public static partial class DataContractSerializerTests
             DataContractResolver = new SerializationTestTypes.ProxyDataContractResolver(),
             MaxItemsInObjectGraph = int.MaxValue,
             IgnoreExtensionDataObject = false,
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         string baseline1 =
             @"<Customer z:Id=""1"" i:type=""PreferredCustomer"" xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/""><Name i:nil=""true""/><VipInfo i:nil=""true""/></Customer>";
@@ -4510,7 +4510,7 @@ public static partial class DataContractSerializerTests
             DataContractResolver = new SerializationTestTypes.ProxyDataContractResolver(),
             MaxItemsInObjectGraph = int.MaxValue,
             IgnoreExtensionDataObject = false,
-            PreserveObjectReferences = false
+            PreserveObjectReferences = false,
         };
         string baseline2 =
             @"<Customer z:Id=""i1"" i:type=""PreferredCustomer"" xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/""><Name i:nil=""true""/><VipInfo i:nil=""true""/></Customer>";
@@ -4534,7 +4534,7 @@ public static partial class DataContractSerializerTests
             IgnoreExtensionDataObject = false,
             KnownTypes = null,
             MaxItemsInObjectGraph = int.MaxValue,
-            PreserveObjectReferences = false
+            PreserveObjectReferences = false,
         };
 
         var value = new SerializationTestTypes.ObjectContainer(
@@ -4580,7 +4580,7 @@ public static partial class DataContractSerializerTests
             IgnoreExtensionDataObject = false,
             KnownTypes = null,
             MaxItemsInObjectGraph = int.MaxValue,
-            PreserveObjectReferences = false
+            PreserveObjectReferences = false,
         };
 
         string baseline =
@@ -4607,12 +4607,12 @@ public static partial class DataContractSerializerTests
         var setting1 = new DataContractSerializerSettings()
         {
             DataContractResolver = new SerializationTestTypes.SimpleResolver_Ser(),
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         var setting2 = new DataContractSerializerSettings()
         {
             DataContractResolver = new SerializationTestTypes.SimpleResolver_DeSer(),
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         var dcs1 = new DataContractSerializer(typeof(SerializationTestTypes.CustomClass), setting1);
         var dcs2 = new DataContractSerializer(typeof(SerializationTestTypes.CustomClass), setting2);
@@ -4670,7 +4670,7 @@ public static partial class DataContractSerializerTests
         var setting = new DataContractSerializerSettings()
         {
             DataContractResolver = dcr2,
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         var dcs = new DataContractSerializer(typeof(SerializationTestTypes.DCRVariations), setting);
         string baseline =
@@ -4702,7 +4702,7 @@ public static partial class DataContractSerializerTests
         var setting = new DataContractSerializerSettings()
         {
             DataContractResolver = dcr1,
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         var dcs = new DataContractSerializer(typeof(SerializationTestTypes.DCRVariations), setting);
         string baseline =
@@ -4748,7 +4748,7 @@ public static partial class DataContractSerializerTests
             IgnoreExtensionDataObject = false,
             KnownTypes = null,
             MaxItemsInObjectGraph = int.MaxValue,
-            PreserveObjectReferences = false
+            PreserveObjectReferences = false,
         };
 
         string baseline =
@@ -4774,7 +4774,7 @@ public static partial class DataContractSerializerTests
             IgnoreExtensionDataObject = false,
             KnownTypes = null,
             MaxItemsInObjectGraph = int.MaxValue,
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         string typeName = typeof(SerializationTestTypes.Employee).FullName;
         string typeNamespace = typeof(SerializationTestTypes.Employee).Assembly.FullName;
@@ -4819,7 +4819,7 @@ public static partial class DataContractSerializerTests
             );
         var setting = new DataContractSerializerSettings()
         {
-            DataContractResolver = new SerializationTestTypes.UserTypeToPrimitiveTypeResolver()
+            DataContractResolver = new SerializationTestTypes.UserTypeToPrimitiveTypeResolver(),
         };
         string baseline =
             @"<ObjectContainer xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><_data i:type=""a:UserType"" xmlns:a=""http://www.default.com""><unknownData i:type=""b:int"" xmlns:b=""http://www.w3.org/2001/XMLSchema""><id>10000</id></unknownData></_data><_data2 i:type=""a:UserType"" xmlns:a=""http://www.default.com""><unknownData i:type=""b:int"" xmlns:b=""http://www.w3.org/2001/XMLSchema""><id>10000</id></unknownData></_data2></ObjectContainer>";
@@ -4839,7 +4839,7 @@ public static partial class DataContractSerializerTests
         var setting = new DataContractSerializerSettings()
         {
             DataContractResolver = new SerializationTestTypes.ResolverDefaultCollections(),
-            PreserveObjectReferences = true
+            PreserveObjectReferences = true,
         };
         string baseline =
             @"<DefaultCollections z:Id=""1"" xmlns=""http://schemas.datacontract.org/2004/07/SerializationTestTypes"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:z=""http://schemas.microsoft.com/2003/10/Serialization/""><_arrayList z:Id=""2"" z:Size=""1"" xmlns:a=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><a:anyType z:Id=""3"" i:type=""b:SerializationTestTypes.Person"" xmlns:b=""http://www.default.com""><Age>0</Age><Name i:nil=""true""/></a:anyType></_arrayList><_dictionary z:Id=""4"" z:Size=""1"" xmlns:a=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><a:KeyValueOfintanyType><a:Key>1</a:Key><a:Value z:Id=""5"" i:type=""b:SerializationTestTypes.CharClass"" xmlns:b=""http://www.default.com""><c>0</c><c1>65535</c1><c2>0</c2><c3>99</c3></a:Value></a:KeyValueOfintanyType></_dictionary><_hashtable z:Id=""6"" z:Size=""1"" xmlns:a=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><a:KeyValueOfanyTypeanyType><a:Key z:Id=""7"" i:type=""b:System.String"" xmlns:b=""http://www.default.com"">one</a:Key><a:Value z:Id=""8"" i:type=""b:SerializationTestTypes.Version1"" xmlns:b=""http://www.default.com""><make z:Id=""9"" i:type=""b:System.String"" xmlns=""TestingVersionTolerance"">Chevrolet</make></a:Value></a:KeyValueOfanyTypeanyType></_hashtable><_singleDimArray z:Id=""10"" z:Size=""1"" xmlns:a=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><a:anyType z:Id=""11"" i:type=""b:SerializationTestTypes.Employee"" xmlns:b=""http://www.default.com""><dateHired xmlns=""NonExistNamespace"">0001-01-01T00:00:00</dateHired><individual i:nil=""true"" xmlns=""NonExistNamespace"" xmlns:c=""http://schemas.datacontract.org/2004/07/SerializationTestTypes""/><salary xmlns=""NonExistNamespace"">0</salary></a:anyType></_singleDimArray></DefaultCollections>";
@@ -5709,7 +5709,7 @@ public static partial class DataContractSerializerTests
 
         var setting = new DataContractSerializerSettings()
         {
-            DataContractResolver = new SerializationTestTypes.SimpleResolver()
+            DataContractResolver = new SerializationTestTypes.SimpleResolver(),
         };
 
         //SerPublicDatasetPublic
@@ -5864,7 +5864,7 @@ public static partial class DataContractSerializerTests
     {
         var setting = new DataContractSerializerSettings()
         {
-            DataContractResolver = new SerializationTestTypes.SimpleResolver()
+            DataContractResolver = new SerializationTestTypes.SimpleResolver(),
         };
         string assemblyName = typeof(DataContractSerializerTests).Assembly.FullName;
 
@@ -6564,12 +6564,12 @@ public static partial class DataContractSerializerTests
             typeof(SerializationTestTypes.MyEnum8),
             typeof(SerializationTestTypes.MyPrivateEnum1),
             typeof(SerializationTestTypes.MyPrivateEnum2),
-            typeof(SerializationTestTypes.MyPrivateEnum3)
+            typeof(SerializationTestTypes.MyPrivateEnum3),
         };
 
         var setting = new DataContractSerializerSettings()
         {
-            DataContractResolver = new SerializationTestTypes.SimpleResolver()
+            DataContractResolver = new SerializationTestTypes.SimpleResolver(),
         };
 
         foreach (var type in typelist)
@@ -6681,7 +6681,7 @@ public static partial class DataContractSerializerTests
                 { "one", 1 },
                 { "two", 22 },
                 { "three", 333 },
-                { "four", 4444 }
+                { "four", 4444 },
             }
         );
         ReadOnlyDictionary<string, int> result =
@@ -6946,7 +6946,7 @@ public static partial class DataContractSerializerTests
                 new NonSerializablePerson("John", 34),
                 new NonSerializablePerson("Jane", 32),
                 new NonSerializablePerson("Bob", 5),
-            }
+            },
         };
         dcs.WriteObject(ms, myFamily);
         ms.Position = 0;
@@ -7079,7 +7079,7 @@ public static partial class DataContractSerializerTests
                 publiclyVisible: true
             )
             {
-                Position = 2
+                Position = 2,
             },
             expectedXml: @"<MemoryStream xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.IO""><__identity i:nil=""true"" xmlns=""http://schemas.datacontract.org/2004/07/System"" /><_buffer>AQIDBA==</_buffer><_capacity>4</_capacity><_expandable>false</_expandable><_exposable>true</_exposable><_isOpen>true</_isOpen><_length>4</_length><_origin>0</_origin><_position>2</_position><_writable>false</_writable></MemoryStream>",
             expectedData: new byte[] { 1, 2, 3, 4 },
@@ -7096,7 +7096,7 @@ public static partial class DataContractSerializerTests
                 publiclyVisible: false
             )
             {
-                Position = 4
+                Position = 4,
             },
             expectedXml: @"<MemoryStream xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.IO""><__identity i:nil=""true"" xmlns=""http://schemas.datacontract.org/2004/07/System"" /><_buffer>AQIDBA==</_buffer><_capacity>4</_capacity><_expandable>false</_expandable><_exposable>false</_exposable><_isOpen>true</_isOpen><_length>4</_length><_origin>0</_origin><_position>4</_position><_writable>false</_writable></MemoryStream>",
             expectedData: new byte[] { 1, 2, 3, 4 },
@@ -7486,7 +7486,7 @@ public static partial class DataContractSerializerTests
             ms,
             new System.Xml.XmlDictionaryReaderQuotas()
             {
-                MaxStringContentLength = maxStringContentLength
+                MaxStringContentLength = maxStringContentLength,
             }
         );
 
@@ -7542,7 +7542,7 @@ public static partial class DataContractSerializerTests
     {
         var setting = new DataContractSerializerSettings()
         {
-            DataContractResolver = new SerializationTestTypes.SimpleResolver()
+            DataContractResolver = new SerializationTestTypes.SimpleResolver(),
         };
 
         var value = new SerializationTestTypes.ObjectContainer(o);

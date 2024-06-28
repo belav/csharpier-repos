@@ -86,7 +86,7 @@ namespace System.Security.Cryptography.X509Certificates
                     Algorithm = new AlgorithmIdentifierAsn
                     {
                         Algorithm = Oids.Dsa,
-                        Parameters = encodedParameters
+                        Parameters = encodedParameters,
                     },
                     SubjectPublicKey = encodedKeyValue,
                 };

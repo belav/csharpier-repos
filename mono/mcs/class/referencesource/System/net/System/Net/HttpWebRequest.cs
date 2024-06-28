@@ -41,7 +41,7 @@ namespace System.Net
     {
         None = 0,
         GZip = 1,
-        Deflate = 2
+        Deflate = 2,
     }
 
     [Serializable]
@@ -102,7 +102,7 @@ namespace System.Net
             EnableDecompression = 0x00000200,
             IsTunnelRequest = 0x00000400,
             IsWebSocketRequest = 0x00000800,
-            Default = AllowAutoRedirect | AllowWriteStreamBuffering | ExpectContinue
+            Default = AllowAutoRedirect | AllowWriteStreamBuffering | ExpectContinue,
         }
 
         internal const HttpStatusCode MaxOkStatus = (HttpStatusCode)299;
@@ -129,7 +129,7 @@ namespace System.Net
             (byte)'T',
             (byte)'T',
             (byte)'P',
-            (byte)'/'
+            (byte)'/',
         };
 
         // Statics used in the 100 Continue timeout mechanism.
@@ -1438,11 +1438,9 @@ namespace System.Net
                         // were set. note that this means that we won't ever buffer for unknown verbs unless
                         // you call [Begin]GetRequestStream before [Begin]GetResponse.
                         HttpWriteMode =
-                            ContentLength >= 0
-                                ? HttpWriteMode.ContentLength
-                                : onRequestStream
-                                    ? HttpWriteMode.Buffer
-                                    : HttpWriteMode.None;
+                            ContentLength >= 0 ? HttpWriteMode.ContentLength
+                            : onRequestStream ? HttpWriteMode.Buffer
+                            : HttpWriteMode.None;
                     }
                 }
             }
@@ -8255,7 +8253,7 @@ namespace System.Net
             PolicyError,
             SystemError,
             TransportDisconnected,
-            ServiceUnavailable
+            ServiceUnavailable,
         };
 
         // Socket configuration data we need to pass to IOControl after creating the socket.

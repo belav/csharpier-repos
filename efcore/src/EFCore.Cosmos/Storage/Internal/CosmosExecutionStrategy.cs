@@ -84,9 +84,10 @@ public class CosmosExecutionStrategy : ExecutionStrategy
         {
             CosmosException cosmosException => IsTransient(cosmosException.StatusCode),
             HttpException httpException => IsTransient(httpException.Response.StatusCode),
-            WebException webException =>
-                IsTransient(((HttpWebResponse)webException.Response!).StatusCode),
-            _ => false
+            WebException webException => IsTransient(
+                ((HttpWebResponse)webException.Response!).StatusCode
+            ),
+            _ => false,
         };
 
         static bool IsTransient(HttpStatusCode statusCode) =>

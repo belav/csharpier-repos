@@ -68,11 +68,10 @@ namespace Mono.CSharp
         )
         {
             string host_name =
-                host == null
-                    ? null
-                    : host is InterfaceMemberBase
-                        ? ((InterfaceMemberBase)host).GetFullName(host.MemberName)
-                        : host.MemberName.Name;
+                host == null ? null
+                : host is InterfaceMemberBase
+                    ? ((InterfaceMemberBase)host).GetFullName(host.MemberName)
+                : host.MemberName.Name;
             string tname = MakeName(host_name, "c", name, unique_id);
             TypeParameters args = null;
             if (tparams != null)
@@ -235,7 +234,7 @@ namespace Mono.CSharp
                         InstanceExpression = new CompilerGeneratedThis(
                             ec.CurrentType,
                             Location.Null
-                        )
+                        ),
                     };
                 }
 
@@ -1483,7 +1482,7 @@ namespace Mono.CSharp
                             loc
                         )
                         {
-                            AllowSpecialMethodsInvocation = true
+                            AllowSpecialMethodsInvocation = true,
                         }.Resolve(ec);
                         ec.Report.SetPrinter(old);
                         if (expr != null && errors_printer.ErrorsCount == 0)

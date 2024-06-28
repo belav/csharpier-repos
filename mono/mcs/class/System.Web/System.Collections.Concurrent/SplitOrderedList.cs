@@ -724,7 +724,7 @@ namespace System.Collections.Concurrent
             63,
             191,
             127,
-            255
+            255,
         };
 
         static readonly byte[] logTable =
@@ -984,7 +984,7 @@ namespace System.Collections.Concurrent
             7,
             7,
             7,
-            7
+            7,
         };
 
         struct SimpleRwLock

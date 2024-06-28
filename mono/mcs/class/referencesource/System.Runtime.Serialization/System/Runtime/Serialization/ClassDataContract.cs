@@ -1901,7 +1901,7 @@ namespace System.Runtime.Serialization
                         serInfoCtorArgs = new Type[]
                         {
                             typeof(SerializationInfo),
-                            typeof(StreamingContext)
+                            typeof(StreamingContext),
                         };
                     return serInfoCtorArgs;
                 }

@@ -143,7 +143,7 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     RedirectStandardOutput = true,
                     // Trying a work around for https://github.com/aspnet/Hosting/issues/140.
                     RedirectStandardInput = true,
-                    WorkingDirectory = workingDirectory
+                    WorkingDirectory = workingDirectory,
                 };
 
                 AddEnvironmentVariablesToProcess(

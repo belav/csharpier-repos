@@ -322,7 +322,7 @@ namespace System.Formats.Tar.Tests
                             Access = FileAccess.Write,
                             Mode = FileMode.CreateNew,
                             Share = FileShare.None,
-                            Options = FileOptions.Asynchronous
+                            Options = FileOptions.Asynchronous,
                         };
 
                     await using (

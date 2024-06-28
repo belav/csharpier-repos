@@ -138,7 +138,7 @@ namespace System
                     ConsoleKey.S,
                     ConsoleKey.O,
                     ConsoleKey.L,
-                    ConsoleKey.E
+                    ConsoleKey.E,
                 }
             )
             {
@@ -162,7 +162,7 @@ namespace System
                     ConsoleKey.S,
                     ConsoleKey.O,
                     ConsoleKey.L,
-                    ConsoleKey.E
+                    ConsoleKey.E,
                 }
             )
             {
@@ -255,7 +255,7 @@ namespace System
                         control: modifiers.HasFlag(ConsoleModifiers.Control),
                         alt: modifiers.HasFlag(ConsoleModifiers.Alt),
                         shift: modifiers.HasFlag(ConsoleModifiers.Shift)
-                    )
+                    ),
                 };
             }
         }
@@ -300,7 +300,7 @@ namespace System
                 ConsoleColor.Red,
                 ConsoleColor.Green,
                 ConsoleColor.Blue,
-                ConsoleColor.Yellow
+                ConsoleColor.Yellow,
             };
             for (int row = 0; row < 2; row++)
             {
@@ -375,7 +375,7 @@ namespace System
 
             Console.WriteLine($"Now type \"test\" without the quotes and press Ctrl+D twice.");
             using Process p = Process.Start(
-                new ProcessStartInfo { FileName = "cat", RedirectStandardOutput = true, }
+                new ProcessStartInfo { FileName = "cat", RedirectStandardOutput = true }
             );
             string stdout = p.StandardOutput.ReadToEnd();
             p.WaitForExit();

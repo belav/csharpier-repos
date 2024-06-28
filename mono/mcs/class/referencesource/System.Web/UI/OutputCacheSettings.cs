@@ -24,7 +24,7 @@ namespace System.Web.UI
         VaryByCustom = 0x00000080,
         VaryByHeader = 0x00000100,
         VaryByParam = 0x00000200,
-        VaryByContentEncoding = 0x00000400
+        VaryByContentEncoding = 0x00000400,
     }
 
     public sealed class OutputCacheParameters

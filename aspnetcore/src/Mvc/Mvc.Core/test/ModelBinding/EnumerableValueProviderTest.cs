@@ -171,7 +171,7 @@ public abstract class EnumerableValueProviderTest
         var expected = new Dictionary<string, string>
         {
             { "property", "[index].property" },
-            { "anotherIndex", "[index][anotherIndex]" }
+            { "anotherIndex", "[index][anotherIndex]" },
         };
         var valueProvider = GetEnumerableValueProvider(
             BindingSource.Query,

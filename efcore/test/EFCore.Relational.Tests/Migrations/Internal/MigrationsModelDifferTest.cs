@@ -1464,7 +1464,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 42,
                                 MouseId = "1",
-                                BoneId = "2"
+                                BoneId = "2",
                             }
                         );
                     }
@@ -1517,7 +1517,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 42,
                                 MouseId = "1",
-                                BoneId = "2"
+                                BoneId = "2",
                             }
                         );
                         x.SplitToTable(
@@ -1667,7 +1667,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                     {
                                         OrderId = 42,
                                         Street = "Lombard",
-                                        City = "San Francisco"
+                                        City = "San Francisco",
                                     }
                                 );
                             }
@@ -1684,7 +1684,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                     {
                                         OrderId = 42,
                                         Street = "Abbey Road",
-                                        City = "London"
+                                        City = "London",
                                     }
                                 );
                             }
@@ -2301,7 +2301,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
     private enum SomeEnum
     {
         Default,
-        NonDefault
+        NonDefault,
     }
 
     [ConditionalFact]
@@ -2359,13 +2359,13 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 IdBeforeRename = 42,
                                 Value1 = 32,
-                                Value2 = "equal"
+                                Value2 = "equal",
                             },
                             new
                             {
                                 IdBeforeRename = 24,
                                 Value1 = 72,
-                                Value2 = "not equal1"
+                                Value2 = "not equal1",
                             }
                         );
                     }
@@ -2383,13 +2383,13 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 42,
                                 Value1 = 27,
-                                Value2 = "equal"
+                                Value2 = "equal",
                             }, // modified
                             new
                             {
                                 Id = 24,
                                 Value1 = 99,
-                                Value2 = "not equal2"
+                                Value2 = "not equal2",
                             }
                         ); // modified
                     }
@@ -2698,7 +2698,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 42,
                                 Description = "Order 1",
-                                OrderDate = DateTime.MinValue
+                                OrderDate = DateTime.MinValue,
                             }
                         );
                     }
@@ -10733,10 +10733,10 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
 
                     var data = new[]
                     {
-                        new SomeEntity(1L, new Guid("74520CF7-0C78-447C-8FE0-ED97A16A13F5"))
+                        new SomeEntity(1L, new Guid("74520CF7-0C78-447C-8FE0-ED97A16A13F5")),
                     };
 
-                    var owned = data.Select(x => new { SomeEntityId = x.Id, }).ToArray();
+                    var owned = data.Select(x => new { SomeEntityId = x.Id }).ToArray();
 
                     builder.OwnsOne(x => x.OwnedEntity).HasData(owned);
                     builder.HasData(data);
@@ -10751,11 +10751,11 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         new ApplicationUser
                         {
                             Id = 12345,
-                            Guid = new Guid("4C85B629-732A-4724-AA33-6E8108134BAE")
-                        }
+                            Guid = new Guid("4C85B629-732A-4724-AA33-6E8108134BAE"),
+                        },
                     };
 
-                    var owned = data.Select(x => new { ApplicationUserId = x.Id, }).ToArray();
+                    var owned = data.Select(x => new { ApplicationUserId = x.Id }).ToArray();
 
                     builder.OwnsOne(x => x.OwnedEntity).HasData(owned);
                     builder.HasData(data);
@@ -11113,13 +11113,13 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 42,
                                 Value1 = 32,
-                                Value2 = "equal"
+                                Value2 = "equal",
                             }, // modified
                             new
                             {
                                 Id = 24,
                                 Value1 = 72,
-                                Value2 = "not equal1"
+                                Value2 = "not equal1",
                             }
                         ); // modified
                     }
@@ -11139,13 +11139,13 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 42,
                                 Value1 = 27,
-                                Value2 = "equal"
+                                Value2 = "equal",
                             }, // modified
                             new
                             {
                                 Id = 24,
                                 Value1 = 99,
-                                Value2 = "not equal2"
+                                Value2 = "not equal2",
                             }
                         ); // modified
                     }
@@ -11586,26 +11586,26 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 99999,
                                 Value1 = 0,
-                                Value2 = ""
+                                Value2 = "",
                             }, // deleted
                             new
                             {
                                 Id = 42,
                                 Value1 = 32,
                                 Value2 = "equal",
-                                InvalidProperty = "is ignored"
+                                InvalidProperty = "is ignored",
                             }, // modified
                             new
                             {
                                 Id = 8,
                                 Value1 = 100,
-                                Value2 = "equal"
+                                Value2 = "equal",
                             }, // unchanged
                             new
                             {
                                 Id = 24,
                                 Value1 = 72,
-                                Value2 = "not equal1"
+                                Value2 = "not equal1",
                             }
                         ); // modified
                     }
@@ -11623,32 +11623,32 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 Id = 11111,
                                 Value1 = 0,
-                                Value2 = ""
+                                Value2 = "",
                             }, // added
                             new
                             {
                                 Id = 11112,
                                 Value1 = 1,
-                                Value2 = "new"
+                                Value2 = "new",
                             }, // added
                             new
                             {
                                 Id = 42,
                                 Value1 = 27,
                                 Value2 = "equal",
-                                InvalidProperty = "is ignored here too"
+                                InvalidProperty = "is ignored here too",
                             }, // modified
                             new
                             {
                                 Id = 8,
                                 Value1 = 100,
-                                Value2 = "equal"
+                                Value2 = "equal",
                             }, // unchanged
                             new
                             {
                                 Id = 24,
                                 Value1 = 99,
-                                Value2 = "not equal2"
+                                Value2 = "not equal2",
                             }
                         ); // modified
                     }
@@ -11765,7 +11765,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 Value = "Value",
                                 DefaultValue = 5,
                                 DefaultValueSql = 5,
-                                ComputedValueSql = 5
+                                ComputedValueSql = 5,
                             }, //Modified
                             new { Id = 21, Value = "Deleted" }
                         ); //Deleted
@@ -11790,7 +11790,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 Value = "Modified",
                                 DefaultValue = 6,
                                 DefaultValueSql = 6,
-                                ComputedValueSql = 5
+                                ComputedValueSql = 5,
                             }, //Modified
                             new { Id = 31, Value = "Added" }, //Added
                             new
@@ -11799,7 +11799,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 Value = "DefaultValuesProvided",
                                 DefaultValue = 42,
                                 DefaultValueSql = 42,
-                                ComputedValueSql = 42
+                                ComputedValueSql = 42,
                             }
                         ); //Added
                     }
@@ -11931,19 +11931,19 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                         {
                             PostId = 416,
                             Title = "Post To Non-existent BlogId",
-                            BlogId = 316
+                            BlogId = 316,
                         },
                         new
                         {
                             PostId = 545,
                             Title = "Updated Title",
-                            BlogId = 38
+                            BlogId = 38,
                         },
                         new
                         {
                             PostId = 546,
                             Title = "New Post",
-                            BlogId = 32
+                            BlogId = 32,
                         }
                     );
                 }
@@ -11977,19 +11977,19 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                     {
                         PostId = 416,
                         Title = "Post To Non-existent BlogId",
-                        BlogId = 316
+                        BlogId = 316,
                     },
                     new
                     {
                         PostId = 545,
                         Title = "Updated Title",
-                        BlogId = 38
+                        BlogId = 38,
                     },
                     new
                     {
                         PostId = 546,
                         Title = "New Post",
-                        BlogId = 32
+                        BlogId = 32,
                     }
                 );
             });
@@ -12024,19 +12024,19 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                             {
                                 PostId = 545,
                                 Title = "Original Title",
-                                BlogId = 32
+                                BlogId = 32,
                             },
                             new
                             {
                                 PostId = 416,
                                 Title = "Post To Non-existent BlogId",
-                                BlogId = 316
+                                BlogId = 316,
                             },
                             new
                             {
                                 PostId = 390,
                                 Title = "Post To Be Removed",
-                                BlogId = 32
+                                BlogId = 32,
                             }
                         );
                     }
@@ -13042,7 +13042,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 {
                                     Id = 1,
                                     UserId = 1,
-                                    LevelId = 1
+                                    LevelId = 1,
                                 }
                             );
                         }
@@ -13085,7 +13085,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                 {
                                     Id = 1,
                                     UserId = 1,
-                                    LevelId = 1
+                                    LevelId = 1,
                                 }
                             );
                         }
@@ -13136,7 +13136,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                     Id = 1,
                                     UserId = 1,
                                     Level1Id = 1,
-                                    Level2Id = 1.0
+                                    Level2Id = 1.0,
                                 }
                             );
                         }
@@ -13181,7 +13181,7 @@ public class MigrationsModelDifferTest : MigrationsModelDifferTestBase
                                     Id = 1,
                                     UserId = 1,
                                     Level1Id = 1,
-                                    Level2Id = 1.0
+                                    Level2Id = 1.0,
                                 }
                             );
                         }

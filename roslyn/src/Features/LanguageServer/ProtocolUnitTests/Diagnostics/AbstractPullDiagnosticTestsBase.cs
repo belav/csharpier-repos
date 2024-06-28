@@ -227,13 +227,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                     ?.Select(r => new PreviousResultId
                     {
                         Uri = r.identifier.Uri,
-                        Value = r.resultId
+                        Value = r.resultId,
                     })
                     .ToArray() ?? Array.Empty<PreviousResultId>();
             return new WorkspaceDiagnosticParams
             {
                 PreviousResultId = previousResultsLsp,
-                PartialResultToken = progress
+                PartialResultToken = progress,
             };
         }
 
@@ -306,7 +306,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                     ?.Select(r => new VSInternalDiagnosticParams
                     {
                         PreviousResultId = r.resultId,
-                        TextDocument = r.identifier
+                        TextDocument = r.identifier,
                     })
                     .ToArray(),
                 PartialResultToken = progress,
@@ -617,7 +617,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
                 },
                 ServerKind = serverKind,
                 SourceGeneratedMarkups = sourceGeneratedMarkups ?? Array.Empty<string>(),
-                AdditionalAnalyzers = additionalAnalyzers
+                AdditionalAnalyzers = additionalAnalyzers,
             };
         }
 

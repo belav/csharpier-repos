@@ -19,7 +19,7 @@ namespace System.Runtime.Serialization
 #endif
     {
         GlobalReference = 0x00000001,
-        GenericTypeParameter = 0x00000002
+        GenericTypeParameter = 0x00000002,
     }
 
 #if CODEDOM

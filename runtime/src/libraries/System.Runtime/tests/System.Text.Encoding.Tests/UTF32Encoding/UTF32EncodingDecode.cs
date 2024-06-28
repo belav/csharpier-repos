@@ -19,14 +19,14 @@ namespace System.Text.Tests
                     new byte[] { 97, 0, 0, 0, (byte)c, 0, 0, 0, 98, 0, 0, 0 },
                     4,
                     4,
-                    c.ToString()
+                    c.ToString(),
                 };
                 yield return new object[]
                 {
                     new byte[] { 97, 0, 0, 0, (byte)c, 0, 0, 0, 98, 0, 0, 0 },
                     0,
                     12,
-                    "a" + c.ToString() + "b"
+                    "a" + c.ToString() + "b",
                 };
             }
 
@@ -37,7 +37,7 @@ namespace System.Text.Tests
                 new byte[] { 97, 0, 0, 0, 0, 0, 1, 0, 98, 0, 0, 0 },
                 0,
                 12,
-                "a\uD800\uDC00b"
+                "a\uD800\uDC00b",
             };
 
             yield return new object[]
@@ -45,7 +45,7 @@ namespace System.Text.Tests
                 new byte[] { 0x00, 0x00, 0x01, 0x00, 0xFF, 0xFF, 0x10, 0x00 },
                 0,
                 8,
-                "\uD800\uDC00\uDBFF\uDFFF"
+                "\uD800\uDC00\uDBFF\uDFFF",
             };
 
             // Mixture of ASCII and Unciode
@@ -80,11 +80,11 @@ namespace System.Text.Tests
                     82,
                     0,
                     0,
-                    0
+                    0,
                 },
                 0,
                 28,
-                "FooBA\u0400R"
+                "FooBA\u0400R",
             };
 
             // U+FDD0 - U+FDEF
@@ -93,14 +93,14 @@ namespace System.Text.Tests
                 new byte[] { 0xD0, 0xFD, 0x00, 0x00, 0xEF, 0xFD, 0x00, 0x00 },
                 0,
                 8,
-                "\uFDD0\uFDEF"
+                "\uFDD0\uFDEF",
             };
             yield return new object[]
             {
                 new byte[] { 0xD0, 0xFD, 0x00, 0x00, 0xEF, 0xFD, 0x00, 0x00 },
                 0,
                 8,
-                "\uFDD0\uFDEF"
+                "\uFDD0\uFDEF",
             };
 
             // High BMP non-chars: U+FFFF, U+FFFE, U+FFFD
@@ -122,11 +122,11 @@ namespace System.Text.Tests
                     0xFD,
                     0xFF,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 0,
                 12,
-                "\uFFFF\uFFFE\uFFFD"
+                "\uFFFF\uFFFE\uFFFD",
             };
 
             // Empty strings
@@ -212,42 +212,42 @@ namespace System.Text.Tests
                 new byte[] { 0xFF, 0xDB, 0x00, 0x00, 0xFF, 0xDF, 0x00, 0x00 },
                 0,
                 8,
-                "\uFFFD\uFFFD"
+                "\uFFFD\uFFFD",
             };
             yield return new object[]
             {
                 new byte[] { 0xFF, 0xDB, 0x00, 0x00, 0xFF, 0xDF, 0x00, 0x00 },
                 0,
                 4,
-                "\uFFFD"
+                "\uFFFD",
             };
             yield return new object[]
             {
                 new byte[] { 0xFF, 0xDB, 0x00, 0x00, 0xFF, 0xDF, 0x00, 0x00 },
                 4,
                 4,
-                "\uFFFD"
+                "\uFFFD",
             };
             yield return new object[]
             {
                 new byte[] { 0x00, 0xD8, 0x00, 0x00, 0x00, 0xDC, 0x00, 0x00 },
                 0,
                 8,
-                "\uFFFD\uFFFD"
+                "\uFFFD\uFFFD",
             };
             yield return new object[]
             {
                 new byte[] { 0xFF, 0xDB, 0x00, 0x00, 0xFD, 0xFF, 0x00, 0x00 },
                 0,
                 8,
-                "\uFFFD\uFFFD"
+                "\uFFFD\uFFFD",
             };
             yield return new object[]
             {
                 new byte[] { 0x00, 0x80, 0x00, 0x00, 0xFF, 0xDF, 0x00, 0x00 },
                 0,
                 8,
-                "\u8000\uFFFD"
+                "\u8000\uFFFD",
             };
 
             // Too high scalar values

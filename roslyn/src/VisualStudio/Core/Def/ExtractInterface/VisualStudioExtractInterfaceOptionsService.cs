@@ -70,7 +70,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
                     IsChecked = true,
                     MakeAbstract = false,
                     IsMakeAbstractCheckable = false,
-                    IsCheckable = true
+                    IsCheckable = true,
                 }
             );
 
@@ -117,8 +117,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ExtractInterfac
         ) =>
             destination switch
             {
-                NewTypeDestination.CurrentFile =>
-                    ExtractInterfaceOptionsResult.ExtractLocation.SameFile,
+                NewTypeDestination.CurrentFile => ExtractInterfaceOptionsResult
+                    .ExtractLocation
+                    .SameFile,
                 NewTypeDestination.NewFile => ExtractInterfaceOptionsResult.ExtractLocation.NewFile,
                 _ => throw ExceptionUtilities.UnexpectedValue(destination),
             };

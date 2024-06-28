@@ -27,19 +27,19 @@ internal sealed class AnonymousArraySeedContext : MigrationContext<Patriarch, Co
                 {
                     Id = 1,
                     HierarchyId = HierarchyId.GetRoot().ToString(),
-                    Name = "Eddard Stark"
+                    Name = "Eddard Stark",
                 },
                 new ConvertedPatriarch
                 {
                     Id = 2,
                     HierarchyId = HierarchyId.Parse("/1/").ToString(),
-                    Name = "Robb Stark"
+                    Name = "Robb Stark",
                 },
                 new ConvertedPatriarch
                 {
                     Id = 3,
                     HierarchyId = HierarchyId.Parse("/2/").ToString(),
-                    Name = "Jon Snow"
+                    Name = "Jon Snow",
                 }
             );
         });

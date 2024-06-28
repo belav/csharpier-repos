@@ -341,7 +341,7 @@ namespace System.ComponentModel.Tests
                     Culture = culture,
                     NetCoreExceptionType = typeof(TNetCoreException),
                     NetFrameworkExceptionType = typeof(TNetFrameworkException),
-                    CanConvert = true
+                    CanConvert = true,
                 };
             }
 
@@ -358,7 +358,7 @@ namespace System.ComponentModel.Tests
                     Culture = culture,
                     NetCoreExceptionType = typeof(NotSupportedException),
                     NetFrameworkExceptionType = typeof(NotSupportedException),
-                    CanConvert = false
+                    CanConvert = false,
                 };
             }
 
@@ -370,7 +370,7 @@ namespace System.ComponentModel.Tests
                     Culture = culture,
                     NetCoreExceptionType = typeof(NotSupportedException),
                     NetFrameworkExceptionType = typeof(NotSupportedException),
-                    CanConvert = false
+                    CanConvert = false,
                 };
             }
 

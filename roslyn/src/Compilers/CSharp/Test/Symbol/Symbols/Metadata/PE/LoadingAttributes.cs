@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -123,7 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -216,7 +216,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -297,7 +297,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -389,7 +389,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -480,7 +480,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -535,7 +535,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeApplicationLib,
                     TestReferences.SymbolsTests.Metadata.MDTestAttributeDefLib,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -704,9 +704,9 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     null,
                     new KeyValuePair<string, string>[]
                     {
-                        new KeyValuePair<string, string>("WrapNonExceptionThrows", "True")
+                        new KeyValuePair<string, string>("WrapNonExceptionThrows", "True"),
                     }
-                )
+                ),
             };
 
             CheckAttributes(assemblies[0], assemblyArgs);
@@ -1115,7 +1115,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.AttributeTestLib01,
                     TestReferences.SymbolsTests.Metadata.AttributeTestDef01,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -1165,7 +1165,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.AttributeTestLib01,
                     TestReferences.SymbolsTests.Metadata.AttributeTestDef01,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -1275,7 +1275,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                 {
                     TestReferences.SymbolsTests.Metadata.AttributeTestLib01,
                     TestReferences.SymbolsTests.Metadata.AttributeTestDef01,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 

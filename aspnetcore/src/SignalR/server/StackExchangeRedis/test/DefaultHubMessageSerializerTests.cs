@@ -76,7 +76,7 @@ public class DefaultHubMessageSerializerTests
                 (byte)'e',
                 (byte)'t',
                 0x90,
-                0x90
+                0x90,
             },
             serializedHubMessage[0].Serialized.ToArray()
         );
@@ -193,7 +193,7 @@ public class DefaultHubMessageSerializerTests
             0x90,
             0x90
         ),
-        new ProtocolTestData("No protocols", new List<IHubProtocol>(), 0)
+        new ProtocolTestData("No protocols", new List<IHubProtocol>(), 0),
     }.ToDictionary(t => t.Name);
 
     public static IEnumerable<object[]> InvocationTestData = _invocationTestData.Keys.Select(k =>

@@ -1200,7 +1200,7 @@ public partial class C
                 //     public partial int M();
                 Diagnostic(ErrorCode.WRN_MissingXMLComment, "M")
                     .WithArguments("C.M()")
-                    .WithLocation(4, 24)
+                    .WithLocation(4, 24),
             };
 
             // Files passed in order.
@@ -1324,7 +1324,7 @@ partial class C
                     .WithLocation(4, 20),
                 // (4,22): warning CS1570: XML comment has badly formed XML -- 'End tag was not expected at this location.'
                 //     /// <summary></a></summary>
-                Diagnostic(ErrorCode.WRN_XMLParseError, "<").WithLocation(4, 22)
+                Diagnostic(ErrorCode.WRN_XMLParseError, "<").WithLocation(4, 22),
             };
 
             // Files passed in order.
@@ -4980,7 +4980,7 @@ class OuterClass<X>
                     //         /// <include file='b16c2dc7f738.xml' path='//target'/>
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, includeElement)
                         .WithArguments("XY", "OuterClass<X>.InnerClass<Y>.Foo()")
-                        .WithLocation(9, 13)
+                        .WithLocation(9, 13),
                 }
             );
             var expected = (
@@ -5209,7 +5209,7 @@ partial class C
                 {
                     // (4,20): warning CS1574: XML comment has cref attribute 'Bogus1' that could not be resolved
                     //     /// <see cref="Bogus1"/>
-                    Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus1").WithArguments("Bogus1")
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus1").WithArguments("Bogus1"),
                 }
             );
             var expected1 = @"
@@ -5235,7 +5235,7 @@ partial class C
                 {
                     // (4,20): warning CS1574: XML comment has cref attribute 'Bogus2' that could not be resolved
                     //     /// <see cref="Bogus2"/>
-                    Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus2").WithArguments("Bogus2")
+                    Diagnostic(ErrorCode.WRN_BadXMLRef, "Bogus2").WithArguments("Bogus2"),
                 }
             );
             var expected2 = @"
@@ -5687,7 +5687,7 @@ public class C { }
                         (int)ErrorCode.WRN_MissingXMLComment
                     ),
                     ReportDiagnostic.Suppress
-                }
+                },
             };
             var comp = CreateCompilation(
                 tree,

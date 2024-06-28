@@ -17,7 +17,7 @@ namespace System.CodeDom
     /// <devdoc>
     ///    <para>Represents a catch exception block.</para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeCatchClause
     {
         private CodeStatementCollection statements;

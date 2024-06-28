@@ -165,7 +165,7 @@ namespace System.Speech.Synthesis
     {
         Text = 0,
         Ssml = 1,
-        WaveAudio
+        WaveAudio,
     }
 
     public enum SynthesisTextFormat

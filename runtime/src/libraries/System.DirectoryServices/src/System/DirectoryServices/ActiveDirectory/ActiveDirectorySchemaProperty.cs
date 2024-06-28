@@ -15,7 +15,7 @@ namespace System.DirectoryServices.ActiveDirectory
         IsIndexedOverContainer = 2,
         IsInAnr = 4,
         IsOnTombstonedObject = 8,
-        IsTupleIndexed = 32
+        IsTupleIndexed = 32,
     }
 
     public class ActiveDirectorySchemaProperty : IDisposable
@@ -118,7 +118,7 @@ namespace System.DirectoryServices.ActiveDirectory
             /* AccessPointDN */new Syntax("2.5.5.14", 127, s_accessPointDnOMObjectClass),
             /* ORName */new Syntax("2.5.5.7", 127, s_oRNameOMObjectClass),
             /* PresentationAddress */new Syntax("2.5.5.13", 127, s_presentationAddressOMObjectClass),
-            /* ReplicaLink */new Syntax("2.5.5.10", 127, s_replicaLinkOMObjectClass)
+            /* ReplicaLink */new Syntax("2.5.5.10", 127, s_replicaLinkOMObjectClass),
         };
 
         #region constructors

@@ -1084,23 +1084,23 @@ namespace System.Numerics
                             NumericsHelpers.Abs(exponent._sign),
                             NumericsHelpers.Abs(modulus._sign)
                         )
-                        : trivialValue
-                            ? BigIntegerCalculator.Pow(
-                                NumericsHelpers.Abs(value._sign),
-                                exponent._bits!,
-                                NumericsHelpers.Abs(modulus._sign)
-                            )
-                            : trivialExponent
-                                ? BigIntegerCalculator.Pow(
-                                    value._bits!,
-                                    NumericsHelpers.Abs(exponent._sign),
-                                    NumericsHelpers.Abs(modulus._sign)
-                                )
-                                : BigIntegerCalculator.Pow(
-                                    value._bits!,
-                                    exponent._bits!,
-                                    NumericsHelpers.Abs(modulus._sign)
-                                );
+                    : trivialValue
+                        ? BigIntegerCalculator.Pow(
+                            NumericsHelpers.Abs(value._sign),
+                            exponent._bits!,
+                            NumericsHelpers.Abs(modulus._sign)
+                        )
+                    : trivialExponent
+                        ? BigIntegerCalculator.Pow(
+                            value._bits!,
+                            NumericsHelpers.Abs(exponent._sign),
+                            NumericsHelpers.Abs(modulus._sign)
+                        )
+                    : BigIntegerCalculator.Pow(
+                        value._bits!,
+                        exponent._bits!,
+                        NumericsHelpers.Abs(modulus._sign)
+                    );
 
                 result = value._sign < 0 && !exponent.IsEven ? -1 * bits : bits;
             }
@@ -1324,11 +1324,9 @@ namespace System.Numerics
             if (_bits == null)
             {
                 if (other._bits == null)
-                    return _sign < other._sign
-                        ? -1
-                        : _sign > other._sign
-                            ? +1
-                            : 0;
+                    return _sign < other._sign ? -1
+                        : _sign > other._sign ? +1
+                        : 0;
                 return -other._sign;
             }
             int cuThis,
@@ -1483,7 +1481,7 @@ namespace System.Numerics
         {
             AllocateArray,
             Count,
-            Span
+            Span,
         }
 
         /// <summary>Shared logic for <see cref="ToByteArray(bool, bool)"/>, <see cref="TryWriteBytes(Span{byte}, out int, bool, bool)"/>, and <see cref="GetByteCount"/>.</summary>
@@ -5011,11 +5009,9 @@ namespace System.Numerics
                 else
                 {
                     actualResult =
-                        (value._sign >= byte.MaxValue)
-                            ? byte.MaxValue
-                            : (value._sign <= byte.MinValue)
-                                ? byte.MinValue
-                                : (byte)value._sign;
+                        (value._sign >= byte.MaxValue) ? byte.MaxValue
+                        : (value._sign <= byte.MinValue) ? byte.MinValue
+                        : (byte)value._sign;
                 }
 
                 result = (TOther)(object)actualResult;
@@ -5032,11 +5028,9 @@ namespace System.Numerics
                 else
                 {
                     actualResult =
-                        (value._sign >= char.MaxValue)
-                            ? char.MaxValue
-                            : (value._sign <= char.MinValue)
-                                ? char.MinValue
-                                : (char)value._sign;
+                        (value._sign >= char.MaxValue) ? char.MaxValue
+                        : (value._sign <= char.MinValue) ? char.MinValue
+                        : (char)value._sign;
                 }
 
                 result = (TOther)(object)actualResult;
@@ -5047,9 +5041,9 @@ namespace System.Numerics
                 decimal actualResult =
                     (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
                         ? decimal.MaxValue
-                        : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
-                            ? decimal.MinValue
-                            : (decimal)value;
+                    : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
+                        ? decimal.MinValue
+                    : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -5076,11 +5070,9 @@ namespace System.Numerics
                 else
                 {
                     actualResult =
-                        (value._sign >= short.MaxValue)
-                            ? short.MaxValue
-                            : (value._sign <= short.MinValue)
-                                ? short.MinValue
-                                : (short)value._sign;
+                        (value._sign >= short.MaxValue) ? short.MaxValue
+                        : (value._sign <= short.MinValue) ? short.MinValue
+                        : (short)value._sign;
                 }
 
                 result = (TOther)(object)actualResult;
@@ -5097,11 +5089,9 @@ namespace System.Numerics
                 else
                 {
                     actualResult =
-                        (value._sign >= int.MaxValue)
-                            ? int.MaxValue
-                            : (value._sign <= int.MinValue)
-                                ? int.MinValue
-                                : (int)value._sign;
+                        (value._sign >= int.MaxValue) ? int.MaxValue
+                        : (value._sign <= int.MinValue) ? int.MinValue
+                        : (int)value._sign;
                 }
 
                 result = (TOther)(object)actualResult;
@@ -5110,33 +5100,27 @@ namespace System.Numerics
             else if (typeof(TOther) == typeof(long))
             {
                 long actualResult =
-                    (value >= long.MaxValue)
-                        ? long.MaxValue
-                        : (value <= long.MinValue)
-                            ? long.MinValue
-                            : (long)value;
+                    (value >= long.MaxValue) ? long.MaxValue
+                    : (value <= long.MinValue) ? long.MinValue
+                    : (long)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(Int128))
             {
                 Int128 actualResult =
-                    (value >= Int128.MaxValue)
-                        ? Int128.MaxValue
-                        : (value <= Int128.MinValue)
-                            ? Int128.MinValue
-                            : (Int128)value;
+                    (value >= Int128.MaxValue) ? Int128.MaxValue
+                    : (value <= Int128.MinValue) ? Int128.MinValue
+                    : (Int128)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(nint))
             {
                 nint actualResult =
-                    (value >= nint.MaxValue)
-                        ? nint.MaxValue
-                        : (value <= nint.MinValue)
-                            ? nint.MinValue
-                            : (nint)value;
+                    (value >= nint.MaxValue) ? nint.MaxValue
+                    : (value <= nint.MinValue) ? nint.MinValue
+                    : (nint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -5157,11 +5141,9 @@ namespace System.Numerics
                 else
                 {
                     actualResult =
-                        (value._sign >= sbyte.MaxValue)
-                            ? sbyte.MaxValue
-                            : (value._sign <= sbyte.MinValue)
-                                ? sbyte.MinValue
-                                : (sbyte)value._sign;
+                        (value._sign >= sbyte.MaxValue) ? sbyte.MaxValue
+                        : (value._sign <= sbyte.MinValue) ? sbyte.MinValue
+                        : (sbyte)value._sign;
                 }
 
                 result = (TOther)(object)actualResult;
@@ -5184,11 +5166,9 @@ namespace System.Numerics
                 else
                 {
                     actualResult =
-                        (value._sign >= ushort.MaxValue)
-                            ? ushort.MaxValue
-                            : (value._sign <= ushort.MinValue)
-                                ? ushort.MinValue
-                                : (ushort)value._sign;
+                        (value._sign >= ushort.MaxValue) ? ushort.MaxValue
+                        : (value._sign <= ushort.MinValue) ? ushort.MinValue
+                        : (ushort)value._sign;
                 }
 
                 result = (TOther)(object)actualResult;
@@ -5197,44 +5177,36 @@ namespace System.Numerics
             else if (typeof(TOther) == typeof(uint))
             {
                 uint actualResult =
-                    (value >= uint.MaxValue)
-                        ? uint.MaxValue
-                        : IsNegative(value)
-                            ? uint.MinValue
-                            : (uint)value;
+                    (value >= uint.MaxValue) ? uint.MaxValue
+                    : IsNegative(value) ? uint.MinValue
+                    : (uint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(ulong))
             {
                 ulong actualResult =
-                    (value >= ulong.MaxValue)
-                        ? ulong.MaxValue
-                        : IsNegative(value)
-                            ? ulong.MinValue
-                            : (ulong)value;
+                    (value >= ulong.MaxValue) ? ulong.MaxValue
+                    : IsNegative(value) ? ulong.MinValue
+                    : (ulong)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(UInt128))
             {
                 UInt128 actualResult =
-                    (value >= UInt128.MaxValue)
-                        ? UInt128.MaxValue
-                        : IsNegative(value)
-                            ? UInt128.MinValue
-                            : (UInt128)value;
+                    (value >= UInt128.MaxValue) ? UInt128.MaxValue
+                    : IsNegative(value) ? UInt128.MinValue
+                    : (UInt128)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(nuint))
             {
                 nuint actualResult =
-                    (value >= nuint.MaxValue)
-                        ? nuint.MaxValue
-                        : IsNegative(value)
-                            ? nuint.MinValue
-                            : (nuint)value;
+                    (value >= nuint.MaxValue) ? nuint.MaxValue
+                    : IsNegative(value) ? nuint.MinValue
+                    : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -5303,9 +5275,9 @@ namespace System.Numerics
                 decimal actualResult =
                     (value >= new Int128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
                         ? decimal.MaxValue
-                        : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
-                            ? decimal.MinValue
-                            : (decimal)value;
+                    : (value <= new Int128(0xFFFF_FFFF_0000_0000, 0x0000_0000_0000_0001))
+                        ? decimal.MinValue
+                    : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }

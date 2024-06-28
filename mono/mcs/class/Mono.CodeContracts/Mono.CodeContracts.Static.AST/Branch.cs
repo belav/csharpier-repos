@@ -73,6 +73,6 @@ namespace Mono.CodeContracts.Static.AST
         Ble_Un,
         Blt,
         Blt_Un,
-        Bne_un
+        Bne_un,
     }
 }

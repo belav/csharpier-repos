@@ -94,7 +94,7 @@ namespace System.Net
         private static readonly HeaderVariantInfo[] s_headerInfo =
         {
             new HeaderVariantInfo(HttpKnownHeaderNames.SetCookie, CookieVariant.Rfc2109),
-            new HeaderVariantInfo(HttpKnownHeaderNames.SetCookie2, CookieVariant.Rfc2965)
+            new HeaderVariantInfo(HttpKnownHeaderNames.SetCookie2, CookieVariant.Rfc2965),
         };
 
         private readonly Hashtable m_domainTable = new Hashtable(); // Do not rename (binary serialization)

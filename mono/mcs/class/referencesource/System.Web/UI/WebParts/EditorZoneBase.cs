@@ -194,7 +194,7 @@ namespace System.Web.UI.WebControls.WebParts
             set { ViewState["HeaderText"] = value; }
         }
 
-        [WebSysDefaultValue(SR.EditorZoneBase_DefaultInstructionText),]
+        [WebSysDefaultValue(SR.EditorZoneBase_DefaultInstructionText)]
         public override string InstructionText
         {
             get

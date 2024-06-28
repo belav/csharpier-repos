@@ -16,7 +16,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new bool?[] { },
                 new bool?[] { true },
-                new bool?[] { true, false }
+                new bool?[] { true, false },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -42,7 +42,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new byte?[] { },
                 new byte?[] { 0 },
-                new byte?[] { 0, 1, byte.MaxValue }
+                new byte?[] { 0, 1, byte.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -68,7 +68,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new char?[] { },
                 new char?[] { '\0' },
-                new char?[] { '\0', '\b', 'A', '\uffff' }
+                new char?[] { '\0', '\b', 'A', '\uffff' },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -100,8 +100,8 @@ namespace System.Linq.Expressions.Tests
                     decimal.One,
                     decimal.MinusOne,
                     decimal.MinValue,
-                    decimal.MaxValue
-                }
+                    decimal.MaxValue,
+                },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -137,8 +137,8 @@ namespace System.Linq.Expressions.Tests
                     double.Epsilon,
                     double.NegativeInfinity,
                     double.PositiveInfinity,
-                    double.NaN
-                }
+                    double.NaN,
+                },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -164,7 +164,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new E?[] { },
                 new E?[] { (E)0 },
-                new E?[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue }
+                new E?[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -190,7 +190,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new El?[] { },
                 new El?[] { (El)0 },
-                new El?[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue }
+                new El?[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -226,8 +226,8 @@ namespace System.Linq.Expressions.Tests
                     float.Epsilon,
                     float.NegativeInfinity,
                     float.PositiveInfinity,
-                    float.NaN
-                }
+                    float.NaN,
+                },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -253,7 +253,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new int?[] { },
                 new int?[] { 0 },
-                new int?[] { 0, 1, -1, int.MinValue, int.MaxValue }
+                new int?[] { 0, 1, -1, int.MinValue, int.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -279,7 +279,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new long?[] { },
                 new long?[] { 0 },
-                new long?[] { 0, 1, -1, long.MinValue, long.MaxValue }
+                new long?[] { 0, 1, -1, long.MinValue, long.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -305,7 +305,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new S?[] { },
                 new S?[] { default(S) },
-                new S?[] { default(S), new S() }
+                new S?[] { default(S), new S() },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -331,7 +331,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new sbyte?[] { },
                 new sbyte?[] { 0 },
-                new sbyte?[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue }
+                new sbyte?[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -357,7 +357,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new Sc?[] { },
                 new Sc?[] { default(Sc) },
-                new Sc?[] { default(Sc), new Sc(), new Sc(null) }
+                new Sc?[] { default(Sc), new Sc(), new Sc(null) },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -383,7 +383,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new Scs?[] { },
                 new Scs?[] { default(Scs) },
-                new Scs?[] { default(Scs), new Scs(), new Scs(null, new S()) }
+                new Scs?[] { default(Scs), new Scs(), new Scs(null, new S()) },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -409,7 +409,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new short?[] { },
                 new short?[] { 0 },
-                new short?[] { 0, 1, -1, short.MinValue, short.MaxValue }
+                new short?[] { 0, 1, -1, short.MinValue, short.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -435,7 +435,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new Sp?[] { },
                 new Sp?[] { default(Sp) },
-                new Sp?[] { default(Sp), new Sp(), new Sp(5, 5.0) }
+                new Sp?[] { default(Sp), new Sp(), new Sp(5, 5.0) },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -461,7 +461,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new Ss?[] { },
                 new Ss?[] { default(Ss) },
-                new Ss?[] { default(Ss), new Ss(), new Ss(new S()) }
+                new Ss?[] { default(Ss), new Ss(), new Ss(new S()) },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -487,7 +487,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new uint?[] { },
                 new uint?[] { 0 },
-                new uint?[] { 0, 1, uint.MaxValue }
+                new uint?[] { 0, 1, uint.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -513,7 +513,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new ulong?[] { },
                 new ulong?[] { 0 },
-                new ulong?[] { 0, 1, ulong.MaxValue }
+                new ulong?[] { 0, 1, ulong.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -539,7 +539,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new ushort?[] { },
                 new ushort?[] { 0 },
-                new ushort?[] { 0, 1, ushort.MaxValue }
+                new ushort?[] { 0, 1, ushort.MaxValue },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)
@@ -591,7 +591,7 @@ namespace System.Linq.Expressions.Tests
             {
                 new Ts?[] { },
                 new Ts?[] { default(Ts) },
-                new Ts?[] { default(Ts), new Ts() }
+                new Ts?[] { default(Ts), new Ts() },
             };
             Expression[][] exprs = new Expression[array.Length][];
             for (int i = 0; i < array.Length; i++)

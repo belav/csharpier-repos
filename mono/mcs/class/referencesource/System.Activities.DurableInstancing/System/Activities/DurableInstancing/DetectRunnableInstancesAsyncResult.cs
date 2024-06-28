@@ -52,7 +52,7 @@ namespace System.Activities.DurableInstancing
                 {
                     ParameterName = "@workflowHostType",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = base.Store.WorkflowHostType
+                    Value = base.Store.WorkflowHostType,
                 }
             );
             if (base.Store.DatabaseVersion >= StoreUtilities.Version45)
@@ -62,7 +62,7 @@ namespace System.Activities.DurableInstancing
                     {
                         ParameterName = "@surrogateLockOwnerId",
                         SqlDbType = SqlDbType.BigInt,
-                        Value = base.StoreLock.SurrogateLockOwnerId
+                        Value = base.StoreLock.SurrogateLockOwnerId,
                     }
                 );
             }

@@ -69,7 +69,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             CheckSddlConstructor("", sdBinary);
         }
@@ -158,7 +158,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             CheckSddlConstructor("O:BUG:BAD:(A;;RPWPCCDCLCSWRCWDWOGA;;;S-1-0-0)", sdBinary);
             CheckSddlConstructor("G:BAO:BUD:(A;;RPWPCCDCLCSWRCWDWOGA;;;S-1-0-0)", sdBinary);
@@ -218,7 +218,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x20,
                 0x02,
                 0x00,
-                0x00
+                0x00,
             };
             CheckSddlConstructor("O:BUG:BA", sdBinary);
 
@@ -339,7 +339,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             CheckSddlConstructor(
                 "O:BUG:BAD:(OA;;RPWPCCDCLCSWRCWDWOGA;ab721a53-1e2f-11d0-9819-00aa0040529b;ab721a53-1e2f-11d0-9819-00aa0040529b;S-1-0-0)",
@@ -431,7 +431,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             CheckBinaryConstructor("O:BUG:BAD:(A;;CCDCLCSWRPWPRCWDWOGA;;;S-1-0-0)", sdBinary);
             sdBinary = new byte[]
@@ -487,7 +487,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x20,
                 0x02,
                 0x00,
-                0x00
+                0x00,
             };
             CheckBinaryConstructor("O:BUG:BA", sdBinary);
 
@@ -608,7 +608,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             CheckBinaryConstructor(
                 "O:BUG:BAD:(OA;;CCDCLCSWRPWPRCWDWOGA;ab721a53-1e2f-11d0-9819-00aa0040529b;ab721a53-1e2f-11d0-9819-00aa0040529b;S-1-0-0)",
@@ -647,7 +647,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(sdBinary, buffer);
 
@@ -712,7 +712,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x20,
                 0x02,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(sdBinary, buffer);
         }
@@ -803,7 +803,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(sdBinary, buffer);
 
@@ -916,7 +916,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x20,
                 0x02,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(sdBinary, buffer);
 
@@ -1065,7 +1065,7 @@ namespace MonoTests.System.Security.AccessControl
                 0x20,
                 0x02,
                 0x00,
-                0x00
+                0x00,
             };
             Assert.AreEqual(sdBinary, buffer);
         }

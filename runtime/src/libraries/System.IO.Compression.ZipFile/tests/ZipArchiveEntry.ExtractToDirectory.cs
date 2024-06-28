@@ -50,7 +50,7 @@ namespace System.IO.Compression.Tests
             yield return new string[]
             {
                 "SpacedRelative.zip",
-                "System.IO.DirectoryNotFoundException"
+                "System.IO.DirectoryNotFoundException",
             };
         }
 

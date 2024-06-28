@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
         public enum Location
         {
             OnDisk,
-            Embedded
+            Embedded,
         }
 
         protected static Task TestAsync(

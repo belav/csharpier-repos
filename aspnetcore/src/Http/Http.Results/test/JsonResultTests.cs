@@ -28,7 +28,7 @@ public class JsonResultTests
             jsonSerializerOptions: null
         );
 
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -47,7 +47,7 @@ public class JsonResultTests
             jsonSerializerOptions: null
         );
 
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -69,7 +69,7 @@ public class JsonResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act
@@ -99,7 +99,7 @@ public class JsonResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act
@@ -135,7 +135,7 @@ public class JsonResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act
@@ -164,7 +164,7 @@ public class JsonResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act
@@ -186,14 +186,14 @@ public class JsonResultTests
     public async Task ExecuteAsync_UsesDefaults_HttpStatusCodesWithoutTypes()
     {
         // Arrange
-        var details = new ProblemDetails() { Status = StatusCodes.Status418ImATeapot, };
+        var details = new ProblemDetails() { Status = StatusCodes.Status418ImATeapot };
 
         var result = new ProblemHttpResult(details);
         var stream = new MemoryStream();
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act
@@ -222,7 +222,7 @@ public class JsonResultTests
             jsonSerializerOptions: null,
             StatusCodes.Status422UnprocessableEntity
         );
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -235,11 +235,11 @@ public class JsonResultTests
     public async Task ExecuteAsync_GetsStatusCodeFromProblemDetails()
     {
         // Arrange
-        var details = new ProblemDetails { Status = StatusCodes.Status413RequestEntityTooLarge, };
+        var details = new ProblemDetails { Status = StatusCodes.Status413RequestEntityTooLarge };
 
         var result = new JsonHttpResult<ProblemDetails>(details, jsonSerializerOptions: null);
 
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);

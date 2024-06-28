@@ -264,7 +264,7 @@ namespace System.ServiceModel.Activities
                 return new CorrelationCallbackContext
                 {
                     ListenAddress = EndpointAddress10.FromEndpointAddress(listenAddress),
-                    Context = context
+                    Context = context,
                 };
             }
             return null;

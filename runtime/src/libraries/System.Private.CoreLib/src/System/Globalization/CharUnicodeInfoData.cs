@@ -2201,7 +2201,7 @@ namespace System.Globalization
                 0x23,
                 0x23,
                 0x23,
-                0x66
+                0x66,
             ];
 
         private static ReadOnlySpan<byte> CategoryCasingLevel2Index => // 6592
@@ -8797,7 +8797,7 @@ namespace System.Globalization
                 0xad,
                 0x01,
                 0xf6,
-                0x02
+                0x02,
             ];
 
         private static ReadOnlySpan<byte> CategoryCasingLevel3Index => // 12144
@@ -20945,7 +20945,7 @@ namespace System.Globalization
                 0xdd,
                 0xdd,
                 0xb6,
-                0xb6
+                0xb6,
             ];
 
         // Contains Unicode category & bidi class information
@@ -21183,7 +21183,7 @@ namespace System.Globalization
                 0x41,
                 0x39,
                 0x40,
-                0x41
+                0x41,
             ];
 
         // Contains simple culture-invariant uppercase mappings
@@ -21654,7 +21654,7 @@ namespace System.Globalization
                 0x00,
                 0x00,
                 0xde,
-                0xff
+                0xff,
             ];
 
         // Contains simple culture-invariant lowercase mappings
@@ -22125,7 +22125,7 @@ namespace System.Globalization
                 0x22,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             ];
 
         [Conditional("DEBUG")]
@@ -24319,7 +24319,7 @@ namespace System.Globalization
                 0x0a,
                 0x0a,
                 0x0a,
-                0x0a
+                0x0a,
             ];
 
         private static ReadOnlySpan<byte> NumericGraphemeLevel2Index => // 5056
@@ -29379,7 +29379,7 @@ namespace System.Globalization
                 0x01,
                 0x00,
                 0x01,
-                0x00
+                0x00,
             ];
 
         private static ReadOnlySpan<byte> NumericGraphemeLevel3Index => // 6256
@@ -35639,7 +35639,7 @@ namespace System.Globalization
                 0x03,
                 0x03,
                 0x03,
-                0x03
+                0x03,
             ];
 
         // Contains decimal digit values in high nibble; digit values in low nibble
@@ -35821,7 +35821,7 @@ namespace System.Globalization
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             ];
 
         // Contains numeric values
@@ -37242,7 +37242,7 @@ namespace System.Globalization
                 0x00,
                 0x00,
                 0xf0,
-                0xbf
+                0xbf,
             ];
 
         // Contains grapheme cluster segmentation values
@@ -37424,7 +37424,7 @@ namespace System.Globalization
                 0x00,
                 0x00,
                 0x00,
-                0x06
+                0x06,
             ];
     }
 }

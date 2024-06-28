@@ -2046,7 +2046,7 @@ public class SqlServerTypeMappingSourceTest : RelationalTypeMappingSourceTestBas
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
             TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>() with
             {
-                Plugins = new[] { new FakeTypeMappingSourcePlugin() }
+                Plugins = new[] { new FakeTypeMappingSourcePlugin() },
             }
         );
 

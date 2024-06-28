@@ -49,7 +49,7 @@ public class RouteEndpointBuilderTest
         )
         {
             DisplayName = "Display name!",
-            Metadata = { metadata }
+            Metadata = { metadata },
         };
 
         var endpoint = Assert.IsType<RouteEndpoint>(builder.Build());
@@ -80,8 +80,8 @@ public class RouteEndpointBuilderTest
             Metadata =
             {
                 new TestRouteDiaganosticsMetadata { Route = "Test" },
-                metadata
-            }
+                metadata,
+            },
         };
 
         var endpoint = Assert.IsType<RouteEndpoint>(builder.Build());
@@ -119,8 +119,8 @@ public class RouteEndpointBuilderTest
             Metadata =
             {
                 new TestCorsMetadata(),
-                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false)
-            }
+                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false),
+            },
         };
 
         // Act && Assert
@@ -148,8 +148,8 @@ public class RouteEndpointBuilderTest
             {
                 new HttpMethodMetadata(new[] { HttpMethods.Get }, acceptCorsPreflight: false),
                 new TestCorsMetadata(),
-                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false)
-            }
+                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false),
+            },
         };
 
         // Act && Assert
@@ -178,8 +178,8 @@ public class RouteEndpointBuilderTest
             DisplayName = "Display name!",
             Metadata =
             {
-                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false)
-            }
+                new HttpMethodMetadata(new[] { HttpMethods.Delete }, acceptCorsPreflight: false),
+            },
         };
 
         // Act && Assert

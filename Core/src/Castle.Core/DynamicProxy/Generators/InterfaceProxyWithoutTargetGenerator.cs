@@ -45,7 +45,7 @@ namespace Castle.DynamicProxy.Generators
                 (c, m) => NullExpression.Instance
             )
             {
-                Logger = Logger
+                Logger = Logger,
             };
         }
 

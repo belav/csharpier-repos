@@ -32,7 +32,7 @@ public class ConvertInterpolatedStringToRawStringTests
             FixedCode = fixedCode,
             LanguageVersion = LanguageVersion.CSharp11,
             CodeActionIndex = index,
-            TestState = { OutputKind = outputKind, },
+            TestState = { OutputKind = outputKind },
         }.RunAsync();
     }
 

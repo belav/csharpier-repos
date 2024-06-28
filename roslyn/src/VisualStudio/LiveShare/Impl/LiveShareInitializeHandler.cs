@@ -24,7 +24,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Shims
                 CodeActionProvider = false,
                 ReferencesProvider = true,
                 RenameProvider = false,
-            }
+            },
         };
 
         public Task<InitializeResult> HandleAsync(

@@ -69,7 +69,7 @@ internal static partial class Interop
             kFSEventStreamCreateFlagNoDefer = 0x00000002,
             kFSEventStreamCreateFlagWatchRoot = 0x00000004,
             kFSEventStreamCreateFlagIgnoreSelf = 0x00000008,
-            kFSEventStreamCreateFlagFileEvents = 0x00000010
+            kFSEventStreamCreateFlagFileEvents = 0x00000010,
         }
 
         [StructLayout(LayoutKind.Sequential)]

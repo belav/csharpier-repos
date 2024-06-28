@@ -28,7 +28,7 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
             {
                 EncryptionAlgorithmType = encryptionAlgorithmType,
                 EncryptionAlgorithmKeySize = 192,
-                ValidationAlgorithmType = validationAlgorithmType
+                ValidationAlgorithmType = validationAlgorithmType,
             },
             masterKey.ToSecret()
         );
@@ -75,7 +75,7 @@ public class ManagedAuthenticatedEncryptorDescriptorDeserializerTests
             {
                 EncryptionAlgorithmType = typeof(Aes),
                 EncryptionAlgorithmKeySize = 192,
-                ValidationAlgorithmType = typeof(HMACSHA384)
+                ValidationAlgorithmType = typeof(HMACSHA384),
             },
             masterKey.ToSecret()
         );

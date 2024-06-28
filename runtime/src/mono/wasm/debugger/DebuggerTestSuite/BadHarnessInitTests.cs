@@ -32,7 +32,7 @@ namespace DebuggerTests
                 new List<(string, Task<Result>)>
                 {
                     ("Profiler.enable", client.SendCommand("Profiler.enable", null, token)),
-                    (bad_cmd_name, client.SendCommand(bad_cmd_name, null, token))
+                    (bad_cmd_name, client.SendCommand(bad_cmd_name, null, token)),
                 };
 
             await Ready();

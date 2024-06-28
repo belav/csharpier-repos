@@ -515,7 +515,7 @@ namespace LibraryImportGenerator.UnitTests
             var test = new GeneratedTargetPInvokeTest(targetPInvokeAssertion, targetFramework)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
             return test.RunAsync();

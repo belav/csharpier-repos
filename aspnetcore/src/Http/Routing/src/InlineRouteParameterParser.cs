@@ -261,7 +261,7 @@ public static class InlineRouteParameterParser
         Start,
         ParsingName,
         InsideParenthesis,
-        End
+        End,
     }
 
     private readonly struct ConstraintParseResults

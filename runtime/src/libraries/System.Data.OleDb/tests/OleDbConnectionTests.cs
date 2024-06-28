@@ -291,7 +291,7 @@ namespace System.Data.OleDb.Tests
             {
                 "[oledb]",
                 "; Everything after this line is an OLE DB initstring",
-                ConnectionString
+                ConnectionString,
             }.AsSpan();
             File.WriteAllLines(udlFile, lines.Slice(start, length).ToArray());
 
@@ -311,7 +311,7 @@ namespace System.Data.OleDb.Tests
                 {
                     "[oledb]",
                     "; Everything after this line is an OLE DB initstring",
-                    ConnectionString
+                    ConnectionString,
                 },
                 System.Text.Encoding.Unicode
             );
@@ -456,7 +456,7 @@ namespace System.Data.OleDb.Tests
             OleDbConnectionStringBuilder builder = new OleDbConnectionStringBuilder
             {
                 Provider = provider,
-                DataSource = "myDB.mdb"
+                DataSource = "myDB.mdb",
             };
             string connStr = builder.ConnectionString;
             Assert.Equal($"Provider={provider};Data Source=myDB.mdb", connStr);

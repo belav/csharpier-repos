@@ -1820,7 +1820,7 @@ namespace System.Net.Http
     public enum HttpKeepAlivePingPolicy
     {
         WithActiveRequests,
-        Always
+        Always,
     }
 
     public partial class StreamContent : System.Net.Http.HttpContent

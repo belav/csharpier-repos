@@ -461,7 +461,7 @@ namespace Microsoft.CodeAnalysis.Completion
                 AutomationText = AutomationText,
                 ProviderName = ProviderName,
                 Flags = Flags,
-                AdditionalFilterTexts = newAdditionalFilterTexts
+                AdditionalFilterTexts = newAdditionalFilterTexts,
             };
         }
 

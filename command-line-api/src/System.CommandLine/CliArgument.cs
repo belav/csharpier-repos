@@ -66,7 +66,11 @@ namespace System.CommandLine
                         _completionSources = new()
                         {
                             static _ =>
-                                new CompletionItem[] { new(bool.TrueString), new(bool.FalseString) }
+                                new CompletionItem[]
+                                {
+                                    new(bool.TrueString),
+                                    new(bool.FalseString),
+                                },
                         };
                     }
                     else if (
@@ -79,7 +83,7 @@ namespace System.CommandLine
                     {
                         _completionSources = new()
                         {
-                            _ => Enum.GetNames(valueType).Select(n => new CompletionItem(n))
+                            _ => Enum.GetNames(valueType).Select(n => new CompletionItem(n)),
                         };
                     }
                     else

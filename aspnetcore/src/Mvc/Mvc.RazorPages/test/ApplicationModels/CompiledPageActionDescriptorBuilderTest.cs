@@ -69,7 +69,7 @@ public class CompiledPageActionDescriptorBuilderTest
         {
             PageType = typeof(TestPage).GetTypeInfo(),
             ModelType = typeof(TestModel).GetTypeInfo(),
-            Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>(), },
+            Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>() },
             HandlerMethods =
             {
                 new PageHandlerModel(
@@ -86,7 +86,7 @@ public class CompiledPageActionDescriptorBuilderTest
                 {
                     BindingInfo = new BindingInfo(),
                 },
-            }
+            },
         };
         var globalFilters = new FilterCollection();
 
@@ -133,7 +133,7 @@ public class CompiledPageActionDescriptorBuilderTest
         {
             PageType = typeof(TestPage).GetTypeInfo(),
             ModelType = typeof(string).GetTypeInfo(),
-            Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>(), },
+            Filters = { Mock.Of<IFilterMetadata>(), Mock.Of<IFilterMetadata>() },
             HandlerMethods =
             {
                 new PageHandlerModel(
@@ -150,7 +150,7 @@ public class CompiledPageActionDescriptorBuilderTest
                 {
                     BindingInfo = new BindingInfo(),
                 },
-            }
+            },
         };
         var globalFilters = new FilterCollection();
 
@@ -182,9 +182,9 @@ public class CompiledPageActionDescriptorBuilderTest
         {
             PageType = typeof(TestPage).GetTypeInfo(),
             ModelType = typeof(TestModel).GetTypeInfo(),
-            Filters = { Mock.Of<IFilterMetadata>(), },
+            Filters = { Mock.Of<IFilterMetadata>() },
         };
-        var globalFilters = new FilterCollection { Mock.Of<IFilterMetadata>(), };
+        var globalFilters = new FilterCollection { Mock.Of<IFilterMetadata>() };
 
         // Act
         var compiledPageActionDescriptor = CompiledPageActionDescriptorBuilder.Build(
@@ -246,7 +246,7 @@ public class CompiledPageActionDescriptorBuilderTest
             new object[0]
         )
         {
-            HandlerMethods = { handlerModel, }
+            HandlerMethods = { handlerModel },
         };
 
         // Act
@@ -281,7 +281,7 @@ public class CompiledPageActionDescriptorBuilderTest
         var parameters = handlerMethod.GetParameters();
         var parameterModel1 = new PageParameterModel(parameters[0], new object[0])
         {
-            ParameterName = "test-name"
+            ParameterName = "test-name",
         };
         var parameterModel2 = new PageParameterModel(parameters[1], new object[0])
         {
@@ -289,7 +289,7 @@ public class CompiledPageActionDescriptorBuilderTest
         };
         var handlerModel = new PageHandlerModel(handlerMethod, new object[0])
         {
-            Parameters = { parameterModel1, parameterModel2, }
+            Parameters = { parameterModel1, parameterModel2 },
         };
         var pageApplicationModel = new PageApplicationModel(
             actionDescriptor,
@@ -297,7 +297,7 @@ public class CompiledPageActionDescriptorBuilderTest
             new object[0]
         )
         {
-            HandlerMethods = { handlerModel, }
+            HandlerMethods = { handlerModel },
         };
 
         // Act
@@ -348,7 +348,7 @@ public class CompiledPageActionDescriptorBuilderTest
             new object[0]
         )
         {
-            HandlerProperties = { propertyModel, }
+            HandlerProperties = { propertyModel },
         };
 
         // Act
@@ -402,7 +402,7 @@ public class CompiledPageActionDescriptorBuilderTest
             new object[0]
         )
         {
-            HandlerProperties = { propertyModel1, propertyModel2, }
+            HandlerProperties = { propertyModel1, propertyModel2 },
         };
 
         // Act
@@ -438,7 +438,7 @@ public class CompiledPageActionDescriptorBuilderTest
         {
             ActionConstraints = new List<IActionConstraintMetadata>(),
             AttributeRouteInfo = new AttributeRouteInfo(),
-            EndpointMetadata = new List<object> { metadata3, metadata4, },
+            EndpointMetadata = new List<object> { metadata3, metadata4 },
             FilterDescriptors = new List<FilterDescriptor>(),
             RelativePath = "/Foo",
             RouteValues = new Dictionary<string, string>(),
@@ -448,7 +448,7 @@ public class CompiledPageActionDescriptorBuilderTest
         var pageApplicationModel = new PageApplicationModel(
             actionDescriptor,
             handlerTypeInfo,
-            new[] { metadata1, metadata2, }
+            new[] { metadata1, metadata2 }
         );
         pageApplicationModel.EndpointMetadata.Add(metadata5);
         pageApplicationModel.EndpointMetadata.Add(metadata6);

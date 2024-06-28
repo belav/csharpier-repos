@@ -85,7 +85,7 @@ namespace System.ServiceModel.Dispatcher
         MatchSingleFx,
         QuerySingleFx,
         QueryResult,
-        QueryMultipleResult
+        QueryMultipleResult,
     }
 
     enum OpcodeFlags
@@ -103,7 +103,7 @@ namespace System.ServiceModel.Dispatcher
         NoContextCopy = 0x00000200,
         InitialSelect = 0x00000400,
         CompressableSelect = 0x00000800,
-        Fx = 0x00001000
+        Fx = 0x00001000,
     }
 
     abstract class Opcode

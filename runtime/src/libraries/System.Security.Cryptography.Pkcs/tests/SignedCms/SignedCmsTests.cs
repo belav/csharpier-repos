@@ -831,7 +831,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None }
                 );
 
                 Assert.Throws<CryptographicException>(
@@ -864,7 +864,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None }
                 );
 
                 Assert.Throws<CryptographicException>(
@@ -910,7 +910,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             )
             {
                 cms.ComputeSignature(
-                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None }
                 );
 
                 Assert.Throws<CryptographicException>(

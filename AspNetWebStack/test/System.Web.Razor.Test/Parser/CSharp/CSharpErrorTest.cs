@@ -60,7 +60,7 @@ namespace System.Web.Razor.Test.Parser.CSharp
                                 CSharpLanguageCharacteristics.Instance.TokenizeString
                             )
                             {
-                                AutoCompleteString = "}"
+                                AutoCompleteString = "}",
                             }
                         )
                 ),
@@ -879,7 +879,7 @@ namespace System.Web.Razor.Test.Parser.CSharp
                         14,
                         0,
                         14
-                    )
+                    ),
                 }
             );
         }

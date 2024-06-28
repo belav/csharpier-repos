@@ -43,7 +43,7 @@ namespace Internal.TypeSystem
         Out = 2,
         Optional = 16,
         HasDefault = 4096,
-        HasFieldMarshal = 8192
+        HasFieldMarshal = 8192,
     }
 
     public struct ParameterMetadata
@@ -166,7 +166,7 @@ namespace Internal.TypeSystem
                     PInvokeAttributes.CharSetAnsi => CharSet.Ansi,
                     PInvokeAttributes.CharSetUnicode => CharSet.Unicode,
                     PInvokeAttributes.CharSetAuto => CharSet.Auto,
-                    _ => CharSet.None
+                    _ => CharSet.None,
                 };
             }
             set
@@ -181,7 +181,7 @@ namespace Internal.TypeSystem
                     CharSet.Unicode => PInvokeAttributes.CharSetUnicode,
                     CharSet.Auto => PInvokeAttributes.CharSetAuto,
                     (CharSet)0 => PInvokeAttributes.None,
-                    _ => throw new BadImageFormatException()
+                    _ => throw new BadImageFormatException(),
                 };
             }
         }

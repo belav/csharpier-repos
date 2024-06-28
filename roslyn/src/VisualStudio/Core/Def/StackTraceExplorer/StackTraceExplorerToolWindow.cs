@@ -146,7 +146,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             )
             {
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Stretch
+                VerticalAlignment = VerticalAlignment.Stretch,
             };
 
             var contentRoot = (DockPanel)Content;
@@ -161,7 +161,7 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
 
                 var points = new[]
                 {
-                    new POINTS() { x = (short)screenPosition.X, y = (short)screenPosition.Y }
+                    new POINTS() { x = (short)screenPosition.X, y = (short)screenPosition.Y },
                 };
 
                 var refCommandId = new Guid(Guids.StackTraceExplorerCommandIdString);

@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         Text = 0x00000001,
         Object = 0x00000002,
         MultiChar = 0x00000004,
-        MultiObject = 0x00000008
+        MultiObject = 0x00000008,
     }
 }

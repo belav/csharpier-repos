@@ -108,7 +108,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         PM_STRING_OPEQUALITY,
         PM_STRING_OPINEQUALITY,
 
-        PM_COUNT
+        PM_COUNT,
     }
 
     // enum identifying all predefined properties used in the C# compiler
@@ -124,7 +124,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
     {
         Static,
         Virtual,
-        Instance
+        Instance,
     }
 
     // Enum used to encode a method signature
@@ -149,6 +149,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         SIG_CLASS_TYVAR = (int)PredefinedType.PT_VOID + 1, // next element in signature is index of class tyvar
         SIG_METH_TYVAR, // next element in signature is index of method tyvar
         SIG_SZ_ARRAY // must be followed by signature type of array elements
+        ,
     }
 
     // A description of a method the compiler uses while compiling.
@@ -482,7 +483,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 PREDEFPROP.PP_G_OPTIONAL_VALUE,
                 PredefinedName.PN_CAP_VALUE,
                 PREDEFMETH.PM_G_OPTIONAL_GETVALUE
-            )
+            ),
         };
 
         private static PredefinedPropertyInfo GetPropInfo(PREDEFPROP property)
@@ -545,7 +546,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_DELEGATE,
                         2,
                         (int)PredefinedType.PT_DELEGATE,
-                        (int)PredefinedType.PT_DELEGATE
+                        (int)PredefinedType.PT_DELEGATE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -560,7 +561,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BOOL,
                         2,
                         (int)PredefinedType.PT_DELEGATE,
-                        (int)PredefinedType.PT_DELEGATE
+                        (int)PredefinedType.PT_DELEGATE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -575,7 +576,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BOOL,
                         2,
                         (int)PredefinedType.PT_DELEGATE,
-                        (int)PredefinedType.PT_DELEGATE
+                        (int)PredefinedType.PT_DELEGATE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -590,7 +591,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_DELEGATE,
                         2,
                         (int)PredefinedType.PT_DELEGATE,
-                        (int)PredefinedType.PT_DELEGATE
+                        (int)PredefinedType.PT_DELEGATE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -605,7 +606,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -621,7 +622,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -636,7 +637,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -652,7 +653,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -667,7 +668,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -683,7 +684,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -698,7 +699,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -714,7 +715,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -729,7 +730,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -745,7 +746,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)MethodSignatureEnum.SIG_SZ_ARRAY,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -760,7 +761,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -775,7 +776,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_CONSTANTEXPRESSION,
                         2,
                         (int)PredefinedType.PT_OBJECT,
-                        (int)PredefinedType.PT_TYPE
+                        (int)PredefinedType.PT_TYPE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -790,7 +791,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_TYPE
+                        (int)PredefinedType.PT_TYPE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -806,7 +807,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_TYPE,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -821,7 +822,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_TYPE
+                        (int)PredefinedType.PT_TYPE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -837,7 +838,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_TYPE,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -852,7 +853,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -868,7 +869,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -883,7 +884,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -900,7 +901,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_BOOL,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -915,7 +916,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -931,7 +932,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -946,7 +947,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_MEMBEREXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_FIELDINFO
+                        (int)PredefinedType.PT_FIELDINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -961,7 +962,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -978,7 +979,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_BOOL,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -993,7 +994,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1010,7 +1011,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_BOOL,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1028,7 +1029,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)MethodSignatureEnum.SIG_SZ_ARRAY,
-                        (int)PredefinedType.PT_PARAMETEREXPRESSION
+                        (int)PredefinedType.PT_PARAMETEREXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1043,7 +1044,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1059,7 +1060,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1074,7 +1075,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1091,7 +1092,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_BOOL,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1106,7 +1107,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1123,7 +1124,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_BOOL,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1138,7 +1139,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1154,7 +1155,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1169,7 +1170,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1185,7 +1186,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1200,7 +1201,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1216,7 +1217,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1231,7 +1232,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1248,7 +1249,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_BOOL,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1263,7 +1264,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1279,7 +1280,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1294,7 +1295,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1310,7 +1311,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1325,7 +1326,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_PARAMETEREXPRESSION,
                         2,
                         (int)PredefinedType.PT_TYPE,
-                        (int)PredefinedType.PT_STRING
+                        (int)PredefinedType.PT_STRING,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1340,7 +1341,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1356,7 +1357,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1371,7 +1372,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1387,7 +1388,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1402,7 +1403,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BINARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1418,7 +1419,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1433,7 +1434,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1447,7 +1448,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         1,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1462,7 +1463,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1476,7 +1477,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         1,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1491,7 +1492,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1508,7 +1509,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)PredefinedType.PT_METHODINFO,
                         (int)MethodSignatureEnum.SIG_SZ_ARRAY,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1524,7 +1525,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         2,
                         (int)PredefinedType.PT_CONSTRUCTORINFO,
                         (int)MethodSignatureEnum.SIG_SZ_ARRAY,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1538,7 +1539,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         (int)PredefinedType.PT_NEWEXPRESSION,
                         1,
-                        (int)PredefinedType.PT_TYPE
+                        (int)PredefinedType.PT_TYPE,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1552,7 +1553,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         1,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1566,7 +1567,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     {
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         1,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1581,7 +1582,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_UNARYEXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_METHODINFO
+                        (int)PredefinedType.PT_METHODINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1597,7 +1598,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         2,
                         (int)PredefinedType.PT_TYPE,
                         (int)MethodSignatureEnum.SIG_SZ_ARRAY,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1612,7 +1613,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_MEMBEREXPRESSION,
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
-                        (int)PredefinedType.PT_PROPERTYINFO
+                        (int)PredefinedType.PT_PROPERTYINFO,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1628,7 +1629,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         2,
                         (int)PredefinedType.PT_EXPRESSION,
                         (int)MethodSignatureEnum.SIG_SZ_ARRAY,
-                        (int)PredefinedType.PT_EXPRESSION
+                        (int)PredefinedType.PT_EXPRESSION,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1643,7 +1644,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_VOID,
                         1,
                         (int)MethodSignatureEnum.SIG_CLASS_TYVAR,
-                        0
+                        0,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1667,7 +1668,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_STRING,
                         2,
                         (int)PredefinedType.PT_OBJECT,
-                        (int)PredefinedType.PT_OBJECT
+                        (int)PredefinedType.PT_OBJECT,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1683,7 +1684,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         3,
                         (int)PredefinedType.PT_OBJECT,
                         (int)PredefinedType.PT_OBJECT,
-                        (int)PredefinedType.PT_OBJECT
+                        (int)PredefinedType.PT_OBJECT,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1698,7 +1699,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_STRING,
                         2,
                         (int)PredefinedType.PT_STRING,
-                        (int)PredefinedType.PT_STRING
+                        (int)PredefinedType.PT_STRING,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1713,7 +1714,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BOOL,
                         2,
                         (int)PredefinedType.PT_STRING,
-                        (int)PredefinedType.PT_STRING
+                        (int)PredefinedType.PT_STRING,
                     }
                 ),
                 new PredefinedMethodInfo(
@@ -1728,7 +1729,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         (int)PredefinedType.PT_BOOL,
                         2,
                         (int)PredefinedType.PT_STRING,
-                        (int)PredefinedType.PT_STRING
+                        (int)PredefinedType.PT_STRING,
                     }
                 ),
             };

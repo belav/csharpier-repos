@@ -219,7 +219,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                     DiagnosticSeverity.Warning,
                     location,
                     "There are multiple types named 'Location'. Source was generated for the first one detected. Use 'JsonSerializableAttribute.TypeInfoPropertyName' to resolve this collision."
-                )
+                ),
             };
 
             CompilationHelper.AssertEqualDiagnosticMessages(
@@ -782,7 +782,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                     DiagnosticSeverity.Error,
                     contextLocation,
                     $"The System.Text.Json source generator is not available in C# {langVersion.ToDisplayString()}. Please use language version 9.0 or greater."
-                )
+                ),
             };
 
             CompilationHelper.AssertEqualDiagnosticMessages(
@@ -853,7 +853,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
             MetadataReference[] additionalReferences =
             {
-                MetadataReference.CreateFromImage(referencedImage)
+                MetadataReference.CreateFromImage(referencedImage),
             };
 
             Compilation compilation = CompilationHelper.CreateCompilation(

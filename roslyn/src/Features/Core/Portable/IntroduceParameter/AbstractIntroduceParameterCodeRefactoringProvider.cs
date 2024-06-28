@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.IntroduceParameter
         {
             Refactor,
             Trampoline,
-            Overload
+            Overload,
         }
 
         protected abstract SyntaxNode GenerateExpressionFromOptionalParameter(

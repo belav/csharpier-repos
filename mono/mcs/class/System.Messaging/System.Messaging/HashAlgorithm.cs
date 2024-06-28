@@ -39,6 +39,6 @@ namespace System.Messaging
         Md4 = 32770,
         Md5 = 32771,
         None = 0,
-        Sha = 32772
+        Sha = 32772,
     }
 }

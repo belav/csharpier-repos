@@ -61,7 +61,7 @@ namespace System.Text.Json
         {
             throw new JsonException(SR.Format(SR.DeserializeUnableToConvertValue, propertyType))
             {
-                AppendPathInformation = true
+                AppendPathInformation = true,
             };
         }
 
@@ -177,7 +177,7 @@ namespace System.Text.Json
         {
             throw new JsonException(SR.Format(SR.SerializationConverterRead, converter))
             {
-                AppendPathInformation = true
+                AppendPathInformation = true,
             };
         }
 
@@ -186,7 +186,7 @@ namespace System.Text.Json
         {
             throw new JsonException(SR.Format(SR.SerializationConverterWrite, converter))
             {
-                AppendPathInformation = true
+                AppendPathInformation = true,
             };
         }
 
@@ -195,7 +195,7 @@ namespace System.Text.Json
         {
             throw new JsonException(SR.Format(SR.SerializerCycleDetected, maxDepth))
             {
-                AppendPathInformation = true
+                AppendPathInformation = true,
             };
         }
 

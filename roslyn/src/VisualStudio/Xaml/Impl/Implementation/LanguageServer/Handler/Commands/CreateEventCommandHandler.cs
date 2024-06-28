@@ -66,7 +66,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             // Arguments[1]: XamlEventDescription
             var arguments = new object[]
             {
-                ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>()
+                ((JToken)request.Arguments[1]).ToObject<XamlEventDescription>(),
             };
             return await commandService
                 .ExecuteCommandAsync(document, request.Command, arguments, cancellationToken)

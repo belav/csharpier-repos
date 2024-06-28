@@ -60,7 +60,7 @@ public class SqlServerStatisticsAggregateMethodTranslator : IAggregateMethodCall
             nameof(SqlServerDbFunctionsExtensions.StandardDeviationPopulation) => "STDEVP",
             nameof(SqlServerDbFunctionsExtensions.VarianceSample) => "VAR",
             nameof(SqlServerDbFunctionsExtensions.VariancePopulation) => "VARP",
-            _ => null
+            _ => null,
         };
 
         if (functionName is null)

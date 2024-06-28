@@ -20,5 +20,5 @@ public enum SameSiteMode
     Lax,
 
     /// <summary>Indicates the client should only send the cookie with "same-site" requests.</summary>
-    Strict
+    Strict,
 }

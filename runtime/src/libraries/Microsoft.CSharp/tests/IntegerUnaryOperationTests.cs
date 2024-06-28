@@ -66,7 +66,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             -1,
             3,
             long.MinValue,
-            long.MaxValue
+            long.MaxValue,
         };
 
         public static IEnumerable<object[]> Int64TestNegations =>
@@ -87,7 +87,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             1,
             3,
             long.MaxValue,
-            ulong.MaxValue
+            ulong.MaxValue,
         };
 
         public static IEnumerable<object[]> UInt64TestUnaryPluses =>

@@ -37,6 +37,6 @@ namespace Mono.Messaging
         Aborted = 0,
         Committed = 1,
         Initialized = 2,
-        Pending = 3
+        Pending = 3,
     }
 }

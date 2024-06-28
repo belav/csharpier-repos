@@ -135,7 +135,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -165,7 +165,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -185,7 +185,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -204,7 +204,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -216,7 +216,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -246,7 +246,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -322,7 +322,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -352,7 +352,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -364,7 +364,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -376,7 +376,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -388,7 +388,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
 
@@ -418,7 +418,7 @@ namespace TestShufflingThunk
                 x = -1,
                 y = -2,
                 z = -3,
-                s = args
+                s = args,
             };
         }
     }

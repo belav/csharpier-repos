@@ -437,7 +437,7 @@ namespace System.Net.Http.Json.Functional.Tests
 
                     List<HttpHeaderData> headers = new List<HttpHeaderData>
                     {
-                        new HttpHeaderData("Content-Type", "application/json")
+                        new HttpHeaderData("Content-Type", "application/json"),
                     };
                     string json = Person.Create().Serialize();
                     await server.HandleRequestAsync(
@@ -654,7 +654,7 @@ namespace System.Net.Http.Json.Functional.Tests
                 {
                     List<HttpHeaderData> headers = new List<HttpHeaderData>
                     {
-                        new HttpHeaderData("Content-Type", "application/json")
+                        new HttpHeaderData("Content-Type", "application/json"),
                     };
                     string json = Person.Create().Serialize();
 
@@ -711,7 +711,7 @@ namespace System.Net.Http.Json.Functional.Tests
                 {
                     List<HttpHeaderData> headers = new List<HttpHeaderData>
                     {
-                        new HttpHeaderData("Content-Type", "application/json")
+                        new HttpHeaderData("Content-Type", "application/json"),
                     };
                     string json = People.Serialize();
 
@@ -818,7 +818,7 @@ namespace System.Net.Http.Json.Functional.Tests
                                         await connection.SendPartialResponseHeadersAsync(
                                             headers: new[]
                                             {
-                                                new HttpHeaderData("Content-Length", "42")
+                                                new HttpHeaderData("Content-Length", "42"),
                                             }
                                         );
                                     }
@@ -879,7 +879,7 @@ namespace System.Net.Http.Json.Functional.Tests
                                         await connection.SendPartialResponseHeadersAsync(
                                             headers: new[]
                                             {
-                                                new HttpHeaderData("Content-Length", "42")
+                                                new HttpHeaderData("Content-Length", "42"),
                                             }
                                         );
                                     }
@@ -911,7 +911,7 @@ namespace System.Net.Http.Json.Functional.Tests
                 )
             )
             {
-                Timeout = TimeSpan.FromMilliseconds(1)
+                Timeout = TimeSpan.FromMilliseconds(1),
             };
 
             await foreach (

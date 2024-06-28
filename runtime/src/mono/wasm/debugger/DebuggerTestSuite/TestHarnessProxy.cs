@@ -58,7 +58,7 @@ namespace DebuggerTests
                     DevToolsUrl = new Uri(url),
                     WebServerUseCors = false,
                     WebServerUseCrossOriginPolicy = true,
-                    Locale = locale
+                    Locale = locale,
                 };
 
             lock (proxyLock)
@@ -100,7 +100,7 @@ namespace DebuggerTests
                                 minimumLevel: LogLevel.Trace,
                                 levelOverrides: new Dictionary<string, LogLevel>
                                 {
-                                    ["Microsoft.AspNetCore"] = LogLevel.Warning
+                                    ["Microsoft.AspNetCore"] = LogLevel.Warning,
                                 },
                                 outputTemplate: "{Timestamp:o} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}"
                             )

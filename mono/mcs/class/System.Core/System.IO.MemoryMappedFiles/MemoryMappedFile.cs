@@ -359,7 +359,7 @@ namespace System.IO.MemoryMappedFiles
                 // fileCapacity = capacity,
 
                 stream = fileStream,
-                keepOpen = leaveOpen
+                keepOpen = leaveOpen,
             };
         }
 
@@ -402,7 +402,7 @@ namespace System.IO.MemoryMappedFiles
                 // fileCapacity = capacity,
 
                 stream = fileStream,
-                keepOpen = leaveOpen
+                keepOpen = leaveOpen,
             };
         }
 

@@ -17,7 +17,7 @@ namespace System.CommandLine.Tests
             {
                 new CliOption<string>("-x"),
                 new CliOption<bool>("-y"),
-                new CliArgument<string[]>("arg")
+                new CliArgument<string[]>("arg"),
             };
 
             var result = command.Parse("the-command -x one -y two three");
@@ -60,8 +60,8 @@ namespace System.CommandLine.Tests
                 new CliOption<int>("-w", "--width") { DefaultValueFactory = _ => 15 },
                 new CliOption<ConsoleColor>("--color", "-c")
                 {
-                    DefaultValueFactory = _ => ConsoleColor.Cyan
-                }
+                    DefaultValueFactory = _ => ConsoleColor.Cyan,
+                },
             };
 
             var result = rootCommand.Parse("-w 9000");
@@ -82,7 +82,7 @@ namespace System.CommandLine.Tests
             {
                 new CliArgument<string>("first"),
                 new CliArgument<string>("second"),
-                new CliArgument<string[]>("third")
+                new CliArgument<string[]>("third"),
             };
 
             var result = command.Parse("one two three four five");
@@ -102,7 +102,7 @@ namespace System.CommandLine.Tests
             {
                 new CliArgument<FileInfo>("first"),
                 new CliArgument<FileInfo>("second"),
-                new CliArgument<FileInfo[]>("third")
+                new CliArgument<FileInfo[]>("third"),
             };
 
             var result = command.Parse("one two three four five");

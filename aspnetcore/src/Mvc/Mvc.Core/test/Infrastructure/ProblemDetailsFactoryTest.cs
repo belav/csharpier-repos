@@ -194,7 +194,7 @@ public class ProblemDetailsFactoryTest
 
     private static DefaultHttpContext GetHttpContext()
     {
-        return new DefaultHttpContext { TraceIdentifier = "some-trace", };
+        return new DefaultHttpContext { TraceIdentifier = "some-trace" };
     }
 
     private static ProblemDetailsFactory GetProblemDetails()

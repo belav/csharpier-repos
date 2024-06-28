@@ -976,6 +976,7 @@ namespace N
                                 "\u0001"
                                 + // number of bytes in the encoding of the named arguments
                                 "\u0000" // number of named arguments
+                            ,
                         }
                     );
                 }
@@ -2259,6 +2260,7 @@ public class MyClass
                                 + "\u0086"
                                 + // length of string
                                 hexFileContent // argument value
+                            ,
                         }
                     );
                 }

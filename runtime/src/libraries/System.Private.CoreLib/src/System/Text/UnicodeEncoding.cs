@@ -1296,7 +1296,7 @@ namespace System.Text
                                 byteBuffer = new byte[]
                                 {
                                     unchecked((byte)(lastChar >> 8)),
-                                    unchecked((byte)lastChar)
+                                    unchecked((byte)lastChar),
                                 };
                             }
                             else
@@ -1304,7 +1304,7 @@ namespace System.Text
                                 byteBuffer = new byte[]
                                 {
                                     unchecked((byte)lastChar),
-                                    unchecked((byte)(lastChar >> 8))
+                                    unchecked((byte)(lastChar >> 8)),
                                 };
                             }
 
@@ -1342,7 +1342,7 @@ namespace System.Text
                             byteBuffer = new byte[]
                             {
                                 unchecked((byte)(ch >> 8)),
-                                unchecked((byte)ch)
+                                unchecked((byte)ch),
                             };
                         }
                         else
@@ -1350,7 +1350,7 @@ namespace System.Text
                             byteBuffer = new byte[]
                             {
                                 unchecked((byte)ch),
-                                unchecked((byte)(ch >> 8))
+                                unchecked((byte)(ch >> 8)),
                             };
                         }
 
@@ -1386,7 +1386,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)(lastChar >> 8)),
-                            unchecked((byte)lastChar)
+                            unchecked((byte)lastChar),
                         };
                     }
                     else
@@ -1394,7 +1394,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)lastChar),
-                            unchecked((byte)(lastChar >> 8))
+                            unchecked((byte)(lastChar >> 8)),
                         };
                     }
 
@@ -1431,7 +1431,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)(lastChar >> 8)),
-                            unchecked((byte)lastChar)
+                            unchecked((byte)lastChar),
                         };
                     }
                     else
@@ -1439,7 +1439,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)lastChar),
-                            unchecked((byte)(lastChar >> 8))
+                            unchecked((byte)(lastChar >> 8)),
                         };
                     }
 
@@ -1672,7 +1672,7 @@ namespace System.Text
                                 byteBuffer = new byte[]
                                 {
                                     unchecked((byte)(lastChar >> 8)),
-                                    unchecked((byte)lastChar)
+                                    unchecked((byte)lastChar),
                                 };
                             }
                             else
@@ -1680,7 +1680,7 @@ namespace System.Text
                                 byteBuffer = new byte[]
                                 {
                                     unchecked((byte)lastChar),
-                                    unchecked((byte)(lastChar >> 8))
+                                    unchecked((byte)(lastChar >> 8)),
                                 };
                             }
 
@@ -1735,7 +1735,7 @@ namespace System.Text
                             byteBuffer = new byte[]
                             {
                                 unchecked((byte)(ch >> 8)),
-                                unchecked((byte)ch)
+                                unchecked((byte)ch),
                             };
                         }
                         else
@@ -1743,7 +1743,7 @@ namespace System.Text
                             byteBuffer = new byte[]
                             {
                                 unchecked((byte)ch),
-                                unchecked((byte)(ch >> 8))
+                                unchecked((byte)(ch >> 8)),
                             };
                         }
 
@@ -1810,7 +1810,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)(lastChar >> 8)),
-                            unchecked((byte)lastChar)
+                            unchecked((byte)lastChar),
                         };
                     }
                     else
@@ -1818,7 +1818,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)lastChar),
-                            unchecked((byte)(lastChar >> 8))
+                            unchecked((byte)(lastChar >> 8)),
                         };
                     }
 
@@ -1888,7 +1888,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)(lastChar >> 8)),
-                            unchecked((byte)lastChar)
+                            unchecked((byte)lastChar),
                         };
                     }
                     else
@@ -1896,7 +1896,7 @@ namespace System.Text
                         byteBuffer = new byte[]
                         {
                             unchecked((byte)lastChar),
-                            unchecked((byte)(lastChar >> 8))
+                            unchecked((byte)(lastChar >> 8)),
                         };
                     }
 
@@ -2029,14 +2029,11 @@ namespace System.Text
         }
 
         public override ReadOnlySpan<byte> Preamble =>
-            GetType() != typeof(UnicodeEncoding)
-                ? new ReadOnlySpan<byte>(GetPreamble())
-                : // in case a derived UnicodeEncoding overrode GetPreamble
-                !byteOrderMark
-                    ? default
-                    : bigEndian
-                        ? [0xfe, 0xff]
-                        : [0xff, 0xfe];
+            GetType() != typeof(UnicodeEncoding) ? new ReadOnlySpan<byte>(GetPreamble())
+            : // in case a derived UnicodeEncoding overrode GetPreamble
+            !byteOrderMark ? default
+            : bigEndian ? [0xfe, 0xff]
+            : [0xff, 0xfe];
 
         public override int GetMaxByteCount(int charCount)
         {

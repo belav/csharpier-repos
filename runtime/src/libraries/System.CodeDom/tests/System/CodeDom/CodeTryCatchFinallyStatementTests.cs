@@ -25,17 +25,17 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 new CodeStatement[] { new CodeCommentStatement("Comment") },
-                new CodeCatchClause[0]
+                new CodeCatchClause[0],
             };
             yield return new object[]
             {
                 new CodeStatement[0],
-                new CodeCatchClause[] { new CodeCatchClause("Local") }
+                new CodeCatchClause[] { new CodeCatchClause("Local") },
             };
             yield return new object[]
             {
                 new CodeStatement[] { new CodeCommentStatement("Comment") },
-                new CodeCatchClause[] { new CodeCatchClause("Local") }
+                new CodeCatchClause[] { new CodeCatchClause("Local") },
             };
         }
 
@@ -58,31 +58,31 @@ namespace System.CodeDom.Tests
             {
                 new CodeStatement[0],
                 new CodeCatchClause[0],
-                new CodeStatement[0]
+                new CodeStatement[0],
             };
             yield return new object[]
             {
                 new CodeStatement[] { new CodeCommentStatement("Comment") },
                 new CodeCatchClause[0],
-                new CodeStatement[0]
+                new CodeStatement[0],
             };
             yield return new object[]
             {
                 new CodeStatement[0],
                 new CodeCatchClause[] { new CodeCatchClause("Local") },
-                new CodeStatement[0]
+                new CodeStatement[0],
             };
             yield return new object[]
             {
                 new CodeStatement[0],
                 new CodeCatchClause[0],
-                new CodeStatement[] { new CodeCommentStatement("Comment") }
+                new CodeStatement[] { new CodeCommentStatement("Comment") },
             };
             yield return new object[]
             {
                 new CodeStatement[] { new CodeCommentStatement("Comment") },
                 new CodeCatchClause[] { new CodeCatchClause("Local") },
-                new CodeStatement[] { new CodeCommentStatement("Comment") }
+                new CodeStatement[] { new CodeCommentStatement("Comment") },
             };
         }
 

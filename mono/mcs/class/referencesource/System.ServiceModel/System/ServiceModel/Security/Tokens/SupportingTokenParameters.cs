@@ -183,7 +183,7 @@ namespace System.ServiceModel.Security.Tokens
                         new object[]
                         {
                             this.GetType(),
-                            (parameters != null) ? parameters.ToString() : "null"
+                            (parameters != null) ? parameters.ToString() : "null",
                         }
                     )
                 );

@@ -23,7 +23,7 @@ public class EntityFrameworkCoreHealthChecksBuilderExtensionsTest
         builder.AddDbContextCheck<TestDbContext>(
             "test",
             HealthStatus.Degraded,
-            new[] { "tag1", "tag2", },
+            new[] { "tag1", "tag2" },
             (c, ct) => Task.FromResult(true)
         );
 
@@ -37,7 +37,7 @@ public class EntityFrameworkCoreHealthChecksBuilderExtensionsTest
         var registration = Assert.Single(registrations);
         Assert.Equal("test", registration.Name);
         Assert.Equal(HealthStatus.Degraded, registration.FailureStatus);
-        Assert.Equal(new[] { "tag1", "tag2", }, registration.Tags.ToArray());
+        Assert.Equal(new[] { "tag1", "tag2" }, registration.Tags.ToArray());
 
         var options = services.GetRequiredService<
             IOptionsMonitor<DbContextHealthCheckOptions<TestDbContext>>

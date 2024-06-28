@@ -1077,7 +1077,7 @@ namespace System.Web.Caching
                                 changeId,
                                 new CacheInsertOptions()
                                 {
-                                    Priority = CacheItemPriority.NotRemovable
+                                    Priority = CacheItemPriority.NotRemovable,
                                 }
                             );
                             dbState._tables.Add(tableName, null);
@@ -1108,7 +1108,7 @@ namespace System.Web.Caching
                                 changeId,
                                 new CacheInsertOptions()
                                 {
-                                    Priority = CacheItemPriority.NotRemovable
+                                    Priority = CacheItemPriority.NotRemovable,
                                 }
                             );
                         }

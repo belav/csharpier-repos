@@ -26,7 +26,7 @@ namespace Microsoft.Extensions.FileProviders
         private static readonly char[] _pathSeparators = new[]
         {
             Path.DirectorySeparatorChar,
-            Path.AltDirectorySeparatorChar
+            Path.AltDirectorySeparatorChar,
         };
 
         private readonly ExclusionFilters _filters;

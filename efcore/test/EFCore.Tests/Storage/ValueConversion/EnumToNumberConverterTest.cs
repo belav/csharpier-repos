@@ -276,6 +276,6 @@ public class EnumToNumberConverterTest
         John = 7,
         Paul = 4,
         George = 1,
-        Ringo = -1
+        Ringo = -1,
     }
 }

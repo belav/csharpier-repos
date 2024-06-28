@@ -97,9 +97,9 @@ class A
                                 CompletionListSetting = new LSP.CompletionListSetting
                                 {
                                     ItemDefaults = ["editRange", "commitCharacters", "data"],
-                                }
-                            }
-                        }
+                                },
+                            },
+                        },
                     }
                 )
                 .ConfigureAwait(false);
@@ -115,7 +115,7 @@ class A
                 Context = new LSP.CompletionContext()
                 {
                     TriggerKind = LSP.CompletionTriggerKind.Invoked,
-                }
+                },
             };
 
             var document = testServer.GetCurrentSolution().Projects.First().Documents.First();

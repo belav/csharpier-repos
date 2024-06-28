@@ -7,7 +7,7 @@ namespace Test
         This,
         Is,
         A,
-        Test
+        Test,
     };
 
     enum TestingEnum2
@@ -15,7 +15,7 @@ namespace Test
         This,
         Is,
         A,
-        Test
+        Test,
     };
 
     public class test

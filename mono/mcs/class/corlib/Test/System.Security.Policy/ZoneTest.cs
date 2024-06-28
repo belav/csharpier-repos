@@ -198,10 +198,7 @@ namespace MonoTests.System.Security.Policy
             Zone.CreateFromUrl(null);
         }
 
-        string[] noZoneUrls =
-        {
-            String.Empty, // not accepted for a Site
-        };
+        string[] noZoneUrls = { String.Empty };
 
         [Test]
         public void CreateFromUrl_NoZone()

@@ -45,7 +45,7 @@ unsafe class ThisCallNative
 
     public enum E : uint
     {
-        Value = 42
+        Value = 42,
     }
 
     [UnmanagedFunctionPointer(CallingConvention.ThisCall)]
@@ -264,7 +264,7 @@ public unsafe class ThisCallTest
             vtable = ManagedVtable,
             dummy = ThisCallNative.E.Value,
             width = width,
-            height = height
+            height = height,
         };
     }
 
@@ -275,7 +275,7 @@ public unsafe class ThisCallTest
             vtable = UnmanagedCallersOnlyVtable,
             dummy = ThisCallNative.E.Value,
             width = width,
-            height = height
+            height = height,
         };
     }
 

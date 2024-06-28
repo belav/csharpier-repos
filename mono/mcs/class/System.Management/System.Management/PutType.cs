@@ -34,6 +34,6 @@ namespace System.Management
         None = 0,
         UpdateOnly = 1,
         CreateOnly = 2,
-        UpdateOrCreate = 3
+        UpdateOrCreate = 3,
     }
 }

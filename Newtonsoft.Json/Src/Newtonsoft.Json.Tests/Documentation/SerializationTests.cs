@@ -253,7 +253,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                         errors.Add(args.ErrorContext.Error.Message);
                         args.ErrorContext.Handled = true;
                     },
-                    Converters = { new IsoDateTimeConverter() }
+                    Converters = { new IsoDateTimeConverter() },
                 }
             );
 
@@ -328,7 +328,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Name = "George Michael Bluth",
                 Age = 16,
                 Roles = null,
-                Title = "Mister Manager"
+                Title = "Mister Manager",
             };
 
             string json = JsonConvert.SerializeObject(person, Formatting.Indented);
@@ -359,7 +359,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             {
                 BirthDate = new DateTime(1980, 12, 23, 0, 0, 0, DateTimeKind.Utc),
                 LastModified = new DateTime(2009, 2, 20, 12, 59, 21, DateTimeKind.Utc),
-                Name = "James"
+                Name = "James",
             };
 
             List<Person> people = new List<Person>();
@@ -410,7 +410,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
 
@@ -430,7 +430,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 json,
                 new JsonSerializerSettings
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
 
@@ -558,7 +558,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 ExpiryDate = new DateTime(2010, 12, 20, 18, 1, 0, DateTimeKind.Utc),
                 Name = "Widget",
                 Price = 9.99m,
-                Sizes = new[] { "Small", "Medium", "Large" }
+                Sizes = new[] { "Small", "Medium", "Large" },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -566,7 +566,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 }
             );
 
@@ -721,7 +721,7 @@ namespace Newtonsoft.Json.Tests.Documentation
             LogEntry entry = new LogEntry
             {
                 LogDate = new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc),
-                Details = "Application started."
+                Details = "Application started.",
             };
 
             // default as of Json.NET 4.5
@@ -730,7 +730,7 @@ namespace Newtonsoft.Json.Tests.Documentation
 
             JsonSerializerSettings microsoftDateFormatSettings = new JsonSerializerSettings
             {
-                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
             };
             string microsoftJson = JsonConvert.SerializeObject(entry, microsoftDateFormatSettings);
             // {"Details":"Application started.","LogDate":"\/Date(1234656000000)\/"}
@@ -876,7 +876,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Paid = false,
                 FollowUpDays = 30,
                 FollowUpEmailAddress = string.Empty,
-                PaidDate = null
+                PaidDate = null,
             };
 
             string included = JsonConvert.SerializeObject(
@@ -973,7 +973,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 BookPrice = 16.19m,
                 AuthorName = "Brandon Sanderson",
                 AuthorAge = 34,
-                AuthorCountry = "United States of America"
+                AuthorCountry = "United States of America",
             };
 
             string startingWithA = JsonConvert.SerializeObject(
@@ -1121,7 +1121,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 { "Adam", "Eve" },
                 { "Bonnie", "Clyde" },
                 { "Donald", "Daisy" },
-                { "Han", "Leia" }
+                { "Han", "Leia" },
             };
 
             string json = JsonConvert.SerializeObject(famousCouples, Formatting.Indented);

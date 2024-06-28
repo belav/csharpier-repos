@@ -70,7 +70,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                 yield return new object[]
                 {
                     actionDescriptor,
-                    "Updates the value pair collection."
+                    "Updates the value pair collection.",
                 };
 
                 Action<int?> deleteAction = controller.Delete;
@@ -133,11 +133,11 @@ namespace WebApiHelpPageWebHost.UnitTest
                     new Dictionary<string, string>
                     {
                         { "id", "The id." },
-                        { "value", "The value." }
+                        { "value", "The value." },
                     },
                     new Dictionary<string, string>
                     {
-                        { "valuePairCollection", "The value pair collection." }
+                        { "valuePairCollection", "The value pair collection." },
                     },
                     new Dictionary<string, string> { { "id", "The id." } },
                     new Dictionary<string, string> { { "valuePair", "The pair." } },
@@ -155,7 +155,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                         yield return new object[]
                         {
                             parameterDescriptor,
-                            expectedResults[i][parameterDescriptor.ParameterName]
+                            expectedResults[i][parameterDescriptor.ParameterName],
                         };
                     }
                 }

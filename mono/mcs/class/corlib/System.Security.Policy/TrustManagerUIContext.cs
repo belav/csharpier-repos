@@ -36,6 +36,6 @@ namespace System.Security.Policy
     {
         Install,
         Upgrade,
-        Run
+        Run,
     }
 }

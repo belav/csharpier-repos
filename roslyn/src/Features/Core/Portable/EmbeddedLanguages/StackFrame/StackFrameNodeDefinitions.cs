@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 0 => Left,
                 1 => DotToken,
                 2 => Right,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -144,7 +144,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             index switch
             {
                 0 => Identifier,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -159,7 +159,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             index switch
             {
                 0 => Identifier,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -199,7 +199,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 0 => Identifier,
                 1 => GraveAccentToken,
                 2 => NumberToken,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -249,7 +249,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 1 => Identifier,
                 2 => GreaterThanToken,
                 3 => DollarToken.HasValue ? DollarToken.Value : null,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -303,7 +303,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 2 => Identifier,
                 3 => PipeToken,
                 4 => Suffix,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -350,7 +350,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             index switch
             {
                 0 => TypeIdentifier,
-                _ => ArrayRankSpecifiers[index - 1]
+                _ => ArrayRankSpecifiers[index - 1],
             };
     }
 
@@ -495,7 +495,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
             {
                 0 => Type,
                 1 => Identifier,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -584,7 +584,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
                 0 => Path,
                 1 => Colon.HasValue ? Colon.Value : null,
                 2 => Line.HasValue ? Line.Value : null,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 }

@@ -118,8 +118,8 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 HomeAddress = new Address()
                 {
                     Street = "123 Anywhere Ln",
-                    City = "Anywhere ST 00000 United States"
-                }
+                    City = "Anywhere ST 00000 United States",
+                },
             };
         }
 

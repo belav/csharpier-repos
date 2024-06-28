@@ -21,7 +21,7 @@ internal sealed record RunArgumentsJson(
     private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions
     {
         DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
-        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
     };
 
     // using an explicit property because the deserializer doesn't like

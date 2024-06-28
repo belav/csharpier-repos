@@ -27,7 +27,7 @@ public class ResponseCachingMiddlewareTests
         var context = TestUtils.CreateTestContext();
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            OnlyIfCached = true
+            OnlyIfCached = true,
         }.ToString();
 
         Assert.True(await middleware.TryServeFromCacheAsync(context));
@@ -69,7 +69,7 @@ public class ResponseCachingMiddlewareTests
             new CachedResponse()
             {
                 Headers = new HeaderDictionary(),
-                Body = new CachedResponseBody(new List<byte[]>(0), 0)
+                Body = new CachedResponseBody(new List<byte[]>(0), 0),
             },
             TimeSpan.Zero
         );
@@ -97,7 +97,7 @@ public class ResponseCachingMiddlewareTests
             new CachedResponse()
             {
                 Headers = new HeaderDictionary() { { "MyHeader", "NewValue" } },
-                Body = new CachedResponseBody(new List<byte[]>(0), 0)
+                Body = new CachedResponseBody(new List<byte[]>(0), 0),
             },
             TimeSpan.Zero
         );
@@ -148,7 +148,7 @@ public class ResponseCachingMiddlewareTests
             new CachedResponse()
             {
                 Headers = new HeaderDictionary(),
-                Body = new CachedResponseBody(new List<byte[]>(0), 0)
+                Body = new CachedResponseBody(new List<byte[]>(0), 0),
             },
             TimeSpan.Zero
         );
@@ -338,7 +338,7 @@ public class ResponseCachingMiddlewareTests
                 {
                     new EntityTagHeaderValue("\"tag\"", true),
                     new EntityTagHeaderValue("\"tag\"", true)
-                }
+                },
             };
         }
     }
@@ -383,7 +383,7 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Request.Headers.IfNoneMatch = new string[]
         {
             "\"E0\", \"E1\"",
-            "\"E1\", \"E2\""
+            "\"E1\", \"E2\"",
         };
 
         Assert.True(ResponseCachingMiddleware.ContentIsNotModified(context));
@@ -438,7 +438,7 @@ public class ResponseCachingMiddlewareTests
 
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         Assert.False(context.ShouldCacheResponse);
@@ -527,7 +527,7 @@ public class ResponseCachingMiddlewareTests
         context.ResponseTime = timeProvider.GetUtcNow();
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            MaxAge = TimeSpan.FromSeconds(12)
+            MaxAge = TimeSpan.FromSeconds(12),
         }.ToString();
 
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(
@@ -555,7 +555,7 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             MaxAge = TimeSpan.FromSeconds(12),
-            SharedMaxAge = TimeSpan.FromSeconds(13)
+            SharedMaxAge = TimeSpan.FromSeconds(13),
         }.ToString();
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(
             timeProvider.GetUtcNow() + TimeSpan.FromSeconds(11)
@@ -581,13 +581,13 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Features.Set<IResponseCachingFeature>(
             new ResponseCachingFeature()
             {
-                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" }),
             }
         );
         var cachedVaryByRules = new CachedVaryByRules()
         {
             Headers = new StringValues(new[] { "HeaderA", "HeaderB" }),
-            QueryKeys = new StringValues(new[] { "QueryA", "QueryB" })
+            QueryKeys = new StringValues(new[] { "QueryA", "QueryB" }),
         };
         context.CachedVaryByRules = cachedVaryByRules;
 
@@ -612,14 +612,14 @@ public class ResponseCachingMiddlewareTests
         context.HttpContext.Features.Set<IResponseCachingFeature>(
             new ResponseCachingFeature()
             {
-                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" })
+                VaryByQueryKeys = new StringValues(new[] { "queryB", "QUERYA" }),
             }
         );
         var cachedVaryByRules = new CachedVaryByRules()
         {
             VaryByKeyPrefix = FastGuid.NewGuid().IdString,
             Headers = new StringValues(new[] { "HEADERA", "HEADERB" }),
-            QueryKeys = new StringValues(new[] { "QUERYA", "QUERYB" })
+            QueryKeys = new StringValues(new[] { "QUERYA", "QUERYB" }),
         };
         context.CachedVaryByRules = cachedVaryByRules;
 
@@ -644,7 +644,7 @@ public class ResponseCachingMiddlewareTests
                 new StringValues((string[])null),
                 new StringValues(new string[0]),
                 new StringValues(new string[] { null }),
-                new StringValues(new string[] { string.Empty })
+                new StringValues(new string[] { string.Empty }),
             };
         }
     }
@@ -967,7 +967,7 @@ public class ResponseCachingMiddlewareTests
             {
                 AttemptResponseCachingValue = allowResponseCaching,
                 AllowCacheLookupValue = allowCacheLookup,
-                AllowCacheStorageValue = allowCacheStorage
+                AllowCacheStorageValue = allowCacheStorage,
             }
         );
 

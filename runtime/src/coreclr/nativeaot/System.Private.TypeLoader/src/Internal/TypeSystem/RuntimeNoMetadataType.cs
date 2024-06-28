@@ -60,9 +60,8 @@ namespace Internal.TypeSystem.NoMetadata
                                     GenericVariance.Contravariant,
                                 Runtime.GenericVariance.Covariant => GenericVariance.Covariant,
                                 Runtime.GenericVariance.NonVariant
-                                or Runtime.GenericVariance.ArrayCovariant =>
-                                    GenericVariance.None,
-                                _ => throw new NotImplementedException()
+                                or Runtime.GenericVariance.ArrayCovariant => GenericVariance.None,
+                                _ => throw new NotImplementedException(),
                             };
                     genericParameters[i] = new RuntimeGenericParameterDesc(
                         GenericParameterKind.Type,

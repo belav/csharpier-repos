@@ -97,6 +97,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x00,
                     0x00 // catch type or filter offset
+                    ,
                 },
                 builder.ToArray()
             );
@@ -401,7 +402,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x00,
                     0x06,
-                    (byte)ILOpCode.Ret
+                    (byte)ILOpCode.Ret,
                 },
                 builder.ToArray()
             );
@@ -439,7 +440,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x00,
                     0x06,
-                    (byte)ILOpCode.Ret
+                    (byte)ILOpCode.Ret,
                 },
                 builder.ToArray()
             );
@@ -747,7 +748,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0x00,
                     0x00,
                     0x06,
-                    (byte)ILOpCode.Ret
+                    (byte)ILOpCode.Ret,
                 },
                 builder.ToArray()
             );
@@ -810,7 +811,7 @@ namespace System.Reflection.Metadata.Ecma335.Tests
                     0xff,
                     (byte)ILOpCode.Nop,
                     (byte)ILOpCode.Nop,
-                    (byte)ILOpCode.Nop
+                    (byte)ILOpCode.Nop,
                 },
                 builder.ToArray()
             );

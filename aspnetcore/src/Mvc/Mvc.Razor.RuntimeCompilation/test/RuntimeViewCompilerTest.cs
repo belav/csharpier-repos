@@ -193,7 +193,7 @@ public class RuntimeViewCompilerTest
         var path = "/Views/Home/Index.cshtml";
         var fileProvider = new TestFileProvider();
         fileProvider.AddFile(path, "some content");
-        var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+        var precompiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(
             fileProvider,
             precompiledViews: new[] { precompiledView }
@@ -221,7 +221,7 @@ public class RuntimeViewCompilerTest
         var path = "/Views/Home/Index.cshtml";
         var fileProvider = new TestFileProvider();
         fileProvider.AddFile(path, "some content");
-        var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+        var precompiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(
             fileProvider,
             precompiledViews: new[] { precompiledView }
@@ -241,7 +241,7 @@ public class RuntimeViewCompilerTest
         var path = "/Views/Home/Index.cshtml";
         var fileProvider = new TestFileProvider();
         fileProvider.AddFile(path, "some content");
-        var precompiledView = new CompiledViewDescriptor { RelativePath = path, };
+        var precompiledView = new CompiledViewDescriptor { RelativePath = path };
         var viewCompiler = GetViewCompiler(
             fileProvider,
             precompiledViews: new[] { precompiledView }

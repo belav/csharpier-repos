@@ -20,7 +20,7 @@ namespace HttpStress
     {
         server = 1,
         client = 2,
-        both = server | client
+        both = server | client,
     };
 
     public class Configuration

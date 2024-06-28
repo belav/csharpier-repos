@@ -330,7 +330,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 AddAsReference = ctorArguments.Count >= 8 ? (bool)ctorArguments[7].Value : true,
                 RemoveFromLinkerInput =
                     ctorArguments.Count >= 9 ? (bool)ctorArguments[8].Value : false,
-                OutputSubFolder = ctorArguments.Count >= 10 ? (string)ctorArguments[9].Value : null
+                OutputSubFolder = ctorArguments.Count >= 10 ? (string)ctorArguments[9].Value : null,
             };
         }
 
@@ -356,7 +356,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         return new SourceAndDestinationPair
                         {
                             Source = fullSource,
-                            DestinationFileName = fullSource.FileName
+                            DestinationFileName = fullSource.FileName,
                         };
                     }
                     var sourceAndDestination = (CustomAttributeArgument[])referenceArg.Value;
@@ -365,7 +365,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                         Source = MakeSourceTreeFilePathAbsolute(
                             sourceAndDestination[0].Value.ToString()
                         ),
-                        DestinationFileName = sourceAndDestination[1].Value.ToString()
+                        DestinationFileName = sourceAndDestination[1].Value.ToString(),
                     };
                 })
                 ?.ToArray();

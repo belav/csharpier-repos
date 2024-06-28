@@ -32,6 +32,6 @@ namespace System.Data.OracleClient.Oci
         NonBlocking = 0x40,
         BatchErrors = 0x80,
         ParseOnly = 0x100,
-        ShowDmlWarnings = 0x400
+        ShowDmlWarnings = 0x400,
     }
 }

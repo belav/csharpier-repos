@@ -209,7 +209,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/hello"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>(HeaderNames.ContentType, "application/json")
+            new KeyValuePair<string, string>(HeaderNames.ContentType, "application/json"),
         };
 
         await InitializeConnectionAsync(_readHeadersApplication);
@@ -268,7 +268,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/hello"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>(HeaderNames.ContentType, "application/json")
+            new KeyValuePair<string, string>(HeaderNames.ContentType, "application/json"),
         };
 
         // Note: No content-type
@@ -277,7 +277,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/hello"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80")
+            new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
         };
 
         await InitializeConnectionAsync(_noopApplication);
@@ -398,7 +398,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/hello"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "localhost:80"),
-            new KeyValuePair<string, string>(HeaderNames.ContentType, "application/json")
+            new KeyValuePair<string, string>(HeaderNames.ContentType, "application/json"),
         };
 
         var requestCount = 0;
@@ -1955,7 +1955,10 @@ public class Http2ConnectionTests : Http2TestBase
             expectedErrorMessage: new[]
             {
                 CoreStrings.FormatHttp2ErrorStreamClosed(Http2FrameType.DATA, streamId: 1),
-                CoreStrings.FormatHttp2ErrorStreamHalfClosedRemote(Http2FrameType.DATA, streamId: 1)
+                CoreStrings.FormatHttp2ErrorStreamHalfClosedRemote(
+                    Http2FrameType.DATA,
+                    streamId: 1
+                ),
             }
         );
     }
@@ -3075,7 +3078,7 @@ public class Http2ConnectionTests : Http2TestBase
                 CoreStrings.FormatHttp2ErrorStreamHalfClosedRemote(
                     Http2FrameType.HEADERS,
                     streamId: 1
-                )
+                ),
             }
         );
     }
@@ -3268,7 +3271,7 @@ public class Http2ConnectionTests : Http2TestBase
             0x80,
             0x80,
             0x80,
-            0x7f
+            0x7f,
         };
 
         Http2FrameWriter.WriteHeader(frame, outputWriter);
@@ -3564,7 +3567,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>("connection", "keep-alive")
+            new KeyValuePair<string, string>("connection", "keep-alive"),
         };
 
         return HEADERS_Received_InvalidHeaderFields_ConnectionError(
@@ -3581,7 +3584,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>("te", "trailers, deflate")
+            new KeyValuePair<string, string>("te", "trailers, deflate"),
         };
 
         return HEADERS_Received_InvalidHeaderFields_ConnectionError(
@@ -3598,7 +3601,7 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "GET"),
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-            new KeyValuePair<string, string>("te", "trailers")
+            new KeyValuePair<string, string>("te", "trailers"),
         };
 
         await InitializeConnectionAsync(_noopApplication);
@@ -3631,7 +3634,7 @@ public class Http2ConnectionTests : Http2TestBase
                 InternalHeaderNames.Path,
                 "/" + new string('A', 8192 / 2)
             ),
-            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http")
+            new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
         };
 
         await InitializeConnectionAsync(_noopApplication);
@@ -6664,7 +6667,7 @@ public class Http2ConnectionTests : Http2TestBase
                         CoreStrings.FormatHttp2ErrorStreamHalfClosedRemote(
                             Http2FrameType.DATA,
                             streamId: 1
-                        )
+                        ),
                     }
                 );
                 break;
@@ -6696,7 +6699,7 @@ public class Http2ConnectionTests : Http2TestBase
                         CoreStrings.FormatHttp2ErrorStreamHalfClosedRemote(
                             Http2FrameType.HEADERS,
                             streamId: 1
-                        )
+                        ),
                     }
                 );
                 break;
@@ -6725,7 +6728,7 @@ public class Http2ConnectionTests : Http2TestBase
                         CoreStrings.FormatHttp2ErrorStreamHalfClosedRemote(
                             Http2FrameType.HEADERS,
                             streamId: 1
-                        )
+                        ),
                     }
                 );
                 break;
@@ -6788,7 +6791,7 @@ public class Http2ConnectionTests : Http2TestBase
             expectedErrorMessage: new[]
             {
                 CoreStrings.FormatHttp2ErrorStreamClosed(finalFrameType, streamId: 1),
-                CoreStrings.FormatHttp2ErrorStreamAborted(finalFrameType, streamId: 1)
+                CoreStrings.FormatHttp2ErrorStreamAborted(finalFrameType, streamId: 1),
             }
         );
     }
@@ -6886,6 +6889,7 @@ public class Http2ConnectionTests : Http2TestBase
             {
                 0x01, // Header value length
                 0x30 // "0"
+                ,
             };
 
             var data = new TheoryData<byte[]>();
@@ -6983,7 +6987,7 @@ public class Http2ConnectionTests : Http2TestBase
                 new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
                 new KeyValuePair<string, string>(InternalHeaderNames.Authority, "127.0.0.1"),
                 new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
-                new KeyValuePair<string, string>("content-length", "0")
+                new KeyValuePair<string, string>("content-length", "0"),
             };
 
             foreach (var headerField in requestHeaders.Where(h => h.Key.StartsWith(':')))

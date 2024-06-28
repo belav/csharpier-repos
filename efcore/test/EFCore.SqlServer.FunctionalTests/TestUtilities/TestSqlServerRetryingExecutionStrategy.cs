@@ -15,6 +15,7 @@ public class TestSqlServerRetryingExecutionStrategy : SqlServerRetryingExecution
         -2, // Timeout
         42008, // Mirroring (Only when a database is deleted and another one is created in fast succession)
         42019 // CREATE DATABASE operation failed
+        ,
     };
 
     public TestSqlServerRetryingExecutionStrategy()

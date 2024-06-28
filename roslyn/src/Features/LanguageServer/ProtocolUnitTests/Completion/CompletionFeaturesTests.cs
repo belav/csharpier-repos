@@ -49,9 +49,9 @@ public class CompletionFeaturesTests : AbstractLanguageServerProtocolTests
                                 "documentation",
                                 "additionalTextEdits",
                                 "command",
-                                "labelDetail"
-                            }
-                        }
+                                "labelDetail",
+                            },
+                        },
                     },
 
                     CompletionListSetting = new LSP.CompletionListSetting
@@ -60,11 +60,11 @@ public class CompletionFeaturesTests : AbstractLanguageServerProtocolTests
                         {
                             CompletionCapabilityHelper.EditRangePropertyName,
                             CompletionCapabilityHelper.DataPropertyName,
-                            CompletionCapabilityHelper.CommitCharactersPropertyName
-                        }
+                            CompletionCapabilityHelper.CommitCharactersPropertyName,
+                        },
                     },
                 },
-            }
+            },
         };
 
     public CompletionFeaturesTests(ITestOutputHelper testOutputHelper)
@@ -104,7 +104,7 @@ public class A
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -202,12 +202,12 @@ class A
             ? new()
             {
                 NewText = "System.Threading.Tasks.Task",
-                Range = new() { Start = new(0, 20), End = new(0, 24) }
+                Range = new() { Start = new(0, 20), End = new(0, 24) },
             }
             : new()
             {
                 NewText = "using System.Threading.Tasks;\r\n\r\n",
-                Range = new() { Start = new(1, 0), End = new(1, 0) }
+                Range = new() { Start = new(1, 0), End = new(1, 0) },
             };
 
         AssertJsonEquals([expectedAdditionalEdit], resolvedItem.AdditionalTextEdits);
@@ -222,7 +222,7 @@ class A
         var expectedDocumentation = new MarkupContent()
         {
             Kind = LSP.MarkupKind.PlainText,
-            Value = "(awaitable) class System.Threading.Tasks.Task"
+            Value = "(awaitable) class System.Threading.Tasks.Task",
         };
         AssertJsonEquals(resolvedItem.Documentation, expectedDocumentation);
     }
@@ -318,7 +318,7 @@ namespace NS1
         var expectedAdditionalEdit = new TextEdit()
         {
             NewText = "using NS2;\r\n\r\n",
-            Range = new() { Start = new(1, 0), End = new(1, 0) }
+            Range = new() { Start = new(1, 0), End = new(1, 0) },
         };
         AssertJsonEquals([expectedAdditionalEdit], resolvedItem.AdditionalTextEdits);
 
@@ -332,7 +332,7 @@ namespace NS1
         var expectedDocumentation = new MarkupContent()
         {
             Kind = LSP.MarkupKind.PlainText,
-            Value = "(extension) bool object.ExtensionMethod()"
+            Value = "(extension) bool object.ExtensionMethod()",
         };
         AssertJsonEquals(resolvedItem.Documentation, expectedDocumentation);
     }
@@ -396,7 +396,7 @@ class A { }";
         var expectedEdit = new TextEdit
         {
             Range = new LSP.Range { Start = new(1, 5), End = new(1, 9) },
-            NewText = "summary"
+            NewText = "summary",
         };
 
         Assert.Equal(
@@ -540,7 +540,7 @@ class A
                 new string[]
                 {
                     CompletionCapabilityHelper.EditRangePropertyName,
-                    CompletionCapabilityHelper.DataPropertyName
+                    CompletionCapabilityHelper.DataPropertyName,
                 };
         }
 
@@ -551,7 +551,7 @@ class A
             new InitializationOptions
             {
                 ClientCapabilities = clientCapability,
-                CallInitialized = true
+                CallInitialized = true,
             },
             extraExportedTypes: new[] { typeof(CSharpLspMockCompletionService.Factory) }.ToList()
         );
@@ -620,7 +620,7 @@ class A
             new InitializationOptions
             {
                 ClientCapabilities = DefaultClientCapabilities,
-                CallInitialized = true
+                CallInitialized = true,
             },
             extraExportedTypes: new[] { typeof(CSharpLspMockCompletionService.Factory) }.ToList()
         );
@@ -642,7 +642,7 @@ class A
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -813,7 +813,7 @@ pub{|caret:|}class";
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -916,7 +916,7 @@ namespace Program
         var expectedAdditionalEdit1 = new TextEdit()
         {
             NewText = "using Namespace1;\r\n\r\n",
-            Range = new() { Start = new(1, 0), End = new(1, 0) }
+            Range = new() { Start = new(1, 0), End = new(1, 0) },
         };
         AssertJsonEquals([expectedAdditionalEdit1], resolvedItem1.AdditionalTextEdits);
 
@@ -934,7 +934,7 @@ namespace Program
         var expectedAdditionalEdit2 = new TextEdit()
         {
             NewText = "using Namespace2;\r\n\r\n",
-            Range = new() { Start = new(1, 0), End = new(1, 0) }
+            Range = new() { Start = new(1, 0), End = new(1, 0) },
         };
         AssertJsonEquals([expectedAdditionalEdit2], resolvedItem2.AdditionalTextEdits);
     }
@@ -966,7 +966,7 @@ public class C
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -994,7 +994,7 @@ public class C
             new InitializationOptions
             {
                 ClientCapabilities = DefaultClientCapabilities,
-                CallInitialized = true
+                CallInitialized = true,
             },
             extraExportedTypes: new[] { typeof(CSharpLspMockCompletionService.Factory) }.ToList()
         );
@@ -1018,7 +1018,7 @@ public class C
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -1162,11 +1162,11 @@ public class C
             new InitializationOptions
             {
                 ClientCapabilities = DefaultClientCapabilities,
-                CallInitialized = true
+                CallInitialized = true,
             },
             extraExportedTypes: new[]
             {
-                typeof(CSharpLspThrowExceptionOnChangeCompletionService.Factory)
+                typeof(CSharpLspThrowExceptionOnChangeCompletionService.Factory),
             }.ToList()
         );
 
@@ -1196,7 +1196,7 @@ public class C
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -1252,7 +1252,7 @@ public class C
                 var expectedEdit = new TextEdit
                 {
                     Range = new LSP.Range { Start = new(0, 5), End = new(0, 5) },
-                    NewText = "ComplexItem"
+                    NewText = "ComplexItem",
                 };
                 AssertJsonEquals(expectedEdit, resolvedItem.Command.Arguments[1]);
 
@@ -1283,7 +1283,7 @@ public class C
             new InitializationOptions
             {
                 ClientCapabilities = DefaultClientCapabilities,
-                CallInitialized = true
+                CallInitialized = true,
             },
             commonReferences: false
         );
@@ -1296,7 +1296,7 @@ public class C
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var document = testLspServer.GetCurrentSolution().Projects.First().Documents.First();
@@ -1341,7 +1341,7 @@ public class C
         {
             Range = new LSP.Range { Start = new(7, 4), End = new(7, 13) },
             NewText =
-                "public override global::System.Boolean AbstractMethod(global::System.Int32 x)\r\n    {\r\n        throw new System.NotImplementedException();\r\n    }"
+                "public override global::System.Boolean AbstractMethod(global::System.Int32 x)\r\n    {\r\n        throw new System.NotImplementedException();\r\n    }",
         };
         AssertJsonEquals(expectedEdit, resolvedItem.Command.Arguments[1]);
 
@@ -1377,7 +1377,7 @@ public class Z
             Context = new LSP.CompletionContext()
             {
                 TriggerKind = LSP.CompletionTriggerKind.Invoked,
-            }
+            },
         };
 
         var globalOptions = testLspServer.TestWorkspace.GetService<IGlobalOptionService>();

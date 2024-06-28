@@ -65,7 +65,7 @@ public class ResponseContentTypeHelperTest
                     MediaTypeHeaderValue.Parse("text/foo; charset=us-ascii"),
                     "text/bar; charset=utf-8",
                     "text/foo; charset=us-ascii"
-                }
+                },
             };
         }
     }

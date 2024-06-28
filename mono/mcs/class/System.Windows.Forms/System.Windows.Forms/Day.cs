@@ -36,6 +36,6 @@ namespace System.Windows.Forms
         Friday,
         Saturday,
         Sunday,
-        Default
+        Default,
     }
 }

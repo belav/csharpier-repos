@@ -12,7 +12,7 @@ class Program
         MyClass myClass = new MyClass() { Name = "trimmed" };
         MyClassWithVisualizerString myClassWithString = new MyClassWithVisualizerString()
         {
-            Name = "trimmed"
+            Name = "trimmed",
         };
 
         Type[] allTypes = typeof(MyClass).Assembly.GetTypes();

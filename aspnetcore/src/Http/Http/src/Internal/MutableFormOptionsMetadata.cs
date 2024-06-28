@@ -23,7 +23,7 @@ internal struct MutableFormOptionsMetadata(IFormOptionsMetadata formOptionsMetad
             MultipartHeadersLengthLimit =
                 MultipartHeadersLengthLimit ?? baseFormOptions.MultipartHeadersLengthLimit,
             MultipartBodyLengthLimit =
-                MultipartBodyLengthLimit ?? baseFormOptions.MultipartBodyLengthLimit
+                MultipartBodyLengthLimit ?? baseFormOptions.MultipartBodyLengthLimit,
         };
 
     public bool? BufferBody { get; set; } = formOptionsMetadata.BufferBody;

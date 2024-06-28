@@ -696,11 +696,9 @@ namespace Microsoft.Win32
 
             entry.Key = key;
             entry.OptionalLength =
-                (contentLength < 0L)
-                    ? 0
-                    : contentLength > Int32.MaxValue
-                        ? Int32.MaxValue
-                        : (int)(contentLength);
+                (contentLength < 0L) ? 0
+                : contentLength > Int32.MaxValue ? Int32.MaxValue
+                : (int)(contentLength);
 
             entry.Info.ExpireTime = _WinInetCache.FILETIME.Zero;
             if (expiresUtc != DateTime.MinValue && expiresUtc > s_MinDateTimeUtcForFileTimeUtc)

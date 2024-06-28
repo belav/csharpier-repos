@@ -30,7 +30,7 @@ namespace Wasm.Build.Tests
             parameters: new object[]
             { /*aot*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         [MemberData(
@@ -38,7 +38,7 @@ namespace Wasm.Build.Tests
             parameters: new object[]
             { /*aot*/
                 true,
-                RunHost.All
+                RunHost.All,
             }
         )]
         public void AOT_InvariantTimezone(
@@ -54,7 +54,7 @@ namespace Wasm.Build.Tests
             parameters: new object[]
             { /*aot*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         public void RelinkingWithoutAOT(

@@ -22,7 +22,7 @@ namespace System.Net.Mail
             ContinueLF,
             LastCR,
             LastLF,
-            Done
+            Done,
         }
 
         private readonly BufferedReadStream _bufferedStream;

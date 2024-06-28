@@ -8,7 +8,7 @@ namespace Microsoft.AspNetCore.Razor.TagHelpers;
 public enum CustomEnum
 {
     FirstValue,
-    SecondValue
+    SecondValue,
 }
 
 public class EnumTagHelper : TagHelper

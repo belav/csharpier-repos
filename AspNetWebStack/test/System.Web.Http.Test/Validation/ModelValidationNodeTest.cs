@@ -22,7 +22,7 @@ namespace System.Web.Http.Validation
             ModelValidationNode[] childNodes = new[]
             {
                 new ModelValidationNode(metadata, "someKey0"),
-                new ModelValidationNode(metadata, "someKey1")
+                new ModelValidationNode(metadata, "someKey1"),
             };
 
             // Act
@@ -113,7 +113,7 @@ namespace System.Web.Http.Validation
                     "Validating parent1.",
                     "Validating parent2.",
                     "Validated parent1.",
-                    "Validated parent2."
+                    "Validated parent2.",
                 },
                 log.ToArray()
             );
@@ -197,7 +197,7 @@ namespace System.Web.Http.Validation
                     "In OnValidating()",
                     "In LoggingValidatonAttribute.IsValid()",
                     "In IValidatableObject.Validate()",
-                    "In OnValidated()"
+                    "In OnValidated()",
                 },
                 log.ToArray()
             );
@@ -234,7 +234,7 @@ namespace System.Web.Http.Validation
                 {
                     "In OnValidating()",
                     "In IValidatableObject.Validate()",
-                    "In OnValidated()"
+                    "In OnValidated()",
                 },
                 log.ToArray()
             );
@@ -275,7 +275,7 @@ namespace System.Web.Http.Validation
             ModelMetadata modelMetadata = GetModelMetadata(model);
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey")
             {
-                SuppressValidation = true
+                SuppressValidation = true,
             };
 
             node.Validating += (sender, e) => log.Add("In OnValidating()");
@@ -311,14 +311,14 @@ namespace System.Web.Http.Validation
                 RangedInt =
                     0 /* error */
                 ,
-                ValidString = "dog"
+                ValidString = "dog",
             };
 
             ModelMetadata modelMetadata = GetModelMetadata(model);
             HttpActionContext context = ContextUtil.CreateActionContext();
             ModelValidationNode node = new ModelValidationNode(modelMetadata, "theKey")
             {
-                ValidateAllProperties = true
+                ValidateAllProperties = true,
             };
             context.ModelState.AddModelError("theKey.RequiredString.Dummy", "existing Error Text");
 

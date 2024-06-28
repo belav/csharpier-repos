@@ -42,7 +42,7 @@ namespace System.Threading.Tasks.Sources
         Faulted = 2,
 
         /// <summary>The operation completed due to cancellation.</summary>
-        Canceled = 3
+        Canceled = 3,
     }
 
     /// <summary>Represents an object that can be wrapped by a <see cref="ValueTask"/>.</summary>

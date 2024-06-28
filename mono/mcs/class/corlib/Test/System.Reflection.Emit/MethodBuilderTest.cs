@@ -822,7 +822,7 @@ namespace MonoTests.System.Reflection.Emit
             {
                 SecurityAction.RequestMinimum,
                 SecurityAction.RequestOptional,
-                SecurityAction.RequestRefuse
+                SecurityAction.RequestRefuse,
             };
             PermissionSet set = new PermissionSet(PermissionState.Unrestricted);
 
@@ -956,7 +956,7 @@ namespace MonoTests.System.Reflection.Emit
                     typeof(DllImportAttribute).GetField("CallingConvention"),
                     typeof(DllImportAttribute).GetField("CharSet"),
                     typeof(DllImportAttribute).GetField("ExactSpelling"),
-                    typeof(DllImportAttribute).GetField("PreserveSig")
+                    typeof(DllImportAttribute).GetField("PreserveSig"),
                 },
                 new object[] { "bar", CallingConvention.StdCall, CharSet.Unicode, true, false }
             );
@@ -999,7 +999,7 @@ namespace MonoTests.System.Reflection.Emit
                 new FieldInfo[]
                 {
                     typeof(DllImportAttribute).GetField("BestFitMapping"),
-                    typeof(DllImportAttribute).GetField("ThrowOnUnmappableChar")
+                    typeof(DllImportAttribute).GetField("ThrowOnUnmappableChar"),
                 },
                 new object[] { false, false }
             );
@@ -1035,7 +1035,7 @@ namespace MonoTests.System.Reflection.Emit
                 {
                     typeof(DllImportAttribute).GetField("SetLastError"),
                     typeof(DllImportAttribute).GetField("BestFitMapping"),
-                    typeof(DllImportAttribute).GetField("ThrowOnUnmappableChar")
+                    typeof(DllImportAttribute).GetField("ThrowOnUnmappableChar"),
                 },
                 new object[] { true, true, true }
             );

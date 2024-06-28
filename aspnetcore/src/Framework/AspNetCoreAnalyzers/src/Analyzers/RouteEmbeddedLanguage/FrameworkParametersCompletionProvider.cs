@@ -560,7 +560,7 @@ public sealed class FrameworkParametersCompletionProvider : CompletionProvider
                 ParenthesizedLambdaExpressionSyntax parenthesizedLambdaExpression =>
                     parenthesizedLambdaExpression.ParameterList,
                 MethodDeclarationSyntax methodDeclaration => methodDeclaration.ParameterList,
-                _ => null
+                _ => null,
             };
 
             if (parameterList != null)

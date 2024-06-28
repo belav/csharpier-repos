@@ -80,7 +80,7 @@ namespace NotePadExample
                     this.menuItemFile,
                     this.menuItemEdit,
                     this.menuItemHelp,
-                    this.menuItemBlank
+                    this.menuItemBlank,
                 }
             );
 
@@ -93,7 +93,7 @@ namespace NotePadExample
                     this.menuItemSep1,
                     this.menuItemSave,
                     this.menuItemSep2,
-                    this.menuItemExit
+                    this.menuItemExit,
                 }
             );
             this.menuItemFile.Text = "File";
@@ -127,7 +127,7 @@ namespace NotePadExample
                     this.menuItemCut,
                     this.menuItemCopy,
                     this.menuItemPaste,
-                    this.menuItemSelectAll
+                    this.menuItemSelectAll,
                 }
             );
             this.menuItemEdit.Text = "Edit";

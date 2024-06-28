@@ -88,7 +88,7 @@ namespace System.Formats.Tar
                 TarEntryFormat.V7 => FieldLocations.V7Data,
                 TarEntryFormat.Ustar or TarEntryFormat.Pax => FieldLocations.PosixData,
                 TarEntryFormat.Gnu => FieldLocations.GnuData,
-                _ => throw new ArgumentOutOfRangeException(nameof(format))
+                _ => throw new ArgumentOutOfRangeException(nameof(format)),
             };
 
             // We know the exact location where the data starts depending on the format
@@ -143,7 +143,7 @@ namespace System.Formats.Tar
                 TarEntryFormat.V7 => FieldLocations.V7Data,
                 TarEntryFormat.Ustar or TarEntryFormat.Pax => FieldLocations.PosixData,
                 TarEntryFormat.Gnu => FieldLocations.GnuData,
-                _ => throw new ArgumentOutOfRangeException(nameof(format))
+                _ => throw new ArgumentOutOfRangeException(nameof(format)),
             };
 
             // We know the exact location where the data starts depending on the format
@@ -635,7 +635,7 @@ namespace System.Formats.Tar
                 _gid = 0,
                 _mTime = DateTimeOffset.MinValue, // 0
                 _typeFlag = entryType,
-                _dataStream = new MemoryStream(Encoding.UTF8.GetBytes(longText))
+                _dataStream = new MemoryStream(Encoding.UTF8.GetBytes(longText)),
             };
         }
 

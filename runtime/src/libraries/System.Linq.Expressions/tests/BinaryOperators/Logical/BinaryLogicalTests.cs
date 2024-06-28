@@ -472,11 +472,11 @@ namespace System.Linq.Expressions.Tests
         {
             yield return new object[]
             {
-                typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.InstanceMethod))
+                typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.InstanceMethod)),
             };
             yield return new object[]
             {
-                typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.StaticVoidMethod))
+                typeof(NonGenericClass).GetMethod(nameof(NonGenericClass.StaticVoidMethod)),
             };
         }
 
@@ -846,7 +846,7 @@ namespace System.Linq.Expressions.Tests
             {
                 GetTypeBuilder(),
                 typeof(bool),
-                new Type[] { typeof(int) }
+                new Type[] { typeof(int) },
             };
 
             // Has two parameters
@@ -855,7 +855,7 @@ namespace System.Linq.Expressions.Tests
             {
                 typeBuilder2,
                 typeof(bool),
-                new Type[] { typeBuilder2, typeBuilder2 }
+                new Type[] { typeBuilder2, typeBuilder2 },
             };
 
             // Has no parameters

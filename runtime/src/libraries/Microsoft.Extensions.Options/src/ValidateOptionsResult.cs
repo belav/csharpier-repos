@@ -17,7 +17,7 @@ namespace Microsoft.Extensions.Options
         /// </summary>
         public static readonly ValidateOptionsResult Skip = new ValidateOptionsResult()
         {
-            Skipped = true
+            Skipped = true,
         };
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.Options
         /// </summary>
         public static readonly ValidateOptionsResult Success = new ValidateOptionsResult()
         {
-            Succeeded = true
+            Succeeded = true,
         };
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace Microsoft.Extensions.Options
             {
                 Failed = true,
                 FailureMessage = failureMessage,
-                Failures = new string[] { failureMessage }
+                Failures = new string[] { failureMessage },
             };
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace Microsoft.Extensions.Options
             {
                 Failed = true,
                 FailureMessage = string.Join("; ", failures),
-                Failures = failures
+                Failures = failures,
             };
     }
 }

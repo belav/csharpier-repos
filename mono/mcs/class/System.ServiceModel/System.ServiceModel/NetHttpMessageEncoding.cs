@@ -29,6 +29,6 @@ namespace System.ServiceModel
     {
         Binary,
         Text,
-        Mtom
+        Mtom,
     }
 }

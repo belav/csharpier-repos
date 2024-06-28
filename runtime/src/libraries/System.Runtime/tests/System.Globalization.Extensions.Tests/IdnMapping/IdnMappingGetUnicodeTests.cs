@@ -23,28 +23,28 @@ namespace System.Globalization.Tests
                 "xn--097ccd",
                 0,
                 10,
-                "\uD800\uDF00\uD800\uDF01\uD800\uDF02"
+                "\uD800\uDF00\uD800\uDF01\uD800\uDF02",
             }; // Surrogate pairs
             yield return new object[]
             {
                 "xn--ab-ic6nfag",
                 0,
                 14,
-                "\uD800\uDF00\u0061\uD800\uDF01b\uD800\uDF02"
+                "\uD800\uDF00\u0061\uD800\uDF01b\uD800\uDF02",
             }; // Surrogate pairs separated by ASCII
             yield return new object[]
             {
                 "xn--yda263v6b6kfag",
                 0,
                 18,
-                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02"
+                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02",
             }; // Surrogate pairs separated by non-ASCII
             yield return new object[]
             {
                 "xn--a-nha4529qfag",
                 0,
                 17,
-                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02"
+                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02",
             }; // Surrogate pairs separated by ASCII and non-ASCII
             yield return new object[] { "\u0061\u0062\u0063", 0, 3, "\u0061\u0062\u0063" }; // ASCII only code points
             yield return new object[]
@@ -52,21 +52,21 @@ namespace System.Globalization.Tests
                 "xn--d9juau41awczczp",
                 0,
                 19,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
             }; // Non-ASCII only code points
             yield return new object[]
             {
                 "xn--de-jg4avhby1noc0d",
                 0,
                 21,
-                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             }; // ASCII and non-ASCII code points
             yield return new object[]
             {
                 "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
                 0,
                 45,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             }; // Fully qualified domain name
 
             // Embedded domain name conversion (NLS + only)(Priority 1)
@@ -81,49 +81,49 @@ namespace System.Globalization.Tests
                 "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
                 0,
                 45,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             };
             yield return new object[]
             {
                 "abc.xn--d9juau41awczczp",
                 0,
                 23,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
             };
             yield return new object[]
             {
                 "abc.xn--d9juau41awczczp.",
                 0,
                 24,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067."
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.",
             };
             yield return new object[]
             {
                 "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
                 0,
                 41,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             };
             yield return new object[]
             {
                 "xn--d9juau41awczczp",
                 0,
                 19,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
             };
             yield return new object[]
             {
                 "xn--d9juau41awczczp.",
                 0,
                 20,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067."
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.",
             };
             yield return new object[]
             {
                 "xn--de-jg4avhby1noc0d",
                 0,
                 21,
-                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             };
         }
 
@@ -181,7 +181,7 @@ namespace System.Globalization.Tests
                     "abc" + (char)i + "def",
                     0,
                     7,
-                    typeof(ArgumentException)
+                    typeof(ArgumentException),
                 };
             }
 
@@ -190,7 +190,7 @@ namespace System.Globalization.Tests
                 "abc" + (char)0x7F + "def",
                 0,
                 7,
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
 
             if (PlatformDetection.IsNlsGlobalization) // expected platform differences, see https://github.com/dotnet/runtime/issues/17190

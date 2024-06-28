@@ -4,7 +4,7 @@ using System.Reflection;
 public enum WasCalled
 {
     BaseWasCalled,
-    DerivedWasCalled
+    DerivedWasCalled,
 }
 
 public delegate WasCalled Del1(string s);

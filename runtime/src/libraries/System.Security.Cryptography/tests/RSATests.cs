@@ -104,7 +104,7 @@ namespace System.Security.Cryptography.Tests
             var rsa = new DelegateRSA
             {
                 HashDataArrayDelegate = (data, offset, count, name) =>
-                    new Span<byte>(data, offset, count).ToArray()
+                    new Span<byte>(data, offset, count).ToArray(),
             };
             int bytesWritten;
             byte[] actual,
@@ -199,7 +199,7 @@ namespace System.Security.Cryptography.Tests
                 {
                     invoked = true;
                     return true;
-                }
+                },
             };
             Assert.True(
                 rsa.VerifyHash(
@@ -1569,10 +1569,7 @@ namespace System.Security.Cryptography.Tests
         {
             public DelegateRSA()
             {
-                LegalKeySizesValue = new[]
-                {
-                    new KeySizes(1, 16_384, 1), // Every "reasonable" key size is legal.
-                };
+                LegalKeySizesValue = new[] { new KeySizes(1, 16_384, 1) };
             }
 
             public delegate bool TrySignDataFunc(

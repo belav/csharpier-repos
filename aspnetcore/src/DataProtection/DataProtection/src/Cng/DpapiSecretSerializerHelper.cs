@@ -82,12 +82,12 @@ internal static unsafe class DpapiSecretSerializerHelper
         var dataIn = new DATA_BLOB()
         {
             cbData = cbSecret,
-            pbData = (pbSecret != null) ? pbSecret : &dummy
+            pbData = (pbSecret != null) ? pbSecret : &dummy,
         };
         var entropy = new DATA_BLOB()
         {
             cbData = cbOptionalEntropy,
-            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy
+            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy,
         };
         var dataOut = default(DATA_BLOB);
 
@@ -250,12 +250,12 @@ internal static unsafe class DpapiSecretSerializerHelper
         var dataIn = new DATA_BLOB()
         {
             cbData = cbProtectedData,
-            pbData = (pbProtectedData != null) ? pbProtectedData : &dummy
+            pbData = (pbProtectedData != null) ? pbProtectedData : &dummy,
         };
         var entropy = new DATA_BLOB()
         {
             cbData = cbOptionalEntropy,
-            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy
+            pbData = (pbOptionalEntropy != null) ? pbOptionalEntropy : &dummy,
         };
         var dataOut = default(DATA_BLOB);
 

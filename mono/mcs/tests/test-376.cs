@@ -5,7 +5,7 @@ class C
     internal enum Flags
     {
         Removed = 0,
-        Public = 1
+        Public = 1,
     }
 
     static Flags _enumFlags;

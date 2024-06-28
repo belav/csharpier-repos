@@ -122,7 +122,7 @@ namespace System.Web.Mvc.Test
                     new ValidationResult[]
                     {
                         new ValidationResult("Error Message 1"),
-                        new ValidationResult("Error Message 2")
+                        new ValidationResult("Error Message 2"),
                     }
                 );
 
@@ -151,7 +151,7 @@ namespace System.Web.Mvc.Test
                 .Returns(
                     new[]
                     {
-                        new ValidationResult("Error Message", new[] { "Property1", "Property2" })
+                        new ValidationResult("Error Message", new[] { "Property1", "Property2" }),
                     }
                 )
                 .Verifiable();

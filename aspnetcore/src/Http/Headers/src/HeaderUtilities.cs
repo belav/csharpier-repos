@@ -615,7 +615,7 @@ public static class HeaderUtilities
             0 => "0",
             1 => "1",
             -1 => "-1",
-            _ => value.ToString(NumberFormatInfo.InvariantInfo)
+            _ => value.ToString(NumberFormatInfo.InvariantInfo),
         };
     }
 

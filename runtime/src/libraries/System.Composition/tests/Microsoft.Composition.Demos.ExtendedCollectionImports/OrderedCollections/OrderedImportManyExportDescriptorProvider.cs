@@ -26,7 +26,7 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
         {
             typeof(IList<>),
             typeof(ICollection<>),
-            typeof(IEnumerable<>)
+            typeof(IEnumerable<>),
         };
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
@@ -70,7 +70,7 @@ namespace Microsoft.Composition.Demos.ExtendedCollectionImports.OrderedCollectio
                     gimd.Invoke(
                         null,
                         new object[] { contract, elementContract, definitionAccessor, keyToOrderBy }
-                    )
+                    ),
             };
         }
 

@@ -93,7 +93,7 @@ namespace JitTest_lcs_lcs_cs
                 "The Sun has left his blackness",
                 "and has found a fresher morning",
                 "and the fair Moon rejoices",
-                "in the clear and cloudless night"
+                "in the clear and cloudless night",
             };
 
             int[] len = new int[RANK];

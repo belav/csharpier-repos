@@ -22,7 +22,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -62,7 +62,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -99,7 +99,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -153,8 +153,8 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(Dictionary<string, int>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -171,7 +171,7 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, int>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 }, }, model);
+        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 } }, model);
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -193,7 +193,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -210,7 +210,7 @@ public class DictionaryModelBinderIntegrationTest
         Assert.True(modelBindingResult.IsModelSet);
 
         var model = Assert.IsType<Dictionary<string, int>>(modelBindingResult.Model);
-        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 }, }, model);
+        Assert.Equal(new Dictionary<string, int>() { { "key0", 10 } }, model);
 
         Assert.NotEmpty(modelState);
         Assert.Equal(0, modelState.ErrorCount);
@@ -411,7 +411,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>)
+            ParameterType = typeof(Dictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -450,7 +450,7 @@ public class DictionaryModelBinderIntegrationTest
         {
             Name = "parameter",
             ParameterType = typeof(Dictionary<string, int>),
-            ParameterInfo = parameterInfo
+            ParameterInfo = parameterInfo,
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -521,7 +521,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -570,7 +570,7 @@ public class DictionaryModelBinderIntegrationTest
             {
                 "key0",
                 new Person { Id = 10 }
-            }
+            },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -586,7 +586,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -619,7 +619,7 @@ public class DictionaryModelBinderIntegrationTest
             {
                 "key0",
                 new Person { Id = 10 }
-            }
+            },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -638,7 +638,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -668,7 +668,7 @@ public class DictionaryModelBinderIntegrationTest
             {
                 "42",
                 new Person { Id = 10 }
-            }
+            },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -684,7 +684,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -714,7 +714,7 @@ public class DictionaryModelBinderIntegrationTest
             {
                 "42",
                 new Person { Id = 10 }
-            }
+            },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -733,7 +733,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         // Act
@@ -775,8 +775,8 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(Dictionary<string, Person>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -830,8 +830,8 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(Dictionary<string, Person>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var modelState = testContext.ModelState;
@@ -876,7 +876,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -931,7 +931,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, Person>)
+            ParameterType = typeof(Dictionary<string, Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -970,7 +970,7 @@ public class DictionaryModelBinderIntegrationTest
         {
             Name = "parameter",
             ParameterType = typeof(Dictionary<string, Person>),
-            ParameterInfo = parameterInfo
+            ParameterInfo = parameterInfo,
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1020,13 +1020,13 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, string[]>
         {
-            { "key0", new[] { "10", "11" } }
+            { "key0", new[] { "10", "11" } },
         };
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1057,7 +1057,7 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, string[]>
         {
-            { "key0", new[] { "10", "11" } }
+            { "key0", new[] { "10", "11" } },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -1073,7 +1073,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1099,7 +1099,7 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, string[]>
         {
-            { "key0", new[] { "10", "11" } }
+            { "key0", new[] { "10", "11" } },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -1118,7 +1118,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1149,7 +1149,7 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, string[]>
         {
-            { "42", new[] { "10", "11" } }
+            { "42", new[] { "10", "11" } },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -1165,7 +1165,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1196,7 +1196,7 @@ public class DictionaryModelBinderIntegrationTest
         // Arrange
         var expectedDictionary = new Dictionary<string, string[]>
         {
-            { "42", new[] { "10", "11" } }
+            { "42", new[] { "10", "11" } },
         };
         var testContext = ModelBindingTestHelper.GetTestContext(
             request => request.QueryString = new QueryString(queryString),
@@ -1215,7 +1215,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string[]>)
+            ParameterType = typeof(Dictionary<string, string[]>),
         };
 
         // Act
@@ -1393,7 +1393,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, string>)
+            ParameterType = typeof(Dictionary<string, string>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1450,7 +1450,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, NonNullPerson>)
+            ParameterType = typeof(Dictionary<string, NonNullPerson>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1535,7 +1535,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<DayOfWeek, string>)
+            ParameterType = typeof(Dictionary<DayOfWeek, string>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1576,7 +1576,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, DayOfWeek>)
+            ParameterType = typeof(Dictionary<string, DayOfWeek>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1624,7 +1624,7 @@ public class DictionaryModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, NonNullPersonWithRequiredProperties>)
+            ParameterType = typeof(Dictionary<string, NonNullPersonWithRequiredProperties>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>

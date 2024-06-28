@@ -14,7 +14,7 @@ namespace System.Net.Sockets.Tests
         private static readonly byte[] s_buffer = new byte[1];
         private static readonly IList<ArraySegment<byte>> s_buffers = new List<ArraySegment<byte>>
         {
-            new ArraySegment<byte>(s_buffer)
+            new ArraySegment<byte>(s_buffer),
         };
         private static readonly SocketAsyncEventArgs s_eventArgs = new SocketAsyncEventArgs();
 

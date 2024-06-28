@@ -51,7 +51,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             var test = new Test(referenceAncillaryInterop: false)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
             test.DisabledDiagnostics.Add(
@@ -69,7 +69,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
             var test = new Test(referenceAncillaryInterop: true)
             {
                 TestCode = source,
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
             test.ExpectedDiagnostics.AddRange(expected);
@@ -83,7 +83,7 @@ namespace Microsoft.Interop.UnitTests.Verifiers
         {
             var test = new Test(referenceAncillaryInterop: false)
             {
-                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck
+                TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
             };
 
             foreach (var source in sources)
@@ -112,13 +112,16 @@ namespace Microsoft.Interop.UnitTests.Verifiers
                 {
                     ReferenceAssemblies = targetFramework switch
                     {
-                        TestTargetFramework.Framework =>
-                            ReferenceAssemblies.NetFramework.Net48.Default,
-                        TestTargetFramework.Standard =>
-                            ReferenceAssemblies.NetStandard.NetStandard21,
+                        TestTargetFramework.Framework => ReferenceAssemblies
+                            .NetFramework
+                            .Net48
+                            .Default,
+                        TestTargetFramework.Standard => ReferenceAssemblies
+                            .NetStandard
+                            .NetStandard21,
                         TestTargetFramework.Core => ReferenceAssemblies.NetCore.NetCoreApp31,
                         TestTargetFramework.Net6 => ReferenceAssemblies.Net.Net60,
-                        _ => ReferenceAssemblies.Default
+                        _ => ReferenceAssemblies.Default,
                     };
                 }
                 SolutionTransforms.Add(

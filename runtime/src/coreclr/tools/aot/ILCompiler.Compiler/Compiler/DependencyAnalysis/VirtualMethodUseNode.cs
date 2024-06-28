@@ -111,7 +111,7 @@ namespace ILCompiler.DependencyAnalysis
                         ),
                         factory.NativeLayout.TemplateTypeLayout(universalCanonicalOwningType),
                         "If universal canon instantiation of method exists, ensure that the universal canonical type has the right set of dependencies"
-                    )
+                    ),
                 };
             }
             else

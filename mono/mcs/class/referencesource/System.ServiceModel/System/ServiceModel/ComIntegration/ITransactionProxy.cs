@@ -18,7 +18,7 @@ namespace System.ServiceModel.ComIntegration
         ISOLATIONLEVEL_READCOMMITTED = 0x1000,
         ISOLATIONLEVEL_REPEATABLEREAD = 0x10000,
         ISOLATIONLEVEL_SERIALIZABLE = 0x100000,
-        ISOLATIONLEVEL_ISOLATED = 0x100000
+        ISOLATIONLEVEL_ISOLATED = 0x100000,
     }
 
     [SuppressUnmanagedCodeSecurity]

@@ -105,7 +105,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                             encoding: null,
                             SourceHashAlgorithms.Default
                         )
-                    )
+                    ),
                 },
                 new MetadataReference[]
                 {
@@ -113,7 +113,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     NetStandard20.netstandard,
                     NetStandard20.SystemRuntime,
                     MetadataReference.CreateFromFile(immutable.Path),
-                    MetadataReference.CreateFromFile(analyzer.Path)
+                    MetadataReference.CreateFromFile(analyzer.Path),
                 },
                 new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
             );

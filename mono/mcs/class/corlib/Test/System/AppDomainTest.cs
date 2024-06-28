@@ -315,7 +315,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -435,7 +435,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -568,7 +568,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -702,7 +702,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -841,7 +841,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -985,7 +985,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -1133,7 +1133,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -1282,7 +1282,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -1436,7 +1436,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -1595,7 +1595,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -1996,7 +1996,7 @@ namespace MonoTests.System
                 ":AB",
                 "B:A",
                 "B\\A",
-                "BA\\"
+                "BA\\",
             };
 
             AssemblyName name = new AssemblyName();
@@ -4525,7 +4525,7 @@ namespace MonoTests.System
             0x83,
             0x4E,
             0xF5,
-            0x6C
+            0x6C,
         };
 
         static byte[] publicKey2 =
@@ -5125,7 +5125,7 @@ namespace MonoTests.System
             0xD3,
             0x17,
             0xDA,
-            0x78
+            0x78,
         };
 
         static byte[] publicKey =
@@ -5289,7 +5289,7 @@ namespace MonoTests.System
             0xf8,
             0xff,
             0xa4,
-            0xcb
+            0xcb,
         };
 
         static byte[] pk_token = { 0xce, 0x52, 0x76, 0xd8, 0x68, 0x7e, 0Xc6, 0xdc };

@@ -211,7 +211,7 @@ namespace System.Activities.DurableInstancing
                     primitiveProperties,
                     complexProperties,
                     primitiveWriteOnlyProperties,
-                    complexWriteOnlyProperties
+                    complexWriteOnlyProperties,
                 };
 
                 foreach (KeyValuePair<XName, InstanceValue> property in properties)

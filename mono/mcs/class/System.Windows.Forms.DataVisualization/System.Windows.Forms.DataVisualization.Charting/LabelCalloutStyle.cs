@@ -31,6 +31,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         None = 0,
         Underlined = 1,
-        Box = 2
+        Box = 2,
     }
 }

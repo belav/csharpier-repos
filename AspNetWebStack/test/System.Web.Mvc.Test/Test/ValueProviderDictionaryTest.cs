@@ -56,9 +56,9 @@ namespace System.Web.Mvc.Test
                     new ValueProviderResult(null, null, null),
                     new ValueProviderResult(null, null, null),
                     new ValueProviderResult(null, null, null),
-                    new ValueProviderResult(null, null, null)
+                    new ValueProviderResult(null, null, null),
                 },
-                ThrowOnKeyNotFound = false
+                ThrowOnKeyNotFound = false,
             };
 
             // Act & assert
@@ -179,7 +179,7 @@ namespace System.Web.Mvc.Test
                 { "bar", "barInQueryString" },
                 { "baz", "bazFromQueryString" },
                 { null, "nullValue" },
-                { "", "emptyStringValue" }
+                { "", "emptyStringValue" },
             };
 
             Mock<ControllerContext> mockControllerContext = new Mock<ControllerContext>();

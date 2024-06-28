@@ -347,6 +347,7 @@ namespace System.IO.Compression
             // GZIP footer
             ReadingCRC, // iterates 4 times
             ReadingFileSize // iterates 4 times
+            ,
         }
 
         [Flags]
@@ -355,7 +356,7 @@ namespace System.IO.Compression
             CRCFlag = 2,
             ExtraFieldsFlag = 4,
             FileNameFlag = 8,
-            CommentFlag = 16
+            CommentFlag = 16,
         }
     }
 }

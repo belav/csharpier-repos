@@ -37,7 +37,7 @@ namespace Roslyn.Test.Utilities
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 RedirectStandardInput = stdInput != null || redirectStandardInput,
-                WorkingDirectory = workingDirectory
+                WorkingDirectory = workingDirectory,
             };
 
             // In case the process is a console application that expects standard input
@@ -118,7 +118,7 @@ namespace Roslyn.Test.Utilities
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                WorkingDirectory = workingDirectory
+                WorkingDirectory = workingDirectory,
             };
 
             Process p = new Process { StartInfo = startInfo };

@@ -357,7 +357,7 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeGeneration
                 {
                     { HasReferenceTypeConstraint: true } => s_classConstraint,
                     { HasValueTypeConstraint: true } => s_structConstraint,
-                    _ => s_defaultConstraint
+                    _ => s_defaultConstraint,
                 };
 
                 listOfClauses.Add(

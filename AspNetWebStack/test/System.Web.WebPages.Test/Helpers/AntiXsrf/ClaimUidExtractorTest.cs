@@ -55,7 +55,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
             GenericIdentity identity = new GenericIdentity("the-user");
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                SuppressIdentityHeuristicChecks = true
+                SuppressIdentityHeuristicChecks = true,
             };
 
             ClaimUidExtractor extractor = new ClaimUidExtractor(
@@ -101,7 +101,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
             mockIdentity.Setup(o => o.IsAuthenticated).Returns(true);
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                UniqueClaimTypeIdentifier = "unique-identifier"
+                UniqueClaimTypeIdentifier = "unique-identifier",
             };
             ClaimsIdentityConverter converter = new ClaimsIdentityConverter(
                 new Func<IIdentity, ClaimsIdentity>[]
@@ -112,7 +112,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
                         MockClaimsIdentity claimsIdentity = new MockClaimsIdentity();
                         claimsIdentity.AddClaim("unique-identifier", "some-value");
                         return claimsIdentity;
-                    }
+                    },
                 }
             );
 
@@ -168,7 +168,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
                     ClaimUidExtractor.NameIdentifierClaimType,
                     "nameIdentifierValue",
                     ClaimUidExtractor.IdentityProviderClaimType,
-                    "identityProviderValue"
+                    "identityProviderValue",
                 },
                 retVal
             );

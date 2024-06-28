@@ -82,15 +82,15 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     { 1, 2 },
                     { 2, 4 },
-                    { 3, 6 }
+                    { 3, 6 },
                 },
                 Array3D = new byte[,,]
                 {
                     {
                         { 1, 2, 3 },
-                        { 4, 5, 6 }
-                    }
-                }
+                        { 4, 5, 6 },
+                    },
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -98,7 +98,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.All,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -345,7 +345,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 List = new List<string> { "List value!" },
                 Dictionary = new Dictionary<string, string>
                 {
-                    { "Dictionary key!", "Dictionary value!" }
+                    { "Dictionary key!", "Dictionary value!" },
                 },
                 ReadOnlyCollection = new ReadOnlyCollection<string>(
                     new[] { "Read Only Collection value!" }
@@ -355,9 +355,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                 ReadOnlyDictionary = new ReadOnlyDictionary<string, string>(
                     new Dictionary<string, string>
                     {
-                        { "Read Only Dictionary key!", "Read Only Dictionary value!" }
+                        { "Read Only Dictionary key!", "Read Only Dictionary value!" },
                     }
-                )
+                ),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -403,7 +403,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     "movie",
                     new Movie { Name = "Die Hard" }
-                }
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -433,7 +433,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             IList<KeyValuePair<string, object>> dic = new List<KeyValuePair<string, object>>
             {
-                new KeyValuePair<string, object>("movie", new Movie { Name = "Die Hard" })
+                new KeyValuePair<string, object>("movie", new Movie { Name = "Die Hard" }),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -586,7 +586,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             wrapper.Array = new List<EmployeeReference> { new EmployeeReference() };
             wrapper.Dictionary = new Dictionary<string, EmployeeReference>
             {
-                { "First", new EmployeeReference() }
+                { "First", new EmployeeReference() },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -721,16 +721,16 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new EmployeeReference
                 {
                     Name = "Bob",
-                    Manager = new EmployeeReference { Name = "Frank" }
+                    Manager = new EmployeeReference { Name = "Frank" },
                 },
                 new Person
                 {
                     Department = "Department",
                     BirthDate = new DateTime(2000, 12, 30, 0, 0, 0, DateTimeKind.Utc),
-                    LastModified = new DateTime(2000, 12, 30, 0, 0, 0, DateTimeKind.Utc)
+                    LastModified = new DateTime(2000, 12, 30, 0, 0, 0, DateTimeKind.Utc),
                 },
                 "String!",
-                int.MinValue
+                int.MinValue,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1009,7 +1009,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Container container = new Container
             {
                 In = new List<Product>(),
-                Out = new List<Product>()
+                Out = new List<Product>(),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1067,7 +1067,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             TypeNameProperty typeNameProperty = new TypeNameProperty
             {
                 Name = "Name!",
-                Value = new TypeNameProperty { Name = "Nested!" }
+                Value = new TypeNameProperty { Name = "Nested!" },
             };
 
             string json = JsonConvert.SerializeObject(typeNameProperty, Formatting.Indented);
@@ -1107,7 +1107,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             TypeNameProperty typeNameProperty = new TypeNameProperty
             {
                 Name = "Name!",
-                Value = new List<int> { 1, 2, 3, 4, 5 }
+                Value = new List<int> { 1, 2, 3, 4, 5 },
             };
 
             string json = JsonConvert.SerializeObject(typeNameProperty, Formatting.Indented);
@@ -1196,8 +1196,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ProductName = "Elbow Grease",
                     Price = 5.99m,
-                    Quantity = 1
-                }
+                    Quantity = 1,
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1305,8 +1305,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ProductName = "Elbow Grease",
                     Price = 5.99m,
-                    Quantity = 1
-                }
+                    Quantity = 1,
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1315,7 +1315,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.Auto,
-                    SerializationBinder = binder
+                    SerializationBinder = binder,
                 }
             );
 
@@ -1355,7 +1355,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     TypeNameHandling = TypeNameHandling.Auto,
                     SerializationBinder = new NewTypeNameSerializationBinder(
                         "Newtonsoft.Json.Tests.Serialization.{0}, Newtonsoft.Json.Tests"
-                    )
+                    ),
                 }
             );
 
@@ -1540,9 +1540,9 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new List<UrlStatus>
                     {
                         new UrlStatus { Status = 300, Url = @"http://www.yahoo.com" },
-                        new UrlStatus { Status = 200, Url = @"http://www.askjeeves.com" }
+                        new UrlStatus { Status = 200, Url = @"http://www.askjeeves.com" },
                     }
-                }
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1847,7 +1847,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             Message message = new Message
             {
                 Address = "jamesnk@testtown.com",
-                Body = new Version(1, 2, 3, 4)
+                Body = new Version(1, 2, 3, 4),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -1865,7 +1865,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 #if !(PORTABLE || DNXCORE50)
                         IgnoreSerializableAttribute = true
 #endif
-                    }
+                    },
                 }
             );
 
@@ -1928,7 +1928,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new Employee
                 {
                     BirthDate = new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc),
-                    Department = "Department!"
+                    Department = "Department!",
                 }
             );
             l.Add("String!");
@@ -2046,7 +2046,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 1,
                 "two",
-                new TestComponentSimple { MyProperty = 1 }
+                new TestComponentSimple { MyProperty = 1 },
             };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
@@ -2083,8 +2083,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Data = new List<object>
                 {
                     new TestComponentSimple { MyProperty = 1 },
-                    new List<object> { new List<object> { new List<object>() } }
-                }
+                    new List<object> { new List<object> { new List<object>() } },
+                },
             };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
@@ -2176,10 +2176,10 @@ namespace Newtonsoft.Json.Tests.Serialization
                             {
                                 "one",
                                 new Dictionary<string, object> { { "one", 1 } }
-                            }
+                            },
                         }
-                    }
-                }
+                    },
+                },
             };
 
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
@@ -2260,8 +2260,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                     Prop1 = new List<object> { new TestComponentSimple { MyProperty = 1 } },
                     Prop2 = new TestComponentSimple { MyProperty = 1 },
                     Prop3 = 3,
-                    Prop4 = new JObject()
-                }
+                    Prop4 = new JObject(),
+                },
             };
 
             string json = JsonConvert.SerializeObject(o1, Formatting.Indented);
@@ -2397,7 +2397,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings()
             {
                 Formatting = Formatting.Indented,
-                TypeNameHandling = TypeNameHandling.All
+                TypeNameHandling = TypeNameHandling.All,
             };
             string serializedString = JsonConvert.SerializeObject(
                 inputContext,
@@ -2439,7 +2439,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 DefaultValueHandling = DefaultValueHandling.Ignore,
                 NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(p, settings);
@@ -2471,7 +2471,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 DefaultValueHandling = DefaultValueHandling.Ignore,
                 NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(p, settings);
@@ -2507,7 +2507,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 MissingMemberHandling = MissingMemberHandling.Ignore,
                 DefaultValueHandling = DefaultValueHandling.Ignore,
                 NullValueHandling = NullValueHandling.Ignore,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(pp, settings);
@@ -2602,7 +2602,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "key",
                 new List<MyInterfaceImplementationType>
                 {
-                    new MyInterfaceImplementationType() { SomeProperty = "property" }
+                    new MyInterfaceImplementationType() { SomeProperty = "property" },
                 }
             );
             string serialized = JsonConvert.SerializeObject(data, Formatting.Indented);
@@ -2694,7 +2694,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             JsonSerializerSettings serializerSettings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             ObjectWithOptionalMessage objWithMessage = new ObjectWithOptionalMessage(
@@ -2719,7 +2719,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             JsonSerializerSettings serializerSettings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Auto,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json =

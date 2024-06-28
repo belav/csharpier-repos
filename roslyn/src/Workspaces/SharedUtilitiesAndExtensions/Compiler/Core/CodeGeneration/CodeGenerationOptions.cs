@@ -65,7 +65,7 @@ internal readonly record struct CodeAndImportGenerationOptions
         new()
         {
             GenerationOptions = CodeGenerationOptions.GetDefault(languageServices),
-            AddImportOptions = AddImportPlacementOptions.Default
+            AddImportOptions = AddImportPlacementOptions.Default,
         };
 
     internal CodeAndImportGenerationOptionsProvider CreateProvider() => new Provider(this);
@@ -139,7 +139,7 @@ internal static class CodeGenerationOptionsProviders
                 languageServices,
                 allowImportsInHiddenRegions,
                 fallbackOptions?.AddImportOptions
-            )
+            ),
         };
 
     public static CleanCodeGenerationOptions GetCleanCodeGenerationOptions(
@@ -158,7 +158,7 @@ internal static class CodeGenerationOptionsProviders
                 languageServices,
                 allowImportsInHiddenRegions,
                 fallbackOptions?.CleanupOptions
-            )
+            ),
         };
 
     public static async ValueTask<CodeGenerationOptions> GetCodeGenerationOptionsAsync(

@@ -13,7 +13,7 @@ namespace System.DirectoryServices.AccountManagement
         UserPrincipalName = 2,
         DistinguishedName = 3,
         Sid = 4,
-        Guid = 5
+        Guid = 5,
     }
 
     internal static class IdentMap
@@ -25,7 +25,7 @@ namespace System.DirectoryServices.AccountManagement
             { IdentityType.UserPrincipalName, IdentityTypeStringMap.Upn },
             { IdentityType.DistinguishedName, IdentityTypeStringMap.DistinguishedName },
             { IdentityType.Sid, IdentityTypeStringMap.Sid },
-            { IdentityType.Guid, IdentityTypeStringMap.Guid }
+            { IdentityType.Guid, IdentityTypeStringMap.Guid },
         };
     }
 

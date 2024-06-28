@@ -638,7 +638,7 @@ namespace System.Windows.Forms
                             new Point(e.AffectedBounds.Left, e.AffectedBounds.Bottom - 1),
                             new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Bottom - 1),
                             new Point(e.AffectedBounds.Right - 1, e.AffectedBounds.Top),
-                            new Point(e.AffectedBounds.Left, e.AffectedBounds.Top)
+                            new Point(e.AffectedBounds.Left, e.AffectedBounds.Top),
                         }
                     );
                 else
@@ -657,7 +657,7 @@ namespace System.Windows.Forms
                             new Point(
                                 e.AffectedBounds.Left + e.ConnectedArea.Right,
                                 e.AffectedBounds.Top
-                            )
+                            ),
                         }
                     );
                 return;

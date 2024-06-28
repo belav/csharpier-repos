@@ -35,6 +35,6 @@ namespace System.Windows.Forms.VisualStyles
         Selected = 3,
         Disabled = 4,
         Readonly = 6,
-        Assist = 7
+        Assist = 7,
     }
 }

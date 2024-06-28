@@ -179,7 +179,7 @@ namespace System.ServiceModel.Activities
                     Namespace = string.IsNullOrEmpty(this.InternalName.NamespaceName)
                         ? NamingHelper.DefaultNamespace
                         : this.InternalName.NamespaceName,
-                    ConfigurationName = this.ConfigurationName ?? this.InternalName.LocalName
+                    ConfigurationName = this.ConfigurationName ?? this.InternalName.LocalName,
                 };
                 this.serviceDescription = result;
             }
@@ -204,7 +204,7 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                constraintList = new List<Constraint>(1) { constraint, };
+                constraintList = new List<Constraint>(1) { constraint };
                 workflowServiceSettings.AdditionalConstraints.Add(constraintType, constraintList);
             }
         }
@@ -294,7 +294,7 @@ namespace System.ServiceModel.Activities
                 Environment = source.Environment,
                 // Retain the same cancellation token. Otherwise we can't cancel the validation of WorkflowService objects
                 // which can make the designer unreponsive if the validation takes a long time.
-                CancellationToken = source.CancellationToken
+                CancellationToken = source.CancellationToken,
             };
 
             foreach (
@@ -716,7 +716,7 @@ namespace System.ServiceModel.Activities
                 if (this.HasImplementedContracts)
                 {
                     validationResults = this.Validate(
-                        new ValidationSettings() { PrepareForRuntime = true, }
+                        new ValidationSettings() { PrepareForRuntime = true }
                     );
                 }
                 else
@@ -957,7 +957,7 @@ namespace System.ServiceModel.Activities
         {
             DelegateInArgument<Receive> element = new DelegateInArgument<Receive>
             {
-                Name = "ReceiveElement"
+                Name = "ReceiveElement",
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext> { Name = "validationContext" };
@@ -978,7 +978,7 @@ namespace System.ServiceModel.Activities
                             new GetParentChain
                             {
                                 ValidationContext = validationContext,
-                                Result = parentChainVar
+                                Result = parentChainVar,
                             },
                             new ValidateReceiveContract()
                             {
@@ -986,13 +986,13 @@ namespace System.ServiceModel.Activities
                                 ReceiveActivity = element,
                                 WorkflowService = new InArgument<WorkflowService>()
                                 {
-                                    Expression = new GetWorkflowSerivce(this)
+                                    Expression = new GetWorkflowSerivce(this),
                                 },
                                 ParentChain = parentChainVar,
-                            }
-                        }
-                    }
-                }
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -1000,7 +1000,7 @@ namespace System.ServiceModel.Activities
         {
             DelegateInArgument<SendReply> element = new DelegateInArgument<SendReply>
             {
-                Name = "ReceiveElement"
+                Name = "ReceiveElement",
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext> { Name = "validationContext" };
@@ -1021,13 +1021,13 @@ namespace System.ServiceModel.Activities
                                 ReceiveActivity = element,
                                 WorkflowSerivce = new InArgument<WorkflowService>()
                                 {
-                                    Expression = new GetWorkflowSerivce(this)
+                                    Expression = new GetWorkflowSerivce(this),
                                 },
-                                ValidationContext = validationContext
-                            }
-                        }
-                    }
-                }
+                                ValidationContext = validationContext,
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -1536,7 +1536,7 @@ namespace System.ServiceModel.Activities
                 {
                     receiveActivity,
                     validationContext,
-                    operationProperties
+                    operationProperties,
                 };
 
                 metadata.SetArgumentsCollection(arguments);

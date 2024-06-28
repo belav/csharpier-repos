@@ -34,7 +34,7 @@ namespace System.Collections.Tests
                     "tr-TR",
                     "zh-CN",
                     "zh-HK",
-                    "zh-TW"
+                    "zh-TW",
                 };
 
         public static void PerformActionOnAllHashtableWrappers(
@@ -46,7 +46,7 @@ namespace System.Collections.Tests
             Hashtable[] hashtableTypes =
             {
                 (Hashtable)hashtable.Clone(),
-                Hashtable.Synchronized(hashtable)
+                Hashtable.Synchronized(hashtable),
             };
 
             foreach (Hashtable hashtableType in hashtableTypes)
@@ -96,7 +96,7 @@ namespace System.Collections.Tests
                 (ArrayList)ArrayList.Adapter(arrList).Clone(),
                 (ArrayList)ArrayList.FixedSize(arrList).Clone(),
                 (ArrayList)ArrayList.ReadOnly(arrList).Clone(),
-                (ArrayList)ArrayList.Synchronized(arrList).Clone()
+                (ArrayList)ArrayList.Synchronized(arrList).Clone(),
             };
 
             foreach (ArrayList arrListType in arrayListTypes)
@@ -188,7 +188,7 @@ namespace System.Collections.Tests
             SortedList[] sortedListTypes =
             {
                 (SortedList)sortedList.Clone(),
-                SortedList.Synchronized(sortedList)
+                SortedList.Synchronized(sortedList),
             };
 
             foreach (SortedList sortedListType in sortedListTypes)

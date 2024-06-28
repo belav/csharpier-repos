@@ -32,7 +32,7 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
         "'{0:yyyy-MM-ddTHH:mm:ss.ffffK}'",
         "'{0:yyyy-MM-ddTHH:mm:ss.fffffK}'",
         "'{0:yyyy-MM-ddTHH:mm:ss.ffffffK}'",
-        "'{0:yyyy-MM-ddTHH:mm:ss.fffffffK}'"
+        "'{0:yyyy-MM-ddTHH:mm:ss.fffffffK}'",
     };
 
     /// <summary>
@@ -144,6 +144,6 @@ public class SqlServerDateTimeTypeMapping : DateTimeTypeMapping
             "date" => DateFormatConst,
             "datetime" => DateTimeFormatConst,
             "smalldatetime" => SmallDateTimeFormatConst,
-            _ => _dateTime2Formats[Precision is >= 0 and <= 7 ? Precision.Value : 7]
+            _ => _dateTime2Formats[Precision is >= 0 and <= 7 ? Precision.Value : 7],
         };
 }

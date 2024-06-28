@@ -37,6 +37,6 @@ namespace System.EnterpriseServices
         ReadCommitted = 2,
         ReadUncommitted = 1,
         RepeatableRead = 3,
-        Serializable = 4
+        Serializable = 4,
     }
 }

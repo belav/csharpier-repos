@@ -41,7 +41,7 @@ namespace ILLink.RoslynAnalyzer.DataFlow
                 ControlFlowRegionKind.Catch => RegionKind.Catch,
                 ControlFlowRegionKind.Filter => RegionKind.Filter,
                 ControlFlowRegionKind.Finally => RegionKind.Finally,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 

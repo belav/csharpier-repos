@@ -151,7 +151,7 @@ public class CertificatePathWatcherTests : LoggedTest
         var certificateConfigs = new CertificateConfig[observerCount];
         for (int i = 0; i < observerCount; i++)
         {
-            certificateConfigs[i] = new CertificateConfig { Path = filePath, };
+            certificateConfigs[i] = new CertificateConfig { Path = filePath };
 
             watcher.AddWatchUnsynchronized(certificateConfigs[i]);
         }
@@ -190,7 +190,7 @@ public class CertificatePathWatcherTests : LoggedTest
 
         using var watcher = new CertificatePathWatcher(dir, logger, _ => fileProvider);
 
-        var certificateConfig = new CertificateConfig { Path = filePath, };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -226,7 +226,7 @@ public class CertificatePathWatcherTests : LoggedTest
         // Returning null indicates that the directory does not exist
         using var watcher = new CertificatePathWatcher(dir, logger, _ => null);
 
-        var certificateConfig = new CertificateConfig { Path = Path.Combine(dir, "test.pfx"), };
+        var certificateConfig = new CertificateConfig { Path = Path.Combine(dir, "test.pfx") };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -253,7 +253,7 @@ public class CertificatePathWatcherTests : LoggedTest
             _ => NoChangeFileProvider.Instance
         );
 
-        var certificateConfig = new CertificateConfig { Path = filePath, };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         if (previouslyAdded)
         {
@@ -288,9 +288,9 @@ public class CertificatePathWatcherTests : LoggedTest
             _ => NoChangeFileProvider.Instance
         );
 
-        var certificateConfig1 = new CertificateConfig { Path = filePath, };
+        var certificateConfig1 = new CertificateConfig { Path = filePath };
 
-        var certificateConfig2 = new CertificateConfig { Path = filePath, };
+        var certificateConfig2 = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig1);
 
@@ -326,7 +326,7 @@ public class CertificatePathWatcherTests : LoggedTest
             _ => NoChangeFileProvider.Instance
         );
 
-        var certificateConfig = new CertificateConfig { Path = filePath, };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -358,7 +358,7 @@ public class CertificatePathWatcherTests : LoggedTest
 
         using var watcher = new CertificatePathWatcher(dir, logger, _ => fileProvider);
 
-        var certificateConfig = new CertificateConfig { Path = filePath, };
+        var certificateConfig = new CertificateConfig { Path = filePath };
 
         watcher.AddWatchUnsynchronized(certificateConfig);
 
@@ -426,11 +426,11 @@ public class CertificatePathWatcherTests : LoggedTest
 
         var changeToken = watcher.GetChangeToken();
 
-        var certificateConfig1 = new CertificateConfig { Path = filePath, };
+        var certificateConfig1 = new CertificateConfig { Path = filePath };
 
-        var certificateConfig2 = new CertificateConfig { Path = filePath, };
+        var certificateConfig2 = new CertificateConfig { Path = filePath };
 
-        var certificateConfig3 = new CertificateConfig { Path = filePath, };
+        var certificateConfig3 = new CertificateConfig { Path = filePath };
 
         // Add certificateConfig1
         watcher.UpdateWatches(

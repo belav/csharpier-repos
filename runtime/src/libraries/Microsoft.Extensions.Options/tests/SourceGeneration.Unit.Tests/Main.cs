@@ -1931,7 +1931,7 @@ public class EmitterTests
 
         var assemblies = new List<Assembly>
         {
-            Assembly.GetAssembly(typeof(MemberDeclarationSyntax))!
+            Assembly.GetAssembly(typeof(MemberDeclarationSyntax))!,
         };
 
         if (includeOptionValidatorReferences)

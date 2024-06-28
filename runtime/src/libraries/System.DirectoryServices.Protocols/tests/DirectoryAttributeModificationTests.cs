@@ -22,7 +22,7 @@ namespace System.DirectoryServices.Protocols.Tests
         {
             var modification = new DirectoryAttributeModification
             {
-                Operation = DirectoryAttributeOperation.Delete
+                Operation = DirectoryAttributeOperation.Delete,
             };
             Assert.Equal(DirectoryAttributeOperation.Delete, modification.Operation);
         }

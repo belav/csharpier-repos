@@ -23,7 +23,7 @@ namespace System.IO.Compression
             NoFlush = 0,
             SyncFlush = 2,
             Finish = 4,
-            Block = 5
+            Block = 5,
         }
 
         public enum ErrorCode : int
@@ -34,7 +34,7 @@ namespace System.IO.Compression
             DataError = -3,
             MemError = -4,
             BufError = -5,
-            VersionError = -6
+            VersionError = -6,
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace System.IO.Compression
             NoCompression = 0,
             BestSpeed = 1,
             DefaultCompression = -1,
-            BestCompression = 9
+            BestCompression = 9,
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace System.IO.Compression
         /// </summary>
         public enum CompressionStrategy : int
         {
-            DefaultStrategy = 0
+            DefaultStrategy = 0,
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace System.IO.Compression
         /// </summary>
         public enum CompressionMethod : int
         {
-            Deflated = 8
+            Deflated = 8,
         }
 
         /// <summary>
@@ -194,7 +194,7 @@ namespace System.IO.Compression
                 NotInitialized,
                 InitializedForDeflate,
                 InitializedForInflate,
-                Disposed
+                Disposed,
             }
 
             private ZStream _zStream;

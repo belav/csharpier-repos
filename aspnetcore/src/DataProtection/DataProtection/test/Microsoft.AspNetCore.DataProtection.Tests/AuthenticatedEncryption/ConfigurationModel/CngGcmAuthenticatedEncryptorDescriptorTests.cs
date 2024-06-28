@@ -17,7 +17,7 @@ public class CngGcmAuthenticatedEncryptorDescriptorTests
             {
                 EncryptionAlgorithm = "enc-alg",
                 EncryptionAlgorithmKeySize = 2048,
-                EncryptionAlgorithmProvider = "enc-alg-prov"
+                EncryptionAlgorithmProvider = "enc-alg-prov",
             },
             masterKey.ToSecret()
         );
@@ -50,7 +50,7 @@ public class CngGcmAuthenticatedEncryptorDescriptorTests
             new CngGcmAuthenticatedEncryptorConfiguration()
             {
                 EncryptionAlgorithm = "enc-alg",
-                EncryptionAlgorithmKeySize = 2048
+                EncryptionAlgorithmKeySize = 2048,
             },
             masterKey.ToSecret()
         );

@@ -266,7 +266,7 @@ namespace System.Web.UI
             "ctl124",
             "ctl125",
             "ctl126",
-            "ctl127"
+            "ctl127",
         };
 
         /// <devdoc>
@@ -1844,7 +1844,7 @@ namespace System.Web.UI
         /// <devdoc>
         /// <para>Apply stylesheet skin on the control.</para>
         /// </devdoc>
-        [EditorBrowsable(EditorBrowsableState.Advanced),]
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
         public virtual void ApplyStyleSheetSkin(Page page)
         {
             // Nothing to do if the control is not in a Page.

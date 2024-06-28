@@ -12,12 +12,12 @@ namespace System.Xml.XmlDocumentTests
             XmlNodeType.Whitespace,
             XmlNodeType.SignificantWhitespace,
             XmlNodeType.CDATA,
-            XmlNodeType.Text
+            XmlNodeType.Text,
         };
         private static readonly InsertType[] s_InsertTypes = new[]
         {
             InsertType.InsertBefore,
-            InsertType.InsertAfter
+            InsertType.InsertAfter,
         };
 
         private static void InsertTestBase(string xml, InsertType insertType, XmlNodeType nodeType)

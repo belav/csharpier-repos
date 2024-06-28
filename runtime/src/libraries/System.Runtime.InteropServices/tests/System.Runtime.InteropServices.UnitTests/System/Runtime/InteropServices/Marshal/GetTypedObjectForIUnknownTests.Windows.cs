@@ -24,36 +24,36 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[]
             {
                 new IInspectableComObject(),
-                typeof(IInspectableComObject)
+                typeof(IInspectableComObject),
             };
             yield return new object[]
             {
                 new IInspectableComObject(),
-                typeof(IInspectableInterface)
+                typeof(IInspectableInterface),
             };
 
             yield return new object[] { new NonDualComObject(), typeof(NonDualComObject) };
             yield return new object[]
             {
                 new AutoDispatchComObject(),
-                typeof(AutoDispatchComObject)
+                typeof(AutoDispatchComObject),
             };
             yield return new object[] { new AutoDualComObject(), typeof(AutoDualComObject) };
 
             yield return new object[]
             {
                 new NonDualComObjectEmpty(),
-                typeof(NonDualComObjectEmpty)
+                typeof(NonDualComObjectEmpty),
             };
             yield return new object[]
             {
                 new AutoDispatchComObjectEmpty(),
-                typeof(AutoDispatchComObjectEmpty)
+                typeof(AutoDispatchComObjectEmpty),
             };
             yield return new object[]
             {
                 new AutoDualComObjectEmpty(),
-                typeof(AutoDualComObjectEmpty)
+                typeof(AutoDualComObjectEmpty),
             };
         }
 

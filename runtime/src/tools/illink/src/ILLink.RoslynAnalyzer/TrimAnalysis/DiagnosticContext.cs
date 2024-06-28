@@ -82,7 +82,7 @@ namespace ILLink.Shared.TrimAnalysis
                 MethodParameterValue methodParameter => methodParameter.Parameter.ParameterSymbol!,
                 MethodReturnValue mrv => mrv.MethodSymbol,
                 GenericParameterValue gpv => gpv.GenericParameter.TypeParameterSymbol,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
 
             Location[]? sourceLocation;

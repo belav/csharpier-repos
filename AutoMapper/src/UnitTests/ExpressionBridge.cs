@@ -167,19 +167,19 @@ namespace AutoMapper.UnitTests
                     ProductSubcategory = new ProductSubcategory
                     {
                         Name = "Bar",
-                        ProductCategory = new ProductCategory { Name = "Baz" }
+                        ProductCategory = new ProductCategory { Name = "Baz" },
                     },
                     BillOfMaterials = new List<BillOfMaterials>
                     {
-                        new BillOfMaterials { BillOfMaterialsID = 5 }
+                        new BillOfMaterials { BillOfMaterialsID = 5 },
                     },
                     Types = new List<ProductType>
                     {
                         new ProductType() { Name = "A" },
                         new ProductType() { Name = "B" },
-                        new ProductType() { Name = "A" }
-                    }
-                }
+                        new ProductType() { Name = "A" },
+                    },
+                },
             };
             var queryable = _products.AsQueryable();
 
@@ -297,7 +297,7 @@ namespace AutoMapper.UnitTests
                     {
                         AP1 = 1,
                         AP2 = "hello",
-                        B = be
+                        B = be,
                     }
                 );
                 be.BP2.Add(
@@ -305,7 +305,7 @@ namespace AutoMapper.UnitTests
                     {
                         AP1 = 2,
                         AP2 = "two",
-                        B = be
+                        B = be,
                     }
                 );
 

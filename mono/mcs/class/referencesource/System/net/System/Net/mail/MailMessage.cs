@@ -22,7 +22,7 @@ namespace System.Net.Mail
         OnSuccess = 1,
         OnFailure = 2,
         Delay = 4,
-        Never = (int)0x08000000
+        Never = (int)0x08000000,
     }
 
     public class MailMessage : IDisposable

@@ -80,6 +80,7 @@ namespace System.ComponentModel
             Guid.NewGuid(), // attributes
             Guid.NewGuid(), // properties
             Guid.NewGuid() // events
+            ,
         };
 
         private static readonly Guid[] _pipelineMergeKeys = new Guid[]
@@ -87,6 +88,7 @@ namespace System.ComponentModel
             Guid.NewGuid(), // attributes
             Guid.NewGuid(), // properties
             Guid.NewGuid() // events
+            ,
         };
 
         private static readonly Guid[] _pipelineFilterKeys = new Guid[]
@@ -94,6 +96,7 @@ namespace System.ComponentModel
             Guid.NewGuid(), // attributes
             Guid.NewGuid(), // properties
             Guid.NewGuid() // events
+            ,
         };
 
         private static readonly Guid[] _pipelineAttributeFilterKeys = new Guid[]
@@ -101,6 +104,7 @@ namespace System.ComponentModel
             Guid.NewGuid(), // attributes
             Guid.NewGuid(), // properties
             Guid.NewGuid() // events
+            ,
         };
 
         private static object _internalSyncObject = new object();

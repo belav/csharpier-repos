@@ -439,7 +439,7 @@ namespace System.Activities.Runtime
                         update = new InstanceListNeedingUpdate
                         {
                             InstanceList = list,
-                            NewId = updatedActivity.NewId
+                            NewId = updatedActivity.NewId,
                         };
                     }
                     else
@@ -498,7 +498,7 @@ namespace System.Activities.Runtime
                         NewId = updatedActivity.NewId,
                         UpdateMap = updatedActivity.Map,
                         MapEntry = updatedActivity.MapEntry,
-                        NewActivity = updatedActivity.NewActivity
+                        NewActivity = updatedActivity.NewActivity,
                     };
                 }
 

@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Data
                 Location = new SettingLocation(
                     LocationKind.EditorConfig,
                     namingStyleOption.Section.FilePath
-                )
+                ),
             };
         }
 

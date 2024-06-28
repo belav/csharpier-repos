@@ -822,13 +822,10 @@ namespace System.Net
 
         private static int HexToInt(char h)
         {
-            return (h >= '0' && h <= '9')
-                ? h - '0'
-                : (h >= 'a' && h <= 'f')
-                    ? h - 'a' + 10
-                    : (h >= 'A' && h <= 'F')
-                        ? h - 'A' + 10
-                        : -1;
+            return (h >= '0' && h <= '9') ? h - '0'
+                : (h >= 'a' && h <= 'f') ? h - 'a' + 10
+                : (h >= 'A' && h <= 'F') ? h - 'A' + 10
+                : -1;
         }
 
         private static char IntToHex(int n)
@@ -1924,7 +1921,7 @@ namespace System.Net
                 (long)'y' << 56 | (long)'u' << 48 | (long)'m' << 40 | (long)'l' << 32,
                 (long)'z' << 56 | (long)'e' << 48 | (long)'t' << 40 | (long)'a' << 32,
                 (long)'z' << 56 | (long)'w' << 48 | (long)'j' << 40,
-                (long)'z' << 56 | (long)'w' << 48 | (long)'n' << 40 | (long)'j' << 32
+                (long)'z' << 56 | (long)'w' << 48 | (long)'n' << 40 | (long)'j' << 32,
             };
 
             static readonly char[] entities_values = new char[]
@@ -2181,7 +2178,7 @@ namespace System.Net
                 '\u00FF',
                 '\u03B6',
                 '\u200D',
-                '\u200C'
+                '\u200C',
             };
 #else
             // The list is from http://www.w3.org/TR/REC-html40/sgml/entities.html, except for &apos;, which

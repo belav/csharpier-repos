@@ -360,7 +360,7 @@ builder.Services.AddAntiforgery();
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.DoNotUseHostConfigureServices)
                 .WithArguments("ConfigureServices")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         await VerifyCS.VerifyCodeFixAsync(source, expectedDiagnostic, fixedSource);

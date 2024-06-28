@@ -637,7 +637,7 @@ public class HtmlHelperCheckBoxTest
         expected = string.Format(CultureInfo.InvariantCulture, expected, expectedChecked);
 
         var viewData = GetTestModelViewData();
-        viewData.Model = new TestModel { Property1 = value, };
+        viewData.Model = new TestModel { Property1 = value };
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(viewData);
 
@@ -682,7 +682,7 @@ public class HtmlHelperCheckBoxTest
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var viewDataDictionary = new ViewDataDictionary<ModelWithValidation>(metadataProvider)
         {
-            Model = new ModelWithValidation()
+            Model = new ModelWithValidation(),
         };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(viewDataDictionary);
 
@@ -888,7 +888,7 @@ public class HtmlHelperCheckBoxTest
         {
             { "Property1", true },
             { "Property2", "NotTrue" },
-            { "Property3", false }
+            { "Property3", false },
         };
     }
 
@@ -899,7 +899,7 @@ public class HtmlHelperCheckBoxTest
         {
             { "ComplexProperty.Property1", true },
             { "ComplexProperty.Property2", "NotTrue" },
-            { "ComplexProperty.Property3", false }
+            { "ComplexProperty.Property3", false },
         };
         viewData.Model = new ModelWithValidation();
 

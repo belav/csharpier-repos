@@ -20,7 +20,7 @@ public class SqlServerMigrationsSqlGeneratorTest : MigrationsSqlGeneratorTestBas
                 Schema = "dbo",
                 Columns = new[] { "FirstName", "LastName" },
                 IsUnique = true,
-                [SqlServerAnnotationNames.CreatedOnline] = true
+                [SqlServerAnnotationNames.CreatedOnline] = true,
             }
         );
 
@@ -42,7 +42,7 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [dbo].[People] ([FirstName], [LastName])
                 Schema = "dbo",
                 Columns = new[] { "FirstName", "LastName" },
                 IsUnique = true,
-                [SqlServerAnnotationNames.SortInTempDb] = true
+                [SqlServerAnnotationNames.SortInTempDb] = true,
             }
         );
 
@@ -70,7 +70,7 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [dbo].[People] ([FirstName], [LastName])
                 Schema = "dbo",
                 Columns = new[] { "FirstName", "LastName" },
                 IsUnique = true,
-                [SqlServerAnnotationNames.DataCompression] = dataCompression
+                [SqlServerAnnotationNames.DataCompression] = dataCompression,
             }
         );
 
@@ -94,7 +94,7 @@ CREATE UNIQUE INDEX [IX_People_Name] ON [dbo].[People] ([FirstName], [LastName])
                 DefaultValue = 0,
                 IsNullable = false,
                 [SqlServerAnnotationNames.ValueGenerationStrategy] =
-                    SqlServerValueGenerationStrategy.IdentityColumn
+                    SqlServerValueGenerationStrategy.IdentityColumn,
             }
         );
 
@@ -204,7 +204,7 @@ ALTER TABLE [Person] ADD [Name] nvarchar(max) NULL;
                 Name = "RowVersion",
                 ClrType = typeof(byte[]),
                 IsRowVersion = true,
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -225,7 +225,7 @@ ALTER TABLE [Person] ADD [RowVersion] rowversion NULL;
                 Name = "RowVersion",
                 ClrType = typeof(byte[]),
                 IsRowVersion = true,
-                IsNullable = true
+                IsNullable = true,
             }
         );
 
@@ -274,7 +274,7 @@ ALTER TABLE [People] ADD FOREIGN KEY ([SpouseId]) REFERENCES [People];
                 Name = "Id",
                 ClrType = typeof(int),
                 [SqlServerAnnotationNames.ValueGenerationStrategy] =
-                    SqlServerValueGenerationStrategy.IdentityColumn
+                    SqlServerValueGenerationStrategy.IdentityColumn,
             }
         );
 
@@ -310,7 +310,7 @@ ALTER TABLE [People] ALTER COLUMN [Id] int NOT NULL;
                 ClrType = typeof(string),
                 MaxLength = 30,
                 IsNullable = true,
-                OldColumn = new AddColumnOperation()
+                OldColumn = new AddColumnOperation(),
             }
         );
 
@@ -346,13 +346,13 @@ ALTER TABLE [Person] ALTER COLUMN [Name] nvarchar(30) NULL;
                 ClrType = typeof(string),
                 MaxLength = 30,
                 IsNullable = true,
-                OldColumn = new AddColumnOperation { ClrType = typeof(string), IsNullable = true }
+                OldColumn = new AddColumnOperation { ClrType = typeof(string), IsNullable = true },
             },
             new CreateIndexOperation
             {
                 Name = "IX_Person_Name",
                 Table = "Person",
-                Columns = new[] { "Name" }
+                Columns = new[] { "Name" },
             }
         );
 
@@ -390,13 +390,13 @@ CREATE INDEX [IX_Person_Name] ON [Person] ([Name]);
                 Name = "Name",
                 ClrType = typeof(string),
                 IsNullable = true,
-                OldColumn = new AddColumnOperation { ClrType = typeof(string), IsNullable = true }
+                OldColumn = new AddColumnOperation { ClrType = typeof(string), IsNullable = true },
             },
             new CreateIndexOperation
             {
                 Name = "IX_Person_Name",
                 Table = "Person",
-                Columns = new[] { "Name" }
+                Columns = new[] { "Name" },
             }
         );
 
@@ -432,8 +432,8 @@ CREATE INDEX [IX_Person_Name] ON [Person] ([Name]);
                 {
                     ClrType = typeof(int),
                     [SqlServerAnnotationNames.ValueGenerationStrategy] =
-                        SqlServerValueGenerationStrategy.IdentityColumn
-                }
+                        SqlServerValueGenerationStrategy.IdentityColumn,
+                },
             }
         );
 
@@ -465,7 +465,7 @@ ALTER TABLE [Person] ALTER COLUMN [Id] bigint NOT NULL;
                         ClrType = typeof(int),
                         [SqlServerAnnotationNames.ValueGenerationStrategy] =
                             SqlServerValueGenerationStrategy.IdentityColumn,
-                        OldColumn = new AddColumnOperation { ClrType = typeof(int) }
+                        OldColumn = new AddColumnOperation { ClrType = typeof(int) },
                     }
                 )
         );
@@ -490,8 +490,8 @@ ALTER TABLE [Person] ALTER COLUMN [Id] bigint NOT NULL;
                         {
                             ClrType = typeof(int),
                             [SqlServerAnnotationNames.ValueGenerationStrategy] =
-                                SqlServerValueGenerationStrategy.IdentityColumn
-                        }
+                                SqlServerValueGenerationStrategy.IdentityColumn,
+                        },
                     }
                 )
         );
@@ -551,7 +551,7 @@ END;
             new SqlServerCreateDatabaseOperation
             {
                 Name = "Northwind",
-                FileName = "|DataDirectory|Narf.mdf"
+                FileName = "|DataDirectory|Narf.mdf",
             }
         );
 
@@ -584,7 +584,7 @@ END;
             new SqlServerCreateDatabaseOperation
             {
                 Name = "Northwind",
-                FileName = "|DataDirectory|Narf.mdf"
+                FileName = "|DataDirectory|Narf.mdf",
             }
         );
 
@@ -615,7 +615,7 @@ END;
             new SqlServerCreateDatabaseOperation
             {
                 Name = "Northwind",
-                Collation = "German_PhoneBook_CI_AS"
+                Collation = "German_PhoneBook_CI_AS",
             }
         );
 
@@ -648,7 +648,7 @@ END;
             new AlterDatabaseOperation
             {
                 Collation = null,
-                OldDatabase = { Collation = "SQL_Latin1_General_CP1_CI_AS" }
+                OldDatabase = { Collation = "SQL_Latin1_General_CP1_CI_AS" },
             }
         );
 
@@ -712,7 +712,7 @@ DROP DATABASE [Northwind];
             {
                 Name = "EntityFrameworkHiLoSequence",
                 Schema = "dbo",
-                NewSchema = "my"
+                NewSchema = "my",
             }
         );
 
@@ -731,7 +731,7 @@ ALTER SCHEMA [my] TRANSFER [dbo].[EntityFrameworkHiLoSequence];
             {
                 Name = "People",
                 Schema = "dbo",
-                NewSchema = "hr"
+                NewSchema = "hr",
             }
         );
 
@@ -764,7 +764,7 @@ ALTER SCHEMA [hr] TRANSFER [dbo].[People];
             {
                 Name = "EntityFrameworkHiLoSequence",
                 Schema = "dbo",
-                NewName = "MySequence"
+                NewName = "MySequence",
             }
         );
 
@@ -966,7 +966,7 @@ IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'First Name'
             {
                 Table = "People",
                 Columns = new[] { "First Name" },
-                Values = values
+                Values = values,
             }
         );
 
@@ -1349,8 +1349,8 @@ EXEC(N'CREATE UNIQUE INDEX [IX_Table1_Column1] ON [Table1] ([Column1]) WHERE [Co
                     Table = "Person",
                     Name = "Name",
                     ClrType = typeof(string),
-                    IsNullable = true
-                }
+                    IsNullable = true,
+                },
             },
             MigrationsSqlGenerationOptions.Idempotent
         );

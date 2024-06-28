@@ -130,10 +130,10 @@ public class CoreEventIdTest : EventIdTestBase
                 () =>
                     new List<IDictionary<string, string>>
                     {
-                        new Dictionary<string, string> { { "A", "B" } }
+                        new Dictionary<string, string> { { "A", "B" } },
                     }
             },
-            { typeof(IDictionary<string, string>), () => new Dictionary<string, string>() }
+            { typeof(IDictionary<string, string>), () => new Dictionary<string, string>() },
         };
 
         TestEventLogging(

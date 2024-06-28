@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
             {
                 Net451.System,
                 Net451.SystemCore,
-                Net451.MicrosoftCSharp
+                Net451.MicrosoftCSharp,
             };
             references = (references != null) ? references.Concat(asyncRefs) : asyncRefs;
 
@@ -972,7 +972,7 @@ class Driver
                 Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(12, 29),
                 // (17,29): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
                 //             Console.Write(*&x);
-                Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(17, 29)
+                Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(17, 29),
             };
 
             CompileAndVerify(
@@ -1051,7 +1051,7 @@ class Driver
                 Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(12, 29),
                 // (19,29): warning CS9123: The '&' operator should not be used on parameters or local variables in async methods.
                 //             Console.Write(*&x);
-                Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(19, 29)
+                Diagnostic(ErrorCode.WRN_AddressOfInAsync, "x").WithLocation(19, 29),
             };
 
             CompileAndVerify(
@@ -6349,7 +6349,7 @@ class IntCode
             {
                 // (12,30): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     public static async Task CompletedTask()
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "CompletedTask").WithLocation(12, 30)
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "CompletedTask").WithLocation(12, 30),
             };
 
             CompileAndVerify(
@@ -6397,7 +6397,7 @@ class IntCode
                 //         ReadMemory() += await t;
                 Diagnostic(ErrorCode.ERR_RefReturningCallAndAwait, "ReadMemory()")
                     .WithArguments("IntCode.ReadMemory()")
-                    .WithLocation(9, 9)
+                    .WithLocation(9, 9),
             };
             var comp = CreateCompilation(source, options: TestOptions.DebugDll);
             comp.VerifyEmitDiagnostics(expected);

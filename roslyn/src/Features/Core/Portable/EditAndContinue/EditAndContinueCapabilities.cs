@@ -104,7 +104,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                             | EditAndContinueCapabilities.AddStaticFieldToExistingType
                             | EditAndContinueCapabilities.AddInstanceFieldToExistingType,
 
-                    _ => EditAndContinueCapabilities.None
+                    _ => EditAndContinueCapabilities.None,
                 };
             }
 

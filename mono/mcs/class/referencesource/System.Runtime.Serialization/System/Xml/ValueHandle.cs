@@ -61,7 +61,7 @@ namespace System.Xml
         Char,
         Unicode,
         QName,
-        ConstString
+        ConstString,
     }
 
     class ValueHandle
@@ -72,15 +72,7 @@ namespace System.Xml
         int length;
         static Base64Encoding base64Encoding;
 
-        static string[] constStrings =
-        {
-            "string",
-            "number",
-            "array",
-            "object",
-            "boolean",
-            "null",
-        };
+        static string[] constStrings = { "string", "number", "array", "object", "boolean", "null" };
 
         public ValueHandle(XmlBufferReader bufferReader)
         {

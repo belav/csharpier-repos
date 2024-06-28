@@ -108,7 +108,7 @@ namespace System.Net.Http.Functional.Tests
                 var options = new LoopbackServer.Options
                 {
                     UseSsl = true,
-                    SslProtocols = acceptedProtocol
+                    SslProtocols = acceptedProtocol,
                 };
                 await LoopbackServer.CreateServerAsync(
                     async (server, url) =>

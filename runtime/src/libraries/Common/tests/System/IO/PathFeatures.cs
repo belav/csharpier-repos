@@ -12,7 +12,7 @@ namespace System.IO
         {
             Uninitialized,
             True,
-            False
+            False,
         }
 
         // Note that this class is using APIs that allow it to run on all platforms (including Core 5.0)

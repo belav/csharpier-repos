@@ -93,13 +93,13 @@ namespace System.ServiceModel.Discovery
         {
             var mbe = new TextMessageEncodingBindingElement()
             {
-                MessageVersion = discoveryVersion.MessageVersion
+                MessageVersion = discoveryVersion.MessageVersion,
             };
             var tbe = new UdpTransportBindingElement();
             return new CustomBinding(mbe, tbe)
             {
                 SendTimeout = TimeSpan.FromMinutes(1),
-                ReceiveTimeout = TimeSpan.FromMinutes(10)
+                ReceiveTimeout = TimeSpan.FromMinutes(10),
             };
         }
 

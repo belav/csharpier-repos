@@ -123,7 +123,7 @@ public enum CLSEnum
     label,
 
     [CLSCompliant(false)]
-    Label
+    Label,
 }
 
 namespace System.Web

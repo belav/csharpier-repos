@@ -184,6 +184,6 @@ namespace System.Net.Sockets
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        DeleteMulticastGroupFromInterface = 0x9800000B
+        DeleteMulticastGroupFromInterface = 0x9800000B,
     }
 } // namespace System.Net.Sockets

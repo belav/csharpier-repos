@@ -102,12 +102,12 @@ namespace Internal.ReadyToRunConstants
         Zero = 0,
         One = 1,
         Two = 2,
-        MoreThanTwo = 3
+        MoreThanTwo = 3,
     }
 
     public enum ReadyToRunEnclosingTypeMap : uint
     {
-        MaxTypeCount = 0xFFFE
+        MaxTypeCount = 0xFFFE,
     }
 
     public enum DictionaryEntryKind

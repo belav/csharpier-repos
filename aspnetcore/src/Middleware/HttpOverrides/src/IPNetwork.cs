@@ -105,7 +105,7 @@ public class IPNetwork
         {
             AddressFamily.InterNetwork => prefixLength <= 32,
             AddressFamily.InterNetworkV6 => prefixLength <= 128,
-            _ => true
+            _ => true,
         };
     }
 

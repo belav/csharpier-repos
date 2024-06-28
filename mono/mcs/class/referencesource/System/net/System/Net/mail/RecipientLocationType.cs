@@ -19,6 +19,6 @@ namespace System.Net.Mail
         Unknown,
         NotLocal,
         WillForward,
-        Ambiguous
+        Ambiguous,
     }
 }

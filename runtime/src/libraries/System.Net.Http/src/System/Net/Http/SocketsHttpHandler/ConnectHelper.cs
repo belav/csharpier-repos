@@ -195,7 +195,7 @@ namespace System.Net.Http
                             DefaultStreamErrorCode = (long)Http3ErrorCode.RequestCancelled,
                             DefaultCloseErrorCode = (long)Http3ErrorCode.NoError,
                             RemoteEndPoint = endPoint,
-                            ClientAuthenticationOptions = clientAuthenticationOptions
+                            ClientAuthenticationOptions = clientAuthenticationOptions,
                         },
                         cancellationToken
                     )

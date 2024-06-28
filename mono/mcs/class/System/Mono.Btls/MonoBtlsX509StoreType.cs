@@ -34,7 +34,7 @@ namespace Mono.Btls
         MachineUntrusted,
         UserTrustedRoots,
         UserIntermediateCA,
-        UserUntrusted
+        UserUntrusted,
     }
 }
 #endif

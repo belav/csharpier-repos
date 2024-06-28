@@ -47,7 +47,7 @@ namespace MonoTests.System.Data.Utils
         DB2,
         Sybase,
         PostgreSQL,
-        Unknown
+        Unknown,
     }
 
     public class ConnectedDataProvider
@@ -297,7 +297,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         },
                         50
                     );
@@ -354,7 +354,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         },
                         50
                     );
@@ -422,7 +422,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         },
                         50
                     );
@@ -479,7 +479,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         },
                         50
                     );
@@ -598,7 +598,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         },
                         100
                     );
@@ -718,7 +718,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         }
                     );
                     row.Add(
@@ -797,7 +797,7 @@ namespace MonoTests.System.Data.Utils
                             0xBC,
                             0xDE,
                             0xFF,
-                            0xF0
+                            0xF0,
                         },
                         50
                     );

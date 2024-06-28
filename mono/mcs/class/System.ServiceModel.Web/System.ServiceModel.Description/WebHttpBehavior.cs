@@ -157,7 +157,7 @@ namespace System.ServiceModel.Description
             {
                 Invoker = new EndpointNotFoundOperationInvoker(),
                 DeserializeRequest = false,
-                SerializeReply = false
+                SerializeReply = false,
             };
 #endif
         }

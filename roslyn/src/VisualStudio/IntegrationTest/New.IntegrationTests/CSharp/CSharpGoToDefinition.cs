@@ -196,7 +196,7 @@ partial class PartialClass { int i = 0; }",
                         );
                         Assert.Equal(expected: 2, actual: reference.GetLine());
                         Assert.Equal(expected: 14, actual: reference.GetColumn());
-                    }
+                    },
                 }
             );
         }

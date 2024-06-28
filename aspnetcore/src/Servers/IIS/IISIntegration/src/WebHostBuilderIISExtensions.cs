@@ -105,7 +105,7 @@ public static class WebHostBuilderIISExtensions
                 services.AddSingleton<IServerIntegratedAuth>(_ => new ServerIntegratedAuth()
                 {
                     IsEnabled = enableAuth,
-                    AuthenticationScheme = IISDefaults.AuthenticationScheme
+                    AuthenticationScheme = IISDefaults.AuthenticationScheme,
                 });
                 services.AddSingleton<IStartupFilter>(
                     new IISSetupFilter(pairingToken, new PathString(path), isWebSocketsSupported)

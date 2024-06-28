@@ -287,7 +287,7 @@ namespace System.ComponentModel.Tests
                 new Component(),
                 new Component(),
                 new Component(),
-                new Component()
+                new Component(),
             };
 
             for (int i = 0; i < components.Length; i++)
@@ -812,7 +812,7 @@ namespace System.ComponentModel.Tests
             // This filter only includes SubComponents.
             var container = new FilterContainer
             {
-                FilterService = new CustomContainerFilterService()
+                FilterService = new CustomContainerFilterService(),
             };
             container.Add(component1);
             container.Add(component2);
@@ -834,7 +834,7 @@ namespace System.ComponentModel.Tests
             // This filter only includes SubComponents.
             var container = new FilterContainer
             {
-                FilterService = new CustomContainerFilterService()
+                FilterService = new CustomContainerFilterService(),
             };
             container.Add(component1);
             container.Add(component2);
@@ -859,7 +859,7 @@ namespace System.ComponentModel.Tests
             // This filter only includes SubComponents.
             var container = new FilterContainer
             {
-                FilterService = new NullContainerFilterService()
+                FilterService = new NullContainerFilterService(),
             };
             container.Add(component1);
             container.Add(component2);

@@ -57,6 +57,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// executing stack. This is done so we can avoid blocking an edit due an executing active statement.
         /// Language services needs to acknowledge such active statements when emitting further remap information.
         /// </summary>
-        Stale = 32
+        Stale = 32,
     }
 }

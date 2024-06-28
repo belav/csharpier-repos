@@ -72,6 +72,6 @@ public class RelationalQueryRootProcessor : QueryRootProcessor
             // that to a query root
             FromSqlQueryRootExpression e => e,
 
-            _ => base.VisitExtension(node)
+            _ => base.VisitExtension(node),
         };
 }

@@ -119,7 +119,7 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
                         new()
                         {
                             HttpContext = context.HttpContext,
-                            ProblemDetails = { Status = statusCode }
+                            ProblemDetails = { Status = statusCode },
                         }
                     )
                     .AsTask();

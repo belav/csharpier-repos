@@ -36,7 +36,7 @@ namespace System.Web.Mvc.Html.Test
                 + "value=\"true\" />"
                 + "<input name=\"Prefix\" type=\"hidden\" value=\"false\" />";
             var viewData = new ViewDataDictionary<bool>(true);
-            viewData.Add("htmlAttributes", new { attribute = text, });
+            viewData.Add("htmlAttributes", new { attribute = text });
             viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
             var html = MvcHelper.GetHtmlHelper(viewData);
@@ -72,11 +72,8 @@ namespace System.Web.Mvc.Html.Test
         )
         {
             // Arrange
-            var innerModel = new ObjectTemplateModel
-            {
-                Property1 = text, // SimpleDisplayText uses first property by default.
-            };
-            var model = new[] { innerModel, innerModel, };
+            var innerModel = new ObjectTemplateModel { Property1 = text };
+            var model = new[] { innerModel, innerModel };
             var viewData = new ViewDataDictionary<ObjectTemplateModel[]>(model);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -126,7 +123,7 @@ namespace System.Web.Mvc.Html.Test
         )
         {
             // Arrange
-            var model = new[] { (ObjectTemplateModel)null, };
+            var model = new[] { (ObjectTemplateModel)null };
             var viewData = new ViewDataDictionary<ObjectTemplateModel[]>(model);
             var html = MvcHelper.GetHtmlHelper(viewData);
 
@@ -178,7 +175,7 @@ namespace System.Web.Mvc.Html.Test
                 + htmlEncodedText
                 + "\" class=\"text-box single-line\" id=\"Prefix\" name=\"Prefix\" type=\"text\" value=\"string\" />";
             var viewData = new ViewDataDictionary<string>("string");
-            viewData.Add("htmlAttributes", new { attribute = text, });
+            viewData.Add("htmlAttributes", new { attribute = text });
             viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
             var html = MvcHelper.GetHtmlHelper(viewData);

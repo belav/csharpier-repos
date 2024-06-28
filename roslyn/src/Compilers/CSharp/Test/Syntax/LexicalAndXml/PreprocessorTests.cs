@@ -554,7 +554,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -571,7 +571,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -641,17 +641,17 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -675,12 +675,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -708,17 +708,17 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -744,12 +744,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -774,12 +774,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -800,12 +800,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -827,12 +828,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -852,12 +854,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -883,17 +885,17 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -924,17 +926,18 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -965,17 +968,17 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1006,17 +1009,18 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1047,17 +1051,18 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1088,17 +1093,19 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(node, new MemberInfo { Kind = SyntaxKind.ClassDeclaration, Text = "C" });
@@ -1127,22 +1134,22 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1175,22 +1182,23 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1223,22 +1231,24 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1271,22 +1281,23 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1321,27 +1332,28 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1376,27 +1388,29 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1431,27 +1445,30 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -1480,22 +1497,22 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1519,23 +1536,24 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1559,22 +1577,23 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1599,28 +1618,28 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1645,28 +1664,28 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1692,33 +1711,34 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1745,39 +1765,40 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsNotActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1799,12 +1820,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1826,12 +1847,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1852,12 +1874,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1878,12 +1900,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1904,12 +1926,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1929,12 +1951,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1954,12 +1977,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -1979,12 +2003,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2004,12 +2028,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2029,12 +2053,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2054,12 +2078,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2079,12 +2103,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2104,12 +2129,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2129,12 +2155,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2154,12 +2181,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2203,7 +2230,7 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 }
             );
         }
@@ -2224,7 +2251,8 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 }
             );
         }
@@ -2243,7 +2271,7 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 }
             );
         }
@@ -2262,7 +2290,8 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 }
             );
         }
@@ -2284,12 +2313,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2311,12 +2341,12 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2337,12 +2367,13 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2366,22 +2397,22 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2405,22 +2436,22 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2444,17 +2475,17 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }, // ?
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2758,22 +2789,24 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2804,23 +2837,24 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2844,12 +2878,12 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2871,22 +2905,22 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2908,22 +2942,22 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -2945,17 +2979,17 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -3021,17 +3055,17 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -3058,22 +3092,22 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -3099,17 +3133,18 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 }
             );
         }
@@ -3136,22 +3171,23 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.BadDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 }
             );
         }
@@ -3171,12 +3207,12 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -3197,12 +3233,12 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3229,12 +3265,12 @@ return (i);
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3351,12 +3387,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3382,12 +3418,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3413,12 +3449,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3444,12 +3480,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3475,12 +3511,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3506,12 +3542,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3537,12 +3573,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3568,12 +3604,12 @@ class Test
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.RegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndRegionDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
 
@@ -3624,7 +3660,7 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = defSym
+                    Text = defSym,
                 }
             );
             VerifyMembers(
@@ -3634,7 +3670,7 @@ class A { }
                     Kind = SyntaxKind.ClassDeclaration,
                     Status = NodeStatus.Unspecified,
                     Status2 = NodeStatus.Defined,
-                    Text = defSym
+                    Text = defSym,
                 }
             );
         }
@@ -3657,7 +3693,7 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 }
             );
         }
@@ -3679,7 +3715,7 @@ class A { } #define XXX
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 }
             );
         }
@@ -3703,18 +3739,18 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -3738,18 +3774,19 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -3773,18 +3810,19 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = defSym
+                    Text = defSym,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -3794,7 +3832,7 @@ class A { }
                     Kind = SyntaxKind.ClassDeclaration,
                     Status = NodeStatus.Unspecified,
                     Status2 = NodeStatus.Unspecified,
-                    Text = defSym
+                    Text = defSym,
                 }
             );
         }
@@ -3818,18 +3856,18 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = defSym
+                    Text = defSym,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -3839,7 +3877,7 @@ class A { }
                     Kind = SyntaxKind.ClassDeclaration,
                     Status = NodeStatus.Unspecified,
                     Text = defSym,
-                    Status2 = NodeStatus.Defined
+                    Status2 = NodeStatus.Defined,
                 }
             );
         }
@@ -3858,7 +3896,7 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = string.Empty
+                    Text = string.Empty,
                 }
             );
         }
@@ -3879,7 +3917,7 @@ class A {}";
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = string.Empty
+                    Text = string.Empty,
                 }
             );
         }
@@ -3899,7 +3937,7 @@ class A {}";
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "GOO"
+                    Text = "GOO",
                 }
             );
         }
@@ -3922,7 +3960,7 @@ class A { }
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = defSym
+                    Text = defSym,
                 }
             );
             VerifyMembers(
@@ -3932,7 +3970,7 @@ class A { }
                     Kind = SyntaxKind.ClassDeclaration,
                     Status = NodeStatus.Unspecified,
                     Status2 = NodeStatus.Undefined,
-                    Text = defSym
+                    Text = defSym,
                 }
             );
         }
@@ -3955,7 +3993,7 @@ class A { }
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 }
             );
         }
@@ -3977,7 +4015,7 @@ class A { } #undef XXX
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 }
             );
         }
@@ -4001,18 +4039,18 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4038,33 +4076,35 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "Z"
+                    Text = "Z",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4095,54 +4135,58 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "A"
+                    Text = "A",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "B"
+                    Text = "B",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4171,50 +4215,52 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "Z"
+                    Text = "Z",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
                     Status =
-                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue
+                        NodeStatus.IsNotActive | NodeStatus.NotBranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "Z"
+                    Text = "Z",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4244,54 +4290,57 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "Z"
+                    Text = "Z",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElseDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "Z"
+                    Text = "Z",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4315,18 +4364,19 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "XXX"
+                    Text = "XXX",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4349,18 +4399,19 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue
+                    Status =
+                        NodeStatus.IsActive | NodeStatus.NotBranchTaken | NodeStatus.FalseValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "ZZZ"
+                    Text = "ZZZ",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -4369,7 +4420,7 @@ class A { }
                 {
                     Kind = SyntaxKind.ClassDeclaration,
                     Status = NodeStatus.Unspecified,
-                    Text = "ZZZ"
+                    Text = "ZZZ",
                 }
             );
         }
@@ -4393,18 +4444,18 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue
+                    Status = NodeStatus.IsActive | NodeStatus.BranchTaken | NodeStatus.TrueValue,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = defSym
+                    Text = defSym,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
             VerifyMembers(
@@ -4414,7 +4465,7 @@ class A { }
                     Kind = SyntaxKind.ClassDeclaration,
                     Status = NodeStatus.Unspecified,
                     Status2 = NodeStatus.Undefined,
-                    Text = defSym
+                    Text = defSym,
                 }
             );
         }
@@ -4433,7 +4484,7 @@ class A { }
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = string.Empty
+                    Text = string.Empty,
                 }
             );
         }
@@ -4452,7 +4503,7 @@ class A { }
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = string.Empty
+                    Text = string.Empty,
                 }
             );
         }
@@ -4471,7 +4522,7 @@ class A { }
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "GOO"
+                    Text = "GOO",
                 }
             );
         }
@@ -4493,7 +4544,7 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "A_1"
+                    Text = "A_1",
                 }
             );
         }
@@ -4512,7 +4563,7 @@ class A { }
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 }
             );
         }
@@ -4539,7 +4590,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_WarningDirective,
-                    Text = "#warning: 'W1'"
+                    Text = "#warning: 'W1'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -4548,43 +4599,43 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "error"
+                    Text = "error",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.UndefDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "error"
+                    Text = "error",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4616,79 +4667,79 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "if"
+                    Text = "if",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "else"
+                    Text = "else",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "elif"
+                    Text = "elif",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "endif"
+                    Text = "endif",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "region"
+                    Text = "region",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "endregion"
+                    Text = "endregion",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "define"
+                    Text = "define",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "undef"
+                    Text = "undef",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "warning"
+                    Text = "warning",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "error"
+                    Text = "error",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "line"
+                    Text = "line",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "pragma"
+                    Text = "pragma",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "reference"
+                    Text = "reference",
                 }
             );
         }
@@ -4724,43 +4775,43 @@ class A { }
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.DefineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 }
             );
         }
@@ -4781,7 +4832,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: 'Your monkey is alive'"
+                    Text = "#error: 'Your monkey is alive'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -4789,7 +4840,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4806,7 +4857,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_WarningDirective,
-                    Text = "#warning: 'Your monkey is alive'"
+                    Text = "#warning: 'Your monkey is alive'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -4814,7 +4865,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4836,17 +4887,17 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4868,17 +4919,17 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4906,7 +4957,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_WarningDirective,
-                    Text = "#warning: 'W4'"
+                    Text = "#warning: 'W4'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -4914,47 +4965,47 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsNotActive
+                    Status = NodeStatus.IsNotActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -4989,82 +5040,82 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5097,32 +5148,32 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ElifDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5139,7 +5190,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: ''"
+                    Text = "#error: ''",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5147,7 +5198,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5164,7 +5215,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_WarningDirective,
-                    Text = "#warning: ''"
+                    Text = "#warning: ''",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5172,7 +5223,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.WarningDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5189,7 +5240,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: 'abc def'"
+                    Text = "#error: 'abc def'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5197,7 +5248,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5214,7 +5265,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: 'abc def '"
+                    Text = "#error: 'abc def '",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5222,7 +5273,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5239,7 +5290,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '/*abc def*/ '"
+                    Text = "#error: '/*abc def*/ '",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5247,7 +5298,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5264,7 +5315,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '/*abc def*/ '"
+                    Text = "#error: '/*abc def*/ '",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5272,7 +5323,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5289,7 +5340,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '/*abc def '"
+                    Text = "#error: '/*abc def '",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5297,7 +5348,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5316,7 +5367,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = string.Format("#error: '{0}'", errorText)
+                    Text = string.Format("#error: '{0}'", errorText),
                 }
             );
             VerifyDirectivesSpecial(
@@ -5324,7 +5375,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5379,7 +5430,7 @@ class A { }
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "version"
+                    Text = "version",
                 }
             );
 
@@ -5410,7 +5461,7 @@ class A { }
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "version:7.1"
+                    Text = "version:7.1",
                 }
             );
 
@@ -5440,7 +5491,7 @@ class A { }
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "version:A.B"
+                    Text = "version:A.B",
                 }
             );
 
@@ -5466,7 +5517,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '\"'"
+                    Text = "#error: '\"'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5474,7 +5525,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5491,7 +5542,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '\"goo\"'"
+                    Text = "#error: '\"goo\"'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5499,7 +5550,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5516,7 +5567,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '\"\"'"
+                    Text = "#error: '\"\"'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5524,7 +5575,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5541,7 +5592,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_ErrorDirective,
-                    Text = "#error: '\"\"\"'"
+                    Text = "#error: '\"\"\"'",
                 }
             );
             VerifyDirectivesSpecial(
@@ -5549,7 +5600,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ErrorDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5571,7 +5622,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = 1000
+                    Number = 1000,
                 }
             );
         }
@@ -5590,7 +5641,7 @@ class A { }
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
                     Number = 1000,
-                    Text = "bogus.cs"
+                    Text = "bogus.cs",
                 }
             );
         }
@@ -5608,7 +5659,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = -1
+                    Number = -1,
                 }
             );
         }
@@ -5627,7 +5678,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = -1
+                    Number = -1,
                 }
             );
         }
@@ -5645,7 +5696,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = -1
+                    Number = -1,
                 }
             );
         }
@@ -5663,7 +5714,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = -2
+                    Number = -2,
                 }
             );
         }
@@ -5682,7 +5733,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = -2
+                    Number = -2,
                 }
             );
         }
@@ -5700,7 +5751,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = -2
+                    Number = -2,
                 }
             );
         }
@@ -5718,7 +5769,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5736,7 +5787,7 @@ class A { }
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -5755,7 +5806,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "bogus.cs"
+                    Text = "bogus.cs",
                 }
             );
         }
@@ -5775,7 +5826,7 @@ class A { }
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
                     Number = 16707566,
-                    Text = "XYZ"
+                    Text = "XYZ",
                 }
             );
         }
@@ -5824,7 +5875,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = 1000
+                    Number = 1000,
                 }
             );
         }
@@ -5842,7 +5893,7 @@ class A { }
                 {
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Number = 1000
+                    Number = 1000,
                 }
             );
         }
@@ -5862,7 +5913,7 @@ class A { }
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
                     Number = 1000,
-                    Text = "bogus.cs"
+                    Text = "bogus.cs",
                 }
             );
         }
@@ -5881,7 +5932,7 @@ class A { }
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
                     Number = 12345,
-                    Text = "bogus.cs"
+                    Text = "bogus.cs",
                 }
             );
         }
@@ -5909,7 +5960,7 @@ x = 1;
                     Kind = SyntaxKind.LineDirectiveTrivia,
                     Status = NodeStatus.IsActive,
                     Number = 100,
-                    Text = "test.cs"
+                    Text = "test.cs",
                 }
             );
 
@@ -6054,7 +6105,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "114" }
+                    WarningList = new[] { "114" },
                 }
             );
         }
@@ -6073,7 +6124,7 @@ public class Test
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
-                    DisableOrRestoreKind = SyntaxKind.DisableKeyword
+                    DisableOrRestoreKind = SyntaxKind.DisableKeyword,
                 }
             );
         }
@@ -6092,7 +6143,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.EnableKeyword,
-                    WarningList = new[] { "114" }
+                    WarningList = new[] { "114" },
                 }
             );
         }
@@ -6111,7 +6162,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "nullable" }
+                    WarningList = new[] { "nullable" },
                 }
             );
         }
@@ -6130,7 +6181,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.EnableKeyword,
-                    WarningList = new[] { "nullable" }
+                    WarningList = new[] { "nullable" },
                 }
             );
         }
@@ -6147,7 +6198,7 @@ public class Test
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_ErrorOverride,
-                    Status = NodeStatus.IsWarning
+                    Status = NodeStatus.IsWarning,
                 }
             );
             VerifyDirectivePragma(
@@ -6157,7 +6208,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.EnableKeyword,
-                    WarningList = new[] { "114" }
+                    WarningList = new[] { "114" },
                 }
             );
         }
@@ -6176,7 +6227,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "114", "CS0162", "168" }
+                    WarningList = new[] { "114", "CS0162", "168" },
                 }
             );
         }
@@ -6195,7 +6246,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "114", "nullable" }
+                    WarningList = new[] { "114", "nullable" },
                 }
             );
         }
@@ -6214,7 +6265,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "nullable", "114" }
+                    WarningList = new[] { "nullable", "114" },
                 }
             );
         }
@@ -6233,7 +6284,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.EnableKeyword,
-                    WarningList = new[] { "114", "CS0162", "168" }
+                    WarningList = new[] { "114", "CS0162", "168" },
                 }
             );
         }
@@ -6252,7 +6303,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.EnableKeyword,
-                    WarningList = new[] { "114", "nullable" }
+                    WarningList = new[] { "114", "nullable" },
                 }
             );
         }
@@ -6271,7 +6322,7 @@ public class Test
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.EnableKeyword,
-                    WarningList = new[] { "nullable", "CS0162" }
+                    WarningList = new[] { "nullable", "CS0162" },
                 }
             );
         }
@@ -6310,7 +6361,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "1633" }
+                    WarningList = new[] { "1633" },
                 }
             );
 
@@ -6338,7 +6389,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.DisableKeyword,
-                    WarningList = new[] { "99999" }
+                    WarningList = new[] { "99999" },
                 }
             );
         }
@@ -6357,7 +6408,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.RestoreKeyword,
-                    WarningList = new[] { "CS0114" }
+                    WarningList = new[] { "CS0114" },
                 }
             );
         }
@@ -6376,7 +6427,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.RestoreKeyword,
-                    WarningList = new[] { "CS0114", "162", "Something" }
+                    WarningList = new[] { "CS0114", "162", "Something" },
                 }
             );
         }
@@ -6395,7 +6446,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.RestoreKeyword,
-                    WarningList = new[] { "CS0114", "nullable" }
+                    WarningList = new[] { "CS0114", "nullable" },
                 }
             );
         }
@@ -6414,7 +6465,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.RestoreKeyword,
-                    WarningList = new[] { "nullable", "CS0114" }
+                    WarningList = new[] { "nullable", "CS0114" },
                 }
             );
         }
@@ -6432,7 +6483,7 @@ class A
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_IdentifierOrNumericLiteralExpected,
-                    Status = NodeStatus.IsWarning
+                    Status = NodeStatus.IsWarning,
                 }
             ); // CS1072
             VerifyDirectivePragma(
@@ -6442,7 +6493,7 @@ class A
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
                     DisableOrRestoreKind = SyntaxKind.RestoreKeyword,
-                    WarningList = new[] { string.Empty }
+                    WarningList = new[] { string.Empty },
                 }
             );
         }
@@ -6459,7 +6510,7 @@ class A
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_IllegalPPWarning,
-                    Status = NodeStatus.IsWarning
+                    Status = NodeStatus.IsWarning,
                 }
             ); // CS1634
             VerifyDirectivePragma(
@@ -6485,7 +6536,7 @@ class A
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_IllegalPPWarning,
-                    Status = NodeStatus.IsWarning
+                    Status = NodeStatus.IsWarning,
                 }
             ); // CS1634
             VerifyDirectivePragma(
@@ -6494,7 +6545,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
-                    DisableOrRestoreKind = SyntaxKind.None
+                    DisableOrRestoreKind = SyntaxKind.None,
                 }
             );
         }
@@ -6511,7 +6562,7 @@ class A
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.WRN_IllegalPPWarning,
-                    Status = NodeStatus.IsWarning
+                    Status = NodeStatus.IsWarning,
                 }
             ); // CS1634
             VerifyDirectivePragma(
@@ -6520,7 +6571,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
-                    DisableOrRestoreKind = SyntaxKind.None
+                    DisableOrRestoreKind = SyntaxKind.None,
                 }
             );
         }
@@ -6538,7 +6589,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
-                    DisableOrRestoreKind = SyntaxKind.DisableKeyword
+                    DisableOrRestoreKind = SyntaxKind.DisableKeyword,
                 }
             );
         }
@@ -6556,7 +6607,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
-                    DisableOrRestoreKind = SyntaxKind.EnableKeyword
+                    DisableOrRestoreKind = SyntaxKind.EnableKeyword,
                 }
             );
         }
@@ -6574,7 +6625,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.WarningKeyword,
-                    DisableOrRestoreKind = SyntaxKind.RestoreKeyword
+                    DisableOrRestoreKind = SyntaxKind.RestoreKeyword,
                 }
             );
         }
@@ -6593,7 +6644,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.None,
-                    DisableOrRestoreKind = SyntaxKind.None
+                    DisableOrRestoreKind = SyntaxKind.None,
                 }
             );
         }
@@ -6612,7 +6663,7 @@ class A
                 {
                     PragmaKind = SyntaxKind.PragmaWarningDirectiveTrivia,
                     WarningOrChecksumKind = SyntaxKind.None,
-                    DisableOrRestoreKind = SyntaxKind.None
+                    DisableOrRestoreKind = SyntaxKind.None,
                 }
             );
         }
@@ -6638,7 +6689,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, guid, bytes }
+                    FileGuidByte = new string[] { file, guid, bytes },
                 }
             );
         }
@@ -6659,7 +6710,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, guid, null }
+                    FileGuidByte = new string[] { file, guid, null },
                 }
             );
         }
@@ -6679,7 +6730,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, null, null }
+                    FileGuidByte = new string[] { file, null, null },
                 }
             );
         }
@@ -6697,7 +6748,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { null, null, null }
+                    FileGuidByte = new string[] { null, null, null },
                 }
             );
         }
@@ -6723,7 +6774,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, guid, bytes }
+                    FileGuidByte = new string[] { file, guid, bytes },
                 }
             );
         }
@@ -6750,7 +6801,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, guid, bytes }
+                    FileGuidByte = new string[] { file, guid, bytes },
                 }
             );
         }
@@ -6778,7 +6829,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, guid, bytes }
+                    FileGuidByte = new string[] { file, guid, bytes },
                 }
             );
         }
@@ -6812,7 +6863,8 @@ class A
                         null /*guid*/
                         ,
                         null /*bytes*/
-                    }
+                        ,
+                    },
                 }
             );
         }
@@ -6845,7 +6897,7 @@ class A
                 new PragmaInfo
                 {
                     PragmaKind = SyntaxKind.PragmaChecksumDirectiveTrivia,
-                    FileGuidByte = new string[] { file, guid, bytes }
+                    FileGuidByte = new string[] { file, guid, bytes },
                 }
             );
         }
@@ -6867,7 +6919,7 @@ class A
                 {
                     Kind = SyntaxKind.ReferenceDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "bogus"
+                    Text = "bogus",
                 }
             );
         }
@@ -6885,7 +6937,7 @@ class A
                 {
                     Kind = SyntaxKind.ReferenceDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "bogus"
+                    Text = "bogus",
                 }
             );
         }
@@ -6903,7 +6955,7 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ReferenceDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -6921,7 +6973,7 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ReferenceDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -6939,7 +6991,7 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ReferenceDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -6957,7 +7009,7 @@ class A
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.ReferenceDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }
@@ -7018,7 +7070,7 @@ class A
                 {
                     Kind = SyntaxKind.LoadDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "bogus"
+                    Text = "bogus",
                 }
             );
         }
@@ -7054,7 +7106,7 @@ class A
                 {
                     Kind = SyntaxKind.LoadDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 }
             );
         }
@@ -7071,7 +7123,7 @@ class A
                 {
                     Kind = SyntaxKind.LoadDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "bogus"
+                    Text = "bogus",
                 }
             );
         }
@@ -7092,7 +7144,7 @@ class A
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_FeatureNotAvailableInVersion7_3,
-                    Status = NodeStatus.IsError
+                    Status = NodeStatus.IsError,
                 }
             );
             VerifyDirectivesSpecial(
@@ -7101,7 +7153,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "enable"
+                    Text = "enable",
                 }
             );
         }
@@ -7120,7 +7172,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "restore"
+                    Text = "restore",
                 }
             );
         }
@@ -7139,7 +7191,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "enable"
+                    Text = "enable",
                 }
             );
         }
@@ -7158,7 +7210,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "disable"
+                    Text = "disable",
                 }
             );
         }
@@ -7177,7 +7229,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "enable warnings"
+                    Text = "enable warnings",
                 }
             );
         }
@@ -7196,7 +7248,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "enable annotations"
+                    Text = "enable annotations",
                 }
             );
         }
@@ -7215,7 +7267,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "disable warnings"
+                    Text = "disable warnings",
                 }
             );
         }
@@ -7232,7 +7284,7 @@ class A
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_NullableDirectiveTargetExpected,
-                    Status = NodeStatus.IsError
+                    Status = NodeStatus.IsError,
                 }
             );
             VerifyDirectivesSpecial(
@@ -7241,7 +7293,7 @@ class A
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "disable"
+                    Text = "disable",
                 }
             );
         }
@@ -7268,7 +7320,7 @@ class enable
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "enable"
+                    Text = "enable",
                 }
             );
             var nodes = root.DescendantNodes(descendIntoTrivia: true);
@@ -7291,7 +7343,7 @@ class enable
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_NullableDirectiveQualifierExpected,
-                    Status = NodeStatus.IsError
+                    Status = NodeStatus.IsError,
                 }
             );
             VerifyDirectivesSpecial(
@@ -7300,7 +7352,7 @@ class enable
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 }
             );
         }
@@ -7317,7 +7369,7 @@ class enable
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_NullableDirectiveTargetExpected,
-                    Status = NodeStatus.IsError
+                    Status = NodeStatus.IsError,
                 }
             );
             VerifyDirectivesSpecial(
@@ -7326,7 +7378,7 @@ class enable
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "disable"
+                    Text = "disable",
                 }
             );
         }
@@ -7343,7 +7395,7 @@ class enable
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_NullableDirectiveQualifierExpected,
-                    Status = NodeStatus.IsError
+                    Status = NodeStatus.IsError,
                 }
             );
             VerifyDirectivesSpecial(
@@ -7352,7 +7404,7 @@ class enable
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 }
             );
         }
@@ -7369,7 +7421,7 @@ class enable
                 new DirectiveInfo
                 {
                     Number = (int)ErrorCode.ERR_NullableDirectiveQualifierExpected,
-                    Status = NodeStatus.IsError
+                    Status = NodeStatus.IsError,
                 }
             );
             VerifyDirectivesSpecial(
@@ -7378,7 +7430,7 @@ class enable
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = ""
+                    Text = "",
                 }
             );
         }
@@ -7402,29 +7454,29 @@ class enable
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "enable"
+                    Text = "enable",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = "enable"
+                    Text = "enable",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsActive,
-                    Text = "disable"
+                    Text = "disable",
                 }
             );
         }
@@ -7445,18 +7497,18 @@ class enable
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.IfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.NullableDirectiveTrivia,
                     Status = NodeStatus.IsNotActive,
-                    Text = ""
+                    Text = "",
                 },
                 new DirectiveInfo
                 {
                     Kind = SyntaxKind.EndIfDirectiveTrivia,
-                    Status = NodeStatus.IsActive
+                    Status = NodeStatus.IsActive,
                 }
             );
         }

@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a reference to a property.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodePropertyReferenceExpression : CodeExpression
     {
         private CodeExpression targetObject;

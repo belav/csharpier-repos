@@ -323,7 +323,7 @@ namespace Microsoft.Extensions.Logging.Generators
                                         EventName = eventName,
                                         IsExtensionMethod = logMethodSymbol.IsExtensionMethod,
                                         Modifiers = method.Modifiers.ToString(),
-                                        SkipEnabledCheck = skipEnabledCheck
+                                        SkipEnabledCheck = skipEnabledCheck,
                                     };
 
                                     bool keepMethod = true; // whether or not we want to keep the method definition or if it's got errors making it so we should discard it instead

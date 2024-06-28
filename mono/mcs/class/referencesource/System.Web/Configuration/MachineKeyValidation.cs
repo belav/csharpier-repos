@@ -48,6 +48,6 @@ namespace System.Web.Configuration
             Justification = "Matches spec and previous shipped values"
         )]
         HMACSHA512,
-        Custom
+        Custom,
     }
 }

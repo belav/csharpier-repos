@@ -38,19 +38,19 @@ namespace System.ComponentModel.Tests
             {
                 new IComponent[] { new Component { Site = new MockSite() } },
                 "name",
-                null
+                null,
             };
             yield return new object[]
             {
                 new IComponent[] { namedComponent },
                 "Name",
-                namedComponent
+                namedComponent,
             };
             yield return new object[]
             {
                 new IComponent[] { namedComponent },
                 "name",
-                namedComponent
+                namedComponent,
             };
             yield return new object[] { new IComponent[] { namedComponent }, "nosuchname", null };
         }

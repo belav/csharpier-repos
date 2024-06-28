@@ -59,7 +59,7 @@ namespace Functions
             ["tandouble"] = MathTests.TanDoubleTest,
             ["tansingle"] = MathTests.TanSingleTest,
             ["tanhdouble"] = MathTests.TanhDoubleTest,
-            ["tanhsingle"] = MathTests.TanhSingleTest
+            ["tanhsingle"] = MathTests.TanhSingleTest,
         };
 
         [Fact]

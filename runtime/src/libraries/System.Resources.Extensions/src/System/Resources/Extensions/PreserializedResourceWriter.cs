@@ -60,7 +60,7 @@ namespace System.Resources.Extensions
             { typeof(double).FullName!, typeof(double) },
             { typeof(decimal).FullName!, typeof(decimal) },
             { typeof(DateTime).FullName!, typeof(DateTime) },
-            { typeof(TimeSpan).FullName!, typeof(TimeSpan) }
+            { typeof(TimeSpan).FullName!, typeof(TimeSpan) },
             // byte[] and Stream are primitive types but do not define a conversion from string
         };
 

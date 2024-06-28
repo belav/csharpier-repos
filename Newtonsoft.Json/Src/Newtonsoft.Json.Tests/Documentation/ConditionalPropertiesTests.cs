@@ -164,7 +164,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = ShouldSerializeContractResolver.Instance
+                    ContractResolver = ShouldSerializeContractResolver.Instance,
                 }
             );
 

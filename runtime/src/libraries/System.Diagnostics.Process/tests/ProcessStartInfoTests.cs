@@ -816,7 +816,7 @@ namespace System.Diagnostics.Tests
         {
             var psi = new ProcessStartInfo
             {
-                FileName = $"{Process.GetCurrentProcess().ProcessName}.exe"
+                FileName = $"{Process.GetCurrentProcess().ProcessName}.exe",
             };
 
             Assert.Contains("open", psi.Verbs, StringComparer.OrdinalIgnoreCase);
@@ -1191,7 +1191,7 @@ namespace System.Diagnostics.Tests
         {
             var info = new ProcessStartInfo
             {
-                UseCredentialsForNetworkingOnly = useCredentialsForNetworkingOnly
+                UseCredentialsForNetworkingOnly = useCredentialsForNetworkingOnly,
             };
             Assert.Equal(useCredentialsForNetworkingOnly, info.UseCredentialsForNetworkingOnly);
         }
@@ -1313,7 +1313,7 @@ namespace System.Diagnostics.Tests
             ProcessStartInfo info = new ProcessStartInfo
             {
                 UseShellExecute = true,
-                FileName = @"http://www.microsoft.com"
+                FileName = @"http://www.microsoft.com",
             };
 
             using (var p = Process.Start(info))
@@ -1342,7 +1342,7 @@ namespace System.Diagnostics.Tests
                 UseShellExecute = useShellExecute,
                 FileName = "notepad.exe",
                 Arguments = tempFile,
-                WindowStyle = ProcessWindowStyle.Minimized
+                WindowStyle = ProcessWindowStyle.Minimized,
             };
 
             using (var process = Process.Start(info))
@@ -1392,7 +1392,7 @@ namespace System.Diagnostics.Tests
             {
                 UseShellExecute = true,
                 FileName = tempFile,
-                WindowStyle = ProcessWindowStyle.Minimized
+                WindowStyle = ProcessWindowStyle.Minimized,
             };
 
             using (var process = Process.Start(info))
@@ -1483,7 +1483,7 @@ namespace System.Diagnostics.Tests
             ProcessStartInfo info = new ProcessStartInfo
             {
                 UseShellExecute = true,
-                FileName = tempFile
+                FileName = tempFile,
             };
 
             // Nano does not support either the STA apartment or ShellExecute.
@@ -1528,7 +1528,7 @@ namespace System.Diagnostics.Tests
             {
                 UseShellExecute = useShellExecute,
                 FileName = @"foo.txt",
-                Verb = "Zlorp"
+                Verb = "Zlorp",
             };
 
             Assert.Equal(
@@ -1554,7 +1554,7 @@ namespace System.Diagnostics.Tests
             ProcessStartInfo info = new ProcessStartInfo
             {
                 UseShellExecute = useShellExecute,
-                FileName = tempFile
+                FileName = tempFile,
             };
 
             int expected = ERROR_BAD_EXE_FORMAT;
@@ -1591,7 +1591,7 @@ namespace System.Diagnostics.Tests
                 " arg3",
                 "arg4 ",
                 "arg 5",
-                $"arg{Environment.NewLine}6"
+                $"arg{Environment.NewLine}6",
             };
             foreach (string arg in args)
             {
@@ -1611,7 +1611,7 @@ namespace System.Diagnostics.Tests
                 " arg3",
                 "arg4 ",
                 "arg 5",
-                $"arg{Environment.NewLine}6"
+                $"arg{Environment.NewLine}6",
             };
             ProcessStartInfo psi = new ProcessStartInfo("filename", args);
 
@@ -1649,7 +1649,7 @@ namespace System.Diagnostics.Tests
                 UseShellExecute = useShellExecute,
                 FileName = "notepad.exe",
                 Arguments = null,
-                WindowStyle = ProcessWindowStyle.Minimized
+                WindowStyle = ProcessWindowStyle.Minimized,
             };
 
             info.ArgumentList.Add(tempFile);
@@ -1723,7 +1723,7 @@ namespace System.Diagnostics.Tests
                 PasswordInClearText = "not used, because ArgumentException should be thrown before",
                 FileName = "notepad.exe",
                 Arguments = null,
-                WindowStyle = ProcessWindowStyle.Minimized
+                WindowStyle = ProcessWindowStyle.Minimized,
             };
 
             Assert.Throws<ArgumentException>(

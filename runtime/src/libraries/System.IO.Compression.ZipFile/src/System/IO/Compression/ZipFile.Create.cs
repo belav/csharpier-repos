@@ -643,7 +643,7 @@ namespace System.IO.Compression
         {
             File,
             Directory,
-            Unsupported
+            Unsupported,
         }
     }
 }

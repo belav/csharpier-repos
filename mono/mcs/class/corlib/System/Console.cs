@@ -156,13 +156,13 @@ namespace System
                 stdout = TextWriter.Synchronized(
                     new CStreamWriter(OpenStandardOutput(0), outputEncoding, true)
                     {
-                        AutoFlush = true
+                        AutoFlush = true,
                     }
                 );
                 stderr = TextWriter.Synchronized(
                     new CStreamWriter(OpenStandardError(0), outputEncoding, true)
                     {
-                        AutoFlush = true
+                        AutoFlush = true,
                     }
                 );
             }
@@ -180,13 +180,13 @@ namespace System
                 stdout = TextWriter.Synchronized(
                     new UnexceptionalStreamWriter(OpenStandardOutput(0), outputEncoding)
                     {
-                        AutoFlush = true
+                        AutoFlush = true,
                     }
                 );
                 stderr = TextWriter.Synchronized(
                     new UnexceptionalStreamWriter(OpenStandardError(0), outputEncoding)
                     {
-                        AutoFlush = true
+                        AutoFlush = true,
                     }
                 );
 

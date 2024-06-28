@@ -29,7 +29,7 @@ namespace System.CommandLine.Tests
             var requiredOption = new CliOption<bool>("--i-must-be-set")
             {
                 Required = true,
-                Recursive = true
+                Recursive = true,
             };
             rootCommand.Options.Add(requiredOption);
 
@@ -49,7 +49,7 @@ namespace System.CommandLine.Tests
             var requiredOption = new CliOption<bool>("-i", "--i-must-be-set")
             {
                 Required = true,
-                Recursive = true
+                Recursive = true,
             };
             rootCommand.Options.Add(requiredOption);
 
@@ -71,7 +71,7 @@ namespace System.CommandLine.Tests
             var requiredOption = new CliOption<bool>("--i-must-be-set")
             {
                 Required = true,
-                Recursive = true
+                Recursive = true,
             };
             rootCommand.Options.Add(requiredOption);
 

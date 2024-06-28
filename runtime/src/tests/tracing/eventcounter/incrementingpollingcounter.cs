@@ -30,7 +30,7 @@ namespace BasicEventSourceTests
                 {
                     DisplayName = "Failure Count",
                     DisplayUnits = "Count",
-                    DisplayRateTimeScale = new TimeSpan(0, 0, 1)
+                    DisplayRateTimeScale = new TimeSpan(0, 0, 1),
                 };
             }
         }

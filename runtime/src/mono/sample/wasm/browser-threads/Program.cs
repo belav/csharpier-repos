@@ -135,7 +135,7 @@ public class Demo
             "\u2682",
             "\u2683",
             "\u2684",
-            "\u2685"
+            "\u2685",
         };
 
         public void Step(string suffix = "")

@@ -141,7 +141,7 @@ namespace System.Tests
                     "abc",
                     CompareOptions.OrdinalIgnoreCase
                 );
-            }
+            },
         };
 
         [Theory]
@@ -180,21 +180,21 @@ namespace System.Tests
                     "AaBbCcDdEeFfGgHh".Insert(
                         i,
                         "\u00E9" /* LATIN SMALL LETTER E WITH ACUTE */
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
                     "AaBbCcDdEeFfGgHh".Insert(
                         i,
                         "\u044D" /* CYRILLIC SMALL LETTER E */
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
                     "AaBbCcDdEeFfGgHh".Insert(
                         i,
                         "\u0131" /* LATIN SMALL LETTER DOTLESS I */
-                    )
+                    ),
                 };
             }
 
@@ -202,12 +202,12 @@ namespace System.Tests
 
             yield return new object[]
             {
-                "\u0418\u0433\u0440\u044B \u0438 \u0440\u0430\u0437\u0432\u043B\u0435\u0447\u0435\u043D\u0438\u044F \u0431\u0435\u0437 \u0433\u0440\u0430\u043D\u0438\u0446 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 4K."
+                "\u0418\u0433\u0440\u044B \u0438 \u0440\u0430\u0437\u0432\u043B\u0435\u0447\u0435\u043D\u0438\u044F \u0431\u0435\u0437 \u0433\u0440\u0430\u043D\u0438\u0446 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 4K.",
             }; // ru-RU
             yield return new object[] { "Poder port\u00E1til." }; // es-ES
             yield return new object[]
             {
-                "\u60F3\u50CF\u3092\u8D85\u3048\u305F\u3001\u30D1\u30D5\u30A9\u30FC\u30DE\u30F3\u30B9\u3092\u3002"
+                "\u60F3\u50CF\u3092\u8D85\u3048\u305F\u3001\u30D1\u30D5\u30A9\u30FC\u30DE\u30F3\u30B9\u3092\u3002",
             }; // ja-JP
             yield return new object[] { "\u00C9l\u00E9gant et performant." }; // fr-FR
         }

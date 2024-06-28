@@ -13,7 +13,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             True = 1, // JSON is "TRUE"
             False = 2, // JSON is "FALSE"
-            Unknown = 3 // JSON is "?"
+            Unknown =
+                3 // JSON is "?"
+            ,
         }
 
         // A converter for a specific Enum.

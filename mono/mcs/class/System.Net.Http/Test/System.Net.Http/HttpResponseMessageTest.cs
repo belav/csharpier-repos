@@ -187,7 +187,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new AuthenticationHeaderValue("proxy", "par"),
-                        new AuthenticationHeaderValue("ttt")
+                        new AuthenticationHeaderValue("ttt"),
                     }
                 )
             );
@@ -199,7 +199,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new ProductInfoHeaderValue("(comment)"),
-                        new ProductInfoHeaderValue(new ProductHeaderValue("server"))
+                        new ProductInfoHeaderValue(new ProductHeaderValue("server")),
                     }
                 )
             );
@@ -212,7 +212,7 @@ namespace MonoTests.System.Net.Http
                     {
                         new TransferCodingHeaderValue("tchv"),
                         new TransferCodingHeaderValue("chunked"),
-                        new TransferCodingHeaderValue("ttt")
+                        new TransferCodingHeaderValue("ttt"),
                     }
                 )
             );
@@ -223,7 +223,7 @@ namespace MonoTests.System.Net.Http
                     {
                         new ProductHeaderValue("prod", "ver"),
                         new ProductHeaderValue("uuu"),
-                        new ProductHeaderValue("vvvvaa")
+                        new ProductHeaderValue("vvvvaa"),
                     }
                 )
             );
@@ -235,7 +235,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new ViaHeaderValue("protocol", "rec-by"),
-                        new ViaHeaderValue("prot", "v")
+                        new ViaHeaderValue("prot", "v"),
                     }
                 )
             );
@@ -245,7 +245,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new WarningHeaderValue(5, "agent", "\"txt\""),
-                        new WarningHeaderValue(4, "ww", "\"t\"")
+                        new WarningHeaderValue(4, "ww", "\"t\""),
                     }
                 )
             );
@@ -255,7 +255,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new AuthenticationHeaderValue("www", "par"),
-                        new AuthenticationHeaderValue("ww")
+                        new AuthenticationHeaderValue("ww"),
                     }
                 )
             );
@@ -348,7 +348,7 @@ namespace MonoTests.System.Net.Http
                         new AuthenticationHeaderValue("x"),
                         new AuthenticationHeaderValue("y"),
                         new AuthenticationHeaderValue("z"),
-                        new AuthenticationHeaderValue("i")
+                        new AuthenticationHeaderValue("i"),
                     }
                 ),
                 "#1b"
@@ -362,7 +362,7 @@ namespace MonoTests.System.Net.Http
                         new ProductHeaderValue("HTTP", "2.0"),
                         new ProductHeaderValue("SHTTP", "1.3"),
                         new ProductHeaderValue("IRC"),
-                        new ProductHeaderValue("RTA", "x11")
+                        new ProductHeaderValue("RTA", "x11"),
                     }
                 ),
                 "#2b"
@@ -374,7 +374,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new ViaHeaderValue("1.0", "fred"),
-                        new ViaHeaderValue("1.1", "nowhere.com", null, "(Apache/1.1)")
+                        new ViaHeaderValue("1.1", "nowhere.com", null, "(Apache/1.1)"),
                     }
                 ),
                 "#2b"
@@ -386,7 +386,7 @@ namespace MonoTests.System.Net.Http
                     new[]
                     {
                         new WarningHeaderValue(199, "Miscellaneous", "\"w\""),
-                        new WarningHeaderValue(200, "a", "\"b\"")
+                        new WarningHeaderValue(200, "a", "\"b\""),
                     }
                 ),
                 "#4b"

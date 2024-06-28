@@ -10,7 +10,7 @@ namespace System.ServiceModel.Security
     {
         Windows,
         MembershipProvider,
-        Custom
+        Custom,
     }
 
     static class UserNamePasswordValidationModeHelper

@@ -11,7 +11,7 @@ namespace DefaultNamespace
     {
         Normal,
         Growing,
-        Living
+        Living,
     }
 
     public class Node

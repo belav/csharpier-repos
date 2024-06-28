@@ -248,15 +248,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
             X500DistinguishedName x500dn = new X500DistinguishedName(dn);
             return key switch
             {
-                RSA rsa =>
-                    new CertificateRequest(x500dn, rsa, hashAlgorithm, RSASignaturePadding.Pkcs1),
+                RSA rsa => new CertificateRequest(
+                    x500dn,
+                    rsa,
+                    hashAlgorithm,
+                    RSASignaturePadding.Pkcs1
+                ),
                 ECDsa ecdsa => new CertificateRequest(x500dn, ecdsa, hashAlgorithm),
-                ECDiffieHellman ecdh =>
-                    new CertificateRequest(x500dn, new PublicKey(ecdh), hashAlgorithm),
-                _ =>
-                    throw new InvalidOperationException(
-                        $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
-                    )
+                ECDiffieHellman ecdh => new CertificateRequest(
+                    x500dn,
+                    new PublicKey(ecdh),
+                    hashAlgorithm
+                ),
+                _ => throw new InvalidOperationException(
+                    $"Had no handler for key of type {key?.GetType().FullName ?? "null"}"
+                ),
             };
         }
 
@@ -619,7 +625,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.CertificateCreatio
                         new X509BasicConstraintsExtension(false, false, 0, true)
                     );
 
-                    byte[] leafSerial = { 1, 1, 2, 6, 12, 60, 60, };
+                    byte[] leafSerial = { 1, 1, 2, 6, 12, 60, 60 };
 
                     leafCert = request.Create(intermedCertWithKey, notBefore, notAfter, leafSerial);
 

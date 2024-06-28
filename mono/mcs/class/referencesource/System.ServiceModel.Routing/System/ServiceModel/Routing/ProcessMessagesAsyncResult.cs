@@ -917,7 +917,7 @@ namespace System.ServiceModel.Routing
             CompletingReceiveContexts,
             CommittingTransaction,
             Completing,
-            Completed
+            Completed,
         }
     }
 }

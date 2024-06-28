@@ -29,7 +29,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => null,
                     modelType
-                )
+                ),
             };
         }
     }

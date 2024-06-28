@@ -573,7 +573,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp7_1
+                LanguageVersion = LanguageVersion.CSharp7_1,
             }.RunAsync();
         }
 
@@ -852,7 +852,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         IEnumerable<(string name, int age)> GetPeople() => default;
                     }
                     """,
-                CodeActionValidationMode = Testing.CodeActionValidationMode.None
+                CodeActionValidationMode = Testing.CodeActionValidationMode.None,
             }.RunAsync();
         }
 
@@ -907,7 +907,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -926,7 +926,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                     }
                     """,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
 
@@ -955,7 +955,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseDeconstruction
                     """,
                 TestState = { OutputKind = OutputKind.ConsoleApplication },
                 FixedState = { OutputKind = OutputKind.ConsoleApplication },
-                LanguageVersion = LanguageVersion.CSharp9
+                LanguageVersion = LanguageVersion.CSharp9,
             }.RunAsync();
         }
     }

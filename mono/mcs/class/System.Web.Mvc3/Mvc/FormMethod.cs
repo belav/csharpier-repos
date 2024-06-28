@@ -3,6 +3,6 @@
     public enum FormMethod
     {
         Get,
-        Post
+        Post,
     }
 }

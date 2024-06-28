@@ -14,12 +14,12 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 typeof(PI_BaseClass),
-                nameof(PI_BaseClass.PublicGetPublicSetStaticProperty)
+                nameof(PI_BaseClass.PublicGetPublicSetStaticProperty),
             };
             yield return new object[]
             {
                 typeof(PI_BaseClass),
-                nameof(PI_BaseClass.PublicGetPublicSetProperty)
+                nameof(PI_BaseClass.PublicGetPublicSetProperty),
             };
 
             // trick trimming into keeping the Length property

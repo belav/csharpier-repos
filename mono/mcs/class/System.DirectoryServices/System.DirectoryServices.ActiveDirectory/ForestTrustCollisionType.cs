@@ -27,6 +27,6 @@ namespace System.DirectoryServices.ActiveDirectory
     {
         TopLevelName,
         Domain,
-        Other
+        Other,
     }
 }

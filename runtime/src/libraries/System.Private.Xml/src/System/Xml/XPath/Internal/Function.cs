@@ -123,7 +123,7 @@ namespace MS.Internal.Xml.XPath
             /* FunctionType.FuncFloor           */XPathResultType.Number,
             /* FunctionType.FuncCeiling         */XPathResultType.Number,
             /* FunctionType.FuncRound           */XPathResultType.Number,
-            /* FunctionType.FuncUserDefined     */XPathResultType.Any
+            /* FunctionType.FuncUserDefined     */XPathResultType.Any,
         };
     }
 }

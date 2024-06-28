@@ -10,7 +10,7 @@ namespace System.Activities
     {
         Exact = 0,
         Any = 1,
-        AnyRevision = 2
+        AnyRevision = 2,
     }
 
     internal static class WorkflowIdentityFilterExtensions

@@ -98,6 +98,7 @@ namespace Internal.JitInterface
             CFI_DEF_CFA_REGISTER, // New register is used to compute CFA
             CFI_REL_OFFSET, // Register is saved at offset from the current CFA
             CFI_DEF_CFA // Take address from register and add offset to it.
+            ,
         }
 
         // Get the CFI data in the same shape as clang/LLVM generated one. This improves the compatibility with libunwind and other unwind solutions
@@ -986,7 +987,7 @@ namespace Internal.JitInterface
         {
             RH_EH_CLAUSE_TYPED = 0,
             RH_EH_CLAUSE_FAULT = 1,
-            RH_EH_CLAUSE_FILTER = 2
+            RH_EH_CLAUSE_FILTER = 2,
         }
 
         private ObjectNode.ObjectData EncodeEHInfo()

@@ -47,7 +47,7 @@ public class BadRequestOfTResultTests
     {
         // Arrange
         var result = new BadRequest<string>("Hello");
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -65,7 +65,7 @@ public class BadRequestOfTResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act
@@ -79,10 +79,10 @@ public class BadRequestOfTResultTests
     public async Task BadRequestObjectResult_ExecuteResultAsync_UsesStatusCodeFromResultTypeForProblemDetails()
     {
         // Arrange
-        var details = new ProblemDetails { Status = StatusCodes.Status422UnprocessableEntity, };
+        var details = new ProblemDetails { Status = StatusCodes.Status422UnprocessableEntity };
         var result = new BadRequest<ProblemDetails>(details);
 
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);

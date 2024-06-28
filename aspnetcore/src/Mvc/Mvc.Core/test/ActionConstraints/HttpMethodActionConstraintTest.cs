@@ -17,7 +17,7 @@ public class HttpMethodActionConstraintTest
         { new string[] { "get" }, "get" },
         { new string[] { "post" }, "POST" },
         { new string[] { "gEt" }, "get" },
-        { new string[] { "get", "PoST" }, "pOSt" }
+        { new string[] { "get", "PoST" }, "pOSt" },
     };
 
     [Theory]

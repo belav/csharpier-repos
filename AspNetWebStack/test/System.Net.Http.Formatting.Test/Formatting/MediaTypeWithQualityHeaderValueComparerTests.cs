@@ -121,7 +121,7 @@ namespace System.Net.Http.Formatting
                             "*/*;q=0.4",
                             "text/plain;q=0",
                         }
-                    }
+                    },
                 };
             }
         }

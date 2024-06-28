@@ -87,7 +87,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             1,
                             5,
                             100,
-                            0
+                            0,
                         },
                         new byte[64]
                         {
@@ -154,7 +154,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             22,
                             1,
                             50,
-                            0
+                            0,
                         },
                         new byte[64]
                     )
@@ -226,7 +226,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             1,
                             -5,
                             100,
-                            0
+                            0,
                         },
                         new sbyte[64]
                         {
@@ -293,7 +293,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             22,
                             -1,
                             -50,
-                            0
+                            0,
                         },
                         new sbyte[64]
                     )
@@ -333,7 +333,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             1,
                             -5,
                             100,
-                            0
+                            0,
                         },
                         new short[32]
                         {
@@ -368,7 +368,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             22,
                             -1,
                             -50,
-                            0
+                            0,
                         },
                         new short[32]
                     )
@@ -412,7 +412,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             1,
                             5,
                             100,
-                            0
+                            0,
                         },
                         new ushort[32]
                         {
@@ -447,7 +447,7 @@ namespace IntelHardwareIntrinsicTest._Avx512BW
                             22,
                             1,
                             50,
-                            0
+                            0,
                         },
                         new ushort[32]
                     )

@@ -11,7 +11,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
     internal enum EventPipeSerializationFormat
     {
         NetPerf,
-        NetTrace
+        NetTrace,
     }
 
     internal class EventPipeSessionConfiguration

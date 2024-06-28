@@ -175,7 +175,7 @@ namespace Microsoft.CodeAnalysis.MSBuild
                 { "pdbonly", "pdbonly" },
                 { "full", "full" },
                 { "portable", "portable" },
-                { "embedded", "embedded" }
+                { "embedded", "embedded" },
             }.ToImmutableDictionary();
 
         protected void ReadDebugInfo()

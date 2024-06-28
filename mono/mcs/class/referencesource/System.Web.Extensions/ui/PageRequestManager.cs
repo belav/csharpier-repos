@@ -1250,7 +1250,7 @@ Sys.WebForms.PageRequestManager._initialize('"
         private enum IDType
         {
             UniqueID,
-            Both
+            Both,
         }
     }
 }

@@ -23,7 +23,7 @@ namespace System.Diagnostics.Tests
             CounterCreationData[] ccds =
             {
                 new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
-                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase)
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
             };
             CounterCreationDataCollection ccdc1 = new CounterCreationDataCollection(ccds);
             CounterCreationDataCollection ccdc2 = new CounterCreationDataCollection(ccdc1);
@@ -37,7 +37,7 @@ namespace System.Diagnostics.Tests
             CounterCreationData[] ccds =
             {
                 new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
-                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase)
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
             };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
             Assert.Equal(2, ccdc.Count);
@@ -60,7 +60,7 @@ namespace System.Diagnostics.Tests
             CounterCreationData[] ccds =
             {
                 new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
-                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase)
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
             };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
@@ -81,7 +81,7 @@ namespace System.Diagnostics.Tests
             CounterCreationData[] ccds =
             {
                 new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
-                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase)
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
             };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
@@ -95,7 +95,7 @@ namespace System.Diagnostics.Tests
             CounterCreationData[] ccds =
             {
                 new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
-                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase)
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
             };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 
@@ -116,7 +116,7 @@ namespace System.Diagnostics.Tests
             CounterCreationData[] ccds =
             {
                 new CounterCreationData("Simple1", "Simple Help", PerformanceCounterType.RawBase),
-                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase)
+                new CounterCreationData("Simple2", "Simple Help", PerformanceCounterType.RawBase),
             };
             CounterCreationDataCollection ccdc = new CounterCreationDataCollection(ccds);
 

@@ -35,7 +35,7 @@ namespace Mono.Tools
             UninstallFromList,
             UninstallSpecific,
             List,
-            Help
+            Help,
         }
 
         private enum VerificationResult
@@ -43,7 +43,7 @@ namespace Mono.Tools
             StrongNamed,
             WeakNamed,
             DelaySigned,
-            Skipped
+            Skipped,
         }
 
         private static bool silent;
@@ -1045,11 +1045,9 @@ namespace Mono.Tools
             version = (version == null ? "*" : version + "*");
             culture = asm_info["culture"] as string;
             culture = (
-                culture == null
-                    ? "*"
-                    : (culture == "neutral")
-                        ? String.Empty
-                        : culture.ToLower(CultureInfo.InvariantCulture)
+                culture == null ? "*"
+                : (culture == "neutral") ? String.Empty
+                : culture.ToLower(CultureInfo.InvariantCulture)
             );
             token = asm_info["publickeytoken"] as string;
             token = (token == null ? "*" : token.ToLower(CultureInfo.InvariantCulture));

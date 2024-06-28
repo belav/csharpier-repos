@@ -115,7 +115,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Bright pastel palette.
         /// </summary>
-        BrightPastel
+        BrightPastel,
     };
 
     #endregion
@@ -162,7 +162,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.Olive,
             Color.Silver,
             Color.Tomato,
-            Color.Moccasin
+            Color.Moccasin,
         };
 
         private static Color[] _colorsPastel =
@@ -182,7 +182,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.Plum,
             Color.CadetBlue,
             Color.PeachPuff,
-            Color.LightSalmon
+            Color.LightSalmon,
         };
 
         private static Color[] _colorsEarth =
@@ -202,7 +202,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.DarkSeaGreen,
             Color.Firebrick,
             Color.SaddleBrown,
-            Color.FromArgb(192, 0, 0)
+            Color.FromArgb(192, 0, 0),
         };
 
         private static Color[] _colorsSemiTransparent =
@@ -222,7 +222,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.FromArgb(80, 255, 0, 255),
             Color.FromArgb(80, 170, 120, 20),
             Color.FromArgb(150, 100, 120, 50),
-            Color.FromArgb(150, 40, 90, 150)
+            Color.FromArgb(150, 40, 90, 150),
         };
 
         private static Color[] _colorsLight =
@@ -236,7 +236,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.AliceBlue,
             Color.WhiteSmoke,
             Color.AntiqueWhite,
-            Color.LightCyan
+            Color.LightCyan,
         };
 
         private static Color[] _colorsExcel =
@@ -256,7 +256,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.FromArgb(128, 0, 128),
             Color.FromArgb(128, 0, 0),
             Color.FromArgb(0, 128, 128),
-            Color.FromArgb(0, 0, 255)
+            Color.FromArgb(0, 0, 255),
         };
 
         private static Color[] _colorsBerry =
@@ -271,7 +271,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.MediumSlateBlue,
             Color.FromArgb(192, 0, 192),
             Color.MediumBlue,
-            Color.Purple
+            Color.Purple,
         };
 
         private static Color[] _colorsChocolate =
@@ -285,7 +285,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.SaddleBrown,
             Color.FromArgb(192, 64, 0),
             Color.Firebrick,
-            Color.FromArgb(182, 92, 58)
+            Color.FromArgb(182, 92, 58),
         };
 
         private static Color[] _colorsFire =
@@ -299,7 +299,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.Yellow,
             Color.OrangeRed,
             Color.MediumVioletRed,
-            Color.FromArgb(221, 226, 33)
+            Color.FromArgb(221, 226, 33),
         };
 
         private static Color[] _colorsSeaGreen =
@@ -313,7 +313,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.MediumTurquoise,
             Color.LightSteelBlue,
             Color.DarkSeaGreen,
-            Color.SkyBlue
+            Color.SkyBlue,
         };
 
         private static Color[] _colorsBrightPastel =
@@ -332,7 +332,7 @@ namespace System.Web.UI.DataVisualization.Charting.Utilities
             Color.FromArgb(80, 99, 129),
             Color.FromArgb(241, 185, 168),
             Color.FromArgb(224, 131, 10),
-            Color.FromArgb(120, 147, 190)
+            Color.FromArgb(120, 147, 190),
         };
 
         #endregion

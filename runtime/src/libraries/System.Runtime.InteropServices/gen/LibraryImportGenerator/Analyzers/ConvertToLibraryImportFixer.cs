@@ -55,7 +55,7 @@ namespace Microsoft.Interop.Analyzers
                 (true, true) => SR.Format(SR.ConvertToLibraryImportWithSuffixAddUnsafe, suffix),
                 (true, false) => SR.ConvertToLibraryImportAddUnsafe,
                 (false, true) => SR.Format(SR.ConvertToLibraryImportWithSuffix, suffix),
-                (false, false) => SR.ConvertToLibraryImport
+                (false, false) => SR.ConvertToLibraryImport,
             };
         }
 
@@ -174,7 +174,7 @@ namespace Microsoft.Interop.Analyzers
             nameof(DllImportAttribute.PreserveSig),
             nameof(DllImportAttribute.SetLastError),
             nameof(StringMarshalling),
-            nameof(DllImportAttribute.ThrowOnUnmappableChar)
+            nameof(DllImportAttribute.ThrowOnUnmappableChar),
         };
 
         private static async Task ConvertToLibraryImport(
@@ -305,7 +305,7 @@ namespace Microsoft.Interop.Analyzers
                                 "@return",
                                 editor.Generator.GetType(generatedDeclaration),
                                 refKind: RefKind.Out
-                            )
+                            ),
                         }
                     );
                 }
@@ -388,9 +388,8 @@ namespace Microsoft.Interop.Analyzers
                             {
                                 Parent: InvocationExpressionSyntax invocationOnType
                             }
-                        } =>
-                            invocationOnType,
-                        _ => null!
+                        } => invocationOnType,
+                        _ => null!,
                     };
 
                     if (invocation is null)
@@ -819,7 +818,7 @@ namespace Microsoft.Interop.Analyzers
                     editor.SemanticModel.Compilation.ObjectType.ContainingAssembly.GetTypeByMetadataName(
                         $"System.Runtime.CompilerServices.CallConvFastcall"
                     ),
-                _ => null
+                _ => null,
             };
 
             // The user is using a calling convention type that doesn't have a matching CallConv type.
@@ -845,7 +844,7 @@ namespace Microsoft.Interop.Analyzers
                         {
                             generator.TypeOfExpression(
                                 generator.TypeExpression(callingConventionType)
-                            )
+                            ),
                         }
                     )
                 )

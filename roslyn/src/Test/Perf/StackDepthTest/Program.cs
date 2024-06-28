@@ -25,7 +25,7 @@ namespace OverflowSensitivity
             SEM_FAILCRITICALERRORS = 0x0001,
             SEM_NOALIGNMENTFAULTEXCEPT = 0x0004,
             SEM_NOGPFAULTERRORBOX = 0x0002,
-            SEM_NOOPENFILEERRORBOX = 0x8000
+            SEM_NOOPENFILEERRORBOX = 0x8000,
         }
 
         public static int Main(string[] args)

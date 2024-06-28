@@ -104,43 +104,43 @@ namespace System.Xml.XmlConvertTests
             AddChild(
                 new CVariation(ToType33)
                 {
-                    Attribute = new Variation("ToString(integral type) - valid cases")
+                    Attribute = new Variation("ToString(integral type) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType34)
                 {
-                    Attribute = new Variation("ToString(float) - valid cases")
+                    Attribute = new Variation("ToString(float) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType35)
                 {
-                    Attribute = new Variation("ToString(double) - valid cases")
+                    Attribute = new Variation("ToString(double) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType36)
                 {
-                    Attribute = new Variation("ToString(decimal) - valid cases")
+                    Attribute = new Variation("ToString(decimal) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType37)
                 {
-                    Attribute = new Variation("ToString(byte, bool, char) - valid cases")
+                    Attribute = new Variation("ToString(byte, bool, char) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType38)
                 {
-                    Attribute = new Variation("ToString(TimeSpan) - valid cases")
+                    Attribute = new Variation("ToString(TimeSpan) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType39)
                 {
-                    Attribute = new Variation("ToString(Guid) - valid cases")
+                    Attribute = new Variation("ToString(Guid) - valid cases"),
                 }
             );
             AddChild(
@@ -148,7 +148,7 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation(
                         "ToString(int16, in32, int64, uint32, uint64) - valid cases"
-                    )
+                    ),
                 }
             );
             AddChild(
@@ -156,7 +156,7 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation(
                         "PositiveZero and NegativeZero double, float, bug regression 76523"
-                    )
+                    ),
                 }
             );
             AddChild(
@@ -166,8 +166,8 @@ namespace System.Xml.XmlConvertTests
                         "ToDateTimeOffset(String s, String[] formats) - valid cases"
                     )
                     {
-                        Param = "datetimeOffset.formats"
-                    }
+                        Param = "datetimeOffset.formats",
+                    },
                 }
             );
             AddChild(
@@ -177,8 +177,8 @@ namespace System.Xml.XmlConvertTests
                         "ToDateTimeOffset(String s, String format) - valid cases"
                     )
                     {
-                        Param = "datetimeOffset.format"
-                    }
+                        Param = "datetimeOffset.format",
+                    },
                 }
             );
             AddChild(
@@ -186,8 +186,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("ToDateTimeOffset(String s) - valid cases")
                     {
-                        Param = "datetimeOffset"
-                    }
+                        Param = "datetimeOffset",
+                    },
                 }
             );
             AddChild(
@@ -197,8 +197,8 @@ namespace System.Xml.XmlConvertTests
                         "ToDateTimeOffset(String s) with offset = hh:60 - valid"
                     )
                     {
-                        Param = "datetimeOffset"
-                    }
+                        Param = "datetimeOffset",
+                    },
                 }
             );
             AddChild(
@@ -208,8 +208,8 @@ namespace System.Xml.XmlConvertTests
                         "ToDateTimeOffset(String s, String format) with offset = hh:60 - invalid"
                     )
                     {
-                        Param = "datetimeOffset.format"
-                    }
+                        Param = "datetimeOffset.format",
+                    },
                 }
             );
             AddChild(
@@ -219,8 +219,8 @@ namespace System.Xml.XmlConvertTests
                         "ToDateTimeOffset(String s, String format) - invalid cases"
                     )
                     {
-                        Param = "datetimeOffset.format"
-                    }
+                        Param = "datetimeOffset.format",
+                    },
                 }
             );
             AddChild(
@@ -228,8 +228,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("ToDateTimeOffset(String s) - invalid cases")
                     {
-                        Param = "datetimeOffset"
-                    }
+                        Param = "datetimeOffset",
+                    },
                 }
             );
             AddChild(
@@ -239,20 +239,20 @@ namespace System.Xml.XmlConvertTests
                         "ToDateTimeOffset(String s, String[] formats) - invalid cases"
                     )
                     {
-                        Param = "datetimeOffset.formats"
-                    }
+                        Param = "datetimeOffset.formats",
+                    },
                 }
             );
             AddChild(
                 new CVariation(ToType56)
                 {
-                    Attribute = new Variation("ToString(DateTimeOffset) - valid cases")
+                    Attribute = new Variation("ToString(DateTimeOffset) - valid cases"),
                 }
             );
             AddChild(
                 new CVariation(ToType57)
                 {
-                    Attribute = new Variation("ToString(DateTimeOffset, format) - valid cases")
+                    Attribute = new Variation("ToString(DateTimeOffset, format) - valid cases"),
                 }
             );
             AddChild(
@@ -260,8 +260,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("4. Roundtrip: DateTimeOffset-String-DateTimeOffset")
                     {
-                        Param = 4
-                    }
+                        Param = 4,
+                    },
                 }
             );
             AddChild(
@@ -269,8 +269,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("1. Roundtrip: DateTimeOffset-String-DateTimeOffset")
                     {
-                        Param = 1
-                    }
+                        Param = 1,
+                    },
                 }
             );
             AddChild(
@@ -278,8 +278,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("5. Roundtrip: DateTimeOffset-String-DateTimeOffset")
                     {
-                        Param = 5
-                    }
+                        Param = 5,
+                    },
                 }
             );
             AddChild(
@@ -287,8 +287,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("2. Roundtrip: DateTimeOffset-String-DateTimeOffset")
                     {
-                        Param = 2
-                    }
+                        Param = 2,
+                    },
                 }
             );
             AddChild(
@@ -296,8 +296,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("3. Roundtrip: DateTimeOffset-String-DateTimeOffset")
                     {
-                        Param = 3
-                    }
+                        Param = 3,
+                    },
                 }
             );
             AddChild(
@@ -305,8 +305,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("5. Roundtrip: String-DateTimeOffset-String")
                     {
-                        Param = "9999-12-31T23:59:59Z"
-                    }
+                        Param = "9999-12-31T23:59:59Z",
+                    },
                 }
             );
             AddChild(
@@ -314,8 +314,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("6. Roundtrip: String-DateTimeOffset-String")
                     {
-                        Param = "2000-02-29T23:59:59.9999999+13:59"
-                    }
+                        Param = "2000-02-29T23:59:59.9999999+13:59",
+                    },
                 }
             );
             AddChild(
@@ -323,8 +323,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("2. Roundtrip: String-DateTimeOffset-String")
                     {
-                        Param = "0001-01-01T00:00:00-14:00"
-                    }
+                        Param = "0001-01-01T00:00:00-14:00",
+                    },
                 }
             );
             AddChild(
@@ -332,8 +332,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("3. Roundtrip: String-DateTimeOffset-String")
                     {
-                        Param = "9998-12-31T12:59:59-14:00"
-                    }
+                        Param = "9998-12-31T12:59:59-14:00",
+                    },
                 }
             );
             AddChild(
@@ -341,8 +341,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("4. Roundtrip: String-DateTimeOffset-String")
                     {
-                        Param = "9999-12-31T23:59:59+14:00"
-                    }
+                        Param = "9999-12-31T23:59:59+14:00",
+                    },
                 }
             );
             AddChild(
@@ -350,8 +350,8 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation("1. Roundtrip: String-DateTimeOffset-String")
                     {
-                        Param = "0001-01-01T00:00:00Z"
-                    }
+                        Param = "0001-01-01T00:00:00Z",
+                    },
                 }
             );
             AddChild(
@@ -359,7 +359,7 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation(
                         "null params DateTime, DateTimeOffset - invalid cases"
-                    )
+                    ),
                 }
             );
         }
@@ -377,7 +377,7 @@ namespace System.Xml.XmlConvertTests
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-dd",
                 "HH:mm:sszzzzzz",
-                null
+                null,
             };
             for (int i = 0; i < array.Length; i++)
             {
@@ -494,7 +494,7 @@ namespace System.Xml.XmlConvertTests
                 "yyyy-MM-ddZ",
                 "yyyy-MM",
                 "HH:mm:sszzzzzz",
-                "yyyy-MM-dd-HH:mm"
+                "yyyy-MM-dd-HH:mm",
             };
             for (int i = 0; i < array0.Length; i++)
             {
@@ -640,7 +640,7 @@ namespace System.Xml.XmlConvertTests
                 "278.62452469864978e-23",
                 "0",
                 "-0",
-                "NaN"
+                "NaN",
             };
             object[] array1 =
             {
@@ -652,7 +652,7 @@ namespace System.Xml.XmlConvertTests
                 278.62452469864978e-23,
                 (double)0,
                 (double)0,
-                double.NaN
+                double.NaN,
             };
 
             return TestValid(array0, array1, "double");
@@ -670,7 +670,7 @@ namespace System.Xml.XmlConvertTests
                 "---32.0",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "double");
@@ -697,7 +697,7 @@ namespace System.Xml.XmlConvertTests
                 "---32",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "Int16");
@@ -723,7 +723,7 @@ namespace System.Xml.XmlConvertTests
                 "---32",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "Int32");
@@ -749,7 +749,7 @@ namespace System.Xml.XmlConvertTests
                 "---32",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "Int64");
@@ -768,7 +768,7 @@ namespace System.Xml.XmlConvertTests
                 "2.646978e-23",
                 "0",
                 "-0",
-                "NaN"
+                "NaN",
             };
             object[] array1 =
             {
@@ -780,7 +780,7 @@ namespace System.Xml.XmlConvertTests
                 (float)2.646978e-23,
                 (float)0,
                 (float)0,
-                float.NaN
+                float.NaN,
             };
             return TestValid(array0, array1, "single");
         }
@@ -804,7 +804,7 @@ namespace System.Xml.XmlConvertTests
                 "---32.0",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "single");
@@ -831,7 +831,7 @@ namespace System.Xml.XmlConvertTests
                 "-129",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "sbyte");
@@ -855,7 +855,7 @@ namespace System.Xml.XmlConvertTests
                 "P0M",
                 "P0D",
                 "P0DT0S",
-                "PT0.0S"
+                "PT0.0S",
             };
             object[] array1 =
             {
@@ -872,7 +872,7 @@ namespace System.Xml.XmlConvertTests
                 new TimeSpan(0, 0, 0, 0),
                 new TimeSpan(0, 0, 0, 0),
                 new TimeSpan(0, 0, 0, 0),
-                new TimeSpan(0, 0, 0, 0)
+                new TimeSpan(0, 0, 0, 0),
             };
             return TestValid(array0, array1, "timespan");
         }
@@ -891,7 +891,7 @@ namespace System.Xml.XmlConvertTests
                 "P-1347M",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "timespan");
@@ -919,7 +919,7 @@ namespace System.Xml.XmlConvertTests
                 "--25",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "uint16");
@@ -947,7 +947,7 @@ namespace System.Xml.XmlConvertTests
                 "--25",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "uint32");
@@ -981,7 +981,7 @@ namespace System.Xml.XmlConvertTests
                 "--25",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "uint64");
@@ -993,12 +993,12 @@ namespace System.Xml.XmlConvertTests
             object[] array0 =
             {
                 "0000000a-000b-000c-0001-020304050607",
-                " 0000000a-000b-000c-0001-020304050607"
+                " 0000000a-000b-000c-0001-020304050607",
             };
             object[] array1 =
             {
                 new Guid(0xa, 0xb, 0xc, 0, 1, 2, 3, 4, 5, 6, 7),
-                new Guid(0xa, 0xb, 0xc, 0, 1, 2, 3, 4, 5, 6, 7)
+                new Guid(0xa, 0xb, 0xc, 0, 1, 2, 3, 4, 5, 6, 7),
             };
             return TestValid(array0, array1, "guid");
         }
@@ -1013,7 +1013,7 @@ namespace System.Xml.XmlConvertTests
                 "0000000a-000b-000c-0001-0203040506070",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "guid");
@@ -1149,7 +1149,7 @@ namespace System.Xml.XmlConvertTests
                 "1,0",
                 null,
                 "\uD812",
-                "\uDF20"
+                "\uDF20",
             };
 
             return TestInvalid(array, "byte");
@@ -1520,7 +1520,7 @@ namespace System.Xml.XmlConvertTests
                 "04:02:08-05:00",
                 "0002-01-09T04:02:08.21",
                 "0002-01-09",
-                "2002-02"
+                "2002-02",
             };
             object[] array1 =
             {
@@ -1571,7 +1571,7 @@ namespace System.Xml.XmlConvertTests
                 ).Add(offsetNow + new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
-                new DateTime(2002, 2, 1, 0, 0, 0, 0)
+                new DateTime(2002, 2, 1, 0, 0, 0, 0),
             };
             return TestValid(array0, array1, "datetime.Roundtrip");
         }
@@ -1598,7 +1598,7 @@ namespace System.Xml.XmlConvertTests
                 "04:02:08-05:00",
                 "0002-01-09T04:02:08.21",
                 "0002-01-09",
-                "2002-02"
+                "2002-02",
             };
             object[] array1 =
             {
@@ -1648,7 +1648,7 @@ namespace System.Xml.XmlConvertTests
                 ).Add(offsetNow + new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
-                new DateTime(2002, 2, 1, 0, 0, 0, 0)
+                new DateTime(2002, 2, 1, 0, 0, 0, 0),
             };
 
             return TestValid(array0, array1, "datetime.Local");
@@ -1677,7 +1677,7 @@ namespace System.Xml.XmlConvertTests
                 "04:02:08-05:00",
                 "0002-01-09T04:02:08.21",
                 "0002-01-09",
-                "2002-02"
+                "2002-02",
             };
             object[] array1 =
             {
@@ -1724,7 +1724,7 @@ namespace System.Xml.XmlConvertTests
                 ).Add(new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
-                new DateTime(2002, 2, 1, 0, 0, 0, 0)
+                new DateTime(2002, 2, 1, 0, 0, 0, 0),
             };
             return TestValid(array0, array1, "datetime.Utc");
         }
@@ -1755,7 +1755,7 @@ namespace System.Xml.XmlConvertTests
                 "04:02:08-05:00",
                 "0002-01-09T04:02:08.21",
                 "0002-01-09",
-                "2016-02-29"
+                "2016-02-29",
             };
             object[] array1 =
             {
@@ -1801,7 +1801,7 @@ namespace System.Xml.XmlConvertTests
                 ).Add(offsetNow + new TimeSpan(5, 0, 0)),
                 new DateTime(2, 1, 9, 4, 2, 8, 210),
                 new DateTime(2, 1, 9, 0, 0, 0, 0),
-                new DateTime(2016, 2, 29, 0, 0, 0, 0)
+                new DateTime(2016, 2, 29, 0, 0, 0, 0),
             };
 
             return TestValid(array0, array1, "datetime.Unspecified");
@@ -1861,7 +1861,7 @@ namespace System.Xml.XmlConvertTests
                 "0002-01-01T00:00:00+00:00",
                 "0002-01-01T00:00:00-00:00",
                 "2008-02-29T23:59:59-14:00",
-                "2012-02-29T23:59:59+14:00"
+                "2012-02-29T23:59:59+14:00",
             };
             object[] array1 =
             {
@@ -1973,7 +1973,7 @@ namespace System.Xml.XmlConvertTests
                 new DateTimeOffset(2, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 new DateTimeOffset(2, 1, 1, 0, 0, 0, TimeSpan.Zero),
                 new DateTimeOffset(2008, 2, 29, 23, 59, 59, TimeSpan.FromHours(-14)),
-                new DateTimeOffset(2012, 2, 29, 23, 59, 59, TimeSpan.FromHours(14))
+                new DateTimeOffset(2012, 2, 29, 23, 59, 59, TimeSpan.FromHours(14)),
             };
             string[] format =
             {
@@ -2002,7 +2002,7 @@ namespace System.Xml.XmlConvertTests
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
-                "yyyy-MM-ddTHH:mm:sszzzzzz"
+                "yyyy-MM-ddTHH:mm:sszzzzzz",
             };
             return TestValid(array0, array1, param, format);
         }
@@ -2028,7 +2028,7 @@ namespace System.Xml.XmlConvertTests
                 "2000-02-29T23:59:59.99999999999999999z",
                 "0001-01-01T00:00:00.99999999999999999Z",
                 "9999-12-31T12:59:59z",
-                "9999-12-31T12:59:59.99999999999999999999999999999Z"
+                "9999-12-31T12:59:59.99999999999999999999999999999Z",
             };
             object[] array1 =
             {
@@ -2086,7 +2086,7 @@ namespace System.Xml.XmlConvertTests
                 new DateTimeOffset(2000, 3, 1, 0, 0, 0, TimeSpan.FromHours(0)),
                 new DateTimeOffset(1, 1, 1, 0, 0, 1, TimeSpan.FromHours(-0)),
                 new DateTimeOffset(9999, 12, 31, 12, 59, 59, TimeSpan.FromHours(0)),
-                new DateTimeOffset(9999, 12, 31, 13, 0, 0, TimeSpan.FromHours(0))
+                new DateTimeOffset(9999, 12, 31, 13, 0, 0, TimeSpan.FromHours(0)),
             };
 
             string[] format =
@@ -2101,7 +2101,7 @@ namespace System.Xml.XmlConvertTests
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
-                "yyyy-MM-ddTHH:mm:sszzzzzz"
+                "yyyy-MM-ddTHH:mm:sszzzzzz",
             };
             return TestValid(array0, array1, param, format);
         }
@@ -2123,7 +2123,7 @@ namespace System.Xml.XmlConvertTests
                 "0001-01-01T00:00:00.99999999999999999999-13:60",
                 "0001-01-01T00:00:00.999999999999+00:60",
                 "9999-12-31T12:59:59.99999999999+11:60",
-                "9999-12-31T12:59:59.99999999999999999999999999999-10:60"
+                "9999-12-31T12:59:59.99999999999999999999999999999-10:60",
             };
             string[] format =
             {
@@ -2137,7 +2137,7 @@ namespace System.Xml.XmlConvertTests
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
-                "yyyy-MM-ddTHH:mm:sszzzzzz"
+                "yyyy-MM-ddTHH:mm:sszzzzzz",
             };
             return TestInvalid(array, param, format);
         }
@@ -2190,7 +2190,7 @@ namespace System.Xml.XmlConvertTests
                 "2100-02-29T23:59:59-14:00",
                 "3000-02-29T23:59:59+14:00",
                 "",
-                null
+                null,
             };
 
             string[] format =
@@ -2235,7 +2235,7 @@ namespace System.Xml.XmlConvertTests
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
                 "yyyy-MM-ddTHH:mm:sszzzzzz",
-                "yyyy-MM-ddTHH:mm:sszzzzzz"
+                "yyyy-MM-ddTHH:mm:sszzzzzz",
             };
             return TestInvalid(array, param, format);
         }
@@ -2595,7 +2595,7 @@ namespace System.Xml.XmlConvertTests
                 "0.123456789012345678",
                 "1234567890123456789",
                 "100.0",
-                "100."
+                "100.",
             };
             object[] array1 =
             {
@@ -2606,7 +2606,7 @@ namespace System.Xml.XmlConvertTests
                 Convert.ToDecimal("0.123456789012345678", CultureInfo.InvariantCulture),
                 (decimal)1234567890123456789,
                 (decimal)100,
-                (decimal)100
+                (decimal)100,
             };
             return TestValid(array0, array1, "decimal");
         }

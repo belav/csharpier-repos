@@ -408,7 +408,7 @@ namespace System.Configuration.Internal
                 {
                     streamName,
                     writeFileContext.TempNewFilename,
-                    dir
+                    dir,
                 };
                 FileIOPermission fileIOPerm = new FileIOPermission(
                     FileIOPermissionAccess.AllAccess,

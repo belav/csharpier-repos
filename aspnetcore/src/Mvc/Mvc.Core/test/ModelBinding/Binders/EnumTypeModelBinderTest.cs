@@ -252,7 +252,7 @@ public class EnumTypeModelBinderTest
             ModelMetadata = binderProviderContext.Metadata,
             ModelName = modelName,
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider() { { modelName, valueProviderValue } }
+            ValueProvider = new SimpleValueProvider() { { modelName, valueProviderValue } },
         };
 
         var binderProvider = new EnumTypeModelBinderProvider(new MvcOptions());
@@ -285,6 +285,6 @@ public class EnumTypeModelBinderTest
         Value0 = 0,
         Value1 = 1,
         Value2 = 2,
-        MaxValue = int.MaxValue
+        MaxValue = int.MaxValue,
     }
 }

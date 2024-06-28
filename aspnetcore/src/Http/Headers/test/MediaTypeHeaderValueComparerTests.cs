@@ -52,7 +52,7 @@ public class MediaTypeHeaderValueComparerTests
                     "text/*+json;q=0.4",
                     "*/*;q=0.4",
                     "text/plain;q=0",
-                }
+                },
             };
         }
     }

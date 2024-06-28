@@ -76,7 +76,7 @@ namespace System.Workflow.ComponentModel.Design
             Valid = 0,
             InvalidPosition = 1,
             InvalidSize = 2,
-            InvalidDraw = 4
+            InvalidDraw = 4,
         };
 
         private DrawingStates drawingState = DrawingStates.Valid;

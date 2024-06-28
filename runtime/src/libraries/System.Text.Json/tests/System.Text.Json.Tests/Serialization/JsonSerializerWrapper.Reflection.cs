@@ -1135,7 +1135,7 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         MaxDepth = GetEffectiveMaxDepth(options),
                         AllowTrailingCommas = options.AllowTrailingCommas,
-                        CommentHandling = options.ReadCommentHandling
+                        CommentHandling = options.ReadCommentHandling,
                     };
             }
 
@@ -1145,7 +1145,7 @@ namespace System.Text.Json.Serialization.Tests
                     ? default
                     : new JsonNodeOptions
                     {
-                        PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive
+                        PropertyNameCaseInsensitive = options.PropertyNameCaseInsensitive,
                     };
             }
 

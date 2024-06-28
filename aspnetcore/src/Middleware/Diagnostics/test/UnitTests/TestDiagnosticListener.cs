@@ -45,7 +45,7 @@ public class TestDiagnosticListener
         HostingUnhandledException = new OnExceptionEventData()
         {
             HttpContext = httpContext,
-            Exception = exception
+            Exception = exception,
         };
     }
 
@@ -58,7 +58,7 @@ public class TestDiagnosticListener
         DiagnosticUnhandledException = new OnExceptionEventData()
         {
             HttpContext = httpContext,
-            Exception = exception
+            Exception = exception,
         };
     }
 
@@ -71,7 +71,7 @@ public class TestDiagnosticListener
         DiagnosticHandledException = new OnExceptionEventData()
         {
             HttpContext = httpContext,
-            Exception = exception
+            Exception = exception,
         };
     }
 

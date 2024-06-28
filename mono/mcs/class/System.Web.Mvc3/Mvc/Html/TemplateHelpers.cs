@@ -19,7 +19,7 @@
         >
         {
             { DataBoundControlMode.ReadOnly, "DisplayTemplates" },
-            { DataBoundControlMode.Edit, "EditorTemplates" }
+            { DataBoundControlMode.Edit, "EditorTemplates" },
         };
 
         static readonly Dictionary<string, Func<HtmlHelper, string>> defaultDisplayActions =
@@ -104,7 +104,7 @@
                     {
                         actionCache[fullViewName] = new ActionCacheViewItem
                         {
-                            ViewName = fullViewName
+                            ViewName = fullViewName,
                         };
 
                         using (StringWriter writer = new StringWriter(CultureInfo.InvariantCulture))
@@ -128,7 +128,7 @@
                     {
                         actionCache[fullViewName] = new ActionCacheCodeItem
                         {
-                            Action = defaultAction
+                            Action = defaultAction,
                         };
                         return defaultAction(MakeHtmlHelper(html, viewData));
                     }
@@ -410,7 +410,7 @@
                     VisitedObjects = new HashSet<object>(
                         html.ViewContext.ViewData.TemplateInfo.VisitedObjects
                     ), // DDB #224750
-                }
+                },
             };
 
             if (additionalViewData != null)

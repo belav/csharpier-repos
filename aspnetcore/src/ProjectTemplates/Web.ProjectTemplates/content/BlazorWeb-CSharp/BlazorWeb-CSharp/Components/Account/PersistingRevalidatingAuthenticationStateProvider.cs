@@ -107,7 +107,7 @@ internal sealed class PersistingRevalidatingAuthenticationStateProvider
             {
                 state.PersistAsJson(
                     nameof(UserInfo),
-                    new UserInfo { UserId = userId, Email = email, }
+                    new UserInfo { UserId = userId, Email = email }
                 );
             }
         }

@@ -31,7 +31,7 @@ public class EnumToUnderlyingType : IntegrationTest<EnumToUnderlyingType.Databas
                 {
                     FirstName = "Bob",
                     LastName = "Smith",
-                    ConsoleColor = ConsoleColor.Yellow
+                    ConsoleColor = ConsoleColor.Yellow,
                 }
             );
             base.Seed(context);
@@ -84,7 +84,7 @@ public class UnderlyingTypeToEnum : IntegrationTest<UnderlyingTypeToEnum.Databas
                 {
                     FirstName = "Bob",
                     LastName = "Smith",
-                    ConsoleColor = (int)ConsoleColor.Yellow
+                    ConsoleColor = (int)ConsoleColor.Yellow,
                 }
             );
             base.Seed(context);
@@ -137,7 +137,7 @@ public class EnumToEnum : IntegrationTest<EnumToEnum.DatabaseInitializer>
                 {
                     FirstName = "Bob",
                     LastName = "Smith",
-                    ConsoleColor = DayOfWeek.Saturday
+                    ConsoleColor = DayOfWeek.Saturday,
                 }
             );
             base.Seed(context);

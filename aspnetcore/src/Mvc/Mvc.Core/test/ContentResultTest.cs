@@ -29,8 +29,8 @@ public class ContentResultTest
             Content = null,
             ContentType = new MediaTypeHeaderValue("text/plain")
             {
-                Encoding = Encoding.Unicode
-            }.ToString()
+                Encoding = Encoding.Unicode,
+            }.ToString(),
         };
         var httpContext = GetHttpContext();
         var actionContext = GetActionContext(httpContext);
@@ -123,7 +123,7 @@ public class ContentResultTest
         var contentResult = new ContentResult
         {
             Content = content,
-            ContentType = contentType?.ToString()
+            ContentType = contentType?.ToString(),
         };
         var httpContext = GetHttpContext();
         var memoryStream = new MemoryStream();

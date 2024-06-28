@@ -40,7 +40,7 @@ public class SqlAzureBatchingTest : IClassFixture<BatchingSqlAzureFixture>
                                     Name = uuid,
                                     ProductNumber = uuid.Substring(0, 25),
                                     Weight = 1000,
-                                    SellStartDate = DateTime.Now
+                                    SellStartDate = DateTime.Now,
                                 }
                             );
                         }

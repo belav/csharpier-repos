@@ -75,7 +75,7 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         RequestDelegate,
                         IEndpointConventionBuilder
                     >)
-                        MapGet
+                        MapGet,
                 },
                 new object[]
                 {
@@ -85,7 +85,7 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         RequestDelegate,
                         IEndpointConventionBuilder
                     >)
-                        MapPost
+                        MapPost,
                 },
                 new object[]
                 {
@@ -95,7 +95,7 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         RequestDelegate,
                         IEndpointConventionBuilder
                     >)
-                        MapPut
+                        MapPut,
                 },
                 new object[]
                 {
@@ -105,7 +105,7 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         RequestDelegate,
                         IEndpointConventionBuilder
                     >)
-                        MapDelete
+                        MapDelete,
                 },
                 new object[]
                 {
@@ -115,7 +115,7 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
                         RequestDelegate,
                         IEndpointConventionBuilder
                     >)
-                        Map
+                        Map,
                 },
             };
         }
@@ -738,7 +738,7 @@ public class RequestDelegateEndpointRouteBuilderExtensionsTest
     private enum MetadataSource
     {
         Parameter,
-        ReturnType
+        ReturnType,
     }
 
     private sealed class EmptyServiceProvider : IServiceProvider

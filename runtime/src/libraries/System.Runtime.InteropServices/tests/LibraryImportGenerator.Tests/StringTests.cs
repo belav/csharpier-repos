@@ -429,11 +429,11 @@ namespace LibraryImportGenerator.IntegrationTests
                 new object[] { "\uD83C\uDF5C !! \uD83C\uDF5C !!" },
                 new object[]
                 {
-                    "\uD83C\uDF32 \u6728 \uD83D\uDD25 \u706B \uD83C\uDF3E \u571F \uD83D\uDEE1 \u91D1 \uD83C\uDF0A \u6C34"
+                    "\uD83C\uDF32 \u6728 \uD83D\uDD25 \u706B \uD83C\uDF3E \u571F \uD83D\uDEE1 \u91D1 \uD83C\uDF0A \u6C34",
                 },
                 new object[]
                 {
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit."
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae posuere mauris, sed ultrices leo. Suspendisse potenti. Mauris enim enim, blandit tincidunt consequat in, varius sit amet neque. Morbi eget porttitor ex. Duis mattis aliquet ante quis imperdiet. Duis sit.",
                 },
                 new object[] { string.Empty },
                 new object[] { null },

@@ -59,7 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Bson
             Event e = new Event
             {
                 Name = "Movie Premiere",
-                StartDate = new DateTime(2013, 1, 22, 20, 30, 0, DateTimeKind.Utc)
+                StartDate = new DateTime(2013, 1, 22, 20, 30, 0, DateTimeKind.Utc),
             };
 
             MemoryStream ms = new MemoryStream();

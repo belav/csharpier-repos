@@ -28,6 +28,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         /// <summary>
         /// Search term is matched in a custom manner (i.e. with a user provided predicate).
         /// </summary>
-        Custom
+        Custom,
     }
 }

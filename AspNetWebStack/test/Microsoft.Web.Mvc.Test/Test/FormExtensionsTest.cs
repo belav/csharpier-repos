@@ -109,14 +109,14 @@ namespace Microsoft.Web.Mvc.Test
             rt.Add(
                 new Route("{controller}/{action}/{id}", null)
                 {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
                 }
             );
             rt.Add(
                 "namedroute",
                 new Route("named/{controller}/{action}/{id}", null)
                 {
-                    Defaults = new RouteValueDictionary(new { id = "defaultid" })
+                    Defaults = new RouteValueDictionary(new { id = "defaultid" }),
                 }
             );
             RouteData rd = new RouteData();

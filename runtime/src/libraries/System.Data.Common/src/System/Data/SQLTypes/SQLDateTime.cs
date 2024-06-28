@@ -74,7 +74,7 @@ namespace System.Data.SqlTypes
             "hh:mm:ss:ffftt",
             "hh:mm:ss:fff",
             "yyMMdd",
-            "yyyyMMdd"
+            "yyyyMMdd",
         };
         private const DateTimeStyles x_DateTimeStyle = DateTimeStyles.AllowWhiteSpaces;
 

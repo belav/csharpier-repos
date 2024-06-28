@@ -52,7 +52,7 @@ namespace Moq.Tests
             var customDefaultValueProvider = new ConstantDefaultValueProvider(null);
             var mockRepository = new MockRepository(MockBehavior.Default)
             {
-                DefaultValueProvider = customDefaultValueProvider
+                DefaultValueProvider = customDefaultValueProvider,
             };
 
             var mock = mockRepository.Create<IFoo>();

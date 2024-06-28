@@ -194,7 +194,7 @@ namespace System.Xml.Xsl.Xslt
                     QName(format.Name.Name, format.Name.Namespace),
                     String(format.InfinitySymbol),
                     String(format.NanSymbol),
-                    String(new string(format.Characters))
+                    String(new string(format.Characters)),
                 }
             );
         }
@@ -215,7 +215,7 @@ namespace System.Xml.Xsl.Xslt
                     formatPicture,
                     String(format.InfinitySymbol),
                     String(format.NanSymbol),
-                    String(new string(format.Characters))
+                    String(new string(format.Characters)),
                 }
             );
         }

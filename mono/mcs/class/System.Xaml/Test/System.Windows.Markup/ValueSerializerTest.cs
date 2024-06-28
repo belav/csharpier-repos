@@ -64,7 +64,7 @@ namespace MonoTests.System.Windows.Markup
             new StaticExtension(),
             TimeSpan.FromMinutes(5),
             new TypeExtension("TypeExt"),
-            new XData() { Text = "test xdata" }
+            new XData() { Text = "test xdata" },
         }; // can we instantiate MemberDefinition?
         string[] test_strings =
         {
@@ -84,7 +84,7 @@ namespace MonoTests.System.Windows.Markup
             "System.Windows.Markup.StaticExtension",
             "00:05:00",
             "System.Windows.Markup.TypeExtension",
-            "System.Windows.Markup.XData"
+            "System.Windows.Markup.XData",
         };
 
         [Test]
@@ -117,7 +117,7 @@ namespace MonoTests.System.Windows.Markup
             typeof(Reference),
             typeof(StaticExtension),
             typeof(TypeExtension),
-            typeof(XData)
+            typeof(XData),
         };
 
         [Test]

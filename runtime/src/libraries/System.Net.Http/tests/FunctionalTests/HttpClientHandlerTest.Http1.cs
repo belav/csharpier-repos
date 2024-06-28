@@ -27,7 +27,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url)
                         {
-                            Version = HttpVersion.Version11
+                            Version = HttpVersion.Version11,
                         };
                         request.Headers.Add("X-foo", "bar");
 

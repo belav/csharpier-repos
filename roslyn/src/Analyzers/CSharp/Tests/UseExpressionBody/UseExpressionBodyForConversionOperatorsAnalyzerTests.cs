@@ -31,8 +31,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
                         ExpressionBodyPreference.WhenPossible
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -47,8 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     {
                         CSharpCodeStyleOptions.PreferExpressionBodiedOperators,
                         ExpressionBodyPreference.Never
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 

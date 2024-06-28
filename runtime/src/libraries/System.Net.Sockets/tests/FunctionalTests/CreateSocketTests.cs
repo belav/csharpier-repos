@@ -192,22 +192,21 @@ namespace System.Net.Sockets.Tests
 
                                 // Accept the connection using one of multiple accept mechanisms.
                                 Socket server =
-                                    acceptApi == 0
-                                        ? listener.Accept()
-                                        : acceptApi == 1
-                                            ? listener.AcceptAsync().GetAwaiter().GetResult()
-                                            : acceptApi == 2
-                                                ? Task
-                                                    .Factory.FromAsync(
-                                                        listener.BeginAccept,
-                                                        listener.EndAccept,
-                                                        null
-                                                    )
-                                                    .GetAwaiter()
-                                                    .GetResult()
-                                                : throw new Exception(
-                                                    $"Unexpected {nameof(acceptApi)}: {acceptApi}"
-                                                );
+                                    acceptApi == 0 ? listener.Accept()
+                                    : acceptApi == 1
+                                        ? listener.AcceptAsync().GetAwaiter().GetResult()
+                                    : acceptApi == 2
+                                        ? Task
+                                            .Factory.FromAsync(
+                                                listener.BeginAccept,
+                                                listener.EndAccept,
+                                                null
+                                            )
+                                            .GetAwaiter()
+                                            .GetResult()
+                                    : throw new Exception(
+                                        $"Unexpected {nameof(acceptApi)}: {acceptApi}"
+                                    );
 
                                 // Get streams for the client and server, and create a pipe that we'll use
                                 // to communicate with a child process.

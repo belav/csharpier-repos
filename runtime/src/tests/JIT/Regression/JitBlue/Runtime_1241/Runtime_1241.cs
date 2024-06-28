@@ -77,7 +77,7 @@ namespace Runtime_1241
                 Vertices = Enumerable
                     .Range(1, 100)
                     .Select(i => new Vertex(new Vector3(i), Vector2.One))
-                    .ToArray()
+                    .ToArray(),
             };
         }
 

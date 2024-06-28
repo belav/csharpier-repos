@@ -25,7 +25,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 Type
             >[]
             {
-                new KeyValuePair<string, Type>("Foo", typeof(object))
+                new KeyValuePair<string, Type>("Foo", typeof(object)),
             };
             IDictionary<string, object> metadata = new Dictionary<string, object>();
             metadata["Key"] = "value";

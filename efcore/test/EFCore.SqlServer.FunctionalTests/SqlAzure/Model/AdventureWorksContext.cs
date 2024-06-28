@@ -20,7 +20,7 @@ public class AdventureWorksContext : PoolableDbContext
                     e.City,
                     e.StateProvince,
                     e.PostalCode,
-                    e.CountryRegion
+                    e.CountryRegion,
                 },
                 "IX_Address_AddressLine1_AddressLine2_City_StateProvince_PostalCode_CountryRegion"
             );
@@ -148,7 +148,7 @@ public class AdventureWorksContext : PoolableDbContext
                 {
                     e.ProductModelID,
                     e.ProductDescriptionID,
-                    e.Culture
+                    e.Culture,
                 })
                 .HasName(
                     "PK_ProductModelProductDescription_ProductModelID_ProductDescriptionID_Culture"

@@ -44,7 +44,7 @@ public class KnownRouteValueConstraintTests
             { "area", "testArea" },
             { "controller", "testController" },
             { "action", "testAction" },
-            { "randomKey", "testRandom" }
+            { "randomKey", "testRandom" },
         };
 
         // Act
@@ -113,7 +113,7 @@ public class KnownRouteValueConstraintTests
             { "area", "testArea" },
             { "controller", "testController" },
             { "action", "testAction" },
-            { "randomKey", "testRandom" }
+            { "randomKey", "testRandom" },
         };
         var constraint = new KnownRouteValueConstraint(descriptorCollectionProvider);
 
@@ -149,7 +149,7 @@ public class KnownRouteValueConstraintTests
             { "area", "invalidTestArea" },
             { "controller", "invalidTestController" },
             { "action", "invalidTestAction" },
-            { "randomKey", "invalidTestRandom" }
+            { "randomKey", "invalidTestRandom" },
         };
 
         var constraint = new KnownRouteValueConstraint(descriptorCollectionProvider);
@@ -173,7 +173,7 @@ public class KnownRouteValueConstraintTests
 
         var httpContext = GetHttpContext();
         var route = Mock.Of<IRouter>();
-        var values = new RouteValueDictionary() { { "area", 12 }, };
+        var values = new RouteValueDictionary() { { "area", 12 } };
         var constraint = new KnownRouteValueConstraint(descriptorCollectionProvider);
 
         // Act
@@ -237,7 +237,7 @@ public class KnownRouteValueConstraintTests
             { "area", "testArea" },
             { "controller", "testController" },
             { "action", "testAction" },
-            { "randomKey", "testRandom" }
+            { "randomKey", "testRandom" },
         };
 
         // Act

@@ -31,7 +31,7 @@ namespace System.Runtime.CompilerServices
         /// <summary>
         /// Provide access to a static field.
         /// </summary>
-        StaticField
+        StaticField,
     };
 
     /// <summary>

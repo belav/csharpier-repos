@@ -66,7 +66,9 @@ namespace System.Globalization
         TAIWANLUNISOLAR = 21,
         PERSIAN = 22,
         UMALQURA = 23,
-        LAST_CALENDAR = 23 // Last calendar ID
+        LAST_CALENDAR =
+            23 // Last calendar ID
+        ,
     }
 
     internal sealed class DateTimeFormatInfoScanner

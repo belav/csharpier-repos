@@ -20,7 +20,9 @@ namespace System.Linq.Expressions
             Space,
             NewLine,
 
-            Break = 0x8000 // newline if column > MaxColumn
+            Break =
+                0x8000 // newline if column > MaxColumn
+            ,
         };
 
         private const int Tab = 4;

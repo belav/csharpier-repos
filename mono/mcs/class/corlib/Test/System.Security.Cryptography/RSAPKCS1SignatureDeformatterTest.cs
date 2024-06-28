@@ -147,7 +147,7 @@ namespace MonoTests.System.Security.Cryptography
             0x8D,
             0x45,
             0xC4,
-            0xF3
+            0xF3,
         };
         private static byte[] md5Signature =
         {
@@ -278,7 +278,7 @@ namespace MonoTests.System.Security.Cryptography
             0x6A,
             0x66,
             0xDC,
-            0x44
+            0x44,
         };
 
         private static RSA rsa;
@@ -735,7 +735,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x23,
                 0x95,
                 0xB5,
-                0xBD
+                0xBD,
             };
             Assert.IsTrue(fmt.VerifySignature(hash, shaSignature), "VerifySignature(SHA1, sign)");
             // bad signature
@@ -918,7 +918,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x51,
                 0x2B,
                 0x83,
-                0xDD
+                0xDD,
             };
             Assert.IsTrue(fmt.VerifySignature(hash, signature), "VerifySignature(MD5, sign)");
         }

@@ -5,7 +5,7 @@ public class Testing
     public enum Fruit
     {
         Apple,
-        Orange
+        Orange,
     };
 
     public static void Main()

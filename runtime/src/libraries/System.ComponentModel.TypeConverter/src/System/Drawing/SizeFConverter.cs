@@ -88,7 +88,7 @@ namespace System.Drawing
                     var args = new string?[]
                     {
                         floatConverter.ConvertToString(context, culture, size.Width),
-                        floatConverter.ConvertToString(context, culture, size.Height)
+                        floatConverter.ConvertToString(context, culture, size.Height),
                     };
                     return string.Join(sep, args);
                 }

@@ -85,7 +85,7 @@ namespace Microsoft.Extensions.Caching.Memory
                     {
                         TrackStatistics = true,
                         Clock = new SystemClock(),
-                        SizeLimit = 10
+                        SizeLimit = 10,
                     }
                     : new MemoryCacheOptions { TrackStatistics = true, Clock = new SystemClock() }
             );

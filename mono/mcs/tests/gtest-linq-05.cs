@@ -73,7 +73,7 @@ class OrderByTests
             new Data { ID = 10, Name = "bcd" },
             new Data { ID = 20, Name = "Abcd" },
             new Data { ID = 20, Name = "Ab" },
-            new Data { ID = 10, Name = "Zyx" }
+            new Data { ID = 10, Name = "Zyx" },
         };
 
         var de = from i in data orderby i.ID ascending, i.Name descending select i;

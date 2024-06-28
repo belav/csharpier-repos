@@ -30,7 +30,7 @@ namespace System.Net.Http
             {
                 1 => _http11RequestsQueueDurationCounter,
                 2 => _http20RequestsQueueDurationCounter,
-                _ => _http30RequestsQueueDurationCounter
+                _ => _http30RequestsQueueDurationCounter,
             };
 
             double timeOnQueueMs = duration.TotalMilliseconds;
@@ -69,7 +69,7 @@ namespace System.Net.Http
                 )
                 {
                     DisplayName = "Requests Started Rate",
-                    DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                    DisplayRateTimeScale = TimeSpan.FromSeconds(1),
                 };
 
                 // The cumulative number of HTTP requests failed since the process started.
@@ -82,7 +82,7 @@ namespace System.Net.Http
                     () => Interlocked.Read(ref _failedRequests)
                 )
                 {
-                    DisplayName = "Requests Failed"
+                    DisplayName = "Requests Failed",
                 };
 
                 // The number of HTTP requests failed per second since the process started.
@@ -93,7 +93,7 @@ namespace System.Net.Http
                 )
                 {
                     DisplayName = "Requests Failed Rate",
-                    DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                    DisplayRateTimeScale = TimeSpan.FromSeconds(1),
                 };
 
                 // The current number of active HTTP requests that have started but not yet completed or failed.
@@ -107,7 +107,7 @@ namespace System.Net.Http
                         + Interlocked.Read(ref _startedRequests)
                 )
                 {
-                    DisplayName = "Current Requests"
+                    DisplayName = "Current Requests",
                 };
 
                 _totalHttp11ConnectionsCounter ??= new PollingCounter(
@@ -116,7 +116,7 @@ namespace System.Net.Http
                     () => Interlocked.Read(ref _openedHttp11Connections)
                 )
                 {
-                    DisplayName = "Current Http 1.1 Connections"
+                    DisplayName = "Current Http 1.1 Connections",
                 };
 
                 _totalHttp20ConnectionsCounter ??= new PollingCounter(
@@ -125,7 +125,7 @@ namespace System.Net.Http
                     () => Interlocked.Read(ref _openedHttp20Connections)
                 )
                 {
-                    DisplayName = "Current Http 2.0 Connections"
+                    DisplayName = "Current Http 2.0 Connections",
                 };
 
                 _totalHttp30ConnectionsCounter ??= new PollingCounter(
@@ -134,7 +134,7 @@ namespace System.Net.Http
                     () => Interlocked.Read(ref _openedHttp30Connections)
                 )
                 {
-                    DisplayName = "Current Http 3.0 Connections"
+                    DisplayName = "Current Http 3.0 Connections",
                 };
 
                 _http11RequestsQueueDurationCounter ??= new EventCounter(
@@ -143,7 +143,7 @@ namespace System.Net.Http
                 )
                 {
                     DisplayName = "HTTP 1.1 Requests Queue Duration",
-                    DisplayUnits = "ms"
+                    DisplayUnits = "ms",
                 };
 
                 _http20RequestsQueueDurationCounter ??= new EventCounter(
@@ -152,7 +152,7 @@ namespace System.Net.Http
                 )
                 {
                     DisplayName = "HTTP 2.0 Requests Queue Duration",
-                    DisplayUnits = "ms"
+                    DisplayUnits = "ms",
                 };
 
                 _http30RequestsQueueDurationCounter ??= new EventCounter(
@@ -161,7 +161,7 @@ namespace System.Net.Http
                 )
                 {
                     DisplayName = "HTTP 3.0 Requests Queue Duration",
-                    DisplayUnits = "ms"
+                    DisplayUnits = "ms",
                 };
             }
         }

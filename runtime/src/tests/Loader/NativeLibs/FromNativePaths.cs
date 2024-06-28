@@ -19,7 +19,7 @@ public class FromNativePaths
         ".so",
         ".dylib",
         ".a",
-        ".sl"
+        ".sl",
     };
 
     [DllImport(NativeLibraryNameWithoutExtension)]

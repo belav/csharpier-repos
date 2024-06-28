@@ -31,7 +31,7 @@ public class MainClass
         testCase = new TestCase
         {
             MethodSpec = "*:Method (int)",
-            ExpectedMethods = new[] { "N2.Test:Method (int)", },
+            ExpectedMethods = new[] { "N2.Test:Method (int)" },
         };
         if (!RunTest(testCase))
             return 2;
@@ -39,7 +39,7 @@ public class MainClass
         testCase = new TestCase
         {
             MethodSpec = "N1.Test:Method",
-            ExpectedMethods = new[] { "N1.Test:Method ()", },
+            ExpectedMethods = new[] { "N1.Test:Method ()" },
         };
         if (!RunTest(testCase))
             return 3;
@@ -61,7 +61,7 @@ public class MainClass
         testCase = new TestCase
         {
             MethodSpec = "*:Method(int,string[])",
-            ExpectedMethods = new[] { "N2.Test:Method (int,string[])", },
+            ExpectedMethods = new[] { "N2.Test:Method (int,string[])" },
         };
         if (!RunTest(testCase))
             return 5;

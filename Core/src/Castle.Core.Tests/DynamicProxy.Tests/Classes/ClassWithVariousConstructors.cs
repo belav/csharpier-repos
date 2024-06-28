@@ -62,6 +62,6 @@ namespace Castle.DynamicProxy.Tests.Classes
         Default,
         ArrayAndSingleString,
         ArrayOfObjectsAndSingleString,
-        TwoStrings
+        TwoStrings,
     }
 }

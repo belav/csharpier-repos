@@ -39,13 +39,13 @@ namespace System.Security.Cryptography
     internal enum CspAlgorithmType
     {
         Rsa = 0,
-        Dss = 1
+        Dss = 1,
     }
 #elif SILVERLIGHT
     internal enum CspAlgorithmType
     {
         Rsa = 0,
-        Dss = 1
+        Dss = 1,
     }
 #endif
 

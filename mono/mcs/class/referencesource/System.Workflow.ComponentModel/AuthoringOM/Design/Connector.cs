@@ -1341,7 +1341,7 @@ namespace System.Workflow.ComponentModel.Design
                                 EditPoint.EditPointTypes.MultiSegmentEditPoint,
                                 editPointLocation
                             ),
-                            previous
+                            previous,
                         }
                     );
                 }
@@ -1390,7 +1390,7 @@ namespace System.Workflow.ComponentModel.Design
                                 this,
                                 EditPoint.EditPointTypes.MultiSegmentEditPoint,
                                 editPointLocation
-                            )
+                            ),
                         }
                     );
                 }
@@ -1567,7 +1567,7 @@ namespace System.Workflow.ComponentModel.Design
                             new Point[]
                             {
                                 this.editPoints[i].Location,
-                                this.editPoints[i + 1].Location
+                                this.editPoints[i + 1].Location,
                             }
                         ) > minLengthForSegmentEditPoint
                     )
@@ -1842,7 +1842,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 ConnectionEditPoint = 1,
                 MultiSegmentEditPoint,
-                MidSegmentEditPoint
+                MidSegmentEditPoint,
             };
 
             private ConnectorEditor owner;
@@ -2158,7 +2158,7 @@ namespace System.Workflow.ComponentModel.Design
                 new Point[]
                 {
                     new Point(bounds.Left, bounds.Top),
-                    new Point(bounds.Left, bounds.Bottom)
+                    new Point(bounds.Left, bounds.Bottom),
                 }
             );
             designerEdgeCover.Add(
@@ -2166,7 +2166,7 @@ namespace System.Workflow.ComponentModel.Design
                 new Point[]
                 {
                     new Point(bounds.Left, bounds.Top),
-                    new Point(bounds.Right, bounds.Top)
+                    new Point(bounds.Right, bounds.Top),
                 }
             );
             designerEdgeCover.Add(
@@ -2174,7 +2174,7 @@ namespace System.Workflow.ComponentModel.Design
                 new Point[]
                 {
                     new Point(bounds.Right, bounds.Top),
-                    new Point(bounds.Right, bounds.Bottom)
+                    new Point(bounds.Right, bounds.Bottom),
                 }
             );
             designerEdgeCover.Add(
@@ -2182,7 +2182,7 @@ namespace System.Workflow.ComponentModel.Design
                 new Point[]
                 {
                     new Point(bounds.Left, bounds.Bottom),
-                    new Point(bounds.Right, bounds.Bottom)
+                    new Point(bounds.Right, bounds.Bottom),
                 }
             );
 

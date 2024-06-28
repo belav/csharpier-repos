@@ -9,7 +9,7 @@ namespace System.Security.Authentication.ExtendedProtection
     public enum TokenBindingType
     {
         Provided = 0,
-        Referred = 1
+        Referred = 1,
     };
 
     public class TokenBinding

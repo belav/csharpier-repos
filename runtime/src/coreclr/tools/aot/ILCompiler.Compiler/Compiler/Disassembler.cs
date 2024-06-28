@@ -76,7 +76,7 @@ namespace ILCompiler
                 Target_X86 = 1,
                 Target_X64,
                 Target_Thumb,
-                Target_Arm64
+                Target_Arm64,
             };
 
             [DllImport(Library)]
@@ -91,7 +91,7 @@ namespace ILCompiler
                         TargetArchitecture.X64 => TargetArch.Target_X64,
                         TargetArchitecture.ARM => TargetArch.Target_Thumb,
                         TargetArchitecture.ARM64 => TargetArch.Target_Arm64,
-                        _ => throw new NotSupportedException()
+                        _ => throw new NotSupportedException(),
                     }
                 );
 

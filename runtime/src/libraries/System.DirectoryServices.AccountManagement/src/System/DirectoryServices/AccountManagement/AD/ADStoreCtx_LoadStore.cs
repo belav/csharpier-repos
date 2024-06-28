@@ -755,7 +755,7 @@ namespace System.DirectoryServices.AccountManagement
                         UrnScheme.DistinguishedNameScheme,
                         UrnScheme.SidScheme,
                         UrnScheme.GuidScheme,
-                        UrnScheme.NameScheme
+                        UrnScheme.NameScheme,
                     };
 
                     StringBuilder innerLdapFilter = new StringBuilder();
@@ -862,236 +862,236 @@ namespace System.DirectoryServices.AccountManagement
                 PropertyNames.PrincipalDisplayName,
                 "displayname",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PrincipalDescription,
                 "description",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PrincipalDistinguishedName,
                 "distinguishedname",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PrincipalSid,
                 "objectsid",
                 new FromLdapConverterDelegate(SidFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.PrincipalSamAccountName,
                 "samaccountname",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PrincipalUserPrincipalName,
                 "userprincipalname",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PrincipalGuid,
                 "objectguid",
                 new FromLdapConverterDelegate(GuidFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.PrincipalStructuralObjectClass,
                 "objectclass",
                 new FromLdapConverterDelegate(ObjectClassFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.PrincipalName,
                 "name",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PrincipalExtensionCache,
                 null,
                 null,
-                new ToLdapConverterDelegate(ExtensionCacheToLdapConverter)
+                new ToLdapConverterDelegate(ExtensionCacheToLdapConverter),
             },
             {
                 PropertyNames.AuthenticablePrincipalEnabled,
                 "useraccountcontrol",
                 new FromLdapConverterDelegate(UACFromLdapConverter),
-                new ToLdapConverterDelegate(UACToLdapConverter)
+                new ToLdapConverterDelegate(UACToLdapConverter),
             },
             {
                 PropertyNames.AuthenticablePrincipalCertificates,
                 "usercertificate",
                 new FromLdapConverterDelegate(CertFromLdapConverter),
-                new ToLdapConverterDelegate(CertToLdap)
+                new ToLdapConverterDelegate(CertToLdap),
             },
             {
                 PropertyNames.GroupIsSecurityGroup,
                 "grouptype",
                 new FromLdapConverterDelegate(GroupTypeFromLdapConverter),
-                new ToLdapConverterDelegate(GroupTypeToLdapConverter)
+                new ToLdapConverterDelegate(GroupTypeToLdapConverter),
             },
             {
                 PropertyNames.GroupGroupScope,
                 "grouptype",
                 new FromLdapConverterDelegate(GroupTypeFromLdapConverter),
-                new ToLdapConverterDelegate(GroupTypeToLdapConverter)
+                new ToLdapConverterDelegate(GroupTypeToLdapConverter),
             },
             {
                 PropertyNames.UserGivenName,
                 "givenname",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.UserMiddleName,
                 "middlename",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.UserSurname,
                 "sn",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.UserEmailAddress,
                 "mail",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.UserVoiceTelephoneNumber,
                 "telephonenumber",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.UserEmployeeID,
                 "employeeid",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.ComputerServicePrincipalNames,
                 "serviceprincipalname",
                 new FromLdapConverterDelegate(MultiStringFromLdapConverter),
-                new ToLdapConverterDelegate(MultiStringToLdapConverter)
+                new ToLdapConverterDelegate(MultiStringToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoAcctLockoutTime,
                 "lockouttime",
                 new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.AcctInfoLastLogon,
                 "lastlogon",
                 new FromLdapConverterDelegate(LastLogonFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.AcctInfoLastLogon,
                 "lastlogontimestamp",
                 new FromLdapConverterDelegate(LastLogonFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.AcctInfoPermittedWorkstations,
                 "userworkstations",
                 new FromLdapConverterDelegate(CommaStringFromLdapConverter),
-                new ToLdapConverterDelegate(CommaStringToLdapConverter)
+                new ToLdapConverterDelegate(CommaStringToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoPermittedLogonTimes,
                 "logonhours",
                 new FromLdapConverterDelegate(BinaryFromLdapConverter),
-                new ToLdapConverterDelegate(BinaryToLdapConverter)
+                new ToLdapConverterDelegate(BinaryToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoExpirationDate,
                 "accountexpires",
                 new FromLdapConverterDelegate(AcctExpirFromLdapConverter),
-                new ToLdapConverterDelegate(AcctExpirToLdapConverter)
+                new ToLdapConverterDelegate(AcctExpirToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoSmartcardRequired,
                 "useraccountcontrol",
                 new FromLdapConverterDelegate(UACFromLdapConverter),
-                new ToLdapConverterDelegate(UACToLdapConverter)
+                new ToLdapConverterDelegate(UACToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoDelegationPermitted,
                 "useraccountcontrol",
                 new FromLdapConverterDelegate(UACFromLdapConverter),
-                new ToLdapConverterDelegate(UACToLdapConverter)
+                new ToLdapConverterDelegate(UACToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoBadLogonCount,
                 "badpwdcount",
                 new FromLdapConverterDelegate(IntFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.AcctInfoHomeDirectory,
                 "homedirectory",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoHomeDrive,
                 "homedrive",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.AcctInfoScriptPath,
                 "scriptpath",
                 new FromLdapConverterDelegate(StringFromLdapConverter),
-                new ToLdapConverterDelegate(StringToLdapConverter)
+                new ToLdapConverterDelegate(StringToLdapConverter),
             },
             {
                 PropertyNames.PwdInfoLastPasswordSet,
                 "pwdlastset",
                 new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.PwdInfoLastBadPasswordAttempt,
                 "badpasswordtime",
                 new FromLdapConverterDelegate(GenericDateTimeFromLdapConverter),
-                null
+                null,
             },
             {
                 PropertyNames.PwdInfoPasswordNotRequired,
                 "useraccountcontrol",
                 new FromLdapConverterDelegate(UACFromLdapConverter),
-                new ToLdapConverterDelegate(UACToLdapConverter)
+                new ToLdapConverterDelegate(UACToLdapConverter),
             },
             {
                 PropertyNames.PwdInfoPasswordNeverExpires,
                 "useraccountcontrol",
                 new FromLdapConverterDelegate(UACFromLdapConverter),
-                new ToLdapConverterDelegate(UACToLdapConverter)
+                new ToLdapConverterDelegate(UACToLdapConverter),
             },
             {
                 PropertyNames.PwdInfoCannotChangePassword,
                 null,
                 null,
-                new ToLdapConverterDelegate(CannotChangePwdToLdapConverter)
+                new ToLdapConverterDelegate(CannotChangePwdToLdapConverter),
             },
             {
                 PropertyNames.PwdInfoAllowReversiblePasswordEncryption,
                 "useraccountcontrol",
                 new FromLdapConverterDelegate(UACFromLdapConverter),
-                new ToLdapConverterDelegate(UACToLdapConverter)
-            }
+                new ToLdapConverterDelegate(UACToLdapConverter),
+            },
         };
 
         /*/

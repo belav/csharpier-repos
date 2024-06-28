@@ -81,7 +81,7 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
                 Namespace = call.Namespace,
                 DeclaringType = call.DeclaringType,
                 Arguments = call.Arguments.ToList(),
-                ChainedCall = From(call.ChainedCall)
+                ChainedCall = From(call.ChainedCall),
             };
 
     /// <summary>
@@ -154,7 +154,7 @@ public class FluentApiCodeFragment : IMethodCallCodeFragment
                     DeclaringType = currentLink.DeclaringType,
                     TypeArguments = currentLink.TypeArguments,
                     Arguments = currentLink.Arguments,
-                    IsHandledByDataAnnotations = currentLink.IsHandledByDataAnnotations
+                    IsHandledByDataAnnotations = currentLink.IsHandledByDataAnnotations,
                 };
                 newRoot = newRoot?.Chain(unchained) ?? unchained;
             }

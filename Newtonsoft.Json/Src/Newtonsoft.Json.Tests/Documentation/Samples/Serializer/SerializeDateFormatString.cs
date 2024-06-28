@@ -48,7 +48,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 new DateTime(2009, 12, 7, 23, 10, 0, DateTimeKind.Utc),
                 new DateTime(2010, 1, 1, 9, 0, 0, DateTimeKind.Utc),
-                new DateTime(2010, 2, 10, 10, 0, 0, DateTimeKind.Utc)
+                new DateTime(2010, 2, 10, 10, 0, 0, DateTimeKind.Utc),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -56,7 +56,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 new JsonSerializerSettings
                 {
                     DateFormatString = "d MMMM, yyyy",
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 

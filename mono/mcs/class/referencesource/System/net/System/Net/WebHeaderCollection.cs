@@ -84,7 +84,7 @@ namespace System.Net
             HttpKnownHeaderNames.WWWAuthenticate, // "WWW-Authenticate"    16
             HttpKnownHeaderNames.XAspNetVersion, // "X-AspNet-Version"    16
             HttpKnownHeaderNames.XPoweredBy, // "X-Powered-By"        12
-            "["
+            "[",
         }; // This sentinel will never match.  (This character isn't in the hint table.)
 
         // Mask off all but the bottom five bits, and look up in this array.
@@ -121,7 +121,7 @@ namespace System.Net
             -1,
             -1,
             -1,
-            -1
+            -1,
         }; // x y z [ - - - -
 
         private const int c_AcceptRanges = 0;
@@ -667,7 +667,7 @@ namespace System.Net
             (char)0xB,
             (char)0xC,
             (char)0xD,
-            (char)0x20
+            (char)0x20,
         };
 
         //
@@ -2018,7 +2018,7 @@ namespace System.Net
             LF,
             WS,
             Colon,
-            Delim
+            Delim,
         }
 
         private static RfcChar[] RfcCharMap = new RfcChar[128]
@@ -2912,7 +2912,7 @@ namespace System.Net
             252,
             253,
             254,
-            255
+            255,
         };
 
         // ASCII string case insensitive hash function

@@ -31,6 +31,6 @@ namespace Mono.Btls.Interface
     public enum BtlsX509Format
     {
         DER = 1,
-        PEM = 2
+        PEM = 2,
     }
 }

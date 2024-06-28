@@ -61,7 +61,7 @@ namespace MonoTests.Mono.Math
                     0x592a0f82,
                     0x2b54b60b,
                     0xbb67f3c2,
-                    0x64313461
+                    0x64313461,
                 };
             }
         }
@@ -103,7 +103,7 @@ namespace MonoTests.Mono.Math
                     0x34ed466b,
                     0x11e49879,
                     0x8eb7ebf5,
-                    0x98b53108
+                    0x98b53108,
                 };
             }
         }
@@ -145,7 +145,7 @@ namespace MonoTests.Mono.Math
                     0x4335234a,
                     0x2556ba2c,
                     0x94cc2109,
-                    0x046645c1
+                    0x046645c1,
                 };
             }
         }
@@ -166,7 +166,7 @@ namespace MonoTests.Mono.Math
                     0xf7f96af1,
                     0x8339780b,
                     0x22268620,
-                    0x382c75a4
+                    0x382c75a4,
                 };
             }
         }
@@ -208,7 +208,7 @@ namespace MonoTests.Mono.Math
                     0xe347ae90,
                     0xf2eb1176,
                     0x5459c63b,
-                    0x8f3b0f75
+                    0x8f3b0f75,
                 };
             }
         }
@@ -250,7 +250,7 @@ namespace MonoTests.Mono.Math
                     0xf867ec36,
                     0xd3659a2a,
                     0xf23ec3a5,
-                    0x04349da9
+                    0x04349da9,
                 };
             }
         }
@@ -271,7 +271,7 @@ namespace MonoTests.Mono.Math
                     0x030232ee,
                     0xd1cb7f22,
                     0xfbfe74df,
-                    0xabadc589
+                    0xabadc589,
                 };
             }
         }
@@ -297,7 +297,7 @@ namespace MonoTests.Mono.Math
                     0x71d4dd69,
                     0x07a642d9,
                     0x8eae29d0,
-                    0xcbd278b4
+                    0xcbd278b4,
                 };
             }
         }
@@ -323,7 +323,7 @@ namespace MonoTests.Mono.Math
                     0xcd6a849d,
                     0x029c9a79,
                     0xb82d5da2,
-                    0x87af9e81
+                    0x87af9e81,
                 };
             }
         }
@@ -368,7 +368,7 @@ namespace MonoTests.Mono.Math
                     0xe22e8cda,
                     0xcaa72806,
                     0xf649f663,
-                    0xefee082d
+                    0xefee082d,
                 };
             }
         }
@@ -428,7 +428,7 @@ namespace MonoTests.Mono.Math
                     0xabc64408,
                     0x94d0c8ac,
                     0x2a31e00b,
-                    0xd4d28ab0
+                    0xd4d28ab0,
                 };
             }
         }
@@ -470,7 +470,7 @@ namespace MonoTests.Mono.Math
                     0x5638366d,
                     0x43da3a23,
                     0x54f4b33c,
-                    0xaa42088d
+                    0xaa42088d,
                 };
             }
         }

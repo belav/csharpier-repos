@@ -40,6 +40,6 @@ namespace System.ComponentModel
         ///     A designer and component class must both have the filter string, and neither may have a filter
         ///     type of Prevent.
         /// </devdoc>
-        Require
+        Require,
     }
 }

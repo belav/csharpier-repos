@@ -40,7 +40,7 @@ namespace System.Web
     internal enum CookieFlags : byte
     {
         Secure = 1,
-        HttpOnly = 2
+        HttpOnly = 2,
     }
 
     // CAS - no InheritanceDemand here as the class is sealed

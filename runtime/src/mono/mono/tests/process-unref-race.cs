@@ -30,7 +30,7 @@ class Driver
                 FileName = "echo",
                 Arguments = "hello",
                 RedirectStandardOutput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             };
 
             Parallel.ForEach(

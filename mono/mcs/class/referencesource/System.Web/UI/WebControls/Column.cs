@@ -455,7 +455,7 @@ namespace System.Web.UI.WebControls
                     propState,
                     itemStyleState,
                     headerStyleState,
-                    footerStyleState
+                    footerStyleState,
                 };
             }
 

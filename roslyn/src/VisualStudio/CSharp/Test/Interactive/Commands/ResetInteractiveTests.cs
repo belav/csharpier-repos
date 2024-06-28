@@ -76,7 +76,7 @@ namespace ResetInteractiveTestsDocument
             var expectedUsings = new List<string>
             {
                 @"using ""System"";",
-                @"using ""ResetInteractiveTestsDocument"";"
+                @"using ""ResetInteractiveTestsDocument"";",
             };
             await AssertResetInteractiveAsync(
                 workspace,

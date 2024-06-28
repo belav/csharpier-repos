@@ -12,7 +12,7 @@ public class RandomMembersTests
     [Fact]
     public void Invalid()
     {
-        var firstModel = new FirstModel { P1 = "1234", };
+        var firstModel = new FirstModel { P1 = "1234" };
 
         var validator = new FirstValidator();
         var vr = validator.Validate("RandomMembers", firstModel);
@@ -23,7 +23,7 @@ public class RandomMembersTests
     [Fact]
     public void Valid()
     {
-        var firstModel = new FirstModel { P1 = "12345", };
+        var firstModel = new FirstModel { P1 = "12345" };
 
         var validator = new FirstValidator();
         Assert.Equal(

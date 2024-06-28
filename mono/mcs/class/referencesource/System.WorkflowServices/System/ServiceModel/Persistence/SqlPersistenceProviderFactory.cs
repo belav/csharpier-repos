@@ -657,7 +657,7 @@ namespace System.ServiceModel.Persistence
                     Dictionary<string, string> openParameters = new Dictionary<string, string>(2)
                     {
                         { "IsLocking", this.IsLockingTurnedOn ? "True" : "False" },
-                        { "LockTimeout", this.lockTimeout.ToString() }
+                        { "LockTimeout", this.lockTimeout.ToString() },
                     };
 
                     TraceRecord record = new DictionaryTraceRecord(openParameters);

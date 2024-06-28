@@ -12,6 +12,6 @@ namespace System.Xml.Schema
         None,
         DTD,
         XDR,
-        XSD
+        XSD,
     }
 }

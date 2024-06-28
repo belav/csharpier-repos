@@ -67,7 +67,7 @@ namespace TestWindowsOsShimsApp
             VER_LESS = 4,
             VER_LESS_EQUAL = 5,
             VER_AND = 6,
-            VER_OR = 7
+            VER_OR = 7,
         }
 
         [Flags]
@@ -80,7 +80,7 @@ namespace TestWindowsOsShimsApp
             VER_SERVICEPACKMINOR = 0x0000010,
             VER_SERVICEPACKMAJOR = 0x0000020,
             VER_SUITENAME = 0x0000040,
-            VER_PRODUCT_TYPE = 0x0000080
+            VER_PRODUCT_TYPE = 0x0000080,
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -138,7 +138,7 @@ namespace TestWindowsOsShimsApp
             {
                 dwOSVersionInfoSize = (uint)Marshal.SizeOf<OSVERSIONINFOEX>(),
                 dwMajorVersion = (uint)osVersion.Major,
-                dwMinorVersion = (uint)osVersion.Minor
+                dwMinorVersion = (uint)osVersion.Minor,
             };
 
             var conditionMask = 0uL;

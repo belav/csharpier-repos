@@ -91,7 +91,7 @@ namespace System
         Parameter = 0x800,
         Property = 0x80,
         ReturnValue = 0x2000,
-        Struct = 8
+        Struct = 8,
     }
 }
 

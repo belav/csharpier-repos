@@ -88,7 +88,7 @@ namespace Microsoft.Interop
                             type,
                             TypeNames.Utf8StringMarshaller
                         ),
-                    _ => throw new InvalidOperationException()
+                    _ => throw new InvalidOperationException(),
                 };
             }
 

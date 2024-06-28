@@ -146,7 +146,7 @@ namespace System.Reflection.Runtime.General
             '+',
             '*',
             '&',
-            ','
+            ',',
         };
 
         [UnconditionalSuppressMessage(

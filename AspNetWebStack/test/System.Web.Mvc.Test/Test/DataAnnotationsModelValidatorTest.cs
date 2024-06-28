@@ -83,7 +83,7 @@ namespace System.Web.Mvc.Test
                             typeof(SampleModel)
                         ),
                         "SampleModel"
-                    }
+                    },
                 };
             }
         }

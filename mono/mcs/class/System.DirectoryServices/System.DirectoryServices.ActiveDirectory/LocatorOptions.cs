@@ -30,6 +30,6 @@ namespace System.DirectoryServices.ActiveDirectory
         KdcRequired = 1024L,
         TimeServerRequired = 2048L,
         WriteableRequired = 4096L,
-        AvoidSelf = 16384L
+        AvoidSelf = 16384L,
     }
 }

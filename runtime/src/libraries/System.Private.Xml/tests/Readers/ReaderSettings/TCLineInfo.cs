@@ -17,7 +17,7 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(
                     new CVariation(ln02)
                     {
-                        Attribute = new Variation("Line Number Offset negative values") { Pri = 1 }
+                        Attribute = new Variation("Line Number Offset negative values") { Pri = 1 },
                     }
                 );
             }
@@ -29,8 +29,8 @@ namespace System.Xml.ReaderSettingsTests
                     {
                         Attribute = new Variation("Line Position Offset negative values")
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }

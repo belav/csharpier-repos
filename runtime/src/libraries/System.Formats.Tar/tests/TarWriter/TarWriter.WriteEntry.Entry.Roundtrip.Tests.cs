@@ -18,7 +18,7 @@ namespace System.Formats.Tar.Tests
                     TarEntryType entryType in new[]
                     {
                         TarEntryType.RegularFile,
-                        TarEntryType.Directory
+                        TarEntryType.Directory,
                     }
                 )
                 {
@@ -36,7 +36,7 @@ namespace System.Formats.Tar.Tests
                             TarEntryFormat.V7,
                             v7EntryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                     }
 
@@ -50,7 +50,7 @@ namespace System.Formats.Tar.Tests
                             TarEntryFormat.Ustar,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                     }
 
@@ -64,14 +64,14 @@ namespace System.Formats.Tar.Tests
                             TarEntryFormat.Pax,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                         yield return new object[]
                         {
                             TarEntryFormat.Gnu,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                     }
                 }
@@ -116,7 +116,7 @@ namespace System.Formats.Tar.Tests
                     TarEntryType entryType in new[]
                     {
                         TarEntryType.SymbolicLink,
-                        TarEntryType.HardLink
+                        TarEntryType.HardLink,
                     }
                 )
                 {
@@ -130,14 +130,14 @@ namespace System.Formats.Tar.Tests
                             TarEntryFormat.V7,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                         yield return new object[]
                         {
                             TarEntryFormat.Ustar,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                     }
 
@@ -151,14 +151,14 @@ namespace System.Formats.Tar.Tests
                             TarEntryFormat.Pax,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                         yield return new object[]
                         {
                             TarEntryFormat.Gnu,
                             entryType,
                             unseekableStream,
-                            name
+                            name,
                         };
                     }
                 }
@@ -206,7 +206,7 @@ namespace System.Formats.Tar.Tests
                     {
                         TarEntryFormat.Ustar,
                         TarEntryFormat.Pax,
-                        TarEntryFormat.Gnu
+                        TarEntryFormat.Gnu,
                     }
                 )
                 {
@@ -214,19 +214,19 @@ namespace System.Formats.Tar.Tests
                     {
                         entryFormat,
                         unseekableStream,
-                        Repeat(OneByteCharacter, 32)
+                        Repeat(OneByteCharacter, 32),
                     };
                     yield return new object[]
                     {
                         entryFormat,
                         unseekableStream,
-                        Repeat(TwoBytesCharacter, 32 / 2)
+                        Repeat(TwoBytesCharacter, 32 / 2),
                     };
                     yield return new object[]
                     {
                         entryFormat,
                         unseekableStream,
-                        Repeat(FourBytesCharacter, 32 / 4)
+                        Repeat(FourBytesCharacter, 32 / 4),
                     };
                 }
             }

@@ -68,7 +68,7 @@ namespace System.Web.Http
             HttpResponseMessage[] responses = new HttpResponseMessage[]
             {
                 new HttpResponseMessage(HttpStatusCode.OK),
-                new HttpResponseMessage(HttpStatusCode.BadRequest)
+                new HttpResponseMessage(HttpStatusCode.BadRequest),
             };
 
             HttpResponseMessage response = await batchHandler.CreateResponseMessageAsync(
@@ -110,7 +110,7 @@ namespace System.Web.Http
                 expectedResourcesForDisposal.Add(tmpContent);
                 return new HttpResponseMessage
                 {
-                    Content = new StringContent(request.RequestUri.AbsoluteUri)
+                    Content = new StringContent(request.RequestUri.AbsoluteUri),
                 };
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
@@ -123,8 +123,8 @@ namespace System.Web.Http
                     ),
                     new HttpMessageContent(
                         new HttpRequestMessage(HttpMethod.Post, "http://example.org/")
-                    )
-                }
+                    ),
+                },
             };
 
             var response = await batchHandler.ProcessBatchAsync(
@@ -169,14 +169,14 @@ namespace System.Web.Http
             {
                 return new HttpResponseMessage
                 {
-                    Content = new StringContent(request.RequestUri.AbsoluteUri)
+                    Content = new StringContent(request.RequestUri.AbsoluteUri),
                 };
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Post, "http://example.org/")
+                new HttpRequestMessage(HttpMethod.Post, "http://example.org/"),
             };
 
             var responses = await batchHandler.ExecuteRequestMessagesAsync(
@@ -208,7 +208,7 @@ namespace System.Web.Http
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
                 new HttpRequestMessage(HttpMethod.Post, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Put, "http://example.com/")
+                new HttpRequestMessage(HttpMethod.Put, "http://example.com/"),
             };
 
             await Assert.ThrowsAsync<InvalidOperationException>(
@@ -238,12 +238,12 @@ namespace System.Web.Http
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server)
             {
-                ExecutionOrder = BatchExecutionOrder.NonSequential
+                ExecutionOrder = BatchExecutionOrder.NonSequential,
             };
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Post, "http://example.com/")
+                new HttpRequestMessage(HttpMethod.Post, "http://example.com/"),
             };
 
             await batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None);
@@ -269,12 +269,12 @@ namespace System.Web.Http
             });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server)
             {
-                ExecutionOrder = BatchExecutionOrder.Sequential
+                ExecutionOrder = BatchExecutionOrder.Sequential,
             };
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
                 new HttpRequestMessage(HttpMethod.Get, "http://example.com/"),
-                new HttpRequestMessage(HttpMethod.Post, "http://example.com/")
+                new HttpRequestMessage(HttpMethod.Post, "http://example.com/"),
             };
 
             await batchHandler.ExecuteRequestMessagesAsync(requests, CancellationToken.None);
@@ -307,8 +307,8 @@ namespace System.Web.Http
                     ),
                     new HttpMessageContent(
                         new HttpRequestMessage(HttpMethod.Post, "http://example.com/values")
-                    )
-                }
+                    ),
+                },
             };
 
             IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(
@@ -336,9 +336,9 @@ namespace System.Web.Http
                     ),
                     new HttpMessageContent(
                         new HttpRequestMessage(HttpMethod.Post, "https://example.com/values")
-                    )
+                    ),
                 },
-                RequestUri = new Uri("https://example.com/")
+                RequestUri = new Uri("https://example.com/"),
             };
 
             IList<HttpRequestMessage> requests = await batchHandler.ParseBatchRequestsAsync(
@@ -366,8 +366,8 @@ namespace System.Web.Http
                     ),
                     new HttpMessageContent(
                         new HttpRequestMessage(HttpMethod.Post, "http://example.com/values")
-                    )
-                }
+                    ),
+                },
             };
             request.Properties.Add("foo", "bar");
             request.SetRouteData(new HttpRouteData(new HttpRoute()));

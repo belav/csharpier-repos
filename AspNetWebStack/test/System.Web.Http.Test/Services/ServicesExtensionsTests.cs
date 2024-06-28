@@ -54,7 +54,7 @@ namespace System.Web.Http.Services
             ).Object;
             IEnumerable<IExceptionLogger> expectedExceptionLoggers = new IExceptionLogger[]
             {
-                expectedExceptionLogger
+                expectedExceptionLogger,
             };
 
             Mock<ServicesContainer> mock = new Mock<ServicesContainer>(MockBehavior.Strict);

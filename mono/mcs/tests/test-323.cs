@@ -4,7 +4,7 @@ class X
     {
         x,
         y,
-        z
+        z,
     }
 
     const A foo = A.x | A.y;

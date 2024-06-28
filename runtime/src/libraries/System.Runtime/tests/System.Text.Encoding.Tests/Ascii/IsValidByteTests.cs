@@ -30,7 +30,7 @@ namespace System.Text.Tests
             Vector128<byte>.Count + 1,
             Vector256<byte>.Count - 1,
             Vector256<byte>.Count,
-            Vector256<byte>.Count + 1
+            Vector256<byte>.Count + 1,
         };
 
         public static IEnumerable<object[]> AsciiOnlyBuffers
@@ -43,7 +43,7 @@ namespace System.Text.Tests
                 {
                     yield return new object[]
                     {
-                        Enumerable.Repeat(GetNextValidAsciiByte(), length).ToArray()
+                        Enumerable.Repeat(GetNextValidAsciiByte(), length).ToArray(),
                     };
                 }
             }

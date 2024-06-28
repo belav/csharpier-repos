@@ -33,7 +33,7 @@ namespace System.Text.RegularExpressions.Tests
                                 "abcd",
                                 "SomeNamespace",
                                 true
-                            )
+                            ),
                         },
                         new AssemblyName("abcd")
                     )
@@ -50,7 +50,7 @@ namespace System.Text.RegularExpressions.Tests
                                 "abcd",
                                 "SomeNamespace",
                                 true
-                            )
+                            ),
                         },
                         new AssemblyName("abcd"),
                         new[]
@@ -60,7 +60,7 @@ namespace System.Text.RegularExpressions.Tests
                                     new[] { typeof(string) }
                                 ),
                                 new[] { "TestCompany" }
-                            )
+                            ),
                         }
                     )
             );
@@ -76,7 +76,7 @@ namespace System.Text.RegularExpressions.Tests
                                 "abcd",
                                 "SomeNamespace",
                                 true
-                            )
+                            ),
                         },
                         new AssemblyName("abcd"),
                         new[]
@@ -86,7 +86,7 @@ namespace System.Text.RegularExpressions.Tests
                                     new[] { typeof(string) }
                                 ),
                                 new[] { "TestCompany" }
-                            )
+                            ),
                         },
                         "resourceFile"
                     )

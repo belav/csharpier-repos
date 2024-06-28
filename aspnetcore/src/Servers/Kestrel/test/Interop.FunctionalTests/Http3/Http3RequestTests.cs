@@ -1750,10 +1750,10 @@ public class Http3RequestTests : LoggedTest
                                     return ValueTask.FromResult(
                                         new SslServerAuthenticationOptions
                                         {
-                                            ServerCertificate = TestResources.GetTestCertificate()
+                                            ServerCertificate = TestResources.GetTestCertificate(),
                                         }
                                     );
-                                }
+                                },
                             }
                         );
                     }

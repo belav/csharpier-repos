@@ -14,7 +14,7 @@ namespace System.CodeDom
     using System.Runtime.InteropServices;
     using Microsoft.Win32;
 
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeRegionDirective : CodeDirective
     {
         private string regionText;

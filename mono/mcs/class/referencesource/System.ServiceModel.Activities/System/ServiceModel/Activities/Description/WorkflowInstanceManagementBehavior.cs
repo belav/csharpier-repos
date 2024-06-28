@@ -57,9 +57,9 @@
                             Mode = SecurityMode.Message,
                             Message = new NonDualMessageSecurityOverHttp
                             {
-                                ClientCredentialType = MessageCredentialType.Windows
-                            }
-                        }
+                                ClientCredentialType = MessageCredentialType.Windows,
+                            },
+                        },
                     };
                 }
 
@@ -81,9 +81,9 @@
                             Mode = NetNamedPipeSecurityMode.Transport,
                             Transport = new NamedPipeTransportSecurity
                             {
-                                ProtectionLevel = ProtectionLevel.Sign
-                            }
-                        }
+                                ProtectionLevel = ProtectionLevel.Sign,
+                            },
+                        },
                     };
                 }
 
@@ -367,7 +367,7 @@
             {
                 MessageVersion = controlEndpointBinding.MessageVersion,
                 Endpoints = { endpointDispatcher },
-                ServiceThrottle = workflowServiceHost.ServiceThrottle
+                ServiceThrottle = workflowServiceHost.ServiceThrottle,
             };
             workflowServiceHost.ChannelDispatchers.Add(channelDispatcher);
         }

@@ -35,7 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
                 return location.LocationKind switch
                 {
                     LocationKind.EditorConfig or LocationKind.GlobalConfig => location.Path,
-                    _ => ServicesVSResources.Visual_Studio_Settings
+                    _ => ServicesVSResources.Visual_Studio_Settings,
                 };
             }
         }

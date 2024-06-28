@@ -353,7 +353,7 @@ namespace System.Runtime.Serialization.Json
             Fail,
             AsString,
             UsingParseEnum,
-            UsingCustomParse
+            UsingCustomParse,
         }
     }
 }

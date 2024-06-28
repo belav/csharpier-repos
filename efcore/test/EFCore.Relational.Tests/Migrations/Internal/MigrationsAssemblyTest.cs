@@ -43,7 +43,7 @@ public class MigrationsAssemblyTest
     {
         var logger = new TestLogger<DbLoggerCategory.Migrations, TestRelationalLoggingDefinitions>
         {
-            EnabledFor = LogLevel.Warning
+            EnabledFor = LogLevel.Warning,
         };
         var assembly = CreateMigrationsAssembly(logger);
 
@@ -67,7 +67,10 @@ public class MigrationsAssemblyTest
             new DbContextOptions<DbContext>(
                 new Dictionary<Type, IDbContextOptionsExtension>
                 {
-                    { typeof(FakeRelationalOptionsExtension), new FakeRelationalOptionsExtension() }
+                    {
+                        typeof(FakeRelationalOptionsExtension),
+                        new FakeRelationalOptionsExtension()
+                    },
                 }
             ),
             new MigrationsIdGenerator(),

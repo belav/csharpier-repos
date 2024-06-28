@@ -13,7 +13,7 @@ namespace System.Web.Mvc.Test
         {
             { "foo", "fooValue1" },
             { "foo", "fooValue2" },
-            { "bar.baz", "someOtherValue" }
+            { "bar.baz", "someOtherValue" },
         };
 
         [Fact]
@@ -107,7 +107,7 @@ namespace System.Web.Mvc.Test
             NameValueCollection unvalidatedCollection = new NameValueCollection()
             {
                 { "foo", "fooValue3" },
-                { "foo", "fooValue4" }
+                { "foo", "fooValue4" },
             };
 
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
@@ -202,7 +202,7 @@ namespace System.Web.Mvc.Test
             NameValueCollection unvalidatedCollection = new NameValueCollection()
             {
                 { "foo", "fooValue3" },
-                { "fooArray[0][bar1", "barValue1" }
+                { "fooArray[0][bar1", "barValue1" },
             };
 
             NameValueCollectionValueProvider valueProvider = new NameValueCollectionValueProvider(

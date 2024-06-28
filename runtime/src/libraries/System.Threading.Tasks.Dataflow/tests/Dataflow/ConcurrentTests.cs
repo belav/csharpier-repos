@@ -27,7 +27,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 var transformBlocks = new TransformBlock<int, int>[]
                 {
                     new TransformBlock<int, int>(x => x, transformOptions),
-                    new TransformBlock<int, int>(x => x, transformOptions)
+                    new TransformBlock<int, int>(x => x, transformOptions),
                 };
 
                 int done = 0;

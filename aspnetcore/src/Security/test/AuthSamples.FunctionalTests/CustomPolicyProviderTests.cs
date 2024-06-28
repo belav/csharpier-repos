@@ -173,7 +173,7 @@ public class CustomPolicyProviderTests
         var form = TestAssert.HasForm(signIn);
         return await client.SendAsync(
             form,
-            new Dictionary<string, string>() { ["UserName"] = userName, ["DOB"] = dob, }
+            new Dictionary<string, string>() { ["UserName"] = userName, ["DOB"] = dob }
         );
     }
 }

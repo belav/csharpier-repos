@@ -103,7 +103,7 @@ namespace Moq.Tests
             var parentMock = new Mock<IFoo>()
             {
                 DefaultValue = DefaultValue.Mock,
-                Switches = expectedSwitches
+                Switches = expectedSwitches,
             };
             var innerMock = Mock.Get(parentMock.Object.Bar);
 

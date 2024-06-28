@@ -324,11 +324,11 @@ class A
             Context = new LSP.VSInternalInlineCompletionContext
             {
                 SelectedCompletionInfo = null,
-                TriggerKind = LSP.VSInternalInlineCompletionTriggerKind.Explicit
+                TriggerKind = LSP.VSInternalInlineCompletionTriggerKind.Explicit,
             },
             Position = locationTyped.Range.Start,
             TextDocument = CreateTextDocumentIdentifier(locationTyped.Uri),
-            Options = options
+            Options = options,
         };
 
         var response = await testLspServer.ExecuteRequestAsync<

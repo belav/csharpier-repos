@@ -563,7 +563,7 @@ namespace System.Security.Cryptography
             0xf7537e82,
             0xbd3af235,
             0x2ad7d2bb,
-            0xeb86d391
+            0xeb86d391,
         };
     }
 }

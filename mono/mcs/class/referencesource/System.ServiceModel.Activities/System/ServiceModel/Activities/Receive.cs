@@ -60,7 +60,7 @@ namespace System.ServiceModel.Activities
                     Variable<Message> request = new Variable<Message> { Name = "RequestMessage" };
                     Variable<NoPersistHandle> noPersistHandle = new Variable<NoPersistHandle>
                     {
-                        Name = "ReceiveNoPersistHandle"
+                        Name = "ReceiveNoPersistHandle",
                     };
                     this.internalReceive.Message = new OutArgument<Message>(request);
                     this.requestFormatter.Message = new InOutArgument<Message>(request);
@@ -74,7 +74,7 @@ namespace System.ServiceModel.Activities
                     return new Sequence
                     {
                         Variables = { request, noPersistHandle },
-                        Activities = { this.internalReceive, this.requestFormatter }
+                        Activities = { this.internalReceive, this.requestFormatter },
                     };
                 }
             };
@@ -400,7 +400,9 @@ namespace System.ServiceModel.Activities
                 CorrelatesWith = new InArgument<CorrelationHandle>(
                     new ArgumentValue<CorrelationHandle> { ArgumentName = "CorrelatesWith" }
                 ),
-                IsOneWay = true // This will be updated by contract inference logic,
+                IsOneWay =
+                    true // This will be updated by contract inference logic,
+                ,
             };
 
             if (this.correlationInitializers != null)

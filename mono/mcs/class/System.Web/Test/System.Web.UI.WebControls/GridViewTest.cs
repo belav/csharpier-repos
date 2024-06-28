@@ -1041,7 +1041,7 @@ namespace MonoTests.System.Web.UI.WebControls
                 typeof(String),
                 typeof(UInt16),
                 typeof(UInt32),
-                typeof(UInt64)
+                typeof(UInt64),
             };
 
             GridView g = new GridView();

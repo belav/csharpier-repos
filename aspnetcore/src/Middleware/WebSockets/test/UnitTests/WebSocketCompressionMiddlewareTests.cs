@@ -26,7 +26,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                         new WebSocketAcceptContext()
                         {
                             DangerousEnableCompression = true,
-                            DisableServerContextTakeover = true
+                            DisableServerContextTakeover = true,
                         }
                     );
                 }
@@ -116,7 +116,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                         new WebSocketAcceptContext()
                         {
                             DangerousEnableCompression = true,
-                            ServerMaxWindowBits = 13
+                            ServerMaxWindowBits = 13,
                         }
                     );
                 }
@@ -162,7 +162,7 @@ public class WebSocketCompressionMiddlewareTests : LoggedTest
                         new WebSocketAcceptContext()
                         {
                             DangerousEnableCompression = true,
-                            ServerMaxWindowBits = 13
+                            ServerMaxWindowBits = 13,
                         }
                     );
 

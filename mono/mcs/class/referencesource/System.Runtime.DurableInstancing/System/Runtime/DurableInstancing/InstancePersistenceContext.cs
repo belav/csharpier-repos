@@ -937,7 +937,7 @@ namespace System.Runtime.DurableInstancing
                 new TransactionOptions()
                 {
                     IsolationLevel = IsolationLevel.ReadCommitted,
-                    Timeout = this.timeout
+                    Timeout = this.timeout,
                 }
             );
             Transaction clone = this.myTransaction.Clone();

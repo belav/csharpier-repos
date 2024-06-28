@@ -18,8 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("GetAttribute(Name) Verify with This[Name]")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -29,7 +29,9 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(GetAttributeWithName2)
                     {
-                        Attribute = new Variation("GetAttribute(Name, null) Verify with This[Name]")
+                        Attribute = new Variation(
+                            "GetAttribute(Name, null) Verify with This[Name]"
+                        ),
                     }
                 );
             }
@@ -39,7 +41,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(GetAttributeWithName3)
                     {
-                        Attribute = new Variation("GetAttribute(Name) Verify with This[Name,null]")
+                        Attribute = new Variation("GetAttribute(Name) Verify with This[Name,null]"),
                     }
                 );
             }
@@ -53,8 +55,8 @@ namespace System.Xml.Tests
                             "GetAttribute(Name, NamespaceURI) Verify with This[Name, NamespaceURI]"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -66,7 +68,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name, null) Verify not the same as This[Name, NamespaceURI]"
-                        )
+                        ),
                     }
                 );
             }
@@ -78,7 +80,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name, NamespaceURI) Verify not the same as This[Name, null]"
-                        )
+                        ),
                     }
                 );
             }
@@ -90,7 +92,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name) Verify with MoveToAttribute(Name)"
-                        )
+                        ),
                     }
                 );
             }
@@ -104,8 +106,8 @@ namespace System.Xml.Tests
                             "GetAttribute(Name,null) Verify with MoveToAttribute(Name)"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -119,8 +121,8 @@ namespace System.Xml.Tests
                             "GetAttribute(Name) Verify with MoveToAttribute(Name,null)"
                         )
                         {
-                            Pri = 1
-                        }
+                            Pri = 1,
+                        },
                     }
                 );
             }
@@ -132,7 +134,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name, NamespaceURI) Verify not the same as MoveToAttribute(Name, null)"
-                        )
+                        ),
                     }
                 );
             }
@@ -144,7 +146,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name, null) Verify not the same as MoveToAttribute(Name, NamespaceURI)"
-                        )
+                        ),
                     }
                 );
             }
@@ -156,7 +158,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "GetAttribute(Name, namespace) Verify not the same as MoveToAttribute(Name, namespace)"
-                        )
+                        ),
                     }
                 );
             }
@@ -166,7 +168,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(GetAttributeWithName13)
                     {
-                        Attribute = new Variation("GetAttribute(String.Empty)")
+                        Attribute = new Variation("GetAttribute(String.Empty)"),
                     }
                 );
             }
@@ -176,7 +178,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(GetAttributeWithName14)
                     {
-                        Attribute = new Variation("GetAttribute(String.Empty,String.Empty)")
+                        Attribute = new Variation("GetAttribute(String.Empty,String.Empty)"),
                     }
                 );
             }

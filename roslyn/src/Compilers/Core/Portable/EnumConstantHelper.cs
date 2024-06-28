@@ -12,7 +12,7 @@ namespace Microsoft.CodeAnalysis
     {
         NoOverflow,
         OverflowReport,
-        OverflowIgnore
+        OverflowIgnore,
     }
 
     internal static class EnumConstantHelper

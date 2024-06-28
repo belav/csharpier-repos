@@ -18,7 +18,7 @@ internal static partial class Interop
             Module32 = 0x00000010,
             All = (HeapList | Process | Thread | Module),
             Inherit = 0x80000000,
-            NoHeaps = 0x40000000
+            NoHeaps = 0x40000000,
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]

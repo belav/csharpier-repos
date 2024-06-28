@@ -18,12 +18,22 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalKeySizesWindowsCsp =
         {
-            new KeySizes(512, 1024, 64) // Use the same values as Csp Windows because the _impl has different values (512, 3072, 64)
+            new KeySizes(
+                512,
+                1024,
+                64
+            ) // Use the same values as Csp Windows because the _impl has different values (512, 3072, 64)
+            ,
         };
 
         private static readonly KeySizes[] s_legalKeySizesAndroid =
         {
-            new KeySizes(1024, 1024, 0) // Intersection of legal sizes on Android and Windows provider
+            new KeySizes(
+                1024,
+                1024,
+                0
+            ) // Intersection of legal sizes on Android and Windows provider
+            ,
         };
 
         // Depending on the platform, _impl's legal key sizes may be more restrictive than Windows provider.

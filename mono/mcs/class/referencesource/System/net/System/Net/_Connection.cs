@@ -24,6 +24,7 @@ namespace System.Net
         StatusLine, // about to parse status line
         Headers, // reading headers
         Data // now read data
+        ,
     }
 #endif
 
@@ -50,7 +51,7 @@ namespace System.Net
         Generic,
         ResponseHeader,
         ResponseStatusLine,
-        ResponseBody
+        ResponseBody,
     }
 
     // The enum literal will be used to look up an error string in the resource file
@@ -62,7 +63,7 @@ namespace System.Net
         IncompleteHeaderLine,
         CrLfError,
         InvalidChunkFormat,
-        UnexpectedServerResponse
+        UnexpectedServerResponse,
     }
 
     // Only defined for DataParseStatus.Invalid
@@ -2389,7 +2390,7 @@ namespace System.Net
         {
             "OK",
             "Continue",
-            "Unauthorized"
+            "Unauthorized",
         };
 
         //
@@ -3288,7 +3289,7 @@ namespace System.Net
                             0,
                             m_StatusLineValues.MajorVersion,
                             m_StatusLineValues.MinorVersion,
-                            m_StatusLineValues.StatusCode
+                            m_StatusLineValues.StatusCode,
                         };
                         if (m_StatusLineValues.StatusDescription == null)
                             m_StatusLineValues.StatusDescription = "";
@@ -4017,11 +4018,9 @@ namespace System.Net
                                 NetRes.GetWebStatusString("net_connclosed", m_Error),
                                 m_Error,
                                 (
-                                    isolatedKeepAliveFailure
-                                        ? WebExceptionInternalStatus.Isolated
-                                        : retry
-                                            ? WebExceptionInternalStatus.Recoverable
-                                            : WebExceptionInternalStatus.RequestFatal
+                                    isolatedKeepAliveFailure ? WebExceptionInternalStatus.Isolated
+                                    : retry ? WebExceptionInternalStatus.Recoverable
+                                    : WebExceptionInternalStatus.RequestFatal
                                 ),
                                 theException
                             );

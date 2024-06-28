@@ -2159,7 +2159,7 @@ namespace System.ServiceModel.Channels
             Invalid,
             ReadableHeader,
             BufferedMessageHeader,
-            WriteableHeader
+            WriteableHeader,
         }
 
         enum HeaderKind : byte

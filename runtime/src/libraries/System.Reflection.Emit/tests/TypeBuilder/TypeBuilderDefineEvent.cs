@@ -16,7 +16,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(int),
                 "TestEvent",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -24,7 +24,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.RTSpecialName,
                 typeof(void),
                 "a",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -32,7 +32,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.SpecialName,
                 typeof(Delegate),
                 "\uD800\uDC00",
-                EventAttributes.SpecialName
+                EventAttributes.SpecialName,
             };
             yield return new object[]
             {
@@ -40,7 +40,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.SpecialName | EventAttributes.RTSpecialName,
                 typeof(EmptyGenericStruct<>),
                 "\u043F\u0440\u0438\u0432\u0435\u0442",
-                EventAttributes.SpecialName
+                EventAttributes.SpecialName,
             };
             yield return new object[]
             {
@@ -48,7 +48,7 @@ namespace System.Reflection.Emit.Tests
                 (EventAttributes)(-1),
                 typeof(string),
                 "class",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -56,7 +56,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(BasicDelegate),
                 "Test Name With Spaces",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -64,7 +64,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(EmptyGenericStruct<int>),
                 "TestEvent",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -72,7 +72,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(EmptyGenericStruct<int>).GetGenericArguments()[0],
                 "TestEvent",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -80,7 +80,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(EmptyGenericStruct<>).GetGenericArguments()[0],
                 "TestEvent",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -88,7 +88,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 Helpers.DynamicType(TypeAttributes.Public).AsType(),
                 "TestEvent",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -96,7 +96,7 @@ namespace System.Reflection.Emit.Tests
                 (EventAttributes)0x8000,
                 typeof(int),
                 "\uFFFD",
-                (EventAttributes)0x8000
+                (EventAttributes)0x8000,
             };
             yield return new object[]
             {
@@ -104,7 +104,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(int),
                 "\uFFFD",
-                EventAttributes.None
+                EventAttributes.None,
             };
             yield return new object[]
             {
@@ -112,7 +112,7 @@ namespace System.Reflection.Emit.Tests
                 EventAttributes.None,
                 typeof(int).MakePointerType(),
                 "1A",
-                EventAttributes.None
+                EventAttributes.None,
             };
         }
 

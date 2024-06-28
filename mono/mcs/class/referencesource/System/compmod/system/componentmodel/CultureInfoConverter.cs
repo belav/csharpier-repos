@@ -670,7 +670,7 @@ namespace System.ComponentModel
                     { "Wolof (Senegal)", "wo-SN" },
                     { "Yakut (Russia)", "sah-RU" },
                     { "Yi (PRC)", "ii-CN" },
-                    { "Yoruba (Nigeria)", "yo-NG" }
+                    { "Yoruba (Nigeria)", "yo-NG" },
                 };
             }
         }

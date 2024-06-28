@@ -12,5 +12,6 @@ namespace System.Runtime.Caching
         Evicted, //Evicted to free up space
         ChangeMonitorChanged, //An associated programmatic dependency triggered eviction
         CacheSpecificEviction //Catch-all for custom providers
+        ,
     }
 }

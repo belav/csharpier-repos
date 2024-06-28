@@ -251,7 +251,7 @@ public class When_mapping_nested_context_items : AutoMapperSpecBase
                             {
                                 Id = fromCar.Id,
                                 Name = fromCar.Name,
-                                Door = (Door)ctx.Items["Door"]
+                                Door = (Door)ctx.Items["Door"],
                             };
                         }
 
@@ -272,15 +272,15 @@ public class When_mapping_nested_context_items : AutoMapperSpecBase
                 {
                     Door = door,
                     Id = 2,
-                    Name = "Volvo"
+                    Name = "Volvo",
                 },
                 new FromCar
                 {
                     Door = door,
                     Id = 3,
-                    Name = "Hyundai"
+                    Name = "Hyundai",
                 },
-            }
+            },
         };
 
         var toGarage = Mapper.Map<ToGarage>(

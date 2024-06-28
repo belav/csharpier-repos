@@ -30,11 +30,14 @@ public class CookieRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar-SA") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar-SA") }
+                            SupportedUICultures = new List<CultureInfo>
+                            {
+                                new CultureInfo("ar-SA"),
+                            },
                         };
                         var provider = new CookieRequestCultureProvider
                         {
-                            CookieName = "Preferences"
+                            CookieName = "Preferences",
                         };
                         options.RequestCultureProviders.Insert(0, provider);
 
@@ -82,11 +85,14 @@ public class CookieRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar-SA") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar-SA") }
+                            SupportedUICultures = new List<CultureInfo>
+                            {
+                                new CultureInfo("ar-SA"),
+                            },
                         };
                         var provider = new CookieRequestCultureProvider
                         {
-                            CookieName = "Preferences"
+                            CookieName = "Preferences",
                         };
                         options.RequestCultureProviders.Insert(0, provider);
                         app.UseRequestLocalization(options);
@@ -130,11 +136,14 @@ public class CookieRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar-SA") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar-SA") }
+                            SupportedUICultures = new List<CultureInfo>
+                            {
+                                new CultureInfo("ar-SA"),
+                            },
                         };
                         var provider = new CookieRequestCultureProvider
                         {
-                            CookieName = "Preferences"
+                            CookieName = "Preferences",
                         };
                         options.RequestCultureProviders.Insert(0, provider);
                         app.UseRequestLocalization(options);
@@ -178,11 +187,14 @@ public class CookieRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar-YE") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar-YE") }
+                            SupportedUICultures = new List<CultureInfo>
+                            {
+                                new CultureInfo("ar-YE"),
+                            },
                         };
                         var provider = new CookieRequestCultureProvider
                         {
-                            CookieName = "Preferences"
+                            CookieName = "Preferences",
                         };
                         options.RequestCultureProviders.Insert(0, provider);
                         app.UseRequestLocalization(options);
@@ -238,11 +250,14 @@ public class CookieRequestCultureProviderTest
                         {
                             DefaultRequestCulture = new RequestCulture("en-US"),
                             SupportedCultures = new List<CultureInfo> { new CultureInfo("ar-YE") },
-                            SupportedUICultures = new List<CultureInfo> { new CultureInfo("ar-YE") }
+                            SupportedUICultures = new List<CultureInfo>
+                            {
+                                new CultureInfo("ar-YE"),
+                            },
                         };
                         var provider = new CookieRequestCultureProvider
                         {
-                            CookieName = "Preferences"
+                            CookieName = "Preferences",
                         };
                         options.RequestCultureProviders.Insert(0, provider);
                         app.UseRequestLocalization(options);

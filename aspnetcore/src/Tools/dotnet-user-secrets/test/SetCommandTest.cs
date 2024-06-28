@@ -32,7 +32,7 @@ public class SetCommandTest
         var testConsole = new TestConsole(_output)
         {
             IsInputRedirected = true,
-            In = new StringReader(input)
+            In = new StringReader(input),
         };
         var secretStore = new TestSecretsStore(_output);
         var command = new SetCommand.FromStdInStrategy();
@@ -60,7 +60,7 @@ public class SetCommandTest
         var testConsole = new TestConsole(_output)
         {
             IsInputRedirected = true,
-            In = new StringReader(input)
+            In = new StringReader(input),
         };
         var secretStore = new TestSecretsStore(_output);
         var command = new SetCommand.FromStdInStrategy();
@@ -80,7 +80,7 @@ public class SetCommandTest
         var testConsole = new TestConsole(_output)
         {
             IsInputRedirected = true,
-            In = new StringReader("")
+            In = new StringReader(""),
         };
         var options = CommandLineOptions.Parse(new[] { "set", "key", "value" }, testConsole);
         Assert.IsType<SetCommand.ForOneValueStrategy>(options.Command);

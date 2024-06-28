@@ -50,7 +50,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 "sim",
                 "struct",
                 "svm",
-                "while"
+                "while",
             };
 
         internal override bool IsSnippetProvider => true;

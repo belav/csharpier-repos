@@ -90,7 +90,7 @@ namespace Tests.Integration
                     VerifyExportFactory(this.IdCreatorTProperty),
                     VerifyExportFactory(this.IdCreatorTMProperty),
                     VerifyExportFactory(this.IdCreatorsTProperty[0]),
-                    VerifyExportFactory(this.IdCreatorsTMProperty[0])
+                    VerifyExportFactory(this.IdCreatorsTMProperty[0]),
                 };
 
                 Assert.Equal(1, this.IdCreatorsTProperty.Length);

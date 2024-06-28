@@ -251,7 +251,7 @@ namespace Microsoft.VisualStudio.Extensibility.Testing
                 SUIHostCommandDispatcher,
                 IOleCommandTarget
             >(cancellationToken);
-            OLECMD[] commands = { new OLECMD { cmdID = commandId }, };
+            OLECMD[] commands = { new OLECMD { cmdID = commandId } };
 
             var status = dispatcher.QueryStatus(
                 commandGuid,

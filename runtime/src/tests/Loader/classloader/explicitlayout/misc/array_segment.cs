@@ -38,7 +38,7 @@ public class Test_ExplicitLayoutWithArraySegment
         {
             Array = new byte[10],
             Offset = 0,
-            Count = 10
+            Count = 10,
         };
         ArraySegment<byte> internalBuffer = fakeArraySegment.ToActual();
     }

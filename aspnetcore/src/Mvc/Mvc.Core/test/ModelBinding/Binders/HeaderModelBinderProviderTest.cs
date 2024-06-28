@@ -15,12 +15,7 @@ public class HeaderModelBinderProviderTest
     {
         get
         {
-            return new TheoryData<BindingSource>()
-            {
-                BindingSource.Body,
-                BindingSource.Form,
-                null,
-            };
+            return new TheoryData<BindingSource>() { BindingSource.Body, BindingSource.Form, null };
         }
     }
 
@@ -192,7 +187,7 @@ public class HeaderModelBinderProviderTest
     private enum CarEnumType
     {
         Sedan,
-        Coupe
+        Coupe,
     }
 
     private struct CustomerStruct

@@ -48,7 +48,7 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         regexes[i],
                         cases[i].input,
-                        cases[i].expectedSuccess
+                        cases[i].expectedSuccess,
                     };
                 }
             }

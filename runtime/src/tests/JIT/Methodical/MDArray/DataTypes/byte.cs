@@ -18,36 +18,36 @@ public class CL
     public byte[,] byte2darr =
     {
         { 0, 1 },
-        { 0, 0 }
+        { 0, 0 },
     };
     public byte[,,] byte3darr =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 1 }
+            { 0, 1 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
     public byte[,] byte2darr_b =
     {
         { 0, 49 },
-        { 0, 0 }
+        { 0, 0 },
     };
     public byte[,,] byte3darr_b =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 49 }
+            { 0, 49 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
 }
 
@@ -56,36 +56,36 @@ public class byteMDArrTest
     static byte[,] byte2darr =
     {
         { 0, 1 },
-        { 0, 0 }
+        { 0, 0 },
     };
     static byte[,,] byte3darr =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 1 }
+            { 0, 1 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
     static byte[,] byte2darr_b =
     {
         { 0, 49 },
-        { 0, 0 }
+        { 0, 0 },
     };
     static byte[,,] byte3darr_b =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 49 }
+            { 0, 49 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
 
     static byte[][,] ja1 = new byte[2][,];
@@ -102,36 +102,36 @@ public class byteMDArrTest
         vt1.byte2darr = new byte[,]
         {
             { 0, 1 },
-            { 0, 0 }
+            { 0, 0 },
         };
         vt1.byte3darr = new byte[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 1 }
+                { 0, 1 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
         vt1.byte2darr_b = new byte[,]
         {
             { 0, 49 },
-            { 0, 0 }
+            { 0, 0 },
         };
         vt1.byte3darr_b = new byte[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 49 }
+                { 0, 49 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
 
         CL cl1 = new CL();
@@ -139,36 +139,36 @@ public class byteMDArrTest
         ja1[0] = new byte[,]
         {
             { 0, 1 },
-            { 0, 0 }
+            { 0, 0 },
         };
         ja2[1] = new byte[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 1 }
+                { 0, 1 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
         ja1_b[0] = new byte[,]
         {
             { 0, 49 },
-            { 0, 0 }
+            { 0, 0 },
         };
         ja2_b[1] = new byte[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 49 }
+                { 0, 49 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
 
         byte result = 1;

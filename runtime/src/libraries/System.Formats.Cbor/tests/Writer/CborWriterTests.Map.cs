@@ -49,7 +49,7 @@ namespace System.Formats.Cbor.Tests
                 "a",
                 new object[] { Map, 2, 3 },
                 "b",
-                new object[] { Map, "x", -1, "y", new object[] { Map, "z", 0 } }
+                new object[] { Map, "x", -1, "y", new object[] { Map, "z", 0 } },
             },
             "a26161a102036162a26178206179a1617a00"
         )]
@@ -101,7 +101,7 @@ namespace System.Formats.Cbor.Tests
                 "a",
                 new object[] { Map, 2, 3 },
                 "b",
-                new object[] { Map, "x", -1, "y", new object[] { Map, "z", 0 } }
+                new object[] { Map, "x", -1, "y", new object[] { Map, "z", 0 } },
             },
             "bf6161bf0203ff6162bf6178206179bf617a00ffffff"
         )]
@@ -153,7 +153,7 @@ namespace System.Formats.Cbor.Tests
                 "a",
                 new object[] { Map, 2, 3 },
                 "b",
-                new object[] { Map, "x", -1, "y", new object[] { Map, "z", 0 } }
+                new object[] { Map, "x", -1, "y", new object[] { Map, "z", 0 } },
             },
             "a26161a102036162a26178206179a1617a00"
         )]
@@ -191,7 +191,7 @@ namespace System.Formats.Cbor.Tests
                 new string[] { "a", "b" },
                 0,
                 new string[] { Hex, "ab", "" },
-                00
+                00,
             },
             "a441ab00626162008301020300a20102030400"
         )]
@@ -222,8 +222,8 @@ namespace System.Formats.Cbor.Tests
                     2,
                     3,
                     "b",
-                    new object[] { Map, "x", -1, "y", new object[] { "z", 0 } }
-                }
+                    new object[] { Map, "x", -1, "y", new object[] { "z", 0 } },
+                },
             },
             "a161618402036162a2617820617982617a00"
         )]
@@ -362,7 +362,7 @@ namespace System.Formats.Cbor.Tests
                 256,
                 0,
                 new object[] { Map, 2, 2, 1, 1 },
-                0
+                0,
             };
             byte[] expectedEncoding = expectedHexEncoding.HexToByteArray();
             var writer = new CborWriter(mode);

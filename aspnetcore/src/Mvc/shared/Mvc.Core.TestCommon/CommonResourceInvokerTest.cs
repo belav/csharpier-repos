@@ -1187,7 +1187,7 @@ public abstract class CommonResourceInvokerTest
             {
                 resultFilter1.Object,
                 resultFilter2.Object,
-                resultFilter3.Object
+                resultFilter3.Object,
             }
         );
 
@@ -1252,7 +1252,7 @@ public abstract class CommonResourceInvokerTest
             {
                 resultFilter1.Object,
                 resultFilter2.Object,
-                resultFilter3.Object
+                resultFilter3.Object,
             }
         );
 
@@ -1838,6 +1838,7 @@ public abstract class CommonResourceInvokerTest
                 resourceFilter3.Object, // This shouldn't run - it will throw if it does
                 exceptionFilter.Object, // This shouldn't run - it will throw if it does
                 resultFilter.Object // This shouldn't run - it will throw if it does
+                ,
             },
             // The action won't run
             exception: Exception
@@ -1901,6 +1902,7 @@ public abstract class CommonResourceInvokerTest
                 resourceFilter3.Object, // This shouldn't run - it will throw if it does
                 exceptionFilter.Object, // This shouldn't run - it will throw if it does
                 resultFilter.Object // This shouldn't run - it will throw if it does
+                ,
             },
             // The action won't run
             exception: Exception
@@ -1960,6 +1962,7 @@ public abstract class CommonResourceInvokerTest
                 resourceFilter2.Object,
                 resourceFilter3.Object, // This shouldn't run - it will throw if it does
                 resultFilter.Object // This shouldn't run - it will throw if it does
+                ,
             },
             // The action won't run
             exception: Exception
@@ -2001,7 +2004,7 @@ public abstract class CommonResourceInvokerTest
                 }
             );
 
-        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object, });
+        var invoker = CreateInvoker(new IFilterMetadata[] { resourceFilter.Object });
 
         // Act
         var exception = await Assert.ThrowsAsync<InvalidOperationException>(invoker.InvokeAsync);
@@ -2041,7 +2044,7 @@ public abstract class CommonResourceInvokerTest
             );
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { authorizationFilter.Object, resourceFilter.Object, }
+            new IFilterMetadata[] { authorizationFilter.Object, resourceFilter.Object }
         );
 
         // Act
@@ -2084,7 +2087,7 @@ public abstract class CommonResourceInvokerTest
             );
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { authorizationFilter.Object, resultFilter.Object, }
+            new IFilterMetadata[] { authorizationFilter.Object, resultFilter.Object }
         );
 
         // Act
@@ -2126,7 +2129,7 @@ public abstract class CommonResourceInvokerTest
             );
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { authorizationFilter.Object, resultFilter.Object, }
+            new IFilterMetadata[] { authorizationFilter.Object, resultFilter.Object }
         );
 
         // Act
@@ -2243,7 +2246,7 @@ public abstract class CommonResourceInvokerTest
             );
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { resourceFilter.Object, resultFilter.Object, }
+            new IFilterMetadata[] { resourceFilter.Object, resultFilter.Object }
         );
 
         // Act
@@ -2280,7 +2283,7 @@ public abstract class CommonResourceInvokerTest
             .Callback<ResourceExecutingContext>(c => c.Result = Result);
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { resourceFilter.Object, resultFilter.Object, }
+            new IFilterMetadata[] { resourceFilter.Object, resultFilter.Object }
         );
 
         // Act
@@ -2385,7 +2388,7 @@ public abstract class CommonResourceInvokerTest
             });
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { exceptionFilter.Object, resultFilter.Object, },
+            new IFilterMetadata[] { exceptionFilter.Object, resultFilter.Object },
             Exception
         );
 
@@ -2423,7 +2426,7 @@ public abstract class CommonResourceInvokerTest
             .Callback<ExceptionContext>(c => c.Result = Result);
 
         var invoker = CreateInvoker(
-            new IFilterMetadata[] { exceptionFilter.Object, resultFilter.Object, },
+            new IFilterMetadata[] { exceptionFilter.Object, resultFilter.Object },
             Exception
         );
 
@@ -2554,7 +2557,7 @@ public abstract class CommonResourceInvokerTest
                 resultFilter1.Object,
                 resultFilter2.Object,
                 resultFilter3.Object,
-                resultFilter4.Object
+                resultFilter4.Object,
             }
         );
 

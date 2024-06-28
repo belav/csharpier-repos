@@ -26,17 +26,17 @@ namespace Wasm.Build.NativeRebuild.Tests
                     new object[]
                     { /*cflags*/
                         "/p:EmccExtraCFlags=-g", /*ldflags*/
-                        ""
+                        "",
                     },
                     new object[]
                     { /*cflags*/
                         "", /*ldflags*/
-                        "/p:EmccExtraLDFlags=-g"
+                        "/p:EmccExtraLDFlags=-g",
                     },
                     new object[]
                     { /*cflags*/
                         "/p:EmccExtraCFlags=-g", /*ldflags*/
-                        "/p:EmccExtraLDFlags=-g"
+                        "/p:EmccExtraLDFlags=-g",
                     }
                 )
                 .WithRunHosts(RunHost.Chrome)

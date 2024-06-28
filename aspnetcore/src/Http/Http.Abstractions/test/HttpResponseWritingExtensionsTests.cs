@@ -78,7 +78,7 @@ public class HttpResponseWritingExtensionsTests
 #pragma warning disable CS0618, SYSLIB0001 // Type or member is obsolete
             { Encoding.UTF7 },
 #pragma warning restore CS0618, SYSLIB0001 // Type or member is obsolete
-            { Encoding.UTF8 }
+            { Encoding.UTF8 },
         };
 
     private HttpContext CreateRequest()

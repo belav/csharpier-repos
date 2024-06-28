@@ -926,7 +926,7 @@ namespace System.Workflow.Activities
     {
         Idle,
         Pending,
-        Excuting
+        Excuting,
     }
 
     [Serializable]

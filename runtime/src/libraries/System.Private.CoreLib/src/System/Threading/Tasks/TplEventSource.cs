@@ -58,7 +58,7 @@ namespace System.Threading.Tasks
             Synchronous = 1,
 
             /// <summary>An asynchronous await.</summary>
-            Asynchronous = 2
+            Asynchronous = 2,
         }
 
         /// <summary>ETW tasks that have start/stop events.</summary>

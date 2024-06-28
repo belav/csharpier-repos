@@ -1262,7 +1262,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 is not [
                     { Type.SpecialType: SpecialType.System_String },
                     { Kind: not TypedConstantKind.Array, Value: int lineNumberOneBased },
-                    { Kind: not TypedConstantKind.Array, Value: int characterNumberOneBased }
+                    { Kind: not TypedConstantKind.Array, Value: int characterNumberOneBased },
                 ]
             )
             {
@@ -1854,9 +1854,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             ParenthesizedLambdaExpressionSyntax
                             {
                                 ReturnType: { } lambdaReturnType
-                            } =>
-                                lambdaReturnType,
-                            var unexpected => throw ExceptionUtilities.UnexpectedValue(unexpected)
+                            } => lambdaReturnType,
+                            var unexpected => throw ExceptionUtilities.UnexpectedValue(unexpected),
                         };
 
                         ReportBadRefToken(returnTypeSyntax, diagnostics);

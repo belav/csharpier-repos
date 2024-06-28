@@ -29,7 +29,7 @@ public class ContosoAuthenticationHandler : AuthenticationHandler<ContosoAuthent
             new Dictionary<string, string>()
             {
                 ["State"] = JsonConvert.SerializeObject(properties.Items),
-                [Options.ReturnUrlQueryParameter] = properties.RedirectUri
+                [Options.ReturnUrlQueryParameter] = properties.RedirectUri,
             }
         );
         Response.Redirect(uri);

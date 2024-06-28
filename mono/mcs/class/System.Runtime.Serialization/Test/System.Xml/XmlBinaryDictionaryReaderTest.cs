@@ -562,7 +562,7 @@ namespace MonoTests.System.Xml
             0x7A,
             1,
             1,
-            1
+            1,
         };
 
         [Test]
@@ -585,7 +585,7 @@ namespace MonoTests.System.Xml
                 2,
                 1,
                 1,
-                1
+                1,
             };
 
             XmlDictionary dic = new XmlDictionary();
@@ -621,7 +621,7 @@ namespace MonoTests.System.Xml
                 2,
                 1,
                 1,
-                1
+                1,
             };
 
             XmlDictionary dic = new XmlDictionary();
@@ -688,7 +688,7 @@ namespace MonoTests.System.Xml
                 1,
                 1,
                 1,
-                1
+                1,
             };
 
             XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
@@ -810,7 +810,7 @@ namespace MonoTests.System.Xml
                 0x66,
                 0x6F,
                 0x6F,
-                1
+                1,
             };
 
             XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
@@ -867,7 +867,7 @@ namespace MonoTests.System.Xml
                 0x62,
                 0x61,
                 0x72,
-                1
+                1,
             };
 
             Read(bytes);
@@ -909,7 +909,7 @@ namespace MonoTests.System.Xml
                 0xbc,
                 0x00,
                 0x08,
-                0x01
+                0x01,
             };
 
             XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
@@ -956,7 +956,7 @@ namespace MonoTests.System.Xml
                 0xbc,
                 0x18,
                 0x01,
-                0x01
+                0x01,
             };
 
             XmlDictionaryReader reader = XmlDictionaryReader.CreateBinaryReader(
@@ -1054,7 +1054,7 @@ namespace MonoTests.System.Xml
             0xE5,
             0x22,
             0xC1,
-            8
+            8,
         };
 
         [Test]
@@ -1575,7 +1575,7 @@ namespace MonoTests.System.Xml
                 0x01,
                 0x01,
                 0x01,
-                0x01
+                0x01,
             };
             var dic = new XmlDictionary();
             for (int i = 0; i < 128; i++)

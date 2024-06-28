@@ -17,7 +17,7 @@ namespace System.Globalization.Tests
             // Month other than february in a leap year
             yield return new object[]
             {
-                new DateTime(RandomLeapYear(), RandomMonthNotFebruary(), 28, 10, 30, 12)
+                new DateTime(RandomLeapYear(), RandomMonthNotFebruary(), 28, 10, 30, 12),
             };
 
             // February in a common year
@@ -26,7 +26,7 @@ namespace System.Globalization.Tests
             // Month other than february in a common year
             yield return new object[]
             {
-                new DateTime(RandomCommonYear(), RandomMonthNotFebruary(), 28, 10, 30, 12)
+                new DateTime(RandomCommonYear(), RandomMonthNotFebruary(), 28, 10, 30, 12),
             };
 
             // Any month in the maximum supported year

@@ -118,7 +118,7 @@ namespace Mono
             0x0d,
             0x01,
             0x07,
-            0x02
+            0x02,
         };
 
         public X509ContentType GetCertContentType(byte[] rawData)

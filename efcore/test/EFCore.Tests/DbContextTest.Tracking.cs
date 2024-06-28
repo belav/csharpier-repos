@@ -55,8 +55,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -68,8 +68,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -81,8 +81,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -95,8 +95,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var principalEntry = await categoryAdder(context, principal);
@@ -192,8 +192,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -205,8 +205,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -218,8 +218,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -232,8 +232,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await adder(context, new object[] { principal, dependent });
@@ -323,8 +323,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -336,8 +336,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var categoryEntry1 = await categoryAdder(context, category1);
@@ -441,7 +441,7 @@ public partial class DbContextTest
         {
             Id = IntSentinel,
             Name = "Marmite",
-            Price = 7.99m
+            Price = 7.99m,
         };
         var gu1 = new TheGuWithSentinel { Id = GuidSentinel, ShirtColor = "Red" };
 
@@ -548,8 +548,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -561,8 +561,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await categoryAdder(context, new[] { category1 });
@@ -684,8 +684,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -697,8 +697,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -710,8 +710,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -724,8 +724,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var principalEntry = await categoryAdder(context, principal);
@@ -821,8 +821,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var principal = new Category
         {
@@ -834,8 +834,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var relatedPrincipal = new Category
@@ -847,8 +847,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var dependent = new Product
         {
@@ -861,8 +861,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await adder(context, new object[] { principal, dependent });
@@ -956,8 +956,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -969,8 +969,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var categoryEntry1 = await categoryAdder(context, category1);
@@ -1070,8 +1070,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product1 = new Product
         {
@@ -1083,8 +1083,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         await categoryAdder(context, new List<Category> { category1 });
@@ -1349,8 +1349,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var entry = context.Entry(entity);
 
@@ -1376,8 +1376,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1390,8 +1390,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1429,8 +1429,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1443,8 +1443,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1480,8 +1480,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1494,8 +1494,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1531,8 +1531,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1545,8 +1545,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1582,8 +1582,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1595,8 +1595,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1632,8 +1632,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1645,8 +1645,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1682,8 +1682,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1696,8 +1696,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1735,8 +1735,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1749,8 +1749,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1786,8 +1786,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1800,8 +1800,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1837,8 +1837,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1851,8 +1851,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -1888,8 +1888,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1901,8 +1901,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1938,8 +1938,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -1951,8 +1951,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -1991,10 +1991,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2008,8 +2008,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2022,8 +2022,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2065,10 +2065,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2082,8 +2082,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2097,8 +2097,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product> { product };
@@ -2142,10 +2142,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2159,8 +2159,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2174,8 +2174,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product>();
@@ -2219,10 +2219,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2236,8 +2236,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2251,8 +2251,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product>();
@@ -2296,10 +2296,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2313,8 +2313,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2326,8 +2326,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2368,10 +2368,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2385,8 +2385,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2398,8 +2398,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2439,10 +2439,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2456,8 +2456,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2470,8 +2470,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2512,10 +2512,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2529,8 +2529,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2544,8 +2544,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product> { product };
@@ -2589,10 +2589,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2606,8 +2606,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2620,8 +2620,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product>();
 
@@ -2663,10 +2663,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2680,8 +2680,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         var product = new Product
@@ -2695,8 +2695,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
 
         category.Products = new List<Product>();
@@ -2740,10 +2740,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2757,8 +2757,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2770,8 +2770,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 
@@ -2812,10 +2812,10 @@ public partial class DbContextTest
                         Name = "Tanavast",
                         Stamp = new Stamp
                         {
-                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147")
+                            Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147"),
                         },
-                        Notes = new[] { "A", "B" }
-                    }
+                        Notes = new[] { "A", "B" },
+                    },
                 }
             )
             .Entity;
@@ -2829,8 +2829,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         var product = new Product
         {
@@ -2842,8 +2842,8 @@ public partial class DbContextTest
             {
                 Name = "Tanavast",
                 Stamp = new Stamp { Code = new Guid("984ade3c-2f7b-4651-a351-642e92ab7147") },
-                Notes = new[] { "A", "B" }
-            }
+                Notes = new[] { "A", "B" },
+            },
         };
         category.Products = new List<Product> { product };
 

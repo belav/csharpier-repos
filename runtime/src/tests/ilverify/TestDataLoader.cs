@@ -45,7 +45,7 @@ namespace ILVerification.Tests
                     {
                         return new ValidTypeTestCase
                         {
-                            MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle)
+                            MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle),
                         };
                     }
                     return null;
@@ -75,7 +75,7 @@ namespace ILVerification.Tests
                         }
                         var newItem = new InvalidTypeTestCase
                         {
-                            MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle)
+                            MetadataToken = MetadataTokens.GetToken(typeDefinitionHandle),
                         };
                         newItem.ExpectedVerifierErrors = verificationErrors;
                         return newItem;
@@ -133,7 +133,7 @@ namespace ILVerification.Tests
                     {
                         return new ValidILTestCase
                         {
-                            MetadataToken = MetadataTokens.GetToken(methodHandle)
+                            MetadataToken = MetadataTokens.GetToken(methodHandle),
                         };
                     }
                     return null;
@@ -171,7 +171,7 @@ namespace ILVerification.Tests
 
                         var newItem = new InvalidILTestCase
                         {
-                            MetadataToken = MetadataTokens.GetToken(methodHandle)
+                            MetadataToken = MetadataTokens.GetToken(methodHandle),
                         };
 
                         if (expectedErrors.Length > 0)

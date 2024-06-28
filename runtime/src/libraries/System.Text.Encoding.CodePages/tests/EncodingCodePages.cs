@@ -264,7 +264,7 @@ namespace System.Text.Tests
             {
                 20833,
                 "x-ebcdic-koreanextended",
-                "x-ebcdic-koreanextended"
+                "x-ebcdic-koreanextended",
             };
             yield return new object[] { 20838, "ibm-thai", "ibm-thai" };
             yield return new object[] { 20838, "ibm-thai", "csibmthai" };
@@ -378,7 +378,7 @@ namespace System.Text.Tests
             {
                 51932,
                 "euc-jp",
-                "extended_unix_code_packed_format_for_japanese"
+                "extended_unix_code_packed_format_for_japanese",
             };
             yield return new object[] { 51932, "euc-jp", "iso-2022-jpeuc" };
             yield return new object[] { 51932, "euc-jp", "x-euc" };
@@ -410,7 +410,7 @@ namespace System.Text.Tests
             {
                 "Windows-1256",
                 new byte[] { 0xC7, 0xE1, 0xE1, 0xE5, 0x20, 0xC7, 0xCD, 0xCF },
-                "\x0627\x0644\x0644\x0647\x0020\x0627\x062D\x062F"
+                "\x0627\x0644\x0644\x0647\x0020\x0627\x062D\x062F",
             };
             yield return new object[]
             {
@@ -432,15 +432,15 @@ namespace System.Text.Tests
                     0xDC,
                     0xDD,
                     0xDE,
-                    0xDF
+                    0xDF,
                 },
-                "\x00D0\x00D1\x00D2\x00D3\x00D4\x00D5\x00D6\x00D7\x00D8\x00D9\x00DA\x00DB\x00DC\x00DD\x00DE\x00DF"
+                "\x00D0\x00D1\x00D2\x00D3\x00D4\x00D5\x00D6\x00D7\x00D8\x00D9\x00DA\x00DB\x00DC\x00DD\x00DE\x00DF",
             };
             yield return new object[]
             {
                 "GB2312",
                 new byte[] { 0xCD, 0xE2, 0xCD, 0xE3, 0xCD, 0xE4 },
-                "\x5916\x8C4C\x5F2F"
+                "\x5916\x8C4C\x5F2F",
             };
             yield return new object[]
             {
@@ -466,9 +466,9 @@ namespace System.Text.Tests
                     0x81,
                     0x30,
                     0x8A,
-                    0x30
+                    0x30,
                 },
-                "\x00DE\x00DF\x00E0\x00E1\x00E2\x00E3"
+                "\x00DE\x00DF\x00E0\x00E1\x00E2\x00E3",
             };
         }
 
@@ -528,7 +528,7 @@ namespace System.Text.Tests
                     0x0E,
                     0x25,
                     0x0F,
-                    0x43
+                    0x43,
                 },
                 new int[]
                 {
@@ -548,8 +548,8 @@ namespace System.Text.Tests
                     0x41,
                     0x42,
                     0xFF65,
-                    0x43
-                }
+                    0x43,
+                },
             };
 
             yield return new object[]
@@ -569,16 +569,16 @@ namespace System.Text.Tests
                     0x82,
                     0x31,
                     0x81,
-                    0x20
+                    0x20,
                 },
-                new int[] { 0x41, 0x42, 0x43, 0x4E02, 0x500B, 0x8B, 0x3F, 0x20 }
+                new int[] { 0x41, 0x42, 0x43, 0x4E02, 0x500B, 0x8B, 0x3F, 0x20 },
             };
 
             yield return new object[]
             {
                 "shift_jis",
                 new byte[] { 0x41, 0x42, 0x43, 0x81, 0x42, 0xE0, 0x43, 0x44, 0x45 },
-                new int[] { 0x41, 0x42, 0x43, 0x3002, 0x6F86, 0x44, 0x45 }
+                new int[] { 0x41, 0x42, 0x43, 0x3002, 0x6F86, 0x44, 0x45 },
             };
 
             yield return new object[]
@@ -603,9 +603,9 @@ namespace System.Text.Tests
                     0x29,
                     0x43,
                     0x21,
-                    0x7E
+                    0x7E,
                 },
-                new int[] { 0xFFE2, 0xFFE2, 0x21, 0x7E, 0x21, 0x7E }
+                new int[] { 0xFFE2, 0xFFE2, 0x21, 0x7E, 0x21, 0x7E },
             };
 
             yield return new object[]
@@ -628,9 +628,9 @@ namespace System.Text.Tests
                     0x7E,
                     0xA,
                     0x43,
-                    0x43
+                    0x43,
                 },
-                new int[] { 0x7E, 0x42, 0x7E, 0x3013, 0x42, 0x42, 0x43, 0x43, }
+                new int[] { 0x7E, 0x42, 0x7E, 0x3013, 0x42, 0x42, 0x43, 0x43 },
             };
         }
 

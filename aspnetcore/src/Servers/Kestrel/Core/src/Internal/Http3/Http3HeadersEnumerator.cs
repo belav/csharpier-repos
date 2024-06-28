@@ -14,7 +14,7 @@ internal sealed class Http3HeadersEnumerator : IEnumerator<KeyValuePair<string, 
     {
         Headers,
         Trailers,
-        Untyped
+        Untyped,
     }
 
     private HeadersType _headersType;

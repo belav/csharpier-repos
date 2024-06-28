@@ -166,7 +166,7 @@ internal class UrlMatchingTree
                 {
                     current.ConstrainedCatchAlls = new UrlMatchingNode(length: i + 1)
                     {
-                        IsCatchAll = true
+                        IsCatchAll = true,
                     };
                 }
 
@@ -215,7 +215,7 @@ internal class UrlMatchingTree
                     {
                         current.ConstrainedCatchAlls = new UrlMatchingNode(length: i + 1)
                         {
-                            IsCatchAll = true
+                            IsCatchAll = true,
                         };
                     }
 
@@ -229,7 +229,7 @@ internal class UrlMatchingTree
                     {
                         current.CatchAlls = new UrlMatchingNode(length: i + 1)
                         {
-                            IsCatchAll = true
+                            IsCatchAll = true,
                         };
                     }
 

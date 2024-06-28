@@ -37,7 +37,7 @@ namespace System.Diagnostics.Tests
                     new EventLogWatcher(
                         new EventLogQuery("Application", PathType.LogName, "*[System]")
                         {
-                            ReverseDirection = true
+                            ReverseDirection = true,
                         },
                         bookmark,
                         true

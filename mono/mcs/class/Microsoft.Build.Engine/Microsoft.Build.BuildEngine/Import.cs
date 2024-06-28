@@ -227,7 +227,7 @@ namespace Microsoft.Build.BuildEngine
                     var settings in new ProjectLoadSettings[]
                     {
                         ProjectLoadSettings.None,
-                        currentLoadSettings
+                        currentLoadSettings,
                     }
                 )
                 {
@@ -318,7 +318,7 @@ namespace Microsoft.Build.BuildEngine
                 var directoryScanner = new DirectoryScanner()
                 {
                     Includes = new ITaskItem[] { new TaskItem(parsed_import) },
-                    BaseDirectory = base_dir_info
+                    BaseDirectory = base_dir_info,
                 };
                 directoryScanner.Scan();
 
@@ -354,7 +354,7 @@ namespace Microsoft.Build.BuildEngine
                         ? MacOSXExternalXBuildDir
                         : String.Empty,
                     DotConfigExtensionsPath,
-                    Project.DefaultExtensionsPath
+                    Project.DefaultExtensionsPath,
                 }
             );
 

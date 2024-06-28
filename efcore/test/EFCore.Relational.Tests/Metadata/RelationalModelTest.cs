@@ -42,7 +42,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 5,
                     Mapping.TPH => 3,
-                    _ => 6
+                    _ => 6,
                 },
                 model.Tables.Count()
             );
@@ -67,7 +67,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 5,
                     Mapping.TPH => 3,
-                    _ => 6
+                    _ => 6,
                 },
                 model.Views.Count()
             );
@@ -99,7 +99,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 5,
                     Mapping.TPH => 3,
-                    _ => 6
+                    _ => 6,
                 },
                 model.Tables.Count()
             );
@@ -109,7 +109,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 24,
                     Mapping.TPH => 18,
-                    _ => 27
+                    _ => 27,
                 },
                 model.StoredProcedures.Count()
             );
@@ -137,7 +137,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 5,
                     Mapping.TPH => 3,
-                    _ => 6
+                    _ => 6,
                 },
                 model.Views.Count()
             );
@@ -147,7 +147,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 24,
                     Mapping.TPH => 18,
-                    _ => 27
+                    _ => 27,
                 },
                 model.StoredProcedures.Count()
             );
@@ -171,7 +171,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 5,
                     Mapping.TPH => 3,
-                    _ => 6
+                    _ => 6,
                 },
                 model.Tables.Count()
             );
@@ -181,7 +181,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     Mapping.TPC => 5,
                     Mapping.TPH => 3,
-                    _ => 6
+                    _ => 6,
                 },
                 model.Views.Count()
             );
@@ -202,7 +202,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.Id),
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 orderMapping.ColumnMappings.Select(m => m.Property.Name)
             );
@@ -218,7 +218,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
                     nameof(Order.Id),
-                    "OrderDate"
+                    "OrderDate",
                 },
                 ordersTable.Columns.Select(m => m.Name)
             );
@@ -395,7 +395,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.Id),
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 orderMapping.ColumnMappings.Select(m => m.Property.Name)
             );
@@ -408,7 +408,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order),
                     nameof(OrderDetails),
                     "OrderDetails.BillingAddress#Address",
-                    "OrderDetails.ShippingAddress#Address"
+                    "OrderDetails.ShippingAddress#Address",
                 },
                 ordersView.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
             );
@@ -423,7 +423,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     "Details_ShippingAddress_City",
                     "Details_ShippingAddress_Street",
                     nameof(Order.Id),
-                    "OrderDate"
+                    "OrderDate",
                 },
                 ordersView.Columns.Select(m => m.Name)
             );
@@ -746,7 +746,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.Id),
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 orderMapping.ColumnMappings.Select(m => m.Property.Name)
             );
@@ -759,7 +759,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order),
                     nameof(OrderDetails),
                     "OrderDetails.BillingAddress#Address",
-                    "OrderDetails.ShippingAddress#Address"
+                    "OrderDetails.ShippingAddress#Address",
                 },
                 ordersTable.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
             );
@@ -774,7 +774,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     "Details_BillingAddress_Street",
                     "Details_ShippingAddress_City",
                     "Details_ShippingAddress_Street",
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 ordersTable.Columns.Select(m => m.Name)
             );
@@ -953,7 +953,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     orderPk,
                     billingAddressType.FindPrimaryKey(),
                     shippingAddressType.FindPrimaryKey(),
-                    orderDetailsPk
+                    orderDetailsPk,
                 },
                 orderPkConstraint.MappedKeys
             );
@@ -1136,7 +1136,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         StoreObjectIdentifier.Table(
                             specialCustomerTable.Name,
                             specialCustomerTable.Schema
-                        )
+                        ),
                     },
                     abstractStringProperty.GetMappedStoreObjects(StoreObjectType.Table)
                 );
@@ -1169,7 +1169,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         StoreObjectIdentifier.Table(
                             extraSpecialCustomerTable.Name,
                             extraSpecialCustomerTable.Schema
-                        )
+                        ),
                     },
                     idProperty.GetMappedStoreObjects(StoreObjectType.Table)
                 );
@@ -1344,7 +1344,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     Assert.Equal(
                         new[]
                         {
-                            StoreObjectIdentifier.Table(customerTable.Name, customerTable.Schema)
+                            StoreObjectIdentifier.Table(customerTable.Name, customerTable.Schema),
                         },
                         abstractStringProperty.GetMappedStoreObjects(StoreObjectType.Table)
                     );
@@ -1353,7 +1353,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     Assert.Equal(
                         new[]
                         {
-                            StoreObjectIdentifier.Table(customerTable.Name, customerTable.Schema)
+                            StoreObjectIdentifier.Table(customerTable.Name, customerTable.Schema),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.Table)
                     );
@@ -1435,7 +1435,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         {
                             anotherSpecialCustomerFkConstraint,
                             specialCustomerFkConstraint,
-                            orderCustomerFkConstraint
+                            orderCustomerFkConstraint,
                         },
                         customerTable.ReferencingForeignKeyConstraints
                     );
@@ -1499,7 +1499,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.Table(
                                 extraSpecialCustomerTable.Name,
                                 extraSpecialCustomerTable.Schema
-                            )
+                            ),
                         },
                         abstractStringProperty.GetMappedStoreObjects(StoreObjectType.Table)
                     );
@@ -1516,7 +1516,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.Table(
                                 extraSpecialCustomerTable.Name,
                                 extraSpecialCustomerTable.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.Table)
                     );
@@ -1582,7 +1582,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 orderInsertMapping.ParameterMappings.Select(m => m.Property.Name)
             );
@@ -1615,7 +1615,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 ordersInsertSproc.Parameters.Select(m => m.Name)
             );
@@ -1776,7 +1776,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                 {
                     nameof(Address.City),
                     nameof(Address.Street),
-                    "OrderDetailsOrderId_Original"
+                    "OrderDetailsOrderId_Original",
                 },
                 billingAddressUpdateSproc.Parameters.Select(m => m.Name)
             );
@@ -1948,7 +1948,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         nameof(AbstractCustomer),
                         nameof(Customer),
                         nameof(ExtraSpecialCustomer),
-                        nameof(SpecialCustomer)
+                        nameof(SpecialCustomer),
                     },
                     baseInsertSproc.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
                 );
@@ -2005,7 +2005,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         nameof(AbstractCustomer),
                         nameof(Customer),
                         nameof(ExtraSpecialCustomer),
-                        nameof(SpecialCustomer)
+                        nameof(SpecialCustomer),
                     },
                     baseUpdateSproc.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
                 );
@@ -2062,7 +2062,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         nameof(AbstractCustomer),
                         nameof(Customer),
                         nameof(ExtraSpecialCustomer),
-                        nameof(SpecialCustomer)
+                        nameof(SpecialCustomer),
                     },
                     baseDeleteSproc.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
                 );
@@ -2154,7 +2154,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         StoreObjectIdentifier.InsertStoredProcedure(
                             specialCustomerInsertSproc.Name,
                             specialCustomerInsertSproc.Schema
-                        )
+                        ),
                     },
                     abstractStringProperty.GetMappedStoreObjects(
                         StoreObjectType.InsertStoredProcedure
@@ -2205,7 +2205,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         StoreObjectIdentifier.InsertStoredProcedure(
                             extraSpecialCustomerInsertSproc.Name,
                             extraSpecialCustomerInsertSproc.Schema
-                        )
+                        ),
                     },
                     idProperty.GetMappedStoreObjects(StoreObjectType.InsertStoredProcedure)
                 );
@@ -2258,7 +2258,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         StoreObjectIdentifier.UpdateStoredProcedure(
                             extraSpecialCustomerUpdateSproc.Name,
                             extraSpecialCustomerUpdateSproc.Schema
-                        )
+                        ),
                     },
                     idProperty.GetMappedStoreObjects(StoreObjectType.UpdateStoredProcedure)
                 );
@@ -2310,7 +2310,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         StoreObjectIdentifier.DeleteStoredProcedure(
                             extraSpecialCustomerDeleteSproc.Name,
                             extraSpecialCustomerDeleteSproc.Schema
-                        )
+                        ),
                     },
                     idProperty.GetMappedStoreObjects(StoreObjectType.DeleteStoredProcedure)
                 );
@@ -2384,7 +2384,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             nameof(AbstractCustomer),
                             nameof(Customer),
                             nameof(ExtraSpecialCustomer),
-                            nameof(SpecialCustomer)
+                            nameof(SpecialCustomer),
                         },
                         baseInsertSproc.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
                     );
@@ -2480,7 +2480,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             nameof(AbstractCustomer),
                             nameof(Customer),
                             nameof(ExtraSpecialCustomer),
-                            nameof(SpecialCustomer)
+                            nameof(SpecialCustomer),
                         },
                         baseUpdateSproc.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
                     );
@@ -2558,7 +2558,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             nameof(AbstractCustomer),
                             nameof(Customer),
                             nameof(ExtraSpecialCustomer),
-                            nameof(SpecialCustomer)
+                            nameof(SpecialCustomer),
                         },
                         baseDeleteSproc.EntityTypeMappings.Select(m => m.TypeBase.DisplayName())
                     );
@@ -2606,7 +2606,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.InsertStoredProcedure(
                                 customerInsertSproc.Name,
                                 customerInsertSproc.Schema
-                            )
+                            ),
                         },
                         abstractStringProperty.GetMappedStoreObjects(
                             StoreObjectType.InsertStoredProcedure
@@ -2646,7 +2646,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.InsertStoredProcedure(
                                 customerInsertSproc.Name,
                                 customerInsertSproc.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.InsertStoredProcedure)
                     );
@@ -2685,7 +2685,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.UpdateStoredProcedure(
                                 customerUpdateSproc.Name,
                                 customerUpdateSproc.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.UpdateStoredProcedure)
                     );
@@ -2723,7 +2723,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.DeleteStoredProcedure(
                                 customerDeleteSproc.Name,
                                 customerDeleteSproc.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.DeleteStoredProcedure)
                     );
@@ -2773,7 +2773,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             nameof(Customer.EnumValue),
                             nameof(Customer.Name),
                             nameof(Customer.SomeShort),
-                            "SpecialtyAk"
+                            "SpecialtyAk",
                         },
                         customerInsertSproc.Parameters.Select(m => m.Name)
                     );
@@ -2807,7 +2807,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             "UpdateId",
                             nameof(Customer.EnumValue),
                             nameof(Customer.Name),
-                            nameof(Customer.SomeShort)
+                            nameof(Customer.SomeShort),
                         },
                         customerUpdateSproc.Parameters.Select(m => m.Name)
                     );
@@ -2895,7 +2895,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.InsertStoredProcedure(
                                 extraSpecialCustomerInsertSproc.Name,
                                 extraSpecialCustomerInsertSproc.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.InsertStoredProcedure)
                     );
@@ -2949,7 +2949,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.UpdateStoredProcedure(
                                 extraSpecialCustomerUpdateSproc.Name,
                                 extraSpecialCustomerUpdateSproc.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.UpdateStoredProcedure)
                     );
@@ -3002,7 +3002,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                             StoreObjectIdentifier.DeleteStoredProcedure(
                                 extraSpecialCustomerDeleteSproc.Name,
                                 extraSpecialCustomerDeleteSproc.Schema
-                            )
+                            ),
                         },
                         idProperty.GetMappedStoreObjects(StoreObjectType.DeleteStoredProcedure)
                     );
@@ -3711,7 +3711,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "EnumValue",
                         "Id",
                         "Name",
-                        "SomeShort"
+                        "SomeShort",
                     },
                     customerView.Columns.Select(t => t.Name)
                 );
@@ -3723,7 +3723,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "Details_BirthDay",
                         "Id",
                         "RelatedCustomerSpecialty",
-                        "Specialty"
+                        "Specialty",
                     },
                     customerDetailsView.Columns.Select(t => t.Name)
                 );
@@ -3778,7 +3778,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "Details_Address",
                         "EnumValue",
                         "Name",
-                        "SomeShort"
+                        "SomeShort",
                     },
                     customerTable.Columns.Select(t => t.Name)
                 );
@@ -3795,7 +3795,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                         "AbstractString",
                         "Details_BirthDay",
                         "RelatedCustomerSpecialty",
-                        "Specialty"
+                        "Specialty",
                     },
                     customerDetailsTable.Columns.Select(t => t.Name)
                 );
@@ -3917,7 +3917,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     "Details_Address",
                     "EnumValue",
                     "Name",
-                    "SomeShort"
+                    "SomeShort",
                 },
                 customerTable.Columns.Select(t => t.Name)
             );
@@ -4067,7 +4067,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     "AbstractString",
                     "Details_Address",
                     "RelatedCustomerSpecialty",
-                    "Specialty"
+                    "Specialty",
                 },
                 customerDetailsTable.Columns.Select(t => t.Name)
             );
@@ -4210,7 +4210,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
                     nameof(Order.Id),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 orderMapping.ColumnMappings.Select(m => m.Property.Name)
             );
@@ -4226,7 +4226,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.CustomerId),
                     nameof(Order.Id),
                     nameof(Order.OrderDate),
-                    "SomeName"
+                    "SomeName",
                 },
                 ordersQuery.Columns.Select(m => m.Name)
             );
@@ -4317,7 +4317,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.AlternateId),
                     nameof(Order.CustomerId),
                     nameof(Order.Id),
-                    nameof(Order.OrderDate)
+                    nameof(Order.OrderDate),
                 },
                 orderMapping.ColumnMappings.Select(m => m.Property.Name)
             );
@@ -4337,7 +4337,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata
                     nameof(Order.CustomerId),
                     nameof(Order.Id),
                     nameof(Order.OrderDate),
-                    "SomeName"
+                    "SomeName",
                 },
                 ordersFunction.Columns.Select(m => m.Name)
             );
@@ -5035,14 +5035,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             TPH,
             TPT,
-            TPC
+            TPC,
         }
 
         private enum MyEnum : ulong
         {
             Sun,
             Mon,
-            Tue
+            Tue,
         }
 
         private abstract class AbstractBase

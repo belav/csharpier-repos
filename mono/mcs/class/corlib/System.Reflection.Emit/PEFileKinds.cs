@@ -31,6 +31,6 @@ namespace System.Reflection.Emit
     {
         Dll = 1,
         ConsoleApplication = 2,
-        WindowApplication = 3
+        WindowApplication = 3,
     }
 }

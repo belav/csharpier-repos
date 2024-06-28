@@ -29,7 +29,7 @@ namespace System.Xml.XmlWriterTests
                 char[] invalidSurrogatePair = new char[]
                 {
                     (char)(SurHighStart + 5),
-                    (char)(SurLowStart - 1)
+                    (char)(SurLowStart - 1),
                 };
 
                 AssertExtensions.Throws<ArgumentException>(
@@ -55,7 +55,7 @@ namespace System.Xml.XmlWriterTests
                 char[] invalidSurrogatePair = new char[]
                 {
                     (char)(SurHighStart + 5),
-                    (char)(SurLowEnd + 1)
+                    (char)(SurLowEnd + 1),
                 };
 
                 AssertExtensions.Throws<ArgumentException>(

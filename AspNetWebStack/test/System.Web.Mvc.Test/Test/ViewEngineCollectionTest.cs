@@ -17,7 +17,7 @@ namespace System.Web.Mvc.Test
             List<IViewEngine> list = new List<IViewEngine>()
             {
                 new Mock<IViewEngine>().Object,
-                new Mock<IViewEngine>().Object
+                new Mock<IViewEngine>().Object,
             };
 
             // Act
@@ -59,7 +59,7 @@ namespace System.Web.Mvc.Test
             var engines = new IViewEngine[]
             {
                 new Mock<IViewEngine>(MockBehavior.Strict).Object,
-                new Mock<IViewEngine>(MockBehavior.Strict).Object
+                new Mock<IViewEngine>(MockBehavior.Strict).Object,
             };
             var collection = new ViewEngineCollection(engines);
 
@@ -107,7 +107,7 @@ namespace System.Web.Mvc.Test
             var providers = new List<IViewEngine>()
             {
                 new Mock<IViewEngine>(MockBehavior.Strict).Object,
-                new Mock<IViewEngine>(MockBehavior.Strict).Object
+                new Mock<IViewEngine>(MockBehavior.Strict).Object,
             };
             var collection = new ViewEngineCollection(providers);
 
@@ -133,7 +133,7 @@ namespace System.Web.Mvc.Test
             {
                 firstEngine.Object,
                 secondEngine.Object,
-                thirdEngine.Object
+                thirdEngine.Object,
             };
 
             var resolver = new Mock<IDependencyResolver>();
@@ -252,7 +252,7 @@ namespace System.Web.Mvc.Test
                 engine.Object
             );
             engine.Setup(e => e.FindPartialView(context, "partial", true)).Returns(engineResult);
-            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object, };
+            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object };
 
             // Act
             ViewEngineResult result = collection.FindPartialView(context, "partial");
@@ -277,7 +277,7 @@ namespace System.Web.Mvc.Test
                 .Setup(e => e.FindPartialView(context, "partial", true))
                 .Returns(new ViewEngineResult(new[] { "path" }));
             engine.Setup(e => e.FindPartialView(context, "partial", false)).Returns(engineResult);
-            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object, };
+            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object };
 
             // Act
             ViewEngineResult result = collection.FindPartialView(context, "partial");
@@ -300,7 +300,7 @@ namespace System.Web.Mvc.Test
             engine
                 .Setup(e => e.FindPartialView(context, "partial", false))
                 .Returns(new ViewEngineResult(new[] { "locatorPath" }));
-            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object, };
+            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object };
 
             // Act
             ViewEngineResult result = collection.FindPartialView(context, "partial");
@@ -559,7 +559,7 @@ namespace System.Web.Mvc.Test
                 engine.Object
             );
             engine.Setup(e => e.FindView(context, "view", "master", true)).Returns(engineResult);
-            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object, };
+            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object };
 
             // Act
             ViewEngineResult result = collection.FindView(context, "view", "master");
@@ -584,7 +584,7 @@ namespace System.Web.Mvc.Test
                 .Setup(e => e.FindView(context, "view", "master", true))
                 .Returns(new ViewEngineResult(new[] { "path" }));
             engine.Setup(e => e.FindView(context, "view", "master", false)).Returns(engineResult);
-            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object, };
+            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object };
 
             // Act
             ViewEngineResult result = collection.FindView(context, "view", "master");
@@ -607,7 +607,7 @@ namespace System.Web.Mvc.Test
             engine
                 .Setup(e => e.FindView(context, "view", "master", false))
                 .Returns(new ViewEngineResult(new[] { "locatorPath" }));
-            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object, };
+            ViewEngineCollection collection = new ViewEngineCollection() { engine.Object };
 
             // Act
             ViewEngineResult result = collection.FindView(context, "view", "master");

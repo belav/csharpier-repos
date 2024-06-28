@@ -58,7 +58,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 new CodeAndImportGenerationOptions()
                 {
                     GenerationOptions = options.GenerationOptions,
-                    AddImportOptions = options.CleanupOptions.AddImportOptions
+                    AddImportOptions = options.CleanupOptions.AddImportOptions,
                 }.CreateProvider()
             );
 

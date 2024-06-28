@@ -46,7 +46,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.genericTypeArguments;
@@ -70,7 +70,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.parameters;
@@ -165,7 +165,7 @@ namespace System.Activities.Statements
                 GenericTypeArguments = this.GenericTypeArguments,
                 Parameters = this.Parameters,
                 Result = this.resultArgument,
-                Parent = this
+                Parent = this,
             };
 
             if (this.Result != null)

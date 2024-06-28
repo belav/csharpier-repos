@@ -111,7 +111,7 @@ namespace System.ServiceModel.Dispatcher
                 new KeyValuePair<UriTemplate, object>(
                     new UriTemplate(OperationHelpPageUriTemplate),
                     HelpOperationMethodName
-                )
+                ),
             };
         }
 

@@ -16,8 +16,8 @@ namespace Microsoft.AspNetCore.Mvc.Rendering;
 
 public class HtmlHelperSelectTest
 {
-    private static readonly SelectListGroup GroupOne = new SelectListGroup { Name = "Group One", };
-    private static readonly SelectListGroup GroupTwo = new SelectListGroup { Name = "Group Two", };
+    private static readonly SelectListGroup GroupOne = new SelectListGroup { Name = "Group One" };
+    private static readonly SelectListGroup GroupTwo = new SelectListGroup { Name = "Group Two" };
     private static readonly SelectListGroup DisabledGroup = new SelectListGroup
     {
         Disabled = true,
@@ -577,7 +577,7 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = SelectSources.ViewDataEntryWithPrefix,
             ["Prefix"] = new ModelContainingSources
             {
-                Property1 = SelectSources.PropertyOfViewDataEntry
+                Property1 = SelectSources.PropertyOfViewDataEntry,
             },
         };
         viewData.Model = new ModelContainingSources { Property1 = SelectSources.PropertyOfModel };
@@ -625,7 +625,7 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = SelectSources.ViewDataEntryWithPrefix,
             ["Prefix"] = new ModelContainingSources
             {
-                Property1 = SelectSources.PropertyOfViewDataEntry
+                Property1 = SelectSources.PropertyOfViewDataEntry,
             },
         };
         viewData.Model = new ModelContainingSources { Property1 = SelectSources.PropertyOfModel };
@@ -662,7 +662,7 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = SelectSources.ViewDataEntryWithPrefix,
             ["Prefix"] = new ModelContainingSources
             {
-                Property1 = SelectSources.PropertyOfViewDataEntry
+                Property1 = SelectSources.PropertyOfViewDataEntry,
             },
         };
         viewData.Model = new ModelContainingSources { Property1 = SelectSources.PropertyOfModel };
@@ -698,7 +698,7 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = SelectSources.ViewDataEntryWithPrefix,
             ["Prefix"] = new ModelContainingSources
             {
-                Property1 = SelectSources.PropertyOfViewDataEntry
+                Property1 = SelectSources.PropertyOfViewDataEntry,
             },
         };
         viewData.Model = new ModelContainingSources { Property1 = SelectSources.PropertyOfModel };
@@ -734,7 +734,7 @@ public class HtmlHelperSelectTest
             ["Property1"] = SelectSources.ViewDataEntry,
             ["Prefix"] = new ModelContainingSources
             {
-                Property1 = SelectSources.PropertyOfViewDataEntry
+                Property1 = SelectSources.PropertyOfViewDataEntry,
             },
         };
         viewData.Model = new ModelContainingSources { Property1 = SelectSources.PropertyOfModel };
@@ -1073,12 +1073,12 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = new[] { SelectSources.ViewDataEntryWithPrefix },
             ["Prefix"] = new ModelContainingListOfSources
             {
-                Property1 = { SelectSources.PropertyOfViewDataEntry }
+                Property1 = { SelectSources.PropertyOfViewDataEntry },
             },
         };
         viewData.Model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(viewData);
@@ -1119,12 +1119,12 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = new[] { SelectSources.ViewDataEntryWithPrefix },
             ["Prefix"] = new ModelContainingListOfSources
             {
-                Property1 = { SelectSources.PropertyOfViewDataEntry }
+                Property1 = { SelectSources.PropertyOfViewDataEntry },
             },
         };
         viewData.Model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
         viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
@@ -1154,12 +1154,12 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = new[] { SelectSources.ViewDataEntryWithPrefix },
             ["Prefix"] = new ModelContainingListOfSources
             {
-                Property1 = { SelectSources.PropertyOfViewDataEntry }
+                Property1 = { SelectSources.PropertyOfViewDataEntry },
             },
         };
         viewData.Model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(viewData);
@@ -1188,12 +1188,12 @@ public class HtmlHelperSelectTest
             ["Prefix.Property1"] = new[] { SelectSources.ViewDataEntryWithPrefix },
             ["Prefix"] = new ModelContainingListOfSources
             {
-                Property1 = { SelectSources.PropertyOfViewDataEntry }
+                Property1 = { SelectSources.PropertyOfViewDataEntry },
             },
         };
         viewData.Model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
         viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
@@ -1222,12 +1222,12 @@ public class HtmlHelperSelectTest
             ["Property1"] = new[] { SelectSources.ViewDataEntry },
             ["Prefix"] = new ModelContainingListOfSources
             {
-                Property1 = { SelectSources.PropertyOfViewDataEntry }
+                Property1 = { SelectSources.PropertyOfViewDataEntry },
             },
         };
         viewData.Model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
         viewData.TemplateInfo.HtmlFieldPrefix = "Prefix";
 
@@ -1251,7 +1251,7 @@ public class HtmlHelperSelectTest
         );
         var model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         helper.ViewContext.ClientValidationEnabled = false;
@@ -1273,7 +1273,7 @@ public class HtmlHelperSelectTest
         );
         var model = new ModelContainingListOfSources
         {
-            Property1 = { SelectSources.PropertyOfModel }
+            Property1 = { SelectSources.PropertyOfModel },
         };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         helper.ViewContext.ClientValidationEnabled = false;
@@ -1784,7 +1784,7 @@ public class HtmlHelperSelectTest
                         new SelectListItem
                         {
                             Text = nameof(EnumWithDuplicates.MoreThanTwo),
-                            Value = "3"
+                            Value = "3",
                         },
                         new SelectListItem { Text = nameof(EnumWithDuplicates.Three), Value = "3" },
                     }
@@ -1801,7 +1801,7 @@ public class HtmlHelperSelectTest
                         new SelectListItem
                         {
                             Text = nameof(EnumWithDuplicates.MoreThanTwo),
-                            Value = "3"
+                            Value = "3",
                         },
                         new SelectListItem { Text = nameof(EnumWithDuplicates.Three), Value = "3" },
                     }

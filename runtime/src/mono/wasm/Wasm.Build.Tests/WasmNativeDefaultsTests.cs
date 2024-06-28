@@ -243,7 +243,7 @@ namespace Wasm.Build.Tests
                 { "Debug", "<WasmNativeStrip>true</WasmNativeStrip>", false, true },
                 { "Release", "<WasmNativeStrip>true</WasmNativeStrip>", publish, true },
                 { "Debug", "<WasmNativeStrip>false</WasmNativeStrip>", true, false },
-                { "Release", "<WasmNativeStrip>false</WasmNativeStrip>", true, false }
+                { "Release", "<WasmNativeStrip>false</WasmNativeStrip>", true, false },
             };
 
         public static TheoryData<
@@ -277,7 +277,7 @@ namespace Wasm.Build.Tests
                     "<WasmNativeStrip>true</WasmNativeStrip><WasmEnableLegacyJsInterop>false</WasmEnableLegacyJsInterop>",
                     true,
                     true
-                }
+                },
             };
 
         [Theory]

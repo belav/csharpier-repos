@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents an argument for use in a custom attribute declaration.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeAttributeArgument
     {
         private string name;

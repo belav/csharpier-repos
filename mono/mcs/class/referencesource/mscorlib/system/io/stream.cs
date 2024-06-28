@@ -580,7 +580,7 @@ namespace System.IO
                 {
                     Buffer = buffer,
                     Offset = offset,
-                    Count = count
+                    Count = count,
                 },
                 (stream, args, callback, state) =>
                     stream.BeginRead(args.Buffer, args.Offset, args.Count, callback, state), // cached by compiler
@@ -957,7 +957,7 @@ namespace System.IO
                 {
                     Buffer = buffer,
                     Offset = offset,
-                    Count = count
+                    Count = count,
                 },
                 (stream, args, callback, state) =>
                     stream.BeginWrite(args.Buffer, args.Offset, args.Count, callback, state), // cached by compiler

@@ -32,6 +32,6 @@ namespace MonoTests.System.Data.Connected
     {
         SQLServer = 1,
         MySQL = 2,
-        PostgreSQL = 3
+        PostgreSQL = 3,
     }
 }

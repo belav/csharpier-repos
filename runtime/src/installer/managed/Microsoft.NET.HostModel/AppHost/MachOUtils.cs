@@ -22,12 +22,12 @@ namespace Microsoft.NET.HostModel.AppHost
             MH_MAGIC = 0xfeedface,
             MH_CIGAM = 0xcefaedfe,
             MH_MAGIC_64 = 0xfeedfacf,
-            MH_CIGAM_64 = 0xcffaedfe
+            MH_CIGAM_64 = 0xcffaedfe,
         }
 
         private enum FileType : uint
         {
-            MH_EXECUTE = 0x2
+            MH_EXECUTE = 0x2,
         }
 
 #pragma warning disable 0649

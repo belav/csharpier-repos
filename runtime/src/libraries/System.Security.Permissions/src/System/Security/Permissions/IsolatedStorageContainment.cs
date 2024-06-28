@@ -25,6 +25,6 @@ namespace System.Security.Permissions
         AdministerIsolatedStorageByUser = 0x70,
 
         //AdministerIsolatedStorageByMachine    = 0x80,
-        UnrestrictedIsolatedStorage = 0xF0
+        UnrestrictedIsolatedStorage = 0xF0,
     }
 }

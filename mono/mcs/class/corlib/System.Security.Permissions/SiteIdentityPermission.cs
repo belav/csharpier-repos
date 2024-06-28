@@ -275,7 +275,7 @@ namespace System.Security.Permissions
             /* 123 */true,
             false,
             true,
-            true
+            true,
         };
 
         private bool IsValid(string s)

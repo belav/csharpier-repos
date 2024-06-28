@@ -19,11 +19,10 @@ namespace ILLink.Shared.TypeSystemProxy
             IsImplicitThis ? Method.Method.OwningType : Method.Method.Signature[MetadataIndex];
 
         public partial string GetDisplayName() =>
-            IsImplicitThis
-                ? "this"
-                : (Method.Method is EcmaMethod ecmaMethod)
-                    ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
-                    : $"#{Index}";
+            IsImplicitThis ? "this"
+            : (Method.Method is EcmaMethod ecmaMethod)
+                ? ecmaMethod.GetParameterDisplayName(MetadataIndex)
+            : $"#{Index}";
 
         public partial bool IsTypeOf(string typeName) => ParameterType.IsTypeOf(typeName);
 

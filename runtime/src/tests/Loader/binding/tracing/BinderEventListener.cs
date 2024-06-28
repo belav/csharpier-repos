@@ -146,7 +146,7 @@ namespace BinderTracingTests
             Unused,
             AppPaths,
             PlatformResourceRoots,
-            SatelliteSubdirectory
+            SatelliteSubdirectory,
         }
 
         public string FilePath { get; internal set; }
@@ -470,7 +470,7 @@ namespace BinderTracingTests
                 AssemblyLoadContext = getDataString("AssemblyLoadContext"),
                 Result = (ResolutionAttempt.ResolutionResult)getData("Result"),
                 ResultAssemblyPath = getDataString("ResultAssemblyPath"),
-                ErrorMessage = getDataString("ErrorMessage")
+                ErrorMessage = getDataString("ErrorMessage"),
             };
             string resultName = getDataString("ResultAssemblyName");
             if (!string.IsNullOrEmpty(resultName) && resultName != "NULL")
@@ -488,7 +488,7 @@ namespace BinderTracingTests
                 AssemblyName = new AssemblyName(getDataString("AssemblyName")),
                 HandlerName = getDataString("HandlerName"),
                 AssemblyLoadContext = getDataString("AssemblyLoadContext"),
-                ResultAssemblyPath = getDataString("ResultAssemblyPath")
+                ResultAssemblyPath = getDataString("ResultAssemblyPath"),
             };
             string resultName = getDataString("ResultAssemblyName");
             if (!string.IsNullOrEmpty(resultName) && resultName != "NULL")

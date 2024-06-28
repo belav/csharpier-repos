@@ -26,7 +26,7 @@ namespace XDocumentTests.SDMSample
                 new XComment("comment"),
                 new XElement("element"),
                 new XProcessingInstruction("target", "data"),
-                new XDocumentType("name", "publicid", "systemid", "internalsubset")
+                new XDocumentType("name", "publicid", "systemid", "internalsubset"),
             };
 
             foreach (XNode node in nodes)
@@ -45,7 +45,7 @@ namespace XDocumentTests.SDMSample
                 new XComment("abcd"),
                 new XElement("nested"),
                 new XProcessingInstruction("target2", "data2"),
-                new XText("text")
+                new XText("text"),
             };
 
             XElement root = new XElement("root");
@@ -79,14 +79,14 @@ namespace XDocumentTests.SDMSample
                 "text",
                 "<![CDATA[abcd]]>",
                 "<!-- comment -->",
-                "<y>y</y>"
+                "<y>y</y>",
             };
             Type[] types = new Type[]
             {
                 typeof(XText),
                 typeof(XCData),
                 typeof(XComment),
-                typeof(XElement)
+                typeof(XElement),
             };
 
             int count = rawXml.Length;
@@ -508,14 +508,14 @@ namespace XDocumentTests.SDMSample
             {
                 new XComment("comment"),
                 new XElement("element"),
-                new XProcessingInstruction("target", "data")
+                new XProcessingInstruction("target", "data"),
             };
 
             XNode[] nestedNodes = new XNode[]
             {
                 new XText("abcd"),
                 new XElement("nested"),
-                new XProcessingInstruction("target2", "data2")
+                new XProcessingInstruction("target2", "data2"),
             };
 
             // Test top-level cases.

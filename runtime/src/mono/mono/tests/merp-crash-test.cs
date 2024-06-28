@@ -321,7 +321,7 @@ class C
             merpGUIPath,
             eventType,
             appPath,
-            configDir
+            configDir,
         };
 
         m.Invoke(null, m_params);
@@ -461,7 +461,7 @@ class C
             "MerpInvoke",
             "Cleanup",
             "Done",
-            "DoubleFault"
+            "DoubleFault",
         };
 
         if (expected_level != levels[result])

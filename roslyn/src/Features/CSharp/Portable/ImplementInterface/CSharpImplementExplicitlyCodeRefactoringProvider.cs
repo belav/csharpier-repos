@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ImplementInterface
             // high fan-out (like IDisposable.Dispose()).
             var findRefsOptions = FindReferencesSearchOptions.Default with
             {
-                Cascade = false
+                Cascade = false,
             };
             var references = await SymbolFinder
                 .FindReferencesAsync(implMember, solution, findRefsOptions, cancellationToken)

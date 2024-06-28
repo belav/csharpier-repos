@@ -23,7 +23,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id?}",
             displayName: "Test1",
-            metadata: new object[] { new IntMetadata(1), }
+            metadata: new object[] { new IntMetadata(1) }
         );
 
         var sink = new TestSink();
@@ -55,12 +55,12 @@ public class DefaultLinkParserTest : LinkParserTestBase
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id}",
             displayName: "Test1",
-            metadata: new object[] { new IntMetadata(1), }
+            metadata: new object[] { new IntMetadata(1) }
         );
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id2}",
             displayName: "Test2",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
 
         var sink = new TestSink();
@@ -94,17 +94,17 @@ public class DefaultLinkParserTest : LinkParserTestBase
         var endpoint0 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}",
             displayName: "Test1",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id}",
             displayName: "Test2",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id2}",
             displayName: "Test3",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
 
         var sink = new TestSink();
@@ -128,7 +128,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
             {
                 controller = "Home",
                 action = "Index",
-                id = "17"
+                id = "17",
             },
             values
         );
@@ -150,7 +150,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "{controller=Home}/{action=Index}/{id?}",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
 
         var parser = CreateLinkParser(endpoint);
@@ -159,10 +159,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         var values = parser.ParsePathByAddress(0, "/");
 
         // Assert
-        MatcherAssert.AssertRouteValuesEqual(
-            new { controller = "Home", action = "Index", },
-            values
-        );
+        MatcherAssert.AssertRouteValuesEqual(new { controller = "Home", action = "Index" }, values);
     }
 
     [Fact]
@@ -171,11 +168,11 @@ public class DefaultLinkParserTest : LinkParserTestBase
         // Arrange
         var endpoint0 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id:int}",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id2:alpha}",
-            metadata: new object[] { new IntMetadata(0), }
+            metadata: new object[] { new IntMetadata(0) }
         );
 
         var parser = CreateLinkParser(endpoint0, endpoint1);
@@ -189,7 +186,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
             {
                 controller = "Home",
                 action = "Index",
-                id2 = "abc"
+                id2 = "abc",
             },
             values
         );
@@ -201,7 +198,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         // Arrange
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id}",
-            metadata: new object[] { new IntMetadata(1), }
+            metadata: new object[] { new IntMetadata(1) }
         );
         var dataSource = new DynamicEndpointDataSource(endpoint1);
 
@@ -223,7 +220,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
         // Arrange
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id}",
-            metadata: new object[] { new IntMetadata(1), }
+            metadata: new object[] { new IntMetadata(1) }
         );
         var dataSource = new DynamicEndpointDataSource(endpoint1);
 
@@ -232,7 +229,7 @@ public class DefaultLinkParserTest : LinkParserTestBase
 
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "{controller}/{action}/{id}",
-            metadata: new object[] { new IntMetadata(1), }
+            metadata: new object[] { new IntMetadata(1) }
         );
         dataSource.AddEndpoint(endpoint2);
 

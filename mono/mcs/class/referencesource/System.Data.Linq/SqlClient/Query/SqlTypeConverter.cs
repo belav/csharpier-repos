@@ -209,7 +209,7 @@ namespace System.Data.Linq.SqlClient
                 {
                     nvarchar,
                     expr,
-                    sql.ValueFromObject(2, false, expr.SourceExpression)
+                    sql.ValueFromObject(2, false, expr.SourceExpression),
                 },
                 expr.SourceExpression
             );
@@ -224,7 +224,7 @@ namespace System.Data.Linq.SqlClient
                     new SqlWhen(
                         expr,
                         sql.ValueFromObject(true.ToString(), false, expr.SourceExpression)
-                    )
+                    ),
                 },
                 sql.ValueFromObject(false.ToString(), false, expr.SourceExpression),
                 expr.SourceExpression

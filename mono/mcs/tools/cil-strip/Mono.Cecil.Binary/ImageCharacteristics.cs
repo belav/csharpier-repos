@@ -53,6 +53,6 @@ namespace Mono.Cecil.Binary
         __flags = 0x0002 | 0x0004 | 0x0008 | 0x0100,
 
         CILOnlyDll = 0x2000 | (ushort)__flags,
-        CILOnlyExe = __flags
+        CILOnlyExe = __flags,
     }
 }

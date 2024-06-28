@@ -36,7 +36,7 @@ namespace Mono.Audio
         A_LAW,
         IMA_ADPCM,
         MPEG,
-        GSM
+        GSM,
     }
 
 #if PUBLIC_API

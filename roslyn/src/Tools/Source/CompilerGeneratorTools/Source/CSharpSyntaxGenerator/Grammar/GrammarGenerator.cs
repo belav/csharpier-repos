@@ -33,8 +33,8 @@ namespace CSharpSyntaxGenerator.Grammar
                     Name = "Modifier",
                     Children =
                     {
-                        new Field { Type = "SyntaxToken", Kinds = modifiers }
-                    }
+                        new Field { Type = "SyntaxToken", Kinds = modifiers },
+                    },
                 }
             );
 
@@ -98,7 +98,7 @@ namespace CSharpSyntaxGenerator.Grammar
             foreach (var name in lexicalRules)
                 rules[name] = new List<Production>
                 {
-                    new Production("/* see lexical specification */")
+                    new Production("/* see lexical specification */"),
                 };
 
             var seen = new HashSet<string>();
@@ -169,11 +169,9 @@ namespace CSharpSyntaxGenerator.Grammar
                         ? HandleChildren(c.Children, delim: " | ")
                             .Parenthesize()
                             .Suffix("?", when: c.Optional)
-                        : child is Sequence s
-                            ? HandleChildren(s.Children).Parenthesize()
-                            : child is Field f
-                                ? HandleField(f).Suffix("?", when: f.IsOptional)
-                                : throw new InvalidOperationException()
+                    : child is Sequence s ? HandleChildren(s.Children).Parenthesize()
+                    : child is Field f ? HandleField(f).Suffix("?", when: f.IsOptional)
+                    : throw new InvalidOperationException()
                 )
             );
 
@@ -181,20 +179,14 @@ namespace CSharpSyntaxGenerator.Grammar
             // 'bool' fields are for a few properties we generate on DirectiveTrivia. They're not
             // relevant to the grammar, so we just return an empty production to ignore them.
             =>
-            field.Type == "bool"
-                ? new Production("")
-                : field.Type == "CSharpSyntaxNode"
-                    ? RuleReference(field.Kinds.Single().Name + "Syntax")
-                    : field.Type.StartsWith("SeparatedSyntaxList")
-                        ? HandleSeparatedList(
-                            field,
-                            field.Type[("SeparatedSyntaxList".Length + 1)..^1]
-                        )
-                        : field.Type.StartsWith("SyntaxList")
-                            ? HandleList(field, field.Type[("SyntaxList".Length + 1)..^1])
-                            : field.IsToken
-                                ? HandleTokenField(field)
-                                : RuleReference(field.Type);
+            field.Type == "bool" ? new Production("")
+            : field.Type == "CSharpSyntaxNode" ? RuleReference(field.Kinds.Single().Name + "Syntax")
+            : field.Type.StartsWith("SeparatedSyntaxList")
+                ? HandleSeparatedList(field, field.Type[("SeparatedSyntaxList".Length + 1)..^1])
+            : field.Type.StartsWith("SyntaxList")
+                ? HandleList(field, field.Type[("SyntaxList".Length + 1)..^1])
+            : field.IsToken ? HandleTokenField(field)
+            : RuleReference(field.Type);
 
         private static Production HandleSeparatedList(Field field, string elementType) =>
             RuleReference(elementType)
@@ -207,15 +199,11 @@ namespace CSharpSyntaxGenerator.Grammar
 
         private static Production HandleList(Field field, string elementType) =>
             (
-                elementType != "SyntaxToken"
-                    ? RuleReference(elementType)
-                    : field.Name == "Commas"
-                        ? new Production("','")
-                        : field.Name == "Modifiers"
-                            ? RuleReference("Modifier")
-                            : field.Name == "TextTokens"
-                                ? RuleReference(nameof(SyntaxKind.XmlTextLiteralToken))
-                                : RuleReference(elementType)
+                elementType != "SyntaxToken" ? RuleReference(elementType)
+                : field.Name == "Commas" ? new Production("','")
+                : field.Name == "Modifiers" ? RuleReference("Modifier")
+                : field.Name == "TextTokens" ? RuleReference(nameof(SyntaxKind.XmlTextLiteralToken))
+                : RuleReference(elementType)
             ).Suffix(field.MinCount == 0 ? "*" : "+");
 
         private static Production HandleTokenField(Field field) =>
@@ -227,13 +215,11 @@ namespace CSharpSyntaxGenerator.Grammar
         private static Production HandleTokenName(string tokenName) =>
             GetSyntaxKind(tokenName) is var kind && kind == SyntaxKind.None
                 ? RuleReference("SyntaxToken")
-                : SyntaxFacts.GetText(kind) is var text && text != ""
-                    ? new Production(text == "'" ? "'\\''" : $"'{text}'")
-                    : tokenName.StartsWith("EndOf")
-                        ? new Production("")
-                        : tokenName.StartsWith("Omitted")
-                            ? new Production("/* epsilon */")
-                            : RuleReference(tokenName);
+            : SyntaxFacts.GetText(kind) is var text && text != ""
+                ? new Production(text == "'" ? "'\\''" : $"'{text}'")
+            : tokenName.StartsWith("EndOf") ? new Production("")
+            : tokenName.StartsWith("Omitted") ? new Production("/* epsilon */")
+            : RuleReference(tokenName);
 
         private static SyntaxKind GetSyntaxKind(string name) =>
             GetMembers<SyntaxKind>().Where(k => k.ToString() == name).SingleOrDefault();

@@ -37,7 +37,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
             new HttpHeaderData("MyCoolTrailerHeader", "amazingtrailer"),
             new HttpHeaderData("EmptyHeader", ""),
             new HttpHeaderData("Accept-Encoding", "identity,gzip"),
-            new HttpHeaderData("Hello", "World")
+            new HttpHeaderData("Hello", "World"),
         };
 
         protected static Frame MakeDataFrame(int streamId, byte[] data, bool endStream = false) =>
@@ -97,7 +97,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         endStream: false,
                         headers: new[]
                         {
-                            new HttpHeaderData("Content-Length", DataBytes.Length.ToString())
+                            new HttpHeaderData("Content-Length", DataBytes.Length.ToString()),
                         }
                     );
                 }
@@ -154,7 +154,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         endStream: false,
                         headers: new[]
                         {
-                            new HttpHeaderData("Content-Length", DataBytes.Length.ToString())
+                            new HttpHeaderData("Content-Length", DataBytes.Length.ToString()),
                         }
                     );
                 }

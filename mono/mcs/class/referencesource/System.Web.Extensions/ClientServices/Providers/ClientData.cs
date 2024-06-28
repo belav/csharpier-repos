@@ -39,7 +39,7 @@ namespace System.Web.ClientServices.Providers
             SettingsNeedReset = 9,
             SettingsCacheIsMoreFresh = 10,
             CookieNames = 11,
-            CookieValues = 12
+            CookieValues = 12,
         }
 
         private const int _NumStoredValues = 13;
@@ -57,7 +57,7 @@ namespace System.Web.ClientServices.Providers
             "SettingsNeedReset",
             "SettingsCacheIsMoreFresh",
             "CookieNames",
-            "CookieValues"
+            "CookieValues",
         };
         private object[] _StoredValues = new object[_NumStoredValues]
         {
@@ -73,7 +73,7 @@ namespace System.Web.ClientServices.Providers
             false,
             false,
             new string[0],
-            new string[0]
+            new string[0],
         };
 
         private ClientData() { }

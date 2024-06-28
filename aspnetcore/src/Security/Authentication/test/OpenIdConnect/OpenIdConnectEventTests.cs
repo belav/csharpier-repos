@@ -35,7 +35,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnMessageReceived_Skip_NoMoreEventsRun()
     {
-        var events = new ExpectedOidcEvents() { ExpectMessageReceived = true, };
+        var events = new ExpectedOidcEvents() { ExpectMessageReceived = true };
         events.OnMessageReceived = context =>
         {
             context.SkipHandler();
@@ -82,7 +82,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnMessageReceived_Handled_NoMoreEventsRun()
     {
-        var events = new ExpectedOidcEvents() { ExpectMessageReceived = true, };
+        var events = new ExpectedOidcEvents() { ExpectMessageReceived = true };
         events.OnMessageReceived = context =>
         {
             context.HandleResponse();
@@ -867,7 +867,7 @@ public class OpenIdConnectEventTests
             {
                 new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"),
                 new Claim(ClaimTypes.Email, "bob@contoso.com"),
-                new Claim(ClaimsIdentity.DefaultNameClaimType, "bob")
+                new Claim(ClaimsIdentity.DefaultNameClaimType, "bob"),
             };
 
             context.Principal = new ClaimsPrincipal(
@@ -901,7 +901,7 @@ public class OpenIdConnectEventTests
         var events = new ExpectedOidcEvents()
         {
             ExpectMessageReceived = true,
-            ExpectAccessDenied = true
+            ExpectAccessDenied = true,
         };
         events.OnAccessDenied = context =>
         {
@@ -927,7 +927,7 @@ public class OpenIdConnectEventTests
         var events = new ExpectedOidcEvents()
         {
             ExpectMessageReceived = true,
-            ExpectAccessDenied = true
+            ExpectAccessDenied = true,
         };
         events.OnAccessDenied = context =>
         {
@@ -1092,7 +1092,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToIdentityProviderForSignOut_Invoked()
     {
-        var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true };
         var server = CreateServer(
             events,
             context =>
@@ -1112,7 +1112,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToIdentityProviderForSignOut_Handled_RedirectNotInvoked()
     {
-        var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRedirectForSignOut = true };
         events.OnRedirectToIdentityProviderForSignOut = context =>
         {
             context.Response.StatusCode = StatusCodes.Status202Accepted;
@@ -1138,7 +1138,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRemoteSignOut_Invoked()
     {
-        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true };
         var server = CreateServer(events, AppNotImpl);
 
         var client = server.CreateClient();
@@ -1155,7 +1155,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRemoteSignOut_Handled_NoSignout()
     {
-        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true };
         events.OnRemoteSignOut = context =>
         {
             context.Response.StatusCode = StatusCodes.Status202Accepted;
@@ -1175,7 +1175,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRemoteSignOut_Skip_NoSignout()
     {
-        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRemoteSignOut = true };
         events.OnRemoteSignOut = context =>
         {
             context.SkipHandler();
@@ -1201,7 +1201,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToSignedOutRedirectUri_Invoked()
     {
-        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true };
         var server = CreateServer(events, AppNotImpl);
 
         var client = server.CreateClient();
@@ -1215,7 +1215,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToSignedOutRedirectUri_Handled_NoRedirect()
     {
-        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true };
         events.OnSignedOutCallbackRedirect = context =>
         {
             context.Response.StatusCode = StatusCodes.Status202Accepted;
@@ -1235,7 +1235,7 @@ public class OpenIdConnectEventTests
     [Fact]
     public async Task OnRedirectToSignedOutRedirectUri_Skipped_NoRedirect()
     {
-        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true, };
+        var events = new ExpectedOidcEvents() { ExpectRedirectToSignedOut = true };
         events.OnSignedOutCallbackRedirect = context =>
         {
             context.SkipHandler();
@@ -1411,7 +1411,7 @@ public class OpenIdConnectEventTests
                                 {
                                     TokenEndpoint = "http://testhost/tokens",
                                     UserInfoEndpoint = "http://testhost/user",
-                                    EndSessionEndpoint = "http://testhost/end"
+                                    EndSessionEndpoint = "http://testhost/end",
                                 };
                                 o.StateDataFormat = new TestStateDataFormat();
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -1467,7 +1467,7 @@ public class OpenIdConnectEventTests
                 {
                     { ".xsrf", "correlationId" },
                     { OpenIdConnectDefaults.RedirectUriForCodePropertiesKey, "redirect_uri" },
-                    { "testkey", "testvalue" }
+                    { "testkey", "testvalue" },
                 }
             );
             properties.RedirectUri = "http://testhost/redirect";
@@ -1539,7 +1539,7 @@ public class OpenIdConnectEventTests
                             "{ \"id_token\": \"my_id_token\", \"access_token\": \"my_access_token\" }",
                             Encoding.ASCII,
                             "application/json"
-                        )
+                        ),
                     }
                 );
             }
@@ -1548,7 +1548,7 @@ public class OpenIdConnectEventTests
                 return Task.FromResult(
                     new HttpResponseMessage()
                     {
-                        Content = new StringContent("{ }", Encoding.ASCII, "application/json")
+                        Content = new StringContent("{ }", Encoding.ASCII, "application/json"),
                     }
                 );
             }

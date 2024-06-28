@@ -22,14 +22,16 @@ namespace System.Net.Http
         DoNotUseProxy = 0, // Don't use a proxy at all.
         UseWinHttpProxy = 1, // Use configuration as specified by "netsh winhttp" machine config command. Automatic detect not supported.
         UseWinInetProxy = 2, // WPAD protocol and PAC files supported.
-        UseCustomProxy = 3 // Use the custom proxy specified in the Proxy property.
+        UseCustomProxy =
+            3 // Use the custom proxy specified in the Proxy property.
+        ,
     }
 
     public enum CookieUsePolicy
     {
         IgnoreCookies = 0,
         UseInternalCookieStoreOnly = 1,
-        UseSpecifiedCookieContainer = 2
+        UseSpecifiedCookieContainer = 2,
     }
 
     public class WinHttpHandler : HttpMessageHandler
@@ -1165,7 +1167,7 @@ namespace System.Net.Http
                     // The result a of double->uint cast is unspecified for -1 and may differ on ARM, returning 0 instead of uint.MaxValue.
                     // To handle Timeout.InfiniteTimespan correctly, we need to cast to int first.
                     keepaliveinterval = (uint)(int)_tcpKeepAliveInterval.TotalMilliseconds,
-                    keepalivetime = (uint)(int)_tcpKeepAliveTime.TotalMilliseconds
+                    keepalivetime = (uint)(int)_tcpKeepAliveTime.TotalMilliseconds,
                 };
 
                 SetWinHttpOption(

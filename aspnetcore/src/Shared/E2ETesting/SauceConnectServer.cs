@@ -146,7 +146,7 @@ public class SauceConnectServer : IDisposable
         }
 
         var uri = new UriBuilder("http", E2ETestOptions.Instance.Sauce.HostName, 4445).Uri;
-        var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(1), };
+        var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(1) };
 
         var retries = 0;
         do

@@ -40,7 +40,7 @@ namespace System.Workflow.ComponentModel.Serialization
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );
@@ -56,7 +56,7 @@ namespace System.Workflow.ComponentModel.Serialization
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );
@@ -72,7 +72,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );
@@ -87,7 +87,7 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );
@@ -2724,7 +2724,7 @@ namespace System.Workflow.ComponentModel.Serialization
                             new object[]
                             {
                                 GetClrFullName(serializationManager, xmlQualifiedName),
-                                e.Message
+                                e.Message,
                             }
                         ),
                         e,
@@ -2754,7 +2754,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                 new object[]
                                 {
                                     GetClrFullName(serializationManager, xmlQualifiedName),
-                                    e.Message
+                                    e.Message,
                                 }
                             ),
                             e,
@@ -3064,7 +3064,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                                 {
                                                     propertyName,
                                                     propertyName,
-                                                    obj.GetType().Name
+                                                    obj.GetType().Name,
                                                 }
                                             )
                                         )
@@ -3245,7 +3245,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                             reader.Value,
                                             reader.LocalName,
                                             obj.GetType().FullName,
-                                            e.Message
+                                            e.Message,
                                         }
                                     ),
                                     e,
@@ -3309,7 +3309,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                                 reader.Value,
                                                 reader.LocalName,
                                                 obj.GetType().FullName,
-                                                e.Message
+                                                e.Message,
                                             }
                                         ),
                                         e,
@@ -3335,7 +3335,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                 reader.Value,
                                 reader.LocalName,
                                 obj.GetType().FullName,
-                                e.Message
+                                e.Message,
                             }
                         ),
                         e,

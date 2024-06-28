@@ -323,7 +323,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     >= '0' and <= '9' => (byte)(c - '0'),
                     >= 'A' and <= 'F' => (byte)(10 + c - 'A'),
-                    _ => @throw(c)
+                    _ => @throw(c),
                 };
 
                 static byte @throw(char c) => throw ExceptionUtilities.UnexpectedValue(c);

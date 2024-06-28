@@ -320,7 +320,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -402,7 +402,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x")
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
                     }
                 )
             );

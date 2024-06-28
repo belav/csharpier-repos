@@ -379,7 +379,7 @@ public static partial class RequestDelegateFactory
                 typeof(IReadOnlyDictionary<FormKey, StringValues>),
                 typeof(CultureInfo),
                 typeof(Memory<char>),
-                typeof(IFormFileCollection)
+                typeof(IFormFileCollection),
             }
         )!;
     private static readonly MethodInfo ProcessFormMethod = typeof(RequestDelegateFactory).GetMethod(
@@ -397,13 +397,13 @@ public static partial class RequestDelegateFactory
 
     private static readonly string[] DefaultAcceptsAndProducesContentType = new[]
     {
-        JsonConstants.JsonContentType
+        JsonConstants.JsonContentType,
     };
     private static readonly string[] FormFileContentType = new[] { "multipart/form-data" };
     private static readonly string[] FormContentType = new[]
     {
         "multipart/form-data",
-        "application/x-www-form-urlencoded"
+        "application/x-www-form-urlencoded",
     };
     private static readonly string[] PlaintextContentType = new[] { "text/plain" };
 
@@ -623,7 +623,7 @@ public static partial class RequestDelegateFactory
             EndpointBuilder = endpointBuilder,
             MetadataAlreadyInferred = metadataResult is not null,
             JsonSerializerOptions = jsonSerializerOptions,
-            FormDataMapperOptions = formDataMapperOptions
+            FormDataMapperOptions = formDataMapperOptions,
         };
 
         return factoryContext;
@@ -1036,7 +1036,7 @@ public static partial class RequestDelegateFactory
             8 => typeof(EndpointFilterInvocationContext<,,,,,,,>),
             9 => typeof(EndpointFilterInvocationContext<,,,,,,,,>),
             10 => typeof(EndpointFilterInvocationContext<,,,,,,,,,>),
-            _ => typeof(DefaultEndpointFilterInvocationContext)
+            _ => typeof(DefaultEndpointFilterInvocationContext),
         };
 
         if (constructorType.IsGenericType)
@@ -2713,49 +2713,45 @@ public static partial class RequestDelegateFactory
         var fullParamCheckBlock = (parameter.ParameterType.IsArray, isOptional) switch
         {
             // (isArray: true, optional: true)
-            (true, true) =>
-                Expression.Block(
-                    new[] { index, stringArrayExpr! },
-                    // values = httpContext.Request.Query["id"];
-                    Expression.Assign(stringArrayExpr!, valueExpression),
-                    Expression.IfThen(
-                        Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
-                        arrayLoop!
-                    )
-                ),
+            (true, true) => Expression.Block(
+                new[] { index, stringArrayExpr! },
+                // values = httpContext.Request.Query["id"];
+                Expression.Assign(stringArrayExpr!, valueExpression),
+                Expression.IfThen(
+                    Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
+                    arrayLoop!
+                )
+            ),
 
             // (isArray: true, optional: false)
-            (true, false) =>
-                Expression.Block(
-                    new[] { index, stringArrayExpr! },
-                    // values = httpContext.Request.Query["id"];
-                    Expression.Assign(stringArrayExpr!, valueExpression),
-                    Expression.IfThenElse(
-                        Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
-                        arrayLoop!,
-                        failBlock
-                    )
-                ),
+            (true, false) => Expression.Block(
+                new[] { index, stringArrayExpr! },
+                // values = httpContext.Request.Query["id"];
+                Expression.Assign(stringArrayExpr!, valueExpression),
+                Expression.IfThenElse(
+                    Expression.NotEqual(stringArrayExpr!, Expression.Constant(null)),
+                    arrayLoop!,
+                    failBlock
+                )
+            ),
 
             // (isArray: false, optional: false)
-            (false, false) =>
-                Expression.Block(
-                    // tempSourceString = httpContext.RequestValue["id"];
-                    Expression.Assign(TempSourceStringExpr, valueExpression),
-                    // if (tempSourceString == null) { ... } only produced when parameter is required
-                    checkRequiredParaseableParameterBlock,
-                    // if (tempSourceString != null) { ... }
-                    ifNotNullTryParse
-                ),
+            (false, false) => Expression.Block(
+                // tempSourceString = httpContext.RequestValue["id"];
+                Expression.Assign(TempSourceStringExpr, valueExpression),
+                // if (tempSourceString == null) { ... } only produced when parameter is required
+                checkRequiredParaseableParameterBlock,
+                // if (tempSourceString != null) { ... }
+                ifNotNullTryParse
+            ),
 
             // (isArray: false, optional: true)
-            (false, true) =>
-                Expression.Block(
-                    // tempSourceString = httpContext.RequestValue["id"];
-                    Expression.Assign(TempSourceStringExpr, valueExpression),
-                    // if (tempSourceString != null) { ... }
-                    ifNotNullTryParse
-                )
+            (false, true) => Expression.Block(
+                // tempSourceString = httpContext.RequestValue["id"];
+                Expression.Assign(TempSourceStringExpr, valueExpression),
+                // if (tempSourceString != null) { ... }
+                ifNotNullTryParse
+            ),
         };
 
         factoryContext.ExtraLocals.Add(argument);
@@ -2879,13 +2875,10 @@ public static partial class RequestDelegateFactory
         );
 
     private static Type? GetExpressionType(Type type) =>
-        type.IsArray
-            ? typeof(string[])
-            : type == typeof(StringValues)
-                ? typeof(StringValues)
-                : type == typeof(StringValues?)
-                    ? typeof(StringValues?)
-                    : null;
+        type.IsArray ? typeof(string[])
+        : type == typeof(StringValues) ? typeof(StringValues)
+        : type == typeof(StringValues?) ? typeof(StringValues?)
+        : null;
 
     private static Expression BindParameterFromRouteValueOrQueryString(
         ParameterInfo parameter,

@@ -135,7 +135,7 @@ namespace ILCompiler
                         {
                             FieldTypeIndex = fieldTypeIndex,
                             Offset = (ulong)fieldOffsetEmit,
-                            Name = fieldNameEmit
+                            Name = fieldNameEmit,
                         };
 
                         fieldsDescs.Add(field);
@@ -467,14 +467,14 @@ namespace ILCompiler
                 Rank = (uint)arrayType.Rank,
                 ElementType = GetVariableTypeIndex(arrayType.ElementType, false),
                 Size = elementSize,
-                IsMultiDimensional = arrayType.IsMdArray ? 1 : 0
+                IsMultiDimensional = arrayType.IsMdArray ? 1 : 0,
             };
 
             ClassTypeDescriptor classDescriptor = new ClassTypeDescriptor
             {
                 IsStruct = 0,
                 Name = _objectWriter.GetMangledName(type),
-                BaseClassId = GetTypeIndex(arrayType.BaseType, false)
+                BaseClassId = GetTypeIndex(arrayType.BaseType, false),
             };
 
             uint typeIndex = _objectWriter.GetArrayTypeIndex(classDescriptor, arrayTypeDescriptor);
@@ -590,7 +590,7 @@ namespace ILCompiler
                 IsStruct = type.IsValueType ? 1 : 0,
                 Name = _objectWriter.GetMangledName(defType),
                 BaseClassId = 0,
-                InstanceSize = 0
+                InstanceSize = 0,
             };
 
             uint typeIndex = _objectWriter.GetClassTypeIndex(classTypeDescriptor);
@@ -679,7 +679,7 @@ namespace ILCompiler
                 {
                     FieldTypeIndex = fieldTypeIndex,
                     Offset = (ulong)fieldOffsetEmit,
-                    Name = fieldDesc.Name
+                    Name = fieldDesc.Name,
                 };
 
                 if (fieldDesc.IsStatic)
@@ -688,7 +688,7 @@ namespace ILCompiler
                     {
                         StaticDataFieldDescriptor staticDesc = new StaticDataFieldDescriptor
                         {
-                            StaticOffset = (ulong)fieldOffsetEmit
+                            StaticOffset = (ulong)fieldOffsetEmit,
                         };
 
                         // Mark field as static
@@ -809,14 +809,14 @@ namespace ILCompiler
                 ClassFieldsTypeDescriptor fieldsDescriptor = new ClassFieldsTypeDescriptor
                 {
                     Size = (ulong)0,
-                    FieldsCount = staticFields.Count
+                    FieldsCount = staticFields.Count,
                 };
 
                 ClassTypeDescriptor classTypeDescriptor = new ClassTypeDescriptor
                 {
                     IsStruct = !staticDataInObject ? 1 : 0,
                     Name = $"__type{staticFieldForm}{_objectWriter.GetMangledName(defType)}",
-                    BaseClassId = 0
+                    BaseClassId = 0,
                 };
 
                 if (staticDataInObject)
@@ -841,14 +841,14 @@ namespace ILCompiler
                     ClassFieldsTypeDescriptor helperFieldsDescriptor = new ClassFieldsTypeDescriptor
                     {
                         Size = (ulong)NodeFactory.Target.PointerSize * 2ul,
-                        FieldsCount = 2
+                        FieldsCount = 2,
                     };
 
                     ClassTypeDescriptor helperClassTypeDescriptor = new ClassTypeDescriptor
                     {
                         IsStruct = 1,
                         Name = $"__ThreadStaticHelper<{classTypeDescriptor.Name}>",
-                        BaseClassId = 0
+                        BaseClassId = 0,
                     };
                     var pointerTypeDescriptor = new PointerTypeDescriptor
                     {
@@ -861,7 +861,7 @@ namespace ILCompiler
                                 "TypeManagerSlot"
                             ),
                             true
-                        )
+                        ),
                     };
 
                     var helperFields = new DataFieldDescriptor[]
@@ -872,7 +872,7 @@ namespace ILCompiler
                                 pointerTypeDescriptor
                             ),
                             Offset = 0,
-                            Name = "TypeManagerSlot"
+                            Name = "TypeManagerSlot",
                         },
                         new DataFieldDescriptor
                         {
@@ -883,8 +883,8 @@ namespace ILCompiler
                                 true
                             ),
                             Offset = (ulong)NodeFactory.Target.PointerSize,
-                            Name = "ClassIndex"
-                        }
+                            Name = "ClassIndex",
+                        },
                     };
 
                     staticFieldRegionTypeIndex = _objectWriter.GetCompleteClassTypeIndex(
@@ -913,7 +913,7 @@ namespace ILCompiler
                 {
                     FieldTypeIndex = staticFieldRegionSymbolTypeIndex,
                     Offset = 0xFFFFFFFF,
-                    Name = staticFieldForm
+                    Name = staticFieldForm,
                 };
 
                 fieldDescs.Add(staticRegionField);

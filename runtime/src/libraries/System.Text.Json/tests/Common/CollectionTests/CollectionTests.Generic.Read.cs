@@ -1339,25 +1339,25 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     typeof(SimpleTestClassWithStringIEnumerableWrapper),
                     SimpleTestClassWithStringIEnumerableWrapper.s_json,
-                    typeof(StringIEnumerableWrapper)
+                    typeof(StringIEnumerableWrapper),
                 };
                 yield return new object[]
                 {
                     typeof(SimpleTestClassWithStringIReadOnlyCollectionWrapper),
                     SimpleTestClassWithStringIReadOnlyCollectionWrapper.s_json,
-                    typeof(WrapperForIReadOnlyCollectionOfT<string>)
+                    typeof(WrapperForIReadOnlyCollectionOfT<string>),
                 };
                 yield return new object[]
                 {
                     typeof(SimpleTestClassWithStringIReadOnlyListWrapper),
                     SimpleTestClassWithStringIReadOnlyListWrapper.s_json,
-                    typeof(StringIReadOnlyListWrapper)
+                    typeof(StringIReadOnlyListWrapper),
                 };
                 yield return new object[]
                 {
                     typeof(SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper),
                     SimpleTestClassWithStringToStringIReadOnlyDictionaryWrapper.s_json,
-                    typeof(GenericIReadOnlyDictionaryWrapper<string, string>)
+                    typeof(GenericIReadOnlyDictionaryWrapper<string, string>),
                 };
             }
         }

@@ -124,7 +124,7 @@ public class MinLengthAttributeAdapterTest
 
         var attribute = new MinLengthAttribute(2)
         {
-            ErrorMessage = "Array must have at least {1} items."
+            ErrorMessage = "Array must have at least {1} items.",
         };
         var adapter = new MinLengthAttributeAdapter(attribute, stringLocalizer: null);
 
@@ -173,7 +173,7 @@ public class MinLengthAttributeAdapterTest
 
         var attribute = new MinLengthAttribute(2)
         {
-            ErrorMessage = "Array must have at least {1} items."
+            ErrorMessage = "Array must have at least {1} items.",
         };
         var adapter = new MinLengthAttributeAdapter(attribute, stringLocalizer: null);
 

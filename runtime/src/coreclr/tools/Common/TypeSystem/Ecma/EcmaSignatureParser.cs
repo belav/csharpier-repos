@@ -194,7 +194,7 @@ namespace Internal.TypeSystem.Ecma
                                         + "|"
                                         + arrayShapeString.ToString(),
                                     kind = EmbeddedSignatureDataKind.ArrayShape,
-                                    type = null
+                                    type = null,
                                 }
                             );
                         }
@@ -305,7 +305,7 @@ namespace Internal.TypeSystem.Ecma
                         {
                             index = string.Join(".", _indexStack),
                             kind = EmbeddedSignatureDataKind.RequiredCustomModifier,
-                            type = ResolveHandle(typeHandle)
+                            type = ResolveHandle(typeHandle),
                         }
                     );
                     continue;
@@ -319,7 +319,7 @@ namespace Internal.TypeSystem.Ecma
                         {
                             index = string.Join(".", _indexStack),
                             kind = EmbeddedSignatureDataKind.OptionalCustomModifier,
-                            type = ResolveHandle(typeHandle)
+                            type = ResolveHandle(typeHandle),
                         }
                     );
                     continue;
@@ -430,7 +430,7 @@ namespace Internal.TypeSystem.Ecma
                                 + "|"
                                 + ((int)signatureCallConv).ToString(),
                             kind = EmbeddedSignatureDataKind.UnmanagedCallConv,
-                            type = null
+                            type = null,
                         }
                     );
                 }

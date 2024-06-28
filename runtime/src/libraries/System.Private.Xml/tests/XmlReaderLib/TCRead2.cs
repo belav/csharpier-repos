@@ -28,7 +28,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v4)
                     {
-                        Attribute = new Variation("Read with surrogate character entity")
+                        Attribute = new Variation("Read with surrogate character entity"),
                     }
                 );
             }
@@ -40,7 +40,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Read with surrogates inside, comments/PIs, text, CDATA"
-                        )
+                        ),
                     }
                 );
             }
@@ -55,7 +55,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v12)
                     {
-                        Attribute = new Variation("Whitespace characters in character entities")
+                        Attribute = new Variation("Whitespace characters in character entities"),
                     }
                 );
             }
@@ -65,7 +65,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v13)
                     {
-                        Attribute = new Variation("Root element 18 chars length")
+                        Attribute = new Variation("Root element 18 chars length"),
                     }
                 );
             }
@@ -82,7 +82,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read31)
                     {
-                        Attribute = new Variation("Namespace prefix starting with xml")
+                        Attribute = new Variation("Namespace prefix starting with xml"),
                     }
                 );
             }
@@ -94,7 +94,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Instantiate an XmlException object without a parameter"
-                        )
+                        ),
                     }
                 );
             }
@@ -104,7 +104,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadEmpty)
                     {
-                        Attribute = new Variation("Test Read of Empty Elements")
+                        Attribute = new Variation("Test Read of Empty Elements"),
                     }
                 );
             }
@@ -116,7 +116,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "1.Parsing this 'some]' as fragment fails with 'Unexpected EOF' error"
-                        )
+                        ),
                     }
                 );
             }
@@ -128,7 +128,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "2. Parsing this 'some]' as fragment fails with 'Unexpected EOF' error"
-                        )
+                        ),
                     }
                 );
             }
@@ -138,7 +138,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read34)
                     {
-                        Attribute = new Variation("Parsing xml:space attribute with spaces")
+                        Attribute = new Variation("Parsing xml:space attribute with spaces"),
                     }
                 );
             }
@@ -148,7 +148,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read35)
                     {
-                        Attribute = new Variation("Parsing valid xml in ASCII encoding")
+                        Attribute = new Variation("Parsing valid xml in ASCII encoding"),
                     }
                 );
             }
@@ -158,7 +158,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read36)
                     {
-                        Attribute = new Variation("Parsing valid xml with huge attributes")
+                        Attribute = new Variation("Parsing valid xml with huge attributes"),
                     }
                 );
             }
@@ -170,7 +170,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader accepts invalid <!ATTLIST e a NOTATION (prefix:name) #IMPLIED> declaration"
-                        )
+                        ),
                     }
                 );
             }
@@ -182,7 +182,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader reports strange error message on &#; character entity reference"
-                        )
+                        ),
                     }
                 );
             }
@@ -194,7 +194,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Assert and wrong XmlException.Message when run non-wf xml"
-                        )
+                        ),
                     }
                 );
             }
@@ -204,7 +204,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read41)
                     {
-                        Attribute = new Variation("Testing general entity references itself")
+                        Attribute = new Variation("Testing general entity references itself"),
                     }
                 );
             }
@@ -214,7 +214,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read42)
                     {
-                        Attribute = new Variation("Testing duplicate attribute")
+                        Attribute = new Variation("Testing duplicate attribute"),
                     }
                 );
             }
@@ -224,7 +224,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read43)
                     {
-                        Attribute = new Variation("Testing xml without root element")
+                        Attribute = new Variation("Testing xml without root element"),
                     }
                 );
             }
@@ -234,7 +234,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read44)
                     {
-                        Attribute = new Variation("Testing xml with unexpected token")
+                        Attribute = new Variation("Testing xml with unexpected token"),
                     }
                 );
             }
@@ -244,7 +244,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read45)
                     {
-                        Attribute = new Variation("XmlException when run non-wf xml")
+                        Attribute = new Variation("XmlException when run non-wf xml"),
                     }
                 );
             }
@@ -256,7 +256,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parsing valid xml with 100 attributes with same names and diff.namespaces"
-                        )
+                        ),
                     }
                 );
             }
@@ -268,7 +268,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parsing xml with invalid surrogate pair in PUBLIC"
-                        )
+                        ),
                     }
                 );
             }
@@ -278,7 +278,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read48)
                     {
-                        Attribute = new Variation("Recursive entity reference inside attribute")
+                        Attribute = new Variation("Recursive entity reference inside attribute"),
                     }
                 );
             }
@@ -290,7 +290,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parsing valid xml with large number of attributes inside single element"
-                        )
+                        ),
                     }
                 );
             }
@@ -300,19 +300,19 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read50)
                     {
-                        Attribute = new Variation("3.Test DTD with namespaces") { Param = 3 }
+                        Attribute = new Variation("3.Test DTD with namespaces") { Param = 3 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read50)
                     {
-                        Attribute = new Variation("1.Test DTD with namespaces") { Param = 1 }
+                        Attribute = new Variation("1.Test DTD with namespaces") { Param = 1 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read50)
                     {
-                        Attribute = new Variation("2.Test DTD with namespaces") { Param = 2 }
+                        Attribute = new Variation("2.Test DTD with namespaces") { Param = 2 },
                     }
                 );
             }
@@ -322,49 +322,49 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("4.Parsing invalid DOCTYPE") { Param = 4 }
+                        Attribute = new Variation("4.Parsing invalid DOCTYPE") { Param = 4 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("2.Parsing invalid DOCTYPE") { Param = 2 }
+                        Attribute = new Variation("2.Parsing invalid DOCTYPE") { Param = 2 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("3.Parsing invalid DOCTYPE") { Param = 3 }
+                        Attribute = new Variation("3.Parsing invalid DOCTYPE") { Param = 3 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("1.Parsing invalid DOCTYPE") { Param = 1 }
+                        Attribute = new Variation("1.Parsing invalid DOCTYPE") { Param = 1 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("5.Parsing invalid DOCTYPE") { Param = 5 }
+                        Attribute = new Variation("5.Parsing invalid DOCTYPE") { Param = 5 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("6.Parsing invalid DOCTYPE") { Param = 6 }
+                        Attribute = new Variation("6.Parsing invalid DOCTYPE") { Param = 6 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("7.Parsing invalid DOCTYPE") { Param = 7 }
+                        Attribute = new Variation("7.Parsing invalid DOCTYPE") { Param = 7 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("8.Parsing invalid xml version") { Param = 8 }
+                        Attribute = new Variation("8.Parsing invalid xml version") { Param = 8 },
                     }
                 );
                 this.AddChild(
@@ -372,26 +372,26 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("9.Parsing invalid xml version,DOCTYPE")
                         {
-                            Param = 9
-                        }
+                            Param = 9,
+                        },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("10.Parsing invalid xml version") { Param = 10 }
+                        Attribute = new Variation("10.Parsing invalid xml version") { Param = 10 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("11.Parsing invalid xml version") { Param = 11 }
+                        Attribute = new Variation("11.Parsing invalid xml version") { Param = 11 },
                     }
                 );
                 this.AddChild(
                     new CVariation(Read53)
                     {
-                        Attribute = new Variation("12.Parsing invalid xml version") { Param = 12 }
+                        Attribute = new Variation("12.Parsing invalid xml version") { Param = 12 },
                     }
                 );
             }
@@ -403,7 +403,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse an XML declaration that will have some whitespace before the closing"
-                        )
+                        ),
                     }
                 );
             }
@@ -415,8 +415,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Parsing xml with DTD and 200 attributes")
                         {
-                            Param = 1
-                        }
+                            Param = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -424,8 +424,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Parsing xml with DTD and 200 attributes with ns")
                         {
-                            Param = 2
-                        }
+                            Param = 2,
+                        },
                     }
                 );
             }
@@ -439,8 +439,8 @@ namespace System.Xml.Tests
                             "Parsing xml with DTD and 200 attributes and 1 duplicate"
                         )
                         {
-                            Param = 1
-                        }
+                            Param = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -450,8 +450,8 @@ namespace System.Xml.Tests
                             "Parsing xml with DTD and 200 attributes with ns and 1 duplicate"
                         )
                         {
-                            Param = 2
-                        }
+                            Param = 2,
+                        },
                     }
                 );
             }
@@ -461,7 +461,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read57)
                     {
-                        Attribute = new Variation("Parse xml with whitespace nodes")
+                        Attribute = new Variation("Parse xml with whitespace nodes"),
                     }
                 );
             }
@@ -473,7 +473,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse xml with whitespace nodes and invalid char"
-                        )
+                        ),
                     }
                 );
             }
@@ -483,7 +483,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Read59)
                     {
-                        Attribute = new Variation("Parse xml with uri attribute")
+                        Attribute = new Variation("Parse xml with uri attribute"),
                     }
                 );
             }
@@ -495,7 +495,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader doesn't fail when numeric character entity computation overflows"
-                        )
+                        ),
                     }
                 );
             }
@@ -509,8 +509,8 @@ namespace System.Xml.Tests
                             "XmlReader should fail on ENTITY name with colons in it"
                         )
                         {
-                            Param = 1
-                        }
+                            Param = 1,
+                        },
                     }
                 );
                 this.AddChild(
@@ -520,8 +520,8 @@ namespace System.Xml.Tests
                             "XmlReader should fail on ENTITY name with colons in it"
                         )
                         {
-                            Param = 1
-                        }
+                            Param = 1,
+                        },
                     }
                 );
             }
@@ -536,7 +536,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Parse input with a character zero 0x00 at root level."
-                        )
+                        ),
                     }
                 );
             }
@@ -548,8 +548,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("3.Parse input with utf-16 encoding")
                         {
-                            Param = "charset03.xml"
-                        }
+                            Param = "charset03.xml",
+                        },
                     }
                 );
                 this.AddChild(
@@ -557,8 +557,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("1.Parse input with utf-16 encoding")
                         {
-                            Param = "charset01.xml"
-                        }
+                            Param = "charset01.xml",
+                        },
                     }
                 );
             }
@@ -570,8 +570,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("2.Parse input with utf-16 encoding")
                         {
-                            Param = "charset02.xml"
-                        }
+                            Param = "charset02.xml",
+                        },
                     }
                 );
             }
@@ -583,7 +583,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Add column position to the exception reported when end tag does not match the start tag"
-                        )
+                        ),
                     }
                 );
             }

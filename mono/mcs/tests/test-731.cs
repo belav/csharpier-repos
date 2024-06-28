@@ -4,7 +4,7 @@ using System;
 
 enum S
 {
-    Foo = 5
+    Foo = 5,
 }
 
 class C
@@ -24,7 +24,7 @@ class C
             S.Foo,
             S.Foo,
             S.Foo,
-            S.Foo
+            S.Foo,
         };
         Console.WriteLine(s[5]);
 

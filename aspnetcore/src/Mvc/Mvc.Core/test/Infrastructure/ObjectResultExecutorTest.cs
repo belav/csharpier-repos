@@ -26,7 +26,7 @@ public class ObjectResultExecutorTest
         httpContext.Request.Headers.Accept = "application/xml"; // This will not be used
         httpContext.Response.ContentType = "text/json";
 
-        var result = new ObjectResult("input") { ContentTypes = { "text/xml", }, };
+        var result = new ObjectResult("input") { ContentTypes = { "text/xml" } };
         result.Formatters.Add(new TestXmlOutputFormatter());
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestStringOutputFormatter()); // This will be chosen based on the content type
@@ -116,10 +116,7 @@ public class ObjectResultExecutorTest
         var actionContext = new ActionContext() { HttpContext = httpContext };
         httpContext.Response.ContentType = "application/xml"; // This will not be used
 
-        var result = new ObjectResult(new ProblemDetails())
-        {
-            ContentTypes = { "text/plain" }, // This will not be used
-        };
+        var result = new ObjectResult(new ProblemDetails()) { ContentTypes = { "text/plain" } };
         result.Formatters.Add(new TestXmlOutputFormatter()); // This will be chosen based on the problem details content type
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestStringOutputFormatter());
@@ -195,10 +192,7 @@ public class ObjectResultExecutorTest
         httpContext.Request.Headers.Accept = "application/json"; // This will not be used
         httpContext.Response.ContentType = "application/xml"; // This will not be used
 
-        var result = new ObjectResult(new ProblemDetails())
-        {
-            ContentTypes = { "text/plain" }, // This will not be used
-        };
+        var result = new ObjectResult(new ProblemDetails()) { ContentTypes = { "text/plain" } };
         result.Formatters.Add(new TestJsonOutputFormatter()); // This will be chosen based on the Accept Headers "application/json"
         result.Formatters.Add(new TestXmlOutputFormatter());
         result.Formatters.Add(new TestStringOutputFormatter());
@@ -223,10 +217,7 @@ public class ObjectResultExecutorTest
         var actionContext = new ActionContext() { HttpContext = httpContext };
         httpContext.Request.Headers.Accept = "application/xml"; // This will not be used
 
-        var result = new ObjectResult(new ProblemDetails())
-        {
-            ContentTypes = { "text/plain" }, // This will not be used
-        };
+        var result = new ObjectResult(new ProblemDetails()) { ContentTypes = { "text/plain" } };
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestXmlOutputFormatter()); // This will be chosen based on the Accept Headers "application/xml"
         result.Formatters.Add(new TestStringOutputFormatter());
@@ -271,7 +262,7 @@ public class ObjectResultExecutorTest
         // Arrange
         var executor = CreateExecutor();
 
-        var actionContext = new ActionContext() { HttpContext = GetHttpContext(), };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
 
         var result = new ObjectResult("input");
 
@@ -300,7 +291,7 @@ public class ObjectResultExecutorTest
 
         var executor = CreateExecutor(options: options);
 
-        var actionContext = new ActionContext() { HttpContext = GetHttpContext(), };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
 
         var result = new ObjectResult("someValue");
 
@@ -322,7 +313,7 @@ public class ObjectResultExecutorTest
             $"'{typeof(MvcOptions).FullName}.{nameof(MvcOptions.OutputFormatters)}' must not be "
             + $"empty. At least one '{typeof(IOutputFormatter).FullName}' is required to format a response.";
         var executor = CreateExecutor();
-        var actionContext = new ActionContext { HttpContext = GetHttpContext(), };
+        var actionContext = new ActionContext { HttpContext = GetHttpContext() };
         var result = new ObjectResult("some value");
 
         // Act & Assert
@@ -409,7 +400,7 @@ public class ObjectResultExecutorTest
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestXmlOutputFormatter());
 
-        var actionContext = new ActionContext() { HttpContext = GetHttpContext(), };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
         actionContext.HttpContext.Request.Headers.Accept = acceptHeader;
 
         // Act
@@ -450,7 +441,7 @@ public class ObjectResultExecutorTest
         result.Formatters.Add(new TestJsonOutputFormatter());
         result.Formatters.Add(new TestXmlOutputFormatter());
 
-        var actionContext = new ActionContext() { HttpContext = GetHttpContext(), };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
         actionContext.HttpContext.Request.Headers.Accept = acceptHeader;
 
         // Act
@@ -470,7 +461,7 @@ public class ObjectResultExecutorTest
         var formatter = new TestJsonOutputFormatter();
         result.Formatters.Add(formatter);
 
-        var actionContext = new ActionContext() { HttpContext = GetHttpContext(), };
+        var actionContext = new ActionContext() { HttpContext = GetHttpContext() };
 
         // Act
         await executor.ExecuteAsync(actionContext, result);

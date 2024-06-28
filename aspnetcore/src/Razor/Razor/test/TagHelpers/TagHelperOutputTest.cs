@@ -395,7 +395,7 @@ public class TagHelperOutputTest
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             "p",
-            new TagHelperAttributeList { { originalName, "btn" }, },
+            new TagHelperAttributeList { { originalName, "btn" } },
             (cachedResult, encoder) =>
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
@@ -478,7 +478,7 @@ public class TagHelperOutputTest
                         attributes: new TagHelperAttributeList()
                         {
                             { "test", "testVal" },
-                            { "something", "  spaced  " }
+                            { "something", "  spaced  " },
                         },
                         tagMode: TagMode.StartTagAndEndTag,
                         preElement: null,
@@ -521,10 +521,7 @@ public class TagHelperOutputTest
                 {
                     GetTagHelperOutput(
                         tagName: "p",
-                        attributes: new TagHelperAttributeList()
-                        {
-                            new TagHelperAttribute("test"),
-                        },
+                        attributes: new TagHelperAttributeList() { new TagHelperAttribute("test") },
                         tagMode: TagMode.StartTagAndEndTag,
                         preElement: null,
                         preContent: null,
@@ -608,7 +605,7 @@ public class TagHelperOutputTest
                         attributes: new TagHelperAttributeList()
                         {
                             { "test", "testVal" },
-                            { "something", "  spaced  " }
+                            { "something", "  spaced  " },
                         },
                         tagMode: TagMode.SelfClosing,
                         preElement: null,
@@ -630,7 +627,7 @@ public class TagHelperOutputTest
                                     "testVal",
                                     HtmlAttributeValueStyle.SingleQuotes
                                 )
-                            }
+                            },
                         },
                         tagMode: TagMode.StartTagOnly,
                         preElement: null,
@@ -647,7 +644,7 @@ public class TagHelperOutputTest
                         attributes: new TagHelperAttributeList()
                         {
                             { "test", "testVal" },
-                            { "something", "  spaced  " }
+                            { "something", "  spaced  " },
                         },
                         tagMode: TagMode.StartTagOnly,
                         preElement: null,
@@ -864,7 +861,7 @@ public class TagHelperOutputTest
                                     "testVal",
                                     HtmlAttributeValueStyle.SingleQuotes
                                 )
-                            }
+                            },
                         },
                         tagMode: TagMode.StartTagOnly,
                         preElement: "Before",
@@ -1194,7 +1191,7 @@ public class TagHelperOutputTest
                 Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         )
         {
-            TagMode = tagMode
+            TagMode = tagMode,
         };
 
         if (preElement != null)

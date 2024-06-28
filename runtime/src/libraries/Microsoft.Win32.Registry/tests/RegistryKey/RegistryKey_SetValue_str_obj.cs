@@ -112,7 +112,7 @@ namespace Microsoft.Win32.RegistryTests
             {
                 "This is a public",
                 "broadcast intend to test",
-                "lot of things. one of which"
+                "lot of things. one of which",
             };
 
             TestRegistryKey.SetValue(testValueName, expected);

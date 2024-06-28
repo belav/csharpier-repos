@@ -69,7 +69,7 @@ namespace Internal.Cryptography.Pal.Windows
                                         pCmsgCmsRecipientInfoMemory,
                                         index
                                     )
-                                )
+                                ),
                             };
 
                         case CMsgCmsRecipientChoice.CMSG_KEY_AGREE_RECIPIENT:

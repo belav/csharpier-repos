@@ -46,7 +46,7 @@ public static class WebHostBuilderIISExtensions
                 {
                     IsEnabled =
                         iisConfigData.fWindowsAuthEnabled || iisConfigData.fBasicAuthEnabled,
-                    AuthenticationScheme = IISServerDefaults.AuthenticationScheme
+                    AuthenticationScheme = IISServerDefaults.AuthenticationScheme,
                 });
                 services.Configure<IISServerOptions>(options =>
                 {

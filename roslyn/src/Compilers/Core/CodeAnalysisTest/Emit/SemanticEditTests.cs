@@ -58,7 +58,7 @@ public class SemanticEditTests : TestBase
 
         var instrumentation = new MethodInstrumentation()
         {
-            Kinds = ImmutableArray.Create(InstrumentationKind.TestCoverage)
+            Kinds = ImmutableArray.Create(InstrumentationKind.TestCoverage),
         };
         Assert.Throws<ArgumentOutOfRangeException>(
             "kind",
@@ -123,7 +123,7 @@ public class SemanticEditTests : TestBase
                     {
                         Kinds = ImmutableArray.Create(
                             InstrumentationKindExtensions.LocalStateTracing
-                        )
+                        ),
                     }
                 )
         );
@@ -137,7 +137,7 @@ public class SemanticEditTests : TestBase
                     newSymbol: method,
                     instrumentation: new MethodInstrumentation()
                     {
-                        Kinds = ImmutableArray.Create((InstrumentationKind)123)
+                        Kinds = ImmutableArray.Create((InstrumentationKind)123),
                     }
                 )
         );

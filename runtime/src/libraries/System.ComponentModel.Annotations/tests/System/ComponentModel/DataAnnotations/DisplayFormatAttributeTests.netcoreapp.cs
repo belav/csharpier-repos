@@ -31,7 +31,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new DisplayFormatAttribute
             {
-                NullDisplayTextResourceType = typeof(FakeResourceType)
+                NullDisplayTextResourceType = typeof(FakeResourceType),
             };
             Assert.Equal(typeof(FakeResourceType), attribute.NullDisplayTextResourceType);
         }
@@ -41,7 +41,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
         {
             var attribute = new DisplayFormatAttribute
             {
-                NullDisplayTextResourceType = typeof(FakeResourceType)
+                NullDisplayTextResourceType = typeof(FakeResourceType),
             };
 
             attribute.NullDisplayText = "Resource1";
@@ -75,7 +75,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             var attribute = new DisplayFormatAttribute
             {
                 NullDisplayTextResourceType = nullDisplayTextResourceType,
-                NullDisplayText = nullDisplayText
+                NullDisplayText = nullDisplayText,
             };
             Assert.Throws<InvalidOperationException>(() => attribute.GetNullDisplayText());
         }

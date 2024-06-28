@@ -108,7 +108,7 @@ namespace Mono.Btls
         IP_ADDRESS_MISMATCH = 64,
 
         /* The application is not happy */
-        APPLICATION_VERIFICATION = 50
+        APPLICATION_VERIFICATION = 50,
     }
 }
 #endif

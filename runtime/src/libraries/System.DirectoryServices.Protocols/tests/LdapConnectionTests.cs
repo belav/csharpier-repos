@@ -38,11 +38,15 @@ namespace System.DirectoryServices.Protocols.Tests
             yield return new object[] { new LdapDirectoryIdentifier("server") };
             yield return new object[]
             {
-                new LdapDirectoryIdentifier(new string[] { "server", null, "server" }, false, false)
+                new LdapDirectoryIdentifier(
+                    new string[] { "server", null, "server" },
+                    false,
+                    false
+                ),
             };
             yield return new object[]
             {
-                new LdapDirectoryIdentifier(new string[] { null }, false, false)
+                new LdapDirectoryIdentifier(new string[] { null }, false, false),
             };
         }
 
@@ -63,7 +67,7 @@ namespace System.DirectoryServices.Protocols.Tests
             yield return new object[]
             {
                 new LdapDirectoryIdentifier("server"),
-                new NetworkCredential("username", "password")
+                new NetworkCredential("username", "password"),
             };
         }
 
@@ -87,19 +91,19 @@ namespace System.DirectoryServices.Protocols.Tests
             {
                 new LdapDirectoryIdentifier("server"),
                 null,
-                AuthType.Anonymous
+                AuthType.Anonymous,
             };
             yield return new object[]
             {
                 new LdapDirectoryIdentifier("server"),
                 new NetworkCredential(),
-                AuthType.Anonymous
+                AuthType.Anonymous,
             };
             yield return new object[]
             {
                 new LdapDirectoryIdentifier("server"),
                 new NetworkCredential("username", "password"),
-                AuthType.Kerberos
+                AuthType.Kerberos,
             };
         }
 
@@ -175,7 +179,7 @@ namespace System.DirectoryServices.Protocols.Tests
             yield return new object[]
             {
                 new LdapDirectoryIdentifier("server"),
-                new NetworkCredential()
+                new NetworkCredential(),
             };
         }
 

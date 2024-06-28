@@ -28,7 +28,7 @@ namespace System.IO.Ports.Tests
         private enum ThrowAt
         {
             Set,
-            Open
+            Open,
         };
 
         #region Test Cases

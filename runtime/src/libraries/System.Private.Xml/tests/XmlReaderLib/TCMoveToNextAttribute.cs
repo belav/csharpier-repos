@@ -20,8 +20,8 @@ namespace System.Xml.Tests
                             "MoveToNextAttribute() When AttributeCount=0, <EMPTY1/> "
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -33,7 +33,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToNextAttribute() When AttributeCount=0, <NONEMPTY1>ABCDE</NONEMPTY1> "
-                        )
+                        ),
                     }
                 );
             }
@@ -45,7 +45,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToNextAttribute() When iOrdinal=0, with namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -57,7 +57,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToNextAttribute() When iOrdinal=0, without namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -69,7 +69,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToFirstAttribute() When iOrdinal=middle, with namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -81,7 +81,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToFirstAttribute() When iOrdinal=middle, without namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -93,7 +93,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToFirstAttribute() When iOrdinal=end, with namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -105,7 +105,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "MoveToFirstAttribute() When iOrdinal=end, without namespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -117,7 +117,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "424573 - XmlReader: Does not count depth for attributes of xml decl. and Doctype"
-                        )
+                        ),
                     }
                 );
             }

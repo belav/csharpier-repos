@@ -308,7 +308,7 @@ namespace Internal.TypeSystem.Interop
                                 returnType: _owningType.ElementType,
                                 parameters: new TypeDesc[]
                                 {
-                                    Context.GetWellKnownType(WellKnownType.Int32)
+                                    Context.GetWellKnownType(WellKnownType.Int32),
                                 }
                             );
                         }
@@ -321,7 +321,7 @@ namespace Internal.TypeSystem.Interop
                                 parameters: new TypeDesc[]
                                 {
                                     Context.GetWellKnownType(WellKnownType.Int32),
-                                    _owningType.ElementType
+                                    _owningType.ElementType,
                                 }
                             );
                         }
@@ -444,6 +444,6 @@ namespace Internal.TypeSystem.Interop
     public enum InlineArrayMethodKind : byte
     {
         Getter = 0,
-        Setter = 1
+        Setter = 1,
     }
 }

@@ -63,7 +63,7 @@ namespace Microsoft.Interop
                     )
                     {
                         InstanceIdentifier = NativeThisParameterIdentifier,
-                        NativeIndex = 0
+                        NativeIndex = 0,
                     }
                 );
                 foreach (var arg in argTypes)
@@ -73,11 +73,10 @@ namespace Microsoft.Interop
                         {
                             NativeIndex = arg.NativeIndex switch
                             {
-                                TypePositionInfo.UnsetIndex
-                                or TypePositionInfo.ReturnIndex =>
+                                TypePositionInfo.UnsetIndex or TypePositionInfo.ReturnIndex =>
                                     arg.NativeIndex,
-                                int index => index + 1
-                            }
+                                int index => index + 1,
+                            },
                         }
                     );
                 }
@@ -139,7 +138,7 @@ namespace Microsoft.Interop
                                     ),
                                     SingleVariableDesignation(
                                         Identifier(VirtualMethodTableIdentifier)
-                                    )
+                                    ),
                                 }
                             )
                         )
@@ -154,7 +153,7 @@ namespace Microsoft.Interop
                         IdentifierName("GetVirtualMethodTableInfoForKey"),
                         Argument(TypeOfExpression(containingTypeName))
                     )
-                )
+                ),
             };
 
             GeneratedStatements statements = GeneratedStatements.Create(

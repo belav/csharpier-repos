@@ -34,7 +34,7 @@ namespace System.Tests
         [Fact]
         public void FromDouble()
         {
-            double[] testValues = { 1000.0, 100.0, 0.0, 0.001, -1000.0, -100.0, };
+            double[] testValues = { 1000.0, 100.0, 0.0, 0.001, -1000.0, -100.0 };
             decimal[] expectedValues = { 1000.0m, 100.0m, 0.0m, 0.001m, -1000.0m, -100.0m };
             Verify(Convert.ToDecimal, testValues, expectedValues);
 
@@ -110,7 +110,7 @@ namespace System.Tests
                 Decimal.MaxValue.ToString(),
                 Decimal.MinValue.ToString(),
                 "0",
-                null
+                null,
             };
             decimal[] expectedValues =
             {
@@ -119,14 +119,14 @@ namespace System.Tests
                 decimal.MaxValue,
                 decimal.MinValue,
                 0,
-                0
+                0,
             };
             VerifyFromString(Convert.ToDecimal, Convert.ToDecimal, testValues, expectedValues);
 
             string[] overflowValues =
             {
                 "1" + Decimal.MaxValue.ToString(),
-                Decimal.MinValue.ToString() + "1"
+                Decimal.MinValue.ToString() + "1",
             };
             VerifyFromStringThrows<OverflowException>(
                 Convert.ToDecimal,

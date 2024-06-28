@@ -112,7 +112,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 throw new ArgumentNullException("contractDescription");
             var ret = new DiscoveryEndpoint(DiscoveryVersion, DiscoveryMode)
             {
-                MaxResponseDelay = this.MaxResponseDelay
+                MaxResponseDelay = this.MaxResponseDelay,
             };
             if (ret.Contract.ContractType != contractDescription.ContractType)
                 throw new ArgumentException(

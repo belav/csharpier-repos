@@ -32,7 +32,7 @@ public class FormCollectionModelBindingIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var data = "Some Data Is Better Than No Data.";
@@ -84,7 +84,7 @@ public class FormCollectionModelBindingIntegrationTest
                 // Setting a custom parameter prevents it from falling back to an empty prefix.
                 BinderModelName = "CustomParameter",
             },
-            ParameterType = typeof(IFormCollection)
+            ParameterType = typeof(IFormCollection),
         };
 
         var data = "Some Data Is Better Than No Data.";
@@ -123,8 +123,8 @@ public class FormCollectionModelBindingIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter", },
-            ParameterType = typeof(IFormCollection)
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(IFormCollection),
         };
 
         // No data is passed.

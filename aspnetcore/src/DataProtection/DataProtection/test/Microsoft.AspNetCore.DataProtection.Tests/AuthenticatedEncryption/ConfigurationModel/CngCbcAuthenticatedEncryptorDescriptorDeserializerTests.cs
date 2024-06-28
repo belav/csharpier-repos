@@ -26,7 +26,7 @@ public class CngCbcAuthenticatedEncryptorDescriptorDeserializerTests
                 EncryptionAlgorithmKeySize = 192,
                 EncryptionAlgorithmProvider = null,
                 HashAlgorithm = Constants.BCRYPT_SHA512_ALGORITHM,
-                HashAlgorithmProvider = null
+                HashAlgorithmProvider = null,
             },
             masterKey.ToSecret()
         );

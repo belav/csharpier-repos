@@ -213,7 +213,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "SupportedRequestBodyFormatters",
                 "ParameterDescriptions",
                 "ResponseDescription",
-                "ID"
+                "ID",
             }
         )]
         [InlineData(
@@ -240,7 +240,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                 "DataField",
                 "RegularField",
                 "DerivedField",
-                "DerivedMember"
+                "DerivedMember",
             }
         )]
         [InlineData(
@@ -336,7 +336,7 @@ namespace WebApiHelpPageWebHost.UnitTest
                             "Max length: 3",
                             "Min length: 2",
                             "Range: inclusive between 1 and 200",
-                            "String length: inclusive between 0 and 100"
+                            "String length: inclusive between 0 and 100",
                         }
                     },
                     {
@@ -348,9 +348,9 @@ namespace WebApiHelpPageWebHost.UnitTest
                             "Max length: 3",
                             "Min length: 2",
                             "Range: inclusive between 1 and 200",
-                            "String length: inclusive between 0 and 100"
+                            "String length: inclusive between 0 and 100",
                         }
-                    }
+                    },
                 };
 
                 yield return new[] { type, annotationMapping };

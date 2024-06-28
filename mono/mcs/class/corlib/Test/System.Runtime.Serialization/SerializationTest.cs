@@ -536,14 +536,14 @@ namespace MonoTests.System.Runtime.Serialization
     {
         aaa,
         bbb,
-        ccc
+        ccc,
     }
 
     enum ByteEnum : byte
     {
         aaa = 221,
         bbb = 3,
-        ccc = 44
+        ccc = 44,
     }
 
     delegate int SampleDelegate(string str, SomeValues sv, ref int acum);
@@ -642,7 +642,7 @@ namespace MonoTests.System.Runtime.Serialization
                 (int)1234,
                 null, /*boxedPoint, boxedPoint,*/
                 boxedLong,
-                boxedLong
+                boxedLong,
             };
             _strings = new string[]
             {
@@ -655,7 +655,7 @@ namespace MonoTests.System.Runtime.Serialization
                 "an",
                 "array",
                 "of",
-                "strings"
+                "strings",
             };
             _ints = new int[] { 4, 5, 6, 7, 8 };
             _intsMulti = new int[2, 3, 4]
@@ -663,30 +663,30 @@ namespace MonoTests.System.Runtime.Serialization
                 {
                     { 1, 2, 3, 4 },
                     { 5, 6, 7, 8 },
-                    { 9, 10, 11, 12 }
+                    { 9, 10, 11, 12 },
                 },
                 {
                     { 13, 14, 15, 16 },
                     { 17, 18, 19, 20 },
-                    { 21, 22, 23, 24 }
-                }
+                    { 21, 22, 23, 24 },
+                },
             };
             _intsJagged = new int[2][] { new int[3] { 1, 2, 3 }, new int[2] { 4, 5 } };
             _simples = new SimpleClass[]
             {
                 new SimpleClass('a'),
                 new SimpleClass('b'),
-                new SimpleClass('c')
+                new SimpleClass('c'),
             };
             _simplesMulti = new SimpleClass[2, 3]
             {
                 { new SimpleClass('d'), new SimpleClass('e'), new SimpleClass('f') },
-                { new SimpleClass('g'), new SimpleClass('j'), new SimpleClass('h') }
+                { new SimpleClass('g'), new SimpleClass('j'), new SimpleClass('h') },
             };
             _simplesJagged = new SimpleClass[2][]
             {
                 new SimpleClass[1] { new SimpleClass('i') },
-                new SimpleClass[2] { null, new SimpleClass('k') }
+                new SimpleClass[2] { null, new SimpleClass('k') },
             };
             _almostEmpty = new object[2000];
             _almostEmpty[1000] = 4;
@@ -710,7 +710,7 @@ namespace MonoTests.System.Runtime.Serialization
                 Double.MaxValue,
                 Double.MinValue,
                 Double.NegativeInfinity,
-                Double.PositiveInfinity
+                Double.PositiveInfinity,
             };
 
             _sampleDelegate = new SampleDelegate(SampleCall);
@@ -724,7 +724,7 @@ namespace MonoTests.System.Runtime.Serialization
                         _sampleDelegate,
                         _sampleDelegate2,
                         _sampleDelegate3,
-                        _sampleDelegateStatic
+                        _sampleDelegateStatic,
                     }
                 );
 

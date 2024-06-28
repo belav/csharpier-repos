@@ -249,7 +249,7 @@ namespace System.Data.EntityModel.Emitters
                                             cspaceNamespaceNameQualifiedRelationshipName
                                         ),
                                         new CodePrimitiveExpression(target.Name),
-                                        valueRef
+                                        valueRef,
                                     }
                                 )
                             )
@@ -314,7 +314,7 @@ namespace System.Data.EntityModel.Emitters
                                         cspaceNamespaceNameQualifiedRelationshipName
                                     ),
                                     new CodePrimitiveExpression(target.Name),
-                                    valueRef
+                                    valueRef,
                                 }
                             )
                         )
@@ -456,7 +456,7 @@ namespace System.Data.EntityModel.Emitters
                 new CodeExpression[]
                 {
                     new CodePrimitiveExpression(cspaceNamespaceNameQualifiedRelationshipName),
-                    new CodePrimitiveExpression(target.Name)
+                    new CodePrimitiveExpression(target.Name),
                 }
             );
         }

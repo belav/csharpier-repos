@@ -162,6 +162,6 @@ internal sealed class MemoryPoolThrowHelper
         offset,
         length,
         MemoryPoolBlock,
-        MemoryPool
+        MemoryPool,
     }
 }

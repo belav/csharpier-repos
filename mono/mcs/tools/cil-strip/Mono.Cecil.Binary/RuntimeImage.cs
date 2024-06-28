@@ -36,6 +36,6 @@ namespace Mono.Cecil.Binary
         ILOnly = 0x0000001,
         F32BitsRequired = 0x0000002,
         StrongNameSigned = 0x0000008,
-        TrackDebugData = 0x00010000
+        TrackDebugData = 0x00010000,
     }
 }

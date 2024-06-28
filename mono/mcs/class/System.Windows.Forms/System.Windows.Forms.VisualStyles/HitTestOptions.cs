@@ -40,6 +40,6 @@ namespace System.Windows.Forms.VisualStyles
         ResizingBorderBottom = 128,
         ResizingBorder = 240,
         SizingTemplate = 256,
-        SystemSizingMargins = 512
+        SystemSizingMargins = 512,
     }
 }

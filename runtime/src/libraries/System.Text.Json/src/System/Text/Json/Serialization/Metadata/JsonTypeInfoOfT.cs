@@ -142,7 +142,7 @@ namespace System.Text.Json.Serialization.Metadata
                 options
             )
             {
-                JsonTypeInfo = this
+                JsonTypeInfo = this,
             };
         }
     }

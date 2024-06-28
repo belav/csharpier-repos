@@ -112,7 +112,7 @@ internal sealed class WebServerStartup
             {
                 FileProvider = new PhysicalFileProvider(_hostingEnvironment.ContentRootPath),
                 ContentTypeProvider = provider,
-                ServeUnknownFileTypes = true
+                ServeUnknownFileTypes = true,
             }
         );
 

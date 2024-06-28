@@ -18,7 +18,7 @@ Test2
     {
         "\u3F2Aarray element 0",
         "array element 1\uCB53",
-        "array \u47BBelement 2"
+        "array \u47BBelement 2",
     };
 
     public static bool TestSameObjRef()

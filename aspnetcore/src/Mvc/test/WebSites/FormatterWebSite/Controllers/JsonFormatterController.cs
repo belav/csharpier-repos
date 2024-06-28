@@ -40,7 +40,7 @@ public class JsonFormatterController : Controller
             Alias = "john",
             description = "This is long so we can test large objects " + new string('a', 1024 * 65),
             Designation = "Administrator",
-            Name = "John Williams"
+            Name = "John Williams",
         };
 
         var objectResult = new ObjectResult(user);

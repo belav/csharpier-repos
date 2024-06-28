@@ -97,7 +97,7 @@ namespace System.Text.Tests
             new CodePageMapping("x-unicode-1-1-utf-7", 65000),
             new CodePageMapping("x-unicode-1-1-utf-8", 65001),
             new CodePageMapping("x-unicode-2-0-utf-7", 65000),
-            new CodePageMapping("x-unicode-2-0-utf-8", 65001)
+            new CodePageMapping("x-unicode-2-0-utf-8", 65001),
         };
 
         [Fact]
@@ -166,7 +166,7 @@ namespace System.Text.Tests
             new CodePageToWebNameMapping(20127, "us-ascii"),
             new CodePageToWebNameMapping(28591, "iso-8859-1"),
             new CodePageToWebNameMapping(65000, "utf-7"),
-            new CodePageToWebNameMapping(65001, "utf-8")
+            new CodePageToWebNameMapping(65001, "utf-8"),
         };
     }
 }

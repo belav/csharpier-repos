@@ -25,7 +25,7 @@ namespace System.ComponentModel.Tests
             {
                 DesignOnlyAttribute.No,
                 new DesignOnlyAttribute(false),
-                true
+                true,
             };
             yield return new object[] { DesignOnlyAttribute.Yes, DesignOnlyAttribute.No, false };
 

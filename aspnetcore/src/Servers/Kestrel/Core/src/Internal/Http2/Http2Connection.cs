@@ -531,7 +531,7 @@ internal sealed partial class Http2Connection
         None = 0,
         Preface = 1,
         Http1x = 2,
-        All = Preface | Http1x
+        All = Preface | Http1x,
     }
 
     private async Task<bool> TryReadPrefaceAsync()
@@ -732,11 +732,10 @@ internal sealed partial class Http2Connection
             Http2FrameType.PRIORITY => ProcessPriorityFrameAsync(),
             Http2FrameType.RST_STREAM => ProcessRstStreamFrameAsync(),
             Http2FrameType.SETTINGS => ProcessSettingsFrameAsync(payload),
-            Http2FrameType.PUSH_PROMISE =>
-                throw new Http2ConnectionErrorException(
-                    CoreStrings.Http2ErrorPushPromiseReceived,
-                    Http2ErrorCode.PROTOCOL_ERROR
-                ),
+            Http2FrameType.PUSH_PROMISE => throw new Http2ConnectionErrorException(
+                CoreStrings.Http2ErrorPushPromiseReceived,
+                Http2ErrorCode.PROTOCOL_ERROR
+            ),
             Http2FrameType.PING => ProcessPingFrameAsync(payload),
             Http2FrameType.GOAWAY => ProcessGoAwayFrameAsync(),
             Http2FrameType.WINDOW_UPDATE => ProcessWindowUpdateFrameAsync(),
@@ -1844,7 +1843,7 @@ internal sealed partial class Http2Connection
         Static,
         StaticAndValue,
         Dynamic,
-        NameAndValue
+        NameAndValue,
     }
 
     // We can't throw a Http2StreamErrorException here, it interrupts the header decompression state and may corrupt subsequent header frames on other streams.
@@ -2111,7 +2110,7 @@ internal sealed partial class Http2Connection
             12 => PseudoHeaderFields.Status,
             13 => PseudoHeaderFields.Status,
             14 => PseudoHeaderFields.Status,
-            _ => PseudoHeaderFields.None
+            _ => PseudoHeaderFields.None,
         };
 
         return headerField;
@@ -2249,7 +2248,7 @@ internal sealed partial class Http2Connection
         Ready,
         PseudoHeaderFields,
         Headers,
-        Trailers
+        Trailers,
     }
 
     [Flags]
@@ -2262,7 +2261,7 @@ internal sealed partial class Http2Connection
         Scheme = 0x8,
         Status = 0x10,
         Protocol = 0x20,
-        Unknown = 0x40000000
+        Unknown = 0x40000000,
     }
 
     private static class GracefulCloseInitiator

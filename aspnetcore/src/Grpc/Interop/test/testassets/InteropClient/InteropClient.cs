@@ -178,7 +178,7 @@ public class InteropClient : IDisposable
             {
                 Credentials = credentials,
                 HttpHandler = httpClientHandler,
-                LoggerFactory = loggerFactory
+                LoggerFactory = loggerFactory,
             }
         );
 
@@ -313,7 +313,7 @@ public class InteropClient : IDisposable
         var request = new SimpleRequest
         {
             ResponseSize = 314159,
-            Payload = CreateZerosPayload(271828)
+            Payload = CreateZerosPayload(271828),
         };
         var response = client.UnaryCall(request);
 
@@ -349,8 +349,8 @@ public class InteropClient : IDisposable
         {
             ResponseParameters =
             {
-                bodySizes.Select((size) => new ResponseParameters { Size = size })
-            }
+                bodySizes.Select((size) => new ResponseParameters { Size = size }),
+            },
         };
 
         using (var call = client.StreamingOutputCall(request))
@@ -374,7 +374,7 @@ public class InteropClient : IDisposable
                 new StreamingOutputCallRequest
                 {
                     ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                    Payload = CreateZerosPayload(27182)
+                    Payload = CreateZerosPayload(27182),
                 }
             );
 
@@ -385,7 +385,7 @@ public class InteropClient : IDisposable
                 new StreamingOutputCallRequest
                 {
                     ResponseParameters = { new ResponseParameters { Size = 9 } },
-                    Payload = CreateZerosPayload(8)
+                    Payload = CreateZerosPayload(8),
                 }
             );
 
@@ -396,7 +396,7 @@ public class InteropClient : IDisposable
                 new StreamingOutputCallRequest
                 {
                     ResponseParameters = { new ResponseParameters { Size = 2653 } },
-                    Payload = CreateZerosPayload(1828)
+                    Payload = CreateZerosPayload(1828),
                 }
             );
 
@@ -407,7 +407,7 @@ public class InteropClient : IDisposable
                 new StreamingOutputCallRequest
                 {
                     ResponseParameters = { new ResponseParameters { Size = 58979 } },
-                    Payload = CreateZerosPayload(45904)
+                    Payload = CreateZerosPayload(45904),
                 }
             );
 
@@ -447,7 +447,7 @@ public class InteropClient : IDisposable
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828),
             FillUsername = true,
-            FillOauthScope = true
+            FillOauthScope = true,
         };
 
         // not setting credentials here because they were set on channel already
@@ -510,7 +510,7 @@ public class InteropClient : IDisposable
         ITokenAccess googleCredential = await GoogleCredential.GetApplicationDefaultAsync();
 
         var credentials = googleCredential.ToCallCredentials();
-        var request = new SimpleRequest { FillUsername = true, };
+        var request = new SimpleRequest { FillUsername = true };
 
         var response = client.UnaryCall(request, new CallOptions(credentials: credentials));
 
@@ -546,7 +546,7 @@ public class InteropClient : IDisposable
                 new StreamingOutputCallRequest
                 {
                     ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                    Payload = CreateZerosPayload(27182)
+                    Payload = CreateZerosPayload(27182),
                 }
             );
 
@@ -612,7 +612,7 @@ public class InteropClient : IDisposable
             var request = new SimpleRequest
             {
                 ResponseSize = 314159,
-                Payload = CreateZerosPayload(271828)
+                Payload = CreateZerosPayload(271828),
             };
 
             var call = client.UnaryCallAsync(request, headers: CreateTestMetadata());
@@ -638,7 +638,7 @@ public class InteropClient : IDisposable
             var request = new StreamingOutputCallRequest
             {
                 ResponseParameters = { new ResponseParameters { Size = 31415 } },
-                Payload = CreateZerosPayload(27182)
+                Payload = CreateZerosPayload(27182),
             };
 
             var call = client.FullDuplexCall(headers: CreateTestMetadata());
@@ -710,7 +710,7 @@ public class InteropClient : IDisposable
         var echoStatus = new EchoStatus
         {
             Code = 2,
-            Message = "\t\ntest with whitespace\r\nand Unicode BMP ☺ and non-BMP 😈\t\n"
+            Message = "\t\ntest with whitespace\r\nand Unicode BMP ☺ and non-BMP 😈\t\n",
         };
 
         try
@@ -754,10 +754,12 @@ public class InteropClient : IDisposable
         {
             ExpectCompressed = new BoolValue
             {
-                Value = true // lie about compression
+                Value =
+                    true // lie about compression
+                ,
             },
             ResponseSize = 314159,
-            Payload = CreateZerosPayload(271828)
+            Payload = CreateZerosPayload(271828),
         };
         var e = Assert.Throws<RpcException>(
             () => client.UnaryCall(probeRequest, CreateClientCompressionMetadata(false))
@@ -768,7 +770,7 @@ public class InteropClient : IDisposable
         {
             ExpectCompressed = new BoolValue { Value = true },
             ResponseSize = 314159,
-            Payload = CreateZerosPayload(271828)
+            Payload = CreateZerosPayload(271828),
         };
         var response1 = client.UnaryCall(compressedRequest, CreateClientCompressionMetadata(true));
         Assert.AreEqual(314159, response1.Payload.Body.Length);
@@ -777,7 +779,7 @@ public class InteropClient : IDisposable
         {
             ExpectCompressed = new BoolValue { Value = false },
             ResponseSize = 314159,
-            Payload = CreateZerosPayload(271828)
+            Payload = CreateZerosPayload(271828),
         };
         var response2 = client.UnaryCall(
             uncompressedRequest,
@@ -798,7 +800,7 @@ public class InteropClient : IDisposable
                 new StreamingInputCallRequest
                 {
                     ExpectCompressed = new BoolValue { Value = true },
-                    Payload = CreateZerosPayload(27182)
+                    Payload = CreateZerosPayload(27182),
                 }
             );
 
@@ -816,7 +818,7 @@ public class InteropClient : IDisposable
             new StreamingInputCallRequest
             {
                 ExpectCompressed = new BoolValue { Value = true },
-                Payload = CreateZerosPayload(27182)
+                Payload = CreateZerosPayload(27182),
             }
         );
 
@@ -825,7 +827,7 @@ public class InteropClient : IDisposable
             new StreamingInputCallRequest
             {
                 ExpectCompressed = new BoolValue { Value = false },
-                Payload = CreateZerosPayload(45904)
+                Payload = CreateZerosPayload(45904),
             }
         );
         await call.RequestStream.CompleteAsync();
@@ -844,7 +846,7 @@ public class InteropClient : IDisposable
         {
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828),
-            ResponseCompressed = new BoolValue { Value = true }
+            ResponseCompressed = new BoolValue { Value = true },
         };
         var response = await client.UnaryCallAsync(request);
 
@@ -855,7 +857,7 @@ public class InteropClient : IDisposable
         {
             ResponseSize = 314159,
             Payload = CreateZerosPayload(271828),
-            ResponseCompressed = new BoolValue { Value = false }
+            ResponseCompressed = new BoolValue { Value = false },
         };
         response = await client.UnaryCallAsync(request);
 
@@ -880,10 +882,10 @@ public class InteropClient : IDisposable
                         new ResponseParameters
                         {
                             Size = size,
-                            Compressed = new BoolValue { Value = true }
+                            Compressed = new BoolValue { Value = true },
                         }
-                )
-            }
+                ),
+            },
         };
 
         using (var call = client.StreamingOutputCall(request))
@@ -909,7 +911,7 @@ public class InteropClient : IDisposable
         var algorithmName = compressed ? "gzip" : "identity";
         return new Metadata
         {
-            { new Metadata.Entry(CompressionRequestAlgorithmMetadataKey, algorithmName) }
+            { new Metadata.Entry(CompressionRequestAlgorithmMetadataKey, algorithmName) },
         };
     }
 
@@ -929,7 +931,7 @@ public class InteropClient : IDisposable
         return new Metadata
         {
             { "x-grpc-test-echo-initial", "test_initial_metadata_value" },
-            { "x-grpc-test-echo-trailing-bin", new byte[] { 0xab, 0xab, 0xab } }
+            { "x-grpc-test-echo-trailing-bin", new byte[] { 0xab, 0xab, 0xab } },
         };
     }
 

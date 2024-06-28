@@ -716,7 +716,7 @@ namespace System.Windows.Forms
                 "TARGETS",
                 "_SWF_AsyncAtom",
                 "_SWF_PostMessageAtom",
-                "_SWF_HoverAtom"
+                "_SWF_HoverAtom",
             };
 
             IntPtr[] atoms = new IntPtr[atom_names.Length];

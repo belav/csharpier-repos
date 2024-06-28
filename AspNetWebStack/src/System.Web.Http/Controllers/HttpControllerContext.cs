@@ -78,7 +78,7 @@ namespace System.Web.Http.Controllers
             _requestContext = new HttpRequestContext
             {
                 Configuration = configuration,
-                RouteData = routeData
+                RouteData = routeData,
             };
             _request = request;
         }

@@ -111,7 +111,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(23, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -154,7 +154,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                         : new CollectionEvent<int>[]
                         {
@@ -182,7 +182,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                     : new CollectionEvent<int>[]
                     {
@@ -191,7 +191,11 @@ namespace C5UnitTests.Templates.Events
                             new ItemCountEventArgs<int>(200, 1),
                             collection
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                        new CollectionEvent<int>(
+                            EventTypeEnum.Changed,
+                            new EventArgs(),
+                            collection
+                        ),
                     }
             );
             collection.AddAll<int>(new int[] { });
@@ -230,7 +234,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                         : new CollectionEvent<int>[]
                         {
@@ -248,7 +252,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                     : new CollectionEvent<int>[]
                     {
@@ -262,7 +266,11 @@ namespace C5UnitTests.Templates.Events
                             new ItemCountEventArgs<int>(53, 1),
                             collection
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                        new CollectionEvent<int>(
+                            EventTypeEnum.Changed,
+                            new EventArgs(),
+                            collection
+                        ),
                     }
             );
             collection.Update(67);
@@ -289,7 +297,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(67, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -316,7 +324,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(53, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             val = 67;
@@ -329,7 +337,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(67, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.UpdateOrAdd(51, out val);
@@ -346,7 +354,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(51, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             val = 67;
@@ -359,7 +367,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(81, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -380,7 +388,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(56, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Remove(11);
@@ -392,7 +400,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(18, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -420,7 +428,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(45, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.RemoveAll<int>(new int[] { 200, 300 });
@@ -455,7 +463,7 @@ namespace C5UnitTests.Templates.Events
                         collection
                     ),
                     //new CollectionEvent<int>(EventTypeEnum.Removed, new ItemCountEventArgs<int>(75, 1), collection),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.RetainAll<int>(new int[] { 32, 187, 45, 62, 75, 82, 95, 2 });
@@ -485,7 +493,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                         : new CollectionEvent<int>[]
                         {
@@ -508,7 +516,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                     : new CollectionEvent<int>[]
                     {
@@ -517,7 +525,11 @@ namespace C5UnitTests.Templates.Events
                             new ItemCountEventArgs<int>(11, 1),
                             collection
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                        new CollectionEvent<int>(
+                            EventTypeEnum.Changed,
+                            new EventArgs(),
+                            collection
+                        ),
                     }
             );
             collection.RemoveAllCopies(14);
@@ -540,7 +552,7 @@ namespace C5UnitTests.Templates.Events
                         new ClearedEventArgs(true, collection.AllowsDuplicates ? 3 : 2),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Clear();
@@ -572,7 +584,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(16, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -599,7 +611,7 @@ namespace C5UnitTests.Templates.Events
                             new ClearedEventArgs(false, 2),
                             collection
                         ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.RemoveInterval(1, 0);
@@ -682,7 +694,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                         : new CollectionEvent<int>[]
                         {
@@ -710,7 +722,7 @@ namespace C5UnitTests.Templates.Events
                                 EventTypeEnum.Changed,
                                 new EventArgs(),
                                 collection
-                            )
+                            ),
                         }
                     : new CollectionEvent<int>[]
                     {
@@ -729,7 +741,11 @@ namespace C5UnitTests.Templates.Events
                             new ItemCountEventArgs<int>(93, 1),
                             collection
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                        new CollectionEvent<int>(
+                            EventTypeEnum.Changed,
+                            new EventArgs(),
+                            collection
+                        ),
                     }
             );
             collection.AddSorted(new int[] { });
@@ -762,7 +778,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(175, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.RemoveRangeFromTo(83, 113);
@@ -784,7 +800,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(85, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.RemoveRangeTo(33);
@@ -806,7 +822,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(25, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.RemoveRangeFrom(173);
@@ -866,7 +882,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemAtEventArgs<int>(45, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -892,7 +908,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(45, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -939,7 +955,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(888, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.InsertAll<int>(1, new int[] { });
@@ -967,7 +983,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(45, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.InsertLast(88);
@@ -984,7 +1000,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(88, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1006,7 +1022,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(18, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.FIFO = true;
@@ -1019,7 +1035,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(4, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1045,7 +1061,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(4, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1071,7 +1087,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(18, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1087,7 +1103,7 @@ namespace C5UnitTests.Templates.Events
             seen.Check(
                 new CollectionEvent<int>[]
                 {
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.View(1, 0).Reverse();
@@ -1105,7 +1121,7 @@ namespace C5UnitTests.Templates.Events
             seen.Check(
                 new CollectionEvent<int>[]
                 {
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.View(1, 0).Sort();
@@ -1123,7 +1139,7 @@ namespace C5UnitTests.Templates.Events
             seen.Check(
                 new CollectionEvent<int>[]
                 {
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.View(1, 0).Shuffle();
@@ -1146,7 +1162,7 @@ namespace C5UnitTests.Templates.Events
                         new ClearedRangeEventArgs(false, 1, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Clear();
@@ -1158,7 +1174,7 @@ namespace C5UnitTests.Templates.Events
                         new ClearedRangeEventArgs(true, 2, 0),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Clear();
@@ -1183,7 +1199,7 @@ namespace C5UnitTests.Templates.Events
                         new ClearedRangeEventArgs(true, 3, 0),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Dispose();
@@ -1302,7 +1318,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(23, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Push(-12);
@@ -1319,7 +1335,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(-12, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Pop();
@@ -1336,7 +1352,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(-12, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Pop();
@@ -1353,7 +1369,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(23, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1385,7 +1401,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(67, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Enqueue(2);
@@ -1402,7 +1418,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(2, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Dequeue();
@@ -1419,7 +1435,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(67, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
             collection.Dequeue();
@@ -1436,7 +1452,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(2, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1552,7 +1568,7 @@ namespace C5UnitTests.Templates.Events
                         new ItemCountEventArgs<int>(2, 1),
                         collection
                     ),
-                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection)
+                    new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), collection),
                 }
             );
         }
@@ -1707,7 +1723,7 @@ namespace C5UnitTests.Templates.Events
                         EventTypeEnum.Changed,
                         new EventArgs(),
                         collection
-                    )
+                    ),
                 }
             );
             collection.Remove(25);
@@ -1726,7 +1742,7 @@ namespace C5UnitTests.Templates.Events
                         EventTypeEnum.Changed,
                         new EventArgs(),
                         collection
-                    )
+                    ),
                 }
             );
         }

@@ -349,7 +349,7 @@ public abstract class UpdateSqlGeneratorTestBase
                 false,
                 false,
                 true
-            )
+            ),
         };
 
         if (defaultsOnly)
@@ -441,7 +441,7 @@ public abstract class UpdateSqlGeneratorTestBase
                 false,
                 concurrencyToken,
                 true
-            )
+            ),
         };
 
         return CreateModificationCommand(entry, columnModifications, false);
@@ -485,7 +485,7 @@ public abstract class UpdateSqlGeneratorTestBase
                 false,
                 concurrencyToken,
                 true
-            )
+            ),
         };
 
         return CreateModificationCommand(entry, columnModifications, false);

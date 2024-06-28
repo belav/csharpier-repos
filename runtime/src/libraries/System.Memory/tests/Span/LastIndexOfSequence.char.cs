@@ -31,7 +31,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { '5', '1', '7' });
@@ -77,7 +77,7 @@ namespace System.SpanTests
                     '9',
                     '7',
                     '0',
-                    '1'
+                    '1',
                 }
             );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8' });
@@ -109,7 +109,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8', 'X' });
@@ -141,7 +141,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { 'X', '7', '8', '9' });
@@ -192,7 +192,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(Array.Empty<char>());

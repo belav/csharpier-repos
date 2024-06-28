@@ -99,7 +99,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ComplexModelDto)
                 ),
                 ModelName = "theModel",
-                ModelBinderProviders = binders
+                ModelBinderProviders = binders,
             };
 
             ComplexModelDtoModelBinder binder = new ComplexModelDtoModelBinder();
@@ -139,7 +139,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     null,
                     modelType,
                     "SomeProperty"
-                )
+                ),
             };
         }
 

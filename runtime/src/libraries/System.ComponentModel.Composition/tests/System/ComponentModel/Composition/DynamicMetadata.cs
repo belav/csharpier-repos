@@ -30,7 +30,7 @@ namespace System.ComponentModel.Composition
                         attributes,
                         new Attribute[]
                         {
-                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter))
+                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter)),
                         }
                     )
             );
@@ -56,7 +56,7 @@ namespace System.ComponentModel.Composition
                         attributes,
                         new Attribute[]
                         {
-                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter))
+                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter)),
                         }
                     ),
                 container1
@@ -91,7 +91,7 @@ namespace System.ComponentModel.Composition
                         attributes,
                         new Attribute[]
                         {
-                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter))
+                            new TypeConverterAttribute(typeof(DynamicMetadataTestClassConverter)),
                         }
                     ),
                 container1

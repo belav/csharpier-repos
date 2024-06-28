@@ -18,7 +18,7 @@ namespace System.Net.Tests
                 TimeSpan.MaxValue,
                 TimeSpan.MinValue,
                 TimeSpan.MinValue,
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             foreach (HttpRequestCacheLevel level in Enum.GetValues(typeof(HttpRequestCacheLevel)))
             {
@@ -29,7 +29,7 @@ namespace System.Net.Tests
                     TimeSpan.MaxValue,
                     TimeSpan.MinValue,
                     TimeSpan.MinValue,
-                    DateTime.MinValue
+                    DateTime.MinValue,
                 };
             }
             yield return new object[]
@@ -39,7 +39,7 @@ namespace System.Net.Tests
                 TimeSpan.MaxValue,
                 TimeSpan.MinValue,
                 TimeSpan.MinValue,
-                new DateTime(504000000000)
+                new DateTime(504000000000),
             };
             yield return new object[]
             {
@@ -48,7 +48,7 @@ namespace System.Net.Tests
                 TimeSpan.FromSeconds(1),
                 TimeSpan.MinValue,
                 TimeSpan.MinValue,
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -57,7 +57,7 @@ namespace System.Net.Tests
                 TimeSpan.MaxValue,
                 TimeSpan.FromSeconds(1),
                 TimeSpan.MinValue,
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -66,7 +66,7 @@ namespace System.Net.Tests
                 TimeSpan.MaxValue,
                 TimeSpan.MinValue,
                 TimeSpan.FromSeconds(1),
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -79,7 +79,7 @@ namespace System.Net.Tests
                 TimeSpan.FromSeconds(1),
                 TimeSpan.MinValue,
                 TimeSpan.MinValue,
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -92,7 +92,7 @@ namespace System.Net.Tests
                 TimeSpan.MaxValue,
                 TimeSpan.FromSeconds(1),
                 TimeSpan.MinValue,
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -105,7 +105,7 @@ namespace System.Net.Tests
                 TimeSpan.MaxValue,
                 TimeSpan.MinValue,
                 TimeSpan.FromSeconds(1),
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -118,7 +118,7 @@ namespace System.Net.Tests
                 TimeSpan.FromSeconds(1),
                 TimeSpan.FromSeconds(2),
                 TimeSpan.MinValue,
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -131,7 +131,7 @@ namespace System.Net.Tests
                 TimeSpan.FromSeconds(1),
                 TimeSpan.MinValue,
                 TimeSpan.FromSeconds(2),
-                DateTime.MinValue
+                DateTime.MinValue,
             };
             yield return new object[]
             {
@@ -145,7 +145,7 @@ namespace System.Net.Tests
                 TimeSpan.FromSeconds(1),
                 TimeSpan.MinValue,
                 TimeSpan.FromSeconds(2),
-                new DateTime(1, 2, 3)
+                new DateTime(1, 2, 3),
             };
         }
 

@@ -40,7 +40,7 @@ namespace System.Linq.Tests
                     "#",
                     "!@#$%^",
                     "0987654321",
-                    "Calling Twice"
+                    "Calling Twice",
                 }
                 select x1;
 
@@ -61,7 +61,7 @@ namespace System.Linq.Tests
                     "#",
                     "!@#$%^",
                     "0987654321",
-                    "Calling Twice"
+                    "Calling Twice",
                 }
                 select x1;
 

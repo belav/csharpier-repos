@@ -20,7 +20,7 @@ namespace System.Web.Mvc.Test
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelName = "foo",
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
 
             ByteArrayModelBinder binder = new ByteArrayModelBinder();
@@ -41,7 +41,7 @@ namespace System.Web.Mvc.Test
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelName = "foo",
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
 
             ByteArrayModelBinder binder = new ByteArrayModelBinder();
@@ -76,13 +76,13 @@ namespace System.Web.Mvc.Test
             string base64Value = Base64TestString;
             SimpleValueProvider valueProvider = new SimpleValueProvider()
             {
-                { "foo", "\"" + base64Value + "\"" }
+                { "foo", "\"" + base64Value + "\"" },
             };
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelName = "foo",
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
 
             ByteArrayModelBinder binder = new ByteArrayModelBinder();
@@ -101,13 +101,13 @@ namespace System.Web.Mvc.Test
             string base64Value = Base64TestString;
             SimpleValueProvider valueProvider = new SimpleValueProvider()
             {
-                { "foo", base64Value }
+                { "foo", base64Value },
             };
 
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
                 ModelName = "foo",
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
 
             ByteArrayModelBinder binder = new ByteArrayModelBinder();

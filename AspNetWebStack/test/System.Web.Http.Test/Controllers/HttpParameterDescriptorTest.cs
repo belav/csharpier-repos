@@ -34,7 +34,7 @@ namespace System.Web.Http
             HttpConfiguration config = new HttpConfiguration();
             HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
 
             Assert.Reflection.Property<HttpParameterDescriptor, HttpConfiguration>(
@@ -51,7 +51,7 @@ namespace System.Web.Http
         {
             HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             HttpActionDescriptor actionDescriptor = new Mock<HttpActionDescriptor>().Object;
 
@@ -69,7 +69,7 @@ namespace System.Web.Http
         {
             HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             IEnumerable<object> attributes = parameterDescriptor.GetCustomAttributes<object>();
 
@@ -81,7 +81,7 @@ namespace System.Web.Http
         {
             HttpParameterDescriptor parameterDescriptor = new Mock<HttpParameterDescriptor>
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             IEnumerable<FromBodyAttribute> attributes =
                 parameterDescriptor.GetCustomAttributes<FromBodyAttribute>();

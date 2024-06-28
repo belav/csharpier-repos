@@ -92,14 +92,14 @@ namespace System.ServiceModel.Activities.Configuration
                 {
                     IdleTimeout = FactorySettings.IdleTimeout,
                     LeaseTimeout = FactorySettings.LeaseTimeout,
-                    MaxItemsInCache = FactorySettings.MaxItemsInCache
+                    MaxItemsInCache = FactorySettings.MaxItemsInCache,
                 },
                 ChannelSettings = new ChannelCacheSettings
                 {
                     IdleTimeout = ChannelSettings.IdleTimeout,
                     LeaseTimeout = ChannelSettings.LeaseTimeout,
-                    MaxItemsInCache = ChannelSettings.MaxItemsInCache
-                }
+                    MaxItemsInCache = ChannelSettings.MaxItemsInCache,
+                },
             };
         }
     }

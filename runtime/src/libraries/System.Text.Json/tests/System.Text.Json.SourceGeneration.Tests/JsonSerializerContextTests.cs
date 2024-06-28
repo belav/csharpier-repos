@@ -126,7 +126,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                 {
                     DataT = 1,
                     DataT1 = 10,
-                    DataT2 = 100
+                    DataT2 = 100,
                 };
             Type type =
                 typeof(MyContainingGenericClass<int>.MyNestedGenericClass<int>.MyNestedGenericNestedGenericClass<int>);
@@ -311,7 +311,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolverChain = { NestedContext.Default, PersonJsonContext.Default }
+                TypeInfoResolverChain = { NestedContext.Default, PersonJsonContext.Default },
             };
 
             JsonTypeInfo messageInfo = options.GetTypeInfo(typeof(JsonMessage));
@@ -403,7 +403,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                     fastPathContext,
                     appendedResolver,
                     new DefaultJsonTypeInfoResolver()
-                )
+                ),
             };
 
             JsonTypeInfo<PocoWithInteger> jsonMessageInfo =
@@ -453,7 +453,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                     prependedResolver,
                     fastPathContext,
                     new DefaultJsonTypeInfoResolver()
-                )
+                ),
             };
 
             JsonTypeInfo<PocoWithInteger> jsonMessageInfo =
@@ -503,7 +503,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                     prependedResolver,
                     fastPathContext,
                     new DefaultJsonTypeInfoResolver()
-                )
+                ),
             };
 
             JsonTypeInfo<PocoWithInteger> jsonMessageInfo =
@@ -542,18 +542,21 @@ namespace System.Text.Json.SourceGeneration.Tests
             yield return new object[] { CompatibleWithInstrumentedFastPathContext.Default };
             yield return new object[]
             {
-                new CustomWrappingResolver<int> { Resolver = new DefaultJsonTypeInfoResolver() }
+                new CustomWrappingResolver<int> { Resolver = new DefaultJsonTypeInfoResolver() },
             };
             yield return new object[]
             {
                 new CustomWrappingResolver<int>
                 {
-                    Resolver = CompatibleWithInstrumentedFastPathContext.Default
-                }
+                    Resolver = CompatibleWithInstrumentedFastPathContext.Default,
+                },
             };
             yield return new object[]
             {
-                new CustomWrappingResolver<int> { Resolver = new ContextWithInstrumentedFastPath() }
+                new CustomWrappingResolver<int>
+                {
+                    Resolver = new ContextWithInstrumentedFastPath(),
+                },
             };
         }
 
@@ -566,16 +569,16 @@ namespace System.Text.Json.SourceGeneration.Tests
                 {
                     Resolver = new DefaultJsonTypeInfoResolver
                     {
-                        Modifiers = { static jti => jti.PolymorphismOptions = null }
-                    }
-                }
+                        Modifiers = { static jti => jti.PolymorphismOptions = null },
+                    },
+                },
             };
             yield return new object[]
             {
                 new CustomWrappingResolver<int>
                 {
-                    Resolver = NotCompatibleWithInstrumentedFastPathContext.Default
-                }
+                    Resolver = NotCompatibleWithInstrumentedFastPathContext.Default,
+                },
             };
         }
 
@@ -633,7 +636,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                                             Setter = (obj, value) =>
                                                 ((PocoWithInteger)obj).Value = value,
                                         }
-                                    )
+                                    ),
                                 },
 
                             SerializeHandler = (writer, value) =>
@@ -642,7 +645,7 @@ namespace System.Text.Json.SourceGeneration.Tests
                                 writer.WriteNumber("Value", value.Value);
                                 writer.WriteEndObject();
                                 FastPathInvocationCount++;
-                            }
+                            },
                         }
                     );
                 }
@@ -703,7 +706,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             var options = new JsonSerializerOptions
             {
-                TypeInfoResolverChain = { NestedContext.Default, PersonJsonContext.Default }
+                TypeInfoResolverChain = { NestedContext.Default, PersonJsonContext.Default },
             };
 
             JsonTypeInfo<T> typeInfo = (JsonTypeInfo<T>)options.GetTypeInfo(typeof(T))!;
@@ -773,12 +776,12 @@ namespace System.Text.Json.SourceGeneration.Tests
                     ListOfPocoProperty = new List<TestPoco>()
                     {
                         new TestPoco() { IntProperty = 4 },
-                        new TestPoco() { IntProperty = 5 }
+                        new TestPoco() { IntProperty = 5 },
                     },
                     DictionaryPocoValueProperty = new Dictionary<char, TestPoco>()
                     {
                         ['c'] = new TestPoco() { IntProperty = 6 },
-                        ['d'] = new TestPoco() { IntProperty = 7 }
+                        ['d'] = new TestPoco() { IntProperty = 7 },
                     },
                     NullablePocoProperty = new TestPoco() { IntProperty = 8 },
                     PocoProperty = new TestPoco() { IntProperty = 9 },
@@ -903,7 +906,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             var value = new ClassWithCustomConverterFactoryProperty
             {
-                MyEnum = SourceGenSampleEnum.MinZero
+                MyEnum = SourceGenSampleEnum.MinZero,
             };
             string json = JsonSerializer.Serialize(
                 value,
@@ -955,7 +958,7 @@ namespace System.Text.Json.SourceGeneration.Tests
             JsonSerializerOptions options = ClassWithDictionaryPropertyContext.Default.Options;
 
             ClassWithDictionaryProperty obj =
-                new(new Dictionary<string, object?>() { ["foo"] = "bar", ["test"] = "baz", });
+                new(new Dictionary<string, object?>() { ["foo"] = "bar", ["test"] = "baz" });
 
             string json = JsonSerializer.Serialize(obj, options);
             Assert.Equal("""{"DictionaryProperty":{"foo":"bar","test":"baz"}}""", json);
@@ -966,7 +969,7 @@ namespace System.Text.Json.SourceGeneration.Tests
         {
             Aye,
             Bee,
-            Cee
+            Cee,
         }
 
         [JsonSerializable(typeof(List<TestEnum>))]

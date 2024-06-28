@@ -36,7 +36,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = httpMethod,
                 AccessControlRequestMethod = requestedMethod,
-                Origin = origin
+                Origin = origin,
             };
 
             Assert.True(requestContext.IsPreflight);
@@ -58,7 +58,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = httpMethod,
                 AccessControlRequestMethod = requestedMethod,
-                Origin = origin
+                Origin = origin,
             };
 
             Assert.False(requestContext.IsPreflight);
@@ -73,7 +73,7 @@ namespace System.Web.Cors.Test
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "DELETE",
                 Origin = "http://localhost",
-                RequestUri = new Uri("http://example.com")
+                RequestUri = new Uri("http://example.com"),
             };
             requestContext.AccessControlRequestHeaders.Add("foo");
             requestContext.AccessControlRequestHeaders.Add("bar");

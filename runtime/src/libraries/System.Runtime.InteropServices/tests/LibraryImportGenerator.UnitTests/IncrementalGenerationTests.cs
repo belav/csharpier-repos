@@ -172,7 +172,7 @@ namespace LibraryImportGenerator.UnitTests
                     RemoveTestMarkup(CodeSnippets.BasicParametersAndModifiers<int>()),
                     RemoveTestMarkup(
                         CodeSnippets.MarshalAsParametersAndModifiers<bool>(UnmanagedType.I1)
-                    )
+                    ),
                 }
             );
 
@@ -347,14 +347,14 @@ namespace LibraryImportGenerator.UnitTests
             // Basic stub
             yield return new[]
             {
-                RemoveTestMarkup(CodeSnippets.BasicParametersAndModifiers<int>())
+                RemoveTestMarkup(CodeSnippets.BasicParametersAndModifiers<int>()),
             };
             // Stub with custom string marshaller
             yield return new[]
             {
                 RemoveTestMarkup(
                     CodeSnippets.CustomStringMarshallingParametersAndModifiers<string>()
-                )
+                ),
             };
         }
 

@@ -158,7 +158,7 @@ public class CompiledPageActionDescriptorFactoryTest
             .Verifiable();
         var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
         {
-            handlerModelConvention.Object
+            handlerModelConvention.Object,
         };
 
         // Act
@@ -290,7 +290,7 @@ public class CompiledPageActionDescriptorFactoryTest
             .Verifiable();
         var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
         {
-            parameterModelConvention.Object
+            parameterModelConvention.Object,
         };
 
         // Act
@@ -434,7 +434,7 @@ public class CompiledPageActionDescriptorFactoryTest
             .Verifiable();
         var conventionCollection = new PageConventionCollection(Mock.Of<IServiceProvider>())
         {
-            propertyModelConvention.Object
+            propertyModelConvention.Object,
         };
 
         // Act

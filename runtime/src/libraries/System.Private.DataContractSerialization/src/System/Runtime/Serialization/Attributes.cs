@@ -15,14 +15,14 @@ namespace System.Runtime.Serialization
                 DictionaryGlobals.RefLocalName,
                 DictionaryGlobals.ClrTypeLocalName,
                 DictionaryGlobals.ClrAssemblyLocalName,
-                DictionaryGlobals.ISerializableFactoryTypeLocalName
+                DictionaryGlobals.ISerializableFactoryTypeLocalName,
             };
 
         private static readonly XmlDictionaryString[] s_schemaInstanceLocalNames =
             new XmlDictionaryString[]
             {
                 DictionaryGlobals.XsiNilLocalName,
-                DictionaryGlobals.XsiTypeLocalName
+                DictionaryGlobals.XsiTypeLocalName,
             };
 
         internal string Id = null!; // initialized in Reset

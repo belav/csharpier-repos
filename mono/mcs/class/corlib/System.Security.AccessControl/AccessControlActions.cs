@@ -33,6 +33,6 @@ namespace System.Security.AccessControl
     {
         None = 0,
         View = 1,
-        Change = 2
+        Change = 2,
     }
 }

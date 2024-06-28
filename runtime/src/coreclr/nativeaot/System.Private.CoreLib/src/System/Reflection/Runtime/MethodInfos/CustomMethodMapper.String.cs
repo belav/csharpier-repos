@@ -108,7 +108,7 @@ namespace System.Reflection.Runtime.MethodInfos
                                     typeof(sbyte*),
                                     typeof(int),
                                     typeof(int),
-                                    typeof(Encoding)
+                                    typeof(Encoding),
                                 },
                                 (object thisObject, object[] args, Type thisType) =>
                                 {

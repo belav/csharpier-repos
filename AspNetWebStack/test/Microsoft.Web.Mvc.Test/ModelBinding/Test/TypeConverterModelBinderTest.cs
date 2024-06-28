@@ -19,7 +19,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(int));
             bindingContext.ValueProvider = new SimpleValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
@@ -42,7 +42,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(int));
             bindingContext.ValueProvider = new SimpleValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeConverterModelBinder binder = new TypeConverterModelBinder();
@@ -156,7 +156,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     modelType
                 ),
                 ModelName = "theModelName",
-                ValueProvider = new SimpleValueProvider() // empty
+                ValueProvider =
+                    new SimpleValueProvider() // empty
+                ,
             };
         }
 

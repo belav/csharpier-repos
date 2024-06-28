@@ -421,7 +421,7 @@ namespace System.ServiceModel.Activities.Dispatcher
                     ReceiveContext = receiveContext,
                     ChannelKey = channelKey,
                     BookmarkName = bookmarkName,
-                    State = state
+                    State = state,
                 };
             }
             else

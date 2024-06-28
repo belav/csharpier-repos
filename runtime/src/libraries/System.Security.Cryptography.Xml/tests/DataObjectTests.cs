@@ -101,7 +101,7 @@ namespace System.Security.Cryptography.Xml.Tests
             {
                 Id = idValue,
                 MimeType = mimeTypeValue,
-                Encoding = encodingValue
+                Encoding = encodingValue,
             };
 
             XmlElement testElement = CreateTestElement(

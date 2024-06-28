@@ -63,7 +63,7 @@ public abstract class FileContentResultTestBase
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.Range = new RangeHeaderValue(start, end);
-        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\"") };
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
 
@@ -105,7 +105,7 @@ public abstract class FileContentResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\"") };
         requestHeaders.Range = new RangeHeaderValue(0, 4);
         requestHeaders.IfRange = new RangeConditionHeaderValue(DateTimeOffset.MinValue);
         httpContext.Request.Method = HttpMethods.Get;
@@ -148,7 +148,7 @@ public abstract class FileContentResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\"") };
         requestHeaders.Range = new RangeHeaderValue(0, 4);
         requestHeaders.IfRange = new RangeConditionHeaderValue(
             new EntityTagHeaderValue("\"Etag\"")
@@ -181,7 +181,7 @@ public abstract class FileContentResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"Etag\"") };
         requestHeaders.Range = new RangeHeaderValue(0, 4);
         requestHeaders.IfRange = new RangeConditionHeaderValue(
             new EntityTagHeaderValue("\"NotEtag\"")
@@ -305,7 +305,7 @@ public abstract class FileContentResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"NotEtag\""), };
+        requestHeaders.IfMatch = new[] { new EntityTagHeaderValue("\"NotEtag\"") };
         httpContext.Request.Headers.Range = "bytes = 0-6";
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();
@@ -343,7 +343,7 @@ public abstract class FileContentResultTestBase
 
         var httpContext = GetHttpContext();
         var requestHeaders = httpContext.Request.GetTypedHeaders();
-        requestHeaders.IfNoneMatch = new[] { new EntityTagHeaderValue("\"Etag\""), };
+        requestHeaders.IfNoneMatch = new[] { new EntityTagHeaderValue("\"Etag\"") };
         httpContext.Request.Headers.Range = "bytes = 0-6";
         httpContext.Request.Method = HttpMethods.Get;
         httpContext.Response.Body = new MemoryStream();

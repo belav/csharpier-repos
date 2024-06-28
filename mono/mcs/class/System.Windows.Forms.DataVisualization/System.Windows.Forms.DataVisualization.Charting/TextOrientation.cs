@@ -33,6 +33,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Horizontal = 1,
         Rotated90 = 2,
         Rotated270 = 3,
-        Stacked = 4
+        Stacked = 4,
     }
 }

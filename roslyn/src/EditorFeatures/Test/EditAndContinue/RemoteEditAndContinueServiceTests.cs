@@ -83,7 +83,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 Assert.NotNull(clientProvider);
                 clientProvider!.AdditionalRemoteParts =
                 [
-                    typeof(MockEditAndContinueWorkspaceService)
+                    typeof(MockEditAndContinueWorkspaceService),
                 ];
                 clientProvider!.ExcludedRemoteParts = [typeof(EditAndContinueService)];
 
@@ -226,7 +226,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                         ManagedHotReloadAvailabilityStatus.NotAllowedForModule,
                         "can't do enc"
                     ),
-                    GetActiveStatementsImpl = () => ImmutableArray.Create(as1)
+                    GetActiveStatementsImpl = () => ImmutableArray.Create(as1),
                 },
                 sourceTextProvider: NullPdbMatchingSourceTextProvider.Instance,
                 captureMatchingDocuments: ImmutableArray.Create(documentId),
@@ -360,7 +360,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                     ModuleUpdates = updates,
                     Diagnostics = diagnostics,
                     RudeEdits = documentsWithRudeEdits,
-                    SyntaxError = syntaxError
+                    SyntaxError = syntaxError,
                 };
             };
 
@@ -387,7 +387,7 @@ namespace Roslyn.VisualStudio.Next.UnitTests.EditAndContinue
                 new[]
                 {
                     $"[{projectId}] Error ENC1001: test.cs(0, 1, 0, 2): {string.Format(FeaturesResources.ErrorReadingFile, "doc", "some error")}",
-                    $"[{projectId}] Error ENC1001: {string.Format(FeaturesResources.ErrorReadingFile, "proj", "some error")}"
+                    $"[{projectId}] Error ENC1001: {string.Format(FeaturesResources.ErrorReadingFile, "proj", "some error")}",
                 },
                 emitDiagnosticsUpdated.Select(update => Inspect(update.Diagnostics.Single()))
             );

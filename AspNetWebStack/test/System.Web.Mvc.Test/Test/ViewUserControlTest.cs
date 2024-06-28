@@ -181,7 +181,7 @@ namespace System.Web.Mvc.Test
             p.ViewData = new ViewDataDictionary
             {
                 { "FirstName", "Joe" },
-                { "LastName", "Schmoe" }
+                { "LastName", "Schmoe" },
             };
 
             // Act
@@ -201,7 +201,7 @@ namespace System.Web.Mvc.Test
             {
                 { "Foo", "FooParent" },
                 { "Bar", "BarParent" },
-                { "Child", new object() }
+                { "Child", new object() },
             };
 
             ViewPage p = new ViewPage();
@@ -231,7 +231,7 @@ namespace System.Web.Mvc.Test
                 {
                     "Child",
                     new ViewDataDictionary() { { "Foo", "FooChild" }, { "Bar", "BarChild" } }
-                }
+                },
             };
 
             ViewPage p = new ViewPage();
@@ -265,7 +265,7 @@ namespace System.Web.Mvc.Test
             p.ViewData = new ViewDataDictionary
             {
                 { "FirstName", "Joe" },
-                { "LastName", "Schmoe" }
+                { "LastName", "Schmoe" },
             };
 
             // Act
@@ -292,12 +292,12 @@ namespace System.Web.Mvc.Test
             p.ViewData = new ViewDataDictionary
             {
                 { "FirstName", "Joe" },
-                { "LastName", "Schmoe" }
+                { "LastName", "Schmoe" },
             };
             p.ViewData["SubData"] = new ViewDataDictionary
             {
                 { "FirstName", "SubJoe" },
-                { "LastName", "SubSchmoe" }
+                { "LastName", "SubSchmoe" },
             };
 
             // Act
@@ -324,12 +324,12 @@ namespace System.Web.Mvc.Test
             p.ViewData = new ViewDataDictionary
             {
                 { "FirstName", "Joe" },
-                { "LastName", "Schmoe" }
+                { "LastName", "Schmoe" },
             };
             p.ViewData["SubData"] = new ViewDataDictionary
             {
                 { "FirstName", "SubJoe" },
-                { "LastName", "SubSchmoe" }
+                { "LastName", "SubSchmoe" },
             };
 
             // Act
@@ -362,7 +362,7 @@ namespace System.Web.Mvc.Test
 
             MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>()
             {
-                ViewDataKey = "FOO"
+                ViewDataKey = "FOO",
             };
             vuc.AppRelativeVirtualPath = "~/Foo.aspx";
             p.Controls.Add(new Control());
@@ -386,7 +386,7 @@ namespace System.Web.Mvc.Test
             p.Controls.Add(new Control());
             MockViewUserControl<MyViewData> vuc = new MockViewUserControl<MyViewData>()
             {
-                ViewDataKey = "FOO"
+                ViewDataKey = "FOO",
             };
             p.Controls[0].Controls.Add(vuc);
             p.ViewData = new ViewDataDictionary();

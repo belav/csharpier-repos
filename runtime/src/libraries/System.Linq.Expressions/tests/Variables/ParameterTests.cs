@@ -412,21 +412,21 @@ namespace System.Linq.Expressions.Tests
                     useInterpreter,
                     41.0F,
                     1.0F,
-                    Apply((x, y) => x + y, 41.0F, 1.0F)
+                    Apply((x, y) => x + y, 41.0F, 1.0F),
                 };
                 yield return new object[]
                 {
                     useInterpreter,
                     41.0D,
                     1.0D,
-                    Apply((x, y) => x + y, 41.0D, 1.0D)
+                    Apply((x, y) => x + y, 41.0D, 1.0D),
                 };
                 yield return new object[]
                 {
                     useInterpreter,
                     TimeSpan.FromSeconds(41),
                     TimeSpan.FromSeconds(1),
-                    Apply((x, y) => x + y, TimeSpan.FromSeconds(41), TimeSpan.FromSeconds(1))
+                    Apply((x, y) => x + y, TimeSpan.FromSeconds(41), TimeSpan.FromSeconds(1)),
                 };
             }
         }

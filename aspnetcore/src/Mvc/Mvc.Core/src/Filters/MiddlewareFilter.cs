@@ -33,7 +33,7 @@ internal sealed class MiddlewareFilter : IAsyncResourceFilter
         var feature = new MiddlewareFilterFeature()
         {
             ResourceExecutionDelegate = next,
-            ResourceExecutingContext = context
+            ResourceExecutingContext = context,
         };
         httpContext.Features.Set<IMiddlewareFilterFeature>(feature);
 

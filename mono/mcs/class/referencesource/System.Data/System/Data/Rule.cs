@@ -41,6 +41,6 @@ namespace System.Data
         ///       Default values are set in the rows affected by the deletion.
         ///    </para>
         /// </devdoc>
-        SetDefault = 3
+        SetDefault = 3,
     }
 }

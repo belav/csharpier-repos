@@ -65,7 +65,7 @@ namespace Castle.Components.DictionaryAdapter.Xml.Tests
                 foo.Items = new IBase[]
                 {
                     Create<IDerived1>("<Derived1 X='1'/>"),
-                    Create<IDerived2>("<Derived2 X='2'/>")
+                    Create<IDerived2>("<Derived2 X='2'/>"),
                 };
 
                 CustomAssert.AreXmlEquivalent(

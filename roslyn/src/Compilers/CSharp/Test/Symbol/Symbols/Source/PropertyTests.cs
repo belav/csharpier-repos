@@ -736,13 +736,13 @@ class Program
                 {
                     Code = (int)ErrorCode.ERR_NoSuchMemberOrExtension,
                     Line = 6,
-                    Column = 11
+                    Column = 11,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_NoSuchMember,
                     Line = 6,
-                    Column = 34
+                    Column = 34,
                 }
             );
 

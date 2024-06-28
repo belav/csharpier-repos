@@ -167,14 +167,14 @@ public class SqlServerMathTranslator : IMethodCallTranslator
                     new[] { typeof(float) }
                 )!,
                 "DEGREES"
-            }
+            },
         };
 
     private static readonly IEnumerable<MethodInfo> TruncateMethodInfos = new[]
     {
         typeof(Math).GetRuntimeMethod(nameof(Math.Truncate), new[] { typeof(decimal) })!,
         typeof(Math).GetRuntimeMethod(nameof(Math.Truncate), new[] { typeof(double) })!,
-        typeof(MathF).GetRuntimeMethod(nameof(MathF.Truncate), new[] { typeof(float) })!
+        typeof(MathF).GetRuntimeMethod(nameof(MathF.Truncate), new[] { typeof(float) })!,
     };
 
     private static readonly IEnumerable<MethodInfo> RoundMethodInfos = new[]
@@ -184,7 +184,7 @@ public class SqlServerMathTranslator : IMethodCallTranslator
         typeof(Math).GetRuntimeMethod(nameof(Math.Round), new[] { typeof(decimal), typeof(int) })!,
         typeof(Math).GetRuntimeMethod(nameof(Math.Round), new[] { typeof(double), typeof(int) })!,
         typeof(MathF).GetRuntimeMethod(nameof(MathF.Round), new[] { typeof(float) })!,
-        typeof(MathF).GetRuntimeMethod(nameof(MathF.Round), new[] { typeof(float), typeof(int) })!
+        typeof(MathF).GetRuntimeMethod(nameof(MathF.Round), new[] { typeof(float), typeof(int) })!,
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -256,7 +256,7 @@ public class SqlServerMathTranslator : IMethodCallTranslator
                     {
                         argument,
                         _sqlExpressionFactory.Constant(0),
-                        _sqlExpressionFactory.Constant(1)
+                        _sqlExpressionFactory.Constant(1),
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, false, false },

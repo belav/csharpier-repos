@@ -1329,7 +1329,7 @@ namespace System.Web.UI.MobileControls
                     fieldsState,
                     autoFieldsState,
                     commandsState,
-                    itemsState
+                    itemsState,
                 };
             }
             else if (baseState != null)

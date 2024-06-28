@@ -13,7 +13,7 @@ struct S
 enum E : byte
 {
     E_1,
-    E_2
+    E_2,
 }
 
 class G<T>
@@ -107,7 +107,7 @@ class C
         var s2 = new S[,]
         {
             { new S() },
-            { new S() }
+            { new S() },
         };
         s2[0, 0].value = 3;
 

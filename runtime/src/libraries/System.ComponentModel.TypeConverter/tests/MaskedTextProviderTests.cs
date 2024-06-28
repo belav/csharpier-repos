@@ -603,7 +603,7 @@ namespace System.ComponentModel.Tests
         {
             var maskedTextProvider = new MaskedTextProvider(TestSimpleDigitMask, '*', true)
             {
-                ResetOnSpace = true
+                ResetOnSpace = true,
             };
             Assert.True(maskedTextProvider.VerifyEscapeChar(' ', 0));
             Assert.True(maskedTextProvider.VerifyEscapeChar('_', 0));

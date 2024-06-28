@@ -60,7 +60,7 @@ namespace Mono.CSharp
 
             // Auto-complete, means that the tokenizer will start producing
             // GETCOMPLETIONS tokens when it reaches a certain point.
-            GetCompletions
+            GetCompletions,
         }
 
         static object evaluator_lock = new object();
@@ -459,7 +459,7 @@ namespace Mono.CSharp
                 var base_class_imported = importer.ImportType(base_class);
                 var baseclass_list = new List<FullNamedExpression>(1)
                 {
-                    new TypeExpression(base_class_imported, host.Location)
+                    new TypeExpression(base_class_imported, host.Location),
                 };
                 host.SetBaseTypes(baseclass_list);
 
@@ -541,7 +541,7 @@ namespace Mono.CSharp
             EOF,
             StatementOrExpression,
             CompilationUnit,
-            Error
+            Error,
         }
 
         //
@@ -776,7 +776,7 @@ namespace Mono.CSharp
                 var base_class_imported = importer.ImportType(base_class);
                 var baseclass_list = new List<FullNamedExpression>(1)
                 {
-                    new TypeExpression(base_class_imported, host.Location)
+                    new TypeExpression(base_class_imported, host.Location),
                 };
 
                 host.SetBaseTypes(baseclass_list);

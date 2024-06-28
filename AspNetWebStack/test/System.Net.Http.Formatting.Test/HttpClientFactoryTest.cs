@@ -18,15 +18,15 @@ namespace System.Net.Http
                     new List<DelegatingHandler>()
                     {
                         new MockDelegatingHandler(),
-                        new MockDelegatingHandler(new HttpClientHandler())
+                        new MockDelegatingHandler(new HttpClientHandler()),
                     },
                     new List<DelegatingHandler>()
                     {
                         new MockDelegatingHandler(new HttpClientHandler()),
                         new MockDelegatingHandler(),
                     },
-                    new List<DelegatingHandler>() { null, new MockDelegatingHandler(), },
-                    new List<DelegatingHandler>() { new MockDelegatingHandler(), null, },
+                    new List<DelegatingHandler>() { null, new MockDelegatingHandler() },
+                    new List<DelegatingHandler>() { new MockDelegatingHandler(), null },
                 };
             }
         }

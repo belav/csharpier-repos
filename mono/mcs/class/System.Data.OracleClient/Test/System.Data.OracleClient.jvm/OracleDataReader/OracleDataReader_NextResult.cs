@@ -635,7 +635,7 @@ namespace MonoTests.System.Data.OracleClient
             {
                 "select * from Customers",
                 "select * from Categories",
-                "select * from Region"
+                "select * from Region",
             };
 
             GetDBSpecificSyntax(

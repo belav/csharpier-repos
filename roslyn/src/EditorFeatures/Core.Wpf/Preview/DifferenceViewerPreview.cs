@@ -178,7 +178,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Preview
                     hwnd = msg.hwnd,
                     lParam = msg.lParam,
                     wParam = msg.wParam,
-                    message = (uint)msg.message
+                    message = (uint)msg.message,
                 };
 
                 // Ask the shell to do the command mapping for us and without firing off the command. We need to check if this command is one of the

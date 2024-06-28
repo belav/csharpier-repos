@@ -26,7 +26,7 @@ namespace MonoTests.System.Runtime.Serialization
                 {
                     Code = "1",
                     CodeA = "A",
-                    CodeA1 = "A1"
+                    CodeA1 = "A1",
                 };
                 Serialize(data, mem);
                 mem.Position = 0;
@@ -39,7 +39,7 @@ namespace MonoTests.System.Runtime.Serialization
                 {
                     Code = "1",
                     CodeA = "A",
-                    CodeA2 = "A1"
+                    CodeA2 = "A1",
                 };
 
                 Serialize(data, mem);

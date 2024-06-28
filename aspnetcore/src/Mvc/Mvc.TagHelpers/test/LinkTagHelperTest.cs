@@ -94,7 +94,7 @@ public class LinkTagHelperTest
                     {
                         { "hello", "world" },
                         { "hello", "world2" },
-                        { "hello", "world3" }
+                        { "hello", "world3" },
                     }
                 },
                 {
@@ -105,7 +105,7 @@ public class LinkTagHelperTest
                     {
                         { "Hello", "world" },
                         { "HELLO", "world2" },
-                        { "hello", "world3" }
+                        { "hello", "world3" },
                     }
                 },
                 {
@@ -150,7 +150,7 @@ public class LinkTagHelperTest
 
         var expectedAttributes = new TagHelperAttributeList(output.Attributes)
         {
-            new TagHelperAttribute("href", "test.css")
+            new TagHelperAttribute("href", "test.css"),
         };
 
         // Act
@@ -172,7 +172,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-href", "test.css"),
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
-                        new TagHelperAttribute("asp-fallback-test-value", "hidden")
+                        new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                     },
                     tagHelper =>
                     {
@@ -188,7 +188,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-href-include", "*.css"),
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
-                        new TagHelperAttribute("asp-fallback-test-value", "hidden")
+                        new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                     },
                     tagHelper =>
                     {
@@ -206,7 +206,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
                         new TagHelperAttribute("asp-fallback-test-value", "hidden"),
-                        new TagHelperAttribute("asp-append-version", "true")
+                        new TagHelperAttribute("asp-append-version", "true"),
                     },
                     tagHelper =>
                     {
@@ -224,7 +224,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
                         new TagHelperAttribute("asp-fallback-test-value", "hidden"),
-                        new TagHelperAttribute("asp-append-version", "true")
+                        new TagHelperAttribute("asp-append-version", "true"),
                     },
                     tagHelper =>
                     {
@@ -244,7 +244,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
                         new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                         new TagHelperAttribute("asp-append-version", "true"),
-                        new TagHelperAttribute("asp-suppress-fallback-integrity", "true")
+                        new TagHelperAttribute("asp-suppress-fallback-integrity", "true"),
                     },
                     tagHelper =>
                     {
@@ -265,7 +265,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
                         new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                         new TagHelperAttribute("asp-append-version", "true"),
-                        new TagHelperAttribute("asp-suppress-fallback-integrity", "false")
+                        new TagHelperAttribute("asp-suppress-fallback-integrity", "false"),
                     },
                     tagHelper =>
                     {
@@ -323,7 +323,7 @@ public class LinkTagHelperTest
                 {
                     new TagHelperAttributeList
                     {
-                        new TagHelperAttribute("asp-href-include", "*.css")
+                        new TagHelperAttribute("asp-href-include", "*.css"),
                     },
                     tagHelper =>
                     {
@@ -334,7 +334,7 @@ public class LinkTagHelperTest
                     new TagHelperAttributeList
                     {
                         new TagHelperAttribute("asp-href-include", "*.css"),
-                        new TagHelperAttribute("asp-href-exclude", "*.min.css")
+                        new TagHelperAttribute("asp-href-exclude", "*.min.css"),
                     },
                     tagHelper =>
                     {
@@ -346,7 +346,7 @@ public class LinkTagHelperTest
                     new TagHelperAttributeList
                     {
                         new TagHelperAttribute("asp-href-include", "*.css"),
-                        new TagHelperAttribute("asp-append-version", "true")
+                        new TagHelperAttribute("asp-append-version", "true"),
                     },
                     tagHelper =>
                     {
@@ -359,7 +359,7 @@ public class LinkTagHelperTest
                     {
                         new TagHelperAttribute("asp-href-include", "*.css"),
                         new TagHelperAttribute("asp-href-exclude", "*.min.css"),
-                        new TagHelperAttribute("asp-append-version", "true")
+                        new TagHelperAttribute("asp-append-version", "true"),
                     },
                     tagHelper =>
                     {
@@ -367,7 +367,7 @@ public class LinkTagHelperTest
                         tagHelper.HrefExclude = "*.min.css";
                         tagHelper.AppendVersion = true;
                     }
-                }
+                },
             };
         }
     }
@@ -457,7 +457,7 @@ public class LinkTagHelperTest
                     {
                         // This is commented out on purpose: new TagHelperAttribute("asp-href-include", "*.css"),
                         // Note asp-href-include attribute isn't included.
-                        new TagHelperAttribute("asp-href-exclude", "*.min.css")
+                        new TagHelperAttribute("asp-href-exclude", "*.min.css"),
                     },
                     tagHelper =>
                     {
@@ -472,7 +472,7 @@ public class LinkTagHelperTest
                         // Note asp-href-include attribute isn't included.
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
-                        new TagHelperAttribute("asp-fallback-test-value", "hidden")
+                        new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                     },
                     tagHelper =>
                     {
@@ -489,7 +489,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         // This is commented out on purpose: new TagHelperAttribute("asp-fallback-test-property", "visibility"),
                         // Note asp-href-include attribute isn't included.
-                        new TagHelperAttribute("asp-fallback-test-value", "hidden")
+                        new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                     },
                     tagHelper =>
                     {
@@ -506,7 +506,7 @@ public class LinkTagHelperTest
                         new TagHelperAttribute("asp-fallback-href-exclude", "**/*.min.css"),
                         new TagHelperAttribute("asp-fallback-test-class", "hidden"),
                         new TagHelperAttribute("asp-fallback-test-property", "visibility"),
-                        new TagHelperAttribute("asp-fallback-test-value", "hidden")
+                        new TagHelperAttribute("asp-fallback-test-value", "hidden"),
                     },
                     tagHelper =>
                     {
@@ -516,7 +516,7 @@ public class LinkTagHelperTest
                         tagHelper.FallbackTestProperty = "visibility";
                         tagHelper.FallbackTestValue = "hidden";
                     }
-                }
+                },
             };
         }
     }
@@ -581,7 +581,7 @@ public class LinkTagHelperTest
         );
         var output = MakeTagHelperOutput(
             "link",
-            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") } }
         );
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
@@ -626,7 +626,7 @@ public class LinkTagHelperTest
         );
         var output = MakeTagHelperOutput(
             "link",
-            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") } }
         );
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
@@ -731,12 +731,12 @@ public class LinkTagHelperTest
             {
                 { "rel", new HtmlString("stylesheet") },
                 { "href", "/css/site.css" },
-                { "asp-append-version", "true" }
+                { "asp-append-version", "true" },
             }
         );
         var output = MakeTagHelperOutput(
             "link",
-            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") } }
         );
 
         var helper = GetHelper();
@@ -769,7 +769,7 @@ public class LinkTagHelperTest
         );
         var output = MakeTagHelperOutput(
             "link",
-            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") } }
         );
         var viewContext = MakeViewContext("/bar");
 
@@ -816,7 +816,7 @@ public class LinkTagHelperTest
         );
         var output = MakeTagHelperOutput(
             "link",
-            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") } }
         );
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),
@@ -942,7 +942,7 @@ public class LinkTagHelperTest
         );
         var output = MakeTagHelperOutput(
             "link",
-            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") }, }
+            attributes: new TagHelperAttributeList { { "rel", new HtmlString("stylesheet") } }
         );
         var globbingUrlBuilder = new Mock<GlobbingUrlBuilder>(
             new TestFileProvider(),

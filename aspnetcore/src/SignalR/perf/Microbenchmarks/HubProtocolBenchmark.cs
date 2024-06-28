@@ -61,7 +61,7 @@ public class HubProtocolBenchmark
                         (byte)9,
                         new byte[] { 5, 4, 3, 2, 1 },
                         'c',
-                        123456789101112L
+                        123456789101112L,
                     }
                 );
                 break;
@@ -109,6 +109,6 @@ public class HubProtocolBenchmark
         NoArguments = 0,
         FewArguments = 1,
         ManyArguments = 2,
-        LargeArguments = 3
+        LargeArguments = 3,
     }
 }

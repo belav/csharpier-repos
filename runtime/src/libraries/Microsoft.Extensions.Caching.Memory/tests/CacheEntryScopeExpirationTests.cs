@@ -23,7 +23,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 new MemoryCacheOptions()
                 {
                     Clock = clock,
-                    TrackLinkedCacheEntries = trackLinkedCacheEntries
+                    TrackLinkedCacheEntries = trackLinkedCacheEntries,
                 }
             );
         }
@@ -408,7 +408,7 @@ namespace Microsoft.Extensions.Caching.Memory
 
                     var expirationToken = new TestExpirationToken()
                     {
-                        ActiveChangeCallbacks = true
+                        ActiveChangeCallbacks = true,
                     };
                     entry1.SetValue(obj);
                     entry1.AddExpirationToken(expirationToken);

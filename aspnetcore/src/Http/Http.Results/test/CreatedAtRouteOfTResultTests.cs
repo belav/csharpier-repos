@@ -41,7 +41,7 @@ public partial class CreatedAtRouteOfTResultTests
             {
                 new RouteValueDictionary(
                     new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
-                )
+                ),
             };
         }
     }

@@ -371,7 +371,7 @@ namespace System.Web
                                     Dependencies = dependency,
                                     SlidingExpiration = slidingExpiration,
                                     Priority = priority,
-                                    OnRemovedCallback = s_callback
+                                    OnRemovedCallback = s_callback,
                                 }
                             );
 
@@ -497,7 +497,7 @@ namespace System.Web
                                 {
                                     Dependencies = dependency,
                                     AbsoluteExpiration = DateTime.UtcNow.AddSeconds(5),
-                                    OnRemovedCallback = s_callback
+                                    OnRemovedCallback = s_callback,
                                 }
                             );
                         }

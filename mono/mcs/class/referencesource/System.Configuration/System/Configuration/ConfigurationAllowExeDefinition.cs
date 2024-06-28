@@ -11,6 +11,6 @@ namespace System.Configuration
         MachineOnly = 0,
         MachineToApplication = 100,
         MachineToRoamingUser = 200,
-        MachineToLocalUser = 300
+        MachineToLocalUser = 300,
     }
 }

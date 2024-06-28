@@ -3924,7 +3924,7 @@ public partial class C
             {
                 (usings, "file1.cs"),
                 (source, "file2.cs"),
-                (IsExternalInitTypeDefinition, "file3.cs")
+                (IsExternalInitTypeDefinition, "file3.cs"),
             },
             expectedOutput: "1"
         );
@@ -4796,7 +4796,7 @@ public partial class C
                     source2,
                     TestOptions.RegularPreview,
                     path: "path/to/FileB.cs"
-                )
+                ),
             }
         );
         comp.VerifyDiagnostics();
@@ -5088,7 +5088,9 @@ public partial class C
             references: new[]
             {
                 firstIsMetadataReference ? ref1.ToMetadataReference() : ref1.EmitToImageReference(),
-                secondIsMetadataReference ? ref2.ToMetadataReference() : ref2.EmitToImageReference()
+                secondIsMetadataReference
+                    ? ref2.ToMetadataReference()
+                    : ref2.EmitToImageReference(),
             }
         );
         comp.VerifyDiagnostics();
@@ -5273,7 +5275,7 @@ public partial class C
             0x78,
             0x52,
             0xB8,
-            0x55
+            0x55,
         };
         var tree = comp.SyntaxTrees[0];
         var model = comp.GetSemanticModel(tree);
@@ -5387,7 +5389,7 @@ public partial class C
                 0x78,
                 0x52,
                 0xB8,
-                0x55
+                0x55,
             },
             identifier.FilePathChecksumOpt
         );
@@ -6111,7 +6113,7 @@ public partial class C
             new[] { (source2, "File2.cs") },
             references: new[]
             {
-                useMetadataReference ? comp1.ToMetadataReference() : comp1.EmitToImageReference()
+                useMetadataReference ? comp1.ToMetadataReference() : comp1.EmitToImageReference(),
             }
         );
         comp2.VerifyEmitDiagnostics();
@@ -6123,7 +6125,7 @@ public partial class C
             new[] { (source1, "File1.cs") },
             references: new[]
             {
-                useMetadataReference ? comp2.ToMetadataReference() : comp2.EmitToImageReference()
+                useMetadataReference ? comp2.ToMetadataReference() : comp2.EmitToImageReference(),
             }
         );
         comp1.VerifyEmitDiagnostics();

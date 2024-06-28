@@ -63,9 +63,9 @@ internal sealed class PublicWorkspacePullDiagnosticsHandler(
                         Items = diagnostics,
                         // The documents provided by workspace reports are never open, so we return null.
                         Version = null,
-                        ResultId = resultId
-                    }
-                ]
+                        ResultId = resultId,
+                    },
+                ],
             }
         );
 
@@ -84,8 +84,8 @@ internal sealed class PublicWorkspacePullDiagnosticsHandler(
                         // The documents provided by workspace reports are never open, so we return null.
                         Version = null,
                         ResultId = null,
-                    }
-                ]
+                    },
+                ],
             }
         );
 
@@ -104,8 +104,8 @@ internal sealed class PublicWorkspacePullDiagnosticsHandler(
                         // The documents provided by workspace reports are never open, so we return null.
                         Version = null,
                         ResultId = resultId,
-                    }
-                ]
+                    },
+                ],
             }
         );
 
@@ -138,7 +138,7 @@ internal sealed class PublicWorkspacePullDiagnosticsHandler(
             .PreviousResultId.Select(id => new PreviousPullResult
             {
                 PreviousResultId = id.Value,
-                TextDocument = new TextDocumentIdentifier { Uri = id.Uri }
+                TextDocument = new TextDocumentIdentifier { Uri = id.Uri },
             })
             .ToImmutableArray();
     }

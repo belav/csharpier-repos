@@ -45,7 +45,7 @@ namespace System.Web.Configuration
         internal const char FilePathsSeparatorChar = '<';
         internal static readonly char[] FilePathsSeparatorParams = new char[]
         {
-            FilePathsSeparatorChar
+            FilePathsSeparatorChar,
         };
 
         public byte[] GetData(string fileName, bool getReadTimeOnly, out long readTime)

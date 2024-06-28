@@ -14,21 +14,21 @@ namespace System.Transactions.Tests
     {
         Prepared,
         ForceRollback,
-        Done
+        Done,
     };
 
     public enum SinglePhaseVote
     {
         Committed,
         Aborted,
-        InDoubt
+        InDoubt,
     };
 
     public enum EnlistmentOutcome
     {
         Committed,
         Aborted,
-        InDoubt
+        InDoubt,
     };
 
     public class TestSinglePhaseEnlistment : ISinglePhaseNotification

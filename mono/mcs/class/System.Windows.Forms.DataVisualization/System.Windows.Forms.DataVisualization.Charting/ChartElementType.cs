@@ -51,6 +51,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         LegendTitle = 19,
         LegendHeader = 20,
         LegendItem = 21,
-        Annotation = 22
+        Annotation = 22,
     }
 }

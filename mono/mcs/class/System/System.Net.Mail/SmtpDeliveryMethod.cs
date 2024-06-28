@@ -34,6 +34,6 @@ namespace System.Net.Mail
     {
         Network = 0,
         SpecifiedPickupDirectory = 1,
-        PickupDirectoryFromIis = 2
+        PickupDirectoryFromIis = 2,
     }
 }

@@ -21,7 +21,7 @@ namespace Microsoft.Web.Helpers.Test
             LinkShareSite.Facebook,
             LinkShareSite.Reddit,
             LinkShareSite.StumbleUpon,
-            LinkShareSite.Twitter
+            LinkShareSite.Twitter,
         };
 
         [Fact]
@@ -201,7 +201,7 @@ namespace Microsoft.Web.Helpers.Test
                     LinkShareSite.Delicious,
                     LinkShareSite.Digg,
                     LinkShareSite.StumbleUpon,
-                    LinkShareSite.Twitter
+                    LinkShareSite.Twitter,
                 },
                 result.ToArray()
             );

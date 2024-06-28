@@ -26,7 +26,7 @@ namespace System.IO.Tests
             -100000000,
             -1000000000,
             int.MinValue,
-            short.MinValue
+            short.MinValue,
         };
         static int[] iArrLargeValues = new int[]
         {
@@ -34,7 +34,7 @@ namespace System.IO.Tests
             int.MaxValue - 1,
             int.MaxValue / 2,
             int.MaxValue / 10,
-            int.MaxValue / 100
+            int.MaxValue / 100,
         };
         static int[] iArrValidValues = new int[]
         {
@@ -42,7 +42,7 @@ namespace System.IO.Tests
             100000,
             int.MaxValue / 2000,
             int.MaxValue / 5000,
-            short.MaxValue
+            short.MaxValue,
         };
 
         private static StringBuilder getSb()

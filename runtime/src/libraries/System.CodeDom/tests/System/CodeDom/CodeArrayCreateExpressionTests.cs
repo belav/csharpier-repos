@@ -46,7 +46,7 @@ namespace System.CodeDom.Tests
             CodeExpression[] initializers = new CodeExpression[]
             {
                 new CodePrimitiveExpression("Value1"),
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
             Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
@@ -81,7 +81,7 @@ namespace System.CodeDom.Tests
             CodeExpression[] initializers = new CodeExpression[]
             {
                 new CodePrimitiveExpression("Value1"),
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
             Assert.Equal(expectedBaseType, arrayCreate.CreateType.BaseType);
@@ -112,7 +112,7 @@ namespace System.CodeDom.Tests
             CodeExpression[] initializers = new CodeExpression[]
             {
                 new CodePrimitiveExpression("Value1"),
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
             var arrayCreate = new CodeArrayCreateExpression(type, initializers);
             Assert.Equal(
@@ -177,7 +177,7 @@ namespace System.CodeDom.Tests
                 CodeExpression sizeExpression in new CodeExpression[]
                 {
                     null,
-                    new CodePrimitiveExpression("Value")
+                    new CodePrimitiveExpression("Value"),
                 }
             )
             {
@@ -197,7 +197,7 @@ namespace System.CodeDom.Tests
                 CodeExpression sizeExpression in new CodeExpression[]
                 {
                     null,
-                    new CodePrimitiveExpression("Value")
+                    new CodePrimitiveExpression("Value"),
                 }
             )
             {
@@ -217,7 +217,7 @@ namespace System.CodeDom.Tests
                 CodeExpression sizeExpression in new CodeExpression[]
                 {
                     null,
-                    new CodePrimitiveExpression("Value")
+                    new CodePrimitiveExpression("Value"),
                 }
             )
             {

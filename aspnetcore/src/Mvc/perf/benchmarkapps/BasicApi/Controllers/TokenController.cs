@@ -64,7 +64,7 @@ namespace BasicApi.Controllers
                 Issuer = _options.TokenValidationParameters.ValidIssuer,
                 Audience = _options.TokenValidationParameters.ValidAudience,
                 SigningCredentials = _credentials,
-                Subject = identity
+                Subject = identity,
             };
 
             var securityToken = handler.CreateJwtSecurityToken(

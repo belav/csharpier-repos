@@ -101,7 +101,7 @@ namespace System.Net.Cache
             Acctime = 0x00000100,
             Synctime = 0x00000200,
             Headerinfo = 0x00000400,
-            ExemptDelta = 0x00000800
+            ExemptDelta = 0x00000800,
         }
 
         //  Error status codes, some are mapped to native ones
@@ -120,7 +120,7 @@ namespace System.Net.Cache
 
             FatalErrors = Warnings + 0x1000,
             CorruptedHeaders = (int)FatalErrors + 1,
-            InternalError = (int)FatalErrors + 2
+            InternalError = (int)FatalErrors + 2,
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]

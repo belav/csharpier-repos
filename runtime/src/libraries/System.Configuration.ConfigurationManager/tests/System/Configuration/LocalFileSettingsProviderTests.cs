@@ -11,7 +11,7 @@ namespace System.ConfigurationTests
         private readonly SettingsContext _testContext = new SettingsContext
         {
             ["GroupName"] = "GroupNameFoo",
-            ["SettingsKey"] = "SettingsKeyFoo"
+            ["SettingsKey"] = "SettingsKeyFoo",
         };
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/29429")]

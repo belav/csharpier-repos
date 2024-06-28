@@ -41,7 +41,7 @@ namespace System.ServiceModel.Diagnostics
         ServiceLevel = ServiceLevelReceive | ServiceLevelSend,
         Malformed = 1024,
         LastChance = 2048,
-        All = int.MaxValue
+        All = int.MaxValue,
     }
 
     internal static class MessageLogger
@@ -730,22 +730,22 @@ namespace System.ServiceModel.Diagnostics
                             MessageLogTraceRecord.MessageLogTraceRecordElementName,
                             "Envelope",
                             "Body",
-                            "RequestSecurityToken"
+                            "RequestSecurityToken",
                         },
                         new string[]
                         {
                             MessageLogTraceRecord.MessageLogTraceRecordElementName,
                             "Envelope",
                             "Body",
-                            "RequestSecurityTokenResponse"
+                            "RequestSecurityTokenResponse",
                         },
                         new string[]
                         {
                             MessageLogTraceRecord.MessageLogTraceRecordElementName,
                             "Envelope",
                             "Body",
-                            "RequestSecurityTokenResponseCollection"
-                        }
+                            "RequestSecurityTokenResponseCollection",
+                        },
                     };
                 return piiBodyPaths;
             }
@@ -763,15 +763,15 @@ namespace System.ServiceModel.Diagnostics
                             MessageLogTraceRecord.MessageLogTraceRecordElementName,
                             "Envelope",
                             "Header",
-                            "Security"
+                            "Security",
                         },
                         new string[]
                         {
                             MessageLogTraceRecord.MessageLogTraceRecordElementName,
                             "Envelope",
                             "Header",
-                            "IssuedTokens"
-                        }
+                            "IssuedTokens",
+                        },
                     };
                 return piiHeadersPaths;
             }
@@ -813,7 +813,7 @@ namespace System.ServiceModel.Diagnostics
                         "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/Validate",
                         "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/Validate",
                         "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RST/KET",
-                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/KET"
+                        "http://schemas.xmlsoap.org/ws/2004/04/security/trust/RSTR/KET",
                     };
                 return securityActions;
             }

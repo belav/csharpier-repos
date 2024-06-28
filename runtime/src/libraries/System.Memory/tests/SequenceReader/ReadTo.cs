@@ -25,7 +25,7 @@ namespace System.Memory.Tests.SequenceReader
                     new byte[] { 0 },
                     new byte[] { 1, 2 },
                     new byte[] { },
-                    new byte[] { 3, 4, 5, 6 }
+                    new byte[] { 3, 4, 5, 6 },
                 }
             );
 
@@ -80,7 +80,7 @@ namespace System.Memory.Tests.SequenceReader
                     new byte[] { 0 },
                     new byte[] { 1, 2 },
                     new byte[] { },
-                    new byte[] { 3, 4, 5, 6 }
+                    new byte[] { 3, 4, 5, 6 },
                 }
             );
 
@@ -140,7 +140,7 @@ namespace System.Memory.Tests.SequenceReader
                     new int[] { 0 },
                     new int[] { 1, 2 },
                     new int[] { },
-                    new int[] { 3, 4 }
+                    new int[] { 3, 4 },
                 }
             );
 
@@ -166,7 +166,7 @@ namespace System.Memory.Tests.SequenceReader
             Assert.True(sequenceReader.End);
         }
 
-        [Theory, InlineData(false), InlineData(true),]
+        [Theory, InlineData(false), InlineData(true)]
         public void TryReadToSpan_Sequence(bool advancePastDelimiter)
         {
             ReadOnlySequence<byte> bytes = SequenceFactory.Create(
@@ -175,7 +175,7 @@ namespace System.Memory.Tests.SequenceReader
                     new byte[] { 0, 0 },
                     new byte[] { 1, 1, 2, 2 },
                     new byte[] { },
-                    new byte[] { 3, 3, 4, 4, 5, 5, 6, 6 }
+                    new byte[] { 3, 3, 4, 4, 5, 5, 6, 6 },
                 }
             );
 
@@ -206,7 +206,19 @@ namespace System.Memory.Tests.SequenceReader
             bytes = SequenceFactory.Create(
                 new byte[][]
                 {
-                    new byte[] { 47, 42, 66, 32, 42, 32, 66, 42, 47 } // /*b * b*/
+                    new byte[]
+                    {
+                        47,
+                        42,
+                        66,
+                        32,
+                        42,
+                        32,
+                        66,
+                        42,
+                        47,
+                    } // /*b * b*/
+                    ,
                 }
             );
 

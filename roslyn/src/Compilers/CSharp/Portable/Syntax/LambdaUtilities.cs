@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 AnonymousFunctionExpressionSyntax anonymousFunctionExpressionSyntax =>
                     anonymousFunctionExpressionSyntax.Body,
-                LocalFunctionStatementSyntax localFunctionStatementSyntax =>
-                    (CSharpSyntaxNode?)localFunctionStatementSyntax.Body
-                        ?? localFunctionStatementSyntax.ExpressionBody!.Expression,
+                LocalFunctionStatementSyntax localFunctionStatementSyntax => (CSharpSyntaxNode?)
+                    localFunctionStatementSyntax.Body
+                    ?? localFunctionStatementSyntax.ExpressionBody!.Expression,
                 _ => throw ExceptionUtilities.UnexpectedValue(nestedFunction),
             };
 

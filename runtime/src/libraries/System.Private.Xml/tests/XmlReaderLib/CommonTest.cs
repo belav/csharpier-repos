@@ -572,7 +572,7 @@ namespace System.Xml.Tests
                 new int[] { 9, 14 },
                 new int[] { 9, 21 },
                 new int[] { 9, 28 },
-                new int[] { 9, 35 }
+                new int[] { 9, 35 },
             };
 
             ReloadSource(filename);
@@ -1430,7 +1430,7 @@ namespace System.Xml.Tests
                     0,
                     (byte)'o',
                     0,
-                    (byte)']'
+                    (byte)']',
                 }
             );
 

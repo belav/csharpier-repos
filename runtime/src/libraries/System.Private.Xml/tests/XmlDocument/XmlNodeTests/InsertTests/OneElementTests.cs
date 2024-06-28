@@ -10,7 +10,7 @@ namespace System.Xml.XmlDocumentTests
         private static readonly InsertType[] s_InsertTypes = new[]
         {
             InsertType.Prepend,
-            InsertType.Append
+            InsertType.Append,
         };
         private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[]
         {
@@ -20,6 +20,7 @@ namespace System.Xml.XmlDocumentTests
             XmlNodeType.Text,
             XmlNodeType.Comment,
             XmlNodeType.Element /*, XmlNodeType.EntityReference*/
+            ,
         };
 
         private static void OneTextNodeBase(string xml, InsertType insertType, XmlNodeType nodeType)

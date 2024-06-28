@@ -635,7 +635,7 @@ namespace MonoTests.System.Reflection
             0x83,
             0x4E,
             0xF5,
-            0x6C
+            0x6C,
         };
 
         static byte[] publicKey1 =
@@ -799,7 +799,7 @@ namespace MonoTests.System.Reflection
             0xf8,
             0xff,
             0xa4,
-            0xcb
+            0xcb,
         };
 
         static byte[] pk_token1 = { 0xce, 0x52, 0x76, 0xd8, 0x68, 0x7e, 0Xc6, 0xdc };
@@ -965,7 +965,7 @@ namespace MonoTests.System.Reflection
             0xb8,
             0xd3,
             0xa9,
-            0xbf
+            0xbf,
         };
 
         static byte[] publicKey3 =
@@ -985,7 +985,7 @@ namespace MonoTests.System.Reflection
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         static byte[] pk_token3 = { 0xb7, 0x7a, 0x5c, 0x56, 0x19, 0x34, 0xe0, 0x89 };

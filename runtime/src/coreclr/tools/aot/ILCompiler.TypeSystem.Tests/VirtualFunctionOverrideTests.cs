@@ -254,7 +254,7 @@ namespace TypeSystemTests
                 new TypeDesc[]
                 {
                     myGenericTypeInstantiatedOverBang0ByRef,
-                    myGenericTypeInstantiatedOverBang1ByRef
+                    myGenericTypeInstantiatedOverBang1ByRef,
                 }
             );
             MethodDesc baseMethod0_1 = baseType.GetMethod("Method", sigBang0Bang1);
@@ -272,7 +272,7 @@ namespace TypeSystemTests
                 new TypeDesc[]
                 {
                     myGenericTypeInstantiatedOverBang1ByRef,
-                    myGenericTypeInstantiatedOverBang0ByRef
+                    myGenericTypeInstantiatedOverBang0ByRef,
                 }
             );
             MethodDesc baseMethod1_0 = baseType.GetMethod("Method", sigBang1Bang0);

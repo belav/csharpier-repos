@@ -212,7 +212,7 @@ namespace System.Net
                     true,
                     true,
                     SingleParser
-                )
+                ),
             };
 
             HeaderHashTable = new Hashtable(

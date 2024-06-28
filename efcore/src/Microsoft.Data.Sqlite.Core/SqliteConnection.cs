@@ -471,7 +471,7 @@ namespace Microsoft.Data.Sqlite
             {
                 Connection = this,
                 CommandTimeout = DefaultTimeout,
-                Transaction = Transaction
+                Transaction = Transaction,
             };
 
         /// <summary>
@@ -811,13 +811,13 @@ namespace Microsoft.Data.Sqlite
                     {
                         { DbMetaDataColumnNames.CollectionName },
                         { DbMetaDataColumnNames.NumberOfRestrictions, typeof(int) },
-                        { DbMetaDataColumnNames.NumberOfIdentifierParts, typeof(int) }
+                        { DbMetaDataColumnNames.NumberOfIdentifierParts, typeof(int) },
                     },
                     Rows =
                     {
                         new object[] { DbMetaDataCollectionNames.MetaDataCollections, 0, 0 },
-                        new object[] { DbMetaDataCollectionNames.ReservedWords, 0, 0 }
-                    }
+                        new object[] { DbMetaDataCollectionNames.ReservedWords, 0, 0 },
+                    },
                 };
             }
             else if (
@@ -830,7 +830,7 @@ namespace Microsoft.Data.Sqlite
             {
                 var dataTable = new DataTable(DbMetaDataCollectionNames.ReservedWords)
                 {
-                    Columns = { { DbMetaDataColumnNames.ReservedWord } }
+                    Columns = { { DbMetaDataColumnNames.ReservedWord } },
                 };
 
                 int rc;

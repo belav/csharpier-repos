@@ -93,7 +93,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                         return new[] { i };
                     },
                     options
-                )
+                ),
             };
 
             foreach (var factory in blockFactories)
@@ -431,7 +431,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new[]
                 {
                     Tuple.Create(DataflowMessageStatus.Accepted, true),
-                    Tuple.Create(DataflowMessageStatus.DecliningPermanently, false)
+                    Tuple.Create(DataflowMessageStatus.DecliningPermanently, false),
                 },
                 new[] { task1.Result, task2.Result }
             );

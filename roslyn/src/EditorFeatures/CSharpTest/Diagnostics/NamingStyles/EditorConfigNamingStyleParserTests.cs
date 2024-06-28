@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                     "method,property",
                 ["dotnet_naming_symbols.method_and_property_symbols.applicable_accessibilities"] =
                     "*",
-                ["dotnet_naming_style.pascal_case_style.capitalization"] = "pascal_case"
+                ["dotnet_naming_style.pascal_case_style.capitalization"] = "pascal_case",
             };
             var result = ParseDictionary(dictionary);
             Assert.Single(result.NamingRules);
@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             var expectedApplicableSymbolKindList = new[]
             {
                 new SymbolKindOrTypeKind(MethodKind.Ordinary),
-                new SymbolKindOrTypeKind(SymbolKind.Property)
+                new SymbolKindOrTypeKind(SymbolKind.Property),
             };
             AssertEx.SetEqual(
                 expectedApplicableSymbolKindList,
@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 Accessibility.Private,
                 Accessibility.Protected,
                 Accessibility.ProtectedAndInternal,
-                Accessibility.ProtectedOrInternal
+                Accessibility.ProtectedOrInternal,
             };
             AssertEx.SetEqual(
                 expectedApplicableAccessibilityList,
@@ -97,7 +97,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                     "method,property",
                 ["dotnet_naming_symbols.method_and_property_symbols.applicable_accessibilities"] =
                     "*",
-                ["dotnet_naming_style.pascal_case_style.capitalization"] = "pascal_case"
+                ["dotnet_naming_style.pascal_case_style.capitalization"] = "pascal_case",
             };
             var result = ParseDictionary(dictionary);
             var namingRule = Assert.Single(result.NamingRules);
@@ -136,7 +136,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             var expectedApplicableSymbolKindList = new[]
             {
                 new SymbolKindOrTypeKind(MethodKind.Ordinary),
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction),
             };
             AssertEx.SetEqual(
                 expectedApplicableSymbolKindList,
@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                     Accessibility.Private,
                     Accessibility.Protected,
                     Accessibility.ProtectedAndInternal,
-                    Accessibility.ProtectedOrInternal
+                    Accessibility.ProtectedOrInternal,
                 },
                 symbolSpec.ApplicableAccessibilityList
             );
@@ -219,7 +219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 new SymbolKindOrTypeKind(MethodKind.Ordinary),
                 new SymbolKindOrTypeKind(SymbolKind.Field),
                 new SymbolKindOrTypeKind(SymbolKind.Event),
-                new SymbolKindOrTypeKind(TypeKind.Delegate)
+                new SymbolKindOrTypeKind(TypeKind.Delegate),
             };
             AssertEx.SetEqual(
                 expectedApplicableSymbolKindList,
@@ -230,7 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 Accessibility.Public,
                 Accessibility.Internal,
                 Accessibility.Protected,
-                Accessibility.ProtectedOrInternal
+                Accessibility.ProtectedOrInternal,
             };
             AssertEx.SetEqual(
                 expectedApplicableAccessibilityList,
@@ -276,7 +276,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 new SymbolKindOrTypeKind(MethodKind.Ordinary),
                 new SymbolKindOrTypeKind(SymbolKind.Field),
                 new SymbolKindOrTypeKind(SymbolKind.Event),
-                new SymbolKindOrTypeKind(TypeKind.Delegate)
+                new SymbolKindOrTypeKind(TypeKind.Delegate),
             };
             AssertEx.SetEqual(
                 expectedApplicableSymbolKindList,
@@ -338,7 +338,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                     Accessibility.Private,
                     Accessibility.Protected,
                     Accessibility.ProtectedAndInternal,
-                    Accessibility.ProtectedOrInternal
+                    Accessibility.ProtectedOrInternal,
                 },
                 symbolSpec.ApplicableAccessibilityList
             );
@@ -378,7 +378,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             Assert.Equal("local_functions", symbolSpec.Name);
             var expectedApplicableSymbolKindList = new[]
             {
-                new SymbolKindOrTypeKind(MethodKind.LocalFunction)
+                new SymbolKindOrTypeKind(MethodKind.LocalFunction),
             };
             AssertEx.SetEqual(
                 expectedApplicableSymbolKindList,
@@ -393,7 +393,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                     Accessibility.Private,
                     Accessibility.Protected,
                     Accessibility.ProtectedAndInternal,
-                    Accessibility.ProtectedOrInternal
+                    Accessibility.ProtectedOrInternal,
                 },
                 symbolSpec.ApplicableAccessibilityList
             );
@@ -444,7 +444,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 TypeKind.Delegate,
                 SymbolKind.Parameter,
                 SymbolKind.TypeParameter,
-                SymbolKind.Local
+                SymbolKind.Local,
             }
         )]
         [InlineData(
@@ -464,7 +464,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 TypeKind.Delegate,
                 SymbolKind.Parameter,
                 SymbolKind.TypeParameter,
-                SymbolKind.Local
+                SymbolKind.Local,
             }
         )]
         [InlineData(
@@ -523,7 +523,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 Accessibility.Private,
                 Accessibility.Protected,
                 Accessibility.ProtectedAndInternal,
-                Accessibility.ProtectedOrInternal
+                Accessibility.ProtectedOrInternal,
             }
         )]
         [InlineData(
@@ -536,7 +536,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
                 Accessibility.Private,
                 Accessibility.Protected,
                 Accessibility.ProtectedAndInternal,
-                Accessibility.ProtectedOrInternal
+                Accessibility.ProtectedOrInternal,
             }
         )]
         [InlineData(
@@ -641,7 +641,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.NamingStyle
             Assert.Equal("symbols", symbolSpec.Name);
             var expectedApplicableTypeKindList = new[]
             {
-                new SymbolKindOrTypeKind(TypeKind.Interface)
+                new SymbolKindOrTypeKind(TypeKind.Interface),
             };
             AssertEx.SetEqual(expectedApplicableTypeKindList, symbolSpec.ApplicableSymbolKindList);
             Assert.Equal("pascal_case_and_prefix_style", namingStyle.Name);

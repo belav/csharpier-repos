@@ -44,7 +44,7 @@ public class CommandConfigurationTest
                             new KettleChips
                             {
                                 BestBuyDate = DateTime.Now,
-                                Name = "Doritos Locos Tacos " + i
+                                Name = "Doritos Locos Tacos " + i,
                             }
                         );
                 }

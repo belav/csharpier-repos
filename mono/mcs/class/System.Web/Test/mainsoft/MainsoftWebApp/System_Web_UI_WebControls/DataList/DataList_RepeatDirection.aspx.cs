@@ -77,7 +77,7 @@ namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
             "ddd",
             "eee",
             "fff",
-            "ggg"
+            "ggg",
         };
 
         private void Page_Load(object sender, System.EventArgs e)

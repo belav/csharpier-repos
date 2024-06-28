@@ -9,7 +9,7 @@ public class DuplicateExtensionMethods : AutoMapperSpecBase
 
     public enum AccountKind
     {
-        None
+        None,
     }
 
     class Source

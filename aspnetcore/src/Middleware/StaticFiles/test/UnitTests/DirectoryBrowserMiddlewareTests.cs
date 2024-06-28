@@ -108,7 +108,7 @@ public class DirectoryBrowserMiddlewareTests
                         {
                             RequestPath = new PathString(baseUrl),
                             FileProvider = fileProvider,
-                            RedirectToAppendTrailingSlash = appendTrailingSlash
+                            RedirectToAppendTrailingSlash = appendTrailingSlash,
                         }
                     ),
                 services => services.AddDirectoryBrowser()
@@ -155,7 +155,7 @@ public class DirectoryBrowserMiddlewareTests
                         new DirectoryBrowserOptions
                         {
                             RequestPath = new PathString(""),
-                            FileProvider = fileProvider
+                            FileProvider = fileProvider,
                         }
                     );
 
@@ -207,7 +207,7 @@ public class DirectoryBrowserMiddlewareTests
                         new DirectoryBrowserOptions
                         {
                             RequestPath = new PathString(""),
-                            FileProvider = fileProvider
+                            FileProvider = fileProvider,
                         }
                     );
 
@@ -372,7 +372,7 @@ public class DirectoryBrowserMiddlewareTests
                         new DirectoryBrowserOptions
                         {
                             RequestPath = new PathString(baseUrl),
-                            FileProvider = fileProvider
+                            FileProvider = fileProvider,
                         }
                     ),
                 services => services.AddDirectoryBrowser()
@@ -449,7 +449,7 @@ public class DirectoryBrowserMiddlewareTests
                         {
                             RequestPath = new PathString(baseUrl),
                             FileProvider = fileProvider,
-                            RedirectToAppendTrailingSlash = appendTrailingSlash
+                            RedirectToAppendTrailingSlash = appendTrailingSlash,
                         }
                     ),
                 services => services.AddDirectoryBrowser()
@@ -530,7 +530,7 @@ public class DirectoryBrowserMiddlewareTests
                         {
                             RequestPath = new PathString(baseUrl),
                             FileProvider = fileProvider,
-                            RedirectToAppendTrailingSlash = appendTrailingSlash
+                            RedirectToAppendTrailingSlash = appendTrailingSlash,
                         }
                     ),
                 services => services.AddDirectoryBrowser()

@@ -14,7 +14,7 @@ namespace System.Collections.Tests
         {
             IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
-                { "key", "value" }
+                { "key", "value" },
             };
             Assert.Equal("value", dictionary.GetValueOrDefault("key"));
             Assert.Equal("value", dictionary.GetValueOrDefault("key", null));
@@ -25,7 +25,7 @@ namespace System.Collections.Tests
         {
             IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
-                { "key", "value" }
+                { "key", "value" },
             };
             Assert.Null(dictionary.GetValueOrDefault("anotherKey"));
             Assert.Equal(
@@ -39,7 +39,7 @@ namespace System.Collections.Tests
         {
             IReadOnlyDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
-                { "key", "value" }
+                { "key", "value" },
             };
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
@@ -98,7 +98,7 @@ namespace System.Collections.Tests
         {
             IDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
-                ["key"] = "value"
+                ["key"] = "value",
             };
             Assert.False(dictionary.TryAdd("key", "value2"));
             Assert.Equal("value", dictionary["key"]);
@@ -133,7 +133,7 @@ namespace System.Collections.Tests
         {
             IDictionary<string, string> dictionary = new SortedDictionary<string, string>()
             {
-                ["key"] = "value"
+                ["key"] = "value",
             };
             Assert.True(dictionary.Remove("key", out var value));
             Assert.Equal("value", value);
@@ -163,7 +163,7 @@ namespace System.Collections.Tests
             IDictionary<string, string> dictionary = new Dictionary<string, string>
             {
                 ["key1"] = "value1",
-                ["key2"] = "value2"
+                ["key2"] = "value2",
             };
             ReadOnlyDictionary<string, string> readOnlyDictionary = dictionary.AsReadOnly();
             Assert.NotNull(readOnlyDictionary);

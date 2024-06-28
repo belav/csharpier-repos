@@ -144,12 +144,12 @@ namespace System.Net.Security.Tests
             yield return new object[]
             {
                 new SslApplicationProtocol("hello"),
-                new SslApplicationProtocol("hello")
+                new SslApplicationProtocol("hello"),
             };
             yield return new object[]
             {
                 new SslApplicationProtocol(new byte[] { 0x42 }),
-                new SslApplicationProtocol(new byte[] { 0x42 })
+                new SslApplicationProtocol(new byte[] { 0x42 }),
             };
             yield return new object[] { null, null };
             yield return new object[] { default, default };
@@ -162,12 +162,12 @@ namespace System.Net.Security.Tests
             yield return new object[]
             {
                 new SslApplicationProtocol("hello"),
-                new SslApplicationProtocol("world")
+                new SslApplicationProtocol("world"),
             };
             yield return new object[]
             {
                 new SslApplicationProtocol(new byte[] { 0x42 }),
-                new SslApplicationProtocol(new byte[] { 0x52, 0x62 })
+                new SslApplicationProtocol(new byte[] { 0x52, 0x62 }),
             };
             yield return new object[] { null, new SslApplicationProtocol(new byte[] { 0x42 }) };
             yield return new object[] { new SslApplicationProtocol(new byte[] { 0x42 }), null };

@@ -202,7 +202,10 @@ static X509Certificate2 GenerateManualCertificate()
         new X509EnhancedKeyUsageExtension(
             new OidCollection
             {
-                new("1.3.6.1.5.5.7.3.1") // serverAuth
+                new(
+                    "1.3.6.1.5.5.7.3.1"
+                ) // serverAuth
+                ,
             },
             false
         )

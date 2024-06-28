@@ -114,6 +114,6 @@ namespace System.Linq
         selector,
         source,
         third,
-        size
+        size,
     }
 }

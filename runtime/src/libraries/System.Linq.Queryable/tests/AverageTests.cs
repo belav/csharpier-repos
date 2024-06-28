@@ -52,7 +52,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (float?)5.5f },
                 new { name = "John", num = (float?)15.5f },
-                new { name = "Bob", num = default(float?) }
+                new { name = "Bob", num = default(float?) },
             };
             float? expected = 10.5f;
 
@@ -103,7 +103,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 10 },
                 new { name = "John", num = -10 },
-                new { name = "Bob", num = 15 }
+                new { name = "Bob", num = 15 },
             };
             double expected = 5;
 
@@ -154,7 +154,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (int?)10 },
                 new { name = "John", num = default(int?) },
-                new { name = "Bob", num = (int?)10 }
+                new { name = "Bob", num = (int?)10 },
             };
             double? expected = 10;
 
@@ -205,7 +205,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 40L },
                 new { name = "John", num = 50L },
-                new { name = "Bob", num = 60L }
+                new { name = "Bob", num = 60L },
             };
             double expected = 50;
 
@@ -256,7 +256,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (long?)40L },
                 new { name = "John", num = default(long?) },
-                new { name = "Bob", num = (long?)30L }
+                new { name = "Bob", num = (long?)30L },
             };
             double? expected = 35;
 
@@ -307,7 +307,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 5.5 },
                 new { name = "John", num = 15.5 },
-                new { name = "Bob", num = 3.0 }
+                new { name = "Bob", num = 3.0 },
             };
             double expected = 8.0;
 
@@ -358,7 +358,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (double?)5.5 },
                 new { name = "John", num = (double?)15.5 },
-                new { name = "Bob", num = default(double?) }
+                new { name = "Bob", num = default(double?) },
             };
             double? expected = 10.5;
 
@@ -409,7 +409,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 5.5m },
                 new { name = "John", num = 15.5m },
-                new { name = "Bob", num = 3.0m }
+                new { name = "Bob", num = 3.0m },
             };
             decimal expected = 8.0m;
 
@@ -460,7 +460,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = (decimal?)5.5m },
                 new { name = "John", num = (decimal?)15.5m },
-                new { name = "Bob", num = (decimal?)null }
+                new { name = "Bob", num = (decimal?)null },
             };
             decimal? expected = 10.5m;
 
@@ -511,7 +511,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Tim", num = 5.5f },
                 new { name = "John", num = 15.5f },
-                new { name = "Bob", num = 3.0f }
+                new { name = "Bob", num = 3.0f },
             };
             float expected = 8.0f;
 

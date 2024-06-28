@@ -139,7 +139,7 @@ namespace System.Data.OleDb
             ResetOleDbType();
         }
 
-        [RefreshProperties(RefreshProperties.All), DbProviderSpecificTypeProperty(true),]
+        [RefreshProperties(RefreshProperties.All), DbProviderSpecificTypeProperty(true)]
         public OleDbType OleDbType
         {
             get { return GetBindType(Value).enumOleDbType; }
@@ -581,7 +581,7 @@ namespace System.Data.OleDb
             }
         }
 
-        [RefreshProperties(RefreshProperties.All), TypeConverter(typeof(StringConverter)),]
+        [RefreshProperties(RefreshProperties.All), TypeConverter(typeof(StringConverter))]
         public override object? Value
         { // V1.2.3300, XXXParameter V1.0.3300
             get { return _value; }
@@ -742,14 +742,14 @@ namespace System.Data.OleDb
                             typeof(string),
                             typeof(OleDbType),
                             typeof(int),
-                            typeof(string)
+                            typeof(string),
                         };
                         ctorValues = new object[]
                         {
                             p.ParameterName,
                             p.OleDbType,
                             p.Size,
-                            p.SourceColumn
+                            p.SourceColumn,
                         };
                         break;
                     case 8: // Value
@@ -770,7 +770,7 @@ namespace System.Data.OleDb
                                 typeof(byte),
                                 typeof(string),
                                 typeof(DataRowVersion),
-                                typeof(object)
+                                typeof(object),
                             };
                             ctorValues = new object?[]
                             {
@@ -783,7 +783,7 @@ namespace System.Data.OleDb
                                 p.ScaleInternal,
                                 p.SourceColumn,
                                 p.SourceVersion,
-                                p.Value
+                                p.Value,
                             };
                         }
                         else
@@ -799,7 +799,7 @@ namespace System.Data.OleDb
                                 typeof(string),
                                 typeof(DataRowVersion),
                                 typeof(bool),
-                                typeof(object)
+                                typeof(object),
                             };
                             ctorValues = new object?[]
                             {
@@ -812,7 +812,7 @@ namespace System.Data.OleDb
                                 p.SourceColumn,
                                 p.SourceVersion,
                                 p.SourceColumnNullMapping,
-                                p.Value
+                                p.Value,
                             };
                         }
                         break;

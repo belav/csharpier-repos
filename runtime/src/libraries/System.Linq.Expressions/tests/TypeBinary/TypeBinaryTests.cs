@@ -31,7 +31,7 @@ namespace System.Linq.Expressions.Tests
             A,
             B,
             C,
-            D
+            D,
         }
 
         protected enum SByteBased : byte
@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
             A,
             B,
             C,
-            D
+            D,
         }
 
         private static IEnumerable<Type> Types
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
                     typeof(ByteBased),
                     typeof(ByteBased?),
                     typeof(SByteBased),
-                    typeof(StringComparison)
+                    typeof(StringComparison),
                 };
             }
         }

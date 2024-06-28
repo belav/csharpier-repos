@@ -16,7 +16,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             List<ValueProviderFactory> list = new List<ValueProviderFactory>()
             {
-                new FormValueProviderFactory()
+                new FormValueProviderFactory(),
             };
 
             // Act
@@ -72,7 +72,7 @@ namespace System.Web.Mvc.Test
             var factories = new ValueProviderFactory[]
             {
                 new Mock<ValueProviderFactory>(MockBehavior.Strict).Object,
-                new Mock<ValueProviderFactory>(MockBehavior.Strict).Object
+                new Mock<ValueProviderFactory>(MockBehavior.Strict).Object,
             };
             var collection = new ValueProviderFactoryCollection(factories);
 
@@ -121,7 +121,7 @@ namespace System.Web.Mvc.Test
             var providers = new List<ValueProviderFactory>()
             {
                 new Mock<ValueProviderFactory>(MockBehavior.Strict).Object,
-                new Mock<ValueProviderFactory>(MockBehavior.Strict).Object
+                new Mock<ValueProviderFactory>(MockBehavior.Strict).Object,
             };
             var collection = new ValueProviderFactoryCollection(providers);
 
@@ -144,14 +144,14 @@ namespace System.Web.Mvc.Test
             var dependencyFactories = new ValueProviderFactory[]
             {
                 firstFactory.Object,
-                secondFactory.Object
+                secondFactory.Object,
             };
             var collectionFactories = new ValueProviderFactory[] { thirdFactory.Object };
             var expectedFactories = new ValueProviderFactory[]
             {
                 firstFactory.Object,
                 secondFactory.Object,
-                thirdFactory.Object
+                thirdFactory.Object,
             };
 
             var resolver = new Mock<IDependencyResolver>();
@@ -179,7 +179,7 @@ namespace System.Web.Mvc.Test
             IValueProvider[] expectedValueProviders = new[]
             {
                 new Mock<IValueProvider>().Object,
-                new Mock<IValueProvider>().Object
+                new Mock<IValueProvider>().Object,
             };
 
             Mock<ValueProviderFactory> mockFactory1 = new Mock<ValueProviderFactory>();
@@ -194,7 +194,7 @@ namespace System.Web.Mvc.Test
             ValueProviderFactoryCollection factories = new ValueProviderFactoryCollection()
             {
                 mockFactory1.Object,
-                mockFactory2.Object
+                mockFactory2.Object,
             };
 
             // Act
@@ -213,7 +213,7 @@ namespace System.Web.Mvc.Test
             IValueProvider[] expectedValueProviders = new[]
             {
                 new Mock<IValueProvider>().Object,
-                new Mock<IValueProvider>().Object
+                new Mock<IValueProvider>().Object,
             };
 
             Mock<ValueProviderFactory> mockFactory1 = new Mock<ValueProviderFactory>();

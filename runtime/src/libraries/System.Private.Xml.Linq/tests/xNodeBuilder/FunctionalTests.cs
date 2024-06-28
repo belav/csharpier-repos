@@ -31,8 +31,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "XNodeBuilder",
-                            Desc = "XLinq XNodeBuilder Tests"
-                        }
+                            Desc = "XLinq XNodeBuilder Tests",
+                        },
                     }
                 );
             }
@@ -54,8 +54,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "Auto-completion of tokens",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -64,8 +64,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteStart/EndDocument",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -74,8 +74,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteDocType",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -84,8 +84,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteStart/EndElement",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -94,8 +94,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteStart/EndAttribute",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -104,8 +104,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteAttributes",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -114,8 +114,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteNode",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -124,8 +124,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteFullEndElement",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -134,8 +134,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "Element Namespace",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -144,8 +144,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "Attribute Namespace",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -154,8 +154,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteCData",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -164,8 +164,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteComment",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -174,8 +174,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteEntityRef",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -184,8 +184,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteCharEntity",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -194,8 +194,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteSurrogateCharEntity",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -204,8 +204,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteProcessingInstruction",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -214,8 +214,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteNmToken",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -224,8 +224,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteName",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -234,8 +234,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteQualifiedName",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -244,8 +244,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteChars",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -254,8 +254,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteString",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -264,8 +264,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteWhitespace",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -274,8 +274,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteValue",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -284,8 +284,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "LookupPrefix",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -294,8 +294,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "XmlSpace",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -304,8 +304,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "XmlLang",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -314,8 +314,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteRaw",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -324,8 +324,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteBase64",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -334,8 +334,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "WriteState",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -344,8 +344,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "NDP20_NewMethods",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -354,8 +354,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "Globalization",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -364,8 +364,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "Close",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -374,8 +374,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "NewLineHandling",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -384,8 +384,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "Error Conditions",
-                            Param = "XNodeBuilder"
-                        }
+                            Param = "XNodeBuilder",
+                        },
                     }
                 );
                 this.AddChild(
@@ -393,8 +393,8 @@ namespace CoreXml.Test.XLinq
                     {
                         Attribute = new TestCaseAttribute()
                         {
-                            Name = "NamespaceHandling::OmitDuplicate (writer sanity)"
-                        }
+                            Name = "NamespaceHandling::OmitDuplicate (writer sanity)",
+                        },
                     }
                 );
                 this.AddChild(
@@ -403,8 +403,8 @@ namespace CoreXml.Test.XLinq
                         Attribute = new TestCaseAttribute()
                         {
                             Name = "OmitDuplicates with annotations",
-                            Desc = "OmitDuplicates with annotations"
-                        }
+                            Desc = "OmitDuplicates with annotations",
+                        },
                     }
                 );
                 this.AddChild(
@@ -414,8 +414,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Name =
                                 "NamespaceHandling::OmitDuplicate Save() (SaveOptions) - XElement",
-                            Params = new object[] { "Save", typeof(XElement) }
-                        }
+                            Params = new object[] { "Save", typeof(XElement) },
+                        },
                     }
                 );
                 this.AddChild(
@@ -425,8 +425,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Name =
                                 "NamespaceHandling::OmitDuplicate ToString() (SaveOptions) - XDocument",
-                            Params = new object[] { "ToString", typeof(XDocument) }
-                        }
+                            Params = new object[] { "ToString", typeof(XDocument) },
+                        },
                     }
                 );
                 this.AddChild(
@@ -436,8 +436,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Name =
                                 "NamespaceHandling::OmitDuplicate Save() (SaveOptions) - XDocument",
-                            Params = new object[] { "Save", typeof(XDocument) }
-                        }
+                            Params = new object[] { "Save", typeof(XDocument) },
+                        },
                     }
                 );
                 this.AddChild(
@@ -447,26 +447,26 @@ namespace CoreXml.Test.XLinq
                         {
                             Name =
                                 "NamespaceHandling::OmitDuplicate ToString() (SaveOptions) - XElement",
-                            Params = new object[] { "ToString", typeof(XElement) }
-                        }
+                            Params = new object[] { "ToString", typeof(XElement) },
+                        },
                     }
                 );
                 this.AddChild(
                     new Writer_Settings()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "Writer settings" }
+                        Attribute = new TestCaseAttribute() { Name = "Writer settings" },
                     }
                 );
                 this.AddChild(
                     new TCCheckChars()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "CheckCharacters" }
+                        Attribute = new TestCaseAttribute() { Name = "CheckCharacters" },
                     }
                 );
                 this.AddChild(
                     new TCNewLineHandling()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "NewLineHandling2" }
+                        Attribute = new TestCaseAttribute() { Name = "NewLineHandling2" },
                     }
                 );
                 this.AddChild(
@@ -475,25 +475,25 @@ namespace CoreXml.Test.XLinq
                 this.AddChild(
                     new TCNewLineOnAttributes()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "NewLineOnAttributes" }
+                        Attribute = new TestCaseAttribute() { Name = "NewLineOnAttributes" },
                     }
                 );
                 this.AddChild(
                     new TCStandAlone()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "Standalone" }
+                        Attribute = new TestCaseAttribute() { Name = "Standalone" },
                     }
                 );
                 this.AddChild(
                     new TCFragmentCL()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "CL = Fragment Tests" }
+                        Attribute = new TestCaseAttribute() { Name = "CL = Fragment Tests" },
                     }
                 );
                 this.AddChild(
                     new TCAutoCL()
                     {
-                        Attribute = new TestCaseAttribute() { Name = "CL = Auto Tests" }
+                        Attribute = new TestCaseAttribute() { Name = "CL = Auto Tests" },
                     }
                 );
             }
@@ -512,8 +512,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -524,8 +524,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -536,8 +536,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -548,8 +548,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -560,8 +560,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -572,8 +572,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -593,8 +593,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -605,8 +605,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -617,8 +617,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -627,8 +627,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Multiple EndDocument should error")
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -639,8 +639,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -651,8 +651,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -663,8 +663,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -675,8 +675,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -687,8 +687,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -699,8 +699,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -711,8 +711,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -723,8 +723,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -745,8 +745,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "null",
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -758,8 +758,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String.Empty",
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -770,8 +770,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -782,8 +782,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -803,8 +803,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -815,8 +815,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -827,8 +827,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -839,8 +839,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -849,8 +849,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Element name = null should error")
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -859,8 +859,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Element NS = String.Empty")
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -869,8 +869,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Element NS = null")
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -879,8 +879,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Write 100 nested elements")
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -898,8 +898,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test for WriteAttribute")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -910,8 +910,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -922,8 +922,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -932,8 +932,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Multiple WritetAttributeString")
                             {
                                 Id = 4,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -944,8 +944,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -956,8 +956,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -968,8 +968,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -978,8 +978,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Duplicate attribute 'attr1'")
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -988,8 +988,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Duplicate attribute 'ns1:attr1'")
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1000,8 +1000,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1010,8 +1010,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Attribute name = null")
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1022,8 +1022,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1032,8 +1032,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Invalid value of xml:space")
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1043,8 +1043,8 @@ namespace CoreXml.Test.XLinq
                                 "SingleQuote in attribute value should be allowed"
                             )
                             {
-                                Id = 14
-                            }
+                                Id = 14,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1054,8 +1054,8 @@ namespace CoreXml.Test.XLinq
                                 "DoubleQuote in attribute value should be escaped"
                             )
                             {
-                                Id = 15
-                            }
+                                Id = 15,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1066,8 +1066,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1078,8 +1078,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1090,8 +1090,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 18,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1102,8 +1102,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1114,8 +1114,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1125,8 +1125,8 @@ namespace CoreXml.Test.XLinq
                                 "testcase: Redefine auto generated prefix n1"
                             )
                             {
-                                Id = 21
-                            }
+                                Id = 21,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1136,8 +1136,8 @@ namespace CoreXml.Test.XLinq
                                 "testcase: Reuse and redefine existing prefix"
                             )
                             {
-                                Id = 22
-                            }
+                                Id = 22,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1147,8 +1147,8 @@ namespace CoreXml.Test.XLinq
                                 "WriteStartAttribute(attr) sanity test"
                             )
                             {
-                                Id = 23
-                            }
+                                Id = 23,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1158,8 +1158,8 @@ namespace CoreXml.Test.XLinq
                                 "WriteStartAttribute(attr) inside an element with changed default namespace"
                             )
                             {
-                                Id = 24
-                            }
+                                Id = 24,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1169,8 +1169,8 @@ namespace CoreXml.Test.XLinq
                                 "WriteStartAttribute(attr) and duplicate attrs"
                             )
                             {
-                                Id = 25
-                            }
+                                Id = 25,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1180,8 +1180,8 @@ namespace CoreXml.Test.XLinq
                                 "WriteStartAttribute(attr) when element has ns:attr"
                             )
                             {
-                                Id = 26
-                            }
+                                Id = 26,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1191,8 +1191,8 @@ namespace CoreXml.Test.XLinq
                                 "XmlCharCheckingWriter should not normalize newLines in attribute values when NewLinesHandling = Replace"
                             )
                             {
-                                Id = 27
-                            }
+                                Id = 27,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1202,8 +1202,8 @@ namespace CoreXml.Test.XLinq
                                 "WriteAttributeString doesn't fail on invalid surrogate pair sequences"
                             )
                             {
-                                Id = 29
-                            }
+                                Id = 29,
+                            },
                         }
                     );
                 }
@@ -1223,8 +1223,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1235,8 +1235,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1246,8 +1246,8 @@ namespace CoreXml.Test.XLinq
                                 "Call WriteAttributes with XmlReader = null"
                             )
                             {
-                                Id = 3
-                            }
+                                Id = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1258,8 +1258,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1270,8 +1270,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1282,8 +1282,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1294,8 +1294,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1307,8 +1307,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Text",
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1320,8 +1320,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "ProcessingInstruction",
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1333,8 +1333,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Comment",
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1346,8 +1346,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "CDATA",
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1358,8 +1358,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1370,8 +1370,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1382,8 +1382,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 21,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -1401,8 +1401,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNode with null reader")
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1413,8 +1413,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1423,8 +1423,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNode before reader.Read()")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1435,8 +1435,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1447,8 +1447,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1457,8 +1457,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNode when reader state is EOF")
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1469,8 +1469,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1481,8 +1481,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1491,8 +1491,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNode with reader on 100 Nodes")
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1503,8 +1503,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1515,8 +1515,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1527,8 +1527,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1539,8 +1539,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1551,8 +1551,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1563,8 +1563,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1575,8 +1575,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 18,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1587,8 +1587,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1599,8 +1599,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 21,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1611,8 +1611,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 22,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1623,8 +1623,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 23,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1635,8 +1635,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 24,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1647,8 +1647,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 25,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1659,8 +1659,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 26,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1671,8 +1671,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 27,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1683,8 +1683,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 28,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1695,8 +1695,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 29,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1707,8 +1707,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 30,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1719,8 +1719,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1731,8 +1731,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 32,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1743,8 +1743,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 33,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1755,8 +1755,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 34,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -1776,8 +1776,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1788,8 +1788,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1800,8 +1800,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1812,8 +1812,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1824,8 +1824,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1836,8 +1836,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -1857,8 +1857,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1869,8 +1869,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1881,8 +1881,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1893,8 +1893,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1905,8 +1905,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1917,8 +1917,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1929,8 +1929,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1941,8 +1941,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1953,8 +1953,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1965,8 +1965,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1977,8 +1977,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -1989,8 +1989,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2001,8 +2001,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 13,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2013,8 +2013,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2025,8 +2025,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2037,8 +2037,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2049,8 +2049,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2061,8 +2061,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 18,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2073,8 +2073,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2085,8 +2085,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2097,8 +2097,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 21,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2109,8 +2109,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 22,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2121,8 +2121,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 23,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2133,8 +2133,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 24,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2145,8 +2145,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 25,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2157,8 +2157,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 26,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2169,8 +2169,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 27,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2181,8 +2181,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 28,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2193,8 +2193,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 29,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2205,8 +2205,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 30,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2217,8 +2217,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2229,8 +2229,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -2250,8 +2250,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2262,8 +2262,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2274,8 +2274,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2286,8 +2286,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2298,8 +2298,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2310,8 +2310,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2322,8 +2322,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2334,8 +2334,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2346,8 +2346,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2358,8 +2358,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2370,8 +2370,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2382,8 +2382,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2394,8 +2394,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2406,8 +2406,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2418,8 +2418,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2430,8 +2430,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2442,8 +2442,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2454,8 +2454,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 18,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2466,8 +2466,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2478,8 +2478,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2490,8 +2490,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 21,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2502,8 +2502,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 22,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2514,8 +2514,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 23,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2524,8 +2524,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Attach prefix with empty namespace")
                             {
                                 Id = 24,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2536,8 +2536,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 25,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2548,8 +2548,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 26,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2560,8 +2560,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 27,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2572,8 +2572,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 28,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2584,8 +2584,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 29,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2596,8 +2596,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 30,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2608,8 +2608,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2620,8 +2620,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 32,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2632,8 +2632,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 33,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2644,8 +2644,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 34,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2656,8 +2656,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 35,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2668,8 +2668,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 36,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2680,8 +2680,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 37,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2692,8 +2692,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 38,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2704,8 +2704,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 39,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2716,8 +2716,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 40,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2728,8 +2728,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 41,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2740,8 +2740,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 42,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -2759,8 +2759,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteCData with null")
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2769,8 +2769,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteCData with String.Empty")
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2779,8 +2779,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteCData Sanity test")
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2791,8 +2791,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2803,8 +2803,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2813,8 +2813,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteCData with <![CDATA[")
                             {
                                 Id = 7,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2823,8 +2823,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("CData state machine")
                             {
                                 Id = 8,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2835,8 +2835,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2844,8 +2844,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("WriteCData after root element")
                             {
-                                Id = 10
-                            }
+                                Id = 10,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2856,8 +2856,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -2875,8 +2875,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test for WriteComment")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2885,8 +2885,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Comment value = String.Empty")
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2895,8 +2895,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Comment value = null")
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2907,8 +2907,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2919,8 +2919,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -2941,8 +2941,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test'test",
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2954,8 +2954,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test<test",
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2967,8 +2967,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "&test;",
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2978,8 +2978,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "null",
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -2991,8 +2991,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test\"test",
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3002,8 +3002,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "\xD",
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3015,8 +3015,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test&test",
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3028,8 +3028,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String.Empty",
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3039,8 +3039,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "\xD\xA",
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3050,8 +3050,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "\r",
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3063,8 +3063,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test>test",
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3073,8 +3073,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("XmlWriter: Entity Refs: amp")
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3083,8 +3083,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("XmlWriter: Entity Refs: apos")
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3093,8 +3093,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("XmlWriter: Entity Refs: lt")
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3103,8 +3103,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("XmlWriter: Entity Refs: quot")
                             {
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3113,8 +3113,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("XmlWriter: Entity Refs: gt")
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3134,8 +3134,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3146,8 +3146,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3158,8 +3158,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3168,8 +3168,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Character from low surrogate range")
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3180,8 +3180,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3190,8 +3190,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test, pass 'a'")
                             {
                                 Id = 7,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3202,8 +3202,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3223,8 +3223,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3235,8 +3235,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3247,8 +3247,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3257,8 +3257,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("MIddle surrogate character")
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3267,8 +3267,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Invalid high surrogate character")
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3277,8 +3277,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Invalid low surrogate character")
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3287,8 +3287,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Swap high-low surrogate characters")
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3299,8 +3299,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3318,8 +3318,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test for WritePI")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3328,8 +3328,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("PI text value = null")
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3338,8 +3338,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("PI text value = String.Empty")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3348,8 +3348,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("PI name = null should error")
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3360,8 +3360,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3371,8 +3371,8 @@ namespace CoreXml.Test.XLinq
                                 "WritePI with xmlns as the name value"
                             )
                             {
-                                Id = 6
-                            }
+                                Id = 6,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3380,8 +3380,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("WritePI with XmL as the name value")
                             {
-                                Id = 7
-                            }
+                                Id = 7,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3390,8 +3390,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WritePI before XmlDecl")
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3402,8 +3402,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3414,8 +3414,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3426,8 +3426,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3438,8 +3438,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3458,8 +3458,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String.Empty",
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3469,8 +3469,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "null",
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3479,8 +3479,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test, Name = foo")
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3491,8 +3491,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3502,8 +3502,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test test",
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3513,8 +3513,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test?",
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3524,8 +3524,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "\"test",
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3535,8 +3535,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "test'",
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3555,8 +3555,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "null",
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3566,8 +3566,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String.Empty",
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3576,8 +3576,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test, Name = foo")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3586,8 +3586,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Sanity test, Name = foo:bar")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3597,8 +3597,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "foo bar",
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3608,8 +3608,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = ":bar",
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3628,8 +3628,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "null",
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3639,8 +3639,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String.Empty",
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3649,8 +3649,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteQName with correct NS")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3661,8 +3661,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3673,8 +3673,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3684,8 +3684,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "foo bar",
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3695,8 +3695,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = ":bar",
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3716,8 +3716,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3726,8 +3726,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteChars with & < >")
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3738,8 +3738,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3750,8 +3750,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3760,8 +3760,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteChars with buffer = null")
                             {
                                 Id = 5,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3772,8 +3772,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3782,8 +3782,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteChars with count < 0")
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3794,8 +3794,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3804,8 +3804,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteChars with index < 0")
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3816,8 +3816,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3828,8 +3828,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -3847,8 +3847,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteString(null)")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3857,8 +3857,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteString(String.Empty)")
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3869,8 +3869,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3881,8 +3881,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3891,8 +3891,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteString with entity reference")
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3903,8 +3903,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3915,8 +3915,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3927,8 +3927,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3939,8 +3939,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3951,8 +3951,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3961,8 +3961,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("High surrogate on last position")
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3971,8 +3971,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Low surrogate on first position")
                             {
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -3981,8 +3981,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Swap low-high surrogates")
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4002,8 +4002,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4013,8 +4013,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String.Empty",
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4024,8 +4024,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "null",
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4035,8 +4035,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4046,8 +4046,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 16,
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4057,8 +4057,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 97,
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4068,8 +4068,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 31,
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4079,8 +4079,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 14,
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4098,8 +4098,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(boolean)")
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4108,8 +4108,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(DateTime)")
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4118,8 +4118,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(decimal)")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4128,8 +4128,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(double)")
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4138,8 +4138,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(int32)")
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4148,8 +4148,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(int64)")
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4158,8 +4158,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(single)")
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4168,8 +4168,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(string)")
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4178,8 +4178,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(DateTimeOffset)")
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4190,8 +4190,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4202,8 +4202,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4214,8 +4214,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4226,8 +4226,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4238,8 +4238,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4250,8 +4250,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4260,8 +4260,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(long)")
                             {
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4279,8 +4279,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("LookupPrefix with null")
                             {
                                 Id = 1,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4291,8 +4291,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4303,8 +4303,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4315,8 +4315,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4327,8 +4327,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4339,8 +4339,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4351,8 +4351,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4363,8 +4363,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4375,8 +4375,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4387,8 +4387,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4406,8 +4406,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Verify XmlSpace as Preserve")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4416,8 +4416,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Verify XmlSpace as Default")
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4426,8 +4426,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Verify XmlSpace as None")
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4438,8 +4438,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4450,8 +4450,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4462,8 +4462,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4474,8 +4474,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4486,8 +4486,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4498,8 +4498,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4517,8 +4517,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Verify XmlLang sanity test")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4529,8 +4529,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4541,8 +4541,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4553,8 +4553,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4565,8 +4565,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4576,8 +4576,8 @@ namespace CoreXml.Test.XLinq
                                 "Verify XmlLang value when received through WriteString"
                             )
                             {
-                                Id = 6
-                            }
+                                Id = 6,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4586,8 +4586,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Should not check XmlLang value")
                             {
                                 Id = 7,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4596,8 +4596,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("More XmlLang with valid sequence")
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4615,8 +4615,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Call both WriteRaw Methods")
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4626,8 +4626,8 @@ namespace CoreXml.Test.XLinq
                                 "Call WriteRaw to write the value of xml:space"
                             )
                             {
-                                Id = 4
-                            }
+                                Id = 4,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4638,8 +4638,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4648,8 +4648,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteRaw with count > buffer size")
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4658,8 +4658,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteRaw with count < 0")
                             {
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4668,8 +4668,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteRaw with index > buffer size")
                             {
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4678,8 +4678,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteRaw with index < 0")
                             {
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4690,8 +4690,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4700,8 +4700,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteRaw with buffer = null")
                             {
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4710,8 +4710,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteRaw with valid surrogate pair")
                             {
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4722,8 +4722,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4732,8 +4732,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Index = Count = 0")
                             {
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4753,8 +4753,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4763,8 +4763,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteBase64 with count < 0")
                             {
                                 Id = 30,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4775,8 +4775,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 40,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4785,8 +4785,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteBase64 with index < 0")
                             {
                                 Id = 50,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4797,8 +4797,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 60,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4807,8 +4807,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteBase64 with buffer = null")
                             {
                                 Id = 70,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4820,8 +4820,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "ns",
                                 Id = 92,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4833,8 +4833,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "lang",
                                 Id = 90,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4846,8 +4846,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "space",
                                 Id = 91,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -4867,8 +4867,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4879,8 +4879,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4891,8 +4891,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4903,8 +4903,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4915,8 +4915,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4927,8 +4927,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4940,8 +4940,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteNmToken",
                                 Id = 25,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4953,8 +4953,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteBinHex",
                                 Id = 23,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4966,8 +4966,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "LookupPrefix",
                                 Id = 24,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4979,8 +4979,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteComment",
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -4992,8 +4992,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteWhitespace",
                                 Id = 18,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5005,8 +5005,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WritePI",
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5018,8 +5018,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteName",
                                 Id = 26,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5031,8 +5031,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteString",
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5044,8 +5044,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteQualifiedName",
                                 Id = 27,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5057,8 +5057,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteValue",
                                 Id = 28,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5070,8 +5070,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteAttributes",
                                 Id = 29,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5083,8 +5083,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteNodeReader",
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5096,8 +5096,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Flush",
                                 Id = 32,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5109,8 +5109,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteRaw",
                                 Id = 21,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5122,8 +5122,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteSurrogateCharEntity",
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5135,8 +5135,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteEntityRef",
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5148,8 +5148,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteCharEntity",
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5161,8 +5161,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteBase64",
                                 Id = 22,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5174,8 +5174,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteChars",
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5187,8 +5187,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteStartDocument",
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5200,8 +5200,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteStartElement",
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5213,8 +5213,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteEndElement",
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5226,8 +5226,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteStartAttribute",
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5239,8 +5239,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteEndAttribute",
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5252,8 +5252,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteCData",
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5265,8 +5265,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "XmlSpace",
                                 Id = 33,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5278,8 +5278,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "XmlSpace",
                                 Id = 34,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5289,8 +5289,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteValue",
                                 Id = 27,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5300,8 +5300,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WritePI",
                                 Id = 13,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5311,8 +5311,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteEntityRef",
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5322,8 +5322,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteCharEntity",
                                 Id = 15,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5335,8 +5335,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteSurrogateCharEntity",
                                 Id = 16,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5346,8 +5346,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteWhitespace",
                                 Id = 17,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5357,8 +5357,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteString",
                                 Id = 18,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5368,8 +5368,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteChars",
                                 Id = 19,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5379,8 +5379,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteRaw",
                                 Id = 20,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5390,8 +5390,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteBase64",
                                 Id = 21,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5401,8 +5401,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteBinHex",
                                 Id = 22,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5412,8 +5412,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "LookupPrefix",
                                 Id = 23,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5423,8 +5423,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteNmToken",
                                 Id = 24,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5434,8 +5434,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteName",
                                 Id = 25,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5447,8 +5447,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteQualifiedName",
                                 Id = 26,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5460,8 +5460,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteStartDocument",
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5471,8 +5471,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteAttributes",
                                 Id = 28,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5484,8 +5484,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteNodeReader",
                                 Id = 30,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5495,8 +5495,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Flush",
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5508,8 +5508,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteStartElement",
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5519,8 +5519,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteEndElement",
                                 Id = 8,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5532,8 +5532,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteStartAttribute",
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5545,8 +5545,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteEndAttribute",
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5556,8 +5556,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteCData",
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5567,8 +5567,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteComment",
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -5588,8 +5588,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5600,8 +5600,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5612,8 +5612,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5624,8 +5624,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5636,8 +5636,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -5657,8 +5657,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5669,8 +5669,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -5690,8 +5690,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5702,8 +5702,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5714,8 +5714,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5726,8 +5726,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -5747,8 +5747,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5760,8 +5760,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5773,8 +5773,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 2,
                                 Id = 4,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5786,8 +5786,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5799,8 +5799,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 15,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5812,8 +5812,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 14,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5825,8 +5825,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 2,
                                 Id = 16,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5838,8 +5838,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 17,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5851,8 +5851,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 18,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5864,8 +5864,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 2,
                                 Id = 22,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5877,8 +5877,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 20,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5890,8 +5890,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 21,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5903,8 +5903,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 23,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5916,8 +5916,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 24,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5929,8 +5929,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 27,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5942,8 +5942,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 26,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5955,8 +5955,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 2,
                                 Id = 31,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5968,8 +5968,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 0,
                                 Id = 30,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5981,8 +5981,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = 1,
                                 Id = 29,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -5994,8 +5994,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "\r", "  " },
                                 Id = 33,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6007,8 +6007,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.None, "\r", "  " },
                                 Id = 34,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6020,8 +6020,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "&#xA;", "  " },
                                 Id = 35,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6033,8 +6033,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.None, "\r", "\n" },
                                 Id = 40,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6046,8 +6046,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "\r", "  " },
                                 Id = 32,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6059,8 +6059,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "&#xA;", "  " },
                                 Id = 36,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6072,8 +6072,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.None, "&#xA;", "  " },
                                 Id = 37,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6085,8 +6085,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "\r", "\n" },
                                 Id = 38,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6098,8 +6098,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "\r", "\n" },
                                 Id = 39,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6111,8 +6111,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "\r" },
                                 Id = 53,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6124,8 +6124,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "\r\n" },
                                 Id = 51,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6137,8 +6137,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "\r" },
                                 Id = 54,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6150,8 +6150,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "---" },
                                 Id = 55,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6163,8 +6163,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "---" },
                                 Id = 54,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6176,8 +6176,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "\r\n" },
                                 Id = 50,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6189,8 +6189,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.None, "\r\n" },
                                 Id = 58,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6202,8 +6202,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.None, "\r" },
                                 Id = 61,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6215,8 +6215,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "\r" },
                                 Id = 60,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6228,8 +6228,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "\r" },
                                 Id = 59,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6241,8 +6241,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Entitize, "\r\n" },
                                 Id = 56,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6254,8 +6254,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { NewLineHandling.Replace, "\r\n" },
                                 Id = 57,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -6272,8 +6272,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("LookupPrefix(null)")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6282,8 +6282,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteAttributes(null, false)")
                             {
                                 Param = false,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6292,8 +6292,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteAttributes(null, true)")
                             {
                                 Param = true,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6302,8 +6302,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteAttributeString(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6312,20 +6312,26 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteAttributeString(String.Empty)")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(var_4)
                         {
-                            Attribute = new VariationAttribute("WriteBase64(null)") { Priority = 2 }
+                            Attribute = new VariationAttribute("WriteBase64(null)")
+                            {
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(var_5)
                         {
-                            Attribute = new VariationAttribute("WriteBinHex(null)") { Priority = 2 }
+                            Attribute = new VariationAttribute("WriteBinHex(null)")
+                            {
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6334,8 +6340,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteCData('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6344,20 +6350,20 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteCData(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(var_7)
                         {
-                            Attribute = new VariationAttribute("WriteChars(null)") { Priority = 2 }
+                            Attribute = new VariationAttribute("WriteChars(null)") { Priority = 2 },
                         }
                     );
                     this.AddChild(
                         new TestVariation(var_8)
                         {
-                            Attribute = new VariationAttribute("Other APIs") { Priority = 2 }
+                            Attribute = new VariationAttribute("Other APIs") { Priority = 2 },
                         }
                     );
                     this.AddChild(
@@ -6366,8 +6372,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteDocType(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6376,8 +6382,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteDocType('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6386,8 +6392,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteElementString(String.Empty)")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6396,8 +6402,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteElementString(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6405,8 +6411,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("WriteEndAttribute()")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6414,14 +6420,17 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("WriteEndDocument()")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(var_13)
                         {
-                            Attribute = new VariationAttribute("WriteEndElement()") { Priority = 2 }
+                            Attribute = new VariationAttribute("WriteEndElement()")
+                            {
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6430,8 +6439,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteEntityRef(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6440,8 +6449,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteEntityRef('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6449,8 +6458,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("WriteFullEndElement()")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6459,8 +6468,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteName('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6469,8 +6478,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteName(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6479,8 +6488,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNmToken('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6489,8 +6498,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNmToken(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6499,8 +6508,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNode(null)")
                             {
                                 Params = new object[] { "reader", true },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6509,8 +6518,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteNode(null)")
                             {
                                 Params = new object[] { "reader", false },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6519,8 +6528,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteProcessingInstruction('', '')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6531,8 +6540,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6541,8 +6550,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteQualifiedName('', '')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6551,8 +6560,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteQualifiedName(null, null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6560,8 +6569,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("WriteRaw(null, 0, 0)")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6570,8 +6579,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartAttribute(null, null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6580,8 +6589,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartAttribute('', '')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6590,8 +6599,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartElement(null, null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6600,8 +6609,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartElement('', '')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6610,8 +6619,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartDocument(true)")
                             {
                                 Param = 2,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6620,8 +6629,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartDocument()")
                             {
                                 Param = 1,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6630,8 +6639,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteStartDocument(false)")
                             {
                                 Param = 3,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6640,8 +6649,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteString(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6650,8 +6659,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteString('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6660,8 +6669,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(false)")
                             {
                                 Param = false,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6670,8 +6679,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteValue(true)")
                             {
                                 Param = true,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6680,8 +6689,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteWhitespace('')")
                             {
                                 Param = "",
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6690,8 +6699,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("WriteWhitespace(null)")
                             {
                                 Param = null,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6701,8 +6710,8 @@ namespace CoreXml.Test.XLinq
                                 "EntityRef after Document should error - PROLOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6712,8 +6721,8 @@ namespace CoreXml.Test.XLinq
                                 "EntityRef after Document should error - EPILOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6723,8 +6732,8 @@ namespace CoreXml.Test.XLinq
                                 "CharEntity after Document should error - PROLOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6734,8 +6743,8 @@ namespace CoreXml.Test.XLinq
                                 "CharEntity after Document should error - EPILOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6745,8 +6754,8 @@ namespace CoreXml.Test.XLinq
                                 "SurrogateCharEntity after Document should error - PROLOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6756,8 +6765,8 @@ namespace CoreXml.Test.XLinq
                                 "SurrogateCharEntity after Document should error - EPILOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6767,8 +6776,8 @@ namespace CoreXml.Test.XLinq
                                 "Attribute after Document should error - PROLOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6778,8 +6787,8 @@ namespace CoreXml.Test.XLinq
                                 "Attribute after Document should error - EPILOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6789,8 +6798,8 @@ namespace CoreXml.Test.XLinq
                                 "CDATA after Document should error - PROLOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6800,8 +6809,8 @@ namespace CoreXml.Test.XLinq
                                 "CDATA after Document should error - EPILOG"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6811,8 +6820,8 @@ namespace CoreXml.Test.XLinq
                                 "Element followed by Document should error"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6822,20 +6831,20 @@ namespace CoreXml.Test.XLinq
                                 "Element followed by DocType should error"
                             )
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(Variation41)
                         {
-                            Attribute = new VariationAttribute("WriteBase64")
+                            Attribute = new VariationAttribute("WriteBase64"),
                         }
                     );
                     this.AddChild(
                         new TestVariation(Variation42)
                         {
-                            Attribute = new VariationAttribute("WriteEntityRef")
+                            Attribute = new VariationAttribute("WriteEntityRef"),
                         }
                     );
                 }
@@ -6854,10 +6863,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>",
                                 },
-                                Priority = 3
-                            }
+                                Priority = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6867,10 +6876,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:xml='http://www.w3.org/XML/1998/namespace' xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:xml='http://www.w3.org/XML/1998/namespace' xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>",
                                 },
-                                Priority = 3
-                            }
+                                Priority = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6880,10 +6889,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></p:A>"
+                                    "<p:A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></p:A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6893,10 +6902,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><B><C xmlns:p='nsp'/></B></p:A>"
+                                    "<p:A xmlns:p='nsp'><B><C xmlns:p='nsp'/></B></p:A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6906,10 +6915,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></A>"
+                                    "<A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6919,10 +6928,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'/><C xmlns:p='nsp'/><p:C xmlns:p='nsp'/></A>"
+                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'/><C xmlns:p='nsp'/><p:C xmlns:p='nsp'/></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6932,10 +6941,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'><C xmlns:p='nsp'><p:C xmlns:p='nsp'/></C></p:B></A>"
+                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'><C xmlns:p='nsp'><p:C xmlns:p='nsp'/></C></p:B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6945,10 +6954,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:xml='http://www.w3.org/XML/1998/namespace'/>"
+                                    "<A xmlns:xml='http://www.w3.org/XML/1998/namespace'/>",
                                 },
-                                Priority = 3
-                            }
+                                Priority = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6958,10 +6967,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></p:A>",
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6971,10 +6980,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></A>"
+                                    "<A><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></A>",
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6984,10 +6993,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns='nsp' xmlns:u='not-used'><p:B xmlns:p='nsp'><C xmlns:u='not-used' xmlns='nsp' /></p:B></A>"
+                                    "<A xmlns='nsp' xmlns:u='not-used'><p:B xmlns:p='nsp'><C xmlns:u='not-used' xmlns='nsp' /></p:B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -6997,10 +7006,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><B xmlns:q='nsp'><p:C xmlns:p='nsp'/></B></p:A>"
+                                    "<p:A xmlns:p='nsp'><B xmlns:q='nsp'><p:C xmlns:p='nsp'/></B></p:A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7010,10 +7019,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns='nsp'><p:B xmlns:p='nsp'><C xmlns='nsp' /></p:B></A>"
+                                    "<A xmlns='nsp'><p:B xmlns:p='nsp'><C xmlns='nsp' /></p:B></A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7021,8 +7030,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Default ns parent autogenerated")
                             {
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7035,10 +7044,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<A xmlns='nsp'><B xmlns=''><C xmlns='nsp'><D xmlns='nsp'/></C></B></A>",
-                                    "<A xmlns='nsp'><B xmlns=''><C xmlns='nsp'><D/></C></B></A>"
+                                    "<A xmlns='nsp'><B xmlns=''><C xmlns='nsp'><D/></C></B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7049,10 +7058,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<p:A xmlns:p='nsp'><p:B xmlns:p='ns-other'><p:C xmlns:p='nsp'><D xmlns:p='nsp'/></p:C></p:B></p:A>",
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='ns-other'><p:C xmlns:p='nsp'><D/></p:C></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='ns-other'><p:C xmlns:p='nsp'><D/></p:C></p:B></p:A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7065,10 +7074,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<A xmlns='nsp'><B xmlns='ns-other'><C xmlns='nsp'><D xmlns='nsp'/></C></B></A>",
-                                    "<A xmlns='nsp'><B xmlns='ns-other'><C xmlns='nsp'><D/></C></B></A>"
+                                    "<A xmlns='nsp'><B xmlns='ns-other'><C xmlns='nsp'><D/></C></B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7081,22 +7090,25 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<A xmlns=''><B xmlns='ns-other'><C xmlns=''><D xmlns=''/></C></B></A>",
-                                    "<A><B xmlns='ns-other'><C xmlns=''><D/></C></B></A>"
+                                    "<A><B xmlns='ns-other'><C xmlns=''><D/></C></B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(testFromChildNode1)
                         {
-                            Attribute = new VariationAttribute("Not from root") { Priority = 1 }
+                            Attribute = new VariationAttribute("Not from root") { Priority = 1 },
                         }
                     );
                     this.AddChild(
                         new TestVariation(testFromChildNode2)
                         {
-                            Attribute = new VariationAttribute("Not from root II.") { Priority = 1 }
+                            Attribute = new VariationAttribute("Not from root II.")
+                            {
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7104,14 +7116,17 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Not from root III.")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(testFromChildNode4)
                         {
-                            Attribute = new VariationAttribute("Not from root IV.") { Priority = 2 }
+                            Attribute = new VariationAttribute("Not from root IV.")
+                            {
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7122,10 +7137,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<p1:A xmlns:p1='nsp'><B xmlns:p1='nsp'/></p1:A>",
-                                    "<p1:root xmlns:p1='nsp'><p1:A><B/></p1:A></p1:root>"
+                                    "<p1:root xmlns:p1='nsp'><p1:A><B/></p1:A></p1:root>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7136,10 +7151,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<A xmlns:p1='nsp'/>",
-                                    "<p1:root xmlns:p1='nsp'><A/></p1:root>"
+                                    "<p1:root xmlns:p1='nsp'><A/></p1:root>",
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7150,10 +7165,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<p1:A xmlns:p1='nsp'/>",
-                                    "<p1:root xmlns:p1='nsp'><p1:A/></p1:root>"
+                                    "<p1:root xmlns:p1='nsp'><p1:A/></p1:root>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7166,10 +7181,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<A xmlns='nsp'/>",
-                                    "<root xmlns='nsp'><A/></root>"
+                                    "<root xmlns='nsp'><A/></root>",
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7182,10 +7197,10 @@ namespace CoreXml.Test.XLinq
                                 Params = new object[]
                                 {
                                     "<A xmlns='ns-other'><B xmlns='nsp'><C xmlns='nsp'/></B></A>",
-                                    "<root xmlns='nsp'><A xmlns='ns-other'><B xmlns='nsp'><C/></B></A></root>"
+                                    "<root xmlns='nsp'><A xmlns='ns-other'><B xmlns='nsp'><C/></B></A></root>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7197,10 +7212,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p1:root xmlns:p1='nsp'><p2:B xmlns:p2='nsp'/></p1:root>"
+                                    "<p1:root xmlns:p1='nsp'><p2:B xmlns:p2='nsp'/></p1:root>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7212,10 +7227,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p1:root xmlns:p1='nsp'><p1:B /></p1:root>"
+                                    "<p1:root xmlns:p1='nsp'><p1:B /></p1:root>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                 }
@@ -7233,8 +7248,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("No annotation - element")
                             {
                                 Params = new object[] { typeof(XElement), "Simple.xml" },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7243,8 +7258,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("No annotation - document")
                             {
                                 Params = new object[] { typeof(XDocument), "Simple.xml" },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7258,10 +7273,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XDocument),
                                     "Simple.xml",
-                                    SaveOptions.DisableFormatting
+                                    SaveOptions.DisableFormatting,
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7275,10 +7290,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XElement),
                                     "Simple.xml",
-                                    SaveOptions.None
+                                    SaveOptions.None,
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7292,10 +7307,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XElement),
                                     "Simple.xml",
-                                    SaveOptions.DisableFormatting
+                                    SaveOptions.DisableFormatting,
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7309,10 +7324,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XDocument),
                                     "Simple.xml",
-                                    SaveOptions.None
+                                    SaveOptions.None,
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7327,10 +7342,10 @@ namespace CoreXml.Test.XLinq
                                     typeof(XDocument),
                                     "Simple.xml",
                                     SaveOptions.OmitDuplicateNamespaces
-                                        | SaveOptions.DisableFormatting
+                                        | SaveOptions.DisableFormatting,
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7345,10 +7360,10 @@ namespace CoreXml.Test.XLinq
                                     typeof(XElement),
                                     "Simple.xml",
                                     SaveOptions.OmitDuplicateNamespaces
-                                        | SaveOptions.DisableFormatting
+                                        | SaveOptions.DisableFormatting,
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7360,10 +7375,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XElement),
                                     "Simple.xml",
-                                    SaveOptions.OmitDuplicateNamespaces
+                                    SaveOptions.OmitDuplicateNamespaces,
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7375,10 +7390,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XDocument),
                                     "Simple.xml",
-                                    SaveOptions.OmitDuplicateNamespaces
+                                    SaveOptions.OmitDuplicateNamespaces,
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7389,8 +7404,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Params = new object[] { typeof(XDocument), "simple.xml" },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7401,8 +7416,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Params = new object[] { typeof(XElement), "simple.xml" },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7413,8 +7428,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = typeof(XDocument),
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7425,8 +7440,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = typeof(XElement),
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7437,8 +7452,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = typeof(XDocument),
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7449,8 +7464,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = typeof(XElement),
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7461,8 +7476,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = typeof(XElement),
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7473,8 +7488,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Param = typeof(XDocument),
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7483,8 +7498,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("On other node types - attributes")
                             {
                                 Param = typeof(XElement),
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7492,8 +7507,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Simulate the VB behavior - Save")
                             {
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7501,8 +7516,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Simulate the VB behavior - Reader")
                             {
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7510,8 +7525,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Local settings override annotation")
                             {
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7523,10 +7538,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XElement),
                                     "simple.xml",
-                                    ReaderOptions.None
+                                    ReaderOptions.None,
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7540,10 +7555,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XElement),
                                     "simple.xml",
-                                    ReaderOptions.OmitDuplicateNamespaces
+                                    ReaderOptions.OmitDuplicateNamespaces,
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7555,10 +7570,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XDocument),
                                     "simple.xml",
-                                    ReaderOptions.None
+                                    ReaderOptions.None,
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7572,10 +7587,10 @@ namespace CoreXml.Test.XLinq
                                 {
                                     typeof(XDocument),
                                     "simple.xml",
-                                    ReaderOptions.OmitDuplicateNamespaces
+                                    ReaderOptions.OmitDuplicateNamespaces,
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                 }
@@ -7594,10 +7609,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></p:A>"
+                                    "<p:A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></p:A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7607,10 +7622,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></A>"
+                                    "<A xmlns:p='nsp'><B><p:C xmlns:p='nsp'/></B></A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7620,10 +7635,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'/><C xmlns:p='nsp'/><p:C xmlns:p='nsp'/></A>"
+                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'/><C xmlns:p='nsp'/><p:C xmlns:p='nsp'/></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7633,10 +7648,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>",
                                 },
-                                Priority = 3
-                            }
+                                Priority = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7646,10 +7661,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></A>"
+                                    "<A><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></A>",
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7659,10 +7674,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><B><C xmlns:p='nsp'/></B></p:A>"
+                                    "<p:A xmlns:p='nsp'><B><C xmlns:p='nsp'/></B></p:A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7672,10 +7687,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'><C xmlns:p='nsp'><p:C xmlns:p='nsp'/></C></p:B></A>"
+                                    "<A xmlns:p='nsp'><p:B xmlns:p='nsp'><C xmlns:p='nsp'><p:C xmlns:p='nsp'/></C></p:B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7685,10 +7700,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns:xml='http://www.w3.org/XML/1998/namespace'/>"
+                                    "<A xmlns:xml='http://www.w3.org/XML/1998/namespace'/>",
                                 },
-                                Priority = 3
-                            }
+                                Priority = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7698,10 +7713,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:p='nsp'><p:C xmlns:p='nsp'/></p:B></p:A>",
                                 },
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7711,10 +7726,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><p:B xmlns:xml='http://www.w3.org/XML/1998/namespace' xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>"
+                                    "<p:A xmlns:p='nsp'><p:B xmlns:xml='http://www.w3.org/XML/1998/namespace' xmlns:p='nsp'><p:C xmlns:p='nsp' xmlns:xml='http://www.w3.org/XML/1998/namespace'/></p:B></p:A>",
                                 },
-                                Priority = 3
-                            }
+                                Priority = 3,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7724,10 +7739,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns='nsp'><p:B xmlns:p='nsp'><C xmlns='nsp' /></p:B></A>"
+                                    "<A xmlns='nsp'><p:B xmlns:p='nsp'><C xmlns='nsp' /></p:B></A>",
                                 },
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7737,10 +7752,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<A xmlns='nsp' xmlns:u='not-used'><p:B xmlns:p='nsp'><C xmlns:u='not-used' xmlns='nsp' /></p:B></A>"
+                                    "<A xmlns='nsp' xmlns:u='not-used'><p:B xmlns:p='nsp'><C xmlns:u='not-used' xmlns='nsp' /></p:B></A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7750,10 +7765,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[]
                                 {
-                                    "<p:A xmlns:p='nsp'><B xmlns:q='nsp'><p:C xmlns:p='nsp'/></B></p:A>"
+                                    "<p:A xmlns:p='nsp'><B xmlns:q='nsp'><p:C xmlns:p='nsp'/></B></p:A>",
                                 },
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7761,20 +7776,23 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Default ns parent autogenerated")
                             {
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(testFromChildNode1)
                         {
-                            Attribute = new VariationAttribute("Not from root") { Priority = 1 }
+                            Attribute = new VariationAttribute("Not from root") { Priority = 1 },
                         }
                     );
                     this.AddChild(
                         new TestVariation(testFromChildNode2)
                         {
-                            Attribute = new VariationAttribute("Not from root II.") { Priority = 1 }
+                            Attribute = new VariationAttribute("Not from root II.")
+                            {
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7782,14 +7800,17 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("Not from root III.")
                             {
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
                         new TestVariation(testFromChildNode4)
                         {
-                            Attribute = new VariationAttribute("Not from root IV.") { Priority = 2 }
+                            Attribute = new VariationAttribute("Not from root IV.")
+                            {
+                                Priority = 2,
+                            },
                         }
                     );
                 }
@@ -7806,8 +7827,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("XDocument: Settings before Close()")
                             {
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7815,8 +7836,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("XElement: Settings before Close()")
                             {
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7824,8 +7845,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("XDocument: Settings after Close()")
                             {
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7833,8 +7854,8 @@ namespace CoreXml.Test.XLinq
                         {
                             Attribute = new VariationAttribute("XElement: Settings after Close()")
                             {
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -7855,8 +7876,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "EntityRef",
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7868,8 +7889,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Whitespace",
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7881,8 +7902,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WriteDocTypeName",
                                 Id = 4,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7894,8 +7915,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "SurrogateCharEntity",
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7907,8 +7928,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "EntityRef", true },
                                 Id = 46,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7920,8 +7941,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "Surrogate", false },
                                 Id = 41,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7933,8 +7954,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "QName", true },
                                 Id = 47,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7946,8 +7967,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "Surrogate", true },
                                 Id = 45,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7959,8 +7980,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "Whitespace", false },
                                 Id = 40,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7972,8 +7993,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "EntityRef", false },
                                 Id = 42,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7985,8 +8006,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "QName", false },
                                 Id = 43,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -7998,8 +8019,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Params = new object[] { "Whitespace", true },
                                 Id = 44,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -8019,8 +8040,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 7,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8031,8 +8052,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8043,8 +8064,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 9,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8055,8 +8076,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 10,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8067,8 +8088,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 11,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8079,8 +8100,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 12,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8090,8 +8111,8 @@ namespace CoreXml.Test.XLinq
                                 "Factory-created writers do not entitize 0xD character in text content when NewLineHandling=Entitize"
                             )
                             {
-                                Id = 13
-                            }
+                                Id = 13,
+                            },
                         }
                     );
                 }
@@ -8109,8 +8130,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Simple test when false")
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8119,8 +8140,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Simple test when true")
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8131,8 +8152,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8143,8 +8164,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8155,8 +8176,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 6,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8165,8 +8186,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Indent = true, mixed content")
                             {
                                 Id = 7,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8177,8 +8198,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 8,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                 }
@@ -8198,8 +8219,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8208,8 +8229,8 @@ namespace CoreXml.Test.XLinq
                             Attribute = new VariationAttribute("Attributes of nested elements")
                             {
                                 Id = 3,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -8229,8 +8250,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8241,8 +8262,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                 }
@@ -8262,8 +8283,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8274,8 +8295,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 2,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                 }
@@ -8295,8 +8316,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 1,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8308,8 +8329,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "true",
                                 Id = 2,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8321,8 +8342,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "false",
                                 Id = 3,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8333,8 +8354,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 4,
-                                Priority = 0
-                            }
+                                Priority = 0,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8345,8 +8366,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 5,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8358,8 +8379,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "CData",
                                 Id = 7,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8371,8 +8392,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "CharEntity",
                                 Id = 9,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8384,8 +8405,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "SurrogateCharEntity",
                                 Id = 10,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8397,8 +8418,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "String",
                                 Id = 6,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8410,8 +8431,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Raw",
                                 Id = 12,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8423,8 +8444,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "BinHex",
                                 Id = 14,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8436,8 +8457,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Chars",
                                 Id = 11,
-                                Priority = 1
-                            }
+                                Priority = 1,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8449,8 +8470,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "PI",
                                 Id = 15,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8462,8 +8483,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WS",
                                 Id = 17,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8475,8 +8496,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Comment",
                                 Id = 16,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8488,8 +8509,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "Comment",
                                 Id = 19,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8501,8 +8522,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "WS",
                                 Id = 20,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8514,8 +8535,8 @@ namespace CoreXml.Test.XLinq
                             {
                                 Param = "PI",
                                 Id = 18,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8526,8 +8547,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 21,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                     this.AddChild(
@@ -8538,8 +8559,8 @@ namespace CoreXml.Test.XLinq
                             )
                             {
                                 Id = 22,
-                                Priority = 2
-                            }
+                                Priority = 2,
+                            },
                         }
                     );
                 }

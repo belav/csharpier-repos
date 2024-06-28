@@ -64,7 +64,7 @@ namespace System.ServiceModel.Security.Tokens
             (byte)'t',
             (byte)'i',
             (byte)'o',
-            (byte)'n'
+            (byte)'n',
         };
 
         public const int DefaultNonceLength = 16;

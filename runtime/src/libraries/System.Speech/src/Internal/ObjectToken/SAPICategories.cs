@@ -120,7 +120,7 @@ namespace System.Speech.Internal.ObjectTokens
                                     CultureInfo.InvariantCulture,
                                     "{0:x}",
                                     CultureInfo.CurrentUICulture.LCID
-                                )
+                                ),
                             };
 
                             foreach (

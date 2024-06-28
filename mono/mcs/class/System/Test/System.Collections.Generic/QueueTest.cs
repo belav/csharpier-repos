@@ -675,7 +675,7 @@ namespace MonoTests.System.Collections.Generic
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
     }
 }

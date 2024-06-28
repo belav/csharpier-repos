@@ -10,12 +10,12 @@ class T
 {
     enum OpCode : ushort
     {
-        False
+        False,
     }
 
     enum OpFlags : ushort
     {
-        None
+        None,
     }
 
     static void DecodeOp(ushort word, out OpCode op, out OpFlags flags)

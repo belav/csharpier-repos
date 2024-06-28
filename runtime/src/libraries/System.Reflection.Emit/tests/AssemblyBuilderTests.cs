@@ -195,7 +195,7 @@ namespace System.Reflection.Emit.Tests
             0x4d,
             0x5a,
             0xd2,
-            0x93
+            0x93,
         };
 
         public static IEnumerable<object[]> DefineDynamicAssembly_TestData()
@@ -204,34 +204,34 @@ namespace System.Reflection.Emit.Tests
                 AssemblyBuilderAccess access in new AssemblyBuilderAccess[]
                 {
                     AssemblyBuilderAccess.Run,
-                    AssemblyBuilderAccess.RunAndCollect
+                    AssemblyBuilderAccess.RunAndCollect,
                 }
             )
             {
                 yield return new object[]
                 {
                     new AssemblyName("TestName") { Version = new Version(0, 0, 0, 0) },
-                    access
+                    access,
                 };
                 yield return new object[]
                 {
                     new AssemblyName("testname") { Version = new Version(1, 2, 3, 4) },
-                    access
+                    access,
                 };
                 yield return new object[]
                 {
                     new AssemblyName("class") { Version = new Version(0, 0, 0, 0) },
-                    access
+                    access,
                 };
                 yield return new object[]
                 {
                     new AssemblyName("\uD800\uDC00") { Version = new Version(0, 0, 0, 0) },
-                    access
+                    access,
                 };
 
                 AssemblyName testPublicKey = new AssemblyName("TestPublicKey")
                 {
-                    Version = new Version(0, 0, 0, 0)
+                    Version = new Version(0, 0, 0, 0),
                 };
                 testPublicKey.CultureInfo = CultureInfo.InvariantCulture;
                 testPublicKey.SetPublicKey(TheKey);
@@ -266,8 +266,8 @@ namespace System.Reflection.Emit.Tests
                     data[1],
                     new CustomAttributeBuilder[]
                     {
-                        new CustomAttributeBuilder(constructor, new object[] { 10 })
-                    }
+                        new CustomAttributeBuilder(constructor, new object[] { 10 }),
+                    },
                 };
             }
         }
@@ -683,7 +683,7 @@ namespace System.Reflection.Emit.Tests
             {
                 assembly,
                 Helpers.DynamicAssembly("Name1", access: AssemblyBuilderAccess.RunAndCollect),
-                false
+                false,
             };
 
             yield return new object[] { assembly, new object(), false };

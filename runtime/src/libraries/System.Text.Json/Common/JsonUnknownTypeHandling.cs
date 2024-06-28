@@ -16,6 +16,6 @@ namespace System.Text.Json.Serialization
         /// <summary>
         /// A type declared as <see cref="object"/> is deserialized as a <see cref="JsonNode"/>.
         /// </summary>
-        JsonNode = 1
+        JsonNode = 1,
     }
 }

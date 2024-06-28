@@ -42,17 +42,17 @@ namespace System.Linq.Parallel.Tests
                 yield return new object[]
                 {
                     Labeled.Label("Array", source.AsParallel().AsOrdered()),
-                    count
+                    count,
                 };
                 yield return new object[]
                 {
                     Labeled.Label("List", source.ToList().AsParallel().AsOrdered()),
-                    count
+                    count,
                 };
                 yield return new object[]
                 {
                     Labeled.Label("Enumerable", source.AsEnumerable().AsParallel().AsOrdered()),
-                    count
+                    count,
                 };
             }
         }

@@ -50,9 +50,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                         [
                             LspProtocol.MarkupKind.PlainText,
                             LspProtocol.MarkupKind.Markdown,
-                        ]
-                    }
-                }
+                        ],
+                    },
+                },
             };
 
         private readonly ILsifJsonWriter _lsifJsonWriter;
@@ -141,9 +141,9 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 {
                     QuickInfoOptions = options.SymbolDescriptionOptions.QuickInfoOptions with
                     {
-                        IncludeNavigationHintsInQuickInfo = false
-                    }
-                }
+                        IncludeNavigationHintsInQuickInfo = false,
+                    },
+                },
             };
 
             var documents = (

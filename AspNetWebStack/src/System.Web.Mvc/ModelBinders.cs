@@ -61,7 +61,7 @@ namespace System.Web.Mvc
                 { typeof(HttpPostedFileBase), new HttpPostedFileBaseModelBinder() },
                 { typeof(byte[]), new ByteArrayModelBinder() },
                 { typeof(Binary), new LinqBinaryModelBinder() },
-                { typeof(CancellationToken), new CancellationTokenModelBinder() }
+                { typeof(CancellationToken), new CancellationTokenModelBinder() },
             };
             return binders;
         }

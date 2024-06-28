@@ -395,7 +395,7 @@ namespace MonoTests.Mono.Security.X509
                 0x31,
                 0x32,
                 0x31,
-                0x32
+                0x32,
             };
             ASN1 asn = new ASN1(sn);
             Assert.AreEqual(
@@ -495,7 +495,7 @@ namespace MonoTests.Mono.Security.X509
                 0x00,
                 0x74,
                 0x00,
-                0x79
+                0x79,
             };
             ASN1 asn = new ASN1(sn);
             Assert.AreEqual(

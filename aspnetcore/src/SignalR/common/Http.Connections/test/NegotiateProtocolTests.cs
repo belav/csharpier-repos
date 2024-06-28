@@ -243,7 +243,7 @@ public class NegotiateProtocolTests
             NegotiateProtocol.WriteResponse(
                 new NegotiationResponse
                 {
-                    AvailableTransports = new List<AvailableTransport> { new AvailableTransport() }
+                    AvailableTransports = new List<AvailableTransport> { new AvailableTransport() },
                 },
                 writer
             );

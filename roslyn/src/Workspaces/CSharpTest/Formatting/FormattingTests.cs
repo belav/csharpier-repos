@@ -1077,7 +1077,7 @@ class D
                 {
                     CSharpFormattingOptions2.SpacingAroundBinaryOperator,
                     BinaryOperatorSpacingOptions.Remove
-                }
+                },
             };
             await AssertFormatAsync(
                 @"class Class2
@@ -1123,7 +1123,7 @@ class D
                         false
                     )
                 },
-                { LabelPositioning, LabelPositionOptions.LeftMost }
+                { LabelPositioning, LabelPositionOptions.LeftMost },
             };
 
             await AssertFormatAsync(
@@ -1160,7 +1160,7 @@ class D
                 { IndentSwitchSection, false },
                 { IndentSwitchCaseSection, false },
                 { IndentSwitchCaseSectionWhenBlock, false },
-                { LabelPositioning, LabelPositionOptions.LeftMost }
+                { LabelPositioning, LabelPositionOptions.LeftMost },
             };
 
             await AssertFormatAsync(
@@ -1620,7 +1620,7 @@ l:
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.WrappingPreserveSingleLine, false }
+                { CSharpFormattingOptions2.WrappingPreserveSingleLine, false },
             };
             await AssertFormatAsync(
                 @"class Class5
@@ -1696,7 +1696,7 @@ class goo{int x = 0;}",
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false }
+                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false },
             };
             await AssertFormatAsync(
                 @"class Class5
@@ -1769,7 +1769,7 @@ class goo
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpFormattingOptions2.WrappingPreserveSingleLine, false },
-                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false }
+                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false },
             };
             await AssertFormatAsync(
                 @"class Class5
@@ -1855,7 +1855,7 @@ class goo{int x = 0;}",
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false }
+                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false },
             };
             await AssertFormatAsync(
                 @"class Program
@@ -2023,7 +2023,7 @@ public class goo : System.Object
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { NewLineBeforeOpenBrace, NewLineBeforeOpenBracePlacement.None }
+                { NewLineBeforeOpenBrace, NewLineBeforeOpenBracePlacement.None },
             };
             await AssertFormatAsync(
                 @"class f00 {
@@ -2216,7 +2216,7 @@ if (a > b)
             {
                 { CSharpFormattingOptions2.NewLineForElse, false },
                 { CSharpFormattingOptions2.NewLineForCatch, false },
-                { CSharpFormattingOptions2.NewLineForFinally, false }
+                { CSharpFormattingOptions2.NewLineForFinally, false },
             };
             await AssertFormatAsync(
                 @"class c
@@ -2291,7 +2291,7 @@ else
                         NewLineBeforeOpenBracePlacement.ControlBlocks,
                         false
                     )
-                }
+                },
             };
 
             await AssertFormatAsync(
@@ -2399,7 +2399,7 @@ MyObject obj = new MyObject {       X1 = 0,        Y1 = 1, X2 = 2,       Y2 = 3 
             {
                 { CSharpFormattingOptions2.NewLineForMembersInObjectInit, false },
                 { CSharpFormattingOptions2.NewLineForMembersInAnonymousTypes, false },
-                { CSharpFormattingOptions2.NewLineForClausesInQuery, false }
+                { CSharpFormattingOptions2.NewLineForClausesInQuery, false },
             };
             await AssertFormatAsync(
                 @"class f00
@@ -5114,7 +5114,7 @@ class innerClass
                                         SyntaxFactory.ParseStatement("c = value;")
                                     )
                                 )
-                            )
+                            ),
                         }
                     )
                 )
@@ -5724,7 +5724,7 @@ _ = this is  C( 1 , 2 ){}  ; }
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceAfterMethodCallName, true }
+                { CSharpFormattingOptions2.SpaceAfterMethodCallName, true },
             };
             var code =
                 @"class C
@@ -5748,7 +5748,7 @@ _ = this is  C( 1 , 2 ){}  ; }
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceWithinMethodCallParentheses, true }
+                { CSharpFormattingOptions2.SpaceWithinMethodCallParentheses, true },
             };
             var code =
                 @"class C
@@ -5774,7 +5774,7 @@ _ = this is  C(  ){}  ; }
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses, true }
+                { CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses, true },
             };
             var code =
                 @"class C
@@ -6555,7 +6555,7 @@ using (null)
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.LabelPositioning, LabelPositionOptions.LeftMost }
+                { CSharpFormattingOptions2.LabelPositioning, LabelPositionOptions.LeftMost },
             };
 
             var code =
@@ -6719,7 +6719,7 @@ class C
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
 
             await AssertFormatAsync(
@@ -6936,7 +6936,7 @@ class Program
 }";
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword, false }
+                { CSharpFormattingOptions2.SpaceAfterControlFlowStatementKeyword, false },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: optionSet);
         }
@@ -6978,7 +6978,7 @@ class Program
 }";
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceAfterComma, false }
+                { CSharpFormattingOptions2.SpaceAfterComma, false },
             };
             await AssertFormatAsync(expectedAfterCommaDisabled, code, changedOptionSet: optionSet);
 
@@ -7100,7 +7100,7 @@ class C
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.NewLineForElse, false }
+                { CSharpFormattingOptions2.NewLineForElse, false },
             };
 
             var code =
@@ -7331,7 +7331,7 @@ class Program
 ";
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
 
             await AssertFormatAsync(expected, code, changedOptionSet: optionSet);
@@ -7357,7 +7357,7 @@ namespace N
 
             var options = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.WrappingPreserveSingleLine, false }
+                { CSharpFormattingOptions2.WrappingPreserveSingleLine, false },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: options);
         }
@@ -7380,7 +7380,7 @@ class C
 
             var options = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.WrappingPreserveSingleLine, false }
+                { CSharpFormattingOptions2.WrappingPreserveSingleLine, false },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: options);
         }
@@ -7411,7 +7411,7 @@ class Program
 
             var options = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false }
+                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: options);
         }
@@ -7998,7 +7998,7 @@ class Program
             var options = new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpFormattingOptions2.SpaceWithinSquareBrackets, true },
-                { CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets, false }
+                { CSharpFormattingOptions2.SpaceBetweenEmptySquareBrackets, false },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: options);
         }
@@ -8022,7 +8022,7 @@ class Program
 
             var options = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceBeforeOpenSquareBracket, true }
+                { CSharpFormattingOptions2.SpaceBeforeOpenSquareBracket, true },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: options);
         }
@@ -8046,7 +8046,7 @@ class Program
 
             var options = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpaceWithinSquareBrackets, true }
+                { CSharpFormattingOptions2.SpaceWithinSquareBrackets, true },
             };
             await AssertFormatAsync(expected, code, changedOptionSet: options);
         }
@@ -8087,7 +8087,7 @@ class Program
                         NewLineBeforeOpenBracePlacement.ControlBlocks,
                         false
                     )
-                }
+                },
             };
 
             await AssertFormatAsync(expected, code, changedOptionSet: options);
@@ -8134,7 +8134,7 @@ class Program
                         NewLineBeforeOpenBracePlacement.ControlBlocks,
                         false
                     )
-                }
+                },
             };
 
             await AssertFormatAsync(expected, code, changedOptionSet: options);
@@ -8189,7 +8189,7 @@ class Program
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true }
+                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true },
             };
             var code =
                 @"
@@ -8785,7 +8785,7 @@ class C
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
             await AssertFormatAsync(
                 @"using System;
@@ -8818,7 +8818,7 @@ class Program
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
             await AssertFormatAsync(
                 @"using System;
@@ -9024,7 +9024,7 @@ class Program
             {
                 { CSharpFormattingOptions2.SpaceAfterMethodCallName, true },
                 { CSharpFormattingOptions2.SpaceBetweenEmptyMethodCallParentheses, true },
-                { CSharpFormattingOptions2.SpaceWithinMethodCallParentheses, true }
+                { CSharpFormattingOptions2.SpaceWithinMethodCallParentheses, true },
             };
             await AssertFormatAsync(
                 @"[Obsolete ( ""Test"" ), Obsolete ( )]
@@ -9303,7 +9303,7 @@ class Program
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpacingAfterMethodDeclarationName, true }
+                { CSharpFormattingOptions2.SpacingAfterMethodDeclarationName, true },
             };
             var code =
                 @"class Program<T>
@@ -9422,7 +9422,7 @@ class Program
                         NewLineBeforeOpenBracePlacement.ControlBlocks,
                         false
                     )
-                }
+                },
             };
             var code =
                 @"class Program
@@ -9463,7 +9463,7 @@ class Program
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
 
             await AssertFormatAsync(
@@ -9490,7 +9490,7 @@ class Program
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
 
             await AssertFormatAsync(
@@ -9519,7 +9519,7 @@ class Program
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
 
             await AssertFormatAsync(
@@ -9565,7 +9565,7 @@ class Program
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
 
             await AssertFormatAsync(
@@ -10422,7 +10422,7 @@ public class Test
             var initialSpacing = spacingAfterMethodDeclarationName ? "" : " ";
             var changedOptionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { SpacingAfterMethodDeclarationName, spacingAfterMethodDeclarationName }
+                { SpacingAfterMethodDeclarationName, spacingAfterMethodDeclarationName },
             };
             await AssertFormatAsync(
                 $@"
@@ -10444,7 +10444,7 @@ public unsafe class Test
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true }
+                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true },
             };
             await AssertFormatAsync(
                 @"
@@ -10473,7 +10473,7 @@ class Program
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
                 { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true },
-                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false }
+                { CSharpFormattingOptions2.WrappingKeepStatementsOnSingleLine, false },
             };
             await AssertFormatAsync(
                 @"
@@ -10574,7 +10574,7 @@ class Program
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true }
+                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, true },
             };
             await AssertFormatAsync(
                 @"
@@ -10598,7 +10598,7 @@ enum TestEnum
         {
             var changingOptions = new OptionsCollection(LanguageNames.CSharp)
             {
-                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, false }
+                { CSharpFormattingOptions2.SpacesIgnoreAroundVariableDeclaration, false },
             };
             await AssertFormatAsync(
                 @"
@@ -11625,7 +11625,7 @@ _ = this is{Count:>0 and var x}and[ 1,2,3 ];
         {
             var optionSet = new OptionsCollection(LanguageNames.CSharp)
             {
-                { FormattingOptions2.UseTabs, true }
+                { FormattingOptions2.UseTabs, true },
             };
             await AssertFormatAsync(
                 @"class Program

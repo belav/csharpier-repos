@@ -141,11 +141,9 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression
     ///     The existing annotation if an annotation with the specified name already exists. Otherwise, <see langword="null" />.
     /// </returns>
     public virtual IAnnotation? FindAnnotation(string name) =>
-        _annotations == null
-            ? null
-            : _annotations.TryGetValue(name, out var annotation)
-                ? annotation
-                : null;
+        _annotations == null ? null
+        : _annotations.TryGetValue(name, out var annotation) ? annotation
+        : null;
 
     /// <summary>
     ///     Gets all annotations on the current object.

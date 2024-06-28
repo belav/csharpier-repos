@@ -23,7 +23,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 "0,0,0,1" => """{"Prop":"00000001"}""",
                 "1,2,3,4" => """{"Prop":"01020304"}""",
                 "255,255,255,255" => """{"Prop":"FFFFFFFF"}""",
-                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null)
+                _ => throw new ArgumentOutOfRangeException(nameof(value), value, null),
             }
         );
 
@@ -44,7 +44,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
             {
                 DateTime.MinValue,
                 new(2023, 5, 29, 10, 52, 47),
-                DateTime.MaxValue
+                DateTime.MaxValue,
             },
             """{"Prop":["0001-01-01 00:00:00","2023-05-29 10:52:47","9999-12-31 23:59:59.9999999"]}""",
             mappedCollection: true
@@ -60,7 +60,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(-2, 0, 0)),
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(0, 0, 0)),
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(2, 0, 0)),
-                DateTimeOffset.MaxValue
+                DateTimeOffset.MaxValue,
             },
             """{"Prop":["0001-01-01 00:00:00+00:00","2023-05-29 10:52:47-02:00","2023-05-29 10:52:47+00:00","2023-05-29 10:52:47+02:00","9999-12-31 23:59:59.9999999+00:00"]}""",
             mappedCollection: true
@@ -74,7 +74,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
             {
                 new(),
                 new("8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD"),
-                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
             },
             """{"Prop":["00000000-0000-0000-0000-000000000000","8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD","FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"]}""",
             mappedCollection: true
@@ -89,7 +89,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 new byte[] { 0, 0, 0, 1 },
                 new byte[] { 255, 255, 255, 255 },
                 Array.Empty<byte>(),
-                new byte[] { 1, 2, 3, 4 }
+                new byte[] { 1, 2, 3, 4 },
             },
             """{"Prop":["00000001","FFFFFFFF","","01020304"]}""",
             mappedCollection: true
@@ -105,7 +105,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
             facets: new Dictionary<string, object?>
             {
                 { CoreAnnotationNames.Precision, 12 },
-                { CoreAnnotationNames.Scale, 6 }
+                { CoreAnnotationNames.Scale, 6 },
             }
         );
 
@@ -118,12 +118,12 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
             {
                 new(),
                 new("8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD"),
-                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
             },
             """{"Prop":["00000000000000000000000000000000","2F24448C3F8E204A8BE898C7C1AADEBD","FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF"]}""",
             facets: new Dictionary<string, object?>
             {
-                { CoreAnnotationNames.ProviderClrType, typeof(byte[]) }
+                { CoreAnnotationNames.ProviderClrType, typeof(byte[]) },
             }
         );
 
@@ -232,11 +232,9 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
     ) =>
         Can_read_and_write_JSON_value<NullableBytesType, byte[]?>(
             nameof(NullableBytesType.Bytes),
-            value == null
-                ? default
-                : value == ""
-                    ? Array.Empty<byte>()
-                    : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
+            value == null ? default
+                : value == "" ? Array.Empty<byte>()
+                : value.Split(',').Select(e => byte.Parse(e)).ToArray(),
             json
         );
 
@@ -361,7 +359,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 null,
                 new byte[] { 255, 255, 255, 255 },
                 Array.Empty<byte>(),
-                new byte[] { 1, 2, 3, 4 }
+                new byte[] { 1, 2, 3, 4 },
             },
             """{"Prop":["00000001",null,"FFFFFFFF","","01020304"]}""",
             mappedCollection: true
@@ -376,7 +374,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 DateTime.MinValue,
                 null,
                 new(2023, 5, 29, 10, 52, 47),
-                DateTime.MaxValue
+                DateTime.MaxValue,
             },
             """{"Prop":["0001-01-01 00:00:00",null,"2023-05-29 10:52:47","9999-12-31 23:59:59.9999999"]}""",
             mappedCollection: true
@@ -393,7 +391,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(0, 0, 0)),
                 null,
                 new(new DateTime(2023, 5, 29, 10, 52, 47), new TimeSpan(2, 0, 0)),
-                DateTimeOffset.MaxValue
+                DateTimeOffset.MaxValue,
             },
             """{"Prop":["0001-01-01 00:00:00+00:00","2023-05-29 10:52:47-02:00","2023-05-29 10:52:47+00:00",null,"2023-05-29 10:52:47+02:00","9999-12-31 23:59:59.9999999+00:00"]}""",
             mappedCollection: true
@@ -417,7 +415,7 @@ public class JsonTypesSqliteTest : JsonTypesRelationalTestBase
                 new(),
                 null,
                 new("8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD"),
-                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF")
+                Guid.Parse("FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"),
             },
             """{"Prop":["00000000-0000-0000-0000-000000000000",null,"8C44242F-8E3F-4A20-8BE8-98C7C1AADEBD","FFFFFFFF-FFFF-FFFF-FFFF-FFFFFFFFFFFF"]}""",
             mappedCollection: true

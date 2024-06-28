@@ -16,7 +16,7 @@ namespace System.Linq.Expressions.Tests
                 yield return new object[]
                 {
                     new char[] { '\0', '\b', 'A', '\uffff' },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
@@ -26,9 +26,9 @@ namespace System.Linq.Expressions.Tests
                         decimal.One,
                         decimal.MinusOne,
                         decimal.MinValue,
-                        decimal.MaxValue
+                        decimal.MaxValue,
                     },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
@@ -42,9 +42,9 @@ namespace System.Linq.Expressions.Tests
                         double.Epsilon,
                         double.NegativeInfinity,
                         double.PositiveInfinity,
-                        double.NaN
+                        double.NaN,
                     },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
@@ -58,47 +58,47 @@ namespace System.Linq.Expressions.Tests
                         float.Epsilon,
                         float.NegativeInfinity,
                         float.PositiveInfinity,
-                        float.NaN
+                        float.NaN,
                     },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new int[] { 0, 1, -1, int.MinValue, int.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new long[] { 0, 1, -1, long.MinValue, long.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new short[] { 0, 1, -1, short.MinValue, short.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[] { new uint[] { 0, 1, uint.MaxValue }, useInterpreter };
                 yield return new object[] { new ulong[] { 0, 1, ulong.MaxValue }, useInterpreter };
                 yield return new object[]
                 {
                     new ushort[] { 0, 1, ushort.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
 
                 yield return new object[]
                 {
                     new byte?[] { null, 0, 1, byte.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new char?[] { null, '\0', '\b', 'A', '\uffff' },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
@@ -109,9 +109,9 @@ namespace System.Linq.Expressions.Tests
                         decimal.One,
                         decimal.MinusOne,
                         decimal.MinValue,
-                        decimal.MaxValue
+                        decimal.MaxValue,
                     },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
@@ -126,9 +126,9 @@ namespace System.Linq.Expressions.Tests
                         double.Epsilon,
                         double.NegativeInfinity,
                         double.PositiveInfinity,
-                        double.NaN
+                        double.NaN,
                     },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
@@ -143,44 +143,44 @@ namespace System.Linq.Expressions.Tests
                         float.Epsilon,
                         float.NegativeInfinity,
                         float.PositiveInfinity,
-                        float.NaN
+                        float.NaN,
                     },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new int?[] { null, 0, 1, -1, int.MinValue, int.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new long?[] { null, 0, 1, -1, long.MinValue, long.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new sbyte?[] { null, 0, 1, -1, sbyte.MinValue, sbyte.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new short?[] { null, 0, 1, -1, short.MinValue, short.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new uint?[] { null, 0, 1, uint.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new ulong?[] { null, 0, 1, ulong.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
                 yield return new object[]
                 {
                     new ushort?[] { null, 0, 1, ushort.MaxValue },
-                    useInterpreter
+                    useInterpreter,
                 };
             }
         }

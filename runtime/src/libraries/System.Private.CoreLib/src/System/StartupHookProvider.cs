@@ -101,7 +101,7 @@ namespace System
                     Path.DirectorySeparatorChar,
                     Path.AltDirectorySeparatorChar,
                     ' ',
-                    ','
+                    ',',
                 };
 
             if (string.IsNullOrEmpty(startupHookPart))

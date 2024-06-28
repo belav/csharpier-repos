@@ -36,7 +36,7 @@ public class TemplateRendererTest
                         typeof(List<IFormFile>).Name,
                         TemplateRenderer.IEnumerableOfIFormFileName,
                         "Collection",
-                        "Object"
+                        "Object",
                     }
                 },
                 {
@@ -46,7 +46,7 @@ public class TemplateRendererTest
                         "IFormFileCollection",
                         TemplateRenderer.IEnumerableOfIFormFileName,
                         "Collection",
-                        "Object"
+                        "Object",
                     }
                 },
                 {
@@ -56,7 +56,7 @@ public class TemplateRendererTest
                         TemplateRenderer.IEnumerableOfIFormFileName,
                         typeof(IEnumerable<IFormFile>).Name,
                         "Collection",
-                        "Object"
+                        "Object",
                     }
                 },
             };

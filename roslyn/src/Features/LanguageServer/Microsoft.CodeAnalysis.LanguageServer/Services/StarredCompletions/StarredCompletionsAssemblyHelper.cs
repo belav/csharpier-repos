@@ -147,7 +147,7 @@ internal static class StarredCompletionAssemblyHelper
                 serviceBroker,
                 BrokeredServices.Services.Descriptors.RemoteModelService,
                 modelBasePath,
-                logger
+                logger,
             }
         );
         if (completionProviderObj == null)

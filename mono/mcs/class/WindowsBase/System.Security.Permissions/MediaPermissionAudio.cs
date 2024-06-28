@@ -30,6 +30,6 @@ namespace System.Security.Permissions
         NoAudio,
         SiteOfOriginAudio,
         SafeAudio,
-        AllAudio
+        AllAudio,
     }
 }

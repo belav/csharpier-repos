@@ -37,7 +37,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                     {
                         TargetAddress = targetAddress,
                         TransportType = transportType,
-                        NumberOfConnections = numberOfConnections
+                        NumberOfConnections = numberOfConnections,
                     }
                 )
             );
@@ -48,7 +48,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             var parameters = new
             {
                 SendInterval = sendInterval.TotalMilliseconds,
-                SendBytes = sendBytes
+                SendBytes = sendBytes,
             };
 
             await Send("starttest", JToken.FromObject(parameters));

@@ -53,7 +53,7 @@ namespace System.Reflection
             {
                 _module = module,
                 _throwIfNotFound = throwIfNotFound,
-                _canonResolver = canonResolver
+                _canonResolver = canonResolver,
             }
                 .Parse()
                 ?.Value;

@@ -98,7 +98,7 @@ class C
                     "/r:" + net4_0dll,
                     "/appconfig:" + appConfigPath,
                     "/touchedfiles:" + touchedBase,
-                    hello
+                    hello,
                 }
             );
 
@@ -178,7 +178,7 @@ public class C { }"
                     "/target:library",
                     "/doc:" + xml.Path,
                     "/touchedfiles:" + touchedDir.Path + "\\touched",
-                    sourcePath
+                    sourcePath,
                 }
             );
 

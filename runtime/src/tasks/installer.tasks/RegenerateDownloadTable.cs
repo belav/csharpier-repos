@@ -76,7 +76,7 @@ namespace Microsoft.DotNet.Build.Tasks
                 {
                     "",
                     $"| Platform |{string.Concat(Branches.Select(p => $" {p.ItemSpec} |"))}",
-                    $"| --- | {string.Concat(Enumerable.Repeat(" :---: |", Branches.Length))}"
+                    $"| --- | {string.Concat(Enumerable.Repeat(" :---: |", Branches.Length))}",
                 }
                     .Concat(rows)
                     .Concat(new[] { "" })

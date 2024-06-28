@@ -80,7 +80,7 @@ namespace System.Linq.Expressions.Compiler
                 new CustomAttributeBuilder(
                     typeof(SecurityTransparentAttribute).GetConstructor(Type.EmptyTypes),
                     new object[0]
-                )
+                ),
             };
 
 #if CLR2

@@ -78,7 +78,7 @@ public static class MapExtensions
         {
             Branch = branch,
             PathMatch = pathMatch,
-            PreserveMatchedPathSegment = preserveMatchedPathSegment
+            PreserveMatchedPathSegment = preserveMatchedPathSegment,
         };
         return app.Use(next => new MapMiddleware(next, options).Invoke);
     }

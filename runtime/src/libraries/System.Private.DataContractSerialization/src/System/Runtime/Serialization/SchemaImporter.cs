@@ -1850,7 +1850,7 @@ namespace System.Runtime.Serialization
                 DataMember dataMember = new DataMember(Globals.SchemaMemberInfoPlaceholder)
                 {
                     Name = enumFacet.Value,
-                    Order = enumValue
+                    Order = enumValue,
                 };
                 dataContract.Members.Add(dataMember);
             }

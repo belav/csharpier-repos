@@ -94,7 +94,7 @@ namespace System.Workflow.ComponentModel.Design
         {
             MultiPage = 1,
             Zoom,
-            Pan
+            Pan,
         }
 
         //Designer Hookup
@@ -665,7 +665,7 @@ namespace System.Workflow.ComponentModel.Design
                             {
                                 { "MultipageLayoutCaption", "MultipageLayout" },
                                 { "ZoomCaption", "Zoom" },
-                                { "PanCaption", "AutoPan" }
+                                { "PanCaption", "AutoPan" },
                             };
                         for (int i = 0; i < tabButtonInfo.GetLength(0); i++)
                         {
@@ -1785,7 +1785,7 @@ namespace System.Workflow.ComponentModel.Design
                 //Before we select the transform factor we make sure that logicalviewport origin is scaled down
                 Point[] logicalViewPortOrigin = new Point[]
                 {
-                    viewPortData.LogicalViewPort.Location
+                    viewPortData.LogicalViewPort.Location,
                 };
                 transformationMatrix.TransformPoints(logicalViewPortOrigin);
 
@@ -2192,7 +2192,7 @@ namespace System.Workflow.ComponentModel.Design
                 this.fitAllAction.Buttons[0].Description = DR.GetString(DR.FitToScreenDescription);
                 this.fitAllAction.Buttons[0].StateImages = new Bitmap[]
                 {
-                    DR.GetImage(DR.FitToScreen) as Bitmap
+                    DR.GetImage(DR.FitToScreen) as Bitmap,
                 };
                 dynamicActionFilter.AddAction(this.fitAllAction);
             }
@@ -2204,7 +2204,7 @@ namespace System.Workflow.ComponentModel.Design
                 );
                 this.fitAllAction.Buttons[0].StateImages = new Bitmap[]
                 {
-                    DR.GetImage(DR.FitToWorkflow) as Bitmap
+                    DR.GetImage(DR.FitToWorkflow) as Bitmap,
                 };
                 dynamicActionFilter.AddAction(this.fitAllAction);
             }

@@ -84,7 +84,7 @@ namespace System.Activities.Statements
                 {
                     this.nestedScopeTimeoutWorkflow = new Delay
                     {
-                        Duration = new InArgument<TimeSpan>(this.nestedScopeTimeout)
+                        Duration = new InArgument<TimeSpan>(this.nestedScopeTimeout),
                     };
                 }
                 return this.nestedScopeTimeoutWorkflow;
@@ -135,13 +135,13 @@ namespace System.Activities.Statements
         {
             DelegateInArgument<TransactionScope> element = new DelegateInArgument<TransactionScope>
             {
-                Name = "element"
+                Name = "element",
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext> { Name = "validationContext" };
             DelegateInArgument<Activity> parent = new DelegateInArgument<Activity>
             {
-                Name = "parent"
+                Name = "parent",
             };
 
             return new Constraint<TransactionScope>
@@ -171,10 +171,10 @@ namespace System.Activities.Statements
                                             {
                                                 Condition = new Equal<Type, Type, bool>
                                                 {
-                                                    Left = new ObtainType { Input = parent, },
+                                                    Left = new ObtainType { Input = parent },
                                                     Right = new InArgument<Type>(context =>
                                                         typeof(TransactionScope)
-                                                    )
+                                                    ),
                                                 },
                                                 Then = new Sequence
                                                 {
@@ -190,13 +190,13 @@ namespace System.Activities.Statements
                                                                     TransactionScope =
                                                                         new InArgument<TransactionScope>(
                                                                             element
-                                                                        )
+                                                                        ),
                                                                 },
                                                             Message = new InArgument<string>(
                                                                 SR.AbortInstanceOnTransactionFailureDoesNotMatch
                                                             ),
                                                             PropertyName =
-                                                                AbortInstanceOnTransactionFailurePropertyName
+                                                                AbortInstanceOnTransactionFailurePropertyName,
                                                         },
                                                         new AssertValidation
                                                         {
@@ -210,26 +210,26 @@ namespace System.Activities.Statements
                                                                         Expression =
                                                                             new IsolationLevelValue
                                                                             {
-                                                                                Scope = element
-                                                                            }
-                                                                    }
+                                                                                Scope = element,
+                                                                            },
+                                                                    },
                                                             },
                                                             Message = new InArgument<string>(
                                                                 SR.IsolationLevelValidation
                                                             ),
                                                             PropertyName =
-                                                                IsolationLevelPropertyName
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                                                IsolationLevelPropertyName,
+                                                        },
+                                                    },
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -237,13 +237,13 @@ namespace System.Activities.Statements
         {
             DelegateInArgument<TransactionScope> element = new DelegateInArgument<TransactionScope>
             {
-                Name = "element"
+                Name = "element",
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext> { Name = "validationContext" };
             DelegateInArgument<Activity> child = new DelegateInArgument<Activity>
             {
-                Name = "child"
+                Name = "child",
             };
             Variable<bool> nestedCompensableActivity = new Variable<bool>();
 
@@ -277,23 +277,23 @@ namespace System.Activities.Statements
                                                 {
                                                     Left = new ObtainType
                                                     {
-                                                        Input = new InArgument<Activity>(child)
+                                                        Input = new InArgument<Activity>(child),
                                                     },
                                                     Right = new InArgument<Type>(context =>
                                                         typeof(CompensableActivity)
-                                                    )
+                                                    ),
                                                 },
                                                 Then = new Assign<bool>
                                                 {
                                                     To = new OutArgument<bool>(
                                                         nestedCompensableActivity
                                                     ),
-                                                    Value = new InArgument<bool>(true)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                                                    Value = new InArgument<bool>(true),
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
                             },
                             new AssertValidation()
                             {
@@ -302,18 +302,18 @@ namespace System.Activities.Statements
                                     {
                                         Operand = new VariableValue<bool>
                                         {
-                                            Variable = nestedCompensableActivity
-                                        }
+                                            Variable = nestedCompensableActivity,
+                                        },
                                     }
                                 ),
                                 Message = new InArgument<string>(
                                     SR.CompensableActivityInsideTransactionScopeActivity
                                 ),
-                                PropertyName = BodyPropertyName
-                            }
-                        }
-                    }
-                }
+                                PropertyName = BodyPropertyName,
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -413,7 +413,7 @@ namespace System.Activities.Statements
             TransactionOptions transactionOptions = new TransactionOptions()
             {
                 IsolationLevel = this.IsolationLevel,
-                Timeout = transactionTimeout
+                Timeout = transactionTimeout,
             };
 
             context.SetRuntimeTransaction(new CommittableTransaction(transactionOptions));
@@ -604,7 +604,7 @@ namespace System.Activities.Statements
                     {
                         parentActivityArgument,
                         isoLevelArgument,
-                        resultArgument
+                        resultArgument,
                     }
                 );
             }
@@ -680,7 +680,7 @@ namespace System.Activities.Statements
                     {
                         parentActivityArgument,
                         txScopeArgument,
-                        resultArgument
+                        resultArgument,
                     }
                 );
             }

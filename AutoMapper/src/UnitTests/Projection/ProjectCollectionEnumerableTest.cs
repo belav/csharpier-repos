@@ -20,7 +20,7 @@ public class ProjectCollectionEnumerableTest
     {
         var customer = new Customer
         {
-            Addresses = new List<Address> { new Address(Street1), new Address(Street2) }
+            Addresses = new List<Address> { new Address(Street1), new Address(Street2) },
         };
         var customers = new[] { customer }.AsQueryable();
 

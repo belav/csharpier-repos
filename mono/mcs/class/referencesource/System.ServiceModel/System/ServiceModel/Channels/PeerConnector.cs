@@ -19,7 +19,7 @@ namespace System.ServiceModel.Channels
             Created,
             Opened,
             Closed,
-            Closing
+            Closing,
         }
 
         PeerNodeConfig config;

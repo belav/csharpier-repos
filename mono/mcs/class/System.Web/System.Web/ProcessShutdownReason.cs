@@ -40,6 +40,6 @@ namespace System.Web
         IdleTimeout,
         MemoryLimitExceeded,
         PingFailed,
-        DeadlockSuspected
+        DeadlockSuspected,
     }
 }

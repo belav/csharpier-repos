@@ -831,7 +831,7 @@ public class ModelStateDictionary : IReadOnlyDictionary<string, ModelStateEntry?
     {
         None = 0,
         Dot,
-        OpenBracket
+        OpenBracket,
     }
 
     [DebuggerDisplay("SubKey = {SubKey}, Key = {Key}, ValidationState = {ValidationState}")]

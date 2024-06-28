@@ -65,7 +65,7 @@ public abstract class NonNullableConventionBase : IModelFinalizingConvention
         {
             PropertyInfo propertyInfo => nullabilityInfoContext.Create(propertyInfo),
             FieldInfo fieldInfo => nullabilityInfoContext.Create(fieldInfo),
-            _ => null
+            _ => null,
         };
 
         return nullabilityInfo is not null;

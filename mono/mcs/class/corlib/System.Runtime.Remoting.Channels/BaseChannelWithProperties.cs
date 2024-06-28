@@ -52,7 +52,7 @@ namespace System.Runtime.Remoting.Channels
                     IDictionary[] dics = new IDictionary[]
                     {
                         base.Properties,
-                        SinksWithProperties.Properties
+                        SinksWithProperties.Properties,
                     };
                     return new AggregateDictionary(dics);
                 }

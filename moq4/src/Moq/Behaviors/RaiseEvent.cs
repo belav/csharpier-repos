@@ -105,7 +105,7 @@ namespace Moq.Behaviors
                     args = new object[]
                     {
                         this.mock.Object,
-                        this.eventArgsFunc.InvokePreserveStack()
+                        this.eventArgsFunc.InvokePreserveStack(),
                     };
                 }
                 else
@@ -113,7 +113,7 @@ namespace Moq.Behaviors
                     args = new object[]
                     {
                         this.mock.Object,
-                        this.eventArgsFunc.InvokePreserveStack(invocation.Arguments)
+                        this.eventArgsFunc.InvokePreserveStack(invocation.Arguments),
                     };
                 }
             }

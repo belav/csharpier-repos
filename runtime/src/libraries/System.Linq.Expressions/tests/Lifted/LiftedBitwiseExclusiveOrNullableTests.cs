@@ -124,7 +124,7 @@ namespace System.Linq.Expressions.Tests
                     null,
                     new Number(0),
                     new Number(1),
-                    Number.MaxValue
+                    Number.MaxValue,
                 };
                 for (int i = 0; i < values.Length; i++)
                 {

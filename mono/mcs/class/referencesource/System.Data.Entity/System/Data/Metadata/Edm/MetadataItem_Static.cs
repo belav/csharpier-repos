@@ -387,7 +387,7 @@ namespace System.Data.Metadata.Edm
                 {
                     EdmConstants.NoneCollectionKind,
                     EdmConstants.ListCollectionKind,
-                    EdmConstants.BagCollectionKind
+                    EdmConstants.BagCollectionKind,
                 }
             );
 
@@ -456,7 +456,7 @@ namespace System.Data.Metadata.Edm
                 {
                     new EdmProperty(EdmConstants.Name, stringTypeUsage),
                     new EdmProperty(EdmConstants.TypeUsage, typeUsageTypeUsage),
-                    new EdmProperty(EdmConstants.Value, complexTypeUsage)
+                    new EdmProperty(EdmConstants.Value, complexTypeUsage),
                 }
             );
 
@@ -473,7 +473,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.Documentation,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.Documentation))
-                    )
+                    ),
                 }
             );
 
@@ -488,7 +488,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.Facets,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.Facet))
-                    )
+                    ),
                 }
             );
 
@@ -501,7 +501,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(EdmConstants.Namespace, stringTypeUsage),
                     new EdmProperty(EdmConstants.Abstract, booleanTypeUsage),
                     new EdmProperty(EdmConstants.Sealed, booleanTypeUsage),
-                    new EdmProperty(EdmConstants.BaseType, complexTypeUsage)
+                    new EdmProperty(EdmConstants.BaseType, complexTypeUsage),
                 }
             );
 
@@ -522,7 +522,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.EntityType,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EntityType))
-                    )
+                    ),
                 }
             );
 
@@ -534,7 +534,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.TypeUsage,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.TypeUsage))
-                    )
+                    ),
                 }
             );
 
@@ -543,7 +543,7 @@ namespace System.Data.Metadata.Edm
                 new EdmProperty[]
                 {
                     new EdmProperty(EdmConstants.Nullable, stringTypeUsage),
-                    new EdmProperty(EdmConstants.DefaultValue, complexTypeUsage)
+                    new EdmProperty(EdmConstants.DefaultValue, complexTypeUsage),
                 }
             );
 
@@ -552,7 +552,7 @@ namespace System.Data.Metadata.Edm
                 new EdmProperty[]
                 {
                     new EdmProperty(EdmConstants.RelationshipTypeName, stringTypeUsage),
-                    new EdmProperty(EdmConstants.ToEndMemberName, stringTypeUsage)
+                    new EdmProperty(EdmConstants.ToEndMemberName, stringTypeUsage),
                 }
             );
 
@@ -564,7 +564,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.RelationshipMultiplicity,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EnumType))
-                    )
+                    ),
                 }
             );
 
@@ -596,7 +596,7 @@ namespace System.Data.Metadata.Edm
                         TypeUsage.Create(
                             GetBuiltInType(BuiltInTypeKind.EdmProperty).GetCollectionType()
                         )
-                    )
+                    ),
                 }
             );
 
@@ -608,7 +608,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.Members,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EdmMember))
-                    )
+                    ),
                 }
             );
 
@@ -619,7 +619,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.KeyMembers,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EdmMember))
-                    )
+                    ),
                 }
             );
 
@@ -632,7 +632,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.Value,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EdmType))
-                    )
+                    ),
                 }
             );
 
@@ -644,7 +644,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.EntitySets,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EntitySet))
-                    )
+                    ),
                 }
             );
 
@@ -658,7 +658,7 @@ namespace System.Data.Metadata.Edm
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EntityType))
                     ),
                     new EdmProperty(EdmConstants.Schema, stringTypeUsage),
-                    new EdmProperty(EdmConstants.Table, stringTypeUsage)
+                    new EdmProperty(EdmConstants.Table, stringTypeUsage),
                 }
             );
 
@@ -671,7 +671,7 @@ namespace System.Data.Metadata.Edm
                         TypeUsage.Create(
                             GetBuiltInType(BuiltInTypeKind.AssociationSetEnd).GetCollectionType()
                         )
-                    )
+                    ),
                 }
             );
 
@@ -683,7 +683,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.EntitySetType,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.EntitySet))
-                    )
+                    ),
                 }
             );
 
@@ -699,7 +699,7 @@ namespace System.Data.Metadata.Edm
                     new EdmProperty(
                         EdmConstants.TypeUsage,
                         TypeUsage.Create(GetBuiltInType(BuiltInTypeKind.TypeUsage))
-                    )
+                    ),
                 }
             );
 
@@ -718,7 +718,7 @@ namespace System.Data.Metadata.Edm
                         TypeUsage.Create(
                             GetBuiltInType(BuiltInTypeKind.FunctionParameter).GetCollectionType()
                         )
-                    )
+                    ),
                 }
             );
 
@@ -727,7 +727,7 @@ namespace System.Data.Metadata.Edm
                 new EdmProperty[]
                 {
                     new EdmProperty(EdmConstants.Summary, stringTypeUsage),
-                    new EdmProperty(EdmConstants.LongDescription, stringTypeUsage)
+                    new EdmProperty(EdmConstants.LongDescription, stringTypeUsage),
                 }
             );
 

@@ -31,14 +31,14 @@ public class ViewEngineTests : IClassFixture<MvcTestFixture<RazorWebSite.Startup
                 "ViewWithLayout",
                 @"<layout>
 ViewWithLayout-Content
-</layout>"
+</layout>",
             };
             yield return new[]
             {
                 "ViewWithFullPath",
                 @"<layout>
 ViewWithFullPath-content
-</layout>"
+</layout>",
             };
             yield return new[]
             {
@@ -48,7 +48,7 @@ ViewWithFullPath-content
 /ViewEngine/ViewWithNestedLayout
 ViewWithNestedLayout-Content
 </nested-layout>
-</layout>"
+</layout>",
             };
 
             yield return new[] { "ViewWithDataFromController", "<h1>hello from controller</h1>" };
@@ -211,14 +211,14 @@ expander-partial";
                 "PartialViewWithNamePassedIn",
                 @"<layout>
 ViewWithLayout-Content
-</layout>"
+</layout>",
             };
             yield return new[]
             {
                 "ViewWithFullPath",
                 @"<layout>
 ViewWithFullPath-content
-</layout>"
+</layout>",
             };
             yield return new[]
             {
@@ -228,19 +228,19 @@ ViewWithFullPath-content
 /PartialViewEngine/ViewWithNestedLayout
 ViewWithNestedLayout-Content
 </nested-layout>
-</layout>"
+</layout>",
             };
             yield return new[]
             {
                 "PartialWithDataFromController",
-                "<h1>hello from controller</h1>"
+                "<h1>hello from controller</h1>",
             };
             yield return new[]
             {
                 "PartialWithModel",
                 @"my name is judge
 <partial>98052
-</partial>"
+</partial>",
             };
         }
     }

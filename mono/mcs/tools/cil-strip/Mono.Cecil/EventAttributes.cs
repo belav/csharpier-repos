@@ -34,6 +34,8 @@ namespace Mono.Cecil
     internal enum EventAttributes : ushort
     {
         SpecialName = 0x0200, // Event is special
-        RTSpecialName = 0x0400 // CLI provides 'special' behavior, depending upon the name of the event
+        RTSpecialName =
+            0x0400 // CLI provides 'special' behavior, depending upon the name of the event
+        ,
     }
 }

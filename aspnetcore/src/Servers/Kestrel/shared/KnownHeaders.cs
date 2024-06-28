@@ -44,7 +44,7 @@ public class KnownHeaders
     public static readonly string[] NonPublicHeaderNames = new[]
     {
         HeaderNames.DNT,
-        InternalHeaderNames.AltUsed
+        InternalHeaderNames.AltUsed,
     };
 
     public sealed class InternalHeader
@@ -71,7 +71,7 @@ public class KnownHeaders
         new InternalHeader("Scheme", InternalHeaderNames.Scheme, isPseudoHeader: true),
         new InternalHeader("Status", InternalHeaderNames.Status, isPseudoHeader: true),
         new InternalHeader("Protocol", InternalHeaderNames.Protocol, isPseudoHeader: true),
-        new InternalHeader("AltUsed", InternalHeaderNames.AltUsed)
+        new InternalHeader("AltUsed", InternalHeaderNames.AltUsed),
     };
 
     public static readonly string[] NonApiHeaders = NonPublicHeaderNames
@@ -92,7 +92,7 @@ public class KnownHeaders
             HeaderNames.Accept,
             HeaderNames.Connection,
             HeaderNames.Host,
-            HeaderNames.UserAgent
+            HeaderNames.UserAgent,
         };
         var responsePrimaryHeaders = new[]
         {
@@ -198,8 +198,8 @@ public class KnownHeaders
                         ClassName = "HeaderNames",
                         Name = HeaderNames.ContentLength,
                         Index = -1,
-                        PrimaryHeader = requestPrimaryHeaders.Contains(HeaderNames.ContentLength)
-                    }
+                        PrimaryHeader = requestPrimaryHeaders.Contains(HeaderNames.ContentLength),
+                    },
                 }
             )
             .ToArray();
@@ -210,7 +210,7 @@ public class KnownHeaders
             HeaderNames.Server,
             HeaderNames.Date,
             HeaderNames.TransferEncoding,
-            HeaderNames.AltSvc
+            HeaderNames.AltSvc,
         };
         var enhancedHeaders = new[]
         {
@@ -218,7 +218,7 @@ public class KnownHeaders
             HeaderNames.Server,
             HeaderNames.Date,
             HeaderNames.TransferEncoding,
-            HeaderNames.AltSvc
+            HeaderNames.AltSvc,
         };
         // http://www.w3.org/TR/cors/#syntax
         var corsResponseHeaders = new[]
@@ -273,7 +273,7 @@ public class KnownHeaders
                         Index = index,
                         EnhancedSetter = enhancedHeaders.Contains(header),
                         ExistenceCheck = responseHeadersExistence.Contains(header),
-                        PrimaryHeader = responsePrimaryHeaders.Contains(header)
+                        PrimaryHeader = responsePrimaryHeaders.Contains(header),
                     }
             )
             .Concat(
@@ -285,8 +285,8 @@ public class KnownHeaders
                         Name = HeaderNames.ContentLength,
                         Index = 63,
                         EnhancedSetter = enhancedHeaders.Contains(HeaderNames.ContentLength),
-                        PrimaryHeader = responsePrimaryHeaders.Contains(HeaderNames.ContentLength)
-                    }
+                        PrimaryHeader = responsePrimaryHeaders.Contains(HeaderNames.ContentLength),
+                    },
                 }
             )
             .ToArray();
@@ -295,7 +295,7 @@ public class KnownHeaders
         {
             HeaderNames.ETag,
             HeaderNames.GrpcMessage,
-            HeaderNames.GrpcStatus
+            HeaderNames.GrpcStatus,
         }
             .OrderBy(header => !responsePrimaryHeaders.Contains(header))
             .ThenBy(header => header)
@@ -312,7 +312,7 @@ public class KnownHeaders
                         Index = index,
                         EnhancedSetter = enhancedHeaders.Contains(header),
                         ExistenceCheck = responseHeadersExistence.Contains(header),
-                        PrimaryHeader = responsePrimaryHeaders.Contains(header)
+                        PrimaryHeader = responsePrimaryHeaders.Contains(header),
                     }
             )
             .ToArray();
@@ -323,7 +323,7 @@ public class KnownHeaders
             HeaderNames.TransferEncoding,
             HeaderNames.KeepAlive,
             HeaderNames.Upgrade,
-            HeaderNames.ProxyConnection
+            HeaderNames.ProxyConnection,
         };
 
         InvalidH2H3ResponseHeadersBits = ResponseHeaders
@@ -550,7 +550,7 @@ public class KnownHeaders
                 "baggage" => "Baggage",
                 "traceparent" => "TraceParent",
                 "tracestate" => "TraceState",
-                _ => name.Replace("-", "")
+                _ => name.Replace("-", ""),
             };
 
             // Pseudo headers start with a colon. A colon isn't valid in C# names so
@@ -866,7 +866,7 @@ public class KnownHeaders
                     .OrderBy(x => x.Name.Length)
                     .GroupBy(x => x.Name.Length),
                 ClassName = "HttpRequestHeaders",
-                Bytes = default(byte[])
+                Bytes = default(byte[]),
             },
             new
             {
@@ -875,7 +875,7 @@ public class KnownHeaders
                     .OrderBy(x => x.Name.Length)
                     .GroupBy(x => x.Name.Length),
                 ClassName = "HttpResponseHeaders",
-                Bytes = responseHeaders.SelectMany(header => header.Bytes).ToArray()
+                Bytes = responseHeaders.SelectMany(header => header.Bytes).ToArray(),
             },
             new
             {
@@ -884,8 +884,8 @@ public class KnownHeaders
                     .OrderBy(x => x.Name.Length)
                     .GroupBy(x => x.Name.Length),
                 ClassName = "HttpResponseTrailers",
-                Bytes = responseTrailers.SelectMany(header => header.Bytes).ToArray()
-            }
+                Bytes = responseTrailers.SelectMany(header => header.Bytes).ToArray(),
+            },
         };
         foreach (var loop in loops.Where(l => l.Bytes != null))
         {
@@ -1585,7 +1585,7 @@ $@"        private void Clear(long bitsToClear)
                     Header = headers.SingleOrDefault(knownHeader =>
                         string.Equals(knownHeader.Name, g.Key, StringComparison.OrdinalIgnoreCase)
                     ),
-                    QPackStaticTableFields = g.ToArray()
+                    QPackStaticTableFields = g.ToArray(),
                 };
             })
             .Where(g => g.Header != null)
@@ -1614,7 +1614,7 @@ $@"        private void Clear(long bitsToClear)
                     Header = headers.SingleOrDefault(knownHeader =>
                         string.Equals(knownHeader.Name, g.Key, StringComparison.OrdinalIgnoreCase)
                     ),
-                    HPackStaticTableIndexes = g.Select(h => h.Index).ToArray()
+                    HPackStaticTableIndexes = g.Select(h => h.Index).ToArray(),
                 };
             })
             .Where(g => g.Header != null)

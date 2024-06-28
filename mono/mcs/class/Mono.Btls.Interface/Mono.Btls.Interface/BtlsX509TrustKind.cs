@@ -37,6 +37,6 @@ namespace Mono.Btls.Interface
         TRUST_ALL = 4,
         REJECT_CLIENT = 32,
         REJECT_SERVER = 64,
-        REJECT_ALL = 128
+        REJECT_ALL = 128,
     }
 }

@@ -646,7 +646,7 @@ namespace System.Net.Quic.Tests
                         new SslApplicationProtocol("test"),
                     };
                     return ValueTask.FromResult(options);
-                }
+                },
             };
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
@@ -726,7 +726,7 @@ namespace System.Net.Quic.Tests
                         new SslApplicationProtocol("test"),
                     };
                     return ValueTask.FromResult(options);
-                }
+                },
             };
             bool isAlpnPresentOnInitialAlpnList = listenerOptions.ApplicationProtocols.Contains(
                 new SslApplicationProtocol(alpn)

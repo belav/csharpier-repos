@@ -30,7 +30,7 @@ internal readonly struct DiagnosticInfo : IEquatable<DiagnosticInfo>
         {
             Descriptor = descriptor,
             Location = trimmedLocation,
-            MessageArgs = messageArgs ?? Array.Empty<object?>()
+            MessageArgs = messageArgs ?? Array.Empty<object?>(),
         };
 
         // Creates a copy of the Location instance that does not capture a reference to Compilation.

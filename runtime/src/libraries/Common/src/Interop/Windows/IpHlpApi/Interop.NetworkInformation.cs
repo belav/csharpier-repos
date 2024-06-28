@@ -31,7 +31,7 @@ internal static partial class Interop
         internal enum AdapterAddressFlags
         {
             DnsEligible = 0x1,
-            Transient = 0x2
+            Transient = 0x2,
         }
 
         [Flags]
@@ -462,7 +462,7 @@ internal static partial class Interop
             TcpTableOwnerPidAll = 5,
             TcpTableOwnerModuleListener = 6,
             TcpTableOwnerModuleConnections = 7,
-            TcpTableOwnerModuleAll = 8
+            TcpTableOwnerModuleAll = 8,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -488,7 +488,7 @@ internal static partial class Interop
         {
             UdpTableBasic = 0,
             UdpTableOwnerPid = 1,
-            UdpTableOwnerModule = 2
+            UdpTableOwnerModule = 2,
         }
 
         [StructLayout(LayoutKind.Sequential)]

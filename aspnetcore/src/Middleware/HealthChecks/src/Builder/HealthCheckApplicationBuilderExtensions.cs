@@ -63,7 +63,7 @@ public static class HealthCheckApplicationBuilderExtensions
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
 
-        UseHealthChecksCore(app, path, port: null, new[] { Options.Create(options), });
+        UseHealthChecksCore(app, path, port: null, new[] { Options.Create(options) });
         return app;
     }
 
@@ -162,7 +162,7 @@ public static class HealthCheckApplicationBuilderExtensions
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
 
-        UseHealthChecksCore(app, path, port, new[] { Options.Create(options), });
+        UseHealthChecksCore(app, path, port, new[] { Options.Create(options) });
         return app;
     }
 
@@ -206,7 +206,7 @@ public static class HealthCheckApplicationBuilderExtensions
 
         ArgumentNullException.ThrowIfNull(options);
 
-        UseHealthChecksCore(app, path, portAsInt, new[] { Options.Create(options), });
+        UseHealthChecksCore(app, path, portAsInt, new[] { Options.Create(options) });
         return app;
     }
 

@@ -34,6 +34,6 @@ namespace System.Windows.Forms.VisualStyles
         Glow = 1,
         Shadow = 2,
         Pulse = 3,
-        Alpha = 4
+        Alpha = 4,
     }
 }

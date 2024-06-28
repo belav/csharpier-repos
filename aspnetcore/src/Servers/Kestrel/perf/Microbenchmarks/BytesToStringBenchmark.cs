@@ -43,7 +43,7 @@ public class BytesToStringBenchmark
                     0x6c,
                     0x69,
                     0x76,
-                    0x65
+                    0x65,
                 };
                 // kéép-álivé
                 _utf8Bytes = new byte[]
@@ -61,7 +61,7 @@ public class BytesToStringBenchmark
                     0x69,
                     0x76,
                     0xc3,
-                    0xa9
+                    0xa9,
                 };
                 break;
             case BenchmarkTypes.Accept:
@@ -154,7 +154,7 @@ public class BytesToStringBenchmark
                     0x3d,
                     0x30,
                     0x2e,
-                    0x37
+                    0x37,
                 };
                 // téxt/pláin,téxt/html;q=0.9,ápplicátion/xhtml+xml;q=0.9,ápplicátion/xml;q=0.8,*/*;q=0.7
                 _utf8Bytes = new byte[]
@@ -251,7 +251,7 @@ public class BytesToStringBenchmark
                     0x3d,
                     0x30,
                     0x2e,
-                    0x37
+                    0x37,
                 };
                 break;
             case BenchmarkTypes.UserAgent:
@@ -367,7 +367,7 @@ public class BytesToStringBenchmark
                     0x37,
                     0x2e,
                     0x33,
-                    0x36
+                    0x36,
                 };
                 // Mozillá/5.0 (Windows NT 10.0; WOW64) áppléWébKit/537.36 (KHTML, liké Gécko) Chromé/54.0.2840.99 Sáfári/537.36
                 _utf8Bytes = new byte[]
@@ -489,7 +489,7 @@ public class BytesToStringBenchmark
                     0x37,
                     0x2e,
                     0x33,
-                    0x36
+                    0x36,
                 };
                 break;
             case BenchmarkTypes.Cookie:
@@ -754,7 +754,7 @@ public class BytesToStringBenchmark
                     0x65,
                     0x72,
                     0x69,
-                    0x63
+                    0x63,
                 };
                 // prov=20629ccd-8b0f-é8éf-2935-cd26609fc0bc; __qcá=P0-1591065732-1479167353442; _gá=Gá1.2.1298898376.1479167354; _gát=1; sgt=id=9519gfdé_3347_4762_8762_df51458c8éc2; ácct=t=why-is-%é0%á5%á7%é0%á5%á8%é0%á5%á9-numéric&s=why-is-%é0%á5%á7%é0%á5%á8%é0%á5%á9-numéric
                 _utf8Bytes = new byte[]
@@ -1045,7 +1045,7 @@ public class BytesToStringBenchmark
                     0xa9,
                     0x72,
                     0x69,
-                    0x63
+                    0x63,
                 };
                 break;
         }

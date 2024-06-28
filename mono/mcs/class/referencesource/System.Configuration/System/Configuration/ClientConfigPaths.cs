@@ -72,7 +72,7 @@ namespace System.Configuration
             '2',
             '3',
             '4',
-            '5'
+            '5',
         };
 
         static volatile ClientConfigPaths s_current;

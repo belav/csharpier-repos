@@ -40,7 +40,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     new HashSet<string>(),
                     new Dictionary<LabelTarget, string>(),
                     new HashSet<string>()
-                )
+                ),
             }
         );
 
@@ -222,16 +222,17 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         return expression switch
         {
-            SwitchExpression switchExpression =>
-                (ExpressionSyntax)TranslateSwitch(switchExpression, lowerableAssignmentVariable),
+            SwitchExpression switchExpression => (ExpressionSyntax)TranslateSwitch(
+                switchExpression,
+                lowerableAssignmentVariable
+            ),
 
-            ConditionalExpression conditionalExpression =>
-                (ExpressionSyntax)TranslateConditional(
-                    conditionalExpression,
-                    lowerableAssignmentVariable
-                ),
+            ConditionalExpression conditionalExpression => (ExpressionSyntax)TranslateConditional(
+                conditionalExpression,
+                lowerableAssignmentVariable
+            ),
 
-            _ => Translate<ExpressionSyntax>(expression)
+            _ => Translate<ExpressionSyntax>(expression),
         };
     }
 
@@ -366,7 +367,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             ExpressionType.TypeAs => SyntaxKind.AsExpression,
             ExpressionType.Coalesce => SyntaxKind.CoalesceExpression,
 
-            _ => throw new ArgumentOutOfRangeException("BinaryExpression with " + binary.NodeType)
+            _ => throw new ArgumentOutOfRangeException("BinaryExpression with " + binary.NodeType),
         };
 
         Result = BinaryExpression(syntaxKind, left, right);
@@ -608,14 +609,13 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     // If we're in statement context and we have an expression that can't stand alone (e.g. literal), assign it to discard
                     ExpressionSyntax e
                         when statementContext == ExpressionContext.Statement
-                            && !IsExpressionValidAsStatement(e) =>
-                        ExpressionStatement(
-                            (ExpressionSyntax)_g.AssignmentStatement(_g.IdentifierName("_"), e)
-                        ),
+                            && !IsExpressionValidAsStatement(e) => ExpressionStatement(
+                        (ExpressionSyntax)_g.AssignmentStatement(_g.IdentifierName("_"), e)
+                    ),
 
                     ExpressionSyntax e => ExpressionStatement(e),
 
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(),
                 };
 
                 if (blockContext == ExpressionContext.Expression)
@@ -719,7 +719,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 SyntaxKind.PreIncrementExpression => true,
                 SyntaxKind.PreDecrementExpression => true,
 
-                _ => false
+                _ => false,
             };
 
         void PreprocessLabels()
@@ -778,7 +778,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             BlockSyntax b => b,
             StatementSyntax s => Block(s),
             ExpressionSyntax e => Block(ExpressionStatement(e)),
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(),
         };
 
         var catchDeclaration = noType ? null : CatchDeclaration(Translate(catchBlock.Test));
@@ -1014,7 +1014,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                     ExpressionSyntax e => Block(ExpressionStatement(e)),
                     StatementSyntax s => Block(s),
 
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException(),
                 };
         }
     }
@@ -1040,8 +1040,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 or double
                 or float
                 or decimal
-                or char =>
-                    (ExpressionSyntax)_g.LiteralExpression(constant.Value),
+                or char => (ExpressionSyntax)_g.LiteralExpression(constant.Value),
 
                 string or bool or null => (ExpressionSyntax)_g.LiteralExpression(constant.Value),
 
@@ -1051,8 +1050,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 ITuple tuple
                     when tuple.GetType() is { IsGenericType: true } tupleType
                         && tupleType.Name.StartsWith("ValueTuple`", StringComparison.Ordinal)
-                        && tupleType.Namespace == "System" =>
-                    HandleValueTuple(tuple),
+                        && tupleType.Namespace == "System" => HandleValueTuple(tuple),
 
                 IEqualityComparer c when c == StructuralComparisons.StructuralEqualityComparer =>
                     MemberAccessExpression(
@@ -1105,19 +1103,17 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                         IdentifierName(nameof(CultureInfo.DefaultThreadCurrentUICulture))
                     ),
 
-                Encoding encoding when encoding == Encoding.ASCII =>
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        Translate(typeof(Encoding)),
-                        IdentifierName(nameof(Encoding.ASCII))
-                    ),
+                Encoding encoding when encoding == Encoding.ASCII => MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    Translate(typeof(Encoding)),
+                    IdentifierName(nameof(Encoding.ASCII))
+                ),
 
-                Encoding encoding when encoding == Encoding.Unicode =>
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        Translate(typeof(Encoding)),
-                        IdentifierName(nameof(Encoding.Unicode))
-                    ),
+                Encoding encoding when encoding == Encoding.Unicode => MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    Translate(typeof(Encoding)),
+                    IdentifierName(nameof(Encoding.Unicode))
+                ),
 
                 Encoding encoding when encoding == Encoding.BigEndianUnicode =>
                     MemberAccessExpression(
@@ -1126,38 +1122,33 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                         IdentifierName(nameof(Encoding.BigEndianUnicode))
                     ),
 
-                Encoding encoding when encoding == Encoding.UTF8 =>
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        Translate(typeof(Encoding)),
-                        IdentifierName(nameof(Encoding.UTF8))
-                    ),
+                Encoding encoding when encoding == Encoding.UTF8 => MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    Translate(typeof(Encoding)),
+                    IdentifierName(nameof(Encoding.UTF8))
+                ),
 
-                Encoding encoding when encoding == Encoding.UTF32 =>
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        Translate(typeof(Encoding)),
-                        IdentifierName(nameof(Encoding.UTF32))
-                    ),
+                Encoding encoding when encoding == Encoding.UTF32 => MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    Translate(typeof(Encoding)),
+                    IdentifierName(nameof(Encoding.UTF32))
+                ),
 
-                Encoding encoding when encoding == Encoding.Latin1 =>
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        Translate(typeof(Encoding)),
-                        IdentifierName(nameof(Encoding.Latin1))
-                    ),
+                Encoding encoding when encoding == Encoding.Latin1 => MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    Translate(typeof(Encoding)),
+                    IdentifierName(nameof(Encoding.Latin1))
+                ),
 
-                Encoding encoding when encoding == Encoding.Default =>
-                    MemberAccessExpression(
-                        SyntaxKind.SimpleMemberAccessExpression,
-                        Translate(typeof(Encoding)),
-                        IdentifierName(nameof(Encoding.Default))
-                    ),
+                Encoding encoding when encoding == Encoding.Default => MemberAccessExpression(
+                    SyntaxKind.SimpleMemberAccessExpression,
+                    Translate(typeof(Encoding)),
+                    IdentifierName(nameof(Encoding.Default))
+                ),
 
-                _ =>
-                    throw new NotSupportedException(
-                        $"Encountered a constant of unsupported type '{value.GetType().Name}'. Only primitive constant nodes are supported."
-                    )
+                _ => throw new NotSupportedException(
+                    $"Encountered a constant of unsupported type '{value.GetType().Name}'. Only primitive constant nodes are supported."
+                ),
             };
 
         ExpressionSyntax HandleEnum(Enum e)
@@ -1538,7 +1529,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             BlockSyntax b => b,
             StatementSyntax s => Block(s),
             ExpressionSyntax e => Block(ExpressionStatement(e)),
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(),
         };
 
         StatementSyntax translated = WhileStatement(
@@ -2035,17 +2026,15 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
                     var result = translatedBody switch
                     {
-                        BlockSyntax block =>
-                            SingletonList<StatementSyntax>(
-                                block.WithStatements(block.Statements.Add(BreakStatement()))
-                            ),
+                        BlockSyntax block => SingletonList<StatementSyntax>(
+                            block.WithStatements(block.Statements.Add(BreakStatement()))
+                        ),
                         StatementSyntax s => List(new[] { s, BreakStatement() }),
-                        ExpressionSyntax e =>
-                            List(
-                                new StatementSyntax[] { ExpressionStatement(e), BreakStatement() }
-                            ),
+                        ExpressionSyntax e => List(
+                            new StatementSyntax[] { ExpressionStatement(e), BreakStatement() }
+                        ),
 
-                        _ => throw new ArgumentOutOfRangeException()
+                        _ => throw new ArgumentOutOfRangeException(),
                     };
 
                     return result;
@@ -2270,14 +2259,14 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
         var translatedBody = Translate(tryNode.Body) switch
         {
             BlockSyntax b => (IEnumerable<SyntaxNode>)b.Statements,
-            var n => new[] { n }
+            var n => new[] { n },
         };
 
         var translatedFinally = Translate(tryNode.Finally) switch
         {
             BlockSyntax b => (IEnumerable<SyntaxNode>)b.Statements,
             null => null,
-            var n => new[] { n }
+            var n => new[] { n },
         };
 
         switch (_context)
@@ -2297,7 +2286,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                             TranslateCatchBlock(
                                 E.Catch(typeof(Exception), tryNode.Fault),
                                 noType: true
-                            )
+                            ),
                         }
                     );
 
@@ -2328,21 +2317,19 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
 
         Result = node.NodeType switch
         {
-            ExpressionType.TypeIs =>
-                BinaryExpression(
-                    SyntaxKind.IsExpression,
-                    visitedExpression,
-                    Translate(node.TypeOperand)
-                ),
+            ExpressionType.TypeIs => BinaryExpression(
+                SyntaxKind.IsExpression,
+                visitedExpression,
+                Translate(node.TypeOperand)
+            ),
 
-            ExpressionType.TypeEqual =>
-                BinaryExpression(
-                    SyntaxKind.EqualsExpression,
-                    visitedExpression,
-                    TypeOfExpression(Translate(node.TypeOperand))
-                ),
+            ExpressionType.TypeEqual => BinaryExpression(
+                SyntaxKind.EqualsExpression,
+                visitedExpression,
+                TypeOfExpression(Translate(node.TypeOperand))
+            ),
 
-            _ => throw new ArgumentOutOfRangeException()
+            _ => throw new ArgumentOutOfRangeException(),
         };
 
         return node;
@@ -2378,37 +2365,47 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
             ExpressionType.IsFalse => _g.LogicalNotExpression(operand),
             ExpressionType.IsTrue => operand,
             ExpressionType.ArrayLength => _g.MemberAccessExpression(operand, "Length"),
-            ExpressionType.Convert =>
-                ParenthesizedExpression(
-                    (ExpressionSyntax)_g.ConvertExpression(Translate(unary.Type), operand)
-                ),
-            ExpressionType.ConvertChecked =>
-                ParenthesizedExpression(
-                    (ExpressionSyntax)_g.ConvertExpression(Translate(unary.Type), operand)
-                ),
+            ExpressionType.Convert => ParenthesizedExpression(
+                (ExpressionSyntax)_g.ConvertExpression(Translate(unary.Type), operand)
+            ),
+            ExpressionType.ConvertChecked => ParenthesizedExpression(
+                (ExpressionSyntax)_g.ConvertExpression(Translate(unary.Type), operand)
+            ),
             ExpressionType.Throw when unary.Type == typeof(void) => _g.ThrowStatement(operand),
             ExpressionType.Throw => _g.ThrowExpression(operand),
-            ExpressionType.TypeAs =>
-                BinaryExpression(SyntaxKind.AsExpression, operand, Translate(unary.Type)),
+            ExpressionType.TypeAs => BinaryExpression(
+                SyntaxKind.AsExpression,
+                operand,
+                Translate(unary.Type)
+            ),
             ExpressionType.Quote => operand,
-            ExpressionType.UnaryPlus =>
-                PrefixUnaryExpression(SyntaxKind.UnaryPlusExpression, operand),
+            ExpressionType.UnaryPlus => PrefixUnaryExpression(
+                SyntaxKind.UnaryPlusExpression,
+                operand
+            ),
             ExpressionType.Unbox => operand,
             ExpressionType.Increment => Translate(E.Add(unary.Operand, E.Constant(1))),
             ExpressionType.Decrement => Translate(E.Subtract(unary.Operand, E.Constant(1))),
-            ExpressionType.PostIncrementAssign =>
-                PostfixUnaryExpression(SyntaxKind.PostIncrementExpression, operand),
-            ExpressionType.PostDecrementAssign =>
-                PostfixUnaryExpression(SyntaxKind.PostDecrementExpression, operand),
-            ExpressionType.PreIncrementAssign =>
-                PrefixUnaryExpression(SyntaxKind.PreIncrementExpression, operand),
-            ExpressionType.PreDecrementAssign =>
-                PrefixUnaryExpression(SyntaxKind.PreDecrementExpression, operand),
+            ExpressionType.PostIncrementAssign => PostfixUnaryExpression(
+                SyntaxKind.PostIncrementExpression,
+                operand
+            ),
+            ExpressionType.PostDecrementAssign => PostfixUnaryExpression(
+                SyntaxKind.PostDecrementExpression,
+                operand
+            ),
+            ExpressionType.PreIncrementAssign => PrefixUnaryExpression(
+                SyntaxKind.PreIncrementExpression,
+                operand
+            ),
+            ExpressionType.PreDecrementAssign => PrefixUnaryExpression(
+                SyntaxKind.PreDecrementExpression,
+                operand
+            ),
 
-            _ =>
-                throw new ArgumentOutOfRangeException(
-                    "Unsupported LINQ unary node: " + unary.NodeType
-                )
+            _ => throw new ArgumentOutOfRangeException(
+                "Unsupported LINQ unary node: " + unary.NodeType
+            ),
         };
 
         return unary;
@@ -2775,7 +2772,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
     {
         Expression,
         Statement,
-        ExpressionLambda
+        ExpressionLambda,
     }
 
     private sealed class ConstantDetectionSyntaxWalker : SyntaxWalker
@@ -2806,10 +2803,9 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 // Binary/unary expressions over constants are also constant
                 BinaryExpressionSyntax
                 or PrefixUnaryExpressionSyntax
-                or PostfixUnaryExpressionSyntax =>
-                    true,
+                or PostfixUnaryExpressionSyntax => true,
 
-                _ => false
+                _ => false,
             };
     }
 
@@ -2849,7 +2845,7 @@ public class LinqToCSharpSyntaxTranslator : ExpressionVisitor, ILinqToCSharpSynt
                 EmptyStatementSyntax => false,
 
                 // TODO: we can exempt most binary and unary expressions as well, e.g. i + 5, but not anything involving assignment
-                _ => true
+                _ => true,
             };
     }
 }

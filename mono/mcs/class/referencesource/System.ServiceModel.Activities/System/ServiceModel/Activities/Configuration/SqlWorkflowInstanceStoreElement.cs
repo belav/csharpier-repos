@@ -101,7 +101,7 @@ namespace System.ServiceModel.Activities.Configuration
                     InstanceCompletionAction = this.InstanceCompletionAction,
                     InstanceLockedExceptionAction = this.InstanceLockedExceptionAction,
                     RunnableInstancesDetectionPeriod = this.RunnableInstancesDetectionPeriod,
-                    MaxConnectionRetries = this.MaxConnectionRetries
+                    MaxConnectionRetries = this.MaxConnectionRetries,
                 };
 
             return sqlWorkflowInstanceStoreBehavior;

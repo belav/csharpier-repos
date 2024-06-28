@@ -43,7 +43,7 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 new object[]
                                 {
                                     RegistryKey, /*writable*/
-                                    false
+                                    false,
                                 }
                             );
                         if (eeKey != null)

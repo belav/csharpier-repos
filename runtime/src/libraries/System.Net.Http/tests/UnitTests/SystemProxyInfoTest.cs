@@ -24,7 +24,7 @@ namespace System.Net.Http.Tests
                 "ALL_PROXY",
                 "no_proxy",
                 "NO_PROXY",
-                "GATEWAY_INTERFACE"
+                "GATEWAY_INTERFACE",
             };
 
             foreach (string v in envVars)

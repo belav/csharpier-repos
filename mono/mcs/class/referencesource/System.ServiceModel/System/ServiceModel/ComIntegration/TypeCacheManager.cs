@@ -22,7 +22,7 @@ namespace System.ServiceModel.ComIntegration
         {
             Default = 0,
             Register = 1,
-            None = 2
+            None = 2,
         }
 
         // TypeCacheManager.Provider will give access to the static instance of the TypeCache

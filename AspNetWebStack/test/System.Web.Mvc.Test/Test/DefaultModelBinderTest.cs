@@ -35,7 +35,7 @@ namespace System.Web.Mvc.Test
 
             Mock<DefaultModelBinderHelper> mockHelper = new Mock<DefaultModelBinderHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper
                 .Setup(b =>
@@ -83,8 +83,8 @@ namespace System.Web.Mvc.Test
                 {
                     { "foo[0]", null },
                     { "foo[1]", null },
-                    { "foo[2]", null }
-                }
+                    { "foo[2]", null },
+                },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -109,7 +109,7 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -138,8 +138,8 @@ namespace System.Web.Mvc.Test
                 {
                     { "foo[0]", null },
                     { "foo[1]", null },
-                    { "foo[2]", null }
-                }
+                    { "foo[2]", null },
+                },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -164,7 +164,7 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -197,10 +197,10 @@ namespace System.Web.Mvc.Test
                         { "countries.CA.States[1]", "British Columbia" },
                         { "countries.US.Name", "United States" },
                         { "countries.US.States[0]", "Washington" },
-                        { "countries.US.States[1]", "Oregon" }
+                        { "countries.US.States[1]", "Oregon" },
                     },
                     CultureInfo.CurrentCulture
-                )
+                ),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -245,10 +245,10 @@ namespace System.Web.Mvc.Test
                         { "countries[CA].States[1]", "British Columbia" },
                         { "countries[US].Name", "United States" },
                         { "countries[US].States[0]", "Washington" },
-                        { "countries[US].States[1]", "Oregon" }
+                        { "countries[US].States[1]", "Oregon" },
                     },
                     CultureInfo.CurrentCulture
-                )
+                ),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -293,10 +293,10 @@ namespace System.Web.Mvc.Test
                         { "countries.CA.States[1]", "British Columbia" },
                         { "countries.US.Name", "United States" },
                         { "countries.US.States[0]", "Washington" },
-                        { "countries.US.States[1]", "Oregon" }
+                        { "countries.US.States[1]", "Oregon" },
                     },
                     CultureInfo.CurrentCulture
-                )
+                ),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -342,8 +342,8 @@ namespace System.Web.Mvc.Test
                     { "foo[1].key", null },
                     { "foo[1].value", null },
                     { "foo[2].key", null },
-                    { "foo[2].value", null }
-                }
+                    { "foo[2].value", null },
+                },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -393,8 +393,8 @@ namespace System.Web.Mvc.Test
                 Binders = new ModelBinderDictionary()
                 {
                     { typeof(int), mockIntBinder.Object },
-                    { typeof(string), mockStringBinder.Object }
-                }
+                    { typeof(string), mockStringBinder.Object },
+                },
             };
 
             // Act
@@ -426,7 +426,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } }
+                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -445,7 +445,10 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(string), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary()
+                {
+                    { typeof(string), mockInnerBinder.Object },
+                },
             };
 
             // Act
@@ -469,7 +472,7 @@ namespace System.Web.Mvc.Test
                     typeof(int[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider() { { "foo", null } }
+                ValueProvider = new SimpleValueProvider() { { "foo", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -489,7 +492,7 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -517,7 +520,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } }
+                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -536,7 +539,10 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(string), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary()
+                {
+                    { typeof(string), mockInnerBinder.Object },
+                },
             };
 
             // Act
@@ -566,7 +572,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } }
+                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -585,7 +591,10 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(string), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary()
+                {
+                    { typeof(string), mockInnerBinder.Object },
+                },
             };
 
             // Act
@@ -617,7 +626,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } }
+                ValueProvider = new SimpleValueProvider() { { "Foo", null }, { "Bar", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -636,7 +645,10 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(string), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary()
+                {
+                    { typeof(string), mockInnerBinder.Object },
+                },
             };
 
             // Act
@@ -660,7 +672,7 @@ namespace System.Web.Mvc.Test
                     typeof(int)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider() { { "foo", "42" } }
+                ValueProvider = new SimpleValueProvider() { { "foo", "42" } },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -688,7 +700,7 @@ namespace System.Web.Mvc.Test
             {
                 ModelMetadata = metadata,
                 ModelName = "foo",
-                ValueProvider = new CustomUnvalidatedValueProvider()
+                ValueProvider = new CustomUnvalidatedValueProvider(),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -717,7 +729,7 @@ namespace System.Web.Mvc.Test
             {
                 ModelMetadata = metadata,
                 ModelName = "foo",
-                ValueProvider = new CustomUnvalidatedValueProvider()
+                ValueProvider = new CustomUnvalidatedValueProvider(),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -746,7 +758,7 @@ namespace System.Web.Mvc.Test
             {
                 ModelMetadata = metadata,
                 ModelName = "foo",
-                ValueProvider = new CustomUnvalidatedValueProvider()
+                ValueProvider = new CustomUnvalidatedValueProvider(),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -769,7 +781,7 @@ namespace System.Web.Mvc.Test
                     typeof(int)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -812,8 +824,8 @@ namespace System.Web.Mvc.Test
                 {
                     { "foo", "FooPostValue" },
                     { "bar", "BarPostValue" },
-                    { "baz", "BazPostValue" }
-                }
+                    { "baz", "BazPostValue" },
+                },
             };
             Mock<DefaultModelBinder> binder = new Mock<DefaultModelBinder> { CallBase = true };
             binder
@@ -883,8 +895,8 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new SimpleValueProvider()
                 {
                     { "prefix.foo", "FooPostValue" },
-                    { "prefix.bar", "BarPostValue" }
-                }
+                    { "prefix.bar", "BarPostValue" },
+                },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -920,8 +932,8 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new SimpleValueProvider()
                 {
                     { "foo", "FooPostValue" },
-                    { "bar", "BarPostValue" }
-                }
+                    { "bar", "BarPostValue" },
+                },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -956,8 +968,8 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new SimpleValueProvider()
                 {
                     { "foo", "FooPostValue" },
-                    { "bar", "BarPostValue" }
-                }
+                    { "bar", "BarPostValue" },
+                },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -985,8 +997,8 @@ namespace System.Web.Mvc.Test
                 ValueProvider = new SimpleValueProvider()
                 {
                     { "prefix.foo", "foo" },
-                    { "prefix.bar", "bar" }
-                }
+                    { "prefix.bar", "bar" },
+                },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -1012,7 +1024,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "Address", null } }
+                ValueProvider = new SimpleValueProvider() { { "Address", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -1035,8 +1047,8 @@ namespace System.Web.Mvc.Test
             {
                 Binders = new ModelBinderDictionary()
                 {
-                    { typeof(Address), mockInnerBinder.Object }
-                }
+                    { typeof(Address), mockInnerBinder.Object },
+                },
             };
 
             // Act
@@ -1058,7 +1070,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)["IntReadWrite"];
@@ -1083,14 +1095,14 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "IntReadWrite", "42" } }
+                ValueProvider = new SimpleValueProvider() { { "IntReadWrite", "42" } },
             };
 
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)["IntReadWrite"];
 
             Mock<DefaultModelBinderHelper> mockHelper = new Mock<DefaultModelBinderHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper
                 .Setup(b => b.PublicOnPropertyValidating(controllerContext, bindingContext, pd, 42))
@@ -1123,14 +1135,14 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "IntReadWrite", "42" } }
+                ValueProvider = new SimpleValueProvider() { { "IntReadWrite", "42" } },
             };
 
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)["IntReadWrite"];
 
             Mock<DefaultModelBinderHelper> mockHelper = new Mock<DefaultModelBinderHelper>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHelper
                 .Setup(b => b.PublicOnPropertyValidating(controllerContext, bindingContext, pd, 42))
@@ -1164,7 +1176,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "NullableIntReadWrite", null } }
+                ValueProvider = new SimpleValueProvider() { { "NullableIntReadWrite", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -1175,7 +1187,7 @@ namespace System.Web.Mvc.Test
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)["NullableIntReadWrite"];
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int?), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int?), mockInnerBinder.Object } },
             };
 
             // Act
@@ -1197,7 +1209,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { "IntReadWriteNonNegative", null } }
+                ValueProvider = new SimpleValueProvider() { { "IntReadWriteNonNegative", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -1216,7 +1228,7 @@ namespace System.Web.Mvc.Test
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)["IntReadWriteNonNegative"];
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -1245,7 +1257,7 @@ namespace System.Web.Mvc.Test
                 ),
                 ModelName = "foo",
                 ModelState = new ModelStateDictionary() { { "blah", new ModelState() } },
-                ValueProvider = new SimpleValueProvider() { { "foo.IntReadWrite", null } }
+                ValueProvider = new SimpleValueProvider() { { "foo.IntReadWrite", null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -1270,7 +1282,7 @@ namespace System.Web.Mvc.Test
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)["IntReadWrite"];
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -1294,7 +1306,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { propertyName, null } }
+                ValueProvider = new SimpleValueProvider() { { propertyName, null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -1321,7 +1333,7 @@ namespace System.Web.Mvc.Test
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)[propertyName];
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -1351,7 +1363,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = new SimpleValueProvider() { { propertyName, null } }
+                ValueProvider = new SimpleValueProvider() { { propertyName, null } },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -1378,7 +1390,7 @@ namespace System.Web.Mvc.Test
             PropertyDescriptor pd = TypeDescriptor.GetProperties(model)[propertyName];
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -1562,7 +1574,7 @@ namespace System.Web.Mvc.Test
                     typeof(CreateComplexElementalModelBindingContext_ReadsBindAttributeFromBuddyClass_Model)
                 ),
                 ModelName = "someName",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -1752,7 +1764,7 @@ namespace System.Web.Mvc.Test
                     null,
                     typeof(PropertyTestingModel)
                 ),
-                PropertyFilter = new BindAttribute() { Exclude = "Blacklisted" }.IsPropertyAllowed
+                PropertyFilter = new BindAttribute() { Exclude = "Blacklisted" }.IsPropertyAllowed,
             };
 
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper();
@@ -1786,7 +1798,7 @@ namespace System.Web.Mvc.Test
                     null,
                     typeof(PropertyTestingModel)
                 ),
-                PropertyFilter = new BindAttribute() { Exclude = "Blacklisted" }.IsPropertyAllowed
+                PropertyFilter = new BindAttribute() { Exclude = "Blacklisted" }.IsPropertyAllowed,
             };
 
             DefaultModelBinderHelper helper = new DefaultModelBinderHelper();
@@ -1843,7 +1855,7 @@ namespace System.Web.Mvc.Test
             contextWithErrors.ModelState.AddModelError("foo.bar", "baz");
             ModelBindingContext contextWithUnrelatedErrors = new ModelBindingContext
             {
-                ModelName = "foo"
+                ModelName = "foo",
             };
             contextWithUnrelatedErrors.ModelState.AddModelError("biff", "baz");
 
@@ -1881,7 +1893,7 @@ namespace System.Web.Mvc.Test
                     typeof(ModelWithoutBindAttribute)
                 ),
                 ModelName = "",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
             Mock<DefaultModelBinder> binder = new Mock<DefaultModelBinder> { CallBase = true };
             binder
@@ -1919,7 +1931,7 @@ namespace System.Web.Mvc.Test
                     typeof(ModelWithoutBindAttribute)
                 ),
                 ModelName = "",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
             Mock<DefaultModelBinder> binder = new Mock<DefaultModelBinder> { CallBase = true };
             binder
@@ -2018,7 +2030,7 @@ namespace System.Web.Mvc.Test
                     typeof(MyModel)
                 ),
                 ModelName = "theModel",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
             bindingContext.ModelState.AddModelError(
                 "theModel.ReadWriteProperty",
@@ -2044,7 +2056,7 @@ namespace System.Web.Mvc.Test
                     null,
                     typeof(MyModel)
                 ),
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
 
             PropertyDescriptor property = TypeDescriptor.GetProperties(typeof(MyModel))[
@@ -2082,8 +2094,8 @@ namespace System.Web.Mvc.Test
                 {
                     { "foo[0]", null },
                     { "foo[1]", null },
-                    { "foo[2]", null }
-                }
+                    { "foo[2]", null },
+                },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -2104,7 +2116,7 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -2141,8 +2153,8 @@ namespace System.Web.Mvc.Test
                 {
                     { "foo.index", new string[] { "alpha", "bravo", "charlie" } }, // 'bravo' will be skipped
                     { "foo[alpha]", "10" },
-                    { "foo[charlie]", "30" }
-                }
+                    { "foo[charlie]", "30" },
+                },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -2180,8 +2192,8 @@ namespace System.Web.Mvc.Test
                 {
                     { "foo[0]", null },
                     { "foo[1]", null },
-                    { "foo[2]", null }
-                }
+                    { "foo[2]", null },
+                },
             };
 
             Mock<IModelBinder> mockInnerBinder = new Mock<IModelBinder>();
@@ -2206,7 +2218,7 @@ namespace System.Web.Mvc.Test
 
             DefaultModelBinder binder = new DefaultModelBinder()
             {
-                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } }
+                Binders = new ModelBinderDictionary() { { typeof(int), mockInnerBinder.Object } },
             };
 
             // Act
@@ -2230,7 +2242,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
             DefaultModelBinder binder = new DefaultModelBinder();
 
@@ -2248,7 +2260,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, int> model = new Dictionary<string, int>
             {
                 { "one", 1 },
-                { "two", 2 }
+                { "two", 2 },
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
@@ -2264,8 +2276,8 @@ namespace System.Web.Mvc.Test
                     { "foo[1].key", null },
                     { "foo[1].value", null },
                     { "foo[2].key", null },
-                    { "foo[2].value", null }
-                }
+                    { "foo[2].value", null },
+                },
             };
 
             Mock<IModelBinder> mockStringBinder = new Mock<IModelBinder>();
@@ -2306,8 +2318,8 @@ namespace System.Web.Mvc.Test
                 Binders = new ModelBinderDictionary()
                 {
                     { typeof(string), mockStringBinder.Object },
-                    { typeof(int), mockIntBinder.Object }
-                }
+                    { typeof(int), mockIntBinder.Object },
+                },
             };
 
             // Act
@@ -2339,7 +2351,7 @@ namespace System.Web.Mvc.Test
             Dictionary<int, string> model = new Dictionary<int, string>
             {
                 { 1, "one" },
-                { 2, "two" }
+                { 2, "two" },
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
@@ -2355,8 +2367,8 @@ namespace System.Web.Mvc.Test
                     { "foo[alpha].key", "10" },
                     { "foo[alpha].value", "ten" },
                     { "foo[charlie].key", "30" },
-                    { "foo[charlie].value", "thirty" }
-                }
+                    { "foo[charlie].value", "thirty" },
+                },
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -2385,7 +2397,7 @@ namespace System.Web.Mvc.Test
             Dictionary<int, string> model = new Dictionary<int, string>
             {
                 { 1, "one" },
-                { 2, "two" }
+                { 2, "two" },
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
@@ -2402,8 +2414,8 @@ namespace System.Web.Mvc.Test
                     { "foo[1].key", null },
                     { "foo[1].value", null },
                     { "foo[2].key", null },
-                    { "foo[2].value", null }
-                }
+                    { "foo[2].value", null },
+                },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -2453,8 +2465,8 @@ namespace System.Web.Mvc.Test
                 Binders = new ModelBinderDictionary()
                 {
                     { typeof(int), mockIntBinder.Object },
-                    { typeof(string), mockStringBinder.Object }
-                }
+                    { typeof(string), mockStringBinder.Object },
+                },
             };
 
             // Act
@@ -2502,7 +2514,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ValueProvider = routeDataFactory.GetValueProvider(controllerContext)
+                ValueProvider = routeDataFactory.GetValueProvider(controllerContext),
             };
 
             DefaultModelBinder binder = new DefaultModelBinder();
@@ -2528,7 +2540,7 @@ namespace System.Web.Mvc.Test
             Dictionary<int, string> model = new Dictionary<int, string>
             {
                 { 1, "one" },
-                { 2, "two" }
+                { 2, "two" },
             };
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
@@ -2544,8 +2556,8 @@ namespace System.Web.Mvc.Test
                     { "foo[1].key", null },
                     { "foo[1].value", null },
                     { "foo[2].key", null },
-                    { "foo[2].value", null }
-                }
+                    { "foo[2].value", null },
+                },
             };
 
             Mock<IModelBinder> mockIntBinder = new Mock<IModelBinder>();
@@ -2586,8 +2598,8 @@ namespace System.Web.Mvc.Test
                 Binders = new ModelBinderDictionary()
                 {
                     { typeof(int), mockIntBinder.Object },
-                    { typeof(string), mockStringBinder.Object }
-                }
+                    { typeof(string), mockStringBinder.Object },
+                },
             };
 
             // Act
@@ -2741,7 +2753,7 @@ namespace System.Web.Mvc.Test
                 {
                     castModel = new MyStringModel()
                     {
-                        Value = bindingContext.ModelName + "_Create"
+                        Value = bindingContext.ModelName + "_Create",
                     };
                 }
                 return castModel;
@@ -3217,7 +3229,7 @@ namespace System.Web.Mvc.Test
             OnModelUpdatedModelMultipleParameters model = new OnModelUpdatedModelMultipleParameters
             {
                 Minimum = 250,
-                Maximum = 100
+                Maximum = 100,
             };
             TestableDefaultModelBinder<OnModelUpdatedModelMultipleParameters> modelBinder =
                 new TestableDefaultModelBinder<OnModelUpdatedModelMultipleParameters>(model);
@@ -3240,7 +3252,7 @@ namespace System.Web.Mvc.Test
             OnModelUpdatedModelMultipleParameters model = new OnModelUpdatedModelMultipleParameters
             {
                 Minimum = 250,
-                Maximum = 100
+                Maximum = 100,
             };
             TestableDefaultModelBinder<OnModelUpdatedModelMultipleParameters> modelBinder =
                 new TestableDefaultModelBinder<OnModelUpdatedModelMultipleParameters>(model);
@@ -3496,7 +3508,7 @@ namespace System.Web.Mvc.Test
                     () => model,
                     model.GetType()
                 ),
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
 
             PropertyDescriptor property = TypeDescriptor.GetProperties(model)["ReadOnlyProperty"];

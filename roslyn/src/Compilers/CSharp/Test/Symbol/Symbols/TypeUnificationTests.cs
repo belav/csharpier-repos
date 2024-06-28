@@ -423,7 +423,7 @@ interface IB<T, U> : IA<U, object>, IA<T, U>
                 {
                     Code = (int)ErrorCode.ERR_UnifyingInterfaceInstantiations,
                     Line = 4,
-                    Column = 11
+                    Column = 11,
                 }
             );
         }

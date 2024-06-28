@@ -24,7 +24,7 @@ namespace ILCompiler
 
         internal override void Begin()
         {
-            var settings = new XmlWriterSettings { CloseOutput = true, Indent = true, };
+            var settings = new XmlWriterSettings { CloseOutput = true, Indent = true };
 
             _sha256 = SHA256.Create();
             _writer = XmlWriter.Create(File.CreateText(_fileName), settings);

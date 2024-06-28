@@ -7,7 +7,7 @@ public class EnumToNullableEnum : AutoMapperSpecBase
     public enum SomeEnum
     {
         Foo,
-        Bar
+        Bar,
     }
 
     public class Source

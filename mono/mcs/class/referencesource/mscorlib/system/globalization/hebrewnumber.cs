@@ -353,7 +353,7 @@ namespace System.Globalization
                 HS.X,
                 HS.S9,
                 HS._err,
-                HS._err
+                HS._err,
             },
             /* 1: S400 */new HS[]
             {
@@ -366,7 +366,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_S9,
                 HS.END,
-                HS.S400_DQ
+                HS.S400_DQ,
             },
             /* 2: S400_400 */new HS[]
             {
@@ -379,7 +379,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_S9,
                 HS._err,
-                HS.S400_400_DQ
+                HS.S400_400_DQ,
             },
             /* 3: S400_X00 */new HS[]
             {
@@ -392,7 +392,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_S9,
                 HS._err,
-                HS.X00_DQ
+                HS.X00_DQ,
             },
             /* 4: S400_X0 */new HS[]
             {
@@ -405,7 +405,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
                 HS._err,
-                HS.X0_DQ
+                HS.X0_DQ,
             },
             /* 5: X00_DQ */new HS[]
             {
@@ -418,7 +418,7 @@ namespace System.Globalization
                 HS.END,
                 HS.END,
                 HS._err,
-                HS._err
+                HS._err,
             },
             /* 6: S400_X00_X0 */new HS[]
             {
@@ -431,7 +431,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
                 HS._err,
-                HS.X0_DQ
+                HS.X0_DQ,
             },
             /* 7: X0_DQ */new HS[]
             {
@@ -444,7 +444,7 @@ namespace System.Globalization
                 HS.END,
                 HS.END,
                 HS._err,
-                HS._err
+                HS._err,
             },
             /* 8: X */new HS[]
             {
@@ -457,7 +457,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
                 HS.END,
-                HS._err
+                HS._err,
             },
             /* 9: X0 */new HS[]
             {
@@ -470,7 +470,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
                 HS.END,
-                HS.X0_DQ
+                HS.X0_DQ,
             },
             /* 10: X00 */new HS[]
             {
@@ -483,7 +483,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_S9,
                 HS.END,
-                HS.X00_DQ
+                HS.X00_DQ,
             },
             /* 11: S400_DQ */new HS[]
             {
@@ -496,7 +496,7 @@ namespace System.Globalization
                 HS.END,
                 HS.END,
                 HS._err,
-                HS._err
+                HS._err,
             },
             /* 12: S400_400_DQ*/new HS[]
             {
@@ -509,7 +509,7 @@ namespace System.Globalization
                 HS.END,
                 HS.END,
                 HS._err,
-                HS._err
+                HS._err,
             },
             /* 13: S400_400_100*/new HS[]
             {
@@ -522,7 +522,7 @@ namespace System.Globalization
                 HS._err,
                 HS.X00_S9,
                 HS._err,
-                HS.X00_DQ
+                HS.X00_DQ,
             },
             /* 14: S9 */new HS[]
             {
@@ -535,7 +535,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
                 HS.END,
-                HS.S9_DQ
+                HS.S9_DQ,
             },
             /* 15: X00_S9 */new HS[]
             {
@@ -548,7 +548,7 @@ namespace System.Globalization
                 HS._err,
                 HS._err,
                 HS._err,
-                HS.S9_DQ
+                HS.S9_DQ,
             },
             /* 16: S9_DQ */new HS[]
             {
@@ -561,7 +561,7 @@ namespace System.Globalization
                 HS.END,
                 HS._err,
                 HS._err,
-                HS._err
+                HS._err,
             },
         };
 

@@ -21,6 +21,6 @@ namespace System.IO.Ports
         None,
         XOnXOff,
         RequestToSend,
-        RequestToSendXOnXOff
+        RequestToSendXOnXOff,
     };
 }

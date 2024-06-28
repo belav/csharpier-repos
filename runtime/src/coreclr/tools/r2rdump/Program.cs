@@ -291,7 +291,7 @@ namespace R2RDump
                         method.ComponentReader.MetadataReader.GetAssemblyDefinition().Name
                     ),
                     ColdRVA = 0,
-                    ColdLength = 0
+                    ColdLength = 0,
                 };
             }
         }
@@ -479,9 +479,9 @@ namespace R2RDump
                     {
                         InlineSignatureBinary = inlineSignatureBinary,
                         Naked = naked,
-                        SignatureBinary = signatureBinary
+                        SignatureBinary = signatureBinary,
                     },
-                    Unwind = Get(_command.Unwind)
+                    Unwind = Get(_command.Unwind),
                 };
 
             try
@@ -564,7 +564,7 @@ namespace R2RDump
         public static int Main(string[] args) =>
             new CliConfiguration(new R2RDumpRootCommand().UseVersion())
             {
-                ResponseFileTokenReplacer = Helpers.TryReadResponseFile
+                ResponseFileTokenReplacer = Helpers.TryReadResponseFile,
             }.Invoke(args);
     }
 }

@@ -248,8 +248,8 @@ namespace System.Text.Json.Serialization.Tests
                     {
                         Name = "Derived Doe",
                         CreditLimit = 2000,
-                        Address = new Address { City = "UB" }
-                    }
+                        Address = new Address { City = "UB" },
+                    },
                 };
 
             var options = new JsonSerializerOptions();
@@ -793,7 +793,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new CustomSystemObjectConverter() }
+                Converters = { new CustomSystemObjectConverter() },
             };
 
             string expectedJson = "42";
@@ -814,7 +814,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                Converters = { new CustomSystemObjectConverter() }
+                Converters = { new CustomSystemObjectConverter() },
             };
 
             TestValue(value, "42");

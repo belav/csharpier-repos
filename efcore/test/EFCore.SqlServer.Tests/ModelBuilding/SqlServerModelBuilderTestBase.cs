@@ -301,7 +301,7 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 var entityType = model.FindEntityType(typeof(SqlVariantEntity))!;
 
                 Assert.Equal(
-                    [nameof(SqlVariantEntity.Id), nameof(SqlVariantEntity.Value),],
+                    [nameof(SqlVariantEntity.Id), nameof(SqlVariantEntity.Value)],
                     entityType.GetProperties().Select(p => p.Name)
                 );
             }
@@ -1420,7 +1420,7 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 {
                     nameof(Order.OrderId),
                     nameof(Order.AnotherCustomerId),
-                    nameof(Order.CustomerId)
+                    nameof(Order.CustomerId),
                 },
                 owned.GetProperties().Select(p => p.GetColumnName())
             );
@@ -1489,7 +1489,7 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 {
                     nameof(Order.OrderId),
                     nameof(Order.AnotherCustomerId),
-                    nameof(Order.CustomerId)
+                    nameof(Order.CustomerId),
                 },
                 owned.GetProperties().Select(p => p.GetColumnName())
             );
@@ -1539,7 +1539,7 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                 {
                     nameof(Order.OrderId),
                     nameof(Order.AnotherCustomerId),
-                    nameof(Order.CustomerId)
+                    nameof(Order.CustomerId),
                 },
                 owned.GetProperties().Select(p => p.GetColumnName())
             );
@@ -1630,7 +1630,7 @@ public class SqlServerModelBuilderTestBase : RelationalModelBuilderTest
                     {
                         "CustomerAlternateKey",
                         nameof(CustomerDetails.CustomerId),
-                        nameof(CustomerDetails.Id)
+                        nameof(CustomerDetails.Id),
                     },
                     owned.GetProperties().Select(p => p.Name)
                 );

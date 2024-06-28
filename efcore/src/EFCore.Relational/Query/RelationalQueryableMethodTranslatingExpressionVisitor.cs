@@ -366,7 +366,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     ColumnExpression c => c.Name[..1].ToLowerInvariant(),
                     JsonScalarExpression { Path: [.., { PropertyName: string propertyName }] } =>
                         propertyName[..1].ToLowerInvariant(),
-                    _ => "j"
+                    _ => "j",
                 };
 
                 if (
@@ -498,7 +498,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                         // Since VALUES may not guarantee row ordering, we add an _ord value by which we'll order.
                         _sqlExpressionFactory.Constant(i, intTypeMapping),
                         // Note that for the actual value, we must leave the type mapping null to allow it to get inferred later based on usage
-                        translatedValue
+                        translatedValue,
                     }
                 )
             );
@@ -1303,7 +1303,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             selectExpression.ReplaceProjection(
                 new Dictionary<ProjectionMember, Expression>
                 {
-                    { projectionMember, projection.UpdateEntityType(derivedType) }
+                    { projectionMember, projection.UpdateEntityType(derivedType) },
                 }
             );
 
@@ -2041,8 +2041,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
             {
                 MemberExpression { Expression: not null } memberExpression
                     when memberExpression.Expression.UnwrapTypeConversion(out _)
-                        is StructuralTypeShaperExpression s =>
-                    s,
+                        is StructuralTypeShaperExpression s => s,
 
                 MethodCallExpression mce
                     when mce.TryGetEFPropertyArguments(out var source, out _)
@@ -2057,7 +2056,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     ) && source2.UnwrapTypeConversion(out _) is StructuralTypeShaperExpression s =>
                     s,
 
-                _ => null
+                _ => null,
             };
 
             if (shaper is null)
@@ -3019,7 +3018,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     (StructuralTypeProjectionExpression)
                         _selectExpression.GetProjection(projectionBindingExpression),
                 StructuralTypeProjectionExpression typeProjection => typeProjection,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
     }
 
@@ -3165,7 +3164,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
 
         var projectionMapping = new Dictionary<ProjectionMember, Expression>
         {
-            { new ProjectionMember(), translation }
+            { new ProjectionMember(), translation },
         };
 
         selectExpression.ClearOrdering();
@@ -3261,19 +3260,18 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                 nullableResultType
             );
             var resultVariable = Expression.Variable(nullableResultType, "result");
-            var returnValueForNull = resultType.IsNullableType()
-                ? (Expression)Expression.Default(resultType)
-                : translation.Type.IsNullableType()
-                    ? Expression.Default(resultType)
-                    : Expression.Throw(
-                        Expression.New(
-                            typeof(InvalidOperationException)
-                                .GetConstructors()
-                                .Single(ci => ci.GetParameters().Length == 1),
-                            Expression.Constant(CoreStrings.SequenceContainsNoElements)
-                        ),
-                        resultType
-                    );
+            var returnValueForNull =
+                resultType.IsNullableType() ? (Expression)Expression.Default(resultType)
+                : translation.Type.IsNullableType() ? Expression.Default(resultType)
+                : Expression.Throw(
+                    Expression.New(
+                        typeof(InvalidOperationException)
+                            .GetConstructors()
+                            .Single(ci => ci.GetParameters().Length == 1),
+                        Expression.Constant(CoreStrings.SequenceContainsNoElements)
+                    ),
+                    resultType
+                );
 
             shaper = Expression.Block(
                 new[] { resultVariable },
@@ -3350,7 +3348,7 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                         ValuesExpression
                         {
                             ColumnNames: [ValuesOrderingColumnName, ValuesValueColumnName]
-                        } valuesExpression
+                        } valuesExpression,
                     ],
                     Predicate: null,
                     GroupBy: [],
@@ -3547,9 +3545,10 @@ public class RelationalQueryableMethodTranslatingExpressionVisitor
                     // them.
                     FromSqlExpression => false,
 
-                    SelectExpression subquery =>
-                        subquery.Projection.FirstOrDefault(p => p.Alias == columnExpression.Name)
-                            is { Expression.TypeMapping: null },
+                    SelectExpression subquery => subquery.Projection.FirstOrDefault(p =>
+                        p.Alias == columnExpression.Name
+                    )
+                        is { Expression.TypeMapping: null },
 
                     JoinExpressionBase => throw new UnreachableException("Impossible: nested join"),
 

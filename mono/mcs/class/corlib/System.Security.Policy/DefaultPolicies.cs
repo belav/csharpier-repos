@@ -120,7 +120,7 @@ namespace System.Security.Policy
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
         private static StrongNamePublicKeyBlob _ecma;
         private static byte[] _msFinalKey = new byte[160]
@@ -284,7 +284,7 @@ namespace System.Security.Policy
             0x4D,
             0x5A,
             0xD2,
-            0x93
+            0x93,
         };
         private static StrongNamePublicKeyBlob _msFinal;
 

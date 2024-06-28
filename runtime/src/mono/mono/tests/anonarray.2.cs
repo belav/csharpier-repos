@@ -10,7 +10,7 @@ class Program
         IEnumerable<IEnumerable<string>> table = new string[][]
         {
             new string[] { "1a", "1b" },
-            new string[] { "2a", "2b" }
+            new string[] { "2a", "2b" },
         };
 
         foreach (IEnumerable<string> row in table)

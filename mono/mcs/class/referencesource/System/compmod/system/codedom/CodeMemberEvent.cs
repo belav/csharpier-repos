@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents an event member.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeMemberEvent : CodeTypeMember
     {
         private CodeTypeReference type;

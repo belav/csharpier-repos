@@ -158,7 +158,7 @@ namespace System.Xml
             UriString,
             Stream,
             TextReader,
-            Invalid
+            Invalid,
         }
 
         #endregion

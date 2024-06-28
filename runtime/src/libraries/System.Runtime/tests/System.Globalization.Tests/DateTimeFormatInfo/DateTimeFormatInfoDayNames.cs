@@ -20,7 +20,7 @@ namespace System.Globalization.Tests
                     "Wednesday",
                     "Thursday",
                     "Friday",
-                    "Saturday"
+                    "Saturday",
                 },
                 DateTimeFormatInfo.InvariantInfo.DayNames
             );
@@ -53,13 +53,13 @@ namespace System.Globalization.Tests
                     "الأربعاء",
                     "الخميس",
                     "الجمعة",
-                    "السبت"
-                }
+                    "السبت",
+                },
             };
             yield return new object[]
             {
                 new CultureInfo("am-ET").DateTimeFormat,
-                new string[] { "እሑድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ" }
+                new string[] { "እሑድ", "ሰኞ", "ማክሰኞ", "ረቡዕ", "ሐሙስ", "ዓርብ", "ቅዳሜ" },
             };
             yield return new object[]
             {
@@ -72,8 +72,8 @@ namespace System.Globalization.Tests
                     "сряда",
                     "четвъртък",
                     "петък",
-                    "събота"
-                }
+                    "събота",
+                },
             };
             yield return new object[]
             {
@@ -86,8 +86,8 @@ namespace System.Globalization.Tests
                     "বুধবার",
                     "বৃহস্পতিবার",
                     "শুক্রবার",
-                    "শনিবার"
-                }
+                    "শনিবার",
+                },
             };
             yield return new object[]
             {
@@ -100,8 +100,8 @@ namespace System.Globalization.Tests
                     "dimecres",
                     "dijous",
                     "divendres",
-                    "dissabte"
-                }
+                    "dissabte",
+                },
             };
             yield return new object[]
             {
@@ -114,8 +114,8 @@ namespace System.Globalization.Tests
                     "středa",
                     "čtvrtek",
                     "pátek",
-                    "sobota"
-                }
+                    "sobota",
+                },
             };
             yield return new object[]
             {
@@ -128,8 +128,8 @@ namespace System.Globalization.Tests
                     "Mittwoch",
                     "Donnerstag",
                     "Freitag",
-                    "Samstag"
-                }
+                    "Samstag",
+                },
             };
             yield return new object[]
             {
@@ -142,8 +142,8 @@ namespace System.Globalization.Tests
                     "Τετάρτη",
                     "Πέμπτη",
                     "Παρασκευή",
-                    "Σάββατο"
-                }
+                    "Σάββατο",
+                },
             };
             yield return new object[]
             {
@@ -156,8 +156,8 @@ namespace System.Globalization.Tests
                     "Wednesday",
                     "Thursday",
                     "Friday",
-                    "Saturday"
-                }
+                    "Saturday",
+                },
             };
             yield return new object[]
             {
@@ -170,8 +170,8 @@ namespace System.Globalization.Tests
                     "miércoles",
                     "jueves",
                     "viernes",
-                    "sábado"
-                }
+                    "sábado",
+                },
             };
             yield return new object[]
             {
@@ -184,8 +184,8 @@ namespace System.Globalization.Tests
                     "miércoles",
                     "jueves",
                     "viernes",
-                    "sábado"
-                }
+                    "sábado",
+                },
             };
             yield return new object[]
             {
@@ -198,8 +198,8 @@ namespace System.Globalization.Tests
                     "miércoles",
                     "jueves",
                     "viernes",
-                    "sábado"
-                }
+                    "sábado",
+                },
             };
             yield return new object[]
             {
@@ -212,8 +212,8 @@ namespace System.Globalization.Tests
                     "kolmapäev",
                     "neljapäev",
                     "reede",
-                    "laupäev"
-                }
+                    "laupäev",
+                },
             };
             yield return new object[]
             {
@@ -226,8 +226,8 @@ namespace System.Globalization.Tests
                     "چهارشنبه",
                     "پنجشنبه",
                     "جمعه",
-                    "شنبه"
-                }
+                    "شنبه",
+                },
             };
             yield return new object[]
             {
@@ -240,8 +240,8 @@ namespace System.Globalization.Tests
                     "keskiviikko",
                     "torstai",
                     "perjantai",
-                    "lauantai"
-                }
+                    "lauantai",
+                },
             };
             yield return new object[]
             {
@@ -254,8 +254,8 @@ namespace System.Globalization.Tests
                     "Miyerkules",
                     "Huwebes",
                     "Biyernes",
-                    "Sabado"
-                }
+                    "Sabado",
+                },
             };
             yield return new object[]
             {
@@ -268,8 +268,8 @@ namespace System.Globalization.Tests
                     "mercredi",
                     "jeudi",
                     "vendredi",
-                    "samedi"
-                }
+                    "samedi",
+                },
             };
             yield return new object[]
             {
@@ -282,8 +282,8 @@ namespace System.Globalization.Tests
                     "બુધવાર",
                     "ગુરુવાર",
                     "શુક્રવાર",
-                    "શનિવાર"
-                }
+                    "શનિવાર",
+                },
             };
             yield return new object[]
             {
@@ -296,8 +296,8 @@ namespace System.Globalization.Tests
                     "יום רביעי",
                     "יום חמישי",
                     "יום שישי",
-                    "יום שבת"
-                }
+                    "יום שבת",
+                },
             };
             yield return new object[]
             {
@@ -310,8 +310,8 @@ namespace System.Globalization.Tests
                     "बुधवार",
                     "गुरुवार",
                     "शुक्रवार",
-                    "शनिवार"
-                }
+                    "शनिवार",
+                },
             };
             yield return new object[]
             {
@@ -324,8 +324,8 @@ namespace System.Globalization.Tests
                     "srijeda",
                     "četvrtak",
                     "petak",
-                    "subota"
-                }
+                    "subota",
+                },
             };
             yield return new object[]
             {
@@ -338,13 +338,13 @@ namespace System.Globalization.Tests
                     "szerda",
                     "csütörtök",
                     "péntek",
-                    "szombat"
-                }
+                    "szombat",
+                },
             };
             yield return new object[]
             {
                 new CultureInfo("id-ID").DateTimeFormat,
-                new string[] { "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu" }
+                new string[] { "Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu" },
             };
             yield return new object[]
             {
@@ -357,8 +357,8 @@ namespace System.Globalization.Tests
                     "mercoledì",
                     "giovedì",
                     "venerdì",
-                    "sabato"
-                }
+                    "sabato",
+                },
             };
             yield return new object[]
             {
@@ -371,8 +371,8 @@ namespace System.Globalization.Tests
                     "水曜日",
                     "木曜日",
                     "金曜日",
-                    "土曜日"
-                }
+                    "土曜日",
+                },
             };
             yield return new object[]
             {
@@ -385,8 +385,8 @@ namespace System.Globalization.Tests
                     "ಬುಧವಾರ",
                     "ಗುರುವಾರ",
                     "ಶುಕ್ರವಾರ",
-                    "ಶನಿವಾರ"
-                }
+                    "ಶನಿವಾರ",
+                },
             };
             yield return new object[]
             {
@@ -399,8 +399,8 @@ namespace System.Globalization.Tests
                     "수요일",
                     "목요일",
                     "금요일",
-                    "토요일"
-                }
+                    "토요일",
+                },
             };
             yield return new object[]
             {
@@ -413,8 +413,8 @@ namespace System.Globalization.Tests
                     "trečiadienis",
                     "ketvirtadienis",
                     "penktadienis",
-                    "šeštadienis"
-                }
+                    "šeštadienis",
+                },
             };
             yield return new object[]
             {
@@ -427,8 +427,8 @@ namespace System.Globalization.Tests
                     "Trešdiena",
                     "Ceturtdiena",
                     "Piektdiena",
-                    "Sestdiena"
-                }
+                    "Sestdiena",
+                },
             };
             yield return new object[]
             {
@@ -441,13 +441,13 @@ namespace System.Globalization.Tests
                     "ബുധനാഴ്‌ച",
                     "വ്യാഴാഴ്‌ച",
                     "വെള്ളിയാഴ്‌ച",
-                    "ശനിയാഴ്‌ച"
-                }
+                    "ശനിയാഴ്‌ച",
+                },
             };
             yield return new object[]
             {
                 new CultureInfo("ms-BN").DateTimeFormat,
-                new string[] { "Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu" }
+                new string[] { "Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu" },
             };
             yield return new object[]
             {
@@ -460,8 +460,8 @@ namespace System.Globalization.Tests
                     "onsdag",
                     "torsdag",
                     "fredag",
-                    "lørdag"
-                }
+                    "lørdag",
+                },
             };
             yield return new object[]
             {
@@ -474,8 +474,8 @@ namespace System.Globalization.Tests
                     "woensdag",
                     "donderdag",
                     "vrijdag",
-                    "zaterdag"
-                }
+                    "zaterdag",
+                },
             };
             yield return new object[]
             {
@@ -488,8 +488,8 @@ namespace System.Globalization.Tests
                     "środa",
                     "czwartek",
                     "piątek",
-                    "sobota"
-                }
+                    "sobota",
+                },
             };
             yield return new object[]
             {
@@ -502,13 +502,22 @@ namespace System.Globalization.Tests
                     "quarta-feira",
                     "quinta-feira",
                     "sexta-feira",
-                    "sábado"
-                }
+                    "sábado",
+                },
             };
             yield return new object[]
             {
                 new CultureInfo("ro-RO").DateTimeFormat,
-                new string[] { "duminică", "luni", "marți", "miercuri", "joi", "vineri", "sâmbătă" }
+                new string[]
+                {
+                    "duminică",
+                    "luni",
+                    "marți",
+                    "miercuri",
+                    "joi",
+                    "vineri",
+                    "sâmbătă",
+                },
             };
             yield return new object[]
             {
@@ -521,8 +530,8 @@ namespace System.Globalization.Tests
                     "streda",
                     "štvrtok",
                     "piatok",
-                    "sobota"
-                }
+                    "sobota",
+                },
             };
             yield return new object[]
             {
@@ -535,8 +544,8 @@ namespace System.Globalization.Tests
                     "onsdag",
                     "torsdag",
                     "fredag",
-                    "lördag"
-                }
+                    "lördag",
+                },
             };
             yield return new object[]
             {
@@ -549,8 +558,8 @@ namespace System.Globalization.Tests
                     "Jumatano",
                     "Alhamisi",
                     "Ijumaa",
-                    "Jumamosi"
-                }
+                    "Jumamosi",
+                },
             };
             yield return new object[]
             {
@@ -563,8 +572,8 @@ namespace System.Globalization.Tests
                     "புதன்",
                     "வியாழன்",
                     "வெள்ளி",
-                    "சனி"
-                }
+                    "சனி",
+                },
             };
             yield return new object[]
             {
@@ -577,8 +586,8 @@ namespace System.Globalization.Tests
                     "బుధవారం",
                     "గురువారం",
                     "శుక్రవారం",
-                    "శనివారం"
-                }
+                    "శనివారం",
+                },
             };
             yield return new object[]
             {
@@ -591,8 +600,8 @@ namespace System.Globalization.Tests
                     "วันพุธ",
                     "วันพฤหัสบดี",
                     "วันศุกร์",
-                    "วันเสาร์"
-                }
+                    "วันเสาร์",
+                },
             };
             yield return new object[]
             {
@@ -605,8 +614,8 @@ namespace System.Globalization.Tests
                     "Çarşamba",
                     "Perşembe",
                     "Cuma",
-                    "Cumartesi"
-                }
+                    "Cumartesi",
+                },
             };
             yield return new object[]
             {
@@ -619,8 +628,8 @@ namespace System.Globalization.Tests
                     "середа",
                     "четвер",
                     "пʼятниця",
-                    "субота"
-                }
+                    "субота",
+                },
             };
             yield return new object[]
             {
@@ -633,8 +642,8 @@ namespace System.Globalization.Tests
                     "Thứ Tư",
                     "Thứ Năm",
                     "Thứ Sáu",
-                    "Thứ Bảy"
-                }
+                    "Thứ Bảy",
+                },
             };
             yield return new object[]
             {
@@ -647,8 +656,8 @@ namespace System.Globalization.Tests
                     "星期三",
                     "星期四",
                     "星期五",
-                    "星期六"
-                }
+                    "星期六",
+                },
             };
         }
 
@@ -701,7 +710,7 @@ namespace System.Globalization.Tests
             yield return new object[] { new string[] { "Sun" } };
             yield return new object[]
             {
-                new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" }
+                new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Additional" },
             };
         }
 
@@ -726,7 +735,7 @@ namespace System.Globalization.Tests
                         "4",
                         "5",
                         "6",
-                        "7"
+                        "7",
                     }
             );
         }

@@ -193,7 +193,7 @@ public class A
                 {
                     Code = (int)ErrorCode.ERR_BadIndexLHS,
                     Line = 6,
-                    Column = 27
+                    Column = 27,
                 }
             );
 
@@ -216,7 +216,7 @@ public class A
                 {
                     Code = (int)ErrorCode.ERR_BadIndexLHS,
                     Line = 10,
-                    Column = 34
+                    Column = 34,
                 }
             );
         }
@@ -585,7 +585,7 @@ class X
                     ErrorCode.WRN_UnreadRecordParameter,
                     ErrorCode.WRN_DoNotCompareFunctionPointers,
                     ErrorCode.WRN_PartialMethodTypeDifference,
-                    ErrorCode.WRN_ParameterOccursAfterInterpolatedStringHandlerParameter
+                    ErrorCode.WRN_ParameterOccursAfterInterpolatedStringHandlerParameter,
                 };
 
                 Assert.Contains(error, nullableUnrelatedWarnings);
@@ -2566,7 +2566,7 @@ class Test
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x"),
                 // (12,13): warning CS0162: Unreachable code detected
                 //             return;
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "return")
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return"),
             };
 
             CreateCompilation(text1, parseOptions: TestOptions.Regular7_3)
@@ -2608,7 +2608,7 @@ class Test
             {
                 // (8,17): warning CS0168: The variable 'x' is declared but never used
                 //             int x;
-                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x")
+                Diagnostic(ErrorCode.WRN_UnreferencedVar, "x").WithArguments("x"),
             };
 
             CreateCompilation(text4, parseOptions: TestOptions.Regular7_3, options: options)
@@ -3010,7 +3010,7 @@ public class Test
                 //     static IMyEnumerator Goo()
                 Diagnostic(ErrorCode.ERR_BadIteratorReturn, "Goo")
                     .WithArguments("Test.Goo()", "IMyEnumerator")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
             compilation.VerifyDiagnostics(expected);
             compilation.VerifyEmitDiagnostics(expected);
@@ -3162,7 +3162,7 @@ class Program
                     //         var z = (System.ConsoleColor) - 1;
                     Diagnostic(ErrorCode.ERR_BadSKunknown, "System.ConsoleColor")
                         .WithArguments("System.ConsoleColor", "type")
-                        .WithLocation(7, 18)
+                        .WithLocation(7, 18),
                 }
             );
         }
@@ -3197,7 +3197,7 @@ class Program
                     //         var z = (System.ConsoleColor) (- 1);
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "z")
                         .WithArguments("z")
-                        .WithLocation(7, 13)
+                        .WithLocation(7, 13),
                 }
             );
         }
@@ -3265,7 +3265,7 @@ class Program
                     //         var z = System.ConsoleColor - 1;
                     Diagnostic(ErrorCode.ERR_BadSKunknown, "System.ConsoleColor")
                         .WithArguments("System.ConsoleColor", "type")
-                        .WithLocation(10, 17)
+                        .WithLocation(10, 17),
                 }
             );
         }
@@ -3307,7 +3307,7 @@ class Program
                     // (6,17): error CS0075: To cast a negative value, you must enclose the value in parentheses.
                     //         var z = (@dynamic) - 1;
                     Diagnostic(ErrorCode.ERR_PossibleBadNegCast, "(@dynamic) - 1")
-                        .WithLocation(6, 17)
+                        .WithLocation(6, 17),
                 }
             );
         }
@@ -3364,7 +3364,7 @@ class Program
                     //         var z = (@dynamic) - 1;
                     Diagnostic(ErrorCode.ERR_BadBinaryOps, "(@dynamic) - 1")
                         .WithArguments("-", "method group", "int")
-                        .WithLocation(6, 17)
+                        .WithLocation(6, 17),
                 }
             );
         }

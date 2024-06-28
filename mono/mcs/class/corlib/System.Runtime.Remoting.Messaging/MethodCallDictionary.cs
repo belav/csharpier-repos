@@ -42,7 +42,7 @@ namespace System.Runtime.Remoting.Messaging
             "__TypeName",
             "__MethodSignature",
             "__Args",
-            "__CallContext"
+            "__CallContext",
         };
 
         public MCMDictionary(IMethodMessage message)

@@ -43,7 +43,7 @@ namespace System.Web.Mvc.Test
                         reqContext
                     )
                     {
-                        ControllerBuilder = cb
+                        ControllerBuilder = cb,
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
@@ -71,7 +71,7 @@ namespace System.Web.Mvc.Test
                         reqContext
                     )
                     {
-                        ControllerBuilder = cb
+                        ControllerBuilder = cb,
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
@@ -99,7 +99,7 @@ namespace System.Web.Mvc.Test
                         reqContext
                     )
                     {
-                        ControllerBuilder = cb
+                        ControllerBuilder = cb,
                     };
                     handler.ProcessRequest(reqContext.HttpContext);
                 },
@@ -209,7 +209,7 @@ namespace System.Web.Mvc.Test
             Mock<IControllerFactory> factory = new Mock<IControllerFactory>();
             Resolver<IControllerFactory> resolver = new Resolver<IControllerFactory>
             {
-                Current = factory.Object
+                Current = factory.Object,
             };
             ControllerBuilder builder = new ControllerBuilder(resolver);
 

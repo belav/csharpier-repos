@@ -8,7 +8,7 @@ class Program
         var c = new C
         {
             ["l1"] = new C { ["l2"] = new C() { Value = 10 } },
-            ["l5"] = { ["51"] = new C() { Value = 100 } }
+            ["l5"] = { ["51"] = new C() { Value = 100 } },
         };
 
         if (c["l1"]["l2"].Value != 10)

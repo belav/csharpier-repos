@@ -106,7 +106,7 @@ public class CriticalHandleArrayTest
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
         MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
         {
-            new MyCriticalHandle() { Handle = handleValue }
+            new MyCriticalHandle() { Handle = handleValue },
         };
         Assert.Throws<MarshalDirectiveException>(() => Native.In(myCriticalHandleArray));
     }
@@ -131,7 +131,7 @@ public class CriticalHandleArrayTest
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
         MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
         {
-            new MyCriticalHandle() { Handle = handleValue }
+            new MyCriticalHandle() { Handle = handleValue },
         };
         Assert.Throws<MarshalDirectiveException>(() => Native.InRef(ref myCriticalHandleArray));
     }
@@ -141,7 +141,7 @@ public class CriticalHandleArrayTest
         IntPtr handleValue = MyCriticalHandle.GetUniqueHandle();
         MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
         {
-            new MyCriticalHandle() { Handle = handleValue }
+            new MyCriticalHandle() { Handle = handleValue },
         };
         Assert.Throws<MarshalDirectiveException>(() => Native.Ref(ref myCriticalHandleArray));
     }
@@ -152,7 +152,7 @@ public class CriticalHandleArrayTest
         IntPtr handleValue2 = MyCriticalHandle.GetUniqueHandle();
         MyCriticalHandle[] myCriticalHandleArray = new MyCriticalHandle[]
         {
-            new MyCriticalHandle() { Handle = handleValue1 }
+            new MyCriticalHandle() { Handle = handleValue1 },
         };
         Assert.Throws<MarshalDirectiveException>(
             () => Native.RefModify(handleValue2, ref myCriticalHandleArray)

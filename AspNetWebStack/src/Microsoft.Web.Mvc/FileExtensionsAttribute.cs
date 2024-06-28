@@ -78,7 +78,7 @@ namespace Microsoft.Web.Mvc
             var rule = new ModelClientValidationRule
             {
                 ValidationType = "extension",
-                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName())
+                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName()),
             };
             rule.ValidationParameters["extension"] = ExtensionsNormalized;
             yield return rule;

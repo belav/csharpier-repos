@@ -7,7 +7,7 @@ namespace N1
     {
         A_1,
         A_2,
-        A_3
+        A_3,
     }
 
     namespace N2

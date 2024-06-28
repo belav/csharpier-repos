@@ -27,7 +27,7 @@ namespace System.Text.Json.Serialization.Tests
         }
 
         public static IEnumerable<object[]> ContinuationAtNullTokenTestData =>
-            new[] { new[] { SR.CustomerSearchApi108KB }, new[] { SR.CustomerSearchApi107KB }, };
+            new[] { new[] { SR.CustomerSearchApi108KB }, new[] { SR.CustomerSearchApi107KB } };
 
         private class CustomerCollectionResponse
         {

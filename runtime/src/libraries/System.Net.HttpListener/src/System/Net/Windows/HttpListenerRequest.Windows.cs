@@ -42,7 +42,7 @@ namespace System.Net
         {
             Insecure,
             NoClientCert,
-            ClientCert
+            ClientCert,
         }
 
         internal HttpListenerRequest(HttpListenerContext httpContext, RequestContextBase memoryBlob)
@@ -63,11 +63,10 @@ namespace System.Net
             _requestId = memoryBlob.RequestBlob->RequestId;
             _connectionId = memoryBlob.RequestBlob->ConnectionId;
             _sslStatus =
-                memoryBlob.RequestBlob->pSslInfo == null
-                    ? SslStatus.Insecure
-                    : memoryBlob.RequestBlob->pSslInfo->SslClientCertNegotiated == 0
-                        ? SslStatus.NoClientCert
-                        : SslStatus.ClientCert;
+                memoryBlob.RequestBlob->pSslInfo == null ? SslStatus.Insecure
+                : memoryBlob.RequestBlob->pSslInfo->SslClientCertNegotiated == 0
+                    ? SslStatus.NoClientCert
+                : SslStatus.ClientCert;
             if (memoryBlob.RequestBlob->pRawUrl != null && memoryBlob.RequestBlob->RawUrlLength > 0)
             {
                 _rawUrl = Marshal.PtrToStringAnsi(

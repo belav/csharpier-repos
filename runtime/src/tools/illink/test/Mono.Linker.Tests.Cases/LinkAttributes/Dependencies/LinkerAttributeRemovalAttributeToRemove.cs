@@ -7,7 +7,7 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes.Dependencies
 {
     public enum TestAttributeUsedFromCopyAssemblyEnum
     {
-        None
+        None,
     }
 
     public class TestAttributeUsedFromCopyAssemblyAttribute : Attribute

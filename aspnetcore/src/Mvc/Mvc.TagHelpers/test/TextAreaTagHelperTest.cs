@@ -18,15 +18,15 @@ public class TextAreaTagHelperTest
         {
             var modelWithNull = new Model
             {
-                NestedModel = new NestedModel { Text = null, },
+                NestedModel = new NestedModel { Text = null },
                 Text = null,
             };
             var modelWithText = new Model
             {
-                NestedModel = new NestedModel { Text = "inner text", },
+                NestedModel = new NestedModel { Text = "inner text" },
                 Text = "outer text",
             };
-            var models = new List<Model> { modelWithNull, modelWithText, };
+            var models = new List<Model> { modelWithNull, modelWithText };
 
             return new TheoryData<object, Type, object, NameAndId, string>
             {
@@ -121,12 +121,12 @@ public class TextAreaTagHelperTest
 
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider)
         {
-            ValidationAttributes = { { "valid", "from validation attributes" }, }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
 
         // Property name is either nameof(Model.Text) or nameof(NestedModel.Text).
         var modelExpression = new ModelExpression(nameAndId.Name, modelExplorer);
-        var tagHelper = new TextAreaTagHelper(htmlGenerator) { For = modelExpression, };
+        var tagHelper = new TextAreaTagHelper(htmlGenerator) { For = modelExpression };
 
         var tagHelperContext = new TagHelperContext(
             tagName: "text-area",
@@ -134,7 +134,7 @@ public class TextAreaTagHelperTest
             items: new Dictionary<object, object>(),
             uniqueId: "test"
         );
-        var htmlAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
+        var htmlAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var output = new TagHelperOutput(
             expectedTagName,
             htmlAttributes,
@@ -237,7 +237,7 @@ public class TextAreaTagHelperTest
             ViewContext = viewContext,
         };
 
-        var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue }, };
+        var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue } };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(

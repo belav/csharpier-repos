@@ -595,7 +595,7 @@ namespace Microsoft.CodeAnalysis.Completion
                     _displayNameToItemsMap[entireDisplayText] = new List<CompletionItem>()
                     {
                         sameNamedItem,
-                        item
+                        item,
                     };
                 }
                 else if (value is List<CompletionItem> sameNamedItems)

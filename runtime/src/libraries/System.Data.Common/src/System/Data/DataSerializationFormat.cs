@@ -11,6 +11,6 @@ namespace System.Data
             Obsoletions.SystemDataSerializationFormatBinaryMessage,
             DiagnosticId = Obsoletions.SystemDataSerializationFormatBinaryDiagId
         )]
-        Binary = 1
+        Binary = 1,
     }
 }

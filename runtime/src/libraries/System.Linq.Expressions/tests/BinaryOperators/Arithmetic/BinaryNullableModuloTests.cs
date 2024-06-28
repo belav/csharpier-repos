@@ -133,7 +133,7 @@ namespace System.Linq.Expressions.Tests
                 float.NegativeInfinity,
                 float.PositiveInfinity,
                 float.NaN,
-                null
+                null,
             };
             for (int i = 0; i < array.Length; i++)
             {
@@ -158,7 +158,7 @@ namespace System.Linq.Expressions.Tests
                 double.NegativeInfinity,
                 double.PositiveInfinity,
                 double.NaN,
-                null
+                null,
             };
             for (int i = 0; i < array.Length; i++)
             {
@@ -179,7 +179,7 @@ namespace System.Linq.Expressions.Tests
                 decimal.MinusOne,
                 decimal.MinValue,
                 decimal.MaxValue,
-                null
+                null,
             };
             for (int i = 0; i < array.Length; i++)
             {

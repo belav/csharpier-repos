@@ -55,7 +55,7 @@ namespace Mono.CSharp
             | Indexer
             | Operator
             | Destructor
-            | NestedMask
+            | NestedMask,
     }
 
     [Flags]
@@ -72,7 +72,7 @@ namespace Mono.CSharp
         NoAccessors = 1 << 3,
 
         // Member has to be override
-        OverrideOnly = 1 << 4
+        OverrideOnly = 1 << 4,
     }
 
     public struct MemberFilter : IEquatable<MemberSpec>
@@ -200,7 +200,7 @@ namespace Mono.CSharp
         enum StateFlags
         {
             HasConversionOperator = 1 << 1,
-            HasUserOperator = 1 << 2
+            HasUserOperator = 1 << 2,
         }
 
         readonly Dictionary<string, IList<MemberSpec>> member_hash;

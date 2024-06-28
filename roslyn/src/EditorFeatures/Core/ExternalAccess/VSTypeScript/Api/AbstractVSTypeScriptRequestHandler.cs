@@ -41,7 +41,7 @@ internal abstract class AbstractVSTypeScriptRequestHandler<TRequestType, TRespon
         {
             textDocumentIdentifier.ProjectContext = new VSProjectContext
             {
-                Id = typeScriptIdentifier.Value.ProjectId
+                Id = typeScriptIdentifier.Value.ProjectId,
             };
         }
 

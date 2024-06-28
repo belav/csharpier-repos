@@ -133,7 +133,7 @@ namespace LibraryImportGenerator.UnitTests
                 TestBehaviors = TestBehaviors.SkipGeneratedSourcesCheck,
                 TestCode = source,
                 FixedCode = source,
-                BatchFixedCode = source
+                BatchFixedCode = source,
             };
             test.ExpectedDiagnostics.Add(diagnostic);
             if (propertiesFile is not null)

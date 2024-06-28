@@ -48,6 +48,6 @@ namespace System.DirectoryServices.ActiveDirectory
         AccessPointDN,
         ORName,
         PresentationAddress,
-        ReplicaLink
+        ReplicaLink,
     }
 }

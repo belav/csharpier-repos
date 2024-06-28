@@ -37,6 +37,6 @@ namespace System.Windows.Forms.VisualStyles
         ImageFile4 = 3005,
         ImageFile5 = 3006,
         StockImageFile = 3007,
-        GlyphImageFile = 3008
+        GlyphImageFile = 3008,
     }
 }

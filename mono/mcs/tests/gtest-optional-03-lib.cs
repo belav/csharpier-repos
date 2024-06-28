@@ -4,7 +4,7 @@ public struct S { }
 
 public enum E
 {
-    Value = 3
+    Value = 3,
 }
 
 public class B

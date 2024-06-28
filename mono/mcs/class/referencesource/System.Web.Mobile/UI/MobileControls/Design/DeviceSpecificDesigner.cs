@@ -84,12 +84,12 @@ namespace System.Web.UI.Design.MobileControls
         private static readonly String[] _templateFramesForForm = new String[]
         {
             Constants.HeaderTemplateTag,
-            Constants.FooterTemplateTag
+            Constants.FooterTemplateTag,
         };
 
         private static readonly String[] _templateFramesForPanel = new String[]
         {
-            Constants.ContentTemplateTag
+            Constants.ContentTemplateTag,
         };
 
         protected override void Dispose(bool disposing)
@@ -220,7 +220,7 @@ namespace System.Web.UI.Design.MobileControls
                             : MobileControlDesigner.infoIcon,
                         _isDuplicate
                             ? SR.GetString(SR.DeviceSpecific_DuplicateWarningMessage)
-                            : SR.GetString(SR.MobileControl_NonHtmlSchemaErrorMessage)
+                            : SR.GetString(SR.MobileControl_NonHtmlSchemaErrorMessage),
                     }
                 );
             }

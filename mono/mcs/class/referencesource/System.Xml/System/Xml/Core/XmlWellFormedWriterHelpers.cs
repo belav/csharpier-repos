@@ -150,7 +150,7 @@ namespace System.Xml
             DefaultXmlns,
             PrefixedXmlns,
             XmlSpace,
-            XmlLang
+            XmlLang,
         }
 
         partial class AttributeValueCache

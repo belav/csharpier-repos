@@ -15,7 +15,7 @@ namespace System.Resources.ResourceWriterTests
         {
             { "name1", "value1" },
             { "name2", "value2" },
-            { "name3", "value3" }
+            { "name3", "value3" },
         };
 
         public static ResourceWriter GenerateResourceStream(
@@ -1871,7 +1871,7 @@ namespace System.Resources.ResourceWriterTests
                 {
                     "Arg_NoAccessSpec",
                     "Must specify binding flags describing the invoke operation required."
-                }
+                },
             };
 
             using (var ms2 = new MemoryStream(_RefBuffer1))
@@ -2196,7 +2196,7 @@ namespace System.Resources.ResourceWriterTests
                 108,
                 117,
                 101,
-                50
+                50,
             };
             using (var ms2 = new MemoryStream(_RefBuffer12))
             {
@@ -2485,7 +2485,7 @@ namespace System.Resources.ResourceWriterTests
                 117,
                 101,
                 50,
-                1
+                1,
             };
             using (var ms2 = new MemoryStream(_RefBuffer12))
             {
@@ -2528,7 +2528,7 @@ namespace System.Resources.ResourceWriterTests
                 115,
                 116,
                 101,
-                109
+                109,
             };
             using (var ms2 = new MemoryStream(_RefBuffer12))
             {
@@ -3091,7 +3091,7 @@ namespace System.Resources.ResourceWriterTests
                 108,
                 117,
                 101,
-                51
+                51,
             };
 
             Dictionary<string, object> s_dict_expected = new Dictionary<string, object>
@@ -3373,10 +3373,10 @@ namespace System.Resources.ResourceWriterTests
                         108,
                         117,
                         101,
-                        51
+                        51,
                     }
                 },
-                { "name3", "value3" }
+                { "name3", "value3" },
             };
             using (var ms2 = new MemoryStream(_RefBuffer12))
             {
@@ -3669,7 +3669,7 @@ namespace System.Resources.ResourceWriterTests
                 108,
                 117,
                 101,
-                50
+                50,
             };
             using (var ms2 = new MemoryStream(_RefBuffer12))
             {

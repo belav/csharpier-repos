@@ -1426,7 +1426,7 @@ namespace NZlib.Compression
             2,
             14,
             1,
-            15
+            15,
         };
 
         private static byte[] bit4Reverse =
@@ -1446,7 +1446,7 @@ namespace NZlib.Compression
             3,
             11,
             7,
-            15
+            15,
         };
 
         public class Tree
@@ -2319,7 +2319,7 @@ namespace NZlib.Compression
             163,
             195,
             227,
-            258
+            258,
         };
 
         /// <summary>
@@ -2355,7 +2355,7 @@ namespace NZlib.Compression
             5,
             5,
             5,
-            0
+            0,
         };
 
         /// <summary>
@@ -2392,7 +2392,7 @@ namespace NZlib.Compression
             8193,
             12289,
             16385,
-            24577
+            24577,
         };
 
         /// <summary>
@@ -2429,7 +2429,7 @@ namespace NZlib.Compression
             12,
             12,
             13,
-            13
+            13,
         };
 
         /// <summary>
@@ -3195,7 +3195,7 @@ namespace NZlib.Compression
             2,
             14,
             1,
-            15
+            15,
         };
 
         public InflaterDynHeader() { }
@@ -4280,7 +4280,7 @@ namespace NZlib.Checksums
             0xB40BBE37,
             0xC30C8EA1,
             0x5A05DF1B,
-            0x2D02EF8D
+            0x2D02EF8D,
         };
 
         /// <summary>

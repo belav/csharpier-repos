@@ -2065,7 +2065,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 QuickAttributes.AssemblySignatureKey => isPossibleAssemblySignatureKeyAttribute,
                 QuickAttributes.AssemblyKeyName => isPossibleAssemblyKeyNameAttribute,
                 QuickAttributes.AssemblyKeyFile => isPossibleAssemblyKeyFileAttribute,
-                _ => throw ExceptionUtilities.UnexpectedValue(attribute)
+                _ => throw ExceptionUtilities.UnexpectedValue(attribute),
             };
 
             LoadAndValidateAttributes(

@@ -19,7 +19,7 @@ namespace System.Net
         Plain,
         Rfc2109,
         Rfc2965,
-        Default = Rfc2109
+        Default = Rfc2109,
     }
 
     // Cookie class

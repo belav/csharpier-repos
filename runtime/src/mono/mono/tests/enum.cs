@@ -5,42 +5,42 @@ namespace Test
 {
     enum ByteEnum : byte
     {
-        A = 10
+        A = 10,
     }
 
     enum SByteEnum : sbyte
     {
-        A = -11
+        A = -11,
     }
 
     enum ShortEnum : short
     {
-        A = -12
+        A = -12,
     }
 
     enum UShortEnum : ushort
     {
-        A = 13
+        A = 13,
     }
 
     enum IntEnum : int
     {
-        A = -15
+        A = -15,
     }
 
     enum UIntEnum : uint
     {
-        A = 16
+        A = 16,
     }
 
     enum LongEnum : long
     {
-        A = -153453525432334L
+        A = -153453525432334L,
     }
 
     enum ULongEnum : ulong
     {
-        A = 164923797563459L
+        A = 164923797563459L,
     }
 
     public enum YaddaYadda
@@ -55,19 +55,19 @@ namespace Test
         zero,
         one,
         two,
-        three
+        three,
     }
 
     public enum longenum : long
     {
         s0 = 0,
-        s1 = 1
+        s1 = 1,
     }
 
     public enum sbyteenum : sbyte
     {
         d0,
-        d1
+        d1,
     }
 
     public class Tests

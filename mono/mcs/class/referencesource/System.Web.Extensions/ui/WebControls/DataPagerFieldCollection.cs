@@ -25,7 +25,7 @@ namespace System.Web.UI.WebControls
         {
             typeof(NextPreviousPagerField),
             typeof(NumericPagerField),
-            typeof(TemplatePagerField)
+            typeof(TemplatePagerField),
         };
 
         public event EventHandler FieldsChanged;

@@ -3046,7 +3046,7 @@ struct S
             new TheoryData<bool, CSharpParseOptions, Verification>
             {
                 { false, TestOptions.Regular7_3, Verification.Passes },
-                { true, null, Verification.Fails }
+                { true, null, Verification.Fails },
             };
 
         [Theory]

@@ -136,26 +136,24 @@ public class ManyToManyData : ISetSource
             nameof(EntityThree) => (IQueryable<TEntity>)_threes.AsQueryable(),
             nameof(EntityCompositeKey) => (IQueryable<TEntity>)_compositeKeys.AsQueryable(),
             nameof(EntityRoot) => (IQueryable<TEntity>)_roots.AsQueryable(),
-            nameof(EntityBranch) =>
-                (IQueryable<TEntity>)_roots.OfType<EntityBranch>().AsQueryable(),
+            nameof(EntityBranch) => (IQueryable<TEntity>)
+                _roots.OfType<EntityBranch>().AsQueryable(),
             nameof(EntityLeaf) => (IQueryable<TEntity>)_roots.OfType<EntityLeaf>().AsQueryable(),
-            nameof(UnidirectionalEntityOne) =>
-                (IQueryable<TEntity>)_unidirectionalOnes.AsQueryable(),
-            nameof(UnidirectionalEntityTwo) =>
-                (IQueryable<TEntity>)_unidirectionalTwos.AsQueryable(),
-            nameof(UnidirectionalEntityThree) =>
-                (IQueryable<TEntity>)_unidirectionalThrees.AsQueryable(),
-            nameof(UnidirectionalEntityCompositeKey) =>
-                (IQueryable<TEntity>)_unidirectionalCompositeKeys.AsQueryable(),
-            nameof(UnidirectionalEntityRoot) =>
-                (IQueryable<TEntity>)_unidirectionalRoots.AsQueryable(),
-            nameof(UnidirectionalEntityBranch) =>
-                (IQueryable<TEntity>)
-                    _unidirectionalRoots.OfType<UnidirectionalEntityBranch>().AsQueryable(),
-            nameof(UnidirectionalEntityLeaf) =>
-                (IQueryable<TEntity>)
-                    _unidirectionalRoots.OfType<UnidirectionalEntityLeaf>().AsQueryable(),
-            _ => throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity))
+            nameof(UnidirectionalEntityOne) => (IQueryable<TEntity>)
+                _unidirectionalOnes.AsQueryable(),
+            nameof(UnidirectionalEntityTwo) => (IQueryable<TEntity>)
+                _unidirectionalTwos.AsQueryable(),
+            nameof(UnidirectionalEntityThree) => (IQueryable<TEntity>)
+                _unidirectionalThrees.AsQueryable(),
+            nameof(UnidirectionalEntityCompositeKey) => (IQueryable<TEntity>)
+                _unidirectionalCompositeKeys.AsQueryable(),
+            nameof(UnidirectionalEntityRoot) => (IQueryable<TEntity>)
+                _unidirectionalRoots.AsQueryable(),
+            nameof(UnidirectionalEntityBranch) => (IQueryable<TEntity>)
+                _unidirectionalRoots.OfType<UnidirectionalEntityBranch>().AsQueryable(),
+            nameof(UnidirectionalEntityLeaf) => (IQueryable<TEntity>)
+                _unidirectionalRoots.OfType<UnidirectionalEntityLeaf>().AsQueryable(),
+            _ => throw new InvalidOperationException("Invalid entity type: " + typeof(TEntity)),
         };
 
     private EntityOne[] CreateOnes(ManyToManyContext context) =>
@@ -618,7 +616,7 @@ public class ManyToManyData : ISetSource
                 "9_7",
                 new DateTime(2009, 7, 1),
                 "Composite 20"
-            )
+            ),
         };
 
     private static EntityCompositeKey CreateEntityCompositeKey(
@@ -667,7 +665,7 @@ public class ManyToManyData : ISetSource
             CreateEntityLeaf(context, _useGeneratedKeys ? 0 : 21, "Leaf 1", 42, true),
             CreateEntityLeaf(context, _useGeneratedKeys ? 0 : 22, "Leaf 2", 421, true),
             CreateEntityLeaf(context, _useGeneratedKeys ? 0 : 23, "Leaf 3", 1337, false),
-            CreateEntityLeaf(context, _useGeneratedKeys ? 0 : 24, "Leaf 4", 1729, false)
+            CreateEntityLeaf(context, _useGeneratedKeys ? 0 : 24, "Leaf 4", 1729, false),
         };
 
     private static EntityRoot CreateEntityRoot(ManyToManyContext context, int id, string name) =>
@@ -757,7 +755,7 @@ public class ManyToManyData : ISetSource
             CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[18], _compositeKeys[17]),
             CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[19], _compositeKeys[17]),
             CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[16], _compositeKeys[18]),
-            CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[17], _compositeKeys[18])
+            CreateJoinCompositeKeyToLeaf(context, (EntityLeaf)_roots[17], _compositeKeys[18]),
         };
 
     private static JoinCompositeKeyToLeaf CreateJoinCompositeKeyToLeaf(
@@ -950,7 +948,7 @@ public class ManyToManyData : ISetSource
                 _ones[19],
                 _ones[15],
                 DateTime.Parse("2016-02-05 14:18:12")
-            )
+            ),
         };
 
     private static JoinOneSelfPayload CreateJoinOneSelfPayload(
@@ -1018,7 +1016,7 @@ public class ManyToManyData : ISetSource
             CreateJoinOneToBranch(context, _ones[18], _roots[15]),
             CreateJoinOneToBranch(context, _ones[18], _roots[18]),
             CreateJoinOneToBranch(context, _ones[19], _roots[16]),
-            CreateJoinOneToBranch(context, _ones[19], _roots[18])
+            CreateJoinOneToBranch(context, _ones[19], _roots[18]),
         };
 
     private static JoinOneToBranch CreateJoinOneToBranch(
@@ -1155,7 +1153,7 @@ public class ManyToManyData : ISetSource
             CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[11], "Antonia Wolfe"),
             CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[13], "Lawrence Matthews"),
             CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[17], "Van Hubbard"),
-            CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[19], "Lindsay Pena")
+            CreateJoinOneToThreePayloadFull(context, _ones[19], _threes[19], "Lindsay Pena"),
         };
 
     private static JoinOneToThreePayloadFull CreateJoinOneToThreePayloadFull(
@@ -1288,7 +1286,7 @@ public class ManyToManyData : ISetSource
             CreateJoinOneToTwo(context, _ones[17], _twos[10]),
             CreateJoinOneToTwo(context, _ones[17], _twos[1]),
             CreateJoinOneToTwo(context, _ones[18], _twos[19]),
-            CreateJoinOneToTwo(context, _ones[18], _twos[9])
+            CreateJoinOneToTwo(context, _ones[18], _twos[9]),
         };
 
     private static JoinOneToTwo CreateJoinOneToTwo(
@@ -1354,7 +1352,7 @@ public class ManyToManyData : ISetSource
             CreateJoinThreeToCompositeKeyFull(context, _threes[18], _compositeKeys[14]),
             CreateJoinThreeToCompositeKeyFull(context, _threes[18], _compositeKeys[19]),
             CreateJoinThreeToCompositeKeyFull(context, _threes[19], _compositeKeys[3]),
-            CreateJoinThreeToCompositeKeyFull(context, _threes[19], _compositeKeys[6])
+            CreateJoinThreeToCompositeKeyFull(context, _threes[19], _compositeKeys[6]),
         };
 
     private static JoinThreeToCompositeKeyFull CreateJoinThreeToCompositeKeyFull(
@@ -1425,7 +1423,7 @@ public class ManyToManyData : ISetSource
             CreateJoinTwoToThree(context, _twos[19], _threes[11]),
             CreateJoinTwoToThree(context, _twos[19], _threes[15]),
             CreateJoinTwoToThree(context, _twos[19], _threes[16]),
-            CreateJoinTwoToThree(context, _twos[19], _threes[17])
+            CreateJoinTwoToThree(context, _twos[19], _threes[17]),
         };
 
     private static JoinTwoToThree CreateJoinTwoToThree(
@@ -1489,7 +1487,7 @@ public class ManyToManyData : ISetSource
             CreateEntityOneEntityTwo(context, _ones[17], _twos[12]),
             CreateEntityOneEntityTwo(context, _ones[17], _twos[13]),
             CreateEntityOneEntityTwo(context, _ones[18], _twos[3]),
-            CreateEntityOneEntityTwo(context, _ones[18], _twos[13])
+            CreateEntityOneEntityTwo(context, _ones[18], _twos[13]),
         };
 
     private static Dictionary<string, object> CreateEntityOneEntityTwo(
@@ -1557,7 +1555,12 @@ public class ManyToManyData : ISetSource
             ),
             CreateJoinOneToThreePayloadFullShared(context, _ones[19], _threes[3], "Rockbrough"),
             CreateJoinOneToThreePayloadFullShared(context, _ones[19], _threes[4], "Sweetfield"),
-            CreateJoinOneToThreePayloadFullShared(context, _ones[19], _threes[15], "Bayburgh Hills")
+            CreateJoinOneToThreePayloadFullShared(
+                context,
+                _ones[19],
+                _threes[15],
+                "Bayburgh Hills"
+            ),
         };
 
     private static Dictionary<string, object> CreateJoinOneToThreePayloadFullShared(
@@ -1612,7 +1615,7 @@ public class ManyToManyData : ISetSource
             CreateJoinTwoSelfShared(context, _twos[17], _twos[15]),
             CreateJoinTwoSelfShared(context, _twos[17], _twos[16]),
             CreateJoinTwoSelfShared(context, _twos[18], _twos[1]),
-            CreateJoinTwoSelfShared(context, _twos[19], _twos[3])
+            CreateJoinTwoSelfShared(context, _twos[19], _twos[3]),
         };
 
     private static Dictionary<string, object> CreateJoinTwoSelfShared(
@@ -1671,7 +1674,7 @@ public class ManyToManyData : ISetSource
             CreateJoinTwoToCompositeKeyShared(context, _twos[19], _compositeKeys[2]),
             CreateJoinTwoToCompositeKeyShared(context, _twos[19], _compositeKeys[4]),
             CreateJoinTwoToCompositeKeyShared(context, _twos[19], _compositeKeys[5]),
-            CreateJoinTwoToCompositeKeyShared(context, _twos[19], _compositeKeys[13])
+            CreateJoinTwoToCompositeKeyShared(context, _twos[19], _compositeKeys[13]),
         };
 
     private static Dictionary<string, object> CreateJoinTwoToCompositeKeyShared(
@@ -1723,7 +1726,7 @@ public class ManyToManyData : ISetSource
             CreateEntityRootEntityThree(context, _threes[17], _roots[5]),
             CreateEntityRootEntityThree(context, _threes[17], _roots[18]),
             CreateEntityRootEntityThree(context, _threes[18], _roots[10]),
-            CreateEntityRootEntityThree(context, _threes[19], _roots[13])
+            CreateEntityRootEntityThree(context, _threes[19], _roots[13]),
         };
 
     private static Dictionary<string, object> CreateEntityRootEntityThree(
@@ -1823,7 +1826,7 @@ public class ManyToManyData : ISetSource
             CreateJoinCompositeKeyToRootShared(context, _roots[6], _compositeKeys[15]),
             CreateJoinCompositeKeyToRootShared(context, _roots[14], _compositeKeys[15]),
             CreateJoinCompositeKeyToRootShared(context, _roots[0], _compositeKeys[18]),
-            CreateJoinCompositeKeyToRootShared(context, _roots[5], _compositeKeys[19])
+            CreateJoinCompositeKeyToRootShared(context, _roots[5], _compositeKeys[19]),
         };
 
     private static Dictionary<string, object> CreateJoinCompositeKeyToRootShared(
@@ -2374,7 +2377,7 @@ public class ManyToManyData : ISetSource
                 "9_7",
                 new DateTime(2009, 7, 1),
                 "Composite 20"
-            )
+            ),
         };
 
     private static UnidirectionalEntityCompositeKey CreateUnidirectionalEntityCompositeKey(
@@ -2450,7 +2453,7 @@ public class ManyToManyData : ISetSource
                 "Leaf 4",
                 1729,
                 false
-            )
+            ),
         };
 
     private static UnidirectionalEntityRoot CreateUnidirectionalEntityRoot(
@@ -2665,7 +2668,7 @@ public class ManyToManyData : ISetSource
                 context,
                 (UnidirectionalEntityLeaf)_unidirectionalRoots[17],
                 _unidirectionalCompositeKeys[18]
-            )
+            ),
         };
 
     private static UnidirectionalJoinCompositeKeyToLeaf CreateUnidirectionalJoinCompositeKeyToLeaf(
@@ -2860,7 +2863,7 @@ public class ManyToManyData : ISetSource
                 _unidirectionalOnes[19],
                 _unidirectionalOnes[15],
                 DateTime.Parse("2016-02-05 14:18:12")
-            )
+            ),
         };
 
     private static UnidirectionalJoinOneSelfPayload CreateUnidirectionalJoinOneSelfPayload(
@@ -3118,7 +3121,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalOnes[19],
                 _unidirectionalRoots[18]
-            )
+            ),
         };
 
     private static UnidirectionalJoinOneToBranch CreateUnidirectionalJoinOneToBranch(
@@ -3831,7 +3834,7 @@ public class ManyToManyData : ISetSource
                 _unidirectionalOnes[19],
                 _unidirectionalThrees[19],
                 "Lindsay Pena"
-            )
+            ),
         };
 
     private static UnidirectionalJoinOneToThreePayloadFull CreateUnidirectionalJoinOneToThreePayloadFull(
@@ -4414,7 +4417,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalOnes[18],
                 _unidirectionalTwos[9]
-            )
+            ),
         };
 
     private static UnidirectionalJoinOneToTwo CreateUnidirectionalJoinOneToTwo(
@@ -4660,7 +4663,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalThrees[19],
                 _unidirectionalCompositeKeys[6]
-            )
+            ),
         };
 
     private static UnidirectionalJoinThreeToCompositeKeyFull CreateUnidirectionalJoinThreeToCompositeKeyFull(
@@ -4941,7 +4944,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalTwos[19],
                 _unidirectionalThrees[17]
-            )
+            ),
         };
 
     private static UnidirectionalJoinTwoToThree CreateUnidirectionalJoinTwoToThree(
@@ -5187,7 +5190,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalOnes[18],
                 _unidirectionalTwos[13]
-            )
+            ),
         };
 
     private static Dictionary<string, object> CreateUnidirectionalEntityOneEntityTwo(
@@ -5452,7 +5455,7 @@ public class ManyToManyData : ISetSource
                 _unidirectionalOnes[19],
                 _unidirectionalThrees[15],
                 "Bayburgh Hills"
-            )
+            ),
         };
 
     private static Dictionary<string, object> CreateUnidirectionalJoinOneToThreePayloadFullShared(
@@ -5645,7 +5648,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalTwos[19],
                 _unidirectionalTwos[3]
-            )
+            ),
         };
 
     private static Dictionary<string, object> CreateUnidirectionalJoinTwoSelfShared(
@@ -5850,7 +5853,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalTwos[19],
                 _unidirectionalCompositeKeys[13]
-            )
+            ),
         };
 
     private static Dictionary<string, object> CreateUnidirectionalJoinTwoToCompositeKeyShared(
@@ -6022,7 +6025,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalThrees[19],
                 _unidirectionalRoots[13]
-            )
+            ),
         };
 
     private static Dictionary<string, object> CreateUnidirectionalEntityRootEntityThree(
@@ -6343,7 +6346,7 @@ public class ManyToManyData : ISetSource
                 context,
                 _unidirectionalRoots[5],
                 _unidirectionalCompositeKeys[19]
-            )
+            ),
         };
 
     private static Dictionary<string, object> CreateUnidirectionalJoinCompositeKeyToRootShared(

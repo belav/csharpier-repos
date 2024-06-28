@@ -218,8 +218,7 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
                     // These are all json.net extensions.  Disallow them all.
                     JsonKind.NaNLiteralToken
                     or JsonKind.InfinityLiteralToken
-                    or JsonKind.UndefinedLiteralToken =>
-                        InvalidLiteral(node.LiteralToken),
+                    or JsonKind.UndefinedLiteralToken => InvalidLiteral(node.LiteralToken),
                     JsonKind.NumberToken => CheckNumber(node.LiteralToken, allowComments),
                     JsonKind.StringToken => CheckString(node.LiteralToken, allowComments),
                     _ => null,

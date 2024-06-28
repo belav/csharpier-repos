@@ -80,7 +80,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
                 new NotificationOptionViewModel(
                     NotificationOption2.Error,
                     KnownMonikers.StatusError
-                )
+                ),
             };
         }
 

@@ -32,6 +32,6 @@ namespace System.Windows.Forms.VisualStyles
     {
         None = 0,
         ImageGlyph = 1,
-        FontGlyph = 2
+        FontGlyph = 2,
     }
 }

@@ -48,7 +48,7 @@ namespace System.Runtime.ExceptionServices.Tests
             var psi = new ProcessStartInfo()
             {
                 RedirectStandardError = true,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             };
 
             using (

@@ -31,7 +31,7 @@ namespace Internal.TypeSystem
                 FieldAlignment = canonicalType.InstanceFieldAlignment,
                 FieldSize = canonicalType.InstanceFieldSize,
                 Offsets = Array.Empty<FieldAndOffset>(),
-                LayoutAbiStable = canonicalType.LayoutAbiStable
+                LayoutAbiStable = canonicalType.LayoutAbiStable,
             };
 
             return result;

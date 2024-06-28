@@ -650,7 +650,7 @@ namespace MonoTests.Mono.Security
             0x83,
             0x4E,
             0xF5,
-            0x6C
+            0x6C,
         };
 
         // these can be verified by saving the "test" buffer to a "test.snk" file
@@ -817,7 +817,7 @@ namespace MonoTests.Mono.Security
             0xF8,
             0xFF,
             0xA4,
-            0xCB
+            0xCB,
         };
         static byte[] testPublicKeyToken = { 0xCE, 0x52, 0x76, 0xD8, 0x68, 0x7E, 0xC6, 0xDC };
 
@@ -4432,7 +4432,7 @@ namespace MonoTests.Mono.Security
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         private static byte[] delayData =
@@ -8020,7 +8020,7 @@ namespace MonoTests.Mono.Security
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         private static byte[] key =
@@ -8620,7 +8620,7 @@ namespace MonoTests.Mono.Security
             0x5B,
             0xAF,
             0x4A,
-            0x90
+            0x90,
         };
 
         [SetUp]
@@ -8686,7 +8686,7 @@ namespace MonoTests.Mono.Security
                 0x05,
                 0xBA,
                 0x6E,
-                0x7B
+                0x7B,
             };
             Assert.AreEqual(knownHash, s, "Hash/GetHashFromAssemblyFile");
         }
@@ -8783,7 +8783,7 @@ namespace MonoTests.Mono.Security
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             sn = new StrongName(ecma);
             Assert.IsTrue(!sn.CanSign, "CanSign");

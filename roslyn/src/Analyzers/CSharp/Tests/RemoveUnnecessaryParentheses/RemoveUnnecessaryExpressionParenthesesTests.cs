@@ -3117,7 +3117,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             var expectedDiagnostics = new DiagnosticDescription[]
             {
                 outerParentheticalExpressionDiagnostic,
-                innerParentheticalExpressionDiagnostic
+                innerParentheticalExpressionDiagnostic,
             };
             await TestDiagnosticsAsync(
                 """
@@ -3147,7 +3147,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnnecessaryParent
             var expectedDiagnostics = new DiagnosticDescription[]
             {
                 outerFirstLineParentheticalExpressionDiagnostic,
-                innerParentheticalExpressionDiagnostic
+                innerParentheticalExpressionDiagnostic,
             };
             await TestDiagnosticsAsync(
                 """

@@ -218,7 +218,7 @@ internal sealed partial class RateLimitingMiddleware
                     return new LeaseContext()
                     {
                         RequestRejectionReason = RequestRejectionReason.GlobalLimiter,
-                        Lease = globalLease
+                        Lease = globalLease,
                     };
                 }
             }
@@ -229,7 +229,7 @@ internal sealed partial class RateLimitingMiddleware
                 return new LeaseContext()
                 {
                     RequestRejectionReason = RequestRejectionReason.EndpointLimiter,
-                    Lease = endpointLease
+                    Lease = endpointLease,
                 };
             }
         }
@@ -265,7 +265,7 @@ internal sealed partial class RateLimitingMiddleware
                     return new LeaseContext()
                     {
                         RequestRejectionReason = RequestRejectionReason.GlobalLimiter,
-                        Lease = globalLease
+                        Lease = globalLease,
                     };
                 }
             }
@@ -279,7 +279,7 @@ internal sealed partial class RateLimitingMiddleware
                 return new LeaseContext()
                 {
                     RequestRejectionReason = RequestRejectionReason.EndpointLimiter,
-                    Lease = endpointLease
+                    Lease = endpointLease,
                 };
             }
         }
@@ -293,7 +293,7 @@ internal sealed partial class RateLimitingMiddleware
                 RateLimiterLog.RequestCanceled(_logger);
                 return new LeaseContext()
                 {
-                    RequestRejectionReason = RequestRejectionReason.RequestCanceled
+                    RequestRejectionReason = RequestRejectionReason.RequestCanceled,
                 };
             }
             else

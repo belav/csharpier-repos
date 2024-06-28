@@ -9,19 +9,19 @@ namespace System.Web.Http
     {
         public User EchoUser(string firstName, string lastName)
         {
-            return new User() { FirstName = firstName, LastName = lastName, };
+            return new User() { FirstName = firstName, LastName = lastName };
         }
 
         public Task<User> EchoUserAsync(string firstName, string lastName)
         {
-            return Task.FromResult(new User() { FirstName = firstName, LastName = lastName, });
+            return Task.FromResult(new User() { FirstName = firstName, LastName = lastName });
         }
 
         [Authorize]
         [HttpGet]
         public User AddAdmin(string firstName, string lastName)
         {
-            return new User() { FirstName = firstName, LastName = lastName, };
+            return new User() { FirstName = firstName, LastName = lastName };
         }
 
         public User RetriveUser(int id)

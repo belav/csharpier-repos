@@ -132,7 +132,7 @@ namespace System.Web.ClientServices.Providers
                 {
                     "userName",
                     "password",
-                    "createPersistentCookie"
+                    "createPersistentCookie",
                 };
                 object[] paramValues = new object[] { username, password, rememberMe };
                 object o = ProxyHelper.CreateWebRequestAndGetResponse(

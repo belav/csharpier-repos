@@ -45,6 +45,6 @@ namespace System.Web.UI.WebControls
         ///    <para>
         ///       The item in insert mode. It is databound.</para>
         /// </devdoc>
-        Insert = 8
+        Insert = 8,
     }
 }

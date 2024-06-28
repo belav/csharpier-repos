@@ -120,7 +120,7 @@ public class SqliteParameterTest
         var parameter = new SqliteParameter
         {
             DbType = DbType.Int64,
-            SqliteType = SqliteType.Integer
+            SqliteType = SqliteType.Integer,
         };
 
         parameter.ResetDbType();
@@ -135,7 +135,7 @@ public class SqliteParameterTest
         var parameter = new SqliteParameter
         {
             DbType = DbType.Int64,
-            SqliteType = SqliteType.Integer
+            SqliteType = SqliteType.Integer,
         };
 
         parameter.ResetSqliteType();
@@ -340,7 +340,7 @@ public class SqliteParameterTest
                 0xB0,
                 0x76,
                 0x04,
-                0x65
+                0x65,
             },
             SqliteType.Blob
         );
@@ -631,6 +631,6 @@ public class SqliteParameterTest
 
     private enum MyEnum
     {
-        One = 1
+        One = 1,
     }
 }

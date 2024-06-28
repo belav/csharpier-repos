@@ -13,7 +13,7 @@ namespace System.Transactions.Tests
     {
         Normal,
         BlockingDependent,
-        RollbackDependent
+        RollbackDependent,
     };
 
     public class CloneTxTests : IDisposable
@@ -140,7 +140,7 @@ namespace System.Transactions.Tests
             {
                 IsolationLevel = isoLevel,
                 // Shorten the delay before a timeout for blocking clones.
-                Timeout = TimeSpan.FromSeconds(1)
+                Timeout = TimeSpan.FromSeconds(1),
             };
 
             // If we are dealing with a "normal" clone, we fully expect the transaction to commit successfully.

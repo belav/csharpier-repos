@@ -39,7 +39,7 @@ namespace BinaryPrimitivesReverseEndianness
             0x98,
             0xba,
             0xdc,
-            0x1e
+            0x1e,
         };
         private static readonly byte[] s_bufferBESigned64 = new byte[]
         {
@@ -50,7 +50,7 @@ namespace BinaryPrimitivesReverseEndianness
             0x76,
             0x54,
             0x32,
-            0x10
+            0x10,
         };
 
         static int Main()

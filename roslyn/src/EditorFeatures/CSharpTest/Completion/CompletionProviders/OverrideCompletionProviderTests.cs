@@ -39,7 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 {
                     CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
                     CSharpCodeStyleOptions.NeverWithSilentEnforcement
-                }
+                },
             };
 
         #region "CompletionItem tests"

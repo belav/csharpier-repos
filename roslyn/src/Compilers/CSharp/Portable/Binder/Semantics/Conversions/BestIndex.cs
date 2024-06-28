@@ -10,7 +10,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         None,
         Best,
-        Ambiguous
+        Ambiguous,
     }
 
     internal readonly struct BestIndex

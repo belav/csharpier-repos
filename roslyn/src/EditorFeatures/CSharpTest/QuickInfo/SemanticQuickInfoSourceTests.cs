@@ -6452,7 +6452,7 @@ class C
                     Usage(
                         $"\r\n{string.Format(FeaturesResources._0_1, "Proj1", FeaturesResources.Available)}\r\n{string.Format(FeaturesResources._0_1, "Proj2", FeaturesResources.Not_Available)}\r\n\r\n{FeaturesResources.You_can_use_the_navigation_bar_to_switch_contexts}",
                         expectsWarningGlyph: true
-                    )
+                    ),
                 }
             );
         }

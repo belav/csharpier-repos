@@ -1289,7 +1289,7 @@ namespace System.Net.Http
                         H3StaticTable.Status425 => 425,
                         H3StaticTable.Status500 => 500,
                         // We should never get here, at least while we only use static table. But we can still parse staticValue.
-                        _ => ParseStatusCode(staticIndex, staticValue)
+                        _ => ParseStatusCode(staticIndex, staticValue),
                     };
 
                     int ParseStatusCode(int? index, string value)
@@ -1314,7 +1314,7 @@ namespace System.Net.Http
                     Version = HttpVersion.Version30,
                     RequestMessage = _request,
                     Content = new HttpConnectionResponseContent(),
-                    StatusCode = (HttpStatusCode)statusCode
+                    StatusCode = (HttpStatusCode)statusCode,
                 };
 
                 if (statusCode < 200)
@@ -1921,7 +1921,7 @@ namespace System.Net.Http
             StatusHeader,
             SkipExpect100Headers,
             ResponseHeaders,
-            TrailingHeaders
+            TrailingHeaders,
         }
     }
 }

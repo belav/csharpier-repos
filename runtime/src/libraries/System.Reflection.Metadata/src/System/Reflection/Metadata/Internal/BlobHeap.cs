@@ -31,7 +31,7 @@ namespace System.Reflection.Metadata.Ecma335
                     0x11,
                     0xD5,
                     0x0A,
-                    0x3A
+                    0x3A,
                 };
 
                 blobs[(int)BlobHandle.VirtualIndex.ContractPublicKey] = new byte[]
@@ -195,7 +195,7 @@ namespace System.Reflection.Metadata.Ecma335
                     0x4D,
                     0x5A,
                     0xD2,
-                    0x93
+                    0x93,
                 };
 
                 blobs[(int)BlobHandle.VirtualIndex.AttributeUsage_AllowSingle] = new byte[]
@@ -232,7 +232,7 @@ namespace System.Reflection.Metadata.Ecma335
                     0x6C,
                     0x65,
                     // false
-                    0x00
+                    0x00,
                 };
 
                 blobs[(int)BlobHandle.VirtualIndex.AttributeUsage_AllowMultiple] = new byte[]
@@ -269,7 +269,7 @@ namespace System.Reflection.Metadata.Ecma335
                     0x6C,
                     0x65,
                     // true
-                    0x01
+                    0x01,
                 };
 
                 s_virtualValues = blobs;

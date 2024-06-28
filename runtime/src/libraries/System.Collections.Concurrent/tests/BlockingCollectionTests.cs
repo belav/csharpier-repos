@@ -1293,7 +1293,7 @@ namespace System.Collections.Concurrent.Tests
             {
                 "hello",
                 null,
-                "goodbye"
+                "goodbye",
             };
 
             Assert.Equal("hello", collection.Take());
@@ -1503,7 +1503,7 @@ namespace System.Collections.Concurrent.Tests
             var collectionsArray = new[]
             {
                 new BlockingCollection<int>(),
-                new BlockingCollection<int>()
+                new BlockingCollection<int>(),
             };
             collectionsArray[0].CompleteAdding();
             collectionsArray[1].CompleteAdding();

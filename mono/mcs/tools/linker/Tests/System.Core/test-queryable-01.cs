@@ -21,7 +21,7 @@ public class TestQueryableOrderBy
         {
             new Pet { Name = "Barley", Age = 8 },
             new Pet { Name = "Boots", Age = 4 },
-            new Pet { Name = "Whiskers", Age = 1 }
+            new Pet { Name = "Whiskers", Age = 1 },
         };
 
         var query = pets.AsQueryable().OrderByDescending(pet => pet.Age);

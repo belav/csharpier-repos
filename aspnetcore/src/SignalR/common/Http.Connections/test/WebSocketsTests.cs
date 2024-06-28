@@ -351,7 +351,7 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var options = new WebSocketOptions
                 {
                     // We want to verify behavior without timeout affecting it
-                    CloseTimeout = TimeSpan.FromSeconds(20)
+                    CloseTimeout = TimeSpan.FromSeconds(20),
                 };
 
                 var ws = new WebSocketsServerTransport(
@@ -401,7 +401,7 @@ public class WebSocketsTests : VerifiableLoggedTest
                 var options = new WebSocketOptions
                 {
                     // We want to verify behavior without timeout affecting it
-                    CloseTimeout = TimeSpan.FromSeconds(20)
+                    CloseTimeout = TimeSpan.FromSeconds(20),
                 };
 
                 var ws = new WebSocketsServerTransport(

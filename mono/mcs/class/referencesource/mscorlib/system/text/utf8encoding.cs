@@ -2741,7 +2741,7 @@ namespace System.Text
                     {
                         unchecked((byte)(((ch >> 12) & 0x07) | 0xF0)),
                         unchecked((byte)(((ch >> 6) & 0x3F) | 0x80)),
-                        unchecked((byte)(((ch) & 0x3F) | 0x80))
+                        unchecked((byte)(((ch) & 0x3F) | 0x80)),
                     };
                 }
                 else if ((ch & (FinalByte >> 12)) != 0)
@@ -2751,7 +2751,7 @@ namespace System.Text
                     bytesUnknown = new byte[]
                     {
                         unchecked((byte)(((ch >> 6) & 0x07) | 0xF0)),
-                        unchecked((byte)(((ch) & 0x3F) | 0x80))
+                        unchecked((byte)(((ch) & 0x3F) | 0x80)),
                     };
                 }
                 else
@@ -2771,7 +2771,7 @@ namespace System.Text
                     bytesUnknown = new byte[]
                     {
                         unchecked((byte)(((ch >> 6) & 0x0F) | 0xE0)),
-                        unchecked((byte)(((ch) & 0x3F) | 0x80))
+                        unchecked((byte)(((ch) & 0x3F) | 0x80)),
                     };
                 }
                 else

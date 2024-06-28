@@ -1640,7 +1640,7 @@ namespace MonoTests.System.IO
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         class MyMemoryStream : MemoryStream

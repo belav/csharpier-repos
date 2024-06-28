@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a delegate creation expression.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeDelegateCreateExpression : CodeExpression
     {
         private CodeTypeReference delegateType;

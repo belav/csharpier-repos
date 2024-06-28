@@ -30,7 +30,7 @@ namespace System.Web.Mvc.Test
                 new KeyValuePair<string, HttpPostedFileBase>(
                     "bar.baz",
                     new MockHttpPostedFile(200, "barBazFile")
-                )
+                ),
             };
 
         [Fact]

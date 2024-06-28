@@ -61,8 +61,8 @@ namespace ComInterfaceGenerator.Tests
                         {
                             "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop",
                             true
-                        }
-                    }
+                        },
+                    },
                 }
             );
         }
@@ -85,8 +85,8 @@ namespace ComInterfaceGenerator.Tests
                         {
                             "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop",
                             false
-                        }
-                    }
+                        },
+                    },
                 }
             );
         }

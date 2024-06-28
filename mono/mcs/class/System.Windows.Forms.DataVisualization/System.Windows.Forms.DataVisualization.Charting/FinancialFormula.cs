@@ -60,6 +60,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         VolumeOscillator = 28,
         WeightedClose = 29,
         WeightedMovingAverage = 30,
-        WilliamsR = 31
+        WilliamsR = 31,
     }
 }

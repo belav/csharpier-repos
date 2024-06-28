@@ -41,7 +41,7 @@ public class RegistryPolicyResolverTests
                 new Type[] { typeof(MyKeyEscrowSink1), typeof(MyKeyEscrowSink2) }.Select(t =>
                     t.AssemblyQualifiedName
                 )
-            )
+            ),
         };
 
         // Act
@@ -84,7 +84,9 @@ public class RegistryPolicyResolverTests
         // Arrange
         var registryEntries = new Dictionary<string, object>()
         {
-            ["DefaultKeyLifetime"] = 1024 // days
+            ["DefaultKeyLifetime"] =
+                1024 // days
+            ,
         };
 
         // Act
@@ -140,7 +142,7 @@ public class RegistryPolicyResolverTests
             ["EncryptionAlgorithmKeySize"] = 2048,
             ["EncryptionAlgorithmProvider"] = "my-enc-alg-provider",
             ["HashAlgorithm"] = "hash-alg",
-            ["HashAlgorithmProvider"] = "my-hash-alg-provider"
+            ["HashAlgorithmProvider"] = "my-hash-alg-provider",
         };
         var expectedConfiguration = new CngCbcAuthenticatedEncryptorConfiguration()
         {
@@ -148,7 +150,7 @@ public class RegistryPolicyResolverTests
             EncryptionAlgorithmKeySize = 2048,
             EncryptionAlgorithmProvider = "my-enc-alg-provider",
             HashAlgorithm = "hash-alg",
-            HashAlgorithmProvider = "my-hash-alg-provider"
+            HashAlgorithmProvider = "my-hash-alg-provider",
         };
 
         // Act
@@ -216,13 +218,13 @@ public class RegistryPolicyResolverTests
             ["EncryptionType"] = "cng-gcm",
             ["EncryptionAlgorithm"] = "enc-alg",
             ["EncryptionAlgorithmKeySize"] = 2048,
-            ["EncryptionAlgorithmProvider"] = "my-enc-alg-provider"
+            ["EncryptionAlgorithmProvider"] = "my-enc-alg-provider",
         };
         var expectedConfiguration = new CngGcmAuthenticatedEncryptorConfiguration()
         {
             EncryptionAlgorithm = "enc-alg",
             EncryptionAlgorithmKeySize = 2048,
-            EncryptionAlgorithmProvider = "my-enc-alg-provider"
+            EncryptionAlgorithmProvider = "my-enc-alg-provider",
         };
 
         // Act
@@ -285,13 +287,13 @@ public class RegistryPolicyResolverTests
             ["EncryptionType"] = "managed",
             ["EncryptionAlgorithmType"] = typeof(Aes).AssemblyQualifiedName,
             ["EncryptionAlgorithmKeySize"] = 2048,
-            ["ValidationAlgorithmType"] = typeof(HMACSHA1).AssemblyQualifiedName
+            ["ValidationAlgorithmType"] = typeof(HMACSHA1).AssemblyQualifiedName,
         };
         var expectedConfiguration = new ManagedAuthenticatedEncryptorConfiguration()
         {
             EncryptionAlgorithmType = typeof(Aes),
             EncryptionAlgorithmKeySize = 2048,
-            ValidationAlgorithmType = typeof(HMACSHA1)
+            ValidationAlgorithmType = typeof(HMACSHA1),
         };
 
         // Act

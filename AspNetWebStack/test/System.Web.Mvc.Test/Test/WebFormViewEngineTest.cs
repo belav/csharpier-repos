@@ -89,7 +89,7 @@ namespace System.Web.Mvc.Test
             string[] expected = new string[]
             {
                 "~/Views/{1}/{0}.master",
-                "~/Views/Shared/{0}.master"
+                "~/Views/Shared/{0}.master",
             };
 
             // Act
@@ -125,7 +125,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.aspx",
                 "~/Views/{1}/{0}.ascx",
                 "~/Views/Shared/{0}.aspx",
-                "~/Views/Shared/{0}.ascx"
+                "~/Views/Shared/{0}.ascx",
             };
 
             // Act
@@ -163,7 +163,7 @@ namespace System.Web.Mvc.Test
                 "~/Views/{1}/{0}.aspx",
                 "~/Views/{1}/{0}.ascx",
                 "~/Views/Shared/{0}.aspx",
-                "~/Views/Shared/{0}.ascx"
+                "~/Views/Shared/{0}.ascx",
             };
 
             // Act
@@ -196,7 +196,7 @@ namespace System.Web.Mvc.Test
         public void FileExtensionsProperty()
         {
             // Arrange
-            string[] expected = new string[] { "aspx", "ascx", "master", };
+            string[] expected = new string[] { "aspx", "ascx", "master" };
 
             // Act
             TestableWebFormViewEngine engine = new TestableWebFormViewEngine();

@@ -207,7 +207,7 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
             Property1 = "p1",
-            Property2 = null
+            Property2 = null,
         };
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model);
 
@@ -249,7 +249,7 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
             Property1 = "p1",
-            Property2 = null
+            Property2 = null,
         };
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider);
 
@@ -452,7 +452,7 @@ public class DefaultEditorTemplatesTest
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
             Property1 = "p1",
-            Property2 = null
+            Property2 = null,
         };
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider: provider);
 
@@ -985,7 +985,7 @@ public class DefaultEditorTemplatesTest
         // Arrange
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
-            Property1 = "Model string"
+            Property1 = "Model string",
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
@@ -1533,7 +1533,7 @@ public class DefaultEditorTemplatesTest
         // Arrange
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
-            Property1 = "Model string"
+            Property1 = "Model string",
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
@@ -1573,7 +1573,7 @@ public class DefaultEditorTemplatesTest
         // Arrange
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
-            Property1 = "Model string"
+            Property1 = "Model string",
         };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
@@ -1612,10 +1612,7 @@ public class DefaultEditorTemplatesTest
     public void EditorFor_FindsModel_EvenIfNullOrEmpty(string propertyValue)
     {
         // Arrange
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
-        {
-            Property1 = propertyValue,
-        };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = propertyValue };
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine
             .Setup(v =>
@@ -1653,10 +1650,7 @@ public class DefaultEditorTemplatesTest
     {
         // Arrange
         var expectedMessage = "my exception message";
-        var model = new DefaultTemplatesUtilities.ObjectTemplateModel
-        {
-            Property1 = "Test string",
-        };
+        var model = new DefaultTemplatesUtilities.ObjectTemplateModel { Property1 = "Test string" };
         var view = new Mock<IView>();
         view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
             .Returns(

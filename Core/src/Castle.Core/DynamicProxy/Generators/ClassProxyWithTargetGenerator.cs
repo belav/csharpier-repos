@@ -67,7 +67,7 @@ namespace Castle.DynamicProxy.Generators
         {
             return new ClassProxyWithTargetTargetContributor(targetType, namingScope)
             {
-                Logger = Logger
+                Logger = Logger,
             };
         }
 

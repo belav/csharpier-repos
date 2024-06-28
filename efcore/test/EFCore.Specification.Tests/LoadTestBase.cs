@@ -40,7 +40,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             RequiredSingle = new RequiredSingle { Id = 21 },
             SingleAk = new SingleAk { Id = 42 },
             SingleShadowFk = new SingleShadowFk { Id = 62 },
-            SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+            SingleCompositeKey = new SingleCompositeKey { Id = 62 },
         };
 
         context.Attach(parent);
@@ -88,7 +88,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             RequiredSingle = new RequiredSingle { Id = 21 },
             SingleAk = new SingleAk { Id = 42 },
             SingleShadowFk = new SingleShadowFk { Id = 62 },
-            SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+            SingleCompositeKey = new SingleCompositeKey { Id = 62 },
         };
 
         context.Attach(parent);
@@ -133,23 +133,23 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
             Children = new List<Child>
             {
                 new() { Id = 11 },
-                new() { Id = 12 }
+                new() { Id = 12 },
             },
             ChildrenAk = new List<ChildAk>
             {
                 new() { Id = 31 },
-                new() { Id = 32 }
+                new() { Id = 32 },
             },
             ChildrenShadowFk = new List<ChildShadowFk>
             {
                 new() { Id = 51 },
-                new() { Id = 52 }
+                new() { Id = 52 },
             },
             ChildrenCompositeKey = new List<ChildCompositeKey>
             {
                 new() { Id = 51 },
-                new() { Id = 52 }
-            }
+                new() { Id = 52 },
+            },
         };
 
         context.Attach(parent);
@@ -6439,7 +6439,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     .HasForeignKey<SingleCompositeKey>(e => new
                     {
                         e.ParentAlternateId,
-                        e.ParentId
+                        e.ParentId,
                     });
             });
 
@@ -6579,7 +6579,7 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     Children = new List<Child>
                     {
                         new() { Id = 11 },
-                        new() { Id = 12 }
+                        new() { Id = 12 },
                     },
                     SinglePkToPk = new SinglePkToPk { Id = 707 },
                     Single = new Single { Id = 21 },
@@ -6587,21 +6587,21 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     ChildrenAk = new List<ChildAk>
                     {
                         new() { Id = 31 },
-                        new() { Id = 32 }
+                        new() { Id = 32 },
                     },
                     SingleAk = new SingleAk { Id = 42 },
                     ChildrenShadowFk = new List<ChildShadowFk>
                     {
                         new() { Id = 51 },
-                        new() { Id = 52 }
+                        new() { Id = 52 },
                     },
                     SingleShadowFk = new SingleShadowFk { Id = 62 },
                     ChildrenCompositeKey = new List<ChildCompositeKey>
                     {
                         new() { Id = 51 },
-                        new() { Id = 52 }
+                        new() { Id = 52 },
                     },
-                    SingleCompositeKey = new SingleCompositeKey { Id = 62 }
+                    SingleCompositeKey = new SingleCompositeKey { Id = 62 },
                 }
             );
 
@@ -6612,9 +6612,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     Children = new List<ChildFullLoaderByConstructor>
                     {
                         new() { Id = 11 },
-                        new() { Id = 12 }
+                        new() { Id = 12 },
                     },
-                    Single = new SingleFullLoaderByConstructor { Id = 21 }
+                    Single = new SingleFullLoaderByConstructor { Id = 21 },
                 }
             );
 
@@ -6625,9 +6625,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     Children = new List<ChildDelegateLoaderByConstructor>
                     {
                         new() { Id = 11 },
-                        new() { Id = 12 }
+                        new() { Id = 12 },
                     },
-                    Single = new SingleDelegateLoaderByConstructor { Id = 21 }
+                    Single = new SingleDelegateLoaderByConstructor { Id = 21 },
                 }
             );
 
@@ -6638,9 +6638,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     Children = new List<ChildDelegateLoaderByProperty>
                     {
                         new() { Id = 11 },
-                        new() { Id = 12 }
+                        new() { Id = 12 },
                     },
-                    Single = new SingleDelegateLoaderByProperty { Id = 21 }
+                    Single = new SingleDelegateLoaderByProperty { Id = 21 },
                 }
             );
 
@@ -6651,9 +6651,9 @@ public abstract partial class LoadTestBase<TFixture> : IClassFixture<TFixture>
                     Children = new List<ChildDelegateLoaderWithStateByProperty>
                     {
                         new() { Id = 11 },
-                        new() { Id = 12 }
+                        new() { Id = 12 },
                     },
-                    Single = new SingleDelegateLoaderWithStateByProperty { Id = 21 }
+                    Single = new SingleDelegateLoaderWithStateByProperty { Id = 21 },
                 }
             );
 

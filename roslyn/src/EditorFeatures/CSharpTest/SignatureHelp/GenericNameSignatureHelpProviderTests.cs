@@ -842,7 +842,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SignatureHelp
                         "summary headline",
                         "T documentation",
                         currentParameterIndex: 0
-                    )
+                    ),
                 }
             );
         }

@@ -26,8 +26,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "XmlNameTable user scenario inheritance",
-                        Desc = "XmlNameTable inheritance"
-                    }
+                        Desc = "XmlNameTable inheritance",
+                    },
                 }
             );
             module.AddChild(
@@ -36,8 +36,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Get) VerifyWGetChar",
-                        Desc = "VerifyWGetChar"
-                    }
+                        Desc = "VerifyWGetChar",
+                    },
                 }
             );
             module.AddChild(
@@ -46,8 +46,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Get) VerifyWAddChar",
-                        Desc = "VerifyWAddChar"
-                    }
+                        Desc = "VerifyWAddChar",
+                    },
                 }
             );
             module.AddChild(
@@ -56,8 +56,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Get) VerifyWAddString",
-                        Desc = "VerifyWAddString"
-                    }
+                        Desc = "VerifyWAddString",
+                    },
                 }
             );
             module.AddChild(
@@ -66,8 +66,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Get) VerifyWGetString",
-                        Desc = "VerifyWGetString"
-                    }
+                        Desc = "VerifyWGetString",
+                    },
                 }
             );
             module.AddChild(
@@ -76,8 +76,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWAddChar",
-                        Desc = "VerifyWAddChar"
-                    }
+                        Desc = "VerifyWAddChar",
+                    },
                 }
             );
             module.AddChild(
@@ -86,8 +86,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWGetChar",
-                        Desc = "VerifyWGetChar"
-                    }
+                        Desc = "VerifyWGetChar",
+                    },
                 }
             );
             module.AddChild(
@@ -96,8 +96,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWAddString",
-                        Desc = "VerifyWAddString"
-                    }
+                        Desc = "VerifyWAddString",
+                    },
                 }
             );
             module.AddChild(
@@ -106,8 +106,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWGetString",
-                        Desc = "VerifyWGetString"
-                    }
+                        Desc = "VerifyWGetString",
+                    },
                 }
             );
             module.AddChild(
@@ -116,8 +116,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Get) VerifyWAddString",
-                        Desc = "VerifyWAddString"
-                    }
+                        Desc = "VerifyWAddString",
+                    },
                 }
             );
             module.AddChild(
@@ -126,8 +126,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Get) VerifyWGetString",
-                        Desc = "VerifyWGetString"
-                    }
+                        Desc = "VerifyWGetString",
+                    },
                 }
             );
             module.AddChild(
@@ -136,8 +136,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWAddChar",
-                        Desc = "VerifyWAddChar"
-                    }
+                        Desc = "VerifyWAddChar",
+                    },
                 }
             );
             module.AddChild(
@@ -146,8 +146,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWGetChar",
-                        Desc = "VerifyWGetChar"
-                    }
+                        Desc = "VerifyWGetChar",
+                    },
                 }
             );
             module.AddChild(
@@ -156,8 +156,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWAddString",
-                        Desc = "VerifyWAddString"
-                    }
+                        Desc = "VerifyWAddString",
+                    },
                 }
             );
             module.AddChild(
@@ -166,8 +166,8 @@ namespace System.Xml.NameTableTests
                     Attribute = new TestCase()
                     {
                         Name = "NameTable(Add) VerifyWGetString",
-                        Desc = "VerifyWGetString"
-                    }
+                        Desc = "VerifyWGetString",
+                    },
                 }
             );
 

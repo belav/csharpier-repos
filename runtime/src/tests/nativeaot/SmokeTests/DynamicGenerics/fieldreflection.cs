@@ -226,14 +226,14 @@ public class FieldReflectionTests
         {
             _f1 = "111",
             _f2 = 0x222,
-            _f3 = 0x333
+            _f3 = 0x333,
         };
         Type2 srt2 = new Type2
         {
             _f1 = 11.11f,
             _f2 = 22.22,
             _f3 = 0x33,
-            _f4 = "444"
+            _f4 = "444",
         };
 
         TestInstanceFieldsOnDerivedType_Inner<Type1, Type2>(srt1, srt2);
@@ -293,14 +293,14 @@ public class FieldReflectionTests
         {
             _f1 = "111",
             _f2 = 0x222,
-            _f3 = 0x333
+            _f3 = 0x333,
         };
         Type2 srt2 = new Type2
         {
             _f1 = 11.11f,
             _f2 = 22.22,
             _f3 = 0x33,
-            _f4 = "444"
+            _f4 = "444",
         };
 
         TestInstanceFields_Inner<Type1, Type2>(
@@ -385,14 +385,14 @@ public class FieldReflectionTests
         {
             _f1 = "111",
             _f2 = 0x222,
-            _f3 = 0x333
+            _f3 = 0x333,
         };
         Type2 srt2 = new Type2
         {
             _f1 = 11.11f,
             _f2 = 22.22,
             _f3 = 0x33,
-            _f4 = "444"
+            _f4 = "444",
         };
 
         TestStaticFields_Inner<Type1, Type2>(TypeOf.FRT_ReferenceTypeWithVariousFields, srt1, srt2);

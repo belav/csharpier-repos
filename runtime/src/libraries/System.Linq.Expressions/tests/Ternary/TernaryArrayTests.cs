@@ -18,7 +18,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new bool[0],
                 new bool[] { true, false },
-                new bool[100]
+                new bool[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -41,7 +41,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new byte[0],
                 new byte[] { 0, 1, byte.MaxValue },
-                new byte[100]
+                new byte[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -63,7 +63,7 @@ namespace System.Linq.Expressions.Tests
             {
                 null,
                 new C[] { null, new C(), new D(), new D(0), new D(5) },
-                new C[10]
+                new C[10],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -86,7 +86,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new char[0],
                 new char[] { '\0', '\b', 'A', '\uffff' },
-                new char[100]
+                new char[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -108,7 +108,7 @@ namespace System.Linq.Expressions.Tests
             {
                 null,
                 new D[] { null, new D(), new D(0), new D(5) },
-                new D[10]
+                new D[10],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -136,9 +136,9 @@ namespace System.Linq.Expressions.Tests
                     decimal.One,
                     decimal.MinusOne,
                     decimal.MinValue,
-                    decimal.MaxValue
+                    decimal.MaxValue,
                 },
-                new decimal[100]
+                new decimal[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -173,9 +173,9 @@ namespace System.Linq.Expressions.Tests
                         {
                             return i + 1;
                         },
-                    (Action<object>)delegate { }
+                    (Action<object>)delegate { },
                 },
-                new Delegate[100]
+                new Delegate[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -207,9 +207,9 @@ namespace System.Linq.Expressions.Tests
                     double.Epsilon,
                     double.NegativeInfinity,
                     double.PositiveInfinity,
-                    double.NaN
+                    double.NaN,
                 },
-                new double[100]
+                new double[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -232,7 +232,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new E[0],
                 new E[] { (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue },
-                new E[100]
+                new E[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -255,7 +255,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new El[0],
                 new El[] { (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue },
-                new El[100]
+                new El[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -287,9 +287,9 @@ namespace System.Linq.Expressions.Tests
                     float.Epsilon,
                     float.NegativeInfinity,
                     float.PositiveInfinity,
-                    float.NaN
+                    float.NaN,
                 },
-                new float[100]
+                new float[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -318,9 +318,9 @@ namespace System.Linq.Expressions.Tests
                         delegate()
                         {
                             return null;
-                        }
+                        },
                 },
-                new Func<object>[100]
+                new Func<object>[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -343,7 +343,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new I[0],
                 new I[] { null, new C(), new D(), new D(0), new D(5) },
-                new I[100]
+                new I[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -366,7 +366,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new IEquatable<C>[0],
                 new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) },
-                new IEquatable<C>[100]
+                new IEquatable<C>[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -394,7 +394,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new IEquatable<D>[0],
                 new IEquatable<D>[] { null, new D(), new D(0), new D(5) },
-                new IEquatable<D>[100]
+                new IEquatable<D>[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -422,7 +422,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new int[0],
                 new int[] { 0, 1, -1, int.MinValue, int.MaxValue },
-                new int[100]
+                new int[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -445,7 +445,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new long[0],
                 new long[] { 0, 1, -1, long.MinValue, long.MaxValue },
-                new long[100]
+                new long[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -468,7 +468,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new object[0],
                 new object[] { null, new object(), new C(), new D(3) },
-                new object[100]
+                new object[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -508,7 +508,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new sbyte[0],
                 new sbyte[] { 0, 1, -1, sbyte.MinValue, sbyte.MaxValue },
-                new sbyte[100]
+                new sbyte[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -531,7 +531,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Sc[0],
                 new Sc[] { default(Sc), new Sc(), new Sc(null) },
-                new Sc[100]
+                new Sc[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -559,7 +559,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Scs[0],
                 new Scs[] { default(Scs), new Scs(), new Scs(null, new S()) },
-                new Scs[100]
+                new Scs[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -587,7 +587,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new short[0],
                 new short[] { 0, 1, -1, short.MinValue, short.MaxValue },
-                new short[100]
+                new short[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -610,7 +610,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Sp[0],
                 new Sp[] { default(Sp), new Sp(), new Sp(5, 5.0) },
-                new Sp[100]
+                new Sp[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -638,7 +638,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Ss[0],
                 new Ss[] { default(Ss), new Ss(), new Ss(new S()) },
-                new Ss[100]
+                new Ss[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -666,7 +666,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new string[0],
                 new string[] { null, "", "a", "foo" },
-                new string[100]
+                new string[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -689,7 +689,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new uint[0],
                 new uint[] { 0, 1, uint.MaxValue },
-                new uint[100]
+                new uint[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -712,7 +712,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new ulong[0],
                 new ulong[] { 0, 1, ulong.MaxValue },
-                new ulong[100]
+                new ulong[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -735,7 +735,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new ushort[0],
                 new ushort[] { 0, 1, ushort.MaxValue },
-                new ushort[100]
+                new ushort[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -884,7 +884,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Tc[0],
                 new Tc[] { null, default(Tc) },
-                new Tc[100]
+                new Tc[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -914,7 +914,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new TC[0],
                 new TC[] { null, default(TC), (TC)new C() },
-                new TC[100]
+                new TC[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -944,7 +944,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Tcn[0],
                 new Tcn[] { null, default(Tcn), new Tcn() },
-                new Tcn[100]
+                new Tcn[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -974,7 +974,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new TCn[0],
                 new TCn[] { null, default(TCn), new TCn(), (TCn)new C() },
-                new TCn[100]
+                new TCn[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -1004,7 +1004,7 @@ namespace System.Linq.Expressions.Tests
                 null,
                 new Ts[0],
                 new Ts[] { default(Ts), new Ts() },
-                new Ts[100]
+                new Ts[100],
             };
             for (int i = 0; i < array1.Length; i++)
             {

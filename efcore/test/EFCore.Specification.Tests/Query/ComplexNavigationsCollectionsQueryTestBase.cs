@@ -63,7 +63,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 {
                     Entity = l4,
                     Collection = l2.OneToMany_Optional_Self2.Where(e => e.Id != 42).ToList(),
-                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name
+                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name,
                 },
             ss =>
                 from l4 in ss.Set<Level1>()
@@ -88,7 +88,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 {
                     Entity = l4,
                     Collection = l2.OneToMany_Optional_Self2.Where(e => e.Id != 42).ToList(),
-                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name
+                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name,
                 },
             elementSorter: e => e.Entity.Id,
             elementAsserter: (e, a) =>
@@ -184,7 +184,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 select new
                 {
                     l1.Id,
-                    collection = l1.OneToMany_Optional1.Where(l2 => l2.Name != "Foo").ToList()
+                    collection = l1.OneToMany_Optional1.Where(l2 => l2.Name != "Foo").ToList(),
                 },
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -234,7 +234,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 select new
                 {
                     l1.OneToOne_Optional_FK1,
-                    l1.OneToOne_Optional_FK1.OneToMany_Optional2
+                    l1.OneToOne_Optional_FK1.OneToMany_Optional2,
                 },
             elementSorter: e => e.OneToOne_Optional_FK1?.Id,
             elementAsserter: (e, a) =>
@@ -261,7 +261,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         subquery = ss.Set<Level2>()
                             .Include(l => l.OneToMany_Optional2)
                             .Where(l => l.Id > 0)
-                            .ToList()
+                            .ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) => AssertCollection(e.subquery, a.subquery)
@@ -282,9 +282,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             {
                                 Level3 = l2.OneToOne_Required_FK2 == null
                                     ? null
-                                    : new { l2.OneToOne_Required_FK2.Name }
+                                    : new { l2.OneToOne_Required_FK2.Name },
                             })
-                            .ToList()
+                            .ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -308,10 +308,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                     ? null
                                     : new ProjectedDto<string>
                                     {
-                                        Value = l2.OneToOne_Required_FK2.Name
-                                    }
+                                        Value = l2.OneToOne_Required_FK2.Name,
+                                    },
                             })
-                            .ToList()
+                            .ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -400,7 +400,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         l1.Id,
                         c1 = l1.OneToMany_Required1.Select(l2 => new { l2.Id }).FirstOrDefault(),
-                        c2 = l1.OneToMany_Required1.Select(l2 => new { l2.Id })
+                        c2 = l1.OneToMany_Required1.Select(l2 => new { l2.Id }),
                     }),
             elementSorter: t => t.Id,
             elementAsserter: (e, a) =>
@@ -433,9 +433,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 Level3s = l2
                                     .OneToMany_Optional2.OrderBy(l3 => l3.Id)
                                     .Select(l3 => new { l3.Id })
-                                    .ToList()
+                                    .ToList(),
                             })
-                            .FirstOrDefault()
+                            .FirstOrDefault(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -472,10 +472,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                         Level4s = l3
                                             .OneToMany_Optional3.OrderBy(l4 => l4.Id)
                                             .Select(l4 => new { l4.Id })
-                                            .ToList()
+                                            .ToList(),
                                     })
-                                    .FirstOrDefault()
-                            })
+                                    .FirstOrDefault(),
+                            }),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -600,7 +600,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 {
                     Entity = l4,
                     Collection = l2.OneToMany_Optional_Self2.Where(e => e.Id != 42).ToList(),
-                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name
+                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name,
                 },
             ss =>
                 from l4 in ss.Set<Level1>()
@@ -625,7 +625,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 {
                     Entity = l4,
                     Collection = l2.OneToMany_Optional_Self2.Where(e => e.Id != 42).ToList(),
-                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name
+                    Property = l3.OneToOne_Optional_FK_Inverse3.OneToOne_Required_FK2.Name,
                 },
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -658,8 +658,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 l2.Name,
                                 Level1Id = EF.Property<int>(l2, "OneToMany_Required_Inverse2Id"),
                                 Level2Id = l2.Level1_Required_Id,
-                                Level2 = l2.OneToOne_Required_FK_Inverse2
-                            })
+                                Level2 = l2.OneToOne_Required_FK_Inverse2,
+                            }),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -706,8 +706,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 l2.Name,
                                 Level1Id = EF.Property<int>(l2, "OneToMany_Required_Inverse2Id"),
                                 Level2Id = l2.Level1_Required_Id,
-                                Level2 = l2.OneToOne_Required_FK_Inverse2
-                            })
+                                Level2 = l2.OneToOne_Required_FK_Inverse2,
+                            }),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1422,7 +1422,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         x.Id,
                         x.Name,
-                        FK = EF.Property<int>(x, "OneToMany_Optional_Inverse2Id")
+                        FK = EF.Property<int>(x, "OneToMany_Optional_Inverse2Id"),
                     })
                     .Distinct()
                 select l1,
@@ -2037,7 +2037,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     {
                         Id = e.Id,
                         OneToOne_Required_FK1 = e.OneToOne_Required_FK1,
-                        OneToMany_Required1 = e.OneToMany_Required1
+                        OneToMany_Required1 = e.OneToMany_Required1,
                     })
         );
 
@@ -2058,7 +2058,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 select new Level2
                 {
                     Id = l2 == null ? 0 : l2.Id,
-                    OneToMany_Required2 = l2 == null ? null : l2.OneToMany_Required2
+                    OneToMany_Required2 = l2 == null ? null : l2.OneToMany_Required2,
                 }
         );
     }
@@ -2922,7 +2922,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .ToList(),
                         FilteredInclude = ss.Set<Level2>()
                             .Include(l2 => l2.OneToMany_Optional2.Where(x => x.Id != l1.Id))
-                            .ToList()
+                            .ToList(),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -3144,7 +3144,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(g => new
                     {
                         g.Key,
-                        Level1s = g.OrderByDescending(e => e.Name).Take(10)
+                        Level1s = g.OrderByDescending(e => e.Name).Take(10),
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -3182,7 +3182,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(g => new
                     {
                         g.Key,
-                        Level1s = g.OrderBy(e => e.Name).Skip(1).Take(5).Distinct()
+                        Level1s = g.OrderBy(e => e.Name).Skip(1).Take(5).Distinct(),
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -3203,7 +3203,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(g => new
                     {
                         g.Key,
-                        Level1s = g.OrderBy(e => e.Name).Skip(1).Take(5).ToList()
+                        Level1s = g.OrderBy(e => e.Name).Skip(1).Take(5).ToList(),
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -3227,7 +3227,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         Level1s = g.OrderBy(e => e.Name)
                             .Skip(1)
                             .Take(5)
-                            .Select(l1 => new { l1.Name })
+                            .Select(l1 => new { l1.Name }),
                     }),
             elementSorter: e => e.Key,
             elementAsserter: (e, a) =>
@@ -3307,9 +3307,9 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .Select(g => new
                             {
                                 g.Key,
-                                Level1s = g.OrderBy(e => e.Name).Skip(1).Take(5)
+                                Level1s = g.OrderBy(e => e.Name).Skip(1).Take(5),
                             })
-                            .ToList()
+                            .ToList(),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -3474,7 +3474,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                     .Select(l1 => new
                     {
                         l1.Id,
-                        Element = l1.OneToMany_Optional1.FirstOrDefault(l2 => l2.Id == l1.Id)
+                        Element = l1.OneToMany_Optional1.FirstOrDefault(l2 => l2.Id == l1.Id),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -3500,7 +3500,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                 {
                     Root = l1,
                     Element = l2,
-                    Collection = l1.OneToMany_Optional1
+                    Collection = l1.OneToMany_Optional1,
                 },
             elementSorter: e => (e.Root.Id, e.Element.Id),
             elementAsserter: (e, a) =>
@@ -3536,8 +3536,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 ChildCount = lc1.OneToMany_Optional_Self1.Count,
                                 Level2Name = lc1.OneToOne_Optional_FK1.Name,
                                 Level2Count = lc1.OneToMany_Optional1.Count(),
-                                IsLevel2There = lc1.OneToMany_Optional1.Any(l2 => l2.Id == 2)
-                            })
+                                IsLevel2There = lc1.OneToMany_Optional1.Any(l2 => l2.Id == 2),
+                            }),
                     }),
             e => e.Level1.Id == 2,
             asserter: (e, a) =>
@@ -3578,8 +3578,8 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         Collection = l1.OneToOne_Optional_FK1.OneToMany_Optional2.Select(l3 => new
                         {
                             ChildId = l3.Id,
-                            ParentName = l1.OneToOne_Optional_FK1.Name
-                        })
+                            ParentName = l1.OneToOne_Optional_FK1.Name,
+                        }),
                     }),
             ss =>
                 ss.Set<Level1>()
@@ -3591,10 +3591,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 xx.OneToMany_Optional2.Select(l3 => new
                                 {
                                     ChildId = (int)l3.MaybeScalar(xxx => xxx.Id),
-                                    ParentName = l1.OneToOne_Optional_FK1.Maybe(xxx => xxx.Name)
+                                    ParentName = l1.OneToOne_Optional_FK1.Maybe(xxx => xxx.Name),
                                 })
                             )
-                        )
+                        ),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -3623,7 +3623,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                         Entity = l1.OneToOne_Optional_FK1.OneToOne_Optional_FK2,
                         Collection = l1
                             .OneToOne_Optional_FK1.OneToMany_Optional2.GroupBy(x => x.Name)
-                            .Select(g => new { g.Key, Count = g.Count() })
+                            .Select(g => new { g.Key, Count = g.Count() }),
                     }),
             ss =>
                 ss.Set<Level1>()
@@ -3636,7 +3636,7 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                                 xx.OneToMany_Optional2.GroupBy(x => x.Name)
                                     .Select(g => new { g.Key, Count = g.Count() })
                             )
-                        )
+                        ),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>
@@ -3837,13 +3837,10 @@ public abstract class ComplexNavigationsCollectionsQueryTestBase<TFixture> : Que
                             .OneToMany_Optional1.OrderBy(xx => xx.Id)
                             .Select(xx => xx.Name)
                             .ToList(),
-                        Condition = x.Id == 1
-                            ? "01"
-                            : x.Id == 2
-                                ? "02"
-                                : x.Id == 3
-                                    ? "03"
-                                    : null
+                        Condition = x.Id == 1 ? "01"
+                        : x.Id == 2 ? "02"
+                        : x.Id == 3 ? "03"
+                        : null,
                     })
                     .Where(x => x.Condition == "02"),
             assertOrder: true,

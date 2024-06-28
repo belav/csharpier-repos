@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // target type:
                     _factory.Typeof(resultType),
                     // context:
-                    _factory.TypeofDynamicOperationContextType()
+                    _factory.TypeofDynamicOperationContextType(),
                 }
             );
 
@@ -157,7 +157,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // context:
                             _factory.TypeofDynamicOperationContextType(),
                             // argument infos:
-                            MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments)
+                            MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments),
                         }
                     )
                     : null;
@@ -217,7 +217,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // context:
                             _factory.TypeofDynamicOperationContextType(),
                             // argument infos:
-                            MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments)
+                            MakeCallSiteArgumentInfos(argumentInfoFactory, loweredArguments),
                         }
                     )
                     : null;
@@ -309,7 +309,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredReceiver,
                                 receiverRefKind,
                                 receiverIsStaticType
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -360,7 +360,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredArguments,
                                 loweredReceiver: loweredReceiver,
                                 loweredRight: loweredHandler
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -416,7 +416,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 argumentNames,
                                 refKinds,
                                 loweredReceiver
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -463,7 +463,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 refKinds,
                                 loweredReceiver,
                                 receiverIsStaticType: true
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -514,7 +514,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 argumentInfoFactory,
                                 loweredArguments,
                                 loweredReceiver: loweredReceiver
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -572,7 +572,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredArguments,
                                 loweredReceiver: loweredReceiver,
                                 loweredRight: loweredRight
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -617,7 +617,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 argumentNames,
                                 refKinds,
                                 loweredReceiver: loweredReceiver
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -677,7 +677,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 loweredReceiver,
                                 loweredReceiverRefKind,
                                 loweredRight: loweredRight
-                            )
+                            ),
                         }
                     )
                     : null;
@@ -709,7 +709,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // member name:
                     _factory.Literal(name),
                     // context:
-                    _factory.TypeofDynamicOperationContextType()
+                    _factory.TypeofDynamicOperationContextType(),
                 }
             );
 

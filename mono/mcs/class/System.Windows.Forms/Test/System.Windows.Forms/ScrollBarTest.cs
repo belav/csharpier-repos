@@ -872,7 +872,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 "OnHandleCreated",
                 "OnBindingContextChanged",
-                "OnBindingContextChanged"
+                "OnBindingContextChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -893,7 +893,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
                 "OnBackColorChanged",
-                "OnInvalidated"
+                "OnInvalidated",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -915,7 +915,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
                 "OnBackgroundImageChanged",
-                "OnInvalidated"
+                "OnInvalidated",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -975,7 +975,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 "OnHandleCreated",
                 "OnBindingContextChanged",
-                "OnBindingContextChanged"
+                "OnBindingContextChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -998,7 +998,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
                 "OnForeColorChanged",
-                "OnInvalidated"
+                "OnInvalidated",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1019,7 +1019,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnHandleCreated",
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
-                "OnImeModeChanged"
+                "OnImeModeChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1101,7 +1101,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnHandleCreated",
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
-                "OnInvalidated"
+                "OnInvalidated",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1123,7 +1123,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
                 "OnScroll",
-                "OnValueChanged"
+                "OnValueChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1144,7 +1144,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnHandleCreated",
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
-                "OnTextChanged"
+                "OnTextChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1165,7 +1165,7 @@ namespace MonoTests.System.Windows.Forms
                 "OnHandleCreated",
                 "OnBindingContextChanged",
                 "OnBindingContextChanged",
-                "OnValueChanged"
+                "OnValueChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1442,7 +1442,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 "HandleCreated",
                 "BindingContextChanged",
-                "BindingContextChanged"
+                "BindingContextChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1463,7 +1463,7 @@ namespace MonoTests.System.Windows.Forms
                 "BindingContextChanged",
                 "BindingContextChanged",
                 "Invalidated",
-                "BackColorChanged"
+                "BackColorChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1485,7 +1485,7 @@ namespace MonoTests.System.Windows.Forms
                 "BindingContextChanged",
                 "BindingContextChanged",
                 "Invalidated",
-                "BackgroundImageChanged"
+                "BackgroundImageChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1545,7 +1545,7 @@ namespace MonoTests.System.Windows.Forms
             {
                 "HandleCreated",
                 "BindingContextChanged",
-                "BindingContextChanged"
+                "BindingContextChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1568,7 +1568,7 @@ namespace MonoTests.System.Windows.Forms
                 "BindingContextChanged",
                 "BindingContextChanged",
                 "Invalidated",
-                "ForeColorChanged"
+                "ForeColorChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1589,7 +1589,7 @@ namespace MonoTests.System.Windows.Forms
                 "HandleCreated",
                 "BindingContextChanged",
                 "BindingContextChanged",
-                "ImeModeChanged"
+                "ImeModeChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1670,7 +1670,7 @@ namespace MonoTests.System.Windows.Forms
                 "HandleCreated",
                 "BindingContextChanged",
                 "BindingContextChanged",
-                "Invalidated"
+                "Invalidated",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1693,7 +1693,7 @@ namespace MonoTests.System.Windows.Forms
                 "BindingContextChanged",
                 "BindingContextChanged",
                 "Scroll",
-                "ValueChanged"
+                "ValueChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1714,7 +1714,7 @@ namespace MonoTests.System.Windows.Forms
                 "HandleCreated",
                 "BindingContextChanged",
                 "BindingContextChanged",
-                "TextChanged"
+                "TextChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;
@@ -1735,7 +1735,7 @@ namespace MonoTests.System.Windows.Forms
                 "HandleCreated",
                 "BindingContextChanged",
                 "BindingContextChanged",
-                "ValueChanged"
+                "ValueChanged",
             };
             Form myform = new Form();
             myform.ShowInTaskbar = false;

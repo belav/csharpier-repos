@@ -172,7 +172,7 @@ namespace MonoTests.System.Net.Http.Headers
                 Private = true,
                 ProxyRevalidate = true,
                 Public = true,
-                SharedMaxAge = TimeSpan.MaxValue
+                SharedMaxAge = TimeSpan.MaxValue,
             };
 
             Assert.AreEqual(0, value.Extensions.Count, "#1");

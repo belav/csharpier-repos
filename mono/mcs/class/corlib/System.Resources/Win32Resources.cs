@@ -254,7 +254,7 @@ namespace System.Resources
             "LegalTrademarks",
             "OriginalFilename",
             "ProductName",
-            "ProductVersion"
+            "ProductVersion",
         };
 
         long signature;

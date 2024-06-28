@@ -68,20 +68,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             if (ShowTargetTypedCompletionFilter.HasValue)
                 options = options with
                 {
-                    TargetTypedCompletionFilter = ShowTargetTypedCompletionFilter.Value
+                    TargetTypedCompletionFilter = ShowTargetTypedCompletionFilter.Value,
                 };
 
             if (ShowImportCompletionItemsOptionValue.HasValue)
                 options = options with
                 {
-                    ShowItemsFromUnimportedNamespaces = ShowImportCompletionItemsOptionValue.Value
+                    ShowItemsFromUnimportedNamespaces = ShowImportCompletionItemsOptionValue.Value,
                 };
 
             if (ForceExpandedCompletionIndexCreation.HasValue)
                 options = options with
                 {
                     ForceExpandedCompletionIndexCreation =
-                        ForceExpandedCompletionIndexCreation.Value
+                        ForceExpandedCompletionIndexCreation.Value,
                 };
 
             if (HideAdvancedMembers.HasValue)
@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
             if (ShowNewSnippetExperience.HasValue)
                 options = options with
                 {
-                    ShowNewSnippetExperienceUserOption = ShowNewSnippetExperience.Value
+                    ShowNewSnippetExperienceUserOption = ShowNewSnippetExperience.Value,
                 };
 
             return options;
@@ -1928,7 +1928,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 var options = CompletionOptions.Default with
                 {
                     TriggerOnTypingLetters = triggerOnLetter,
-                    TriggerInArgumentLists = showCompletionInArgumentLists
+                    TriggerInArgumentLists = showCompletionInArgumentLists,
                 };
 
                 var isTextualTriggerCharacterResult = service.ShouldTriggerCompletion(
@@ -1997,7 +1997,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                 '#',
                 '\'',
                 '\"',
-                '\\'
+                '\\',
             };
 
             await VerifyCommitCharactersAsync(initialMarkup, textTypedSoFar, commitCharacters);

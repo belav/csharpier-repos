@@ -21,8 +21,8 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
             new string[]
             {
                 "Dependencies/LibWithConstantSubstitution.xml",
-                "ILLink.Substitutions.xml"
-            }
+                "ILLink.Substitutions.xml",
+            },
         }
     )]
     [IgnoreSubstitutions(false)]

@@ -39,6 +39,6 @@ namespace System.EnterpriseServices
         Integrity = 5,
         None = 1,
         Packet = 4,
-        Privacy = 6
+        Privacy = 6,
     }
 }

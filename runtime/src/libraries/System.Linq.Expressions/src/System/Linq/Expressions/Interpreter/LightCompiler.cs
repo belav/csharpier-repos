@@ -2818,7 +2818,7 @@ namespace System.Linq.Expressions.Interpreter
                 FileName = node.Document.FileName,
                 StartLine = node.StartLine,
                 EndLine = node.EndLine,
-                IsClear = node.IsClear
+                IsClear = node.IsClear,
             };
             _debugInfos.Add(info);
         }

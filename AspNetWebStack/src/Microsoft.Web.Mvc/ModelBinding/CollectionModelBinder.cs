@@ -60,7 +60,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                             null,
                             typeof(TElement)
                         ),
-                        ModelName = fullChildName
+                        ModelName = fullChildName,
                     };
 
                 object boundValue = null;
@@ -158,8 +158,8 @@ namespace Microsoft.Web.Mvc.ModelBinding
                                 rawValueElement,
                                 culture
                             ), // our temporary provider goes at the front of the list
-                            bindingContext.ValueProvider
-                        }
+                            bindingContext.ValueProvider,
+                        },
                     };
 
                 object boundValue = null;

@@ -30,6 +30,6 @@ namespace System.Windows.Forms
         Top,
         Bottom,
         Left,
-        Right
+        Right,
     }
 }

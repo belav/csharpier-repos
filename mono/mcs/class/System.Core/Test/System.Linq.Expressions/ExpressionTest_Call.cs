@@ -444,7 +444,7 @@ namespace MonoTests.System.Linq.Expressions
 
             int[,] data =
             {
-                { 1 }
+                { 1 },
             };
 
             Assert.AreEqual(3, lambda(data));

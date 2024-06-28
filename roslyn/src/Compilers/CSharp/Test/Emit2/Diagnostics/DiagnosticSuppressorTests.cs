@@ -283,7 +283,7 @@ class C
             var analyzersAndSuppressors = new DiagnosticAnalyzer[]
             {
                 analyzer,
-                new DiagnosticSuppressorForId(analyzer.Descriptor.Id)
+                new DiagnosticSuppressorForId(analyzer.Descriptor.Id),
             };
             expectedDiagnostics = new DiagnosticDescription[]
             {
@@ -320,7 +320,7 @@ class C
             {
                 analyzer,
                 new DiagnosticSuppressorForId(analyzer.Descriptor.Id),
-                new DiagnosticSuppressorForId(analyzer.Descriptor.Id)
+                new DiagnosticSuppressorForId(analyzer.Descriptor.Id),
             };
             VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors, expectedDiagnostic);
             VerifySuppressedAndFilteredDiagnostics(compilation, analyzersAndSuppressors);
@@ -330,7 +330,7 @@ class C
             {
                 analyzer,
                 new DiagnosticSuppressorForId(analyzer.Descriptor.Id, suppressionId: "SPR0001"),
-                new DiagnosticSuppressorForId(analyzer.Descriptor.Id, suppressionId: "SPR0002")
+                new DiagnosticSuppressorForId(analyzer.Descriptor.Id, suppressionId: "SPR0002"),
             };
             VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors, expectedDiagnostic);
             VerifySuppressedAndFilteredDiagnostics(compilation, analyzersAndSuppressors);
@@ -366,7 +366,7 @@ class C
             {
                 analyzer,
                 suppressor1,
-                suppressor2
+                suppressor2,
             };
             VerifySuppressedDiagnostics(
                 compilation,
@@ -406,7 +406,7 @@ class C
             var analyzersAndSuppressors = new DiagnosticAnalyzer[]
             {
                 analyzer,
-                new DiagnosticSuppressorForId(analyzer.Descriptor.Id, suppressionId)
+                new DiagnosticSuppressorForId(analyzer.Descriptor.Id, suppressionId),
             };
             expectedDiagnostic = Diagnostic(analyzer.Descriptor.Id, source, isSuppressed: true);
             VerifySuppressedDiagnostics(compilation, analyzersAndSuppressors, expectedDiagnostic);
@@ -479,7 +479,7 @@ class C { }";
                         var analyzersWithSuppressor = new DiagnosticAnalyzer[]
                         {
                             analyzer,
-                            suppressor
+                            suppressor,
                         };
 
                         var specificDiagnosticOptions = originalSpecificDiagnosticOptions.Add(
@@ -883,7 +883,7 @@ class C { }";
             {
                 analyzer,
                 suppressor,
-                suppressor2
+                suppressor2,
             };
             diagnostics = compilation.GetAnalyzerDiagnostics(
                 analyzersAndSuppressors,
@@ -981,7 +981,7 @@ class C { }";
             {
                 analyzer1,
                 analyzer2,
-                suppressor
+                suppressor,
             };
             expectedDiagnostics = new DiagnosticDescription[]
             {

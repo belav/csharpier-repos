@@ -229,7 +229,7 @@ namespace System.Collections.Immutable.Tests
         {
             IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string>
             {
-                { "a", "b" }
+                { "a", "b" },
             };
             StringComparer keyComparer = StringComparer.OrdinalIgnoreCase;
             StringComparer valueComparer = StringComparer.CurrentCulture;
@@ -273,7 +273,7 @@ namespace System.Collections.Immutable.Tests
         {
             IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string>
             {
-                { "a", "B" }
+                { "a", "B" },
             };
             StringComparer keyComparer = StringComparer.OrdinalIgnoreCase;
             StringComparer valueComparer = StringComparer.CurrentCulture;
@@ -454,7 +454,7 @@ namespace System.Collections.Immutable.Tests
         {
             ImmutableSortedDictionary<int, string> dictionary = new Dictionary<int, string>
             {
-                { 1, "a" }
+                { 1, "a" },
             }.ToImmutableSortedDictionary();
             Assert.Equal(0, dictionary.Remove(1).Count);
         }
@@ -465,7 +465,7 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<int, string> dictionary = new Dictionary<int, string>
             {
                 { 1, "a" },
-                { 2, "b" }
+                { 2, "b" },
             }.ToImmutableSortedDictionary();
             Assert.Equal(1, dictionary.Remove(1).Count);
         }
@@ -476,7 +476,7 @@ namespace System.Collections.Immutable.Tests
             ImmutableSortedDictionary<int, string> dictionary = new Dictionary<int, string>
             {
                 { 1, "a" },
-                { 2, "b" }
+                { 2, "b" },
             }.ToImmutableSortedDictionary();
             Assert.Equal(1, dictionary.Remove(2).Count);
         }
@@ -486,7 +486,7 @@ namespace System.Collections.Immutable.Tests
         {
             ImmutableSortedDictionary<int, string> dictionary = new Dictionary<int, string>
             {
-                { 1, "a" }
+                { 1, "a" },
             }.ToImmutableSortedDictionary();
             Assert.Equal(1, dictionary.Remove(2).Count);
             Assert.Equal(1, dictionary.Remove(-1).Count);
@@ -555,7 +555,7 @@ namespace System.Collections.Immutable.Tests
             var dictionary = new Dictionary<string, int>()
             {
                 { "a", 1 },
-                { "b", 2 }
+                { "b", 2 },
             }.ToImmutableSortedDictionary();
 
             ref readonly int safeRef = ref dictionary.ValueRef("a");
@@ -574,7 +574,7 @@ namespace System.Collections.Immutable.Tests
             var dictionary = new Dictionary<string, int>()
             {
                 { "a", 1 },
-                { "b", 2 }
+                { "b", 2 },
             }.ToImmutableSortedDictionary();
 
             Assert.Throws<KeyNotFoundException>(() => dictionary.ValueRef("c"));

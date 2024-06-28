@@ -95,6 +95,6 @@ namespace System.Windows.Forms
         Default = -1,
         SplitButton = 62,
         IpAddress = 63,
-        OutlineButton = 64
+        OutlineButton = 64,
     }
 }

@@ -21,7 +21,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => new ReadOnlyCollection<int>(new int[0]),
                     typeof(ICollection<int>)
-                )
+                ),
             };
 
             // Act
@@ -46,7 +46,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => originalInstance,
                     typeof(ICollection<int>)
-                )
+                ),
             };
 
             // Act
@@ -70,7 +70,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(ICollection<int>)
-                )
+                ),
             };
 
             // Act
@@ -94,7 +94,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(Dictionary<string, int>)
-                )
+                ),
             };
 
             // Act
@@ -104,7 +104,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 {
                     new KeyValuePair<string, int>("forty-two", 40),
                     new KeyValuePair<string, int>("forty-two", 2),
-                    new KeyValuePair<string, int>("forty-two", 42)
+                    new KeyValuePair<string, int>("forty-two", 42),
                 },
                 () => new Dictionary<string, int>()
             );
@@ -124,7 +124,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(Dictionary<string, int>)
-                )
+                ),
             };
 
             // Act
@@ -133,7 +133,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 new[]
                 {
                     new KeyValuePair<string, int>("forty-two", 42),
-                    new KeyValuePair<string, int>(null, 84)
+                    new KeyValuePair<string, int>(null, 84),
                 },
                 () => new Dictionary<string, int>()
             );
@@ -156,7 +156,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => originalModel,
                     typeof(IDictionary<string, string>)
-                )
+                ),
             };
 
             // Act
@@ -181,14 +181,14 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             Dictionary<string, string> originalInstance = new Dictionary<string, string>
             {
                 { "dog", "Canidae" },
-                { "cat", "Felidae" }
+                { "cat", "Felidae" },
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => originalInstance,
                     typeof(IDictionary<string, string>)
-                )
+                ),
             };
 
             // Act
@@ -214,7 +214,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(IDictionary<string, string>)
-                )
+                ),
             };
 
             // Act

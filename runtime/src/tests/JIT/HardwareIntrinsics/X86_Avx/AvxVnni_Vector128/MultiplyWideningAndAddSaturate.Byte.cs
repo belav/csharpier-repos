@@ -414,7 +414,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni.Vector128
                     {
                         typeof(Vector128<Int32>),
                         typeof(Vector128<Byte>),
-                        typeof(Vector128<SByte>)
+                        typeof(Vector128<SByte>),
                     }
                 )
                 .Invoke(
@@ -423,7 +423,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni.Vector128
                     {
                         Unsafe.Read<Vector128<Int32>>(_dataTable.inArray0Ptr),
                         Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
-                        Unsafe.Read<Vector128<SByte>>(_dataTable.inArray2Ptr)
+                        Unsafe.Read<Vector128<SByte>>(_dataTable.inArray2Ptr),
                     }
                 );
 
@@ -447,7 +447,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni.Vector128
                     {
                         typeof(Vector128<Int32>),
                         typeof(Vector128<Byte>),
-                        typeof(Vector128<SByte>)
+                        typeof(Vector128<SByte>),
                     }
                 )
                 .Invoke(
@@ -456,7 +456,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni.Vector128
                     {
                         Avx.LoadVector128((Int32*)(_dataTable.inArray0Ptr)),
                         Avx.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
-                        Avx.LoadVector128((SByte*)(_dataTable.inArray2Ptr))
+                        Avx.LoadVector128((SByte*)(_dataTable.inArray2Ptr)),
                     }
                 );
 
@@ -480,7 +480,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni.Vector128
                     {
                         typeof(Vector128<Int32>),
                         typeof(Vector128<Byte>),
-                        typeof(Vector128<SByte>)
+                        typeof(Vector128<SByte>),
                     }
                 )
                 .Invoke(
@@ -489,7 +489,7 @@ namespace JIT.HardwareIntrinsics.X86._AvxVnni.Vector128
                     {
                         Avx.LoadAlignedVector128((Int32*)(_dataTable.inArray0Ptr)),
                         Avx.LoadAlignedVector128((Byte*)(_dataTable.inArray1Ptr)),
-                        Avx.LoadAlignedVector128((SByte*)(_dataTable.inArray2Ptr))
+                        Avx.LoadAlignedVector128((SByte*)(_dataTable.inArray2Ptr)),
                     }
                 );
 

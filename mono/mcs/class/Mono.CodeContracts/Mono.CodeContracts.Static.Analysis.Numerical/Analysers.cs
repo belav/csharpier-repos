@@ -36,7 +36,7 @@ namespace Mono.CodeContracts.Static.Analysis.Numerical
         public enum ArithmeticEnvironmentKind
         {
             Intervals,
-            DisIntervals
+            DisIntervals,
         }
 
         public class Arithmetic : IMethodAnalysis

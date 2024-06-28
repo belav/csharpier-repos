@@ -35,6 +35,6 @@ namespace System.Data.SqlClient
     {
         Auto,
         AlwaysBlock,
-        NeverBlock
+        NeverBlock,
     }
 }

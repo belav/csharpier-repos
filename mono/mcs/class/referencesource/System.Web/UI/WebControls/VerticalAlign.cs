@@ -50,6 +50,6 @@ namespace System.Web.UI.WebControls
         ///       control.
         ///    </para>
         /// </devdoc>
-        Bottom = 3
+        Bottom = 3,
     }
 }

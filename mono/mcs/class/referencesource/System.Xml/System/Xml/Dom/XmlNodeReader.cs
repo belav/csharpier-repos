@@ -62,13 +62,13 @@ namespace System.Xml
         {
             new VirtualAttribute(null, null),
             new VirtualAttribute(null, null),
-            new VirtualAttribute(null, null)
+            new VirtualAttribute(null, null),
         };
 
         internal VirtualAttribute[] docTypeNodeAttributes =
         {
             new VirtualAttribute(null, null),
-            new VirtualAttribute(null, null)
+            new VirtualAttribute(null, null),
         };
 
         bool bOnAttrVal;

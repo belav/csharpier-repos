@@ -29,7 +29,7 @@ namespace Microsoft.Android.Build.Ndk
         {
             { "osx", "darwin-x86_64" },
             { "linux", "linux-x86_64" },
-            { "windows", "windows-x86_64" }
+            { "windows", "windows-x86_64" },
         };
 
         private static readonly Dictionary<string, AndroidArch> validArches = new Dictionary<
@@ -40,7 +40,7 @@ namespace Microsoft.Android.Build.Ndk
             { "arm", new AndroidArch("arm", "armeabi-v7a", "arm-linux-androideabi") },
             { "arm64", new AndroidArch("aarch64", "aarch64-v8a", "aarch64-linux-android") },
             { "x86", new AndroidArch("x86", "x86", "i686-linux-android") },
-            { "x64", new AndroidArch("x86_64", "x86_64", "x86_64-linux-android") }
+            { "x64", new AndroidArch("x86_64", "x86_64", "x86_64-linux-android") },
         };
 
         private string armClangPrefix = "armv7a";

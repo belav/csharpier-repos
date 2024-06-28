@@ -24,7 +24,7 @@ public class BenchmarkDriverStartup
         {
             var result = await JsonSerializer.DeserializeAsync<BenchmarkResult>(
                 context.Request.Body,
-                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, }
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
             );
             await context.Response.WriteAsync("OK");
             Program.BenchmarkResultTask.TrySetResult(result);

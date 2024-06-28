@@ -28,6 +28,6 @@ namespace System.Web.Configuration.nBrowser
         None = 0,
         Browser = 1,
         Gateway = 2,
-        DefaultBrowser = 3
+        DefaultBrowser = 3,
     }
 }

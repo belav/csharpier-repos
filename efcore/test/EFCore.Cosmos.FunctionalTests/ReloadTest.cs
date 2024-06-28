@@ -10,7 +10,7 @@ public class ReloadTest
     public static IEnumerable<object[]> IsAsyncData = new[]
     {
         new object[] { true },
-        new object[] { false }
+        new object[] { false },
     };
 
     [ConditionalTheory]

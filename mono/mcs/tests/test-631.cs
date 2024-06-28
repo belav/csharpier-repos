@@ -2,7 +2,7 @@ using System;
 
 enum E : uint
 {
-    Value = 24
+    Value = 24,
 }
 
 class A

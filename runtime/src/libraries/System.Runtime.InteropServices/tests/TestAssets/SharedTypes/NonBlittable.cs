@@ -46,7 +46,7 @@ namespace SharedTypes
                 return new StringContainerNative
                 {
                     str1 = Marshal.StringToCoTaskMemUTF8(managed.str1),
-                    str2 = Marshal.StringToCoTaskMemUTF8(managed.str2)
+                    str2 = Marshal.StringToCoTaskMemUTF8(managed.str2),
                 };
             }
 
@@ -55,7 +55,7 @@ namespace SharedTypes
                 return new StringContainer
                 {
                     str1 = Marshal.PtrToStringUTF8(unmanaged.str1),
-                    str2 = Marshal.PtrToStringUTF8(unmanaged.str2)
+                    str2 = Marshal.PtrToStringUTF8(unmanaged.str2),
                 };
             }
 
@@ -134,7 +134,7 @@ namespace SharedTypes
             {
                 b1 = (byte)(managed.b1 ? 1 : 0),
                 b2 = (byte)(managed.b2 ? 1 : 0),
-                b3 = (byte)(managed.b3 ? 1 : 0)
+                b3 = (byte)(managed.b3 ? 1 : 0),
             };
         }
 
@@ -144,7 +144,7 @@ namespace SharedTypes
             {
                 b1 = unmanaged.b1 != 0,
                 b2 = unmanaged.b2 != 0,
-                b3 = unmanaged.b3 != 0
+                b3 = unmanaged.b3 != 0,
             };
         }
     }
@@ -409,7 +409,7 @@ namespace SharedTypes
                 {
                     b1 = (byte)(managed.b1 ? 1 : 0),
                     b2 = (byte)(managed.b2 ? 1 : 0),
-                    b3 = (byte)(managed.b3 ? 1 : 0)
+                    b3 = (byte)(managed.b3 ? 1 : 0),
                 };
             }
 
@@ -423,7 +423,7 @@ namespace SharedTypes
                 {
                     b1 = _boolStructNative.b1 != 0,
                     b2 = _boolStructNative.b2 != 0,
-                    b3 = _boolStructNative.b3 != 0
+                    b3 = _boolStructNative.b3 != 0,
                 };
             }
         }

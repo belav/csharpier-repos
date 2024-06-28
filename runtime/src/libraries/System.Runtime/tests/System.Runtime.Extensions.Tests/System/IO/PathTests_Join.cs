@@ -16,7 +16,7 @@ namespace System.IO.Tests
             { Sep, Sep },
             { AltSep, AltSep },
             { "a", "a" },
-            { null, "" }
+            { null, "" },
         };
 
         public static TheoryData<string, string, string> TestData_JoinTwoPaths = new TheoryData<
@@ -46,7 +46,7 @@ namespace System.IO.Tests
             { "a", $"a{AltSep}", $"a{Sep}a{AltSep}" },
             { null, null, "" },
             { null, "a", "a" },
-            { "a", null, "a" }
+            { "a", null, "a" },
         };
 
         [Theory, MemberData(nameof(TestData_JoinTwoPaths))]
@@ -103,7 +103,7 @@ namespace System.IO.Tests
                 { "a", null, null, "a" },
                 { null, "a", null, "a" },
                 { null, null, "a", "a" },
-                { "a", null, "a", $"a{Sep}a" }
+                { "a", null, "a", $"a{Sep}a" },
             };
 
         [Theory, MemberData(nameof(TestData_JoinThreePaths))]
@@ -189,7 +189,7 @@ namespace System.IO.Tests
                 { null, null, "a", null, "a" },
                 { null, null, null, "a", "a" },
                 { "a", null, "b", null, $"a{Sep}b" },
-                { "a", null, null, "b", $"a{Sep}b" }
+                { "a", null, null, "b", $"a{Sep}b" },
             };
 
         [Theory, MemberData(nameof(TestData_JoinFourPaths))]

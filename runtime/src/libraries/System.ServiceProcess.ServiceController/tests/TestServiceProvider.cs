@@ -103,7 +103,7 @@ namespace System.ServiceProcess.Tests
                 );
                 testServiceInstaller.ServicesDependedOn = new string[]
                 {
-                    _prerequisiteServices.TestServiceName
+                    _prerequisiteServices.TestServiceName,
                 };
             }
 

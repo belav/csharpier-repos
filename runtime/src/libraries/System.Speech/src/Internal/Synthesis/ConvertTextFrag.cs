@@ -418,7 +418,7 @@ namespace System.Speech.Internal.Synthesis
             "telephone",
             "time",
             "time:hms12",
-            "time:hms24"
+            "time:hms24",
         };
 
         private static readonly string[] s_asContextFormat = new string[]
@@ -448,7 +448,7 @@ namespace System.Speech.Internal.Synthesis
             "phone_number",
             "time",
             "time",
-            "time"
+            "time",
         };
 
         #endregion

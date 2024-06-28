@@ -25,19 +25,19 @@ namespace System.Web.UI.WebControls.WebParts
     {
         private ProxyWebPartConnectionCollection _staticConnections;
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override string ClientID
         {
             get { return base.ClientID; }
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override ControlCollection Controls
         {
             get { return base.Controls; }
         }
 
-        [DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never),]
+        [DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override bool EnableTheming
         {
             get { return false; }
@@ -49,7 +49,7 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [DefaultValue(""), EditorBrowsable(EditorBrowsableState.Never),]
+        [DefaultValue(""), EditorBrowsable(EditorBrowsableState.Never)]
         public override string SkinID
         {
             get { return String.Empty; }
@@ -82,7 +82,7 @@ namespace System.Web.UI.WebControls.WebParts
             }
         }
 
-        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never),]
+        [Browsable(false), DefaultValue(false), EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Visible
         {
             get { return false; }
@@ -99,7 +99,7 @@ namespace System.Web.UI.WebControls.WebParts
             return new EmptyControlCollection(this);
         }
 
-        [EditorBrowsable(EditorBrowsableState.Never),]
+        [EditorBrowsable(EditorBrowsableState.Never)]
         public override void Focus()
         {
             throw new NotSupportedException(SR.GetString(SR.NoFocusSupport, this.GetType().Name));

@@ -585,7 +585,7 @@ namespace System.Web.Compilation
                     new CodeExpression[]
                     {
                         new CodePrimitiveExpression(name),
-                        new CodeSnippetExpression("value")
+                        new CodeSnippetExpression("value"),
                     }
                 );
                 property.SetStatements.Add(minvoke);

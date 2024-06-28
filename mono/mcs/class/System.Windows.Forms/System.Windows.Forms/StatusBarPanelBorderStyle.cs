@@ -29,6 +29,6 @@ namespace System.Windows.Forms
     {
         None = 1,
         Raised,
-        Sunken
+        Sunken,
     }
 }

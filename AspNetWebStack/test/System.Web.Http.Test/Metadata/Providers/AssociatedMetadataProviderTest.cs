@@ -34,7 +34,7 @@ namespace System.Web.Http.Metadata.Providers
             {
                 LocalAttributes = 42,
                 MetadataAttributes = "hello",
-                MixedAttributes = 21.12
+                MixedAttributes = 21.12,
             };
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
 
@@ -336,7 +336,7 @@ namespace System.Web.Http.Metadata.Providers
                         Attributes = attributes,
                         ContainerType = containerType,
                         ModelType = modelType,
-                        PropertyName = propertyName
+                        PropertyName = propertyName,
                     }
                 );
 
@@ -352,7 +352,7 @@ namespace System.Web.Http.Metadata.Providers
                     new CreateMetadataFromPrototypeParams
                     {
                         Prototype = prototype,
-                        Model = modelAccessor == null ? null : modelAccessor()
+                        Model = modelAccessor == null ? null : modelAccessor(),
                     }
                 );
 

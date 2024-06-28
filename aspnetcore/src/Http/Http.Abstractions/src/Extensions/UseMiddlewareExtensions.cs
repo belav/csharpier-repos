@@ -363,7 +363,7 @@ public static class UseMiddlewareExtensions
             {
                 providerArg,
                 Expression.Constant(parameterType, typeof(Type)),
-                Expression.Constant(methodInfo.DeclaringType, typeof(Type))
+                Expression.Constant(methodInfo.DeclaringType, typeof(Type)),
             };
 
             var getServiceCall = Expression.Call(GetServiceInfo, parameterTypeExpression);

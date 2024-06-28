@@ -2969,7 +2969,7 @@ namespace Moq.Tests.Regressions
                 var mock = new Mock<IDictionary<string, IDictionary<string, string>>>()
                 {
                     CallBase = true,
-                    DefaultValue = DefaultValue.Mock
+                    DefaultValue = DefaultValue.Mock,
                 };
                 var mockedIndexResult = mock.Object["foo"];
                 Assert.Null(mockedIndexResult["foo"]);
@@ -2981,7 +2981,7 @@ namespace Moq.Tests.Regressions
                 var mock = new Mock<IDictionary<string, Func<string>>>()
                 {
                     CallBase = true,
-                    DefaultValue = DefaultValue.Mock
+                    DefaultValue = DefaultValue.Mock,
                 };
                 var mockedIndexResult = mock.Object["foo"];
                 Assert.Null(mockedIndexResult());
@@ -4627,7 +4627,7 @@ namespace Moq.Tests.Regressions
                 var mock = new Mock<IDataServiceFactory>()
                 {
                     DefaultValue = DefaultValue.Mock,
-                    CallBase = true
+                    CallBase = true,
                 };
 
                 var service = mock.Object.GetDataService();
@@ -4929,7 +4929,7 @@ namespace Moq.Tests.Regressions
             {
                 Created,
                 Duplicated,
-                Invalid
+                Invalid,
             }
 
             public interface IMembershipService
@@ -5114,7 +5114,7 @@ namespace Moq.Tests.Regressions
                 // CallBase was missing
                 var htmlInputTextMock = new Mock<System.Web.UI.HtmlControls.HtmlInputText>()
                 {
-                    CallBase = true
+                    CallBase = true,
                 };
                 Assert.True(htmlInputTextMock.Object.Visible);
             }

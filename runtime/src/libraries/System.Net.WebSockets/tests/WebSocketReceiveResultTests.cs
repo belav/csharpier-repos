@@ -19,7 +19,7 @@ namespace System.Net.WebSockets.Tests
                 WebSocketMessageType.Close,
                 true,
                 WebSocketCloseStatus.NormalClosure,
-                null
+                null,
             },
             new object[]
             {
@@ -27,7 +27,7 @@ namespace System.Net.WebSockets.Tests
                 WebSocketMessageType.Close,
                 true,
                 WebSocketCloseStatus.NormalClosure,
-                "normal"
+                "normal",
             },
         };
 

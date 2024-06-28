@@ -81,7 +81,7 @@ namespace MonoCasTests.System.Web.UI
                     typeof(string),
                     typeof(string),
                     typeof(string),
-                    typeof(BuildMethod)
+                    typeof(BuildMethod),
                 }
             );
             Assert.IsNotNull(ci, ".ctor(2xstring,int,3xstring,BuildMethod)");

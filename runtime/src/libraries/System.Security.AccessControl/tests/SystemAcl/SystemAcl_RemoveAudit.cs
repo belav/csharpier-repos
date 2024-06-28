@@ -23,7 +23,7 @@ namespace System.Security.AccessControl.Tests
                 0,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -36,7 +36,7 @@ namespace System.Security.AccessControl.Tests
                 1,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -49,7 +49,7 @@ namespace System.Security.AccessControl.Tests
                 2,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -62,7 +62,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#79:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -75,7 +75,7 @@ namespace System.Security.AccessControl.Tests
                 0,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#77:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -88,7 +88,7 @@ namespace System.Security.AccessControl.Tests
                 1,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#77:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -101,7 +101,7 @@ namespace System.Security.AccessControl.Tests
                 2,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#69:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -114,7 +114,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#69:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -127,7 +127,7 @@ namespace System.Security.AccessControl.Tests
                 0,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#78:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -140,7 +140,7 @@ namespace System.Security.AccessControl.Tests
                 1,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#78:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -153,7 +153,7 @@ namespace System.Security.AccessControl.Tests
                 2,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#70:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -166,7 +166,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#70:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -179,7 +179,7 @@ namespace System.Security.AccessControl.Tests
                 0,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -192,7 +192,7 @@ namespace System.Security.AccessControl.Tests
                 1,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -205,7 +205,7 @@ namespace System.Security.AccessControl.Tests
                 2,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -218,7 +218,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -231,7 +231,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:3:BO:false:0",
                 "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:2:BO:false:0#135:2:1:BO:false:0#64:2:1:BO:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -244,7 +244,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0#199:2:3:BG:false:0#199:2:3:BO:false:0",
                 "199:2:3:BA:false:0#199:2:2:BG:false:0#135:2:1:BG:false:0#64:2:1:BG:false:0#199:2:3:BO:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -257,7 +257,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0#199:2:3:BA:false:0#199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0#199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -270,7 +270,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#135:2:1:BA:false:0#64:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -283,7 +283,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:3:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -296,7 +296,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "215:2:3:BA:false:0",
                 "215:2:3:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -309,7 +309,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "199:2:3:BA:false:0",
                 "199:2:3:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -322,7 +322,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "135:2:3:BA:false:0",
                 "135:2:3:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -335,7 +335,7 @@ namespace System.Security.AccessControl.Tests
                 0,
                 "199:2:3:BA:false:0",
                 "199:2:2:BA:false:0#207:2:1:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -348,7 +348,7 @@ namespace System.Security.AccessControl.Tests
                 0,
                 "199:2:3:BA:false:0",
                 "135:2:3:BA:false:0#79:2:3:BA:false:0",
-                true
+                true,
             };
             yield return new object[]
             {
@@ -361,7 +361,7 @@ namespace System.Security.AccessControl.Tests
                 3,
                 "202:2:3:BA:false:0",
                 "202:2:3:BA:false:0",
-                false
+                false,
             };
         }
 

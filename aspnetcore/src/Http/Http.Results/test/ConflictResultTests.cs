@@ -31,7 +31,7 @@ public class ConflictResultTests
     {
         // Arrange
         var result = new Conflict();
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);

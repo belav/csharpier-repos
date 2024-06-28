@@ -105,7 +105,7 @@ namespace XPathTests.FunctionalTests.CoreFunctionLibrary.NodeSetFunctions
                     LocalName = "Attr4",
                     Name = "Attr4",
                     HasNameTable = true,
-                    Value = "Fourth"
+                    Value = "Fourth",
                 }
             );
 

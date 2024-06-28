@@ -19,19 +19,19 @@ namespace System.Collections.Immutable.Tests
             {
                 new[] { "a", "b" },
                 Array.Empty<string>(),
-                new[] { "a", "b" }
+                new[] { "a", "b" },
             };
             yield return new object[]
             {
                 Array.Empty<string>(),
                 new[] { "a", "b" },
-                new[] { "a", "b" }
+                new[] { "a", "b" },
             };
             yield return new object[]
             {
                 new[] { "a", "b" },
                 new[] { "c", "d" },
-                new[] { "a", "b", "c", "d" }
+                new[] { "a", "b", "c", "d" },
             };
         }
 

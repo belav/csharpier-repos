@@ -114,7 +114,7 @@ namespace System.Workflow.Activities.Rules
             ),
             new TypeWrapperTuple(typeof(CodeCastExpression), new CastExpression()),
             new TypeWrapperTuple(typeof(CodeObjectCreateExpression), new ObjectCreateExpression()),
-            new TypeWrapperTuple(typeof(CodeArrayCreateExpression), new ArrayCreateExpression())
+            new TypeWrapperTuple(typeof(CodeArrayCreateExpression), new ArrayCreateExpression()),
         };
 
         private static RuleExpressionInternal GetExpression(CodeExpression expression)

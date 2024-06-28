@@ -219,7 +219,7 @@ namespace System.Reflection.Metadata.Ecma335
             GenericParamConstraint = 20,
             MethodSpec = 21,
 
-            BitCount = 5
+            BitCount = 5,
         }
 
         private static HasCustomAttributeTag ToHasCustomAttributeTag(HandleKind kind)
@@ -283,7 +283,7 @@ namespace System.Reflection.Metadata.Ecma335
             Param = 1,
             Property = 2,
 
-            BitCount = 2
+            BitCount = 2,
         }
 
         private static HasConstantTag ToHasConstantTag(HandleKind kind)
@@ -308,7 +308,7 @@ namespace System.Reflection.Metadata.Ecma335
             MethodDef = 2,
             MemberRef = 3,
 
-            BitCount = 3
+            BitCount = 3,
         }
 
         private static CustomAttributeTypeTag ToCustomAttributeTypeTag(HandleKind kind)
@@ -332,7 +332,7 @@ namespace System.Reflection.Metadata.Ecma335
             MethodDef = 1,
             Assembly = 2,
 
-            BitCount = 2
+            BitCount = 2,
         }
 
         private static HasDeclSecurityTag ToHasDeclSecurityTag(HandleKind kind)
@@ -357,7 +357,7 @@ namespace System.Reflection.Metadata.Ecma335
             Field = 0,
             Param = 1,
 
-            BitCount = 1
+            BitCount = 1,
         }
 
         private static HasFieldMarshalTag ToHasFieldMarshalTag(HandleKind kind)
@@ -380,7 +380,7 @@ namespace System.Reflection.Metadata.Ecma335
             Event = 0,
             Property = 1,
 
-            BitCount = 1
+            BitCount = 1,
         }
 
         private static HasSemanticsTag ToHasSemanticsTag(HandleKind kind)
@@ -404,7 +404,7 @@ namespace System.Reflection.Metadata.Ecma335
             AssemblyRef = 1,
             ExportedType = 2,
 
-            BitCount = 2
+            BitCount = 2,
         }
 
         private static ImplementationTag ToImplementationTag(HandleKind kind)
@@ -429,7 +429,7 @@ namespace System.Reflection.Metadata.Ecma335
             Field = 0,
             MethodDef = 1,
 
-            BitCount = 1
+            BitCount = 1,
         }
 
         private static MemberForwardedTag ToMemberForwardedTag(HandleKind kind)
@@ -455,7 +455,7 @@ namespace System.Reflection.Metadata.Ecma335
             MethodDef = 3,
             TypeSpec = 4,
 
-            BitCount = 3
+            BitCount = 3,
         }
 
         private static MemberRefParentTag ToMemberRefParentTag(HandleKind kind)
@@ -484,7 +484,7 @@ namespace System.Reflection.Metadata.Ecma335
             MethodDef = 0,
             MemberRef = 1,
 
-            BitCount = 1
+            BitCount = 1,
         }
 
         private static MethodDefOrRefTag ToMethodDefOrRefTag(HandleKind kind)
@@ -509,7 +509,7 @@ namespace System.Reflection.Metadata.Ecma335
             AssemblyRef = 2,
             TypeRef = 3,
 
-            BitCount = 2
+            BitCount = 2,
         }
 
         private static ResolutionScopeTag ToResolutionScopeTag(HandleKind kind)
@@ -537,7 +537,7 @@ namespace System.Reflection.Metadata.Ecma335
             TypeRef = 1,
             TypeSpec = 2,
 
-            BitCount = 2
+            BitCount = 2,
         }
 
         private static TypeDefOrRefOrSpecTag ToTypeDefOrRefOrSpecTag(HandleKind kind)
@@ -562,7 +562,7 @@ namespace System.Reflection.Metadata.Ecma335
             TypeDef = 0,
             TypeRef = 1,
 
-            BitCount = 2
+            BitCount = 2,
         }
 
         private static TypeDefOrRefTag ToTypeDefOrRefTag(HandleKind kind)
@@ -585,7 +585,7 @@ namespace System.Reflection.Metadata.Ecma335
             TypeDef = 0,
             MethodDef = 1,
 
-            BitCount = 1
+            BitCount = 1,
         }
 
         private static TypeOrMethodDefTag ToTypeOrMethodDefTag(HandleKind kind)
@@ -633,7 +633,7 @@ namespace System.Reflection.Metadata.Ecma335
             LocalConstant = 25,
             ImportScope = 26,
 
-            BitCount = 5
+            BitCount = 5,
         }
 
         private static HasCustomDebugInformationTag ToHasCustomDebugInformationTag(HandleKind kind)

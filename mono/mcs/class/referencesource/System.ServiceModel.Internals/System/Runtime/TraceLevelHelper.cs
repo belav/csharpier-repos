@@ -28,7 +28,7 @@ namespace System.Runtime
             TraceEventType.Error,
             TraceEventType.Warning,
             TraceEventType.Information,
-            TraceEventType.Verbose
+            TraceEventType.Verbose,
         };
 
         internal static TraceEventType GetTraceEventType(byte level, byte opcode)

@@ -213,7 +213,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new string[] { },
                 new bool[] { },
                 new Func<object, object>(_ => StaticClass.Value),
-                1
+                1,
             };
             yield return new object[]
             {
@@ -224,7 +224,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new string[] { },
                 new bool[] { },
                 new Func<object, object>(_ => StaticClass.Value),
-                2
+                2,
             };
             yield return new object[]
             {
@@ -235,7 +235,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new string[] { "a", "b" },
                 new bool[] { },
                 new Func<object, object>(_ => StaticClass.Value),
-                5
+                5,
             };
             yield return new object[]
             {
@@ -246,7 +246,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new string[] { },
                 new bool[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                1
+                1,
             };
             yield return new object[]
             {
@@ -257,7 +257,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new string[] { },
                 new bool[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                2
+                2,
             };
             yield return new object[]
             {
@@ -268,7 +268,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new string[] { "a", "b" },
                 new bool[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                5
+                5,
             };
         }
 
@@ -282,7 +282,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { },
                 new string[] { },
                 new bool[] { },
-                1
+                1,
             };
             yield return new object[]
             {
@@ -292,7 +292,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 2, 3 },
                 new string[] { },
                 new bool[] { },
-                2
+                2,
             };
             yield return new object[]
             {
@@ -302,7 +302,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4, 5 },
                 new string[] { "a", "b" },
                 new bool[] { },
-                5
+                5,
             };
             yield return new object[]
             {
@@ -312,7 +312,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { },
                 new string[] { },
                 new bool[] { },
-                1
+                1,
             };
             yield return new object[]
             {
@@ -322,7 +322,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 2, 3 },
                 new string[] { },
                 new bool[] { },
-                2
+                2,
             };
             yield return new object[]
             {
@@ -332,7 +332,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4, 5 },
                 new string[] { "a", "b" },
                 new bool[] { },
-                5
+                5,
             };
         }
 
@@ -346,7 +346,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 2, 3 },
                 new string[] { },
                 new Func<object, object>(_ => StaticClass.Value),
-                2
+                2,
             };
             yield return new object[]
             {
@@ -356,7 +356,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4, 5 },
                 new string[] { "a" },
                 new Func<object, object>(_ => StaticClass.Value),
-                5
+                5,
             };
             yield return new object[]
             {
@@ -366,7 +366,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 2, 3 },
                 new string[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                2
+                2,
             };
             yield return new object[]
             {
@@ -376,7 +376,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4, 5 },
                 new string[] { "a" },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                5
+                5,
             };
             yield return new object[]
             {
@@ -386,7 +386,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 6 },
                 new string[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                6
+                6,
             };
         }
 
@@ -400,7 +400,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 1 },
                 new string[] { },
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -410,7 +410,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 2 },
                 new string[] { },
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -420,7 +420,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 3 },
                 new string[] { },
                 false,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -430,7 +430,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4 },
                 new string[] { },
                 true,
-                true
+                true,
             };
         }
 
@@ -441,28 +441,28 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new InstanceClass(),
                 new object[] { 1 },
                 new string[] { },
-                2
+                2,
             };
             yield return new object[]
             {
                 new InstanceClass(),
                 new object[] { 2, 3 },
                 new string[] { },
-                5
+                5,
             };
             yield return new object[]
             {
                 new InstanceStruct(),
                 new object[] { 4 },
                 new string[] { },
-                8
+                8,
             };
             yield return new object[]
             {
                 new InstanceStruct(),
                 new object[] { 5, 6 },
                 new string[] { },
-                11
+                11,
             };
         }
 
@@ -474,7 +474,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 1, 2, 3 },
                 new string[] { },
                 new Func<object, object>(obj => ((InstanceClass)obj).Value),
-                6
+                6,
             };
             yield return new object[]
             {
@@ -482,7 +482,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4, 5, 6 },
                 new string[] { },
                 new Func<object, object>(obj => ((InstanceStruct)obj).Value),
-                15
+                15,
             };
         }
 
@@ -493,13 +493,13 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             {
                 new InstanceClass(),
                 new object[] { 2, 3 },
-                new string[] { }
+                new string[] { },
             };
             yield return new object[]
             {
                 new InstanceStruct(),
                 new object[] { 5, 6 },
-                new string[] { }
+                new string[] { },
             };
         }
 
@@ -511,7 +511,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 1, 2, 3 },
                 new string[] { "x", "y" },
                 false,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -519,7 +519,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 4, 5 },
                 new string[] { "i" },
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
@@ -527,7 +527,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 6, 7, 8 },
                 new string[] { "x", "y" },
                 false,
-                true
+                true,
             };
             yield return new object[]
             {
@@ -535,7 +535,7 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new object[] { 9, 10 },
                 new string[] { "i" },
                 true,
-                true
+                true,
             };
         }
 

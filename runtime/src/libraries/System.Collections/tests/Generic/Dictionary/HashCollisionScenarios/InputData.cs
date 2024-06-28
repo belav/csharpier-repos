@@ -8,7 +8,7 @@ namespace System.Collections.Tests
     public enum InputAction
     {
         Add,
-        Delete
+        Delete,
     }
 
     public static class TestData

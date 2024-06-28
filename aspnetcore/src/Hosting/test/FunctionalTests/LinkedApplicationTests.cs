@@ -38,7 +38,7 @@ public class LinkedApplicationTests : LoggedTest
                 PublishApplicationBeforeDeployment = true,
                 RestoreDependencies = true,
                 PublishTimeout = TimeSpan.FromMinutes(10), // Machines are slow (these tests restore)
-                StatusMessagesEnabled = false
+                StatusMessagesEnabled = false,
             };
 
             using var deployer = new SelfHostDeployer(deploymentParameters, loggerFactory);

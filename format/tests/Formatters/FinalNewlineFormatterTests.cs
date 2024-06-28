@@ -26,7 +26,7 @@ class C
 {
 }";
 
-            var editorConfig = new Dictionary<string, string>() { ["end_of_line"] = "crlf", };
+            var editorConfig = new Dictionary<string, string>() { ["end_of_line"] = "crlf" };
 
             await AssertCodeUnchangedAsync(code, editorConfig);
         }
@@ -41,7 +41,7 @@ class C
 }
 ";
 
-            var editorConfig = new Dictionary<string, string>() { ["end_of_line"] = "crlf", };
+            var editorConfig = new Dictionary<string, string>() { ["end_of_line"] = "crlf" };
 
             await AssertCodeUnchangedAsync(code, editorConfig);
         }

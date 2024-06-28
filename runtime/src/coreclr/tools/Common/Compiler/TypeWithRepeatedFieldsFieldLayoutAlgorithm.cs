@@ -55,7 +55,7 @@ namespace ILCompiler
                 FieldAlignment = layoutFromMetadata.FieldAlignment,
                 FieldSize = layoutFromMetadata.FieldSize,
                 Offsets = offsets,
-                LayoutAbiStable = layoutFromMetadata.LayoutAbiStable
+                LayoutAbiStable = layoutFromMetadata.LayoutAbiStable,
             };
         }
 

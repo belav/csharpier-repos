@@ -88,7 +88,7 @@ public class IncludeOrder : AutoMapperSpecBase
         var source = new IDevice[]
         {
             new Device { Id = 2 },
-            new DerivedDevice { Id = 1, AdditionalProperty = 7 }
+            new DerivedDevice { Id = 1, AdditionalProperty = 7 },
         };
         var destination = Map<DeviceDto[]>(source);
         destination[0].Id.ShouldBe(2);
@@ -103,7 +103,7 @@ public class IncludeOrder : AutoMapperSpecBase
         var source = new IDevice[]
         {
             new DerivedDevice { Id = 1, AdditionalProperty = 7 },
-            new Device { Id = 2 }
+            new Device { Id = 2 },
         };
         var destination = Map<DeviceDto[]>(source);
         destination[0].Id.ShouldBe(1);

@@ -31,7 +31,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new SimpleConsoleFormatterOptions
                 {
                     IncludeScopes = true,
-                    ColorBehavior = colorBehavior
+                    ColorBehavior = colorBehavior,
                 }
             );
             var logger = t.Logger;
@@ -81,7 +81,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new SimpleConsoleFormatterOptions
                 {
                     IncludeScopes = true,
-                    ColorBehavior = LoggerColorBehavior.Enabled
+                    ColorBehavior = LoggerColorBehavior.Enabled,
                 }
             );
             var logger = t.Logger;
@@ -109,7 +109,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new SimpleConsoleFormatterOptions
                 {
                     SingleLine = true,
-                    ColorBehavior = LoggerColorBehavior.Enabled
+                    ColorBehavior = LoggerColorBehavior.Enabled,
                 }
             );
             var logger = (ILogger)t.Logger;
@@ -157,7 +157,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new SimpleConsoleFormatterOptions
                 {
                     SingleLine = true,
-                    ColorBehavior = LoggerColorBehavior.Enabled
+                    ColorBehavior = LoggerColorBehavior.Enabled,
                 }
             );
             var logger = (ILogger)t.Logger;

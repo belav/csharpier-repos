@@ -126,7 +126,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     () => originalDto,
                     typeof(ComplexModelDto)
                 ),
-                ModelName = bindingContext.ModelName
+                ModelName = bindingContext.ModelName,
             };
 
             actionContext.Bind(dtoBindingContext);

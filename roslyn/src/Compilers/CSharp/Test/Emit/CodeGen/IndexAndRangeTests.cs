@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
         )
         {
             var comp = CreateCompilationWithIndexAndRange(
-                new[] { s, TestSources.GetSubArray, },
+                new[] { s, TestSources.GetSubArray },
                 expectedOutput is null ? TestOptions.ReleaseDll : TestOptions.ReleaseExe
             );
             return CompileAndVerify(comp, expectedOutput: expectedOutput);
@@ -79,7 +79,7 @@ class Program
         Expression<Func<S, S>> e4 = (S s) => s[new Range(0, 1)]; // 4
     }
 }";
-            var comp = CreateCompilationWithIndexAndRange(new[] { src, TestSources.GetSubArray, });
+            var comp = CreateCompilationWithIndexAndRange(new[] { src, TestSources.GetSubArray });
             comp.VerifyEmitDiagnostics(
                 // (16,55): error CS8790: An expression tree may not contain a pattern System.Index or System.Range indexer access
                 //         Expression<Func<int[], int>> e = (int[] a) => a[new Index(0, true)]; // 1

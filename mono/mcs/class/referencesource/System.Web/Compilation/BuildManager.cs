@@ -643,7 +643,7 @@ namespace System.Web.Compilation
             Type t = Type.GetType(AppSettings.PortableCompilationOutputSnapshotType, true);
             object[] args = new Object[]
             {
-                AppSettings.PortableCompilationOutputSnapshotTypeOptions
+                AppSettings.PortableCompilationOutputSnapshotTypeOptions,
             };
             t.InvokeMember(
                 "RestoreSnapshot",
@@ -4495,7 +4495,9 @@ namespace System.Web.Compilation
         TopLevelFiles = 1, // In EnsureTopLevelFilesCompiled() but before building global.asax
         GlobalAsax = 2, // While building global.asax
         BrowserCapabilities = 3, // While building browserCap
-        AfterTopLevelFiles = 4 // After EnsureTopLevelFilesCompiled() is called
+        AfterTopLevelFiles =
+            4 // After EnsureTopLevelFilesCompiled() is called
+        ,
     }
 
     internal enum PreStartInitStage

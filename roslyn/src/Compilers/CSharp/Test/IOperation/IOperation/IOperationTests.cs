@@ -104,7 +104,7 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
                 // (7,10): warning CS8600: Converting null literal or possible null value to non-nullable type.
                 //         ((string)null)!.ToString();
                 Diagnostic(ErrorCode.WRN_ConvertingNullableToNonNullable, "(string)null")
-                    .WithLocation(7, 10)
+                    .WithLocation(7, 10),
             };
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
                 comp,

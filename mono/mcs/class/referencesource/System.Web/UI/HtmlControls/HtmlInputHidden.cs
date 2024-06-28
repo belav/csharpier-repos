@@ -27,7 +27,7 @@ namespace System.Web.UI.HtmlControls
     ///       to the HTML &lt;input type=hidden&gt; element on the server.
     ///    </para>
     /// </devdoc>
-    [DefaultEvent("ServerChange"), SupportsEventValidation,]
+    [DefaultEvent("ServerChange"), SupportsEventValidation]
     public class HtmlInputHidden : HtmlInputControl, IPostBackDataHandler
     {
         private static readonly object EventServerChange = new object();

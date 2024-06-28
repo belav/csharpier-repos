@@ -204,7 +204,7 @@ namespace System.Runtime.Serialization
                 767933981,
                 1535867969,
                 2146435069,
-                0x7FFFFFC7
+                0x7FFFFFC7,
                 // 0x7FFFFFC7 == Array.MaxLength is not prime, but it is the largest possible array size.
                 // There's nowhere to go from here. Using a const rather than the MaxLength property
                 // so that the array contains only const values.

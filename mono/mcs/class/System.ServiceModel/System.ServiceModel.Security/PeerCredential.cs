@@ -45,7 +45,7 @@ namespace System.ServiceModel.Security
             {
                 cert = this.cert,
                 cert_auth = this.cert_auth.Clone(),
-                peer_auth = this.peer_auth.Clone()
+                peer_auth = this.peer_auth.Clone(),
             };
         }
 

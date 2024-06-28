@@ -1135,7 +1135,7 @@ class Tests
     enum E
     {
         A,
-        B
+        B,
     };
 
     public static int test_2_optimize_branches()

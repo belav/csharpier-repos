@@ -45,7 +45,7 @@ namespace System.Text.RegularExpressions
                 ExceptionArgument.startat => nameof(ExceptionArgument.startat),
                 ExceptionArgument.str => nameof(ExceptionArgument.str),
                 ExceptionArgument.value => nameof(ExceptionArgument.value),
-                _ => null
+                _ => null,
             };
 
         private static string? GetStringForExceptionResource(ExceptionResource resource) =>
@@ -54,7 +54,7 @@ namespace System.Text.RegularExpressions
                 ExceptionResource.BeginIndexNotNegative => SR.BeginIndexNotNegative,
                 ExceptionResource.CountTooSmall => SR.CountTooSmall,
                 ExceptionResource.LengthNotNegative => SR.LengthNotNegative,
-                _ => null
+                _ => null,
             };
     }
 

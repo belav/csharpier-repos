@@ -19,7 +19,7 @@ public class ExeTest
                 "Needs escaping\\\\",
                 "Needs \"escaping\"",
                 "Needs \\\"escaping\"",
-                "Needs escaping\\\\too"
+                "Needs escaping\\\\too",
             }
         );
 

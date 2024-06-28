@@ -31,7 +31,7 @@ namespace System.Net
     {
         NotInitialized,
         InProgress,
-        Completed
+        Completed,
     }
 
     internal unsafe class ListenerClientCertAsyncResult : LazyAsyncResult
@@ -319,7 +319,7 @@ namespace System.Net
         {
             Insecure,
             NoClientCert,
-            ClientCert
+            ClientCert,
         }
 
         internal HttpListenerRequest(HttpListenerContext httpContext, RequestContextBase memoryBlob)
@@ -344,11 +344,10 @@ namespace System.Net
             m_RequestId = memoryBlob.RequestBlob->RequestId;
             m_ConnectionId = memoryBlob.RequestBlob->ConnectionId;
             m_SslStatus =
-                memoryBlob.RequestBlob->pSslInfo == null
-                    ? SslStatus.Insecure
-                    : memoryBlob.RequestBlob->pSslInfo->SslClientCertNegotiated == 0
-                        ? SslStatus.NoClientCert
-                        : SslStatus.ClientCert;
+                memoryBlob.RequestBlob->pSslInfo == null ? SslStatus.Insecure
+                : memoryBlob.RequestBlob->pSslInfo->SslClientCertNegotiated == 0
+                    ? SslStatus.NoClientCert
+                : SslStatus.ClientCert;
             if (memoryBlob.RequestBlob->pRawUrl != null && memoryBlob.RequestBlob->RawUrlLength > 0)
             {
                 m_RawUrl = Marshal.PtrToStringAnsi(
@@ -1951,13 +1950,10 @@ namespace System.Net
 
             private static int HexToInt(char h)
             {
-                return (h >= '0' && h <= '9')
-                    ? h - '0'
-                    : (h >= 'a' && h <= 'f')
-                        ? h - 'a' + 10
-                        : (h >= 'A' && h <= 'F')
-                            ? h - 'A' + 10
-                            : -1;
+                return (h >= '0' && h <= '9') ? h - '0'
+                    : (h >= 'a' && h <= 'f') ? h - 'a' + 10
+                    : (h >= 'A' && h <= 'F') ? h - 'A' + 10
+                    : -1;
             }
 
             private class UrlDecoder

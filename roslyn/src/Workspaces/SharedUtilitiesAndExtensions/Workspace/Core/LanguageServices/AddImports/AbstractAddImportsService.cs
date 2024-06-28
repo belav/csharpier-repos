@@ -57,7 +57,7 @@ namespace Microsoft.CodeAnalysis.AddImport
                     configOptions,
                     fallbackOptions.UsingDirectivePlacement
                 ),
-                AllowInHiddenRegions = allowInHiddenRegions
+                AllowInHiddenRegions = allowInHiddenRegions,
             };
         }
 

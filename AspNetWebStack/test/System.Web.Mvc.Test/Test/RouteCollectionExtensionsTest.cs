@@ -25,7 +25,7 @@ namespace System.Web.Mvc.Test
                 {
                     controller = "Home",
                     action = "Index",
-                    id = ""
+                    id = "",
                 }
             );
 
@@ -34,7 +34,7 @@ namespace System.Web.Mvc.Test
             {
                 { "controller", "home" },
                 { "action", "about" },
-                { "area", "some-area" }
+                { "area", "some-area" },
             };
 
             // Act
@@ -58,7 +58,7 @@ namespace System.Web.Mvc.Test
             {
                 { "controller", "home" },
                 { "action", "index" },
-                { "area", "some-area" }
+                { "area", "some-area" },
             };
 
             // Act
@@ -100,7 +100,7 @@ namespace System.Web.Mvc.Test
                 { "controller", "home" },
                 { "action", "tenmostrecent" },
                 { "tag", "some-tag" },
-                { "area", "blog" }
+                { "area", "blog" },
             };
 
             // Act
@@ -122,7 +122,7 @@ namespace System.Web.Mvc.Test
             {
                 { "controller", "home" },
                 { "action", "tenmostrecent" },
-                { "tag", "some-tag" }
+                { "tag", "some-tag" },
             };
 
             // Act
@@ -531,7 +531,7 @@ namespace System.Web.Mvc.Test
                 {
                     controller = "Home",
                     action = "Index",
-                    id = ""
+                    id = "",
                 }
             );
 
@@ -543,7 +543,7 @@ namespace System.Web.Mvc.Test
                 {
                     controller = "Home",
                     action = "TenMostRecent",
-                    tag = ""
+                    tag = "",
                 }
             );
             blogContext.MapRoute(
@@ -553,7 +553,7 @@ namespace System.Web.Mvc.Test
                 {
                     controller = "Home",
                     action = "Index",
-                    id = ""
+                    id = "",
                 }
             );
 
@@ -565,7 +565,7 @@ namespace System.Web.Mvc.Test
                 {
                     controller = "Home",
                     action = "Index",
-                    id = ""
+                    id = "",
                 }
             );
 

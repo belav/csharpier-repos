@@ -49,7 +49,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers
                     groupingPriority: 1
                 ),
                 new ColumnState2(ColumnDefinitions.Analyzer.Severity, isVisible: true, width: 0),
-                new ColumnState2(ColumnDefinitions.Analyzer.Location, isVisible: true, width: 0)
+                new ColumnState2(ColumnDefinitions.Analyzer.Location, isVisible: true, width: 0),
             };
 
         protected override string[] GetFixedColumns() =>

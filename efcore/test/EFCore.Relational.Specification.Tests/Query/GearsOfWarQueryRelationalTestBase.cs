@@ -103,7 +103,7 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
                     .Select(g => new
                     {
                         g.Nickname,
-                        Discriminator = EF.Property<string>(g, "Discriminator")
+                        Discriminator = EF.Property<string>(g, "Discriminator"),
                     }),
             elementSorter: e => e.Nickname
         );
@@ -116,7 +116,7 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
                     .Select(g => new
                     {
                         g.Nickname,
-                        Discriminator = EF.Property<string>(g, "Discriminator")
+                        Discriminator = EF.Property<string>(g, "Discriminator"),
                     }),
             elementSorter: e => e.Nickname
         );
@@ -128,7 +128,7 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
                     .Select(f => new
                     {
                         f.Id,
-                        Discriminator = EF.Property<string>(f, "Discriminator")
+                        Discriminator = EF.Property<string>(f, "Discriminator"),
                     }),
             elementSorter: e => e.Id
         );
@@ -141,7 +141,7 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
                     .Select(lh => new
                     {
                         lh.Id,
-                        Discriminator = EF.Property<string>(lh, "Discriminator")
+                        Discriminator = EF.Property<string>(lh, "Discriminator"),
                     }),
             elementSorter: e => e.Id
         );
@@ -153,7 +153,7 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
                     .Select(ll => new
                     {
                         ll.Name,
-                        Discriminator = EF.Property<string>(ll, "Discriminator")
+                        Discriminator = EF.Property<string>(ll, "Discriminator"),
                     }),
             elementSorter: e => e.Name
         );
@@ -166,7 +166,7 @@ public abstract class GearsOfWarQueryRelationalTestBase<TFixture>
                     .Select(ll => new
                     {
                         ll.Name,
-                        Discriminator = EF.Property<string>(ll, "Discriminator")
+                        Discriminator = EF.Property<string>(ll, "Discriminator"),
                     }),
             elementSorter: e => e.Name
         );

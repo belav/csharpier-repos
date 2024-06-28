@@ -55,7 +55,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null) (Syntax: 'if (true
                 //         bool condition = false;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "condition")
                     .WithArguments("condition")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -120,7 +120,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null) (Syntax: 'if (true
                 //         bool condition = false;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "condition")
                     .WithArguments("condition")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -176,7 +176,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null) (Syntax: 'if (1 ==
                 //         bool condition = false;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "condition")
                     .WithArguments("condition")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1042,7 +1042,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null) (Syntax: '/*<bind>
                     .WithLocation(7, 6),
                 // file.cs(7,6): error CS1002: ; expected
                 //     {
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(7, 6),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1158,7 +1158,7 @@ IBlockOperation (2 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
                     .WithLocation(20, 14),
                 // file.cs(20,14): error CS1002: ; expected
                 //             }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(20, 14)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(20, 14),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -1241,7 +1241,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null, IsInvalid) (Syntax
                     .WithLocation(12, 28),
                 // file.cs(12,28): error CS1002: ; expected
                 //         /*<bind>*/if (flag)
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(12, 28)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(12, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1356,7 +1356,7 @@ IBlockOperation (2 statements) (OperationKind.Block, Type: null, IsInvalid) (Syn
                     .WithLocation(15, 14),
                 // file.cs(15,14): error CS1002: ; expected
                 //             }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(15, 14)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(15, 14),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -1424,7 +1424,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null, IsInvalid) (Syntax
                     .WithLocation(14, 13),
                 // CS1002: ; expected
                 //         else
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(14, 13)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(14, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1494,7 +1494,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null, IsInvalid) (Syntax
                 //         int a = 1;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "a")
                     .WithArguments("a")
-                    .WithLocation(8, 13)
+                    .WithLocation(8, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1582,7 +1582,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null, IsInvalid) (Syntax
                     .WithLocation(11, 13),
                 // file.cs(11,13): error CS1002: ; expected
                 //         else
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(11, 13)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(11, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1643,7 +1643,7 @@ IConditionalOperation (OperationKind.Conditional, Type: null) (Syntax: 'if (true
             {
                 // CS0162: Unreachable code detected
                 //             B();/*</bind>*/
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "B").WithLocation(11, 13)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "B").WithLocation(11, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IfStatementSyntax>(
@@ -1794,7 +1794,7 @@ Block[B3] - Exit
                 //         bool condition = false;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "condition")
                     .WithArguments("condition")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1878,7 +1878,7 @@ Block[B3] - Exit
                 //         bool condition = false;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "condition")
                     .WithArguments("condition")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -2798,7 +2798,7 @@ Block[B6] - Exit
                 //         if (a ? b : c)
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "a ? b : c")
                     .WithArguments("P", "bool")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -3324,7 +3324,7 @@ Block[B6] - Exit
                 //         if (a ?? b)
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "a ?? b")
                     .WithArguments("P", "bool")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -3715,7 +3715,7 @@ Block[B8] - Exit [UnReachable]
             {
                 // file.cs(6,13): error CS8115: A throw expression is not allowed in this context.
                 //         if (throw null)
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(6, 13),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             {
                 FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesSession,
                 FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesSession,
-                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
             };
 
             using (

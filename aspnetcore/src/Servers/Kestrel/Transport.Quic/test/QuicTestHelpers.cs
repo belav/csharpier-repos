@@ -101,7 +101,7 @@ internal static class QuicTestHelpers
         var sslServerAuthenticationOptions = new SslServerAuthenticationOptions();
         sslServerAuthenticationOptions.ApplicationProtocols = new List<SslApplicationProtocol>()
         {
-            SslApplicationProtocol.Http3
+            SslApplicationProtocol.Http3,
         };
         sslServerAuthenticationOptions.ServerCertificate = cert;
         sslServerAuthenticationOptions.RemoteCertificateValidationCallback =
@@ -114,7 +114,7 @@ internal static class QuicTestHelpers
             {
                 ApplicationProtocols = sslServerAuthenticationOptions.ApplicationProtocols,
                 OnConnection = (context, cancellationToken) =>
-                    ValueTask.FromResult(sslServerAuthenticationOptions)
+                    ValueTask.FromResult(sslServerAuthenticationOptions),
             }
         );
 
@@ -159,8 +159,8 @@ internal static class QuicTestHelpers
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
-                }
+                    SslApplicationProtocol.Http3,
+                },
             },
             DefaultStreamErrorCode = 0,
             DefaultCloseErrorCode = 0,

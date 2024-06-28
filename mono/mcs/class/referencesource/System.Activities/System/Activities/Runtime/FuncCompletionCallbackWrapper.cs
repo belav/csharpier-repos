@@ -19,7 +19,7 @@ namespace System.Activities.Runtime
         {
             typeof(NativeActivityContext),
             typeof(ActivityInstance),
-            typeof(T)
+            typeof(T),
         };
 
         T resultValue;

@@ -98,6 +98,7 @@ namespace System.Security.Policy
             Throw, // Throw an exception
             Merge, // Create a list of all the evidence objects
             SelectNewObject // The newly added object wins
+            ,
         }
 
 #if FEATURE_CAS_POLICY
@@ -272,7 +273,7 @@ namespace System.Security.Policy
                         typeof(Site),
                         typeof(StrongName),
                         typeof(Url),
-                        typeof(Zone)
+                        typeof(Zone),
                     };
 
 #if FEATURE_CAS_POLICY
@@ -1752,7 +1753,7 @@ namespace System.Security.Policy
             public enum LockType
             {
                 Reader,
-                Writer
+                Writer,
             }
 
             public EvidenceLockHolder(Evidence target, LockType lockType)
@@ -2048,7 +2049,9 @@ namespace System.Security.Policy
             internal enum Category
             {
                 Host = 0x1, // Enumerate only host supplied evidence
-                Assembly = 0x2 // Enumerate only assembly supplied evidence
+                Assembly =
+                    0x2 // Enumerate only assembly supplied evidence
+                ,
             }
 
             internal EvidenceEnumerator(Evidence evidence, Category category)

@@ -26,7 +26,7 @@ namespace System.Security.Cryptography
         {
             LegalBlockSizesValue = new KeySizes[]
             {
-                new KeySizes(minSize: 128, maxSize: 128, skipSize: 0)
+                new KeySizes(minSize: 128, maxSize: 128, skipSize: 0),
             };
 
             // This class wraps Aes

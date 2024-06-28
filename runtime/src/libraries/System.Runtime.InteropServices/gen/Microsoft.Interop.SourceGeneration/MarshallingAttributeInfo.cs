@@ -64,7 +64,7 @@ namespace Microsoft.Interop
         Undefined,
         Utf8,
         Utf16,
-        Custom
+        Custom,
     }
 
     /// <summary>
@@ -177,11 +177,10 @@ namespace Microsoft.Interop
                         $"{TypeNames.ExceptionAsNaNMarshaller}<double>",
                         unmanagedReturnType
                     ),
-                _ =>
-                    CreateWellKnownComExceptionMarshallingData(
-                        $"{TypeNames.ExceptionAsDefaultMarshaller}<{MarshallerHelpers.GetCompatibleGenericTypeParameterSyntax(SyntaxFactory.ParseTypeName(unmanagedReturnType.FullTypeName))}>",
-                        unmanagedReturnType
-                    ),
+                _ => CreateWellKnownComExceptionMarshallingData(
+                    $"{TypeNames.ExceptionAsDefaultMarshaller}<{MarshallerHelpers.GetCompatibleGenericTypeParameterSyntax(SyntaxFactory.ParseTypeName(unmanagedReturnType.FullTypeName))}>",
+                    unmanagedReturnType
+                ),
             };
 
             static NativeMarshallingAttributeInfo CreateWellKnownComExceptionMarshallingData(

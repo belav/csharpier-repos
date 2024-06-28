@@ -136,8 +136,8 @@ namespace Newtonsoft.Json.Tests.Documentation
                     Formatting = Formatting.Indented,
                     ContractResolver = new DefaultContractResolver
                     {
-                        NamingStrategy = new SnakeCaseNamingStrategy()
-                    }
+                        NamingStrategy = new SnakeCaseNamingStrategy(),
+                    },
                 }
             );
 
@@ -147,7 +147,7 @@ namespace Newtonsoft.Json.Tests.Documentation
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    ContractResolver = AppSettings.SnakeCaseContractResolver
+                    ContractResolver = AppSettings.SnakeCaseContractResolver,
                 }
             );
 

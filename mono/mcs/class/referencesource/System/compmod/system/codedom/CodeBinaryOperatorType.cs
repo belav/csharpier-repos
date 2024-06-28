@@ -20,7 +20,7 @@ namespace System.CodeDom
     ///       Specifies type identifiers for supported binary operators.
     ///    </para>
     /// </devdoc>
-    [ComVisible(true), Serializable,]
+    [ComVisible(true), Serializable]
     public enum CodeBinaryOperatorType
     {
         /// <devdoc>

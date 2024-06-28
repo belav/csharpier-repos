@@ -318,7 +318,7 @@ namespace R2RTest
                 {
                     Composite = true,
                     CompositeRoot = GetBackupFile(serpRoot, SerpDir),
-                    PartialComposite = true
+                    PartialComposite = true,
                 };
                 var runner = new Crossgen2Runner(
                     _options,
@@ -345,7 +345,7 @@ namespace R2RTest
 
                     Crossgen2RunnerOptions crossgen2Options = new Crossgen2RunnerOptions()
                     {
-                        Composite = false
+                        Composite = false,
                     };
                     var runner = new Crossgen2Runner(
                         _options,
@@ -382,7 +382,7 @@ namespace R2RTest
 
                     Crossgen2RunnerOptions crossgen2Options = new Crossgen2RunnerOptions()
                     {
-                        Composite = false
+                        Composite = false,
                     };
                     var runner = new Crossgen2Runner(
                         _options,
@@ -420,7 +420,7 @@ namespace R2RTest
 
                     Crossgen2RunnerOptions crossgen2Options = new Crossgen2RunnerOptions()
                     {
-                        Composite = false
+                        Composite = false,
                     };
                     var runner = new Crossgen2Runner(
                         _options,
@@ -480,7 +480,7 @@ namespace R2RTest
 
                     Crossgen2RunnerOptions crossgen2Options = new Crossgen2RunnerOptions()
                     {
-                        Composite = false
+                        Composite = false,
                     };
                     var runner = new Crossgen2Runner(
                         _options,
@@ -615,7 +615,7 @@ namespace R2RTest
                 "Microsoft.Search.Frontend.SchemaInterfaces.dll",
                 "Microsoft.Search.Frontend.Serialization.Models.dll",
                 "Microsoft.Search.Frontend.SharedComponents.dll",
-                "SparkleAssembly.dll"
+                "SparkleAssembly.dll",
             };
         }
 

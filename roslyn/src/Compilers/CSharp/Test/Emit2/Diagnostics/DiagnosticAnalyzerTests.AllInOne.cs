@@ -125,7 +125,7 @@ public class C
             AnalyzerOptions options = new AnalyzerOptions(
                 new[]
                 {
-                    new TestAdditionalText("myfilepath", text)
+                    new TestAdditionalText("myfilepath", text),
                 }.ToImmutableArray<AdditionalText>()
             );
 

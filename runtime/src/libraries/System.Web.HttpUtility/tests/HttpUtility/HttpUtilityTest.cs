@@ -84,7 +84,7 @@ namespace System.Web.Tests
         #endregion HtmlAttributeEncode
 
         public static IEnumerable<object[]> HtmlEncodeDecodeData =>
-            new[] { new object[] { "", "" }, new object[] { "<script>", "&lt;script&gt;" }, };
+            new[] { new object[] { "", "" }, new object[] { "<script>", "&lt;script&gt;" } };
 
         #region HtmlDecode
 
@@ -94,216 +94,216 @@ namespace System.Web.Tests
                 new object[]
                 {
                     "\u00E1\u00C1\u00E2\u00C2\u00B4",
-                    @"&aacute;&Aacute;&acirc;&Acirc;&acute;"
+                    @"&aacute;&Aacute;&acirc;&Acirc;&acute;",
                 },
                 new object[]
                 {
                     "\u00E6\u00C6\u00E0\u00C0\u2135",
-                    @"&aelig;&AElig;&agrave;&Agrave;&alefsym;"
+                    @"&aelig;&AElig;&agrave;&Agrave;&alefsym;",
                 },
                 new object[] { "\u03B1\u0391&\u2227\u2220", @"&alpha;&Alpha;&amp;&and;&ang;" },
                 new object[] { "\u0027\u0027&\u2227\u2220", @"&apos;&apos;&amp;&and;&ang;" },
                 new object[]
                 {
                     "\u00E5\u00C5\u2248\u00E3\u00C3",
-                    @"&aring;&Aring;&asymp;&atilde;&Atilde;"
+                    @"&aring;&Aring;&asymp;&atilde;&Atilde;",
                 },
                 new object[]
                 {
                     "\u00E4\u00C4\u201E\u03B2\u0392",
-                    @"&auml;&Auml;&bdquo;&beta;&Beta;"
+                    @"&auml;&Auml;&bdquo;&beta;&Beta;",
                 },
                 new object[]
                 {
                     "\u00A6\u2022\u2229\u00E7\u00C7",
-                    @"&brvbar;&bull;&cap;&ccedil;&Ccedil;"
+                    @"&brvbar;&bull;&cap;&ccedil;&Ccedil;",
                 },
                 new object[] { "\u00B8\u00A2\u03C7\u03A7\u02C6", @"&cedil;&cent;&chi;&Chi;&circ;" },
                 new object[]
                 {
                     "\u2663\u2245\u00A9\u21B5\u222A",
-                    @"&clubs;&cong;&copy;&crarr;&cup;"
+                    @"&clubs;&cong;&copy;&crarr;&cup;",
                 },
                 new object[]
                 {
                     "\u00A4\u2020\u2021\u2193\u21D3",
-                    @"&curren;&dagger;&Dagger;&darr;&dArr;"
+                    @"&curren;&dagger;&Dagger;&darr;&dArr;",
                 },
                 new object[]
                 {
                     "\u00B0\u03B4\u0394\u2666\u00F7",
-                    @"&deg;&delta;&Delta;&diams;&divide;"
+                    @"&deg;&delta;&Delta;&diams;&divide;",
                 },
                 new object[]
                 {
                     "\u00E9\u00C9\u00EA\u00CA\u00E8",
-                    @"&eacute;&Eacute;&ecirc;&Ecirc;&egrave;"
+                    @"&eacute;&Eacute;&ecirc;&Ecirc;&egrave;",
                 },
                 new object[]
                 {
                     "\u00C8\u2205\u2003\u2002\u03B5",
-                    @"&Egrave;&empty;&emsp;&ensp;&epsilon;"
+                    @"&Egrave;&empty;&emsp;&ensp;&epsilon;",
                 },
                 new object[]
                 {
                     "\u0395\u2261\u03B7\u0397\u00F0",
-                    @"&Epsilon;&equiv;&eta;&Eta;&eth;"
+                    @"&Epsilon;&equiv;&eta;&Eta;&eth;",
                 },
                 new object[]
                 {
                     "\u00D0\u00EB\u00CB\u20AC\u2203",
-                    @"&ETH;&euml;&Euml;&euro;&exist;"
+                    @"&ETH;&euml;&Euml;&euro;&exist;",
                 },
                 new object[]
                 {
                     "\u0192\u2200\u00BD\u00BC\u00BE",
-                    @"&fnof;&forall;&frac12;&frac14;&frac34;"
+                    @"&fnof;&forall;&frac12;&frac14;&frac34;",
                 },
                 new object[] { "\u2044\u03B3\u0393\u2265>", @"&frasl;&gamma;&Gamma;&ge;&gt;" },
                 new object[]
                 {
                     "\u2194\u21D4\u2665\u2026\u00ED",
-                    @"&harr;&hArr;&hearts;&hellip;&iacute;"
+                    @"&harr;&hArr;&hearts;&hellip;&iacute;",
                 },
                 new object[]
                 {
                     "\u00CD\u00EE\u00CE\u00A1\u00EC",
-                    @"&Iacute;&icirc;&Icirc;&iexcl;&igrave;"
+                    @"&Iacute;&icirc;&Icirc;&iexcl;&igrave;",
                 },
                 new object[]
                 {
                     "\u00CC\u2111\u221E\u222B\u03B9",
-                    @"&Igrave;&image;&infin;&int;&iota;"
+                    @"&Igrave;&image;&infin;&int;&iota;",
                 },
                 new object[]
                 {
                     "\u0399\u00BF\u2208\u00EF\u00CF",
-                    @"&Iota;&iquest;&isin;&iuml;&Iuml;"
+                    @"&Iota;&iquest;&isin;&iuml;&Iuml;",
                 },
                 new object[]
                 {
                     "\u03BA\u039A\u03BB\u039B\u2329",
-                    @"&kappa;&Kappa;&lambda;&Lambda;&lang;"
+                    @"&kappa;&Kappa;&lambda;&Lambda;&lang;",
                 },
                 new object[]
                 {
                     "\u00AB\u2190\u21D0\u2308\u201C",
-                    @"&laquo;&larr;&lArr;&lceil;&ldquo;"
+                    @"&laquo;&larr;&lArr;&lceil;&ldquo;",
                 },
                 new object[]
                 {
                     "\u2264\u230A\u2217\u25CA\u200E",
-                    @"&le;&lfloor;&lowast;&loz;&lrm;"
+                    @"&le;&lfloor;&lowast;&loz;&lrm;",
                 },
                 new object[] { "\u2039\u2018<\u00AF\u2014", @"&lsaquo;&lsquo;&lt;&macr;&mdash;" },
                 new object[]
                 {
                     "\u00B5\u00B7\u2212\u03BC\u039C",
-                    @"&micro;&middot;&minus;&mu;&Mu;"
+                    @"&micro;&middot;&minus;&mu;&Mu;",
                 },
                 new object[] { "\u2207\u00A0\u2013\u2260\u220B", @"&nabla;&nbsp;&ndash;&ne;&ni;" },
                 new object[]
                 {
                     "\u00AC\u2209\u2284\u00F1\u00D1",
-                    @"&not;&notin;&nsub;&ntilde;&Ntilde;"
+                    @"&not;&notin;&nsub;&ntilde;&Ntilde;",
                 },
                 new object[]
                 {
                     "\u03BD\u039D\u00F3\u00D3\u00F4",
-                    @"&nu;&Nu;&oacute;&Oacute;&ocirc;"
+                    @"&nu;&Nu;&oacute;&Oacute;&ocirc;",
                 },
                 new object[]
                 {
                     "\u00D4\u0153\u0152\u00F2\u00D2",
-                    @"&Ocirc;&oelig;&OElig;&ograve;&Ograve;"
+                    @"&Ocirc;&oelig;&OElig;&ograve;&Ograve;",
                 },
                 new object[]
                 {
                     "\u203E\u03C9\u03A9\u03BF\u039F",
-                    @"&oline;&omega;&Omega;&omicron;&Omicron;"
+                    @"&oline;&omega;&Omega;&omicron;&Omicron;",
                 },
                 new object[]
                 {
                     "\u2295\u2228\u00AA\u00BA\u00F8",
-                    @"&oplus;&or;&ordf;&ordm;&oslash;"
+                    @"&oplus;&or;&ordf;&ordm;&oslash;",
                 },
                 new object[]
                 {
                     "\u00D8\u00F5\u00D5\u2297\u00F6",
-                    @"&Oslash;&otilde;&Otilde;&otimes;&ouml;"
+                    @"&Oslash;&otilde;&Otilde;&otimes;&ouml;",
                 },
                 new object[]
                 {
                     "\u00D6\u00B6\u2202\u2030\u22A5",
-                    @"&Ouml;&para;&part;&permil;&perp;"
+                    @"&Ouml;&para;&part;&permil;&perp;",
                 },
                 new object[] { "\u03C6\u03A6\u03C0\u03A0\u03D6", @"&phi;&Phi;&pi;&Pi;&piv;" },
                 new object[]
                 {
                     "\u00B1\u00A3\u2032\u2033\u220F",
-                    @"&plusmn;&pound;&prime;&Prime;&prod;"
+                    @"&plusmn;&pound;&prime;&Prime;&prod;",
                 },
                 new object[] { "\u221D\u03C8\u03A8\"\u221A", @"&prop;&psi;&Psi;&quot;&radic;" },
                 new object[]
                 {
                     "\u232A\u00BB\u2192\u21D2\u2309",
-                    @"&rang;&raquo;&rarr;&rArr;&rceil;"
+                    @"&rang;&raquo;&rarr;&rArr;&rceil;",
                 },
                 new object[]
                 {
                     "\u201D\u211C\u00AE\u230B\u03C1",
-                    @"&rdquo;&real;&reg;&rfloor;&rho;"
+                    @"&rdquo;&real;&reg;&rfloor;&rho;",
                 },
                 new object[]
                 {
                     "\u03A1\u200F\u203A\u2019\u201A",
-                    @"&Rho;&rlm;&rsaquo;&rsquo;&sbquo;"
+                    @"&Rho;&rlm;&rsaquo;&rsquo;&sbquo;",
                 },
                 new object[]
                 {
                     "\u0161\u0160\u22C5\u00A7\u00AD",
-                    @"&scaron;&Scaron;&sdot;&sect;&shy;"
+                    @"&scaron;&Scaron;&sdot;&sect;&shy;",
                 },
                 new object[]
                 {
                     "\u03C3\u03A3\u03C2\u223C\u2660",
-                    @"&sigma;&Sigma;&sigmaf;&sim;&spades;"
+                    @"&sigma;&Sigma;&sigmaf;&sim;&spades;",
                 },
                 new object[] { "\u2282\u2286\u2211\u2283\u00B9", @"&sub;&sube;&sum;&sup;&sup1;" },
                 new object[]
                 {
                     "\u00B2\u00B3\u2287\u00DF\u03C4",
-                    @"&sup2;&sup3;&supe;&szlig;&tau;"
+                    @"&sup2;&sup3;&supe;&szlig;&tau;",
                 },
                 new object[]
                 {
                     "\u03A4\u2234\u03B8\u0398\u03D1",
-                    @"&Tau;&there4;&theta;&Theta;&thetasym;"
+                    @"&Tau;&there4;&theta;&Theta;&thetasym;",
                 },
                 new object[]
                 {
                     "\u2009\u00FE\u00DE\u02DC\u00D7",
-                    @"&thinsp;&thorn;&THORN;&tilde;&times;"
+                    @"&thinsp;&thorn;&THORN;&tilde;&times;",
                 },
                 new object[]
                 {
                     "\u2122\u00FA\u00DA\u2191\u21D1",
-                    @"&trade;&uacute;&Uacute;&uarr;&uArr;"
+                    @"&trade;&uacute;&Uacute;&uarr;&uArr;",
                 },
                 new object[]
                 {
                     "\u00FB\u00DB\u00F9\u00D9\u00A8",
-                    @"&ucirc;&Ucirc;&ugrave;&Ugrave;&uml;"
+                    @"&ucirc;&Ucirc;&ugrave;&Ugrave;&uml;",
                 },
                 new object[]
                 {
                     "\u03D2\u03C5\u03A5\u00FC\u00DC",
-                    @"&upsih;&upsilon;&Upsilon;&uuml;&Uuml;"
+                    @"&upsih;&upsilon;&Upsilon;&uuml;&Uuml;",
                 },
                 new object[]
                 {
                     "\u2118\u03BE\u039E\u00FD\u00DD",
-                    @"&weierp;&xi;&Xi;&yacute;&Yacute;"
+                    @"&weierp;&xi;&Xi;&yacute;&Yacute;",
                 },
                 new object[] { "\u00A5\u00FF\u0178\u03B6\u0396", @"&yen;&yuml;&Yuml;&zeta;&Zeta;" },
                 new object[] { "\u200D\u200C", @"&zwj;&zwnj;" },
@@ -403,7 +403,7 @@ namespace System.Web.Tests
                     "\u00A0\u00A1\u00A2\u00A3\u00A4\u00A5\u00A6\u00A7\u00A8\u00A9\u00AA\u00AB\u00AC\u00AD\u00AE\u00AF\u00B0\u00B1\u00B2\u00B3\u00B4\u00B5\u00B6\u00B7\u00B8\u00B9\u00BA\u00BB\u00BC\u00BD\u00BE\u00BF\u00C0\u00C1\u00C2\u00C3\u00C4\u00C5\u00C6\u00C7\u00C8\u00C9\u00CA\u00CB\u00CC\u00CD\u00CE\u00CF\u00D0\u00D1\u00D2\u00D3\u00D4\u00D5\u00D6\u00D7\u00D8\u00D9\u00DA\u00DB\u00DC\u00DD\u00DE\u00DF\u00E0\u00E1\u00E2\u00E3\u00E4\u00E5\u00E6\u00E7\u00E8\u00E9\u00EA\u00EB\u00EC\u00ED\u00EE\u00EF\u00F0\u00F1\u00F2\u00F3\u00F4\u00F5\u00F6\u00F7\u00F8\u00F9\u00FA\u00FB\u00FC\u00FD\u00FE\u00FF",
                     @"&#160;&#161;&#162;&#163;&#164;&#165;&#166;&#167;&#168;&#169;&#170;&#171;&#172;&#173;&#174;&#175;&#176;&#177;&#178;&#179;&#180;&#181;&#182;&#183;&#184;&#185;&#186;&#187;&#188;&#189;&#190;&#191;&#192;&#193;&#194;&#195;&#196;&#197;&#198;&#199;&#200;&#201;&#202;&#203;&#204;&#205;&#206;&#207;&#208;&#209;&#210;&#211;&#212;&#213;&#214;&#215;&#216;&#217;&#218;&#219;&#220;&#221;&#222;&#223;&#224;&#225;&#226;&#227;&#228;&#229;&#230;&#231;&#232;&#233;&#234;&#235;&#236;&#237;&#238;&#239;&#240;&#241;&#242;&#243;&#244;&#245;&#246;&#247;&#248;&#249;&#250;&#251;&#252;&#253;&#254;&#255;",
                 },
-                new object[] { new NullToString(), "" }
+                new object[] { new NullToString(), "" },
             };
 
         private sealed class NullToString
@@ -474,7 +474,7 @@ namespace System.Web.Tests
                 yield return new object[]
                 {
                     "The \t and \n will need to be escaped.",
-                    "The \\t and \\n will need to be escaped."
+                    "The \\t and \\n will need to be escaped.",
                 };
                 for (char c = char.MinValue; c < TestMaxChar; c++)
                 {
@@ -563,32 +563,32 @@ namespace System.Web.Tests
                 {
                     "name=value&foo=bar",
                     new[] { "name", "foo" },
-                    new[] { new[] { "value" }, new[] { "bar" } }
+                    new[] { new[] { "value" }, new[] { "bar" } },
                 },
                 new object[]
                 {
                     "name=value&name=bar",
                     new[] { "name" },
-                    new[] { new[] { "value", "bar" } }
+                    new[] { new[] { "value", "bar" } },
                 },
                 new object[] { "value", new string[] { null }, new[] { new[] { "value" } } },
                 new object[]
                 {
                     "name=value&bar",
                     new[] { "name", null },
-                    new[] { new[] { "value" }, new[] { "bar" } }
+                    new[] { new[] { "value" }, new[] { "bar" } },
                 },
                 new object[]
                 {
                     "bar&name=value",
                     new[] { null, "name" },
-                    new[] { new[] { "bar" }, new[] { "value" } }
+                    new[] { new[] { "bar" }, new[] { "value" } },
                 },
                 new object[]
                 {
                     "value&bar",
                     new string[] { null },
-                    new[] { new[] { "value", "bar" } }
+                    new[] { new[] { "value", "bar" } },
                 },
                 new object[] { "", new string[] { }, new string[][] { } },
                 new object[] { "=", new[] { "" }, new[] { new[] { "" } } },
@@ -597,31 +597,31 @@ namespace System.Web.Tests
                 {
                     HttpUtility.UrlEncode(UnicodeStr) + "=" + HttpUtility.UrlEncode(UnicodeStr),
                     new[] { UnicodeStr },
-                    new[] { new[] { UnicodeStr } }
+                    new[] { new[] { UnicodeStr } },
                 },
                 new object[]
                 {
                     "name=value=test",
                     new[] { "name" },
-                    new[] { new[] { "value=test" } }
+                    new[] { new[] { "value=test" } },
                 },
                 new object[]
                 {
                     "name=value&#xe9;",
                     new[] { "name", null },
-                    new[] { new[] { "value" }, new[] { "#xe9;" } }
+                    new[] { new[] { "value" }, new[] { "#xe9;" } },
                 },
                 new object[]
                 {
                     "name=value&amp;name2=value2",
                     new[] { "name", "amp;name2" },
-                    new[] { new[] { "value" }, new[] { "value2" } }
+                    new[] { new[] { "value" }, new[] { "value2" } },
                 },
                 new object[]
                 {
                     "name=value=test+phrase",
                     new[] { "name" },
-                    new[] { new[] { "value=test phrase" } }
+                    new[] { new[] { "value=test phrase" } },
                 },
             };
 
@@ -639,9 +639,9 @@ namespace System.Web.Tests
                         {
                             "??name=value=test",
                             new[] { "?name" },
-                            new[] { new[] { "value=test" } }
+                            new[] { new[] { "value=test" } },
                         },
-                        new object[] { "?", Array.Empty<string>(), Array.Empty<IList<string>>() }
+                        new object[] { "?", Array.Empty<string>(), Array.Empty<IList<string>>() },
                     }
                 );
 
@@ -713,47 +713,47 @@ namespace System.Web.Tests
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=bar",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%ar",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%61r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%61r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%ar",
-                    "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%%61r"
+                    "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%%61r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r",
-                    "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r"
+                    "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=ba%r",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61%r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61%r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=bar",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%ar",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=bar baz",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=bar+baz"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=bar+baz",
                 },
                 new object[] { "http://example.net/\U00010000", "http://example.net/\U00010000" },
                 new object[] { "http://example.net/\uFFFD", "http://example.net/\uD800" },
@@ -764,10 +764,10 @@ namespace System.Web.Tests
                 new object[]
                 {
                     "http://example.net/%42%61%7A",
-                    "http://example.net/%2542%2561%257A"
+                    "http://example.net/%2542%2561%257A",
                 },
                 // The second iteration should return the original string
-                new object[] { "http://example.net/Baz", "http://example.net/%42%61%7A" }
+                new object[] { "http://example.net/Baz", "http://example.net/%42%61%7A" },
             };
 
         public static IEnumerable<object[]> UrlDecodeDataToBytes =>
@@ -776,53 +776,53 @@ namespace System.Web.Tests
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=bar",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%ar",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%61r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%61r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%ar",
-                    "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%%61r"
+                    "http://127.0.0.1:8080/app%Dir/page.aspx?foo=b%%61r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r",
-                    "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r"
+                    "http://127.0.0.1:8080/app%%Dir/page.aspx?foo=b%%r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=ba%r",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61%r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%61%r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%uu0061r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%u0061r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=b%%u0061r",
                 },
                 new object[]
                 {
                     "http://127.0.0.1:8080/appDir/page.aspx?foo=bar baz",
-                    "http://127.0.0.1:8080/appDir/page.aspx?foo=bar+baz"
+                    "http://127.0.0.1:8080/appDir/page.aspx?foo=bar+baz",
                 },
                 new object[] { "http://example.net/\U00010000", "http://example.net/\U00010000" },
                 new object[] { "http://example.net/\uFFFD", "http://example.net/\uD800" },
                 new object[] { "http://example.net/\uFFFDa", "http://example.net/\uD800a" },
                 new object[] { "http://example.net/\uFFFD", "http://example.net/\uDC00" },
-                new object[] { "http://example.net/\uFFFDa", "http://example.net/\uDC00a" }
+                new object[] { "http://example.net/\uFFFDa", "http://example.net/\uDC00a" },
             };
 
         [Theory]

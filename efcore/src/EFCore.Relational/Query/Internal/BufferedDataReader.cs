@@ -863,7 +863,7 @@ public class BufferedDataReader : DbDataReader
                 TypeCase.UShort => (T)(object)GetUInt16(ordinal),
                 TypeCase.UInt => (T)(object)GetUInt32(ordinal),
                 TypeCase.ULong => (T)(object)GetUInt64(ordinal),
-                _ => (T)_objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]]
+                _ => (T)_objects[_currentRowNumber * _objectCount + _ordinalToIndexMap[ordinal]],
             };
 
         // ReSharper disable once InconsistentNaming
@@ -2023,7 +2023,7 @@ public class BufferedDataReader : DbDataReader
             Long,
             UInt,
             ULong,
-            UShort
+            UShort,
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -2058,29 +2058,26 @@ public class BufferedDataReader : DbDataReader
                             propertyName,
                             expectedType
                         )
-                        : exception is InvalidCastException
-                            ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
-                                entityType,
-                                propertyName,
-                                expectedType,
-                                actualType
-                            )
-                            : RelationalStrings.ErrorMaterializingProperty(
-                                entityType,
-                                propertyName
-                            );
+                    : exception is InvalidCastException
+                        ? CoreStrings.ErrorMaterializingPropertyInvalidCast(
+                            entityType,
+                            propertyName,
+                            expectedType,
+                            actualType
+                        )
+                    : RelationalStrings.ErrorMaterializingProperty(entityType, propertyName);
             }
             else
             {
                 message =
                     exception is NullReferenceException || Equals(value, DBNull.Value)
                         ? RelationalStrings.ErrorMaterializingValueNullReference(expectedType)
-                        : exception is InvalidCastException
-                            ? RelationalStrings.ErrorMaterializingValueInvalidCast(
-                                expectedType,
-                                actualType
-                            )
-                            : RelationalStrings.ErrorMaterializingValue;
+                    : exception is InvalidCastException
+                        ? RelationalStrings.ErrorMaterializingValueInvalidCast(
+                            expectedType,
+                            actualType
+                        )
+                    : RelationalStrings.ErrorMaterializingValue;
             }
 
             throw new InvalidOperationException(message, exception);

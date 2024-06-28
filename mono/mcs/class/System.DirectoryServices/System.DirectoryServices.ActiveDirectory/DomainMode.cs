@@ -30,6 +30,6 @@ namespace System.DirectoryServices.ActiveDirectory
         Windows2003InterimDomain,
         Windows2003Domain,
         Windows2008Domain,
-        Windows2008R2Domain
+        Windows2008R2Domain,
     }
 }

@@ -87,7 +87,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             await TestServices.Input.SendAsync(
                 [
                     (VirtualKeyCode.VK_R, VirtualKeyCode.CONTROL),
-                    (VirtualKeyCode.VK_V, VirtualKeyCode.CONTROL)
+                    (VirtualKeyCode.VK_V, VirtualKeyCode.CONTROL),
                 ],
                 cancellationToken
             );

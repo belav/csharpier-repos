@@ -92,7 +92,7 @@ namespace Castle.Core.Tests
                 {
                     foo = 1,
                     name = "jonh",
-                    age = 25
+                    age = 25,
                 }
             );
 
@@ -114,7 +114,7 @@ namespace Castle.Core.Tests
             {
                 foo = 1,
                 name = "john",
-                age = 25
+                age = 25,
             };
             Assert.IsFalse(target.GetType().IsPublic);
             var dict = new ReflectionBasedDictionaryAdapter(target);

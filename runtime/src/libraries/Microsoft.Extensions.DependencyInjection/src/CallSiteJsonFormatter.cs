@@ -159,7 +159,7 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 return new CallSiteFormatterContext(Builder, Offset + 4, _processedCallSites)
                 {
-                    _firstItem = true
+                    _firstItem = true,
                 };
             }
 

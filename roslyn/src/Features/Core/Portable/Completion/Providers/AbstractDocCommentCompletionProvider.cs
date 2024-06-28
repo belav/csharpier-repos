@@ -213,7 +213,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 GetCommentItem(),
                 GetItem(InheritdocElementName),
                 GetItem(SeeElementName),
-                GetItem(SeeAlsoElementName)
+                GetItem(SeeAlsoElementName),
             };
 
         private CompletionItem GetCommentItem()

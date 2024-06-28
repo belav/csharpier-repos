@@ -1046,12 +1046,12 @@ public class PageConventionCollectionExtensionsTest
                 {
                     CreateSelectorModel("Index", suppressLinkGeneration: true),
                     CreateSelectorModel(""),
-                }
+                },
             },
             new PageRouteModel("/Pages/About.cshtml", "/About")
             {
-                Selectors = { CreateSelectorModel("About"), }
-            }
+                Selectors = { CreateSelectorModel("About") },
+            },
         };
 
         // Act
@@ -1107,12 +1107,12 @@ public class PageConventionCollectionExtensionsTest
         {
             new PageRouteModel("/Pages/Profile.cshtml", "/Profile")
             {
-                Selectors = { CreateSelectorModel("Profile"), }
+                Selectors = { CreateSelectorModel("Profile") },
             },
             new PageRouteModel("/Areas/Accounts/Pages/Profile.cshtml", "/Profile", "Accounts")
             {
-                Selectors = { CreateSelectorModel("Accounts/Profile"), }
-            }
+                Selectors = { CreateSelectorModel("Accounts/Profile") },
+            },
         };
 
         // Act
@@ -1173,7 +1173,7 @@ public class PageConventionCollectionExtensionsTest
             AttributeRouteModel = new AttributeRouteModel
             {
                 Template = template,
-                SuppressLinkGeneration = suppressLinkGeneration
+                SuppressLinkGeneration = suppressLinkGeneration,
             },
         };
     }

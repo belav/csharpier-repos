@@ -17,7 +17,7 @@ namespace System.Data.Mapping.ViewGeneration
     {
         GenerateAllViews = 0,
         OfTypeViews,
-        OfTypeOnlyViews
+        OfTypeOnlyViews,
     }
 
     internal enum ViewGenTraceLevel
@@ -25,7 +25,7 @@ namespace System.Data.Mapping.ViewGeneration
         None = 0,
         ViewsOnly,
         Normal,
-        Verbose
+        Verbose,
     }
 
     internal enum PerfType

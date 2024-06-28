@@ -44,7 +44,7 @@ namespace MonoTests.System.IO.Packaging
         {
             new Uri("/file1.png", UriKind.Relative),
             new Uri("/file2.png", UriKind.Relative),
-            new Uri("/file3.png", UriKind.Relative)
+            new Uri("/file3.png", UriKind.Relative),
         };
 
         [TestFixtureSetUp]

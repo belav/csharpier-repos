@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The value is guaranteed to the same instance across multiple accesses.
         /// </summary>
-        PreserveIdentity = 1
+        PreserveIdentity = 1,
     }
 
     internal static class PreservationModeExtensions

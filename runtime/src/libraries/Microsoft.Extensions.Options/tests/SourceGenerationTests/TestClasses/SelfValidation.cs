@@ -62,7 +62,7 @@ namespace SelfValidation
             {
                 new ValidationResult(
                     $"Display: {context.DisplayName}, Member: {context.MemberName}"
-                )
+                ),
             };
         }
     }

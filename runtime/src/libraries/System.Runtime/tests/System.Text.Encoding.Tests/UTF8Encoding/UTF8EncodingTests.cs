@@ -166,44 +166,44 @@ namespace System.Text.Tests
             {
                 new UTF8Encoding(false),
                 new UTF8Encoding(false, false),
-                true
+                true,
             };
             yield return new object[]
             {
                 new UTF8Encoding(true),
                 new UTF8Encoding(true, false),
-                true
+                true,
             };
             yield return new object[]
             {
                 new UTF8Encoding(false),
                 new UTF8Encoding(false, true),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new UTF8Encoding(true, true),
                 new UTF8Encoding(true, true),
-                true
+                true,
             };
             yield return new object[]
             {
                 new UTF8Encoding(false, false),
                 new UTF8Encoding(false, false),
-                true
+                true,
             };
             yield return new object[]
             {
                 new UTF8Encoding(true, false),
                 new UTF8Encoding(true, false),
-                true
+                true,
             };
             yield return new object[]
             {
                 new UTF8Encoding(true, false),
                 new UTF8Encoding(false, true),
-                false
+                false,
             };
 
             yield return new object[] { Encoding.UTF8, Encoding.UTF8, true };
@@ -243,7 +243,7 @@ namespace System.Text.Tests
                     (byte)'b',
                     (byte)'!',
                     (byte)'c',
-                    (byte)'!'
+                    (byte)'!',
                 },
                 encoding.GetBytes("abc")
             );

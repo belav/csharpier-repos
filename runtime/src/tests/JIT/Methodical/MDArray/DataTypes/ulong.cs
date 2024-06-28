@@ -18,36 +18,36 @@ public class CL
     public ulong[,] ulong2darr =
     {
         { 0, 1 },
-        { 0, 0 }
+        { 0, 0 },
     };
     public ulong[,,] ulong3darr =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 1 }
+            { 0, 1 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
     public ulong[,] ulong2darr_b =
     {
         { 0, 49 },
-        { 0, 0 }
+        { 0, 0 },
     };
     public ulong[,,] ulong3darr_b =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 49 }
+            { 0, 49 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
 }
 
@@ -56,36 +56,36 @@ public class ulongMDArrTest
     static ulong[,] ulong2darr =
     {
         { 0, 1 },
-        { 0, 0 }
+        { 0, 0 },
     };
     static ulong[,,] ulong3darr =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 1 }
+            { 0, 1 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
     static ulong[,] ulong2darr_b =
     {
         { 0, 49 },
-        { 0, 0 }
+        { 0, 0 },
     };
     static ulong[,,] ulong3darr_b =
     {
         {
-            { 0, 0 }
+            { 0, 0 },
         },
         {
-            { 0, 49 }
+            { 0, 49 },
         },
         {
-            { 0, 0 }
-        }
+            { 0, 0 },
+        },
     };
 
     static ulong[][,] ja1 = new ulong[2][,];
@@ -102,36 +102,36 @@ public class ulongMDArrTest
         vt1.ulong2darr = new ulong[,]
         {
             { 0, 1 },
-            { 0, 0 }
+            { 0, 0 },
         };
         vt1.ulong3darr = new ulong[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 1 }
+                { 0, 1 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
         vt1.ulong2darr_b = new ulong[,]
         {
             { 0, 49 },
-            { 0, 0 }
+            { 0, 0 },
         };
         vt1.ulong3darr_b = new ulong[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 49 }
+                { 0, 49 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
 
         CL cl1 = new CL();
@@ -139,36 +139,36 @@ public class ulongMDArrTest
         ja1[0] = new ulong[,]
         {
             { 0, 1 },
-            { 0, 0 }
+            { 0, 0 },
         };
         ja2[1] = new ulong[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 1 }
+                { 0, 1 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
         ja1_b[0] = new ulong[,]
         {
             { 0, 49 },
-            { 0, 0 }
+            { 0, 0 },
         };
         ja2_b[1] = new ulong[,,]
         {
             {
-                { 0, 0 }
+                { 0, 0 },
             },
             {
-                { 0, 49 }
+                { 0, 49 },
             },
             {
-                { 0, 0 }
-            }
+                { 0, 0 },
+            },
         };
 
         ulong result = 1;

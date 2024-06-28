@@ -10,5 +10,6 @@ namespace System
         None, // Never use Idn
         AllExceptIntranet, // Use Idn in Internet and not intranet
         All // Internet and intranet
+        ,
     }
 }

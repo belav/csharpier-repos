@@ -430,7 +430,7 @@ namespace System.Security.Claims
             var baseId = new NonClaimsIdentity
             {
                 Name = "base_name",
-                AuthenticationType = "TestId_AuthType"
+                AuthenticationType = "TestId_AuthType",
             };
 
             var id = new ClaimsIdentity(
@@ -507,7 +507,7 @@ namespace System.Security.Claims
             var baseId = new NonClaimsIdentity
             {
                 Name = "base_name",
-                AuthenticationType = "TestId_AuthType"
+                AuthenticationType = "TestId_AuthType",
             };
 
             var id = new ClaimsIdentity(

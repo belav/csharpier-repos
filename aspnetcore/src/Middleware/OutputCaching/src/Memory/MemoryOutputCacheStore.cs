@@ -123,7 +123,7 @@ internal sealed class MemoryOutputCacheStore : IOutputCacheStore
         var options = new MemoryCacheEntryOptions
         {
             AbsoluteExpirationRelativeToNow = validFor,
-            Size = value.Length
+            Size = value.Length,
         };
 
         if (tags != null && tags.Length > 0)

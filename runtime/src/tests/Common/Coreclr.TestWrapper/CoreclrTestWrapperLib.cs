@@ -46,7 +46,7 @@ namespace CoreclrTestLib
             MiniDumpWithTokenInformation = 0x00040000,
             MiniDumpWithModuleHeaders = 0x00080000,
             MiniDumpFilterTriage = 0x00100000,
-            MiniDumpValidTypeFlags = 0x001fffff
+            MiniDumpValidTypeFlags = 0x001fffff,
         }
 
         [DllImport("DbgHelp.dll", SetLastError = true)]
@@ -74,7 +74,7 @@ namespace CoreclrTestLib
             TH32CS_SNAPMODULE = 0x00000008,
             TH32CS_SNAPMODULE32 = 0x00000010,
             TH32CS_SNAPPROCESS = 0x00000002,
-            TH32CS_SNAPTHREAD = 0x00000004
+            TH32CS_SNAPTHREAD = 0x00000004,
         };
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -154,7 +154,7 @@ namespace CoreclrTestLib
 
                     var processEntry = new Kernel32.ProcessEntry32W
                     {
-                        Size = sizeof(Kernel32.ProcessEntry32W)
+                        Size = sizeof(Kernel32.ProcessEntry32W),
                     };
 
                     bool success = Kernel32.Process32FirstW(snapshot, ref processEntry);
@@ -356,7 +356,7 @@ namespace CoreclrTestLib
         private static List<string> knownNativeModules = new List<string>()
         {
             "libcoreclr.so",
-            "libclrjit.so"
+            "libclrjit.so",
         };
         private static string TO_BE_CONTINUE_TAG = "<TO_BE_CONTINUE>";
         private static string SKIP_LINE_TAG = "# <SKIP_LINE>";
@@ -372,7 +372,7 @@ namespace CoreclrTestLib
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                }
+                },
             };
 
             outputWriter.WriteLine(
@@ -563,7 +563,7 @@ namespace CoreclrTestLib
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                     RedirectStandardInput = true,
-                }
+                },
             };
 
             outputWriter.WriteLine(

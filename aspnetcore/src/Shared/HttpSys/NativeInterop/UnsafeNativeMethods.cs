@@ -57,7 +57,7 @@ internal static unsafe partial class UnsafeNclNativeMethods
     {
         None = 0,
         SkipCompletionPortOnSuccess = 1,
-        SkipSetEventOnHandle = 2
+        SkipSetEventOnHandle = 2,
     }
 
     [LibraryImport(TOKENBINDING)]

@@ -16,6 +16,6 @@ namespace System.Runtime.InteropServices
         MultiSeparate = 2,
         SingleUse = 0,
         Suspended = 4,
-        Surrogate = 8
+        Surrogate = 8,
     }
 }

@@ -43,13 +43,13 @@ namespace System.Windows.Forms
     internal enum MimeExtensionHandlerStatus
     {
         OK,
-        ERROR
+        ERROR,
     }
 
     internal enum EPlatformHandler
     {
         Default,
-        GNOME
+        GNOME,
     }
 
     internal class ResourceImageLoader
@@ -526,14 +526,14 @@ namespace System.Windows.Forms
             GNOME_ICON_LOOKUP_FLAGS_NONE = 0,
             GNOME_ICON_LOOKUP_FLAGS_EMBEDDING_TEXT = 1 << 0,
             GNOME_ICON_LOOKUP_FLAGS_SHOW_SMALL_IMAGES_AS_THEMSELVES = 1 << 1,
-            GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES = 1 << 2
+            GNOME_ICON_LOOKUP_FLAGS_ALLOW_SVG_AS_THEMSELVES = 1 << 2,
         };
 
         enum GtkIconLookupFlags
         {
             GTK_ICON_LOOKUP_NO_SVG = 1 << 0,
             GTK_ICON_LOOKUP_FORCE_SVG = 1 << 1,
-            GTK_ICON_LOOKUP_USE_BUILTIN = 1 << 2
+            GTK_ICON_LOOKUP_USE_BUILTIN = 1 << 2,
         };
 
         static bool inited = false;

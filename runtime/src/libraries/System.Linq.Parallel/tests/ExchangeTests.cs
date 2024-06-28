@@ -16,7 +16,7 @@ namespace System.Linq.Parallel.Tests
             ParallelMergeOptions.AutoBuffered,
             ParallelMergeOptions.Default,
             ParallelMergeOptions.FullyBuffered,
-            ParallelMergeOptions.NotBuffered
+            ParallelMergeOptions.NotBuffered,
         };
 
         /// <summary>

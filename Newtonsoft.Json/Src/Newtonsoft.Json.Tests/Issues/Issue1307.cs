@@ -57,7 +57,7 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             private static readonly JsonLoadSettings _jsonLoadSettings = new JsonLoadSettings
             {
-                CommentHandling = CommentHandling.Ignore
+                CommentHandling = CommentHandling.Ignore,
             };
 
             public override bool CanConvert(Type objectType)

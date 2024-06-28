@@ -40,11 +40,9 @@ namespace System
                 "Expected resulting length to be within value's length"
             );
 
-            return newLength == 0
-                ? string.Empty
-                : newLength == value.Length
-                    ? value
-                    : value.Substring(startIndex, newLength);
+            return newLength == 0 ? string.Empty
+                : newLength == value.Length ? value
+                : value.Substring(startIndex, newLength);
         }
     }
 }

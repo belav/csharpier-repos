@@ -26,7 +26,7 @@ public class ValidationProblemResultTests
         var httpContext = new DefaultHttpContext
         {
             RequestServices = CreateServices(),
-            Response = { Body = stream, },
+            Response = { Body = stream },
         };
 
         // Act

@@ -17,7 +17,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Light, string.Empty);
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -38,7 +38,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -68,7 +68,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "AttachedToParent"
             );
             TaskInfo node_1_2 = new TaskInfo(node_1, "node_1_2", WorkloadType.Light, "LongRunning");
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -88,9 +88,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -109,7 +109,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -156,7 +156,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -171,9 +171,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
             TaskInfo node_2_2 = new TaskInfo(node_2, "node_2_2", WorkloadType.Light, "None");
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -198,7 +198,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Light, "LongRunning");
 
@@ -220,9 +220,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -273,7 +273,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -287,7 +287,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Light, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -318,7 +318,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -343,7 +343,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -370,9 +370,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -398,7 +398,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -465,7 +465,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -507,7 +507,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -527,9 +527,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -574,7 +574,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -596,9 +596,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -660,7 +660,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -707,7 +707,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Heavy, "LongRunning");
             TaskInfo node_2_1 = new TaskInfo(
@@ -717,9 +717,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning"
             );
             TaskInfo node_2_2 = new TaskInfo(node_2, "node_2_2", WorkloadType.Heavy, "None");
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -765,7 +765,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -789,7 +789,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -808,7 +808,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Heavy, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -829,7 +829,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Light, "None");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -853,7 +853,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -880,9 +880,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Cancel, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -902,7 +902,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -938,7 +938,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -958,9 +958,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1007,7 +1007,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_7 = new TaskInfo(node, "node_7", WorkloadType.Medium, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1029,7 +1029,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Medium, "None");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1059,7 +1059,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1081,9 +1081,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "AttachedToParent"
             );
             TaskInfo node_3_2 = new TaskInfo(node_3, "node_3_2", WorkloadType.Light, "None");
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1138,7 +1138,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Medium, "None");
             TaskInfo node_2_1 = new TaskInfo(
@@ -1153,9 +1153,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "AttachedToParent"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1185,7 +1185,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1202,9 +1202,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_3_2 = new TaskInfo(node_3, "node_3_2", WorkloadType.VeryHeavy, "None");
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1229,7 +1229,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "AttachedToParent"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1281,7 +1281,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1313,7 +1313,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.None, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1352,7 +1352,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryLight, "LongRunning");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1382,7 +1382,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1409,9 +1409,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "AttachedToParent"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1458,7 +1458,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1478,7 +1478,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1509,7 +1509,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_1_2 = new TaskInfo(node_1, "node_1_2", WorkloadType.VeryHeavy, "None");
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1529,9 +1529,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, -1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1568,7 +1568,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.Heavy, "None");
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1590,9 +1590,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1617,7 +1617,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "AttachedToParent"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1643,7 +1643,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_1_2 = new TaskInfo(node_1, "node_1_2", WorkloadType.Medium, "None");
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1658,9 +1658,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_2_2 = new TaskInfo(node_2, "node_2_2", WorkloadType.VeryHeavy, "None");
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1686,7 +1686,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "AttachedToParent"
             );
             TaskInfo node_1_2 = new TaskInfo(node_1, "node_1_2", WorkloadType.Heavy, "None");
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Medium, "None");
             TaskInfo node_2_1 = new TaskInfo(
@@ -1696,9 +1696,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
             TaskInfo node_2_2 = new TaskInfo(node_2, "node_2_2", WorkloadType.VeryLight, "None");
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1735,7 +1735,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.VeryHeavy, "None");
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -1757,9 +1757,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_3_2 = new TaskInfo(node_3, "node_3_2", WorkloadType.Heavy, "None");
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1779,7 +1779,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Light, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1831,7 +1831,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_7 = new TaskInfo(node, "node_7", WorkloadType.VeryLight, "LongRunning");
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1846,7 +1846,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Heavy, "LongRunning");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1893,7 +1893,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_7 = new TaskInfo(node, "node_7", WorkloadType.Medium, "None");
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1937,7 +1937,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1957,7 +1957,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Medium, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -1999,7 +1999,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_7 = new TaskInfo(node, "node_7", WorkloadType.Heavy, "None");
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2031,7 +2031,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2053,7 +2053,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Medium, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2078,7 +2078,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.VeryLight, "None");
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -2105,9 +2105,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning, AttachedToParent"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2129,7 +2129,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2186,7 +2186,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2211,7 +2211,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -2238,9 +2238,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2266,7 +2266,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning, AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryLight, "None");
             TaskInfo node_2_1 = new TaskInfo(
@@ -2281,9 +2281,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2314,7 +2314,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryHeavy, "None");
             TaskInfo node_2_1 = new TaskInfo(
@@ -2329,9 +2329,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 0);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2384,7 +2384,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryLight, "None");
             TaskInfo node_2_1 = new TaskInfo(
@@ -2399,9 +2399,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "LongRunning, AttachedToParent"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2416,7 +2416,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.VeryHeavy, "None");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2468,7 +2468,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2499,7 +2499,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -2519,9 +2519,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2546,7 +2546,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning, AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Light, "AttachedToParent");
 
@@ -2568,9 +2568,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, AttachedToParent"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2627,7 +2627,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2649,7 +2649,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Light, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2676,7 +2676,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2718,7 +2718,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -2740,9 +2740,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning"
             );
             TaskInfo node_3_2 = new TaskInfo(node_3, "node_3_2", WorkloadType.VeryHeavy, "None");
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2773,7 +2773,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryHeavy, "None");
             TaskInfo node_2_1 = new TaskInfo(
@@ -2788,9 +2788,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2815,7 +2815,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.Heavy, "LongRunning");
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -2842,9 +2842,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "AttachedToParent"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 97);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2891,7 +2891,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Heavy, "LongRunning");
 
@@ -2913,9 +2913,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2931,7 +2931,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Heavy, "None");
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.Light, "None");
             TaskInfo node_1_2 = new TaskInfo(node_1, "node_1_2", WorkloadType.Light, "LongRunning");
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -2951,9 +2951,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -2980,7 +2980,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Light, "None");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3017,7 +3017,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3079,7 +3079,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3111,7 +3111,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3136,7 +3136,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3198,7 +3198,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3225,7 +3225,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3257,7 +3257,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 197);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3284,7 +3284,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3311,7 +3311,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3353,7 +3353,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3380,9 +3380,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3439,7 +3439,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3481,7 +3481,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3512,7 +3512,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3532,9 +3532,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3556,7 +3556,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryLight, "None");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3581,7 +3581,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.Light, "LongRunning");
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3608,9 +3608,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3646,7 +3646,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3666,9 +3666,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "AttachedToParent"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3688,7 +3688,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Light, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3736,7 +3736,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3756,9 +3756,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3788,7 +3788,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3815,9 +3815,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3864,7 +3864,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_7 = new TaskInfo(node, "node_7", WorkloadType.Heavy, "None");
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3906,7 +3906,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_7 = new TaskInfo(node, "node_7", WorkloadType.Light, "LongRunning");
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3926,7 +3926,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Light, "LongRunning");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -3957,7 +3957,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "LongRunning"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -3977,9 +3977,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4005,7 +4005,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4020,9 +4020,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_2_2 = new TaskInfo(node_2, "node_2_2", WorkloadType.VeryLight, "None");
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4047,7 +4047,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4074,7 +4074,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4116,7 +4116,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4138,9 +4138,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "LongRunning, RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4202,7 +4202,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 1);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4227,7 +4227,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning, RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4254,9 +4254,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "AttachedToParent"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4313,7 +4313,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4362,7 +4362,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4382,7 +4382,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.VeryLight, "LongRunning");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4409,7 +4409,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4446,7 +4446,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4468,7 +4468,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.VeryLight, "None");
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4504,7 +4504,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4524,9 +4524,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "RespectParentCancellation"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4562,7 +4562,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4577,9 +4577,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_2_2 = new TaskInfo(node_2, "node_2_2", WorkloadType.Heavy, "None");
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4631,7 +4631,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4688,7 +4688,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.Millisecond, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4724,7 +4724,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryHeavy,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4744,9 +4744,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Heavy,
                 "LongRunning, AttachedToParent"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4766,7 +4766,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
 
             TaskInfo node_1 = new TaskInfo(node, "node_1", WorkloadType.Medium, "AttachedToParent");
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4823,7 +4823,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7, });
+            node.AddChildren(new[] { node_1, node_2, node_3, node_4, node_5, node_6, node_7 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4860,7 +4860,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "RespectParentCancellation"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(node, "node_2", WorkloadType.Heavy, "None");
 
@@ -4872,9 +4872,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, RespectParentCancellation"
             );
             TaskInfo node_3_2 = new TaskInfo(node_3, "node_3_2", WorkloadType.Light, "LongRunning");
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4904,7 +4904,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "LongRunning, AttachedToParent"
             );
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -4931,9 +4931,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.VeryLight,
                 "RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4965,7 +4965,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -4991,7 +4991,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "AttachedToParent"
             );
             TaskInfo node_1_2 = new TaskInfo(node_1, "node_1_2", WorkloadType.Light, "None");
-            node_1.AddChildren(new[] { node_1_1, node_1_2, });
+            node_1.AddChildren(new[] { node_1_1, node_1_2 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -5011,9 +5011,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Medium,
                 "AttachedToParent"
             );
-            node_2.AddChildren(new[] { node_2_1, node_2_2, });
+            node_2.AddChildren(new[] { node_2_1, node_2_2 });
 
-            node.AddChildren(new[] { node_1, node_2, });
+            node.AddChildren(new[] { node_1, node_2 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -5038,7 +5038,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "LongRunning, AttachedToParent"
             );
             TaskInfo node_1_1 = new TaskInfo(node_1, "node_1_1", WorkloadType.VeryHeavy, "None");
-            node_1.AddChildren(new[] { node_1_1, });
+            node_1.AddChildren(new[] { node_1_1 });
 
             TaskInfo node_2 = new TaskInfo(
                 node,
@@ -5060,9 +5060,9 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 WorkloadType.Light,
                 "LongRunning, RespectParentCancellation"
             );
-            node_3.AddChildren(new[] { node_3_1, node_3_2, });
+            node_3.AddChildren(new[] { node_3_1, node_3_2 });
 
-            node.AddChildren(new[] { node_1, node_2, node_3, });
+            node.AddChildren(new[] { node_1, node_2, node_3 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);
@@ -5087,7 +5087,7 @@ namespace System.Threading.Tasks.Tests.CancelWait
                 "RespectParentCancellation"
             );
 
-            node.AddChildren(new[] { node_1, });
+            node.AddChildren(new[] { node_1 });
             TestParameters parameters = new TestParameters(node, API.Wait, WaitBy.TimeSpan, 27);
 
             TaskCancelWaitTest test = new TaskCancelWaitTest(parameters);

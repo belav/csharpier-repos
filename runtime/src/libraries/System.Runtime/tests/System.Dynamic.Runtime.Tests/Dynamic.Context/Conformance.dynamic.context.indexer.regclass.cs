@@ -22,7 +22,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 
     public class MemberClass
@@ -198,7 +198,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
                 return new MyClass[]
                 {
                     null,
-                    new MyClass() { Field = 3 }
+                    new MyClass() { Field = 3 },
                 };
             }
             set { MemberClass.t_status = 2; }
@@ -272,7 +272,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
                 return new MyStruct?[]
                 {
                     null,
-                    new MyStruct() { Number = 4 }
+                    new MyStruct() { Number = 4 },
                 };
             }
             set { MemberClass.t_status = 2; }
@@ -497,7 +497,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
                 return new MyClass[]
                 {
                     null,
-                    new MyClass() { Field = 3 }
+                    new MyClass() { Field = 3 },
                 };
             }
             set { MemberClass.t_status = 2; }
@@ -562,7 +562,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
                 return new MyStruct?[]
                 {
                     null,
-                    new MyStruct() { Number = 4 }
+                    new MyStruct() { Number = 4 },
                 };
             }
             set { MemberClass.t_status = 2; }
@@ -1093,7 +1093,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             var result = new InnerTest()
             {
                 Field = dy[p1, p2, p3],
-                MyEnum = dy['a', p2, new MyStruct?[4]]
+                MyEnum = dy['a', p2, new MyStruct?[4]],
             };
             if (result.Field == 4 && result.MyEnum == MyEnum.Second && MemberClass.t_status == 1)
                 return 0;
@@ -1356,7 +1356,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
             {
                 (MyStruct)dy[new decimal[0]],
                 (MyStruct)dy[new decimal[1]],
-                (MyStruct)dy[p]
+                (MyStruct)dy[p],
             };
             if (
                 list.Count == 3
@@ -1519,20 +1519,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.indexer.regclas
                 {
                     _field1 = null,
                     _field2 = string.Empty,
-                    _field3 = 1
+                    _field3 = 1,
                 },
                 new Test(),
                 new Test()
                 {
                     _field1 = null,
                     _field2 = null,
-                    _field3 = 0
+                    _field3 = 0,
                 },
                 new Test()
                 {
                     _field1 = new MyStruct(),
                     _field2 = string.Empty,
-                    _field3 = 10
+                    _field3 = 10,
                 },
             };
             MemberClass mc = new MemberClass();

@@ -67,7 +67,7 @@ namespace Mono.Linker
             "System.Private.CoreLib",
             "mscorlib",
             "System.Runtime",
-            "netstandard"
+            "netstandard",
         };
 
         public static TypeDefinition? FindPredefinedType(WellKnownType type, LinkContext context)

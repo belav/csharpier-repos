@@ -116,7 +116,7 @@ namespace System.CommandLine.Tests.Invocation
             {
                 fromCommand,
                 seenCommand,
-                beenCommand
+                beenCommand,
             };
 
             CliConfiguration configuration = new(rootCommand) { Output = new StringWriter() };
@@ -176,7 +176,7 @@ namespace System.CommandLine.Tests.Invocation
             var rootCommand = new CliRootCommand
             {
                 new CliOption<string>("/call", "-call", "--call"),
-                new CliOption<string>("/email", "-email", "--email")
+                new CliOption<string>("/email", "-email", "--email"),
             };
             CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
             var result = rootCommand.Parse("-all", config);

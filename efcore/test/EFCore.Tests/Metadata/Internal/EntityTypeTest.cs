@@ -783,7 +783,7 @@ public partial class EntityTypeTest
             new[]
             {
                 customerType.AddProperty(nameof(Customer.Id), typeof(int)),
-                customerType.AddProperty(nameof(Customer.AlternateId), typeof(int))
+                customerType.AddProperty(nameof(Customer.AlternateId), typeof(int)),
             }
         );
         var orderType = model.AddEntityType(typeof(Order));
@@ -3280,7 +3280,7 @@ public partial class EntityTypeTest
                 pk.Properties.Single(),
                 fkProp,
                 principalToDependent,
-                dependentToPrincipal
+                dependentToPrincipal,
             },
             ((IRuntimeEntityType)entityType).GetSnapshottableMembers().ToArray()
         );
@@ -3654,6 +3654,7 @@ public partial class EntityTypeTest
                 "Rejection",
                 "Rejection.FirstTest#FirstTest", // FirstTest is shared
                 "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff" // SpecialistStaff is shared
+                ,
             },
             GetTypeNames()
         );
@@ -3670,7 +3671,7 @@ public partial class EntityTypeTest
                     "Attitude.FirstTest#FirstTest.Tester#SpecialistStaff",
                     "Rejection",
                     "Rejection.FirstTest#FirstTest",
-                    "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
+                    "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff",
                 },
                 GetTypeNames()
             );
@@ -3701,7 +3702,7 @@ public partial class EntityTypeTest
                             "ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff", // Attitude becomes shared
                             "Rejection",
                             "Rejection.FirstTest#FirstTest",
-                            "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
+                            "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff",
                         },
                         typeNames
                     );
@@ -3725,7 +3726,7 @@ public partial class EntityTypeTest
                 "ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff",
                 "Rejection",
                 "Rejection.FirstTest#FirstTest",
-                "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
+                "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff",
             },
             entityTypes.Select(e => e.DisplayName()).ToList()
         );

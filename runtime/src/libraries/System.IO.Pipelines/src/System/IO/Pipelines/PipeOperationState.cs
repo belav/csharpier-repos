@@ -68,7 +68,7 @@ namespace System.IO.Pipelines
         {
             Reading = 1,
             ReadingTentative = 2,
-            Writing = 4
+            Writing = 4,
         }
     }
 }

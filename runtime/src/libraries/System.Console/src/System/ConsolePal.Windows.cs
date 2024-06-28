@@ -239,7 +239,7 @@ namespace System
             NumLockOn = 0x0020,
             ScrollLockOn = 0x0040,
             CapsLockOn = 0x0080,
-            EnhancedKey = 0x0100
+            EnhancedKey = 0x0100,
         }
 
         // For tracking Alt+NumPad unicode key sequence. When you press Alt key down

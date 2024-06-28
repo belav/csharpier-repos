@@ -803,7 +803,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x2C,
                 0x2D,
                 0x2E,
-                0x2F
+                0x2F,
             };
             byte[] result1 = new byte[48];
             byte[] result2 = new byte[48];

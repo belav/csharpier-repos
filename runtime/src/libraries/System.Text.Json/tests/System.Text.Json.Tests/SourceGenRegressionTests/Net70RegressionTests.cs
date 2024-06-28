@@ -63,7 +63,7 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
                     DatesAvailable = new List<DateTimeOffset> { DateTimeOffset.MinValue },
                     TemperatureRanges = new Dictionary<string, HighLowTemps>
                     {
-                        ["key"] = new HighLowTemps { Low = 0, High = 5 }
+                        ["key"] = new HighLowTemps { Low = 0, High = 5 },
                     },
                     SummaryWords = new[] { "word1", "word2" },
                 },
@@ -132,7 +132,7 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
                     DatesAvailable = new List<DateTimeOffset> { DateTimeOffset.MinValue },
                     TemperatureRanges = new Dictionary<string, HighLowTemps>
                     {
-                        ["key"] = new HighLowTemps { Low = 0, High = 5 }
+                        ["key"] = new HighLowTemps { Low = 0, High = 5 },
                     },
                     SummaryWords = new[] { "word1", "word2" },
                 },
@@ -205,7 +205,7 @@ namespace System.Text.Json.Tests.SourceGenRegressionTests
                 TypeInfoResolver = JsonTypeInfoResolver.Combine(
                     Net70GeneratedContext.Default,
                     new DefaultJsonTypeInfoResolver()
-                )
+                ),
             };
 
             // Unlike v6, v7 Contexts do implement IJsonTypeInfoResolver so combined resolvers will produce the expected output.

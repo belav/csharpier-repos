@@ -27,6 +27,6 @@ namespace System.Data
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        DiffGram = 2
+        DiffGram = 2,
     }
 }

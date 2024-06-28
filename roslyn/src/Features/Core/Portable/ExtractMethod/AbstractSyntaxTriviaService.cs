@@ -139,7 +139,7 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 [TriviaLocation.AfterBeginningOfSpan] = triviaAtBeginning.Item2,
 
                 [TriviaLocation.BeforeEndOfSpan] = triviaAtEnd.Item1,
-                [TriviaLocation.AfterEndOfSpan] = triviaAtEnd.Item2
+                [TriviaLocation.AfterEndOfSpan] = triviaAtEnd.Item2,
             };
             return triviaList;
         }

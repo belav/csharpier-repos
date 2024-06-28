@@ -128,7 +128,7 @@ namespace System.Net.Http
                 Http3ErrorCode.RequestIncomplete => "H3_REQUEST_INCOMPLETE",
                 Http3ErrorCode.ConnectError => "H3_CONNECT_ERROR",
                 Http3ErrorCode.VersionFallback => "H3_VERSION_FALLBACK",
-                _ => "(unknown error)"
+                _ => "(unknown error)",
             };
 #endif
     }

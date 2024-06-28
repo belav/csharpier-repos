@@ -487,7 +487,7 @@ namespace System.Management
         private enum STATFLAG
         {
             STATFLAG_DEFAULT = 0,
-            STATFLAG_NONAME = 1
+            STATFLAG_NONAME = 1,
         }
 
         private enum MSHCTX
@@ -495,7 +495,7 @@ namespace System.Management
             MSHCTX_LOCAL = 0,
             MSHCTX_NOSHAREDMEM = 1,
             MSHCTX_DIFFERENTMACHINE = 2,
-            MSHCTX_INPROC = 3
+            MSHCTX_INPROC = 3,
         }
 
         private enum MSHLFLAGS
@@ -503,7 +503,7 @@ namespace System.Management
             MSHLFLAGS_NORMAL = 0,
             MSHLFLAGS_TABLESTRONG = 1,
             MSHLFLAGS_TABLEWEAK = 2,
-            MSHLFLAGS_NOPING = 3
+            MSHLFLAGS_NOPING = 3,
         }
     }
 

@@ -58,7 +58,7 @@ internal class InitializeHandler : ILspServiceRequestHandler<InitializeParams, I
                 })
             );
 
-            return Task.FromResult(new InitializeResult { Capabilities = serverCapabilities, });
+            return Task.FromResult(new InitializeResult { Capabilities = serverCapabilities });
         }
         finally
         {

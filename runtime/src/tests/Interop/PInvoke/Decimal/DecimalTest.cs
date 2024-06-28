@@ -49,7 +49,7 @@ public class DecimalTest
 
         var localDecimalWrapper = new DecimalTestNative.DecimalWrapper
         {
-            dec = (decimal)StartingIntValue
+            dec = (decimal)StartingIntValue,
         };
         Assert.True(
             DecimalTestNative.ValidateAndChangeWrappedDecimal(
@@ -139,7 +139,7 @@ public class DecimalTest
 
         var localCurrencyWrapper = new DecimalTestNative.CurrencyWrapper
         {
-            currency = (decimal)StartingIntValue
+            currency = (decimal)StartingIntValue,
         };
         Assert.True(
             DecimalTestNative.ValidateAndChangeWrappedCurrency(

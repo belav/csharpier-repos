@@ -529,7 +529,7 @@ namespace System.Collections.Immutable.Tests
                     "Visual Studio",
                     "Comics",
                     "Computers",
-                    "Laptops"
+                    "Laptops",
                 }
             );
 

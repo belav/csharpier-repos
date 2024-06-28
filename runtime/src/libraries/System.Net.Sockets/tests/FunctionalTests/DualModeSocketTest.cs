@@ -1752,7 +1752,7 @@ namespace System.Net.Sockets.Tests
 
                 var args = new SocketAsyncEventArgs()
                 {
-                    RemoteEndPoint = new IPEndPoint(IPAddress.IPv6Any, 0)
+                    RemoteEndPoint = new IPEndPoint(IPAddress.IPv6Any, 0),
                 };
                 args.Completed += (s, e) =>
                 {
@@ -2417,6 +2417,7 @@ namespace System.Net.Sockets.Tests
             new IPAddress(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 1 }, 0), // ::127.0.0.1
             IPAddress.Loopback.MapToIPv6(), // ::ffff:127.0.0.1
             IPAddress.IPv6Loopback // ::1
+            ,
         };
 
         protected DualModeBase()
@@ -2472,37 +2473,37 @@ namespace System.Net.Sockets.Tests
             {
                 new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
                 IPAddress.Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.IPv6Loopback, IPAddress.Loopback },
                 IPAddress.Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
                 IPAddress.IPv6Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.IPv6Loopback, IPAddress.Loopback },
                 IPAddress.IPv6Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
                 IPAddress.IPv6Any,
-                true
+                true,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.IPv6Loopback, IPAddress.Loopback },
                 IPAddress.IPv6Any,
-                true
+                true,
             },
         };
 
@@ -2512,7 +2513,7 @@ namespace System.Net.Sockets.Tests
             {
                 new IPAddress[] { IPAddress.Loopback.MapToIPv6() },
                 IPAddress.IPv6Loopback,
-                false
+                false,
             },
             new object[] { new IPAddress[] { IPAddress.Loopback }, IPAddress.IPv6Loopback, false },
             new object[] { new IPAddress[] { IPAddress.Loopback }, IPAddress.IPv6Any, false },
@@ -2525,7 +2526,7 @@ namespace System.Net.Sockets.Tests
             {
                 new IPAddress[] { IPAddress.Loopback.MapToIPv6() },
                 IPAddress.Loopback,
-                false
+                false,
             },
             new object[] { new IPAddress[] { IPAddress.Loopback }, IPAddress.Loopback, false },
             new object[] { new IPAddress[] { IPAddress.Loopback }, IPAddress.IPv6Any, true },
@@ -2533,38 +2534,38 @@ namespace System.Net.Sockets.Tests
             {
                 new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
                 IPAddress.Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.IPv6Loopback, IPAddress.Loopback },
                 IPAddress.Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
                 IPAddress.IPv6Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.IPv6Loopback, IPAddress.Loopback },
                 IPAddress.IPv6Loopback,
-                false
+                false,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.Loopback, IPAddress.IPv6Loopback },
                 IPAddress.IPv6Any,
-                true
+                true,
             },
             new object[]
             {
                 new IPAddress[] { IPAddress.IPv6Loopback, IPAddress.Loopback },
                 IPAddress.IPv6Any,
-                true
-            }
+                true,
+            },
         };
 
         protected class SocketServer : IDisposable

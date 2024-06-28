@@ -21,7 +21,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     Name = name,
                     Type = new CodeTypeReference(type),
-                    InitExpression = initExpression
+                    InitExpression = initExpression,
                 }
             );
             return new CodeVariableReferenceExpression(name);

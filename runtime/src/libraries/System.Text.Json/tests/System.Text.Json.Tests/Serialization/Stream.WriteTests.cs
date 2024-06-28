@@ -131,7 +131,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 // Will likely default to 4K due to buffer pooling.
-                DefaultBufferSize = 1
+                DefaultBufferSize = 1,
             };
 
             {
@@ -157,7 +157,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 // Will likely default to 4K due to buffer pooling.
-                DefaultBufferSize = 1
+                DefaultBufferSize = 1,
             };
 
             LargeDataTestClass obj = await Serializer.DeserializeWrapper<LargeDataTestClass>(
@@ -244,7 +244,7 @@ namespace System.Text.Json.Serialization.Tests
                     StartTime = new DateTime(i, DateTimeKind.Utc),
                     EndTime = new DateTime(i * 10000, DateTimeKind.Utc),
                     TrackId = i,
-                    Track = new Track() { Id = i, Name = new string('N', i), },
+                    Track = new Track() { Id = i, Name = new string('N', i) },
                 };
 
                 for (int j = 0; j < 5; j++)
@@ -320,7 +320,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 IgnoreNullValues = ignoreNull,
-                WriteIndented = writeIndented
+                WriteIndented = writeIndented,
             };
 
             string json = JsonSerializer.Serialize(list, options);
@@ -384,7 +384,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 MaxDepth = (ListLength * depthFactor * 2) + 4, // Order-to-RelatedOrder has a depth of 2.
                 IgnoreNullValues = ignoreNull,
-                WriteIndented = writeIndented
+                WriteIndented = writeIndented,
             };
             string json = JsonSerializer.Serialize(orders[0], options);
 
@@ -462,7 +462,7 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             var instrumentedResolver = new PocoWithInstrumentedFastPath.Context(
-                new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize, }
+                new JsonSerializerOptions { DefaultBufferSize = defaultBufferSize }
             );
 
             // The current implementation uses a heuristic
@@ -522,7 +522,7 @@ namespace System.Text.Json.Serialization.Tests
                     Value = new string(
                         'a',
                         targetSerializationSize - objectSerializationPaddingSize
-                    )
+                    ),
                 };
             }
         }
@@ -579,7 +579,7 @@ namespace System.Text.Json.Serialization.Tests
                                                 Getter = obj =>
                                                     ((PocoWithInstrumentedFastPath)obj).Value,
                                             }
-                                        )
+                                        ),
                                     },
 
                                 SerializeHandler = (writer, value) =>
@@ -588,7 +588,7 @@ namespace System.Text.Json.Serialization.Tests
                                     writer.WriteString("Value", value.Value);
                                     writer.WriteEndObject();
                                     FastPathInvocationCount++;
-                                }
+                                },
                             }
                         );
                     }

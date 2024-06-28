@@ -16,7 +16,7 @@ namespace System.Xml.XmlConvertTests
                 {
                     Attribute = new Variation(
                         "v2 - XmlConvert.ToDouble does not handle -0 correctly"
-                    )
+                    ),
                 }
             );
         }

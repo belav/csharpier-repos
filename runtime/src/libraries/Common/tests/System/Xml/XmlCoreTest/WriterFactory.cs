@@ -41,7 +41,9 @@ namespace XmlCoreTest.Common
         CharCheckingWriter = 8, // CharCheckingWriter implemented in this same folder
         UTF8WriterIndent = 16, // UTF8WriterIndent implemented in this same folder
         UnicodeWriterIndent = 32, // UnicodeWriterIndent implemented in this same folder
-        WrappedWriter = 64 // WrappedWriter implemented in this same folder
+        WrappedWriter =
+            64 // WrappedWriter implemented in this same folder
+        ,
     }
 
     public class WriterFactory

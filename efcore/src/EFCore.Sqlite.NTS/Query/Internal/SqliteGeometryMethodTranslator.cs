@@ -154,7 +154,7 @@ public class SqliteGeometryMethodTranslator : IMethodCallTranslator
         {
             typeof(Geometry).GetRuntimeMethod(nameof(Geometry.Within), new[] { typeof(Geometry) })!,
             "Within"
-        }
+        },
     };
 
     private static readonly MethodInfo GetGeometryN = typeof(Geometry).GetRuntimeMethod(
@@ -222,7 +222,7 @@ public class SqliteGeometryMethodTranslator : IMethodCallTranslator
                                     finalArguments.Select(a => false),
                                     method.ReturnType
                                 )
-                            )
+                            ),
                         },
                         null
                     );
@@ -244,7 +244,7 @@ public class SqliteGeometryMethodTranslator : IMethodCallTranslator
                     new[]
                     {
                         instance,
-                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },

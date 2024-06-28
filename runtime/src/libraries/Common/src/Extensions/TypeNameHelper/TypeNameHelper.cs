@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.Internal
             { typeof(string), "string" },
             { typeof(uint), "uint" },
             { typeof(ulong), "ulong" },
-            { typeof(ushort), "ushort" }
+            { typeof(ushort), "ushort" },
         };
 
         [return: NotNullIfNotNull(nameof(item))]

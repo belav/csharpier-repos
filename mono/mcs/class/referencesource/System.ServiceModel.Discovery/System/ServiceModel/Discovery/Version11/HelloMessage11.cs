@@ -35,7 +35,7 @@ namespace System.ServiceModel.Discovery.Version11
                 ),
                 Hello = EndpointDiscoveryMetadata11.FromEndpointDiscoveryMetadata(
                     endpointDiscoveryMetadata
-                )
+                ),
             };
         }
     }

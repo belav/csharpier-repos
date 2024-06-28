@@ -68,7 +68,7 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 7, 32) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 7, 32) },
             },
             new DiagnosticResult
             {
@@ -76,7 +76,7 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 40) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 40) },
             },
             new DiagnosticResult
             {
@@ -84,7 +84,7 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 42) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 42) },
             },
             new DiagnosticResult
             {
@@ -92,7 +92,7 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
                 Message =
                     "Component parameter 'ConsoleApplication1.TypeName.MyProperty4' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 10, 41) }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 10, 41) },
             }
         );
     }

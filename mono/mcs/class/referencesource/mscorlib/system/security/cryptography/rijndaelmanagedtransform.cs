@@ -18,7 +18,7 @@ namespace System.Security.Cryptography
     internal enum RijndaelManagedTransformMode
     {
         Encrypt = 0,
-        Decrypt = 1
+        Decrypt = 1,
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
@@ -1659,7 +1659,7 @@ namespace System.Security.Cryptography
             176,
             84,
             187,
-            22
+            22,
         };
 
         private static readonly int[] s_Rcon = new int[]
@@ -1693,7 +1693,7 @@ namespace System.Security.Cryptography
             0xfa,
             0xef,
             0xc5,
-            0x91
+            0x91,
         };
 
         private static readonly int[] s_T = new int[4 * 256]
@@ -2725,7 +2725,7 @@ namespace System.Security.Cryptography
             2076946608,
             -1459858348,
             1842789307,
-            742004246
+            742004246,
         };
 
         private static readonly int[] s_TF = new int[4 * 256]
@@ -3757,7 +3757,7 @@ namespace System.Security.Cryptography
             -1342177280,
             1409286144,
             -1157627904,
-            369098752
+            369098752,
         };
 
         private static readonly int[] s_iT = new int[4 * 256]
@@ -4789,7 +4789,7 @@ namespace System.Security.Cryptography
             2069988555,
             -714033614,
             1215585388,
-            -800958536
+            -800958536,
         };
 
         private static readonly int[] s_iTF = new int[4 * 256]
@@ -5821,7 +5821,7 @@ namespace System.Security.Cryptography
             1426063360,
             553648128,
             201326592,
-            2097152000
+            2097152000,
         };
     }
 }

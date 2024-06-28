@@ -63,7 +63,7 @@
                         new SubEntity { Name = "First", Description = "First Description" },
                         new SubEntity { Name = "Second", Description = "First Description" },
                     },
-                    Title = "Entities"
+                    Title = "Entities",
                 };
 
                 var viewModel = expression.Compile()(entity);
@@ -96,7 +96,7 @@
                         new SubEntity { Name = "First", Description = "First Description" },
                         new SubEntity { Name = "Second", Description = "First Description" },
                     },
-                    Title = "Entities"
+                    Title = "Entities",
                 };
 
                 var viewModel = expression.Compile()(entity);

@@ -85,7 +85,7 @@ namespace System.Web.Helpers.Test
             {
                 DtdProcessing = DtdProcessing.Parse,
                 ValidationType = ValidationType.DTD,
-                XmlResolver = new AssemblyResourceXmlResolver()
+                XmlResolver = new AssemblyResourceXmlResolver(),
             };
 
             string docType = String.Format(DOCTYPE_XHTML1_1, root);

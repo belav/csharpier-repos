@@ -191,6 +191,6 @@ internal sealed class ServerSentEventsMessageParser
     {
         ReadMessagePayload,
         ReadEndOfMessage,
-        Error
+        Error,
     }
 }

@@ -83,7 +83,7 @@ namespace System.Web.Mvc.Routing.Test
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
                 ActionNameSelectors = new ActionNameSelector[]
                 {
-                    (context, name) => name == "Action1"
+                    (context, name) => name == "Action1",
                 },
                 ControllerDescriptor = controllerDescriptor,
                 RouteData = routeData,
@@ -94,7 +94,7 @@ namespace System.Web.Mvc.Routing.Test
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action2()),
                 ActionNameSelectors = new ActionNameSelector[]
                 {
-                    (context, name) => name == "Action2"
+                    (context, name) => name == "Action2",
                 },
                 ControllerDescriptor = controllerDescriptor,
                 RouteData = routeData,
@@ -133,7 +133,7 @@ namespace System.Web.Mvc.Routing.Test
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action2()),
                 ActionNameSelectors = new ActionNameSelector[]
                 {
-                    (context, name) => name == "Action1"
+                    (context, name) => name == "Action1",
                 },
                 ControllerDescriptor = controllerDescriptor,
                 RouteData = routeData,
@@ -182,7 +182,7 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate worse = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionSelectors = new ActionSelector[] { (context) => false, },
+                ActionSelectors = new ActionSelector[] { (context) => false },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 0,
                 RouteData = new RouteData(),
@@ -216,7 +216,7 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate better = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionSelectors = new ActionSelector[] { (context) => false, },
+                ActionSelectors = new ActionSelector[] { (context) => false },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 0,
                 RouteData = new RouteData(),
@@ -225,7 +225,7 @@ namespace System.Web.Mvc.Routing.Test
             DirectRouteCandidate worse = new DirectRouteCandidate()
             {
                 ActionDescriptor = ActionDescriptorFrom<TestController>(c => c.Action1()),
-                ActionSelectors = new ActionSelector[] { (context) => false, },
+                ActionSelectors = new ActionSelector[] { (context) => false },
                 ControllerDescriptor = controllerDescriptor,
                 Order = 1,
                 RouteData = new RouteData(),

@@ -525,7 +525,7 @@ namespace System.Net.Http.Functional.Tests
                             TestAsync,
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
-                                Version = base.UseVersion
+                                Version = base.UseVersion,
                             },
                             CancellationToken.None
                         )
@@ -613,7 +613,7 @@ namespace System.Net.Http.Functional.Tests
                     {
                         var m = new HttpRequestMessage(new HttpMethod(specifiedMethod), uri)
                         {
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         (await client.SendAsync(TestAsync, m)).Dispose();
                     }

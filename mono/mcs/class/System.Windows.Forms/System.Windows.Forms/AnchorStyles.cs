@@ -41,6 +41,6 @@ namespace System.Windows.Forms
         Top = 0x00000001,
         Bottom = 0x00000002,
         Left = 0x00000004,
-        Right = 0x00000008
+        Right = 0x00000008,
     }
 }

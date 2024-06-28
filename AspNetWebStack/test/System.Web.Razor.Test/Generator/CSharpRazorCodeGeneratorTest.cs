@@ -148,7 +148,7 @@ namespace System.Web.Razor.Test.Generator
                     /* 04 */new GeneratedCodeMapping(12, 3, 3, 24),
                     /* 05 */new GeneratedCodeMapping(13, 46, 46, 3),
                     /* 06 */new GeneratedCodeMapping(15, 3, 7, 1),
-                    /* 07 */new GeneratedCodeMapping(15, 8, 8, 1)
+                    /* 07 */new GeneratedCodeMapping(15, 8, 8, 1),
                 }
             );
         }
@@ -232,7 +232,7 @@ namespace System.Web.Razor.Test.Generator
                 {
                     /* 01 */new GeneratedCodeMapping(1, 13, 13, 4),
                     /* 02 */new GeneratedCodeMapping(5, 13, 13, 104),
-                    /* 03 */new GeneratedCodeMapping(12, 26, 26, 11)
+                    /* 03 */new GeneratedCodeMapping(12, 26, 26, 11),
                 }
             );
         }
@@ -249,7 +249,7 @@ namespace System.Web.Razor.Test.Generator
                 {
                     /* 01 */new GeneratedCodeMapping(1, 13, 4, 4),
                     /* 02 */new GeneratedCodeMapping(5, 13, 4, 104),
-                    /* 03 */new GeneratedCodeMapping(12, 26, 14, 11)
+                    /* 03 */new GeneratedCodeMapping(12, 26, 14, 11),
                 }
             );
         }
@@ -279,7 +279,7 @@ namespace System.Web.Razor.Test.Generator
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>
                 {
                     /* 01 */new GeneratedCodeMapping(1, 3, 3, 6),
-                    /* 02 */new GeneratedCodeMapping(2, 6, 6, 5)
+                    /* 02 */new GeneratedCodeMapping(2, 6, 6, 5),
                 }
             );
         }
@@ -292,7 +292,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(1, 3, 3, 31)
+                    /* 01 */new GeneratedCodeMapping(1, 3, 3, 31),
                 }
             );
         }
@@ -330,7 +330,7 @@ namespace System.Web.Razor.Test.Generator
                 {
                     /* 01 */new GeneratedCodeMapping(1, 3, 3, 2),
                     /* 02 */new GeneratedCodeMapping(2, 2, 7, 9),
-                    /* 03 */new GeneratedCodeMapping(2, 11, 11, 2)
+                    /* 03 */new GeneratedCodeMapping(2, 11, 11, 2),
                 }
             );
         }
@@ -347,7 +347,7 @@ namespace System.Web.Razor.Test.Generator
                 {
                     /* 01 */new GeneratedCodeMapping(1, 3, 3, 2),
                     /* 02 */new GeneratedCodeMapping(2, 2, 7, 9),
-                    /* 03 */new GeneratedCodeMapping(2, 11, 5, 2)
+                    /* 03 */new GeneratedCodeMapping(2, 11, 5, 2),
                 }
             );
         }
@@ -372,7 +372,7 @@ namespace System.Web.Razor.Test.Generator
                     /* 09 */new GeneratedCodeMapping(17, 9, 24, 7),
                     /* 10 */new GeneratedCodeMapping(17, 16, 16, 26),
                     /* 11 */new GeneratedCodeMapping(19, 19, 19, 9),
-                    /* 12 */new GeneratedCodeMapping(21, 1, 1, 1)
+                    /* 12 */new GeneratedCodeMapping(21, 1, 1, 1),
                 }
             );
         }
@@ -385,7 +385,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(3, 2, 7, 0)
+                    /* 01 */new GeneratedCodeMapping(3, 2, 7, 0),
                 }
             );
         }
@@ -398,7 +398,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(3, 3, 7, 0)
+                    /* 01 */new GeneratedCodeMapping(3, 3, 7, 0),
                 }
             );
         }
@@ -411,7 +411,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(1, 3, 3, 0)
+                    /* 01 */new GeneratedCodeMapping(1, 3, 3, 0),
                 }
             );
         }
@@ -424,7 +424,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(3, 2, 7, 0)
+                    /* 01 */new GeneratedCodeMapping(3, 2, 7, 0),
                 }
             );
         }
@@ -440,7 +440,7 @@ namespace System.Web.Razor.Test.Generator
                 {
                     /* 01 */new GeneratedCodeMapping(1, 3, 3, 6),
                     /* 02 */new GeneratedCodeMapping(2, 6, 7, 0),
-                    /* 03 */new GeneratedCodeMapping(2, 6, 6, 2)
+                    /* 03 */new GeneratedCodeMapping(2, 6, 6, 2),
                 }
             );
         }
@@ -457,7 +457,7 @@ namespace System.Web.Razor.Test.Generator
                 {
                     /* 01 */new GeneratedCodeMapping(1, 3, 3, 6),
                     /* 02 */new GeneratedCodeMapping(2, 6, 7, 0),
-                    /* 03 */new GeneratedCodeMapping(2, 6, 3, 2)
+                    /* 03 */new GeneratedCodeMapping(2, 6, 3, 2),
                 }
             );
         }
@@ -470,7 +470,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(3, 3, 7, 0)
+                    /* 01 */new GeneratedCodeMapping(3, 3, 7, 0),
                 }
             );
         }
@@ -483,7 +483,7 @@ namespace System.Web.Razor.Test.Generator
                 designTimeMode: true,
                 expectedDesignTimePragmas: new List<GeneratedCodeMapping>()
                 {
-                    /* 01 */new GeneratedCodeMapping(3, 3, 3, 0)
+                    /* 01 */new GeneratedCodeMapping(3, 3, 3, 0),
                 }
             );
         }

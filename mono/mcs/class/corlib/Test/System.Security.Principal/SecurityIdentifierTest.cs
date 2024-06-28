@@ -76,7 +76,7 @@ namespace MonoTests.System.Security.Principal
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
             CheckStringCtor(
@@ -94,7 +94,7 @@ namespace MonoTests.System.Security.Principal
                     0x21,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
             CheckStringCtor(
@@ -116,7 +116,7 @@ namespace MonoTests.System.Security.Principal
                     0xEA,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
             CheckStringCtor(
@@ -134,7 +134,7 @@ namespace MonoTests.System.Security.Principal
                     0x32,
                     0x34,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
             CheckStringCtor(
@@ -152,7 +152,7 @@ namespace MonoTests.System.Security.Principal
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
         }
@@ -182,7 +182,7 @@ namespace MonoTests.System.Security.Principal
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
         }
@@ -214,7 +214,7 @@ namespace MonoTests.System.Security.Principal
                 0xEA,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             SecurityIdentifier sid = new SecurityIdentifier(inForm, 0);
 
@@ -611,7 +611,7 @@ namespace MonoTests.System.Security.Principal
                 new SecurityIdentifier("S-1-5-32-5432"),
                 new SecurityIdentifier("S-1-6-0"),
                 new SecurityIdentifier("S-1-5-32-99"),
-                new SecurityIdentifier("S-1-0-2")
+                new SecurityIdentifier("S-1-0-2"),
             };
 
             SecurityIdentifier[] sortedSids = (SecurityIdentifier[])sids.Clone();

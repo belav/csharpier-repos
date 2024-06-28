@@ -179,7 +179,7 @@ namespace Mono.CSharp
             7095,
             8009,
             8094,
-            8123
+            8123,
         };
 
         public Report(CompilerContext context, ReportPrinter printer)

@@ -28,7 +28,7 @@ public class FormTagHelperTest
             allAttributes: new TagHelperAttributeList()
             {
                 { "asp-handler", "page-handler" },
-                { "method", "get" }
+                { "method", "get" },
             },
             items: new Dictionary<object, object>(),
             uniqueId: "test"
@@ -54,7 +54,7 @@ public class FormTagHelperTest
         {
             ViewContext = viewContext,
             PageHandler = "page-handler",
-            Method = "get"
+            Method = "get",
         };
 
         // Act & Assert
@@ -73,7 +73,7 @@ public class FormTagHelperTest
             allAttributes: new TagHelperAttributeList()
             {
                 { "asp-action", "index" },
-                { "asp-controller", "home" }
+                { "asp-controller", "home" },
             },
             items: new Dictionary<object, object>(),
             uniqueId: "test"
@@ -191,7 +191,7 @@ public class FormTagHelperTest
         );
         var output = new TagHelperOutput(
             expectedTagName,
-            attributes: new TagHelperAttributeList() { { "action", HtmlString.Empty }, },
+            attributes: new TagHelperAttributeList() { { "action", HtmlString.Empty } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
@@ -246,7 +246,7 @@ public class FormTagHelperTest
         );
         var output = new TagHelperOutput(
             expectedTagName,
-            attributes: new TagHelperAttributeList() { { "action", string.Empty }, },
+            attributes: new TagHelperAttributeList() { { "action", string.Empty } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
@@ -302,14 +302,14 @@ public class FormTagHelperTest
                 { "asp-action", "index" },
                 { "asp-controller", "home" },
                 { "method", "post" },
-                { "asp-antiforgery", true }
+                { "asp-antiforgery", true },
             },
             items: new Dictionary<object, object>(),
             uniqueId: "test"
         );
         var output = new TagHelperOutput(
             expectedTagName,
-            attributes: new TagHelperAttributeList { { "id", "myform" }, },
+            attributes: new TagHelperAttributeList { { "id", "myform" } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
@@ -339,7 +339,7 @@ public class FormTagHelperTest
             Antiforgery = true,
             Controller = "home",
             ViewContext = viewContext,
-            RouteValues = { { "name", "value" }, },
+            RouteValues = { { "name", "value" } },
         };
 
         // Act
@@ -416,7 +416,7 @@ public class FormTagHelperTest
             Action = "Index",
             Antiforgery = antiforgery,
             ViewContext = viewContext,
-            Method = method.ToString().ToLowerInvariant()
+            Method = method.ToString().ToLowerInvariant(),
         };
 
         // Act
@@ -495,7 +495,7 @@ public class FormTagHelperTest
             Action = "Index",
             Antiforgery = false,
             ViewContext = testViewContext,
-            RouteValues = { { "val", "hello" }, { "-Name", "Value" }, },
+            RouteValues = { { "val", "hello" }, { "-Name", "Value" } },
         };
 
         // Act & Assert
@@ -583,7 +583,7 @@ public class FormTagHelperTest
                 { "asp-controller", "home" },
                 { "asp-fragment", "test" },
                 { "method", "post" },
-                { "asp-antiforgery", true }
+                { "asp-antiforgery", true },
             },
             items: new Dictionary<object, object>(),
             uniqueId: "test"
@@ -591,7 +591,7 @@ public class FormTagHelperTest
 
         var output = new TagHelperOutput(
             expectedTagName,
-            attributes: new TagHelperAttributeList { { "id", "myform" }, },
+            attributes: new TagHelperAttributeList { { "id", "myform" } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
@@ -616,7 +616,7 @@ public class FormTagHelperTest
             Controller = "home",
             Fragment = "test",
             ViewContext = viewContext,
-            RouteValues = { { "name", "value" }, },
+            RouteValues = { { "name", "value" } },
         };
 
         // Act
@@ -832,7 +832,7 @@ public class FormTagHelperTest
             Antiforgery = false,
             Route = "Default",
             ViewContext = viewContext,
-            RouteValues = { { "name", "value" }, },
+            RouteValues = { { "name", "value" } },
         };
 
         // Act & Assert
@@ -996,7 +996,7 @@ public class FormTagHelperTest
 
         var output = new TagHelperOutput(
             tagName: "form",
-            attributes: new TagHelperAttributeList { { "aCTiON", "my-action" }, },
+            attributes: new TagHelperAttributeList { { "aCTiON", "my-action" } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
@@ -1038,7 +1038,7 @@ public class FormTagHelperTest
         );
         var tagHelperOutput = new TagHelperOutput(
             "form",
-            attributes: new TagHelperAttributeList { { "action", "my-action" }, },
+            attributes: new TagHelperAttributeList { { "action", "my-action" } },
             getChildContentAsync: (useCachedResult, encoder) =>
                 Task.FromResult<TagHelperContent>(null)
         );

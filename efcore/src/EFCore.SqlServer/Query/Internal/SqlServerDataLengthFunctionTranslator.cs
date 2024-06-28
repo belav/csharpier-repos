@@ -54,7 +54,7 @@ public class SqlServerDataLengthFunctionTranslator : IMethodCallTranslator
             typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
                 nameof(SqlServerDbFunctionsExtensions.DataLength),
                 new[] { typeof(DbFunctions), typeof(Guid?) }
-            )!
+            )!,
         };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;

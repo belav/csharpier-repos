@@ -720,6 +720,6 @@ namespace System.Runtime.Remoting
     {
         On,
         Off,
-        RemoteOnly
+        RemoteOnly,
     }
 } // namespace System.Runtime.Remoting 

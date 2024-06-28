@@ -15,7 +15,7 @@ namespace System.DirectoryServices
             Add = 0,
             Delete = 1,
             Update = 2,
-            None = 3
+            None = 3,
         }
 
         private readonly DirectoryEntry _entry;

@@ -9,7 +9,7 @@ using Microsoft.CSharp.RuntimeBinder;
 
 enum Enum
 {
-    A = 3
+    A = 3,
 }
 
 class AssertDynamicObject : DynamicMetaObject
@@ -257,7 +257,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -278,7 +278,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                 },
                 "ArgumentInfo"
             );
@@ -304,7 +304,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.UseCompileTimeType
                             | CSharpArgumentInfoFlags.Constant,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -325,7 +325,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                 },
                 "ArgumentInfo"
             );
@@ -350,7 +350,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.UseCompileTimeType
                             | CSharpArgumentInfoFlags.Constant,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -375,7 +375,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.UseCompileTimeType
                             | CSharpArgumentInfoFlags.Constant,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -406,7 +406,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -431,7 +431,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -458,7 +458,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -483,7 +483,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -508,7 +508,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -533,7 +533,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -558,7 +558,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -583,7 +583,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -608,7 +608,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -633,7 +633,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -658,7 +658,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -683,7 +683,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -708,7 +708,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -733,7 +733,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -758,7 +758,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -797,7 +797,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -822,7 +822,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -847,7 +847,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -872,7 +872,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -897,7 +897,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -922,7 +922,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -947,7 +947,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -972,7 +972,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -997,7 +997,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1022,7 +1022,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1047,7 +1047,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1138,7 +1138,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1164,7 +1164,7 @@ class Tester : DynamicObjectMock
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
                     ),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                 },
                 "ArgumentInfo"
             );
@@ -1186,7 +1186,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                 },
                 "ArgumentInfo"
             );
@@ -1230,7 +1230,7 @@ class Tester : DynamicObjectMock
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
                     ),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null),
                 },
                 "ArgumentInfo"
             );
@@ -1284,7 +1284,7 @@ class Tester : DynamicObjectMock
                             | CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         "name"
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1309,7 +1309,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.UseCompileTimeType
                             | CSharpArgumentInfoFlags.Constant,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1338,7 +1338,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.UseCompileTimeType
                             | CSharpArgumentInfoFlags.Constant,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1363,7 +1363,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1385,7 +1385,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                 },
                 "ArgumentInfo"
             );
@@ -1410,7 +1410,7 @@ class Tester : DynamicObjectMock
                     CSharpArgumentInfo.Create(
                         CSharpArgumentInfoFlags.IsRef | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1436,7 +1436,7 @@ class Tester : DynamicObjectMock
                     CSharpArgumentInfo.Create(
                         CSharpArgumentInfoFlags.IsOut | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1508,7 +1508,7 @@ class Tester : DynamicObjectMock
                     CSharpArgumentInfo.Create(
                         CSharpArgumentInfoFlags.IsRef | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1540,7 +1540,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1572,7 +1572,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.Constant
                             | CSharpArgumentInfoFlags.UseCompileTimeType,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1596,7 +1596,7 @@ class Tester : DynamicObjectMock
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                 },
                 "ArgumentInfo"
             );
@@ -1625,7 +1625,7 @@ class Tester : DynamicObjectMock
                         CSharpArgumentInfoFlags.UseCompileTimeType
                             | CSharpArgumentInfoFlags.Constant,
                         null
-                    )
+                    ),
                 },
                 "ArgumentInfo"
             );
@@ -1659,7 +1659,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null),
                 },
                 "ArgumentInfo"
             );
@@ -1676,7 +1676,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                 },
                 "ArgumentInfo"
             );
@@ -1843,7 +1843,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null),
                 },
                 "ArgumentInfo"
             );
@@ -1876,7 +1876,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null),
                 },
                 "ArgumentInfo"
             );
@@ -1909,7 +1909,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null),
                 },
                 "ArgumentInfo"
             );
@@ -1959,7 +1959,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.Constant, null),
                 },
                 "ArgumentInfo"
             );
@@ -1992,7 +1992,7 @@ class Tester : DynamicObjectMock
                 new[]
                 {
                     CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                 },
                 "ArgumentInfo"
             );

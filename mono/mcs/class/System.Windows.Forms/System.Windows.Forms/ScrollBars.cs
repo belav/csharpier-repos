@@ -33,6 +33,6 @@ namespace System.Windows.Forms
         None = 0,
         Horizontal = 1,
         Vertical = 2,
-        Both = 3
+        Both = 3,
     }
 }

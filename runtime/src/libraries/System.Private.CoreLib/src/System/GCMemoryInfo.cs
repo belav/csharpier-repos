@@ -56,7 +56,7 @@ namespace System
 
         /// <summary>A background collection.</summary>
         /// <remarks>This is always a gen2 collection.</remarks>
-        Background = 3
+        Background = 3,
     };
 
     [StructLayout(LayoutKind.Sequential)]

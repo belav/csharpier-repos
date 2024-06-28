@@ -249,7 +249,7 @@ namespace System.Xml.Xsl
                 None,
                 Zero,
                 None,
-                Zero
+                Zero,
             },
             /* Zero       */{ Zero, Zero, Zero, Zero, Zero, Zero, Zero, Zero },
             /* One        */{ None, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
@@ -257,7 +257,7 @@ namespace System.Xml.Xsl
             /* More       */{ None, Zero, More, NotOne, More, NotOne, More, NotOne },
             /* NotOne     */{ Zero, Zero, NotOne, NotOne, NotOne, NotOne, NotOne, NotOne },
             /* OneOrMore  */{ None, Zero, OneOrMore, ZeroOrMore, More, NotOne, OneOrMore, ZeroOrMore },
-            /* ZeroOrMore */{ Zero, Zero, ZeroOrMore, ZeroOrMore, NotOne, NotOne, ZeroOrMore, ZeroOrMore }
+            /* ZeroOrMore */{ Zero, Zero, ZeroOrMore, ZeroOrMore, NotOne, NotOne, ZeroOrMore, ZeroOrMore },
         };
 
         /// <summary>
@@ -274,7 +274,7 @@ namespace System.Xml.Xsl
                 More,
                 NotOne,
                 OneOrMore,
-                ZeroOrMore
+                ZeroOrMore,
             },
             /* Zero       */{ Zero, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
             /* One        */{ One, One, More, OneOrMore, More, OneOrMore, More, OneOrMore },
@@ -286,7 +286,7 @@ namespace System.Xml.Xsl
                 More,
                 ZeroOrMore,
                 OneOrMore,
-                ZeroOrMore
+                ZeroOrMore,
             },
             /* More       */{ More, More, More, More, More, More, More, More },
             /* NotOne     */{ NotOne, NotOne, OneOrMore, ZeroOrMore, More, NotOne, OneOrMore, ZeroOrMore },
@@ -299,8 +299,8 @@ namespace System.Xml.Xsl
                 More,
                 ZeroOrMore,
                 OneOrMore,
-                ZeroOrMore
-            }
+                ZeroOrMore,
+            },
         };
         #endregion
 
@@ -317,7 +317,7 @@ namespace System.Xml.Xsl
             /* More       */"+",
             /* NotOne     */"*",
             /* OneOrMore  */"+",
-            /* ZeroOrMore */"*"
+            /* ZeroOrMore */"*",
         };
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace System.Xml.Xsl
             /* More       */"More",
             /* NotOne     */"NotOne",
             /* OneOrMore  */"OneOrMore",
-            /* ZeroOrMore */"ZeroOrMore"
+            /* ZeroOrMore */"ZeroOrMore",
         };
 
         /// <summary>

@@ -33,6 +33,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Arrow = 1,
         Diamond = 2,
         Square = 3,
-        Round = 4
+        Round = 4,
     }
 }

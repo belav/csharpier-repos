@@ -358,7 +358,7 @@ namespace Mono.Data.Sqlite
         FileProtectionComplete = 0x00100000,
         FileProtectionCompleteUnlessOpen = 0x00200000,
         FileProtectionCompleteUntilFirstUserAuthentication = 0x00300000,
-        FileProtectionNone = 0x00400000
+        FileProtectionNone = 0x00400000,
     }
 
     // subset of the options available in http://www.sqlite.org/c3ref/c_config_getmalloc.html

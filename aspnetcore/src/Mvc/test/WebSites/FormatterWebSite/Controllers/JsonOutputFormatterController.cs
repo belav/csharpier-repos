@@ -28,7 +28,7 @@ public class JsonOutputFormatterController : ControllerBase
         {
             Id = 10,
             Name = "Test",
-            StreetName = "Some street"
+            StreetName = "Some street",
         };
 
     [HttpGet]
@@ -40,7 +40,7 @@ public class JsonOutputFormatterController : ControllerBase
             {
                 Id = 11,
                 Name = "TestName1",
-                StreetName = "Some street"
+                StreetName = "Some street",
             },
         };
 

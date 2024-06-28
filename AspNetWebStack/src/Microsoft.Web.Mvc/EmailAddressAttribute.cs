@@ -32,7 +32,7 @@ namespace Microsoft.Web.Mvc
             yield return new ModelClientValidationRule
             {
                 ValidationType = "email",
-                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName())
+                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName()),
             };
         }
 

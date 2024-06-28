@@ -185,8 +185,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -361,7 +361,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .CheckBox(name: "name", htmlAttributes: new { attribute = text, })
+                .CheckBox(name: "name", htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -385,7 +385,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper.CheckBox(text, htmlAttributes: new { id = "id", }).ToHtmlString();
+            var result = helper.CheckBox(text, htmlAttributes: new { id = "id" }).ToHtmlString();
 
             // Assert
             Assert.Equal(
@@ -416,7 +416,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .CheckBox(name: String.Empty, htmlAttributes: new { id = "id", })
+                .CheckBox(name: String.Empty, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -527,8 +527,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -651,7 +651,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .CheckBoxFor(m => dummy, htmlAttributes: new { attribute = text, })
+                .CheckBoxFor(m => dummy, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -682,7 +682,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .CheckBoxFor(m => dummy, htmlAttributes: new { id = "id", })
+                .CheckBoxFor(m => dummy, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -716,19 +716,19 @@ namespace System.Web.Mvc.Html.Test
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo"))
+                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo")),
                 },
                 // Hidden(name, value)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt))
+                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt)),
                 },
                 // Hidden(name, value, htmlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt, null))
+                    Action = new Func<MvcHtmlString>(() => helper.Hidden("foo", dt, null)),
                 },
                 // Hidden(name, value, htmlAttributes)
                 new
@@ -736,25 +736,25 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""foo"" name=""foo"" type=""hidden"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.Hidden("foo", dt, new RouteValueDictionary())
-                    )
+                    ),
                 },
                 // RadioButton(name, value)
                 new
                 {
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt))
+                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt)),
                 },
                 // RadioButton(name, value, isChecked)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, false))
+                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, false)),
                 },
                 // RadioButton(name, value, htmlAttributes)
                 new
                 {
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, null))
+                    Action = new Func<MvcHtmlString>(() => helper.RadioButton("foo", dt, null)),
                 },
                 // RadioButton(name, value)
                 new
@@ -762,7 +762,7 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input checked=""checked"" id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.RadioButton("foo", dt, new RouteValueDictionary())
-                    )
+                    ),
                 },
                 // RadioButton(name, value, isChecked, htmlAttributes)
                 new
@@ -770,7 +770,7 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.RadioButton("foo", dt, false, null)
-                    )
+                    ),
                 },
                 // RadioButton(name, value, isChecked, htmlAttributes)
                 new
@@ -778,25 +778,25 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""foo"" name=""foo"" type=""radio"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.RadioButton("foo", dt, false, new RouteValueDictionary())
-                    )
+                    ),
                 },
                 // TextBox(name)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo"))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo")),
                 },
                 // TextBox(name, value)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt)),
                 },
                 // TextBox(name, value, hmtlAttributes)
                 new
                 {
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt, (object)null))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("foo", dt, (object)null)),
                 },
                 // TextBox(name, value, hmtlAttributes)
                 new
@@ -804,8 +804,8 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""foo"" name=""foo"" type=""text"" value=""01/01/1900 00:00:00"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.TextBox("foo", dt, new RouteValueDictionary())
-                    )
-                }
+                    ),
+                },
             };
 
             // Act && Assert
@@ -1140,7 +1140,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .Hidden(name: "name", value: null, htmlAttributes: new { attribute = text, })
+                .Hidden(name: "name", value: null, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -1164,7 +1164,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .Hidden(text, value: null, htmlAttributes: new { id = "id", })
+                .Hidden(text, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -1187,7 +1187,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .Hidden(name: String.Empty, value: null, htmlAttributes: new { id = "id", })
+                .Hidden(name: String.Empty, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -1421,7 +1421,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .HiddenFor(m => m, htmlAttributes: new { attribute = text, })
+                .HiddenFor(m => m, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -1449,9 +1449,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
-            var result = helper
-                .HiddenFor(m => m, htmlAttributes: new { id = "id", })
-                .ToHtmlString();
+            var result = helper.HiddenFor(m => m, htmlAttributes: new { id = "id" }).ToHtmlString();
 
             // Assert
             Assert.Equal(
@@ -1569,8 +1567,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -1836,7 +1834,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .Password(name: "name", value: null, htmlAttributes: new { attribute = text, })
+                .Password(name: "name", value: null, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -1860,7 +1858,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .Password(text, value: null, htmlAttributes: new { id = "id", })
+                .Password(text, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -1887,7 +1885,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .Password(name: String.Empty, value: null, htmlAttributes: new { id = "id", })
+                .Password(name: String.Empty, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -1999,8 +1997,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -2153,7 +2151,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .PasswordFor(m => m, htmlAttributes: new { attribute = text, })
+                .PasswordFor(m => m, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -2182,7 +2180,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .PasswordFor(m => m, htmlAttributes: new { id = "id", })
+                .PasswordFor(m => m, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -2345,8 +2343,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -2602,11 +2600,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .RadioButton(
-                    name: "name",
-                    value: "value",
-                    htmlAttributes: new { attribute = text, }
-                )
+                .RadioButton(name: "name", value: "value", htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -2634,7 +2628,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .RadioButton(text, value: "value", htmlAttributes: new { id = "id", })
+                .RadioButton(text, value: "value", htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -2664,7 +2658,7 @@ namespace System.Web.Mvc.Html.Test
                 .RadioButton(
                     name: String.Empty,
                     value: String.Empty,
-                    htmlAttributes: new { id = "id", }
+                    htmlAttributes: new { id = "id" }
                 )
                 .ToHtmlString();
 
@@ -2834,8 +2828,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -2960,7 +2954,7 @@ namespace System.Web.Mvc.Html.Test
                 .RadioButtonFor(
                     m => m,
                     value: String.Empty,
-                    htmlAttributes: new { attribute = text, }
+                    htmlAttributes: new { attribute = text }
                 )
                 .ToHtmlString();
 
@@ -2990,7 +2984,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .RadioButtonFor(m => m, value: String.Empty, htmlAttributes: new { id = "id", })
+                .RadioButtonFor(m => m, value: String.Empty, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -3126,8 +3120,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -3393,7 +3387,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .TextBox(name: "name", value: null, htmlAttributes: new { attribute = text, })
+                .TextBox(name: "name", value: null, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -3440,7 +3434,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .TextBox(text, value: null, htmlAttributes: new { id = "id", })
+                .TextBox(text, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -3467,7 +3461,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .TextBox(name: String.Empty, value: null, htmlAttributes: new { id = "id", })
+                .TextBox(name: String.Empty, value: null, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -3544,8 +3538,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -3691,7 +3685,7 @@ namespace System.Web.Mvc.Html.Test
 
             ViewDataDictionary<DateModel> viewData = new ViewDataDictionary<DateModel>()
             {
-                Model = new DateModel { date = dt }
+                Model = new DateModel { date = dt },
             };
             HtmlHelper<DateModel> dateModelhelper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -3703,13 +3697,13 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""viewDataDate"" name=""viewDataDate"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.TextBox("viewDataDate", null, "-{0}-")
-                    )
+                    ),
                 },
                 // TextBox(name, value, format)
                 new
                 {
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
-                    Action = new Func<MvcHtmlString>(() => helper.TextBox("date", dt, "-{0}-"))
+                    Action = new Func<MvcHtmlString>(() => helper.TextBox("date", dt, "-{0}-")),
                 },
                 // TextBox(name, value, format, hmtlAttributes)
                 new
@@ -3717,7 +3711,7 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.TextBox("date", dt, "-{0}-", (object)null)
-                    )
+                    ),
                 },
                 // TextBox(name, value, format, hmtlAttributes)
                 new
@@ -3725,7 +3719,7 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(
                         () => helper.TextBox("date", dt, "-{0}-", new RouteValueDictionary())
-                    )
+                    ),
                 },
                 // TextBoxFor(expression, format)
                 new
@@ -3733,7 +3727,7 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(
                         () => dateModelhelper.TextBoxFor(m => m.date, "-{0}-")
-                    )
+                    ),
                 },
                 // TextBoxFor(expression, format, hmtlAttributes)
                 new
@@ -3741,7 +3735,7 @@ namespace System.Web.Mvc.Html.Test
                     Html = @"<input id=""date"" name=""date"" type=""text"" value=""-01/01/1900 00:00:00-"" />",
                     Action = new Func<MvcHtmlString>(
                         () => dateModelhelper.TextBoxFor(m => m.date, "-{0}-", (object)null)
-                    )
+                    ),
                 },
                 // TextBoxFor(expression, format, hmtlAttributes)
                 new
@@ -3754,8 +3748,8 @@ namespace System.Web.Mvc.Html.Test
                                 "-{0}-",
                                 new RouteValueDictionary()
                             )
-                    )
-                }
+                    ),
+                },
             };
 
             // Act && Assert
@@ -3781,7 +3775,7 @@ namespace System.Web.Mvc.Html.Test
 
             // Act
             var result = helper
-                .TextBoxFor(m => m, htmlAttributes: new { attribute = text, })
+                .TextBoxFor(m => m, htmlAttributes: new { attribute = text })
                 .ToHtmlString();
 
             // Assert
@@ -3834,7 +3828,7 @@ namespace System.Web.Mvc.Html.Test
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .TextBoxFor(m => m, htmlAttributes: new { id = "id", })
+                .TextBoxFor(m => m, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -3933,7 +3927,7 @@ namespace System.Web.Mvc.Html.Test
             {
                 { "foo", true },
                 { "bar", "NotTrue" },
-                { "baz", false }
+                { "baz", false },
             };
             return viewData;
         }
@@ -3943,7 +3937,7 @@ namespace System.Web.Mvc.Html.Test
         {
             return new ViewDataDictionary<HiddenModel>(new HiddenModel())
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
         }
 
@@ -3951,7 +3945,7 @@ namespace System.Web.Mvc.Html.Test
         {
             ViewDataDictionary<HiddenModel> viewData = new ViewDataDictionary<HiddenModel>
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
             viewData.Model = new HiddenModel();
             ModelState modelStateFoo = new ModelState();
@@ -3976,7 +3970,7 @@ namespace System.Web.Mvc.Html.Test
         {
             ViewDataDictionary<FooModel> viewData = new ViewDataDictionary<FooModel>
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
             ModelState modelStateFoo = new ModelState();
             modelStateFoo.Errors.Add(new ModelError("foo error 1"));
@@ -3995,7 +3989,7 @@ namespace System.Web.Mvc.Html.Test
         {
             ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
             ModelState modelState = new ModelState();
@@ -4022,7 +4016,7 @@ namespace System.Web.Mvc.Html.Test
                 TemplateInfo = new TemplateInfo
                 {
                     HtmlFieldPrefix = viewData.TemplateInfo.GetFullHtmlFieldName(htmlFieldName),
-                }
+                },
             };
 
             return new ViewDataDictionary<string>(nestedViewData);
@@ -4034,14 +4028,14 @@ namespace System.Web.Mvc.Html.Test
         private static readonly object _attributesObjectDictionary = new { baz = "BazObjValue" };
         private static readonly object _attributesObjectUnderscoresDictionary = new
         {
-            foo_baz = "BazObjValue"
+            foo_baz = "BazObjValue",
         };
 
         private static ViewDataDictionary<FooBarModel> GetTextBoxViewData()
         {
             ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
 
@@ -4052,7 +4046,7 @@ namespace System.Web.Mvc.Html.Test
         {
             ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
             ModelState modelStateFoo = new ModelState();

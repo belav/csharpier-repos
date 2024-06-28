@@ -29,8 +29,8 @@ namespace System.Runtime.InteropServices.Tests
             {
                 new int[,]
                 {
-                    { 10 }
-                }
+                    { 10 },
+                },
             };
 
             MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(
@@ -87,7 +87,7 @@ namespace System.Runtime.InteropServices.Tests
         public enum Int32Enum : int
         {
             Value1,
-            Value2
+            Value2,
         }
     }
 }

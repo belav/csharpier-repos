@@ -66,7 +66,7 @@ namespace System.Collections.Tests
                     int.MaxValue,
                     -1,
                     -2,
-                    int.MinValue
+                    int.MinValue,
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
@@ -114,7 +114,7 @@ namespace System.Collections.Tests
                     int.MaxValue,
                     -1,
                     -2,
-                    int.MinValue
+                    int.MinValue,
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
@@ -208,7 +208,7 @@ namespace System.Collections.Tests
                     int.MaxValue,
                     -1,
                     -2,
-                    int.MinValue
+                    int.MinValue,
                 };
                 for (int i = 0; i < bad.Length; i++)
                 {
@@ -359,7 +359,7 @@ namespace System.Collections.Tests
                     items.Length - 1,
                     /**/
                     3,
-                    items.Length - 2
+                    items.Length - 2,
                 };
 
                 for (int i = 0; i < bad.Length; i++)
@@ -399,7 +399,7 @@ namespace System.Collections.Tests
                     -1,
                     /**/
                     2,
-                    -1
+                    -1,
                 };
 
                 for (int i = 0; i < bad.Length; i++)

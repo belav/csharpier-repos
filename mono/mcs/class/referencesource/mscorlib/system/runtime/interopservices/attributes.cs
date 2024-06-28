@@ -161,7 +161,7 @@ namespace System.Runtime.InteropServices
     {
         None = 0,
         AutoDispatch = 1,
-        AutoDual = 2
+        AutoDual = 2,
     }
 
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class, Inherited = false)]
@@ -577,7 +577,7 @@ namespace System.Runtime.InteropServices
         VT_CLSID = 72,
         VT_VECTOR = 0x1000,
         VT_ARRAY = 0x2000,
-        VT_BYREF = 0x4000
+        VT_BYREF = 0x4000,
     }
 
     [Serializable]
@@ -964,7 +964,7 @@ namespace System.Runtime.InteropServices
         System32 = 0x800,
         SafeDirectories = 0x1000,
         AssemblyDirectory = 0x2,
-        LegacyBehavior = 0x0
+        LegacyBehavior = 0x0,
     }
 
     [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Method, AllowMultiple = false)]

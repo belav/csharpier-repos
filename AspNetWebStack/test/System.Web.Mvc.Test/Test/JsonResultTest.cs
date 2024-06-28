@@ -56,7 +56,7 @@ namespace System.Web.Mvc.Test
             {
                 Data = data,
                 ContentType = String.Empty,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
 
             // Act
@@ -96,7 +96,7 @@ namespace System.Web.Mvc.Test
             {
                 Data = data,
                 ContentType = contentType,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
 
             // Act
@@ -146,7 +146,7 @@ namespace System.Web.Mvc.Test
             JsonResult result = new JsonResult
             {
                 ContentType = contentType,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
 
             // Act
@@ -179,7 +179,7 @@ namespace System.Web.Mvc.Test
                 .Setup(c => c.HttpContext.Response.Write(_jsonSerializedData))
                 .Verifiable();
 
-            JsonResult result = new JsonResult { Data = data, ContentType = contentType, };
+            JsonResult result = new JsonResult { Data = data, ContentType = contentType };
 
             // Act
             result.ExecuteResult(mockControllerContext.Object);

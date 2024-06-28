@@ -38,7 +38,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = null,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
 
@@ -68,7 +68,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = null,
-                XmlEncryptor = expectedXmlEncryptor
+                XmlEncryptor = expectedXmlEncryptor,
             }
         );
 
@@ -124,7 +124,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = mockConfiguration.Object,
                 XmlRepository = mockXmlRepository.Object,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
         options.Value.AuthenticatedEncryptorFactories.Add(testEncryptorFactory);
@@ -242,7 +242,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = mockConfiguration.Object,
                 XmlRepository = mockXmlRepository.Object,
-                XmlEncryptor = new NullXmlEncryptor()
+                XmlEncryptor = new NullXmlEncryptor(),
             }
         );
         options.Value.AuthenticatedEncryptorFactories.Add(testEncryptorFactory);
@@ -369,7 +369,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = new Mock<IXmlRepository>().Object,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
         var keyManager = new XmlKeyManager(
@@ -714,7 +714,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = mockXmlRepository.Object,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
         var keyManager = new XmlKeyManager(
@@ -749,7 +749,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = mockXmlRepository.Object,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
         var keyManager = new XmlKeyManager(
@@ -808,7 +808,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = mockXmlRepository.Object,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
         var keyManager = new XmlKeyManager(
@@ -882,7 +882,7 @@ public class XmlKeyManagerTests
             {
                 AuthenticatedEncryptorConfiguration = new Mock<AlgorithmConfiguration>().Object,
                 XmlRepository = new Mock<IXmlRepository>().Object,
-                XmlEncryptor = null
+                XmlEncryptor = null,
             }
         );
         var keyManager = new XmlKeyManager(

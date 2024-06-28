@@ -27,7 +27,7 @@ public class WorkloadRequiredTests : BlazorWasmTestBase
         ("WasmEnableExceptionHandling", false),
         ("InvariantTimezone", true),
         //("InvariantGlobalization", true), - not applicable for blazor
-        ("WasmNativeStrip", false)
+        ("WasmNativeStrip", false),
     };
 
     public WorkloadRequiredTests(
@@ -165,7 +165,7 @@ public class WorkloadRequiredTests : BlazorWasmTestBase
                 OnConsoleMessage = msg =>
                 {
                     sbOutput.AppendLine(msg.Text);
-                }
+                },
             }
         );
 

@@ -44,7 +44,7 @@ namespace System.Dynamic.Tests
             "Argument name that isn\u2019t a valid C\u266F name \uD83D\uDC7F\uD83E\uDD22",
             "horrid name with" + (char)0xD800 + "a half surrogate",
             "new",
-            "break"
+            "break",
         };
 
         public static IEnumerable<object[]> NamesAndBools() =>

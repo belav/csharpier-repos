@@ -28,17 +28,17 @@ namespace System.Globalization.Tests
                 "Oct",
                 "Nov",
                 "Dec",
-                ""
+                "",
             };
             yield return new object[]
             {
                 DateTimeFormatInfo.InvariantInfo,
-                englishAbbreviatedMonthNames
+                englishAbbreviatedMonthNames,
             };
             yield return new object[]
             {
                 new CultureInfo("en-US").DateTimeFormat,
-                englishAbbreviatedMonthNames
+                englishAbbreviatedMonthNames,
             };
             yield return new object[] { new DateTimeFormatInfo(), englishAbbreviatedMonthNames };
 
@@ -62,8 +62,8 @@ namespace System.Globalization.Tests
                         "oct.",
                         "nov.",
                         "d\u00E9c.",
-                        ""
-                    }
+                        "",
+                    },
                 };
             }
         }

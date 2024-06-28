@@ -394,7 +394,7 @@ internal sealed class DataAnnotationsMetadataProvider
                 // option to tolerate empty/whitespace strings. empty/whitespace INPUT will still result in
                 // a validation error by default because we convert empty/whitespace strings to null
                 // unless you say otherwise.
-                requiredAttribute = new RequiredAttribute() { AllowEmptyStrings = true, };
+                requiredAttribute = new RequiredAttribute() { AllowEmptyStrings = true };
                 attributes.Add(requiredAttribute);
             }
         }
@@ -463,7 +463,7 @@ internal sealed class DataAnnotationsMetadataProvider
         {
             ModelMetadataKind.Parameter => nullabilityContext.Create(context.Key.ParameterInfo!),
             ModelMetadataKind.Property => nullabilityContext.Create(context.Key.PropertyInfo!),
-            _ => null
+            _ => null,
         };
         var isOptional = nullability != null && nullability.ReadState != NullabilityState.NotNull;
         return !isOptional;

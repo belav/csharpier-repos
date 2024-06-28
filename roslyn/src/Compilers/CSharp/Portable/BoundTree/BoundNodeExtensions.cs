@@ -240,10 +240,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     Debug.Assert(currentBinary.Left is TInterpolatedStringType || result != null);
                     TResult rewrittenLeft = currentBinary.Left switch
                     {
-                        TInterpolatedStringType interpolatedString =>
-                            interpolatedStringFactory(interpolatedString, i++, arg),
+                        TInterpolatedStringType interpolatedString => interpolatedStringFactory(
+                            interpolatedString,
+                            i++,
+                            arg
+                        ),
                         BoundBinaryOperator => result!,
-                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind)
+                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Left.Kind),
                     };
 
                     // For simplicity, we use recursion for binary operators on the right side of the tree. We're not traditionally concerned
@@ -252,17 +255,19 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     var rewrittenRight = currentBinary.Right switch
                     {
-                        TInterpolatedStringType interpolatedString =>
-                            interpolatedStringFactory(interpolatedString, i++, arg),
-                        BoundBinaryOperator binaryOperator =>
-                            doRewrite(
-                                binaryOperator,
-                                arg,
-                                interpolatedStringFactory,
-                                binaryOperatorFactory,
-                                ref i
-                            ),
-                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Right.Kind)
+                        TInterpolatedStringType interpolatedString => interpolatedStringFactory(
+                            interpolatedString,
+                            i++,
+                            arg
+                        ),
+                        BoundBinaryOperator binaryOperator => doRewrite(
+                            binaryOperator,
+                            arg,
+                            interpolatedStringFactory,
+                            binaryOperatorFactory,
+                            ref i
+                        ),
+                        _ => throw ExceptionUtilities.UnexpectedValue(currentBinary.Right.Kind),
                     };
 
                     result = binaryOperatorFactory(
@@ -306,8 +311,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundBinaryOperator { InterpolatedStringHandlerData: { } d } => d,
                 BoundInterpolatedString { InterpolationData: { } d } => d,
                 BoundBinaryOperator or BoundInterpolatedString when !throwOnMissing => default,
-                BoundBinaryOperator
-                or BoundInterpolatedString =>
+                BoundBinaryOperator or BoundInterpolatedString =>
                     throw ExceptionUtilities.Unreachable(),
                 _ => throw ExceptionUtilities.UnexpectedValue(e.Kind),
             };

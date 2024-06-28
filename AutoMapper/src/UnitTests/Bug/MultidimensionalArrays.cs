@@ -37,7 +37,7 @@ public class MultidimensionalArrays : AutoMapperSpecBase
             { _e, _e, new Source(2) },
             { _e, new Source(11), _e },
             { new Source(20), _e, _e },
-            { _e, _e, _e }
+            { _e, _e, _e },
         };
         _destination = Mapper.Map<Destination[,]>(_source);
     }

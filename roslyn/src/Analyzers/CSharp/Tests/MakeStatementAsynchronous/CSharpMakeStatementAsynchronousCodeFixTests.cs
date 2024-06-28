@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -73,7 +73,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -131,7 +131,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -162,7 +162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -193,7 +193,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -224,7 +224,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
@@ -251,7 +251,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.MakeStateme
                         }
                     }
                     """,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
     }

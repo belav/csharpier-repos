@@ -203,7 +203,7 @@ int a;
                     "[|int x;\r\nint y;\r\n|] -> banana.cs: (19,0)-(20,8)",
                     "[|int z;\r\n|] -> banana.cs: (43,0)-(43,8)",
                     "[|int w;\r\n|] -> : (8,0)-(8,8)",
-                    "[|int q;\r\nint f;\r\n#if false\r\n#line 17 \"d:\\twing.cs\"\r\n#endif\r\nint a;\r\n}|] -> <hidden>"
+                    "[|int q;\r\nint f;\r\n#if false\r\n#line 17 \"d:\\twing.cs\"\r\n#endif\r\nint a;\r\n}|] -> <hidden>",
                 },
                 InspectLineMapping(syntaxTree)
             );
@@ -339,7 +339,7 @@ class X {
                 {
                     "[|using System;\r\nclass X {\r\n    int q;\r\n|] -> : (0,0)-(2,12)",
                     "[|    int r;\r\n|] -> : (4,0)-(4,12)",
-                    "[|    int s;\r\n}|] -> seconddirective: (19,0)-(20,1)"
+                    "[|    int s;\r\n}|] -> seconddirective: (19,0)-(20,1)",
                 },
                 InspectLineMapping(syntaxTree)
             );
@@ -402,7 +402,7 @@ class X {}
             var syntaxTree = SyntaxFactory.ParseSyntaxTree(sampleProgram, path: "c:\\goo.cs");
 
             AssertEx.Equal(
-                new[] { "[|class X {}\r\n|] -> : (19,0)-(19,12)", },
+                new[] { "[|class X {}\r\n|] -> : (19,0)-(19,12)" },
                 InspectLineMapping(syntaxTree)
             );
         }
@@ -415,7 +415,7 @@ class X {}
 
             var syntaxTree = SyntaxFactory.ParseSyntaxTree(sampleProgram, path: "c:\\goo.cs");
 
-            AssertEx.Equal(new[] { "[||] -> : (29,0)-(29,0)", }, InspectLineMapping(syntaxTree));
+            AssertEx.Equal(new[] { "[||] -> : (29,0)-(29,0)" }, InspectLineMapping(syntaxTree));
         }
 
         [Fact]
@@ -829,7 +829,7 @@ class MainClass
                 .Green.WithDiagnosticsGreen(
                     new DiagnosticInfo[]
                     {
-                        new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass)
+                        new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass),
                     }
                 )
                 .CreateRed();
@@ -866,7 +866,7 @@ class MainClass
                     node.Node.WithDiagnosticsGreen(
                         new DiagnosticInfo[]
                         {
-                            new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass)
+                            new SyntaxDiagnosticInfo(10, 10, ErrorCode.ERR_NoBaseClass),
                         }
                     )
                 )

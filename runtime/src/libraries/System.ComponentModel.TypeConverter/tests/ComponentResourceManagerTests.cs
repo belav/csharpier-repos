@@ -36,7 +36,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = ignoreCase
+                IgnoreCase = ignoreCase,
             };
 
             var value = new TestValue();
@@ -65,7 +65,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = true
+                IgnoreCase = true,
             };
 
             var value = new MulticasedClass();
@@ -95,7 +95,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = true
+                IgnoreCase = true,
             };
 
             resourceManager.ApplyResources(value, "Object");
@@ -124,7 +124,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = true
+                IgnoreCase = true,
             };
 
             var value = new TestComponent();
@@ -140,7 +140,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = true
+                IgnoreCase = true,
             };
 
             var value = new TestComponent { Site = new TestSite { DesignMode = false } };
@@ -156,7 +156,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = true
+                IgnoreCase = true,
             };
 
             var value = new TestComponent { Site = new TestSite { DesignMode = true } };
@@ -202,7 +202,7 @@ namespace System.ComponentModel.Tests
         {
             var resourceManager = new ComponentResourceManager(typeof(global::Resources.TestResx))
             {
-                IgnoreCase = ignoreCase
+                IgnoreCase = ignoreCase,
             };
 
             resourceManager.ApplyResources("Value", "ObjectName");

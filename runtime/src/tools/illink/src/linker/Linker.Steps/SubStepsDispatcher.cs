@@ -184,7 +184,7 @@ namespace Mono.Linker.Steps
                 on_fields = new List<ISubStep>(),
                 on_methods = new List<ISubStep>(),
                 on_properties = new List<ISubStep>(),
-                on_events = new List<ISubStep>()
+                on_events = new List<ISubStep>(),
             };
 
             foreach (var substep in substeps)

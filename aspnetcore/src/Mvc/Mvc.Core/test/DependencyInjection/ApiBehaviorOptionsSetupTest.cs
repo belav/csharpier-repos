@@ -33,7 +33,7 @@ public class ApiBehaviorOptionsSetupTest
             500,
             502,
             503,
-            504
+            504,
         };
         var optionsSetup = new ApiBehaviorOptionsSetup();
         var options = new ApiBehaviorOptions();
@@ -115,7 +115,7 @@ public class ApiBehaviorOptionsSetupTest
                 null,
                 null,
                 null
-            ) == new ValidationProblemDetails { Status = 422, }
+            ) == new ValidationProblemDetails { Status = 422 }
         );
 
         // Act

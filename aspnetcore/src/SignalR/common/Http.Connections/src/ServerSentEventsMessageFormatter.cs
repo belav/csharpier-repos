@@ -14,7 +14,7 @@ internal static class ServerSentEventsMessageFormatter
         (byte)'t',
         (byte)'a',
         (byte)':',
-        (byte)' '
+        (byte)' ',
     };
     private static readonly ReadOnlyMemory<byte> Newline = new[] { (byte)'\r', (byte)'\n' };
 

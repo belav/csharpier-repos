@@ -42,7 +42,7 @@ namespace System.Linq.Parallel.Tests
                     ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
                     parms[1],
                     ((Labeled<ParallelQuery<int>>)parms[2]).Order(),
-                    parms[3]
+                    parms[3],
                 };
             }
         }
@@ -57,7 +57,7 @@ namespace System.Linq.Parallel.Tests
                     ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
                     parms[1],
                     parms[2],
-                    parms[3]
+                    parms[3],
                 };
             }
         }
@@ -72,7 +72,7 @@ namespace System.Linq.Parallel.Tests
                     parms[0],
                     parms[1],
                     ((Labeled<ParallelQuery<int>>)parms[2]).Order(),
-                    parms[3]
+                    parms[3],
                 };
             }
         }
@@ -94,7 +94,7 @@ namespace System.Linq.Parallel.Tests
                         0,
                         1,
                         Math.Max(DuplicateFactor, leftCount / 2),
-                        Math.Max(DuplicateFactor, leftCount)
+                        Math.Max(DuplicateFactor, leftCount),
                     }.Distinct()
                 )
                 {
@@ -110,7 +110,7 @@ namespace System.Linq.Parallel.Tests
                         leftCount,
                         right,
                         rightCount,
-                        Math.Max(leftCount, rightCount) + (Math.Min(leftCount, rightCount) + 1) / 2
+                        Math.Max(leftCount, rightCount) + (Math.Min(leftCount, rightCount) + 1) / 2,
                     };
                 }
             }

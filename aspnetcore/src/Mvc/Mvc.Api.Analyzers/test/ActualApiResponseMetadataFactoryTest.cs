@@ -18,7 +18,7 @@ public class ActualApiResponseMetadataFactoryTest
     public enum ReturnOperationTestVariant
     {
         Default,
-        SwitchExpression
+        SwitchExpression,
     }
 
     [Fact]

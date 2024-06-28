@@ -139,7 +139,7 @@ namespace System
             /// <summary>
             /// Used for asserting that certain methods are only called from the constructor to validate thread-safety assumptions
             /// </summary>
-            Debug_LeftConstructor = 0x8000000000000000
+            Debug_LeftConstructor = 0x8000000000000000,
         }
 
         [Conditional("DEBUG")]
@@ -1048,9 +1048,9 @@ namespace System
                             && _info.Offset.Query == _info.Offset.End
                         )
                             ? _string
-                            : (IsDosPath && (_string[start] == '/' || _string[start] == '\\'))
-                                ? _string.Substring(start + 1, _info.Offset.Query - start - 1)
-                                : _string.Substring(start, _info.Offset.Query - start);
+                        : (IsDosPath && (_string[start] == '/' || _string[start] == '\\'))
+                            ? _string.Substring(start + 1, _info.Offset.Query - start - 1)
+                        : _string.Substring(start, _info.Offset.Query - start);
 
                     // Should be a rare case, convert c|\ into c:\
                     if (IsDosPath && str[1] == '|')
@@ -3370,17 +3370,15 @@ namespace System
                     {
                         mode = formatAs switch
                         {
-                            V1ToStringUnescape =>
-                                (
-                                    InFact(Flags.UserEscaped)
-                                        ? UnescapeMode.Unescape
-                                        : UnescapeMode.EscapeUnescape
-                                ) | UnescapeMode.V1ToStringFlag,
-                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
-                            _ =>
+                            V1ToStringUnescape => (
                                 InFact(Flags.UserEscaped)
                                     ? UnescapeMode.Unescape
                                     : UnescapeMode.EscapeUnescape
+                            ) | UnescapeMode.V1ToStringFlag,
+                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
+                            _ => InFact(Flags.UserEscaped)
+                                ? UnescapeMode.Unescape
+                                : UnescapeMode.EscapeUnescape,
                         };
                     }
                 }
@@ -3429,17 +3427,15 @@ namespace System
                     {
                         mode = formatAs switch
                         {
-                            V1ToStringUnescape =>
-                                (
-                                    InFact(Flags.UserEscaped)
-                                        ? UnescapeMode.Unescape
-                                        : UnescapeMode.EscapeUnescape
-                                ) | UnescapeMode.V1ToStringFlag,
-                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
-                            _ =>
+                            V1ToStringUnescape => (
                                 InFact(Flags.UserEscaped)
                                     ? UnescapeMode.Unescape
                                     : UnescapeMode.EscapeUnescape
+                            ) | UnescapeMode.V1ToStringFlag,
+                            UriFormat.Unescaped => UnescapeMode.Unescape | UnescapeMode.UnescapeAll,
+                            _ => InFact(Flags.UserEscaped)
+                                ? UnescapeMode.Unescape
+                                : UnescapeMode.EscapeUnescape,
                         };
                     }
                 }
@@ -3972,11 +3968,9 @@ namespace System
                         ref idx,
                         length,
                         (
-                            ((syntaxFlags & UriSyntaxFlags.MayHaveQuery) != 0)
-                                ? '?'
-                                : _syntax.InFact(UriSyntaxFlags.MayHaveFragment)
-                                    ? '#'
-                                    : c_EOL
+                            ((syntaxFlags & UriSyntaxFlags.MayHaveQuery) != 0) ? '?'
+                            : _syntax.InFact(UriSyntaxFlags.MayHaveFragment) ? '#'
+                            : c_EOL
                         )
                     );
                 }
@@ -4975,7 +4969,7 @@ namespace System
             BackslashInPath = 0x10,
             ReservedFound = 0x20,
             NotIriCanonical = 0x40,
-            FoundNonAscii = 0x8
+            FoundNonAscii = 0x8,
         }
 
         //

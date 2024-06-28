@@ -1241,7 +1241,7 @@ namespace System.StubHelpers
             Array,
             Layout,
             StringBuilderAnsi,
-            StringBuilderUnicode
+            StringBuilderUnicode,
         }
 
         // Pointer to MngdNativeArrayMarshaler, ownership not assumed.
@@ -1716,7 +1716,7 @@ namespace System.StubHelpers
     {
         Primitive,
         Metadata,
-        Projection
+        Projection,
     };
 
     internal static class WinRTTypeNameConverter

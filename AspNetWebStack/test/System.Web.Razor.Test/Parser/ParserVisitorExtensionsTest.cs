@@ -54,7 +54,7 @@ namespace System.Web.Razor.Test.Parser
             List<RazorError> errors = new List<RazorError>()
             {
                 new RazorError("Foo", 1, 0, 1),
-                new RazorError("Bar", 2, 0, 2)
+                new RazorError("Bar", 2, 0, 2),
             };
             ParserResults results = new ParserResults(root, errors);
 
@@ -75,7 +75,7 @@ namespace System.Web.Razor.Test.Parser
             List<RazorError> errors = new List<RazorError>()
             {
                 new RazorError("Foo", 1, 0, 1),
-                new RazorError("Bar", 2, 0, 2)
+                new RazorError("Bar", 2, 0, 2),
             };
             ParserResults results = new ParserResults(root, errors);
 

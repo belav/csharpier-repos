@@ -44,7 +44,7 @@ internal class BasePolicy : IQueuePolicy, IDisposable
             {
                 PermitLimit = maxConcurrentRequests,
                 QueueProcessingOrder = order,
-                QueueLimit = requestQueueLimit
+                QueueLimit = requestQueueLimit,
             }
         );
     }

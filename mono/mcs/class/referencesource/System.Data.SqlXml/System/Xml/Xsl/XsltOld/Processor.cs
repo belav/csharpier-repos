@@ -37,6 +37,7 @@ namespace System.Xml.Xsl.XsltOld
             Continue, // Continues next iteration immediately
             Interrupt, // Returns to caller, was processed enough
             Done // Execution finished
+            ,
         }
 
         internal enum OutputResult
@@ -45,7 +46,7 @@ namespace System.Xml.Xsl.XsltOld
             Interrupt,
             Overflow,
             Error,
-            Ignore
+            Ignore,
         }
 
         private ExecResult execResult;

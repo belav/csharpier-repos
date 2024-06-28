@@ -513,7 +513,7 @@ namespace Newtonsoft.Json.Tests.Schema
             JsonSchema schema = new JsonSchema();
             schema.PatternProperties = new Dictionary<string, JsonSchema>
             {
-                { "[abc]", new JsonSchema() }
+                { "[abc]", new JsonSchema() },
             };
 
             StringWriter writer = new StringWriter();

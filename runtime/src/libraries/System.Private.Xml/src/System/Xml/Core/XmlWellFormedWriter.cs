@@ -439,7 +439,7 @@ namespace System.Xml
             State.Error,
             State.Error,
             State.Error,
-            State.Error
+            State.Error,
         };
 
         private static readonly State[] s_stateTableAuto =

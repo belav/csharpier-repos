@@ -16,7 +16,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 NumberFormatInfo.ReadOnly(new CultureInfo("en-US").NumberFormat),
-                true
+                true,
             };
         }
 

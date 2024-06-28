@@ -580,7 +580,7 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
         private enum TestMode
         {
             FullDocument,
-            StartAtSpecifiedElement
+            StartAtSpecifiedElement,
         }
 
         private static XmlReader CreateReader(TestMode mode, XmlBuffer xmlBuffer, string startAt)

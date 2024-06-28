@@ -959,7 +959,7 @@ public class StreamingHub : TestHub
     {
         private static readonly IEnumerable<Type> _knownTypes = new List<Type>()
         {
-            typeof(DerivedParameterTestObject)
+            typeof(DerivedParameterTestObject),
         };
 
         public static ISerializationBinder Instance { get; } =

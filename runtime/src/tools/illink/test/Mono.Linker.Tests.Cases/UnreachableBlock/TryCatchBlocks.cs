@@ -127,7 +127,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
                     "call System.Void Mono.Linker.Tests.Cases.UnreachableBlock.TryCatchBlocks/RemovedBranchInFilterBlock::Reached()",
                     "leave.s il_1a",
                     ".endcatch",
-                    "ret"
+                    "ret",
                 }
             )]
             public static void Test()

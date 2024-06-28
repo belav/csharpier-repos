@@ -30,7 +30,7 @@ internal static class RequestDelegateFilterPipelineBuilder
         var factoryContext = new EndpointFilterFactoryContext
         {
             MethodInfo = requestDelegate.Method,
-            ApplicationServices = options.EndpointBuilder.ApplicationServices
+            ApplicationServices = options.EndpointBuilder.ApplicationServices,
         };
         var jsonTypeInfo =
             (JsonTypeInfo<object>)jsonSerializerOptions.GetReadOnlyTypeInfo(typeof(object));

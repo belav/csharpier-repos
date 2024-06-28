@@ -2163,7 +2163,7 @@ namespace System.Runtime.Serialization.DataContracts
                 0xf7537e82,
                 0xbd3af235,
                 0x2ad7d2bb,
-                0xeb86d391
+                0xeb86d391,
             };
 
             int blocks = (namespaces.Length + 8) / 64 + 1;
@@ -2270,7 +2270,7 @@ namespace System.Runtime.Serialization.DataContracts
                     (byte)(aa >> 16),
                     (byte)(aa >> 24),
                     (byte)bb,
-                    (byte)(bb >> 8)
+                    (byte)(bb >> 8),
                 };
             }
         }

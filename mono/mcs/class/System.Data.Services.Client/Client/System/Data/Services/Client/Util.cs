@@ -39,7 +39,7 @@ namespace System.Data.Services.Client
         internal static readonly Version[] SupportedResponseVersions =
         {
             DataServiceVersion1,
-            DataServiceVersion2
+            DataServiceVersion2,
         };
 
         internal static readonly char[] ForwardSlash = new char[1] { '/' };
@@ -52,7 +52,7 @@ namespace System.Data.Services.Client
             ' ',
             ' ',
             ' ',
-            ' '
+            ' ',
         };
 
 #if DEBUG

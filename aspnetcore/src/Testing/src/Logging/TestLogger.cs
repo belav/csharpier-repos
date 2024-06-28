@@ -28,7 +28,7 @@ public class TestLogger : ILogger
     {
         _scope = state;
 
-        _sink.Begin(new BeginScopeContext() { LoggerName = _name, Scope = state, });
+        _sink.Begin(new BeginScopeContext() { LoggerName = _name, Scope = state });
 
         return TestDisposable.Instance;
     }
@@ -55,7 +55,7 @@ public class TestLogger : ILogger
                 Exception = exception,
                 Formatter = (s, e) => formatter((TState)s, e),
                 LoggerName = _name,
-                Scope = _scope
+                Scope = _scope,
             }
         );
     }

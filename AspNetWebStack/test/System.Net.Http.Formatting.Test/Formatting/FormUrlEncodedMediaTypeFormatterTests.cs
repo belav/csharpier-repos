@@ -122,7 +122,7 @@ namespace System.Net.Http.Formatting
         {
             FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter()
             {
-                MaxDepth = 100
+                MaxDepth = 100,
             };
 
             StringContent content = new StringContent(GetDeeplyNestedObject(125));
@@ -141,7 +141,7 @@ namespace System.Net.Http.Formatting
         {
             FormUrlEncodedMediaTypeFormatter formatter = new FormUrlEncodedMediaTypeFormatter()
             {
-                MaxDepth = 150
+                MaxDepth = 150,
             };
 
             StringContent content = new StringContent(GetDeeplyNestedObject(125));

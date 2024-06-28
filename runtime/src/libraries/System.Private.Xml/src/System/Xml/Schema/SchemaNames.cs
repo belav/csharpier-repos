@@ -593,7 +593,7 @@ namespace System.Xml.Schema
             SchemaItemType,
             SchemaMemberTypes,
             SchemaXPath,
-            XmlLang
+            XmlLang,
         };
     };
 }

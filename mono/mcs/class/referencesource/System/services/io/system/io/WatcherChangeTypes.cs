@@ -48,6 +48,6 @@ namespace System.IO
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        All = Created | Deleted | Changed | Renamed
+        All = Created | Deleted | Changed | Renamed,
     }
 }

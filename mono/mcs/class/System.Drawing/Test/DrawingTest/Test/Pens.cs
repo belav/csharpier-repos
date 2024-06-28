@@ -160,7 +160,7 @@ namespace Test.Sys.Drawing
             "White",
             "WhiteSmoke",
             "Yellow",
-            "YellowGreen"
+            "YellowGreen",
         };
 
         string[] ar_system_pens =
@@ -179,7 +179,7 @@ namespace Test.Sys.Drawing
             "InfoText",
             "MenuText",
             "WindowFrame",
-            "WindowText"
+            "WindowText",
         };
         #endregion
 

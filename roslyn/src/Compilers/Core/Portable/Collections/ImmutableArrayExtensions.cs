@@ -780,7 +780,7 @@ namespace Microsoft.CodeAnalysis
             array switch
             {
                 null or { IsDefault: true } => ImmutableArray<T>.Empty,
-                { } underlying => underlying
+                { } underlying => underlying,
             };
 
         /// <summary>

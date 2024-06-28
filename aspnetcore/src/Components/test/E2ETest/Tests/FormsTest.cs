@@ -280,7 +280,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
             new[]
             {
                 "77 + 33 = 100 is a false statement, unfortunately.",
-                "The IsSelectMathStatementTrue field is not valid."
+                "The IsSelectMathStatementTrue field is not valid.",
             },
             messagesAccessor
         );
@@ -318,7 +318,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Equal(
             new[]
             {
-                "The field SelectedCities must be a string or array type with a maximum length of '3'."
+                "The field SelectedCities must be a string or array type with a maximum length of '3'.",
             },
             messagesAccesor
         );
@@ -608,7 +608,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
             new[]
             {
                 "That doesn't look like a real email address",
-                "We only accept very short email addresses (max 10 chars)"
+                "We only accept very short email addresses (max 10 chars)",
             },
             emailMessagesAccessor
         );

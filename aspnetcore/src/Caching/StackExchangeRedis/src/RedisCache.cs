@@ -189,7 +189,7 @@ public partial class RedisCache : IDistributedCache, IDisposable
                     absoluteExpiration?.Ticks ?? NotPresent,
                     options.SlidingExpiration?.Ticks ?? NotPresent,
                     GetExpirationInSeconds(creationTime, absoluteExpiration, options) ?? NotPresent,
-                    value
+                    value,
                 }
             );
         }
@@ -233,7 +233,7 @@ public partial class RedisCache : IDistributedCache, IDisposable
                         options.SlidingExpiration?.Ticks ?? NotPresent,
                         GetExpirationInSeconds(creationTime, absoluteExpiration, options)
                             ?? NotPresent,
-                        value
+                        value,
                     }
                 )
                 .ConfigureAwait(false);

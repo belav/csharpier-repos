@@ -81,7 +81,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                 contextBaseType,
                 new[]
                 {
-                    new ParameterDefinition { Name = "connectionString", Type = typeof(string) }
+                    new ParameterDefinition { Name = "connectionString", Type = typeof(string) },
                 },
                 new[] { "connectionString" },
                 new[] { typeof(string) },
@@ -99,8 +99,8 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                         new ParameterDefinition
                         {
                             Name = "connection",
-                            Type = typeof(IDbConnection)
-                        }
+                            Type = typeof(IDbConnection),
+                        },
                     },
                     new[]
                     {
@@ -109,7 +109,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                             writer.GetMethodCallExpression(
                                 writer.GetLiteralFullType(context.SchemaLoader.Vendor.GetType())
                             )
-                        )
+                        ),
                     },
                     new[] { typeof(IDbConnection), typeof(IVendor) },
                     context
@@ -126,8 +126,8 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                         new ParameterDefinition
                         {
                             Name = "connection",
-                            Type = typeof(IDbConnection)
-                        }
+                            Type = typeof(IDbConnection),
+                        },
                     },
                     new[] { "connection" },
                     new[] { typeof(IDbConnection) },
@@ -145,7 +145,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                     new ParameterDefinition
                     {
                         Name = "mappingSource",
-                        Type = typeof(MappingSource)
+                        Type = typeof(MappingSource),
                     },
                 },
                 new[] { "connection", "mappingSource" },
@@ -163,7 +163,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                     new ParameterDefinition
                     {
                         Name = "mappingSource",
-                        Type = typeof(MappingSource)
+                        Type = typeof(MappingSource),
                     },
                 },
                 new[] { "connection", "mappingSource" },
@@ -194,7 +194,7 @@ namespace DbMetal.Generator.Implementation.CodeTextGenerator
                     new ParameterDefinition
                     {
                         Name = "mappingSource",
-                        Type = typeof(MappingSource)
+                        Type = typeof(MappingSource),
                     },
                     new ParameterDefinition { Name = "vendor", Type = typeof(IVendor) },
                 },

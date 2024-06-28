@@ -174,7 +174,7 @@ internal sealed class ExceptionHandlerMiddlewareImpl
                 Error = edi.SourceException,
                 Path = originalPath.Value!,
                 Endpoint = context.GetEndpoint(),
-                RouteValues = context.Features.Get<IRouteValuesFeature>()?.RouteValues
+                RouteValues = context.Features.Get<IRouteValuesFeature>()?.RouteValues,
             };
 
             ClearHttpContext(context);

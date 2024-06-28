@@ -561,7 +561,7 @@ CREATE TABLE [db2].[DependentTable] (
                 "[db.2].SimpleTableName",
                 "dbo.[Table.With.Dot]",
                 "dbo.SimpleTableName",
-                "JustTableName"
+                "JustTableName",
             },
             new[] { "db2" },
             dbModel =>
@@ -1003,7 +1003,7 @@ CREATE TRIGGER Trigger2
     AFTER INSERT AS
 BEGIN
     UPDATE SomeTable SET Baz=Foo WHERE Id IN (SELECT INSERTED.Id FROM INSERTED);
-END;"
+END;",
             },
             Enumerable.Empty<string>(),
             Enumerable.Empty<string>(),

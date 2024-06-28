@@ -764,7 +764,7 @@ namespace Microsoft.WebAssembly.Diagnostics
                 type = "object",
                 subtype = "error",
                 description = message,
-                className
+                className,
             };
             _error = Result.UserVisibleErr(
                 JObject.FromObject(

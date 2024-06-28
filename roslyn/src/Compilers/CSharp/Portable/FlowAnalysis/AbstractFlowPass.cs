@@ -1097,11 +1097,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                             // `(a != null && a.b(out x)) is true or false` matches any boolean
                             // both subpatterns must have the same bool test for the test to propagate out
                             var leftNullTest = isBoolTest(binary.Left);
-                            return leftNullTest is null
-                                ? null
-                                : leftNullTest != isBoolTest(binary.Right)
-                                    ? null
-                                    : leftNullTest;
+                            return leftNullTest is null ? null
+                                : leftNullTest != isBoolTest(binary.Right) ? null
+                                : leftNullTest;
                         }
 
                         // `(a != null && a.b(out x)) is true and true` matches `true`
@@ -1199,8 +1197,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 data switch
                 {
                     null => (null, false, false),
-                    { } d =>
-                        (d.Construction, d.UsesBoolReturns, d.HasTrailingHandlerValidityParameter)
+                    { } d => (
+                        d.Construction,
+                        d.UsesBoolReturns,
+                        d.HasTrailingHandlerValidityParameter
+                    ),
                 };
 
             VisitInterpolatedStringHandlerConstructor(construction);
@@ -3145,9 +3146,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     Conversion: Conversion conversion,
                     Operand: BoundConditionalAccess ca
-                } when CanPropagateStateWhenNotNull(conversion) =>
-                    ca,
-                _ => null
+                } when CanPropagateStateWhenNotNull(conversion) => ca,
+                _ => null,
             };
 
             if (access is not null)
@@ -4094,6 +4094,6 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         Before,
         Inside,
-        After
+        After,
     };
 }

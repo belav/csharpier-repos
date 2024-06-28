@@ -200,6 +200,7 @@ namespace System.Runtime.Remoting.Channels
         Complete, // server synchronously processed message
         OneWay, // message dispatched and no response should be sent
         Async // the call was dispatched asynchronously
+        ,
         //   (sink should store data on stack for later processing)
     } // ServerProcessing
 

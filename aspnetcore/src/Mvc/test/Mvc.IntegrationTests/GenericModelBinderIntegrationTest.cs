@@ -25,7 +25,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<IFormCollection>)
+            ParameterType = typeof(List<IFormCollection>),
         };
 
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
@@ -64,7 +64,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<IFormCollection>)
+            ParameterType = typeof(List<IFormCollection>),
         };
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -102,7 +102,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<IFormCollection>)
+            ParameterType = typeof(List<IFormCollection>),
         };
 
         // Without a key here so the GenericModelBinder will not recurse to bind elements.
@@ -201,7 +201,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Address[])
+            ParameterType = typeof(Address[]),
         };
 
         // Act
@@ -229,7 +229,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Address[])
+            ParameterType = typeof(Address[]),
         };
 
         // Need to have a key here so that the GenericModelBinder will recurse to bind elements.
@@ -264,7 +264,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>[])
+            ParameterType = typeof(Dictionary<string, int>[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -311,7 +311,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>[])
+            ParameterType = typeof(Dictionary<string, int>[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -356,7 +356,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, int>[])
+            ParameterType = typeof(Dictionary<string, int>[]),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -391,7 +391,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
+            ParameterType = typeof(ICollection<KeyValuePair<string, int>>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -435,7 +435,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
+            ParameterType = typeof(ICollection<KeyValuePair<string, int>>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -479,7 +479,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(ICollection<KeyValuePair<string, int>>)
+            ParameterType = typeof(ICollection<KeyValuePair<string, int>>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -514,7 +514,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, List<int>>)
+            ParameterType = typeof(Dictionary<string, List<int>>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -564,7 +564,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, List<int>>)
+            ParameterType = typeof(Dictionary<string, List<int>>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -612,7 +612,7 @@ public class GenericModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, List<int>>)
+            ParameterType = typeof(Dictionary<string, List<int>>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>

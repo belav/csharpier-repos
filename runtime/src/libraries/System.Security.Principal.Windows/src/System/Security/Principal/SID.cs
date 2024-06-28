@@ -339,7 +339,7 @@ namespace System.Security.Principal
         WinCapabilityEnterpriseAuthenticationSid = 93,
 
         /// <summary>Indicates a SID for removable storage capability for app containers.</summary>
-        WinCapabilityRemovableStorageSid = 94
+        WinCapabilityRemovableStorageSid = 94,
         // Note: Adding additional values require changes everywhere where the value above is used as the maximum defined WellKnownSidType value.
         // E.g. System.Security.Principal.SecurityIdentifier constructor
     }

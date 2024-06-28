@@ -195,7 +195,7 @@ public class P {
                     "/errorlog:errorlog",
                     $"/doc:{docName}",
                     "/warnaserror",
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -229,7 +229,7 @@ public class P {
                     "/t:library",
                     "/preferreduilang:en",
                     $"/doc:{docName}",
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -294,7 +294,7 @@ dotnet_diagnostic.cs0169.severity = none"
                     "/t:library",
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -344,7 +344,7 @@ my_option2 = my_val2"
                     "/analyzer:" + Assembly.GetExecutingAssembly().Location,
                     "/nowarn:8032",
                     "/additionalfile:" + additionalFile.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -420,7 +420,7 @@ dotnet_diagnostic.cs0169.severity = garbage"
                     "/t:library",
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -469,7 +469,7 @@ dotnet_diagnostic.cs0169.severity = suppress";
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig1.Path,
                     "/analyzerconfig:" + analyzerConfig2.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -594,7 +594,7 @@ a.cs
                 new[]
                 {
                     Path.Combine(WorkingDirectory, "a.cs"),
-                    Path.Combine(WorkingDirectory, "b.cs")
+                    Path.Combine(WorkingDirectory, "b.cs"),
                 },
                 cmd.Arguments.SourceFiles.Select(file => file.Path)
             );
@@ -651,7 +651,7 @@ c.cs /lib:x
 # comment
 d.cs
 "
-                    }
+                    },
                 },
                 isInteractive: false
             );
@@ -678,7 +678,7 @@ d.cs
                 {
                     typeof(object).Assembly.Location,
                     @"..\v4.0.30319\System.dll",
-                    @".\System.Data.dll"
+                    @".\System.Data.dll",
                 },
                 references
             );
@@ -795,7 +795,7 @@ class C
             var parser = new TestCommandLineParser(
                 patterns: new Dictionary<string, string[]>()
                 {
-                    { @"C:\temp|*.cs", new[] { "a.cs", "b.cs", "c.cs" } }
+                    { @"C:\temp|*.cs", new[] { "a.cs", "b.cs", "c.cs" } },
                 },
                 recursivePatterns: new Dictionary<string, string[]>()
                 {
@@ -820,7 +820,7 @@ class C
                     @"C:\temp\c.cs",
                     @"C:\temp\a\x.cs",
                     @"C:\temp\a\b\b.cs",
-                    @"C:\temp\a\c.cs"
+                    @"C:\temp\a\c.cs",
                 },
                 resolvedSourceFiles
             );
@@ -917,7 +917,7 @@ class C
                         "/preferreduilang:en",
                         "/t:library",
                         @"/recurse:.",
-                        "/out:abc.dll"
+                        "/out:abc.dll",
                     }
                 )
                 .Run(outWriter);
@@ -934,7 +934,7 @@ class C
                         "/preferreduilang:en",
                         "/t:library",
                         @"/recurse:.  ",
-                        "/out:abc.dll"
+                        "/out:abc.dll",
                     }
                 )
                 .Run(outWriter);
@@ -951,7 +951,7 @@ class C
                         "/preferreduilang:en",
                         "/t:library",
                         @"/recurse:  .  ",
-                        "/out:abc.dll"
+                        "/out:abc.dll",
                     }
                 )
                 .Run(outWriter);
@@ -968,7 +968,7 @@ class C
                         "/preferreduilang:en",
                         "/t:library",
                         @"/recurse:././.",
-                        "/out:abc.dll"
+                        "/out:abc.dll",
                     }
                 )
                 .Run(outWriter);
@@ -1228,7 +1228,7 @@ class C
         )]
         public void Win32ResQuotes()
         {
-            string[] responseFile = new string[] { @" /win32res:d:\\""abc def""\a""b c""d\a.res", };
+            string[] responseFile = new string[] { @" /win32res:d:\\""abc def""\a""b c""d\a.res" };
 
             CSharpCommandLineArguments args = DefaultParse(
                 CSharpCommandLineParser.ParseResponseLines(responseFile),
@@ -1236,15 +1236,12 @@ class C
             );
             Assert.Equal(@"d:\abc def\ab cd\a.res", args.Win32ResourceFile);
 
-            responseFile = new string[] { @" /win32icon:d:\\""abc def""\a""b c""d\a.ico", };
+            responseFile = new string[] { @" /win32icon:d:\\""abc def""\a""b c""d\a.ico" };
 
             args = DefaultParse(CSharpCommandLineParser.ParseResponseLines(responseFile), @"c:\");
             Assert.Equal(@"d:\abc def\ab cd\a.ico", args.Win32Icon);
 
-            responseFile = new string[]
-            {
-                @" /win32manifest:d:\\""abc def""\a""b c""d\a.manifest",
-            };
+            responseFile = new string[] { @" /win32manifest:d:\\""abc def""\a""b c""d\a.manifest" };
 
             args = DefaultParse(CSharpCommandLineParser.ParseResponseLines(responseFile), @"c:\");
             Assert.Equal(@"d:\abc def\ab cd\a.manifest", args.Win32Manifest);
@@ -2219,7 +2216,7 @@ class C
             Assert.True(parsedArgs.SourceFiles.Any());
 
             parsedArgs = CSharpCommandLineParser.Script.Parse(
-                new[] { "/langversion:-1", "c.csx", },
+                new[] { "/langversion:-1", "c.csx" },
                 WorkingDirectory,
                 sdkDirectory
             );
@@ -2512,7 +2509,7 @@ class C
                     "12.0",
                     "latest",
                     "latestmajor",
-                    "preview"
+                    "preview",
                 },
                 Enum.GetValues(typeof(LanguageVersion))
                     .Cast<LanguageVersion>()
@@ -2532,7 +2529,7 @@ class C
                         LanguageVersion.Default,
                         LanguageVersion.Latest,
                         LanguageVersion.LatestMajor,
-                        LanguageVersion.Preview
+                        LanguageVersion.Preview,
                     }
                 )
                 .Select(v => v.GetErrorCode());
@@ -3869,7 +3866,7 @@ class C
                     "/preferreduilang:en",
                     "/t:library",
                     "/a:" + typeof(object).Assembly.Location,
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -4050,7 +4047,7 @@ class C
                     "/preferreduilang:en",
                     "/t:library",
                     "/a:" + Assembly.GetExecutingAssembly().Location,
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -4106,7 +4103,7 @@ class C
                     "/t:library",
                     "/a:" + Assembly.GetExecutingAssembly().Location,
                     "a.cs",
-                    "/ruleset:" + ruleSetFile.Path
+                    "/ruleset:" + ruleSetFile.Path,
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -4161,7 +4158,7 @@ class C
                     "a.cs",
                     "/ruleset:" + ruleSetFile.Path,
                     "/warnaserror+",
-                    "/nowarn:8032"
+                    "/nowarn:8032",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -4186,7 +4183,7 @@ class C
                     "a.cs",
                     "/warnaserror+",
                     "/ruleset:" + ruleSetFile.Path,
-                    "/nowarn:8032"
+                    "/nowarn:8032",
                 }
             );
             exitCode = csc.Run(outWriter);
@@ -4223,7 +4220,7 @@ class C
                     "/t:library",
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4260,7 +4257,7 @@ class C
                     "/t:library",
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4301,7 +4298,7 @@ class C
                     "/t:library",
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4342,7 +4339,7 @@ class C
                     "/t:library",
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+:Test001",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4384,7 +4381,7 @@ class C
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+",
                     "/warnaserror-",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4426,7 +4423,7 @@ class C
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+",
                     "/warnaserror-:Test001",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4468,7 +4465,7 @@ class C
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+:Test002",
                     "/warnaserror-:Test002",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4513,7 +4510,7 @@ class C
                     "/t:library",
                     "/ruleset:Rules.ruleset",
                     "/nowarn:Test001",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4559,7 +4556,7 @@ class C
                     "/ruleset:Rules.ruleset",
                     "/warnaserror+",
                     "/nowarn:Test001",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4605,7 +4602,7 @@ class C
                     "/ruleset:Rules.ruleset",
                     "/nowarn:Test001",
                     "/warnaserror+:Test001",
-                    "a.cs"
+                    "a.cs",
                 },
                 dir.Path
             );
@@ -4864,7 +4861,7 @@ class C
                     "/a:" + Assembly.GetExecutingAssembly().Location,
                     "a.cs",
                     "/ruleset:" + ruleSetFile.Path,
-                    "/warn:0"
+                    "/warn:0",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -4883,7 +4880,7 @@ class C
                     "/a:" + Assembly.GetExecutingAssembly().Location,
                     "a.cs",
                     "/warn:0",
-                    "/ruleset:" + ruleSetFile.Path
+                    "/ruleset:" + ruleSetFile.Path,
                 }
             );
             exitCode = csc.Run(outWriter);
@@ -5866,7 +5863,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
             {
                 @"C:\MyFolder\MyBinary.xml,version=1.0.0",
                 @"C:\MyFolder\MyBinary.xml,version=2.1.0",
-                @"C:\MyFolder\MyBinary.xml,version=42"
+                @"C:\MyFolder\MyBinary.xml,version=42",
             };
 
             foreach (string invalidSarifVersion in invalidSarifVersions)
@@ -5995,7 +5992,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                         "/r:" + silverlight,
                         "/r:" + net4_0dll,
                         "/appconfig:" + appConfigFile.Path,
-                        srcFile.Path
+                        srcFile.Path,
                     }
                 )
                 .Run(outWriter);
@@ -6023,7 +6020,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                         "/nologo",
                         "/preferreduilang:en",
                         $@"/appconfig:{root}DoesNotExist\NOwhere\bonobo.exe.config",
-                        srcFile.Path
+                        srcFile.Path,
                     }
                 )
                 .Run(outWriter);
@@ -6603,7 +6600,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                         "/preferreduilang:en",
                         "/t:library",
                         "/out:" + subFolder.ToString(),
-                        src.ToString()
+                        src.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -7705,7 +7702,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     @"/nullable:Annotations",
                     @"/nullable:Annotations",
                     "/langversion:8",
-                    "a.cs"
+                    "a.cs",
                 },
                 WorkingDirectory
             );
@@ -8005,7 +8002,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 {
                     ReportDiagnostic.Default,
                     ReportDiagnostic.Default,
-                    ReportDiagnostic.Default
+                    ReportDiagnostic.Default,
                 },
                 parsedArgs
             );
@@ -8028,7 +8025,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     ReportDiagnostic.Error,
                     ReportDiagnostic.Error,
                     ReportDiagnostic.Default,
-                    ReportDiagnostic.Default
+                    ReportDiagnostic.Default,
                 },
                 parsedArgs
             );
@@ -8051,7 +8048,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     ReportDiagnostic.Default,
                     ReportDiagnostic.Error,
                     ReportDiagnostic.Error,
-                    ReportDiagnostic.Default
+                    ReportDiagnostic.Default,
                 },
                 parsedArgs
             );
@@ -8073,7 +8070,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     ReportDiagnostic.Error,
                     ReportDiagnostic.Default,
                     ReportDiagnostic.Default,
-                    ReportDiagnostic.Error
+                    ReportDiagnostic.Error,
                 },
                 parsedArgs
             );
@@ -8128,7 +8125,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 {
                     ReportDiagnostic.Suppress,
                     ReportDiagnostic.Suppress,
-                    ReportDiagnostic.Suppress
+                    ReportDiagnostic.Suppress,
                 },
                 parsedArgs
             );
@@ -8149,7 +8146,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                 {
                     ReportDiagnostic.Suppress,
                     ReportDiagnostic.Suppress,
-                    ReportDiagnostic.Suppress
+                    ReportDiagnostic.Suppress,
                 },
                 parsedArgs
             );
@@ -8171,7 +8168,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     ReportDiagnostic.Suppress,
                     ReportDiagnostic.Suppress,
                     ReportDiagnostic.Suppress,
-                    ReportDiagnostic.Error
+                    ReportDiagnostic.Error,
                 },
                 parsedArgs
             );
@@ -8193,7 +8190,7 @@ C:\*.cs(100,7): error CS0103: The name 'Goo' does not exist in the current conte
                     ReportDiagnostic.Suppress,
                     ReportDiagnostic.Suppress,
                     ReportDiagnostic.Suppress,
-                    ReportDiagnostic.Error
+                    ReportDiagnostic.Error,
                 },
                 parsedArgs
             );
@@ -8818,7 +8815,7 @@ class Test { static void Main() {} }"
                         "/preferreduilang:en",
                         "/addmodule:" + modfile,
                         "/linkres:" + modfile,
-                        source2
+                        source2,
                     }
                 )
                 .Run(outWriter);
@@ -9337,7 +9334,7 @@ public class CS1698_a {}
                     kfile,
                     "/r:" + cs1698b.Path,
                     "/out:" + cs1698a.Path,
-                    "CS1698.cs"
+                    "CS1698.cs",
                 },
                 WorkingDirectory
             );
@@ -9770,7 +9767,7 @@ class myClass
             responseFile = new string[]
             {
                 @"a.cs b.cs ""c.cs e.cs""",
-                @"hello world # this is a comment"
+                @"hello world # this is a comment",
             };
 
             IEnumerable<string> args = CSharpCommandLineParser.ParseResponseLines(responseFile);
@@ -9784,14 +9781,14 @@ class myClass
                 @"  a.cs #3.cs",
                 @"  b#.cs c#d.cs #e.cs",
                 @"  ""#f.cs""",
-                @"  ""#g.cs #h.cs"""
+                @"  ""#g.cs #h.cs""",
             };
 
             args = CSharpCommandLineParser.ParseResponseLines(responseFile);
             AssertEx.Equal(new[] { "a.cs", "b#.cs", "c#d.cs", "#f.cs", "#g.cs #h.cs" }, args);
 
             // Check backslash escaping
-            responseFile = new string[] { @"a\b\c d\\e\\f\\ \\\g\\\h\\\i \\\\ \\\\\k\\\\\", };
+            responseFile = new string[] { @"a\b\c d\\e\\f\\ \\\g\\\h\\\i \\\\ \\\\\k\\\\\" };
             args = CSharpCommandLineParser.ParseResponseLines(responseFile);
             AssertEx.Equal(
                 new[] { @"a\b\c", @"d\\e\\f\\", @"\\\g\\\h\\\i", @"\\\\", @"\\\\\k\\\\\" },
@@ -9799,7 +9796,7 @@ class myClass
             );
 
             // More backslash escaping and quoting
-            responseFile = new string[] { @"a\""a b\\""b c\\\""c d\\\\""d e\\\\\""e f"" g""", };
+            responseFile = new string[] { @"a\""a b\\""b c\\\""c d\\\\""d e\\\\\""e f"" g""" };
             args = CSharpCommandLineParser.ParseResponseLines(responseFile);
             AssertEx.Equal(
                 new[] { @"a\""a", @"b\\""b c\\\""c d\\\\""d", @"e\\\\\""e", @"f"" g""" },
@@ -9821,7 +9818,7 @@ class myClass
         [ConditionalFact(typeof(WindowsOnly))]
         private void SourceFileQuoting()
         {
-            string[] responseFile = new string[] { @"d:\\""abc def""\baz.cs ab""c d""e.cs", };
+            string[] responseFile = new string[] { @"d:\\""abc def""\baz.cs ab""c d""e.cs" };
 
             CSharpCommandLineArguments args = DefaultParse(
                 CSharpCommandLineParser.ParseResponseLines(responseFile),
@@ -10698,7 +10695,7 @@ public class C
             var cmd = CreateCSharpCompiler(
                 null,
                 dir.Path,
-                new[] { "/nologo", "a.cs", "/keyfile:key.snk", }
+                new[] { "/nologo", "a.cs", "/keyfile:key.snk" }
             );
             var comp = cmd.CreateCompilation(
                 TextWriter.Null,
@@ -10729,7 +10726,7 @@ public class C
             var cmd = CreateCSharpCompiler(
                 null,
                 dir.Path,
-                new[] { "/nologo", "a.cs", "/keycontainer:bbb", }
+                new[] { "/nologo", "a.cs", "/keycontainer:bbb" }
             );
             var comp = cmd.CreateCompilation(
                 TextWriter.Null,
@@ -10768,7 +10765,7 @@ public class C
                     "/nologo",
                     "a.cs",
                     "/keyFile:key.snk",
-                    "/features:UseLegacyStrongNameProvider"
+                    "/features:UseLegacyStrongNameProvider",
                 }
             );
             var comp = cmd.CreateCompilation(
@@ -11625,7 +11622,7 @@ public class C
                         "/preferreduilang:en",
                         "/nostdlib",
                         "/t:library",
-                        src.ToString()
+                        src.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -11648,7 +11645,7 @@ public class C
                         "/t:library",
                         "/runtimemetadataversion:v4.0.30319",
                         "/langversion:8",
-                        src.ToString()
+                        src.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -11805,7 +11802,7 @@ namespace System
                         "/runtimemetadataversion:v4.0.30319",
                         "/nowarn:8625",
                         "/features:noRefSafetyRulesAttribute",
-                        src.ToString()
+                        src.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -11823,7 +11820,7 @@ namespace System
                         "/runtimemetadataversion:v4.0.30319",
                         "/nowarn:8625",
                         "/features:noRefSafetyRulesAttribute",
-                        src.ToString()
+                        src.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -11846,7 +11843,7 @@ namespace System
                         "/runtimemetadataversion:v4.0.30319",
                         "/nowarn:8625",
                         "/features:noRefSafetyRulesAttribute",
-                        src.ToString()
+                        src.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -11893,7 +11890,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        @"/define:"""""
+                        @"/define:""""",
                     }
                 )
                 .Run(outWriter);
@@ -11913,7 +11910,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        "/define: "
+                        "/define: ",
                     }
                 )
                 .Run(outWriter);
@@ -11933,7 +11930,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        "/define:"
+                        "/define:",
                     }
                 )
                 .Run(outWriter);
@@ -11953,7 +11950,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        "/define:,,,"
+                        "/define:,,,",
                     }
                 )
                 .Run(outWriter);
@@ -11973,7 +11970,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        "/define:,blah,Blah"
+                        "/define:,blah,Blah",
                     }
                 )
                 .Run(outWriter);
@@ -11993,7 +11990,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        "/define:a;;b@"
+                        "/define:a;;b@",
                     }
                 )
                 .Run(outWriter);
@@ -12021,7 +12018,7 @@ namespace System
                         "/preferreduilang:en",
                         "/t:library",
                         src.ToString(),
-                        "/define:a,b@;"
+                        "/define:a,b@;",
                     }
                 )
                 .Run(outWriter);
@@ -12043,7 +12040,7 @@ namespace System
                         "/t:library",
                         src.ToString(),
                         @"/define:OE_WIN32=-1:LANG_HOST_EN=-1:LANG_OE_EN=-1:LANG_PRJ_EN=-1:HOST_COM20SDKEVERETT=-1:EXEMODE=-1:OE_NT5=-1:Win32=-1",
-                        @"/d:TRACE=TRUE,DEBUG=TRUE"
+                        @"/d:TRACE=TRUE,DEBUG=TRUE",
                     }
                 )
                 .Run(outWriter);
@@ -12445,7 +12442,7 @@ public class C
             );
             Assert.Equal(
                 csc.Arguments.MetadataReferences.Select(r => r.Reference),
-                new string[] { MscorlibFullPath, },
+                new string[] { MscorlibFullPath },
                 StringComparer.OrdinalIgnoreCase
             );
         }
@@ -12503,7 +12500,7 @@ static void Main() {
                         "/nologo",
                         "/preferreduilang:en",
                         Path.Combine(baseDir, "nonexistent.cs"),
-                        source.ToString()
+                        source.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -12586,7 +12583,7 @@ public class C
                         "/preferreduilang:en",
                         "/warn:3",
                         "/warnaserror:nullable",
-                        source.ToString()
+                        source.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -12638,7 +12635,7 @@ public class Test
                         "/preferreduilang:en",
                         "/warn:3",
                         "/warnaserror",
-                        source.ToString()
+                        source.ToString(),
                     }
                 )
                 .Run(outWriter);
@@ -13272,7 +13269,7 @@ Copyright (C) Microsoft Corporation. All rights reserved.",
                     "/preferreduilang:en",
                     "/debug:" + format,
                     $"/sourcelink:{sourceLinkPath}",
-                    srcPath
+                    srcPath,
                 }
             );
             csc.FileSystem = TestableFileSystem.CreateForStandard(
@@ -13637,7 +13634,7 @@ public class C { }
                 // error CS2021: File name 'tmpDi\r*a?.cs' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName).WithArguments(@"tmpDi\r*a?.cs"),
                 // error CS2001: Source file 'tmpDi\r*a?.cs' could not be found.
-                Diagnostic(ErrorCode.ERR_FileNotFound).WithArguments(@"tmpDi\r*a?.cs")
+                Diagnostic(ErrorCode.ERR_FileNotFound).WithArguments(@"tmpDi\r*a?.cs"),
             };
             TestCS2002(commandLineArgs, tempParentDir.Path, 1, (string[])null, parseDiags);
 
@@ -13647,7 +13644,7 @@ public class C { }
             {
                 // error CS2021: File name 'e:a.cs' is empty, contains invalid characters, has a drive specification without an absolute path, or is too long
                 Diagnostic(ErrorCode.FTL_InvalidInputFileName)
-                    .WithArguments(currentDrive + @":a.cs")
+                    .WithArguments(currentDrive + @":a.cs"),
             };
             TestCS2002(commandLineArgs, tempParentDir.Path, 1, (string[])null, parseDiags);
 
@@ -13845,7 +13842,7 @@ public class C { }
                 "/reportanalyzer",
                 "/t:library",
                 "/a:" + typeof(DoNothingGenerator).Assembly.Location,
-                srcFile.Path
+                srcFile.Path,
             };
             var csc = CreateCSharpCompiler(responseFile: null, srcDirectory, args.ToArray());
 
@@ -13884,7 +13881,7 @@ public class C { }
                 : new DiagnosticAnalyzer[]
                 {
                     new HiddenDiagnosticAnalyzer(),
-                    new WarningDiagnosticAnalyzer()
+                    new WarningDiagnosticAnalyzer(),
                 };
             var csc = CreateCSharpCompiler(
                 responseFile: null,
@@ -13947,7 +13944,7 @@ class C { }
                     "/warnaserror+",
                     "/nologo",
                     "/t:library",
-                    srcFile.Path
+                    srcFile.Path,
                 },
                 analyzers: new[] { new WarningDiagnosticAnalyzer() }
             );
@@ -14015,7 +14012,7 @@ class C { }
                 {
                     "/t:library",
                     $"/warnaserror:{AnalyzerExecutor.AnalyzerExceptionDiagnosticId}",
-                    srcFile.Path
+                    srcFile.Path,
                 },
                 analyzers: new[] { new AnalyzerThatThrowsInGetMessage() }
             );
@@ -14608,7 +14605,7 @@ using System.Diagnostics; // Unused.
                 {
                     "/analyzerconfig:.editorconfig",
                     "a.cs",
-                    "/analyzerconfig:subdir\\.editorconfig"
+                    "/analyzerconfig:subdir\\.editorconfig",
                 },
                 WorkingDirectory
             );
@@ -14731,7 +14728,7 @@ public class Program
                     "/preferreduilang:en",
                     "/langversion:8",
                     "/nullable+",
-                    filePath
+                    filePath,
                 };
                 if (featureOpt != null)
                     args = args.Concat(featureOpt).ToArray();
@@ -14761,7 +14758,7 @@ public class Program
 
             string[] expectedWarningsAll = new[]
             {
-                fileName + "(4,27): warning CS8603: Possible null reference return."
+                fileName + "(4,27): warning CS8603: Possible null reference return.",
             };
             string[] expectedWarningsNone = Array.Empty<string>();
 
@@ -14883,7 +14880,7 @@ class C
                     additionalFlags: new[]
                     {
                         "/langversion:preview",
-                        "/features:enable-generator-cache"
+                        "/features:enable-generator-cache",
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -14961,7 +14958,7 @@ class C
                     {
                         "/langversion:preview",
                         "/out:" + outputPath,
-                        "/features:enable-generator-cache"
+                        "/features:enable-generator-cache",
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -15047,7 +15044,7 @@ class C
                     additionalFlags: new[]
                     {
                         "/langversion:preview",
-                        "/features:enable-generator-cache"
+                        "/features:enable-generator-cache",
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -15139,7 +15136,7 @@ class C
                     additionalFlags: new[]
                     {
                         "/langversion:preview",
-                        "/features:enable-generator-cache"
+                        "/features:enable-generator-cache",
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -15154,12 +15151,12 @@ class C
                     additionalFlags: new[]
                     {
                         "/langversion:preview",
-                        "/features:enable-generator-cache"
+                        "/features:enable-generator-cache",
                     },
                     generators: new[]
                     {
                         generator.AsSourceGenerator(),
-                        generator2.AsSourceGenerator()
+                        generator2.AsSourceGenerator(),
                     },
                     driverCache: cache,
                     analyzers: null
@@ -15227,7 +15224,7 @@ class C
                     {
                         "/langversion:preview",
                         "/features:enable-generator-cache",
-                        "/additionalFile:" + additionalFile.Path
+                        "/additionalFile:" + additionalFile.Path,
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -15377,7 +15374,7 @@ a = diffGlobalA
                         "/langversion:preview",
                         "/features:enable-generator-cache",
                         "/analyzerConfig:" + editorconfig.Path,
-                        "/analyzerConfig:" + globalconfig.Path
+                        "/analyzerConfig:" + globalconfig.Path,
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -15434,7 +15431,7 @@ class C
                     additionalFlags: new[]
                     {
                         "/langversion:preview",
-                        "/features:enable-generator-cache"
+                        "/features:enable-generator-cache",
                     },
                     generators: new[] { generator.AsSourceGenerator() },
                     driverCache: cache,
@@ -15774,7 +15771,7 @@ class C
                 {
                     "/warnaserror+",
                     "/warnaserror+:Hidden01",
-                    "/nowarn:8032"
+                    "/nowarn:8032",
                 },
                 expectedErrorCount: 1
             );
@@ -16413,7 +16410,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/warnaserror:Something,CS0168,Warning01",
-                    "/nowarn:0168,Warning01,58000"
+                    "/nowarn:0168,Warning01,58000",
                 },
                 expectedWarningCount: 1
             );
@@ -16426,7 +16423,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/nowarn:0168,Warning01,58000",
-                    "/warnaserror:Something,CS0168,Warning01"
+                    "/warnaserror:Something,CS0168,Warning01",
                 },
                 expectedWarningCount: 1
             );
@@ -16439,7 +16436,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/warnaserror-:Something,CS0168,Warning01",
-                    "/nowarn:0168,Warning01,58000"
+                    "/nowarn:0168,Warning01,58000",
                 },
                 expectedWarningCount: 1
             );
@@ -16452,7 +16449,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/nowarn:0168,Warning01,58000",
-                    "/warnaserror-:Something,CS0168,Warning01"
+                    "/warnaserror-:Something,CS0168,Warning01",
                 },
                 expectedWarningCount: 1
             );
@@ -16574,7 +16571,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/warnaserror-:Warning01,CS0168,58000,8032",
-                    "/warnaserror+"
+                    "/warnaserror+",
                 },
                 expectedErrorCount: 1
             );
@@ -16587,7 +16584,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/warnaserror",
-                    "/warnaserror-:Warning01,CS0168,58000,8032"
+                    "/warnaserror-:Warning01,CS0168,58000,8032",
                 },
                 expectedWarningCount: 3
             );
@@ -16927,7 +16924,7 @@ class C
                     "/target:library",
                     "/nologo",
                     "/preferreduilang:en",
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -16954,7 +16951,7 @@ class C
                     "/target:library",
                     "/nologo",
                     "/preferreduilang:en",
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -16981,7 +16978,7 @@ class C
                     "/target:library",
                     "/nologo",
                     "/preferreduilang:en",
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -17527,7 +17524,7 @@ class C {
                     @"/pathmap:C:\temp\=/_1/,C:\temp\a\=/_2/,C:\temp\a\b\=/_3/",
                     "a.cs",
                     @"a\b.cs",
-                    @"a\b\c.cs"
+                    @"a\b\c.cs",
                 },
                 WorkingDirectory
             );
@@ -17592,7 +17589,7 @@ class C {
                     "a.cs",
                     "/out:a.exe",
                     "/debug:full",
-                    $"/pdb:{pdbPath}"
+                    $"/pdb:{pdbPath}",
                 };
                 var isDeterministic = extraArgs.Contains("/deterministic");
                 var args = defaultArgs.Concat(extraArgs).ToArray();
@@ -17843,7 +17840,7 @@ public class C
                     "/doc:doc.xml",
                     "/deterministic",
                     "/langversion:7",
-                    "a.cs"
+                    "a.cs",
                 }
             );
 
@@ -17860,13 +17857,13 @@ public class C
                 {
                     "MethodDefinition:Void C.Main()",
                     "MethodDefinition:Void C.PrivateMethod()",
-                    "MethodDefinition:Void C..ctor()"
+                    "MethodDefinition:Void C..ctor()",
                 },
                 new[]
                 {
                     "CompilationRelaxationsAttribute",
                     "RuntimeCompatibilityAttribute",
-                    "DebuggableAttribute"
+                    "DebuggableAttribute",
                 }
             );
 
@@ -17908,7 +17905,7 @@ public class C
                     "CompilationRelaxationsAttribute",
                     "RuntimeCompatibilityAttribute",
                     "DebuggableAttribute",
-                    "ReferenceAssemblyAttribute"
+                    "ReferenceAssemblyAttribute",
                 }
             );
 
@@ -17937,7 +17934,7 @@ public class C
                     "/refout:ref/a.dll",
                     "/deterministic",
                     "/preferreduilang:en",
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -18006,7 +18003,7 @@ class C
                     "/deterministic",
                     "/langversion:7",
                     "/doc:doc.xml",
-                    "a.cs"
+                    "a.cs",
                 }
             );
             int exitCode = csc.Run(outWriter);
@@ -18027,7 +18024,7 @@ class C
                     "CompilationRelaxationsAttribute",
                     "RuntimeCompatibilityAttribute",
                     "DebuggableAttribute",
-                    "ReferenceAssemblyAttribute"
+                    "ReferenceAssemblyAttribute",
                 }
             );
 
@@ -18281,7 +18278,7 @@ namespace Microsoft.CodeAnalysis
                     new MetadataReference[]
                     {
                         NetStandard13.SystemRuntime,
-                        minSystemCollectionsImmutableRef
+                        minSystemCollectionsImmutableRef,
                     },
                     new CSharpCompilationOptions(
                         OutputKind.DynamicallyLinkedLibrary,
@@ -18374,7 +18371,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
             var references = new MetadataReference[]
             {
                 minCodeAnalysisRef,
-                minSystemCollectionsImmutableRef
+                minSystemCollectionsImmutableRef,
             };
             references = references.Concat(NetStandard13.All).ToArray();
 
@@ -18430,7 +18427,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                 workingDirectory: dir.Path,
                 additionalEnvironmentVars: new[]
                 {
-                    KeyValuePairUtil.Create("MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH", "")
+                    KeyValuePairUtil.Create("MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH", ""),
                 }
             );
 
@@ -18451,7 +18448,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                 workingDirectory: dir.Path,
                 additionalEnvironmentVars: new[]
                 {
-                    KeyValuePairUtil.Create("MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH", cscDir)
+                    KeyValuePairUtil.Create("MICROSOFT_DIASYMREADER_NATIVE_ALT_LOAD_PATH", cscDir),
                 }
             );
 
@@ -18562,7 +18559,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                 {
                     @"/features:InterceptorsPreviewNamespaces=NS1.NS2",
                     @"/features:InterceptorsPreviewNamespaces=NS3.NS4",
-                    "a.cs"
+                    "a.cs",
                 }
             );
             var comp = (CSharpCompilation)
@@ -18630,7 +18627,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     Tuple.Create("portable", DebugInformationFormat.PortablePdb),
                     Tuple.Create("full", platformPdbKind),
                     Tuple.Create("pdbonly", platformPdbKind),
-                    Tuple.Create("embedded", DebugInformationFormat.Embedded)
+                    Tuple.Create("embedded", DebugInformationFormat.Embedded),
                 };
 
                 foreach (var tuple in list)
@@ -18665,7 +18662,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     Tuple.Create("library", OutputKind.DynamicallyLinkedLibrary),
                     Tuple.Create("module", OutputKind.NetModule),
                     Tuple.Create("appcontainerexe", OutputKind.WindowsRuntimeApplication),
-                    Tuple.Create("winmdobj", OutputKind.WindowsRuntimeMetadata)
+                    Tuple.Create("winmdobj", OutputKind.WindowsRuntimeMetadata),
                 };
 
                 foreach (var tuple in list)
@@ -18690,7 +18687,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     Tuple.Create("itanium", Platform.Itanium),
                     Tuple.Create("anycpu", Platform.AnyCpu),
                     Tuple.Create("anycpu32bitpreferred", Platform.AnyCpu32BitPreferred),
-                    Tuple.Create("arm", Platform.Arm)
+                    Tuple.Create("arm", Platform.Arm),
                 };
 
                 foreach (var tuple in list)
@@ -18738,7 +18735,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     "/debug:embedded",
                     "/pathmap:test\\=\"",
                     "/target:library",
-                    "/preferreduilang:en"
+                    "/preferreduilang:en",
                 }
             );
 
@@ -18769,7 +18766,7 @@ public class TestAnalyzer : DiagnosticAnalyzer
                     "/debug:embedded",
                     "/pdb:test\\?.pdb",
                     "/target:library",
-                    "/preferreduilang:en"
+                    "/preferreduilang:en",
                 }
             );
 
@@ -20051,7 +20048,7 @@ dotnet_analyzer_diagnostic.severity = suggestion";
                 "/t:library",
                 "/preferreduilang:en",
                 "/analyzerconfig:" + analyzerConfig.Path,
-                src.Path
+                src.Path,
             };
             if (noWarn)
             {
@@ -20096,7 +20093,7 @@ dotnet_analyzer_diagnostic.severity = suggestion";
                 ReportDiagnostic.Info => errorlog ? "info" : null,
                 ReportDiagnostic.Hidden => null,
                 ReportDiagnostic.Suppress => null,
-                _ => throw ExceptionUtilities.UnexpectedValue(expectedDiagnosticSeverity)
+                _ => throw ExceptionUtilities.UnexpectedValue(expectedDiagnosticSeverity),
             };
 
             if (prefix == null)
@@ -20394,7 +20391,7 @@ dotnet_diagnostic.{descriptor.Id}.severity = {analyzerConfigSeverity.ToAnalyzerC
                 "/t:library",
                 "/preferreduilang:en",
                 "/analyzerconfig:" + analyzerConfig.Path,
-                src.Path
+                src.Path,
             };
             if (noWarn)
             {
@@ -20433,11 +20430,9 @@ dotnet_diagnostic.{descriptor.Id}.severity = {analyzerConfigSeverity.ToAnalyzerC
             )
             {
                 var prefix =
-                    analyzerConfigSeverity == ReportDiagnostic.Error
-                        ? "error"
-                        : analyzerConfigSeverity == ReportDiagnostic.Warn
-                            ? "warning"
-                            : "info";
+                    analyzerConfigSeverity == ReportDiagnostic.Error ? "error"
+                    : analyzerConfigSeverity == ReportDiagnostic.Warn ? "warning"
+                    : "info";
                 Assert.Contains(
                     $"{prefix} {descriptor.Id}: {descriptor.MessageFormat}",
                     outWriter.ToString()
@@ -20616,7 +20611,7 @@ generated_code = auto"
                 "/nologo",
                 "/t:library",
                 "/preferreduilang:en",
-                src.Path
+                src.Path,
             };
 
             var cmd = CreateCSharpCompiler(null, dir.Path, args, analyzers: new[] { analyzer });
@@ -20974,7 +20969,7 @@ class C
                     {
                         Path.Combine(dir.Path, generatorPrefix, $"generatedSource.cs"),
                         generatedSource
-                    }
+                    },
                 },
                 dir,
                 true
@@ -21038,7 +21033,7 @@ class C
                     {
                         Path.Combine(dir.Path, generatorPrefix, "generatedSource.cs"),
                         generatedSource
-                    }
+                    },
                 },
                 dir,
                 true
@@ -21146,7 +21141,7 @@ class C
                             checksumAlgorithm: SourceHashAlgorithm.Sha1
                         )
                     );
-                }
+                },
             };
 
             VerifyOutput(
@@ -21159,7 +21154,7 @@ class C
                     "/out:checksum.exe",
                     "/pdb:checksum.pdb",
                     "/debug:portable",
-                    "/checksumAlgorithm:SHA256"
+                    "/checksumAlgorithm:SHA256",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -21231,7 +21226,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -21244,7 +21239,7 @@ class C
                     {
                         Path.Combine(generatedDir.Path, generatorPrefix, expectedDir),
                         new() { { expectedFileName, generatedSource } }
-                    }
+                    },
                 }
             );
 
@@ -21277,7 +21272,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator1 },
                 analyzers: null
@@ -21290,7 +21285,7 @@ class C
                     {
                         Path.Combine(generatedDir.Path, generatorPrefix),
                         new() { { "generatedSource.cs", generatedSource1 } }
-                    }
+                    },
                 }
             );
 
@@ -21305,7 +21300,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator2 },
                 analyzers: null
@@ -21317,7 +21312,7 @@ class C
                     {
                         Path.Combine(generatedDir.Path, generatorPrefix),
                         new() { { "generatedSource.cs", generatedSource2 } }
-                    }
+                    },
                 }
             );
 
@@ -21360,7 +21355,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator, generator2 },
                 analyzers: null
@@ -21379,7 +21374,7 @@ class C
                     {
                         Path.Combine(generatedDir.Path, generator2Prefix),
                         new() { { source2Name, source2 } }
-                    }
+                    },
                 }
             );
 
@@ -21427,7 +21422,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -21440,7 +21435,7 @@ class C
                     {
                         Path.Combine(generatedDir.Path, generatorPrefix, expectedDir),
                         new() { { generatedFileName, generatedSource } }
-                    }
+                    },
                 }
             );
 
@@ -21505,7 +21500,7 @@ public class TestGenerator : ISourceGenerator
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/analyzer:" + gen1,
-                    "/analyzer:" + gen2
+                    "/analyzer:" + gen2,
                 }.ToArray()
             );
 
@@ -21518,7 +21513,7 @@ public class TestGenerator : ISourceGenerator
                     {
                         Path.Combine(generatedDir.Path, "generator", "TestGenerator"),
                         new() { { "generatedSource.cs", "//from version 2.0.0.0" } }
-                    }
+                    },
                 }
             );
         }
@@ -21579,7 +21574,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDirPath,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -21615,7 +21610,7 @@ class C
                 {
                     "/generatedfilesout:" + generatedDir.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -21628,7 +21623,7 @@ class C
                     {
                         Path.Combine(generatedDir.Path, generatorPrefix),
                         new() { { "generatedSource.cs", generatedSource } }
-                    }
+                    },
                 }
             );
 
@@ -21750,7 +21745,7 @@ class C
                 {
                     "/generatedfilesout:",
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 }
             );
             Assert.Contains(
@@ -21788,7 +21783,7 @@ class C
                     "/generatedfilesout:" + generatedDir.Path,
                     $"/touchedfiles:{dir.Path}/touched",
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -21925,7 +21920,7 @@ key7 = value7"
                 "/analyzerconfig:" + analyzerConfig2.Path,
                 "/analyzerconfig:" + analyzerConfig3.Path,
                 "/t:library",
-                src.Path
+                src.Path,
             };
 
             var cmd = CreateCSharpCompiler(null, dir.Path, args, generators: new[] { generator });
@@ -22145,7 +22140,7 @@ class C
                 {
                     "/additionalfile:" + additionalFile.Path,
                     "/langversion:preview",
-                    "/out:embed.exe"
+                    "/out:embed.exe",
                 },
                 generators: new[] { generator },
                 analyzers: null
@@ -22243,7 +22238,7 @@ is_global = true
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig1.Path,
                     "/analyzerconfig:" + analyzerConfig2.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -22284,7 +22279,7 @@ option1 = def"
                 src,
                 additionalFlags: new[]
                 {
-                    "/analyzerconfig:" + analyzerConfig.Path + "," + analyzerConfig2.Path
+                    "/analyzerconfig:" + analyzerConfig.Path + "," + analyzerConfig2.Path,
                 },
                 expectedWarningCount: 1,
                 includeCurrentAssemblyAsAnalyzerReference: false
@@ -22316,7 +22311,7 @@ option1 = def"
                 src,
                 additionalFlags: new[]
                 {
-                    "/analyzerconfig:" + analyzerConfig.Path + "," + analyzerConfig2.Path
+                    "/analyzerconfig:" + analyzerConfig.Path + "," + analyzerConfig2.Path,
                 },
                 expectedWarningCount: 1,
                 includeCurrentAssemblyAsAnalyzerReference: false
@@ -22369,7 +22364,7 @@ key3 = value3"
                     "/analyzer:" + Assembly.GetExecutingAssembly().Location,
                     "/nowarn:8032,Warning01",
                     "/additionalfile:" + additionalFile.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -22631,7 +22626,7 @@ dotnet_diagnostic.Warning01.severity = error;
                 additionalFlags: new[]
                 {
                     "/nowarn:Warning01",
-                    "/analyzerconfig:" + globalConfig.Path
+                    "/analyzerconfig:" + globalConfig.Path,
                 },
                 includeCurrentAssemblyAsAnalyzerReference: false,
                 analyzers: new[] { new WarningDiagnosticAnalyzer() }
@@ -22998,7 +22993,7 @@ class C
                 additionalFlags: new[]
                 {
                     "/nowarn:CS8850,CS8033",
-                    "/analyzer:" + frameworkGenerator
+                    "/analyzer:" + frameworkGenerator,
                 }
             );
 
@@ -23035,7 +23030,7 @@ public class Generator : ISourceGenerator
                         {
                             MetadataReference.CreateFromAssemblyInternal(
                                 typeof(ISourceGenerator).Assembly
-                            )
+                            ),
                         }
                     ),
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
@@ -23220,7 +23215,7 @@ dotnet_diagnostic.CS8034.severity = none
                 additionalFlags: new[]
                 {
                     "/analyzer:" + notAnalyzer.Path,
-                    "/analyzerConfig:" + globalconfig.Path
+                    "/analyzerConfig:" + globalconfig.Path,
                 },
                 includeCurrentAssemblyAsAnalyzerReference: false
             );
@@ -23282,7 +23277,7 @@ dotnet_diagnostic.DiagID1.severity = none
                     "/t:exe",
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -23417,7 +23412,7 @@ dotnet_diagnostic.CS9211.severity = warning
                     "/t:exe",
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -23470,7 +23465,7 @@ dotnet_diagnostic.DiagID.severity = warning
                     "/t:exe",
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 
@@ -23524,7 +23519,7 @@ dotnet_diagnostic.CS9204.severity = warning
                     "/t:exe",
                     "/preferreduilang:en",
                     "/analyzerconfig:" + analyzerConfig.Path,
-                    src.Path
+                    src.Path,
                 }
             );
 

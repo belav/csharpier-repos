@@ -10,7 +10,7 @@ internal static partial class Interop
         internal enum SysConfName
         {
             _SC_CLK_TCK = 1,
-            _SC_PAGESIZE = 2
+            _SC_PAGESIZE = 2,
         }
 
         [LibraryImport(

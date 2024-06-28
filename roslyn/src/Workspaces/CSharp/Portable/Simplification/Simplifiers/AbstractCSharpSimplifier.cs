@@ -287,11 +287,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 return true;
 
             var firstMember =
-                root.Members.Count > 0
-                    ? root.Members[0]
-                    : root.AttributeLists.Count > 0
-                        ? root.AttributeLists[0]
-                        : (SyntaxNode)null;
+                root.Members.Count > 0 ? root.Members[0]
+                : root.AttributeLists.Count > 0 ? root.AttributeLists[0]
+                : (SyntaxNode)null;
             if (firstMember == null)
                 return false;
 
@@ -303,8 +301,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
                 var (usings, members) = syntax switch
                 {
                     BaseNamespaceDeclarationSyntax ns => (ns.Usings, ns.Members),
-                    CompilationUnitSyntax compilationUnit =>
-                        (compilationUnit.Usings, compilationUnit.Members),
+                    CompilationUnitSyntax compilationUnit => (
+                        compilationUnit.Usings,
+                        compilationUnit.Members
+                    ),
                     _ => default,
                 };
 

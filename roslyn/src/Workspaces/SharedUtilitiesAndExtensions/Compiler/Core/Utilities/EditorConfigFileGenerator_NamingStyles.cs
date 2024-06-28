@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Options
                 {
                     EnforcementLevel = x.EnforcementLevel,
                     NamingStyleID = x.NamingStyle.ID,
-                    SymbolSpecificationID = x.SymbolSpecification.ID
+                    SymbolSpecificationID = x.SymbolSpecification.ID,
                 })
                 .ToImmutableArray();
 

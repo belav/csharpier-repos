@@ -52,8 +52,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Schema
                         Type = JsonSchemaType.Array,
                         Items = new List<JsonSchema>
                         {
-                            new JsonSchema { Type = JsonSchemaType.String }
-                        }
+                            new JsonSchema { Type = JsonSchemaType.String },
+                        },
                     }
                 },
             };

@@ -2178,7 +2178,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                             (ReturnOnlyScope, false) => ErrorCode.ERR_RefAssignReturnOnly,
                             (ReturnOnlyScope, true) => ErrorCode.WRN_RefAssignReturnOnly,
                             (_, false) => ErrorCode.ERR_RefAssignNarrower,
-                            (_, true) => ErrorCode.WRN_RefAssignNarrower
+                            (_, true) => ErrorCode.WRN_RefAssignNarrower,
                         };
 
                         Error(diagnostics, errorCode, node, getName(op1), op2.Syntax);
@@ -2340,15 +2340,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundImplicitIndexerAccess
                 {
                     IndexerOrSliceAccess: BoundIndexerAccess indexerAccess
-                } =>
-                    indexerAccess.Indexer,
+                } => indexerAccess.Indexer,
                 // array[Index]
                 BoundImplicitIndexerAccess { IndexerOrSliceAccess: BoundArrayAccess } => null,
                 // array[int or Range]
                 BoundArrayAccess => null,
                 BoundDynamicIndexerAccess => null,
                 BoundBadExpression => null,
-                _ => throw ExceptionUtilities.UnexpectedValue(e.Kind)
+                _ => throw ExceptionUtilities.UnexpectedValue(e.Kind),
             };
         }
 
@@ -3580,7 +3579,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     boolean
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
 
@@ -3705,7 +3704,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 signature.ReturnType
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -4591,15 +4590,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 // Depending on whether the filter constant is true or false, and whether there are other catch clauses,
                 // we suggest different actions
-                var errorCode = boundFilter.ConstantValueOpt.BooleanValue
-                    ? ErrorCode.WRN_FilterIsConstantTrue
+                var errorCode =
+                    boundFilter.ConstantValueOpt.BooleanValue ? ErrorCode.WRN_FilterIsConstantTrue
                     : (
                         filter.Parent.Parent is TryStatementSyntax s
                         && s.Catches.Count == 1
                         && s.Finally == null
                     )
                         ? ErrorCode.WRN_FilterIsConstantFalseRedundantTryCatch
-                        : ErrorCode.WRN_FilterIsConstantFalse;
+                    : ErrorCode.WRN_FilterIsConstantFalse;
 
                 // Since the expression is a constant, the name can be retrieved from the first token
                 Error(diagnostics, errorCode, filter.FilterExpression);
@@ -4735,7 +4734,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     @checked: CheckOverflowAtRuntime
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
             else if ((object)returnType != null)
@@ -4758,7 +4757,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         @checked: CheckOverflowAtRuntime
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else if (returnType.IsVoidType() || IsEffectivelyTaskReturningAsyncMethod())
@@ -4807,7 +4806,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         @checked: CheckOverflowAtRuntime
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else
@@ -4833,7 +4832,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         @checked: CheckOverflowAtRuntime
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             }
@@ -4842,7 +4841,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 expression = BindToNaturalType(expression, diagnostics);
                 statement = new BoundExpressionStatement(syntax, expression)
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
             else
@@ -4862,14 +4861,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     @checked: CheckOverflowAtRuntime
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
 
             // Need to attach the tree for when we generate sequence points.
             return new BoundBlock(node, locals, ImmutableArray.Create(statement))
             {
-                WasCompilerGenerated = node.Kind() != SyntaxKind.ArrowExpressionClause
+                WasCompilerGenerated = node.Kind() != SyntaxKind.ArrowExpressionClause,
             };
         }
 
@@ -4892,8 +4891,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var messageId = expressionBody.Parent switch
             {
-                ConstructorDeclarationSyntax
-                or DestructorDeclarationSyntax =>
+                ConstructorDeclarationSyntax or DestructorDeclarationSyntax =>
                     MessageID.IDS_FeatureExpressionBodiedDeOrConstructor,
                 AccessorDeclarationSyntax => MessageID.IDS_FeatureExpressionBodiedAccessor,
                 BaseMethodDeclarationSyntax => MessageID.IDS_FeatureExpressionBodiedMethod,
@@ -5288,7 +5286,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 initializerInvocation
             )
             {
-                WasCompilerGenerated = ((MethodSymbol)ContainingMember()).IsImplicitlyDeclared
+                WasCompilerGenerated = ((MethodSymbol)ContainingMember()).IsImplicitlyDeclared,
             };
             Debug.Assert(
                 initializerInvocation.HasAnyErrors
@@ -5495,7 +5493,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             BoundExpression receiver = new BoundThisReference(syntax, constructor.ContainingType)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
             return new BoundCall(
                 syntax: syntax,
@@ -5515,7 +5513,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors: hasErrors
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -5570,7 +5568,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             CSharpSyntaxNode syntax = constructor.GetNonNullSyntaxNode();
             BoundExpression receiver = new BoundThisReference(syntax, constructor.ContainingType)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
             BoundExpression argument = new BoundParameter(syntax, constructor.Parameters[0]);
 
@@ -5592,7 +5590,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors: false
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 

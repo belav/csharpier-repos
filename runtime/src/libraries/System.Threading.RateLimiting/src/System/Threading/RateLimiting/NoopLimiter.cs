@@ -23,7 +23,7 @@ namespace System.Threading.RateLimiting
                 CurrentAvailablePermits = long.MaxValue,
                 CurrentQueuedCount = 0,
                 TotalFailedLeases = 0,
-                TotalSuccessfulLeases = Interlocked.Read(ref _totalSuccessfulLeases)
+                TotalSuccessfulLeases = Interlocked.Read(ref _totalSuccessfulLeases),
             };
         }
 

@@ -48,7 +48,7 @@ public class DesignApiConsistencyTest
                     .SetMethod,
                 typeof(CSharpDbContextGeneratorBase.ToStringInstanceHelper).GetMethod(
                     nameof(CSharpDbContextGeneratorBase.ToStringInstanceHelper.ToStringWithCulture)
-                )
+                ),
             };
     }
 }

@@ -82,13 +82,13 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new BindableAttribute(true, BindingDirection.TwoWay),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new BindableAttribute(false, BindingDirection.OneWay),
-                false
+                false,
             };
 
             yield return new object[] { attribute, new object(), false };

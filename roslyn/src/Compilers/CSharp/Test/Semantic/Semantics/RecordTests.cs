@@ -658,7 +658,7 @@ public record A(int i,) { }
             {
                 "System.Type A.EqualityContract { get; }",
                 "System.Int32 A.i { get; init; }",
-                "? A. { get; init; }"
+                "? A. { get; init; }",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -769,7 +769,7 @@ public record A(int i, int ) { }
             {
                 "System.Type A.EqualityContract { get; }",
                 "System.Int32 A.i { get; init; }",
-                "System.Int32 A. { get; init; }"
+                "System.Int32 A. { get; init; }",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -813,7 +813,7 @@ public record A(int, string ) { }
             {
                 "System.Type A.EqualityContract { get; }",
                 "System.Int32 A. { get; init; }",
-                "System.String A. { get; init; }"
+                "System.String A. { get; init; }",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -863,7 +863,7 @@ public record A(int, int ) { }
             {
                 "System.Type A.EqualityContract { get; }",
                 "System.Int32 A. { get; init; }",
-                "System.Int32 A. { get; init; }"
+                "System.Int32 A. { get; init; }",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -1086,7 +1086,7 @@ public partial record C
                 "Equals",
                 "<Clone>$",
                 ".ctor",
-                "Deconstruct"
+                "Deconstruct",
             };
             AssertEx.Equal(
                 expectedMemberNames,
@@ -1312,7 +1312,7 @@ record C(int X, int X)
             {
                 "System.Type C.EqualityContract { get; }",
                 "System.Int32 C.X { get; init; }",
-                "System.Int32 C.X { get; init; }"
+                "System.Int32 C.X { get; init; }",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -1344,7 +1344,7 @@ record C(int X, int X)
                 "Equals",
                 "<Clone>$",
                 ".ctor",
-                "Deconstruct"
+                "Deconstruct",
             };
             AssertEx.Equal(
                 expectedMemberNames,
@@ -1381,7 +1381,7 @@ record class C(int X, int X)
             {
                 "System.Type C.EqualityContract { get; }",
                 "System.Int32 C.X { get; init; }",
-                "System.Int32 C.X { get; init; }"
+                "System.Int32 C.X { get; init; }",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -1413,7 +1413,7 @@ record class C(int X, int X)
                 "Equals",
                 "<Clone>$",
                 ".ctor",
-                "Deconstruct"
+                "Deconstruct",
             };
             AssertEx.Equal(
                 expectedMemberNames,
@@ -1478,7 +1478,7 @@ record C(int X, int Y)
                 "System.Boolean C.Equals(C? other)",
                 "C C." + WellKnownMemberNames.CloneMethodName + "()",
                 "C..ctor(C original)",
-                "void C.Deconstruct(out System.Int32 X, out System.Int32 Y)"
+                "void C.Deconstruct(out System.Int32 X, out System.Int32 Y)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -2058,7 +2058,7 @@ class Program
                 "System.Boolean C.Equals(System.Object? obj)",
                 "System.Boolean C.Equals(C? other)",
                 "C C." + WellKnownMemberNames.CloneMethodName + "()",
-                "C..ctor(C original)"
+                "C..ctor(C original)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -2121,7 +2121,7 @@ class Program
                 "System.Boolean C.Equals(System.Object? obj)",
                 "System.Boolean C.Equals(C? other)",
                 "C C." + WellKnownMemberNames.CloneMethodName + "()",
-                "C..ctor(C original)"
+                "C..ctor(C original)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -7416,7 +7416,7 @@ record C3 : C2;
                 "System.Boolean C3.Equals(C3? other)",
                 "C1 C3." + WellKnownMemberNames.CloneMethodName + "()",
                 "C3..ctor(C3 original)",
-                "C3..ctor()"
+                "C3..ctor()",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -7468,7 +7468,7 @@ record C3 : C2;
                 "System.Boolean C3.Equals(C3? other)",
                 "C1 C3." + WellKnownMemberNames.CloneMethodName + "()",
                 "C3..ctor(C3 original)",
-                "C3..ctor()"
+                "C3..ctor()",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -7518,7 +7518,7 @@ record C3 : C2;
                 "System.Boolean C3.Equals(C3? other)",
                 "C1 C3." + WellKnownMemberNames.CloneMethodName + "()",
                 "C3..ctor(C3 original)",
-                "C3..ctor()"
+                "C3..ctor()",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -7568,7 +7568,7 @@ record C3 : C2;
                 "System.Boolean C3.Equals(C3? other)",
                 "C1 C3." + WellKnownMemberNames.CloneMethodName + "()",
                 "C3..ctor(C3 original)",
-                "C3..ctor()"
+                "C3..ctor()",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -11831,7 +11831,7 @@ record C1(object P, object Q) : B
                 new[]
                 {
                     "System.Type C2.EqualityContract { get; }",
-                    "System.Object C2.P { get; init; }"
+                    "System.Object C2.P { get; init; }",
                 },
                 GetProperties(comp, "C2").ToTestDisplayStrings()
             );
@@ -12050,7 +12050,7 @@ record B2(int X, int Y) : A
                 new[]
                 {
                     "System.Type B1.EqualityContract { get; }",
-                    "System.Int32 B1.X { get; init; }"
+                    "System.Int32 B1.X { get; init; }",
                 },
                 GetProperties(comp, "B1").ToTestDisplayStrings()
             );
@@ -12058,7 +12058,7 @@ record B2(int X, int Y) : A
                 new[]
                 {
                     "System.Type B2.EqualityContract { get; }",
-                    "System.Int32 B2.X { get; init; }"
+                    "System.Int32 B2.X { get; init; }",
                 },
                 GetProperties(comp, "B2").ToTestDisplayStrings()
             );
@@ -12114,7 +12114,7 @@ record C(int X, int Y, int Z) : B
                 {
                     "System.Type C.EqualityContract { get; }",
                     "System.Int32 C.X { get; init; }",
-                    "System.Int32 C.Y { get; init; }"
+                    "System.Int32 C.Y { get; init; }",
                 },
                 actualMembers
             );
@@ -12166,7 +12166,7 @@ record C(int X, int Y, int Z) : B
                 "System.Boolean C.Equals(C? other)",
                 "C C." + WellKnownMemberNames.CloneMethodName + "()",
                 "C..ctor(C original)",
-                "void C.Deconstruct(out System.Int32 X, out System.Int32 Y)"
+                "void C.Deconstruct(out System.Int32 X, out System.Int32 Y)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
 
@@ -12189,7 +12189,7 @@ record C(int X, int Y, int Z) : B
                 "Equals",
                 "<Clone>$",
                 ".ctor",
-                "Deconstruct"
+                "Deconstruct",
             };
             AssertEx.Equal(expectedMemberNames, c.GetPublicSymbol().MemberNames);
 
@@ -12777,7 +12777,7 @@ record C(dynamic P1, object[] P2, object P3, object?[] P4, (int, int) P5, (int X
                 "(System.Int32 X, System.Int32 Y) C.P5 { get; }",
                 "(System.Int32, System.Int32)[] C.P6 { get; }",
                 "nint C.P7 { get; }",
-                "System.UIntPtr[] C.P8 { get; }"
+                "System.UIntPtr[] C.P8 { get; }",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -13026,7 +13026,7 @@ record C(object P)
                 "System.Boolean B.Equals(B? other)",
                 expectedClone,
                 "B..ctor(B original)",
-                "void B.Deconstruct(out System.Object P, out System.Object Q)"
+                "void B.Deconstruct(out System.Object P, out System.Object Q)",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -13055,7 +13055,7 @@ record C(object P)
                 "System.Boolean C.Equals(C? other)",
                 "C C." + WellKnownMemberNames.CloneMethodName + "()",
                 "C..ctor(C original)",
-                "void C.Deconstruct(out System.Object P)"
+                "void C.Deconstruct(out System.Object P)",
             };
             AssertEx.Equal(
                 expectedMembers,
@@ -13203,7 +13203,7 @@ record C(object P)
                 new[]
                 {
                     "System.Type B.EqualityContract { get; }",
-                    "System.Object B.P { get; init; }"
+                    "System.Object B.P { get; init; }",
                 },
                 GetProperties(comp, "B").ToTestDisplayStrings()
             );
@@ -13258,7 +13258,7 @@ record C(object P) : I
                 new[]
                 {
                     "System.Type B.EqualityContract { get; }",
-                    "System.Object B.P { get; init; }"
+                    "System.Object B.P { get; init; }",
                 },
                 GetProperties(comp, "B").ToTestDisplayStrings()
             );
@@ -13267,7 +13267,7 @@ record C(object P) : I
                 {
                     "System.Type C.EqualityContract { get; }",
                     "System.Object C.P { get; init; }",
-                    "System.Object C.I.P { get; }"
+                    "System.Object C.I.P { get; }",
                 },
                 GetProperties(comp, "C").ToTestDisplayStrings()
             );
@@ -14689,7 +14689,7 @@ class Program
             );
 
             AssertEx.Equal(
-                new[] { "System.Type C.EqualityContract { get; }", },
+                new[] { "System.Type C.EqualityContract { get; }" },
                 GetProperties(comp, "C").ToTestDisplayStrings()
             );
         }
@@ -14824,7 +14824,7 @@ record CB(object P) : B;
                 new[]
                 {
                     "System.Type CA.EqualityContract { get; }",
-                    "System.Object CA.P { get; init; }"
+                    "System.Object CA.P { get; init; }",
                 },
                 GetProperties(comp, "CA").ToTestDisplayStrings()
             );
@@ -15538,7 +15538,7 @@ public record C(object P1, object P2) : B(3, 4) { }
             {
                 "B..ctor(System.Object N1, System.Object N2)",
                 "B..ctor(B b, params System.Int32[] i)",
-                "B..ctor(B original)"
+                "B..ctor(B original)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
 
@@ -16445,7 +16445,7 @@ public record C(int j) : B(1)
             {
                 "B..ctor(System.Int32 i)",
                 "B..ctor(ref B b)",
-                "B..ctor(B original)"
+                "B..ctor(B original)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -16908,7 +16908,7 @@ THROW
                         // public record C : B
                         Diagnostic(ErrorCode.ERR_NoCopyConstructorInBaseType, "C")
                             .WithArguments("B")
-                            .WithLocation(2, 15)
+                            .WithLocation(2, 15),
                     }
                     : new DiagnosticDescription[] { };
 
@@ -19081,7 +19081,7 @@ record B(int X, int Y) : A
                 "System.Boolean B.Equals(B? other)",
                 "A B." + WellKnownMemberNames.CloneMethodName + "()",
                 "B..ctor(B original)",
-                "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)"
+                "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -19159,7 +19159,7 @@ record B(int X, int Y) : A
                 "System.Boolean B.Equals(B? other)",
                 expectedClone,
                 "B..ctor(B original)",
-                "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)"
+                "void B.Deconstruct(out System.Int32 X, out System.Int32 Y)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -25116,7 +25116,7 @@ class Program
                     {
                         useImageReference
                             ? comp1.EmitToImageReference()
-                            : comp1.ToMetadataReference()
+                            : comp1.ToMetadataReference(),
                     },
                     expectedOutput: @"
 True True False False
@@ -25329,7 +25329,7 @@ class E
                     src2,
                     references: new[]
                     {
-                        emitRef ? comp.EmitToImageReference() : comp.ToMetadataReference()
+                        emitRef ? comp.EmitToImageReference() : comp.ToMetadataReference(),
                     },
                     expectedOutput: @"
 1
@@ -25525,7 +25525,7 @@ class E
                         : new[] { src2, IsExternalInitTypeDefinition },
                     references: new[]
                     {
-                        emitRef ? comp.EmitToImageReference() : comp.ToMetadataReference()
+                        emitRef ? comp.EmitToImageReference() : comp.ToMetadataReference(),
                     },
                     expectedOutput: @"
 1
@@ -27019,7 +27019,7 @@ interface I {}
                 {
                     "Base..ctor(Base original)",
                     "Base..ctor(System.Int32 X)",
-                    "Base..ctor()"
+                    "Base..ctor()",
                 };
                 Assert.Equal(
                     candidates,
@@ -27284,7 +27284,7 @@ interface I {}
                 {
                     "C..ctor(System.Int32 X, System.Int32 Y)",
                     "C..ctor(C original)",
-                    "C..ctor(System.Int32 X, System.Int32 Y, System.Int32 Z)"
+                    "C..ctor(System.Int32 X, System.Int32 Y, System.Int32 Z)",
                 };
                 Assert.Equal(
                     candidates,
@@ -27587,7 +27587,7 @@ interface I {}
                 {
                     "Base..ctor(Base original)",
                     "Base..ctor(System.Int32 X)",
-                    "Base..ctor()"
+                    "Base..ctor()",
                 };
                 Assert.Equal(
                     candidates,
@@ -29185,7 +29185,7 @@ False"
                 "System.Boolean B1.Equals(B1? other)",
                 "A B1." + WellKnownMemberNames.CloneMethodName + "()",
                 "B1..ctor(B1 original)",
-                "void B1.Deconstruct(out System.Int32 P)"
+                "void B1.Deconstruct(out System.Int32 P)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -29782,7 +29782,7 @@ record B2 : A<int>;
                 {
                     "System.IEquatable<B1>",
                     "System.IEquatable<B2>",
-                    "System.IEquatable<A<T>>"
+                    "System.IEquatable<A<T>>",
                 },
                 type.InterfacesNoUseSiteDiagnostics().ToTestDisplayStrings()
             );
@@ -29791,7 +29791,7 @@ record B2 : A<int>;
                 {
                     "System.IEquatable<B1>",
                     "System.IEquatable<B2>",
-                    "System.IEquatable<A<T>>"
+                    "System.IEquatable<A<T>>",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -29806,7 +29806,7 @@ record B2 : A<int>;
                 {
                     "System.IEquatable<B2>",
                     "System.IEquatable<A<System.Object>>",
-                    "System.IEquatable<B1>"
+                    "System.IEquatable<B1>",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -29821,7 +29821,7 @@ record B2 : A<int>;
                 {
                     "System.IEquatable<B1>",
                     "System.IEquatable<A<System.Int32>>",
-                    "System.IEquatable<B2>"
+                    "System.IEquatable<B2>",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -29864,7 +29864,7 @@ record B : A<object>, I<A<object>>, I<B>
                     "System.IEquatable<A<System.Object>>",
                     "I<A<System.Object>>",
                     "I<B>",
-                    "System.IEquatable<B>"
+                    "System.IEquatable<B>",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -29964,7 +29964,7 @@ record B : A<int>;
                 new[]
                 {
                     "System.IEquatable<A<System.Int32>>[missing]",
-                    "System.IEquatable<B>[missing]"
+                    "System.IEquatable<B>[missing]",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -30075,7 +30075,7 @@ record B : A<int>, System.IEquatable<B>;
                 {
                     "System.IEquatable<A<System.Int32>>[missing]",
                     "System.IEquatable<B>",
-                    "System.IEquatable<B>[missing]"
+                    "System.IEquatable<B>[missing]",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -30191,7 +30191,7 @@ record B : A<int>, IEquatable<B>;
                 {
                     "System.IEquatable<A<System.Int32>>[missing]",
                     "IEquatable<B>",
-                    "System.IEquatable<B>[missing]"
+                    "System.IEquatable<B>[missing]",
                 },
                 type.AllInterfacesNoUseSiteDiagnostics.ToTestDisplayStrings()
             );
@@ -30773,7 +30773,7 @@ public class C
             var expectedMembers = new[]
             {
                 "R..ctor(params System.Int32[] Array)",
-                "R..ctor(R original)"
+                "R..ctor(R original)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }
@@ -36438,7 +36438,7 @@ public record C(int I) : Base(I)
                 //     public void I() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "Base.I")
-                    .WithLocation(9, 17)
+                    .WithLocation(9, 17),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -36475,7 +36475,7 @@ public record C(int I) : Base(I)
                 //     public void I() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "Base.I")
-                    .WithLocation(9, 17)
+                    .WithLocation(9, 17),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -36574,7 +36574,7 @@ public record C(int I) : Base(I)
                 //     public void I() { }
                 Diagnostic(ErrorCode.WRN_NewRequired, "I")
                     .WithArguments("C.I()", "GrandBase.I")
-                    .WithLocation(12, 17)
+                    .WithLocation(12, 17),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.RegularPreview);
@@ -37129,7 +37129,7 @@ public record C(int I) : B(I);";
                 "System.Boolean D.Equals(D? other)",
                 "D D." + WellKnownMemberNames.CloneMethodName + "()",
                 "D..ctor(D original)",
-                "void D.Deconstruct(out System.Int32 I)"
+                "void D.Deconstruct(out System.Int32 I)",
             };
             AssertEx.Equal(expectedMembers, actualMembers);
         }

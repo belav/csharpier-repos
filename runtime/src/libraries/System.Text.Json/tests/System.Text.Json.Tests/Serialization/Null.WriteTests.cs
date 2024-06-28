@@ -26,23 +26,23 @@ namespace System.Text.Json.Serialization.Tests
                 MyListList = new List<List<object>> { new List<object> { null } },
                 MyDictionaryList = new List<Dictionary<string, string>>
                 {
-                    new Dictionary<string, string>() { ["key"] = null }
+                    new Dictionary<string, string>() { ["key"] = null },
                 },
                 MyStringDictionary = new Dictionary<string, string>() { ["key"] = null },
                 MyNullableDateTimeDictionary = new Dictionary<string, DateTime?>()
                 {
-                    ["key"] = null
+                    ["key"] = null,
                 },
                 MyObjectDictionary = new Dictionary<string, object>() { ["key"] = null },
                 MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>()
                 {
-                    ["key"] = null
+                    ["key"] = null,
                 },
                 MyListDictionary = new Dictionary<string, List<object>>() { ["key"] = null },
                 MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>()
                 {
-                    ["key"] = null
-                }
+                    ["key"] = null,
+                },
             };
 
             string json = JsonSerializer.Serialize(obj);
@@ -81,26 +81,26 @@ namespace System.Text.Json.Serialization.Tests
                 MyListList = new List<List<object>> { new List<object> { null } },
                 MyDictionaryList = new List<Dictionary<string, string>>
                 {
-                    new Dictionary<string, string>() { ["key"] = null }
+                    new Dictionary<string, string>() { ["key"] = null },
                 },
                 MyStringDictionary = new Dictionary<string, string>() { ["key"] = null },
                 MyNullableDateTimeDictionary = new Dictionary<string, DateTime?>()
                 {
-                    ["key"] = null
+                    ["key"] = null,
                 },
                 MyObjectDictionary = new Dictionary<string, object>() { ["key"] = null },
                 MyStringDictionaryDictionary = new Dictionary<string, Dictionary<string, string>>()
                 {
-                    ["key"] = new Dictionary<string, string>() { ["key"] = null }
+                    ["key"] = new Dictionary<string, string>() { ["key"] = null },
                 },
                 MyListDictionary = new Dictionary<string, List<object>>()
                 {
-                    ["key"] = new List<object> { null }
+                    ["key"] = new List<object> { null },
                 },
                 MyObjectDictionaryDictionary = new Dictionary<string, Dictionary<string, object>>()
                 {
-                    ["key"] = new Dictionary<string, object>() { ["key"] = null }
-                }
+                    ["key"] = new Dictionary<string, object>() { ["key"] = null },
+                },
             };
 
             string json = JsonSerializer.Serialize(obj, options);
@@ -264,7 +264,7 @@ namespace System.Text.Json.Serialization.Tests
             var input = new MyPoco[]
             {
                 null,
-                new MyPoco { Foo = "foo" }
+                new MyPoco { Foo = "foo" },
             };
 
             string json = JsonSerializer.Serialize(

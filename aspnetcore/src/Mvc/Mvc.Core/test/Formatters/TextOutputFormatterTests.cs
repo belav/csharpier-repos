@@ -25,20 +25,20 @@ public class TextOutputFormatterTests
             {
                 "utf-16; q=0.5",
                 new string[] { "utf-8", "utf-16" },
-                "utf-16"
+                "utf-16",
             };
 
             yield return new object[]
             {
                 "utf-8; q=0.0",
                 new string[] { "utf-8", "utf-16" },
-                "utf-8"
+                "utf-8",
             };
             yield return new object[]
             {
                 "utf-8; q=0.0, utf-16; q=0.0",
                 new string[] { "utf-8", "utf-16" },
-                "utf-8"
+                "utf-8",
             };
 
             yield return new object[] { "*; q=0.0", new string[] { "utf-8", "utf-16" }, "utf-8" };
@@ -250,7 +250,7 @@ public class TextOutputFormatterTests
         var context = new OutputFormatterWriteContext(
             new DefaultHttpContext()
             {
-                RequestServices = new ServiceCollection().BuildServiceProvider()
+                RequestServices = new ServiceCollection().BuildServiceProvider(),
             },
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             objectType: null,

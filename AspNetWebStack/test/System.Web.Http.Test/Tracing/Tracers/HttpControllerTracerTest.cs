@@ -48,13 +48,13 @@ namespace System.Web.Http.Tracing.Tracers
                 new TraceRecord(request, TraceCategories.ControllersCategory, TraceLevel.Info)
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "Dispose"
+                    Operation = "Dispose",
                 },
                 new TraceRecord(request, TraceCategories.ControllersCategory, TraceLevel.Info)
                 {
                     Kind = TraceKind.End,
-                    Operation = "Dispose"
-                }
+                    Operation = "Dispose",
+                },
             };
 
             // Act
@@ -152,7 +152,7 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -160,8 +160,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
@@ -222,7 +222,7 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -230,8 +230,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Error
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
@@ -291,7 +291,7 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -299,8 +299,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Warn
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act

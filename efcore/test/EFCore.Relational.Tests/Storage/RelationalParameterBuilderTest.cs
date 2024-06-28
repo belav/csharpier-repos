@@ -104,7 +104,7 @@ public class RelationalParameterBuilderTest
                     "SecondName",
                     new StringTypeMapping("nvarchar(max)", DbType.String),
                     nullable: true
-                )
+                ),
             }
         );
 

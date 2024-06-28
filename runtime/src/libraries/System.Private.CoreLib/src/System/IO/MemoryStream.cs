@@ -539,7 +539,7 @@ namespace System.IO
                     SeekOrigin.Begin => _origin,
                     SeekOrigin.Current => _position,
                     SeekOrigin.End => _length,
-                    _ => throw new ArgumentException(SR.Argument_InvalidSeekOrigin)
+                    _ => throw new ArgumentException(SR.Argument_InvalidSeekOrigin),
                 }
             );
         }

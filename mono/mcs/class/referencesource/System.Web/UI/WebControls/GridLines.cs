@@ -41,6 +41,6 @@ namespace System.Web.UI.WebControls
         ///       A grid woth both horizontal and vertical grid lines rendered.
         ///    </para>
         /// </devdoc>
-        Both = 3
+        Both = 3,
     }
 }

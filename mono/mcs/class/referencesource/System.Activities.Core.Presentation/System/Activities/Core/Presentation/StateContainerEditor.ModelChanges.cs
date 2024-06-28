@@ -182,7 +182,9 @@ namespace System.Activities.Core.Presentation
                 ModelItem stateMachineModelItem = GetStateMachineModelItem(srcModelItem);
                 Transition newTransition = new Transition()
                 {
-                    DisplayName = StateContainerEditor.GenerateTransitionName(stateMachineModelItem)
+                    DisplayName = StateContainerEditor.GenerateTransitionName(
+                        stateMachineModelItem
+                    ),
                 };
                 newTransition.To = destModelItem.GetCurrentValue() as State;
                 // Assign the shared trigger.

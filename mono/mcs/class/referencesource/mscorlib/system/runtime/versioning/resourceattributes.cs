@@ -104,7 +104,7 @@ namespace System.Runtime.Versioning
         ProcessID = 0x2,
         CLRInstanceID = 0x4, // for multiple CLR's within the process
         AssemblyName = 0x8,
-        TypeName = 0x10
+        TypeName = 0x10,
     }
 
     public static class VersioningHelper

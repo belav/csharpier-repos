@@ -36,7 +36,7 @@ namespace MonoTests.System.Web.Caching
         Disable,
         Peek,
         QueueSize,
-        Update
+        Update,
     }
 
     public sealed class CacheItemPriorityQueueTestItem

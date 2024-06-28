@@ -203,7 +203,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                     typeof(ClassWithPrivateCtor),
                     typeof(ClassWithInternalConstructor),
                     typeof(ClassWithProtectedConstructor),
-                    typeof(StaticConstructorClass)
+                    typeof(StaticConstructorClass),
                 },
                 (a, b) => new object[] { a[0], b }
             );

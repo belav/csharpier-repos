@@ -35,7 +35,7 @@ namespace System.Reflection.Tests
             "Void PubMeth2ToOverride()",
             "Void IntMeth2ToOverride()",
             "Void ProMeth2ToOverride()",
-            "Void ProIntMeth2ToOverride()"
+            "Void ProIntMeth2ToOverride()",
         };
 
         public static string[] InheritedMethodNames = new string[] { };
@@ -47,7 +47,7 @@ namespace System.Reflection.Tests
             "Void PubMeth1()",
             "Void PubMeth2()",
             "Void PubMeth3()",
-            "Void PubMeth2ToOverride()"
+            "Void PubMeth2ToOverride()",
         };
 
         public void PubBaseMeth1() { }
@@ -127,7 +127,7 @@ namespace System.Reflection.Tests
             "Void PubMeth2ToOverride()",
             "Void IntMeth2ToOverride()",
             "Void ProMeth2ToOverride()",
-            "Void ProIntMeth2ToOverride()"
+            "Void ProIntMeth2ToOverride()",
         };
 
         public static new string[] InheritedMethodNames = new string[]
@@ -137,7 +137,7 @@ namespace System.Reflection.Tests
             "Void IntBaseMeth1()",
             "Void IntBaseMeth1(System.String)",
             "Void ProtectedBaseMeth1()",
-            "Void ProtectedBaseMeth1(System.String)"
+            "Void ProtectedBaseMeth1(System.String)",
         };
 
         public static new string[] PublicMethodNames = new string[]
@@ -145,7 +145,7 @@ namespace System.Reflection.Tests
             "Void PubMeth1()",
             "Void PubMeth2()",
             "Void PubMeth3()",
-            "Void PubMeth2ToOverride()"
+            "Void PubMeth2ToOverride()",
         };
 
         //They exist in base, new slot is allocated in sub class
@@ -208,7 +208,7 @@ namespace System.Reflection.Tests
             "Void meth1()",
             "Void meth2()",
             "Void meth3()",
-            "Void meth4()"
+            "Void meth4()",
         };
         public static string[] InheritedMethodNames = new string[] { };
         public static string[] PublicMethodNames = new string[] { "Void meth1()" };
@@ -230,7 +230,7 @@ namespace System.Reflection.Tests
             "Void meth1()",
             "Void meth2()",
             "Void meth3()",
-            "Void meth4()"
+            "Void meth4()",
         };
         public static new string[] PublicMethodNames = new string[] { };
     }

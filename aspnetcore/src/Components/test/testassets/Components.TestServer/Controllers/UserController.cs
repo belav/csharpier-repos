@@ -27,7 +27,7 @@ public class UserController : Controller
             ExposedClaims = User
                 .Claims.Where(c => c.Type == "test-claim" || IsExposedRole(c))
                 .Select(c => new ExposedClaim { Type = c.Type, Value = c.Value })
-                .ToList()
+                .ToList(),
         };
     }
 

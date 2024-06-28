@@ -36,6 +36,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Gif = 4,
         Emf = 5,
         EmfDual = 6,
-        EmfPlus = 7
+        EmfPlus = 7,
     }
 }

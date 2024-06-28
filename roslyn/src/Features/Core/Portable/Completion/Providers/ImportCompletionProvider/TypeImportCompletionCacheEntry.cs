@@ -297,7 +297,7 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 IsGeneric = 2,
                 IsAttribute = 4,
                 IsEnumBaseType = 8,
-                IsEditorBrowsableStateAdvanced = 16
+                IsEditorBrowsableStateAdvanced = 16,
             }
         }
     }

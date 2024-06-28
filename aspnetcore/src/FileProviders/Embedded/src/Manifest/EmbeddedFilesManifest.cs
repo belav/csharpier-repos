@@ -19,7 +19,7 @@ internal sealed class EmbeddedFilesManifest
     private static readonly char[] _separators = new char[]
     {
         Path.DirectorySeparatorChar,
-        Path.AltDirectorySeparatorChar
+        Path.AltDirectorySeparatorChar,
     };
 
     private readonly ManifestDirectory _rootDirectory;

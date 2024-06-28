@@ -263,7 +263,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                                 result.IdentifierLocation.SourceSpan,
                                 options with
                                 {
-                                    PreferProvisionalTab = true
+                                    PreferProvisionalTab = true,
                                 },
                                 cancellationToken
                             )

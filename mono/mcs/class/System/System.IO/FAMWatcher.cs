@@ -59,7 +59,7 @@ namespace System.IO
         Moved = 6,
         Acknowledge = 7,
         Exists = 8,
-        EndExist = 9
+        EndExist = 9,
     };
 
     class FAMData

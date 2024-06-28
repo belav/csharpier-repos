@@ -66,7 +66,7 @@ namespace MonoCasTests.System.Web.UI.WebControls
                     typeof(bool),
                     typeof(bool),
                     typeof(bool),
-                    typeof(string)
+                    typeof(string),
                 }
             );
             Assert.IsNotNull(ci, ".ctor(DateTime,bool,bool,bool,bool,string)");

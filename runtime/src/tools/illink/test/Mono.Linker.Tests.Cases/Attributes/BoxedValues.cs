@@ -63,7 +63,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
     {
         A = 1,
         B,
-        C
+        C,
     }
 
     [Kept]
@@ -78,7 +78,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
         B,
 
         [Kept]
-        C
+        C,
     }
 
     [Kept]
@@ -87,7 +87,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
     public enum Enum_3
     {
         [Kept]
-        C
+        C,
     }
 
     [Kept]
@@ -96,7 +96,7 @@ namespace Mono.Linker.Tests.Cases.Attributes
     public enum Enum_4
     {
         [Kept]
-        B
+        B,
     }
 
     [Kept]
@@ -105,6 +105,6 @@ namespace Mono.Linker.Tests.Cases.Attributes
     public enum Enum_5
     {
         [Kept]
-        B
+        B,
     }
 }

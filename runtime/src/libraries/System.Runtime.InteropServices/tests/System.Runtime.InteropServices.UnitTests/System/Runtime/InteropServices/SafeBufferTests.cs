@@ -200,7 +200,7 @@ namespace System.Runtime.InteropServices.Tests
             {
                 I = 1234,
                 L = 987654321,
-                D = double.MaxValue
+                D = double.MaxValue,
             };
             buffer.Write<TestStruct>(0, structValue);
             Assert.Equal(structValue, buffer.Read<TestStruct>(0));
@@ -221,25 +221,25 @@ namespace System.Runtime.InteropServices.Tests
                 {
                     I = 11,
                     L = 22,
-                    D = 33
+                    D = 33,
                 },
                 new TestStruct
                 {
                     I = 44,
                     L = 55,
-                    D = 66
+                    D = 66,
                 },
                 new TestStruct
                 {
                     I = 77,
                     L = 88,
-                    D = 99
+                    D = 99,
                 },
                 new TestStruct
                 {
                     I = 100,
                     L = 200,
-                    D = 300
+                    D = 300,
                 },
             };
             TestArray(structArray);

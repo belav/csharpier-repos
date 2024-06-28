@@ -28,7 +28,7 @@ public class EnumerableWrapperProviderFactoryTest
                     typeof(IEnumerable<Person>),
                     new[]
                     {
-                        new Person() { Id = 10, Name = "John" }
+                        new Person() { Id = 10, Name = "John" },
                     },
                     typeof(DelegatingEnumerable<Person, Person>)
                 },
@@ -91,7 +91,7 @@ public class EnumerableWrapperProviderFactoryTest
                     (
                         new[]
                         {
-                            new Person() { Id = 10, Name = "John" }
+                            new Person() { Id = 10, Name = "John" },
                         }
                     ).AsQueryable(),
                     typeof(DelegatingEnumerable<Person, Person>)
@@ -150,7 +150,7 @@ public class EnumerableWrapperProviderFactoryTest
                     (
                         new[]
                         {
-                            new Person() { Id = 10, Name = "John" }
+                            new Person() { Id = 10, Name = "John" },
                         }
                     ).ToList()
                 },

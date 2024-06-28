@@ -36,7 +36,7 @@ public class SampleRateLimiterPolicy : IRateLimiterPolicy<string>
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 1,
                 Window = TimeSpan.FromSeconds(5),
-                SegmentsPerWindow = 1
+                SegmentsPerWindow = 1,
             }
         );
     }

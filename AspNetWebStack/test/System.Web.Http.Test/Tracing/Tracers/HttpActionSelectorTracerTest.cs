@@ -64,7 +64,7 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(
                     _actionContext.Request,
@@ -72,8 +72,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
@@ -140,7 +140,7 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Info
                 )
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(
                     _actionContext.Request,
@@ -148,8 +148,8 @@ namespace System.Web.Http.Tracing.Tracers
                     TraceLevel.Error
                 )
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act

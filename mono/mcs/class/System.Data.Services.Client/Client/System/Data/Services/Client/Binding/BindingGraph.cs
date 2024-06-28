@@ -28,7 +28,7 @@ namespace System.Data.Services.Client
 
         Gray,
 
-        Black
+        Black,
     }
 
     internal sealed class BindingGraph
@@ -597,7 +597,7 @@ namespace System.Data.Services.Client
                 {
                     Source = s,
                     Target = t,
-                    Label = label
+                    Label = label,
                 };
                 s.OutgoingEdges.Add(e);
                 t.IncomingEdges.Add(e);
@@ -612,7 +612,7 @@ namespace System.Data.Services.Client
                 {
                     Source = s,
                     Target = t,
-                    Label = label
+                    Label = label,
                 };
                 s.OutgoingEdges.Remove(e);
                 t.IncomingEdges.Remove(e);
@@ -624,7 +624,7 @@ namespace System.Data.Services.Client
                 {
                     Source = this.vertices[source],
                     Target = this.vertices[target],
-                    Label = label
+                    Label = label,
                 };
                 return this.vertices[source].OutgoingEdges.Any(r => r.Equals(e));
             }

@@ -77,7 +77,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// SubAxis class is derived from the main Axis class and provides
     /// additional axis associated with one of the main chart axis.
     /// </summary>
-    [SRDescription("DescriptionAttributeSubAxis_SubAxis"), DefaultProperty("Enabled"),
+    [SRDescription("DescriptionAttributeSubAxis_SubAxis"), DefaultProperty("Enabled")
 #if WINFORMS_CONTROL
         TypeConverter(typeof(SubAxis.SubAxisConverter)),
 #endif
@@ -438,7 +438,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <b>SubAxisCollection</b> is a strongly typed collection of chart sub-axes objects.
     /// Collection indexer can accept sub-axis index or it's unique name as a parameter.
     /// </summary>
-    [SRDescription("DescriptionAttributeSubAxisCollection_SubAxisCollection"),]
+    [SRDescription("DescriptionAttributeSubAxisCollection_SubAxisCollection")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -499,7 +499,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Make sure to cast the SubAxis to it's type (e.g. LineSubAxis) to access type
         /// specific properties.
         /// </remarks>
-        [SRDescription("DescriptionAttributeSubAxisCollection_Item"),]
+        [SRDescription("DescriptionAttributeSubAxisCollection_Item")]
         public SubAxis this[object parameter]
         {
             get

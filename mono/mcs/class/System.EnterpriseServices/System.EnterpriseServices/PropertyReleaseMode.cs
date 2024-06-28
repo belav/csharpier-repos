@@ -38,6 +38,6 @@ namespace System.EnterpriseServices
     public enum PropertyReleaseMode
     {
         Process = 1,
-        Standard = 0
+        Standard = 0,
     }
 }

@@ -381,7 +381,7 @@ namespace System.Web.UI
         private enum ExpressionType
         {
             Script,
-            ComponentReference
+            ComponentReference,
         }
 
         private sealed class ComponentReference : Expression

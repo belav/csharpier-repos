@@ -115,7 +115,7 @@ namespace MonoTests.System.Data.Connected
                 RemovesTrailingSpaces = true,
                 EmptyBinaryAsNull = true,
                 SupportsDate = true,
-                SupportsTime = true
+                SupportsTime = true,
             };
 
             return new ConnectionHolder<OdbcConnection>(engine, connection, connectionString);

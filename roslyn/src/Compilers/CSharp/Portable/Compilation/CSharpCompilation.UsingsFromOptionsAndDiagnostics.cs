@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 new UsingsFromOptionsAndDiagnostics()
                 {
                     UsingNamespacesOrTypes = ImmutableArray<NamespaceOrTypeAndUsingDirective>.Empty,
-                    Diagnostics = null
+                    Diagnostics = null,
                 };
 
             public ImmutableArray<NamespaceOrTypeAndUsingDirective> UsingNamespacesOrTypes { get; init; }
@@ -102,7 +102,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return new UsingsFromOptionsAndDiagnostics()
                 {
                     UsingNamespacesOrTypes = boundUsings.ToImmutableAndFree(),
-                    Diagnostics = diagnostics
+                    Diagnostics = diagnostics,
                 };
             }
 

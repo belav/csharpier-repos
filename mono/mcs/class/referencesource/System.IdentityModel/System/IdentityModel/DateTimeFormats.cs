@@ -23,7 +23,7 @@ namespace System.IdentityModel
             "yyyy-MM-ddTHH:mm:ss.fffzzz",
             "yyyy-MM-ddTHH:mm:ss.ffzzz",
             "yyyy-MM-ddTHH:mm:ss.fzzz",
-            "yyyy-MM-ddTHH:mm:sszzz"
+            "yyyy-MM-ddTHH:mm:sszzz",
         };
 
         internal static string Generated = "yyyy-MM-ddTHH:mm:ss.fffZ";

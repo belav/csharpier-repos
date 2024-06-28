@@ -43,7 +43,7 @@ namespace System.Net
         {
             rfc1123_date,
             rfc850_date,
-            asctime_date
+            asctime_date,
         };
 
         internal static DateTime Parse(string dateStr)

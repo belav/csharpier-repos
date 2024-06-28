@@ -17,7 +17,7 @@ public class SqlUnaryExpression : SqlExpression
     {
         ExpressionType.Not,
         ExpressionType.Negate,
-        ExpressionType.UnaryPlus
+        ExpressionType.UnaryPlus,
     };
 
     private static ExpressionType VerifyOperator(ExpressionType operatorType) =>

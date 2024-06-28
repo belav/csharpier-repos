@@ -127,6 +127,6 @@ namespace Microsoft.InfoCards.Diagnostics
 
     internal enum InfoCardEventCategory : short
     {
-        General = 1
+        General = 1,
     }
 }

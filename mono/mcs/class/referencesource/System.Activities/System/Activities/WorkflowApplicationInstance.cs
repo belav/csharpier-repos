@@ -37,7 +37,7 @@ namespace System.Activities
         {
             Initialized,
             Loaded,
-            Aborted
+            Aborted,
         }
 
         public WorkflowIdentity DefinitionIdentity { get; private set; }

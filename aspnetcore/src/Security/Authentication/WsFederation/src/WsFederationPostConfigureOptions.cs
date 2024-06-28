@@ -108,7 +108,7 @@ public class WsFederationPostConfigureOptions : IPostConfigureOptions<WsFederati
                     new WsFederationConfigurationRetriever(),
                     new HttpDocumentRetriever(options.Backchannel)
                     {
-                        RequireHttps = options.RequireHttpsMetadata
+                        RequireHttps = options.RequireHttpsMetadata,
                     }
                 );
             }

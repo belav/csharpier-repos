@@ -2575,7 +2575,7 @@ namespace MonoTests.System.XmlSerialization
                 {
                     doc.CreateAttribute("at"),
                     doc.CreateElement("elem1"),
-                    doc.CreateElement("elem2")
+                    doc.CreateElement("elem2"),
                 },
                 typeof(object)
             );
@@ -2613,7 +2613,7 @@ namespace MonoTests.System.XmlSerialization
                 {
                     doc.CreateAttribute("at"),
                     doc.CreateElement("elem1"),
-                    doc.CreateElement("elem2")
+                    doc.CreateElement("elem2"),
                 },
                 typeof(XmlNode[])
             );
@@ -2641,7 +2641,7 @@ namespace MonoTests.System.XmlSerialization
                     {
                         doc.CreateAttribute("at"),
                         doc.CreateElement("elem1"),
-                        doc.CreateElement("elem2")
+                        doc.CreateElement("elem2"),
                     }
                 ),
                 typeof(object)
@@ -3346,7 +3346,7 @@ namespace MonoTests.System.XmlSerialization
             group,
             page,
             example,
-            dir
+            dir,
         }
 
         #region GenericsSeralizationTests
@@ -3689,7 +3689,7 @@ namespace MonoTests.System.XmlSerialization
             three,
             four,
             five,
-            six
+            six,
         };
 
         [Test]
@@ -4041,7 +4041,7 @@ namespace MonoTests.System.XmlSerialization
                 3,
                 "apepe",
                 new AnotherArrayListType(),
-                new DerivedArrayListType()
+                new DerivedArrayListType(),
             };
 
             Serialize(test);
@@ -4109,7 +4109,7 @@ namespace MonoTests.System.XmlSerialization
             [XmlArray(Form = XmlSchemaForm.Unqualified)]
             public ArrayItemInXmlArray[] Mids = new ArrayItemInXmlArray[]
             {
-                new ArrayItemInXmlArray()
+                new ArrayItemInXmlArray(),
             };
         }
 
@@ -4372,7 +4372,7 @@ namespace MonoTests.System.XmlSerialization
 
             var ser = new XmlSerializer(typeof(AnySchemaProviderClass));
 
-            var obj = new AnySchemaProviderClass { Text = "test", };
+            var obj = new AnySchemaProviderClass { Text = "test" };
 
             using (var t = new StringWriter())
             {
@@ -4417,7 +4417,7 @@ namespace MonoTests.System.XmlSerialization
         {
             var ser = new XmlSerializer(typeof(SubNoParameterlessConstructor));
 
-            var obj = new SubNoParameterlessConstructor { Text = "test", };
+            var obj = new SubNoParameterlessConstructor { Text = "test" };
 
             using (var w = new StringWriter())
             {
@@ -4443,7 +4443,7 @@ namespace MonoTests.System.XmlSerialization
             var e = d.CreateElement("Contents");
             e.AppendChild(d.CreateElement("SomeElement"));
 
-            var c = new ClassWithXmlAnyElement { Contents = e, };
+            var c = new ClassWithXmlAnyElement { Contents = e };
 
             var ser = new XmlSerializer(typeof(ClassWithXmlAnyElement));
             using (var sw = new StringWriter())

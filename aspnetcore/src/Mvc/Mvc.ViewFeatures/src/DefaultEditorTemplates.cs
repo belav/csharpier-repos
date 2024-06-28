@@ -201,7 +201,7 @@ internal static class DefaultEditorTemplates
 
         var htmlAttributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
         {
-            { "class", className }
+            { "class", className },
         };
 
         if (inputType != null)

@@ -58,7 +58,7 @@ namespace ComWrappersTests
                         {
                             QueryInterface = fpWrappedQueryInterface,
                             AddRef = fpAddRef,
-                            Release = fpRelease
+                            Release = fpRelease,
                         };
 
                         var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(
@@ -79,9 +79,9 @@ namespace ComWrappersTests
                             {
                                 QueryInterface = fpQueryInterface,
                                 AddRef = fpAddRef,
-                                Release = fpRelease
+                                Release = fpRelease,
                             },
-                            SetValue = Marshal.GetFunctionPointerForDelegate(ITestVtbl.pSetValue)
+                            SetValue = Marshal.GetFunctionPointerForDelegate(ITestVtbl.pSetValue),
                         };
                         var vtblRaw = RuntimeHelpers.AllocateTypeAssociatedMemory(
                             typeof(ITestVtbl),
@@ -433,7 +433,7 @@ namespace ComWrappersTests
             [MethodImpl(MethodImplOptions.NoInlining)]
             static void CreateResurrectingTestInstance(ComWrappers wrapper)
             {
-                Test testInstance = new Test() { EnableResurrection = true, };
+                Test testInstance = new Test() { EnableResurrection = true };
                 IntPtr nativeInstance = wrapper.GetOrCreateComInterfaceForObject(
                     testInstance,
                     CreateComInterfaceFlags.None

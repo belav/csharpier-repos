@@ -19,11 +19,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
         private static INamedTypeSymbol? GetNamedTypeSymbol(ITypeSymbol type)
         {
-            return type is INamedTypeSymbol
-                ? (INamedTypeSymbol)type
+            return type is INamedTypeSymbol ? (INamedTypeSymbol)type
                 : type is ITypeParameterSymbol
                     ? GetNamedTypeSymbolConstraint((ITypeParameterSymbol)type)
-                    : null;
+                : null;
         }
     }
 }

@@ -136,7 +136,7 @@ public class SqliteStringMethodTranslator : IMethodCallTranslator
                         new[]
                         {
                             _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping),
-                            _sqlExpressionFactory.ApplyTypeMapping(argument, stringTypeMapping)
+                            _sqlExpressionFactory.ApplyTypeMapping(argument, stringTypeMapping),
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { true, true },
@@ -162,7 +162,7 @@ public class SqliteStringMethodTranslator : IMethodCallTranslator
                     {
                         _sqlExpressionFactory.ApplyTypeMapping(instance, stringTypeMapping),
                         _sqlExpressionFactory.ApplyTypeMapping(firstArgument, stringTypeMapping),
-                        _sqlExpressionFactory.ApplyTypeMapping(secondArgument, stringTypeMapping)
+                        _sqlExpressionFactory.ApplyTypeMapping(secondArgument, stringTypeMapping),
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true, true },
@@ -190,7 +190,7 @@ public class SqliteStringMethodTranslator : IMethodCallTranslator
                     new[]
                     {
                         instance,
-                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1))
+                        _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true },
@@ -207,7 +207,7 @@ public class SqliteStringMethodTranslator : IMethodCallTranslator
                     {
                         instance,
                         _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
-                        arguments[1]
+                        arguments[1],
                     },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true, true, true },
@@ -300,7 +300,7 @@ public class SqliteStringMethodTranslator : IMethodCallTranslator
                 {
                     argument,
                     _sqlExpressionFactory.Constant(1),
-                    _sqlExpressionFactory.Constant(1)
+                    _sqlExpressionFactory.Constant(1),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true, true },
@@ -323,7 +323,7 @@ public class SqliteStringMethodTranslator : IMethodCallTranslator
                         argumentsPropagateNullability: new[] { true },
                         typeof(int)
                     ),
-                    _sqlExpressionFactory.Constant(1)
+                    _sqlExpressionFactory.Constant(1),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true, true },

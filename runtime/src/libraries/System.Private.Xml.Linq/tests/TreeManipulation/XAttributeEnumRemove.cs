@@ -30,8 +30,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("attributes from multiple elements")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -39,8 +39,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("attributes from multiple documents")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -50,8 +50,8 @@ namespace XLinqTests
                         "All non-namespace attributes in one element"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -59,8 +59,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("All namespace attributes in one element")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -68,8 +68,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("All attributes in one element")
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -77,8 +77,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("All attributes in one document")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -86,8 +86,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("All attributes in one document + nulls")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -95,14 +95,14 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("Duplicate attribute in sequence")
                     {
-                        Priority = 3
-                    }
+                        Priority = 3,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(EmptySequence)
                 {
-                    Attribute = new VariationAttribute("Empty sequence") { Priority = 1 }
+                    Attribute = new VariationAttribute("Empty sequence") { Priority = 1 },
                 }
             );
         }

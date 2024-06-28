@@ -486,7 +486,7 @@ public class CSharpCodeLensTests : AbstractCodeLensTests
             .GetURI();
         var codeLensParamsDoc1 = new LSP.CodeLensParams
         {
-            TextDocument = CreateTextDocumentIdentifier(documentUri)
+            TextDocument = CreateTextDocumentIdentifier(documentUri),
         };
 
         var actualCodeLenses = await testLspServer.ExecuteRequestAsync<
@@ -534,7 +534,7 @@ public class CSharpCodeLensTests : AbstractCodeLensTests
                         LanguageNames.CSharp,
                         false
                     );
-                }
+                },
             }
         );
         var actualCodeLenses = await GetCodeLensAsync(testLspServer);
@@ -572,7 +572,7 @@ namespace Test
                 OptionUpdater = (globalOptions) =>
                 {
                     globalOptions.SetGlobalOption(LspOptionsStorage.LspUsingDevkitFeatures, false);
-                }
+                },
             }
         );
         await VerifyTestCodeLensAsync(
@@ -613,7 +613,7 @@ namespace Test
                 OptionUpdater = (globalOptions) =>
                 {
                     globalOptions.SetGlobalOption(LspOptionsStorage.LspUsingDevkitFeatures, false);
-                }
+                },
             }
         );
         await VerifyTestCodeLensAsync(
@@ -654,7 +654,7 @@ namespace Test
                 OptionUpdater = (globalOptions) =>
                 {
                     globalOptions.SetGlobalOption(LspOptionsStorage.LspUsingDevkitFeatures, true);
-                }
+                },
             }
         );
         await VerifyTestCodeLensMissingAsync(testLspServer);
@@ -695,7 +695,7 @@ namespace Test
                         LanguageNames.CSharp,
                         false
                     );
-                }
+                },
             }
         );
         await VerifyTestCodeLensMissingAsync(testLspServer);

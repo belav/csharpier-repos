@@ -24,7 +24,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         Attributes = 2,
         Multiple = 4,
         Mutable = 8,
-        AllNodes = Elements | Attributes
+        AllNodes = Elements | Attributes,
     }
 
     public static class CursorFlagsExtensions

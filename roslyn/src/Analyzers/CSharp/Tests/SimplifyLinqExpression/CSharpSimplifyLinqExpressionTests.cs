@@ -79,7 +79,7 @@ class Test
 
         var test = Data().{methodName}({lambda});
     }}
-}}"
+}}",
             }.RunAsync();
         }
 
@@ -161,7 +161,7 @@ class Test
     {{
         var test1 = (from value in Enumerable.Range(0, 10) select value).{methodName}({lambda});
     }}
-}}"
+}}",
             }.RunAsync();
         }
 
@@ -223,7 +223,7 @@ class Test
             return x == 1;
         }});
     }}
-}}"
+}}",
             }.RunAsync();
         }
 
@@ -271,7 +271,7 @@ class Test
 
     static IEnumerable<string> test = new List<string> {{ ""hello"", ""world"", ""!"" }};
     {returnType} result = test.{methodName}(x => FooTest(x));
-}}"
+}}",
             }.RunAsync();
         }
 
@@ -405,7 +405,7 @@ class Test
         IEnumerable<int> test = new List<int> {{ 1, 2, 3, 4, 5}};
         Enumerable.{methodName}(test, (x => x == 1));
     }}
-}}"
+}}",
             }.RunAsync();
         }
 

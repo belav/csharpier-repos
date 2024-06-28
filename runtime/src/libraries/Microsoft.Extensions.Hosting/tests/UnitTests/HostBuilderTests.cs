@@ -88,7 +88,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                         new[]
                         {
                             // Hides value2
-                            new KeyValuePair<string, string>("key2", "value3")
+                            new KeyValuePair<string, string>("key2", "value3"),
                         }
                     );
                 })
@@ -122,7 +122,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                         configBuilder.AddInMemoryCollection(
                             new KeyValuePair<string, string>[]
                             {
-                                new KeyValuePair<string, string>("key1", "value1")
+                                new KeyValuePair<string, string>("key1", "value1"),
                             }
                         );
                     }
@@ -133,7 +133,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                         configBuilder.AddInMemoryCollection(
                             new KeyValuePair<string, string>[]
                             {
-                                new KeyValuePair<string, string>("key2", "value2")
+                                new KeyValuePair<string, string>("key2", "value2"),
                             }
                         );
                     }
@@ -145,7 +145,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                             new KeyValuePair<string, string>[]
                             {
                                 // Hides value2
-                                new KeyValuePair<string, string>("key2", "value3")
+                                new KeyValuePair<string, string>("key2", "value3"),
                             }
                         );
                     }
@@ -223,14 +223,14 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             var settings = new Dictionary<string, string>
             {
-                { HostDefaults.EnvironmentKey, "EnvA" }
+                { HostDefaults.EnvironmentKey, "EnvA" },
             };
 
             var config = new ConfigurationBuilder().AddInMemoryCollection(settings).Build();
 
             var overrideSettings = new Dictionary<string, string>
             {
-                { HostDefaults.EnvironmentKey, "EnvB" }
+                { HostDefaults.EnvironmentKey, "EnvB" },
             };
 
             var overrideConfig = new ConfigurationBuilder()
@@ -255,7 +255,7 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void UseEnvironmentIsNotOverridden()
         {
-            var vals = new Dictionary<string, string> { { "ENV", "Dev" }, };
+            var vals = new Dictionary<string, string> { { "ENV", "Dev" } };
             var builder = new ConfigurationBuilder().AddInMemoryCollection(vals);
             var config = builder.Build();
 
@@ -286,7 +286,7 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void UseBasePathConfiguresBasePath()
         {
-            var vals = new Dictionary<string, string> { { "ENV", "Dev" }, };
+            var vals = new Dictionary<string, string> { { "ENV", "Dev" } };
             var builder = new ConfigurationBuilder().AddInMemoryCollection(vals);
             var config = builder.Build();
 
@@ -310,7 +310,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             {
                 { "applicationName", "MyProjectReference" },
                 { "environment", Environments.Development },
-                { "contentRoot", Path.GetFullPath(".") }
+                { "contentRoot", Path.GetFullPath(".") },
             };
 
             using (
@@ -388,7 +388,7 @@ namespace Microsoft.Extensions.Hosting.Tests
             new object[]
             {
                 BackgroundServiceExceptionBehavior.StopHost,
-                TimeSpan.FromTicks(long.MaxValue)
+                TimeSpan.FromTicks(long.MaxValue),
             },
         };
 
@@ -483,7 +483,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                         configBuilder.AddInMemoryCollection(
                             new KeyValuePair<string, string>[]
                             {
-                                new KeyValuePair<string, string>("key1", "value1")
+                                new KeyValuePair<string, string>("key1", "value1"),
                             }
                         )
                 )
@@ -511,7 +511,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                 .ConfigureHostConfiguration(config =>
                 {
                     config.AddInMemoryCollection(
-                        new[] { new KeyValuePair<string, string>("Key", "Value"), }
+                        new[] { new KeyValuePair<string, string>("Key", "Value") }
                     );
                 })
                 .UseDefaultServiceProvider(
@@ -590,7 +590,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                         configBuilder.AddInMemoryCollection(
                             new KeyValuePair<string, string>[]
                             {
-                                new KeyValuePair<string, string>("key1", "value1")
+                                new KeyValuePair<string, string>("key1", "value1"),
                             }
                         )
                 )
@@ -657,7 +657,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                                 new KeyValuePair<string, string>(
                                     HostDefaults.ContentRootKey,
                                     Path.GetFullPath(".")
-                                )
+                                ),
                             }
                         );
                     })
@@ -749,7 +749,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                                 new KeyValuePair<string, string>(
                                     HostDefaults.EnvironmentKey,
                                     Environments.Development
-                                )
+                                ),
                             }
                         );
                     })

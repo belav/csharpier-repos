@@ -160,7 +160,7 @@ public abstract class AdventureWorksContextBase : DbContext
             {
                 e.BusinessEntityID,
                 e.AddressID,
-                e.AddressTypeID
+                e.AddressTypeID,
             });
 
             entity.ToTable("BusinessEntityAddress", "Person");
@@ -191,7 +191,7 @@ public abstract class AdventureWorksContextBase : DbContext
             {
                 e.BusinessEntityID,
                 e.PersonID,
-                e.ContactTypeID
+                e.ContactTypeID,
             });
 
             entity.ToTable("BusinessEntityContact", "Person");
@@ -399,7 +399,7 @@ public abstract class AdventureWorksContextBase : DbContext
                 e.BusinessEntityID,
                 e.StartDate,
                 e.DepartmentID,
-                e.ShiftID
+                e.ShiftID,
             });
 
             entity.ToTable("EmployeeDepartmentHistory", "HumanResources");
@@ -542,7 +542,7 @@ public abstract class AdventureWorksContextBase : DbContext
             {
                 e.BusinessEntityID,
                 e.PhoneNumber,
-                e.PhoneNumberTypeID
+                e.PhoneNumberTypeID,
             });
 
             entity.ToTable("PersonPhone", "Person");
@@ -733,7 +733,7 @@ public abstract class AdventureWorksContextBase : DbContext
             {
                 e.ProductModelID,
                 e.ProductDescriptionID,
-                e.CultureID
+                e.CultureID,
             });
 
             entity.ToTable("ProductModelProductDescriptionCulture", "Production");
@@ -1138,7 +1138,7 @@ public abstract class AdventureWorksContextBase : DbContext
             {
                 e.BusinessEntityID,
                 e.StartDate,
-                e.TerritoryID
+                e.TerritoryID,
             });
 
             entity.ToTable("SalesTerritoryHistory", "Sales");
@@ -1390,7 +1390,7 @@ public abstract class AdventureWorksContextBase : DbContext
             {
                 e.WorkOrderID,
                 e.ProductID,
-                e.OperationSequence
+                e.OperationSequence,
             });
 
             entity.ToTable("WorkOrderRouting", "Production");

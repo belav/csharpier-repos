@@ -86,12 +86,12 @@ namespace System.Net.Security.Tests
                 yield return new object[]
                 {
                     new X509Certificate2(serverCert),
-                    new X509Certificate2(clientCert)
+                    new X509Certificate2(clientCert),
                 };
                 yield return new object[]
                 {
                     new X509Certificate(serverCert.Export(X509ContentType.Pfx), (string)null),
-                    new X509Certificate(clientCert.Export(X509ContentType.Pfx), (string)null)
+                    new X509Certificate(clientCert.Export(X509ContentType.Pfx), (string)null),
                 };
             }
         }
@@ -958,7 +958,7 @@ namespace System.Net.Security.Tests
                         new SslClientAuthenticationOptions()
                         {
                             TargetHost = name,
-                            ClientCertificates = clientCerts
+                            ClientCertificates = clientCerts,
                         },
                         CancellationToken.None
                     );
@@ -966,7 +966,7 @@ namespace System.Net.Security.Tests
                         new SslServerAuthenticationOptions()
                         {
                             ServerCertificate = certificate,
-                            ClientCertificateRequired = clientCertificate != null
+                            ClientCertificateRequired = clientCertificate != null,
                         },
                         CancellationToken.None
                     );
@@ -1007,7 +1007,10 @@ namespace System.Net.Security.Tests
                         clientSslStream.AuthenticateAsClientAsync(
                             new SslClientAuthenticationOptions()
                             {
-                                TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false)
+                                TargetHost = certificate.GetNameInfo(
+                                    X509NameType.SimpleName,
+                                    false
+                                ),
                             },
                             new CancellationToken(true)
                         )
@@ -1017,7 +1020,7 @@ namespace System.Net.Security.Tests
                         serverSslStream.AuthenticateAsServerAsync(
                             new SslServerAuthenticationOptions()
                             {
-                                ServerCertificate = certificate
+                                ServerCertificate = certificate,
                             },
                             new CancellationToken(true)
                         )
@@ -1037,7 +1040,7 @@ namespace System.Net.Security.Tests
                 Task t = clientSslStream.AuthenticateAsClientAsync(
                     new SslClientAuthenticationOptions()
                     {
-                        TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false)
+                        TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false),
                     },
                     cts.Token
                 );
@@ -1061,7 +1064,7 @@ namespace System.Net.Security.Tests
                 Task t = clientSslStream.AuthenticateAsClientAsync(
                     new SslClientAuthenticationOptions()
                     {
-                        TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false)
+                        TargetHost = certificate.GetNameInfo(X509NameType.SimpleName, false),
                     },
                     cts.Token
                 );

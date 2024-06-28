@@ -17,7 +17,7 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(
                     new CVariation(v1)
                     {
-                        Attribute = new Variation("ReaderSettings not null") { Priority = 0 }
+                        Attribute = new Variation("ReaderSettings not null") { Priority = 0 },
                     }
                 );
             }
@@ -27,7 +27,7 @@ namespace System.Xml.ReaderSettingsTests
                 this.AddChild(
                     new CVariation(WrappingScenario)
                     {
-                        Attribute = new Variation("Wrapping scenario")
+                        Attribute = new Variation("Wrapping scenario"),
                     }
                 );
             }

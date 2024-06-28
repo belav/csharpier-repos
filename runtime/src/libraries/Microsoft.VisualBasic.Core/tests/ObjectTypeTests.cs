@@ -359,14 +359,14 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 "a",
                 "ABC",
                 32,
-                PlatformDetection.IsInvariantGlobalization ? -2 : -1
+                PlatformDetection.IsInvariantGlobalization ? -2 : -1,
             };
             yield return new object[]
             {
                 "ABC",
                 "a",
                 -32,
-                PlatformDetection.IsInvariantGlobalization ? 2 : 1
+                PlatformDetection.IsInvariantGlobalization ? 2 : 1,
             };
             yield return new object[] { "abc", "ABC", 32, 0 };
         }

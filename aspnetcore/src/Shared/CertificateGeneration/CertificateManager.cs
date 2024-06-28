@@ -32,15 +32,13 @@ internal abstract class CertificateManager
     public const int RSAMinimumKeySizeInBits = 2048;
 
     public static CertificateManager Instance { get; } =
-        OperatingSystem.IsWindows()
-            ?
+        OperatingSystem.IsWindows() ?
 #pragma warning disable CA1416 // Validate platform compatibility
             new WindowsCertificateManager()
-            :
+        :
 #pragma warning restore CA1416 // Validate platform compatibility
-            OperatingSystem.IsMacOS()
-                ? new MacOSCertificateManager() as CertificateManager
-                : new UnixCertificateManager();
+        OperatingSystem.IsMacOS() ? new MacOSCertificateManager() as CertificateManager
+        : new UnixCertificateManager();
 
     public static CertificateManagerEventSource Log { get; set; } =
         new CertificateManagerEventSource();
@@ -703,7 +701,7 @@ internal abstract class CertificateManager
                 new Oid(
                     ServerAuthenticationEnhancedKeyUsageOid,
                     ServerAuthenticationEnhancedKeyUsageOidFriendlyName
-                )
+                ),
             },
             critical: true
         );
@@ -1358,6 +1356,6 @@ internal abstract class CertificateManager
         Undefined,
         Local,
         Trusted,
-        All
+        All,
     }
 }

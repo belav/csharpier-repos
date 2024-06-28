@@ -14,7 +14,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                DictionaryKeyPolicy =
+                    JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                ,
             };
 
             const string JsonString = @"[{""Key1"":1,""Key2"":2},{""Key1"":3,""Key2"":4}]";
@@ -60,7 +62,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                DictionaryKeyPolicy =
+                    JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                ,
             };
 
             // Ensure we ignore key policy for extension data and deserialize keys as they are.
@@ -90,7 +94,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions()
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                DictionaryKeyPolicy =
+                    JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                ,
             };
 
             Dictionary<string, int>[] obj = new Dictionary<string, int>[]
@@ -116,7 +122,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions()
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                DictionaryKeyPolicy =
+                    JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                ,
             };
 
             Dictionary<string, string>[] obj = new Dictionary<string, string>[]
@@ -141,7 +149,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions()
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                DictionaryKeyPolicy =
+                    JsonNamingPolicy.CamelCase // e.g. Key1 -> key1.
+                ,
             };
 
             Dictionary<string, int?>[] obj = new Dictionary<string, int?>[]
@@ -166,7 +176,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = new UppercaseNamingPolicy() // e.g. myint -> MYINT.
+                DictionaryKeyPolicy =
+                    new UppercaseNamingPolicy() // e.g. myint -> MYINT.
+                ,
             };
 
             // Without key policy, deserialize keys as they are.
@@ -188,13 +200,15 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = new UppercaseNamingPolicy() // e.g. myint -> MYINT.
+                DictionaryKeyPolicy =
+                    new UppercaseNamingPolicy() // e.g. myint -> MYINT.
+                ,
             };
 
             Dictionary<string, int> obj = new Dictionary<string, int>
             {
                 { "myint1", 1 },
-                { "myint2", 2 }
+                { "myint2", 2 },
             };
 
             const string Json = @"{""myint1"":1,""myint2"":2}";
@@ -225,14 +239,14 @@ namespace System.Text.Json.Serialization.Tests
 
             Dictionary<ETestEnum, ETestEnum> dict = new Dictionary<ETestEnum, ETestEnum>
             {
-                [ETestEnum.TestValue1] = ETestEnum.TestValue1
+                [ETestEnum.TestValue1] = ETestEnum.TestValue1,
             };
             string value = await Serializer.SerializeWrapper(dict, options);
             Assert.Equal("{\"testValue1\":1}", value);
 
             dict = new Dictionary<ETestEnum, ETestEnum>
             {
-                [ETestEnum.TestValue2] = ETestEnum.TestValue2
+                [ETestEnum.TestValue2] = ETestEnum.TestValue2,
             };
             value = await Serializer.SerializeWrapper(dict, options);
             Assert.Equal("{\"testValue2\":2}", value);
@@ -240,7 +254,7 @@ namespace System.Text.Json.Serialization.Tests
             dict = new Dictionary<ETestEnum, ETestEnum>
             {
                 [ETestEnum.TestValue1] = ETestEnum.TestValue1,
-                [ETestEnum.TestValue2] = ETestEnum.TestValue2
+                [ETestEnum.TestValue2] = ETestEnum.TestValue2,
             };
             value = await Serializer.SerializeWrapper(dict, options);
             Assert.Equal("{\"testValue1\":1,\"testValue2\":2}", value);
@@ -251,14 +265,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             Dictionary<ETestEnum, ETestEnum> dict = new Dictionary<ETestEnum, ETestEnum>
             {
-                [ETestEnum.TestValue1] = ETestEnum.TestValue1
+                [ETestEnum.TestValue1] = ETestEnum.TestValue1,
             };
             string value = await Serializer.SerializeWrapper(dict);
             Assert.Equal("{\"TestValue1\":1}", value);
 
             dict = new Dictionary<ETestEnum, ETestEnum>
             {
-                [ETestEnum.TestValue2] = ETestEnum.TestValue2
+                [ETestEnum.TestValue2] = ETestEnum.TestValue2,
             };
             value = await Serializer.SerializeWrapper(dict);
             Assert.Equal("{\"TestValue2\":2}", value);
@@ -266,7 +280,7 @@ namespace System.Text.Json.Serialization.Tests
             dict = new Dictionary<ETestEnum, ETestEnum>
             {
                 [ETestEnum.TestValue1] = ETestEnum.TestValue1,
-                [ETestEnum.TestValue2] = ETestEnum.TestValue2
+                [ETestEnum.TestValue2] = ETestEnum.TestValue2,
             };
             value = await Serializer.SerializeWrapper(dict);
             Assert.Equal("{\"TestValue1\":1,\"TestValue2\":2}", value);
@@ -307,7 +321,7 @@ namespace System.Text.Json.Serialization.Tests
                     DayOfWeek.Wednesday,
                     DayOfWeek.Thursday,
                     DayOfWeek.Friday,
-                    DayOfWeek.Saturday
+                    DayOfWeek.Saturday,
                 },
                 options
             );
@@ -330,7 +344,7 @@ namespace System.Text.Json.Serialization.Tests
 
             Dictionary<ETestEnum, ETestEnum> dict = new Dictionary<ETestEnum, ETestEnum>
             {
-                [ETestEnum.TestValue1] = ETestEnum.TestValue1
+                [ETestEnum.TestValue1] = ETestEnum.TestValue1,
             };
 
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -345,7 +359,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = new NullNamingPolicy()
+                DictionaryKeyPolicy = new NullNamingPolicy(),
             };
 
             // A naming policy that returns null is not allowed.
@@ -371,13 +385,15 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = new UppercaseNamingPolicy() // e.g. myint -> MYINT.
+                DictionaryKeyPolicy =
+                    new UppercaseNamingPolicy() // e.g. myint -> MYINT.
+                ,
             };
 
             Dictionary<string, int?> obj = new Dictionary<string, int?>
             {
                 { "myint1", 1 },
-                { "myint2", 2 }
+                { "myint2", 2 },
             };
 
             const string Json = @"{""myint1"":1,""myint2"":2}";
@@ -397,7 +413,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = new NullNamingPolicy()
+                DictionaryKeyPolicy = new NullNamingPolicy(),
             };
 
             // A naming policy that returns null is not allowed.
@@ -423,14 +439,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // The camel case policy resolves two keys to the same output key.
             Dictionary<string, int> obj = new Dictionary<string, int>
             {
                 { "myInt", 1 },
-                { "MyInt", 2 }
+                { "MyInt", 2 },
             };
             string json = await Serializer.SerializeWrapper(obj, options);
 
@@ -445,7 +461,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""keyDict"":{""keyString"":""text"",""keyNumber"":1000,""keyBool"":true},""keyList"":[1,2,3]}";
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
             };
 
             var obj = new Dictionary<string, object>();
@@ -453,7 +469,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 { "KeyString", "text" },
                 { "KeyNumber", 1000 },
-                { "KeyBool", true }
+                { "KeyBool", true },
             };
             obj["KeyList"] = new List<int>() { 1, 2, 3 };
 
@@ -481,7 +497,7 @@ namespace System.Text.Json.Serialization.Tests
                 { "KeyBool", true },
                 { "KeyObject", new object() },
                 { "KeyList", new List<string>() },
-                { "KeyDictionary", new Dictionary<string, string>() }
+                { "KeyDictionary", new Dictionary<string, string>() },
             };
             string json = await Serializer.SerializeWrapper(
                 obj,
@@ -525,7 +541,7 @@ namespace System.Text.Json.Serialization.Tests
                 Name = "text",
                 Number = 1000,
                 isValid = true,
-                Values = new List<int>() { 1, 2, 3 }
+                Values = new List<int>() { 1, 2, 3 },
             };
         }
 
@@ -536,7 +552,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""keyDict"":{""nestedKeyDict"":{""Name"":""text"",""Number"":1000,""isValid"":true,""Values"":[1,2,3]}}}";
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
             };
             var obj = new Dictionary<string, Dictionary<string, CustomClass>>()
             {
@@ -544,9 +560,9 @@ namespace System.Text.Json.Serialization.Tests
                     "KeyDict",
                     new Dictionary<string, CustomClass>()
                     {
-                        { "NestedKeyDict", CreateCustomObject() }
+                        { "NestedKeyDict", CreateCustomObject() },
                     }
-                }
+                },
             };
             var json = await Serializer.SerializeWrapper(
                 obj,
@@ -585,7 +601,7 @@ namespace System.Text.Json.Serialization.Tests
                 @"{""Key"":""KeyPair"",""Value"":{""keyDict"":{""Name"":""text"",""Number"":1000,""isValid"":true,""Values"":[1,2,3]}}}";
             var options = new JsonSerializerOptions
             {
-                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                DictionaryKeyPolicy = JsonNamingPolicy.CamelCase,
             };
             var obj = new KeyValuePair<string, Dictionary<string, CustomClass>>(
                 "KeyPair",

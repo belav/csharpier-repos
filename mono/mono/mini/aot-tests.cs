@@ -345,7 +345,7 @@ class Tests
         {
             o1 = 1,
             o2 = 2,
-            o3 = 3
+            o3 = 3,
         };
 
         // Call Foo2.Get_T directly, so its gets an instance
@@ -387,7 +387,7 @@ class Tests
         {
             o1 = 1,
             o2 = 2,
-            o3 = 3
+            o3 = 3,
         };
         Type t = typeof(Foo5<>).MakeGenericType(new Type[] { typeof(VTypeByRefStruct) });
         var o = Activator.CreateInstance(t);
@@ -417,7 +417,7 @@ class Tests
                     typeof(long?),
                     typeof(long?),
                     typeof(long?),
-                    typeof(long?)
+                    typeof(long?),
                 }
             );
         long res = (long)method.Invoke(null, new object[] { 1, 2L, 3L, 4L, 42L });
@@ -467,7 +467,7 @@ class Tests
                     null,
                     null,
                     true,
-                    new Struct7() { value = "ABC" }
+                    new Struct7() { value = "ABC" },
                 }
             );
         return s == "ABC" ? 0 : 1;
@@ -715,7 +715,7 @@ class Tests
                         5L,
                         6L,
                         7L,
-                        8L
+                        8L,
                     }
                 );
         if (res2 != 36)
@@ -731,7 +731,7 @@ class Tests
             a = 1,
             b = 2,
             c = 3,
-            d = 4
+            d = 4,
         };
 
         NullableMethods.GetHasValueManyArgs<LargeStruct>(1, 2, 3, 4, 5, 6, 7, 8, s);
@@ -757,7 +757,7 @@ class Tests
     enum AnEnum
     {
         A = 0,
-        B = 1
+        B = 1,
     }
 
     public static int test_0_enum_eq_comparer()
@@ -787,7 +787,7 @@ class Tests
             {
                 123L,
                 new List<int> { 2 }
-            }
+            },
         };
         Dictionary<long, int> newDict = ConvertDictionary(data);
         if (newDict.Count != 1)
@@ -797,7 +797,7 @@ class Tests
 
     enum LongEnum : ulong
     {
-        A = 1
+        A = 1,
     }
 
     public static int test_0_long_enum_eq_comparer()
@@ -809,32 +809,32 @@ class Tests
 
     enum UInt32Enum : uint
     {
-        A = 1
+        A = 1,
     }
 
     enum Int32Enum : int
     {
-        A = 1
+        A = 1,
     }
 
     enum Int16Enum : short
     {
-        A = 1
+        A = 1,
     }
 
     enum UInt16Enum : ushort
     {
-        A = 1
+        A = 1,
     }
 
     enum Int8Enum : sbyte
     {
-        A = 1
+        A = 1,
     }
 
     enum UInt8Enum : byte
     {
-        A = 1
+        A = 1,
     }
 
     public static int test_0_int_enum_eq_comparer()
@@ -908,7 +908,7 @@ class Tests
             a = 1,
             b = 2,
             c = 3,
-            d = 4
+            d = 4,
         };
 
         NullableMethods.GetHasValue<LargeStruct>(s);
@@ -966,7 +966,7 @@ class Tests
         {
             a = 1,
             b = 1,
-            c = 10
+            c = 10,
         };
         return pass_hfa_on_stack(s1, s1, s1);
     }

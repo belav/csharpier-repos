@@ -20,6 +20,6 @@ namespace System.Xml
         Same,
 
         /// <include file='doc\XmlNodeOrder.uex' path='docs/doc[@for="XmlNodeOrder.Unknown"]/*' />
-        Unknown
+        Unknown,
     }
 }

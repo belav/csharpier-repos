@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             params DiagnosticResult[] expected
         )
         {
-            var test = new Test { TestCode = source, };
+            var test = new Test { TestCode = source };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync();
@@ -66,7 +66,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             string fixedSource
         )
         {
-            var test = new Test { TestCode = source, FixedCode = fixedSource, };
+            var test = new Test { TestCode = source, FixedCode = fixedSource };
 
             test.ExpectedDiagnostics.AddRange(expected);
             await test.RunAsync();

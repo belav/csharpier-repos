@@ -81,7 +81,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                         StartCharacter = linePositionSpan.Start.Character,
                         EndLine = linePositionSpan.End.Line,
                         EndCharacter = linePositionSpan.End.Character,
-                        Kind = foldingRangeKind
+                        Kind = foldingRangeKind,
                     }
                 );
             }

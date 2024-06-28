@@ -14,7 +14,7 @@ public class SignInResult
     private static readonly SignInResult _notAllowed = new SignInResult { IsNotAllowed = true };
     private static readonly SignInResult _twoFactorRequired = new SignInResult
     {
-        RequiresTwoFactor = true
+        RequiresTwoFactor = true,
     };
 
     /// <summary>
@@ -83,14 +83,10 @@ public class SignInResult
     /// <returns>A string representation of value of the current <see cref="SignInResult"/> object.</returns>
     public override string ToString()
     {
-        return IsLockedOut
-            ? "LockedOut"
-            : IsNotAllowed
-                ? "NotAllowed"
-                : RequiresTwoFactor
-                    ? "RequiresTwoFactor"
-                    : Succeeded
-                        ? "Succeeded"
-                        : "Failed";
+        return IsLockedOut ? "LockedOut"
+            : IsNotAllowed ? "NotAllowed"
+            : RequiresTwoFactor ? "RequiresTwoFactor"
+            : Succeeded ? "Succeeded"
+            : "Failed";
     }
 }

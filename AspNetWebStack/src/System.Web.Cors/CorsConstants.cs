@@ -80,7 +80,7 @@ namespace System.Web.Cors
             "Content-Type",
             "Expires",
             "Last-Modified",
-            "Pragma"
+            "Pragma",
         };
 
         internal static readonly string[] SimpleMethods = { "GET", "HEAD", "POST" };

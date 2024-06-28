@@ -47,7 +47,7 @@ public abstract class GearsOfWarQueryFixtureBase
                 e => (((SquadMission)e)?.SquadId, ((SquadMission)e)?.MissionId)
             },
             { typeof(Weapon), e => ((Weapon)e)?.Id },
-            { typeof(LocustHighCommand), e => ((LocustHighCommand)e)?.Id }
+            { typeof(LocustHighCommand), e => ((LocustHighCommand)e)?.Id },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
@@ -324,7 +324,7 @@ public abstract class GearsOfWarQueryFixtureBase
                         Assert.Equal(ee.Name, aa.Name);
                     }
                 }
-            }
+            },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)

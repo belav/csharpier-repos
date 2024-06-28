@@ -459,7 +459,7 @@ namespace Microsoft.Win32
                         s_windowThread = new Thread(new ThreadStart(systemEvents.WindowThreadProc))
                         {
                             IsBackground = true,
-                            Name = ".NET System Events"
+                            Name = ".NET System Events",
                         };
                         s_windowThread.Start();
                         s_eventWindowReady.WaitOne();
@@ -661,7 +661,7 @@ namespace Microsoft.Win32
                     hbrBackground = (IntPtr)(Interop.User32.COLOR_WINDOW + 1),
                     lpfnWndProc = Marshal.GetFunctionPointerForDelegate(_windowProc),
                     lpszClassName = className,
-                    hInstance = hInstance
+                    hInstance = hInstance,
                 };
 
                 if (Interop.User32.RegisterClassW(ref windowClass) == 0)

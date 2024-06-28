@@ -84,7 +84,7 @@ namespace System.Speech.Internal
                     24000,
                     32000,
                     44100,
-                    48000
+                    48000,
                 };
                 waveEx.wFormatTag = (ushort)WaveFormatId.Pcm;
                 waveEx.nChannels = waveEx.nBlockAlign = (ushort)(isStereo ? 2 : 1);
@@ -156,7 +156,7 @@ namespace System.Speech.Internal
                     11155,
                     22311,
                     22179,
-                    44359
+                    44359,
                 };
                 uint[] BlockAlign = new uint[] { 256, 256, 512, 1024 };
                 byte[] Extra811 = new byte[32]
@@ -192,7 +192,7 @@ namespace System.Speech.Internal
                     0x88,
                     0x01,
                     0x18,
-                    0xFF
+                    0xFF,
                 };
 
                 byte[] Extra22 = new byte[32]
@@ -228,7 +228,7 @@ namespace System.Speech.Internal
                     0x88,
                     0x01,
                     0x18,
-                    0xFF
+                    0xFF,
                 };
 
                 byte[] Extra44 = new byte[32]
@@ -264,7 +264,7 @@ namespace System.Speech.Internal
                     0x88,
                     0x01,
                     0x18,
-                    0xFF
+                    0xFF,
                 };
 
                 byte[][] Extra = new byte[][] { Extra811, Extra811, Extra22, Extra44 };
@@ -414,7 +414,7 @@ namespace System.Speech.Internal
             GSM610_11kHzMono,
             GSM610_22kHzMono,
             GSM610_44kHzMono,
-            NUM_FORMATS
+            NUM_FORMATS,
         }
 
         #endregion
@@ -428,7 +428,7 @@ namespace System.Speech.Internal
             TrueSpeech = 0x0022,
             Alaw = 0x0006,
             Mulaw = 0x0007,
-            Gsm610 = 0x0031
+            Gsm610 = 0x0031,
         }
 
         [StructLayout(LayoutKind.Sequential)]

@@ -13,7 +13,7 @@ public class EndpointMetadataComparerTest
         // Arrange
         var endpoint1 = new Endpoint(
             TestConstants.EmptyRequestDelegate,
-            new EndpointMetadataCollection(new object[] { new TestMetadata(), }),
+            new EndpointMetadataCollection(new object[] { new TestMetadata() }),
             "test1"
         );
         var endpoint2 = new Endpoint(
@@ -40,7 +40,7 @@ public class EndpointMetadataComparerTest
         );
         var endpoint2 = new Endpoint(
             TestConstants.EmptyRequestDelegate,
-            new EndpointMetadataCollection(new object[] { new TestMetadata(), }),
+            new EndpointMetadataCollection(new object[] { new TestMetadata() }),
             "test2"
         );
 
@@ -57,12 +57,12 @@ public class EndpointMetadataComparerTest
         // Arrange
         var endpoint1 = new Endpoint(
             TestConstants.EmptyRequestDelegate,
-            new EndpointMetadataCollection(new object[] { new TestMetadata(), }),
+            new EndpointMetadataCollection(new object[] { new TestMetadata() }),
             "test1"
         );
         var endpoint2 = new Endpoint(
             TestConstants.EmptyRequestDelegate,
-            new EndpointMetadataCollection(new object[] { new TestMetadata(), }),
+            new EndpointMetadataCollection(new object[] { new TestMetadata() }),
             "test2"
         );
 
@@ -101,7 +101,7 @@ public class EndpointMetadataComparerTest
         // Arrange
         var endpoint1 = new Endpoint(
             TestConstants.EmptyRequestDelegate,
-            new EndpointMetadataCollection(new object[] { new TestMetadata(), }),
+            new EndpointMetadataCollection(new object[] { new TestMetadata() }),
             "test1"
         );
         var endpoint2 = new Endpoint(
@@ -110,7 +110,7 @@ public class EndpointMetadataComparerTest
             "test2"
         );
 
-        var list = new List<Endpoint>() { endpoint2, endpoint1, };
+        var list = new List<Endpoint>() { endpoint2, endpoint1 };
 
         // Act
         list.Sort(EndpointMetadataComparer<TestMetadata>.Default);

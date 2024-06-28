@@ -48,7 +48,7 @@ public class SingleRouteWithParametersBenchmark : EndpointRoutingBenchmarkBase
                         action = "Details",
                         category = "Administration",
                         region = "US",
-                        id = 10
+                        id = 10,
                     }
                 )
             )
@@ -69,7 +69,7 @@ public class SingleRouteWithParametersBenchmark : EndpointRoutingBenchmarkBase
                 action = "Details",
                 category = "Administration",
                 region = "US",
-                id = 10
+                id = 10,
             }
         );
 

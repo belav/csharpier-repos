@@ -45,7 +45,7 @@ internal static class CompletionOptionsStorage
             ),
             ShowNewSnippetExperienceFeatureFlag = options.GetOption(
                 ShowNewSnippetExperienceFeatureFlag
-            )
+            ),
         };
 
     private static readonly OptionGroup s_completionOptionGroup =

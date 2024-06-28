@@ -50,7 +50,7 @@ namespace System.Workflow.ComponentModel.Serialization
             "System.Collections.Generic",
             "System.Workflow.ComponentModel",
             "System.Workflow.Runtime",
-            "System.Workflow.Activities"
+            "System.Workflow.Activities",
         };
 
         public static Activity LoadXomlDocument(
@@ -108,7 +108,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                     {
                                         StandardXomlKeys.Definitions_XmlNs_Prefix,
                                         reader.LocalName,
-                                        StandardXomlKeys.Definitions_XmlNs
+                                        StandardXomlKeys.Definitions_XmlNs,
                                     }
                                 ),
                                 (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1,
@@ -366,7 +366,7 @@ namespace System.Workflow.ComponentModel.Serialization
                                         checksumBytes[14]
                                             .ToString("X2", CultureInfo.InvariantCulture),
                                         checksumBytes[15]
-                                            .ToString("X2", CultureInfo.InvariantCulture)
+                                            .ToString("X2", CultureInfo.InvariantCulture),
                                     }
                                 );
                                 CodeAttributeDeclaration xomlSourceAttribute =

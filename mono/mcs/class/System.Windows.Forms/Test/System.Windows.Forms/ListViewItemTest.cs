@@ -1908,7 +1908,7 @@ namespace MonoTests.System.Windows.Forms
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         static byte[] _serializedV20_MS =
@@ -2838,7 +2838,7 @@ namespace MonoTests.System.Windows.Forms
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         static byte[] _serializedV11_Mono =
@@ -3761,7 +3761,7 @@ namespace MonoTests.System.Windows.Forms
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
 
         static byte[] _serializedV20_Mono =
@@ -4712,7 +4712,7 @@ namespace MonoTests.System.Windows.Forms
             0x00,
             0x00,
             0x00,
-            0x0b
+            0x0b,
         };
     }
 

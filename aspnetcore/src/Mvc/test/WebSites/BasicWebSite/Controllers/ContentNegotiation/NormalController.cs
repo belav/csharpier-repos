@@ -77,7 +77,7 @@ public class NormalController : Controller
     [NonAction]
     public User CreateUser()
     {
-        User user = new User() { Name = "My name", Address = "My address", };
+        User user = new User() { Name = "My name", Address = "My address" };
 
         return user;
     }

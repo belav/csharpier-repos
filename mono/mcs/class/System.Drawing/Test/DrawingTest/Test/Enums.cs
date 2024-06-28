@@ -183,7 +183,7 @@ namespace Test.Sys.Drawing
             "White",
             "WhiteSmoke",
             "Yellow",
-            "YellowGreen"
+            "YellowGreen",
         };
 
         string[] ar_font_style = { "Regular", "Bold", "Italic", "Underline", "Strikeout" };
@@ -198,7 +198,7 @@ namespace Test.Sys.Drawing
             "MiddleRight",
             "BottomLeft",
             "BottomCenter",
-            "BottomRight"
+            "BottomRight",
         };
 
         string[] ar_string_alignment = { "Near", "Center", "Far" };
@@ -214,7 +214,7 @@ namespace Test.Sys.Drawing
             "Inch",
             "Document",
             "Millimeter",
-            "Em"
+            "Em",
         };
 
         string[] ar_string_trimming =
@@ -224,7 +224,7 @@ namespace Test.Sys.Drawing
             "Word",
             "EllipsisCharacter",
             "EllipsisWord",
-            "EllipsisPath"
+            "EllipsisPath",
         };
 
         #endregion

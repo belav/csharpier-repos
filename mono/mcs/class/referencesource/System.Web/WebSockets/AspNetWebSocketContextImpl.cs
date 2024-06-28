@@ -87,7 +87,7 @@ namespace System.Web.WebSockets
                                 Path = cookie.Path,
                                 Secure = cookie.Secure,
                                 Domain = cookie.Domain,
-                                Expires = cookie.Expires
+                                Expires = cookie.Expires,
                             }
                         );
                     }

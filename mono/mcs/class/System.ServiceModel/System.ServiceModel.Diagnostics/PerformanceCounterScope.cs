@@ -32,6 +32,6 @@ namespace System.ServiceModel.Diagnostics
     {
         Off,
         ServiceOnly,
-        All
+        All,
     }
 }

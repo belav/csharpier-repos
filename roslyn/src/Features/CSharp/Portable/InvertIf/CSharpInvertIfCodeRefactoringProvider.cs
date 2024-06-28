@@ -104,16 +104,14 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 SwitchSectionSyntax => SyntaxKind.BreakStatement,
                 LocalFunctionStatementSyntax
                 or AccessorDeclarationSyntax
-                or MemberDeclarationSyntax =>
-                    node.ContainsYield()
-                        ? SyntaxKind.YieldBreakStatement
-                        : SyntaxKind.ReturnStatement,
+                or MemberDeclarationSyntax => node.ContainsYield()
+                    ? SyntaxKind.YieldBreakStatement
+                    : SyntaxKind.ReturnStatement,
                 AnonymousFunctionExpressionSyntax => SyntaxKind.ReturnStatement,
                 CommonForEachStatementSyntax
                 or DoStatementSyntax
                 or WhileStatementSyntax
-                or ForStatementSyntax =>
-                    SyntaxKind.ContinueStatement,
+                or ForStatementSyntax => SyntaxKind.ContinueStatement,
                 _ => null,
             };
 
@@ -123,8 +121,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
                 SyntaxKind.ContinueStatement => SyntaxFactory.ContinueStatement(),
                 SyntaxKind.BreakStatement => SyntaxFactory.BreakStatement(),
                 SyntaxKind.ReturnStatement => SyntaxFactory.ReturnStatement(),
-                SyntaxKind.YieldBreakStatement =>
-                    SyntaxFactory.YieldStatement(SyntaxKind.YieldBreakStatement),
+                SyntaxKind.YieldBreakStatement => SyntaxFactory.YieldStatement(
+                    SyntaxKind.YieldBreakStatement
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
@@ -140,10 +139,9 @@ namespace Microsoft.CodeAnalysis.CSharp.InvertIf
             }
 
             return original is BlockSyntax block
-                ? block.WithStatements(SyntaxFactory.List(statementArray))
-                : statementArray.Length == 1
-                    ? statementArray[0]
-                    : SyntaxFactory.Block(statementArray);
+                    ? block.WithStatements(SyntaxFactory.List(statementArray))
+                : statementArray.Length == 1 ? statementArray[0]
+                : SyntaxFactory.Block(statementArray);
         }
 
         protected override IfStatementSyntax UpdateIf(

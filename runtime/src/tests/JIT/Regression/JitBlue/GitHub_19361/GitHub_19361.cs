@@ -72,7 +72,7 @@ namespace Repro
             string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
                 new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         static readonly Random Rng = new Random(Seed);
@@ -91,7 +91,7 @@ namespace Repro
                             IsCash = true,
                             IsHedge = true,
                             Modifier = 0.5,
-                            Section = "hello"
+                            Section = "hello",
                         }
                     );
                 }

@@ -8,11 +8,11 @@ namespace Mono.Linker.Tests.Cases.Resources
         "EmbeddedLinkXmlFileInReferencedAssemblyIsProcessedIfActionIsLink_Lib1.dll",
         new[]
         {
-            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsProcessedIfActionIsLink_Lib1.cs"
+            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsProcessedIfActionIsLink_Lib1.cs",
         },
         resources: new object[]
         {
-            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsProcessedIfActionIsLink_Lib1.xml"
+            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsProcessedIfActionIsLink_Lib1.xml",
         }
     )]
     [SetupLinkerAction(

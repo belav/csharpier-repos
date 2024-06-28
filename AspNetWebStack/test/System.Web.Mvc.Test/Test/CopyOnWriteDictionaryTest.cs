@@ -53,7 +53,7 @@ namespace System.Web.Mvc.Test
             var sourceDictionary = new Dictionary<string, object>
             {
                 { "key1", "value1" },
-                { "key2", "value2" }
+                { "key2", "value2" },
             };
             var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
                 sourceDictionary,
@@ -78,7 +78,7 @@ namespace System.Web.Mvc.Test
             var sourceDictionary = new Dictionary<string, object>
             {
                 { "key1", "value1" },
-                { "key2", "value2" }
+                { "key2", "value2" },
             };
             var copyOnWriteDictionary = new CopyOnWriteDictionary<string, object>(
                 sourceDictionary,

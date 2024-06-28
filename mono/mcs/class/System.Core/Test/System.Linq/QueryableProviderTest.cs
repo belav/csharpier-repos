@@ -381,7 +381,7 @@ namespace MonoTests.System.Linq
         {
             NotInitilized,
             Execute,
-            CreateQuery
+            CreateQuery,
         }
 
         public class QueryProvider : IQueryProvider

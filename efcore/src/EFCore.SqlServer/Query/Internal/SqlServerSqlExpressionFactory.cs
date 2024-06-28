@@ -52,7 +52,7 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
             AtTimeZoneExpression e => ApplyTypeMappingOnAtTimeZone(e, typeMapping),
             SqlServerAggregateFunctionExpression e => e.ApplyTypeMapping(typeMapping),
 
-            _ => base.ApplyTypeMapping(sqlExpression, typeMapping)
+            _ => base.ApplyTypeMapping(sqlExpression, typeMapping),
         };
 
     private SqlExpression ApplyTypeMappingOnAtTimeZone(
@@ -60,17 +60,16 @@ public class SqlServerSqlExpressionFactory : SqlExpressionFactory
         RelationalTypeMapping? typeMapping
     )
     {
-        var operandTypeMapping = typeMapping is null
-            ? null
-            : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset)
-                ? typeMapping
-                : atTimeZoneExpression.Operand.Type == typeof(DateTime)
-                    ? _typeMappingSource.FindMapping(
-                        typeof(DateTime),
-                        "datetime2",
-                        precision: typeMapping.Precision
-                    )
-                    : null;
+        var operandTypeMapping =
+            typeMapping is null ? null
+            : atTimeZoneExpression.Operand.Type == typeof(DateTimeOffset) ? typeMapping
+            : atTimeZoneExpression.Operand.Type == typeof(DateTime)
+                ? _typeMappingSource.FindMapping(
+                    typeof(DateTime),
+                    "datetime2",
+                    precision: typeMapping.Precision
+                )
+            : null;
 
         return new AtTimeZoneExpression(
             operandTypeMapping is null

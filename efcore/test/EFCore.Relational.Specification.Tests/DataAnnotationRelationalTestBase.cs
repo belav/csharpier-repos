@@ -103,7 +103,7 @@ public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotatio
                     {
                         Species = "Felis catus",
                         Tag = new PetTag { TagId = 2 },
-                        FavoritePetFood = petFood
+                        FavoritePetFood = petFood,
                     }
                 );
 

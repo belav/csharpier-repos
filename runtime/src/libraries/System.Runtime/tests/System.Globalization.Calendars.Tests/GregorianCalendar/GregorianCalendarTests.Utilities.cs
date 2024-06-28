@@ -29,7 +29,7 @@ namespace System.Globalization.Tests
             30,
             31,
             30,
-            31
+            31,
         };
         private static readonly int[] s_daysInMonthInCommonYear =
         {
@@ -45,7 +45,7 @@ namespace System.Globalization.Tests
             30,
             31,
             30,
-            31
+            31,
         };
 
         public static bool IsLeapYear(int year)

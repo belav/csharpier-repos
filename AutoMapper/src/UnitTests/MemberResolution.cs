@@ -32,7 +32,7 @@ public class When_multiple_source_members_match_postfix : AutoMapperSpecBase
             new Order
             {
                 ProductId = 12,
-                Product = new() { Id = 42 }
+                Product = new() { Id = 42 },
             }
         );
         destination.ProductId.ShouldBe(12);
@@ -106,7 +106,7 @@ public class When_mapping_derived_classes_in_arrays : AutoMapperSpecBase
         var model = new[]
         {
             new ModelObject { BaseString = "Base1" },
-            new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+            new ModelSubObject { BaseString = "Base2", SubString = "Sub2" },
         };
         _result = (DtoObject[])Mapper.Map(model, typeof(ModelObject[]), typeof(DtoObject[]));
     }
@@ -210,7 +210,7 @@ public class When_mapping_derived_classes_from_intefaces_to_abstract : AutoMappe
     {
         var model = new IModelObject[]
         {
-            new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+            new ModelSubObject { BaseString = "Base2", SubString = "Sub2" },
         };
         _result = (DtoObject[])Mapper.Map(model, typeof(IModelObject[]), typeof(DtoObject[]));
         base.Because_of();
@@ -281,7 +281,7 @@ public class When_mapping_derived_classes_as_property_of_top_object : AutoMapper
     {
         var model = new Model
         {
-            Object = new ModelSubObject { BaseString = "Base2", SubString = "Sub2" }
+            Object = new ModelSubObject { BaseString = "Base2", SubString = "Sub2" },
         };
 
         _result = Mapper.Map<Model, DtoModel>(model);
@@ -341,11 +341,11 @@ public class When_mapping_dto_with_only_properties : AutoMapperSpecBase
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
             Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
             SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
-            SubMissing = new ModelSubObject { ProperName = "I have a missing sub sub object" }
+            SubMissing = new ModelSubObject { ProperName = "I have a missing sub sub object" },
         };
         _result = Mapper.Map<ModelObject, ModelDto>(model);
     }
@@ -429,11 +429,11 @@ public class When_mapping_dto_with_only_fields : AutoMapperSpecBase
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
             Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
             SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
-            SubMissing = new ModelSubObject { ProperName = "I have a missing sub sub object" }
+            SubMissing = new ModelSubObject { ProperName = "I have a missing sub sub object" },
         };
         _result = Mapper.Map<ModelObject, ModelDto>(model);
     }
@@ -517,11 +517,11 @@ public class When_mapping_dto_with_fields_and_properties : AutoMapperSpecBase
             Sub = new ModelSubObject
             {
                 ProperName = "Some name",
-                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" }
+                SubSub = new ModelSubSubObject { IAmACoolProperty = "Cool daddy-o" },
             },
             Sub2 = new ModelSubObject { ProperName = "Sub 2 name" },
             SubWithExtraName = new ModelSubObject { ProperName = "Some other name" },
-            SubMissing = new ModelSubObject { ProperName = "I have a missing sub sub object" }
+            SubMissing = new ModelSubObject { ProperName = "I have a missing sub sub object" },
         };
         _result = Mapper.Map<ModelObject, ModelDto>(model);
         base.Because_of();
@@ -893,9 +893,9 @@ public class When_mapping_using_a_custom_member_mappings : AutoMapperSpecBase
             SomeWeirdSubObject = new ModelSubObject
             {
                 Narf = 5,
-                SubSub = new ModelSubSubObject { Norf = 15 }
+                SubSub = new ModelSubSubObject { Norf = 15 },
             },
-            MoreBlarg = "adsfdsaf"
+            MoreBlarg = "adsfdsaf",
         };
         _result = Mapper.Map<ModelObject, ModelDto>(model);
     }
@@ -1050,7 +1050,7 @@ public class When_mapping_using_custom_member_mappings_without_generics : AutoMa
             Status = "Pending",
             Customer = "Buster",
             ShippingCode = "AbcxY23",
-            Zip = "XYZ"
+            Zip = "XYZ",
         };
         _result = Mapper.Map<Order, OrderDTO>(order);
     }
@@ -1156,7 +1156,7 @@ public class When_mapping_to_a_self_referential_object : AutoMapperSpecBase
                         new Category { Name = "Child 1" },
                         new Category { Name = "Child 2" },
                         new Category { Name = "Child 3" },
-                    }
+                    },
                 },
                 new Category
                 {
@@ -1167,9 +1167,9 @@ public class When_mapping_to_a_self_referential_object : AutoMapperSpecBase
                         new Category { Name = "Child 5" },
                         new Category { Name = "Child 6" },
                         new Category { Name = "Child 7" },
-                    }
+                    },
                 },
-            }
+            },
         };
         _result = Mapper.Map<Category, CategoryDto>(category);
     }

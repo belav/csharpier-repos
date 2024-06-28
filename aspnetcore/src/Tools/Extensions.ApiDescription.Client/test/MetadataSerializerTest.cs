@@ -222,7 +222,7 @@ public class MetadataSerializerTest
         var expectedResult = $"Identity={identity}|Value={escapedValue}";
         var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
-            { "Value", escapedValue }
+            { "Value", escapedValue },
         };
         var input = new TaskItem(identity, metadata);
 
@@ -240,7 +240,7 @@ public class MetadataSerializerTest
         // Arrange
         var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
-            { "Value", "a value" }
+            { "Value", "a value" },
         };
         var expectedResult = $"Identity={escapedValue}|Value=a value";
         var input = new TaskItem(escapedValue, metadata);
@@ -301,7 +301,7 @@ public class MetadataSerializerTest
         var identity = "../files/azureMonitor.json";
         var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
-            { "Value", value }
+            { "Value", value },
         };
         var input = new Mock<ITaskItem>(MockBehavior.Strict);
         input.SetupGet(i => i.ItemSpec).Returns(identity).Verifiable();
@@ -328,7 +328,7 @@ public class MetadataSerializerTest
         // Arrange
         var metadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
         {
-            { "Value", "a value" }
+            { "Value", "a value" },
         };
         var input = new Mock<ITaskItem>(MockBehavior.Strict);
         input.SetupGet(i => i.ItemSpec).Returns(value).Verifiable();

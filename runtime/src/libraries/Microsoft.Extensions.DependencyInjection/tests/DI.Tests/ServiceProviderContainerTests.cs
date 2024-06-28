@@ -114,7 +114,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 ServiceDescriptor.Singleton<ICustomService, CustomService3>(),
                 ServiceDescriptor.Singleton<ICustomService, CustomService4>(),
                 ServiceDescriptor.Singleton<ICustomService, CustomService5>(),
-                ServiceDescriptor.Singleton<ICustomService, CustomService6>()
+                ServiceDescriptor.Singleton<ICustomService, CustomService6>(),
             };
 
             var serviceTypes = new[]
@@ -220,14 +220,14 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 {
                     serviceType,
                     typeof(ClassWithNoConstraints<string>),
-                    $"Open generic service type '{serviceType}' requires registering an open generic implementation type."
+                    $"Open generic service type '{serviceType}' requires registering an open generic implementation type.",
                 };
                 // Service type is GenericTypeDefinition, implementation type has different generic type definition arity
                 yield return new object[]
                 {
                     serviceType,
                     typeof(FakeOpenGenericServiceWithTwoTypeArguments<,>),
-                    $"Arity of open generic service type '{serviceType}' does not equal arity of open generic implementation type '{typeof(FakeOpenGenericServiceWithTwoTypeArguments<,>)}'."
+                    $"Arity of open generic service type '{serviceType}' does not equal arity of open generic implementation type '{typeof(FakeOpenGenericServiceWithTwoTypeArguments<,>)}'.",
                 };
             }
         }
@@ -1426,7 +1426,7 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 typeof(G),
                 typeof(H),
                 typeof(I),
-                typeof(J)
+                typeof(J),
             };
 
             IServiceProvider sp = null;

@@ -17,7 +17,7 @@ namespace Microsoft.Internal
         public enum TestEnum
         {
             First = 1,
-            Second = 2
+            Second = 2,
         }
 
         public static class DelegateTestClass

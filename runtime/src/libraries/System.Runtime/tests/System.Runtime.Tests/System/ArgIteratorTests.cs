@@ -64,7 +64,7 @@ namespace System.Tests
                 typeof(float),
                 typeof(double),
                 typeof(DummyClass),
-                typeof(DummyStruct)
+                typeof(DummyStruct),
             };
 
             VerifyTypes(

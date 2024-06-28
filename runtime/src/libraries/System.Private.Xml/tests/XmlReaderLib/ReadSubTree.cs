@@ -441,7 +441,7 @@ namespace System.Xml.Tests
             "<root xmlns:p1='a' xmlns:p2='b'><e xmlns:p2='b' p1:a='' p2:a='' ></e></root>",
             "<root xmlns:p1='a' ><e p1:a='' p2:a='' xmlns:p2='b' ></e></root>",
             "<root xmlns:p2='b'><e xmlns:p1='a' p1:a='' p2:a=''></e></root>",
-            "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a='' xmlns:p1='a' xmlns:p2='b'></e></root>"
+            "<root xmlns:p1='a' xmlns:p2='b'><e p1:a='' p2:a='' xmlns:p1='a' xmlns:p2='b'></e></root>",
         };
         private string[][] _exp =
         {

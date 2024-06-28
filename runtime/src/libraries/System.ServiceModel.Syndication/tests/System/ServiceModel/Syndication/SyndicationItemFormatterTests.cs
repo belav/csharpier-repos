@@ -401,7 +401,7 @@ namespace System.ServiceModel.Syndication.Tests
                 "http://www.w3.org/2000/xmlns/",
                 "value",
                 "version",
-                true
+                true,
             };
             yield return new object[] { "type", "ns", "value", "version", false };
             yield return new object[]
@@ -410,7 +410,7 @@ namespace System.ServiceModel.Syndication.Tests
                 "http://www.w3.org/2001/XMLSchema-instance",
                 "value",
                 "version",
-                false
+                false,
             };
         }
 
@@ -574,7 +574,7 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 new XElement("Name").CreateReader(),
                 "contentType",
-                "version"
+                "version",
             };
         }
 

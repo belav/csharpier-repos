@@ -247,7 +247,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     AnonymousMethodExpressionSyntax syntax => syntax.DelegateKeyword.GetLocation(),
                     LambdaExpressionSyntax syntax => syntax.ArrowToken.GetLocation(),
-                    _ => GetFirstLocation()
+                    _ => GetFirstLocation(),
                 };
             }
         }

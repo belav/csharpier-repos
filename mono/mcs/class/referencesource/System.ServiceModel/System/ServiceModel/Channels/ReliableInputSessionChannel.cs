@@ -303,7 +303,7 @@ namespace System.ServiceModel.Channels
                     this.BeginCloseGuards,
                     this.BeginCloseBinder,
                     this.BeginUnregisterChannel,
-                    base.OnBeginClose
+                    base.OnBeginClose,
                 };
 
             OperationEndCallback[] endOperations = new OperationEndCallback[]
@@ -313,7 +313,7 @@ namespace System.ServiceModel.Channels
                 this.EndCloseGuards,
                 this.EndCloseBinder,
                 this.EndUnregisterChannel,
-                base.OnEndClose
+                base.OnEndClose,
             };
 
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(

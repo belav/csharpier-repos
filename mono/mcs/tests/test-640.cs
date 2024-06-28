@@ -1,11 +1,11 @@
 enum MyEnum : byte
 {
-    Value_1 = 1
+    Value_1 = 1,
 }
 
 enum E : ushort
 {
-    V = 1
+    V = 1,
 }
 
 public class C

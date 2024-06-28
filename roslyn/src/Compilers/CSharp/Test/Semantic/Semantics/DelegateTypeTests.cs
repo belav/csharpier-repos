@@ -660,7 +660,7 @@ class Program
                         "lambda expression",
                         "System.Linq.Expressions.LambdaExpression<System.Func<int>>"
                     )
-                    .WithLocation(8, 46)
+                    .WithLocation(8, 46),
             };
 
             var comp = CreateCompilation(
@@ -976,7 +976,7 @@ class Program
                     expectedType is null
                         ? getExpectedDiagnostics(methodGroupExpression, methodGroupOnly)
                         : null,
-                    expectedType
+                    expectedType,
                 };
         }
 
@@ -991,7 +991,7 @@ class Program
                         // (6,29): error CS8917: The delegate type could not be inferred.
                         //         System.Delegate d = F;
                         Diagnostic(ErrorCode.ERR_CannotInferDelegateType, methodGroupOnly)
-                            .WithLocation(6, 29 + offset)
+                            .WithLocation(6, 29 + offset),
                     };
                 }
             );
@@ -1057,7 +1057,7 @@ class Program
                                 $"(System.Delegate){methodGroupExpression}"
                             )
                             .WithArguments("method", "System.Delegate")
-                            .WithLocation(6, 20)
+                            .WithLocation(6, 20),
                     };
                 }
             );
@@ -1604,7 +1604,7 @@ class Program
                     //         System.Delegate d = this.F;
                     Diagnostic(ErrorCode.ERR_ObjectProhibited, "this.F")
                         .WithArguments("B.F(object)")
-                        .WithLocation(5, 29)
+                        .WithLocation(5, 29),
                 }
             ); // instance and static
 #endif
@@ -1977,7 +1977,7 @@ internal object? F() => throw null!;
                     //         System.Delegate d = F<object>;
                     Diagnostic(ErrorCode.ERR_ValConstraintNotSatisfied, "F<object>")
                         .WithArguments("B.F<T>(T)", "T", "object")
-                        .WithLocation(5, 29)
+                        .WithLocation(5, 29),
                 }
             ); // different type parameter constraints
 #endif
@@ -1999,7 +1999,7 @@ internal object? F() => throw null!;
                         // (5,29): error CS8917: The delegate type could not be inferred.
                         //         System.Delegate d = F;
                         Diagnostic(ErrorCode.ERR_CannotInferDelegateType, methodGroupOnly)
-                            .WithLocation(5, 29 + offset)
+                            .WithLocation(5, 29 + offset),
                     };
                 }
                 return new object?[]
@@ -2008,7 +2008,7 @@ internal object? F() => throw null!;
                     methodB,
                     methodGroupExpression,
                     expectedDiagnostics,
-                    expectedType
+                    expectedType,
                 };
             }
         }
@@ -2193,7 +2193,7 @@ partial class B : A
                     //         System.Delegate d = this.F<object>;
                     Diagnostic(ErrorCode.ERR_AmbigCall, "this.F<object>")
                         .WithArguments("A.F<T>(T)", "B.F<T>(T)")
-                        .WithLocation(5, 29)
+                        .WithLocation(5, 29),
                 }
             ); // different type parameter constraints
             yield return getData(
@@ -2207,7 +2207,7 @@ partial class B : A
                     //         System.Delegate d = this.F<object>;
                     Diagnostic(ErrorCode.ERR_AmbigCall, "this.F<object>")
                         .WithArguments("A.F<T>(T)", "B.F<T>(T)")
-                        .WithLocation(5, 29)
+                        .WithLocation(5, 29),
                 }
             ); // different type parameter constraints
 
@@ -2229,7 +2229,7 @@ partial class B : A
                         // (5,29): error CS8917: The delegate type could not be inferred.
                         //         System.Delegate d = F;
                         Diagnostic(ErrorCode.ERR_CannotInferDelegateType, methodGroupOnly)
-                            .WithLocation(5, 29 + offset)
+                            .WithLocation(5, 29 + offset),
                     };
                 }
                 return new object?[]
@@ -2239,7 +2239,7 @@ partial class B : A
                     methodGroupExpression,
                     expectedDiagnostics,
                     expectedMethod,
-                    expectedType
+                    expectedType,
                 };
             }
         }
@@ -2622,7 +2622,7 @@ static class B
                     //         System.Delegate d = this.F<int>;
                     Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "F<int>")
                         .WithArguments("F", "System.Action")
-                        .WithLocation(6, 34)
+                        .WithLocation(6, 34),
                 }
             ); // different type parameter constraints
 
@@ -2644,7 +2644,7 @@ static class B
                         // (6,29): error CS8917: The delegate type could not be inferred.
                         //         System.Delegate d = F;
                         Diagnostic(ErrorCode.ERR_CannotInferDelegateType, methodGroupOnly)
-                            .WithLocation(6, 29 + offset)
+                            .WithLocation(6, 29 + offset),
                     };
                 }
                 return new object?[]
@@ -2654,7 +2654,7 @@ static class B
                     methodGroupExpression,
                     expectedDiagnostics,
                     expectedMethod,
-                    expectedType
+                    expectedType,
                 };
             }
         }
@@ -2841,7 +2841,7 @@ namespace N
                         // (6,29): error CS8917: The delegate type could not be inferred.
                         //         System.Delegate d = F;
                         Diagnostic(ErrorCode.ERR_CannotInferDelegateType, methodGroupOnly)
-                            .WithLocation(6, 29 + offset)
+                            .WithLocation(6, 29 + offset),
                     };
                 }
                 return new object?[]
@@ -2851,7 +2851,7 @@ namespace N
                     methodGroupExpression,
                     expectedDiagnostics,
                     expectedMethod,
-                    expectedType
+                    expectedType,
                 };
             }
         }
@@ -4658,7 +4658,7 @@ static class E2
             Assert.Equal(
                 [
                     "void System.Object.M<System.Object>()",
-                    "void System.Object.M<System.Object>(System.Object ignored)"
+                    "void System.Object.M<System.Object>(System.Object ignored)",
                 ],
                 model.GetMemberGroup(memberAccess).ToTestDisplayStrings()
             );
@@ -4864,7 +4864,7 @@ partial class Program
                 Diagnostic(ErrorCode.ERR_DiscardTypeInferenceFailed, "_").WithLocation(9, 9),
                 // (10,9): error CS8183: Cannot infer the type of implicitly-typed discard.
                 //         _ = x => x;
-                Diagnostic(ErrorCode.ERR_DiscardTypeInferenceFailed, "_").WithLocation(10, 9)
+                Diagnostic(ErrorCode.ERR_DiscardTypeInferenceFailed, "_").WithLocation(10, 9),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -4943,7 +4943,7 @@ partial class Program
                 //         x = GetValue;
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "GetValue")
                     .WithArguments("GetValue", "object")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -5002,7 +5002,7 @@ partial class Program
                 //     static object F3() { return F; }
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "F")
                     .WithArguments("F", "object")
-                    .WithLocation(6, 33)
+                    .WithLocation(6, 33),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -5056,7 +5056,7 @@ partial class Program
                 //         object[] a = new[] { F, (object)F, F };
                 Diagnostic(ErrorCode.WRN_MethGrpToNonDel, "F")
                     .WithArguments("F", "object")
-                    .WithLocation(6, 44)
+                    .WithLocation(6, 44),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -5612,7 +5612,7 @@ class Program
                 //         Console.WriteLine((() => { }).GetType());
                 Diagnostic(ErrorCode.ERR_BadUnaryOp, "(() => { }).GetType")
                     .WithArguments(".", "lambda expression")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             var comp = CreateCompilation(
@@ -5645,7 +5645,7 @@ class Program
                 //         Console.WriteLine(Main.GetType());
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "Main")
                     .WithArguments("Program.Main()", "method")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             var comp = CreateCompilation(
@@ -7078,7 +7078,7 @@ class C
                     .WithLocation(10, 12),
                 // (11,14): error CS8917: The delegate type could not be inferred.
                 //         F2(x => x);
-                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "=>").WithLocation(11, 14)
+                Diagnostic(ErrorCode.ERR_CannotInferDelegateType, "=>").WithLocation(11, 14),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -7329,7 +7329,7 @@ System.Func`1[System.Func`1[System.Object]]
                         "Program.F(System.Func<System.Func<object>>, int)",
                         "Program.F(System.Func<System.Func<int>>, object)"
                     )
-                    .WithLocation(14, 9)
+                    .WithLocation(14, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -7358,7 +7358,7 @@ class Program
                 //         F((string s) => { });
                 Diagnostic(ErrorCode.ERR_AmbigCall, "F")
                     .WithArguments("Program.F<T>(System.Action<T>)", "Program.F(StringAction)")
-                    .WithLocation(8, 9)
+                    .WithLocation(8, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -7392,7 +7392,7 @@ class Program
                 //         F0(M);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F0")
                     .WithArguments("Program.F0<T>(System.Action<T>)")
-                    .WithLocation(10, 9)
+                    .WithLocation(10, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -7430,7 +7430,7 @@ class Program
                 //         F(M);
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
                     .WithArguments("Program.F<T>(System.Action<T>)")
-                    .WithLocation(10, 9)
+                    .WithLocation(10, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -7469,7 +7469,7 @@ class Program
                 //         F((string s) => { });
                 Diagnostic(ErrorCode.ERR_AmbigCall, "F")
                     .WithArguments("Program.F(System.Action<string>)", "Program.F(StringAction)")
-                    .WithLocation(11, 9)
+                    .WithLocation(11, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -7844,7 +7844,7 @@ class Program
                         "Program.M<T>(T, System.Func<object>)",
                         "Program.M<T>(System.Func<object>, T)"
                     )
-                    .WithLocation(10, 9)
+                    .WithLocation(10, 9),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -8186,7 +8186,7 @@ class Program
                         "Program.F(System.Delegate, System.Delegate, string)",
                         "Program.F(System.Func<int>, System.Delegate, MyString)"
                     )
-                    .WithLocation(12, 9)
+                    .WithLocation(12, 9),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -8226,7 +8226,7 @@ class C
                 //         M(F);
                 Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F")
                     .WithArguments("F", "System.Linq.Expressions.Expression")
-                    .WithLocation(10, 11)
+                    .WithLocation(10, 11),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -8317,7 +8317,7 @@ class C
                         "C.M(System.Linq.Expressions.Expression)",
                         "C.M(System.Delegate)"
                     )
-                    .WithLocation(11, 9)
+                    .WithLocation(11, 9),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -8412,7 +8412,7 @@ E.M"
                 // (10,13): error CS1946: An anonymous method expression cannot be converted to an expression tree
                 //         c.M(delegate () { return 1; });
                 Diagnostic(ErrorCode.ERR_AnonymousMethodToExpressionTree, "delegate")
-                    .WithLocation(10, 13)
+                    .WithLocation(10, 13),
             };
 
             // Breaking change from C#9 which binds to E.M in each case.
@@ -8545,7 +8545,7 @@ class Program
                         "Program.F(System.Func<System.Func<object>>, int)",
                         "Program.F(System.Func<System.Func<int>>, object)"
                     )
-                    .WithLocation(12, 9)
+                    .WithLocation(12, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -9009,7 +9009,7 @@ System.Func`1[System.Object]"
                         ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         "new[] { F3<string>, F3<object> }"
                     )
-                    .WithLocation(10, 18)
+                    .WithLocation(10, 18),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -9194,7 +9194,7 @@ class Program
                         ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         "new[] { F2<object, string>, F2<object, object> }"
                     )
-                    .WithLocation(9, 18)
+                    .WithLocation(9, 18),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -9244,7 +9244,7 @@ class Program
                         ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         "new[] { (object x, ref object y) => { }, (object x, ref string y) => { } }"
                     )
-                    .WithLocation(8, 18)
+                    .WithLocation(8, 18),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -9531,7 +9531,7 @@ class Program
                 //         var c3 = F<string> ?? ((object o) => { });
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "F<string> ?? ((object o) => { })")
                     .WithArguments("??", "method group", "lambda expression")
-                    .WithLocation(8, 18)
+                    .WithLocation(8, 18),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -10168,7 +10168,7 @@ class Program
                 //         Report(F(() => 1.0, d2));
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "1.0")
                     .WithArguments("lambda expression")
-                    .WithLocation(12, 24)
+                    .WithLocation(12, 24),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -10292,7 +10292,7 @@ class Program
                 //         Report(F1(a1, (object o) => { }));
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "=>")
                     .WithArguments("lambda expression", "D1<string>")
-                    .WithLocation(12, 34)
+                    .WithLocation(12, 34),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -10332,7 +10332,7 @@ class Program
                 //         Report(F1((D1<string> d) => { }, (object o) => { }));
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "=>")
                     .WithArguments("lambda expression", "D1<string>")
-                    .WithLocation(10, 53)
+                    .WithLocation(10, 53),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -10411,7 +10411,7 @@ class Program
                 //         Report(F1(ref d1, (object o) => { }));
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethParams, "=>")
                     .WithArguments("lambda expression", "D1<string>")
-                    .WithLocation(12, 38)
+                    .WithLocation(12, 38),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -10451,7 +10451,7 @@ class Program
                 //         Report(F2(() => 1.0, (D2<int> d) => { }));
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F2")
                     .WithArguments("Program.F2<T>(T, in T)")
-                    .WithLocation(11, 16)
+                    .WithLocation(11, 16),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -11138,7 +11138,7 @@ class Program
                 //         F2((ref readonly string (s) => ref s));
                 Diagnostic(ErrorCode.ERR_RefReturnParameter, "s")
                     .WithArguments("s")
-                    .WithLocation(11, 44)
+                    .WithLocation(11, 44),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -11263,7 +11263,7 @@ class Program
                     .WithArguments(
                         "Program.F2<T>(System.Linq.Expressions.Expression<System.Func<T, T>>, T)"
                     )
-                    .WithLocation(10, 9)
+                    .WithLocation(10, 9),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -11483,7 +11483,7 @@ class Program
                     .WithArguments(
                         "Program.F2<T>(System.Linq.Expressions.Expression<System.Func<T, T>>, System.Linq.Expressions.Expression<System.Func<T, T>>)"
                     )
-                    .WithLocation(12, 9)
+                    .WithLocation(12, 9),
             };
 
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
@@ -11752,7 +11752,7 @@ Test4(() => () => 4);
                     .WithArguments(
                         "Test4<T>(System.Func<System.Linq.Expressions.Expression<System.Func<T>>>)"
                     )
-                    .WithLocation(12, 1)
+                    .WithLocation(12, 1),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -11867,7 +11867,7 @@ class Program
                     .WithArguments(
                         "Program.M2<T>(System.Linq.Expressions.Expression<System.Func<T>>)"
                     )
-                    .WithLocation(14, 9)
+                    .WithLocation(14, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -11941,7 +11941,7 @@ class Program
                     .WithArguments(
                         "Program.M3<T>(System.Linq.Expressions.Expression<System.Func<System.Func<T>>>)"
                     )
-                    .WithLocation(17, 9)
+                    .WithLocation(17, 9),
             };
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -12764,7 +12764,7 @@ class Program
                 //         var d4 = b ? F2 : F2;
                 Diagnostic(ErrorCode.ERR_InvalidQM, "b ? F2 : F2")
                     .WithArguments("method group", "method group")
-                    .WithLocation(10, 18)
+                    .WithLocation(10, 18),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -12893,7 +12893,7 @@ class C
                 //         _ = c + (() => 1);
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "c + (() => 1)")
                     .WithArguments("+", "C", "lambda expression")
-                    .WithLocation(11, 13)
+                    .WithLocation(11, 13),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -12984,7 +12984,7 @@ class C
                 //         _ = c + F;
                 Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F")
                     .WithArguments("F", "System.Linq.Expressions.Expression")
-                    .WithLocation(11, 17)
+                    .WithLocation(11, 17),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -13099,7 +13099,7 @@ class C
                 //         _ = c + F;
                 Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F")
                     .WithArguments("F", "System.Linq.Expressions.Expression")
-                    .WithLocation(11, 17)
+                    .WithLocation(11, 17),
             };
             comp = CreateCompilation(source, parseOptions: TestOptions.Regular10);
             comp.VerifyDiagnostics(expectedDiagnostics);
@@ -14376,7 +14376,7 @@ class Program
                     .Select(h => reader.GetString(h))
                     .ToArray();
 
-                string[] expectedTypes = new[] { "<Module>", "D", "Program", };
+                string[] expectedTypes = new[] { "<Module>", "D", "Program" };
                 AssertEx.Equal(expectedTypes, actualTypes);
             }
         }
@@ -16938,7 +16938,7 @@ public class Program
                 //         SomeMethod((Employee e) => e.Name);
                 Diagnostic(ErrorCode.ERR_AnonMethToNonDel, "=>")
                     .WithArguments("lambda expression", "Program.Field")
-                    .WithLocation(7, 33)
+                    .WithLocation(7, 33),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -16992,7 +16992,7 @@ class Program
                 //         c1 = F;
                 Diagnostic(ErrorCode.ERR_MethGrpToNonDel, "F")
                     .WithArguments("F", "C1")
-                    .WithLocation(18, 14)
+                    .WithLocation(18, 14),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17082,7 +17082,7 @@ class Program
                 //         _ = (C2)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)F")
                     .WithArguments("method", "C2")
-                    .WithLocation(22, 13)
+                    .WithLocation(22, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17195,7 +17195,7 @@ class Program
                 //         _ = (C2)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)F")
                     .WithArguments("method", "C2")
-                    .WithLocation(35, 13)
+                    .WithLocation(35, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17271,7 +17271,7 @@ class Program
                 //         _ = (C<ICloneable>)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C<ICloneable>)F")
                     .WithArguments("method", "C<System.ICloneable>")
-                    .WithLocation(18, 13)
+                    .WithLocation(18, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17378,7 +17378,7 @@ class Program
                 //         _ = (C<MulticastDelegate>)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C<MulticastDelegate>)F")
                     .WithArguments("method", "C<System.MulticastDelegate>")
-                    .WithLocation(23, 13)
+                    .WithLocation(23, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17487,7 +17487,7 @@ class Program
                 //         _ = (C2)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)F")
                     .WithArguments("method", "C2")
-                    .WithLocation(18, 13)
+                    .WithLocation(18, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17564,7 +17564,7 @@ class Program
                 //         _ = (C2)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)F")
                     .WithArguments("method", "C2")
-                    .WithLocation(29, 13)
+                    .WithLocation(29, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17616,7 +17616,7 @@ class Program
                 //         _ = (C<ICloneable>)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C<ICloneable>)F")
                     .WithArguments("method", "C<System.ICloneable>")
-                    .WithLocation(14, 13)
+                    .WithLocation(14, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -17684,7 +17684,7 @@ class Program
                 //         _ = (C<MulticastDelegate>)F;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C<MulticastDelegate>)F")
                     .WithArguments("method", "C<System.MulticastDelegate>")
-                    .WithLocation(17, 13)
+                    .WithLocation(17, 13),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -21189,7 +21189,7 @@ class Program
                         "System.Runtime.CompilerServices.DecimalConstantAttribute",
                         ".ctor"
                     )
-                    .WithLocation(1, 25)
+                    .WithLocation(1, 25),
             };
 
             var comp = CreateCompilation(source);
@@ -21760,7 +21760,7 @@ class Program
                 // new C().M((decimal d = 1.1m) => { });
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("C.M(Del)", "C.M(System.Action<decimal>)")
-                    .WithLocation(1, 9)
+                    .WithLocation(1, 9),
             };
 
             var comp2 = CreateCompilation(source2, new[] { comp1.ToMetadataReference() });
@@ -21856,7 +21856,7 @@ class Program
                         "System.Runtime.CompilerServices.DateTimeConstantAttribute",
                         ".ctor"
                     )
-                    .WithLocation(5, 57)
+                    .WithLocation(5, 57),
             };
 
             var comp = CreateCompilation(source);
@@ -21990,7 +21990,7 @@ class Program
                 // new C().M(([Optional, DateTimeConstant(100L)] DateTime d) => { });
                 Diagnostic(ErrorCode.ERR_AmbigCall, "M")
                     .WithArguments("C.M(Del)", "C.M(System.Action<System.DateTime>)")
-                    .WithLocation(5, 9)
+                    .WithLocation(5, 9),
             };
 
             var comp2 = CreateCompilation(source2, new[] { comp1.ToMetadataReference() });

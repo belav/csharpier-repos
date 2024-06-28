@@ -52,7 +52,7 @@ namespace Microsoft.Interop
                         NotSupportedDetails = string.Format(
                             SR.MarshallingStringOrCharAsUndefinedNotSupported,
                             _stringMarshallingAttribute
-                        )
+                        ),
                     }
                 );
             }
@@ -84,7 +84,7 @@ namespace Microsoft.Interop
                                 NotSupportedDetails = SR.Format(
                                     SR.MarshallingCharAsSpecifiedStringMarshallingNotSupported,
                                     nameof(CharEncoding.Utf8)
-                                )
+                                ),
                             }
                         );
                     case CharEncoding.Custom:
@@ -92,7 +92,7 @@ namespace Microsoft.Interop
                             new(info, context)
                             {
                                 NotSupportedDetails =
-                                    SR.MarshallingCharAsStringMarshallingCustomNotSupported
+                                    SR.MarshallingCharAsStringMarshallingCustomNotSupported,
                             }
                         );
                 }

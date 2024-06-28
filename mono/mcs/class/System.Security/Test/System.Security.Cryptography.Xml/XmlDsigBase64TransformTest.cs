@@ -138,7 +138,7 @@ namespace MonoTests.System.Security.Cryptography.Xml
             0x66,
             0x6F,
             0x72,
-            0x6D
+            0x6D,
         };
 
         private XmlDocument GetDoc()

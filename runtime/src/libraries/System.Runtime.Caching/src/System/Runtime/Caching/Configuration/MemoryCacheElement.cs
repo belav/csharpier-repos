@@ -54,7 +54,7 @@ namespace System.Runtime.Caching.Configuration
                 s_propName,
                 s_propPhysicalMemoryLimitPercentage,
                 s_propCacheMemoryLimitMegabytes,
-                s_propPollingInterval
+                s_propPollingInterval,
             };
 
         internal MemoryCacheElement() { }

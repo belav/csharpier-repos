@@ -35,7 +35,7 @@ namespace System.CodeDom.Compiler.Tests
             {
                 PathToAssembly = AssemblyPathHelper.GetAssemblyLocation(
                     typeof(CompilerResultsTests).Assembly
-                )
+                ),
             };
 
             Assert.NotNull(results.CompiledAssembly);

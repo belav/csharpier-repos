@@ -24,28 +24,28 @@ namespace DebuggerTests
                 type_name,
                 "InstanceMethod",
                 $"{type_name}.InstanceMethod",
-                false
+                false,
             };
             yield return new object[]
             {
                 type_name,
                 "GenericInstanceMethod",
                 $"{type_name}.GenericInstanceMethod<int>",
-                false
+                false,
             };
             yield return new object[]
             {
                 type_name,
                 "InstanceMethodAsync",
                 $"{type_name}.InstanceMethodAsync",
-                true
+                true,
             };
             yield return new object[]
             {
                 type_name,
                 "GenericInstanceMethodAsync",
                 $"{type_name}.GenericInstanceMethodAsync<int>",
-                true
+                true,
             };
 
             // TODO: { "DebuggerTests.EvaluateTestsGeneric`1", "Instance", 9, "EvaluateTestsGenericStructInstanceMethod", prefix }
@@ -687,7 +687,7 @@ namespace DebuggerTests
                                         "DebuggerTests.SampleClass",
                                         description: "DebuggerTests.SampleClass"
                                     )
-                                )
+                                ),
                             },
                             "testNoneProps#1"
                         );
@@ -711,7 +711,7 @@ namespace DebuggerTests
                                 sampleClass = TObject(
                                     "DebuggerTests.SampleClass",
                                     description: "DebuggerTests.SampleClass"
-                                )
+                                ),
                             },
                             "testNoneProps#1"
                         );
@@ -951,7 +951,7 @@ namespace DebuggerTests
                                         "DebuggerTests.SampleClass",
                                         description: "DebuggerTests.SampleClass"
                                     )
-                                )
+                                ),
                             },
                             "testCollapsedProps#1"
                         );
@@ -975,7 +975,7 @@ namespace DebuggerTests
                                 sampleClassCollapsed = TObject(
                                     "DebuggerTests.SampleClass",
                                     description: "DebuggerTests.SampleClass"
-                                )
+                                ),
                             },
                             "testCollapsedProps#1"
                         );
@@ -1107,9 +1107,9 @@ namespace DebuggerTests
                                     "System.Collections.Generic.List<string>",
                                     description: "Count = 1"
                                 ),
-                                name = "sampleClassRootHidden.Items"
+                                name = "sampleClassRootHidden.Items",
                             }
-                        )
+                        ),
                     };
                     await CheckProps(
                         testRootHiddenProps,

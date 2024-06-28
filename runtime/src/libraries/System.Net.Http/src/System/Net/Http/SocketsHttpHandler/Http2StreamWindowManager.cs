@@ -182,7 +182,7 @@ namespace System.Net.Http
                 Init,
                 Waiting,
                 PingSent,
-                TerminatingMayReceivePingAck
+                TerminatingMayReceivePingAck,
             }
 
             private const double PingIntervalInSeconds = 2;

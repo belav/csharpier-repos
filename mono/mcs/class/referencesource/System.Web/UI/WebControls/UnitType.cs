@@ -79,6 +79,6 @@ namespace System.Web.UI.WebControls
             "CA1711:IdentifiersShouldNotHaveIncorrectSuffix",
             Justification = "This is the correct name for a unit of measurement."
         )]
-        Ex = 9
+        Ex = 9,
     }
 }

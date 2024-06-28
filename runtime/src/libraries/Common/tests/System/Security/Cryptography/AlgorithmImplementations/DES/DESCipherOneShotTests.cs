@@ -1235,7 +1235,7 @@ namespace System.Security.Cryptography.Encryption.Des.Tests
                     // plaintext
                     Array.Empty<byte>(),
                     // ciphertext
-                    new byte[] { 0xED, 0xD9, 0xE3, 0xFC, 0xC6, 0x55, 0xDC, 0x32, },
+                    new byte[] { 0xED, 0xD9, 0xE3, 0xFC, 0xC6, 0x55, 0xDC, 0x32 },
                     PaddingMode.PKCS7,
                     CipherMode.ECB,
                 };

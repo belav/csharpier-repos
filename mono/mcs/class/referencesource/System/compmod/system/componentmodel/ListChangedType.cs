@@ -49,6 +49,6 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        PropertyDescriptorChanged
+        PropertyDescriptorChanged,
     }
 }

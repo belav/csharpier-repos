@@ -123,7 +123,7 @@ namespace System.CommandLine.Tests
         public async Task It_writes_suggestions_for_partial_option_aliases_under_root_command()
         {
             CliRootCommand rootCommand = new() { _fruitOption, _vegetableOption };
-            CliConfiguration config = new(rootCommand) { Output = new StringWriter(), };
+            CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("[suggest:1] \"f\"", config);
 
@@ -148,7 +148,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public async Task It_writes_suggestions_for_partial_option_and_subcommand_aliases_under_root_command()
         {
-            CliRootCommand rootCommand = new() { _eatCommand, new CliCommand("wash-dishes"), };
+            CliRootCommand rootCommand = new() { _eatCommand, new CliCommand("wash-dishes") };
             CliConfiguration config = new(rootCommand) { Output = new StringWriter() };
 
             var result = rootCommand.Parse("[suggest:5] \"--ver\"", config);
@@ -167,7 +167,7 @@ namespace System.CommandLine.Tests
                     new CliCommand("child"),
                     new CliOption<bool>("--option1"),
                     new CliOption<bool>("--option2"),
-                    new CliArgument<string>("arg")
+                    new CliArgument<string>("arg"),
                 };
             CliConfiguration config = new(command) { Output = new StringWriter() };
 

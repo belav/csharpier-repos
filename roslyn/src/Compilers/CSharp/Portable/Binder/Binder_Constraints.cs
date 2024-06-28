@@ -624,7 +624,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     TypeSymbol typeSymbol => typeSymbol,
                     LocalFunctionSymbol => null,
                     MethodSymbol method => (TypeSymbol)method.ContainingSymbol,
-                    _ => throw ExceptionUtilities.UnexpectedValue(containingSymbol)
+                    _ => throw ExceptionUtilities.UnexpectedValue(containingSymbol),
                 };
                 Debug.Assert(possibleFileType?.IsDefinition != false);
                 if (possibleFileType?.HasFileLocalTypes() == false)

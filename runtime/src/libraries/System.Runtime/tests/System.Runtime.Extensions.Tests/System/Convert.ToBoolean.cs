@@ -17,7 +17,7 @@ namespace System.Tests
         [Fact]
         public void FromByte()
         {
-            byte[] testValues = { byte.MinValue, byte.MaxValue, };
+            byte[] testValues = { byte.MinValue, byte.MaxValue };
             bool[] expectedValues = { false, true };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
@@ -35,7 +35,7 @@ namespace System.Tests
                 0.0m,
                 1.5m,
                 -1.5m,
-                500.00m
+                500.00m,
             };
             bool[] expectedValues = { true, true, true, false, false, false, true, true, true };
             Verify(Convert.ToBoolean, testValues, expectedValues);
@@ -59,7 +59,7 @@ namespace System.Tests
                 1.5e300,
                 -1.7e-500,
                 -1.7e300,
-                -1.7e-320
+                -1.7e-320,
             };
             bool[] expectedValues =
             {
@@ -76,7 +76,7 @@ namespace System.Tests
                 true,
                 false,
                 true,
-                true
+                true,
             };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
@@ -101,7 +101,7 @@ namespace System.Tests
         public void FromInt64()
         {
             long[] testValues = { long.MinValue, long.MaxValue, 0 };
-            bool[] expectedValues = { true, true, false, };
+            bool[] expectedValues = { true, true, false };
             Verify(Convert.ToBoolean, testValues, expectedValues);
         }
 
@@ -118,7 +118,7 @@ namespace System.Tests
                 " false ",
                 " false",
                 "false ",
-                "False"
+                "False",
             };
             bool[] expectedValues = { false, true, true, true, true, false, false, false, false };
             VerifyFromString(Convert.ToBoolean, Convert.ToBoolean, testValues, expectedValues);

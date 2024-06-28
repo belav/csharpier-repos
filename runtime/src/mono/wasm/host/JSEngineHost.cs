@@ -45,7 +45,7 @@ internal sealed class JSEngineHost
             WasmHost.JavaScriptCore => "jsc",
             WasmHost.SpiderMonkey => "sm",
             WasmHost.NodeJS => "node",
-            _ => throw new CommandLineException($"Unsupported engine {_args.Host}")
+            _ => throw new CommandLineException($"Unsupported engine {_args.Host}"),
         };
 
         if (

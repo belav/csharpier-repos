@@ -99,7 +99,7 @@ End Class",
                 LanguageNames.CSharp => typeof(CSharp.LanguageServer.CSharpLspBuildOnlyDiagnostics),
                 LanguageNames.VisualBasic =>
                     typeof(VisualBasic.LanguageServer.VisualBasicLspBuildOnlyDiagnostics),
-                _ => null
+                _ => null,
             };
 
             if (compilerBuildOnlyDiagnosticsType != null)

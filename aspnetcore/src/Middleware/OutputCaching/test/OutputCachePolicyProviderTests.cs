@@ -27,7 +27,7 @@ public class OutputCachePolicyProviderTests
                 HttpMethods.Connect,
                 HttpMethods.Options,
                 "",
-                null
+                null,
             };
         }
     }
@@ -90,7 +90,7 @@ public class OutputCachePolicyProviderTests
         context.HttpContext.Request.Method = HttpMethods.Get;
         context.HttpContext.Request.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            NoStore = true
+            NoStore = true,
         }.ToString();
 
         var policy = new OutputCachePolicyBuilder().Build();
@@ -137,7 +137,7 @@ public class OutputCachePolicyProviderTests
         var context = TestUtils.CreateTestContext(testSink: sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Public = true
+            Public = true,
         }.ToString();
 
         var policy = new OutputCachePolicyBuilder().Build();
@@ -155,7 +155,7 @@ public class OutputCachePolicyProviderTests
         var context = TestUtils.CreateTestContext(testSink: sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            NoCache = true
+            NoCache = true,
         }.ToString();
 
         var policy = new OutputCachePolicyBuilder().Build();
@@ -173,7 +173,7 @@ public class OutputCachePolicyProviderTests
         var context = TestUtils.CreateTestContext(testSink: sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            NoStore = true
+            NoStore = true,
         }.ToString();
 
         var policy = new OutputCachePolicyBuilder().Build();
@@ -219,7 +219,7 @@ public class OutputCachePolicyProviderTests
         var context = TestUtils.CreateTestContext(testSink: sink);
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            Private = true
+            Private = true,
         }.ToString();
 
         var policy = new OutputCachePolicyBuilder().Build();
@@ -349,7 +349,7 @@ public class OutputCachePolicyProviderTests
         context.HttpContext.Response.StatusCode = StatusCodes.Status200OK;
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
-            MaxAge = TimeSpan.FromSeconds(10)
+            MaxAge = TimeSpan.FromSeconds(10),
         }.ToString();
         context.HttpContext.Response.Headers.Expires = HeaderUtilities.FormatDate(utcNow);
         context.HttpContext.Response.Headers.Date = HeaderUtilities.FormatDate(utcNow);
@@ -373,7 +373,7 @@ public class OutputCachePolicyProviderTests
         context.HttpContext.Response.Headers.CacheControl = new CacheControlHeaderValue()
         {
             MaxAge = TimeSpan.FromSeconds(10),
-            SharedMaxAge = TimeSpan.FromSeconds(15)
+            SharedMaxAge = TimeSpan.FromSeconds(15),
         }.ToString();
         context.HttpContext.Response.Headers.Date = HeaderUtilities.FormatDate(utcNow);
         context.ResponseTime = utcNow + TimeSpan.FromSeconds(11);

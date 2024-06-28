@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis
         private static readonly XmlReaderSettings s_xmlSettings = new XmlReaderSettings()
         {
             // Dev12 prohibits DTD
-            DtdProcessing = DtdProcessing.Prohibit
+            DtdProcessing = DtdProcessing.Prohibit,
         };
 
         /// <exception cref="IOException"></exception>

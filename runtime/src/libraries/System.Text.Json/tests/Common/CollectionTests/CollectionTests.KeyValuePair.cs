@@ -221,7 +221,7 @@ namespace System.Text.Json.Serialization.Tests
             List<KeyValuePair<string, int>> input = new List<KeyValuePair<string, int>>
             {
                 new KeyValuePair<string, int>("123", 123),
-                new KeyValuePair<string, int>("456", 456)
+                new KeyValuePair<string, int>("456", 456),
             };
 
             string json = await Serializer.SerializeWrapper(input);
@@ -371,7 +371,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = new LeadingUnderscorePolicy()
+                PropertyNamingPolicy = new LeadingUnderscorePolicy(),
             };
 
             string serialized = await Serializer.SerializeWrapper(kvp, options);
@@ -411,7 +411,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = new LeadingUnderscorePolicy() // Key -> _Key, Value -> _Value
+                PropertyNamingPolicy =
+                    new LeadingUnderscorePolicy() // Key -> _Key, Value -> _Value
+                ,
             };
 
             // Payloads not compliant with naming policy won't yield matches.
@@ -434,7 +436,7 @@ namespace System.Text.Json.Serialization.Tests
             options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = new LeadingUnderscorePolicy(),
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
             };
 
             kvp = await Serializer.DeserializeWrapper<KeyValuePair<string, int>>(json, options);
@@ -455,7 +457,7 @@ namespace System.Text.Json.Serialization.Tests
             JsonNamingPolicy namingPolicy = new TrailingAngleBracketPolicy();
 
             // Baseline - properties serialized with default encoder if none specified.
-            var options = new JsonSerializerOptions { PropertyNamingPolicy = namingPolicy, };
+            var options = new JsonSerializerOptions { PropertyNamingPolicy = namingPolicy };
 
             Assert.Equal(
                 @"{""Key\u003C"":1,""Value\u003C"":2}",
@@ -466,7 +468,7 @@ namespace System.Text.Json.Serialization.Tests
             options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = namingPolicy,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
             };
 
             Assert.Equal(
@@ -487,7 +489,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = (JsonNamingPolicy)Activator.CreateInstance(policyType)
+                PropertyNamingPolicy = (JsonNamingPolicy)Activator.CreateInstance(policyType),
             };
 
             InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -574,7 +576,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = new LeadingUnderscorePolicy()
+                PropertyNamingPolicy = new LeadingUnderscorePolicy(),
             };
             JsonException ex = await Assert.ThrowsAsync<JsonException>(
                 async () =>

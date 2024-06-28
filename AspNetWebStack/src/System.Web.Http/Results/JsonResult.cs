@@ -171,7 +171,7 @@ namespace System.Web.Http.Results
                     using (
                         JsonWriter jsonWriter = new JsonTextWriter(textWriter)
                         {
-                            CloseOutput = false
+                            CloseOutput = false,
                         }
                     )
                     {

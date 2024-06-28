@@ -150,7 +150,7 @@ public abstract class BenchTask
                     span = ts + initTs,
                     steps = steps + initialSamples,
                     taskName = task.Name,
-                    measurementName = Name
+                    measurementName = Name,
                 };
             }
             catch (Exception ex)
@@ -163,7 +163,7 @@ public abstract class BenchTask
                     span = ts,
                     steps = currentStep + initialSamples,
                     taskName = task.Name,
-                    measurementName = Name + " " + ex.Message
+                    measurementName = Name + " " + ex.Message,
                 };
             }
         }

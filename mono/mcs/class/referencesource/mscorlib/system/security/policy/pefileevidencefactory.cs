@@ -38,7 +38,7 @@ namespace System.Security.Policy
         Site,
         StrongName,
         Url,
-        Zone
+        Zone,
     }
 
     /// <summary>

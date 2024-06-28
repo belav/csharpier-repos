@@ -122,11 +122,7 @@ public class HtmlHelperTextBoxExtensionsTest
     public void TextBox_UsesSpecifiedHtmlAttributes()
     {
         // Arrange
-        var htmlAttributes = new
-        {
-            attr = "value",
-            name = "-expression-", // overridden
-        };
+        var htmlAttributes = new { attr = "value", name = "-expression-" };
 
         var model = new TestModel { Property1 = "propValue" };
 
@@ -148,11 +144,7 @@ public class HtmlHelperTextBoxExtensionsTest
     public void TextBoxFor_UsesSpecifiedHtmlAttributes()
     {
         // Arrange
-        var htmlAttributes = new
-        {
-            attr = "value",
-            name = "-expression-", // overridden
-        };
+        var htmlAttributes = new { attr = "value", name = "-expression-" };
 
         var model = new TestModel { Property1 = "propValue" };
 
@@ -179,7 +171,7 @@ public class HtmlHelperTextBoxExtensionsTest
             + "Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.Editor or Microsoft.AspNetCore.Mvc.Rendering."
             + "IHtmlHelper`1.EditorFor with a non-empty htmlFieldName argument value.";
 
-        var htmlAttributes = new { attr = "value", };
+        var htmlAttributes = new { attr = "value" };
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper("propValue");
         helper.ViewContext.ClientValidationEnabled = false;
@@ -196,7 +188,7 @@ public class HtmlHelperTextBoxExtensionsTest
     public void TextBoxFor_DoesNotThrow_IfFullNameEmpty_WithNameAttribute()
     {
         // Arrange
-        var htmlAttributes = new { attr = "value", name = "-expression-", };
+        var htmlAttributes = new { attr = "value", name = "-expression-" };
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper("propValue");
         helper.ViewContext.ClientValidationEnabled = false;

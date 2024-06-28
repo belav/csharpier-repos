@@ -35,6 +35,6 @@ namespace System.Configuration
         BasicMap = 0,
         AddRemoveClearMap = 1,
         BasicMapAlternate = 2,
-        AddRemoveClearMapAlternate = 3
+        AddRemoveClearMapAlternate = 3,
     }
 }

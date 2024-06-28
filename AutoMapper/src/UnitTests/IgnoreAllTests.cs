@@ -202,7 +202,7 @@ public class ReverseMapIgnoreAttributeTests
         Destination source = new Destination
         {
             ShouldBeMapped = "Value1",
-            ShouldNotBeMapped = "Value2"
+            ShouldNotBeMapped = "Value2",
         };
 
         Source destination = config.CreateMapper().Map<Destination, Source>(source);

@@ -1489,7 +1489,7 @@ namespace Mono.Xml.XPath2
         GeneralGE,
         NodeIs,
         NodeFWD,
-        NodeBWD
+        NodeBWD,
     }
 
     // Range
@@ -1542,7 +1542,7 @@ namespace Mono.Xml.XPath2
         Mul,
         Div,
         IDiv,
-        IMod
+        IMod,
     }
 
     internal class ArithmeticOperationExpr : BinaryOperationExpr
@@ -1669,7 +1669,7 @@ namespace Mono.Xml.XPath2
     {
         Union,
         Intersect,
-        Except
+        Except,
     }
 
     internal class GroupExpr : BinaryOperationExpr

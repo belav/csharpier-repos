@@ -282,7 +282,7 @@ public class ParameterBindingMethodCacheTests
             )
             .Compile();
 
-        var httpContext = new DefaultHttpContext { Request = { Headers = { ["ETag"] = "42", }, }, };
+        var httpContext = new DefaultHttpContext { Request = { Headers = { ["ETag"] = "42" } } };
 
         Assert.Equal(new BindAsyncRecord(42), await parseHttpContext(httpContext));
     }
@@ -307,7 +307,7 @@ public class ParameterBindingMethodCacheTests
             )
             .Compile();
 
-        var httpContext = new DefaultHttpContext { Request = { Headers = { ["ETag"] = "42", }, }, };
+        var httpContext = new DefaultHttpContext { Request = { Headers = { ["ETag"] = "42" } } };
 
         Assert.Equal(new BindAsyncSingleArgStruct(42), await parseHttpContext(httpContext));
     }
@@ -318,8 +318,8 @@ public class ParameterBindingMethodCacheTests
         {
             return new[]
             {
-                new[] { GetFirstParameter((BindAsyncRecord arg) => BindAsyncRecordMethod(arg)), },
-                new[] { GetFirstParameter((BindAsyncStruct arg) => BindAsyncStructMethod(arg)), },
+                new[] { GetFirstParameter((BindAsyncRecord arg) => BindAsyncRecordMethod(arg)) },
+                new[] { GetFirstParameter((BindAsyncStruct arg) => BindAsyncStructMethod(arg)) },
                 new[]
                 {
                     GetFirstParameter(
@@ -338,41 +338,41 @@ public class ParameterBindingMethodCacheTests
                     GetFirstParameter(
                         (InheritBindAsyncWithParameterInfo arg) =>
                             InheritBindAsyncWithParameterInfoMethod(arg)
-                    )
+                    ),
                 },
                 new[]
                 {
                     GetFirstParameter(
                         (BindAsyncFromInterface arg) => BindAsyncFromInterfaceMethod(arg)
-                    )
+                    ),
                 },
                 new[]
                 {
                     GetFirstParameter(
                         (BindAsyncFromGrandparentInterface arg) =>
                             BindAsyncFromGrandparentInterfaceMethod(arg)
-                    )
+                    ),
                 },
                 new[]
                 {
                     GetFirstParameter(
                         (BindAsyncDirectlyAndFromInterface arg) =>
                             BindAsyncDirectlyAndFromInterfaceMethod(arg)
-                    )
+                    ),
                 },
                 new[]
                 {
                     GetFirstParameter(
                         (BindAsyncFromClassAndInterface arg) =>
                             BindAsyncFromClassAndInterfaceMethod(arg)
-                    )
+                    ),
                 },
                 new[]
                 {
                     GetFirstParameter(
                         (BindAsyncFromInterfaceWithParameterInfo arg) =>
                             BindAsyncFromInterfaceWithParameterInfoMethod(arg)
-                    )
+                    ),
                 },
                 new[]
                 {
@@ -381,7 +381,7 @@ public class ParameterBindingMethodCacheTests
                             BindAsyncFromImplicitStaticAbstractInterfaceMethodInsteadOfReflectionMatchedMethod(
                                 arg
                             )
-                    )
+                    ),
                 },
             };
         }
@@ -736,7 +736,7 @@ public class ParameterBindingMethodCacheTests
                 typeof(BindAsyncWithParameterInfoWrongTypeInherit),
                 typeof(BindAsyncWrongTypeFromInterface),
                 typeof(BindAsyncBothBadMethods),
-                typeof(BindAsyncFromStaticAbstractInterfaceWrongType)
+                typeof(BindAsyncFromStaticAbstractInterfaceWrongType),
             };
         }
     }
@@ -888,7 +888,7 @@ public class ParameterBindingMethodCacheTests
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     private static void TryParseStringRecordMethod(TryParseStringRecord arg) { }
@@ -1722,7 +1722,7 @@ public class ParameterBindingMethodCacheTests
     {
         Reflection,
         InterfaceStaticAbstractImplicit,
-        InterfaceStaticAbstractExplicit
+        InterfaceStaticAbstractExplicit,
     }
 
     private class MockParameterInfo : ParameterInfo

@@ -494,6 +494,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x12,
                     0x04,
                     0x00 // compressed data
+                    ,
                 }
             );
 
@@ -525,6 +526,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x12,
                     0x04,
                     0x00 // compressed data
+                    ,
                 }
             );
 
@@ -556,6 +558,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x12,
                     0x04,
                     0x00 // compressed data
+                    ,
                 }
             );
 
@@ -587,6 +590,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x12,
                     0x04,
                     0x00 // compressed data
+                    ,
                 }
             );
 
@@ -618,6 +622,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x12,
                     0x04,
                     0x00 // compressed data
+                    ,
                 }
             );
 
@@ -649,6 +654,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x12,
                     0x04,
                     0x00 // compressed data
+                    ,
                 }
             );
 
@@ -709,7 +715,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x08,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 }
             );
 
@@ -736,6 +742,7 @@ namespace System.Reflection.PortableExecutable.Tests
                     0x03,
                     0x04,
                     0x05 // checksum
+                    ,
                 }
             );
 
@@ -757,6 +764,7 @@ namespace System.Reflection.PortableExecutable.Tests
                 0x03,
                 0x04,
                 0x05 // checksum
+                ,
             }
         )]
         [InlineData(new byte[] { 0x01, 0x01, 0x02, 0x03, 0x04, 0x05 })]

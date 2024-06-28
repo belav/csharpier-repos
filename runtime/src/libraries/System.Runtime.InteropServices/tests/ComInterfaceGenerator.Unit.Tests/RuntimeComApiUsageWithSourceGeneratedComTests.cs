@@ -613,7 +613,7 @@ namespace ComInterfaceGenerator.Unit.Tests
             var test = new VerifyCS.Test
             {
                 TestCode = source,
-                MarkupOptions = Microsoft.CodeAnalysis.Testing.MarkupOptions.UseFirstDescriptor
+                MarkupOptions = Microsoft.CodeAnalysis.Testing.MarkupOptions.UseFirstDescriptor,
             };
 
             return test.RunAsync(CancellationToken.None);
@@ -626,7 +626,7 @@ namespace ComInterfaceGenerator.Unit.Tests
                 MarkupOptions = Microsoft.CodeAnalysis.Testing.MarkupOptions.UseFirstDescriptor,
                 TestState =
                 {
-                    Sources = { source, },
+                    Sources = { source },
                     AnalyzerConfigFiles =
                     {
                         (
@@ -635,9 +635,9 @@ namespace ComInterfaceGenerator.Unit.Tests
                             is_global = true
                             build_property.EnableGeneratedComInterfaceComImportInterop = true
                             """
-                        )
-                    }
-                }
+                        ),
+                    },
+                },
             };
 
             return test.RunAsync(CancellationToken.None);

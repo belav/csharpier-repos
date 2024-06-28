@@ -294,7 +294,7 @@ public class StoredProcedure
                 RelationalAnnotationNames.DeleteStoredProcedure,
             StoreObjectType.UpdateStoredProcedure =>
                 RelationalAnnotationNames.UpdateStoredProcedure,
-            _ => throw new InvalidOperationException("Unsopported sproc type " + sprocType)
+            _ => throw new InvalidOperationException("Unsopported sproc type " + sprocType),
         };
 
     /// <inheritdoc />

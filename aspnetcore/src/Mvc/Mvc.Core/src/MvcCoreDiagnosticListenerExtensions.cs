@@ -914,7 +914,7 @@ internal static class MvcCoreDiagnosticListenerExtensions
                 {
                     actionContext,
                     actionArguments,
-                    controller
+                    controller,
                 }
             );
         }
@@ -995,7 +995,7 @@ internal static class MvcCoreDiagnosticListenerExtensions
                     actionContext,
                     actionArguments,
                     controller,
-                    result
+                    result,
                 }
             );
         }

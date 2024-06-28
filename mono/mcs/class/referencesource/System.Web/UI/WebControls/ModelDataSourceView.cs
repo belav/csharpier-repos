@@ -546,7 +546,7 @@ namespace System.Web.UI.WebControls
             {
                 ModelType = modelType,
                 AutoPage = autoPage,
-                AutoSort = autoSort
+                AutoSort = autoSort,
             };
             EvaluateMethodParameters(DataSourceOperation.Select, method, mergedParameters);
             return method;
@@ -638,7 +638,7 @@ namespace System.Web.UI.WebControls
                         result.ReturnValue,
                         autoPage ? (int?)arguments.StartRowIndex : null,
                         autoPage ? (int?)arguments.MaximumRows : null,
-                        autoSort ? sortExpression : null
+                        autoSort ? sortExpression : null,
                     }
                 );
                 return returnValue;
@@ -1514,7 +1514,7 @@ namespace System.Web.UI.WebControls
                         ModelState = modelState,
                         ModelName = modelName,
                         ValueProvider = customValueProvider,
-                        ValidateRequest = validateRequest
+                        ValidateRequest = validateRequest,
                     };
 
                     //Select parameters that take custom values providers are tracked by ViewState so that

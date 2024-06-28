@@ -83,7 +83,7 @@ namespace System.Text.RegularExpressions.Tests
                 // lower bound int.MaxValue is never unfolded and treated as infinity
                 ("(a{2147483647,})", 2),
                 // typical case that blows up the DFA size to 2^100 when .* is added at the beginning (below)
-                ("a.{100}b", 103)
+                ("a.{100}b", 103),
             };
 
             foreach ((string Pattern, int ExpectedSafeSize) in patternData)

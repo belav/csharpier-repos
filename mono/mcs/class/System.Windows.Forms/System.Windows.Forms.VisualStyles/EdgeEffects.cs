@@ -35,6 +35,6 @@ namespace System.Windows.Forms.VisualStyles
         FillInterior = 2048,
         Flat = 4096,
         Soft = 16384,
-        Mono = 32768
+        Mono = 32768,
     }
 }

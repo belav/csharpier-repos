@@ -208,7 +208,7 @@ namespace System.IO
         internal static readonly char[] InvalidChars =
         {
             Path.DirectorySeparatorChar,
-            Path.AltDirectorySeparatorChar
+            Path.AltDirectorySeparatorChar,
         };
 
         private class Op
@@ -232,6 +232,7 @@ namespace System.IO
             AnyString, // *
             End, // end of pattern
             True // always succeeds
+            ,
         };
     }
 }

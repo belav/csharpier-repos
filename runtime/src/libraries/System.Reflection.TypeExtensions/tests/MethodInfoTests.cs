@@ -126,37 +126,37 @@ namespace System.Reflection.Tests
             {
                 typeof(MI_GenericClass<int>),
                 nameof(MI_GenericClass<int>.TestGenericMethod),
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(MI_NonGenericClass),
                 nameof(MI_NonGenericClass.TestGenericMethod),
-                new string[] { "T", "U" }
+                new string[] { "T", "U" },
             };
             yield return new object[]
             {
                 typeof(MI_NonGenericClass),
                 nameof(MI_NonGenericClass.TestPartialGenericMethod),
-                new string[] { "T" }
+                new string[] { "T" },
             };
             yield return new object[]
             {
                 typeof(MI_GenericClass<int>),
                 nameof(MI_GenericClass<int>.TestMultipleGenericMethod),
-                new string[] { "U" }
+                new string[] { "U" },
             };
             yield return new object[]
             {
                 typeof(MI_GenericClass<>),
                 nameof(MI_GenericClass<int>.TestMethod),
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(MI_GenericClass<>),
                 nameof(MI_GenericClass<int>.TestGenericReturnTypeMethod),
-                new string[0]
+                new string[0],
             };
         }
 

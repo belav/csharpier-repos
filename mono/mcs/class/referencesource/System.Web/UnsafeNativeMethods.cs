@@ -411,7 +411,7 @@ namespace System.Web
         internal enum DeploymentDirectoryType
         {
             ddtInstallationDependentDirectory = 0,
-            ddtInstallationIndependentDirectory
+            ddtInstallationIndependentDirectory,
         }
 
         [DllImport(
@@ -912,7 +912,7 @@ namespace System.Web
             RestrictIISFolders = 2,
             CreateTempDir = 3,
             GetAutogenKeys = 4,
-            GenerateToken = 5
+            GenerateToken = 5,
         };
 
         [DllImport(ModName.ENGINE_FULL_NAME)]
@@ -1467,7 +1467,7 @@ namespace System.Web
             Initialization = 0,
             Connecting,
             SendingRequest,
-            ReadingResponse
+            ReadingResponse,
         };
 
         internal enum StateProtocolVerb

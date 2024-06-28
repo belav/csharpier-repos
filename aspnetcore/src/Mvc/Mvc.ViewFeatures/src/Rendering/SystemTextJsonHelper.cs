@@ -40,9 +40,6 @@ internal sealed class SystemTextJsonHelper : IJsonHelper
             return serializerOptions;
         }
 
-        return new JsonSerializerOptions(serializerOptions)
-        {
-            Encoder = JavaScriptEncoder.Default,
-        };
+        return new JsonSerializerOptions(serializerOptions) { Encoder = JavaScriptEncoder.Default };
     }
 }

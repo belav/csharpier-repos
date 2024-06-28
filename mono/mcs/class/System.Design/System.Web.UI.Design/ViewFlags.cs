@@ -39,6 +39,6 @@ namespace System.Web.UI.Design
     {
         CustomPaint = 1,
         DesignTimeHtmlRequiresLoadComplete = 2,
-        TemplateEditing = 4
+        TemplateEditing = 4,
     }
 }

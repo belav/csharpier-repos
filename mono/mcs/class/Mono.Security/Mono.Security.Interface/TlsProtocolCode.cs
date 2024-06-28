@@ -32,6 +32,6 @@ namespace Mono.Security.Interface
     {
         Tls10 = 0x301,
         Tls11 = 0x302,
-        Tls12 = 0x303
+        Tls12 = 0x303,
     }
 }

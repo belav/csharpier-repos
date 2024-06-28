@@ -411,20 +411,17 @@ namespace ILCompiler
             string inputFileExtension = Path.GetExtension(inFilePath);
             string nearOutFilePath = inputFileExtension switch
             {
-                ".dll" =>
-                    Path.ChangeExtension(
-                        inFilePath,
-                        _singleFileCompilation && _inputBubble ? ".ni.dll.tmp" : ".ni.dll"
-                    ),
-                ".exe" =>
-                    Path.ChangeExtension(
-                        inFilePath,
-                        _singleFileCompilation && _inputBubble ? ".ni.exe.tmp" : ".ni.exe"
-                    ),
-                _ =>
-                    throw new CommandLineException(
-                        string.Format(SR.UnsupportedInputFileExtension, inputFileExtension)
-                    )
+                ".dll" => Path.ChangeExtension(
+                    inFilePath,
+                    _singleFileCompilation && _inputBubble ? ".ni.dll.tmp" : ".ni.dll"
+                ),
+                ".exe" => Path.ChangeExtension(
+                    inFilePath,
+                    _singleFileCompilation && _inputBubble ? ".ni.exe.tmp" : ".ni.exe"
+                ),
+                _ => throw new CommandLineException(
+                    string.Format(SR.UnsupportedInputFileExtension, inputFileExtension)
+                ),
             };
 
             string outFile = _outNearInput ? nearOutFilePath : _outputFilePath;
@@ -1165,7 +1162,7 @@ namespace ILCompiler
                     .UseExtendedHelp(Crossgen2RootCommand.GetExtendedHelp)
             )
             {
-                ResponseFileTokenReplacer = Helpers.TryReadResponseFile
+                ResponseFileTokenReplacer = Helpers.TryReadResponseFile,
             }.Invoke(args);
     }
 }

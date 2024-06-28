@@ -39,7 +39,7 @@ public enum Foo
 {
     A,
     B,
-    C
+    C,
 }
 
 public class Bla : Iface

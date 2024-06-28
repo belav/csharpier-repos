@@ -48,7 +48,7 @@ public class RequiredRouteConstraintTests
                 {
                     controller = "Home",
                     action = "Index",
-                    area = (string)null
+                    area = (string)null,
                 }
             ),
             direction
@@ -76,7 +76,7 @@ public class RequiredRouteConstraintTests
                 {
                     controller = "Home",
                     action = "Index",
-                    area = string.Empty
+                    area = string.Empty,
                 }
             ),
             direction
@@ -104,7 +104,7 @@ public class RequiredRouteConstraintTests
                 {
                     controller = "Home",
                     action = "Index",
-                    area = "Store"
+                    area = "Store",
                 }
             ),
             direction

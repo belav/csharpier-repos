@@ -193,7 +193,7 @@ public class BatchingLoggerProviderTests
                         BatchSize = maxBatchSize,
                         BackgroundQueueSize = maxQueueSize,
                         IsEnabled = true,
-                        IncludeScopes = includeScopes
+                        IncludeScopes = includeScopes,
                     }
                 )
             ) { }

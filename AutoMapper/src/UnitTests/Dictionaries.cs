@@ -92,7 +92,7 @@ namespace AutoMapper.UnitTests
                             "Key2",
                             new SourceValue { Value = 10 }
                         },
-                    }
+                    },
                 };
 
                 _result = Mapper.Map<Source, Destination>(source);
@@ -157,7 +157,7 @@ namespace AutoMapper.UnitTests
                             "Key2",
                             new SourceValue { Value = 10 }
                         },
-                    }
+                    },
                 };
 
                 _result = Mapper.Map<Source, Destination>(source);
@@ -240,8 +240,8 @@ namespace AutoMapper.UnitTests
                     {
                         { "A", "AAA" },
                         { "B", "BBB" },
-                        { "C", "CCC" }
-                    }
+                        { "C", "CCC" },
+                    },
                 };
 
                 _dest = Mapper.Map<
@@ -445,8 +445,8 @@ namespace AutoMapper.UnitTests
                     Values = new List<DestinationValuePair>
                     {
                         new DestinationValuePair { Key = "Key1", Value = "Value1" },
-                        new DestinationValuePair { Key = "Key2", Value = "Value2" }
-                    }.ToArray()
+                        new DestinationValuePair { Key = "Key2", Value = "Value2" },
+                    }.ToArray(),
                 };
 
                 _result = Mapper.Map<FooDto, FooObject>(source);
@@ -522,8 +522,8 @@ namespace AutoMapper.UnitTests
                 Values = new List<DestinationValuePair>
                 {
                     new DestinationValuePair { Key = "Key1", Value = "Value1" },
-                    new DestinationValuePair { Key = "Key2", Value = "Value2" }
-                }.ToArray()
+                    new DestinationValuePair { Key = "Key2", Value = "Value2" },
+                }.ToArray(),
             };
 
             _result = Mapper.Map<FooDto, FooObject>(source);
@@ -574,8 +574,8 @@ namespace AutoMapper.UnitTests
                 Values = new List<DestinationValuePair>
                 {
                     new DestinationValuePair { Key = "Key1", Value = "Value1" },
-                    new DestinationValuePair { Key = "Key2", Value = "Value2" }
-                }.ToArray()
+                    new DestinationValuePair { Key = "Key2", Value = "Value2" },
+                }.ToArray(),
             };
 
             _result = Mapper.Map<FooDto, FooObject>(source);

@@ -26,7 +26,7 @@ public class SqliteNetTopologySuiteMemberTranslatorPlugin : IMemberTranslatorPlu
             new SqliteLineStringMemberTranslator(sqlExpressionFactory),
             new SqliteMultiLineStringMemberTranslator(sqlExpressionFactory),
             new SqlitePointMemberTranslator(sqlExpressionFactory),
-            new SqlitePolygonMemberTranslator(sqlExpressionFactory)
+            new SqlitePolygonMemberTranslator(sqlExpressionFactory),
         };
     }
 

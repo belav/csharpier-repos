@@ -55,13 +55,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 yield return new object[]
                 {
                     TestData.ECDsabrainpoolP160r1_CertificatePemBytes,
-                    "9145C79DD4DF758EB377D13B0DB81F83CE1A63A4099DDC32FE228B06EB1F306423ED61B6B4AF4691".HexToByteArray()
+                    "9145C79DD4DF758EB377D13B0DB81F83CE1A63A4099DDC32FE228B06EB1F306423ED61B6B4AF4691".HexToByteArray(),
                 };
 
                 yield return new object[]
                 {
                     TestData.ECDsabrainpoolP160r1_ExplicitCertificatePemBytes,
-                    "6D74F1C9BCBBA5A25F67E670B3DABDB36C24E8FAC3266847EB2EE7E3239208ADC696BB421AB380B4".HexToByteArray()
+                    "6D74F1C9BCBBA5A25F67E670B3DABDB36C24E8FAC3266847EB2EE7E3239208ADC696BB421AB380B4".HexToByteArray(),
                 };
             }
         }
@@ -670,7 +670,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     0xdc,
                     0xfa,
                     0x26,
-                    0x57
+                    0x57,
                 };
 
                 Assert.Equal(expectedKey, key);

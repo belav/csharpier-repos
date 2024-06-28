@@ -143,7 +143,7 @@ public class SetCookieHeaderValueTest
                 HttpOnly = true,
                 MaxAge = TimeSpan.FromDays(1),
                 Path = "path1",
-                Secure = true
+                Secure = true,
             };
             header1.Extensions.Add("extension1");
             header1.Extensions.Add("extension2=value");
@@ -169,26 +169,26 @@ public class SetCookieHeaderValueTest
 
             var header5 = new SetCookieHeaderValue("name5", "value5")
             {
-                SameSite = SameSiteMode.Lax
+                SameSite = SameSiteMode.Lax,
             };
             var string5a = "name5=value5; samesite=lax";
             var string5b = "name5=value5; samesite=Lax";
 
             var header6 = new SetCookieHeaderValue("name6", "value6")
             {
-                SameSite = SameSiteMode.Strict
+                SameSite = SameSiteMode.Strict,
             };
             var string6 = "name6=value6; samesite=Strict";
 
             var header7 = new SetCookieHeaderValue("name7", "value7")
             {
-                SameSite = SameSiteMode.None
+                SameSite = SameSiteMode.None,
             };
             var string7 = "name7=value7; samesite=None";
 
             var header8 = new SetCookieHeaderValue("name8", "value8")
             {
-                SameSite = SameSiteMode.Unspecified
+                SameSite = SameSiteMode.Unspecified,
             };
             var string8a = "name8=value8; samesite";
             var string8b = "name8=value8; samesite=invalid";
@@ -261,7 +261,7 @@ public class SetCookieHeaderValueTest
                 HttpOnly = true,
                 MaxAge = TimeSpan.FromDays(1),
                 Path = "path1",
-                Secure = true
+                Secure = true,
             };
             var string1 =
                 "name1=n1=v1&n2=v2&n3=v3; expires=Sun, 06 Nov 1994 08:49:37 GMT; max-age=86400; domain=domain1; path=path1; secure; samesite=Strict; httponly";

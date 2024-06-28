@@ -119,7 +119,7 @@ namespace System.Web.Http.Routing
             // Arrange
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] },
             };
             HttpRoute route = new HttpRoute(null, null, null, dataTokens);
             RouteEntry entry = new RouteEntry(name: null, route: route);
@@ -148,7 +148,7 @@ namespace System.Web.Http.Routing
             // Arrange
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[0] },
             };
             HttpRoute route = new HttpRoute(null, null, null, dataTokens);
             RouteEntry entry = new RouteEntry(name: null, route: route);
@@ -185,7 +185,7 @@ namespace System.Web.Http.Routing
 
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } },
             };
             HttpMessageHandler handler = new Mock<HttpMessageHandler>(MockBehavior.Strict).Object;
             HttpRoute route = new HttpRoute(null, null, null, dataTokens, handler);
@@ -214,7 +214,7 @@ namespace System.Web.Http.Routing
 
             HttpRouteValueDictionary dataTokens = new HttpRouteValueDictionary
             {
-                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } }
+                { RouteDataTokenKeys.Actions, new HttpActionDescriptor[] { action } },
             };
             HttpMessageHandler handler = new Mock<HttpMessageHandler>(MockBehavior.Strict).Object;
             HttpRoute route = new HttpRoute(null, null, null, dataTokens, handler);
@@ -301,7 +301,7 @@ namespace System.Web.Http.Routing
                 object[] attributes = new object[]
                 {
                     new ExtendedRoutePrefixAttribute(),
-                    new RoutePrefixAttribute("Prefix")
+                    new RoutePrefixAttribute("Prefix"),
                 };
                 return new Collection<T>(TypeHelper.OfType<T>(attributes));
             }

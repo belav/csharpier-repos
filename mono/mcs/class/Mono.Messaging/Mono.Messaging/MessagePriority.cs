@@ -41,6 +41,6 @@ namespace Mono.Messaging
         Lowest = 0,
         Normal = 3,
         VeryHigh = 6,
-        VeryLow = 1
+        VeryLow = 1,
     }
 }

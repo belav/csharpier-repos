@@ -92,7 +92,7 @@ namespace Newtonsoft.Json.Utilities
         Uri = 38,
         String = 39,
         Bytes = 40,
-        DBNull = 41
+        DBNull = 41,
     }
 
     internal class TypeInformation
@@ -112,7 +112,7 @@ namespace Newtonsoft.Json.Utilities
         None = 0,
         Success = 1,
         Overflow = 2,
-        Invalid = 3
+        Invalid = 3,
     }
 
     internal static class ConvertUtils
@@ -192,7 +192,7 @@ namespace Newtonsoft.Json.Utilities
             new TypeInformation(typeof(decimal), PrimitiveTypeCode.Decimal),
             new TypeInformation(typeof(DateTime), PrimitiveTypeCode.DateTime),
             new TypeInformation(typeof(object), PrimitiveTypeCode.Empty), // no 17 in TypeCode for some reason
-            new TypeInformation(typeof(string), PrimitiveTypeCode.String)
+            new TypeInformation(typeof(string), PrimitiveTypeCode.String),
         };
 #endif
 
@@ -405,7 +405,7 @@ namespace Newtonsoft.Json.Utilities
             Success = 0,
             CannotConvertNull = 1,
             NotInstantiableType = 2,
-            NoValidConversion = 3
+            NoValidConversion = 3,
         }
 
         public static object Convert(object initialValue, CultureInfo culture, Type targetType)
@@ -979,7 +979,7 @@ namespace Newtonsoft.Json.Utilities
                 40,
                 44,
                 47,
-                50
+                50,
             };
 
             /// <summary>

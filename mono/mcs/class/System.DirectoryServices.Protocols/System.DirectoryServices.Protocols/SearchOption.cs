@@ -33,6 +33,6 @@ namespace System.DirectoryServices.Protocols
     public enum SearchOption
     {
         DomainScope,
-        PhantomRoot
+        PhantomRoot,
     }
 }

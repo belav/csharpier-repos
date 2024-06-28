@@ -26,7 +26,7 @@ namespace System.Runtime.InteropServices
     {
         SYS_WIN16 = 0,
         SYS_WIN32 = SYS_WIN16 + 1,
-        SYS_MAC = SYS_WIN32 + 1
+        SYS_MAC = SYS_WIN32 + 1,
     }
 
     [Obsolete(
@@ -40,7 +40,7 @@ namespace System.Runtime.InteropServices
         LIBFLAG_FRESTRICTED = 0x1,
         LIBFLAG_FCONTROL = 0x2,
         LIBFLAG_FHIDDEN = 0x4,
-        LIBFLAG_FHASDISKIMAGE = 0x8
+        LIBFLAG_FHASDISKIMAGE = 0x8,
     }
 
     [Obsolete(

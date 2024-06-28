@@ -36,6 +36,6 @@ namespace System.EnterpriseServices
     public enum BindingOption
     {
         NoBinding,
-        BindingToPoolThread
+        BindingToPoolThread,
     }
 }

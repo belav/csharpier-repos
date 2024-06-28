@@ -97,6 +97,6 @@ namespace Mono.WebBrowser.DOM
         ReplaceHistory = 0x0080,
         BypassLocalCache = 0x0100,
         BypassProxy = 0x0200,
-        CharsetChange = 0x0400
+        CharsetChange = 0x0400,
     }
 }

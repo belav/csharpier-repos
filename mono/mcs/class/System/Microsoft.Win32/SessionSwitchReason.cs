@@ -38,6 +38,6 @@ namespace Microsoft.Win32
         SessionLogoff,
         SessionLock,
         SessionUnlock,
-        SessionRemoteControl
+        SessionRemoteControl,
     }
 }

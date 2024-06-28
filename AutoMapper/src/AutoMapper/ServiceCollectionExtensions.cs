@@ -155,7 +155,7 @@ public static class ServiceCollectionExtensions
                 typeof(IMemberValueResolver<,,,>),
                 typeof(ITypeConverter<,>),
                 typeof(IValueConverter<,>),
-                typeof(IMappingAction<,>)
+                typeof(IMappingAction<,>),
             };
             foreach (
                 var type in assembliesToScan.SelectMany(a =>

@@ -30,8 +30,8 @@ namespace System.Collections.Generic
                     {
                         HttpStatusCode.Accepted,
                         HttpStatusCode.Ambiguous,
-                        HttpStatusCode.BadGateway
-                    }
+                        HttpStatusCode.BadGateway,
+                    },
                 };
             }
         }
@@ -136,7 +136,7 @@ namespace System.Collections.Generic
             // Arrange
             IDictionary<string, object> dict = new Dictionary<string, object>()
             {
-                { "key", value }
+                { "key", value },
             };
 
             // Act
@@ -158,7 +158,7 @@ namespace System.Collections.Generic
                 { "[0]", 1 },
                 { "Name", 2 },
                 { "Address.Street", 3 },
-                { "", 4 }
+                { "", 4 },
             };
 
             // Act

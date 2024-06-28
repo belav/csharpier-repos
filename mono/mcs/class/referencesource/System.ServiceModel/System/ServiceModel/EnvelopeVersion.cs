@@ -91,13 +91,13 @@ namespace System.ServiceModel
                     {
                         "",
                         ultimateReceiverActor,
-                        nextDestinationActorValue
+                        nextDestinationActorValue,
                     };
                     ultimateDestinationActorValues = new string[]
                     {
                         "",
                         ultimateReceiverActor,
-                        nextDestinationActorValue
+                        nextDestinationActorValue,
                     };
                 }
             }

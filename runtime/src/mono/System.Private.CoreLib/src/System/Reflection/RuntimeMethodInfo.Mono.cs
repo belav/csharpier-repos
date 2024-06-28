@@ -546,7 +546,7 @@ namespace System.Reflection
                 PreserveSig = preserveSig,
                 BestFitMapping = bestFitMapping,
                 ThrowOnUnmappableChar = throwOnUnmappableChar,
-                CallingConvention = callingConvention
+                CallingConvention = callingConvention,
             };
         }
 
@@ -649,7 +649,7 @@ namespace System.Reflection
                 new CustomAttributeNamedArgument(
                     attrType.GetField("ThrowOnUnmappableChar")!,
                     throwOnUnmappableChar
-                )
+                ),
             };
 
             return new RuntimeCustomAttributeData(

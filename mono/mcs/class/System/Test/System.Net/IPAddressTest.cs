@@ -315,7 +315,7 @@ namespace MonoTests.System.Net
             0,
             0,
             0xFF,
-            0xFF
+            0xFF,
         };
 
         [Test]
@@ -405,7 +405,7 @@ namespace MonoTests.System.Net
                 0x45,
                 0x67,
                 0x89,
-                0x98
+                0x98,
             };
             byte[] dataOut = IPAddress
                 .Parse("123:4567:8998:7654:3210:0123:4567:8998")
@@ -430,7 +430,7 @@ namespace MonoTests.System.Net
                 0x7F,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             };
             dataOut = IPAddress.Parse("::FFFF:127.0.0.1").GetAddressBytes();
             for (int i = 0; i < dataIn.Length; i++)

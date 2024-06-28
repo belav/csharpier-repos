@@ -86,10 +86,10 @@ namespace Roslyn.VisualStudio.Next.UnitTests.Remote
                             VarWhenTypeIsApparent = new CodeStyleOption2<bool>(
                                 false,
                                 NotificationOption2.Suggestion
-                            )
-                        }
-                    }
-                }
+                            ),
+                        },
+                    },
+                },
             };
 
             analyzerResult = await AnalyzeAsync(
@@ -133,8 +133,8 @@ End Class";
                         PreferNullPropagation = new CodeStyleOption2<bool>(
                             false,
                             NotificationOption2.Silent
-                        )
-                    }
+                        ),
+                    },
                 };
 
                 var analyzerType = typeof(VisualBasicUseNullPropagationDiagnosticAnalyzer);
@@ -154,8 +154,8 @@ End Class";
                         PreferNullPropagation = new CodeStyleOption2<bool>(
                             true,
                             NotificationOption2.Error
-                        )
-                    }
+                        ),
+                    },
                 };
 
                 analyzerResult = await AnalyzeAsync(

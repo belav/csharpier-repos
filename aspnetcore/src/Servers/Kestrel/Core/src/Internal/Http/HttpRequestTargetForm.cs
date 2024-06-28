@@ -11,5 +11,5 @@ internal enum HttpRequestTarget
     OriginForm,
     AbsoluteForm,
     AuthorityForm,
-    AsteriskForm
+    AsteriskForm,
 }

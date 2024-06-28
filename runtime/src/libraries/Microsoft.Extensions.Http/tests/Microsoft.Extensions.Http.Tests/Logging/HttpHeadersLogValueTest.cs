@@ -17,14 +17,14 @@ namespace Microsoft.Extensions.Http.Logging
             var headers = new TestHttpHeaders
             {
                 { "secureHeader1", "value1" },
-                { "unsecureHeader1", "value1" }
+                { "unsecureHeader1", "value1" },
             };
             var contentHeaders = new TestHttpHeaders
             {
                 { "unsecureHeader2", "value2" },
-                { "secureHeader2", "value2" }
+                { "secureHeader2", "value2" },
             };
-            var headersToRedact = new HashSet<string> { "secureHeader1", "secureHeader2", };
+            var headersToRedact = new HashSet<string> { "secureHeader1", "secureHeader2" };
             var sensitiveHeaders = new HashSet<string>(
                 headersToRedact,
                 StringComparer.OrdinalIgnoreCase

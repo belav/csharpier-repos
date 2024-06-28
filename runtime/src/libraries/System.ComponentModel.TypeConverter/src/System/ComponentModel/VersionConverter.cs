@@ -104,7 +104,7 @@ namespace System.ComponentModel
                             version.Major,
                             version.Minor,
                             version.Build,
-                            version.Revision
+                            version.Revision,
                         }
                     );
                 }

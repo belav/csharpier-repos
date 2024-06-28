@@ -17,7 +17,7 @@ public partial class VectorTest
         string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
             new Random().Next(),
         string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-        _ => DefaultSeed
+        _ => DefaultSeed,
     };
 
     static Random random;
@@ -67,7 +67,7 @@ public partial class VectorTest
                 (Double)Int64.MinValue,
                 (Double)(Int64.MinValue),
                 (Double)(UInt64.MinValue),
-                (Double)(UInt64.MaxValue)
+                (Double)(UInt64.MaxValue),
             };
             firstSingles = new Single[]
             {
@@ -76,7 +76,7 @@ public partial class VectorTest
                 (Single)Int32.MinValue,
                 (Single)(Int32.MinValue),
                 (Single)(UInt32.MinValue),
-                (Single)(UInt32.MaxValue)
+                (Single)(UInt32.MaxValue),
             };
             firstInt64s = new Int64[]
             {
@@ -85,7 +85,7 @@ public partial class VectorTest
                 (Int64)Double.MinValue,
                 (Int64)(Double.MinValue),
                 (Int64)(UInt64.MinValue),
-                (Int64)(UInt64.MaxValue)
+                (Int64)(UInt64.MaxValue),
             };
             firstUInt64s = new UInt64[]
             {
@@ -94,7 +94,7 @@ public partial class VectorTest
                 (UInt64)Double.MinValue,
                 (UInt64)(Double.MinValue),
                 (UInt64)(Int64.MinValue),
-                (UInt64)(Int64.MaxValue)
+                (UInt64)(Int64.MaxValue),
             };
             firstInt32s = new Int32[]
             {
@@ -103,7 +103,7 @@ public partial class VectorTest
                 (Int32)Single.MinValue,
                 (Int32)(Single.MinValue),
                 (Int32)(UInt32.MinValue),
-                (Int32)(UInt32.MaxValue)
+                (Int32)(UInt32.MaxValue),
             };
             firstUInt32s = new UInt32[]
             {
@@ -112,7 +112,7 @@ public partial class VectorTest
                 (UInt32)Single.MinValue,
                 (UInt32)(Single.MinValue),
                 (UInt32)(Int32.MinValue),
-                (UInt32)(Int32.MaxValue)
+                (UInt32)(Int32.MaxValue),
             };
             firstInt16s = new Int16[]
             {
@@ -121,7 +121,7 @@ public partial class VectorTest
                 SByte.MinValue,
                 SByte.MaxValue,
                 (Int16)(UInt16.MinValue),
-                (Int16)(UInt16.MaxValue)
+                (Int16)(UInt16.MaxValue),
             };
             firstUInt16s = new UInt16[]
             {
@@ -130,21 +130,21 @@ public partial class VectorTest
                 Byte.MinValue,
                 Byte.MaxValue,
                 (UInt16)(Int16.MinValue),
-                (UInt16)(Int16.MaxValue)
+                (UInt16)(Int16.MaxValue),
             };
             firstSBytes = new SByte[]
             {
                 SByte.MinValue,
                 SByte.MaxValue,
                 (SByte)(Byte.MinValue),
-                (SByte)(Byte.MaxValue)
+                (SByte)(Byte.MaxValue),
             };
             firstBytes = new Byte[]
             {
                 Byte.MinValue,
                 Byte.MaxValue,
                 (Byte)(SByte.MinValue),
-                (Byte)(SByte.MaxValue)
+                (Byte)(SByte.MaxValue),
             };
         }
 

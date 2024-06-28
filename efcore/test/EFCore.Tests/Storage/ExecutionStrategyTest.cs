@@ -52,7 +52,7 @@ public class ExecutionStrategyTest : IDisposable
             TimeSpan.FromSeconds(3),
             TimeSpan.FromSeconds(7),
             TimeSpan.FromSeconds(15),
-            TimeSpan.FromSeconds(31)
+            TimeSpan.FromSeconds(31),
         };
 
         Assert.Equal(expectedDelays.Count, delays.Count);

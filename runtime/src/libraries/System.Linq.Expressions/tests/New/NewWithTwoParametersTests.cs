@@ -24,7 +24,7 @@ namespace System.Linq.Expressions.Tests
                 double.Epsilon,
                 double.NegativeInfinity,
                 double.PositiveInfinity,
-                double.NaN
+                double.NaN,
             };
             for (int i = 0; i < array1.Length; i++)
             {
@@ -85,7 +85,7 @@ namespace System.Linq.Expressions.Tests
             Expression[] exprArgs =
             {
                 Expression.Constant(a, typeof(int)),
-                Expression.Constant(b, typeof(double))
+                Expression.Constant(b, typeof(double)),
             };
             Expression<Func<Sp>> e = Expression.Lambda<Func<Sp>>(
                 Expression.New(constructor, exprArgs),
@@ -104,7 +104,7 @@ namespace System.Linq.Expressions.Tests
             Expression[] exprArgs =
             {
                 Expression.Constant(a, typeof(int)),
-                Expression.Constant(b, typeof(string))
+                Expression.Constant(b, typeof(string)),
             };
             Expression<Func<D>> e = Expression.Lambda<Func<D>>(
                 Expression.New(constructor, exprArgs),
@@ -127,7 +127,7 @@ namespace System.Linq.Expressions.Tests
             Expression[] exprArgs =
             {
                 Expression.Constant(a, typeof(string)),
-                Expression.Constant(b, typeof(S))
+                Expression.Constant(b, typeof(S)),
             };
             Expression<Func<Scs>> e = Expression.Lambda<Func<Scs>>(
                 Expression.New(constructor, exprArgs),
@@ -154,7 +154,7 @@ namespace System.Linq.Expressions.Tests
             MemberInfo[] members =
             {
                 typeof(TestClass).GetField(nameof(TestClass.S)),
-                typeof(TestClass).GetProperty(nameof(TestClass.Val))
+                typeof(TestClass).GetProperty(nameof(TestClass.Val)),
             };
             exprArgs = new Expression[] { Expression.Constant("x"), Expression.Constant(23) };
 
@@ -182,7 +182,7 @@ namespace System.Linq.Expressions.Tests
             MemberInfo[] members =
             {
                 typeof(TestClass).GetField(nameof(TestClass.S)),
-                typeof(TestClass).GetProperty(nameof(TestClass.Val))
+                typeof(TestClass).GetProperty(nameof(TestClass.Val)),
             };
 
             newExp = Expression.New(
@@ -216,7 +216,7 @@ namespace System.Linq.Expressions.Tests
             MemberInfo[] members =
             {
                 typeof(TestClass).GetField(nameof(TestClass.S)),
-                typeof(TestClass).GetProperty(nameof(TestClass.Val))
+                typeof(TestClass).GetProperty(nameof(TestClass.Val)),
             };
 
             newExp = Expression.New(

@@ -44,7 +44,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
             {
                 new SimpleConsoleFormatter(defaultMonitor),
                 new SystemdConsoleFormatter(systemdMonitor),
-                new JsonConsoleFormatter(jsonMonitor)
+                new JsonConsoleFormatter(jsonMonitor),
             };
             return formatters;
         }
@@ -229,7 +229,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 LogLevel.Warning => "Warning",
                 LogLevel.Error => "Error",
                 LogLevel.Critical => "Critical",
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel))
+                _ => throw new ArgumentOutOfRangeException(nameof(logLevel)),
             };
         }
 
@@ -368,7 +368,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 {
                     FormatterName = null,
                     Format = format,
-                    TimestampFormat = "HH:mm:ss "
+                    TimestampFormat = "HH:mm:ss ",
                 }
             );
 
@@ -616,7 +616,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                     },
                     new RemoteInvokeOptions
                     {
-                        StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true }
+                        StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true },
                     }
                 )
                 .Dispose();
@@ -725,7 +725,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 {
                     TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
                     Format = format,
-                    UseUtcTimestamp = false
+                    UseUtcTimestamp = false,
                 }
             );
             var levelPrefix = t.GetLevelPrefix(level);
@@ -789,7 +789,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 {
                     TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
                     Format = format,
-                    UseUtcTimestamp = true
+                    UseUtcTimestamp = true,
                 }
             );
             var levelPrefix = t.GetLevelPrefix(level);
@@ -1367,7 +1367,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ConsoleLoggerOptions
                 {
                     LogToStandardErrorThreshold = LogLevel.Warning,
-                    Format = format
+                    Format = format,
                 }
             );
             var logger = t.Logger;
@@ -1765,7 +1765,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                         new KeyValuePair<string, string>(
                             "Console:TimeStampFormat",
                             "yyyyMMddHHmmss"
-                        )
+                        ),
                     }
                 )
                 .Build();
@@ -1835,7 +1835,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                         new KeyValuePair<string, string>(
                             "Console:LogToStandardErrorThreshold",
                             "Warning"
-                        )
+                        ),
                     }
                 )
                 .Build();
@@ -1894,7 +1894,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 new ConsoleLoggerOptions()
                 {
                     QueueFullMode = ConsoleLoggerQueueFullMode.DropWrite,
-                    MaxQueueLength = 10
+                    MaxQueueLength = 10,
                 }
             );
             Assert.Equal(ConsoleLoggerQueueFullMode.DropWrite, logger.Options.QueueFullMode);

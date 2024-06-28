@@ -75,7 +75,7 @@ namespace System.Security.Cryptography
                             case RSASignaturePaddingMode.Pkcs1:
                                 var pkcsPaddingInfo = new BCRYPT_PKCS1_PADDING_INFO()
                                 {
-                                    pszAlgId = namePtr
+                                    pszAlgId = namePtr,
                                 };
                                 return keyHandle.SignHash(
                                     hash,
@@ -88,7 +88,7 @@ namespace System.Security.Cryptography
                                 var pssPaddingInfo = new BCRYPT_PSS_PADDING_INFO()
                                 {
                                     pszAlgId = namePtr,
-                                    cbSalt = hash.Length
+                                    cbSalt = hash.Length,
                                 };
                                 return keyHandle.SignHash(
                                     hash,
@@ -138,7 +138,7 @@ namespace System.Security.Cryptography
                         case RSASignaturePaddingMode.Pkcs1:
                             var pkcs1PaddingInfo = new BCRYPT_PKCS1_PADDING_INFO()
                             {
-                                pszAlgId = namePtr
+                                pszAlgId = namePtr,
                             };
                             return keyHandle.TrySignHash(
                                 hash,
@@ -152,7 +152,7 @@ namespace System.Security.Cryptography
                             var pssPaddingInfo = new BCRYPT_PSS_PADDING_INFO()
                             {
                                 pszAlgId = namePtr,
-                                cbSalt = hash.Length
+                                cbSalt = hash.Length,
                             };
                             return keyHandle.TrySignHash(
                                 hash,
@@ -222,7 +222,7 @@ namespace System.Security.Cryptography
                         case RSASignaturePaddingMode.Pkcs1:
                             var pkcs1PaddingInfo = new BCRYPT_PKCS1_PADDING_INFO()
                             {
-                                pszAlgId = namePtr
+                                pszAlgId = namePtr,
                             };
                             return keyHandle.VerifyHash(
                                 hash,
@@ -235,7 +235,7 @@ namespace System.Security.Cryptography
                             var pssPaddingInfo = new BCRYPT_PSS_PADDING_INFO()
                             {
                                 pszAlgId = namePtr,
-                                cbSalt = hash.Length
+                                cbSalt = hash.Length,
                             };
                             return keyHandle.VerifyHash(
                                 hash,

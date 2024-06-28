@@ -29,14 +29,14 @@ namespace System.Web.Http.ModelBinding.Binders
             {
                 ModelMetadata = GetMetadataForObject(new Person()),
                 ModelName = "someName",
-                ValueProvider = mockValueProvider.Object
+                ValueProvider = mockValueProvider.Object,
             };
             HttpActionContext context = ContextUtil.CreateActionContext();
             context.ControllerContext.Configuration.Services.Replace(
                 typeof(ModelBinderProvider),
                 new SimpleModelBinderProvider(typeof(ComplexModelDto), mockDtoBinder.Object)
                 {
-                    SuppressPrefixCheck = true
+                    SuppressPrefixCheck = true,
                 }
             );
 
@@ -142,7 +142,7 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
             TestableMutableObjectModelBinder testableBinder =
@@ -162,7 +162,7 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(new Person())
+                ModelMetadata = GetMetadataForObject(new Person()),
             };
 
             Mock<TestableMutableObjectModelBinder> mockTestableBinder =
@@ -188,7 +188,7 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
             Mock<TestableMutableObjectModelBinder> mockTestableBinder =
@@ -219,7 +219,7 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion))
+                ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion)),
             };
 
             TestableMutableObjectModelBinder testableBinder =
@@ -247,13 +247,13 @@ namespace System.Web.Http.ModelBinding.Binders
                 "ValueTypeRequired",
                 "FirstName",
                 "LastName",
-                "PropertyWithDefaultValue"
+                "PropertyWithDefaultValue",
             };
 
             HttpActionContext actionContext = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
             TestableMutableObjectModelBinder testableBinder =
@@ -277,7 +277,7 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext actionContext = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(new ModelWithMixedBindingBehaviors())
+                ModelMetadata = GetMetadataForObject(new ModelWithMixedBindingBehaviors()),
             };
 
             // Act
@@ -390,7 +390,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelWithBindRequired model = new ModelWithBindRequired
             {
                 Name = "original value",
-                Age = -20
+                Age = -20,
             };
 
             ModelMetadata containerMetadata = GetMetadataForObject(model);
@@ -399,7 +399,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = containerMetadata,
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
             ComplexModelDto dto = new ComplexModelDto(
                 containerMetadata,
@@ -441,7 +441,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelWithBindRequired model = new ModelWithBindRequired
             {
                 Name = "original value",
-                Age = -20
+                Age = -20,
             };
 
             ModelMetadata containerMetadata = GetMetadataForObject(model);
@@ -507,7 +507,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = containerMetadata,
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
 
             // Set no properties though Age (a non-Nullable struct) and City (a class) properties are required.
@@ -556,7 +556,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = containerMetadata,
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
 
             ComplexModelDto dto = new ComplexModelDto(
@@ -609,7 +609,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = containerMetadata,
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
 
             // Set no properties though ValueTypeRequired (a non-Nullable struct) property is required.
@@ -651,7 +651,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = containerMetadata,
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
 
             ComplexModelDto dto = new ComplexModelDto(
@@ -701,7 +701,7 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext context = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = containerMetadata
+                ModelMetadata = containerMetadata,
             };
             ComplexModelDto dto = new ComplexModelDto(
                 containerMetadata,
@@ -748,7 +748,7 @@ namespace System.Web.Http.ModelBinding.Binders
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(new Person())
+                ModelMetadata = GetMetadataForObject(new Person()),
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
@@ -789,7 +789,7 @@ namespace System.Web.Http.ModelBinding.Binders
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
@@ -826,7 +826,7 @@ namespace System.Web.Http.ModelBinding.Binders
             HttpActionContext context = ContextUtil.CreateActionContext();
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(model)
+                ModelMetadata = GetMetadataForObject(model),
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
@@ -868,7 +868,7 @@ namespace System.Web.Http.ModelBinding.Binders
             Person model = new Person { DateOfBirth = new DateTime(1900, 1, 1) };
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(model)
+                ModelMetadata = GetMetadataForObject(model),
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
@@ -951,7 +951,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new Person()),
-                ModelName = "foo"
+                ModelName = "foo",
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
@@ -1000,7 +1000,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new ModelWhosePropertySetterThrows()),
-                ModelName = "foo"
+                ModelName = "foo",
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
@@ -1051,7 +1051,7 @@ namespace System.Web.Http.ModelBinding.Binders
             ModelBindingContext bindingContext = new ModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new ModelWhosePropertySetterThrows()),
-                ModelName = "foo"
+                ModelName = "foo",
             };
 
             ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>

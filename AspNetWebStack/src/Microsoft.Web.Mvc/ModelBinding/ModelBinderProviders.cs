@@ -25,7 +25,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 new DictionaryModelBinderProvider(),
                 new CollectionModelBinderProvider(),
                 new TypeConverterModelBinderProvider(),
-                new MutableObjectModelBinderProvider()
+                new MutableObjectModelBinderProvider(),
             };
         }
     }

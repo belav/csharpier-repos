@@ -14,7 +14,7 @@ namespace System.Text.Json.Serialization.Tests
             enum TypeDiscriminator
             {
                 Customer = 1,
-                Employee = 2
+                Employee = 2,
             }
 
             public override bool CanConvert(Type typeToConvert)
@@ -296,7 +296,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 return new SampleRepro
                 {
-                    Value = JsonSerializer.Deserialize<object>(ref reader, options)
+                    Value = JsonSerializer.Deserialize<object>(ref reader, options),
                 };
             }
 
@@ -323,7 +323,7 @@ namespace System.Text.Json.Serialization.Tests
             // Regression test for https://github.com/dotnet/runtime/issues/77173
             var options = new JsonSerializerOptions
             {
-                Converters = { new PolymorphicBaseClassConverter() }
+                Converters = { new PolymorphicBaseClassConverter() },
             };
 
             // Sanity check -- returns converter for the base class.

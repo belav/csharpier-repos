@@ -26,7 +26,7 @@ namespace System.ServiceModel.Syndication.Tests
         Prefix,
         SourceExtra,
         TargetExtra,
-        NodeType
+        NodeType,
     }
 
     public class XmlDiff

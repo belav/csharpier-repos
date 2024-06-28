@@ -50,7 +50,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedValidWithClientEku
         );
@@ -67,7 +67,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedValidWithNoEku
         );
@@ -83,7 +83,7 @@ public class ClientCertificateAuthenticationTests
         using var host = await CreateHost(
             new CertificateAuthenticationOptions
             {
-                AllowedCertificateTypes = CertificateTypes.Chained
+                AllowedCertificateTypes = CertificateTypes.Chained,
             },
             Certificates.SelfSignedValidWithClientEku
         );
@@ -100,7 +100,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 AllowedCertificateTypes = CertificateTypes.Chained,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedValidWithNoEku
         );
@@ -117,7 +117,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedValidWithServerEku
         );
@@ -135,7 +135,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
                 ValidateCertificateUse = false,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedValidWithServerEku
         );
@@ -153,7 +153,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.Chained,
                 ValidateCertificateUse = false,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedValidWithServerEku
         );
@@ -175,7 +175,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
                 ValidateCertificateUse = false,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedExpired
         );
@@ -193,7 +193,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
                 ValidateValidityPeriod = false,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedExpired
         );
@@ -215,7 +215,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
                 ValidateCertificateUse = false,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedNotYetValid
         );
@@ -233,7 +233,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
                 ValidateValidityPeriod = false,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             Certificates.SelfSignedNotYetValid
         );
@@ -250,7 +250,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 ValidateCertificateUse = false,
-                Events = failedValidationEvents
+                Events = failedValidationEvents,
             },
             Certificates.SelfSignedValidWithServerEku
         );
@@ -268,7 +268,7 @@ public class ClientCertificateAuthenticationTests
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
                 ValidateCertificateUse = false,
-                Events = unprocessedValidationEvents
+                Events = unprocessedValidationEvents,
             },
             Certificates.SelfSignedValidWithServerEku
         );
@@ -317,8 +317,8 @@ public class ClientCertificateAuthenticationTests
                         context.Fail("Validation failed: " + context.Exception);
                         failCalled = true;
                         return Task.CompletedTask;
-                    }
-                }
+                    },
+                },
             },
             Certificates.SignedClient
         );
@@ -338,10 +338,10 @@ public class ClientCertificateAuthenticationTests
                 Events = successfulValidationEvents,
                 CustomTrustStore = new X509Certificate2Collection()
                 {
-                    Certificates.SignedSecondaryRoot
+                    Certificates.SignedSecondaryRoot,
                 },
                 ChainTrustValidationMode = X509ChainTrustMode.CustomRootTrust,
-                RevocationMode = X509RevocationMode.NoCheck
+                RevocationMode = X509RevocationMode.NoCheck,
             },
             Certificates.SignedClient
         );
@@ -361,10 +361,10 @@ public class ClientCertificateAuthenticationTests
                 CustomTrustStore = new X509Certificate2Collection()
                 {
                     Certificates.SelfSignedPrimaryRoot,
-                    Certificates.SignedSecondaryRoot
+                    Certificates.SignedSecondaryRoot,
                 },
                 ChainTrustValidationMode = X509ChainTrustMode.CustomRootTrust,
-                RevocationMode = X509RevocationMode.NoCheck
+                RevocationMode = X509RevocationMode.NoCheck,
             },
             Certificates.SignedClient
         );
@@ -388,9 +388,9 @@ public class ClientCertificateAuthenticationTests
                 },
                 AdditionalChainCertificates = new X509Certificate2Collection()
                 {
-                    Certificates.SignedSecondaryRoot
+                    Certificates.SignedSecondaryRoot,
                 },
-                RevocationMode = X509RevocationMode.NoCheck
+                RevocationMode = X509RevocationMode.NoCheck,
             },
             Certificates.SignedClient
         );
@@ -412,7 +412,7 @@ public class ClientCertificateAuthenticationTests
                 {
                     Certificates.SelfSignedPrimaryRoot,
                 },
-                RevocationMode = X509RevocationMode.NoCheck
+                RevocationMode = X509RevocationMode.NoCheck,
             },
             Certificates.SignedClient
         );
@@ -429,7 +429,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             wireUpHeaderMiddleware: true
         );
@@ -469,7 +469,7 @@ public class ClientCertificateAuthenticationTests
             new CertificateAuthenticationOptions
             {
                 AllowedCertificateTypes = CertificateTypes.SelfSigned,
-                Events = successfulValidationEvents
+                Events = successfulValidationEvents,
             },
             wireUpHeaderMiddleware: true,
             headerName: "X-ARR-ClientCert"
@@ -510,7 +510,7 @@ public class ClientCertificateAuthenticationTests
         using var host = await CreateHost(
             new CertificateAuthenticationOptions
             {
-                AllowedCertificateTypes = CertificateTypes.SelfSigned
+                AllowedCertificateTypes = CertificateTypes.SelfSigned,
             },
             Certificates.SelfSignedValidWithNoEku
         );
@@ -712,7 +712,7 @@ public class ClientCertificateAuthenticationTests
                                 validationCount.ToString(CultureInfo.InvariantCulture),
                                 ClaimValueTypes.String,
                                 context.Options.ClaimsIssuer
-                            )
+                            ),
                         };
 
                         context.Principal = new ClaimsPrincipal(
@@ -720,8 +720,8 @@ public class ClientCertificateAuthenticationTests
                         );
                         context.Success();
                         return Task.CompletedTask;
-                    }
-                }
+                    },
+                },
             },
             Certificates.SelfSignedValidWithNoEku,
             null,
@@ -807,7 +807,7 @@ public class ClientCertificateAuthenticationTests
                                 Expected,
                                 ClaimValueTypes.String,
                                 context.Options.ClaimsIssuer
-                            )
+                            ),
                         };
 
                         context.Principal = new ClaimsPrincipal(
@@ -815,8 +815,8 @@ public class ClientCertificateAuthenticationTests
                         );
                         context.Success();
                         return Task.CompletedTask;
-                    }
-                }
+                    },
+                },
             },
             Certificates.SelfSignedValidWithNoEku
         );
@@ -881,7 +881,7 @@ public class ClientCertificateAuthenticationTests
                                 validationCount.ToString(CultureInfo.InvariantCulture),
                                 ClaimValueTypes.String,
                                 context.Options.ClaimsIssuer
-                            )
+                            ),
                         };
 
                         context.Principal = new ClaimsPrincipal(
@@ -889,8 +889,8 @@ public class ClientCertificateAuthenticationTests
                         );
                         context.Success();
                         return Task.CompletedTask;
-                    }
-                }
+                    },
+                },
             },
             Certificates.SelfSignedValidWithNoEku,
             null,
@@ -1144,7 +1144,7 @@ public class ClientCertificateAuthenticationTests
                         context.ClientCertificate.Subject,
                         ClaimValueTypes.String,
                         context.Options.ClaimsIssuer
-                    )
+                    ),
                 };
 
                 context.Principal = new ClaimsPrincipal(
@@ -1152,7 +1152,7 @@ public class ClientCertificateAuthenticationTests
                 );
                 context.Success();
                 return Task.CompletedTask;
-            }
+            },
         };
 
     private readonly CertificateAuthenticationEvents failedValidationEvents =
@@ -1162,7 +1162,7 @@ public class ClientCertificateAuthenticationTests
             {
                 context.Fail("Not validated");
                 return Task.CompletedTask;
-            }
+            },
         };
 
     private readonly CertificateAuthenticationEvents unprocessedValidationEvents =
@@ -1171,6 +1171,6 @@ public class ClientCertificateAuthenticationTests
             OnCertificateValidated = context =>
             {
                 return Task.CompletedTask;
-            }
+            },
         };
 }

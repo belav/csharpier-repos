@@ -87,7 +87,7 @@ internal sealed class RegisterConfirmationModel<TUser> : RegisterConfirmationMod
                     area = "Identity",
                     userId = userId,
                     code = code,
-                    returnUrl = returnUrl
+                    returnUrl = returnUrl,
                 },
                 protocol: Request.Scheme
             );

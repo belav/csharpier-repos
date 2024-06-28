@@ -31,6 +31,6 @@ namespace System.Windows.Forms
         Single = 1,
         Raised = 2,
         Sunken = 3,
-        None = 4
+        None = 4,
     }
 }

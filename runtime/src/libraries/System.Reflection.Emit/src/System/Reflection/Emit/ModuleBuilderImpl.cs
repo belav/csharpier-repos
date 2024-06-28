@@ -49,7 +49,7 @@ namespace System.Reflection.Emit
             typeof(string),
             typeof(nint),
             typeof(nuint),
-            typeof(TypedReference)
+            typeof(TypedReference),
         };
 
         internal ModuleBuilderImpl(

@@ -993,7 +993,7 @@ namespace Microsoft.SqlServer.Server
             17,
             17,
             17,
-            17
+            17,
         };
 
         private const byte MaxTimeScale = 7;
@@ -1007,7 +1007,7 @@ namespace Microsoft.SqlServer.Server
             1,
             0,
             0,
-            0
+            0,
         };
 
         // Construction for Decimal type and new Katmai Date/Time types
@@ -2217,6 +2217,7 @@ namespace Microsoft.SqlServer.Server
             DbType.Time, // SqlDbType.Time
             DbType.DateTime2, // SqlDbType.DateTime2
             DbType.DateTimeOffset // SqlDbType.DateTimeOffset
+            ,
         };
 
         private void SetDefaultsForType(SqlDbType dbType)

@@ -65,7 +65,7 @@ namespace System.Runtime.Remoting.Metadata.W3cXsd2001
             "HH:mm:ss.ffffZ",
             "HH:mm:ss.fffffZ",
             "HH:mm:ss.ffffffZ",
-            "HH:mm:ss.fffffffZ"
+            "HH:mm:ss.fffffffZ",
         };
 
         DateTime _value;

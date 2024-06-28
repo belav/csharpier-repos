@@ -341,14 +341,14 @@ namespace System.Net
         enum InputState
         {
             RequestLine,
-            Headers
+            Headers,
         }
 
         enum LineState
         {
             None,
             CR,
-            LF
+            LF,
         }
 
         InputState input_state = InputState.RequestLine;

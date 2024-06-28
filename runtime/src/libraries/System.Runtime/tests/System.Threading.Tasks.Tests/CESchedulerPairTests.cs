@@ -215,7 +215,7 @@ namespace System.Threading.Tasks.Tests
                 var schedPairScheduler in new TaskScheduler[]
                 {
                     schedPair.ConcurrentScheduler,
-                    schedPair.ExclusiveScheduler
+                    schedPair.ExclusiveScheduler,
                 }
             )
             {
@@ -899,7 +899,7 @@ namespace System.Threading.Tasks.Tests
                         "Start",
                         "ContinueWith", /* FromAsync: Not supported in .NET Native */
                         "ContinueWhenAll",
-                        "ContinueWhenAny"
+                        "ContinueWhenAny",
                     }
                 )
                 {

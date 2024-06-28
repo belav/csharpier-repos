@@ -699,7 +699,7 @@ namespace SerializationTypes
         {
             ClassA1 = new DuplicateTypeNamesTest.ns1.ClassA()
             {
-                Name = "Hello World! \u6F22 \u00F1"
+                Name = "Hello World! \u6F22 \u00F1",
             };
             StructA1 = new DuplicateTypeNamesTest.ns1.StructA() { Text = "" };
             EnumA1 = DuplicateTypeNamesTest.ns1.EnumA.two;
@@ -1111,7 +1111,7 @@ namespace SerializationTypes
     {
         Option0,
         Option1,
-        Option2
+        Option2,
     }
 
     public class TypeWithNestedGenericClassImplementingIXmlSerialiable
@@ -1595,7 +1595,7 @@ namespace SerializationTypes
         LaunchURL,
         LaunchSection,
         LaunchVideo,
-        LaunchImage
+        LaunchImage,
     }
 
     public class SerializableSlide
@@ -2153,7 +2153,7 @@ namespace SerializationTypes
             {
                 NonSerializablePerson nsp = (NonSerializablePerson)obj;
                 NonSerializablePersonSurrogate serializablePerson =
-                    new NonSerializablePersonSurrogate { Name = nsp.Name, Age = nsp.Age, };
+                    new NonSerializablePersonSurrogate { Name = nsp.Name, Age = nsp.Age };
 
                 return serializablePerson;
             }
@@ -2161,7 +2161,7 @@ namespace SerializationTypes
             {
                 NonSerializablePersonForStress nsp = (NonSerializablePersonForStress)obj;
                 NonSerializablePersonForStressSurrogate serializablePerson =
-                    new NonSerializablePersonForStressSurrogate { Name = nsp.Name, Age = nsp.Age, };
+                    new NonSerializablePersonForStressSurrogate { Name = nsp.Name, Age = nsp.Age };
 
                 return serializablePerson;
             }
@@ -2298,7 +2298,7 @@ public class NookAppLocalState
     {
         Unconfigured,
         Nook,
-        Microsoft
+        Microsoft,
     }
 }
 
@@ -2903,19 +2903,19 @@ public class ReaderWriterFactory
         Text,
         MTOM,
         WebData,
-        WrappedWebData
+        WrappedWebData,
     };
 
     public enum TransferMode
     {
         Buffered,
-        Streamed
+        Streamed,
     };
 
     public enum ReaderMode
     {
         Buffered,
-        Streamed
+        Streamed,
     };
 
     public static ReaderWriterType Binary = ReaderWriterType.Binary;
@@ -3456,7 +3456,7 @@ public enum SoapEncodedTestEnum
     A,
 
     [SoapEnum("Large")]
-    B
+    B,
 }
 
 public class SoapEncodedTestType2
@@ -3654,7 +3654,7 @@ public class JsonTypes
         {
             return new Dictionary<TestEnumValues, TestEnumValues>()
             {
-                { TestEnumValues.Value1, TestEnumValues.Value2 }
+                { TestEnumValues.Value1, TestEnumValues.Value2 },
             };
         }
     }
@@ -3668,7 +3668,7 @@ public class JsonTypes
                 {
                     new TestStruct() { value1 = 12 },
                     new TestStruct() { value1 = 15 }
-                }
+                },
             };
         }
     }
@@ -3683,19 +3683,19 @@ public class JsonTypes
                     new TestClass()
                     {
                         intList = new List<int>() { 1, 2 },
-                        floatNum = 45f
+                        floatNum = 45f,
                     },
                     new TestClass()
                     {
                         intList = new List<int>() { 4, 5 },
-                        floatNum = 90f
+                        floatNum = 90f,
                     }
                 },
                 {
                     new TestClass()
                     {
                         intList = new List<int>() { 6, 7 },
-                        floatNum = 10f
+                        floatNum = 10f,
                     },
                     new TestStruct() { value1 = 25 }
                 },
@@ -3710,7 +3710,7 @@ public class JsonTypes
         private Dictionary<string, string> _dict = new Dictionary<string, string>()
         {
             { "Title", "Sherlocl Kholmes" },
-            { "Name", "study scarlet" }
+            { "Name", "study scarlet" },
         };
     }
 
@@ -3777,7 +3777,7 @@ public class JsonTypes
                 new DateTime(1, 1, 1, 3, 58, 32),
                 new DateTime(DateTime.Now.Year, 12, 20),
                 new DateTime(1998, 1, 1),
-                new DateTime(1, 1, 1, 3, 58, 32, DateTimeKind.Utc)
+                new DateTime(1, 1, 1, 3, 58, 32, DateTimeKind.Utc),
             };
         }
     }
@@ -3792,7 +3792,7 @@ public class JsonTypes
                     new DateTime(1, 1, 1, 3, 58, 32),
                     new DateTime(1, 1, 1, 3, 58, 32, DateTimeKind.Utc)
                 },
-                { new DateTime(1998, 1, 1), new DateTime(DateTime.Now.Year, 12, 20) }
+                { new DateTime(1998, 1, 1), new DateTime(DateTime.Now.Year, 12, 20) },
             };
         }
     }
@@ -3805,7 +3805,7 @@ public class JsonTypes
             {
                 new Dictionary<string, string>() { { "Title", "Sherlocl Kholmes" } },
                 new int[] { 1, 2, 3 },
-                new object[] { "hi", 1, "there" }
+                new object[] { "hi", 1, "there" },
             };
         }
     }
@@ -3818,7 +3818,7 @@ public class JsonTypes
             {
                 new object[] { new KeyValuePair<string, string>("Title", "Sherlocl Kholmes") },
                 new object[] { 1, 2, 3 },
-                new object[] { "hi", 1, "there" }
+                new object[] { "hi", 1, "there" },
             };
         }
     }
@@ -3827,7 +3827,7 @@ public class JsonTypes
 public enum TestEnumValues
 {
     Value1 = 3,
-    Value2 = 4
+    Value2 = 4,
 }
 
 public struct TestStruct
@@ -4142,7 +4142,7 @@ public enum GroupType
 {
     Small,
     Medium,
-    Large
+    Large,
 }
 
 public class Group3WithXmlTextAttr
@@ -4397,7 +4397,7 @@ public class NetNativeTestData
         new DataContractSerializer(typeof(Invalid_Class_No_Parameterless_Ctor)),
         new DataContractSerializer(typeof(List<Invalid_Class_No_Parameterless_Ctor>)),
         new DataContractSerializer(typeof(Invalid_Class_Derived_With_DataContract)),
-        new DataContractSerializer(typeof(Invalid_Class_KnownType_Invalid_Type))
+        new DataContractSerializer(typeof(Invalid_Class_KnownType_Invalid_Type)),
     };
 
     public NetNativeTestData(Type type, Func<object> instantiate, string errorMessage)
@@ -4545,7 +4545,7 @@ public enum TestEnum
 {
     Off,
     On,
-    Both
+    Both,
 }
 
 public class EnumTestBase { }

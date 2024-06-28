@@ -33,7 +33,7 @@ namespace System.CommandLine.Suggest
                 "Print complete script for specific shell"
             )
             {
-                shellTypeArgument
+                shellTypeArgument,
             };
             CompleteScriptCommand.SetAction(context =>
             {
@@ -60,13 +60,13 @@ namespace System.CommandLine.Suggest
             GetCommand = new CliCommand("get", "Gets suggestions from the specified executable")
             {
                 ExecutableOption,
-                PositionOption
+                PositionOption,
             };
             GetCommand.SetAction(Get);
 
             var commandPathOption = new CliOption<string>("--command-path")
             {
-                Description = "The path to the command for which to register suggestions"
+                Description = "The path to the command for which to register suggestions",
             };
 
             RegisterCommand = new CliCommand("register", "Registers an app for suggestions")
@@ -74,8 +74,8 @@ namespace System.CommandLine.Suggest
                 commandPathOption,
                 new CliOption<string>("--suggestion-command")
                 {
-                    Description = "The command to invoke to retrieve suggestions"
-                }
+                    Description = "The command to invoke to retrieve suggestions",
+                },
             };
 
             RegisterCommand.SetAction(
@@ -107,7 +107,7 @@ namespace System.CommandLine.Suggest
         {
             var option = new CliOption<FileInfo>("--executable", "-e")
             {
-                Description = "The executable to call for suggestions"
+                Description = "The executable to call for suggestions",
             };
             option.AcceptLegalFilePathsOnly();
 
@@ -120,7 +120,7 @@ namespace System.CommandLine.Suggest
             new("--position", "-p")
             {
                 Description = "The current character position on the command line",
-                DefaultValueFactory = (_) => short.MaxValue
+                DefaultValueFactory = (_) => short.MaxValue,
             };
 
         private CliCommand RegisterCommand { get; }

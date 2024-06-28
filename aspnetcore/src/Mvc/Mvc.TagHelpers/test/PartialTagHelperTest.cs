@@ -106,7 +106,7 @@ public class PartialTagHelperTest
             Mock.Of<IViewBufferScope>()
         )
         {
-            ViewContext = viewContext
+            ViewContext = viewContext,
         };
 
         // Act
@@ -687,7 +687,7 @@ public class PartialTagHelperTest
             Name = partialName,
             ViewContext = viewContext,
             ViewData = viewData,
-            Optional = false
+            Optional = false,
         };
         var tagHelperContext = GetTagHelperContext();
         var output = GetTagHelperOutput();
@@ -735,7 +735,7 @@ public class PartialTagHelperTest
         {
             Name = partialName,
             ViewContext = viewContext,
-            Optional = true
+            Optional = true,
         };
         var tagHelperContext = GetTagHelperContext();
         var output = GetTagHelperOutput();
@@ -795,7 +795,7 @@ public class PartialTagHelperTest
         {
             Name = partialName,
             ViewContext = viewContext,
-            FallbackName = fallbackName
+            FallbackName = fallbackName,
         };
         var tagHelperContext = GetTagHelperContext();
         var output = GetTagHelperOutput();
@@ -880,7 +880,7 @@ public class PartialTagHelperTest
             Name = partialName,
             ViewContext = viewContext,
             ViewData = viewData,
-            FallbackName = fallbackName
+            FallbackName = fallbackName,
         };
         var tagHelperContext = GetTagHelperContext();
         var output = GetTagHelperOutput();
@@ -928,7 +928,7 @@ public class PartialTagHelperTest
         {
             Name = partialName,
             ViewContext = viewContext,
-            FallbackName = fallbackName
+            FallbackName = fallbackName,
         };
         var tagHelperContext = GetTagHelperContext();
         var output = GetTagHelperOutput();
@@ -983,7 +983,7 @@ public class PartialTagHelperTest
         {
             Name = partialName,
             ViewContext = viewContext,
-            FallbackName = fallbackName
+            FallbackName = fallbackName,
         };
         var tagHelperContext = GetTagHelperContext();
         var output = GetTagHelperOutput();

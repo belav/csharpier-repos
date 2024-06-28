@@ -73,7 +73,7 @@ namespace Castle.DynamicProxy
                 options
             )
             {
-                Logger = logger
+                Logger = logger,
             };
             return generator.GetProxyType();
         }
@@ -95,7 +95,7 @@ namespace Castle.DynamicProxy
                 options
             )
             {
-                Logger = logger
+                Logger = logger,
             };
             return generator.GetProxyType();
         }
@@ -119,7 +119,7 @@ namespace Castle.DynamicProxy
                 options
             )
             {
-                Logger = logger
+                Logger = logger,
             };
             return generator.GetProxyType();
         }
@@ -142,7 +142,7 @@ namespace Castle.DynamicProxy
                 options
             )
             {
-                Logger = logger
+                Logger = logger,
             };
             return generator.GetProxyType();
         }
@@ -165,7 +165,7 @@ namespace Castle.DynamicProxy
                 options
             )
             {
-                Logger = logger
+                Logger = logger,
             };
             return generator.GetProxyType();
         }

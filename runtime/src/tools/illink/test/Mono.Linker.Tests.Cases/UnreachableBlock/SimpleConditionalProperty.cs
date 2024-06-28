@@ -26,7 +26,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.3", "ldc.i4.3", "beq.s il_4", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.3", "ldc.i4.3", "beq.s il_4", "ret" })]
         static void TestProperty_int_1()
         {
             if (Prop != 3)
@@ -70,7 +70,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
                 "ldloca.s",
                 "initobj System.Nullable`1<System.Int64>",
                 "ldloc.0",
-                "ret"
+                "ret",
             }
         )]
         static long? TestProperty_int_4()
@@ -93,7 +93,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "brfalse.s il_3", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.0", "brfalse.s il_3", "ret" })]
         static void TestProperty_bool_2()
         {
             if (PropBool)
@@ -113,7 +113,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "br.s il_2", "ldc.i4.1", "pop", "ret", })]
+        [ExpectedInstructionSequence(new[] { "br.s il_2", "ldc.i4.1", "pop", "ret" })]
         static void TestProperty_enum_1()
         {
             while (PropEnum == TestEnum.C)
@@ -218,7 +218,7 @@ namespace Mono.Linker.Tests.Cases.UnreachableBlock
         {
             A = 0,
             B = 1,
-            C = 2
+            C = 2,
         }
 
         [Kept]

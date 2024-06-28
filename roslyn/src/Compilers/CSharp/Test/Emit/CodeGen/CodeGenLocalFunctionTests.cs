@@ -2280,7 +2280,7 @@ public class C
                         "C",
                         "<Main>g__LocalFunc|0_0",
                         ".method [System.Runtime.CompilerServices.CompilerGeneratedAttribute()] assembly hidebysig static System.Void <Main>g__LocalFunc|0_0([opt] System.Int32 a = 2) cil managed"
-                    )
+                    ),
                 }
             );
         }
@@ -6392,7 +6392,7 @@ class C
                         "<M>g__internalCallStatic|0_4" => MethodImplAttributes.InternalCall,
                         ".ctor" => MethodImplAttributes.IL,
                         "M" => MethodImplAttributes.IL,
-                        _ => throw TestExceptionUtilities.UnexpectedValue(methodName)
+                        _ => throw TestExceptionUtilities.UnexpectedValue(methodName),
                     };
 
                     Assert.Equal(expectedFlags, actualFlags);

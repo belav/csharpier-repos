@@ -36,7 +36,7 @@ public class ManualTestsAsync : TarTestsBase
             {
                 Access = FileAccess.ReadWrite,
                 Mode = FileMode.Create,
-                Options = FileOptions.DeleteOnClose
+                Options = FileOptions.DeleteOnClose,
             }
         );
         Stream s = unseekableStream

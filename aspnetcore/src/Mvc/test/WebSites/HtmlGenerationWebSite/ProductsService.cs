@@ -15,9 +15,9 @@ public class ProductsService
         ["Books"] = new[]
         {
             new Product { ProductName = "Book1" },
-            new Product { ProductName = "Book2" }
+            new Product { ProductName = "Book2" },
         },
-        ["Electronics"] = new[] { new Product { ProductName = "Laptops" } }
+        ["Electronics"] = new[] { new Product { ProductName = "Laptops" } },
     };
 
     public ProductsService(

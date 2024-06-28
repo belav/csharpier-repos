@@ -51,6 +51,6 @@ namespace System.Data.OracleClient.Oci
         OciDate = 0x9c,
         TimeStamp = 0xbb,
         IntervalYearToMonth = 0xbd,
-        IntervalDayToSecond = 0xbe
+        IntervalDayToSecond = 0xbe,
     }
 }

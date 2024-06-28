@@ -316,7 +316,7 @@ namespace Microsoft.Extensions.Hosting
                 })
                 {
                     // Make sure this doesn't hang the process
-                    IsBackground = true
+                    IsBackground = true,
                 };
 
                 // Start the thread

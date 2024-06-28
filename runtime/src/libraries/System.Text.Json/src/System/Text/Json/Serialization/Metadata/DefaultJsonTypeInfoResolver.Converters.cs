@@ -34,7 +34,7 @@ namespace System.Text.Json.Serialization.Metadata
                 // IEnumerable should always be second to last since they can convert any IEnumerable.
                 new IEnumerableConverterFactory(),
                 // Object should always be last since it converts any type.
-                new ObjectConverterFactory()
+                new ObjectConverterFactory(),
             ];
         }
 

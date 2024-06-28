@@ -127,7 +127,7 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             {
                 FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesComputation,
                 FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesComputation,
-                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
             };
 
             Logger.Log(
@@ -161,7 +161,7 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             {
                 FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesPreviewChanges,
                 FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesPreviewChanges,
-                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
             };
 
             Logger.Log(

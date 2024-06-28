@@ -20,7 +20,7 @@ namespace MonoTests.System.Text.RegularExpressions
         {
             LTR = 1,
             RTL = 2,
-            Both = 3
+            Both = 3,
         }
 
         struct testcase

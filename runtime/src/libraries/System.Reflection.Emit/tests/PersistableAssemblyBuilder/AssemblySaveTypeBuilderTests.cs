@@ -50,7 +50,7 @@ namespace System.Reflection.Emit.Tests
             yield return new object[] { new Type[] { typeof(INoMethod), typeof(IOneMethod) } };
             yield return new object[]
             {
-                new Type[] { typeof(IMultipleMethod), typeof(EmptyTestClass) }
+                new Type[] { typeof(IMultipleMethod), typeof(EmptyTestClass) },
             };
             yield return new object[]
             {
@@ -60,14 +60,14 @@ namespace System.Reflection.Emit.Tests
                     typeof(EmptyTestClass),
                     typeof(IAccess),
                     typeof(IOneMethod),
-                    typeof(INoMethod)
-                }
+                    typeof(INoMethod),
+                },
             };
             yield return new object[] { new Type[] { typeof(EmptyStruct) } };
             yield return new object[] { new Type[] { typeof(StructWithFields) } };
             yield return new object[]
             {
-                new Type[] { typeof(StructWithFields), typeof(EmptyStruct) }
+                new Type[] { typeof(StructWithFields), typeof(EmptyStruct) },
             };
             yield return new object[]
             {
@@ -76,8 +76,8 @@ namespace System.Reflection.Emit.Tests
                     typeof(IMultipleMethod),
                     typeof(StructWithFields),
                     typeof(ClassWithFields),
-                    typeof(EmptyTestClass)
-                }
+                    typeof(EmptyTestClass),
+                },
             };
         }
 
@@ -477,19 +477,19 @@ namespace System.Reflection.Emit.Tests
             {
                 new string[] { "U", "T" },
                 new Type[] { typeof(string), typeof(int) },
-                "TestInterface[System.String,System.Int32]"
+                "TestInterface[System.String,System.Int32]",
             };
             yield return new object[]
             {
                 new string[] { "U", "T" },
                 new Type[] { typeof(MakeGenericTypeClass), typeof(MakeGenericTypeInterface) },
-                "TestInterface[System.Reflection.Emit.Tests.MakeGenericTypeClass,System.Reflection.Emit.Tests.MakeGenericTypeInterface]"
+                "TestInterface[System.Reflection.Emit.Tests.MakeGenericTypeClass,System.Reflection.Emit.Tests.MakeGenericTypeInterface]",
             };
             yield return new object[]
             {
                 new string[] { "U" },
                 new Type[] { typeof(List<string>) },
-                "TestInterface[System.Collections.Generic.List`1[System.String]]"
+                "TestInterface[System.Collections.Generic.List`1[System.String]]",
             };
         }
 

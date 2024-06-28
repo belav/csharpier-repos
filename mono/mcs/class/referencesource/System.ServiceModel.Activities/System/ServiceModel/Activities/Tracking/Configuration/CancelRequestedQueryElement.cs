@@ -87,7 +87,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             return new CancelRequestedQuery
             {
                 ActivityName = this.ActivityName,
-                ChildActivityName = this.ChildActivityName
+                ChildActivityName = this.ChildActivityName,
             };
         }
     }

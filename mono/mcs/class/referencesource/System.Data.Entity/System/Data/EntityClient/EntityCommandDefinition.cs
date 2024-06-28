@@ -87,7 +87,7 @@ namespace System.Data.EntityClient
                     );
                     _columnMapGenerators = new IColumnMapGenerator[]
                     {
-                        new ConstantColumnMapGenerator(columnMap, columnCount)
+                        new ConstantColumnMapGenerator(columnMap, columnCount),
                     };
                     // Note: we presume that the first item in the ProviderCommandInfo is the root node;
                     Debug.Assert(
@@ -176,7 +176,7 @@ namespace System.Data.EntityClient
                         storeProviderServices.CreateCommandDefinition(providerCommandTree);
                     _mappedCommandDefinitions = new List<DbCommandDefinition>(1)
                     {
-                        storeCommandDefinition
+                        storeCommandDefinition,
                     };
 
                     EntitySet firstResultEntitySet =

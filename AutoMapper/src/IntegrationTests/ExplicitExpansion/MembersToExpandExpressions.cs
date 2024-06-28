@@ -64,8 +64,8 @@ public class MembersToExpandExpressions : AutoMapperSpecBase, IAsyncLifetime
         Inner = new SourceInner
         {
             Desc = -25,
-            Deep = new SourceDeepInner() { Desc = 28 }
-        }
+            Deep = new SourceDeepInner() { Desc = 28 },
+        },
     };
 
     public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>

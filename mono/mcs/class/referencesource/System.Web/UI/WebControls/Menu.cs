@@ -1026,10 +1026,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///     Gets and sets the Menu's selected node.
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public MenuItem SelectedItem
         {
             get { return _selectedItem; }

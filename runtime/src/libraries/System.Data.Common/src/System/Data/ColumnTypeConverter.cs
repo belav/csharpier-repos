@@ -51,7 +51,7 @@ namespace System.Data
             typeof(SqlMoney),
             typeof(SqlBytes),
             typeof(SqlChars),
-            typeof(SqlXml)
+            typeof(SqlXml),
         };
         private StandardValuesCollection? _values;
 

@@ -21,12 +21,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     new DerivedCompareAttribute("CompareProperty"),
                     "a",
                     new ValidationContext(new CompareObject("b"))
-                )
+                ),
             };
 
         private static ValidationContext s_context = new ValidationContext(new CompareObject("a"))
         {
-            DisplayName = "CurrentProperty"
+            DisplayName = "CurrentProperty",
         };
 
         protected override IEnumerable<TestCase> InvalidValues() =>
@@ -47,7 +47,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
                     new CompareAttribute(nameof(CompareObject.CompareProperty)),
                     "b",
                     new ValidationContext(new CompareObjectSubClass("a"))
-                )
+                ),
             };
 
         [Fact]

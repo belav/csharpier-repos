@@ -50,11 +50,9 @@ namespace System.Globalization.Tests
             string charCategoryString = data[2];
             string numericValueString = data[8];
             StrongBidiCategory bidiCategory =
-                data[4] == "L"
-                    ? StrongBidiCategory.StrongLeftToRight
-                    : data[4] == "R" || data[4] == "AL"
-                        ? StrongBidiCategory.StrongRightToLeft
-                        : StrongBidiCategory.Other;
+                data[4] == "L" ? StrongBidiCategory.StrongLeftToRight
+                : data[4] == "R" || data[4] == "AL" ? StrongBidiCategory.StrongRightToLeft
+                : StrongBidiCategory.Other;
 
             int codePoint = int.Parse(charValueString, NumberStyles.HexNumber);
             Parse(testCases, codePoint, charCategoryString, numericValueString, bidiCategory);
@@ -120,7 +118,7 @@ namespace System.Globalization.Tests
             ["Mc"] = UnicodeCategory.SpacingCombiningMark,
             ["Cs"] = UnicodeCategory.Surrogate,
             ["Lt"] = UnicodeCategory.TitlecaseLetter,
-            ["Lu"] = UnicodeCategory.UppercaseLetter
+            ["Lu"] = UnicodeCategory.UppercaseLetter,
         };
 
         private static void Parse(
@@ -145,7 +143,7 @@ namespace System.Globalization.Tests
                     GeneralCategory = generalCategory,
                     NumericValue = numericValue,
                     CodePoint = codePoint,
-                    BidiCategory = bidiCategory
+                    BidiCategory = bidiCategory,
                 }
             );
         }

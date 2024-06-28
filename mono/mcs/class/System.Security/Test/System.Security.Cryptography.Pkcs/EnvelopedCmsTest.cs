@@ -1867,7 +1867,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x02,
             0x02,
             0x07,
-            0xD0
+            0xD0,
         };
 
         private void DefaultProperties(EnvelopedCms ep, int contentLength, int version)
@@ -2305,7 +2305,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0xEC,
                 0xAD,
                 0xC5,
-                0xB5
+                0xB5,
             };
             EnvelopedCms ep = new EnvelopedCms();
             ep.Decode(encoded);
@@ -2658,7 +2658,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0xEC,
                 0xAD,
                 0xC5,
-                0xB5
+                0xB5,
             };
             EnvelopedCms ep = new EnvelopedCms();
             ep.Decode(encoded);

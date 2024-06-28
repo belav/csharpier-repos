@@ -39,7 +39,7 @@ app.MapGet("/{routeValue}", getRouteWithDefault);
                     fromRouteWithNullNameRequiredSource,
                     expectedBody,
                     200,
-                    expectedBody
+                    expectedBody,
                 },
                 new object[] { fromRouteWithNullNameRequiredSource, null, 400, string.Empty },
                 new object[] { fromRouteNullableSource, expectedBody, 200, expectedBody },

@@ -1055,7 +1055,7 @@ namespace System.Threading.Tasks
             Completing = 0x4,
 
             /// <summary>The scheduler pair is finished processing.</summary>
-            Completed = 0x8
+            Completed = 0x8,
         }
     }
 }

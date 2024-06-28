@@ -59,7 +59,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         private static readonly char[] s_directorySeparators =
         [
             PathUtilities.DirectorySeparatorChar,
-            PathUtilities.AltDirectorySeparatorChar
+            PathUtilities.AltDirectorySeparatorChar,
         ];
 
         /// <summary>

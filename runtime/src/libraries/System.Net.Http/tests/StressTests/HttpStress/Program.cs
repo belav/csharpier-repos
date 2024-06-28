@@ -30,7 +30,7 @@ namespace HttpStress
         {
             Success = 0,
             StressError = 1,
-            CliError = 2
+            CliError = 2,
         };
 
         public static readonly bool IsQuicSupported =
@@ -55,19 +55,19 @@ namespace HttpStress
             cmd.AddOption(
                 new Option("-n", "Max number of requests to make concurrently.")
                 {
-                    Argument = new Argument<int>("numWorkers", Environment.ProcessorCount)
+                    Argument = new Argument<int>("numWorkers", Environment.ProcessorCount),
                 }
             );
             cmd.AddOption(
                 new Option("-serverUri", "Stress suite server uri.")
                 {
-                    Argument = new Argument<string>("serverUri", "https://localhost:5001")
+                    Argument = new Argument<string>("serverUri", "https://localhost:5001"),
                 }
             );
             cmd.AddOption(
                 new Option("-runMode", "Stress suite execution mode. Defaults to Both.")
                 {
-                    Argument = new Argument<RunMode>("runMode", RunMode.both)
+                    Argument = new Argument<RunMode>("runMode", RunMode.both),
                 }
             );
             cmd.AddOption(
@@ -76,7 +76,7 @@ namespace HttpStress
                     "Maximum stress execution time, in minutes. Defaults to infinity."
                 )
                 {
-                    Argument = new Argument<double?>("minutes", null)
+                    Argument = new Argument<double?>("minutes", null),
                 }
             );
             cmd.AddOption(
@@ -85,13 +85,13 @@ namespace HttpStress
                     "Max content length for request and response bodies."
                 )
                 {
-                    Argument = new Argument<int>("numBytes", 1000)
+                    Argument = new Argument<int>("numBytes", 1000),
                 }
             );
             cmd.AddOption(
                 new Option("-maxRequestUriSize", "Max query string length support by the server.")
                 {
-                    Argument = new Argument<int>("numChars", 5000)
+                    Argument = new Argument<int>("numChars", 5000),
                 }
             );
             cmd.AddOption(
@@ -100,37 +100,37 @@ namespace HttpStress
                     "Maximum number of headers to place in request"
                 )
                 {
-                    Argument = new Argument<int>("numHeaders", 90)
+                    Argument = new Argument<int>("numHeaders", 90),
                 }
             );
             cmd.AddOption(
                 new Option("-maxRequestHeaderTotalSize", "Max request header total size.")
                 {
-                    Argument = new Argument<int>("numBytes", 1000)
+                    Argument = new Argument<int>("numBytes", 1000),
                 }
             );
             cmd.AddOption(
                 new Option("-http", "HTTP version (1.1 or 2.0 or 3.0)")
                 {
-                    Argument = new Argument<Version>("version", HttpVersion.Version20)
+                    Argument = new Argument<Version>("version", HttpVersion.Version20),
                 }
             );
             cmd.AddOption(
                 new Option("-connectionLifetime", "Max connection lifetime length (milliseconds).")
                 {
-                    Argument = new Argument<int?>("connectionLifetime", null)
+                    Argument = new Argument<int?>("connectionLifetime", null),
                 }
             );
             cmd.AddOption(
                 new Option("-ops", "Indices of the operations to use")
                 {
-                    Argument = new Argument<int[]?>("space-delimited indices", null)
+                    Argument = new Argument<int[]?>("space-delimited indices", null),
                 }
             );
             cmd.AddOption(
                 new Option("-xops", "Indices of the operations to exclude")
                 {
-                    Argument = new Argument<int[]?>("space-delimited indices", null)
+                    Argument = new Argument<int[]?>("space-delimited indices", null),
                 }
             );
             cmd.AddOption(
@@ -139,19 +139,19 @@ namespace HttpStress
                     "Enable System.Net.Http.InternalDiagnostics (client) and/or ASP.NET dignostics (server) tracing."
                 )
                 {
-                    Argument = new Argument<bool>("enable", false)
+                    Argument = new Argument<bool>("enable", false),
                 }
             );
             cmd.AddOption(
                 new Option("-aspnetlog", "Enable ASP.NET warning and error logging.")
                 {
-                    Argument = new Argument<bool>("enable", false)
+                    Argument = new Argument<bool>("enable", false),
                 }
             );
             cmd.AddOption(
                 new Option("-listOps", "List available options.")
                 {
-                    Argument = new Argument<bool>("enable", false)
+                    Argument = new Argument<bool>("enable", false),
                 }
             );
             cmd.AddOption(
@@ -160,7 +160,7 @@ namespace HttpStress
                     "Seed for generating pseudo-random parameters for a given -n argument."
                 )
                 {
-                    Argument = new Argument<int?>("seed", null)
+                    Argument = new Argument<int?>("seed", null),
                 }
             );
             cmd.AddOption(
@@ -169,7 +169,7 @@ namespace HttpStress
                     "Max number of query parameters or form fields for a request."
                 )
                 {
-                    Argument = new Argument<int>("queryParameters", 1)
+                    Argument = new Argument<int>("queryParameters", 1),
                 }
             );
             cmd.AddOption(
@@ -178,19 +178,19 @@ namespace HttpStress
                     "Number between 0 and 1 indicating rate of client-side request cancellation attempts. Defaults to 0.1."
                 )
                 {
-                    Argument = new Argument<double>("probability", 0.1)
+                    Argument = new Argument<double>("probability", 0.1),
                 }
             );
             cmd.AddOption(
                 new Option("-httpSys", "Use http.sys instead of Kestrel.")
                 {
-                    Argument = new Argument<bool>("enable", false)
+                    Argument = new Argument<bool>("enable", false),
                 }
             );
             cmd.AddOption(
                 new Option("-winHttp", "Use WinHttpHandler for the stress client.")
                 {
-                    Argument = new Argument<bool>("enable", false)
+                    Argument = new Argument<bool>("enable", false),
                 }
             );
             cmd.AddOption(
@@ -199,7 +199,7 @@ namespace HttpStress
                     "Client stats display interval in seconds. Defaults to 5 seconds."
                 )
                 {
-                    Argument = new Argument<int>("seconds", 5)
+                    Argument = new Argument<int>("seconds", 5),
                 }
             );
             cmd.AddOption(
@@ -208,7 +208,7 @@ namespace HttpStress
                     "Default HttpClient timeout in seconds. Defaults to 60 seconds."
                 )
                 {
-                    Argument = new Argument<int>("seconds", 60)
+                    Argument = new Argument<int>("seconds", 60),
                 }
             );
             cmd.AddOption(
@@ -217,13 +217,13 @@ namespace HttpStress
                     "Overrides kestrel max concurrent streams per connection."
                 )
                 {
-                    Argument = new Argument<int?>("streams", null)
+                    Argument = new Argument<int?>("streams", null),
                 }
             );
             cmd.AddOption(
                 new Option("-serverMaxFrameSize", "Overrides kestrel max frame size setting.")
                 {
-                    Argument = new Argument<int?>("bytes", null)
+                    Argument = new Argument<int?>("bytes", null),
                 }
             );
             cmd.AddOption(
@@ -232,7 +232,7 @@ namespace HttpStress
                     "Overrides kestrel initial connection window size setting."
                 )
                 {
-                    Argument = new Argument<int?>("bytes", null)
+                    Argument = new Argument<int?>("bytes", null),
                 }
             );
             cmd.AddOption(
@@ -241,7 +241,7 @@ namespace HttpStress
                     "Overrides kestrel max request header field size."
                 )
                 {
-                    Argument = new Argument<int?>("bytes", null)
+                    Argument = new Argument<int?>("bytes", null),
                 }
             );
 
@@ -349,12 +349,11 @@ namespace HttpStress
             {
                 (null, null) => clientOperations,
                 (int[] incl, null) => incl.Select(i => clientOperations[i]).ToArray(),
-                (_, int[] excl) =>
-                    Enumerable
-                        .Range(0, clientOperations.Length)
-                        .Except(excl)
-                        .Select(i => clientOperations[i])
-                        .ToArray(),
+                (_, int[] excl) => Enumerable
+                    .Range(0, clientOperations.Length)
+                    .Except(excl)
+                    .Select(i => clientOperations[i])
+                    .ToArray(),
             };
 
             string GetAssemblyInfo(Assembly assembly) =>

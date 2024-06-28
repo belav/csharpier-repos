@@ -26,7 +26,7 @@ public class ResponseCachingMiddleware
         "Date",
         "ETag",
         "Expires",
-        "Vary"
+        "Vary",
     };
 
     private readonly RequestDelegate _next;
@@ -317,7 +317,7 @@ public class ResponseCachingMiddleware
                     {
                         VaryByKeyPrefix = FastGuid.NewGuid().IdString,
                         Headers = normalizedVaryHeaders,
-                        QueryKeys = normalizedVaryQueryKeys
+                        QueryKeys = normalizedVaryQueryKeys,
                     };
                 }
 
@@ -344,7 +344,7 @@ public class ResponseCachingMiddleware
             {
                 Created = context.ResponseDate.Value,
                 StatusCode = response.StatusCode,
-                Headers = new HeaderDictionary()
+                Headers = new HeaderDictionary(),
             };
 
             foreach (var header in headers)

@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.ExtractInterface
                         new DocumentNavigationOperation(
                             extractInterfaceResult.NavigationDocumentId,
                             position: 0
-                        )
+                        ),
                     };
                 }
             }

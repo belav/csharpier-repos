@@ -17,7 +17,7 @@ namespace ILCompiler.Logging
         Info,
         Diagnostic,
 
-        WarningAsError = 0xFF
+        WarningAsError = 0xFF,
     }
 
     public readonly struct MessageContainer

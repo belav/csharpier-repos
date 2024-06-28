@@ -82,7 +82,7 @@ public abstract class SqlStoreTestBase<TUser, TRole, TKey>
             Email = email,
             PhoneNumber = phoneNumber,
             LockoutEnabled = lockoutEnabled,
-            LockoutEnd = lockoutEnd
+            LockoutEnd = lockoutEnd,
         };
     }
 

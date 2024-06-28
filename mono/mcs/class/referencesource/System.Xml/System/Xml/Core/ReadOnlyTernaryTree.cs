@@ -17,7 +17,7 @@ namespace System.Xml
         characterByte = 0,
         leftTree = 1,
         rightTree = 2,
-        data = 3
+        data = 3,
     };
 
     //
@@ -34,7 +34,7 @@ namespace System.Xml
         NO_ENTITIES = 16,
         HEAD = 32,
         BLOCK_WS = 64,
-        HAS_NS = 128
+        HAS_NS = 128,
     }
 
     internal enum AttributeProperties : uint
@@ -42,7 +42,7 @@ namespace System.Xml
         DEFAULT = 0,
         URI = 1,
         BOOLEAN = 2,
-        NAME = 4
+        NAME = 4,
     }
 
     /**

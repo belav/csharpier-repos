@@ -16,7 +16,7 @@ namespace Mono.Linker.Tests.Cases.DynamicDependencies
         references: new[] { "base.dll" },
         resources: new object[]
         {
-            "Dependencies/DynamicDependencyMethodInNonReferencedAssemblyLibrary.xml"
+            "Dependencies/DynamicDependencyMethodInNonReferencedAssemblyLibrary.xml",
         },
         addAsReference: false
     )]

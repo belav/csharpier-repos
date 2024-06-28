@@ -180,7 +180,7 @@ namespace System.Tests
                         "-03",
                         "-02",
                         null
-                    }
+                    },
                 };
             else if (
                 PlatformDetection.IsHybridGlobalizationOnOSX
@@ -239,7 +239,7 @@ namespace System.Tests
                         "Argentina Standard Time",
                         "Argentina Summer Time",
                         null
-                    }
+                    },
                 };
             else if (PlatformDetection.IsWindows)
                 return new TheoryData<TimeZoneInfo, string, string, string, string, string>
@@ -291,7 +291,7 @@ namespace System.Tests
                         "Argentina Standard Time",
                         "Argentina Daylight Time",
                         "Argentina Summer Time"
-                    }
+                    },
                 };
             else
                 return new TheoryData<TimeZoneInfo, string, string, string, string, string>
@@ -343,7 +343,7 @@ namespace System.Tests
                         "Argentina Standard Time",
                         "Argentina Summer Time",
                         null
-                    }
+                    },
                 };
         }
 
@@ -2995,7 +2995,7 @@ namespace System.Tests
             TimeSpan[] localOffsets = new TimeSpan[]
             {
                 new TimeSpan(-7, 0, 0),
-                new TimeSpan(-8, 0, 0)
+                new TimeSpan(-8, 0, 0),
             };
             VerifyAmbiguousOffsetsException<ArgumentException>(
                 TimeZoneInfo.Local,
@@ -4793,7 +4793,7 @@ namespace System.Tests
             "UCT",
             "UTC",
             "Universal",
-            "Zulu"
+            "Zulu",
         };
 
         // On Android GMT, GMT+0, and GMT-0 are values

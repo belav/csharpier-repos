@@ -31,7 +31,7 @@ public class SqlServerFromPartsFunctionTranslator : IMethodCallTranslator
                 typeof(int),
                 typeof(int),
                 typeof(int),
-                typeof(int)
+                typeof(int),
             }
         )!;
 
@@ -48,7 +48,7 @@ public class SqlServerFromPartsFunctionTranslator : IMethodCallTranslator
                 typeof(int),
                 typeof(int),
                 typeof(int),
-                typeof(int)
+                typeof(int),
             }
         )!;
 
@@ -67,7 +67,7 @@ public class SqlServerFromPartsFunctionTranslator : IMethodCallTranslator
                 typeof(int),
                 typeof(int),
                 typeof(int),
-                typeof(int)
+                typeof(int),
             }
         )!;
 
@@ -81,7 +81,7 @@ public class SqlServerFromPartsFunctionTranslator : IMethodCallTranslator
                 typeof(int),
                 typeof(int),
                 typeof(int),
-                typeof(int)
+                typeof(int),
             }
         )!;
 
@@ -95,7 +95,7 @@ public class SqlServerFromPartsFunctionTranslator : IMethodCallTranslator
                 typeof(int),
                 typeof(int),
                 typeof(int),
-                typeof(int)
+                typeof(int),
             }
         )!;
 
@@ -109,7 +109,7 @@ public class SqlServerFromPartsFunctionTranslator : IMethodCallTranslator
         { DateTime2FromPartsMethodInfo, ("DATETIME2FROMPARTS", "datetime2") },
         { DateTimeOffsetFromPartsMethodInfo, ("DATETIMEOFFSETFROMPARTS", "datetimeoffset") },
         { SmallDateTimeFromPartsMethodInfo, ("SMALLDATETIMEFROMPARTS", "smalldatetime") },
-        { TimeFromPartsMethodInfo, ("TIMEFROMPARTS", "time") }
+        { TimeFromPartsMethodInfo, ("TIMEFROMPARTS", "time") },
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;

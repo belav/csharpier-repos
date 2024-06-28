@@ -16,7 +16,7 @@ namespace A
         public enum Mat
         {
             A = 5,
-            B
+            B,
         }
 
         public static void Main()

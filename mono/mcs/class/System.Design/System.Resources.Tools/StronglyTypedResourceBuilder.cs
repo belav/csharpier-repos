@@ -72,7 +72,7 @@ namespace System.Resources.Tools
             '\"',
             '\'',
             ':',
-            '!'
+            '!',
         };
 
         static char[] specialCharsNameSpace =
@@ -104,7 +104,7 @@ namespace System.Resources.Tools
             '}',
             '\"',
             '\'',
-            '!'
+            '!',
         };
 
         public static CodeCompileUnit Create(

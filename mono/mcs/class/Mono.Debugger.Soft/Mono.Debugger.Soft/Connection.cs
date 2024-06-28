@@ -181,7 +181,7 @@ namespace Mono.Debugger.Soft
         VALUE_TYPE_ID_NULL = 0xf0,
         VALUE_TYPE_ID_TYPE = 0xf1,
         VALUE_TYPE_ID_PARENT_VTYPE = 0xf2,
-        VALUE_TYPE_ID_FIXED_ARRAY = 0xf3
+        VALUE_TYPE_ID_FIXED_ARRAY = 0xf3,
     }
 
     [Flags]
@@ -235,7 +235,7 @@ namespace Mono.Debugger.Soft
 
         Type = 0x50,
         Boxed = 0x51,
-        Enum = 0x55
+        Enum = 0x55,
     }
 
     class ValueImpl
@@ -275,7 +275,7 @@ namespace Mono.Debugger.Soft
         TYPE = 1,
         FIELD = 2,
         METHOD = 3,
-        UNKNOWN = 4
+        UNKNOWN = 4,
     }
 
     [Flags]
@@ -283,7 +283,7 @@ namespace Mono.Debugger.Soft
     {
         NONE = 0,
         DEBUGGER_INVOKE = 1,
-        NATIVE_TRANSITION = 2
+        NATIVE_TRANSITION = 2,
     }
 
     class ResolvedToken
@@ -394,7 +394,7 @@ namespace Mono.Debugger.Soft
         ERR_NO_INVOCATION = 104,
         ABSENT_INFORMATION = 105,
         NO_SEQ_POINT_AT_IL_OFFSET = 106,
-        INVOKE_ABORTED = 107
+        INVOKE_ABORTED = 107,
     }
 
     public class ErrorHandlerEventArgs : EventArgs
@@ -437,7 +437,7 @@ namespace Mono.Debugger.Soft
         {
             NONE = 0,
             EVENT_THREAD = 1,
-            ALL = 2
+            ALL = 2,
         }
 
         enum CommandSet
@@ -456,7 +456,7 @@ namespace Mono.Debugger.Soft
             MODULE = 24,
             FIELD = 25,
             EVENT = 64,
-            POINTER = 65
+            POINTER = 65,
         }
 
         enum EventKind
@@ -478,7 +478,7 @@ namespace Mono.Debugger.Soft
             KEEPALIVE = 14,
             USER_BREAK = 15,
             USER_LOG = 16,
-            CRASH = 17
+            CRASH = 17,
         }
 
         enum ModifierKind
@@ -490,7 +490,7 @@ namespace Mono.Debugger.Soft
             STEP = 10,
             ASSEMBLY_ONLY = 11,
             SOURCE_FILE_ONLY = 12,
-            TYPE_NAME_ONLY = 13
+            TYPE_NAME_ONLY = 13,
         }
 
         enum CmdVM
@@ -509,12 +509,12 @@ namespace Mono.Debugger.Soft
             GET_TYPES = 12,
             INVOKE_METHODS = 13,
             START_BUFFERING = 14,
-            STOP_BUFFERING = 15
+            STOP_BUFFERING = 15,
         }
 
         enum CmdEvent
         {
-            COMPOSITE = 100
+            COMPOSITE = 100,
         }
 
         enum CmdThread
@@ -530,14 +530,14 @@ namespace Mono.Debugger.Soft
             /* Ditto */
             GET_TID = 6,
             SET_IP = 7,
-            GET_ELAPSED_TIME = 8
+            GET_ELAPSED_TIME = 8,
         }
 
         enum CmdEventRequest
         {
             SET = 1,
             CLEAR = 2,
-            CLEAR_ALL_BREAKPOINTS = 3
+            CLEAR_ALL_BREAKPOINTS = 3,
         }
 
         enum CmdAppDomain
@@ -587,7 +587,7 @@ namespace Mono.Debugger.Soft
             GET_BODY = 7,
             RESOLVE_TOKEN = 8,
             GET_CATTRS = 9,
-            MAKE_GENERIC_METHOD = 10
+            MAKE_GENERIC_METHOD = 10,
         }
 
         enum CmdType
@@ -615,12 +615,12 @@ namespace Mono.Debugger.Soft
             GET_INTERFACE_MAP = 17,
             IS_INITIALIZED = 18,
             CREATE_INSTANCE = 19,
-            GET_VALUE_SIZE = 20
+            GET_VALUE_SIZE = 20,
         }
 
         enum CmdField
         {
-            GET_INFO = 1
+            GET_INFO = 1,
         }
 
         [Flags]
@@ -632,7 +632,7 @@ namespace Mono.Debugger.Soft
         enum MemberListTypeExtensions
         {
             CaseSensitive = 1,
-            CaseInsensitive = 2
+            CaseInsensitive = 2,
         }
 
         enum CmdStackFrame
@@ -648,19 +648,19 @@ namespace Mono.Debugger.Soft
         {
             GET_LENGTH = 1,
             GET_VALUES = 2,
-            SET_VALUES = 3
+            SET_VALUES = 3,
         }
 
         enum CmdStringRef
         {
             GET_VALUE = 1,
             GET_LENGTH = 2,
-            GET_CHARS = 3
+            GET_CHARS = 3,
         }
 
         enum CmdPointer
         {
-            GET_VALUE = 1
+            GET_VALUE = 1,
         }
 
         enum CmdObjectRef
@@ -969,7 +969,7 @@ namespace Mono.Debugger.Soft
                             {
                                 Type = etype,
                                 Klass = pointerClass,
-                                Value = value
+                                Value = value,
                             };
                         }
                         else
@@ -995,7 +995,7 @@ namespace Mono.Debugger.Soft
                             Type = etype,
                             Klass = klass,
                             Fields = fields,
-                            IsEnum = is_enum
+                            IsEnum = is_enum,
                         };
                     case (ElementType)ValueTypeId.VALUE_TYPE_ID_NULL:
                         return new ValueImpl { Type = etype };
@@ -1735,7 +1735,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = thread_id
+                                Id = thread_id,
                             };
                             //EventHandler.ThreadStart (req_id, thread_id, thread_id);
                         }
@@ -1744,7 +1744,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = thread_id
+                                Id = thread_id,
                             };
                             //EventHandler.ThreadDeath (req_id, thread_id, thread_id);
                         }
@@ -1754,7 +1754,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.AssemblyLoad (req_id, thread_id, id);
                         }
@@ -1764,7 +1764,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.AssemblyUnload (req_id, thread_id, id);
                         }
@@ -1774,7 +1774,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.TypeLoad (req_id, thread_id, id);
                         }
@@ -1784,7 +1784,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.MethodEntry (req_id, thread_id, id);
                         }
@@ -1794,7 +1794,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.MethodExit (req_id, thread_id, id);
                         }
@@ -1806,7 +1806,7 @@ namespace Mono.Debugger.Soft
                             {
                                 ThreadId = thread_id,
                                 Id = id,
-                                Location = loc
+                                Location = loc,
                             };
                             //EventHandler.Breakpoint (req_id, thread_id, id, loc);
                         }
@@ -1818,7 +1818,7 @@ namespace Mono.Debugger.Soft
                             {
                                 ThreadId = thread_id,
                                 Id = id,
-                                Location = loc
+                                Location = loc,
                             };
                             //EventHandler.Step (req_id, thread_id, id, loc);
                         }
@@ -1830,7 +1830,7 @@ namespace Mono.Debugger.Soft
                             {
                                 ThreadId = thread_id,
                                 Id = id,
-                                Location = loc
+                                Location = loc,
                             };
                             //EventHandler.Exception (req_id, thread_id, id, loc);
                         }
@@ -1840,7 +1840,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.AppDomainCreate (req_id, thread_id, id);
                         }
@@ -1850,7 +1850,7 @@ namespace Mono.Debugger.Soft
                             events[i] = new EventInfo(etype, req_id)
                             {
                                 ThreadId = thread_id,
-                                Id = id
+                                Id = id,
                             };
                             //EventHandler.AppDomainUnload (req_id, thread_id, id);
                         }
@@ -1862,7 +1862,7 @@ namespace Mono.Debugger.Soft
                             {
                                 ThreadId = thread_id,
                                 Id = id,
-                                Location = loc
+                                Location = loc,
                             };
                             //EventHandler.Exception (req_id, thread_id, id, loc);
                         }
@@ -1876,7 +1876,7 @@ namespace Mono.Debugger.Soft
                                 ThreadId = thread_id,
                                 Level = level,
                                 Category = category,
-                                Message = message
+                                Message = message,
                             };
                             //EventHandler.Exception (req_id, thread_id, id, loc);
                         }
@@ -2116,7 +2116,7 @@ namespace Mono.Debugger.Soft
                                     new ErrorHandlerEventArgs()
                                     {
                                         ErrorCode = (ErrorCode)r.ErrorCode,
-                                        ErrorMessage = r.ErrorMsg
+                                        ErrorMessage = r.ErrorMsg,
                                     }
                                 );
                             throw new NotImplementedException("No error handler set.");
@@ -2990,7 +2990,7 @@ namespace Mono.Debugger.Soft
                 ScopeName = r.ReadString(),
                 FQName = r.ReadString(),
                 Guid = r.ReadString(),
-                Assembly = r.ReadId()
+                Assembly = r.ReadId(),
             };
             if (Version.AtLeast(2, 48))
                 info.SourceLink = r.ReadString();
@@ -3472,7 +3472,7 @@ namespace Mono.Debugger.Soft
                 Name = r.ReadString(),
                 Parent = r.ReadId(),
                 TypeId = r.ReadId(),
-                Attrs = r.ReadInt()
+                Attrs = r.ReadInt(),
             };
             return info;
         }

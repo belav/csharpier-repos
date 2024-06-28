@@ -36,6 +36,6 @@ namespace System.Web.Configuration
         MSN = 18,
         Digest = 21,
         MQ = 100,
-        Default = -1
+        Default = -1,
     }
 }

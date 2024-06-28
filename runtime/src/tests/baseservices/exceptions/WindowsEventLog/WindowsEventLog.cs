@@ -149,7 +149,7 @@ class Program
         {
             "The application requested process termination through System.Environment.FailFast(string message).",
             "ArgumentException",
-            cookie
+            cookie,
         };
         return LaunchTest("FailFast", logEntriesToCheck, cookie);
     }

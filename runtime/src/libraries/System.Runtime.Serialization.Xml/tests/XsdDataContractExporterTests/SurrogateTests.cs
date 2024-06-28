@@ -126,7 +126,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
                         ref s
                     );
-                }
+                },
             };
             yield return new object[]
             {
@@ -172,7 +172,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
                         ref s
                     );
-                }
+                },
             };
             yield return new object[]
             {
@@ -214,7 +214,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
                         ref s
                     );
-                }
+                },
             };
             yield return new object[]
             {
@@ -268,7 +268,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
                         ref s
                     );
-                }
+                },
             };
             yield return new object[]
             {
@@ -323,7 +323,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:schema targetNamespace=""http://www.w3.org/2001/XMLSchema"" xmlns:xs=""http://www.w3.org/2001/XMLSchema"">",
                         ref s
                     );
-                }
+                },
             };
         }
 
@@ -351,13 +351,13 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 typeof(SurrogateTests.InvalidSurrogateTest),
                 new CollectionASurrogate(),
-                typeof(InvalidDataContractException)
+                typeof(InvalidDataContractException),
             };
             yield return new object[]
             {
                 typeof(SurrogateTests.InvalidSurrogateTestDC),
                 new CollectionASurrogate(),
-                typeof(InvalidDataContractException)
+                typeof(InvalidDataContractException),
             };
         }
 

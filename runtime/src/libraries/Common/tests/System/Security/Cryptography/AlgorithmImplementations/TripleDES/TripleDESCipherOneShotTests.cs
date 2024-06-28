@@ -41,7 +41,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
             };
 
         protected override byte[] IV =>
-            new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, };
+            new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 };
 
         protected override SymmetricAlgorithm CreateAlgorithm() => TripleDESFactory.Create();
 
@@ -756,7 +756,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                     // plaintext
                     Array.Empty<byte>(),
                     // ciphertext
-                    new byte[] { 0x79, 0x6B, 0x9D, 0x8B, 0xFD, 0xD4, 0x23, 0xCE, },
+                    new byte[] { 0x79, 0x6B, 0x9D, 0x8B, 0xFD, 0xD4, 0x23, 0xCE },
                     PaddingMode.PKCS7,
                     CipherMode.CBC,
                 };
@@ -1262,7 +1262,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                     // plaintext
                     Array.Empty<byte>(),
                     // ciphertext
-                    new byte[] { 0x65, 0xE4, 0x9C, 0xD3, 0xE6, 0xBE, 0xB8, 0x40, },
+                    new byte[] { 0x65, 0xE4, 0x9C, 0xD3, 0xE6, 0xBE, 0xB8, 0x40 },
                     PaddingMode.PKCS7,
                     CipherMode.ECB,
                 };
@@ -1758,7 +1758,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                     // plaintext
                     Array.Empty<byte>(),
                     // ciphertext
-                    new byte[] { 0x17, },
+                    new byte[] { 0x17 },
                     PaddingMode.PKCS7,
                     CipherMode.CFB,
                     8,
@@ -2277,7 +2277,7 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                         // plaintext
                         Array.Empty<byte>(),
                         // ciphertext
-                        new byte[] { 0x1E, 0xE2, 0xAF, 0x50, 0x3D, 0xD3, 0x52, 0x78, },
+                        new byte[] { 0x1E, 0xE2, 0xAF, 0x50, 0x3D, 0xD3, 0x52, 0x78 },
                         PaddingMode.PKCS7,
                         CipherMode.CFB,
                         64,

@@ -54,7 +54,7 @@ namespace System.Tests
                 472.2,
                 472.6,
                 472.5,
-                471.5
+                471.5,
             };
             uint[] expectedValues = { 1000, 0, 0, 4294967295, 472, 473, 472, 472 };
             Verify(Convert.ToUInt32, testValues, expectedValues);
@@ -65,7 +65,7 @@ namespace System.Tests
                 -0.500000000001,
                 -100.0,
                 4294967296,
-                4294967295.5
+                4294967295.5,
             };
             VerifyThrows<OverflowException, double>(Convert.ToUInt32, overflowValues);
         }
@@ -152,7 +152,7 @@ namespace System.Tests
                 Int32.MaxValue.ToString(),
                 "2147483648",
                 "2147483649",
-                null
+                null,
             };
             uint[] expectedValues =
             {
@@ -163,7 +163,7 @@ namespace System.Tests
                 int.MaxValue,
                 (uint)int.MaxValue + 1,
                 (uint)int.MaxValue + 2,
-                0
+                0,
             };
             VerifyFromString(Convert.ToUInt32, Convert.ToUInt32, testValues, expectedValues);
 
@@ -201,7 +201,7 @@ namespace System.Tests
                 "0",
                 "2147483647",
                 "2147483648",
-                "2147483649"
+                "2147483649",
             };
             int[] testBases = { 10, 2, 8, 16, 16, 10, 8, 2, 16, 10, 8, 2, 10, 10, 10 };
             uint[] expectedValues =
@@ -220,7 +220,7 @@ namespace System.Tests
                 uint.MinValue,
                 (uint)int.MaxValue,
                 (uint)int.MaxValue + 1,
-                (uint)int.MaxValue + 2
+                (uint)int.MaxValue + 2,
             };
             VerifyFromStringWithBase(Convert.ToUInt32, testValues, testBases, expectedValues);
 
@@ -234,7 +234,7 @@ namespace System.Tests
                 "-4294967297",
                 "11111111111111111111111111111111111111111111111111111111111111111",
                 "1FFFFffffFFFFffff",
-                "7777777777777777777777777"
+                "7777777777777777777777777",
             };
             int[] overflowBases = { 10, 10, 10, 10, 10, 10, 2, 16, 8 };
             VerifyFromStringWithBaseThrows<OverflowException>(

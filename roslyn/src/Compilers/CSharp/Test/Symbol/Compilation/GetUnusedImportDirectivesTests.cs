@@ -272,7 +272,7 @@ namespace NamespaceContainingInternalsOnly
 }
 "
                     ),
-                    signing
+                    signing,
                 }
             );
 
@@ -297,7 +297,7 @@ public class C
 }
 "
                     ),
-                    signing
+                    signing,
                 }
             );
 

@@ -72,6 +72,8 @@ namespace System.Web.UI.WebControls
 
         Search = 31,
 
-        Enabled = 32 //This should be the last one
+        Enabled =
+            32 //This should be the last one
+        ,
     }
 }

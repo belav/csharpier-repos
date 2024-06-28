@@ -286,15 +286,14 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
                     .Replace("\t", "\\t")
                     .Replace("\n", "\\n")
                     .Replace("\r", "\\r");
-                var message = isDelete
-                    ? string.Format(Resources.Delete_0_characters, change.Span.Length)
-                    : isAdd
-                        ? string.Format(Resources.Insert_0, textChange)
-                        : string.Format(
-                            Resources.Replace_0_characters_with_1,
-                            change.Span.Length,
-                            textChange
-                        );
+                var message =
+                    isDelete ? string.Format(Resources.Delete_0_characters, change.Span.Length)
+                    : isAdd ? string.Format(Resources.Insert_0, textChange)
+                    : string.Format(
+                        Resources.Replace_0_characters_with_1,
+                        change.Span.Length,
+                        textChange
+                    );
                 return $" {message}";
             }
         }

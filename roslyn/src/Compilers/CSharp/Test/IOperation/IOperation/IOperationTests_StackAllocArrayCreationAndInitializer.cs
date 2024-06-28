@@ -36,7 +36,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
             {
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[1]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1]").WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -71,7 +71,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[1]
             {
                 // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc M[1]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[1]").WithLocation(8, 27)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[1]").WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -108,7 +108,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[di
                 // file.cs(9,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc M[dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[dimension]")
-                    .WithLocation(9, 27)
+                    .WithLocation(9, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -144,7 +144,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[di
                 // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc M[dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[dimension]")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -183,7 +183,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc M[di
                 // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc M[dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[dimension]")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -222,7 +222,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc  ...
                 // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc M[(int)dimension]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[(int)dimension]")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -257,7 +257,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[] { 42 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 42 }")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -292,7 +292,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[1] { 42 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[1] { 42 }")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -331,7 +331,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                         "stackalloc int[2] { 42 }"
                     )
                     .WithArguments("2")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -365,7 +365,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
             {
                 // file.cs(6,42): error CS0150: A constant value is expected
                 //         var a = /*<bind>*/stackalloc int[dimension] { 42 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ConstantExpected, "dimension").WithLocation(6, 42)
+                Diagnostic(ErrorCode.ERR_ConstantExpected, "dimension").WithLocation(6, 42),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -405,7 +405,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc  ...
                 // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc M[] { new M() }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc M[] { new M() }")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -445,7 +445,7 @@ IOperation:  (OperationKind.None, Type: M*, IsInvalid) (Syntax: 'stackalloc[] { 
                 // file.cs(8,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc[] { new M() }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc[] { new M() }")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitStackAllocArrayCreationExpressionSyntax>(
@@ -485,7 +485,7 @@ IOperation:  (OperationKind.None, Type: ?*, IsInvalid) (Syntax: 'stackalloc[]/*<
                 // file.cs(6,27): error CS0826: No best type found for implicitly-typed array
                 //         var x = /*<bind>*/stackalloc[]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "stackalloc[]/*</bind>*/")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitStackAllocArrayCreationExpressionSyntax>(
@@ -528,7 +528,7 @@ IOperation:  (OperationKind.None, Type: ?*, IsInvalid) (Syntax: 'stackalloc[2]/*
                 // file.cs(6,27): error CS0826: No best type found for implicitly-typed array
                 //         var x = /*<bind>*/stackalloc[2]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedArrayNoBestType, "stackalloc[2]/*</bind>*/")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitStackAllocArrayCreationExpressionSyntax>(
@@ -569,7 +569,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                 // file.cs(7,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var b = /*<bind>*/stackalloc[] { 2, a, default }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc[] { 2, a, default }")
-                    .WithLocation(7, 27)
+                    .WithLocation(7, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ImplicitStackAllocArrayCreationExpressionSyntax>(
@@ -603,7 +603,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
             {
                 // file.cs(6,41): error CS1586: Array creation must have array size or array initializer
                 //         var a = /*<bind>*/stackalloc int[]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_MissingArraySize, "[]").WithLocation(6, 41)
+                Diagnostic(ErrorCode.ERR_MissingArraySize, "[]").WithLocation(6, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -638,7 +638,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[] { 1 }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[] { 1 }")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -679,7 +679,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                     .WithLocation(6, 42),
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[b]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[b]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[b]").WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -717,7 +717,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
             {
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[M()]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[M()]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[M()]").WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -759,7 +759,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[(int)M()]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[(int)M()]")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -800,7 +800,7 @@ class C
                 //         var a = /*<bind>*/stackalloc int[M()]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectRequired, "M")
                     .WithArguments("C.M()")
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -843,7 +843,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                 //         var a = /*<bind>*/stackalloc int[(int)M()]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(int)M()")
                     .WithArguments("C", "int")
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(
@@ -884,7 +884,7 @@ IOperation:  (OperationKind.None, Type: System.Int32*, IsInvalid) (Syntax: 'stac
                     .WithLocation(6, 42),
                 // file.cs(6,27): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var a = /*<bind>*/stackalloc int[0.0]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[0.0]").WithLocation(6, 27)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[0.0]").WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<StackAllocArrayCreationExpressionSyntax>(

@@ -82,10 +82,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Gets the connection string for the AccessDataSource. This property is auto-generated and cannot be set.
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string ConnectionString
         {
             get
@@ -185,10 +182,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// Gets/sets the ADO.net managed provider name. This property is restricted to the OLE DB provider and cannot be set.
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string ProviderName
         {
             get { return OleDbProviderName; }
@@ -203,10 +197,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// A semi-colon delimited string indicating which databases to use for the dependency in the format "database1:table1;database2:table2".
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public override string SqlCacheDependency
         {
             get

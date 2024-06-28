@@ -53,7 +53,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignIn,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
@@ -62,7 +62,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Success,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -89,7 +89,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignIn,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
@@ -98,7 +98,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Redirect,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -124,7 +124,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignIn,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
@@ -133,7 +133,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Failure,
-                    ErrorMessage = "There was an error trying to log in."
+                    ErrorMessage = "There was an error trying to log in.",
                 }
             );
 
@@ -169,7 +169,7 @@ public class RemoteAuthenticatorCoreTests
             Task.FromResult(
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
-                    Status = RemoteAuthenticationStatus.Redirect
+                    Status = RemoteAuthenticationStatus.Redirect,
                 }
             );
 
@@ -200,7 +200,7 @@ public class RemoteAuthenticatorCoreTests
             Task.FromResult(
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
-                    Status = RemoteAuthenticationStatus.OperationCompleted
+                    Status = RemoteAuthenticationStatus.OperationCompleted,
                 }
             );
 
@@ -233,7 +233,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Success,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -276,7 +276,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Failure,
-                    ErrorMessage = "There was an error trying to log in"
+                    ErrorMessage = "There was an error trying to log in",
                 }
             );
 
@@ -338,7 +338,7 @@ public class RemoteAuthenticatorCoreTests
             [_onLogOutSucceeded] = new EventCallbackFactory().Create<RemoteAuthenticationState>(
                 remoteAuthenticator,
                 (state) => logOutCallbackInvocationCount++
-            )
+            ),
         };
 
         var initialParameters = ParameterView.FromDictionary(parameterDictionary);
@@ -376,7 +376,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignOut,
-                ReturnUrl = "https://www.example.com/base/"
+                ReturnUrl = "https://www.example.com/base/",
             }.ToState()
         );
 
@@ -388,7 +388,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Success,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -421,7 +421,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Success,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -451,7 +451,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignOut,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
@@ -463,7 +463,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Redirect,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -489,7 +489,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignIn,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
@@ -528,7 +528,7 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignIn,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
@@ -540,7 +540,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Failure,
-                    ErrorMessage = "There was an error trying to log out"
+                    ErrorMessage = "There was an error trying to log out",
                 }
             );
 
@@ -569,14 +569,14 @@ public class RemoteAuthenticatorCoreTests
             new InteractiveRequestOptions
             {
                 Interaction = InteractionType.SignIn,
-                ReturnUrl = "https://www.example.com/base/fetchData"
+                ReturnUrl = "https://www.example.com/base/fetchData",
             }.ToState()
         );
 
         var parameters = ParameterView.FromDictionary(
             new Dictionary<string, object>
             {
-                [_action] = RemoteAuthenticationActions.LogOutCallback
+                [_action] = RemoteAuthenticationActions.LogOutCallback,
             }
         );
 
@@ -611,14 +611,14 @@ public class RemoteAuthenticatorCoreTests
             Task.FromResult(
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
-                    Status = RemoteAuthenticationStatus.OperationCompleted
+                    Status = RemoteAuthenticationStatus.OperationCompleted,
                 }
             );
 
         var parameters = ParameterView.FromDictionary(
             new Dictionary<string, object>
             {
-                [_action] = RemoteAuthenticationActions.LogOutCallback
+                [_action] = RemoteAuthenticationActions.LogOutCallback,
             }
         );
 
@@ -647,7 +647,7 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Success,
-                    State = remoteAuthenticator.AuthenticationState
+                    State = remoteAuthenticator.AuthenticationState,
                 }
             );
 
@@ -689,14 +689,14 @@ public class RemoteAuthenticatorCoreTests
                 new RemoteAuthenticationResult<RemoteAuthenticationState>()
                 {
                     Status = RemoteAuthenticationStatus.Failure,
-                    ErrorMessage = "There was an error trying to log out"
+                    ErrorMessage = "There was an error trying to log out",
                 }
             );
 
         var parameters = ParameterView.FromDictionary(
             new Dictionary<string, object>
             {
-                [_action] = RemoteAuthenticationActions.LogOutCallback
+                [_action] = RemoteAuthenticationActions.LogOutCallback,
             }
         );
 
@@ -727,7 +727,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.LoggingIn = validator.FakeRender;
-                    }
+                    },
                 }
             },
             {
@@ -737,7 +737,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.CompletingLoggingIn = validator.FakeRender;
-                    }
+                    },
                 }
             },
             {
@@ -748,7 +748,7 @@ public class RemoteAuthenticatorCoreTests
                     {
                         remoteAuthenticator.LogInFailed = m =>
                             builder => validator.FakeRender(builder);
-                    }
+                    },
                 }
             },
             {
@@ -758,7 +758,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.LoggingIn = validator.FakeRender;
-                    }
+                    },
                 }
             },
             // Profile fragment overrides
@@ -769,7 +769,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.UserProfile = validator.FakeRender;
-                    }
+                    },
                 }
             },
             {
@@ -779,7 +779,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.LoggingIn = validator.FakeRender;
-                    }
+                    },
                 }
             },
             // Register fragment overrides
@@ -790,7 +790,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.Registering = validator.FakeRender;
-                    }
+                    },
                 }
             },
             {
@@ -800,7 +800,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.LogOut = validator.FakeRender;
-                    }
+                    },
                 }
             },
             {
@@ -810,7 +810,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.CompletingLogOut = validator.FakeRender;
-                    }
+                    },
                 }
             },
             {
@@ -821,7 +821,7 @@ public class RemoteAuthenticatorCoreTests
                     {
                         remoteAuthenticator.LogOutFailed = m =>
                             builder => validator.FakeRender(builder);
-                    }
+                    },
                 }
             },
             {
@@ -831,7 +831,7 @@ public class RemoteAuthenticatorCoreTests
                     SetupFakeRenderAction = (validator, remoteAuthenticator) =>
                     {
                         remoteAuthenticator.LogOutSucceeded = validator.FakeRender;
-                    }
+                    },
                 }
             },
         };
@@ -920,7 +920,7 @@ public class RemoteAuthenticatorCoreTests
                     RetrieveOriginalRenderAction = (validator, remoteAuthenticator) =>
                     {
                         validator.OriginalRender = remoteAuthenticator.UserProfile;
-                    }
+                    },
                 },
                 "ProfileNotSupportedFragment"
             },
@@ -935,10 +935,10 @@ public class RemoteAuthenticatorCoreTests
                     RetrieveOriginalRenderAction = (validator, remoteAuthenticator) =>
                     {
                         validator.OriginalRender = remoteAuthenticator.Registering;
-                    }
+                    },
                 },
                 "RegisterNotSupportedFragment"
-            }
+            },
         };
 
     [Theory]

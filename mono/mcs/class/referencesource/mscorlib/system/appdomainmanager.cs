@@ -33,7 +33,7 @@ namespace System
     public enum AppDomainManagerInitializationOptions
     {
         None = 0x0000,
-        RegisterWithHost = 0x0001
+        RegisterWithHost = 0x0001,
     }
 #endif // FEATURE_APPDOMAINMANAGER_INITOPTIONS
 

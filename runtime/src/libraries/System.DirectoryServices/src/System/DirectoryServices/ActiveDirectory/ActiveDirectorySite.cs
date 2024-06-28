@@ -23,7 +23,7 @@ namespace System.DirectoryServices.ActiveDirectory
         UseWindows2000IstgElection = 128,
         RandomBridgeHeaderServerSelectionDisabled = 256,
         UseHashingForReplicationSchedule = 512,
-        RedundantServerTopologyEnabled = 1024
+        RedundantServerTopologyEnabled = 1024,
     }
 
     public class ActiveDirectorySite : IDisposable
@@ -851,31 +851,31 @@ namespace System.DirectoryServices.ActiveDirectory
 
         internal static readonly string[] s_distinguishedName = new string[]
         {
-            "distinguishedName"
+            "distinguishedName",
         };
         private static readonly string[] s_propertiesToLoadArray = new string[]
         {
             "fromServer",
             "distinguishedName",
             "dNSHostName",
-            "objectCategory"
+            "objectCategory",
         };
         private static readonly string[] s_cnLocation = new string[] { "cn", "location" };
         private static readonly string[] s_cnDistinguishedName = new string[]
         {
             "cn",
-            "distinguishedName"
+            "distinguishedName",
         };
         private static readonly string[] s_dNSHostName = new string[] { "dNSHostName" };
         private static readonly string[] s_fromServerDistinguishedName = new string[]
         {
             "fromServer",
-            "distinguishedName"
+            "distinguishedName",
         };
         private static readonly string[] s_dNSHostNameDistinguishedName = new string[]
         {
             "dNSHostName",
-            "distinguishedName"
+            "distinguishedName",
         };
 
         public void Save()

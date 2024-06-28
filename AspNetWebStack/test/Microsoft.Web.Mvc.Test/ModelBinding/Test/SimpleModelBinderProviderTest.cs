@@ -75,7 +75,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 new Mock<IExtensibleModelBinder>().Object
             )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(object));
 
@@ -123,7 +123,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 factory
             )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
 
@@ -146,7 +146,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 theBinderInstance
             )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ExtensibleModelBindingContext bindingContext = GetBindingContext(typeof(string));
 
@@ -196,7 +196,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => null,
                     modelType
-                )
+                ),
             };
         }
     }

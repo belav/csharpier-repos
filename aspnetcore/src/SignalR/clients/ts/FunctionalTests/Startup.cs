@@ -69,7 +69,7 @@ public class Startup
                     ValidateIssuer = false,
                     ValidateActor = false,
                     ValidateLifetime = true,
-                    IssuerSigningKey = SecurityKey
+                    IssuerSigningKey = SecurityKey,
                 };
 
                 options.Events = new JwtBearerEvents
@@ -103,7 +103,7 @@ public class Startup
                         }
 
                         return Task.CompletedTask;
-                    }
+                    },
                 };
             });
 
@@ -202,7 +202,7 @@ public class Startup
                     var cookieOptions = new CookieOptions();
                     var expiredCookieOptions = new CookieOptions()
                     {
-                        Expires = DateTimeOffset.Now.AddHours(-1)
+                        Expires = DateTimeOffset.Now.AddHours(-1),
                     };
                     if (context.Request.IsHttps)
                     {

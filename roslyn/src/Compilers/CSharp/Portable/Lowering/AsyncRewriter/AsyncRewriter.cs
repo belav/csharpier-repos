@@ -263,7 +263,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 _asyncMethodBuilderMemberCollection.SetStateMachine,
                                 new BoundExpression[]
                                 {
-                                    F.Parameter(F.CurrentFunction.Parameters[0])
+                                    F.Parameter(F.CurrentFunction.Parameters[0]),
                                 }
                             )
                         ),

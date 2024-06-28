@@ -756,7 +756,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -784,7 +784,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -812,7 +812,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -839,7 +839,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -900,7 +900,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -939,7 +939,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -977,7 +977,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1012,7 +1012,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1045,7 +1045,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1079,7 +1079,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1117,7 +1117,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1349,7 +1349,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = new EndpointMetadataApiDescriptionProvider(
             endpointDataSource,
@@ -1395,7 +1395,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1429,7 +1429,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1469,7 +1469,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1507,7 +1507,7 @@ public class EndpointMetadataApiDescriptionProviderTest
         var endpointDataSource = builder.DataSources.OfType<EndpointDataSource>().Single();
         var hostEnvironment = new HostEnvironment
         {
-            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+            ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
         };
         var provider = CreateEndpointMetadataApiDescriptionProvider(endpointDataSource);
 
@@ -1568,7 +1568,7 @@ public class EndpointMetadataApiDescriptionProviderTest
             endpointDataSource,
             new HostEnvironment
             {
-                ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest)
+                ApplicationName = nameof(EndpointMetadataApiDescriptionProviderTest),
             },
             new DefaultParameterPolicyFactory(
                 Options.Create(new RouteOptions()),

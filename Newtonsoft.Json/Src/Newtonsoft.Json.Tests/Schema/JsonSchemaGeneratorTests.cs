@@ -91,7 +91,7 @@ namespace Newtonsoft.Json.Tests.Schema
                     "HasValue",
                     new List<string>() { "first", "second", null }
                 },
-                { "NoValue", null }
+                { "NoValue", null },
             };
 
             string valueJson = JsonConvert.SerializeObject(value, Formatting.Indented);
@@ -468,7 +468,7 @@ namespace Newtonsoft.Json.Tests.Schema
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                IgnoreSerializableAttribute = false
+                IgnoreSerializableAttribute = false,
             };
 
             generator.ContractResolver = contractResolver;
@@ -527,7 +527,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             No = 0,
             Asc = 1,
-            Desc = -1
+            Desc = -1,
         }
 
         public class X
@@ -713,7 +713,7 @@ namespace Newtonsoft.Json.Tests.Schema
         {
             No = 0,
             Asc = 1,
-            Desc = -1
+            Desc = -1,
         }
 
         public class Y

@@ -59,7 +59,7 @@ namespace System.Workflow.Activities
                     DependencyPropertyOptions.Metadata,
                     new Attribute[]
                     {
-                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter))
+                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)),
                     }
                 )
             );

@@ -71,7 +71,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// CandleStick. Color of the bar depends if Open value was bigger than Close value.
         /// </summary>
-        Candlestick
+        Candlestick,
     }
 
     #endregion

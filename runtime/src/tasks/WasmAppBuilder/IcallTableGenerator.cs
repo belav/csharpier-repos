@@ -312,7 +312,7 @@ internal sealed class IcallTableGenerator
                     nameof(Double) => "double",
                     nameof(Object) => "object",
                     nameof(String) => "string",
-                    _ => throw new NotImplementedException(t.FullName)
+                    _ => throw new NotImplementedException(t.FullName),
                 }
             );
         }

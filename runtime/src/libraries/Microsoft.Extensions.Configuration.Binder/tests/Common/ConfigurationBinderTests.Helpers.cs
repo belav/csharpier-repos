@@ -35,7 +35,7 @@ namespace Microsoft.Extensions
     public class ComplexOptions
     {
         private static Dictionary<string, int> _existingDictionary =
-            new() { { "existing-item1", 1 }, { "existing-item2", 2 }, };
+            new() { { "existing-item1", 1 }, { "existing-item2", 2 } };
 
         public ComplexOptions()
         {
@@ -88,7 +88,7 @@ namespace Microsoft.Extensions
         > InstantiatedDictionaryWithHashSetWithSomeValues { get; set; } =
             new Dictionary<string, HashSet<string>>
             {
-                { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) }
+                { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) },
             };
 
         public IEnumerable<string> NonInstantiatedIEnumerable { get; set; } = null!;
@@ -124,7 +124,7 @@ namespace Microsoft.Extensions
         > InstantiatedDictionaryWithReadOnlySetWithSomeValues { get; set; } =
             new Dictionary<string, IReadOnlySet<string>>
             {
-                { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) }
+                { "item1", new HashSet<string>(new[] { "existing1", "existing2" }) },
             };
 #endif
         public IReadOnlyDictionary<

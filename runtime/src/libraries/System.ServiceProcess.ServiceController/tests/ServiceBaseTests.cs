@@ -66,7 +66,7 @@ namespace System.ServiceProcess.Tests
                         Console.WriteLine("Trying to clean-up " + currentService);
                         TestServiceInstaller deleteService = new TestServiceInstaller()
                         {
-                            ServiceName = controller.ServiceName
+                            ServiceName = controller.ServiceName,
                         };
                         deleteService.RemoveService();
                         Console.WriteLine("Cleaned up " + currentService);

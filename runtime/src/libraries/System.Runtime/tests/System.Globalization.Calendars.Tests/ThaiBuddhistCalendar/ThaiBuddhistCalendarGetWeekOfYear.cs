@@ -21,19 +21,19 @@ namespace System.Globalization.Tests
                     {
                         DateTime.MinValue,
                         (CalendarWeekRule)i,
-                        (DayOfWeek)j
+                        (DayOfWeek)j,
                     };
                     yield return new object[]
                     {
                         DateTime.MaxValue,
                         (CalendarWeekRule)i,
-                        (DayOfWeek)j
+                        (DayOfWeek)j,
                     };
                     yield return new object[]
                     {
                         s_randomDataGenerator.GetDateTime(-55),
                         (CalendarWeekRule)i,
-                        (DayOfWeek)j
+                        (DayOfWeek)j,
                     };
                 }
             }

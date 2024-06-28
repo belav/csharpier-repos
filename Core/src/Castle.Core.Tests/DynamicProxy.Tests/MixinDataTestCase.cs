@@ -246,14 +246,14 @@ namespace Castle.DynamicProxy.Tests
         public void Ctor_succeeds_when_mixing_regular_mixin_instances_with_delegate_mixins()
         {
             var mixinData = new MixinData(
-                new object[] { new NotADelegate(), new Action(() => { }), }
+                new object[] { new NotADelegate(), new Action(() => { }) }
             );
         }
 
         [Test]
         public void Ctor_succeeds_when_mixing_regular_mixin_instances_with_delegate_type_mixins()
         {
-            var mixinData = new MixinData(new object[] { new NotADelegate(), typeof(Action), });
+            var mixinData = new MixinData(new object[] { new NotADelegate(), typeof(Action) });
         }
 
         [Test]
@@ -282,7 +282,7 @@ namespace Castle.DynamicProxy.Tests
                         {
                             typeof(Func<object, bool>),
                             new NotADelegate(),
-                            typeof(Predicate<object>)
+                            typeof(Predicate<object>),
                         }
                     )
             );

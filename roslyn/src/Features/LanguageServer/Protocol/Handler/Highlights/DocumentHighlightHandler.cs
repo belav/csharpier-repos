@@ -111,7 +111,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             return keywordSpans.SelectAsArray(highlight => new DocumentHighlight
             {
                 Kind = DocumentHighlightKind.Text,
-                Range = ProtocolConversions.TextSpanToRange(highlight, text)
+                Range = ProtocolConversions.TextSpanToRange(highlight, text),
             });
         }
 

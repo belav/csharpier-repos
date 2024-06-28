@@ -65,7 +65,7 @@ namespace System.Web.Http
                 null
             )
             {
-                Response = response
+                Response = response,
             };
             return actionExecutedContext;
         }
@@ -81,7 +81,7 @@ namespace System.Web.Http
             return new HttpControllerDescriptor()
             {
                 Configuration = config,
-                ControllerName = "FooController"
+                ControllerName = "FooController",
             };
         }
 

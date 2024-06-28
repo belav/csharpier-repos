@@ -53,7 +53,7 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 {
                     formatOptions = formatOptions with
                     {
-                        CodeStyleSeverity = GetSeverity(styleSeverity)
+                        CodeStyleSeverity = GetSeverity(styleSeverity),
                     };
                 }
 
@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 {
                     formatOptions = formatOptions with
                     {
-                        Diagnostics = diagnostics.ToImmutableHashSet()
+                        Diagnostics = diagnostics.ToImmutableHashSet(),
                     };
                 }
 
@@ -77,7 +77,7 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 {
                     formatOptions = formatOptions with
                     {
-                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet()
+                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet(),
                     };
                 }
 

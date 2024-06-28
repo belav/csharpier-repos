@@ -16,7 +16,7 @@ public readonly struct ParameterView
 {
     private static readonly RenderTreeFrame[] _emptyFrames = new RenderTreeFrame[]
     {
-        RenderTreeFrame.Element(0, string.Empty).WithComponentSubtreeLength(1)
+        RenderTreeFrame.Element(0, string.Empty).WithComponentSubtreeLength(1),
     };
 
     private static readonly ParameterView _empty = new ParameterView(

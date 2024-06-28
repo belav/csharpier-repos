@@ -454,7 +454,7 @@ namespace System.ServiceModel.Security
                 Principal = OperationContext.Current.ClaimsPrincipal as ClaimsPrincipal,
                 RequestAction = requestAction,
                 ResponseAction = responseAction,
-                TrustNamespace = trustNamespace
+                TrustNamespace = trustNamespace,
             };
 
             XmlReader requestBodyReader = requestMessage.GetReaderAtBodyContents();

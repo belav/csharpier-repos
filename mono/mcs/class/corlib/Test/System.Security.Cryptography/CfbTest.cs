@@ -202,7 +202,7 @@ namespace MonoTests.System.Security.Cryptography
             PaddingMode.PKCS7,
             PaddingMode.Zeros,
             PaddingMode.ANSIX923,
-            PaddingMode.ISO10126
+            PaddingMode.ISO10126,
         };
 
         protected override PaddingMode[] PaddingModes

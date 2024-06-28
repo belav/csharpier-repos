@@ -72,7 +72,7 @@ namespace System.Net.Security
             Unknown = 0,
             IsNotCached = 1,
             IsCached = 2,
-            Renegotiated = 3
+            Renegotiated = 3,
         }
 
         private CachedSessionStatus _CachedSession;
@@ -1812,7 +1812,7 @@ namespace System.Net.Security
             BeforeSSL3,
             SinceSSL3,
             Unified,
-            Invalid
+            Invalid,
         }
 
         // This is set on the first packet to figure out the framing style
@@ -1824,7 +1824,7 @@ namespace System.Net.Security
             ChangeCipherSpec = 20,
             Alert = 21,
             Handshake = 22,
-            AppData = 23
+            AppData = 23,
         }
 
         // We need at least 5 bytes to determine what we have.

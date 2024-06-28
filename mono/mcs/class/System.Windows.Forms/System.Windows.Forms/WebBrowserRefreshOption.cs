@@ -33,6 +33,6 @@ namespace System.Windows.Forms
         Normal = 0,
         IfExpired = 1,
         Continue = 2,
-        Completely = 3
+        Completely = 3,
     }
 }

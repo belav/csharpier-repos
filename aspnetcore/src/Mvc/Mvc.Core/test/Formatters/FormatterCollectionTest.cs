@@ -15,7 +15,7 @@ public class FormatterCollectionTest
         {
             new TestOutputFormatter(),
             new AnotherTestOutputFormatter(),
-            new TestOutputFormatter()
+            new TestOutputFormatter(),
         };
 
         // Act
@@ -34,7 +34,7 @@ public class FormatterCollectionTest
         {
             new TestOutputFormatter(),
             new AnotherTestOutputFormatter(),
-            new TestOutputFormatter()
+            new TestOutputFormatter(),
         };
 
         // Act

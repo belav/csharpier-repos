@@ -565,7 +565,7 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
                 //         return /*<bind>*/(a)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "a")
                     .WithArguments("a")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(

@@ -106,7 +106,7 @@ namespace Mono.Net.Security
         Initialize,
         Continue,
         ReadDone,
-        Complete
+        Complete,
     }
 
     class AsyncProtocolResult

@@ -46,7 +46,7 @@ namespace System.IO.Tests
             FileShare.Write,
             FileShare.Write | FileShare.Delete,
             FileShare.ReadWrite,
-            FileShare.ReadWrite | FileShare.Delete
+            FileShare.ReadWrite | FileShare.Delete,
 
             // Does not include FileShare.Inheritable, as doing so when other tests concurrently spawn processes
             // results in those file handles being inherited, which then keeps the file open longer
@@ -72,7 +72,7 @@ namespace System.IO.Tests
                 {
                     FileAccess.ReadWrite,
                     FileAccess.Write,
-                    FileAccess.Read
+                    FileAccess.Read,
                 }
             )
             {
@@ -105,7 +105,7 @@ namespace System.IO.Tests
                         {
                             FileAccess.ReadWrite,
                             FileAccess.Write,
-                            FileAccess.Read
+                            FileAccess.Read,
                         }
                     )
                     {
@@ -167,7 +167,7 @@ namespace System.IO.Tests
                 {
                     FileAccess.ReadWrite,
                     FileAccess.Write,
-                    FileAccess.Read
+                    FileAccess.Read,
                 }
             )
             {

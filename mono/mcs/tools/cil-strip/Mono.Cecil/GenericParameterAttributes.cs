@@ -41,6 +41,6 @@ namespace Mono.Cecil
         SpecialConstraintMask = 0x001c,
         ReferenceTypeConstraint = 0x0004,
         NotNullableValueTypeConstraint = 0x0008,
-        DefaultConstructorConstraint = 0x0010
+        DefaultConstructorConstraint = 0x0010,
     }
 }

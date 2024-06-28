@@ -223,7 +223,7 @@ namespace Mono.Terminal
                     {
                         HandleChar(Console.ReadKey(true).KeyChar);
                     }
-                )
+                ),
             };
 
             rendered_text = new StringBuilder();
@@ -1581,7 +1581,7 @@ namespace Mono.Terminal
                     "Seven",
                     "Eight",
                     "Nine",
-                    "Ten"
+                    "Ten",
                 };
                 return new Mono.Terminal.LineEditor.Completion(prefix, completions);
             };

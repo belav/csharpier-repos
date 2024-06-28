@@ -34,7 +34,7 @@ namespace System.Linq.Tests
                     null,
                     "Calling Twice",
                     "SoS",
-                    string.Empty
+                    string.Empty,
                 }
                 where !string.IsNullOrEmpty(x2)
                 select new { a1 = x1, a2 = x2 };
@@ -78,14 +78,14 @@ namespace System.Linq.Tests
                 new { Name = "Alpha", Score = 90 },
                 new { Name = "Robert", Score = 45 },
                 new { Name = "Prakash", Score = 99 },
-                new { Name = "Bob", Score = 0 }
+                new { Name = "Bob", Score = 0 },
             };
             var expected = new[]
             {
                 new { Name = "Robert", Score = 45 },
                 new { Name = "Prakash", Score = 99 },
                 new { Name = "Bob", Score = 0 },
-                new { Name = "Alpha", Score = 90 }
+                new { Name = "Alpha", Score = 90 },
             };
 
             Assert.Equal(expected, source.OrderByDescending(e => e.Name, null));

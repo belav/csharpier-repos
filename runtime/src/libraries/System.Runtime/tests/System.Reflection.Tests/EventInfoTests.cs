@@ -84,31 +84,31 @@ namespace System.Reflection.Tests
             {
                 typeof(BaseClass),
                 nameof(BaseClass.PublicEvent),
-                new BaseClass()
+                new BaseClass(),
             };
             yield return new object[]
             {
                 typeof(BaseClass),
                 nameof(BaseClass.PublicStaticEvent),
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(BaseClass),
                 nameof(BaseClass.PublicVirtualEvent),
-                new BaseClass()
+                new BaseClass(),
             };
             yield return new object[]
             {
                 typeof(SubClass),
                 nameof(SubClass.EventPublicNew),
-                new SubClass()
+                new SubClass(),
             };
             yield return new object[]
             {
                 typeof(SubClass),
                 nameof(SubClass.PublicEvent),
-                new SubClass()
+                new SubClass(),
             };
         }
 
@@ -131,7 +131,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.PublicEvent),
                 null,
                 new EventHandler(ObjectEventArgsHandler),
-                typeof(TargetException)
+                typeof(TargetException),
             };
 
             // Handler is incorrect
@@ -141,7 +141,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.PublicEvent),
                 "hello",
                 new EventHandler(ObjectEventArgsHandler),
-                typeof(TargetException)
+                typeof(TargetException),
             };
             yield return new object[]
             {
@@ -149,7 +149,7 @@ namespace System.Reflection.Tests
                 nameof(BaseClass.PublicEvent),
                 new BaseClass(),
                 new ObjectDelegate(ObjectHandler),
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
         }
 
@@ -178,7 +178,7 @@ namespace System.Reflection.Tests
                 new EventHandler(ObjectEventArgsHandler),
                 null,
                 new EventHandler(ObjectEventArgsHandler),
-                typeof(TargetException)
+                typeof(TargetException),
             };
 
             // Target is incorrect
@@ -190,7 +190,7 @@ namespace System.Reflection.Tests
                 new EventHandler(ObjectEventArgsHandler),
                 "hello",
                 new EventHandler(ObjectEventArgsHandler),
-                typeof(TargetException)
+                typeof(TargetException),
             };
 
             // Handler is incorrect
@@ -202,7 +202,7 @@ namespace System.Reflection.Tests
                 new EventHandler(ObjectEventArgsHandler),
                 new BaseClass(),
                 new ObjectDelegate(ObjectHandler),
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
         }
 

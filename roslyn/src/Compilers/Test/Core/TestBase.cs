@@ -67,7 +67,7 @@ namespace Roslyn.Test.Utilities
                         Net40.mscorlib,
                         Net40.System,
                         Net40.SystemCore,
-                        Net40.MicrosoftVisualBasic
+                        Net40.MicrosoftVisualBasic,
                     },
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -81,7 +81,7 @@ namespace Roslyn.Test.Utilities
                         Net451.mscorlib,
                         Net451.System,
                         Net451.SystemCore,
-                        Net451.MicrosoftVisualBasic
+                        Net451.MicrosoftVisualBasic,
                     },
                 LazyThreadSafetyMode.PublicationOnly
             );
@@ -151,7 +151,7 @@ namespace Roslyn.Test.Utilities
                         uixaml,
                         interop,
                         system,
-                        mscor
+                        mscor,
                     };
                 },
                 LazyThreadSafetyMode.PublicationOnly

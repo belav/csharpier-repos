@@ -32,7 +32,7 @@ namespace System.Net
         Secure,
         HttpOnly,
         Unknown,
-        Version
+        Version,
     }
 
     // CookieTokenizer

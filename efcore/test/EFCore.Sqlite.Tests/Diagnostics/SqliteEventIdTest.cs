@@ -33,7 +33,7 @@ public class SqliteEventIdTest : EventIdTestBase
             { typeof(IEntityType), () => entityType },
             { typeof(IKey), () => new Key(new[] { property }, ConfigurationSource.Convention) },
             { typeof(IReadOnlySequence), () => new FakeSequence() },
-            { typeof(Type), () => typeof(object) }
+            { typeof(Type), () => typeof(object) },
         };
 
         TestEventLogging(

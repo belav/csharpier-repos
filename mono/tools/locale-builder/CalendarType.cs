@@ -35,6 +35,6 @@ namespace Mono.Tools.LocaleBuilder
         Gregorian = 1,
         ThaiBuddhist = 2,
         UmAlQuraCalendar = 3,
-        HijriCalendar = 4
+        HijriCalendar = 4,
     }
 }

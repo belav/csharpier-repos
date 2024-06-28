@@ -91,7 +91,7 @@ namespace MonoTests.System.Data.OracleClient
                 "Data Source",
                 "HostName",
                 "Port",
-                "Location"
+                "Location",
             };
             DoTestWithSpecificProperties(propsToUse, description);
 
@@ -104,7 +104,7 @@ namespace MonoTests.System.Data.OracleClient
                 "Data Source",
                 "Port",
                 "Location",
-                "retrieveMessagesFromServerOnGetMessage"
+                "retrieveMessagesFromServerOnGetMessage",
             };
             DoTestWithSpecificProperties(propsToUse, description);
 
@@ -117,7 +117,7 @@ namespace MonoTests.System.Data.OracleClient
                 "Data Source",
                 "HostName",
                 "Location",
-                "retrieveMessagesFromServerOnGetMessage"
+                "retrieveMessagesFromServerOnGetMessage",
             };
             DoTestWithSpecificProperties(propsToUse, description);
 
@@ -130,7 +130,7 @@ namespace MonoTests.System.Data.OracleClient
                 "Data Source",
                 "HostName",
                 "Port",
-                "retrieveMessagesFromServerOnGetMessage"
+                "retrieveMessagesFromServerOnGetMessage",
             };
             DoTestWithSpecificProperties(propsToUse, description);
 
@@ -142,7 +142,7 @@ namespace MonoTests.System.Data.OracleClient
                 "User ID",
                 "Data Source",
                 "Location",
-                "retrieveMessagesFromServerOnGetMessage"
+                "retrieveMessagesFromServerOnGetMessage",
             };
             DoTestWithSpecificProperties(propsToUse, description);
         }

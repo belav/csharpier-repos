@@ -411,7 +411,7 @@ public class TemplateMatcherTests
                 controller = "blog",
                 action = "showpost",
                 m = (string)null,
-                d = (string)null
+                d = (string)null,
             }
         );
 
@@ -554,7 +554,7 @@ public class TemplateMatcherTests
                 {
                     controller = "home",
                     action = "index",
-                    id = (string)null
+                    id = (string)null,
                 }
             )
         );
@@ -583,7 +583,7 @@ public class TemplateMatcherTests
                 {
                     Controller = "Home",
                     id = "123",
-                    Param1 = "p1"
+                    Param1 = "p1",
                 }
             )
         );
@@ -667,7 +667,7 @@ public class TemplateMatcherTests
                 {
                     Controller = "Home",
                     id = "123",
-                    Param1 = "p1"
+                    Param1 = "p1",
                 }
             )
         );
@@ -704,7 +704,7 @@ public class TemplateMatcherTests
                     controller = "Home",
                     action = "ShowPilot",
                     missionId = (string)null,
-                    name = (string)null
+                    name = (string)null,
                 }
             ),
             new RouteValueDictionary(
@@ -713,7 +713,7 @@ public class TemplateMatcherTests
                     controller = "Home",
                     action = "ShowPilot",
                     missionId = "777",
-                    name = "12345./foobar"
+                    name = "12345./foobar",
                 }
             )
         );
@@ -865,7 +865,7 @@ public class TemplateMatcherTests
             {
                 { " ", "not a space" },
                 { "op.tional", "default value" },
-                { "ran!dom", "va@lue" }
+                { "ran!dom", "va@lue" },
             },
             new RouteValueDictionary()
             {
@@ -873,7 +873,7 @@ public class TemplateMatcherTests
                 { ".!$%", "weimatch" },
                 { "dynamic.data", "omatcherid" },
                 { "op.tional", "default value" },
-                { "ran!dom", "va@lue" }
+                { "ran!dom", "va@lue" },
             }
         );
     }
@@ -922,7 +922,7 @@ public class TemplateMatcherTests
             {
                 { "language", "xx" },
                 { "locale", "yy" },
-                { "controller", "foo" }
+                { "controller", "foo" },
             }
         );
     }

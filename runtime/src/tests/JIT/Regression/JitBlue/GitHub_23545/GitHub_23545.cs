@@ -28,7 +28,7 @@ namespace GitHub_23545
                     {
                         new TestStruct() { value1 = 12 },
                         new TestStruct() { value1 = 15 }
-                    }
+                    },
                 };
             }
         }

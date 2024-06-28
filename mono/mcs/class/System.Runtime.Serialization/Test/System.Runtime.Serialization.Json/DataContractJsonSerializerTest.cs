@@ -957,7 +957,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
                 SerializeNonDCArrayType obj = new SerializeNonDCArrayType();
                 obj.IPAddresses = new NonDCItem[]
                 {
-                    new NonDCItem() { Data = new byte[] { 1, 2, 3, 4 } }
+                    new NonDCItem() { Data = new byte[] { 1, 2, 3, 4 } },
                 };
                 ser.WriteObject(xw, obj);
             }
@@ -1287,7 +1287,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
             {
                 Foo = "foo",
                 Bar = "bar",
-                Baz = "baz"
+                Baz = "baz",
             };
 
             // XML
@@ -1505,7 +1505,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
                     new DateTime(2010, 3, 4, 5, 6, 7),
                     DateTimeKind.Utc
                 ),
-                EndDate = DateTime.SpecifyKind(new DateTime(2010, 4, 5, 6, 7, 8), DateTimeKind.Utc)
+                EndDate = DateTime.SpecifyKind(new DateTime(2010, 4, 5, 6, 7, 8), DateTimeKind.Utc),
             };
             serializer.WriteObject(ms, query);
             Assert.AreEqual(
@@ -2097,7 +2097,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
                     new DataContractJsonSerializerSettings
                     {
                         SerializeReadOnlyTypes = true,
-                        UseSimpleDictionaryFormat = true
+                        UseSimpleDictionaryFormat = true,
                     }
                 );
                 serializer.WriteObject(ms, person);
@@ -2107,7 +2107,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
             var person2 = new PersonWithContact
             {
                 name = "Jane",
-                contact = new Contact { url = "localhost", email = "jane@localhost" }
+                contact = new Contact { url = "localhost", email = "jane@localhost" },
             };
             using (var ms = new MemoryStream())
             {
@@ -2116,7 +2116,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
                     new DataContractJsonSerializerSettings
                     {
                         SerializeReadOnlyTypes = true,
-                        UseSimpleDictionaryFormat = true
+                        UseSimpleDictionaryFormat = true,
                     }
                 );
                 serializer.WriteObject(ms, person2);
@@ -2207,7 +2207,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
     {
         Red,
         Green,
-        Blue
+        Blue,
     }
 
     [DataContract(Name = "_ColorsWithDC")]
@@ -2218,7 +2218,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
 
         [EnumMember]
         Green,
-        Blue
+        Blue,
     }
 
     public enum ColorsEnumMemberNoDC
@@ -2228,7 +2228,7 @@ namespace MonoTests.System.Runtime.Serialization.Json
 
         [EnumMember]
         Green,
-        Blue
+        Blue,
     }
 
     [DataContract]

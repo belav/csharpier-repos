@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         AppClicked = 1,
         ItemClicked = 2,
         Keyboard = 3,
-        CloseCalled = 4
+        CloseCalled = 4,
     }
 }

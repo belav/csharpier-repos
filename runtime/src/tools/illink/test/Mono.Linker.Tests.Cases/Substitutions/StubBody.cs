@@ -69,7 +69,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         struct NestedType
         {
             [Kept]
-            [ExpectedInstructionSequence(new[] { "ret", })]
+            [ExpectedInstructionSequence(new[] { "ret" })]
             public NestedType(int arg)
             {
                 throw new NotImplementedException();
@@ -78,7 +78,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
 
         [Kept]
         [ExpectedInstructionSequence(
-            new[] { "ldarg.0", "call System.Void System.Object::.ctor()", "ret", }
+            new[] { "ldarg.0", "call System.Void System.Object::.ctor()", "ret" }
         )]
         public StubBody()
         {
@@ -116,7 +116,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ret", })]
+        [ExpectedInstructionSequence(new[] { "ret" })]
         static void TestMethod_6()
         {
             TestMethod_5();

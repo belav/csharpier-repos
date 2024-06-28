@@ -187,7 +187,7 @@ public sealed class WebAssemblyHostBuilder
         var configFiles = new[]
         {
             "appsettings.json",
-            $"appsettings.{applicationEnvironment}.json"
+            $"appsettings.{applicationEnvironment}.json",
         };
 
         foreach (var configFile in configFiles)

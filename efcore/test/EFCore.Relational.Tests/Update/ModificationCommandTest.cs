@@ -493,7 +493,7 @@ public class ModificationCommandTest
             {
                 Id = 1,
                 Name1 = computeNonKeyValue ? null : "Test",
-                Name2 = computeNonKeyValue ? null : "Test"
+                Name2 = computeNonKeyValue ? null : "Test",
             }
         );
     }

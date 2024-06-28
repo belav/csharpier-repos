@@ -229,7 +229,7 @@ public static partial class Results
         ArgumentNullException.ThrowIfNull(jsonTypeInfo);
         return new JsonHttpResult<object>(data, statusCode, contentType)
         {
-            JsonTypeInfo = jsonTypeInfo
+            JsonTypeInfo = jsonTypeInfo,
         };
     }
 
@@ -257,7 +257,7 @@ public static partial class Results
         ArgumentNullException.ThrowIfNull(context);
         return new JsonHttpResult<object>(data, statusCode, contentType)
         {
-            JsonTypeInfo = context.GetRequiredTypeInfo(type)
+            JsonTypeInfo = context.GetRequiredTypeInfo(type),
         };
     }
 

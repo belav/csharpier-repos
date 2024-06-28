@@ -30,6 +30,6 @@ namespace System.Security.Permissions
         NoVideo,
         SiteOfOriginVideo,
         SafeVideo,
-        AllVideo
+        AllVideo,
     }
 }

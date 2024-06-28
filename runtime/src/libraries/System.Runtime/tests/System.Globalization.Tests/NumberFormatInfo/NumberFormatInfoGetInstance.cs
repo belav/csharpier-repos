@@ -16,7 +16,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 new CustomFormatProvider(),
-                CustomFormatProvider.CustomFormat
+                CustomFormatProvider.CustomFormat,
             };
 
             yield return new object[] { new InvalidFormatProvider(), NumberFormatInfo.CurrentInfo };

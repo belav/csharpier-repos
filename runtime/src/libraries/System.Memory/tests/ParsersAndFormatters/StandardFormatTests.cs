@@ -191,25 +191,25 @@ namespace System.Buffers.Text.Tests
                 {
                     new StandardFormat('A', 3),
                     new StandardFormat('A', 3),
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     new StandardFormat('a', 3),
                     new StandardFormat('A', 3),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new StandardFormat('A', 3),
                     new StandardFormat('A', 4),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new StandardFormat('A', 3),
                     new StandardFormat('A', StandardFormat.NoPrecision),
-                    false
+                    false,
                 };
             }
         }

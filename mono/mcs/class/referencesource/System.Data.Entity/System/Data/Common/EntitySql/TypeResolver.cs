@@ -25,7 +25,7 @@ namespace System.Data.Common.EntitySql
         FunctionGroup,
         InlineFunctionGroup,
         Namespace,
-        EnumMember
+        EnumMember,
     }
 
     /// <summary>

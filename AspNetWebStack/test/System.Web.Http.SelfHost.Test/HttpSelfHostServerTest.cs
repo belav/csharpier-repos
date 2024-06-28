@@ -585,7 +585,7 @@ namespace System.Web.Http.SelfHost
         {
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
-                Content = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes("echoStream")))
+                Content = new StreamContent(new MemoryStream(Encoding.UTF8.GetBytes("echoStream"))),
             };
         }
 
@@ -595,7 +595,7 @@ namespace System.Web.Http.SelfHost
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 RequestMessage = Request,
-                Content = new HttpSelfHostServerTest.ThrowsBeforeTaskObjectContent()
+                Content = new HttpSelfHostServerTest.ThrowsBeforeTaskObjectContent(),
             };
         }
 
@@ -605,7 +605,7 @@ namespace System.Web.Http.SelfHost
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 RequestMessage = Request,
-                Content = new HttpSelfHostServerTest.ThrowBeforeWriteObjectContent()
+                Content = new HttpSelfHostServerTest.ThrowBeforeWriteObjectContent(),
             };
         }
 
@@ -615,7 +615,7 @@ namespace System.Web.Http.SelfHost
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 RequestMessage = Request,
-                Content = new HttpSelfHostServerTest.ThrowAfterWriteObjectContent()
+                Content = new HttpSelfHostServerTest.ThrowAfterWriteObjectContent(),
             };
         }
 
@@ -625,7 +625,7 @@ namespace System.Web.Http.SelfHost
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 RequestMessage = Request,
-                Content = new HttpSelfHostServerTest.ThrowBeforeWriteStream()
+                Content = new HttpSelfHostServerTest.ThrowBeforeWriteStream(),
             };
         }
 
@@ -635,7 +635,7 @@ namespace System.Web.Http.SelfHost
             return new HttpResponseMessage(HttpStatusCode.OK)
             {
                 RequestMessage = Request,
-                Content = new HttpSelfHostServerTest.ThrowAfterWriteStream()
+                Content = new HttpSelfHostServerTest.ThrowAfterWriteStream(),
             };
         }
     }

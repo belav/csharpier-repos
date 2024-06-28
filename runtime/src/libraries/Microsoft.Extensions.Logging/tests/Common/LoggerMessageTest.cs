@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.Logging.Test
                         TestLoggerExtensions.ActionMatchedInfo.NamedStringFormat
                     ),
                     new KeyValuePair<string, object>("controller", controller),
-                    new KeyValuePair<string, object>("action", action)
+                    new KeyValuePair<string, object>("action", action),
                 },
                 actualLogValues.ToArray()
             );
@@ -80,7 +80,7 @@ namespace Microsoft.Extensions.Logging.Test
                     new KeyValuePair<string, object>(
                         "{OriginalFormat}",
                         TestLoggerExtensions.ScopeWithoutAnyParameters.Message
-                    )
+                    ),
                 },
                 actualLogValues.ToArray()
             );
@@ -116,7 +116,7 @@ namespace Microsoft.Extensions.Logging.Test
                     new KeyValuePair<string, object>(
                         "{OriginalFormat}",
                         TestLoggerExtensions.ScopeWithOneParameter.NamedStringFormat
-                    )
+                    ),
                 },
                 actualLogValues.ToArray()
             );
@@ -154,7 +154,7 @@ namespace Microsoft.Extensions.Logging.Test
                     new KeyValuePair<string, object>(
                         "{OriginalFormat}",
                         TestLoggerExtensions.ScopeInfoWithTwoParameters.NamedStringFormat
-                    )
+                    ),
                 },
                 actualLogValues.ToArray()
             );
@@ -198,7 +198,7 @@ namespace Microsoft.Extensions.Logging.Test
                     new KeyValuePair<string, object>(
                         "{OriginalFormat}",
                         TestLoggerExtensions.ScopeInfoWithThreeParameters.NamedStringFormat
-                    )
+                    ),
                 },
                 actualLogValues.ToArray()
             );
@@ -315,7 +315,7 @@ namespace Microsoft.Extensions.Logging.Test
                     new KeyValuePair<string, object>("param1", param1),
                     new KeyValuePair<string, object>("param2", param2),
                     new KeyValuePair<string, object>("param3", param3),
-                    new KeyValuePair<string, object>("{OriginalFormat}", format)
+                    new KeyValuePair<string, object>("{OriginalFormat}", format),
                 },
                 actualLogValues.ToArray()
             );
@@ -537,64 +537,64 @@ namespace Microsoft.Extensions.Logging.Test
                 new object[]
                 {
                     (Define)LoggerMessage.Define<string, string>,
-                    DefineInvalidParameters
+                    DefineInvalidParameters,
                 },
                 new object[]
                 {
                     (Define)LoggerMessage.Define<string, string, string>,
-                    DefineInvalidParameters
+                    DefineInvalidParameters,
                 },
                 new object[]
                 {
                     (Define)LoggerMessage.Define<string, string, string, string>,
-                    DefineInvalidParameters
+                    DefineInvalidParameters,
                 },
                 new object[]
                 {
                     (Define)LoggerMessage.Define<string, string, string, string, string>,
-                    DefineInvalidParameters
+                    DefineInvalidParameters,
                 },
                 new object[]
                 {
                     (Define)LoggerMessage.Define<string, string, string, string, string, string>,
-                    DefineInvalidParameters
+                    DefineInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)LoggerMessage.DefineScope,
-                    DefineScopeInvalidParameters
+                    DefineScopeInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)LoggerMessage.DefineScope<string>,
-                    DefineScopeInvalidParameters
+                    DefineScopeInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)LoggerMessage.DefineScope<string, string>,
-                    DefineScopeInvalidParameters
+                    DefineScopeInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)LoggerMessage.DefineScope<string, string, string>,
-                    DefineScopeInvalidParameters
+                    DefineScopeInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)LoggerMessage.DefineScope<string, string, string, string>,
-                    DefineScopeInvalidParameters
+                    DefineScopeInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)LoggerMessage.DefineScope<string, string, string, string, string>,
-                    DefineScopeInvalidParameters
+                    DefineScopeInvalidParameters,
                 },
                 new object[]
                 {
                     (DefineScope)
                         LoggerMessage.DefineScope<string, string, string, string, string, string>,
-                    DefineScopeInvalidParameters
-                }
+                    DefineScopeInvalidParameters,
+                },
             };
 
         public static IEnumerable<object[]> LogMessagesData =>
@@ -605,7 +605,7 @@ namespace Microsoft.Extensions.Logging.Test
                 new object[]
                 {
                     LoggerMessage.Define<string, string>(LogLevel.Error, 2, "Log {P0} {P1}"),
-                    2
+                    2,
                 },
                 new object[]
                 {
@@ -614,7 +614,7 @@ namespace Microsoft.Extensions.Logging.Test
                         3,
                         "Log {P0} {P1} {P2}"
                     ),
-                    3
+                    3,
                 },
                 new object[]
                 {
@@ -623,7 +623,7 @@ namespace Microsoft.Extensions.Logging.Test
                         4,
                         "Log {P0} {P1} {P2} {P3}"
                     ),
-                    4
+                    4,
                 },
                 new object[]
                 {
@@ -632,7 +632,7 @@ namespace Microsoft.Extensions.Logging.Test
                         5,
                         "Log {P0} {P1} {P2} {P3} {P4}"
                     ),
-                    5
+                    5,
                 },
                 new object[]
                 {
@@ -641,7 +641,7 @@ namespace Microsoft.Extensions.Logging.Test
                         6,
                         "Log {P0} {P1} {P2} {P3} {P4} {P5}"
                     ),
-                    6
+                    6,
                 },
             };
 
@@ -656,7 +656,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log ",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    0
+                    0,
                 },
                 new object[]
                 {
@@ -666,7 +666,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log {P0}",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    1
+                    1,
                 },
                 new object[]
                 {
@@ -676,7 +676,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log {P0} {P1}",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    2
+                    2,
                 },
                 new object[]
                 {
@@ -686,7 +686,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log {P0} {P1} {P2}",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    3
+                    3,
                 },
                 new object[]
                 {
@@ -696,7 +696,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log {P0} {P1} {P2} {P3}",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    4
+                    4,
                 },
                 new object[]
                 {
@@ -706,7 +706,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log {P0} {P1} {P2} {P3} {P4}",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    5
+                    5,
                 },
                 new object[]
                 {
@@ -716,7 +716,7 @@ namespace Microsoft.Extensions.Logging.Test
                         "Log {P0} {P1} {P2} {P3} {P4} {P5}",
                         options: new LogDefineOptions() { SkipEnabledCheck = true }
                     ),
-                    6
+                    6,
                 },
             };
 

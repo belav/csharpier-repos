@@ -39,6 +39,6 @@ namespace System.ComponentModel.Design.Data
         Select,
         Update,
         Insert,
-        Delete
+        Delete,
     }
 }

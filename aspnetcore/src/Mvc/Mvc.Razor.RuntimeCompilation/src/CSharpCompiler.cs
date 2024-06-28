@@ -183,7 +183,7 @@ internal class CSharpCompiler
             {
                 { "CS1701", ReportDiagnostic.Suppress }, // Binding redirects
                 { "CS1702", ReportDiagnostic.Suppress },
-                { "CS1705", ReportDiagnostic.Suppress }
+                { "CS1705", ReportDiagnostic.Suppress },
             }
         );
 

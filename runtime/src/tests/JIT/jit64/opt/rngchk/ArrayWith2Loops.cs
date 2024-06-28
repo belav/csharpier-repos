@@ -21,7 +21,7 @@ namespace SimpleArray_01
                 new RngTest(Test.Test1),
                 new RngTest(Test.Test2),
                 new RngTest(Test.Test3),
-                new RngTest(Test.Test4)
+                new RngTest(Test.Test4),
             };
 
             foreach (RngTest test in Tests)

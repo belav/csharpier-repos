@@ -83,6 +83,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Weave = 51,
         WideDownwardDiagonal = 52,
         WideUpwardDiagonal = 53,
-        ZigZag = 54
+        ZigZag = 54,
     }
 }

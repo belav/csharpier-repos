@@ -172,7 +172,7 @@ public class ApiConventionResultTest
         var method = typeof(DefaultConventionController).GetMethod(
             nameof(DefaultConventionController.PutUser)
         );
-        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)), };
+        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
         var result = ApiConventionResult.TryGetApiConvention(
@@ -199,7 +199,7 @@ public class ApiConventionResultTest
         var method = typeof(DefaultConventionController).GetMethod(
             nameof(DefaultConventionController.Delete)
         );
-        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)), };
+        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
         var result = ApiConventionResult.TryGetApiConvention(
@@ -226,7 +226,7 @@ public class ApiConventionResultTest
         var method = typeof(DefaultConventionController).GetMethod(
             nameof(DefaultConventionController.EditUser)
         );
-        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)), };
+        var conventions = new[] { new ApiConventionTypeAttribute(typeof(DefaultApiConventions)) };
 
         // Act
         var result = ApiConventionResult.TryGetApiConvention(

@@ -115,6 +115,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// If debugging, this means Edit and Continue has been disabled.
         /// If not debugging, this means hot reload has been disabled.
         /// </summary>
-        Disabled = 19
+        Disabled = 19,
     };
 }

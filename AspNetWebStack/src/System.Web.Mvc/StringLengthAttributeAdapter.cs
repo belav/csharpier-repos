@@ -23,7 +23,7 @@ namespace System.Web.Mvc
                     ErrorMessage,
                     Attribute.MinimumLength,
                     Attribute.MaximumLength
-                )
+                ),
             };
         }
     }

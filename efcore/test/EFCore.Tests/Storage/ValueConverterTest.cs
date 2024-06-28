@@ -20,7 +20,7 @@ public class ValueConverterTest
                 {
                     Id = async ? 1 : 2,
                     ConvertedGoingIn = new DateTime(2015, 1, 10, 8, 8, 8, DateTimeKind.Local),
-                    ConvertedComingOut = new DateTime(2015, 1, 10, 9, 9, 9, DateTimeKind.Local)
+                    ConvertedComingOut = new DateTime(2015, 1, 10, 9, 9, 9, DateTimeKind.Local),
                 }
             );
 
@@ -235,7 +235,7 @@ public class ValueConverterTest
             typeof(char?),
             typeof(double?),
             typeof(float?),
-            typeof(decimal?)
+            typeof(decimal?),
         };
 
         foreach (var fromType in types)
@@ -350,7 +350,7 @@ public class ValueConverterTest
         John = 7,
         Paul = 4,
         George = 1,
-        Ringo = -1
+        Ringo = -1,
     }
 
     [ConditionalFact]

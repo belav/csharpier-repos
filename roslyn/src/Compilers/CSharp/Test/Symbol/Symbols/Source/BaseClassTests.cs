@@ -1242,7 +1242,7 @@ public class ClassC : ClassB {}
 
             var comp2 = CreateCompilation(
                 text,
-                new MetadataReference[] { ClassAv1, new CSharpCompilationReference(comp), }
+                new MetadataReference[] { ClassAv1, new CSharpCompilationReference(comp) }
             );
 
             var global = comp2.GlobalNamespace;
@@ -1265,7 +1265,7 @@ public class ClassC : ClassB {}
             var text = @"// hi";
             var comp = CreateCompilation(
                 text,
-                new MetadataReference[] { ClassAv2, ClassBv1, },
+                new MetadataReference[] { ClassAv2, ClassBv1 },
                 assemblyName: "ClassB"
             );
 

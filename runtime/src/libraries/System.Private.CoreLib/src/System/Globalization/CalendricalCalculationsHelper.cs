@@ -37,7 +37,7 @@ namespace System.Globalization
                 38.291999,
                 28.316289,
                 11.636204,
-                2.043794
+                2.043794,
             ];
         private static ReadOnlySpan<double> Coefficients1700to1799 =>
             [8.118780842, -0.005092142, 0.003336121, -0.0000266484];
@@ -56,7 +56,7 @@ namespace System.Globalization
                 23.43929111111111,
                 -0.013004166666666667,
                 -1.638888888888889E-07,
-                5.03611111111111E-07
+                5.03611111111111E-07,
             ];
 
         private static double RadiansFromDegrees(double degree)
@@ -106,7 +106,7 @@ namespace System.Globalization
             Year1900to1987,
             Year1800to1899,
             Year1700to1799,
-            Year1620to1699
+            Year1620to1699,
         }
 
         private readonly struct EphemerisCorrectionAlgorithmMap
@@ -131,7 +131,11 @@ namespace System.Globalization
                 new EphemerisCorrectionAlgorithmMap(1800, CorrectionAlgorithm.Year1800to1899),
                 new EphemerisCorrectionAlgorithmMap(1700, CorrectionAlgorithm.Year1700to1799),
                 new EphemerisCorrectionAlgorithmMap(1620, CorrectionAlgorithm.Year1620to1699),
-                new EphemerisCorrectionAlgorithmMap(int.MinValue, CorrectionAlgorithm.Default) // default must be last
+                new EphemerisCorrectionAlgorithmMap(
+                    int.MinValue,
+                    CorrectionAlgorithm.Default
+                ) // default must be last
+                ,
             };
 
         private static double Reminder(double divisor, double dividend)

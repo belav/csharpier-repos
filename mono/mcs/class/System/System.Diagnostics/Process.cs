@@ -977,7 +977,7 @@ namespace System.Diagnostics
                     stdinEncoding
                 )
                 {
-                    AutoFlush = true
+                    AutoFlush = true,
                 };
             }
 

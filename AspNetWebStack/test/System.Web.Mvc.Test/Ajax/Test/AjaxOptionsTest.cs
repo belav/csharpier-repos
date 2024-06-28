@@ -204,7 +204,7 @@ namespace System.Web.Mvc.Ajax.Test
                 UpdateTargetId = "someId",
                 Url = "http://someurl.com",
                 OnComplete = "some_complete_function",
-                AllowCache = allowCache
+                AllowCache = allowCache,
             };
 
             // Act
@@ -243,7 +243,7 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions
             {
                 InsertionMode = InsertionMode.InsertAfter,
-                UpdateTargetId = "someId"
+                UpdateTargetId = "someId",
             };
 
             // Act
@@ -318,7 +318,7 @@ namespace System.Web.Mvc.Ajax.Test
                 HttpMethod = "GET",
                 AllowCache = true,
                 Url = "http://someurl.com",
-                OnComplete = "some_complete_function"
+                OnComplete = "some_complete_function",
             };
 
             // Act
@@ -384,7 +384,7 @@ namespace System.Web.Mvc.Ajax.Test
             AjaxOptions options = new AjaxOptions
             {
                 InsertionMode = mode,
-                UpdateTargetId = "someId"
+                UpdateTargetId = "someId",
             };
 
             // Act

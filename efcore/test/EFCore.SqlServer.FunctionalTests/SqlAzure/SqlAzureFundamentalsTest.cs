@@ -41,7 +41,7 @@ public class SqlAzureFundamentalsTest : IClassFixture<SqlAzureFixture>
                                 Name = "Blue Cloud",
                                 ProductNumber = "xxxxxxxxxxx",
                                 Weight = 0.01m,
-                                SellStartDate = DateTime.Now
+                                SellStartDate = DateTime.Now,
                             }
                         );
                         Assert.Equal(1, contextScoped.SaveChanges());

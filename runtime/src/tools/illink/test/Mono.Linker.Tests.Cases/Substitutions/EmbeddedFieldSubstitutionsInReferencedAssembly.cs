@@ -9,7 +9,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         new string[] { "Dependencies/ReferencedField.cs" },
         resources: new object[]
         {
-            new string[] { "Dependencies/ReferencedField.xml", "ILLink.Substitutions.xml" }
+            new string[] { "Dependencies/ReferencedField.xml", "ILLink.Substitutions.xml" },
         }
     )]
     [IgnoreSubstitutions(false)]
@@ -24,7 +24,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
             "pop",
             "ldc.i4.1",
             "stsfld System.Boolean Mono.Linker.Tests.Cases.Substitutions.Dependencies.ReferencedField::BoolValue",
-            "ret"
+            "ret",
         }
     )]
     public class EmbeddedFieldSubstitutionsInReferencedAssembly

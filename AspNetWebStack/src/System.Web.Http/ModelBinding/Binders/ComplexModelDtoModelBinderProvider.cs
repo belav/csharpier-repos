@@ -24,7 +24,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 new ComplexModelDtoModelBinder()
             )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
         }
     }

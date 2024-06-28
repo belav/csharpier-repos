@@ -82,8 +82,8 @@ public class ProjectionWithExplicitExpansion
             {
                 Ides = -25,
                 Ide1 = -7,
-                Deep = new SourceDeepInner() { Dide = 28, Did1 = 38, }
-            }
+                Deep = new SourceDeepInner() { Dide = 28, Did1 = 38 },
+            },
         },
     }.AsQueryable();
 

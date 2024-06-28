@@ -394,14 +394,14 @@ namespace MonoTests.System.Runtime.Serialization
         [EnumMember(Value = "_Red")]
         Red,
         Green,
-        Blue
+        Blue,
     }
 
     public enum EnumNoDc
     {
         Red,
         Green,
-        Blue
+        Blue,
     }
 
     [DataContract(Name = "_dc")]

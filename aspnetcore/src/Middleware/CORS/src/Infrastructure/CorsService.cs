@@ -122,7 +122,7 @@ public class CorsService : ICorsService
             {
                 result.IsPreflightRequest
                     ? headers.AccessControlRequestMethod.ToString()
-                    : context.Request.Method
+                    : context.Request.Method,
             }
             : policy.Methods;
         AddHeaderValues(result.AllowedMethods, allowedMethods);

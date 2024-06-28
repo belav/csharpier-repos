@@ -34,7 +34,7 @@ namespace System.Security.AccessControl
         GenericAll = 0x10000000,
         GenericExecute = 0x20000000,
         GenericWrite = 0x40000000,
-        GenericRead = unchecked((int)0x80000000)
+        GenericRead = unchecked((int)0x80000000),
     }
 
     public sealed class CryptoKeyAccessRule : AccessRule

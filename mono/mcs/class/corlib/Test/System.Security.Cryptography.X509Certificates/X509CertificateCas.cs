@@ -560,7 +560,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
             0x57,
             0xBC,
             0x63,
-            0x1C
+            0x1C,
         };
 
         private CultureInfo oldcult;
@@ -662,7 +662,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                 0x5B,
                 0x3A,
                 0x5D,
-                0xA9
+                0xA9,
             };
             Assert.AreEqual(hash, x509.GetCertHash(), "GetCertHash");
             Assert.AreEqual(
@@ -797,7 +797,7 @@ namespace MonoCasTests.System.Security.Cryptography.X509Certificates
                 0x03,
                 0x01,
                 0x00,
-                0x01
+                0x01,
             };
             Assert.AreEqual(pubkey, x509.GetPublicKey(), "GetPublicKey");
             Assert.AreEqual(

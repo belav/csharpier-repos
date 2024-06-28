@@ -37,7 +37,7 @@ public abstract class QueryTestBase<TFixture> : IClassFixture<TFixture>
     public static IEnumerable<object[]> IsAsyncData = new[]
     {
         new object[] { false },
-        new object[] { true }
+        new object[] { true },
     };
 
     public Task AssertQuery<TResult>(

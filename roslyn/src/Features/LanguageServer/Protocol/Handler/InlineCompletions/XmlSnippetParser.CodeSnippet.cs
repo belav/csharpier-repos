@@ -378,7 +378,7 @@ internal partial class XmlSnippetParser
         private enum SnippetParseState
         {
             Code,
-            Literal
+            Literal,
         }
     }
 }

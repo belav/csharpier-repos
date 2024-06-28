@@ -27,7 +27,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Account",
-                action = "AddUser"
+                action = "AddUser",
             }
         ),
         CreateActionDescriptor(
@@ -35,7 +35,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Account",
-                action = "AddUser"
+                action = "AddUser",
             }
         ),
         CreateActionDescriptor(
@@ -43,7 +43,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Account",
-                action = "DeleteUser"
+                action = "DeleteUser",
             }
         ),
         CreateActionDescriptor(
@@ -51,7 +51,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Account",
-                action = "DeleteUser"
+                action = "DeleteUser",
             }
         ),
         CreateActionDescriptor(
@@ -59,7 +59,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Account",
-                action = "Details"
+                action = "Details",
             }
         ),
         CreateActionDescriptor(
@@ -67,7 +67,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Account",
-                action = "List"
+                action = "List",
             }
         ),
         CreateActionDescriptor(
@@ -75,7 +75,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Diagnostics",
-                action = "Stats"
+                action = "Stats",
             }
         ),
         CreateActionDescriptor(
@@ -83,7 +83,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Diagnostics",
-                action = "Performance"
+                action = "Performance",
             }
         ),
         CreateActionDescriptor(
@@ -91,7 +91,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "CreateProduct"
+                action = "CreateProduct",
             }
         ),
         CreateActionDescriptor(
@@ -99,7 +99,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "CreateProduct"
+                action = "CreateProduct",
             }
         ),
         CreateActionDescriptor(
@@ -107,7 +107,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "DeleteProduct"
+                action = "DeleteProduct",
             }
         ),
         CreateActionDescriptor(
@@ -115,7 +115,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "DeleteProduct"
+                action = "DeleteProduct",
             }
         ),
         CreateActionDescriptor(
@@ -123,7 +123,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "EditProduct"
+                action = "EditProduct",
             }
         ),
         CreateActionDescriptor(
@@ -131,7 +131,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "EditProduct"
+                action = "EditProduct",
             }
         ),
         CreateActionDescriptor(
@@ -139,7 +139,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "Index"
+                action = "Index",
             }
         ),
         CreateActionDescriptor(
@@ -147,7 +147,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Admin",
                 controller = "Products",
-                action = "Inventory"
+                action = "Inventory",
             }
         ),
         CreateActionDescriptor(
@@ -155,7 +155,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Search",
-                action = "FindProduct"
+                action = "FindProduct",
             }
         ),
         CreateActionDescriptor(
@@ -163,7 +163,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Search",
-                action = "ShowCategory"
+                action = "ShowCategory",
             }
         ),
         CreateActionDescriptor(
@@ -171,7 +171,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Search",
-                action = "HotItems"
+                action = "HotItems",
             }
         ),
         CreateActionDescriptor(
@@ -179,7 +179,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Product",
-                action = "Index"
+                action = "Index",
             }
         ),
         CreateActionDescriptor(
@@ -187,7 +187,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Product",
-                action = "Details"
+                action = "Details",
             }
         ),
         CreateActionDescriptor(
@@ -195,7 +195,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Product",
-                action = "Buy"
+                action = "Buy",
             }
         ),
         CreateActionDescriptor(
@@ -203,7 +203,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Checkout",
-                action = "ViewCart"
+                action = "ViewCart",
             }
         ),
         CreateActionDescriptor(
@@ -211,7 +211,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Checkout",
-                action = "Billing"
+                action = "Billing",
             }
         ),
         CreateActionDescriptor(
@@ -219,7 +219,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Checkout",
-                action = "Confim"
+                action = "Confim",
             }
         ),
         CreateActionDescriptor(
@@ -227,7 +227,7 @@ public class ActionSelectorBenchmark
             {
                 area = "Store",
                 controller = "Checkout",
-                action = "Confim"
+                action = "Confim",
             }
         ),
         CreateActionDescriptor(
@@ -235,7 +235,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Blog",
-                action = "Index"
+                action = "Index",
             }
         ),
         CreateActionDescriptor(
@@ -243,7 +243,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Blog",
-                action = "Search"
+                action = "Search",
             }
         ),
         CreateActionDescriptor(
@@ -251,7 +251,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Blog",
-                action = "ViewPost"
+                action = "ViewPost",
             }
         ),
         CreateActionDescriptor(
@@ -259,7 +259,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Blog",
-                action = "PostComment"
+                action = "PostComment",
             }
         ),
         CreateActionDescriptor(
@@ -267,7 +267,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Home",
-                action = "Index"
+                action = "Index",
             }
         ),
         CreateActionDescriptor(
@@ -275,7 +275,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Home",
-                action = "Search"
+                action = "Search",
             }
         ),
         CreateActionDescriptor(
@@ -283,7 +283,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Home",
-                action = "About"
+                action = "About",
             }
         ),
         CreateActionDescriptor(
@@ -291,7 +291,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Home",
-                action = "Contact"
+                action = "Contact",
             }
         ),
         CreateActionDescriptor(
@@ -299,7 +299,7 @@ public class ActionSelectorBenchmark
             {
                 area = "",
                 controller = "Home",
-                action = "Support"
+                action = "Support",
             }
         ),
     };
@@ -403,7 +403,7 @@ public class ActionSelectorBenchmark
             );
         }
 
-        return new ActionDescriptor() { RouteValues = routeValues, };
+        return new ActionDescriptor() { RouteValues = routeValues };
     }
 
     private static KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>[] GetDataSet(

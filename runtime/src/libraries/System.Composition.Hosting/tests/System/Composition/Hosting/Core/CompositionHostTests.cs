@@ -78,7 +78,7 @@ namespace System.Composition.Hosting.Core.Tests
                                 dependencyTarget,
                                 true,
                                 "Site"
-                            )
+                            ),
                         };
                     },
                     dependencies =>
@@ -204,7 +204,7 @@ namespace System.Composition.Hosting.Core.Tests
                     "contractName",
                     new Dictionary<string, object>
                     {
-                        { "SharingBoundaryNames", sharingBoundaryNames }
+                        { "SharingBoundaryNames", sharingBoundaryNames },
                     }
                 );
 
@@ -353,7 +353,7 @@ namespace System.Composition.Hosting.Core.Tests
                     {
                         return new CompositionDependency[]
                         {
-                            CompositionDependency.Missing(contract, "site")
+                            CompositionDependency.Missing(contract, "site"),
                         };
                     },
                     dependencies =>

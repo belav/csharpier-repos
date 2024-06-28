@@ -104,7 +104,7 @@ namespace Microsoft.CodeAnalysis.ImplementInterface
                     compilation.ComAliasNameAttributeType(),
                     compilation.TupleElementNamesAttributeType(),
                     compilation.DynamicAttributeType(),
-                    compilation.NativeIntegerAttributeType()
+                    compilation.NativeIntegerAttributeType(),
                 }
                     .WhereNotNull()
                     .ToArray()!;

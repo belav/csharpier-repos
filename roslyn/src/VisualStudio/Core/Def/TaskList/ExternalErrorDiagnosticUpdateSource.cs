@@ -862,7 +862,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TaskList
         {
             Started,
             Updated,
-            Done
+            Done,
         }
 
         internal readonly struct TestAccessor(ExternalErrorDiagnosticUpdateSource instance)

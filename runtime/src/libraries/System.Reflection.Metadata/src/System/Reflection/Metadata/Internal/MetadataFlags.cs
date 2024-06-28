@@ -126,7 +126,7 @@ namespace System.Reflection.Metadata.Ecma335
 
         AllTables = TypeSystemTables | DebugTables,
 
-        ValidPortablePdbExternalTables = TypeSystemTables & ~PtrTables & ~EncTables
+        ValidPortablePdbExternalTables = TypeSystemTables & ~PtrTables & ~EncTables,
     }
 
     internal enum HeapSizes : byte

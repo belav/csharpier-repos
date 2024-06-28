@@ -179,7 +179,7 @@ namespace System.Data.OleDb
             }
         }
 
-        [Browsable(true), ResDescriptionAttribute(Res.OleDbConnection_DataSource),]
+        [Browsable(true), ResDescriptionAttribute(Res.OleDbConnection_DataSource)]
         public override string DataSource
         {
             get
@@ -276,7 +276,7 @@ namespace System.Data.OleDb
             get { return (OleDbConnectionPoolGroupProviderInfo)PoolGroup.ProviderInfo; }
         }
 
-        [ResDescriptionAttribute(Res.OleDbConnection_ServerVersion),]
+        [ResDescriptionAttribute(Res.OleDbConnection_ServerVersion)]
         public override string ServerVersion
         { // MDAC 55481
             get { return InnerConnection.ServerVersion; }
@@ -292,7 +292,7 @@ namespace System.Data.OleDb
             get { return InnerConnection.State; }
         }
 
-        [EditorBrowsableAttribute(EditorBrowsableState.Advanced),]
+        [EditorBrowsableAttribute(EditorBrowsableState.Advanced)]
         public void ResetState()
         { // MDAC 58606
             IntPtr hscp;

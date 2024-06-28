@@ -234,6 +234,6 @@ namespace System.Windows.Input
         Pa1,
         DbeEnterDialogConversionMode = Pa1,
         OemClear,
-        DeadCharProcessed
+        DeadCharProcessed,
     }
 }

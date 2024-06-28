@@ -83,7 +83,7 @@ namespace System.Globalization
             381,
             387,
             392,
-            398
+            398,
         };
 
         // From https://en.wikipedia.org/wiki/ISO_week_date#Relation_with_the_Gregorian_calendar.

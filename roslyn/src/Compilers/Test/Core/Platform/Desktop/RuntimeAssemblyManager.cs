@@ -23,7 +23,7 @@ namespace Roslyn.Test.Utilities.Desktop
         private enum Kind
         {
             ModuleData,
-            Assembly
+            Assembly,
         }
 
         private readonly struct AssemblyData

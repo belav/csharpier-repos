@@ -36,7 +36,7 @@ namespace System.Threading
             Thread timerThread = new Thread(TimerThread)
             {
                 Name = ".NET Timer",
-                IsBackground = true
+                IsBackground = true,
             };
             timerThread.UnsafeStart();
 

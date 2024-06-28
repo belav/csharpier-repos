@@ -567,7 +567,7 @@ namespace System.Web.Helpers
                 dataSource.DefaultSort = new SortInfo
                 {
                     SortColumn = _defaultSort,
-                    SortDirection = SortDirection.Ascending
+                    SortDirection = SortDirection.Ascending,
                 };
                 dataSource.RowsPerPage = _rowsPerPage;
                 _dataSource = dataSource;
@@ -608,7 +608,7 @@ namespace System.Web.Helpers
                 Header = header,
                 Format = format,
                 Style = style,
-                CanSort = canSort
+                CanSort = canSort,
             };
         }
 

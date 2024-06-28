@@ -26,35 +26,35 @@ namespace Microsoft.VisualBasic.Activities
                 new VisualBasicImportReference
                 {
                     Import = "System.Collections",
-                    Assembly = "mscorlib"
+                    Assembly = "mscorlib",
                 },
                 new VisualBasicImportReference
                 {
                     Import = "System.Collections.Generic",
-                    Assembly = "mscorlib"
+                    Assembly = "mscorlib",
                 },
                 //"system"
                 new VisualBasicImportReference { Import = "System", Assembly = "system" },
                 new VisualBasicImportReference
                 {
                     Import = "System.Collections.Generic",
-                    Assembly = "system"
+                    Assembly = "system",
                 },
                 //"System.Activities"
                 new VisualBasicImportReference
                 {
                     Import = "System.Activities",
-                    Assembly = "System.Activities"
+                    Assembly = "System.Activities",
                 },
                 new VisualBasicImportReference
                 {
                     Import = "System.Activities.Statements",
-                    Assembly = "System.Activities"
+                    Assembly = "System.Activities",
                 },
                 new VisualBasicImportReference
                 {
                     Import = "System.Activities.Expressions",
-                    Assembly = "System.Activities"
+                    Assembly = "System.Activities",
                 },
             };
 

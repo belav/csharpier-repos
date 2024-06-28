@@ -345,7 +345,7 @@ namespace CodeStyleConfigFileGenerator
             None,
             Minimum,
             Recommended,
-            All
+            All,
         }
 
         private sealed class AnalyzerAssemblyLoader : IAnalyzerAssemblyLoader

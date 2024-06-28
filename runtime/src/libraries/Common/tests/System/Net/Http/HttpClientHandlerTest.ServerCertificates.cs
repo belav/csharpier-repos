@@ -165,7 +165,7 @@ namespace System.Net.Http.Functional.Tests
                         {
                             remoteServer,
                             remoteServer.EchoUri,
-                            checkRevocation
+                            checkRevocation,
                         };
                         yield return new object[]
                         {
@@ -175,7 +175,7 @@ namespace System.Net.Http.Functional.Tests
                                 remoteServer.EchoUri,
                                 hops: 1
                             ),
-                            checkRevocation
+                            checkRevocation,
                         };
                     }
                 }
@@ -334,12 +334,12 @@ namespace System.Net.Http.Functional.Tests
             new object[]
             {
                 Configuration.Http.ExpiredCertRemoteServer,
-                SslPolicyErrors.RemoteCertificateChainErrors
+                SslPolicyErrors.RemoteCertificateChainErrors,
             },
             new object[]
             {
                 Configuration.Http.WrongHostNameCertRemoteServer,
-                SslPolicyErrors.RemoteCertificateNameMismatch
+                SslPolicyErrors.RemoteCertificateNameMismatch,
             },
         };
 
@@ -439,7 +439,7 @@ namespace System.Net.Http.Functional.Tests
                 var options = new LoopbackServer.Options
                 {
                     UseSsl = true,
-                    Certificate = certificate
+                    Certificate = certificate,
                 };
 
                 await LoopbackServer.CreateServerAsync(

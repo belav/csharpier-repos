@@ -23,9 +23,9 @@ public class SimpleTypeModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
 
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -69,7 +69,7 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -114,7 +114,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -158,7 +158,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -280,7 +280,7 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             ParameterType = typeof(DateTime),
-            BindingInfo = new BindingInfo { BindingSource = BindingSource.Body, }
+            BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -317,7 +317,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -361,7 +361,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = typeof(int)
+            ParameterType = typeof(int),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -432,7 +432,7 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = parameterType
+            ParameterType = parameterType,
         };
 
         // Act
@@ -476,7 +476,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = parameterType
+            ParameterType = parameterType,
         };
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -542,7 +542,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = parameterType
+            ParameterType = parameterType,
         };
 
         // Act
@@ -581,7 +581,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = parameterType
+            ParameterType = parameterType,
         };
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -619,7 +619,7 @@ public class SimpleTypeModelBinderIntegrationTest
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
 
-            ParameterType = typeof(string)
+            ParameterType = typeof(string),
         };
 
         // No Data.
@@ -657,7 +657,7 @@ public class SimpleTypeModelBinderIntegrationTest
                     { "address.lines[]", new[] { "line 1", "line 2" } },
                     { "address[].zip", new[] { "98052" } },
                     { "name[]", new[] { "Fred" } },
-                }
+                },
             };
         }
     }
@@ -722,7 +722,7 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(SampleModel)
+            ParameterType = typeof(SampleModel),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -766,7 +766,7 @@ public class SimpleTypeModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(SampleTryParsableModel)
+            ParameterType = typeof(SampleTryParsableModel),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>

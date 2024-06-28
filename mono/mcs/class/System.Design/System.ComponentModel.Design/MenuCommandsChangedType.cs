@@ -35,6 +35,6 @@ namespace System.ComponentModel.Design
     {
         CommandAdded,
         CommandRemoved,
-        CommandChanged
+        CommandChanged,
     }
 }

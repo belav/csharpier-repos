@@ -28,11 +28,7 @@ public class HtmlHelperHiddenTest
                 { "baz", "BazValue" },
                 { "name", "-expression-" }, // overridden
             };
-            var htmlAttributes2 = new
-            {
-                baz = "BazValue",
-                name = "-expression-", // overridden
-            };
+            var htmlAttributes2 = new { baz = "BazValue", name = "-expression-" };
 
             var data = new TheoryData<object, string>
             {
@@ -42,7 +38,7 @@ public class HtmlHelperHiddenTest
                     new Dictionary<string, object> { { "foo-baz", "BazValue" } },
                     expected2
                 },
-                { new { foo_baz = "BazValue" }, expected2 }
+                { new { foo_baz = "BazValue" }, expected2 },
             };
 
             return data;
@@ -556,7 +552,7 @@ public class HtmlHelperHiddenTest
         var attributes = new Dictionary<string, object>
         {
             { "baz", "BazValue" },
-            { "class", "some-class" }
+            { "class", "some-class" },
         };
 
         // Act
@@ -857,7 +853,7 @@ public class HtmlHelperHiddenTest
         var attributes = new Dictionary<string, object>
         {
             { "baz", "BazValue" },
-            { "class", "some-class" }
+            { "class", "some-class" },
         };
 
         // Act
@@ -911,7 +907,7 @@ public class HtmlHelperHiddenTest
                     model => localModel.Property4.Property5,
                     @"<input data-val=""HtmlEncode[[true]]"" id=""HtmlEncode[[localModel_Property4_Property5]]"" "
                         + @"name=""HtmlEncode[[localModel.Property4.Property5]]"" type=""HtmlEncode[[hidden]]"" value=""HtmlEncode[[local-value]]"" />"
-                }
+                },
             };
         }
     }
@@ -936,7 +932,7 @@ public class HtmlHelperHiddenTest
         var attributes = new Dictionary<string, object>
         {
             { "data-val", "true" },
-            { "value", "attr-val" }
+            { "value", "attr-val" },
         };
 
         // Act
@@ -966,7 +962,7 @@ public class HtmlHelperHiddenTest
                     model => model.Property4.Property6[0],
                     @"<input data-val=""HtmlEncode[[true]]"" id=""HtmlEncode[[pre_Property4_Property6_0_]]"" "
                         + @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[hidden]]"" value=""HtmlEncode[[Prop6Val]]"" />"
-                }
+                },
             };
         }
     }

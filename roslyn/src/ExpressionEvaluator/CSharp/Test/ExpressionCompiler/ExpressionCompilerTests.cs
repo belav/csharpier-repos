@@ -4747,7 +4747,7 @@ class C
                     referenceN1,
                     referenceN2,
                     referenceD0,
-                    referenceD1
+                    referenceD1,
                 }
             );
 
@@ -6179,7 +6179,7 @@ class C
                 new[]
                 {
                     SystemXmlLinqRef.WithAliases(ImmutableArray.Create("X")),
-                    SystemXmlRef.WithAliases(ImmutableArray.Create("X"))
+                    SystemXmlRef.WithAliases(ImmutableArray.Create("X")),
                 }
             );
 
@@ -6851,7 +6851,7 @@ class C
                     {
                         corruptMetadata,
                         comp.ToModuleInstance(),
-                        MscorlibRef.ToModuleInstance()
+                        MscorlibRef.ToModuleInstance(),
                     }
                 );
                 var context = CreateMethodContext(runtime, "C.M");

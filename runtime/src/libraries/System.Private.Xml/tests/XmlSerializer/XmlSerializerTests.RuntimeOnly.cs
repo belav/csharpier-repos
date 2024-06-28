@@ -224,7 +224,7 @@ public static partial class XmlSerializerTests
                 (decimal)0,
                 (decimal)2.3,
                 decimal.MinValue,
-                decimal.MaxValue
+                decimal.MaxValue,
             }
         )
         {
@@ -468,7 +468,7 @@ public static partial class XmlSerializerTests
                 (short)0,
                 (short)2.3,
                 short.MinValue,
-                short.MaxValue
+                short.MaxValue,
             }
         )
         {
@@ -635,7 +635,7 @@ public static partial class XmlSerializerTests
         SimpleType[] x = new SimpleType[]
         {
             new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType { P1 = "def", P2 = 12 },
         };
         SimpleType[] y = SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -991,7 +991,7 @@ public static partial class XmlSerializerTests
         {
             new int[] { 1, 3, 5, 7, 9 },
             new int[] { 0, 2, 4, 6 },
-            new int[] { 11, 22 }
+            new int[] { 11, 22 },
         };
         int[][] actualJaggedIntegerArray = SerializeAndDeserialize<int[][]>(
             jaggedIntegerArray,
@@ -1024,7 +1024,7 @@ public static partial class XmlSerializerTests
         {
             new string[] { "1", "3", "5", "7", "9" },
             new string[] { "0", "2", "4", "6" },
-            new string[] { "11", "22" }
+            new string[] { "11", "22" },
         };
         string[][] actualJaggedStringArray = SerializeAndDeserialize<string[][]>(
             jaggedStringArray,
@@ -1060,7 +1060,7 @@ public static partial class XmlSerializerTests
             1.0,
             "string",
             Guid.Parse("2054fd3e-e118-476a-9962-1a882be51860"),
-            new DateTime(2013, 1, 2)
+            new DateTime(2013, 1, 2),
         };
         object[] actualObjectArray = SerializeAndDeserialize<object[]>(
             objectArray,
@@ -1087,7 +1087,7 @@ public static partial class XmlSerializerTests
         {
             new int[][] { new int[] { 1 }, new int[] { 3 } },
             new int[][] { new int[] { 0 } },
-            new int[][] { new int[] { } }
+            new int[][] { new int[] { } },
         };
         int[][][] actualJaggedIntegerArray2 = SerializeAndDeserialize<int[][][]>(
             jaggedIntegerArray2,
@@ -1185,7 +1185,7 @@ public static partial class XmlSerializerTests
         SimpleType[] x = new SimpleType[]
         {
             new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType { P1 = "def", P2 = 12 },
         };
         SimpleType[] y = SerializeAndDeserialize<SimpleType[]>(
             x,
@@ -1259,7 +1259,7 @@ public static partial class XmlSerializerTests
         var original = new TypeWithMemberWithXmlNamespaceDeclarationsAttribute()
         {
             header = "foo",
-            body = "bar"
+            body = "bar",
         };
 
         var actual = SerializeAndDeserialize<TypeWithMemberWithXmlNamespaceDeclarationsAttribute>(
@@ -1282,7 +1282,7 @@ public static partial class XmlSerializerTests
         {
             header = "foo",
             body = "bar",
-            xmlns = new XmlSerializerNamespaces(new[] { ns })
+            xmlns = new XmlSerializerNamespaces(new[] { ns }),
         };
 
         var actual = SerializeAndDeserialize<TypeWithMemberWithXmlNamespaceDeclarationsAttribute>(
@@ -1407,7 +1407,7 @@ public static partial class XmlSerializerTests
         HighScores.BridgeGameHighScore bghs = new HighScores.BridgeGameHighScore()
         {
             Id = 123,
-            Name = "Foo"
+            Name = "Foo",
         };
         value.Add(bghs);
         var actual = SerializeAndDeserialize<List<HighScores.BridgeGameHighScore>>(
@@ -1456,13 +1456,13 @@ public static partial class XmlSerializerTests
         value.Add(
             new PublicTypeWithNestedPublicTypeWithNestedPublicType.NestedPublicType.LevelData()
             {
-                Name = "Foo"
+                Name = "Foo",
             }
         );
         value.Add(
             new PublicTypeWithNestedPublicTypeWithNestedPublicType.NestedPublicType.LevelData()
             {
-                Name = "Bar"
+                Name = "Bar",
             }
         );
         var actual = SerializeAndDeserialize(
@@ -1576,8 +1576,8 @@ public static partial class XmlSerializerTests
             Instruments = new Music.Instrument[]
             {
                 new Music.Brass() { Name = "Trumpet", IsValved = true },
-                new Music.Brass() { Name = "Cornet", IsValved = true }
-            }
+                new Music.Brass() { Name = "Cornet", IsValved = true },
+            },
         };
         var overrides = new XmlAttributeOverrides();
         overrides.Add(
@@ -1585,7 +1585,7 @@ public static partial class XmlSerializerTests
             "Instruments",
             new XmlAttributes()
             {
-                XmlElements = { new XmlElementAttribute("Brass", typeof(Music.Brass)) }
+                XmlElements = { new XmlElementAttribute("Brass", typeof(Music.Brass)) },
             }
         );
 
@@ -1785,7 +1785,7 @@ public static partial class XmlSerializerTests
 
         var value = new TypeWithXmlElementsAndUnnamedXmlAny()
         {
-            Things = new object[] { 1, "2", element }
+            Things = new object[] { 1, "2", element },
         };
 
         var actual = SerializeAndDeserialize(
@@ -1817,7 +1817,7 @@ public static partial class XmlSerializerTests
 
         var value = new TypeWithMultiNamedXmlAnyElement()
         {
-            Things = new object[] { element1, element2 }
+            Things = new object[] { element1, element2 },
         };
 
         var actual = SerializeAndDeserialize(
@@ -1858,7 +1858,7 @@ public static partial class XmlSerializerTests
         {
             Things = new object[] { element1, element2 },
             StringField = "foo",
-            IntField = 123
+            IntField = 123,
         };
 
         var actual = SerializeAndDeserialize(
@@ -1882,7 +1882,7 @@ public static partial class XmlSerializerTests
     {
         var value = new TypeWithStringArrayAsXmlAttribute()
         {
-            XmlAttributeForms = new string[] { "SomeValue1", "SomeValue2" }
+            XmlAttributeForms = new string[] { "SomeValue1", "SomeValue2" },
         };
 
         var actual = SerializeAndDeserialize(
@@ -1901,7 +1901,7 @@ public static partial class XmlSerializerTests
         {
             XmlAttributeForms = new string[] { "SomeValue1", "SomeValue2" },
             StringField = "foo",
-            IntField = 123
+            IntField = 123,
         };
 
         var actual = SerializeAndDeserialize(
@@ -1920,7 +1920,7 @@ public static partial class XmlSerializerTests
     {
         var value = new TypeWithByteArrayAsXmlAttribute()
         {
-            XmlAttributeForms = new byte[] { 0, 1, 2 }
+            XmlAttributeForms = new byte[] { 0, 1, 2 },
         };
 
         var actual = SerializeAndDeserialize(
@@ -1952,7 +1952,7 @@ public static partial class XmlSerializerTests
     {
         var value = new TypeWithByteArrayArrayAsXmlAttribute()
         {
-            XmlAttributeForms = new byte[][] { new byte[] { 1 }, new byte[] { 2 } }
+            XmlAttributeForms = new byte[][] { new byte[] { 1 }, new byte[] { 2 } },
         };
 
         var actual = SerializeAndDeserialize(
@@ -1973,8 +1973,8 @@ public static partial class XmlSerializerTests
             XmlAttributeForms = new XmlQualifiedName[]
             {
                 new XmlQualifiedName("SomeValue1", "ns1"),
-                new XmlQualifiedName("SomeValue2", "ns2")
-            }
+                new XmlQualifiedName("SomeValue2", "ns2"),
+            },
         };
 
         var actual = SerializeAndDeserialize(
@@ -1991,7 +1991,7 @@ public static partial class XmlSerializerTests
     {
         var value = new TypeWithEnumArrayAsXmlAttribute()
         {
-            XmlAttributeForms = new IntEnum[] { IntEnum.Option1, IntEnum.Option2 }
+            XmlAttributeForms = new IntEnum[] { IntEnum.Option1, IntEnum.Option2 },
         };
 
         var actual = SerializeAndDeserialize(
@@ -2098,7 +2098,7 @@ public static partial class XmlSerializerTests
             IntValue = 11,
             DoubleValue = 12.0,
             StringValue = "abc",
-            DateTimeValue = new DateTime(1000)
+            DateTimeValue = new DateTime(1000),
         };
 
         var actual = SerializeAndDeserialize(
@@ -2195,7 +2195,7 @@ public static partial class XmlSerializerTests
             IntValue = 11,
             DoubleValue = 12.0,
             StringValue = "abc",
-            DateTimeValue = new DateTime(1000)
+            DateTimeValue = new DateTime(1000),
         };
 
         var actual = SerializeAndDeserialize(
@@ -2229,7 +2229,7 @@ public static partial class XmlSerializerTests
             IntValue = 11,
             DoubleValue = 12.0,
             StringValue = "abc",
-            DateTimeValue = new DateTime(1000)
+            DateTimeValue = new DateTime(1000),
         };
 
         var actual = SerializeAndDeserialize(
@@ -2264,7 +2264,7 @@ public static partial class XmlSerializerTests
             IntValue = 11,
             DoubleValue = 12.0,
             StringValue = "abc",
-            DateTimeValue = new DateTime(1000)
+            DateTimeValue = new DateTime(1000),
         };
 
         var actual = SerializeAndDeserialize(
@@ -2300,7 +2300,7 @@ public static partial class XmlSerializerTests
             IntValue = 11,
             DoubleValue = 12.0,
             StringValue = "abc",
-            DateTimeValue = new DateTime(1000)
+            DateTimeValue = new DateTime(1000),
         };
 
         var actual = SerializeAndDeserialize(
@@ -2383,7 +2383,7 @@ public static partial class XmlSerializerTests
         {
             Name = "MyName",
             PostitiveInt = "10",
-            Today = new DateTime(2012, 10, 10)
+            Today = new DateTime(2012, 10, 10),
         };
 
         var actual = SerializeAndDeserialize(
@@ -2409,7 +2409,7 @@ public static partial class XmlSerializerTests
         {
             ID = 10,
             Name = "MyName",
-            SecondaryID = 1000
+            SecondaryID = 1000,
         };
 
         var actual = SerializeAndDeserialize(
@@ -2511,7 +2511,7 @@ public static partial class XmlSerializerTests
         MyItem[] things = new MyItem[]
         {
             new MyItem() { ItemName = "AAA" },
-            new MyItem() { ItemName = "BBB" }
+            new MyItem() { ItemName = "BBB" },
         };
         var value = new MyGroup() { GroupName = "MyName", MyItems = things };
 
@@ -2536,7 +2536,7 @@ public static partial class XmlSerializerTests
         List<MyItem> things = new List<MyItem>()
         {
             new MyItem() { ItemName = "AAA" },
-            new MyItem() { ItemName = "BBB" }
+            new MyItem() { ItemName = "BBB" },
         };
         var value = new MyGroup2() { GroupName = "MyName", MyItems = things };
 
@@ -2610,7 +2610,7 @@ public static partial class XmlSerializerTests
         {
             Optional = IntEnum.Option1,
             OptionalInt = 42,
-            Struct1 = new SomeStruct { A = 1, B = 2 }
+            Struct1 = new SomeStruct { A = 1, B = 2 },
         };
         string baseline =
             "<root><WithNullables xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" id=\"id1\"><Optional xsi:type=\"IntEnum\">Option1</Optional><OptionalInt xsi:type=\"xsd:int\">42</OptionalInt><Struct1 href=\"#id2\" /></WithNullables><SomeStruct id=\"id2\" d2p1:type=\"SomeStruct\" xmlns:d2p1=\"http://www.w3.org/2001/XMLSchema-instance\"><A xmlns:q1=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q1:int\">1</A><B xmlns:q2=\"http://www.w3.org/2001/XMLSchema\" d2p1:type=\"q2:int\">2</B></SomeStruct></root>";
@@ -2894,8 +2894,8 @@ public static partial class XmlSerializerTests
             composite = new CompositeTypeForXmlMembersMapping()
             {
                 BoolValue = true,
-                StringValue = "foo"
-            }
+                StringValue = "foo",
+            },
         };
         var requestBodyActual = RoundTripWithXmlMembersMapping<GetDataUsingDataContractRequestBody>(
             requestBodyValue,
@@ -3026,7 +3026,7 @@ public static partial class XmlSerializerTests
         var value = new object[]
         {
             new GetDataRequestBody() { value = 3 },
-            false
+            false,
         };
         var actual = RoundTripWithXmlMembersMapping(
             value,
@@ -3081,7 +3081,7 @@ public static partial class XmlSerializerTests
         string memberName = "data";
         var requestBodyValue = new XmlMembersMappingTypeHavingIntArray()
         {
-            IntArray = new int[] { 1, 2, 3 }
+            IntArray = new int[] { 1, 2, 3 },
         };
         var requestBodyActual = RoundTripWithXmlMembersMapping<XmlMembersMappingTypeHavingIntArray>(
             requestBodyValue,
@@ -3106,7 +3106,7 @@ public static partial class XmlSerializerTests
         TypeWithXmlAttributes value = new TypeWithXmlAttributes
         {
             MyName = "fooname",
-            Today = DateTime.Now
+            Today = DateTime.Now,
         };
         var actual = RoundTripWithXmlMembersMapping<TypeWithXmlAttributes>(
             value,
@@ -3433,7 +3433,7 @@ public static partial class XmlSerializerTests
         var requestBodyValue = new CompositeTypeForXmlMembersMapping()
         {
             BoolValue = true,
-            StringValue = "foo"
+            StringValue = "foo",
         };
         var requestBodyActual =
             RoundTripWithXmlMembersMappingSoap<CompositeTypeForXmlMembersMapping>(
@@ -3712,7 +3712,7 @@ public static partial class XmlSerializerTests
             IntArray = new int[] { 1, 2 },
             StringArray = new string[] { "foo", "bar" },
             IntList = new List<int>() { 1, 2 },
-            StringList = new List<string>() { "foo", "bar" }
+            StringList = new List<string>() { "foo", "bar" },
         };
 
         string baseline =
@@ -3845,7 +3845,7 @@ public static partial class XmlSerializerTests
             CurrentPaymentType = NookAppLocalState.PaymentType.Microsoft,
             IsFirstRun = true,
             PreviousSearchQueries = new List<string>(new string[] { "one", "two" }),
-            TextColor = System.Drawing.Color.FromArgb(3, 4, 5, 6)
+            TextColor = System.Drawing.Color.FromArgb(3, 4, 5, 6),
         };
         value.LocalReadingPositionState = new List<LocalReadingPosition>();
         value.LocalReadingPositionState.Add(
@@ -3855,7 +3855,7 @@ public static partial class XmlSerializerTests
                 LastReadTime = new DateTime(2013, 1, 2),
                 PageCount = 1,
                 PageNumber = "1",
-                PlatformOffset = "offset"
+                PlatformOffset = "offset",
             }
         );
 
@@ -3888,7 +3888,7 @@ public static partial class XmlSerializerTests
             Name2 = "Name2",
             Name3 = "Name3",
             Name4 = "Name4",
-            Name5 = "Name5"
+            Name5 = "Name5",
         };
         DerivedTypeWithDifferentOverrides actual =
             SerializeAndDeserialize<DerivedTypeWithDifferentOverrides>(
@@ -3917,7 +3917,7 @@ public static partial class XmlSerializerTests
             Name4 = "Name4",
             Name5 = "Name5",
             Name6 = "Name6",
-            Name7 = "Name7"
+            Name7 = "Name7",
         };
         ((DerivedTypeWithDifferentOverrides)value).Name5 = "MidLevelName5";
         ((DerivedTypeWithDifferentOverrides)value).Name4 = "MidLevelName4";
@@ -3967,7 +3967,7 @@ public static partial class XmlSerializerTests
         SimpleType[] x = new SimpleType[]
         {
             new SimpleType { P1 = "abc", P2 = 11 },
-            new SimpleType { P1 = "def", P2 = 12 }
+            new SimpleType { P1 = "def", P2 = 12 },
         };
         Func<XmlSerializer> serializerFactory = () =>
         {

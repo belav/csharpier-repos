@@ -109,7 +109,7 @@ namespace System.Web.Http
                     {
                         Configuration = controllerContext.Configuration,
                         ControllerDescriptor = controllerDescriptor,
-                        MethodInfo = testDelegate.Method
+                        MethodInfo = testDelegate.Method,
                     };
                 });
             controllerDescriptor.Configuration.Services.Replace(
@@ -306,7 +306,7 @@ namespace System.Web.Http
                 request: new HttpRequestMessage()
                 {
                     Method = HttpMethod.Post,
-                    RequestUri = requestUri
+                    RequestUri = requestUri,
                 }
             );
             controllerContext.ControllerDescriptor = new HttpControllerDescriptor(
@@ -337,7 +337,7 @@ namespace System.Web.Http
             User postedUser = new User()
             {
                 FirstName = "SampleFirstName",
-                LastName = "SampleLastName"
+                LastName = "SampleLastName",
             };
 
             HttpRequestMessage request = new HttpRequestMessage() { Method = HttpMethod.Post };
@@ -348,7 +348,7 @@ namespace System.Web.Http
             using (
                 HttpRequestMessage tempRequest = new HttpRequestMessage()
                 {
-                    Content = new ObjectContent<User>(postedUser, new XmlMediaTypeFormatter())
+                    Content = new ObjectContent<User>(postedUser, new XmlMediaTypeFormatter()),
                 }
             )
             {
@@ -520,7 +520,7 @@ namespace System.Web.Http
                         {
                             new FilterInfo(actionFilterMock.Object, FilterScope.Action),
                             new FilterInfo(authorizationFilterMock.Object, FilterScope.Action),
-                            new FilterInfo(authenticationFilterMock.Object, FilterScope.Action)
+                            new FilterInfo(authenticationFilterMock.Object, FilterScope.Action),
                         }
                     )
                 );
@@ -569,7 +569,7 @@ namespace System.Web.Http
                     "model binding",
                     "action filters",
                     "action",
-                    "authN filters challenge"
+                    "authN filters challenge",
                 },
                 log.ToArray()
             );
@@ -589,7 +589,7 @@ namespace System.Web.Http
 
             HttpActionDescriptor actionDescriptorMock = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             actionDescriptorMock.Configuration = _configurationInstance;
 
@@ -613,7 +613,7 @@ namespace System.Web.Http
 
             HttpActionDescriptor actionDescriptorMock = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             actionDescriptorMock.Configuration = _configurationInstance;
 
@@ -666,7 +666,7 @@ namespace System.Web.Http
                         "result",
                         "attempted",
                         CultureInfo.InvariantCulture
-                    )
+                    ),
                 }
             );
 
@@ -678,7 +678,7 @@ namespace System.Web.Http
                         "result",
                         "attempted",
                         CultureInfo.InvariantCulture
-                    )
+                    ),
                 }
             );
 
@@ -693,7 +693,7 @@ namespace System.Web.Http
             // Arrange
             HttpActionDescriptor actionDescriptorMock = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             actionDescriptorMock.Configuration = _configurationInstance;
 
@@ -722,7 +722,7 @@ namespace System.Web.Http
             // Arrange
             HttpActionDescriptor actionDescriptorMock = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             }.Object;
             actionDescriptorMock.Configuration = _configurationInstance;
 
@@ -1032,7 +1032,7 @@ namespace System.Web.Http
             // Arrange
             var config = new HttpConfiguration()
             {
-                IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always
+                IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always,
             };
             var singletonController = new Mock<ApiController> { CallBase = true }.Object;
             var mockDescriptor = new Mock<HttpControllerDescriptor>(
@@ -1041,7 +1041,7 @@ namespace System.Web.Http
                 typeof(ApiController)
             )
             {
-                CallBase = true
+                CallBase = true,
             };
             mockDescriptor
                 .Setup(d => d.CreateController(It.IsAny<HttpRequestMessage>()))
@@ -1114,7 +1114,7 @@ namespace System.Web.Http
                 ApiController controller = CreateFakeController();
                 controller.ControllerContext = new HttpControllerContext
                 {
-                    Request = expectedRequest
+                    Request = expectedRequest,
                 };
 
                 // Act

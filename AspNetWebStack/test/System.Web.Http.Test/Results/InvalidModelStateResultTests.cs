@@ -511,7 +511,7 @@ namespace System.Web.Http.Results
                     controller.RequestContext = new HttpRequestContext
                     {
                         Configuration = configuration,
-                        IncludeErrorDetail = true
+                        IncludeErrorDetail = true,
                     };
                     controller.Request = expectedRequest;
 
@@ -713,7 +713,7 @@ namespace System.Web.Http.Results
                 HttpRequestContext requestContext = new HttpRequestContext
                 {
                     Configuration = configuration,
-                    IncludeErrorDetail = true
+                    IncludeErrorDetail = true,
                 };
                 controller.RequestContext = requestContext;
                 controller.Request = request;

@@ -576,19 +576,16 @@ namespace System.Globalization
             ReadOnlySpan<char> string2,
             CompareOptions options
         ) =>
-            GlobalizationMode.UseNls
-                ? NlsCompareString(string1, string2, options)
-                :
+            GlobalizationMode.UseNls ? NlsCompareString(string1, string2, options)
+            :
 #if TARGET_BROWSER
-                GlobalizationMode.Hybrid
-                    ? JsCompareString(string1, string2, options)
-                    :
+            GlobalizationMode.Hybrid ? JsCompareString(string1, string2, options)
+            :
 #elif TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                GlobalizationMode.Hybrid
-                    ? CompareStringNative(string1, string2, options)
-                    :
+            GlobalizationMode.Hybrid ? CompareStringNative(string1, string2, options)
+            :
 #endif
-                    IcuCompareString(string1, string2, options);
+            IcuCompareString(string1, string2, options);
 
         /// <summary>
         /// Determines whether prefix is a prefix of string.  If prefix equals
@@ -748,9 +745,8 @@ namespace System.Globalization
                 ? NlsStartsWith(source, prefix, options, matchLengthPtr)
                 :
 #if TARGET_BROWSER
-                GlobalizationMode.Hybrid
-                    ? JsStartsWith(source, prefix, options)
-                    :
+            GlobalizationMode.Hybrid ? JsStartsWith(source, prefix, options)
+            :
 #endif
                 IcuStartsWith(source, prefix, options, matchLengthPtr);
 
@@ -922,9 +918,8 @@ namespace System.Globalization
                 ? NlsEndsWith(source, suffix, options, matchLengthPtr)
                 :
 #if TARGET_BROWSER
-                GlobalizationMode.Hybrid
-                    ? JsEndsWith(source, suffix, options)
-                    :
+            GlobalizationMode.Hybrid ? JsEndsWith(source, suffix, options)
+            :
 #endif
                 IcuEndsWith(source, suffix, options, matchLengthPtr);
 
@@ -1325,9 +1320,9 @@ namespace System.Globalization
                 ? NlsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning)
                 :
 #if TARGET_BROWSER
-                GlobalizationMode.Hybrid
-                    ? JsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning)
-                    :
+            GlobalizationMode.Hybrid
+                ? JsIndexOfCore(source, target, options, matchLengthPtr, fromBeginning)
+            :
 #endif
                 IcuIndexOfCore(source, target, options, matchLengthPtr, fromBeginning);
 
@@ -1692,15 +1687,14 @@ namespace System.Globalization
         }
 
         private SortKey CreateSortKeyCore(string source, CompareOptions options) =>
-            GlobalizationMode.UseNls
-                ? NlsCreateSortKey(source, options)
-                :
+            GlobalizationMode.UseNls ? NlsCreateSortKey(source, options)
+            :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                GlobalizationMode.Hybrid
-                    ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
-                    :
+            GlobalizationMode.Hybrid
+                ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
+            :
 #endif
-                    IcuCreateSortKey(source, options);
+            IcuCreateSortKey(source, options);
 
         /// <summary>
         /// Computes a sort key over the specified input.
@@ -1748,15 +1742,14 @@ namespace System.Globalization
             Span<byte> destination,
             CompareOptions options
         ) =>
-            GlobalizationMode.UseNls
-                ? NlsGetSortKey(source, destination, options)
-                :
+            GlobalizationMode.UseNls ? NlsGetSortKey(source, destination, options)
+            :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                GlobalizationMode.Hybrid
-                    ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
-                    :
+            GlobalizationMode.Hybrid
+                ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
+            :
 #endif
-                    IcuGetSortKey(source, destination, options);
+            IcuGetSortKey(source, destination, options);
 
         /// <summary>
         /// Returns the length (in bytes) of the sort key that would be produced from the specified input.
@@ -1793,15 +1786,14 @@ namespace System.Globalization
         }
 
         private int GetSortKeyLengthCore(ReadOnlySpan<char> source, CompareOptions options) =>
-            GlobalizationMode.UseNls
-                ? NlsGetSortKeyLength(source, options)
-                :
+            GlobalizationMode.UseNls ? NlsGetSortKeyLength(source, options)
+            :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                GlobalizationMode.Hybrid
-                    ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
-                    :
+            GlobalizationMode.Hybrid
+                ? throw new PlatformNotSupportedException(GetPNSEText("SortKey"))
+            :
 #endif
-                    IcuGetSortKeyLength(source, options);
+            IcuGetSortKeyLength(source, options);
 
         public override bool Equals([NotNullWhen(true)] object? value)
         {
@@ -1874,15 +1866,14 @@ namespace System.Globalization
             ReadOnlySpan<char> source,
             CompareOptions options
         ) =>
-            GlobalizationMode.UseNls
-                ? NlsGetHashCodeOfString(source, options)
-                :
+            GlobalizationMode.UseNls ? NlsGetHashCodeOfString(source, options)
+            :
 #if TARGET_BROWSER || TARGET_MACCATALYST || TARGET_IOS || TARGET_TVOS
-                GlobalizationMode.Hybrid
-                    ? throw new PlatformNotSupportedException(GetPNSEText("HashCode"))
-                    :
+            GlobalizationMode.Hybrid
+                ? throw new PlatformNotSupportedException(GetPNSEText("HashCode"))
+            :
 #endif
-                    IcuGetHashCodeOfString(source, options);
+            IcuGetHashCodeOfString(source, options);
 
         public override string ToString() => "CompareInfo - " + Name;
 

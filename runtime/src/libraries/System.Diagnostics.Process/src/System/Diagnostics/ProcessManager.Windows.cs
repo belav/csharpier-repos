@@ -401,7 +401,7 @@ namespace System.Diagnostics
             { "% Privileged Time", ValueId.PrivilegedTime },
             { "Start Address", ValueId.StartAddress },
             { "Thread State", ValueId.ThreadState },
-            { "Thread Wait Reason", ValueId.ThreadWaitReason }
+            { "Thread Wait Reason", ValueId.ThreadWaitReason },
         };
 
         internal static int SystemProcessID
@@ -843,7 +843,7 @@ namespace System.Diagnostics
             PrivilegedTime,
             StartAddress,
             ThreadState,
-            ThreadWaitReason
+            ThreadWaitReason,
         }
     }
 }

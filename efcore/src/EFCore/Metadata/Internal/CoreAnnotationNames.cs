@@ -406,6 +406,6 @@ public static class CoreAnnotationNames
         FullChangeTrackingNotificationsRequired,
         AdHocModel,
         JsonValueReaderWriterType,
-        ElementType
+        ElementType,
     };
 }

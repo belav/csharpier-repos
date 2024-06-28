@@ -60,7 +60,7 @@ namespace Castle.DynamicProxy.Tests
                 {
                     typeof(IsByValue),
                     typeof(IsConst),
-                    typeof(IsLong)
+                    typeof(IsLong),
                 },
                 ["IsByValue_IsLong"] = new[] { typeof(IsByValue), typeof(IsLong) },
                 ["IsConst"] = new[] { typeof(IsConst) },

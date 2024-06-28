@@ -296,7 +296,7 @@ namespace System.Configuration
             Usable,
 
             // The config system has been completely initialized.
-            Completed
+            Completed,
         };
     }
 }

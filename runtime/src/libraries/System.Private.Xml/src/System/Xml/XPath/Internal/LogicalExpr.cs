@@ -88,7 +88,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpStringStringE),
                 null,
                 null,
-                null
+                null,
             },
             new cmpXslt?[]
             {
@@ -96,7 +96,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpBoolStringE),
                 new cmpXslt(cmpBoolBoolE),
                 null,
-                null
+                null,
             },
             new cmpXslt?[]
             {
@@ -104,7 +104,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpQueryStringE),
                 new cmpXslt(cmpQueryBoolE),
                 new cmpXslt(cmpQueryQueryE),
-                null
+                null,
             },
             new cmpXslt?[]
             {
@@ -112,7 +112,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpRtfStringE),
                 new cmpXslt(cmpRtfBoolE),
                 new cmpXslt(cmpRtfQueryE),
-                new cmpXslt(cmpRtfRtfE)
+                new cmpXslt(cmpRtfRtfE),
             },
         };
         private static readonly cmpXslt?[][] s_CompXsltO =
@@ -124,7 +124,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpStringStringO),
                 null,
                 null,
-                null
+                null,
             },
             new cmpXslt?[]
             {
@@ -132,7 +132,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpBoolStringO),
                 new cmpXslt(cmpBoolBoolO),
                 null,
-                null
+                null,
             },
             new cmpXslt?[]
             {
@@ -140,7 +140,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpQueryStringO),
                 new cmpXslt(cmpQueryBoolO),
                 new cmpXslt(cmpQueryQueryO),
-                null
+                null,
             },
             new cmpXslt?[]
             {
@@ -148,7 +148,7 @@ namespace MS.Internal.Xml.XPath
                 new cmpXslt(cmpRtfStringO),
                 new cmpXslt(cmpRtfBoolO),
                 new cmpXslt(cmpRtfQueryO),
-                new cmpXslt(cmpRtfRtfO)
+                new cmpXslt(cmpRtfRtfO),
             },
         };
 

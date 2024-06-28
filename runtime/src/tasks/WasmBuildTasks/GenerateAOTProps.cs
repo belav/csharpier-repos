@@ -44,7 +44,7 @@ namespace Microsoft.WebAssembly.Build.Tasks
                 "DefiningProjectName",
                 "DefiningProjectExtension",
                 s_originalItemNameMetadata,
-                s_conditionToUseMetadata
+                s_conditionToUseMetadata,
             };
 
         public override bool Execute()

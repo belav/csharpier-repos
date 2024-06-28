@@ -631,7 +631,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new BadNullableDoubleConverter() }
+                Converters = { new BadNullableDoubleConverter() },
             };
 
             Assert.Throws<InvalidOperationException>(() => JsonSerializer.Serialize(3.14, options));
@@ -655,7 +655,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new BadNullableDoubleConverter() }
+                Converters = { new BadNullableDoubleConverter() },
             };
 
             Assert.Throws<InvalidOperationException>(

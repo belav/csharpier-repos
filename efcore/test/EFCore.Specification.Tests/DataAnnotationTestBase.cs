@@ -981,7 +981,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
             {
                 e.String,
                 e.DateTime,
-                e.Guid
+                e.Guid,
             });
 
         var entity = modelBuilder.Model.FindEntityType(typeof(GeneratedEntityNonInteger));
@@ -1870,7 +1870,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RequiredColumn = "Third",
                         RowVersion = new Guid("00000000-0000-0000-0000-000000000003"),
                         Details = new Details { Name = "Third Name" },
-                        AdditionalDetails = new Details { Name = "Third Additional Name" }
+                        AdditionalDetails = new Details { Name = "Third Additional Name" },
                     }
                 );
 
@@ -1891,7 +1891,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RowVersion = new Guid("00000000-0000-0000-0000-000000000001"),
                         MaxLengthProperty = "Short",
                         Details = new Details { Name = "Third Name" },
-                        AdditionalDetails = new Details { Name = "Third Additional Name" }
+                        AdditionalDetails = new Details { Name = "Third Additional Name" },
                     }
                 );
 
@@ -1909,7 +1909,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RowVersion = new Guid("00000000-0000-0000-0000-000000000002"),
                         MaxLengthProperty = "VeryVeryVeryVeryVeryVeryLongString",
                         Details = new Details { Name = "Third Name" },
-                        AdditionalDetails = new Details { Name = "Third Additional Name" }
+                        AdditionalDetails = new Details { Name = "Third Additional Name" },
                     }
                 );
 
@@ -2906,7 +2906,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RequiredColumn = "ValidString",
                         RowVersion = new Guid("00000000-0000-0000-0000-000000000001"),
                         Details = new Details { Name = "One" },
-                        AdditionalDetails = new Details { Name = "Two" }
+                        AdditionalDetails = new Details { Name = "Two" },
                     }
                 );
 
@@ -2923,7 +2923,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RequiredColumn = null,
                         RowVersion = new Guid("00000000-0000-0000-0000-000000000002"),
                         Details = new Details { Name = "One" },
-                        AdditionalDetails = new Details { Name = "Two" }
+                        AdditionalDetails = new Details { Name = "Two" },
                     }
                 );
 
@@ -3193,7 +3193,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RequiredColumn = "First",
                         RowVersion = new Guid("00000001-0000-0000-0000-000000000001"),
                         Details = new Details { Name = "First Name" },
-                        AdditionalDetails = new Details { Name = "First Additional Name" }
+                        AdditionalDetails = new Details { Name = "First Additional Name" },
                     }
                 );
             context
@@ -3204,7 +3204,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                         RequiredColumn = "Second",
                         RowVersion = new Guid("00000001-0000-0000-0000-000000000001"),
                         Details = new Details { Name = "Second Name" },
-                        AdditionalDetails = new Details { Name = "Second Additional Name" }
+                        AdditionalDetails = new Details { Name = "Second Additional Name" },
                     }
                 );
 
@@ -3217,7 +3217,7 @@ public abstract class DataAnnotationTestBase<TFixture> : IClassFixture<TFixture>
                     new Book
                     {
                         Id = 1,
-                        AdditionalDetails = new Details { Name = "Book Name" }
+                        AdditionalDetails = new Details { Name = "Book Name" },
                     }
                 );
 

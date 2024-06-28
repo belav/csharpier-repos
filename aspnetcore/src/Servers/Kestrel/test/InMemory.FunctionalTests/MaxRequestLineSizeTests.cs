@@ -81,8 +81,8 @@ public class MaxRequestLineSizeTests : LoggedTest
                 ServerOptions = new KestrelServerOptions
                 {
                     AddServerHeader = false,
-                    Limits = { MaxRequestLineSize = maxRequestLineSize }
-                }
+                    Limits = { MaxRequestLineSize = maxRequestLineSize },
+                },
             }
         );
     }

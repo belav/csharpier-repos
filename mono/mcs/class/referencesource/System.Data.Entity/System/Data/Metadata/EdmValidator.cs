@@ -32,7 +32,7 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Internal
         /// </summary>
-        Internal
+        Internal,
     }
 
     /// <summary>

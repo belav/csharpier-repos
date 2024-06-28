@@ -766,6 +766,6 @@ namespace Microsoft.CodeAnalysis.LanguageService
         IncludeNamespaces = 1 << 1,
         IncludeParameters = 1 << 2,
         IncludeType = 1 << 3,
-        IncludeTypeParameters = 1 << 4
+        IncludeTypeParameters = 1 << 4,
     }
 }

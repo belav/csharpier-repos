@@ -104,7 +104,7 @@ class C
                 {
                     new SourceLineUpdate(4, 9),
                     new SourceLineUpdate(7, 7),
-                    new SourceLineUpdate(9, 4)
+                    new SourceLineUpdate(9, 4),
                 }
             );
         }
@@ -196,7 +196,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F")),
                 }
             );
         }
@@ -414,7 +414,7 @@ class C { /*--*/static void Bar() { } }";
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar")),
                 }
             );
         }
@@ -470,7 +470,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar")),
                 }
             );
         }
@@ -506,7 +506,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar")),
                 }
             );
 
@@ -517,7 +517,7 @@ class C
                 active,
                 new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"), syntaxMap[0])
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"), syntaxMap[0]),
                 }
             );
         }
@@ -583,7 +583,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "/******//*edit*/",
                         FeaturesResources.method
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -592,7 +592,7 @@ class C<T>
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar")),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -630,7 +630,7 @@ class C
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "/******/",
                         FeaturesResources.method
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -639,7 +639,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Bar")),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -679,7 +679,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember("C.Bar"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -748,7 +748,7 @@ class C
                         RudeEditKind.StackAllocUpdate,
                         "stackalloc bool[64]",
                         GetResource("method")
-                    )
+                    ),
                 ]
             );
 
@@ -761,7 +761,7 @@ class C
                         RudeEditKind.StackAllocUpdate,
                         "stackalloc bool[64]",
                         GetResource("method")
-                    )
+                    ),
                 ]
             );
         }
@@ -800,7 +800,7 @@ class C
                         RudeEditKind.StackAllocUpdate,
                         "stackalloc bool[64]",
                         GetResource("method")
-                    )
+                    ),
                 ]
             );
         }
@@ -843,7 +843,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember("C.F"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -886,7 +886,7 @@ class C
                 {
                     new SourceLineUpdate(3, 7),
                     new SourceLineUpdate(6, 6),
-                    new SourceLineUpdate(7, 3)
+                    new SourceLineUpdate(7, 3),
                 }
             );
         }
@@ -944,7 +944,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1088,7 +1088,7 @@ class  C(int a);
                         SemanticEditKind.Update,
                         c => c.GetPrimaryConstructor("C"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1113,7 +1113,7 @@ class C(int a );
                         SemanticEditKind.Update,
                         c => c.GetPrimaryConstructor("C"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1164,7 +1164,7 @@ record C(int P );
                         SemanticEditKind.Update,
                         c => c.GetPrimaryConstructor("C"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1285,7 +1285,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1348,7 +1348,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "base",
                         GetResource("constructor")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1361,7 +1361,7 @@ class C<T>
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -1448,7 +1448,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1593,7 +1593,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 diagnostics:
                 [
-                    Diagnostic(RudeEditKind.Move, "static int Bar = 2", FeaturesResources.field)
+                    Diagnostic(RudeEditKind.Move, "static int Bar = 2", FeaturesResources.field),
                 ]
             );
         }
@@ -1647,7 +1647,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1699,7 +1699,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Replace, c => c.GetMember("C"))
+                    SemanticEdit(SemanticEditKind.Replace, c => c.GetMember("C")),
                 },
                 capabilities: EditAndContinueCapabilities.NewTypeDefinition
             );
@@ -1731,7 +1731,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1762,7 +1762,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1793,7 +1793,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1824,7 +1824,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1855,7 +1855,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1885,7 +1885,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -1916,7 +1916,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "/**/",
                         GetResource("field")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1929,7 +1929,7 @@ class C<T>
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").StaticConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -1960,7 +1960,7 @@ class C<T>
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Replace, c => c.GetMember("C"))
+                    SemanticEdit(SemanticEditKind.Replace, c => c.GetMember("C")),
                 },
                 capabilities: EditAndContinueCapabilities.NewTypeDefinition
             );
@@ -1995,7 +1995,7 @@ class C
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c => c.GetMember<IPropertySymbol>("C.P").GetMethod
-                    )
+                    ),
                 }
             );
         }
@@ -2149,7 +2149,7 @@ class C
                 lineEdits: new[] { new SourceLineUpdate(3, 4) },
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_P"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_P")),
                 }
             );
         }
@@ -2178,7 +2178,7 @@ class C
                 lineEdits: new[] { new SourceLineUpdate(3, 5) },
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_P"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.get_P")),
                 }
             );
         }
@@ -2208,7 +2208,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<INamedTypeSymbol>("C").InstanceConstructors.Single(),
                         preserveLocalVariables: true
-                    )
+                    ),
                 }
             );
         }
@@ -2242,7 +2242,7 @@ class C
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c => c.GetMember<IPropertySymbol>("C.this[]").GetMethod
-                    )
+                    ),
                 }
             );
         }
@@ -2466,7 +2466,7 @@ class C
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
-                    )
+                    ),
                 }
             );
         }
@@ -2497,7 +2497,7 @@ class C
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
-                    )
+                    ),
                 }
             );
         }
@@ -2528,7 +2528,7 @@ class C
                     SemanticEdit(
                         SemanticEditKind.Update,
                         c => c.GetMember<IEventSymbol>("C.E").RemoveMethod
-                    )
+                    ),
                 }
             );
         }
@@ -2596,7 +2596,7 @@ class C
                 {
                     new SourceLineUpdate(3, 9),
                     new SourceLineUpdate(5, 5),
-                    new SourceLineUpdate(9, 3)
+                    new SourceLineUpdate(9, 3),
                 }
             );
         }
@@ -2641,7 +2641,7 @@ class C
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F")),
                 }
             );
         }
@@ -2704,6 +2704,7 @@ class D
                             new SourceLineUpdate(9, 19)
                         )
                     ) // D ctor
+                    ,
                 },
                 semanticEdits: new[]
                 {
@@ -2822,7 +2823,7 @@ class C
                 },
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F")),
                 }
             );
         }
@@ -2850,7 +2851,7 @@ class C { static void F<T>() { } }";
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "{",
                         GetResource("method")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -2859,7 +2860,7 @@ class C { static void F<T>() { } }";
                 Array.Empty<SequencePointUpdates>(),
                 semanticEdits: new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F"))
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.F")),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );

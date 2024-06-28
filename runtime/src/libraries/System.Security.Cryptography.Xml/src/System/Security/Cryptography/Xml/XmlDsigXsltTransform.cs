@@ -16,7 +16,7 @@ namespace System.Security.Cryptography.Xml
         {
             typeof(Stream),
             typeof(XmlDocument),
-            typeof(XmlNodeList)
+            typeof(XmlNodeList),
         };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private XmlNodeList? _xslNodes;

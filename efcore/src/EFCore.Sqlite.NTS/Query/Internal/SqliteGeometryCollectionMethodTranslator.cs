@@ -51,7 +51,7 @@ public class SqliteGeometryCollectionMethodTranslator : IMethodCallTranslator
                 new[]
                 {
                     instance!,
-                    _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1))
+                    _sqlExpressionFactory.Add(arguments[0], _sqlExpressionFactory.Constant(1)),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { true, true },

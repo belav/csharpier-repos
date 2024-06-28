@@ -27,7 +27,7 @@ public class SqlServerTimeSpanTypeMapping : TimeSpanTypeMapping
         @"'{0:hh\:mm\:ss\.FFFF}'",
         @"'{0:hh\:mm\:ss\.FFFFF}'",
         @"'{0:hh\:mm\:ss\.FFFFFF}'",
-        @"'{0:hh\:mm\:ss\.FFFFFFF}'"
+        @"'{0:hh\:mm\:ss\.FFFFFFF}'",
     };
 
     /// <summary>

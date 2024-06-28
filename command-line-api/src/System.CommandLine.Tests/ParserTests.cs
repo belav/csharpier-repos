@@ -132,8 +132,8 @@ namespace System.CommandLine.Tests
                 {
                     new CliOption<bool>("-x"),
                     new CliOption<bool>("-y"),
-                    new CliOption<bool>("-z")
-                }
+                    new CliOption<bool>("-z"),
+                },
             };
 
             CliConfiguration configuration = new(rootCommand) { EnablePosixBundling = false };
@@ -151,7 +151,7 @@ namespace System.CommandLine.Tests
                 new CliOption<bool>("--xyz"),
                 new CliOption<bool>("-x"),
                 new CliOption<bool>("-y"),
-                new CliOption<bool>("-z")
+                new CliOption<bool>("-z"),
             };
 
             var result = command.Parse("the-command --xyz");
@@ -313,7 +313,7 @@ namespace System.CommandLine.Tests
             {
                 animalsOption,
                 vegetablesOption,
-                new CliArgument<string[]>("arg")
+                new CliArgument<string[]>("arg"),
             };
 
             var result = command.Parse("the-command -a cat some-arg -v carrot");
@@ -339,7 +339,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("outer")
             {
                 new CliOption<string>("--inner1"),
-                new CliOption<string>("--inner2")
+                new CliOption<string>("--inner2"),
             };
 
             var result = command.Parse("outer --inner1 argument1 --inner2 argument2");
@@ -364,7 +364,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("move")
             {
                 new CliArgument<string[]>("arg"),
-                new CliOption<string>("-X")
+                new CliOption<string>("-X"),
             };
 
             // option before args
@@ -413,7 +413,7 @@ namespace System.CommandLine.Tests
             {
                 new CliArgument<string[]>("arg"),
                 new CliOption<string>("--one"),
-                new CliOption<string[]>("--many")
+                new CliOption<string[]>("--many"),
             };
 
             var result = command.Parse(commandLine);
@@ -427,7 +427,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("one")
             {
                 new CliCommand("two") { new CliCommand("three") },
-                new CliCommand("three")
+                new CliCommand("three"),
             };
 
             ParseResult result = command.Parse("one two three");
@@ -441,7 +441,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("one")
             {
                 new CliCommand("two") { new CliCommand("three") },
-                new CliCommand("three")
+                new CliCommand("three"),
             };
 
             ParseResult result = command.Parse("one three");
@@ -455,7 +455,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("outer")
             {
                 new CliArgument<string[]>("arg1"),
-                new CliCommand("inner") { new CliArgument<string[]>("arg2") }
+                new CliCommand("inner") { new CliArgument<string[]>("arg2") },
             };
 
             var result = command.Parse("outer arg1 inner arg2");
@@ -475,8 +475,8 @@ namespace System.CommandLine.Tests
                 new CliCommand("inner")
                 {
                     new CliArgument<string>("arg3"),
-                    new CliCommand("non-unique") { new CliArgument<string>("arg4") }
-                }
+                    new CliCommand("non-unique") { new CliArgument<string>("arg4") },
+                },
             };
 
             ParseResult result = command.Parse("outer arg1 inner arg2 non-unique arg3 ");
@@ -536,7 +536,7 @@ namespace System.CommandLine.Tests
             var grandparent = new CliCommand("grandparent")
             {
                 new CliArgument<string>("arg"),
-                new CliCommand("parent") { grandchild }
+                new CliCommand("parent") { grandchild },
             };
 
             var result = grandparent.Parse("parent grandchild");
@@ -550,7 +550,7 @@ namespace System.CommandLine.Tests
             var outer = new CliCommand("outer")
             {
                 new CliCommand("inner") { new CliOption<bool>("-x") },
-                new CliOption<bool>("-x")
+                new CliOption<bool>("-x"),
             };
 
             ParseResult result = outer.Parse("outer inner -x");
@@ -590,7 +590,7 @@ namespace System.CommandLine.Tests
             var outer = new CliCommand("outer")
             {
                 new CliArgument<string>("arg1"),
-                new CliCommand("inner") { new CliArgument<string>("arg2") }
+                new CliCommand("inner") { new CliArgument<string>("arg2") },
             };
 
             ParseResult result = outer.Parse("outer inner arg1 arg2");
@@ -609,7 +609,7 @@ namespace System.CommandLine.Tests
             var outer = new CliCommand("outer")
             {
                 new CliCommand("inner") { innerOption },
-                outerOption
+                outerOption,
             };
 
             var result = outer.Parse("outer inner -x one -x two");
@@ -625,8 +625,8 @@ namespace System.CommandLine.Tests
                 new CliCommand("complete")
                 {
                     new CliArgument<string>("arg"),
-                    new CliOption<int>("--position")
-                }
+                    new CliOption<int>("--position"),
+                },
             };
 
             ParseResult result = command.Parse(
@@ -672,7 +672,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<string>("the-arg")
             {
-                DefaultValueFactory = (_) => "default"
+                DefaultValueFactory = (_) => "default",
             };
 
             var command = new CliCommand("command") { argument };
@@ -688,7 +688,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("command");
             var option = new CliOption<string>("-o", "--option")
             {
-                DefaultValueFactory = (_) => "the-default"
+                DefaultValueFactory = (_) => "the-default",
             };
             command.Options.Add(option);
 
@@ -703,7 +703,7 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<string>("-o", "--option")
             {
-                DefaultValueFactory = (_) => "the-default"
+                DefaultValueFactory = (_) => "the-default",
             };
 
             var command = new CliCommand("command") { option };
@@ -730,7 +730,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<string>("o")
             {
-                DefaultValueFactory = (_) => "the-default"
+                DefaultValueFactory = (_) => "the-default",
             };
 
             var command = new CliCommand("command") { argument };
@@ -744,7 +744,7 @@ namespace System.CommandLine.Tests
         {
             var argument = new CliArgument<DirectoryInfo>("the-arg")
             {
-                DefaultValueFactory = (_) => new DirectoryInfo(Directory.GetCurrentDirectory())
+                DefaultValueFactory = (_) => new DirectoryInfo(Directory.GetCurrentDirectory()),
             };
 
             var command = new CliCommand("inner") { argument };
@@ -761,8 +761,8 @@ namespace System.CommandLine.Tests
             {
                 new CliCommand("inner")
                 {
-                    new CliArgument<string[]>("arg") { Arity = ArgumentArity.OneOrMore }
-                }
+                    new CliArgument<string[]>("arg") { Arity = ArgumentArity.OneOrMore },
+                },
             };
 
             ParseResult result = outer.Parse("outer inner -p:RandomThing=random");
@@ -797,7 +797,7 @@ namespace System.CommandLine.Tests
             {
                 innerCommand,
                 option,
-                new CliArgument<string[]>("arg2")
+                new CliArgument<string[]>("arg2"),
             };
 
             outerCommand.Parse("outer inner").CommandResult.Command.Should().BeSameAs(innerCommand);
@@ -868,7 +868,7 @@ namespace System.CommandLine.Tests
         {
             var rootCommand = new CliRootCommand
             {
-                new CliCommand("subcommand") { new CliOption<DirectoryInfo>("--directory") }
+                new CliCommand("subcommand") { new CliOption<DirectoryInfo>("--directory") },
             };
 
             var args = new[] { "subcommand", "--directory:", @"c:\" };
@@ -987,7 +987,7 @@ namespace System.CommandLine.Tests
             var optX = new CliOption<bool>("-x");
             var optY = new CliOption<bool>("-y");
 
-            var root = new CliRootCommand("parent") { optX, optY, };
+            var root = new CliRootCommand("parent") { optX, optY };
 
             var result = root.Parse(commandLine);
 
@@ -1089,7 +1089,7 @@ namespace System.CommandLine.Tests
                 {
                     new CliOption<string>("--Platform"),
                     new CliOption<string>("--Framework"),
-                    new CliOption<string[]>("--logger")
+                    new CliOption<string[]>("--logger"),
                 };
             subcommand.TreatUnmatchedTokensAsErrors = treatUnmatchedTokensAsErrors;
             rootCommand.Subcommands.Add(subcommand);
@@ -1120,7 +1120,7 @@ namespace System.CommandLine.Tests
                 {
                     new CliOption<string>("--Platform"),
                     new CliOption<string>("--Framework"),
-                    new CliOption<string[]>("--logger")
+                    new CliOption<string[]>("--logger"),
                 };
             subcommand.TreatUnmatchedTokensAsErrors = true; // the default, set to true to make it explicit
             rootCommand.Subcommands.Add(subcommand);
@@ -1188,7 +1188,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("the-command")
             {
-                new CliArgument<string[]>("arg") { Arity = new ArgumentArity(2, 3) }
+                new CliArgument<string[]>("arg") { Arity = new ArgumentArity(2, 3) },
             };
 
             var result = command.Parse("1");
@@ -1208,7 +1208,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("the-command")
             {
-                new CliArgument<string[]>("arg") { Arity = new ArgumentArity(2, 3) }
+                new CliArgument<string[]>("arg") { Arity = new ArgumentArity(2, 3) },
             };
 
             ParseResult parseResult = command.Parse("1 2 3 4");
@@ -1286,7 +1286,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("the-command")
             {
-                new CliOption<int[]>("-x") { Arity = new ArgumentArity(2, 3) }
+                new CliOption<int[]>("-x") { Arity = new ArgumentArity(2, 3) },
             };
 
             command
@@ -1338,7 +1338,7 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<string>("--exec-prefix")
             {
-                DefaultValueFactory = _ => "/usr/local"
+                DefaultValueFactory = _ => "/usr/local",
             };
 
             var rootCommand = new CliRootCommand { option };

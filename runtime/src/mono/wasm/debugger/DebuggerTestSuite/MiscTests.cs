@@ -42,7 +42,7 @@ namespace DebuggerTests
             await SetBreakpoint("/debugger-driver.html", 27, 2);
 
             var eval_req = JObject.FromObject(
-                new { expression = "window.setTimeout(function() { invoke_bad_js_test(); }, 1);", }
+                new { expression = "window.setTimeout(function() { invoke_bad_js_test(); }, 1);" }
             );
 
             var task = insp.WaitFor("Runtime.exceptionThrown");
@@ -159,7 +159,7 @@ namespace DebuggerTests
                             str_spaces,
                             str_esc,
 
-                            strings = TArray("string[]", "string[4]")
+                            strings = TArray("string[]", "string[4]"),
                         },
                         "locals"
                     );
@@ -220,7 +220,7 @@ namespace DebuggerTests
                         {
                             List = TObject("System.Collections.Generic.List<int>", is_null: true),
                             StringField = TString("n_gs#StringField"),
-                            Options = TEnum("DebuggerTests.Options", "None")
+                            Options = TEnum("DebuggerTests.Options", "None"),
                         },
                         nameof(n_gs)
                     );
@@ -321,7 +321,7 @@ namespace DebuggerTests
 
                     // Try to get an invalid scope!
                     var get_prop_req = JObject.FromObject(
-                        new { objectId = "dotnet:scope:23490871", }
+                        new { objectId = "dotnet:scope:23490871" }
                     );
 
                     var frame_props = await cli.SendCommand(
@@ -363,7 +363,7 @@ namespace DebuggerTests
                     gs_local = TValueType(
                         "DebuggerTests.ValueTypesTest.GenericStruct<DebuggerTests.ValueTypesTest>"
                     ),
-                    vt_local = TObject("DebuggerTests.ValueTypesTest")
+                    vt_local = TObject("DebuggerTests.ValueTypesTest"),
                 },
                 "locals"
             );
@@ -402,7 +402,7 @@ namespace DebuggerTests
                     str_member = TString("set in MethodWithLocalStructs#SimpleStruct#str_member"),
                     dt = TDateTime(dt),
                     gs = TValueType("DebuggerTests.ValueTypesTest.GenericStruct<System.DateTime>"),
-                    Kind = TEnum("System.DateTimeKind", "Utc")
+                    Kind = TEnum("System.DateTimeKind", "Utc"),
                 },
                 "ss_local"
             );
@@ -440,7 +440,7 @@ namespace DebuggerTests
                         "System.Collections.Generic.List<DebuggerTests.ValueTypesTest>",
                         is_null: true
                     ),
-                    Options = TEnum("DebuggerTests.Options", "None")
+                    Options = TEnum("DebuggerTests.Options", "None"),
                 },
                 "gs_local"
             );
@@ -450,7 +450,7 @@ namespace DebuggerTests
             var exp = new[]
             {
                 ("SimpleStructProperty", 2, "Utc"),
-                ("SimpleStructField", 5, "Local")
+                ("SimpleStructField", 5, "Local"),
             };
 
             foreach (var (name, bias, dt_kind) in exp)
@@ -467,7 +467,7 @@ namespace DebuggerTests
                         gs = TValueType(
                             "DebuggerTests.ValueTypesTest.GenericStruct<System.DateTime>"
                         ),
-                        Kind = TEnum("System.DateTimeKind", dt_kind)
+                        Kind = TEnum("System.DateTimeKind", dt_kind),
                     },
                     label: $"vt_local_props.{name}"
                 );
@@ -541,7 +541,7 @@ namespace DebuggerTests
                                     is_null: true
                                 ),
                                 StringField = TString("n_gs#StringField"),
-                                Options = TEnum("DebuggerTests.Options", "None")
+                                Options = TEnum("DebuggerTests.Options", "None"),
                             },
                             name
                         );
@@ -614,7 +614,7 @@ namespace DebuggerTests
                             vt_dt = TDateTime(new DateTime(4819, 5, 6, 7, 8, 9)),
                             vt_gs = TValueType("Math.GenericStruct<string>"),
                             e = TEnum("System.IO.FileMode", "0"),
-                            ee = TEnum("System.IO.FileMode", "Append")
+                            ee = TEnum("System.IO.FileMode", "Append"),
                         },
                         "locals"
                     );
@@ -650,7 +650,7 @@ namespace DebuggerTests
                 {
                     ss_local = TObject("DebuggerTests.ValueTypesTest.SimpleStruct"),
                     gs_local = TValueType("DebuggerTests.ValueTypesTest.GenericStruct<int>"),
-                    result = TBool(true)
+                    result = TBool(true),
                 },
                 "locals#0"
             );
@@ -671,7 +671,7 @@ namespace DebuggerTests
                     ),
                     dt = TDateTime(dt),
                     gs = TValueType("DebuggerTests.ValueTypesTest.GenericStruct<System.DateTime>"),
-                    Kind = TEnum("System.DateTimeKind", "Utc")
+                    Kind = TEnum("System.DateTimeKind", "Utc"),
                 },
                 "ss_local"
             );
@@ -693,7 +693,7 @@ namespace DebuggerTests
                             "System.Collections.Generic.List<System.DateTime>",
                             description: "Count = 1"
                         ),
-                        Options = TEnum("DebuggerTests.Options", "Option1")
+                        Options = TEnum("DebuggerTests.Options", "Option1"),
                     }
                 );
             }
@@ -712,7 +712,7 @@ namespace DebuggerTests
                         "System.Collections.Generic.List<int>",
                         description: "Count = 2"
                     ),
-                    Options = TEnum("DebuggerTests.Options", "Option2")
+                    Options = TEnum("DebuggerTests.Options", "Option2"),
                 },
                 "gs_local"
             );
@@ -777,7 +777,7 @@ namespace DebuggerTests
                     guid = TValueType("System.Guid", "3D36E07E-AC90-48C6-B7EC-A481E289D014"),
                     dts = TArray("System.DateTime[]", "System.DateTime[2]"),
                     obj = TObject("DebuggerTests.ClassForToStringTests"),
-                    sst = TObject("DebuggerTests.StructForToStringTests")
+                    sst = TObject("DebuggerTests.StructForToStringTests"),
                 },
                 "locals#0"
             );
@@ -810,7 +810,7 @@ namespace DebuggerTests
                 {
                     Day = TNumber(2),
                     Year = TNumber(2020),
-                    DayOfWeek = TEnum("System.DayOfWeek", "Thursday")
+                    DayOfWeek = TEnum("System.DayOfWeek", "Thursday"),
                 },
                 "dto_props",
                 skip_num_fields_check: true
@@ -828,7 +828,7 @@ namespace DebuggerTests
                     DTO = TValueType("System.DateTimeOffset", DTO.ToString()),
                     TS = TValueType("System.TimeSpan", ts.ToString()),
                     Dec = TValueType("System.Decimal", "1239871"),
-                    Guid = TValueType("System.Guid", "3D36E07E-AC90-48C6-B7EC-A481E289D014")
+                    Guid = TValueType("System.Guid", "3D36E07E-AC90-48C6-B7EC-A481E289D014"),
                 },
                 "obj_props"
             );
@@ -843,7 +843,7 @@ namespace DebuggerTests
                     DTO = TValueType("System.DateTimeOffset", DTO.ToString()),
                     TS = TValueType("System.TimeSpan", ts.ToString()),
                     Dec = TValueType("System.Decimal", "1239871"),
-                    Guid = TValueType("System.Guid", "3D36E07E-AC90-48C6-B7EC-A481E289D014")
+                    Guid = TValueType("System.Guid", "3D36E07E-AC90-48C6-B7EC-A481E289D014"),
                 },
                 "sst_props"
             );
@@ -881,7 +881,7 @@ namespace DebuggerTests
                         {
                             sc_arg = TObject("DebuggerTests.SimpleClass"),
                             @this = TValueType("DebuggerTests.Point"),
-                            local_gs = TValueType("DebuggerTests.SimpleGenericStruct<int>")
+                            local_gs = TValueType("DebuggerTests.SimpleGenericStruct<int>"),
                         },
                         "locals#0"
                     );
@@ -893,7 +893,7 @@ namespace DebuggerTests
                         {
                             Id = TString("local_gs#Id"),
                             Color = TEnum("DebuggerTests.RGB", "Green"),
-                            Value = TNumber(4)
+                            Value = TNumber(4),
                         },
                         label: "local_gs#0"
                     );
@@ -1021,7 +1021,7 @@ namespace DebuggerTests
                             num1 = TNumber(100),
                             str2 = TString("xyz"),
                             num3 = TNumber(345),
-                            str3 = TString("abc")
+                            str3 = TString("abc"),
                         },
                         "InvokeReflectedStaticMethod#locals"
                     );
@@ -1161,7 +1161,7 @@ namespace DebuggerTests
                 {
                     scriptId = pause_location["callFrames"]
                         [0]["functionLocation"]["scriptId"]
-                        .Value<string>()
+                        .Value<string>(),
                 }
             );
 
@@ -1199,7 +1199,7 @@ namespace DebuggerTests
                 {
                     scriptId = pause_location["callFrames"]
                         [0]["functionLocation"]["scriptId"]
-                        .Value<string>()
+                        .Value<string>(),
                 }
             );
 
@@ -1261,7 +1261,7 @@ namespace DebuggerTests
             var bp = await SetBreakpoint("dotnet://debugger-test.dll/debugger-test.cs", 10, 8);
 
             var eval_req = JObject.FromObject(
-                new { expression = "window.setTimeout(function() { invoke_add(); }, 1);", }
+                new { expression = "window.setTimeout(function() { invoke_add(); }, 1);" }
             );
 
             await EvaluateAndCheck(
@@ -1342,7 +1342,7 @@ namespace DebuggerTests
                         {
                             a = TNumber(10),
                             b = TNumber(20),
-                            c = TNumber(30)
+                            c = TNumber(30),
                         },
                         "a"
                     );
@@ -1437,7 +1437,7 @@ namespace DebuggerTests
                             propA = TNumber(10),
                             propB = TNumber(20),
                             propC = TNumber(30),
-                            d = TNumber(40)
+                            d = TNumber(40),
                         },
                         "exc"
                     );

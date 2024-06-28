@@ -2069,7 +2069,7 @@ namespace System.Text.Json.Tests
                         new JsonReaderOptions
                         {
                             CommentHandling = commentHandling,
-                            MaxDepth = depth
+                            MaxDepth = depth,
                         }
                     );
                     var json = new Utf8JsonReader(data, isFinalBlock: true, state);
@@ -2089,7 +2089,7 @@ namespace System.Text.Json.Tests
                     int expectedDepth = 0;
                     var newtonJson = new JsonTextReader(new StringReader(jsonStr))
                     {
-                        MaxDepth = depth
+                        MaxDepth = depth,
                     };
                     while (newtonJson.Read())
                     {
@@ -2121,7 +2121,7 @@ namespace System.Text.Json.Tests
                         new JsonReaderOptions
                         {
                             CommentHandling = commentHandling,
-                            MaxDepth = depth
+                            MaxDepth = depth,
                         }
                     );
 
@@ -2140,7 +2140,7 @@ namespace System.Text.Json.Tests
                     int expectedDepth = 0;
                     var newtonJson = new JsonTextReader(new StringReader(jsonStr))
                     {
-                        MaxDepth = depth
+                        MaxDepth = depth,
                     };
                     while (newtonJson.Read())
                     {
@@ -2189,7 +2189,7 @@ namespace System.Text.Json.Tests
                         new JsonReaderOptions
                         {
                             CommentHandling = commentHandling,
-                            MaxDepth = depth + 1
+                            MaxDepth = depth + 1,
                         }
                     );
                     var json = new Utf8JsonReader(data, isFinalBlock: true, state);
@@ -2207,7 +2207,7 @@ namespace System.Text.Json.Tests
                     int expectedDepth = 0;
                     var newtonJson = new JsonTextReader(new StringReader(jsonStr))
                     {
-                        MaxDepth = depth + 1
+                        MaxDepth = depth + 1,
                     };
                     while (newtonJson.Read())
                     {
@@ -2888,7 +2888,7 @@ namespace System.Text.Json.Tests
                             new JsonReaderOptions
                             {
                                 CommentHandling = commentHandling,
-                                MaxDepth = maxDepth
+                                MaxDepth = maxDepth,
                             }
                         );
                         var jsonSlice = new Utf8JsonReader(
@@ -4969,7 +4969,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = allowTrailingCommas
+                        AllowTrailingCommas = allowTrailingCommas,
                     }
                 );
                 TrailingCommasHelper(utf8, state, allowTrailingCommas, expectThrow: false);
@@ -4996,7 +4996,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = allowTrailingCommas
+                        AllowTrailingCommas = allowTrailingCommas,
                     }
                 );
                 TrailingCommasHelper(utf8, state, allowTrailingCommas, expectThrow: true);
@@ -5028,7 +5028,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = allowTrailingCommas
+                        AllowTrailingCommas = allowTrailingCommas,
                     }
                 );
                 TrailingCommasHelper(utf8, state, allowTrailingCommas, expectThrow: false);
@@ -5060,7 +5060,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = allowTrailingCommas
+                        AllowTrailingCommas = allowTrailingCommas,
                     }
                 );
                 TrailingCommasHelper(utf8, state, allowTrailingCommas, expectThrow: true);
@@ -5121,7 +5121,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: true);
@@ -5130,7 +5130,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: false);
@@ -5156,7 +5156,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: true);
@@ -5165,7 +5165,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: false);
@@ -5186,7 +5186,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: true);
@@ -5195,7 +5195,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: true);
@@ -5221,7 +5221,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: true);
@@ -5230,7 +5230,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 TrailingCommasHelperPartial(utf8, state, expectThrow: true);
@@ -5296,7 +5296,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5307,7 +5307,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5329,7 +5329,7 @@ namespace System.Text.Json.Tests
                 options: new JsonReaderOptions
                 {
                     CommentHandling = JsonCommentHandling.Allow,
-                    AllowTrailingCommas = false
+                    AllowTrailingCommas = false,
                 }
             );
             var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5340,7 +5340,7 @@ namespace System.Text.Json.Tests
                 options: new JsonReaderOptions
                 {
                     CommentHandling = JsonCommentHandling.Allow,
-                    AllowTrailingCommas = true
+                    AllowTrailingCommas = true,
                 }
             );
             reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5370,7 +5370,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5386,7 +5386,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5417,7 +5417,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5431,7 +5431,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5461,7 +5461,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5476,7 +5476,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5507,7 +5507,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = false
+                        AllowTrailingCommas = false,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5524,7 +5524,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5553,7 +5553,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5582,7 +5582,7 @@ namespace System.Text.Json.Tests
                     options: new JsonReaderOptions
                     {
                         CommentHandling = commentHandling,
-                        AllowTrailingCommas = true
+                        AllowTrailingCommas = true,
                     }
                 );
                 var reader = new Utf8JsonReader(utf8, isFinalBlock: true, state);
@@ -5790,7 +5790,7 @@ namespace System.Text.Json.Tests
                     new object[] { false, TestCaseType.Json400B, SR.Json400B },
                     new object[] { false, TestCaseType.Json4KB, SR.Json4KB },
                     new object[] { false, TestCaseType.Json40KB, SR.Json40KB },
-                    new object[] { false, TestCaseType.Json400KB, SR.Json400KB }
+                    new object[] { false, TestCaseType.Json400KB, SR.Json400KB },
                 };
             }
         }
@@ -5836,7 +5836,7 @@ namespace System.Text.Json.Tests
                     new object[] { false, TestCaseType.ProjectLockJson, SR.ProjectLockJson },
                     new object[] { false, TestCaseType.Json400B, SR.Json400B },
                     new object[] { false, TestCaseType.Json40KB, SR.Json40KB },
-                    new object[] { false, TestCaseType.Json400KB, SR.Json400KB }
+                    new object[] { false, TestCaseType.Json400KB, SR.Json400KB },
                 };
             }
         }
@@ -5868,7 +5868,7 @@ namespace System.Text.Json.Tests
                     {
                         "   \" Test string with \\\"nested quotes \\\" and hex: \\uABCD values! \"   ",
                         true,
-                        " Test string with \"nested quotes \" and hex: \uABCD values! "
+                        " Test string with \"nested quotes \" and hex: \uABCD values! ",
                     },
                     new object[] { "   12345   ", false, "12345" },
                     new object[] { "   12345.67890e-12   ", false, "1.23456789E-08" },
@@ -5879,7 +5879,7 @@ namespace System.Text.Json.Tests
                     {
                         "   \" Test string with \\\"nested quotes \\\" and hex: \\uABCD values! \"   ",
                         false,
-                        " Test string with \"nested quotes \" and hex: \uABCD values! "
+                        " Test string with \"nested quotes \" and hex: \uABCD values! ",
                     },
                 };
             }
@@ -5895,7 +5895,7 @@ namespace System.Text.Json.Tests
                     new object[]
                     {
                         "  \"he\\r\\n\\\"l\\\\\\\"lo\\\\\"  ",
-                        "he\\r\\n\\\"l\\\\\\\"lo\\\\"
+                        "he\\r\\n\\\"l\\\\\\\"lo\\\\",
                     },
                     new object[] { "  12345  ", "12345" },
                     new object[] { "  null  ", "null" },
@@ -6039,7 +6039,7 @@ namespace System.Text.Json.Tests
                     new object[] { "{\"name\": [{},]/*comment*/,/*comment*/}" },
                     new object[]
                     {
-                        "{\"first\" : \"value\", \"name\": [{},], \"last\":2 /*comment*/,/*comment*/}"
+                        "{\"first\" : \"value\", \"name\": [{},], \"last\":2 /*comment*/,/*comment*/}",
                     },
                     new object[] { "{\"prop\":{\"name\": 1,\"last\":2,}/*comment*/,}" },
                     new object[] { "{\"prop\":[1,2,]/*comment*/,}" },
@@ -6387,7 +6387,7 @@ namespace System.Text.Json.Tests
                     {
                         "{\"age\":30, \r\n \"num\":-0.e, \r\n \"ints\":[1, 2, 3, 4, 5]}",
                         1,
-                        10
+                        10,
                     },
                     new object[] { "{ \"number\": 00", 0, 13 },
                     new object[] { "{{}}", 0, 1 },
@@ -6399,7 +6399,7 @@ namespace System.Text.Json.Tests
                     {
                         "{\"s\u6F22\u5B57trings\":[\"a\u6F22\u5B57bc\", \"def\"",
                         0,
-                        36
+                        36,
                     },
                     new object[] { "{\"age\":30, \"ints\":[1, 2, 3, 4, 5}}", 0, 32 },
                     new object[] { "{\"age\":30, \"name\":\"test}", 0, 24 },
@@ -6408,32 +6408,32 @@ namespace System.Text.Json.Tests
                     {
                         "[[[[{\r\n\"t\u6F22\u5B57emp1\":[[[[{\"temp2\":[}]]]]}]]]]",
                         1,
-                        28
+                        28,
                     },
                     new object[]
                     {
                         "[[[[{\r\n\"t\u6F22\u5B57emp1\":[[[[{\"temp2:[]}]]]]}]]]]",
                         1,
-                        38
+                        38,
                     },
                     new object[]
                     {
                         "[[[[{\r\n\"t\u6F22\u5B57emp1\":[[[[{\"temp2\":[]},[}]]]]}]]]]",
                         1,
-                        32
+                        32,
                     },
                     new object[]
                     {
                         "{\r\n\t\"isActive\": false,\r\n\t\"array\": [\r\n\t\t[{\r\n\t\t\t\"id\": 1\r\n\t\t}]\r\n\t]\r\n}",
                         3,
                         3,
-                        3
+                        3,
                     },
                     new object[]
                     {
                         "{\"Here is a \u6F22\u5B57string: \\\"\\\"\":\"Here is \u6F22\u5B57a\",\"Here is a back slash\\\\\":[\"Multiline\\r\\n String\\r\\n\",\"\\tMul\\r\\ntiline String\",\"\\\"somequote\\\"\\tMu\\\"\\\"l\\r\\ntiline\\\"another\\\" String\\\\\"],\"str:\"\\\"\\\"\"}",
                         0,
-                        190
+                        190,
                     },
                     new object[] { "\"hel\rlo\"", 0, 4 },
                     new object[] { "\"hel\nlo\"", 0, 4 },
@@ -6494,7 +6494,7 @@ namespace System.Text.Json.Tests
                     new object[]
                     {
                         "[[[]], {\"a\":1, \"b\": 2}, 3, {\"a\":{}, \"b\":{\"c\":[]} }, [{\"a\":1, \"b\": 2}, null]]",
-                        JsonTokenType.EndArray
+                        JsonTokenType.EndArray,
                     },
                     new object[] { "[]", JsonTokenType.EndArray },
                     new object[] { "[[],[],[],[]]", JsonTokenType.EndArray },
@@ -6504,23 +6504,23 @@ namespace System.Text.Json.Tests
                     new object[]
                     {
                         "{\"a\":{\"b\":{}}, \"c\":[1, 2], \"d\": 3, \"e\":[[], [{}] ], \"f\":{\"g\":[1, 2], \"e\":null}}",
-                        JsonTokenType.EndObject
+                        JsonTokenType.EndObject,
                     },
                     new object[] { "{}", JsonTokenType.EndObject },
                     new object[]
                     {
                         "{\"a\":{}, \"b\":{}, \"c\":{}, \"d\":{}}",
-                        JsonTokenType.EndObject
+                        JsonTokenType.EndObject,
                     },
                     new object[]
                     {
                         "{\"a\":{\"b\":{}, \"c\":{}, \"d\":{}}}",
-                        JsonTokenType.EndObject
+                        JsonTokenType.EndObject,
                     },
                     new object[]
                     {
                         "{\"a\":[], \"b\":[], \"c\":[], \"d\":[]}",
-                        JsonTokenType.EndObject
+                        JsonTokenType.EndObject,
                     },
                     new object[] { "{\"a\":[{}, {}, {}]}", JsonTokenType.EndObject },
                 };
@@ -6560,7 +6560,7 @@ namespace System.Text.Json.Tests
                     "A string with {0}valid UTF8 \\t tab",
                     "A string with {0}invalid UTF8 \\xc3\\x28",
                     "A string with {0}valid UTF16 \\u002e \\u0009 \u092E",
-                    "A string with {0}invalid UTF16 \\uDD1E"
+                    "A string with {0}invalid UTF16 \\uDD1E",
                 };
 
                 // single line comments

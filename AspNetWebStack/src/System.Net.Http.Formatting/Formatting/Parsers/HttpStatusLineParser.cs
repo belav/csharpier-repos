@@ -58,7 +58,7 @@ namespace System.Net.Http.Formatting.Parsers
             MinorVersionNumber,
             StatusCode,
             ReasonPhrase,
-            AfterCarriageReturn
+            AfterCarriageReturn,
         }
 
         /// <summary>

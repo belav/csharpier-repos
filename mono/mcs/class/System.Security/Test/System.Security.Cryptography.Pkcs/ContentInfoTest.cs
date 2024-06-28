@@ -135,7 +135,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x6F,
                 0x6E,
                 0x6F,
-                0x21
+                0x21,
             };
             Oid o = ContentInfo.GetContentType(invalid);
             Assert.AreEqual("1.2.840.113549.1.7.0", o.Value, "GetContentType");
@@ -179,7 +179,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x6F,
                 0x6E,
                 0x6F,
-                0x21
+                0x21,
             };
             Oid o = ContentInfo.GetContentType(data);
             Assert.AreEqual("1.2.840.113549.1.7.1", o.Value, "GetContentType");
@@ -1037,7 +1037,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x78,
                 0x6F,
                 0x97,
-                0x67
+                0x67,
             };
             Oid o = ContentInfo.GetContentType(signedData);
             Assert.AreEqual("1.2.840.113549.1.7.2", o.Value, "GetContentType");
@@ -1335,7 +1335,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0xEC,
                 0xAD,
                 0xC5,
-                0xB5
+                0xB5,
             };
             Oid o = ContentInfo.GetContentType(envelopedData);
             Assert.AreEqual("1.2.840.113549.1.7.3", o.Value, "GetContentType");
@@ -1634,7 +1634,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0xEC,
                 0xAD,
                 0xC5,
-                0xB5
+                0xB5,
             };
             Oid o = ContentInfo.GetContentType(signedAndEnvelopedData);
             Assert.AreEqual("1.2.840.113549.1.7.4", o.Value, "GetContentType");
@@ -1717,7 +1717,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x6F,
                 0x6E,
                 0x6F,
-                0x21
+                0x21,
             };
             Oid o = ContentInfo.GetContentType(unknown);
             Assert.AreEqual("1.2.840.113549.1.7.7", o.Value, "GetContentType");
@@ -1748,7 +1748,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x07,
                 0x01,
                 0x05,
-                0x00
+                0x00,
             };
             // ASN1 contentInfo = new ASN1 (0x30);
             // contentInfo.Add (ASN1Convert.FromOid (defaultOid));

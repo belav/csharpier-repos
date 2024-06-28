@@ -83,7 +83,7 @@ namespace Microsoft.Win32.SafeHandles
                 secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    bInheritHandle = Interop.BOOL.TRUE
+                    bInheritHandle = Interop.BOOL.TRUE,
                 };
             }
 
@@ -165,7 +165,7 @@ namespace Microsoft.Win32.SafeHandles
         {
             var allocationInfo = new Interop.Kernel32.FILE_ALLOCATION_INFO
             {
-                AllocationSize = preallocationSize
+                AllocationSize = preallocationSize,
             };
 
             if (

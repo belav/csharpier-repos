@@ -396,7 +396,7 @@ namespace BuildBoss
             // be included here.
             var excludedNameSet = new HashSet<string>(PathComparer)
             {
-                "Microsoft.CodeAnalysis.Elfie"
+                "Microsoft.CodeAnalysis.Elfie",
             };
 
             textWriter.WriteLine("Verifying contents of VS.ExternalAPIs.Roslyn");

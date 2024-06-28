@@ -36,7 +36,7 @@ namespace System.IO.IsolatedStorage
                     IsolatedStorageScope.Machine | IsolatedStorageScope.Assembly,
                     IsolatedStorageScope.Machine
                         | IsolatedStorageScope.Assembly
-                        | IsolatedStorageScope.Domain
+                        | IsolatedStorageScope.Domain,
                 };
             }
         }
@@ -48,7 +48,7 @@ namespace System.IO.IsolatedStorage
             UserStoreForDomain,
             MachineStoreForAssembly,
             MachineStoreForApplication,
-            MachineStoreForDomain
+            MachineStoreForDomain,
         }
 
         public static IsolatedStorageFile GetPresetScope(PresetScopes scope)

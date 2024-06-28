@@ -40,6 +40,6 @@ namespace System.Web.UI
         Downstream,
         Server,
         None,
-        ServerAndClient
+        ServerAndClient,
     }
 }

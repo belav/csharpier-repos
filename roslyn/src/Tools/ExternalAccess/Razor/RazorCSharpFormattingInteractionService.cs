@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             var roslynIndentationOptions = new IndentationOptions(formattingOptions)
             {
                 AutoFormattingOptions = autoFormattingOptions.UnderlyingObject,
-                IndentStyle = (FormattingOptions2.IndentStyle)indentStyle
+                IndentStyle = (FormattingOptions2.IndentStyle)indentStyle,
             };
 
             return formattingService.GetFormattingChangesOnTypedCharacter(
@@ -115,8 +115,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                     UseTabs = indentationOptions.UseTabs,
                     TabSize = indentationOptions.TabSize,
                     IndentationSize = indentationOptions.IndentationSize,
-                    NewLine = CSharpSyntaxFormattingOptions.Default.NewLine
-                }
+                    NewLine = CSharpSyntaxFormattingOptions.Default.NewLine,
+                },
             };
     }
 }

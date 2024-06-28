@@ -25,7 +25,7 @@ namespace System.Security.Cryptography
         /// <summary>
         ///     The key handle being opened represents an ephemeral key
         /// </summary>
-        EphemeralKey = 0x00000001
+        EphemeralKey = 0x00000001,
     }
 
     /// <summary>

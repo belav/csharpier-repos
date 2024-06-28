@@ -40,6 +40,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
         CommitPhase = 0x2,
         AbortPhase = 0x4,
         AllPhases = 0x7,
-        FailIfInDoubtsRemain = 0x10
+        FailIfInDoubtsRemain = 0x10,
     }
 }

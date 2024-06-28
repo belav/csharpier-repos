@@ -191,7 +191,7 @@ namespace System.ServiceModel.Discovery
             var anyAttr = new XmlSchemaAnyAttribute()
             {
                 Namespace = "##other",
-                ProcessContents = XmlSchemaContentProcessing.Lax
+                ProcessContents = XmlSchemaContentProcessing.Lax,
             };
 
             var probePart = new XmlSchemaSequence();
@@ -199,28 +199,28 @@ namespace System.ServiceModel.Discovery
                 new XmlSchemaElement()
                 {
                     RefName = new XmlQualifiedName("Types", version.Namespace),
-                    MinOccurs = 0
+                    MinOccurs = 0,
                 }
             );
             probePart.Items.Add(
                 new XmlSchemaElement()
                 {
                     RefName = new XmlQualifiedName("Scopes", version.Namespace),
-                    MinOccurs = 0
+                    MinOccurs = 0,
                 }
             );
             probePart.Items.Add(
                 new XmlSchemaElement()
                 {
                     RefName = new XmlQualifiedName("XAddrs", version.Namespace),
-                    MinOccurs = 0
+                    MinOccurs = 0,
                 }
             );
             probePart.Items.Add(
                 new XmlSchemaElement()
                 {
                     RefName = new XmlQualifiedName("MetadataVersion", version.Namespace),
-                    MinOccurs = 0
+                    MinOccurs = 0,
                 }
             );
             probePart.Items.Add(
@@ -229,14 +229,14 @@ namespace System.ServiceModel.Discovery
                     MinOccurs = 0,
                     MaxOccursString = "unbounded",
                     Namespace = "##other",
-                    ProcessContents = XmlSchemaContentProcessing.Lax
+                    ProcessContents = XmlSchemaContentProcessing.Lax,
                 }
             );
             var ct = new XmlSchemaComplexType()
             {
                 Name = "ProbeMatchType",
                 Particle = probePart,
-                AnyAttribute = anyAttr
+                AnyAttribute = anyAttr,
             };
             schema.Items.Add(ct);
 
@@ -246,28 +246,28 @@ namespace System.ServiceModel.Discovery
                     Name = "QNameListType",
                     Content = new XmlSchemaSimpleTypeList()
                     {
-                        ItemTypeName = new XmlQualifiedName("QName", XmlSchema.Namespace)
-                    }
+                        ItemTypeName = new XmlQualifiedName("QName", XmlSchema.Namespace),
+                    },
                 }
             );
 
             var scr = new XmlSchemaSimpleContentRestriction()
             {
                 BaseTypeName = new XmlQualifiedName("UriListType", version.Namespace),
-                AnyAttribute = anyAttr
+                AnyAttribute = anyAttr,
             };
             scr.Attributes.Add(
                 new XmlSchemaAttribute()
                 {
                     Name = "matchBy",
-                    SchemaTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace)
+                    SchemaTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace),
                 }
             );
             schema.Items.Add(
                 new XmlSchemaComplexType()
                 {
                     Name = "ScopesType",
-                    ContentModel = new XmlSchemaSimpleContent() { Content = scr }
+                    ContentModel = new XmlSchemaSimpleContent() { Content = scr },
                 }
             );
 
@@ -277,8 +277,8 @@ namespace System.ServiceModel.Discovery
                     Name = "UriListType",
                     Content = new XmlSchemaSimpleTypeList()
                     {
-                        ItemTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace)
-                    }
+                        ItemTypeName = new XmlQualifiedName("anyURI", XmlSchema.Namespace),
+                    },
                 }
             );
 
@@ -286,28 +286,28 @@ namespace System.ServiceModel.Discovery
                 new XmlSchemaElement()
                 {
                     Name = "Types",
-                    SchemaTypeName = new XmlQualifiedName("QNameListType", version.Namespace)
+                    SchemaTypeName = new XmlQualifiedName("QNameListType", version.Namespace),
                 }
             );
             schema.Items.Add(
                 new XmlSchemaElement()
                 {
                     Name = "Scopes",
-                    SchemaTypeName = new XmlQualifiedName("ScopesType", version.Namespace)
+                    SchemaTypeName = new XmlQualifiedName("ScopesType", version.Namespace),
                 }
             );
             schema.Items.Add(
                 new XmlSchemaElement()
                 {
                     Name = "XAddrs",
-                    SchemaTypeName = new XmlQualifiedName("UriListType", version.Namespace)
+                    SchemaTypeName = new XmlQualifiedName("UriListType", version.Namespace),
                 }
             );
             schema.Items.Add(
                 new XmlSchemaElement()
                 {
                     Name = "MetadataVersion",
-                    SchemaTypeName = new XmlQualifiedName("unisgnedInt", XmlSchema.Namespace)
+                    SchemaTypeName = new XmlQualifiedName("unisgnedInt", XmlSchema.Namespace),
                 }
             );
 

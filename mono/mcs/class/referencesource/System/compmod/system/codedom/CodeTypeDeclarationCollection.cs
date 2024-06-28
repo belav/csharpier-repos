@@ -17,7 +17,7 @@ namespace System.CodeDom
     ///       A collection that stores <see cref='System.CodeDom.CodeTypeDeclaration'/> objects.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeTypeDeclarationCollection : CollectionBase
     {
         /// <devdoc>

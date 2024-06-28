@@ -56,7 +56,7 @@ namespace System.ServiceModel.Diagnostics
             InstancesPercentMaxInstancesBase,
             SessionsPercentMaxSessions,
             SessionsPercentMaxSessionsBase,
-            TotalCounters = SessionsPercentMaxSessionsBase + 1
+            TotalCounters = SessionsPercentMaxSessionsBase + 1,
         }
 
         protected static readonly string[] perfCounterNames =
@@ -114,7 +114,7 @@ namespace System.ServiceModel.Diagnostics
         {
             NoBits = 0,
             service32 = 0x01,
-            uri31 = 0x04
+            uri31 = 0x04,
         }
 
         internal ServicePerformanceCountersBase(ServiceHostBase serviceHost)

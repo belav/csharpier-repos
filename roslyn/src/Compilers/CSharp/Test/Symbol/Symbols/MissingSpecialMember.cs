@@ -539,7 +539,7 @@ namespace System
                     expectedWarnings: new[]
                     {
                         // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+                        Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                     }
                 );
 
@@ -584,7 +584,7 @@ namespace System
                 expectedWarnings: new[]
                 {
                     // warning CS8021: No value for RuntimeMetadataVersion found. No assembly containing System.Object was found nor was a value for RuntimeMetadataVersion specified through options.
-                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1)
+                    Diagnostic(ErrorCode.WRN_NoRuntimeMetadataVersion).WithLocation(1, 1),
                 }
             );
 
@@ -673,7 +673,7 @@ namespace System
                 SystemXmlRef,
                 SystemXmlLinqRef,
                 SystemWindowsFormsRef,
-                ValueTupleRef
+                ValueTupleRef,
             }
                 .Concat(WinRtRefs)
                 .ToArray();
@@ -983,7 +983,7 @@ namespace System
                     WellKnownType.System_Windows_Forms_Application,
                     WellKnownType.System_Environment,
                     WellKnownType.System_Runtime_GCLatencyMode,
-                    WellKnownType.System_IFormatProvider
+                    WellKnownType.System_IFormatProvider,
                 }
             )
             {
@@ -1008,7 +1008,7 @@ namespace System
                 SystemXmlRef,
                 SystemXmlLinqRef,
                 SystemWindowsFormsRef,
-                ValueTupleRef
+                ValueTupleRef,
             }
                 .Concat(WinRtRefs)
                 .ToArray();

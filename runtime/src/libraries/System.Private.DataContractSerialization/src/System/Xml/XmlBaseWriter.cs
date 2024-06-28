@@ -63,7 +63,7 @@ namespace System.Xml
             "w",
             "x",
             "y",
-            "z"
+            "z",
         };
 
         protected XmlBaseWriter()
@@ -2071,6 +2071,7 @@ namespace System.Xml
             Document, // Inside StartDocument/EndDocument
             Epilog, // EndDocument must be called
             End // Nothing further to write
+            ,
         }
 
         private sealed class NamespaceManager

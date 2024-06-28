@@ -106,7 +106,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Diagnostics
             var additionalAnalyzers = new DiagnosticAnalyzer[]
             {
                 new CSharpSyntaxAnalyzer(),
-                new CSharpSemanticAnalyzer()
+                new CSharpSemanticAnalyzer(),
             };
             await using var testLspServer = await CreateTestWorkspaceWithDiagnosticsAsync(
                 markup,
@@ -913,7 +913,7 @@ class B {";
                 var projectContext = new VSProjectContext
                 {
                     Id = ProtocolConversions.ProjectIdToProjectContextId(document.Project.Id),
-                    Label = document.Project.Name
+                    Label = document.Project.Name,
                 };
                 return new VSTextDocumentIdentifier
                 {

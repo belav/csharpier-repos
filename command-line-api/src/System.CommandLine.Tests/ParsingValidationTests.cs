@@ -93,7 +93,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("set")
             {
                 CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
-                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2"),
             };
 
             var result = command.Parse("set key1 value1");
@@ -107,7 +107,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("set")
             {
                 CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
-                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2"),
             };
 
             var result = command.Parse("set not-key1 value1");
@@ -150,7 +150,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("set")
             {
                 CreateArgumentWithAcceptOnlyFromAmong(name: "key", "key1", "key2"),
-                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2")
+                CreateArgumentWithAcceptOnlyFromAmong(name: "value", "value1", "value2"),
             };
 
             var result = command.Parse("set key1 not-value1");
@@ -220,7 +220,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("command")
             {
-                new CliOption<string>("-x") { Required = true }
+                new CliOption<string>("-x") { Required = true },
             };
 
             var result = command.Parse("");
@@ -238,7 +238,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("command")
             {
-                new CliOption<string>("--xray", "-x") { Required = true }
+                new CliOption<string>("--xray", "-x") { Required = true },
             };
 
             var result = command.Parse("");
@@ -263,7 +263,7 @@ namespace System.CommandLine.Tests
             var command = new CliRootCommand
             {
                 option,
-                new CliCommand("subcommand") { option }
+                new CliCommand("subcommand") { option },
             };
 
             var result = command.Parse(commandLine);
@@ -279,7 +279,7 @@ namespace System.CommandLine.Tests
             var parent = new CliCommand("parent")
             {
                 new CliOption<string>("-x") { Required = true },
-                child
+                child,
             };
 
             var result = parent.Parse("child");
@@ -292,7 +292,7 @@ namespace System.CommandLine.Tests
         {
             var command = new CliCommand("the-command")
             {
-                new CliOption<bool>("-x") { Arity = ArgumentArity.Zero }
+                new CliOption<bool>("-x") { Arity = ArgumentArity.Zero },
             };
 
             var result = command.Parse("the-command -x some-arg");
@@ -312,7 +312,7 @@ namespace System.CommandLine.Tests
             var command = new CliCommand("the-command")
             {
                 new CliOption<bool>("--one"),
-                new CliOption<bool>("--two")
+                new CliOption<bool>("--two"),
             };
 
             command.Validators.Add(commandResult =>
@@ -708,7 +708,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileInfo>("to").AcceptExistingOnly()
+                    new CliArgument<FileInfo>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -728,7 +728,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileInfo>("--to").AcceptExistingOnly()
+                    new CliOption<FileInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -748,7 +748,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<DirectoryInfo>("to").AcceptExistingOnly()
+                    new CliArgument<DirectoryInfo>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -768,7 +768,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly()
+                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -788,7 +788,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileSystemInfo>("arg").AcceptExistingOnly()
+                    new CliArgument<FileSystemInfo>("arg").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -808,7 +808,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileSystemInfo>("--to").AcceptExistingOnly()
+                    new CliOption<FileSystemInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -828,7 +828,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<IEnumerable<FileInfo>>("to").AcceptExistingOnly()
+                    new CliArgument<IEnumerable<FileInfo>>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -848,7 +848,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<IEnumerable<FileInfo>>("--to").AcceptExistingOnly()
+                    new CliOption<IEnumerable<FileInfo>>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -868,7 +868,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<List<DirectoryInfo>>("to").AcceptExistingOnly()
+                    new CliArgument<List<DirectoryInfo>>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -888,7 +888,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<DirectoryInfo[]>("--to").AcceptExistingOnly()
+                    new CliOption<DirectoryInfo[]>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -910,9 +910,9 @@ namespace System.CommandLine.Tests
                 {
                     new CliArgument<FileSystemInfo[]>("to")
                     {
-                        Arity = ArgumentArity.ZeroOrMore
+                        Arity = ArgumentArity.ZeroOrMore,
                     }.AcceptExistingOnly(),
-                    new CliOption<string>("--to")
+                    new CliOption<string>("--to"),
                 };
 
                 var path = NonexistentPath();
@@ -931,7 +931,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly()
+                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -950,7 +950,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileSystemInfo>("to").AcceptExistingOnly()
+                    new CliArgument<FileSystemInfo>("to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -970,7 +970,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly()
+                    new CliOption<FileSystemInfo[]>("--to").AcceptExistingOnly(),
                 };
 
                 var path = NonexistentPath();
@@ -990,7 +990,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<FileInfo>("arg").AcceptExistingOnly()
+                    new CliArgument<FileInfo>("arg").AcceptExistingOnly(),
                 };
 
                 var path = ExistingFile();
@@ -1004,7 +1004,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<FileInfo>("--to").AcceptExistingOnly()
+                    new CliOption<FileInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = ExistingFile();
@@ -1018,7 +1018,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliArgument<DirectoryInfo>("arg").AcceptExistingOnly()
+                    new CliArgument<DirectoryInfo>("arg").AcceptExistingOnly(),
                 };
 
                 var path = ExistingDirectory();
@@ -1032,7 +1032,7 @@ namespace System.CommandLine.Tests
             {
                 var command = new CliCommand("move")
                 {
-                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly()
+                    new CliOption<DirectoryInfo>("--to").AcceptExistingOnly(),
                 };
 
                 var path = ExistingDirectory();
@@ -1062,7 +1062,7 @@ namespace System.CommandLine.Tests
         {
             var outer = new CliCommand("outer")
             {
-                new CliCommand("inner") { new CliCommand("inner-er") }
+                new CliCommand("inner") { new CliCommand("inner-er") },
             };
 
             var result = outer.Parse("outer inner");

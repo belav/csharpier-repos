@@ -156,7 +156,7 @@ namespace System.Web.Http.ModelBinding
                     Activator.CreateInstance(closedBinderType);
                 provider = new SimpleModelBinderProvider(modelType, binderInstance)
                 {
-                    SuppressPrefixCheck = modelBinderAttribute.SuppressPrefixCheck
+                    SuppressPrefixCheck = modelBinderAttribute.SuppressPrefixCheck,
                 };
             }
             else

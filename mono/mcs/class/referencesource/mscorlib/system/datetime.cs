@@ -136,7 +136,7 @@ namespace System
             273,
             304,
             334,
-            365
+            365,
         };
         private static readonly int[] DaysToMonth366 =
         {
@@ -152,7 +152,7 @@ namespace System
             274,
             305,
             335,
-            366
+            366,
         };
 
         public static readonly DateTime MinValue = new DateTime(MinTicks, DateTimeKind.Unspecified);

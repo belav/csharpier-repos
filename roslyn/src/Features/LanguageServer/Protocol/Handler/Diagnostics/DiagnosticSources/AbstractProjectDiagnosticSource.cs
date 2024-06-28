@@ -41,7 +41,7 @@ internal abstract class AbstractProjectDiagnosticSource(Project project) : IDiag
             ? new VSTextDocumentIdentifier
             {
                 ProjectContext = ProtocolConversions.ProjectToProjectContext(Project),
-                Uri = ProtocolConversions.CreateAbsoluteUri(Project.FilePath)
+                Uri = ProtocolConversions.CreateAbsoluteUri(Project.FilePath),
             }
             : null;
 

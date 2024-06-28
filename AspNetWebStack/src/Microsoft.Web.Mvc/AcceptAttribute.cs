@@ -64,7 +64,7 @@ namespace Microsoft.Web.Mvc
             var rule = new ModelClientValidationRule
             {
                 ValidationType = "accept",
-                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName())
+                ErrorMessage = FormatErrorMessage(metadata.GetDisplayName()),
             };
             rule.ValidationParameters["mimetype"] = MimeTypesNormalized;
             yield return rule;

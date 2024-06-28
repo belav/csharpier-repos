@@ -22,7 +22,7 @@ namespace System.IdentityModel
         NameUserPrincipalName = 8,
         NameCanonicalEx = 9,
         NameServicePrincipalName = 10,
-        NameDnsDomainName = 12
+        NameDnsDomainName = 12,
     }
 
     enum TokenInformationClass : uint
@@ -41,7 +41,7 @@ namespace System.IdentityModel
         TokenSessionId,
         TokenGroupsAndPrivileges,
         TokenSessionReference,
-        TokenSandBoxInert
+        TokenSandBoxInert,
     }
 
     enum Win32Error
@@ -213,7 +213,7 @@ namespace System.IdentityModel
     internal enum TokenType : int
     {
         TokenPrimary = 1,
-        TokenImpersonation
+        TokenImpersonation,
     }
 
     internal enum SecurityLogonType : int
@@ -223,7 +223,7 @@ namespace System.IdentityModel
         Batch,
         Service,
         Proxy,
-        Unlock
+        Unlock,
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -255,7 +255,7 @@ namespace System.IdentityModel
             (byte)'e',
             (byte)'r',
             (byte)'o',
-            (byte)'s'
+            (byte)'s',
         };
 
         internal const uint KERB_CERTIFICATE_S4U_LOGON_FLAG_CHECK_DUPLICATES = 0x1;

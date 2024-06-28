@@ -230,7 +230,7 @@ csharp_style_namespace_declarations = file_scoped
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
                     FeatureAttribute.ErrorSquiggles,
-                    FeatureAttribute.ErrorList
+                    FeatureAttribute.ErrorList,
                 },
                 cancellationToken
             );

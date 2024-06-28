@@ -107,7 +107,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
     {
         // Arrange
         var url = LinkFrom("http://localhost/ContosoCorp/Trains")
-            .To(new { action = "Contact", controller = "Home", });
+            .To(new { action = "Contact", controller = "Home" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -128,7 +128,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
     {
         // Arrange
         var url = LinkFrom("http://localhost/Travel/Flight")
-            .To(new { action = "Contact", controller = "Home", });
+            .To(new { action = "Contact", controller = "Home" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -1330,7 +1330,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
                 {
                     action = "BuyTickets",
                     controller = "Flight",
-                    area = "Travel"
+                    area = "Travel",
                 }
             );
 
@@ -1378,7 +1378,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
                 {
                     action = "Index",
                     controller = "Home",
-                    area = ""
+                    area = "",
                 }
             );
 
@@ -1406,7 +1406,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
                 {
                     action = "Schedule",
                     controller = "Rail",
-                    area = "Travel"
+                    area = "Travel",
                 }
             );
 
@@ -1455,7 +1455,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
                 {
                     action = "Index",
                     controller = "Home",
-                    area = ""
+                    area = "",
                 }
             );
 
@@ -1478,7 +1478,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
     {
         // Arrange
         var url = LinkFrom("http://localhost/ContosoCorp/Trains")
-            .To(new { action = "Index", controller = "Flight", });
+            .To(new { action = "Index", controller = "Flight" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -1499,7 +1499,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
     {
         // Arrange
         var url = LinkFrom("http://localhost/Travel/Flight")
-            .To(new { action = "Index", controller = "Rail", });
+            .To(new { action = "Index", controller = "Rail" });
 
         // Act
         var response = await Client.GetAsync(url);
@@ -1525,7 +1525,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
                 {
                     action = "ListUsers",
                     controller = "UserManagement",
-                    area = "Admin"
+                    area = "Admin",
                 }
             );
 
@@ -1553,7 +1553,7 @@ public abstract class RoutingTestsBase<TStartup> : IClassFixture<MvcTestFixture<
                 {
                     action = "ListUsers",
                     controller = "UserManagement",
-                    area = "Admin"
+                    area = "Admin",
                 }
             );
 

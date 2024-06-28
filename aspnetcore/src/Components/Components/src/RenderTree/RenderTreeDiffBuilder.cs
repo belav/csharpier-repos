@@ -15,7 +15,7 @@ internal static class RenderTreeDiffBuilder
     {
         Match,
         Insert,
-        Delete
+        Delete,
     }
 
     // We use int.MinValue to signal this special case because (1) it would never be used by

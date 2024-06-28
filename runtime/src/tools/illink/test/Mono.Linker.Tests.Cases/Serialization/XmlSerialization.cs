@@ -32,7 +32,7 @@ namespace Mono.Linker.Tests.Cases.Serialization
             {
                 collection = new Collection(),
                 enumerable = new Enumerable(),
-                genericEnumerable = new GenericEnumerable<ItemType>()
+                genericEnumerable = new GenericEnumerable<ItemType>(),
             };
 
             // Reference types to ensure they are scanned for attributes.

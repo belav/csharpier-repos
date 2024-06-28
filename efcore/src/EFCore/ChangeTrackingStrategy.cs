@@ -49,5 +49,5 @@ public enum ChangeTrackingStrategy
     /// <remarks>
     ///     Original values are recorded for all properties, regardless of whether they are required to save changes to the entity.
     /// </remarks>
-    ChangingAndChangedNotificationsWithOriginalValues
+    ChangingAndChangedNotificationsWithOriginalValues,
 }

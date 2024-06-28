@@ -307,7 +307,7 @@ namespace MonoTests.System.Threading.Tasks
                 Task.Factory.StartNew(() =>
                 {
                     t2.WaitOne(5000);
-                })
+                }),
             };
 
             bool ran = false;

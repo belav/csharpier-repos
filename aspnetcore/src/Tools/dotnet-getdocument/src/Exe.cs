@@ -25,7 +25,7 @@ internal static class Exe
         {
             FileName = executable,
             UseShellExecute = false,
-            RedirectStandardOutput = interceptOutput
+            RedirectStandardOutput = interceptOutput,
         };
         foreach (var argument in args)
         {

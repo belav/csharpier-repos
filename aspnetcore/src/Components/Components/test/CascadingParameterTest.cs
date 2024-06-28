@@ -565,7 +565,7 @@ public class CascadingParameterTest
         // Act/Assert: Render a component that consumes the value
         var component = new CascadingParameterConsumerComponent<MyParamType>
         {
-            RegularParameter = "Goodbye"
+            RegularParameter = "Goodbye",
         };
         var componentId = renderer.AssignRootComponentId(component);
         Assert.Equal(0, constructionCount);
@@ -591,7 +591,7 @@ public class CascadingParameterTest
         // Act/Assert: Even if another component consumes the value, we don't call the factory again
         var anotherConsumer = new CascadingParameterConsumerComponent<MyParamType>
         {
-            RegularParameter = "Goodbye"
+            RegularParameter = "Goodbye",
         };
         var anotherConsumerComponentId = renderer.AssignRootComponentId(anotherConsumer);
         renderer.RenderRootComponent(anotherConsumerComponentId);
@@ -725,7 +725,7 @@ public class CascadingParameterTest
         var renderer = new TestRenderer(services.BuildServiceProvider());
         var component = new CascadingParameterConsumerComponent<MyParamType>
         {
-            RegularParameter = "Goodbye"
+            RegularParameter = "Goodbye",
         };
 
         // Act/Assert 1: Initial render
@@ -817,7 +817,7 @@ public class CascadingParameterTest
         var renderer = new TestRenderer(services.BuildServiceProvider());
         var component = new CascadingParameterConsumerComponent<MyParamType>
         {
-            RegularParameter = "Goodbye"
+            RegularParameter = "Goodbye",
         };
 
         // Act: Supply an update before the value is first consumed

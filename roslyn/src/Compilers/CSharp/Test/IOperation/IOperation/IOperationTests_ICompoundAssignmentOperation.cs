@@ -226,7 +226,7 @@ ICompoundAssignmentOperation (BinaryOperatorKind.Add) (OperationKind.CompoundAss
                 //         /*<bind>*/c += x/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c += x")
                     .WithArguments("int", "C")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -273,7 +273,7 @@ ICompoundAssignmentOperation (BinaryOperatorKind.None) (OperationKind.CompoundAs
                 //         /*<bind>*/c += x/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "c += x")
                     .WithArguments("+=", "C", "int")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -524,7 +524,7 @@ ICompoundAssignmentOperation (BinaryOperatorKind.None) (OperationKind.CompoundAs
                 //         /*<bind>*/c += x/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "c += x")
                     .WithArguments("+=", "C", "int")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -576,7 +576,7 @@ ICompoundAssignmentOperation (BinaryOperatorKind.Add) (OperationKind.CompoundAss
                 //         /*<bind>*/c += x/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c += x")
                     .WithArguments("int", "C")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(

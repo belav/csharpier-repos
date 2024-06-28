@@ -303,7 +303,7 @@ IBlockOperation (1 statements) (OperationKind.Block, Type: null) (Syntax: '{ ...
                 {
                     // file.cs(6,19): error CS0227: Unsafe code may only appear if compiling with /unsafe
                     //         /*<bind>*/unsafe
-                    Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(6, 19)
+                    Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(6, 19),
                 }
             );
 
@@ -762,7 +762,7 @@ unsafe class C<T>
                 // (10,17): error CS0066: 'C.E2': event must be of a delegate type
                 Diagnostic(ErrorCode.ERR_EventNotDelegate, "E2").WithArguments("C.E2"),
                 // (9,17): warning CS0067: The event 'C.E1' is never used
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1").WithArguments("C.E1")
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1").WithArguments("C.E1"),
             };
 
             CompareUnsafeDiagnostics(template, expected, expected);
@@ -802,7 +802,7 @@ unsafe class C<T>
                     //      void Test(C<int*> c) { }
                     Diagnostic(ErrorCode.ERR_BadTypeArgument, "c")
                         .WithArguments("int*")
-                        .WithLocation(8, 24)
+                        .WithLocation(8, 24),
                 },
                 new[]
                 {
@@ -1019,7 +1019,7 @@ unsafe class C<T>
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "Unsafe()"),
                 // (14,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //      static int* Unsafe() { return null; } //CS0214
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*")
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*"),
             };
 
             DiagnosticDescription[] expectedWithUnsafe =
@@ -1027,7 +1027,7 @@ unsafe class C<T>
                 // (4,25): error CS1736: Default parameter value for 'p' must be a compile-time constant
                 //      void Test(int* p = Unsafe()) //CS0214 * 2
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Unsafe()")
-                    .WithArguments("p")
+                    .WithArguments("p"),
             };
 
             CompareUnsafeDiagnostics(template, expectedWithoutUnsafe, expectedWithUnsafe);
@@ -1830,7 +1830,7 @@ class Container<T> {{ }}
                         .WithArguments("a", "int*[]"),
                     // (5,15): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     //      A(params int*[] a) { }
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*")
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*"),
                 },
                 new[]
                 {
@@ -1838,7 +1838,7 @@ class Container<T> {{ }}
                     // (2,2): error CS0181: Attribute constructor parameter 'a' has type 'int*[]', which is not a valid attribute parameter type
                     // [A]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
-                        .WithArguments("a", "int*[]")
+                        .WithArguments("a", "int*[]"),
                 }
             );
         }
@@ -1867,7 +1867,7 @@ class Container<T> {{ }}
                         .WithArguments("p", "int*"),
                     // (5,8): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     //      A(int* p = null) { }
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*")
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*"),
                 },
                 new[]
                 {
@@ -1875,7 +1875,7 @@ class Container<T> {{ }}
                     // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid attribute parameter type
                     // [A]
                     Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
-                        .WithArguments("p", "int*")
+                        .WithArguments("p", "int*"),
                 }
             );
         }
@@ -10533,7 +10533,7 @@ class C<T> : A
             {
                 // (8,30): warning CS0169: The field 'C<T>.b' is never used
                 //     private static C<T*[]>.B b;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "b").WithArguments("C<T>.b")
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "b").WithArguments("C<T>.b"),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular11)
@@ -10554,7 +10554,7 @@ class C<T> : A
                 //     private static C<T*[]>.B b;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                     .WithArguments("C<T>.b")
-                    .WithLocation(8, 30)
+                    .WithLocation(8, 30),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular12)
@@ -10591,7 +10591,7 @@ unsafe class C<T> : A
                 //     private static C<T*[]>.B b;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                     .WithArguments("C<T>.b")
-                    .WithLocation(8, 30)
+                    .WithLocation(8, 30),
             };
 
             var expectedWithUnsafe = new[]
@@ -10600,7 +10600,7 @@ unsafe class C<T> : A
                 //     private static C<T*[]>.B b;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                     .WithArguments("C<T>.b")
-                    .WithLocation(8, 30)
+                    .WithLocation(8, 30),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular11)
@@ -10680,7 +10680,7 @@ class C<T> : A
                 //     private static C<T*[]> c;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "c")
                     .WithArguments("C<T>.c")
-                    .WithLocation(17, 28)
+                    .WithLocation(17, 28),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular11)
@@ -10724,7 +10724,7 @@ class C<T> : A
                 //     private static C<T*[]>.B b;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                     .WithArguments("C<T>.b")
-                    .WithLocation(10, 30)
+                    .WithLocation(10, 30),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular12)
@@ -10929,7 +10929,7 @@ class C<T> : A
                 //     private static C<string*[]> c;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "c")
                     .WithArguments("C<T>.c")
-                    .WithLocation(13, 33)
+                    .WithLocation(13, 33),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular11)
@@ -10963,7 +10963,7 @@ class C<T> : A
                 //     private static C<string*[]>.B b;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "b")
                     .WithArguments("C<T>.b")
-                    .WithLocation(10, 35)
+                    .WithLocation(10, 35),
             };
 
             CreateCompilation(text, parseOptions: TestOptions.Regular12)
@@ -11806,7 +11806,7 @@ namespace ConsoleApplication30
                 verify: Verification.Fails,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromImage(comp1.EmitToArray())
+                    MetadataReference.CreateFromImage(comp1.EmitToArray()),
                 },
                 expectedOutput: "TrueFalse"
             ).Compilation;
@@ -11863,7 +11863,7 @@ namespace ConsoleApplication30
                 verify: Verification.Fails,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromImage(comp1.EmitToArray())
+                    MetadataReference.CreateFromImage(comp1.EmitToArray()),
                 }
             ).Compilation;
         }
@@ -12896,7 +12896,7 @@ using X = System.Collections.Generic.List<int*>;
                 // using X = System.Collections.Generic.List<int*>;
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "X")
                     .WithArguments("int*")
-                    .WithLocation(2, 7)
+                    .WithLocation(2, 7),
             };
 
             var comp = CreateCompilation(
@@ -12925,7 +12925,7 @@ using X = System.Collections.Generic.List<int*>;
                     .WithLocation(2, 7),
                 // (2,43): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 // using X = System.Collections.Generic.List<int*>;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*").WithLocation(2, 43)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*").WithLocation(2, 43),
             };
 
             comp = CreateCompilation(
@@ -12967,7 +12967,7 @@ class C
                 //     void M(X x)
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "x")
                     .WithArguments("int*")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             var comp = CreateCompilation(
@@ -12997,7 +12997,7 @@ class C
                 //     void M(X x)
                 Diagnostic(ErrorCode.ERR_BadTypeArgument, "x")
                     .WithArguments("int*")
-                    .WithLocation(6, 14)
+                    .WithLocation(6, 14),
             };
 
             comp = CreateCompilation(
@@ -13118,7 +13118,7 @@ using X = System.Collections.Generic.List<int*[]>;
                         ErrorCode.HDN_UnusedUsingDirective,
                         "using X = System.Collections.Generic.List<int*[]>;"
                     )
-                    .WithLocation(2, 1)
+                    .WithLocation(2, 1),
             };
             var comp = CreateCompilation(
                 csharp,
@@ -13141,7 +13141,7 @@ using X = System.Collections.Generic.List<int*[]>;
                     .WithLocation(2, 1),
                 // (2,43): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 // using X = System.Collections.Generic.List<int*[]>;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*").WithLocation(2, 43)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*").WithLocation(2, 43),
             };
             comp = CreateCompilation(
                 csharp,
@@ -13193,7 +13193,7 @@ class C
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*").WithLocation(2, 43),
                 // (6,12): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //     void M(X x)
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "X").WithLocation(6, 12)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "X").WithLocation(6, 12),
             };
 
             comp = CreateCompilation(
@@ -13414,7 +13414,7 @@ class C
                 // (12,9): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         y = delegate { throw null; }; // 4
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "y = delegate { throw null; }")
-                    .WithLocation(12, 9)
+                    .WithLocation(12, 9),
             };
 
             comp = CreateCompilation(
@@ -13581,7 +13581,7 @@ class C
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*").WithLocation(13, 25),
                 // (13,32): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         var z = int*[] (int*[] x) => throw null; // 5
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "x").WithLocation(13, 32)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "x").WithLocation(13, 32),
             };
 
             comp = CreateCompilation(

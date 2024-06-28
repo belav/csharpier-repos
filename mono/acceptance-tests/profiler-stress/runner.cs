@@ -229,7 +229,7 @@ namespace Mono.Profiling.Tests.Stress
                 );
                 Console.ResetColor();
 
-                var result = new TestResult { Benchmark = bench, StartInfo = info, };
+                var result = new TestResult { Benchmark = bench, StartInfo = info };
 
                 using (var proc = new Process())
                 {
@@ -317,7 +317,7 @@ namespace Mono.Profiling.Tests.Stress
             var failures = results.Count(r => r.ExitCode != null && r.ExitCode != 0);
             var timeouts = results.Count(r => r.ExitCode == null);
 
-            var settings = new XmlWriterSettings { NewLineOnAttributes = true, Indent = true, };
+            var settings = new XmlWriterSettings { NewLineOnAttributes = true, Indent = true };
 
             using (var writer = XmlWriter.Create("TestResult-profiler-stress.xml", settings))
             {

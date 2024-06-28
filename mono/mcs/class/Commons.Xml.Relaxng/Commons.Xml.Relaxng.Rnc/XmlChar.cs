@@ -549,7 +549,7 @@ namespace System.Xml
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         static readonly byte[] namePages =
@@ -809,7 +809,7 @@ namespace System.Xml
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         static readonly uint[] nameBitmap =
@@ -1133,7 +1133,7 @@ namespace System.Xml
             0x661FFFFF,
             0xFFFFFFFE,
             0xFFFFFFFF,
-            0x77FFFFFF
+            0x77FFFFFF,
         };
     }
 }

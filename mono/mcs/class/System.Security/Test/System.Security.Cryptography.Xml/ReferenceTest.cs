@@ -74,7 +74,7 @@ namespace MonoTests.System.Security.Cryptography.Xml
                 0x63,
                 0xB2,
                 0xFD,
-                0x52
+                0x52,
             };
             AssertCrypto.AssertEquals("Load-Digest", hash, reference.DigestValue);
             Assert.AreEqual(0, reference.TransformChain.Count, "Load-#Transform");

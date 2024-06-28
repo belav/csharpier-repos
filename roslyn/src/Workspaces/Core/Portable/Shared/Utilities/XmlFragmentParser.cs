@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         }
 
         private static readonly XmlReaderSettings s_xmlSettings =
-            new() { DtdProcessing = DtdProcessing.Prohibit, };
+            new() { DtdProcessing = DtdProcessing.Prohibit };
 
         private void ParseInternal<TArg>(string text, Action<XmlReader, TArg> callback, TArg arg)
         {

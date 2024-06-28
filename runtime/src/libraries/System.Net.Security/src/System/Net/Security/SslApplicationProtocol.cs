@@ -91,15 +91,11 @@ namespace System.Net.Security
             byte[] arr = _readOnlyProtocol;
             try
             {
-                return arr is null
-                    ? string.Empty
-                    : ReferenceEquals(arr, s_http3Utf8)
-                        ? "h3"
-                        : ReferenceEquals(arr, s_http2Utf8)
-                            ? "h2"
-                            : ReferenceEquals(arr, s_http11Utf8)
-                                ? "http/1.1"
-                                : s_utf8.GetString(arr);
+                return arr is null ? string.Empty
+                    : ReferenceEquals(arr, s_http3Utf8) ? "h3"
+                    : ReferenceEquals(arr, s_http2Utf8) ? "h2"
+                    : ReferenceEquals(arr, s_http11Utf8) ? "http/1.1"
+                    : s_utf8.GetString(arr);
             }
             catch
             {

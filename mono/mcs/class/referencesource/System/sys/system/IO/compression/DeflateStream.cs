@@ -45,7 +45,7 @@ namespace System.IO.Compression
         {
             Managed,
             ZLib,
-            Unknown
+            Unknown,
         };
 
         private static volatile WorkerType deflaterType = WorkerType.Unknown;

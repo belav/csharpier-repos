@@ -23,7 +23,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     4,
                     3,
-                    "bbbb"
+                    "bbbb",
                 };
                 yield return new object[]
                 {
@@ -34,7 +34,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     4,
                     0,
-                    "123 123 123 123"
+                    "123 123 123 123",
                 };
                 yield return new object[]
                 {
@@ -45,7 +45,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.IgnoreCase,
                     9,
                     0,
-                    "Microsoft"
+                    "Microsoft",
                 };
                 yield return new object[]
                 {
@@ -56,7 +56,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.IgnoreCase,
                     16,
                     0,
-                    "my CAT has fleas"
+                    "my CAT has fleas",
                 };
                 yield return new object[]
                 {
@@ -67,7 +67,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     2,
                     0,
-                    "bbaaa"
+                    "bbaaa",
                 };
                 yield return new object[]
                 {
@@ -78,7 +78,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     2,
                     3,
-                    "aaabb"
+                    "aaabb",
                 };
 
                 // Stress
@@ -91,7 +91,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     999,
                     0,
-                    new string('b', 999)
+                    new string('b', 999),
                 };
 
                 // Undefined groups
@@ -104,7 +104,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcat$2048$1024dogENDkljeah"
+                    "slkfjsdSTARTcat$2048$1024dogENDkljeah",
                 };
                 yield return new object[]
                 {
@@ -115,7 +115,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTART${catTWO}dogcat${dogTWO}ENDkljeah"
+                    "slkfjsdSTART${catTWO}dogcat${dogTWO}ENDkljeah",
                 };
 
                 // Replace with group numbers
@@ -128,7 +128,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     15,
                     0,
-                    "p"
+                    "p",
                 };
                 yield return new object[]
                 {
@@ -139,7 +139,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     15,
                     0,
-                    "cdefghiklmnop"
+                    "cdefghiklmnop",
                 };
                 yield return new object[]
                 {
@@ -150,7 +150,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     5,
                     0,
-                    "David Bau"
+                    "David Bau",
                 };
 
                 // Stress
@@ -167,7 +167,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     input.Length,
                     0,
-                    "de"
+                    "de",
                 };
                 yield return new object[]
                 {
@@ -178,7 +178,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     input.Length,
                     0,
-                    input
+                    input,
                 };
 
                 // Undefined group
@@ -191,7 +191,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     3,
                     0,
-                    "$3"
+                    "$3",
                 };
                 yield return new object[]
                 {
@@ -202,7 +202,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcat$2048$1024dogENDkljeah"
+                    "slkfjsdSTARTcat$2048$1024dogENDkljeah",
                 };
 
                 // Valid cases
@@ -215,7 +215,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     14,
                     0,
-                    "16:00"
+                    "16:00",
                 };
 
                 yield return new object[]
@@ -227,7 +227,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     7,
                     0,
-                    "catest dogest"
+                    "catest dogest",
                 };
                 yield return new object[]
                 {
@@ -238,7 +238,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcatdogcatdogENDkljeah"
+                    "slkfjsdSTARTcatdogcatdogENDkljeah",
                 };
                 yield return new object[]
                 {
@@ -249,7 +249,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcatdogcatdogENDkljeah"
+                    "slkfjsdSTARTcatdogcatdogENDkljeah",
                 };
                 yield return new object[]
                 {
@@ -260,7 +260,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcatdogcatdogENDkljeah"
+                    "slkfjsdSTARTcatdogcatdogENDkljeah",
                 };
                 yield return new object[]
                 {
@@ -271,7 +271,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcatdogcatdogENDkljeah"
+                    "slkfjsdSTARTcatdogcatdogENDkljeah",
                 };
                 yield return new object[]
                 {
@@ -282,7 +282,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcatdogcatdogENDkljeah"
+                    "slkfjsdSTARTcatdogcatdogENDkljeah",
                 };
 
                 yield return new object[]
@@ -294,7 +294,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     19,
                     0,
-                    "hello$world"
+                    "hello$world",
                 };
                 yield return new object[]
                 {
@@ -305,7 +305,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     28,
                     0,
-                    "before text. The following should be dog and it is dog. after text"
+                    "before text. The following should be dog and it is dog. after text",
                 };
 
                 yield return new object[]
@@ -317,7 +317,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     27,
                     0,
-                    "What the hello world, how are you? goodby"
+                    "What the hello world, how are you? goodby",
                 };
                 yield return new object[]
                 {
@@ -328,7 +328,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     27,
                     0,
-                    "What the hello world, how are you? goodby"
+                    "What the hello world, how are you? goodby",
                 };
                 yield return new object[]
                 {
@@ -339,7 +339,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     27,
                     0,
-                    "What the What the cookie are you doing goodby"
+                    "What the What the cookie are you doing goodby",
                 };
                 yield return new object[]
                 {
@@ -350,7 +350,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     28,
                     0,
-                    "before text. This is the after text and after text"
+                    "before text. This is the after text and after text",
                 };
                 yield return new object[]
                 {
@@ -361,7 +361,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     28,
                     0,
-                    "before text. The following should be the entire string 'before textcat dogafter text'. after text"
+                    "before text. The following should be the entire string 'before textcat dogafter text'. after text",
                 };
 
                 yield return new object[]
@@ -373,7 +373,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     24,
                     0,
-                    "START world hello hello world $3$4 END"
+                    "START world hello hello world $3$4 END",
                 };
                 yield return new object[]
                 {
@@ -384,7 +384,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     24,
                     0,
-                    "START world hello hello world $123$234 END"
+                    "START world hello hello world $123$234 END",
                 };
 
                 yield return new object[]
@@ -398,7 +398,7 @@ namespace System.Text.RegularExpressions.Tests
                         | RegexOptions.Multiline,
                     21,
                     0,
-                    "My dog cat has fleas."
+                    "My dog cat has fleas.",
                 };
                 yield return new object[]
                 {
@@ -411,7 +411,7 @@ namespace System.Text.RegularExpressions.Tests
                         | RegexOptions.Multiline,
                     21,
                     0,
-                    "My cat dog has fleas."
+                    "My cat dog has fleas.",
                 };
 
                 // Error cases
@@ -424,7 +424,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     20,
                     0,
-                    "slkfjsdSTARTcatdog$kljeah"
+                    "slkfjsdSTARTcatdog$kljeah",
                 };
 
                 if (!RegexHelpers.IsNonBacktracking(engine))
@@ -439,7 +439,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         20,
                         0,
-                        "slkfjsdSTARTcatdogcatdogENDkljeah"
+                        "slkfjsdSTARTcatdogcatdogENDkljeah",
                     };
                     yield return new object[]
                     {
@@ -450,7 +450,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         20,
                         0,
-                        "slkfjsdSTARTcatdogcatdogENDkljeah"
+                        "slkfjsdSTARTcatdogcatdogENDkljeah",
                     };
                     yield return new object[]
                     {
@@ -461,7 +461,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         20,
                         0,
-                        "slkfjsdSTARTcatdogcatdogENDkljeah"
+                        "slkfjsdSTARTcatdogcatdogENDkljeah",
                     };
                     yield return new object[]
                     {
@@ -472,7 +472,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         20,
                         0,
-                        "slkfjsdSTARTcatdogcatdogENDkljeah"
+                        "slkfjsdSTARTcatdogcatdogENDkljeah",
                     };
                     yield return new object[]
                     {
@@ -483,7 +483,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         20,
                         0,
-                        "slkfjsdSTARTcatdogcatdogENDkljeah"
+                        "slkfjsdSTARTcatdogcatdogENDkljeah",
                     };
                     yield return new object[]
                     {
@@ -494,7 +494,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         20,
                         0,
-                        "slkfjsdSTARTcatdogcatdogENDkljeah"
+                        "slkfjsdSTARTcatdogcatdogENDkljeah",
                     };
 
                     yield return new object[]
@@ -506,7 +506,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         24,
                         0,
-                        "START $234 hello hello $234 $3$4 END"
+                        "START $234 hello hello $234 $3$4 END",
                     };
                     yield return new object[]
                     {
@@ -517,7 +517,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         24,
                         0,
-                        "START world hello hello world $3$4 END"
+                        "START world hello hello world $3$4 END",
                     };
                     yield return new object[]
                     {
@@ -528,7 +528,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         24,
                         0,
-                        "START world hello hello world hello23world34 END"
+                        "START world hello hello world hello23world34 END",
                     };
                     yield return new object[]
                     {
@@ -539,7 +539,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         24,
                         0,
-                        "START world hello hello world hello3world34 END"
+                        "START world hello hello world hello3world34 END",
                     };
                     yield return new object[]
                     {
@@ -550,7 +550,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         24,
                         0,
-                        "START world hello hello world helloworld4 END"
+                        "START world hello hello world helloworld4 END",
                     };
                     yield return new object[]
                     {
@@ -561,7 +561,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.ECMAScript,
                         24,
                         0,
-                        "START world hello hello world hello456world567 END"
+                        "START world hello hello world hello456world567 END",
                     };
 
                     yield return new object[]
@@ -576,7 +576,7 @@ namespace System.Text.RegularExpressions.Tests
                             | RegexOptions.Multiline,
                         21,
                         0,
-                        "My dog cat has fleas."
+                        "My dog cat has fleas.",
                     };
                     yield return new object[]
                     {
@@ -590,7 +590,7 @@ namespace System.Text.RegularExpressions.Tests
                             | RegexOptions.Multiline,
                         21,
                         0,
-                        "My cat dog has fleas."
+                        "My cat dog has fleas.",
                     };
 
                     // RightToLeft
@@ -603,7 +603,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         4,
                         3,
-                        "bbbb"
+                        "bbbb",
                     };
                     yield return new object[]
                     {
@@ -614,7 +614,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         4,
                         3,
-                        "123 123 123 123"
+                        "123 123 123 123",
                     };
                     yield return new object[]
                     {
@@ -625,7 +625,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         32,
                         32,
-                        "0123456789foo4567890bar"
+                        "0123456789foo4567890bar",
                     };
                     yield return new object[]
                     {
@@ -636,7 +636,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         17,
                         32,
-                        "##########foo#######foo         "
+                        "##########foo#######foo         ",
                     };
                     yield return new object[]
                     {
@@ -647,7 +647,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         7,
                         32,
-                        "0123456789foo#######foo         "
+                        "0123456789foo#######foo         ",
                     };
                     yield return new object[]
                     {
@@ -658,7 +658,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         0,
                         32,
-                        "0123456789foo4567890foo         "
+                        "0123456789foo4567890foo         ",
                     };
                     yield return new object[]
                     {
@@ -669,7 +669,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         32,
-                        "##########foo#######foo         "
+                        "##########foo#######foo         ",
                     };
 
                     yield return new object[]
@@ -681,7 +681,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc123def!"
+                        "abc123def!",
                     };
                     yield return new object[]
                     {
@@ -692,7 +692,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc1!"
+                        "abc1!",
                     };
                     yield return new object[]
                     {
@@ -703,7 +703,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc2!"
+                        "abc2!",
                     };
                     yield return new object[]
                     {
@@ -714,7 +714,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc3!"
+                        "abc3!",
                     };
                     yield return new object[]
                     {
@@ -725,7 +725,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc$4!"
+                        "abc$4!",
                     };
 
                     yield return new object[]
@@ -737,7 +737,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc$!"
+                        "abc$!",
                     };
                     yield return new object[]
                     {
@@ -748,7 +748,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc123def!"
+                        "abc123def!",
                     };
                     yield return new object[]
                     {
@@ -759,7 +759,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abcabc!"
+                        "abcabc!",
                     };
                     yield return new object[]
                     {
@@ -770,7 +770,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc!!"
+                        "abc!!",
                     };
 
                     yield return new object[]
@@ -782,7 +782,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abc3!"
+                        "abc3!",
                     };
                     yield return new object[]
                     {
@@ -793,7 +793,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         10,
-                        "abcabc123def!!"
+                        "abcabc123def!!",
                     };
 
                     // Anchors
@@ -806,7 +806,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.None,
                         5,
                         0,
-                        "bbbbb"
+                        "bbbbb",
                     };
                 }
             }
@@ -857,7 +857,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     4,
                     0,
-                    "bbbb"
+                    "bbbb",
                 };
                 yield return new object[]
                 {
@@ -868,7 +868,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     12,
                     0,
-                    "Huge mountain"
+                    "Huge mountain",
                 };
                 yield return new object[]
                 {
@@ -879,7 +879,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     13,
                     0,
-                    "Tiny village"
+                    "Tiny village",
                 };
 
                 if ("i".ToUpper() == "I")
@@ -893,7 +893,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.IgnoreCase,
                         9,
                         0,
-                        "Huge horse"
+                        "Huge horse",
                     };
                 }
 
@@ -906,7 +906,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.IgnoreCase,
                     9,
                     0,
-                    "Tiny dog"
+                    "Tiny dog",
                 };
 
                 yield return new object[]
@@ -918,7 +918,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     16,
                     0,
-                    "SUCCESS"
+                    "SUCCESS",
                 };
                 yield return new object[]
                 {
@@ -929,7 +929,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     6,
                     0,
-                    "ABCABC"
+                    "ABCABC",
                 };
                 yield return new object[]
                 {
@@ -940,7 +940,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     3,
                     0,
-                    "ABCabc"
+                    "ABCabc",
                 };
                 yield return new object[]
                 {
@@ -951,7 +951,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     3,
                     2,
-                    "abCABc"
+                    "abCABc",
                 };
 
                 if (!RegexHelpers.IsNonBacktracking(engine))
@@ -972,7 +972,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.CultureInvariant | RegexOptions.Singleline,
                         boldInput.Length,
                         0,
-                        boldExpected
+                        boldExpected,
                     };
 
                     // RighToLeft
@@ -985,7 +985,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         4,
                         3,
-                        "bbbb"
+                        "bbbb",
                     };
                     yield return new object[]
                     {
@@ -996,7 +996,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         32,
                         32,
-                        "0123456789foo4567890bar"
+                        "0123456789foo4567890bar",
                     };
                     yield return new object[]
                     {
@@ -1007,7 +1007,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         17,
                         32,
-                        "##########foo#######foo         "
+                        "##########foo#######foo         ",
                     };
                     yield return new object[]
                     {
@@ -1018,7 +1018,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         7,
                         32,
-                        "0123456789foo#######foo         "
+                        "0123456789foo#######foo         ",
                     };
                     yield return new object[]
                     {
@@ -1029,7 +1029,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         0,
                         32,
-                        "0123456789foo4567890foo         "
+                        "0123456789foo4567890foo         ",
                     };
                     yield return new object[]
                     {
@@ -1040,7 +1040,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         -1,
                         32,
-                        "##########foo#######foo         "
+                        "##########foo#######foo         ",
                     };
                 }
             }
@@ -1168,7 +1168,7 @@ namespace System.Text.RegularExpressions.Tests
                         "b" => null,
                         "c" => "",
                         "d" => "y",
-                        _ => throw new InvalidOperationException()
+                        _ => throw new InvalidOperationException(),
                     };
                 },
                 options
@@ -1444,7 +1444,7 @@ namespace System.Text.RegularExpressions.Tests
                     "###",
                     0,
                     "012aaabb34bba56",
-                    options
+                    options,
                 };
                 yield return new object[]
                 {
@@ -1453,7 +1453,7 @@ namespace System.Text.RegularExpressions.Tests
                     "###",
                     -1,
                     "012###34###56",
-                    options
+                    options,
                 };
                 yield return new object[]
                 {
@@ -1462,7 +1462,7 @@ namespace System.Text.RegularExpressions.Tests
                     "#",
                     2,
                     "#Hello# World!",
-                    options
+                    options,
                 };
                 yield return new object[]
                 {
@@ -1471,7 +1471,7 @@ namespace System.Text.RegularExpressions.Tests
                     "###",
                     1,
                     "012###34bba56",
-                    options
+                    options,
                 };
                 yield return new object[]
                 {
@@ -1480,7 +1480,7 @@ namespace System.Text.RegularExpressions.Tests
                     "#$$#",
                     -1,
                     "#$#Hello#$# #$#World#$#!",
-                    options
+                    options,
                 };
                 yield return new object[] { @"", "hej", "  ", -1, "  h  e  j  ", options };
                 if ((options & RegexHelpers.RegexOptionNonBacktracking) == 0)
@@ -1492,7 +1492,7 @@ namespace System.Text.RegularExpressions.Tests
                         "${2}",
                         -1,
                         "this ${2} it",
-                        options
+                        options,
                     };
                 }
             }
@@ -1525,7 +1525,7 @@ namespace System.Text.RegularExpressions.Tests
                     "it costs $500000:55 I think",
                     "$$???:${2}",
                     "it costs $???:55 I think",
-                    options
+                    options,
                 };
                 yield return new object[]
                 {
@@ -1533,7 +1533,7 @@ namespace System.Text.RegularExpressions.Tests
                     "---12345abc---",
                     "$2$1",
                     "---abc12345---",
-                    options
+                    options,
                 };
             }
         }

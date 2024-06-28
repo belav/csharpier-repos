@@ -27,6 +27,6 @@ namespace System.DirectoryServices
     {
         None = -1,
         HexString,
-        Standard
+        Standard,
     }
 }

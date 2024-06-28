@@ -163,7 +163,7 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
                 //         /*<bind>*/return 0.0;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_LiteralDoubleCast, "0.0")
                     .WithArguments("F", "float")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(

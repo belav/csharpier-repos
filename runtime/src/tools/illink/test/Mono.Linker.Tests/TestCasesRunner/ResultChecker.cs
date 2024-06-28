@@ -33,11 +33,11 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 new TestCaseAssemblyResolver(),
                 new ReaderParameters
                 {
-                    SymbolReaderProvider = new DefaultSymbolReaderProvider(false)
+                    SymbolReaderProvider = new DefaultSymbolReaderProvider(false),
                 },
                 new ReaderParameters
                 {
-                    SymbolReaderProvider = new DefaultSymbolReaderProvider(false)
+                    SymbolReaderProvider = new DefaultSymbolReaderProvider(false),
                 }
             ) { }
 
@@ -1482,7 +1482,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                                             MethodDefinition method => method.GetDisplayName(),
                                             IMemberDefinition member => member.FullName,
                                             AssemblyDefinition asm => asm.Name.Name,
-                                            _ => throw new NotImplementedException()
+                                            _ => throw new NotImplementedException(),
                                         } + ": "
                                         : "";
 

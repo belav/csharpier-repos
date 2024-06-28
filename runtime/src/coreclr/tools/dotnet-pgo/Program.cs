@@ -168,7 +168,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                     .UseExtendedHelp(PgoRootCommand.GetExtendedHelp)
             )
             {
-                ResponseFileTokenReplacer = Helpers.TryReadResponseFile
+                ResponseFileTokenReplacer = Helpers.TryReadResponseFile,
             }.Invoke(args);
 
         public static void PrintWarning(string warning)
@@ -2297,7 +2297,7 @@ namespace Microsoft.Diagnostics.Tools.Pgo
                                             ILOffset = kvp.Key.Item1.Start,
                                             Other = kvp.Key.Item2.Start,
                                             Count = 1,
-                                            DataLong = kvp.Value
+                                            DataLong = kvp.Value,
                                         })
                                     );
                                 }

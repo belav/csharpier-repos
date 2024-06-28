@@ -373,7 +373,7 @@ public class RedisProtocolTests
                         (byte)'y',
                         (byte)'z',
                         0x03,
-                        0x2a
+                        0x2a,
                     }
                 )
             ),

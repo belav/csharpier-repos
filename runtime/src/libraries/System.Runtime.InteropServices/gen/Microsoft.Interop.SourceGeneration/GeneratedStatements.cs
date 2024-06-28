@@ -37,21 +37,21 @@ namespace Microsoft.Interop
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.Setup
+                        CurrentStage = StubCodeContext.Stage.Setup,
                     }
                 ),
                 Marshal = GenerateStatementsForStubContext(
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.Marshal
+                        CurrentStage = StubCodeContext.Stage.Marshal,
                     }
                 ),
                 Pin = GenerateStatementsForStubContext(
                         marshallers,
                         context with
                         {
-                            CurrentStage = StubCodeContext.Stage.Pin
+                            CurrentStage = StubCodeContext.Stage.Pin,
                         }
                     )
                     .Cast<FixedStatementSyntax>()
@@ -60,7 +60,7 @@ namespace Microsoft.Interop
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.PinnedMarshal
+                        CurrentStage = StubCodeContext.Stage.PinnedMarshal,
                     }
                 ),
                 InvokeStatement = EmptyStatement(),
@@ -68,7 +68,7 @@ namespace Microsoft.Interop
                         marshallers,
                         context with
                         {
-                            CurrentStage = StubCodeContext.Stage.UnmarshalCapture
+                            CurrentStage = StubCodeContext.Stage.UnmarshalCapture,
                         }
                     )
                     .AddRange(
@@ -76,7 +76,7 @@ namespace Microsoft.Interop
                             marshallers,
                             context with
                             {
-                                CurrentStage = StubCodeContext.Stage.Unmarshal
+                                CurrentStage = StubCodeContext.Stage.Unmarshal,
                             }
                         )
                     ),
@@ -84,34 +84,34 @@ namespace Microsoft.Interop
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.NotifyForSuccessfulInvoke
+                        CurrentStage = StubCodeContext.Stage.NotifyForSuccessfulInvoke,
                     }
                 ),
                 GuaranteedUnmarshal = GenerateStatementsForStubContext(
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.GuaranteedUnmarshal
+                        CurrentStage = StubCodeContext.Stage.GuaranteedUnmarshal,
                     }
                 ),
                 CleanupCallerAllocated = GenerateStatementsForStubContext(
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.CleanupCallerAllocated
+                        CurrentStage = StubCodeContext.Stage.CleanupCallerAllocated,
                     }
                 ),
                 CleanupCalleeAllocated = GenerateStatementsForStubContext(
                     marshallers,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.CleanupCalleeAllocated
+                        CurrentStage = StubCodeContext.Stage.CleanupCalleeAllocated,
                     }
                 ),
                 ManagedExceptionCatchClauses = GenerateCatchClauseForManagedException(
                     marshallers,
                     context
-                )
+                ),
             };
         }
 
@@ -131,10 +131,10 @@ namespace Microsoft.Interop
                         marshallers,
                         context with
                         {
-                            CurrentStage = StubCodeContext.Stage.Invoke
+                            CurrentStage = StubCodeContext.Stage.Invoke,
                         },
                         expressionToInvoke
-                    )
+                    ),
                 };
             }
             else if (context.Direction == MarshalDirection.UnmanagedToManaged)
@@ -145,10 +145,10 @@ namespace Microsoft.Interop
                         marshallers,
                         context with
                         {
-                            CurrentStage = StubCodeContext.Stage.Invoke
+                            CurrentStage = StubCodeContext.Stage.Invoke,
                         },
                         expressionToInvoke
-                    )
+                    ),
                 };
             }
             else
@@ -293,7 +293,7 @@ namespace Microsoft.Interop
                     managedExceptionMarshaller.TypeInfo,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.Marshal
+                        CurrentStage = StubCodeContext.Stage.Marshal,
                     }
                 )
             );
@@ -302,7 +302,7 @@ namespace Microsoft.Interop
                     managedExceptionMarshaller.TypeInfo,
                     context with
                     {
-                        CurrentStage = StubCodeContext.Stage.PinnedMarshal
+                        CurrentStage = StubCodeContext.Stage.PinnedMarshal,
                     }
                 )
             );
@@ -336,7 +336,7 @@ namespace Microsoft.Interop
                     "Keep alive any managed objects that need to stay alive across the call.",
                 StubCodeContext.Stage.GuaranteedUnmarshal =>
                     "Convert native data to managed data even in the case of an exception during the non-cleanup phases.",
-                _ => throw new ArgumentOutOfRangeException(nameof(stage))
+                _ => throw new ArgumentOutOfRangeException(nameof(stage)),
             };
 
             // Comment separating each stage

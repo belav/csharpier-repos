@@ -192,7 +192,7 @@ internal sealed class AttributeRoute : IRouter
         ActionDescriptor action
     )
     {
-        var routeInfo = new RouteInfo() { ActionDescriptor = action, };
+        var routeInfo = new RouteInfo() { ActionDescriptor = action };
 
         try
         {

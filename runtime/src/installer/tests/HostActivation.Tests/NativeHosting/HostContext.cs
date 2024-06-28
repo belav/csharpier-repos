@@ -167,7 +167,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 sharedState.HostFxrPath,
                 sharedState.RuntimeConfigPath,
                 SharedTestState.ConfigPropertyName,
-                newPropertyName
+                newPropertyName,
             };
             CommandResult result = sharedState
                 .CreateNativeHostCommand(args, sharedState.DotNetRoot)
@@ -197,7 +197,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 Scenario.Config,
                 CheckProperties.None,
                 sharedState.SelfContainedApp.HostFxrDll,
-                sharedState.SelfContainedApp.RuntimeConfigJson
+                sharedState.SelfContainedApp.RuntimeConfigJson,
             };
             CommandResult result = sharedState
                 .CreateNativeHostCommand(args, sharedState.DotNetRoot)
@@ -230,7 +230,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 sharedState.RuntimeConfigPath,
                 sharedState.SecondaryRuntimeConfigPath,
                 SharedTestState.ConfigPropertyName,
-                SharedTestState.SecondaryConfigPropertyName
+                SharedTestState.SecondaryConfigPropertyName,
             };
             CommandResult result = sharedState
                 .CreateNativeHostCommand(args, sharedState.DotNetRoot)
@@ -276,7 +276,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 sharedState.HostFxrPath,
                 sharedState.RuntimeConfigPath,
                 SharedTestState.ConfigPropertyName,
-                newPropertyName
+                newPropertyName,
             };
             CommandResult result = sharedState
                 .CreateNativeHostCommand(args, sharedState.DotNetRoot)
@@ -336,12 +336,12 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 checkProperties,
                 sharedState.HostFxrPath,
                 sharedState.AppPath,
-                sharedState.RuntimeConfigPath
+                sharedState.RuntimeConfigPath,
             };
             string[] appArgs =
             {
                 SharedTestState.AppPropertyName,
-                SharedTestState.ConfigPropertyName
+                SharedTestState.ConfigPropertyName,
             };
             CommandResult result = sharedState
                 .CreateNativeHostCommand(args.Concat(appArgs), sharedState.DotNetRoot)
@@ -430,14 +430,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     : testData.ExistingContext switch
                     {
                         ExistingContextType.FrameworkDependent => sharedState.AppPath,
-                        ExistingContextType.SelfContained_NoIncludedFrameworks =>
-                            sharedState.SelfContainedApp.AppDll,
-                        ExistingContextType.SelfContained_WithIncludedFrameworks =>
-                            sharedState.SelfContainedApp_IncludedFrameworks.AppDll,
-                        _ =>
-                            throw new Exception(
-                                $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
-                            )
+                        ExistingContextType.SelfContained_NoIncludedFrameworks => sharedState
+                            .SelfContainedApp
+                            .AppDll,
+                        ExistingContextType.SelfContained_WithIncludedFrameworks => sharedState
+                            .SelfContainedApp_IncludedFrameworks
+                            .AppDll,
+                        _ => throw new Exception(
+                            $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
+                        ),
                     };
 
             string hostfxrPath =
@@ -446,14 +447,15 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                     : testData.ExistingContext switch
                     {
                         ExistingContextType.FrameworkDependent => sharedState.HostFxrPath,
-                        ExistingContextType.SelfContained_NoIncludedFrameworks =>
-                            sharedState.SelfContainedApp.HostFxrDll,
-                        ExistingContextType.SelfContained_WithIncludedFrameworks =>
-                            sharedState.SelfContainedApp_IncludedFrameworks.HostFxrDll,
-                        _ =>
-                            throw new Exception(
-                                $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
-                            )
+                        ExistingContextType.SelfContained_NoIncludedFrameworks => sharedState
+                            .SelfContainedApp
+                            .HostFxrDll,
+                        ExistingContextType.SelfContained_WithIncludedFrameworks => sharedState
+                            .SelfContainedApp_IncludedFrameworks
+                            .HostFxrDll,
+                        _ => throw new Exception(
+                            $"Unexpected test data {nameof(testData.ExistingContext)}: {testData.ExistingContext}"
+                        ),
                     };
 
             string[] args =
@@ -463,7 +465,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 CheckProperties.None,
                 hostfxrPath,
                 appOrConfigPath,
-                frameworkCompatConfig
+                frameworkCompatConfig,
             };
 
             CommandResult result;
@@ -631,7 +633,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeHosting
                 CheckProperties.None,
                 sharedState.HostFxrPath,
                 appOrConfigPath,
-                propertyCompatConfig
+                propertyCompatConfig,
             };
 
             CommandResult result;

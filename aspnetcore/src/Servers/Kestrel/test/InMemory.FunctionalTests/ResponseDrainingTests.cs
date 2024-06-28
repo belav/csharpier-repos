@@ -16,7 +16,7 @@ public class ResponseDrainingTests : TestApplicationErrorLoggerLoggedTest
         new TheoryData<ListenOptions>
         {
             new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)),
-            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
+            new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough(),
         };
 
     [Theory]

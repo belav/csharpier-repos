@@ -168,7 +168,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                     .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
                     .Configure(app =>
                         app.UseStaticFiles(
-                            new StaticFileOptions { RequestPath = new PathString(baseUrl), }
+                            new StaticFileOptions { RequestPath = new PathString(baseUrl) }
                         )
                     );
             })
@@ -218,7 +218,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                     .UseWebRoot(Path.Combine(AppContext.BaseDirectory, baseDir))
                     .Configure(app =>
                         app.UseStaticFiles(
-                            new StaticFileOptions { RequestPath = new PathString(baseUrl), }
+                            new StaticFileOptions { RequestPath = new PathString(baseUrl) }
                         )
                     );
             })
@@ -251,7 +251,7 @@ public class StaticFileMiddlewareTests : LoggedTest
             new[] { "/SomeDir", @".", "/soMediR/TestDocument.txt" },
             new[] { "", @"SubFolder", "/ranges.txt" },
             new[] { "/somedir", @"SubFolder", "/somedir/ranges.txt" },
-            new[] { "", @"SubFolder", "/Empty.txt" }
+            new[] { "", @"SubFolder", "/Empty.txt" },
         };
 
     [Fact]

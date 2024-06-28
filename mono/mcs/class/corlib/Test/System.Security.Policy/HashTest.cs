@@ -3115,7 +3115,7 @@ namespace MonoTests.System.Security.Policy
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         private Assembly wellKnownAssembly;

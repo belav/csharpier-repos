@@ -304,7 +304,7 @@ internal static class MsQuicConfiguration
                     {
                         Asn1Blob = ptr,
                         Asn1BlobLength = (uint)certificateData.Length,
-                        PrivateKeyPassword = (sbyte*)IntPtr.Zero
+                        PrivateKeyPassword = (sbyte*)IntPtr.Zero,
                     };
                     config.CertificatePkcs12 = &pkcs12Certificate;
                     status = MsQuicApi.Api.ConfigurationLoadCredential(

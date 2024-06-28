@@ -197,7 +197,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     _allocatedILMarkers[marker] = new ILMarker()
                     {
                         BlockOffset = (int)current.RegularInstructionsLength,
-                        AbsoluteOffset = -1
+                        AbsoluteOffset = -1,
                     };
                 }
             }
@@ -967,7 +967,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         _allocatedILMarkers[i] = new ILMarker()
                         {
                             BlockOffset = blockOffset,
-                            AbsoluteOffset = absoluteOffset
+                            AbsoluteOffset = absoluteOffset,
                         };
                     }
                 }
@@ -1326,7 +1326,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 new ILMarker()
                 {
                     BlockOffset = (int)curBlock.RegularInstructionsLength,
-                    AbsoluteOffset = -1
+                    AbsoluteOffset = -1,
                 }
             );
 

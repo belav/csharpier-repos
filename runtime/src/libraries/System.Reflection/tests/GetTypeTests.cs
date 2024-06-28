@@ -113,47 +113,47 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 "System.Reflection.Tests.MyNameSPACe1.MyNAMEspace99.MyClASs3+inNer",
-                null
+                null,
             };
             yield return new object[]
             {
                 "System.Reflection.Tests.MyNameSPACe1.MyNAMEspace2.MyClASs399+inNer",
-                null
+                null,
             };
             yield return new object[]
             {
                 "System.Reflection.Tests.MyNameSPACe1.MyNAMEspace2.MyClASs3+inNer99",
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(MyNamespace1.MyNamespace2.MyClass2).FullName,
-                typeof(MyNamespace1.MyNamespace2.MyClass2)
+                typeof(MyNamespace1.MyNamespace2.MyClass2),
             };
             yield return new object[]
             {
                 typeof(MyNamespace1.MyNamespace2.MyClass3.iNner).FullName,
-                typeof(MyNamespace1.MyNamespace2.MyClass3.iNner)
+                typeof(MyNamespace1.MyNamespace2.MyClass3.iNner),
             };
             yield return new object[]
             {
                 "System.Reflection.Tests.MyNameSPACe1.MyNAMEspace2.MyClASs3+inNer",
-                typeof(MyNamespace1.MyNamespace2.MyClass3.iNner)
+                typeof(MyNamespace1.MyNamespace2.MyClass3.iNner),
             };
             yield return new object[]
             {
                 typeof(MyNamespace1.MyNamespace3.Foo).FullName,
-                typeof(MyNamespace1.MyNamespace3.Foo)
+                typeof(MyNamespace1.MyNamespace3.Foo),
             };
             yield return new object[]
             {
                 "System.Reflection.Tests.mynamespace1.mynamespace3.foo",
-                typeof(MyNamespace1.MyNamespace3.Foo)
+                typeof(MyNamespace1.MyNamespace3.Foo),
             };
             yield return new object[]
             {
                 "System.Reflection.Tests.MYNAMESPACE1.MYNAMESPACE3.FOO",
-                typeof(MyNamespace1.MyNamespace3.Foo)
+                typeof(MyNamespace1.MyNamespace3.Foo),
             };
 
             Type type = typeof(MyNamespace1.MynAmespace3.Goo<int>);

@@ -45,7 +45,7 @@ public class BrowserTestBase : LoggedTest, IAsyncLifetime
             PlatformID.Win32NT => "win",
             PlatformID.Unix => "linux",
             PlatformID.MacOSX => "osx",
-            _ => null
+            _ => null,
         };
 
         var builder = new ConfigurationBuilder()

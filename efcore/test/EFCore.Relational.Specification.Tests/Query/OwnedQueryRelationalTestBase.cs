@@ -48,7 +48,7 @@ public abstract class OwnedQueryRelationalTestBase<TFixture> : OwnedQueryTestBas
                     {
                         p.Orders,
                         p.PersonAddress,
-                        p.PersonAddress.Country.Planet
+                        p.PersonAddress.Country.Planet,
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>

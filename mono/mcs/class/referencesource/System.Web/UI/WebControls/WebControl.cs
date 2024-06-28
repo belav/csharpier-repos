@@ -22,7 +22,7 @@ namespace System.Web.UI.WebControls
     ///       methods, properties and events common to all controls within the
     ///       System.Web.UI.WebControls namespace.</para>
     /// </devdoc>
-    [ParseChildren(true), PersistChildren(false), Themeable(true),]
+    [ParseChildren(true), PersistChildren(false), Themeable(true)]
     public class WebControl : Control, IAttributeAccessor
     {
         private static string _disabledCssClass = "aspNetDisabled";

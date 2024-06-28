@@ -212,7 +212,7 @@ public class ReplaceConditionalWithStatementsTests
                 {
                     a = 1L;
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -239,7 +239,7 @@ public class ReplaceConditionalWithStatementsTests
                 {
                     a = 1L;
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -354,7 +354,7 @@ public class ReplaceConditionalWithStatementsTests
                     {
                     }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -519,7 +519,7 @@ public class ReplaceConditionalWithStatementsTests
                 {
                     a = 1L;
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -546,7 +546,7 @@ public class ReplaceConditionalWithStatementsTests
                 {
                     a = 1L;
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -573,7 +573,7 @@ public class ReplaceConditionalWithStatementsTests
                 {
                     a = 1L;
                 }
-                """
+                """,
         }.RunAsync();
     }
 

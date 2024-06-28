@@ -539,7 +539,7 @@ namespace System.Globalization
             HS.END,
             HS._err,
             HS._err,
-            HS._err
+            HS._err,
         };
 
         // Count of valid HebrewToken, column count in the NumberPassingState array

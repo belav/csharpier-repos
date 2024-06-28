@@ -20,7 +20,7 @@ public enum NodeFlags
     DocumentRoot = 64,
     AttributeTextNode = 128,
     MixedContent = 256,
-    Indent = 512
+    Indent = 512,
 }
 
 public abstract class CXmlBase

@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Reference matches definition except for version (reference version is lower or higher than definition version).
             /// </summary>
-            EquivalentIgnoringVersion = 2
+            EquivalentIgnoringVersion = 2,
         }
 
         /// <summary>

@@ -148,7 +148,7 @@ namespace System.Xml
             DefaultXmlns,
             PrefixedXmlns,
             XmlSpace,
-            XmlLang
+            XmlLang,
         }
 
         private sealed partial class AttributeValueCache

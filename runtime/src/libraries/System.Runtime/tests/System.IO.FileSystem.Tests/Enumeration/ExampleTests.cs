@@ -27,7 +27,7 @@ namespace System.IO.Tests.Enumeration
                 (ref FileSystemEntry entry) => entry.FileName.ToString()
             )
             {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
+                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
             };
 
             FSAssert.EqualWhenOrdered(new string[] { "one", "two" }, fileNames);
@@ -55,7 +55,7 @@ namespace System.IO.Tests.Enumeration
                             return true;
                     }
                     return false;
-                }
+                },
             };
         }
 
@@ -92,7 +92,7 @@ namespace System.IO.Tests.Enumeration
                     new EnumerationOptions() { RecurseSubdirectories = recursive }
                 )
                 {
-                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
+                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
                 }
             ).Count();
         }
@@ -122,7 +122,7 @@ namespace System.IO.Tests.Enumeration
                     new EnumerationOptions() { RecurseSubdirectories = recursive }
                 )
                 {
-                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
+                    ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
                 }
             ).Sum();
         }

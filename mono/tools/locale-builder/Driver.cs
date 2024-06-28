@@ -669,7 +669,7 @@ namespace Mono.Tools.LocaleBuilder
                 "smn",
                 "dsb",
                 "tt",
-                "tt_RU"
+                "tt_RU",
             };
 
             var lcdids = GetXmlDocument("lcids.xml");
@@ -911,7 +911,7 @@ namespace Mono.Tools.LocaleBuilder
                         NativeName = ci.NativeTerritoryName,
                         Name = ci.Territory,
                         TwoLetterISORegionName = ci.Territory,
-                        CurrencyNativeName = ci.NativeCurrencyName
+                        CurrencyNativeName = ci.NativeCurrencyName,
                     };
 
                     var tc = supplemental.SelectSingleNode(
@@ -1953,7 +1953,7 @@ namespace Mono.Tools.LocaleBuilder
             "wed",
             "thu",
             "fri",
-            "sat"
+            "sat",
         };
 
         static void AddOrReplaceDayValue(IList<string> list, string dayType, string value)

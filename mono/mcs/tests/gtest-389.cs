@@ -4,7 +4,7 @@ enum MyEnum : byte
 {
     A = 1,
     B = 2,
-    Z = 255
+    Z = 255,
 }
 
 class C

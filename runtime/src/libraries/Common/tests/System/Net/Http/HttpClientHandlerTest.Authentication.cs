@@ -74,7 +74,7 @@ namespace System.Net.Http.Functional.Tests
                 yield return new object[]
                 {
                     "Basic realm=\"testrealm1\" basic realm=\"testrealm1\"",
-                    true
+                    true,
                 };
                 yield return new object[] { "Basic something digest something", true };
             }
@@ -82,13 +82,13 @@ namespace System.Net.Http.Functional.Tests
             {
                 "Digest realm=\"api@example.org\", qop=\"auth\", algorithm=MD5-sess, nonce=\"5TsQWLVdgBdmrQ0XsxbDODV+57QdFR34I9HAbC/RVvkK\", "
                     + "opaque=\"HRPCssKJSGjCrkzDg8OhwpzCiGPChXYjwrI2QmXDnsOS\", charset=UTF-8, userhash=true",
-                true
+                true,
             };
             yield return new object[]
             {
                 "dIgEsT realm=\"api@example.org\", qop=\"auth\", algorithm=MD5-sess, nonce=\"5TsQWLVdgBdmrQ0XsxbDODV+57QdFR34I9HAbC/RVvkK\", "
                     + "opaque=\"HRPCssKJSGjCrkzDg8OhwpzCiGPChXYjwrI2QmXDnsOS\", charset=UTF-8, userhash=true",
-                true
+                true,
             };
 
             // These cases fail on WinHttpHandler because of a behavior in WinHttp that causes requests to be duplicated
@@ -100,7 +100,7 @@ namespace System.Net.Http.Functional.Tests
                 yield return new object[]
                 {
                     "Digest realm=\"testrealm\", nonce=\"testnonce\", algorithm=\"myown\"",
-                    false
+                    false,
                 };
             }
 
@@ -112,14 +112,14 @@ namespace System.Net.Http.Functional.Tests
                 yield return new object[]
                 {
                     "Digest realm=withoutquotes, nonce=withoutquotes",
-                    false
+                    false,
                 };
             }
             yield return new object[] { "Digest realm=\"testrealm\" nonce=\"testnonce\"", false };
             yield return new object[]
             {
                 "Digest realm=\"testrealm1\", nonce=\"testnonce1\" Digest realm=\"testrealm2\", nonce=\"testnonce2\"",
-                false
+                false,
             };
 
             // These tests check that the algorithm parameter is treated in case insensitive way.
@@ -127,7 +127,7 @@ namespace System.Net.Http.Functional.Tests
             yield return new object[]
             {
                 $"Digest realm=\"testrealm\", algorithm=md5-Sess, nonce=\"testnonce\", qop=\"auth\"",
-                true
+                true,
             };
             if (!IsWinHttpHandler)
             {
@@ -135,12 +135,12 @@ namespace System.Net.Http.Functional.Tests
                 yield return new object[]
                 {
                     $"Digest realm=\"testrealm\", algorithm=sha-256, nonce=\"testnonce\"",
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     $"Digest realm=\"testrealm\", algorithm=sha-256-SESS, nonce=\"testnonce\", qop=\"auth\"",
-                    true
+                    true,
                 };
             }
 
@@ -150,17 +150,17 @@ namespace System.Net.Http.Functional.Tests
                 yield return new object[]
                 {
                     "Digest realm=\"testrealm\",nonce=\"6afd170437eb5144258b308f7c491d96\",opaque=\"\",stale=FALSE,algorithm=MD5,qop=\"auth\"",
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     "Digest realm=\"testrealm\", domain=\"\", nonce=\"NA42+vpOFQd1GwCyVRZuhhy+jDn4BMRl\", algorithm=MD5, qop=\"auth\", stale=false",
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     "Digest realm=\"\", nonce=\"NA42+vpOFQd1GwCyVRZuhhy+jDn4BMRl\", algorithm=MD5, qop=\"auth\", stale=false",
-                    true
+                    true,
                 };
             }
         }
@@ -181,7 +181,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 Domain = Domain,
                 Username = Username,
-                Password = Password
+                Password = Password,
             };
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
@@ -257,7 +257,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 Domain = Domain,
                 Username = Username,
-                Password = Password
+                Password = Password,
             };
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
@@ -301,7 +301,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 Domain = Domain,
                 Username = Username,
-                Password = Password
+                Password = Password,
             };
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
@@ -342,7 +342,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 Domain = Domain,
                 Username = Username,
-                Password = Password
+                Password = Password,
             };
             await LoopbackServer.CreateServerAsync(
                 async (server, url) =>
@@ -377,18 +377,18 @@ namespace System.Net.Http.Functional.Tests
             yield return new object[]
             {
                 $"Digest realm=\"testrealm\", nonce=\"{Convert.ToBase64String(Encoding.UTF8.GetBytes($"{DateTimeOffset.UtcNow}:XMh;z+$5|`i6Hx}}\", qop=auth-int, algorithm=MD5"))}\"",
-                true
+                true,
             };
             yield return new object[]
             {
                 $"Digest realm=\"testrealm\", nonce=\"{Convert.ToBase64String(Encoding.UTF8.GetBytes($"{DateTimeOffset.UtcNow}:XMh;z+$5|`i6Hx}}\", qop=auth-int, algorithm=md5"))}\"",
-                true
+                true,
             };
             yield return new object[]
             {
                 $"Basic realm=\"testrealm\", "
                     + $"Digest realm=\"testrealm\", nonce=\"{Convert.ToBase64String(Encoding.UTF8.GetBytes($"{DateTimeOffset.UtcNow}:XMh;z+$5|`i6Hx}}"))}\", algorithm=MD5",
-                true
+                true,
             };
 
             yield return new object[] { "Basic something, Digest something", false };
@@ -396,7 +396,7 @@ namespace System.Net.Http.Functional.Tests
             {
                 $"Digest realm=\"testrealm\", nonce=\"testnonce\", algorithm=MD5 "
                     + $"Basic realm=\"testrealm\"",
-                false
+                false,
             };
         }
 
@@ -827,7 +827,7 @@ namespace System.Net.Http.Functional.Tests
 
             var options = new LoopbackProxyServer.Options
             {
-                AuthenticationSchemes = AuthenticationSchemes.Negotiate
+                AuthenticationSchemes = AuthenticationSchemes.Negotiate,
             };
             using (LoopbackProxyServer proxyServer = LoopbackProxyServer.Create(options))
             {
@@ -839,7 +839,7 @@ namespace System.Net.Http.Functional.Tests
                     _output.WriteLine(proxyServer.Uri.AbsoluteUri.ToString());
                     handler.Proxy = new WebProxy("localhost", proxyServer.Uri.Port)
                     {
-                        Credentials = DomainCredential
+                        Credentials = DomainCredential,
                     };
 
                     using (HttpResponseMessage response = await client.GetAsync(server))
@@ -965,7 +965,7 @@ namespace System.Net.Http.Functional.Tests
                 {
                     var responseHeader = new HttpHeaderData[]
                     {
-                        new HttpHeaderData("Www-authenticate", authScheme)
+                        new HttpHeaderData("Www-authenticate", authScheme),
                     };
                     HttpRequestData requestData = await server.HandleRequestAsync(
                         HttpStatusCode.Unauthorized,
@@ -1004,7 +1004,7 @@ namespace System.Net.Http.Functional.Tests
                 {
                     var responseHeader = new HttpHeaderData[]
                     {
-                        new HttpHeaderData("WWW-Authenticate", "NTLM")
+                        new HttpHeaderData("WWW-Authenticate", "NTLM"),
                     };
                     HttpRequestData requestData = await server.HandleRequestAsync(
                         HttpStatusCode.Unauthorized,
@@ -1027,7 +1027,7 @@ namespace System.Net.Http.Functional.Tests
                             "WWW-Authenticate",
                             "NTLM TlRMTVNTUAACAAAAHAAcADAAAACV/wIAUwCrhitz1vsAAAAAAAAAAAAAAAAAAAAASgAuAEUATQBDAEwASQBFAE4AVAAuAEMATwBNAA=="
                         ),
-                        new HttpHeaderData("Connection", "keep-alive")
+                        new HttpHeaderData("Connection", "keep-alive"),
                     };
                     await connection.SendResponseAsync(HttpStatusCode.Unauthorized, responseHeader);
                     connection.CompleteRequestProcessing();

@@ -359,7 +359,7 @@ public class ComplexTypeModelBinderTest
 
         var testableBinder = new Mock<TestableComplexTypeModelBinder>(allowValidatingTopLevelNodes)
         {
-            CallBase = true
+            CallBase = true,
         };
         testableBinder.Setup(o => o.CreateModelPublic(bindingContext)).Returns(model).Verifiable();
         testableBinder
@@ -583,7 +583,7 @@ public class ComplexTypeModelBinderTest
         // Arrange
         var bindingContext = new DefaultModelBindingContext
         {
-            ModelMetadata = GetMetadataForType(typeof(Person))
+            ModelMetadata = GetMetadataForType(typeof(Person)),
         };
 
         var binder = CreateBinder(bindingContext.ModelMetadata);
@@ -602,7 +602,7 @@ public class ComplexTypeModelBinderTest
         var bindingContext = new DefaultModelBindingContext
         {
             ModelMetadata = GetMetadataForType(typeof(PointStruct)),
-            IsTopLevelObject = true
+            IsTopLevelObject = true,
         };
         var binder = CreateBinder(bindingContext.ModelMetadata);
 
@@ -630,7 +630,7 @@ public class ComplexTypeModelBinderTest
             + $"'{typeof(ClassWithNoParameterlessConstructor)}'. Model bound complex types must not be abstract "
             + "or value types and must have a parameterless constructor.";
         var metadata = GetMetadataForType(typeof(ClassWithNoParameterlessConstructor));
-        var bindingContext = new DefaultModelBindingContext { ModelMetadata = metadata, };
+        var bindingContext = new DefaultModelBindingContext { ModelMetadata = metadata };
         var binder = CreateBinder(metadata);
 
         // Act & Assert
@@ -648,7 +648,7 @@ public class ComplexTypeModelBinderTest
         {
             ModelMetadata = GetMetadataForProperty(typeof(Location), nameof(Location.Point)),
             ModelName = nameof(Location.Point),
-            IsTopLevelObject = false
+            IsTopLevelObject = false,
         };
         var binder = CreateBinder(bindingContext.ModelMetadata);
 
@@ -778,7 +778,7 @@ public class ComplexTypeModelBinderTest
         var metadata = GetMetadataForProperty(typeof(PersonWithBindExclusion), property);
         var bindingContext = new DefaultModelBindingContext()
         {
-            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
+            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext() },
             ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion)),
         };
 
@@ -830,7 +830,7 @@ public class ComplexTypeModelBinderTest
         var metadata = GetMetadataForProperty(typeof(ModelWithMixedBindingBehaviors), property);
         var bindingContext = new DefaultModelBindingContext()
         {
-            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), },
+            ActionContext = new ActionContext() { HttpContext = new DefaultHttpContext() },
             ModelMetadata = GetMetadataForType(typeof(ModelWithMixedBindingBehaviors)),
         };
 
@@ -1689,7 +1689,7 @@ public class ComplexTypeModelBinderTest
         public int[] SettableArray { get; set; } = new int[] { 0, 1 };
 
         public IDictionary<int, string> SettableDictionary { get; set; } =
-            new Dictionary<int, string> { { 0, "zero" }, { 25, "twenty-five" }, };
+            new Dictionary<int, string> { { 0, "zero" }, { 25, "twenty-five" } };
 
         public IList<int> SettableList { get; set; } = new List<int> { 3, 9, 0 };
     }

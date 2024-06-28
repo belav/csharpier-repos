@@ -84,7 +84,7 @@ namespace System.CommandLine
                 "ios" => TargetOS.iOS,
                 "tvossimulator" => TargetOS.tvOSSimulator,
                 "tvos" => TargetOS.tvOS,
-                _ => throw new CommandLineException($"Target OS '{token}' is not supported")
+                _ => throw new CommandLineException($"Target OS '{token}' is not supported"),
             };
         }
 
@@ -99,7 +99,7 @@ namespace System.CommandLine
                     Architecture.Arm => TargetArchitecture.ARM,
                     Architecture.Arm64 => TargetArchitecture.ARM64,
                     Architecture.LoongArch64 => TargetArchitecture.LoongArch64,
-                    _ => throw new NotImplementedException()
+                    _ => throw new NotImplementedException(),
                 };
             }
             else
@@ -111,10 +111,9 @@ namespace System.CommandLine
                     "arm" or "armel" => TargetArchitecture.ARM,
                     "arm64" => TargetArchitecture.ARM64,
                     "loongarch64" => TargetArchitecture.LoongArch64,
-                    _ =>
-                        throw new CommandLineException(
-                            $"Target architecture '{token}' is not supported"
-                        )
+                    _ => throw new CommandLineException(
+                        $"Target architecture '{token}' is not supported"
+                    ),
                 };
             }
         }

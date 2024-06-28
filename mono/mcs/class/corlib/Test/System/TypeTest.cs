@@ -53,7 +53,7 @@ namespace MonoTests.System
     {
         A,
         B,
-        C
+        C,
     };
 
     class GenericEnum<T>
@@ -61,7 +61,7 @@ namespace MonoTests.System
         public enum TheEnum
         {
             A,
-            B
+            B,
         };
     }
 
@@ -3955,7 +3955,7 @@ namespace MonoTests.System
                 Tuple.Create<MemberTypes, Type>(MemberTypes.Method, typeof(MethodInfo[])),
                 Tuple.Create<MemberTypes, Type>(MemberTypes.NestedType, typeof(Type[])),
                 Tuple.Create<MemberTypes, Type>(MemberTypes.Property, typeof(PropertyInfo[])),
-                Tuple.Create<MemberTypes, Type>(MemberTypes.TypeInfo, typeof(Type[]))
+                Tuple.Create<MemberTypes, Type>(MemberTypes.TypeInfo, typeof(Type[])),
             };
 
             for (int i = 0; i < flagsandtypes.Length; i++)
@@ -4011,7 +4011,11 @@ namespace MonoTests.System
                     typeof(Type[]),
                     "Ne*"
                 ),
-                Tuple.Create<MemberTypes, Type, string>(MemberTypes.TypeInfo, typeof(Type[]), "Ne*")
+                Tuple.Create<MemberTypes, Type, string>(
+                    MemberTypes.TypeInfo,
+                    typeof(Type[]),
+                    "Ne*"
+                ),
             };
 
             for (int i = 0; i < flagsandtypes.Length; i++)
@@ -4503,21 +4507,21 @@ namespace MonoTests.System
         {
             A,
             B,
-            C
+            C,
         }
 
         public enum MyRealEnum2 : byte
         {
             A,
             B,
-            C
+            C,
         }
 
         public enum MyRealEnum3 : short
         {
             A,
             B,
-            C
+            C,
         }
 
         public class MyEnum : TypeDelegator
@@ -4602,7 +4606,7 @@ namespace MonoTests.System
             D = -1,
             C = 2,
             B = 1,
-            A = 0
+            A = 0,
         }
 
         [Test]
@@ -5914,7 +5918,7 @@ namespace MonoTests.System
                     "Bug59738Class`1",
                     $"MonoTests.System.TypeTest+Bug59738Class`1[[System.Int32, {typeof(int).Assembly.FullName}]]",
                     "MonoTests.System.TypeTest+Bug59738Class`1[System.Int32]"
-                )
+                ),
             };
 
             for (var i = 0; i < expected.Length; i++)

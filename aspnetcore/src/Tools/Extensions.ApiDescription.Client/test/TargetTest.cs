@@ -67,9 +67,7 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(
-                new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", }
-            );
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -191,9 +189,7 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(
-                new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", }
-            );
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -216,9 +212,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiGenerateCodeOptions", "--an-option")
-            .WithItem(
-                new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", }
-            );
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -241,9 +235,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiCodeDirectory", "generated")
-            .WithItem(
-                new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", }
-            );
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -269,7 +261,7 @@ public class TargetTest : IDisposable
                 new TemporaryOpenApiProject.ItemSpec
                 {
                     Include = "files/azureMonitor.json",
-                    ClassName = "AzureMonitor"
+                    ClassName = "AzureMonitor",
                 }
             );
         _temporaryDirectory.WithCSharpProject(project);
@@ -299,7 +291,7 @@ public class TargetTest : IDisposable
                 new TemporaryOpenApiProject.ItemSpec
                 {
                     Include = "files/azureMonitor.json",
-                    CodeGenerator = "NSwagTypeScript"
+                    CodeGenerator = "NSwagTypeScript",
                 }
             );
         _temporaryDirectory.WithCSharpProject(project);
@@ -327,7 +319,7 @@ public class TargetTest : IDisposable
                 new TemporaryOpenApiProject.ItemSpec
                 {
                     Include = "files/azureMonitor.json",
-                    Namespace = "SomeNamespace"
+                    Namespace = "SomeNamespace",
                 }
             );
         _temporaryDirectory.WithCSharpProject(project);
@@ -355,7 +347,7 @@ public class TargetTest : IDisposable
                 new TemporaryOpenApiProject.ItemSpec
                 {
                     Include = "files/azureMonitor.json",
-                    Options = "--an-option"
+                    Options = "--an-option",
                 }
             );
         _temporaryDirectory.WithCSharpProject(project);
@@ -383,7 +375,7 @@ public class TargetTest : IDisposable
                 new TemporaryOpenApiProject.ItemSpec
                 {
                     Include = "files/azureMonitor.json",
-                    OutputPath = "Custom.cs"
+                    OutputPath = "Custom.cs",
                 }
             );
         _temporaryDirectory.WithCSharpProject(project);
@@ -450,12 +442,12 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", })
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" })
             .WithItem(
                 new TemporaryOpenApiProject.ItemSpec
                 {
                     Include = "files/azureMonitor.json",
-                    CodeGenerator = "NSwagTypeScript"
+                    CodeGenerator = "NSwagTypeScript",
                 }
             );
         _temporaryDirectory.WithCSharpProject(project);
@@ -488,9 +480,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiGenerateCodeOnBuild", "false")
-            .WithItem(
-                new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", }
-            );
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -524,9 +514,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiGenerateCodeOnBuild", "false")
-            .WithItem(
-                new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json", }
-            );
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 

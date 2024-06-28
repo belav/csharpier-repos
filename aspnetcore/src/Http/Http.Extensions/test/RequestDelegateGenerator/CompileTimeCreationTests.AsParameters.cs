@@ -56,31 +56,31 @@ app.MapGet("/", TestAction);
                 {
                     "BadArgumentListRecord",
                     DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly.Id,
-                    GetMultipleContructorsError(typeof(BadArgumentListRecord))
+                    GetMultipleContructorsError(typeof(BadArgumentListRecord)),
                 },
                 new object[]
                 {
                     "BadArgumentListClass",
                     DiagnosticDescriptors.InvalidAsParametersSignature.Id,
-                    GetInvalidConstructorError(typeof(BadArgumentListClass))
+                    GetInvalidConstructorError(typeof(BadArgumentListClass)),
                 },
                 new object[]
                 {
                     "BadArgumentListClassMultipleCtors",
                     DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly.Id,
-                    GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors))
+                    GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors)),
                 },
                 new object[]
                 {
                     "BadAbstractArgumentListClass",
                     DiagnosticDescriptors.InvalidAsParametersAbstractType.Id,
-                    GetAbstractTypeError(typeof(BadAbstractArgumentListClass))
+                    GetAbstractTypeError(typeof(BadAbstractArgumentListClass)),
                 },
                 new object[]
                 {
                     "BadNoPublicConstructorArgumentListClass",
                     DiagnosticDescriptors.InvalidAsParametersNoConstructorFound.Id,
-                    GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass))
+                    GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass)),
                 },
             };
         }

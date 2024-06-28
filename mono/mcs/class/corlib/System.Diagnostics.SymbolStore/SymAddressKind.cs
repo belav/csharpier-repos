@@ -47,6 +47,6 @@ namespace System.Diagnostics.SymbolStore
         NativeRegisterStack = 7,
         NativeStackRegister = 8,
         BitField = 9,
-        NativeSectionOffset = 10
+        NativeSectionOffset = 10,
     }
 }

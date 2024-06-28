@@ -32,7 +32,7 @@ public class HeaderCollectionBenchmark
         ContentLengthString,
         Plaintext,
         Common,
-        Unknown
+        Unknown,
     }
 
     [Params(

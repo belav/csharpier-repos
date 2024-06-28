@@ -28,7 +28,7 @@ public class NullSubstitute : IntegrationTest<NullSubstitute.DatabaseInitializer
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer { FirstName = "Bob", LastName = "Smith", });
+            context.Customers.Add(new Customer { FirstName = "Bob", LastName = "Smith" });
 
             base.Seed(context);
         }

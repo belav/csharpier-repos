@@ -35,7 +35,7 @@ namespace System.Activities.Core.Presentation
                 new EditorOptionAttribute
                 {
                     Name = TypeCollectionPropertyEditor.AllowDuplicate,
-                    Value = true
+                    Value = true,
                 }
             );
             builder.AddCustomAttributes(
@@ -50,7 +50,7 @@ namespace System.Activities.Core.Presentation
                 new EditorOptionAttribute
                 {
                     Name = TypePropertyEditor.BrowseTypeDirectly,
-                    Value = false
+                    Value = false,
                 }
             );
             builder.AddCustomAttributes(

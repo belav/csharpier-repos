@@ -39,7 +39,7 @@ namespace System.Net.Security.Tests
                     Configuration.Certificates.GetServerCertificate(),
                     null,
                     false
-                )
+                ),
             };
 
             SslClientAuthenticationOptions clientOptions = new SslClientAuthenticationOptions

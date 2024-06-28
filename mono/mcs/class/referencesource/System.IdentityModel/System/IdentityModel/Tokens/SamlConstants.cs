@@ -64,7 +64,7 @@ namespace System.IdentityModel.Tokens
             "yyyy-MM-ddTHH:mm:ss.fffzzz",
             "yyyy-MM-ddTHH:mm:ss.ffzzz",
             "yyyy-MM-ddTHH:mm:ss.fzzz",
-            "yyyy-MM-ddTHH:mm:sszzz"
+            "yyyy-MM-ddTHH:mm:sszzz",
         };
         internal const string AssertionIdPrefix = "SamlSecurityToken-";
         internal const string GeneratedDateTimeFormat = "yyyy-MM-ddTHH:mm:ss.fffZ";

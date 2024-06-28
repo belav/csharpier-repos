@@ -724,7 +724,7 @@ namespace Microsoft.Extensions.Primitives
 
         // candidate
         public static TheoryData<StringSegment> DefaultStringSegmentEqualsStringSegmentData =>
-            new() { { default(StringSegment) }, { new StringSegment() }, };
+            new() { { default(StringSegment) }, { new StringSegment() } };
 
         [Theory]
         [MemberData(nameof(DefaultStringSegmentEqualsStringSegmentData))]
@@ -765,7 +765,7 @@ namespace Microsoft.Extensions.Primitives
 
         // candidate
         public static TheoryData<string> DefaultStringSegmentDoesNotEqualStringData =>
-            new() { { string.Empty }, { "Hello, World!" }, };
+            new() { { string.Empty }, { "Hello, World!" } };
 
         [Theory]
         [MemberData(nameof(DefaultStringSegmentDoesNotEqualStringData))]

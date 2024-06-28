@@ -333,7 +333,7 @@ namespace System.Data
                     {
                         keyValues = new EntityKeyMember[]
                         {
-                            new EntityKeyMember(_keyNames[0], _singletonKeyValue)
+                            new EntityKeyMember(_keyNames[0], _singletonKeyValue),
                         };
                     }
                     else
@@ -846,7 +846,7 @@ namespace System.Data
                 {
                     DbExpressionBuilder
                         .Constant(Helper.GetModelTypeUsage(singletonKeyMember), _singletonKeyValue)
-                        .As(singletonKeyMember.Name)
+                        .As(singletonKeyMember.Name),
                 };
             }
             else

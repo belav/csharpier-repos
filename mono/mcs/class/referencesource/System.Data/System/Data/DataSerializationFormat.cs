@@ -11,6 +11,6 @@ namespace System.Data
     public enum SerializationFormat
     {
         Xml = 0,
-        Binary = 1
+        Binary = 1,
     }
 }

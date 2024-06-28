@@ -317,8 +317,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     double.Pi,
                     double.NegativeInfinity,
                     double.PositiveInfinity,
-                    double.NaN
-                }
+                    double.NaN,
+                },
             };
             yield return new object[] { new double[] { } };
             yield return new object[] { null };
@@ -345,12 +345,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 new string[]
                 {
                     "\u0050\u0159\u00ed\u006c\u0069\u0161",
-                    "\u017e\u006c\u0075\u0165\u006f\u0075\u010d\u006b\u00fd"
-                }
+                    "\u017e\u006c\u0075\u0165\u006f\u0075\u010d\u006b\u00fd",
+                },
             };
             yield return new object[]
             {
-                new string[] { string.Intern("hello"), string.Empty, null }
+                new string[] { string.Intern("hello"), string.Empty, null },
             };
             yield return new object[] { new string[] { } };
             yield return new object[] { null };
@@ -385,8 +385,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     1.1d,
                     new DateTime(2022, 5, 8, 14, 55, 01, DateTimeKind.Utc),
                     false,
-                    true
-                }
+                    true,
+                },
             };
             yield return new object[]
             {
@@ -395,8 +395,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     new double?(1.1d),
                     new DateTime?(new DateTime(2022, 5, 8, 14, 55, 01, DateTimeKind.Utc)),
                     new bool?(false),
-                    new bool?(true)
-                }
+                    new bool?(true),
+                },
             };
             yield return new object[]
             {
@@ -406,8 +406,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     new object(),
                     new SomethingRef(),
                     new SomethingStruct(),
-                    new Exception("test")
-                }
+                    new Exception("test"),
+                },
             };
             yield return new object[] { new object[] { "JSData" } }; // special cased, so we call createData in the test itself
             yield return new object[]
@@ -418,8 +418,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     new int[] { },
                     new double[] { },
                     new string[] { },
-                    new object[] { }
-                }
+                    new object[] { },
+                },
             };
             yield return new object[]
             {
@@ -429,8 +429,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     new int[] { 1, 2, 3 },
                     new double[] { 1, 2, 3 },
                     new string[] { "a", "b", "c" },
-                    new object[] { }
-                }
+                    new object[] { },
+                },
             };
             yield return new object[]
             {
@@ -445,9 +445,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                         new object(),
                         new SomethingRef(),
                         new SomethingStruct(),
-                        new Exception("test")
-                    }
-                }
+                        new Exception("test"),
+                    },
+                },
             };
             yield return new object[] { new object[] { } };
             yield return new object[] { null };
@@ -464,8 +464,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     new object[]
                     {
                         JavaScriptTestHelper.createData("test"),
-                        JavaScriptTestHelper.createException("test")
-                    }
+                        JavaScriptTestHelper.createException("test"),
+                    },
                 };
             }
             var actual = JavaScriptTestHelper.echo1_ObjectArray(expected);
@@ -518,8 +518,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     (int a) =>
                     {
                         return a;
-                    }
-                }
+                    },
+                },
             };
             yield return new object[] { new object[] { (dummyDelegate)dummyDelegateA } };
             yield return new object[] { new object[] { 0L } };
@@ -527,10 +527,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             yield return new object[] { new object[] { (sbyte)0 } };
             yield return new object[] { new object[] { (ushort)0 } };
             yield return new object[] { new object[] { new SomethingStruct[] { } } };
-            yield return new object[] { new object[] { new SomethingRef[] { }, } };
+            yield return new object[] { new object[] { new SomethingRef[] { } } };
             yield return new object[]
             {
-                new object[] { new ArraySegment<byte>(new byte[] { 11 }), }
+                new object[] { new ArraySegment<byte>(new byte[] { 11 }) },
             };
         }
 
@@ -645,7 +645,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     double.MinValue,
                     double.NaN,
                     double.PositiveInfinity,
-                    double.NegativeInfinity
+                    double.NegativeInfinity,
                 };
             Span<double> expected = new Span<double>(expectedBytes, 10);
             Assert.True(Unsafe.AsPointer(ref expected.GetPinnableReference()) == expectedBytes);
@@ -709,7 +709,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 double.MinValue,
                 double.NaN,
                 double.PositiveInfinity,
-                double.NegativeInfinity
+                double.NegativeInfinity,
             };
             ArraySegment<double> expected = new ArraySegment<double>(expectedBytes, 1, 10);
             ArraySegment<double> actual = JavaScriptTestHelper.echo1_ArraySegmentOfDouble(

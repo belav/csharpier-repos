@@ -32,6 +32,6 @@ namespace Mono
     {
         None = 0,
         DisableNativeBackend = 1,
-        DisableAutomaticFallback = 2
+        DisableAutomaticFallback = 2,
     }
 }

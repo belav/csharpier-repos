@@ -58,7 +58,7 @@ namespace Microsoft.Win32
             "HKEY_LOCAL_MACHINE",
             "HKEY_USERS",
             "HKEY_PERFORMANCE_DATA",
-            "HKEY_CURRENT_CONFIG"
+            "HKEY_CURRENT_CONFIG",
         };
 
         // MSDN defines the following limits for registry key names & values:
@@ -1382,11 +1382,9 @@ namespace Microsoft.Win32
                 Win32Error(ret, null);
             }
 
-            return type == Interop.Advapi32.RegistryValues.REG_NONE
-                ? RegistryValueKind.None
-                : !Enum.IsDefined(typeof(RegistryValueKind), type)
-                    ? RegistryValueKind.Unknown
-                    : (RegistryValueKind)type;
+            return type == Interop.Advapi32.RegistryValues.REG_NONE ? RegistryValueKind.None
+                : !Enum.IsDefined(typeof(RegistryValueKind), type) ? RegistryValueKind.Unknown
+                : (RegistryValueKind)type;
         }
 
         public string Name
@@ -1823,12 +1821,11 @@ namespace Microsoft.Win32
         private static void Win32ErrorStatic(int errorCode, string? str) =>
             throw errorCode switch
             {
-                Interop.Errors.ERROR_ACCESS_DENIED =>
-                    str != null
-                        ? new UnauthorizedAccessException(
-                            SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
-                        )
-                        : new UnauthorizedAccessException(),
+                Interop.Errors.ERROR_ACCESS_DENIED => str != null
+                    ? new UnauthorizedAccessException(
+                        SR.Format(SR.UnauthorizedAccess_RegistryKeyGeneric_Key, str)
+                    )
+                    : new UnauthorizedAccessException(),
 
                 _ => new IOException(Interop.Kernel32.GetMessage(errorCode), errorCode),
             };
@@ -1859,7 +1856,7 @@ namespace Microsoft.Win32
             WriteAccess = 0x0004,
 
             /// <summary>Indicates if this key is for HKEY_PERFORMANCE_DATA</summary>
-            PerfData = 0x0008
+            PerfData = 0x0008,
         }
     }
 }

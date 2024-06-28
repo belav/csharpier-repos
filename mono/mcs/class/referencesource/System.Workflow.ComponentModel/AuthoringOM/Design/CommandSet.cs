@@ -31,7 +31,7 @@ namespace System.Workflow.ComponentModel.Design
             WorkflowMenuCommands.ZoomIn,
             WorkflowMenuCommands.ZoomOut,
             WorkflowMenuCommands.Pan,
-            WorkflowMenuCommands.DefaultFilter
+            WorkflowMenuCommands.DefaultFilter,
         };
 
         private IServiceProvider serviceProvider;

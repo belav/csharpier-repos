@@ -241,11 +241,11 @@ namespace System.Text.Json.Serialization.Tests
             MyDecimalArray = new decimal[] { 3.3m };
             MyDateTimeArray = new DateTime[]
             {
-                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc)
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
             };
             MyDateTimeOffsetArray = new DateTimeOffset[]
             {
-                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0))
+                new DateTimeOffset(2019, 1, 30, 12, 1, 2, new TimeSpan(1, 0, 0)),
             };
             MyGuidArray = new Guid[] { new Guid("1B33498A-7B7D-4DDA-9C13-F6AA4AB449A6") };
             MyUriArray = new Uri[] { new Uri("https://github.com/dotnet/runtime") };
@@ -255,7 +255,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 MyInt64 = 64,
                 MyString = "Hello",
-                MyInt32Array = new int[] { 32 }
+                MyInt32Array = new int[] { 32 },
             };
 
             MyInt16TwoDimensionArray = new int[2][];
@@ -304,7 +304,7 @@ namespace System.Text.Json.Serialization.Tests
             MyStringToStringGenericIDict = new Dictionary<string, string> { { "key", "value" } };
             MyStringToStringGenericIReadOnlyDict = new Dictionary<string, string>
             {
-                { "key", "value" }
+                { "key", "value" },
             };
 
             MyStringToStringImmutableDict = ImmutableDictionary.CreateRange(

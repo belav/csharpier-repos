@@ -37,6 +37,6 @@ namespace System.Security.Cryptography.Pkcs
     {
         Unknown,
         EphemeralKey,
-        StaticKey
+        StaticKey,
     }
 }

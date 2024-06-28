@@ -79,7 +79,7 @@ namespace System.Web.UI
             VaryByCustom = 0x0010,
             VaryByHeader = 0x0020,
             VaryByControl = 0x0040,
-            VaryByContentEncodings = 0x0080
+            VaryByContentEncodings = 0x0080,
         }
 
         string inputFile;

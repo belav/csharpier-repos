@@ -475,7 +475,7 @@ namespace System.Speech.Internal.Synthesis
         {
             First,
             Middle,
-            Last
+            Last,
         };
 
         private WAVEFORMATEX _inWavFormat;
@@ -509,7 +509,7 @@ namespace System.Speech.Internal.Synthesis
             23,
             29,
             31,
-            37
+            37,
         };
 
         #endregion

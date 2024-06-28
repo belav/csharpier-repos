@@ -199,7 +199,7 @@ public class Startup
         "REMOTE_PORT",
         "REMOTE_USER",
         "REQUEST_METHOD",
-        "WEBSOCKET_VERSION"
+        "WEBSOCKET_VERSION",
     };
 
     public static Task Main(string[] args)

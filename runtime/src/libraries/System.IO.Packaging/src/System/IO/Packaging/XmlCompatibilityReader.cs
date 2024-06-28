@@ -1900,7 +1900,7 @@ namespace System.IO.Packaging
             "http://www.w3.org/2000/xmlns/",
             "http://www.w3.org/XML/1998/namespace",
             "http://www.w3.org/2001/XMLSchema-instance",
-            MarkupCompatibilityURI
+            MarkupCompatibilityURI,
         };
         #endregion Private Fields
     }

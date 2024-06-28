@@ -204,7 +204,7 @@ public class HtmlHelperPasswordTest
         var attributes = new Dictionary<string, object>
         {
             { "test-key", "test-value" },
-            { "class", "some-class" }
+            { "class", "some-class" },
         };
 
         // Act
@@ -327,7 +327,7 @@ public class HtmlHelperPasswordTest
         var attributes = new Dictionary<string, object>
         {
             { "baz", "BazValue" },
-            { "class", "some-class" }
+            { "class", "some-class" },
         };
 
         // Act
@@ -374,7 +374,7 @@ public class HtmlHelperPasswordTest
                     model => model.Property4.Property6[0],
                     @"<input data-val=""HtmlEncode[[true]]"" id=""HtmlEncode[[pre_Property4_Property6_0_]]"" "
                         + @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[password]]"" value=""HtmlEncode[[attr-value]]"" />"
-                }
+                },
             };
         }
     }
@@ -541,7 +541,7 @@ public class HtmlHelperPasswordTest
                     model => model.Property4.Property6[0],
                     @"<input id=""HtmlEncode[[pre_Property4_Property6_0_]]"" "
                         + @"name=""HtmlEncode[[pre.Property4.Property6[0]]]"" type=""HtmlEncode[[password]]"" />"
-                }
+                },
             };
         }
     }

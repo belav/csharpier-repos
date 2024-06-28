@@ -1408,7 +1408,7 @@ namespace System.Net.Security
                 incomingSecurityBuffers = new SecurityBuffer[]
                 {
                     incomingSecurity,
-                    new SecurityBuffer(null, 0, 0, BufferType.Empty)
+                    new SecurityBuffer(null, 0, 0, BufferType.Empty),
                 };
             }
 
@@ -2943,6 +2943,7 @@ namespace System.Net.Security
             "?", // 0x20000000
             "?", // 0x40000000
             "?" // 0x80000000
+            ,
         };
 
         static readonly string[] OutputContextAttributes =
@@ -2979,6 +2980,7 @@ namespace System.Net.Security
             "?", // 0x20000000
             "?", // 0x40000000
             "?" // 0x80000000
+            ,
         };
 
         /*

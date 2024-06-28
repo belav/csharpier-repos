@@ -20,7 +20,7 @@ namespace System.Runtime.InteropServices.Tests
             "This \0 is \0 a \0 string \0 with \0 nulls",
             "\0string",
             "string\0",
-            "\0\0\0\0\0\0\0\0"
+            "\0\0\0\0\0\0\0\0",
         };
 
         [Fact]

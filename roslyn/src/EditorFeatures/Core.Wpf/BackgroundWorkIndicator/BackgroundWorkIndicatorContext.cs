@@ -259,7 +259,7 @@ internal partial class WpfBackgroundWorkIndicatorFactory
                     _trackingSpan,
                     new[]
                     {
-                        string.Format(EditorFeaturesResources._0_Esc_to_cancel, data.description)
+                        string.Format(EditorFeaturesResources._0_Esc_to_cancel, data.description),
                     }
                 );
             }

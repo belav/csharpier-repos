@@ -35,7 +35,7 @@ public class ExceptionDetailsProviderTest
 
             var data = new TheoryData<string>()
             {
-                Path.Combine(rootPath, "TestFiles/SourceFile.txt")
+                Path.Combine(rootPath, "TestFiles/SourceFile.txt"),
             };
 
             if (!TestPlatformHelper.IsMono)
@@ -151,7 +151,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 4,
                     ExpectedPreErrorCode = GetCodeLines(4, 9),
                     ExpectedErrorCode = GetCodeLines(10, 10),
-                    ExpectedPostErrorCode = GetCodeLines(11, 16)
+                    ExpectedPostErrorCode = GetCodeLines(11, 16),
                 },
                 new ErrorData()
                 {
@@ -161,7 +161,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 4,
                     ExpectedPreErrorCode = GetCodeLines(4, 9),
                     ExpectedErrorCode = GetCodeLines(10, 13),
-                    ExpectedPostErrorCode = GetCodeLines(14, 19)
+                    ExpectedPostErrorCode = GetCodeLines(14, 19),
                 },
                 // PreErrorCode less than source code line count
                 new ErrorData()
@@ -172,7 +172,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = Enumerable.Empty<string>(),
                     ExpectedErrorCode = GetCodeLines(1, 1),
-                    ExpectedPostErrorCode = GetCodeLines(2, 7)
+                    ExpectedPostErrorCode = GetCodeLines(2, 7),
                 },
                 new ErrorData()
                 {
@@ -182,7 +182,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = GetCodeLines(1, 2),
                     ExpectedErrorCode = GetCodeLines(3, 5),
-                    ExpectedPostErrorCode = GetCodeLines(6, 10)
+                    ExpectedPostErrorCode = GetCodeLines(6, 10),
                 },
                 // PostErrorCode less than source code line count
                 new ErrorData()
@@ -193,7 +193,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 4,
                     ExpectedPreErrorCode = GetCodeLines(4, 9),
                     ExpectedErrorCode = GetCodeLines(10, 10),
-                    ExpectedPostErrorCode = Enumerable.Empty<string>()
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
                 },
                 new ErrorData()
                 {
@@ -203,7 +203,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = GetCodeLines(1, 6),
                     ExpectedErrorCode = GetCodeLines(7, 10),
-                    ExpectedPostErrorCode = Enumerable.Empty<string>()
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
                 },
                 new ErrorData()
                 {
@@ -213,7 +213,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = GetCodeLines(1, 4),
                     ExpectedErrorCode = GetCodeLines(5, 8),
-                    ExpectedPostErrorCode = GetCodeLines(9, 10)
+                    ExpectedPostErrorCode = GetCodeLines(9, 10),
                 },
                 // Pre and Post error code less than source code line count
                 new ErrorData()
@@ -224,7 +224,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = GetCodeLines(1, 1),
                     ExpectedErrorCode = GetCodeLines(2, 3),
-                    ExpectedPostErrorCode = GetCodeLines(4, 4)
+                    ExpectedPostErrorCode = GetCodeLines(4, 4),
                 },
                 new ErrorData()
                 {
@@ -234,7 +234,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = Enumerable.Empty<string>(),
                     ExpectedErrorCode = GetCodeLines(1, 4),
-                    ExpectedPostErrorCode = Enumerable.Empty<string>()
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
                 },
                 // change source code line count
                 new ErrorData()
@@ -246,7 +246,7 @@ public class ExceptionDetailsProviderTest
                     ExpectedPreContextLine = 1,
                     ExpectedPreErrorCode = Enumerable.Empty<string>(),
                     ExpectedErrorCode = GetCodeLines(1, 1),
-                    ExpectedPostErrorCode = Enumerable.Empty<string>()
+                    ExpectedPostErrorCode = Enumerable.Empty<string>(),
                 },
             };
         }

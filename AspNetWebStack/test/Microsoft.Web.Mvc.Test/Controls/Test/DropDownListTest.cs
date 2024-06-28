@@ -98,7 +98,7 @@ namespace Microsoft.Web.Mvc.Controls.Test
                 {
                     new { Text = "aaa", Value = "111" },
                     new { Text = "bbb", Value = "222" },
-                    new { Text = "ccc", Value = "333" }
+                    new { Text = "ccc", Value = "333" },
                 },
                 "Value",
                 "Text",

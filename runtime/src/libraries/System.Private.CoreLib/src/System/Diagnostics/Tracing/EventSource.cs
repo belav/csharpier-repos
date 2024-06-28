@@ -1522,7 +1522,7 @@ namespace System.Diagnostics.Tracing
                         {
                             Keywords = (EventKeywords)metadata.Descriptor.Keywords,
                             Level = (EventLevel)metadata.Descriptor.Level,
-                            Opcode = (EventOpcode)metadata.Descriptor.Opcode
+                            Opcode = (EventOpcode)metadata.Descriptor.Opcode,
                         };
 
                         WriteMultiMerge(
@@ -2258,7 +2258,7 @@ namespace System.Diagnostics.Tracing
                             {
                                 Keywords = (EventKeywords)metadata.Descriptor.Keywords,
                                 Level = (EventLevel)metadata.Descriptor.Level,
-                                Opcode = (EventOpcode)metadata.Descriptor.Opcode
+                                Opcode = (EventOpcode)metadata.Descriptor.Opcode,
                             };
 
                             WriteMultiMerge(
@@ -2287,7 +2287,7 @@ namespace System.Diagnostics.Tracing
                             childActivityID
                         )
                         {
-                            Payload = new ReadOnlyCollection<object?>(args)
+                            Payload = new ReadOnlyCollection<object?>(args),
                         };
 
                         DispatchToAllListeners(eventCallbackArgs);
@@ -2496,7 +2496,7 @@ namespace System.Diagnostics.Tracing
                 EventSourceOptions opt = new EventSourceOptions
                 {
                     Keywords = (EventKeywords)unchecked(keywords),
-                    Level = level
+                    Level = level,
                 };
 
                 [UnconditionalSuppressMessage(
@@ -2645,7 +2645,7 @@ namespace System.Diagnostics.Tracing
                 Message = msg,
                 Payload = new ReadOnlyCollection<object?>(new object[] { msg }),
                 PayloadNames = s_errorPayloadNames ??=
-                    new ReadOnlyCollection<string>(new string[] { "message" })
+                    new ReadOnlyCollection<string>(new string[] { "message" }),
             };
 
             for (
@@ -5912,7 +5912,7 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Disable event
         /// </summary>
-        Disable = -3
+        Disable = -3,
     }
 
     #region private classes
@@ -6243,7 +6243,7 @@ namespace System.Diagnostics.Tracing
             {
                 Name = name,
                 Keywords = kwd,
-                Attribs = channelAttribute
+                Attribs = channelAttribute,
             };
         }
 
@@ -6791,7 +6791,7 @@ namespace System.Diagnostics.Tracing
                     EventLevel.Warning => nameof(EventLevel.Warning),
                     EventLevel.Informational => nameof(EventLevel.Informational),
                     EventLevel.Verbose => nameof(EventLevel.Verbose),
-                    _ => ((int)level).ToString()
+                    _ => ((int)level).ToString(),
                 }
             );
         }
@@ -7013,7 +7013,7 @@ namespace System.Diagnostics.Tracing
             "&quot;",
             "%r",
             "%n",
-            "%t"
+            "%t",
         };
 
         // Manifest messages use %N conventions for their message substitutions.   Translate from

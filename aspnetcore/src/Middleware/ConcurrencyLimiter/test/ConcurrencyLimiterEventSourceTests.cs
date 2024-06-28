@@ -48,7 +48,7 @@ public class ConcurrencyLimiterEventSourceTests
     {
         // Arrange
         using var eventListener = new TestCounterListener(
-            new[] { "queue-length", "queue-duration", "requests-rejected", }
+            new[] { "queue-length", "queue-duration", "requests-rejected" }
         );
 
         using var eventSource = GetConcurrencyLimiterEventSource();
@@ -90,7 +90,7 @@ public class ConcurrencyLimiterEventSourceTests
     {
         // Arrange
         using var eventListener = new TestCounterListener(
-            new[] { "queue-length", "queue-duration", "requests-rejected", }
+            new[] { "queue-length", "queue-duration", "requests-rejected" }
         );
 
         using var eventSource = GetConcurrencyLimiterEventSource();

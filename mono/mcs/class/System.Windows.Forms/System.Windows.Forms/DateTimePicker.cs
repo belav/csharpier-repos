@@ -1954,7 +1954,7 @@ namespace System.Windows.Forms
             Month,
             Year,
             AMPMSpecifier,
-            Literal
+            Literal,
         }
 
         internal class PartData

@@ -166,7 +166,7 @@ namespace MonoTests.System.Security.AccessControl
 
         enum TestRights
         {
-            One = 1
+            One = 1,
         }
 
         class TestSecurity : CommonObjectSecurity

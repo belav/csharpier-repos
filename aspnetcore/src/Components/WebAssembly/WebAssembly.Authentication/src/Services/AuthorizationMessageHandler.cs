@@ -135,7 +135,7 @@ public class AuthorizationMessageHandler : DelegatingHandler, IDisposable
             _tokenOptions = new AccessTokenRequestOptions
             {
                 Scopes = scopesList,
-                ReturnUrl = returnUrl
+                ReturnUrl = returnUrl,
             };
         }
 

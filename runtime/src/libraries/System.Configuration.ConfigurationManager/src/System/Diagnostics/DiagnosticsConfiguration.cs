@@ -212,7 +212,7 @@ namespace System.Diagnostics
         {
             NotInitialized,
             Initializing,
-            Initialized
+            Initialized,
         }
     }
 }

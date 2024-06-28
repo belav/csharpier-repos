@@ -194,7 +194,7 @@ namespace Thunkerator
             RETURNTYPES,
             NORMALTYPES,
             FUNCTIONS,
-            IFDEFING
+            IFDEFING,
         }
 
         private static ReadOnlyCollection<FunctionDecl> ParseInput(StreamReader tr)

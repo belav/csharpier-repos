@@ -110,7 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
     {
         Defined,
         Undefined,
-        Unspecified
+        Unspecified,
     }
 
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]

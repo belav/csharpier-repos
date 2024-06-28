@@ -59,7 +59,7 @@ public class RelationalEventIdTest : EventIdTestBase
         {
             Name = "Column1",
             Table = "Table1",
-            ClrType = typeof(int)
+            ClrType = typeof(int),
         };
 
         var fakeFactories = new Dictionary<Type, Func<object>>
@@ -84,7 +84,7 @@ public class RelationalEventIdTest : EventIdTestBase
                             contextServices.GetRequiredService<IStateManager>(),
                             entityType,
                             new object()
-                        )
+                        ),
                     }
             },
             { typeof(IRelationalConnection), () => new FakeRelationalConnection() },
@@ -112,7 +112,7 @@ public class RelationalEventIdTest : EventIdTestBase
             { typeof(DbContext), () => new FakeDbContext() },
             { typeof(SqlExpression), () => new FakeSqlExpression() },
             { typeof(IUpdateEntry), () => updateEntry },
-            { typeof(ColumnOperation), () => columnOperation }
+            { typeof(ColumnOperation), () => columnOperation },
         };
 
         TestEventLogging(
@@ -121,7 +121,7 @@ public class RelationalEventIdTest : EventIdTestBase
             new[]
             {
                 typeof(IRelationalConnectionDiagnosticsLogger),
-                typeof(IRelationalCommandDiagnosticsLogger)
+                typeof(IRelationalCommandDiagnosticsLogger),
             },
             new TestRelationalLoggingDefinitions(),
             fakeFactories,
@@ -138,7 +138,7 @@ public class RelationalEventIdTest : EventIdTestBase
                         nameof(IRelationalCommandDiagnosticsLogger.CommandNonQueryExecuting),
                         nameof(IRelationalCommandDiagnosticsLogger.CommandReaderExecutingAsync),
                         nameof(IRelationalCommandDiagnosticsLogger.CommandScalarExecutingAsync),
-                        nameof(IRelationalCommandDiagnosticsLogger.CommandNonQueryExecutingAsync)
+                        nameof(IRelationalCommandDiagnosticsLogger.CommandNonQueryExecutingAsync),
                     }
                 },
                 {
@@ -150,9 +150,9 @@ public class RelationalEventIdTest : EventIdTestBase
                         nameof(IRelationalCommandDiagnosticsLogger.CommandNonQueryExecutedAsync),
                         nameof(IRelationalCommandDiagnosticsLogger.CommandReaderExecuted),
                         nameof(IRelationalCommandDiagnosticsLogger.CommandScalarExecuted),
-                        nameof(IRelationalCommandDiagnosticsLogger.CommandNonQueryExecuted)
+                        nameof(IRelationalCommandDiagnosticsLogger.CommandNonQueryExecuted),
                     }
-                }
+                },
             }
         );
     }

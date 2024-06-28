@@ -76,11 +76,11 @@ public class ValidatableObjectAdapterTest
                         new ValidationResult(
                             "Error message",
                             new[] { nameof(SampleModel.FirstName) }
-                        )
+                        ),
                     },
                     new[]
                     {
-                        new ModelValidationResult(nameof(SampleModel.FirstName), "Error message")
+                        new ModelValidationResult(nameof(SampleModel.FirstName), "Error message"),
                     }
                 },
                 {
@@ -111,7 +111,7 @@ public class ValidatableObjectAdapterTest
                     {
                         new ValidationResult(
                             "Error message1",
-                            new[] { nameof(SampleModel.FirstName), nameof(SampleModel.LastName), }
+                            new[] { nameof(SampleModel.FirstName), nameof(SampleModel.LastName) }
                         ),
                         new ValidationResult("Error message2"),
                     },

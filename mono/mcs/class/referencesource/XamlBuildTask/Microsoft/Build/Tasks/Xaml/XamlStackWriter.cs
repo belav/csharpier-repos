@@ -18,7 +18,7 @@ namespace Microsoft.Build.Tasks.Xaml
         None,
         Object,
         GetObject,
-        Member
+        Member,
     }
 
     internal struct XamlStackFrame

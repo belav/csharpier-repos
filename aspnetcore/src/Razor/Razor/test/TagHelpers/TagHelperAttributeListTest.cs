@@ -348,7 +348,7 @@ public class TagHelperAttributeListTest
     {
         // Arrange
         var attributes = new TagHelperAttributeList(
-            new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv"), }
+            new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv") }
         );
 
         // Act & Assert
@@ -700,7 +700,7 @@ public class TagHelperAttributeListTest
     {
         // Arrange
         var attributes = new TagHelperAttributeList(
-            new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv"), }
+            new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv") }
         );
 
         // Act & Assert
@@ -715,7 +715,7 @@ public class TagHelperAttributeListTest
     {
         // Arrange
         var attributes = new TagHelperAttributeList(
-            new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv"), }
+            new[] { new TagHelperAttribute("a", "av"), new TagHelperAttribute("b", "bv") }
         );
 
         // Act

@@ -42,7 +42,9 @@ namespace BasicEventSourceTests
         {
             RemoteInvokeOptions options = new RemoteInvokeOptions
             {
-                TimeOut = 300_000 /* ms */
+                TimeOut =
+                    300_000 /* ms */
+                ,
             };
             RemoteExecutor
                 .Invoke(
@@ -50,7 +52,9 @@ namespace BasicEventSourceTests
                     {
                         RemoteInvokeOptions localOptions = new RemoteInvokeOptions
                         {
-                            TimeOut = 300_000 /* ms */
+                            TimeOut =
+                                300_000 /* ms */
+                            ,
                         };
                         using (
                             RemoteInvokeHandle handle = RemoteExecutor.Invoke(

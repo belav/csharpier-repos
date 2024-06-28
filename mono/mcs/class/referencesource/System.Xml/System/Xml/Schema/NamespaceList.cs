@@ -18,7 +18,7 @@ namespace System.Xml.Schema
         {
             Any,
             Other,
-            Set
+            Set,
         };
 
         private ListType type = ListType.Any;

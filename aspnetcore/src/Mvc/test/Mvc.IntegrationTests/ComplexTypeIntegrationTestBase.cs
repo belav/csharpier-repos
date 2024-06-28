@@ -32,7 +32,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
         var testContext = GetTestContext();
 
@@ -72,7 +72,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -123,7 +123,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -174,7 +174,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -226,7 +226,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -276,7 +276,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -335,7 +335,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -390,7 +390,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -445,7 +445,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -508,7 +508,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -562,7 +562,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -616,7 +616,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -668,7 +668,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -726,7 +726,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -786,7 +786,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -844,7 +844,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -900,7 +900,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -948,7 +948,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -999,7 +999,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1057,7 +1057,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1113,7 +1113,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1161,7 +1161,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1212,7 +1212,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1270,7 +1270,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1328,7 +1328,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1376,7 +1376,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1779,7 +1779,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1837,7 +1837,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1895,7 +1895,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1945,7 +1945,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -2096,7 +2096,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order9)
+            ParameterType = typeof(Order9),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -2154,7 +2154,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order10)
+            ParameterType = typeof(Order10),
         };
 
         // No Data
@@ -2218,7 +2218,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order10)
+            ParameterType = typeof(Order10),
         };
 
         // No Data
@@ -2277,7 +2277,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order11)
+            ParameterType = typeof(Order11),
         };
 
         // No Data
@@ -2335,7 +2335,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order11)
+            ParameterType = typeof(Order11),
         };
 
         // No Data
@@ -2394,7 +2394,7 @@ public abstract class ComplexTypeIntegrationTestBase
         {
             Name = "parameter",
             ParameterType = typeof(Order11),
-            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" },
         };
 
         // No Data
@@ -2458,7 +2458,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order12)
+            ParameterType = typeof(Order12),
         };
 
         // No Data
@@ -2511,7 +2511,7 @@ public abstract class ComplexTypeIntegrationTestBase
         {
             Name = "parameter",
             ParameterType = typeof(Order12),
-            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" },
         };
 
         // No Data
@@ -2616,7 +2616,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order13)
+            ParameterType = typeof(Order13),
         };
 
         // No Data
@@ -2669,7 +2669,7 @@ public abstract class ComplexTypeIntegrationTestBase
         {
             Name = "parameter",
             ParameterType = typeof(Order13),
-            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" },
         };
 
         // No Data
@@ -2774,7 +2774,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order14)
+            ParameterType = typeof(Order14),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -2829,7 +2829,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order14)
+            ParameterType = typeof(Order14),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -3141,7 +3141,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Product)
+            ParameterType = typeof(Product),
         };
 
         // Need to have a key here so that the ComplexTypeModelBinder will recurse to bind elements.
@@ -3198,7 +3198,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Photo)
+            ParameterType = typeof(Photo),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.

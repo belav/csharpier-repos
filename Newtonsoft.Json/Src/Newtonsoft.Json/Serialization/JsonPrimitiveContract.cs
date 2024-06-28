@@ -72,7 +72,7 @@ namespace Newtonsoft.Json.Serialization
 #endif
             [typeof(float)] = ReadType.ReadAsDouble,
             [typeof(double)] = ReadType.ReadAsDouble,
-            [typeof(long)] = ReadType.ReadAsInt64
+            [typeof(long)] = ReadType.ReadAsInt64,
         };
     }
 }

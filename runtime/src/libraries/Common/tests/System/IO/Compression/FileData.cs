@@ -50,7 +50,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298376583000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "docProps",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -61,7 +61,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298378287000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "xl",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -72,7 +72,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 1440,
                 Name = "[Content_Types].xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -83,7 +83,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298378707000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -94,7 +94,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 860,
                 Name = "app.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -105,7 +105,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 629,
                 Name = "core.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -116,7 +116,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 205,
                 Name = "sharedStrings.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -127,7 +127,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 1260,
                 Name = "styles.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -138,7 +138,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298377077000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "theme",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -149,7 +149,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 626,
                 Name = "workbook.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -160,7 +160,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298378077000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "worksheets",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -171,7 +171,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298378337000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -182,7 +182,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 7079,
                 Name = "theme1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -193,7 +193,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 948,
                 Name = "sheet1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -204,7 +204,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 628,
                 Name = "sheet2.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -215,7 +215,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 628,
                 Name = "sheet3.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -226,7 +226,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 980,
                 Name = "workbook.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -237,7 +237,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 588,
                 Name = ".rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "excel")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "excel"),
             },
             new FileData()
             {
@@ -248,7 +248,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298379007000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "Content",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "packaging")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "packaging"),
             },
             new FileData()
             {
@@ -259,7 +259,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 175,
                 Name = "[Content_Types].xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "packaging")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "packaging"),
             },
             new FileData()
             {
@@ -270,7 +270,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "Document.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "packaging")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "packaging"),
             },
             new FileData()
             {
@@ -281,7 +281,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298761346000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "docProps",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -292,7 +292,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298761456000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "ppt",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -303,7 +303,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 3142,
                 Name = "[Content_Types].xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -314,7 +314,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762721000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -325,7 +325,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 1141,
                 Name = "app.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -336,7 +336,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 697,
                 Name = "core.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -347,7 +347,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 9216,
                 Name = "thumbnail.jpeg",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -358,7 +358,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 3228,
                 Name = "presentation.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -369,7 +369,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 651,
                 Name = "presProps.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -380,7 +380,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298761686000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "slideLayouts",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -391,7 +391,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762379000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "slideMasters",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -402,7 +402,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762429000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "slides",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -413,7 +413,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 182,
                 Name = "tableStyles.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -424,7 +424,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762479000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "theme",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -435,7 +435,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 828,
                 Name = "viewProps.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -446,7 +446,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762509000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -457,7 +457,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 4360,
                 Name = "slideLayout1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -468,7 +468,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 3023,
                 Name = "slideLayout10.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -479,7 +479,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 3248,
                 Name = "slideLayout11.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -490,7 +490,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 2968,
                 Name = "slideLayout2.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -501,7 +501,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 4444,
                 Name = "slideLayout3.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -512,7 +512,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 4715,
                 Name = "slideLayout4.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -523,7 +523,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 7226,
                 Name = "slideLayout5.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -534,7 +534,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 2236,
                 Name = "slideLayout6.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -545,7 +545,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 1898,
                 Name = "slideLayout7.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -556,7 +556,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 4805,
                 Name = "slideLayout8.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -567,7 +567,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 4660,
                 Name = "slideLayout9.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -578,7 +578,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298761916000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -589,7 +589,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout1.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -600,7 +600,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout10.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -611,7 +611,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout11.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -622,7 +622,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout2.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -633,7 +633,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout3.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -644,7 +644,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout4.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -655,7 +655,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout5.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -666,7 +666,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout6.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -677,7 +677,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout7.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -688,7 +688,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout8.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -699,7 +699,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slideLayout9.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -710,7 +710,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 12250,
                 Name = "slideMaster1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -721,7 +721,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762399000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -732,7 +732,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 1991,
                 Name = "slideMaster1.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -743,7 +743,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 1502,
                 Name = "slide1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -754,7 +754,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298762449000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -765,7 +765,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 311,
                 Name = "slide1.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -776,7 +776,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 7088,
                 Name = "theme1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -787,7 +787,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 976,
                 Name = "presentation.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -798,7 +798,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636680000000, DateTimeKind.Utc),
                 Length = 738,
                 Name = ".rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "powerpoint"),
             },
             new FileData()
             {
@@ -809,7 +809,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 377,
                 Name = "AppManifest.xaml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "silverlight")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "silverlight"),
             },
             new FileData()
             {
@@ -820,7 +820,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 7680,
                 Name = "sampleSilverlight.dll",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "silverlight")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "silverlight"),
             },
             new FileData()
             {
@@ -831,7 +831,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298384845000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "docProps",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -842,7 +842,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298385739000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "word",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -853,7 +853,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 1422,
                 Name = "[Content_Types].xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -864,7 +864,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298386053000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -875,7 +875,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 732,
                 Name = "app.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -886,7 +886,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 657,
                 Name = "core.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -897,7 +897,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 1583,
                 Name = "document.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -908,7 +908,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 1492,
                 Name = "fontTable.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -919,7 +919,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 2182,
                 Name = "settings.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -930,7 +930,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 14960,
                 Name = "styles.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -941,7 +941,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 15713,
                 Name = "stylesWithEffects.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -952,7 +952,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298385508000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "theme",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -963,7 +963,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 428,
                 Name = "webSettings.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -974,7 +974,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298385779000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "_rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -985,7 +985,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 7076,
                 Name = "theme1.xml",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -996,7 +996,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 953,
                 Name = "document.xml.rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -1007,7 +1007,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170636700000000, DateTimeKind.Utc),
                 Length = 590,
                 Name = ".rels",
-                OrigFolder = Path.Combine("ZipTestData", "compat", "word")
+                OrigFolder = Path.Combine("ZipTestData", "compat", "word"),
             },
             new FileData()
             {
@@ -1018,7 +1018,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170672720000000, DateTimeKind.Utc),
                 Length = 55,
                 Name = "added.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1029,7 +1029,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635622023640000000, DateTimeKind.Utc),
                 Length = 2703788,
                 Name = "binary.wmv",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1040,7 +1040,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1051,7 +1051,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170672720000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1062,7 +1062,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205740000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1073,7 +1073,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298860858000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1084,7 +1084,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205920000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "addFile"),
             },
             new FileData()
             {
@@ -1095,7 +1095,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635622023640000000, DateTimeKind.Utc),
                 Length = 2703788,
                 Name = "binary.wmv",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "append")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "append"),
             },
             new FileData()
             {
@@ -1106,7 +1106,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "append")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "append"),
             },
             new FileData()
             {
@@ -1117,7 +1117,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170672720000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "append")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "append"),
             },
             new FileData()
             {
@@ -1128,7 +1128,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205740000000, DateTimeKind.Utc),
                 Length = 83,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "append")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "append"),
             },
             new FileData()
             {
@@ -1139,7 +1139,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298861923000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "append")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "append"),
             },
             new FileData()
             {
@@ -1150,7 +1150,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205920000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "append")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "append"),
             },
             new FileData()
             {
@@ -1161,7 +1161,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove"),
             },
             new FileData()
             {
@@ -1172,7 +1172,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170672740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove"),
             },
             new FileData()
             {
@@ -1183,7 +1183,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205740000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove"),
             },
             new FileData()
             {
@@ -1194,7 +1194,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298862173000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove"),
             },
             new FileData()
             {
@@ -1205,7 +1205,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205920000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "secondnewname.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "deleteMove"),
             },
             new FileData()
             {
@@ -1216,7 +1216,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635622023640000000, DateTimeKind.Utc),
                 Length = 2703788,
                 Name = "binary.wmv",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite"),
             },
             new FileData()
             {
@@ -1227,7 +1227,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite"),
             },
             new FileData()
             {
@@ -1238,7 +1238,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634170672740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite"),
             },
             new FileData()
             {
@@ -1249,7 +1249,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205740000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite"),
             },
             new FileData()
             {
@@ -1260,7 +1260,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298863243000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite"),
             },
             new FileData()
             {
@@ -1271,7 +1271,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205920000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite")
+                OrigFolder = Path.Combine("ZipTestData", "modified", "overwrite"),
             },
             new FileData()
             {
@@ -1282,7 +1282,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140394900000000, DateTimeKind.Utc),
                 Length = 1277,
                 Name = "text.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "appended")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "appended"),
             },
             new FileData()
             {
@@ -1293,7 +1293,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878284085623000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "emptydir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "emptydir"),
             },
             new FileData()
             {
@@ -1304,7 +1304,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878284086238000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "subdir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir1")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir1"),
             },
             new FileData()
             {
@@ -1315,7 +1315,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140460640000000, DateTimeKind.Utc),
                 Length = 59,
                 Name = "small.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir1")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir1"),
             },
             new FileData()
             {
@@ -1326,7 +1326,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878284086589000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "subdir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir2")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir2"),
             },
             new FileData()
             {
@@ -1337,7 +1337,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140460640000000, DateTimeKind.Utc),
                 Length = 59,
                 Name = "small.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir2")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "explicitdir2"),
             },
             new FileData()
             {
@@ -1348,7 +1348,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878284088225000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "subdir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "noexplicitdir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "noexplicitdir"),
             },
             new FileData()
             {
@@ -1359,7 +1359,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140460640000000, DateTimeKind.Utc),
                 Length = 59,
                 Name = "small.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "noexplicitdir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "noexplicitdir"),
             },
             new FileData()
             {
@@ -1370,7 +1370,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635622023640000000, DateTimeKind.Utc),
                 Length = 2703788,
                 Name = "binary.wmv",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal"),
             },
             new FileData()
             {
@@ -1381,7 +1381,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal"),
             },
             new FileData()
             {
@@ -1392,7 +1392,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878284089255000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal"),
             },
             new FileData()
             {
@@ -1403,7 +1403,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205740000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal"),
             },
             new FileData()
             {
@@ -1414,7 +1414,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878284089395000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal"),
             },
             new FileData()
             {
@@ -1425,7 +1425,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205920000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "normal"),
             },
             new FileData()
             {
@@ -1436,7 +1436,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140394900000000, DateTimeKind.Utc),
                 Length = 1277,
                 Name = "text.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "prepended")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "prepended"),
             },
             new FileData()
             {
@@ -1447,7 +1447,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140394900000000, DateTimeKind.Utc),
                 Length = 1277,
                 Name = "text.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "small")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "small"),
             },
             new FileData()
             {
@@ -1458,7 +1458,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140193300000000, DateTimeKind.Utc),
                 Length = 1420,
                 Name = "\uD55C\uAE00.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "unicode")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfiles", "unicode"),
             },
             new FileData()
             {
@@ -1469,7 +1469,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634145821520000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "emptydir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "emptydir"),
             },
             new FileData()
             {
@@ -1480,7 +1480,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298859117000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "subdir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "explicitdir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "explicitdir"),
             },
             new FileData()
             {
@@ -1491,7 +1491,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140496640000000, DateTimeKind.Utc),
                 Length = 59,
                 Name = "small.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "explicitdir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "explicitdir"),
             },
             new FileData()
             {
@@ -1502,7 +1502,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635622023640000000, DateTimeKind.Utc),
                 Length = 2703788,
                 Name = "binary.wmv",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal"),
             },
             new FileData()
             {
@@ -1513,7 +1513,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144740000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal"),
             },
             new FileData()
             {
@@ -1524,7 +1524,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140433780000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal"),
             },
             new FileData()
             {
@@ -1535,7 +1535,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205740000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal"),
             },
             new FileData()
             {
@@ -1546,7 +1546,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298864271000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal"),
             },
             new FileData()
             {
@@ -1557,7 +1557,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205920000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normal"),
             },
             new FileData()
             {
@@ -1568,7 +1568,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635622023640000000, DateTimeKind.Utc),
                 Length = 2703788,
                 Name = "binary.wmv",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir"),
             },
             new FileData()
             {
@@ -1579,7 +1579,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635433642420000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir"),
             },
             new FileData()
             {
@@ -1590,7 +1590,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635433642420000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir"),
             },
             new FileData()
             {
@@ -1601,7 +1601,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298865429000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir"),
             },
             new FileData()
             {
@@ -1612,7 +1612,7 @@ public class FileData
                 LastModifiedDate = new DateTime(635433642420000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutEmptyDir"),
             },
             new FileData()
             {
@@ -1623,7 +1623,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140142900000000, DateTimeKind.Utc),
                 Length = 1277,
                 Name = "text.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "small")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "small"),
             },
             new FileData()
             {
@@ -1634,7 +1634,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140193300000000, DateTimeKind.Utc),
                 Length = 1420,
                 Name = "\uD55C\uAE00.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "unicode")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "unicode"),
             },
             new FileData()
             {
@@ -1645,7 +1645,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634110710340000000, DateTimeKind.Utc),
                 Length = 26,
                 Name = "small.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "verysmall")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "verysmall"),
             },
             new FileData()
             {
@@ -1656,7 +1656,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140144720000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "empty.file",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary"),
             },
             new FileData()
             {
@@ -1667,7 +1667,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140433780000000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "emptydir",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary"),
             },
             new FileData()
             {
@@ -1678,7 +1678,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205720000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "first.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary"),
             },
             new FileData()
             {
@@ -1689,7 +1689,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634878298864271000, DateTimeKind.Utc),
                 Length = 0,
                 Name = "notempty",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary"),
             },
             new FileData()
             {
@@ -1700,7 +1700,7 @@ public class FileData
                 LastModifiedDate = new DateTime(634140205900000000, DateTimeKind.Utc),
                 Length = 34,
                 Name = "second.txt",
-                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary")
+                OrigFolder = Path.Combine("ZipTestData", "refzipfolders", "normalWithoutBinary"),
             },
         };
     }

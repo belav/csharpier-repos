@@ -23,7 +23,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
         using (var context = CreateContext())
         {
             await context.AddAsync(
-                new HeliumBalloon { Id = Guid.NewGuid().ToString(), Gas = new Helium(), }
+                new HeliumBalloon { Id = Guid.NewGuid().ToString(), Gas = new Helium() }
             );
 
             await context.AddAsync(
@@ -244,7 +244,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         p.Orders,
                         p.PersonAddress,
-                        p.PersonAddress.Country.Planet
+                        p.PersonAddress.Country.Planet,
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -270,7 +270,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         Count = p
                             .Orders.Where(o => o.Client.PersonAddress.Country.Planet.Star.Id != 42)
                             .Count(),
-                        p.PersonAddress.Country.Planet
+                        p.PersonAddress.Country.Planet,
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -967,7 +967,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     .Select(t => new
                     {
                         t,
-                        Planets = ss.Set<Planet>().Where(p => p.Id != t).ToList()
+                        Planets = ss.Set<Planet>().Where(p => p.Id != t).ToList(),
                     }),
             assertOrder: true,
             elementAsserter: (e, a) =>
@@ -1031,7 +1031,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     c2.Id,
                     c2,
                     c2.Orders,
-                    c2.PersonAddress
+                    c2.PersonAddress,
                 },
             elementSorter: e => (e.c1.Id, e.c2.Id),
             elementAsserter: (e, a) =>
@@ -1059,7 +1059,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         c1,
                         c2.Id,
-                        c2
+                        c2,
                     }
                 ).Distinct()
                     on o.Id equals sub.Id
@@ -1168,7 +1168,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 { typeof(OwnedAddress), e => ((OwnedAddress)e)?.Country.Name },
                 { typeof(OwnedCountry), e => ((OwnedCountry)e)?.Name },
                 { typeof(Element), e => ((Element)e)?.Id },
-                { typeof(Throned), e => ((Throned)e)?.Property }
+                { typeof(Throned), e => ((Throned)e)?.Property },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
         public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
@@ -1420,7 +1420,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             Assert.Equal(((Throned)e).Property, ((Throned)a).Property);
                         }
                     }
-                }
+                },
             }.ToDictionary(e => e.Key, e => (object)e.Value);
 
         protected override string StoreName => "OwnedQueryTest";
@@ -1445,28 +1445,28 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                 OwnedPersonId = 1,
                                 PlaceType = "Land",
                                 AddressLine = "804 S. Lakeshore Road",
-                                ZipCode = 38654
+                                ZipCode = 38654,
                             },
                             new
                             {
                                 OwnedPersonId = 2,
                                 PlaceType = "Land",
                                 AddressLine = "7 Church Dr.",
-                                ZipCode = 28655
+                                ZipCode = 28655,
                             },
                             new
                             {
                                 OwnedPersonId = 3,
                                 PlaceType = "Land",
                                 AddressLine = "72 Hickory Rd.",
-                                ZipCode = 07728
+                                ZipCode = 07728,
                             },
                             new
                             {
                                 OwnedPersonId = 4,
                                 PlaceType = "Land",
                                 AddressLine = "28 Strawberry St.",
-                                ZipCode = 19053
+                                ZipCode = 19053,
                             }
                         );
 
@@ -1479,25 +1479,25 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                     {
                                         OwnedAddressOwnedPersonId = 1,
                                         PlanetId = 1,
-                                        Name = "USA"
+                                        Name = "USA",
                                     },
                                     new
                                     {
                                         OwnedAddressOwnedPersonId = 2,
                                         PlanetId = 1,
-                                        Name = "USA"
+                                        Name = "USA",
                                     },
                                     new
                                     {
                                         OwnedAddressOwnedPersonId = 3,
                                         PlanetId = 1,
-                                        Name = "USA"
+                                        Name = "USA",
                                     },
                                     new
                                     {
                                         OwnedAddressOwnedPersonId = 4,
                                         PlanetId = 1,
-                                        Name = "USA"
+                                        Name = "USA",
                                     }
                                 );
 
@@ -1520,31 +1520,31 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 Id = -10,
                                 ClientId = 1,
-                                OrderDate = Convert.ToDateTime("2018-07-11 10:01:41")
+                                OrderDate = Convert.ToDateTime("2018-07-11 10:01:41"),
                             },
                             new
                             {
                                 Id = -11,
                                 ClientId = 1,
-                                OrderDate = Convert.ToDateTime("2015-03-03 04:37:59")
+                                OrderDate = Convert.ToDateTime("2015-03-03 04:37:59"),
                             },
                             new
                             {
                                 Id = -20,
                                 ClientId = 2,
-                                OrderDate = Convert.ToDateTime("2015-05-25 20:35:48")
+                                OrderDate = Convert.ToDateTime("2015-05-25 20:35:48"),
                             },
                             new
                             {
                                 Id = -30,
                                 ClientId = 3,
-                                OrderDate = Convert.ToDateTime("2014-11-10 04:32:42")
+                                OrderDate = Convert.ToDateTime("2014-11-10 04:32:42"),
                             },
                             new
                             {
                                 Id = -40,
                                 ClientId = 4,
-                                OrderDate = Convert.ToDateTime("2016-04-25 19:23:56")
+                                OrderDate = Convert.ToDateTime("2016-04-25 19:23:56"),
                             }
                         );
 
@@ -1558,28 +1558,28 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                         Id = -100,
                                         OrderId = -10,
                                         OrderClientId = 1,
-                                        Detail = "Discounted Order"
+                                        Detail = "Discounted Order",
                                     },
                                     new
                                     {
                                         Id = -101,
                                         OrderId = -10,
                                         OrderClientId = 1,
-                                        Detail = "Full Price Order"
+                                        Detail = "Full Price Order",
                                     },
                                     new
                                     {
                                         Id = -200,
                                         OrderId = -20,
                                         OrderClientId = 2,
-                                        Detail = "Internal Order"
+                                        Detail = "Internal Order",
                                     },
                                     new
                                     {
                                         Id = -300,
                                         OrderId = -30,
                                         OrderClientId = 3,
-                                        Detail = "Bulk Order"
+                                        Detail = "Bulk Order",
                                     }
                                 );
                             }
@@ -1602,13 +1602,13 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 BranchId = 2,
                                 PlaceType = "Land",
-                                BranchName = "BranchA"
+                                BranchName = "BranchA",
                             },
                             new
                             {
                                 BranchId = 3,
                                 PlaceType = "Land",
-                                BranchName = "BranchB"
+                                BranchName = "BranchB",
                             }
                         );
 
@@ -1621,13 +1621,13 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                     {
                                         OwnedAddressBranchId = 2,
                                         PlanetId = 1,
-                                        Name = "Canada"
+                                        Name = "Canada",
                                     },
                                     new
                                     {
                                         OwnedAddressBranchId = 3,
                                         PlanetId = 1,
-                                        Name = "Canada"
+                                        Name = "Canada",
                                     }
                                 );
                             }
@@ -1653,7 +1653,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 LeafAId = 3,
                                 PlaceType = "Land",
-                                LeafType = 1
+                                LeafType = 1,
                             }
                         );
 
@@ -1671,7 +1671,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                     {
                                         OwnedAddressLeafAId = 3,
                                         PlanetId = 1,
-                                        Name = "Mexico"
+                                        Name = "Mexico",
                                     }
                                 );
                             }
@@ -1696,7 +1696,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 LeafBId = 4,
                                 PlaceType = "Land",
-                                LeafBType = "Green"
+                                LeafBType = "Green",
                             }
                         );
 
@@ -1714,7 +1714,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                                     {
                                         OwnedAddressLeafBId = 4,
                                         PlanetId = 1,
-                                        Name = "Panama"
+                                        Name = "Panama",
                                     }
                                 );
                             }
@@ -1729,7 +1729,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         Id = 1,
                         StarId = 1,
-                        Name = "Earth"
+                        Name = "Earth",
                     }
                 )
             );
@@ -1740,7 +1740,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     {
                         Id = 1,
                         PlanetId = 1,
-                        Diameter = 3474
+                        Diameter = 3474,
                     }
                 )
             );
@@ -1758,13 +1758,13 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 Id = "H",
                                 Name = "Hydrogen",
-                                StarId = 1
+                                StarId = 1,
                             },
                             new
                             {
                                 Id = "He",
                                 Name = "Helium",
-                                StarId = 1
+                                StarId = 1,
                             }
                         );
                     }
@@ -1781,7 +1781,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                             {
                                 BartonId = 1,
                                 Property = "Property",
-                                Value = 42
+                                Value = 42,
                             }
                         )
                 );
@@ -1888,8 +1888,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     Id = 1,
                     StarId = 1,
-                    Name = "Earth"
-                }
+                    Name = "Earth",
+                },
             };
 
         private static IReadOnlyList<Star> CreateStars() =>
@@ -1905,16 +1905,16 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                         {
                             Id = "H",
                             Name = "Hydrogen",
-                            StarId = 1
+                            StarId = 1,
                         },
                         new()
                         {
                             Id = "He",
                             Name = "Helium",
-                            StarId = 1
-                        }
-                    }
-                }
+                            StarId = 1,
+                        },
+                    },
+                },
             };
 
         private static IReadOnlyList<Moon> CreateMoons() =>
@@ -1924,8 +1924,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     Id = 1,
                     PlanetId = 1,
-                    Diameter = 3474
-                }
+                    Diameter = 3474,
+                },
             };
 
         private static IReadOnlyList<OwnedPerson> CreateOwnedPeople()
@@ -1935,14 +1935,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "USA", PlanetId = 1 },
                 ["AddressLine"] = "804 S. Lakeshore Road",
-                ["ZipCode"] = 38654
+                ["ZipCode"] = 38654,
             };
 
             var ownedPerson1 = new OwnedPerson
             {
                 Id = 1,
                 PersonAddress = personAddress1,
-                ["Name"] = "Mona Cy"
+                ["Name"] = "Mona Cy",
             };
 
             var personAddress2 = new OwnedAddress
@@ -1950,14 +1950,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "USA", PlanetId = 1 },
                 ["AddressLine"] = "7 Church Dr.",
-                ["ZipCode"] = 28655
+                ["ZipCode"] = 28655,
             };
 
             var branchAddress2 = new OwnedAddress
             {
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "Canada", PlanetId = 1 },
-                ["BranchName"] = "BranchA"
+                ["BranchName"] = "BranchA",
             };
 
             var ownedPerson2 = new Branch
@@ -1965,7 +1965,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Id = 2,
                 PersonAddress = personAddress2,
                 BranchAddress = branchAddress2,
-                ["Name"] = "Antigonus Mitul"
+                ["Name"] = "Antigonus Mitul",
             };
 
             var personAddress3 = new OwnedAddress
@@ -1973,21 +1973,21 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "USA", PlanetId = 1 },
                 ["AddressLine"] = "72 Hickory Rd.",
-                ["ZipCode"] = 07728
+                ["ZipCode"] = 07728,
             };
 
             var branchAddress3 = new OwnedAddress
             {
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "Canada", PlanetId = 1 },
-                ["BranchName"] = "BranchB"
+                ["BranchName"] = "BranchB",
             };
 
             var leafAAddress3 = new OwnedAddress
             {
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "Mexico", PlanetId = 1 },
-                ["LeafType"] = 1
+                ["LeafType"] = 1,
             };
 
             var ownedPerson3 = new LeafA
@@ -1996,7 +1996,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 PersonAddress = personAddress3,
                 BranchAddress = branchAddress3,
                 LeafAAddress = leafAAddress3,
-                ["Name"] = "Madalena Morana"
+                ["Name"] = "Madalena Morana",
             };
 
             var personAddress4 = new OwnedAddress
@@ -2004,14 +2004,14 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "USA", PlanetId = 1 },
                 ["AddressLine"] = "28 Strawberry St.",
-                ["ZipCode"] = 19053
+                ["ZipCode"] = 19053,
             };
 
             var leafBAddress4 = new OwnedAddress
             {
                 PlaceType = "Land",
                 Country = new OwnedCountry { Name = "Panama", PlanetId = 1 },
-                ["LeafBType"] = "Green"
+                ["LeafBType"] = "Green",
             };
 
             var ownedPerson4 = new LeafB
@@ -2019,7 +2019,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Id = 4,
                 PersonAddress = personAddress4,
                 LeafBAddress = leafBAddress4,
-                ["Name"] = "Vanda Waldemar"
+                ["Name"] = "Vanda Waldemar",
             };
 
             var order1 = new Order
@@ -2030,8 +2030,8 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Details = new List<OrderDetail>
                 {
                     new() { Detail = "Discounted Order" },
-                    new() { Detail = "Full Price Order" }
-                }
+                    new() { Detail = "Full Price Order" },
+                },
             };
 
             var order2 = new Order
@@ -2039,7 +2039,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Id = -11,
                 Client = ownedPerson1,
                 ["OrderDate"] = Convert.ToDateTime("2015-03-03 04:37:59"),
-                Details = new List<OrderDetail>()
+                Details = new List<OrderDetail>(),
             };
             ownedPerson1.Orders = new List<Order> { order1, order2 };
 
@@ -2048,7 +2048,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Id = -20,
                 Client = ownedPerson2,
                 ["OrderDate"] = Convert.ToDateTime("2015-05-25 20:35:48"),
-                Details = new List<OrderDetail> { new() { Detail = "Internal Order" } }
+                Details = new List<OrderDetail> { new() { Detail = "Internal Order" } },
             };
             ownedPerson2.Orders = new List<Order> { order3 };
 
@@ -2057,7 +2057,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Id = -30,
                 Client = ownedPerson3,
                 ["OrderDate"] = Convert.ToDateTime("2014-11-10 04:32:42"),
-                Details = new List<OrderDetail> { new() { Detail = "Bulk Order" } }
+                Details = new List<OrderDetail> { new() { Detail = "Bulk Order" } },
             };
             ownedPerson3.Orders = new List<Order> { order4 };
 
@@ -2066,7 +2066,7 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 Id = -40,
                 Client = ownedPerson4,
                 ["OrderDate"] = Convert.ToDateTime("2016-04-25 19:23:56"),
-                Details = new List<OrderDetail>()
+                Details = new List<OrderDetail>(),
             };
             ownedPerson4.Orders = new List<Order> { order5 };
 
@@ -2082,9 +2082,9 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                 {
                     Id = 1,
                     Simple = "Simple",
-                    Throned = new Throned { Property = "Property", Value = 42 }
+                    Throned = new Throned { Property = "Property", Value = 42 },
                 },
-                new() { Id = 2, Simple = "Not", }
+                new() { Id = 2, Simple = "Not" },
             };
 
         private static void WireUp(
@@ -2140,10 +2140,9 @@ public abstract class OwnedQueryTestBase<TFixture> : QueryTestBase<TFixture>
                     "BranchName" => _branchName,
                     "LeafType" => _leafAType,
                     "LeafBType" => _leafBType,
-                    _ =>
-                        throw new InvalidOperationException(
-                            $"Indexer property with key {name} is not defined on {nameof(OwnedPerson)}."
-                        ),
+                    _ => throw new InvalidOperationException(
+                        $"Indexer property with key {name} is not defined on {nameof(OwnedPerson)}."
+                    ),
                 };
             set
             {

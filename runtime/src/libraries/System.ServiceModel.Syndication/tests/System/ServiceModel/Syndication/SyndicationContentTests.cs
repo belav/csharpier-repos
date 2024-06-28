@@ -56,7 +56,7 @@ namespace System.ServiceModel.Syndication.Tests
                 null,
                 "OuterName",
                 null,
-                @"<OuterName type=""CustomType"" name=""value"" />"
+                @"<OuterName type=""CustomType"" name=""value"" />",
             };
             yield return new object[]
             {
@@ -66,11 +66,11 @@ namespace System.ServiceModel.Syndication.Tests
                     { new XmlQualifiedName("type"), "value2" },
                     { new XmlQualifiedName("name1"), "value3" },
                     { new XmlQualifiedName("name2"), "" },
-                    { new XmlQualifiedName("name3"), null }
+                    { new XmlQualifiedName("name3"), null },
                 },
                 "OuterName",
                 "OuterNamespace",
-                @"<OuterName type=""CustomType"" d1p1:type=""value1"" name1=""value3"" name2="""" name3="""" name=""value"" xmlns:d1p1=""namespace"" xmlns=""OuterNamespace"" />"
+                @"<OuterName type=""CustomType"" d1p1:type=""value1"" name1=""value3"" name2="""" name3="""" name=""value"" xmlns:d1p1=""namespace"" xmlns=""OuterNamespace"" />",
             };
         }
 

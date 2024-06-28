@@ -159,7 +159,7 @@ public class TestServer : IServer
         return new ClientHandler(PathBase, Application)
         {
             AllowSynchronousIO = AllowSynchronousIO,
-            PreserveExecutionContext = PreserveExecutionContext
+            PreserveExecutionContext = PreserveExecutionContext,
         };
     }
 
@@ -171,7 +171,7 @@ public class TestServer : IServer
         return new ClientHandler(PathBase, Application, additionalContextConfiguration)
         {
             AllowSynchronousIO = AllowSynchronousIO,
-            PreserveExecutionContext = PreserveExecutionContext
+            PreserveExecutionContext = PreserveExecutionContext,
         };
     }
 
@@ -197,7 +197,7 @@ public class TestServer : IServer
         return new WebSocketClient(pathBase, Application)
         {
             AllowSynchronousIO = AllowSynchronousIO,
-            PreserveExecutionContext = PreserveExecutionContext
+            PreserveExecutionContext = PreserveExecutionContext,
         };
     }
 

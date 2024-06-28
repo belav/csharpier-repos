@@ -57,7 +57,7 @@ namespace System.Text.RegularExpressions.Tests
                         cases[i].Beginning,
                         cases[i].Length,
                         cases[i].ExpectedSuccess,
-                        cases[i].ExpectedValue
+                        cases[i].ExpectedValue,
                     };
                 }
             }
@@ -2821,7 +2821,7 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     RegexOptions.None,
                     RegexOptions.RightToLeft,
-                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant
+                    RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
                 }
             )
             {
@@ -4088,7 +4088,7 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         engine,
                         RegexOptions.IgnoreCase | RegexOptions.CultureInvariant,
-                        length
+                        length,
                     };
                 }
             }
@@ -4311,19 +4311,19 @@ namespace System.Text.RegularExpressions.Tests
                         {
                             engine,
                             @$"(a+{lazyInner})+{lazyOuter}$",
-                            $"{a50}b"
+                            $"{a50}b",
                         };
                         yield return new object[]
                         {
                             engine,
                             @$"([^a]+{lazyInner})+{lazyOuter}$",
-                            $"{b50}a"
+                            $"{b50}a",
                         };
                         yield return new object[]
                         {
                             engine,
                             @$"(\w+{lazyInner})+{lazyOuter}$",
-                            $"{a100}!"
+                            $"{a100}!",
                         };
 
                         // Loop around a loop (w/ and w/out inner capture)
@@ -4331,13 +4331,13 @@ namespace System.Text.RegularExpressions.Tests
                         {
                             engine,
                             @$"((?:aa)+{lazyInner})+{lazyOuter}$",
-                            $"{a100}b"
+                            $"{a100}b",
                         };
                         yield return new object[]
                         {
                             engine,
                             @$"((aa)+{lazyInner})+{lazyOuter}$",
-                            $"{a100}b"
+                            $"{a100}b",
                         };
                     }
                 }
@@ -4347,7 +4347,7 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     engine,
                     string.Concat(Enumerable.Repeat(@"(?:a||\w)", 64)) + "$",
-                    $"{a64}b"
+                    $"{a64}b",
                 };
             }
         }
@@ -4564,8 +4564,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("adfadsfSUCCESSadsfadsf", 0, 22),
-                        new CaptureData("SUCCESS", 7, 7)
-                    }
+                        new CaptureData("SUCCESS", 7, 7),
+                    },
                 };
 
                 // Using |, (), ^, $, .: Actual - "^aaa(bb.+)(d|c)$"
@@ -4581,8 +4581,8 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         new CaptureData("aaabb.cc", 0, 8),
                         new CaptureData("bb.c", 3, 4),
-                        new CaptureData("c", 7, 1)
-                    }
+                        new CaptureData("c", 7, 1),
+                    },
                 };
 
                 // Using greedy quantifiers: Actual - "(a+)(b*)(c?)"
@@ -4599,8 +4599,8 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("aaabbbc", 0, 7),
                         new CaptureData("aaa", 0, 3),
                         new CaptureData("bbb", 3, 3),
-                        new CaptureData("c", 6, 1)
-                    }
+                        new CaptureData("c", 6, 1),
+                    },
                 };
 
                 // Using lazy quantifiers: Actual - "(d+?)(e*?)(f??)"
@@ -4618,8 +4618,8 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("d", 0, 1),
                         new CaptureData("d", 0, 1),
                         new CaptureData(string.Empty, 1, 0),
-                        new CaptureData(string.Empty, 1, 0)
-                    }
+                        new CaptureData(string.Empty, 1, 0),
+                    },
                 };
                 yield return new object[]
                 {
@@ -4635,7 +4635,7 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("ddd", 0, 3),
                         new CaptureData("eee", 3, 3),
                         new CaptureData("fff", 6, 3),
-                    }
+                    },
                 };
 
                 // Noncapturing group : Actual - "(a+)(?:b*)(ccc)"
@@ -4652,7 +4652,7 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("aaabbbccc", 0, 9),
                         new CaptureData("aaa", 0, 3),
                         new CaptureData("ccc", 6, 3),
-                    }
+                    },
                 };
 
                 // Alternation constructs: Actual - "(111|aaa)"
@@ -4664,7 +4664,11 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     0,
                     3,
-                    new CaptureData[] { new CaptureData("aaa", 0, 3), new CaptureData("aaa", 0, 3) }
+                    new CaptureData[]
+                    {
+                        new CaptureData("aaa", 0, 3),
+                        new CaptureData("aaa", 0, 3),
+                    },
                 };
 
                 // Using "n" Regex option. Only explicitly named groups should be captured: Actual - "([0-9]*)\\s(?<s>[a-z_A-Z]+)", "n"
@@ -4679,8 +4683,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("200 dollars", 0, 11),
-                        new CaptureData("dollars", 4, 7)
-                    }
+                        new CaptureData("dollars", 4, 7),
+                    },
                 };
 
                 // Single line mode "s". Includes new line character: Actual - "([^/]+)","s"
@@ -4696,7 +4700,7 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         new CaptureData("abc\nsfc", 0, 7),
                         new CaptureData("abc\nsfc", 0, 7),
-                    }
+                    },
                 };
 
                 // "([0-9]+(\\.[0-9]+){3})"
@@ -4723,7 +4727,7 @@ namespace System.Text.RegularExpressions.Tests
                                 new CaptureData(".111", 8, 4),
                             }
                         ),
-                    }
+                    },
                 };
 
                 // Groups and captures
@@ -4740,8 +4744,8 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("aaabbcccccccccc", 0, 15),
                         new CaptureData("aaa", 0, 3),
                         new CaptureData("bb", 3, 2),
-                        new CaptureData("cccccccccc", 5, 10)
-                    }
+                        new CaptureData("cccccccccc", 5, 10),
+                    },
                 };
 
                 yield return new object[]
@@ -4757,8 +4761,8 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData("aaabbcccccccccc", 0, 15),
                         new CaptureData("aaa", 0, 3),
                         new CaptureData("bb", 3, 2),
-                        new CaptureData("cccccccccc", 5, 10)
-                    }
+                        new CaptureData("cccccccccc", 5, 10),
+                    },
                 };
 
                 // Using |, (), ^, $, .: Actual - "^aaa(bb.+)(d|c)$"
@@ -4774,8 +4778,8 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         new CaptureData("aaabb.cc", 0, 8),
                         new CaptureData("bb.c", 3, 4),
-                        new CaptureData("c", 7, 1)
-                    }
+                        new CaptureData("c", 7, 1),
+                    },
                 };
 
                 // Actual - ".*\\b(\\w+)\\b"
@@ -4790,8 +4794,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("XSP_TEST_FAILURE SUCCESS", 0, 24),
-                        new CaptureData("SUCCESS", 17, 7)
-                    }
+                        new CaptureData("SUCCESS", 17, 7),
+                    },
                 };
 
                 // Multiline
@@ -4806,8 +4810,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("line2\nline3", 6, 11),
-                        new CaptureData("line2\n", 6, 6)
-                    }
+                        new CaptureData("line2\n", 6, 6),
+                    },
                 };
 
                 // Multiline
@@ -4822,8 +4826,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("line2\nline3", 6, 11),
-                        new CaptureData("line2\n", 6, 6)
-                    }
+                        new CaptureData("line2\n", 6, 6),
+                    },
                 };
 
                 // Multiline
@@ -4838,8 +4842,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("line3\n\nline4", 12, 12),
-                        new CaptureData("line3\n\n", 12, 7)
-                    }
+                        new CaptureData("line3\n\n", 12, 7),
+                    },
                 };
 
                 // Multiline
@@ -4854,8 +4858,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("line3\n\nline4", 12, 12),
-                        new CaptureData("line3\n\n", 12, 7)
-                    }
+                        new CaptureData("line3\n\n", 12, 7),
+                    },
                 };
 
                 // Multiline
@@ -4870,8 +4874,8 @@ namespace System.Text.RegularExpressions.Tests
                     new CaptureData[]
                     {
                         new CaptureData("line2\nline3", 6, 11),
-                        new CaptureData("line2\n", 6, 6)
-                    }
+                        new CaptureData("line2\n", 6, 6),
+                    },
                 };
 
                 // Validate captures after backtracking constructs are uncaptured when backtracking
@@ -4888,8 +4892,8 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData[]
                         {
                             new CaptureData("aaaa", 0, 4),
-                            new CaptureData("a", 3, 1)
-                        }
+                            new CaptureData("a", 3, 1),
+                        },
                     };
 
                     yield return new object[]
@@ -4914,8 +4918,8 @@ namespace System.Text.RegularExpressions.Tests
                                     new CaptureData("a", 2, 1),
                                 }
                             ),
-                            new CaptureData("a", 3, 1)
-                        }
+                            new CaptureData("a", 3, 1),
+                        },
                     };
                 }
                 yield return new object[]
@@ -4930,8 +4934,8 @@ namespace System.Text.RegularExpressions.Tests
                     {
                         new CaptureData("aaaa", 0, 4),
                         new CaptureData("a", 0, 1),
-                        new CaptureData("a", 3, 1)
-                    }
+                        new CaptureData("a", 3, 1),
+                    },
                 };
 
                 if (!RegexHelpers.IsNonBacktracking(engine))
@@ -4945,7 +4949,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.None,
                         0,
                         9,
-                        new CaptureData[] { new CaptureData("abcXXXdef", 0, 9) }
+                        new CaptureData[] { new CaptureData("abcXXXdef", 0, 9) },
                     };
 
                     // Backreferences : Actual - "(\\w)\\1"
@@ -4961,7 +4965,7 @@ namespace System.Text.RegularExpressions.Tests
                         {
                             new CaptureData("aa", 0, 2),
                             new CaptureData("a", 0, 1),
-                        }
+                        },
                     };
 
                     // Actual - "(?<1>\\d+)abc(?(1)222|111)"
@@ -4976,8 +4980,8 @@ namespace System.Text.RegularExpressions.Tests
                         new CaptureData[]
                         {
                             new CaptureData("111abc222", 0, 9),
-                            new CaptureData("111", 0, 3)
-                        }
+                            new CaptureData("111", 0, 3),
+                        },
                     };
 
                     // RightToLeft
@@ -4989,7 +4993,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         3,
                         3,
-                        new CaptureData[] { new CaptureData("aaa", 0, 3) }
+                        new CaptureData[] { new CaptureData("aaa", 0, 3) },
                     };
 
                     // RightToLeft with anchor
@@ -5001,7 +5005,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         3,
                         3,
-                        new CaptureData[] { new CaptureData("aaa", 0, 3) }
+                        new CaptureData[] { new CaptureData("aaa", 0, 3) },
                     };
                     yield return new object[]
                     {
@@ -5011,7 +5015,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.RightToLeft,
                         0,
                         3,
-                        new CaptureData[] { new CaptureData("bbb", 0, 3) }
+                        new CaptureData[] { new CaptureData("bbb", 0, 3) },
                     };
                 }
             }
@@ -5131,7 +5135,7 @@ namespace System.Text.RegularExpressions.Tests
                         RegexOptions.None,
                         RegexOptions.Singleline,
                         RegexOptions.Multiline,
-                        RegexOptions.Singleline | RegexOptions.Multiline
+                        RegexOptions.Singleline | RegexOptions.Multiline,
                     }
                 )
                 {
@@ -5147,7 +5151,7 @@ namespace System.Text.RegularExpressions.Tests
                         true,
                         true,
                         "abc",
-                        0
+                        0,
                     };
                     yield return new object[]
                     {
@@ -5160,7 +5164,7 @@ namespace System.Text.RegularExpressions.Tests
                         false,
                         true,
                         "bc",
-                        1
+                        1,
                     };
                     yield return new object[]
                     {
@@ -5173,7 +5177,7 @@ namespace System.Text.RegularExpressions.Tests
                         false,
                         true,
                         "abc",
-                        1
+                        1,
                     };
                     yield return new object[]
                     {
@@ -5186,7 +5190,7 @@ namespace System.Text.RegularExpressions.Tests
                         false,
                         false,
                         "",
-                        0
+                        0,
                     };
                 }
 
@@ -5205,7 +5209,7 @@ namespace System.Text.RegularExpressions.Tests
                     false,
                     true,
                     "abc",
-                    1
+                    1,
                 };
                 yield return new object[]
                 {
@@ -5218,7 +5222,7 @@ namespace System.Text.RegularExpressions.Tests
                     false,
                     true,
                     "abc2",
-                    1
+                    1,
                 };
 
                 if (!RegexHelpers.IsNonBacktracking(engine))
@@ -5235,7 +5239,7 @@ namespace System.Text.RegularExpressions.Tests
                         true,
                         false,
                         "def",
-                        3
+                        3,
                     };
                     yield return new object[]
                     {
@@ -5248,7 +5252,7 @@ namespace System.Text.RegularExpressions.Tests
                         false,
                         true,
                         "def",
-                        3
+                        3,
                     };
                 }
             }
@@ -5609,21 +5613,21 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     @"(?:\w*)+\.",
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     engine,
                     @"(?:a+)+b",
                     "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     engine,
                     @"(?:x+x+)+y",
                     "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                    false
+                    false,
                 };
             }
         }
@@ -5754,7 +5758,7 @@ namespace System.Text.RegularExpressions.Tests
                     "$",
                     "abcda",
                     400,
-                    4
+                    4,
                 };
                 yield return new object[] { engine, "(a|A)", "", "aAaAa", 2000, 400 };
             }
@@ -5913,7 +5917,7 @@ namespace System.Text.RegularExpressions.Tests
             {
                 "(?:a|aa|[abc]?[ab]?[abcd]).{20}$",
                 "aaa01234567890123456789",
-                23
+                23,
             };
             yield return new object[] { "(?:a|AA|BCD).{20}$", "a01234567890123456789", 21 };
             yield return new object[] { "(?:a.{20}|a.{10})bc$", "a01234567890123456789bc", 23 };
@@ -5963,7 +5967,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"a+",
                     RegexOptions.None,
                     "xxxxxaaaaxxxxxxxxxxaaaaaa",
-                    new (int, int, string)[] { (5, 4, "aaaa"), (19, 6, "aaaaaa") }
+                    new (int, int, string)[] { (5, 4, "aaaa"), (19, 6, "aaaaaa") },
                 };
                 yield return new object[]
                 {
@@ -5971,7 +5975,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"(...)+",
                     RegexOptions.None,
                     "abcd\nfghijklm",
-                    new (int, int, string)[] { (0, 3, "abc"), (5, 6, "fghijk") }
+                    new (int, int, string)[] { (0, 3, "abc"), (5, 6, "fghijk") },
                 };
                 yield return new object[]
                 {
@@ -5979,7 +5983,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"something",
                     RegexOptions.None,
                     "nothing",
-                    null
+                    null,
                 };
                 yield return new object[]
                 {
@@ -5987,7 +5991,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(a|ba)c",
                     RegexOptions.None,
                     "bac",
-                    new (int, int, string)[] { (0, 3, "bac") }
+                    new (int, int, string)[] { (0, 3, "bac") },
                 };
                 yield return new object[]
                 {
@@ -5995,7 +5999,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(a|ba)c",
                     RegexOptions.None,
                     "ac",
-                    new (int, int, string)[] { (0, 2, "ac") }
+                    new (int, int, string)[] { (0, 2, "ac") },
                 };
                 yield return new object[]
                 {
@@ -6003,7 +6007,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(a|ba)c",
                     RegexOptions.None,
                     "baacd",
-                    new (int, int, string)[] { (2, 2, "ac") }
+                    new (int, int, string)[] { (2, 2, "ac") },
                 };
                 yield return new object[]
                 {
@@ -6011,7 +6015,7 @@ namespace System.Text.RegularExpressions.Tests
                     "\n",
                     RegexOptions.None,
                     "\n",
-                    new (int, int, string)[] { (0, 1, "\n") }
+                    new (int, int, string)[] { (0, 1, "\n") },
                 };
                 yield return new object[]
                 {
@@ -6019,7 +6023,7 @@ namespace System.Text.RegularExpressions.Tests
                     "[^a]",
                     RegexOptions.None,
                     "\n",
-                    new (int, int, string)[] { (0, 1, "\n") }
+                    new (int, int, string)[] { (0, 1, "\n") },
                 };
 
                 // In Singleline mode . includes all characters, also \n
@@ -6029,7 +6033,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"(...)+",
                     RegexOptions.None | RegexOptions.Singleline,
                     "abcd\nfghijklm",
-                    new (int, int, string)[] { (0, 12, "abcd\nfghijkl") }
+                    new (int, int, string)[] { (0, 12, "abcd\nfghijkl") },
                 };
 
                 // Ignoring case
@@ -6039,7 +6043,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"a+",
                     RegexOptions.None | RegexOptions.IgnoreCase,
                     "xxxxxaAAaxxxxxxxxxxaaaaAa",
-                    new (int, int, string)[] { (5, 4, "aAAa"), (19, 6, "aaaaAa") }
+                    new (int, int, string)[] { (5, 4, "aAAa"), (19, 6, "aaaaAa") },
                 };
 
                 // NonASCII characters
@@ -6049,7 +6053,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"(\uFFFE\uFFFF)+",
                     RegexOptions.None,
                     "=====\uFFFE\uFFFF\uFFFE\uFFFF\uFFFE====",
-                    new (int, int, string)[] { (5, 4, "\uFFFE\uFFFF\uFFFE\uFFFF") }
+                    new (int, int, string)[] { (5, 4, "\uFFFE\uFFFF\uFFFE\uFFFF") },
                 };
                 yield return new object[]
                 {
@@ -6057,7 +6061,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\d\s\w+",
                     RegexOptions.None,
                     "=====1\v\u212A4==========1\ta\u0130Aa",
-                    new (int, int, string)[] { (5, 4, "1\v\u212A4"), (19, 6, "1\ta\u0130Aa") }
+                    new (int, int, string)[] { (5, 4, "1\v\u212A4"), (19, 6, "1\ta\u0130Aa") },
                 };
                 yield return new object[]
                 {
@@ -6065,7 +6069,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\u221E|\u2713",
                     RegexOptions.None,
                     "infinity \u221E and checkmark \u2713 are contained here",
-                    new (int, int, string)[] { (9, 1, "\u221E"), (25, 1, "\u2713") }
+                    new (int, int, string)[] { (9, 1, "\u221E"), (25, 1, "\u2713") },
                 };
 
                 // Whitespace
@@ -6075,7 +6079,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\s+",
                     RegexOptions.None,
                     "===== \n\t\v\r ====",
-                    new (int, int, string)[] { (5, 6, " \n\t\v\r ") }
+                    new (int, int, string)[] { (5, 6, " \n\t\v\r ") },
                 };
 
                 // Unicode character classes, the input string uses the first element of each character class
@@ -6087,8 +6091,8 @@ namespace System.Text.RegularExpressions.Tests
                     "=====Aa\u01C5\u02B0\u01BB\u0300\u0903\u04880\u16EE===",
                     new (int, int, string)[]
                     {
-                        (5, 10, "Aa\u01C5\u02B0\u01BB\u0300\u0903\u04880\u16EE")
-                    }
+                        (5, 10, "Aa\u01C5\u02B0\u01BB\u0300\u0903\u04880\u16EE"),
+                    },
                 };
                 yield return new object[]
                 {
@@ -6098,8 +6102,8 @@ namespace System.Text.RegularExpressions.Tests
                     "=====\u00B2 \u2028\u2029\0\u0600\uD800\uE000_\u002D===",
                     new (int, int, string)[]
                     {
-                        (5, 10, "\u00B2 \u2028\u2029\0\u0600\uD800\uE000_\u002D")
-                    }
+                        (5, 10, "\u00B2 \u2028\u2029\0\u0600\uD800\uE000_\u002D"),
+                    },
                 };
                 yield return new object[]
                 {
@@ -6107,7 +6111,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\p{Ps}\p{Pe}\p{Pi}\p{Pf}\p{Po}\p{Sm}\p{Sc}\p{Sk}\p{So}\p{Cn}",
                     RegexOptions.None,
                     "=====()\xAB\xBB!+$^\xA6\u0378===",
-                    new (int, int, string)[] { (5, 10, "()\xAB\xBB!+$^\xA6\u0378") }
+                    new (int, int, string)[] { (5, 10, "()\xAB\xBB!+$^\xA6\u0378") },
                 };
                 yield return new object[]
                 {
@@ -6121,8 +6125,8 @@ namespace System.Text.RegularExpressions.Tests
                             5,
                             30,
                             "Aa\u01C5\u02B0\u01BB\u0300\u0903\u04880\u16EE\xB2 \u2028\u2029\0\u0600\uD800\uE000_\x2D()\xAB\xBB!+$^\xA6\u0378"
-                        )
-                    }
+                        ),
+                    },
                 };
 
                 // Case insensitive cases by using ?i and some non-ASCII characters like Kelvin sign and applying ?i over negated character classes
@@ -6132,7 +6136,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[a-d\u00D5]+k*)",
                     RegexOptions.None,
                     "xyxaB\u00F5c\u212AKAyy",
-                    new (int, int, string)[] { (3, 6, "aB\u00F5c\u212AK"), (9, 1, "A") }
+                    new (int, int, string)[] { (3, 6, "aB\u00F5c\u212AK"), (9, 1, "A") },
                 };
                 yield return new object[]
                 {
@@ -6140,7 +6144,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[a-d]+)",
                     RegexOptions.None,
                     "xyxaBcyy",
-                    new (int, int, string)[] { (3, 3, "aBc") }
+                    new (int, int, string)[] { (3, 3, "aBc") },
                 };
                 yield return new object[]
                 {
@@ -6148,7 +6152,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[\0-@B-\uFFFF]+)",
                     RegexOptions.None,
                     "xaAaAy",
-                    new (int, int, string)[] { (0, 6, "xaAaAy") }
+                    new (int, int, string)[] { (0, 6, "xaAaAy") },
                 }; // this is the same as .+
                 yield return new object[]
                 {
@@ -6156,7 +6160,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[\0-ac-\uFFFF])",
                     RegexOptions.None,
                     "b",
-                    new (int, int, string)[] { (0, 1, "b") }
+                    new (int, int, string)[] { (0, 1, "b") },
                 };
                 yield return new object[]
                 {
@@ -6164,7 +6168,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[\0-PR-\uFFFF])",
                     RegexOptions.None,
                     "Q",
-                    new (int, int, string)[] { (0, 1, "Q") }
+                    new (int, int, string)[] { (0, 1, "Q") },
                 };
                 yield return new object[]
                 {
@@ -6172,7 +6176,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[\0-pr-\uFFFF])",
                     RegexOptions.None,
                     "q",
-                    new (int, int, string)[] { (0, 1, "q") }
+                    new (int, int, string)[] { (0, 1, "q") },
                 };
                 yield return new object[] { engine, "(?i:[^a])", RegexOptions.None, "aAaA", null }; // this corresponds to not{a,A}
                 yield return new object[]
@@ -6181,7 +6185,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(?i:[\0-\uFFFF-[A]])",
                     RegexOptions.None,
                     "aAaA",
-                    null
+                    null,
                 }; // this corresponds to not{a,A}
                 yield return new object[] { engine, "(?i:[^Q])", RegexOptions.None, "q", null };
                 yield return new object[] { engine, "(?i:[^b])", RegexOptions.None, "b", null };
@@ -6193,7 +6197,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\b\w+nn\b",
                     RegexOptions.None,
                     "both Anne and Ann are names that contain nn",
-                    new (int, int, string)[] { (14, 3, "Ann") }
+                    new (int, int, string)[] { (14, 3, "Ann") },
                 };
                 yield return new object[]
                 {
@@ -6201,7 +6205,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\B x",
                     RegexOptions.None,
                     " xx",
-                    new (int, int, string)[] { (0, 2, " x") }
+                    new (int, int, string)[] { (0, 2, " x") },
                 };
                 yield return new object[]
                 {
@@ -6209,7 +6213,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\bxx\b",
                     RegexOptions.None,
                     " zxx:xx",
-                    new (int, int, string)[] { (5, 2, "xx") }
+                    new (int, int, string)[] { (5, 2, "xx") },
                 };
                 yield return new object[]
                 {
@@ -6217,7 +6221,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"^abc*\B",
                     RegexOptions.None | RegexOptions.Multiline,
                     "\nabcc \nabcccd\n",
-                    new (int, int, string)[] { (1, 3, "abc"), (7, 5, "abccc") }
+                    new (int, int, string)[] { (1, 3, "abc"), (7, 5, "abccc") },
                 };
                 yield return new object[]
                 {
@@ -6225,7 +6229,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^abc",
                     RegexOptions.None,
                     "abcccc",
-                    new (int, int, string)[] { (0, 3, "abc") }
+                    new (int, int, string)[] { (0, 3, "abc") },
                 };
                 yield return new object[] { engine, "^abc", RegexOptions.None, "aabcccc", null };
                 yield return new object[] { engine, "abc$", RegexOptions.None, "aabcccc", null };
@@ -6236,7 +6240,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"abc\Z",
                     RegexOptions.None,
                     "aabc\n",
-                    new (int, int, string)[] { (1, 3, "abc") }
+                    new (int, int, string)[] { (1, 3, "abc") },
                 };
                 yield return new object[]
                 {
@@ -6244,7 +6248,7 @@ namespace System.Text.RegularExpressions.Tests
                     "abc$",
                     RegexOptions.None,
                     "aabc\nabc",
-                    new (int, int, string)[] { (5, 3, "abc") }
+                    new (int, int, string)[] { (5, 3, "abc") },
                 };
                 yield return new object[]
                 {
@@ -6252,7 +6256,7 @@ namespace System.Text.RegularExpressions.Tests
                     "abc$",
                     RegexOptions.None | RegexOptions.Multiline,
                     "aabc\nabc",
-                    new (int, int, string)[] { (1, 3, "abc"), (5, 3, "abc") }
+                    new (int, int, string)[] { (1, 3, "abc"), (5, 3, "abc") },
                 };
                 yield return new object[] { engine, @"a\bb", RegexOptions.None, "ab", null };
                 yield return new object[]
@@ -6261,7 +6265,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"a\Bb",
                     RegexOptions.None,
                     "ab",
-                    new (int, int, string)[] { (0, 2, "ab") }
+                    new (int, int, string)[] { (0, 2, "ab") },
                 };
                 yield return new object[]
                 {
@@ -6269,7 +6273,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"(a\Bb|a\bb)",
                     RegexOptions.None,
                     "ab",
-                    new (int, int, string)[] { (0, 2, "ab") }
+                    new (int, int, string)[] { (0, 2, "ab") },
                 };
                 yield return new object[]
                 {
@@ -6277,7 +6281,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"a$",
                     RegexOptions.None | RegexOptions.Multiline,
                     "b\na",
-                    new (int, int, string)[] { (2, 1, "a") }
+                    new (int, int, string)[] { (2, 1, "a") },
                 };
 
                 // Various loop constructs
@@ -6287,7 +6291,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[bcd]{4,5}(.)",
                     RegexOptions.None,
                     "acdbcdbe",
-                    new (int, int, string)[] { (0, 7, "acdbcdb") }
+                    new (int, int, string)[] { (0, 7, "acdbcdb") },
                 };
                 yield return new object[]
                 {
@@ -6295,7 +6299,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[bcd]{4,5}?(.)",
                     RegexOptions.None,
                     "acdbcdbe",
-                    new (int, int, string)[] { (0, 6, "acdbcd") }
+                    new (int, int, string)[] { (0, 6, "acdbcd") },
                 };
                 yield return new object[]
                 {
@@ -6303,7 +6307,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(x{3})+",
                     RegexOptions.None,
                     "abcxxxxxxxxacacaca",
-                    new (int, int, string)[] { (3, 6, "xxxxxx") }
+                    new (int, int, string)[] { (3, 6, "xxxxxx") },
                 };
                 yield return new object[]
                 {
@@ -6311,7 +6315,7 @@ namespace System.Text.RegularExpressions.Tests
                     "(x{3})+?",
                     RegexOptions.None,
                     "abcxxxxxxxxacacaca",
-                    new (int, int, string)[] { (3, 3, "xxx"), (6, 3, "xxx") }
+                    new (int, int, string)[] { (3, 3, "xxx"), (6, 3, "xxx") },
                 };
                 yield return new object[]
                 {
@@ -6319,7 +6323,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[0-9]+0",
                     RegexOptions.None,
                     "ababca123000xyz",
-                    new (int, int, string)[] { (5, 7, "a123000") }
+                    new (int, int, string)[] { (5, 7, "a123000") },
                 };
                 yield return new object[]
                 {
@@ -6327,7 +6331,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[0-9]+?0",
                     RegexOptions.None,
                     "ababca123000xyz",
-                    new (int, int, string)[] { (5, 5, "a1230") }
+                    new (int, int, string)[] { (5, 5, "a1230") },
                 };
                 // Mixed lazy/eager loop
                 yield return new object[]
@@ -6336,7 +6340,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[0-9]+?0|b[0-9]+0",
                     RegexOptions.None,
                     "ababca123000xyzababcb123000xyz",
-                    new (int, int, string)[] { (5, 5, "a1230"), (20, 7, "b123000") }
+                    new (int, int, string)[] { (5, 5, "a1230"), (20, 7, "b123000") },
                 };
                 // Loops around alternations
                 yield return new object[]
@@ -6345,7 +6349,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^(?:aaa|aa)*$",
                     RegexOptions.None,
                     "aaaaaaaa",
-                    new (int, int, string)[] { (0, 8, "aaaaaaaa") }
+                    new (int, int, string)[] { (0, 8, "aaaaaaaa") },
                 };
                 yield return new object[]
                 {
@@ -6353,7 +6357,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^(?:aaa|aa)*?$",
                     RegexOptions.None,
                     "aaaaaaaa",
-                    new (int, int, string)[] { (0, 8, "aaaaaaaa") }
+                    new (int, int, string)[] { (0, 8, "aaaaaaaa") },
                 };
                 yield return new object[]
                 {
@@ -6361,7 +6365,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^(?:aaa|aa){1,5}$",
                     RegexOptions.None,
                     "aaaaaaaa",
-                    new (int, int, string)[] { (0, 8, "aaaaaaaa") }
+                    new (int, int, string)[] { (0, 8, "aaaaaaaa") },
                 };
                 yield return new object[]
                 {
@@ -6369,7 +6373,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^(?:aaa|aa){1,5}?$",
                     RegexOptions.None,
                     "aaaaaaaa",
-                    new (int, int, string)[] { (0, 8, "aaaaaaaa") }
+                    new (int, int, string)[] { (0, 8, "aaaaaaaa") },
                 };
                 yield return new object[]
                 {
@@ -6377,7 +6381,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^(?:aaa|aa){4}$",
                     RegexOptions.None,
                     "aaaaaaaa",
-                    new (int, int, string)[] { (0, 8, "aaaaaaaa") }
+                    new (int, int, string)[] { (0, 8, "aaaaaaaa") },
                 };
                 yield return new object[]
                 {
@@ -6385,7 +6389,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^(?:aaa|aa){4}?$",
                     RegexOptions.None,
                     "aaaaaaaa",
-                    new (int, int, string)[] { (0, 8, "aaaaaaaa") }
+                    new (int, int, string)[] { (0, 8, "aaaaaaaa") },
                 };
 
                 // Mostly empty matches using unusual regexes consisting mostly of anchors only
@@ -6395,7 +6399,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^",
                     RegexOptions.None,
                     "",
-                    new (int, int, string)[] { (0, 0, "") }
+                    new (int, int, string)[] { (0, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6403,7 +6407,7 @@ namespace System.Text.RegularExpressions.Tests
                     "$",
                     RegexOptions.None,
                     "",
-                    new (int, int, string)[] { (0, 0, "") }
+                    new (int, int, string)[] { (0, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6411,7 +6415,7 @@ namespace System.Text.RegularExpressions.Tests
                     "^$",
                     RegexOptions.None,
                     "",
-                    new (int, int, string)[] { (0, 0, "") }
+                    new (int, int, string)[] { (0, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6419,7 +6423,7 @@ namespace System.Text.RegularExpressions.Tests
                     "$^",
                     RegexOptions.None,
                     "",
-                    new (int, int, string)[] { (0, 0, "") }
+                    new (int, int, string)[] { (0, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6427,7 +6431,7 @@ namespace System.Text.RegularExpressions.Tests
                     "$^$$^^$^$",
                     RegexOptions.None,
                     "",
-                    new (int, int, string)[] { (0, 0, "") }
+                    new (int, int, string)[] { (0, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6435,7 +6439,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a*",
                     RegexOptions.None,
                     "bbb",
-                    new (int, int, string)[] { (0, 0, ""), (1, 0, ""), (2, 0, ""), (3, 0, "") }
+                    new (int, int, string)[] { (0, 0, ""), (1, 0, ""), (2, 0, ""), (3, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6449,8 +6453,8 @@ namespace System.Text.RegularExpressions.Tests
                         (1, 3, "aaa"),
                         (4, 0, ""),
                         (5, 0, ""),
-                        (6, 0, "")
-                    }
+                        (6, 0, ""),
+                    },
                 };
                 yield return new object[]
                 {
@@ -6458,7 +6462,7 @@ namespace System.Text.RegularExpressions.Tests
                     @"\b",
                     RegexOptions.None,
                     "hello--world",
-                    new (int, int, string)[] { (0, 0, ""), (5, 0, ""), (7, 0, ""), (12, 0, "") }
+                    new (int, int, string)[] { (0, 0, ""), (5, 0, ""), (7, 0, ""), (12, 0, "") },
                 };
                 yield return new object[]
                 {
@@ -6476,8 +6480,8 @@ namespace System.Text.RegularExpressions.Tests
                         (8, 0, ""),
                         (9, 0, ""),
                         (10, 0, ""),
-                        (11, 0, "")
-                    }
+                        (11, 0, ""),
+                    },
                 };
 
                 // Involving many different characters in the same regex
@@ -6493,8 +6497,8 @@ namespace System.Text.RegularExpressions.Tests
                             5,
                             67,
                             "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789<>:;@"
-                        )
-                    }
+                        ),
+                    },
                 };
 
                 //this will need a total of 2x70 + 2 parts in the partition of NonBacktracking
@@ -6523,7 +6527,7 @@ namespace System.Text.RegularExpressions.Tests
                     pattern,
                     RegexOptions.None,
                     input,
-                    new (int, int, string)[] { (5, length, input.Substring(5, length)) }
+                    new (int, int, string)[] { (5, length, input.Substring(5, length)) },
                 };
             }
         }
@@ -6680,7 +6684,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[abc]{0,3}",
                     "xxxabbbbbbbyyy",
                     true,
-                    "abbbbbbb"
+                    "abbbbbbb",
                 };
                 yield return new object[]
                 {
@@ -6689,7 +6693,7 @@ namespace System.Text.RegularExpressions.Tests
                     "a[abc]{0,3}?",
                     "xxxabbbbbbbyyy",
                     true,
-                    "a"
+                    "a",
                 };
             }
         }
@@ -6723,7 +6727,7 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     @"(the)\s*([12][0-9]|3[01]|0?[1-9])",
                     "it is the 10:00 time",
-                    (6, 6)
+                    (6, 6),
                 };
                 yield return new object[] { engine, "(ab|a|bcd|c){0,}d*", "ababcd", (0, 6) };
                 yield return new object[] { engine, "(ab|a|bcd|c){0,10}d*", "ababcd", (0, 6) };
@@ -6733,7 +6737,7 @@ namespace System.Text.RegularExpressions.Tests
                     engine,
                     @"(the)\s*(0?[1-9]|[12][0-9]|3[01])",
                     "it is the 10:00 time",
-                    (6, 5)
+                    (6, 5),
                 };
             }
         }
@@ -6860,7 +6864,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     @"\b\w{10,}\b",
                     "this is a complicated word in a\nnontrivial sentence",
-                    new (int, int)[] { (10, 11), (32, 10) }
+                    new (int, int)[] { (10, 11), (32, 10) },
                 };
                 yield return new object[]
                 {
@@ -6868,7 +6872,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.Multiline,
                     @"^\w{10,}\b",
                     "this is a\ncomplicated word in a\nnontrivial sentence",
-                    new (int, int)[] { (10, 11), (32, 10) }
+                    new (int, int)[] { (10, 11), (32, 10) },
                 };
                 yield return new object[]
                 {
@@ -6876,7 +6880,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.None,
                     @"\b\d{1,2}\/\d{1,2}\/\d{2,4}\b",
                     "date 10/12/1966 and 10/12/66 are the same",
-                    new (int, int)[] { (5, 10), (20, 8) }
+                    new (int, int)[] { (5, 10), (20, 8) },
                 };
                 yield return new object[]
                 {
@@ -6884,7 +6888,7 @@ namespace System.Text.RegularExpressions.Tests
                     RegexOptions.Multiline,
                     @"\b\d{1,2}\/\d{1,2}\/\d{2,4}$",
                     "date 10/12/1966\nand 10/12/66\nare the same",
-                    new (int, int)[] { (5, 10), (20, 8) }
+                    new (int, int)[] { (5, 10), (20, 8) },
                 };
             }
         }

@@ -129,10 +129,9 @@ namespace CSharpSyntaxGenerator
                         {
                             string s => new[] { s },
                             IEnumerable<string> ss => ss,
-                            _ =>
-                                throw new InvalidOperationException(
-                                    "Join must be passed strings or collections of strings"
-                                )
+                            _ => throw new InvalidOperationException(
+                                "Join must be passed strings or collections of strings"
+                            ),
                         }
                     ).Where(s => s != "")
                 )
@@ -156,11 +155,9 @@ namespace CSharpSyntaxGenerator
 
         protected static string OverrideOrNewModifier(Field field)
         {
-            return IsOverride(field)
-                ? "override "
-                : IsNew(field)
-                    ? "new "
-                    : "";
+            return IsOverride(field) ? "override "
+                : IsNew(field) ? "new "
+                : "";
         }
 
         protected static bool CanBeField(Field field)
@@ -422,7 +419,7 @@ namespace CSharpSyntaxGenerator
                     {
                         Node node => node.Fields,
                         AbstractNode abstractNode => abstractNode.Fields,
-                        _ => throw new InvalidOperationException("Unexpected node type.")
+                        _ => throw new InvalidOperationException("Unexpected node type."),
                     }
                 ).Single(f => f.Name == field.Name);
             }

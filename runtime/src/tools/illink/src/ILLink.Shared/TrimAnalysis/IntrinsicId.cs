@@ -394,6 +394,6 @@ namespace ILLink.Shared.TrimAnalysis
         /// <summary>
         /// <see cref="System.Nullable.GetUnderlyingType(System.Type)"/>
         /// </summary>
-        Nullable_GetUnderlyingType
+        Nullable_GetUnderlyingType,
     }
 }

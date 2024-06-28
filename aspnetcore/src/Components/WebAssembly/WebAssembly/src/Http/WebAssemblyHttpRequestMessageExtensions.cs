@@ -41,8 +41,9 @@ public static class WebAssemblyHttpRequestMessageExtensions
             BrowserRequestCredentials.Omit => "omit",
             BrowserRequestCredentials.SameOrigin => "same-origin",
             BrowserRequestCredentials.Include => "include",
-            _ =>
-                throw new InvalidOperationException($"Unsupported enum value {requestCredentials}.")
+            _ => throw new InvalidOperationException(
+                $"Unsupported enum value {requestCredentials}."
+            ),
         };
 
         return SetBrowserRequestOption(requestMessage, "credentials", stringOption);
@@ -72,7 +73,7 @@ public static class WebAssemblyHttpRequestMessageExtensions
             BrowserRequestCache.NoCache => "no-cache",
             BrowserRequestCache.ForceCache => "force-cache",
             BrowserRequestCache.OnlyIfCached => "only-if-cached",
-            _ => throw new InvalidOperationException($"Unsupported enum value {requestCache}.")
+            _ => throw new InvalidOperationException($"Unsupported enum value {requestCache}."),
         };
 
         return SetBrowserRequestOption(requestMessage, "cache", stringOption);
@@ -100,7 +101,7 @@ public static class WebAssemblyHttpRequestMessageExtensions
             BrowserRequestMode.NoCors => "no-cors",
             BrowserRequestMode.Cors => "cors",
             BrowserRequestMode.Navigate => "navigate",
-            _ => throw new InvalidOperationException($"Unsupported enum value {requestMode}.")
+            _ => throw new InvalidOperationException($"Unsupported enum value {requestMode}."),
         };
 
         return SetBrowserRequestOption(requestMessage, "mode", stringOption);

@@ -29,7 +29,7 @@ public class DataProtectionRedisTests
         var database = new Mock<IDatabase>();
         database
             .Setup(d => d.ListRange("Key", 0, -1, CommandFlags.None))
-            .Returns(new RedisValue[] { "<Element1/>", "<Element2/>", })
+            .Returns(new RedisValue[] { "<Element1/>", "<Element2/>" })
             .Verifiable();
         var repo = new RedisXmlRepository(() => database.Object, "Key");
 
@@ -46,7 +46,7 @@ public class DataProtectionRedisTests
         var database = new Mock<IDatabase>();
         database
             .Setup(d => d.ListRange("Key", 0, -1, CommandFlags.None))
-            .Returns(new RedisValue[] { "<Element1/>", "<Element2", })
+            .Returns(new RedisValue[] { "<Element1/>", "<Element2" })
             .Verifiable();
         var repo = new RedisXmlRepository(() => database.Object, "Key");
 

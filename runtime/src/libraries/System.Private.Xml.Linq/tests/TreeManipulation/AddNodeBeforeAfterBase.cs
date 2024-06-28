@@ -63,7 +63,7 @@ namespace XLinqTests
                 new XText("xtext"),
                 "plaintext1",
                 "plaintext2",
-                null
+                null,
             };
 
             if (isConnected)
@@ -145,7 +145,7 @@ namespace XLinqTests
                 " ",
                 "\t",
                 "",
-                null
+                null,
             };
 
             object[] origNodes =
@@ -154,7 +154,7 @@ namespace XLinqTests
                 new XComment("coco"),
                 " ",
                 new XDocumentType("root", null, null, null),
-                new XElement("anUnexpectedlyLongNameForTheRootElement")
+                new XElement("anUnexpectedlyLongNameForTheRootElement"),
             };
 
             if (isConnected)

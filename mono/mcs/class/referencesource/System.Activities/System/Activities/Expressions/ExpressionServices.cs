@@ -558,7 +558,7 @@ namespace System.Activities.Expressions
                     {
                         OperandLocation = new InOutArgument<TOperand>(operandReference)
                         {
-                            EvaluationOrder = 0
+                            EvaluationOrder = 0,
                         },
                     };
                 string argumentError = TryConvertArguments(
@@ -1059,7 +1059,7 @@ namespace System.Activities.Expressions
 
                 if (ra != null)
                 {
-                    result = new ArgumentValue<TResult> { ArgumentName = ra.Name, };
+                    result = new ArgumentValue<TResult> { ArgumentName = ra.Name };
                     return null;
                 }
                 else
@@ -1283,7 +1283,7 @@ namespace System.Activities.Expressions
             InArgument<TLeft> leftArgument = new InArgument<TLeft>(left) { EvaluationOrder = 0 };
             InArgument<TRight> rightArgument = new InArgument<TRight>(right)
             {
-                EvaluationOrder = 1
+                EvaluationOrder = 1,
             };
 
             switch (binaryExpressionBody.NodeType)
@@ -1293,7 +1293,7 @@ namespace System.Activities.Expressions
                     {
                         Left = leftArgument,
                         Right = rightArgument,
-                        Checked = false
+                        Checked = false,
                     };
                     break;
                 case ExpressionType.AddChecked:
@@ -1301,7 +1301,7 @@ namespace System.Activities.Expressions
                     {
                         Left = leftArgument,
                         Right = rightArgument,
-                        Checked = true
+                        Checked = true,
                     };
                     break;
                 case ExpressionType.Subtract:
@@ -1309,7 +1309,7 @@ namespace System.Activities.Expressions
                     {
                         Left = leftArgument,
                         Right = rightArgument,
-                        Checked = false
+                        Checked = false,
                     };
                     break;
                 case ExpressionType.SubtractChecked:
@@ -1317,7 +1317,7 @@ namespace System.Activities.Expressions
                     {
                         Left = leftArgument,
                         Right = rightArgument,
-                        Checked = true
+                        Checked = true,
                     };
                     break;
                 case ExpressionType.Multiply:
@@ -1325,7 +1325,7 @@ namespace System.Activities.Expressions
                     {
                         Left = leftArgument,
                         Right = rightArgument,
-                        Checked = false
+                        Checked = false,
                     };
                     break;
                 case ExpressionType.MultiplyChecked:
@@ -1333,14 +1333,14 @@ namespace System.Activities.Expressions
                     {
                         Left = leftArgument,
                         Right = rightArgument,
-                        Checked = true
+                        Checked = true,
                     };
                     break;
                 case ExpressionType.Divide:
                     result = new Divide<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.AndAlso:
@@ -1353,7 +1353,7 @@ namespace System.Activities.Expressions
                     object resultObject1 = new AndAlso()
                     {
                         Left = (Activity<bool>)leftObject1,
-                        Right = (Activity<bool>)rightObject1
+                        Right = (Activity<bool>)rightObject1,
                     };
                     result = (Activity<TResult>)resultObject1;
                     break;
@@ -1367,7 +1367,7 @@ namespace System.Activities.Expressions
                     object resultObject2 = new OrElse()
                     {
                         Left = (Activity<bool>)leftObject2,
-                        Right = (Activity<bool>)rightObject2
+                        Right = (Activity<bool>)rightObject2,
                     };
                     result = (Activity<TResult>)resultObject2;
                     break;
@@ -1375,56 +1375,56 @@ namespace System.Activities.Expressions
                     result = new Or<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.And:
                     result = new And<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.LessThan:
                     result = new LessThan<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.LessThanOrEqual:
                     result = new LessThanOrEqual<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.GreaterThan:
                     result = new GreaterThan<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.GreaterThanOrEqual:
                     result = new GreaterThanOrEqual<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.Equal:
                     result = new Equal<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 case ExpressionType.NotEqual:
                     result = new NotEqual<TLeft, TRight, TResult>()
                     {
                         Left = leftArgument,
-                        Right = rightArgument
+                        Right = rightArgument,
                     };
                     break;
                 default:
@@ -1581,7 +1581,7 @@ namespace System.Activities.Expressions
                 {
                     result = new PropertyValue<TOperand, TResult>
                     {
-                        PropertyName = memberExpressionBody.Member.Name
+                        PropertyName = memberExpressionBody.Member.Name,
                     };
                 }
                 else
@@ -1589,7 +1589,7 @@ namespace System.Activities.Expressions
                     result = new PropertyValue<TOperand, TResult>
                     {
                         Operand = operand,
-                        PropertyName = memberExpressionBody.Member.Name
+                        PropertyName = memberExpressionBody.Member.Name,
                     };
                 }
                 return null;
@@ -1600,7 +1600,7 @@ namespace System.Activities.Expressions
                 {
                     result = new FieldValue<TOperand, TResult>
                     {
-                        FieldName = memberExpressionBody.Member.Name
+                        FieldName = memberExpressionBody.Member.Name,
                     };
                 }
                 else
@@ -1608,7 +1608,7 @@ namespace System.Activities.Expressions
                     result = new FieldValue<TOperand, TResult>
                     {
                         Operand = operand,
-                        FieldName = memberExpressionBody.Member.Name
+                        FieldName = memberExpressionBody.Member.Name,
                     };
                 }
                 return null;
@@ -1702,7 +1702,7 @@ namespace System.Activities.Expressions
                     {
                         result = new PropertyReference<TOperand, TResult>
                         {
-                            PropertyName = memberExpressionBody.Member.Name
+                            PropertyName = memberExpressionBody.Member.Name,
                         };
                     }
                     else
@@ -1710,7 +1710,7 @@ namespace System.Activities.Expressions
                         result = new PropertyReference<TOperand, TResult>
                         {
                             Operand = operand,
-                            PropertyName = memberExpressionBody.Member.Name
+                            PropertyName = memberExpressionBody.Member.Name,
                         };
                     }
                 }
@@ -1720,7 +1720,7 @@ namespace System.Activities.Expressions
                     {
                         result = new ValueTypePropertyReference<TOperand, TResult>
                         {
-                            PropertyName = memberExpressionBody.Member.Name
+                            PropertyName = memberExpressionBody.Member.Name,
                         };
                     }
                     else
@@ -1728,7 +1728,7 @@ namespace System.Activities.Expressions
                         result = new ValueTypePropertyReference<TOperand, TResult>
                         {
                             OperandLocation = operandReference,
-                            PropertyName = memberExpressionBody.Member.Name
+                            PropertyName = memberExpressionBody.Member.Name,
                         };
                     }
                 }
@@ -1742,7 +1742,7 @@ namespace System.Activities.Expressions
                     {
                         result = new FieldReference<TOperand, TResult>
                         {
-                            FieldName = memberExpressionBody.Member.Name
+                            FieldName = memberExpressionBody.Member.Name,
                         };
                     }
                     else
@@ -1750,7 +1750,7 @@ namespace System.Activities.Expressions
                         result = new FieldReference<TOperand, TResult>
                         {
                             Operand = operand,
-                            FieldName = memberExpressionBody.Member.Name
+                            FieldName = memberExpressionBody.Member.Name,
                         };
                     }
                 }
@@ -1760,7 +1760,7 @@ namespace System.Activities.Expressions
                     {
                         result = new ValueTypeFieldReference<TOperand, TResult>
                         {
-                            FieldName = memberExpressionBody.Member.Name
+                            FieldName = memberExpressionBody.Member.Name,
                         };
                     }
                     else
@@ -1768,7 +1768,7 @@ namespace System.Activities.Expressions
                         result = new ValueTypeFieldReference<TOperand, TResult>
                         {
                             OperandLocation = operandReference,
-                            FieldName = memberExpressionBody.Member.Name
+                            FieldName = memberExpressionBody.Member.Name,
                         };
                     }
                 }
@@ -1853,7 +1853,7 @@ namespace System.Activities.Expressions
                 Parameters =
                 {
                     new InArgument<TLeft> { Expression = left, EvaluationOrder = 0 },
-                    new InArgument<TRight> { Expression = right, EvaluationOrder = 1 }
+                    new InArgument<TRight> { Expression = right, EvaluationOrder = 1 },
                 },
             };
             return null;
@@ -1979,7 +1979,7 @@ namespace System.Activities.Expressions
                     methodCallExpression.Object,
                     false,
                     throwOnError,
-                    null
+                    null,
                 };
                 error =
                     TryConvertArgumentExpressionHandle
@@ -2031,7 +2031,7 @@ namespace System.Activities.Expressions
                 invocationExpression.Expression,
                 false,
                 throwOnError,
-                null
+                null,
             };
             string error =
                 TryConvertArgumentExpressionHandle
@@ -2081,7 +2081,7 @@ namespace System.Activities.Expressions
                 error = TryConvertReference<TArgument>(expression, throwOnError, out argument);
                 if (error == null)
                 {
-                    result = new InOutArgument<TArgument> { Expression = argument, };
+                    result = new InOutArgument<TArgument> { Expression = argument };
                 }
             }
             else
@@ -2090,7 +2090,7 @@ namespace System.Activities.Expressions
                 error = TryConvert<TArgument>(expression, throwOnError, out argument);
                 if (error == null)
                 {
-                    result = new InArgument<TArgument> { Expression = argument, };
+                    result = new InArgument<TArgument> { Expression = argument };
                 }
             }
             return error;
@@ -2257,7 +2257,7 @@ namespace System.Activities.Expressions
             if (typeof(RuntimeArgument).IsAssignableFrom(valueType))
             {
                 RuntimeArgument runtimeArgument = (RuntimeArgument)value;
-                result = new ArgumentValue<TResult> { ArgumentName = runtimeArgument.Name, };
+                result = new ArgumentValue<TResult> { ArgumentName = runtimeArgument.Name };
             }
             else if (typeof(Variable).IsAssignableFrom(valueType))
             {
@@ -2324,7 +2324,7 @@ namespace System.Activities.Expressions
             if (typeof(RuntimeArgument).IsAssignableFrom(valueType))
             {
                 RuntimeArgument runtimeArgument = (RuntimeArgument)value;
-                result = new ArgumentReference<TResult> { ArgumentName = runtimeArgument.Name, };
+                result = new ArgumentReference<TResult> { ArgumentName = runtimeArgument.Name };
             }
             else if (typeof(Variable).IsAssignableFrom(valueType))
             {
@@ -2336,7 +2336,7 @@ namespace System.Activities.Expressions
                 DelegateArgument delegateArgument = (DelegateArgument)value;
                 result = new DelegateArgumentReference<TResult>
                 {
-                    DelegateArgument = delegateArgument
+                    DelegateArgument = delegateArgument,
                 };
             }
 

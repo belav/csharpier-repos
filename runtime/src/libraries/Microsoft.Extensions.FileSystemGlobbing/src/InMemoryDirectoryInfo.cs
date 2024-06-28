@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         private static readonly char[] DirectorySeparators = new[]
         {
             Path.DirectorySeparatorChar,
-            Path.AltDirectorySeparatorChar
+            Path.AltDirectorySeparatorChar,
         };
         private readonly IEnumerable<string> _files;
 

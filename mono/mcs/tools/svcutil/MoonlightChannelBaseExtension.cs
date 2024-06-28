@@ -430,7 +430,7 @@ namespace Mono.ServiceContractTool
             {
                 Name = "Begin" + od.Name,
                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                ReturnType = asyncResultType
+                ReturnType = asyncResultType,
             };
             type.Members.Add(cm);
 
@@ -466,7 +466,7 @@ namespace Mono.ServiceContractTool
             {
                 Name = "End" + od.Name,
                 Attributes = MemberAttributes.Public | MemberAttributes.Final,
-                ReturnType = context.EndMethod.ReturnType
+                ReturnType = context.EndMethod.ReturnType,
             };
             type.Members.Add(cm);
 

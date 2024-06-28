@@ -48,7 +48,7 @@ namespace System
 
         //  Iri strict parsing flag. Makes sense for Unicode. If true then string is
         //  normalized, bidi control characters are removed, unicode char limits are checked
-        IriParsing = 0x400
+        IriParsing = 0x400,
     }
 
     public class GenericUriParser : UriParser

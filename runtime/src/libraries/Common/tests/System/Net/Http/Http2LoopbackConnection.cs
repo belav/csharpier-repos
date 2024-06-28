@@ -596,7 +596,7 @@ namespace System.Net.Test.Common
             new HttpHeaderData("user-agent", ""),
             new HttpHeaderData("vary", ""),
             new HttpHeaderData("via", ""),
-            new HttpHeaderData("www-authenticate", "")
+            new HttpHeaderData("www-authenticate", ""),
         };
 
         private static HttpHeaderData GetHeaderForIndex(int index)

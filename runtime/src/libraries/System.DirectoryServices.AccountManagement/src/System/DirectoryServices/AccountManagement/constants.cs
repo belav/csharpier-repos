@@ -14,7 +14,7 @@ namespace System.DirectoryServices.AccountManagement
     {
         NotSet = 0,
         Loaded,
-        Changed
+        Changed,
     }
 
     // These are the default options used when a user does not specify a context option to connect to the store.
@@ -156,7 +156,7 @@ namespace System.DirectoryServices.AccountManagement
             {
                 typeof(GroupPrincipal),
                 new ArrayList(1) { PropertyNames.GroupMembers }
-            }
+            },
         };
     }
 }

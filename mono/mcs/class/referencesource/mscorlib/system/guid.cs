@@ -179,7 +179,7 @@ namespace System
         {
             None = 0,
             All = 1,
-            AllButOverflow = 2
+            AllButOverflow = 2,
         }
 
         private enum ParseFailureKind
@@ -189,7 +189,7 @@ namespace System
             Format = 2,
             FormatWithParameter = 3,
             NativeException = 4,
-            FormatWithInnerException = 5
+            FormatWithInnerException = 5,
         }
 
         // This will store the result of the parsing.  And it will eventually be used to construct a Guid instance.

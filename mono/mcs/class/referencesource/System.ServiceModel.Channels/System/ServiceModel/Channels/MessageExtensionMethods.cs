@@ -227,11 +227,10 @@ namespace System.ServiceModel.Channels
             );
 
             HttpResponseMessage response = new HttpResponseMessage();
-            response.StatusCode = responseMessageProperty.HasStatusCodeBeenSet
-                ? responseMessageProperty.StatusCode
-                : message.IsFault
-                    ? HttpStatusCode.InternalServerError
-                    : HttpStatusCode.OK;
+            response.StatusCode =
+                responseMessageProperty.HasStatusCodeBeenSet ? responseMessageProperty.StatusCode
+                : message.IsFault ? HttpStatusCode.InternalServerError
+                : HttpStatusCode.OK;
 
             string reasonPhrase = responseMessageProperty.StatusDescription;
             if (!string.IsNullOrEmpty(reasonPhrase))

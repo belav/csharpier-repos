@@ -22,7 +22,7 @@ public class HttpOkObjectResultTest
             {
                 null,
                 "Test string",
-                new Person { Id = 274, Name = "George", }
+                new Person { Id = 274, Name = "George" },
             };
         }
     }
@@ -46,7 +46,7 @@ public class HttpOkObjectResultTest
         // Arrange
         var result = new OkObjectResult(value);
 
-        var httpContext = new DefaultHttpContext { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext { RequestServices = CreateServices() };
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
         // Act

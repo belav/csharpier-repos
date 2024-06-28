@@ -202,7 +202,7 @@ namespace ILVerify
             {
                 var importer = new ILImporter(method, methodIL)
                 {
-                    SanityChecks = _verifierOptions.SanityChecks
+                    SanityChecks = _verifierOptions.SanityChecks,
                 };
 
                 importer.ReportVerificationError = (args, code) =>
@@ -220,7 +220,7 @@ namespace ILVerify
                             ErrorArguments = args,
                             Message = string.IsNullOrEmpty(codeResource)
                                 ? code.ToString()
-                                : codeResource
+                                : codeResource,
                         }
                     );
                 };
@@ -237,7 +237,7 @@ namespace ILVerify
                     new VerificationResult()
                     {
                         Method = methodHandle,
-                        Message = "Unable to resolve token"
+                        Message = "Unable to resolve token",
                     }
                 );
             }
@@ -278,7 +278,7 @@ namespace ILVerify
                     {
                         ExceptionID = e.StringID,
                         Method = methodHandle,
-                        Message = e.Message
+                        Message = e.Message,
                     }
                 );
             }
@@ -308,7 +308,7 @@ namespace ILVerify
                             Code = code,
                             Message =
                                 $"[MD]: Error: {_stringResourceManager.Value.GetString(code.ToString(), CultureInfo.InvariantCulture)}",
-                            Args = args
+                            Args = args,
                         }
                     );
                 };
@@ -321,7 +321,7 @@ namespace ILVerify
                     new VerificationResult()
                     {
                         Type = typeHandle,
-                        Message = "Unable to resolve token"
+                        Message = "Unable to resolve token",
                     }
                 );
             }

@@ -31,7 +31,7 @@ namespace System.ServiceModel.Activities.Presentation.Factories
 
             Variable<CorrelationHandle> requestReplyCorrelation = new Variable<CorrelationHandle>
             {
-                Name = correlationHandleName
+                Name = correlationHandleName,
             };
 
             Send send = new Send
@@ -44,10 +44,10 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                     {
                         CorrelationHandle = new VariableValue<CorrelationHandle>
                         {
-                            Variable = requestReplyCorrelation
-                        }
-                    }
-                }
+                            Variable = requestReplyCorrelation,
+                        },
+                    },
+                },
             };
 
             Sequence sequence = new Sequence()
@@ -56,8 +56,8 @@ namespace System.ServiceModel.Activities.Presentation.Factories
                 Activities =
                 {
                     send,
-                    new ReceiveReply { DisplayName = "ReceiveReplyForSend", Request = send, },
-                }
+                    new ReceiveReply { DisplayName = "ReceiveReplyForSend", Request = send },
+                },
             };
             return sequence;
         }

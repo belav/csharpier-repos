@@ -252,11 +252,9 @@ namespace Microsoft.CodeAnalysis.Rebuild
 
                 var hashAlgorithmGuid = PdbReader.GetGuid(document.HashAlgorithm);
                 var hashAlgorithm =
-                    hashAlgorithmGuid == HashAlgorithmSha1
-                        ? SourceHashAlgorithm.Sha1
-                        : hashAlgorithmGuid == HashAlgorithmSha256
-                            ? SourceHashAlgorithm.Sha256
-                            : SourceHashAlgorithm.None;
+                    hashAlgorithmGuid == HashAlgorithmSha1 ? SourceHashAlgorithm.Sha1
+                    : hashAlgorithmGuid == HashAlgorithmSha256 ? SourceHashAlgorithm.Sha256
+                    : SourceHashAlgorithm.None;
 
                 var hash = PdbReader.GetBlobBytes(document.Hash);
                 var sourceTextInfo = new SourceTextInfo(

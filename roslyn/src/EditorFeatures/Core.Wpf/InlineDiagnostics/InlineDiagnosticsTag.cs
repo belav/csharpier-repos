@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
             {
                 Moniker = GetMoniker(),
                 MaxHeight = lineHeight,
-                Margin = new Thickness(1, 0, 5, 0)
+                Margin = new Thickness(1, 0, 5, 0),
             };
 
             var border = new Border
@@ -110,12 +110,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 {
                     Height = lineHeight,
                     Orientation = Orientation.Horizontal,
-                    Children = { image, block }
+                    Children = { image, block },
                 },
                 CornerRadius = new CornerRadius(2),
                 // Highlighting lines are 2px buffer. So shift us up by one from the bottom so we feel centered between them.
                 Margin = new Thickness(10, top: 0, right: 0, bottom: 1),
-                Padding = new Thickness(1)
+                Padding = new Thickness(1),
             };
 
             // This is used as a workaround to the moniker issues in blue theme
@@ -182,7 +182,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineDiagnostics
                 EditAndContinueErrorTypeDefinition.Name => "inline diagnostics - Edit and Continue",
                 PredefinedErrorTypeNames.SyntaxError => "inline diagnostics - syntax error",
                 PredefinedErrorTypeNames.Warning => "inline diagnostics - compiler warning",
-                _ => throw ExceptionUtilities.UnexpectedValue(error)
+                _ => throw ExceptionUtilities.UnexpectedValue(error),
             };
 
         /// <summary>

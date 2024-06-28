@@ -30,9 +30,9 @@ public class NegotiateProtocolBenchmark
                 new AvailableTransport
                 {
                     Transport = "WebSockets",
-                    TransferFormats = new List<string> { "Text", "Binary" }
-                }
-            }
+                    TransferFormats = new List<string> { "Text", "Binary" },
+                },
+            },
         };
         _stream = Stream.Null;
 

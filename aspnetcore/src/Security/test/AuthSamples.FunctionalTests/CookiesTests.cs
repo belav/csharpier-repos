@@ -90,7 +90,9 @@ public class CookiesTests : IClassFixture<WebApplicationFactory<Cookies.Startup>
             new Dictionary<string, string>()
             {
                 ["username"] = userName,
-                ["password"] = userName // this test doesn't care what the password is
+                ["password"] =
+                    userName // this test doesn't care what the password is
+                ,
             }
         );
 

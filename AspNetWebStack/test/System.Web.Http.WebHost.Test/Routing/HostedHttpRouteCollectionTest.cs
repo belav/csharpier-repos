@@ -326,7 +326,7 @@ namespace System.Web.Http.WebHost.Routing
             {
                 { "controller", "controllerName" },
                 { "action", "actionName" },
-                { "httproute", true }
+                { "httproute", true },
             };
 
             request.SetRouteData(new HttpRouteData(route, routeValues));
@@ -361,7 +361,7 @@ namespace System.Web.Http.WebHost.Routing
             {
                 { "controller", "controllerName" },
                 { "action", "actionName" },
-                { "httproute", true }
+                { "httproute", true },
             };
 
             request.SetRouteData(new HttpRouteData(route, routeValues));

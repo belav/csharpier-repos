@@ -56,7 +56,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         public static readonly XmlRootAttribute Root = new XmlRootAttribute
         {
             ElementName = "Root",
-            Namespace = string.Empty
+            Namespace = string.Empty,
         };
     }
 }

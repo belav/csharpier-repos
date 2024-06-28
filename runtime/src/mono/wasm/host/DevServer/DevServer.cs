@@ -82,7 +82,7 @@ internal static class DevServer
             [WebHostDefaults.EnvironmentKey] = "Development",
             ["Logging:LogLevel:Microsoft"] = "Warning",
             ["Logging:LogLevel:Microsoft.Hosting.Lifetime"] = "Information",
-            [WebHostDefaults.StaticWebAssetsKey] = options.StaticWebAssetsPath
+            [WebHostDefaults.StaticWebAssetsKey] = options.StaticWebAssetsPath,
         };
 
         config.AddInMemoryCollection(inMemoryConfiguration);

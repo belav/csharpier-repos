@@ -44,7 +44,7 @@ namespace System.Net
             PartialSize,
             Body,
             BodyFinished,
-            Trailer
+            Trailer,
         }
 
         class Chunk

@@ -338,7 +338,7 @@ namespace MonoTests.Microsoft.Build.Internal
             var result = p.Build(
                 new ILogger[]
                 {
-                    new ConsoleLogger(LoggerVerbosity.Minimal, sw.WriteLine, null, null)
+                    new ConsoleLogger(LoggerVerbosity.Minimal, sw.WriteLine, null, null),
                 }
             );
             Assert.IsTrue(result, "#1: " + sw);
@@ -373,7 +373,7 @@ namespace MonoTests.Microsoft.Build.Internal
             var result = p.Build(
                 new ILogger[]
                 {
-                    new ConsoleLogger(LoggerVerbosity.Minimal, sw.WriteLine, null, null)
+                    new ConsoleLogger(LoggerVerbosity.Minimal, sw.WriteLine, null, null),
                 }
             );
             Assert.IsTrue(result, "#1: " + sw);
@@ -400,7 +400,7 @@ namespace MonoTests.Microsoft.Build.Internal
             var result = p.Build(
                 new ILogger[]
                 {
-                    new ConsoleLogger(LoggerVerbosity.Minimal, sw.WriteLine, null, null)
+                    new ConsoleLogger(LoggerVerbosity.Minimal, sw.WriteLine, null, null),
                 }
             );
             Assert.IsTrue(result, "#1: " + sw);

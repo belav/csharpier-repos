@@ -235,7 +235,7 @@ public static class UrlHelperExtensions
                 Host = host,
                 Values = values,
                 Protocol = protocol,
-                Fragment = fragment
+                Fragment = fragment,
             }
         );
     }
@@ -391,7 +391,7 @@ public static class UrlHelperExtensions
                 Values = values,
                 Protocol = protocol,
                 Host = host,
-                Fragment = fragment
+                Fragment = fragment,
             }
         );
     }

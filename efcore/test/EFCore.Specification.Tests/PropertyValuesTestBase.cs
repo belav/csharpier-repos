@@ -1663,7 +1663,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             BuildingId = new Guid(building.BuildingId.ToString()),
             Name = "Values End",
             Value = building.Value,
-            Shadow1 = 777
+            Shadow1 = 777,
         };
 
         buildingValues.SetValues(newBuilding);
@@ -1702,7 +1702,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         {
             Name = "Values End",
             Value = building.Value,
-            Shadow2 = "Cheese"
+            Shadow2 = "Cheese",
         };
 
         buildingValues.SetValues(newBuilding);
@@ -1740,7 +1740,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             { "Value", building.Value },
             { "Shadow1", 13 },
             { "Shadow2", "Pine Walk" },
-            { "PrincipalMailRoomId", 0 }
+            { "PrincipalMailRoomId", 0 },
         };
 
         buildingValues.SetValues(dictionary);
@@ -1778,7 +1778,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
         var dictionary = new Dictionary<string, int>
         {
             { "Shadow1", 13 },
-            { "PrincipalMailRoomId", 0 }
+            { "PrincipalMailRoomId", 0 },
         };
 
         buildingValues.SetValues(dictionary);
@@ -1873,7 +1873,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             { "BuildingId", new Guid(building.BuildingId.ToString()) },
             { "Name", "Values End" },
             { "Value", building.Value },
-            { "Shadow1", 777 }
+            { "Shadow1", 777 },
         };
 
         buildingValues.SetValues(dictionary);
@@ -2280,7 +2280,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 "PrincipalMailRoomId",
                 "Shadow1",
                 "Shadow2",
-                "Value"
+                "Value",
             },
             buildingValues.Properties.Select(p => p.Name).ToList()
         );
@@ -2579,7 +2579,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             {
                 BuildingId = buildingId,
                 Name = name,
-                Value = value
+                Value = value,
             };
 
         public Guid BuildingId { get; set; }
@@ -2786,7 +2786,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                     "Building One",
                     1500000
                 ),
-                Building.Create(Guid.NewGuid(), "Building Two", 1000000m)
+                Building.Create(Guid.NewGuid(), "Building Two", 1000000m),
             };
 
             foreach (var building in buildings)
@@ -2805,7 +2805,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 new() { BuildingId = buildings[0].BuildingId, Number = "1/1221" },
                 new() { BuildingId = buildings[0].BuildingId, Number = "1/1223" },
                 new() { BuildingId = buildings[0].BuildingId, Number = "2/1458" },
-                new() { BuildingId = buildings[0].BuildingId, Number = "2/1789" }
+                new() { BuildingId = buildings[0].BuildingId, Number = "2/1789" },
             };
 
             foreach (var office in offices)
@@ -2817,7 +2817,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
             {
                 new() { TeamName = "Build" },
                 new() { TeamName = "Test" },
-                new() { TeamName = "DevOps" }
+                new() { TeamName = "DevOps" },
             };
 
             var employees = new List<Employee>
@@ -2829,7 +2829,7 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                     LastName = "Miller",
                     LeaveBalance = 45,
                     Office = offices[0],
-                    VirtualTeams = new List<VirtualTeam> { teams[0], teams[1] }
+                    VirtualTeams = new List<VirtualTeam> { teams[0], teams[1] },
                 },
                 new CurrentEmployee
                 {
@@ -2838,15 +2838,15 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                     LastName = "Vickers",
                     LeaveBalance = 62,
                     Office = offices[1],
-                    VirtualTeams = new List<VirtualTeam> { teams[1], teams[2] }
+                    VirtualTeams = new List<VirtualTeam> { teams[1], teams[2] },
                 },
                 new PastEmployee
                 {
                     EmployeeId = 3,
                     FirstName = "John",
                     LastName = "Doe",
-                    TerminationDate = new DateTime(2006, 1, 23)
-                }
+                    TerminationDate = new DateTime(2006, 1, 23),
+                },
             };
 
             context.Entry(employees[0]).Property("Shadow1").CurrentValue = 111;
@@ -2872,20 +2872,20 @@ public abstract class PropertyValuesTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     AssetTag = "WB1973",
                     iD = new byte[] { 1, 9, 7, 3 },
-                    Office = offices[0]
+                    Office = offices[0],
                 },
                 new()
                 {
                     AssetTag = "WB1977",
                     iD = new byte[] { 1, 9, 7, 7 },
-                    Office = offices[0]
+                    Office = offices[0],
                 },
                 new()
                 {
                     AssetTag = "WB1970",
                     iD = new byte[] { 1, 9, 7, 0 },
-                    Office = offices[2]
-                }
+                    Office = offices[2],
+                },
             };
 
             foreach (var whiteboard in whiteboards)

@@ -163,7 +163,7 @@ public class ServerVariableTests
                     ["QUERY_STRING"] = "bar=2",
                     ["REQUEST_FILENAME"] = "/other-foo",
                     ["REQUEST_URI"] = "/other-foo",
-                    ["REQUEST_METHOD"] = "POST"
+                    ["REQUEST_METHOD"] = "POST",
                 }
             )
         );

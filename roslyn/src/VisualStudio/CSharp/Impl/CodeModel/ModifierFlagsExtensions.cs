@@ -34,7 +34,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
                 { ModifierFlags.Volatile, SyntaxKind.VolatileKeyword },
                 { ModifierFlags.Unsafe, SyntaxKind.UnsafeKeyword },
                 { ModifierFlags.Async, SyntaxKind.AsyncKeyword },
-                { ModifierFlags.Partial, SyntaxKind.PartialKeyword }
+                { ModifierFlags.Partial, SyntaxKind.PartialKeyword },
             };
 
         public static ModifierFlags GetModifierFlags(this MemberDeclarationSyntax member)

@@ -314,7 +314,7 @@ namespace System.Security.Cryptography
                     0x90befffa,
                     0xa4506ceb,
                     0xbef9a3f7,
-                    0xc67178f2
+                    0xc67178f2,
                 ];
 
             private static unsafe void SHATransform(uint* expandedBuffer, uint* state, byte* block)

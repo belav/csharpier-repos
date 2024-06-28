@@ -31,8 +31,8 @@ public class HeaderModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
-            ParameterType = typeof(Person)
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(Person),
         };
 
         // Do not add any headers.
@@ -69,8 +69,8 @@ public class HeaderModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(Person)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Person),
         };
 
         var testContext = GetModelBindingTestContext(request =>
@@ -115,7 +115,7 @@ public class HeaderModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var testContext = GetModelBindingTestContext(request =>
@@ -278,9 +278,9 @@ public class HeaderModelBinderIntegrationTest
             BindingInfo = new BindingInfo
             {
                 BinderModelName = "CustomParameter",
-                BindingSource = BindingSource.Header
+                BindingSource = BindingSource.Header,
             },
-            ParameterType = modelType
+            ParameterType = modelType,
         };
 
         void action(HttpRequest r) =>
@@ -323,8 +323,8 @@ public class HeaderModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(Product)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(Product),
         };
 
         var testContext = GetModelBindingTestContext(request =>
@@ -499,7 +499,7 @@ public class HeaderModelBinderIntegrationTest
     private enum CarType
     {
         Coupe,
-        Sedan
+        Sedan,
     }
 
     [TypeConverter(typeof(CanConvertFromStringConverter))]
@@ -531,7 +531,7 @@ public class HeaderModelBinderIntegrationTest
             var id = value.ToString();
             return new OrderWithTypeConverter()
             {
-                Id = int.Parse(id, CultureInfo.InvariantCulture)
+                Id = int.Parse(id, CultureInfo.InvariantCulture),
             };
         }
     }

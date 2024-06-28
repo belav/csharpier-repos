@@ -277,7 +277,7 @@ namespace BenchmarksGame
             new Frequency('S', 0.02),
             new Frequency('V', 0.02),
             new Frequency('W', 0.02),
-            new Frequency('Y', 0.02)
+            new Frequency('Y', 0.02),
         };
 
         static Frequency[] HomoSapiens =
@@ -285,7 +285,7 @@ namespace BenchmarksGame
             new Frequency('a', 0.3029549426680),
             new Frequency('c', 0.1979883004921),
             new Frequency('g', 0.1975473066391),
-            new Frequency('t', 0.3015094502008)
+            new Frequency('t', 0.3015094502008),
         };
 
         private static void FillRandom(int[] result)

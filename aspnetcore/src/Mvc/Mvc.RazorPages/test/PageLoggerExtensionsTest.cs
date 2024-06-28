@@ -23,8 +23,8 @@ public class PageLoggerExtensionsTest
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 // Using a generic type to verify the use of a clean name
-                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo()
-            }
+                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo(),
+            },
         };
 
         // Act
@@ -52,8 +52,8 @@ public class PageLoggerExtensionsTest
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 // Using a generic type to verify the use of a clean name
-                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo()
-            }
+                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo(),
+            },
         };
 
         // Act
@@ -81,8 +81,8 @@ public class PageLoggerExtensionsTest
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 // Using a generic type to verify the use of a clean name
-                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo()
-            }
+                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo(),
+            },
         };
 
         // Act
@@ -110,8 +110,8 @@ public class PageLoggerExtensionsTest
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 // Using a generic type to verify the use of a clean name
-                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo()
-            }
+                PageTypeInfo = typeof(ValueTuple<int, string>).GetTypeInfo(),
+            },
         };
 
         // Act

@@ -71,7 +71,7 @@ public class H2SpecTests : LoggedTest
             if (testCases == null || !testCases.Any())
             {
                 dataset.Add(
-                    new H2SpecTestCase() { Skip = "Unable to detect test cases on this platform.", }
+                    new H2SpecTestCase() { Skip = "Unable to detect test cases on this platform." }
                 );
                 return dataset;
             }

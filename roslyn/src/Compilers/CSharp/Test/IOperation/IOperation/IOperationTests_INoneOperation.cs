@@ -282,7 +282,7 @@ unsafe public class MyClass
             {
                 // CS0196: A pointer must be indexed by only one value
                 //         j = i[1, (a ? b : c)];
-                Diagnostic(ErrorCode.ERR_PtrIndexSingle, "i[1, (a ? b : c)]").WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_PtrIndexSingle, "i[1, (a ? b : c)]").WithLocation(6, 13),
             };
 
             string expectedFlowGraph =

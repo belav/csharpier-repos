@@ -190,7 +190,7 @@ namespace System.Web.Compilation
         Verbatim,
         Expression,
         Tag,
-        Comment
+        Comment,
     }
 
     sealed class TextBlock

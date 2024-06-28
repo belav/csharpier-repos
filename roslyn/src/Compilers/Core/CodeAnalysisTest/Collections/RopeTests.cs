@@ -34,7 +34,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             "uvwx",
             "yz01",
             "2345",
-            "6789"
+            "6789",
         };
         private static readonly Rope[] shortRopes = shortStrings
             .Select(s => Rope.ForString(s))

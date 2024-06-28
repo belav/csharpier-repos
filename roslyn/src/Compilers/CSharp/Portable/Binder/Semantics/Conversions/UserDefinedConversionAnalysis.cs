@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal enum UserDefinedConversionAnalysisKind : byte
     {
         ApplicableInNormalForm,
-        ApplicableInLiftedForm
+        ApplicableInLiftedForm,
     }
 
     internal sealed class UserDefinedConversionAnalysis

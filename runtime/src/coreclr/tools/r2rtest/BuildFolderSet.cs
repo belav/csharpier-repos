@@ -767,7 +767,7 @@ namespace R2RTest
             PASS = 0,
             FAIL = 1,
 
-            Count
+            Count,
         }
 
         private enum ExecutionOutcome
@@ -778,7 +778,7 @@ namespace R2RTest
             TIMED_OUT = 3,
             BUILD_FAILED = 4,
 
-            Count
+            Count,
         }
 
         private CompilationOutcome GetCompilationOutcome(ProcessInfo compilation)

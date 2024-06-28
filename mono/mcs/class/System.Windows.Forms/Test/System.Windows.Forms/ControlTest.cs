@@ -3064,7 +3064,7 @@ namespace MonoTests.System.Windows.Forms
             IsInputKey,
             PreProcessMessage,
             ProcessDialogKey,
-            ProcessDialogChar
+            ProcessDialogChar,
         }
 
         private class MyControl : Control

@@ -79,7 +79,7 @@ namespace System.Diagnostics.Tests
                 {
                     invokeCalled++;
                     return d.DynamicInvoke(args);
-                }
+                },
             };
             p.StartInfo.RedirectStandardError = true;
             p.ErrorDataReceived += (s, e) => sb.Append(e.Data);
@@ -659,7 +659,7 @@ namespace System.Diagnostics.Tests
                 {
                     invokeCalled++;
                     return d.DynamicInvoke(args);
-                }
+                },
             };
             p.StartInfo.RedirectStandardOutput = true;
             p.OutputDataReceived += (s, e) =>

@@ -18,7 +18,7 @@ public static class Program
             (typeof(A), "0068 FFFD FFFD"),
             (typeof(B), "006C FFFD FFFD"),
             (typeof(C), "006C FFFD FFFD 0068 FFFD FFFD"),
-            (typeof(D), "0068 FFFD FFFD 006C FFFD FFFD")
+            (typeof(D), "0068 FFFD FFFD 006C FFFD FFFD"),
         };
 
         foreach (var tup in tuples)

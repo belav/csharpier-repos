@@ -128,7 +128,7 @@ public abstract class NavigationManager
         {
             NavigateToCore(
                 uri,
-                new NavigationOptions { ForceLoad = forceLoad, ReplaceHistoryEntry = replace, }
+                new NavigationOptions { ForceLoad = forceLoad, ReplaceHistoryEntry = replace }
             );
         }
         else
@@ -333,7 +333,7 @@ public abstract class NavigationManager
                 this,
                 new LocationChangedEventArgs(_uri!, isInterceptedLink)
                 {
-                    HistoryEntryState = HistoryEntryState
+                    HistoryEntryState = HistoryEntryState,
                 }
             );
         }

@@ -28,6 +28,6 @@ namespace System.ComponentModel
         /// <devdoc>
         ///    <para>Specifies that the entire collection has changed.</para>
         /// </devdoc>
-        Refresh = 3
+        Refresh = 3,
     }
 }

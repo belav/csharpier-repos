@@ -383,7 +383,7 @@ namespace System.ServiceModel.Description
                     Hashtable h = new Hashtable(2)
                     {
                         { "IsWarning", error.IsWarning },
-                        { "Message", error.Message }
+                        { "Message", error.Message },
                     };
                     TraceUtility.TraceEvent(
                         TraceEventType.Warning,

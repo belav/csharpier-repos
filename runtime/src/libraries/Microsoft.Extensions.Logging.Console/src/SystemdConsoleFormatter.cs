@@ -118,7 +118,7 @@ namespace Microsoft.Extensions.Logging.Console
                 LogLevel.Warning => "<4>", // warning conditions
                 LogLevel.Error => "<3>", // error conditions
                 LogLevel.Critical => "<2>", // critical conditions
-                _ => throw new ArgumentOutOfRangeException(nameof(logLevel))
+                _ => throw new ArgumentOutOfRangeException(nameof(logLevel)),
             };
         }
 

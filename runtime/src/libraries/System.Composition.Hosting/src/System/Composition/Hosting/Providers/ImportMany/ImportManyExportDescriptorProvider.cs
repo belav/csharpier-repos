@@ -19,7 +19,7 @@ namespace System.Composition.Hosting.Providers.ImportMany
         {
             typeof(IList<>),
             typeof(ICollection<>),
-            typeof(IEnumerable<>)
+            typeof(IEnumerable<>),
         };
 
         public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
@@ -61,7 +61,7 @@ namespace System.Composition.Hosting.Providers.ImportMany
             >();
             return new[]
             {
-                (ExportDescriptorPromise)gimdm(contract, elementContract, definitionAccessor)
+                (ExportDescriptorPromise)gimdm(contract, elementContract, definitionAccessor),
             };
         }
 

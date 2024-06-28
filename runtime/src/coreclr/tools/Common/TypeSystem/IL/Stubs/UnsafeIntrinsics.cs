@@ -25,7 +25,7 @@ namespace Internal.IL.Stubs
                         {
                             (byte)ILOpcode.ldarg_0,
                             (byte)ILOpcode.conv_u,
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -48,7 +48,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.ldarg_0,
                             (byte)ILOpcode.ldarg_1,
                             (byte)ILOpcode.add,
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -80,7 +80,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.ldarg_1,
                             (byte)ILOpcode.prefix1,
                             unchecked((byte)ILOpcode.ceq),
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -94,7 +94,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.ldarg_1,
                             (byte)ILOpcode.prefix1,
                             unchecked((byte)ILOpcode.cgt_un),
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -108,7 +108,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.ldarg_1,
                             (byte)ILOpcode.prefix1,
                             unchecked((byte)ILOpcode.clt_un),
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -121,7 +121,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.ldarg_1,
                             (byte)ILOpcode.ldarg_0,
                             (byte)ILOpcode.sub,
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -133,7 +133,7 @@ namespace Internal.IL.Stubs
                         {
                             (byte)ILOpcode.ldc_i4_0,
                             (byte)ILOpcode.conv_u,
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -148,7 +148,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.conv_u,
                             (byte)ILOpcode.prefix1,
                             unchecked((byte)ILOpcode.ceq),
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null
@@ -170,7 +170,7 @@ namespace Internal.IL.Stubs
                             (byte)ILOpcode.ldarg_0,
                             (byte)ILOpcode.ldarg_1,
                             (byte)ILOpcode.sub,
-                            (byte)ILOpcode.ret
+                            (byte)ILOpcode.ret,
                         },
                         Array.Empty<LocalVariableDefinition>(),
                         null

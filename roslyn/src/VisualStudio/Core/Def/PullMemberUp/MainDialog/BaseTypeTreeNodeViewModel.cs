@@ -53,7 +53,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
             var rootTreeNode = new BaseTypeTreeNodeViewModel(root, glyphService)
             {
                 IsChecked = false,
-                IsExpanded = true
+                IsExpanded = true,
             };
             var queue = new Queue<BaseTypeTreeNodeViewModel>();
             queue.Enqueue(rootTreeNode);
@@ -76,7 +76,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PullMemberUp.Ma
                     .Select(baseType => new BaseTypeTreeNodeViewModel(baseType, glyphService)
                     {
                         IsChecked = false,
-                        IsExpanded = true
+                        IsExpanded = true,
                     })
                     .ToImmutableArray();
 

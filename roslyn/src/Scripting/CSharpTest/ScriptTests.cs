@@ -460,7 +460,7 @@ throw e;",
                     typeof(uint),
                     typeof(decimal),
                     typeof(decimal),
-                    typeof(int)
+                    typeof(int),
                 },
                 state.Variables.Select(v => v.Type)
             );

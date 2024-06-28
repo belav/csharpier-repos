@@ -60,7 +60,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -93,7 +93,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             "Type Argument"
                         ),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -126,7 +126,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             "Type Argument"
                         ),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -152,7 +152,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     GetType(),
                     new[]
                     {
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "Type Argument")
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, "Type Argument"),
                     }
                 )
             );

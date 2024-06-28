@@ -46,7 +46,7 @@ public class IncludeMembers : IntegrationTest<IncludeMembers.DatabaseInitializer
             {
                 Name = "name",
                 InnerSource = new InnerSource { Description = "description" },
-                OtherInnerSource = new OtherInnerSource { Title = "title" }
+                OtherInnerSource = new OtherInnerSource { Title = "title" },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -123,7 +123,7 @@ public class IncludeMembersExplicitExpansion
             {
                 Name = "name",
                 InnerSource = new InnerSource { Description = "description" },
-                OtherInnerSource = new OtherInnerSource { Title = "title" }
+                OtherInnerSource = new OtherInnerSource { Title = "title" },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -208,12 +208,12 @@ public class IncludeMembersFirstOrDefault
                 Name = "name",
                 InnerSources =
                 {
-                    new InnerSource { Description = "description", Publisher = "publisher" }
+                    new InnerSource { Description = "description", Publisher = "publisher" },
                 },
                 OtherInnerSources =
                 {
-                    new OtherInnerSource { Title = "title", Author = "author" }
-                }
+                    new OtherInnerSource { Title = "title", Author = "author" },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -302,12 +302,12 @@ public class IncludeMembersFirstOrDefaultWithMapFromExpression
                 Name = "name",
                 InnerSources =
                 {
-                    new InnerSource { Description1 = "description", Publisher = "publisher" }
+                    new InnerSource { Description1 = "description", Publisher = "publisher" },
                 },
                 OtherInnerSources =
                 {
-                    new OtherInnerSource { Title1 = "title", Author = "author" }
-                }
+                    new OtherInnerSource { Title1 = "title", Author = "author" },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -429,10 +429,10 @@ public class IncludeMembersFirstOrDefaultWithSubqueryMapFrom
                             new InnerSourceDetails
                             {
                                 Description = "description",
-                                Publisher = "publisher"
-                            }
-                        }
-                    }
+                                Publisher = "publisher",
+                            },
+                        },
+                    },
                 },
                 OtherInnerSources =
                 {
@@ -440,10 +440,10 @@ public class IncludeMembersFirstOrDefaultWithSubqueryMapFrom
                     {
                         OtherInnerSourceDetails =
                         {
-                            new OtherInnerSourceDetails { Title = "title", Author = "author" }
-                        }
-                    }
-                }
+                            new OtherInnerSourceDetails { Title = "title", Author = "author" },
+                        },
+                    },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -590,12 +590,12 @@ public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom
                                     InnerSourceDetails = new InnerSourceDetails
                                     {
                                         Description = "description",
-                                        Publisher = "publisher"
-                                    }
-                                }
-                            }
-                        }
-                    }
+                                        Publisher = "publisher",
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
                 OtherInnerSources =
                 {
@@ -603,10 +603,10 @@ public class IncludeMembersSelectFirstOrDefaultWithSubqueryMapFrom
                     {
                         OtherInnerSourceDetails =
                         {
-                            new OtherInnerSourceDetails { Title = "title", Author = "author" }
-                        }
-                    }
-                }
+                            new OtherInnerSourceDetails { Title = "title", Author = "author" },
+                        },
+                    },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -740,10 +740,10 @@ public class SubqueryMapFromWithIncludeMembersFirstOrDefault
                             new InnerSourceDetails
                             {
                                 Description = "description",
-                                Publisher = "publisher"
-                            }
-                        }
-                    }
+                                Publisher = "publisher",
+                            },
+                        },
+                    },
                 },
                 OtherInnerSources =
                 {
@@ -751,10 +751,10 @@ public class SubqueryMapFromWithIncludeMembersFirstOrDefault
                     {
                         OtherInnerSourceDetails =
                         {
-                            new OtherInnerSourceDetails { Title = "title", Author = "author" }
-                        }
-                    }
-                }
+                            new OtherInnerSourceDetails { Title = "title", Author = "author" },
+                        },
+                    },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -879,10 +879,10 @@ public class SubqueryMapFromWithIncludeMembersSelectFirstOrDefault
                             new InnerSourceDetails
                             {
                                 Description = "description",
-                                Publisher = "publisher"
-                            }
-                        }
-                    }
+                                Publisher = "publisher",
+                            },
+                        },
+                    },
                 },
                 OtherInnerSources =
                 {
@@ -890,10 +890,10 @@ public class SubqueryMapFromWithIncludeMembersSelectFirstOrDefault
                     {
                         OtherInnerSourceDetails =
                         {
-                            new OtherInnerSourceDetails { Title = "title", Author = "author" }
-                        }
-                    }
-                }
+                            new OtherInnerSourceDetails { Title = "title", Author = "author" },
+                        },
+                    },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -1038,12 +1038,12 @@ public class SubqueryMapFromWithIncludeMembersSelectMemberFirstOrDefault
                                     InnerSourceDetails = new InnerSourceDetails
                                     {
                                         Description = "description",
-                                        Publisher = "publisher"
-                                    }
-                                }
-                            }
-                        }
-                    }
+                                        Publisher = "publisher",
+                                    },
+                                },
+                            },
+                        },
+                    },
                 },
                 OtherInnerSources =
                 {
@@ -1051,10 +1051,10 @@ public class SubqueryMapFromWithIncludeMembersSelectMemberFirstOrDefault
                     {
                         OtherInnerSourceDetails =
                         {
-                            new OtherInnerSourceDetails { Title = "title", Author = "author" }
-                        }
-                    }
-                }
+                            new OtherInnerSourceDetails { Title = "title", Author = "author" },
+                        },
+                    },
+                },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -1150,7 +1150,7 @@ public class IncludeMembersWithMapFromExpression
             {
                 Name = "name",
                 InnerSource = new InnerSource { Description1 = "description" },
-                OtherInnerSource = new OtherInnerSource { Title1 = "title" }
+                OtherInnerSource = new OtherInnerSource { Title1 = "title" },
             };
             context.Sources.Add(source);
             base.Seed(context);
@@ -1379,7 +1379,7 @@ public class CascadedIncludeMembers : IntegrationTest<CascadedIncludeMembers.Dat
         {
             var source = new Source
             {
-                FieldLevel1 = new Level1 { FieldLevel2 = new Level2 { TheField = 2 } }
+                FieldLevel1 = new Level1 { FieldLevel2 = new Level2 { TheField = 2 } },
             };
             context.Sources.Add(source);
             base.Seed(context);

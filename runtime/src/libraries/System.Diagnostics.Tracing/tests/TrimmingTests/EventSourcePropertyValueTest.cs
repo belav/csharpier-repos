@@ -91,7 +91,7 @@ internal class Program
             var testData = new TestData()
             {
                 TestInt = 5,
-                SubData = new TestSubData() { SubInt = 6 }
+                SubData = new TestSubData() { SubInt = 6 },
             };
             TestEventSource.Log.LogData(testData);
 

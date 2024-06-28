@@ -185,7 +185,7 @@ namespace System.Data.Tests
                 typeof(TimeSpan),
                 typeof(ushort),
                 typeof(uint),
-                typeof(ulong)
+                typeof(ulong),
             };
 
             //Checking default value (string)
@@ -418,7 +418,7 @@ namespace System.Data.Tests
                 typeof(TimeSpan),
                 typeof(ushort),
                 typeof(uint),
-                typeof(ulong)
+                typeof(ulong),
             };
 
             foreach (Type type in typeArr)

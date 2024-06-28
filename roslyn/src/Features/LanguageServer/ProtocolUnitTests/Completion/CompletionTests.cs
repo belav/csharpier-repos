@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                         {
                             ItemDefaults = new[]
                             {
-                                CompletionCapabilityHelper.EditRangePropertyName
+                                CompletionCapabilityHelper.EditRangePropertyName,
                             },
                         },
                         CompletionItemKind = new(),
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                         CompletionList = new VSInternalCompletionListSetting()
                         {
                             CommitCharacters = true,
-                        }
+                        },
                     },
                 },
             };
@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                 ? new string[]
                 {
                     CompletionCapabilityHelper.EditRangePropertyName,
-                    CompletionCapabilityHelper.CommitCharactersPropertyName
+                    CompletionCapabilityHelper.CommitCharactersPropertyName,
                 }
                 : [CompletionCapabilityHelper.EditRangePropertyName];
 
@@ -76,13 +76,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                     {
                         CompletionListSetting = new LSP.CompletionListSetting
                         {
-                            ItemDefaults = itemDefaultArray
+                            ItemDefaults = itemDefaultArray,
                         },
                         CompletionList = isPublicDefaultCommitChars
                             ? null
-                            : new LSP.VSInternalCompletionListSetting { CommitCharacters = true }
+                            : new LSP.VSInternalCompletionListSetting { CommitCharacters = true },
                     },
-                }
+                },
             };
             var markup =
                 @"class A
@@ -153,15 +153,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Completion
                         {
                             ItemDefaults = new string[]
                             {
-                                CompletionCapabilityHelper.EditRangePropertyName
-                            }
+                                CompletionCapabilityHelper.EditRangePropertyName,
+                            },
                         },
                         CompletionList = new LSP.VSInternalCompletionListSetting
                         {
                             CommitCharacters = true,
-                        }
+                        },
                     },
-                }
+                },
             };
             var markup =
                 @"namespace M
@@ -320,7 +320,7 @@ static class Extensions
             var capabilities = CreateCoreCompletionCapabilities();
             capabilities.TextDocument.Completion.CompletionItemKind.ValueSet =
             [
-                LSP.CompletionItemKind.ExtensionMethod
+                LSP.CompletionItemKind.ExtensionMethod,
             ];
 
             await using var testLspServer = await CreateTestLspServerAsync(
@@ -646,7 +646,7 @@ class A
             var defaultRange = new LSP.Range
             {
                 Start = new LSP.Position { Line = 5, Character = 19 },
-                End = new LSP.Position { Line = 5, Character = 19 }
+                End = new LSP.Position { Line = 5, Character = 19 },
             };
 
             var expected = await CreateCompletionItemAsync(
@@ -697,7 +697,7 @@ class A
             var defaultRange = new LSP.Range
             {
                 Start = new LSP.Position { Line = 5, Character = 21 },
-                End = new LSP.Position { Line = 5, Character = 21 }
+                End = new LSP.Position { Line = 5, Character = 21 },
             };
 
             var expected = await CreateCompletionItemAsync(
@@ -748,7 +748,7 @@ class A
             var defaultRange = new LSP.Range
             {
                 Start = new LSP.Position { Line = 5, Character = 25 },
-                End = new LSP.Position { Line = 5, Character = 25 }
+                End = new LSP.Position { Line = 5, Character = 25 },
             };
 
             var expected = await CreateCompletionItemAsync(
@@ -789,9 +789,9 @@ class A
                         CompletionList = new VSInternalCompletionListSetting
                         {
                             CommitCharacters = true,
-                        }
+                        },
                     },
-                }
+                },
             };
 
             var markup =

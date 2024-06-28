@@ -16,7 +16,7 @@ class Repro
             new[]
             {
                 new Person { Age = 25 },
-                new Person { Age = 21 }
+                new Person { Age = 21 },
             },
             25
         );

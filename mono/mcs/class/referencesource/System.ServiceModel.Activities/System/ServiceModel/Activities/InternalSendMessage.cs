@@ -81,7 +81,7 @@ namespace System.ServiceModel.Activities
             this.sendMessageInstance = new Variable<VolatileSendMessageInstance>();
             this.channelCorrelationCompletionWaiter = new WaitOnChannelCorrelation
             {
-                Instance = this.sendMessageInstance
+                Instance = this.sendMessageInstance,
             };
 
             this.noPersistHandle = new Variable<NoPersistHandle>();
@@ -90,7 +90,7 @@ namespace System.ServiceModel.Activities
 
             this.openChannelFactory = new OpenChannelFactory
             {
-                Instance = this.sendMessageInstance
+                Instance = this.sendMessageInstance,
             };
             this.openChannelAndSendMessage = new OpenChannelAndSendMessage
             {
@@ -840,7 +840,7 @@ namespace System.ServiceModel.Activities
                             {
                                 WorkflowServiceNamespace.RequestReplyCorrelation,
                                 new InstanceValue(true)
-                            }
+                            },
                         }
                     );
 
@@ -873,7 +873,7 @@ namespace System.ServiceModel.Activities
                                 {
                                     WorkflowServiceNamespace.RequestReplyCorrelation,
                                     new InstanceValue(true)
-                                }
+                                },
                             }
                         );
                         List<InstanceKey> transientCorrelations = new List<InstanceKey>(
@@ -892,7 +892,7 @@ namespace System.ServiceModel.Activities
 
             MessageContext messageContext = new MessageContext(message)
             {
-                EndToEndTracingId = e2eTracingId
+                EndToEndTracingId = e2eTracingId,
             };
             Bookmark sendCompleteBookmark = context.CreateBookmark(SendCompleteOnExtension);
             this.extensionSendCompleteBookmark.Set(context, sendCompleteBookmark);
@@ -918,7 +918,7 @@ namespace System.ServiceModel.Activities
             return new SendSettings
             {
                 RequirePersistBeforeSend = this.ShouldPersistBeforeSend,
-                OwnerDisplayName = this.OwnerDisplayName
+                OwnerDisplayName = this.OwnerDisplayName,
             };
         }
 
@@ -930,7 +930,7 @@ namespace System.ServiceModel.Activities
                 EndpointConfigurationName = this.EndpointConfigurationName,
                 TokenImpersonationLevel = this.TokenImpersonationLevel,
                 ProtectionLevel = this.Parent.ProtectionLevel,
-                OwnerDisplayName = this.OwnerDisplayName
+                OwnerDisplayName = this.OwnerDisplayName,
             };
 
             if (this.EndpointAddress != null)
@@ -1092,7 +1092,7 @@ namespace System.ServiceModel.Activities
         {
             VolatileSendMessageInstance volatileInstance = new VolatileSendMessageInstance
             {
-                Instance = instance
+                Instance = instance,
             };
             this.sendMessageInstance.Set(context, volatileInstance);
         }
@@ -1265,7 +1265,7 @@ namespace System.ServiceModel.Activities
                                     {
                                         MessagingActivityHelper.ActivityInstanceId,
                                         context.ActivityInstanceId
-                                    }
+                                    },
                                 }
                             )
                         );
@@ -1387,7 +1387,7 @@ namespace System.ServiceModel.Activities
                     context.Track(
                         new SendMessageRecord(MessagingActivityHelper.MessageCorrelationSendRecord)
                         {
-                            E2EActivityId = e2eActivityId
+                            E2EActivityId = e2eActivityId,
                         }
                     );
 
@@ -1407,7 +1407,7 @@ namespace System.ServiceModel.Activities
                                         {
                                             MessagingActivityHelper.ActivityInstanceId,
                                             context.ActivityInstanceId
-                                        }
+                                        },
                                     }
                                 )
                             );
@@ -1444,7 +1444,7 @@ namespace System.ServiceModel.Activities
                                 {
                                     MessagingActivityHelper.ActivityInstanceId,
                                     context.ActivityInstanceId
-                                }
+                                },
                             }
                         )
                     );
@@ -1828,7 +1828,7 @@ namespace System.ServiceModel.Activities
                 contextValue = Guid.NewGuid().ToString();
                 Dictionary<string, string> contextValues = new Dictionary<string, string>(1)
                 {
-                    { ContextMessageProperty.InstanceIdKey, contextValue }
+                    { ContextMessageProperty.InstanceIdKey, contextValue },
                 };
                 new CallbackContextMessageProperty(contextValues).AddOrReplaceInMessage(
                     instance.RequestOrReply
@@ -2471,7 +2471,7 @@ namespace System.ServiceModel.Activities
                                         {
                                             MessagingActivityHelper.ActivityInstanceId,
                                             this.instance.ActivityInstanceId
-                                        }
+                                        },
                                     }
                                 )
                             );
@@ -2717,7 +2717,7 @@ namespace System.ServiceModel.Activities
             {
                 None,
                 SendComplete,
-                CorrelationComplete
+                CorrelationComplete,
             }
         }
 
@@ -3225,7 +3225,7 @@ namespace System.ServiceModel.Activities
                 {
                     None,
                     ConstructorComplete,
-                    WorkflowCorrelationProcessingComplete
+                    WorkflowCorrelationProcessingComplete,
                 }
             }
         }
@@ -3289,7 +3289,7 @@ namespace System.ServiceModel.Activities
                 {
                     CacheLimit = channelCacheSettings.MaxItemsInCache,
                     IdleTimeout = channelCacheSettings.IdleTimeout,
-                    LeaseTimeout = channelCacheSettings.LeaseTimeout
+                    LeaseTimeout = channelCacheSettings.LeaseTimeout,
                 };
 
                 this.disposeChannelPool = new Action<Pool<IChannel>>(this.DisposeChannelPool);
@@ -3300,7 +3300,7 @@ namespace System.ServiceModel.Activities
                     channelSettings
                 )
                 {
-                    DisposeItemCallback = this.disposeChannelPool
+                    DisposeItemCallback = this.disposeChannelPool,
                 };
                 this.createChannelCacheItem = () =>
                     new Pool<IChannel>(channelCacheSettings.MaxItemsInCache);

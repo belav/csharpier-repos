@@ -78,7 +78,7 @@ namespace System.Net.Sockets.Tests
         private static readonly byte[] s_buffer = new byte[1];
         private static readonly IList<ArraySegment<byte>> s_buffers = new List<ArraySegment<byte>>
         {
-            new ArraySegment<byte>(s_buffer)
+            new ArraySegment<byte>(s_buffer),
         };
         private static readonly SocketAsyncEventArgs s_eventArgs = new SocketAsyncEventArgs();
         private static readonly Socket s_ipv4Socket = new Socket(
@@ -830,7 +830,7 @@ namespace System.Net.Sockets.Tests
         {
             var eventArgs = new SocketAsyncEventArgs
             {
-                RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, 1)
+                RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, 1),
             };
 
             using (
@@ -852,7 +852,7 @@ namespace System.Net.Sockets.Tests
         {
             var eventArgs = new SocketAsyncEventArgs
             {
-                RemoteEndPoint = new DnsEndPoint("localhost", 1, AddressFamily.InterNetworkV6)
+                RemoteEndPoint = new DnsEndPoint("localhost", 1, AddressFamily.InterNetworkV6),
             };
 
             Assert.Throws<NotSupportedException>(
@@ -926,7 +926,7 @@ namespace System.Net.Sockets.Tests
         {
             var eventArgs = new SocketAsyncEventArgs
             {
-                SendPacketsElements = new SendPacketsElement[0]
+                SendPacketsElements = new SendPacketsElement[0],
             };
 
             Assert.Throws<NotSupportedException>(() => GetSocket().SendPacketsAsync(eventArgs));

@@ -112,7 +112,7 @@ namespace System.Web.Mvc.Test
             {
                 View = "SomeView",
                 Master = "SomeMaster",
-                ExceptionType = typeof(ArgumentException)
+                ExceptionType = typeof(ArgumentException),
             };
             Exception exception = new ArgumentNullException();
 
@@ -233,7 +233,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             HandleErrorAttribute attr = new HandleErrorAttribute()
             {
-                ExceptionType = typeof(ArgumentException)
+                ExceptionType = typeof(ArgumentException),
             };
             ActionResult result = new EmptyResult();
             ExceptionContext context = GetExceptionContext(

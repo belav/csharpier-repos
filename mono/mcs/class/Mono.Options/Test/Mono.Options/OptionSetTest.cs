@@ -241,7 +241,7 @@ namespace MonoTests.Mono.Options
             {
                 { "a=", v => a = v },
                 { "n=", (int v) => n = v },
-                new TestArgumentSource(null, null) { { "@s1", "a", "-a" }, { "@s2", "-n=42" }, },
+                new TestArgumentSource(null, null) { { "@s1", "a", "-a" }, { "@s2", "-n=42" } },
             };
             List<string> extra = p.Parse(args);
             Assert.AreEqual(extra.Count, 2);
@@ -307,7 +307,7 @@ namespace MonoTests.Mono.Options
         public void EnumValues()
         {
             DayOfWeek a = 0;
-            OptionSet p = new OptionSet() { { "a=", (DayOfWeek v) => a = v }, };
+            OptionSet p = new OptionSet() { { "a=", (DayOfWeek v) => a = v } };
             p.Parse(_("-a=Monday"));
             Assert.AreEqual(a, DayOfWeek.Monday);
             p.Parse(_("-a=tuesday"));
@@ -331,7 +331,7 @@ namespace MonoTests.Mono.Options
         public void BooleanValues()
         {
             bool a = false;
-            OptionSet p = new OptionSet() { { "a", v => a = v != null }, };
+            OptionSet p = new OptionSet() { { "a", v => a = v != null } };
             p.Parse(_("-a"));
             Assert.AreEqual(a, true);
             p.Parse(_("-a+"));
@@ -358,7 +358,7 @@ namespace MonoTests.Mono.Options
                     "/h",
                     "-?",
                     "--help",
-                    "-v"
+                    "-v",
                 }
             );
             CombinationPlatter(_("@s1", "-a=42", "@s3", "-a", "64", "bar", "@s4"));
@@ -696,7 +696,7 @@ namespace MonoTests.Mono.Options
         {
             var p = new OptionSet()
             {
-                "What is interesting about this is that we are going to use a newli\r\nne that is windows style"
+                "What is interesting about this is that we are going to use a newli\r\nne that is windows style",
             };
 
             StringWriter expected = new StringWriter();
@@ -733,7 +733,7 @@ namespace MonoTests.Mono.Options
                 { "b", v => b = "b" },
                 { "c", v => c = "c" },
                 { "f=", v => f = v },
-                new TestArgumentSource(null, null) { { "@s1", "-abcf" }, },
+                new TestArgumentSource(null, null) { { "@s1", "-abcf" } },
             };
             List<string> extra = p.Parse(args);
             Assert.AreEqual(extra.Count, 1);
@@ -751,7 +751,7 @@ namespace MonoTests.Mono.Options
             {
                 { "a", v => { } },
                 { "b", v => { } },
-                new TestArgumentSource(null, null) { { "@s1", "-a", "-b" }, },
+                new TestArgumentSource(null, null) { { "@s1", "-a", "-b" } },
             };
             List<string> e = p.Parse(_("-a", "-b", "--", "-a", "-b"));
             Assert.AreEqual(e.Count, 2);
@@ -796,7 +796,7 @@ namespace MonoTests.Mono.Options
                     { "@s9", "C-->D", "-d:E" },
                     { "@s10", "F", "-d" },
                     { "@s11", "G", "H" },
-                    { "@s12", "-dJ-->K" }
+                    { "@s12", "-dJ-->K" },
                 },
             };
             p.Parse(
@@ -956,7 +956,7 @@ namespace MonoTests.Mono.Options
         [Test]
         public void Localization()
         {
-            var p = new OptionSet(f => "hello!") { { "n=", (int v) => { } }, };
+            var p = new OptionSet(f => "hello!") { { "n=", (int v) => { } } };
             Utils.AssertException(
                 typeof(OptionException),
                 "hello!",
@@ -1031,7 +1031,7 @@ namespace MonoTests.Mono.Options
         public void DerivedType()
         {
             bool help = false;
-            var p = new CiOptionSet() { { "h|help", v => help = v != null }, };
+            var p = new CiOptionSet() { { "h|help", v => help = v != null } };
             p.Parse(_("-H"));
             Assert.AreEqual(help, true);
             help = false;
@@ -1130,7 +1130,7 @@ namespace MonoTests.Mono.Options
         public void DefaultHandler()
         {
             var extra = new List<string>();
-            var p = new OptionSet() { { "<>", v => extra.Add(v) }, };
+            var p = new OptionSet() { { "<>", v => extra.Add(v) } };
             var e = p.Parse(_("-a", "b", "--c=D", "E"));
             Assert.AreEqual(e.Count, 0);
             Assert.AreEqual(extra.Count, 4);
@@ -1144,7 +1144,7 @@ namespace MonoTests.Mono.Options
         public void MixedDefaultHandler()
         {
             var tests = new List<string>();
-            var p = new OptionSet() { { "t|<>=", v => tests.Add(v) }, };
+            var p = new OptionSet() { { "t|<>=", v => tests.Add(v) } };
             var e = p.Parse(_("-tA", "-t:B", "-t=C", "D", "--E=F"));
             Assert.AreEqual(e.Count, 0);
             Assert.AreEqual(tests.Count, 5);

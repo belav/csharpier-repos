@@ -11,7 +11,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
 {
     public static TheoryData<Type> ConvertibleTypeData
     {
-        get { return new TheoryData<Type> { typeof(TFloatingPoint), typeof(TFloatingPoint?), }; }
+        get { return new TheoryData<Type> { typeof(TFloatingPoint), typeof(TFloatingPoint?) }; }
     }
 
     protected abstract TFloatingPoint Twelve { get; }
@@ -73,7 +73,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", "12_5" }
+            { "theModelName", "12_5" },
         };
         var binder = GetBinder();
 
@@ -99,7 +99,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", " 12" }
+            { "theModelName", " 12" },
         };
         var binder = GetBinder(NumberStyles.Float & ~NumberStyles.AllowLeadingWhite);
 
@@ -125,7 +125,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", "12.5" }
+            { "theModelName", "12.5" },
         };
         var binder = GetBinder(NumberStyles.Float & ~NumberStyles.AllowDecimalPoint);
 
@@ -151,7 +151,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", "32,000" }
+            { "theModelName", "32,000" },
         };
         var binder = GetBinder(NumberStyles.Float);
 
@@ -197,7 +197,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         // Arrange
         var message = $"The value '{value}' is invalid.";
         var bindingContext = GetBindingContext(typeof(TFloatingPoint));
-        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value }, };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
         var binder = GetBinder();
 
         // Act
@@ -282,7 +282,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
         {
-            { "theModelName", "12,5" }
+            { "theModelName", "12,5" },
         };
         var binder = GetBinder();
 
@@ -305,7 +305,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", "32,000" }
+            { "theModelName", "32,000" },
         };
         var binder = GetBinder();
 
@@ -328,7 +328,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", "32,000.1" }
+            { "theModelName", "32,000.1" },
         };
         var binder = GetBinder();
 
@@ -351,7 +351,7 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
         var bindingContext = GetBindingContext(destinationType);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
         {
-            { "theModelName", "32000,1" }
+            { "theModelName", "32000,1" },
         };
         var binder = GetBinder();
 
@@ -378,7 +378,9 @@ public abstract class FloatingPointTypeModelBinderTest<TFloatingPoint>
             ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType),
             ModelName = "theModelName",
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider() // empty
+            ValueProvider =
+                new SimpleValueProvider() // empty
+            ,
         };
     }
 

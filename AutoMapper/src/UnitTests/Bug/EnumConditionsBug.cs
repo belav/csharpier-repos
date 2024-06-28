@@ -6,14 +6,14 @@
         public enum Enum1
         {
             One,
-            Two
+            Two,
         };
 
         [Flags]
         public enum Enum2
         {
             Three,
-            Four
+            Four,
         }
 
         public class EnumTestSource

@@ -48,7 +48,7 @@
                     new Base()
                     {
                         Base1 = "base1",
-                        Sub = new Sub() { Sub1 = "sub1" }
+                        Sub = new Sub() { Sub1 = "sub1" },
                     }
                 );
 
@@ -83,7 +83,7 @@
                         {
                             Base1 = b.Base1,
                             BaseID = b.BaseID,
-                            Sub = new SubDTO { Sub1 = b.Sub.Sub1, }
+                            Sub = new SubDTO { Sub1 = b.Sub.Sub1 },
                         })
                         .FirstOrDefault();
                     baseDTO.ShouldNotBeNull();

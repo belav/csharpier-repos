@@ -8,7 +8,7 @@ public class Test
     {
         None = 0,
         Foo = 1,
-        Bar = 2
+        Bar = 2,
     };
 
     public void f1([System.Runtime.InteropServices.DefaultParameterValue(null)] object x) { }

@@ -102,7 +102,7 @@ namespace System.Data.Tests
             yield return new object[] { typeof(int[,]) };
             yield return new object[]
             {
-                Array.CreateInstance(typeof(int), new[] { 1 }, new[] { 1 }).GetType()
+                Array.CreateInstance(typeof(int), new[] { 1 }, new[] { 1 }).GetType(),
             };
 
             // HashSet<T> isn't in the allow list

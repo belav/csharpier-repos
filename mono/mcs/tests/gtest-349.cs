@@ -11,7 +11,7 @@ class X
         Delegate[] e = new Delegate[]
         {
             new Function<IList, IList, int>(f2),
-            new Function<IList, object, int>(f2)
+            new Function<IList, object, int>(f2),
         };
 
         if ((int)e[0].DynamicInvoke(null, null) != 1)

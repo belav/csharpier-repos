@@ -47,7 +47,7 @@ namespace System.Net
         Status,
         Headers,
         Content,
-        Aborted
+        Aborted,
     }
 
     class WebConnection : IDisposable

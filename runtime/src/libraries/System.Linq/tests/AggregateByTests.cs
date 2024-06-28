@@ -231,7 +231,7 @@ namespace System.Linq.Tests
                 expected: new Dictionary<string, string>
                 {
                     { "Bob", "BobbobBob" },
-                    { "tim", "timTim" }
+                    { "tim", "timTim" },
                 }
             );
 
@@ -245,7 +245,7 @@ namespace System.Linq.Tests
                 {
                     { 20, "I am 20 and my name is Tom" },
                     { 30, "I am 30 and my name is Dick" },
-                    { 40, "I am 40 and my name is Harry" }
+                    { 40, "I am 40 and my name is Harry" },
                 }
             );
 
@@ -258,7 +258,7 @@ namespace System.Linq.Tests
                 expected: new Dictionary<int, string>
                 {
                     { 20, "I am 20 and my name is maybe Tom maybe Dick" },
-                    { 40, "I am 40 and my name is maybe Harry" }
+                    { 40, "I am 40 and my name is maybe Harry" },
                 }
             );
 

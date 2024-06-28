@@ -75,7 +75,7 @@ namespace System.Data.ProviderBase
 
             destinationTable = new DataTable(collectionName)
             {
-                Locale = CultureInfo.InvariantCulture
+                Locale = CultureInfo.InvariantCulture,
             };
             destinationColumns = destinationTable.Columns;
 
@@ -199,7 +199,7 @@ namespace System.Data.ProviderBase
                 // Build a DataTable from the reader
                 resultTable = new DataTable(collectionName)
                 {
-                    Locale = CultureInfo.InvariantCulture
+                    Locale = CultureInfo.InvariantCulture,
                 };
 
                 schemaTable = reader.GetSchemaTable()!;

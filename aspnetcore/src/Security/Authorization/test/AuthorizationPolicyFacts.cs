@@ -58,7 +58,7 @@ public class AuthorizationPolicyFacts
 
         var policies = new[]
         {
-            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build()
+            new AuthorizationPolicyBuilder().RequireAssertion(_ => true).Build(),
         };
 
         var options = new AuthorizationOptions();
@@ -80,7 +80,7 @@ public class AuthorizationPolicyFacts
         var attributes = new AuthorizeAttribute[]
         {
             new AuthorizeAttribute(),
-            new AuthorizeAttribute("2") { AuthenticationSchemes = "dupe" }
+            new AuthorizeAttribute("2") { AuthenticationSchemes = "dupe" },
         };
         var options = new AuthorizationOptions();
         options.DefaultPolicy = new AuthorizationPolicyBuilder("default")
@@ -111,7 +111,7 @@ public class AuthorizationPolicyFacts
         // Arrange
         var attributes = new AuthorizeAttribute[]
         {
-            new AuthorizeAttribute() { Roles = "r1 , r2" }
+            new AuthorizeAttribute() { Roles = "r1 , r2" },
         };
         var options = new AuthorizationOptions();
         var provider = new DefaultAuthorizationPolicyProvider(Options.Create(options));
@@ -135,7 +135,7 @@ public class AuthorizationPolicyFacts
         // Arrange
         var attributes = new AuthorizeAttribute[]
         {
-            new AuthorizeAttribute() { AuthenticationSchemes = "a1 , a2" }
+            new AuthorizeAttribute() { AuthenticationSchemes = "a1 , a2" },
         };
         var options = new AuthorizationOptions();
 
@@ -156,7 +156,7 @@ public class AuthorizationPolicyFacts
         // Arrange
         var attributes = new AuthorizeAttribute[]
         {
-            new AuthorizeAttribute() { AuthenticationSchemes = "a1 , , ,,, a2" }
+            new AuthorizeAttribute() { AuthenticationSchemes = "a1 , , ,,, a2" },
         };
         var options = new AuthorizationOptions();
 
@@ -177,7 +177,7 @@ public class AuthorizationPolicyFacts
         // Arrange
         var attributes = new AuthorizeAttribute[]
         {
-            new AuthorizeAttribute() { Roles = "r1 , ,, , r2" }
+            new AuthorizeAttribute() { Roles = "r1 , ,, , r2" },
         };
         var options = new AuthorizationOptions();
         var provider = new DefaultAuthorizationPolicyProvider(Options.Create(options));

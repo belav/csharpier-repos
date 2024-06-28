@@ -48,6 +48,6 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Items of baggage will be included in the logging.
         /// </summary>
-        Baggage = 0x0040
+        Baggage = 0x0040,
     }
 }

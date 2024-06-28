@@ -201,7 +201,7 @@ namespace System.Runtime.InteropServices.Tests
                 "Called GetInstance",
                 "Called MarshalManagedToNative",
                 "Called MarshalNativeToManaged",
-                "Called CleanUpNativeData"
+                "Called CleanUpNativeData",
             };
             Assert.Equal(expectedOrderingFirstCall, OrderTrackingCustomMarshaler.Events);
 
@@ -213,7 +213,7 @@ namespace System.Runtime.InteropServices.Tests
                 {
                     "Called MarshalManagedToNative",
                     "Called MarshalNativeToManaged",
-                    "Called CleanUpNativeData"
+                    "Called CleanUpNativeData",
                 }
             );
             Assert.Equal(expectedOrderingSecondCall, OrderTrackingCustomMarshaler.Events);
@@ -238,7 +238,7 @@ namespace System.Runtime.InteropServices.Tests
             OrderTrackingMethodOut(out var val4);
             Assert.Equal("2334", val4);
             IEnumerable<string> expectedOrderingForthCall = expectedOrderingThirdCall.Concat(
-                new string[] { "Called MarshalNativeToManaged", }
+                new string[] { "Called MarshalNativeToManaged" }
             );
             Assert.Equal(
                 expectedOrderingForthCall.Skip(11),
@@ -263,7 +263,7 @@ namespace System.Runtime.InteropServices.Tests
             var val6 = OrderTrackingMethodReturn("726");
             Assert.Equal("726", val6);
             IEnumerable<string> expectedOrderingSixthCall = expectedOrderingFifthCall.Concat(
-                new string[] { "Called MarshalNativeToManaged", }
+                new string[] { "Called MarshalNativeToManaged" }
             );
             Assert.Equal(
                 expectedOrderingSixthCall.Skip(15),

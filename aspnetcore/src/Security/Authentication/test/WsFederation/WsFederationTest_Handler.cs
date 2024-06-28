@@ -435,7 +435,7 @@ public class WsFederationTestHandlers
                                     {
                                         context.Response.Headers["EventHeader"] = "OnRemoteSignOut";
                                         return Task.FromResult(0);
-                                    }
+                                    },
                                 };
                             });
                     })
@@ -473,7 +473,7 @@ public class WsFederationTestHandlers
                     {
                         var authProperties = new AuthenticationProperties()
                         {
-                            RedirectUri = context.Request.GetEncodedUrl()
+                            RedirectUri = context.Request.GetEncodedUrl(),
                         };
                         await context.SignOutAsync(
                             WsFederationDefaults.AuthenticationScheme,
@@ -568,7 +568,7 @@ public class WsFederationTestHandlers
             var metadata = File.ReadAllText(@"WsFederation/federationmetadata.xml");
             var newResponse = new HttpResponseMessage()
             {
-                Content = new StringContent(metadata, Encoding.UTF8, "text/xml")
+                Content = new StringContent(metadata, Encoding.UTF8, "text/xml"),
             };
             return Task.FromResult<HttpResponseMessage>(newResponse);
         }

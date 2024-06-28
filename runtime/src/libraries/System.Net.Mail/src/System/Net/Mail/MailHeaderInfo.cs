@@ -88,7 +88,7 @@ namespace System.Net.Mail
             new HeaderInfo(MailHeaderID.To, "To", true, false, true),
             new HeaderInfo(MailHeaderID.XPriority, "X-Priority", true, false, false),
             new HeaderInfo(MailHeaderID.XReceiver, "X-Receiver", false, true, true),
-            new HeaderInfo(MailHeaderID.XSender, "X-Sender", true, true, true)
+            new HeaderInfo(MailHeaderID.XSender, "X-Sender", true, true, true),
         };
 
         private static readonly Dictionary<string, int> s_headerDictionary =

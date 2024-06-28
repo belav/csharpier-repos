@@ -332,7 +332,7 @@ namespace System.Diagnostics.Tracing
         private enum State
         {
             Started,
-            Stopped
+            Stopped,
         }
 
         /// <summary>

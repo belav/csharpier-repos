@@ -39,6 +39,6 @@ namespace System.EnterpriseServices
         LocallyOk,
         NoTransaction,
         Aborting,
-        Aborted
+        Aborted,
     }
 }

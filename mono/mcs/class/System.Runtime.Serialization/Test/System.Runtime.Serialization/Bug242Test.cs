@@ -36,7 +36,7 @@ namespace MonoTests.System.Runtime.Serialization
             var dataItems = new[]
             {
                 new DataItemTest242() { Name = "aaaaa" },
-                new DataItemTest242() { Name = "bbbbb" }
+                new DataItemTest242() { Name = "bbbbb" },
             };
 
             var data = new DataTest242()
@@ -45,7 +45,7 @@ namespace MonoTests.System.Runtime.Serialization
                 DataIList = dataItems.ToList(),
                 DataList = dataItems.ToList(),
                 DataICollection = dataItems.ToList(),
-                DataIEnumerable = dataItems.ToList()
+                DataIEnumerable = dataItems.ToList(),
             };
 
             // Serialize

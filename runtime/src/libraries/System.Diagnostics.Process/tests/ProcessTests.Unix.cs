@@ -91,7 +91,7 @@ namespace System.Diagnostics.Tests
                             new ProcessStartInfo
                             {
                                 UseShellExecute = true,
-                                FileName = Environment.CurrentDirectory
+                                FileName = Environment.CurrentDirectory,
                             }
                         )
                 );
@@ -310,7 +310,7 @@ namespace System.Diagnostics.Tests
                                 new ProcessStartInfo
                                 {
                                     UseShellExecute = true,
-                                    FileName = fileToOpen
+                                    FileName = fileToOpen,
                                 }
                             )
                         )
@@ -343,7 +343,7 @@ namespace System.Diagnostics.Tests
             {
                 UseShellExecute = true,
                 FileName = "/nosuchfile",
-                Arguments = "invalid_arg"
+                Arguments = "invalid_arg",
             };
             startInfo.Environment.Remove("DISPLAY"); // Get rid of DISPLAY environment variable as this causes spurious test failures.
             using (var px = Process.Start(startInfo))
@@ -370,7 +370,7 @@ namespace System.Diagnostics.Tests
                     {
                         UseShellExecute = true,
                         FileName = "touch",
-                        Arguments = testFilePath
+                        Arguments = testFilePath,
                     }
                 )
             )
@@ -413,7 +413,7 @@ namespace System.Diagnostics.Tests
                         {
                             UseShellExecute = true,
                             FileName = "/",
-                            Verb = argVerb
+                            Verb = argVerb,
                         };
                         if (bool.Parse(argValid))
                         {
@@ -533,7 +533,7 @@ namespace System.Diagnostics.Tests
             {
                 UseShellExecute = true,
                 FileName = "https://github.com/dotnet/corefx",
-                Arguments = arguments
+                Arguments = arguments,
             };
             using (var px = Process.Start(startInfo))
             {
@@ -548,7 +548,7 @@ namespace System.Diagnostics.Tests
             new TheoryData<string[]>
             {
                 { new string[] { "-a", "Safari" } },
-                { new string[] { "-a", "\"Google Chrome\"" } }
+                { new string[] { "-a", "\"Google Chrome\"" } },
             };
 
         [Theory, MemberData(nameof(StartOSXProcessWithArgumentList))]
@@ -561,7 +561,7 @@ namespace System.Diagnostics.Tests
             var startInfo = new ProcessStartInfo
             {
                 UseShellExecute = true,
-                FileName = "https://github.com/dotnet/corefx"
+                FileName = "https://github.com/dotnet/corefx",
             };
 
             foreach (string item in argumentList)
@@ -1007,8 +1007,8 @@ namespace System.Diagnostics.Tests
                 {
                     RedirectStandardOutput = true,
                     RedirectStandardInput = true,
-                    RedirectStandardError = true
-                }
+                    RedirectStandardError = true,
+                },
             };
             using (
                 RemoteInvokeHandle handle = RemoteExecutor.Invoke(
@@ -1124,7 +1124,10 @@ namespace System.Diagnostics.Tests
                             // Don't pass our standard out to the sleepProcess or the ReadToEnd below won't return.
                             new RemoteInvokeOptions
                             {
-                                StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true }
+                                StartInfo = new ProcessStartInfo()
+                                {
+                                    RedirectStandardOutput = true,
+                                },
                             }
                         );
 
@@ -1139,7 +1142,7 @@ namespace System.Diagnostics.Tests
                     Process.GetCurrentProcess().Id.ToString(),
                     new RemoteInvokeOptions
                     {
-                        StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true }
+                        StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true },
                     }
                 );
                 using (createNonChildProcess)
@@ -1238,7 +1241,7 @@ namespace System.Diagnostics.Tests
         {
             "xdg-open",
             "gnome-open",
-            "kfmclient"
+            "kfmclient",
         };
 
         private string WriteScriptFile(string directory, string name, int returnValue)

@@ -1330,7 +1330,7 @@ namespace System.Xml.Serialization
                                 typeof(Int32),
                                 typeof(Int32),
                                 typeof(Boolean),
-                                typeof(Byte)
+                                typeof(Byte),
                             },
                             null
                         );
@@ -2920,7 +2920,7 @@ namespace System.Xml.Serialization
         LessThanOrEqualTo,
         GreaterThan,
         NotEqualTo,
-        GreaterThanOrEqualTo
+        GreaterThanOrEqualTo,
     }
 
     internal class IfState

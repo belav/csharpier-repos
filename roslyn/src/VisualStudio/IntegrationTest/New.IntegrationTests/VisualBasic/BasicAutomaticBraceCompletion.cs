@@ -63,7 +63,7 @@ End Class",
             );
 
             await TestServices.Input.SendWithoutActivateAsync(
-                ["New Object", VirtualKeyCode.ESCAPE, VirtualKeyCode.TAB,],
+                ["New Object", VirtualKeyCode.ESCAPE, VirtualKeyCode.TAB],
                 HangMitigatingCancellationToken
             );
 

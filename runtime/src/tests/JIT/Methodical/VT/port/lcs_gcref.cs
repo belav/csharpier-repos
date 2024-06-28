@@ -116,7 +116,7 @@ namespace JitTest_lcs_gcref_port
                 "The Sun has left his blackness",
                 "and has found a fresher morning",
                 "and the fair Moon rejoices",
-                "in the clear and cloudless night"
+                "in the clear and cloudless night",
             };
 
             LCSV[] len = new LCSV[RANK];

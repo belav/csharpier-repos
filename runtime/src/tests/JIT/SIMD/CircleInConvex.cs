@@ -197,17 +197,13 @@ namespace ClassLibrary
         static int cmp(Point a, Point b)
         {
             if (a.X == b.X)
-                return a.Y < b.Y
-                    ? 1
-                    : a.Y > b.Y
-                        ? -1
-                        : 0;
+                return a.Y < b.Y ? 1
+                    : a.Y > b.Y ? -1
+                    : 0;
             else
-                return a.X < b.X
-                    ? 1
-                    : a.X > b.X
-                        ? -1
-                        : 0;
+                return a.X < b.X ? 1
+                    : a.X > b.X ? -1
+                    : 0;
         }
 
         static bool cw(Point a, Point b, Point c)

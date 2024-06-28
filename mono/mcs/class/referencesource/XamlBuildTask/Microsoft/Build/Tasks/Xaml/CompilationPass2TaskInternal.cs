@@ -308,7 +308,7 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 LocalAssembly = localAssembly,
                 ProvideLineInfo = true,
-                AllowProtectedMembersOnRoot = true
+                AllowProtectedMembersOnRoot = true,
             };
             using (StreamReader streamReader = new StreamReader(markupItem))
             {

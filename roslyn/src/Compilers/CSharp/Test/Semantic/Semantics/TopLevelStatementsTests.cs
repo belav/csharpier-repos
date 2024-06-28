@@ -910,7 +910,7 @@ class Test
                 //     System.Console.WriteLine("Hi!");
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, @"""Hi!""")
                     .WithArguments(@"""Hi!""")
-                    .WithLocation(4, 30)
+                    .WithLocation(4, 30),
             };
 
             comp.GetDiagnostics(
@@ -945,7 +945,7 @@ namespace Test
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, @"""Hi!""").WithLocation(4, 30),
                 // (4,30): error CS1022: Type or namespace definition, or end-of-file expected
                 //     System.Console.WriteLine("Hi!");
-                Diagnostic(ErrorCode.ERR_EOFExpected, @"""Hi!""").WithLocation(4, 30)
+                Diagnostic(ErrorCode.ERR_EOFExpected, @"""Hi!""").WithLocation(4, 30),
             };
 
             comp.GetDiagnostics(
@@ -2786,7 +2786,7 @@ namespace N1
                         new[]
                         {
                             Parse(text1, filename: "text1", DefaultParseOptions),
-                            Parse(text1, filename: "text2", TestOptions.Regular6)
+                            Parse(text1, filename: "text2", TestOptions.Regular6),
                         },
                         options: TestOptions.DebugExe
                     )
@@ -8505,28 +8505,23 @@ extern static void internalCallStatic();
                     {
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__forwardRef|0_0" =>
-                            MethodImplAttributes.ForwardRef,
+                            + ">g__forwardRef|0_0" => MethodImplAttributes.ForwardRef,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__noInlining|0_1" =>
-                            MethodImplAttributes.NoInlining,
+                            + ">g__noInlining|0_1" => MethodImplAttributes.NoInlining,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__noOptimization|0_2" =>
-                            MethodImplAttributes.NoOptimization,
+                            + ">g__noOptimization|0_2" => MethodImplAttributes.NoOptimization,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__synchronized|0_3" =>
-                            MethodImplAttributes.Synchronized,
+                            + ">g__synchronized|0_3" => MethodImplAttributes.Synchronized,
                         "<"
                             + WellKnownMemberNames.TopLevelStatementsEntryPointMethodName
-                            + ">g__internalCallStatic|0_4" =>
-                            MethodImplAttributes.InternalCall,
+                            + ">g__internalCallStatic|0_4" => MethodImplAttributes.InternalCall,
                         ".ctor" => MethodImplAttributes.IL,
                         WellKnownMemberNames.TopLevelStatementsEntryPointMethodName =>
                             MethodImplAttributes.IL,
-                        _ => throw TestExceptionUtilities.UnexpectedValue(methodName)
+                        _ => throw TestExceptionUtilities.UnexpectedValue(methodName),
                     };
 
                     Assert.Equal(expectedFlags, actualFlags);
@@ -12138,7 +12133,7 @@ class C
                         "i"
                     )
                     .WithArguments("i")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -12227,7 +12222,7 @@ class C
                         "M2"
                     )
                     .WithArguments("M2")
-                    .WithLocation(10, 9)
+                    .WithLocation(10, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -12979,7 +12974,7 @@ partial class Program
                             "System.Int32 Program.Property { get; set; }",
                             "System.Int32 Program.Property.get",
                             "void Program.Property.set",
-                            "Program..ctor()"
+                            "Program..ctor()",
                         },
                         field.ContainingType.GetMembers().ToTestDisplayStrings()
                     );
@@ -12999,7 +12994,7 @@ partial class Program
                             "System.Int32 Program.Property.get",
                             "void Program.Property.set",
                             "Program..ctor()",
-                            "System.Int32 Program.Property { get; set; }"
+                            "System.Int32 Program.Property { get; set; }",
                         },
                         field.ContainingType.GetMembers().ToTestDisplayStrings()
                     );

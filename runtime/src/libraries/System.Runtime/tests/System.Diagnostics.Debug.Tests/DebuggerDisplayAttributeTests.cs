@@ -62,7 +62,7 @@ namespace System.Diagnostics.Tests
         {
             var attribute = new DebuggerDisplayAttribute("Value")
             {
-                TargetTypeName = targetTypeName
+                TargetTypeName = targetTypeName,
             };
             Assert.Equal(targetTypeName, attribute.TargetTypeName);
         }

@@ -1657,7 +1657,7 @@ namespace System.Xml.Serialization
             WriteAttribute = 2,
             WriteElementString = 4,
             WriteNullableStringLiteral = 8,
-            Encoded = 16
+            Encoded = 16,
         }
     }
 

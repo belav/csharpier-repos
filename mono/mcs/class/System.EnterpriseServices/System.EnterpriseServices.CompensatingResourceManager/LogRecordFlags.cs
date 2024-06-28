@@ -42,6 +42,6 @@ namespace System.EnterpriseServices.CompensatingResourceManager
         WrittenDuringAbort = 0x8,
         WrittenDurringRecovery = 0x10, // Typo present in .NET
         WrittenDuringReplay = 0x20,
-        ReplayInProgress = 0x40
+        ReplayInProgress = 0x40,
     }
 }

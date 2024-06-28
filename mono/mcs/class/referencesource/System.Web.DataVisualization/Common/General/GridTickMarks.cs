@@ -83,7 +83,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Tickmarks are set across the axis line.
         /// </summary>
-        AcrossAxis
+        AcrossAxis,
     };
 
     #endregion
@@ -93,7 +93,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// the axis line. TickMark shares many common properties with the Grid
     /// class. This class also contains methods for tick marks drawing.
     /// </summary>
-    [DefaultProperty("Enabled"), SRDescription("DescriptionAttributeTickMark_TickMark"),]
+    [DefaultProperty("Enabled"), SRDescription("DescriptionAttributeTickMark_TickMark")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -1203,7 +1203,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// plotting area. It contains grid interval and visual appearance
     /// properties. This class also contains methods for grid lines drawing.
     /// </summary>
-    [DefaultProperty("Enabled"), SRDescription("DescriptionAttributeGrid_Grid"),]
+    [DefaultProperty("Enabled"), SRDescription("DescriptionAttributeGrid_Grid")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

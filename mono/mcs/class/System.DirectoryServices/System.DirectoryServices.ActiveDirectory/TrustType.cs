@@ -32,6 +32,6 @@ namespace System.DirectoryServices.ActiveDirectory
         External,
         Forest,
         Kerberos,
-        Unknown
+        Unknown,
     }
 }

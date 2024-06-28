@@ -63,7 +63,7 @@ namespace Microsoft.CodeAnalysis.Editor
         /// <summary>
         /// File rename is allowed
         /// </summary>
-        Allowed
+        Allowed,
     }
 
     internal readonly struct InlineRenameReplacement

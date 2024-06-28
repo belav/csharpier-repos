@@ -21,7 +21,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         ExcludeNamespaces = PdbToXmlOptions.ExcludeNamespaces,
         ExcludeAsyncInfo = PdbToXmlOptions.ExcludeAsyncInfo,
         ExcludeCustomDebugInformation = PdbToXmlOptions.ExcludeCustomDebugInformation,
-        IncludeModuleDebugInfo = PdbToXmlOptions.IncludeModuleDebugInfo
+        IncludeModuleDebugInfo = PdbToXmlOptions.IncludeModuleDebugInfo,
     }
 
     public static class PdbValidationOptionsExtensions

@@ -209,7 +209,7 @@ namespace JIT.HardwareIntrinsics.X86
                     new object[]
                     {
                         Unsafe.Read<Vector128<Byte>>(_dataTable.inArray1Ptr),
-                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr)
+                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArray2Ptr),
                     }
                 );
 
@@ -229,7 +229,7 @@ namespace JIT.HardwareIntrinsics.X86
                     new object[]
                     {
                         Sse2.LoadVector128((Byte*)(_dataTable.inArray1Ptr)),
-                        Sse2.LoadVector128((Byte*)(_dataTable.inArray2Ptr))
+                        Sse2.LoadVector128((Byte*)(_dataTable.inArray2Ptr)),
                     }
                 );
 
@@ -249,7 +249,7 @@ namespace JIT.HardwareIntrinsics.X86
                     new object[]
                     {
                         Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray1Ptr)),
-                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray2Ptr))
+                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArray2Ptr)),
                     }
                 );
 

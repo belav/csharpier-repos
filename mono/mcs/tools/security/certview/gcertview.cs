@@ -153,7 +153,7 @@ namespace Mono.Tools.CertView
                 typeof(string),
                 typeof(string),
                 typeof(string),
-                typeof(int)
+                typeof(int),
             };
             allStore = new ListStore(storeType);
             v1Store = new ListStore(storeType);

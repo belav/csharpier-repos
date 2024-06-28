@@ -743,7 +743,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
-                Converters = { new ListOfEmployeeConverter() }
+                Converters = { new ListOfEmployeeConverter() },
             };
             Employee angela = await Serializer.DeserializeWrapper<Employee>(json, options);
             Assert.Equal(0, angela.Subordinates.Count);
@@ -1667,7 +1667,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 IncludeFields = true,
-                ReferenceHandler = ReferenceHandler.Preserve
+                ReferenceHandler = ReferenceHandler.Preserve,
             };
             object obj = await Serializer.DeserializeWrapper(
                 Encoding.UTF8.GetString(data),
@@ -2167,7 +2167,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
-                UnknownTypeHandling = typehandling
+                UnknownTypeHandling = typehandling,
             };
             string json = @"[{ ""$id"" : ""1"" },{ ""$ref"" : ""1""}]";
             object[] deserialized = await Serializer.DeserializeWrapper<object[]>(json, options);
@@ -2187,7 +2187,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
-                UnknownTypeHandling = typehandling
+                UnknownTypeHandling = typehandling,
             };
             await Assert.ThrowsAsync<JsonException>(
                 () => Serializer.DeserializeWrapper<object>(json, options)
@@ -2204,7 +2204,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 ReferenceHandler = ReferenceHandler.Preserve,
-                UnknownTypeHandling = typehandling
+                UnknownTypeHandling = typehandling,
             };
             string json =
                 @"[{ ""$id"" : ""1"" }, { ""$ref"" : ""1"", ""trailingProperty"" : true }]";

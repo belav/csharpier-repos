@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ErrorCode.Void => false,
                 ErrorCode.ERR_IdentifierExpectedKW => false, // message uses {1} rather than {0}
                 ErrorCode.WRN_XMLParseError => false, // XmlSyntaxDiagnosticInfo.GetMessage() uses distinct error code
-                _ => true
+                _ => true,
             };
         }
 #endif

@@ -34,7 +34,7 @@ namespace System.Net.Security
             DiagnosticId = Obsoletions.EncryptionPolicyDiagId,
             UrlFormat = Obsoletions.SharedUrlFormat
         )]
-        NoEncryption
+        NoEncryption,
     }
 
     // A user delegate used to verify remote SSL certificate.

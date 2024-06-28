@@ -33,7 +33,7 @@ namespace System.ServiceModel.Activities
         {
             this.transactionHandle = new Variable<RuntimeTransactionHandle>
             {
-                Name = "TransactionHandle"
+                Name = "TransactionHandle",
             };
             this.isNested = new Variable<bool>();
 
@@ -61,7 +61,7 @@ namespace System.ServiceModel.Activities
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -91,11 +91,11 @@ namespace System.ServiceModel.Activities
                 new DelegateInArgument<ValidationContext> { Name = "validationContext" };
             DelegateInArgument<Activity> child = new DelegateInArgument<Activity>
             {
-                Name = "child"
+                Name = "child",
             };
             Variable<bool> nestedCompensableActivity = new Variable<bool>
             {
-                Name = "nestedCompensableActivity"
+                Name = "nestedCompensableActivity",
             };
 
             return new Constraint<TransactedReceiveScope>
@@ -128,11 +128,11 @@ namespace System.ServiceModel.Activities
                                                 {
                                                     Left = new ObtainType
                                                     {
-                                                        Input = new InArgument<Activity>(child)
+                                                        Input = new InArgument<Activity>(child),
                                                     },
                                                     Right = new InArgument<Type>(context =>
                                                         typeof(TransactionScope)
-                                                    )
+                                                    ),
                                                 },
                                                 Then = new AssertValidation
                                                 {
@@ -140,7 +140,7 @@ namespace System.ServiceModel.Activities
                                                     Assertion =
                                                         new NestedChildTransactionScopeActivityAbortInstanceFlagValidator
                                                         {
-                                                            Child = child
+                                                            Child = child,
                                                         },
                                                     //Message = new InArgument<string>(env => SR.AbortInstanceOnTransactionFailureDoesNotMatch(child.Get(env).DisplayName, this.DisplayName)),
                                                     Message = new InArgument<string>
@@ -149,12 +149,13 @@ namespace System.ServiceModel.Activities
                                                             new NestedChildTransactionScopeActivityAbortInstanceFlagValidatorMessage
                                                             {
                                                                 Child = child,
-                                                                ParentDisplayName = this.DisplayName
-                                                            }
+                                                                ParentDisplayName =
+                                                                    this.DisplayName,
+                                                            },
                                                     },
                                                     PropertyName =
-                                                        AbortInstanceOnTransactionFailurePropertyName
-                                                }
+                                                        AbortInstanceOnTransactionFailurePropertyName,
+                                                },
                                             },
                                             new If()
                                             {
@@ -162,23 +163,23 @@ namespace System.ServiceModel.Activities
                                                 {
                                                     Left = new ObtainType
                                                     {
-                                                        Input = new InArgument<Activity>(child)
+                                                        Input = new InArgument<Activity>(child),
                                                     },
                                                     Right = new InArgument<Type>(context =>
                                                         typeof(CompensableActivity)
-                                                    )
+                                                    ),
                                                 },
                                                 Then = new Assign<bool>
                                                 {
                                                     To = new OutArgument<bool>(
                                                         nestedCompensableActivity
                                                     ),
-                                                    Value = new InArgument<bool>(true)
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
+                                                    Value = new InArgument<bool>(true),
+                                                },
+                                            },
+                                        },
+                                    },
+                                },
                             },
                             new AssertValidation
                             {
@@ -189,18 +190,18 @@ namespace System.ServiceModel.Activities
                                     {
                                         Operand = new VariableValue<bool>
                                         {
-                                            Variable = nestedCompensableActivity
-                                        }
-                                    }
+                                            Variable = nestedCompensableActivity,
+                                        },
+                                    },
                                 },
                                 Message = new InArgument<string>(
                                     SR2.CompensableActivityInsideTransactedReceiveScope
                                 ),
-                                PropertyName = BodyPropertyName
-                            }
-                        }
-                    }
-                }
+                                PropertyName = BodyPropertyName,
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -504,7 +505,7 @@ namespace System.ServiceModel.Activities
                     {
                         childArgument,
                         parentDisplayNameArgument,
-                        resultArgument
+                        resultArgument,
                     }
                 );
             }

@@ -90,7 +90,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input checked=\"checked\" class=\"form-control check-box\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"checkbox\" value=\"true\" /><input name=\"FieldPrefix\" type=\"hidden\" value=\"false\" />"
-                    }
+                    },
                 };
             }
         }
@@ -377,7 +377,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"text\" value=\"12.30\" />"
-                    }
+                    },
                 };
             }
         }
@@ -461,7 +461,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "Hidden Value<input class=\"form-control\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"hidden\" value=\"Hidden Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -547,7 +547,7 @@ namespace System.Web.Mvc.Html.Test
                             + "Line"
                             + Environment.NewLine
                             + "Value!</textarea>"
-                    }
+                    },
                 };
             }
         }
@@ -637,7 +637,7 @@ namespace System.Web.Mvc.Html.Test
             ObjectTemplateModel model = new ObjectTemplateModel
             {
                 Property1 = "p1",
-                Property2 = null
+                Property2 = null,
             };
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(model);
 
@@ -665,7 +665,7 @@ namespace System.Web.Mvc.Html.Test
             ObjectTemplateModel model = new ObjectTemplateModel
             {
                 Property1 = "p1",
-                Property2 = null
+                Property2 = null,
             };
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(model);
             html.ViewContext.ViewBag.htmlAttributes = new { @class = "form-control", foo = "bar" };
@@ -694,7 +694,7 @@ namespace System.Web.Mvc.Html.Test
             ObjectTemplateModel model = new ObjectTemplateModel
             {
                 Property1 = "p1",
-                Property2 = null
+                Property2 = null,
             };
             HtmlHelper html = MakeHtmlHelper<ObjectTemplateModel>(model);
             html.ViewData.ModelState.AddModelError("FieldPrefix.Property1", "Error Message");
@@ -737,7 +737,7 @@ namespace System.Web.Mvc.Html.Test
                 "Property1"
             )
             {
-                DisplayName = String.Empty
+                DisplayName = String.Empty,
             };
             ModelMetadata prop2Metadata = new ModelMetadata(
                 provider.Object,
@@ -747,7 +747,7 @@ namespace System.Web.Mvc.Html.Test
                 "Property2"
             )
             {
-                DisplayName = "Custom display name"
+                DisplayName = "Custom display name",
             };
             html.ViewData.ModelMetadata = metadata.Object;
             metadata.Setup(p => p.Properties).Returns(() => new[] { prop1Metadata, prop2Metadata });
@@ -788,7 +788,7 @@ namespace System.Web.Mvc.Html.Test
                 "Property1"
             )
             {
-                ShowForEdit = true
+                ShowForEdit = true,
             };
             ModelMetadata prop2Metadata = new ModelMetadata(
                 provider.Object,
@@ -798,7 +798,7 @@ namespace System.Web.Mvc.Html.Test
                 "Property2"
             )
             {
-                ShowForEdit = false
+                ShowForEdit = false,
             };
             html.ViewData.ModelMetadata = metadata.Object;
             metadata.Setup(p => p.Properties).Returns(() => new[] { prop1Metadata, prop2Metadata });
@@ -1040,7 +1040,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line password\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"password\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1093,7 +1093,7 @@ namespace System.Web.Mvc.Html.Test
                 "Property1"
             )
             {
-                HideSurroundingHtml = true
+                HideSurroundingHtml = true,
             };
             html.ViewData.ModelMetadata = metadata.Object;
             metadata.Setup(p => p.Properties).Returns(() => new[] { prop1Metadata });
@@ -1151,7 +1151,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"text\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1209,7 +1209,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"tel\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1270,7 +1270,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"url\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1328,7 +1328,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"email\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1426,7 +1426,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"datetime\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1518,7 +1518,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"datetime-local\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1616,7 +1616,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"date\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1705,7 +1705,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"time\" value=\"Value\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1763,7 +1763,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"number\" value=\"10\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1830,7 +1830,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         new { @class = "form-control", custom = "foo" },
                         "<input class=\"form-control text-box single-line\" custom=\"foo\" id=\"FieldPrefix\" name=\"FieldPrefix\" type=\"color\" value=\"#33F4CC\" />"
-                    }
+                    },
                 };
             }
         }
@@ -1899,7 +1899,7 @@ namespace System.Web.Mvc.Html.Test
                 new StringWriter()
             )
             {
-                HttpContext = mockHttpContext.Object
+                HttpContext = mockHttpContext.Object,
             };
 
             // A new helper instance, is executing within a new scope, so it needs to be reset.

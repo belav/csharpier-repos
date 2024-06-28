@@ -80,7 +80,7 @@ namespace System.Text.Json
             {
                 AllowTrailingCommas = AllowTrailingCommas,
                 CommentHandling = CommentHandling,
-                MaxDepth = MaxDepth
+                MaxDepth = MaxDepth,
             };
         }
     }

@@ -17,7 +17,7 @@ namespace System.Web.Mvc
         private string _cacheKeyPrefix;
         private CacheItemPolicy _cacheItemPolicy = new CacheItemPolicy
         {
-            SlidingExpiration = TimeSpan.FromMinutes(20)
+            SlidingExpiration = TimeSpan.FromMinutes(20),
         };
         private ObjectCache _prototypeCache;
 

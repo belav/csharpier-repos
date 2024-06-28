@@ -82,7 +82,7 @@ namespace System.Web.Mvc.Razor.Test
                 "SomeSourceFile.cshtml"
             )
             {
-                CallBase = true
+                CallBase = true,
             };
             mockHost.SetupGet(h => h.NamespaceImports).Returns(new HashSet<string>());
 

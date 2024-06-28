@@ -29,7 +29,7 @@ namespace System.Diagnostics.Eventing.Reader
         Administrative = 0,
         Operational,
         Analytical,
-        Debug
+        Debug,
     }
 
     /// <summary>
@@ -39,7 +39,7 @@ namespace System.Diagnostics.Eventing.Reader
     {
         Application = 0,
         System,
-        Custom
+        Custom,
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ namespace System.Diagnostics.Eventing.Reader
     {
         Circular = 0,
         AutoBackup,
-        Retain
+        Retain,
     }
 
     /// <summary>

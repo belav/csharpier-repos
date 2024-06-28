@@ -95,7 +95,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     Tuple.Create("one", 1),
                     Tuple.Create("II", 2),
-                    Tuple.Create("3", 3)
+                    Tuple.Create("3", 3),
                 }
             );
 

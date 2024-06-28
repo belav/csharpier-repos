@@ -1368,7 +1368,7 @@ namespace System.Reflection.Emit
                             token,
                             null,
                             null
-                        )
+                        ),
                     };
                     tokenInfos.Add(tokenInfo);
                 }

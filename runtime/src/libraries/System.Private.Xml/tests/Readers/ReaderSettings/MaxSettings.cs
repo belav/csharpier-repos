@@ -26,7 +26,7 @@ namespace System.Xml.ReaderSettingsTests
         {
             "billionlaughs",
             "extent_4.xml",
-            "surrogate_parameterentities_2.xml"
+            "surrogate_parameterentities_2.xml",
         };
 
         private bool IsSkipped(string uri)

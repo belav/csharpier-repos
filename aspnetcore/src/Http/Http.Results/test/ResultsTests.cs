@@ -278,24 +278,22 @@ public partial class ResultsTests
         var result =
             bytesOrFile switch
             {
-                0 =>
-                    Results.Bytes(
-                        contents,
-                        contentType,
-                        fileDownloadName,
-                        enableRangeProcessing,
-                        lastModified,
-                        entityTag
-                    ),
-                _ =>
-                    Results.File(
-                        contents,
-                        contentType,
-                        fileDownloadName,
-                        enableRangeProcessing,
-                        lastModified,
-                        entityTag
-                    )
+                0 => Results.Bytes(
+                    contents,
+                    contentType,
+                    fileDownloadName,
+                    enableRangeProcessing,
+                    lastModified,
+                    entityTag
+                ),
+                _ => Results.File(
+                    contents,
+                    contentType,
+                    fileDownloadName,
+                    enableRangeProcessing,
+                    lastModified,
+                    entityTag
+                ),
             } as FileContentHttpResult;
 
         // Assert
@@ -317,7 +315,7 @@ public partial class ResultsTests
                 "testfile",
                 true,
                 new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
-                EntityTagHeaderValue.Any
+                EntityTagHeaderValue.Any,
             },
             new object[]
             {
@@ -326,7 +324,7 @@ public partial class ResultsTests
                 default(string),
                 default(bool),
                 default(DateTimeOffset?),
-                default(EntityTagHeaderValue)
+                default(EntityTagHeaderValue),
             },
             new object[]
             {
@@ -335,7 +333,7 @@ public partial class ResultsTests
                 "testfile",
                 true,
                 new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
-                EntityTagHeaderValue.Any
+                EntityTagHeaderValue.Any,
             },
             new object[]
             {
@@ -344,8 +342,8 @@ public partial class ResultsTests
                 default(string),
                 default(bool),
                 default(DateTimeOffset?),
-                default(EntityTagHeaderValue)
-            }
+                default(EntityTagHeaderValue),
+            },
         };
 
     [Theory]
@@ -365,32 +363,29 @@ public partial class ResultsTests
         // Act
         var result = overload switch
         {
-            0 =>
-                Results.Stream(
-                    stream,
-                    contentType,
-                    fileDownloadName,
-                    lastModified,
-                    entityTag,
-                    enableRangeProcessing
-                ),
-            1 =>
-                Results.Stream(
-                    PipeReader.Create(stream),
-                    contentType,
-                    fileDownloadName,
-                    lastModified,
-                    entityTag,
-                    enableRangeProcessing
-                ),
-            _ =>
-                Results.Stream(
-                    (s) => Task.CompletedTask,
-                    contentType,
-                    fileDownloadName,
-                    lastModified,
-                    entityTag
-                )
+            0 => Results.Stream(
+                stream,
+                contentType,
+                fileDownloadName,
+                lastModified,
+                entityTag,
+                enableRangeProcessing
+            ),
+            1 => Results.Stream(
+                PipeReader.Create(stream),
+                contentType,
+                fileDownloadName,
+                lastModified,
+                entityTag,
+                enableRangeProcessing
+            ),
+            _ => Results.Stream(
+                (s) => Task.CompletedTask,
+                contentType,
+                fileDownloadName,
+                lastModified,
+                entityTag
+            ),
         };
 
         // Assert
@@ -433,7 +428,7 @@ public partial class ResultsTests
                 "testfile",
                 true,
                 new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
-                EntityTagHeaderValue.Any
+                EntityTagHeaderValue.Any,
             },
             new object[]
             {
@@ -442,7 +437,7 @@ public partial class ResultsTests
                 default(string),
                 default(bool),
                 default(DateTimeOffset?),
-                default(EntityTagHeaderValue)
+                default(EntityTagHeaderValue),
             },
             new object[]
             {
@@ -451,7 +446,7 @@ public partial class ResultsTests
                 "testfile",
                 true,
                 new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
-                EntityTagHeaderValue.Any
+                EntityTagHeaderValue.Any,
             },
             new object[]
             {
@@ -460,7 +455,7 @@ public partial class ResultsTests
                 default(string),
                 default(bool),
                 default(DateTimeOffset?),
-                default(EntityTagHeaderValue)
+                default(EntityTagHeaderValue),
             },
             new object[]
             {
@@ -469,7 +464,7 @@ public partial class ResultsTests
                 "testfile",
                 true,
                 new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
-                EntityTagHeaderValue.Any
+                EntityTagHeaderValue.Any,
             },
             new object[]
             {
@@ -478,8 +473,8 @@ public partial class ResultsTests
                 default(string),
                 default(bool),
                 default(DateTimeOffset?),
-                default(EntityTagHeaderValue)
-            }
+                default(EntityTagHeaderValue),
+            },
         };
 
     [Fact]
@@ -605,13 +600,13 @@ public partial class ResultsTests
             new object[]
             {
                 new AuthenticationProperties(),
-                new List<string> { "TestScheme" }
+                new List<string> { "TestScheme" },
             },
             new object[] { new AuthenticationProperties(), default(IList<string>) },
             new object[]
             {
                 default(AuthenticationProperties),
-                new List<string> { "TestScheme" }
+                new List<string> { "TestScheme" },
             },
             new object[] { default(AuthenticationProperties), default(IList<string>) },
         };
@@ -1850,7 +1845,7 @@ public partial class ResultsTests
         {
             MethodCallExpression mce => mce.Method.Name,
             MemberExpression me => me.Member.Name,
-            _ => throw new InvalidOperationException()
+            _ => throw new InvalidOperationException(),
         };
     }
 
@@ -1970,7 +1965,7 @@ public partial class ResultsTests
                         null
                     ),
                 typeof(ProblemHttpResult)
-            )
+            ),
         };
 
     public static IEnumerable<object[]> FactoryMethodsFromTuples() =>

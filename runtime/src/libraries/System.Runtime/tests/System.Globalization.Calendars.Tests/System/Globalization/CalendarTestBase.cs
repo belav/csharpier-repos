@@ -68,7 +68,7 @@ namespace System.Globalization.Tests
         {
             Year = 1,
             Month = 2,
-            Day = 8
+            Day = 8,
         }
 
         private static int MinEra(Calendar calendar) =>
@@ -848,7 +848,7 @@ namespace System.Globalization.Tests
         {
             CultureInfo ciJapanese = new CultureInfo("ja-JP")
             {
-                DateTimeFormat = { Calendar = new JapaneseCalendar() }
+                DateTimeFormat = { Calendar = new JapaneseCalendar() },
             };
 
             DateTime dt = new DateTime(1970, 1, 1);

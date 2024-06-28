@@ -51,7 +51,7 @@ internal sealed class ChangeCookieAction : UrlAction
                 HttpOnly = HttpOnly,
                 Secure = Secure,
                 Path = Path,
-                Expires = now.Add(Lifetime)
+                Expires = now.Add(Lifetime),
             };
         }
 
@@ -62,7 +62,7 @@ internal sealed class ChangeCookieAction : UrlAction
                 Domain = Domain,
                 HttpOnly = HttpOnly,
                 Secure = Secure,
-                Path = Path
+                Path = Path,
             };
         }
 

@@ -13,7 +13,7 @@ namespace System.Web.UI.WebControls
     /// <devdoc>
     /// Represents a Parameter that gets its value from the application's session state.
     /// </devdoc>
-    [DefaultProperty("SessionField"),]
+    [DefaultProperty("SessionField")]
     public class SessionParameter : Parameter
     {
         /// <devdoc>

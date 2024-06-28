@@ -2733,7 +2733,7 @@ namespace Mono.CSharp
             ByRef = 1 << 10,
             PointerByRef = 1 << 11,
 
-            ReadonlyMask = 1 << 20
+            ReadonlyMask = 1 << 20,
         }
 
         TypeSpec type;
@@ -3101,7 +3101,7 @@ namespace Mono.CSharp
             HasReferenceToStoreyForInstanceLambdas = 1 << 16,
             Iterator = 1 << 20,
             NoFlowAnalysis = 1 << 21,
-            InitializationEmitted = 1 << 22
+            InitializationEmitted = 1 << 22,
         }
 
         public Block Parent;
@@ -5731,7 +5731,7 @@ namespace Mono.CSharp
                 types.Long,
                 types.ULong,
                 types.Char,
-                types.String
+                types.String,
             };
 
             if (nullable != null)
@@ -9610,7 +9610,7 @@ namespace Mono.CSharp
 
                 var current_pe = new PropertyExpr(current_prop, loc)
                 {
-                    InstanceExpression = enumerator_variable
+                    InstanceExpression = enumerator_variable,
                 }.Resolve(ec);
                 if (current_pe == null)
                     return false;

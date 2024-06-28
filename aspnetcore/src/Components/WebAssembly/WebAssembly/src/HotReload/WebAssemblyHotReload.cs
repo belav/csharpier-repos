@@ -21,7 +21,7 @@ public static partial class WebAssemblyHotReload
     private const string BlazorHotReloadModuleName = "blazor-hotreload";
 
     private static HotReloadAgent? _hotReloadAgent;
-    private static readonly UpdateDelta[] _updateDeltas = new[] { new UpdateDelta(), };
+    private static readonly UpdateDelta[] _updateDeltas = new[] { new UpdateDelta() };
 
     internal static async Task InitializeAsync()
     {

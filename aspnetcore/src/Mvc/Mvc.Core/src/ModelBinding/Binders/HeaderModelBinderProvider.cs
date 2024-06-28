@@ -42,7 +42,7 @@ public partial class HeaderModelBinderProvider : IModelBinderProvider
         // infinite recursion into this binder provider.
         var nestedBindingInfo = new BindingInfo(bindingInfo)
         {
-            BindingSource = BindingSource.ModelBinding
+            BindingSource = BindingSource.ModelBinding,
         };
 
         var innerModelBinder = context.CreateBinder(

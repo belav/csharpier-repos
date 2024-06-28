@@ -159,7 +159,7 @@ namespace ILCompiler
                 LayoutInt[] gcStatics = new LayoutInt[StaticIndex.Count]
                 {
                     LayoutInt.Zero,
-                    LayoutInt.Zero
+                    LayoutInt.Zero,
                 };
 
                 LayoutInt[] nonGcStatics = new LayoutInt[StaticIndex.Count]
@@ -190,9 +190,9 @@ namespace ILCompiler
                     }
 
                     // 0 corresponds to "normal" statics, 1 to thread-local statics
-                    int[] nonGcAlignment = new int[StaticIndex.Count] { 1, 1, };
-                    int[] nonGcBytes = new int[StaticIndex.Count] { 0, 0, };
-                    int[] gcBytes = new int[StaticIndex.Count] { 0, 0, };
+                    int[] nonGcAlignment = new int[StaticIndex.Count] { 1, 1 };
+                    int[] nonGcBytes = new int[StaticIndex.Count] { 0, 0 };
+                    int[] gcBytes = new int[StaticIndex.Count] { 0, 0 };
 
                     foreach (FieldDefinitionHandle fieldDefHandle in typeDef.GetFields())
                     {
@@ -299,22 +299,22 @@ namespace ILCompiler
                     gcStatics: new StaticsBlock()
                     {
                         Size = gcStatics[StaticIndex.Regular],
-                        LargestAlignment = blockAlignment
+                        LargestAlignment = blockAlignment,
                     },
                     nonGcStatics: new StaticsBlock()
                     {
                         Size = nonGcStatics[StaticIndex.Regular],
-                        LargestAlignment = blockAlignment
+                        LargestAlignment = blockAlignment,
                     },
                     threadGcStatics: new StaticsBlock()
                     {
                         Size = gcStatics[StaticIndex.ThreadLocal],
-                        LargestAlignment = blockAlignment
+                        LargestAlignment = blockAlignment,
                     },
                     threadNonGcStatics: new StaticsBlock()
                     {
                         Size = nonGcStatics[StaticIndex.ThreadLocal],
-                        LargestAlignment = blockAlignment
+                        LargestAlignment = blockAlignment,
                     },
                     typeOffsets: typeOffsets
                 );
@@ -688,7 +688,7 @@ namespace ILCompiler
                     offsetsForType.GcOffsets[StaticIndex.Regular]
                         + new LayoutInt(gcBoxedCount[StaticIndex.Regular] * pointerSize),
                     offsetsForType.GcOffsets[StaticIndex.ThreadLocal]
-                        + new LayoutInt(gcBoxedCount[StaticIndex.ThreadLocal] * pointerSize)
+                        + new LayoutInt(gcBoxedCount[StaticIndex.ThreadLocal] * pointerSize),
                 };
 
                 foreach (FieldDesc field in defType.GetFields())

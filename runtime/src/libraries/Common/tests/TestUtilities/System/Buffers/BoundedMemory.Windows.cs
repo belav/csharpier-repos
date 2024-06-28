@@ -72,7 +72,7 @@ namespace System.Buffers
                 elementCount: elementCount
             )
             {
-                Protection = VirtualAllocProtection.PAGE_READWRITE
+                Protection = VirtualAllocProtection.PAGE_READWRITE,
             };
         }
 

@@ -297,7 +297,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     Greedy = false,
                     BoundedCapacity = 1,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             var source1 = new BufferBlock<int>(
@@ -344,7 +344,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     Greedy = false,
                     BoundedCapacity = 1,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             var source1 = new BufferBlock<int>(

@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                     IsClassDeclarationSelection
                 )
                 {
-                    FileName = FileName
+                    FileName = FileName,
                 };
 
                 return SpecializedCollections.SingletonEnumerable(
@@ -99,7 +99,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 FileName = "Test1.cs",
             }.RunAsync();
         }
@@ -120,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                     }
                 }
                 """;
-            await new Test { TestCode = input, FixedCode = input, }.RunAsync();
+            await new Test { TestCode = input, FixedCode = input }.RunAsync();
         }
 
         [Fact]
@@ -140,7 +140,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             {
                 TestCode = input,
                 FixedCode = input,
-                WorkspaceKind = WorkspaceKind.MiscellaneousFiles
+                WorkspaceKind = WorkspaceKind.MiscellaneousFiles,
             }.RunAsync();
         }
 
@@ -192,10 +192,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
 
             await new Test
             {
-                TestState = { Sources = { input1, input2, } },
-                FixedState = { Sources = { expected1, expected2, expected3, } },
+                TestState = { Sources = { input1, input2 } },
+                FixedState = { Sources = { expected1, expected2, expected3 } },
                 FileName = "Test2.cs",
-                DialogSelection = MakeSelection("Method", "Method2")
+                DialogSelection = MakeSelection("Method", "Method2"),
             }.RunAsync();
         }
 
@@ -232,7 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 TestCode = input,
                 LanguageVersion = LanguageVersion.CSharp9,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 FileName = "Test1.cs",
             }.RunAsync();
         }
@@ -269,7 +269,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 TestCode = input,
                 LanguageVersion = LanguageVersion.CSharp12,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 FileName = "Test1.cs",
             }.RunAsync();
         }
@@ -303,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 TestCode = input,
                 LanguageVersion = LanguageVersion.CSharp9,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 FileName = "Test1.cs",
             }.RunAsync();
         }
@@ -337,7 +337,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 TestCode = input,
                 LanguageVersion = LanguageVersion.CSharp9,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
             }.RunAsync();
         }
 
@@ -369,7 +369,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 TestCode = input,
                 LanguageVersion = LanguageVersion.CSharp12,
                 ReferenceAssemblies = ReferenceAssemblies.Net.Net50,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
             }.RunAsync();
         }
 
@@ -542,7 +542,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 FileName = "Test1.cs",
             }.RunAsync();
         }
@@ -586,7 +586,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -594,7 +594,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped,
                         NotificationOption2.Silent
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -648,7 +648,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped,
                         NotificationOption2.Silent
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -702,7 +702,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped,
                         NotificationOption2.Silent
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -739,7 +739,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2 }, },
+                FixedState = { Sources = { expected1, expected2 } },
                 FileName = "Test1.cs",
             }.RunAsync();
         }
@@ -1079,7 +1079,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 FixedState = { Sources = { expected1, expected2 } },
                 Options =
                 {
-                    { CodeStyleOptions2.FileHeaderTemplate, "this is my real document header" }
+                    { CodeStyleOptions2.FileHeaderTemplate, "this is my real document header" },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -1139,7 +1139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -1152,7 +1152,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                     {
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
                         AddImportPlacement.InsideNamespace
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -1214,7 +1214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
@@ -1222,7 +1222,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                     {
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
                         AddImportPlacement.InsideNamespace
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -1269,14 +1269,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
                     {
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
                         AddImportPlacement.InsideNamespace
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -1338,14 +1338,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2, } },
+                FixedState = { Sources = { expected1, expected2 } },
                 LanguageVersion = LanguageVersion.CSharp10,
                 Options =
                 {
                     {
                         CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
                         AddImportPlacement.InsideNamespace
-                    }
+                    },
                 },
                 FileName = "Test1.cs",
             }.RunAsync();
@@ -1440,7 +1440,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             {
                 TestCode = input,
                 FixedState = { Sources = { expected1, expected2 } },
-                DialogSelection = MakeSelection("Method")
+                DialogSelection = MakeSelection("Method"),
             }.RunAsync();
         }
 
@@ -1938,7 +1938,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2 } }
+                FixedState = { Sources = { expected1, expected2 } },
             }.RunAsync();
         }
 
@@ -1992,7 +1992,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             await new Test
             {
                 TestCode = input,
-                FixedState = { Sources = { expected1, expected2 } }
+                FixedState = { Sources = { expected1, expected2 } },
             }.RunAsync();
         }
 
@@ -2522,7 +2522,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                 TestCode = input,
                 FixedCode = input,
                 LanguageVersion = LanguageVersion.CSharp10,
-                TestState = { OutputKind = OutputKind.ConsoleApplication }
+                TestState = { OutputKind = OutputKind.ConsoleApplication },
             }.RunAsync();
         }
 
@@ -2557,7 +2557,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             {
                 TestCode = input,
                 FixedState = { Sources = { expected1, expected2 } },
-                FileName = "Test1.cs"
+                FileName = "Test1.cs",
             }.RunAsync();
         }
 
@@ -2596,7 +2596,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
                         .CompilerError("CS0548")
                         .WithSpan(7, 17, 7, 18)
                         .WithArguments("N.<invalid-global-code>.N"),
-                }
+                },
             }.RunAsync();
         }
 
@@ -2669,7 +2669,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractClass
             {
                 TestCode = code,
                 FixedState = { Sources = { expected1, expected2 } },
-                FileName = "Test1.cs"
+                FileName = "Test1.cs",
             }.RunAsync();
         }
 

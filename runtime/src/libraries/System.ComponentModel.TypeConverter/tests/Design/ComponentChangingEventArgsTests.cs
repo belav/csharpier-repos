@@ -13,7 +13,7 @@ namespace System.ComponentModel.Design.Tests
             yield return new object[]
             {
                 "component",
-                new ArrayConverter().GetProperties(new int[1])[0]
+                new ArrayConverter().GetProperties(new int[1])[0],
             };
             yield return new object[] { null, null };
         }

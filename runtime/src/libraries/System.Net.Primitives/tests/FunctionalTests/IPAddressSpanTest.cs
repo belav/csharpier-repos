@@ -31,8 +31,8 @@ namespace System.Net.Primitives.Functional.Tests
                     0x13,
                     0x14,
                     0x15,
-                    0x16
-                }
+                    0x16,
+                },
             },
         };
 

@@ -49,7 +49,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i1;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -91,7 +91,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i1 = 1;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -134,7 +134,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i1 = ;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 28)
+                    .WithLocation(6, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -183,7 +183,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i1, i2;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "i2")
                     .WithArguments("i2")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -234,7 +234,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i1 = 2, i2 = 2/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
                     .WithArguments("i2")
-                    .WithLocation(6, 31)
+                    .WithLocation(6, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -286,7 +286,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i1 = , i2 = 2/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
                     .WithArguments("i2")
-                    .WithLocation(6, 30)
+                    .WithLocation(6, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -333,7 +333,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int i,/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -547,7 +547,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int[2, 3] a;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "a")
                     .WithArguments("a")
-                    .WithLocation(6, 29)
+                    .WithLocation(6, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -602,7 +602,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/int[2, 3] a, b;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "b")
                     .WithArguments("b")
-                    .WithLocation(6, 32)
+                    .WithLocation(6, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -676,7 +676,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
                 //         int /*<bind>*/x[10] = 1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x")
                     .WithArguments("x")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -720,7 +720,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 x) (OperationKind.VariableDec
                 //         int /*<bind>*/x[10]/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -868,7 +868,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
             {
                 // file.cs(6,22): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         /*<bind>*/int[10] x = { 1 };/*</bind>*/
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[10]").WithLocation(6, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -913,7 +913,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[10] x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -959,7 +959,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[][10] x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 29)
+                    .WithLocation(7, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1010,7 +1010,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[,10] x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 28)
+                    .WithLocation(7, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1103,7 +1103,7 @@ class C
                 //         int[/*<bind>*/10/*</bind>*/] x;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(6, 38)
+                    .WithLocation(6, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ExpressionSyntax>(
@@ -1214,7 +1214,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[M2(out var z)] x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(6, 38)
+                    .WithLocation(6, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1280,7 +1280,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[M2(out var z)]? x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(6, 39)
+                    .WithLocation(6, 39),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1346,7 +1346,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/ref int[M2(out var z)] y;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "y")
                     .WithArguments("y")
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1416,7 +1416,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/ref int[M2(out var z)]? y;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "y")
                     .WithArguments("y")
-                    .WithLocation(6, 43)
+                    .WithLocation(6, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1466,7 +1466,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[10]?[20]? x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 33)
+                    .WithLocation(7, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1533,7 +1533,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/Col::List<int[10]> x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 38)
+                    .WithLocation(7, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1579,7 +1579,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/List x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(8, 24)
+                    .WithLocation(8, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1644,7 +1644,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[y is int z] x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 35)
+                    .WithLocation(7, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1716,7 +1716,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         /*<bind>*/int[M(y switch { int z => 42 })] x;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "x")
                     .WithArguments("x")
-                    .WithLocation(7, 52)
+                    .WithLocation(7, 52),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1774,7 +1774,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
             {
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
-                Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9)
+                Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1837,7 +1837,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
             {
                 // CS0227: Unsafe code may only appear if compiling with /unsafe
                 //         unsafe
-                Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9)
+                Diagnostic(ErrorCode.ERR_IllegalUnsafe, "unsafe").WithLocation(8, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1895,7 +1895,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //     int i1;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
                     .WithArguments("Program.i1")
-                    .WithLocation(4, 9)
+                    .WithLocation(4, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1968,7 +1968,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //     int i1, i2;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
                     .WithArguments("Program.i1")
-                    .WithLocation(4, 9)
+                    .WithLocation(4, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2022,7 +2022,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //     int i1;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
                     .WithArguments("Program.i1")
-                    .WithLocation(4, 9)
+                    .WithLocation(4, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2087,7 +2087,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //     int i1, i2;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "i1")
                     .WithArguments("Program.i1")
-                    .WithLocation(4, 9)
+                    .WithLocation(4, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2154,7 +2154,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //     int i1, i2;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "i2")
                     .WithArguments("Program.i2")
-                    .WithLocation(4, 13)
+                    .WithLocation(4, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2233,7 +2233,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                     .WithLocation(9, 33),
                 // file.cs(9,64): error CS0209: The type of a local declared in a fixed statement must be a pointer type
                 //             fixed (/*<bind>*/int[M2(y switch { int z => 42 })] p1 = null/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_BadFixedInitType, "p1 = null").WithLocation(9, 64)
+                Diagnostic(ErrorCode.ERR_BadFixedInitType, "p1 = null").WithLocation(9, 64),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2378,7 +2378,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         using (/*<bind>*/Program p1 =/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
                     .WithArguments(")")
-                    .WithLocation(8, 49)
+                    .WithLocation(8, 49),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2436,7 +2436,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //         using (/*<bind>*/Program p1 =, p2 =/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
                     .WithArguments(")")
-                    .WithLocation(8, 55)
+                    .WithLocation(8, 55),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2480,7 +2480,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
             {
                 // CS0210: You must provide an initializer in a fixed or using statement declaration
                 //         using (/*<bind>*/Program p1/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_FixedMustInit, "p1").WithLocation(8, 34)
+                Diagnostic(ErrorCode.ERR_FixedMustInit, "p1").WithLocation(8, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2530,7 +2530,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_FixedMustInit, "p1").WithLocation(8, 34),
                 // CS0210: You must provide an initializer in a fixed or using statement declaration
                 //         using (/*<bind>*/Program p1, p2/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_FixedMustInit, "p2").WithLocation(8, 38)
+                Diagnostic(ErrorCode.ERR_FixedMustInit, "p2").WithLocation(8, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2584,7 +2584,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(8, 64),
                 // CS0210: You must provide an initializer in a fixed or using statement declaration
                 //         using (/*<bind>*/Program p1 = new Program(),/*</bind>*/)
-                Diagnostic(ErrorCode.ERR_FixedMustInit, "").WithLocation(8, 64)
+                Diagnostic(ErrorCode.ERR_FixedMustInit, "").WithLocation(8, 64),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -2944,7 +2944,7 @@ class C
                     .WithLocation(7, 28),
                 // file.cs(7,81): warning CS0642: Possible mistaken empty statement
                 //        using( /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/);
-                Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";").WithLocation(7, 81)
+                Diagnostic(ErrorCode.WRN_PossibleMistakenNullStatement, ";").WithLocation(7, 81),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3014,7 +3014,7 @@ class C
                 // file.cs(7,27): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //        using /*<bind>*/int[y switch { int z => 42 }] x = new int[0]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[y switch { int z => 42 }]")
-                    .WithLocation(7, 27)
+                    .WithLocation(7, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3102,7 +3102,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //         for (/*<bind>*/int i = 0, j = 0/*</bind>*/; i < 0; i++)
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "j")
                     .WithArguments("j")
-                    .WithLocation(6, 35)
+                    .WithLocation(6, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3147,7 +3147,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         for (/*<bind>*/int i =/*</bind>*/; i < 0; i++)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3202,7 +3202,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //         for (/*<bind>*/int i =, j =/*</bind>*/; i < 0; i++)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 47)
+                    .WithLocation(6, 47),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3245,7 +3245,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         for (/*<bind>*/int i/*</bind>*/; i < 0; i++)
                 Diagnostic(ErrorCode.ERR_UseDefViolation, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 42)
+                    .WithLocation(6, 42),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3296,7 +3296,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                 //         for (/*<bind>*/int i, j/*</bind>*/; i < 0; i++)
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "j")
                     .WithArguments("j")
-                    .WithLocation(6, 31)
+                    .WithLocation(6, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3347,7 +3347,7 @@ IVariableDeclarationOperation (2 declarators) (OperationKind.VariableDeclaration
                     .WithLocation(6, 31),
                 // CS1001: Identifier expected
                 //         for (/*<bind>*/int i =,/*</bind>*/; i < 0; i++)
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(6, 43)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ";").WithLocation(6, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -3563,7 +3563,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/const int i1 = 1;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 29)
+                    .WithLocation(6, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3617,7 +3617,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/const int i1 = 1, i2 = 2;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
                     .WithArguments("i2")
-                    .WithLocation(9, 37)
+                    .WithLocation(9, 37),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3660,7 +3660,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/const int i1 = ;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 34)
+                    .WithLocation(6, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3713,7 +3713,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1 = , i2 = /*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 41)
+                    .WithLocation(6, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3757,7 +3757,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 29)
+                    .WithLocation(6, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3812,7 +3812,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1, i2/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "i2")
                     .WithArguments("i2")
-                    .WithLocation(6, 33)
+                    .WithLocation(6, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3865,7 +3865,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1,/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 29)
+                    .WithLocation(6, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3912,7 +3912,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1 = GetInt()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()")
                     .WithArguments("i1")
-                    .WithLocation(6, 34)
+                    .WithLocation(6, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -3971,7 +3971,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1 = GetInt(), i2 = GetInt()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "GetInt()")
                     .WithArguments("i2")
-                    .WithLocation(6, 49)
+                    .WithLocation(6, 49),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -4016,7 +4016,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1 = i/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(7, 29)
+                    .WithLocation(7, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -4065,7 +4065,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         const /*<bind>*/int i1 = i, i2 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i2")
                     .WithArguments("i2")
-                    .WithLocation(7, 37)
+                    .WithLocation(7, 37),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -4299,7 +4299,7 @@ class C
                 //         int d = ;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(7, 17)
+                    .WithLocation(7, 17),
             };
 
             string expectedFlowGraph =
@@ -4485,7 +4485,7 @@ class C
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[10]").WithLocation(7, 14),
                 // CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         int d[10] = 1;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(7, 15)
+                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "10").WithLocation(7, 15),
             };
 
             string expectedFlowGraph =
@@ -4541,7 +4541,7 @@ class C
             {
                 // CS1001: Identifier expected
                 //         int = 5;
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(7, 13)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "=").WithLocation(7, 13),
             };
 
             string expectedFlowGraph =
@@ -4713,7 +4713,7 @@ class C
                     .WithLocation(7, 17),
                 // CS1510: A ref or out value must be an assignable variable
                 //         ref int b = 1;
-                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "1").WithLocation(7, 21)
+                Diagnostic(ErrorCode.ERR_RefLvalueExpected, "1").WithLocation(7, 21),
             };
 
             string expectedFlowGraph =
@@ -4773,7 +4773,7 @@ class C
                 // CS8172: Cannot initialize a by-reference variable with a value
                 //         ref int b = a;
                 Diagnostic(ErrorCode.ERR_InitializeByReferenceVariableWithValue, "b = a")
-                    .WithLocation(8, 17)
+                    .WithLocation(8, 17),
             };
 
             string expectedFlowGraph =
@@ -4928,7 +4928,7 @@ class C
                 //         a = 1;
                 Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "a")
                     .WithArguments("a")
-                    .WithLocation(7, 9)
+                    .WithLocation(7, 9),
             };
 
             string expectedFlowGraph =

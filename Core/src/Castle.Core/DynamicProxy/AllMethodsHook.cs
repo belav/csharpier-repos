@@ -27,7 +27,7 @@ namespace Castle.DynamicProxy
         {
             typeof(object),
             typeof(MarshalByRefObject),
-            typeof(ContextBoundObject)
+            typeof(ContextBoundObject),
         };
 
         public virtual bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)

@@ -60,10 +60,10 @@ internal sealed partial class PublicDocumentPullDiagnosticsHandler
                                 Method = Methods.TextDocumentDiagnosticName,
                                 RegisterOptions = new DiagnosticRegistrationOptions
                                 {
-                                    Identifier = DocumentNonLocalDiagnosticIdentifier.ToString()
-                                }
-                            }
-                        ]
+                                    Identifier = DocumentNonLocalDiagnosticIdentifier.ToString(),
+                                },
+                            },
+                        ],
                     },
                     cancellationToken
                 )

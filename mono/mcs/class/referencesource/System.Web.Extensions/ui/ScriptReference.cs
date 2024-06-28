@@ -18,7 +18,7 @@ namespace System.Web.UI
     using System.Web.Util;
     using Debug = System.Diagnostics.Debug;
 
-    [DefaultProperty("Path"),]
+    [DefaultProperty("Path")]
     public class ScriptReference : ScriptReferenceBase
     {
         // Maps Tuple<string, Assembly>(resource name, assembly) to string (partial script path)
@@ -417,7 +417,7 @@ namespace System.Web.UI
                         HttpUtility.UrlEncode(name),
                         version,
                         HttpUtility.UrlEncode(fileVersion),
-                        HttpUtility.UrlEncode(resourceName)
+                        HttpUtility.UrlEncode(resourceName),
                     }
                 );
 

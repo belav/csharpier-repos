@@ -56,7 +56,7 @@ public class ApiExplorerDataFilter : IResourceFilter
         {
             GroupName = description.GroupName,
             HttpMethod = description.HttpMethod,
-            RelativePath = description.RelativePath
+            RelativePath = description.RelativePath,
         };
 
         foreach (var parameter in description.ParameterDescriptions)
@@ -111,7 +111,7 @@ public class ApiExplorerDataFilter : IResourceFilter
                     new ApiExplorerResponseFormat()
                     {
                         FormatterType = responseFormat.Formatter?.GetType().FullName,
-                        MediaType = responseFormat.MediaType
+                        MediaType = responseFormat.MediaType,
                     }
                 );
             }

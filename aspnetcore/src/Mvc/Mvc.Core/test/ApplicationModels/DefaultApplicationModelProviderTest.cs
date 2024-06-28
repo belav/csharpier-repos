@@ -21,7 +21,7 @@ public class DefaultApplicationModelProviderTest
     public void OnProvidersExecuting_AddsGlobalFilters()
     {
         // Arrange
-        var options = new MvcOptions() { Filters = { new MyFilterAttribute(), }, };
+        var options = new MvcOptions() { Filters = { new MyFilterAttribute() } };
 
         var builder = new TestApplicationModelProvider(
             options,
@@ -46,7 +46,7 @@ public class DefaultApplicationModelProviderTest
             new[]
             {
                 typeof(ModelBinderController).GetTypeInfo(),
-                typeof(ConventionallyRoutedController).GetTypeInfo()
+                typeof(ConventionallyRoutedController).GetTypeInfo(),
             }
         );
 

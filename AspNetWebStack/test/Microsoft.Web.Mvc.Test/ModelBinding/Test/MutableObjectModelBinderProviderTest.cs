@@ -20,7 +20,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(int)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             MutableObjectModelBinderProvider binderProvider =
@@ -44,7 +44,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(int)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } }
+                ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } },
             };
 
             MutableObjectModelBinderProvider binderProvider =
@@ -69,7 +69,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ComplexModelDto)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } }
+                ValueProvider = new SimpleValueProvider { { "foo.bar", "someValue" } },
             };
 
             MutableObjectModelBinderProvider binderProvider =

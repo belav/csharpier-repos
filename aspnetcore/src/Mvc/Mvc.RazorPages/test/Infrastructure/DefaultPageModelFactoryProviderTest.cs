@@ -85,7 +85,7 @@ public class DefaultPageModelFactoryProviderTest
         // Arrange
         var descriptor = new CompiledPageActionDescriptor
         {
-            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo()
+            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo(),
         };
         var pageContext = new PageContext();
         var modelActivatorProvider = new Mock<IPageModelActivatorProvider>();
@@ -106,7 +106,7 @@ public class DefaultPageModelFactoryProviderTest
         // Arrange
         var descriptor = new CompiledPageActionDescriptor
         {
-            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo()
+            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo(),
         };
         var pageContext = new PageContext();
         var modelActivatorProvider = new Mock<IPageModelActivatorProvider>();

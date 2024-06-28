@@ -88,7 +88,7 @@ namespace MonoTests.Mono.Security.Protocol.Ntlm
                 0x49,
                 0x4e,
                 0x4f,
-                0x52
+                0x52,
             };
             Type1Message msg = new Type1Message(data);
             Assert.AreEqual("URSA-MINOR", msg.Domain, "Domain");
@@ -151,7 +151,7 @@ namespace MonoTests.Mono.Security.Protocol.Ntlm
                 0x4d,
                 0x41,
                 0x49,
-                0x4e
+                0x4e,
             };
             Type1Message msg = new Type1Message(data);
             Assert.AreEqual("DOMAIN", msg.Domain, "Domain");

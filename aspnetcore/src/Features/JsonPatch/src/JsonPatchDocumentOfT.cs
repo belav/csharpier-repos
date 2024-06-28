@@ -693,7 +693,7 @@ public class JsonPatchDocument<TModel> : IJsonPatchDocument
                     op = op.op,
                     value = op.value,
                     path = op.path,
-                    from = op.from
+                    from = op.from,
                 };
 
                 allOps.Add(untypedOp);

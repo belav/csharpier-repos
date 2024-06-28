@@ -73,7 +73,7 @@ public abstract class MappingQueryTestBase<TFixture> : IClassFixture<TFixture>
     {
         One = 1,
         Two,
-        Three
+        Three,
     }
 
     public abstract class MappingQueryFixtureBase : SharedStoreFixtureBase<PoolableDbContext>

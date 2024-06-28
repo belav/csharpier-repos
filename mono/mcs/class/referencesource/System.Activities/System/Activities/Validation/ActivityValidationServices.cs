@@ -529,7 +529,7 @@ namespace System.Activities.Validation
                         )
                         {
                             Source = toValidate,
-                            Id = toValidate.Id
+                            Id = toValidate.Id,
                         };
 
                         ActivityUtilities.Add(

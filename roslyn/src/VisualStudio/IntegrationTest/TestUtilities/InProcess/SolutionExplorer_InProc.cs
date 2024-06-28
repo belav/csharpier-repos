@@ -57,7 +57,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 [WellKnownProjectTemplates.Website] = "EmptyWeb.zip",
                 [WellKnownProjectTemplates.WinFormsApplication] = "WindowsApplication.zip",
                 [WellKnownProjectTemplates.WpfApplication] = "WpfApplication.zip",
-                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40"
+                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40",
             };
         }
 
@@ -73,7 +73,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 [WellKnownProjectTemplates.Website] = "EmptyWeb.zip",
                 [WellKnownProjectTemplates.WinFormsApplication] = "WindowsApplication.zip",
                 [WellKnownProjectTemplates.WpfApplication] = "WpfApplication.zip",
-                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40"
+                [WellKnownProjectTemplates.WebApplication] = "WebApplicationProject40",
             };
         }
 

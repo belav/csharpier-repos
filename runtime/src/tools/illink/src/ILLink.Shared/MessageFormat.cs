@@ -35,7 +35,7 @@ namespace ILLink.Shared
                 (false, true) => SharedStrings.InterfaceRequiresMismatchMessage,
                 (true, true) => SharedStrings.ImplementationRequiresMismatchMessage,
                 (false, false) => SharedStrings.BaseRequiresMismatchMessage,
-                (true, false) => SharedStrings.DerivedRequiresMismatchMessage
+                (true, false) => SharedStrings.DerivedRequiresMismatchMessage,
             };
 
             return string.Format(format, args);

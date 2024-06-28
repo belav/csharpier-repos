@@ -250,7 +250,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
             await new VerifyCS.Test
             {
                 TestState = { Sources = { document1, document2, document3 } },
-                FixedState = { Sources = { fixedDocument1, fixedDocument2, fixedDocument3 } }
+                FixedState = { Sources = { fixedDocument1, fixedDocument2, fixedDocument3 } },
             }.RunAsync();
         }
 
@@ -285,8 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
                     AdditionalProjectReferences = { "Project2" },
                     AdditionalProjects =
                     {
-                        ["Project2", LanguageNames.VisualBasic] = { Sources = { vbDocument } }
-                    }
+                        ["Project2", LanguageNames.VisualBasic] = { Sources = { vbDocument } },
+                    },
                 },
                 FixedState =
                 {
@@ -294,9 +294,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
                     AdditionalProjectReferences = { "Project2" },
                     AdditionalProjects =
                     {
-                        ["Project2", LanguageNames.VisualBasic] = { Sources = { fixedVBDocument } }
-                    }
-                }
+                        ["Project2", LanguageNames.VisualBasic] = { Sources = { fixedVBDocument } },
+                    },
+                },
             }.RunAsync();
         }
     }

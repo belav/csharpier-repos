@@ -775,7 +775,7 @@ namespace System.ServiceModel
         {
             Unknown = 0,
             WCF,
-            Workflow
+            Workflow,
         }
 
         class HostingManager : IRegisteredObject
@@ -2522,7 +2522,7 @@ namespace System.ServiceModel
             {
                 Unknown,
                 WorkflowService,
-                NotWorkflowService
+                NotWorkflowService,
             }
         }
     }

@@ -162,7 +162,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             {
                 CodeGenerationOptions = CodeGenerationOptions.GetDefault(document.Project.Services),
                 CodeCleanupOptions = CodeCleanupOptions.GetDefault(document.Project.Services),
-                ExtractOptions = new() { DoNotPutOutOrRefOnStruct = dontPutOutOrRefOnStruct }
+                ExtractOptions = new() { DoNotPutOutOrRefOnStruct = dontPutOutOrRefOnStruct },
             };
 
             var semanticDocument = await SemanticDocument.CreateAsync(

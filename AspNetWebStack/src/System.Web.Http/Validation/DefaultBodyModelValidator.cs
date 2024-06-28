@@ -74,7 +74,7 @@ namespace System.Web.Http.Validation
                 MetadataProvider = metadataProvider,
                 ActionContext = actionContext,
                 ValidatorCache = actionContext.GetValidatorCache(),
-                RootPrefix = keyPrefix
+                RootPrefix = keyPrefix,
             };
             return ValidateNodeAndChildren(
                 metadata,

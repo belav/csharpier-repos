@@ -197,7 +197,7 @@ namespace Microsoft.CodeAnalysis
             ReduceBoth,
             InsertNew,
             DeleteOld,
-            ReplaceOldWithNew
+            ReplaceOldWithNew,
         }
 
         private readonly struct DiffAction

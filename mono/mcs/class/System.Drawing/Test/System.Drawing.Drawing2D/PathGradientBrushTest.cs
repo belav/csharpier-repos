@@ -471,7 +471,7 @@ namespace MonoTests.System.Drawing.Drawing2D
             {
                 new PointF(5, 50),
                 new PointF(10, 100),
-                new PointF(20, 75)
+                new PointF(20, 75),
             };
             using (PathGradientBrush pgb = new PathGradientBrush(points))
             {

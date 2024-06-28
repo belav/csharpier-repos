@@ -88,7 +88,7 @@ public class ManifestEntryTests
                 ManifestDirectory.CreateDirectory(
                     "b",
                     new[] { new ManifestFile("test2.txt", "test2.txt") }
-                )
+                ),
             }
         );
 

@@ -24,7 +24,7 @@ namespace System.Xml.CustomReaderTests
             module.AddChild(
                 new TCReadReader()
                 {
-                    Attribute = new TestCase() { Name = "Read", Desc = "CustomInheritedReader" }
+                    Attribute = new TestCase() { Name = "Read", Desc = "CustomInheritedReader" },
                 }
             );
 

@@ -355,7 +355,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -377,7 +377,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -400,7 +400,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {
@@ -423,7 +423,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 {
                     TestOptions.RegularPreview,
                     TestOptions.Regular10,
-                    TestOptions.Regular11
+                    TestOptions.Regular11,
                 }
             )
             {

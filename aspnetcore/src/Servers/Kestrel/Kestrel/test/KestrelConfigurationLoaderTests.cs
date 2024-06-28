@@ -26,7 +26,7 @@ public class KestrelConfigurationLoaderTests
         var env = new MockHostingEnvironment
         {
             ApplicationName = "TestApplication",
-            ContentRootPath = Directory.GetCurrentDirectory()
+            ContentRootPath = Directory.GetCurrentDirectory(),
         };
         serverOptions.ApplicationServices = new ServiceCollection()
             .AddLogging()
@@ -76,7 +76,7 @@ public class KestrelConfigurationLoaderTests
         var serverOptions = CreateServerOptions();
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:Found:Url", "http://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:Found:Url", "http://*:5001") }
             )
             .Build();
         serverOptions
@@ -137,7 +137,7 @@ public class KestrelConfigurationLoaderTests
         var serverOptions = CreateServerOptions();
         var config1 = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001") }
             )
             .Build();
         serverOptions.Configure(config1).LocalhostEndpoint(5001, endpointOptions => run1 = true);
@@ -148,7 +148,7 @@ public class KestrelConfigurationLoaderTests
         var run2 = false;
         var config2 = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End2:Url", "http://*:5002"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End2:Url", "http://*:5002") }
             )
             .Build();
         serverOptions.Configure(config2).LocalhostEndpoint(5003, endpointOptions => run2 = true);
@@ -184,7 +184,7 @@ public class KestrelConfigurationLoaderTests
         var ran2 = false;
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001") }
             )
             .Build();
         serverOptions
@@ -241,7 +241,7 @@ public class KestrelConfigurationLoaderTests
         var ran2 = false;
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "https://*:5001") }
             )
             .Build();
         serverOptions
@@ -454,7 +454,7 @@ public class KestrelConfigurationLoaderTests
                     new KeyValuePair<string, string>(
                         "Endpoints:End1:Certificate:Password",
                         "testPassword"
-                    )
+                    ),
                 }
             )
             .Build();
@@ -722,7 +722,7 @@ public class KestrelConfigurationLoaderTests
                     new KeyValuePair<string, string>(
                         "Certificates:Default:KeyPath",
                         Path.Combine("shared", "TestCertificates", "https-aspnet.key")
-                    )
+                    ),
                 }
             )
             .Build();
@@ -761,7 +761,7 @@ public class KestrelConfigurationLoaderTests
                         "Certificates:Default:KeyPath",
                         Path.Combine("shared", "TestCertificates", "https-ecdsa.key")
                     ),
-                    new KeyValuePair<string, string>("Certificates:Default:Password", "aspnetcore")
+                    new KeyValuePair<string, string>("Certificates:Default:Password", "aspnetcore"),
                 }
             )
             .Build();
@@ -905,7 +905,7 @@ public class KestrelConfigurationLoaderTests
                             new KeyValuePair<string, string>(
                                 "Certificates:Default:Password",
                                 password
-                            )
+                            ),
                         }
                         : Array.Empty<KeyValuePair<string, string>>()
                 )
@@ -991,7 +991,7 @@ public class KestrelConfigurationLoaderTests
                         new KeyValuePair<string, string>(
                             "Certificates:Development:Password",
                             "12341234"
-                        )
+                        ),
                     }
                 )
                 .Build();

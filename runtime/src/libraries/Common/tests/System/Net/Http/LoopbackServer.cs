@@ -406,7 +406,7 @@ namespace System.Net.Test.Common
             ContentLength,
             SingleChunk,
             BytePerChunk,
-            ConnectionClose
+            ConnectionClose,
         }
 
         public static string GetContentModeResponse(

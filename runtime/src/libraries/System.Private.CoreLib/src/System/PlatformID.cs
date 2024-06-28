@@ -23,6 +23,6 @@ namespace System
 
         [EditorBrowsable(EditorBrowsableState.Never)]
         MacOSX = 6,
-        Other = 7
+        Other = 7,
     }
 }

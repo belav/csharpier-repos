@@ -23,7 +23,7 @@ namespace System
             'C',
             'D',
             'E',
-            'F'
+            'F',
         };
 
         // http://host/Path/Path/File?Query is the base of

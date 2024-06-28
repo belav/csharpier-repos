@@ -61,7 +61,7 @@ namespace System.Xml
             "w",
             "x",
             "y",
-            "z"
+            "z",
         };
         XmlBaseWriterNodeWriterAsyncHelper nodeWriterAsyncHelper;
 
@@ -2220,6 +2220,7 @@ namespace System.Xml
             Document, // Inside StartDocument/EndDocument
             Epilog, // EndDocument must be called
             End // Nothing further to write
+            ,
         }
 
         class NamespaceManager

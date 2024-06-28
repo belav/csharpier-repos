@@ -9,7 +9,7 @@ namespace System.Workflow.ComponentModel.Compiler
     {
         None,
         Optional,
-        Required
+        Required,
     }
 
     [AttributeUsageAttribute(

@@ -68,11 +68,9 @@ namespace Mono.Xml.XPath
         {
             get
             {
-                return currentIsNode
-                    ? currentNode
-                    : currentIsAttr
-                        ? nodes.Length + currentAttr
-                        : nodes.Length + attributes.Length + currentNs;
+                return currentIsNode ? currentNode
+                    : currentIsAttr ? nodes.Length + currentAttr
+                    : nodes.Length + attributes.Length + currentNs;
             }
             set
             {
@@ -102,11 +100,9 @@ namespace Mono.Xml.XPath
 
         public override XPathNodeType GetNodeType(long nodePosition)
         {
-            return nodePosition < nodes.Length
-                ? nodes[nodePosition].NodeType
-                : nodePosition < nodes.Length + attributes.Length
-                    ? XPathNodeType.Attribute
-                    : XPathNodeType.Namespace;
+            return nodePosition < nodes.Length ? nodes[nodePosition].NodeType
+                : nodePosition < nodes.Length + attributes.Length ? XPathNodeType.Attribute
+                : XPathNodeType.Namespace;
         }
 
         public override string GetLocalName(long nodePosition)
@@ -172,11 +168,9 @@ namespace Mono.Xml.XPath
         int GetOwnerPosition(long position)
         {
             int pos = (int)position;
-            return pos < nodes.Length
-                ? pos
-                : pos < nodes.Length + attributes.Length
-                    ? attributes[(int)pos].OwnerElement
-                    : namespaces[(int)pos].DeclaredElement;
+            return pos < nodes.Length ? pos
+                : pos < nodes.Length + attributes.Length ? attributes[(int)pos].OwnerElement
+                : namespaces[(int)pos].DeclaredElement;
         }
 
         public override XmlNodeOrder ComparePosition(long firstPosition, long secondPosition)

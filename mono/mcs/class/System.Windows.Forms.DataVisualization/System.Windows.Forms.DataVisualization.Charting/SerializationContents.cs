@@ -33,6 +33,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Default = 1,
         Data = 2,
         Appearance = 4,
-        All = 7
+        All = 7,
     }
 }

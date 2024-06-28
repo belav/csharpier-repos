@@ -13,7 +13,7 @@ namespace System.Xml.Schema
         {
             Any,
             Other,
-            Set
+            Set,
         };
 
         private ListType _type = ListType.Any;

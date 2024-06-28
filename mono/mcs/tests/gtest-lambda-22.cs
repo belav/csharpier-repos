@@ -16,7 +16,7 @@ class MainClass
     {
         Product[] products = new[]
         {
-            new Product { CategoryID = 1, UnitPrice = 1m }
+            new Product { CategoryID = 1, UnitPrice = 1m },
         };
 
         var categories =
@@ -27,7 +27,7 @@ class MainClass
                 g,
                 ExpensiveProducts = from p2 in g
                 where (p2.UnitPrice > g.Average(p3 => p3.UnitPrice))
-                select p2
+                select p2,
             };
     }
 }

@@ -27,7 +27,7 @@ namespace Benchstone.MDBenchI
             Ident2,
             Ident3,
             Ident4,
-            Ident5
+            Ident5,
         }
 
         sealed class Record

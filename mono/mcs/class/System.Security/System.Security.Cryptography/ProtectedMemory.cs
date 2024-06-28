@@ -131,7 +131,7 @@ namespace System.Security.Cryptography
             Unknown,
             Win32RtlEncryptMemory,
             Win32CryptoProtect,
-            Unsupported = Int32.MinValue
+            Unsupported = Int32.MinValue,
         }
 
         private static MemoryProtectionImplementation impl;

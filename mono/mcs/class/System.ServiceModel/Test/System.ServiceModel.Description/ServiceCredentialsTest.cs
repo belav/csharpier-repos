@@ -122,7 +122,7 @@ namespace MonoTests.System.ServiceModel.Description
                     typeof(SamlAuthenticationClaimResource),
                     typeof(SamlAccessDecision),
                     typeof(SamlAuthorityBinding),
-                    typeof(SamlNameIdentifierClaimResource)
+                    typeof(SamlNameIdentifierClaimResource),
                 }
             );
             foreach (Type type in sc.SecurityContextClaimTypes)

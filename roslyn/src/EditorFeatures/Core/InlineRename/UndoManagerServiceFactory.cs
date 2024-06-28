@@ -66,7 +66,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                 );
                 UndoManagers[subjectBuffer] = new BufferUndoState()
                 {
-                    TextUndoHistory = undoHistory
+                    TextUndoHistory = undoHistory,
                 };
                 CreateStartRenameUndoTransaction(subjectBuffer);
             }

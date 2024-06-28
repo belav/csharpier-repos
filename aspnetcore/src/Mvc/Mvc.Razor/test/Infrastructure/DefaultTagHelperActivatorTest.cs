@@ -22,7 +22,7 @@ public class DefaultTagHelperActivatorTest
         // Arrange
         var httpContext = new DefaultHttpContext()
         {
-            RequestServices = new ServiceCollection().BuildServiceProvider()
+            RequestServices = new ServiceCollection().BuildServiceProvider(),
         };
         var viewContext = MakeViewContext(httpContext);
         var viewDataValue = new object();

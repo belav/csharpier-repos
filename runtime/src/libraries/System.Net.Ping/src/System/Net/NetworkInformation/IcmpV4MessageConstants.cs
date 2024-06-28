@@ -23,7 +23,7 @@ namespace System.Net.NetworkInformation
         InformationReply = 16,
         AddressMaskRequest = 17,
         AddressMaskReply = 18,
-        Traceroute = 30
+        Traceroute = 30,
     }
 
     /// <summary>

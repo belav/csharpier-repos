@@ -37,7 +37,7 @@ namespace System.Data.Services.Common
 
         Summary,
 
-        Title
+        Title,
     }
 
     public enum SyndicationTextContentKind
@@ -46,7 +46,7 @@ namespace System.Data.Services.Common
 
         Html,
 
-        Xhtml
+        Xhtml,
     }
 
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = true)]

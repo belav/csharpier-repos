@@ -317,7 +317,7 @@ public class HealthCheckMiddlewareTests
     [Fact]
     public async Task CanUseCustomWriter()
     {
-        var expectedJson = JsonConvert.SerializeObject(new { status = "Unhealthy", });
+        var expectedJson = JsonConvert.SerializeObject(new { status = "Unhealthy" });
 
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
@@ -333,7 +333,7 @@ public class HealthCheckMiddlewareTests
                                 ResponseWriter = (c, r) =>
                                 {
                                     var json = JsonConvert.SerializeObject(
-                                        new { status = r.Status.ToString(), }
+                                        new { status = r.Status.ToString() }
                                     );
                                     c.Response.ContentType = "application/json";
                                     return c.Response.WriteAsync(json);
@@ -386,7 +386,7 @@ public class HealthCheckMiddlewareTests
                     {
                         app.UseHealthChecks(
                             "/health",
-                            new HealthCheckOptions() { ResponseWriter = null, }
+                            new HealthCheckOptions() { ResponseWriter = null }
                         );
                     })
                     .ConfigureServices(services =>
@@ -434,7 +434,7 @@ public class HealthCheckMiddlewareTests
                             "/health",
                             new HealthCheckOptions()
                             {
-                                ResultStatusCodes = { [HealthStatus.Healthy] = 201, }
+                                ResultStatusCodes = { [HealthStatus.Healthy] = 201 },
                             }
                         );
                     })
@@ -504,7 +504,7 @@ public class HealthCheckMiddlewareTests
                     {
                         app.UseHealthChecks(
                             "/health",
-                            new HealthCheckOptions() { AllowCachingResponses = true, }
+                            new HealthCheckOptions() { AllowCachingResponses = true }
                         );
                     })
                     .ConfigureServices(services =>
@@ -713,7 +713,7 @@ public class HealthCheckMiddlewareTests
                         // Throws if used
                         app.UseHealthChecks(
                             "/health",
-                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
                         );
 
                         app.UseHealthChecks("/health/detailed");
@@ -753,7 +753,7 @@ public class HealthCheckMiddlewareTests
                         // Throws if used
                         app.UseHealthChecks(
                             "/health",
-                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
                         );
                     })
                     .ConfigureServices(services =>
@@ -920,7 +920,7 @@ public class HealthCheckMiddlewareTests
                         app.UseHealthChecks(
                             "/health",
                             port: 5001,
-                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
                         );
 
                         app.UseHealthChecks("/health/detailed", port: 5001);
@@ -968,7 +968,7 @@ public class HealthCheckMiddlewareTests
                         app.UseHealthChecks(
                             "/health",
                             port: 5002,
-                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null, }
+                            new HealthCheckOptions() { ResponseWriter = (c, r) => throw null }
                         );
 
                         app.UseHealthChecks("/health", port: 5001);
@@ -1027,8 +1027,8 @@ public class HealthCheckMiddlewareTests
             {
                 [HealthStatus.Healthy] = 200,
                 [HealthStatus.Degraded] = 200,
-                [HealthStatus.Unhealthy] = 503
-            }
+                [HealthStatus.Unhealthy] = 503,
+            },
         };
     }
 
@@ -1061,8 +1061,8 @@ public class HealthCheckMiddlewareTests
                 {
                     ResultStatusCodes = new Dictionary<HealthStatus, int>
                     {
-                        [HealthStatus.Healthy] = 200
-                    }
+                        [HealthStatus.Healthy] = 200,
+                    },
                 }
         );
         Assert.DoesNotContain(

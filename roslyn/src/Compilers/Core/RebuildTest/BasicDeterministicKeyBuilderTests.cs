@@ -142,7 +142,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                 new[]
                 {
                     GlobalImport.Parse(@"<xmlns:xmlNamespacePrefix = ""xmlNamespaceName"">"),
-                    GlobalImport.Parse("System.Xml")
+                    GlobalImport.Parse("System.Xml"),
                 }
             );
             var compilation = VisualBasicCompilation.Create(
@@ -303,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Rebuild.UnitTests
                         VisualBasicParseOptions.Default.WithLanguageVersion(
                             LanguageVersion.VisualBasic15
                         )
-                    )
+                    ),
                 },
                 options: new VisualBasicCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary,

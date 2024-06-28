@@ -20,7 +20,7 @@ namespace Microsoft.NET.HostModel.ComHost
     {
         private static readonly JsonSerializerOptions s_jsonOptions = new JsonSerializerOptions
         {
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
         };
 
         private struct ClsidEntry
@@ -77,7 +77,7 @@ namespace Microsoft.NET.HostModel.ComHost
                         {
                             Type = GetTypeName(metadataReader, definition),
                             Assembly = assemblyName,
-                            ProgId = !string.IsNullOrWhiteSpace(progId) ? progId : null
+                            ProgId = !string.IsNullOrWhiteSpace(progId) ? progId : null,
                         }
                     );
                 }
@@ -339,7 +339,7 @@ namespace Microsoft.NET.HostModel.ComHost
             Bool,
             String,
             SystemType,
-            Unknown
+            Unknown,
         }
 
         private sealed class TypeResolver : ICustomAttributeTypeProvider<KnownType>

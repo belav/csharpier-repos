@@ -523,7 +523,7 @@ public class Program
                 new MetadataReference[]
                 {
                     new CSharpCompilationReference(comp1),
-                    TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true),
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -535,7 +535,7 @@ public class Program
                 new MetadataReference[]
                 {
                     comp1.EmitToImageReference(),
-                    TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true)
+                    TestReferences.SymbolsTests.NoPia.StdOle.WithEmbedInteropTypes(true),
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -4342,7 +4342,7 @@ class C
                 // (9,37): error CS8916: Attributes on lambda expressions require a parenthesized parameter list.
                 //         Func<object, object> f = [A][B] x => x;
                 Diagnostic(ErrorCode.ERR_AttributesRequireParenthesizedLambdaExpression, "[B]")
-                    .WithLocation(9, 37)
+                    .WithLocation(9, 37),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);
@@ -4923,7 +4923,7 @@ class Program
                     NotNullAttributeDefinition,
                     NotNullIfNotNullAttributeDefinition,
                     MemberNotNullAttributeDefinition,
-                    MemberNotNullWhenAttributeDefinition
+                    MemberNotNullWhenAttributeDefinition,
                 },
                 parseOptions: TestOptions.RegularPreview
             );
@@ -5436,7 +5436,7 @@ class Program
                     source,
                     MaybeNullWhenAttributeDefinition,
                     NotNullWhenAttributeDefinition,
-                    MaybeNullAttributeDefinition
+                    MaybeNullAttributeDefinition,
                 }
             );
             comp.VerifyDiagnostics(
@@ -5976,7 +5976,7 @@ class Program
                     source,
                     AllowNullAttributeDefinition,
                     MaybeNullWhenAttributeDefinition,
-                    NotNullIfNotNullAttributeDefinition
+                    NotNullIfNotNullAttributeDefinition,
                 },
                 parseOptions: TestOptions.RegularPreview
             );
@@ -7271,7 +7271,7 @@ class Program
                 //         F((bool b) => { if (b) return new C1(); return new C2(); });
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "F")
                     .WithArguments("Program.F<T>(System.Func<bool, T>)")
-                    .WithLocation(14, 9)
+                    .WithLocation(14, 9),
             };
 
             var comp = CreateCompilation(source, parseOptions: TestOptions.Regular9);

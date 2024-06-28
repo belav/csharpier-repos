@@ -172,7 +172,7 @@ public class Program
                     Source = "BlazorWasm",
                     Name = "blazorwasm/js-usedjsheapsize",
                     ShortDescription = "UsedJSHeapSize",
-                    LongDescription = "JS used heap size"
+                    LongDescription = "JS used heap size",
                 }
             );
 
@@ -191,7 +191,7 @@ public class Program
                     Source = "BlazorWasm",
                     Name = "blazorwasm/js-totaljsheapsize",
                     ShortDescription = "TotalJSHeapSize",
-                    LongDescription = "JS total heap size"
+                    LongDescription = "JS total heap size",
                 }
             );
 
@@ -237,7 +237,7 @@ public class Program
                     Name = scenarioName,
                     ShortDescription = result.Name,
                     LongDescription = result.Descriptor.Description,
-                    Format = "n2"
+                    Format = "n2",
                 }
             );
 
@@ -259,7 +259,7 @@ public class Program
         if (isStressRun)
         {
             output.Measurements.Add(
-                new BenchmarkMeasurement { Timestamp = DateTime.UtcNow, Name = "$$Delimiter$$", }
+                new BenchmarkMeasurement { Timestamp = DateTime.UtcNow, Name = "$$Delimiter$$" }
             );
         }
 
@@ -311,7 +311,7 @@ public class Program
 
     static IHost StartBenchmarkResultReceiver()
     {
-        var args = new[] { "--urls", "http://127.0.0.1:0", };
+        var args = new[] { "--urls", "http://127.0.0.1:0" };
 
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(builder => builder.UseStartup<BenchmarkDriverStartup>())

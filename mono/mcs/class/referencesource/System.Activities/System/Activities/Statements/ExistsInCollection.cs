@@ -48,7 +48,7 @@ namespace System.Activities.Statements
             metadata.Bind(this.Item, itemArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument> { collectionArgument, itemArgument, }
+                new Collection<RuntimeArgument> { collectionArgument, itemArgument }
             );
         }
 

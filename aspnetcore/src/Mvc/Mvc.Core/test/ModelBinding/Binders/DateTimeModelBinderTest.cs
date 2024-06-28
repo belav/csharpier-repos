@@ -29,10 +29,7 @@ public class DateTimeModelBinderTest
         // Arrange
         var message = "The value 'not a date' is not valid.";
         var bindingContext = GetBindingContext();
-        bindingContext.ValueProvider = new SimpleValueProvider
-        {
-            { "theModelName", "not a date" },
-        };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "not a date" } };
         var binder = GetBinder();
 
         // Act
@@ -54,7 +51,7 @@ public class DateTimeModelBinderTest
         var bindingContext = GetBindingContext();
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
         {
-            { "theModelName", "2020-08-not-a-date" }
+            { "theModelName", "2020-08-not-a-date" },
         };
         var binder = GetBinder();
 
@@ -114,7 +111,7 @@ public class DateTimeModelBinderTest
         // Arrange
         var message = $"The value '{value}' is invalid.";
         var bindingContext = GetBindingContext();
-        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value }, };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
         var binder = GetBinder();
 
         // Act
@@ -160,7 +157,7 @@ public class DateTimeModelBinderTest
         var bindingContext = GetBindingContext(type);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
         {
-            { "theModelName", "2019-06-14T02:30:04.0000000Z" }
+            { "theModelName", "2019-06-14T02:30:04.0000000Z" },
         };
         var binder = GetBinder();
 
@@ -183,7 +180,7 @@ public class DateTimeModelBinderTest
         var expected = DateTime.Parse("2019-06-14T02:30:04.0000000Z", CultureInfo.InvariantCulture);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
         {
-            { "theModelName", "2019-06-14T02:30:04.0000000Z" }
+            { "theModelName", "2019-06-14T02:30:04.0000000Z" },
         };
         var binder = GetBinder(DateTimeStyles.AssumeLocal);
 
@@ -214,7 +211,9 @@ public class DateTimeModelBinderTest
             ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType),
             ModelName = "theModelName",
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider() // empty
+            ValueProvider =
+                new SimpleValueProvider() // empty
+            ,
         };
     }
 }

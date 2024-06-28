@@ -146,25 +146,25 @@ namespace System.Text.Tests
             {
                 new UTF32Encoding(),
                 new UTF32Encoding(false, true, false),
-                true
+                true,
             };
             yield return new object[]
             {
                 new UTF32Encoding(),
                 new UTF32Encoding(false, false, false),
-                false
+                false,
             };
             yield return new object[]
             {
                 new UTF32Encoding(),
                 new UTF32Encoding(true, true, false),
-                false
+                false,
             };
             yield return new object[]
             {
                 new UTF32Encoding(),
                 new UTF32Encoding(false, true, true),
-                false
+                false,
             };
 
             yield return new object[] { Encoding.UTF32, Encoding.UTF32, true };
@@ -177,13 +177,13 @@ namespace System.Text.Tests
             {
                 Encoding.GetEncoding("utf-32BE"),
                 new UTF32Encoding(true, true),
-                true
+                true,
             };
             yield return new object[]
             {
                 Encoding.GetEncoding("utf-32BE"),
                 Encoding.GetEncoding("utf-32"),
-                false
+                false,
             };
 
             yield return new object[] { new UTF32Encoding(), new object(), false };

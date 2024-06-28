@@ -21,7 +21,7 @@ namespace System.Activities.Runtime
         static Type[] completionCallbackParameters = new Type[]
         {
             typeof(NativeActivityContext),
-            typeof(ActivityInstance)
+            typeof(ActivityInstance),
         };
 
         bool checkForCancelation;

@@ -9,6 +9,6 @@ namespace System.Web.Configuration
     public enum CustomErrorsRedirectMode
     {
         ResponseRedirect = 0,
-        ResponseRewrite = 1
+        ResponseRewrite = 1,
     }
 }

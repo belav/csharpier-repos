@@ -16,7 +16,7 @@ namespace System.Web
     {
         DOWNLEVEL = 0,
         IIS7_ISAPI = 1,
-        IIS7_INTEGRATED = 2
+        IIS7_INTEGRATED = 2,
     }
 
     internal enum EtwTraceType
@@ -73,7 +73,7 @@ namespace System.Web
         ETW_TYPE_WEB_EVENT_RAISE_START = 50,
         ETW_TYPE_WEB_EVENT_RAISE_END = 51,
         ETW_TYPE_WEB_EVENT_DELIVER_START = 52,
-        ETW_TYPE_WEB_EVENT_DELIVER_END = 53
+        ETW_TYPE_WEB_EVENT_DELIVER_END = 53,
     }
 
     struct EtwTraceLevel
@@ -121,7 +121,7 @@ namespace System.Web
         InProc = 0,
         OutOfProc = 1,
         IIS7Integrated = 3,
-        Unknown = 999
+        Unknown = 999,
     }
 
     internal static class EtwTrace

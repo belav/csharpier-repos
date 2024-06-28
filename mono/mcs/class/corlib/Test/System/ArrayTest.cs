@@ -23,7 +23,7 @@ namespace MonoTests.System
         hola,
         adios,
         mas,
-        menos
+        menos,
     };
 
     class AClass
@@ -964,7 +964,7 @@ namespace MonoTests.System
             String[,] s1 =
             {
                 { "this", "is" },
-                { "a", "test" }
+                { "a", "test" },
             };
             IEnumerator en = s1.GetEnumerator();
             Assert.IsNotNull(en, "#AA01");
@@ -1909,7 +1909,7 @@ namespace MonoTests.System
                 'a',
                 'j',
                 'i',
-                'h'
+                'h',
             };
             string s;
             int retval;
@@ -2207,13 +2207,13 @@ namespace MonoTests.System
             {
                 i1 = 1,
                 i2 = 2,
-                i3 = 3
+                i3 = 3,
             };
             c3[1] = new BStruct()
             {
                 i1 = 4,
                 i2 = 5,
-                i3 = 6
+                i3 = 6,
             };
             Array.Reverse(c3);
             Assert.AreEqual(4, c3[0].i1);
@@ -2634,7 +2634,7 @@ namespace MonoTests.System
                     typeof(Single),
                     typeof(UInt16),
                     typeof(UInt32),
-                    typeof(UInt64)
+                    typeof(UInt64),
                 };
 
                 bool v1 = true;
@@ -2664,7 +2664,7 @@ namespace MonoTests.System
                     "-4.8F",
                     "24234",
                     "235354",
-                    "234552"
+                    "234552",
                 };
 
                 Object[][] vt = { va1, va1, va1, va1, va1, va1, va1, va1, va1, va1, va1, va1 };
@@ -2814,7 +2814,7 @@ namespace MonoTests.System
                     0,
                     1,
                     1,
-                    0
+                    0,
                 };
 
                 // SetValue
@@ -3160,7 +3160,7 @@ namespace MonoTests.System
                     unchecked((ulong)0xffffFFFF00000000),
                     0,
                     0x7FFFFFFFffffffff,
-                    100
+                    100,
                 };
 
                 Array a = arr;
@@ -3241,7 +3241,7 @@ namespace MonoTests.System
                 new Comp(11),
                 new Comp(9),
                 new Comp(0),
-                new Comp(-100)
+                new Comp(-100),
             };
             IComparer<Comp> comp = null;
             Array.Sort<Comp, int>(c, source, comp);
@@ -3511,7 +3511,7 @@ namespace MonoTests.System
             char[,] arr = new char[,]
             {
                 { 'a' },
-                { 'b' }
+                { 'b' },
             };
             Array.Sort(arr, 0, 1);
         }
@@ -3557,7 +3557,7 @@ namespace MonoTests.System
                 (long)436,
                 (float)1.1,
                 1.23,
-                "Hello World"
+                "Hello World",
             };
             Array.Sort(array, (IComparer)null);
         }
@@ -3599,7 +3599,7 @@ namespace MonoTests.System
             byte[,] matrix = new byte[2, 2]
             {
                 { 1, 1 },
-                { 2, 2 }
+                { 2, 2 },
             };
             Array.Clear(matrix, 0, 2);
             Assert.AreEqual(0, matrix[0, 0], "0,0");
@@ -3615,7 +3615,7 @@ namespace MonoTests.System
             byte[,] matrix = new byte[2, 2]
             {
                 { 1, 1 },
-                { 2, 2 }
+                { 2, 2 },
             };
             Array.Clear(matrix, 0, 5);
         }
@@ -3884,7 +3884,7 @@ namespace MonoTests.System
             {
                 new EquatableClass(0),
                 new EquatableClass(1),
-                new EquatableClass(0)
+                new EquatableClass(0),
             };
 
             Assert.AreEqual(0, Array.IndexOf<EquatableClass>(list, list[0]), "#0");
@@ -4234,7 +4234,7 @@ namespace MonoTests.System
                 "123",
                 "Iam",
                 null,
-                "NotNull"
+                "NotNull",
             };
             IComparer comparer = new NullAtEndComparer();
             Array.Sort(data, comparer);
@@ -4307,12 +4307,12 @@ namespace MonoTests.System
             IStructuralComparable a = new int[2, 2]
             {
                 { 10, 10 },
-                { 10, 10 }
+                { 10, 10 },
             };
             IStructuralComparable b = new int[2, 2]
             {
                 { 10, 10 },
-                { 10, 10 }
+                { 10, 10 },
             };
             a.CompareTo(b, Comparer<object>.Default);
         }
@@ -4325,7 +4325,7 @@ namespace MonoTests.System
             IStructuralComparable b = new int[2, 2]
             {
                 { 10, 10 },
-                { 10, 10 }
+                { 10, 10 },
             };
             a.CompareTo(b, Comparer<object>.Default);
         }
@@ -4338,7 +4338,7 @@ namespace MonoTests.System
             IStructuralComparable b = new int[2, 2]
             {
                 { 10, 10 },
-                { 10, 10 }
+                { 10, 10 },
             };
             a.CompareTo(b, Comparer<object>.Default);
         }

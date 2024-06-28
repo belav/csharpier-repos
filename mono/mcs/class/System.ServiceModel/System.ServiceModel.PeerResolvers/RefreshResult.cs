@@ -12,6 +12,6 @@ namespace System.ServiceModel.PeerResolvers
     public enum RefreshResult
     {
         Success,
-        RegistrationNotFound
+        RegistrationNotFound,
     }
 }

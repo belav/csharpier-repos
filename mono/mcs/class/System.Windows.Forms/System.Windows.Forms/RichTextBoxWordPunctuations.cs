@@ -33,6 +33,6 @@ namespace System.Windows.Forms
         Level1 = 128,
         Level2 = 256,
         Custom = 512,
-        All = 896
+        All = 896,
     }
 }

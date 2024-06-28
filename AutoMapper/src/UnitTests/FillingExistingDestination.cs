@@ -56,7 +56,7 @@ public class When_the_destination_object_is_specified : AutoMapperSpecBase
 
     protected override void Because_of()
     {
-        _source = new Source { Value = 10, };
+        _source = new Source { Value = 10 };
         _originalDest = new Destination { Value = 1111 };
         _dest = Mapper.Map<Source, Destination>(_source, _originalDest);
     }
@@ -118,13 +118,13 @@ public class When_the_destination_object_is_specified_with_child_objects : AutoM
         _source = new Source
         {
             Value = 10,
-            Child = new ChildSource { Value = 20 }
+            Child = new ChildSource { Value = 20 },
         };
         _originalDest = new Destination
         {
             Value = 1111,
             Name = "foo",
-            Child = new ChildDestination { Name = "bar" }
+            Child = new ChildDestination { Name = "bar" },
         };
         _dest = Mapper.Map<Source, Destination>(_source, _originalDest);
     }
@@ -204,7 +204,7 @@ public class When_the_destination_object_is_specified_and_you_are_converting_an_
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     protected override MapperConfiguration CreateConfiguration() => new(cfg => { });

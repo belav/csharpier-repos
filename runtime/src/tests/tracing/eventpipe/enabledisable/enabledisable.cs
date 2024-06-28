@@ -71,7 +71,7 @@ namespace Tracing.Tests.EnableDisableValidation
 
             var providers = new List<EventPipeProvider>()
             {
-                new EventPipeProvider("Local.TestEventSource", EventLevel.Verbose)
+                new EventPipeProvider("Local.TestEventSource", EventLevel.Verbose),
             };
 
             DiagnosticsClient client = new DiagnosticsClient(Process.GetCurrentProcess().Id);

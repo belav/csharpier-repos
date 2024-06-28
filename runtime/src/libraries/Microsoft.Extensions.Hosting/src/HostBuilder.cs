@@ -321,7 +321,7 @@ namespace Microsoft.Extensions.Hosting
             _hostBuilderContext = new HostBuilderContext(Properties)
             {
                 HostingEnvironment = _hostingEnvironment!,
-                Configuration = _hostConfiguration!
+                Configuration = _hostConfiguration!,
             };
         }
 

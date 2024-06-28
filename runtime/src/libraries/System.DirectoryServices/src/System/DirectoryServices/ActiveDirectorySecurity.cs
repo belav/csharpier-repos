@@ -42,7 +42,7 @@ namespace System.DirectoryServices
         WriteProperty = 0x20,
         DeleteTree = 0x40,
         ListObject = 0x80,
-        ExtendedRight = 0x100
+        ExtendedRight = 0x100,
     }
 
     public enum ActiveDirectorySecurityInheritance
@@ -51,13 +51,13 @@ namespace System.DirectoryServices
         All = 1,
         Descendents = 2,
         SelfAndChildren = 3,
-        Children = 4
+        Children = 4,
     }
 
     public enum PropertyAccess
     {
         Read = 0,
-        Write = 1
+        Write = 1,
     }
 
     public class ActiveDirectorySecurity : DirectoryObjectSecurity
@@ -478,7 +478,7 @@ namespace System.DirectoryServices
             InheritanceFlags.ContainerInherit,
             InheritanceFlags.ContainerInherit,
             InheritanceFlags.ContainerInherit,
-            InheritanceFlags.ContainerInherit
+            InheritanceFlags.ContainerInherit,
         };
 
         internal static PropagationFlags[] ITToPF = new PropagationFlags[]
@@ -487,7 +487,7 @@ namespace System.DirectoryServices
             PropagationFlags.None,
             PropagationFlags.InheritOnly,
             PropagationFlags.NoPropagateInherit,
-            PropagationFlags.InheritOnly | PropagationFlags.NoPropagateInherit
+            PropagationFlags.InheritOnly | PropagationFlags.NoPropagateInherit,
         };
 
         internal static InheritanceFlags GetInheritanceFlags(

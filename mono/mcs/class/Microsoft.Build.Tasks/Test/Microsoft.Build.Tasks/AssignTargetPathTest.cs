@@ -37,7 +37,7 @@ namespace MonoTests.Microsoft.Build.Tasks
     {
         Windows,
         Unix,
-        Mac
+        Mac,
     }
 
     [TestFixture]
@@ -77,7 +77,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "/a/c/def.cs",
                         "a/xyz.cs",
                         "/different/xyz/foo.cs",
-                        "rel/bar.resx"
+                        "rel/bar.resx",
                     },
                     new string[] { "b/abc.cs", "c/def.cs", "xyz.cs", "foo.cs", "bar.resx" },
                     "/a/./",
@@ -93,7 +93,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                         @"C:\a\c\def.cs",
                         "xyz.cs",
                         @"C:\different\xyz\foo.cs",
-                        @"rel\bar.resx"
+                        @"rel\bar.resx",
                     },
                     new string[] { @"b\abc.cs", @"c\def.cs", "xyz.cs", "foo.cs", "bar.resx" },
                     @"C:\a\.\",
@@ -116,14 +116,14 @@ namespace MonoTests.Microsoft.Build.Tasks
                         "//a/b/abc.cs",
                         "k/../k/def.cs",
                         "/xyz.cs",
-                        "/different/xyz/foo.cs"
+                        "/different/xyz/foo.cs",
                     },
                     new string[]
                     {
                         "a/b/abc.cs",
                         Path.Combine(cur_dir_minus_root, "k/def.cs"),
                         "xyz.cs",
-                        "different/xyz/foo.cs"
+                        "different/xyz/foo.cs",
                     },
                     "/",
                     "A"
@@ -137,14 +137,14 @@ namespace MonoTests.Microsoft.Build.Tasks
                         root + @"a\b\abc.cs",
                         @"k\..\k\def.cs",
                         root + @"xyz.cs",
-                        root + @"different\xyz\foo.cs"
+                        root + @"different\xyz\foo.cs",
                     },
                     new string[]
                     {
                         "a\\b\\abc.cs",
                         cur_dir_minus_root + "\\k\\def.cs",
                         "xyz.cs",
-                        "different\\xyz\\foo.cs"
+                        "different\\xyz\\foo.cs",
                     },
                     root,
                     "A"
@@ -165,7 +165,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     new string[]
                     {
                         Path.Combine(cur_dir_minus_root, "xyz.cs"),
-                        Path.Combine(cur_dir_minus_root, "rel/bar.resx")
+                        Path.Combine(cur_dir_minus_root, "rel/bar.resx"),
                     },
                     "/",
                     "A"
@@ -178,7 +178,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     new string[]
                     {
                         Path.Combine(cur_dir_minus_root, "xyz.cs"),
-                        Path.Combine(cur_dir_minus_root, "rel\\bar.resx")
+                        Path.Combine(cur_dir_minus_root, "rel\\bar.resx"),
                     },
                     root,
                     "A"
@@ -224,7 +224,7 @@ namespace MonoTests.Microsoft.Build.Tasks
             {
                 PathCombine("Test", "Link", "xyz.cs"),
                 PathCombine("Test", "Link", "bar.resx"),
-                PathCombine("..", "Test", "Link", "qwe.txt")
+                PathCombine("..", "Test", "Link", "qwe.txt"),
             };
 
             BuildItemGroup include = project.GetEvaluatedItemsByName("FooPath");

@@ -122,7 +122,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                                 var response = await next(context);
                                 Assert.IsType<EmptyHttpResult>(response);
                                 return response;
-                            }
+                            },
                     }
                 ),
             }
@@ -333,200 +333,200 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 {
                     (Action<HttpContext, string[]>)Store,
                     new[] { "plain string" },
-                    new[] { "plain string" }
+                    new[] { "plain string" },
                 },
                 new object[]
                 {
                     (Action<HttpContext, StringValues>)Store,
                     new[] { "1", "2", "3" },
-                    new StringValues(new[] { "1", "2", "3" })
+                    new StringValues(new[] { "1", "2", "3" }),
                 },
                 new object[]
                 {
                     (Action<HttpContext, int[]>)Store,
                     new[] { "-1", "2", "3" },
-                    new[] { -1, 2, 3 }
+                    new[] { -1, 2, 3 },
                 },
                 new object[]
                 {
                     (Action<HttpContext, uint[]>)Store,
                     new[] { "1", "42", "32" },
-                    new[] { 1U, 42U, 32U }
+                    new[] { 1U, 42U, 32U },
                 },
                 new object[]
                 {
                     (Action<HttpContext, bool[]>)Store,
                     new[] { "true", "false" },
-                    new[] { true, false }
+                    new[] { true, false },
                 },
                 new object[]
                 {
                     (Action<HttpContext, short[]>)Store,
                     new[] { "-42" },
-                    new[] { (short)-42 }
+                    new[] { (short)-42 },
                 },
                 new object[]
                 {
                     (Action<HttpContext, ushort[]>)Store,
                     new[] { "42" },
-                    new[] { (ushort)42 }
+                    new[] { (ushort)42 },
                 },
                 new object[]
                 {
                     (Action<HttpContext, long[]>)Store,
                     new[] { "-42" },
-                    new[] { -42L }
+                    new[] { -42L },
                 },
                 new object[]
                 {
                     (Action<HttpContext, ulong[]>)Store,
                     new[] { "42" },
-                    new[] { 42UL }
+                    new[] { 42UL },
                 },
                 new object[]
                 {
                     (Action<HttpContext, IntPtr[]>)Store,
                     new[] { "-42" },
-                    new[] { new IntPtr(-42) }
+                    new[] { new IntPtr(-42) },
                 },
                 new object[] { (Action<HttpContext, char[]>)Store, new[] { "A" }, new[] { 'A' } },
                 new object[]
                 {
                     (Action<HttpContext, double[]>)Store,
                     new[] { "0.5" },
-                    new[] { 0.5 }
+                    new[] { 0.5 },
                 },
                 new object[]
                 {
                     (Action<HttpContext, float[]>)Store,
                     new[] { "0.5" },
-                    new[] { 0.5f }
+                    new[] { 0.5f },
                 },
                 new object[]
                 {
                     (Action<HttpContext, Half[]>)Store,
                     new[] { "0.5" },
-                    new[] { (Half)0.5f }
+                    new[] { (Half)0.5f },
                 },
                 new object[]
                 {
                     (Action<HttpContext, decimal[]>)Store,
                     new[] { "0.5" },
-                    new[] { 0.5m }
+                    new[] { 0.5m },
                 },
                 new object[]
                 {
                     (Action<HttpContext, Uri[]>)Store,
                     new[] { "https://example.org" },
-                    new[] { new Uri("https://example.org") }
+                    new[] { new Uri("https://example.org") },
                 },
                 new object[]
                 {
                     (Action<HttpContext, DateTime[]>)Store,
                     new[] { now.ToString("o") },
-                    new[] { now.ToUniversalTime() }
+                    new[] { now.ToUniversalTime() },
                 },
                 new object[]
                 {
                     (Action<HttpContext, DateTimeOffset[]>)Store,
                     new[] { "1970-01-01T00:00:00.0000000+00:00" },
-                    new[] { DateTimeOffset.UnixEpoch }
+                    new[] { DateTimeOffset.UnixEpoch },
                 },
                 new object[]
                 {
                     (Action<HttpContext, TimeSpan[]>)Store,
                     new[] { "00:00:42" },
-                    new[] { TimeSpan.FromSeconds(42) }
+                    new[] { TimeSpan.FromSeconds(42) },
                 },
                 new object[]
                 {
                     (Action<HttpContext, Guid[]>)Store,
                     new[] { "00000000-0000-0000-0000-000000000000" },
-                    new[] { Guid.Empty }
+                    new[] { Guid.Empty },
                 },
                 new object[]
                 {
                     (Action<HttpContext, Version[]>)Store,
                     new[] { "6.0.0.42" },
-                    new[] { new Version("6.0.0.42") }
+                    new[] { new Version("6.0.0.42") },
                 },
                 new object[]
                 {
                     (Action<HttpContext, BigInteger[]>)Store,
                     new[] { "-42" },
-                    new[] { new BigInteger(-42) }
+                    new[] { new BigInteger(-42) },
                 },
                 new object[]
                 {
                     (Action<HttpContext, IPAddress[]>)Store,
                     new[] { "127.0.0.1" },
-                    new[] { IPAddress.Loopback }
+                    new[] { IPAddress.Loopback },
                 },
                 new object[]
                 {
                     (Action<HttpContext, IPEndPoint[]>)Store,
                     new[] { "127.0.0.1:80" },
-                    new[] { new IPEndPoint(IPAddress.Loopback, 80) }
+                    new[] { new IPEndPoint(IPAddress.Loopback, 80) },
                 },
                 new object[]
                 {
                     (Action<HttpContext, AddressFamily[]>)Store,
                     new[] { "Unix" },
-                    new[] { AddressFamily.Unix }
+                    new[] { AddressFamily.Unix },
                 },
                 new object[]
                 {
                     (Action<HttpContext, ILOpCode[]>)Store,
                     new[] { "Nop" },
-                    new[] { ILOpCode.Nop }
+                    new[] { ILOpCode.Nop },
                 },
                 new object[]
                 {
                     (Action<HttpContext, AssemblyFlags[]>)Store,
                     new[] { "PublicKey,Retargetable" },
-                    new[] { AssemblyFlags.PublicKey | AssemblyFlags.Retargetable }
+                    new[] { AssemblyFlags.PublicKey | AssemblyFlags.Retargetable },
                 },
                 new object[]
                 {
                     (Action<HttpContext, int?[]>)Store,
                     new[] { "42" },
-                    new int?[] { 42 }
+                    new int?[] { 42 },
                 },
                 new object[]
                 {
                     (Action<HttpContext, MyEnum[]>)Store,
                     new[] { "ValueB" },
-                    new[] { MyEnum.ValueB }
+                    new[] { MyEnum.ValueB },
                 },
                 new object[]
                 {
                     (Action<HttpContext, MyTryParseRecord[]>)Store,
                     new[] { "https://example.org" },
-                    new[] { new MyTryParseRecord(new Uri("https://example.org")) }
+                    new[] { new MyTryParseRecord(new Uri("https://example.org")) },
                 },
                 new object?[]
                 {
                     (Action<HttpContext, int[]>)Store,
                     new string[] { },
-                    Array.Empty<int>()
+                    Array.Empty<int>(),
                 },
                 new object?[]
                 {
                     (Action<HttpContext, int?[]>)Store,
                     new string?[] { "1", "2", null, "4" },
-                    new int?[] { 1, 2, null, 4 }
+                    new int?[] { 1, 2, null, 4 },
                 },
                 new object?[]
                 {
                     (Action<HttpContext, int?[]>)Store,
                     new string[] { "1", "2", "", "4" },
-                    new int?[] { 1, 2, null, 4 }
+                    new int?[] { 1, 2, null, 4 },
                 },
                 new object[]
                 {
                     (Action<HttpContext, MyTryParseRecord?[]?>)Store,
                     new[] { "" },
-                    new MyTryParseRecord?[] { null }
+                    new MyTryParseRecord?[] { null },
                 },
             };
         }
@@ -550,7 +550,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 {
                     (Action<HttpContext, string>)Store,
                     "plain string",
-                    "plain string"
+                    "plain string",
                 },
                 new object[] { (Action<HttpContext, int>)Store, "-42", -42 },
                 new object[] { (Action<HttpContext, uint>)Store, "42", 42U },
@@ -569,63 +569,63 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 {
                     (Action<HttpContext, Uri>)Store,
                     "https://example.org",
-                    new Uri("https://example.org")
+                    new Uri("https://example.org"),
                 },
                 new object[]
                 {
                     (Action<HttpContext, DateTime>)Store,
                     now.ToString("o"),
-                    now.ToUniversalTime()
+                    now.ToUniversalTime(),
                 },
                 new object[]
                 {
                     (Action<HttpContext, DateTimeOffset>)Store,
                     "1970-01-01T00:00:00.0000000+00:00",
-                    DateTimeOffset.UnixEpoch
+                    DateTimeOffset.UnixEpoch,
                 },
                 new object[]
                 {
                     (Action<HttpContext, TimeSpan>)Store,
                     "00:00:42",
-                    TimeSpan.FromSeconds(42)
+                    TimeSpan.FromSeconds(42),
                 },
                 new object[]
                 {
                     (Action<HttpContext, Guid>)Store,
                     "00000000-0000-0000-0000-000000000000",
-                    Guid.Empty
+                    Guid.Empty,
                 },
                 new object[]
                 {
                     (Action<HttpContext, Version>)Store,
                     "6.0.0.42",
-                    new Version("6.0.0.42")
+                    new Version("6.0.0.42"),
                 },
                 new object[] { (Action<HttpContext, BigInteger>)Store, "-42", new BigInteger(-42) },
                 new object[]
                 {
                     (Action<HttpContext, IPAddress>)Store,
                     "127.0.0.1",
-                    IPAddress.Loopback
+                    IPAddress.Loopback,
                 },
                 new object[]
                 {
                     (Action<HttpContext, IPEndPoint>)Store,
                     "127.0.0.1:80",
-                    new IPEndPoint(IPAddress.Loopback, 80)
+                    new IPEndPoint(IPAddress.Loopback, 80),
                 },
                 new object[]
                 {
                     (Action<HttpContext, AddressFamily>)Store,
                     "Unix",
-                    AddressFamily.Unix
+                    AddressFamily.Unix,
                 },
                 new object[] { (Action<HttpContext, ILOpCode>)Store, "Nop", ILOpCode.Nop },
                 new object[]
                 {
                     (Action<HttpContext, AssemblyFlags>)Store,
                     "PublicKey,Retargetable",
-                    AssemblyFlags.PublicKey | AssemblyFlags.Retargetable
+                    AssemblyFlags.PublicKey | AssemblyFlags.Retargetable,
                 },
                 new object[] { (Action<HttpContext, int?>)Store, "42", 42 },
                 new object[] { (Action<HttpContext, MyEnum>)Store, "ValueB", MyEnum.ValueB },
@@ -633,7 +633,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 {
                     (Action<HttpContext, MyTryParseRecord>)Store,
                     "https://example.org",
-                    new MyTryParseRecord(new Uri("https://example.org"))
+                    new MyTryParseRecord(new Uri("https://example.org")),
                 },
                 new object?[] { (Action<HttpContext, int?>)Store, null, null },
             };
@@ -1138,7 +1138,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[]
                 {
                     (Action<ParametersListWithImplictFromBody>)
-                        TestImpliedFromBodyStruct_ParameterList
+                        TestImpliedFromBodyStruct_ParameterList,
                 },
             };
         }
@@ -1159,7 +1159,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             {
                 new object[]
                 {
-                    (Action<ParametersListWithExplictFromBody>)TestExplicitFromBody_ParameterList
+                    (Action<ParametersListWithExplictFromBody>)TestExplicitFromBody_ParameterList,
                 },
             };
         }
@@ -1375,29 +1375,29 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[]
                 {
                     (Action<BadArgumentListRecord>)TestParameterListRecord,
-                    GetMultipleContructorsError(typeof(BadArgumentListRecord))
+                    GetMultipleContructorsError(typeof(BadArgumentListRecord)),
                 },
                 new object[]
                 {
                     (Action<BadArgumentListClass>)TestParameterListClass,
-                    GetInvalidConstructorError(typeof(BadArgumentListClass))
+                    GetInvalidConstructorError(typeof(BadArgumentListClass)),
                 },
                 new object[]
                 {
                     (Action<BadArgumentListClassMultipleCtors>)
                         TestParameterListClassWithMutipleConstructors,
-                    GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors))
+                    GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors)),
                 },
                 new object[]
                 {
                     (Action<BadAbstractArgumentListClass>)TestParameterListAbstractClass,
-                    GetAbstractClassError(typeof(BadAbstractArgumentListClass))
+                    GetAbstractClassError(typeof(BadAbstractArgumentListClass)),
                 },
                 new object[]
                 {
                     (Action<BadNoPublicConstructorArgumentListClass>)
                         TestParameterListNoPulicConstructorClass,
-                    GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass))
+                    GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass)),
                 },
             };
         }
@@ -1481,16 +1481,16 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[]
                 {
                     (Action<ParametersListWithExplictFromService>)
-                        TestExplicitFromService_FromParameterList
+                        TestExplicitFromService_FromParameterList,
                 },
                 new[]
                 {
-                    (Action<HttpContext, IEnumerable<MyService>>)TestExplicitFromIEnumerableService
+                    (Action<HttpContext, IEnumerable<MyService>>)TestExplicitFromIEnumerableService,
                 },
                 new[]
                 {
                     (Action<HttpContext, MyService, IEnumerable<MyService>>)
-                        TestExplicitMultipleFromService
+                        TestExplicitMultipleFromService,
                 },
             };
         }
@@ -1534,11 +1534,11 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[]
                 {
                     (Action<ParametersListWithImplictFromService>)
-                        TestImpliedFromService_FromParameterList
+                        TestImpliedFromService_FromParameterList,
                 },
                 new[]
                 {
-                    (Action<HttpContext, IEnumerable<MyService>>)TestImpliedIEnumerableFromService
+                    (Action<HttpContext, IEnumerable<MyService>>)TestImpliedIEnumerableFromService,
                 },
                 new[] { (Action<HttpContext, MyService>)TestImpliedFromServiceBasedOnContainer },
             };
@@ -1775,7 +1775,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         get
         {
             JsonTodoChild originalTodo =
-                new() { Name = "Write even more tests!", Child = "With type hierarchies!", };
+                new() { Name = "Write even more tests!", Child = "With type hierarchies!" };
 
             JsonTodo TestAction() => originalTodo;
 
@@ -1952,28 +1952,28 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[] { (Func<ValueTask<CustomResult>>)ValueTaskTestAction },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<CustomResult>>)FSharpAsyncTestAction
+                    (Func<FSharp.Control.FSharpAsync<CustomResult>>)FSharpAsyncTestAction,
                 },
                 new object[] { (Func<CustomResult>)StaticTestAction },
                 new object[] { (Func<Task<CustomResult>>)StaticTaskTestAction },
                 new object[] { (Func<ValueTask<CustomResult>>)StaticValueTaskTestAction },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<CustomResult>>)StaticFSharpAsyncTestAction
+                    (Func<FSharp.Control.FSharpAsync<CustomResult>>)StaticFSharpAsyncTestAction,
                 },
                 new object[] { (Func<object>)StaticResultAsObject },
                 new object[] { (Func<Task<object>>)StaticTaskOfIResultAsObject },
                 new object[] { (Func<ValueTask<object>>)StaticValueTaskOfIResultAsObject },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<object>>)StaticFSharpAsyncOfIResultAsObject
+                    (Func<FSharp.Control.FSharpAsync<object>>)StaticFSharpAsyncOfIResultAsObject,
                 },
                 new object[] { (Func<StructResult>)TestStructAction },
                 new object[] { (Func<Task<StructResult>>)TaskTestStructAction },
                 new object[] { (Func<ValueTask<StructResult>>)ValueTaskTestStructAction },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<StructResult>>)FSharpAsyncTestStructAction
+                    (Func<FSharp.Control.FSharpAsync<StructResult>>)FSharpAsyncTestStructAction,
                 },
             };
         }
@@ -2012,27 +2012,27 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[]
                 {
                     (Func<IResult?>)TestAction,
-                    "The IResult returned by the Delegate must not be null."
+                    "The IResult returned by the Delegate must not be null.",
                 },
                 new object[]
                 {
                     (Func<Task<IResult?>?>)TaskNullAction,
-                    "The IResult in Task<IResult> response must not be null."
+                    "The IResult in Task<IResult> response must not be null.",
                 },
                 new object[]
                 {
                     (Func<Task<bool?>?>)TaskBoolAction,
-                    "The Task returned by the Delegate must not be null."
+                    "The Task returned by the Delegate must not be null.",
                 },
                 new object[]
                 {
                     (Func<Task<IResult?>>)TaskTestAction,
-                    "The IResult returned by the Delegate must not be null."
+                    "The IResult returned by the Delegate must not be null.",
                 },
                 new object[]
                 {
                     (Func<ValueTask<IResult?>>)ValueTaskTestAction,
-                    "The IResult returned by the Delegate must not be null."
+                    "The IResult returned by the Delegate must not be null.",
                 },
             };
         }
@@ -2077,7 +2077,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "name",
                     null,
                     true,
-                    null
+                    null,
                 },
                 new object?[]
                 {
@@ -2085,7 +2085,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "name",
                     "TestName",
                     false,
-                    "Hello TestName!"
+                    "Hello TestName!",
                 },
                 new object?[]
                 {
@@ -2093,7 +2093,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "name",
                     null,
                     false,
-                    "Hello DefaultName!"
+                    "Hello DefaultName!",
                 },
                 new object?[]
                 {
@@ -2101,7 +2101,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "name",
                     "TestName",
                     false,
-                    "Hello TestName!"
+                    "Hello TestName!",
                 },
                 new object?[]
                 {
@@ -2109,7 +2109,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "name",
                     null,
                     false,
-                    "Hello !"
+                    "Hello !",
                 },
                 new object?[]
                 {
@@ -2117,7 +2117,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "name",
                     "TestName",
                     false,
-                    "Hello TestName!"
+                    "Hello TestName!",
                 },
                 new object?[]
                 {
@@ -2125,7 +2125,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "age",
                     null,
                     true,
-                    null
+                    null,
                 },
                 new object?[]
                 {
@@ -2133,7 +2133,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "age",
                     "42",
                     false,
-                    "Age: 42"
+                    "Age: 42",
                 },
                 new object?[]
                 {
@@ -2141,7 +2141,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "age",
                     null,
                     false,
-                    "Age: 12"
+                    "Age: 12",
                 },
                 new object?[]
                 {
@@ -2149,7 +2149,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "age",
                     "42",
                     false,
-                    "Age: 42"
+                    "Age: 42",
                 },
                 new object?[]
                 {
@@ -2157,7 +2157,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "age",
                     null,
                     false,
-                    "Age: "
+                    "Age: ",
                 },
                 new object?[]
                 {
@@ -2165,7 +2165,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     "age",
                     "42",
                     false,
-                    "Age: 42"
+                    "Age: 42",
                 },
             };
         }
@@ -2196,7 +2196,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             {
                 RouteParameterNames = routeParam is not null
                     ? new[] { paramName }
-                    : Array.Empty<string>()
+                    : Array.Empty<string>(),
             }
         );
 
@@ -2290,7 +2290,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     (Action<HttpContext, MyBindAsyncRecord>)requiredReferenceType,
                     false,
                     true,
-                    false
+                    false,
                 },
                 new object?[]
                 {
@@ -2304,7 +2304,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     (Action<HttpContext, MySimpleBindAsyncRecord>)requiredReferenceTypeSimple,
                     true,
                     false,
-                    false
+                    false,
                 },
                 new object?[]
                 {
@@ -2318,70 +2318,70 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                     (Action<HttpContext, MyBindAsyncRecord?>)defaultReferenceType,
                     true,
                     false,
-                    false
+                    false,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyBindAsyncRecord?>)nullableReferenceType,
                     false,
                     false,
-                    false
+                    false,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyBindAsyncRecord?>)nullableReferenceType,
                     true,
                     false,
-                    false
+                    false,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyNullableBindAsyncStruct>)requiredValueType,
                     false,
                     true,
-                    true
+                    true,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyNullableBindAsyncStruct>)requiredValueType,
                     true,
                     false,
-                    true
+                    true,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MySimpleBindAsyncStruct>)requiredValueTypeSimple,
                     true,
                     false,
-                    true
+                    true,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyNullableBindAsyncStruct?>)defaultValueType,
                     false,
                     false,
-                    true
+                    true,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyNullableBindAsyncStruct?>)defaultValueType,
                     true,
                     false,
-                    true
+                    true,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyNullableBindAsyncStruct?>)nullableValueType,
                     false,
                     false,
-                    true
+                    true,
                 },
                 new object?[]
                 {
                     (Action<HttpContext, MyNullableBindAsyncStruct?>)nullableValueType,
                     true,
                     false,
-                    true
+                    true,
                 },
             };
         }
@@ -2466,25 +2466,25 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 {
                     (Func<MyService, string>)defaultValueExplicitServiceParam,
                     false,
-                    false
+                    false,
                 },
                 new object?[]
                 {
                     (Func<MyService, string>)defaultValueExplicitServiceParam,
                     true,
-                    false
+                    false,
                 },
                 new object?[]
                 {
                     (Func<MyService?, string>)nullableExplicitServiceParam,
                     false,
-                    false
+                    false,
                 },
                 new object?[]
                 {
                     (Func<MyService?, string>)nullableExplicitServiceParam,
                     true,
-                    false
+                    false,
                 },
             };
         }
@@ -2663,25 +2663,25 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 {
                     (Func<Uri, string>)uriParsing,
                     "https://example.org",
-                    "Uri: https://example.org"
+                    "Uri: https://example.org",
                 },
                 new object?[]
                 {
                     (Func<Uri, string>)uriParsing,
                     "https://example.org/path/to/file?name=value1&name=value2",
-                    "Uri: https://example.org/path/to/file?name=value1&name=value2"
+                    "Uri: https://example.org/path/to/file?name=value1&name=value2",
                 },
                 new object?[]
                 {
                     (Func<Uri, string>)uriParsing,
                     "/path/to/file?name=value1&name=value2",
-                    "Uri: /path/to/file?name=value1&name=value2"
+                    "Uri: /path/to/file?name=value1&name=value2",
                 },
                 new object?[]
                 {
                     (Func<Uri, string>)uriParsing,
                     "?name=value1&name=value2",
-                    "Uri: ?name=value1&name=value2"
+                    "Uri: ?name=value1&name=value2",
                 },
             };
         }
@@ -3033,7 +3033,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                             async (context) =>
                             {
                                 return await next(context);
-                            }
+                            },
                     }
                 ),
             }
@@ -3089,7 +3089,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                             async (context) =>
                             {
                                 return await next(context);
-                            }
+                            },
                     }
                 ),
             }
@@ -3142,12 +3142,12 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[] { (Func<FSharp.Control.FSharpAsync<string>>)FSharpAsyncOfTMethod },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<string>>)FSharpAsyncOfTWithYieldMethod
+                    (Func<FSharp.Control.FSharpAsync<string>>)FSharpAsyncOfTWithYieldMethod,
                 },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<object>>)FSharpAsyncOfObjectWithYieldMethod
-                }
+                    (Func<FSharp.Control.FSharpAsync<object>>)FSharpAsyncOfObjectWithYieldMethod,
+                },
             };
         }
     }
@@ -3179,7 +3179,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                             async (context) =>
                             {
                                 return await next(context);
-                            }
+                            },
                     }
                 ),
             }
@@ -3255,15 +3255,15 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[] { (Func<Task<FSharp.Core.Unit>>)TaskOfUnitMethod },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<FSharp.Core.Unit>>)FSharpAsyncOfUnitMethod
+                    (Func<FSharp.Control.FSharpAsync<FSharp.Core.Unit>>)FSharpAsyncOfUnitMethod,
                 },
                 new object[] { (Func<ValueTask>)ValueTaskWithYieldMethod },
                 new object[] { (Func<Task>)TaskWithYieldMethod },
                 new object[]
                 {
                     (Func<FSharp.Control.FSharpAsync<FSharp.Core.Unit>>)
-                        FSharpAsyncOfUnitWithYieldMethod
-                }
+                        FSharpAsyncOfUnitWithYieldMethod,
+                },
             };
         }
     }
@@ -3295,7 +3295,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                             async (context) =>
                             {
                                 return await next(context);
-                            }
+                            },
                     }
                 ),
             }
@@ -3342,7 +3342,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                             async (context) =>
                             {
                                 return await next(context);
-                            }
+                            },
                     }
                 ),
             }
@@ -3410,12 +3410,13 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 new object[] { (Func<Task<TodoStruct>>)TaskOfStructWithYieldMethod },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<TodoStruct>>)FSharpAsyncOfStructMethod
+                    (Func<FSharp.Control.FSharpAsync<TodoStruct>>)FSharpAsyncOfStructMethod,
                 },
                 new object[]
                 {
-                    (Func<FSharp.Control.FSharpAsync<TodoStruct>>)FSharpAsyncOfStructWithYieldMethod
-                }
+                    (Func<FSharp.Control.FSharpAsync<TodoStruct>>)
+                        FSharpAsyncOfStructWithYieldMethod,
+                },
             };
         }
     }
@@ -3447,7 +3448,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                             async (context) =>
                             {
                                 return await next(context);
-                            }
+                            },
                     }
                 ),
             }
@@ -3513,7 +3514,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         var customMetadata = new CustomEndpointMetadata();
         var options = new RequestDelegateFactoryOptions
         {
-            EndpointBuilder = CreateEndpointBuilder(new List<object> { customMetadata })
+            EndpointBuilder = CreateEndpointBuilder(new List<object> { customMetadata }),
         };
 
         // Act
@@ -3855,7 +3856,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             RoutePatternFactory.Parse("/test/pattern"),
             order: 0
         );
-        var options = new RequestDelegateFactoryOptions { EndpointBuilder = builder, };
+        var options = new RequestDelegateFactoryOptions { EndpointBuilder = builder };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate, options);
@@ -3886,7 +3887,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         };
         var metadataResult = new RequestDelegateMetadataResult
         {
-            EndpointMetadata = new List<object>()
+            EndpointMetadata = new List<object>(),
         };
         var httpContext = CreateHttpContext();
 
@@ -4162,7 +4163,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                                 Assert.IsType<EmptyHttpResult>(response);
                                 Assert.Same(Results.Empty, response);
                                 return response;
-                            }
+                            },
                     }
                 ),
             }
@@ -4362,7 +4363,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
                 [typeof(IHttpResponseFeature)] = responseFeature,
                 [typeof(IHttpResponseBodyFeature)] = responseFeature,
                 [typeof(IHttpRequestLifetimeFeature)] = new TestHttpRequestLifetimeFeature(),
-            }
+            },
         };
     }
 
@@ -4608,7 +4609,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
             builder.Metadata.Add(
                 new RoutePatternMetadata
                 {
-                    RoutePattern = reb.RoutePattern?.RawText ?? string.Empty
+                    RoutePattern = reb.RoutePattern?.RawText ?? string.Empty,
                 }
             );
         }
@@ -4641,7 +4642,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
         Caller,
         Parameter,
         ReturnType,
-        Property
+        Property,
     }
 
     private class Todo : ITodo

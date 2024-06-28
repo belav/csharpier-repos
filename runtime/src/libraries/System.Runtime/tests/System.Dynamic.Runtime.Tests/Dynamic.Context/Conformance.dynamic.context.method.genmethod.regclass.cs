@@ -519,7 +519,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             {
                 new InnerTest() { Field = 0 },
                 new InnerTest() { Field = 1 },
-                null
+                null,
             };
             private int _index = -1;
             #region IEnumerator<InnerTest> Members
@@ -631,7 +631,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.method.genmetho
             var tc = new
             {
                 A1 = (int)mc.Method_ReturnsInt<int>(0),
-                A2 = (string)mc.Method_ReturnsString<int, int>(1, 2)
+                A2 = (string)mc.Method_ReturnsString<int, int>(1, 2),
             };
             if (tc != null && tc.A1 == 1 && tc.A2 == "foo")
                 return 0;

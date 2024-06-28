@@ -52,7 +52,7 @@ public class DbSetInitializerTest
                     typeof(string),
                     setterFactory.Create(typeof(JustAContext).GetAnyProperty("Three"))
                 ),
-                new DbSetProperty("Four", typeof(string), null)
+                new DbSetProperty("Four", typeof(string), null),
             };
         }
     }

@@ -30,6 +30,6 @@ namespace Microsoft.Build.BuildEngine
     public enum ProjectLoadSettings
     {
         None,
-        IgnoreMissingImports
+        IgnoreMissingImports,
     }
 }

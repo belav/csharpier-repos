@@ -414,7 +414,7 @@ namespace System.Reflection.Emit
             // support for MethodImplAttribute PCA
             return new object[]
             {
-                new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags())
+                new MethodImplAttribute((MethodImplOptions)GetMethodImplementationFlags()),
             };
         }
 

@@ -25,7 +25,7 @@ namespace System.ComponentModel.Tests
             {
                 LocalizableAttribute.No,
                 new LocalizableAttribute(false),
-                true
+                true,
             };
             yield return new object[] { LocalizableAttribute.Yes, LocalizableAttribute.No, false };
 

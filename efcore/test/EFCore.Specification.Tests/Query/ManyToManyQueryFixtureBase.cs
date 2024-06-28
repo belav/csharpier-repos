@@ -384,7 +384,7 @@ public abstract class ManyToManyQueryFixtureBase
             {
                 e.Key1,
                 e.Key2,
-                e.Key3
+                e.Key3,
             });
         modelBuilder.Entity<EntityRoot>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<EntityBranch>().HasBaseType<EntityRoot>();
@@ -403,7 +403,7 @@ public abstract class ManyToManyQueryFixtureBase
             {
                 e.Key1,
                 e.Key2,
-                e.Key3
+                e.Key3,
             });
         modelBuilder.Entity<UnidirectionalEntityRoot>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<UnidirectionalEntityBranch>().HasBaseType<UnidirectionalEntityRoot>();
@@ -545,7 +545,7 @@ public abstract class ManyToManyQueryFixtureBase
                         {
                             e.CompositeId1,
                             e.CompositeId2,
-                            e.CompositeId3
+                            e.CompositeId3,
                         })
                         .IsRequired(),
                 r => r.HasOne(x => x.Three).WithMany(x => x.JoinCompositeKeyFull).IsRequired()
@@ -577,7 +577,7 @@ public abstract class ManyToManyQueryFixtureBase
                         {
                             e.CompositeId1,
                             e.CompositeId2,
-                            e.CompositeId3
+                            e.CompositeId3,
                         })
             );
 
@@ -699,7 +699,7 @@ public abstract class ManyToManyQueryFixtureBase
                         {
                             e.CompositeId1,
                             e.CompositeId2,
-                            e.CompositeId3
+                            e.CompositeId3,
                         })
                         .IsRequired(),
                 r => r.HasOne(x => x.Three).WithMany(x => x.JoinCompositeKeyFull).IsRequired()
@@ -731,7 +731,7 @@ public abstract class ManyToManyQueryFixtureBase
                         {
                             e.CompositeId1,
                             e.CompositeId2,
-                            e.CompositeId3
+                            e.CompositeId3,
                         })
             );
 

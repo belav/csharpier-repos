@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         new object[]
                         {
                             name,
-                            ((MissingMetadataTypeSymbol)hostObjectType).ContainingAssembly.Identity
+                            ((MissingMetadataTypeSymbol)hostObjectType).ContainingAssembly.Identity,
                         },
                         ImmutableArray<Symbol>.Empty,
                         ImmutableArray<Location>.Empty

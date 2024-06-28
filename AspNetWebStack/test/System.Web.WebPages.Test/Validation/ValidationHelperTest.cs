@@ -687,7 +687,7 @@ namespace System.Web.WebPages.Validation.Test
             var clientRules = new ModelClientValidationRule
             {
                 ValidationType = "foo",
-                ErrorMessage = "Foo error."
+                ErrorMessage = "Foo error.",
             };
             clientRules.ValidationParameters["qux"] = "some data";
             validator.Setup(c => c.ClientValidationRule).Returns(clientRules).Verifiable();
@@ -714,7 +714,7 @@ namespace System.Web.WebPages.Validation.Test
             var clientRules = new ModelClientValidationRule
             {
                 ValidationType = "biz",
-                ErrorMessage = "<Biz error.>"
+                ErrorMessage = "<Biz error.>",
             };
             clientRules.ValidationParameters["qux"] = "<some ' data>";
             validator.Setup(c => c.ClientValidationRule).Returns(clientRules).Verifiable();

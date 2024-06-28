@@ -266,7 +266,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// A collection of data points.
     /// </summary>
-    [SRDescription("DescriptionAttributeDataPointCollection_DataPointCollection"),]
+    [SRDescription("DescriptionAttributeDataPointCollection_DataPointCollection")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

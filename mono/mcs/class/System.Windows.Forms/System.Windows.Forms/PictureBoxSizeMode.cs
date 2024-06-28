@@ -32,6 +32,6 @@ namespace System.Windows.Forms
         StretchImage = 1,
         AutoSize = 2,
         CenterImage = 3,
-        Zoom = 4
+        Zoom = 4,
     }
 }

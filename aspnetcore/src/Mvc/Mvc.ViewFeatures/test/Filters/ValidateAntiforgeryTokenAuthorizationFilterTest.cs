@@ -75,7 +75,7 @@ public class ValidateAntiforgeryTokenAuthorizationFilterTest
 
         var context = new AuthorizationFilterContext(
             actionContext,
-            new IFilterMetadata[] { filter, new IgnoreAntiforgeryTokenAttribute(), }
+            new IFilterMetadata[] { filter, new IgnoreAntiforgeryTokenAttribute() }
         );
 
         // Act

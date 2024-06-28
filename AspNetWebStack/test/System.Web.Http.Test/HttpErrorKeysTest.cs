@@ -21,7 +21,7 @@ namespace System.Web.Http
                     { () => HttpErrorKeys.StackTraceKey, "StackTrace" },
                     { () => HttpErrorKeys.InnerExceptionKey, "InnerException" },
                     { () => HttpErrorKeys.MessageLanguageKey, "MessageLanguage" },
-                    { () => HttpErrorKeys.ErrorCodeKey, "ErrorCode" }
+                    { () => HttpErrorKeys.ErrorCodeKey, "ErrorCode" },
                 };
             }
         }

@@ -138,7 +138,7 @@ namespace System.Xml.Linq.Tests
             {
                 new XDeclaration("1.0", "UFT8", "false"),
                 new XElement("E"),
-                "x"
+                "x",
             };
             yield return new object[] { "", new XElement("E"), "x" };
             yield return new object[] { new XElement("E"), new XAttribute("a", "A"), "y" };
@@ -146,7 +146,7 @@ namespace System.Xml.Linq.Tests
             {
                 new XElement("E"),
                 new XDeclaration("1.0", "UFT8", "false"),
-                "y"
+                "y",
             };
             yield return new object[] { new XElement("E"), "", "y" };
         }

@@ -150,7 +150,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                     Name = "Electric scooter",
                     SeatingCapacity = 1,
                     Engine = new Engine(),
-                    Operator = new Operator { Name = "Kai Saunders" }
+                    Operator = new Operator { Name = "Kai Saunders" },
                 }
             );
 
@@ -212,8 +212,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                     Operator = new Operator
                     {
                         Name = "Kai Saunders",
-                        Details = new OperatorDetails()
-                    }
+                        Details = new OperatorDetails(),
+                    },
                 }
             );
 
@@ -266,7 +266,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                 {
                     Name = "Electric scooter",
                     SeatingCapacity = 1,
-                    Operator = new Operator { Name = "Kai Saunders" }
+                    Operator = new Operator { Name = "Kai Saunders" },
                 }
             );
 
@@ -367,8 +367,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                     Operator = new Operator
                     {
                         Name = "Kai Saunders",
-                        Details = new OperatorDetails()
-                    }
+                        Details = new OperatorDetails(),
+                    },
                 }
             );
 
@@ -578,8 +578,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                     Operator = new LicensedOperator
                     {
                         Name = "Jack Jackson",
-                        LicenseType = "Class A CDC"
-                    }
+                        LicenseType = "Class A CDC",
+                    },
                 }
             );
             await context.AddAsync(
@@ -587,7 +587,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                 {
                     Capacity = 10000_1,
                     FuelType = "Gas",
-                    VehicleName = "Fuel transport"
+                    VehicleName = "Fuel transport",
                 }
             );
 
@@ -689,7 +689,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
             {
                 Name = "Trek Pro Fit Madone 6 Series",
                 Operator = bike.Operator,
-                SeatingCapacity = 2
+                SeatingCapacity = 2,
             };
 
             context.Remove(bike);
@@ -743,7 +743,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
             {
                 Name = "Trek Pro Fit Madone 6 Series",
                 Operator = new LicensedOperator { Name = "repairman", LicenseType = "Repair" },
-                SeatingCapacity = 2
+                SeatingCapacity = 2,
             };
 
             context.Remove(bike);
@@ -860,7 +860,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
 
         var meterReading = new MeterReading
         {
-            MeterReadingDetails = new MeterReadingDetail { CurrentRead = "100" }
+            MeterReadingDetails = new MeterReadingDetail { CurrentRead = "100" },
         };
 
         await context.AddAsync(meterReading);
@@ -1016,8 +1016,8 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
                     {
                         Status = OrderStatus.Pending,
                         ShippingAddress = "221 B Baker St, London",
-                        BillingAddress = "11 Wall Street, New York"
-                    }
+                        BillingAddress = "11 Wall Street, New York",
+                    },
                 }
             );
 
@@ -1044,7 +1044,7 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
     public enum OrderStatus
     {
         Pending,
-        Shipped
+        Shipped,
     }
 
     public void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction) =>
@@ -1206,6 +1206,6 @@ public abstract class TableSplittingTestBase : NonSharedModelTestBase
     protected enum MeterReadingStatus
     {
         Running = 0,
-        NotAccesible = 2
+        NotAccesible = 2,
     }
 }

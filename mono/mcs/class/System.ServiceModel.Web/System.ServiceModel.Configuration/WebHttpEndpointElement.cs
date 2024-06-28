@@ -196,7 +196,7 @@ namespace System.ServiceModel.Configuration
                     automatic_format_selection_enabled,
                     default_outgoing_response_format,
                     fault_exception_enabled,
-                    help_enabled
+                    help_enabled,
                 }
             )
                 properties.Add(item);

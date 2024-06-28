@@ -20,7 +20,7 @@ public class SaveTempDataFilterTest
             return new TheoryData<IActionResult>()
             {
                 new TestActionResult(),
-                new TestKeepTempDataActionResult()
+                new TestKeepTempDataActionResult(),
             };
         }
     }

@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_None)
                     {
-                        Attribute = new Variation("HasValue On None")
+                        Attribute = new Variation("HasValue On None"),
                     }
                 );
             }
@@ -26,7 +26,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_Element)
                     {
-                        Attribute = new Variation("HasValue On Element") { Pri = 0 }
+                        Attribute = new Variation("HasValue On Element") { Pri = 0 },
                     }
                 );
             }
@@ -38,7 +38,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "Get node with a scalar value, verify the value with valid ReadString"
-                        )
+                        ),
                     }
                 );
             }
@@ -48,7 +48,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_Attribute)
                     {
-                        Attribute = new Variation("HasValue On Attribute") { Pri = 0 }
+                        Attribute = new Variation("HasValue On Attribute") { Pri = 0 },
                     }
                 );
             }
@@ -58,7 +58,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_Text)
                     {
-                        Attribute = new Variation("HasValue On Text") { Pri = 0 }
+                        Attribute = new Variation("HasValue On Text") { Pri = 0 },
                     }
                 );
             }
@@ -68,7 +68,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_CDATA)
                     {
-                        Attribute = new Variation("HasValue On CDATA") { Pri = 0 }
+                        Attribute = new Variation("HasValue On CDATA") { Pri = 0 },
                     }
                 );
             }
@@ -78,7 +78,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_ProcessingInstruction)
                     {
-                        Attribute = new Variation("HasValue On ProcessingInstruction") { Pri = 0 }
+                        Attribute = new Variation("HasValue On ProcessingInstruction") { Pri = 0 },
                     }
                 );
             }
@@ -88,7 +88,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_Comment)
                     {
-                        Attribute = new Variation("HasValue On Comment") { Pri = 0 }
+                        Attribute = new Variation("HasValue On Comment") { Pri = 0 },
                     }
                 );
             }
@@ -102,8 +102,8 @@ namespace System.Xml.Tests
                             "HasValue On Whitespace PreserveWhitespaces = true"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -113,7 +113,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_EndElement)
                     {
-                        Attribute = new Variation("HasValue On EndElement")
+                        Attribute = new Variation("HasValue On EndElement"),
                     }
                 );
             }
@@ -123,7 +123,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_XmlDeclaration)
                     {
-                        Attribute = new Variation("HasValue On XmlDeclaration") { Pri = 0 }
+                        Attribute = new Variation("HasValue On XmlDeclaration") { Pri = 0 },
                     }
                 );
             }
@@ -133,7 +133,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_EntityReference)
                     {
-                        Attribute = new Variation("HasValue On EntityReference")
+                        Attribute = new Variation("HasValue On EntityReference"),
                     }
                 );
             }
@@ -143,7 +143,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestHasValueNodeType_EndEntity)
                     {
-                        Attribute = new Variation("HasValue On EndEntity")
+                        Attribute = new Variation("HasValue On EndEntity"),
                     }
                 );
             }
@@ -153,7 +153,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v13)
                     {
-                        Attribute = new Variation("PI Value containing surrogates") { Pri = 0 }
+                        Attribute = new Variation("PI Value containing surrogates") { Pri = 0 },
                     }
                 );
             }

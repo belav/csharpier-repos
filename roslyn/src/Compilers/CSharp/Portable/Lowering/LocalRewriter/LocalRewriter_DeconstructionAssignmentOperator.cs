@@ -560,7 +560,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     type: outputPlaceholder.Type
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 temps.Add(localSymbol);

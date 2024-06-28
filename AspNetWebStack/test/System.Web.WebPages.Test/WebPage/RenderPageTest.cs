@@ -693,7 +693,7 @@ namespace System.Web.WebPages.Test
                             {
                                 bar = "world",
                                 x = "good",
-                                y = "bye"
+                                y = "bye",
                             }
                         )
                     );
@@ -774,7 +774,7 @@ namespace System.Web.WebPages.Test
                             {
                                 { "bar", "world" },
                                 { "x", "good" },
-                                { "y", "bye" }
+                                { "y", "bye" },
                             }
                         )
                     );

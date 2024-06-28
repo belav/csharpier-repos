@@ -100,7 +100,7 @@ namespace Mono.Cecil.Binary
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             Lfanew = 128;
             End = new byte[64]
@@ -168,7 +168,7 @@ namespace Mono.Cecil.Binary
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
         }
 

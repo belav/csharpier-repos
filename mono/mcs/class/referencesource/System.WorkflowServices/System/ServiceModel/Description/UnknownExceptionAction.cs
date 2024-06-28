@@ -11,6 +11,6 @@ namespace System.ServiceModel.Description
     public enum UnknownExceptionAction
     {
         TerminateInstance = 0,
-        AbortInstance
+        AbortInstance,
     }
 }

@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.InlineHints
         {
             Literal,
             ObjectCreation,
-            Other
+            Other,
         }
 
         protected abstract void AddAllParameterNameHintLocations(
@@ -383,11 +383,11 @@ namespace Microsoft.CodeAnalysis.InlineHints
             ISyntaxFactsService syntaxFacts
         )
         {
-            var identifierNameSyntax = syntaxFacts.IsArgument(argument)
-                ? syntaxFacts.GetExpressionOfArgument(argument)
+            var identifierNameSyntax =
+                syntaxFacts.IsArgument(argument) ? syntaxFacts.GetExpressionOfArgument(argument)
                 : syntaxFacts.IsAttributeArgument(argument)
                     ? syntaxFacts.GetExpressionOfAttributeArgument(argument)
-                    : null;
+                : null;
 
             if (!syntaxFacts.IsIdentifierName(identifierNameSyntax))
                 return string.Empty;

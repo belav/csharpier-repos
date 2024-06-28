@@ -132,7 +132,7 @@ namespace System.ServiceModel.Channels
             None = 0,
             Address = 1,
             Port = 2,
-            All = 3
+            All = 3,
         }
     }
 }

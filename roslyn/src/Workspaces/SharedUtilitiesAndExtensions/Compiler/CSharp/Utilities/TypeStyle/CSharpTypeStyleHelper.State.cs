@@ -63,11 +63,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             public NotificationOption2 GetDiagnosticSeverityPreference() =>
-                IsInIntrinsicTypeContext
-                    ? _forBuiltInTypes
-                    : IsTypeApparentInContext
-                        ? _whenTypeIsApparent
-                        : _elsewhere;
+                IsInIntrinsicTypeContext ? _forBuiltInTypes
+                : IsTypeApparentInContext ? _whenTypeIsApparent
+                : _elsewhere;
 
             /// <summary>
             /// Returns true if type information could be gleaned by simply looking at the given statement.

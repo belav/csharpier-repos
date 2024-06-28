@@ -79,7 +79,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return new DependencyList(
                 new DependencyListEntry[]
                 {
-                    new DependencyListEntry(_targetMethod, "Delegate target method")
+                    new DependencyListEntry(_targetMethod, "Delegate target method"),
                 }
             );
         }

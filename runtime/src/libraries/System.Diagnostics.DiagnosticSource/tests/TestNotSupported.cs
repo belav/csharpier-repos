@@ -42,7 +42,7 @@ namespace System.Diagnostics.Metrics.Tests
                                 InstrumentPublished = (instruments, theListener) =>
                                     instrumentsPublished = true,
                                 MeasurementsCompleted = (instruments, state) =>
-                                    instrumentCompleted = true
+                                    instrumentCompleted = true,
                             }
                         )
                         {

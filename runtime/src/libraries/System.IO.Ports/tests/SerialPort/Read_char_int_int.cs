@@ -37,7 +37,7 @@ namespace System.IO.Ports.Tests
         {
             NonBuffered,
             Buffered,
-            BufferedAndNonBuffered
+            BufferedAndNonBuffered,
         };
 
         #region Test Cases

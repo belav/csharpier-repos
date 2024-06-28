@@ -27,8 +27,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ValueProvider = new SimpleValueProvider
                 {
                     { "someName[0]", new KeyValuePair<int, string>(42, "forty-two") },
-                    { "someName[1]", new KeyValuePair<int, string>(84, "eighty-four") }
-                }
+                    { "someName[1]", new KeyValuePair<int, string>(84, "eighty-four") },
+                },
             };
 
             Mock<IExtensibleModelBinder> mockKvpBinder = new Mock<IExtensibleModelBinder>();

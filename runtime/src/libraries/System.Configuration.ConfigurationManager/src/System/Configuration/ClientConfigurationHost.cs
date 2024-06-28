@@ -399,11 +399,10 @@ namespace System.Configuration
             {
                 throw allowExeDefinition switch
                 {
-                    ConfigurationAllowExeDefinition.MachineOnly =>
-                        new ConfigurationErrorsException(
-                            SR.Config_allow_exedefinition_error_machine,
-                            errorInfo
-                        ),
+                    ConfigurationAllowExeDefinition.MachineOnly => new ConfigurationErrorsException(
+                        SR.Config_allow_exedefinition_error_machine,
+                        errorInfo
+                    ),
                     ConfigurationAllowExeDefinition.MachineToApplication =>
                         new ConfigurationErrorsException(
                             SR.Config_allow_exedefinition_error_application,
@@ -417,10 +416,9 @@ namespace System.Configuration
 
                     // If we have extended ConfigurationAllowExeDefinition
                     // make sure to update this switch accordingly
-                    _ =>
-                        ExceptionUtil.UnexpectedError(
-                            "ClientConfigurationHost::VerifyDefinitionAllowed"
-                        ),
+                    _ => ExceptionUtil.UnexpectedError(
+                        "ClientConfigurationHost::VerifyDefinitionAllowed"
+                    ),
                 };
             }
         }

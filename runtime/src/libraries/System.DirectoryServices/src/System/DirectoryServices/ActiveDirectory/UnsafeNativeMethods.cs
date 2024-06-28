@@ -41,7 +41,7 @@ namespace System.DirectoryServices.ActiveDirectory
         DS_REPL_INFO_CURSORS_2_FOR_NC = 7,
         DS_REPL_INFO_CURSORS_3_FOR_NC = 8,
         DS_REPL_INFO_METADATA_2_FOR_OBJ = 9,
-        DS_REPL_INFO_METADATA_2_FOR_ATTR_VALUE = 10
+        DS_REPL_INFO_METADATA_2_FOR_ATTR_VALUE = 10,
     }
 
     public enum ReplicationOperationType
@@ -50,7 +50,7 @@ namespace System.DirectoryServices.ActiveDirectory
         Add = 1,
         Delete = 2,
         Modify = 3,
-        UpdateReference = 4
+        UpdateReference = 4,
     }
 
     internal enum DS_NAME_ERROR
@@ -62,7 +62,7 @@ namespace System.DirectoryServices.ActiveDirectory
         DS_NAME_ERROR_NO_MAPPING = 4,
         DS_NAME_ERROR_DOMAIN_ONLY = 5,
         DS_NAME_ERROR_NO_SYNTACTICAL_MAPPING = 6,
-        DS_NAME_ERROR_TRUST_REFERRAL = 7
+        DS_NAME_ERROR_TRUST_REFERRAL = 7,
     }
 
     [Flags]
@@ -73,7 +73,7 @@ namespace System.DirectoryServices.ActiveDirectory
         DS_DOMAIN_TREE_ROOT = 0x0004,
         DS_DOMAIN_PRIMARY = 0x0008,
         DS_DOMAIN_NATIVE_MODE = 0x0010,
-        DS_DOMAIN_DIRECT_INBOUND = 0x0020
+        DS_DOMAIN_DIRECT_INBOUND = 0x0020,
     }
 
     internal enum LSA_FOREST_TRUST_RECORD_TYPE
@@ -81,14 +81,14 @@ namespace System.DirectoryServices.ActiveDirectory
         ForestTrustTopLevelName,
         ForestTrustTopLevelNameEx,
         ForestTrustDomainInfo,
-        ForestTrustRecordTypeLast
+        ForestTrustRecordTypeLast,
     }
 
     public enum ForestTrustCollisionType
     {
         TopLevelName,
         Domain,
-        Other
+        Other,
     }
 
     [Flags]
@@ -97,7 +97,7 @@ namespace System.DirectoryServices.ActiveDirectory
         None = 0,
         NewlyCreated = 1,
         DisabledByAdmin = 2,
-        DisabledByConflict = 4
+        DisabledByConflict = 4,
     }
 
     [Flags]
@@ -107,7 +107,7 @@ namespace System.DirectoryServices.ActiveDirectory
         SidDisabledByAdmin = 1,
         SidDisabledByConflict = 2,
         NetBiosNameDisabledByAdmin = 4,
-        NetBiosNameDisabledByConflict = 8
+        NetBiosNameDisabledByConflict = 8,
     }
 
     /*
@@ -137,7 +137,7 @@ namespace System.DirectoryServices.ActiveDirectory
         DsRole_WorkstationWithSharedAccountDomain,
         DsRole_ServerWithSharedAccountDomain,
         DsRole_MemberWorkstationWithSharedAccountDomain,
-        DsRole_MemberServerWithSharedAccountDomain
+        DsRole_MemberServerWithSharedAccountDomain,
     }
 
     /*
@@ -155,7 +155,7 @@ namespace System.DirectoryServices.ActiveDirectory
         DsRolePrimaryDomainInfoBasic = 1,
         DsRoleUpgradeStatus = 2,
         DsRoleOperationState = 3,
-        DsRolePrimaryDomainInfoBasicEx = 4
+        DsRolePrimaryDomainInfoBasicEx = 4,
     }
 
     [StructLayout(LayoutKind.Sequential)]

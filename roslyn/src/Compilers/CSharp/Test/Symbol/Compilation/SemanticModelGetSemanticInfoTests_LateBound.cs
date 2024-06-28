@@ -546,7 +546,7 @@ class C
                 WellKnownMemberNames.UnaryNegationOperatorName,
                 WellKnownMemberNames.UnaryPlusOperatorName,
                 WellKnownMemberNames.IncrementOperatorName,
-                WellKnownMemberNames.DecrementOperatorName
+                WellKnownMemberNames.DecrementOperatorName,
             };
 
             for (int i = 0; i < operators.Length; i++)
@@ -632,7 +632,7 @@ class C
                     "&",
                     "|",
                     "&&",
-                    "||"
+                    "||",
                 }
             )
             {

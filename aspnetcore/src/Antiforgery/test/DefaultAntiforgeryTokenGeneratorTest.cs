@@ -427,7 +427,7 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
         {
             SecurityToken = cookieToken.SecurityToken,
             Username = embeddedUsername,
-            IsCookieToken = false
+            IsCookieToken = false,
         };
 
         var mockClaimUidExtractor = new Mock<IClaimUidExtractor>();
@@ -471,7 +471,7 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
         {
             SecurityToken = cookieToken.SecurityToken,
             IsCookieToken = false,
-            ClaimUid = new BinaryBlob(256)
+            ClaimUid = new BinaryBlob(256),
         };
 
         var differentToken = new BinaryBlob(256);
@@ -517,7 +517,7 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
             SecurityToken = cookieToken.SecurityToken,
             Username = String.Empty,
             IsCookieToken = false,
-            AdditionalData = "some-additional-data"
+            AdditionalData = "some-additional-data",
         };
 
         var mockAdditionalDataProvider = new Mock<IAntiforgeryAdditionalDataProvider>();
@@ -560,7 +560,7 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
             SecurityToken = cookieToken.SecurityToken,
             Username = String.Empty,
             IsCookieToken = false,
-            AdditionalData = "some-additional-data"
+            AdditionalData = "some-additional-data",
         };
 
         var mockAdditionalDataProvider = new Mock<IAntiforgeryAdditionalDataProvider>();
@@ -601,7 +601,7 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
             SecurityToken = cookieToken.SecurityToken,
             Username = "THE-USER",
             IsCookieToken = false,
-            AdditionalData = "some-additional-data"
+            AdditionalData = "some-additional-data",
         };
 
         var mockAdditionalDataProvider = new Mock<IAntiforgeryAdditionalDataProvider>();
@@ -641,7 +641,7 @@ public class DefaultAntiforgeryTokenGeneratorProviderTest
         {
             SecurityToken = cookieToken.SecurityToken,
             IsCookieToken = false,
-            ClaimUid = new BinaryBlob(256)
+            ClaimUid = new BinaryBlob(256),
         };
 
         var mockClaimUidExtractor = new Mock<IClaimUidExtractor>();

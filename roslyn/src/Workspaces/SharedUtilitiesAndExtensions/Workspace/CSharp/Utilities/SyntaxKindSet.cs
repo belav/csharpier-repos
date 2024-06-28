@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             SyntaxKind.StaticKeyword,
             SyntaxKind.UnsafeKeyword,
             SyntaxKind.ReadOnlyKeyword,
-            SyntaxKind.RefKeyword
+            SyntaxKind.RefKeyword,
         };
 
         public static readonly ISet<SyntaxKind> AllMemberModifiers = new HashSet<SyntaxKind>(

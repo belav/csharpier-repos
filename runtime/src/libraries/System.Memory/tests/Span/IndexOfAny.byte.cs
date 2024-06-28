@@ -413,7 +413,7 @@ namespace System.SpanTests
                             a[targetIndex],
                             a[targetIndex + 1],
                             a[targetIndex + 2],
-                            a[targetIndex + 3]
+                            a[targetIndex + 3],
                         }
                     );
                     int idx = IndexOfAny(span, values);

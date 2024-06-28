@@ -47,11 +47,9 @@ namespace System.IdentityModel.Tokens
         static byte DecodeHex(char c)
         {
             return (byte)(
-                c <= '9'
-                    ? c - '0'
-                    : c <= 'F'
-                        ? c - 'A' + 10
-                        : c - 'a' + 10
+                c <= '9' ? c - '0'
+                : c <= 'F' ? c - 'A' + 10
+                : c - 'a' + 10
             );
         }
 

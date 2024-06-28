@@ -28,7 +28,7 @@ public class IcuShardingTests2 : IcuTestsBase
                     "icudt.dat",
                     $@"new Locale[] {{
                                     new Locale(""en-GB"", ""{SundayNames.English}""), new Locale(""zh-CN"", ""{SundayNames.Chinese}""), new Locale(""sk-SK"", ""{SundayNames.Slovak}""),
-                                    new Locale(""xx-yy"", null) }}"
+                                    new Locale(""xx-yy"", null) }}",
                 },
                 new object[] { "icudt_EFIGS.dat", GetEfigsTestedLocales() },
                 new object[] { "icudt_CJK.dat", GetCjkTestedLocales() },

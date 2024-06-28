@@ -29,6 +29,6 @@ namespace System.DirectoryServices.ActiveDirectory
         Add,
         Delete,
         Modify,
-        UpdateReference
+        UpdateReference,
     }
 }

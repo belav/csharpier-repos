@@ -184,7 +184,7 @@ namespace System.Security.Cryptography.Xml
                                     xmlNamespaceManager
                                 )!
                                 .InnerText
-                        )
+                        ),
                     }
                 );
             }

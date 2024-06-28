@@ -138,7 +138,7 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         NotSupportedReason.MultiDimArraysNotSupported => MultiDimArraysNotSupported,
                         NotSupportedReason.NullableUnderlyingTypeNotSupported =>
                             NullableUnderlyingTypeNotSupported,
-                        _ => throw new InvalidOperationException()
+                        _ => throw new InvalidOperationException(),
                     };
             }
         }

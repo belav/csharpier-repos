@@ -322,7 +322,7 @@ namespace Microsoft.VisualBasic
                 "readonly",
                 "synclock",
                 "uinteger",
-                "widening"
+                "widening",
             },
             new string[]
             { // 9 characters
@@ -367,7 +367,7 @@ namespace Microsoft.VisualBasic
                 "notoverridable",
             },
             null, // 15 characters
-            new string[] { "class_initialize", }
+            new string[] { "class_initialize" },
         };
 
         internal VBCodeGenerator() { }
@@ -3613,7 +3613,7 @@ namespace Microsoft.VisualBasic
                         "Protected",
                         "Protected Friend",
                         "Friend",
-                        "Private"
+                        "Private",
                     };
                 }
 
@@ -3636,7 +3636,7 @@ namespace Microsoft.VisualBasic
                         (object)MemberAttributes.Family,
                         (object)MemberAttributes.FamilyOrAssembly,
                         (object)MemberAttributes.Assembly,
-                        (object)MemberAttributes.Private
+                        (object)MemberAttributes.Private,
                     };
                 }
 
@@ -3705,7 +3705,7 @@ namespace Microsoft.VisualBasic
                     values = new object[]
                     {
                         (object)TypeAttributes.Public,
-                        (object)TypeAttributes.NotPublic
+                        (object)TypeAttributes.NotPublic,
                     };
                 }
 

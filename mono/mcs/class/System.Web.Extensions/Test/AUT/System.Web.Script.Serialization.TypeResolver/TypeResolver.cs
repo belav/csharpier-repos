@@ -35,6 +35,6 @@ namespace System.Web.Script.Serialization.TypeResolver.CS
         Black,
         White,
         Blue,
-        Red
+        Red,
     }
 }

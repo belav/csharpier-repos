@@ -138,7 +138,7 @@ namespace System.Web.UI
                                 controlTypeName,
                                 _itemType.FullName,
                                 tagName,
-                                childType.FullName
+                                childType.FullName,
                             }
                         )
                     );

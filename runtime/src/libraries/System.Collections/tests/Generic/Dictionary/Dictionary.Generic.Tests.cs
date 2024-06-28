@@ -670,12 +670,12 @@ namespace System.Collections.Tests
             var s_64bit = new string[]
             {
                 "95e85f8e-67a3-4367-974f-dd24d8bb2ca2",
-                "eb3d6fe9-de64-43a9-8f58-bddea727b1ca"
+                "eb3d6fe9-de64-43a9-8f58-bddea727b1ca",
             };
             var s_32bit = new string[]
             {
                 "25b1f130-7517-48e3-96b0-9da44e8bfe0e",
-                "ba5a3625-bc38-4bf1-a707-a3cfe2158bae"
+                "ba5a3625-bc38-4bf1-a707-a3cfe2158bae",
             };
             string[] chained = (Environment.Is64BitProcess ? s_64bit : s_32bit).ToArray();
             dictionary.Add(chained[0], 0);

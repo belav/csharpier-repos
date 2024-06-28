@@ -275,7 +275,7 @@ namespace Mono.CSharp
             {
                 "method",
                 "param",
-                "return"
+                "return",
             };
 
             internal const string Prefix = "set_";
@@ -535,11 +535,9 @@ namespace Mono.CSharp
         {
             get
             {
-                return (get != null && set != null)
-                    ? Variance.None
-                    : set == null
-                        ? Variance.Covariant
-                        : Variance.Contravariant;
+                return (get != null && set != null) ? Variance.None
+                    : set == null ? Variance.Covariant
+                    : Variance.Contravariant;
             }
         }
 
@@ -1054,11 +1052,9 @@ namespace Mono.CSharp
                 parent,
                 type,
                 mod,
-                parent.PartialContainer.Kind == MemberKind.Interface
-                    ? AllowedModifiersInterface
-                    : parent.PartialContainer.Kind == MemberKind.Struct
-                        ? AllowedModifiersStruct
-                        : AllowedModifiersClass,
+                parent.PartialContainer.Kind == MemberKind.Interface ? AllowedModifiersInterface
+                    : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
+                    : AllowedModifiersClass,
                 name,
                 attrs
             ) { }
@@ -1373,7 +1369,7 @@ namespace Mono.CSharp
                 {
                     block = new ToplevelBlock(Compiler, ParameterInfo, Location)
                     {
-                        IsCompilerGenerated = true
+                        IsCompilerGenerated = true,
                     };
                     FabricateBodyStatement();
                 }
@@ -1717,7 +1713,7 @@ namespace Mono.CSharp
             {
                 "method",
                 "param",
-                "return"
+                "return",
             };
 
             public const string AddPrefix = "add_";
@@ -1853,11 +1849,9 @@ namespace Mono.CSharp
                 parent,
                 type,
                 mod_flags,
-                parent.PartialContainer.Kind == MemberKind.Interface
-                    ? AllowedModifiersInterface
-                    : parent.PartialContainer.Kind == MemberKind.Struct
-                        ? AllowedModifiersStruct
-                        : AllowedModifiersClass,
+                parent.PartialContainer.Kind == MemberKind.Interface ? AllowedModifiersInterface
+                    : parent.PartialContainer.Kind == MemberKind.Struct ? AllowedModifiersStruct
+                    : AllowedModifiersClass,
                 name,
                 attrs
             ) { }

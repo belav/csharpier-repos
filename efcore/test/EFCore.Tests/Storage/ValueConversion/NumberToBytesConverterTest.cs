@@ -353,7 +353,7 @@ public class NumberToBytesConverterTest
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(decimal.MaxValue)
         );
@@ -375,7 +375,7 @@ public class NumberToBytesConverterTest
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(long.MaxValue)
         );
@@ -397,7 +397,7 @@ public class NumberToBytesConverterTest
                 0x7F,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(int.MaxValue)
         );
@@ -419,7 +419,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x7F,
-                0xFF
+                0xFF,
             },
             converter(short.MaxValue)
         );
@@ -441,7 +441,7 @@ public class NumberToBytesConverterTest
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(decimal.MinValue)
         );
@@ -463,7 +463,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             },
             converter((decimal)0.000000001)
         );
@@ -485,7 +485,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             },
             converter((decimal)0.00000000000000000001)
         );
@@ -507,7 +507,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             },
             converter((decimal)-0.00000000000000000001)
         );
@@ -538,7 +538,7 @@ public class NumberToBytesConverterTest
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -562,7 +562,7 @@ public class NumberToBytesConverterTest
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -586,7 +586,7 @@ public class NumberToBytesConverterTest
                     0x7F,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -610,7 +610,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x7F,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -634,7 +634,7 @@ public class NumberToBytesConverterTest
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -658,7 +658,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 }
             )
         );
@@ -682,7 +682,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 }
             )
         );
@@ -706,7 +706,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 }
             )
         );
@@ -738,7 +738,7 @@ public class NumberToBytesConverterTest
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(decimal.MaxValue)
         );
@@ -760,7 +760,7 @@ public class NumberToBytesConverterTest
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(long.MaxValue)
         );
@@ -782,7 +782,7 @@ public class NumberToBytesConverterTest
                 0x7F,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(int.MaxValue)
         );
@@ -804,7 +804,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x7F,
-                0xFF
+                0xFF,
             },
             converter(short.MaxValue)
         );
@@ -826,7 +826,7 @@ public class NumberToBytesConverterTest
                 0xFF,
                 0xFF,
                 0xFF,
-                0xFF
+                0xFF,
             },
             converter(decimal.MinValue)
         );
@@ -848,7 +848,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             },
             converter((decimal?)0.000000001)
         );
@@ -870,7 +870,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             },
             converter((decimal?)0.00000000000000000001)
         );
@@ -892,7 +892,7 @@ public class NumberToBytesConverterTest
                 0x00,
                 0x00,
                 0x00,
-                0x01
+                0x01,
             },
             converter((decimal?)-0.00000000000000000001)
         );
@@ -924,7 +924,7 @@ public class NumberToBytesConverterTest
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -948,7 +948,7 @@ public class NumberToBytesConverterTest
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -972,7 +972,7 @@ public class NumberToBytesConverterTest
                     0x7F,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -996,7 +996,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x7F,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -1020,7 +1020,7 @@ public class NumberToBytesConverterTest
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 }
             )
         );
@@ -1044,7 +1044,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 }
             )
         );
@@ -1068,7 +1068,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 }
             )
         );
@@ -1092,7 +1092,7 @@ public class NumberToBytesConverterTest
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 }
             )
         );

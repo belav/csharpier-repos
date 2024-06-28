@@ -29,17 +29,17 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new object[]
             {
                 new LengthAttribute(0, 0),
-                new Collection<int>(new int[0])
+                new Collection<int>(new int[0]),
             };
             yield return new object[]
             {
                 new LengthAttribute(12, 16),
-                new Collection<int>(new int[14])
+                new Collection<int>(new int[14]),
             };
             yield return new object[]
             {
                 new LengthAttribute(16, 20),
-                new Collection<string>(new string[16])
+                new Collection<string>(new string[16]),
             };
 
             yield return new object[] { new LengthAttribute(0, 2), new List<int>(new int[0]) };
@@ -47,7 +47,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new object[]
             {
                 new LengthAttribute(16, 16),
-                new List<string>(new string[16])
+                new List<string>(new string[16]),
             };
 
             //ICollection<T> but not ICollection
@@ -55,12 +55,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new object[]
             {
                 new LengthAttribute(12, 14),
-                new HashSet<int>(Enumerable.Range(1, 14))
+                new HashSet<int>(Enumerable.Range(1, 14)),
             };
             yield return new object[]
             {
                 new LengthAttribute(16, 20),
-                new HashSet<string>(Enumerable.Range(1, 16).Select(i => i.ToString()))
+                new HashSet<string>(Enumerable.Range(1, 16).Select(i => i.ToString())),
             };
 
             //ICollection but not ICollection<T>
@@ -69,7 +69,7 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new object[]
             {
                 new LengthAttribute(16, 16),
-                new ArrayList(new string[16])
+                new ArrayList(new string[16]),
             };
 
             //Multi ICollection<T>
@@ -92,12 +92,12 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new object[]
             {
                 new LengthAttribute(15, 20),
-                new Collection<byte>(new byte[14])
+                new Collection<byte>(new byte[14]),
             };
             yield return new object[]
             {
                 new LengthAttribute(15, 20),
-                new Collection<byte>(new byte[21])
+                new Collection<byte>(new byte[21]),
             };
             yield return new object[] { new LengthAttribute(15, 20), new List<byte>(new byte[14]) };
             yield return new object[] { new LengthAttribute(15, 20), new List<byte>(new byte[21]) };

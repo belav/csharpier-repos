@@ -1249,7 +1249,7 @@ namespace System.Activities
                 // as part of the RuntimeTransactionHandle processing
                 workflowExecutionProperties = new List<Handle>(1)
                 {
-                    new RuntimeTransactionHandle(ambientTransaction)
+                    new RuntimeTransactionHandle(ambientTransaction),
                 };
             }
 
@@ -1259,7 +1259,7 @@ namespace System.Activities
                 workflowExecutionProperties
             )
             {
-                SynchronizationContext = syncContext
+                SynchronizationContext = syncContext,
             };
 
             bool success = false;
@@ -1813,7 +1813,7 @@ namespace System.Activities
                         Workflow45Namespace.DefinitionIdentityFilter,
                         new InstanceValue(identityFilter)
                     },
-                }
+                },
             };
         }
 
@@ -3531,7 +3531,7 @@ namespace System.Activities
                     {
                         Workflow45Namespace.DefinitionIdentity,
                         new InstanceValue(this.DefinitionIdentity, InstanceValueOptions.Optional)
-                    }
+                    },
                 }
             );
         }
@@ -3692,7 +3692,7 @@ namespace System.Activities
         {
             Complete,
             Save,
-            Unload
+            Unload,
         }
 
         enum WorkflowApplicationState : byte
@@ -3700,7 +3700,7 @@ namespace System.Activities
             Paused,
             Runnable,
             Unloaded,
-            Aborted
+            Aborted,
         }
 
         internal class SynchronousSynchronizationContext : SynchronizationContext
@@ -7338,14 +7338,14 @@ namespace System.Activities
 
             public void Unlock(TimeSpan timeout)
             {
-                SaveWorkflowCommand saveCmd = new SaveWorkflowCommand() { UnlockInstance = true, };
+                SaveWorkflowCommand saveCmd = new SaveWorkflowCommand() { UnlockInstance = true };
 
                 this.store.Execute(this.handle, saveCmd, timeout);
             }
 
             public IAsyncResult BeginUnlock(TimeSpan timeout, AsyncCallback callback, object state)
             {
-                SaveWorkflowCommand saveCmd = new SaveWorkflowCommand() { UnlockInstance = true, };
+                SaveWorkflowCommand saveCmd = new SaveWorkflowCommand() { UnlockInstance = true };
 
                 return this.store.BeginExecute(this.handle, saveCmd, timeout, callback, state);
             }

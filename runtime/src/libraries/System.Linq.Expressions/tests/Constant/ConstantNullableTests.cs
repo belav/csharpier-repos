@@ -47,7 +47,7 @@ namespace System.Linq.Expressions.Tests
                     decimal.One,
                     decimal.MinusOne,
                     decimal.MinValue,
-                    decimal.MaxValue
+                    decimal.MaxValue,
                 }
             )
             {
@@ -70,7 +70,7 @@ namespace System.Linq.Expressions.Tests
                     double.Epsilon,
                     double.NegativeInfinity,
                     double.PositiveInfinity,
-                    double.NaN
+                    double.NaN,
                 }
             )
             {
@@ -100,7 +100,7 @@ namespace System.Linq.Expressions.Tests
                     El.A,
                     El.B,
                     (El)long.MaxValue,
-                    (El)long.MinValue
+                    (El)long.MinValue,
                 }
             )
             {
@@ -123,7 +123,7 @@ namespace System.Linq.Expressions.Tests
                     float.Epsilon,
                     float.NegativeInfinity,
                     float.PositiveInfinity,
-                    float.NaN
+                    float.NaN,
                 }
             )
             {

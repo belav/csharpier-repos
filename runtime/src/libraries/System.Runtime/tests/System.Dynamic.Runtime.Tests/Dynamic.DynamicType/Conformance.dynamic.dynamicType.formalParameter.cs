@@ -232,7 +232,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
                 "",
                 string.Empty,
                 null,
-                "1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1"
+                "1AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA1",
             };
 
             new MyType(d11, 'c', d33);
@@ -277,7 +277,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
     {
         one,
         two,
-        three
+        three,
     }
 
     public delegate void MyDelegate();
@@ -649,7 +649,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.formalParam
     {
         one,
         two,
-        three
+        three,
     }
 
     internal delegate void MyDelegate();

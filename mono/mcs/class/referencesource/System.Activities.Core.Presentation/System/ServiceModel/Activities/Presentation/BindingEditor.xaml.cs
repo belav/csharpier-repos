@@ -48,7 +48,7 @@ namespace System.ServiceModel.Activities.Presentation
                         BindingName = (string)(
                             this.TryFindResource("bindingEditorEmptyBindingLabel") ?? "none"
                         ),
-                        Value = null
+                        Value = null,
                     }
                 );
                 Configuration machineConfig = ConfigurationManager.OpenMachineConfiguration();
@@ -64,7 +64,7 @@ namespace System.ServiceModel.Activities.Presentation
                                 p => new BindingDescriptor()
                                 {
                                     BindingName = p.BindingName,
-                                    Value = p
+                                    Value = p,
                                 }
                             )
                     );

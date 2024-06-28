@@ -1054,7 +1054,7 @@ public class ExceptionHandlerTest
                 {
                     httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
                     return httpContext.Response.WriteAsync("Custom handler");
-                }
+                },
             }
         );
 
@@ -1117,7 +1117,7 @@ public class ExceptionHandlerTest
                                 {
                                     httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
                                     return httpContext.Response.WriteAsync("Custom handler");
-                                }
+                                },
                             }
                         );
                         app.Run(context =>

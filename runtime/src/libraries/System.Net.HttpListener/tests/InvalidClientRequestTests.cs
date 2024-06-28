@@ -47,7 +47,7 @@ namespace System.Net.Tests
                 null,
                 null,
                 null,
-                "Version Not Supported"
+                "Version Not Supported",
             };
             yield return new object[]
             {
@@ -55,7 +55,7 @@ namespace System.Net.Tests
                 null,
                 null,
                 null,
-                "Version Not Supported"
+                "Version Not Supported",
             };
             yield return new object[]
             {
@@ -63,7 +63,7 @@ namespace System.Net.Tests
                 null,
                 null,
                 null,
-                "Version Not Supported"
+                "Version Not Supported",
             };
 
             // Invalid verb
@@ -95,7 +95,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Content-Length: -10" },
                 "\r\n",
-                "Bad Request"
+                "Bad Request",
             };
             yield return new object[]
             {
@@ -103,7 +103,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Content-Length: -10" },
                 "\r\n",
-                "Bad Request"
+                "Bad Request",
             };
             yield return new object[]
             {
@@ -111,7 +111,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Content-Length: -10" },
                 "\r\n",
-                "Bad Request"
+                "Bad Request",
             };
             yield return new object[]
             {
@@ -119,7 +119,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Content-Length: -9223372036854775809" },
                 "\r\n",
-                "Bad Request"
+                "Bad Request",
             };
 
             yield return new object[]
@@ -128,7 +128,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Content-Length: 1", "Content-Length: 2" },
                 "\r\n",
-                "Bad Request"
+                "Bad Request",
             };
 
             yield return new object[]
@@ -137,7 +137,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Transfer-Encoding: garbage" },
                 "\r\n",
-                "Not Implemented"
+                "Not Implemented",
             };
             yield return new object[]
             {
@@ -145,7 +145,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Transfer-Encoding: garbage" },
                 "\r\n",
-                "Not Implemented"
+                "Not Implemented",
             };
 
             yield return new object[]
@@ -154,7 +154,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "Transfer-Encoding: chunked", "Transfer-Encoding: chunked" },
                 "\r\n",
-                "Not Implemented"
+                "Not Implemented",
             };
 
             yield return new object[]
@@ -163,7 +163,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "NoValue" },
                 null,
-                "Bad Request"
+                "Bad Request",
             };
             yield return new object[]
             {
@@ -171,7 +171,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { ":" },
                 null,
-                "Bad Request"
+                "Bad Request",
             };
             yield return new object[]
             {
@@ -179,7 +179,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "\0:value" },
                 null,
-                "Bad Request"
+                "Bad Request",
             };
             yield return new object[]
             {
@@ -187,7 +187,7 @@ namespace System.Net.Tests
                 null,
                 new string[] { "value:\0" },
                 null,
-                "Bad Request"
+                "Bad Request",
             };
 
             yield return new object[] { "GET {path} HTTP/1.1", "", null, null, "Bad Request" };
@@ -197,7 +197,7 @@ namespace System.Net.Tests
                 "Host: \r\n",
                 null,
                 null,
-                "Bad Request"
+                "Bad Request",
             };
 
             yield return new object[]
@@ -206,7 +206,7 @@ namespace System.Net.Tests
                 null,
                 null,
                 null,
-                "Not Found"
+                "Not Found",
             };
             yield return new object[] { "GET {path}../ HTTP/1.1", null, null, null, "Not Found" };
 
@@ -217,7 +217,7 @@ namespace System.Net.Tests
                 null,
                 null,
                 null,
-                "Length Required"
+                "Length Required",
             };
             yield return new object[]
             {
@@ -225,7 +225,7 @@ namespace System.Net.Tests
                 null,
                 null,
                 null,
-                "Length Required"
+                "Length Required",
             };
 
             // ? prior to path and query.  This may or may not fail, depending on the OS, but in either case it shouldn't crash.

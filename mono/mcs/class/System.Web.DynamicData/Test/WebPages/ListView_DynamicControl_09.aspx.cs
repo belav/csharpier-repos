@@ -23,7 +23,7 @@ public partial class ListView_DynamicControl_09 : TestsBasePage<TestDataContext3
             {
                 PrimaryKeyColumn1 = "Marek",
                 PrimaryKeyColumn2 = 2,
-                Column1 = 1
+                Column1 = 1,
             }
         );
     }

@@ -212,7 +212,7 @@ namespace MonoTests.System
                 "w",
                 "ax",
                 "y",
-                "z"
+                "z",
             };
             foreach (string code in codes)
             {
@@ -1091,7 +1091,7 @@ namespace MonoTests.System
         public void LogicBugPinned()
         {
             string format = null;
-            string[] names = new string[] { "A", "B", "C", "D", };
+            string[] names = new string[] { "A", "B", "C", "D" };
             string[] fmtSpl = null;
             UE ue = UE.A | UE.B | UE.C | UE.D;
 
@@ -1406,7 +1406,7 @@ namespace MonoTests.System
         [Flags]
         enum Foo
         {
-            negative = -1
+            negative = -1,
         }
 
         // Our first implementation used to crash
@@ -1440,7 +1440,7 @@ namespace MonoTests.System
         {
             a,
             b,
-            c
+            c,
         }
 
         [Flags]
@@ -1448,7 +1448,7 @@ namespace MonoTests.System
         {
             a,
             b,
-            c
+            c,
         }
 
         [Flags]
@@ -1456,7 +1456,7 @@ namespace MonoTests.System
         {
             a,
             b,
-            c
+            c,
         }
 
         enum TestShortEnum : short
@@ -1467,7 +1467,7 @@ namespace MonoTests.System
             three,
             four,
             five,
-            six
+            six,
         }
 
         enum E
@@ -1493,7 +1493,7 @@ namespace MonoTests.System
             None = 0,
             One = 1,
             Two = 2,
-            Negative = unchecked((int)0xFFFF0000)
+            Negative = unchecked((int)0xFFFF0000),
         }
 
         enum TestingEnum
@@ -1501,7 +1501,7 @@ namespace MonoTests.System
             This,
             Is,
             A,
-            Test
+            Test,
         }
 
         enum TestingEnum2
@@ -1509,7 +1509,7 @@ namespace MonoTests.System
             This,
             Is,
             A,
-            Test
+            Test,
         }
 
         enum TestingEnum3 : ulong
@@ -1517,7 +1517,7 @@ namespace MonoTests.System
             This,
             Is,
             A,
-            Test = ulong.MaxValue
+            Test = ulong.MaxValue,
         }
 
         enum TestingEnum4 : byte
@@ -1525,7 +1525,7 @@ namespace MonoTests.System
             This,
             Is,
             A,
-            Test = byte.MaxValue
+            Test = byte.MaxValue,
         }
 
         enum TestingEnum5 : short
@@ -1533,7 +1533,7 @@ namespace MonoTests.System
             This,
             Is,
             A,
-            Test = short.MaxValue
+            Test = short.MaxValue,
         }
 
         enum TestingEnum6
@@ -1541,7 +1541,7 @@ namespace MonoTests.System
             This,
             Is,
             A,
-            Test = int.MaxValue
+            Test = int.MaxValue,
         }
 
         enum E3
@@ -1549,7 +1549,7 @@ namespace MonoTests.System
             A = 0,
             B = 1,
             C = 2,
-            D = 3
+            D = 3,
         }
 
         enum UE : ulong
@@ -1557,7 +1557,7 @@ namespace MonoTests.System
             A = 1,
             B = 2,
             C = 4,
-            D = 8
+            D = 8,
         }
 
         enum EA
@@ -1565,7 +1565,7 @@ namespace MonoTests.System
             A = 0,
             B = 2,
             C = 3,
-            D = 4
+            D = 4,
         }
 
         enum EnInt8 : sbyte
@@ -1615,7 +1615,7 @@ namespace MonoTests.System
             A = Int64.MinValue,
             B = 3488924689489L,
             C = Int64.MaxValue,
-            D = 456L
+            D = 456L,
         }
 
         enum EnUInt64 : ulong
@@ -1623,7 +1623,7 @@ namespace MonoTests.System
             A = UInt64.MinValue,
             B = 3488924689489L,
             C = UInt64.MaxValue,
-            D = 789L
+            D = 789L,
         }
 
         enum EnumByte : byte
@@ -1632,7 +1632,7 @@ namespace MonoTests.System
             byte_Bb = 0xff,
             byte_Cc = 0,
             byte_Dd = 0x7f,
-            byte_Ff = 100
+            byte_Ff = 100,
         }
 
         enum EnumSByte : sbyte
@@ -1642,7 +1642,7 @@ namespace MonoTests.System
             sbyte_Cc = 0,
             sbyte_Dd = -1,
             sbyte_Ee = 0x7F,
-            sbyte_Ff = 100
+            sbyte_Ff = 100,
         }
 
         enum EnumShort : short
@@ -1652,7 +1652,7 @@ namespace MonoTests.System
             short_Cc = 0,
             short_Dd = -1,
             short_Ee = 0x7FFF,
-            short_Ff = 100
+            short_Ff = 100,
         }
 
         enum EnumUShort : ushort
@@ -1661,7 +1661,7 @@ namespace MonoTests.System
             ushort_Bb = unchecked((int)0xFF00),
             ushort_Cc = 0,
             ushort_Ee = 0x7FFF,
-            ushort_Ff = 100
+            ushort_Ff = 100,
         }
 
         enum EnumInt
@@ -1671,7 +1671,7 @@ namespace MonoTests.System
             int_Cc = 0,
             int_Dd = -1,
             int_Ee = 0x7FFFFFFF,
-            int_Ff = 100
+            int_Ff = 100,
         }
 
         enum EnumUInt : uint
@@ -1679,7 +1679,7 @@ namespace MonoTests.System
             uint_Aa = 5,
             uint_Cc = 0,
             uint_Ee = 0x7FFFFFFF,
-            uint_Ff = 100
+            uint_Ff = 100,
         }
 
         enum EnumLong : long
@@ -1689,7 +1689,7 @@ namespace MonoTests.System
             long_Cc = 0,
             long_Dd = -1,
             long_Ee = 0x7FFFFFFFffffffff,
-            long_Ff = 100
+            long_Ff = 100,
         }
 
         enum EnumULong : ulong
@@ -1698,7 +1698,7 @@ namespace MonoTests.System
             ulong_Bb = unchecked((ulong)0xffffFFFF00000000),
             ulong_Cc = 0,
             ulong_Ee = 0x7FFFFFFFffffffff,
-            ulong_Ff = 100
+            ulong_Ff = 100,
         }
 
         enum EnumOverlap

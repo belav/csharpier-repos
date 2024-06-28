@@ -388,7 +388,7 @@ namespace System.Diagnostics
                     Owner = subscriptions.Owner,
                     IsEnabled1Arg = subscriptions.IsEnabled1Arg,
                     IsEnabled3Arg = subscriptions.IsEnabled3Arg,
-                    Next = Remove(subscriptions.Next, subscription)
+                    Next = Remove(subscriptions.Next, subscription),
                 };
             }
         }
@@ -515,7 +515,7 @@ namespace System.Diagnostics
                 OnActivityImport = onActivityImport,
                 OnActivityExport = onActivityExport,
                 Owner = this,
-                Next = _subscriptions
+                Next = _subscriptions,
             };
 
             while (

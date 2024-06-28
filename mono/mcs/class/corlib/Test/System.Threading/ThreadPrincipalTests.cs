@@ -28,7 +28,7 @@ namespace MonoTests.System.Threading.Tasks
             {
                 AuthenticationType = "authtype",
                 IsAuthenticated = true,
-                Name = "name"
+                Name = "name",
             };
             var mockPrincipal = new MockPrincipal { Identity = mockIdentity };
             var oldPrincipal = Thread.CurrentPrincipal;

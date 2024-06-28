@@ -141,7 +141,7 @@ namespace System.ServiceModel.Description
 
             CustomBinding cb = new CustomBinding(binding)
             {
-                Name = ServiceMetadataBehaviorHttpGetBinding
+                Name = ServiceMetadataBehaviorHttpGetBinding,
             };
             cb.Elements.Find<MessageEncodingBindingElement>().MessageVersion = MessageVersion.None;
 

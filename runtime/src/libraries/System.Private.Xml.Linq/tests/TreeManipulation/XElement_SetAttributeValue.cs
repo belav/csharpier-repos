@@ -31,10 +31,10 @@ namespace XLinqTests
                         {
                             "<A a1='a1' b='b'>text<B/></A>",
                             "{ns}a1",
-                            "ns_a1"
+                            "ns_a1",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -43,8 +43,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Add attribute (empty elem)")
                     {
                         Params = new object[] { "<A a='a' b='b'/>", "a1", "a1" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -53,8 +53,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Add attribute (content text only)")
                     {
                         Params = new object[] { "<A a1='a1' b='b'>text</A>", "{ns}a1", "ns_a1" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -65,8 +65,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "<A a1='original' />", "a1", "a1" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -80,10 +80,10 @@ namespace XLinqTests
                         {
                             "<A p:a1='x' a1='original' xmlns:p='ns'/>",
                             "{ns}a1",
-                            "ns_a1"
+                            "ns_a1",
                         },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -95,10 +95,10 @@ namespace XLinqTests
                         {
                             "<A a1='original' x='x' y='y'>text</A>",
                             "a1",
-                            "a1"
+                            "a1",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -112,10 +112,10 @@ namespace XLinqTests
                         {
                             "<A x='x' a1='original' y='y'>text</A>",
                             "a1",
-                            "a1"
+                            "a1",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -127,10 +127,10 @@ namespace XLinqTests
                         {
                             "<A x='x' y='y' a1='original'>text</A>",
                             "a1",
-                            "a1"
+                            "a1",
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -139,8 +139,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Remove attribute (only attribute)")
                     {
                         Params = new object[] { "<A a1='original'></A>", "a1", null },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -149,8 +149,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Remove attribute (from multiple attribs)")
                     {
                         Params = new object[] { "<A y='y' a1='original' x='x'></A>", "a1", null },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -164,10 +164,10 @@ namespace XLinqTests
                         {
                             "<A a1='original' p:a1='o' xmlns:p='A' ></A>",
                             "{A}a1",
-                            null
+                            null,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -181,10 +181,10 @@ namespace XLinqTests
                         {
                             "<A x='t' a1='original' y='r'>trt</A>",
                             "a1",
-                            null
+                            null,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -196,10 +196,10 @@ namespace XLinqTests
                         {
                             "<A x='t' a1='original' y='r'>trt</A>",
                             "nonex",
-                            null
+                            null,
                         },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -208,8 +208,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Add attribute (empty elem, namespaces)")
                     {
                         Params = new object[] { "<A a1='a1' b='b'/>", "{ns}a1", "ns_a1" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -218,8 +218,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Add attribute (empty elem I., no attrs)")
                     {
                         Params = new object[] { "<A></A>", "a1", "a1" },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -228,8 +228,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Add attribute (empty elem II., no attrs)")
                     {
                         Params = new object[] { "<A/>", "a1", "a1" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
         }

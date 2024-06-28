@@ -1220,7 +1220,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         boolean
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else

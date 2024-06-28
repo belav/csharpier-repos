@@ -75,7 +75,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             var stackPanel = new StackPanel
             {
                 Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Stretch
+                HorizontalAlignment = HorizontalAlignment.Stretch,
             };
 
             var block = new TextBlock { VerticalAlignment = VerticalAlignment.Center };
@@ -93,7 +93,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     VerticalAlignment = VerticalAlignment.Center,
                     Moniker = imageMoniker,
                     Width = 16.0,
-                    Height = 16.0
+                    Height = 16.0,
                 };
 
                 stackPanel.Children.Add(image);
@@ -112,7 +112,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 ReferenceType.Package => ReferenceImageMonikers.Package,
                 ReferenceType.Project => ReferenceImageMonikers.Project,
                 ReferenceType.Assembly => ReferenceImageMonikers.Assembly,
-                _ => throw ExceptionUtilities.UnexpectedValue(referenceType)
+                _ => throw ExceptionUtilities.UnexpectedValue(referenceType),
             };
         }
 
@@ -290,7 +290,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     ReferenceType.Package => ServicesVSResources.Packages,
                     ReferenceType.Project => ServicesVSResources.Projects,
                     ReferenceType.Assembly => ServicesVSResources.Assemblies,
-                    _ => throw ExceptionUtilities.UnexpectedValue(referenceType)
+                    _ => throw ExceptionUtilities.UnexpectedValue(referenceType),
                 };
             }
         }
@@ -372,7 +372,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 var combobox = new ComboBox
                 {
                     IsEditable = false,
-                    ItemsSource = new[] { ServicesVSResources.Keep, ServicesVSResources.Remove }
+                    ItemsSource = new[] { ServicesVSResources.Keep, ServicesVSResources.Remove },
                 };
 
                 combobox.SetValue(AutomationProperties.NameProperty, ServicesVSResources.Action);
@@ -387,7 +387,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     combobox.SelectedItem = action switch
                     {
                         UpdateAction.Remove => ServicesVSResources.Remove,
-                        _ => ServicesVSResources.Keep
+                        _ => ServicesVSResources.Keep,
                     };
                 }
 
@@ -397,7 +397,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                     {
                         0 => UpdateAction.TreatAsUsed,
                         1 => UpdateAction.Remove,
-                        _ => throw ExceptionUtilities.UnexpectedValue(combobox.SelectedIndex)
+                        _ => throw ExceptionUtilities.UnexpectedValue(combobox.SelectedIndex),
                     };
 
                     entry.TrySetValue(UnusedReferencesTableKeyNames.UpdateAction, action);

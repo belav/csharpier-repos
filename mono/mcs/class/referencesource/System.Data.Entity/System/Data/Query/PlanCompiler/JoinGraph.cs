@@ -353,7 +353,7 @@ namespace System.Data.Query.PlanCompiler
     internal enum JoinKind
     {
         Inner,
-        LeftOuter
+        LeftOuter,
     }
 
     /// <summary>

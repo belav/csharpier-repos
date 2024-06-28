@@ -1342,7 +1342,7 @@ namespace MonoTests.System.Security.Permissions
             0xC8,
             0x9D,
             0xBB,
-            0x87
+            0x87,
         };
 
         private static byte[] cert2 =
@@ -3839,7 +3839,7 @@ namespace MonoTests.System.Security.Permissions
             0xDA,
             0x48,
             0x6C,
-            0x9C
+            0x9C,
         };
 
         private X509Certificate x509;

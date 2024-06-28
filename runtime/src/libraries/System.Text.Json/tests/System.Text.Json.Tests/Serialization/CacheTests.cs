@@ -189,7 +189,7 @@ namespace System.Text.Json.Serialization.Tests
         // this options is not the default options instance the tests will not use previously cached metadata.
         private static JsonSerializerOptions s_options = new JsonSerializerOptions
         {
-            IncludeFields = true
+            IncludeFields = true,
         };
 
         [Theory]
@@ -376,7 +376,7 @@ namespace System.Text.Json.Serialization.Tests
             yield return new[] { new JsonSerializerOptions { WriteIndented = true } };
             yield return new[]
             {
-                new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } }
+                new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } },
             };
         }
 

@@ -37,7 +37,9 @@ namespace Microsoft.Interop
                 Location = location,
                 AdditionalLocations = null,
                 Properties = null,
-                MessageArgs = messageArgs.Select(o => o?.ToString()).ToSequenceEqualImmutableArray()
+                MessageArgs = messageArgs
+                    .Select(o => o?.ToString())
+                    .ToSequenceEqualImmutableArray(),
             };
         }
 
@@ -54,7 +56,7 @@ namespace Microsoft.Interop
                 Location = location,
                 AdditionalLocations = null,
                 Properties = properties.ToValueEquals(),
-                MessageArgs = messageArgs.Select(o => o.ToString()).ToSequenceEqualImmutableArray()
+                MessageArgs = messageArgs.Select(o => o.ToString()).ToSequenceEqualImmutableArray(),
             };
         }
 
@@ -74,7 +76,7 @@ namespace Microsoft.Interop
                     additionalLocations ?? ImmutableArray<Location>.Empty
                 ).ToSequenceEqualImmutableArray(),
                 Properties = properties.ToValueEquals(),
-                MessageArgs = messageArgs.Select(o => o.ToString()).ToSequenceEqualImmutableArray()
+                MessageArgs = messageArgs.Select(o => o.ToString()).ToSequenceEqualImmutableArray(),
             };
         }
     }

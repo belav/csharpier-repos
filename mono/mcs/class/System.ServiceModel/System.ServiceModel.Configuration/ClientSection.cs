@@ -66,7 +66,7 @@ namespace System.ServiceModel.Configuration
             typeof(SecurityBindingElementImporter),
             typeof(TransactionFlowBindingElementImporter),
             typeof(TransportBindingElementImporter),
-            typeof(UseManagedPresentationBindingElementImporter)
+            typeof(UseManagedPresentationBindingElementImporter),
         };
 
         static Type[] _defaultWsdlImporters = new Type[]
@@ -75,7 +75,7 @@ namespace System.ServiceModel.Configuration
             typeof(StandardBindingImporter),
             typeof(TransportBindingElementImporter),
             typeof(DataContractSerializerMessageContractImporter),
-            typeof(XmlSerializerMessageContractImporter)
+            typeof(XmlSerializerMessageContractImporter),
         };
 
         public ClientSection() { }

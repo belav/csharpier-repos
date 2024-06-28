@@ -59,7 +59,7 @@ namespace System.Tests
         {
             OtherType data = new OtherType
             {
-                oneStruct = new OneStruct { field = "field", b = 2343 }
+                oneStruct = new OneStruct { field = "field", b = 2343 },
             };
             Type dataType = data.GetType();
             Assert.Throws<ArgumentNullException>(() =>
@@ -97,7 +97,7 @@ namespace System.Tests
                         new FieldInfo[]
                         {
                             dataType.GetField("oneStruct"),
-                            typeof(OneStruct).GetField("b")
+                            typeof(OneStruct).GetField("b"),
                         }
                     );
                 }
@@ -115,7 +115,7 @@ namespace System.Tests
                 new FieldInfo[]
                 {
                     dataType.GetField("oneStruct"),
-                    typeof(OneStruct).GetField("field")
+                    typeof(OneStruct).GetField("field"),
                 }
             );
             Assert.Equal("field", TypedReference.ToObject(reference));

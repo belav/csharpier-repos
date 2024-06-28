@@ -576,11 +576,9 @@ public class Property : PropertyBase, IMutableProperty, IConventionProperty, IPr
     public virtual PropertySaveBehavior GetAfterSaveBehavior() =>
         (PropertySaveBehavior?)this[CoreAnnotationNames.AfterSaveBehavior]
         ?? (
-            IsKey()
-                ? PropertySaveBehavior.Throw
-                : ValueGenerated.ForUpdate()
-                    ? PropertySaveBehavior.Ignore
-                    : PropertySaveBehavior.Save
+            IsKey() ? PropertySaveBehavior.Throw
+            : ValueGenerated.ForUpdate() ? PropertySaveBehavior.Ignore
+            : PropertySaveBehavior.Save
         );
 
     /// <summary>

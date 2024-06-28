@@ -25,7 +25,7 @@ namespace System.ServiceModel.Description
         const string BaseAddressPattern = "{%BaseAddress%}";
         static readonly Uri EmptyUri = new Uri(String.Empty, UriKind.Relative);
 
-        static readonly Type[] httpGetSupportedChannels = new Type[] { typeof(IReplyChannel), };
+        static readonly Type[] httpGetSupportedChannels = new Type[] { typeof(IReplyChannel) };
 
         ServiceMetadataBehavior.MetadataExtensionInitializer initializer;
         MetadataSet metadata;

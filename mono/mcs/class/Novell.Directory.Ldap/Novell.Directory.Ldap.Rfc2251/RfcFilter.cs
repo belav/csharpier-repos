@@ -494,13 +494,10 @@ namespace Novell.Directory.Ldap.Rfc2251
         /// </summary>
         internal static int hex2int(char c)
         {
-            return (c >= '0' && c <= '9')
-                ? c - '0'
-                : (c >= 'A' && c <= 'F')
-                    ? c - 'A' + 10
-                    : (c >= 'a' && c <= 'f')
-                        ? c - 'a' + 10
-                        : -1;
+            return (c >= '0' && c <= '9') ? c - '0'
+                : (c >= 'A' && c <= 'F') ? c - 'A' + 10
+                : (c >= 'a' && c <= 'f') ? c - 'a' + 10
+                : -1;
         }
 
         /// <summary> Replace escaped hex digits with the equivalent binary representation.

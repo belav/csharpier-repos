@@ -473,7 +473,7 @@ namespace System.Data.Services.Client
                         Assembly assembly in new Assembly[]
                         {
                             userType.Assembly,
-                            contextType.Assembly
+                            contextType.Assembly,
                         }.Distinct()
                     )
 #endif
@@ -699,7 +699,7 @@ namespace System.Data.Services.Client
                 {
                     Attribute = epmAttr,
                     PropValReader = dlgPropValReader,
-                    DefiningType = definingType
+                    DefiningType = definingType,
                 }
             );
         }

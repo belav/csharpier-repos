@@ -344,7 +344,7 @@ public class RemoteWindowsDeployer : ApplicationDeployer
                 CreateNoWindow = true,
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
-                RedirectStandardInput = true
+                RedirectStandardInput = true,
             };
 
             using (var runScriptsOnRemoteServerProcess = new Process() { StartInfo = startInfo })
@@ -419,7 +419,7 @@ public class RemoteWindowsDeployer : ApplicationDeployer
         {
             "RemotePSSessionHelper.ps1",
             "StartServer.ps1",
-            "StopServer.ps1"
+            "StopServer.ps1",
         };
 
         // Copy the scripts from this assembly's embedded resources to the temp path on the machine where these

@@ -14,7 +14,7 @@ class Stress
         "ulong",
         "sbyte",
         "byte",
-        "char"
+        "char",
     };
 
     static void w(string s)

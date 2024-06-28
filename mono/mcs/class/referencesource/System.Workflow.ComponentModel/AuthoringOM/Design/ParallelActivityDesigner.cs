@@ -569,7 +569,7 @@ namespace System.Workflow.ComponentModel.Design
                     new Point(
                         dropTargetRectangle.Left + dropTargetRectangle.Width / 2,
                         dropTargetRectangle.Bottom - 2
-                    )
+                    ),
                 },
                 compositeDesignerTheme.ConnectorStartCap,
                 compositeDesignerTheme.ConnectorEndCap

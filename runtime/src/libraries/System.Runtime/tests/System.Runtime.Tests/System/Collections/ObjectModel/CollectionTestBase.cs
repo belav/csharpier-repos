@@ -22,7 +22,7 @@ namespace System.Collections.ObjectModel.Tests
             4,
             -5,
             3,
-            3
+            3,
         };
         protected static readonly int[] s_excludedFromIntArray = new int[]
         {
@@ -30,7 +30,7 @@ namespace System.Collections.ObjectModel.Tests
             -34,
             42,
             int.MaxValue,
-            int.MinValue
+            int.MinValue,
         };
 
         [Flags]
@@ -49,7 +49,7 @@ namespace System.Collections.ObjectModel.Tests
             Insert = 0x200,
             RemoveAt = 0x400,
             GetEnumerator = 0x800,
-            End
+            End,
         }
 
         protected class CallTrackingIList<T> : IList<T>

@@ -578,7 +578,7 @@ namespace System.Web.Mvc.Async
                             exception: null
                         )
                         {
-                            Result = _invoker.EndInvokeActionMethod(InnerAsyncResult)
+                            Result = _invoker.EndInvokeActionMethod(InnerAsyncResult),
                         };
                 }
 
@@ -595,7 +595,7 @@ namespace System.Web.Mvc.Async
                         exception: null
                     )
                     {
-                        Result = preContext.Result
+                        Result = preContext.Result,
                     };
                     return () => shortCircuitedPostContext;
                 }

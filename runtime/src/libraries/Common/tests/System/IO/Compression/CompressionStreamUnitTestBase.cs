@@ -345,7 +345,7 @@ namespace System.IO.Compression
                         CompressionLevel.Optimal,
                         CompressionLevel.Fastest,
                         CompressionLevel.NoCompression,
-                        CompressionLevel.SmallestSize
+                        CompressionLevel.SmallestSize,
                     }
                 )
                 {
@@ -638,7 +638,7 @@ namespace System.IO.Compression
         Read,
         ReadAsync,
         Copy,
-        CopyAsync
+        CopyAsync,
     }
 
     internal sealed class BadWrappedStream : MemoryStream
@@ -649,7 +649,7 @@ namespace System.IO.Compression
             ReturnNullTasks,
             ReturnTooSmallCounts,
             ReturnTooLargeCounts,
-            ReadSlowly
+            ReadSlowly,
         }
 
         private readonly Mode _mode;

@@ -124,7 +124,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 4,
-                ApplicationMaxBufferSize = 4
+                ApplicationMaxBufferSize = 4,
             };
             await dispatcher.ExecuteNegotiateAsync(context, options);
             var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
@@ -169,7 +169,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 4,
-                ApplicationMaxBufferSize = 4
+                ApplicationMaxBufferSize = 4,
             };
             await dispatcher.ExecuteNegotiateAsync(context, options);
             var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
@@ -204,7 +204,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             {
                 TransportMaxBufferSize = 4,
                 ApplicationMaxBufferSize = 4,
-                MinimumProtocolVersion = 1
+                MinimumProtocolVersion = 1,
             };
             await dispatcher.ExecuteNegotiateAsync(context, options);
             var negotiateResponse = JsonConvert.DeserializeObject<JObject>(
@@ -2363,7 +2363,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 2,
-                ApplicationMaxBufferSize = 2
+                ApplicationMaxBufferSize = 2,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -2824,7 +2824,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 13,
-                ApplicationMaxBufferSize = 13
+                ApplicationMaxBufferSize = 13,
             };
 
             var connection = manager.CreateConnection(options);
@@ -2887,7 +2887,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 13,
-                ApplicationMaxBufferSize = 13
+                ApplicationMaxBufferSize = 13,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -2946,7 +2946,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 13,
-                ApplicationMaxBufferSize = 13
+                ApplicationMaxBufferSize = 13,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -3053,7 +3053,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var options = new HttpConnectionDispatcherOptions
             {
                 TransportMaxBufferSize = 2,
-                ApplicationMaxBufferSize = 2
+                ApplicationMaxBufferSize = 2,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -3296,9 +3296,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                             {
                                 (byte)(iteration + 1),
                                 (byte)(iteration + 2),
-                                (byte)(iteration + 3)
+                                (byte)(iteration + 3),
                             }
-                        )
+                        ),
                     };
                 }
             );
@@ -3364,9 +3364,9 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                             {
                                 (byte)(iteration + 1),
                                 (byte)(iteration + 2),
-                                (byte)(iteration + 3)
+                                (byte)(iteration + 3),
                             }
-                        )
+                        ),
                     };
                 }
             );
@@ -3445,7 +3445,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             var dispatcher = CreateDispatcher(manager, LoggerFactory);
             var options = new HttpConnectionDispatcherOptions()
             {
-                CloseOnAuthenticationExpiration = true
+                CloseOnAuthenticationExpiration = true,
             };
             var connection = manager.CreateConnection(options);
             connection.TransportType = HttpTransportType.LongPolling;
@@ -3520,7 +3520,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                             ValidateIssuer = false,
                             ValidateActor = false,
                             ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
+                            IssuerSigningKey = SecurityKey,
                         };
 
                         options.Events = new JwtBearerEvents
@@ -3540,7 +3540,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                                     context.Token = context.Request.Query["access_token"];
                                 }
                                 return Task.CompletedTask;
-                            }
+                            },
                         };
                     });
             },
@@ -3563,7 +3563,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 {
                     var claims = new[]
                     {
-                        new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"])
+                        new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]),
                     };
                     var credentials = new SigningCredentials(
                         SecurityKey,
@@ -3608,7 +3608,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 AccessTokenProvider = () => Task.FromResult(token),
                 Transports = transportType,
                 DefaultTransferFormat = TransferFormat.Text,
-                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream)
+                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
             },
             LoggerFactory
         );
@@ -3653,7 +3653,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                     {
                         var claims = new List<Claim>
                         {
-                            new Claim(ClaimTypes.NameIdentifier, context.Request.Query["user"])
+                            new Claim(ClaimTypes.NameIdentifier, context.Request.Query["user"]),
                         };
                         await context.SignInAsync(
                             new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"))
@@ -3689,7 +3689,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 Transports = transportType,
                 DefaultTransferFormat = TransferFormat.Text,
                 HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
-                Cookies = cookies
+                Cookies = cookies,
             },
             LoggerFactory
         );
@@ -3733,7 +3733,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                             ValidateIssuer = false,
                             ValidateActor = false,
                             ValidateLifetime = true,
-                            IssuerSigningKey = SecurityKey
+                            IssuerSigningKey = SecurityKey,
                         };
 
                         options.Events = new JwtBearerEvents
@@ -3753,7 +3753,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                                     context.Token = context.Request.Query["access_token"];
                                 }
                                 return Task.CompletedTask;
-                            }
+                            },
                         };
                     });
             },
@@ -3776,7 +3776,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                 {
                     var claims = new[]
                     {
-                        new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"])
+                        new Claim(ClaimTypes.NameIdentifier, httpContext.Request.Query["user"]),
                     };
                     var credentials = new SigningCredentials(
                         SecurityKey,
@@ -3868,7 +3868,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
             {
                 Url = new Uri(url),
                 DefaultTransferFormat = TransferFormat.Text,
-                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream)
+                HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(handler, stream),
             },
             LoggerFactory
         );
@@ -3961,7 +3961,7 @@ public class HttpConnectionDispatcherTests : VerifiableLoggedTest
                     HttpMessageHandlerFactory = handler => new GetNegotiateHttpHandler(
                         handler,
                         stream
-                    )
+                    ),
                 },
                 LoggerFactory
             );

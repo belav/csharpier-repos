@@ -21,14 +21,14 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
                 new int[,]
                 {
                     { 1, 2 },
-                    { 3, 4 }
+                    { 3, 4 },
                 },
                 new int[2, 2],
                 new int[,]
                 {
                     { 1, 2 },
-                    { 3, 4 }
-                }
+                    { 3, 4 },
+                },
             };
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)

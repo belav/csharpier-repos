@@ -18,6 +18,6 @@ namespace System.Transactions
         ReadUncommitted,
         Snapshot,
         Chaos,
-        Unspecified
+        Unspecified,
     }
 }

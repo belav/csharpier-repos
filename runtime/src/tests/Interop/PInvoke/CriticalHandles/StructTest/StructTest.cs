@@ -71,7 +71,7 @@ public class CriticalHandleStructTest
     {
         Native.MyCriticalHandleStruct handleStruct = new Native.MyCriticalHandleStruct()
         {
-            Handle = new MyCriticalHandle() { Handle = handleValue }
+            Handle = new MyCriticalHandle() { Handle = handleValue },
         };
         IntPtr value;
         value = Native.In(handleStruct, s_handleCallback);
@@ -113,7 +113,7 @@ public class CriticalHandleStructTest
     {
         Native.MyCriticalHandleStruct handleStruct = new Native.MyCriticalHandleStruct()
         {
-            Handle = new MyCriticalHandle() { Handle = handleValue }
+            Handle = new MyCriticalHandle() { Handle = handleValue },
         };
         Native.InRef(ref handleStruct, s_handleCallback);
         Assert.Equal(handleValue.ToInt32(), handleStruct.Handle.Handle.ToInt32());
@@ -133,7 +133,7 @@ public class CriticalHandleStructTest
     {
         Native.MyCriticalHandleStruct handleStruct = new Native.MyCriticalHandleStruct()
         {
-            Handle = new MyCriticalHandle() { Handle = handleValue }
+            Handle = new MyCriticalHandle() { Handle = handleValue },
         };
         Native.Ref(ref handleStruct, s_handleCallback);
         Assert.Equal(handleValue.ToInt32(), handleStruct.Handle.Handle.ToInt32());
@@ -145,7 +145,7 @@ public class CriticalHandleStructTest
         IntPtr handleValue2 = MyCriticalHandle.GetUniqueHandle();
         Native.MyCriticalHandleStruct handleStruct = new Native.MyCriticalHandleStruct()
         {
-            Handle = new MyCriticalHandle() { Handle = handleValue1 }
+            Handle = new MyCriticalHandle() { Handle = handleValue1 },
         };
 
         Assert.Throws<NotSupportedException>(

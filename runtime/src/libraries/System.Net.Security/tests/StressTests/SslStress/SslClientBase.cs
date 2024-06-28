@@ -54,7 +54,7 @@ namespace SslStress
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http11
+                    SslApplicationProtocol.Http11,
                 },
                 RemoteCertificateValidationCallback = ((x, y, z, w) => true),
                 TargetHost = SslServerBase.Hostname,
@@ -111,7 +111,7 @@ namespace SslStress
                 }
             })
             {
-                IsBackground = true
+                IsBackground = true,
             }.Start();
 
             IEnumerable<Task> workers = CreateWorkerSeeds()

@@ -43,7 +43,9 @@ namespace System.Speech.Internal.SapiInterop
         SPERR_AUDIO_NOT_FOUND = -2147200904, // 0x80045078
         SPERR_NOT_SUPPORTED_FOR_INPROC_RECOGNIZER = -2147200893, //  0x80045083
         SPERR_LEX_INVALID_DATA = -2147200891, // 0x80045085
-        SPERR_CFG_INVALID_DATA = -2147200890 // 0x80045086
+        SPERR_CFG_INVALID_DATA =
+            -2147200890 // 0x80045086
+        ,
     }
 
     #endregion Enum

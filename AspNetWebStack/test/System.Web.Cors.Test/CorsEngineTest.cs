@@ -37,7 +37,7 @@ namespace System.Web.Cors.Test
             CorsRequestContext requestContext = new CorsRequestContext
             {
                 Origin = null,
-                HttpMethod = "GET"
+                HttpMethod = "GET",
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, new CorsPolicy());
@@ -84,7 +84,7 @@ namespace System.Web.Cors.Test
             CorsPolicy policy = new CorsPolicy
             {
                 AllowAnyOrigin = true,
-                SupportsCredentials = false
+                SupportsCredentials = false,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -100,7 +100,7 @@ namespace System.Web.Cors.Test
             CorsPolicy policy = new CorsPolicy
             {
                 AllowAnyOrigin = true,
-                SupportsCredentials = true
+                SupportsCredentials = true,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -116,7 +116,7 @@ namespace System.Web.Cors.Test
             CorsPolicy policy = new CorsPolicy
             {
                 AllowAnyOrigin = true,
-                SupportsCredentials = false
+                SupportsCredentials = false,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -132,7 +132,7 @@ namespace System.Web.Cors.Test
             CorsPolicy policy = new CorsPolicy
             {
                 AllowAnyOrigin = true,
-                SupportsCredentials = true
+                SupportsCredentials = true,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -192,7 +192,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true };
             policy.Methods.Add("GET");
@@ -212,7 +212,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true };
             policy.Methods.Add("PUT");
@@ -232,7 +232,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             CorsPolicy policy = new CorsPolicy { AllowAnyMethod = true };
             policy.Origins.Add("foo");
@@ -257,7 +257,7 @@ namespace System.Web.Cors.Test
             {
                 AllowAnyOrigin = true,
                 AllowAnyMethod = true,
-                SupportsCredentials = true
+                SupportsCredentials = true,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -280,7 +280,7 @@ namespace System.Web.Cors.Test
             {
                 AllowAnyOrigin = true,
                 AllowAnyMethod = true,
-                PreflightMaxAge = null
+                PreflightMaxAge = null,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -303,7 +303,7 @@ namespace System.Web.Cors.Test
             {
                 AllowAnyOrigin = true,
                 AllowAnyMethod = true,
-                PreflightMaxAge = 10
+                PreflightMaxAge = 10,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -320,7 +320,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "GET",
-                Origin = "foo"
+                Origin = "foo",
             };
             CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true, AllowAnyMethod = true };
 
@@ -339,7 +339,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true };
             policy.Methods.Add("PUT");
@@ -366,7 +366,7 @@ namespace System.Web.Cors.Test
             {
                 AllowAnyOrigin = true,
                 AllowAnyMethod = true,
-                AllowAnyHeader = true
+                AllowAnyHeader = true,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -383,7 +383,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             requestContext.AccessControlRequestHeaders.Add("foo");
             requestContext.AccessControlRequestHeaders.Add("bar");
@@ -391,7 +391,7 @@ namespace System.Web.Cors.Test
             {
                 AllowAnyOrigin = true,
                 AllowAnyHeader = true,
-                AllowAnyMethod = true
+                AllowAnyMethod = true,
             };
 
             CorsResult result = corsEngine.EvaluatePolicy(requestContext, policy);
@@ -410,7 +410,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             requestContext.AccessControlRequestHeaders.Add("Content-Type");
             CorsPolicy policy = new CorsPolicy { AllowAnyOrigin = true, AllowAnyMethod = true };
@@ -433,7 +433,7 @@ namespace System.Web.Cors.Test
             {
                 HttpMethod = "OPTIONS",
                 AccessControlRequestMethod = "PUT",
-                Origin = "foo"
+                Origin = "foo",
             };
             requestContext.AccessControlRequestHeaders.Add("match");
             requestContext.AccessControlRequestHeaders.Add("noMatch");

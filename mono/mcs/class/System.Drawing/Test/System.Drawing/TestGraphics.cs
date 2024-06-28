@@ -854,13 +854,13 @@ namespace MonoTests.System.Drawing
         {
             new Point(0, 0),
             new Point(15, 5),
-            new Point(5, 15)
+            new Point(5, 15),
         };
         static PointF[] SmallCurveF = new PointF[3]
         {
             new PointF(0, 0),
             new PointF(15, 5),
-            new PointF(5, 15)
+            new PointF(5, 15),
         };
 
         static Point[] TooSmallCurve = new Point[2] { new Point(0, 0), new Point(15, 5) };
@@ -869,7 +869,7 @@ namespace MonoTests.System.Drawing
             new PointF(0, 0),
             new PointF(15, 5),
             new PointF(5, 15),
-            new PointF(0, 20)
+            new PointF(0, 20),
         };
 
         [Test]
@@ -1053,12 +1053,12 @@ namespace MonoTests.System.Drawing
             Rectangle[] rects = new Rectangle[2]
             {
                 new Rectangle(5, 5, -10, -10),
-                new Rectangle(0, 0, 5, -10)
+                new Rectangle(0, 0, 5, -10),
             };
             RectangleF[] rectf = new RectangleF[2]
             {
                 new RectangleF(0.0f, 5.0f, -10.0f, -10.0f),
-                new RectangleF(15.0f, 0.0f, -10.0f, 5.0f)
+                new RectangleF(15.0f, 0.0f, -10.0f, 5.0f),
             };
             g.DrawRectangles(pen, rects);
             g.DrawRectangles(pen, rectf);
@@ -1092,12 +1092,12 @@ namespace MonoTests.System.Drawing
             Rectangle[] rects = new Rectangle[2]
             {
                 new Rectangle(5, 5, -10, -10),
-                new Rectangle(0, 0, 5, -10)
+                new Rectangle(0, 0, 5, -10),
             };
             RectangleF[] rectf = new RectangleF[2]
             {
                 new RectangleF(0.0f, 5.0f, -10.0f, -10.0f),
-                new RectangleF(15.0f, 0.0f, -10.0f, 5.0f)
+                new RectangleF(15.0f, 0.0f, -10.0f, 5.0f),
             };
             g.FillRectangles(brush, rects);
             g.FillRectangles(brush, rectf);
@@ -2767,7 +2767,7 @@ namespace MonoTests.System.Drawing
         {
             new CharacterRange(0, 1),
             new CharacterRange(1, 1),
-            new CharacterRange(2, 1)
+            new CharacterRange(2, 1),
         };
 
         Region[] Measure(Graphics gfx, RectangleF rect)

@@ -2112,7 +2112,7 @@ namespace System.Activities
 
             Dictionary<string, object> inputParameters = new Dictionary<string, object>(1)
             {
-                { ActivityDelegate.ArgumentName, argument }
+                { ActivityDelegate.ArgumentName, argument },
             };
 
             return InternalScheduleDelegate(

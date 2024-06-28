@@ -69,28 +69,28 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
             new object[]
             {
                 Array.Empty<string>(),
-                new ServiceNameCollection(Array.Empty<string>())
+                new ServiceNameCollection(Array.Empty<string>()),
             },
             new object[] { new[] { "first", "second" }, new[] { "first", "second" } },
             new object[]
             {
                 new[] { "first", "second" },
-                new List<string> { "first", "second" }
+                new List<string> { "first", "second" },
             },
             new object[]
             {
                 new[] { "first", "second" },
-                new ServiceNameCollection(new[] { "first", "second" })
+                new ServiceNameCollection(new[] { "first", "second" }),
             },
             new object[]
             {
                 new[] { "first", "second" },
-                new[] { "first", "second", "first", "SECOND" }
+                new[] { "first", "second", "first", "SECOND" },
             },
             new object[]
             {
                 new[] { "first", "second" },
-                new List<string> { "first", "second", "first", "SECOND" }
+                new List<string> { "first", "second", "first", "SECOND" },
             },
         };
 
@@ -316,27 +316,27 @@ namespace System.Security.Authentication.ExtendedProtection.Tests
             new object[]
             {
                 new[] { "first", "second", "third", "forth" },
-                new[] { "third", "forth" }
+                new[] { "third", "forth" },
             },
             new object[]
             {
                 new[] { "first", "second", "third", "forth" },
-                new List<string> { "third", "forth" }
+                new List<string> { "third", "forth" },
             },
             new object[]
             {
                 new[] { "first", "second", "third", "forth" },
-                new ServiceNameCollection(new[] { "third", "forth" })
+                new ServiceNameCollection(new[] { "third", "forth" }),
             },
             new object[]
             {
                 new[] { "first", "second", "third", "forth" },
-                new[] { "third", "forth", "THIRD", "forth" }
+                new[] { "third", "forth", "THIRD", "forth" },
             },
             new object[]
             {
                 new[] { "first", "second", "third", "forth" },
-                new List<string> { "third", "forth", "THIRD", "forth" }
+                new List<string> { "third", "forth", "THIRD", "forth" },
             },
         };
 

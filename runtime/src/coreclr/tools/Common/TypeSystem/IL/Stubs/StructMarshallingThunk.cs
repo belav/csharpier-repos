@@ -15,7 +15,7 @@ namespace Internal.IL.Stubs
     {
         ManagedToNative = 1,
         NativeToManaged = 2,
-        Cleanup = 4
+        Cleanup = 4,
     }
 
     public struct InlineArrayCandidate
@@ -82,7 +82,7 @@ namespace Internal.IL.Stubs
                                 ManagedType.IsValueType
                                     ? (TypeDesc)ManagedType.MakeByRefType()
                                     : ManagedType,
-                                NativeType.MakeByRefType()
+                                NativeType.MakeByRefType(),
                             };
                             break;
                         case StructMarshallingThunkType.NativeToManaged:
@@ -91,7 +91,7 @@ namespace Internal.IL.Stubs
                                 NativeType.MakeByRefType(),
                                 ManagedType.IsValueType
                                     ? (TypeDesc)ManagedType.MakeByRefType()
-                                    : ManagedType
+                                    : ManagedType,
                             };
                             break;
                         case StructMarshallingThunkType.Cleanup:

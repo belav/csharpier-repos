@@ -473,7 +473,7 @@ public class ResponseTrailersTests : LoggedTest
             new string('c', 1024 * 8),
             new string('d', 1024 * 16),
             new string('e', 1024 * 32),
-            new string('f', 1024 * 64 - 1)
+            new string('f', 1024 * 64 - 1),
         }; // Max header size
 
         using (

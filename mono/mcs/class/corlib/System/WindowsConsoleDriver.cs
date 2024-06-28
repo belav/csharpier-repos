@@ -103,7 +103,7 @@ namespace System
     {
         STD_INPUT = -10,
         STD_OUTPUT = -11,
-        STD_ERROR = -12
+        STD_ERROR = -12,
     }
 
     unsafe class WindowsConsoleDriver : IConsoleDriver

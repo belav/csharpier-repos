@@ -24,7 +24,7 @@ public class SqlServerHierarchyIdApiConsistencyTest
             new()
             {
                 typeof(SqlServerHierarchyIdDbContextOptionsBuilderExtensions),
-                typeof(SqlServerHierarchyIdServiceCollectionExtensions)
+                typeof(SqlServerHierarchyIdServiceCollectionExtensions),
             };
     }
 }

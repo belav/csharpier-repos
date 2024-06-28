@@ -133,7 +133,7 @@ namespace System.IO
             {
                 FileName = fileName,
                 UseShellExecute = false,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             };
 
             foreach (var argument in arguments)

@@ -63,7 +63,7 @@ public class NewtonsoftJsonPatchInputFormatterTest
     public async Task Constructor_SuppressInputFormatterBuffering_DoesNotBufferRequestBody()
     {
         // Arrange
-        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = false, };
+        var mvcOptions = new MvcOptions() { SuppressInputFormatterBuffering = false };
         var formatter = new NewtonsoftJsonPatchInputFormatter(
             GetLogger(),
             _serializerSettings,

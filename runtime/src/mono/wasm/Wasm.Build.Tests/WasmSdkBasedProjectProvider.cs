@@ -37,7 +37,7 @@ public class WasmSdkBasedProjectProvider : ProjectProviderBase
     )
     {
         SortedSet<string> res =
-            new() { "dotnet.js", "dotnet.native.wasm", "dotnet.native.js", "dotnet.runtime.js", };
+            new() { "dotnet.js", "dotnet.native.wasm", "dotnet.native.js", "dotnet.runtime.js" };
         if (assertOptions.RuntimeType is RuntimeVariant.MultiThreaded)
         {
             res.Add("dotnet.native.worker.js");
@@ -107,7 +107,7 @@ public class WasmSdkBasedProjectProvider : ProjectProviderBase
             NativeFilesType.FromRuntimePack => runtimeNativeDir,
             NativeFilesType.Relinked => objBuildDir,
             NativeFilesType.AOT => objBuildDir,
-            _ => throw new ArgumentOutOfRangeException(nameof(assertOptions.ExpectedFileType))
+            _ => throw new ArgumentOutOfRangeException(nameof(assertOptions.ExpectedFileType)),
         };
         string buildType = assertOptions.IsPublish ? "publish" : "build";
         foreach (string nativeFilename in new[] { "dotnet.native.wasm", "dotnet.native.js" })

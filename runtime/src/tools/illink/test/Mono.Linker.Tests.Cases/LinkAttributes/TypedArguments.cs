@@ -99,7 +99,7 @@ namespace Mono.Linker.Tests.Cases.LinkAttributes
 
     enum TypedArgumentsEnumA
     {
-        Value = 2
+        Value = 2,
     }
 
     enum TypedArgumentsEnumB { }

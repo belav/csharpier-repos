@@ -92,13 +92,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// Produce a string for testing purposes that is likely to be the same independent of platform and locale.
             /// </summary>
             string INumericTC<float>.ToString(float value) =>
-                float.IsNaN(value)
-                    ? "NaN"
-                    : value == float.NegativeInfinity
-                        ? "-Inf"
-                        : value == float.PositiveInfinity
-                            ? "Inf"
-                            : FormattableString.Invariant($"{value:G9}");
+                float.IsNaN(value) ? "NaN"
+                : value == float.NegativeInfinity ? "-Inf"
+                : value == float.PositiveInfinity ? "Inf"
+                : FormattableString.Invariant($"{value:G9}");
 
             float INumericTC<float>.Prev(float value)
             {

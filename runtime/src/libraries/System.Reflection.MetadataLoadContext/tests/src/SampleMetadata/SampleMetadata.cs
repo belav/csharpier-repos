@@ -139,7 +139,7 @@ namespace SampleMetadata
         min = int.MinValue,
         zero = 0,
         one = 1,
-        max = int.MaxValue
+        max = int.MaxValue,
     }
 
     public enum E_2_U4 : uint
@@ -147,7 +147,7 @@ namespace SampleMetadata
         min = uint.MinValue,
         zero = 0,
         one = 1,
-        max = uint.MaxValue
+        max = uint.MaxValue,
     }
 
     public class GenericEnumContainer<T>

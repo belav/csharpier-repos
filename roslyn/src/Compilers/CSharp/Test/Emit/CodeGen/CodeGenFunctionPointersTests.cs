@@ -1636,7 +1636,7 @@ unsafe
     static void M() => Console.Write(1);
 }}
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 expectedOutput: "1",
                 targetFramework: TargetFramework.NetCoreApp
@@ -1899,7 +1899,7 @@ unsafe struct S
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 expectedOutput: "15",
                 targetFramework: TargetFramework.NetCoreApp
@@ -3686,7 +3686,7 @@ unsafe class C
                 "void C.M(System.Object o)",
                 "void C.M(System.String s)",
                 "void C.M(out System.String s)",
-                "void C.M(System.Int32 i)"
+                "void C.M(System.Int32 i)",
             };
 
             AssertEx.Equal(
@@ -3750,7 +3750,7 @@ class C : I1, I2
                 expectedSymbolCandidates: new[]
                 {
                     "void IHelpers.M(I1 i1)",
-                    "void IHelpers.M(I2 i2)"
+                    "void IHelpers.M(I2 i2)",
                 }
             );
         }
@@ -4091,7 +4091,7 @@ IVariableDeclaratorOperation (Symbol: delegate*<System.Void> ptr1) (OperationKin
                 expectedSymbolCandidates: new[]
                 {
                     "System.Int32 System.Int32?.GetValueOrDefault()",
-                    "System.Int32 System.Int32?.GetValueOrDefault(System.Int32 defaultValue)"
+                    "System.Int32 System.Int32?.GetValueOrDefault(System.Int32 defaultValue)",
                 }
             );
 
@@ -4160,7 +4160,7 @@ unsafe class C
                 expectedSymbolCandidates: new[]
                 {
                     "System.Int32 C.M(System.String s)",
-                    "System.Int32 C.M(ref System.Int32 i)"
+                    "System.Int32 C.M(ref System.Int32 i)",
                 }
             );
 
@@ -4227,7 +4227,7 @@ unsafe class C
                 expectedSymbolCandidates: new[]
                 {
                     "void C.M(System.String s, System.Object o)",
-                    "void C.M(System.Object o, System.String s)"
+                    "void C.M(System.Object o, System.String s)",
                 }
             );
 
@@ -9740,7 +9740,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -9777,7 +9777,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -9819,7 +9819,7 @@ class C
     static void M() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -9875,7 +9875,7 @@ class C
     static void M() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -9912,7 +9912,7 @@ class C
     static void M() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -9943,7 +9943,7 @@ class C
     static void M() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10060,7 +10060,7 @@ class C
     static void M() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10111,7 +10111,7 @@ class C
     static void M8<T>(T t) where T : unmanaged {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10217,7 +10217,7 @@ class C
     static void M5(out int o) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10279,7 +10279,7 @@ class C
     static void M6(int? o) {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10332,7 +10332,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10465,7 +10465,7 @@ class C<T> where T : unmanaged
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10613,7 +10613,7 @@ class C<T1>
     static void M<T2>() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10655,7 +10655,7 @@ class C
     static void M3(S<S<int>> o) {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10689,7 +10689,7 @@ class C
     static void M3(S<S<object>> o) {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -10859,7 +10859,7 @@ public class C
     public static void M1() { }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11103,7 +11103,7 @@ class Test
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11141,7 +11141,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11243,7 +11243,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11406,7 +11406,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11504,7 +11504,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11580,7 +11580,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11708,7 +11708,7 @@ public static class CExt
     public static SEnumerator GetEnumerator(this S s) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11750,7 +11750,7 @@ public static class CExt
     public static SEnumerator GetEnumerator(this S s) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11789,7 +11789,7 @@ public static class CExt
     public static SEnumerator GetEnumerator(this S s) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11827,7 +11827,7 @@ public class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11889,7 +11889,7 @@ public class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11928,7 +11928,7 @@ static class CExt
     public static void Extension(this S s) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -11978,7 +11978,7 @@ static class CExt
     public static void Deconstruct(this S s, out int i1, out int i2) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12043,7 +12043,7 @@ static class CExt
     public static void Add(this S s, int i) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12094,7 +12094,7 @@ static class CExt
     public static Result GetAwaiter(this S s) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12138,7 +12138,7 @@ static class CExt
     public static ref int GetPinnableReference(this S s) => throw null;
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.UnsafeReleaseDll
             );
@@ -12170,7 +12170,7 @@ class C
     public static void Main() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -12201,7 +12201,7 @@ class D
     public static void Main() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -12235,7 +12235,7 @@ class D
     public static void Main() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -12262,7 +12262,7 @@ class D
     public static async Task Main() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -12308,7 +12308,7 @@ class D
     public static async Task Main() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -12346,7 +12346,7 @@ class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -12387,7 +12387,7 @@ public class C
     public static void M2() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12424,7 +12424,7 @@ public class C
     public static void M1() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12521,7 +12521,7 @@ class C
     public static void Func() {}
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12552,7 +12552,7 @@ class A
     static void F() { }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -12585,7 +12585,7 @@ class C
     static Type[] F() { throw null!; }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 
@@ -13295,7 +13295,7 @@ public unsafe class C
                             isSuppressed: false
                         )
                         .WithArguments("C.M()", "Default")
-                        .WithLocation(10, 39)
+                        .WithLocation(10, 39),
                 };
 
             if (diagnosticToSkip != 1)
@@ -13478,7 +13478,7 @@ static void M()
     Console.WriteLine(1);
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 },
                 options: TestOptions.UnsafeReleaseExe,
                 targetFramework: TargetFramework.NetCoreApp
@@ -13521,7 +13521,7 @@ public unsafe class C
     }
 }
 ",
-                    UnmanagedCallersOnlyAttribute
+                    UnmanagedCallersOnlyAttribute,
                 }
             );
 

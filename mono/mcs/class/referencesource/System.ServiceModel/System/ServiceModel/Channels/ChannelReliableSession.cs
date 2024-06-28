@@ -701,7 +701,7 @@ namespace System.ServiceModel.Channels
             NotFaulted,
             LocallyFaulted,
             RemotelyFaulted,
-            CleanedUp
+            CleanedUp,
         }
 
         public delegate void UnblockChannelCloseHandler();
@@ -1305,7 +1305,7 @@ namespace System.ServiceModel.Channels
             Idle,
             KeepAlive,
             FastPolling,
-            NotPolling
+            NotPolling,
         }
     }
 

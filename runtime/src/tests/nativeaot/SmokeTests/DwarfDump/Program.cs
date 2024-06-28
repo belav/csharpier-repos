@@ -48,7 +48,7 @@ public class Program
                 Arguments = $"--verify {Environment.ProcessPath}",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             }
         );
 

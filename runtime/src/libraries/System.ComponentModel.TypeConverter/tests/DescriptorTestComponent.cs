@@ -8,7 +8,7 @@ namespace System.ComponentModel.Tests
     internal enum DescriptorTestEnum
     {
         Value0 = 0,
-        Value1 = 1
+        Value1 = 1,
     }
 
     internal class DescriptorTestComponent : IComponent, ISite

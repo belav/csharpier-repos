@@ -382,7 +382,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 }
             );
 
@@ -434,7 +434,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 Set = ds,
                 Middle = "Middle",
                 Table = CreateDataTable("LoneTable", 2),
-                After = "After"
+                After = "After",
             };
 
             string json = JsonConvert.SerializeObject(
@@ -576,12 +576,12 @@ namespace Newtonsoft.Json.Tests.Converters
             {
                 TableWrapper1 = new DataTableWrapper
                 {
-                    DataTableProperty = CreateDataTable(3, "Table1Col")
+                    DataTableProperty = CreateDataTable(3, "Table1Col"),
                 },
                 TableWrapper2 = new DataTableWrapper
                 {
-                    DataTableProperty = CreateDataTable(3, "Table2Col")
-                }
+                    DataTableProperty = CreateDataTable(3, "Table2Col"),
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -655,7 +655,7 @@ namespace Newtonsoft.Json.Tests.Converters
             {
                 var dataTableSerializer = new JsonSerializer
                 {
-                    ContractResolver = new LowercaseContractResolver()
+                    ContractResolver = new LowercaseContractResolver(),
                 };
 
                 base.WriteJson(writer, value, dataTableSerializer);

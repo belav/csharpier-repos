@@ -18,7 +18,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
@@ -44,7 +44,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
@@ -72,7 +72,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
             HttpAntiForgeryException expectedException = new HttpAntiForgeryException(
@@ -109,7 +109,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                CookieName = "cookie-name"
+                CookieName = "cookie-name",
             };
 
             Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
@@ -137,7 +137,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(
@@ -163,7 +163,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             HttpAntiForgeryException expectedException = new HttpAntiForgeryException(
@@ -198,7 +198,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
 
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
-                FormFieldName = "form-field-name"
+                FormFieldName = "form-field-name",
             };
 
             Mock<MockableAntiForgeryTokenSerializer> mockSerializer =
@@ -238,7 +238,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
             MockAntiForgeryConfig config = new MockAntiForgeryConfig()
             {
                 CookieName = "cookie-name",
-                RequireSSL = requireSsl
+                RequireSSL = requireSsl,
             };
 
             AntiForgeryTokenStore tokenStore = new AntiForgeryTokenStore(

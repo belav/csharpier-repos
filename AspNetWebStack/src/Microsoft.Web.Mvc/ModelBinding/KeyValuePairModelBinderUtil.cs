@@ -22,7 +22,7 @@ namespace Microsoft.Web.Mvc.ModelBinding
                     ModelName = ModelBinderUtil.CreatePropertyModelName(
                         parentBindingContext.ModelName,
                         propertyName
-                    )
+                    ),
                 };
 
             IExtensibleModelBinder binder = parentBindingContext.ModelBinderProviders.GetBinder(

@@ -147,7 +147,7 @@ IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await Undefi
                 //         /*<bind>*/await UndefinedTask/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "UndefinedTask")
                     .WithArguments("UndefinedTask")
-                    .WithLocation(9, 25)
+                    .WithLocation(9, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
@@ -187,7 +187,7 @@ IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await i')
                 //         /*<bind>*/await i/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "await i")
                     .WithArguments("int", "GetAwaiter")
-                    .WithLocation(9, 19)
+                    .WithLocation(9, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
@@ -228,7 +228,7 @@ IAwaitOperation (OperationKind.Await, Type: ?, IsInvalid) (Syntax: 'await /*</bi
                 //         /*<bind>*/await /*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(9, 36)
+                    .WithLocation(9, 36),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AwaitExpressionSyntax>(
@@ -283,7 +283,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/await t;/*</bind>*/
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "t")
                     .WithArguments("t")
-                    .WithLocation(9, 25)
+                    .WithLocation(9, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -328,7 +328,7 @@ class C
                 //         System.Threading.Tasks.ValueTask DisposeAsync();
                 Diagnostic(ErrorCode.ERR_DottedTypeNameNotFoundInNS, "ValueTask")
                     .WithArguments("ValueTask", "System.Threading.Tasks")
-                    .WithLocation(32, 32)
+                    .WithLocation(32, 32),
             };
 
             string expectedFlowGraph =

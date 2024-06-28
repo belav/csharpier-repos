@@ -158,7 +158,7 @@ namespace System.Security.Cryptography.Cose.Tests
                 CoseHeaderLabel.Algorithm,
                 CoseHeaderLabel.ContentType,
                 CoseHeaderLabel.CriticalHeaders,
-                CoseHeaderLabel.KeyIdentifier
+                CoseHeaderLabel.KeyIdentifier,
             };
 
             foreach (CoseHeaderLabel label in labelsToTest)
@@ -220,7 +220,7 @@ namespace System.Security.Cryptography.Cose.Tests
                     KnownHeaderCrit => GetDummyCritHeaderValue(),
                     KnownHeaderContentType => EncodeString(ContentTypeDummyValue, writer),
                     KnownHeaderKid => EncodeBytes(s_sampleContent, writer),
-                    _ => throw new InvalidOperationException()
+                    _ => throw new InvalidOperationException(),
                 };
                 AssertExtensions.SequenceEqual(expectedValue.Span, value.EncodedValue.Span);
                 currentHeader++;
@@ -600,7 +600,7 @@ namespace System.Security.Cryptography.Cose.Tests
                 int intValue => CoseHeaderValue.FromInt32(intValue),
                 string stringValue => CoseHeaderValue.FromString(stringValue),
                 byte[] bytesValue => CoseHeaderValue.FromBytes(bytesValue),
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
         }
 
@@ -629,7 +629,7 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 new object[] { SetValueMethod.ItemSet },
                 new object[] { SetValueMethod.Add },
-                new object[] { SetValueMethod.AddShortcut }
+                new object[] { SetValueMethod.AddShortcut },
             };
 
         public static IEnumerable<object[]> SetValueGetValueData =>
@@ -637,7 +637,7 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 new object[] { SetValueMethod.ItemSet, GetValueMethod.ItemGet },
                 new object[] { SetValueMethod.Add, GetValueMethod.TryGetValue },
-                new object[] { SetValueMethod.AddShortcut, GetValueMethod.GetValueShortcut }
+                new object[] { SetValueMethod.AddShortcut, GetValueMethod.GetValueShortcut },
             };
 
         public static IEnumerable<object[]> KnownHeadersEncodedValues_TestData()

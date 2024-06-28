@@ -83,7 +83,7 @@ namespace System.Threading.RateLimiting
                 QueueProcessingOrder = options.QueueProcessingOrder,
                 QueueLimit = options.QueueLimit,
                 Window = options.Window,
-                AutoReplenishment = options.AutoReplenishment
+                AutoReplenishment = options.AutoReplenishment,
             };
 
             _permitCount = options.PermitLimit;
@@ -447,7 +447,7 @@ namespace System.Threading.RateLimiting
         {
             private static readonly string[] s_allMetadataNames = new[]
             {
-                MetadataName.RetryAfter.Name
+                MetadataName.RetryAfter.Name,
             };
 
             private readonly TimeSpan? _retryAfter;

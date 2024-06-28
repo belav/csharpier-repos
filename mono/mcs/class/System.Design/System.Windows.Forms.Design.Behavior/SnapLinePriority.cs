@@ -36,6 +36,6 @@ namespace System.Windows.Forms.Design.Behavior
         Low = 1,
         Medium,
         High,
-        Always
+        Always,
     }
 }

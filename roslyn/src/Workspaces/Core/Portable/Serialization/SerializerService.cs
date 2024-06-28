@@ -296,5 +296,5 @@ internal enum SerializationKinds
 {
     Bits,
     FilePath,
-    MemoryMapFile
+    MemoryMapFile,
 }

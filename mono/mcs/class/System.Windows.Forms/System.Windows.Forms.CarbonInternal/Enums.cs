@@ -44,7 +44,7 @@ namespace System.Windows.Forms.CarbonInternal
         kSheetAlertWindowClass = 15,
         kAltPlainWindowClass = 16,
         kDrawerWindowClass = 20,
-        kAllWindowClasses = 0xFFFFFFFF
+        kAllWindowClasses = 0xFFFFFFFF,
     }
 
     internal enum WindowAttributes : uint
@@ -78,7 +78,8 @@ namespace System.Windows.Forms.CarbonInternal
                 | kWindowCollapseBoxAttribute
                 | kWindowResizableAttribute
             ),
-        kWindowStandardFloatingAttributes = (kWindowCloseBoxAttribute | kWindowCollapseBoxAttribute)
+        kWindowStandardFloatingAttributes =
+            (kWindowCloseBoxAttribute | kWindowCollapseBoxAttribute),
     }
 
     internal enum ThemeCursor : uint
@@ -101,7 +102,7 @@ namespace System.Windows.Forms.CarbonInternal
         kThemeResizeLeftCursor = 15,
         kThemeResizeRightCursor = 16,
         kThemeResizeLeftRightCursor = 17,
-        kThemeNotAllowedCursor = 18
+        kThemeNotAllowedCursor = 18,
     }
 
     internal enum MouseTrackingResult : ushort
@@ -114,7 +115,7 @@ namespace System.Windows.Forms.CarbonInternal
         kMouseTrackingKeyModifiersChanged = 6,
         kMouseTrackingUserCancelled = 7,
         kMouseTrackingTimedOut = 8,
-        kMouseTrackingMouseMoved = 9
+        kMouseTrackingMouseMoved = 9,
     }
 
     internal enum CFStringEncoding : uint
@@ -132,6 +133,6 @@ namespace System.Windows.Forms.CarbonInternal
         kCFStringEncodingUTF16LE = 0x14000100,
         kCFStringEncodingUTF32 = 0x0c000100,
         kCFStringEncodingUTF32BE = 0x18000100,
-        kCFStringEncodingUTF32LE = 0x1c000100
+        kCFStringEncodingUTF32LE = 0x1c000100,
     }
 }

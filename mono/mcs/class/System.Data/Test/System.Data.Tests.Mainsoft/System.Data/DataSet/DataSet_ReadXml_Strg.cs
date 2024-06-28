@@ -91,7 +91,7 @@ namespace tests.system_data_dll.System_Data
                             string.Empty,
                             string.Empty,
                             new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                            35
+                            35,
                         }
                     );
                 ds1.Tables[1]

@@ -433,7 +433,7 @@ namespace System.Drawing
                 ["threedlightshadow"] = Color.FromKnownColor(KnownColor.ControlLightLight),
                 ["window"] = Color.FromKnownColor(KnownColor.Window),
                 ["windowframe"] = Color.FromKnownColor(KnownColor.WindowFrame),
-                ["windowtext"] = Color.FromKnownColor(KnownColor.WindowText)
+                ["windowtext"] = Color.FromKnownColor(KnownColor.WindowText),
             };
         }
     }

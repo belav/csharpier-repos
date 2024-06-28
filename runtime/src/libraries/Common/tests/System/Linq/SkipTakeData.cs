@@ -26,7 +26,7 @@ namespace System.Linq.Tests
                 100,
                 250,
                 500,
-                int.MaxValue
+                int.MaxValue,
             };
             counts = counts.Concat(counts.Select(c => -c)).Append(0).Append(int.MinValue);
 

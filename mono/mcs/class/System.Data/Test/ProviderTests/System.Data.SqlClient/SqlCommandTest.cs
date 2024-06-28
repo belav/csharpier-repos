@@ -3769,7 +3769,7 @@ namespace MonoTests.System.Data.Connected.SqlClient
         private enum Status
         {
             OK = 0,
-            Error = 3
+            Error = 3,
         }
 
         private readonly string CREATE_TMP_SP_PARAM_TEST =

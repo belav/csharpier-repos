@@ -58,13 +58,13 @@ namespace System.Web.Http.Tracing.Tracers
                 new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info)
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "CreateController"
+                    Operation = "CreateController",
                 },
                 new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info)
                 {
                     Kind = TraceKind.End,
-                    Operation = "CreateController"
-                }
+                    Operation = "CreateController",
+                },
             };
 
             // Act
@@ -99,13 +99,13 @@ namespace System.Web.Http.Tracing.Tracers
                 new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Info)
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "CreateController"
+                    Operation = "CreateController",
                 },
                 new TraceRecord(_request, TraceCategories.ControllersCategory, TraceLevel.Error)
                 {
                     Kind = TraceKind.End,
-                    Operation = "CreateController"
-                }
+                    Operation = "CreateController",
+                },
             };
 
             // Act

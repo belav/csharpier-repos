@@ -317,7 +317,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                     serviceStarting.Set();
                                     Assert.True(startCancelled.WaitOne(TimeSpan.FromSeconds(5)));
                                     ct.ThrowIfCancellationRequested();
-                                }
+                                },
                             });
                         }
                     )
@@ -454,7 +454,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                 StartAction = ct =>
                                 {
                                     serviceStarting.Set();
-                                }
+                                },
                             });
                             services.AddSingleton<IHostLifetime>(_ => new FakeHostLifetime()
                             {
@@ -462,7 +462,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                 {
                                     lifetimeStart.Set();
                                     Assert.True(lifetimeContinue.WaitOne(TimeSpan.FromSeconds(5)));
-                                }
+                                },
                             });
                         }
                     )
@@ -514,7 +514,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                 StartAction = ct =>
                                 {
                                     serviceStarting.Set();
-                                }
+                                },
                             });
                             services.AddSingleton<IHostLifetime>(_ => new FakeHostLifetime()
                             {
@@ -522,7 +522,7 @@ namespace Microsoft.Extensions.Hosting.Internal
                                 {
                                     lifetimeStart.Set();
                                     WaitHandle.WaitAny(new[] { lifetimeContinue, ct.WaitHandle });
-                                }
+                                },
                             });
                         }
                     )

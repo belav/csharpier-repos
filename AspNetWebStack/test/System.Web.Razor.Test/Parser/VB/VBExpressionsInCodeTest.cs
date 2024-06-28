@@ -40,7 +40,7 @@ namespace System.Web.Razor.Test.Parser.VB
                         11,
                         1,
                         5
-                    )
+                    ),
                 }
             );
         }
@@ -77,7 +77,7 @@ namespace System.Web.Razor.Test.Parser.VB
                         11,
                         1,
                         5
-                    )
+                    ),
                 }
             );
         }

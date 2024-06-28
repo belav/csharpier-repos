@@ -20,7 +20,7 @@ namespace System.Text.Tests
                     new byte[] { 97, (byte)c, 98 },
                     0,
                     3,
-                    "a" + c.ToString() + "b"
+                    "a" + c.ToString() + "b",
                 };
             }
 
@@ -30,35 +30,35 @@ namespace System.Text.Tests
                 new byte[] { 70, 111, 111, 66, 65, 208, 128, 82 },
                 0,
                 8,
-                "FooBA\u0400R"
+                "FooBA\u0400R",
             };
             yield return new object[]
             {
                 new byte[] { 195, 128, 110, 105, 109, 97, 204, 128, 108 },
                 0,
                 9,
-                "\u00C0nima\u0300l"
+                "\u00C0nima\u0300l",
             };
             yield return new object[]
             {
                 new byte[] { 84, 101, 115, 116, 240, 144, 181, 181, 84, 101, 115, 116 },
                 0,
                 12,
-                "Test\uD803\uDD75Test"
+                "Test\uD803\uDD75Test",
             };
             yield return new object[]
             {
                 new byte[] { 0, 84, 101, 10, 115, 116, 0, 9, 0, 84, 15, 101, 115, 116, 0 },
                 0,
                 15,
-                "\0Te\nst\0\t\0T\u000Fest\0"
+                "\0Te\nst\0\t\0T\u000Fest\0",
             };
             yield return new object[]
             {
                 new byte[] { 240, 144, 181, 181, 240, 144, 181, 181, 240, 144, 181, 181 },
                 0,
                 12,
-                "\uD803\uDD75\uD803\uDD75\uD803\uDD75"
+                "\uD803\uDD75\uD803\uDD75\uD803\uDD75",
             };
             yield return new object[] { new byte[] { 196, 176 }, 0, 2, "\u0130" };
             yield return new object[] { new byte[] { 0x61, 0xCC, 0x8A }, 0, 3, "\u0061\u030A" };
@@ -82,11 +82,11 @@ namespace System.Text.Tests
                     0xC2,
                     0xA3,
                     0xC2,
-                    0xA4
+                    0xA4,
                 },
                 0,
                 16,
-                "\u00A4\u00D0aR|{AnGe\u00A3\u00A4"
+                "\u00A4\u00D0aR|{AnGe\u00A3\u00A4",
             };
 
             yield return new object[] { new byte[] { 0x00, 0x7F }, 0, 2, "\u0000\u007F" };
@@ -107,11 +107,11 @@ namespace System.Text.Tests
                     0x00,
                     0x7F,
                     0x00,
-                    0x7F
+                    0x7F,
                 },
                 0,
                 14,
-                "\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F"
+                "\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F\u0000\u007F",
             };
 
             yield return new object[]
@@ -119,7 +119,7 @@ namespace System.Text.Tests
                 new byte[] { 0xC2, 0x80, 0xDF, 0xBF },
                 0,
                 4,
-                "\u0080\u07FF"
+                "\u0080\u07FF",
             };
             yield return new object[]
             {
@@ -140,11 +140,11 @@ namespace System.Text.Tests
                     0xC2,
                     0x80,
                     0xDF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 16,
-                "\u0080\u07FF\u0080\u07FF\u0080\u07FF\u0080\u07FF"
+                "\u0080\u07FF\u0080\u07FF\u0080\u07FF\u0080\u07FF",
             };
 
             yield return new object[]
@@ -152,7 +152,7 @@ namespace System.Text.Tests
                 new byte[] { 0xE0, 0xA0, 0x80, 0xE0, 0xBF, 0xBF },
                 0,
                 6,
-                "\u0800\u0FFF"
+                "\u0800\u0FFF",
             };
             yield return new object[]
             {
@@ -175,11 +175,11 @@ namespace System.Text.Tests
                     0x80,
                     0xE0,
                     0xBF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 18,
-                "\u0800\u0FFF\u0800\u0FFF\u0800\u0FFF"
+                "\u0800\u0FFF\u0800\u0FFF\u0800\u0FFF",
             };
 
             yield return new object[]
@@ -187,7 +187,7 @@ namespace System.Text.Tests
                 new byte[] { 0xE1, 0x80, 0x80, 0xEC, 0xBF, 0xBF },
                 0,
                 6,
-                "\u1000\uCFFF"
+                "\u1000\uCFFF",
             };
             yield return new object[]
             {
@@ -210,11 +210,11 @@ namespace System.Text.Tests
                     0x80,
                     0xEC,
                     0xBF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 18,
-                "\u1000\uCFFF\u1000\uCFFF\u1000\uCFFF"
+                "\u1000\uCFFF\u1000\uCFFF\u1000\uCFFF",
             };
 
             yield return new object[]
@@ -222,7 +222,7 @@ namespace System.Text.Tests
                 new byte[] { 0xED, 0x80, 0x80, 0xED, 0x9F, 0xBF },
                 0,
                 6,
-                "\uD000\uD7FF"
+                "\uD000\uD7FF",
             };
             yield return new object[]
             {
@@ -245,11 +245,11 @@ namespace System.Text.Tests
                     0x80,
                     0xED,
                     0x9F,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 18,
-                "\uD000\uD7FF\uD000\uD7FF\uD000\uD7FF"
+                "\uD000\uD7FF\uD000\uD7FF\uD000\uD7FF",
             };
 
             yield return new object[]
@@ -257,7 +257,7 @@ namespace System.Text.Tests
                 new byte[] { 0xF0, 0x90, 0x80, 0x80, 0xF0, 0xBF, 0xBF, 0xBF },
                 0,
                 8,
-                "\uD800\uDC00\uD8BF\uDFFF"
+                "\uD800\uDC00\uD8BF\uDFFF",
             };
             yield return new object[]
             {
@@ -278,11 +278,11 @@ namespace System.Text.Tests
                     0xF0,
                     0xBF,
                     0xBF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 16,
-                "\uD800\uDC00\uD8BF\uDFFF\uD800\uDC00\uD8BF\uDFFF"
+                "\uD800\uDC00\uD8BF\uDFFF\uD800\uDC00\uD8BF\uDFFF",
             };
 
             yield return new object[]
@@ -290,7 +290,7 @@ namespace System.Text.Tests
                 new byte[] { 0xF1, 0x80, 0x80, 0x80, 0xF3, 0xBF, 0xBF, 0xBF },
                 0,
                 8,
-                "\uD8C0\uDC00\uDBBF\uDFFF"
+                "\uD8C0\uDC00\uDBBF\uDFFF",
             };
             yield return new object[]
             {
@@ -311,11 +311,11 @@ namespace System.Text.Tests
                     0xF3,
                     0xBF,
                     0xBF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 16,
-                "\uD8C0\uDC00\uDBBF\uDFFF\uD8C0\uDC00\uDBBF\uDFFF"
+                "\uD8C0\uDC00\uDBBF\uDFFF\uD8C0\uDC00\uDBBF\uDFFF",
             };
 
             yield return new object[]
@@ -323,7 +323,7 @@ namespace System.Text.Tests
                 new byte[] { 0xF4, 0x80, 0x80, 0x80, 0xF4, 0x8F, 0xBF, 0xBF },
                 0,
                 8,
-                "\uDBC0\uDC00\uDBFF\uDFFF"
+                "\uDBC0\uDC00\uDBFF\uDFFF",
             };
             yield return new object[]
             {
@@ -344,11 +344,11 @@ namespace System.Text.Tests
                     0xF4,
                     0x8F,
                     0xBF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 16,
-                "\uDBC0\uDC00\uDBFF\uDFFF\uDBC0\uDC00\uDBFF\uDFFF"
+                "\uDBC0\uDC00\uDBFF\uDFFF\uDBC0\uDC00\uDBFF\uDFFF",
             };
 
             // Long ASCII strings
@@ -357,14 +357,14 @@ namespace System.Text.Tests
                 new byte[] { 84, 101, 115, 116, 83, 116, 114, 105, 110, 103 },
                 0,
                 10,
-                "TestString"
+                "TestString",
             };
             yield return new object[]
             {
                 new byte[] { 84, 101, 115, 116, 84, 101, 115, 116 },
                 0,
                 8,
-                "TestTest"
+                "TestTest",
             };
 
             // Control codes
@@ -373,21 +373,21 @@ namespace System.Text.Tests
                 new byte[] { 0x1F, 0x10, 0x00, 0x09 },
                 0,
                 4,
-                "\u001F\u0010\u0000\u0009"
+                "\u001F\u0010\u0000\u0009",
             };
             yield return new object[]
             {
                 new byte[] { 0x1F, 0x00, 0x10, 0x09 },
                 0,
                 4,
-                "\u001F\u0000\u0010\u0009"
+                "\u001F\u0000\u0010\u0009",
             };
             yield return new object[]
             {
                 new byte[] { 0x00, 0x1F, 0x10, 0x09 },
                 0,
                 4,
-                "\u0000\u001F\u0010\u0009"
+                "\u0000\u001F\u0010\u0009",
             };
 
             // BOM
@@ -396,7 +396,7 @@ namespace System.Text.Tests
                 new byte[] { 0xEF, 0xBB, 0xBF, 0x41 },
                 0,
                 4,
-                "\uFEFF\u0041"
+                "\uFEFF\u0041",
             };
 
             // U+FDD0 - U+FDEF
@@ -405,7 +405,7 @@ namespace System.Text.Tests
                 new byte[] { 0xEF, 0xB7, 0x90, 0xEF, 0xB7, 0xAF },
                 0,
                 6,
-                "\uFDD0\uFDEF"
+                "\uFDD0\uFDEF",
             };
 
             // 2 byte encoding
@@ -423,7 +423,7 @@ namespace System.Text.Tests
                 new byte[] { 97, 240, 144, 128, 128, 98 },
                 0,
                 6,
-                "a\uD800\uDC00b"
+                "a\uD800\uDC00b",
             };
 
             yield return new object[]
@@ -431,21 +431,21 @@ namespace System.Text.Tests
                 new byte[] { 0xF0, 0x90, 0x8F, 0xBF },
                 0,
                 4,
-                "\uD800\uDFFF"
+                "\uD800\uDFFF",
             };
             yield return new object[]
             {
                 new byte[] { 0xF4, 0x8F, 0xB0, 0x80 },
                 0,
                 4,
-                "\uDBFF\uDC00"
+                "\uDBFF\uDC00",
             };
             yield return new object[]
             {
                 new byte[] { 0xF4, 0x8F, 0xBF, 0xBF },
                 0,
                 4,
-                "\uDBFF\uDFFF"
+                "\uDBFF\uDFFF",
             };
 
             yield return new object[]
@@ -453,7 +453,7 @@ namespace System.Text.Tests
                 new byte[] { 0xF3, 0xB0, 0x80, 0x80 },
                 0,
                 4,
-                "\uDB80\uDC00"
+                "\uDB80\uDC00",
             };
 
             // High BMP non-chars
@@ -483,11 +483,11 @@ namespace System.Text.Tests
                     0x80,
                     0xEF,
                     0xBF,
-                    0xBF
+                    0xBF,
                 },
                 0,
                 18,
-                "\uE000\uFFFF\uE000\uFFFF\uE000\uFFFF"
+                "\uE000\uFFFF\uE000\uFFFF\uE000\uFFFF",
             };
 
             // Empty strings
@@ -527,18 +527,18 @@ namespace System.Text.Tests
                     101,
                     115,
                     116,
-                    176
+                    176,
                 },
                 0,
                 15,
-                "\uFFFDTest\uFFFD\uFFFD\u0130\uFFFDTest\uFFFD"
+                "\uFFFDTest\uFFFD\uFFFD\u0130\uFFFDTest\uFFFD",
             };
             yield return new object[]
             {
                 new byte[] { 240, 240, 144, 181, 181, 240, 144, 181, 181, 240, 144, 240 },
                 0,
                 12,
-                "\uFFFD\uD803\uDD75\uD803\uDD75\uFFFD\uFFFD"
+                "\uFFFD\uD803\uDD75\uD803\uDD75\uFFFD\uFFFD",
             };
 
             // Invalid surrogate bytes
@@ -566,14 +566,14 @@ namespace System.Text.Tests
                     new byte[] { 0xE0, 0x80, 0x80 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xE0, 0x9F, 0x80 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 // Truncated 3-byte sequences
@@ -586,49 +586,49 @@ namespace System.Text.Tests
                     new byte[] { 0xED, 0xA0, 0x80 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xAF, 0xBF },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xB0, 0x80 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xBF, 0xBF },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xA0, 0x80, 0xED, 0xAF, 0xBF },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xB0, 0x80, 0xED, 0xB0, 0x80 },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xA0, 0x80, 0xED, 0xA0, 0x80 },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 // Overlong 4-byte sequences
@@ -637,14 +637,14 @@ namespace System.Text.Tests
                     new byte[] { 0xF0, 0x80, 0x80 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF0, 0x8F, 0x80 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 // Truncated 4-byte sequences
@@ -653,14 +653,14 @@ namespace System.Text.Tests
                     new byte[] { 0xF0, 0x90, 0x41, 0x42 },
                     0,
                     4,
-                    "\uFFFD\u0041\u0042"
+                    "\uFFFD\u0041\u0042",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF0, 0x90, 0x80, 0x42 },
                     0,
                     4,
-                    "\uFFFD\u0042"
+                    "\uFFFD\u0042",
                 };
 
                 // Too high scalar value in surrogates
@@ -669,14 +669,14 @@ namespace System.Text.Tests
                     new byte[] { 0xED, 0xA0, 0x80, 0xEE, 0x80, 0x80 },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uE000"
+                    "\uFFFD\uFFFD\uFFFD\uE000",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF4, 0x90, 0x80, 0x80 },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 // More examples of overlong sequences. This can cause security
@@ -688,28 +688,28 @@ namespace System.Text.Tests
                     new byte[] { 0xE0, 0x80, 0xBF },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF0, 0x80, 0x80, 0xBF },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF8, 0x80, 0x80, 0x80, 0xBF },
                     0,
                     5,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xFC, 0x80, 0x80, 0x80, 0x80, 0xBF },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xC0, 0xBF }, 0, 2, "\uFFFD\uFFFD" };
@@ -718,14 +718,14 @@ namespace System.Text.Tests
                     new byte[] { 0xE0, 0x9C, 0x90 },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF0, 0x8F, 0xA4, 0x80 },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xEF, 0x41 }, 0, 2, "\uFFFD\u0041" };
@@ -737,14 +737,14 @@ namespace System.Text.Tests
                     new byte[] { 0xEF, 0xBF, 0xEF, 0xBF, 0xAE },
                     0,
                     5,
-                    "\uFFFD\uFFEE"
+                    "\uFFFD\uFFEE",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xEF, 0xBF, 0xC0, 0xBF },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xF0, 0xC4, 0x80 }, 0, 3, "\uFFFD\u0100" };
@@ -767,11 +767,11 @@ namespace System.Text.Tests
                         0x47,
                         0x65,
                         0xA3,
-                        0xA4
+                        0xA4,
                     },
                     0,
                     12,
-                    "\uFFFD\uFFFD\u0061\u0052\u007C\u007B\u0041\u006E\u0047\u0065\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\u0061\u0052\u007C\u007B\u0041\u006E\u0047\u0065\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xA3 }, 0, 1, "\uFFFD" };
@@ -781,49 +781,49 @@ namespace System.Text.Tests
                     new byte[] { 0x65, 0xA3, 0xA4 },
                     0,
                     3,
-                    "\u0065\uFFFD\uFFFD"
+                    "\u0065\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0x47, 0x65, 0xA3, 0xA4 },
                     0,
                     4,
-                    "\u0047\u0065\uFFFD\uFFFD"
+                    "\u0047\u0065\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xA4, 0xD0, 0x61, 0xA3, 0xA4 },
                     0,
                     5,
-                    "\uFFFD\uFFFD\u0061\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\u0061\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xA4, 0xD0, 0x61, 0xA3 },
                     0,
                     4,
-                    "\uFFFD\uFFFD\u0061\uFFFD"
+                    "\uFFFD\uFFFD\u0061\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xD0, 0x61, 0xA3 },
                     0,
                     3,
-                    "\uFFFD\u0061\uFFFD"
+                    "\uFFFD\u0061\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xA4, 0x61, 0xA3 },
                     0,
                     3,
-                    "\uFFFD\u0061\uFFFD"
+                    "\uFFFD\u0061\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xD0, 0x61, 0x52, 0xA3 },
                     0,
                     4,
-                    "\uFFFD\u0061\u0052\uFFFD"
+                    "\uFFFD\u0061\u0052\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xAA }, 0, 1, "\uFFFD" };
@@ -834,14 +834,14 @@ namespace System.Text.Tests
                     new byte[] { 0xEF, 0xFF, 0xEE },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xEF, 0xFF, 0xAE },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -849,7 +849,7 @@ namespace System.Text.Tests
                     new byte[] { 0x80, 0x90, 0xA0, 0xB0, 0xC1 },
                     0,
                     5,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -869,11 +869,11 @@ namespace System.Text.Tests
                         0x90,
                         0xA0,
                         0xB0,
-                        0xC1
+                        0xC1,
                     },
                     0,
                     15,
-                    "\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -893,11 +893,11 @@ namespace System.Text.Tests
                         0x7F,
                         0x7F,
                         0x7F,
-                        0x7F
+                        0x7F,
                     },
                     0,
                     15,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F",
                 };
 
                 yield return new object[]
@@ -905,7 +905,7 @@ namespace System.Text.Tests
                     new byte[] { 0xC2, 0x7F, 0xC2, 0xC0, 0xDF, 0x7F, 0xDF, 0xC0 },
                     0,
                     8,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[] { new byte[] { 0xC2, 0xDF }, 0, 2, "\uFFFD\uFFFD" };
                 yield return new object[]
@@ -913,7 +913,7 @@ namespace System.Text.Tests
                     new byte[] { 0x80, 0x80, 0xC1, 0x80, 0xC1, 0xBF },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -932,11 +932,11 @@ namespace System.Text.Tests
                         0xDF,
                         0x7F,
                         0xDF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     14,
-                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u00E1\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u00E1\uFFFD\u007F\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -954,11 +954,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xE0,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     12,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -975,11 +975,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xE0,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     12,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -999,11 +999,11 @@ namespace System.Text.Tests
                         0xA1,
                         0xE0,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     15,
-                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\uFFFD\u007F\u00E1\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\uFFFD\u007F\u00E1\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1033,11 +1033,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xEC,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1066,11 +1066,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xEC,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1088,11 +1088,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xED,
                         0x9F,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     12,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1109,11 +1109,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xED,
                         0xA0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     12,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1133,11 +1133,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xED,
                         0xA0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     15,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\u8000\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\u8000\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1167,11 +1167,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xEF,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1200,11 +1200,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xEF,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1226,11 +1226,11 @@ namespace System.Text.Tests
                         0xF0,
                         0xBF,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1251,11 +1251,11 @@ namespace System.Text.Tests
                         0xF0,
                         0x90,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1276,11 +1276,11 @@ namespace System.Text.Tests
                         0xF0,
                         0xC0,
                         0xBF,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1318,11 +1318,11 @@ namespace System.Text.Tests
                         0xF3,
                         0xBF,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     32,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1359,11 +1359,11 @@ namespace System.Text.Tests
                         0xF3,
                         0x80,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     32,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1400,11 +1400,11 @@ namespace System.Text.Tests
                         0xF3,
                         0xC0,
                         0xBF,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     32,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1426,11 +1426,11 @@ namespace System.Text.Tests
                         0xF4,
                         0x8F,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1451,11 +1451,11 @@ namespace System.Text.Tests
                         0xF4,
                         0x80,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1476,11 +1476,11 @@ namespace System.Text.Tests
                         0xF4,
                         0x90,
                         0xBF,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
             }
             else
@@ -1496,21 +1496,21 @@ namespace System.Text.Tests
                     new byte[] { 0xED, 0xA0, 0x80, 0xED, 0xAF, 0xBF },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xB0, 0x80, 0xED, 0xB0, 0x80 },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xED, 0xA0, 0x80, 0xED, 0xA0, 0x80 },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 // Too high scalar value in surrogates
@@ -1519,14 +1519,14 @@ namespace System.Text.Tests
                     new byte[] { 0xED, 0xA0, 0x80, 0xEE, 0x80, 0x80 },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uE000"
+                    "\uFFFD\uFFFD\uE000",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF4, 0x90, 0x80, 0x80 },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 // These are examples of overlong sequences. This can cause security
@@ -1539,21 +1539,21 @@ namespace System.Text.Tests
                     new byte[] { 0xF0, 0x80, 0x80, 0xBF },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xF8, 0x80, 0x80, 0x80, 0xBF },
                     0,
                     5,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xFC, 0x80, 0x80, 0x80, 0x80, 0xBF },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xC0, 0xBF }, 0, 2, "\uFFFD\uFFFD" };
@@ -1563,7 +1563,7 @@ namespace System.Text.Tests
                     new byte[] { 0xF0, 0x8F, 0xA4, 0x80 },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xEF, 0x41 }, 0, 2, "\uFFFD\u0041" };
@@ -1575,14 +1575,14 @@ namespace System.Text.Tests
                     new byte[] { 0xEF, 0xBF, 0xEF, 0xBF, 0xAE },
                     0,
                     5,
-                    "\uFFFD\uFFEE"
+                    "\uFFFD\uFFEE",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xEF, 0xBF, 0xC0, 0xBF },
                     0,
                     4,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xF0, 0xC4, 0x80 }, 0, 3, "\uFFFD\u0100" };
@@ -1605,11 +1605,11 @@ namespace System.Text.Tests
                         0x47,
                         0x65,
                         0xA3,
-                        0xA4
+                        0xA4,
                     },
                     0,
                     12,
-                    "\uFFFD\uFFFD\u0061\u0052\u007C\u007B\u0041\u006E\u0047\u0065\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\u0061\u0052\u007C\u007B\u0041\u006E\u0047\u0065\uFFFD\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xA3 }, 0, 1, "\uFFFD" };
@@ -1619,49 +1619,49 @@ namespace System.Text.Tests
                     new byte[] { 0x65, 0xA3, 0xA4 },
                     0,
                     3,
-                    "\u0065\uFFFD\uFFFD"
+                    "\u0065\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0x47, 0x65, 0xA3, 0xA4 },
                     0,
                     4,
-                    "\u0047\u0065\uFFFD\uFFFD"
+                    "\u0047\u0065\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xA4, 0xD0, 0x61, 0xA3, 0xA4 },
                     0,
                     5,
-                    "\uFFFD\uFFFD\u0061\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\u0061\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xA4, 0xD0, 0x61, 0xA3 },
                     0,
                     4,
-                    "\uFFFD\uFFFD\u0061\uFFFD"
+                    "\uFFFD\uFFFD\u0061\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xD0, 0x61, 0xA3 },
                     0,
                     3,
-                    "\uFFFD\u0061\uFFFD"
+                    "\uFFFD\u0061\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xA4, 0x61, 0xA3 },
                     0,
                     3,
-                    "\uFFFD\u0061\uFFFD"
+                    "\uFFFD\u0061\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xD0, 0x61, 0x52, 0xA3 },
                     0,
                     4,
-                    "\uFFFD\u0061\u0052\uFFFD"
+                    "\uFFFD\u0061\u0052\uFFFD",
                 };
 
                 yield return new object[] { new byte[] { 0xAA }, 0, 1, "\uFFFD" };
@@ -1672,14 +1672,14 @@ namespace System.Text.Tests
                     new byte[] { 0xEF, 0xFF, 0xEE },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
                     new byte[] { 0xEF, 0xFF, 0xAE },
                     0,
                     3,
-                    "\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1687,7 +1687,7 @@ namespace System.Text.Tests
                     new byte[] { 0x80, 0x90, 0xA0, 0xB0, 0xC1 },
                     0,
                     5,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1707,11 +1707,11 @@ namespace System.Text.Tests
                         0x90,
                         0xA0,
                         0xB0,
-                        0xC1
+                        0xC1,
                     },
                     0,
                     15,
-                    "\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1731,11 +1731,11 @@ namespace System.Text.Tests
                         0x7F,
                         0x7F,
                         0x7F,
-                        0x7F
+                        0x7F,
                     },
                     0,
                     15,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F\u007F",
                 };
 
                 yield return new object[]
@@ -1743,7 +1743,7 @@ namespace System.Text.Tests
                     new byte[] { 0xC2, 0x7F, 0xC2, 0xC0, 0xDF, 0x7F, 0xDF, 0xC0 },
                     0,
                     8,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[] { new byte[] { 0xC2, 0xDF }, 0, 2, "\uFFFD\uFFFD" };
                 yield return new object[]
@@ -1751,7 +1751,7 @@ namespace System.Text.Tests
                     new byte[] { 0x80, 0x80, 0xC1, 0x80, 0xC1, 0xBF },
                     0,
                     6,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1770,11 +1770,11 @@ namespace System.Text.Tests
                         0xDF,
                         0x7F,
                         0xDF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     14,
-                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u00E1\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\u007F\u007F\u007F\u00E1\uFFFD\u007F\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1792,11 +1792,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xE0,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     12,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1813,11 +1813,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xE0,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     12,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1837,11 +1837,11 @@ namespace System.Text.Tests
                         0xA1,
                         0xE0,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     15,
-                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\uFFFD\u007F\u00E1\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\u007F\uFFFD\u007F\u00E1\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1871,11 +1871,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xEC,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1904,11 +1904,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xEC,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -1926,11 +1926,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xED,
                         0x9F,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     12,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1947,11 +1947,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xED,
                         0xA0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     12,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -1971,11 +1971,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xED,
                         0xA0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     15,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u8000\uFFFD\u007F\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u8000\uFFFD\u007F\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -2005,11 +2005,11 @@ namespace System.Text.Tests
                         0x7F,
                         0xEF,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2038,11 +2038,11 @@ namespace System.Text.Tests
                         0xBF,
                         0xEF,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     24,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -2064,11 +2064,11 @@ namespace System.Text.Tests
                         0xF0,
                         0xBF,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2089,11 +2089,11 @@ namespace System.Text.Tests
                         0xF0,
                         0x90,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2114,11 +2114,11 @@ namespace System.Text.Tests
                         0xF0,
                         0xC0,
                         0xBF,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -2156,11 +2156,11 @@ namespace System.Text.Tests
                         0xF3,
                         0xBF,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     32,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2197,11 +2197,11 @@ namespace System.Text.Tests
                         0xF3,
                         0x80,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     32,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2238,11 +2238,11 @@ namespace System.Text.Tests
                         0xF3,
                         0xC0,
                         0xBF,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     32,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
 
                 yield return new object[]
@@ -2264,11 +2264,11 @@ namespace System.Text.Tests
                         0xF4,
                         0x8F,
                         0xBF,
-                        0xC0
+                        0xC0,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2289,11 +2289,11 @@ namespace System.Text.Tests
                         0xF4,
                         0x80,
                         0xC0,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
                 yield return new object[]
                 {
@@ -2314,11 +2314,11 @@ namespace System.Text.Tests
                         0xF4,
                         0x90,
                         0xBF,
-                        0xBF
+                        0xBF,
                     },
                     0,
                     16,
-                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD"
+                    "\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u007F\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD",
                 };
             }
         }

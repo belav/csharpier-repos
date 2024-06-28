@@ -305,6 +305,6 @@ namespace Microsoft.Build.BuildEngine
         Item = 1 << 1,
         Choose = 1 << 2,
 
-        Any = Property | Item | Choose
+        Any = Property | Item | Choose,
     }
 }

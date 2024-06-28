@@ -38,6 +38,6 @@ namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
     {
         HomeSite,
         Relative,
-        Absolute
+        Absolute,
     }
 }

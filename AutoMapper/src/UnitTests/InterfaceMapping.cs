@@ -19,7 +19,7 @@ public class InterfaceInheritance : AutoMapperSpecBase
         {
             Name = "Name",
             PropertyA = "PropertyA",
-            PropertyB = "PropertyB"
+            PropertyB = "PropertyB",
         };
         var destination = new Target();
         Mapper.Map(source, destination);
@@ -76,7 +76,7 @@ public class GenericsAndInterfaces : AutoMapperSpecBase
 {
     MyClass<ContainerClass> source = new MyClass<ContainerClass>
     {
-        Container = new ContainerClass { MyProperty = 3 }
+        Container = new ContainerClass { MyProperty = 3 },
     };
 
     public interface IMyInterface<T>
@@ -342,7 +342,7 @@ public class When_mapping_an_interface_to_an_abstract_type : AutoMapperSpecBase
     {
         var model = new ModelObject
         {
-            Child = new SubChildModelObject { ChildProperty = "child property value" }
+            Child = new SubChildModelObject { ChildProperty = "child property value" },
         };
         _result = Mapper.Map<ModelObject, DtoObject>(model);
     }

@@ -167,7 +167,7 @@ namespace ILLink.Shared.TrimAnalysis
             {
                 MethodDesc method => ShouldWarnWhenAccessedForReflection(method),
                 FieldDesc field => ShouldWarnWhenAccessedForReflection(field),
-                _ => false
+                _ => false,
             };
 
         public DynamicallyAccessedMemberTypes GetGenericParameterAnnotation(
@@ -1398,14 +1398,12 @@ namespace ILLink.Shared.TrimAnalysis
                 "EmptyTypes"
                     when field.OwningType.IsTypeOf(
                         ILLink.Shared.TypeSystemProxy.WellKnownType.System_Type
-                    ) =>
-                    ArrayValue.Create(0, field.OwningType),
+                    ) => ArrayValue.Create(0, field.OwningType),
                 "Empty"
                     when field.OwningType.IsTypeOf(
                         ILLink.Shared.TypeSystemProxy.WellKnownType.System_String
-                    ) =>
-                    new KnownStringValue(string.Empty),
-                _ => new FieldValue(field, GetFieldAnnotation(field))
+                    ) => new KnownStringValue(string.Empty),
+                _ => new FieldValue(field, GetFieldAnnotation(field)),
             };
 
         internal SingleValue GetTypeValueFromGenericArgument(TypeDesc genericArgument)

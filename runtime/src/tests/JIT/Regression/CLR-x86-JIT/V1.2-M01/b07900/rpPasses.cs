@@ -31,7 +31,7 @@ public struct AA
                 new int[] { 18, 117, 73 }[((int)(93.0f))] /= new int[][]
                     {
                         new int[] { 6 },
-                        new int[] { 103, 28, 52, 112, 31 }
+                        new int[] { 103, 28, 52, 112, 31 },
                     }[85][(new int[76u, 48u, 105u])[86, 24, 7]]
             ) { }
             try { }

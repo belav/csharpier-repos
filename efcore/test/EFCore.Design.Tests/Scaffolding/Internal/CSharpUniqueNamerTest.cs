@@ -17,13 +17,13 @@ public class CSharpUniqueNamerTest
         {
             Table = table,
             Name = "Id",
-            StoreType = "int"
+            StoreType = "int",
         };
         var input2 = new DatabaseColumn
         {
             Table = table,
             Name = "Id",
-            StoreType = "int"
+            StoreType = "int",
         };
 
         Assert.Equal("Id", namer.GetName(input1));

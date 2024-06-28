@@ -73,7 +73,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 true,
                 "t1+",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.Point))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.Point)),
             };
             yield return new object[]
             {
@@ -81,57 +81,57 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "t2-",
                 (XsdDataContractExporter exp) => exp.CanExport((Type)null),
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'type')"
+                @"Value cannot be null. (Parameter 'type')",
             };
             yield return new object[]
             {
                 false,
                 "t3-",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.NonSerializableSquare))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.NonSerializableSquare)),
             };
             yield return new object[]
             {
                 true,
                 "t4+",
                 (XsdDataContractExporter exp) =>
-                    exp.CanExport(typeof(Types.NonAttributedPersonStruct))
+                    exp.CanExport(typeof(Types.NonAttributedPersonStruct)),
             };
             yield return new object[]
             {
                 true,
                 "t5+",
                 (XsdDataContractExporter exp) =>
-                    exp.CanExport(typeof(Types.NonAttributedPersonClass))
+                    exp.CanExport(typeof(Types.NonAttributedPersonClass)),
             };
             yield return new object[]
             {
                 true,
                 "t6+",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.ExtendedSquare))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.ExtendedSquare)),
             };
             yield return new object[]
             {
                 false,
                 "t7-",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection1))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection1)),
             };
             yield return new object[]
             {
                 false,
                 "t8-",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection2))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection2)),
             };
             yield return new object[]
             {
                 false,
                 "t9-",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection3))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection3)),
             };
             yield return new object[]
             {
                 false,
                 "t10-",
-                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection4))
+                (XsdDataContractExporter exp) => exp.CanExport(typeof(Types.RecursiveCollection4)),
             };
 
             // CanExport(ICollection<Assembly>)
@@ -140,7 +140,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 true,
                 "ca1+",
                 (XsdDataContractExporter exp) =>
-                    exp.CanExport(new Assembly[] { typeof(DataContractTypes).Assembly })
+                    exp.CanExport(new Assembly[] { typeof(DataContractTypes).Assembly }),
             };
             yield return new object[]
             {
@@ -148,7 +148,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "ca2-",
                 (XsdDataContractExporter exp) => exp.CanExport((ICollection<Assembly>)null),
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'assemblies')"
+                @"Value cannot be null. (Parameter 'assemblies')",
             };
             yield return new object[]
             {
@@ -156,14 +156,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "ca3-",
                 (XsdDataContractExporter exp) => exp.CanExport(new Assembly[] { null }),
                 typeof(ArgumentException),
-                @"Cannot export null assembly provided via 'assemblies' parameter."
+                @"Cannot export null assembly provided via 'assemblies' parameter.",
             };
             yield return new object[]
             {
                 false,
                 "ca4-",
                 (XsdDataContractExporter exp) =>
-                    exp.CanExport(new Assembly[] { typeof(ExporterApiTests).Assembly })
+                    exp.CanExport(new Assembly[] { typeof(ExporterApiTests).Assembly }),
             };
 
             // CanExport(ICollection<Type>)
@@ -172,7 +172,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 true,
                 "ct1+",
                 (XsdDataContractExporter exp) =>
-                    exp.CanExport(new Type[] { typeof(Types.Point), typeof(Types.Circle) })
+                    exp.CanExport(new Type[] { typeof(Types.Point), typeof(Types.Circle) }),
             };
             yield return new object[]
             {
@@ -180,7 +180,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "ct2-",
                 (XsdDataContractExporter exp) => exp.CanExport((ICollection<Type>)null),
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'types')"
+                @"Value cannot be null. (Parameter 'types')",
             };
             yield return new object[]
             {
@@ -188,7 +188,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "ct3-",
                 (XsdDataContractExporter exp) => exp.CanExport(new Type[] { null }),
                 typeof(ArgumentException),
-                @"Cannot export null type provided via 'types' parameter."
+                @"Cannot export null type provided via 'types' parameter.",
             };
             yield return new object[]
             {
@@ -197,7 +197,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 (XsdDataContractExporter exp) =>
                     exp.CanExport(
                         new Type[] { typeof(Types.Point), typeof(Types.NonSerializableSquare) }
-                    )
+                    ),
             };
         }
 
@@ -265,7 +265,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:element name=""Point"" nillable=""true"" type=""tns:Point"" />",
                         ref s
                     );
-                }
+                },
             };
 
             // Export(ICollection<Assembly>)
@@ -285,7 +285,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                     Assert.Equal(autoImportKVP ? 21 : 20, ss.Count);
                     Assert.Equal(autoImportKVP ? 171 : 163, ss.GlobalTypes.Count);
                     Assert.Equal(autoImportKVP ? 204 : 196, ss.GlobalElements.Count);
-                }
+                },
             };
 
             // Export(ICollection<Type>)
@@ -336,7 +336,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:element name=""Circle"" nillable=""true"" type=""tns:Circle"" />",
                         ref s
                     );
-                }
+                },
             };
             yield return new object[]
             {
@@ -347,7 +347,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         {
                             typeof(Types.NonAttributedPersonStruct),
                             typeof(Types.NonAttributedPersonClass),
-                            typeof(Types.ExtendedSquare)
+                            typeof(Types.ExtendedSquare),
                         }
                     ),
                 (string s, XmlSchemaSet ss) =>
@@ -457,7 +457,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         @"<xs:element name=""Point"" nillable=""true"" type=""tns:Point"" />",
                         ref s
                     );
-                }
+                },
             };
 
             // EnumsTest - from Enums.cs
@@ -472,7 +472,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                     //Assert.Equal(3, ss.GlobalAttributes.Count);
                     Assert.Equal(5, ss.GlobalTypes.Count);
                     Assert.Equal(23, ss.GlobalElements.Count);
-                }
+                },
             };
         }
 
@@ -502,14 +502,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "tn",
                 (XsdDataContractExporter exp) => exp.Export((Type)null),
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'type')"
+                @"Value cannot be null. (Parameter 'type')",
             };
             yield return new object[]
             {
                 "tinv",
                 (XsdDataContractExporter exp) => exp.Export(typeof(Types.NonSerializableSquare)),
                 typeof(InvalidDataContractException),
-                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required."
+                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required.",
             };
 
             // Export(ICollection<Assembly>)
@@ -518,14 +518,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "can",
                 (XsdDataContractExporter exp) => exp.Export((ICollection<Assembly>)null),
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'assemblies')"
+                @"Value cannot be null. (Parameter 'assemblies')",
             };
             yield return new object[]
             {
                 "canv",
                 (XsdDataContractExporter exp) => exp.Export(new Assembly[] { null }),
                 typeof(ArgumentException),
-                @"Cannot export null assembly provided via 'assemblies' parameter."
+                @"Cannot export null assembly provided via 'assemblies' parameter.",
             };
             // This exception message might change with updates to this test assembly. Right now, 'NonSerializablePerson' is the non-serializable type that gets found first. If this becomes an issue, consider not verifying the exception message.
             yield return new object[]
@@ -534,7 +534,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 (XsdDataContractExporter exp) =>
                     exp.Export(new Assembly[] { typeof(ExporterApiTests).Assembly }),
                 typeof(InvalidDataContractException),
-                @"Type 'NonSerializablePerson' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required."
+                @"Type 'NonSerializablePerson' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required.",
             };
 
             // Export(ICollection<Type>)
@@ -543,14 +543,14 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 "ctn",
                 (XsdDataContractExporter exp) => exp.Export((ICollection<Type>)null),
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'types')"
+                @"Value cannot be null. (Parameter 'types')",
             };
             yield return new object[]
             {
                 "ctnv",
                 (XsdDataContractExporter exp) => exp.Export(new Type[] { null }),
                 typeof(ArgumentException),
-                @"Cannot export null type provided via 'types' parameter."
+                @"Cannot export null type provided via 'types' parameter.",
             };
             yield return new object[]
             {
@@ -560,7 +560,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                         new Type[] { typeof(Types.Point), typeof(Types.NonSerializableSquare) }
                     ),
                 typeof(InvalidDataContractException),
-                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required."
+                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required.",
             };
         }
 
@@ -597,7 +597,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 "GSTN_Point",
                 typeof(Types.Point),
-                new XmlQualifiedName("Point", "http://basic")
+                new XmlQualifiedName("Point", "http://basic"),
             };
             yield return new object[]
             {
@@ -605,7 +605,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 null,
                 null,
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'type')"
+                @"Value cannot be null. (Parameter 'type')",
             };
             yield return new object[]
             {
@@ -613,13 +613,13 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 typeof(Types.NonSerializableSquare),
                 null,
                 typeof(InvalidDataContractException),
-                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required."
+                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required.",
             };
             yield return new object[]
             {
                 "GSTN_Square",
                 typeof(Types.Square),
-                new XmlQualifiedName("Square", "http://shapes")
+                new XmlQualifiedName("Square", "http://shapes"),
             };
             yield return new object[]
             {
@@ -628,7 +628,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 new XmlQualifiedName(
                     "ExtendedSquare",
                     "http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types"
-                )
+                ),
             };
 
             // From DataContractTypesTest.cs
@@ -639,7 +639,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 new XmlQualifiedName(
                     "Address",
                     "http://schemas.datacontract.org/2004/07/schemaexport.suites"
-                )
+                ),
             };
         }
 
@@ -679,7 +679,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 null,
                 null,
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'type')"
+                @"Value cannot be null. (Parameter 'type')",
             };
             yield return new object[]
             {
@@ -687,7 +687,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 typeof(Types.NonSerializableSquare),
                 null,
                 typeof(InvalidDataContractException),
-                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required."
+                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required.",
             };
         }
 
@@ -724,7 +724,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             {
                 "GREN_Point",
                 typeof(Types.Point),
-                new XmlQualifiedName("Point", "http://basic")
+                new XmlQualifiedName("Point", "http://basic"),
             };
             yield return new object[]
             {
@@ -732,7 +732,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 null,
                 null,
                 typeof(ArgumentNullException),
-                @"Value cannot be null. (Parameter 'type')"
+                @"Value cannot be null. (Parameter 'type')",
             };
             yield return new object[]
             {
@@ -740,13 +740,13 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 typeof(Types.NonSerializableSquare),
                 null,
                 typeof(InvalidDataContractException),
-                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required."
+                @"Type 'System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types.NonSerializableSquare' cannot be serialized. Consider marking it with the DataContractAttribute attribute, and marking all of its members you want serialized with the DataMemberAttribute attribute. Alternatively, you can ensure that the type is public and has a parameterless constructor - all public members of the type will then be serialized, and no attributes will be required.",
             };
             yield return new object[]
             {
                 "GREN_Square",
                 typeof(Types.Square),
-                new XmlQualifiedName("Square", "http://shapes")
+                new XmlQualifiedName("Square", "http://shapes"),
             };
             yield return new object[]
             {
@@ -755,7 +755,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 new XmlQualifiedName(
                     "ExtendedSquare",
                     "http://schemas.datacontract.org/2004/07/System.Runtime.Serialization.Xml.XsdDataContractExporterTests.Types"
-                )
+                ),
             };
         }
 

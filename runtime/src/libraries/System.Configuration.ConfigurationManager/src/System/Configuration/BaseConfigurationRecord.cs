@@ -2664,11 +2664,10 @@ namespace System.Configuration
                     ConfigurationAllowExeDefinition.MachineToRoamingUser,
                 AllowExeDefinitionMachineToLocal =>
                     ConfigurationAllowExeDefinition.MachineToLocalUser,
-                _ =>
-                    throw new ConfigurationErrorsException(
-                        SR.Config_section_allow_exe_definition_attribute_invalid,
-                        xmlUtil
-                    ),
+                _ => throw new ConfigurationErrorsException(
+                    SR.Config_section_allow_exe_definition_attribute_invalid,
+                    xmlUtil
+                ),
             };
 
         internal static ConfigurationAllowDefinition AllowDefinitionToEnum(XmlUtil xmlUtil) =>
@@ -2679,11 +2678,10 @@ namespace System.Configuration
                 AllowDefinitionMachineToApplication =>
                     ConfigurationAllowDefinition.MachineToApplication,
                 AllowDefinitionMachineToWebRoot => ConfigurationAllowDefinition.MachineToWebRoot,
-                _ =>
-                    throw new ConfigurationErrorsException(
-                        SR.Config_section_allow_definition_attribute_invalid,
-                        xmlUtil
-                    ),
+                _ => throw new ConfigurationErrorsException(
+                    SR.Config_section_allow_definition_attribute_invalid,
+                    xmlUtil
+                ),
             };
 
         internal static string CombineConfigKey(string parentConfigKey, string tagName)

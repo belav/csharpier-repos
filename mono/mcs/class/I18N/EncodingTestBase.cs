@@ -202,7 +202,7 @@ namespace MonoTests.I18N
                 0x20,
                 cpInfo.SuperscriptFiveReplacementChar,
                 0x20,
-                cpInfo.InfinityReplacementChar
+                cpInfo.InfinityReplacementChar,
             };
             if (cpInfo.SupplementChar.HasValue)
             {
@@ -364,7 +364,7 @@ namespace MonoTests.I18N
                 0x38,
                 0x30,
                 0x30,
-                0x30
+                0x30,
             };
             // FIXME: some codepages do have U+00AC (logical not sign) or U+20AC (euro sign), we need to adapt the tests
             // Assert.AreEqual (expected, bytes);

@@ -65,7 +65,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 {
                     c,
                     o,
-                    e
+                    e,
                 },
             e => (e.c.CustomerID, e.o.OrderID, e.e.EmployeeID)
         );
@@ -88,7 +88,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         {
                             e1,
                             e2,
-                            e3
+                            e3,
                         },
                     e => (e.e1.EmployeeID, e.e2.EmployeeID, e.e3.EmployeeID)
                 )
@@ -151,7 +151,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 {
                     o1,
                     o1.o2,
-                    Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate")
+                    Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate"),
                 },
             e => e.o1.o2.OrderID
         );
@@ -172,7 +172,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 {
                     o1,
                     o1.o2,
-                    Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate")
+                    Shadow = EF.Property<DateTime?>(o1.o2, "OrderDate"),
                 },
             e => e.o1.o2.OrderID
         );
@@ -226,7 +226,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     on new { a = c.CustomerID, b = c.CustomerID } equals new
                     {
                         a = o.CustomerID,
-                        b = o.CustomerID
+                        b = o.CustomerID,
                     }
                 select new { c, o },
             e => e.o.OrderID
@@ -378,7 +378,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => new
                     {
                         Title = EF.Property<string>(e, "Title"),
-                        Id = e.EmployeeID
+                        Id = e.EmployeeID,
                     }),
             e => e.Id
         );
@@ -400,7 +400,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => new
                     {
                         Title = EF.Property<string>(e, "Title"),
-                        Id = e.EmployeeID
+                        Id = e.EmployeeID,
                     }),
             e => e.Id
         );
@@ -422,7 +422,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                     .Select(e => new
                     {
                         Title = EF.Property<string>(e, "Title"),
-                        Id = e.EmployeeID
+                        Id = e.EmployeeID,
                     }),
             e => e.Id
         );
@@ -519,7 +519,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 {
                     A = c.CustomerID,
                     B = o0.CustomerID,
-                    C = o2.CustomerID
+                    C = o2.CustomerID,
                 },
             e => (e.A, e.B, e.C)
         );
@@ -613,7 +613,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                 {
                     c,
                     o1,
-                    o2
+                    o2,
                 },
             e => (e.c.CustomerID, e.o1?.OrderID, e.o2?.OrderID)
         );
@@ -824,7 +824,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         c.Orders.Select(o => new
                         {
                             OrderProperty = ClientMethod(o),
-                            CustomerProperty = c.ContactName
+                            CustomerProperty = c.ContactName,
                         })
                     ),
             elementSorter: e => e.OrderProperty
@@ -843,7 +843,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         {
                             OrderProperty = ClientMethod(o),
                             o.OrderDetails,
-                            CustomerProperty = c.ContactName
+                            CustomerProperty = c.ContactName,
                         })
                     ),
             elementSorter: e => e.OrderProperty,
@@ -868,7 +868,7 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                         {
                             OrderProperty = ClientMethod(o),
                             o.OrderDetails,
-                            CustomerProperty = c.ContactName
+                            CustomerProperty = c.ContactName,
                         })
                     )
                     .Select(e => new { e.OrderProperty, e.CustomerProperty }),
@@ -1087,9 +1087,9 @@ public abstract class NorthwindJoinQueryTestBase<TFixture> : QueryTestBase<TFixt
                             .Take(1)
                             .Select(o => new
                             {
-                                Title = o.CustomerID == o.Customer.City ? "A" : "B"
+                                Title = o.CustomerID == o.Customer.City ? "A" : "B",
                             })
-                            .ToList()
+                            .ToList(),
                     }),
             asserter: (e, a) => AssertCollection(e.Orders, a.Orders, ordered: true)
         );

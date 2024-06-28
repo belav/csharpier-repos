@@ -95,7 +95,7 @@ namespace System.ServiceModel.Discovery.Configuration
                 throw new ArgumentNullException("contractDescription");
             var ret = new AnnouncementEndpoint(DiscoveryVersion)
             {
-                MaxAnnouncementDelay = this.MaxAnnouncementDelay
+                MaxAnnouncementDelay = this.MaxAnnouncementDelay,
             };
             if (ret.Contract.ContractType != contractDescription.ContractType)
                 throw new ArgumentException(

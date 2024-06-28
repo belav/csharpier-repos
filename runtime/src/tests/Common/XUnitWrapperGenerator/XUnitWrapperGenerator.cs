@@ -1379,7 +1379,7 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                 "freebsd" => Xunit.TestPlatforms.FreeBSD,
                 "netbsd" => Xunit.TestPlatforms.NetBSD,
                 null or "" or "anyos" => Xunit.TestPlatforms.Any,
-                _ => 0
+                _ => 0,
             };
         }
     }

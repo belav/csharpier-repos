@@ -62,9 +62,9 @@ namespace StandAloneTests.GridViewSortingStyles
                         "__EVENTTARGET",
                         "GridView1",
                         "__EVENTARGUMENT",
-                        "Sort$ProductName"
+                        "Sort$ProductName",
                     },
-                    UrlDescription = "Ascending sorting on ProductName"
+                    UrlDescription = "Ascending sorting on ProductName",
                 }
             );
             runItems.Add(
@@ -75,9 +75,9 @@ namespace StandAloneTests.GridViewSortingStyles
                         "__EVENTTARGET",
                         "GridView1",
                         "__EVENTARGUMENT",
-                        "Sort$ProductName"
+                        "Sort$ProductName",
                     },
-                    UrlDescription = "Descending sorting on ProductName"
+                    UrlDescription = "Descending sorting on ProductName",
                 }
             );
             runItems.Add(
@@ -88,9 +88,9 @@ namespace StandAloneTests.GridViewSortingStyles
                         "__EVENTTARGET",
                         "GridView1",
                         "__EVENTARGUMENT",
-                        "Sort$ProductID"
+                        "Sort$ProductID",
                     },
-                    UrlDescription = "Ascending sorting on ProductID"
+                    UrlDescription = "Ascending sorting on ProductID",
                 }
             );
             runItems.Add(
@@ -101,9 +101,9 @@ namespace StandAloneTests.GridViewSortingStyles
                         "__EVENTTARGET",
                         "GridView1",
                         "__EVENTARGUMENT",
-                        "Sort$ProductID"
+                        "Sort$ProductID",
                     },
-                    UrlDescription = "Descending sorting on ProductID"
+                    UrlDescription = "Descending sorting on ProductID",
                 }
             );
             return true;

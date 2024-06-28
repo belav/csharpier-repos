@@ -112,13 +112,12 @@ namespace Internal.Cryptography.Pal.Windows
                                 CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY =>
                                     recipient->OriginatorPublicKeyInfo.ToSubjectIdentifierOrKey(),
 
-                                _ =>
-                                    throw new CryptographicException(
-                                        SR.Format(
-                                            SR.Cryptography_Cms_Invalid_Originator_Identifier_Choice,
-                                            originatorChoice
-                                        )
-                                    ),
+                                _ => throw new CryptographicException(
+                                    SR.Format(
+                                        SR.Cryptography_Cms_Invalid_Originator_Identifier_Choice,
+                                        originatorChoice
+                                    )
+                                ),
                             };
                         }
                     );

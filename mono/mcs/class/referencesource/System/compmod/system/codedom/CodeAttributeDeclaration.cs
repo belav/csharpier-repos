@@ -20,7 +20,7 @@ namespace System.CodeDom
     ///       Represents a single custom attribute.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeAttributeDeclaration
     {
         private string name;

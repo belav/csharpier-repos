@@ -216,7 +216,7 @@ namespace System
             L1 = long.MinValue,
             US1 = ushort.MinValue,
             UI1 = uint.MinValue,
-            UL1 = ulong.MinValue
+            UL1 = ulong.MinValue,
         };
 
         public static Span<byte> GetSpanBE()

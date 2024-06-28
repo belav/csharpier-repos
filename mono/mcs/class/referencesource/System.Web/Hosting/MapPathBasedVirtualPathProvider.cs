@@ -271,7 +271,7 @@ namespace System.Web.Hosting
     {
         Files,
         Directories,
-        All
+        All,
     }
 
     internal class MapPathBasedVirtualPathCollection : MarshalByRefObject, IEnumerable

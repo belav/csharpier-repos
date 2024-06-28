@@ -37,6 +37,6 @@ namespace System.Windows.Forms
         Left = 0,
         Right = 0,
         Down = 4,
-        Up = 4
+        Up = 4,
     }
 }

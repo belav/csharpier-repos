@@ -56,7 +56,7 @@ internal static class DebuggerHelpers
             {
                 Create(key1, value1),
                 Create(key2, value2),
-                Create(key3, value3)
+                Create(key3, value3),
             },
             includeNullValues,
             prefix

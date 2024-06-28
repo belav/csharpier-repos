@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.Http
             private static readonly Func<ObjectFactory> _createActivator = () =>
                 ActivatorUtilities.CreateFactory(
                     typeof(TClient),
-                    new Type[] { typeof(HttpClient), }
+                    new Type[] { typeof(HttpClient) }
                 );
 
             private ObjectFactory? _activator;

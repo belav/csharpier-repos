@@ -71,7 +71,7 @@ public class DefaultPageFactoryProviderTest
             ActionDescriptor = new CompiledPageActionDescriptor
             {
                 PageTypeInfo = typeof(TestPage).GetTypeInfo(),
-            }
+            },
         };
 
         var viewContext = new ViewContext();
@@ -106,7 +106,7 @@ public class DefaultPageFactoryProviderTest
         {
             PageTypeInfo = typeof(ViewDataTestPage).GetTypeInfo(),
             DeclaredModelTypeInfo = typeof(ViewDataTestPageModel).GetTypeInfo(),
-            ModelTypeInfo = typeof(ViewDataTestPageModel).GetTypeInfo()
+            ModelTypeInfo = typeof(ViewDataTestPageModel).GetTypeInfo(),
         };
         descriptor.RelativePath = "/this/is/a/path.cshtml";
 
@@ -185,7 +185,7 @@ public class DefaultPageFactoryProviderTest
         {
             ActionDescriptor = new CompiledPageActionDescriptor
             {
-                PageTypeInfo = typeof(NonGenericViewDataTestPage).GetTypeInfo()
+                PageTypeInfo = typeof(NonGenericViewDataTestPage).GetTypeInfo(),
             },
         };
 
@@ -211,7 +211,7 @@ public class DefaultPageFactoryProviderTest
         {
             ActionDescriptor = new CompiledPageActionDescriptor
             {
-                PageTypeInfo = typeof(TestPage).GetTypeInfo()
+                PageTypeInfo = typeof(TestPage).GetTypeInfo(),
             },
             ViewData = new ViewDataDictionary<TestPage>(
                 modelMetadataProvider,
@@ -219,7 +219,7 @@ public class DefaultPageFactoryProviderTest
             )
             {
                 { "test-key", "test-value" },
-            }
+            },
         };
 
         var viewContext = new ViewContext()
@@ -253,12 +253,12 @@ public class DefaultPageFactoryProviderTest
         {
             ActionDescriptor = new CompiledPageActionDescriptor
             {
-                PageTypeInfo = typeof(PropertiesWithoutRazorInject).GetTypeInfo()
+                PageTypeInfo = typeof(PropertiesWithoutRazorInject).GetTypeInfo(),
             },
-            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
+            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider },
         };
 
-        var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext, };
+        var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext };
 
         var factoryProvider = CreatePageFactory();
 
@@ -290,12 +290,12 @@ public class DefaultPageFactoryProviderTest
         {
             ActionDescriptor = new CompiledPageActionDescriptor
             {
-                PageTypeInfo = typeof(DisposablePage).GetTypeInfo()
+                PageTypeInfo = typeof(DisposablePage).GetTypeInfo(),
             },
-            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
+            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider },
         };
 
-        var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext, };
+        var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext };
 
         var factoryProvider = CreatePageFactory();
 
@@ -322,12 +322,12 @@ public class DefaultPageFactoryProviderTest
         {
             ActionDescriptor = new CompiledPageActionDescriptor
             {
-                PageTypeInfo = typeof(DisposablePage).GetTypeInfo()
+                PageTypeInfo = typeof(DisposablePage).GetTypeInfo(),
             },
-            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider, },
+            HttpContext = new DefaultHttpContext { RequestServices = serviceProvider },
         };
 
-        var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext, };
+        var viewContext = new ViewContext() { HttpContext = pageContext.HttpContext };
 
         var factoryProvider = CreatePageFactory();
 
@@ -394,7 +394,7 @@ public class DefaultPageFactoryProviderTest
                         {
                             IAsyncDisposable asyncDisposable => asyncDisposable.DisposeAsync(),
                             IDisposable disposable => SyncDispose(disposable),
-                            _ => default
+                            _ => default,
                         };
                 }
             );

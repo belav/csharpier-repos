@@ -242,7 +242,7 @@ namespace System.Runtime.InteropServices
         Error = 45,
         IInspectable = 46,
         HString = 47,
-        LPUTF8Str = 48
+        LPUTF8Str = 48,
     }
 
     public sealed class MarshalAsAttribute : Attribute

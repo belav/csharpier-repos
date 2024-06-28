@@ -28,7 +28,7 @@ namespace System.Xml.Schema
         List,
 
         /// <include file='doc\DatatypeImplementation.uex' path='docs/doc[@for="XmlSchemaDatatypeVariety.Union"]/*' />
-        Union
+        Union,
     }
 
     internal class XsdSimpleValue
@@ -951,7 +951,7 @@ namespace System.Xml.Schema
             c_ENUMERATION, // ENUMERATION
             c_QNameXdr, // QName
             c_NCName, // NCName
-            null
+            null,
         };
 
         private static readonly DatatypeImplementation[] c_tokenizedTypesXsd =
@@ -968,7 +968,7 @@ namespace System.Xml.Schema
             c_ENUMERATION, // ENUMERATION
             c_QName, // QName
             c_NCName, // NCName
-            null
+            null,
         };
 
         private static readonly SchemaDatatypeMap[] c_XdrTypes =
@@ -1010,7 +1010,7 @@ namespace System.Xml.Schema
             new SchemaDatatypeMap("ui4", c_unsignedInt),
             new SchemaDatatypeMap("ui8", c_unsignedLong),
             new SchemaDatatypeMap("uri", c_anyURI),
-            new SchemaDatatypeMap("uuid", c_uuid)
+            new SchemaDatatypeMap("uuid", c_uuid),
         };
 
         private static readonly SchemaDatatypeMap[] c_XsdTypes =

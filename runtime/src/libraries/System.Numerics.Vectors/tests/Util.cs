@@ -156,11 +156,9 @@ namespace System.Numerics.Tests
 
         public static float Clamp(float value, float min, float max)
         {
-            return value > max
-                ? max
-                : value < min
-                    ? min
-                    : value;
+            return value > max ? max
+                : value < min ? min
+                : value;
         }
 
         public static T Zero<T>()

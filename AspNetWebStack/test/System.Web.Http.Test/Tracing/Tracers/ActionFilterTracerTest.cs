@@ -32,7 +32,7 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(Task.FromResult<HttpResponseMessage>(response));
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor
@@ -54,7 +54,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "ExecuteActionFilterAsync"
+                    Operation = "ExecuteActionFilterAsync",
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -63,7 +63,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.End,
-                    Operation = "ExecuteActionFilterAsync"
+                    Operation = "ExecuteActionFilterAsync",
                 },
             };
 
@@ -103,7 +103,7 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(tcs.Task);
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor
@@ -125,7 +125,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "ExecuteActionFilterAsync"
+                    Operation = "ExecuteActionFilterAsync",
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -134,7 +134,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.End,
-                    Operation = "ExecuteActionFilterAsync"
+                    Operation = "ExecuteActionFilterAsync",
                 },
             };
 

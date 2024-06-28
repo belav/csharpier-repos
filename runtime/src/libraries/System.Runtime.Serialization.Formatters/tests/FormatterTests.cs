@@ -88,7 +88,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 {
                     calledMethod = name;
                     result = val;
-                }
+                },
             };
 
             Action<string, object> verify = (expectedMember, expectedValue) =>

@@ -35,7 +35,7 @@ namespace XLinqTests
         {
             MethodsEnum.Load,
             MethodsEnum.ReadFrom,
-            MethodsEnum.Parse
+            MethodsEnum.Parse,
         };
 
         #endregion
@@ -57,7 +57,7 @@ namespace XLinqTests
 
             ReadFrom,
 
-            Parse
+            Parse,
         }
 
         #endregion
@@ -69,13 +69,13 @@ namespace XLinqTests
             AddChild(
                 new TestVariation(reader_1)
                 {
-                    Attribute = new VariationAttribute("Read XDocument") { Priority = 0 }
+                    Attribute = new VariationAttribute("Read XDocument") { Priority = 0 },
                 }
             );
             AddChild(
                 new TestVariation(reader_2)
                 {
-                    Attribute = new VariationAttribute("Read XElement") { Priority = 0 }
+                    Attribute = new VariationAttribute("Read XElement") { Priority = 0 },
                 }
             );
             AddChild(
@@ -84,8 +84,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with string content")
                     {
                         Params = new object[] { "<A>truck</A>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -94,8 +94,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with attribute")
                     {
                         Params = new object[] { "<A attr=\"1\" />" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -104,8 +104,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with empty element")
                     {
                         Params = new object[] { "<A />" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -114,8 +114,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with empty content")
                     {
                         Params = new object[] { "<A></A>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -127,10 +127,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />"
+                            "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -141,8 +141,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "<X>t0<A />t00</X>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -152,10 +152,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>"
+                            "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -166,8 +166,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "<X>t0<A>truck</A>t00</X>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -177,10 +177,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>"
+                            "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -189,8 +189,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with attributes")
                     {
                         Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -200,10 +200,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>"
+                            "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -212,8 +212,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with namespace, CData")
                     {
                         Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -224,8 +224,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "<X>t0<A />t00</X>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -235,10 +235,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>"
+                            "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -250,10 +250,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />"
+                            "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -263,10 +263,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>"
+                            "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -275,8 +275,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with string content")
                     {
                         Params = new object[] { "<A>truck</A>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -285,8 +285,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with empty element")
                     {
                         Params = new object[] { "<A />" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -297,8 +297,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { "<X>t0<A>truck</A>t00</X>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -307,8 +307,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with namespace, CData")
                     {
                         Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -318,10 +318,10 @@ namespace XLinqTests
                     {
                         Params = new object[]
                         {
-                            "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>"
+                            "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>",
                         },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -330,8 +330,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with empty content")
                     {
                         Params = new object[] { "<A></A>" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -340,8 +340,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with attribute")
                     {
                         Params = new object[] { "<A attr=\"1\" />" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -350,8 +350,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with attributes")
                     {
                         Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -360,8 +360,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf <Atruck</A>")
                     {
                         Params = new object[] { "<Atruck</A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -370,8 +370,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf empty")
                     {
                         Params = new object[] { "" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -380,8 +380,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf tab")
                     {
                         Params = new object[] { "\t" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -390,8 +390,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf EOL")
                     {
                         Params = new object[] { "\n" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -400,8 +400,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf no closing bracket")
                     {
                         Params = new object[] { "<A >" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -410,8 +410,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf no opening bracket")
                     {
                         Params = new object[] { "A></A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -420,8 +420,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XElement with nwf missing element")
                     {
                         Params = new object[] { "<q=a/>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -430,8 +430,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf empty")
                     {
                         Params = new object[] { "\n" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -440,8 +440,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf empty")
                     {
                         Params = new object[] { "" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -450,8 +450,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf no opening bracket")
                     {
                         Params = new object[] { "A></A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -460,8 +460,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf missing element")
                     {
                         Params = new object[] { "<q=a/>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -470,8 +470,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf empty")
                     {
                         Params = new object[] { "\t" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -480,8 +480,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf no closing bracket")
                     {
                         Params = new object[] { "<A >" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -490,8 +490,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("Read XDocument with nwf <Atruck</A>")
                     {
                         Params = new object[] { "<Atruck</A>" },
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -501,8 +501,8 @@ namespace XLinqTests
                         "XDocument: Call Read after ReadState = Closed"
                     )
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -512,8 +512,8 @@ namespace XLinqTests
                         "XElement: Call Read after ReadState = Closed"
                     )
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -521,8 +521,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XDocument: Null parameters for Load")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -530,8 +530,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XElement: Null parameters for Load")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -541,8 +541,8 @@ namespace XLinqTests
                         "XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -552,8 +552,8 @@ namespace XLinqTests
                         "XElement: Null parameters for Parse, ReadFrom and ReadContentFrom"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
         }

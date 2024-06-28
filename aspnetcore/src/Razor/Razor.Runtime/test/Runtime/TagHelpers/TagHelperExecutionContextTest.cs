@@ -487,7 +487,7 @@ public class TagHelperExecutionContextTest
     {
         // Arrange
         var executionContext = new TagHelperExecutionContext("p", TagMode.StartTagAndEndTag);
-        var expectedAttributes = new TagHelperAttributeList { { "class", "btn" }, };
+        var expectedAttributes = new TagHelperAttributeList { { "class", "btn" } };
         expectedAttributes.Add(
             new TagHelperAttribute("type", "text", HtmlAttributeValueStyle.SingleQuotes)
         );
@@ -540,7 +540,7 @@ public class TagHelperExecutionContextTest
         var expectedAttributes = new TagHelperAttributeList
         {
             { "class", "btn" },
-            { "foo", "bar" }
+            { "foo", "bar" },
         };
         expectedAttributes.Add(
             new TagHelperAttribute("valid", "true", HtmlAttributeValueStyle.NoQuotes)
@@ -573,7 +573,7 @@ public class TagHelperExecutionContextTest
     {
         // Arrange
         var executionContext = new TagHelperExecutionContext("p", TagMode.StartTagAndEndTag);
-        var expectedAttributes = new TagHelperAttributeList { { "class", "btn" }, };
+        var expectedAttributes = new TagHelperAttributeList { { "class", "btn" } };
         expectedAttributes.Add(
             new TagHelperAttribute("something", true, HtmlAttributeValueStyle.SingleQuotes)
         );

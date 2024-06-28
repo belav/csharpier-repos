@@ -171,7 +171,7 @@ namespace System.Collections.ObjectModel.Tests
                 -10000000,
                 -100000000,
                 -1000000000,
-                int.MinValue
+                int.MinValue,
             };
             foreach (var index in iArrInvalidValues)
             {
@@ -188,7 +188,7 @@ namespace System.Collections.ObjectModel.Tests
                 anArray.Length,
                 int.MaxValue,
                 int.MaxValue / 2,
-                int.MaxValue / 10
+                int.MaxValue / 10,
             };
             foreach (var index in iArrLargeValues)
             {

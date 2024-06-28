@@ -70,6 +70,6 @@ namespace Mono.Security.X509
 
         //		RevocationStatusUnknown = 64,
         //		Revoked = 4,
-        UntrustedRoot = 32
+        UntrustedRoot = 32,
     }
 }

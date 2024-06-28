@@ -37,7 +37,7 @@ public class SqlServerAggregateMethodCallTranslatorProvider
                 new SqlServerStringAggregateMethodTranslator(
                     sqlExpressionFactory,
                     typeMappingSource
-                )
+                ),
             }
         );
     }

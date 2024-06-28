@@ -36,7 +36,7 @@ internal sealed class Heartbeat : IDisposable
         _timerThread = new Thread(state => ((Heartbeat)state!).TimerLoop())
         {
             Name = "Kestrel Timer",
-            IsBackground = true
+            IsBackground = true,
         };
     }
 

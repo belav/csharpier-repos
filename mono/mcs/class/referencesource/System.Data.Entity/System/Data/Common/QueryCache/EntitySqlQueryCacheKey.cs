@@ -160,7 +160,7 @@ namespace System.Data.Common.QueryCache
                     _eSqlStatement,
                     _parametersToken,
                     _includePathsToken,
-                    Enum.GetName(typeof(MergeOption), _mergeOption)
+                    Enum.GetName(typeof(MergeOption), _mergeOption),
                 }
             );
         }

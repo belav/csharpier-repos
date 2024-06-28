@@ -68,7 +68,7 @@ namespace System
         Buttons,
         BitImageEntwining,
         BitImageType, // 32
-        Last
+        Last,
     }
 }
 #endif

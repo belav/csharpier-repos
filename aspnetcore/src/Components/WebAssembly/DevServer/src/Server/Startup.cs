@@ -80,7 +80,7 @@ internal sealed class Startup
                             // Browser multi-threaded runtime requires cross-origin policy headers to enable SharedArrayBuffer.
                             ApplyCrossOriginPolicyHeaders(fileContext.Context);
                         }
-                    }
+                    },
                 }
             );
         });

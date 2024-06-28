@@ -324,7 +324,7 @@ namespace ILCompiler
 
             List<CorJitFlag> corJitFlags = new List<CorJitFlag>
             {
-                CorJitFlag.CORJIT_FLAG_DEBUG_INFO
+                CorJitFlag.CORJIT_FLAG_DEBUG_INFO,
             };
             if (_hotColdSplitting)
             {

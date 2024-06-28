@@ -31,7 +31,7 @@ public class TokenReplacementTests
                     tokens = null;
                     message = "oops!";
                     return false;
-                }
+                },
             };
 
         command.Parse("@replace-me", config);
@@ -58,7 +58,7 @@ public class TokenReplacementTests
                     tokens = new[] { "123" };
                     message = null;
                     return true;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);
@@ -87,7 +87,7 @@ public class TokenReplacementTests
                     tokens = new[] { "123" };
                     message = null;
                     return true;
-                }
+                },
             };
 
         var result = command.Parse("-x @replace-me", config);
@@ -116,7 +116,7 @@ public class TokenReplacementTests
                     tokens = new[] { "subcommand", "-x", "123" };
                     message = null;
                     return true;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);
@@ -145,7 +145,7 @@ public class TokenReplacementTests
                     tokens = new[] { "one two three" };
                     message = null;
                     return true;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);
@@ -172,7 +172,7 @@ public class TokenReplacementTests
                     tokens = null;
                     message = "oops!";
                     return false;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);
@@ -199,7 +199,7 @@ public class TokenReplacementTests
                     tokens = null;
                     message = null;
                     return false;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);
@@ -228,7 +228,7 @@ public class TokenReplacementTests
                     tokens = null;
                     message = null;
                     return true;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);
@@ -257,7 +257,7 @@ public class TokenReplacementTests
                     tokens = Array.Empty<string>();
                     message = null;
                     return true;
-                }
+                },
             };
 
         var result = command.Parse("@replace-me", config);

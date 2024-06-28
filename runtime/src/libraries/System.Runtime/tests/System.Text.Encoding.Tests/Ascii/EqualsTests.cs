@@ -73,7 +73,7 @@ namespace System.Text.Tests
                                     destination.Fill(iteration);
                                     destination[iteration / 2] = (char)128;
                                 }
-                            )
+                            ),
                         };
                     }
                 }
@@ -105,11 +105,10 @@ namespace System.Text.Tests
                 for (char i = (char)0; i <= 127; i++)
                 {
                     char left = i;
-                    char right = char.IsAsciiLetterUpper(left)
-                        ? char.ToLower(left)
-                        : char.IsAsciiLetterLower(left)
-                            ? char.ToUpper(left)
-                            : left;
+                    char right =
+                        char.IsAsciiLetterUpper(left) ? char.ToLower(left)
+                        : char.IsAsciiLetterLower(left) ? char.ToUpper(left)
+                        : left;
                     yield return new object[] { new string(left, i), new string(right, i) };
                 }
             }
@@ -136,7 +135,7 @@ namespace System.Text.Tests
                         1,
                         Vector128<byte>.Count - 1,
                         Vector128<byte>.Count,
-                        Vector256<byte>.Count + 1
+                        Vector256<byte>.Count + 1,
                     }
                 )
                 {

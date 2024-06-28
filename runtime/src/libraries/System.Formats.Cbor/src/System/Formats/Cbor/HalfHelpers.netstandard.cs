@@ -125,7 +125,7 @@ namespace System.Formats.Cbor
                 26,
                 05,
                 04,
-                31
+                31,
             ];
 
         private static int Log2SoftwareFallback(uint value)

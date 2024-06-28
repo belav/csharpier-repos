@@ -26,7 +26,7 @@ internal struct ComponentParameter
                 {
                     Name = kvp.Name,
                     TypeName = valueType?.FullName,
-                    Assembly = valueType?.Assembly?.GetName()?.Name
+                    Assembly = valueType?.Assembly?.GetName()?.Name,
                 }
             );
 

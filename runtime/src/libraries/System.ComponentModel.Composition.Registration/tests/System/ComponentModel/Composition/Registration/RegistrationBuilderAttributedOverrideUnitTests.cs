@@ -159,7 +159,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private static object[] ExportInterfaceConventionAttributes = new object[]
         {
             new ExportAttribute(typeof(IContractA)),
-            new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
+            new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN),
         };
 
         public class NoClassDeclarationOverrides : IContractA, IContractB { }
@@ -340,7 +340,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
         private static object[] ExportPropertyConventionAttributes = new object[]
         {
             new ExportAttribute(typeof(IContractA)),
-            new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
+            new ExportMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN),
         };
 
         public class NoPropertyDeclarationOverrides
@@ -490,7 +490,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private static object[] ImportPropertyConventionAttributes = new object[]
         {
-            new ImportAttribute(ContractNames.ContractX, typeof(AB))
+            new ImportAttribute(ContractNames.ContractX, typeof(AB)),
         };
 
         [Fact]
@@ -597,7 +597,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
                 new[]
                 {
                     rb.MapType(typeof(IContractA).GetTypeInfo()),
-                    rb.MapType(typeof(IContractB).GetTypeInfo())
+                    rb.MapType(typeof(IContractB).GetTypeInfo()),
                 }
             );
             var conventionalAttrs = conventional.GetCustomAttributes(true);
@@ -631,7 +631,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private static object[] ImportParameterConventionAttributes = new object[]
         {
-            new ImportAttribute(ContractNames.ContractX, typeof(IContractA))
+            new ImportAttribute(ContractNames.ContractX, typeof(IContractA)),
         };
 
         private class NoConstructorParameterOverrides
@@ -686,7 +686,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private static readonly IEnumerable<object> CreationPolicyConventionAttributes = new[]
         {
-            new PartCreationPolicyAttribute(CreationPolicy.NonShared)
+            new PartCreationPolicyAttribute(CreationPolicy.NonShared),
         };
 
         private class NoCreationPolicyDeclared { }
@@ -757,7 +757,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
         private static readonly IEnumerable<object> PartMetadataConventionAttributes = new object[]
         {
-            new PartMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN)
+            new PartMetadataAttribute(MetadataKeys.MetadataKeyP, MetadataValues.MetadataValueN),
         };
 
         private class NoDeclaredPartMetadata { }

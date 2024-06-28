@@ -44,13 +44,13 @@ internal static class ControllerBinderDelegateProvider
         var parameters = actionDescriptor.Parameters switch
         {
             List<ParameterDescriptor> list => list.ToArray(),
-            _ => actionDescriptor.Parameters.ToArray()
+            _ => actionDescriptor.Parameters.ToArray(),
         };
 
         var properties = actionDescriptor.BoundProperties switch
         {
             List<ParameterDescriptor> list => list.ToArray(),
-            _ => actionDescriptor.BoundProperties.ToArray()
+            _ => actionDescriptor.BoundProperties.ToArray(),
         };
 
         return Bind;

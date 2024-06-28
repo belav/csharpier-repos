@@ -861,7 +861,7 @@ public class C
                         "System.Int32 C.PrivateSetter.get",
                         "void C.PrivateSetter.set",
                         "C..ctor()",
-                        "System.Int32 C.PrivateSetter { get; private set; }"
+                        "System.Int32 C.PrivateSetter { get; private set; }",
                     }
                 );
                 VerifyMethods(
@@ -871,7 +871,7 @@ public class C
                     {
                         "System.Int32 C.PrivateSetter.get",
                         "C..ctor()",
-                        "System.Int32 C.PrivateSetter { get; }"
+                        "System.Int32 C.PrivateSetter { get; }",
                     }
                 );
                 VerifyMvid(output, hasMvidSection: false);
@@ -911,7 +911,7 @@ public class C
                         "System.Int32 C.PrivateGetter.get",
                         "void C.PrivateGetter.set",
                         "C..ctor()",
-                        "System.Int32 C.PrivateGetter { private get; set; }"
+                        "System.Int32 C.PrivateGetter { private get; set; }",
                     }
                 );
                 VerifyMethods(
@@ -921,7 +921,7 @@ public class C
                     {
                         "void C.PrivateGetter.set",
                         "C..ctor()",
-                        "System.Int32 C.PrivateGetter { set; }"
+                        "System.Int32 C.PrivateGetter { set; }",
                     }
                 );
             }
@@ -958,7 +958,7 @@ public class C
                         "System.Int32 C.this[System.Int32 i].get",
                         "void C.this[System.Int32 i].set",
                         "C..ctor()",
-                        "System.Int32 C.this[System.Int32 i] { private get; set; }"
+                        "System.Int32 C.this[System.Int32 i] { private get; set; }",
                     }
                 );
                 VerifyMethods(
@@ -968,7 +968,7 @@ public class C
                     {
                         "void C.this[System.Int32 i].set",
                         "C..ctor()",
-                        "System.Int32 C.this[System.Int32 i] { set; }"
+                        "System.Int32 C.this[System.Int32 i] { set; }",
                     }
                 );
             }
@@ -1009,7 +1009,7 @@ public class C : Base
                         "void C.Property.set",
                         "C..ctor()",
                         "System.Int32 C.Property.get",
-                        "System.Int32 C.Property { internal get; set; }"
+                        "System.Int32 C.Property { internal get; set; }",
                     }
                 );
                 // A getter is synthesized on C.Property so that it can be marked as sealed. It is emitted despite being internal because it is virtual.
@@ -1021,7 +1021,7 @@ public class C : Base
                         "void C.Property.set",
                         "C..ctor()",
                         "System.Int32 C.Property.get",
-                        "System.Int32 C.Property { internal get; set; }"
+                        "System.Int32 C.Property { internal get; set; }",
                     }
                 );
             }
@@ -1135,7 +1135,7 @@ public class C
                     {
                         "SomeAttribute..ctor()",
                         "SomeAttribute..cctor()",
-                        "void SomeAttribute.F()"
+                        "void SomeAttribute.F()",
                     }
                 );
                 VerifyMethods(metadataOutput, "SomeAttribute", new[] { "SomeAttribute..ctor()" });
@@ -1183,7 +1183,7 @@ public class C
                         "MemberReference:Void System.Runtime.CompilerServices.CompilationRelaxationsAttribute..ctor(Int32)",
                         "MemberReference:Void System.Runtime.CompilerServices.RuntimeCompatibilityAttribute..ctor()",
                         "MemberReference:Void System.Diagnostics.DebuggableAttribute..ctor(DebuggingModes)",
-                        "MemberReference:Void System.Runtime.CompilerServices.ReferenceAssemblyAttribute..ctor()"
+                        "MemberReference:Void System.Runtime.CompilerServices.ReferenceAssemblyAttribute..ctor()",
                     },
                     attributes.Select(a =>
                         MetadataReaderUtils.Dump(reader, reader.GetCustomAttribute(a).Constructor)
@@ -1217,7 +1217,7 @@ public class C
                     {
                         "MemberReference:Void System.Runtime.CompilerServices.CompilationRelaxationsAttribute..ctor(Int32)",
                         "MemberReference:Void System.Runtime.CompilerServices.RuntimeCompatibilityAttribute..ctor()",
-                        "MemberReference:Void System.Diagnostics.DebuggableAttribute..ctor(DebuggingModes)"
+                        "MemberReference:Void System.Diagnostics.DebuggableAttribute..ctor(DebuggingModes)",
                     }
                 );
             };
@@ -1250,7 +1250,7 @@ public class C
                         "MemberReference:Void System.Runtime.CompilerServices.CompilationRelaxationsAttribute..ctor(Int32)",
                         "MemberReference:Void System.Runtime.CompilerServices.RuntimeCompatibilityAttribute..ctor()",
                         "MemberReference:Void System.Diagnostics.DebuggableAttribute..ctor(DebuggingModes)",
-                        "MemberReference:Void System.Runtime.CompilerServices.ReferenceAssemblyAttribute..ctor()"
+                        "MemberReference:Void System.Runtime.CompilerServices.ReferenceAssemblyAttribute..ctor()",
                     },
                     attributes.Select(a =>
                         MetadataReaderUtils.Dump(reader, reader.GetCustomAttribute(a).Constructor)
@@ -1579,7 +1579,7 @@ public class C
         {
             BothMetadataAndRefOut,
             RefOut,
-            Different
+            Different,
         }
 
         /// <summary>
@@ -1670,7 +1670,7 @@ public class C
                     fileName: "x.goo",
                     () => new MemoryStream(arrayOfEmbeddedData1),
                     isPublic: true
-                )
+                ),
             };
             IEnumerable<ResourceDescription> manifestResources2 = new[]
             {
@@ -1679,7 +1679,7 @@ public class C
                     fileName: "x.goo",
                     () => new MemoryStream(arrayOfEmbeddedData2),
                     isPublic: true
-                )
+                ),
             };
             verify();
 
@@ -1689,7 +1689,7 @@ public class C
                     resourceName: "A",
                     () => new MemoryStream(arrayOfEmbeddedData1),
                     isPublic: true
-                )
+                ),
             }; // embedded
             manifestResources2 = new[]
             {
@@ -1697,7 +1697,7 @@ public class C
                     resourceName: "A",
                     () => new MemoryStream(arrayOfEmbeddedData2),
                     isPublic: true
-                )
+                ),
             }; // embedded
             verify();
 
@@ -1796,7 +1796,7 @@ public class C
                     "snKey.snk",
                     () => new MemoryStream(TestResources.General.snKey, writable: false),
                     true
-                )
+                ),
             };
 
             CSharpCompilation moduleComp = CreateEmptyCompilation(
@@ -2808,7 +2808,7 @@ public class PublicClass
                     "void PublicClass.InternalEvent.remove",
                     "PublicClass..ctor()",
                     "event System.Action PublicClass.PublicEvent",
-                    "event System.Action PublicClass.InternalEvent"
+                    "event System.Action PublicClass.InternalEvent",
                 },
                 compWithReal
                     .GetMember<NamedTypeSymbol>("PublicClass")
@@ -2821,7 +2821,7 @@ public class PublicClass
                 {
                     "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
                     "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
-                    "System.Diagnostics.DebuggableAttribute"
+                    "System.Diagnostics.DebuggableAttribute",
                 },
                 compWithReal
                     .SourceModule.GetReferencedAssemblySymbols()
@@ -2874,7 +2874,7 @@ public class PublicClass
                     "void PublicClass.InternalEvent.remove",
                     "PublicClass..ctor()",
                     "event System.Action PublicClass.PublicEvent",
-                    "event System.Action PublicClass.InternalEvent"
+                    "event System.Action PublicClass.InternalEvent",
                 },
                 compWithReal2
                     .GetMember<NamedTypeSymbol>("PublicClass")
@@ -2887,7 +2887,7 @@ public class PublicClass
                 {
                     "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
                     "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
-                    "System.Diagnostics.DebuggableAttribute"
+                    "System.Diagnostics.DebuggableAttribute",
                 },
                 compWithReal2
                     .SourceModule.GetReferencedAssemblySymbols()
@@ -2931,7 +2931,7 @@ public class PublicClass
                     "void PublicClass.InternalEvent.remove",
                     "PublicClass..ctor()",
                     "event System.Action PublicClass.PublicEvent",
-                    "event System.Action PublicClass.InternalEvent"
+                    "event System.Action PublicClass.InternalEvent",
                 },
                 compWithMetadata
                     .GetMember<NamedTypeSymbol>("PublicClass")
@@ -2944,7 +2944,7 @@ public class PublicClass
                 {
                     "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
                     "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
-                    "System.Diagnostics.DebuggableAttribute"
+                    "System.Diagnostics.DebuggableAttribute",
                 },
                 compWithMetadata
                     .SourceModule.GetReferencedAssemblySymbols()
@@ -2986,7 +2986,7 @@ public class PublicClass
                     "void PublicClass.PublicEvent.add",
                     "void PublicClass.PublicEvent.remove",
                     "PublicClass..ctor()",
-                    "event System.Action PublicClass.PublicEvent"
+                    "event System.Action PublicClass.PublicEvent",
                 },
                 compWithRef
                     .GetMember<NamedTypeSymbol>("PublicClass")
@@ -3000,7 +3000,7 @@ public class PublicClass
                     "System.Runtime.CompilerServices.CompilationRelaxationsAttribute",
                     "System.Runtime.CompilerServices.RuntimeCompatibilityAttribute",
                     "System.Diagnostics.DebuggableAttribute",
-                    "System.Runtime.CompilerServices.ReferenceAssemblyAttribute"
+                    "System.Runtime.CompilerServices.ReferenceAssemblyAttribute",
                 },
                 compWithRef
                     .SourceModule.GetReferencedAssemblySymbols()
@@ -3102,7 +3102,7 @@ public class C : I
                         "System.Int32 C.I.P.get",
                         "void C.I.P.set",
                         "C..ctor()",
-                        "System.Int32 C.I.P { get; set; }"
+                        "System.Int32 C.I.P { get; set; }",
                     },
                     input
                         .GetMember<NamedTypeSymbol>("C")
@@ -3202,7 +3202,7 @@ public class C : I
                         "void C.I.E.add",
                         "void C.I.E.remove",
                         "C..ctor()",
-                        "event System.Action C.I.E"
+                        "event System.Action C.I.E",
                     },
                     input
                         .GetMember<NamedTypeSymbol>("C")
@@ -3302,7 +3302,7 @@ public class C : I
                         "System.Int32 C.I.get_Item(System.Int32 i)",
                         "void C.I.set_Item(System.Int32 i, System.Int32 value)",
                         "C..ctor()",
-                        "System.Int32 C.I.Item[System.Int32 i] { get; set; }"
+                        "System.Int32 C.I.Item[System.Int32 i] { get; set; }",
                     },
                     input
                         .GetMember<NamedTypeSymbol>("C")
@@ -3388,7 +3388,7 @@ internal struct InternalStruct
                 new[]
                 {
                     "System.Int32 InternalStruct.<P>k__BackingField",
-                    "InternalStruct..ctor()"
+                    "InternalStruct..ctor()",
                 },
                 compWithRef
                     .GetMember<NamedTypeSymbol>("InternalStruct")
@@ -3606,7 +3606,7 @@ struct S
                     {
                         DebugDirectoryEntryType.CodeView,
                         DebugDirectoryEntryType.PdbChecksum,
-                        DebugDirectoryEntryType.EmbeddedPortablePdb
+                        DebugDirectoryEntryType.EmbeddedPortablePdb,
                     }
                 );
                 verifyEmbeddedDebugInfo(
@@ -5123,7 +5123,7 @@ using System;
                         "E",
                         "D",
                         ".ctor",
-                        ".cctor"
+                        ".cctor",
                     };
 
                     var actualAMembers = ((SourceModuleSymbol)m)

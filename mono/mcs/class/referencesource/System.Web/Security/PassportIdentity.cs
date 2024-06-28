@@ -1099,7 +1099,7 @@ namespace System.Web.Security
                 "MSPProf",
                 "MSPConsent",
                 "MSPSecAuth",
-                "MSPProfC"
+                "MSPProfC",
             };
             String[] sCookieDomains =
             {
@@ -1107,7 +1107,7 @@ namespace System.Web.Security
                 "TicketDomain",
                 "ProfileDomain",
                 "SecureDomain",
-                "TicketDomain"
+                "TicketDomain",
             };
             String[] sCookiePaths =
             {
@@ -1115,7 +1115,7 @@ namespace System.Web.Security
                 "TicketPath",
                 "ProfilePath",
                 "SecurePath",
-                "TicketPath"
+                "TicketPath",
             };
             String[] sCookieDomainsV = new String[5];
             String[] sCookiePathsV = new String[5];

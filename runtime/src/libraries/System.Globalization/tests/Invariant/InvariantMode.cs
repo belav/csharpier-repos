@@ -54,7 +54,7 @@ namespace System.Globalization.Tests
             "ja-JP",
             "fr-FR",
             "tr-TR",
-            ""
+            "",
         };
 
         public static IEnumerable<object[]> IndexOf_TestData()
@@ -75,7 +75,7 @@ namespace System.Globalization.Tests
                 0,
                 7,
                 CompareOptions.OrdinalIgnoreCase,
-                5
+                5,
             };
             yield return new object[]
             {
@@ -84,7 +84,7 @@ namespace System.Globalization.Tests
                 0,
                 7,
                 CompareOptions.OrdinalIgnoreCase,
-                -1
+                -1,
             };
 
             yield return new object[]
@@ -94,7 +94,7 @@ namespace System.Globalization.Tests
                 0,
                 7,
                 CompareOptions.OrdinalIgnoreCase,
-                5
+                5,
             };
 
             // Long strings
@@ -105,7 +105,7 @@ namespace System.Globalization.Tests
                 0,
                 5655,
                 CompareOptions.None,
-                100
+                100,
             };
             yield return new object[]
             {
@@ -114,7 +114,7 @@ namespace System.Globalization.Tests
                 0,
                 5656,
                 CompareOptions.None,
-                101
+                101,
             };
             yield return new object[]
             {
@@ -123,7 +123,7 @@ namespace System.Globalization.Tests
                 0,
                 5555,
                 CompareOptions.None,
-                -1
+                -1,
             };
 
             // Hungarian
@@ -134,7 +134,7 @@ namespace System.Globalization.Tests
                 0,
                 12,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[] { "foobardzsdzs", "rddzs", 0, 12, CompareOptions.None, -1 };
             yield return new object[]
@@ -144,7 +144,7 @@ namespace System.Globalization.Tests
                 0,
                 12,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
 
             // Turkish
@@ -164,7 +164,7 @@ namespace System.Globalization.Tests
                 0,
                 9,
                 CompareOptions.None,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -173,7 +173,7 @@ namespace System.Globalization.Tests
                 0,
                 9,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -182,7 +182,7 @@ namespace System.Globalization.Tests
                 0,
                 9,
                 CompareOptions.None,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -191,7 +191,7 @@ namespace System.Globalization.Tests
                 0,
                 9,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -200,7 +200,7 @@ namespace System.Globalization.Tests
                 0,
                 9,
                 CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -209,7 +209,7 @@ namespace System.Globalization.Tests
                 0,
                 9,
                 CompareOptions.OrdinalIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -218,7 +218,7 @@ namespace System.Globalization.Tests
                 0,
                 6,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -227,7 +227,7 @@ namespace System.Globalization.Tests
                 0,
                 11,
                 CompareOptions.IgnoreNonSpace,
-                -1
+                -1,
             };
 
             // Weightless characters
@@ -242,7 +242,7 @@ namespace System.Globalization.Tests
                 0,
                 11,
                 CompareOptions.IgnoreSymbols,
-                -1
+                -1,
             };
             yield return new object[] { "More Test's", "Tests", 0, 11, CompareOptions.None, -1 };
             yield return new object[] { "cbabababdbaba", "ab", 0, 13, CompareOptions.None, 2 };
@@ -322,7 +322,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.OrdinalIgnoreCase,
-                7
+                7,
             };
             yield return new object[]
             {
@@ -331,7 +331,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.OrdinalIgnoreCase,
-                -1
+                -1,
             };
 
             yield return new object[]
@@ -341,7 +341,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.OrdinalIgnoreCase,
-                7
+                7,
             };
 
             // Long strings
@@ -352,7 +352,7 @@ namespace System.Globalization.Tests
                 5654,
                 5655,
                 CompareOptions.None,
-                5540
+                5540,
             };
             yield return new object[]
             {
@@ -361,7 +361,7 @@ namespace System.Globalization.Tests
                 5655,
                 5656,
                 CompareOptions.None,
-                656
+                656,
             };
             yield return new object[]
             {
@@ -370,7 +370,7 @@ namespace System.Globalization.Tests
                 5554,
                 5555,
                 CompareOptions.None,
-                -1
+                -1,
             };
 
             // Hungarian
@@ -381,7 +381,7 @@ namespace System.Globalization.Tests
                 11,
                 12,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[] { "foobardzsdzs", "rddzs", 11, 12, CompareOptions.None, -1 };
             yield return new object[]
@@ -391,7 +391,7 @@ namespace System.Globalization.Tests
                 11,
                 12,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
 
             // Turkish
@@ -413,7 +413,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.None,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -422,7 +422,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -431,7 +431,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.None,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -440,7 +440,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -449,7 +449,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.OrdinalIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -458,7 +458,7 @@ namespace System.Globalization.Tests
                 8,
                 9,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -467,7 +467,7 @@ namespace System.Globalization.Tests
                 5,
                 6,
                 CompareOptions.Ordinal,
-                -1
+                -1,
             };
             yield return new object[]
             {
@@ -476,7 +476,7 @@ namespace System.Globalization.Tests
                 10,
                 11,
                 CompareOptions.IgnoreNonSpace,
-                -1
+                -1,
             };
 
             // Weightless characters
@@ -492,7 +492,7 @@ namespace System.Globalization.Tests
                 10,
                 11,
                 CompareOptions.IgnoreSymbols,
-                -1
+                -1,
             };
             yield return new object[] { "More Test's", "Tests", 10, 11, CompareOptions.None, -1 };
             yield return new object[] { "cbabababdbaba", "ab", 12, 13, CompareOptions.None, 10 };
@@ -516,21 +516,21 @@ namespace System.Globalization.Tests
                 new string('a', 5555),
                 "aaaaaaaaaaaaaaa",
                 CompareOptions.None,
-                true
+                true,
             };
             yield return new object[]
             {
                 new string('a', 5555),
                 new string('a', 5000),
                 CompareOptions.None,
-                true
+                true,
             };
             yield return new object[]
             {
                 new string('a', 5555),
                 new string('a', 5000) + "b",
                 CompareOptions.None,
-                false
+                false,
             };
 
             // Hungarian
@@ -552,14 +552,14 @@ namespace System.Globalization.Tests
                 "\u00C0nimal",
                 "a\u0300",
                 CompareOptions.IgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\u00C0nimal",
                 "a\u0300",
                 CompareOptions.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[] { "FooBar", "Foo\u0400Bar", CompareOptions.Ordinal, false };
             yield return new object[]
@@ -567,7 +567,7 @@ namespace System.Globalization.Tests
                 "FooBA\u0300R",
                 "FooB\u00C0R",
                 CompareOptions.IgnoreNonSpace,
-                false
+                false,
             };
 
             yield return new object[]
@@ -575,21 +575,21 @@ namespace System.Globalization.Tests
                 "\u00D3\u00D4\u00D3\u00D4Hello",
                 "\u00F3\u00F4",
                 CompareOptions.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\u00D3\u00D4Hello\u00D3\u00D4",
                 "\u00F3\u00F5",
                 CompareOptions.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\U00010400\U00010400Hello",
                 "\U00010428",
                 CompareOptions.OrdinalIgnoreCase,
-                true
+                true,
             };
 
             // Ignore symbols
@@ -598,14 +598,14 @@ namespace System.Globalization.Tests
                 "Test's can be interesting",
                 "Tests",
                 CompareOptions.IgnoreSymbols,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Test's can be interesting",
                 "Tests",
                 CompareOptions.None,
-                false
+                false,
             };
 
             // Platform differences
@@ -627,21 +627,21 @@ namespace System.Globalization.Tests
                 new string('a', 5555),
                 "aaaaaaaaaaaaaaa",
                 CompareOptions.None,
-                true
+                true,
             };
             yield return new object[]
             {
                 new string('a', 5555),
                 new string('a', 5000),
                 CompareOptions.None,
-                true
+                true,
             };
             yield return new object[]
             {
                 new string('a', 5555),
                 new string('a', 5000) + "b",
                 CompareOptions.None,
-                false
+                false,
             };
 
             // Hungarian
@@ -661,21 +661,21 @@ namespace System.Globalization.Tests
                 "Exhibit \u00C0",
                 "A\u0300",
                 CompareOptions.Ordinal,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Exhibit \u00C0",
                 "a\u0300",
                 CompareOptions.IgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Exhibit \u00C0",
                 "a\u0300",
                 CompareOptions.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[] { "FooBar", "Foo\u0400Bar", CompareOptions.Ordinal, false };
             yield return new object[]
@@ -683,7 +683,7 @@ namespace System.Globalization.Tests
                 "FooBA\u0300R",
                 "FooB\u00C0R",
                 CompareOptions.IgnoreNonSpace,
-                false
+                false,
             };
 
             yield return new object[]
@@ -691,28 +691,28 @@ namespace System.Globalization.Tests
                 "\u00D3\u00D4\u00D3\u00D4Hello",
                 "\u00F3\u00F4",
                 CompareOptions.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "\u00D3\u00D4Hello\u00D3\u00D4",
                 "\u00F3\u00F4",
                 CompareOptions.OrdinalIgnoreCase,
-                true
+                true,
             };
             yield return new object[]
             {
                 "\U00010400\U00010400Hello",
                 "\U00010428",
                 CompareOptions.OrdinalIgnoreCase,
-                false
+                false,
             };
             yield return new object[]
             {
                 "Hello\U00010400",
                 "\U00010428",
                 CompareOptions.OrdinalIgnoreCase,
-                true
+                true,
             };
 
             // Weightless characters
@@ -725,7 +725,7 @@ namespace System.Globalization.Tests
                 "More Test's",
                 "Tests",
                 CompareOptions.IgnoreSymbols,
-                false
+                false,
             };
             yield return new object[] { "More Test's", "Tests", CompareOptions.None, false };
 
@@ -747,21 +747,21 @@ namespace System.Globalization.Tests
                 "\u304D\u3083",
                 "\u30AD\u30E3",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\u304D\u3083",
                 "\u30AD\u3083",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\u304D \u3083",
                 "\u30AD\u3083",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[] { "\u3044", "I", ignoreKanaIgnoreWidthIgnoreCase, 1 };
 
@@ -772,28 +772,28 @@ namespace System.Globalization.Tests
                 "ABCDE",
                 "\uFF21\uFF22\uFF23\uFF24\uFF25",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "ABCDE",
                 "\uFF21\uFF22\uFF23D\uFF25",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "ABCDE",
                 "a\uFF22\uFF23D\uFF25",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "ABCDE",
                 "\uFF41\uFF42\uFF23D\uFF25",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
 
             yield return new object[] { "\u6FA4", "\u6CA2", ignoreKanaIgnoreWidthIgnoreCase, 1 };
@@ -803,7 +803,7 @@ namespace System.Globalization.Tests
                 "\u3070\u3073\u3076\u3079\u307C",
                 "\u30D0\u30D3\u30D6\u30D9\u30DC",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
 
             yield return new object[] { "ABDDE", "D", ignoreKanaIgnoreWidthIgnoreCase, -1 };
@@ -815,7 +815,7 @@ namespace System.Globalization.Tests
                 "\u3060",
                 "\uFF80\uFF9E",
                 ignoreKanaIgnoreWidthIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[] { "\u3060", "\u30C0", ignoreKanaIgnoreWidthIgnoreCase, -1 };
 
@@ -833,21 +833,21 @@ namespace System.Globalization.Tests
                 "\u00D3\u00D4",
                 "\u00F3\u00F4",
                 CompareOptions.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
                 "\U00010400",
                 "\U00010428",
                 CompareOptions.OrdinalIgnoreCase,
-                0
+                0,
             };
             yield return new object[]
             {
                 "\u00D3\u00D4",
                 "\u00F3\u00F4",
                 CompareOptions.IgnoreCase,
-                0
+                0,
             };
             yield return new object[] { "\U00010400", "\U00010428", CompareOptions.IgnoreCase, 0 };
 
@@ -856,21 +856,21 @@ namespace System.Globalization.Tests
                 "\u00D3\u00D4G",
                 "\u00F3\u00F4",
                 CompareOptions.OrdinalIgnoreCase,
-                1
+                1,
             };
             yield return new object[]
             {
                 "\U00010400G",
                 "\U00010428",
                 CompareOptions.OrdinalIgnoreCase,
-                1
+                1,
             };
             yield return new object[]
             {
                 "\u00D3\u00D4G",
                 "\u00F3\u00F4",
                 CompareOptions.IgnoreCase,
-                1
+                1,
             };
             yield return new object[] { "\U00010400G", "\U00010428", CompareOptions.IgnoreCase, 1 };
 
@@ -879,28 +879,28 @@ namespace System.Globalization.Tests
                 "\u00D3\u00D4",
                 "\u00F3\u00F4G",
                 CompareOptions.OrdinalIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\U00010400",
                 "\U00010428G",
                 CompareOptions.OrdinalIgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\u00D3\u00D4",
                 "\u00F3\u00F4G",
                 CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\U00010400",
                 "\U00010428G",
                 CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
 
             // Hungarian
@@ -921,7 +921,7 @@ namespace System.Globalization.Tests
                 "FooBA\u0300R",
                 "FooB\u00C0R",
                 CompareOptions.IgnoreNonSpace,
-                -1
+                -1,
             };
 
             yield return new object[] { "Test's", "Tests", CompareOptions.IgnoreSymbols, -1 };
@@ -937,7 +937,7 @@ namespace System.Globalization.Tests
                 CompareOptions.IgnoreKanaType
                     | CompareOptions.IgnoreWidth
                     | CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
 
             // Surrogates
@@ -947,14 +947,14 @@ namespace System.Globalization.Tests
                 "Hello\uFE6A",
                 "Hello\U0001F601",
                 CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "Hello\U0001F601",
                 "Hello\uFE6A",
                 CompareOptions.IgnoreCase,
-                1
+                1,
             };
             yield return new object[] { "\uDBFF", "\uD800\uDC00", CompareOptions.IgnoreCase, -1 };
             yield return new object[] { "\uD800\uDC00", "\uDBFF", CompareOptions.IgnoreCase, 1 };
@@ -963,7 +963,7 @@ namespace System.Globalization.Tests
                 "abcdefg\uDBFF",
                 "abcdefg\uD800\uDC00",
                 CompareOptions.IgnoreCase,
-                -1
+                -1,
             };
         }
 
@@ -988,20 +988,20 @@ namespace System.Globalization.Tests
             {
                 "THIS IS A LONGER TEST CASE",
                 "this is a longer test case",
-                true
+                true,
             };
             yield return new object[]
             {
                 "this Is A LONGER mIXEd casE test case",
                 "this is a longer mixed case test case",
-                true
+                true,
             };
 
             yield return new object[]
             {
                 "THIS \t hAs \t SOMe \t tabs",
                 "this \t has \t some \t tabs",
-                true
+                true,
             };
             yield return new object[] { "EMBEDDED\0NuLL\0Byte\0", "embedded\0null\0byte\0", true };
 
@@ -1047,19 +1047,19 @@ namespace System.Globalization.Tests
             {
                 "this is a longer test case",
                 "THIS IS A LONGER TEST CASE",
-                true
+                true,
             };
             yield return new object[]
             {
                 "this Is A LONGER mIXEd casE test case",
                 "THIS IS A LONGER MIXED CASE TEST CASE",
-                true
+                true,
             };
             yield return new object[]
             {
                 "this \t HaS \t somE \t TABS",
                 "THIS \t HAS \t SOME \t TABS",
-                true
+                true,
             };
 
             yield return new object[] { "embedded\0NuLL\0Byte\0", "EMBEDDED\0NULL\0BYTE\0", true };
@@ -1106,28 +1106,28 @@ namespace System.Globalization.Tests
                 "\uD800\uDF00\uD800\uDF01\uD800\uDF02",
                 0,
                 6,
-                "xn--097ccd"
+                "xn--097ccd",
             }; // Surrogate pairs
             yield return new object[]
             {
                 "\uD800\uDF00\u0061\uD800\uDF01\u0042\uD800\uDF02",
                 0,
                 8,
-                "xn--ab-ic6nfag"
+                "xn--ab-ic6nfag",
             }; // Surrogate pairs separated by ASCII
             yield return new object[]
             {
                 "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02",
                 0,
                 8,
-                "xn--yda263v6b6kfag"
+                "xn--yda263v6b6kfag",
             }; // Surrogate pairs separated by non-ASCII
             yield return new object[]
             {
                 "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02",
                 0,
                 8,
-                "xn--a-nha4529qfag"
+                "xn--a-nha4529qfag",
             }; // Surrogate pairs separated by ASCII and non-ASCII
             yield return new object[] { "\u0061\u0062\u0063", 0, 3, "\u0061\u0062\u0063" }; // ASCII only code points
             yield return new object[]
@@ -1135,21 +1135,21 @@ namespace System.Globalization.Tests
                 "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
                 0,
                 7,
-                "xn--d9juau41awczczp"
+                "xn--d9juau41awczczp",
             }; // Non-ASCII only code points
             yield return new object[]
             {
                 "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 0,
                 9,
-                "xn--de-jg4avhby1noc0d"
+                "xn--de-jg4avhby1noc0d",
             }; // ASCII and non-ASCII code points
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 0,
                 21,
-                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d"
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
             }; // Fully qualified domain name
 
             // Embedded domain name conversion (NLS + only)(Priority 1)
@@ -1164,49 +1164,49 @@ namespace System.Globalization.Tests
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 0,
                 21,
-                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d"
+                "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
             };
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 0,
                 11,
-                "abc.xn--d9juau41awczczp"
+                "abc.xn--d9juau41awczczp",
             };
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 0,
                 12,
-                "abc.xn--d9juau41awczczp."
+                "abc.xn--d9juau41awczczp.",
             };
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 4,
                 17,
-                "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d"
+                "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
             };
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 4,
                 7,
-                "xn--d9juau41awczczp"
+                "xn--d9juau41awczczp",
             };
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 4,
                 8,
-                "xn--d9juau41awczczp."
+                "xn--d9juau41awczczp.",
             };
             yield return new object[]
             {
                 "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
                 12,
                 9,
-                "xn--de-jg4avhby1noc0d"
+                "xn--de-jg4avhby1noc0d",
             };
         }
 
@@ -1224,28 +1224,28 @@ namespace System.Globalization.Tests
                 "xn--097ccd",
                 0,
                 10,
-                "\uD800\uDF00\uD800\uDF01\uD800\uDF02"
+                "\uD800\uDF00\uD800\uDF01\uD800\uDF02",
             }; // Surrogate pairs
             yield return new object[]
             {
                 "xn--ab-ic6nfag",
                 0,
                 14,
-                "\uD800\uDF00\u0061\uD800\uDF01b\uD800\uDF02"
+                "\uD800\uDF00\u0061\uD800\uDF01b\uD800\uDF02",
             }; // Surrogate pairs separated by ASCII
             yield return new object[]
             {
                 "xn--yda263v6b6kfag",
                 0,
                 18,
-                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02"
+                "\uD800\uDF00\u0101\uD800\uDF01\u305D\uD800\uDF02",
             }; // Surrogate pairs separated by non-ASCII
             yield return new object[]
             {
                 "xn--a-nha4529qfag",
                 0,
                 17,
-                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02"
+                "\uD800\uDF00\u0101\uD800\uDF01\u0061\uD800\uDF02",
             }; // Surrogate pairs separated by ASCII and non-ASCII
             yield return new object[] { "\u0061\u0062\u0063", 0, 3, "\u0061\u0062\u0063" }; // ASCII only code points
             yield return new object[]
@@ -1253,21 +1253,21 @@ namespace System.Globalization.Tests
                 "xn--d9juau41awczczp",
                 0,
                 19,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
             }; // Non-ASCII only code points
             yield return new object[]
             {
                 "xn--de-jg4avhby1noc0d",
                 0,
                 21,
-                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             }; // ASCII and non-ASCII code points
             yield return new object[]
             {
                 "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
                 0,
                 45,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             }; // Fully qualified domain name
 
             // Embedded domain name conversion (NLS + only)(Priority 1)
@@ -1282,49 +1282,49 @@ namespace System.Globalization.Tests
                 "abc.xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
                 0,
                 45,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             };
             yield return new object[]
             {
                 "abc.xn--d9juau41awczczp",
                 0,
                 23,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
             };
             yield return new object[]
             {
                 "abc.xn--d9juau41awczczp.",
                 0,
                 24,
-                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067."
+                "\u0061\u0062\u0063.\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.",
             };
             yield return new object[]
             {
                 "xn--d9juau41awczczp.xn--de-jg4avhby1noc0d",
                 0,
                 41,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             };
             yield return new object[]
             {
                 "xn--d9juau41awczczp",
                 0,
                 19,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067"
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067",
             };
             yield return new object[]
             {
                 "xn--d9juau41awczczp.",
                 0,
                 20,
-                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067."
+                "\u305D\u306E\u30B9\u30D4\u30FC\u30C9\u3067.",
             };
             yield return new object[]
             {
                 "xn--de-jg4avhby1noc0d",
                 0,
                 21,
-                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0"
+                "\u30D1\u30D5\u30A3\u30FC\u0064\u0065\u30EB\u30F3\u30D0",
             };
         }
 

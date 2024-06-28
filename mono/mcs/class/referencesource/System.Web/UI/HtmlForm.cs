@@ -59,7 +59,7 @@ namespace System.Web.UI.HtmlControls
         /// <devdoc>
         ///     Gets or sets default button for the form
         /// </devdoc>
-        [WebCategory("Behavior"), DefaultValue(""),]
+        [WebCategory("Behavior"), DefaultValue("")]
         public string DefaultButton
         {
             get
@@ -76,7 +76,7 @@ namespace System.Web.UI.HtmlControls
         /// <devdoc>
         ///     Gets or sets default focused control for the form
         /// </devdoc>
-        [WebCategory("Behavior"), DefaultValue(""),]
+        [WebCategory("Behavior"), DefaultValue("")]
         public string DefaultFocus
         {
             get

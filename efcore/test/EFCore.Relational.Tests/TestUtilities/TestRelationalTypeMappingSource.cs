@@ -129,7 +129,7 @@ public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
             { typeof(decimal), _defaultDecimalMapping },
             { typeof(TimeSpan), _defaultTimeSpanMapping },
             { typeof(string), _string },
-            { typeof(int[]), _intArray }
+            { typeof(int[]), _intArray },
         };
 
     private readonly IReadOnlyDictionary<string, RelationalTypeMapping> _simpleNameMappings =
@@ -139,7 +139,7 @@ public class TestRelationalTypeMappingSource : RelationalTypeMappingSource
             { "some_string(max)", _string },
             { "some_binary(max)", _binary },
             { "money", _defaultDecimalMapping },
-            { "dec", _defaultDecimalMapping }
+            { "dec", _defaultDecimalMapping },
         };
 
     public TestRelationalTypeMappingSource(

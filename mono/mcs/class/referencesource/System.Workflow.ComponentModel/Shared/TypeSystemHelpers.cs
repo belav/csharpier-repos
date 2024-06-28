@@ -52,7 +52,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 "UInteger",
                 "ULong",
                 "SByte",
-                "UShort"
+                "UShort",
             }
         );
         private static readonly ArrayList CSKeywords = new ArrayList(
@@ -76,7 +76,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 "uint",
                 "ulong",
                 "sbyte",
-                "ushort"
+                "ushort",
             }
         );
         private static readonly string[] DotNetKeywords = new string[]
@@ -99,14 +99,14 @@ namespace System.Workflow.ComponentModel.Compiler
             "System.UInt32",
             "System.UInt64",
             "System.SByte",
-            "System.UInt16"
+            "System.UInt16",
         };
 
         internal enum ParseTypeNameLanguage
         {
             VB,
             CSharp,
-            NetFramework
+            NetFramework,
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]

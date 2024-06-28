@@ -76,7 +76,7 @@ namespace System.Text.Json.Nodes.Tests
 
             var options = new JsonSerializerOptions
             {
-                NumberHandling = Serialization.JsonNumberHandling.WriteAsString
+                NumberHandling = Serialization.JsonNumberHandling.WriteAsString,
             };
 
             // With options.
@@ -314,26 +314,26 @@ namespace System.Text.Json.Nodes.Tests
                     new JsonArray
                     {
                         new JsonArray { 0, 0, 0 },
-                        new JsonArray { 0, 0, 1 }
+                        new JsonArray { 0, 0, 1 },
                     },
                     new JsonArray
                     {
                         new JsonArray { 0, 1, 0 },
-                        new JsonArray { 0, 1, 1 }
-                    }
+                        new JsonArray { 0, 1, 1 },
+                    },
                 },
                 new JsonArray
                 {
                     new JsonArray
                     {
                         new JsonArray { 1, 0, 0 },
-                        new JsonArray { 1, 0, 1 }
+                        new JsonArray { 1, 0, 1 },
                     },
                     new JsonArray
                     {
                         new JsonArray { 1, 1, 0 },
-                        new JsonArray { 1, 1, 1 }
-                    }
+                        new JsonArray { 1, 1, 1 },
+                    },
                 },
             };
 

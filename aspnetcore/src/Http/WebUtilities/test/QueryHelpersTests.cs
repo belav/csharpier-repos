@@ -195,7 +195,7 @@ public class QueryHelperTests
             { "hello", "world" },
             { "some", "text" },
             { "another", string.Empty },
-            { "invisible", null }
+            { "invisible", null },
         };
 
         var result = QueryHelpers.AddQueryString(uri, queryStrings);
@@ -249,7 +249,7 @@ public class QueryHelperTests
         {
             { "param1", new StringValues(new[] { "value1", string.Empty, "value3" }) },
             { "param2", string.Empty },
-            { "param3", StringValues.Empty }
+            { "param3", StringValues.Empty },
         };
 
         var result = QueryHelpers.AddQueryString(uri, queryStrings);

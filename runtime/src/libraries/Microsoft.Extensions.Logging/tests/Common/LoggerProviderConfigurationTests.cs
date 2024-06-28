@@ -97,7 +97,7 @@ namespace Microsoft.Extensions.Logging.Test
                                         Pair(
                                             "Microsoft.Extensions.Logging.Test.TestLoggerProvider:Key",
                                             "Value2"
-                                        )
+                                        ),
                                     }
                                 )
                                 .Build()

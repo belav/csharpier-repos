@@ -12,7 +12,7 @@ namespace System.DirectoryServices.ActiveDirectory
         SidAdminDisabled = 1,
         SidConflictDisabled = 2,
         NetBiosNameAdminDisabled = 4,
-        NetBiosNameConflictDisabled = 8
+        NetBiosNameConflictDisabled = 8,
     }
 
     public class ForestTrustDomainInformation

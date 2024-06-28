@@ -24,6 +24,6 @@ namespace System.Configuration
         String = 0,
         Xml = 1,
         Binary = 2,
-        ProviderSpecific = 3
+        ProviderSpecific = 3,
     }
 }

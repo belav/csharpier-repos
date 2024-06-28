@@ -8,7 +8,7 @@
         {
             One,
             Two,
-            Three
+            Three,
         }
     }
 }

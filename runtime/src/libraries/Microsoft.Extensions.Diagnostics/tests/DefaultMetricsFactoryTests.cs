@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             MeterOptions options = new MeterOptions("name")
             {
                 Version = "version",
-                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } }
+                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } },
             };
 
             Meter meter1 = meterFactory.Create(options);
@@ -64,7 +64,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
                 { "N", null },
                 { "c", "d" },
                 { "q", "d" },
-                { "c", null }
+                { "c", null },
             };
             List<KeyValuePair<string, object?>> l2 = new List<KeyValuePair<string, object?>>()
             {
@@ -75,7 +75,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
                 new KeyValuePair<string, object?>("w", o),
                 new KeyValuePair<string, object?>("z", "a"),
                 new KeyValuePair<string, object?>("c", "d"),
-                new KeyValuePair<string, object?>("q", "d")
+                new KeyValuePair<string, object?>("q", "d"),
             };
             HashSet<KeyValuePair<string, object?>> l3 = new HashSet<KeyValuePair<string, object?>>()
             {
@@ -86,7 +86,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
                 new KeyValuePair<string, object?>("c", "d"),
                 new KeyValuePair<string, object?>("x", "c"),
                 new KeyValuePair<string, object?>("z", "a"),
-                new KeyValuePair<string, object?>("y", "b")
+                new KeyValuePair<string, object?>("y", "b"),
             };
 
             Meter meter4 = meterFactory.Create("name4", "4", l1);
@@ -184,7 +184,7 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Tests
             MeterOptions options = new MeterOptions("name")
             {
                 Version = "version",
-                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } }
+                Tags = new TagList() { { "key1", "value1" }, { "key2", "value2" } },
             };
 
             Meter meter1 = meterFactory.Create(options);

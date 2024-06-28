@@ -37,7 +37,7 @@ namespace System.IO
         Fixed = 3,
         Network = 4,
         CDRom = 5,
-        Ram = 6
+        Ram = 6,
     }
 
     // Ideally we'll get a better security permission, but possibly

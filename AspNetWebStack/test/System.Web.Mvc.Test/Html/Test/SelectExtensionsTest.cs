@@ -39,44 +39,45 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Text = "UFO",
                     Value = "ufo",
-                    Category = ""
+                    Category = "",
                 }, /* Empty Group */
                 new
                 {
                     Text = "Volvo",
                     Value = "volvo",
-                    Category = "Swedish Cars"
+                    Category = "Swedish Cars",
                 },
                 new
                 {
                     Text = "Mercedes-Benz",
                     Value = "mercedes-benz",
-                    Category = "German Cars"
+                    Category = "German Cars",
                 },
                 new
                 {
                     Text = "Saab",
                     Value = "saab",
-                    Category = "Swedish Cars"
+                    Category = "Swedish Cars",
                 },
                 new
                 {
                     Text = "Audi",
                     Value = "audi",
-                    Category = "German Cars"
+                    Category = "German Cars",
                 },
                 new
                 {
                     Text = "Other",
                     Value = "other",
-                    Category = (string)null
+                    Category = (string)null,
                 }, /* Another Empty Group */
                 new
                 {
                     Text = "Unknown",
                     Value = "unknown",
-                    Category = " "
+                    Category = " ",
                 } /* Unnamed Group */
+                ,
             },
             "Value",
             "Text",
@@ -90,44 +91,45 @@ namespace System.Web.Mvc.Html.Test
                 {
                     Text = "UFO",
                     Value = "ufo",
-                    Category = ""
+                    Category = "",
                 }, /* Empty Group */
                 new
                 {
                     Text = "Volvo",
                     Value = "volvo",
-                    Category = "Swedish Cars"
+                    Category = "Swedish Cars",
                 },
                 new
                 {
                     Text = "Mercedes-Benz",
                     Value = "mercedes-benz",
-                    Category = "German Cars"
+                    Category = "German Cars",
                 },
                 new
                 {
                     Text = "Saab",
                     Value = "saab",
-                    Category = "Swedish Cars"
+                    Category = "Swedish Cars",
                 },
                 new
                 {
                     Text = "Audi",
                     Value = "audi",
-                    Category = "German Cars"
+                    Category = "German Cars",
                 },
                 new
                 {
                     Text = "Other",
                     Value = "other",
-                    Category = (string)null
+                    Category = (string)null,
                 }, /* Another Empty Group */
                 new
                 {
                     Text = "Unknown",
                     Value = "unknown",
-                    Category = " "
+                    Category = " ",
                 } /* Unnamed Group */
+                ,
             },
             "Value",
             "Text",
@@ -157,7 +159,7 @@ namespace System.Web.Mvc.Html.Test
                 SelectListGroup disabledGroup = new SelectListGroup
                 {
                     Disabled = true,
-                    Name = "DisabledGroup"
+                    Name = "DisabledGroup",
                 };
                 items.Add(new SelectListItem() { Text = "Alice", Value = "a" });
                 items.Add(
@@ -165,7 +167,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Text = "Bob",
                         Value = "b",
-                        Group = disabledGroup
+                        Group = disabledGroup,
                     }
                 );
                 items.Add(
@@ -173,7 +175,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Text = "Charlie",
                         Value = "c",
-                        Group = disabledGroup
+                        Group = disabledGroup,
                     }
                 );
                 items.Add(
@@ -181,7 +183,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Text = "David",
                         Value = "d",
-                        Disabled = true
+                        Disabled = true,
                     }
                 );
 
@@ -206,7 +208,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Group = swedish,
                         Text = "Volvo",
-                        Value = "volvo"
+                        Value = "volvo",
                     }
                 );
                 items.Add(new SelectListItem() { Text = "other3", Value = "other3" });
@@ -215,7 +217,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Group = unnamed,
                         Text = "other4",
-                        Value = "other4"
+                        Value = "other4",
                     }
                 );
                 items.Add(
@@ -223,7 +225,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Group = unnamed,
                         Text = "other5",
-                        Value = "other5"
+                        Value = "other5",
                     }
                 );
                 items.Add(
@@ -231,7 +233,7 @@ namespace System.Web.Mvc.Html.Test
                     {
                         Group = german,
                         Text = "Mercedes-Benz",
-                        Value = "mercedes-benz"
+                        Value = "mercedes-benz",
                     }
                 );
                 items.Add(
@@ -240,7 +242,7 @@ namespace System.Web.Mvc.Html.Test
                         Group = swedish,
                         Text = "Saab",
                         Value = "saab",
-                        Selected = true
+                        Selected = true,
                     }
                 );
                 items.Add(
@@ -249,7 +251,7 @@ namespace System.Web.Mvc.Html.Test
                         Group = german,
                         Text = "Audi",
                         Value = "audi",
-                        Disabled = true
+                        Disabled = true,
                     }
                 );
                 items.Add(new SelectListItem() { Text = "other6", Value = "other6" });
@@ -384,8 +386,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
             SelectList selectList = new SelectList(
                 MultiSelectListTest.GetSampleAnonymousObjects(),
@@ -937,7 +939,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary vdd = new ViewDataDictionary
             {
-                { "foo", MultiSelectListTest.GetSampleIEnumerableObjects() }
+                { "foo", MultiSelectListTest.GetSampleIEnumerableObjects() },
             };
             HtmlHelper helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -989,7 +991,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumWithDisplay> vdd = new ViewDataDictionary<EnumWithDisplay>
             {
-                { "foo", EnumWithDisplay.Three }
+                { "foo", EnumWithDisplay.Three },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -1021,7 +1023,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumWithDisplay> vdd = new ViewDataDictionary<EnumWithDisplay>
             {
-                { "foo", EnumWithDisplay.Three }
+                { "foo", EnumWithDisplay.Three },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -1079,7 +1081,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary vdd = new ViewDataDictionary
             {
-                { "foo", MultiSelectListTest.GetSampleListObjects() }
+                { "foo", MultiSelectListTest.GetSampleListObjects() },
             };
             HtmlHelper helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -1228,7 +1230,7 @@ namespace System.Web.Mvc.Html.Test
         )
         {
             // Arrange
-            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text" } };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
@@ -1236,7 +1238,7 @@ namespace System.Web.Mvc.Html.Test
                 .DropDownList(
                     name: "name",
                     selectList: selectList,
-                    htmlAttributes: new { attribute = text, }
+                    htmlAttributes: new { attribute = text }
                 )
                 .ToHtmlString();
 
@@ -1256,17 +1258,13 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_AttributeEncodes_Name(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text" } };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
             // htmlAttributes included only to avoid special-cased renaming done for id attribute.
             var result = helper
-                .DropDownList(
-                    name: text,
-                    selectList: selectList,
-                    htmlAttributes: new { id = "id", }
-                )
+                .DropDownList(name: text, selectList: selectList, htmlAttributes: new { id = "id" })
                 .ToHtmlString();
 
             // Assert
@@ -1289,7 +1287,7 @@ namespace System.Web.Mvc.Html.Test
             {
                 new SelectListItem
                 {
-                    Group = new SelectListGroup { Name = text, },
+                    Group = new SelectListGroup { Name = text },
                     Text = "text",
                 },
             };
@@ -1318,7 +1316,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_HtmlEncodes_OptionLabel(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text" } };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
@@ -1344,7 +1342,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_AttributeEncodes_Prefix(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text", }, };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = "text" } };
             var viewData = new ViewDataDictionary<string>(model: null);
             viewData.TemplateInfo.HtmlFieldPrefix = text;
             var helper = MvcHelper.GetHtmlHelper(viewData);
@@ -1355,7 +1353,7 @@ namespace System.Web.Mvc.Html.Test
                 .DropDownList(
                     name: String.Empty,
                     selectList: selectList,
-                    htmlAttributes: new { id = "id", }
+                    htmlAttributes: new { id = "id" }
                 )
                 .ToHtmlString();
 
@@ -1375,7 +1373,7 @@ namespace System.Web.Mvc.Html.Test
         public void DropDownList_HtmlEncodes_Text(string text, string encodedText)
         {
             // Arrange
-            var selectList = new List<SelectListItem> { new SelectListItem { Text = text, }, };
+            var selectList = new List<SelectListItem> { new SelectListItem { Text = text } };
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
@@ -1594,8 +1592,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
             SelectList selectList = new SelectList(
                 MultiSelectListTest.GetSampleAnonymousObjects(),
@@ -1804,7 +1802,7 @@ namespace System.Web.Mvc.Html.Test
             FooModel model = new FooModel { foo = "Bravo" };
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>(model)
             {
-                { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) }
+                { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -1830,13 +1828,13 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             FooContainerModel model = new FooContainerModel
             {
-                inner = new FooModel { foo = "Bravo" }
+                inner = new FooModel { foo = "Bravo" },
             };
             ViewDataDictionary<FooContainerModel> vdd = new ViewDataDictionary<FooContainerModel>(
                 model
             )
             {
-                { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) }
+                { "foo", new SelectList(MultiSelectListTest.GetSampleStrings()) },
             };
 
             ViewDataDictionary<FooModel> nestedViewData = MvcHelper.GetNestedViewData(
@@ -2145,7 +2143,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", "123456789" }
+                { "foo", "123456789" },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -2174,7 +2172,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", "123456789" }
+                { "foo", "123456789" },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -2263,7 +2261,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", "123456789" }
+                { "foo", "123456789" },
             };
             vdd.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
@@ -2310,8 +2308,8 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             IEnumerable<EnumModel> model = new List<EnumModel>
             {
-                new EnumModel { WithDisplay = EnumWithDisplay.One, },
-                new EnumModel { WithDisplay = EnumWithDisplay.Two, },
+                new EnumModel { WithDisplay = EnumWithDisplay.One },
+                new EnumModel { WithDisplay = EnumWithDisplay.Two },
             };
             ViewDataDictionary<IEnumerable<EnumModel>> viewData = new ViewDataDictionary<
                 IEnumerable<EnumModel>
@@ -2332,7 +2330,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<int> viewData = new ViewDataDictionary<int>
             {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression", },
+                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression" },
             };
             HtmlHelper<int> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2352,7 +2350,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumWithFlags> viewData = new ViewDataDictionary<EnumWithFlags>
             {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression", },
+                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression" },
             };
             HtmlHelper<EnumWithFlags> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2391,7 +2389,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<EnumWithDisplay> viewData = new ViewDataDictionary<EnumWithDisplay>
             {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression", },
+                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression" },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2421,7 +2419,7 @@ namespace System.Web.Mvc.Html.Test
             ViewDataDictionary<EnumWithoutAnything> viewData =
                 new ViewDataDictionary<EnumWithoutAnything>
                 {
-                    TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression", },
+                    TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression" },
                 };
             HtmlHelper<EnumWithoutAnything> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2446,7 +2444,7 @@ namespace System.Web.Mvc.Html.Test
                 EnumWithDisplay.Two
             )
             {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression", },
+                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyExpression" },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -2473,7 +2471,7 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForUsesModelValueIfNotProvidedInViewData_EnumModel()
         {
             // Arrange
-            EnumModel model = new EnumModel { WithDisplay = EnumWithDisplay.Two, };
+            EnumModel model = new EnumModel { WithDisplay = EnumWithDisplay.Two };
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(
                 new ViewDataDictionary<EnumModel>(model)
             );
@@ -2501,7 +2499,7 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForUsesModelValueIfNotProvidedInViewData_EnumWithoutAnything()
         {
             // Arrange
-            EnumModel model = new EnumModel { WithoutAnything = (EnumWithoutAnything)23, };
+            EnumModel model = new EnumModel { WithoutAnything = (EnumWithoutAnything)23 };
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(
                 new ViewDataDictionary<EnumModel>(model)
             );
@@ -2526,7 +2524,7 @@ namespace System.Web.Mvc.Html.Test
         public void EnumDropDownListForUsesModelValueIfNotProvidedInViewData_Unobtrusive()
         {
             // Arrange
-            EnumModel model = new EnumModel { WithDisplay = EnumWithDisplay.Two, };
+            EnumModel model = new EnumModel { WithDisplay = EnumWithDisplay.Two };
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(
                 new ViewDataDictionary<EnumModel>(model)
             );
@@ -2539,8 +2537,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
 
             // Act
@@ -3037,7 +3035,7 @@ namespace System.Web.Mvc.Html.Test
                     new ModelError("WithDisplay error 1"),
                     new ModelError("WithDisplay error 2"),
                 },
-                Value = new ValueProviderResult(new string[] { "1", }, "1", null),
+                Value = new ValueProviderResult(new string[] { "1" }, "1", null),
             };
             viewData.ModelState["WithDisplay"] = modelState;
 
@@ -3192,7 +3190,7 @@ namespace System.Web.Mvc.Html.Test
                 _enumDropDownListViewData
             )
             {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix", },
+                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix" },
             };
             HtmlHelper<EnumModel> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -3226,7 +3224,7 @@ namespace System.Web.Mvc.Html.Test
                 EnumWithDisplay.Two
             )
             {
-                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix", },
+                TemplateInfo = new TemplateInfo { HtmlFieldPrefix = "MyPrefix" },
             };
             HtmlHelper<EnumWithDisplay> helper = MvcHelper.GetHtmlHelper(viewData);
 
@@ -3376,8 +3374,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
             MultiSelectList selectList = new MultiSelectList(
                 MultiSelectListTest.GetSampleAnonymousObjects(),
@@ -3730,7 +3728,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary vdd = new ViewDataDictionary
             {
-                { "foo", MultiSelectListTest.GetSampleIEnumerableObjects() }
+                { "foo", MultiSelectListTest.GetSampleIEnumerableObjects() },
             };
             HtmlHelper helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -3760,8 +3758,8 @@ namespace System.Web.Mvc.Html.Test
             {
                 {
                     "foo",
-                    new EnumWithDisplay?[] { EnumWithDisplay.One, null, EnumWithDisplay.Three, }
-                }
+                    new EnumWithDisplay?[] { EnumWithDisplay.One, null, EnumWithDisplay.Three }
+                },
             };
             HtmlHelper<IEnumerable<EnumWithDisplay?>> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -3799,8 +3797,8 @@ namespace System.Web.Mvc.Html.Test
             {
                 {
                     "foo",
-                    new EnumWithDisplay?[] { EnumWithDisplay.One, null, EnumWithDisplay.Three, }
-                }
+                    new EnumWithDisplay?[] { EnumWithDisplay.One, null, EnumWithDisplay.Three }
+                },
             };
             HtmlHelper<IEnumerable<EnumWithDisplay?>> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -3862,7 +3860,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary vdd = new ViewDataDictionary
             {
-                { "foo", new string[] { "123456789", "111111111" } }
+                { "foo", new string[] { "123456789", "111111111" } },
             };
             HtmlHelper helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -3888,7 +3886,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary vdd = new ViewDataDictionary
             {
-                { "foo", MultiSelectListTest.GetSampleListObjects() }
+                { "foo", MultiSelectListTest.GetSampleListObjects() },
             };
             HtmlHelper helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -4144,8 +4142,8 @@ namespace System.Web.Mvc.Html.Test
                     new ModelClientValidationRule
                     {
                         ValidationType = "type",
-                        ErrorMessage = "error"
-                    }
+                        ErrorMessage = "error",
+                    },
                 };
             MultiSelectList selectList = new MultiSelectList(
                 MultiSelectListTest.GetSampleAnonymousObjects(),
@@ -4265,7 +4263,7 @@ namespace System.Web.Mvc.Html.Test
             FooArrayModel model = new FooArrayModel { foo = new[] { "Bravo" } };
             ViewDataDictionary<FooArrayModel> vdd = new ViewDataDictionary<FooArrayModel>(model)
             {
-                { "foo", new MultiSelectList(MultiSelectListTest.GetSampleStrings()) }
+                { "foo", new MultiSelectList(MultiSelectListTest.GetSampleStrings()) },
             };
             HtmlHelper<FooArrayModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -4502,7 +4500,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", MultiSelectListTest.GetSampleIEnumerableObjects() }
+                { "foo", MultiSelectListTest.GetSampleIEnumerableObjects() },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -4547,7 +4545,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", "123456789" }
+                { "foo", "123456789" },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -4568,7 +4566,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", new string[] { "123456789", "111111111" } }
+                { "foo", new string[] { "123456789", "111111111" } },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -4597,7 +4595,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", MultiSelectListTest.GetSampleListObjects() }
+                { "foo", MultiSelectListTest.GetSampleListObjects() },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
 
@@ -4655,7 +4653,7 @@ namespace System.Web.Mvc.Html.Test
             // Arrange
             ViewDataDictionary<FooModel> vdd = new ViewDataDictionary<FooModel>
             {
-                { "foo", new string[] { "123456789", "111111111" } }
+                { "foo", new string[] { "123456789", "111111111" } },
             };
             HtmlHelper<FooModel> helper = MvcHelper.GetHtmlHelper(vdd);
             helper.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix = "MyPrefix";
@@ -4690,7 +4688,7 @@ namespace System.Web.Mvc.Html.Test
                 new ViewDataDictionary
                 {
                     { "foo", new[] { new DateTime(1900, 1, 1, 0, 0, 1) } },
-                    { "bar", new DateTime(1900, 1, 1, 0, 0, 1) }
+                    { "bar", new DateTime(1900, 1, 1, 0, 0, 1) },
                 }
             );
             HtmlHelper helper = MvcHelper.GetHtmlHelper();
@@ -4715,7 +4713,7 @@ namespace System.Web.Mvc.Html.Test
                         + "</select>",
                     Action = new Func<MvcHtmlString>(
                         () => helper.DropDownList("foo", selectList, (string)null)
-                    )
+                    ),
                 },
                 // DropDownList(name, selectList, optionLabel) (With default value selected from ViewData)
                 new
@@ -4729,7 +4727,7 @@ namespace System.Web.Mvc.Html.Test
                         + "</select>",
                     Action = new Func<MvcHtmlString>(
                         () => defaultValueHelper.DropDownList("bar", selectList, (string)null)
-                    )
+                    ),
                 },
                 // ListBox(name, selectList)
                 new
@@ -4741,7 +4739,7 @@ namespace System.Web.Mvc.Html.Test
                         + "<option value=\"01/01/1900 00:00:02\">Charlie</option>"
                         + Environment.NewLine
                         + "</select>",
-                    Action = new Func<MvcHtmlString>(() => helper.ListBox("foo", selectList))
+                    Action = new Func<MvcHtmlString>(() => helper.ListBox("foo", selectList)),
                 },
                 // ListBox(name, selectList) (With default value selected from ViewData)
                 new
@@ -4755,8 +4753,8 @@ namespace System.Web.Mvc.Html.Test
                         + "</select>",
                     Action = new Func<MvcHtmlString>(
                         () => defaultValueHelper.ListBox("foo", selectList)
-                    )
-                }
+                    ),
+                },
             };
 
             // Act && Assert
@@ -4777,12 +4775,12 @@ namespace System.Web.Mvc.Html.Test
             if (includeEmpty)
             {
                 // Similar to what we might generate for a Nullable<T>
-                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty, });
+                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty });
             }
 
             foreach (string name in Enum.GetNames(typeof(EnumWithDisplay)))
             {
-                selectList.Add(new SelectListItem { Text = name, Value = name, });
+                selectList.Add(new SelectListItem { Text = name, Value = name });
             }
 
             return selectList;
@@ -4797,7 +4795,7 @@ namespace System.Web.Mvc.Html.Test
             if (includeEmpty)
             {
                 // Similar to what we might generate for a Nullable<T>
-                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty, });
+                selectList.Add(new SelectListItem { Text = String.Empty, Value = String.Empty });
             }
 
             foreach (
@@ -4811,7 +4809,7 @@ namespace System.Web.Mvc.Html.Test
             {
                 string name = field.Name;
                 object value = field.GetRawConstantValue();
-                selectList.Add(new SelectListItem { Text = name, Value = value.ToString(), });
+                selectList.Add(new SelectListItem { Text = name, Value = value.ToString() });
             }
 
             return selectList;
@@ -4846,7 +4844,7 @@ namespace System.Web.Mvc.Html.Test
         {
             ViewDataDictionary<FooBarModel> viewData = new ViewDataDictionary<FooBarModel>
             {
-                { "foo", "ViewDataFoo" }
+                { "foo", "ViewDataFoo" },
             };
             viewData.Model = new FooBarModel { foo = "ViewItemFoo", bar = "ViewItemBar" };
 
@@ -4869,7 +4867,7 @@ namespace System.Web.Mvc.Html.Test
             {
                 new { Date = new DateTime(1900, 1, 1, 0, 0, 0), FullWord = "Alpha" },
                 new { Date = new DateTime(1900, 1, 1, 0, 0, 1), FullWord = "Bravo" },
-                new { Date = new DateTime(1900, 1, 1, 0, 0, 2), FullWord = "Charlie" }
+                new { Date = new DateTime(1900, 1, 1, 0, 0, 2), FullWord = "Charlie" },
             };
         }
 

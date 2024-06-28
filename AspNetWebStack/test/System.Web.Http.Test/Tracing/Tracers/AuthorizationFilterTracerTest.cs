@@ -22,7 +22,7 @@ namespace System.Web.Http.Tracing.Tracers
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<IAuthorizationFilter> mockFilter = new Mock<IAuthorizationFilter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockFilter
                 .Setup(f =>
@@ -35,7 +35,7 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(Task.FromResult(response));
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor
@@ -60,7 +60,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "ExecuteAuthorizationFilterAsync"
+                    Operation = "ExecuteAuthorizationFilterAsync",
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -69,7 +69,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.End,
-                    Operation = "ExecuteAuthorizationFilterAsync"
+                    Operation = "ExecuteAuthorizationFilterAsync",
                 },
             };
 
@@ -95,7 +95,7 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             Mock<IAuthorizationFilter> mockAttr = new Mock<IAuthorizationFilter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             HttpResponseMessage response = new HttpResponseMessage();
             InvalidOperationException exception = new InvalidOperationException("test");
@@ -113,7 +113,7 @@ namespace System.Web.Http.Tracing.Tracers
                 .Returns(tcs.Task);
             Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
             mockActionDescriptor
@@ -138,7 +138,7 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.Begin,
-                    Operation = "ExecuteAuthorizationFilterAsync"
+                    Operation = "ExecuteAuthorizationFilterAsync",
                 },
                 new TraceRecord(
                     actionContext.Request,
@@ -147,8 +147,8 @@ namespace System.Web.Http.Tracing.Tracers
                 )
                 {
                     Kind = TraceKind.End,
-                    Operation = "ExecuteAuthorizationFilterAsync"
-                }
+                    Operation = "ExecuteAuthorizationFilterAsync",
+                },
             };
 
             // Act & Assert

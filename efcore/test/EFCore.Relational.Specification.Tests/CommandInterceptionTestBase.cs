@@ -1577,7 +1577,7 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
             new IInterceptor[]
             {
                 new MutatingReaderCommandInterceptor(),
-                new ResultReplacingReaderCommandInterceptor()
+                new ResultReplacingReaderCommandInterceptor(),
             }
         );
         var results = async
@@ -1611,7 +1611,7 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
             new IInterceptor[]
             {
                 new MutatingScalarCommandInterceptor(),
-                new ResultReplacingScalarCommandInterceptor()
+                new ResultReplacingScalarCommandInterceptor(),
             }
         );
         await TestCompositeScalarInterceptors(context, async);
@@ -1628,7 +1628,7 @@ public abstract class CommandInterceptionTestBase : InterceptionTestBase
             new IInterceptor[]
             {
                 new MutatingNonQueryCommandInterceptor(this),
-                new ResultReplacingNonQueryCommandInterceptor()
+                new ResultReplacingNonQueryCommandInterceptor(),
             }
         );
         await TestCompositeNonQueryInterceptors(context, async);

@@ -12,6 +12,6 @@ namespace System.Configuration
 
         [Obsolete(Obsoletions.BinaryFormatterMessage + @". Consider using Xml instead.")]
         Binary = 2,
-        ProviderSpecific = 3
+        ProviderSpecific = 3,
     }
 }

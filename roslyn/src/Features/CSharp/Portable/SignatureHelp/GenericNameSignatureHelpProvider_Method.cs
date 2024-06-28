@@ -85,7 +85,7 @@ namespace Microsoft.CodeAnalysis.CSharp.SignatureHelp
             var result = new List<SymbolDisplayPart>
             {
                 Punctuation(SyntaxKind.GreaterThanToken),
-                Punctuation(SyntaxKind.OpenParenToken)
+                Punctuation(SyntaxKind.OpenParenToken),
             };
 
             var first = true;

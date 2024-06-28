@@ -242,7 +242,7 @@ namespace System.Security.Cryptography.X509Certificates
             spki.Algorithm = new AlgorithmIdentifierAsn
             {
                 Algorithm = key.Oid!.Value!,
-                Parameters = key.EncodedParameters.RawData
+                Parameters = key.EncodedParameters.RawData,
             };
             spki.SubjectPublicKey = key.EncodedKeyValue.RawData;
 

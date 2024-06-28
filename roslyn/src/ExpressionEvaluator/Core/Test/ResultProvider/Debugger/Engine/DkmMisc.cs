@@ -28,7 +28,7 @@ namespace Microsoft.VisualStudio.Debugger
     public enum DkmDataCreationDisposition
     {
         CreateNew,
-        CreateAlways
+        CreateAlways,
     }
 }
 
@@ -45,12 +45,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
 
     public enum DkmEvaluationResultStorageType
     {
-        None = 0
+        None = 0,
     }
 
     public enum DkmEvaluationResultTypeModifierFlags
     {
-        None = 0
+        None = 0,
     }
 
     public class DkmDataAddress { }

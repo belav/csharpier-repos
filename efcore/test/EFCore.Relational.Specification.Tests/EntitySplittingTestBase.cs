@@ -22,7 +22,7 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
             var meterReading = new MeterReading
             {
                 ReadingStatus = MeterReadingStatus.NotAccesible,
-                CurrentRead = "100"
+                CurrentRead = "100",
             };
 
             await context.AddAsync(meterReading);
@@ -175,6 +175,6 @@ public abstract class EntitySplittingTestBase : NonSharedModelTestBase
     protected enum MeterReadingStatus
     {
         Running = 0,
-        NotAccesible = 2
+        NotAccesible = 2,
     }
 }

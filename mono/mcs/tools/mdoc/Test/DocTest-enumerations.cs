@@ -44,7 +44,7 @@ namespace ObjCRuntime
         Mac_Arch = 0xFF00000000000000,
         iOS_Arch32 = 0x0000000001000000,
         iOS_Arch64 = 0x0000000002000000,
-        iOS_Arch = 0x00000000FF000000
+        iOS_Arch = 0x00000000FF000000,
     }
 }
 
@@ -54,7 +54,7 @@ namespace MyNamespace
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     public class MyFlagEnumAttribute : Attribute

@@ -48,7 +48,7 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             var settings = new JsonSerializerSettings()
             {
-                ContractResolver = new CustomContractResolver()
+                ContractResolver = new CustomContractResolver(),
             };
 
             var result = JsonConvert.DeserializeObject<TestClass>("{ 'Items': '11' }", settings);

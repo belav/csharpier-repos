@@ -79,6 +79,6 @@ public class RelationalDataReaderTest
     public static IEnumerable<object[]> IsAsyncData = new[]
     {
         new object[] { false },
-        new object[] { true }
+        new object[] { true },
     };
 }

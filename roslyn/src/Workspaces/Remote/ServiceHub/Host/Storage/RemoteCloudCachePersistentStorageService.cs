@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.Remote.Storage
                         ActivationArguments = ImmutableDictionary<string, string>.Empty.Add(
                             "RelativePathBase",
                             solutionFolder
-                        )
+                        ),
                     },
                     cancellationToken
                 )

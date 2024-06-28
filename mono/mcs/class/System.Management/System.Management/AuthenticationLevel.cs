@@ -38,6 +38,6 @@ namespace System.Management
         Call = 3,
         Packet = 4,
         PacketIntegrity = 5,
-        PacketPrivacy = 6
+        PacketPrivacy = 6,
     }
 }

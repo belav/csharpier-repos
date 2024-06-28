@@ -32,7 +32,7 @@ public class RedisProtocolBenchmark
             new List<IHubProtocol>
             {
                 new DummyProtocol("protocol1"),
-                new DummyProtocol("protocol2")
+                new DummyProtocol("protocol2"),
             },
             NullLogger<DefaultHubProtocolResolver>.Instance
         );

@@ -1553,7 +1553,7 @@ IBlockOperation (2 statements, 2 locals) (OperationKind.Block, Type: null, IsInv
                 //                 ClassA.CCC
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "CCC")
                     .WithArguments("ClassA", "CCC")
-                    .WithLocation(21, 24)
+                    .WithLocation(21, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -1628,7 +1628,7 @@ IVariableDeclarationOperation (1 declarators) (OperationKind.VariableDeclaration
                 //         using (/*<bind>*/var v1 = new { }/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_NoConvToIDisp, "var v1 = new { }")
                     .WithArguments("<empty anonymous type>")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclarationSyntax>(
@@ -1753,7 +1753,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                 // CS0833: An anonymous type cannot have multiple properties with the same name
                 //             ClassA.aa,
                 Diagnostic(ErrorCode.ERR_AnonymousTypeDuplicatePropertyName, "ClassA.aa")
-                    .WithLocation(9, 13)
+                    .WithLocation(9, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AnonymousObjectCreationExpressionSyntax>(
@@ -1901,7 +1901,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
             {
                 // CS0836: Cannot use anonymous type in a constant expression
                 //     const int i = (/*<bind>*/new { a = 2 }/*</bind>*/).a;
-                Diagnostic(ErrorCode.ERR_AnonymousTypeNotAvailable, "new").WithLocation(4, 30)
+                Diagnostic(ErrorCode.ERR_AnonymousTypeNotAvailable, "new").WithLocation(4, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AnonymousObjectCreationExpressionSyntax>(
@@ -2065,7 +2065,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                 //     public IQueryable<Product> Products;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Products")
                     .WithArguments("DB.Products", "null")
-                    .WithLocation(12, 32)
+                    .WithLocation(12, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AnonymousObjectCreationExpressionSyntax>(
@@ -2198,7 +2198,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                 // file.cs(6,59): error CS8716: There is no target type for the default literal.
                 //         var obj = /*<bind>*/new { f1 = null, f2 = M, f3 = default }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 59)
+                    .WithLocation(6, 59),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AnonymousObjectCreationExpressionSyntax>(
@@ -2472,7 +2472,7 @@ unsafe class C
                 Compilation = compilation,
                 Tree = tree,
                 Model = compilation.GetSemanticModel(tree),
-                Nodes = nodes
+                Nodes = nodes,
             };
         }
 

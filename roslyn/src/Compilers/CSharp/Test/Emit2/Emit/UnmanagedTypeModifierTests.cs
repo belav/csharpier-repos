@@ -766,7 +766,7 @@ class Program
                 references: new[]
                 {
                     parent.Compilation.EmitToImageReference(),
-                    child.Compilation.EmitToImageReference()
+                    child.Compilation.EmitToImageReference(),
                 },
                 expectedOutput: @"
 Parent
@@ -893,7 +893,7 @@ class Program
                 references: new[]
                 {
                     parent.Compilation.EmitToImageReference(),
-                    child.Compilation.EmitToImageReference()
+                    child.Compilation.EmitToImageReference(),
                 },
                 expectedOutput: "Child"
             );
@@ -1018,7 +1018,7 @@ class Program
                 references: new[]
                 {
                     parent.Compilation.EmitToImageReference(),
-                    child.Compilation.EmitToImageReference()
+                    child.Compilation.EmitToImageReference(),
                 },
                 expectedOutput: "Child"
             );
@@ -1143,7 +1143,7 @@ class Program
                 references: new[]
                 {
                     parent.Compilation.EmitToImageReference(),
-                    child.Compilation.EmitToImageReference()
+                    child.Compilation.EmitToImageReference(),
                 },
                 expectedOutput: "Child"
             );
@@ -1270,7 +1270,7 @@ class Program
                 references: new[]
                 {
                     parent.Compilation.EmitToImageReference(),
-                    child.Compilation.EmitToImageReference()
+                    child.Compilation.EmitToImageReference(),
                 },
                 expectedOutput: "Child"
             );

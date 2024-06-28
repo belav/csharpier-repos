@@ -42,7 +42,7 @@ namespace BasicEventSourceTests
             var settings = new EventSourceSettings[]
             {
                 EventSourceSettings.Default,
-                EventSourceSettings.EtwSelfDescribingEventFormat
+                EventSourceSettings.EtwSelfDescribingEventFormat,
             };
 
             // For every interesting combination, run the test and see that we get a nice failure message.

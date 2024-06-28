@@ -16,7 +16,7 @@ namespace System.Net.Primitives.PalTests
             new object[] { AddressFamily.Unspecified },
             new object[] { AddressFamily.Unix },
             new object[] { AddressFamily.InterNetwork },
-            new object[] { AddressFamily.InterNetworkV6 }
+            new object[] { AddressFamily.InterNetworkV6 },
         };
 
         [Theory, MemberData(nameof(AddressFamilyData))]
@@ -42,7 +42,7 @@ namespace System.Net.Primitives.PalTests
             new object[] { (ushort)0 },
             new object[] { (ushort)42 },
             new object[] { (ushort)1024 },
-            new object[] { (ushort)65535 }
+            new object[] { (ushort)65535 },
         };
 
         [Theory, MemberData(nameof(PortData))]
@@ -86,7 +86,7 @@ namespace System.Net.Primitives.PalTests
             new object[] { 0x00000000 },
             new object[] { 0x04030201 },
             new object[] { 0x0100007F },
-            new object[] { 0xFFFFFFFF }
+            new object[] { 0xFFFFFFFF },
         };
 
         [Theory, MemberData(nameof(IPv4AddressData))]
@@ -129,9 +129,9 @@ namespace System.Net.Primitives.PalTests
                     0xee,
                     0xee,
                     0x00,
-                    0x01
+                    0x01,
                 },
-                (uint)0xffeeddcc
+                (uint)0xffeeddcc,
             },
             new object[]
             {
@@ -152,9 +152,9 @@ namespace System.Net.Primitives.PalTests
                     0x00,
                     0x00,
                     0x00,
-                    0x01
+                    0x01,
                 },
-                (uint)0xccddeeff
+                (uint)0xccddeeff,
             },
             new object[]
             {
@@ -175,10 +175,10 @@ namespace System.Net.Primitives.PalTests
                     222,
                     1,
                     41,
-                    90
+                    90,
                 },
-                (uint)0
-            }
+                (uint)0,
+            },
         };
 
         [Theory, MemberData(nameof(IPv6AddressData))]

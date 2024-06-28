@@ -112,7 +112,7 @@ namespace System.Net.Http.Functional.Tests
                                                 uri
                                             )
                                             {
-                                                Version = version
+                                                Version = version,
                                             };
 
                                             switch (testMethod)
@@ -321,7 +321,7 @@ namespace System.Net.Http.Functional.Tests
                                                 uri
                                             )
                                             {
-                                                Version = version
+                                                Version = version,
                                             };
 
                                             switch (testMethod)
@@ -525,7 +525,7 @@ namespace System.Net.Http.Functional.Tests
                                                 uri
                                             )
                                             {
-                                                Version = version
+                                                Version = version,
                                             };
 
                                             var content = new ByteArrayContent(
@@ -723,7 +723,7 @@ namespace System.Net.Http.Functional.Tests
                         "scheme",
                         "host",
                         "port",
-                        "remoteAddress"
+                        "remoteAddress",
                     },
                     connectionEstablished.PayloadNames
                 );
@@ -1102,7 +1102,7 @@ namespace System.Net.Http.Functional.Tests
                                                         {
                                                             SettingId =
                                                                 SettingId.MaxConcurrentStreams,
-                                                            Value = 1
+                                                            Value = 1,
                                                         }
                                                     );
                                             }
@@ -1148,7 +1148,7 @@ namespace System.Net.Http.Functional.Tests
                                         },
                                         options: new Http3Options
                                         {
-                                            MaxInboundBidirectionalStreams = 1
+                                            MaxInboundBidirectionalStreams = 1,
                                         }
                                     );
 
@@ -1169,7 +1169,7 @@ namespace System.Net.Http.Functional.Tests
                             1 => (2, 2),
                             2 => (2, 3), // race condition: if a connection hits its stream limit, it will be removed from the list and re-added on a separate thread
                             3 => (3, 3),
-                            _ => throw new ArgumentOutOfRangeException()
+                            _ => throw new ArgumentOutOfRangeException(),
                         };
                         Assert.InRange(requestLeftQueueEvents.Count(), minCount, maxCount);
 
@@ -1247,7 +1247,7 @@ namespace System.Net.Http.Functional.Tests
                                                         using HttpRequestMessage request =
                                                             new(HttpMethod.Get, originalUri)
                                                             {
-                                                                Version = version
+                                                                Version = version,
                                                             };
 
                                                         Task clientTask = client.SendAsync(request);
@@ -1259,7 +1259,7 @@ namespace System.Net.Http.Functional.Tests
                                                                     new HttpHeaderData(
                                                                         "Location",
                                                                         redirectUri.AbsoluteUri
-                                                                    )
+                                                                    ),
                                                                 }
                                                             );
 
@@ -1355,7 +1355,7 @@ namespace System.Net.Http.Functional.Tests
                                     server => server.HandleRequestAsync(),
                                     options: new LoopbackServer.Options()
                                     {
-                                        UseSsl = bool.Parse(useSslString)
+                                        UseSsl = bool.Parse(useSslString),
                                     }
                                 );
 
@@ -1496,7 +1496,7 @@ namespace System.Net.Http.Functional.Tests
                                 },
                                 options: new GenericLoopbackOptions
                                 {
-                                    ListenBacklog = NumParallelRequests
+                                    ListenBacklog = NumParallelRequests,
                                 }
                             );
 

@@ -62,7 +62,9 @@ namespace Mono.CSharp
         [Flags]
         public enum Status : byte
         {
-            HAS_OFFSET = 4 // Used by FieldMember.
+            HAS_OFFSET =
+                4 // Used by FieldMember.
+            ,
         }
 
         static readonly string[] attribute_targets = new string[] { "field" };
@@ -714,7 +716,7 @@ namespace Mono.CSharp
                 new Constant[]
                 {
                     new IntConstant(Compiler.BuiltinTypes, buffer_size * type_size, Location),
-                    new IntConstant(Compiler.BuiltinTypes, (int)char_set, Location)
+                    new IntConstant(Compiler.BuiltinTypes, (int)char_set, Location),
                 }
             );
 

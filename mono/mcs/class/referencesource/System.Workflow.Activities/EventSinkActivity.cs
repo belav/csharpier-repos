@@ -58,7 +58,7 @@ namespace System.Workflow.Activities
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Content
-                        )
+                        ),
                     }
                 )
             );
@@ -113,7 +113,7 @@ namespace System.Workflow.Activities
                 "EventName",
                 "InterfaceType",
                 "Invoked",
-                "Roles"
+                "Roles",
             }
         );
 

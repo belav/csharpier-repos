@@ -100,7 +100,7 @@ namespace StandAloneRunner
                     "Output test results to the console and to the indicated file",
                     (string s) => outputName = s
                 },
-                { "v|verbose", "Print the running test name", v => verbose = true }
+                { "v|verbose", "Print the running test name", v => verbose = true },
             };
 
             List<string> extra = options.Parse(args);

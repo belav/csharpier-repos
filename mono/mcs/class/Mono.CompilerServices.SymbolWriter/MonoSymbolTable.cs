@@ -98,7 +98,7 @@ namespace Mono.CompilerServices.SymbolWriter
         public enum Flags
         {
             IsAspxSource = 1,
-            WindowsFileNames = 2
+            WindowsFileNames = 2,
         }
 
         public Flags FileFlags;
@@ -268,7 +268,7 @@ namespace Mono.CompilerServices.SymbolWriter
             Lexical = 1,
             CompilerGenerated = 2,
             IteratorBody = 3,
-            IteratorDispatcher = 4
+            IteratorDispatcher = 4,
         }
 
         public CodeBlockEntry(int index, int parent, Type type, int start_offset)
@@ -369,7 +369,7 @@ namespace Mono.CompilerServices.SymbolWriter
         {
             Local,
             Parameter,
-            This
+            This,
         }
 
         public CapturedVariable(string name, string captured_name, CapturedKind kind)
@@ -1206,7 +1206,7 @@ namespace Mono.CompilerServices.SymbolWriter
         {
             LocalNamesAmbiguous = 1,
             ColumnsInfoIncluded = 1 << 1,
-            EndInfoIncluded = 1 << 2
+            EndInfoIncluded = 1 << 2,
         }
 
         public const int Size = 12;

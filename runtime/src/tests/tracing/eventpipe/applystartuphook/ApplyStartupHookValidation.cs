@@ -30,7 +30,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, serverName }
+                    { Utils.DiagnosticPortsEnvKey, serverName },
                 },
                 duringExecution: async (_) =>
                 {
@@ -87,7 +87,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                 currentAssembly: Assembly.GetExecutingAssembly(),
                 environment: new Dictionary<string, string>
                 {
-                    { Utils.DiagnosticPortsEnvKey, serverName }
+                    { Utils.DiagnosticPortsEnvKey, serverName },
                 },
                 duringExecution: async (pid) =>
                 {
@@ -106,7 +106,7 @@ namespace Tracing.Tests.ApplyStartupHookValidation
                                 format: EventPipeSerializationFormat.NetTrace,
                                 providers: new List<Provider>
                                 {
-                                    new Provider(AppEventSource.SourceName, 0, EventLevel.Verbose)
+                                    new Provider(AppEventSource.SourceName, 0, EventLevel.Verbose),
                                 }
                             );
 

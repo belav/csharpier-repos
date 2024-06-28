@@ -35,7 +35,7 @@ public class EditFormTest
         var editForm = new EditForm
         {
             EditContext = new EditContext(new TestModel()),
-            Model = new TestModel()
+            Model = new TestModel(),
         };
         var testRenderer = new TestRenderer();
         var componentId = testRenderer.AssignRootComponentId(editForm);
@@ -92,7 +92,7 @@ public class EditFormTest
         // Arrange
         var editContext = new EditContext(new TestModel())
         {
-            ShouldUseFieldIdentifiers = createFieldPath
+            ShouldUseFieldIdentifiers = createFieldPath,
         };
         var rootComponent = new TestEditFormHostComponent { EditContext = editContext };
         var editFormComponent = await RenderAndGetTestEditFormComponentAsync(rootComponent);
@@ -109,7 +109,7 @@ public class EditFormTest
     {
         // Arrange
         var model = new TestModel();
-        var rootComponent = new TestEditFormHostComponent { Model = model, FormName = "my-form", };
+        var rootComponent = new TestEditFormHostComponent { Model = model, FormName = "my-form" };
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);

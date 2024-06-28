@@ -83,7 +83,7 @@ public class TlsTests : LoggedTest
                         ApplicationProtocols = new List<SslApplicationProtocol>
                         {
                             SslApplicationProtocol.Http2,
-                            SslApplicationProtocol.Http11
+                            SslApplicationProtocol.Http11,
                         },
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                         EnabledSslProtocols = SslProtocols.Tls11, // Intentionally less than the required 1.2

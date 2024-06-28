@@ -26,7 +26,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
                 )
             ).SelectAsArray(item => item.DisplayText);
             Assert.All(
-                ["var", "public", "readonly", "goto",],
+                ["var", "public", "readonly", "goto"],
                 item => Assert.Contains(item, completionItems)
             );
         }
@@ -183,7 +183,7 @@ Del<C, System",
                     HangMitigatingCancellationToken
                 )
             ).SelectAsArray(item => item.DisplayText);
-            Assert.All(["x", "Complex",], item => Assert.Contains(item, completionItems));
+            Assert.All(["x", "Complex"], item => Assert.Contains(item, completionItems));
             await TestServices.Input.SendWithoutActivateAsync(
                 VirtualKeyCode.ESCAPE,
                 HangMitigatingCancellationToken

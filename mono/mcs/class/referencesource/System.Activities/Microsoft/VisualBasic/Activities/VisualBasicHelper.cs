@@ -43,6 +43,7 @@ namespace Microsoft.VisualBasic.Activities
             typeof(Expression).Assembly, // System.Core
             typeof(Microsoft.VisualBasic.Strings).Assembly, // Microsoft.VisualBasic
             typeof(Activity).Assembly // System.Activities
+            ,
         };
 
         public static AssemblyName GetFastAssemblyName(Assembly assembly)
@@ -287,7 +288,7 @@ namespace Microsoft.VisualBasic.Activities
                     new AssemblyReference
                     {
                         Assembly = importReference.EarlyBoundAssembly,
-                        AssemblyName = importReference.AssemblyName
+                        AssemblyName = importReference.AssemblyName,
                     }
                 );
             }

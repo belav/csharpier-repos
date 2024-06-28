@@ -64,7 +64,7 @@ namespace MonoTests.System.Data.Utils
                     "1-String1",
                     "1-String2",
                     new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    1.534
+                    1.534,
                 }
             );
             dtChild.Rows.Add(
@@ -78,7 +78,7 @@ namespace MonoTests.System.Data.Utils
                     "3-String1",
                     "3-String2",
                     DateTime.MinValue,
-                    double.MaxValue / 10000
+                    double.MaxValue / 10000,
                 }
             );
             dtChild.Rows.Add(
@@ -89,7 +89,7 @@ namespace MonoTests.System.Data.Utils
                     "1-String1",
                     "1-String2",
                     new DateTime(1973, 6, 20, 0, 0, 0, 0),
-                    double.MinValue * 10000
+                    double.MinValue * 10000,
                 }
             );
             dtChild.Rows.Add(
@@ -100,7 +100,7 @@ namespace MonoTests.System.Data.Utils
                     "2-String1",
                     "2-String2",
                     new DateTime(2008, 12, 1, 13, 59, 59, 59),
-                    0.45
+                    0.45,
                 }
             );
             dtChild.Rows.Add(
@@ -111,7 +111,7 @@ namespace MonoTests.System.Data.Utils
                     "3-String1",
                     "3-String2",
                     new DateTime(2003, 1, 1, 1, 1, 1, 1),
-                    0.55
+                    0.55,
                 }
             );
             dtChild.Rows.Add(
@@ -122,7 +122,7 @@ namespace MonoTests.System.Data.Utils
                     "1-String1",
                     "1-String2",
                     new DateTime(2002, 1, 1, 1, 1, 1, 1),
-                    0
+                    0,
                 }
             );
             dtChild.Rows.Add(
@@ -133,7 +133,7 @@ namespace MonoTests.System.Data.Utils
                     "2-String1",
                     "2-String2",
                     new DateTime(2001, 1, 1, 1, 1, 1, 1),
-                    10
+                    10,
                 }
             );
             dtChild.Rows.Add(
@@ -144,7 +144,7 @@ namespace MonoTests.System.Data.Utils
                     "3-String1",
                     "3-String2",
                     new DateTime(2000, 1, 1, 1, 1, 1, 1),
-                    20
+                    20,
                 }
             );
             dtChild.Rows.Add(
@@ -155,7 +155,7 @@ namespace MonoTests.System.Data.Utils
                     "1-String1",
                     "1-String2",
                     new DateTime(2000, 1, 1, 1, 1, 1, 0),
-                    25
+                    25,
                 }
             );
             dtChild.Rows.Add(
@@ -166,7 +166,7 @@ namespace MonoTests.System.Data.Utils
                     "2-String1",
                     "2-String2",
                     new DateTime(2000, 1, 1, 1, 1, 0, 0),
-                    30
+                    30,
                 }
             );
             dtChild.Rows.Add(
@@ -177,7 +177,7 @@ namespace MonoTests.System.Data.Utils
                     "3-String1",
                     "3-String2",
                     new DateTime(2000, 1, 1, 0, 0, 0, 0),
-                    35
+                    35,
                 }
             );
             dtChild.AcceptChanges();
@@ -204,7 +204,7 @@ namespace MonoTests.System.Data.Utils
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
                     1.534,
-                    true
+                    true,
                 }
             );
             dtParent.Rows.Add(
@@ -215,7 +215,7 @@ namespace MonoTests.System.Data.Utils
                     "2-String2",
                     new DateTime(2004, 1, 1, 0, 0, 0, 1),
                     -1.534,
-                    true
+                    true,
                 }
             );
             dtParent.Rows.Add(
@@ -226,7 +226,7 @@ namespace MonoTests.System.Data.Utils
                     "3-String2",
                     new DateTime(2003, 1, 1, 0, 0, 1, 0),
                     double.MinValue * 10000,
-                    false
+                    false,
                 }
             );
             dtParent.Rows.Add(
@@ -237,7 +237,7 @@ namespace MonoTests.System.Data.Utils
                     "4-String2",
                     new DateTime(2002, 1, 1, 0, 1, 0, 0),
                     double.MaxValue / 10000,
-                    true
+                    true,
                 }
             );
             dtParent.Rows.Add(
@@ -248,7 +248,7 @@ namespace MonoTests.System.Data.Utils
                     "5-String2",
                     new DateTime(2001, 1, 1, 1, 0, 0, 0),
                     0.755,
-                    true
+                    true,
                 }
             );
             dtParent.Rows.Add(
@@ -259,7 +259,7 @@ namespace MonoTests.System.Data.Utils
                     "6-String2",
                     new DateTime(2000, 1, 1, 0, 0, 0, 0),
                     0.001,
-                    false
+                    false,
                 }
             );
             dtParent.AcceptChanges();

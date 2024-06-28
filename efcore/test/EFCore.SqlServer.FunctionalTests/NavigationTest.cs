@@ -118,7 +118,7 @@ public class NavigationTestFixture
         {
             InitialCatalog = "StateManagerBug",
             MultipleActiveResultSets = true,
-            ["Trusted_Connection"] = true
+            ["Trusted_Connection"] = true,
         };
 
         _options = new DbContextOptionsBuilder()

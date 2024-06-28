@@ -38,7 +38,7 @@ public class OpenIdConnectTests
             opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             opt.Configuration = new OpenIdConnectConfiguration
             {
-                EndSessionEndpoint = "https://example.com/signout_test/signout_request"
+                EndSessionEndpoint = "https://example.com/signout_test/signout_request",
             };
         });
 
@@ -66,7 +66,7 @@ public class OpenIdConnectTests
             opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             opt.Configuration = new OpenIdConnectConfiguration
             {
-                AuthorizationEndpoint = "https://example.com/provider/login"
+                AuthorizationEndpoint = "https://example.com/provider/login",
             };
         });
 
@@ -94,7 +94,7 @@ public class OpenIdConnectTests
             opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             opt.Configuration = new OpenIdConnectConfiguration
             {
-                AuthorizationEndpoint = "https://example.com/provider/login"
+                AuthorizationEndpoint = "https://example.com/provider/login",
             };
             opt.NonceCookie.Path = "/";
             opt.NonceCookie.Extensions.Add("ExtN");
@@ -125,7 +125,7 @@ public class OpenIdConnectTests
             opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             opt.Configuration = new OpenIdConnectConfiguration
             {
-                AuthorizationEndpoint = "https://example.com/provider/login"
+                AuthorizationEndpoint = "https://example.com/provider/login",
             };
         });
 
@@ -153,7 +153,7 @@ public class OpenIdConnectTests
             opt.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
             opt.Configuration = new OpenIdConnectConfiguration
             {
-                AuthorizationEndpoint = "https://example.com/provider/login"
+                AuthorizationEndpoint = "https://example.com/provider/login",
             };
             opt.CorrelationCookie.Path = "/";
             opt.CorrelationCookie.Extensions.Add("ExtC");

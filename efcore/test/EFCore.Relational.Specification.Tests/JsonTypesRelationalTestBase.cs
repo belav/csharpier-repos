@@ -23,7 +23,7 @@ public class JsonTypesRelationalTestBase : JsonTypesTestBase
             {
                 { RelationalAnnotationNames.IsFixedLength, true },
                 { RelationalAnnotationNames.StoreType, storeType },
-                { CoreAnnotationNames.MaxLength, 32 }
+                { CoreAnnotationNames.MaxLength, 32 },
             }
         );
 
@@ -38,7 +38,7 @@ public class JsonTypesRelationalTestBase : JsonTypesTestBase
             facets: new Dictionary<string, object?>
             {
                 { RelationalAnnotationNames.StoreType, storeType },
-                { CoreAnnotationNames.Unicode, false }
+                { CoreAnnotationNames.Unicode, false },
             }
         );
 

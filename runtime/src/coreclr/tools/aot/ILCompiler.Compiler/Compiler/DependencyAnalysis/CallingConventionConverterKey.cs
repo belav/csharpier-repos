@@ -190,7 +190,7 @@ namespace ILCompiler.DependencyAnalysis
             '*',
             '&',
             '+',
-            '\\'
+            '\\',
         };
 
         private static void AppendEscapedIdentifier(StringBuilder sb, string identifier)

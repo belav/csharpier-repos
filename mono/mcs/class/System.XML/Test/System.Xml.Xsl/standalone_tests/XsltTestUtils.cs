@@ -101,7 +101,7 @@ namespace MonoTests.oasis_xslt
         {
             Text,
             HTML,
-            XML
+            XML,
         }
 
         CompareType _compare;

@@ -21,7 +21,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Remote
         private enum GlobalNotificationState
         {
             NotStarted,
-            Started
+            Started,
         }
 
         /// <summary>

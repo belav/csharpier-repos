@@ -242,10 +242,7 @@ namespace System.Security.Cryptography.Rsa.Tests
         [Fact]
         public static void ImportNoExponent()
         {
-            RSAParameters imported = new RSAParameters
-            {
-                Modulus = TestData.RSA1024Params.Modulus,
-            };
+            RSAParameters imported = new RSAParameters { Modulus = TestData.RSA1024Params.Modulus };
 
             using (RSA rsa = RSAFactory.Create())
             {
@@ -400,11 +397,7 @@ namespace System.Security.Cryptography.Rsa.Tests
 
         internal static RSAParameters MakePublic(in RSAParameters rsaParams)
         {
-            return new RSAParameters
-            {
-                Modulus = rsaParams.Modulus,
-                Exponent = rsaParams.Exponent,
-            };
+            return new RSAParameters { Modulus = rsaParams.Modulus, Exponent = rsaParams.Exponent };
         }
 
         private static void VerifyDValue(in RSAParameters rsaParams)

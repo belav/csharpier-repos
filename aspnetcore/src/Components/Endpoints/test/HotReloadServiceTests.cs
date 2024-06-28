@@ -55,8 +55,8 @@ public class HotReloadServiceTests
                 {
                     AssemblyName = "TestAssembly2",
                     PageType = typeof(StaticComponent),
-                    RouteTemplates = new List<string> { "/app/test" }
-                }
+                    RouteTemplates = new List<string> { "/app/test" },
+                },
             }
         );
         HotReloadService.UpdateApplication(null);
@@ -159,7 +159,7 @@ public class HotReloadServiceTests
                     {
                         AssemblyName = "TestAssembly",
                         ComponentType = t,
-                        RenderMode = t.GetCustomAttribute<RenderModeAttribute>()
+                        RenderMode = t.GetCustomAttribute<RenderModeAttribute>(),
                     })
                     .ToArray()
             )

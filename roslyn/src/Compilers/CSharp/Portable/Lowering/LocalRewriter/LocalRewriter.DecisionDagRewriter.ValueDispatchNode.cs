@@ -126,7 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             BinaryOperatorKind.GreaterThan => true,
                             BinaryOperatorKind.GreaterThanOrEqual => true,
-                            _ => false
+                            _ => false,
                         };
 
                     private RelationalDispatch WithLeftAndRight(

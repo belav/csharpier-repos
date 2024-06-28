@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Variation1)
                     {
-                        Attribute = new Variation("Test Integrity of all values after Dispose")
+                        Attribute = new Variation("Test Integrity of all values after Dispose"),
                     }
                 );
             }
@@ -26,7 +26,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Variation2)
                     {
-                        Attribute = new Variation("Call Dispose Multiple(3) Times")
+                        Attribute = new Variation("Call Dispose Multiple(3) Times"),
                     }
                 );
             }
@@ -36,7 +36,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(Variation3)
                     {
-                        Attribute = new Variation("Check Dispose with Exclusive Stream")
+                        Attribute = new Variation("Check Dispose with Exclusive Stream"),
                     }
                 );
             }

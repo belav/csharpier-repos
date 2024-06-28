@@ -40,6 +40,6 @@ namespace System.Runtime.InteropServices
         DESCKIND_VARDESC = 2,
         DESCKIND_TYPECOMP = 3,
         DESCKIND_IMPLICITAPPOBJ = 4,
-        DESCKIND_MAX = 5
+        DESCKIND_MAX = 5,
     }
 }

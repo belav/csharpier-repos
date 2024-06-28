@@ -138,7 +138,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 new XmlQualifiedName[]
                 {
                     new XmlQualifiedName("elem1"),
-                    new XmlQualifiedName("elem2")
+                    new XmlQualifiedName("elem2"),
                 }
             );
 
@@ -196,7 +196,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 new XmlQualifiedName[]
                 {
                     new XmlQualifiedName("elem1"),
-                    new XmlQualifiedName("elem2")
+                    new XmlQualifiedName("elem2"),
                 }
             );
 
@@ -448,7 +448,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 names = new XmlQualifiedName[]
                 {
                     new XmlQualifiedName("g1"),
-                    new XmlQualifiedName("g2")
+                    new XmlQualifiedName("g2"),
                 };
             }
             else
@@ -484,7 +484,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 names = new XmlQualifiedName[]
                 {
                     new XmlQualifiedName("g1"),
-                    new XmlQualifiedName("foo")
+                    new XmlQualifiedName("foo"),
                 };
             }
             else
@@ -554,7 +554,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 names = new XmlQualifiedName[]
                 {
                     new XmlQualifiedName("elem1"),
-                    new XmlQualifiedName("elem2")
+                    new XmlQualifiedName("elem2"),
                 };
             }
             else
@@ -565,7 +565,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 names = new XmlQualifiedName[]
                 {
                     new XmlQualifiedName("ext1"),
-                    new XmlQualifiedName("ext2")
+                    new XmlQualifiedName("ext2"),
                 };
             }
 
@@ -653,7 +653,7 @@ namespace System.Xml.XmlSchemaValidatorApiTests
                 {
                     new XmlQualifiedName("elem1"),
                     new XmlQualifiedName("elem1", "uri:tempuri"),
-                    new XmlQualifiedName("elem2")
+                    new XmlQualifiedName("elem2"),
                 }
             );
 

@@ -24,7 +24,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<int>)
+            ParameterType = typeof(List<int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -72,8 +72,8 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(List<int>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(List<int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -111,7 +111,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(ICollection<int>)
+            ParameterType = typeof(ICollection<int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -143,7 +143,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<int>)
+            ParameterType = typeof(List<int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -189,7 +189,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Person>)
+            ParameterType = typeof(List<Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -229,8 +229,8 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(List<Person>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(List<Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -263,7 +263,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Person>)
+            ParameterType = typeof(List<Person>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -301,7 +301,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Person2>)
+            ParameterType = typeof(List<Person2>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -362,8 +362,8 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            BindingInfo = new BindingInfo() { BinderModelName = "prefix", },
-            ParameterType = typeof(List<Person2>)
+            BindingInfo = new BindingInfo() { BinderModelName = "prefix" },
+            ParameterType = typeof(List<Person2>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -414,7 +414,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(ICollection<Person2>)
+            ParameterType = typeof(ICollection<Person2>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -465,7 +465,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<int>)
+            ParameterType = typeof(List<int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -510,7 +510,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(ICollection<Person2>)
+            ParameterType = typeof(ICollection<Person2>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -561,7 +561,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Person2>)
+            ParameterType = typeof(List<Person2>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -603,7 +603,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Person4)
+            ParameterType = typeof(Person4),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -663,7 +663,7 @@ public class CollectionModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Person5)
+            ParameterType = typeof(Person5),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -876,7 +876,7 @@ public class CollectionModelBinderIntegrationTest
                 },
                 {
                     typeof(ICollection<string>),
-                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } }, },
+                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } } },
                     typeof(List<string>)
                 },
                 {
@@ -889,7 +889,7 @@ public class CollectionModelBinderIntegrationTest
                 },
                 {
                     typeof(List<string>),
-                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } }, },
+                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } } },
                     typeof(List<string>)
                 },
                 {
@@ -902,7 +902,7 @@ public class CollectionModelBinderIntegrationTest
                 },
                 {
                     typeof(ClosedGenericList),
-                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } }, },
+                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } } },
                     typeof(ClosedGenericList)
                 },
                 {
@@ -915,7 +915,7 @@ public class CollectionModelBinderIntegrationTest
                 },
                 {
                     typeof(ExplicitClosedGenericList),
-                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } }, },
+                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } } },
                     typeof(ExplicitClosedGenericList)
                 },
                 {
@@ -928,7 +928,7 @@ public class CollectionModelBinderIntegrationTest
                 },
                 {
                     typeof(ExplicitList<string>),
-                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } }, },
+                    new Dictionary<string, StringValues> { { "[]", new[] { "hello", "world" } } },
                     typeof(ExplicitList<string>)
                 },
             };

@@ -435,7 +435,7 @@ public class HttpResponseHeadersTests
             "00",
             "042",
             "42",
-            long.MaxValue.ToString(CultureInfo.InvariantCulture)
+            long.MaxValue.ToString(CultureInfo.InvariantCulture),
         };
 
     public static TheoryData<string> BadContentLengths =>

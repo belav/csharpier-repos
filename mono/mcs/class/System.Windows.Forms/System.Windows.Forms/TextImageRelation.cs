@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         ImageAboveText = 1,
         TextAboveImage = 2,
         ImageBeforeText = 4,
-        TextBeforeImage = 8
+        TextBeforeImage = 8,
     }
 }

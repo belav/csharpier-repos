@@ -130,7 +130,7 @@ public abstract class RemoteAuthenticationHandler<TOptions>
             Logger.RemoteAuthenticationError(exception.Message);
             var errorContext = new RemoteFailureContext(Context, Scheme, Options, exception)
             {
-                Properties = properties
+                Properties = properties,
             };
             await Events.RemoteFailure(errorContext);
 
@@ -166,7 +166,7 @@ public abstract class RemoteAuthenticationHandler<TOptions>
         Debug.Assert(ticket != null);
         var ticketContext = new TicketReceivedContext(Context, Scheme, Options, ticket)
         {
-            ReturnUri = ticket.Properties.RedirectUri
+            ReturnUri = ticket.Properties.RedirectUri,
         };
 
         ticket.Properties.RedirectUri = null;
@@ -322,7 +322,7 @@ public abstract class RemoteAuthenticationHandler<TOptions>
             AccessDeniedPath = Options.AccessDeniedPath,
             Properties = properties,
             ReturnUrl = properties?.RedirectUri,
-            ReturnUrlParameter = Options.ReturnUrlParameter
+            ReturnUrlParameter = Options.ReturnUrlParameter,
         };
         await Events.AccessDenied(context);
 

@@ -441,7 +441,7 @@ namespace System.Activities.Core.Presentation
                         state = new State()
                         {
                             DisplayName = DefaultFinalStateDisplayName,
-                            IsFinal = true
+                            IsFinal = true,
                         };
                     }
                     else

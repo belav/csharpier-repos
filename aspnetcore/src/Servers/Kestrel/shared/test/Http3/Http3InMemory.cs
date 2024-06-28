@@ -267,7 +267,7 @@ internal class Http3InMemory
     {
         MultiplexedConnectionContext = new TestMultiplexedConnectionContext(this)
         {
-            ConnectionId = "TEST"
+            ConnectionId = "TEST",
         };
 
         var httpConnectionContext = new HttpMultiplexedConnectionContext(
@@ -954,7 +954,7 @@ internal class Http3FrameWithPayload : Http3RawFrame
 public enum StreamInitiator
 {
     Client,
-    Server
+    Server,
 }
 
 internal class Http3ControlStream : Http3StreamBase

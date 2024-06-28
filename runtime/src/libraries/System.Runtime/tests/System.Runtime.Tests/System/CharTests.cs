@@ -421,7 +421,7 @@ namespace System.Tests
                     'c',
                     'd',
                     'e',
-                    'f'
+                    'f',
                 },
                 char.IsAsciiHexDigit
             );
@@ -446,7 +446,7 @@ namespace System.Tests
                     'c',
                     'd',
                     'e',
-                    'f'
+                    'f',
                 },
                 char.IsAsciiHexDigitLower
             );
@@ -471,7 +471,7 @@ namespace System.Tests
                     'C',
                     'D',
                     'E',
-                    'F'
+                    'F',
                 },
                 char.IsAsciiHexDigitUpper
             );
@@ -531,7 +531,7 @@ namespace System.Tests
                 UnicodeCategory.LowercaseLetter,
                 UnicodeCategory.TitlecaseLetter,
                 UnicodeCategory.ModifierLetter,
-                UnicodeCategory.OtherLetter
+                UnicodeCategory.OtherLetter,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetter(c));
@@ -549,7 +549,7 @@ namespace System.Tests
                 UnicodeCategory.LowercaseLetter,
                 UnicodeCategory.TitlecaseLetter,
                 UnicodeCategory.ModifierLetter,
-                UnicodeCategory.OtherLetter
+                UnicodeCategory.OtherLetter,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetter(c.ToString(), 0), $"'{c}':{(int)c:x4} Is Not Letter");
@@ -582,7 +582,7 @@ namespace System.Tests
                 UnicodeCategory.TitlecaseLetter,
                 UnicodeCategory.ModifierLetter,
                 UnicodeCategory.OtherLetter,
-                UnicodeCategory.DecimalDigitNumber
+                UnicodeCategory.DecimalDigitNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetterOrDigit(c));
@@ -601,7 +601,7 @@ namespace System.Tests
                 UnicodeCategory.TitlecaseLetter,
                 UnicodeCategory.ModifierLetter,
                 UnicodeCategory.OtherLetter,
-                UnicodeCategory.DecimalDigitNumber
+                UnicodeCategory.DecimalDigitNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetterOrDigit(c.ToString(), 0));
@@ -668,7 +668,7 @@ namespace System.Tests
             {
                 UnicodeCategory.DecimalDigitNumber,
                 UnicodeCategory.LetterNumber,
-                UnicodeCategory.OtherNumber
+                UnicodeCategory.OtherNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsNumber(c));
@@ -684,7 +684,7 @@ namespace System.Tests
             {
                 UnicodeCategory.DecimalDigitNumber,
                 UnicodeCategory.LetterNumber,
-                UnicodeCategory.OtherNumber
+                UnicodeCategory.OtherNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsNumber(c.ToString(), 0));
@@ -718,7 +718,7 @@ namespace System.Tests
                 UnicodeCategory.ClosePunctuation,
                 UnicodeCategory.InitialQuotePunctuation,
                 UnicodeCategory.FinalQuotePunctuation,
-                UnicodeCategory.OtherPunctuation
+                UnicodeCategory.OtherPunctuation,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsPunctuation(c));
@@ -738,7 +738,7 @@ namespace System.Tests
                 UnicodeCategory.ClosePunctuation,
                 UnicodeCategory.InitialQuotePunctuation,
                 UnicodeCategory.FinalQuotePunctuation,
-                UnicodeCategory.OtherPunctuation
+                UnicodeCategory.OtherPunctuation,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsPunctuation(c.ToString(), 0));
@@ -768,7 +768,7 @@ namespace System.Tests
             {
                 UnicodeCategory.SpaceSeparator,
                 UnicodeCategory.LineSeparator,
-                UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSeparator(c));
@@ -784,7 +784,7 @@ namespace System.Tests
             {
                 UnicodeCategory.SpaceSeparator,
                 UnicodeCategory.LineSeparator,
-                UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSeparator(c.ToString(), 0));
@@ -989,7 +989,7 @@ namespace System.Tests
                 UnicodeCategory.MathSymbol,
                 UnicodeCategory.ModifierSymbol,
                 UnicodeCategory.CurrencySymbol,
-                UnicodeCategory.OtherSymbol
+                UnicodeCategory.OtherSymbol,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSymbol(c));
@@ -1006,7 +1006,7 @@ namespace System.Tests
                 UnicodeCategory.MathSymbol,
                 UnicodeCategory.ModifierSymbol,
                 UnicodeCategory.CurrencySymbol,
-                UnicodeCategory.OtherSymbol
+                UnicodeCategory.OtherSymbol,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSymbol(c.ToString(), 0));
@@ -1070,7 +1070,7 @@ namespace System.Tests
             {
                 UnicodeCategory.SpaceSeparator,
                 UnicodeCategory.LineSeparator,
-                UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsWhiteSpace(c));
@@ -1091,7 +1091,7 @@ namespace System.Tests
             {
                 UnicodeCategory.SpaceSeparator,
                 UnicodeCategory.LineSeparator,
-                UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsWhiteSpace(c.ToString(), 0));
@@ -1361,7 +1361,7 @@ namespace System.Tests
                 '\u00ca',
                 '\u00cf',
                 '\u00d4',
-                '\u00da'
+                '\u00da',
             },
             /* LowercaseLetter         */new char[]
             {
@@ -1374,7 +1374,7 @@ namespace System.Tests
                 '\u00e7',
                 '\u00ed',
                 '\u00f3',
-                '\u00fa'
+                '\u00fa',
             },
             /* TitlecaseLetter         */new char[] { },
             /* ModifierLetter          */new char[] { },
@@ -1393,7 +1393,7 @@ namespace System.Tests
                 '\u0036',
                 '\u0037',
                 '\u0038',
-                '\u0039'
+                '\u0039',
             },
             /* LetterNumber            */new char[] { },
             /* OtherNumber             */new char[] { '\u00b2', '\u00b3', '\u00b9', '\u00bc', '\u00bd', '\u00be' },
@@ -1411,7 +1411,7 @@ namespace System.Tests
                 '\u0085',
                 '\u008e',
                 '\u0094',
-                '\u009a'
+                '\u009a',
             },
             /* Format                  */new char[] { '\u00ad' },
             /* Surrogate               */new char[] { },
@@ -1435,7 +1435,7 @@ namespace System.Tests
                 '\u00a7',
                 '\u00b6',
                 '\u00b7',
-                '\u00bf'
+                '\u00bf',
             },
             /* MathSymbol              */new char[]
             {
@@ -1448,7 +1448,7 @@ namespace System.Tests
                 '\u00ac',
                 '\u00b1',
                 '\u00d7',
-                '\u00f7'
+                '\u00f7',
             },
             /* CurrencySymbol          */new char[] { '\u0024', '\u00a2', '\u00a3', '\u00a4', '\u00a5' },
             /* ModifierSymbol          */new char[] { '\u005e', '\u0060', '\u00a8', '\u00af', '\u00b4', '\u00b8' },
@@ -1469,7 +1469,7 @@ namespace System.Tests
                 '\u1eb4',
                 '\u1fba',
                 '\u2c28',
-                '\ua668'
+                '\ua668',
             }, // UnicodeCategory.UppercaseLetter
             new char[]
             {
@@ -1482,7 +1482,7 @@ namespace System.Tests
                 '\u01F9',
                 '\u022D',
                 '\u1E09',
-                '\uFF45'
+                '\uFF45',
             }, // UnicodeCategory.LowercaseLetter
             new char[]
             {
@@ -1495,7 +1495,7 @@ namespace System.Tests
                 '\u1f9f',
                 '\u1faa',
                 '\u1fad',
-                '\u1fbc'
+                '\u1fbc',
             }, // UnicodeCategory.TitlecaseLetter
             new char[]
             {
@@ -1508,7 +1508,7 @@ namespace System.Tests
                 '\u1d9d',
                 '\u1daf',
                 '\u2091',
-                '\u30fe'
+                '\u30fe',
             }, // UnicodeCategory.ModifierLetter
             new char[]
             {
@@ -1521,7 +1521,7 @@ namespace System.Tests
                 '\u9082',
                 '\ua271',
                 '\ub985',
-                '\ucb37'
+                '\ucb37',
             }, // UnicodeCategory.OtherLetter
             new char[]
             {
@@ -1534,7 +1534,7 @@ namespace System.Tests
                 '\u0fad',
                 '\u180b',
                 '\u1dd5',
-                '\u2dfd'
+                '\u2dfd',
             }, // UnicodeCategory.NonSpacingMark
             new char[]
             {
@@ -1546,7 +1546,7 @@ namespace System.Tests
                 '\u1083',
                 '\u1925',
                 '\u1b44',
-                '\ua8b5'
+                '\ua8b5',
             }, // UnicodeCategory.SpacingCombiningMark
             new char[]
             {
@@ -1559,7 +1559,7 @@ namespace System.Tests
                 '\u20e4',
                 '\ua670',
                 '\ua671',
-                '\ua672'
+                '\ua672',
             }, // UnicodeCategory.EnclosingMark
             new char[]
             {
@@ -1572,7 +1572,7 @@ namespace System.Tests
                 '\u1810',
                 '\u1b50',
                 '\u1c50',
-                '\ua900'
+                '\ua900',
             }, // UnicodeCategory.DecimalDigitNumber
             new char[]
             {
@@ -1585,7 +1585,7 @@ namespace System.Tests
                 '\u2180',
                 '\u2187',
                 '\u3023',
-                '\u3028'
+                '\u3028',
             }, // UnicodeCategory.LetterNumber
             new char[]
             {
@@ -1598,7 +1598,7 @@ namespace System.Tests
                 '\u24f1',
                 '\u2780',
                 '\u3220',
-                '\u3280'
+                '\u3280',
             }, // UnicodeCategory.OtherNumber
             new char[]
             {
@@ -1611,7 +1611,7 @@ namespace System.Tests
                 '\u200a',
                 '\u202f',
                 '\u205f',
-                '\u3000'
+                '\u3000',
             }, // UnicodeCategory.SpaceSeparator
             new char[] { '\u2028' }, // UnicodeCategory.LineSeparator
             new char[] { '\u2029' }, // UnicodeCategory.ParagraphSeparator
@@ -1627,7 +1627,7 @@ namespace System.Tests
                 '\u2063',
                 '\u206b',
                 '\u206e',
-                '\ufff9'
+                '\ufff9',
             }, // UnicodeCategory.Format
             new char[]
             {
@@ -1640,7 +1640,7 @@ namespace System.Tests
                 '\udcd0',
                 '\udd9c',
                 '\ude68',
-                '\udf34'
+                '\udf34',
             }, // UnicodeCategory.Surrogate
             new char[]
             {
@@ -1653,7 +1653,7 @@ namespace System.Tests
                 '\uef00',
                 '\uf180',
                 '\uf400',
-                '\uf680'
+                '\uf680',
             }, // UnicodeCategory.PrivateUse
             new char[]
             {
@@ -1665,7 +1665,7 @@ namespace System.Tests
                 '\ufe4d',
                 '\ufe4e',
                 '\ufe4f',
-                '\uff3f'
+                '\uff3f',
             }, // UnicodeCategory.ConnectorPunctuation
             new char[]
             {
@@ -1678,7 +1678,7 @@ namespace System.Tests
                 '\ufe32',
                 '\ufe58',
                 '\ufe63',
-                '\uff0d'
+                '\uff0d',
             }, // UnicodeCategory.DashPunctuation
             new char[]
             {
@@ -1691,7 +1691,7 @@ namespace System.Tests
                 '\u3014',
                 '\ufe17',
                 '\ufe3f',
-                '\ufe5d'
+                '\ufe5d',
             }, // UnicodeCategory.OpenPunctuation
             new char[]
             {
@@ -1704,7 +1704,7 @@ namespace System.Tests
                 '\u3017',
                 '\ufe18',
                 '\ufe40',
-                '\ufe5e'
+                '\ufe5e',
             }, // UnicodeCategory.ClosePunctuation
             new char[]
             {
@@ -1717,7 +1717,7 @@ namespace System.Tests
                 '\u2e09',
                 '\u2e0c',
                 '\u2e1c',
-                '\u2e20'
+                '\u2e20',
             }, // UnicodeCategory.InitialQuotePunctuation
             new char[]
             {
@@ -1729,7 +1729,7 @@ namespace System.Tests
                 '\u2e0a',
                 '\u2e0d',
                 '\u2e1d',
-                '\u2e21'
+                '\u2e21',
             }, // UnicodeCategory.FinalQuotePunctuation
             new char[]
             {
@@ -1742,7 +1742,7 @@ namespace System.Tests
                 '\u2058',
                 '\u2e16',
                 '\ua8cf',
-                '\ufe55'
+                '\ufe55',
             }, // UnicodeCategory.OtherPunctuation
             new char[]
             {
@@ -1755,7 +1755,7 @@ namespace System.Tests
                 '\u29b5',
                 '\u2a17',
                 '\u2a73',
-                '\u2acf'
+                '\u2acf',
             }, // UnicodeCategory.MathSymbol
             new char[]
             {
@@ -1768,7 +1768,7 @@ namespace System.Tests
                 '\u20b1',
                 '\u20b4',
                 '\ufe69',
-                '\uffe1'
+                '\uffe1',
             }, // UnicodeCategory.CurrencySymbol
             new char[]
             {
@@ -1781,7 +1781,7 @@ namespace System.Tests
                 '\u1fee',
                 '\ua703',
                 '\ua70c',
-                '\ua715'
+                '\ua715',
             }, // UnicodeCategory.ModifierSymbol
             new char[]
             {
@@ -1794,7 +1794,7 @@ namespace System.Tests
                 '\u2e8f',
                 '\u2f8c',
                 '\u3292',
-                '\u3392'
+                '\u3392',
             }, // UnicodeCategory.OtherSymbol
             new char[] { '\u09c6', '\u0dfa' }, // UnicodeCategory.OtherNotAssigned
         };
@@ -1806,7 +1806,7 @@ namespace System.Tests
             '\u0000',
             '\ud7ff',
             '\ue000',
-            '\uffff'
+            '\uffff',
         };
 
         private static readonly UnicodeCategory[] s_categoryForLatin1 =

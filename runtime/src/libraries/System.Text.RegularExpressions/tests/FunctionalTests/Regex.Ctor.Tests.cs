@@ -25,13 +25,13 @@ namespace System.Text.RegularExpressions.Tests
                 {
                     "foo",
                     RegexHelpers.RegexOptionNonBacktracking,
-                    Regex.InfiniteMatchTimeout
+                    Regex.InfiniteMatchTimeout,
                 };
                 yield return new object[]
                 {
                     "foo",
                     RegexHelpers.RegexOptionNonBacktracking,
-                    new TimeSpan(1)
+                    new TimeSpan(1),
                 };
             }
             yield return new object[] { "foo", RegexOptions.None, Regex.InfiniteMatchTimeout };
@@ -39,7 +39,7 @@ namespace System.Text.RegularExpressions.Tests
             {
                 "foo",
                 RegexOptions.RightToLeft,
-                Regex.InfiniteMatchTimeout
+                Regex.InfiniteMatchTimeout,
             };
             yield return new object[] { "foo", RegexOptions.Compiled, Regex.InfiniteMatchTimeout };
             yield return new object[]
@@ -49,7 +49,7 @@ namespace System.Text.RegularExpressions.Tests
                     | RegexOptions.IgnoreCase
                     | RegexOptions.Multiline
                     | RegexOptions.CultureInvariant,
-                Regex.InfiniteMatchTimeout
+                Regex.InfiniteMatchTimeout,
             };
             yield return new object[]
             {
@@ -59,14 +59,14 @@ namespace System.Text.RegularExpressions.Tests
                     | RegexOptions.Multiline
                     | RegexOptions.CultureInvariant
                     | RegexOptions.Compiled,
-                Regex.InfiniteMatchTimeout
+                Regex.InfiniteMatchTimeout,
             };
             yield return new object[] { "foo", RegexOptions.None, new TimeSpan(1) };
             yield return new object[]
             {
                 "foo",
                 RegexOptions.None,
-                TimeSpan.FromMilliseconds(int.MaxValue - 1)
+                TimeSpan.FromMilliseconds(int.MaxValue - 1),
             };
         }
 

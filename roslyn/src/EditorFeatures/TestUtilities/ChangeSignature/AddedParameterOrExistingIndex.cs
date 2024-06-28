@@ -75,27 +75,23 @@ namespace Microsoft.CodeAnalysis.Test.Utilities.ChangeSignature
 
             var type = document.Project.Language switch
             {
-                LanguageNames.CSharp =>
-                    semanticModel
-                        .GetSpeculativeTypeInfo(
-                            0,
-                            CSharp.SyntaxFactory.ParseTypeName(
-                                _addedParameterFullyQualifiedTypeName!
-                            ),
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Type,
-                LanguageNames.VisualBasic =>
-                    semanticModel
-                        .GetSpeculativeTypeInfo(
-                            0,
-                            VisualBasic.SyntaxFactory.ParseTypeName(
-                                _addedParameterFullyQualifiedTypeName!
-                            ),
-                            SpeculativeBindingOption.BindAsTypeOrNamespace
-                        )
-                        .Type,
-                _ => throw new ArgumentException("Unsupported language")
+                LanguageNames.CSharp => semanticModel
+                    .GetSpeculativeTypeInfo(
+                        0,
+                        CSharp.SyntaxFactory.ParseTypeName(_addedParameterFullyQualifiedTypeName!),
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type,
+                LanguageNames.VisualBasic => semanticModel
+                    .GetSpeculativeTypeInfo(
+                        0,
+                        VisualBasic.SyntaxFactory.ParseTypeName(
+                            _addedParameterFullyQualifiedTypeName!
+                        ),
+                        SpeculativeBindingOption.BindAsTypeOrNamespace
+                    )
+                    .Type,
+                _ => throw new ArgumentException("Unsupported language"),
             };
 
             if (type == null)

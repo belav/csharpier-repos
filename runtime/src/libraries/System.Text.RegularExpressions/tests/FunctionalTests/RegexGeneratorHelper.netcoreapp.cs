@@ -69,7 +69,7 @@ namespace System.Text.RegularExpressions.Tests
                     CSharpSyntaxTree.ParseText(
                         source,
                         CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview)
-                    )
+                    ),
                 },
                 References,
                 new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)

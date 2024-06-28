@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         DocumentKinds = new[]
         {
             nameof(TextDocumentKind.AdditionalDocument),
-            nameof(TextDocumentKind.AnalyzerConfigDocument)
+            nameof(TextDocumentKind.AnalyzerConfigDocument),
         },
         DocumentExtensions = new[] { ".txt", ".editorconfig" }
     )]

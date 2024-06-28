@@ -19,7 +19,7 @@ internal class TestBlobSink : BlobLoggerProvider
                     ApplicationInstanceId = "42",
                     ApplicationName = "appname",
                     BlobName = "filename",
-                    IsEnabled = true
+                    IsEnabled = true,
                 }
             ),
             blobReferenceFactory

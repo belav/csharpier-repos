@@ -24,7 +24,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
             Prefix
         )
         {
-            Root = true
+            Root = true,
         };
     }
 }

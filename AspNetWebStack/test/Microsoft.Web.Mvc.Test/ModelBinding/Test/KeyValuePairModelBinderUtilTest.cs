@@ -24,7 +24,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
                 ModelBinderProviders = new ModelBinderProviderCollection(),
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
@@ -77,7 +77,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
                 ModelBinderProviders = new ModelBinderProviderCollection(),
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             Mock<IExtensibleModelBinder> mockIntBinder = new Mock<IExtensibleModelBinder>();
@@ -129,7 +129,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelName = "someName",
                 ModelState = new ModelStateDictionary(),
                 ModelBinderProviders = new ModelBinderProviderCollection(),
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             // Act

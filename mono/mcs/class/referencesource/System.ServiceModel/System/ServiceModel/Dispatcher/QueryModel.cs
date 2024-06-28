@@ -10,7 +10,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum AxisDirection : byte
     {
         Forward,
-        Reverse
+        Reverse,
     }
 
     internal enum QueryNodeType : byte
@@ -43,7 +43,7 @@ namespace System.ServiceModel.Dispatcher
                 | QueryNodeType.Comment
                 | QueryNodeType.Text
                 | QueryNodeType.Processing
-            )
+            ),
     }
 
     internal enum QueryAxisType : byte
@@ -61,7 +61,7 @@ namespace System.ServiceModel.Dispatcher
         Parent = 10,
         Preceding = 11,
         PrecedingSibling = 12,
-        Self = 13
+        Self = 13,
     }
 
     // 4 bytes - each element is a byte
@@ -149,7 +149,7 @@ namespace System.ServiceModel.Dispatcher
         NamespaceWildcard = 0x08,
 
         // QName is entirely wildcard
-        Wildcard = NodeQNameType.NameWildcard | NodeQNameType.NamespaceWildcard
+        Wildcard = NodeQNameType.NameWildcard | NodeQNameType.NamespaceWildcard,
     }
 
     /// <summary>

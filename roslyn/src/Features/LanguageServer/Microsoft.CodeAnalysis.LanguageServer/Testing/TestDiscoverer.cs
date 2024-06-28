@@ -61,7 +61,7 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
             progress.Report(
                 partialResult with
                 {
-                    Message = LanguageServerResources.No_test_methods_found_in_requested_range
+                    Message = LanguageServerResources.No_test_methods_found_in_requested_range,
                 }
             );
             return ImmutableArray<TestCase>.Empty;
@@ -89,7 +89,7 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
             progress.Report(
                 partialResult with
                 {
-                    Message = LanguageServerResources.Test_discovery_aborted
+                    Message = LanguageServerResources.Test_discovery_aborted,
                 }
             );
             return ImmutableArray<TestCase>.Empty;
@@ -113,7 +113,7 @@ internal partial class TestDiscoverer(ILoggerFactory loggerFactory)
                     LanguageServerResources.Found_0_tests_in_1,
                     matchedTests.Length,
                     RunTestsHandler.GetShortTimespan(elapsed)
-                )
+                ),
             }
         );
 

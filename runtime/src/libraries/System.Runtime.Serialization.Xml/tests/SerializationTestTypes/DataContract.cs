@@ -2116,7 +2116,7 @@ namespace SerializationTestTypes
                         addMethodTypeArray = new Type[]
                         {
                             Globals.TypeOfObject,
-                            Globals.TypeOfObject
+                            Globals.TypeOfObject,
                         };
                         itemType = Globals.TypeOfKeyValue.MakeGenericType(addMethodTypeArray);
                         break;
@@ -2199,7 +2199,7 @@ namespace SerializationTestTypes
                         Globals.TypeOfIList,
                         Globals.TypeOfIEnumerableGeneric,
                         Globals.TypeOfICollection,
-                        Globals.TypeOfIEnumerable
+                        Globals.TypeOfIEnumerable,
                     };
                 }
                 return _knownInterfaces;

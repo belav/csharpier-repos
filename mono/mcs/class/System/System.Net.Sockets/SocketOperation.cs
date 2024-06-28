@@ -42,6 +42,6 @@ namespace System.Net.Sockets
         Disconnect,
         AcceptReceive,
         ReceiveGeneric,
-        SendGeneric
+        SendGeneric,
     }
 }

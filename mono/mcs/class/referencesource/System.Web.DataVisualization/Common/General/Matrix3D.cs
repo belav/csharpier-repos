@@ -83,7 +83,7 @@ namespace System.Web.UI.DataVisualization.Charting
             /// <summary>
             /// Rotation around Z axis.
             /// </summary>
-            Z
+            Z,
         }
 
         #endregion // Enumerations

@@ -1369,7 +1369,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     {
         First,
         Second,
-        Third
+        Third,
     }
 
     public class Target
@@ -1436,7 +1436,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     {
         First,
         Second,
-        Third
+        Third,
     }
 
     public class Target
@@ -1503,7 +1503,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     {
         First,
         Second,
-        Third
+        Third,
     }
 
     public class Target
@@ -1768,7 +1768,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Inde
     public enum MyEnum
     {
         First,
-        Second
+        Second,
     }
 
     public class Target

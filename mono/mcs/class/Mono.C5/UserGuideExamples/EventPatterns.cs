@@ -147,7 +147,7 @@ namespace EventPatterns
         {
             Before,
             Removed,
-            Updated
+            Updated,
         };
 
         private static void AddItemUpdatedHandler<T>(ICollection<T> coll)

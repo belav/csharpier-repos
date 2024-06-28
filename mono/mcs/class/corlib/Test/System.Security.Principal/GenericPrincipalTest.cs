@@ -350,7 +350,7 @@ namespace MonoTests.System.Security.Principal
             0x65,
             0x72,
             0x73,
-            0x0B
+            0x0B,
         };
 
         [Test]

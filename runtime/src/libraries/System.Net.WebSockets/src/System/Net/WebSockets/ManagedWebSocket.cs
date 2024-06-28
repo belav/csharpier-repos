@@ -36,21 +36,21 @@ namespace System.Net.WebSockets
         private static readonly WebSocketState[] s_validSendStates =
         {
             WebSocketState.Open,
-            WebSocketState.CloseReceived
+            WebSocketState.CloseReceived,
         };
 
         /// <summary>Valid states to be in when calling ReceiveAsync.</summary>
         private static readonly WebSocketState[] s_validReceiveStates =
         {
             WebSocketState.Open,
-            WebSocketState.CloseSent
+            WebSocketState.CloseSent,
         };
 
         /// <summary>Valid states to be in when calling CloseOutputAsync.</summary>
         private static readonly WebSocketState[] s_validCloseOutputStates =
         {
             WebSocketState.Open,
-            WebSocketState.CloseReceived
+            WebSocketState.CloseReceived,
         };
 
         /// <summary>Valid states to be in when calling CloseAsync.</summary>
@@ -58,7 +58,7 @@ namespace System.Net.WebSockets
         {
             WebSocketState.Open,
             WebSocketState.CloseReceived,
-            WebSocketState.CloseSent
+            WebSocketState.CloseSent,
         };
 
         /// <summary>The maximum size in bytes of a message frame header that includes mask bytes.</summary>
@@ -142,7 +142,7 @@ namespace System.Net.WebSockets
         {
             Opcode = MessageOpcode.Text,
             Fin = true,
-            Processed = true
+            Processed = true,
         };
 
         /// <summary>The offset of the next available byte in the _receiveBuffer.</summary>
@@ -658,14 +658,9 @@ namespace System.Net.WebSockets
             {
                 return new ValueTask(
                     Task.FromException(
-                        exc is OperationCanceledException
-                            ? exc
-                            : _state == WebSocketState.Aborted
-                                ? CreateOperationCanceledException(exc)
-                                : new WebSocketException(
-                                    WebSocketError.ConnectionClosedPrematurely,
-                                    exc
-                                )
+                        exc is OperationCanceledException ? exc
+                        : _state == WebSocketState.Aborted ? CreateOperationCanceledException(exc)
+                        : new WebSocketException(WebSocketError.ConnectionClosedPrematurely, exc)
                     )
                 );
             }
@@ -1030,11 +1025,9 @@ namespace System.Net.WebSockets
                                         2
                                         + (_isServer ? MaskLength : 0)
                                         + (
-                                            payloadLength <= 125
-                                                ? 0
-                                                : payloadLength == 126
-                                                    ? sizeof(ushort)
-                                                    : sizeof(ulong)
+                                            payloadLength <= 125 ? 0
+                                            : payloadLength == 126 ? sizeof(ushort)
+                                            : sizeof(ulong)
                                         ); // additional 2 or 8 bytes for 16-bit or 64-bit length
                                     await EnsureBufferContainsAsync(minNeeded, cancellationToken)
                                         .ConfigureAwait(false);
@@ -2154,7 +2147,7 @@ namespace System.Net.WebSockets
             Binary = 0x2,
             Close = 0x8,
             Ping = 0x9,
-            Pong = 0xA
+            Pong = 0xA,
         }
 
         [StructLayout(LayoutKind.Auto)]

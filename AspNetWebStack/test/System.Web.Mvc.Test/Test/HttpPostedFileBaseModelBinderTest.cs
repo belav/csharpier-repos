@@ -23,7 +23,7 @@ namespace System.Web.Mvc.Test
             HttpPostedFileBaseModelBinder binder = new HttpPostedFileBaseModelBinder();
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelName = "fileName"
+                ModelName = "fileName",
             };
 
             // Act
@@ -45,7 +45,7 @@ namespace System.Web.Mvc.Test
             HttpPostedFileBaseModelBinder binder = new HttpPostedFileBaseModelBinder();
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelName = "fileName"
+                ModelName = "fileName",
             };
 
             // Act
@@ -70,7 +70,7 @@ namespace System.Web.Mvc.Test
             HttpPostedFileBaseModelBinder binder = new HttpPostedFileBaseModelBinder();
             ModelBindingContext bindingContext = new ModelBindingContext()
             {
-                ModelName = "fileName"
+                ModelName = "fileName",
             };
 
             // Act

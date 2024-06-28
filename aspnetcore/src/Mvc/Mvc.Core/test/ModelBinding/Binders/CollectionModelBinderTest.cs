@@ -19,7 +19,7 @@ public class CollectionModelBinderTest
         var valueProvider = new SimpleValueProvider
         {
             { "someName[foo]", "42" },
-            { "someName[baz]", "200" }
+            { "someName[baz]", "200" },
         };
         var bindingContext = GetModelBindingContext(valueProvider);
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
@@ -48,7 +48,7 @@ public class CollectionModelBinderTest
         {
             { "someName[0]", "42" },
             { "someName[1]", "100" },
-            { "someName[3]", "400" }
+            { "someName[3]", "400" },
         };
         var bindingContext = GetModelBindingContext(valueProvider);
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
@@ -77,7 +77,7 @@ public class CollectionModelBinderTest
             { "someName.index", new[] { "foo", "bar", "baz" } },
             { "someName[foo]", "42" },
             { "someName[bar]", "100" },
-            { "someName[baz]", "200" }
+            { "someName[baz]", "200" },
         };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
@@ -108,7 +108,7 @@ public class CollectionModelBinderTest
             { "someName.index", new[] { "foo", "bar", "baz" } },
             { "someName[foo]", "42" },
             { "someName[bar]", "100" },
-            { "someName[baz]", "200" }
+            { "someName[baz]", "200" },
         };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
@@ -136,7 +136,7 @@ public class CollectionModelBinderTest
         // Arrange
         var valueProvider = new SimpleValueProvider
         {
-            { "someName", new[] { "42", "100", "200" } }
+            { "someName", new[] { "42", "100", "200" } },
         };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
@@ -162,7 +162,7 @@ public class CollectionModelBinderTest
         // Arrange
         var valueProvider = new SimpleValueProvider
         {
-            { "someName", new[] { "42", "100", "200" } }
+            { "someName", new[] { "42", "100", "200" } },
         };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly);
         var modelState = bindingContext.ModelState;
@@ -185,7 +185,7 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
-        var valueProvider = new SimpleValueProvider { { "someName", null }, };
+        var valueProvider = new SimpleValueProvider { { "someName", null } };
         var bindingContext = GetModelBindingContext(valueProvider, isReadOnly: false);
 
         // Act
@@ -221,7 +221,7 @@ public class CollectionModelBinderTest
     {
         // Arrange
         var binder = new CollectionModelBinder<int>(CreateIntBinder(), NullLoggerFactory.Instance);
-        var valueProvider = new SimpleValueProvider { { "someName", "420" }, };
+        var valueProvider = new SimpleValueProvider { { "someName", "420" } };
         var context = GetModelBindingContext(valueProvider);
         var valueProviderResult = new ValueProviderResult(
             new[] { null, "42", "", "100", null, "200" }
@@ -562,7 +562,7 @@ public class CollectionModelBinderTest
 
     private static DefaultModelBindingContext CreateContext()
     {
-        var actionContext = new ActionContext() { HttpContext = new DefaultHttpContext(), };
+        var actionContext = new ActionContext() { HttpContext = new DefaultHttpContext() };
         var modelBindingContext = new DefaultModelBindingContext()
         {
             ActionContext = actionContext,

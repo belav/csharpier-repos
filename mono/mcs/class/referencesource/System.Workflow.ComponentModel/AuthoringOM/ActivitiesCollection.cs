@@ -410,7 +410,7 @@ namespace System.Workflow.ComponentModel
     {
         Add = 0x00,
         Remove = 0x01,
-        Replace = 0x02
+        Replace = 0x02,
     }
 
     [Obsolete(

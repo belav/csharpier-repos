@@ -23,7 +23,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<string>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--runtime" },
@@ -31,7 +31,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<string>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--queue" },
@@ -39,7 +39,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<string>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--arch" },
@@ -47,7 +47,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<string>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--playwright" },
@@ -55,7 +55,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<bool>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--quarantined" },
@@ -63,7 +63,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<bool>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--helixTimeout" },
@@ -71,7 +71,7 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<string>(),
-                Required = true
+                Required = true,
             },
             new Option(
                 aliases: new string[] { "--source" },
@@ -79,8 +79,8 @@ public class HelixTestRunnerOptions
             )
             {
                 Argument = new Argument<string>() { Arity = ArgumentArity.ZeroOrMore },
-                Required = true
-            }
+                Required = true,
+            },
         };
 
         var parseResult = command.Parse(args);

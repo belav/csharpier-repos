@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.GenerateMember
                 TypeKind.Class,
                 TypeKind.Module,
                 TypeKind.Struct,
-                TypeKind.Interface
+                TypeKind.Interface,
             };
 
         protected static bool ValidateTypeToGenerateIn(

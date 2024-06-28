@@ -203,7 +203,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                                 SyntaxTrivia
                                 (SyntaxKind.SingleLineCommentTrivia),
                                 SyntaxTrivia
-                                (SyntaxKind.EndOfLineTrivia)
+                                (SyntaxKind.EndOfLineTrivia),
                             ]
                     )
                         triviaToMove = TriviaList(triviaToMove.Take(triviaToMove.Count - 2));

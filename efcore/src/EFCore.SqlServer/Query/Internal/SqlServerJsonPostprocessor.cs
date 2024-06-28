@@ -119,7 +119,7 @@ public class SqlServerJsonPostprocessor : ExpressionVisitor
                         {
                             JoinExpressionBase j => j.Update(newOpenJsonExpression),
                             SqlServerOpenJsonExpression => newOpenJsonExpression,
-                            _ => throw new UnreachableException()
+                            _ => throw new UnreachableException(),
                         };
 
                         foreach (var columnInfo in openJsonExpression.ColumnInfos!)

@@ -109,7 +109,7 @@ namespace System.Linq.Tests
                     "X",
                     "Have Space",
                     "Clinton",
-                    ""
+                    "",
                 }
                 select x1;
 
@@ -327,7 +327,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -350,7 +350,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             AssertExtensions.Throws<ArgumentNullException>(
@@ -375,7 +375,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Func<Record, string> keySelector = null;
@@ -414,7 +414,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Func<Record, int> elementSelector = null;
@@ -435,7 +435,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Func<Record, int> elementSelector = null;
@@ -456,7 +456,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Func<string, IEnumerable<int>, long> resultSelector = null;
@@ -483,7 +483,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Func<string, IEnumerable<int>, long> resultSelector = null;
@@ -504,7 +504,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Func<string, IEnumerable<Record>, long> resultSelector = null;
@@ -558,7 +558,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record { Name = "miT", Score = 25 },
             };
             long[] expected = { 240, 365, -600, 63 };
 
@@ -585,7 +585,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record { Name = "miT", Score = 25 },
             };
             long[] expected = { 240, 365, -600, 63 };
 
@@ -614,7 +614,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = null, Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record { Name = "miT", Score = 25 },
             };
             long[] expected = { 165, 58, -600, 120, 75 };
 
@@ -641,7 +641,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = null, Score = 9 },
-                new Record { Name = "miT", Score = 25 }
+                new Record { Name = "miT", Score = 25 },
             };
             long[] expected = { 165, 58, -600, 120, 75 };
 
@@ -664,7 +664,7 @@ namespace System.Linq.Tests
             string[] key = { "Tim" };
             Record[] source =
             {
-                new Record { Name = key[0], Score = 60 }
+                new Record { Name = key[0], Score = 60 },
             };
 
             AssertGroupingCorrect(key, source, source.GroupBy(e => e.Name));
@@ -776,7 +776,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Tim", Score = element[0] },
                 new Record { Name = "Tim", Score = element[1] },
                 new Record { Name = "miT", Score = element[2] },
-                new Record { Name = "miT", Score = element[3] }
+                new Record { Name = "miT", Score = element[3] },
             };
 
             Assert.Equal(
@@ -819,7 +819,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             IGrouping<string, Record>[] groupedArray = source.GroupBy(r => r.Name).ToArray();
@@ -837,7 +837,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             IGrouping<string, int>[] groupedArray = source
@@ -857,7 +857,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             IEnumerable<Record>[] groupedArray = source.GroupBy(r => r.Name, (r, e) => e).ToArray();
@@ -875,7 +875,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             IEnumerable<Record>[] groupedArray = source
@@ -895,7 +895,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             List<IGrouping<string, Record>> groupedList = source.GroupBy(r => r.Name).ToList();
@@ -913,7 +913,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             List<IGrouping<string, int>> groupedList = source
@@ -933,7 +933,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             List<IEnumerable<Record>> groupedList = source
@@ -953,7 +953,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             List<IEnumerable<Record>> groupedList = source
@@ -973,7 +973,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Assert.Equal(4, source.GroupBy(r => r.Name).Count());
@@ -989,7 +989,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Assert.Equal(4, source.GroupBy(r => r.Name, e => e.Score).Count());
@@ -1005,7 +1005,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Assert.Equal(4, source.GroupBy(r => r.Name, (r, e) => e).Count());
@@ -1021,7 +1021,7 @@ namespace System.Linq.Tests
                 new Record { Name = "Robert", Score = -100 },
                 new Record { Name = "Chris", Score = 24 },
                 new Record { Name = "Prakash", Score = 9 },
-                new Record { Name = "Tim", Score = 25 }
+                new Record { Name = "Tim", Score = 25 },
             };
 
             Assert.Equal(4, source.GroupBy(r => r.Name, e => e, (r, e) => e).Count());

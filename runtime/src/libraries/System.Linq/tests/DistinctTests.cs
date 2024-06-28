@@ -234,7 +234,7 @@ namespace System.Linq.Tests
                     "namespace",
                     "namespace",
                     "namespace",
-                }
+                },
             };
         }
 

@@ -208,7 +208,7 @@ namespace System.Net.Http.Headers
             false,
             true,
             false,
-            true
+            true,
         };
 
         static readonly int last_token_char = token_chars.Length;
@@ -218,7 +218,7 @@ namespace System.Net.Http.Headers
             "dddd, dd'-'MMM'-'yy HH:mm:ss 'GMT'",
             "ddd MMM d HH:mm:ss yyyy",
             "d MMM yy H:m:s",
-            "ddd, d MMM yyyy H:m:s zzz"
+            "ddd, d MMM yyyy H:m:s zzz",
         };
 
         readonly string s;

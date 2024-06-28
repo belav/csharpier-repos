@@ -216,7 +216,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         ReturnValueInline = 0x800,
         ReturnValueInArray = 0x1000,
         ExceptionInArray = 0x2000,
-        GenericMethod = 0x8000
+        GenericMethod = 0x8000,
     }
 
     // ValueType Fixup Enum
@@ -242,7 +242,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         UserNameSpace = 6,
         MemberName = 7,
         Interop = 8,
-        CallElement = 9
+        CallElement = 9,
     }
 
     [Serializable]
@@ -252,6 +252,6 @@ namespace System.Runtime.Serialization.Formatters.Binary
         SchemaType = 0x1,
         Embedded = 0x2,
         XmlElement = 0x4,
-        XmlAttribute = 0x8
+        XmlAttribute = 0x8,
     }
 }

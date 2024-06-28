@@ -96,12 +96,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                 context.GetType().Namespace.IndexOf("csharp", StringComparison.OrdinalIgnoreCase)
                 >= 0;
             var expectedFlags =
-                error != null
-                    ? DkmClrCompilationResultFlags.None
-                    : isCSharp
-                        ? DkmClrCompilationResultFlags.PotentialSideEffect
-                        : DkmClrCompilationResultFlags.PotentialSideEffect
-                            | DkmClrCompilationResultFlags.ReadOnlyResult;
+                error != null ? DkmClrCompilationResultFlags.None
+                : isCSharp ? DkmClrCompilationResultFlags.PotentialSideEffect
+                : DkmClrCompilationResultFlags.PotentialSideEffect
+                    | DkmClrCompilationResultFlags.ReadOnlyResult;
             Assert.Equal(expectedFlags, resultProperties.Flags);
             Assert.Equal(default(DkmEvaluationResultCategory), resultProperties.Category);
             Assert.Equal(default(DkmEvaluationResultAccessType), resultProperties.AccessType);

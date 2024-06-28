@@ -125,7 +125,7 @@ namespace MonoTests.System.Diagnostics
                 "<remove name=\"a\" value=\"b\"/>",
                 "<clear name=\"a\"/>",
                 // invalid element
-                "<invalid element=\"a\" here=\"b\"/>"
+                "<invalid element=\"a\" here=\"b\"/>",
             };
             ValidateExceptions("#TST:IE:Bad", "<switches>{0}</switches>", badElements);
 
@@ -134,7 +134,7 @@ namespace MonoTests.System.Diagnostics
                 "<add name=\"a\" value=\"4\"/>",
                 "<add name=\"a\" value=\"-2\"/>",
                 "<remove name=\"a\"/>",
-                "<clear/>"
+                "<clear/>",
             };
             ValidateSuccess("#TST:IE:Good", "<switches>{0}</switches>", goodElements);
         }
@@ -148,7 +148,7 @@ namespace MonoTests.System.Diagnostics
                 "",
                 "assertuienabled=\"true\"",
                 "assertuienabled=\"false\" logfilename=\"some file name\"",
-                "logfilename=\"some file name\""
+                "logfilename=\"some file name\"",
             };
             ValidateSuccess("#TAT:Good", "<assert {0}/>", goodAttributes);
 
@@ -157,7 +157,7 @@ namespace MonoTests.System.Diagnostics
                 "AssertUiEnabled=\"true\"",
                 "LogFileName=\"foo\"",
                 "assertuienabled=\"\"",
-                "assertuienabled=\"non-boolean-value\""
+                "assertuienabled=\"non-boolean-value\"",
             };
             ValidateExceptions("#TAT:BadAttrs", "<assert {0}/>", badAttributes);
 
@@ -173,7 +173,7 @@ namespace MonoTests.System.Diagnostics
             {
                 "",
                 "filemappingsize=\"1048576\"",
-                "filemappingsize=\"0\""
+                "filemappingsize=\"0\"",
             };
             ValidateSuccess("#PCT:Good", "<performanceCounters {0}/>", goodAttributes);
 
@@ -181,7 +181,7 @@ namespace MonoTests.System.Diagnostics
             {
                 "FileMappingSize=\"1048576\"",
                 "filemappingsize=\"\"",
-                "filemappingsize=\"non-int-value\""
+                "filemappingsize=\"non-int-value\"",
             };
             ValidateExceptions("#PCT:BadAttrs", "<performanceCounters {0}/>", badAttributes);
 
@@ -202,7 +202,7 @@ namespace MonoTests.System.Diagnostics
                 "",
                 "autoflush=\"true\"",
                 "indentsize=\"4\"",
-                "autoflush=\"false\" indentsize=\"10\""
+                "autoflush=\"false\" indentsize=\"10\"",
             };
             ValidateSuccess("#TTT:A:Good", "<trace {0}/>", good);
 
@@ -214,7 +214,7 @@ namespace MonoTests.System.Diagnostics
                 "autoflush=\"\"",
                 "indentsize=\"non-integral-value\"",
                 "indentsize=\"\"",
-                "extra=\"invalid\""
+                "extra=\"invalid\"",
             };
             ValidateExceptions("#TTT:A:Bad", "<trace {0}/>", bad);
         }
@@ -226,7 +226,7 @@ namespace MonoTests.System.Diagnostics
             string[] good =
             {
                 // more about listeners in a different function...
-                "<listeners />"
+                "<listeners />",
             };
             ValidateSuccess("#TTT:C:Good", "<trace>{0}</trace>", good);
 
@@ -248,7 +248,7 @@ namespace MonoTests.System.Diagnostics
                 "<remove name=\"foo\"/>",
                 "<add name=\"foo\" "
                     + "type=\"System.Diagnostics.TextWriterTraceListener, System, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\" />",
-                "<remove name=\"foo\"/>"
+                "<remove name=\"foo\"/>",
             };
             ValidateSuccess("#TTT:L:Good", format, good);
 

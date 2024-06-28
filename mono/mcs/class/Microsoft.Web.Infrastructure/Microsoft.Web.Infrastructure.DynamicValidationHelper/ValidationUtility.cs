@@ -53,7 +53,7 @@ namespace Microsoft.Web.Infrastructure.DynamicValidationHelper
             context.Items[UNVALIDATED_DATA_KEY] = new object[]
             {
                 req.FormUnvalidated,
-                req.QueryStringUnvalidated
+                req.QueryStringUnvalidated,
             };
 
             // Just to be safe, make sure it's on

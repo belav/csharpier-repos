@@ -69,7 +69,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 }
             );
             Assert.AreEqual("{}", json);
@@ -87,7 +87,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 }
             );
             StringAssert.AreEqual(
@@ -119,7 +119,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 }
             );
             Assert.AreEqual("[]", json);
@@ -136,7 +136,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+                    ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
                 }
             );
             Assert.AreEqual("{}", json);
@@ -232,7 +232,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var settings = new JsonSerializerSettings()
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
             var c = JsonConvert.SerializeObject(main, settings);
@@ -295,7 +295,7 @@ namespace Newtonsoft.Json.Tests.Serialization
 
             var settings = new JsonSerializerSettings
             {
-                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
             };
 
             var c = JsonConvert.SerializeObject(parent, settings);
@@ -320,7 +320,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 new JsonSerializerSettings
                 {
                     EqualityComparer = new ReferenceEqualsEqualityComparer(),
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 

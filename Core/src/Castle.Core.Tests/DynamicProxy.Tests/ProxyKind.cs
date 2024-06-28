@@ -19,6 +19,6 @@ namespace Castle.DynamicProxy.Tests
         Class,
         WithTarget,
         WithoutTarget,
-        WithTargetInterface
+        WithTargetInterface,
     }
 }

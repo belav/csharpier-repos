@@ -49,13 +49,13 @@ namespace MonoTests.System.ServiceModel
             TransportBindingElement element = new HttpTransportBindingElement
             {
                 MaxBufferSize = int.MaxValue,
-                MaxReceivedMessageSize = int.MaxValue
+                MaxReceivedMessageSize = int.MaxValue,
             };
             Binding binding = new CustomBinding(
                 new BindingElement[]
                 {
                     new TextMessageEncodingBindingElement(MessageVersion.Default, Encoding.UTF8),
-                    element
+                    element,
                 }
             );
 

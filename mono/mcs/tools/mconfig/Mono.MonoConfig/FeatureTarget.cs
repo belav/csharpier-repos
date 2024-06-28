@@ -33,6 +33,6 @@ namespace Mono.MonoConfig
     {
         Any,
         Web,
-        Application
+        Application,
     };
 }

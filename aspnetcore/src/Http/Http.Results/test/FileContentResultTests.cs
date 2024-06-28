@@ -46,7 +46,7 @@ public class FileContentResultTests : FileContentResultTestBase
         var result = Assert.IsAssignableFrom<IFileHttpResult>(
             new FileContentHttpResult(Array.Empty<byte>(), contentType)
             {
-                FileDownloadName = downloadName
+                FileDownloadName = downloadName,
             }
         );
         Assert.Equal(contentType, result.ContentType);
@@ -64,7 +64,7 @@ public class FileContentResultTests : FileContentResultTestBase
         var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(
             new FileContentHttpResult(Array.Empty<byte>(), contentType)
             {
-                FileDownloadName = downloadName
+                FileDownloadName = downloadName,
             }
         );
         Assert.Equal(contentType, result.ContentType);

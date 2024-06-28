@@ -98,7 +98,7 @@ internal static class HandshakeHelpers
         parsedOptions = new WebSocketDeflateOptions()
         {
             ServerContextTakeover = serverContextTakeover,
-            ServerMaxWindowBits = serverMaxWindowBits
+            ServerMaxWindowBits = serverMaxWindowBits,
         };
 
         using var builder = new ValueStringBuilder(WebSocketDeflateConstants.MaxExtensionLength);

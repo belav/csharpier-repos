@@ -943,14 +943,14 @@ namespace System.Windows.Forms.VisualStyles
         {
             None,
             Color,
-            Alpha
+            Alpha,
         }
 
         enum DeviceContextType
         {
             Unknown,
             Graphics,
-            Native
+            Native,
         }
         #endregion
         #region Painters
@@ -2235,7 +2235,7 @@ namespace System.Windows.Forms.VisualStyles
 
         enum GdkColorspace
         {
-            GDK_COLORSPACE_RGB
+            GDK_COLORSPACE_RGB,
         }
         #endregion
         #region GTK
@@ -2627,7 +2627,7 @@ namespace System.Windows.Forms.VisualStyles
             GTK_SHADOW_IN,
             GTK_SHADOW_OUT,
             GTK_SHADOW_ETCHED_IN,
-            GTK_SHADOW_ETCHED_OUT
+            GTK_SHADOW_ETCHED_OUT,
         }
 
         enum GtkStateType
@@ -2636,13 +2636,13 @@ namespace System.Windows.Forms.VisualStyles
             GTK_STATE_ACTIVE,
             GTK_STATE_PRELIGHT,
             GTK_STATE_SELECTED,
-            GTK_STATE_INSENSITIVE
+            GTK_STATE_INSENSITIVE,
         }
 
         enum GtkWindowType
         {
             GTK_WINDOW_TOPLEVEL,
-            GTK_WINDOW_POPUP
+            GTK_WINDOW_POPUP,
         }
 
         enum GtkArrowType
@@ -2651,13 +2651,13 @@ namespace System.Windows.Forms.VisualStyles
             GTK_ARROW_DOWN,
             GTK_ARROW_LEFT,
             GTK_ARROW_RIGHT,
-            GTK_ARROW_NONE
+            GTK_ARROW_NONE,
         }
 
         enum GtkOrientation
         {
             GTK_ORIENTATION_HORIZONTAL,
-            GTK_ORIENTATION_VERTICAL
+            GTK_ORIENTATION_VERTICAL,
         }
 
         enum GtkExpanderStyle
@@ -2665,7 +2665,7 @@ namespace System.Windows.Forms.VisualStyles
             GTK_EXPANDER_COLLAPSED,
             GTK_EXPANDER_SEMI_COLLAPSED,
             GTK_EXPANDER_SEMI_EXPANDED,
-            GTK_EXPANDER_EXPANDED
+            GTK_EXPANDER_EXPANDED,
         }
 
         enum GtkPositionType
@@ -2673,7 +2673,7 @@ namespace System.Windows.Forms.VisualStyles
             GTK_POS_LEFT,
             GTK_POS_RIGHT,
             GTK_POS_TOP,
-            GTK_POS_BOTTOM
+            GTK_POS_BOTTOM,
         }
 
         enum GtkWidgetFlags : uint
@@ -2690,7 +2690,7 @@ namespace System.Windows.Forms.VisualStyles
             GDK_WINDOW_EDGE_EAST,
             GDK_WINDOW_EDGE_SOUTH_WEST,
             GDK_WINDOW_EDGE_SOUTH,
-            GDK_WINDOW_EDGE_SOUTH_EAST
+            GDK_WINDOW_EDGE_SOUTH_EAST,
         }
         #endregion
         #region Structures
@@ -2842,7 +2842,7 @@ namespace System.Windows.Forms.VisualStyles
     {
         Unchecked = GtkPlus.GtkShadowType.GTK_SHADOW_OUT,
         Mixed = GtkPlus.GtkShadowType.GTK_SHADOW_ETCHED_IN,
-        Checked = GtkPlus.GtkShadowType.GTK_SHADOW_IN
+        Checked = GtkPlus.GtkShadowType.GTK_SHADOW_IN,
     }
 
     enum GtkPlusState
@@ -2851,7 +2851,7 @@ namespace System.Windows.Forms.VisualStyles
         Pressed,
         Hot,
         Selected,
-        Disabled
+        Disabled,
     }
     #endregion
 }

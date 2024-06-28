@@ -47,7 +47,7 @@ namespace Newtonsoft.Json.Serialization
             NamingStrategy = new CamelCaseNamingStrategy
             {
                 ProcessDictionaryKeys = true,
-                OverrideSpecifiedNames = true
+                OverrideSpecifiedNames = true,
             };
         }
 

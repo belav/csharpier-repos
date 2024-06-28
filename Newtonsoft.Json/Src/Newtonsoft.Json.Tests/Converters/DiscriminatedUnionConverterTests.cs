@@ -113,7 +113,7 @@ namespace Newtonsoft.Json.Tests.Converters
             List<Shape> values = new List<Shape>
             {
                 Shape.NewRectangle(10.0, 5.0),
-                Shape.NewCircle(7.5)
+                Shape.NewCircle(7.5),
             };
 
             string json = JsonConvert.SerializeObject(values, Formatting.Indented);
@@ -334,7 +334,7 @@ namespace Newtonsoft.Json.Tests.Converters
                 new JsonSerializerSettings
                 {
                     PreserveReferencesHandling = PreserveReferencesHandling.All,
-                    TypeNameHandling = TypeNameHandling.All
+                    TypeNameHandling = TypeNameHandling.All,
                 }
             );
 

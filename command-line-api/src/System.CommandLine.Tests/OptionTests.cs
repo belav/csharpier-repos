@@ -308,7 +308,7 @@ namespace System.CommandLine.Tests
                 .BeEquivalentTo(
                     new[]
                     {
-                        $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'"
+                        $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'",
                     }
                 );
         }

@@ -547,7 +547,7 @@ namespace SdtEventSources
                 descrs[0] = new EventData
                 {
                     DataPointer = (IntPtr)(&bufferLength),
-                    Size = sizeof(int)
+                    Size = sizeof(int),
                 };
                 descrs[1] = new EventData { DataPointer = (IntPtr)arg1Ptr, Size = arr.Length };
 

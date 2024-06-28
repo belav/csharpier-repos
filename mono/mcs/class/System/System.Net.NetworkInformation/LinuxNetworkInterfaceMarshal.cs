@@ -116,6 +116,8 @@ namespace System.Net.NetworkInformation
         SIT = 776, // IPv6-in-IPv4 tunnel
         IPDDP = 777, // IP over DDP tunnel
         IPGRE = 778, // GRE over IP
-        IP6GRE = 823 // GRE over IPv6
+        IP6GRE =
+            823 // GRE over IPv6
+        ,
     }
 }

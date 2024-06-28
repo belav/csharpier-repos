@@ -492,7 +492,7 @@ namespace ILCompiler.DependencyAnalysis
                 new DependencyListEntry(
                     _methodSig,
                     "NativeLayoutMethodNameAndSignatureVertexNode signature vertex"
-                )
+                ),
             };
         }
 
@@ -574,7 +574,7 @@ namespace ILCompiler.DependencyAnalysis
                     new DependencyListEntry(
                         _parameterTypeSig,
                         "NativeLayoutParameterizedTypeSignatureVertexNode parameter type signature"
-                    )
+                    ),
                 };
             }
 
@@ -650,7 +650,7 @@ namespace ILCompiler.DependencyAnalysis
             {
                 return new DependencyListEntry[]
                 {
-                    new DependencyListEntry(_sig, "Method signature")
+                    new DependencyListEntry(_sig, "Method signature"),
                 };
             }
 
@@ -788,7 +788,7 @@ namespace ILCompiler.DependencyAnalysis
                     new DependencyListEntry(
                         context.MaximallyConstructableType(_type),
                         "NativeLayoutEETypeVertexNode containing type signature"
-                    )
+                    ),
                 };
             }
 
@@ -826,7 +826,7 @@ namespace ILCompiler.DependencyAnalysis
                 new DependencyListEntry(
                     _symbol,
                     "NativeLayoutISymbolNodeReferenceVertexNode containing symbol"
-                )
+                ),
             };
         }
 
@@ -860,7 +860,7 @@ namespace ILCompiler.DependencyAnalysis
                 new DependencyListEntry(
                     _signatureToBePlaced,
                     "NativeLayoutPlacedSignatureVertexNode placed signature"
-                )
+                ),
             };
         }
 
@@ -1131,7 +1131,7 @@ namespace ILCompiler.DependencyAnalysis
                     new DependencyListEntry(
                         context.GenericDictionaryLayout(_owningMethodOrType),
                         "Dictionary Layout"
-                    )
+                    ),
                 };
             }
             else
@@ -1141,7 +1141,7 @@ namespace ILCompiler.DependencyAnalysis
                     new DependencyListEntry(
                         context.GenericDictionaryLayout(_owningMethodOrType),
                         "Dictionary Layout"
-                    )
+                    ),
                 };
             }
         }
@@ -1887,7 +1887,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             AllInVTable,
             AllOnTypesThatShouldProduceFullVTables,
-            AllOnTypesThatProducePartialVTables
+            AllOnTypesThatProducePartialVTables,
         }
 
         private static IEnumerable<MethodDesc> EnumVirtualSlotsDeclaredOnType(TypeDesc declType)
@@ -2420,7 +2420,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             var result = new DependencyList
             {
-                { factory.NativeLayout.FieldLdTokenVertex(_field), "Field Signature" }
+                { factory.NativeLayout.FieldLdTokenVertex(_field), "Field Signature" },
             };
 
             foreach (
@@ -2474,7 +2474,7 @@ namespace ILCompiler.DependencyAnalysis
         {
             var result = new DependencyList
             {
-                { factory.NativeLayout.MethodLdTokenVertex(_method), "Method Signature" }
+                { factory.NativeLayout.MethodLdTokenVertex(_method), "Method Signature" },
             };
 
             foreach (

@@ -71,7 +71,7 @@ namespace System.ServiceModel.Syndication.Tests
                 "relationshipType",
                 "title",
                 "mediaType",
-                10
+                10,
             };
         }
 
@@ -137,7 +137,7 @@ namespace System.ServiceModel.Syndication.Tests
                 10
             )
             {
-                BaseUri = new Uri("http://baseuri.com")
+                BaseUri = new Uri("http://baseuri.com"),
             };
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
             original.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -211,7 +211,7 @@ namespace System.ServiceModel.Syndication.Tests
                 10
             )
             {
-                BaseUri = new Uri("http://baseuri.com")
+                BaseUri = new Uri("http://baseuri.com"),
             };
             original.AttributeExtensions.Add(new XmlQualifiedName("name"), "value");
             original.ElementExtensions.Add(new ExtensionObject { Value = 10 });
@@ -343,20 +343,20 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 new SyndicationLink(new Uri("http://microsoft.com")),
-                new Uri("http://microsoft.com")
+                new Uri("http://microsoft.com"),
             };
             yield return new object[]
             {
                 new SyndicationLink(new Uri("/relative", UriKind.Relative)),
-                null
+                null,
             };
             yield return new object[]
             {
                 new SyndicationLink(new Uri("/relative", UriKind.Relative))
                 {
-                    BaseUri = new Uri("http://microsoft.com")
+                    BaseUri = new Uri("http://microsoft.com"),
                 },
-                new Uri("http://microsoft.com/relative")
+                new Uri("http://microsoft.com/relative"),
             };
         }
 

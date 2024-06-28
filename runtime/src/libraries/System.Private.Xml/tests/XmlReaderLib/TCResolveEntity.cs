@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_None)
                     {
-                        Attribute = new Variation("ResolveEntity On None")
+                        Attribute = new Variation("ResolveEntity On None"),
                     }
                 );
             }
@@ -26,7 +26,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_Element)
                     {
-                        Attribute = new Variation("ResolveEntity On Element")
+                        Attribute = new Variation("ResolveEntity On Element"),
                     }
                 );
             }
@@ -36,7 +36,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_Attribute)
                     {
-                        Attribute = new Variation("ResolveEntity On Attribute")
+                        Attribute = new Variation("ResolveEntity On Attribute"),
                     }
                 );
             }
@@ -46,7 +46,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_Text)
                     {
-                        Attribute = new Variation("ResolveEntity On Text")
+                        Attribute = new Variation("ResolveEntity On Text"),
                     }
                 );
             }
@@ -56,7 +56,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_CDATA)
                     {
-                        Attribute = new Variation("ResolveEntity On CDATA")
+                        Attribute = new Variation("ResolveEntity On CDATA"),
                     }
                 );
             }
@@ -66,7 +66,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_ProcessingInstruction)
                     {
-                        Attribute = new Variation("ResolveEntity On ProcessingInstruction")
+                        Attribute = new Variation("ResolveEntity On ProcessingInstruction"),
                     }
                 );
             }
@@ -76,7 +76,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_Comment)
                     {
-                        Attribute = new Variation("ResolveEntity On Comment")
+                        Attribute = new Variation("ResolveEntity On Comment"),
                     }
                 );
             }
@@ -86,7 +86,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_Whitespace)
                     {
-                        Attribute = new Variation("ResolveEntity On Whitespace")
+                        Attribute = new Variation("ResolveEntity On Whitespace"),
                     }
                 );
             }
@@ -96,7 +96,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_EndElement)
                     {
-                        Attribute = new Variation("ResolveEntity On EndElement")
+                        Attribute = new Variation("ResolveEntity On EndElement"),
                     }
                 );
             }
@@ -106,7 +106,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_XmlDeclaration)
                     {
-                        Attribute = new Variation("ResolveEntity On XmlDeclaration")
+                        Attribute = new Variation("ResolveEntity On XmlDeclaration"),
                     }
                 );
             }
@@ -116,7 +116,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestResolveEntityNodeType_EndEntity)
                     {
-                        Attribute = new Variation("ResolveEntity On EndEntity")
+                        Attribute = new Variation("ResolveEntity On EndEntity"),
                     }
                 );
             }

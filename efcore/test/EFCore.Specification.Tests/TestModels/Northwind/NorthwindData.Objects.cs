@@ -22,7 +22,7 @@ public partial class NorthwindData
                 PostalCode = "12209",
                 Country = "Germany",
                 Phone = "030-0074321",
-                Fax = "030-0076545"
+                Fax = "030-0076545",
             },
             new Customer
             {
@@ -36,7 +36,7 @@ public partial class NorthwindData
                 PostalCode = "05021",
                 Country = "Mexico",
                 Phone = "(5) 555-4729",
-                Fax = "(5) 555-3745"
+                Fax = "(5) 555-3745",
             },
             new Customer
             {
@@ -50,7 +50,7 @@ public partial class NorthwindData
                 PostalCode = "05023",
                 Country = "Mexico",
                 Phone = "(5) 555-3932",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -64,7 +64,7 @@ public partial class NorthwindData
                 PostalCode = "WA1 1DP",
                 Country = "UK",
                 Phone = "(171) 555-7788",
-                Fax = "(171) 555-6750"
+                Fax = "(171) 555-6750",
             },
             new Customer
             {
@@ -78,7 +78,7 @@ public partial class NorthwindData
                 PostalCode = "S-958 22",
                 Country = "Sweden",
                 Phone = "0921-12 34 65",
-                Fax = "0921-12 34 67"
+                Fax = "0921-12 34 67",
             },
             new Customer
             {
@@ -92,7 +92,7 @@ public partial class NorthwindData
                 PostalCode = "68306",
                 Country = "Germany",
                 Phone = "0621-08460",
-                Fax = "0621-08924"
+                Fax = "0621-08924",
             },
             new Customer
             {
@@ -106,7 +106,7 @@ public partial class NorthwindData
                 PostalCode = "67000",
                 Country = "France",
                 Phone = "88.60.15.31",
-                Fax = "88.60.15.32"
+                Fax = "88.60.15.32",
             },
             new Customer
             {
@@ -120,7 +120,7 @@ public partial class NorthwindData
                 PostalCode = "28023",
                 Country = "Spain",
                 Phone = "(91) 555 22 82",
-                Fax = "(91) 555 91 99"
+                Fax = "(91) 555 91 99",
             },
             new Customer
             {
@@ -134,7 +134,7 @@ public partial class NorthwindData
                 PostalCode = "13008",
                 Country = "France",
                 Phone = "91.24.45.40",
-                Fax = "91.24.45.41"
+                Fax = "91.24.45.41",
             },
             new Customer
             {
@@ -148,7 +148,7 @@ public partial class NorthwindData
                 PostalCode = "T2F 8M4",
                 Country = "Canada",
                 Phone = "(604) 555-4729",
-                Fax = "(604) 555-3745"
+                Fax = "(604) 555-3745",
             },
             new Customer
             {
@@ -162,7 +162,7 @@ public partial class NorthwindData
                 PostalCode = "EC2 5NT",
                 Country = "UK",
                 Phone = "(171) 555-1212",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -176,7 +176,7 @@ public partial class NorthwindData
                 PostalCode = "1010",
                 Country = "Argentina",
                 Phone = "(1) 135-5555",
-                Fax = "(1) 135-4892"
+                Fax = "(1) 135-4892",
             },
             new Customer
             {
@@ -190,7 +190,7 @@ public partial class NorthwindData
                 PostalCode = "05022",
                 Country = "Mexico",
                 Phone = "(5) 555-3392",
-                Fax = "(5) 555-7293"
+                Fax = "(5) 555-7293",
             },
             new Customer
             {
@@ -204,7 +204,7 @@ public partial class NorthwindData
                 PostalCode = "3012",
                 Country = "Switzerland",
                 Phone = "0452-076545",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -218,7 +218,7 @@ public partial class NorthwindData
                 PostalCode = "05432-043",
                 Country = "Brazil",
                 Phone = "(11) 555-7647",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -232,7 +232,7 @@ public partial class NorthwindData
                 PostalCode = "WX1 6LT",
                 Country = "UK",
                 Phone = "(171) 555-2282",
-                Fax = "(171) 555-9199"
+                Fax = "(171) 555-9199",
             },
             new Customer
             {
@@ -246,7 +246,7 @@ public partial class NorthwindData
                 PostalCode = "52066",
                 Country = "Germany",
                 Phone = "0241-039123",
-                Fax = "0241-059428"
+                Fax = "0241-059428",
             },
             new Customer
             {
@@ -260,7 +260,7 @@ public partial class NorthwindData
                 PostalCode = "44000",
                 Country = "France",
                 Phone = "40.67.88.88",
-                Fax = "40.67.89.89"
+                Fax = "40.67.89.89",
             },
             new Customer
             {
@@ -274,7 +274,7 @@ public partial class NorthwindData
                 PostalCode = "WX3 6FW",
                 Country = "UK",
                 Phone = "(171) 555-0297",
-                Fax = "(171) 555-3373"
+                Fax = "(171) 555-3373",
             },
             new Customer
             {
@@ -288,7 +288,7 @@ public partial class NorthwindData
                 PostalCode = "8010",
                 Country = "Austria",
                 Phone = "7675-3425",
-                Fax = "7675-3426"
+                Fax = "7675-3426",
             },
             new Customer
             {
@@ -302,7 +302,7 @@ public partial class NorthwindData
                 PostalCode = "05442-030",
                 Country = "Brazil",
                 Phone = "(11) 555-9857",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -316,7 +316,7 @@ public partial class NorthwindData
                 PostalCode = "28034",
                 Country = "Spain",
                 Phone = "(91) 555 94 44",
-                Fax = "(91) 555 55 93"
+                Fax = "(91) 555 55 93",
             },
             new Customer
             {
@@ -330,7 +330,7 @@ public partial class NorthwindData
                 PostalCode = "59000",
                 Country = "France",
                 Phone = "20.16.10.16",
-                Fax = "20.16.10.17"
+                Fax = "20.16.10.17",
             },
             new Customer
             {
@@ -344,7 +344,7 @@ public partial class NorthwindData
                 PostalCode = "S-844 67",
                 Country = "Sweden",
                 Phone = "0695-34 67 21",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -358,7 +358,7 @@ public partial class NorthwindData
                 PostalCode = "80805",
                 Country = "Germany",
                 Phone = "089-0877310",
-                Fax = "089-0877451"
+                Fax = "089-0877451",
             },
             new Customer
             {
@@ -372,7 +372,7 @@ public partial class NorthwindData
                 PostalCode = "44000",
                 Country = "France",
                 Phone = "40.32.21.21",
-                Fax = "40.32.21.20"
+                Fax = "40.32.21.20",
             },
             new Customer
             {
@@ -386,7 +386,7 @@ public partial class NorthwindData
                 PostalCode = "10100",
                 Country = "Italy",
                 Phone = "011-4988260",
-                Fax = "011-4988261"
+                Fax = "011-4988261",
             },
             new Customer
             {
@@ -400,7 +400,7 @@ public partial class NorthwindData
                 PostalCode = "1675",
                 Country = "Portugal",
                 Phone = "(1) 354-2534",
-                Fax = "(1) 354-2535"
+                Fax = "(1) 354-2535",
             },
             new Customer
             {
@@ -414,7 +414,7 @@ public partial class NorthwindData
                 PostalCode = "08022",
                 Country = "Spain",
                 Phone = "(93) 203 4560",
-                Fax = "(93) 203 4561"
+                Fax = "(93) 203 4561",
             },
             new Customer
             {
@@ -428,7 +428,7 @@ public partial class NorthwindData
                 PostalCode = "41101",
                 Country = "Spain",
                 Phone = "(95) 555 82 82",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -442,7 +442,7 @@ public partial class NorthwindData
                 PostalCode = "04876-786",
                 Country = "Brazil",
                 Phone = "(11) 555-9482",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -456,7 +456,7 @@ public partial class NorthwindData
                 PostalCode = "97403",
                 Country = "USA",
                 Phone = "(503) 555-7555",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -470,7 +470,7 @@ public partial class NorthwindData
                 PostalCode = "1081",
                 Country = "Venezuela",
                 Phone = "(2) 283-2951",
-                Fax = "(2) 283-3397"
+                Fax = "(2) 283-3397",
             },
             new Customer
             {
@@ -484,7 +484,7 @@ public partial class NorthwindData
                 PostalCode = "05454-876",
                 Country = "Brazil",
                 Phone = "(21) 555-0091",
-                Fax = "(21) 555-8765"
+                Fax = "(21) 555-8765",
             },
             new Customer
             {
@@ -498,7 +498,7 @@ public partial class NorthwindData
                 PostalCode = "5022",
                 Country = "Venezuela",
                 Phone = "(5) 555-1340",
-                Fax = "(5) 555-1948"
+                Fax = "(5) 555-1948",
             },
             new Customer
             {
@@ -512,7 +512,7 @@ public partial class NorthwindData
                 PostalCode = "97827",
                 Country = "USA",
                 Phone = "(503) 555-6874",
-                Fax = "(503) 555-2376"
+                Fax = "(503) 555-2376",
             },
             new Customer
             {
@@ -526,7 +526,7 @@ public partial class NorthwindData
                 PostalCode = null,
                 Country = "Ireland",
                 Phone = "2967 542",
-                Fax = "2967 3333"
+                Fax = "2967 3333",
             },
             new Customer
             {
@@ -540,7 +540,7 @@ public partial class NorthwindData
                 PostalCode = "PO31 7PJ",
                 Country = "UK",
                 Phone = "(198) 555-8888",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -554,7 +554,7 @@ public partial class NorthwindData
                 PostalCode = "14776",
                 Country = "Germany",
                 Phone = "0555-09876",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -568,7 +568,7 @@ public partial class NorthwindData
                 PostalCode = "78000",
                 Country = "France",
                 Phone = "30.59.84.10",
-                Fax = "30.59.85.11"
+                Fax = "30.59.85.11",
             },
             new Customer
             {
@@ -582,7 +582,7 @@ public partial class NorthwindData
                 PostalCode = "31000",
                 Country = "France",
                 Phone = "61.77.61.10",
-                Fax = "61.77.61.11"
+                Fax = "61.77.61.11",
             },
             new Customer
             {
@@ -596,7 +596,7 @@ public partial class NorthwindData
                 PostalCode = "V3F 2K1",
                 Country = "Canada",
                 Phone = "(604) 555-3392",
-                Fax = "(604) 555-7293"
+                Fax = "(604) 555-7293",
             },
             new Customer
             {
@@ -610,7 +610,7 @@ public partial class NorthwindData
                 PostalCode = "99362",
                 Country = "USA",
                 Phone = "(509) 555-7969",
-                Fax = "(509) 555-6221"
+                Fax = "(509) 555-6221",
             },
             new Customer
             {
@@ -624,7 +624,7 @@ public partial class NorthwindData
                 PostalCode = "60528",
                 Country = "Germany",
                 Phone = "069-0245984",
-                Fax = "069-0245874"
+                Fax = "069-0245874",
             },
             new Customer
             {
@@ -638,7 +638,7 @@ public partial class NorthwindData
                 PostalCode = "94117",
                 Country = "USA",
                 Phone = "(415) 555-5938",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -652,7 +652,7 @@ public partial class NorthwindData
                 PostalCode = "3508",
                 Country = "Venezuela",
                 Phone = "(9) 331-6954",
-                Fax = "(9) 331-7256"
+                Fax = "(9) 331-7256",
             },
             new Customer
             {
@@ -666,7 +666,7 @@ public partial class NorthwindData
                 PostalCode = "4980",
                 Country = "Venezuela",
                 Phone = "(8) 34-56-12",
-                Fax = "(8) 34-93-93"
+                Fax = "(8) 34-93-93",
             },
             new Customer
             {
@@ -680,7 +680,7 @@ public partial class NorthwindData
                 PostalCode = "97219",
                 Country = "USA",
                 Phone = "(503) 555-9573",
-                Fax = "(503) 555-9646"
+                Fax = "(503) 555-9646",
             },
             new Customer
             {
@@ -694,7 +694,7 @@ public partial class NorthwindData
                 PostalCode = "24100",
                 Country = "Italy",
                 Phone = "035-640230",
-                Fax = "035-640231"
+                Fax = "035-640231",
             },
             new Customer
             {
@@ -708,7 +708,7 @@ public partial class NorthwindData
                 PostalCode = "B-1180",
                 Country = "Belgium",
                 Phone = "(02) 201 24 67",
-                Fax = "(02) 201 24 68"
+                Fax = "(02) 201 24 68",
             },
             new Customer
             {
@@ -722,7 +722,7 @@ public partial class NorthwindData
                 PostalCode = "H1J 1C3",
                 Country = "Canada",
                 Phone = "(514) 555-8054",
-                Fax = "(514) 555-8055"
+                Fax = "(514) 555-8055",
             },
             new Customer
             {
@@ -736,7 +736,7 @@ public partial class NorthwindData
                 PostalCode = "04179",
                 Country = "Germany",
                 Phone = "0342-023176",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -750,7 +750,7 @@ public partial class NorthwindData
                 PostalCode = "SW7 1RZ",
                 Country = "UK",
                 Phone = "(171) 555-7733",
-                Fax = "(171) 555-2530"
+                Fax = "(171) 555-2530",
             },
             new Customer
             {
@@ -764,7 +764,7 @@ public partial class NorthwindData
                 PostalCode = "1010",
                 Country = "Argentina",
                 Phone = "(1) 135-5333",
-                Fax = "(1) 135-5535"
+                Fax = "(1) 135-5535",
             },
             new Customer
             {
@@ -778,7 +778,7 @@ public partial class NorthwindData
                 PostalCode = "99508",
                 Country = "USA",
                 Phone = "(907) 555-7584",
-                Fax = "(907) 555-2880"
+                Fax = "(907) 555-2880",
             },
             new Customer
             {
@@ -792,7 +792,7 @@ public partial class NorthwindData
                 PostalCode = "50739",
                 Country = "Germany",
                 Phone = "0221-0644327",
-                Fax = "0221-0765721"
+                Fax = "0221-0765721",
             },
             new Customer
             {
@@ -806,7 +806,7 @@ public partial class NorthwindData
                 PostalCode = "75012",
                 Country = "France",
                 Phone = "(1) 42.34.22.66",
-                Fax = "(1) 42.34.22.77"
+                Fax = "(1) 42.34.22.77",
             },
             new Customer
             {
@@ -820,7 +820,7 @@ public partial class NorthwindData
                 PostalCode = "05033",
                 Country = "Mexico",
                 Phone = "(5) 552-3745",
-                Fax = "(5) 545-3745"
+                Fax = "(5) 545-3745",
             },
             new Customer
             {
@@ -834,7 +834,7 @@ public partial class NorthwindData
                 PostalCode = "5020",
                 Country = "Austria",
                 Phone = "6562-9722",
-                Fax = "6562-9723"
+                Fax = "6562-9723",
             },
             new Customer
             {
@@ -848,7 +848,7 @@ public partial class NorthwindData
                 PostalCode = "1756",
                 Country = "Portugal",
                 Phone = "(1) 356-5634",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -862,7 +862,7 @@ public partial class NorthwindData
                 PostalCode = "02389-673",
                 Country = "Brazil",
                 Phone = "(21) 555-4252",
-                Fax = "(21) 555-4545"
+                Fax = "(21) 555-4545",
             },
             new Customer
             {
@@ -876,7 +876,7 @@ public partial class NorthwindData
                 PostalCode = "05487-020",
                 Country = "Brazil",
                 Phone = "(11) 555-1189",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -890,7 +890,7 @@ public partial class NorthwindData
                 PostalCode = "01307",
                 Country = "Germany",
                 Phone = "0372-035188",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -904,7 +904,7 @@ public partial class NorthwindData
                 PostalCode = "1010",
                 Country = "Argentina",
                 Phone = "(1) 123-5555",
-                Fax = "(1) 123-5556"
+                Fax = "(1) 123-5556",
             },
             new Customer
             {
@@ -918,7 +918,7 @@ public partial class NorthwindData
                 PostalCode = "87110",
                 Country = "USA",
                 Phone = "(505) 555-5939",
-                Fax = "(505) 555-3620"
+                Fax = "(505) 555-3620",
             },
             new Customer
             {
@@ -932,7 +932,7 @@ public partial class NorthwindData
                 PostalCode = "42100",
                 Country = "Italy",
                 Phone = "0522-556721",
-                Fax = "0522-556722"
+                Fax = "0522-556722",
             },
             new Customer
             {
@@ -946,7 +946,7 @@ public partial class NorthwindData
                 PostalCode = "02389-890",
                 Country = "Brazil",
                 Phone = "(21) 555-3412",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -960,7 +960,7 @@ public partial class NorthwindData
                 PostalCode = "1203",
                 Country = "Switzerland",
                 Phone = "0897-034214",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -974,7 +974,7 @@ public partial class NorthwindData
                 PostalCode = "28001",
                 Country = "Spain",
                 Phone = "(91) 745 6200",
-                Fax = "(91) 745 6210"
+                Fax = "(91) 745 6210",
             },
             new Customer
             {
@@ -988,7 +988,7 @@ public partial class NorthwindData
                 PostalCode = "4110",
                 Country = "Norway",
                 Phone = "07-98 92 35",
-                Fax = "07-98 92 47"
+                Fax = "07-98 92 47",
             },
             new Customer
             {
@@ -1002,7 +1002,7 @@ public partial class NorthwindData
                 PostalCode = "83720",
                 Country = "USA",
                 Phone = "(208) 555-8097",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -1016,7 +1016,7 @@ public partial class NorthwindData
                 PostalCode = "OX15 4NB",
                 Country = "UK",
                 Phone = "(171) 555-1717",
-                Fax = "(171) 555-5646"
+                Fax = "(171) 555-5646",
             },
             new Customer
             {
@@ -1030,7 +1030,7 @@ public partial class NorthwindData
                 PostalCode = "1734",
                 Country = "Denmark",
                 Phone = "31 12 34 56",
-                Fax = "31 13 35 57"
+                Fax = "31 13 35 57",
             },
             new Customer
             {
@@ -1044,7 +1044,7 @@ public partial class NorthwindData
                 PostalCode = "75016",
                 Country = "France",
                 Phone = "(1) 47.55.60.10",
-                Fax = "(1) 47.55.60.20"
+                Fax = "(1) 47.55.60.20",
             },
             new Customer
             {
@@ -1058,7 +1058,7 @@ public partial class NorthwindData
                 PostalCode = "82520",
                 Country = "USA",
                 Phone = "(307) 555-4680",
-                Fax = "(307) 555-6525"
+                Fax = "(307) 555-6525",
             },
             new Customer
             {
@@ -1072,7 +1072,7 @@ public partial class NorthwindData
                 PostalCode = "B-6000",
                 Country = "Belgium",
                 Phone = "(071) 23 67 22 20",
-                Fax = "(071) 23 67 22 21"
+                Fax = "(071) 23 67 22 21",
             },
             new Customer
             {
@@ -1086,7 +1086,7 @@ public partial class NorthwindData
                 PostalCode = "97201",
                 Country = "USA",
                 Phone = "(503) 555-3612",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -1100,7 +1100,7 @@ public partial class NorthwindData
                 PostalCode = "59801",
                 Country = "USA",
                 Phone = "(406) 555-5834",
-                Fax = "(406) 555-8083"
+                Fax = "(406) 555-8083",
             },
             new Customer
             {
@@ -1114,7 +1114,7 @@ public partial class NorthwindData
                 PostalCode = "44087",
                 Country = "Germany",
                 Phone = "0251-031259",
-                Fax = "0251-035695"
+                Fax = "0251-035695",
             },
             new Customer
             {
@@ -1128,7 +1128,7 @@ public partial class NorthwindData
                 PostalCode = "05033",
                 Country = "Mexico",
                 Phone = "(5) 555-2933",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -1142,7 +1142,7 @@ public partial class NorthwindData
                 PostalCode = "05634-030",
                 Country = "Brazil",
                 Phone = "(11) 555-2167",
-                Fax = "(11) 555-2168"
+                Fax = "(11) 555-2168",
             },
             new Customer
             {
@@ -1156,7 +1156,7 @@ public partial class NorthwindData
                 PostalCode = "98034",
                 Country = "USA",
                 Phone = "(206) 555-8257",
-                Fax = "(206) 555-2174"
+                Fax = "(206) 555-2174",
             },
             new Customer
             {
@@ -1170,7 +1170,7 @@ public partial class NorthwindData
                 PostalCode = "8200",
                 Country = "Denmark",
                 Phone = "86 21 32 43",
-                Fax = "86 22 33 44"
+                Fax = "86 22 33 44",
             },
             new Customer
             {
@@ -1184,7 +1184,7 @@ public partial class NorthwindData
                 PostalCode = "69004",
                 Country = "France",
                 Phone = "78.32.54.86",
-                Fax = "78.32.54.87"
+                Fax = "78.32.54.87",
             },
             new Customer
             {
@@ -1198,7 +1198,7 @@ public partial class NorthwindData
                 PostalCode = "51100",
                 Country = "France",
                 Phone = "26.47.15.10",
-                Fax = "26.47.15.11"
+                Fax = "26.47.15.11",
             },
             new Customer
             {
@@ -1212,7 +1212,7 @@ public partial class NorthwindData
                 PostalCode = "70563",
                 Country = "Germany",
                 Phone = "0711-020361",
-                Fax = "0711-035428"
+                Fax = "0711-035428",
             },
             new Customer
             {
@@ -1226,7 +1226,7 @@ public partial class NorthwindData
                 PostalCode = "90110",
                 Country = "Finland",
                 Phone = "981-443655",
-                Fax = "981-443655"
+                Fax = "981-443655",
             },
             new Customer
             {
@@ -1240,7 +1240,7 @@ public partial class NorthwindData
                 PostalCode = "08737-363",
                 Country = "Brazil",
                 Phone = "(14) 555-8122",
-                Fax = null
+                Fax = null,
             },
             new Customer
             {
@@ -1254,7 +1254,7 @@ public partial class NorthwindData
                 PostalCode = "98128",
                 Country = "USA",
                 Phone = "(206) 555-4112",
-                Fax = "(206) 555-4115"
+                Fax = "(206) 555-4115",
             },
             new Customer
             {
@@ -1268,7 +1268,7 @@ public partial class NorthwindData
                 PostalCode = "21240",
                 Country = "Finland",
                 Phone = "90-224 8858",
-                Fax = "90-224 8858"
+                Fax = "90-224 8858",
             },
             new Customer
             {
@@ -1282,8 +1282,8 @@ public partial class NorthwindData
                 PostalCode = "01-012",
                 Country = "Poland",
                 Phone = "(26) 642-7012",
-                Fax = "(26) 642-7012"
-            }
+                Fax = "(26) 642-7012",
+            },
         };
 
     #endregion
@@ -1317,7 +1317,7 @@ Apt. 2A",
                 Notes =
                     @"Education includes a BA in psychology from Colorado State University in 1970.  She also completed ""The Art of the Cold Call.""  Nancy is a member of Toastmasters International.",
                 ReportsTo = 2,
-                PhotoPath = "http://accweb/emmployees/davolio.bmp"
+                PhotoPath = "http://accweb/emmployees/davolio.bmp",
             },
             new Employee
             {
@@ -1340,7 +1340,7 @@ Apt. 2A",
                 ),
                 Notes =
                     "Andrew received his BTS commercial in 1974 and a Ph.D. in international marketing from the University of Dallas in 1981.  He is fluent in French and Italian and reads German.  He joined the company as a sales representative, was promoted to sales manager in January 1992 and to vice president of sales in March 1993.  Andrew is a member of the Sales Management Roundtable, the Seattle Chamber of Commerce, and the Pacific Rim Importers Association.",
-                PhotoPath = "http://accweb/emmployees/fuller.bmp"
+                PhotoPath = "http://accweb/emmployees/fuller.bmp",
             },
             new Employee
             {
@@ -1364,7 +1364,7 @@ Apt. 2A",
                 Notes =
                     "Janet has a BS degree in chemistry from Boston College (1984).  She has also completed a certificate program in food retailing management.  Janet was hired as a sales associate in 1991 and promoted to sales representative in February 1992.",
                 ReportsTo = 2,
-                PhotoPath = "http://accweb/emmployees/leverling.bmp"
+                PhotoPath = "http://accweb/emmployees/leverling.bmp",
             },
             new Employee
             {
@@ -1388,7 +1388,7 @@ Apt. 2A",
                 Notes =
                     "Margaret holds a BA in English literature from Concordia College (1958) and an MA from the American Institute of Culinary Arts (1966).  She was assigned to the London office temporarily from July through November 1992.",
                 ReportsTo = 2,
-                PhotoPath = "http://accweb/emmployees/peacock.bmp"
+                PhotoPath = "http://accweb/emmployees/peacock.bmp",
             },
             new Employee
             {
@@ -1412,7 +1412,7 @@ Apt. 2A",
                 Notes =
                     @"Steven Buchanan graduated from St. Andrews University, Scotland, with a BSC degree in 1976.  Upon joining the company as a sales representative in 1992, he spent 6 months in an orientation program at the Seattle office and then returned to his permanent post in London.  He was promoted to sales manager in March 1993.  Mr. Buchanan has completed the courses ""Successful Telemarketing"" and ""International Sales Management.""  He is fluent in French.",
                 ReportsTo = 2,
-                PhotoPath = "http://accweb/emmployees/buchanan.bmp"
+                PhotoPath = "http://accweb/emmployees/buchanan.bmp",
             },
             new Employee
             {
@@ -1438,7 +1438,7 @@ Miner Rd.",
                 Notes =
                     @"Michael is a graduate of Sussex University (MA, economics, 1983) and the University of California at Los Angeles (MBA, marketing, 1986).  He has also taken the courses ""Multi-Cultural Selling"" and ""Time Management for the Sales Professional.""  He is fluent in Japanese and can read and write French, Portuguese, and Spanish.",
                 ReportsTo = 5,
-                PhotoPath = "http://accweb/emmployees/davolio.bmp"
+                PhotoPath = "http://accweb/emmployees/davolio.bmp",
             },
             new Employee
             {
@@ -1464,7 +1464,7 @@ Winchester Way",
                 Notes =
                     @"Robert King served in the Peace Corps and traveled extensively before completing his degree in English at the University of Michigan in 1992, the year he joined the company.  After completing a course entitled ""Selling in Europe,"" he was transferred to the London office in March 1993.",
                 ReportsTo = 5,
-                PhotoPath = "http://accweb/emmployees/davolio.bmp"
+                PhotoPath = "http://accweb/emmployees/davolio.bmp",
             },
             new Employee
             {
@@ -1488,7 +1488,7 @@ Winchester Way",
                 Notes =
                     "Laura received a BA in psychology from the University of Washington.  She has also completed a course in business French.  She reads and writes French.",
                 ReportsTo = 2,
-                PhotoPath = "http://accweb/emmployees/davolio.bmp"
+                PhotoPath = "http://accweb/emmployees/davolio.bmp",
             },
             new Employee
             {
@@ -1512,8 +1512,8 @@ Winchester Way",
                 Notes =
                     "Anne has a BA degree in English from St. Lawrence College.  She is fluent in French and German.",
                 ReportsTo = 5,
-                PhotoPath = "http://accweb/emmployees/davolio.bmp"
-            }
+                PhotoPath = "http://accweb/emmployees/davolio.bmp",
+            },
         };
 
     #endregion
@@ -1534,7 +1534,7 @@ Winchester Way",
                 UnitsInStock = 39,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1547,7 +1547,7 @@ Winchester Way",
                 UnitsInStock = 17,
                 UnitsOnOrder = 40,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1560,7 +1560,7 @@ Winchester Way",
                 UnitsInStock = 13,
                 UnitsOnOrder = 70,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1573,7 +1573,7 @@ Winchester Way",
                 UnitsInStock = 53,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1586,7 +1586,7 @@ Winchester Way",
                 UnitsInStock = 0,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -1599,7 +1599,7 @@ Winchester Way",
                 UnitsInStock = 120,
                 UnitsOnOrder = 0,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1612,7 +1612,7 @@ Winchester Way",
                 UnitsInStock = 15,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1625,7 +1625,7 @@ Winchester Way",
                 UnitsInStock = 6,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1638,7 +1638,7 @@ Winchester Way",
                 UnitsInStock = 29,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -1651,7 +1651,7 @@ Winchester Way",
                 UnitsInStock = 31,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1664,7 +1664,7 @@ Winchester Way",
                 UnitsInStock = 22,
                 UnitsOnOrder = 30,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1677,7 +1677,7 @@ Winchester Way",
                 UnitsInStock = 86,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1690,7 +1690,7 @@ Winchester Way",
                 UnitsInStock = 24,
                 UnitsOnOrder = 0,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1703,7 +1703,7 @@ Winchester Way",
                 UnitsInStock = 35,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1716,7 +1716,7 @@ Winchester Way",
                 UnitsInStock = 39,
                 UnitsOnOrder = 0,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1729,7 +1729,7 @@ Winchester Way",
                 UnitsInStock = 29,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1742,7 +1742,7 @@ Winchester Way",
                 UnitsInStock = 0,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -1755,7 +1755,7 @@ Winchester Way",
                 UnitsInStock = 42,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1768,7 +1768,7 @@ Winchester Way",
                 UnitsInStock = 25,
                 UnitsOnOrder = 0,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1781,7 +1781,7 @@ Winchester Way",
                 UnitsInStock = 40,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1794,7 +1794,7 @@ Winchester Way",
                 UnitsInStock = 3,
                 UnitsOnOrder = 40,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1807,7 +1807,7 @@ Winchester Way",
                 UnitsInStock = 104,
                 UnitsOnOrder = 0,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1820,7 +1820,7 @@ Winchester Way",
                 UnitsInStock = 61,
                 UnitsOnOrder = 0,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1833,7 +1833,7 @@ Winchester Way",
                 UnitsInStock = 20,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -1846,7 +1846,7 @@ Winchester Way",
                 UnitsInStock = 76,
                 UnitsOnOrder = 0,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1859,7 +1859,7 @@ Winchester Way",
                 UnitsInStock = 15,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1872,7 +1872,7 @@ Winchester Way",
                 UnitsInStock = 49,
                 UnitsOnOrder = 0,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1885,7 +1885,7 @@ Winchester Way",
                 UnitsInStock = 26,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -1898,7 +1898,7 @@ Winchester Way",
                 UnitsInStock = 0,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -1911,7 +1911,7 @@ Winchester Way",
                 UnitsInStock = 10,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1924,7 +1924,7 @@ Winchester Way",
                 UnitsInStock = 0,
                 UnitsOnOrder = 70,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1937,7 +1937,7 @@ Winchester Way",
                 UnitsInStock = 9,
                 UnitsOnOrder = 40,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1950,7 +1950,7 @@ Winchester Way",
                 UnitsInStock = 112,
                 UnitsOnOrder = 0,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1963,7 +1963,7 @@ Winchester Way",
                 UnitsInStock = 111,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1976,7 +1976,7 @@ Winchester Way",
                 UnitsInStock = 20,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -1989,7 +1989,7 @@ Winchester Way",
                 UnitsInStock = 112,
                 UnitsOnOrder = 0,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2002,7 +2002,7 @@ Winchester Way",
                 UnitsInStock = 11,
                 UnitsOnOrder = 50,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2015,7 +2015,7 @@ Winchester Way",
                 UnitsInStock = 17,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2028,7 +2028,7 @@ Winchester Way",
                 UnitsInStock = 69,
                 UnitsOnOrder = 0,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2041,7 +2041,7 @@ Winchester Way",
                 UnitsInStock = 123,
                 UnitsOnOrder = 0,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2054,7 +2054,7 @@ Winchester Way",
                 UnitsInStock = 85,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2067,7 +2067,7 @@ Winchester Way",
                 UnitsInStock = 26,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -2080,7 +2080,7 @@ Winchester Way",
                 UnitsInStock = 17,
                 UnitsOnOrder = 10,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2093,7 +2093,7 @@ Winchester Way",
                 UnitsInStock = 27,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2106,7 +2106,7 @@ Winchester Way",
                 UnitsInStock = 5,
                 UnitsOnOrder = 70,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2119,7 +2119,7 @@ Winchester Way",
                 UnitsInStock = 95,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2132,7 +2132,7 @@ Winchester Way",
                 UnitsInStock = 36,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2145,7 +2145,7 @@ Winchester Way",
                 UnitsInStock = 15,
                 UnitsOnOrder = 70,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2158,7 +2158,7 @@ Winchester Way",
                 UnitsInStock = 10,
                 UnitsOnOrder = 60,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2171,7 +2171,7 @@ Winchester Way",
                 UnitsInStock = 65,
                 UnitsOnOrder = 0,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2184,7 +2184,7 @@ Winchester Way",
                 UnitsInStock = 20,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2197,7 +2197,7 @@ Winchester Way",
                 UnitsInStock = 38,
                 UnitsOnOrder = 0,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2210,7 +2210,7 @@ Winchester Way",
                 UnitsInStock = 0,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = true
+                Discontinued = true,
             },
             new Product
             {
@@ -2223,7 +2223,7 @@ Winchester Way",
                 UnitsInStock = 21,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2236,7 +2236,7 @@ Winchester Way",
                 UnitsInStock = 115,
                 UnitsOnOrder = 0,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2249,7 +2249,7 @@ Winchester Way",
                 UnitsInStock = 21,
                 UnitsOnOrder = 10,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2262,7 +2262,7 @@ Winchester Way",
                 UnitsInStock = 36,
                 UnitsOnOrder = 0,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2275,7 +2275,7 @@ Winchester Way",
                 UnitsInStock = 62,
                 UnitsOnOrder = 0,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2288,7 +2288,7 @@ Winchester Way",
                 UnitsInStock = 79,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2301,7 +2301,7 @@ Winchester Way",
                 UnitsInStock = 19,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2314,7 +2314,7 @@ Winchester Way",
                 UnitsInStock = 113,
                 UnitsOnOrder = 0,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2327,7 +2327,7 @@ Winchester Way",
                 UnitsInStock = 17,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2340,7 +2340,7 @@ Winchester Way",
                 UnitsInStock = 24,
                 UnitsOnOrder = 0,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2353,7 +2353,7 @@ Winchester Way",
                 UnitsInStock = 22,
                 UnitsOnOrder = 80,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2366,7 +2366,7 @@ Winchester Way",
                 UnitsInStock = 76,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2379,7 +2379,7 @@ Winchester Way",
                 UnitsInStock = 4,
                 UnitsOnOrder = 100,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2392,7 +2392,7 @@ Winchester Way",
                 UnitsInStock = 52,
                 UnitsOnOrder = 0,
                 ReorderLevel = 10,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2405,7 +2405,7 @@ Winchester Way",
                 UnitsInStock = 6,
                 UnitsOnOrder = 10,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2418,7 +2418,7 @@ Winchester Way",
                 UnitsInStock = 26,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2431,7 +2431,7 @@ Winchester Way",
                 UnitsInStock = 15,
                 UnitsOnOrder = 10,
                 ReorderLevel = 30,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2444,7 +2444,7 @@ Winchester Way",
                 UnitsInStock = 26,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2457,7 +2457,7 @@ Winchester Way",
                 UnitsInStock = 14,
                 UnitsOnOrder = 0,
                 ReorderLevel = 0,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2470,7 +2470,7 @@ Winchester Way",
                 UnitsInStock = 101,
                 UnitsOnOrder = 0,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2483,7 +2483,7 @@ Winchester Way",
                 UnitsInStock = 4,
                 UnitsOnOrder = 20,
                 ReorderLevel = 5,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2496,7 +2496,7 @@ Winchester Way",
                 UnitsInStock = 125,
                 UnitsOnOrder = 0,
                 ReorderLevel = 25,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2509,7 +2509,7 @@ Winchester Way",
                 UnitsInStock = 57,
                 UnitsOnOrder = 0,
                 ReorderLevel = 20,
-                Discontinued = false
+                Discontinued = false,
             },
             new Product
             {
@@ -2522,8 +2522,8 @@ Winchester Way",
                 UnitsInStock = 32,
                 UnitsOnOrder = 0,
                 ReorderLevel = 15,
-                Discontinued = false
-            }
+                Discontinued = false,
+            },
         };
 
     #endregion
@@ -2549,7 +2549,7 @@ Winchester Way",
                 ShipCity = "Reims",
                 ShipRegion = null,
                 ShipPostalCode = "51100",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -2567,7 +2567,7 @@ Winchester Way",
                 ShipCity = "Münster",
                 ShipRegion = null,
                 ShipPostalCode = "44087",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -2585,7 +2585,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -2603,7 +2603,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -2621,7 +2621,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -2639,7 +2639,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -2657,7 +2657,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -2675,7 +2675,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -2693,7 +2693,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -2711,7 +2711,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -2729,7 +2729,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -2747,7 +2747,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05022",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -2765,7 +2765,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -2783,7 +2783,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -2801,7 +2801,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -2819,7 +2819,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -2837,7 +2837,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -2855,7 +2855,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -2873,7 +2873,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -2891,7 +2891,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -2909,7 +2909,7 @@ Winchester Way",
                 ShipCity = "Caracas",
                 ShipRegion = "DF",
                 ShipPostalCode = "1081",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -2927,7 +2927,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -2945,7 +2945,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -2963,7 +2963,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -2981,7 +2981,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -2999,7 +2999,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3017,7 +3017,7 @@ Winchester Way",
                 ShipCity = "Reims",
                 ShipRegion = null,
                 ShipPostalCode = "51100",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -3035,7 +3035,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -3053,7 +3053,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -3071,7 +3071,7 @@ Winchester Way",
                 ShipCity = "Leipzig",
                 ShipRegion = null,
                 ShipPostalCode = "04179",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3089,7 +3089,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -3107,7 +3107,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3125,7 +3125,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -3143,7 +3143,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28001",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -3161,7 +3161,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28001",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -3179,7 +3179,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -3197,7 +3197,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3215,7 +3215,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3233,7 +3233,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3251,7 +3251,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -3269,7 +3269,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -3287,7 +3287,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -3305,7 +3305,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05432-043",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -3323,7 +3323,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -3341,7 +3341,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05634-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -3359,7 +3359,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -3377,7 +3377,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3395,7 +3395,7 @@ Winchester Way",
                 ShipCity = "Reims",
                 ShipRegion = null,
                 ShipPostalCode = "51100",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -3413,7 +3413,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -3431,7 +3431,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -3449,7 +3449,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -3467,7 +3467,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -3485,7 +3485,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -3503,7 +3503,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3521,7 +3521,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -3539,7 +3539,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -3557,7 +3557,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -3575,7 +3575,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3593,7 +3593,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28001",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -3611,7 +3611,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3629,7 +3629,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05021",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -3647,7 +3647,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -3665,7 +3665,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97201",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3683,7 +3683,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -3701,7 +3701,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3719,7 +3719,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3737,7 +3737,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3755,7 +3755,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -3773,7 +3773,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3791,7 +3791,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3809,7 +3809,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -3827,7 +3827,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -3845,7 +3845,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -3863,7 +3863,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -3881,7 +3881,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -3899,7 +3899,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3917,7 +3917,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -3935,7 +3935,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -3953,7 +3953,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28023",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -3971,7 +3971,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -3989,7 +3989,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -4007,7 +4007,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4025,7 +4025,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -4043,7 +4043,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4061,7 +4061,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -4079,7 +4079,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -4097,7 +4097,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4115,7 +4115,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -4133,7 +4133,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1756",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -4151,7 +4151,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4169,7 +4169,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4187,7 +4187,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -4205,7 +4205,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4223,7 +4223,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -4241,7 +4241,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4259,7 +4259,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4277,7 +4277,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4295,7 +4295,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4313,7 +4313,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4331,7 +4331,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -4349,7 +4349,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4367,7 +4367,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4385,7 +4385,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4403,7 +4403,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -4421,7 +4421,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -4439,7 +4439,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -4457,7 +4457,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -4475,7 +4475,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -4493,7 +4493,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4511,7 +4511,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -4529,7 +4529,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4547,7 +4547,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -4565,7 +4565,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4583,7 +4583,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4601,7 +4601,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4619,7 +4619,7 @@ Winchester Way",
                 ShipCity = "Aachen",
                 ShipRegion = null,
                 ShipPostalCode = "52066",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -4637,7 +4637,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -4655,7 +4655,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -4673,7 +4673,7 @@ Winchester Way",
                 ShipCity = "Barcelona",
                 ShipRegion = null,
                 ShipPostalCode = "8022",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -4691,7 +4691,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -4709,7 +4709,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -4727,7 +4727,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4745,7 +4745,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -4763,7 +4763,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -4781,7 +4781,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -4799,7 +4799,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -4817,7 +4817,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -4835,7 +4835,7 @@ Winchester Way",
                 ShipCity = "Elgin",
                 ShipRegion = "OR",
                 ShipPostalCode = "97827",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -4853,7 +4853,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -4871,7 +4871,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -4889,7 +4889,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -4907,7 +4907,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -4925,7 +4925,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -4943,7 +4943,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -4961,7 +4961,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -4979,7 +4979,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -4997,7 +4997,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -5015,7 +5015,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5033,7 +5033,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -5051,7 +5051,7 @@ Winchester Way",
                 ShipCity = "Stavern",
                 ShipRegion = null,
                 ShipPostalCode = "4110",
-                ShipCountry = "Norway"
+                ShipCountry = "Norway",
             },
             new Order
             {
@@ -5069,7 +5069,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -5087,7 +5087,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -5105,7 +5105,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -5123,7 +5123,7 @@ Winchester Way",
                 ShipCity = "Aachen",
                 ShipRegion = null,
                 ShipPostalCode = "52066",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -5141,7 +5141,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -5159,7 +5159,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5177,7 +5177,7 @@ Winchester Way",
                 ShipCity = "Elgin",
                 ShipRegion = "OR",
                 ShipPostalCode = "97827",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5195,7 +5195,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -5213,7 +5213,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -5231,7 +5231,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1756",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -5249,7 +5249,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5267,7 +5267,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -5285,7 +5285,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -5303,7 +5303,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5321,7 +5321,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -5339,7 +5339,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -5357,7 +5357,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -5375,7 +5375,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -5393,7 +5393,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -5411,7 +5411,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -5429,7 +5429,7 @@ Winchester Way",
                 ShipCity = "Lille",
                 ShipRegion = null,
                 ShipPostalCode = "59000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -5447,7 +5447,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -5465,7 +5465,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -5483,7 +5483,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -5501,7 +5501,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -5519,7 +5519,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -5537,7 +5537,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -5555,7 +5555,7 @@ Winchester Way",
                 ShipCity = "Elgin",
                 ShipRegion = "OR",
                 ShipPostalCode = "97827",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5573,7 +5573,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -5591,7 +5591,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -5609,7 +5609,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -5627,7 +5627,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -5645,7 +5645,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -5663,7 +5663,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -5681,7 +5681,7 @@ Winchester Way",
                 ShipCity = "Torino",
                 ShipRegion = null,
                 ShipPostalCode = "10100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -5699,7 +5699,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -5717,7 +5717,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -5735,7 +5735,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -5753,7 +5753,7 @@ Winchester Way",
                 ShipCity = "Barcelona",
                 ShipRegion = null,
                 ShipPostalCode = "8022",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -5771,7 +5771,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -5789,7 +5789,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -5807,7 +5807,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -5825,7 +5825,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -5843,7 +5843,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -5861,7 +5861,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -5879,7 +5879,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1756",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -5897,7 +5897,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -5915,7 +5915,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX1 6LT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -5933,7 +5933,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -5951,7 +5951,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -5969,7 +5969,7 @@ Winchester Way",
                 ShipCity = "Münster",
                 ShipRegion = null,
                 ShipPostalCode = "44087",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -5987,7 +5987,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -6005,7 +6005,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6023,7 +6023,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6041,7 +6041,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -6059,7 +6059,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -6077,7 +6077,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -6095,7 +6095,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -6113,7 +6113,7 @@ Winchester Way",
                 ShipCity = "Münster",
                 ShipRegion = null,
                 ShipPostalCode = "44087",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -6131,7 +6131,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -6149,7 +6149,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -6167,7 +6167,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6185,7 +6185,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6203,7 +6203,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -6221,7 +6221,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6239,7 +6239,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -6257,7 +6257,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6275,7 +6275,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -6293,7 +6293,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -6311,7 +6311,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -6329,7 +6329,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -6347,7 +6347,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6365,7 +6365,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -6383,7 +6383,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -6401,7 +6401,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX1 6LT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -6419,7 +6419,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -6437,7 +6437,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -6455,7 +6455,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -6473,7 +6473,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05432-043",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -6491,7 +6491,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -6509,7 +6509,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -6527,7 +6527,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6545,7 +6545,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6563,7 +6563,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -6581,7 +6581,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -6599,7 +6599,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -6617,7 +6617,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -6635,7 +6635,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -6653,7 +6653,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -6671,7 +6671,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1756",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -6689,7 +6689,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6707,7 +6707,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6725,7 +6725,7 @@ Winchester Way",
                 ShipCity = "Lille",
                 ShipRegion = null,
                 ShipPostalCode = "59000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6743,7 +6743,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -6761,7 +6761,7 @@ Winchester Way",
                 ShipCity = "Walla Walla",
                 ShipRegion = "WA",
                 ShipPostalCode = "99362",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6779,7 +6779,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -6797,7 +6797,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -6815,7 +6815,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -6833,7 +6833,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -6851,7 +6851,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -6869,7 +6869,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -6887,7 +6887,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -6905,7 +6905,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -6923,7 +6923,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -6941,7 +6941,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -6959,7 +6959,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -6977,7 +6977,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05432-043",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -6995,7 +6995,7 @@ Winchester Way",
                 ShipCity = "Vancouver",
                 ShipRegion = "BC",
                 ShipPostalCode = "V3F 2K1",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -7013,7 +7013,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05634-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -7031,7 +7031,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7049,7 +7049,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -7067,7 +7067,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -7085,7 +7085,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -7103,7 +7103,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7121,7 +7121,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -7139,7 +7139,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -7157,7 +7157,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -7175,7 +7175,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -7193,7 +7193,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7211,7 +7211,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -7229,7 +7229,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7247,7 +7247,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7265,7 +7265,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -7283,7 +7283,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -7301,7 +7301,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -7319,7 +7319,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7337,7 +7337,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -7355,7 +7355,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7373,7 +7373,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -7391,7 +7391,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "SW7 1RZ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -7409,7 +7409,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -7427,7 +7427,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -7445,7 +7445,7 @@ Winchester Way",
                 ShipCity = "Stavern",
                 ShipRegion = null,
                 ShipPostalCode = "4110",
-                ShipCountry = "Norway"
+                ShipCountry = "Norway",
             },
             new Order
             {
@@ -7463,7 +7463,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -7481,7 +7481,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7499,7 +7499,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -7517,7 +7517,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -7535,7 +7535,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -7553,7 +7553,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -7571,7 +7571,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7589,7 +7589,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -7607,7 +7607,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -7625,7 +7625,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -7643,7 +7643,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -7661,7 +7661,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -7679,7 +7679,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -7697,7 +7697,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7715,7 +7715,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -7733,7 +7733,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7751,7 +7751,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -7769,7 +7769,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -7787,7 +7787,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -7805,7 +7805,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7823,7 +7823,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -7841,7 +7841,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7859,7 +7859,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -7877,7 +7877,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -7895,7 +7895,7 @@ Winchester Way",
                 ShipCity = "Walla Walla",
                 ShipRegion = "WA",
                 ShipPostalCode = "99362",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -7913,7 +7913,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -7931,7 +7931,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -7949,7 +7949,7 @@ Winchester Way",
                 ShipCity = "Münster",
                 ShipRegion = null,
                 ShipPostalCode = "44087",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7967,7 +7967,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -7985,7 +7985,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -8003,7 +8003,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -8021,7 +8021,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -8039,7 +8039,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -8057,7 +8057,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8075,7 +8075,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8093,7 +8093,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -8111,7 +8111,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8129,7 +8129,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -8147,7 +8147,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -8165,7 +8165,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8183,7 +8183,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -8201,7 +8201,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -8219,7 +8219,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -8237,7 +8237,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8255,7 +8255,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -8273,7 +8273,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -8291,7 +8291,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -8309,7 +8309,7 @@ Winchester Way",
                 ShipCity = "Barcelona",
                 ShipRegion = null,
                 ShipPostalCode = "8022",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -8327,7 +8327,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8345,7 +8345,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -8363,7 +8363,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -8381,7 +8381,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -8399,7 +8399,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -8417,7 +8417,7 @@ Winchester Way",
                 ShipCity = "Kirkland",
                 ShipRegion = "WA",
                 ShipPostalCode = "98034",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8435,7 +8435,7 @@ Winchester Way",
                 ShipCity = "Leipzig",
                 ShipRegion = null,
                 ShipPostalCode = "04179",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8453,7 +8453,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -8471,7 +8471,7 @@ Winchester Way",
                 ShipCity = "Kirkland",
                 ShipRegion = "WA",
                 ShipPostalCode = "98034",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8489,7 +8489,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -8507,7 +8507,7 @@ Winchester Way",
                 ShipCity = "San Francisco",
                 ShipRegion = "CA",
                 ShipPostalCode = "94117",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8525,7 +8525,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8543,7 +8543,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -8561,7 +8561,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8579,7 +8579,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -8597,7 +8597,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -8615,7 +8615,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -8633,7 +8633,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -8651,7 +8651,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -8669,7 +8669,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8687,7 +8687,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8705,7 +8705,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -8723,7 +8723,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -8741,7 +8741,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8759,7 +8759,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -8777,7 +8777,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8795,7 +8795,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -8813,7 +8813,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8831,7 +8831,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -8849,7 +8849,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8867,7 +8867,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -8885,7 +8885,7 @@ Winchester Way",
                 ShipCity = "Elgin",
                 ShipRegion = "OR",
                 ShipPostalCode = "97827",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8903,7 +8903,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -8921,7 +8921,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -8939,7 +8939,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -8957,7 +8957,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -8975,7 +8975,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -8993,7 +8993,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05634-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9011,7 +9011,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9029,7 +9029,7 @@ Winchester Way",
                 ShipCity = "Münster",
                 ShipRegion = null,
                 ShipPostalCode = "44087",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9047,7 +9047,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -9065,7 +9065,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -9083,7 +9083,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -9101,7 +9101,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9119,7 +9119,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -9137,7 +9137,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9155,7 +9155,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -9173,7 +9173,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9191,7 +9191,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9209,7 +9209,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -9227,7 +9227,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -9245,7 +9245,7 @@ Winchester Way",
                 ShipCity = "Vancouver",
                 ShipRegion = "BC",
                 ShipPostalCode = "V3F 2K1",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -9263,7 +9263,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -9281,7 +9281,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9299,7 +9299,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9317,7 +9317,7 @@ Winchester Way",
                 ShipCity = "Butte",
                 ShipRegion = "MT",
                 ShipPostalCode = "59801",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9335,7 +9335,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05021",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -9353,7 +9353,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -9371,7 +9371,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9389,7 +9389,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -9407,7 +9407,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -9425,7 +9425,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9443,7 +9443,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -9461,7 +9461,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9479,7 +9479,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -9497,7 +9497,7 @@ Winchester Way",
                 ShipCity = "Lille",
                 ShipRegion = null,
                 ShipPostalCode = "59000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -9515,7 +9515,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -9533,7 +9533,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -9551,7 +9551,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9569,7 +9569,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -9587,7 +9587,7 @@ Winchester Way",
                 ShipCity = "Stavern",
                 ShipRegion = null,
                 ShipPostalCode = "4110",
-                ShipCountry = "Norway"
+                ShipCountry = "Norway",
             },
             new Order
             {
@@ -9605,7 +9605,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9623,7 +9623,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -9641,7 +9641,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -9659,7 +9659,7 @@ Winchester Way",
                 ShipCity = "Berlin",
                 ShipRegion = null,
                 ShipPostalCode = "12209",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9677,7 +9677,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9695,7 +9695,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9713,7 +9713,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -9731,7 +9731,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9749,7 +9749,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9767,7 +9767,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -9785,7 +9785,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9803,7 +9803,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9821,7 +9821,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9839,7 +9839,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9857,7 +9857,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -9875,7 +9875,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -9893,7 +9893,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9911,7 +9911,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9929,7 +9929,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -9947,7 +9947,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -9965,7 +9965,7 @@ Winchester Way",
                 ShipCity = "Elgin",
                 ShipRegion = "OR",
                 ShipPostalCode = "97827",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -9983,7 +9983,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -10001,7 +10001,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10019,7 +10019,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -10037,7 +10037,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -10055,7 +10055,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10073,7 +10073,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -10091,7 +10091,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -10109,7 +10109,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10127,7 +10127,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -10145,7 +10145,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10163,7 +10163,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -10181,7 +10181,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -10199,7 +10199,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -10217,7 +10217,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -10235,7 +10235,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10253,7 +10253,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -10271,7 +10271,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -10289,7 +10289,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10307,7 +10307,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -10325,7 +10325,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10343,7 +10343,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10361,7 +10361,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -10379,7 +10379,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -10397,7 +10397,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10415,7 +10415,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -10433,7 +10433,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -10451,7 +10451,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -10469,7 +10469,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -10487,7 +10487,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -10505,7 +10505,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -10523,7 +10523,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10541,7 +10541,7 @@ Winchester Way",
                 ShipCity = "Berlin",
                 ShipRegion = null,
                 ShipPostalCode = "12209",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10559,7 +10559,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10577,7 +10577,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10595,7 +10595,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -10613,7 +10613,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10631,7 +10631,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -10649,7 +10649,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -10667,7 +10667,7 @@ Winchester Way",
                 ShipCity = "Leipzig",
                 ShipRegion = null,
                 ShipPostalCode = "04179",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10685,7 +10685,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10703,7 +10703,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -10721,7 +10721,7 @@ Winchester Way",
                 ShipCity = "Berlin",
                 ShipRegion = null,
                 ShipPostalCode = "12209",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -10739,7 +10739,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -10757,7 +10757,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -10775,7 +10775,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -10793,7 +10793,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10811,7 +10811,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -10829,7 +10829,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97201",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10847,7 +10847,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -10865,7 +10865,7 @@ Winchester Way",
                 ShipCity = "Torino",
                 ShipRegion = null,
                 ShipPostalCode = "10100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -10883,7 +10883,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10901,7 +10901,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -10919,7 +10919,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10937,7 +10937,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -10955,7 +10955,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -10973,7 +10973,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -10991,7 +10991,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11009,7 +11009,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11027,7 +11027,7 @@ Winchester Way",
                 ShipCity = "San Francisco",
                 ShipRegion = "CA",
                 ShipPostalCode = "94117",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11045,7 +11045,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -11063,7 +11063,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11081,7 +11081,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11099,7 +11099,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11117,7 +11117,7 @@ Winchester Way",
                 ShipCity = "Montréal",
                 ShipRegion = "Québec",
                 ShipPostalCode = "H1J 1C3",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -11135,7 +11135,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05442-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -11153,7 +11153,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -11171,7 +11171,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -11189,7 +11189,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -11207,7 +11207,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -11225,7 +11225,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11243,7 +11243,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -11261,7 +11261,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11279,7 +11279,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -11297,7 +11297,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -11315,7 +11315,7 @@ Winchester Way",
                 ShipCity = "San Francisco",
                 ShipRegion = "CA",
                 ShipPostalCode = "94117",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11333,7 +11333,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -11351,7 +11351,7 @@ Winchester Way",
                 ShipCity = "Reims",
                 ShipRegion = null,
                 ShipPostalCode = "51100",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11369,7 +11369,7 @@ Winchester Way",
                 ShipCity = "Paris",
                 ShipRegion = null,
                 ShipPostalCode = "75016",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11387,7 +11387,7 @@ Winchester Way",
                 ShipCity = "Reims",
                 ShipRegion = null,
                 ShipPostalCode = "51100",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11405,7 +11405,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11423,7 +11423,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -11441,7 +11441,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -11459,7 +11459,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -11477,7 +11477,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -11495,7 +11495,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11513,7 +11513,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -11531,7 +11531,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -11549,7 +11549,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11567,7 +11567,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -11585,7 +11585,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -11603,7 +11603,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -11621,7 +11621,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "SW7 1RZ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -11639,7 +11639,7 @@ Winchester Way",
                 ShipCity = "Torino",
                 ShipRegion = null,
                 ShipPostalCode = "10100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -11657,7 +11657,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -11675,7 +11675,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11693,7 +11693,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11711,7 +11711,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11729,7 +11729,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -11747,7 +11747,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05021",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -11765,7 +11765,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -11783,7 +11783,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -11801,7 +11801,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -11819,7 +11819,7 @@ Winchester Way",
                 ShipCity = "Lille",
                 ShipRegion = null,
                 ShipPostalCode = "59000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -11837,7 +11837,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -11855,7 +11855,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11873,7 +11873,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11891,7 +11891,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -11909,7 +11909,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -11927,7 +11927,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -11945,7 +11945,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -11963,7 +11963,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -11981,7 +11981,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -11999,7 +11999,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -12017,7 +12017,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -12035,7 +12035,7 @@ Winchester Way",
                 ShipCity = "Butte",
                 ShipRegion = "MT",
                 ShipPostalCode = "59801",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12053,7 +12053,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -12071,7 +12071,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12089,7 +12089,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -12107,7 +12107,7 @@ Winchester Way",
                 ShipCity = "Leipzig",
                 ShipRegion = null,
                 ShipPostalCode = "04179",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12125,7 +12125,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -12143,7 +12143,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -12161,7 +12161,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -12179,7 +12179,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12197,7 +12197,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -12215,7 +12215,7 @@ Winchester Way",
                 ShipCity = "Caracas",
                 ShipRegion = "DF",
                 ShipPostalCode = "1081",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -12233,7 +12233,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12251,7 +12251,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -12269,7 +12269,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12287,7 +12287,7 @@ Winchester Way",
                 ShipCity = "Lille",
                 ShipRegion = null,
                 ShipPostalCode = "59000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -12305,7 +12305,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12323,7 +12323,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12341,7 +12341,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -12359,7 +12359,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -12377,7 +12377,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12395,7 +12395,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -12413,7 +12413,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -12431,7 +12431,7 @@ Winchester Way",
                 ShipCity = "Aachen",
                 ShipRegion = null,
                 ShipPostalCode = "52066",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12449,7 +12449,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -12467,7 +12467,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12485,7 +12485,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -12503,7 +12503,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28023",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -12521,7 +12521,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -12539,7 +12539,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12557,7 +12557,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -12575,7 +12575,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97201",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12593,7 +12593,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -12611,7 +12611,7 @@ Winchester Way",
                 ShipCity = "Torino",
                 ShipRegion = null,
                 ShipPostalCode = "10100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -12629,7 +12629,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12647,7 +12647,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12665,7 +12665,7 @@ Winchester Way",
                 ShipCity = "Vancouver",
                 ShipRegion = "BC",
                 ShipPostalCode = "V3F 2K1",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -12683,7 +12683,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -12701,7 +12701,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -12719,7 +12719,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -12737,7 +12737,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -12755,7 +12755,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12773,7 +12773,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12791,7 +12791,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12809,7 +12809,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -12827,7 +12827,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -12845,7 +12845,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12863,7 +12863,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12881,7 +12881,7 @@ Winchester Way",
                 ShipCity = "Kirkland",
                 ShipRegion = "WA",
                 ShipPostalCode = "98034",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -12899,7 +12899,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -12917,7 +12917,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -12935,7 +12935,7 @@ Winchester Way",
                 ShipCity = "Aachen",
                 ShipRegion = null,
                 ShipPostalCode = "52066",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -12953,7 +12953,7 @@ Winchester Way",
                 ShipCity = "Strasbourg",
                 ShipRegion = null,
                 ShipPostalCode = "67000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -12971,7 +12971,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -12989,7 +12989,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -13007,7 +13007,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -13025,7 +13025,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05634-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -13043,7 +13043,7 @@ Winchester Way",
                 ShipCity = "Stavern",
                 ShipRegion = null,
                 ShipPostalCode = "4110",
-                ShipCountry = "Norway"
+                ShipCountry = "Norway",
             },
             new Order
             {
@@ -13061,7 +13061,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13079,7 +13079,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13097,7 +13097,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05634-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -13115,7 +13115,7 @@ Winchester Way",
                 ShipCity = "Berlin",
                 ShipRegion = null,
                 ShipPostalCode = "12209",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13133,7 +13133,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -13151,7 +13151,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -13169,7 +13169,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -13187,7 +13187,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05634-030",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -13205,7 +13205,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -13223,7 +13223,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -13241,7 +13241,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -13259,7 +13259,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13277,7 +13277,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -13295,7 +13295,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13313,7 +13313,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -13331,7 +13331,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13349,7 +13349,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX1 6LT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -13367,7 +13367,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13385,7 +13385,7 @@ Winchester Way",
                 ShipCity = "Lyon",
                 ShipRegion = null,
                 ShipPostalCode = "69004",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13403,7 +13403,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -13421,7 +13421,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13439,7 +13439,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13457,7 +13457,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -13475,7 +13475,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13493,7 +13493,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05023",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -13511,7 +13511,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -13529,7 +13529,7 @@ Winchester Way",
                 ShipCity = "Versailles",
                 ShipRegion = null,
                 ShipPostalCode = "78000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13547,7 +13547,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13565,7 +13565,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13583,7 +13583,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13601,7 +13601,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13619,7 +13619,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -13637,7 +13637,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -13655,7 +13655,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13673,7 +13673,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -13691,7 +13691,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13709,7 +13709,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -13727,7 +13727,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "OX15 4NB",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -13745,7 +13745,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -13763,7 +13763,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13781,7 +13781,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -13799,7 +13799,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -13817,7 +13817,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -13835,7 +13835,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -13853,7 +13853,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -13871,7 +13871,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -13889,7 +13889,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -13907,7 +13907,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -13925,7 +13925,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -13943,7 +13943,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -13961,7 +13961,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13979,7 +13979,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -13997,7 +13997,7 @@ Winchester Way",
                 ShipCity = "San Francisco",
                 ShipRegion = "CA",
                 ShipPostalCode = "94117",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -14015,7 +14015,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -14033,7 +14033,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14051,7 +14051,7 @@ Winchester Way",
                 ShipCity = "Barcelona",
                 ShipRegion = null,
                 ShipPostalCode = "8022",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -14069,7 +14069,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -14087,7 +14087,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -14105,7 +14105,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -14123,7 +14123,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -14141,7 +14141,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -14159,7 +14159,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -14177,7 +14177,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -14195,7 +14195,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -14213,7 +14213,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -14231,7 +14231,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -14249,7 +14249,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -14267,7 +14267,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -14285,7 +14285,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14303,7 +14303,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -14321,7 +14321,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -14339,7 +14339,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14357,7 +14357,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -14375,7 +14375,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14393,7 +14393,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -14411,7 +14411,7 @@ Winchester Way",
                 ShipCity = "Paris",
                 ShipRegion = null,
                 ShipPostalCode = "75016",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -14429,7 +14429,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -14447,7 +14447,7 @@ Winchester Way",
                 ShipCity = "Stavern",
                 ShipRegion = null,
                 ShipPostalCode = "4110",
-                ShipCountry = "Norway"
+                ShipCountry = "Norway",
             },
             new Order
             {
@@ -14465,7 +14465,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -14483,7 +14483,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -14501,7 +14501,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -14519,7 +14519,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14537,7 +14537,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14555,7 +14555,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -14573,7 +14573,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -14591,7 +14591,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28001",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -14609,7 +14609,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -14627,7 +14627,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -14645,7 +14645,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -14663,7 +14663,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -14681,7 +14681,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14699,7 +14699,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -14717,7 +14717,7 @@ Winchester Way",
                 ShipCity = "Luleå",
                 ShipRegion = null,
                 ShipPostalCode = "S-958 22",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -14735,7 +14735,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14753,7 +14753,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05021",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -14771,7 +14771,7 @@ Winchester Way",
                 ShipCity = "Versailles",
                 ShipRegion = null,
                 ShipPostalCode = "78000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -14789,7 +14789,7 @@ Winchester Way",
                 ShipCity = "Barcelona",
                 ShipRegion = null,
                 ShipPostalCode = "8022",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -14807,7 +14807,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -14825,7 +14825,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -14843,7 +14843,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -14861,7 +14861,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -14879,7 +14879,7 @@ Winchester Way",
                 ShipCity = "Cowes",
                 ShipRegion = "Isle of Wight",
                 ShipPostalCode = "PO31 7PJ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -14897,7 +14897,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -14915,7 +14915,7 @@ Winchester Way",
                 ShipCity = "Resende",
                 ShipRegion = "SP",
                 ShipPostalCode = "08737-363",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -14933,7 +14933,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -14951,7 +14951,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -14969,7 +14969,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -14987,7 +14987,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -15005,7 +15005,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -15023,7 +15023,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15041,7 +15041,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -15059,7 +15059,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -15077,7 +15077,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -15095,7 +15095,7 @@ Winchester Way",
                 ShipCity = "Leipzig",
                 ShipRegion = null,
                 ShipPostalCode = "04179",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -15113,7 +15113,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -15131,7 +15131,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -15149,7 +15149,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -15167,7 +15167,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -15185,7 +15185,7 @@ Winchester Way",
                 ShipCity = "Bergamo",
                 ShipRegion = null,
                 ShipPostalCode = "24100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -15203,7 +15203,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -15221,7 +15221,7 @@ Winchester Way",
                 ShipCity = "Berlin",
                 ShipRegion = null,
                 ShipPostalCode = "12209",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -15239,7 +15239,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -15257,7 +15257,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -15275,7 +15275,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -15293,7 +15293,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -15311,7 +15311,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -15329,7 +15329,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -15347,7 +15347,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -15365,7 +15365,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -15383,7 +15383,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -15401,7 +15401,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -15419,7 +15419,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1675",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -15437,7 +15437,7 @@ Winchester Way",
                 ShipCity = "Paris",
                 ShipRegion = null,
                 ShipPostalCode = "75016",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -15455,7 +15455,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15473,7 +15473,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -15491,7 +15491,7 @@ Winchester Way",
                 ShipCity = "Münster",
                 ShipRegion = null,
                 ShipPostalCode = "44087",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -15509,7 +15509,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -15527,7 +15527,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05432-043",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -15545,7 +15545,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28023",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -15563,7 +15563,7 @@ Winchester Way",
                 ShipCity = "Nantes",
                 ShipRegion = null,
                 ShipPostalCode = "44000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -15581,7 +15581,7 @@ Winchester Way",
                 ShipCity = "Versailles",
                 ShipRegion = null,
                 ShipPostalCode = "78000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -15599,7 +15599,7 @@ Winchester Way",
                 ShipCity = "Versailles",
                 ShipRegion = null,
                 ShipPostalCode = "78000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -15617,7 +15617,7 @@ Winchester Way",
                 ShipCity = "Lander",
                 ShipRegion = "WY",
                 ShipPostalCode = "82520",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15635,7 +15635,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -15653,7 +15653,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -15671,7 +15671,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -15689,7 +15689,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -15707,7 +15707,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -15725,7 +15725,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -15743,7 +15743,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -15761,7 +15761,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -15779,7 +15779,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15797,7 +15797,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15815,7 +15815,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -15833,7 +15833,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -15851,7 +15851,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -15869,7 +15869,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15887,7 +15887,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-673",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -15905,7 +15905,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -15923,7 +15923,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -15941,7 +15941,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97201",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -15959,7 +15959,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -15977,7 +15977,7 @@ Winchester Way",
                 ShipCity = "ÅÅrhus",
                 ShipRegion = null,
                 ShipPostalCode = "8200",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -15995,7 +15995,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -16013,7 +16013,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16031,7 +16031,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -16049,7 +16049,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -16067,7 +16067,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16085,7 +16085,7 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16103,7 +16103,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -16121,7 +16121,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16139,7 +16139,7 @@ Winchester Way",
                 ShipCity = "Butte",
                 ShipRegion = "MT",
                 ShipPostalCode = "59801",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16157,7 +16157,7 @@ Winchester Way",
                 ShipCity = "Bruxelles",
                 ShipRegion = null,
                 ShipPostalCode = "B-1180",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -16175,7 +16175,7 @@ Winchester Way",
                 ShipCity = "Helsinki",
                 ShipRegion = null,
                 ShipPostalCode = "21240",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -16193,7 +16193,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16211,7 +16211,7 @@ Winchester Way",
                 ShipCity = "Lisboa",
                 ShipRegion = null,
                 ShipPostalCode = "1756",
-                ShipCountry = "Portugal"
+                ShipCountry = "Portugal",
             },
             new Order
             {
@@ -16229,7 +16229,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -16247,7 +16247,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -16265,7 +16265,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -16283,7 +16283,7 @@ Winchester Way",
                 ShipCity = "Berlin",
                 ShipRegion = null,
                 ShipPostalCode = "12209",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16301,7 +16301,7 @@ Winchester Way",
                 ShipCity = "München",
                 ShipRegion = null,
                 ShipPostalCode = "80805",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16319,7 +16319,7 @@ Winchester Way",
                 ShipCity = "Madrid",
                 ShipRegion = null,
                 ShipPostalCode = "28001",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -16337,7 +16337,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -16355,7 +16355,7 @@ Winchester Way",
                 ShipCity = "Stavern",
                 ShipRegion = null,
                 ShipPostalCode = "4110",
-                ShipCountry = "Norway"
+                ShipCountry = "Norway",
             },
             new Order
             {
@@ -16373,7 +16373,7 @@ Winchester Way",
                 ShipCity = "Colchester",
                 ShipRegion = "Essex",
                 ShipPostalCode = "CO7 6JX",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -16391,7 +16391,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -16409,7 +16409,7 @@ Winchester Way",
                 ShipCity = "Portland",
                 ShipRegion = "OR",
                 ShipPostalCode = "97219",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16427,7 +16427,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -16445,7 +16445,7 @@ Winchester Way",
                 ShipCity = "Köln",
                 ShipRegion = null,
                 ShipPostalCode = "50739",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16463,7 +16463,7 @@ Winchester Way",
                 ShipCity = "Cunewalde",
                 ShipRegion = null,
                 ShipPostalCode = "01307",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16481,7 +16481,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -16499,7 +16499,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "EC2 5NT",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -16517,7 +16517,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -16535,7 +16535,7 @@ Winchester Way",
                 ShipCity = "Oulu",
                 ShipRegion = null,
                 ShipPostalCode = "90110",
-                ShipCountry = "Finland"
+                ShipCountry = "Finland",
             },
             new Order
             {
@@ -16553,7 +16553,7 @@ Winchester Way",
                 ShipCity = "Torino",
                 ShipRegion = null,
                 ShipPostalCode = "10100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -16571,7 +16571,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -16589,7 +16589,7 @@ Winchester Way",
                 ShipCity = "Brandenburg",
                 ShipRegion = null,
                 ShipPostalCode = "14776",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16607,7 +16607,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -16625,7 +16625,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16643,7 +16643,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16661,7 +16661,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16679,7 +16679,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -16697,7 +16697,7 @@ Winchester Way",
                 ShipCity = "Anchorage",
                 ShipRegion = "AK",
                 ShipPostalCode = "99508",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16715,7 +16715,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -16733,7 +16733,7 @@ Winchester Way",
                 ShipCity = "Aachen",
                 ShipRegion = null,
                 ShipPostalCode = "52066",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16751,7 +16751,7 @@ Winchester Way",
                 ShipCity = "Sevilla",
                 ShipRegion = null,
                 ShipPostalCode = "41101",
-                ShipCountry = "Spain"
+                ShipCountry = "Spain",
             },
             new Order
             {
@@ -16769,7 +16769,7 @@ Winchester Way",
                 ShipCity = "Charleroi",
                 ShipRegion = null,
                 ShipPostalCode = "B-6000",
-                ShipCountry = "Belgium"
+                ShipCountry = "Belgium",
             },
             new Order
             {
@@ -16787,7 +16787,7 @@ Winchester Way",
                 ShipCity = "I. de Margarita",
                 ShipRegion = "Nueva Esparta",
                 ShipPostalCode = "4980",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -16805,7 +16805,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -16823,7 +16823,7 @@ Winchester Way",
                 ShipCity = "Bern",
                 ShipRegion = null,
                 ShipPostalCode = "3012",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -16841,7 +16841,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05432-043",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -16859,7 +16859,7 @@ Winchester Way",
                 ShipCity = "Paris",
                 ShipRegion = null,
                 ShipPostalCode = "75016",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -16877,7 +16877,7 @@ Winchester Way",
                 ShipCity = "Warszawa",
                 ShipRegion = null,
                 ShipPostalCode = "01-012",
-                ShipCountry = "Poland"
+                ShipCountry = "Poland",
             },
             new Order
             {
@@ -16895,7 +16895,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -16913,7 +16913,7 @@ Winchester Way",
                 ShipCity = "Stuttgart",
                 ShipRegion = null,
                 ShipPostalCode = "70563",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -16931,7 +16931,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -16949,7 +16949,7 @@ Winchester Way",
                 ShipCity = "Tsawassen",
                 ShipRegion = "BC",
                 ShipPostalCode = "T2F 8M4",
-                ShipCountry = "Canada"
+                ShipCountry = "Canada",
             },
             new Order
             {
@@ -16967,7 +16967,7 @@ Winchester Way",
                 ShipCity = "Campinas",
                 ShipRegion = "SP",
                 ShipPostalCode = "04876-786",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -16985,7 +16985,7 @@ Winchester Way",
                 ShipCity = "Bräcke",
                 ShipRegion = null,
                 ShipPostalCode = "S-844 67",
-                ShipCountry = "Sweden"
+                ShipCountry = "Sweden",
             },
             new Order
             {
@@ -17003,7 +17003,7 @@ Winchester Way",
                 ShipCity = "Toulouse",
                 ShipRegion = null,
                 ShipPostalCode = "31000",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -17021,7 +17021,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "05454-876",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -17039,7 +17039,7 @@ Winchester Way",
                 ShipCity = "Salzburg",
                 ShipRegion = null,
                 ShipPostalCode = "5020",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -17057,7 +17057,7 @@ Winchester Way",
                 ShipCity = "Buenos Aires",
                 ShipRegion = null,
                 ShipPostalCode = "1010",
-                ShipCountry = "Argentina"
+                ShipCountry = "Argentina",
             },
             new Order
             {
@@ -17075,7 +17075,7 @@ Winchester Way",
                 ShipCity = "San Cristóbal",
                 ShipRegion = "Táchira",
                 ShipPostalCode = "5022",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -17093,7 +17093,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "WX3 6FW",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -17111,7 +17111,7 @@ Winchester Way",
                 ShipCity = "London",
                 ShipRegion = null,
                 ShipPostalCode = "SW7 1RZ",
-                ShipCountry = "UK"
+                ShipCountry = "UK",
             },
             new Order
             {
@@ -17129,7 +17129,7 @@ Winchester Way",
                 ShipCity = "Mannheim",
                 ShipRegion = null,
                 ShipPostalCode = "68306",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -17147,7 +17147,7 @@ Winchester Way",
                 ShipCity = "Rio de Janeiro",
                 ShipRegion = "RJ",
                 ShipPostalCode = "02389-890",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -17165,7 +17165,7 @@ Winchester Way",
                 ShipCity = "Torino",
                 ShipRegion = null,
                 ShipPostalCode = "10100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -17183,7 +17183,7 @@ Winchester Way",
                 ShipCity = "Eugene",
                 ShipRegion = "OR",
                 ShipPostalCode = "97403",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -17201,7 +17201,7 @@ Winchester Way",
                 ShipCity = "Reggio Emilia",
                 ShipRegion = null,
                 ShipPostalCode = "42100",
-                ShipCountry = "Italy"
+                ShipCountry = "Italy",
             },
             new Order
             {
@@ -17219,7 +17219,7 @@ Winchester Way",
                 ShipCity = "Cork",
                 ShipRegion = "Co. Cork",
                 ShipPostalCode = null,
-                ShipCountry = "Ireland"
+                ShipCountry = "Ireland",
             },
             new Order
             {
@@ -17237,7 +17237,7 @@ Winchester Way",
                 ShipCity = "Boise",
                 ShipRegion = "ID",
                 ShipPostalCode = "83720",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -17255,7 +17255,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -17273,7 +17273,7 @@ Winchester Way",
                 ShipCity = "Seattle",
                 ShipRegion = "WA",
                 ShipPostalCode = "98124",
-                ShipCountry = "USA"
+                ShipCountry = "USA",
             },
             new Order
             {
@@ -17291,7 +17291,7 @@ Winchester Way",
                 ShipCity = "Aachen",
                 ShipRegion = null,
                 ShipPostalCode = "52066",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -17309,7 +17309,7 @@ Winchester Way",
                 ShipCity = "Sao Paulo",
                 ShipRegion = "SP",
                 ShipPostalCode = "05487-020",
-                ShipCountry = "Brazil"
+                ShipCountry = "Brazil",
             },
             new Order
             {
@@ -17327,7 +17327,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -17345,7 +17345,7 @@ Winchester Way",
                 ShipCity = "Frankfurt a.M.",
                 ShipRegion = null,
                 ShipPostalCode = "60528",
-                ShipCountry = "Germany"
+                ShipCountry = "Germany",
             },
             new Order
             {
@@ -17363,7 +17363,7 @@ Winchester Way",
                 ShipCity = "Barquisimeto",
                 ShipRegion = "Lara",
                 ShipPostalCode = "3508",
-                ShipCountry = "Venezuela"
+                ShipCountry = "Venezuela",
             },
             new Order
             {
@@ -17381,7 +17381,7 @@ Winchester Way",
                 ShipCity = "Graz",
                 ShipRegion = null,
                 ShipPostalCode = "8010",
-                ShipCountry = "Austria"
+                ShipCountry = "Austria",
             },
             new Order
             {
@@ -17399,7 +17399,7 @@ Winchester Way",
                 ShipCity = "México D.F.",
                 ShipRegion = null,
                 ShipPostalCode = "05033",
-                ShipCountry = "Mexico"
+                ShipCountry = "Mexico",
             },
             new Order
             {
@@ -17417,7 +17417,7 @@ Winchester Way",
                 ShipCity = "Kobenhavn",
                 ShipRegion = null,
                 ShipPostalCode = "1734",
-                ShipCountry = "Denmark"
+                ShipCountry = "Denmark",
             },
             new Order
             {
@@ -17435,7 +17435,7 @@ Winchester Way",
                 ShipCity = "Genève",
                 ShipRegion = null,
                 ShipPostalCode = "1204",
-                ShipCountry = "Switzerland"
+                ShipCountry = "Switzerland",
             },
             new Order
             {
@@ -17453,7 +17453,7 @@ Winchester Way",
                 ShipCity = "Marseille",
                 ShipRegion = null,
                 ShipPostalCode = "13008",
-                ShipCountry = "France"
+                ShipCountry = "France",
             },
             new Order
             {
@@ -17471,8 +17471,8 @@ Winchester Way",
                 ShipCity = "Albuquerque",
                 ShipRegion = "NM",
                 ShipPostalCode = "87110",
-                ShipCountry = "USA"
-            }
+                ShipCountry = "USA",
+            },
         };
 
     #endregion
@@ -17488,7 +17488,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 14.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17496,7 +17496,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 9.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17504,7 +17504,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17512,7 +17512,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17520,7 +17520,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17528,7 +17528,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17536,7 +17536,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17544,7 +17544,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17552,7 +17552,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 16.8000m,
                 Quantity = 6,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17560,7 +17560,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17568,7 +17568,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17576,7 +17576,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 64.8000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17584,7 +17584,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17592,7 +17592,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17600,7 +17600,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17608,7 +17608,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17616,7 +17616,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17624,7 +17624,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17632,7 +17632,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 21,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17640,7 +17640,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17648,7 +17648,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17656,7 +17656,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17664,7 +17664,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17672,7 +17672,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17680,7 +17680,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17688,7 +17688,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17696,7 +17696,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 35.1000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17704,7 +17704,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17712,7 +17712,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17720,7 +17720,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -17728,7 +17728,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 17.0000m,
                 Quantity = 65,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -17736,7 +17736,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 25.6000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -17744,7 +17744,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17752,7 +17752,7 @@ Winchester Way",
                 ProductID = 37,
                 UnitPrice = 20.8000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17760,7 +17760,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 16,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -17768,7 +17768,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17776,7 +17776,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -17784,7 +17784,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -17792,7 +17792,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17800,7 +17800,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17808,7 +17808,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 17.0000m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -17816,7 +17816,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 24.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17824,7 +17824,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17832,7 +17832,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -17840,7 +17840,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17848,7 +17848,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -17856,7 +17856,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 36,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -17864,7 +17864,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17872,7 +17872,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 25,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17880,7 +17880,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17888,7 +17888,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17896,7 +17896,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 30.4000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17904,7 +17904,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17912,7 +17912,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 70,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17920,7 +17920,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -17928,7 +17928,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17936,7 +17936,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17944,7 +17944,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17952,7 +17952,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -17960,7 +17960,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17968,7 +17968,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17976,7 +17976,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17984,7 +17984,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 64.8000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -17992,7 +17992,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18000,7 +18000,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18008,7 +18008,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 24,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -18016,7 +18016,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -18024,7 +18024,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18032,7 +18032,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -18040,7 +18040,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 33,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -18048,7 +18048,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18056,7 +18056,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18064,7 +18064,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -18072,7 +18072,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 6,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -18080,7 +18080,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18088,7 +18088,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18096,7 +18096,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18104,7 +18104,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18112,7 +18112,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18120,7 +18120,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18128,7 +18128,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 35.1000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18136,7 +18136,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 12.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18144,7 +18144,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -18152,7 +18152,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18160,7 +18160,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18168,7 +18168,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18176,7 +18176,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18184,7 +18184,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18192,7 +18192,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18200,7 +18200,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18208,7 +18208,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18216,7 +18216,7 @@ Winchester Way",
                 ProductID = 15,
                 UnitPrice = 12.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18224,7 +18224,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18232,7 +18232,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18240,7 +18240,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18248,7 +18248,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 35.1000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -18256,7 +18256,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18264,7 +18264,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -18272,7 +18272,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 11.2000m,
                 Quantity = 5,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -18280,7 +18280,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 45,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -18288,7 +18288,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -18296,7 +18296,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 36,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -18304,7 +18304,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 100,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18312,7 +18312,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18320,7 +18320,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -18328,7 +18328,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18336,7 +18336,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -18344,7 +18344,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18352,7 +18352,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 3,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18360,7 +18360,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 8.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18368,7 +18368,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18376,7 +18376,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 17.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18384,7 +18384,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18392,7 +18392,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18400,7 +18400,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18408,7 +18408,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18416,7 +18416,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 24,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18424,7 +18424,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 2,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18432,7 +18432,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 64.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18440,7 +18440,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 50.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18448,7 +18448,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18456,7 +18456,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 35.1000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18464,7 +18464,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18472,7 +18472,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18480,7 +18480,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18488,7 +18488,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18496,7 +18496,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18504,7 +18504,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18512,7 +18512,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18520,7 +18520,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18528,7 +18528,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18536,7 +18536,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18544,7 +18544,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18552,7 +18552,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18560,7 +18560,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18568,7 +18568,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -18576,7 +18576,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -18584,7 +18584,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18592,7 +18592,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18600,7 +18600,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18608,7 +18608,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 13.6000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18616,7 +18616,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18624,7 +18624,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18632,7 +18632,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18640,7 +18640,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18648,7 +18648,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18656,7 +18656,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18664,7 +18664,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18672,7 +18672,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18680,7 +18680,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18688,7 +18688,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18696,7 +18696,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18704,7 +18704,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18712,7 +18712,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 50.0000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18720,7 +18720,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18728,7 +18728,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18736,7 +18736,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18744,7 +18744,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18752,7 +18752,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18760,7 +18760,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18768,7 +18768,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18776,7 +18776,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18784,7 +18784,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18792,7 +18792,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 17.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18800,7 +18800,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 20.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18808,7 +18808,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18816,7 +18816,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18824,7 +18824,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18832,7 +18832,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18840,7 +18840,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18848,7 +18848,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18856,7 +18856,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18864,7 +18864,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18872,7 +18872,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18880,7 +18880,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18888,7 +18888,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18896,7 +18896,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18904,7 +18904,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 25.6000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18912,7 +18912,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 10.6000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18920,7 +18920,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -18928,7 +18928,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18936,7 +18936,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18944,7 +18944,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18952,7 +18952,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18960,7 +18960,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18968,7 +18968,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18976,7 +18976,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18984,7 +18984,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -18992,7 +18992,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19000,7 +19000,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19008,7 +19008,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19016,7 +19016,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19024,7 +19024,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 5.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19032,7 +19032,7 @@ Winchester Way",
                 ProductID = 15,
                 UnitPrice = 12.4000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19040,7 +19040,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 11.2000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19048,7 +19048,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19056,7 +19056,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 21,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19064,7 +19064,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 70,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19072,7 +19072,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19080,7 +19080,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19088,7 +19088,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 35.1000m,
                 Quantity = 80,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19096,7 +19096,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 20.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19104,7 +19104,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19112,7 +19112,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19120,7 +19120,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19128,7 +19128,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19136,7 +19136,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 17.6000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19144,7 +19144,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19152,7 +19152,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19160,7 +19160,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 25,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19168,7 +19168,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19176,7 +19176,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19184,7 +19184,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 10.6000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19192,7 +19192,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19200,7 +19200,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19208,7 +19208,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19216,7 +19216,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19224,7 +19224,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 8,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19232,7 +19232,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19240,7 +19240,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19248,7 +19248,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 50,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19256,7 +19256,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 25,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19264,7 +19264,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19272,7 +19272,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 50.0000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19280,7 +19280,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19288,7 +19288,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 7.6000m,
                 Quantity = 16,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19296,7 +19296,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19304,7 +19304,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19312,7 +19312,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19320,7 +19320,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 5.6000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19328,7 +19328,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19336,7 +19336,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 7,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19344,7 +19344,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 25,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19352,7 +19352,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 25.6000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19360,7 +19360,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 48,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19368,7 +19368,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 17.6000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19376,7 +19376,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19384,7 +19384,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19392,7 +19392,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19400,7 +19400,7 @@ Winchester Way",
                 ProductID = 37,
                 UnitPrice = 20.8000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19408,7 +19408,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19416,7 +19416,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19424,7 +19424,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19432,7 +19432,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 17.6000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19440,7 +19440,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 70,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19448,7 +19448,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19456,7 +19456,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 50.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19464,7 +19464,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19472,7 +19472,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19480,7 +19480,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19488,7 +19488,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 9,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19496,7 +19496,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 24,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19504,7 +19504,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 56,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19512,7 +19512,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19520,7 +19520,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19528,7 +19528,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19536,7 +19536,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 4,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19544,7 +19544,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19552,7 +19552,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 17.6000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19560,7 +19560,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 32.0000m,
                 Quantity = 70,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -19568,7 +19568,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 32.0000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19576,7 +19576,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 80,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19584,7 +19584,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19592,7 +19592,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 36,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19600,7 +19600,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19608,7 +19608,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 11.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19616,7 +19616,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 50,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19624,7 +19624,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19632,7 +19632,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 6,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19640,7 +19640,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19648,7 +19648,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19656,7 +19656,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19664,7 +19664,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19672,7 +19672,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19680,7 +19680,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19688,7 +19688,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 13,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19696,7 +19696,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 77,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19704,7 +19704,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19712,7 +19712,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19720,7 +19720,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -19728,7 +19728,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19736,7 +19736,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19744,7 +19744,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19752,7 +19752,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19760,7 +19760,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19768,7 +19768,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19776,7 +19776,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19784,7 +19784,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19792,7 +19792,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19800,7 +19800,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19808,7 +19808,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19816,7 +19816,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 8,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -19824,7 +19824,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19832,7 +19832,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19840,7 +19840,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19848,7 +19848,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 56,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19856,7 +19856,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 70,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19864,7 +19864,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 80,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -19872,7 +19872,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19880,7 +19880,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19888,7 +19888,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19896,7 +19896,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19904,7 +19904,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19912,7 +19912,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 54,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19920,7 +19920,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 55,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -19928,7 +19928,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 11.2000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19936,7 +19936,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19944,7 +19944,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19952,7 +19952,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19960,7 +19960,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19968,7 +19968,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19976,7 +19976,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19984,7 +19984,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -19992,7 +19992,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20000,7 +20000,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20008,7 +20008,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20016,7 +20016,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20024,7 +20024,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20032,7 +20032,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20040,7 +20040,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20048,7 +20048,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 5,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20056,7 +20056,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 13,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20064,7 +20064,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20072,7 +20072,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 35,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20080,7 +20080,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20088,7 +20088,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 18,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20096,7 +20096,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20104,7 +20104,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20112,7 +20112,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20120,7 +20120,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20128,7 +20128,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 64.8000m,
                 Quantity = 12,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20136,7 +20136,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20144,7 +20144,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 70,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20152,7 +20152,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 42,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20160,7 +20160,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 10.6000m,
                 Quantity = 80,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20168,7 +20168,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20176,7 +20176,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20184,7 +20184,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 10.6000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20192,7 +20192,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20200,7 +20200,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20208,7 +20208,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 42,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -20216,7 +20216,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20224,7 +20224,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20232,7 +20232,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20240,7 +20240,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20248,7 +20248,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 35.1000m,
                 Quantity = 16,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20256,7 +20256,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20264,7 +20264,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20272,7 +20272,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20280,7 +20280,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 6,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20288,7 +20288,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20296,7 +20296,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20304,7 +20304,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 17.0000m,
                 Quantity = 32,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20312,7 +20312,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 50.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20320,7 +20320,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20328,7 +20328,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20336,7 +20336,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20344,7 +20344,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20352,7 +20352,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20360,7 +20360,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20368,7 +20368,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 64.8000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20376,7 +20376,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20384,7 +20384,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 24.0000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20392,7 +20392,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20400,7 +20400,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 8,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20408,7 +20408,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20416,7 +20416,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20424,7 +20424,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20432,7 +20432,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20440,7 +20440,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20448,7 +20448,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20456,7 +20456,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 7.6000m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20464,7 +20464,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 5.6000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20472,7 +20472,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20480,7 +20480,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20488,7 +20488,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20496,7 +20496,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20504,7 +20504,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20512,7 +20512,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 60,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20520,7 +20520,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20528,7 +20528,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20536,7 +20536,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 24,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20544,7 +20544,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20552,7 +20552,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20560,7 +20560,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20568,7 +20568,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 42,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20576,7 +20576,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 11.2000m,
                 Quantity = 7,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20584,7 +20584,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 70,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -20592,7 +20592,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 32,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20600,7 +20600,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20608,7 +20608,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20616,7 +20616,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 28,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20624,7 +20624,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 70,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20632,7 +20632,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20640,7 +20640,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20648,7 +20648,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20656,7 +20656,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20664,7 +20664,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20672,7 +20672,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 18,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20680,7 +20680,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20688,7 +20688,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 120,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20696,7 +20696,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20704,7 +20704,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20712,7 +20712,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20720,7 +20720,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20728,7 +20728,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20736,7 +20736,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20744,7 +20744,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20752,7 +20752,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20760,7 +20760,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20768,7 +20768,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20776,7 +20776,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20784,7 +20784,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20792,7 +20792,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 35.1000m,
                 Quantity = 65,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20800,7 +20800,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 21,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20808,7 +20808,7 @@ Winchester Way",
                 ProductID = 48,
                 UnitPrice = 10.2000m,
                 Quantity = 70,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -20816,7 +20816,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -20824,7 +20824,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -20832,7 +20832,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -20840,7 +20840,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 8.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20848,7 +20848,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20856,7 +20856,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20864,7 +20864,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 42,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20872,7 +20872,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 15.2000m,
                 Quantity = 5,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20880,7 +20880,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 2,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -20888,7 +20888,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20896,7 +20896,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20904,7 +20904,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20912,7 +20912,7 @@ Winchester Way",
                 ProductID = 37,
                 UnitPrice = 20.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20920,7 +20920,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20928,7 +20928,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20936,7 +20936,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20944,7 +20944,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20952,7 +20952,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 49,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20960,7 +20960,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -20968,7 +20968,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 25,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20976,7 +20976,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20984,7 +20984,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 9,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -20992,7 +20992,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21000,7 +21000,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21008,7 +21008,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21016,7 +21016,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21024,7 +21024,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 18,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -21032,7 +21032,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21040,7 +21040,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21048,7 +21048,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21056,7 +21056,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21064,7 +21064,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21072,7 +21072,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21080,7 +21080,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21088,7 +21088,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 2,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21096,7 +21096,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 36,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21104,7 +21104,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21112,7 +21112,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21120,7 +21120,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 7.6000m,
                 Quantity = 55,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21128,7 +21128,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 22.8000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21136,7 +21136,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21144,7 +21144,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -21152,7 +21152,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -21160,7 +21160,7 @@ Winchester Way",
                 ProductID = 9,
                 UnitPrice = 77.6000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21168,7 +21168,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 2,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21176,7 +21176,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21184,7 +21184,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 12.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21192,7 +21192,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 4,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21200,7 +21200,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21208,7 +21208,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21216,7 +21216,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21224,7 +21224,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21232,7 +21232,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21240,7 +21240,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21248,7 +21248,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 60,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21256,7 +21256,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 49,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21264,7 +21264,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21272,7 +21272,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 10,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21280,7 +21280,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21288,7 +21288,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21296,7 +21296,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21304,7 +21304,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21312,7 +21312,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21320,7 +21320,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 13.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21328,7 +21328,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 35.1000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21336,7 +21336,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 45,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21344,7 +21344,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21352,7 +21352,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21360,7 +21360,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 70,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21368,7 +21368,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21376,7 +21376,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21384,7 +21384,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 7.6000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -21392,7 +21392,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21400,7 +21400,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21408,7 +21408,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21416,7 +21416,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21424,7 +21424,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 18,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21432,7 +21432,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21440,7 +21440,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 16.8000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21448,7 +21448,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21456,7 +21456,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21464,7 +21464,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21472,7 +21472,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21480,7 +21480,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 24,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21488,7 +21488,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21496,7 +21496,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21504,7 +21504,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21512,7 +21512,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 15.6000m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21520,7 +21520,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 30.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21528,7 +21528,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21536,7 +21536,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21544,7 +21544,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21552,7 +21552,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 45,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21560,7 +21560,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 49,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21568,7 +21568,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21576,7 +21576,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 22.8000m,
                 Quantity = 90,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21584,7 +21584,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 35.1000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21592,7 +21592,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21600,7 +21600,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 80,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21608,7 +21608,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 13.6000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21616,7 +21616,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21624,7 +21624,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21632,7 +21632,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 31.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21640,7 +21640,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21648,7 +21648,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 14.4000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21656,7 +21656,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21664,7 +21664,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21672,7 +21672,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21680,7 +21680,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 12,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21688,7 +21688,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21696,7 +21696,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 3,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21704,7 +21704,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 5.6000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21712,7 +21712,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21720,7 +21720,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21728,7 +21728,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21736,7 +21736,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21744,7 +21744,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21752,7 +21752,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21760,7 +21760,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 5.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21768,7 +21768,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 39.4000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21776,7 +21776,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21784,7 +21784,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21792,7 +21792,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 120,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21800,7 +21800,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 35,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21808,7 +21808,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 28,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21816,7 +21816,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 55,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21824,7 +21824,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21832,7 +21832,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 100,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -21840,7 +21840,7 @@ Winchester Way",
                 ProductID = 48,
                 UnitPrice = 10.2000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21848,7 +21848,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -21856,7 +21856,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21864,7 +21864,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21872,7 +21872,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -21880,7 +21880,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21888,7 +21888,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21896,7 +21896,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 22.8000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21904,7 +21904,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21912,7 +21912,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21920,7 +21920,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 21,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -21928,7 +21928,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21936,7 +21936,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21944,7 +21944,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21952,7 +21952,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21960,7 +21960,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21968,7 +21968,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -21976,7 +21976,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 24.0000m,
                 Quantity = 16,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -21984,7 +21984,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -21992,7 +21992,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22000,7 +22000,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22008,7 +22008,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 4,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22016,7 +22016,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22024,7 +22024,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 28,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22032,7 +22032,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22040,7 +22040,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 4.8000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22048,7 +22048,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22056,7 +22056,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22064,7 +22064,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22072,7 +22072,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 17.6000m,
                 Quantity = 16,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -22080,7 +22080,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22088,7 +22088,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -22096,7 +22096,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22104,7 +22104,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22112,7 +22112,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 99.0000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22120,7 +22120,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22128,7 +22128,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 7.6000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22136,7 +22136,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 13.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22144,7 +22144,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22152,7 +22152,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 9.6000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22160,7 +22160,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22168,7 +22168,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 11.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22176,7 +22176,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 20.7000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22184,7 +22184,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 36.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22192,7 +22192,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22200,7 +22200,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22208,7 +22208,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 2,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22216,7 +22216,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 50.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22224,7 +22224,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22232,7 +22232,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22240,7 +22240,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 24.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22248,7 +22248,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22256,7 +22256,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 3.6000m,
                 Quantity = 80,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22264,7 +22264,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22272,7 +22272,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22280,7 +22280,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 17.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22288,7 +22288,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 18.6000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22296,7 +22296,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 36.4000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22304,7 +22304,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22312,7 +22312,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22320,7 +22320,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22328,7 +22328,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 13.6000m,
                 Quantity = 60,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22336,7 +22336,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 14.4000m,
                 Quantity = 42,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22344,7 +22344,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 2,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22352,7 +22352,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22360,7 +22360,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 14.4000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22368,7 +22368,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22376,7 +22376,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 14.4000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22384,7 +22384,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 24.8000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22392,7 +22392,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 210.8000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22400,7 +22400,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 26.2000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22408,7 +22408,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22416,7 +22416,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 26.6000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22424,7 +22424,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 7.6000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22432,7 +22432,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22440,7 +22440,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 16.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22448,7 +22448,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 27.2000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22456,7 +22456,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22464,7 +22464,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 11.2000m,
                 Quantity = 35,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22472,7 +22472,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22480,7 +22480,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 8.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22488,7 +22488,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 14.7000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22496,7 +22496,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22504,7 +22504,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 15.2000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22512,7 +22512,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 8.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22520,7 +22520,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 19.2000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22528,7 +22528,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 12.0000m,
                 Quantity = 60,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22536,7 +22536,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22544,7 +22544,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 42.4000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22552,7 +22552,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 8.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22560,7 +22560,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 7.3000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22568,7 +22568,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 24.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22576,7 +22576,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 5.9000m,
                 Quantity = 24,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22584,7 +22584,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22592,7 +22592,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 12.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -22600,7 +22600,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 16.8000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -22608,7 +22608,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 13.9000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22616,7 +22616,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 44.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22624,7 +22624,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22632,7 +22632,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 6.2000m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22640,7 +22640,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 15.5000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22648,7 +22648,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 7,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22656,7 +22656,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 11.2000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22664,7 +22664,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 11.2000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22672,7 +22672,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 16.8000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22680,7 +22680,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 13.6000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22688,7 +22688,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 28.8000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22696,7 +22696,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22704,7 +22704,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 7.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22712,7 +22712,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 7.7000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22720,7 +22720,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22728,7 +22728,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22736,7 +22736,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 30.4000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22744,7 +22744,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 27.8000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22752,7 +22752,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 10.4000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22760,7 +22760,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22768,7 +22768,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22776,7 +22776,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22784,7 +22784,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22792,7 +22792,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22800,7 +22800,7 @@ Winchester Way",
                 ProductID = 15,
                 UnitPrice = 15.5000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22808,7 +22808,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 8,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -22816,7 +22816,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22824,7 +22824,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22832,7 +22832,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22840,7 +22840,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22848,7 +22848,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22856,7 +22856,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22864,7 +22864,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22872,7 +22872,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22880,7 +22880,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22888,7 +22888,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22896,7 +22896,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22904,7 +22904,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22912,7 +22912,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 14,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22920,7 +22920,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22928,7 +22928,7 @@ Winchester Way",
                 ProductID = 48,
                 UnitPrice = 12.7500m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22936,7 +22936,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22944,7 +22944,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22952,7 +22952,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22960,7 +22960,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -22968,7 +22968,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 36,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -22976,7 +22976,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 50,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22984,7 +22984,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 50,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -22992,7 +22992,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23000,7 +23000,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23008,7 +23008,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 9,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23016,7 +23016,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 6,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23024,7 +23024,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 12,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23032,7 +23032,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23040,7 +23040,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23048,7 +23048,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23056,7 +23056,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 39,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23064,7 +23064,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23072,7 +23072,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23080,7 +23080,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 39,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23088,7 +23088,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23096,7 +23096,7 @@ Winchester Way",
                 ProductID = 9,
                 UnitPrice = 97.0000m,
                 Quantity = 16,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23104,7 +23104,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23112,7 +23112,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 43.9000m,
                 Quantity = 120,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23120,7 +23120,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 16,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23128,7 +23128,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 84,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23136,7 +23136,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23144,7 +23144,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 80,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23152,7 +23152,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23160,7 +23160,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23168,7 +23168,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23176,7 +23176,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23184,7 +23184,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23192,7 +23192,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23200,7 +23200,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23208,7 +23208,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 16,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -23216,7 +23216,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23224,7 +23224,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -23232,7 +23232,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23240,7 +23240,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23248,7 +23248,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23256,7 +23256,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23264,7 +23264,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23272,7 +23272,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23280,7 +23280,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23288,7 +23288,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23296,7 +23296,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 25,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23304,7 +23304,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23312,7 +23312,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23320,7 +23320,7 @@ Winchester Way",
                 ProductID = 37,
                 UnitPrice = 26.0000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23328,7 +23328,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 6,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23336,7 +23336,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23344,7 +23344,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23352,7 +23352,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23360,7 +23360,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23368,7 +23368,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23376,7 +23376,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23384,7 +23384,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 8,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23392,7 +23392,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23400,7 +23400,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23408,7 +23408,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 50,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23416,7 +23416,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23424,7 +23424,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23432,7 +23432,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 8,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23440,7 +23440,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23448,7 +23448,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23456,7 +23456,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23464,7 +23464,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23472,7 +23472,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23480,7 +23480,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23488,7 +23488,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23496,7 +23496,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23504,7 +23504,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23512,7 +23512,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23520,7 +23520,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 17.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23528,7 +23528,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -23536,7 +23536,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23544,7 +23544,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 24,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -23552,7 +23552,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23560,7 +23560,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23568,7 +23568,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -23576,7 +23576,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 50,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23584,7 +23584,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23592,7 +23592,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 5,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23600,7 +23600,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23608,7 +23608,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -23616,7 +23616,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23624,7 +23624,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23632,7 +23632,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -23640,7 +23640,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23648,7 +23648,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23656,7 +23656,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23664,7 +23664,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23672,7 +23672,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23680,7 +23680,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23688,7 +23688,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23696,7 +23696,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23704,7 +23704,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23712,7 +23712,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23720,7 +23720,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23728,7 +23728,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23736,7 +23736,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23744,7 +23744,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23752,7 +23752,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23760,7 +23760,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 35,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23768,7 +23768,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 4,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23776,7 +23776,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 36,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23784,7 +23784,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 9,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23792,7 +23792,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -23800,7 +23800,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 24,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -23808,7 +23808,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23816,7 +23816,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 70,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23824,7 +23824,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23832,7 +23832,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23840,7 +23840,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23848,7 +23848,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23856,7 +23856,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23864,7 +23864,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23872,7 +23872,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23880,7 +23880,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23888,7 +23888,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 10,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -23896,7 +23896,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23904,7 +23904,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 55,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23912,7 +23912,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 100,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23920,7 +23920,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 48,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23928,7 +23928,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23936,7 +23936,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23944,7 +23944,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 6,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23952,7 +23952,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -23960,7 +23960,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23968,7 +23968,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -23976,7 +23976,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23984,7 +23984,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -23992,7 +23992,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24000,7 +24000,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24008,7 +24008,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24016,7 +24016,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24024,7 +24024,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24032,7 +24032,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24040,7 +24040,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24048,7 +24048,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24056,7 +24056,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24064,7 +24064,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24072,7 +24072,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24080,7 +24080,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24088,7 +24088,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 18,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24096,7 +24096,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24104,7 +24104,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24112,7 +24112,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24120,7 +24120,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24128,7 +24128,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24136,7 +24136,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24144,7 +24144,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24152,7 +24152,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24160,7 +24160,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24168,7 +24168,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24176,7 +24176,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24184,7 +24184,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 18,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24192,7 +24192,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24200,7 +24200,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -24208,7 +24208,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24216,7 +24216,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24224,7 +24224,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24232,7 +24232,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24240,7 +24240,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24248,7 +24248,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24256,7 +24256,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 16,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24264,7 +24264,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 6,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24272,7 +24272,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24280,7 +24280,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24288,7 +24288,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24296,7 +24296,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24304,7 +24304,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 18,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24312,7 +24312,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24320,7 +24320,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 60,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24328,7 +24328,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24336,7 +24336,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24344,7 +24344,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24352,7 +24352,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24360,7 +24360,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24368,7 +24368,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24376,7 +24376,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24384,7 +24384,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 11,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24392,7 +24392,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 28,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24400,7 +24400,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 12,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24408,7 +24408,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24416,7 +24416,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24424,7 +24424,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -24432,7 +24432,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24440,7 +24440,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24448,7 +24448,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24456,7 +24456,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24464,7 +24464,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24472,7 +24472,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24480,7 +24480,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24488,7 +24488,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24496,7 +24496,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24504,7 +24504,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24512,7 +24512,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24520,7 +24520,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24528,7 +24528,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24536,7 +24536,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24544,7 +24544,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24552,7 +24552,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24560,7 +24560,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24568,7 +24568,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24576,7 +24576,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24584,7 +24584,7 @@ Winchester Way",
                 ProductID = 15,
                 UnitPrice = 15.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24592,7 +24592,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24600,7 +24600,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24608,7 +24608,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 9,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24616,7 +24616,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24624,7 +24624,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24632,7 +24632,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24640,7 +24640,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24648,7 +24648,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24656,7 +24656,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24664,7 +24664,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24672,7 +24672,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24680,7 +24680,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24688,7 +24688,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 4,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -24696,7 +24696,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24704,7 +24704,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24712,7 +24712,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24720,7 +24720,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24728,7 +24728,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 100,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24736,7 +24736,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24744,7 +24744,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24752,7 +24752,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24760,7 +24760,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24768,7 +24768,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24776,7 +24776,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24784,7 +24784,7 @@ Winchester Way",
                 ProductID = 15,
                 UnitPrice = 15.5000m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24792,7 +24792,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 5,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24800,7 +24800,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 21,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24808,7 +24808,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24816,7 +24816,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 4,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24824,7 +24824,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24832,7 +24832,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24840,7 +24840,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -24848,7 +24848,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 120,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -24856,7 +24856,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 65,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -24864,7 +24864,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 5,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24872,7 +24872,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 24,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24880,7 +24880,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24888,7 +24888,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24896,7 +24896,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24904,7 +24904,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -24912,7 +24912,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 43.9000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24920,7 +24920,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24928,7 +24928,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24936,7 +24936,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24944,7 +24944,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24952,7 +24952,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24960,7 +24960,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24968,7 +24968,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 5,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -24976,7 +24976,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 48,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -24984,7 +24984,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -24992,7 +24992,7 @@ Winchester Way",
                 ProductID = 48,
                 UnitPrice = 12.7500m,
                 Quantity = 6,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25000,7 +25000,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25008,7 +25008,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25016,7 +25016,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25024,7 +25024,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 70,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25032,7 +25032,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25040,7 +25040,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -25048,7 +25048,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -25056,7 +25056,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -25064,7 +25064,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25072,7 +25072,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 100,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25080,7 +25080,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25088,7 +25088,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25096,7 +25096,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25104,7 +25104,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25112,7 +25112,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25120,7 +25120,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25128,7 +25128,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25136,7 +25136,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25144,7 +25144,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25152,7 +25152,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25160,7 +25160,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25168,7 +25168,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25176,7 +25176,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 55,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25184,7 +25184,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25192,7 +25192,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25200,7 +25200,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 80,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25208,7 +25208,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25216,7 +25216,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25224,7 +25224,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25232,7 +25232,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25240,7 +25240,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25248,7 +25248,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25256,7 +25256,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25264,7 +25264,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25272,7 +25272,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25280,7 +25280,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25288,7 +25288,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25296,7 +25296,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25304,7 +25304,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25312,7 +25312,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25320,7 +25320,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25328,7 +25328,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25336,7 +25336,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25344,7 +25344,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25352,7 +25352,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25360,7 +25360,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25368,7 +25368,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25376,7 +25376,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25384,7 +25384,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25392,7 +25392,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 18,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -25400,7 +25400,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25408,7 +25408,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25416,7 +25416,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25424,7 +25424,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25432,7 +25432,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25440,7 +25440,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25448,7 +25448,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25456,7 +25456,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25464,7 +25464,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25472,7 +25472,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25480,7 +25480,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25488,7 +25488,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25496,7 +25496,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25504,7 +25504,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25512,7 +25512,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25520,7 +25520,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25528,7 +25528,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25536,7 +25536,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25544,7 +25544,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25552,7 +25552,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25560,7 +25560,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25568,7 +25568,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25576,7 +25576,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25584,7 +25584,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25592,7 +25592,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 36,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25600,7 +25600,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 13,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25608,7 +25608,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25616,7 +25616,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 80,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25624,7 +25624,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25632,7 +25632,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25640,7 +25640,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25648,7 +25648,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25656,7 +25656,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25664,7 +25664,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 21.3500m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25672,7 +25672,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25680,7 +25680,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25688,7 +25688,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25696,7 +25696,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25704,7 +25704,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 16.2500m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25712,7 +25712,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25720,7 +25720,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25728,7 +25728,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25736,7 +25736,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25744,7 +25744,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25752,7 +25752,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25760,7 +25760,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25768,7 +25768,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25776,7 +25776,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25784,7 +25784,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -25792,7 +25792,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -25800,7 +25800,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25808,7 +25808,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25816,7 +25816,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 2,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25824,7 +25824,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 4,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25832,7 +25832,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25840,7 +25840,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 21,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -25848,7 +25848,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25856,7 +25856,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25864,7 +25864,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25872,7 +25872,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 18,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25880,7 +25880,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25888,7 +25888,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25896,7 +25896,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25904,7 +25904,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25912,7 +25912,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25920,7 +25920,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -25928,7 +25928,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25936,7 +25936,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25944,7 +25944,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25952,7 +25952,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -25960,7 +25960,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -25968,7 +25968,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 12,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25976,7 +25976,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25984,7 +25984,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 2,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -25992,7 +25992,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26000,7 +26000,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26008,7 +26008,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26016,7 +26016,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 12,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26024,7 +26024,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26032,7 +26032,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 6,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26040,7 +26040,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -26048,7 +26048,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 3,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26056,7 +26056,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 28,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26064,7 +26064,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 6,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26072,7 +26072,7 @@ Winchester Way",
                 ProductID = 15,
                 UnitPrice = 15.5000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26080,7 +26080,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26088,7 +26088,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26096,7 +26096,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26104,7 +26104,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26112,7 +26112,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26120,7 +26120,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26128,7 +26128,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 70,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26136,7 +26136,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 55,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26144,7 +26144,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 70,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26152,7 +26152,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26160,7 +26160,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 24,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26168,7 +26168,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26176,7 +26176,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26184,7 +26184,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 3,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -26192,7 +26192,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 49,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -26200,7 +26200,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26208,7 +26208,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26216,7 +26216,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26224,7 +26224,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26232,7 +26232,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26240,7 +26240,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 12,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26248,7 +26248,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26256,7 +26256,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26264,7 +26264,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26272,7 +26272,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26280,7 +26280,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26288,7 +26288,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26296,7 +26296,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 45,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -26304,7 +26304,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 14,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -26312,7 +26312,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26320,7 +26320,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 4,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26328,7 +26328,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26336,7 +26336,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26344,7 +26344,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 32,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26352,7 +26352,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26360,7 +26360,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26368,7 +26368,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26376,7 +26376,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26384,7 +26384,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26392,7 +26392,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26400,7 +26400,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26408,7 +26408,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26416,7 +26416,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26424,7 +26424,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26432,7 +26432,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26440,7 +26440,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26448,7 +26448,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26456,7 +26456,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26464,7 +26464,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26472,7 +26472,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26480,7 +26480,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26488,7 +26488,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26496,7 +26496,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26504,7 +26504,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26512,7 +26512,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 8,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26520,7 +26520,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 100,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26528,7 +26528,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26536,7 +26536,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 120,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26544,7 +26544,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26552,7 +26552,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26560,7 +26560,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26568,7 +26568,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26576,7 +26576,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26584,7 +26584,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26592,7 +26592,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 12,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26600,7 +26600,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26608,7 +26608,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26616,7 +26616,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 17.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26624,7 +26624,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26632,7 +26632,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26640,7 +26640,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26648,7 +26648,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26656,7 +26656,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26664,7 +26664,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26672,7 +26672,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26680,7 +26680,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26688,7 +26688,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -26696,7 +26696,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26704,7 +26704,7 @@ Winchester Way",
                 ProductID = 9,
                 UnitPrice = 97.0000m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26712,7 +26712,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26720,7 +26720,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 6,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26728,7 +26728,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 18,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26736,7 +26736,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 60,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -26744,7 +26744,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26752,7 +26752,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26760,7 +26760,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26768,7 +26768,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26776,7 +26776,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26784,7 +26784,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26792,7 +26792,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26800,7 +26800,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26808,7 +26808,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 48,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26816,7 +26816,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26824,7 +26824,7 @@ Winchester Way",
                 ProductID = 9,
                 UnitPrice = 97.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26832,7 +26832,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 60,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26840,7 +26840,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26848,7 +26848,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -26856,7 +26856,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 90,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26864,7 +26864,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26872,7 +26872,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26880,7 +26880,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26888,7 +26888,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26896,7 +26896,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26904,7 +26904,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26912,7 +26912,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26920,7 +26920,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 7,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26928,7 +26928,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 9,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26936,7 +26936,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26944,7 +26944,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -26952,7 +26952,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -26960,7 +26960,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 8,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26968,7 +26968,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26976,7 +26976,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 65,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26984,7 +26984,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 8,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -26992,7 +26992,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27000,7 +27000,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 5,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27008,7 +27008,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27016,7 +27016,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27024,7 +27024,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 60,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27032,7 +27032,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 42,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -27040,7 +27040,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -27048,7 +27048,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 35,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -27056,7 +27056,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27064,7 +27064,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27072,7 +27072,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27080,7 +27080,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27088,7 +27088,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27096,7 +27096,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27104,7 +27104,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27112,7 +27112,7 @@ Winchester Way",
                 ProductID = 48,
                 UnitPrice = 12.7500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27120,7 +27120,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27128,7 +27128,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27136,7 +27136,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27144,7 +27144,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27152,7 +27152,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27160,7 +27160,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27168,7 +27168,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27176,7 +27176,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 28,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -27184,7 +27184,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 21.3500m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27192,7 +27192,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27200,7 +27200,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27208,7 +27208,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27216,7 +27216,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27224,7 +27224,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27232,7 +27232,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27240,7 +27240,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27248,7 +27248,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27256,7 +27256,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 120,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27264,7 +27264,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 3,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27272,7 +27272,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27280,7 +27280,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27288,7 +27288,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27296,7 +27296,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 110,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27304,7 +27304,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27312,7 +27312,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27320,7 +27320,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 27,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27328,7 +27328,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27336,7 +27336,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 18,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27344,7 +27344,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 12,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27352,7 +27352,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27360,7 +27360,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27368,7 +27368,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27376,7 +27376,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27384,7 +27384,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27392,7 +27392,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 32,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27400,7 +27400,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27408,7 +27408,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 25,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27416,7 +27416,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27424,7 +27424,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27432,7 +27432,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27440,7 +27440,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27448,7 +27448,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 12,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27456,7 +27456,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 3,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27464,7 +27464,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -27472,7 +27472,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27480,7 +27480,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27488,7 +27488,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27496,7 +27496,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27504,7 +27504,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27512,7 +27512,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27520,7 +27520,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27528,7 +27528,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27536,7 +27536,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27544,7 +27544,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27552,7 +27552,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27560,7 +27560,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27568,7 +27568,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27576,7 +27576,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27584,7 +27584,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27592,7 +27592,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27600,7 +27600,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27608,7 +27608,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27616,7 +27616,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27624,7 +27624,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27632,7 +27632,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27640,7 +27640,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27648,7 +27648,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27656,7 +27656,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27664,7 +27664,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 16.2500m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27672,7 +27672,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27680,7 +27680,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 3,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27688,7 +27688,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27696,7 +27696,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27704,7 +27704,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27712,7 +27712,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27720,7 +27720,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27728,7 +27728,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27736,7 +27736,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27744,7 +27744,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27752,7 +27752,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27760,7 +27760,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27768,7 +27768,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -27776,7 +27776,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 2,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -27784,7 +27784,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27792,7 +27792,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27800,7 +27800,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27808,7 +27808,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27816,7 +27816,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27824,7 +27824,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27832,7 +27832,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27840,7 +27840,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 5,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27848,7 +27848,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27856,7 +27856,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27864,7 +27864,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 14,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27872,7 +27872,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27880,7 +27880,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27888,7 +27888,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27896,7 +27896,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27904,7 +27904,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 28,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -27912,7 +27912,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -27920,7 +27920,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27928,7 +27928,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27936,7 +27936,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27944,7 +27944,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27952,7 +27952,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27960,7 +27960,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27968,7 +27968,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27976,7 +27976,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27984,7 +27984,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -27992,7 +27992,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28000,7 +28000,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28008,7 +28008,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28016,7 +28016,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 44,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28024,7 +28024,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28032,7 +28032,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28040,7 +28040,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28048,7 +28048,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28056,7 +28056,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28064,7 +28064,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 5,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28072,7 +28072,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28080,7 +28080,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 25,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28088,7 +28088,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 12,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -28096,7 +28096,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28104,7 +28104,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 16.2500m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -28112,7 +28112,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28120,7 +28120,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28128,7 +28128,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28136,7 +28136,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28144,7 +28144,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 10.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28152,7 +28152,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28160,7 +28160,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28168,7 +28168,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28176,7 +28176,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 14,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28184,7 +28184,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28192,7 +28192,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 21,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28200,7 +28200,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28208,7 +28208,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28216,7 +28216,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28224,7 +28224,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28232,7 +28232,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28240,7 +28240,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28248,7 +28248,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28256,7 +28256,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28264,7 +28264,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28272,7 +28272,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28280,7 +28280,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28288,7 +28288,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 12,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28296,7 +28296,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 43.9000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28304,7 +28304,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28312,7 +28312,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28320,7 +28320,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28328,7 +28328,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28336,7 +28336,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28344,7 +28344,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28352,7 +28352,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28360,7 +28360,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28368,7 +28368,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28376,7 +28376,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28384,7 +28384,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -28392,7 +28392,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 130,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -28400,7 +28400,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 80,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -28408,7 +28408,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28416,7 +28416,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28424,7 +28424,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28432,7 +28432,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28440,7 +28440,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28448,7 +28448,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28456,7 +28456,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28464,7 +28464,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28472,7 +28472,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28480,7 +28480,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28488,7 +28488,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28496,7 +28496,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28504,7 +28504,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28512,7 +28512,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28520,7 +28520,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28528,7 +28528,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28536,7 +28536,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 33,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28544,7 +28544,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 70,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28552,7 +28552,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 7,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28560,7 +28560,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 2,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28568,7 +28568,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 17.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28576,7 +28576,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28584,7 +28584,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28592,7 +28592,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 16,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28600,7 +28600,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28608,7 +28608,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 27,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28616,7 +28616,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 120,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28624,7 +28624,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28632,7 +28632,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28640,7 +28640,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28648,7 +28648,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28656,7 +28656,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28664,7 +28664,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28672,7 +28672,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 3,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28680,7 +28680,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28688,7 +28688,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 10.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28696,7 +28696,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28704,7 +28704,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28712,7 +28712,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28720,7 +28720,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28728,7 +28728,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 2,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28736,7 +28736,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28744,7 +28744,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28752,7 +28752,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28760,7 +28760,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28768,7 +28768,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28776,7 +28776,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 42,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28784,7 +28784,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28792,7 +28792,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28800,7 +28800,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28808,7 +28808,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28816,7 +28816,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28824,7 +28824,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28832,7 +28832,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28840,7 +28840,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28848,7 +28848,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 3,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28856,7 +28856,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -28864,7 +28864,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 14,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28872,7 +28872,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -28880,7 +28880,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28888,7 +28888,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28896,7 +28896,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28904,7 +28904,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28912,7 +28912,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28920,7 +28920,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 15,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28928,7 +28928,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28936,7 +28936,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 65,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28944,7 +28944,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -28952,7 +28952,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 21,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28960,7 +28960,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28968,7 +28968,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28976,7 +28976,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 24,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -28984,7 +28984,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -28992,7 +28992,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29000,7 +29000,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29008,7 +29008,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29016,7 +29016,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29024,7 +29024,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29032,7 +29032,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 50,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29040,7 +29040,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29048,7 +29048,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 7,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29056,7 +29056,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29064,7 +29064,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29072,7 +29072,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29080,7 +29080,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29088,7 +29088,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29096,7 +29096,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 5,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29104,7 +29104,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 24,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29112,7 +29112,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29120,7 +29120,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29128,7 +29128,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29136,7 +29136,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29144,7 +29144,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 4,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29152,7 +29152,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29160,7 +29160,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29168,7 +29168,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29176,7 +29176,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29184,7 +29184,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 10.0000m,
                 Quantity = 15,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29192,7 +29192,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29200,7 +29200,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29208,7 +29208,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 50,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29216,7 +29216,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29224,7 +29224,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29232,7 +29232,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29240,7 +29240,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29248,7 +29248,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29256,7 +29256,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29264,7 +29264,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29272,7 +29272,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 16,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29280,7 +29280,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29288,7 +29288,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29296,7 +29296,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29304,7 +29304,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29312,7 +29312,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29320,7 +29320,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29328,7 +29328,7 @@ Winchester Way",
                 ProductID = 48,
                 UnitPrice = 12.7500m,
                 Quantity = 8,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29336,7 +29336,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29344,7 +29344,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29352,7 +29352,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 30,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29360,7 +29360,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29368,7 +29368,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29376,7 +29376,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29384,7 +29384,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 60,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29392,7 +29392,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 25,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -29400,7 +29400,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29408,7 +29408,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29416,7 +29416,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29424,7 +29424,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29432,7 +29432,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29440,7 +29440,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29448,7 +29448,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29456,7 +29456,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29464,7 +29464,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29472,7 +29472,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29480,7 +29480,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29488,7 +29488,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29496,7 +29496,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29504,7 +29504,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29512,7 +29512,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29520,7 +29520,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29528,7 +29528,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29536,7 +29536,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29544,7 +29544,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29552,7 +29552,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29560,7 +29560,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29568,7 +29568,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29576,7 +29576,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29584,7 +29584,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29592,7 +29592,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29600,7 +29600,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29608,7 +29608,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29616,7 +29616,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29624,7 +29624,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29632,7 +29632,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29640,7 +29640,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29648,7 +29648,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29656,7 +29656,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29664,7 +29664,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29672,7 +29672,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29680,7 +29680,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 3,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29688,7 +29688,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29696,7 +29696,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 16,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29704,7 +29704,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29712,7 +29712,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29720,7 +29720,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 9,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29728,7 +29728,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 9,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29736,7 +29736,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 8,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29744,7 +29744,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -29752,7 +29752,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29760,7 +29760,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 2,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29768,7 +29768,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 52,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29776,7 +29776,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29784,7 +29784,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29792,7 +29792,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29800,7 +29800,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29808,7 +29808,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29816,7 +29816,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29824,7 +29824,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29832,7 +29832,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29840,7 +29840,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 4,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29848,7 +29848,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29856,7 +29856,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29864,7 +29864,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29872,7 +29872,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29880,7 +29880,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 6,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29888,7 +29888,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -29896,7 +29896,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29904,7 +29904,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29912,7 +29912,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29920,7 +29920,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29928,7 +29928,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29936,7 +29936,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29944,7 +29944,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29952,7 +29952,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29960,7 +29960,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 4,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -29968,7 +29968,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -29976,7 +29976,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 70,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29984,7 +29984,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -29992,7 +29992,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 42,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -30000,7 +30000,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 60,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -30008,7 +30008,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 48,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30016,7 +30016,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30024,7 +30024,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30032,7 +30032,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30040,7 +30040,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 80,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30048,7 +30048,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30056,7 +30056,7 @@ Winchester Way",
                 ProductID = 37,
                 UnitPrice = 26.0000m,
                 Quantity = 60,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30064,7 +30064,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 36,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30072,7 +30072,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 45,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30080,7 +30080,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 55,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30088,7 +30088,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 21.3500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30096,7 +30096,7 @@ Winchester Way",
                 ProductID = 9,
                 UnitPrice = 97.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30104,7 +30104,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 49,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30112,7 +30112,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 18,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30120,7 +30120,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30128,7 +30128,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 4,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30136,7 +30136,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30144,7 +30144,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 5,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30152,7 +30152,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30160,7 +30160,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30168,7 +30168,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 42,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30176,7 +30176,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30184,7 +30184,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30192,7 +30192,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30200,7 +30200,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30208,7 +30208,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 100,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30216,7 +30216,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 65,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30224,7 +30224,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30232,7 +30232,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30240,7 +30240,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30248,7 +30248,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30256,7 +30256,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30264,7 +30264,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30272,7 +30272,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30280,7 +30280,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30288,7 +30288,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 10,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30296,7 +30296,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30304,7 +30304,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 43.9000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30312,7 +30312,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30320,7 +30320,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30328,7 +30328,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30336,7 +30336,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30344,7 +30344,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30352,7 +30352,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30360,7 +30360,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30368,7 +30368,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30376,7 +30376,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30384,7 +30384,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30392,7 +30392,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30400,7 +30400,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30408,7 +30408,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30416,7 +30416,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30424,7 +30424,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 12,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30432,7 +30432,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30440,7 +30440,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30448,7 +30448,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30456,7 +30456,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 80,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30464,7 +30464,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30472,7 +30472,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 6,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30480,7 +30480,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30488,7 +30488,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30496,7 +30496,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30504,7 +30504,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30512,7 +30512,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 42,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -30520,7 +30520,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30528,7 +30528,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30536,7 +30536,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30544,7 +30544,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30552,7 +30552,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30560,7 +30560,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30568,7 +30568,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30576,7 +30576,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30584,7 +30584,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 16,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30592,7 +30592,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30600,7 +30600,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30608,7 +30608,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30616,7 +30616,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 21,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30624,7 +30624,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30632,7 +30632,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30640,7 +30640,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30648,7 +30648,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30656,7 +30656,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 21,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -30664,7 +30664,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30672,7 +30672,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30680,7 +30680,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30688,7 +30688,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -30696,7 +30696,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30704,7 +30704,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30712,7 +30712,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30720,7 +30720,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30728,7 +30728,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30736,7 +30736,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30744,7 +30744,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30752,7 +30752,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -30760,7 +30760,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30768,7 +30768,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30776,7 +30776,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30784,7 +30784,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 32,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -30792,7 +30792,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30800,7 +30800,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30808,7 +30808,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 21,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30816,7 +30816,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 12,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30824,7 +30824,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30832,7 +30832,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30840,7 +30840,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30848,7 +30848,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30856,7 +30856,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30864,7 +30864,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30872,7 +30872,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30880,7 +30880,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30888,7 +30888,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30896,7 +30896,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30904,7 +30904,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30912,7 +30912,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30920,7 +30920,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30928,7 +30928,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30936,7 +30936,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30944,7 +30944,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30952,7 +30952,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -30960,7 +30960,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30968,7 +30968,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30976,7 +30976,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30984,7 +30984,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -30992,7 +30992,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31000,7 +31000,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 28,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -31008,7 +31008,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -31016,7 +31016,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 120,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -31024,7 +31024,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 110,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31032,7 +31032,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31040,7 +31040,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 91,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31048,7 +31048,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 100,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31056,7 +31056,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31064,7 +31064,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31072,7 +31072,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 80,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31080,7 +31080,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31088,7 +31088,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31096,7 +31096,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 8,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31104,7 +31104,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 3,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31112,7 +31112,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31120,7 +31120,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31128,7 +31128,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31136,7 +31136,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 6,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31144,7 +31144,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31152,7 +31152,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31160,7 +31160,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31168,7 +31168,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31176,7 +31176,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31184,7 +31184,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -31192,7 +31192,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31200,7 +31200,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31208,7 +31208,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -31216,7 +31216,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 14,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -31224,7 +31224,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31232,7 +31232,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31240,7 +31240,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31248,7 +31248,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31256,7 +31256,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31264,7 +31264,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31272,7 +31272,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31280,7 +31280,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31288,7 +31288,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31296,7 +31296,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31304,7 +31304,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31312,7 +31312,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31320,7 +31320,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 40,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31328,7 +31328,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31336,7 +31336,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31344,7 +31344,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31352,7 +31352,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31360,7 +31360,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31368,7 +31368,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31376,7 +31376,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31384,7 +31384,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31392,7 +31392,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31400,7 +31400,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31408,7 +31408,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31416,7 +31416,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31424,7 +31424,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31432,7 +31432,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31440,7 +31440,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31448,7 +31448,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 16.2500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31456,7 +31456,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31464,7 +31464,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31472,7 +31472,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31480,7 +31480,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31488,7 +31488,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -31496,7 +31496,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -31504,7 +31504,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 24,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -31512,7 +31512,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -31520,7 +31520,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -31528,7 +31528,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31536,7 +31536,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 25,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31544,7 +31544,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 12,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31552,7 +31552,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31560,7 +31560,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31568,7 +31568,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31576,7 +31576,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31584,7 +31584,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31592,7 +31592,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31600,7 +31600,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31608,7 +31608,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31616,7 +31616,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31624,7 +31624,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31632,7 +31632,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 49,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31640,7 +31640,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31648,7 +31648,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 36,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31656,7 +31656,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 43.9000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31664,7 +31664,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 25,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -31672,7 +31672,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -31680,7 +31680,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 42,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31688,7 +31688,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31696,7 +31696,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -31704,7 +31704,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 14,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -31712,7 +31712,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31720,7 +31720,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -31728,7 +31728,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31736,7 +31736,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31744,7 +31744,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31752,7 +31752,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31760,7 +31760,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 4,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31768,7 +31768,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 8,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31776,7 +31776,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -31784,7 +31784,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31792,7 +31792,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31800,7 +31800,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31808,7 +31808,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 24,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31816,7 +31816,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 49,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31824,7 +31824,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31832,7 +31832,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31840,7 +31840,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -31848,7 +31848,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31856,7 +31856,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31864,7 +31864,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 44,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31872,7 +31872,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31880,7 +31880,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 80,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31888,7 +31888,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31896,7 +31896,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31904,7 +31904,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31912,7 +31912,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31920,7 +31920,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31928,7 +31928,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 5,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31936,7 +31936,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 18,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -31944,7 +31944,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31952,7 +31952,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31960,7 +31960,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31968,7 +31968,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31976,7 +31976,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31984,7 +31984,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -31992,7 +31992,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32000,7 +32000,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 16.2500m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32008,7 +32008,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32016,7 +32016,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32024,7 +32024,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32032,7 +32032,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32040,7 +32040,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32048,7 +32048,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32056,7 +32056,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32064,7 +32064,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32072,7 +32072,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 6,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32080,7 +32080,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32088,7 +32088,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 16,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32096,7 +32096,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32104,7 +32104,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32112,7 +32112,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32120,7 +32120,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 28,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32128,7 +32128,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 25,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32136,7 +32136,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32144,7 +32144,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32152,7 +32152,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -32160,7 +32160,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32168,7 +32168,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32176,7 +32176,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32184,7 +32184,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32192,7 +32192,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32200,7 +32200,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32208,7 +32208,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 21.3500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32216,7 +32216,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32224,7 +32224,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32232,7 +32232,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32240,7 +32240,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 10,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -32248,7 +32248,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32256,7 +32256,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 6,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32264,7 +32264,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32272,7 +32272,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32280,7 +32280,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 77,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32288,7 +32288,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32296,7 +32296,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32304,7 +32304,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 44,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32312,7 +32312,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 2,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32320,7 +32320,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32328,7 +32328,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32336,7 +32336,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32344,7 +32344,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32352,7 +32352,7 @@ Winchester Way",
                 ProductID = 37,
                 UnitPrice = 26.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32360,7 +32360,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 12,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32368,7 +32368,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 12,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32376,7 +32376,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32384,7 +32384,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32392,7 +32392,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32400,7 +32400,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32408,7 +32408,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32416,7 +32416,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32424,7 +32424,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -32432,7 +32432,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32440,7 +32440,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32448,7 +32448,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32456,7 +32456,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32464,7 +32464,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32472,7 +32472,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32480,7 +32480,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32488,7 +32488,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32496,7 +32496,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32504,7 +32504,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32512,7 +32512,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32520,7 +32520,7 @@ Winchester Way",
                 ProductID = 47,
                 UnitPrice = 9.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32528,7 +32528,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32536,7 +32536,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32544,7 +32544,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32552,7 +32552,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32560,7 +32560,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32568,7 +32568,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 6,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32576,7 +32576,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32584,7 +32584,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32592,7 +32592,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 80,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32600,7 +32600,7 @@ Winchester Way",
                 ProductID = 27,
                 UnitPrice = 43.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32608,7 +32608,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32616,7 +32616,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32624,7 +32624,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 40,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -32632,7 +32632,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32640,7 +32640,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32648,7 +32648,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32656,7 +32656,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 84,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32664,7 +32664,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32672,7 +32672,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 55,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32680,7 +32680,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32688,7 +32688,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32696,7 +32696,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 36,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -32704,7 +32704,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 8,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -32712,7 +32712,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 35,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -32720,7 +32720,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32728,7 +32728,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32736,7 +32736,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32744,7 +32744,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32752,7 +32752,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32760,7 +32760,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32768,7 +32768,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32776,7 +32776,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32784,7 +32784,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -32792,7 +32792,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32800,7 +32800,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32808,7 +32808,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32816,7 +32816,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 65,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32824,7 +32824,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 60,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32832,7 +32832,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 65,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32840,7 +32840,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 66,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -32848,7 +32848,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 50,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -32856,7 +32856,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 20,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -32864,7 +32864,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 90,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -32872,7 +32872,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32880,7 +32880,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 50,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -32888,7 +32888,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 35,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -32896,7 +32896,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 18,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32904,7 +32904,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32912,7 +32912,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32920,7 +32920,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32928,7 +32928,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32936,7 +32936,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -32944,7 +32944,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -32952,7 +32952,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32960,7 +32960,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32968,7 +32968,7 @@ Winchester Way",
                 ProductID = 74,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32976,7 +32976,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -32984,7 +32984,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -32992,7 +32992,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33000,7 +33000,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 21,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33008,7 +33008,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33016,7 +33016,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33024,7 +33024,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33032,7 +33032,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33040,7 +33040,7 @@ Winchester Way",
                 ProductID = 22,
                 UnitPrice = 21.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33048,7 +33048,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33056,7 +33056,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33064,7 +33064,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 56,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33072,7 +33072,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 15,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -33080,7 +33080,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -33088,7 +33088,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33096,7 +33096,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33104,7 +33104,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33112,7 +33112,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33120,7 +33120,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33128,7 +33128,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33136,7 +33136,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33144,7 +33144,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33152,7 +33152,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33160,7 +33160,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 2,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33168,7 +33168,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33176,7 +33176,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33184,7 +33184,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 14,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33192,7 +33192,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 70,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33200,7 +33200,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 90,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33208,7 +33208,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33216,7 +33216,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33224,7 +33224,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 18,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33232,7 +33232,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33240,7 +33240,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33248,7 +33248,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33256,7 +33256,7 @@ Winchester Way",
                 ProductID = 58,
                 UnitPrice = 13.2500m,
                 Quantity = 40,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33264,7 +33264,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33272,7 +33272,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 50,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33280,7 +33280,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 36,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33288,7 +33288,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 60,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33296,7 +33296,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33304,7 +33304,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33312,7 +33312,7 @@ Winchester Way",
                 ProductID = 45,
                 UnitPrice = 9.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33320,7 +33320,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33328,7 +33328,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 28,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -33336,7 +33336,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33344,7 +33344,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 18,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33352,7 +33352,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33360,7 +33360,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33368,7 +33368,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33376,7 +33376,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 110,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33384,7 +33384,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33392,7 +33392,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33400,7 +33400,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33408,7 +33408,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 5,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33416,7 +33416,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33424,7 +33424,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33432,7 +33432,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 24,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -33440,7 +33440,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 11,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33448,7 +33448,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33456,7 +33456,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 63,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33464,7 +33464,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 44,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33472,7 +33472,7 @@ Winchester Way",
                 ProductID = 72,
                 UnitPrice = 34.8000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33480,7 +33480,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33488,7 +33488,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33496,7 +33496,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33504,7 +33504,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33512,7 +33512,7 @@ Winchester Way",
                 ProductID = 26,
                 UnitPrice = 31.2300m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33520,7 +33520,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33528,7 +33528,7 @@ Winchester Way",
                 ProductID = 65,
                 UnitPrice = 21.0500m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33536,7 +33536,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33544,7 +33544,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -33552,7 +33552,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 20,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -33560,7 +33560,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33568,7 +33568,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33576,7 +33576,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33584,7 +33584,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 21,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33592,7 +33592,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33600,7 +33600,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33608,7 +33608,7 @@ Winchester Way",
                 ProductID = 56,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33616,7 +33616,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33624,7 +33624,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 100,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33632,7 +33632,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 21.3500m,
                 Quantity = 70,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33640,7 +33640,7 @@ Winchester Way",
                 ProductID = 29,
                 UnitPrice = 123.7900m,
                 Quantity = 60,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33648,7 +33648,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 100,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33656,7 +33656,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 45,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33664,7 +33664,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 80,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33672,7 +33672,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33680,7 +33680,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33688,7 +33688,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 16,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33696,7 +33696,7 @@ Winchester Way",
                 ProductID = 36,
                 UnitPrice = 19.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33704,7 +33704,7 @@ Winchester Way",
                 ProductID = 38,
                 UnitPrice = 263.5000m,
                 Quantity = 25,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33712,7 +33712,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33720,7 +33720,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 70,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -33728,7 +33728,7 @@ Winchester Way",
                 ProductID = 69,
                 UnitPrice = 36.0000m,
                 Quantity = 36,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -33736,7 +33736,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 15,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -33744,7 +33744,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33752,7 +33752,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 6,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33760,7 +33760,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33768,7 +33768,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33776,7 +33776,7 @@ Winchester Way",
                 ProductID = 42,
                 UnitPrice = 14.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33784,7 +33784,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33792,7 +33792,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 7,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33800,7 +33800,7 @@ Winchester Way",
                 ProductID = 59,
                 UnitPrice = 55.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33808,7 +33808,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33816,7 +33816,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 5,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -33824,7 +33824,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33832,7 +33832,7 @@ Winchester Way",
                 ProductID = 71,
                 UnitPrice = 21.5000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33840,7 +33840,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33848,7 +33848,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33856,7 +33856,7 @@ Winchester Way",
                 ProductID = 49,
                 UnitPrice = 20.0000m,
                 Quantity = 60,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33864,7 +33864,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 28,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33872,7 +33872,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33880,7 +33880,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -33888,7 +33888,7 @@ Winchester Way",
                 ProductID = 63,
                 UnitPrice = 43.9000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33896,7 +33896,7 @@ Winchester Way",
                 ProductID = 44,
                 UnitPrice = 19.4500m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33904,7 +33904,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33912,7 +33912,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33920,7 +33920,7 @@ Winchester Way",
                 ProductID = 62,
                 UnitPrice = 49.3000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33928,7 +33928,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33936,7 +33936,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 24,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33944,7 +33944,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 20,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33952,7 +33952,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33960,7 +33960,7 @@ Winchester Way",
                 ProductID = 35,
                 UnitPrice = 18.0000m,
                 Quantity = 18,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -33968,7 +33968,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 25,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33976,7 +33976,7 @@ Winchester Way",
                 ProductID = 5,
                 UnitPrice = 21.3500m,
                 Quantity = 30,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -33984,7 +33984,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -33992,7 +33992,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34000,7 +34000,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 4,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34008,7 +34008,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 50,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34016,7 +34016,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34024,7 +34024,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 30,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34032,7 +34032,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34040,7 +34040,7 @@ Winchester Way",
                 ProductID = 18,
                 UnitPrice = 62.5000m,
                 Quantity = 35,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34048,7 +34048,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34056,7 +34056,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 25,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34064,7 +34064,7 @@ Winchester Way",
                 ProductID = 33,
                 UnitPrice = 2.5000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34072,7 +34072,7 @@ Winchester Way",
                 ProductID = 67,
                 UnitPrice = 14.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34080,7 +34080,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34088,7 +34088,7 @@ Winchester Way",
                 ProductID = 25,
                 UnitPrice = 14.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34096,7 +34096,7 @@ Winchester Way",
                 ProductID = 51,
                 UnitPrice = 53.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34104,7 +34104,7 @@ Winchester Way",
                 ProductID = 57,
                 UnitPrice = 19.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34112,7 +34112,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34120,7 +34120,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34128,7 +34128,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 50,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34136,7 +34136,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34144,7 +34144,7 @@ Winchester Way",
                 ProductID = 21,
                 UnitPrice = 10.0000m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34152,7 +34152,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 21,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34160,7 +34160,7 @@ Winchester Way",
                 ProductID = 61,
                 UnitPrice = 28.5000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34168,7 +34168,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34176,7 +34176,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34184,7 +34184,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34192,7 +34192,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34200,7 +34200,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34208,7 +34208,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 15,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34216,7 +34216,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 10,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34224,7 +34224,7 @@ Winchester Way",
                 ProductID = 70,
                 UnitPrice = 15.0000m,
                 Quantity = 12,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34232,7 +34232,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 30,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34240,7 +34240,7 @@ Winchester Way",
                 ProductID = 40,
                 UnitPrice = 18.4000m,
                 Quantity = 40,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34248,7 +34248,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 30,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34256,7 +34256,7 @@ Winchester Way",
                 ProductID = 17,
                 UnitPrice = 39.0000m,
                 Quantity = 77,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34264,7 +34264,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 12,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34272,7 +34272,7 @@ Winchester Way",
                 ProductID = 53,
                 UnitPrice = 32.8000m,
                 Quantity = 25,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34280,7 +34280,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 4,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34288,7 +34288,7 @@ Winchester Way",
                 ProductID = 68,
                 UnitPrice = 12.5000m,
                 Quantity = 55,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34296,7 +34296,7 @@ Winchester Way",
                 ProductID = 30,
                 UnitPrice = 25.8900m,
                 Quantity = 4,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -34304,7 +34304,7 @@ Winchester Way",
                 ProductID = 54,
                 UnitPrice = 7.4500m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -34312,7 +34312,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34320,7 +34320,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 42,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34328,7 +34328,7 @@ Winchester Way",
                 ProductID = 34,
                 UnitPrice = 14.0000m,
                 Quantity = 35,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34336,7 +34336,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 9,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34344,7 +34344,7 @@ Winchester Way",
                 ProductID = 28,
                 UnitPrice = 45.6000m,
                 Quantity = 8,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34352,7 +34352,7 @@ Winchester Way",
                 ProductID = 43,
                 UnitPrice = 46.0000m,
                 Quantity = 36,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34360,7 +34360,7 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 28,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34368,7 +34368,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34376,7 +34376,7 @@ Winchester Way",
                 ProductID = 1,
                 UnitPrice = 18.0000m,
                 Quantity = 40,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34384,7 +34384,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 20,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34392,7 +34392,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34400,7 +34400,7 @@ Winchester Way",
                 ProductID = 31,
                 UnitPrice = 12.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34408,7 +34408,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 15,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -34416,7 +34416,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 10,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -34424,7 +34424,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 8,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34432,7 +34432,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 40,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34440,7 +34440,7 @@ Winchester Way",
                 ProductID = 50,
                 UnitPrice = 16.2500m,
                 Quantity = 22,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34448,7 +34448,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 130,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34456,7 +34456,7 @@ Winchester Way",
                 ProductID = 11,
                 UnitPrice = 21.0000m,
                 Quantity = 10,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34464,7 +34464,7 @@ Winchester Way",
                 ProductID = 24,
                 UnitPrice = 4.5000m,
                 Quantity = 20,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34472,7 +34472,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 14,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -34480,7 +34480,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 10,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34488,7 +34488,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 30,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34496,7 +34496,7 @@ Winchester Way",
                 ProductID = 76,
                 UnitPrice = 18.0000m,
                 Quantity = 2,
-                Discount = 0.15f
+                Discount = 0.15f,
             },
             new OrderDetail
             {
@@ -34504,7 +34504,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -34512,7 +34512,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 20,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -34520,7 +34520,7 @@ Winchester Way",
                 ProductID = 19,
                 UnitPrice = 9.2000m,
                 Quantity = 10,
-                Discount = 0.25f
+                Discount = 0.25f,
             },
             new OrderDetail
             {
@@ -34528,7 +34528,7 @@ Winchester Way",
                 ProductID = 2,
                 UnitPrice = 19.0000m,
                 Quantity = 24,
-                Discount = 0.2f
+                Discount = 0.2f,
             },
             new OrderDetail
             {
@@ -34536,7 +34536,7 @@ Winchester Way",
                 ProductID = 3,
                 UnitPrice = 10.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34544,7 +34544,7 @@ Winchester Way",
                 ProductID = 4,
                 UnitPrice = 22.0000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34552,7 +34552,7 @@ Winchester Way",
                 ProductID = 6,
                 UnitPrice = 25.0000m,
                 Quantity = 1,
-                Discount = 0.02f
+                Discount = 0.02f,
             },
             new OrderDetail
             {
@@ -34560,7 +34560,7 @@ Winchester Way",
                 ProductID = 7,
                 UnitPrice = 30.0000m,
                 Quantity = 1,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -34568,7 +34568,7 @@ Winchester Way",
                 ProductID = 8,
                 UnitPrice = 40.0000m,
                 Quantity = 2,
-                Discount = 0.1f
+                Discount = 0.1f,
             },
             new OrderDetail
             {
@@ -34576,7 +34576,7 @@ Winchester Way",
                 ProductID = 10,
                 UnitPrice = 31.0000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34584,7 +34584,7 @@ Winchester Way",
                 ProductID = 12,
                 UnitPrice = 38.0000m,
                 Quantity = 2,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -34592,7 +34592,7 @@ Winchester Way",
                 ProductID = 13,
                 UnitPrice = 6.0000m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34600,7 +34600,7 @@ Winchester Way",
                 ProductID = 14,
                 UnitPrice = 23.2500m,
                 Quantity = 1,
-                Discount = 0.03f
+                Discount = 0.03f,
             },
             new OrderDetail
             {
@@ -34608,7 +34608,7 @@ Winchester Way",
                 ProductID = 16,
                 UnitPrice = 17.4500m,
                 Quantity = 2,
-                Discount = 0.03f
+                Discount = 0.03f,
             },
             new OrderDetail
             {
@@ -34616,7 +34616,7 @@ Winchester Way",
                 ProductID = 20,
                 UnitPrice = 81.0000m,
                 Quantity = 1,
-                Discount = 0.04f
+                Discount = 0.04f,
             },
             new OrderDetail
             {
@@ -34624,7 +34624,7 @@ Winchester Way",
                 ProductID = 23,
                 UnitPrice = 9.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34632,7 +34632,7 @@ Winchester Way",
                 ProductID = 32,
                 UnitPrice = 32.0000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34640,7 +34640,7 @@ Winchester Way",
                 ProductID = 39,
                 UnitPrice = 18.0000m,
                 Quantity = 2,
-                Discount = 0.05f
+                Discount = 0.05f,
             },
             new OrderDetail
             {
@@ -34648,7 +34648,7 @@ Winchester Way",
                 ProductID = 41,
                 UnitPrice = 9.6500m,
                 Quantity = 3,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34656,7 +34656,7 @@ Winchester Way",
                 ProductID = 46,
                 UnitPrice = 12.0000m,
                 Quantity = 3,
-                Discount = 0.02f
+                Discount = 0.02f,
             },
             new OrderDetail
             {
@@ -34664,7 +34664,7 @@ Winchester Way",
                 ProductID = 52,
                 UnitPrice = 7.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34672,7 +34672,7 @@ Winchester Way",
                 ProductID = 55,
                 UnitPrice = 24.0000m,
                 Quantity = 2,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34680,7 +34680,7 @@ Winchester Way",
                 ProductID = 60,
                 UnitPrice = 34.0000m,
                 Quantity = 2,
-                Discount = 0.06f
+                Discount = 0.06f,
             },
             new OrderDetail
             {
@@ -34688,7 +34688,7 @@ Winchester Way",
                 ProductID = 64,
                 UnitPrice = 33.2500m,
                 Quantity = 2,
-                Discount = 0.03f
+                Discount = 0.03f,
             },
             new OrderDetail
             {
@@ -34696,7 +34696,7 @@ Winchester Way",
                 ProductID = 66,
                 UnitPrice = 17.0000m,
                 Quantity = 1,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34704,7 +34704,7 @@ Winchester Way",
                 ProductID = 73,
                 UnitPrice = 15.0000m,
                 Quantity = 2,
-                Discount = 0.01f
+                Discount = 0.01f,
             },
             new OrderDetail
             {
@@ -34712,7 +34712,7 @@ Winchester Way",
                 ProductID = 75,
                 UnitPrice = 7.7500m,
                 Quantity = 4,
-                Discount = 0f
+                Discount = 0f,
             },
             new OrderDetail
             {
@@ -34720,8 +34720,8 @@ Winchester Way",
                 ProductID = 77,
                 UnitPrice = 13.0000m,
                 Quantity = 2,
-                Discount = 0f
-            }
+                Discount = 0f,
+            },
         };
 
     #endregion

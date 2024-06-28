@@ -34,6 +34,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// <summary>
         /// An internal error was found while applying code updates. This will generally be propagated through an exception.
         /// </summary>
-        ApplyUpdateFailure = 4
+        ApplyUpdateFailure = 4,
     }
 }

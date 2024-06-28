@@ -25,7 +25,9 @@ namespace System.CommandLine.Tests.Invocation
         public enum Signals
         {
             SIGINT = 2, // Console.CancelKeyPress
-            SIGTERM = 15 // AppDomain.CurrentDomain.ProcessExit
+            SIGTERM =
+                15 // AppDomain.CurrentDomain.ProcessExit
+            ,
         }
 
         [Fact]
@@ -63,7 +65,7 @@ namespace System.CommandLine.Tests.Invocation
 
             return new CliConfiguration(command)
             {
-                ProcessTerminationTimeout = TimeSpan.FromSeconds(2)
+                ProcessTerminationTimeout = TimeSpan.FromSeconds(2),
             }.InvokeAsync(args);
         }
 

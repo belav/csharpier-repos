@@ -2572,7 +2572,7 @@ namespace MonoTests.System.Xml.Linq
                     0xB9,
                     0x19,
                     0xEA,
-                    0x57
+                    0x57,
                 }
             );
             Guid rd = new Guid(
@@ -2593,7 +2593,7 @@ namespace MonoTests.System.Xml.Linq
                     0x24,
                     0x7B,
                     0x2E,
-                    0xC9
+                    0xC9,
                 }
             );
             Guid rn = new Guid(
@@ -2614,7 +2614,7 @@ namespace MonoTests.System.Xml.Linq
                     0x79,
                     0x57,
                     0x2B,
-                    0x79
+                    0x79,
                 }
             );
             Guid rp = new Guid(
@@ -2635,7 +2635,7 @@ namespace MonoTests.System.Xml.Linq
                     0x99,
                     0xF9,
                     0xC1,
-                    0xE6
+                    0xE6,
                 }
             );
             Guid rz = Guid.Empty;

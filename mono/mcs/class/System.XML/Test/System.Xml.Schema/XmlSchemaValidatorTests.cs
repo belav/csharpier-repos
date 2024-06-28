@@ -505,7 +505,7 @@ namespace MonoTests.System.Xml
             schemaSet.Add(schema);
             var xmlReaderSettings = new XmlReaderSettings
             {
-                ValidationType = ValidationType.Schema
+                ValidationType = ValidationType.Schema,
             };
             xmlReaderSettings.ValidationFlags |= XmlSchemaValidationFlags.ReportValidationWarnings;
             xmlReaderSettings.Schemas.Add(schemaSet);

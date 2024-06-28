@@ -65,14 +65,14 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new TypeConverterAttribute("otherTypeName"),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new TypeConverterAttribute("typeName"),
                 new object(),
-                false
+                false,
             };
             yield return new object[] { new TypeConverterAttribute("typeName"), null, false };
         }

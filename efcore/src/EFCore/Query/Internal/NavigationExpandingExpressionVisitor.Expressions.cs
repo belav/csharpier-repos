@@ -36,7 +36,7 @@ public partial class NavigationExpandingExpressionVisitor
         {
             var result = new EntityReference(EntityType, EntityQueryRootExpression)
             {
-                IsOptional = IsOptional
+                IsOptional = IsOptional,
             };
             result.IncludePaths = IncludePaths.Snapshot(result);
 
@@ -168,7 +168,7 @@ public partial class NavigationExpandingExpressionVisitor
         {
             var result = new IncludeTreeNode(EntityType, entityReference, SetLoaded)
             {
-                FilterExpression = FilterExpression
+                FilterExpression = FilterExpression,
             };
 
             foreach (var (navigationBase, includeTreeNode) in this)

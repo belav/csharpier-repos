@@ -74,9 +74,9 @@ namespace System.Web.Mvc.Test
                     "string value",
                     new DateTime(2001, 1, 1),
                     new object(),
-                    32m
+                    32m,
                 },
-                ThrowOnKeyNotFound = false
+                ThrowOnKeyNotFound = false,
             };
 
             // Act & assert
@@ -275,7 +275,7 @@ namespace System.Web.Mvc.Test
                     {
                         "Bar",
                         new Hashtable { { "Baz", "Quux" } }
-                    }
+                    },
                 }
             );
 
@@ -459,7 +459,7 @@ namespace System.Web.Mvc.Test
             );
             ViewDataDictionary vdd = new ViewDataDictionary(model)
             {
-                ModelMetadata = originalMetadata
+                ModelMetadata = originalMetadata,
             };
 
             // Act

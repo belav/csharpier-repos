@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a event detach statement.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeRemoveEventStatement : CodeStatement
     {
         private CodeEventReferenceExpression eventRef;

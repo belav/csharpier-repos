@@ -181,7 +181,7 @@ namespace System.Collections.Generic.Tests
                 { 3, 4, false },
                 { 0, 255, false },
                 { 0, 128, false },
-                { 255, 255, true }
+                { 255, 255, true },
             };
         }
 
@@ -192,7 +192,7 @@ namespace System.Collections.Generic.Tests
                 { 3, 3, true },
                 { 3, 5, false },
                 { int.MinValue + 1, 1, false },
-                { int.MinValue, int.MinValue, true }
+                { int.MinValue, int.MinValue, true },
             };
         }
 
@@ -203,7 +203,7 @@ namespace System.Collections.Generic.Tests
                 { "foo", "foo", true },
                 { string.Empty, null, false },
                 { "bar", new string("bar".ToCharArray()), true },
-                { "foo", "bar", false }
+                { "foo", "bar", false },
             };
         }
 
@@ -216,7 +216,7 @@ namespace System.Collections.Generic.Tests
                 { one, one, true },
                 { one, new Equatable(1), true },
                 { new Equatable(int.MinValue + 1), new Equatable(1), false },
-                { new Equatable(-1), new Equatable(int.MaxValue), false }
+                { new Equatable(-1), new Equatable(int.MaxValue), false },
             };
         }
 
@@ -228,7 +228,7 @@ namespace System.Collections.Generic.Tests
                 { Int16Enum.Two, Int16Enum.Two, true },
                 { Int16Enum.Min, Int16Enum.Max, false },
                 { Int16Enum.Min, Int16Enum.Min, true },
-                { Int16Enum.One, Int16Enum.Min + 1, false }
+                { Int16Enum.One, Int16Enum.Min + 1, false },
             };
         }
 
@@ -240,7 +240,7 @@ namespace System.Collections.Generic.Tests
                 { SByteEnum.Two, SByteEnum.Two, true },
                 { SByteEnum.Min, SByteEnum.Max, false },
                 { SByteEnum.Min, SByteEnum.Min, true },
-                { SByteEnum.One, SByteEnum.Min + 1, false }
+                { SByteEnum.One, SByteEnum.Min + 1, false },
             };
         }
 
@@ -252,7 +252,7 @@ namespace System.Collections.Generic.Tests
                 { Int32Enum.Two, Int32Enum.Two, true },
                 { Int32Enum.Min, Int32Enum.Max, false },
                 { Int32Enum.Min, Int32Enum.Min, true },
-                { Int32Enum.One, Int32Enum.Min + 1, false }
+                { Int32Enum.One, Int32Enum.Min + 1, false },
             };
         }
 
@@ -268,7 +268,7 @@ namespace System.Collections.Generic.Tests
                 { (Int32Enum)(-2), null, false },
                 { Int32Enum.Two, null, false },
                 { null, Int32Enum.Max, false },
-                { null, Int32Enum.Min + 1, false }
+                { null, Int32Enum.Min + 1, false },
             };
         }
 
@@ -280,7 +280,7 @@ namespace System.Collections.Generic.Tests
                 { Int64Enum.Two, Int64Enum.Two, true },
                 { Int64Enum.Min, Int64Enum.Max, false },
                 { Int64Enum.Min, Int64Enum.Min, true },
-                { Int64Enum.One, Int64Enum.Min + 1, false }
+                { Int64Enum.One, Int64Enum.Min + 1, false },
             };
         }
 
@@ -296,7 +296,7 @@ namespace System.Collections.Generic.Tests
                 { new NonEquatableValueType(), new NonEquatableValueType(), true },
                 { one, one, true },
                 { new NonEquatableValueType(-1), new NonEquatableValueType(), false },
-                { new NonEquatableValueType(2), new NonEquatableValueType(2), true }
+                { new NonEquatableValueType(2), new NonEquatableValueType(2), true },
             };
         }
 
@@ -314,7 +314,7 @@ namespace System.Collections.Generic.Tests
                 { new NonEquatableValueType(-1), new NonEquatableValueType(), false },
                 { new NonEquatableValueType(2), new NonEquatableValueType(2), true },
                 { new NonEquatableValueType(-1), null, false },
-                { null, new NonEquatableValueType(2), false }
+                { null, new NonEquatableValueType(2), false },
             };
         }
 
@@ -326,7 +326,7 @@ namespace System.Collections.Generic.Tests
             {
                 { obj, obj, true },
                 { obj, new object(), false },
-                { obj, null, false }
+                { obj, null, false },
             };
         }
 
@@ -428,7 +428,7 @@ namespace System.Collections.Generic.Tests
                 {
                     state1++;
                     return false;
-                }
+                },
             };
             var right = new DelegateEquatable
             {
@@ -436,7 +436,7 @@ namespace System.Collections.Generic.Tests
                 {
                     state2++;
                     return true;
-                }
+                },
             };
 
             Assert.False(comparer.Equals(left, right));
@@ -464,7 +464,7 @@ namespace System.Collections.Generic.Tests
                 {
                     state1++;
                     return false;
-                }
+                },
             };
             var right = new ValueDelegateEquatable
             {
@@ -472,7 +472,7 @@ namespace System.Collections.Generic.Tests
                 {
                     state2++;
                     return true;
-                }
+                },
             };
 
             Assert.False(comparer.Equals(left, right));

@@ -130,23 +130,23 @@ namespace Microsoft.CodeAnalysis.IntroduceVariable
                 {
                     {
                         FeaturesResources.Introduce_field_for_0,
-                        FeaturesResources.Introduce_local_for_0
+                        FeaturesResources.Introduce_local_for_0,
                     },
                     {
                         FeaturesResources.Introduce_constant_for_0,
-                        FeaturesResources.Introduce_local_constant_for_0
-                    }
+                        FeaturesResources.Introduce_local_constant_for_0,
+                    },
                 },
                 {
                     {
                         FeaturesResources.Introduce_field_for_all_occurrences_of_0,
-                        FeaturesResources.Introduce_local_for_all_occurrences_of_0
+                        FeaturesResources.Introduce_local_for_all_occurrences_of_0,
                     },
                     {
                         FeaturesResources.Introduce_constant_for_all_occurrences_of_0,
-                        FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0
-                    }
-                }
+                        FeaturesResources.Introduce_local_constant_for_all_occurrences_of_0,
+                    },
+                },
             };
 
             private string CreateDisplayText(string nodeString)

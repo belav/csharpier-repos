@@ -3042,7 +3042,7 @@ class C
                 //     void Goo(System.Collections.Generic.IEnumerable<C>? e)
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7_3, "?")
                     .WithArguments("nullable reference types", "8.0")
-                    .WithLocation(28, 55)
+                    .WithLocation(28, 55),
             };
             var comp = CreateEmptyCompilation(
                 text,

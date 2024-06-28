@@ -6,7 +6,7 @@ namespace System.ServiceModel
     public enum NetNamedPipeSecurityMode
     {
         None,
-        Transport
+        Transport,
     }
 
     static class NetNamedPipeSecurityModeHelper

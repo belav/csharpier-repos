@@ -1163,7 +1163,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 "42318",
                 "42319",
                 "42320",
-                "42321"
+                "42321",
             };
 
             public WhidbeyVBCompilerOptionsBuilder()
@@ -1305,7 +1305,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 "42324",
                 "42326",
                 "42327",
-                "42328"
+                "42328",
             };
 
             public OrcasVBCompilerOptionsBuilder()
@@ -1484,7 +1484,7 @@ namespace System.Workflow.ComponentModel.Compiler
                 {
                     Xml.XmlTextReader reader = new Xml.XmlTextReader(binaryStream)
                     {
-                        DtdProcessing = DtdProcessing.Prohibit
+                        DtdProcessing = DtdProcessing.Prohibit,
                     };
                     if (reader.MoveToContent() == System.Xml.XmlNodeType.Element)
                     {

@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         InsetDouble = 4,
         Outset = 5,
         OutsetDouble = 6,
-        OutsetPartial = 7
+        OutsetPartial = 7,
     }
 }

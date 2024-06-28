@@ -14,7 +14,7 @@ namespace System.Workflow.ComponentModel
         Optional = 4,
         Metadata = 8,
         NonSerialized = 16,
-        DelegateProperty = 32
+        DelegateProperty = 32,
     }
 
     //overrides so you dont need to do inheritence

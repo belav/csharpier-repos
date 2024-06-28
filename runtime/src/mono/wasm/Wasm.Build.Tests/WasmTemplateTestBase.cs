@@ -121,7 +121,7 @@ public abstract class WasmTemplateTestBase : BuildTestBase
         if (buildProjectOptions.ExtraBuildEnvironmentVariables is null)
             buildProjectOptions = buildProjectOptions with
             {
-                ExtraBuildEnvironmentVariables = new Dictionary<string, string>()
+                ExtraBuildEnvironmentVariables = new Dictionary<string, string>(),
             };
         buildProjectOptions.ExtraBuildEnvironmentVariables["ForceNet8Current"] = "false";
 

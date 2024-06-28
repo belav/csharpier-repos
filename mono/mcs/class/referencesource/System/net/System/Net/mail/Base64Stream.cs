@@ -341,7 +341,7 @@ namespace System.Net
             57,
             43,
             47,
-            61
+            61,
         };
 
         int lineLength;

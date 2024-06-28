@@ -186,7 +186,7 @@ namespace System.Collections.Immutable.Tests
                     {
                         { "a", 1 },
                         { "b", 2 },
-                        { "c", 3 }
+                        { "c", 3 },
                     }
                 )
                 .ToBuilder();

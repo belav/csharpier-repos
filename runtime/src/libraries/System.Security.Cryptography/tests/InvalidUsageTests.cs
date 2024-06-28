@@ -70,7 +70,7 @@ namespace System.Security.Cryptography.Tests
             internal enum ErrorCondition
             {
                 NegativeValueFromRead,
-                TooLargeValueFromRead
+                TooLargeValueFromRead,
             }
 
             private readonly ErrorCondition _condition;

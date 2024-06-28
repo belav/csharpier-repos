@@ -28,7 +28,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(v2)
                     {
-                        Attribute = new Variation("XmlException(message, innerException) ")
+                        Attribute = new Variation("XmlException(message, innerException) "),
                     }
                 );
             }
@@ -40,7 +40,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlException(message, innerException, line, position)"
-                        )
+                        ),
                     }
                 );
             }
@@ -50,7 +50,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadingElementWithDuplicateAttributesThrowsException)
                     {
-                        Attribute = new Variation("Read an element with duplicate attributes")
+                        Attribute = new Variation("Read an element with duplicate attributes"),
                     }
                 );
             }
@@ -60,7 +60,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadingForbiddenXmlNamespaceAliasThrows)
                     {
-                        Attribute = new Variation("Read an element with xmlns:xml namespace")
+                        Attribute = new Variation("Read an element with xmlns:xml namespace"),
                     }
                 );
             }
@@ -70,7 +70,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadingXmlElementWithNameStartingWithNumberThrows)
                     {
-                        Attribute = new Variation("Read an XML element whose name starts with 1")
+                        Attribute = new Variation("Read an XML element whose name starts with 1"),
                     }
                 );
             }
@@ -84,7 +84,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlReader: scanner error on invalid character for an encoding give pointer to scanner buffer, not file position"
-                        )
+                        ),
                     }
                 );
             }
@@ -96,7 +96,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "XmlDocument.Load: XmlException contains ambiguous error when finding unexpected token"
-                        )
+                        ),
                     }
                 );
             }
@@ -106,7 +106,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(SourceUri1)
                     {
-                        Attribute = new Variation("Check to see if SourceUri1 is set correctly")
+                        Attribute = new Variation("Check to see if SourceUri1 is set correctly"),
                     }
                 );
             }

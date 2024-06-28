@@ -50,7 +50,7 @@ public class HttpMethodPolicyJumpTableBenchmark
             KeyValuePair.Create(HttpMethods.Patch, 6),
             KeyValuePair.Create(HttpMethods.Put, 7),
             KeyValuePair.Create(HttpMethods.Post, 8),
-            KeyValuePair.Create(HttpMethods.Trace, 9)
+            KeyValuePair.Create(HttpMethods.Trace, 9),
         };
 
         foreach (var item in extra)

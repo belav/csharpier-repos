@@ -37,6 +37,6 @@ namespace System.Xaml
         StartMember,
         EndMember,
         Value,
-        NamespaceDeclaration
+        NamespaceDeclaration,
     }
 }

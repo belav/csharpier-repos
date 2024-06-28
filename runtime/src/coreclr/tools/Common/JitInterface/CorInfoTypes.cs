@@ -66,7 +66,7 @@ namespace Internal.JitInterface
     public enum HRESULT
     {
         S_OK = 0,
-        E_NOTIMPL = -2147467263
+        E_NOTIMPL = -2147467263,
     }
 
     public unsafe struct CORINFO_SIG_INFO
@@ -434,7 +434,7 @@ namespace Internal.JitInterface
         // New calling conventions supported with the extensible calling convention encoding go here.
         CMemberFunction,
         StdcallMemberFunction,
-        FastcallMemberFunction
+        FastcallMemberFunction,
     }
 
     public enum CORINFO_CALLINFO_FLAGS
@@ -456,7 +456,7 @@ namespace Internal.JitInterface
     {
         CORINFO_CONTEXTFLAGS_METHOD = 0x00, // CORINFO_CONTEXT_HANDLE is really a CORINFO_METHOD_HANDLE
         CORINFO_CONTEXTFLAGS_CLASS = 0x01, // CORINFO_CONTEXT_HANDLE is really a CORINFO_CLASS_HANDLE
-        CORINFO_CONTEXTFLAGS_MASK = 0x01
+        CORINFO_CONTEXTFLAGS_MASK = 0x01,
     };
 
     public enum CorInfoSigInfoFlags : byte
@@ -493,7 +493,7 @@ namespace Internal.JitInterface
         SET = 1,
         ADDRESS = 2,
 
-        ILLEGAL
+        ILLEGAL,
     }
 
     // Can a value be accessed directly from JITed code.
@@ -503,6 +503,7 @@ namespace Internal.JitInterface
         IAT_PVALUE, // The value needs to be accessed via an       indirection
         IAT_PPVALUE, // The value needs to be accessed via a double indirection
         IAT_RELPVALUE // The value needs to be accessed via a relative indirection
+        ,
     }
 
     public enum CorInfoGCType
@@ -511,6 +512,7 @@ namespace Internal.JitInterface
         TYPE_GC_REF, // Is an object ref
         TYPE_GC_BYREF, // Is an interior pointer - promote it but don't scan it
         TYPE_GC_OTHER // requires type-specific treatment
+        ,
     }
 
     public enum CorInfoClassId
@@ -761,7 +763,7 @@ namespace Internal.JitInterface
         CORINFO_HANDLETYPE_UNKNOWN,
         CORINFO_HANDLETYPE_CLASS,
         CORINFO_HANDLETYPE_METHOD,
-        CORINFO_HANDLETYPE_FIELD
+        CORINFO_HANDLETYPE_FIELD,
     }
 
     // Enum used for HFA type recognition.
@@ -802,6 +804,7 @@ namespace Internal.JitInterface
         CORJIT_FUNC_ROOT, // The main/root function (always id==0)
         CORJIT_FUNC_HANDLER, // a funclet associated with an EH handler (finally, fault, catch, filter handler)
         CORJIT_FUNC_FILTER // a funclet associated with an EH filter
+        ,
     }
 
     public unsafe struct CORINFO_METHOD_INFO
@@ -952,7 +955,7 @@ namespace Internal.JitInterface
     {
         CORINFO_NO_THIS_TRANSFORM,
         CORINFO_BOX_THIS,
-        CORINFO_DEREF_THIS
+        CORINFO_DEREF_THIS,
     };
 
     //----------------------------------------------------------------------------
@@ -1042,7 +1045,7 @@ namespace Internal.JitInterface
         CORINFO_CALL_CODE_POINTER,
         CORINFO_VIRTUALCALL_STUB,
         CORINFO_VIRTUALCALL_LDVIRTFTN,
-        CORINFO_VIRTUALCALL_VTABLE
+        CORINFO_VIRTUALCALL_VTABLE,
     };
 
     public enum CORINFO_VIRTUALCALL_NO_CHUNK : uint
@@ -1337,7 +1340,9 @@ namespace Internal.JitInterface
     {
         NO_MAPPING = -1, // -- The IL offset corresponds to no source code (such as EH step blocks).
         PROLOG = -2, // -- The IL offset indicates a prolog
-        EPILOG = -3 // -- The IL offset indicates an epilog
+        EPILOG =
+            -3 // -- The IL offset indicates an epilog
+        ,
     }
 
     public enum BoundaryTypes
@@ -1348,7 +1353,7 @@ namespace Internal.JitInterface
         CALL_SITE_BOUNDARIES = 0x04, // Before every CEE_CALL, CEE_CALLVIRT, etc instruction
 
         // Set of boundaries that debugger should always reasonably ask the JIT for.
-        DEFAULT_BOUNDARIES = STACK_EMPTY_BOUNDARIES | NOP_BOUNDARIES | CALL_SITE_BOUNDARIES
+        DEFAULT_BOUNDARIES = STACK_EMPTY_BOUNDARIES | NOP_BOUNDARIES | CALL_SITE_BOUNDARIES,
     }
 
     // Note that SourceTypes can be OR'd together - it's possible that
@@ -1363,7 +1368,9 @@ namespace Internal.JitInterface
         STACK_EMPTY = 0x02, // The stack is empty here
         CALL_SITE = 0x04, // This is a call site.
         NATIVE_END_OFFSET_UNKNOWN = 0x08, // Indicates a epilog endpoint
-        CALL_INSTRUCTION = 0x10 // The actual instruction of a call.
+        CALL_INSTRUCTION =
+            0x10 // The actual instruction of a call.
+        ,
     };
 
     public struct OffsetMapping
@@ -1385,7 +1392,9 @@ namespace Internal.JitInterface
 
         UNKNOWN_ILNUM = -4, // Unknown variable
 
-        MAX_ILNUM = -4 // Sentinel value. This should be set to the largest magnitude value in the enum
+        MAX_ILNUM =
+            -4 // Sentinel value. This should be set to the largest magnitude value in the enum
+        ,
         // so that the compression routines know the enum's range.
     };
 

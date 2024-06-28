@@ -96,7 +96,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -328,7 +328,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -373,7 +373,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -550,7 +550,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -575,7 +575,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -600,7 +600,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -635,7 +635,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -670,7 +670,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -706,7 +706,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
 
             // Serialize
@@ -1575,13 +1575,13 @@ namespace System.Text.Json.Serialization.Tests
             var instance = new ClassWithUnsupportedDictionary()
             {
                 MyConcurrentDict = concurrentDictionary,
-                MyIDict = dictionary
+                MyIDict = dictionary,
             };
 
             var instanceWithIgnore = new ClassWithIgnoredUnsupportedDictionary
             {
                 MyConcurrentDict = concurrentDictionary,
-                MyIDict = dictionary
+                MyIDict = dictionary,
             };
 
             await Assert.ThrowsAsync<NotSupportedException>(
@@ -2161,12 +2161,12 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[]
             {
                 typeof(ClassWithClassProperty_IgnoreConditionWhenWritingDefault),
-                new JsonSerializerOptions()
+                new JsonSerializerOptions(),
             };
             yield return new object[]
             {
                 typeof(ClassWithClassProperty_IgnoreConditionWhenWritingDefault_Ctor),
-                new JsonSerializerOptions { IgnoreNullValues = true }
+                new JsonSerializerOptions { IgnoreNullValues = true },
             };
         }
 
@@ -2232,12 +2232,12 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[]
             {
                 typeof(ClassWithStructProperty_IgnoreConditionWhenWritingDefault),
-                new JsonSerializerOptions()
+                new JsonSerializerOptions(),
             };
             yield return new object[]
             {
                 typeof(StructWithStructProperty_IgnoreConditionWhenWritingDefault_Ctor),
-                new JsonSerializerOptions { IgnoreNullValues = true }
+                new JsonSerializerOptions { IgnoreNullValues = true },
             };
         }
 
@@ -2349,7 +2349,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 IgnoreNullValues = true,
-                PropertyNameCaseInsensitive = true
+                PropertyNameCaseInsensitive = true,
             };
             var obj =
                 await Serializer.DeserializeWrapper<ClassWithStructProperty_IgnoreConditionNever>(
@@ -2631,7 +2631,7 @@ namespace System.Text.Json.Serialization.Tests
                     obj,
                     new JsonSerializerOptions
                     {
-                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
                     }
                 )
             );
@@ -2671,7 +2671,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             };
             Assert.Equal("[false,true]", await Serializer.SerializeWrapper(list, options));
         }
@@ -2696,7 +2696,7 @@ namespace System.Text.Json.Serialization.Tests
             // JsonIgnoreCondition.WhenWritingDefault (as the option name implies)
             options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             };
             obj = await Serializer.DeserializeWrapper<ClassWithInitializedProps>(json, options);
             Assert.Null(obj.MyString);
@@ -2916,7 +2916,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                IncludeFields = true
+                IncludeFields = true,
             };
 
             string json =
@@ -3199,7 +3199,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             };
 
             // Verify ignored.
@@ -3261,7 +3261,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             };
 
             // Verify not ignored; MyValueTypeWithProperties is not null.
@@ -3288,7 +3288,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             };
 
             // We don't ignore when applied to root types; only properties.
@@ -3312,7 +3312,7 @@ namespace System.Text.Json.Serialization.Tests
 
             MyValueTypeWithBoxedPrimitive obj = new MyValueTypeWithBoxedPrimitive
             {
-                BoxedPrimitive = 0
+                BoxedPrimitive = 0,
             };
 
             // Baseline without custom options.
@@ -3321,7 +3321,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var options = new JsonSerializerOptions
             {
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,
             };
 
             // No check if the boxed object's value type is a default value (0 in this case).
@@ -3354,7 +3354,7 @@ namespace System.Text.Json.Serialization.Tests
             // No check if the interface property's value type is a default value.
             obj = new MyClassWithValueTypeInterfaceProperty
             {
-                MyProp = new MyClassWithValueTypeInterfaceProperty.MyStruct()
+                MyProp = new MyClassWithValueTypeInterfaceProperty.MyStruct(),
             };
             json = await Serializer.SerializeWrapper(obj);
             Assert.Equal("{\"MyProp\":{}}", json);
@@ -3849,7 +3849,7 @@ namespace System.Text.Json.Serialization.Tests
             public static CollectionWithPrivateElementType CreatePopulatedInstance() =>
                 new CollectionWithPrivateElementType
                 {
-                    _values = { PrivateEnum.A, PrivateEnum.B, PrivateEnum.C }
+                    _values = { PrivateEnum.A, PrivateEnum.B, PrivateEnum.C },
                 };
 
             public void Validate() =>
@@ -3902,7 +3902,7 @@ namespace System.Text.Json.Serialization.Tests
             public static DictionaryWithPrivateKeyAndValueType CreatePopulatedInstance() =>
                 new DictionaryWithPrivateKeyAndValueType
                 {
-                    _values = { [PrivateEnum.A] = PrivateEnum.B, [PrivateEnum.B] = PrivateEnum.C }
+                    _values = { [PrivateEnum.A] = PrivateEnum.B, [PrivateEnum.B] = PrivateEnum.C },
                 };
 
             public void Validate() =>
@@ -3910,7 +3910,7 @@ namespace System.Text.Json.Serialization.Tests
                     new KeyValuePair<PrivateEnum, PrivateEnum>[]
                     {
                         new(PrivateEnum.A, PrivateEnum.B),
-                        new(PrivateEnum.B, PrivateEnum.C)
+                        new(PrivateEnum.B, PrivateEnum.C),
                     },
                     this
                 );
@@ -3972,7 +3972,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             A = 0,
             B = 1,
-            C = 2
+            C = 2,
         }
     }
 }

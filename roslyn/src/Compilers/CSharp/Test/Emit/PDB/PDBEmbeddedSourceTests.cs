@@ -49,7 +49,7 @@ class C
             var embeddedTexts = new[]
             {
                 EmbeddedText.FromSource(tree1.FilePath, tree1.GetText()),
-                EmbeddedText.FromSource(tree2.FilePath, tree2.GetText())
+                EmbeddedText.FromSource(tree2.FilePath, tree2.GetText()),
             };
 
             c.VerifyPdb(
@@ -138,7 +138,7 @@ class C
                         select new
                         {
                             FilePath = pdbReader.GetString(document.Name),
-                            Text = pdbReader.GetEmbeddedSource(documentHandle)
+                            Text = pdbReader.GetEmbeddedSource(documentHandle),
                         }
                     ).Single();
 

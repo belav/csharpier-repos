@@ -381,7 +381,7 @@ namespace System.Web.Mvc
                 return new ViewDataInfo(() => descriptor.GetValue(container))
                 {
                     Container = container,
-                    PropertyDescriptor = descriptor
+                    PropertyDescriptor = descriptor,
                 };
             }
 

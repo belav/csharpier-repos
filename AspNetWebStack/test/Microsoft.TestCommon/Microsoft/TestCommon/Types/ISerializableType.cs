@@ -62,7 +62,7 @@ namespace Microsoft.TestCommon.Types
             return new ISerializableType[]
             {
                 new ISerializableType(),
-                new ISerializableType(1, "SomeName")
+                new ISerializableType(1, "SomeName"),
             };
         }
     }

@@ -44,7 +44,7 @@ namespace System.Xml
             Uninitialized,
             NotDeclaredButInScope,
             DeclaredButNotWrittenOut,
-            DeclaredAndWrittenOut
+            DeclaredAndWrittenOut,
         }
 
         struct TagInfo
@@ -93,7 +93,7 @@ namespace System.Xml
             None,
             XmlSpace,
             XmlLang,
-            XmlNs
+            XmlNs,
         };
 
         // State machine is working through autocomplete
@@ -126,7 +126,7 @@ namespace System.Xml
             Base64,
             RawData,
             Whitespace,
-            Empty
+            Empty,
         }
 
         //
@@ -211,7 +211,7 @@ namespace System.Xml
             "Base64",
             "RawData",
             "Whitespace",
-            "Empty"
+            "Empty",
         };
 
         static readonly State[] stateTableDefault =

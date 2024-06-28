@@ -196,7 +196,7 @@ namespace System.Activities.Runtime
                 options
             )
             {
-                Bookmark = bookmark
+                Bookmark = bookmark,
             };
             this.bookmarks.Add(bookmark, bookmarkCallbackWrapper);
 

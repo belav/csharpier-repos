@@ -254,6 +254,6 @@ namespace System.Net.Test.Common
         /// <summary>
         /// Encode a literal value without adding a new dynamic index. Intermediaries (such as a proxy) must not index the value when forwarding the header.
         /// </summary>
-        NeverIndexed = 8
+        NeverIndexed = 8,
     }
 }

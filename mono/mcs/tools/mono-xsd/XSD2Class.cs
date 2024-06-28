@@ -526,6 +526,6 @@ namespace Commons.Xml.XSD2ClassLib
     {
         Element,
         Attribute,
-        AnyAttribute
+        AnyAttribute,
     }
 }

@@ -129,7 +129,7 @@ namespace ICSharpCode.SharpZipLib.GZip
                 /* The extra flags */
                 0,
                 /* The OS type (unknown) */
-                (byte)255
+                (byte)255,
             };
             baseOutputStream.Write(gzipHeader, 0, gzipHeader.Length);
         }
@@ -168,7 +168,7 @@ namespace ICSharpCode.SharpZipLib.GZip
                 (byte)totalin,
                 (byte)(totalin >> 8),
                 (byte)(totalin >> 16),
-                (byte)(totalin >> 24)
+                (byte)(totalin >> 24),
             };
 
             baseOutputStream.Write(gzipFooter, 0, gzipFooter.Length);

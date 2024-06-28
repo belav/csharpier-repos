@@ -21,7 +21,7 @@ namespace System.ServiceModel.PeerResolvers
         internal enum RegistrationState
         {
             OK,
-            Deleted
+            Deleted,
         }
 
         internal class RegistrationEntry

@@ -58,7 +58,7 @@ public class RuntimeSkipNavigation : RuntimePropertyBase, IRuntimeSkipNavigation
                 SkipNavigationComparer.Instance
             )
             {
-                this
+                this,
             };
         }
         else

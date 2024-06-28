@@ -214,7 +214,7 @@ public static partial class MountHelper
         {
             FileName = fileName,
             UseShellExecute = false,
-            RedirectStandardOutput = true
+            RedirectStandardOutput = true,
         };
 
 #if NETFRAMEWORK

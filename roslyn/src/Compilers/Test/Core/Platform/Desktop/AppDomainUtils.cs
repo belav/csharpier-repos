@@ -36,7 +36,7 @@ namespace Roslyn.Test.Utilities.Desktop
                 new AppDomainSetup()
                 {
                     ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile,
-                    ApplicationBase = basePath
+                    ApplicationBase = basePath,
                 }
             );
         }

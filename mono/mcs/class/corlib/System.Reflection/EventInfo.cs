@@ -141,7 +141,7 @@ namespace System.Reflection
                 typeVector = new Type[]
                 {
                     method.DeclaringType,
-                    method.GetParametersInternal()[0].ParameterType
+                    method.GetParametersInternal()[0].ParameterType,
                 };
                 addHandlerDelegateType = typeof(AddEvent<,>);
                 frameName = "AddEventFrame";

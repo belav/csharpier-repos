@@ -14,7 +14,7 @@ namespace System.DirectoryServices.Protocols
     public enum ExtendedDNFlag
     {
         HexString = 0,
-        StandardString = 1
+        StandardString = 1,
     }
 
     [Flags]
@@ -24,7 +24,7 @@ namespace System.DirectoryServices.Protocols
         Owner = 1,
         Group = 2,
         Dacl = 4,
-        Sacl = 8
+        Sacl = 8,
     }
 
     [Flags]
@@ -34,13 +34,13 @@ namespace System.DirectoryServices.Protocols
         ObjectSecurity = 0x1,
         ParentsFirst = 0x0800,
         PublicDataOnly = 0x2000,
-        IncrementalValues = 0x80000000
+        IncrementalValues = 0x80000000,
     }
 
     public enum SearchOption
     {
         DomainScope = 1,
-        PhantomRoot = 2
+        PhantomRoot = 2,
     }
 
     internal static class UtilityHandle

@@ -47,22 +47,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
             var workspace = languageName switch
             {
                 "XML" => TestWorkspace.Create(markup, composition: s_composition),
-                LanguageNames.CSharp =>
-                    TestWorkspace.CreateCSharp(
-                        markup,
-                        composition: s_composition,
-                        parseOptions: (CSharpParseOptions)parseOptions
-                    ),
-                LanguageNames.VisualBasic =>
-                    TestWorkspace.CreateVisualBasic(
-                        markup,
-                        composition: s_composition,
-                        parseOptions: parseOptions,
-                        compilationOptions: new VisualBasicCompilationOptions(
-                            OutputKind.DynamicallyLinkedLibrary
-                        )
-                    ),
-                _ => throw new ArgumentException("Invalid language name.")
+                LanguageNames.CSharp => TestWorkspace.CreateCSharp(
+                    markup,
+                    composition: s_composition,
+                    parseOptions: (CSharpParseOptions)parseOptions
+                ),
+                LanguageNames.VisualBasic => TestWorkspace.CreateVisualBasic(
+                    markup,
+                    composition: s_composition,
+                    parseOptions: parseOptions,
+                    compilationOptions: new VisualBasicCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary
+                    )
+                ),
+                _ => throw new ArgumentException("Invalid language name."),
             };
 
             options?.SetGlobalOptions(workspace.GlobalOptions);

@@ -82,7 +82,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         }
 
         [Theory]
-        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", }, "b", false)]
+        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "d", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", true)]
         [InlineData(
@@ -108,7 +108,7 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         }
 
         [Theory]
-        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", }, "b", false)]
+        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", true)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "d", false)]
         [InlineData(

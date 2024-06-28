@@ -101,7 +101,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Do not start the axis segment scale from zero.
         /// </summary>
-        No
+        No,
     };
 
     #endregion // Enumerations

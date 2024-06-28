@@ -53,17 +53,17 @@ public class NestedDtos : IntegrationTest<NestedDtos.DatabaseInitializer>
                     new Art
                     {
                         AName = "art1",
-                        Sem = new Sem { Name = "sem1" }
+                        Sem = new Sem { Name = "sem1" },
                     },
                     new Art
                     {
                         AName = "art2",
-                        Sem = new Sem { Name = "sem2" }
+                        Sem = new Sem { Name = "sem2" },
                     },
                     new Art
                     {
                         AName = "art3",
-                        Sem = new Sem { Name = "sem3" }
+                        Sem = new Sem { Name = "sem3" },
                     },
                 }
             );

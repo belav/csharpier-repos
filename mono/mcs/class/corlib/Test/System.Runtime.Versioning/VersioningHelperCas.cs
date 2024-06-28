@@ -70,7 +70,7 @@ namespace MonoCasTests.System.Runtime.Versioning
             {
                 typeof(string),
                 typeof(ResourceScope),
-                typeof(ResourceScope)
+                typeof(ResourceScope),
             };
             MethodInfo mi = typeof(VersioningHelper).GetMethod("MakeVersionSafeName", types);
             Assert.IsNotNull(mi, "MakeVersionSafeName(string,ResourceScope,ResourceScope)");

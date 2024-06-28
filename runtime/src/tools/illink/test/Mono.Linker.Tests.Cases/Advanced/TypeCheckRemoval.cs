@@ -34,7 +34,7 @@ namespace Mono.Linker.Tests.Cases.Advanced
                 "ldnull",
                 "cgt.un",
                 "call System.Void System.Console::WriteLine(System.Boolean)",
-                "ret"
+                "ret",
             }
         )]
         static void TestTypeCheckRemoved_1(object o)
@@ -53,7 +53,7 @@ namespace Mono.Linker.Tests.Cases.Advanced
                 "ldnull",
                 "cgt.un",
                 "call System.Void System.Console::WriteLine(System.Boolean)",
-                "ret"
+                "ret",
             }
         )]
         static void TestTypeCheckRemoved_2<T>(T o)
@@ -75,7 +75,7 @@ namespace Mono.Linker.Tests.Cases.Advanced
                 "ldnull",
                 "ldnull",
                 "cgt.un",
-                "ret"
+                "ret",
             }
         )]
         static bool TestTypeCheckRemoved_3(object o1, object o2)
@@ -93,7 +93,7 @@ namespace Mono.Linker.Tests.Cases.Advanced
                 "brfalse.s il_6",
                 "ret",
                 "call System.Void Mono.Linker.Tests.Cases.Advanced.TypeCheckRemoval/T6::Call()",
-                "ret"
+                "ret",
             }
         )]
         static void TestTypeCheckRemoved_4(object o1)
@@ -131,7 +131,7 @@ namespace Mono.Linker.Tests.Cases.Advanced
                 "ldc.i4.1",
                 "ret",
                 "ldc.i4.2",
-                "ret"
+                "ret",
             }
         )]
         static int TestTypeCheckRemoved_6(object o)
@@ -263,7 +263,7 @@ namespace Mono.Linker.Tests.Cases.Advanced
                     "pop",
                     "leave.s il_1f",
                     ".endcatch",
-                    "ret"
+                    "ret",
                 }
             )]
             static void MethodWithFilterRemovalInTry(object o)

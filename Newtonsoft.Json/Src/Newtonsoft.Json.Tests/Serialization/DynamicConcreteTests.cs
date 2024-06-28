@@ -74,7 +74,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new DynamicConcreteContractResolver()
+                    ContractResolver = new DynamicConcreteContractResolver(),
                 }
             );
 
@@ -90,7 +90,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new DynamicConcreteContractResolver()
+                    ContractResolver = new DynamicConcreteContractResolver(),
                 }
             );
 
@@ -107,7 +107,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 json,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new DynamicConcreteContractResolver()
+                    ContractResolver = new DynamicConcreteContractResolver(),
                 }
             );
 

@@ -243,7 +243,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(designerBounds.Left, designerBounds.Top),
-                            new Point(designerBounds.Left, designerBounds.Bottom)
+                            new Point(designerBounds.Left, designerBounds.Bottom),
                         }
                     )
                 )
@@ -257,7 +257,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(designerBounds.Left, designerBounds.Top),
-                            new Point(designerBounds.Right, designerBounds.Top)
+                            new Point(designerBounds.Right, designerBounds.Top),
                         }
                     )
                 )
@@ -271,7 +271,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(designerBounds.Right, designerBounds.Top),
-                            new Point(designerBounds.Right, designerBounds.Bottom)
+                            new Point(designerBounds.Right, designerBounds.Bottom),
                         }
                     )
                 )
@@ -285,7 +285,7 @@ namespace System.Workflow.ComponentModel.Design
                         new Point[]
                         {
                             new Point(designerBounds.Left, designerBounds.Bottom),
-                            new Point(designerBounds.Right, designerBounds.Bottom)
+                            new Point(designerBounds.Right, designerBounds.Bottom),
                         }
                     )
                 )

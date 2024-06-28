@@ -119,7 +119,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             Winter = 0,
             Spring,
             Summer,
-            Fall
+            Fall,
         }
 
         [DbFunction("len", IsBuiltIn = true)]
@@ -141,7 +141,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 2 => 2,
                 3 => 1,
                 4 => 0,
-                _ => throw new Exception()
+                _ => throw new Exception(),
             };
 
         public static string StarValueStatic(int starCount, int value) =>
@@ -180,7 +180,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 2 => 2,
                 3 => 1,
                 4 => 0,
-                _ => throw new Exception()
+                _ => throw new Exception(),
             };
 
         public string StarValueInstance(int starCount, int value) =>
@@ -317,7 +317,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     {
                         new SqlConstantExpression(Expression.Constant(abc[0]), typeMapping: null),
                         new SqlConstantExpression(Expression.Constant(abc[1]), typeMapping: null),
-                        new SqlConstantExpression(Expression.Constant(abc[2]), typeMapping: null)
+                        new SqlConstantExpression(Expression.Constant(abc[2]), typeMapping: null),
                     }, // args.First().TypeMapping)
                     typeMapping: null
                 ));
@@ -343,7 +343,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                             new SqlConstantExpression(
                                 Expression.Constant(abc[2]),
                                 args.First().TypeMapping
-                            )
+                            ),
                         },
                         typeMapping: null
                     ),
@@ -356,7 +356,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         new SqlConstantExpression(
                             Expression.Constant(trueFalse[1]),
                             typeMapping: null
-                        )
+                        ),
                     },
                     typeMapping: null
                 ));
@@ -484,8 +484,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 Items = new List<LineItem>
                 {
                     new() { Quantity = 5, Product = product1 },
-                    new() { Quantity = 15, Product = product3 }
-                }
+                    new() { Quantity = 15, Product = product3 },
+                },
             };
 
             var order12 = new Order
@@ -496,8 +496,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     new() { Quantity = 1, Product = product1 },
                     new() { Quantity = 6, Product = product2 },
-                    new() { Quantity = 200, Product = product3 }
-                }
+                    new() { Quantity = 200, Product = product3 },
+                },
             };
 
             var order13 = new Order
@@ -507,7 +507,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 Items = new List<LineItem>
                 {
                     new() { Quantity = 50, Product = product4 },
-                }
+                },
             };
 
             var order21 = new Order
@@ -518,8 +518,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     new() { Quantity = 1, Product = product1 },
                     new() { Quantity = 34, Product = product4 },
-                    new() { Quantity = 100, Product = product5 }
-                }
+                    new() { Quantity = 100, Product = product5 },
+                },
             };
 
             var order22 = new Order
@@ -529,8 +529,8 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 Items = new List<LineItem>
                 {
                     new() { Quantity = 34, Product = product3 },
-                    new() { Quantity = 100, Product = product4 }
-                }
+                    new() { Quantity = 100, Product = product4 },
+                },
             };
 
             var order31 = new Order
@@ -539,57 +539,57 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 OrderDate = new DateTime(2001, 6, 21),
                 Items = new List<LineItem>
                 {
-                    new() { Quantity = 5, Product = product5 }
-                }
+                    new() { Quantity = 5, Product = product5 },
+                },
             };
 
             var address11 = new Address
             {
                 Street = "1600 Pennsylvania Avenue",
                 City = "Washington",
-                State = "DC"
+                State = "DC",
             };
             var address12 = new Address
             {
                 Street = "742 Evergreen Terrace",
                 City = "SpringField",
-                State = ""
+                State = "",
             };
             var address21 = new Address
             {
                 Street = "Apartment 5A, 129 West 81st Street",
                 City = "New York",
-                State = "NY"
+                State = "NY",
             };
             var address31 = new Address
             {
                 Street = "425 Grove Street, Apt 20",
                 City = "New York",
-                State = "NY"
+                State = "NY",
             };
             var address32 = new Address
             {
                 Street = "342 GravelPit Terrace",
                 City = "BedRock",
-                State = ""
+                State = "",
             };
             var address41 = new Address
             {
                 Street = "4222 Clinton Way",
                 City = "Los Angles",
-                State = "CA"
+                State = "CA",
             };
             var address42 = new Address
             {
                 Street = "1060 West Addison Street",
                 City = "Chicago",
-                State = "IL"
+                State = "IL",
             };
             var address43 = new Address
             {
                 Street = "112 ½ Beacon Street",
                 City = "Boston",
-                State = "MA"
+                State = "MA",
             };
 
             var customer1 = new Customer
@@ -597,7 +597,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 FirstName = "Customer",
                 LastName = "One",
                 Orders = new List<Order> { order11, order12, order13 },
-                Addresses = new List<Address> { address11, address12 }
+                Addresses = new List<Address> { address11, address12 },
             };
 
             var customer2 = new Customer
@@ -605,7 +605,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 FirstName = "Customer",
                 LastName = "Two",
                 Orders = new List<Order> { order21, order22 },
-                Addresses = new List<Address> { address21 }
+                Addresses = new List<Address> { address21 },
             };
 
             var customer3 = new Customer
@@ -613,14 +613,14 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 FirstName = "Customer",
                 LastName = "Three",
                 Orders = new List<Order> { order31 },
-                Addresses = new List<Address> { address31, address32 }
+                Addresses = new List<Address> { address31, address32 },
             };
 
             var customer4 = new Customer
             {
                 FirstName = "Customer",
                 LastName = "Four",
-                Addresses = new List<Address> { address41, address42, address43 }
+                Addresses = new List<Address> { address41, address42, address43 },
             };
 
             ((UDFSqlContext)context).Products.AddRange(
@@ -697,7 +697,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         c.FirstName,
                         OrderCount = UDFSqlContext.CustomerOrderCountStatic(
                             UDFSqlContext.AddFiveStatic(c.Id - 5)
-                        )
+                        ),
                     }
                 ).Single()
         );
@@ -758,7 +758,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             select new
             {
                 c.LastName,
-                OrderCount = UDFSqlContext.CustomerOrderCountStatic(customerId)
+                OrderCount = UDFSqlContext.CustomerOrderCountStatic(customerId),
             }
         ).Single();
 
@@ -782,7 +782,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 OrderCount = UDFSqlContext.StarValueStatic(
                     starCount,
                     UDFSqlContext.CustomerOrderCountStatic(customerId)
-                )
+                ),
             }
         ).Single();
 
@@ -1331,7 +1331,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
             select new
             {
                 Id = context.StarValueInstance(4, c.Id),
-                LastName = context.DollarValueInstance(2, c.LastName)
+                LastName = context.DollarValueInstance(2, c.LastName),
             }
         ).Single();
 
@@ -1377,7 +1377,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         c.FirstName,
                         OrderCount = context.CustomerOrderCountInstance(
                             context.AddFiveInstance(c.Id - 5)
-                        )
+                        ),
                     }
                 ).Single()
         );
@@ -1458,7 +1458,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 OrderCount = context.StarValueInstance(
                     starCount,
                     context.CustomerOrderCountInstance(customerId)
-                )
+                ),
             }
         ).Single();
 
@@ -1887,7 +1887,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     c.Id,
                     products = context.GetTopSellingProductsForCustomer(c.Id).ToList(),
-                    orders = context.Orders.Where(o => o.CustomerId == c.Id).ToList()
+                    orders = context.Orders.Where(o => o.CustomerId == c.Id).ToList(),
                 };
 
             Assert.Equal(
@@ -1989,7 +1989,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     c.Id,
                     c.LastName,
                     r.Year,
-                    r.Count
+                    r.Count,
                 }
             ).ToList();
 
@@ -2019,11 +2019,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     () =>
                         (
                             from c in context.Customers
-                            select new
-                            {
-                                c.Id,
-                                Prods = context.GetTopTwoSellingProducts().ToList(),
-                            }
+                            select new { c.Id, Prods = context.GetTopTwoSellingProducts().ToList() }
                         ).ToList()
                 )
                 .Message;
@@ -2042,7 +2038,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
         {
             var query = (
                 from c in context.Customers
-                select new { c.Id, Prods = context.GetTopTwoSellingProducts().Distinct().ToList(), }
+                select new { c.Id, Prods = context.GetTopTwoSellingProducts().Distinct().ToList() }
             ).ToList();
         }
     }
@@ -2060,7 +2056,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     c.Id,
                     Orders = context
                         .GetOrdersWithMultipleProducts(context.AddValues(c.Id, 1))
-                        .ToList()
+                        .ToList(),
                 }
             ).ToList();
 
@@ -2087,7 +2083,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     OrderCountYear = context
                         .GetOrdersWithMultipleProducts(c.Id)
                         .Where(o => o.OrderDate.Day == 21)
-                        .ToList()
+                        .ToList(),
                 }
             ).ToList();
 
@@ -2158,7 +2154,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                                             .ToList(),
                                         Prods = context.GetTopTwoSellingProducts().ToList(),
                                     })
-                                    .ToList()
+                                    .ToList(),
                             }
                         ).ToList()
                 )
@@ -2189,7 +2185,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                                     .GetTopTwoSellingProducts()
                                     .Where(p => p.AmountSold == 249)
                                     .Select(p => p.ProductId)
-                                    .ToList()
+                                    .ToList(),
                             }
                         ).ToList()
                 )
@@ -2274,7 +2270,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     c.Id,
                     c.LastName,
-                    Orders = context.GetOrdersWithMultipleProducts(c.Id).ToList()
+                    Orders = context.GetOrdersWithMultipleProducts(c.Id).ToList(),
                 }
             ).ToList();
 
@@ -2343,7 +2339,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     c.Id,
                     c.LastName,
                     r.Year,
-                    r.Count
+                    r.Count,
                 }
             ).ToList();
 
@@ -2371,7 +2367,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     c.Id,
                     c.LastName,
                     r.Year,
-                    r.Count
+                    r.Count,
                 }
             ).ToList();
 
@@ -2394,7 +2390,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     p.Id,
                     p.Name,
-                    r.AmountSold
+                    r.AmountSold,
                 }
             ).OrderBy(p => p.Id).ToList();
 
@@ -2424,7 +2420,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     p.Id,
                     p.Name,
-                    j.AmountSold
+                    j.AmountSold,
                 }
             ).ToList();
 
@@ -2545,7 +2541,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     c.Id,
                     c.LastName,
                     r.Year,
-                    r.Count
+                    r.Count,
                 }
             ).ToList();
 
@@ -2590,7 +2586,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     c.Id,
                     c.LastName,
                     r.Year,
-                    r.Count
+                    r.Count,
                 }
             ).ToList();
 
@@ -2616,7 +2612,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     c.Id,
                     r.Count,
-                    r.Year
+                    r.Year,
                 }
             ).ToList();
 
@@ -2644,9 +2640,9 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                         {
                             //how to I setup the PK/FK combo properly for this?  Is it even possible?
                             //OrderName = mpo.Order.Name,
-                            CustomerName = mpo.Customer.LastName
+                            CustomerName = mpo.Customer.LastName,
                         })
-                        .ToList()
+                        .ToList(),
                 }
             ).ToList();
 
@@ -2691,7 +2687,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 .Select(x => new
                 {
                     x.Key.LastName,
-                    SumOfLengths = x.Sum(xx => xx.FirstName.Length)
+                    SumOfLengths = x.Sum(xx => xx.FirstName.Length),
                 })
                 .ToList();
 
@@ -2725,7 +2721,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                 .Select(x => new
                 {
                     x.Key.LastName,
-                    SumOfLengths = x.Sum(xx => xx.FirstName.Length)
+                    SumOfLengths = x.Sum(xx => xx.FirstName.Length),
                 })
                 .ToList();
 
@@ -2798,7 +2794,7 @@ public abstract class UdfDbFunctionTestBase<TFixture> : IClassFixture<TFixture>
                     {
                         CustomerId = x.Key.CustomerId,
                         Year = x.Key.Year,
-                        Count = x.Count()
+                        Count = x.Count(),
                     })
                 orderby a.Id, r.Year
                 select r

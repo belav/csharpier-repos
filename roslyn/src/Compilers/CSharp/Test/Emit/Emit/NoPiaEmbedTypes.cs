@@ -67,7 +67,7 @@ class UsePia
                 Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test"),
                 // (7,29): error CS1752: Interop type 'Test' cannot be embedded. Use the applicable interface instead.
                 //         System.Action<Test> y = null;
-                Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test")
+                Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test"),
             };
 
             var compilation = CreateCompilation(
@@ -75,7 +75,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -86,7 +86,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -127,7 +127,7 @@ class UsePia
             {
                 // (6,29): error CS1752: Interop type 'Test' cannot be embedded. Use the applicable interface instead.
                 //         System.Action<Test> y = null;
-                Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test")
+                Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test"),
             };
 
             var compilation = CreateCompilation(
@@ -135,7 +135,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -146,7 +146,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -225,7 +225,7 @@ class UsePia
             {
                 // (8,19): error CS1752: Interop type 'Test' cannot be embedded. Use the applicable interface instead.
                 //     class test2 : Test
-                Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test")
+                Diagnostic(ErrorCode.ERR_NewCoClassOnLink, "Test").WithArguments("Test"),
             };
 
             var compilation = CreateCompilation(
@@ -233,7 +233,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -244,7 +244,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -311,7 +311,7 @@ class UsePia
                 // (16,13): error CS1754: Type 'Test21.Test22' cannot be embedded because it is a nested type. Consider setting the 'Embed Interop Types' property to false.
                 //         var y = x.M22();
                 Diagnostic(ErrorCode.ERR_NoPIANestedType, "y = x.M22()")
-                    .WithArguments("Test21.Test22")
+                    .WithArguments("Test21.Test22"),
             };
 
             var compilation = CreateCompilation(
@@ -319,7 +319,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -330,7 +330,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -387,7 +387,7 @@ public struct Test21
                 // (10,13): error CS1754: Type 'Test21.Test22' cannot be embedded because it is a nested type. Consider setting the 'Embed Interop Types' property to false.
                 //         var y = x.M22();
                 Diagnostic(ErrorCode.ERR_NoPIANestedType, "y = x.M22()")
-                    .WithArguments("Test21.Test22")
+                    .WithArguments("Test21.Test22"),
             };
 
             var compilation = CreateCompilation(
@@ -395,7 +395,7 @@ public struct Test21
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -406,7 +406,7 @@ public struct Test21
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -453,7 +453,8 @@ class UsePia
             {
                 // (8,28): error CS1754: Type 'Test21.Test22' cannot be embedded because it is a nested type. Consider setting the 'Embed Interop Types' property to false.
                 //     public void M14(Test21.Test22 x)
-                Diagnostic(ErrorCode.ERR_NoPIANestedType, "Test22").WithArguments("Test21.Test22")
+                Diagnostic(ErrorCode.ERR_NoPIANestedType, "Test22")
+                    .WithArguments("Test21.Test22"),
             };
 
             var compilation = CreateCompilation(
@@ -461,7 +462,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -472,7 +473,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -527,7 +528,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -538,7 +539,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -584,7 +585,7 @@ class UsePia
                 // (14,24): error CS1768: Type 'Test21<T>' cannot be embedded because it has a generic argument. Consider setting the 'Embed Interop Types' property to false.
                 //         return default(Test21<int>);
                 Diagnostic(ErrorCode.ERR_GenericsUsedInNoPIAType, "Test21<int>")
-                    .WithArguments("Test21<T>")
+                    .WithArguments("Test21<T>"),
             };
 
             var compilation = CreateCompilation(
@@ -592,7 +593,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -603,7 +604,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -650,7 +651,7 @@ class UsePia
                 // (10,16): error CS1757: Embedded interop struct 'Test21' can contain only public instance fields.
                 //         return default(Test21);
                 Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "default(Test21)")
-                    .WithArguments("Test21")
+                    .WithArguments("Test21"),
             };
 
             var compilation = CreateCompilation(
@@ -658,7 +659,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -669,7 +670,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -716,7 +717,7 @@ class UsePia
                 // (10,16): error CS1757: Embedded interop struct 'Test21' can contain only public instance fields.
                 //         return default(Test21);
                 Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "default(Test21)")
-                    .WithArguments("Test21")
+                    .WithArguments("Test21"),
             };
 
             var compilation = CreateCompilation(
@@ -724,7 +725,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -735,7 +736,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -782,7 +783,7 @@ class UsePia
                 // (10,16): error CS1757: Embedded interop struct 'Test21' can contain only public instance fields.
                 //         return default(Test21);
                 Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "default(Test21)")
-                    .WithArguments("Test21")
+                    .WithArguments("Test21"),
             };
 
             var compilation = CreateCompilation(
@@ -790,7 +791,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -801,7 +802,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -848,7 +849,7 @@ class UsePia
                 // (10,16): error CS1757: Embedded interop struct 'Test21' can contain only public instance fields.
                 //         return default(Test21);
                 Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "default(Test21)")
-                    .WithArguments("Test21")
+                    .WithArguments("Test21"),
             };
 
             var compilation = CreateCompilation(
@@ -856,7 +857,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -867,7 +868,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -914,7 +915,7 @@ class UsePia
                 // (10,16): error CS1757: Embedded interop struct 'Test21' can contain only public instance fields.
                 //         return default(Test21);
                 Diagnostic(ErrorCode.ERR_InteropStructContainsMethods, "default(Test21)")
-                    .WithArguments("Test21")
+                    .WithArguments("Test21"),
             };
 
             var compilation = CreateCompilation(
@@ -922,7 +923,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -933,7 +934,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -979,14 +980,14 @@ class UsePia
                 // (5,9): error CS1774: Embedded interop method 'void D.M3()' contains a body.
                 //         D.M1();
                 Diagnostic(ErrorCode.ERR_InteropMethodWithBody, "D.M1()")
-                    .WithArguments("void D.M3()")
+                    .WithArguments("void D.M3()"),
             };
             DiagnosticDescription[] expectedMetadataOnly =
             {
                 // (5,9): error CS1774: Embedded interop method 'void D.M1()' contains a body.
                 Diagnostic(ErrorCode.ERR_InteropMethodWithBody).WithArguments("void D.M1()"),
                 // (5,9): error CS1774: Embedded interop method 'void D.M3()' contains a body.
-                Diagnostic(ErrorCode.ERR_InteropMethodWithBody).WithArguments("void D.M3()")
+                Diagnostic(ErrorCode.ERR_InteropMethodWithBody).WithArguments("void D.M3()"),
             };
             var reference1 = CompileIL(
                 sources1,
@@ -1046,7 +1047,7 @@ class UsePia
                     .WithArguments(
                         "System.Runtime.InteropServices.TypeIdentifierAttribute",
                         ".ctor"
-                    )
+                    ),
             };
 
             var compilation = CreateEmptyCompilation(
@@ -1054,7 +1055,7 @@ class UsePia
                 new MetadataReference[]
                 {
                     MscorlibRef_v20,
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -1066,7 +1067,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     MscorlibRef_v20,
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -1123,7 +1124,7 @@ class UsePia
                     .WithArguments(
                         "System.Runtime.InteropServices.TypeIdentifierAttribute",
                         ".ctor"
-                    )
+                    ),
             };
 
             var compilation = CreateEmptyCompilation(
@@ -1131,7 +1132,7 @@ class UsePia
                 new MetadataReference[]
                 {
                     MscorlibRef_v20,
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 },
                 options: TestOptions.DebugExe
             );
@@ -1143,7 +1144,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     MscorlibRef_v20,
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 },
                 options: TestOptions.DebugExe
             );
@@ -1443,7 +1444,7 @@ class UsePia4
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -1452,7 +1453,7 @@ class UsePia4
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2250,7 +2251,7 @@ interface UsePia5 : ITest29
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -2259,7 +2260,7 @@ interface UsePia5 : ITest29
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2371,7 +2372,7 @@ class UsePia
             {
                 // (10,16): error CS0144: Cannot create an instance of the abstract type or interface 'ITest28'
                 //         return new ITest28();
-                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new ITest28()").WithArguments("ITest28")
+                Diagnostic(ErrorCode.ERR_NoNewAbstract, "new ITest28()").WithArguments("ITest28"),
             };
 
             var compilation = CreateCompilation(
@@ -2379,7 +2380,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -2390,7 +2391,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2486,7 +2487,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -2499,7 +2500,7 @@ class UsePia
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2597,7 +2598,7 @@ class UsePia
                 new MetadataReference[]
                 {
                     MscorlibRef_v4_0_30316_17626,
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 },
                 options: TestOptions.DebugExe
             );
@@ -2611,7 +2612,7 @@ class UsePia
                 new MetadataReference[]
                 {
                     MscorlibRef_v4_0_30316_17626,
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 },
                 options: TestOptions.DebugExe
             );
@@ -2670,7 +2671,7 @@ class UsePia
                 //         return new ITest28(1);
                 Diagnostic(ErrorCode.ERR_BadCtorArgCount, "ITest28")
                     .WithArguments("ITest28", "1")
-                    .WithLocation(10, 20)
+                    .WithLocation(10, 20),
             };
 
             var compilation = CreateCompilation(
@@ -2678,7 +2679,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -2689,7 +2690,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2754,7 +2755,7 @@ class UsePia
                 //         return new ITest28();
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "new ITest28()")
                     .WithArguments("System.Guid", ".ctor")
-                    .WithLocation(20, 16)
+                    .WithLocation(20, 16),
             };
 
             var compilation = CreateCompilation(
@@ -2762,7 +2763,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -2773,7 +2774,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2838,7 +2839,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -2847,7 +2848,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -2991,7 +2992,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3000,7 +3001,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3088,7 +3089,7 @@ class UsePia
                 // (10,6): error CS1766: Source interface 'InterfaceEvents' is missing method 'Goo' which is required to embed event 'Interface1_Event.Goo'.
                 //     	x.Goo -= Handler;
                 Diagnostic(ErrorCode.ERR_MissingMethodOnSourceInterface, "x.Goo -= Handler")
-                    .WithArguments("InterfaceEvents", "Goo", "Interface1_Event.Goo")
+                    .WithArguments("InterfaceEvents", "Goo", "Interface1_Event.Goo"),
             };
 
             var compilation1 = CreateCompilation(
@@ -3096,7 +3097,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3107,7 +3108,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3192,7 +3193,7 @@ class UsePia
                 //     	x4.E += Handler;
                 Diagnostic(ErrorCode.ERR_MissingSourceInterface, "x4.E += Handler")
                     .WithArguments("Interface4_Event", "Interface4_Event.E")
-                    .WithLocation(16, 6)
+                    .WithLocation(16, 6),
             };
 
             var compilation1 = CreateCompilation(
@@ -3200,7 +3201,7 @@ class UsePia
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3211,7 +3212,7 @@ class UsePia
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3273,7 +3274,7 @@ class UsePia
                     .WithArguments(
                         "Interface1_Event",
                         "System.Runtime.InteropServices.ComImportAttribute"
-                    )
+                    ),
             };
 
             DiagnosticDescription[] expectedMetadataOnly =
@@ -3283,7 +3284,7 @@ class UsePia
                     .WithArguments(
                         "Interface1_Event",
                         "System.Runtime.InteropServices.ComImportAttribute"
-                    )
+                    ),
             };
 
             var compilation1 = CreateCompilation(
@@ -3291,7 +3292,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3302,7 +3303,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3416,7 +3417,7 @@ class UsePia
                     .WithArguments(
                         "Interface1_Event",
                         "System.Runtime.InteropServices.GuidAttribute"
-                    )
+                    ),
             };
 
             DiagnosticDescription[] expectedMetadataOnly =
@@ -3426,7 +3427,7 @@ class UsePia
                     .WithArguments(
                         "Interface1_Event",
                         "System.Runtime.InteropServices.GuidAttribute"
-                    )
+                    ),
             };
 
             var compilation1 = CreateCompilation(
@@ -3492,7 +3493,7 @@ class UsePia5 : ITest29, ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3501,7 +3502,7 @@ class UsePia5 : ITest29, ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3593,7 +3594,7 @@ class UsePia5 : ITest29, ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3602,7 +3603,7 @@ class UsePia5 : ITest29, ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3686,7 +3687,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3695,7 +3696,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3765,7 +3766,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3774,7 +3775,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3857,7 +3858,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3866,7 +3867,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -3948,7 +3949,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -3957,7 +3958,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4056,7 +4057,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4065,7 +4066,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4180,7 +4181,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4258,7 +4259,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4327,7 +4328,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4336,7 +4337,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4410,7 +4411,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4419,7 +4420,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4496,7 +4497,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4505,7 +4506,7 @@ class UsePia5 : ITest30
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4681,7 +4682,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4690,7 +4691,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4772,7 +4773,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4781,7 +4782,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4850,7 +4851,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4859,7 +4860,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4870,7 +4871,7 @@ class UsePia
                     .WithArguments(
                         "Pia, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "System.Runtime.InteropServices.GuidAttribute"
-                    )
+                    ),
             };
 
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -4920,7 +4921,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -4929,7 +4930,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -4941,7 +4942,7 @@ class UsePia
                         "Pia, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "System.Runtime.InteropServices.ImportedFromTypeLibAttribute",
                         "System.Runtime.InteropServices.PrimaryInteropAssemblyAttribute"
-                    )
+                    ),
             };
 
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -5031,7 +5032,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
 
@@ -5041,7 +5042,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaCompilation1.EmitToImageReference(embedInteropTypes: true),
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -5053,7 +5054,7 @@ class UsePia
                         "ITest32",
                         "Pia1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Pia2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -5119,7 +5120,7 @@ class ITest34
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -5128,7 +5129,7 @@ class ITest34
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -5139,7 +5140,7 @@ class ITest34
                     .WithArguments(
                         "ITest34",
                         "Pia1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             VerifyEmitDiagnostics(compilation1, true, expected);
@@ -5217,7 +5218,7 @@ class UsePia
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: false)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: false),
                 },
                 assemblyName: "Consumer1"
             );
@@ -5231,7 +5232,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    new CSharpCompilationReference(compilation1, embedInteropTypes: false)
+                    new CSharpCompilationReference(compilation1, embedInteropTypes: false),
                 }
             );
 
@@ -5244,7 +5245,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    metadata1.GetReference(embedInteropTypes: false)
+                    metadata1.GetReference(embedInteropTypes: false),
                 }
             );
 
@@ -5257,7 +5258,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaMetadata.GetReference(embedInteropTypes: true),
-                    new CSharpCompilationReference(compilation1, embedInteropTypes: false)
+                    new CSharpCompilationReference(compilation1, embedInteropTypes: false),
                 }
             );
 
@@ -5270,7 +5271,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaMetadata.GetReference(embedInteropTypes: true),
-                    metadata1.GetReference(embedInteropTypes: false)
+                    metadata1.GetReference(embedInteropTypes: false),
                 }
             );
 
@@ -5334,7 +5335,7 @@ class UsePia
                     .WithArguments(
                         "Pia, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                         "Consumer1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             System.Action<ModuleSymbol> metadataValidator = delegate(ModuleSymbol module)
@@ -5359,7 +5360,7 @@ class UsePia
                 options: TestOptions.ReleaseDll,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: false)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: false),
                 },
                 assemblyName: "Consumer1"
             );
@@ -5373,7 +5374,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    new CSharpCompilationReference(compilation1, embedInteropTypes: false)
+                    new CSharpCompilationReference(compilation1, embedInteropTypes: false),
                 }
             );
 
@@ -5386,7 +5387,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    metadata1.GetReference(embedInteropTypes: false)
+                    metadata1.GetReference(embedInteropTypes: false),
                 }
             );
 
@@ -5399,7 +5400,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaMetadata.GetReference(embedInteropTypes: true),
-                    new CSharpCompilationReference(compilation1, embedInteropTypes: false)
+                    new CSharpCompilationReference(compilation1, embedInteropTypes: false),
                 }
             );
 
@@ -5412,7 +5413,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaMetadata.GetReference(embedInteropTypes: true),
-                    metadata1.GetReference(embedInteropTypes: false)
+                    metadata1.GetReference(embedInteropTypes: false),
                 }
             );
 
@@ -5480,7 +5481,7 @@ interface IUsePia6 : ITest35
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -5489,7 +5490,7 @@ interface IUsePia6 : ITest35
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -5584,7 +5585,7 @@ class UsePia7 : UsePia6, ITest35
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -5593,7 +5594,7 @@ class UsePia7 : UsePia6, ITest35
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -5681,7 +5682,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -5690,7 +5691,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -5766,7 +5767,7 @@ class UsePia7 : ITest33
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -5775,7 +5776,7 @@ class UsePia7 : ITest33
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -5851,7 +5852,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -5861,7 +5862,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaCompilation.EmitToImageReference(embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -5931,7 +5932,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -5941,7 +5942,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaCompilation.EmitToImageReference(embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -6011,7 +6012,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -6021,7 +6022,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaCompilation.EmitToImageReference(embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -6097,7 +6098,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -6107,7 +6108,7 @@ class UsePia
                 references: new MetadataReference[]
                 {
                     piaCompilation.EmitToImageReference(embedInteropTypes: true),
-                    CSharpRef
+                    CSharpRef,
                 }
             );
 
@@ -6175,7 +6176,7 @@ public interface ITest34 : ITest33
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -6198,7 +6199,7 @@ class UsePia5
             DiagnosticDescription[] expected =
             {
                 // error CS1748: Cannot find the interop type that matches the embedded interop type 'ITest33'. Are you missing an assembly reference?
-                Diagnostic(ErrorCode.ERR_NoCanonicalView).WithArguments("ITest33")
+                Diagnostic(ErrorCode.ERR_NoCanonicalView).WithArguments("ITest33"),
             };
 
             var compilation1 = CreateCompilation(
@@ -6206,7 +6207,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -6216,7 +6217,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation2, false, expected);
@@ -6271,7 +6272,7 @@ public interface ITest34
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -6293,7 +6294,7 @@ class UsePia5
             DiagnosticDescription[] expected =
             {
                 // error CS1748: Cannot find the interop type that matches the embedded interop type 'ITest33'. Are you missing an assembly reference?
-                Diagnostic(ErrorCode.ERR_NoCanonicalView).WithArguments("ITest33")
+                Diagnostic(ErrorCode.ERR_NoCanonicalView).WithArguments("ITest33"),
             };
 
             var fullName = MetadataTypeName.FromFullName("ITest33");
@@ -6304,7 +6305,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
 
@@ -6327,7 +6328,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -6360,7 +6361,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2)
+                    new CSharpCompilationReference(piaCompilation2),
                 }
             );
 
@@ -6383,7 +6384,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream())
+                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream()),
                 }
             );
 
@@ -6462,7 +6463,7 @@ public interface ITest34
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -6488,7 +6489,7 @@ class UsePia5
             {
                 // (10,17): error CS1748: Cannot find the interop type that matches the embedded interop type 'ITest33'. Are you missing an assembly reference?
                 //         ITest34 y = null;
-                Diagnostic(ErrorCode.ERR_NoCanonicalView, "y = null").WithArguments("ITest33")
+                Diagnostic(ErrorCode.ERR_NoCanonicalView, "y = null").WithArguments("ITest33"),
             };
 
             var compilation1 = CreateCompilation(
@@ -6496,7 +6497,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation1, true, expected);
@@ -6506,7 +6507,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation2, true, expected);
@@ -6516,7 +6517,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2)
+                    new CSharpCompilationReference(piaCompilation2),
                 }
             );
             CompileAndVerify(compilation3, verify: Verification.FailsPEVerify);
@@ -6526,7 +6527,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream())
+                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream()),
                 }
             );
             CompileAndVerify(compilation4, verify: Verification.FailsPEVerify);
@@ -6582,7 +6583,7 @@ public interface ITest34
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -6609,7 +6610,7 @@ class UsePia5
                     .WithArguments(
                         "System.Collections.Generic.List<ITest33>",
                         "Pia2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             var compilation1 = CreateCompilation(
@@ -6617,7 +6618,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -6627,7 +6628,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation2, false, expected);
@@ -6684,7 +6685,7 @@ public interface ITest34
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -6712,7 +6713,7 @@ class UsePia5
                     .WithArguments(
                         "System.Collections.Generic.List<ITest33>",
                         "Pia2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             var compilation1 = CreateCompilation(
@@ -6720,7 +6721,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation1, true, expected);
@@ -6730,7 +6731,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation2, true, expected);
@@ -6782,7 +6783,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             compilation1.VerifyEmitDiagnostics(
@@ -6849,7 +6850,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
 
@@ -6859,7 +6860,7 @@ class UsePia5
                 //         y.M2(null);
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "y.M2")
                     .WithArguments("ITest33")
-                    .WithLocation(10, 9)
+                    .WithLocation(10, 9),
             };
 
             VerifyEmitDiagnostics(compilation1, true, expected);
@@ -6915,7 +6916,7 @@ public interface ITest34
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -6942,7 +6943,7 @@ class UsePia5
                     .WithArguments(
                         "System.Collections.Generic.List<ITest33>",
                         "Pia2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             var compilation1 = CreateCompilation(
@@ -6950,7 +6951,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation1, false, expected);
@@ -6960,7 +6961,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation2, false, expected);
@@ -6970,7 +6971,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2)
+                    new CSharpCompilationReference(piaCompilation2),
                 }
             );
             CompileAndVerify(compilation3);
@@ -6980,7 +6981,7 @@ class UsePia5
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream())
+                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream()),
                 }
             );
             CompileAndVerify(compilation4);
@@ -7038,7 +7039,7 @@ public interface ITest34
                 {
                     piaCompilation1.EmitToImageReference(embedInteropTypes: true),
                     SystemRuntimeFacadeRef,
-                    ValueTupleRef
+                    ValueTupleRef,
                 }
             );
 
@@ -7067,7 +7068,7 @@ public class UsePia5 : ITest34
                         "System.Collections.Generic.List<ValueTuple<ITest33, ITest33>>",
                         "Pia2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
                     )
-                    .WithLocation(5, 24)
+                    .WithLocation(5, 24),
             };
 
             var compilation1 = CreateCompilationWithMscorlib40(
@@ -7078,7 +7079,7 @@ public class UsePia5 : ITest34
                     piaCompilation2.ToMetadataReference(embedInteropTypes: true),
                     piaCompilation1.ToMetadataReference(),
                     ValueTupleRef,
-                    SystemRuntimeFacadeRef
+                    SystemRuntimeFacadeRef,
                 }
             );
             VerifyEmitDiagnostics(
@@ -7095,7 +7096,7 @@ public class UsePia5 : ITest34
                     piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                     piaCompilation1.ToMetadataReference(),
                     ValueTupleRef,
-                    SystemRuntimeFacadeRef
+                    SystemRuntimeFacadeRef,
                 }
             );
             VerifyEmitDiagnostics(
@@ -7112,7 +7113,7 @@ public class UsePia5 : ITest34
                     piaCompilation2.ToMetadataReference(),
                     piaCompilation1.ToMetadataReference(),
                     ValueTupleRef,
-                    SystemRuntimeFacadeRef
+                    SystemRuntimeFacadeRef,
                 }
             );
             VerifyEmitDiagnostics(
@@ -7129,7 +7130,7 @@ public class UsePia5 : ITest34
                     piaCompilation2.EmitToImageReference(),
                     piaCompilation1.ToMetadataReference(),
                     ValueTupleRef,
-                    SystemRuntimeFacadeRef
+                    SystemRuntimeFacadeRef,
                 }
             );
             VerifyEmitDiagnostics(
@@ -7190,7 +7191,7 @@ public interface ITest34
                 assemblyName: "Pia2",
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation1, embedInteropTypes: true),
                 }
             );
 
@@ -7220,7 +7221,7 @@ class UsePia5
                     .WithArguments(
                         "System.Collections.Generic.List<ITest33>",
                         "Pia2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-                    )
+                    ),
             };
 
             var compilation1 = CreateCompilation(
@@ -7228,7 +7229,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation2, embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation1, true, expected);
@@ -7238,7 +7239,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation2.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation2.EmitToImageReference(embedInteropTypes: true),
                 }
             );
             VerifyEmitDiagnostics(compilation2, true, expected);
@@ -7248,7 +7249,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation2)
+                    new CSharpCompilationReference(piaCompilation2),
                 }
             );
             CompileAndVerify(compilation3, verify: Verification.FailsPEVerify);
@@ -7258,7 +7259,7 @@ class UsePia5
                 options: TestOptions.DebugExe,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream())
+                    MetadataReference.CreateFromStream(piaCompilation2.EmitToStream()),
                 }
             );
             CompileAndVerify(compilation4, verify: Verification.FailsPEVerify);
@@ -7425,7 +7426,7 @@ public class NetImpl : IEventsDerived_Event
                 NetImpl_cs,
                 new[]
                 {
-                    new CSharpCompilationReference(IEvent_Compilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(IEvent_Compilation, embedInteropTypes: true),
                 },
                 options: TestOptions.ReleaseDll,
                 assemblyName: "NetImpl"
@@ -7490,7 +7491,7 @@ class Test
                 new CSharpCompilationReference(NetImpl_1_Compilation),
                 new CSharpCompilationReference(NetImpl_2_Compilation),
                 MetadataReference.CreateFromStream(NetImpl_1_Image),
-                MetadataReference.CreateFromStream(NetImpl_2_Image)
+                MetadataReference.CreateFromStream(NetImpl_2_Image),
             };
 
             MetadataReference[] IEvent_refs = new MetadataReference[]
@@ -7498,7 +7499,7 @@ class Test
                 new CSharpCompilationReference(IEvent_Compilation),
                 new CSharpCompilationReference(IEvent_Compilation, embedInteropTypes: true),
                 IEvent_Metadata.GetReference(),
-                IEvent_Metadata.GetReference(embedInteropTypes: true)
+                IEvent_Metadata.GetReference(embedInteropTypes: true),
             };
 
             foreach (var NetImpl_ref in NetImpl_refs)
@@ -7564,7 +7565,7 @@ namespace NoPiaTestApp
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -7573,7 +7574,7 @@ namespace NoPiaTestApp
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    piaCompilation.EmitToImageReference(embedInteropTypes: true)
+                    piaCompilation.EmitToImageReference(embedInteropTypes: true),
                 }
             );
 
@@ -7589,7 +7590,7 @@ namespace NoPiaTestApp
                 // (6,44): warning CS0067: The event 'NoPiaTestApp.Test.e3' is never used
                 //         public event DelegateWithInterface e3;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "e3")
-                    .WithArguments("NoPiaTestApp.Test.e3")
+                    .WithArguments("NoPiaTestApp.Test.e3"),
             };
 
             DiagnosticDescription[] expectedMEtadataOnly =
@@ -7599,7 +7600,7 @@ namespace NoPiaTestApp
                     .WithArguments(
                         "IMyInterface",
                         "System.Runtime.InteropServices.ComImportAttribute"
-                    )
+                    ),
             };
 
             VerifyEmitDiagnostics(compilation1, false, expected, expectedMEtadataOnly);
@@ -7807,7 +7808,7 @@ class UsePia
                 options: TestOptions.ReleaseExe,
                 references: new MetadataReference[]
                 {
-                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true)
+                    new CSharpCompilationReference(piaCompilation, embedInteropTypes: true),
                 }
             );
 
@@ -7817,7 +7818,7 @@ class UsePia
                 //     	x.Goo += Handler;
                 Diagnostic(ErrorCode.ERR_MissingPredefinedMember, "x.Goo += Handler")
                     .WithArguments("System.Runtime.InteropServices.ComAwareEventInfo", ".ctor")
-                    .WithLocation(10, 6)
+                    .WithLocation(10, 6),
             };
 
             VerifyEmitDiagnostics(compilation1, true, expected);
@@ -8018,7 +8019,7 @@ class Program
                         .GetReference(
                             display: "ParametersWithoutNames.dll",
                             embedInteropTypes: true
-                        )
+                        ),
                 },
                 options: TestOptions.ReleaseDll
             );

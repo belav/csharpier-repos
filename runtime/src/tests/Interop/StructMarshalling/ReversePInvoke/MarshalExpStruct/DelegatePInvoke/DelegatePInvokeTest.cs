@@ -22,7 +22,7 @@ public class Test_DelegatePInvokeTest
         ByteStructPack2ExplicitId,
         ShortStructPack4ExplicitId,
         IntStructPack8ExplicitId,
-        LongStructPack16ExplicitId
+        LongStructPack16ExplicitId,
     }
 
     #region Methods implementation

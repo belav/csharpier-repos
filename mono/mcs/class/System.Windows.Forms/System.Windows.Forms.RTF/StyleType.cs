@@ -37,6 +37,6 @@ namespace System.Windows.Forms.RTF
     {
         Paragraph = 0,
         Character = 1,
-        Section = 2
+        Section = 2,
     }
 }

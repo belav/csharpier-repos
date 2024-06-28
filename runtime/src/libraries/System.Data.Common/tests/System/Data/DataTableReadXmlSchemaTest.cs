@@ -692,7 +692,7 @@ namespace System.Data.Tests
                 new ThreadCultureChange(
                     new CultureInfo("en-US")
                     {
-                        NumberFormat = new NumberFormatInfo() { NegativeSign = "()" }
+                        NumberFormat = new NumberFormatInfo() { NegativeSign = "()" },
                     }
                 )
             )
@@ -2375,7 +2375,7 @@ namespace System.Data.Tests
                     255,
                     255,
                     255,
-                    11
+                    11,
                 }
             );
 
@@ -2384,7 +2384,7 @@ namespace System.Data.Tests
                 new ThreadCultureChange(
                     new CultureInfo("en-US")
                     {
-                        NumberFormat = new NumberFormatInfo() { NegativeSign = "()" }
+                        NumberFormat = new NumberFormatInfo() { NegativeSign = "()" },
                     }
                 )
             )

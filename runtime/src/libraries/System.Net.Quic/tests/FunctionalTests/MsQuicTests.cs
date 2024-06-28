@@ -226,7 +226,7 @@ namespace System.Net.Quic.Tests
                     ListenEndPoint = new IPEndPoint(IPAddress.Loopback, 0),
                     ApplicationProtocols = new List<SslApplicationProtocol>()
                     {
-                        ApplicationProtocol
+                        ApplicationProtocol,
                     },
                     ConnectionOptionsCallback = (_, _, _) =>
                     {
@@ -235,7 +235,7 @@ namespace System.Net.Quic.Tests
                             SslStreamCertificateContext.Create(certificate, chain);
                         serverOptions.ServerAuthenticationOptions.ServerCertificate = null;
                         return ValueTask.FromResult(serverOptions);
-                    }
+                    },
                 };
 
                 // Use whatever endpoint, it'll get overwritten in CreateConnectedQuicConnection.
@@ -352,7 +352,7 @@ namespace System.Net.Quic.Tests
             clientSslOptions.CertificateChainPolicy = new X509ChainPolicy()
             {
                 RevocationMode = X509RevocationMode.NoCheck,
-                TrustMode = X509ChainTrustMode.CustomRootTrust
+                TrustMode = X509ChainTrustMode.CustomRootTrust,
             };
             clientSslOptions.CertificateChainPolicy.CustomTrustStore.Add(
                 _certificates.serverChain[_certificates.serverChain.Count - 1]
@@ -400,7 +400,7 @@ namespace System.Net.Quic.Tests
                             return false;
                         };
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
 
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
@@ -442,7 +442,7 @@ namespace System.Net.Quic.Tests
                 ),
                 ApplicationProtocols = new List<SslApplicationProtocol>() { ApplicationProtocol },
                 ConnectionOptionsCallback = (_, _, _) =>
-                    ValueTask.FromResult(CreateQuicServerOptions())
+                    ValueTask.FromResult(CreateQuicServerOptions()),
             };
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
 
@@ -528,7 +528,7 @@ namespace System.Net.Quic.Tests
                         return null;
                     };
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
 
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
@@ -609,7 +609,7 @@ namespace System.Net.Quic.Tests
                         return certificate;
                     };
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
 
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
@@ -638,14 +638,14 @@ namespace System.Net.Quic.Tests
                     ListenEndPoint = new IPEndPoint(IPAddress.Loopback, 0),
                     ApplicationProtocols = new List<SslApplicationProtocol>()
                     {
-                        ApplicationProtocol
+                        ApplicationProtocol,
                     },
                     ConnectionOptionsCallback = (_, _, _) =>
                     {
                         var serverOptions = CreateQuicServerOptions();
                         serverOptions.ServerAuthenticationOptions.ServerCertificate = certificate;
                         return ValueTask.FromResult(serverOptions);
-                    }
+                    },
                 };
                 await using QuicListener listener = await CreateQuicListener(quicOptions);
 
@@ -711,14 +711,14 @@ namespace System.Net.Quic.Tests
                     ListenEndPoint = new IPEndPoint(ipAddress, 0),
                     ApplicationProtocols = new List<SslApplicationProtocol>()
                     {
-                        ApplicationProtocol
+                        ApplicationProtocol,
                     },
                     ConnectionOptionsCallback = (_, _, _) =>
                     {
                         var serverOptions = CreateQuicServerOptions();
                         serverOptions.ServerAuthenticationOptions.ServerCertificate = certificate;
                         return ValueTask.FromResult(serverOptions);
-                    }
+                    },
                 };
 
                 // Use whatever endpoint, it'll get overwritten in CreateConnectedQuicConnection.
@@ -802,7 +802,7 @@ namespace System.Net.Quic.Tests
                             return true;
                         };
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
 
             await using QuicListener listener = await CreateQuicListener(listenerOptions);
@@ -857,7 +857,7 @@ namespace System.Net.Quic.Tests
                     serverOptions.MaxInboundBidirectionalStreams = 1;
                     serverOptions.MaxInboundUnidirectionalStreams = 1;
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
             (QuicConnection clientConnection, QuicConnection serverConnection) =
                 await CreateConnectedQuicConnection(null, listenerOptions);
@@ -892,7 +892,7 @@ namespace System.Net.Quic.Tests
                     serverOptions.MaxInboundBidirectionalStreams = 1;
                     serverOptions.MaxInboundUnidirectionalStreams = 1;
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
             (QuicConnection clientConnection, QuicConnection serverConnection) =
                 await CreateConnectedQuicConnection(null, listenerOptions);
@@ -939,7 +939,7 @@ namespace System.Net.Quic.Tests
                     serverOptions.MaxInboundBidirectionalStreams = 1;
                     serverOptions.MaxInboundUnidirectionalStreams = 1;
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
             (QuicConnection clientConnection, QuicConnection serverConnection) =
                 await CreateConnectedQuicConnection(null, listenerOptions);
@@ -1050,7 +1050,7 @@ namespace System.Net.Quic.Tests
                     serverOptions.MaxInboundBidirectionalStreams = 1;
                     serverOptions.MaxInboundUnidirectionalStreams = 1;
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
             (QuicConnection clientConnection, QuicConnection serverConnection) =
                 await CreateConnectedQuicConnection(null, listenerOptions);
@@ -1275,7 +1275,7 @@ namespace System.Net.Quic.Tests
             {
                 var segment = new BufferSegment(memory)
                 {
-                    RunningIndex = RunningIndex + Memory.Length
+                    RunningIndex = RunningIndex + Memory.Length,
                 };
                 Next = segment;
                 return segment;
@@ -1624,7 +1624,7 @@ namespace System.Net.Quic.Tests
                     serverOptions.MaxInboundUnidirectionalStreams = 1;
                     serverOptions.IdleTimeout = TimeSpan.FromSeconds(1);
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
             (QuicConnection clientConnection, QuicConnection serverConnection) =
                 await CreateConnectedQuicConnection(null, listenerOptions);
@@ -1689,7 +1689,7 @@ namespace System.Net.Quic.Tests
                         return serverCert;
                     };
                     return ValueTask.FromResult(serverOptions);
-                }
+                },
             };
 
             // Use whatever endpoint, it'll get overwritten in CreateConnectedQuicConnection.

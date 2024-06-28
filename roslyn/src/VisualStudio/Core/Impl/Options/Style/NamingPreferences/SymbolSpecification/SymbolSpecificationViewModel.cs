@@ -131,7 +131,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                         SymbolKind.Local,
                         ServicesVSResources.NamingSpecification_CSharp_Local,
                         specification
-                    )
+                    ),
                 };
 
                 // Not localized because they're language keywords
@@ -161,7 +161,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                     new ModifierViewModel(DeclarationModifiers.Async, "async", specification),
                     new ModifierViewModel(DeclarationModifiers.Const, "const", specification),
                     new ModifierViewModel(DeclarationModifiers.ReadOnly, "readonly", specification),
-                    new ModifierViewModel(DeclarationModifiers.Static, "static", specification)
+                    new ModifierViewModel(DeclarationModifiers.Static, "static", specification),
                 };
             }
             else if (languageName == LanguageNames.VisualBasic)
@@ -237,7 +237,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                         SymbolKind.Local,
                         ServicesVSResources.NamingSpecification_VisualBasic_Local,
                         specification
-                    )
+                    ),
                 };
 
                 // Not localized because they're language keywords
@@ -271,7 +271,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
                     new ModifierViewModel(DeclarationModifiers.Async, "Async", specification),
                     new ModifierViewModel(DeclarationModifiers.Const, "Const", specification),
                     new ModifierViewModel(DeclarationModifiers.ReadOnly, "ReadOnly", specification),
-                    new ModifierViewModel(DeclarationModifiers.Static, "Shared", specification)
+                    new ModifierViewModel(DeclarationModifiers.Static, "Shared", specification),
                 };
             }
             else
@@ -391,13 +391,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Style.N
 
             internal SymbolKindOrTypeKind CreateSymbolOrTypeOrMethodKind()
             {
-                return _symbolKind.HasValue
-                    ? new SymbolKindOrTypeKind(_symbolKind.Value)
-                    : _typeKind.HasValue
-                        ? new SymbolKindOrTypeKind(_typeKind.Value)
-                        : _methodKind.HasValue
-                            ? new SymbolKindOrTypeKind(_methodKind.Value)
-                            : throw ExceptionUtilities.Unreachable();
+                return _symbolKind.HasValue ? new SymbolKindOrTypeKind(_symbolKind.Value)
+                    : _typeKind.HasValue ? new SymbolKindOrTypeKind(_typeKind.Value)
+                    : _methodKind.HasValue ? new SymbolKindOrTypeKind(_methodKind.Value)
+                    : throw ExceptionUtilities.Unreachable();
             }
         }
 

@@ -61,7 +61,7 @@ public sealed class HttpLoggingOptions
         HeaderNames.UserAgent,
         HeaderNames.Warning,
         HeaderNames.XRequestedWith,
-        HeaderNames.XUACompatible
+        HeaderNames.XUACompatible,
     };
 
     /// <summary>
@@ -96,7 +96,7 @@ public sealed class HttpLoggingOptions
         HeaderNames.Server,
         HeaderNames.TransferEncoding,
         HeaderNames.Upgrade,
-        HeaderNames.XPoweredBy
+        HeaderNames.XPoweredBy,
     };
 
     /// <summary>

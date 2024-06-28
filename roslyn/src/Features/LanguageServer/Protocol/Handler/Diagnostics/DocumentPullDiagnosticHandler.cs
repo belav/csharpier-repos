@@ -53,7 +53,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                     // values for a particular file, so our results should always be preferred over the workspace-pull
                     // values which are cached and may be out of date.
                     Supersedes = WorkspaceDiagnosticIdentifier,
-                }
+                },
             };
 
         protected override VSInternalDiagnosticReport[] CreateRemovedReport(

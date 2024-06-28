@@ -433,13 +433,13 @@ namespace System.Activities.Core.Presentation
                     {
                         Source = this,
                         Mode = BindingMode.OneWay,
-                        Path = new PropertyPath(this.CaseProperty)
+                        Path = new PropertyPath(this.CaseProperty),
                     },
                     new Binding
                     {
                         Source = this,
                         Mode = BindingMode.OneWay,
-                        Path = new PropertyPath(this.IsDefaultCaseProperty)
+                        Path = new PropertyPath(this.IsDefaultCaseProperty),
                     },
                 },
             };
@@ -526,7 +526,7 @@ namespace System.Activities.Core.Presentation
                 {
                     Source = this,
                     Mode = BindingMode.OneWay,
-                    Path = new PropertyPath(this.DefaultCaseDisplayNameProperty)
+                    Path = new PropertyPath(this.DefaultCaseDisplayNameProperty),
                 }
             );
             return result;

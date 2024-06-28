@@ -1079,7 +1079,7 @@ namespace System.ComponentModel.Composition.Hosting
             Unknown,
             TreatAsRejected,
             TreatAsValidated,
-            NeedsTesting
+            NeedsTesting,
         };
 
         private abstract class PartQueryStateNode

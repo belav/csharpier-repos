@@ -219,7 +219,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                     new StaticFileOptions
                     {
                         RequestPath = new PathString(baseUrl),
-                        FileProvider = fileProvider
+                        FileProvider = fileProvider,
                     }
                 )
             );
@@ -264,7 +264,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                     OnPrepareResponse = context =>
                     {
                         onPrepareResponseExecuted = true;
-                    }
+                    },
                 }
             )
         );
@@ -312,7 +312,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                         onPrepareResponseExecuted = true;
 
                         return Task.CompletedTask;
-                    }
+                    },
                 }
             )
         );
@@ -368,7 +368,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                         Assert.False(asyncCallbackInvoked);
                         asyncCallbackInvoked = true;
                         return Task.CompletedTask;
-                    }
+                    },
                 }
             )
         );
@@ -422,7 +422,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                         new StaticFileOptions
                         {
                             RequestPath = new PathString(),
-                            FileProvider = fileProvider
+                            FileProvider = fileProvider,
                         }
                     );
                     app.UseEndpoints(endpoints => { });
@@ -485,7 +485,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                         new StaticFileOptions
                         {
                             RequestPath = new PathString(),
-                            FileProvider = fileProvider
+                            FileProvider = fileProvider,
                         }
                     );
                     app.UseEndpoints(endpoints => { });
@@ -554,7 +554,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                 new StaticFileOptions
                 {
                     RequestPath = new PathString(),
-                    FileProvider = fileProvider
+                    FileProvider = fileProvider,
                 }
             );
         });
@@ -583,7 +583,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                     new StaticFileOptions
                     {
                         RequestPath = new PathString(baseUrl),
-                        FileProvider = fileProvider
+                        FileProvider = fileProvider,
                     }
                 )
             );
@@ -674,7 +674,7 @@ public class StaticFileMiddlewareTests : LoggedTest
                     new StaticFileOptions
                     {
                         RequestPath = new PathString(baseUrl),
-                        FileProvider = fileProvider
+                        FileProvider = fileProvider,
                     }
                 )
             );
@@ -691,7 +691,7 @@ public class StaticFileMiddlewareTests : LoggedTest
             new[] { "", @".", "/missing.file" },
             new[] { "/subdir", @".", "/subdir/missing.file" },
             new[] { "/missing.file", @"./", "/missing.file" },
-            new[] { "", @"./", "/xunit.xml" }
+            new[] { "", @"./", "/xunit.xml" },
         };
 
     public static IEnumerable<object[]> ExistingFiles =>
@@ -702,6 +702,6 @@ public class StaticFileMiddlewareTests : LoggedTest
             new[] { "/SomeDir", @".", "/soMediR/TestDocument.txt" },
             new[] { "", @"SubFolder", "/ranges.txt" },
             new[] { "/somedir", @"SubFolder", "/somedir/ranges.txt" },
-            new[] { "", @"SubFolder", "/Empty.txt" }
+            new[] { "", @"SubFolder", "/Empty.txt" },
         };
 }

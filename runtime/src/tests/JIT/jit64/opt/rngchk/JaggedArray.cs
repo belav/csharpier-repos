@@ -22,7 +22,7 @@ namespace SimpleArray_01
                 new RngTest(Test.Test2),
                 new RngTest(Test.Test3),
                 new RngTest(Test.Test4),
-                new RngTest(Test.Test5)
+                new RngTest(Test.Test5),
             };
             foreach (RngTest test in Tests)
             {

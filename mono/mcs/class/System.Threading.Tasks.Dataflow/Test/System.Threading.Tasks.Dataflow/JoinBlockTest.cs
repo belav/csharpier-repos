@@ -127,7 +127,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 new GroupingDataflowBlockOptions
                 {
                     MaxNumberOfGroups = 1,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
 
@@ -159,7 +159,7 @@ namespace MonoTests.System.Threading.Tasks.Dataflow
                 {
                     MaxNumberOfGroups = 1,
                     Greedy = false,
-                    TaskScheduler = scheduler
+                    TaskScheduler = scheduler,
                 }
             );
             var source1 = new TestSourceBlock<int>();

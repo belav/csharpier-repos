@@ -23,7 +23,7 @@ namespace Sample
         public void NewCallsCounter()
         {
             _calls?.Dispose();
-            _calls = new("fib-calls", this) { DisplayName = "Recursive Fib calls", };
+            _calls = new("fib-calls", this) { DisplayName = "Recursive Fib calls" };
         }
 
         [NonEvent]

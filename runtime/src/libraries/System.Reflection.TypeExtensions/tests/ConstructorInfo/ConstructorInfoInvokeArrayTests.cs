@@ -91,7 +91,7 @@ namespace System.Reflection.Tests
                                                 new object[]
                                                 {
                                                     invalidLowerBounds[j],
-                                                    invalidLengths[j]
+                                                    invalidLengths[j],
                                                 }
                                             )
                                 );
@@ -152,7 +152,7 @@ namespace System.Reflection.Tests
                                                 new object[]
                                                 {
                                                     invalidLengths1[j],
-                                                    invalidLengths2[j]
+                                                    invalidLengths2[j],
                                                 }
                                             )
                                 );
@@ -203,7 +203,7 @@ namespace System.Reflection.Tests
                                                     invalidLowerBounds1[j],
                                                     invalidLengths3[j],
                                                     invalidLowerBounds2[j],
-                                                    invalidLengths4[j]
+                                                    invalidLengths4[j],
                                                 }
                                             )
                                 );
@@ -251,7 +251,7 @@ namespace System.Reflection.Tests
                                                 validLowerBounds1[j],
                                                 validLengths1[j],
                                                 validLowerBounds2[j],
-                                                validLengths2[j]
+                                                validLengths2[j],
                                             }
                                         );
                                 Assert.Equal(validLowerBounds1[j], arr.GetLowerBound(0));
@@ -279,7 +279,7 @@ namespace System.Reflection.Tests
                                 -10,
                                 -20,
                                 -40,
-                                0
+                                0,
                             };
                             validLowerBounds2 = new int[]
                             {
@@ -292,7 +292,7 @@ namespace System.Reflection.Tests
                                 99,
                                 100,
                                 -30,
-                                0
+                                0,
                             };
                             validLengths1 = new int[] { 1, 200, 2, 40, 0, 1, 200, 2, 40, 65535 };
                             validLengths2 = new int[] { 5, 10, 1, 0, 4, 5, 65535, 1, 0, 4 };
@@ -313,7 +313,7 @@ namespace System.Reflection.Tests
                                                 validLowerBounds1[j],
                                                 validLengths1[j],
                                                 validLowerBounds2[j],
-                                                validLengths2[j]
+                                                validLengths2[j],
                                             }
                                         );
                                 Assert.Equal(validLowerBounds1[j], arr.GetLowerBound(0));
@@ -393,7 +393,7 @@ namespace System.Reflection.Tests
                                                 new object[]
                                                 {
                                                     invalidLengths1[j],
-                                                    invalidLengths2[j]
+                                                    invalidLengths2[j],
                                                 }
                                             )
                                 );
@@ -414,7 +414,7 @@ namespace System.Reflection.Tests
                                 2,
                                 110,
                                 5,
-                                100
+                                100,
                             };
                             for (int j = 0; j < validLengths1.Length; j++)
                             {

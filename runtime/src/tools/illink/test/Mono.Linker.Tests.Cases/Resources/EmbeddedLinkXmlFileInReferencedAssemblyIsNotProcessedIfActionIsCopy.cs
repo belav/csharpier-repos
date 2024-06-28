@@ -8,11 +8,11 @@ namespace Mono.Linker.Tests.Cases.Resources
         "EmbeddedLinkXmlFileInReferencedAssemblyIsNotProcessedIfActionIsCopy_Lib1.dll",
         new[]
         {
-            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsNotProcessedIfActionIsCopy_Lib1.cs"
+            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsNotProcessedIfActionIsCopy_Lib1.cs",
         },
         resources: new object[]
         {
-            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsNotProcessedIfActionIsCopy_Lib1.xml"
+            "Dependencies/EmbeddedLinkXmlFileInReferencedAssemblyIsNotProcessedIfActionIsCopy_Lib1.xml",
         }
     )]
     [SetupLinkerAction(

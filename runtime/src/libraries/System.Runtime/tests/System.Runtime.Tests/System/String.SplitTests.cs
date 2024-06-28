@@ -58,7 +58,7 @@ namespace System.Tests
                 StringSplitOptions options in new[]
                 {
                     StringSplitOptions.None - 1,
-                    (StringSplitOptions)0x04
+                    (StringSplitOptions)0x04,
                 }
             )
             {
@@ -256,7 +256,7 @@ namespace System.Tests
         [InlineData(",", ',', M, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData(",,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData(",,", ',', 1, StringSplitOptions.None, new[] { ",," })]
-        [InlineData(",,", ',', 2, StringSplitOptions.None, new[] { "", ",", })]
+        [InlineData(",,", ',', 2, StringSplitOptions.None, new[] { "", "," })]
         [InlineData(",,", ',', 3, StringSplitOptions.None, new[] { "", "", "" })]
         [InlineData(",,", ',', 4, StringSplitOptions.None, new[] { "", "", "" })]
         [InlineData(",,", ',', M, StringSplitOptions.None, new[] { "", "", "" })]
@@ -328,7 +328,7 @@ namespace System.Tests
         [InlineData(",a,b", ',', 5, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b" })]
         [InlineData("a,b,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a,b,", ',', 1, StringSplitOptions.None, new[] { "a,b," })]
-        [InlineData("a,b,", ',', 2, StringSplitOptions.None, new[] { "a", "b,", })]
+        [InlineData("a,b,", ',', 2, StringSplitOptions.None, new[] { "a", "b," })]
         [InlineData("a,b,", ',', 3, StringSplitOptions.None, new[] { "a", "b", "" })]
         [InlineData("a,b,", ',', 4, StringSplitOptions.None, new[] { "a", "b", "" })]
         [InlineData("a,b,", ',', M, StringSplitOptions.None, new[] { "a", "b", "" })]
@@ -346,7 +346,7 @@ namespace System.Tests
         [InlineData("a,b,c", ',', M, StringSplitOptions.None, new[] { "a", "b", "c" })]
         [InlineData("a,b,c", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a,b,c", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "a,b,c" })]
-        [InlineData("a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c", })]
+        [InlineData("a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c" })]
         [InlineData(
             "a,b,c",
             ',',
@@ -370,13 +370,13 @@ namespace System.Tests
         )]
         [InlineData("a,,c", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a,,c", ',', 1, StringSplitOptions.None, new[] { "a,,c" })]
-        [InlineData("a,,c", ',', 2, StringSplitOptions.None, new[] { "a", ",c", })]
+        [InlineData("a,,c", ',', 2, StringSplitOptions.None, new[] { "a", ",c" })]
         [InlineData("a,,c", ',', 3, StringSplitOptions.None, new[] { "a", "", "c" })]
         [InlineData("a,,c", ',', 4, StringSplitOptions.None, new[] { "a", "", "c" })]
         [InlineData("a,,c", ',', M, StringSplitOptions.None, new[] { "a", "", "c" })]
         [InlineData("a,,c", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a,,c", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "a,,c" })]
-        [InlineData("a,,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c", })]
+        [InlineData("a,,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
         [InlineData("a,,c", ',', 3, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
         [InlineData("a,,c", ',', 4, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
         [InlineData("a,,c", ',', M, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "c" })]
@@ -388,7 +388,7 @@ namespace System.Tests
         [InlineData(",a,b,c", ',', M, StringSplitOptions.None, new[] { "", "a", "b", "c" })]
         [InlineData(",a,b,c", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData(",a,b,c", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { ",a,b,c" })]
-        [InlineData(",a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c", })]
+        [InlineData(",a,b,c", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c" })]
         [InlineData(
             ",a,b,c",
             ',',
@@ -413,18 +413,12 @@ namespace System.Tests
         [InlineData("a,b,c,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("a,b,c,", ',', 1, StringSplitOptions.None, new[] { "a,b,c," })]
         [InlineData("a,b,c,", ',', 2, StringSplitOptions.None, new[] { "a", "b,c," })]
-        [InlineData("a,b,c,", ',', 3, StringSplitOptions.None, new[] { "a", "b", "c,", })]
+        [InlineData("a,b,c,", ',', 3, StringSplitOptions.None, new[] { "a", "b", "c," })]
         [InlineData("a,b,c,", ',', 4, StringSplitOptions.None, new[] { "a", "b", "c", "" })]
         [InlineData("a,b,c,", ',', M, StringSplitOptions.None, new[] { "a", "b", "c", "" })]
         [InlineData("a,b,c,", ',', 0, StringSplitOptions.RemoveEmptyEntries, new string[0])]
         [InlineData("a,b,c,", ',', 1, StringSplitOptions.RemoveEmptyEntries, new[] { "a,b,c," })]
-        [InlineData(
-            "a,b,c,",
-            ',',
-            2,
-            StringSplitOptions.RemoveEmptyEntries,
-            new[] { "a", "b,c,", }
-        )]
+        [InlineData("a,b,c,", ',', 2, StringSplitOptions.RemoveEmptyEntries, new[] { "a", "b,c," })]
         [InlineData(
             "a,b,c,",
             ',',
@@ -610,13 +604,7 @@ namespace System.Tests
         )]
         [InlineData("first,second,", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("first,second,", ',', 1, StringSplitOptions.None, new[] { "first,second," })]
-        [InlineData(
-            "first,second,",
-            ',',
-            2,
-            StringSplitOptions.None,
-            new[] { "first", "second,", }
-        )]
+        [InlineData("first,second,", ',', 2, StringSplitOptions.None, new[] { "first", "second," })]
         [InlineData(
             "first,second,",
             ',',
@@ -729,7 +717,7 @@ namespace System.Tests
             ',',
             2,
             StringSplitOptions.RemoveEmptyEntries,
-            new[] { "first", "second,third", }
+            new[] { "first", "second,third" }
         )]
         [InlineData(
             "first,second,third",
@@ -754,7 +742,7 @@ namespace System.Tests
         )]
         [InlineData("first,,third", ',', 0, StringSplitOptions.None, new string[0])]
         [InlineData("first,,third", ',', 1, StringSplitOptions.None, new[] { "first,,third" })]
-        [InlineData("first,,third", ',', 2, StringSplitOptions.None, new[] { "first", ",third", })]
+        [InlineData("first,,third", ',', 2, StringSplitOptions.None, new[] { "first", ",third" })]
         [InlineData(
             "first,,third",
             ',',
@@ -789,7 +777,7 @@ namespace System.Tests
             ',',
             2,
             StringSplitOptions.RemoveEmptyEntries,
-            new[] { "first", "third", }
+            new[] { "first", "third" }
         )]
         [InlineData(
             "first,,third",
@@ -867,7 +855,7 @@ namespace System.Tests
             ',',
             2,
             StringSplitOptions.RemoveEmptyEntries,
-            new[] { "first", "second,third", }
+            new[] { "first", "second,third" }
         )]
         [InlineData(
             ",first,second,third",
@@ -910,7 +898,7 @@ namespace System.Tests
             ',',
             3,
             StringSplitOptions.None,
-            new[] { "first", "second", "third,", }
+            new[] { "first", "second", "third," }
         )]
         [InlineData(
             "first,second,third,",
@@ -945,7 +933,7 @@ namespace System.Tests
             ',',
             2,
             StringSplitOptions.RemoveEmptyEntries,
-            new[] { "first", "second,third,", }
+            new[] { "first", "second,third," }
         )]
         [InlineData(
             "first,second,third,",
@@ -1455,7 +1443,7 @@ namespace System.Tests
                 "ome",
                 "",
                 "pace",
-                ""
+                "",
             }
         )]
         [InlineData(
@@ -1483,7 +1471,7 @@ namespace System.Tests
                 "",
                 "p",
                 "ce",
-                ""
+                "",
             }
         )]
         [InlineData(
@@ -1552,7 +1540,7 @@ namespace System.Tests
                 ,
                 "ce" /*s*/
                 ,
-                ""
+                "",
             }
         )]
         [InlineData(
@@ -1593,7 +1581,7 @@ namespace System.Tests
                 "pace",
                 "comma",
                 "and more",
-                "pace"
+                "pace",
             }
         )]
         [InlineData(
@@ -1749,7 +1737,7 @@ namespace System.Tests
                 "ome",
                 "",
                 "pace",
-                ""
+                "",
             }
         )]
         [InlineData(
@@ -1777,7 +1765,7 @@ namespace System.Tests
                 "",
                 "p",
                 "ce",
-                ""
+                "",
             }
         )]
         [InlineData(
@@ -1846,7 +1834,7 @@ namespace System.Tests
                 ,
                 "ce" /*s*/
                 ,
-                ""
+                "",
             }
         )]
         [InlineData(
@@ -1914,7 +1902,7 @@ namespace System.Tests
                 "ome",
                 "paces",
                 "commas and more",
-                "paces"
+                "paces",
             }
         )]
         [InlineData(

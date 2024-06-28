@@ -141,7 +141,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
         var testCert = TestResources.GetTestCertificate();
         options.ClientAuthenticationOptions.ClientCertificates = new X509CertificateCollection
         {
-            testCert
+            testCert,
         };
 
         // Act
@@ -202,14 +202,14 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
+                    SslApplicationProtocol.Http3,
                 },
                 OnConnection = (context, cancellationToken) =>
                 {
                     var options = new SslServerAuthenticationOptions();
                     options.ApplicationProtocols = new List<SslApplicationProtocol>();
                     return ValueTask.FromResult(options);
-                }
+                },
             },
             LoggerFactory
         );
@@ -285,7 +285,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
+                    SslApplicationProtocol.Http3,
                 },
                 OnConnection = (context, cancellationToken) =>
                 {
@@ -298,7 +298,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
                     var options = new SslServerAuthenticationOptions();
                     options.ServerCertificate = TestResources.GetTestCertificate();
                     return ValueTask.FromResult(options);
-                }
+                },
             },
             LoggerFactory
         );
@@ -374,14 +374,14 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
+                    SslApplicationProtocol.Http3,
                 },
                 OnConnection = (context, cancellationToken) =>
                 {
                     var options = new SslServerAuthenticationOptions();
                     options.ServerCertificate = TestResources.GetTestCertificate();
                     return ValueTask.FromResult(options);
-                }
+                },
             },
             LoggerFactory
         );
@@ -413,7 +413,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
+                    SslApplicationProtocol.Http3,
                 },
                 OnConnection = async (context, cancellationToken) =>
                 {
@@ -422,7 +422,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
                     var options = new SslServerAuthenticationOptions();
                     options.ServerCertificate = TestResources.GetTestCertificate();
                     return options;
-                }
+                },
             },
             LoggerFactory
         );
@@ -460,7 +460,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
+                    SslApplicationProtocol.Http3,
                 },
                 OnConnection = async (context, cancellationToken) =>
                 {
@@ -468,7 +468,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
 
                     // Options are invalid and S.N.Q will throw an error from AcceptConnectionAsync.
                     return new SslServerAuthenticationOptions();
-                }
+                },
             },
             LoggerFactory
         );
@@ -518,7 +518,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
             {
                 ApplicationProtocols = new List<SslApplicationProtocol>
                 {
-                    SslApplicationProtocol.Http3
+                    SslApplicationProtocol.Http3,
                 },
                 OnConnection = (context, cancellationToken) =>
                 {
@@ -528,7 +528,7 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
                     connectionContext = context.Connection;
 
                     return ValueTask.FromResult(options);
-                }
+                },
             },
             LoggerFactory
         );

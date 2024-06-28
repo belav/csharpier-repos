@@ -24,7 +24,7 @@ namespace System.CodeDom.Tests
             yield return new object[]
             {
                 new CodePrimitiveExpression("Value1"),
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
         }
 

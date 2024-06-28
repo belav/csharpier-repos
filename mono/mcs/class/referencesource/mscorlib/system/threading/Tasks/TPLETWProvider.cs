@@ -79,7 +79,7 @@ namespace System.Threading.Tasks
             ParallelFor = 2,
 
             /// <summary>Parallel.ForEach.</summary>
-            ParallelForEach = 3
+            ParallelForEach = 3,
         }
 
         /// <summary>Configured behavior of a task wait operation.</summary>
@@ -89,7 +89,7 @@ namespace System.Threading.Tasks
             Synchronous = 1,
 
             /// <summary>An asynchronous await.</summary>
-            Asynchronous = 2
+            Asynchronous = 2,
         }
 
         /// <summary>ETW tasks that have start/stop events.</summary>

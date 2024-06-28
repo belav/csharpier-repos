@@ -275,7 +275,7 @@ internal static class VsTfmAndFileExtHashingAlgorithm
         0xb40bbe37L,
         0xc30c8ea1L,
         0x5a05df1bL,
-        0x2d02ef8dL
+        0x2d02ef8dL,
     ];
 #pragma warning restore format
 

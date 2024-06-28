@@ -78,7 +78,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("class").Single(),
                 Glyph.ClassInternal,
                 GetContainerName(testLspServer.GetCurrentSolution())
-            )
+            ),
         };
 
         var results = await RunGetWorkspaceSymbolsAsync(testLspServer, "A").ConfigureAwait(false);
@@ -108,7 +108,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("class").Single(),
                 Glyph.ClassInternal,
                 GetContainerName(testLspServer.GetCurrentSolution())
-            )
+            ),
         };
 
         using var progress = BufferedProgress.Create<LSP.SymbolInformation[]>(null);
@@ -145,7 +145,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("method").Single(),
                 Glyph.MethodPrivate,
                 GetContainerName(testLspServer.GetCurrentSolution(), "A")
-            )
+            ),
         };
 
         var results = await RunGetWorkspaceSymbolsAsync(testLspServer, "M").ConfigureAwait(false);
@@ -178,7 +178,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("local").Single(),
                 Glyph.Local,
                 GetContainerName(testLspServer.GetCurrentSolution(), "A.M.i")
-            )
+            ),
         };
 
         var results = await RunGetWorkspaceSymbolsAsync(testLspServer, "i").ConfigureAwait(false);
@@ -228,7 +228,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("field")[1],
                 Glyph.FieldPrivate,
                 GetContainerName(testLspServer.GetCurrentSolution(), "A.F")
-            )
+            ),
         };
 
         var results = await RunGetWorkspaceSymbolsAsync(testLspServer, "F").ConfigureAwait(false);
@@ -255,7 +255,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                     {
                     }
                 }
-                """
+                """,
         };
 
         await using var testLspServer = await CreateTestLspServerAsync(
@@ -277,7 +277,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("method")[1],
                 Glyph.MethodPrivate,
                 GetContainerName(testLspServer.GetCurrentSolution(), "B")
-            )
+            ),
         };
 
         var results = await RunGetWorkspaceSymbolsAsync(testLspServer, "M").ConfigureAwait(false);
@@ -327,7 +327,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
                 testLspServer.GetLocations("class").Single(),
                 Glyph.ClassInternal,
                 GetContainerName(testLspServer.GetCurrentSolution())
-            )
+            ),
         };
 
         var results = await RunGetWorkspaceSymbolsAsync(testLspServer, "A").ConfigureAwait(false);
@@ -343,7 +343,7 @@ public class WorkspaceSymbolsTests(ITestOutputHelper testOutputHelper)
         var request = new LSP.WorkspaceSymbolParams
         {
             Query = query,
-            PartialResultToken = progress
+            PartialResultToken = progress,
         };
 
         return testLspServer.ExecuteRequestAsync<

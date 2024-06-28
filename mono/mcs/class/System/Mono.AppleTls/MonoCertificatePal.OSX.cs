@@ -217,7 +217,7 @@ namespace Mono.AppleTls
             X509Cert = 9,
             PEMSequence = 10,
             PKCS7 = 11,
-            PKCS12 = 12
+            PKCS12 = 12,
         }
 
         // Native enum; don't change.
@@ -228,7 +228,7 @@ namespace Mono.AppleTls
             PublicKey = 2,
             SessionKey = 3,
             Certificate = 4,
-            Aggregate = 5
+            Aggregate = 5,
         }
 
         // Native enum; don't change

@@ -467,7 +467,7 @@ namespace System
                 DS.ERROR,
                 DS.BEGIN,
                 DS.BEGIN,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.N                                                                                 // DS.N
             new DS[]
@@ -489,7 +489,7 @@ namespace System
                 DS.DX_YN,
                 DS.N,
                 DS.N,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.NN                                                                                // DS.NN
             new DS[]
@@ -511,7 +511,7 @@ namespace System
                 DS.DX_NNY,
                 DS.NN,
                 DS.NN,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_Nd                                                                              // DS.D_Nd
             new DS[]
@@ -533,7 +533,7 @@ namespace System
                 DS.DX_YN,
                 DS.ERROR,
                 DS.D_Nd,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_NN                                                                              // DS.D_NN
             new DS[]
@@ -555,7 +555,7 @@ namespace System
                 DS.DX_NNY,
                 DS.ERROR,
                 DS.D_NN,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_NNd                                                                             // DS.D_NNd
             new DS[]
@@ -577,7 +577,7 @@ namespace System
                 DS.DX_NNY,
                 DS.ERROR,
                 DS.D_NNd,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_M                                                                               // DS.D_M
             new DS[]
@@ -599,7 +599,7 @@ namespace System
                 DS.DX_YM,
                 DS.ERROR,
                 DS.D_M,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_MN                                                                              // DS.D_MN
             new DS[]
@@ -621,7 +621,7 @@ namespace System
                 DS.DX_YMN,
                 DS.ERROR,
                 DS.D_MN,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_NM                                                                              // DS.D_NM
             new DS[]
@@ -643,7 +643,7 @@ namespace System
                 DS.DX_YMN,
                 DS.ERROR,
                 DS.D_NM,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_MNd                                                                             // DS.D_MNd
             new DS[]
@@ -665,7 +665,7 @@ namespace System
                 DS.DX_YMN,
                 DS.ERROR,
                 DS.D_MNd,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_NDS,                                                                            // DS.D_NDS,
             new DS[]
@@ -687,7 +687,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_NDS,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_Y                                                                               // DS.D_Y
             new DS[]
@@ -709,7 +709,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_Y,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_YN                                                                              // DS.D_YN
             new DS[]
@@ -731,7 +731,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_YN,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_YNd                                                                             // DS.D_YNd
             new DS[]
@@ -753,7 +753,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_YN,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_YM                                                                              // DS.D_YM
             new DS[]
@@ -775,7 +775,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_YM,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_YMd                                                                             // DS.D_YMd
             new DS[]
@@ -797,7 +797,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_YM,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.D_S                                                                               // DS.D_S
             new DS[]
@@ -819,7 +819,7 @@ namespace System
                 DS.ERROR,
                 DS.ERROR,
                 DS.D_S,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.T_S                                                                               // DS.T_S
             new DS[]
@@ -841,7 +841,7 @@ namespace System
                 DS.ERROR,
                 DS.T_S,
                 DS.T_S,
-                DS.ERROR
+                DS.ERROR,
             },
             // DS.T_Nt                                                                              // DS.T_Nt
             new DS[]
@@ -863,7 +863,7 @@ namespace System
                 DS.ERROR,
                 DS.T_Nt,
                 DS.T_Nt,
-                DS.TX_NN
+                DS.TX_NN,
             },
             // DS.T_NNt                                                                             // DS.T_NNt
             new DS[]
@@ -885,7 +885,7 @@ namespace System
                 DS.ERROR,
                 DS.T_NNt,
                 DS.T_NNt,
-                DS.TX_NNN
+                DS.TX_NNN,
             },
         };
 

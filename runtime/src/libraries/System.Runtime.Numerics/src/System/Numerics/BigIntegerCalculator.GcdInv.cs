@@ -223,11 +223,9 @@ namespace System.Numerics
 
             buffer[1] = hi;
             buffer[0] = lo;
-            return hi != 0
-                ? 2
-                : lo != 0
-                    ? 1
-                    : 0;
+            return hi != 0 ? 2
+                : lo != 0 ? 1
+                : 0;
         }
 
         private static void ExtractDigits(

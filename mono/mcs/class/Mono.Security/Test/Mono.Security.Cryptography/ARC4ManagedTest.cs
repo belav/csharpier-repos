@@ -629,7 +629,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0xe9,
                 0x40,
                 0xb0,
-                0xc0
+                0xc0,
             };
             ARC4Managed rc4 = new ARC4Managed();
             rc4.Key = key;
@@ -655,7 +655,7 @@ namespace MonoTests.Mono.Security.Cryptography
             0x2e,
             0x59,
             0x96,
-            0x61
+            0x61,
         };
         static byte[] serverWriteKey =
         {
@@ -674,7 +674,7 @@ namespace MonoTests.Mono.Security.Cryptography
             0x79,
             0x91,
             0x12,
-            0x1e
+            0x1e,
         };
 
         // SSL3 Client's Finished Handshake (from ref. b)
@@ -738,7 +738,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0x6b,
                 0x4f,
                 0x63,
-                0x04
+                0x04,
             };
             ARC4Managed rc4 = new ARC4Managed();
             rc4.Key = clientWriteKey;
@@ -801,7 +801,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0xb3,
                 0x9f,
                 0x67,
-                0x10
+                0x10,
             };
             AssertEquals("RC4 - Client's Finished Handshake", expectedData, data);
         }
@@ -867,7 +867,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0x6d,
                 0x60,
                 0xd5,
-                0x4e
+                0x4e,
             };
             ARC4Managed rc4 = new ARC4Managed();
             rc4.Key = serverWriteKey;
@@ -930,7 +930,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0xd8,
                 0xb9,
                 0x90,
-                0x8c
+                0x8c,
             };
             AssertEquals("RC4 - Server's Finished Handshake", expectedData, encryptedData);
         }

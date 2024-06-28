@@ -19,7 +19,7 @@ namespace ROOT_PROJECT_NAMESPACE.Areas.HelpPage
                 {
                     controller = "Help",
                     action = "Index",
-                    apiId = UrlParameter.Optional
+                    apiId = UrlParameter.Optional,
                 }
             );
 

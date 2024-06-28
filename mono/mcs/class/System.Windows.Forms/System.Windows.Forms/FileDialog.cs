@@ -53,7 +53,7 @@ namespace System.Windows.Forms
         internal enum FileDialogType
         {
             OpenFileDialog,
-            SaveFileDialog
+            SaveFileDialog,
         }
 
         private bool addExtension = true;
@@ -207,7 +207,7 @@ namespace System.Windows.Forms
                     backToolBarButton,
                     upToolBarButton,
                     newdirToolBarButton,
-                    menueToolBarButton
+                    menueToolBarButton,
                 }
             );
             smallButtonToolBar.ButtonSize = new Size(24, 24); // 21, 16
@@ -1571,7 +1571,7 @@ namespace System.Windows.Forms
             {
                 Normal,
                 Down,
-                Up
+                Up,
             }
 
             private Image image = null;
@@ -2777,7 +2777,7 @@ namespace System.Windows.Forms
                     tilesMenutItem.CloneMenu(),
                     largeIconMenutItem.CloneMenu(),
                     listMenutItem.CloneMenu(),
-                    detailsMenutItem.CloneMenu()
+                    detailsMenutItem.CloneMenu(),
                 };
 
                 viewMenuItemClones.Add(menuItemClones);
@@ -5094,7 +5094,7 @@ namespace System.Windows.Forms
             Directory,
             Device,
             RemovableDevice,
-            Network
+            Network,
         }
 
         private MasterMount.FsTypes fsType;
@@ -5357,7 +5357,7 @@ namespace System.Windows.Forms
             nfs,
             smbfs,
             usbfs,
-            cifs
+            cifs,
         }
 
         internal struct Mount

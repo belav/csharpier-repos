@@ -102,11 +102,11 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource1 = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json1)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json1),
             };
             var jsonConfigSource2 = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json2)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json2),
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -141,11 +141,11 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource1 = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json1)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json1),
             };
             var jsonConfigSource2 = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json2)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json2),
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -180,11 +180,11 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource1 = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json1)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json1),
             };
             var jsonConfigSource2 = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json2)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json2),
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -213,7 +213,7 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json),
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -246,7 +246,7 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json),
             };
 
             var configurationBuilder = new ConfigurationBuilder();
@@ -306,7 +306,7 @@ namespace Microsoft.Extensions.Configuration.Json.Test
 
             var jsonConfigSource = new JsonConfigurationSource
             {
-                FileProvider = TestStreamHelpers.StringToFileProvider(json)
+                FileProvider = TestStreamHelpers.StringToFileProvider(json),
             };
 
             var configurationBuilder = new ConfigurationBuilder();

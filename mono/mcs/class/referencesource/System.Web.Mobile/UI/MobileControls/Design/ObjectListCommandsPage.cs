@@ -119,7 +119,7 @@ namespace System.Web.UI.Design.MobileControls
                     _txtText,
                     grplblData,
                     lblDefaultCommand,
-                    _cmbDefaultCommand
+                    _cmbDefaultCommand,
                 }
             );
         }

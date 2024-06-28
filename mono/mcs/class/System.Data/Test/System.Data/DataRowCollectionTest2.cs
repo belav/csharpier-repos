@@ -70,7 +70,7 @@ namespace MonoTests.System.Data
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
                     1.534,
-                    true
+                    true,
                 }
             );
             Assert.AreEqual(6, dt.Rows.Count, "DRWC5");
@@ -171,7 +171,7 @@ namespace MonoTests.System.Data
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
                     1.534,
-                    true
+                    true,
                 }
             );
             Assert.AreEqual(1, dt.Rows.Count, "DRWC15");
@@ -199,7 +199,7 @@ namespace MonoTests.System.Data
                     "1-String1",
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534
+                    1.534,
                 }
             );
             Assert.AreEqual(count + 1, dt.Rows.Count, "DRWC14");

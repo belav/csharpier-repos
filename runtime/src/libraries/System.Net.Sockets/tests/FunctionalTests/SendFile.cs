@@ -699,7 +699,7 @@ namespace System.Net.Sockets.Tests
                         count += received;
                     }
                     Assert.Equal(0, client.Available);
-                })
+                }),
             }.WhenAllOrAnyFailed();
         }
     }

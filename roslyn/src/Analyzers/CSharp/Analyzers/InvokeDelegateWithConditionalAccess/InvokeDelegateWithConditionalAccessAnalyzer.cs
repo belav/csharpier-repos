@@ -317,9 +317,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 {
                     Name: IdentifierNameSyntax { Identifier.ValueText: nameof(Action.Invoke) },
                     Expression: IdentifierNameSyntax identifier
-                } =>
-                    identifier,
-                _ => null
+                } => identifier,
+                _ => null,
             };
 
             if (invocationName is null)

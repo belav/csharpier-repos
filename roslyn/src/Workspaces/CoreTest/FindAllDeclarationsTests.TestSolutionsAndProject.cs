@@ -168,8 +168,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
         ) =>
             solutionKind switch
             {
-                SolutionKind.SingleClass =>
-                    CreateWorkspaceWithSingleProjectSolution(testHost, [SingleClass], out solution),
+                SolutionKind.SingleClass => CreateWorkspaceWithSingleProjectSolution(
+                    testHost,
+                    [SingleClass],
+                    out solution
+                ),
                 SolutionKind.SingleClassWithSingleMethod =>
                     CreateWorkspaceWithSingleProjectSolution(
                         testHost,
@@ -182,12 +185,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         [SingleClassWithSingleProperty],
                         out solution
                     ),
-                SolutionKind.SingleClassWithSingleField =>
-                    CreateWorkspaceWithSingleProjectSolution(
-                        testHost,
-                        [SingleClassWithSingleField],
-                        out solution
-                    ),
+                SolutionKind.SingleClassWithSingleField => CreateWorkspaceWithSingleProjectSolution(
+                    testHost,
+                    [SingleClassWithSingleField],
+                    out solution
+                ),
                 SolutionKind.TwoProjectsEachWithASingleClassWithSingleMethod =>
                     CreateWorkspaceWithMultipleProjectSolution(
                         testHost,
@@ -206,8 +208,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         [SingleClassWithSingleField, SingleClassWithSingleField],
                         out solution
                     ),
-                SolutionKind.NestedClass =>
-                    CreateWorkspaceWithSingleProjectSolution(testHost, [NestedClass], out solution),
+                SolutionKind.NestedClass => CreateWorkspaceWithSingleProjectSolution(
+                    testHost,
+                    [NestedClass],
+                    out solution
+                ),
                 SolutionKind.TwoNamespacesWithIdenticalClasses =>
                     CreateWorkspaceWithSingleProjectSolution(
                         testHost,
@@ -238,7 +243,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             TwoProjectsEachWithASingleClassWithSingleProperty,
             TwoProjectsEachWithASingleClassWithSingleField,
             NestedClass,
-            TwoNamespacesWithIdenticalClasses
+            TwoNamespacesWithIdenticalClasses,
         }
 
         private const string SingleClass =

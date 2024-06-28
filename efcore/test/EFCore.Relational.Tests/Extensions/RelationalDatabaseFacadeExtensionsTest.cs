@@ -232,12 +232,12 @@ public class RelationalDatabaseFacadeExtensionsTest
         {
             "00000000000001_One",
             "00000000000002_Two",
-            "00000000000003_Three"
+            "00000000000003_Three",
         };
 
         var migrationsAssembly = new FakeIMigrationsAssembly
         {
-            Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
+            Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo)),
         };
 
         var db = FakeRelationalTestHelpers.Instance.CreateContext(
@@ -268,7 +268,7 @@ public class RelationalDatabaseFacadeExtensionsTest
 
         var repository = new FakeHistoryRepository
         {
-            AppliedMigrations = migrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
+            AppliedMigrations = migrations.Select(id => new HistoryRow(id, "1.1.0")).ToList(),
         };
 
         var context = FakeRelationalTestHelpers.Instance.CreateContext(
@@ -410,19 +410,21 @@ public class RelationalDatabaseFacadeExtensionsTest
         {
             "00000000000001_One",
             "00000000000002_Two",
-            "00000000000003_Three"
+            "00000000000003_Three",
         };
 
         var appliedMigrations = new[] { "00000000000001_One", "00000000000002_Two" };
 
         var migrationsAssembly = new FakeIMigrationsAssembly
         {
-            Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo))
+            Migrations = migrations.ToDictionary(x => x, x => default(TypeInfo)),
         };
 
         var repository = new FakeHistoryRepository
         {
-            AppliedMigrations = appliedMigrations.Select(id => new HistoryRow(id, "1.1.0")).ToList()
+            AppliedMigrations = appliedMigrations
+                .Select(id => new HistoryRow(id, "1.1.0"))
+                .ToList(),
         };
 
         var context = FakeRelationalTestHelpers.Instance.CreateContext(

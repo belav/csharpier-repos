@@ -77,7 +77,7 @@ namespace System.Text.Json.Serialization.Tests
             UnsupportedDerivedTypesWrapper_Dictionary wrapper =
                 new UnsupportedDerivedTypesWrapper_Dictionary
                 {
-                    DictionaryWrapper = new UnsupportedDictionaryWrapper()
+                    DictionaryWrapper = new UnsupportedDictionaryWrapper(),
                 };
             wrapper.DictionaryWrapper[new int[,] { }] = 1;
 

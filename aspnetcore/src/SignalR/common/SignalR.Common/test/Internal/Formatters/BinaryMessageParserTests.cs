@@ -163,7 +163,7 @@ public class BinaryMessageParserTests
             0x7c,
             0x7d,
             0x7e,
-            0x7f
+            0x7f,
         },
         new byte[]
         {
@@ -294,7 +294,7 @@ public class BinaryMessageParserTests
             0x7c,
             0x7d,
             0x7e,
-            0x7f
+            0x7f,
         }
     )]
     public void ReadBinaryMessage(byte[] encoded, byte[] payload)

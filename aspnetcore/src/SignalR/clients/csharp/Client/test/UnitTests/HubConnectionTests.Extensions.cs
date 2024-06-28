@@ -299,7 +299,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = args
+                            arguments = args,
                         }
                     )
                     .DefaultTimeout();
@@ -337,7 +337,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { 42, "42" }
+                            arguments = new object[] { 42, "42" },
                         }
                     )
                     .DefaultTimeout();
@@ -349,7 +349,7 @@ public partial class HubConnectionTests
                             invocationId = "2",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { 42 }
+                            arguments = new object[] { 42 },
                         }
                     )
                     .DefaultTimeout();
@@ -388,7 +388,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { 42, "42" }
+                            arguments = new object[] { 42, "42" },
                         }
                     )
                     .DefaultTimeout();
@@ -400,7 +400,7 @@ public partial class HubConnectionTests
                             invocationId = "2",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { 42 }
+                            arguments = new object[] { 42 },
                         }
                     )
                     .DefaultTimeout();
@@ -438,7 +438,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { "xxx" }
+                            arguments = new object[] { "xxx" },
                         }
                     )
                     .DefaultTimeout();
@@ -450,7 +450,7 @@ public partial class HubConnectionTests
                             invocationId = "2",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { 42 }
+                            arguments = new object[] { 42 },
                         }
                     )
                     .DefaultTimeout();
@@ -489,7 +489,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { "xxx" }
+                            arguments = new object[] { "xxx" },
                         }
                     )
                     .DefaultTimeout();
@@ -501,7 +501,7 @@ public partial class HubConnectionTests
                             invocationId = "2",
                             type = 1,
                             target = "Foo",
-                            arguments = new object[] { 42 }
+                            arguments = new object[] { 42 },
                         }
                     )
                     .DefaultTimeout();
@@ -889,7 +889,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = args
+                            arguments = args,
                         }
                     )
                     .DefaultTimeout();

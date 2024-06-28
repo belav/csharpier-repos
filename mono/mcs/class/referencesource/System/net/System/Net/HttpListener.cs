@@ -173,11 +173,9 @@ namespace System.Net
         private UnsafeNclNativeMethods.HttpApi.HTTP_REQUEST* Allocate(uint size)
         {
             uint newSize =
-                size != 0
-                    ? size
-                    : RequestBuffer == null
-                        ? 4096
-                        : Size;
+                size != 0 ? size
+                : RequestBuffer == null ? 4096
+                : Size;
             if (m_NativeOverlapped != null && newSize != RequestBuffer.Length)
             {
                 NativeOverlapped* nativeOverlapped = m_NativeOverlapped;
@@ -333,7 +331,7 @@ namespace System.Net
             (byte)'c',
             (byte)'a',
             (byte)'t',
-            (byte)'e'
+            (byte)'e',
         };
 
         private class AuthenticationSelectorInfo

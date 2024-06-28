@@ -299,7 +299,7 @@ namespace Tracing.Tests.ProcessInfoValidation
                 Architecture.X64 => "x64",
                 Architecture.Arm => "arm32",
                 Architecture.Arm64 => "arm64",
-                _ => "Unknown"
+                _ => "Unknown",
             };
 
             Utils.Assert(

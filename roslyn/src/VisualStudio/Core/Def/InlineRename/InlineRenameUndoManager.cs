@@ -144,7 +144,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InlineRename
                     UndoManager = undoManager,
                     TextUndoHistory = undoHistory,
                     StartRenameSessionUndoPrimitive = startRenameUndoPrimitive,
-                    UndoHistoryBuffer = primaryBuffer
+                    UndoHistoryBuffer = primaryBuffer,
                 };
                 undoManager.Add(startRenameUndoPrimitive);
             }

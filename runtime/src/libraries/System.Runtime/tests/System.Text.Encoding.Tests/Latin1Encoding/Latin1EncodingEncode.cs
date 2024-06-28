@@ -41,7 +41,7 @@ namespace System.Text.Tests
                 "\u0100\u201E\uFF5E\u16DA",
                 0,
                 4,
-                new byte[] { 0x41, 0x22, 0x7E, 0x3F }
+                new byte[] { 0x41, 0x22, 0x7E, 0x3F },
             };
 
             yield return new object[]
@@ -49,14 +49,14 @@ namespace System.Text.Tests
                 "\uFF59\uFF60\u0262\u5FC3",
                 0,
                 4,
-                new byte[] { 0x79, 0x3F, 0x3F, 0x3F }
+                new byte[] { 0x79, 0x3F, 0x3F, 0x3F },
             };
             yield return new object[]
             {
                 "\u0001\u0060\u007E\u00E3\u0108\u2018\uFF59",
                 0,
                 7,
-                new byte[] { 0x01, 0x60, 0x7E, 0xE3, 0x43, 0x27, 0x79 }
+                new byte[] { 0x01, 0x60, 0x7E, 0xE3, 0x43, 0x27, 0x79 },
             };
         }
 
@@ -188,7 +188,7 @@ namespace System.Text.Tests
                     "latin1",
                     EncoderFallback.ReplacementFallback,
                     DecoderFallback.ExceptionFallback
-                )
+                ),
             };
         }
     }

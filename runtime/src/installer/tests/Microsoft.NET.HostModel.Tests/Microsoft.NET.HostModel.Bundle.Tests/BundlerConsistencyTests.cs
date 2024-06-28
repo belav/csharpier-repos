@@ -82,7 +82,7 @@ namespace Microsoft.NET.HostModel.Tests
             {
                 new FileSpec($"{appName}.dll", $"{appName}.dll"),
                 new FileSpec($"{appName}.deps.json", $"{appName}.deps.json"),
-                new FileSpec($"{appName}.runtimeconfig.json", $"{appName}.runtimeconfig.json")
+                new FileSpec($"{appName}.runtimeconfig.json", $"{appName}.runtimeconfig.json"),
             };
 
             Bundler bundler = CreateBundlerInstance();
@@ -102,7 +102,7 @@ namespace Microsoft.NET.HostModel.Tests
                 new FileSpec(appPath, "rel/app.repeat.dll"),
                 new FileSpec(appPath, "rel/app.repeat.dll"),
                 new FileSpec(systemLibPath, "rel/system.repeat.dll"),
-                new FileSpec(systemLibPath, "rel/system.repeat.dll")
+                new FileSpec(systemLibPath, "rel/system.repeat.dll"),
             };
 
             Bundler bundler = CreateBundlerInstance();
@@ -180,7 +180,7 @@ namespace Microsoft.NET.HostModel.Tests
         {
             var fileSpecs = new List<FileSpec>()
             {
-                new FileSpec(Binaries.AppHost.FilePath, BundlerHostName)
+                new FileSpec(Binaries.AppHost.FilePath, BundlerHostName),
             };
             if (bundleMultipleFiles)
             {

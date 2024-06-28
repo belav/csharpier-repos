@@ -51,7 +51,7 @@ namespace System.Runtime.Diagnostics
         {
             NoError,
             NoFreeBuffers,
-            EventTooBig
+            EventTooBig,
         }
 
         /// <summary>

@@ -28,7 +28,7 @@ namespace System.Reflection
             {
                 _context = context,
                 _callingModule = callingModule,
-                _referencedModules = referencedModules
+                _referencedModules = referencedModules,
             };
 
             TypeDesc result = parser.Parse()?.Value;

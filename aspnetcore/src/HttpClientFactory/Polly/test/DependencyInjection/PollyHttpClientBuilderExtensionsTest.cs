@@ -579,7 +579,7 @@ public class PollyHttpClientBuilderExtensionsTest
         {
             typeof(IPolicyRegistry<string>),
             typeof(IReadOnlyPolicyRegistry<string>),
-            typeof(IConcurrentPolicyRegistry<string>)
+            typeof(IConcurrentPolicyRegistry<string>),
         };
 
         // Act 1

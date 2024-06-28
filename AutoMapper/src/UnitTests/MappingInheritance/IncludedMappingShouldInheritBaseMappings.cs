@@ -76,7 +76,7 @@ public class ReadonlyCollectionProperties : AutoMapperSpecBase
                         o.MapFrom(s =>
                             new[]
                             {
-                                new KeyValueModel { Key = "key1", Value = "value1" }
+                                new KeyValueModel { Key = "key1", Value = "value1" },
                             }
                         )
                 )
@@ -342,7 +342,7 @@ public class IncludedBaseMappingShouldInheritBaseMappings : NonValidatingSpecBas
         });
         var dest = new DtoSubObject { BaseString = "12345" };
         var mapper = config.CreateMapper();
-        mapper.Map(new ModelSubObject { DifferentBaseString = "", }, dest);
+        mapper.Map(new ModelSubObject { DifferentBaseString = "" }, dest);
 
         dest.BaseString.ShouldBe("12345");
     }

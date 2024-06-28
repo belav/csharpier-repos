@@ -488,11 +488,9 @@ namespace System.Net.Sockets.Tests
                     using (suppressContext ? ExecutionContext.SuppressFlow() : default)
                     {
                         pending =
-                            sendMode == 0
-                                ? client.SendAsync(saea)
-                                : sendMode == 1
-                                    ? client.SendToAsync(saea)
-                                    : client.SendPacketsAsync(saea);
+                            sendMode == 0 ? client.SendAsync(saea)
+                            : sendMode == 1 ? client.SendToAsync(saea)
+                            : client.SendPacketsAsync(saea);
                     }
                     asyncLocal.Value = 0;
 
@@ -719,7 +717,7 @@ namespace System.Net.Sockets.Tests
         ) =>
             new AsyncLocal<object>()
             {
-                Value = new SetOnFinalized { _setWhenFinalized = ecDropped }
+                Value = new SetOnFinalized { _setWhenFinalized = ecDropped },
             };
 
         private sealed class SetOnFinalized

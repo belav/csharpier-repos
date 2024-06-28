@@ -164,7 +164,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.localVaria
         {
             First,
             Second,
-            Third
+            Third,
         }
 
         [Fact]

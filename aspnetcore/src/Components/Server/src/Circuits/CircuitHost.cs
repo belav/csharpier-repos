@@ -74,7 +74,7 @@ internal partial class CircuitHost : IAsyncDisposable
         Services = scope.ServiceProvider;
 
         Circuit = new Circuit(this);
-        Handle = new CircuitHandle() { CircuitHost = this, };
+        Handle = new CircuitHandle() { CircuitHost = this };
 
         _dispatchInboundActivity = BuildInboundActivityDispatcher(_circuitHandlers, Circuit);
 
@@ -959,7 +959,7 @@ internal partial class CircuitHost : IAsyncDisposable
                     [
                         .. _scope
                             .ServiceProvider.GetServices<CircuitHandler>()
-                            .OrderBy(h => h.Order)
+                            .OrderBy(h => h.Order),
                     ];
                     await OnCircuitOpenedAsync(cancellation);
                     await OnConnectionUpAsync(cancellation);

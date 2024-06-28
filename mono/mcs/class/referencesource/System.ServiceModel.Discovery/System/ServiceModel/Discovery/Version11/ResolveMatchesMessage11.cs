@@ -33,7 +33,7 @@ namespace System.ServiceModel.Discovery.Version11
                 MessageSequence = DiscoveryMessageSequence11.FromDiscoveryMessageSequence(
                     messageSequence
                 ),
-                ResolveMatches = ResolveMatches11.Create(endpointDiscoveryMetadata)
+                ResolveMatches = ResolveMatches11.Create(endpointDiscoveryMetadata),
             };
         }
     }

@@ -136,7 +136,7 @@ public class CSharpHelper : ICSharpHelper
         "virtual",
         "void",
         "volatile",
-        "while"
+        "while",
     };
 
     private static readonly IReadOnlyDictionary<
@@ -173,7 +173,7 @@ public class CSharpHelper : ICSharpHelper
         { typeof(ulong), (c, v) => c.Literal((ulong)v) },
         { typeof(ushort), (c, v) => c.Literal((ushort)v) },
         { typeof(BigInteger), (c, v) => c.Literal((BigInteger)v) },
-        { typeof(Type), (c, v) => c.Literal((Type)v) }
+        { typeof(Type), (c, v) => c.Literal((Type)v) },
     };
 
     /// <summary>
@@ -391,7 +391,7 @@ public class CSharpHelper : ICSharpHelper
             '\n' => @"\n",
             '\r' => @"\r",
             '\'' => @"\'",
-            _ => value.ToString()
+            _ => value.ToString(),
         }
         + "\'";
 

@@ -468,7 +468,7 @@ namespace System.Web.Razor.Test.Parser.CSharp
                             "{"
                         ),
                         new SourceLocation(1, 0, 1)
-                    )
+                    ),
                 }
             );
         }
@@ -522,7 +522,7 @@ namespace System.Web.Razor.Test.Parser.CSharp
                 designTimeParser: true,
                 expectedErrors: new[]
                 {
-                    new RazorError(RazorResources.ParseError_Helpers_Cannot_Be_Nested, 38, 1, 11)
+                    new RazorError(RazorResources.ParseError_Helpers_Cannot_Be_Nested, 38, 1, 11),
                 }
             );
         }

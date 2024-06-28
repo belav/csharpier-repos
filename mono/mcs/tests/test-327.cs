@@ -4,12 +4,12 @@ namespace A
 {
     enum X1
     {
-        x1
+        x1,
     };
 
     enum X2
     {
-        x2
+        x2,
     };
 }
 

@@ -18,7 +18,7 @@ namespace Microsoft.EntityFrameworkCore.Extensions
                     new[]
                     {
                         typeof(MethodCallCodeFragmentExtensionsTest),
-                        typeof(Action<MethodCallCodeFragmentExtensionsTest>)
+                        typeof(Action<MethodCallCodeFragmentExtensionsTest>),
                     }
                 ),
                 new NestedClosureCodeFragment(
@@ -29,7 +29,7 @@ namespace Microsoft.EntityFrameworkCore.Extensions
                             new[]
                             {
                                 typeof(MethodCallCodeFragmentExtensionsTest),
-                                typeof(TestArgument)
+                                typeof(TestArgument),
                             }
                         ),
                         new TestArgument()
@@ -44,7 +44,7 @@ namespace Microsoft.EntityFrameworkCore.Extensions
                 {
                     "Microsoft.EntityFrameworkCore.Extensions.Namespace1",
                     "Microsoft.EntityFrameworkCore.Extensions.Namespace2",
-                    "Microsoft.EntityFrameworkCore.Extensions.Namespace3"
+                    "Microsoft.EntityFrameworkCore.Extensions.Namespace3",
                 },
                 usings
             );

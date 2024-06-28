@@ -72,7 +72,7 @@ public static partial class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
             TestState =
             {
                 Sources = { source.ReplaceLineEndings() },
-                OutputKind = OutputKind.ConsoleApplication
+                OutputKind = OutputKind.ConsoleApplication,
             },
             FixedState = { Sources = { fixedSource.ReplaceLineEndings() } },
             ReferenceAssemblies = CSharpAnalyzerVerifier<TAnalyzer>.GetReferenceAssemblies(),

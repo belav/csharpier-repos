@@ -36,7 +36,7 @@ namespace System.Text.Tests
                 new byte[9],
                 "\u8FD9\u4E2A\u4E00\u4E2AABC\u6D4B\u8BD5".ToCharArray(),
                 8,
-                1
+                1,
             };
             yield return new object[]
             {
@@ -44,7 +44,7 @@ namespace System.Text.Tests
                 new byte[21],
                 "\u8FD9\u4E2A\u4E00\u4E2AABC\u6D4B\u8BD5".ToCharArray(),
                 18,
-                3
+                3,
             };
             yield return new object[]
             {
@@ -52,7 +52,7 @@ namespace System.Text.Tests
                 new byte[27],
                 "\u8FD9\u4E2A\u4E00\u4E2AABC\u6D4B\u8BD5".ToCharArray(),
                 16,
-                2
+                2,
             };
         }
 
@@ -347,11 +347,9 @@ namespace System.Text.Tests
 
         private static int Clamp(int value, int min, int max)
         {
-            return (value < min)
-                ? min
-                : (value > max)
-                    ? max
-                    : value;
+            return (value < min) ? min
+                : (value > max) ? max
+                : value;
         }
     }
 }

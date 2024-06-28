@@ -258,7 +258,7 @@ internal sealed class JsonTranscodingRouteAdapter
     {
         Literal,
         Any,
-        CatchAll
+        CatchAll,
     }
 
     private static HttpRouteVariable? GetVariable(HttpRoutePattern pattern, int i)

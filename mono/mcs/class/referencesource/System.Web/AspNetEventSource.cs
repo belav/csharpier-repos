@@ -291,7 +291,7 @@ namespace System.Web
         {
             RequestEnteredAspNetPipeline = 1,
             RequestStarted,
-            RequestCompleted
+            RequestCompleted,
         }
 
         // Tasks are used for correlating events; we're free to define our own.

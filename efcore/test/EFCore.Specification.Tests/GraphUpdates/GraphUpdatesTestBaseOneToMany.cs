@@ -787,9 +787,9 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                         testCode =
                             deleteOrphansTiming == CascadeTiming.Immediate
                                 ? () => context.ChangeTracker.DetectChanges()
-                                : deleteOrphansTiming == null
-                                    ? () => context.ChangeTracker.CascadeChanges()
-                                    : () => context.SaveChanges();
+                            : deleteOrphansTiming == null
+                                ? () => context.ChangeTracker.CascadeChanges()
+                            : () => context.SaveChanges();
                     }
 
                     var message = Assert.Throws<InvalidOperationException>(testCode).Message;
@@ -1026,7 +1026,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                     {
                         CompositeChildren = new ObservableHashSet<OptionalComposite2>(
                             ReferenceEqualityComparer.Instance
-                        )
+                        ),
                     };
 
                     context.Set<Optional1>().Add(newParent);
@@ -1603,8 +1603,8 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
                         )
                         {
                             new() { Id = 5 },
-                            new() { Id = 6 }
-                        }
+                            new() { Id = 6 },
+                        },
                     };
 
                     context.Set<RequiredComposite1>().Add(newParent);
@@ -2095,7 +2095,7 @@ public abstract partial class GraphUpdatesTestBase<TFixture>
             var orphaned = new List<Optional2>
             {
                 new() { Parent = removed },
-                new() { Parent = removed }
+                new() { Parent = removed },
             };
 
             context.AddRange(orphaned);

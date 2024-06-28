@@ -77,7 +77,7 @@ namespace System.Linq.Expressions.Tests
             new object[] { ExpressionType.SubtractAssignChecked },
             new object[] { ExpressionType.TypeEqual },
             new object[] { (ExpressionType)(-1) },
-            new object[] { (ExpressionType)int.MaxValue }
+            new object[] { (ExpressionType)int.MaxValue },
         };
 
         public static IEnumerable<object[]> NumericMethodAllowedUnaryTypes

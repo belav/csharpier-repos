@@ -78,7 +78,7 @@ namespace Mono.CSharp
     {
         Store = 1,
         Load = 2,
-        LoadStore = 3
+        LoadStore = 3,
     };
 
     /// <summary>
@@ -1057,7 +1057,7 @@ namespace Mono.CSharp
             IgnoreArity = 1 << 5,
             IgnoreAmbiguity = 1 << 6,
             NameOfExcluded = 1 << 7,
-            DontSetConditionalAccess = 1 << 8
+            DontSetConditionalAccess = 1 << 8,
         }
 
         //
@@ -5272,7 +5272,7 @@ namespace Mono.CSharp
             return new MethodGroupExpr(best, queriedType, loc)
             {
                 best_candidate = best,
-                best_candidate_return = best.ReturnType
+                best_candidate_return = best.ReturnType,
             };
         }
 
@@ -5377,7 +5377,7 @@ namespace Mono.CSharp
                 ec.DefineLabel()
             )
             {
-                Statement = statement
+                Statement = statement,
             };
 
             EmitCall(ec, arguments, statement);
@@ -5733,7 +5733,7 @@ namespace Mono.CSharp
             CovariantDelegate = 1 << 2,
             NoBaseMembers = 1 << 3,
             BaseMembersIncluded = 1 << 4,
-            GetEnumeratorLookup = 1 << 5
+            GetEnumeratorLookup = 1 << 5,
         }
 
         public interface IBaseMembersProvider

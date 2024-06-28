@@ -928,7 +928,7 @@ namespace System.Tests
                 0.0,
                 0.84551240822557006,
                 1.0,
-                1844674407370955.25
+                1844674407370955.25,
             }
             from format in new[] { "D", "D4", "D20", "X", "X4", "X20" }
             select new object[] { value, format };
@@ -1813,7 +1813,7 @@ namespace System.Tests
                 0.0,
                 0.845512390f,
                 1.0,
-                429496.72
+                429496.72,
             }
             from format in new[] { "D", "D4", "D20", "X", "X4", "X20" }
             select new object[] { value, format };

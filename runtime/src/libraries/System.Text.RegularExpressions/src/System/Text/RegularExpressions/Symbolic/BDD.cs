@@ -566,11 +566,9 @@ namespace System.Text.RegularExpressions.Symbolic
 
             if (IsLeaf)
             {
-                return !other.IsLeaf || Ordinal < other.Ordinal
-                    ? -1
-                    : Ordinal == other.Ordinal
-                        ? 0
-                        : 1;
+                return !other.IsLeaf || Ordinal < other.Ordinal ? -1
+                    : Ordinal == other.Ordinal ? 0
+                    : 1;
             }
 
             if (other.IsLeaf)
@@ -580,11 +578,9 @@ namespace System.Text.RegularExpressions.Symbolic
 
             ulong min = GetMin();
             ulong bdd_min = other.GetMin();
-            return min < bdd_min
-                ? -1
-                : bdd_min < min
-                    ? 1
-                    : Ordinal.CompareTo(other.Ordinal);
+            return min < bdd_min ? -1
+                : bdd_min < min ? 1
+                : Ordinal.CompareTo(other.Ordinal);
         }
     }
 }

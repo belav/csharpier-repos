@@ -16,7 +16,7 @@ namespace ILLink.Shared.DataFlow
         Try,
         Catch,
         Filter,
-        Finally
+        Finally,
     }
 
     public enum ConditionKind

@@ -431,7 +431,7 @@ namespace Roslyn.Test.PdbUtilities
                 4166287,
                 4999559,
                 5999471,
-                7199369
+                7199369,
             ];
 #pragma warning restore format
 

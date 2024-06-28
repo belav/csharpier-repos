@@ -13,7 +13,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<TestEnum, TestInputSelect<TestEnum>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NotNullableEnum
+            ValueExpression = () => model.NotNullableEnum,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -32,7 +32,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<TestEnum, TestInputSelect<TestEnum>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NotNullableEnum
+            ValueExpression = () => model.NotNullableEnum,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -51,7 +51,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<TestEnum?, TestInputSelect<TestEnum?>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NullableEnum
+            ValueExpression = () => model.NullableEnum,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -70,7 +70,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<TestEnum?, TestInputSelect<TestEnum?>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NullableEnum
+            ValueExpression = () => model.NullableEnum,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -90,7 +90,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<Guid, TestInputSelect<Guid>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NotNullableGuid
+            ValueExpression = () => model.NotNullableGuid,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -111,7 +111,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<Guid?, TestInputSelect<Guid?>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NullableGuid
+            ValueExpression = () => model.NullableGuid,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -132,7 +132,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<int, TestInputSelect<int>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NotNullableInt
+            ValueExpression = () => model.NotNullableInt,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -152,7 +152,7 @@ public class InputSelectTest
         var rootComponent = new TestInputHostComponent<int?, TestInputSelect<int?>>
         {
             EditContext = new EditContext(model),
-            ValueExpression = () => model.NullableInt
+            ValueExpression = () => model.NullableInt,
         };
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
 
@@ -174,8 +174,8 @@ public class InputSelectTest
             ValueExpression = () => model.NotNullableInt,
             AdditionalAttributes = new Dictionary<string, object>
             {
-                { "DisplayName", "Some number" }
-            }
+                { "DisplayName", "Some number" },
+            },
         };
         var fieldIdentifier = FieldIdentifier.Create(() => model.NotNullableInt);
         var inputSelectComponent = await InputRenderer.RenderAndGetComponent(rootComponent);
@@ -212,7 +212,7 @@ public class InputSelectTest
     {
         One,
         Two,
-        Tree
+        Tree,
     }
 
     class TestModel

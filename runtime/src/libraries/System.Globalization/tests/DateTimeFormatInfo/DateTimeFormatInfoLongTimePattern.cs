@@ -148,7 +148,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 new CultureInfo("fr-CA").DateTimeFormat,
-                "HH h mm min ss s"
+                "HH h mm min ss s",
             }; // HH 'h' mm 'min' ss 's'
             yield return new object[] { new CultureInfo("fr-CH").DateTimeFormat, "HH:mm:ss" };
             yield return new object[] { new CultureInfo("fr-FR").DateTimeFormat, "HH:mm:ss" };

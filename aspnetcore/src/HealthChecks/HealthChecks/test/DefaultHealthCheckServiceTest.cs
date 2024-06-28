@@ -809,7 +809,7 @@ public class DefaultHealthCheckServiceTest
             CancellationToken cancellationToken = default
         )
         {
-            var data = new Dictionary<string, object>() { { "name", context.Registration.Name }, };
+            var data = new Dictionary<string, object>() { { "name", context.Registration.Name } };
             return Task.FromResult(HealthCheckResult.Healthy(data: data));
         }
     }

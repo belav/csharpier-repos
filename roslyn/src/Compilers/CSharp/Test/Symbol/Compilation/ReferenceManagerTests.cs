@@ -224,7 +224,7 @@ public class M
                 {
                     new CSharpCompilationReference(libV1),
                     new CSharpCompilationReference(libV3),
-                    new CSharpCompilationReference(refLibV2)
+                    new CSharpCompilationReference(refLibV2),
                 }
             );
 
@@ -248,7 +248,7 @@ public class M
                 {
                     new CSharpCompilationReference(libV3),
                     new CSharpCompilationReference(libV1),
-                    new CSharpCompilationReference(refLibV2)
+                    new CSharpCompilationReference(refLibV2),
                 }
             );
 
@@ -360,7 +360,7 @@ public class Q : S2 {}
                 references: new[]
                 {
                     new CSharpCompilationReference(refLibV1),
-                    new CSharpCompilationReference(libV1)
+                    new CSharpCompilationReference(libV1),
                 },
                 options: s_signedDll
             );
@@ -403,7 +403,7 @@ public class OKImpl : I
                 {
                     new CSharpCompilationReference(refLibV1),
                     new CSharpCompilationReference(libV2),
-                    new CSharpCompilationReference(x)
+                    new CSharpCompilationReference(x),
                 }
             );
 
@@ -560,7 +560,7 @@ public class OKImpl : I
                             $"{RuntimeCorLibName.Name} {RuntimeCorLibName.Version.ToString(2)}",
                             "RefLibV1 1.0",
                             "Lib 2.0",
-                            "X 2.0"
+                            "X 2.0",
                         },
                         reader.DumpAssemblyReferences()
                     );
@@ -625,7 +625,7 @@ public class R
                 references: new[]
                 {
                     new CSharpCompilationReference(a1),
-                    new CSharpCompilationReference(b2)
+                    new CSharpCompilationReference(b2),
                 },
                 options: s_signedDll
             );
@@ -649,7 +649,7 @@ public class M
                 {
                     new CSharpCompilationReference(refA1B2),
                     new CSharpCompilationReference(a2),
-                    new CSharpCompilationReference(b1)
+                    new CSharpCompilationReference(b1),
                 }
             );
 
@@ -755,7 +755,7 @@ namespace System.Runtime.CompilerServices
                 references: new MetadataReference[]
                 {
                     MinCorlibRef,
-                    new CSharpCompilationReference(libV1)
+                    new CSharpCompilationReference(libV1),
                 },
                 options: s_signedDll
             );
@@ -776,7 +776,7 @@ public class C
                 {
                     MinCorlibRef,
                     new CSharpCompilationReference(refLibV1),
-                    new CSharpCompilationReference(libV2)
+                    new CSharpCompilationReference(libV2),
                 }
             );
 
@@ -839,7 +839,7 @@ public class M
                 references: new[]
                 {
                     new CSharpCompilationReference(refLibV1),
-                    new CSharpCompilationReference(libV2)
+                    new CSharpCompilationReference(libV2),
                 }
             );
 
@@ -921,7 +921,7 @@ public class Test
                 references: new MetadataReference[]
                 {
                     MetadataReference.CreateFromImage(refLibV1.EmitToArray()),
-                    new CSharpCompilationReference(libV2)
+                    new CSharpCompilationReference(libV2),
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -1136,12 +1136,12 @@ public class E : bar::C { }
                     new TestMetadataReferenceResolver(
                         assemblyNames: new Dictionary<string, PortableExecutableReference>
                         {
-                            { "Lib", r3 }
+                            { "Lib", r3 },
                         },
                         files: new Dictionary<string, PortableExecutableReference>
                         {
                             { p2, r2 },
-                            { p3, r3 }
+                            { p3, r3 },
                         }
                     )
                 )
@@ -1329,7 +1329,7 @@ public interface I {}";
                 new[]
                 {
                     MetadataReference.CreateFromFile(p1),
-                    MetadataReference.CreateFromFile(p2)
+                    MetadataReference.CreateFromFile(p2),
                 },
                 TestOptions.ReleaseDll.WithAssemblyIdentityComparer(
                     DesktopAssemblyIdentityComparer.Default
@@ -1439,7 +1439,7 @@ public class Q
                 {
                     new CSharpCompilationReference(libV1),
                     new CSharpCompilationReference(refLibV1),
-                    new CSharpCompilationReference(libV2)
+                    new CSharpCompilationReference(libV2),
                 },
                 assemblyName: "Main"
             );
@@ -1701,7 +1701,7 @@ public class A
                 new ErroneousReferenceResolver()
             );
 
-            foreach (var tree in new[] { Parse("#r \"throw\"", options: TestOptions.Script), })
+            foreach (var tree in new[] { Parse("#r \"throw\"", options: TestOptions.Script) })
             {
                 var c = CSharpCompilation.Create(
                     "c",
@@ -2243,7 +2243,7 @@ class D
 
             var comp1 = CreateCompilation(
                 text1,
-                new MetadataReference[] { moduleRef, assemblyRef, }
+                new MetadataReference[] { moduleRef, assemblyRef }
             );
             var tree1 = comp1.SyntaxTrees.Single();
 
@@ -2302,7 +2302,7 @@ namespace A
                 )
                 .EmitToImageReference();
 
-            var comp1 = CreateCompilation(text1, new MetadataReference[] { moduleRef, });
+            var comp1 = CreateCompilation(text1, new MetadataReference[] { moduleRef });
             var tree1 = comp1.SyntaxTrees.Single();
 
             var implicitTypeCount1 = comp1
@@ -2513,7 +2513,7 @@ public class Source
                 new[]
                 {
                     new CSharpCompilationReference(libAv1),
-                    new CSharpCompilationReference(libBv2)
+                    new CSharpCompilationReference(libBv2),
                 }
             );
             comp.VerifyDiagnostics(
@@ -2584,7 +2584,7 @@ public class Source
                 new[]
                 {
                     new CSharpCompilationReference(libAv1),
-                    new CSharpCompilationReference(libBv2)
+                    new CSharpCompilationReference(libBv2),
                 }
             );
             comp.VerifyDiagnostics(
@@ -2655,7 +2655,7 @@ public class Source
                 new[]
                 {
                     new CSharpCompilationReference(libAv1),
-                    new CSharpCompilationReference(libBv2)
+                    new CSharpCompilationReference(libBv2),
                 }
             );
             comp.VerifyDiagnostics(
@@ -2767,7 +2767,7 @@ public class Source
                 new[]
                 {
                     new CSharpCompilationReference(libAv1),
-                    new CSharpCompilationReference(libBv2)
+                    new CSharpCompilationReference(libBv2),
                 }
             );
             comp.VerifyEmitDiagnostics(
@@ -2829,7 +2829,9 @@ public class Source
                 source,
                 new[]
                 {
-                    AssemblyMetadata.CreateFromImage(new byte[0]).GetReference(display: "Empty.dll")
+                    AssemblyMetadata
+                        .CreateFromImage(new byte[0])
+                        .GetReference(display: "Empty.dll"),
                 }
             );
             c.VerifyDiagnostics(
@@ -2959,7 +2961,7 @@ public class Source
         {
             var c = CreateSubmissionWithExactReferences(
                 "System.Diagnostics.Process.GetCurrentProcess()",
-                new[] { Net20.mscorlib, Net20.System, Net451.mscorlib, Net451.System, }
+                new[] { Net20.mscorlib, Net20.System, Net451.mscorlib, Net451.System }
             );
 
             c.VerifyDiagnostics();
@@ -3166,7 +3168,7 @@ new B()
                 {
                     MscorlibRef_v4_0_30316_17626,
                     bRef.WithAliases(ImmutableArray.Create("X")),
-                    aRef
+                    aRef,
                 },
                 TestOptions.ReleaseDll.WithMetadataReferenceResolver(
                     new TestMetadataReferenceResolver(
@@ -3180,7 +3182,7 @@ new B()
                                             true
                                         )
                                     )
-                            }
+                            },
                         }
                     )
                 )
@@ -3217,7 +3219,7 @@ new B()
                 {
                     MscorlibRef_v4_0_30316_17626,
                     bRef.WithAliases(ImmutableArray.Create("X")),
-                    aRef
+                    aRef,
                 },
                 TestOptions.ReleaseDll.WithMetadataReferenceResolver(
                     new TestMetadataReferenceResolver(
@@ -3227,7 +3229,7 @@ new B()
                                 "a",
                                 (PortableExecutableReference)
                                     aRef.WithProperties(MetadataReferenceProperties.Assembly)
-                            }
+                            },
                         }
                     )
                 )
@@ -3504,7 +3506,7 @@ public class P
             var resolver = new TestMissingMetadataReferenceResolver(
                 new Dictionary<string, MetadataReference>
                 {
-                    { "B", bRef.WithAliases(ImmutableArray.Create("X")) }
+                    { "B", bRef.WithAliases(ImmutableArray.Create("X")) },
                 }
             );
 
@@ -3867,7 +3869,7 @@ public class C : A
                 .ToMetadataReference();
 
             var resolver = new TestMissingMetadataReferenceResolver(
-                new Dictionary<string, MetadataReference> { { "B, 1.0.0.0", eRef }, }
+                new Dictionary<string, MetadataReference> { { "B, 1.0.0.0", eRef } }
             );
 
             var c = CreateCompilationWithMscorlib46(
@@ -3967,7 +3969,7 @@ public class C : A
                 .EmitToImageReference();
 
             var resolver = new TestMissingMetadataReferenceResolver(
-                new Dictionary<string, MetadataReference> { { "B", bRef }, { "D", dRef }, }
+                new Dictionary<string, MetadataReference> { { "B", bRef }, { "D", dRef } }
             );
 
             var c = CreateCompilationWithMscorlib46(
@@ -4028,7 +4030,7 @@ public class C : A
                 new Dictionary<string, MetadataReference>
                 {
                     // the compiler asked for v1, but we have v2
-                    { "B, 1.0.0.0", b2Ref }
+                    { "B, 1.0.0.0", b2Ref },
                 }
             );
 

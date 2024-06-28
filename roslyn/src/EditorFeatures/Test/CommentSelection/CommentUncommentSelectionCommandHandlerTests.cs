@@ -484,7 +484,7 @@ class Goo
                 expectedChanges: new[]
                 {
                     new TextChange(new TextSpan(6, 2), string.Empty),
-                    new TextChange(new TextSpan(16, 2), string.Empty)
+                    new TextChange(new TextSpan(16, 2), string.Empty),
                 },
                 expectedSelectedSpan: new Span(6, 8),
                 supportBlockComments: true
@@ -500,7 +500,7 @@ class Goo
                 expectedChanges: new[]
                 {
                     new TextChange(new TextSpan(19, 2), string.Empty),
-                    new TextChange(new TextSpan(29, 2), string.Empty)
+                    new TextChange(new TextSpan(29, 2), string.Empty),
                 },
                 expectedSelectedSpan: new Span(19, 8),
                 supportBlockComments: true
@@ -516,7 +516,7 @@ class Goo
                 expectedChanges: new[]
                 {
                     new TextChange(new TextSpan(0, 2), string.Empty),
-                    new TextChange(new TextSpan(15, 2), string.Empty)
+                    new TextChange(new TextSpan(15, 2), string.Empty),
                 },
                 expectedSelectedSpan: new Span(0, 13),
                 supportBlockComments: true
@@ -532,7 +532,7 @@ class Goo
                 expectedChanges: new[]
                 {
                     new TextChange(new TextSpan(0, 2), string.Empty),
-                    new TextChange(new TextSpan(15, 2), string.Empty)
+                    new TextChange(new TextSpan(15, 2), string.Empty),
                 },
                 expectedSelectedSpan: new Span(0, 13),
                 supportBlockComments: true
@@ -709,7 +709,7 @@ class A
     */
 }";
 
-            var expectedChanges = new[] { new TextChange(new TextSpan(55, 2), string.Empty), };
+            var expectedChanges = new[] { new TextChange(new TextSpan(55, 2), string.Empty) };
 
             var expectedSelectedSpans = new[] { Span.FromBounds(43, 65) };
 
@@ -737,7 +737,7 @@ class A
     */
 }";
 
-            var expectedChanges = new[] { new TextChange(new TextSpan(55, 2), string.Empty), };
+            var expectedChanges = new[] { new TextChange(new TextSpan(55, 2), string.Empty) };
 
             var expectedSelectedSpans = new[] { Span.FromBounds(22, 65) };
 

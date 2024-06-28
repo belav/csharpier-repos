@@ -35,7 +35,7 @@ namespace System.Workflow.ComponentModel
         Execute = 0,
         Cancel = 1,
         Compensate = 2,
-        HandleFault = 3
+        HandleFault = 3,
     }
 
     [Serializable]

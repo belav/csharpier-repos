@@ -216,7 +216,7 @@ public partial class InMemoryQueryExpression
                 {
                     _groupingParameter = inMemoryQueryExpression._groupingParameter,
                     _singleResultMethodInfo = inMemoryQueryExpression._singleResultMethodInfo,
-                    _scalarServerQuery = inMemoryQueryExpression._scalarServerQuery
+                    _scalarServerQuery = inMemoryQueryExpression._scalarServerQuery,
                 };
 
                 clonedInMemoryQueryExpression._clientProjections.AddRange(

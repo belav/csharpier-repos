@@ -46,7 +46,7 @@ namespace System.Windows.Forms
         XLookupNone = 1,
         XLookupChars = 2,
         XLookupKeySym = 3,
-        XLookupBoth = 4
+        XLookupBoth = 4,
     }
 
     internal class X11Keyboard : IDisposable
@@ -1995,7 +1995,9 @@ namespace System.Windows.Forms
             0,
             0,
             0,
-            (int)VirtualKeys.VK_DELETE /* FFF8 */
+            (int)
+                VirtualKeys.VK_DELETE /* FFF8 */
+            ,
         };
 
         private static readonly int[] nonchar_key_scan = new int[]
@@ -2264,6 +2266,7 @@ namespace System.Windows.Forms
             0x00,
             0x00,
             0x153 /* FFF8 */
+            ,
         };
 
         private static readonly int[] nonchar_vkey_key = new int[]
@@ -2524,6 +2527,7 @@ namespace System.Windows.Forms
             0,
             0,
             0 /* FA-FF */
+            ,
         };
     }
 }

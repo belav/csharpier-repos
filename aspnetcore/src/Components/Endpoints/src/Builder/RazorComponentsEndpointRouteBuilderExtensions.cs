@@ -45,7 +45,7 @@ public static class RazorComponentsEndpointRouteBuilderExtensions
             FileProvider = new ManifestEmbeddedFileProvider(
                 typeof(RazorComponentsEndpointRouteBuilderExtensions).Assembly
             ),
-            OnPrepareResponse = CacheHeaderSettings.SetCacheHeaders
+            OnPrepareResponse = CacheHeaderSettings.SetCacheHeaders,
         };
 
         var app = endpoints.CreateApplicationBuilder();

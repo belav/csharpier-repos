@@ -47,13 +47,13 @@ public class C<T>
     [A(X = C<int>.E.V)]
     public enum E
     {
-        V
+        V,
     }
 
     [A(X = new[] { C<int>.E2.A, C<int>.E2.B })]
     public enum E2
     {
         A,
-        B
+        B,
     }
 }

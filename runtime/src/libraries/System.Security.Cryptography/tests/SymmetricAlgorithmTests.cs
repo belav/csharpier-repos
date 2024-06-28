@@ -1117,7 +1117,7 @@ namespace System.Security.Cryptography.Tests
                     yield return new object[] { mode, 0x7FFFFFFD, 0x7FFFFFFE, 176 };
                 }
 
-                PaddingMode[] noPadOnAlignSize = new[] { PaddingMode.Zeros, PaddingMode.None, };
+                PaddingMode[] noPadOnAlignSize = new[] { PaddingMode.Zeros, PaddingMode.None };
 
                 foreach (PaddingMode mode in noPadOnAlignSize)
                 {

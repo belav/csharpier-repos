@@ -273,7 +273,7 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
         {
             var streamError = new HTTP_REQUEST_PROPERTY_STREAM_ERROR()
             {
-                ErrorCode = (uint)errorCode
+                ErrorCode = (uint)errorCode,
             };
             var statusCode = HttpApi.HttpSetRequestProperty(
                 Server.RequestQueue.Handle,
@@ -333,7 +333,7 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                 PropertyId = HTTP_DELEGATE_REQUEST_PROPERTY_ID.DelegateRequestDelegateUrlProperty,
                 PropertyInfo = uriPointer,
                 PropertyInfoLength = (uint)
-                    System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix)
+                    System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix),
             };
 
             // Passing 0 for delegateUrlGroupId allows http.sys to find the right group for the

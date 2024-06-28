@@ -30,6 +30,6 @@ namespace Microsoft.Build.Execution
     public enum BuildResultCode
     {
         Success,
-        Failure
+        Failure,
     }
 }

@@ -57,7 +57,7 @@ namespace System.Net
         {
             None,
             Challenge,
-            Response
+            Response,
         }
 
         HttpWebRequest connectRequest;

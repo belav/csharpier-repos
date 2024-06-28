@@ -47,7 +47,16 @@ namespace System.Globalization
         // Initialize our era info.
         static internal EraInfo[] koreanEraInfo = new EraInfo[]
         {
-            new EraInfo(1, 1, 1, 1, -2333, 2334, GregorianCalendar.MaxYear + 2333) // era #, start year/month/day, yearOffset, minEraYear
+            new EraInfo(
+                1,
+                1,
+                1,
+                1,
+                -2333,
+                2334,
+                GregorianCalendar.MaxYear + 2333
+            ) // era #, start year/month/day, yearOffset, minEraYear
+            ,
         };
 
         internal GregorianCalendarHelper helper;

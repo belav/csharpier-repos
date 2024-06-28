@@ -14,7 +14,7 @@ class Driver
                 FileName = "echo",
                 Arguments = "hello",
                 RedirectStandardOutput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             };
 
             Process p = Process.Start(psi);

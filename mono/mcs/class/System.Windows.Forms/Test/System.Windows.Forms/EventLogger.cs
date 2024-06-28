@@ -173,7 +173,7 @@ namespace MonoTests.System.Windows.Forms
                     new Type[]
                     {
                         invoke.GetParameters()[0].ParameterType,
-                        invoke.GetParameters()[1].ParameterType
+                        invoke.GetParameters()[1].ParameterType,
                     }
                 );
                 method.DefineParameter(1, ParameterAttributes.None, "test");

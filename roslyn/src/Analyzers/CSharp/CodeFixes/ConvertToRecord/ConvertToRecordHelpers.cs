@@ -51,10 +51,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                             Instance: IInstanceReferenceOperation,
                                             TargetMethod: IMethodSymbol { Name: nameof(Equals) },
                                             Arguments: [
-                                                IArgumentOperation { Value: IOperation arg }
+                                                IArgumentOperation { Value: IOperation arg },
                                             ]
                                         }
-                                    }
+                                    },
                                 ]
                             }
                         && arg.WalkDownConversion()
@@ -167,7 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                 OperatorKind: UnaryOperatorKind.Not,
                                 Operand: IOperation operand
                             }
-                        }
+                        },
                     ]
                 }
             )
@@ -287,10 +287,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                 Parameter: IParameterSymbol referencedParameter
                             },
                             Property: IPropertySymbol referencedProperty
-                        } =>
-                            referencedParameter.Equals(parameter)
-                                ? referencedProperty.GetBackingFieldIfAny()
-                                : null,
+                        } => referencedParameter.Equals(parameter)
+                            ? referencedProperty.GetBackingFieldIfAny()
+                            : null,
                         IFieldReferenceOperation
                         {
                             Instance: IParameterReferenceOperation
@@ -298,9 +297,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                 Parameter: IParameterSymbol referencedParameter
                             },
                             Field: IFieldSymbol referencedField
-                        } =>
-                            referencedParameter.Equals(parameter) ? referencedField : null,
-                        _ => null
+                        } => referencedParameter.Equals(parameter) ? referencedField : null,
+                        _ => null,
                     }
             );
 
@@ -540,14 +538,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         {
                             Instance: IInstanceReferenceOperation,
                             Field: IFieldSymbol field
-                        } =>
-                            field,
+                        } => field,
                         IPropertyReferenceOperation
                         {
                             Instance: IInstanceReferenceOperation,
                             Property: IPropertySymbol property
-                        } =>
-                            property,
+                        } => property,
                         _ => null,
                     };
 
@@ -717,9 +713,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                                                 }
                                             }
                                         }
-                                    }
+                                    },
                                 ]
-                            }
+                            },
                         ]
                     }
                 && referencedParameter1.Equals(parameter)
@@ -883,34 +879,32 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         OperatorKind: UnaryOperatorKind.Not,
                         Operand: IOperation newCondition
                     }
-                ) =>
-                    TryAddEqualizedFieldsForCondition(
-                        newCondition,
-                        !successRequirement,
-                        currentObject,
-                        otherObject,
-                        builder
-                    ),
+                ) => TryAddEqualizedFieldsForCondition(
+                    newCondition,
+                    !successRequirement,
+                    currentObject,
+                    otherObject,
+                    builder
+                ),
                 // We want our equality check to be exhaustive, i.e. all checks must pass for the condition to pass
                 // we recurse into each operand to try to find some props to bind
                 (
                     true,
                     IBinaryOperation { OperatorKind: BinaryOperatorKind.ConditionalAnd } andOp
-                ) =>
-                    TryAddEqualizedFieldsForCondition(
-                        andOp.LeftOperand,
+                ) => TryAddEqualizedFieldsForCondition(
+                    andOp.LeftOperand,
+                    successRequirement,
+                    currentObject,
+                    otherObject,
+                    builder
+                )
+                    && TryAddEqualizedFieldsForCondition(
+                        andOp.RightOperand,
                         successRequirement,
                         currentObject,
                         otherObject,
                         builder
-                    )
-                        && TryAddEqualizedFieldsForCondition(
-                            andOp.RightOperand,
-                            successRequirement,
-                            currentObject,
-                            otherObject,
-                            builder
-                        ),
+                    ),
                 // Exhaustive binary operator for inverted checks via DeMorgan's law
                 // We see an or here, but we're in a context where this being true will return false
                 // for example: return !(expr || expr)
@@ -940,14 +934,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         LeftOperand: IMemberReferenceOperation leftMemberReference,
                         RightOperand: IMemberReferenceOperation rightMemberReference,
                     }
-                ) =>
-                    TryAddFieldFromComparison(
-                        leftMemberReference,
-                        rightMemberReference,
-                        currentObject,
-                        otherObject,
-                        builder
-                    ),
+                ) => TryAddFieldFromComparison(
+                    leftMemberReference,
+                    rightMemberReference,
+                    currentObject,
+                    otherObject,
+                    builder
+                ),
                 // we are comparing two potential members, but in a context where if the expression is true, we return false
                 // e.g: return !(A != other.A);
                 (
@@ -958,14 +951,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         LeftOperand: IMemberReferenceOperation leftMemberReference,
                         RightOperand: IMemberReferenceOperation rightMemberReference,
                     }
-                ) =>
-                    TryAddFieldFromComparison(
-                        leftMemberReference,
-                        rightMemberReference,
-                        currentObject,
-                        otherObject,
-                        builder
-                    ),
+                ) => TryAddFieldFromComparison(
+                    leftMemberReference,
+                    rightMemberReference,
+                    currentObject,
+                    otherObject,
+                    builder
+                ),
                 // equals invocation, something like: A.Equals(other.A)
                 (
                     true,
@@ -975,12 +967,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         Instance: IMemberReferenceOperation invokedOn,
                         Arguments: [IMemberReferenceOperation arg]
                     }
-                ) =>
-                    TryAddFieldFromComparison(invokedOn, arg, currentObject, otherObject, builder),
+                ) => TryAddFieldFromComparison(invokedOn, arg, currentObject, otherObject, builder),
                 // some other operation, or an incorrect operation (!= when we expect == based on context, etc).
                 // If one of the conditions is just a null check on the "otherObject", then it's valid but doesn't check any members
                 // Otherwise we fail as it has unknown behavior
-                _ => IsNullCheck(condition, successRequirement, otherObject)
+                _ => IsNullCheck(condition, successRequirement, otherObject),
             };
 
         /// <summary>
@@ -1008,15 +999,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         OperatorKind: UnaryOperatorKind.Not,
                         Operand: IOperation newCondition
                     }
-                ) =>
-                    TryAddEqualizedFieldsForConditionWithoutTypedVariable(
-                        newCondition,
-                        !successRequirement,
-                        currentObject,
-                        builder,
-                        out boundVariable,
-                        additionalConditions
-                    ),
+                ) => TryAddEqualizedFieldsForConditionWithoutTypedVariable(
+                    newCondition,
+                    !successRequirement,
+                    currentObject,
+                    builder,
+                    out boundVariable,
+                    additionalConditions
+                ),
                 (
                     true,
                     IBinaryOperation
@@ -1025,15 +1015,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         LeftOperand: IOperation leftOperation,
                         RightOperand: IOperation rightOperation,
                     }
-                ) =>
-                    TryAddEqualizedFieldsForConditionWithoutTypedVariable(
-                        leftOperation,
-                        successRequirement,
-                        currentObject,
-                        builder,
-                        out boundVariable,
-                        additionalConditions.Append(rightOperation)
-                    ),
+                ) => TryAddEqualizedFieldsForConditionWithoutTypedVariable(
+                    leftOperation,
+                    successRequirement,
+                    currentObject,
+                    builder,
+                    out boundVariable,
+                    additionalConditions.Append(rightOperation)
+                ),
                 (
                     false,
                     IBinaryOperation
@@ -1042,15 +1031,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         LeftOperand: IOperation leftOperation,
                         RightOperand: IOperation rightOperation,
                     }
-                ) =>
-                    TryAddEqualizedFieldsForConditionWithoutTypedVariable(
-                        leftOperation,
-                        successRequirement,
-                        currentObject,
-                        builder,
-                        out boundVariable,
-                        additionalConditions.Append(rightOperation)
-                    ),
+                ) => TryAddEqualizedFieldsForConditionWithoutTypedVariable(
+                    leftOperation,
+                    successRequirement,
+                    currentObject,
+                    builder,
+                    out boundVariable,
+                    additionalConditions.Append(rightOperation)
+                ),
                 (_, IIsPatternOperation { Pattern: IPatternOperation isPattern }) =>
                     TryGetBoundVariableForIsPattern(isPattern, out boundVariable),
                 _ => false,
@@ -1131,9 +1119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                         ConstantValue.Value: true,
                     }
                 }
-                // we are done with the comparison, the final statment does no checks
-                =>
-                    true,
+                    // we are done with the comparison, the final statment does no checks
+                    => true,
                 IReturnOperation { ReturnedValue: IOperation value } =>
                     TryAddEqualizedFieldsForCondition(
                         value,
@@ -1148,12 +1135,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                     WhenTrue: IOperation whenTrue,
                     WhenFalse: var whenFalse,
                 }
-                // 1. Check structure of if statment, get success requirement
-                // and any potential statments in the non failure block
-                // 2. Check condition for compared members
-                // 3. Check remaining members in non failure block
-                =>
-                    TryGetSuccessCondition(
+                    // 1. Check structure of if statment, get success requirement
+                    // and any potential statments in the non failure block
+                    // 2. Check condition for compared members
+                    // 3. Check remaining members in non failure block
+                    => TryGetSuccessCondition(
                         whenTrue,
                         whenFalse,
                         statementsToCheck.Skip(1),
@@ -1173,7 +1159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                             type,
                             builder
                         ),
-                _ => false
+                _ => false,
             };
 
         private static bool TryAddFieldFromComparison(
@@ -1445,7 +1431,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             {
                 IPropertySymbol prop => prop.GetBackingFieldIfAny(),
                 IFieldSymbol field => field,
-                _ => null
+                _ => null,
             };
 
         private static bool AreConditionsSatisfiedEitherOrder<T>(

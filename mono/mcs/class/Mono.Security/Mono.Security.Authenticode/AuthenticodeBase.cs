@@ -103,7 +103,7 @@ namespace Mono.Security.Authenticode
     {
         Individual,
         Commercial,
-        Maximum
+        Maximum,
     }
 
 #if INSIDE_CORLIB

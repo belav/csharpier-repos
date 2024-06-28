@@ -266,7 +266,7 @@ namespace Mono.CSharp
 
             RefOutMask = REF | OUT,
             ModifierMask = PARAMS | REF | OUT | This | ReadOnly,
-            CallerMask = CallerMemberName | CallerLineNumber | CallerFilePath
+            CallerMask = CallerMemberName | CallerLineNumber | CallerFilePath,
         }
 
         static readonly string[] attribute_targets = new[] { "param" };

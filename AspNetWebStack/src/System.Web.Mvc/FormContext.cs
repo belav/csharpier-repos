@@ -36,7 +36,7 @@ namespace System.Web.Mvc
             SortedDictionary<string, object> dict = new SortedDictionary<string, object>()
             {
                 { "Fields", FieldValidators.Values },
-                { "FormId", FormId }
+                { "FormId", FormId },
             };
             if (!String.IsNullOrEmpty(ValidationSummaryId))
             {

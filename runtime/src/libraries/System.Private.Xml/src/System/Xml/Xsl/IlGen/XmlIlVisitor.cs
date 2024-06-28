@@ -1501,7 +1501,7 @@ namespace System.Xml.Xsl.IlGen
                         _iterCurr.GetLabelNext(),
                         lblInitRight,
                         lblNextLeft,
-                        lblNextRight
+                        lblNextRight,
                     }
                 );
                 _iterCurr.SetIterator(

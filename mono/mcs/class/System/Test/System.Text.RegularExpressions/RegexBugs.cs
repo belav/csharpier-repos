@@ -689,7 +689,7 @@ namespace MonoTests.System.Text.RegularExpressions
                 "statics",
                 "Pass. Group[0]=(0,6) Group[1]= Group[2]=(0,6)"
             ),
-            new RegexTrial(bug80554_s, RegexOptions.None, "dynamic", "Fail.")
+            new RegexTrial(bug80554_s, RegexOptions.None, "dynamic", "Fail."),
         };
 
         static RegexTrial[] trials =
@@ -705,7 +705,7 @@ namespace MonoTests.System.Text.RegularExpressions
                 RegexOptions.Compiled,
                 "/home/homedir/DirName",
                 "Pass. Group[0]=(0,21) Group[1]=(0,14) Group[2]=(14,7)"
-            )
+            ),
         };
     }
 }

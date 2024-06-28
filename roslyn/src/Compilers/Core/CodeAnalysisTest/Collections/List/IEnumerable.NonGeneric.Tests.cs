@@ -91,7 +91,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         protected enum EnumerableOrder
         {
             Unspecified,
-            Sequential
+            Sequential,
         }
 
         #endregion

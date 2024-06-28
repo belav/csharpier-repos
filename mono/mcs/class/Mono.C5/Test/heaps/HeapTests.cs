@@ -79,7 +79,7 @@ namespace C5UnitTests.heaps
         {
             Add,
             Remove,
-            Changed
+            Changed,
         }
 
         [Test]
@@ -128,7 +128,7 @@ namespace C5UnitTests.heaps
                 Acts.Add,
                 Acts.Add,
                 Acts.Add,
-                Acts.Changed
+                Acts.Changed,
             };
             for (int i = 0; i < vals.Length; i++)
             {
@@ -178,7 +178,7 @@ namespace C5UnitTests.heaps
                 Acts.Add,
                 Acts.Add,
                 Acts.Add,
-                Acts.Changed
+                Acts.Changed,
             };
             for (int i = 0; i < vals.Length; i++)
             {

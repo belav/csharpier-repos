@@ -607,7 +607,7 @@ namespace System.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );
@@ -634,7 +634,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x0A
+                    0x0A,
                 },
                 destination.ToArray()
             );
@@ -661,7 +661,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -688,7 +688,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -715,7 +715,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x0A
+                    0x0A,
                 },
                 destination.ToArray()
             );
@@ -742,7 +742,7 @@ namespace System.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );
@@ -769,7 +769,7 @@ namespace System.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );
@@ -803,7 +803,7 @@ namespace System.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );
@@ -830,7 +830,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -857,7 +857,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -884,7 +884,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -911,7 +911,7 @@ namespace System.Tests
                     0x00,
                     0x00,
                     0x00,
-                    0x00
+                    0x00,
                 },
                 destination.ToArray()
             );
@@ -938,7 +938,7 @@ namespace System.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );
@@ -965,7 +965,7 @@ namespace System.Tests
                     0xFF,
                     0xFF,
                     0xFF,
-                    0xFF
+                    0xFF,
                 },
                 destination.ToArray()
             );

@@ -63,6 +63,6 @@ namespace System.Data.OracleClient.Oci
         TimeStamp = 0x44,
         TimeStampWithTZ = 0x45,
         TimeStampLocal = 0x46,
-        UserCallback = 0x47
+        UserCallback = 0x47,
     }
 }

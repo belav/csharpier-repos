@@ -111,7 +111,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xE3,
                 0x6C,
                 0x9D,
-                0xA7
+                0xA7,
             };
             byte[] input = Encoding.Default.GetBytes(input1);
 
@@ -155,7 +155,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x52,
                 0x52,
                 0x25,
-                0x25
+                0x25,
             };
             byte[] input = Encoding.Default.GetBytes(input2);
 
@@ -199,7 +199,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x4E,
                 0xE7,
                 0xAD,
-                0x67
+                0x67,
             };
             byte[] input = new byte[1000000];
             for (int i = 0; i < 1000000; i++)

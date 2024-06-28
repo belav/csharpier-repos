@@ -98,7 +98,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             ImmutableSegmentedDictionary<int, string?> dictionary = new Dictionary<int, string?>
             {
                 { 1, "a" },
-                { 2, "b" }
+                { 2, "b" },
             }.ToImmutableSegmentedDictionary();
             Assert.False(dictionary.ContainsValue("c"));
             Assert.False(dictionary.ContainsValue(null));
@@ -109,7 +109,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string>
             {
-                { "a", "b" }
+                { "a", "b" },
             };
             var keyComparer = StringComparer.OrdinalIgnoreCase;
 
@@ -135,7 +135,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             IEnumerable<KeyValuePair<string, string>> pairs = new Dictionary<string, string>
             {
-                { "a", "B" }
+                { "a", "B" },
             };
             var keyComparer = StringComparer.OrdinalIgnoreCase;
 
@@ -349,7 +349,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             ImmutableSegmentedDictionary<string, int> dictionary = new Dictionary<string, int>
             {
-                { "a", 1 }
+                { "a", 1 },
             }.ToImmutableSegmentedDictionary();
             Assert.True(
                 IsSame(ImmutableSegmentedDictionary<string, int>.Empty, dictionary.Clear())
@@ -362,7 +362,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             ImmutableSegmentedDictionary<string, int> dictionary = new Dictionary<string, int>
             {
-                { "a", 1 }
+                { "a", 1 },
             }.ToImmutableSegmentedDictionary(StringComparer.OrdinalIgnoreCase);
 
             ImmutableSegmentedDictionary<string, int> clearedDictionary = dictionary.Clear();

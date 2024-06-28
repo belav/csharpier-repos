@@ -37,7 +37,7 @@ public class ResponseCompressionProviderBenchmark
             "br, compress, gzip",
             "gzip, compress",
             "identity",
-            "*"
+            "*",
         };
     }
 

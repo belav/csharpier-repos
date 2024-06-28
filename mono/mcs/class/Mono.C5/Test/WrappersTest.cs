@@ -88,7 +88,7 @@ namespace C5UnitTests.wrappers
                             new ItemAtEventArgs<int>(45, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -114,7 +114,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(45, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -161,7 +161,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(888, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.InsertAll<int>(1, new int[] { });
@@ -189,7 +189,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(45, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.InsertLast(88);
@@ -206,7 +206,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(88, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -227,7 +227,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(8, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -253,7 +253,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(4, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -279,7 +279,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(8, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -295,7 +295,7 @@ namespace C5UnitTests.wrappers
                 seen.Check(
                     new CollectionEvent<int>[]
                     {
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.View(1, 0).Reverse();
@@ -313,7 +313,7 @@ namespace C5UnitTests.wrappers
                 seen.Check(
                     new CollectionEvent<int>[]
                     {
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.View(1, 0).Sort();
@@ -331,7 +331,7 @@ namespace C5UnitTests.wrappers
                 seen.Check(
                     new CollectionEvent<int>[]
                     {
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.View(1, 0).Shuffle();
@@ -359,7 +359,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(56, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -380,7 +380,7 @@ namespace C5UnitTests.wrappers
                             new ClearedRangeEventArgs(false, 2, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.RemoveInterval(1, 0);
@@ -408,7 +408,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(53, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Update(67);
@@ -435,7 +435,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(67, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -462,7 +462,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(53, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 val = 67;
@@ -475,7 +475,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(67, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.UpdateOrAdd(51, out val);
@@ -492,7 +492,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(51, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 val = 67;
@@ -505,7 +505,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(81, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -526,7 +526,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(56, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Remove(11);
@@ -538,7 +538,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(18, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -566,7 +566,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(45, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.RemoveAll<int>(new int[] { 200, 300 });
@@ -589,7 +589,7 @@ namespace C5UnitTests.wrappers
                             new ClearedRangeEventArgs(false, 1, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Clear();
@@ -601,7 +601,7 @@ namespace C5UnitTests.wrappers
                             new ClearedRangeEventArgs(true, 2, 0),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Clear();
@@ -626,7 +626,7 @@ namespace C5UnitTests.wrappers
                             new ClearedRangeEventArgs(true, 3, 0),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Dispose();
@@ -665,7 +665,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(75, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.RetainAll<int>(new int[] { 32, 187, 45, 62, 82, 95, 2 });
@@ -699,7 +699,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(17, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.RemoveAllCopies(14);
@@ -720,7 +720,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(23, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -752,7 +752,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(67, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.AddAll<int>(new int[] { });
@@ -883,7 +883,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(67, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Enqueue(2);
@@ -900,7 +900,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(2, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Dequeue();
@@ -917,7 +917,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(67, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Dequeue();
@@ -934,7 +934,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(2, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }
@@ -958,7 +958,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(23, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Push(-12);
@@ -975,7 +975,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(-12, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Pop();
@@ -992,7 +992,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(-12, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
                 list.Pop();
@@ -1009,7 +1009,7 @@ namespace C5UnitTests.wrappers
                             new ItemCountEventArgs<int>(23, 1),
                             guarded
                         ),
-                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded)
+                        new CollectionEvent<int>(EventTypeEnum.Changed, new EventArgs(), guarded),
                     }
                 );
             }

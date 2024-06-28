@@ -165,8 +165,7 @@ namespace Moq.Tests.Linq
         public void ShouldAllowFluentOnReadOnlyGetterProperty()
         {
             var target = Mock.Of<IFoo>(x =>
-                x.Bars
-                == new[] { Mock.Of<IBar>(b => b.Id == "1"), Mock.Of<IBar>(b => b.Id == "2"), }
+                x.Bars == new[] { Mock.Of<IBar>(b => b.Id == "1"), Mock.Of<IBar>(b => b.Id == "2") }
             );
 
             Assert.NotNull(Mock.Get(target));

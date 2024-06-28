@@ -14,7 +14,7 @@ namespace DebuggerTests
             var ss_local = new SimpleStruct("set in MethodWithLocalStructs", 1, DateTimeKind.Utc);
             var gs_local = new GenericStruct<ValueTypesTest>
             {
-                StringField = $"gs_local#GenericStruct<ValueTypesTest>#StringField"
+                StringField = $"gs_local#GenericStruct<ValueTypesTest>#StringField",
             };
 
             ValueTypesTest vt_local = new ValueTypesTest
@@ -31,7 +31,7 @@ namespace DebuggerTests
                     DateTimeKind.Utc
                 ),
                 DT = new DateTime(2020, 1, 2, 3, 4, 5),
-                RGB = RGB.Blue
+                RGB = RGB.Blue,
             };
             Console.WriteLine(
                 $"Using the struct: {ss_local.gs.StringField}, gs: {gs_local.StringField}, {vt_local.StringField}"
@@ -72,7 +72,7 @@ namespace DebuggerTests
             {
                 StringField = "gs_local#GenericStruct<ValueTypesTest>#StringField",
                 List = new System.Collections.Generic.List<int> { 5, 3 },
-                Options = Options.Option2
+                Options = Options.Option2,
             };
 
             var result = await ss_local.AsyncMethodWithStructArgs(gs_local);
@@ -106,9 +106,9 @@ namespace DebuggerTests
                     StringField = $"{str}#SimpleStruct#gs#StringField",
                     List = new System.Collections.Generic.List<DateTime>
                     {
-                        new DateTime(2010 + f, 2 + f, 3 + f, 10 + f, 2 + f, 3 + f)
+                        new DateTime(2010 + f, 2 + f, 3 + f, 10 + f, 2 + f, 3 + f),
                     },
-                    Options = Options.Option1
+                    Options = Options.Option1,
                 };
                 Kind = kind;
             }
@@ -146,7 +146,7 @@ namespace DebuggerTests
             var dts = new DateTime[]
             {
                 new DateTime(1983, 6, 7, 5, 6, 10),
-                new DateTime(1999, 10, 15, 1, 2, 3)
+                new DateTime(1999, 10, 15, 1, 2, 3),
             };
 
             var obj = new ClassForToStringTests
@@ -155,7 +155,7 @@ namespace DebuggerTests
                 DTO = new DateTimeOffset(dt0, new TimeSpan(2, 14, 0)),
                 TS = ts,
                 Dec = 1239871,
-                Guid = guid
+                Guid = guid,
             };
 
             var sst = new StructForToStringTests
@@ -164,7 +164,7 @@ namespace DebuggerTests
                 DTO = new DateTimeOffset(dt0, new TimeSpan(3, 15, 0)),
                 TS = ts,
                 Dec = 1239871,
-                Guid = guid
+                Guid = guid,
             };
             Console.WriteLine(
                 $"MethodWithLocalsForToStringTest: {dt0}, {dt1}, {ts}, {dec}, {guid}, {dts[0]}, {obj.DT}, {sst.DT}"
@@ -214,7 +214,7 @@ namespace DebuggerTests
             var dts = new DateTime[]
             {
                 new DateTime(1983, 6, 7, 5, 6, 10),
-                new DateTime(1999, 10, 15, 1, 2, 3)
+                new DateTime(1999, 10, 15, 1, 2, 3),
             };
 
             var obj = new ClassForToStringTests
@@ -223,7 +223,7 @@ namespace DebuggerTests
                 DTO = new DateTimeOffset(dt0, new TimeSpan(2, 14, 0)),
                 TS = ts,
                 Dec = 1239871,
-                Guid = guid
+                Guid = guid,
             };
 
             var sst = new StructForToStringTests
@@ -232,7 +232,7 @@ namespace DebuggerTests
                 DTO = new DateTimeOffset(dt0, new TimeSpan(3, 15, 0)),
                 TS = ts,
                 Dec = 1239871,
-                Guid = guid
+                Guid = guid,
             };
             Console.WriteLine(
                 $"MethodWithLocalsForToStringTest: {dt0}, {dt1}, {ts}, {dec}, {guid}, {dts[0]}, {obj.DT}, {sst.DT}"
@@ -321,7 +321,7 @@ namespace DebuggerTests
     {
         Red,
         Green,
-        Blue
+        Blue,
     }
 
     [Flags]
@@ -332,6 +332,6 @@ namespace DebuggerTests
         Option2 = 2,
         Option3 = 4,
 
-        All = Option1 | Option3
+        All = Option1 | Option3,
     }
 }

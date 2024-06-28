@@ -58,7 +58,7 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
                                 : throw new InvalidOperationException(
                                     CoreStrings.NativeAotNoCompiledModel
                                 )
-                        )
+                        ),
                 }
             )
         )
@@ -117,11 +117,10 @@ public abstract class RelationalGeometryTypeMapping<TGeometry, TProvider> : Rela
             value = Converter.ConvertToProvider(value);
         }
 
-        parameter.Value = value is null
-            ? DBNull.Value
-            : SpatialConverter is null
-                ? value
-                : SpatialConverter.ConvertToProvider(value);
+        parameter.Value =
+            value is null ? DBNull.Value
+            : SpatialConverter is null ? value
+            : SpatialConverter.ConvertToProvider(value);
 
         if (nullable.HasValue)
         {

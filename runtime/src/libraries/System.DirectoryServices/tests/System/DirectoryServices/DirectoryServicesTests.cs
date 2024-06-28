@@ -710,7 +710,7 @@ namespace System.DirectoryServices.Tests
                         cnEntry.Properties["objectClass"].Value = new string[]
                         {
                             "extensibleObject",
-                            "organizationalRole"
+                            "organizationalRole",
                         };
                         cnEntry.Properties["cn"].Value = "CustomUser";
                         cnEntry.Properties["description"].Value = "Some Custom User";

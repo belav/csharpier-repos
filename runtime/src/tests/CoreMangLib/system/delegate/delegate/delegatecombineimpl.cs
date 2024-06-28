@@ -23,7 +23,7 @@ namespace DelegateTest
             c_Start_null_false,
             c_Working_null_true,
             c_Working_null_false,
-            c_Start_null_false_duplicate
+            c_Start_null_false_duplicate,
         }
 
         booldelegate starkWork;

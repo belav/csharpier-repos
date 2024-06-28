@@ -10,6 +10,6 @@ namespace System.Web.UI
     {
         Inherit = 0,
         Enabled,
-        Disabled
+        Disabled,
     }
 }

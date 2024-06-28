@@ -18,8 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadEndElement() on EndElement, no namespace")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -31,8 +31,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadEndElement() on EndElement, with namespace")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -42,7 +42,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadEndElement3)
                     {
-                        Attribute = new Variation("ReadEndElement on Start Element, no namespace")
+                        Attribute = new Variation("ReadEndElement on Start Element, no namespace"),
                     }
                 );
             }
@@ -54,8 +54,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadEndElement on Empty Element, no namespace")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -69,8 +69,8 @@ namespace System.Xml.Tests
                             "ReadEndElement on regular Element, with namespace"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -82,8 +82,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadEndElement on Empty Tag, with namespace")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -93,7 +93,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadEndElement7)
                     {
-                        Attribute = new Variation("ReadEndElement on CDATA")
+                        Attribute = new Variation("ReadEndElement on CDATA"),
                     }
                 );
             }
@@ -103,7 +103,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadEndElement9)
                     {
-                        Attribute = new Variation("ReadEndElement on Text")
+                        Attribute = new Variation("ReadEndElement on Text"),
                     }
                 );
             }
@@ -113,7 +113,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadEndElement10)
                     {
-                        Attribute = new Variation("ReadEndElement on ProcessingInstruction")
+                        Attribute = new Variation("ReadEndElement on ProcessingInstruction"),
                     }
                 );
             }
@@ -123,7 +123,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadEndElement11)
                     {
-                        Attribute = new Variation("ReadEndElement on Comment")
+                        Attribute = new Variation("ReadEndElement on Comment"),
                     }
                 );
             }
@@ -133,7 +133,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadEndElement13)
                     {
-                        Attribute = new Variation("ReadEndElement on XmlDeclaration")
+                        Attribute = new Variation("ReadEndElement on XmlDeclaration"),
                     }
                 );
             }
@@ -143,7 +143,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestTextReadEndElement1)
                     {
-                        Attribute = new Variation("ReadEndElement on EntityReference")
+                        Attribute = new Variation("ReadEndElement on EntityReference"),
                     }
                 );
             }
@@ -153,7 +153,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestTextReadEndElement2)
                     {
-                        Attribute = new Variation("ReadEndElement on EndEntity")
+                        Attribute = new Variation("ReadEndElement on EndEntity"),
                     }
                 );
             }

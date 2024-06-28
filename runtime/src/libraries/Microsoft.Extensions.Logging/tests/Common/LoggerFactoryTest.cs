@@ -580,7 +580,7 @@ namespace Microsoft.Extensions.Logging.Test
 
             Assert.Equal(
                 loggerProvider.LogText,
-                new[] { "Message", "Scope", "Scope2", "Message2", }
+                new[] { "Message", "Scope", "Scope2", "Message2" }
             );
             Assert.NotNull(loggerProvider.ScopeProvider);
             Assert.Equal(0, loggerProvider.BeginScopeCalledTimes);
@@ -633,12 +633,12 @@ namespace Microsoft.Extensions.Logging.Test
 
             Assert.Equal(
                 loggerProvider.LogText,
-                new[] { "Message", "Scope", "Scope2", "Message2", }
+                new[] { "Message", "Scope", "Scope2", "Message2" }
             );
 
             Assert.Equal(
                 loggerProvider2.LogText,
-                new[] { "Message", "Scope", "Scope2", "Message2", }
+                new[] { "Message", "Scope", "Scope2", "Message2" }
             );
         }
 

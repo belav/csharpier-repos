@@ -39,6 +39,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         Minutes = 7,
         Seconds = 8,
         Milliseconds = 9,
-        NotSet = 10
+        NotSet = 10,
     }
 }

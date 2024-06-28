@@ -42,5 +42,6 @@ namespace System.Net
         ///    </para>
         /// </devdoc>
         Mux // Persistant, many requests/responses out of order
+        ,
     } // enum ConnectionModes
 } // namespace System.Net

@@ -31,7 +31,7 @@ public class DynamicPageEndpointMatcherPolicyTest
                 {
                     ["page"] = "/About",
                 },
-                DisplayName = "/About"
+                DisplayName = "/About",
             },
         };
 
@@ -87,7 +87,7 @@ public class DynamicPageEndpointMatcherPolicyTest
                 _ => Task.CompletedTask,
                 EndpointMetadataCollection.Empty,
                 "ReplacedLoaded"
-            )
+            ),
         };
 
         var loader = new Mock<PageLoader>();
@@ -108,11 +108,10 @@ public class DynamicPageEndpointMatcherPolicyTest
                                 "/Index" => LoadedEndpoints[0],
                                 "/About" => LoadedEndpoints[1],
                                 "/ReplacedEndpoint" => LoadedEndpoints[2],
-                                _ =>
-                                    throw new InvalidOperationException(
-                                        $"Invalid endpoint '{descriptor.DisplayName}'."
-                                    )
-                            }
+                                _ => throw new InvalidOperationException(
+                                    $"Invalid endpoint '{descriptor.DisplayName}'."
+                                ),
+                            },
                         }
                     )
             );
@@ -158,9 +157,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { null, };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { null };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
         candidates.SetValidity(0, false);
@@ -170,7 +169,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             throw new InvalidOperationException();
         };
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -185,9 +184,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { null, };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { null };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
@@ -196,7 +195,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             return new ValueTask<RouteValueDictionary>(new RouteValueDictionary());
         };
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -213,20 +212,20 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[] { null, };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { null };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
         Transform = (c, values, state) =>
         {
             return new ValueTask<RouteValueDictionary>(
-                new RouteValueDictionary(new { page = "/Index", })
+                new RouteValueDictionary(new { page = "/Index" })
             );
         };
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -250,12 +249,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[]
-        {
-            new RouteValueDictionary(new { slug = "test", }),
-        };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test" }) };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
@@ -266,7 +262,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             );
         };
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -300,12 +296,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[]
-        {
-            new RouteValueDictionary(new { slug = "test", }),
-        };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test" }) };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
@@ -320,7 +313,7 @@ public class DynamicPageEndpointMatcherPolicyTest
         {
             RequestServices = new ServiceCollection()
                 .AddScoped(sp => new CustomTransformer() { State = "Invalid" })
-                .BuildServiceProvider()
+                .BuildServiceProvider(),
         };
 
         // Act & Assert
@@ -335,12 +328,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[]
-        {
-            new RouteValueDictionary(new { slug = "test", }),
-        };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test" }) };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
@@ -356,7 +346,7 @@ public class DynamicPageEndpointMatcherPolicyTest
             return new ValueTask<IReadOnlyList<Endpoint>>(Array.Empty<Endpoint>());
         };
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -371,12 +361,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[]
-        {
-            new RouteValueDictionary(new { slug = "test", }),
-        };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test" }) };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
@@ -394,14 +381,14 @@ public class DynamicPageEndpointMatcherPolicyTest
                     new Endpoint(
                         (ctx) => Task.CompletedTask,
                         new EndpointMetadataCollection(
-                            new PageActionDescriptor() { DisplayName = "/ReplacedEndpoint", }
+                            new PageActionDescriptor() { DisplayName = "/ReplacedEndpoint" }
                         ),
                         "ReplacedEndpoint"
-                    )
+                    ),
                 }
             );
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);
@@ -436,12 +423,9 @@ public class DynamicPageEndpointMatcherPolicyTest
         // Arrange
         var policy = new DynamicPageEndpointMatcherPolicy(SelectorCache, Loader, Comparer);
 
-        var endpoints = new[] { DynamicEndpoint, };
-        var values = new RouteValueDictionary[]
-        {
-            new RouteValueDictionary(new { slug = "test", }),
-        };
-        var scores = new[] { 0, };
+        var endpoints = new[] { DynamicEndpoint };
+        var values = new RouteValueDictionary[] { new RouteValueDictionary(new { slug = "test" }) };
+        var scores = new[] { 0 };
 
         var candidates = new CandidateSet(endpoints, values, scores);
 
@@ -455,7 +439,7 @@ public class DynamicPageEndpointMatcherPolicyTest
         Filter = (c, values, state, endpoints) =>
             new ValueTask<IReadOnlyList<Endpoint>>(new[] { PageEndpoints[0], PageEndpoints[1] });
 
-        var httpContext = new DefaultHttpContext() { RequestServices = Services, };
+        var httpContext = new DefaultHttpContext() { RequestServices = Services };
 
         // Act
         await policy.ApplyAsync(httpContext, candidates);

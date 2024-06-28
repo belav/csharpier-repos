@@ -45,7 +45,7 @@ namespace MonoTests.Mono.Unix.Native
         // won't cause the program to hang
         void SetTimeout(int socket)
         {
-            var timeout = new Timeval { tv_sec = 0, tv_usec = 500000, };
+            var timeout = new Timeval { tv_sec = 0, tv_usec = 500000 };
             if (
                 Syscall.setsockopt(
                     socket,
@@ -276,7 +276,7 @@ namespace MonoTests.Mono.Unix.Native
                 UnixSocketProtocol.IPPROTO_TCP,
                 (so1, so2) =>
                 {
-                    Linger linger = new Linger { l_onoff = 1, l_linger = 42, };
+                    Linger linger = new Linger { l_onoff = 1, l_linger = 42 };
                     // Set SO_LINGER
                     if (
                         Syscall.setsockopt(
@@ -450,7 +450,7 @@ namespace MonoTests.Mono.Unix.Native
                 sin6_port = Syscall.htons(1234),
                 sin6_flowinfo = 2,
                 sin6_addr = NativeConvert.ToIn6Addr(IPAddress.IPv6Loopback),
-                sin6_scope_id = 3
+                sin6_scope_id = 3,
             };
 
             var storage = address1.ToSockaddrStorage();
@@ -735,7 +735,7 @@ namespace MonoTests.Mono.Unix.Native
                     {
                         sin_family = UnixAddressFamily.AF_INET,
                         sin_port = Syscall.htons(0),
-                        sin_addr = new InAddr(127, 0, 0, 1)
+                        sin_addr = new InAddr(127, 0, 0, 1),
                     };
                     if (Syscall.bind(so1, address) < 0)
                         UnixMarshal.ThrowExceptionForLastError();
@@ -795,7 +795,7 @@ namespace MonoTests.Mono.Unix.Native
                                 iov_len = (ulong)buffer1.Length,
                             },
                         };
-                        var msghdr1 = new Msghdr { msg_iov = iovecs1, msg_iovlen = 1, };
+                        var msghdr1 = new Msghdr { msg_iov = iovecs1, msg_iovlen = 1 };
                         ret = Syscall.sendmsg(so1, msghdr1, 0);
                     }
                     if (ret < 0)
@@ -812,7 +812,7 @@ namespace MonoTests.Mono.Unix.Native
                                 iov_len = (ulong)buffer2.Length,
                             },
                         };
-                        var msghdr2 = new Msghdr { msg_iov = iovecs2, msg_iovlen = 1, };
+                        var msghdr2 = new Msghdr { msg_iov = iovecs2, msg_iovlen = 1 };
                         ret = Syscall.recvmsg(so2, msghdr2, 0);
                     }
                     if (ret < 0)

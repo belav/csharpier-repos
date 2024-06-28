@@ -54,7 +54,7 @@ namespace System.Activities.Statements
                             {
                                 throw SA.FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -130,7 +130,7 @@ namespace System.Activities.Statements
                     this.currentCompensationId,
                     this.currentCompensationToken,
                     // Add the variables which are only used by the secondary root
-                    this.compensationId
+                    this.compensationId,
                 }
             );
 
@@ -200,7 +200,7 @@ namespace System.Activities.Statements
             Variable<bool> assertFlag = new Variable<bool> { Name = "assertFlag", Default = true };
             Variable<IEnumerable<Activity>> elements = new Variable<IEnumerable<Activity>>()
             {
-                Name = "elements"
+                Name = "elements",
             };
             Variable<int> index = new Variable<int>() { Name = "index" };
 
@@ -233,7 +233,7 @@ namespace System.Activities.Statements
                                         "env => (assertFlag.Get(env) != false) && index.Get(env) < elements.Get(env).Count())",
                                     AssertFlag = new InArgument<bool>(assertFlag),
                                     Index = new InArgument<int>(index),
-                                    Elements = new InArgument<IEnumerable<Activity>>(elements)
+                                    Elements = new InArgument<IEnumerable<Activity>>(elements),
                                 },
 
                                 Body = new Sequence
@@ -251,13 +251,13 @@ namespace System.Activities.Statements
                                                 Elements = new InArgument<IEnumerable<Activity>>(
                                                     elements
                                                 ),
-                                                Index = new InArgument<int>(index)
+                                                Index = new InArgument<int>(index),
                                             },
 
                                             Then = new Assign<bool>
                                             {
                                                 To = assertFlag,
-                                                Value = false
+                                                Value = false,
                                             },
                                         },
                                         new Assign<int>
@@ -272,23 +272,23 @@ namespace System.Activities.Statements
                                                     DisplayName = "(env => index.Get(env) + 1)",
                                                     Left = new VariableValue<int>
                                                     {
-                                                        Variable = index
+                                                        Variable = index,
                                                     },
                                                     Right = 1,
-                                                }
-                                            }
+                                                },
+                                            },
                                         },
-                                    }
-                                }
+                                    },
+                                },
                             },
                             new AssertValidation
                             {
                                 Assertion = new InArgument<bool>(assertFlag),
-                                Message = new InArgument<string>(SA.SR.NoCAInSecondaryRoot)
-                            }
-                        }
-                    }
-                }
+                                Message = new InArgument<string>(SA.SR.NoCAInSecondaryRoot),
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -676,7 +676,7 @@ namespace System.Activities.Statements
                     assertFlagArgument,
                     indexArgument,
                     elementsArgument,
-                    resultArgument
+                    resultArgument,
                 }
             );
         }

@@ -134,7 +134,7 @@ namespace System.Diagnostics
             {
                 Value = formattedValue,
                 Key = formattedKey,
-                Type = formattedType
+                Type = formattedType,
             };
         }
 

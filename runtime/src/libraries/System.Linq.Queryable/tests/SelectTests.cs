@@ -17,7 +17,7 @@ namespace System.Linq.Tests
                 new { name = "Bob", custID = 29099 },
                 new { name = "Chris", custID = 39033 },
                 new { name = (string)null, custID = 30349 },
-                new { name = "Prakash", custID = 39030 }
+                new { name = "Prakash", custID = 39030 },
             };
             string[] expected = { "Prakash", "Bob", "Chris", null, "Prakash" };
             Assert.Equal(expected, source.AsQueryable().Select(e => e.name));
@@ -30,7 +30,7 @@ namespace System.Linq.Tests
             {
                 new { name = "Prakash", custID = 98088 },
                 new { name = "Bob", custID = 29099 },
-                new { name = "Chris", custID = 39033 }
+                new { name = "Chris", custID = 39033 },
             };
             string[] expected = { "Prakash", null, null };
             Assert.Equal(expected, source.AsQueryable().Select((e, i) => i == 0 ? e.name : null));

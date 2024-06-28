@@ -17,7 +17,7 @@ namespace System
     public enum Base64FormattingOptions
     {
         None = 0,
-        InsertLineBreaks = 1
+        InsertLineBreaks = 1,
     }
 
     // The Convert class provides conversion and querying methods for values. The

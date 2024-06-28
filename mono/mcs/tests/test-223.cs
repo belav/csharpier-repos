@@ -6,7 +6,7 @@
 
 enum Foo
 {
-    Bar
+    Bar,
 }
 
 class T

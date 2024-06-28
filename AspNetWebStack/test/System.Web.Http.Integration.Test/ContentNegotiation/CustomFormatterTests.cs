@@ -33,7 +33,7 @@ namespace System.Web.Http.ContentNegotiation
             Order reqOrdr = new Order() { OrderId = "100", OrderValue = 100.00 };
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<Order>(reqOrdr, new XmlMediaTypeFormatter())
+                Content = new ObjectContent<Order>(reqOrdr, new XmlMediaTypeFormatter()),
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoOrder");
             request.Method = HttpMethod.Post;
@@ -61,7 +61,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<string>("Hello World!", new PlainTextFormatter())
+                Content = new ObjectContent<string>("Hello World!", new PlainTextFormatter()),
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoString");
             request.Method = HttpMethod.Post;
@@ -80,7 +80,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<int>(100, new PlainTextFormatter())
+                Content = new ObjectContent<int>(100, new PlainTextFormatter()),
             };
 
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoInt");
@@ -101,7 +101,7 @@ namespace System.Web.Http.ContentNegotiation
             Order reqOrdr = new Order() { OrderId = "100", OrderValue = 100.00 };
             HttpRequestMessage request = new HttpRequestMessage
             {
-                Content = new ObjectContent<Order>(reqOrdr, new PlainTextFormatter())
+                Content = new ObjectContent<Order>(reqOrdr, new PlainTextFormatter()),
             };
             request.RequestUri = new Uri(baseAddress + "/CustomFormatterTests/EchoOrder");
             request.Method = HttpMethod.Post;

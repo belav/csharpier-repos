@@ -120,7 +120,7 @@ namespace Owin
                 BufferPolicySelector = bufferPolicySelector,
                 ExceptionLogger = exceptionLogger,
                 ExceptionHandler = exceptionHandler,
-                AppDisposing = builder.GetOnAppDisposingProperty()
+                AppDisposing = builder.GetOnAppDisposingProperty(),
             };
         }
 

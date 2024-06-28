@@ -21,7 +21,7 @@ internal static class HighlightingOptionsStorage
             HighlightRelatedJsonComponentsUnderCursor = globalOptions.GetOption(
                 HighlightRelatedJsonComponentsUnderCursor,
                 language
-            )
+            ),
         };
 
     private static readonly OptionGroup s_highlightingGroup =

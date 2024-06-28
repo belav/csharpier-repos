@@ -16,7 +16,7 @@ namespace System.Web.Mvc.Test
             Type[] expectedTypes = new Type[]
             {
                 typeof(TypeCacheValidFoo),
-                typeof(TypeCacheValidBar)
+                typeof(TypeCacheValidBar),
             };
 
             string cacheName = "testCache";

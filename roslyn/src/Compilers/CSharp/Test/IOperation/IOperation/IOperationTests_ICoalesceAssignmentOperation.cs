@@ -104,7 +104,7 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
                 //         /*<bind>*/c1 ??= s1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "c1 ??= s1")
                     .WithArguments("??=", "C", "string")
-                    .WithLocation(6, 19)
+                    .WithLocation(6, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -141,7 +141,7 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
                 //         /*<bind>*/i1 ??= s1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "i1 ??= s1")
                     .WithArguments("??=", "int", "string")
-                    .WithLocation(6, 19)
+                    .WithLocation(6, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -185,7 +185,7 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
                 //         /*<bind>*/o1 ??= o2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "o2")
                     .WithArguments("o2")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -301,7 +301,7 @@ ICoalesceAssignmentOperation (OperationKind.CoalesceAssignment, Type: ?, IsInval
                 //         /*<bind>*/??=/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 33)
+                    .WithLocation(6, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -807,7 +807,7 @@ Block[B10] - Exit
             {
                 // file.cs(6,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (o1 ?? o2) ??= (s1 ?? s2);
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o1 ?? o2").WithLocation(6, 10)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o1 ?? o2").WithLocation(6, 10),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

@@ -43,7 +43,7 @@ namespace System.Runtime.Remoting.Messaging
             "__MethodSignature",
             "__OutArgs",
             "__Return",
-            "__CallContext"
+            "__CallContext",
         };
         public static string[] InternalExceptionKeys = new string[] { "__CallContext" };
 

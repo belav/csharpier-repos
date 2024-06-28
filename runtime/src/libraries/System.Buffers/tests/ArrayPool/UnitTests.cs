@@ -341,7 +341,7 @@ namespace System.Buffers.ArrayPool.Tests
                         (int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum),
                         1
                     ),
-                    ArrayPool<byte>.Shared
+                    ArrayPool<byte>.Shared,
                 }
             )
             {
@@ -367,7 +367,7 @@ namespace System.Buffers.ArrayPool.Tests
                         (int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum),
                         1
                     ),
-                    ArrayPool<char>.Shared
+                    ArrayPool<char>.Shared,
                 }
             )
             {
@@ -393,7 +393,7 @@ namespace System.Buffers.ArrayPool.Tests
                         (int)BitOperations.RoundUpToPowerOf2((uint)requestedMinimum),
                         1
                     ),
-                    ArrayPool<string>.Shared
+                    ArrayPool<string>.Shared,
                 }
             )
             {

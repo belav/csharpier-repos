@@ -435,7 +435,7 @@ namespace System.Xml.Linq.Tests
             yield return new object[] { new XCData("cdata cdata") };
             yield return new object[]
             {
-                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1")
+                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1dtd1", "dtd1dtd1dtd1dtd1"),
             };
         }
 
@@ -460,7 +460,7 @@ namespace System.Xml.Linq.Tests
                 new XDeclaration("234", "UTF-8", "yes"),
                 XNamespace.Xmlns,
                 //new XStreamingElement("elementSequence"),
-                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1 dtd1", "dtd1 dtd1 dtd1 ")
+                new XDocumentType("dtd1", "dtd1dtd1dtd1", "dtd1 dtd1", "dtd1 dtd1 dtd1 "),
             };
 
             return aObject;
@@ -564,7 +564,7 @@ namespace System.Xml.Linq.Tests
                 typeof(XDeclaration),
                 typeof(XNamespace),
                 //typeof(XStreamingElement),
-                typeof(XDocumentType)
+                typeof(XDocumentType),
             };
 
             return types;

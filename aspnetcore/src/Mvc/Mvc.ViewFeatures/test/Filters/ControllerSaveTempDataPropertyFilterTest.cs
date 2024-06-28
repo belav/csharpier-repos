@@ -18,7 +18,7 @@ public class ControllerSaveTempDataPropertyFilterTest
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            ["TempDataProperty-Test"] = "FirstValue"
+            ["TempDataProperty-Test"] = "FirstValue",
         };
 
         var filter = CreateControllerSaveTempDataPropertyFilter(httpContext, tempData);
@@ -65,7 +65,7 @@ public class ControllerSaveTempDataPropertyFilterTest
         var httpContext = new DefaultHttpContext();
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
-            ["TempDataProperty-Test"] = "FirstValue"
+            ["TempDataProperty-Test"] = "FirstValue",
         };
 
         var filter = CreateControllerSaveTempDataPropertyFilter(httpContext, tempData: tempData);
@@ -110,7 +110,7 @@ public class ControllerSaveTempDataPropertyFilterTest
         var tempData = new TempDataDictionary(httpContext, Mock.Of<ITempDataProvider>())
         {
             ["TempDataProperty-Test"] = "ValueWithPrefix",
-            ["Test"] = "Value"
+            ["Test"] = "Value",
         };
 
         var filter = CreateControllerSaveTempDataPropertyFilter(httpContext, tempData: tempData);

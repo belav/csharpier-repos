@@ -128,7 +128,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
             {
                 // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         /*<bind>*/Action a = () => 1;/*</bind>*/
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 36)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 36),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -174,7 +174,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action a = (int i) => { };/*</bind>*/
                 Diagnostic(ErrorCode.ERR_BadDelArgCount, "=>")
                     .WithArguments("System.Action", "1")
-                    .WithLocation(7, 38)
+                    .WithLocation(7, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -250,7 +250,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
             {
                 // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         Action a = /*<bind>*/(Action)(() => 1)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 45)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 45),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -288,7 +288,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/(Action)((int i) => { })/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadDelArgCount, "=>")
                     .WithArguments("System.Action", "1")
-                    .WithLocation(7, 47)
+                    .WithLocation(7, 47),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -377,7 +377,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
             {
                 // CS8030: Anonymous function converted to a void returning delegate cannot return a value
                 //         /*<bind>*/Action a = delegate() { return 1; };/*</bind>*/
-                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return").WithLocation(7, 43)
+                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return").WithLocation(7, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -423,7 +423,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action a = delegate(int i) { };/*</bind>*/
                 Diagnostic(ErrorCode.ERR_BadDelArgCount, "delegate")
                     .WithArguments("System.Action", "1")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -544,7 +544,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action a = M1;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M1")
                     .WithArguments("M1")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -581,7 +581,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M1')
                 //         Action a = /*<bind>*/M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M1")
                     .WithArguments("M1")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
@@ -629,7 +629,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action a = M1;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_BadRetType, "M1")
                     .WithArguments("Program.M1()", "int")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -670,7 +670,7 @@ IMethodReferenceOperation: System.Int32 Program.M1() (OperationKind.MethodRefere
                     //         Action a = /*<bind>*/M1/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_BadRetType, "M1")
                         .WithArguments("Program.M1()", "int")
-                        .WithLocation(7, 30)
+                        .WithLocation(7, 30),
                 },
                 parseOptions: TestOptions.WithoutImprovedOverloadCandidates
             );
@@ -687,7 +687,7 @@ IOperation:  (OperationKind.None, Type: null, IsInvalid) (Syntax: 'M1')
                     //         Action a = /*<bind>*/M1/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_BadRetType, "M1")
                         .WithArguments("Program.M1()", "int")
-                        .WithLocation(7, 30)
+                        .WithLocation(7, 30),
                 }
             );
         }
@@ -730,7 +730,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action a = M1;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "M1")
                     .WithArguments("M1", "System.Action")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -769,7 +769,7 @@ IOperation:  (OperationKind.None, Type: null, IsInvalid) (Syntax: 'M1')
                 //         Action a = /*<bind>*/M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "M1")
                     .WithArguments("M1", "System.Action")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
@@ -841,7 +841,7 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                 //         Action a = /*<bind>*/(Action)M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M1")
                     .WithArguments("M1")
-                    .WithLocation(7, 38)
+                    .WithLocation(7, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -881,7 +881,7 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                 //         Action a = /*<bind>*/(Action)o.M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M1")
                     .WithArguments("object", "M1")
-                    .WithLocation(8, 40)
+                    .WithLocation(8, 40),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -921,7 +921,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/(Action)M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadRetType, "(Action)M1")
                     .WithArguments("Program.M1()", "int")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -963,7 +963,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                     //         Action a = /*<bind>*/(Action)p.M1/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_BadRetType, "(Action)p.M1")
                         .WithArguments("Program.M1()", "int")
-                        .WithLocation(8, 30)
+                        .WithLocation(8, 30),
                 },
                 parseOptions: TestOptions.WithoutImprovedOverloadCandidates
             );
@@ -982,7 +982,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                     //         Action a = /*<bind>*/(Action)p.M1/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_BadRetType, "p.M1")
                         .WithArguments("Program.M1()", "int")
-                        .WithLocation(8, 38)
+                        .WithLocation(8, 38),
                 }
             );
         }
@@ -1017,7 +1017,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/(Action)M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "(Action)M1")
                     .WithArguments("M1", "System.Action")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -1058,7 +1058,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/(Action)p.M1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "(Action)p.M1")
                     .WithArguments("M1", "System.Action")
-                    .WithLocation(8, 30)
+                    .WithLocation(8, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -1134,7 +1134,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
             {
                 // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         Action a = /*<bind>*/new Action(() => 1)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 47)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 47),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1175,7 +1175,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/new Action((int i) => { })/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadDelArgCount, "=>")
                     .WithArguments("System.Action", "1")
-                    .WithLocation(7, 49)
+                    .WithLocation(7, 49),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1217,7 +1217,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
                 // CS0149: Method name expected
                 //         Action action = /*<bind>*/new Action((o) => { }, new object())/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethodNameExpected, "(o) => { }, new object()")
-                    .WithLocation(8, 46)
+                    .WithLocation(8, 46),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1331,7 +1331,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/new Action(this.M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "this.M1")
                     .WithArguments("Program.M1()")
-                    .WithLocation(7, 41)
+                    .WithLocation(7, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1404,7 +1404,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
                 //         Action a = /*<bind>*/new Action(M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M1")
                     .WithArguments("M1")
-                    .WithLocation(7, 41)
+                    .WithLocation(7, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1446,7 +1446,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                     //         Action a = /*<bind>*/new Action(M1)/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_BadRetType, "M1")
                         .WithArguments("Program.M1()", "int")
-                        .WithLocation(7, 41)
+                        .WithLocation(7, 41),
                 },
                 parseOptions: TestOptions.WithoutImprovedOverloadCandidates
             );
@@ -1465,7 +1465,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                     //         Action a = /*<bind>*/new Action(M1)/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_BadRetType, "M1")
                         .WithArguments("Program.M1()", "int")
-                        .WithLocation(7, 41)
+                        .WithLocation(7, 41),
                 }
             );
         }
@@ -1502,7 +1502,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action a = /*<bind>*/new Action(M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Action(M1)")
                     .WithArguments("M1", "System.Action")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1550,7 +1550,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
             {
                 // CS0149: Method name expected
                 //         Action action = /*<bind>*/new Action(M2, M3)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_MethodNameExpected, "M2, M3").WithLocation(8, 46)
+                Diagnostic(ErrorCode.ERR_MethodNameExpected, "M2, M3").WithLocation(8, 46),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1590,7 +1590,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action<string> a = /*<bind>*/new Action(M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new Action(M1)")
                     .WithArguments("System.Action", "System.Action<string>")
-                    .WithLocation(7, 38)
+                    .WithLocation(7, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1630,7 +1630,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Func<string> a = /*<bind>*/new Action(M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new Action(M1)")
                     .WithArguments("System.Action", "System.Func<string>")
-                    .WithLocation(7, 36)
+                    .WithLocation(7, 36),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1710,7 +1710,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
             {
                 // CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         Action a = /*<bind>*/new Action((Action)(() => 1))/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 56)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(7, 56),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1750,7 +1750,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
                 //         Action a = /*<bind>*/new Action((Action)((int i) => { }))/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadDelArgCount, "=>")
                     .WithArguments("System.Action", "1")
-                    .WithLocation(7, 58)
+                    .WithLocation(7, 58),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1826,7 +1826,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
                 //         Action a = /*<bind>*/new Action((Action)M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M1")
                     .WithArguments("M1")
-                    .WithLocation(7, 49)
+                    .WithLocation(7, 49),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1868,7 +1868,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
                 //         Action a = /*<bind>*/new Action((Action)M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadRetType, "(Action)M1")
                     .WithArguments("Program.M1()", "int")
-                    .WithLocation(7, 41)
+                    .WithLocation(7, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1911,7 +1911,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action, IsInvalid) (Synta
                 //         Action a = /*<bind>*/new Action((Action)M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "(Action)M1")
                     .WithArguments("M1", "System.Action")
-                    .WithLocation(7, 41)
+                    .WithLocation(7, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1954,7 +1954,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Action<string> a = /*<bind>*/new Action((Action)M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new Action((Action)M1)")
                     .WithArguments("System.Action", "System.Action<string>")
-                    .WithLocation(7, 38)
+                    .WithLocation(7, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -1997,7 +1997,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action,
                 //         Func<string> a = /*<bind>*/new Action((Action)M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new Action((Action)M1)")
                     .WithArguments("System.Action", "System.Func<string>")
-                    .WithLocation(7, 36)
+                    .WithLocation(7, 36),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -2040,7 +2040,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Action<System.Int32>, IsI
                 //         Action<int> a = /*<bind>*/new Action<int>((Action)M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Action<int>((Action)M1)")
                     .WithArguments("System.Action.Invoke()", "System.Action<int>")
-                    .WithLocation(7, 35)
+                    .WithLocation(7, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
@@ -2088,7 +2088,7 @@ IVariableDeclaratorOperation (Symbol: Program.DType d1) (OperationKind.VariableD
                 //         DType /*<bind>*/d1 = () =>/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(7, 46)
+                    .WithLocation(7, 46),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2138,7 +2138,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action<int> a = M1;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "M1")
                     .WithArguments("M1", "System.Action<int>")
-                    .WithLocation(7, 35)
+                    .WithLocation(7, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -2259,7 +2259,7 @@ IDelegateCreationOperation (OperationKind.DelegateCreation, Type: System.Action<
                 //         Action<int> a = /*<bind>*/new Action<int>(M1)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "new Action<int>(M1)")
                     .WithArguments("M1", "System.Action<int>")
-                    .WithLocation(7, 35)
+                    .WithLocation(7, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(

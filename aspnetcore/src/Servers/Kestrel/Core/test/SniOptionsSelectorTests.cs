@@ -37,7 +37,7 @@ public class SniOptionsSelectorTests
             {
                 "*",
                 new SniConfig { Certificate = new CertificateConfig { Path = "WildcardOnly" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -98,7 +98,7 @@ public class SniOptionsSelectorTests
             {
                 "*.example.org",
                 new SniConfig { Certificate = new CertificateConfig { Path = "Short" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -139,7 +139,7 @@ public class SniOptionsSelectorTests
             {
                 "*.Example.Org",
                 new SniConfig { Certificate = new CertificateConfig { Path = "WildcardPrefix" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -185,7 +185,7 @@ public class SniOptionsSelectorTests
             {
                 "*.Example.Org",
                 new SniConfig { Certificate = new CertificateConfig { Path = "WildcardPrefix" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -247,7 +247,7 @@ public class SniOptionsSelectorTests
             {
                 "*.b.example.org",
                 new SniConfig { Certificate = new CertificateConfig { Path = "b" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -287,7 +287,7 @@ public class SniOptionsSelectorTests
             {
                 "*.EXAMPLE.org",
                 new SniConfig { Certificate = new CertificateConfig { Path = "b" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -347,7 +347,7 @@ public class SniOptionsSelectorTests
             {
                 "*",
                 new SniConfig { Certificate = new CertificateConfig { Path = "WildcardOnly" } }
-            }
+            },
         };
 
         var mockCertificateConfigLoader = new MockCertificateConfigLoader();
@@ -374,7 +374,7 @@ public class SniOptionsSelectorTests
             {
                 "www.example.org",
                 new SniConfig { Certificate = new CertificateConfig() }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -405,7 +405,7 @@ public class SniOptionsSelectorTests
             {
                 "www.example.org",
                 new SniConfig { Certificate = new CertificateConfig() }
-            }
+            },
         };
 
         SslServerAuthenticationOptions lastSeenSslOptions = null;
@@ -415,7 +415,7 @@ public class SniOptionsSelectorTests
             OnAuthenticate = (context, sslOptions) =>
             {
                 lastSeenSslOptions = sslOptions;
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -451,7 +451,7 @@ public class SniOptionsSelectorTests
             {
                 "config.example.org",
                 new SniConfig { Certificate = new CertificateConfig() }
-            }
+            },
         };
 
         var selectorCertificate = _x509Certificate2;
@@ -459,7 +459,7 @@ public class SniOptionsSelectorTests
         var fallbackOptions = new HttpsConnectionAdapterOptions
         {
             ServerCertificate = new X509Certificate2(Array.Empty<byte>()),
-            ServerCertificateSelector = (context, serverName) => selectorCertificate
+            ServerCertificateSelector = (context, serverName) => selectorCertificate,
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -507,7 +507,7 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig() }
+            { "www.example.org", new SniConfig() },
         };
 
         var ex = Assert.Throws<InvalidOperationException>(
@@ -530,14 +530,14 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig() }
+            { "www.example.org", new SniConfig() },
         };
         var fallbackOptions = new HttpsConnectionAdapterOptions
         {
             ServerCertificate = new X509Certificate2(
                 TestResources.GetCertPath("aspnetdevcert.pfx"),
                 "testPassword"
-            )
+            ),
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -561,7 +561,7 @@ public class SniOptionsSelectorTests
     {
         var sniDictionary = new Dictionary<string, SniConfig>
         {
-            { "www.example.org", new SniConfig() }
+            { "www.example.org", new SniConfig() },
         };
 
         var selectorCertificate = _x509Certificate2;
@@ -569,7 +569,7 @@ public class SniOptionsSelectorTests
         var fallbackOptions = new HttpsConnectionAdapterOptions
         {
             ServerCertificate = new X509Certificate2(Array.Empty<byte>()),
-            ServerCertificateSelector = (context, serverName) => selectorCertificate
+            ServerCertificateSelector = (context, serverName) => selectorCertificate,
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -598,9 +598,9 @@ public class SniOptionsSelectorTests
                 new SniConfig
                 {
                     Protocols = HttpProtocols.None,
-                    Certificate = new CertificateConfig()
+                    Certificate = new CertificateConfig(),
                 }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -632,9 +632,9 @@ public class SniOptionsSelectorTests
                     // I'm not using Http1AndHttp2 or Http2 because I don't want to account for
                     // validation and normalization. Other tests cover that.
                     Protocols = HttpProtocols.Http1,
-                    Certificate = new CertificateConfig()
+                    Certificate = new CertificateConfig(),
                 }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -665,7 +665,7 @@ public class SniOptionsSelectorTests
             {
                 "www.example.org",
                 new SniConfig { Certificate = new CertificateConfig() }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -697,9 +697,9 @@ public class SniOptionsSelectorTests
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                     SslProtocols = SslProtocols.Tls13 | SslProtocols.Tls11,
 #pragma warning restore SYSLIB0039
-                    Certificate = new CertificateConfig()
+                    Certificate = new CertificateConfig(),
                 }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -728,7 +728,7 @@ public class SniOptionsSelectorTests
             {
                 "www.example.org",
                 new SniConfig { Certificate = new CertificateConfig() }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -757,9 +757,9 @@ public class SniOptionsSelectorTests
                 new SniConfig
                 {
                     ClientCertificateMode = ClientCertificateMode.DelayCertificate,
-                    Certificate = new CertificateConfig()
+                    Certificate = new CertificateConfig(),
                 }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -768,7 +768,7 @@ public class SniOptionsSelectorTests
             new MockCertificateConfigLoader(),
             new HttpsConnectionAdapterOptions
             {
-                ClientCertificateMode = ClientCertificateMode.AllowCertificate
+                ClientCertificateMode = ClientCertificateMode.AllowCertificate,
             },
             fallbackHttpProtocols: HttpProtocols.Http1AndHttp2,
             logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
@@ -802,7 +802,7 @@ public class SniOptionsSelectorTests
             {
                 "www.example.org",
                 new SniConfig { Certificate = new CertificateConfig() }
-            }
+            },
         };
 
         var sniOptionsSelector = new SniOptionsSelector(
@@ -811,7 +811,7 @@ public class SniOptionsSelectorTests
             new MockCertificateConfigLoader(),
             new HttpsConnectionAdapterOptions
             {
-                ClientCertificateMode = ClientCertificateMode.AllowCertificate
+                ClientCertificateMode = ClientCertificateMode.AllowCertificate,
             },
             fallbackHttpProtocols: HttpProtocols.Http1AndHttp2,
             logger: Mock.Of<ILogger<HttpsConnectionMiddleware>>()
@@ -873,7 +873,7 @@ public class SniOptionsSelectorTests
             // Defaults to null
             ApplicationProtocols = new List<SslApplicationProtocol>
             {
-                SslApplicationProtocol.Http2
+                SslApplicationProtocol.Http2,
             },
             // Defaults to X509RevocationMode.NoCheck
             CertificateRevocationCheckMode = X509RevocationMode.Offline,

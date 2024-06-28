@@ -102,7 +102,7 @@ namespace System.Reflection.Tests
     internal enum MyKinds
     {
         First,
-        Second
+        Second,
     };
 
     [AttributeUsage(AttributeTargets.All)]

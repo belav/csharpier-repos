@@ -6,7 +6,7 @@ class Foo<T>
     {
         One,
         Two,
-        Three
+        Three,
     }
 
     public TestEnum Test;

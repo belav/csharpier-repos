@@ -13,7 +13,7 @@ namespace System.Web.UI.WebControls
     using System.Web;
     using System.Web.UI;
 
-    [Browsable(false),]
+    [Browsable(false)]
     public sealed class CompleteWizardStep : TemplatedWizardStep
     {
         internal override Wizard Owner
@@ -54,7 +54,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// <para>Gets or sets the title on the <see cref='System.Web.UI.WebControls.Wizard/> .</para>
         /// </devdoc>
-        [Localizable(true), WebSysDefaultValue(SR.CreateUserWizard_DefaultCompleteTitleText),]
+        [Localizable(true), WebSysDefaultValue(SR.CreateUserWizard_DefaultCompleteTitleText)]
         public override string Title
         {
             get

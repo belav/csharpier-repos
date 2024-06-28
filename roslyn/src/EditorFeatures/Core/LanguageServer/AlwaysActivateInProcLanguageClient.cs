@@ -94,7 +94,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 serverCapabilities.MultipleContextSupportProvider =
                     new VSInternalMultipleContextFeatures
                     {
-                        SupportsMultipleContextsDiagnostics = true
+                        SupportsMultipleContextsDiagnostics = true,
                     };
                 serverCapabilities.DiagnosticProvider ??= new();
                 serverCapabilities.DiagnosticProvider.DiagnosticKinds =
@@ -147,8 +147,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                         TokenTypes = SemanticTokensSchema
                             .GetSchema(clientCapabilities.HasVisualStudioLspCapability())
                             .AllTokenTypes.ToArray(),
-                        TokenModifiers = SemanticTokensSchema.TokenModifiers
-                    }
+                        TokenModifiers = SemanticTokensSchema.TokenModifiers,
+                    },
                 };
             }
 

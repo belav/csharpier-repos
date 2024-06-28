@@ -90,7 +90,7 @@ public class ValueProviderResultTest
         var result = new ValueProviderResult("Hi There");
 
         // Act & Assert
-        Assert.Equal<string>(new string[] { "Hi There", }, result);
+        Assert.Equal<string>(new string[] { "Hi There" }, result);
     }
 
     [Fact]
@@ -146,7 +146,7 @@ public class ValueProviderResultTest
                     false
                 },
                 {
-                    new ValueProviderResult(new string[] { "Hi", }),
+                    new ValueProviderResult(new string[] { "Hi" }),
                     new ValueProviderResult(new string[] { "Hi", string.Empty }),
                     false
                 },

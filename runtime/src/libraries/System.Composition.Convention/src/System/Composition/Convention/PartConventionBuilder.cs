@@ -17,7 +17,7 @@ namespace System.Composition.Convention
         private static List<Attribute> s_onImportsSatisfiedAttributeList;
         private static readonly List<Attribute> s_importingConstructorList = new List<Attribute>()
         {
-            new ImportingConstructorAttribute()
+            new ImportingConstructorAttribute(),
         };
         private static readonly Type s_exportAttributeType = typeof(ExportAttribute);
         private readonly List<ExportConventionBuilder> _typeExportBuilders;
@@ -860,7 +860,7 @@ namespace System.Composition.Convention
                                             var onImportsSatisfiedAttributeList =
                                                 new List<Attribute>
                                                 {
-                                                    new OnImportsSatisfiedAttribute()
+                                                    new OnImportsSatisfiedAttribute(),
                                                 };
                                             s_onImportsSatisfiedAttributeList =
                                                 onImportsSatisfiedAttributeList;

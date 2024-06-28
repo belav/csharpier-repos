@@ -42,6 +42,6 @@ namespace Mono.Messaging
         NotAcknowledgeReachQueue = 4,
         NotAcknowledgeReceive = 12,
         PositiveArrival = 1,
-        PositiveReceive = 2
+        PositiveReceive = 2,
     }
 }

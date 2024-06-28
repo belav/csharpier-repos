@@ -2387,7 +2387,7 @@ public class C
                 // var p = new C().P; // 1
                 Diagnostic(ErrorCode.WRN_DeprecatedSymbolStr, "new C().P")
                     .WithArguments("C.P", "Length")
-                    .WithLocation(2, 9)
+                    .WithLocation(2, 9),
             };
             CreateCompilation(source, parseOptions: TestOptions.Regular12)
                 .VerifyDiagnostics(expectedDiagnostics);
@@ -2906,7 +2906,7 @@ class Attr : System.Attribute { public Attr(string s) {} }";
                 //     [Attr(nameof(Method().Method))]
                 Diagnostic(ErrorCode.ERR_CantInferMethTypeArgs, "Method")
                     .WithArguments("C.Method<T>()")
-                    .WithLocation(4, 18)
+                    .WithLocation(4, 18),
             };
             CreateCompilation(source, parseOptions: TestOptions.Regular12)
                 .VerifyDiagnostics(expectedDiagnostics);
@@ -2932,7 +2932,7 @@ class Attr : System.Attribute { public Attr(string s) {} }";
                 // (4,18): error CS8082: Sub-expression cannot be used in an argument to nameof.
                 //     [Attr(nameof(Method<C>().Method))]
                 Diagnostic(ErrorCode.ERR_SubexpressionNotInNameof, "Method<C>()")
-                    .WithLocation(4, 18)
+                    .WithLocation(4, 18),
             };
             CreateCompilation(source, parseOptions: TestOptions.Regular12)
                 .VerifyDiagnostics(expectedDiagnostics);

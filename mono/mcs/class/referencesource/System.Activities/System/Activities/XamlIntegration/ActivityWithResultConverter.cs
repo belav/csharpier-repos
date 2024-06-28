@@ -215,7 +215,7 @@ namespace System.Activities.XamlIntegration
                 {
                     return new VisualBasicReference<TLocationValue>()
                     {
-                        ExpressionText = expressionText
+                        ExpressionText = expressionText,
                     };
                 }
             }

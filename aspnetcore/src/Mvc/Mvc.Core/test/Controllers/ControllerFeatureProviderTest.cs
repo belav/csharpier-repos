@@ -305,7 +305,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             {
                 Mock.Of<ApplicationPart>(),
                 new TestApplicationPart(typeof(NoSuffix).GetTypeInfo()),
-                otherPart.Object
+                otherPart.Object,
             };
 
             var feature = new ControllerFeature();
@@ -313,7 +313,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var expected = new List<TypeInfo>
             {
                 typeof(NoSuffix).GetTypeInfo(),
-                typeof(PocoController).GetTypeInfo()
+                typeof(PocoController).GetTypeInfo(),
             };
 
             var provider = new ControllerFeatureProvider();
@@ -339,7 +339,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             {
                 Mock.Of<ApplicationPart>(),
                 new TestApplicationPart(typeof(NoSuffix)),
-                otherPart.Object
+                otherPart.Object,
             };
 
             var feature = new ControllerFeature();
@@ -347,7 +347,7 @@ namespace Microsoft.AspNetCore.Mvc.Controllers
             var expected = new List<TypeInfo>
             {
                 typeof(NoSuffix).GetTypeInfo(),
-                typeof(PocoController).GetTypeInfo()
+                typeof(PocoController).GetTypeInfo(),
             };
 
             var provider = new ControllerFeatureProvider();

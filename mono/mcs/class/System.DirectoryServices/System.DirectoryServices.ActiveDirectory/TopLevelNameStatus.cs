@@ -29,6 +29,6 @@ namespace System.DirectoryServices.ActiveDirectory
         Enabled,
         NewlyCreated,
         AdminDisabled,
-        ConflictDisabled = 4
+        ConflictDisabled = 4,
     }
 }

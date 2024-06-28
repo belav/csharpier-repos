@@ -641,7 +641,7 @@ namespace Wasm.Build.Tests
                         $"{config.ToLower()}_{BuildEnvironment.DefaultRuntimeIdentifier}",
                         "AppBundle",
                         "_framework"
-                    )
+                    ),
                 };
             }
 

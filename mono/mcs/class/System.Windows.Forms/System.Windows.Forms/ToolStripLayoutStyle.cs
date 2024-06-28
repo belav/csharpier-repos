@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         HorizontalStackWithOverflow = 1,
         VerticalStackWithOverflow = 2,
         Flow = 3,
-        Table = 4
+        Table = 4,
     }
 }

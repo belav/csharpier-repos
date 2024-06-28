@@ -38,7 +38,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly void M() { }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -51,7 +51,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 void M() { }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -63,7 +63,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 void M() { }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -75,7 +75,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 readonly void M() { }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -90,7 +90,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -107,7 +107,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 static void G(ref S s) { }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -127,7 +127,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 public static void G(ref this S s) { }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -269,7 +269,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -285,7 +285,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -303,7 +303,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 static void G(ref int x) { }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -321,7 +321,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 static void G(out int x) { x = 0; }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -337,7 +337,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -357,7 +357,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -378,7 +378,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -399,7 +399,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -435,7 +435,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly int P => 0;
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -449,7 +449,7 @@ public sealed class MakeStructMemberReadOnlyTests
             }
             """;
 
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -468,7 +468,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly int P { get => 0; }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -488,7 +488,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly int this[int i] { get => 0; }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -508,7 +508,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly int P { get { return 0; } }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -528,7 +528,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly int this[int i] { get { return 0; } }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -560,7 +560,7 @@ public sealed class MakeStructMemberReadOnlyTests
                         s.i = 1;
                     }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -594,7 +594,7 @@ public sealed class MakeStructMemberReadOnlyTests
 
                     static void G() { }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -624,7 +624,7 @@ public sealed class MakeStructMemberReadOnlyTests
                         M();
                     }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -792,7 +792,7 @@ public sealed class MakeStructMemberReadOnlyTests
 
                     readonly int X { get => 0; set { } }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -816,7 +816,7 @@ public sealed class MakeStructMemberReadOnlyTests
 
                     readonly int this[int x] { get => 0; set { } }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -846,7 +846,7 @@ public sealed class MakeStructMemberReadOnlyTests
                         ref readonly int x = ref i;
                     }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -865,7 +865,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -886,7 +886,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -904,7 +904,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -925,7 +925,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -970,7 +970,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly void M() { this.ToString(); }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -992,7 +992,7 @@ public sealed class MakeStructMemberReadOnlyTests
                     readonly void M() { this.X(); }
                     readonly void X() { }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -1024,7 +1024,7 @@ public sealed class MakeStructMemberReadOnlyTests
                         var v = this[0];
                     }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -1056,7 +1056,7 @@ public sealed class MakeStructMemberReadOnlyTests
                         var v = this[0];
                     }
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -1078,7 +1078,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 {
                     readonly bool IEquatable<S>.Equals(S s) => true;
                 }
-                """
+                """,
         }.RunAsync();
     }
 
@@ -1097,7 +1097,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode, }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1120,7 +1120,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode, }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1174,7 +1174,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 public void M() { x.CompareTo(null); }
             }
             """;
-        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode, }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1188,7 +1188,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 public void M() { x.CompareTo(null); }
             }
             """;
-        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode, }.RunAsync();
+        await new VerifyCS.Test { TestCode = testCode, FixedCode = testCode }.RunAsync();
     }
 
     [Fact]
@@ -1224,7 +1224,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 void M() => throw new System.Exception();
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -1239,7 +1239,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]
@@ -1254,7 +1254,7 @@ public sealed class MakeStructMemberReadOnlyTests
                 }
             }
             """;
-        await new VerifyCS.Test { TestCode = test, FixedCode = test, }.RunAsync();
+        await new VerifyCS.Test { TestCode = test, FixedCode = test }.RunAsync();
     }
 
     [Fact]

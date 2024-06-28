@@ -35,7 +35,7 @@ namespace System.Dynamic.Tests
             -1,
             int.MinValue,
             int.MaxValue,
-            int.MaxValue - 1
+            int.MaxValue - 1,
         };
 
         public static IEnumerable<object[]> CrossJoinInt32() =>
@@ -50,7 +50,7 @@ namespace System.Dynamic.Tests
             2.0,
             -1.0,
             double.PositiveInfinity,
-            double.NaN
+            double.NaN,
         };
 
         public static IEnumerable<object[]> CrossJoinDouble() =>

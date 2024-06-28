@@ -110,7 +110,7 @@ public class CreateIndexOperation : MigrationOperation, ITableMigrationOperation
             Columns = index.Columns.Select(p => p.Name).ToArray(),
             IsUnique = index.IsUnique,
             IsDescending = index.IsDescending?.ToArray(),
-            Filter = index.Filter
+            Filter = index.Filter,
         };
         operation.AddAnnotations(index.GetAnnotations());
 

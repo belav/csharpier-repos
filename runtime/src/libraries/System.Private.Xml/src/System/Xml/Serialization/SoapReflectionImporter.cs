@@ -597,7 +597,7 @@ namespace System.Xml.Serialization
             mapping.TypeDesc = model.TypeDesc;
             mapping.Elements = new ElementAccessor[]
             {
-                CreateElementAccessor(itemTypeMapping, mapping.Namespace)
+                CreateElementAccessor(itemTypeMapping, mapping.Namespace),
             };
             SetArrayMappingType(mapping);
 

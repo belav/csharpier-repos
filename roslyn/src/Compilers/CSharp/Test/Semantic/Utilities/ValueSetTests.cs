@@ -812,7 +812,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     ForNint,
                     ForNuint,
                     ForChar,
-                    ForLength
+                    ForLength,
                 }
             )
             {

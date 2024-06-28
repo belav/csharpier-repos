@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting.UnitTests
             new PrintOptions
             {
                 MemberDisplayFormat = MemberDisplayFormat.SeparateLines,
-                MaximumOutputLength = int.MaxValue
+                MaximumOutputLength = int.MaxValue,
             };
         protected static PrintOptions HiddenOptions =>
             new PrintOptions { MemberDisplayFormat = MemberDisplayFormat.Hidden };

@@ -3665,7 +3665,7 @@ public class Program
         {
             NotEmptyStructGen<Guid>?[] v = new NotEmptyStructGen<Guid>?[]
             {
-                default(NotEmptyStructGen<Guid>)
+                default(NotEmptyStructGen<Guid>),
             };
             Eval(3725, v is EmptyStruct, false);
             Eval(3726, v is EmptyStruct[], false);
@@ -4629,7 +4629,7 @@ public class Program
         {
             NotEmptyStructConstrainedGen<IntPtr>?[] v = new NotEmptyStructConstrainedGen<IntPtr>?[]
             {
-                default(NotEmptyStructConstrainedGen<IntPtr>)
+                default(NotEmptyStructConstrainedGen<IntPtr>),
             };
             Eval(4705, v is EmptyStruct, false);
             Eval(4706, v is EmptyStruct[], false);
@@ -6550,7 +6550,7 @@ public class Program
         {
             NestedStructGen<Decimal>?[] v = new NestedStructGen<Decimal>?[]
             {
-                default(NestedStructGen<Decimal>)
+                default(NestedStructGen<Decimal>),
             };
             Eval(6665, v is EmptyStruct, false);
             Eval(6666, v is EmptyStruct[], false);
@@ -7512,7 +7512,7 @@ public class Program
         {
             ExplicitFieldOffsetStruct?[] v = new ExplicitFieldOffsetStruct?[]
             {
-                default(ExplicitFieldOffsetStruct)
+                default(ExplicitFieldOffsetStruct),
             };
             Eval(7645, v is EmptyStruct, false);
             Eval(7646, v is EmptyStruct[], false);
@@ -9433,7 +9433,7 @@ public class Program
         {
             ImplementOneInterface?[] v = new ImplementOneInterface?[]
             {
-                default(ImplementOneInterface)
+                default(ImplementOneInterface),
             };
             Eval(11565, v is EmptyStruct, false);
             Eval(11566, v is EmptyStruct[], false);
@@ -10395,7 +10395,7 @@ public class Program
         {
             ImplementTwoInterface?[] v = new ImplementTwoInterface?[]
             {
-                default(ImplementTwoInterface)
+                default(ImplementTwoInterface),
             };
             Eval(12545, v is EmptyStruct, false);
             Eval(12546, v is EmptyStruct[], false);
@@ -11367,7 +11367,7 @@ public class Program
                 EmptyStructGen<int>
             >?[]
             {
-                default(ImplementOneInterfaceGen<EmptyStructGen<int>>)
+                default(ImplementOneInterfaceGen<EmptyStructGen<int>>),
             };
             Eval(13525, v is EmptyStruct, false);
             Eval(13526, v is EmptyStruct[], false);
@@ -12329,7 +12329,7 @@ public class Program
         {
             ImplementTwoInterfaceGen<int>?[] v = new ImplementTwoInterfaceGen<int>?[]
             {
-                default(ImplementTwoInterfaceGen<int>)
+                default(ImplementTwoInterfaceGen<int>),
             };
             Eval(14505, v is EmptyStruct, false);
             Eval(14506, v is EmptyStruct[], false);
@@ -13291,7 +13291,7 @@ public class Program
         {
             ImplementAllInterface<int>?[] v = new ImplementAllInterface<int>?[]
             {
-                default(ImplementAllInterface<int>)
+                default(ImplementAllInterface<int>),
             };
             Eval(15485, v is EmptyStruct, false);
             Eval(15486, v is EmptyStruct[], false);

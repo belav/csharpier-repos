@@ -190,7 +190,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                     {
                         expectedHostname = name;
                         return _x509Certificate2;
-                    }
+                    },
                 }
             );
         }
@@ -303,7 +303,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         new HttpsConnectionAdapterOptions
                         {
                             ServerCertificate = _x509Certificate2,
-                            ClientCertificateMode = ClientCertificateMode.RequireCertificate
+                            ClientCertificateMode = ClientCertificateMode.RequireCertificate,
                         }
                     );
                 }
@@ -325,7 +325,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 new HttpsConnectionAdapterOptions
                 {
                     ServerCertificate = _x509Certificate2,
-                    ClientCertificateMode = ClientCertificateMode.AllowCertificate
+                    ClientCertificateMode = ClientCertificateMode.AllowCertificate,
                 }
             );
         }
@@ -370,7 +370,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                                 chain,
                                 sslPolicyErrors
                             ) => true,
-                            CertificateRevocationCheckMode = X509RevocationMode.NoCheck
+                            CertificateRevocationCheckMode = X509RevocationMode.NoCheck,
                         }
                     ),
                 state: null
@@ -455,7 +455,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         Assert.Equal("localhost", name);
                         selectorCalled++;
                         return _x509Certificate2;
-                    }
+                    },
                 }
             );
         }
@@ -495,7 +495,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
                     return new SslServerAuthenticationOptions
                     {
-                        ServerCertificate = _x509Certificate2
+                        ServerCertificate = _x509Certificate2,
                     };
                 },
                 state: null
@@ -540,7 +540,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                             return _x509Certificate2;
                         }
                         return _x509Certificate2NoExt;
-                    }
+                    },
                 }
             );
         }
@@ -583,7 +583,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                     {
                         selectorCalled++;
                         return TestResources.GetTestCertificate("eku.code_signing.pfx");
-                    }
+                    },
                 }
             );
         }
@@ -632,7 +632,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         Assert.Equal("localhost", name);
                         selectorCalled++;
                         return _x509Certificate2;
-                    }
+                    },
                 }
             );
         }
@@ -668,7 +668,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                     {
                         selectorCalled++;
                         return null;
-                    }
+                    },
                 }
             );
         }
@@ -972,7 +972,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                                 RemoteCertificateValidationCallback = (_, _, _, _) => true,
                             }
                         );
-                    }
+                    },
                 }
             );
         }
@@ -1119,7 +1119,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                             return true;
                         };
                         so.CertificateRevocationCheckMode = X509RevocationMode.NoCheck;
-                    }
+                    },
                 }
             );
         }
@@ -1269,7 +1269,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                                 ServerCertificate = _x509Certificate2,
                             }
                         );
-                    }
+                    },
                 }
             );
         }
@@ -1315,7 +1315,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                                 ApplicationProtocols = new(),
                             }
                         );
-                    }
+                    },
                 }
             );
         }
@@ -1557,7 +1557,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                         Assert.NotNull(certificate);
                         Assert.NotNull(chain);
                         return true;
-                    }
+                    },
                 }
             );
         }
@@ -1592,7 +1592,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 {
                     ServerCertificate = _x509Certificate2,
                     ClientCertificateMode = mode,
-                    ClientCertificateValidation = (certificate, chain, sslPolicyErrors) => false
+                    ClientCertificateValidation = (certificate, chain, sslPolicyErrors) => false,
                 }
             );
         }
@@ -1625,7 +1625,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                 new HttpsConnectionAdapterOptions
                 {
                     ServerCertificate = _x509Certificate2,
-                    ClientCertificateMode = mode
+                    ClientCertificateMode = mode,
                 }
             );
         }
@@ -1744,7 +1744,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         Assert.NotEmpty(eku.EnhancedKeyUsages);
 
         CreateMiddleware(
-            new HttpsConnectionAdapterOptions { ServerCertificate = cert, },
+            new HttpsConnectionAdapterOptions { ServerCertificate = cert },
             ListenOptions.DefaultHttpProtocols
         );
     }
@@ -1764,7 +1764,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var ex = Assert.Throws<InvalidOperationException>(
             () =>
                 CreateMiddleware(
-                    new HttpsConnectionAdapterOptions { ServerCertificate = cert, },
+                    new HttpsConnectionAdapterOptions { ServerCertificate = cert },
                     ListenOptions.DefaultHttpProtocols
                 )
         );
@@ -1783,7 +1783,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
 
         var testLogger = new TestApplicationErrorLogger();
         CreateMiddleware(
-            new HttpsConnectionAdapterOptions { ServerCertificate = cert, },
+            new HttpsConnectionAdapterOptions { ServerCertificate = cert },
             ListenOptions.DefaultHttpProtocols,
             testLogger
         );
@@ -1819,7 +1819,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             ApplicationProtocols = new List<SslApplicationProtocol>
             {
                 SslApplicationProtocol.Http11,
-                SslApplicationProtocol.Http2
+                SslApplicationProtocol.Http2,
             },
         };
 
@@ -1912,7 +1912,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
     private static HttpsConnectionMiddleware CreateMiddleware(X509Certificate2 serverCertificate)
     {
         return CreateMiddleware(
-            new HttpsConnectionAdapterOptions { ServerCertificate = serverCertificate, },
+            new HttpsConnectionAdapterOptions { ServerCertificate = serverCertificate },
             ListenOptions.DefaultHttpProtocols
         );
     }

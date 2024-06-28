@@ -426,7 +426,7 @@ public class CommandBatchPreparerTest
             {
                 Id = 2,
                 RelatedId = 1,
-                Value = "Test2"
+                Value = "Test2",
             }
         );
         fakeEntry2.SetEntityState(EntityState.Modified);
@@ -537,7 +537,7 @@ ForeignKeyConstraint { 'RelatedId' } FakeEntity [Added]" + CoreStrings.Sensitive
             {
                 Id = 2,
                 RelatedId = 1,
-                UniqueValue = "Test2"
+                UniqueValue = "Test2",
             }
         );
         fakeEntry2.SetEntityState(EntityState.Modified);

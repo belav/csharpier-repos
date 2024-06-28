@@ -531,7 +531,7 @@ namespace MemoryMarshalGetArrayDataReferenceTest
                     new StructWithByte[]
                     {
                         new StructWithByte { Byte = 1 },
-                        new StructWithByte { Byte = 1 }
+                        new StructWithByte { Byte = 1 },
                     }
                 ),
                 2
@@ -722,7 +722,7 @@ namespace MemoryMarshalGetArrayDataReferenceTest
         {
             A,
             B,
-            C
+            C,
         }
 
         struct StructWithByte

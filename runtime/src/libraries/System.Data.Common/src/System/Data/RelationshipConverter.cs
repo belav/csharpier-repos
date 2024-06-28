@@ -73,6 +73,7 @@ namespace System.Data
                             typeof(string[]) /*childColumnNames*/
                             ,
                             typeof(bool) /*nested*/
+                            ,
                         }
                     )!;
 
@@ -83,7 +84,7 @@ namespace System.Data
                         rel.ChildKey.Table.TableName,
                         rel.ParentColumnNames,
                         rel.ChildColumnNames,
-                        rel.Nested
+                        rel.Nested,
                     };
                 }
                 else
@@ -106,6 +107,7 @@ namespace System.Data
                             typeof(string[]) /*childColumnNames*/
                             ,
                             typeof(bool) /*nested*/
+                            ,
                         }
                     )!;
 
@@ -118,7 +120,7 @@ namespace System.Data
                         rel.ChildKey.Table.Namespace,
                         rel.ParentColumnNames,
                         rel.ChildColumnNames,
-                        rel.Nested
+                        rel.Nested,
                     };
                 }
 

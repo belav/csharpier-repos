@@ -87,7 +87,7 @@ namespace Mono.Linker
                 TypeDefinition type => type.Module?.Assembly,
                 IMemberDefinition member => member.DeclaringType.Module.Assembly,
                 null => null,
-                _ => throw new NotSupportedException()
+                _ => throw new NotSupportedException(),
             };
 
             if (
@@ -225,11 +225,13 @@ namespace Mono.Linker
                 return typeName switch
                 {
                     ArrayTypeName => new ArrayType(elementType),
-                    MultiDimArrayTypeName multiDimArrayTypeName =>
-                        new ArrayType(elementType, multiDimArrayTypeName.Rank),
+                    MultiDimArrayTypeName multiDimArrayTypeName => new ArrayType(
+                        elementType,
+                        multiDimArrayTypeName.Rank
+                    ),
                     ByRefTypeName => new ByReferenceType(elementType),
                     PointerTypeName => new PointerType(elementType),
-                    _ => elementType
+                    _ => elementType,
                 };
             }
 

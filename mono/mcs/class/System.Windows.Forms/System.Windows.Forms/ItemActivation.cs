@@ -34,6 +34,6 @@ namespace System.Windows.Forms
     {
         OneClick = 1,
         Standard = 0,
-        TwoClick = 2
+        TwoClick = 2,
     }
 }

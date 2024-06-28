@@ -15,7 +15,7 @@ namespace System.Web.Util
         Hours,
         Minutes,
         Seconds,
-        Milliseconds
+        Milliseconds,
     };
 
     internal sealed class DateTimeUtil

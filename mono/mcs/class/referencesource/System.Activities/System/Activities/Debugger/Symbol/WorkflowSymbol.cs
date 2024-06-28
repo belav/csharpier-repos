@@ -37,7 +37,7 @@ namespace System.Activities.Debugger.Symbol
         {
             String = 0x76, // Format as well as cookie. String format is hidden from public.
             Binary = 0x77,
-            Checksum = 0x80
+            Checksum = 0x80,
         }
 
         internal const EncodingFormat DefaultEncodingFormat = EncodingFormat.Binary;
@@ -189,7 +189,7 @@ namespace System.Activities.Debugger.Symbol
                     StartLine = int.Parse(symbolSegments[1], CultureInfo.InvariantCulture),
                     StartColumn = int.Parse(symbolSegments[2], CultureInfo.InvariantCulture),
                     EndLine = int.Parse(symbolSegments[3], CultureInfo.InvariantCulture),
-                    EndColumn = int.Parse(symbolSegments[4], CultureInfo.InvariantCulture)
+                    EndColumn = int.Parse(symbolSegments[4], CultureInfo.InvariantCulture),
                 };
             }
 
@@ -197,7 +197,7 @@ namespace System.Activities.Debugger.Symbol
             {
                 FileName = s[0],
                 Symbols = symbols,
-                checksum = checksum
+                checksum = checksum,
             };
         }
 

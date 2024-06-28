@@ -320,7 +320,7 @@ namespace System.Data.Services.Client
                 parameterPath.Add(parameterSegment);
                 this.annotations[lambda.Parameters[0]] = new ExpressionAnnotation()
                 {
-                    Segment = parameterSegment
+                    Segment = parameterSegment,
                 };
 
                 Expression body = this.Visit(lambda.Body);
@@ -764,7 +764,7 @@ namespace System.Data.Services.Client
             parameterPath.Add(parameterSegment);
             this.annotations[expression] = new ExpressionAnnotation()
             {
-                Segment = parameterSegment
+                Segment = parameterSegment,
             };
 
             return result;

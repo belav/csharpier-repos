@@ -26,7 +26,7 @@ namespace System.Web.Mvc.Test
             var providers = new IModelBinderProvider[]
             {
                 new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
-                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object
+                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
             };
             var collection = new ModelBinderProviderCollection(providers);
 
@@ -75,7 +75,7 @@ namespace System.Web.Mvc.Test
             var providers = new List<IModelBinderProvider>()
             {
                 new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
-                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object
+                new Mock<IModelBinderProvider>(MockBehavior.Strict).Object,
             };
             var collection = new ModelBinderProviderCollection(providers);
 
@@ -98,14 +98,14 @@ namespace System.Web.Mvc.Test
             var dependencyProviders = new IModelBinderProvider[]
             {
                 firstProvider.Object,
-                secondProvider.Object
+                secondProvider.Object,
             };
             var collectionProviders = new IModelBinderProvider[] { thirdProvider.Object };
             var expectedProviders = new IModelBinderProvider[]
             {
                 firstProvider.Object,
                 secondProvider.Object,
-                thirdProvider.Object
+                thirdProvider.Object,
             };
 
             var resolver = new Mock<IDependencyResolver>();
@@ -208,11 +208,11 @@ namespace System.Web.Mvc.Test
             IModelBinderProvider[] dependencyProviders = new IModelBinderProvider[]
             {
                 locatedProvider.Object,
-                secondProvider.Object
+                secondProvider.Object,
             };
             IModelBinderProvider[] collectionProviders = new IModelBinderProvider[]
             {
-                thirdProvider.Object
+                thirdProvider.Object,
             };
 
             Mock<IDependencyResolver> resolver = new Mock<IDependencyResolver>();

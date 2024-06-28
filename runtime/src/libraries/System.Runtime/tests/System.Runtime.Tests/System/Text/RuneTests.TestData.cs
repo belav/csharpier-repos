@@ -34,8 +34,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\u0000' },
-                    Utf8Sequence = new byte[] { 0x00 }
-                }
+                    Utf8Sequence = new byte[] { 0x00 },
+                },
             };
 
             yield return new object[]
@@ -48,8 +48,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\u007F' },
-                    Utf8Sequence = new byte[] { 0x7F }
-                }
+                    Utf8Sequence = new byte[] { 0x7F },
+                },
             };
 
             yield return new object[]
@@ -62,8 +62,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\u0080' },
-                    Utf8Sequence = new byte[] { 0xC2, 0x80 }
-                }
+                    Utf8Sequence = new byte[] { 0xC2, 0x80 },
+                },
             };
 
             yield return new object[]
@@ -76,8 +76,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\u07FF' },
-                    Utf8Sequence = new byte[] { 0xDF, 0xBF }
-                }
+                    Utf8Sequence = new byte[] { 0xDF, 0xBF },
+                },
             };
 
             yield return new object[]
@@ -90,8 +90,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\u0800' },
-                    Utf8Sequence = new byte[] { 0xE0, 0xA0, 0x80 }
-                }
+                    Utf8Sequence = new byte[] { 0xE0, 0xA0, 0x80 },
+                },
             };
 
             yield return new object[]
@@ -104,8 +104,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\uD7FF' },
-                    Utf8Sequence = new byte[] { 0xED, 0x9F, 0xBF }
-                }
+                    Utf8Sequence = new byte[] { 0xED, 0x9F, 0xBF },
+                },
             };
 
             yield return new object[]
@@ -118,8 +118,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\uE000' },
-                    Utf8Sequence = new byte[] { 0xEE, 0x80, 0x80 }
-                }
+                    Utf8Sequence = new byte[] { 0xEE, 0x80, 0x80 },
+                },
             };
 
             yield return new object[]
@@ -132,8 +132,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\uFFFD' },
-                    Utf8Sequence = new byte[] { 0xEF, 0xBF, 0xBD }
-                }
+                    Utf8Sequence = new byte[] { 0xEF, 0xBF, 0xBD },
+                },
             };
 
             yield return new object[]
@@ -146,8 +146,8 @@ namespace System.Text.Tests
                     IsBmp = true,
                     Plane = 0,
                     Utf16Sequence = new char[] { '\uFFFF' },
-                    Utf8Sequence = new byte[] { 0xEF, 0xBF, 0xBF }
-                }
+                    Utf8Sequence = new byte[] { 0xEF, 0xBF, 0xBF },
+                },
             };
         }
 
@@ -163,8 +163,8 @@ namespace System.Text.Tests
                     IsBmp = false,
                     Plane = 1,
                     Utf16Sequence = new char[] { '\uD800', '\uDC00' },
-                    Utf8Sequence = new byte[] { 0xF0, 0x90, 0x80, 0x80 }
-                }
+                    Utf8Sequence = new byte[] { 0xF0, 0x90, 0x80, 0x80 },
+                },
             };
 
             yield return new object[]
@@ -177,8 +177,8 @@ namespace System.Text.Tests
                     IsBmp = false,
                     Plane = 16,
                     Utf16Sequence = new char[] { '\uDBFF', '\uDFFF' },
-                    Utf8Sequence = new byte[] { 0xF4, 0x8F, 0xBF, 0xBF }
-                }
+                    Utf8Sequence = new byte[] { 0xF4, 0x8F, 0xBF, 0xBF },
+                },
             };
         }
 
@@ -196,6 +196,7 @@ namespace System.Text.Tests
                     ).ScalarValue /* value */
                     ,
                     true /* isValid */
+                    ,
                 };
             }
 
@@ -212,6 +213,7 @@ namespace System.Text.Tests
                     ) /* value */
                     ,
                     false /* isValid */
+                    ,
                 };
             }
         }
@@ -280,8 +282,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -300,8 +302,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -320,8 +322,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -340,8 +342,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -360,8 +362,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -380,8 +382,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -400,8 +402,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -420,8 +422,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -440,8 +442,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -460,8 +462,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -480,8 +482,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -500,8 +502,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -520,8 +522,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -540,8 +542,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -560,8 +562,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -580,8 +582,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -600,8 +602,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -620,8 +622,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -640,8 +642,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -660,8 +662,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -680,8 +682,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -700,8 +702,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -720,8 +722,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -740,8 +742,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -760,8 +762,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -780,8 +782,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -800,8 +802,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -820,8 +822,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -840,8 +842,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -860,8 +862,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -880,8 +882,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -900,8 +902,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -920,8 +922,8 @@ namespace System.Text.Tests
                     IsSeparator = true,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -940,8 +942,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -960,8 +962,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -980,8 +982,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1000,8 +1002,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1020,8 +1022,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1040,8 +1042,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1060,8 +1062,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1080,8 +1082,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1100,8 +1102,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1120,8 +1122,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1140,8 +1142,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1160,8 +1162,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1180,8 +1182,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1200,8 +1202,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1220,8 +1222,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1240,8 +1242,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1260,8 +1262,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1280,8 +1282,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1300,8 +1302,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1320,8 +1322,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1340,8 +1342,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1360,8 +1362,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1380,8 +1382,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1400,8 +1402,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1420,8 +1422,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1440,8 +1442,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1460,8 +1462,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1480,8 +1482,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1500,8 +1502,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1520,8 +1522,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1540,8 +1542,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1560,8 +1562,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1580,8 +1582,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1600,8 +1602,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1620,8 +1622,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1640,8 +1642,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1660,8 +1662,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1680,8 +1682,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1700,8 +1702,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1720,8 +1722,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1740,8 +1742,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1760,8 +1762,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1780,8 +1782,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1800,8 +1802,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1820,8 +1822,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1840,8 +1842,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1860,8 +1862,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1880,8 +1882,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1900,8 +1902,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1920,8 +1922,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1940,8 +1942,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1960,8 +1962,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -1980,8 +1982,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2000,8 +2002,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2020,8 +2022,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2040,8 +2042,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2060,8 +2062,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2080,8 +2082,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2100,8 +2102,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2120,8 +2122,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2140,8 +2142,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2160,8 +2162,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2180,8 +2182,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2200,8 +2202,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2220,8 +2222,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2240,8 +2242,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2260,8 +2262,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2280,8 +2282,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2300,8 +2302,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2320,8 +2322,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2340,8 +2342,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2360,8 +2362,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2380,8 +2382,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2400,8 +2402,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2420,8 +2422,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2440,8 +2442,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2460,8 +2462,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2480,8 +2482,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2500,8 +2502,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2520,8 +2522,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2540,8 +2542,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2560,8 +2562,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2580,8 +2582,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2600,8 +2602,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2620,8 +2622,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2640,8 +2642,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2660,8 +2662,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2680,8 +2682,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2700,8 +2702,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2720,8 +2722,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2740,8 +2742,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2760,8 +2762,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2780,8 +2782,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2800,8 +2802,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2820,8 +2822,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
 
             // Remainder of Latin-1
@@ -2843,8 +2845,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2863,8 +2865,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2883,8 +2885,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2903,8 +2905,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2923,8 +2925,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2943,8 +2945,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -2963,8 +2965,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -2983,8 +2985,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3003,8 +3005,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3023,8 +3025,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3043,8 +3045,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3063,8 +3065,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3083,8 +3085,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3103,8 +3105,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3123,8 +3125,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3143,8 +3145,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3163,8 +3165,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3183,8 +3185,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3203,8 +3205,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3223,8 +3225,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3243,8 +3245,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3263,8 +3265,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3283,8 +3285,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3303,8 +3305,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3323,8 +3325,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3343,8 +3345,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3363,8 +3365,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3383,8 +3385,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3403,8 +3405,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3423,8 +3425,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3443,8 +3445,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3463,8 +3465,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3483,8 +3485,8 @@ namespace System.Text.Tests
                     IsSeparator = true,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
             yield return new object[]
             {
@@ -3503,8 +3505,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3523,8 +3525,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3543,8 +3545,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3563,8 +3565,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3583,8 +3585,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3603,8 +3605,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3623,8 +3625,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3643,8 +3645,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3663,8 +3665,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3683,8 +3685,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3703,8 +3705,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3723,8 +3725,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3743,8 +3745,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3763,8 +3765,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3783,8 +3785,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3803,8 +3805,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3823,8 +3825,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3843,8 +3845,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3863,8 +3865,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3883,8 +3885,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3903,8 +3905,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3923,8 +3925,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3943,8 +3945,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3963,8 +3965,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -3983,8 +3985,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4003,8 +4005,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4023,8 +4025,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4043,8 +4045,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4063,8 +4065,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4083,8 +4085,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4103,8 +4105,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4123,8 +4125,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4143,8 +4145,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4163,8 +4165,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4183,8 +4185,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4203,8 +4205,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4223,8 +4225,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4243,8 +4245,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4263,8 +4265,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4283,8 +4285,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4303,8 +4305,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4323,8 +4325,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4343,8 +4345,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4363,8 +4365,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4383,8 +4385,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4403,8 +4405,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4423,8 +4425,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4443,8 +4445,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4463,8 +4465,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4483,8 +4485,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4503,8 +4505,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4523,8 +4525,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4543,8 +4545,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4563,8 +4565,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4583,8 +4585,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4603,8 +4605,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4623,8 +4625,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4643,8 +4645,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4663,8 +4665,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4683,8 +4685,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4703,8 +4705,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4723,8 +4725,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = true,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4743,8 +4745,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4763,8 +4765,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4783,8 +4785,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4803,8 +4805,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4823,8 +4825,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4843,8 +4845,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4863,8 +4865,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4883,8 +4885,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4903,8 +4905,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4923,8 +4925,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4943,8 +4945,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4963,8 +4965,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -4983,8 +4985,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5003,8 +5005,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5023,8 +5025,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5043,8 +5045,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5063,8 +5065,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5083,8 +5085,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5103,8 +5105,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5123,8 +5125,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5143,8 +5145,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5163,8 +5165,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5183,8 +5185,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5203,8 +5205,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5223,8 +5225,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5243,8 +5245,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5263,8 +5265,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5283,8 +5285,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5303,8 +5305,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5323,8 +5325,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5343,8 +5345,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5363,8 +5365,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
             yield return new object[]
             {
@@ -5383,8 +5385,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
 
             // Select others
@@ -5407,8 +5409,8 @@ namespace System.Text.Tests
                     IsSeparator = true,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
 
             // U+2028 LINE SEPARATOR
@@ -5429,8 +5431,8 @@ namespace System.Text.Tests
                     IsSeparator = true,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
 
             // U+2029 PARAGRAPH SEPARATOR
@@ -5451,8 +5453,8 @@ namespace System.Text.Tests
                     IsSeparator = true,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
 
             // U+202F NARROW NO-BREAK SPACE
@@ -5473,8 +5475,8 @@ namespace System.Text.Tests
                     IsSeparator = true,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = true
-                }
+                    IsWhiteSpace = true,
+                },
             };
 
             // U+2154 VULGAR FRACTION TWO THIRDS
@@ -5495,8 +5497,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
 
             // U+FFFD REPLACEMENT CHARACTER
@@ -5517,8 +5519,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = true,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
 
             // U+10000 LINEAR B SYLLABLE B008 A
@@ -5539,8 +5541,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
 
             // U+10110 AEGEAN NUMBER TEN
@@ -5561,8 +5563,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
 
             // U+10177 GREEK TWO THIRDS SIGN
@@ -5583,8 +5585,8 @@ namespace System.Text.Tests
                     IsSeparator = false,
                     IsSymbol = false,
                     IsUpper = false,
-                    IsWhiteSpace = false
-                }
+                    IsWhiteSpace = false,
+                },
             };
         }
 

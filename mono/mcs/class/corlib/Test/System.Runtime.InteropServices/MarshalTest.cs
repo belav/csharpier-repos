@@ -204,7 +204,7 @@ namespace MonoTests.System.Runtime.InteropServices
             "This \0 is \0 a \0 string \0 with \0 nulls",
             "\0string",
             "string\0",
-            "\0\0\0\0\0\0\0\0"
+            "\0\0\0\0\0\0\0\0",
         };
 
         [Test]
@@ -1056,7 +1056,7 @@ namespace MonoTests.System.Runtime.InteropServices
             {
                 value1 = 42,
                 value2 = 53,
-                array = Encoding.UTF8.GetBytes("Hello")
+                array = Encoding.UTF8.GetBytes("Hello"),
             };
 
             byte[] buffer = Serialize(myStruct);
@@ -1078,7 +1078,7 @@ namespace MonoTests.System.Runtime.InteropServices
                 value1 = 42,
                 array1 = Encoding.UTF8.GetBytes("Hello"),
                 value2 = 53,
-                array2 = Encoding.UTF8.GetBytes("World")
+                array2 = Encoding.UTF8.GetBytes("World"),
             };
 
             byte[] array = Serialize(myStruct);
@@ -1123,7 +1123,7 @@ namespace MonoTests.System.Runtime.InteropServices
             {
                 arrayField = new FiveByteStruct[arraySize],
                 firstUShortField = 42,
-                secondUShortField = 43
+                secondUShortField = 43,
             };
 
             for (var i = 0; i < arraySize; ++i)

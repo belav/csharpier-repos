@@ -88,7 +88,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     {
                         c1,
                         c2,
-                        c3
+                        c3,
                     };
                     ((IList)collection).Add(c4); // Add non-X509Certificate2 object
 
@@ -238,7 +238,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 X509CertificateCollection collection = new X509CertificateCollection
                 {
-                    certificate
+                    certificate,
                 };
 
                 Assert.Throws<ArgumentNullException>(() => collection[0] = null);
@@ -280,7 +280,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 X509Certificate2Collection collection = new X509Certificate2Collection
                 {
-                    certificate
+                    certificate,
                 };
 
                 Assert.Throws<ArgumentNullException>(() => collection[0] = null);
@@ -337,7 +337,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 X509CertificateCollection collection = new X509CertificateCollection
                 {
-                    certificate
+                    certificate,
                 };
 
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1]);
@@ -380,7 +380,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 X509Certificate2Collection collection = new X509Certificate2Collection
                 {
-                    certificate
+                    certificate,
                 };
 
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1]);
@@ -891,7 +891,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var cert2 = new X509Certificate2(TestData.ComplexNameInfoCert))
             using (var cert3 = new X509Certificate2(TestData.CertWithPolicies))
             {
-                var collection = new X509Certificate2Collection { cert1, cert2, cert3, };
+                var collection = new X509Certificate2Collection { cert1, cert2, cert3 };
 
                 byte[] exported = collection.Export(X509ContentType.Pkcs12);
 
@@ -1023,7 +1023,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 Assert.True(oneWithKey.HasPrivateKey);
 
-                var col = new X509Certificate2Collection { oneWithKey, twoWithoutKey, };
+                var col = new X509Certificate2Collection { oneWithKey, twoWithoutKey };
 
                 Assert.Equal(1, col.Count(x => x.HasPrivateKey));
                 Assert.Equal(2, col.Count);
@@ -1345,7 +1345,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // Add c1Clone back
                 // End state: { c1, c2 } => { c2, c1Clone }
                 cc = new X509Certificate2Collection(array);
-                collection = new X509Certificate2Collection { c1Clone, c1, c2, };
+                collection = new X509Certificate2Collection { c1Clone, c1, c2 };
                 AssertExtensions.Throws<ArgumentException>(null, () => cc.RemoveRange(collection));
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);

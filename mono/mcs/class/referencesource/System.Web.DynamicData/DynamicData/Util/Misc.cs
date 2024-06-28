@@ -189,7 +189,7 @@ namespace System.Web.DynamicData
                 {
                     //
                     Name = Enum.GetName(enumType, e),
-                    UnderlyingValue = GetUnderlyingTypeValue(enumType, e)
+                    UnderlyingValue = GetUnderlyingTypeValue(enumType, e),
                 };
             foreach (var entry in enumEntries.OrderBy(e => e.UnderlyingValue))
             {

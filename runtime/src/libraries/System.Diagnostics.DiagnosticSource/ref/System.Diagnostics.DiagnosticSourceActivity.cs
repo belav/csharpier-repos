@@ -471,7 +471,7 @@ namespace System.Diagnostics
     {
         Unset = 0,
         Ok = 1,
-        Error = 2
+        Error = 2,
     }
 
     public enum ActivityIdFormat
@@ -852,7 +852,7 @@ namespace System.Diagnostics
         None,
         PropagationData,
         AllData,
-        AllDataAndRecorded
+        AllDataAndRecorded,
     }
 
     public enum ActivityKind

@@ -118,7 +118,7 @@ internal sealed class ProcessEx : IDisposable
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true,
-            WorkingDirectory = workingDirectory
+            WorkingDirectory = workingDirectory,
         };
 
         if (envVars != null)

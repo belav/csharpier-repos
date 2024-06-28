@@ -181,7 +181,7 @@ namespace System.Windows.Forms
                     categorized_toolbarbutton,
                     alphabetic_toolbarbutton,
                     new PropertyToolBarSeparator(),
-                    propertypages_toolbarbutton
+                    propertypages_toolbarbutton,
                 }
             );
             //toolbar.ButtonSize = new System.Drawing.Size (20, 20);

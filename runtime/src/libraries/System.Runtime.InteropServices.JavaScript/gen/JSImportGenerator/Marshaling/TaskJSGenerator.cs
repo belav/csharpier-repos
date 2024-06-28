@@ -190,7 +190,7 @@ namespace Microsoft.Interop.JavaScript
                                                                         Token(SyntaxKind.OutKeyword)
                                                                     )
                                                                 )
-                                                                .WithType(sourceType)
+                                                                .WithType(sourceType),
                                                         }
                                                     )
                                                 )
@@ -233,7 +233,7 @@ namespace Microsoft.Interop.JavaScript
                                                     )
                                                 )
                                             )
-                                    )
+                                    ),
                                 }
                             )
                         )
@@ -285,7 +285,7 @@ namespace Microsoft.Interop.JavaScript
                                                                     )
                                                                 ),
                                                             Parameter(Identifier("__task_result"))
-                                                                .WithType(sourceType)
+                                                                .WithType(sourceType),
                                                         }
                                                     )
                                                 )
@@ -323,7 +323,7 @@ namespace Microsoft.Interop.JavaScript
                                                     )
                                                 )
                                             )
-                                    )
+                                    ),
                                 }
                             )
                         )

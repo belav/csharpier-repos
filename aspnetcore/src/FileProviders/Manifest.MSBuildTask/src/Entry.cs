@@ -29,7 +29,7 @@ public class Entry : IEquatable<Entry>
         {
             Name = name,
             AssemblyResourceName = assemblyResourceName,
-            IsFile = true
+            IsFile = true,
         };
 
     internal void AddChild(Entry child)

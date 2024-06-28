@@ -230,7 +230,7 @@ namespace System.Data.SqlClient
             set { _collation = value; }
         }
 
-        [Browsable(false),]
+        [Browsable(false)]
         public SqlCompareOptions CompareInfo
         {
             // Bits 21 through 25 represent the CompareInfo
@@ -352,7 +352,7 @@ namespace System.Data.SqlClient
             set { _internalMetaType = value; }
         }
 
-        [Browsable(false),]
+        [Browsable(false)]
         public int LocaleId
         {
             // Lowest 20 bits represent LocaleId
@@ -817,7 +817,7 @@ namespace System.Data.SqlClient
             }
         }
 
-        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public object SqlValue
         {
             get
@@ -2395,14 +2395,14 @@ namespace System.Data.SqlClient
                             typeof(string),
                             typeof(SqlDbType),
                             typeof(int),
-                            typeof(string)
+                            typeof(string),
                         };
                         ctorValues = new object[]
                         {
                             p.ParameterName,
                             p.SqlDbType,
                             p.Size,
-                            p.SourceColumn
+                            p.SourceColumn,
                         };
                         break;
                     case 8: // Value
@@ -2423,7 +2423,7 @@ namespace System.Data.SqlClient
                                 typeof(byte),
                                 typeof(string),
                                 typeof(DataRowVersion),
-                                typeof(object)
+                                typeof(object),
                             };
                             ctorValues = new object[]
                             {
@@ -2436,7 +2436,7 @@ namespace System.Data.SqlClient
                                 p.ScaleInternal,
                                 p.SourceColumn,
                                 p.SourceVersion,
-                                p.Value
+                                p.Value,
                             };
                         }
                         else
@@ -2455,7 +2455,7 @@ namespace System.Data.SqlClient
                                 typeof(object),
                                 typeof(string),
                                 typeof(string),
-                                typeof(string)
+                                typeof(string),
                             };
                             ctorValues = new object[]
                             {
@@ -2471,7 +2471,7 @@ namespace System.Data.SqlClient
                                 p.Value,
                                 p.XmlSchemaCollectionDatabase,
                                 p.XmlSchemaCollectionOwningSchema,
-                                p.XmlSchemaCollectionName
+                                p.XmlSchemaCollectionName,
                             };
                         }
                         break;

@@ -54,7 +54,7 @@ public class ValidationVisitorModelWithValidatedProperties : ValidationVisitorBe
                     Street = "15701 NE 39th St",
                     Type = "Home",
                     Zip = "98052",
-                }
+                },
             },
         };
 

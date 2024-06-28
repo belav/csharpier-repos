@@ -35,6 +35,6 @@ namespace System.Windows.Forms
         UnicodeText = 1,
         Rtf = 2,
         Html = 3,
-        CommaSeparatedValue = 4
+        CommaSeparatedValue = 4,
     }
 }

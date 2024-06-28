@@ -42,7 +42,7 @@ public abstract class RequestDelegateCreationTestBase : LoggedTest
             new KeyValuePair<string, string>(
                 "InterceptorsPreviewNamespaces",
                 "Microsoft.AspNetCore.Http.Generated"
-            )
+            ),
         }
     );
     private static readonly Project _baseProject = CreateProject();

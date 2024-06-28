@@ -307,7 +307,7 @@ namespace Mono.CSharp
             HasUserOperators = 1 << 17,
             CanBeReused = 1 << 18,
             InterfacesExpanded = 1 << 19,
-            HasInstanceField = 1 << 20
+            HasInstanceField = 1 << 20,
         }
 
         /// <summary>
@@ -1144,7 +1144,7 @@ namespace Mono.CSharp
             GenericIterateInterface = 1 << 21,
             GenericTask = 1 << 22,
             InterfacesImported = 1 << 23,
-            Tuple = 1 << 24
+            Tuple = 1 << 24,
         }
 
         //

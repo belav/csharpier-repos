@@ -95,7 +95,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Items will be added into the legend in the same order as the chart series.
         /// </summary>
-        ReversedSeriesOrder
+        ReversedSeriesOrder,
     };
 
     /// <summary>
@@ -162,7 +162,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// The symbol will be a marker.
         /// </summary>
-        Marker
+        Marker,
     }
 
     /// <summary>
@@ -183,7 +183,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Many column, many rows.
         /// </summary>
-        Table
+        Table,
     };
 
     /// <summary>
@@ -206,7 +206,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// The legend items will be fit vertically within the legend.
         /// It is preferred to use this style when docking is set to left or right.
         /// </summary>
-        Tall
+        Tall,
     };
 
     #endregion
@@ -216,7 +216,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// appearance, position and content properties. This class is also
     /// responsible for drawing and positioning of the legend.
     /// </summary>
-    [SRDescription("DescriptionAttributeLegend_Legend"), DefaultProperty("Enabled"),]
+    [SRDescription("DescriptionAttributeLegend_Legend"), DefaultProperty("Enabled")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -5110,7 +5110,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// The LegendCollection class is a strongly typed collection of legends.
     /// </summary>
-    [SRDescription("DescriptionAttributeLegendCollection_LegendCollection"),]
+    [SRDescription("DescriptionAttributeLegendCollection_LegendCollection")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -5371,7 +5371,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// The LegendItemsCollection class is a strongly typed collection of legend items.
     /// </summary>
-    [SRDescription("DescriptionAttributeCustomLabelsCollection_CustomLabelsCollection"),]
+    [SRDescription("DescriptionAttributeCustomLabelsCollection_CustomLabelsCollection")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,
@@ -5466,7 +5466,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// It contains properties which describe visual appearance and
     /// content of the legend item.
     /// </summary>
-    [SRDescription("DescriptionAttributeLegendItem_LegendItem"), DefaultProperty("Name"),]
+    [SRDescription("DescriptionAttributeLegendItem_LegendItem"), DefaultProperty("Name")]
 #if Microsoft_CONTROL
     public class LegendItem : ChartNamedElement
 #else

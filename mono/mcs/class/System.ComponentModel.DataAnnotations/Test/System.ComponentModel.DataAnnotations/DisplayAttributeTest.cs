@@ -95,7 +95,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 ShortName = "ShortName",
                 Prompt = "Prompt",
                 Description = "Description",
-                GroupName = "GroupName"
+                GroupName = "GroupName",
             };
 
             Assert.AreEqual("Name", display.GetName());
@@ -115,7 +115,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 ShortName = "ShortName",
                 Prompt = "Prompt",
                 Description = "Description",
-                GroupName = "GroupName"
+                GroupName = "GroupName",
             };
 
             Assert.AreEqual(GoodResources.Name, display.GetName());
@@ -140,7 +140,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
             {
                 Order = 1,
                 AutoGenerateField = true,
-                AutoGenerateFilter = false
+                AutoGenerateFilter = false,
             };
 
             Assert.AreEqual(1, display.Order);
@@ -201,7 +201,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 ShortName = resourceKey,
                 Prompt = resourceKey,
                 Description = resourceKey,
-                GroupName = resourceKey
+                GroupName = resourceKey,
             };
 
             ExceptionAssert.Throws<InvalidOperationException>(
@@ -238,7 +238,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 ShortName = resourceKey,
                 Prompt = resourceKey,
                 Description = resourceKey,
-                GroupName = resourceKey
+                GroupName = resourceKey,
             };
 
             ExceptionAssert.Throws<InvalidOperationException>(
@@ -275,7 +275,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 ShortName = resourceKey,
                 Prompt = resourceKey,
                 Description = resourceKey,
-                GroupName = resourceKey
+                GroupName = resourceKey,
             };
 
             ExceptionAssert.Throws<InvalidOperationException>(
@@ -312,7 +312,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
                 ShortName = resourceKey,
                 Prompt = resourceKey,
                 Description = resourceKey,
-                GroupName = resourceKey
+                GroupName = resourceKey,
             };
 
             ExceptionAssert.Throws<InvalidOperationException>(

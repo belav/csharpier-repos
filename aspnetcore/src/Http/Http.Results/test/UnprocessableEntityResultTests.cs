@@ -30,7 +30,7 @@ public class UnprocessableEntityResultTests
     {
         // Arrange
         var result = new UnprocessableEntity();
-        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);

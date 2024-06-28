@@ -20,7 +20,7 @@ public class CustomParsingTests
     {
         var argument = new CliArgument<FileSystemInfo>("arg")
         {
-            DefaultValueFactory = result => null
+            DefaultValueFactory = result => null,
         };
 
         argument.HasDefaultValue.Should().BeTrue();
@@ -39,7 +39,7 @@ public class CustomParsingTests
     {
         var argument = new CliArgument<string>("arg")
         {
-            DefaultValueFactory = result => "the-default"
+            DefaultValueFactory = result => "the-default",
         };
 
         argument.GetDefaultValue().Should().Be("the-default");
@@ -70,7 +70,7 @@ public class CustomParsingTests
             {
                 result.AddError("oops!");
                 return null;
-            }
+            },
         };
 
         new CliRootCommand { argument }
@@ -90,7 +90,7 @@ public class CustomParsingTests
             {
                 result.AddError("oops!");
                 return null;
-            }
+            },
         };
 
         new CliRootCommand { argument }
@@ -110,7 +110,7 @@ public class CustomParsingTests
             {
                 result.AddError("oops!");
                 return null;
-            }
+            },
         };
 
         new CliRootCommand { option }
@@ -126,7 +126,7 @@ public class CustomParsingTests
     {
         var argument = new CliArgument<int>("arg")
         {
-            CustomParser = result => int.Parse(result.Tokens.Single().Value)
+            CustomParser = result => int.Parse(result.Tokens.Single().Value),
         };
 
         new CliRootCommand { argument }
@@ -141,7 +141,7 @@ public class CustomParsingTests
     {
         var argument = new CliArgument<IEnumerable<int>>("arg")
         {
-            CustomParser = result => result.Tokens.Single().Value.Split(',').Select(int.Parse)
+            CustomParser = result => result.Tokens.Single().Value.Split(',').Select(int.Parse),
         };
 
         new CliRootCommand { argument }
@@ -156,7 +156,7 @@ public class CustomParsingTests
     {
         var argument = new CliArgument<IEnumerable<int>>("arg")
         {
-            CustomParser = result => result.Tokens.Select(t => int.Parse(t.Value)).ToArray()
+            CustomParser = result => result.Tokens.Select(t => int.Parse(t.Value)).ToArray(),
         };
 
         new CliRootCommand { argument }
@@ -172,7 +172,7 @@ public class CustomParsingTests
         var argument = new CliArgument<int>("arg")
         {
             CustomParser = result => result.Tokens.Select(t => int.Parse(t.Value)).Sum(),
-            Arity = ArgumentArity.ZeroOrMore
+            Arity = ArgumentArity.ZeroOrMore,
         };
 
         new CliRootCommand { argument }
@@ -195,8 +195,8 @@ public class CustomParsingTests
                 {
                     argumentResult = argResult;
                     return null;
-                }
-            }
+                },
+            },
         };
 
         CliConfiguration simpleConfig = new(command);
@@ -222,8 +222,8 @@ public class CustomParsingTests
                 {
                     argumentResult = argResult;
                     return null;
-                }
-            }
+                },
+            },
         };
 
         command.Parse("");
@@ -249,10 +249,10 @@ public class CustomParsingTests
             {
                 resultForOptionX = argResult.GetResult(optionX);
                 return string.Empty;
-            }
+            },
         };
 
-        var command = new CliCommand("the-command") { optionX, optionY, };
+        var command = new CliCommand("the-command") { optionX, optionY };
 
         command.Parse(commandLine);
 
@@ -272,8 +272,8 @@ public class CustomParsingTests
                 {
                     argumentResult = argResult;
                     return null;
-                }
-            }
+                },
+            },
         };
 
         command.Parse("");
@@ -297,7 +297,7 @@ public class CustomParsingTests
             {
                 callCount++;
                 return int.Parse(result.Tokens.Single().Value);
-            }
+            },
         };
 
         var command = new CliRootCommand();
@@ -316,7 +316,7 @@ public class CustomParsingTests
         var argument = new CliArgument<int>("arg")
         {
             CustomParser = _ => 789,
-            DefaultValueFactory = _ => 123
+            DefaultValueFactory = _ => 123,
         };
 
         var result = new CliRootCommand { argument }.Parse("");
@@ -336,7 +336,7 @@ public class CustomParsingTests
                     argumentResult.AddError("nope");
                     return null;
                 },
-                Arity = new ArgumentArity(0, 2)
+                Arity = new ArgumentArity(0, 2),
             },
             new CliArgument<DirectoryInfo>("to")
             {
@@ -345,8 +345,8 @@ public class CustomParsingTests
                     argumentResult.AddError("UH UH");
                     return null;
                 },
-                Arity = ArgumentArity.ExactlyOne
-            }
+                Arity = ArgumentArity.ExactlyOne,
+            },
         };
 
         var result = root.Parse("a.txt b.txt /path/to/dir");
@@ -368,7 +368,7 @@ public class CustomParsingTests
             {
                 r.AddError("one");
                 return r.Tokens[0].Value;
-            }
+            },
         };
 
         var optionThatDependsOnOptionWithError = new CliOption<bool>(
@@ -385,7 +385,7 @@ public class CustomParsingTests
                 }
 
                 return false;
-            }
+            },
         };
 
         var command = new CliCommand("cmd") { optionWithError, optionThatDependsOnOptionWithError };
@@ -413,7 +413,7 @@ public class CustomParsingTests
                 {
                     r.AddError("second error");
                     return r.Tokens[0].Value;
-                }
+                },
             };
 
         CliCommand command = new("cmd") { firstOptionWithError, secondOptionWithError };
@@ -444,8 +444,8 @@ public class CustomParsingTests
                 {
                     argResult.AddError("nope");
                     return default;
-                }
-            }
+                },
+            },
         };
 
         var result = command.Parse("the-command -x nope yep");
@@ -472,7 +472,7 @@ public class CustomParsingTests
                 );
 
                 return default;
-            }
+            },
         };
 
         var command = new CliCommand("the-command") { option };
@@ -495,7 +495,7 @@ public class CustomParsingTests
 
         var command = new CliRootCommand
         {
-            new CliOption<int>("-x") { CustomParser = result => ++i, }
+            new CliOption<int>("-x") { CustomParser = result => ++i },
         };
 
         command.Parse("-x 123");
@@ -511,7 +511,7 @@ public class CustomParsingTests
 
         var command = new CliRootCommand
         {
-            new CliOption<int>("-x") { DefaultValueFactory = result => ++i, }
+            new CliOption<int>("-x") { DefaultValueFactory = result => ++i },
         };
 
         command.Parse("");
@@ -550,7 +550,7 @@ public class CustomParsingTests
         {
             DefaultValueFactory = both,
             CustomParser = both,
-            Arity = ArgumentArity.ZeroOrOne
+            Arity = ArgumentArity.ZeroOrOne,
         };
 
         var rootCommand = new CliRootCommand { opt };
@@ -574,13 +574,13 @@ public class CustomParsingTests
                 {
                     int.Parse(result.Tokens[0].Value),
                     int.Parse(result.Tokens[1].Value),
-                    int.Parse(result.Tokens[2].Value)
+                    int.Parse(result.Tokens[2].Value),
                 };
-            }
+            },
         };
         var argument2 = new CliArgument<int[]>("two")
         {
-            CustomParser = result => result.Tokens.Select(t => t.Value).Select(int.Parse).ToArray()
+            CustomParser = result => result.Tokens.Select(t => t.Value).Select(int.Parse).ToArray(),
         };
         var command = new CliRootCommand { argument1, argument2, new CliOption<int>("-o") };
 
@@ -615,7 +615,7 @@ public class CustomParsingTests
 
                     argumentResult.AddError($"'{value}' is not a valid value");
                     return null;
-                }
+                },
             };
 
         ParseResult parseResult = new CliRootCommand() { option }.Parse("-ip a.b.c.d");
@@ -638,9 +638,9 @@ public class CustomParsingTests
                 {
                     int.Parse(result.Tokens[0].Value),
                     int.Parse(result.Tokens[1].Value),
-                    int.Parse(result.Tokens[2].Value)
+                    int.Parse(result.Tokens[2].Value),
                 };
-            }
+            },
         };
 
         var command = new CliRootCommand { argument1 };
@@ -668,13 +668,13 @@ public class CustomParsingTests
                 {
                     int.Parse(result.Tokens[0].Value),
                     int.Parse(result.Tokens[1].Value),
-                    int.Parse(result.Tokens[2].Value)
+                    int.Parse(result.Tokens[2].Value),
                 };
-            }
+            },
         };
         var argument2 = new CliArgument<int[]>("two")
         {
-            CustomParser = result => result.Tokens.Select(t => t.Value).Select(int.Parse).ToArray()
+            CustomParser = result => result.Tokens.Select(t => t.Value).Select(int.Parse).ToArray(),
         };
         var command = new CliRootCommand { argument1, argument2 };
 
@@ -706,7 +706,7 @@ public class CustomParsingTests
                 result.OnlyTake(-1);
 
                 return null;
-            }
+            },
         };
 
         argument
@@ -728,7 +728,7 @@ public class CustomParsingTests
                 result.OnlyTake(1);
 
                 return null;
-            }
+            },
         };
 
         argument
@@ -748,7 +748,7 @@ public class CustomParsingTests
             {
                 result.OnlyTake(0);
                 return null;
-            }
+            },
         };
         var argument2 = new CliArgument<int[]>("arg2");
         var command = new CliRootCommand { argument1, argument2 };
@@ -769,7 +769,7 @@ public class CustomParsingTests
             {
                 ctx.OnlyTake(0);
                 return null;
-            }
+            },
         };
         CliArgument<int[]> multiple = new("args");
 
@@ -792,7 +792,7 @@ public class CustomParsingTests
                 ctx.OnlyTake(0);
                 return null;
             },
-            Arity = ArgumentArity.ZeroOrOne
+            Arity = ArgumentArity.ZeroOrOne,
         };
 
         var second = new CliArgument<string[]>(name: "second")
@@ -802,7 +802,7 @@ public class CustomParsingTests
                 ctx.OnlyTake(0);
                 return null;
             },
-            Arity = ArgumentArity.ZeroOrMore
+            Arity = ArgumentArity.ZeroOrMore,
         };
 
         var third = new CliArgument<string[]>(name: "third")
@@ -812,7 +812,7 @@ public class CustomParsingTests
                 ctx.OnlyTake(3);
                 return new[] { "1", "2", "3" };
             },
-            Arity = ArgumentArity.ZeroOrMore
+            Arity = ArgumentArity.ZeroOrMore,
         };
 
         var command = new CliRootCommand { first, second, third };
@@ -850,7 +850,7 @@ public class CustomParsingTests
                     return ctx.Tokens.SingleOrDefault()?.Value;
                 },
             },
-            new CliArgument<string>("third")
+            new CliArgument<string>("third"),
         };
 
         var result = command.Parse("one two three");
@@ -890,7 +890,7 @@ public class CustomParsingTests
                     return ctx.Tokens.SingleOrDefault()?.Value;
                 },
             },
-            new CliOption<string>("--third")
+            new CliOption<string>("--third"),
         };
 
         var parseResult = command.Parse(commandLine);

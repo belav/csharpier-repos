@@ -95,13 +95,19 @@ namespace Internal.TypeSystem
                 ArrayType arrayType => AppendName(sb, arrayType, options),
                 ByRefType byRefType => AppendName(sb, byRefType, options),
                 PointerType pointerType => AppendName(sb, pointerType, options),
-                FunctionPointerType functionPointerType =>
-                    AppendName(sb, functionPointerType, options),
-                GenericParameterDesc genericPointerType =>
-                    AppendName(sb, genericPointerType, options),
+                FunctionPointerType functionPointerType => AppendName(
+                    sb,
+                    functionPointerType,
+                    options
+                ),
+                GenericParameterDesc genericPointerType => AppendName(
+                    sb,
+                    genericPointerType,
+                    options
+                ),
                 SignatureTypeVariable sigTypeVar => AppendName(sb, sigTypeVar, options),
                 SignatureMethodVariable sigMethodVar => AppendName(sb, sigMethodVar, options),
-                _ => AppendName(sb, (DefType)type, options)
+                _ => AppendName(sb, (DefType)type, options),
             };
         }
 

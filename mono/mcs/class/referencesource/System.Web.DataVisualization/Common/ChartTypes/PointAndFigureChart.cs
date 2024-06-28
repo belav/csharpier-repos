@@ -506,7 +506,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         50000.0,
                         100000.0,
                         1000000.0,
-                        1000000.0
+                        1000000.0,
                     };
 
                     for (int index = 1; index < availableBoxSizes.Length; index++)

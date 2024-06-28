@@ -1087,7 +1087,7 @@ namespace System.ServiceProcess
                     | SERVICE_PAUSE_CONTINUE
                     | SERVICE_INTERROGATE
                     | SERVICE_USER_DEFINED_CONTROL
-                )
+                ),
         }
 
         private enum SERVICE_MANAGER_RIGHTS : uint
@@ -1108,7 +1108,7 @@ namespace System.ServiceProcess
             GENERIC_READ = 0x80000000,
             GENERIC_WRITE = 0x40000000,
             GENERIC_EXECUTE = 0x20000000,
-            GENERIC_ALL = 0x10000000
+            GENERIC_ALL = 0x10000000,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -1180,7 +1180,7 @@ namespace System.ServiceProcess
             SERVICETYPE_NO_CHANGE = SERVICE_NO_CHANGE,
             SERVICE_WIN32 = (SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHARE_PROCESS),
             SERVICE_TYPE_ALL =
-                (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS)
+                (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS),
         }
 
         private enum SERVICE_START_TYPE
@@ -1190,7 +1190,7 @@ namespace System.ServiceProcess
             SERVICE_AUTO_START = 0x2,
             SERVICE_DEMAND_START = 0x3,
             SERVICE_DISABLED = 0x4,
-            SERVICESTARTTYPE_NO_CHANGE = SERVICE_NO_CHANGE
+            SERVICESTARTTYPE_NO_CHANGE = SERVICE_NO_CHANGE,
         }
 
         private enum SERVICE_ERROR_CONTROL
@@ -1200,14 +1200,14 @@ namespace System.ServiceProcess
             SERVICE_ERROR_SEVERE = 0x2,
             SERVICE_ERROR_CRITICAL = 0x3,
             msidbServiceInstallErrorControlVital = 0x8000,
-            SERVICEERRORCONTROL_NO_CHANGE = SERVICE_NO_CHANGE
+            SERVICEERRORCONTROL_NO_CHANGE = SERVICE_NO_CHANGE,
         }
 
         private enum SERVICE_STATE_REQUEST
         {
             SERVICE_ACTIVE = 0x1,
             SERVICE_INACTIVE = 0x2,
-            SERVICE_STATE_ALL = (SERVICE_ACTIVE | SERVICE_INACTIVE)
+            SERVICE_STATE_ALL = (SERVICE_ACTIVE | SERVICE_INACTIVE),
         }
 
         private enum SERVICE_CONTROL_TYPE
@@ -1225,7 +1225,7 @@ namespace System.ServiceProcess
             SERVICE_CONTROL_DEVICEEVENT = 0xB,
             SERVICE_CONTROL_HARDWAREPROFILECHANGE = 0xC,
             SERVICE_CONTROL_POWEREVENT = 0xD,
-            SERVICE_CONTROL_SESSIONCHANGE = 0xE
+            SERVICE_CONTROL_SESSIONCHANGE = 0xE,
         }
 
         [Flags]
@@ -1239,7 +1239,7 @@ namespace System.ServiceProcess
             SERVICE_ACCEPT_NETBINDCHANGE = 0x10,
             SERVICE_ACCEPT_HARDWAREPROFILECHANGE = 0x20,
             SERVICE_ACCEPT_POWEREVENT = 0x40,
-            SERVICE_ACCEPT_SESSIONCHANGE = 0x80
+            SERVICE_ACCEPT_SESSIONCHANGE = 0x80,
         }
 
         #endregion PInvoke declaration

@@ -93,7 +93,7 @@ namespace SIMD
                 ParallelOptions options = new ParallelOptions
                 {
                     MaxDegreeOfParallelism = _degreeOfParallelism,
-                    CancellationToken = _cancellation.Token
+                    CancellationToken = _cancellation.Token,
                 };
                 if (!_parallel)
                     rayTracer.RenderSequential(scene, rgb);

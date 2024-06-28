@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
         {
             Ancestors,
             Descendants,
-            Current
+            Current,
         }
 
         public UseUtf8StringLiteralDiagnosticAnalyzer()
@@ -274,7 +274,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UseUtf8StringLiteral
                     '\r' => false,
                     '\n' => false,
                     '\t' => false,
-                    _ => true
+                    _ => true,
                 };
         }
 

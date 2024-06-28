@@ -64,7 +64,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
                 },
@@ -75,7 +75,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Client,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
                 },
@@ -85,7 +85,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
                 },
@@ -96,7 +96,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 100,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
                 },
@@ -106,7 +106,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "private,max-age=10"
                 },
@@ -116,7 +116,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "public,max-age=10"
                 },
@@ -126,7 +126,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.None,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-cache,max-age=10"
                 },
@@ -136,7 +136,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = null,
                         Location = ResponseCacheLocation.None,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-cache"
                 },
@@ -146,7 +146,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 31536000,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "public,max-age=31536000"
                 },
@@ -156,10 +156,10 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 20,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "public,max-age=20"
-                }
+                },
             };
         }
     }
@@ -192,7 +192,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Client,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
                 },
@@ -202,7 +202,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
                 },
@@ -213,10 +213,10 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 100,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = null
+                        VaryByHeader = null,
                     },
                     "no-store"
-                }
+                },
             };
         }
     }
@@ -251,7 +251,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = "Accept"
+                        VaryByHeader = "Accept",
                     },
                     "Accept",
                     "public,max-age=10"
@@ -262,7 +262,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByHeader = "Accept"
+                        VaryByHeader = "Accept",
                     },
                     "Accept",
                     "no-store"
@@ -273,7 +273,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByHeader = "Accept"
+                        VaryByHeader = "Accept",
                     },
                     "Accept",
                     "private,max-age=10"
@@ -284,7 +284,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByHeader = "Test"
+                        VaryByHeader = "Test",
                     },
                     "Test",
                     "private,max-age=10"
@@ -295,11 +295,11 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 31536000,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByHeader = "Test"
+                        VaryByHeader = "Test",
                     },
                     "Test",
                     "public,max-age=31536000"
-                }
+                },
             };
         }
     }
@@ -336,7 +336,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByQueryKeys = new[] { "Accept" }
+                        VaryByQueryKeys = new[] { "Accept" },
                     },
                     new[] { "Accept" },
                     "public,max-age=10"
@@ -347,7 +347,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 0,
                         Location = ResponseCacheLocation.Any,
                         NoStore = true,
-                        VaryByQueryKeys = new[] { "Accept" }
+                        VaryByQueryKeys = new[] { "Accept" },
                     },
                     new[] { "Accept" },
                     "no-store"
@@ -358,7 +358,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByQueryKeys = new[] { "Accept" }
+                        VaryByQueryKeys = new[] { "Accept" },
                     },
                     new[] { "Accept" },
                     "private,max-age=10"
@@ -369,7 +369,7 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 10,
                         Location = ResponseCacheLocation.Client,
                         NoStore = false,
-                        VaryByQueryKeys = new[] { "Accept", "Test" }
+                        VaryByQueryKeys = new[] { "Accept", "Test" },
                     },
                     new[] { "Accept", "Test" },
                     "private,max-age=10"
@@ -380,11 +380,11 @@ public class ResponseCacheFilterExecutorTest
                         Duration = 31536000,
                         Location = ResponseCacheLocation.Any,
                         NoStore = false,
-                        VaryByQueryKeys = new[] { "Accept", "Test" }
+                        VaryByQueryKeys = new[] { "Accept", "Test" },
                     },
                     new[] { "Accept", "Test" },
                     "public,max-age=31536000"
-                }
+                },
             };
         }
     }
@@ -424,7 +424,7 @@ public class ResponseCacheFilterExecutorTest
                 Location = ResponseCacheLocation.None,
                 NoStore = true,
                 VaryByHeader = null,
-                VaryByQueryKeys = new[] { "Test" }
+                VaryByQueryKeys = new[] { "Test" },
             }
         );
         var context = GetActionExecutingContext();
@@ -447,7 +447,7 @@ public class ResponseCacheFilterExecutorTest
                 Duration = 0,
                 Location = ResponseCacheLocation.None,
                 NoStore = true,
-                VaryByHeader = null
+                VaryByHeader = null,
             }
         );
         var context = GetActionExecutingContext();

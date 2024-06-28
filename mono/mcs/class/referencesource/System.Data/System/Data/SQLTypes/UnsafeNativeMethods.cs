@@ -182,14 +182,14 @@ namespace System.Data.SqlTypes
             METHOD_BUFFERED,
             METHOD_IN_DIRECT,
             METHOD_OUT_DIRECT,
-            METHOD_NEITHER
+            METHOD_NEITHER,
         };
 
         internal enum Access
         {
             FILE_ANY_ACCESS,
             FILE_READ_ACCESS,
-            FILE_WRITE_ACCESS
+            FILE_WRITE_ACCESS,
         }
 
         internal static uint CTL_CODE(ushort deviceType, ushort function, byte method, byte access)
@@ -223,7 +223,9 @@ namespace System.Data.SqlTypes
             Disk = 0x0001, // FILE_TYPE_DISK
             Char = 0x0002, // FILE_TYPE_CHAR
             Pipe = 0x0003, // FILE_TYPE_PIPE
-            Remote = 0x8000 // FILE_TYPE_REMOTE
+            Remote =
+                0x8000 // FILE_TYPE_REMOTE
+            ,
         }
 
         #region definitions from wdm.h
@@ -255,7 +257,7 @@ namespace System.Data.SqlTypes
             SecurityAnonymous,
             SecurityIdentification,
             SecurityImpersonation,
-            SecurityDelegation
+            SecurityDelegation,
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
@@ -293,7 +295,7 @@ namespace System.Data.SqlTypes
             FILE_SEQUENTIAL_ONLY = 0x00000004,
             FILE_NO_INTERMEDIATE_BUFFERING = 0x00000008,
             FILE_SYNCHRONOUS_IO_NONALERT = 0x00000020,
-            FILE_RANDOM_ACCESS = 0x00000800
+            FILE_RANDOM_ACCESS = 0x00000800,
         }
 
         internal enum CreationDisposition : uint
@@ -303,7 +305,7 @@ namespace System.Data.SqlTypes
             FILE_CREATE = 2,
             FILE_OPEN_IF = 3,
             FILE_OVERWRITE = 4,
-            FILE_OVERWRITE_IF = 5
+            FILE_OVERWRITE_IF = 5,
         }
 
         #endregion
@@ -330,7 +332,7 @@ namespace System.Data.SqlTypes
             OpenLink = 0x00000100,
             KernelHandle = 0x00000200,
             ForceAccessCheck = 0x00000400,
-            ValidAttributes = 0x000007F2
+            ValidAttributes = 0x000007F2,
         }
 
         #endregion

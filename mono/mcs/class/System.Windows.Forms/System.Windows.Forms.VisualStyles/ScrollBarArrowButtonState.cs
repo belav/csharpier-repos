@@ -45,6 +45,6 @@ namespace System.Windows.Forms.VisualStyles
         RightNormal = 13,
         RightHot = 14,
         RightPressed = 15,
-        RightDisabled = 16
+        RightDisabled = 16,
     }
 }

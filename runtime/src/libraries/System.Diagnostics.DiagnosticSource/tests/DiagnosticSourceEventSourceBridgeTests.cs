@@ -597,7 +597,7 @@ namespace System.Diagnostics.Tests
                         MyClass val = new MyClass()
                         {
                             Url = "MyUrl",
-                            Point = new MyPoint() { X = 3, Y = 5 }
+                            Point = new MyPoint() { X = 3, Y = 5 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -606,7 +606,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     propStr = "hi",
                                     propInt = 4,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -636,7 +636,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     prop2Str = "hello",
                                     prop2Int = 8,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -658,10 +658,7 @@ namespace System.Diagnostics.Tests
 
                         // Emit an event that does not match either pattern.  (thus will be filtered out)
                         if (diagnosticSourceListener.IsEnabled("TestEvent3"))
-                            diagnosticSourceListener.Write(
-                                "TestEvent3",
-                                new { propStr = "prop3", }
-                            );
+                            diagnosticSourceListener.Write("TestEvent3", new { propStr = "prop3" });
                         Assert.Equal(0, eventSourceListener.EventCount); // No Event should be fired.
 
                         /***************************************************************************************/
@@ -680,7 +677,7 @@ namespace System.Diagnostics.Tests
                                     {
                                         propStr = "hi",
                                         propInt = 4,
-                                        cls = val
+                                        cls = val,
                                     }
                                 );
                         }
@@ -736,7 +733,7 @@ namespace System.Diagnostics.Tests
                             Url = "MyUrl",
                             Point = new MyPoint() { X = 3, Y = 5 },
                             Url2 = "Second url",
-                            AnotherString = "another"
+                            AnotherString = "another",
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write("TestEvent1", val);
@@ -790,7 +787,7 @@ namespace System.Diagnostics.Tests
                         MyClass val = new MyOtherDerivedClass()
                         {
                             Url = "MyUrl",
-                            Point = new MyDerivedPoint() { X = 3, Y = 5 }
+                            Point = new MyDerivedPoint() { X = 3, Y = 5 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write("TestEvent1", val);
@@ -841,7 +838,7 @@ namespace System.Diagnostics.Tests
                         MyClass val = new MyClass()
                         {
                             Url = "MyUrl",
-                            Point = new MyPoint() { X = 3, Y = 5 }
+                            Point = new MyPoint() { X = 3, Y = 5 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -850,7 +847,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     propStr = "hi",
                                     propInt = 4,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -873,7 +870,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     prop2Str = "hello",
                                     prop2Int = 8,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -889,10 +886,7 @@ namespace System.Diagnostics.Tests
 
                         // Emit an event that does not match either pattern.  (thus will be filtered out)
                         if (diagnosticSourceListener.IsEnabled("TestEvent3"))
-                            diagnosticSourceListener.Write(
-                                "TestEvent3",
-                                new { propStr = "prop3", }
-                            );
+                            diagnosticSourceListener.Write("TestEvent3", new { propStr = "prop3" });
                         Assert.Equal(0, eventSourceListener.EventCount); // No Event should be fired.
                     }
 
@@ -1046,7 +1040,7 @@ namespace System.Diagnostics.Tests
                         MyClass val = new MyClass()
                         {
                             Url = "MyUrl",
-                            Point = new MyPoint() { X = 3, Y = 5 }
+                            Point = new MyPoint() { X = 3, Y = 5 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -1055,7 +1049,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     propStr = "hi",
                                     propInt = 4,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -1106,7 +1100,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     propStr = "hiThere",
                                     propInt = 5,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -1163,7 +1157,7 @@ namespace System.Diagnostics.Tests
                                     {
                                         propStr = "hi",
                                         propInt = 4,
-                                        cls = val
+                                        cls = val,
                                     }
                                 );
                         }
@@ -1257,7 +1251,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     cls = val,
                                     propStr = "propVal1",
-                                    propStrNull = strVal
+                                    propStrNull = strVal,
                                 }
                             );
 
@@ -1310,7 +1304,7 @@ namespace System.Diagnostics.Tests
                         MyClass val2 = new MyClass()
                         {
                             Url = null,
-                            Point = new MyPoint() { X = 8, Y = 9 }
+                            Point = new MyPoint() { X = 8, Y = 9 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -1369,7 +1363,7 @@ namespace System.Diagnostics.Tests
                         MyClass val = new MyClass()
                         {
                             Url = "MyUrl",
-                            Point = new MyPoint() { X = 3, Y = 5 }
+                            Point = new MyPoint() { X = 3, Y = 5 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -1379,7 +1373,7 @@ namespace System.Diagnostics.Tests
                                     propStr = "hi",
                                     propInt = 4,
                                     cls = val,
-                                    propStr2 = "there"
+                                    propStr2 = "there",
                                 }
                             );
 
@@ -1424,7 +1418,7 @@ namespace System.Diagnostics.Tests
                         MyClass val = new MyClass()
                         {
                             Url = "MyUrl",
-                            Point = new MyPoint() { X = 3, Y = 5 }
+                            Point = new MyPoint() { X = 3, Y = 5 },
                         };
                         if (diagnosticSourceListener.IsEnabled("TestEvent1"))
                             diagnosticSourceListener.Write(
@@ -1433,7 +1427,7 @@ namespace System.Diagnostics.Tests
                                 {
                                     propStr = "hi",
                                     propInt = 4,
-                                    cls = val
+                                    cls = val,
                                 }
                             );
 
@@ -1674,9 +1668,9 @@ namespace System.Diagnostics.Tests
                                         Method = "Get",
                                         Host = "MyHost",
                                         Path = "MyPath",
-                                        QueryString = "MyQuery"
-                                    }
-                                }
+                                        QueryString = "MyQuery",
+                                    },
+                                },
                             }
                         );
                         // Check that the morphs work as expected.
@@ -1723,8 +1717,8 @@ namespace System.Diagnostics.Tests
                                         DataSource = "MyDataSource",
                                         Database = "MyDatabase",
                                     },
-                                    CommandText = "MyCommand"
-                                }
+                                    CommandText = "MyCommand",
+                                },
                             }
                         );
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1783,8 +1777,8 @@ namespace System.Diagnostics.Tests
                                 httpContext = new
                                 {
                                     Response = new { StatusCode = "200" },
-                                    TraceIdentifier = "MyTraceId"
-                                }
+                                    TraceIdentifier = "MyTraceId",
+                                },
                             }
                         );
                         Assert.Equal(1, eventSourceListener.EventCount); // Exactly one more event has been emitted.
@@ -1842,7 +1836,7 @@ namespace System.Diagnostics.Tests
                                 ce.Signal();
                             })
                             {
-                                IsBackground = true
+                                IsBackground = true,
                             }.Start();
                         }
                         ce.Wait();
@@ -2092,7 +2086,7 @@ namespace System.Diagnostics.Tests
             {
                 0 => new KeyValuePair<string, object>(nameof(Number), Number),
                 1 => new KeyValuePair<string, object>(nameof(OtherNumber), OtherNumber),
-                _ => throw new IndexOutOfRangeException()
+                _ => throw new IndexOutOfRangeException(),
             };
     }
 

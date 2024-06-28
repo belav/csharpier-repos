@@ -90,7 +90,7 @@ app.MapGet(
         {
             <= 0 => TypedResults.BadRequest(),
             >= 1 and <= 10 => TypedResults.Ok(new Todo(id, "Walk the dog")),
-            _ => TypedResults.NotFound()
+            _ => TypedResults.NotFound(),
         }
 );
 
@@ -98,7 +98,7 @@ var extensions = new Dictionary<string, object?>() { { "traceId", "traceId123" }
 
 var errors = new Dictionary<string, string[]>()
 {
-    { "Title", new[] { "The Title field is required." } }
+    { "Title", new[] { "The Title field is required." } },
 };
 
 app.MapGet(
@@ -107,26 +107,23 @@ app.MapGet(
         problemType switch
         {
             "plain" => Results.Problem(statusCode: 500, extensions: extensions),
-            "object" =>
-                Results.Problem(
-                    new ProblemDetails()
-                    {
-                        Status = 500,
-                        Extensions = { { "traceId", "traceId123" } }
-                    }
-                ),
-            "validation" =>
-                Results.ValidationProblem(errors, statusCode: 400, extensions: extensions),
-            "objectValidation" =>
-                Results.Problem(
-                    new HttpValidationProblemDetails(errors)
-                    {
-                        Status = 400,
-                        Extensions = { { "traceId", "traceId123" } }
-                    }
-                ),
+            "object" => Results.Problem(
+                new ProblemDetails() { Status = 500, Extensions = { { "traceId", "traceId123" } } }
+            ),
+            "validation" => Results.ValidationProblem(
+                errors,
+                statusCode: 400,
+                extensions: extensions
+            ),
+            "objectValidation" => Results.Problem(
+                new HttpValidationProblemDetails(errors)
+                {
+                    Status = 400,
+                    Extensions = { { "traceId", "traceId123" } },
+                }
+            ),
             "validationTyped" => TypedResults.ValidationProblem(errors, extensions: extensions),
-            _ => TypedResults.NotFound()
+            _ => TypedResults.NotFound(),
         }
 );
 
@@ -152,7 +149,7 @@ public class TodoBindable : IBindableFromHttpContext<TodoBindable>
             new TodoBindable
             {
                 Id = 1,
-                Title = "I was bound from IBindableFromHttpContext<TodoBindable>.BindAsync!"
+                Title = "I was bound from IBindableFromHttpContext<TodoBindable>.BindAsync!",
             }
         );
     }

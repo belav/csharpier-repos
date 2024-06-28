@@ -832,7 +832,7 @@ namespace System.Text
                             unchecked((byte)(iChar >> 24)),
                             unchecked((byte)(iChar >> 16)),
                             unchecked((byte)(iChar >> 8)),
-                            unchecked((byte)(iChar))
+                            unchecked((byte)(iChar)),
                         };
                     }
                     else
@@ -842,7 +842,7 @@ namespace System.Text
                             unchecked((byte)(iChar)),
                             unchecked((byte)(iChar >> 8)),
                             unchecked((byte)(iChar >> 16)),
-                            unchecked((byte)(iChar >> 24))
+                            unchecked((byte)(iChar >> 24)),
                         };
                     }
 
@@ -1001,7 +1001,7 @@ namespace System.Text
                             unchecked((byte)(iChar >> 24)),
                             unchecked((byte)(iChar >> 16)),
                             unchecked((byte)(iChar >> 8)),
-                            unchecked((byte)(iChar))
+                            unchecked((byte)(iChar)),
                         };
                     }
                     else
@@ -1011,7 +1011,7 @@ namespace System.Text
                             unchecked((byte)(iChar)),
                             unchecked((byte)(iChar >> 8)),
                             unchecked((byte)(iChar >> 16)),
-                            unchecked((byte)(iChar >> 24))
+                            unchecked((byte)(iChar >> 24)),
                         };
                     }
 
@@ -1251,14 +1251,11 @@ namespace System.Text
         }
 
         public override ReadOnlySpan<byte> Preamble =>
-            GetType() != typeof(UTF32Encoding)
-                ? new ReadOnlySpan<byte>(GetPreamble())
-                : // in case a derived UTF32Encoding overrode GetPreamble
-                !_emitUTF32ByteOrderMark
-                    ? default
-                    : _bigEndian
-                        ? [0x00, 0x00, 0xFE, 0xFF]
-                        : [0xFF, 0xFE, 0x00, 0x00];
+            GetType() != typeof(UTF32Encoding) ? new ReadOnlySpan<byte>(GetPreamble())
+            : // in case a derived UTF32Encoding overrode GetPreamble
+            !_emitUTF32ByteOrderMark ? default
+            : _bigEndian ? [0x00, 0x00, 0xFE, 0xFF]
+            : [0xFF, 0xFE, 0x00, 0x00];
 
         public override bool Equals([NotNullWhen(true)] object? value)
         {

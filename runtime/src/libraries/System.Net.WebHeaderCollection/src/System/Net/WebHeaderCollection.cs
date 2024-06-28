@@ -17,7 +17,7 @@ namespace System.Net
     {
         Unknown,
         WebRequest,
-        WebResponse
+        WebResponse,
     }
 
     public class WebHeaderCollection : NameValueCollection, ISerializable

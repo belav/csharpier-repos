@@ -73,7 +73,7 @@ namespace System.Web.Http.Tracing
                             // Cannot override, inner handles correctly
                             "ReadFromStreamAsync",
                             "WriteToStreamAsync",
-                            "SelectCharacterEncoding"
+                            "SelectCharacterEncoding",
                         }
                     },
                     { typeof(IContentNegotiator), typeof(ContentNegotiatorTracer), new string[0] },
@@ -98,7 +98,7 @@ namespace System.Web.Http.Tracing
                             // Cannot override but handled by overriding ErrorMessage
                             "get_IsValid",
                             "GetValue",
-                            "SetValue"
+                            "SetValue",
                         }
                     },
                     {
@@ -129,7 +129,7 @@ namespace System.Web.Http.Tracing
                             "get_ActionDescriptor",
                             "set_ActionDescriptor",
                             "get_ParameterBindings",
-                            "set_ParameterBindings"
+                            "set_ParameterBindings",
                         }
                     },
                     {
@@ -141,7 +141,7 @@ namespace System.Web.Http.Tracing
                             "get_Configuration",
                             "set_Configuration",
                             "get_ControllerDescriptor",
-                            "set_ControllerDescriptor"
+                            "set_ControllerDescriptor",
                         }
                     },
                     { typeof(IHttpActionInvoker), typeof(HttpActionInvokerTracer), new string[0] },
@@ -166,7 +166,7 @@ namespace System.Web.Http.Tracing
                             "get_ControllerType",
                             "set_ControllerType",
                             "get_ControllerName",
-                            "set_ControllerName"
+                            "set_ControllerName",
                         }
                     },
                     {
@@ -210,7 +210,7 @@ namespace System.Web.Http.Tracing
                             // Cannot override, base handles correctly
                             "SelectCharacterEncoding",
                             // Cannot override behavior, but copying SerializerSettings in ctor captures inner's result
-                            "CreateDefaultSerializerSettings"
+                            "CreateDefaultSerializerSettings",
                         }
                     },
                     {
@@ -225,7 +225,7 @@ namespace System.Web.Http.Tracing
                             "get_RequiredMemberSelector",
                             "set_RequiredMemberSelector",
                             // Cannot override, base handles correctly
-                            "SelectCharacterEncoding"
+                            "SelectCharacterEncoding",
                         }
                     },
                     {
@@ -237,7 +237,7 @@ namespace System.Web.Http.Tracing
                             "get_InnerHandler",
                             "set_InnerHandler",
                             // Not meant to be delegated to inner, just to base
-                            "Dispose"
+                            "Dispose",
                         }
                     },
                     {
@@ -249,7 +249,7 @@ namespace System.Web.Http.Tracing
                             "get_InnerHandler",
                             "set_InnerHandler",
                             // Not meant to be delegated to inner, just to base
-                            "Dispose"
+                            "Dispose",
                         }
                     },
                     {
@@ -510,13 +510,12 @@ namespace System.Web.Http.Tracing
                     String.Format(
                         "{0} [{1}]",
                         visibleMemberName,
-                        isOverrideable
-                            ? "Override this virtual in the tracer"
+                        isOverrideable ? "Override this virtual in the tracer"
                             : isGetter
                                 ? "Capture this value from inner in the tracer's ctor, and add to it to the exclude list"
-                                : isSetter
-                                    ? "Ensure this non-virtual setter cannot be called after the tracer has captured it, and add it to the exclude list"
-                                    : "Make this member virtual and override it, or add it to the exclude list"
+                            : isSetter
+                                ? "Ensure this non-virtual setter cannot be called after the tracer has captured it, and add it to the exclude list"
+                            : "Make this member virtual and override it, or add it to the exclude list"
                     )
                 );
             }

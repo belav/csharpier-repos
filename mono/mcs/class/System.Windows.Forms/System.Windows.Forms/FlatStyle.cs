@@ -33,6 +33,6 @@ namespace System.Windows.Forms
         Flat = 0,
         Popup = 1,
         Standard = 2,
-        System = 3
+        System = 3,
     }
 }

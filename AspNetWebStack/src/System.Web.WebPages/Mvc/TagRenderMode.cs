@@ -13,6 +13,6 @@ namespace System.Web.Mvc
         Normal,
         StartTag,
         EndTag,
-        SelfClosing
+        SelfClosing,
     }
 }

@@ -293,7 +293,7 @@ namespace System.Linq.Expressions.Tests
 
                 yield return new object[]
                 {
-                    Expression.Invoke(instance, Enumerable.Repeat(Expression.Constant(0), i))
+                    Expression.Invoke(instance, Enumerable.Repeat(Expression.Constant(0), i)),
                 };
             }
         }

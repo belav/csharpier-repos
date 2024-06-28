@@ -11,7 +11,7 @@ namespace Microsoft.Diagnostics.NETCore.Client
         public enum PortType
         {
             Connect,
-            Listen
+            Listen,
         }
 
         public enum TransportType

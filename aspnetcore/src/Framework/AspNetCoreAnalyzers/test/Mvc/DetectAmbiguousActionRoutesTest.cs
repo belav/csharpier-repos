@@ -39,7 +39,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("/a")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -105,7 +105,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("[action]")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -144,7 +144,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("[action]")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -277,7 +277,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("{i}")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -397,7 +397,7 @@ internal class Program
                 .WithLocation(3),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("/b")
-                .WithLocation(4)
+                .WithLocation(4),
         };
 
         // Act & Assert
@@ -465,7 +465,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("/a")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -505,7 +505,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("/a")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -543,7 +543,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("/a")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -663,7 +663,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("/")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -735,7 +735,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("Person")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert
@@ -774,7 +774,7 @@ internal class Program
                 .WithLocation(0),
             new DiagnosticResult(DiagnosticDescriptors.AmbiguousActionRoute)
                 .WithArguments("Person")
-                .WithLocation(1)
+                .WithLocation(1),
         };
 
         // Act & Assert

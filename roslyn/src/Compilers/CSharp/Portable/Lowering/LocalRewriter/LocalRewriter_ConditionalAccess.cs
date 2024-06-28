@@ -30,7 +30,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             LoweredConditionalAccess,
             Conditional,
-            ConditionalCaptureReceiverByVal
+            ConditionalCaptureReceiverByVal,
         }
 
         // IL gen can generate more compact code for certain conditional accesses

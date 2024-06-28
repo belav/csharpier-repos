@@ -218,7 +218,7 @@ namespace System.Net.Http.Functional.Tests
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
                                 Version = UseVersion,
-                                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                             },
                             cts.Token
                         );
@@ -229,7 +229,7 @@ namespace System.Net.Http.Functional.Tests
                             new HttpRequestMessage(HttpMethod.Get, uri)
                             {
                                 Version = UseVersion,
-                                VersionPolicy = HttpVersionPolicy.RequestVersionExact
+                                VersionPolicy = HttpVersionPolicy.RequestVersionExact,
                             },
                             default
                         );
@@ -367,7 +367,7 @@ namespace System.Net.Http.Functional.Tests
                         var request = new HttpRequestMessage(HttpMethod.Post, uri)
                         {
                             Content = content,
-                            Version = UseVersion
+                            Version = UseVersion,
                         };
                         request.Headers.ExpectContinue = true;
 
@@ -443,7 +443,7 @@ namespace System.Net.Http.Functional.Tests
                     requestCanceledTcs.SetResult();
                     cancellation.ThrowIfCancellationRequested();
                     throw new UnreachableException();
-                }
+                },
             };
 
             using var client = CreateHttpClient(handler, versionString);
@@ -503,7 +503,7 @@ namespace System.Net.Http.Functional.Tests
                                 }
 
                                 return Stream.Null;
-                            }
+                            },
                         };
 
                         using var client = CreateHttpClient(handler, versionString);
@@ -587,7 +587,7 @@ namespace System.Net.Http.Functional.Tests
                                     await destination.FlushAsync(ct);
                                     await serverReceivedRequest.Task.WaitAsync(ct);
                                     await destination.WriteAsync(postContent, ct);
-                                }
+                                },
                             }
                         );
                     }

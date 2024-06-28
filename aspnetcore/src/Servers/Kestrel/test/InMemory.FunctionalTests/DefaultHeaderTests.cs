@@ -15,7 +15,7 @@ public class DefaultHeaderTests : LoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AddServerHeader = true }
+            ServerOptions = { AddServerHeader = true },
         };
 
         await using (var server = new TestServer(ctx => Task.CompletedTask, testContext))

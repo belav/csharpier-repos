@@ -273,7 +273,7 @@ namespace System.ServiceProcess
             SERVICE_ACCEPT_NETBINDCHANGE = 0x10,
             SERVICE_ACCEPT_HARDWAREPROFILECHANGE = 0x20,
             SERVICE_ACCEPT_POWEREVENT = 0x40,
-            SERVICE_ACCEPT_SESSIONCHANGE = 0x80
+            SERVICE_ACCEPT_SESSIONCHANGE = 0x80,
         }
 
         private enum SERVICE_CONTROL_TYPE
@@ -291,7 +291,7 @@ namespace System.ServiceProcess
             SERVICE_CONTROL_DEVICEEVENT = 0xB,
             SERVICE_CONTROL_HARDWAREPROFILECHANGE = 0xC,
             SERVICE_CONTROL_POWEREVENT = 0xD,
-            SERVICE_CONTROL_SESSIONCHANGE = 0xE
+            SERVICE_CONTROL_SESSIONCHANGE = 0xE,
         }
 
         private enum SERVICE_TYPE
@@ -308,7 +308,7 @@ namespace System.ServiceProcess
             SERVICETYPE_NO_CHANGE = SERVICE_NO_CHANGE,
             SERVICE_WIN32 = (SERVICE_WIN32_OWN_PROCESS | SERVICE_WIN32_SHARE_PROCESS),
             SERVICE_TYPE_ALL =
-                (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS)
+                (SERVICE_WIN32 | SERVICE_ADAPTER | SERVICE_DRIVER | SERVICE_INTERACTIVE_PROCESS),
         }
 
         [UnmanagedFunctionPointerAttribute(CallingConvention.StdCall)]

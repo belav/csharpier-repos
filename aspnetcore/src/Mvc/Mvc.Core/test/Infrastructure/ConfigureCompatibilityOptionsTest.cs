@@ -33,10 +33,10 @@ public class ConfigureCompatibilityOptionsTest
         // Arrange
         var configure = Create(
             CompatibilityVersion.Version_3_0,
-            new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true }, }
+            new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true } }
         );
 
-        var options = new TestOptions() { TestProperty = false, };
+        var options = new TestOptions() { TestProperty = false };
 
         // Act
         configure.PostConfigure(Options.DefaultName, options);
@@ -51,7 +51,7 @@ public class ConfigureCompatibilityOptionsTest
         // Arrange
         var configure = Create(
             CompatibilityVersion.Version_3_0,
-            new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true }, }
+            new Dictionary<string, object> { { nameof(TestOptions.TestProperty), true } }
         );
 
         var options = new TestOptions();

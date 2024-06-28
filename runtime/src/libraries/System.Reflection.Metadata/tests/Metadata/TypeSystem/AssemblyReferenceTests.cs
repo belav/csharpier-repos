@@ -51,7 +51,7 @@ namespace System.Reflection.Metadata.Tests
                 "mscorlib",
                 "System.Core",
                 "System",
-                "Microsoft.VisualBasic"
+                "Microsoft.VisualBasic",
             };
 
             byte[][] expKeys = new byte[][]
@@ -60,7 +60,7 @@ namespace System.Reflection.Metadata.Tests
                 new byte[] { 0xb7, 0x7a, 0x5c, 0x56, 0x19, 0x34, 0xe0, 0x89 },
                 new byte[] { 0xb7, 0x7a, 0x5c, 0x56, 0x19, 0x34, 0xe0, 0x89 },
                 // VB: B0 3F 5F 7F 11 D5 0A 3A
-                new byte[] { 0xb0, 0x3f, 0x5f, 0x7f, 0x11, 0xd5, 0x0a, 0x3a }
+                new byte[] { 0xb0, 0x3f, 0x5f, 0x7f, 0x11, 0xd5, 0x0a, 0x3a },
             };
 
             var expVers = new Version[]

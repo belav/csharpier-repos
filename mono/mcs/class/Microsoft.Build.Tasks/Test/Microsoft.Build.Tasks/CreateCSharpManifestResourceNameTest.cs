@@ -36,19 +36,19 @@ namespace MonoTests.Microsoft.Build.Tasks
                     TestResourceHelper.GetFullPathOfResource("Test/resources/foo with space.resx"),
                     null,
                     "Sample.cs",
-                    null
+                    null,
                 },
                 {
                     TestResourceHelper.GetFullPathOfResource("Test/resources/foo with space.resx"),
                     "RandomName",
                     "Sample.cs",
-                    null
+                    null,
                 },
                 {
                     TestResourceHelper.GetFullPathOfResource("Test/resources/foo with space.resx"),
                     "RandomName",
                     "Sample.cs",
-                    "bar with space.resx"
+                    "bar with space.resx",
                 },
                 // W/o dependent file
                 { "foo with space.resx", null, null, null },
@@ -66,7 +66,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     "foo with space.de.resx",
                     "RandomName",
                     sample_cs_path,
-                    "bar with space.fr.resx"
+                    "bar with space.fr.resx",
                 },
                 // can't find a C# class in the .vb file
                 { "foo with space.de.resx", "RandomName", junk_file, "bar with space.fr.resx" },
@@ -76,7 +76,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     ),
                     null,
                     "Sample.cs",
-                    null
+                    null,
                 },
                 {
                     TestResourceHelper.GetFullPathOfResource(
@@ -84,13 +84,13 @@ namespace MonoTests.Microsoft.Build.Tasks
                     ),
                     "RandomName",
                     "Sample.cs",
-                    null
+                    null,
                 },
                 // W/o dependent file
                 { "foo with space.de.resx", null, null, null },
                 { "foo with space.de.resx", "RandomName", null, null },
                 { "Test/resources folder/foo with space.de.resx", null, null, null },
-                { "Test/resources folder/foo with space.de.resx", "RandomName", null, null }
+                { "Test/resources folder/foo with space.de.resx", "RandomName", null, null },
             };
 
             non_resx_no_culture_files = new string[,]
@@ -98,7 +98,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 { "foo with space.txt", null, null },
                 { "foo with space.txt", "RandomName", null },
                 { "Test/resources folder/foo with space.txt", null, null },
-                { "Test/resources folder/foo with space.txt", "RandomName", null }
+                { "Test/resources folder/foo with space.txt", "RandomName", null },
             };
 
             non_resx_with_culture_files = new string[,]
@@ -106,7 +106,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 { "foo with space.de.txt", null, null },
                 { "foo with space.de.txt", "RandomName", null },
                 { "Test/resources folder/foo with space.de.txt", null, null },
-                { "Test/resources folder/foo with space.de.txt", "RandomName", null }
+                { "Test/resources folder/foo with space.de.txt", "RandomName", null },
             };
         }
 
@@ -155,7 +155,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     "RN1.RN2.foo with space",
                     "RN1.RN2.foo with space",
                     "RN1.RN2.Test.resources_folder.foo with space",
-                    "RN1.RN2.Test.resources_folder.foo with space"
+                    "RN1.RN2.Test.resources_folder.foo with space",
                 },
                 "RN1.RN2"
             );
@@ -179,7 +179,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     "foo with space.de",
                     "foo with space.de",
                     "Test.resources_folder.foo with space.de",
-                    "Test.resources_folder.foo with space.de"
+                    "Test.resources_folder.foo with space.de",
                 },
                 null
             );
@@ -203,7 +203,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     "RN1.RN2.foo with space.de",
                     "RN1.RN2.foo with space.de",
                     "RN1.RN2.Test.resources_folder.foo with space.de",
-                    "RN1.RN2.Test.resources_folder.foo with space.de"
+                    "RN1.RN2.Test.resources_folder.foo with space.de",
                 },
                 "RN1.RN2"
             );
@@ -219,7 +219,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     Path.Combine("de", "foo with space.txt"),
                     Path.Combine("de", "foo with space.txt"),
                     Path.Combine("de", "Test.resources_folder.foo with space.txt"),
-                    Path.Combine("de", "Test.resources_folder.foo with space.txt")
+                    Path.Combine("de", "Test.resources_folder.foo with space.txt"),
                 },
                 null
             );
@@ -235,7 +235,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     Path.Combine("de", "RN1.RN2.foo with space.txt"),
                     Path.Combine("de", "RN1.RN2.foo with space.txt"),
                     Path.Combine("de", "RN1.RN2.Test.resources_folder.foo with space.txt"),
-                    Path.Combine("de", "RN1.RN2.Test.resources_folder.foo with space.txt")
+                    Path.Combine("de", "RN1.RN2.Test.resources_folder.foo with space.txt"),
                 },
                 "RN1.RN2"
             );
@@ -251,7 +251,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     "foo with space.txt",
                     "foo with space.txt",
                     "Test.resources_folder.foo with space.txt",
-                    "Test.resources_folder.foo with space.txt"
+                    "Test.resources_folder.foo with space.txt",
                 },
                 null
             );
@@ -268,7 +268,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                     "RN1.RN2.foo with space.txt",
                     "RN1.RN2.foo with space.txt",
                     "RN1.RN2.Test.resources_folder.foo with space.txt",
-                    "RN1.RN2.Test.resources_folder.foo with space.txt"
+                    "RN1.RN2.Test.resources_folder.foo with space.txt",
                 },
                 "RN1.RN2"
             );
@@ -281,7 +281,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 new string[,]
                 {
                     { "../folder/foo.txt", null, null, "abc.txt" },
-                    { "../folder/foo.de.txt", null, null, "xyz.txt" }
+                    { "../folder/foo.de.txt", null, null, "xyz.txt" },
                 },
                 new string[] { "abc.txt", "xyz.txt" },
                 null
@@ -295,7 +295,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 new string[,]
                 {
                     { "../folder/foo.txt", null, null, "abc.txt" },
-                    { "../folder/foo.de.txt", null, null, "xyz.txt" }
+                    { "../folder/foo.de.txt", null, null, "xyz.txt" },
                 },
                 new string[] { "RN.abc.txt", "RN.xyz.txt" },
                 "RN"
@@ -309,7 +309,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 new string[,]
                 {
                     { "../folder/foo.txt", null, null },
-                    { "../folder/foo.de.txt", null, null }
+                    { "../folder/foo.de.txt", null, null },
                 },
                 new string[] { "...folder.foo.txt", Path.Combine("de", "...folder.foo.txt") },
                 null
@@ -323,7 +323,7 @@ namespace MonoTests.Microsoft.Build.Tasks
                 new string[,]
                 {
                     { "../folder/foo.txt", null, null },
-                    { "../folder/foo.de.txt", null, null }
+                    { "../folder/foo.de.txt", null, null },
                 },
                 new string[] { "RN....folder.foo.txt", Path.Combine("de", "RN....folder.foo.txt") },
                 "RN"
@@ -336,7 +336,7 @@ namespace MonoTests.Microsoft.Build.Tasks
             string[,] files = new string[,]
             {
                 { "Foo.invalid.txt", null, null },
-                { "Foo.invalid.resx", null, null }
+                { "Foo.invalid.resx", null, null },
             };
             CheckResourceNames(
                 files,

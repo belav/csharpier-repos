@@ -22,7 +22,7 @@ namespace System.Runtime.Serialization
     enum CodeTypeReferenceOptions
     {
         GlobalReference = 0x00000001,
-        GenericTypeParameter = 0x00000002
+        GenericTypeParameter = 0x00000002,
     }
 
     class CodeTypeReference

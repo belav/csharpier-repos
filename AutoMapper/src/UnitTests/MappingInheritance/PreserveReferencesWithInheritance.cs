@@ -88,7 +88,7 @@
             var @class = new Source.Class
             {
                 Properties = new List<Source.Member> { field },
-                Type = typeof(float)
+                Type = typeof(float),
             };
             var returnValue = new Source.Instance { Type = typeof(float), Definition = @class };
             @class.Definition = @class;
@@ -99,8 +99,8 @@
                 {
                     Name = "(return)",
                     Definition = returnValue.Definition,
-                    Type = returnValue.Type
-                }
+                    Type = returnValue.Type,
+                },
             };
             _destination = Mapper.Map<List<Target.Member>>(source);
         }

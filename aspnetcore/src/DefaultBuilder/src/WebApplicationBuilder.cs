@@ -288,7 +288,7 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
         if (hostApplicationBuilder.Environment.IsDevelopment())
         {
             return new DefaultServiceProviderFactory(
-                new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true, }
+                new ServiceProviderOptions { ValidateScopes = true, ValidateOnBuild = true }
             );
         }
 
@@ -323,7 +323,7 @@ public sealed class WebApplicationBuilder : IHostApplicationBuilder
             )
             {
                 configuration.AddInMemoryCollection(
-                    new[] { new KeyValuePair<string, string?>(HostDefaults.ContentRootKey, cwd), }
+                    new[] { new KeyValuePair<string, string?>(HostDefaults.ContentRootKey, cwd) }
                 );
             }
         }

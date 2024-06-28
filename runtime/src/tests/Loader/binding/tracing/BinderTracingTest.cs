@@ -218,7 +218,7 @@ namespace BinderTracingTests
             {
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
             };
 
             Console.WriteLine($"[{DateTime.Now:T}] Launching process for {method.Name}...");

@@ -70,6 +70,6 @@ namespace System.Reflection.Emit
 
         /// <summary>
         /// </summary>
-        Primitive = 5
+        Primitive = 5,
     }
 }

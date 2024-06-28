@@ -76,7 +76,7 @@ namespace System.Activities.Debugger
                     ModuleNamePrefix = moduleNamePrefix,
                     TypeNamePrefix = typeNamePrefix,
                     AuxiliaryThreadName = auxiliaryThreadName,
-                    BreakOnStartup = breakOnStartup
+                    BreakOnStartup = breakOnStartup,
                 },
                 debugStartedAtRoot,
                 dynamicModuleManager

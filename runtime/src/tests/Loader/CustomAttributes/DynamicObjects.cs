@@ -118,7 +118,7 @@ namespace DynamicObjects
                 new PropertyInfo[2]
                 {
                     rat.GetProperty(nameof(RequiredAttribute.ErrorMessageResourceType)),
-                    rat.GetProperty(nameof(RequiredAttribute.ErrorMessageResourceName))
+                    rat.GetProperty(nameof(RequiredAttribute.ErrorMessageResourceName)),
                 },
                 new object[] { typeof(ValidationErrors), "ObjectRequired" }
             );

@@ -133,12 +133,11 @@ namespace System.Net.WebSockets
             // Provide a canned message for the error type.
             error switch
             {
-                WebSocketError.InvalidMessageType =>
-                    SR.Format(
-                        SR.net_WebSockets_InvalidMessageType_Generic,
-                        $"{nameof(WebSocket)}.{nameof(WebSocket.CloseAsync)}",
-                        $"{nameof(WebSocket)}.{nameof(WebSocket.CloseOutputAsync)}"
-                    ),
+                WebSocketError.InvalidMessageType => SR.Format(
+                    SR.net_WebSockets_InvalidMessageType_Generic,
+                    $"{nameof(WebSocket)}.{nameof(WebSocket.CloseAsync)}",
+                    $"{nameof(WebSocket)}.{nameof(WebSocket.CloseOutputAsync)}"
+                ),
                 WebSocketError.Faulted => SR.net_Websockets_WebSocketBaseFaulted,
                 WebSocketError.NotAWebSocket => SR.net_WebSockets_NotAWebSocket_Generic,
                 WebSocketError.UnsupportedVersion =>

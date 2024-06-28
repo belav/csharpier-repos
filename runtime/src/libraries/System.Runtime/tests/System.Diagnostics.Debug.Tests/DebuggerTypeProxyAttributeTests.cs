@@ -61,7 +61,7 @@ namespace System.Diagnostics.Tests
         {
             var attribute = new DebuggerTypeProxyAttribute("TypeName")
             {
-                TargetTypeName = targetTypeName
+                TargetTypeName = targetTypeName,
             };
             Assert.Equal(targetTypeName, attribute.TargetTypeName);
         }

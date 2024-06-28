@@ -463,7 +463,7 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression[] vars =
             {
                 Expression.Variable(typeof(int)),
-                Expression.Variable(typeof(string))
+                Expression.Variable(typeof(string)),
             };
 
             BlockExpression block = Expression.Block(vars, expressions);
@@ -487,7 +487,7 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression[] vars =
             {
                 Expression.Variable(typeof(int)),
-                Expression.Variable(typeof(string))
+                Expression.Variable(typeof(string)),
             };
 
             BlockExpression block = Expression.Block(vars, expressions);

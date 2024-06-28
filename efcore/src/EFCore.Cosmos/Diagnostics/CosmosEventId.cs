@@ -33,7 +33,7 @@ public static class CosmosEventId
         ExecutedReadItem,
         ExecutedCreateItem,
         ExecutedReplaceItem,
-        ExecutedDeleteItem
+        ExecutedDeleteItem,
     }
 
     private static readonly string CommandPrefix = DbLoggerCategory.Database.Command.Name + ".";

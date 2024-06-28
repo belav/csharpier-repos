@@ -143,7 +143,7 @@ namespace DebuggerTests
                     TNumber(0),
                     TNumber("3.1415"),
                     "DebuggerTests.StepInTest<double>.TestedMethod"
-                }
+                },
             };
 
         [ConditionalTheory(nameof(RunningOnChrome))]

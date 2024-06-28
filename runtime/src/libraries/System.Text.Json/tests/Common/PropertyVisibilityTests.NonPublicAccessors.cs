@@ -200,7 +200,7 @@ namespace System.Text.Json.Serialization.Tests
         public enum MySmallEnum
         {
             DefaultValue = 0,
-            AnotherValue = 1
+            AnotherValue = 1,
         }
 
         [Fact]
@@ -250,7 +250,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower
+                PropertyNamingPolicy = JsonNamingPolicy.SnakeCaseLower,
             };
 
             string json = @"{""my_string"":""Hello""}";

@@ -66,7 +66,7 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return null;
-                }
+                },
             };
             yield return ConvertTest
                 .Valid("reference name", null)
@@ -78,7 +78,7 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return new object();
-                }
+                },
             };
             yield return ConvertTest
                 .Valid("reference name", null)
@@ -97,7 +97,7 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return referenceService;
-                }
+                },
             };
             yield return ConvertTest
                 .Valid("reference name", component1)
@@ -159,7 +159,7 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return null;
-                }
+                },
             };
             yield return ConvertTest
                 .Valid(component1, string.Empty)
@@ -174,7 +174,7 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return new object();
-                }
+                },
             };
             yield return ConvertTest
                 .Valid(component1, string.Empty)
@@ -194,7 +194,7 @@ namespace System.ComponentModel.Tests
                 {
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return referenceService;
-                }
+                },
             };
             yield return ConvertTest
                 .Valid(component1, "reference name")
@@ -256,7 +256,7 @@ namespace System.ComponentModel.Tests
                     callCount++;
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return referenceService;
-                }
+                },
             };
 
             TypeConverter.StandardValuesCollection values1 = converter.GetStandardValues(context);
@@ -294,7 +294,7 @@ namespace System.ComponentModel.Tests
                     callCount++;
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return referenceService;
-                }
+                },
             };
 
             TypeConverter.StandardValuesCollection values1 = converter.GetStandardValues(context);
@@ -329,7 +329,7 @@ namespace System.ComponentModel.Tests
                     callCount++;
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return referenceService;
-                }
+                },
             };
 
             TypeConverter.StandardValuesCollection values1 = converter.GetStandardValues(context);
@@ -364,7 +364,7 @@ namespace System.ComponentModel.Tests
                     callCount++;
                     Assert.Equal(typeof(IReferenceService), serviceType);
                     return referenceService;
-                }
+                },
             };
 
             TypeConverter.StandardValuesCollection values1 = converter.GetStandardValues(context);

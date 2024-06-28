@@ -5,7 +5,7 @@ public class Test
     public enum MyEnum
     {
         ZERO,
-        ONE
+        ONE,
     }
 
     public static int Main()

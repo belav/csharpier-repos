@@ -7,7 +7,7 @@ namespace ILCompiler.DependencyAnalysis.X86
     {
         Int8 = 1,
         Int16 = 2,
-        Int32 = 4
+        Int32 = 4,
     }
 
     public struct AddrMode

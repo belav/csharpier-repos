@@ -18,7 +18,7 @@ namespace System.Resources.ResourceWriterTests
         {
             { "name1", "value1" },
             { "name2", "value2" },
-            { "name3", "value3" }
+            { "name3", "value3" },
         };
         private static byte[] _RefBuffer = new byte[]
         {
@@ -294,7 +294,7 @@ namespace System.Resources.ResourceWriterTests
             108,
             117,
             101,
-            51
+            51,
         };
 
         [Fact]

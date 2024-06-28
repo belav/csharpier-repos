@@ -33,7 +33,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { '5', '1', '7' });
@@ -76,7 +76,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8' });
@@ -108,7 +108,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { '7', '7', '8', 'X' });
@@ -140,7 +140,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(new char[] { 'X', '7', '8', '9' });
@@ -191,7 +191,7 @@ namespace System.SpanTests
                     '7',
                     '7',
                     '8',
-                    '9'
+                    '9',
                 }
             );
             Span<char> value = new Span<char>(Array.Empty<char>());
@@ -267,231 +267,231 @@ namespace System.SpanTests
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111",
                 0,
-                44
+                44,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1111",
                 0,
-                43
+                43,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11111",
                 7,
-                42
+                42,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111111",
                 7,
-                41
+                41,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1111111",
                 7,
-                11
+                11,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11111111",
                 7,
-                10
+                10,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111111111",
                 7,
-                9
+                9,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11111111111",
                 7,
-                7
+                7,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11111111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111111111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1211",
                 5,
-                48
+                48,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11121",
                 44,
-                44
+                44,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "121111",
                 5,
-                19
+                19,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "12111211",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1111111",
                 7,
-                11
+                11,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1121121111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1111211111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111111211111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1121111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11122111112111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "1111111211111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "111211111111111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "1111x1211111111111x12111122131221221211221111112121121",
                 "11111211111121111111",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436",
                 "\u0436\u0436\u0436",
                 0,
-                11
+                11,
             };
             yield return new object[]
             {
                 "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436",
                 "\u04360\u0436",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "\u0436\u0436\u0436\u0436\u0436\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0447\u0447\u0447\u0447\u0441",
                 "\u0447\u0447\u0447\u0447\u0441",
                 20,
-                20
+                20,
             };
             yield return new object[]
             {
                 "\u0436\u0436\u0436\u0436\u0436\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0430\u0447\u0447\u0447\u0447\u0441\u0441\u0441\u0441\u0441\u0441\u0441\u0447\u0447\u0447\u0447",
                 "\u0447\u0447\u0447\u0447",
                 20,
-                31
+                31,
             };
             yield return new object[]
             {
                 "\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436\u0436",
                 "1112",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "0\u0443\u0437\u04300\u043E\u0446\u0443\u04490\u043E\u0430\u04370\u0449\u0446\u0443\u043E\u0430\u0437\u0449\u0446\u0443\u043E0\u0430\u0437\u0449\u0446\u0443\u043E\u0430\u0437\u0449\u043E\u04460\u0443\u0437\u043E\u0437\u0446\u0443\u043E\u0430\u0437\u0443\u043E\u0446\u04370\u0449\u0430\u0443\u0446\u04370\u043E\u0430\u0437\u0446\u043E",
                 "0\u043E\u0430\u04370",
                 9,
-                9
+                9,
             };
             yield return new object[] { "abababababababababababababababbc", "bb", 29, 29 };
             yield return new object[] { "abababababababababababababababb", "bb", 29, 29 };
@@ -514,7 +514,7 @@ namespace System.SpanTests
                 "babbbabababababababababababababababc",
                 "\u0441a\u0441\u0441",
                 -1,
-                -1
+                -1,
             };
             yield return new object[] { "babbbbbbbbbbbbb", "babbbbbbbbbbbb", 0, 0 };
             yield return new object[] { "babbbbbbbbbbbbbbabbbbbbbbbbbb", "babbbbbbbbbbbb", 0, 15 };
@@ -523,70 +523,70 @@ namespace System.SpanTests
                 "babbbbbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbbbbbbb",
                 0,
-                17
+                17,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbbbbbbb",
                 18,
-                32
+                32,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "bbbbbbbbbbbbb",
                 20,
-                20
+                20,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 0,
-                0
+                0,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbb",
                 0,
-                0
+                0,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbb",
                 -1,
-                -1
+                -1,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 0,
-                0
+                0,
             };
             yield return new object[]
             {
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbb",
                 "babbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbb",
                 0,
-                0
+                0,
             };
             yield return new object[]
             {
                 "xxxxxxxxxxxxxxbabbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbxxxxxxxxxxxxxxx",
                 "xxxxxxxxxxxxxxx",
                 60,
-                60
+                60,
             };
             yield return new object[]
             {
                 "xxxxxxxxxxxxxxxbabbbbbbxbbbbbbbbbbabbbbbbbbbbbbbabbbbbbbbbbbbxxxxxxxxxxxxxx",
                 "xxxxxxxxxxxxxxx",
                 0,
-                0
+                0,
             };
         }
 

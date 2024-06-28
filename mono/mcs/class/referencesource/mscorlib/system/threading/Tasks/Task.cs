@@ -96,7 +96,7 @@ namespace System.Threading.Tasks
         /// <summary>
         /// The task completed due to an unhandled exception.
         /// </summary>
-        Faulted
+        Faulted,
     }
 
     /// <summary>
@@ -7766,7 +7766,7 @@ namespace System.Threading.Tasks
                 {
                     return new Delegate[]
                     {
-                        AsyncMethodBuilderCore.TryGetStateMachineForDebugger(singleAction)
+                        AsyncMethodBuilderCore.TryGetStateMachineForDebugger(singleAction),
                     };
                 }
 
@@ -8075,7 +8075,7 @@ namespace System.Threading.Tasks
         /// Forces continuations added to the current task to be executed asynchronously.
         /// This option has precedence over TaskContinuationOptions.ExecuteSynchronously
         /// </summary>
-        RunContinuationsAsynchronously = 0x40
+        RunContinuationsAsynchronously = 0x40,
     }
 
     /// <summary>
@@ -8109,7 +8109,7 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Denotes that Dispose should be a complete nop for a Task.  Used when constructing tasks that are meant to be cached/reused.
         /// </summary>
-        DoNotDispose = 0x4000
+        DoNotDispose = 0x4000,
     }
 
     /// <summary>
@@ -8211,7 +8211,7 @@ namespace System.Threading.Tasks
         /// created, the continuation will run on the thread creating the continuation.  Only very
         /// short-running continuations should be executed synchronously.
         /// </summary>
-        ExecuteSynchronously = 0x80000
+        ExecuteSynchronously = 0x80000,
     }
 
     /// <summary>

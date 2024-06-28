@@ -32,7 +32,7 @@ public class CSharpMigrationOperationGeneratorTest
             new[]
             {
                 new SqlOperation { Sql = "-- Don't stand so" },
-                new SqlOperation { Sql = "-- close to me" }
+                new SqlOperation { Sql = "-- close to me" },
             },
             builder
         );
@@ -55,7 +55,7 @@ mb.Sql("-- close to me");
             {
                 Name = "Id",
                 Table = "Post",
-                ClrType = typeof(int)
+                ClrType = typeof(int),
             },
             """
 mb.AddColumn<int>(
@@ -90,7 +90,7 @@ mb.AddColumn<int>(
                 DefaultValue = 1,
                 IsFixedLength = true,
                 Comment = "My Comment",
-                Collation = "Some Collation"
+                Collation = "Some Collation",
             },
             """
 mb.AddColumn<int>(
@@ -133,7 +133,7 @@ mb.AddColumn<int>(
                 Name = "Id",
                 Table = "Post",
                 ClrType = typeof(int),
-                DefaultValueSql = "1"
+                DefaultValueSql = "1",
             },
             """
 mb.AddColumn<int>(
@@ -160,7 +160,7 @@ mb.AddColumn<int>(
                 Table = "Post",
                 ClrType = typeof(int),
                 ComputedColumnSql = "1",
-                IsStored = true
+                IsStored = true,
             },
             """
 mb.AddColumn<int>(
@@ -188,7 +188,7 @@ mb.AddColumn<int>(
                 Name = "FK_Post_Blog_BlogId",
                 Table = "Post",
                 Columns = new[] { "BlogId" },
-                PrincipalTable = "Blog"
+                PrincipalTable = "Blog",
             },
             """
 mb.AddForeignKey(
@@ -215,7 +215,7 @@ mb.AddForeignKey(
                 Name = "FK_Post_Blog_BlogId1_BlogId2",
                 Table = "Post",
                 Columns = new[] { "BlogId1", "BlogId2" },
-                PrincipalTable = "Blog"
+                PrincipalTable = "Blog",
             },
             """
 mb.AddForeignKey(
@@ -247,7 +247,7 @@ mb.AddForeignKey(
                 PrincipalTable = "Blog",
                 PrincipalColumns = new[] { "Id" },
                 OnUpdate = ReferentialAction.Restrict,
-                OnDelete = ReferentialAction.Cascade
+                OnDelete = ReferentialAction.Cascade,
             },
             """
 mb.AddForeignKey(
@@ -288,7 +288,7 @@ mb.AddForeignKey(
                 PrincipalTable = "Blog",
                 PrincipalColumns = new[] { "Id1", "Id2" },
                 OnUpdate = ReferentialAction.Restrict,
-                OnDelete = ReferentialAction.Cascade
+                OnDelete = ReferentialAction.Cascade,
             },
             """
 mb.AddForeignKey(
@@ -323,7 +323,7 @@ mb.AddForeignKey(
             {
                 Name = "PK_Post",
                 Table = "Post",
-                Columns = new[] { "Id" }
+                Columns = new[] { "Id" },
             },
             """
 mb.AddPrimaryKey(
@@ -347,7 +347,7 @@ mb.AddPrimaryKey(
                 Name = "PK_Post",
                 Schema = "dbo",
                 Table = "Post",
-                Columns = new[] { "Id" }
+                Columns = new[] { "Id" },
             },
             """
 mb.AddPrimaryKey(
@@ -372,7 +372,7 @@ mb.AddPrimaryKey(
             {
                 Name = "PK_Post",
                 Table = "Post",
-                Columns = new[] { "Id1", "Id2" }
+                Columns = new[] { "Id1", "Id2" },
             },
             """
 mb.AddPrimaryKey(
@@ -395,7 +395,7 @@ mb.AddPrimaryKey(
             {
                 Name = "AK_Post_AltId",
                 Table = "Post",
-                Columns = new[] { "AltId" }
+                Columns = new[] { "AltId" },
             },
             """
 mb.AddUniqueConstraint(
@@ -419,7 +419,7 @@ mb.AddUniqueConstraint(
                 Name = "AK_Post_AltId",
                 Schema = "dbo",
                 Table = "Post",
-                Columns = new[] { "AltId" }
+                Columns = new[] { "AltId" },
             },
             """
 mb.AddUniqueConstraint(
@@ -444,7 +444,7 @@ mb.AddUniqueConstraint(
             {
                 Name = "AK_Post_AltId1_AltId2",
                 Table = "Post",
-                Columns = new[] { "AltId1", "AltId2" }
+                Columns = new[] { "AltId1", "AltId2" },
             },
             """
 mb.AddUniqueConstraint(
@@ -467,7 +467,7 @@ mb.AddUniqueConstraint(
             {
                 Name = "CK_Post_AltId1_AltId2",
                 Table = "Post",
-                Sql = "AltId1 > AltId2"
+                Sql = "AltId1 > AltId2",
             },
             """
 mb.AddCheckConstraint(
@@ -491,7 +491,7 @@ mb.AddCheckConstraint(
                 Name = "CK_Post_AltId1_AltId2",
                 Schema = "dbo",
                 Table = "Post",
-                Sql = "AltId1 > AltId2"
+                Sql = "AltId1 > AltId2",
             },
             """
 mb.AddCheckConstraint(
@@ -516,7 +516,7 @@ mb.AddCheckConstraint(
             {
                 Name = "Id",
                 Table = "Post",
-                ClrType = typeof(int)
+                ClrType = typeof(int),
             },
             """
 mb.AlterColumn<int>(
@@ -592,8 +592,8 @@ mb.AlterColumn<int>(
                     DefaultValue = 0,
                     IsFixedLength = true,
                     Comment = "My Comment",
-                    Collation = "Some Collation"
-                }
+                    Collation = "Some Collation",
+                },
             },
             """
 mb.AlterColumn<int>(
@@ -668,7 +668,7 @@ mb.AlterColumn<int>(
                 Name = "Id",
                 Table = "Post",
                 ClrType = typeof(int),
-                DefaultValueSql = "1"
+                DefaultValueSql = "1",
             },
             """
 mb.AlterColumn<int>(
@@ -713,7 +713,7 @@ mb.AlterColumn<int>(
                 Table = "Post",
                 ClrType = typeof(int),
                 ComputedColumnSql = "1",
-                IsStored = true
+                IsStored = true,
             },
             """
 mb.AlterColumn<int>(
@@ -761,7 +761,7 @@ mb.AlterColumn<int>(
             {
                 Collation = "Some collation",
                 ["foo"] = "bar",
-                OldDatabase = { Collation = "Some other collation", ["bar"] = "foo" }
+                OldDatabase = { Collation = "Some other collation", ["bar"] = "foo" },
             },
             """
 mb.AlterDatabase(
@@ -848,8 +848,8 @@ mb.AlterSequence(
                     IncrementBy = 4,
                     MinValue = 3,
                     MaxValue = 5,
-                    IsCyclic = true
-                }
+                    IsCyclic = true,
+                },
             },
             """
 mb.AlterSequence(
@@ -901,7 +901,7 @@ mb.AlterTable(
                 Name = "Customer",
                 Schema = "dbo",
                 Comment = "My Comment 2",
-                OldTable = { Comment = "My Comment" }
+                OldTable = { Comment = "My Comment" },
             },
             """
 mb.AlterTable(
@@ -926,7 +926,7 @@ mb.AlterTable(
             {
                 Name = "IX_Post_Title",
                 Table = "Post",
-                Columns = new[] { "Title" }
+                Columns = new[] { "Title" },
             },
             """
 mb.CreateIndex(
@@ -956,7 +956,7 @@ mb.CreateIndex(
                 Columns = new[] { "Title", "Name" },
                 IsUnique = true,
                 IsDescending = new[] { true, false },
-                Filter = "[Title] IS NOT NULL"
+                Filter = "[Title] IS NOT NULL",
             },
             """
 mb.CreateIndex(
@@ -987,7 +987,7 @@ mb.CreateIndex(
             {
                 Name = "IX_Post_Title_Subtitle",
                 Table = "Post",
-                Columns = new[] { "Title", "Subtitle" }
+                Columns = new[] { "Title", "Subtitle" },
             },
             """
 mb.CreateIndex(
@@ -1020,7 +1020,7 @@ mb.EnsureSchema(
             new CreateSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
-                ClrType = typeof(long)
+                ClrType = typeof(long),
             },
             """
 mb.CreateSequence(
@@ -1039,7 +1039,7 @@ mb.CreateSequence(
             new CreateSequenceOperation
             {
                 Name = "EntityFrameworkHiLoSequence",
-                ClrType = typeof(int)
+                ClrType = typeof(int),
             },
             """
 mb.CreateSequence<int>(
@@ -1064,7 +1064,7 @@ mb.CreateSequence<int>(
                 IncrementBy = 5,
                 MinValue = 2,
                 MaxValue = 4,
-                IsCyclic = true
+                IsCyclic = true,
             },
             """
 mb.CreateSequence(
@@ -1101,7 +1101,7 @@ mb.CreateSequence(
                 IncrementBy = 5,
                 MinValue = 2,
                 MaxValue = 4,
-                IsCyclic = true
+                IsCyclic = true,
             },
             """
 mb.CreateSequence<int>(
@@ -1138,9 +1138,9 @@ mb.CreateSequence<int>(
                     {
                         Name = "Id",
                         Table = "Post",
-                        ClrType = typeof(int)
-                    }
-                }
+                        ClrType = typeof(int),
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1189,9 +1189,9 @@ mb.CreateTable(
                         IsNullable = true,
                         DefaultValue = 1,
                         Comment = "My Comment",
-                        Collation = "Some Collation"
-                    }
-                }
+                        Collation = "Some Collation",
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1238,9 +1238,9 @@ mb.CreateTable(
                         Name = "Id",
                         Table = "Post",
                         ClrType = typeof(int),
-                        DefaultValueSql = "1"
-                    }
-                }
+                        DefaultValueSql = "1",
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1278,9 +1278,9 @@ mb.CreateTable(
                         Table = "Post",
                         ClrType = typeof(int),
                         ComputedColumnSql = "1",
-                        IsStored = true
-                    }
-                }
+                        IsStored = true,
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1313,7 +1313,7 @@ mb.CreateTable(
                 Name = "Post",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) },
                 },
                 ForeignKeys =
                 {
@@ -1322,9 +1322,9 @@ mb.CreateTable(
                         Name = "FK_Post_Blog_BlogId",
                         Table = "Post",
                         Columns = new[] { "BlogId" },
-                        PrincipalTable = "Blog"
-                    }
-                }
+                        PrincipalTable = "Blog",
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1362,7 +1362,7 @@ mb.CreateTable(
                 Name = "Post",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "BlogId", ClrType = typeof(int) },
                 },
                 ForeignKeys =
                 {
@@ -1376,9 +1376,9 @@ mb.CreateTable(
                         PrincipalSchema = "my",
                         PrincipalColumns = new[] { "Id" },
                         OnUpdate = ReferentialAction.SetNull,
-                        OnDelete = ReferentialAction.SetDefault
-                    }
-                }
+                        OnDelete = ReferentialAction.SetDefault,
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1426,7 +1426,7 @@ mb.CreateTable(
                 Columns =
                 {
                     new AddColumnOperation { Name = "BlogId1", ClrType = typeof(int) },
-                    new AddColumnOperation { Name = "BlogId2", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "BlogId2", ClrType = typeof(int) },
                 },
                 ForeignKeys =
                 {
@@ -1436,9 +1436,9 @@ mb.CreateTable(
                         Table = "Post",
                         Columns = new[] { "BlogId1", "BlogId2" },
                         PrincipalTable = "Blog",
-                        PrincipalColumns = new[] { "Id1", "Id2" }
-                    }
-                }
+                        PrincipalColumns = new[] { "Id1", "Id2" },
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1478,7 +1478,7 @@ mb.CreateTable(
                 Columns =
                 {
                     new AddColumnOperation { Name = "BlogId1", ClrType = typeof(int) },
-                    new AddColumnOperation { Name = "BlogId2", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "BlogId2", ClrType = typeof(int) },
                 },
                 ForeignKeys =
                 {
@@ -1487,9 +1487,9 @@ mb.CreateTable(
                         Name = "FK_Post_Blog_BlogId1_BlogId2",
                         Table = "Post",
                         Columns = new[] { "BlogId1", "BlogId2" },
-                        PrincipalTable = "Blog"
-                    }
-                }
+                        PrincipalTable = "Blog",
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1526,14 +1526,14 @@ mb.CreateTable(
                 Name = "Post",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "Id", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "Id", ClrType = typeof(int) },
                 },
                 PrimaryKey = new AddPrimaryKeyOperation
                 {
                     Name = "PK_Post",
                     Table = "Post",
-                    Columns = new[] { "Id" }
-                }
+                    Columns = new[] { "Id" },
+                },
             },
             """
 mb.CreateTable(
@@ -1566,15 +1566,15 @@ mb.CreateTable(
                 Schema = "dbo",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "Id", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "Id", ClrType = typeof(int) },
                 },
                 PrimaryKey = new AddPrimaryKeyOperation
                 {
                     Name = "PK_Post",
                     Schema = "dbo",
                     Table = "Post",
-                    Columns = new[] { "Id" }
-                }
+                    Columns = new[] { "Id" },
+                },
             },
             """
 mb.CreateTable(
@@ -1609,14 +1609,14 @@ mb.CreateTable(
                 Columns =
                 {
                     new AddColumnOperation { Name = "Id1", ClrType = typeof(int) },
-                    new AddColumnOperation { Name = "Id2", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "Id2", ClrType = typeof(int) },
                 },
                 PrimaryKey = new AddPrimaryKeyOperation
                 {
                     Name = "PK_Post",
                     Table = "Post",
-                    Columns = new[] { "Id1", "Id2" }
-                }
+                    Columns = new[] { "Id1", "Id2" },
+                },
             },
             """
 mb.CreateTable(
@@ -1649,7 +1649,7 @@ mb.CreateTable(
                 Name = "Post",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "AltId", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "AltId", ClrType = typeof(int) },
                 },
                 UniqueConstraints =
                 {
@@ -1657,9 +1657,9 @@ mb.CreateTable(
                     {
                         Name = "AK_Post_AltId",
                         Table = "Post",
-                        Columns = new[] { "AltId" }
-                    }
-                }
+                        Columns = new[] { "AltId" },
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1692,7 +1692,7 @@ mb.CreateTable(
                 Schema = "dbo",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "AltId", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "AltId", ClrType = typeof(int) },
                 },
                 UniqueConstraints =
                 {
@@ -1701,9 +1701,9 @@ mb.CreateTable(
                         Name = "AK_Post_AltId",
                         Schema = "dbo",
                         Table = "Post",
-                        Columns = new[] { "AltId" }
-                    }
-                }
+                        Columns = new[] { "AltId" },
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1738,7 +1738,7 @@ mb.CreateTable(
                 Columns =
                 {
                     new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) },
-                    new AddColumnOperation { Name = "AltId2", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "AltId2", ClrType = typeof(int) },
                 },
                 UniqueConstraints =
                 {
@@ -1746,9 +1746,9 @@ mb.CreateTable(
                     {
                         Name = "AK_Post_AltId1_AltId2",
                         Table = "Post",
-                        Columns = new[] { "AltId1", "AltId2" }
-                    }
-                }
+                        Columns = new[] { "AltId1", "AltId2" },
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1782,7 +1782,7 @@ mb.CreateTable(
                 Columns =
                 {
                     new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) },
-                    new AddColumnOperation { Name = "AltId2", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "AltId2", ClrType = typeof(int) },
                 },
                 CheckConstraints =
                 {
@@ -1790,9 +1790,9 @@ mb.CreateTable(
                     {
                         Name = "CK_Post_AltId1_AltId2",
                         Table = "Post",
-                        Sql = "AltId1 > AltId2"
-                    }
-                }
+                        Sql = "AltId1 > AltId2",
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1827,7 +1827,7 @@ mb.CreateTable(
                 Columns =
                 {
                     new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) },
-                    new AddColumnOperation { Name = "AltId2", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "AltId2", ClrType = typeof(int) },
                 },
                 CheckConstraints =
                 {
@@ -1836,9 +1836,9 @@ mb.CreateTable(
                         Name = "CK_Post_AltId1_AltId2",
                         Schema = "dbo",
                         Table = "Post",
-                        Sql = "AltId1 > AltId2"
-                    }
-                }
+                        Sql = "AltId1 > AltId2",
+                    },
+                },
             },
             """
 mb.CreateTable(
@@ -1874,9 +1874,9 @@ mb.CreateTable(
                 Schema = "dbo",
                 Columns =
                 {
-                    new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) }
+                    new AddColumnOperation { Name = "AltId1", ClrType = typeof(int) },
                 },
-                Comment = "My Comment"
+                Comment = "My Comment",
             },
             """
 mb.CreateTable(
@@ -1910,10 +1910,10 @@ mb.CreateTable(
                     {
                         Name = "AltId1",
                         ClrType = typeof(int),
-                        Comment = "My Column comment"
-                    }
+                        Comment = "My Column comment",
+                    },
                 },
-                Comment = "My Operation Comment"
+                Comment = "My Operation Comment",
             },
             """
 mb.CreateTable(
@@ -1958,7 +1958,7 @@ mb.DropColumn(
             {
                 Name = "Id",
                 Schema = "dbo",
-                Table = "Post"
+                Table = "Post",
             },
             """
 mb.DropColumn(
@@ -1997,7 +1997,7 @@ mb.DropForeignKey(
             {
                 Name = "FK_Post_BlogId",
                 Schema = "dbo",
-                Table = "Post"
+                Table = "Post",
             },
             """
 mb.DropForeignKey(
@@ -2034,7 +2034,7 @@ mb.DropIndex(
             {
                 Name = "IX_Post_Title",
                 Schema = "dbo",
-                Table = "Post"
+                Table = "Post",
             },
             """
 mb.DropIndex(
@@ -2073,7 +2073,7 @@ mb.DropPrimaryKey(
             {
                 Name = "PK_Post",
                 Schema = "dbo",
-                Table = "Post"
+                Table = "Post",
             },
             """
 mb.DropPrimaryKey(
@@ -2177,7 +2177,7 @@ mb.DropUniqueConstraint(
             {
                 Name = "AK_Post_AltId",
                 Schema = "dbo",
-                Table = "Post"
+                Table = "Post",
             },
             """
 mb.DropUniqueConstraint(
@@ -2216,7 +2216,7 @@ mb.DropCheckConstraint(
             {
                 Name = "CK_Post_AltId1_AltId2",
                 Schema = "dbo",
-                Table = "Post"
+                Table = "Post",
             },
             """
 mb.DropCheckConstraint(
@@ -2239,7 +2239,7 @@ mb.DropCheckConstraint(
             {
                 Name = "Id",
                 Table = "Post",
-                NewName = "PostId"
+                NewName = "PostId",
             },
             """
 mb.RenameColumn(
@@ -2263,7 +2263,7 @@ mb.RenameColumn(
                 Name = "Id",
                 Schema = "dbo",
                 Table = "Post",
-                NewName = "PostId"
+                NewName = "PostId",
             },
             """
 mb.RenameColumn(
@@ -2305,7 +2305,7 @@ mb.RenameIndex(
                 Name = "IX_dbo.Post_Title",
                 Schema = "dbo",
                 Table = "Post",
-                NewName = "IX_dbo.Post_PostTitle"
+                NewName = "IX_dbo.Post_PostTitle",
             },
             """
 mb.RenameIndex(
@@ -2342,7 +2342,7 @@ mb.RenameSequence(
                 Name = "EntityFrameworkHiLoSequence",
                 Schema = "dbo",
                 NewName = "MySequence",
-                NewSchema = "my"
+                NewSchema = "my",
             },
             """
 mb.RenameSequence(
@@ -2379,7 +2379,7 @@ mb.RenameTable(
                 Name = "Post",
                 Schema = "dbo",
                 NewName = "Posts",
-                NewSchema = "my"
+                NewSchema = "my",
             },
             """
 mb.RenameTable(
@@ -2420,7 +2420,7 @@ mb.RestartSequence(
             {
                 Name = "EntityFrameworkHiLoSequence",
                 Schema = "dbo",
-                StartValue = 1
+                StartValue = 1,
             },
             """
 mb.RestartSequence(
@@ -2451,11 +2451,11 @@ mb.RestartSequence(
                 new Coordinate(1.1, 2.2),
                 new Coordinate(2.2, 2.2),
                 new Coordinate(2.2, 1.1),
-                new Coordinate(7.1, 7.2)
+                new Coordinate(7.1, 7.2),
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly LineString _lineString2 =
@@ -2465,17 +2465,17 @@ mb.RestartSequence(
                 new Coordinate(7.1, 7.2),
                 new Coordinate(20.2, 20.2),
                 new Coordinate(20.20, 1.1),
-                new Coordinate(70.1, 70.2)
+                new Coordinate(70.1, 70.2),
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly MultiPoint _multiPoint =
         new(new[] { new Point(1.1, 2.2), new Point(2.2, 2.2), new Point(2.2, 1.1) })
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly Polygon _polygon1 =
@@ -2486,12 +2486,12 @@ mb.RestartSequence(
                     new Coordinate(1.1, 2.2),
                     new Coordinate(2.2, 2.2),
                     new Coordinate(2.2, 1.1),
-                    new Coordinate(1.1, 2.2)
+                    new Coordinate(1.1, 2.2),
                 }
             )
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly Polygon _polygon2 =
@@ -2502,12 +2502,12 @@ mb.RestartSequence(
                     new Coordinate(10.1, 20.2),
                     new Coordinate(20.2, 20.2),
                     new Coordinate(20.2, 10.1),
-                    new Coordinate(10.1, 20.2)
+                    new Coordinate(10.1, 20.2),
                 }
             )
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     private static readonly Point _point1 = new(1.1, 2.2, 3.3) { SRID = 4326 };
@@ -2529,11 +2529,11 @@ mb.RestartSequence(
                 _polygon2,
                 _point1,
                 _multiLineString,
-                _multiPolygon
+                _multiPolygon,
             }
         )
         {
-            SRID = 4326
+            SRID = 4326,
         };
 
     [ConditionalFact]
@@ -2553,8 +2553,8 @@ mb.RestartSequence(
                     { 4, "Harry Strickland", _multiPoint },
                     { 5, "The Imp", _multiPolygon },
                     { 6, "The Kingslayer", _multiLineString },
-                    { 7, "Aemon Targaryen", _geometryCollection }
-                }
+                    { 7, "Aemon Targaryen", _geometryCollection },
+                },
             },
             """
 mb.InsertData(
@@ -2600,8 +2600,8 @@ mb.InsertData(
                 Columns = new[] { "Geometry" },
                 Values = new object[,]
                 {
-                    { _point1 }
-                }
+                    { _point1 },
+                },
             },
             """
 mb.InsertData(
@@ -2628,8 +2628,8 @@ mb.InsertData(
                 Columns = new[] { "Tags" },
                 Values = new object[,]
                 {
-                    { new string[0] }
-                }
+                    { new string[0] },
+                },
             },
             """
 mb.InsertData(
@@ -2656,8 +2656,8 @@ mb.InsertData(
                 Columns = new[] { "First Name", "Last Name", "Geometry" },
                 Values = new object[,]
                 {
-                    { "John", null, new string[0] }
-                }
+                    { "John", null, new string[0] },
+                },
             },
             """
 mb.InsertData(
@@ -2685,8 +2685,8 @@ mb.InsertData(
                 Columns = new[] { "First Name", "Last Name", "Geometry" },
                 Values = new object[,]
                 {
-                    { "John", "Snow", _polygon1 }
-                }
+                    { "John", "Snow", _polygon1 },
+                },
             },
             """
 mb.InsertData(
@@ -2715,8 +2715,8 @@ mb.InsertData(
                 Values = new object[,]
                 {
                     { _lineString1 },
-                    { _multiPoint }
-                }
+                    { _multiPoint },
+                },
             },
             """
 mb.InsertData(
@@ -2752,7 +2752,7 @@ mb.InsertData(
                     { 0, "Contains\r\na Windows linebreak" },
                     { 1, "Contains a\nLinux linebreak" },
                     { 2, "Contains a single Backslash r,\rjust in case" },
-                }
+                },
             },
             $$"""
 mb.InsertData(
@@ -2797,8 +2797,8 @@ mb.InsertData(
                     { "Daenerys" },
                     { "John" },
                     { "Arya" },
-                    { "Harry" }
-                }
+                    { "Harry" },
+                },
             },
             """
 mb.DeleteData(
@@ -2840,8 +2840,8 @@ mb.DeleteData(
                     { "Daenerys", "Targaryen" },
                     { "John", "Snow" },
                     { "Arya", "Stark" },
-                    { "Harry", "Strickland" }
-                }
+                    { "Harry", "Strickland" },
+                },
             },
             """
 mb.DeleteData(
@@ -2876,8 +2876,8 @@ mb.DeleteData(
                 KeyColumns = new[] { "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "Snow" }
-                }
+                    { "Snow" },
+                },
             },
             """
 mb.DeleteData(
@@ -2904,8 +2904,8 @@ mb.DeleteData(
                 KeyColumns = new[] { "First Name", "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "John", "Snow" }
-                }
+                    { "John", "Snow" },
+                },
             },
             """
 mb.DeleteData(
@@ -2935,7 +2935,7 @@ mb.DeleteData(
                     { 0, "Contains\r\na Windows linebreak" },
                     { 1, "Contains a\nLinux linebreak" },
                     { 2, "Contains a single Backslash r,\rjust in case" },
-                }
+                },
             },
             $$"""
 mb.DeleteData(
@@ -2974,14 +2974,14 @@ mb.DeleteData(
                 KeyValues = new object[,]
                 {
                     { "Hodor" },
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
                     { "Winterfell", "Stark", "Northmen" },
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             },
             """
 mb.UpdateData(
@@ -3025,14 +3025,14 @@ mb.UpdateData(
                 KeyValues = new object[,]
                 {
                     { "Hodor", null },
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
                     { "Stark" },
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             },
             """
 mb.UpdateData(
@@ -3074,14 +3074,14 @@ mb.UpdateData(
                 KeyValues = new object[,]
                 {
                     { "Hodor", null },
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
                     { "Winterfell", "Stark", "Northmen" },
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             },
             """
 mb.UpdateData(
@@ -3123,13 +3123,13 @@ mb.UpdateData(
                 KeyColumns = new[] { "Full Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys Targaryen" }
+                    { "Daenerys Targaryen" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             },
             """
 mb.UpdateData(
@@ -3164,13 +3164,13 @@ mb.UpdateData(
                 KeyColumns = new[] { "First Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             },
             """
 mb.UpdateData(
@@ -3204,14 +3204,14 @@ mb.UpdateData(
                 KeyValues = new object[,]
                 {
                     { "Hodor" },
-                    { "Daenerys" }
+                    { "Daenerys" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
                     { "Stark" },
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             },
             """
 mb.UpdateData(
@@ -3252,13 +3252,13 @@ mb.UpdateData(
                 KeyColumns = new[] { "First Name", "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "House Allegiance" },
                 Values = new object[,]
                 {
-                    { "Targaryen" }
-                }
+                    { "Targaryen" },
+                },
             },
             """
 mb.UpdateData(
@@ -3291,13 +3291,13 @@ mb.UpdateData(
                 KeyColumns = new[] { "First Name", "Last Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys", "Targaryen" }
+                    { "Daenerys", "Targaryen" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             },
             """
 mb.UpdateData(
@@ -3330,13 +3330,13 @@ mb.UpdateData(
                 KeyColumns = new[] { "Full Name" },
                 KeyValues = new object[,]
                 {
-                    { "Daenerys Targaryen" }
+                    { "Daenerys Targaryen" },
                 },
                 Columns = new[] { "Birthplace", "House Allegiance", "Culture" },
                 Values = new object[,]
                 {
-                    { "Dragonstone", "Targaryen", "Valyrian" }
-                }
+                    { "Dragonstone", "Targaryen", "Valyrian" },
+                },
             },
             """
 mb.UpdateData(
@@ -3380,7 +3380,7 @@ mb.UpdateData(
                     { "Contains\r\na Windows linebreak" },
                     { "Contains a\nLinux linebreak" },
                     { "Contains a single Backslash r,\rjust in case" },
-                }
+                },
             },
             $$"""
 mb.UpdateData(
@@ -3423,7 +3423,7 @@ mb.UpdateData(
     [ConditionalFact]
     public void AlterTableOperation_annotation_set_to_null()
     {
-        var oldTable = new CreateTableOperation { Name = "Customer", };
+        var oldTable = new CreateTableOperation { Name = "Customer" };
         oldTable.AddAnnotation("MyAnnotation1", "Bar");
         oldTable.AddAnnotation("MyAnnotation2", null);
 
@@ -3464,7 +3464,7 @@ mb.AlterTable(
                             {
                                 new SqlServerNetTopologySuiteTypeMappingSourcePlugin(
                                     NtsGeometryServices.Instance
-                                )
+                                ),
                             }
                         )
                     )
@@ -3483,7 +3483,7 @@ mb.AlterTable(
             References =
             {
                 BuildReference.ByName("Microsoft.EntityFrameworkCore.Relational"),
-                BuildReference.ByName("NetTopologySuite")
+                BuildReference.ByName("NetTopologySuite"),
             },
             Sources =
             {
@@ -3503,8 +3503,8 @@ mb.AlterTable(
                         }
                     }
 """
-                }
-            }
+                },
+            },
         };
 
         var assembly = build.BuildInMemory();

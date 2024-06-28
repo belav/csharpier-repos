@@ -81,7 +81,7 @@ public abstract class ComplexTypeQueryFixtureBase
             { typeof(Address), (Func<Address, object>)(e => e.ZipCode) },
             { typeof(Country), (Func<Country, object>)(e => e.Code) },
             { typeof(AddressStruct), (Func<AddressStruct, object>)(e => e.ZipCode) },
-            { typeof(CountryStruct), (Func<CountryStruct, object>)(e => e.Code) }
+            { typeof(CountryStruct), (Func<CountryStruct, object>)(e => e.Code) },
         }.ToDictionary(e => e.Key, e => e.Value);
 
     public IReadOnlyDictionary<Type, object> EntityAsserters { get; } =
@@ -168,7 +168,7 @@ public abstract class ComplexTypeQueryFixtureBase
                         AssertValuedCustomer(e.OptionalCustomer, a.OptionalCustomer);
                     }
                 }
-            }
+            },
         }.ToDictionary(e => e.Key, e => e.Value);
 
     private static void AssertCustomer(Customer? expected, Customer? actual)

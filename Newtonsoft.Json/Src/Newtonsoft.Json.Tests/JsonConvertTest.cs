@@ -266,7 +266,7 @@ namespace Newtonsoft.Json.Tests
                     new JsonSerializerSettings
                     {
                         Formatting = Formatting.Indented,
-                        ContractResolver = new CamelCasePropertyNamesContractResolver()
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
                     };
 
                 Employee e = new Employee
@@ -275,7 +275,7 @@ namespace Newtonsoft.Json.Tests
                     LastName = "Example",
                     BirthDate = new DateTime(1980, 4, 20, 0, 0, 0, DateTimeKind.Utc),
                     Department = "IT",
-                    JobTitle = "Web Dude"
+                    JobTitle = "Web Dude",
                 };
 
                 string json = JsonConvert.SerializeObject(e);
@@ -334,7 +334,7 @@ namespace Newtonsoft.Json.Tests
                     new JsonSerializerSettings
                     {
                         Formatting = Formatting.Indented,
-                        Converters = { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } }
+                        Converters = { new IsoDateTimeConverter { DateTimeFormat = "yyyy" } },
                     };
 
                 string json = JsonConvert.SerializeObject(
@@ -346,8 +346,8 @@ namespace Newtonsoft.Json.Tests
                         {
                             // should take precedence
                             new JavaScriptDateTimeConverter(),
-                            new IsoDateTimeConverter { DateTimeFormat = "dd" }
-                        }
+                            new IsoDateTimeConverter { DateTimeFormat = "dd" },
+                        },
                     }
                 );
 
@@ -1291,7 +1291,7 @@ namespace Newtonsoft.Json.Tests
                     value,
                     DateFormatHandling.IsoDateFormat,
                     DateTimeZoneHandling.RoundtripKind
-                )
+                ),
             };
 
             if (value is DateTime)
@@ -1496,7 +1496,7 @@ namespace Newtonsoft.Json.Tests
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateParseHandling = DateParseHandling.DateTimeOffset,
-                DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
+                DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind,
             };
             var json = JsonConvert.SerializeObject(dict, settings);
 
@@ -1553,7 +1553,7 @@ namespace Newtonsoft.Json.Tests
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
             };
             writer.WriteValue(dt);
             writer.Flush();
@@ -1628,7 +1628,7 @@ namespace Newtonsoft.Json.Tests
                 One = "Red",
                 Two = "Green",
                 Three = "Yellow",
-                Four = "Black"
+                Four = "Black",
             };
             string json = JsonConvert.SerializeObject(clobber);
 
@@ -1699,7 +1699,7 @@ namespace Newtonsoft.Json.Tests
         {
             IncorrectJsonConvertParameters value = new IncorrectJsonConvertParameters
             {
-                One = "Boom"
+                One = "Boom",
             };
 
             ExceptionAssert.Throws<JsonException>(() =>
@@ -2044,7 +2044,7 @@ namespace Newtonsoft.Json.Tests
                     23224.849899771067,
                     23062.5,
                     22846.272519910868,
-                    22594.281246368635
+                    22594.281246368635,
                 },
                 Positions = new List<double>
                 {
@@ -2052,9 +2052,9 @@ namespace Newtonsoft.Json.Tests
                     60.440934405753069,
                     63.444192925248643,
                     66.813119113482557,
-                    70.4496501404433
+                    70.4496501404433,
                 },
-                Gain = 12345.67895111213
+                Gain = 12345.67895111213,
             };
 
             string json = JsonConvert.SerializeObject(measurements);

@@ -61,7 +61,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                     {
                         MainBuilder = parameters.MethodBuilder,
                         MethodBuilder = methodBuilder,
-                        ScopeVariables = new HashSet<string>()
+                        ScopeVariables = new HashSet<string>(),
                     }
                 );
 
@@ -177,7 +177,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             var metadataVariables = new Dictionary<IAnnotatable, string>();
             var relationalModelParameters = parameters with
             {
-                TargetName = relationalModelVariable
+                TargetName = relationalModelVariable,
             };
             AddNamespace(typeof(List<TableMapping>), parameters.Namespaces);
             foreach (var entityType in model.Model.GetEntityTypes())
@@ -199,7 +199,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                         metadataVariables,
                         parameters with
                         {
-                            TargetName = metadataVariables[table]
+                            TargetName = metadataVariables[table],
                         }
                     );
                 }
@@ -754,7 +754,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                 Generate,
                 parameters with
                 {
-                    TargetName = parameterVariable
+                    TargetName = parameterVariable,
                 }
             );
         }
@@ -912,7 +912,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             StoreObjectType.InsertStoredProcedure => "GetInsertStoredProcedure",
             StoreObjectType.DeleteStoredProcedure => "GetDeleteStoredProcedure",
             StoreObjectType.UpdateStoredProcedure => "GetUpdateStoredProcedure",
-            _ => throw new Exception("Unexpected stored procedure type: " + storeObjectType)
+            _ => throw new Exception("Unexpected stored procedure type: " + storeObjectType),
         };
 
         return $"(IRuntimeStoredProcedure){entityTypeVariable}.{methodName}()!";
@@ -1260,7 +1260,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = uniqueConstraintVariable
+                TargetName = uniqueConstraintVariable,
             }
         );
 
@@ -1412,7 +1412,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = foreignKeyConstraintVariable
+                TargetName = foreignKeyConstraintVariable,
             }
         );
 
@@ -1499,7 +1499,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = tableMappingVariable
+                TargetName = tableMappingVariable,
             }
         );
 
@@ -1564,7 +1564,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = tableMappingVariable
+                TargetName = tableMappingVariable,
             }
         );
 
@@ -1627,7 +1627,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = viewMappingVariable
+                TargetName = viewMappingVariable,
             }
         );
 
@@ -1697,7 +1697,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = sqlQueryMappingVariable
+                TargetName = sqlQueryMappingVariable,
             }
         );
 
@@ -1769,7 +1769,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = functionMappingVariable
+                TargetName = functionMappingVariable,
             }
         );
 
@@ -1818,7 +1818,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             StoreObjectType.InsertStoredProcedure => "InsertStoredProcedureMapping",
             StoreObjectType.DeleteStoredProcedure => "DeleteStoredProcedureMapping",
             StoreObjectType.UpdateStoredProcedure => "UpdateStoredProcedureMapping",
-            _ => throw new Exception("Unexpected stored procedure type: " + storeObjectType)
+            _ => throw new Exception("Unexpected stored procedure type: " + storeObjectType),
         };
 
         var sprocSnippet = CreateFindSnippet(sprocMapping.StoredProcedure, metadataVariables);
@@ -1862,7 +1862,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = sprocMappingVariable
+                TargetName = sprocMappingVariable,
             }
         );
 
@@ -2624,7 +2624,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             Generate,
             parameters with
             {
-                TargetName = resultColumnVariable
+                TargetName = resultColumnVariable,
             }
         );
     }
@@ -3050,7 +3050,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
             parameters with
             {
                 Annotations = annotatable.GetAnnotations().ToDictionary(a => a.Name, a => a.Value),
-                IsRuntime = false
+                IsRuntime = false,
             }
         );
 
@@ -3061,7 +3061,7 @@ public class RelationalCSharpRuntimeAnnotationCodeGenerator : CSharpRuntimeAnnot
                 Annotations = annotatable
                     .GetRuntimeAnnotations()
                     .ToDictionary(a => a.Name, a => a.Value),
-                IsRuntime = true
+                IsRuntime = true,
             }
         );
     }

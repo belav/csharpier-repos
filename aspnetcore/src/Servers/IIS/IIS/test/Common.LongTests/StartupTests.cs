@@ -1754,7 +1754,7 @@ public class StartupTests : IISFunctionalTestBase
         var handler = new HttpClientHandler
         {
             ServerCertificateCustomValidationCallback = (a, b, c, d) => true,
-            AllowAutoRedirect = false
+            AllowAutoRedirect = false,
         };
         var client = new HttpClient(handler)
         {
@@ -1860,7 +1860,7 @@ public class StartupTests : IISFunctionalTestBase
     {
         var handler = new HttpClientHandler
         {
-            ServerCertificateCustomValidationCallback = (a, b, c, d) => true
+            ServerCertificateCustomValidationCallback = (a, b, c, d) => true,
         };
         return deploymentResult.CreateClient(handler);
     }

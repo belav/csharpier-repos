@@ -45,7 +45,7 @@ public class LazyLoadingTests : AppTestBase
                 TestScenario: "LazyLoadingTest",
                 BrowserQueryString: new Dictionary<string, string>
                 {
-                    ["loadRequiredAssembly"] = "false"
+                    ["loadRequiredAssembly"] = "false",
                 },
                 ExpectedExitCode: 1
             )

@@ -19,7 +19,7 @@ namespace System.Security.Principal
         SystemOperator = 0x225,
         PrintOperator = 0x226,
         BackupOperator = 0x227,
-        Replicator = 0x228
+        Replicator = 0x228,
     }
 
     public class WindowsPrincipal : ClaimsPrincipal

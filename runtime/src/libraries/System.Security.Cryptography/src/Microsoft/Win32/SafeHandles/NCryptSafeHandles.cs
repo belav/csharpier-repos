@@ -52,7 +52,7 @@ namespace Microsoft.Win32.SafeHandles
             /// <summary>
             ///     The safe handle owns the native handle, but shares it with other Duplicate handles
             /// </summary>
-            Holder
+            Holder,
         }
 
         private OwnershipState _ownershipState;

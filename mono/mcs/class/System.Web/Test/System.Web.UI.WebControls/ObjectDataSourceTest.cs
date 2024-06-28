@@ -1884,7 +1884,7 @@ namespace MonoTests.System.Web.UI.WebControls
                     data.LName,
                     oldvalue_data.ID,
                     oldvalue_data.FName,
-                    oldvalue_data.LName
+                    oldvalue_data.LName,
                 }
             );
             UpdateWithDataObjectTypeNameAllValues = true;

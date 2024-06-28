@@ -44,7 +44,7 @@ namespace System.Web.UI.MobileControls
         private static readonly int PagingUnitSize = ControlPager.DefaultWeight; // chars
 
         /// <include file='doc\LiteralText.uex' path='docs/doc[@for="LiteralText.Text"]/*' />
-        [Bindable(false), Browsable(false),]
+        [Bindable(false), Browsable(false)]
         public String Text
         {
             // Override MobileControl default behavior for InnerText

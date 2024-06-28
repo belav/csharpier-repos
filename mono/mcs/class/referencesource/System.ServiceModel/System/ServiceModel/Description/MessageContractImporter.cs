@@ -201,7 +201,7 @@ namespace System.ServiceModel.Description
                 Dictionary<String, String> ht = new Dictionary<string, string>(2)
                 {
                     { "Operation", operation.Name },
-                    { "Format", CurrentSchemaImporter.GetFormatName() }
+                    { "Format", CurrentSchemaImporter.GetFormatName() },
                 };
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,

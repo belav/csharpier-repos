@@ -594,7 +594,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x48,
                 0xDD,
                 0x38,
-                0x74
+                0x74,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("password", salt, "SHA1", 1);
             string msg = "PKCS#5-Long password salt SHA1 (1)";
@@ -633,7 +633,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x69,
                 0x11,
                 0x61,
-                0xB5
+                0xB5,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("password", salt, "SHA1", 1);
             string msg = "PKCS#5 password salt SHA1 (1)";
@@ -664,7 +664,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x48,
                 0xDD,
                 0x38,
-                0x74
+                0x74,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("password", salt, "SHA1", 1);
             string msg = "PKCS#5-Long password salt SHA1 (1)";
@@ -695,7 +695,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x52,
                 0xEF,
                 0x4B,
-                0x68
+                0x68,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("mono", null, "SHA1", 10);
             string msg = "PKCS#5 mono null SHA1 (10)";
@@ -726,7 +726,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x89,
                 0x1E,
                 0x4C,
-                0x67
+                0x67,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("mono", null, "SHA1", 10);
             string msg = "PKCS#5-Long mono null SHA1 (10)";
@@ -753,7 +753,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x85,
                 0x2F,
                 0x7F,
-                0xF2
+                0xF2,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("mono", salt, "MD5", 100);
             string msg = "PKCS#5 mono salt MD5 (100)";
@@ -780,7 +780,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x6F,
                 0x3E,
                 0x40,
-                0x36
+                0x36,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("mono", salt, "MD5", 100);
             string msg = "PKCS#5-Long mono salt MD5 (100)";
@@ -807,7 +807,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xBF,
                 0xAC,
                 0x41,
-                0xA6
+                0xA6,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("password", null, "MD5", 1000);
             string msg = "PKCS#5 password null MD5 (1000)";
@@ -834,7 +834,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xAA,
                 0xED,
                 0x4C,
-                0x72
+                0x72,
             };
             PasswordDeriveBytes pd = new PasswordDeriveBytes("password", null, "MD5", 1000);
             string msg = "PKCS#5-Long password null MD5 (1000)";

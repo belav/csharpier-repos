@@ -110,7 +110,7 @@ namespace System.Data.Linq.SqlClient
                                     predicateExpression.SourceExpression
                                 ),
                                 valueFalse
-                            )
+                            ),
                         },
                         valueNull,
                         predicateExpression.SourceExpression

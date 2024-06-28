@@ -1572,14 +1572,14 @@ namespace System.Tests
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     3,
-                    MidpointRounding.ToEven
+                    MidpointRounding.ToEven,
                 };
                 yield return new object[]
                 {
                     float.NegativeInfinity,
                     float.NegativeInfinity,
                     3,
-                    MidpointRounding.ToEven
+                    MidpointRounding.ToEven,
                 };
                 yield return new object[] { 0, 0, 3, MidpointRounding.ToEven };
                 yield return new object[] { 3.42156f, 3.422f, 3, MidpointRounding.ToEven };
@@ -1590,21 +1590,21 @@ namespace System.Tests
                     float.NaN,
                     float.NaN,
                     3,
-                    MidpointRounding.AwayFromZero
+                    MidpointRounding.AwayFromZero,
                 };
                 yield return new object[]
                 {
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     3,
-                    MidpointRounding.AwayFromZero
+                    MidpointRounding.AwayFromZero,
                 };
                 yield return new object[]
                 {
                     float.NegativeInfinity,
                     float.NegativeInfinity,
                     3,
-                    MidpointRounding.AwayFromZero
+                    MidpointRounding.AwayFromZero,
                 };
                 yield return new object[] { 0, 0, 3, MidpointRounding.AwayFromZero };
                 yield return new object[] { 3.42156f, 3.422f, 3, MidpointRounding.AwayFromZero };
@@ -1616,14 +1616,14 @@ namespace System.Tests
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     3,
-                    MidpointRounding.ToZero
+                    MidpointRounding.ToZero,
                 };
                 yield return new object[]
                 {
                     float.NegativeInfinity,
                     float.NegativeInfinity,
                     3,
-                    MidpointRounding.ToZero
+                    MidpointRounding.ToZero,
                 };
                 yield return new object[] { 0, 0, 3, MidpointRounding.ToZero };
                 yield return new object[] { 3.42156f, 3.421f, 3, MidpointRounding.ToZero };
@@ -1634,21 +1634,21 @@ namespace System.Tests
                     float.NaN,
                     float.NaN,
                     3,
-                    MidpointRounding.ToNegativeInfinity
+                    MidpointRounding.ToNegativeInfinity,
                 };
                 yield return new object[]
                 {
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     3,
-                    MidpointRounding.ToNegativeInfinity
+                    MidpointRounding.ToNegativeInfinity,
                 };
                 yield return new object[]
                 {
                     float.NegativeInfinity,
                     float.NegativeInfinity,
                     3,
-                    MidpointRounding.ToNegativeInfinity
+                    MidpointRounding.ToNegativeInfinity,
                 };
                 yield return new object[] { 0, 0, 3, MidpointRounding.ToNegativeInfinity };
                 yield return new object[]
@@ -1656,14 +1656,14 @@ namespace System.Tests
                     3.42156f,
                     3.421f,
                     3,
-                    MidpointRounding.ToNegativeInfinity
+                    MidpointRounding.ToNegativeInfinity,
                 };
                 yield return new object[]
                 {
                     -3.42156f,
                     -3.422f,
                     3,
-                    MidpointRounding.ToNegativeInfinity
+                    MidpointRounding.ToNegativeInfinity,
                 };
 
                 yield return new object[]
@@ -1671,21 +1671,21 @@ namespace System.Tests
                     float.NaN,
                     float.NaN,
                     3,
-                    MidpointRounding.ToPositiveInfinity
+                    MidpointRounding.ToPositiveInfinity,
                 };
                 yield return new object[]
                 {
                     float.PositiveInfinity,
                     float.PositiveInfinity,
                     3,
-                    MidpointRounding.ToPositiveInfinity
+                    MidpointRounding.ToPositiveInfinity,
                 };
                 yield return new object[]
                 {
                     float.NegativeInfinity,
                     float.NegativeInfinity,
                     3,
-                    MidpointRounding.ToPositiveInfinity
+                    MidpointRounding.ToPositiveInfinity,
                 };
                 yield return new object[] { 0, 0, 3, MidpointRounding.ToPositiveInfinity };
                 yield return new object[]
@@ -1693,14 +1693,14 @@ namespace System.Tests
                     3.42156f,
                     3.422f,
                     3,
-                    MidpointRounding.ToPositiveInfinity
+                    MidpointRounding.ToPositiveInfinity,
                 };
                 yield return new object[]
                 {
                     -3.42156f,
                     -3.421f,
                     3,
-                    MidpointRounding.ToPositiveInfinity
+                    MidpointRounding.ToPositiveInfinity,
                 };
             }
         }

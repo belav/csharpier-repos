@@ -53,7 +53,7 @@ namespace System.Data.Metadata.Edm
             /// <summary>
             /// Check the extension against the set of acceptable extensions
             /// </summary>
-            All
+            All,
         }
 
         [ResourceExposure(ResourceScope.Machine)] //Exposes the file name which is a Machine resource

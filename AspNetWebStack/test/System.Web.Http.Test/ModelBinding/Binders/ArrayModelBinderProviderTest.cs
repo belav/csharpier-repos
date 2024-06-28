@@ -21,7 +21,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     typeof(int[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
 
             ArrayModelBinderProvider binderProvider = new ArrayModelBinderProvider();
@@ -44,7 +44,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     typeof(ICollection<int>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
 
             ArrayModelBinderProvider binderProvider = new ArrayModelBinderProvider();

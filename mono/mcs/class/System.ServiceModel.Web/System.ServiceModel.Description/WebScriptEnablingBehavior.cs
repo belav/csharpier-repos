@@ -143,7 +143,7 @@ namespace System.ServiceModel.Description
                     String.Empty
                 )
                 {
-                    ContractFilter = new MatchAllMessageFilter()
+                    ContractFilter = new MatchAllMessageFilter(),
                 }
             );
 

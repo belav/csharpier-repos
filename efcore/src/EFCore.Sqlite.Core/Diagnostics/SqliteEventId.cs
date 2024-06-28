@@ -50,7 +50,7 @@ public static class SqliteEventId
         UniqueConstraintFound,
         InferringTypes,
         OutOfRangeWarning,
-        FormatWarning
+        FormatWarning,
     }
 
     private static readonly string ValidationPrefix = DbLoggerCategory.Model.Validation.Name + ".";

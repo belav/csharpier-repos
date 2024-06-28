@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.Caching.Memory
     {
         private IMemoryCache CreateCache(ISystemClock clock)
         {
-            return new MemoryCache(new MemoryCacheOptions() { Clock = clock, });
+            return new MemoryCache(new MemoryCacheOptions() { Clock = clock });
         }
 
         [Fact]

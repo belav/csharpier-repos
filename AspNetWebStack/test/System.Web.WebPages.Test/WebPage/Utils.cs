@@ -94,7 +94,7 @@ namespace System.Web.WebPages.Test
                 ExecuteAction = p =>
                 {
                     pageExecuteAction(p);
-                }
+                },
             };
             page.VirtualPathFactory = new HashVirtualPathFactory(page);
             page.DisplayModeProvider = new DisplayModeProvider();
@@ -112,7 +112,7 @@ namespace System.Web.WebPages.Test
                 ExecuteAction = p =>
                 {
                     pageExecuteAction(p);
-                }
+                },
             };
             page.VirtualPathFactory = new HashVirtualPathFactory(page);
             page.DisplayModeProvider = new DisplayModeProvider();

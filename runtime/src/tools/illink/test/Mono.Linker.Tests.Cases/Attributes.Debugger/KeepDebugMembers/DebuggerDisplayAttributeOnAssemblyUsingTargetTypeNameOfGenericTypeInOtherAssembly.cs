@@ -20,7 +20,7 @@ namespace Mono.Linker.Tests.Cases.Attributes.Debugger.KeepDebugMembers
         "library.dll",
         new[]
         {
-            "../Dependencies/DebuggerDisplayAttributeOnAssemblyUsingTargetTypeNameInOtherAssembly_Lib.cs"
+            "../Dependencies/DebuggerDisplayAttributeOnAssemblyUsingTargetTypeNameInOtherAssembly_Lib.cs",
         }
     )]
     [KeptMemberInAssembly(

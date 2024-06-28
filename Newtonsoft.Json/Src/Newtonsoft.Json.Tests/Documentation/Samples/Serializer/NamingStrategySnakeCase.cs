@@ -57,7 +57,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new SnakeCaseNamingStrategy()
+                NamingStrategy = new SnakeCaseNamingStrategy(),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -65,7 +65,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 

@@ -91,7 +91,7 @@ public class TextTemplatingModelGeneratorTest
             {
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -128,7 +128,7 @@ public class TextTemplatingModelGeneratorTest
             {
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -157,7 +157,7 @@ public class TextTemplatingModelGeneratorTest
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ProjectDir = projectDir,
-                Language = "C#"
+                Language = "C#",
             }
         );
 
@@ -188,7 +188,7 @@ public class TextTemplatingModelGeneratorTest
                         ContextName = "Context",
                         ConnectionString = @"Name=DefaultConnection",
                         ProjectDir = projectDir,
-                        Language = "VB"
+                        Language = "VB",
                     }
                 )
         );
@@ -245,7 +245,7 @@ ProjectDefaultNamespace: <#= Session["ProjectDefaultNamespace"] #>
                 ContextNamespace = "ContextNamespace",
                 ModelNamespace = "ModelNamespace",
                 RootNamespace = "RootNamespace",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -311,7 +311,7 @@ ProjectDefaultNamespace: RootNamespace
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
                 ModelNamespace = "ModelNamespace",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -358,7 +358,7 @@ My entity type configuration template
             {
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -390,7 +390,7 @@ My entity type configuration template
             {
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -425,7 +425,7 @@ My entity type configuration template
                     {
                         ContextName = "Context",
                         ConnectionString = @"Name=DefaultConnection",
-                        ProjectDir = projectDir
+                        ProjectDir = projectDir,
                     }
                 )
         );
@@ -478,7 +478,7 @@ My entity type configuration template
             {
                 ContextName = "Context",
                 ConnectionString = @"Name=DefaultConnection",
-                ProjectDir = projectDir
+                ProjectDir = projectDir,
             }
         );
 
@@ -523,7 +523,7 @@ My entity type configuration template
                     {
                         ContextName = "Context",
                         ConnectionString = @"Name=DefaultConnection",
-                        ProjectDir = projectDir
+                        ProjectDir = projectDir,
                     }
                 )
         );

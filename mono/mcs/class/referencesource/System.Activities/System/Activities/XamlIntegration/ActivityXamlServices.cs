@@ -444,7 +444,7 @@ namespace System.Activities.XamlIntegration
                 RootNamespace = null,
                 GenerateAsPartialClass = false,
                 AlwaysGenerateSource = true,
-                Language = language
+                Language = language,
             };
         }
 

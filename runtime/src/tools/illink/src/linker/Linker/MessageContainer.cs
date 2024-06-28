@@ -324,7 +324,7 @@ namespace Mono.Linker
                 AssemblyDefinition asm => asm,
                 TypeDefinition type => type.Module.Assembly,
                 IMemberDefinition member => member.DeclaringType.Module.Assembly,
-                _ => null
+                _ => null,
             };
 
             if (assembly == null)

@@ -557,8 +557,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseIndexOrRangeOperator
                     {
                         ["AdditionalProject"] =
                         {
-                            Sources = { "namespace System { internal struct Index { } }" }
-                        }
+                            Sources = { "namespace System { internal struct Index { } }" },
+                        },
                     },
                     AdditionalProjectReferences = { "AdditionalProject" },
                 },

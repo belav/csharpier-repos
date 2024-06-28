@@ -53,6 +53,6 @@ namespace System.Diagnostics.PerformanceData
             Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_SYSTEM_TIMER,
         PrecisionTimer100Ns = Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_100NS_TIMER,
         PrecisionObjectSpecificTimer =
-            Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_OBJECT_TIMER
+            Interop.Kernel32.PerformanceCounterOptions.PERF_PRECISION_OBJECT_TIMER,
     }
 }

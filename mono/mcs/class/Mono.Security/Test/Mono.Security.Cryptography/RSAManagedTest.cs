@@ -332,7 +332,7 @@ namespace MonoTests.Mono.Security.Cryptography
                 0x10,
                 0x11,
                 0x12,
-                0x13
+                0x13,
             };
             // we don't need the private key to encrypt
             RSAManaged pubkey = new RSAManaged();

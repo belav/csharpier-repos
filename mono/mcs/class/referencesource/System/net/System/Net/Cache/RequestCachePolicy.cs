@@ -45,7 +45,7 @@ namespace System.Net.Cache
         Reload = 5,
 
         // Bypass the cache and removing existing entries in the cache
-        NoCacheNoStore = 6
+        NoCacheNoStore = 6,
     }
 
     //

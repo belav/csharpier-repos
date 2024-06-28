@@ -45,7 +45,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     null,
                     "1000000000000001",
                     null,
-                    "30649EDF9BE7D2C2"
+                    "30649EDF9BE7D2C2",
                 };
 
                 // RFC 2268 test
@@ -57,7 +57,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     null,
                     "FFFFFFFFFFFFFFFF",
                     null,
-                    "278B27E42E2F0D49"
+                    "278B27E42E2F0D49",
                 };
 
                 // RFC 2268 test
@@ -69,7 +69,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     null,
                     "0000000000000000",
                     null,
-                    "2269552ab0f85ca6"
+                    "2269552ab0f85ca6",
                 };
 
                 yield return new object[]
@@ -81,7 +81,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     s_multiBlockString_8,
                     null,
                     "F6DF2E83811D6CB0C8A5830069D16F6A51C985D7003852539051FABC3C6EA7CF46BD3DBD5527003A13BC850E32BB598F"
-                        + "1AC96E96401EBBCDAEEF21D6C05B8DF2637B938CFDB8814B3CC47E30640BD0396B2AC6D7D9977499"
+                        + "1AC96E96401EBBCDAEEF21D6C05B8DF2637B938CFDB8814B3CC47E30640BD0396B2AC6D7D9977499",
                 };
 
                 yield return new object[]
@@ -93,7 +93,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     s_multiBlockString,
                     null,
                     "F6DF2E83811D6CB0C8A5830069D16F6A51C985D7003852539051FABC3C6EA7CF46BD3DBD5527003A789B76CBE4D40A73"
-                        + "620F04ED9F0AA1AEC7FEC90E7934F69E0568F6DF1F38B2198821D0A771D68A3F8220C8822E387721AEB21E183555CE07"
+                        + "620F04ED9F0AA1AEC7FEC90E7934F69E0568F6DF1F38B2198821D0A771D68A3F8220C8822E387721AEB21E183555CE07",
                 };
 
                 yield return new object[]
@@ -105,7 +105,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     s_multiBlockString,
                     s_multiBlockStringPaddedZeros,
                     "F6DF2E83811D6CB0C8A5830069D16F6A51C985D7003852539051FABC3C6EA7CF46BD3DBD5527003A789B76CBE4D40A73"
-                        + "620F04ED9F0AA1AEC7FEC90E7934F69E0568F6DF1F38B2198821D0A771D68A3F8220C8822E387721C669B2B62A6BF492"
+                        + "620F04ED9F0AA1AEC7FEC90E7934F69E0568F6DF1F38B2198821D0A771D68A3F8220C8822E387721C669B2B62A6BF492",
                 };
 
                 yield return new object[]
@@ -117,7 +117,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     s_multiBlockString_8,
                     null,
                     "85B5D998F35ECD98DB886798170F64BA2DBA4FE902791CDE900EEB0B35728FEE35FB6CADC41DF67F6056044F15B5C7ED"
-                        + "4FAB086053D7DC458C206145AE9655F1590C590FBDE76365FA488CADBCDA67B325A35E7CCBC1B9A1"
+                        + "4FAB086053D7DC458C206145AE9655F1590C590FBDE76365FA488CADBCDA67B325A35E7CCBC1B9A1",
                 };
 
                 yield return new object[]
@@ -129,7 +129,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     s_multiBlockString,
                     null,
                     "85B5D998F35ECD98DB886798170F64BA2DBA4FE902791CDE900EEB0B35728FEE35FB6CADC41DF67FBB691B45D92B876A"
-                        + "13FD18229E5ACB797D21D7B257520910360E00FEECDE3433FDC6F15233AE6B5CAC01289AC8B57A9A6B5DA734C2E7E733"
+                        + "13FD18229E5ACB797D21D7B257520910360E00FEECDE3433FDC6F15233AE6B5CAC01289AC8B57A9A6B5DA734C2E7E733",
                 };
 
                 yield return new object[]
@@ -141,7 +141,7 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     s_multiBlockString,
                     s_multiBlockStringPaddedZeros,
                     "85B5D998F35ECD98DB886798170F64BA2DBA4FE902791CDE900EEB0B35728FEE35FB6CADC41DF67FBB691B45D92B876A"
-                        + "13FD18229E5ACB797D21D7B257520910360E00FEECDE3433FDC6F15233AE6B5CAC01289AC8B57A9A6A1BB012ED20DADA"
+                        + "13FD18229E5ACB797D21D7B257520910360E00FEECDE3433FDC6F15233AE6B5CAC01289AC8B57A9A6A1BB012ED20DADA",
                 };
             }
         }
@@ -183,12 +183,11 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                     byte[] oneShotEncrypt = cipherMode switch
                     {
                         CipherMode.ECB => alg.EncryptEcb(textHex.HexToByteArray(), paddingMode),
-                        CipherMode.CBC =>
-                            alg.EncryptCbc(
-                                textHex.HexToByteArray(),
-                                iv.HexToByteArray(),
-                                paddingMode
-                            ),
+                        CipherMode.CBC => alg.EncryptCbc(
+                            textHex.HexToByteArray(),
+                            iv.HexToByteArray(),
+                            paddingMode
+                        ),
                         _ => throw new NotImplementedException(),
                     };
 

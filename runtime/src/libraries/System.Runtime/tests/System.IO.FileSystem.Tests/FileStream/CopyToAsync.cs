@@ -196,7 +196,7 @@ namespace System.IO.Tests
                                 cancelable,
                                 0x1000,
                                 0x100,
-                                100
+                                100,
                             };
                             yield return new object[]
                             {
@@ -208,7 +208,7 @@ namespace System.IO.Tests
                                 cancelable,
                                 0x1,
                                 0x1,
-                                1000
+                                1000,
                             };
                             yield return new object[]
                             {
@@ -220,7 +220,7 @@ namespace System.IO.Tests
                                 cancelable,
                                 0x2,
                                 0x100,
-                                100
+                                100,
                             };
                             yield return new object[]
                             {
@@ -232,7 +232,7 @@ namespace System.IO.Tests
                                 cancelable,
                                 0x4000,
                                 0x10,
-                                100
+                                100,
                             };
                             yield return new object[]
                             {
@@ -244,7 +244,7 @@ namespace System.IO.Tests
                                 cancelable,
                                 0x1000,
                                 99999,
-                                10
+                                10,
                             };
                         }
                     }

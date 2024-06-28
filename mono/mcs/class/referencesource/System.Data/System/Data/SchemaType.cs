@@ -12,6 +12,6 @@ namespace System.Data
     {
         Source = 1,
 
-        Mapped = 2
+        Mapped = 2,
     }
 }

@@ -682,7 +682,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             HttpMethod.Patch,
             HttpMethod.Post,
             HttpMethod.Put,
-            HttpMethod.Trace
+            HttpMethod.Trace,
         };
 
         foreach (var statusCode in statusCodes)
@@ -1076,7 +1076,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -1160,7 +1160,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -1650,7 +1650,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -1911,7 +1911,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -1960,7 +1960,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -2009,7 +2009,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -2067,7 +2067,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var serviceContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -3895,7 +3895,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = true }
+            ServerOptions = { AllowSynchronousIO = true },
         };
 
         await using (
@@ -3932,7 +3932,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var testContext = new TestServiceContext(LoggerFactory)
         {
-            ServerOptions = { AllowSynchronousIO = false }
+            ServerOptions = { AllowSynchronousIO = false },
         };
 
         await using (
@@ -4862,7 +4862,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     options.CodeBackedListenOptions.Add(
                         new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                         {
-                            Protocols = HttpProtocols.Http1AndHttp2AndHttp3
+                            Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
                         }
                     );
                 },
@@ -4898,7 +4898,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                         {
                             Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
-                            IsTls = true
+                            IsTls = true,
                         }
                     );
                 },
@@ -4939,7 +4939,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                         {
                             Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
-                            IsTls = true
+                            IsTls = true,
                         }
                     );
                 },
@@ -4970,7 +4970,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 new TestServiceContext(LoggerFactory),
                 new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                 {
-                    Protocols = HttpProtocols.Http1
+                    Protocols = HttpProtocols.Http1,
                 }
             )
         )
@@ -5001,14 +5001,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     options.CodeBackedListenOptions.Add(
                         new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                         {
-                            Protocols = HttpProtocols.Http1
+                            Protocols = HttpProtocols.Http1,
                         }
                     );
                     options.CodeBackedListenOptions.Add(
                         new ListenOptions(new IPEndPoint(IPAddress.Loopback, 1))
                         {
                             Protocols = HttpProtocols.Http3,
-                            IsTls = true
+                            IsTls = true,
                         }
                     );
                 },
@@ -5048,7 +5048,7 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                         new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0))
                         {
                             Protocols = HttpProtocols.Http1AndHttp2AndHttp3,
-                            DisableAltSvcHeader = true
+                            DisableAltSvcHeader = true,
                         }
                     );
                 },

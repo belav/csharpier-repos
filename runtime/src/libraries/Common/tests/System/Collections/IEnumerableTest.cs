@@ -10,7 +10,7 @@ namespace Tests.Collections
     public enum CollectionOrder
     {
         Unspecified,
-        Sequential
+        Sequential,
     }
 
     public abstract class IEnumerableTest<T>

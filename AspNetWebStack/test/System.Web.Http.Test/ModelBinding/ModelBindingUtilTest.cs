@@ -224,7 +224,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
             bindingContext.ModelMetadata.Model = "hello!";
 
@@ -241,7 +241,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
 
             // Act
@@ -267,7 +267,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
             bindingContext.ModelMetadata.Model = 42;
 
@@ -290,7 +290,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(string))
+                ModelMetadata = GetMetadata(typeof(string)),
             };
 
             // Act & assert
@@ -327,7 +327,7 @@ namespace System.Web.Http.ModelBinding
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = GetMetadata(typeof(object))
+                ModelMetadata = GetMetadata(typeof(object)),
             };
 
             // Act & assert

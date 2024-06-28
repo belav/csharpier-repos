@@ -61,7 +61,7 @@ public class SystemTextJsonHelperTest : JsonHelperTestBase
                 Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
                 PropertyNamingPolicy = null,
                 WriteIndented = true,
-            }
+            },
         };
         var helper = GetJsonHelper(options);
         var obj = new { HTML = "<b>John</b>" };

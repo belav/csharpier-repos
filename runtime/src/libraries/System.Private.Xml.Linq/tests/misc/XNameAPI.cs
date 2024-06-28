@@ -18,7 +18,7 @@ namespace CoreXml.Test.XLinq
                 FromString,
                 TwoParamGet,
                 ExpandedName,
-                XNamespacePlusOperator
+                XNamespacePlusOperator,
             }
 
             //[TestCase(Name = "XName API - expanded name", Param = GetNameType.ExpandedName)]

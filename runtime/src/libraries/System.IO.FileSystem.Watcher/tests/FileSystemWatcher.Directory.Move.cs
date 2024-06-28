@@ -178,7 +178,7 @@ namespace System.IO.Tests
                 .Select(i => new
                 {
                     DirectoryInWatchedDir = Path.Combine(watchedTestDirectory, $"dir{i}"),
-                    DirectoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}")
+                    DirectoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}"),
                 })
                 .ToArray();
 
@@ -226,7 +226,7 @@ namespace System.IO.Tests
                 .Select(i => new
                 {
                     DirectoryInWatchedDir = Path.Combine(watchedTestDirectory, $"dir{i}"),
-                    DirectoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}")
+                    DirectoryInUnwatchedDir = Path.Combine(unwatchedTestDirectory, $"dir{i}"),
                 })
                 .ToArray();
 

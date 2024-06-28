@@ -140,7 +140,7 @@ namespace LinkerAnalyzer.Core
                 ReaderParameters parameters = new ReaderParameters()
                 {
                     ReadingMode = ReadingMode.Immediate,
-                    AssemblyResolver = resolver
+                    AssemblyResolver = resolver,
                 };
                 var assembly = AssemblyDefinition.ReadAssembly(file, parameters);
                 assemblies.Add(assembly);

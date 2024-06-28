@@ -102,12 +102,12 @@ namespace System.Security.Cryptography
 
         private static readonly KeySizes[] s_legalBlockSizes =
         {
-            new KeySizes(minSize: 64, maxSize: 64, skipSize: 0)
+            new KeySizes(minSize: 64, maxSize: 64, skipSize: 0),
         };
 
         private static readonly KeySizes[] s_legalKeySizes =
         {
-            new KeySizes(minSize: 2 * 64, maxSize: 3 * 64, skipSize: 64)
+            new KeySizes(minSize: 2 * 64, maxSize: 3 * 64, skipSize: 64),
         };
     }
 }

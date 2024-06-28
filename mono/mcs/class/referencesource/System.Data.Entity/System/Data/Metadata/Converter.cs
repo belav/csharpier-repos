@@ -1210,7 +1210,7 @@ namespace System.Data.Metadata.Edm
                     entityContainer = functionImportEntityContainer;
                     entitySets = new EntitySet[]
                     {
-                        GetEntitySet(somFunctionImport.EntitySet, entityContainer)
+                        GetEntitySet(somFunctionImport.EntitySet, entityContainer),
                     };
                 }
                 else if (null != somFunctionImport.ReturnTypeList)
@@ -1739,7 +1739,7 @@ namespace System.Data.Metadata.Edm
                                     primitiveType.FacetDescriptions,
                                     EdmProviderManifest.MaxLengthFacetName
                                 )
-                                .MaxValue
+                                .MaxValue,
                         }
                     );
                 }

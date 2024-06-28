@@ -62,7 +62,7 @@ namespace System.ServiceModel
             Stop,
             Suspend,
             Resume,
-            Transfer
+            Transfer,
         }
 #endif
 
@@ -184,7 +184,7 @@ namespace System.ServiceModel
 
         static readonly XmlWriterSettings xws = new XmlWriterSettings()
         {
-            OmitXmlDeclaration = true
+            OmitXmlDeclaration = true,
         };
 
         public static void LogMessage(
@@ -350,7 +350,7 @@ namespace System.ServiceModel
 
         static readonly XmlWriterSettings xml_writer_settings = new XmlWriterSettings()
         {
-            OmitXmlDeclaration = true
+            OmitXmlDeclaration = true,
         };
 
         // I avoided OuterXml which includes indentation.

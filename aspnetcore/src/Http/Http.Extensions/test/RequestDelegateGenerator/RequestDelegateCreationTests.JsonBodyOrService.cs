@@ -20,7 +20,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
             {
                 Id = 0,
                 Name = "Test Item",
-                IsComplete = false
+                IsComplete = false,
             };
             var expectedTodoBody = "Test Item";
             var expectedServiceBody = "Produced from service!";
@@ -40,7 +40,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
                     null,
                     true,
                     200,
-                    expectedServiceBody
+                    expectedServiceBody,
                 },
                 new object[]
                 {
@@ -49,7 +49,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
                     null,
                     false,
                     400,
-                    string.Empty
+                    string.Empty,
                 },
                 new object[]
                 {
@@ -58,7 +58,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
                     todo,
                     false,
                     200,
-                    expectedTodoBody
+                    expectedTodoBody,
                 },
                 new object[]
                 {
@@ -67,7 +67,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
                     null,
                     false,
                     400,
-                    string.Empty
+                    string.Empty,
                 },
                 new object[]
                 {
@@ -76,7 +76,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
                     todo,
                     false,
                     200,
-                    expectedTodoBody
+                    expectedTodoBody,
                 },
                 new object[]
                 {
@@ -85,7 +85,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
                     null,
                     false,
                     400,
-                    string.Empty
+                    string.Empty,
                 },
             };
         }
@@ -132,7 +132,7 @@ app.MapPost("/", (Todo todo, TestService svc) => $"{svc.TestServiceMethod()}, {t
         {
             Id = 1,
             Name = "Test",
-            IsComplete = false
+            IsComplete = false,
         };
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(
@@ -160,70 +160,70 @@ app.MapPost("/", (Todo todo, TestService svc) => $"{svc.TestServiceMethod()}, {t
                     @"(Todo todo) => $""Todo: {todo.Name}"";",
                     true,
                     false,
-                    "Todo: Default Todo"
+                    "Todo: Default Todo",
                 },
                 new object[]
                 {
                     @"(Todo? todo = null) => $""Todo: {todo?.Name}"";",
                     false,
                     false,
-                    "Todo: "
+                    "Todo: ",
                 },
                 new object[]
                 {
                     @"(Todo? todo = null) => $""Todo: {todo?.Name}"";",
                     true,
                     false,
-                    "Todo: Default Todo"
+                    "Todo: Default Todo",
                 },
                 new object[]
                 {
                     @"(Todo? todo) => $""Todo: {todo?.Name}"";",
                     false,
                     false,
-                    "Todo: "
+                    "Todo: ",
                 },
                 new object[]
                 {
                     @"(Todo? todo) => $""Todo: {todo?.Name}"";",
                     true,
                     false,
-                    "Todo: Default Todo"
+                    "Todo: Default Todo",
                 },
                 new object[]
                 {
                     @"(TodoStruct todo) => $""Todo: {todo.Name}"";",
                     true,
                     false,
-                    "Todo: Default Todo"
+                    "Todo: Default Todo",
                 },
                 new object[]
                 {
                     @"(TodoStruct? todo = null) => $""Todo: {todo?.Name}"";",
                     false,
                     false,
-                    "Todo: "
+                    "Todo: ",
                 },
                 new object[]
                 {
                     @"(TodoStruct? todo = null) => $""Todo: {todo?.Name}"";",
                     true,
                     false,
-                    "Todo: Default Todo"
+                    "Todo: Default Todo",
                 },
                 new object[]
                 {
                     @"(TodoStruct? todo) => $""Todo: {todo?.Name}"";",
                     false,
                     false,
-                    "Todo: "
+                    "Todo: ",
                 },
                 new object[]
                 {
                     @"(TodoStruct? todo) => $""Todo: {todo?.Name}"";",
                     true,
                     false,
-                    "Todo: Default Todo"
+                    "Todo: Default Todo",
                 },
             };
         }

@@ -129,7 +129,7 @@ public class ListAdapterTest
                 {
                     new List<int>() { 5, 10 },
                     new List<int>() { 5, 10, 20 }
-                }
+                },
             };
         }
     }
@@ -241,7 +241,7 @@ public class ListAdapterTest
                     "c",
                     "1",
                     new List<string>() { "a", "c", "b" }
-                }
+                },
             };
         }
     }
@@ -307,7 +307,7 @@ public class ListAdapterTest
                     sDto3,
                     "1",
                     new List<SimpleObject>() { sDto1, sDto3, sDto2 }
-                }
+                },
             };
         }
     }
@@ -494,7 +494,7 @@ public class ListAdapterTest
                 {
                     "1",
                     new List<int>() { 10, 30 }
-                }
+                },
             };
         }
     }

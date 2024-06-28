@@ -29,7 +29,7 @@ namespace System.Workflow.Runtime
         Completed = 1,
         Suspended = 2,
         Terminated = 3,
-        Created = 4
+        Created = 4,
     }
 
     #endregion

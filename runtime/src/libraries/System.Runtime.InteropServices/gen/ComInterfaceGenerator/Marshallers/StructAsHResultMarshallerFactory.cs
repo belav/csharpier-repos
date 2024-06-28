@@ -70,7 +70,7 @@ namespace Microsoft.Interop
                                                 new[]
                                                 {
                                                     info.ManagedType.Syntax,
-                                                    AsNativeType(info).Syntax
+                                                    AsNativeType(info).Syntax,
                                                 }
                                             )
                                         )
@@ -99,7 +99,7 @@ namespace Microsoft.Interop
                                                 new[]
                                                 {
                                                     AsNativeType(info).Syntax,
-                                                    info.ManagedType.Syntax
+                                                    info.ManagedType.Syntax,
                                                 }
                                             )
                                         )

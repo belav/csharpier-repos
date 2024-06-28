@@ -7763,7 +7763,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassString.nongenericStringArrayField = new string[] { "", "", "", " " };
 
@@ -7837,7 +7837,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassIntArray.nongenericStringArrayField = new string[] { "", "", "", " " };
 
@@ -7913,7 +7913,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassStringArray.nongenericStringArrayField = new string[] { "", "", "", " " };
 
@@ -8007,7 +8007,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassInt.nongenericStringArrayProperty = new string[] { "", "", "", " " };
 
@@ -8083,7 +8083,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassString.nongenericStringArrayProperty = new string[] { "", "", "", " " };
 
@@ -8161,7 +8161,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassIntArray.nongenericStringArrayProperty = new string[] { "", "", "", " " };
 
@@ -8242,7 +8242,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassStringArray.nongenericStringArrayProperty = new string[] { "", "", "", " " };
 
@@ -8364,7 +8364,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassInt.nongenericStringArrayVirtualProperty = new string[] { "", "", "", " " };
 
@@ -8442,7 +8442,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassString.nongenericStringArrayVirtualProperty = new string[] { "", "", "", " " };
 
@@ -8522,14 +8522,14 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassIntArray.nongenericStringArrayVirtualProperty = new string[]
         {
             "",
             "",
             "",
-            " "
+            " ",
         };
 
         if (
@@ -8611,14 +8611,14 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassStringArray.nongenericStringArrayVirtualProperty = new string[]
         {
             "",
             "",
             "",
-            " "
+            " ",
         };
 
         if (
@@ -8700,14 +8700,14 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassInheritsFromGenericClassInt.nongenericStringArrayVirtualProperty = new string[]
         {
             "",
             "",
             "",
-            " "
+            " ",
         };
 
         if (GenericClassInheritsFromGenericClassInt.genericVirtualProperty != Int32.MaxValue)
@@ -8786,7 +8786,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassInheritsFromGenericClassString.nongenericStringArrayVirtualProperty =
             new string[] { "", "", "", " " };
@@ -8869,7 +8869,7 @@ public class M
             4,
             2,
             1,
-            0
+            0,
         };
         GenericClassInheritsFromGenericClassIntArray.nongenericIntVirtualProperty = Int32.MinValue;
         GenericClassInheritsFromGenericClassIntArray.nongenericStringVirtualProperty = "";
@@ -8877,7 +8877,7 @@ public class M
         {
             0,
             Int32.MaxValue,
-            Int32.MinValue
+            Int32.MinValue,
         };
         GenericClassInheritsFromGenericClassIntArray.nongenericStringArrayVirtualProperty =
             new string[] { "", "", "", " " };
@@ -8964,7 +8964,7 @@ public class M
             " ",
             "",
             "",
-            " "
+            " ",
         };
         GenericClassInheritsFromGenericClassStringArray.nongenericIntVirtualProperty =
             Int32.MinValue;

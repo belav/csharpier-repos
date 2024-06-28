@@ -19,7 +19,7 @@ namespace System.ComponentModel
             {
                 new TestAttribute(),
                 new DerivedAttribute(),
-                new DerivedDerivedAttribute()
+                new DerivedDerivedAttribute(),
             };
             _collection = new AttributeCollection(_testAttributes);
             _list = new AttributeList(_collection);

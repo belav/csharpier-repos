@@ -429,18 +429,15 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 ExpressionKind.GreaterThan => PREDEFMETH.PM_EXPRESSION_GREATERTHAN,
                 ExpressionKind.Modulo => PREDEFMETH.PM_EXPRESSION_MODULO,
                 ExpressionKind.Divide => PREDEFMETH.PM_EXPRESSION_DIVIDE,
-                ExpressionKind.Multiply =>
-                    expr.isChecked()
-                        ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
-                        : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
-                ExpressionKind.Subtract =>
-                    expr.isChecked()
-                        ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
-                        : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
-                ExpressionKind.Add =>
-                    expr.isChecked()
-                        ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
-                        : PREDEFMETH.PM_EXPRESSION_ADD,
+                ExpressionKind.Multiply => expr.isChecked()
+                    ? PREDEFMETH.PM_EXPRESSION_MULTIPLYCHECKED
+                    : PREDEFMETH.PM_EXPRESSION_MULTIPLY,
+                ExpressionKind.Subtract => expr.isChecked()
+                    ? PREDEFMETH.PM_EXPRESSION_SUBTRACTCHECKED
+                    : PREDEFMETH.PM_EXPRESSION_SUBTRACT,
+                ExpressionKind.Add => expr.isChecked()
+                    ? PREDEFMETH.PM_EXPRESSION_ADDCHECKED
+                    : PREDEFMETH.PM_EXPRESSION_ADD,
 
                 _ => throw Error.InternalCompilerError(),
             };

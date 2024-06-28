@@ -10,7 +10,7 @@ namespace MonoTests.Controls
     public enum EnumConverterTestValues
     {
         FlagOne = 0x01,
-        FlagTwo = 0x02
+        FlagTwo = 0x02,
     }
 
     public class EnumConverterTestValuesConverter : EnumConverter

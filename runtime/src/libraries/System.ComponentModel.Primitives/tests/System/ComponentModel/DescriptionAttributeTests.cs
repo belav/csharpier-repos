@@ -53,7 +53,7 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new DescriptionAttribute("description2"),
-                false
+                false,
             };
             yield return new object[] { attribute, new DescriptionAttribute(""), false };
             // .NET Framework throws a NullReferenceException.
@@ -69,19 +69,19 @@ namespace System.ComponentModel.Tests
                 {
                     new DescriptionAttribute(null),
                     new DescriptionAttribute(null),
-                    true
+                    true,
                 };
                 yield return new object[]
                 {
                     new DescriptionAttribute(null),
                     new DescriptionAttribute("description"),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     new DescriptionAttribute(null),
                     new DescriptionAttribute(""),
-                    false
+                    false,
                 };
             }
 
@@ -89,7 +89,7 @@ namespace System.ComponentModel.Tests
             {
                 new DescriptionAttribute("description"),
                 new object(),
-                false
+                false,
             };
             yield return new object[] { new DescriptionAttribute("description"), null, false };
             yield return new object[] { new DescriptionAttribute(null), new object(), false };

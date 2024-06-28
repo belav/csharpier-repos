@@ -25,7 +25,7 @@ public class ByteArrayModelBinderIntegrationTest
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo(),
-            ParameterType = typeof(Person)
+            ParameterType = typeof(Person),
         };
 
         var prefix = fallBackScenario ? string.Empty : "Parameter1";
@@ -73,9 +73,9 @@ public class ByteArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter", },
+            BindingInfo = new BindingInfo() { BinderModelName = "CustomParameter" },
 
-            ParameterType = typeof(byte[])
+            ParameterType = typeof(byte[]),
         };
 
         // No data is passed.
@@ -103,8 +103,8 @@ public class ByteArrayModelBinderIntegrationTest
         var parameter = new ParameterDescriptor
         {
             Name = "Parameter1",
-            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter", },
-            ParameterType = typeof(byte[])
+            BindingInfo = new BindingInfo { BinderModelName = "CustomParameter" },
+            ParameterType = typeof(byte[]),
         };
 
         // any valid base64 string

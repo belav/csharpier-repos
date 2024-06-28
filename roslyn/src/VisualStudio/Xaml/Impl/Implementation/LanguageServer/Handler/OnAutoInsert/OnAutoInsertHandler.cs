@@ -80,8 +80,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 TextEdit = new TextEdit
                 {
                     NewText = insertText,
-                    Range = ProtocolConversions.TextSpanToRange(result.TextChange.Span, text)
-                }
+                    Range = ProtocolConversions.TextSpanToRange(result.TextChange.Span, text),
+                },
             };
         }
     }

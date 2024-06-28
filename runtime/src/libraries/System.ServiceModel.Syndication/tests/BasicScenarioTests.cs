@@ -390,8 +390,8 @@ namespace System.ServiceModel.Syndication.Tests
                             | XmlDiffOption.IgnorePrefix
                             | XmlDiffOption.IgnoreWhitespace
                             | XmlDiffOption.IgnoreChildOrder
-                            | XmlDiffOption.IgnoreAttributeOrder
-                    }
+                            | XmlDiffOption.IgnoreAttributeOrder,
+                    },
                 };
 
                 string diffNode = string.Empty;
@@ -552,8 +552,8 @@ namespace System.ServiceModel.Syndication.Tests
                             | XmlDiffOption.IgnorePrefix
                             | XmlDiffOption.IgnoreWhitespace
                             | XmlDiffOption.IgnoreChildOrder
-                            | XmlDiffOption.IgnoreAttributeOrder
-                    }
+                            | XmlDiffOption.IgnoreAttributeOrder,
+                    },
                 };
 
                 string diffNode = string.Empty;
@@ -626,9 +626,9 @@ namespace System.ServiceModel.Syndication.Tests
                             | XmlDiffOption.IgnorePrefix
                             | XmlDiffOption.IgnoreWhitespace
                             | XmlDiffOption.IgnoreChildOrder
-                            | XmlDiffOption.IgnoreAttributeOrder
+                            | XmlDiffOption.IgnoreAttributeOrder,
                     },
-                    AllowableDifferences = allowableDifferences
+                    AllowableDifferences = allowableDifferences,
                 };
 
                 string diffNode = string.Empty;

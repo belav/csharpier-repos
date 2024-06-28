@@ -133,7 +133,7 @@ public static class DynamicMethodJumpStubTests
         LARGE_PAGES = 0x20000000,
         PHYSICAL = 0x400000,
         TOP_DOWN = 0x100000,
-        WRITE_WATCH = 0x200000
+        WRITE_WATCH = 0x200000,
     }
 
     [Flags]
@@ -149,7 +149,7 @@ public static class DynamicMethodJumpStubTests
         WRITECOPY = 0x08,
         GUARD_Modifierflag = 0x100,
         NOCACHE_Modifierflag = 0x200,
-        WRITECOMBINE_Modifierflag = 0x400
+        WRITECOMBINE_Modifierflag = 0x400,
     }
 
     [DllImport("kernel32.dll", SetLastError = true)]

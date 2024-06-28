@@ -33,7 +33,7 @@ namespace System.Web.UI.Design.MobileControls
         private static Type[] _editorPages = new Type[]
         {
             typeof(ListGeneralPage),
-            typeof(ListItemsPage)
+            typeof(ListItemsPage),
         };
 
         internal const int IDX_GENERAL = 0;

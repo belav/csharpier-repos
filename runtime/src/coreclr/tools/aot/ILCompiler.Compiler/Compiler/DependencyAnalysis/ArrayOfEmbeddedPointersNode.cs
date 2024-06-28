@@ -103,7 +103,7 @@ namespace ILCompiler.DependencyAnalysis
                 return new[]
                 {
                     new DependencyListEntry(Target, "reloc"),
-                    new DependencyListEntry(_parentNode, "Pointer region")
+                    new DependencyListEntry(_parentNode, "Pointer region"),
                 };
             }
 

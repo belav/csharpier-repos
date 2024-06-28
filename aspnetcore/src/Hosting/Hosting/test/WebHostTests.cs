@@ -89,7 +89,7 @@ public partial class WebHostTests
         var data = new Dictionary<string, string>
         {
             { "server.urls", "http://localhost:5003" },
-            { "urls", "http://localhost:5009" }
+            { "urls", "http://localhost:5009" },
         };
 
         var config = new ConfigurationBuilder().AddInMemoryCollection(data).Build();

@@ -96,7 +96,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 0x6F,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
             Pkcs9DocumentDescription dd = new Pkcs9DocumentDescription(desc);
             Assert.AreEqual("1.3.6.1.4.1.311.88.2.2", dd.Oid.Value, "Oid.Value");

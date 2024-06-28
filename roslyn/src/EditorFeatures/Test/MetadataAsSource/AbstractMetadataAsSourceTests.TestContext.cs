@@ -162,9 +162,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.MetadataAsSource
                                     new CodeStyleOption2<NamespaceDeclarationPreference>(
                                         NamespaceDeclarationPreference.FileScoped,
                                         NotificationOption2.Silent
-                                    )
-                            }
-                        }
+                                    ),
+                            },
+                        },
                     };
                 }
 

@@ -18,7 +18,7 @@ public class GetCurrentOpenApiReferenceTest
             + "CodeGenerator=NSwagCSharp|Namespace=ConsoleClient|Options=|OutputPath="
             + "C:\\dd\\dnx\\AspNetCore\\artifacts\\obj\\ConsoleClient\\azureMonitorClient.cs|"
             + "OriginalItemSpec=../files/azureMonitor.json|FirstForGenerator=true";
-        var task = new GetCurrentOpenApiReference { Input = input, };
+        var task = new GetCurrentOpenApiReference { Input = input };
 
         var expectedIdentity = "../files/azureMonitor.json";
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)

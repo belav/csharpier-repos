@@ -69,7 +69,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
         M(3, 4);
     }
 #endif
-}"
+}",
                 },
                 @"public class Class1
 {
@@ -148,7 +148,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.LinkedFileDiffMerging
         Method();
     }
 #endif
-}"
+}",
                 },
                 @"public class Class1
 {

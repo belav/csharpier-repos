@@ -15,7 +15,7 @@ namespace System.ComponentModel.Annotations.Tests
         {
             var attribute = new RegularExpressionAttribute("SomePattern")
             {
-                MatchTimeoutInMilliseconds = newValue
+                MatchTimeoutInMilliseconds = newValue,
             };
             Assert.Equal(TimeSpan.FromMilliseconds(newValue), attribute.MatchTimeout);
         }

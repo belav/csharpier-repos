@@ -64,7 +64,7 @@ End Class
                         );
                         Assert.Equal(expected: 4, actual: reference.GetLine());
                         Assert.Equal(expected: 24, actual: reference.GetColumn());
-                    }
+                    },
                 }
             );
         }
@@ -133,7 +133,7 @@ End Class
                         );
                         Assert.Equal(expected: 3, actual: reference.GetLine());
                         Assert.Equal(expected: 34, actual: reference.GetColumn());
-                    }
+                    },
                 }
             );
 

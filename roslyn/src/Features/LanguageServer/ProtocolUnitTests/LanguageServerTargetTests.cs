@@ -115,7 +115,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                 {
                     Text = "sometext",
                     Uri = ProtocolConversions.CreateAbsoluteUri(@"C:\location\file.json"),
-                }
+                },
             };
 
             // We just want this to not throw.
@@ -141,7 +141,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                 {
                     Text = "sometext",
                     Uri = ProtocolConversions.CreateAbsoluteUri(@"C:\location\file.json"),
-                }
+                },
             };
             var ex = await Assert.ThrowsAsync<RemoteInvocationException>(
                 async () =>

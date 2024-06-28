@@ -40,7 +40,7 @@ public class Startup
                     {
                         // context.SkipHandler();
                         return Task.CompletedTask;
-                    }
+                    },
                 };
             });
     }

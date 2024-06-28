@@ -22,15 +22,15 @@ public class SelectTagHelperTest
         {
             var modelWithNull = new Model
             {
-                NestedModel = new NestedModel { Text = null, },
+                NestedModel = new NestedModel { Text = null },
                 Text = null,
             };
             var modelWithText = new Model
             {
-                NestedModel = new NestedModel { Text = "inner text", },
+                NestedModel = new NestedModel { Text = "inner text" },
                 Text = "outer text",
             };
-            var models = new List<Model> { modelWithNull, modelWithText, };
+            var models = new List<Model> { modelWithNull, modelWithText };
             var noneSelected =
                 "<option></option>"
                 + Environment.NewLine
@@ -224,7 +224,7 @@ public class SelectTagHelperTest
     )
     {
         // Arrange
-        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var originalPostContent = "original content";
 
         var expectedAttributes = new TagHelperAttributeList(originalAttributes)
@@ -275,7 +275,7 @@ public class SelectTagHelperTest
 
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider)
         {
-            ValidationAttributes = { { "valid", "from validation attributes" }, }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
         var viewContext = TestableHtmlGenerator.GetViewContext(
             model,
@@ -314,7 +314,7 @@ public class SelectTagHelperTest
     )
     {
         // Arrange
-        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var originalPostContent = "original content";
 
         var expectedAttributes = new TagHelperAttributeList(originalAttributes)
@@ -366,7 +366,7 @@ public class SelectTagHelperTest
 
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider)
         {
-            ValidationAttributes = { { "valid", "from validation attributes" }, }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
         var viewContext = TestableHtmlGenerator.GetViewContext(
             model,
@@ -416,7 +416,7 @@ public class SelectTagHelperTest
     public async Task ProcessAsync_WithItems_AndNoModelExpression_GeneratesExpectedOutput()
     {
         // Arrange
-        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var originalPostContent = "original content";
 
         var expectedAttributes = new TagHelperAttributeList(originalAttributes);
@@ -506,7 +506,7 @@ public class SelectTagHelperTest
     )
     {
         // Arrange
-        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" }, };
+        var originalAttributes = new TagHelperAttributeList { { "class", "form-control" } };
         var originalPostContent = "original content";
 
         var expectedAttributes = new TagHelperAttributeList(originalAttributes)
@@ -558,7 +558,7 @@ public class SelectTagHelperTest
 
         var htmlGenerator = new TestableHtmlGenerator(metadataProvider)
         {
-            ValidationAttributes = { { "valid", "from validation attributes" }, }
+            ValidationAttributes = { { "valid", "from validation attributes" } },
         };
         var viewContext = TestableHtmlGenerator.GetViewContext(
             model,
@@ -619,7 +619,7 @@ public class SelectTagHelperTest
             // Provided for completeness. Select tag helper does not confirm AllAttributes set is consistent.
             { attributeName, attributeValue },
         };
-        var originalAttributes = new TagHelperAttributeList { { attributeName, attributeValue }, };
+        var originalAttributes = new TagHelperAttributeList { { attributeName, attributeValue } };
         var propertyName = "Property1";
         var expectedTagName = "select";
 
@@ -863,7 +863,7 @@ public class SelectTagHelperTest
             ViewContext = viewContext,
         };
 
-        var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue }, };
+        var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue } };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
         var output = new TagHelperOutput(
@@ -917,7 +917,7 @@ public class SelectTagHelperTest
             ViewContext = viewContext,
         };
 
-        var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue }, };
+        var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue } };
 
         var tagHelperContext = new TagHelperContext(
             attributes,

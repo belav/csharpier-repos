@@ -111,7 +111,7 @@ namespace MonoTests
                         Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                         app
                     ),
-                    method ?? ""
+                    method ?? "",
                 }
             );
             return pi;
@@ -943,7 +943,7 @@ namespace MonoTests
             // Add an assembly filter
             req.AssemblyFilter = new AssemblyMirror[]
             {
-                (e as BreakpointEvent).Method.DeclaringType.Assembly
+                (e as BreakpointEvent).Method.DeclaringType.Assembly,
             };
             req.Enable();
 
@@ -1003,7 +1003,7 @@ namespace MonoTests
             step_req.Disable();
             step_req.AssemblyFilter = new AssemblyMirror[]
             {
-                (e as BreakpointEvent).Method.DeclaringType.Assembly
+                (e as BreakpointEvent).Method.DeclaringType.Assembly,
             };
             assert_location(step_into(), "ss7_3"); //call "throw new Exception ();", we assume we end up at "catch"
             assert_location(step_into(), "ss7_3"); //move to { of catch
@@ -1318,7 +1318,7 @@ namespace MonoTests
             create_step(e);
             step_req.AssemblyFilter = new List<AssemblyMirror>()
             {
-                entry_point.DeclaringType.Assembly
+                entry_point.DeclaringType.Assembly,
             };
             var ef = step_into();
             assert_location(ef, method);
@@ -1332,7 +1332,7 @@ namespace MonoTests
             create_step(e);
             step_req.AssemblyFilter = new List<AssemblyMirror>()
             {
-                entry_point.DeclaringType.Assembly
+                entry_point.DeclaringType.Assembly,
             };
             var ef = step_over();
             assert_location(ef, method);
@@ -1346,7 +1346,7 @@ namespace MonoTests
             create_step(e);
             step_req.AssemblyFilter = new List<AssemblyMirror>()
             {
-                entry_point.DeclaringType.Assembly
+                entry_point.DeclaringType.Assembly,
             };
             var ef = step_out();
             assert_location(ef, method);
@@ -3265,7 +3265,7 @@ namespace MonoTests
                 vm.CreateValue('A'),
                 vm.CreateValue(true),
                 vm.CreateValue(3.14f),
-                vm.CreateValue(3.14)
+                vm.CreateValue(3.14),
             };
 
             v = this_obj.InvokeMethod(e.Thread, m, args);

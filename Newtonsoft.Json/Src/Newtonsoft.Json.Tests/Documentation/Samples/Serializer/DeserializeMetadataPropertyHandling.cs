@@ -61,7 +61,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                     {
                         TypeNameHandling = TypeNameHandling.All,
                         // $type no longer needs to be first
-                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead
+                        MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
                     }
                 );
 

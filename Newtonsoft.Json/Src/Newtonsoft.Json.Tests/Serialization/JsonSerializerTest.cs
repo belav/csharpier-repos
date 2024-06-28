@@ -500,8 +500,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 RoleNames = new Dictionary<string, bool>
                 {
                     { "IsAdmin", true },
-                    { "IsModerator", false }
-                }
+                    { "IsModerator", false },
+                },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -509,7 +509,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new DictionaryKeyContractResolver()
+                    ContractResolver = new DictionaryKeyContractResolver(),
                 }
             );
 
@@ -653,7 +653,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 IgnoredProperty = v,
                 IgnoredList = new List<Version> { v },
                 IgnoredDictionary = new Dictionary<string, Version> { { "Value", v } },
-                Name = "Name!"
+                Name = "Name!",
             };
 
             string json = JsonConvert.SerializeObject(
@@ -661,7 +661,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new IgnoredPropertiesContractResolver()
+                    ContractResolver = new IgnoredPropertiesContractResolver(),
                 }
             );
 
@@ -702,7 +702,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     deserializeJson,
                     new JsonSerializerSettings
                     {
-                        ContractResolver = new IgnoredPropertiesContractResolver()
+                        ContractResolver = new IgnoredPropertiesContractResolver(),
                     }
                 );
 
@@ -764,7 +764,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         {
             CustomerWithMetadataType c = new CustomerWithMetadataType()
             {
-                UpdatedBy_Id = Guid.NewGuid()
+                UpdatedBy_Id = Guid.NewGuid(),
             };
             string json = JsonConvert.SerializeObject(c);
 
@@ -964,7 +964,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Message = "Trying out integer as type parameter",
                 Data = 25,
-                Result = "This should be fine"
+                Result = "This should be fine",
             };
 
             var json = JsonConvert.SerializeObject(input);
@@ -984,7 +984,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Message = "Trying out integer as type parameter",
                 Data = 25,
-                Result = "This should be fine"
+                Result = "This should be fine",
             };
 
             var json = JsonConvert.SerializeObject(input);
@@ -1004,7 +1004,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Message = "Trying out integer as type parameter",
                 Data = 25,
-                Result = "This should be fine"
+                Result = "This should be fine",
             };
 
             var json = JsonConvert.SerializeObject(input);
@@ -1024,7 +1024,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 Message = "More complex case - generic list of int",
                 Data = Enumerable.Range(50, 70).ToList(),
-                Result = "This should be fine too"
+                Result = "This should be fine too",
             };
 
             var json = JsonConvert.SerializeObject(input);
@@ -1550,7 +1550,7 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void PreserveReferencesCallbackTest()
         {
             var p1 = new PersonReference { Name = "John Smith" };
-            var p2 = new PersonReference { Name = "Mary Sue", };
+            var p2 = new PersonReference { Name = "Mary Sue" };
 
             p1.Spouse = p2;
             p2.Spouse = p1;
@@ -1561,7 +1561,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             var settings = new JsonSerializerSettings
             {
                 PreserveReferencesHandling = PreserveReferencesHandling.All,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(obj, settings);
@@ -1700,7 +1700,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             var original = new Foo1<Bar1>
             {
                 foo = new Bar1 { bar = "value" },
-                foo2 = new Bar1 { bar = "value2" }
+                foo2 = new Bar1 { bar = "value2" },
             };
             var json = JsonConvert.SerializeObject(original);
             var expectedJson = @"{""foo"":{""bar"":""value""},""foo2"":{""bar"":""value2""}}";
@@ -1756,7 +1756,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 VirtualMember = "VirtualMember!",
                 NonVirtualMember = "NonVirtualMember!",
-                NewMember = "NewMember!"
+                NewMember = "NewMember!",
             };
 
             string result = JsonConvert.SerializeObject(cc);
@@ -1774,7 +1774,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JustAProperty = "JustAProperty!",
                 Virtual = "Virtual!",
                 VirtualWithDataMember = "VirtualWithDataMember!",
-                WithDataMember = "WithDataMember!"
+                WithDataMember = "WithDataMember!",
             };
 
             baseWith.JustAProperty = "JustAProperty2!";
@@ -1805,7 +1805,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JustAProperty = "JustAProperty!",
                 Virtual = "Virtual!",
                 VirtualWithDataMember = "VirtualWithDataMember!",
-                WithDataMember = "WithDataMember!"
+                WithDataMember = "WithDataMember!",
             };
 
             baseWith.JustAProperty = "JustAProperty2!";
@@ -1834,7 +1834,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JustAProperty = "JustAProperty!",
                 Virtual = "Virtual!",
                 VirtualWithDataMember = "VirtualWithDataMember!",
-                WithDataMember = "WithDataMember!"
+                WithDataMember = "WithDataMember!",
             };
 
             baseWith.JustAProperty = "JustAProperty2!";
@@ -1867,7 +1867,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 JustAProperty = "JustAProperty!",
                 Virtual = "Virtual!",
                 VirtualWithDataMember = "VirtualWithDataMember!",
-                WithDataMember = "WithDataMember!"
+                WithDataMember = "WithDataMember!",
             };
 
             baseWith.JustAProperty = "JustAProperty2!";
@@ -2036,7 +2036,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 "21321546",
                 "101",
                 "1236",
-                "D:\\1.txt"
+                "D:\\1.txt",
             };
             executorObject.clientGetResultFunction = "ClientBanSubsCB";
 
@@ -2344,7 +2344,7 @@ keyword such as type of business.""
                 testDates,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
             Assert.AreEqual(expected, result);
@@ -2383,7 +2383,7 @@ keyword such as type of business.""
                 testDates,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
             Assert.AreEqual(
@@ -2420,7 +2420,7 @@ keyword such as type of business.""
                 IntValue = int.MaxValue,
                 NestedAnonymous = new { NestedValue = byte.MaxValue },
                 NestedArray = new[] { 1, 2 },
-                Product = new Product() { Name = "TestProduct" }
+                Product = new Product() { Name = "TestProduct" },
             };
 
             string json = JsonConvert.SerializeObject(anonymous);
@@ -2642,7 +2642,7 @@ keyword such as type of business.""
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
             string indented = JsonConvert.SerializeObject(obj, settings);
 
@@ -2780,7 +2780,7 @@ keyword such as type of business.""
             MemberConverterClass m1 = new MemberConverterClass
             {
                 DefaultConverter = testDate,
-                MemberConverter = testDate
+                MemberConverter = testDate,
             };
 
             string json = JsonConvert.SerializeObject(m1);
@@ -2805,14 +2805,14 @@ keyword such as type of business.""
             MemberConverterClass m1 = new MemberConverterClass
             {
                 DefaultConverter = testDate,
-                MemberConverter = testDate
+                MemberConverter = testDate,
             };
 
             string json = JsonConvert.SerializeObject(
                 m1,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
             Assert.AreEqual(
@@ -2836,7 +2836,7 @@ keyword such as type of business.""
             MemberConverterClass m1 = new MemberConverterClass
             {
                 DefaultConverter = testDate,
-                MemberConverter = testDate
+                MemberConverter = testDate,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -2870,15 +2870,12 @@ keyword such as type of business.""
             MemberConverterClass m1 = new MemberConverterClass
             {
                 DefaultConverter = testDate,
-                MemberConverter = testDate
+                MemberConverter = testDate,
             };
 
             string json = JsonConvert.SerializeObject(
                 m1,
-                new JsonSerializerSettings
-                {
-                    DateFormatHandling = DateFormatHandling.IsoDateFormat,
-                }
+                new JsonSerializerSettings { DateFormatHandling = DateFormatHandling.IsoDateFormat }
             );
             Assert.AreEqual(
                 @"{""DefaultConverter"":""1970-01-01T00:00:00Z"",""MemberConverter"":""1970-01-01T00:00:00Z""}",
@@ -2901,7 +2898,7 @@ keyword such as type of business.""
             MemberConverterClass m1 = new MemberConverterClass
             {
                 DefaultConverter = testDate,
-                MemberConverter = testDate
+                MemberConverter = testDate,
             };
 
             string json = JsonConvert.SerializeObject(m1, new JavaScriptDateTimeConverter());
@@ -2927,7 +2924,7 @@ keyword such as type of business.""
             MemberConverterClass c = new MemberConverterClass
             {
                 DefaultConverter = date,
-                MemberConverter = date
+                MemberConverter = date,
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -3006,7 +3003,7 @@ keyword such as type of business.""
             {
                 FirstName = "FirstNameValue",
                 RawContent = new JRaw("[1,2,3,4,5]"),
-                LastName = "LastNameValue"
+                LastName = "LastNameValue",
             };
 
             string json;
@@ -3042,7 +3039,7 @@ keyword such as type of business.""
                 RoleId = 5,
                 NullableRoleId = 6,
                 NullRoleId = null,
-                Active = true
+                Active = true,
             };
 
             string json = JsonConvert.SerializeObject(userNullablle);
@@ -3107,7 +3104,7 @@ keyword such as type of business.""
                 BirthDate = new DateTime(2000, 12, 20, 10, 55, 55, DateTimeKind.Utc),
                 FirstName = "Bob",
                 LastName = "Smith",
-                MiddleName = "Cosmo"
+                MiddleName = "Cosmo",
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -3183,7 +3180,7 @@ keyword such as type of business.""
                         FirstName = null,
                         BirthDate = new DateTime(2000, 10, 10, 10, 10, 10, DateTimeKind.Utc),
                         LastName = null,
-                        MiddleName = null
+                        MiddleName = null,
                     };
 
                     string json = JsonConvert.SerializeObject(requiredMembersClass);
@@ -3224,7 +3221,7 @@ keyword such as type of business.""
                 new[] { 1, 1 },
                 new[] { 1, 2 },
                 new[] { 2, 1 },
-                new[] { 2, 2 }
+                new[] { 2, 2 },
             };
 
             string json = JsonConvert.SerializeObject(aa);
@@ -3327,7 +3324,7 @@ keyword such as type of business.""
                 Name = "Mike Manager",
                 BirthDate = new DateTime(1983, 8, 3, 0, 0, 0, DateTimeKind.Utc),
                 Department = "IT",
-                LastModified = new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc)
+                LastModified = new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc),
             };
             return person;
         }
@@ -3338,7 +3335,7 @@ keyword such as type of business.""
             LogEntry entry = new LogEntry
             {
                 LogDate = new DateTime(2009, 2, 15, 0, 0, 0, DateTimeKind.Utc),
-                Details = "Application started."
+                Details = "Application started.",
             };
 
             string defaultJson = JsonConvert.SerializeObject(entry);
@@ -3376,7 +3373,7 @@ keyword such as type of business.""
             {
                 { "one", 1 },
                 { "two", 2 },
-                { "three", 3 }
+                { "three", 3 },
             };
             o.IListProperty = new List<int> { 1, 2, 3 };
             o.IEnumerableProperty = new List<int> { 4, 5, 6 };
@@ -3452,7 +3449,7 @@ keyword such as type of business.""
                     json,
                     new JsonSerializerSettings
                     {
-                        DefaultValueHandling = DefaultValueHandling.Populate
+                        DefaultValueHandling = DefaultValueHandling.Populate,
                     }
                 );
             Assert.AreEqual("value", c.TestProperty1);
@@ -3462,7 +3459,7 @@ keyword such as type of business.""
                 json,
                 new JsonSerializerSettings
                 {
-                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+                    DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate,
                 }
             );
             Assert.AreEqual("value", c.TestProperty1);
@@ -3520,7 +3517,7 @@ keyword such as type of business.""
                 i,
                 new JsonSerializerSettings
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
 
@@ -3533,7 +3530,7 @@ keyword such as type of business.""
                 json,
                 new JsonSerializerSettings
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
 
@@ -3541,7 +3538,7 @@ keyword such as type of business.""
                 ii,
                 new JsonSerializerSettings
                 {
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
             Assert.AreEqual(
@@ -3618,7 +3615,7 @@ keyword such as type of business.""
                         Formatting.Indented,
                         new JsonSerializerSettings
                         {
-                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                            ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                         }
                     );
                 },
@@ -3732,7 +3729,7 @@ keyword such as type of business.""
                 json,
                 new JsonSerializerSettings
                 {
-                    ObjectCreationHandling = ObjectCreationHandling.Replace
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
                 }
             );
 
@@ -3870,8 +3867,8 @@ keyword such as type of business.""
                 Children = new List<Content>
                 {
                     new Content { Text = "First" },
-                    new Content { Text = "Second" }
-                }
+                    new Content { Text = "Second" },
+                },
             };
 
             string json = JsonConvert.SerializeObject(content, Formatting.Indented);
@@ -4208,7 +4205,7 @@ Path '', line 1, position 1."
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                                 IgnoreSerializableAttribute = true
 #endif
-                            }
+                            },
                         }
                     );
                 },
@@ -4231,7 +4228,7 @@ Path '', line 1, position 1."
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                                 IgnoreSerializableAttribute = true
 #endif
-                            }
+                            },
                         }
                     );
                 },
@@ -4254,7 +4251,7 @@ Path '', line 1, position 1."
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                                 IgnoreSerializableAttribute = true
 #endif
-                            }
+                            },
                         }
                     );
                 },
@@ -4277,7 +4274,7 @@ Path '', line 1, position 1."
 #if !(PORTABLE || DNXCORE50 || PORTABLE40) || NETSTANDARD1_3 || NETSTANDARD2_0 || NET6_0_OR_GREATER
                                 IgnoreSerializableAttribute = true
 #endif
-                            }
+                            },
                         }
                     );
                 },
@@ -4326,7 +4323,7 @@ Path '', line 1, position 1."
                 StringProperty = "StringProperty!",
                 StringField = "StringField",
                 IntProperty = 5,
-                IntField = 10
+                IntField = 10,
             };
 
             string json = JsonConvert.SerializeObject(structTest, Formatting.Indented);
@@ -4582,7 +4579,7 @@ Path '', line 1, position 1."
                 {
                     Id = 1,
                     Key = "key1",
-                    Value = "value1"
+                    Value = "value1",
                 }
             );
             g.Add(
@@ -4590,7 +4587,7 @@ Path '', line 1, position 1."
                 {
                     Id = 2,
                     Key = "key2",
-                    Value = "value2"
+                    Value = "value2",
                 }
             );
 
@@ -4660,7 +4657,7 @@ Path '', line 1, position 1."
                         new JsonSerializerSettings
                         {
                             PreserveReferencesHandling = PreserveReferencesHandling.All,
-                            MetadataPropertyHandling = MetadataPropertyHandling.Default
+                            MetadataPropertyHandling = MetadataPropertyHandling.Default,
                         }
                     ),
                 "Cannot preserve reference to readonly dictionary, or dictionary created from a non-default constructor: Newtonsoft.Json.Tests.TestObjects.DictionaryWithNoDefaultConstructor. Path 'key1', line 1, position 16."
@@ -4696,7 +4693,7 @@ Path '', line 1, position 1."
                 new JsonSerializerSettings
                 {
                     DateParseHandling = DateParseHandling.DateTimeOffset,
-                    Converters = { new IsoDateTimeConverter() }
+                    Converters = { new IsoDateTimeConverter() },
                 }
             );
             DateTimeOffsetWrapper c = JsonConvert.DeserializeObject<DateTimeOffsetWrapper>(
@@ -4723,7 +4720,7 @@ Path '', line 1, position 1."
                 new JsonSerializerSettings
                 {
                     ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -4770,7 +4767,7 @@ Path '', line 1, position 1."
             {
                 TimeSpanProperty = new TimeSpan(200, 20, 59, 30, 900),
                 GuidProperty = new Guid("66143115-BE2A-4a59-AF0A-348E1EA15B1E"),
-                AnimalProperty = new Human() { Ethnicity = "European" }
+                AnimalProperty = new Human() { Ethnicity = "European" },
             };
             MemoryStream ms = new MemoryStream();
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(
@@ -4830,8 +4827,8 @@ Path '', line 1, position 1."
                     {
                         ContractResolver = new DefaultContractResolver
                         {
-                            IgnoreSerializableInterface = true
-                        }
+                            IgnoreSerializableInterface = true,
+                        },
                     }
                 );
 
@@ -4843,8 +4840,8 @@ Path '', line 1, position 1."
                     {
                         ContractResolver = new DefaultContractResolver
                         {
-                            IgnoreSerializableInterface = true
-                        }
+                            IgnoreSerializableInterface = true,
+                        },
                     }
                 );
 
@@ -5027,7 +5024,7 @@ Path '', line 1, position 1."
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
             StringAssert.AreEqual(
@@ -5449,7 +5446,7 @@ Path '', line 1, position 1."
             ClientMap source = new ClientMap()
             {
                 position = new Pos() { X = 100, Y = 200 },
-                center = new PosDouble() { X = 251.6, Y = 361.3 }
+                center = new PosDouble() { X = 251.6, Y = 361.3 },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -5700,8 +5697,8 @@ Path '', line 1, position 1."
                 {
                     { "1", "One" },
                     { "2", "II" },
-                    { "3", "3" }
-                }
+                    { "3", "3" },
+                },
             };
 
             string json = JsonConvert.SerializeObject(s1, Formatting.Indented);
@@ -5760,7 +5757,7 @@ Path '', line 1, position 1."
             var serializeObject = JsonConvert.SerializeObject(
                 new TimeZoneOffsetObject
                 {
-                    Offset = new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(6))
+                    Offset = new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(6)),
                 }
             );
 
@@ -5768,7 +5765,7 @@ Path '', line 1, position 1."
 
             JsonTextReader reader = new JsonTextReader(new StringReader(serializeObject))
             {
-                DateParseHandling = DateParseHandling.None
+                DateParseHandling = DateParseHandling.None,
             };
             JsonSerializer serializer = new JsonSerializer();
 
@@ -5796,12 +5793,12 @@ Path '', line 1, position 1."
             var serializeObject = JsonConvert.SerializeObject(
                 new TimeZoneOffsetObject
                 {
-                    Offset = new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(6))
+                    Offset = new DateTimeOffset(new DateTime(2000, 1, 1), TimeSpan.FromHours(6)),
                 },
                 Formatting.None,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
 
@@ -5947,7 +5944,7 @@ Path '', line 1, position 1."
             {
                 X = 1,
                 Y = 2,
-                Z = 3
+                Z = 3,
             };
 
             string str = JsonConvert.SerializeObject(obj);
@@ -5967,7 +5964,7 @@ Path '', line 1, position 1."
             var settings = new JsonSerializerSettings
             {
                 TypeNameHandling = TypeNameHandling.Objects,
-                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+                ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
             };
 
             string json = JsonConvert.SerializeObject(derived, Formatting.Indented, settings);
@@ -5986,12 +5983,12 @@ Path '', line 1, position 1."
                 new NullableStructPropertyClass()
                 {
                     Foo1 = new StructISerializable() { Name = "foo 1" },
-                    Foo2 = new StructISerializable() { Name = "foo 2" }
+                    Foo2 = new StructISerializable() { Name = "foo 2" },
                 };
             NullableStructPropertyClass barWithNull = new NullableStructPropertyClass()
             {
                 Foo1 = new StructISerializable() { Name = "foo 1" },
-                Foo2 = null
+                Foo2 = null,
             };
 
             //throws error on deserialization because bar1.Foo2 is of type Foo?
@@ -6014,7 +6011,7 @@ Path '', line 1, position 1."
                 new JsonSerializerSettings
                 {
                     NullValueHandling = NullValueHandling.Ignore,
-                    MissingMemberHandling = MissingMemberHandling.Ignore
+                    MissingMemberHandling = MissingMemberHandling.Ignore,
                 }
             );
         }
@@ -6029,7 +6026,7 @@ Path '', line 1, position 1."
                 Data = new JObject(
                     new JProperty("First", "Value1"),
                     new JProperty("Second", "Value2")
-                )
+                ),
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -6051,7 +6048,7 @@ Path '', line 1, position 1."
                 json,
                 new JsonSerializerSettings
                 {
-                    MetadataPropertyHandling = MetadataPropertyHandling.Default
+                    MetadataPropertyHandling = MetadataPropertyHandling.Default,
                 }
             );
 
@@ -6094,7 +6091,7 @@ Path '', line 1, position 1."
         {
             EnumerableClass c = new EnumerableClass
             {
-                Enumerable = new List<string> { "One", "Two", "Three" }
+                Enumerable = new List<string> { "One", "Two", "Three" },
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -6231,7 +6228,7 @@ Path '', line 1, position 1."
             ChildDataContract cc = new ChildDataContract
             {
                 VirtualMember = "VirtualMember!",
-                NonVirtualMember = "NonVirtualMember!"
+                NonVirtualMember = "NonVirtualMember!",
             };
 
             string result = JsonConvert.SerializeObject(cc, Formatting.Indented);
@@ -6256,7 +6253,7 @@ Path '', line 1, position 1."
             ChildDataContract cc = new ChildDataContract
             {
                 VirtualMember = "VirtualMember!",
-                NonVirtualMember = "NonVirtualMember!"
+                NonVirtualMember = "NonVirtualMember!",
             };
 
             DataContractSerializer serializer = new DataContractSerializer(
@@ -6281,7 +6278,7 @@ Path '', line 1, position 1."
             VirtualOverrideNewChildObject cc = new VirtualOverrideNewChildObject
             {
                 VirtualMember = "VirtualMember!",
-                NonVirtualMember = "NonVirtualMember!"
+                NonVirtualMember = "NonVirtualMember!",
             };
 
             string result = JsonConvert.SerializeObject(cc);
@@ -6298,7 +6295,7 @@ Path '', line 1, position 1."
                 new VirtualOverrideNewChildWithDifferentOverrideObject
                 {
                     VirtualMember = "VirtualMember!",
-                    NonVirtualMember = "NonVirtualMember!"
+                    NonVirtualMember = "NonVirtualMember!",
                 };
 
             string result = JsonConvert.SerializeObject(cc);
@@ -6314,7 +6311,7 @@ Path '', line 1, position 1."
             ImplementInterfaceObject cc = new ImplementInterfaceObject
             {
                 InterfaceMember = new DateTime(2010, 12, 31, 0, 0, 0, DateTimeKind.Utc),
-                NewMember = "NewMember!"
+                NewMember = "NewMember!",
             };
 
             string result = JsonConvert.SerializeObject(cc, Formatting.Indented);
@@ -6396,7 +6393,7 @@ Path '', line 1, position 1."
                 {
                     BaseClassValue = "BaseClassValue!",
                     DerivedClassValue = "DerivedClassValue!",
-                    NonSerialized = "NonSerialized!"
+                    NonSerialized = "NonSerialized!",
                 },
                 Formatting.Indented
             );
@@ -6413,7 +6410,7 @@ Path '', line 1, position 1."
                 new CollectionClassAttributeDerived
                 {
                     BaseClassValue = "BaseClassValue!",
-                    CollectionDerivedClassValue = "CollectionDerivedClassValue!"
+                    CollectionDerivedClassValue = "CollectionDerivedClassValue!",
                 },
                 Formatting.Indented
             );
@@ -6566,7 +6563,7 @@ Path '', line 1, position 1."
                 NullableGuid = new Guid("9E9F3ADF-E017-4F72-91E0-617EBE85967D"),
                 TimeSpan = TimeSpan.FromDays(1),
                 NullableTimeSpan = TimeSpan.FromHours(1),
-                Uri = new Uri("http://testuri.com")
+                Uri = new Uri("http://testuri.com"),
             };
             string json = JsonConvert.SerializeObject(c1, Formatting.Indented);
 
@@ -6850,7 +6847,7 @@ Path '', line 1, position 1."
             {
                 Integer = new ConvertibleInt(1),
                 NullableInteger1 = new ConvertibleInt(2),
-                NullableInteger2 = null
+                NullableInteger2 = null,
             };
 
             string json = JsonConvert.SerializeObject(c, Formatting.Indented);
@@ -6975,7 +6972,7 @@ Path '', line 1, position 1."
                 Latitude = 33.657145,
                 Longitude = -117.766684,
                 TimeStamp = new DateTime(2000, 3, 1, 23, 59, 59, DateTimeKind.Utc),
-                Payload = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }
+                Payload = new byte[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
             };
 
             string jsonString = JsonConvert.SerializeObject(expected, Formatting.Indented);
@@ -7156,7 +7153,7 @@ Path '', line 1, position 1."
                 {
                     "Value cannot be null." + Environment.NewLine + "Parameter name: value",
                     "Argument cannot be null." + Environment.NewLine + "Parameter name: value", // mono
-                    "Value cannot be null. (Parameter 'value')"
+                    "Value cannot be null. (Parameter 'value')",
                 }
             );
         }
@@ -7173,7 +7170,7 @@ Path '', line 1, position 1."
                 {
                     "Value cannot be null." + Environment.NewLine + "Parameter name: value",
                     "Argument cannot be null." + Environment.NewLine + "Parameter name: value", // mono
-                    "Value cannot be null. (Parameter 'value')"
+                    "Value cannot be null. (Parameter 'value')",
                 }
             );
         }
@@ -7281,7 +7278,7 @@ Path '', line 1, position 1."
                 Name = "Apple",
                 ExpiryDate = new DateTime(2012, 4, 1),
                 Price = 3.99M,
-                Sizes = new[] { "Small", "Medium", "Large" }
+                Sizes = new[] { "Small", "Medium", "Large" },
             };
 
             string json = JsonConvert.SerializeObject(product);
@@ -7298,7 +7295,7 @@ Path '', line 1, position 1."
                 {
                     ContractResolver = new MetroPropertyNameResolver(),
                     Converters = { new MetroStringConverter() },
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
             StringAssert.AreEqual(
@@ -7328,7 +7325,7 @@ Path '', line 1, position 1."
                 Color.Yellow,
                 Color.Green,
                 Color.Black,
-                Color.Brown
+                Color.Brown,
             };
 
             string json2 = JsonConvert.SerializeObject(
@@ -7337,7 +7334,7 @@ Path '', line 1, position 1."
                 {
                     ContractResolver = new MetroPropertyNameResolver(),
                     Converters = { new MetroStringConverter(), new MetroColorConverter() },
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -7396,7 +7393,7 @@ Path '', line 1, position 1."
             byte[] data = ms.ToArray();
             BsonReader reader = new BsonReader(new MemoryStream(data))
             {
-                ReadRootValueAsArray = true
+                ReadRootValueAsArray = true,
             };
 
             JArray a = (JArray)JArray.ReadFrom(reader);
@@ -7534,7 +7531,7 @@ Path '', line 1, position 1."
         {
             PropertyItemConverter c = new PropertyItemConverter
             {
-                Data = new[] { "one", "two", "three" }
+                Data = new[] { "one", "two", "three" },
             };
 
             var c2 = JsonConvert.DeserializeObject<PropertyItemConverter>(
@@ -7552,7 +7549,7 @@ Path '', line 1, position 1."
         {
             PropertyItemConverter c = new PropertyItemConverter
             {
-                Data = new[] { "one", "two", "three" }
+                Data = new[] { "one", "two", "three" },
             };
 
             string json = JsonConvert.SerializeObject(c);
@@ -7567,7 +7564,7 @@ Path '', line 1, position 1."
             IDictionary<DateTimeOffset, int> dic1 = new Dictionary<DateTimeOffset, int>
             {
                 { new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero), 1 },
-                { new DateTimeOffset(2013, 12, 12, 12, 12, 12, TimeSpan.Zero), 2 }
+                { new DateTimeOffset(2013, 12, 12, 12, 12, 12, TimeSpan.Zero), 2 },
             };
 
             string json = JsonConvert.SerializeObject(dic1, Formatting.Indented);
@@ -7595,7 +7592,7 @@ Path '', line 1, position 1."
             IDictionary<DateTimeOffset?, int> dic1 = new Dictionary<DateTimeOffset?, int>
             {
                 { new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.Zero), 1 },
-                { new DateTimeOffset(2013, 12, 12, 12, 12, 12, TimeSpan.Zero), 2 }
+                { new DateTimeOffset(2013, 12, 12, 12, 12, 12, TimeSpan.Zero), 2 },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -7603,7 +7600,7 @@ Path '', line 1, position 1."
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
 
@@ -7631,7 +7628,7 @@ Path '', line 1, position 1."
             IDictionary<DateTime, int> dic1 = new Dictionary<DateTime, int>
             {
                 { new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc), 1 },
-                { new DateTime(2013, 12, 12, 12, 12, 12, DateTimeKind.Utc), 2 }
+                { new DateTime(2013, 12, 12, 12, 12, 12, DateTimeKind.Utc), 2 },
             };
 
             string json = JsonConvert.SerializeObject(dic1, Formatting.Indented);
@@ -7659,7 +7656,7 @@ Path '', line 1, position 1."
             IDictionary<DateTime, int> dic1 = new Dictionary<DateTime, int>
             {
                 { new DateTime(2020, 12, 12, 12, 12, 12, DateTimeKind.Utc), 1 },
-                { new DateTime(2023, 12, 12, 12, 12, 12, DateTimeKind.Utc), 2 }
+                { new DateTime(2023, 12, 12, 12, 12, 12, DateTimeKind.Utc), 2 },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -7687,7 +7684,7 @@ Path '', line 1, position 1."
             IDictionary<DateTime, int> dic1 = new Dictionary<DateTime, int>
             {
                 { new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc), 1 },
-                { new DateTime(2013, 12, 12, 12, 12, 12, DateTimeKind.Utc), 2 }
+                { new DateTime(2013, 12, 12, 12, 12, 12, DateTimeKind.Utc), 2 },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -7695,7 +7692,7 @@ Path '', line 1, position 1."
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat
+                    DateFormatHandling = DateFormatHandling.MicrosoftDateFormat,
                 }
             );
 
@@ -7744,7 +7741,7 @@ Path '', line 1, position 1."
             var serializer = new JsonSerializer();
             serializer.ContractResolver = new DefaultContractResolver
             {
-                IgnoreSerializableAttribute = false
+                IgnoreSerializableAttribute = false,
             };
             serializer.Serialize(stringWriter, obj);
 
@@ -7758,7 +7755,7 @@ Path '', line 1, position 1."
             var serializer = new JsonSerializer();
             serializer.ContractResolver = new DefaultContractResolver
             {
-                IgnoreSerializableAttribute = false
+                IgnoreSerializableAttribute = false,
             };
 
             return serializer.Deserialize(jsonReader, typeof(T)) as T;
@@ -7776,8 +7773,8 @@ Path '', line 1, position 1."
                 {
                     DateTimeUtils.ConvertJavaScriptTicksToDateTime(1336458600000),
                     DateTimeUtils.ConvertJavaScriptTicksToDateTime(1336545000000),
-                    DateTimeUtils.ConvertJavaScriptTicksToDateTime(1336636800000)
-                }
+                    DateTimeUtils.ConvertJavaScriptTicksToDateTime(1336636800000),
+                },
             };
 
             string json = JsonConvert.SerializeObject(e, Formatting.Indented);
@@ -7833,7 +7830,7 @@ Path '', line 1, position 1."
                     NoAttribute = "Value!",
                     IgnoreDataMemberAttribute = "Value!",
                     DataMemberAttribute = "Value!",
-                    IgnoreDataMemberAndDataMemberAttribute = "Value!"
+                    IgnoreDataMemberAndDataMemberAttribute = "Value!",
                 };
 
             //MemoryStream ms = new MemoryStream();
@@ -7857,7 +7854,7 @@ Path '', line 1, position 1."
                     NoAttribute = "Value!",
                     IgnoreDataMemberAttribute = "Value!",
                     DataMemberAttribute = "Value!",
-                    IgnoreDataMemberAndDataMemberAttribute = "Value!"
+                    IgnoreDataMemberAndDataMemberAttribute = "Value!",
                 };
 
             json = JsonConvert.SerializeObject(poco, Formatting.Indented);
@@ -7905,7 +7902,7 @@ Path '', line 1, position 1."
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                CheckAdditionalContent = true
+                CheckAdditionalContent = true,
             };
             JsonSerializer s = JsonSerializer.Create(settings);
             IDictionary<string, int> o = s.Deserialize<Dictionary<string, int>>(
@@ -7929,7 +7926,7 @@ lines.*/
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                CheckAdditionalContent = true
+                CheckAdditionalContent = true,
             };
             JsonSerializer s = JsonSerializer.Create(settings);
             IDictionary<string, int> o = s.Deserialize<Dictionary<string, int>>(
@@ -7954,7 +7951,7 @@ lines.*/
 
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                CheckAdditionalContent = true
+                CheckAdditionalContent = true,
             };
             JsonSerializer s = JsonSerializer.Create(settings);
             ExceptionAssert.Throws<JsonReaderException>(
@@ -8130,7 +8127,7 @@ This is just junk, though.";
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
                 }
             );
 
@@ -8162,7 +8159,7 @@ This is just junk, though.";
                 d,
                 new JsonSerializerSettings
                 {
-                    FloatFormatHandling = FloatFormatHandling.DefaultValue
+                    FloatFormatHandling = FloatFormatHandling.DefaultValue,
                 }
             );
             // [1.1,0.0,0.0]
@@ -8305,7 +8302,7 @@ This is just junk, though.";
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateParseHandling = DateParseHandling.DateTimeOffset,
-                DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind
+                DateTimeZoneHandling = DateTimeZoneHandling.RoundtripKind,
             };
 
             var obj = (JObject)JsonConvert.DeserializeObject(content, jsonSerializerSettings);
@@ -8328,7 +8325,7 @@ This is just junk, though.";
                 ObjectNull = null,
                 Float = float.NaN,
                 NullableDouble = double.NaN,
-                NullableFloat = null
+                NullableFloat = null,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -8336,7 +8333,7 @@ This is just junk, though.";
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    FloatFormatHandling = FloatFormatHandling.DefaultValue
+                    FloatFormatHandling = FloatFormatHandling.DefaultValue,
                 }
             );
 
@@ -8363,7 +8360,7 @@ This is just junk, though.";
             IList<object> dates = new List<object>
             {
                 new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc),
-                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1))
+                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1)),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -8387,7 +8384,7 @@ This is just junk, though.";
             IList<object> dates = new List<object>
             {
                 new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc),
-                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1))
+                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1)),
             };
 
             string json = JsonConvert.SerializeObject(
@@ -8395,7 +8392,7 @@ This is just junk, though.";
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    DateFormatString = @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK"
+                    DateFormatString = @"yyyy'-'MM'-'dd'T'HH':'mm':'ss.fffK",
                 }
             );
 
@@ -8418,7 +8415,7 @@ This is just junk, though.";
             IList<object> dates = new List<object>
             {
                 new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc),
-                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1))
+                new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1)),
             };
 
             StringWriter sw = new StringWriter();
@@ -8429,7 +8426,7 @@ This is just junk, though.";
                 {
                     DateFormatString = "yyyy tt",
                     Culture = culture,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
             serializer.Serialize(jsonWriter, dates);
@@ -8473,7 +8470,7 @@ This is just junk, though.";
                 new JsonSerializerSettings
                 {
                     StringEscapeHandling = StringEscapeHandling.EscapeHtml,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
             serializer.Serialize(jsonWriter, new { html = "<html></html>" });
@@ -8598,7 +8595,7 @@ This is just junk, though.";
                 {
                     "DateTimeOffset-Plus15",
                     new DateTimeOffset(2000, 12, 12, 12, 12, 12, TimeSpan.FromHours(1.5))
-                }
+                },
             };
 
             string expected = JsonConvert.SerializeObject(dates, Formatting.Indented);
@@ -8608,7 +8605,7 @@ This is just junk, though.";
                 Formatting.Indented,
                 new JsonSerializerSettings
                 {
-                    DateFormatString = JsonSerializerSettings.DefaultDateFormatString
+                    DateFormatString = JsonSerializerSettings.DefaultDateFormatString,
                 }
             );
 
@@ -8678,8 +8675,8 @@ This is just junk, though.";
                 {
                     ContractResolver = new DefaultContractResolver
                     {
-                        IgnoreSerializableAttribute = false
-                    }
+                        IgnoreSerializableAttribute = false,
+                    },
                 }
             );
 
@@ -8730,13 +8727,13 @@ This is just junk, though.";
             PersonReference john = new PersonReference
             {
                 Id = new Guid("0B64FFDF-D155-44AD-9689-58D9ADB137F3"),
-                Name = "John Smith"
+                Name = "John Smith",
             };
 
             PersonReference jane = new PersonReference
             {
                 Id = new Guid("AE3C399C-058D-431D-91B0-A36C266441B9"),
-                Name = "Jane Smith"
+                Name = "Jane Smith",
             };
 
             john.Spouse = jane;
@@ -8752,7 +8749,7 @@ This is just junk, though.";
                     ReferenceResolver = new IdReferenceResolver(),
 #pragma warning restore 618
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -8783,13 +8780,13 @@ This is just junk, though.";
             PersonReference john = new PersonReference
             {
                 Id = new Guid("0B64FFDF-D155-44AD-9689-58D9ADB137F3"),
-                Name = "John Smith"
+                Name = "John Smith",
             };
 
             PersonReference jane = new PersonReference
             {
                 Id = new Guid("AE3C399C-058D-431D-91B0-A36C266441B9"),
-                Name = "Jane Smith"
+                Name = "Jane Smith",
             };
 
             john.Spouse = jane;
@@ -8805,7 +8802,7 @@ This is just junk, though.";
                     ReferenceResolver = null,
 #pragma warning restore 618
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -8854,7 +8851,7 @@ This is just junk, though.";
             string json = JsonConvert.SerializeObject(
                 new Dictionary<TypeConverterSize, TypeConverterSize>
                 {
-                    { new TypeConverterSize(1, 2), new TypeConverterSize(3, 4) }
+                    { new TypeConverterSize(1, 2), new TypeConverterSize(3, 4) },
                 }
             );
 
@@ -8898,7 +8895,7 @@ This is just junk, though.";
                     ReferenceResolver = new IdReferenceResolver(),
 #pragma warning restore 618
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -8938,7 +8935,7 @@ This is just junk, though.";
                 {
                     ReferenceResolverProvider = () => new IdReferenceResolver(),
                     PreserveReferencesHandling = PreserveReferencesHandling.Objects,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 
@@ -9037,7 +9034,7 @@ This is just junk, though.";
             var c = new TestClassConvertable
             {
                 Id = new ConvertibleId { Value = 1 },
-                X = 2
+                X = 2,
             };
             var s = JsonConvert.SerializeObject(c, Formatting.Indented);
             StringAssert.AreEqual(
@@ -9082,7 +9079,7 @@ This is just junk, though.";
             string dateFormatString = "yyyy'-pie-'MMM'-'dddd'-'dd";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                DateFormatString = dateFormatString
+                DateFormatString = dateFormatString,
             };
 
             string json = JsonConvert.SerializeObject(dt, settings);
@@ -9095,7 +9092,7 @@ This is just junk, though.";
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json))
             {
-                DateFormatString = dateFormatString
+                DateFormatString = dateFormatString,
             };
             JValue v = (JValue)JToken.ReadFrom(reader);
 
@@ -9105,7 +9102,7 @@ This is just junk, though.";
 
             reader = new JsonTextReader(new StringReader(@"""abc"""))
             {
-                DateFormatString = dateFormatString
+                DateFormatString = dateFormatString,
             };
             v = (JValue)JToken.ReadFrom(reader);
 
@@ -9124,7 +9121,7 @@ This is just junk, though.";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 DateFormatString = dateFormatString,
-                Culture = culture
+                Culture = culture,
             };
 
             string json = JsonConvert.SerializeObject(dt, settings);
@@ -9138,7 +9135,7 @@ This is just junk, though.";
             JsonTextReader reader = new JsonTextReader(new StringReader(json))
             {
                 DateFormatString = dateFormatString,
-                Culture = culture
+                Culture = culture,
             };
             JValue v = (JValue)JToken.ReadFrom(reader);
 
@@ -9149,7 +9146,7 @@ This is just junk, though.";
             reader = new JsonTextReader(new StringReader(@"""2000-pie-Dec-Friday-22"""))
             {
                 DateFormatString = dateFormatString,
-                Culture = culture
+                Culture = culture,
             };
             v = (JValue)JToken.ReadFrom(reader);
 
@@ -9166,7 +9163,7 @@ This is just junk, though.";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 DateFormatString = dateFormatString,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -9197,7 +9194,7 @@ This is just junk, though.";
             {
                 DateFormatString = dateFormatString,
                 MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -9228,7 +9225,7 @@ This is just junk, though.";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 DateFormatString = dateFormatString,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -9259,7 +9256,7 @@ This is just junk, though.";
             {
                 DateFormatString = dateFormatString,
                 MetadataPropertyHandling = MetadataPropertyHandling.ReadAhead,
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -9288,7 +9285,7 @@ This is just junk, though.";
             string dateFormatString = "yyyy'-pie-'MMM'-'dddd'-'dd";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
-                DateFormatString = dateFormatString
+                DateFormatString = dateFormatString,
             };
 
             string json = JsonConvert.SerializeObject(dt, settings);
@@ -9302,7 +9299,7 @@ This is just junk, though.";
             JsonTextReader reader = new JsonTextReader(new StringReader(json))
             {
                 DateFormatString = dateFormatString,
-                DateParseHandling = DateParseHandling.DateTimeOffset
+                DateParseHandling = DateParseHandling.DateTimeOffset,
             };
             JValue v = (JValue)JToken.ReadFrom(reader);
 
@@ -9514,13 +9511,13 @@ This is just junk, though.";
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 ContractResolver = new JsonPropertyConverterContractResolver(),
-                Formatting = Formatting.Indented
+                Formatting = Formatting.Indented,
             };
 
             JsonPropertyConverterTestClass c1 = new JsonPropertyConverterTestClass
             {
                 NormalDate = dt,
-                JavaScriptDate = dt
+                JavaScriptDate = dt,
             };
 
             string json = JsonConvert.SerializeObject(c1, settings);

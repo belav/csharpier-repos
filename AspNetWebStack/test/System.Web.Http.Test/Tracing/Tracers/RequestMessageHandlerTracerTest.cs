@@ -28,12 +28,12 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 new TraceRecord(request, TraceCategories.RequestCategory, TraceLevel.Info)
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(request, TraceCategories.RequestCategory, TraceLevel.Info)
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             MethodInfo method = typeof(DelegatingHandler).GetMethod(
@@ -79,12 +79,12 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 new TraceRecord(request, TraceCategories.RequestCategory, TraceLevel.Info)
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(request, TraceCategories.RequestCategory, TraceLevel.Error)
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             MethodInfo method = typeof(DelegatingHandler).GetMethod(
@@ -133,12 +133,12 @@ namespace System.Web.Http.Tracing.Tracers
             {
                 new TraceRecord(request, TraceCategories.RequestCategory, TraceLevel.Info)
                 {
-                    Kind = TraceKind.Begin
+                    Kind = TraceKind.Begin,
                 },
                 new TraceRecord(request, TraceCategories.RequestCategory, TraceLevel.Error)
                 {
-                    Kind = TraceKind.End
-                }
+                    Kind = TraceKind.End,
+                },
             };
 
             MethodInfo method = typeof(DelegatingHandler).GetMethod(

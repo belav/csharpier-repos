@@ -124,7 +124,7 @@ internal static partial class Interop
                             rghStores = rghStores,
                             cPropSheetPages = cPropSheetPages,
                             rgPropSheetPages = rgPropSheetPages,
-                            nStartPage = nStartPage
+                            nStartPage = nStartPage,
                         };
                     }
                 }
@@ -237,7 +237,7 @@ internal static partial class Interop
                             rghStores = rghStores,
                             cPropSheetPages = cPropSheetPages,
                             rgPropSheetPages = rgPropSheetPages,
-                            hSelectedCertStore = hSelectedCertStore
+                            hSelectedCertStore = hSelectedCertStore,
                         };
                     }
                 }

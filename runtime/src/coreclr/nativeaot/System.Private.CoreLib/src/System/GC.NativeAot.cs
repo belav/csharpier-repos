@@ -32,7 +32,7 @@ namespace System
         Failed = 1,
         Canceled = 2,
         Timeout = 3,
-        NotApplicable = 4
+        NotApplicable = 4,
     }
 
     internal enum InternalGCCollectionMode
@@ -41,7 +41,7 @@ namespace System
         Blocking = 0x00000002,
         Optimized = 0x00000004,
         Compacting = 0x00000008,
-        Aggressive = 0x00000010
+        Aggressive = 0x00000010,
     }
 
     internal enum StartNoGCRegionStatus
@@ -49,7 +49,7 @@ namespace System
         Succeeded = 0,
         NotEnoughMemory = 1,
         AmountTooLarge = 2,
-        AlreadyInProgress = 3
+        AlreadyInProgress = 3,
     }
 
     internal enum EndNoGCRegionStatus
@@ -57,7 +57,7 @@ namespace System
         Succeeded = 0,
         NotInProgress = 1,
         GCInduced = 2,
-        AllocationExceeded = 3
+        AllocationExceeded = 3,
     }
 
     internal enum RefreshMemoryStatus
@@ -772,7 +772,7 @@ namespace System
         {
             GCConfigurationContext context = new GCConfigurationContext
             {
-                Configurations = new Dictionary<string, object>()
+                Configurations = new Dictionary<string, object>(),
             };
 
             RuntimeImports.RhEnumerateConfigurationValues(

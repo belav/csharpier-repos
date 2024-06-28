@@ -30,7 +30,7 @@ public class ConfigurationReaderTests
     public void ReadCertificatesWhenEmptyCertificatesSection_ReturnsEmptyCollection()
     {
         var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("Certificates", ""), })
+            .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("Certificates", "") })
             .Build();
         var reader = new ConfigurationReader(config);
         var certificates = reader.Certificates;
@@ -155,7 +155,7 @@ public class ConfigurationReaderTests
     public void ReadEndpointsWhenEmptyEndpointsSection_ReturnsEmptyCollection()
     {
         var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("Endpoints", ""), })
+            .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("Endpoints", "") })
             .Build();
         var reader = new ConfigurationReader(config);
         var endpoints = reader.Endpoints;
@@ -167,9 +167,7 @@ public class ConfigurationReaderTests
     public void ReadEndpointWithMissingUrl_Throws()
     {
         var config = new ConfigurationBuilder()
-            .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1", ""), }
-            )
+            .AddInMemoryCollection(new[] { new KeyValuePair<string, string>("Endpoints:End1", "") })
             .Build();
         var reader = new ConfigurationReader(config);
         Assert.Throws<InvalidOperationException>(() => reader.Endpoints);
@@ -180,7 +178,7 @@ public class ConfigurationReaderTests
     {
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", ""), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "") }
             )
             .Build();
         var reader = new ConfigurationReader(config);
@@ -353,7 +351,7 @@ public class ConfigurationReaderTests
     {
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001") }
             )
             .Build();
         var reader = new ConfigurationReader(config);
@@ -367,7 +365,7 @@ public class ConfigurationReaderTests
     {
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001") }
             )
             .Build();
 
@@ -479,7 +477,7 @@ public class ConfigurationReaderTests
     {
         var config = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001"), }
+                new[] { new KeyValuePair<string, string>("Endpoints:End1:Url", "http://*:5001") }
             )
             .Build();
         var reader = new ConfigurationReader(config);

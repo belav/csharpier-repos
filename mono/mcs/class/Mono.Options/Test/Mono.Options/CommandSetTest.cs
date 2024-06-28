@@ -131,22 +131,19 @@ namespace MonoTests.Mono.Options
                 new Command("cs c"),
                 new CommandSet("cs")
                 {
-                    new CommandSet("cs2")
-                    {
-                        new CommandSet("cs3") { new Command("cs-cs2-cs3-c"), },
-                    },
+                    new CommandSet("cs2") { new CommandSet("cs3") { new Command("cs-cs2-cs3-c") } },
                 },
             };
             Assert.IsTrue(
-                new[] { "a", "aa", "a a", "cs c", "cs cs2 cs3 cs-cs2-cs3-c", }.SequenceEqual(
+                new[] { "a", "aa", "a a", "cs c", "cs cs2 cs3 cs-cs2-cs3-c" }.SequenceEqual(
                     commands.GetCompletions()
                 )
             );
 
-            Assert.IsTrue(new[] { "a", "aa", "a a", }.SequenceEqual(commands.GetCompletions("a")));
+            Assert.IsTrue(new[] { "a", "aa", "a a" }.SequenceEqual(commands.GetCompletions("a")));
 
             Assert.IsTrue(
-                new[] { "cs c", "cs cs2 cs3 cs-cs2-cs3-c", }.SequenceEqual(
+                new[] { "cs c", "cs cs2 cs3 cs-cs2-cs3-c" }.SequenceEqual(
                     commands.GetCompletions("cs")
                 )
             );
@@ -192,7 +189,7 @@ namespace MonoTests.Mono.Options
                     {
                         "Yet more text!",
                         new Command("and again", "Wee! Nesting!"),
-                    }
+                    },
                 },
                 new CommandSet("another")
                 {
@@ -339,7 +336,7 @@ namespace MonoTests.Mono.Options
                 new CommandSet("intermediate")
                 {
                     new Command("b") { Run = v => i_b = v.Count() },
-                    new CommandSet("inner") { new Command("c") { Run = v => i_i_c = v.Count() }, }
+                    new CommandSet("inner") { new Command("c") { Run = v => i_i_c = v.Count() } },
                 },
             };
             Assert.AreEqual(0, outer.Run(new[] { "a", "1" }));
@@ -361,7 +358,7 @@ namespace MonoTests.Mono.Options
             e.Run = (args) => e.CommandSet.Out.WriteLine(string.Join(" ", args));
 
             var o = new StringWriter();
-            var c = new CommandSet("set", output: o, error: Console.Error) { e, };
+            var c = new CommandSet("set", output: o, error: Console.Error) { e };
             Assert.AreEqual(0, c.Run(new[] { "help", "echo" }));
 
             var expected = $"--help{Environment.NewLine}";

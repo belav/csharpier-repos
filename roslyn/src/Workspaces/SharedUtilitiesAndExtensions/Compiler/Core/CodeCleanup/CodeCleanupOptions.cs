@@ -39,7 +39,7 @@ internal sealed record class CodeCleanupOptions
         new()
         {
             FormattingOptions = SyntaxFormattingOptions.GetDefault(languageServices),
-            SimplifierOptions = SimplifierOptions.GetDefault(languageServices)
+            SimplifierOptions = SimplifierOptions.GetDefault(languageServices),
         };
 
     public OrganizeImportsOptions GetOrganizeImportsOptions() =>

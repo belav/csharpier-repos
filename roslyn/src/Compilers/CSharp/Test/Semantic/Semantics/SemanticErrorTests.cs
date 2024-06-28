@@ -50,7 +50,7 @@ namespace x
                 {
                     Code = (int)ErrorCode.ERR_BadBinaryOps,
                     Line = 9,
-                    Column = 17
+                    Column = 17,
                 }
             );
         }
@@ -76,7 +76,7 @@ class C
                 {
                     Code = (int)ErrorCode.ERR_BadBinaryOps,
                     Line = 8,
-                    Column = 12
+                    Column = 12,
                 }
             );
         }
@@ -1063,8 +1063,8 @@ namespace x
                     {
                         Code = (int)ErrorCode.ERR_IntDivByZero,
                         Line = 8,
-                        Column = 21
-                    }
+                        Column = 21,
+                    },
                 }
             );
         }
@@ -1094,20 +1094,20 @@ namespace x
                     {
                         Code = (int)ErrorCode.ERR_IntDivByZero,
                         Line = 8,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_IntDivByZero,
                         Line = 9,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_IntDivByZero,
                         Line = 10,
-                        Column = 26
-                    }
+                        Column = 26,
+                    },
                 }
             );
         }
@@ -1179,8 +1179,8 @@ namespace x
                     {
                         Code = (int)ErrorCode.ERR_BadIndexCount,
                         Line = 9,
-                        Column = 25
-                    }
+                        Column = 25,
+                    },
                 }
             );
         }
@@ -1523,26 +1523,26 @@ public class MyClass
                     {
                         Code = (int)ErrorCode.ERR_ThisInStaticMeth,
                         Line = 9,
-                        Column = 9
+                        Column = 9,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ObjectProhibited,
                         Line = 9,
-                        Column = 9
+                        Column = 9,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ThisInStaticMeth,
                         Line = 9,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ObjectProhibited,
                         Line = 9,
-                        Column = 18
-                    }
+                        Column = 18,
+                    },
                 }
             );
         }
@@ -1639,8 +1639,8 @@ namespace ConsoleApplication3
                     {
                         Code = (int)ErrorCode.ERR_ThisInBadContext,
                         Line = 6,
-                        Column = 20
-                    }
+                        Column = 20,
+                    },
                 }
             );
         }
@@ -1764,8 +1764,8 @@ namespace ConsoleApplication3
                     {
                         Code = (int)ErrorCode.ERR_NoImplicitConv,
                         Line = 11,
-                        Column = 20
-                    }
+                        Column = 20,
+                    },
                 }
             );
         }
@@ -2228,13 +2228,13 @@ class A
                     {
                         Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                         Line = 6,
-                        Column = 34
+                        Column = 34,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                         Line = 8,
-                        Column = 34
+                        Column = 34,
                     }
                 );
             }
@@ -2266,13 +2266,13 @@ class A
                 {
                     Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                     Line = 7,
-                    Column = 34
+                    Column = 34,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                     Line = 8,
-                    Column = 34
+                    Column = 34,
                 }
             );
 
@@ -2294,19 +2294,19 @@ class A
                 {
                     Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                     Line = 6,
-                    Column = 34
+                    Column = 34,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                     Line = 7,
-                    Column = 34
+                    Column = 34,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_ConstOutOfRangeChecked,
                     Line = 8,
-                    Column = 34
+                    Column = 34,
                 }
             );
 
@@ -2609,7 +2609,7 @@ class OuterClass
                         {
                             MessageProvider.Instance.GetIdForErrorCode(649),
                             ReportDiagnostic.Suppress
-                        }
+                        },
                     }
                 )
             );
@@ -2817,8 +2817,8 @@ public class B
                     {
                         Code = (int)ErrorCode.ERR_BadEventUsage,
                         Line = 26,
-                        Column = 14
-                    }
+                        Column = 14,
+                    },
                 }
             );
         }
@@ -2887,8 +2887,8 @@ public class Class1
                     {
                         Code = (int)ErrorCode.ERR_BadEventUsageNoField,
                         Line = 28,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -3409,13 +3409,13 @@ int AIProp { get ; set ; }
                 {
                     Code = (int)ErrorCode.ERR_NamespaceUnexpected,
                     Line = 5,
-                    Column = 10
+                    Column = 10,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_NamespaceUnexpected,
                     Line = 10,
-                    Column = 5
+                    Column = 5,
                 }
             );
         }
@@ -3447,43 +3447,43 @@ namespace ns1
                 {
                     Code = (int)ErrorCode.ERR_EOFExpected,
                     Line = 4,
-                    Column = 5
+                    Column = 5,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_NamespaceUnexpected,
                     Line = 4,
-                    Column = 10
+                    Column = 10,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_EOFExpected,
                     Line = 4,
-                    Column = 14
+                    Column = 14,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_NamespaceUnexpected,
                     Line = 6,
-                    Column = 5
+                    Column = 5,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_EOFExpected,
                     Line = 6,
-                    Column = 9
+                    Column = 9,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_NamespaceUnexpected,
                     Line = 5,
-                    Column = 15
+                    Column = 15,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_NamespaceUnexpected,
                     Line = 7,
-                    Column = 15
+                    Column = 15,
                 }
             );
         }
@@ -4254,8 +4254,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_MethDelegateMismatch,
                         Line = 11,
-                        Column = 15
-                    }
+                        Column = 15,
+                    },
                 }
             );
         }
@@ -4727,8 +4727,8 @@ class A
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_StaticConstParam,
-                        Parameters = new string[] { "A.A(int)" }
-                    }
+                        Parameters = new string[] { "A.A(int)" },
+                    },
                 }
             );
         }
@@ -5081,14 +5081,14 @@ namespace x
                     {
                         Code = (int)ErrorCode.ERR_NoBreakOrCont,
                         Line = 9,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoBreakOrCont,
                         Line = 11,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -5219,26 +5219,26 @@ public class @a
                     {
                         Code = (int)ErrorCode.ERR_NoNewAbstract,
                         Line = 14,
-                        Column = 15
+                        Column = 15,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoNewAbstract,
                         Line = 15,
-                        Column = 15
+                        Column = 15,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NoNewAbstract,
                         Line = 16,
-                        Column = 15
+                        Column = 15,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NameNotInContext,
                         Line = 15,
-                        Column = 22
-                    }
+                        Column = 22,
+                    },
                 }
             );
         }
@@ -5927,8 +5927,8 @@ namespace x
                     {
                         Code = (int)ErrorCode.ERR_BadEmptyThrow,
                         Line = 16,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -6301,8 +6301,8 @@ namespace MyNamespace
                     {
                         Code = (int)ErrorCode.ERR_LabelShadow,
                         Line = 11,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -6362,8 +6362,8 @@ public class Cls
                     {
                         Code = (int)ErrorCode.ERR_LabelNotFound,
                         Line = 6,
-                        Column = 14
-                    }
+                        Column = 14,
+                    },
                 }
             );
         }
@@ -7325,8 +7325,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_ReturnExpected,
                         Line = 4,
-                        Column = 22
-                    }
+                        Column = 22,
+                    },
                 }
             );
         }
@@ -7369,8 +7369,8 @@ public class MyClass
                     {
                         Code = (int)ErrorCode.ERR_SwitchFallThrough,
                         Line = 10,
-                        Column = 10
-                    }
+                        Column = 10,
+                    },
                 }
             );
         }
@@ -7422,14 +7422,14 @@ class MyClass2
                     {
                         Code = (int)ErrorCode.ERR_UseDefViolation,
                         Line = 26,
-                        Column = 11
+                        Column = 11,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_UseDefViolation,
                         Line = 29,
-                        Column = 7
-                    }
+                        Column = 7,
+                    },
                 }
             );
         }
@@ -7774,8 +7774,8 @@ public class MyClass
                     {
                         Code = (int)ErrorCode.ERR_UseDefViolationField,
                         Line = 14,
-                        Column = 33
-                    }
+                        Column = 33,
+                    },
                 }
             );
         }
@@ -8337,8 +8337,8 @@ public class MainClass
                     {
                         Code = (int)ErrorCode.ERR_LockNeedsReference,
                         Line = 6,
-                        Column = 15
-                    }
+                        Column = 15,
+                    },
                 }
             );
         }
@@ -8367,14 +8367,14 @@ class MyClass
                     {
                         Code = (int)ErrorCode.ERR_NullNotValid,
                         Line = 9,
-                        Column = 27
+                        Column = 27,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NullNotValid,
                         Line = 10,
-                        Column = 27
-                    }
+                        Column = 27,
+                    },
                 }
             );
         }
@@ -8968,8 +8968,8 @@ class MyDerived : MyClass
                     {
                         Code = (int)ErrorCode.ERR_RefReadonly,
                         Line = 17,
-                        Column = 24
-                    }
+                        Column = 24,
+                    },
                 }
             );
         }
@@ -9014,8 +9014,8 @@ public class MyClass
                     {
                         Code = (int)ErrorCode.ERR_PtrExpected,
                         Line = 15,
-                        Column = 7
-                    }
+                        Column = 7,
+                    },
                 }
             );
         }
@@ -9117,25 +9117,25 @@ class MyDerived : MyClass
                     {
                         Code = (int)ErrorCode.ERR_AssgReadonlyStatic,
                         Line = 15,
-                        Column = 7
+                        Column = 7,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_AssgReadonlyStatic,
                         Line = 20,
-                        Column = 8
+                        Column = 8,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_AssgReadonlyStatic,
                         Line = 25,
-                        Column = 8
+                        Column = 8,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_AssgReadonlyStatic,
                         Line = 37,
-                        Column = 9
+                        Column = 9,
                     },
                 }
             );
@@ -9282,8 +9282,8 @@ class MyClass
                     {
                         Code = (int)ErrorCode.ERR_RefReadonlyStatic,
                         Line = 13,
-                        Column = 24
-                    }
+                        Column = 24,
+                    },
                 }
             );
         }
@@ -9641,8 +9641,8 @@ public class MainClass
                     {
                         Code = (int)ErrorCode.ERR_BadGetEnumerator,
                         Line = 50,
-                        Column = 24
-                    }
+                        Column = 24,
+                    },
                 }
             );
         }
@@ -9682,13 +9682,13 @@ class B : A
                 {
                     Code = (int)ErrorCode.ERR_AbstractBaseCall,
                     Line = 10,
-                    Column = 9
+                    Column = 9,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_AbstractBaseCall,
                     Line = 11,
-                    Column = 20
+                    Column = 20,
                 }
             );
         }
@@ -10329,8 +10329,8 @@ class MyClass
                     {
                         Code = (int)ErrorCode.ERR_AmbigMember,
                         Line = 28,
-                        Column = 11
-                    }
+                        Column = 11,
+                    },
                 }
             );
         }
@@ -10544,25 +10544,25 @@ public class MyClass
                     {
                         Code = (int)ErrorCode.ERR_FieldInitRefNonstatic,
                         Line = 9,
-                        Column = 11
+                        Column = 11,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ThisInBadContext,
                         Line = 10,
-                        Column = 11
+                        Column = 11,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_FieldInitRefNonstatic,
                         Line = 11,
-                        Column = 11
+                        Column = 11,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ThisInBadContext,
                         Line = 12,
-                        Column = 11
+                        Column = 11,
                     },
                 }
             );
@@ -11023,8 +11023,8 @@ class MyClass
                     {
                         Code = (int)ErrorCode.ERR_NoImplicitConvCast,
                         Line = 8,
-                        Column = 27
-                    }
+                        Column = 27,
+                    },
                 }
             );
         }
@@ -11412,8 +11412,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_UseDefViolationOut,
                         Line = 15,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -12835,8 +12835,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_CantInferMethTypeArgs,
                         Line = 11,
-                        Column = 11
-                    }
+                        Column = 11,
+                    },
                 }
             );
         }
@@ -12902,14 +12902,14 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_LocalSameNameAsTypeParam,
                         Line = 7,
-                        Column = 26
+                        Column = 26,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_LocalSameNameAsTypeParam,
                         Line = 14,
-                        Column = 16
-                    }
+                        Column = 16,
+                    },
                 }
             );
         }
@@ -13059,14 +13059,14 @@ namespace ConsoleApplication1
                     {
                         Code = (int)ErrorCode.ERR_MethGrpToNonDel,
                         Line = 12,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_MethGrpToNonDel,
                         Line = 15,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -13135,8 +13135,8 @@ namespace ConsoleApplication1
                     {
                         Code = (int)ErrorCode.ERR_UnboxNotLValue,
                         Line = 15,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -13164,8 +13164,8 @@ class Tester
                     {
                         Code = (int)ErrorCode.ERR_AnonMethGrpInForEach,
                         Line = 7,
-                        Column = 27
-                    }
+                        Column = 27,
+                    },
                 }
             );
         }
@@ -13290,8 +13290,8 @@ class MyClass
                     {
                         Code = (int)ErrorCode.ERR_DecConstError,
                         Line = 7,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -13926,8 +13926,8 @@ class D : C
                     {
                         Code = (int)ErrorCode.ERR_BadTypeReference,
                         Line = 16,
-                        Column = 32
-                    }
+                        Column = 32,
+                    },
                 }
             );
         }
@@ -14075,8 +14075,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_ArrayInitToNonArrayType,
                         Line = 6,
-                        Column = 18
-                    }
+                        Column = 18,
+                    },
                 }
             );
         }
@@ -14101,8 +14101,8 @@ class X
                     {
                         Code = (int)ErrorCode.ERR_ArrayInitInBadPlace,
                         Line = 6,
-                        Column = 21
-                    }
+                        Column = 21,
+                    },
                 }
             );
         }
@@ -14318,14 +14318,14 @@ public class CMain
                     {
                         Code = (int)ErrorCode.ERR_InstantiatingStaticClass,
                         Line = 10,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_VarDeclIsStaticClass,
                         Line = 10,
-                        Column = 9
-                    }
+                        Column = 9,
+                    },
                 }
             );
         }
@@ -14356,8 +14356,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_ConvertToStaticClass,
                         Line = 12,
-                        Column = 34
-                    }
+                        Column = 34,
+                    },
                 }
             );
         }
@@ -14579,8 +14579,8 @@ public delegate void TestDel();
                     {
                         Code = (int)ErrorCode.ERR_PartialMethodToDelegate,
                         Line = 11,
-                        Column = 38
-                    }
+                        Column = 38,
+                    },
                 }
             );
         }
@@ -14732,15 +14732,15 @@ class A
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
                         Line = 6,
-                        Column = 13
+                        Column = 13,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_UnreferencedVar,
                         Line = 6,
                         Column = 13,
-                        IsWarning = true
-                    }
+                        IsWarning = true,
+                    },
                 }
             );
         }
@@ -14788,22 +14788,22 @@ class A
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
                         Line = 6,
-                        Column = 9
+                        Column = 9,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_UnreferencedVarAssg,
                         Line = 6,
                         Column = 13,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_UnreferencedVarAssg,
                         Line = 6,
                         Column = 20,
-                        IsWarning = true
-                    }
+                        IsWarning = true,
+                    },
                 }
             );
         }
@@ -14850,8 +14850,8 @@ class G
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedVariableAssignedArrayInitializer,
                         Line = 6,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -15041,68 +15041,68 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 12,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 20,
-                        Column = 22
+                        Column = 22,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 22,
-                        Column = 17
+                        Column = 17,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 25,
-                        Column = 19
+                        Column = 19,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 27,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 28,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 30,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 31,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 33,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 34,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_ImplicitlyTypedArrayNoBestType,
                         Line = 36,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -15128,8 +15128,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
                         Line = 6,
-                        Column = 23
-                    }
+                        Column = 23,
+                    },
                 }
             );
         }
@@ -15154,8 +15154,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
                         Line = 6,
-                        Column = 23
-                    }
+                        Column = 23,
+                    },
                 }
             );
         }
@@ -15180,8 +15180,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
                         Line = 6,
-                        Column = 23
-                    }
+                        Column = 23,
+                    },
                 }
             );
         }
@@ -15206,8 +15206,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
                         Line = 6,
-                        Column = 23
-                    }
+                        Column = 23,
+                    },
                 }
             );
         }
@@ -15235,8 +15235,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
                         Line = 8,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -15319,8 +15319,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeDuplicatePropertyName,
                         Line = 6,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -15347,8 +15347,8 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeDuplicatePropertyName,
                         Line = 6,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -15375,14 +15375,14 @@ public class C
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypePropertyAssignedBadValue,
                         Line = 6,
-                        Column = 23
+                        Column = 23,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeDuplicatePropertyName,
                         Line = 6,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -15435,8 +15435,8 @@ public class Myclass
                     {
                         Code = (int)ErrorCode.ERR_ExpressionTreeMustHaveDelegate,
                         Line = 8,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -15476,8 +15476,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeNotAvailable,
                         Line = 11,
-                        Column = 10
-                    }
+                        Column = 10,
+                    },
                 }
             );
         }
@@ -15504,8 +15504,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeNotAvailable,
                         Line = 4,
-                        Column = 22
-                    }
+                        Column = 22,
+                    },
                 }
             );
         }
@@ -15550,8 +15550,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_DefaultValueMustBeConstant,
                         Line = 4,
-                        Column = 39
-                    }
+                        Column = 39,
+                    },
                 }
             );
         }
@@ -15587,8 +15587,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeNotAvailable,
                         Line = 13,
-                        Column = 14
-                    }
+                        Column = 14,
+                    },
                 }
             );
         }
@@ -15626,8 +15626,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_AnonymousTypeNotAvailable,
                         Line = 13,
-                        Column = 14
-                    }
+                        Column = 14,
+                    },
                 }
             );
         }
@@ -15977,8 +15977,8 @@ namespace ConsoleApplication1
                     {
                         Code = (int)ErrorCode.ERR_ArrayInitializerExpected,
                         Line = 5,
-                        Column = 33
-                    }
+                        Column = 33,
+                    },
                 }
             );
         }
@@ -16460,13 +16460,13 @@ class C
                 {
                     Code = (int)ErrorCode.ERR_IncrementLvalueExpected,
                     Line = 6,
-                    Column = 11
+                    Column = 11,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_IncrementLvalueExpected,
                     Line = 7,
-                    Column = 9
+                    Column = 9,
                 }
             );
         }
@@ -16606,8 +16606,8 @@ public class TestTheClasses
                     {
                         Code = (int)ErrorCode.ERR_NoSuchMemberOrExtension,
                         Line = 25,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -16997,8 +16997,8 @@ namespace ConsoleApplication1
                     {
                         Code = (int)ErrorCode.ERR_BadArgCount,
                         Line = 11,
-                        Column = 16
-                    }
+                        Column = 16,
+                    },
                 }
             );
         }
@@ -17033,8 +17033,8 @@ namespace x
                     {
                         Code = (int)ErrorCode.ERR_BadArgType,
                         Line = 12,
-                        Column = 26
-                    }
+                        Column = 26,
+                    },
                 }
             );
         }
@@ -17201,22 +17201,22 @@ class C : B
                         Code = (int)ErrorCode.WRN_NewRequired,
                         Line = 8,
                         Column = 16,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.WRN_NewRequired,
                         Line = 12,
                         Column = 22,
-                        IsWarning = true
+                        IsWarning = true,
                     },
                     //new ErrorDescription { Code = (int)ErrorCode.ERR_BadArgTypes, Line = 16, Column = 5 },  //specifically omitted by roslyn
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_BadArgType,
                         Line = 16,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -17239,7 +17239,7 @@ class C : B
                 {
                     Code = (int)ErrorCode.ERR_RefLvalueExpected,
                     Line = 5,
-                    Column = 15
+                    Column = 15,
                 }
             );
         }
@@ -17439,8 +17439,8 @@ class C : A
                     {
                         Code = (int)ErrorCode.ERR_BaseInStaticMeth,
                         Line = 16,
-                        Column = 7
-                    }
+                        Column = 7,
+                    },
                 }
             );
         }
@@ -17513,8 +17513,8 @@ class CMyClass : Base
                     {
                         Code = (int)ErrorCode.ERR_BaseInBadContext,
                         Line = 8,
-                        Column = 25
-                    }
+                        Column = 25,
+                    },
                 }
             );
         }
@@ -17541,8 +17541,8 @@ public class A : Attribute
                     {
                         Code = (int)ErrorCode.ERR_BaseInBadContext,
                         Line = 4,
-                        Column = 18
-                    }
+                        Column = 18,
+                    },
                 }
             );
         }
@@ -17760,14 +17760,14 @@ namespace CS1540
                     {
                         Code = (int)ErrorCode.ERR_BadProtectedAccess,
                         Line = 34,
-                        Column = 18
+                        Column = 18,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_BadProtectedAccess,
                         Line = 35,
-                        Column = 18
-                    }
+                        Column = 18,
+                    },
                 }
             );
         }
@@ -18124,8 +18124,8 @@ class @a
                     {
                         Code = (int)ErrorCode.ERR_BadDelArgCount,
                         Line = 21,
-                        Column = 9
-                    }
+                        Column = 9,
+                    },
                 }
             );
         }
@@ -18218,8 +18218,8 @@ class @a
                     {
                         Code = (int)ErrorCode.ERR_BadArgType,
                         Line = 21,
-                        Column = 15
-                    }
+                        Column = 15,
+                    },
                 }
             );
             //new ErrorDescription[] { new ErrorDescription { Code = (int)ErrorCode.ERR_BadDelArgTypes, Line = 21, Column = 9 } });
@@ -18318,8 +18318,8 @@ public class MyClass
                     {
                         Code = (int)ErrorCode.ERR_ReturnNotLValue,
                         Line = 23,
-                        Column = 9
-                    }
+                        Column = 9,
+                    },
                 }
             );
         }
@@ -18396,8 +18396,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_BadArgExtraRef,
                         Line = 8,
-                        Column = 13
-                    }
+                        Column = 13,
+                    },
                 }
             );
         }
@@ -18491,8 +18491,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_BadArgRef,
                         Line = 8,
-                        Column = 15
-                    }
+                        Column = 15,
+                    },
                 }
             );
         }
@@ -18532,7 +18532,7 @@ class C : IEnumerable
                 // (8,24): error CS0161: 'C.GetEnumerator()': not all code paths return a value
                 //     public IEnumerator GetEnumerator()
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "GetEnumerator")
-                    .WithArguments("C.GetEnumerator()")
+                    .WithArguments("C.GetEnumerator()"),
             };
             comp.VerifyDiagnostics(expected);
             comp.VerifyEmitDiagnostics(expected);
@@ -18626,8 +18626,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_BadIteratorReturn,
                         Line = 6,
-                        Column = 9
-                    }
+                        Column = 9,
+                    },
                 }
             );
         }
@@ -18730,8 +18730,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_AnonDelegateCantUse,
                         Line = 8,
-                        Column = 42
-                    }
+                        Column = 42,
+                    },
                 }
             );
         }
@@ -18920,8 +18920,8 @@ public class Program
                     {
                         Code = (int)ErrorCode.ERR_BadCoClassSig,
                         Line = 12,
-                        Column = 41
-                    }
+                        Column = 41,
+                    },
                 }
             );
         }
@@ -18969,8 +18969,8 @@ public class Test
                     {
                         Code = (int)ErrorCode.ERR_MultipleIEnumOfT,
                         Line = 27,
-                        Column = 27
-                    }
+                        Column = 27,
+                    },
                 }
             );
         }
@@ -19107,8 +19107,8 @@ class D
                     {
                         Code = (int)ErrorCode.ERR_AssgReadonly2,
                         Line = 17,
-                        Column = 7
-                    }
+                        Column = 7,
+                    },
                 }
             );
         }
@@ -19437,8 +19437,8 @@ class C {
                     {
                         Code = (int)ErrorCode.ERR_AnonMethToNonDel,
                         Line = 6,
-                        Column = 14
-                    }
+                        Column = 14,
+                    },
                 }
             );
         }
@@ -19466,14 +19466,14 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_CantConvAnonMethParams,
                         Line = 8,
-                        Column = 24
+                        Column = 24,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_BadParamType,
                         Line = 8,
-                        Column = 40
-                    }
+                        Column = 40,
+                    },
                 }
             );
         }
@@ -19792,8 +19792,8 @@ class Test
                     {
                         Code = (int)ErrorCode.ERR_IllegalParams,
                         Line = 7,
-                        Column = 33
-                    }
+                        Column = 33,
+                    },
                 }
             );
         }
@@ -19837,8 +19837,8 @@ class CMain
                     {
                         Code = (int)ErrorCode.ERR_ThisStructNotInAnonMeth,
                         Line = 13,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -19882,8 +19882,8 @@ class CMain
                     {
                         Code = (int)ErrorCode.ERR_ThisStructNotInAnonMeth,
                         Line = 13,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -20019,14 +20019,14 @@ class Errors
                     {
                         Code = (int)ErrorCode.ERR_CantConvAnonMethParams,
                         Line = 7,
-                        Column = 15
+                        Column = 15,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_BadParamType,
                         Line = 7,
-                        Column = 31
-                    }
+                        Column = 31,
+                    },
                 }
             );
         }
@@ -20332,7 +20332,7 @@ public class Child2 : Parent
                 //         Parent exampleParent1 = new Parent(10); // CS1729
                 Diagnostic(ErrorCode.ERR_NoCorrespondingArgument, "Parent")
                     .WithArguments("j", "Parent.Parent(int, int)")
-                    .WithLocation(9, 37)
+                    .WithLocation(9, 37),
             };
 
             compilation.VerifyDiagnostics(expected);
@@ -20395,13 +20395,13 @@ class MyDerived : MyBase
                 {
                     Code = (int)ErrorCode.ERR_BadCtorArgCount,
                     Line = 11,
-                    Column = 25
+                    Column = 25,
                 },
                 new ErrorDescription
                 {
                     Code = (int)ErrorCode.ERR_BadCtorArgCount,
                     Line = 32,
-                    Column = 19
+                    Column = 19,
                 }
             );
         }
@@ -20425,8 +20425,8 @@ class C
                     {
                         Code = (int)ErrorCode.ERR_DefaultValueBeforeRequiredValue,
                         Line = 4,
-                        Column = 43
-                    }
+                        Column = 43,
+                    },
                 } //sic: error on close paren
             );
         }
@@ -20498,8 +20498,8 @@ public class C
                     {
                         Code = 1739,
                         Line = 6,
-                        Column = 20
-                    }
+                        Column = 20,
+                    },
                 }
             );
         }
@@ -20527,8 +20527,8 @@ public class C
                     {
                         Code = 1739,
                         Line = 6,
-                        Column = 20
-                    }
+                        Column = 20,
+                    },
                 }
             );
         }
@@ -20583,8 +20583,8 @@ public class B
                     {
                         Code = 1742,
                         Line = 7,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -20613,8 +20613,8 @@ public class C
                     {
                         Code = 1744,
                         Line = 6,
-                        Column = 21
-                    }
+                        Column = 21,
+                    },
                 }
             );
         }
@@ -20644,8 +20644,8 @@ public class C
                     {
                         Code = 1744,
                         Line = 6,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -20672,8 +20672,8 @@ public class C
                     {
                         Code = 1744,
                         Line = 6,
-                        Column = 17
-                    }
+                        Column = 17,
+                    },
                 }
             );
         }
@@ -20700,8 +20700,8 @@ public class C
                     {
                         Code = 1744,
                         Line = 6,
-                        Column = 33
-                    }
+                        Column = 33,
+                    },
                 }
             );
         }
@@ -20731,8 +20731,8 @@ public class C
                     {
                         Code = 1746,
                         Line = 8,
-                        Column = 24
-                    }
+                        Column = 24,
+                    },
                 }
             );
         }
@@ -21665,14 +21665,14 @@ namespace CompilerError1955
                     {
                         Code = (int)ErrorCode.ERR_NonInvocableMemberCalled,
                         Line = 19,
-                        Column = 40
+                        Column = 40,
                     },
                     new ErrorDescription
                     {
                         Code = (int)ErrorCode.ERR_NonInvocableMemberCalled,
                         Line = 20,
-                        Column = 40
-                    }
+                        Column = 40,
+                    },
                 }
             );
         }
@@ -23967,7 +23967,7 @@ public class IsTest10
                     Code = (int)ErrorCode.WRN_IsAlwaysTrue,
                     Line = 14,
                     Column = 13,
-                    IsWarning = true
+                    IsWarning = true,
                 }
             );
 
@@ -25945,7 +25945,7 @@ ftftftft";
                 //         W((E?)null != 0);
                 Diagnostic(ErrorCode.WRN_NubExprIsConstBool, "(E?)null != 0")
                     .WithArguments("true", "MyClass.E", "MyClass.E?")
-                    .WithLocation(96, 11)
+                    .WithLocation(96, 11),
             };
             var compatibleExpected = fullExpected
                 .Where(d => !d.Code.Equals((int)ErrorCode.WRN_NubExprIsConstBool2))
@@ -27075,8 +27075,8 @@ class WarningCS1690 : MarshalByRefObject
                         Code = (int)ErrorCode.WRN_CallOnNonAgileField,
                         Line = 11,
                         Column = 9,
-                        IsWarning = true
-                    }
+                        IsWarning = true,
+                    },
                 }
             );
         }
@@ -27335,8 +27335,8 @@ public class Test
                         Code = (int)ErrorCode.WRN_AssignmentToSelf,
                         Line = 7,
                         Column = 7,
-                        IsWarning = true
-                    }
+                        IsWarning = true,
+                    },
                 }
             );
         }

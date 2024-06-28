@@ -74,7 +74,7 @@ namespace ILVerification.Tests
                 new VerifierOptions
                 {
                     IncludeMetadataTokensInErrorMessages = true,
-                    SanityChecks = true
+                    SanityChecks = true,
                 }
             );
 

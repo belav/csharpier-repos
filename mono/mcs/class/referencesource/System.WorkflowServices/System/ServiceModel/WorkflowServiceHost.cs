@@ -223,7 +223,7 @@ namespace System.ServiceModel
                                 new object[]
                                 {
                                     implementedContract.FullName,
-                                    this.workflowDefinitionContext.WorkflowName
+                                    this.workflowDefinitionContext.WorkflowName,
                                 }
                             )
                         )

@@ -41,7 +41,7 @@ namespace XLinqTests
                     " ",
                     "\n",
                     "\t",
-                    null
+                    null,
                 };
             }
         }
@@ -69,7 +69,7 @@ namespace XLinqTests
                     "stringplain",
                     "",
                     " ",
-                    null
+                    null,
                 };
             }
         }

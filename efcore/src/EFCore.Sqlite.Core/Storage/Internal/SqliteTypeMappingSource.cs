@@ -47,7 +47,7 @@ public class SqliteTypeMappingSource : RelationalTypeMappingSource
             "POLYGON",
             "POLYGONZ",
             "POLYGONM",
-            "POLYGONZM"
+            "POLYGONZM",
         };
 
     internal const string IntegerTypeName = "INTEGER";
@@ -84,7 +84,7 @@ public class SqliteTypeMappingSource : RelationalTypeMappingSource
             { typeof(double), Real },
             { typeof(float), new FloatTypeMapping(RealTypeName) },
             { typeof(Guid), SqliteGuidTypeMapping.Default },
-            { typeof(JsonElement), SqliteJsonTypeMapping.Default }
+            { typeof(JsonElement), SqliteJsonTypeMapping.Default },
         };
 
     private readonly Dictionary<string, RelationalTypeMapping> _storeTypeMappings =
@@ -93,7 +93,7 @@ public class SqliteTypeMappingSource : RelationalTypeMappingSource
             { IntegerTypeName, Integer },
             { RealTypeName, Real },
             { BlobTypeName, Blob },
-            { TextTypeName, Text }
+            { TextTypeName, Text },
         };
 
     /// <summary>
@@ -186,7 +186,9 @@ public class SqliteTypeMappingSource : RelationalTypeMappingSource
                 : null,
         name => Contains(name, "BLOB") ? Blob : null,
         name =>
-            Contains(name, "REAL") || Contains(name, "FLOA") || Contains(name, "DOUB") ? Real : null
+            Contains(name, "REAL") || Contains(name, "FLOA") || Contains(name, "DOUB")
+                ? Real
+                : null,
     };
 
     private static bool Contains(string haystack, string needle) =>

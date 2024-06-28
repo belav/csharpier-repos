@@ -359,8 +359,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 || parameterRefKind switch
                                 {
                                     RefKind.In => argumentRefKind == RefKindExtensions.StrictIn,
-                                    RefKind.RefReadOnlyParameter =>
-                                        argumentRefKind is RefKind.In or RefKindExtensions.StrictIn,
+                                    RefKind.RefReadOnlyParameter => argumentRefKind
+                                        is RefKind.In
+                                            or RefKindExtensions.StrictIn,
                                     _ => false,
                                 }
                             ),
@@ -396,7 +397,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors: method.OriginalDefinition is ErrorMethodSymbol
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
 
             static ImmutableArray<RefKind> getArgumentRefKinds(MethodSymbol method)
@@ -575,7 +576,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 type: type
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -608,7 +609,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors || !conversion.IsValid
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -989,7 +990,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new BoundStatementList(syntax, statements, hasErrors)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
     }
@@ -1005,7 +1006,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new BoundReturnStatement(syntax, refKind, expression, hasErrors)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
     }
@@ -1059,7 +1060,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 ImmutableArray.Create(statement)
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -1070,7 +1071,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return new BoundBlock(syntax, ImmutableArray<LocalSymbol>.Empty, statements)
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -1085,7 +1086,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 statements.AsImmutableOrNull()
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
     }

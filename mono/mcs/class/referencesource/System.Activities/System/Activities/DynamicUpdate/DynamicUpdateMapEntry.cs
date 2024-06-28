@@ -167,7 +167,7 @@ namespace System.Activities.DynamicUpdate
                 second.NewActivityId
             )
             {
-                Parent = newParent
+                Parent = newParent,
             };
 
             if (second.IsRemoval)
@@ -257,7 +257,7 @@ namespace System.Activities.DynamicUpdate
                 IsUpdateBlockedByUpdateAuthor = this.IsUpdateBlockedByUpdateAuthor,
                 Parent = newParent,
                 SavedOriginalValues = this.SavedOriginalValues,
-                SavedOriginalValueFromParent = this.SavedOriginalValueFromParent
+                SavedOriginalValueFromParent = this.SavedOriginalValueFromParent,
             };
         }
     }

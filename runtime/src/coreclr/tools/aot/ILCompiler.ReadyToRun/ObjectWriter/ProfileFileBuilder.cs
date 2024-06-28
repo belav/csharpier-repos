@@ -81,7 +81,7 @@ namespace ILCompiler.PEWriter
                 TargetArchitecture.X64 => 0x00010000,
                 TargetArchitecture.ARM => 0x00001000,
                 TargetArchitecture.ARM64 => 0x00010000,
-                _ => throw new NotImplementedException(_targetDetails.Architecture.ToString())
+                _ => throw new NotImplementedException(_targetDetails.Architecture.ToString()),
             };
         }
 

@@ -45,7 +45,7 @@ class C
                 ),
                 new AddedParameterOrExistingIndex(2),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -95,7 +95,7 @@ class C
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(4),
-                new AddedParameterOrExistingIndex(5)
+                new AddedParameterOrExistingIndex(5),
             };
             var expectedUpdatedCode =
                 @"
@@ -146,7 +146,7 @@ class C
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(4),
-                new AddedParameterOrExistingIndex(5)
+                new AddedParameterOrExistingIndex(5),
             };
             var expectedUpdatedCode =
                 @"
@@ -191,7 +191,7 @@ class C
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -233,7 +233,7 @@ class SomeClass
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -278,7 +278,7 @@ class SomeClass
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -327,7 +327,7 @@ class SomeClass
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -378,7 +378,7 @@ class SomeClass
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -430,7 +430,7 @@ class D : B
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -474,7 +474,7 @@ class CustomAttribute : System.Attribute
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var expectedUpdatedCode =
                 @"
@@ -509,7 +509,7 @@ class CustomAttribute : System.Attribute
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
-                )
+                ),
             };
             var expectedUpdatedCode =
                 @"
@@ -544,7 +544,7 @@ class CustomAttribute : System.Attribute
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
-                )
+                ),
             };
             var expectedUpdatedCode =
                 @"
@@ -578,7 +578,7 @@ class CustomAttribute : System.Attribute
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
-                )
+                ),
             };
             var expectedUpdatedCode =
                 @"
@@ -614,7 +614,7 @@ class CustomAttribute : System.Attribute
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(2)
+                new AddedParameterOrExistingIndex(2),
             };
             var expectedUpdatedCode =
                 @"
@@ -648,7 +648,7 @@ class CustomAttribute : System.Attribute
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
-                )
+                ),
             };
             var expectedUpdatedCode =
                 @"class C
@@ -681,7 +681,7 @@ class CustomAttribute : System.Attribute
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(null, "int", "a", CallSiteKind.Value, "12345"),
                     "int"
-                )
+                ),
             };
             var expectedUpdatedCode =
                 @"public class C
@@ -724,7 +724,7 @@ csharp_indent_braces = true
                 new AddedParameterOrExistingIndex(
                     new AddedParameter(null, "int", "a", CallSiteKind.Value, "12345"),
                     "int"
-                )
+                ),
             };
             var expectedUpdatedCode =
                 @"

@@ -162,12 +162,12 @@ namespace System.Globalization.Tests
                 yield return new object[]
                 {
                     "zh-CN",
-                    new string[] { "China", "People's Republic of China", "China mainland" }
+                    new string[] { "China", "People's Republic of China", "China mainland" },
                 };
                 yield return new object[]
                 {
                     "CN",
-                    new string[] { "China", "People's Republic of China", "China mainland" }
+                    new string[] { "China", "People's Republic of China", "China mainland" },
                 };
             }
             else
@@ -240,7 +240,7 @@ namespace System.Globalization.Tests
                 "US Dollar",
                 "\u0055\u0053\u0020\u0044\u006f\u006c\u006c\u0061\u0072",
                 "USA",
-                "USA"
+                "USA",
             };
             yield return new object[]
             {
@@ -251,7 +251,7 @@ namespace System.Globalization.Tests
                 "Japanese Yen",
                 PlatformDetection.IsNlsGlobalization ? "\u5186" : "\u65e5\u672c\u5186",
                 "JPN",
-                "JPN"
+                "JPN",
             };
             yield return new object[]
             {
@@ -262,7 +262,7 @@ namespace System.Globalization.Tests
                 "PRC Yuan Renminbi",
                 "\u4eba\u6c11\u5e01",
                 "CHN",
-                "CHN"
+                "CHN",
             };
             yield return new object[]
             {
@@ -275,7 +275,7 @@ namespace System.Globalization.Tests
                     ? "\u0631\u064a\u0627\u0644\u00a0\u0633\u0639\u0648\u062f\u064a"
                     : "\u0631\u064a\u0627\u0644\u0020\u0633\u0639\u0648\u062f\u064a",
                 "SAU",
-                "SAU"
+                "SAU",
             };
             yield return new object[]
             {
@@ -288,7 +288,7 @@ namespace System.Globalization.Tests
                     ? "\uc6d0"
                     : "\ub300\ud55c\ubbfc\uad6d\u0020\uc6d0",
                 "KOR",
-                "KOR"
+                "KOR",
             };
             yield return new object[]
             {
@@ -301,7 +301,7 @@ namespace System.Globalization.Tests
                     ? "\u05e9\u05e7\u05dc\u0020\u05d7\u05d3\u05e9"
                     : "\u05e9\u05f4\u05d7",
                 "ISR",
-                "ISR"
+                "ISR",
             };
         }
 

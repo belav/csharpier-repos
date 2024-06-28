@@ -10,7 +10,7 @@ namespace System.Xml
     {
         Type = 0,
         Root = 1,
-        Item = 2
+        Item = 2,
     }
 
     class StringHandle
@@ -321,7 +321,7 @@ namespace System.Xml
             Dictionary,
             UTF8,
             EscapedUTF8,
-            ConstString
+            ConstString,
         }
     }
 }

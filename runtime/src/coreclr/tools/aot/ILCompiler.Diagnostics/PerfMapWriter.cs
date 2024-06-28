@@ -176,7 +176,7 @@ namespace ILCompiler.Diagnostics
                 TargetOS.FreeBSD => PerfMapOSToken.FreeBSD,
                 TargetOS.NetBSD => PerfMapOSToken.NetBSD,
                 TargetOS.SunOS => PerfMapOSToken.SunOS,
-                _ => throw new NotImplementedException(details.OperatingSystem.ToString())
+                _ => throw new NotImplementedException(details.OperatingSystem.ToString()),
             };
 
             PerfMapAbiToken abiToken = details.Abi switch
@@ -184,7 +184,7 @@ namespace ILCompiler.Diagnostics
                 TargetAbi.Unknown => PerfMapAbiToken.Unknown,
                 TargetAbi.NativeAot => PerfMapAbiToken.Default,
                 TargetAbi.NativeAotArmel => PerfMapAbiToken.Armel,
-                _ => throw new NotImplementedException(details.Abi.ToString())
+                _ => throw new NotImplementedException(details.Abi.ToString()),
             };
 
             PerfMapArchitectureToken archToken = details.Architecture switch
@@ -194,7 +194,7 @@ namespace ILCompiler.Diagnostics
                 TargetArchitecture.ARM64 => PerfMapArchitectureToken.ARM64,
                 TargetArchitecture.X64 => PerfMapArchitectureToken.X64,
                 TargetArchitecture.X86 => PerfMapArchitectureToken.X86,
-                _ => throw new NotImplementedException(details.Architecture.ToString())
+                _ => throw new NotImplementedException(details.Architecture.ToString()),
             };
 
             return new PerfmapTokensForTarget(osToken, archToken, abiToken);

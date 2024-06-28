@@ -39,7 +39,7 @@ namespace System.Linq.Expressions.Tests
             var instance = new SampleClassWithProperties
             {
                 DefaultProperty = new List<int> { 100, 101 },
-                AlternativeProperty = new List<int> { 200, 201 }
+                AlternativeProperty = new List<int> { 200, 201 },
             };
 
             IndexExpression expr = instance.DefaultIndexExpression;
@@ -69,7 +69,7 @@ namespace System.Linq.Expressions.Tests
         {
             var instance = new SampleClassWithProperties
             {
-                DefaultProperty = new List<int> { 100, 101 }
+                DefaultProperty = new List<int> { 100, 101 },
             };
 
             IndexExpression expr = instance.DefaultIndexExpression;

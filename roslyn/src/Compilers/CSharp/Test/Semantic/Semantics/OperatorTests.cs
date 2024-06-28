@@ -1373,7 +1373,7 @@ IBinaryOperation (BinaryOperatorKind.Or) (OperatorMethod: S S.op_BitwiseOr(S x, 
                 // struct S
                 Diagnostic(ErrorCode.WRN_EqualityOpWithoutGetHashCode, "S")
                     .WithArguments("S")
-                    .WithLocation(3, 8)
+                    .WithLocation(3, 8),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -1427,7 +1427,7 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: ?, IsInva
                 //         B b = /*<bind>*/new C() + new B()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "new C() + new B()")
                     .WithArguments("+", "C", "B")
-                    .WithLocation(16, 25)
+                    .WithLocation(16, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -1653,7 +1653,7 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: ?, IsInva
                 //         var z = /*<bind>*/x + y/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_AmbigBinaryOps, "x + y")
                     .WithArguments("+", "D<object>.C", "D<dynamic>.C")
-                    .WithLocation(16, 27)
+                    .WithLocation(16, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -2116,7 +2116,7 @@ IBlockOperation (3 statements, 3 locals) (OperationKind.Block, Type: null) (Synt
                 //     public override string ToString() { return this.str; }
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "str")
                     .WithArguments("S", "str")
-                    .WithLocation(11, 53)
+                    .WithLocation(11, 53),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -2627,7 +2627,7 @@ ICompoundAssignmentOperation (BinaryOperatorKind.Add, IsLifted) (OperationKind.C
                 //         /*<bind>*/a += b/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a += b")
                     .WithArguments("int?", "int")
-                    .WithLocation(6, 19)
+                    .WithLocation(6, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -3173,7 +3173,7 @@ IBlockOperation (14 statements) (OperationKind.Block, Type: null) (Syntax: '{ ..
             {
                 // CS0448: The return type for ++ or -- operator must match the parameter type or be derived from the parameter type
                 //     public static S operator --(S? s) { return (S)s; }
-                Diagnostic(ErrorCode.ERR_BadIncDecRetType, "--").WithLocation(10, 30)
+                Diagnostic(ErrorCode.ERR_BadIncDecRetType, "--").WithLocation(10, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BlockSyntax>(
@@ -3544,27 +3544,26 @@ class C
                             + (
                                 child.Text switch
                                 {
-                                    "@operator" =>
-                                        ((BinaryOperatorSignature)child.Value).Kind.ToString(),
-                                    "leftConversion"
-                                    or "finalConversion" =>
-                                        (
-                                            child.Children.SingleOrDefault() is TreeDumperNode node
-                                                ? (
-                                                    node.Text switch
-                                                    {
-                                                        "conversion" =>
-                                                            node.Children.ElementAt(1).Value,
-                                                        "valuePlaceholder" => Conversion.Identity,
-                                                        _ =>
-                                                            throw ExceptionUtilities.UnexpectedValue(
-                                                                node.Text
-                                                            )
-                                                    }
-                                                )
-                                                : Conversion.NoConversion
-                                        ).ToString(),
-                                    _ => child.Value.ToString()
+                                    "@operator" => (
+                                        (BinaryOperatorSignature)child.Value
+                                    ).Kind.ToString(),
+                                    "leftConversion" or "finalConversion" => (
+                                        child.Children.SingleOrDefault() is TreeDumperNode node
+                                            ? (
+                                                node.Text switch
+                                                {
+                                                    "conversion" => node
+                                                        .Children.ElementAt(1)
+                                                        .Value,
+                                                    "valuePlaceholder" => Conversion.Identity,
+                                                    _ => throw ExceptionUtilities.UnexpectedValue(
+                                                        node.Text
+                                                    ),
+                                                }
+                                            )
+                                            : Conversion.NoConversion
+                                    ).ToString(),
+                                    _ => child.Value.ToString(),
                                 }
                             )
                     )
@@ -8106,7 +8105,7 @@ public class RubyTime
                 UnaryOperatorKind.UnaryPlus,
                 UnaryOperatorKind.UnaryMinus,
                 UnaryOperatorKind.LogicalNegation,
-                UnaryOperatorKind.BitwiseComplement
+                UnaryOperatorKind.BitwiseComplement,
             };
 
             string[] opTokens = { "++", "--", "++", "--", "+", "-", "!", "~" };
@@ -8133,7 +8132,7 @@ public class RubyTime
                 "System.StringComparison",
                 "System.Guid",
                 "dynamic",
-                "byte*"
+                "byte*",
             };
 
             var builder = new System.Text.StringBuilder();
@@ -8545,7 +8544,7 @@ class Module1
                 "&",
                 "||",
                 "&&",
-                ">>>"
+                ">>>",
             };
 
             string[] typeNames =
@@ -8577,7 +8576,7 @@ class Module1
                 "Module1",
                 "dynamic",
                 "byte*",
-                "sbyte*"
+                "sbyte*",
             };
 
             var builder = new System.Text.StringBuilder();
@@ -8704,7 +8703,7 @@ class Module1
                 BinaryOperatorKind.Xor,
                 BinaryOperatorKind.Or,
                 BinaryOperatorKind.And,
-                BinaryOperatorKind.UnsignedRightShift
+                BinaryOperatorKind.UnsignedRightShift,
             };
 
             string[] opTokens =
@@ -8719,7 +8718,7 @@ class Module1
                 "^=",
                 "|=",
                 "&=",
-                ">>>="
+                ">>>=",
             };
 
             string[] typeNames =
@@ -8751,7 +8750,7 @@ class Module1
                 "Module1",
                 "dynamic",
                 "byte*",
-                "sbyte*"
+                "sbyte*",
             };
 
             var builder = new System.Text.StringBuilder();

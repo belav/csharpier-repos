@@ -22,7 +22,7 @@ internal sealed class OletxEnlistment : OletxBaseEnlistment, IPromotedEnlistment
         Aborting,
         Aborted,
         InDoubt,
-        Done
+        Done,
     }
 
     private Phase0EnlistmentShim? _phase0Shim;

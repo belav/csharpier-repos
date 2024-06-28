@@ -69,6 +69,6 @@ namespace System.Windows.Forms.RTF
         FileSource,
         DrawAttr,
         IndexAttr,
-        Unicode
+        Unicode,
     }
 }

@@ -29,7 +29,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             Category = principal,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
         principal.Products.Add(dependent);
 
@@ -64,7 +64,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Category = principal
+            Category = principal,
         };
         principal.Products.Add(dependent);
 
@@ -98,7 +98,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -133,7 +133,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
         principal.Products.Add(dependent);
 
@@ -170,7 +170,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
             CategoryId2 = principal.Id2,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -234,7 +234,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -270,7 +270,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             Category = principal,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
         principal.Products.Add(dependent);
 
@@ -305,7 +305,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Category = principal
+            Category = principal,
         };
         principal.Products.Add(dependent);
 
@@ -339,7 +339,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -374,7 +374,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
         principal.Products.Add(dependent);
 
@@ -411,7 +411,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
             CategoryId2 = principal.Id2,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -475,7 +475,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -510,7 +510,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -544,7 +544,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -578,7 +578,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
         principal.Products.Add(dependent);
 
@@ -642,7 +642,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
         principal.Products.Add(dependent);
 
@@ -706,7 +706,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -741,7 +741,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
             CategoryId2 = principal.Id2,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -774,7 +774,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -808,7 +808,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -843,7 +843,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
             CategoryId2 = principal.Id2,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -876,7 +876,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Category = principal
+            Category = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -910,7 +910,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -943,7 +943,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             CategoryId1 = principal.Id1,
-            CategoryId2 = principal.Id2
+            CategoryId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -977,7 +977,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             Parent = principal,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
         principal.Child = dependent;
 
@@ -1012,7 +1012,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Parent = principal
+            Parent = principal,
         };
         principal.Child = dependent;
 
@@ -1046,7 +1046,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1081,7 +1081,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
         principal.Child = dependent;
 
@@ -1118,7 +1118,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             ParentId1 = principal.Id1,
             ParentId2 = principal.Id2,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1182,7 +1182,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1218,7 +1218,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             Parent = principal,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
         principal.Child = dependent;
 
@@ -1253,7 +1253,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Parent = principal
+            Parent = principal,
         };
         principal.Child = dependent;
 
@@ -1287,7 +1287,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -1322,7 +1322,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
         principal.Child = dependent;
 
@@ -1359,7 +1359,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             ParentId1 = principal.Id1,
             ParentId2 = principal.Id2,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -1423,7 +1423,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -1458,7 +1458,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1492,7 +1492,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -1526,7 +1526,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
         principal.Child = dependent;
 
@@ -1590,7 +1590,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
         principal.Child = dependent;
 
@@ -1654,7 +1654,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1689,7 +1689,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             ParentId1 = principal.Id1,
             ParentId2 = principal.Id2,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1722,7 +1722,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1756,7 +1756,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;
@@ -1791,7 +1791,7 @@ public class FixupCompositeTest
             Id2 = Guid78,
             ParentId1 = principal.Id1,
             ParentId2 = principal.Id2,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -1824,7 +1824,7 @@ public class FixupCompositeTest
         {
             Id1 = 78,
             Id2 = Guid78,
-            Parent = principal
+            Parent = principal,
         };
 
         context.Entry(principal).State = entityState;
@@ -1858,7 +1858,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(dependent).State = entityState;
@@ -1891,7 +1891,7 @@ public class FixupCompositeTest
             Id1 = 78,
             Id2 = Guid78,
             ParentId1 = principal.Id1,
-            ParentId2 = principal.Id2
+            ParentId2 = principal.Id2,
         };
 
         context.Entry(principal).State = entityState;

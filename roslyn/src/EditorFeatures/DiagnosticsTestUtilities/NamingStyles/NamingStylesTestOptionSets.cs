@@ -45,20 +45,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                         firstPreferences.NamingStyles.AddRange(secondPreferences.NamingStyles),
                         firstPreferences.NamingRules.AddRange(secondPreferences.NamingRules)
                     )
-                }
+                },
             };
         }
 
         internal OptionsCollection ClassNamesArePascalCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, ClassNamesArePascalCaseOption() }
+                { NamingStyleOptions.NamingPreferences, ClassNamesArePascalCaseOption() },
             };
 
         internal OptionsCollection FieldNamesAreCamelCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseOption() }
+                { NamingStyleOptions.NamingPreferences, FieldNamesAreCamelCaseOption() },
             };
 
         internal OptionsCollection FieldNamesAreCamelCaseWithUnderscorePrefix =>
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     FieldNamesAreCamelCaseWithUnderscorePrefixOption()
-                }
+                },
             };
 
         internal OptionsCollection FieldNamesAreCamelCaseWithFieldUnderscorePrefix =>
@@ -76,7 +76,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     FieldNamesAreCamelCaseWithFieldUnderscorePrefixOption()
-                }
+                },
             };
 
         internal OptionsCollection FieldNamesAreCamelCaseWithFieldUnderscorePrefixAndUnderscoreEndSuffix =>
@@ -85,25 +85,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     FieldNamesAreCamelCaseWithFieldUnderscorePrefixAndUnderscoreEndSuffixOption()
-                }
+                },
             };
 
         internal OptionsCollection MethodNamesArePascalCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, MethodNamesArePascalCaseOption() }
+                { NamingStyleOptions.NamingPreferences, MethodNamesArePascalCaseOption() },
             };
 
         internal OptionsCollection MethodNamesAreCamelCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, MethodNamesAreCamelCaseOption() }
+                { NamingStyleOptions.NamingPreferences, MethodNamesAreCamelCaseOption() },
             };
 
         internal OptionsCollection ParameterNamesAreCamelCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, ParameterNamesAreCamelCaseOption() }
+                { NamingStyleOptions.NamingPreferences, ParameterNamesAreCamelCaseOption() },
             };
 
         internal OptionsCollection ParameterNamesAreCamelCaseWithPUnderscorePrefix =>
@@ -112,7 +112,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     ParameterNamesAreCamelCaseWithPUnderscorePrefixOption()
-                }
+                },
             };
 
         internal OptionsCollection ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffix =>
@@ -121,43 +121,43 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     ParameterNamesAreCamelCaseWithPUnderscorePrefixAndUnderscoreEndSuffixOption()
-                }
+                },
             };
 
         internal OptionsCollection LocalNamesAreCamelCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, LocalNamesAreCamelCaseOption() }
+                { NamingStyleOptions.NamingPreferences, LocalNamesAreCamelCaseOption() },
             };
 
         internal OptionsCollection LocalFunctionNamesAreCamelCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, LocalFunctionNamesAreCamelCaseOption() }
+                { NamingStyleOptions.NamingPreferences, LocalFunctionNamesAreCamelCaseOption() },
             };
 
         internal OptionsCollection PropertyNamesArePascalCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, PropertyNamesArePascalCaseOption() }
+                { NamingStyleOptions.NamingPreferences, PropertyNamesArePascalCaseOption() },
             };
 
         internal OptionsCollection InterfaceNamesStartWithI =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, InterfaceNamesStartWithIOption() }
+                { NamingStyleOptions.NamingPreferences, InterfaceNamesStartWithIOption() },
             };
 
         internal OptionsCollection TypeParameterNamesStartWithT =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, TypeParameterNamesStartWithTOption() }
+                { NamingStyleOptions.NamingPreferences, TypeParameterNamesStartWithTOption() },
             };
 
         internal OptionsCollection ConstantsAreUpperCase =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, ConstantsAreUpperCaseOption() }
+                { NamingStyleOptions.NamingPreferences, ConstantsAreUpperCaseOption() },
             };
 
         internal OptionsCollection LocalsAreCamelCaseConstantsAreUpperCase =>
@@ -166,13 +166,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     LocalsAreCamelCaseConstantsAreUpperCaseOption()
-                }
+                },
             };
 
         internal OptionsCollection AsyncFunctionNamesEndWithAsync =>
             new OptionsCollection(_languageName)
             {
-                { NamingStyleOptions.NamingPreferences, AsyncFunctionNamesEndWithAsyncOption() }
+                { NamingStyleOptions.NamingPreferences, AsyncFunctionNamesEndWithAsyncOption() },
             };
 
         internal OptionsCollection MethodNamesWithAccessibilityArePascalCase(
@@ -183,7 +183,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     MethodNamesArePascalCaseOption(accessibilities)
-                }
+                },
             };
 
         internal OptionsCollection SymbolKindsArePascalCase(
@@ -194,7 +194,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     SymbolKindsArePascalCaseOption(symbolKinds)
-                }
+                },
             };
 
         internal OptionsCollection SymbolKindsArePascalCaseEmpty() =>
@@ -205,7 +205,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                     SymbolKindsArePascalCaseOption(
                         ImmutableArray<SymbolSpecification.SymbolKindOrTypeKind>.Empty
                     )
-                }
+                },
             };
 
         internal OptionsCollection SymbolKindsArePascalCase(object symbolOrTypeKind) =>
@@ -241,7 +241,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
                 {
                     NamingStyleOptions.NamingPreferences,
                     AccessibilitiesArePascalCaseOption(accessibilities)
-                }
+                },
             };
 
         private static NamingStylePreferences ClassNamesArePascalCaseOption()
@@ -266,7 +266,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
@@ -302,7 +302,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -339,7 +339,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -376,7 +376,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -413,7 +413,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -458,7 +458,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
@@ -496,7 +496,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
@@ -532,7 +532,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
@@ -568,7 +568,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
             var info = new NamingStylePreferences(
                 ImmutableArray.Create(symbolSpecification),
@@ -604,7 +604,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -641,7 +641,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -678,7 +678,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -715,7 +715,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -752,7 +752,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -789,7 +789,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -826,7 +826,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -863,7 +863,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -905,7 +905,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -965,14 +965,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = localsSymbolSpecification.ID,
                 NamingStyleID = camelCaseNamingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var constLocalsUpperCaseNamingRule = new SerializableNamingRule()
             {
                 SymbolSpecificationID = constLocalsSymbolSpecification.ID,
                 NamingStyleID = allUpperNamingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(
@@ -1014,7 +1014,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.NamingStyles
             {
                 SymbolSpecificationID = symbolSpecification.ID,
                 NamingStyleID = namingStyle.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
 
             var info = new NamingStylePreferences(

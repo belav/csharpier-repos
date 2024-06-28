@@ -179,7 +179,7 @@ unsafe partial class GenericsTest
             () => GenericsNative.AddVectorU128(default, default)
         );
 
-        Vector<uint>[] values = new Vector<uint>[] { default, value2, default, *value4, default, };
+        Vector<uint>[] values = new Vector<uint>[] { default, value2, default, *value4, default };
 
         Assert.Throws<MarshalDirectiveException>(() =>
         {
@@ -248,7 +248,7 @@ unsafe partial class GenericsTest
             () => GenericsNative.AddVectorU256(default, default)
         );
 
-        Vector<uint>[] values = new Vector<uint>[] { default, value2, default, *value4, default, };
+        Vector<uint>[] values = new Vector<uint>[] { default, value2, default, *value4, default };
 
         Assert.Throws<MarshalDirectiveException>(() =>
         {

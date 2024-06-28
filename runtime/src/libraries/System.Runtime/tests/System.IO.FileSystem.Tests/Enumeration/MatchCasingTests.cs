@@ -37,7 +37,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions
                 {
                     MatchCasing = MatchCasing.CaseSensitive,
-                    RecurseSubdirectories = true
+                    RecurseSubdirectories = true,
                 }
             );
 
@@ -49,7 +49,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions
                 {
                     MatchCasing = MatchCasing.CaseInsensitive,
-                    RecurseSubdirectories = true
+                    RecurseSubdirectories = true,
                 }
             );
             FSAssert.EqualWhenOrdered(
@@ -58,7 +58,7 @@ namespace System.IO.Tests.Enumeration
                     fileOne.FullName,
                     fileTwo.FullName,
                     fileThree.FullName,
-                    fileFour.FullName
+                    fileFour.FullName,
                 },
                 paths
             );
@@ -69,7 +69,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions
                 {
                     MatchCasing = MatchCasing.CaseSensitive,
-                    RecurseSubdirectories = true
+                    RecurseSubdirectories = true,
                 }
             );
             FSAssert.EqualWhenOrdered(new string[] { fileTwo.FullName, fileThree.FullName }, paths);
@@ -80,7 +80,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions
                 {
                     MatchCasing = MatchCasing.CaseSensitive,
-                    RecurseSubdirectories = true
+                    RecurseSubdirectories = true,
                 }
             );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, paths);

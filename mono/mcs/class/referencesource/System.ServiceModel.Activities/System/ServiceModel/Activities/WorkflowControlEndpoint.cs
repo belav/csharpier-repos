@@ -153,7 +153,7 @@ namespace System.ServiceModel.Activities
         {
             return new NetNamedPipeBinding(NetNamedPipeSecurityMode.None)
             {
-                TransactionFlow = true
+                TransactionFlow = true,
             };
         }
 

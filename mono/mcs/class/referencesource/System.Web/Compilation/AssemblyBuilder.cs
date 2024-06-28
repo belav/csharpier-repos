@@ -622,7 +622,7 @@ namespace System.Web.Compilation
                 new CodeTypeReference(typeof(System.Reflection.AssemblyCultureAttribute)),
                 new CodeAttributeArgument[]
                 {
-                    new CodeAttributeArgument(new CodePrimitiveExpression(CultureName))
+                    new CodeAttributeArgument(new CodePrimitiveExpression(CultureName)),
                 }
             );
 
@@ -803,7 +803,7 @@ namespace System.Web.Compilation
 
             CodeChecksumPragma pragma = new CodeChecksumPragma()
             {
-                ChecksumAlgorithmId = s_codeChecksumSha1Id
+                ChecksumAlgorithmId = s_codeChecksumSha1Id,
             };
 
             if (_compConfig.UrlLinePragmas)

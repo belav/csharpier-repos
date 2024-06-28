@@ -190,7 +190,7 @@ namespace System.CommandLine
                 ArgumentResult argumentResult => argumentResult.Argument,
                 OptionResult optionResult => optionResult.Option,
                 DirectiveResult directiveResult => directiveResult.Directive,
-                _ => ((CommandResult)currentSymbolResult).Command
+                _ => ((CommandResult)currentSymbolResult).Command,
             };
 
             var context = GetCompletionContext();

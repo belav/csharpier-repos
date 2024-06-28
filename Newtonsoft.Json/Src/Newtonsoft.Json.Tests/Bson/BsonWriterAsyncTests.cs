@@ -525,7 +525,7 @@ namespace Newtonsoft.Json.Tests.Bson
             MemoryStream ms = new MemoryStream();
             JsonWriter writer = new BsonWriter(ms)
             {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
 
             await writer.WriteStartArrayAsync();
@@ -600,7 +600,7 @@ namespace Newtonsoft.Json.Tests.Bson
                     78,
                     158,
                     62,
-                    1
+                    1,
                 },
                 (byte[])reader.Value
             );

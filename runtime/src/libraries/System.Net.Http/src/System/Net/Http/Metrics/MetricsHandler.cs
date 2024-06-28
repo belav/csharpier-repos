@@ -215,7 +215,7 @@ namespace System.Net.Http.Metrics
                 HttpRequestError.ConfigurationLimitExceeded => "configuration_limit_exceeded",
 
                 // Fall back to the exception type name in case of HttpRequestError.Unknown or when exception is not an HttpRequestException.
-                _ => exception.GetType().FullName!
+                _ => exception.GetType().FullName!,
             };
             return true;
         }
@@ -227,7 +227,7 @@ namespace System.Net.Http.Metrics
                 (1, 1) => "1.1",
                 (2, 0) => "2",
                 (3, 0) => "3",
-                _ => httpVersion.ToString()
+                _ => httpVersion.ToString(),
             };
 
         private static TagList InitializeCommonTags(HttpRequestMessage request)

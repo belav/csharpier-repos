@@ -72,7 +72,7 @@ IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKi
                 //         /*<bind>*/base/*</bind>*/.M1();
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "M1")
                     .WithArguments("object", "M1")
-                    .WithLocation(8, 35)
+                    .WithLocation(8, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BaseExpressionSyntax>(

@@ -33,6 +33,6 @@ namespace System.Web.UI
     {
         XhtmlBasic = 0,
         XhtmlMobileProfile = 1,
-        Wml20 = 2
+        Wml20 = 2,
     }
 }

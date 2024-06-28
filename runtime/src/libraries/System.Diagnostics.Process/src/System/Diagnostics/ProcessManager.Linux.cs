@@ -140,7 +140,7 @@ namespace System.Diagnostics
                                 _currentPriority = (int)stat.nice,
                                 _startAddress = null,
                                 _threadState = ProcFsStateToThreadState(stat.state),
-                                _threadWaitReason = ThreadWaitReason.Unknown
+                                _threadWaitReason = ThreadWaitReason.Unknown,
                             }
                         );
                     }

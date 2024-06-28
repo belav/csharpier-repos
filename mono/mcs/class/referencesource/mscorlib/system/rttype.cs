@@ -81,7 +81,7 @@ namespace System
         // If we want to be able to distinguish between overloads whose parameter types have the same name but come from different assemblies,
         // we can add FormatAssembly | FormatNoVersion to FormatSerialization. But we are omitting it because it is not a useful scenario
         // and including the assembly name will normally increase the size of the serialized data and also decrease the performance.
-        FormatSerialization = FormatNamespace | FormatGenericParam | FormatFullInst
+        FormatSerialization = FormatNamespace | FormatGenericParam | FormatFullInst,
     }
 
     internal enum TypeNameKind
@@ -102,7 +102,7 @@ namespace System
             All,
             CaseSensitive,
             CaseInsensitive,
-            HandleToInfo
+            HandleToInfo,
         }
 
         // Helper to build lists of MemberInfos. Special cased to avoid allocations for lists of one element.
@@ -215,7 +215,7 @@ namespace System
                 Property,
                 Event,
                 Interface,
-                NestedType
+                NestedType,
             }
 
             private struct Filter
@@ -371,7 +371,7 @@ namespace System
                                             methodAttributes,
                                             bindingFlags,
                                             null
-                                        )
+                                        ),
                                     };
                             break;
                         case CacheType.Constructor:
@@ -385,7 +385,7 @@ namespace System
                                             m_runtimeTypeCache,
                                             methodAttributes,
                                             bindingFlags
-                                        )
+                                        ),
                                     };
                             break;
                     }
@@ -429,7 +429,7 @@ namespace System
                                     ReflectedType,
                                     m_runtimeTypeCache,
                                     bindingFlags
-                                )
+                                ),
                             };
 
                     Insert(ref list, null, MemberListType.HandleToInfo);
@@ -2159,7 +2159,7 @@ namespace System
                         s_SICtorParamTypes = new Type[]
                         {
                             typeof(SerializationInfo),
-                            typeof(StreamingContext)
+                            typeof(StreamingContext),
                         };
 
                     m_serializationCtor =
@@ -6967,7 +6967,7 @@ namespace System
                             new Object[]
                             {
                                 null,
-                                RuntimeMethodHandle.GetFunctionPointer(ace.m_hCtorMethodHandle)
+                                RuntimeMethodHandle.GetFunctionPointer(ace.m_hCtorMethodHandle),
                             }
                         );
                     ace.m_ctor = ctor;
@@ -7459,7 +7459,7 @@ namespace System
             Error = 0x00000008,
             Currency = 0x00000010,
             BStr = 0x00000020,
-            SafeArray = 0x00010000
+            SafeArray = 0x00010000,
         }
 
         private static volatile OleAutBinder s_ForwardCallBinder;

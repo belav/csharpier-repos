@@ -984,7 +984,7 @@ namespace System.Web.Configuration
                 "System.Reflection.AssemblyKeyFile",
                 new CodeAttributeArgument[]
                 {
-                    new CodeAttributeArgument(new CodePrimitiveExpression(_strongNameKeyFileName))
+                    new CodeAttributeArgument(new CodePrimitiveExpression(_strongNameKeyFileName)),
                 }
             );
 
@@ -999,7 +999,7 @@ namespace System.Web.Configuration
                 "System.Reflection.AssemblyVersion",
                 new CodeAttributeArgument[]
                 {
-                    new CodeAttributeArgument(new CodePrimitiveExpression(ThisAssembly.Version))
+                    new CodeAttributeArgument(new CodePrimitiveExpression(ThisAssembly.Version)),
                 }
             );
             ccu.AssemblyCustomAttributes.Add(declaration);
@@ -1286,7 +1286,7 @@ namespace System.Web.Configuration
                             new CodeTypeReferenceExpression(typeof(String)),
                             "Empty"
                         ),
-                        new CodePrimitiveExpression(bd.Depth)
+                        new CodePrimitiveExpression(bd.Depth),
                     }
                 );
 
@@ -1319,7 +1319,7 @@ namespace System.Web.Configuration
                                 new CodeTypeReferenceExpression(typeof(String)),
                                 "Empty"
                             ),
-                            new CodePrimitiveExpression(bd.Depth)
+                            new CodePrimitiveExpression(bd.Depth),
                         }
                     );
 
@@ -1680,7 +1680,7 @@ namespace System.Web.Configuration
                                     new CodePropertyReferenceExpression(
                                         new CodeTypeReferenceExpression(typeof(String)),
                                         "Empty"
-                                    )
+                                    ),
                                 }
                             )
                         );
@@ -1788,7 +1788,7 @@ namespace System.Web.Configuration
                                 {
                                     new CodePrimitiveExpression(
                                         ((CheckPair)bd.IdCapabilityChecks[i]).Header
-                                    )
+                                    ),
                                 }
                             )
                         )
@@ -1910,7 +1910,7 @@ namespace System.Web.Configuration
                                         new CodePropertyReferenceExpression(
                                             new CodeTypeReferenceExpression(typeof(String)),
                                             "Empty"
-                                        )
+                                        ),
                                     }
                                 )
                             )
@@ -1964,7 +1964,7 @@ namespace System.Web.Configuration
                                 {
                                     new CodePrimitiveExpression(
                                         ((CheckPair)bd.CaptureCapabilityChecks[i]).Header
-                                    )
+                                    ),
                                 }
                             )
                         )

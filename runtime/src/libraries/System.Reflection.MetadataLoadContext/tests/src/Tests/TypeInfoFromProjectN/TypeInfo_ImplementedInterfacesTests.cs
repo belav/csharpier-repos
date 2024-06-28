@@ -171,6 +171,6 @@ namespace System.Reflection.Tests
     public enum MyEnum1
     {
         A,
-        B
+        B,
     }
 }

@@ -20,7 +20,7 @@ namespace System.Globalization.Tests
             {
                 s_randomDataGenerator.GetInt16(-55) % 9999,
                 s_randomDataGenerator.GetInt16(-55) % 12 + 1,
-                s_randomDataGenerator.GetInt16(-55) % 29 + 1
+                s_randomDataGenerator.GetInt16(-55) % 29 + 1,
             };
         }
 

@@ -21,7 +21,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelBinderProvider[] providers = new[]
             {
                 new Mock<ModelBinderProvider>().Object,
-                new Mock<ModelBinderProvider>().Object
+                new Mock<ModelBinderProvider>().Object,
             };
 
             // Act
@@ -66,7 +66,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection
             {
-                mockProvider
+                mockProvider,
             };
 
             // Act
@@ -87,7 +87,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection
             {
-                mockProvider
+                mockProvider,
             };
 
             // Act
@@ -108,7 +108,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection
             {
-                mockProvider
+                mockProvider,
             };
 
             // Act
@@ -132,7 +132,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection
             {
-                mockProvider
+                mockProvider,
             };
 
             // Act
@@ -153,7 +153,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection
             {
-                mockProvider
+                mockProvider,
             };
 
             // Act
@@ -174,7 +174,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection
             {
-                frontOfListProvider
+                frontOfListProvider,
             };
 
             // Act
@@ -233,7 +233,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(ModelWithProviderAttribute_BadAttribute)
-                )
+                ),
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
@@ -260,7 +260,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ModelWithProviderAttribute_Binder_Generic<int>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", "fooValue" } }
+                ValueProvider = new SimpleValueProvider { { "foo", "fooValue" } },
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
@@ -289,7 +289,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ModelWithProviderAttribute_Binder_SuppressPrefix)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "bar", "barValue" } }
+                ValueProvider = new SimpleValueProvider { { "bar", "barValue" } },
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
@@ -318,7 +318,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ModelWithProviderAttribute_Binder)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "bar", "barValue" } }
+                ValueProvider = new SimpleValueProvider { { "bar", "barValue" } },
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
@@ -347,7 +347,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ModelWithProviderAttribute_Binder)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo", "fooValue" } }
+                ValueProvider = new SimpleValueProvider { { "foo", "fooValue" } },
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
@@ -374,7 +374,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(ModelWithProviderAttribute_Provider)
-                )
+                ),
             };
 
             ModelBinderProviderCollection providers = new ModelBinderProviderCollection();
@@ -401,7 +401,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(object)
-                )
+                ),
             };
             IExtensibleModelBinder expectedBinder = new Mock<IExtensibleModelBinder>().Object;
 
@@ -415,7 +415,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 {
                     new Mock<ModelBinderProvider>().Object,
                     mockProvider.Object,
-                    new Mock<ModelBinderProvider>().Object
+                    new Mock<ModelBinderProvider>().Object,
                 }
             );
 
@@ -439,11 +439,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(object)
-                )
+                ),
             };
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection(
-                new[] { new Mock<ModelBinderProvider>().Object, }
+                new[] { new Mock<ModelBinderProvider>().Object }
             );
 
             // Act
@@ -498,7 +498,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(ModelWithBindAttribute)
-                )
+                ),
             };
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection();
 
@@ -566,11 +566,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(int)
-                )
+                ),
             };
 
             ModelBinderProviderCollection collection = new ModelBinderProviderCollection(
-                new[] { new Mock<ModelBinderProvider>().Object, }
+                new[] { new Mock<ModelBinderProvider>().Object }
             );
 
             // Act & assert

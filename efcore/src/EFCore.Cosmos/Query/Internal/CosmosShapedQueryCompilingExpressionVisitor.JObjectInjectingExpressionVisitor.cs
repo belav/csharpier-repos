@@ -38,7 +38,7 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                             Equal(jObjectVariable, Constant(null, jObjectVariable.Type)),
                             Constant(null, shaperExpression.Type),
                             shaperExpression
-                        )
+                        ),
                     };
 
                     return Block(shaperExpression.Type, variables, expressions);
@@ -61,7 +61,7 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                             Equal(jArrayVariable, Constant(null, jArrayVariable.Type)),
                             Constant(null, collectionShaperExpression.Type),
                             collectionShaperExpression
-                        )
+                        ),
                     };
 
                     return Block(collectionShaperExpression.Type, variables, expressions);

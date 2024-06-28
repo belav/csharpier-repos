@@ -52,7 +52,7 @@ namespace System.Diagnostics.Tests
                     ProductName = Path.GetFileNameWithoutExtension(NativeConsoleAppFileName),
                     ProductPrivatePart = 2,
                     ProductVersion = "5.4.3.2",
-                    SpecialBuild = ""
+                    SpecialBuild = "",
                 }
             );
         }

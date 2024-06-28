@@ -172,7 +172,7 @@ namespace MonoTests.System.Data.OleDb
                     values = new DateTime[]
                     {
                         new DateTime(1753, 01, 01, 00, 00, 00), //	01/01/1753 00:00:00.000
-                        new DateTime(1900, 01, 01, 00, 00, 00)
+                        new DateTime(1900, 01, 01, 00, 00, 00),
                     }; //	01/01/1900 00:00
                     break;
                 case DataBaseServer.Oracle:
@@ -188,7 +188,7 @@ namespace MonoTests.System.Data.OleDb
                     values = new DateTime[]
                     {
                         new DateTime(0001, 01, 01), //	1/1/0001
-                        new DateTime(0001, 01, 01, 00, 00, 00, 0)
+                        new DateTime(0001, 01, 01, 00, 00, 00, 0),
                     }; //	1/1/0001 00:00:00.000
                     break;
                 default:

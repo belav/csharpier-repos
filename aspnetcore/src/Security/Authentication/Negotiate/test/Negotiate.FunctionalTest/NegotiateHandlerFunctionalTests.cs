@@ -26,7 +26,7 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
     private static readonly Version Http2Version = new Version(2, 0);
 
     public static IEnumerable<object[]> Http11And2 =>
-        new List<object[]> { new object[] { Http11Version }, new object[] { Http2Version }, };
+        new List<object[]> { new object[] { Http11Version }, new object[] { Http2Version } };
 
     [ConditionalFact]
     // Only test HTTP/1.1, ALPN is not supported on Win7
@@ -132,7 +132,7 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
                     sslPolicyErrors
                 ) => true,
                 UseDefaultCredentials = true,
-            }
+            },
         };
 
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
@@ -431,7 +431,7 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
             }
         )
         {
-            BaseAddress = new Uri(address)
+            BaseAddress = new Uri(address),
         };
     }
 
@@ -452,7 +452,7 @@ public class NegotiateHandlerFunctionalTests : LoggedTest
             }
         )
         {
-            BaseAddress = new Uri(address)
+            BaseAddress = new Uri(address),
         };
     }
 }

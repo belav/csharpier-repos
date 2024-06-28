@@ -401,7 +401,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = Guid.NewGuid(),
             Name = "Theon",
-            PartitionKey = 42
+            PartitionKey = 42,
         };
 
         using (var context = new CustomerContextGuid(options))
@@ -452,7 +452,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = DateTime.MinValue,
             Name = "Theon/\\#\\\\?",
-            PartitionKey = 42
+            PartitionKey = 42,
         };
 
         using (var context = new CustomerContextDateTime(options))
@@ -816,7 +816,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         await Can_add_update_delete_with_collection(
             new List<List<short>>
             {
-                new() { 1, 2 }
+                new() { 1, 2 },
             },
             c =>
             {
@@ -842,7 +842,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             },
             new List<Dictionary<string, string>>
             {
-                new() { { "1", null }, { "3", "2" } }
+                new() { { "1", null }, { "3", "2" } },
             }
         );
 
@@ -850,7 +850,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             new List<float>[]
             {
                 new() { 1f },
-                new() { 2 }
+                new() { 2 },
             },
             c =>
             {
@@ -859,7 +859,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             new List<float>[]
             {
                 new() { 1f },
-                new() { 3f }
+                new() { 3f },
             }
         );
 
@@ -878,7 +878,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     "1",
                     new List<int> { 1 }
-                }
+                },
             },
             c =>
             {
@@ -893,7 +893,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     "2",
                     new List<int> { 3 }
-                }
+                },
             }
         );
 
@@ -901,7 +901,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
             new SortedDictionary<string, long?[]>
             {
                 { "2", new long?[] { 2 } },
-                { "1", new long?[] { 1 } }
+                { "1", new long?[] { 1 } },
             },
             c =>
             {
@@ -929,7 +929,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                     "1",
                     new Dictionary<string, short?> { { "value", 1 } }
                 },
-                { "2", null }
+                { "2", null },
             }
         );
     }
@@ -948,7 +948,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            Collection = initialValue
+            Collection = initialValue,
         };
 
         using (var context = new CollectionCustomerContext<TCollection>(options, onModelBuilder))
@@ -1031,7 +1031,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             id = "42",
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         await using (var context = new PartitionKeyContextWithResourceId(options))
@@ -1050,7 +1050,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     id = "42",
                     Name = "Theon Twin",
-                    PartitionKey = pk2
+                    PartitionKey = pk2,
                 }
             );
 
@@ -1097,7 +1097,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             id = "42",
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         using (var context = new PartitionKeyContextWithResourceId(options))
@@ -1110,7 +1110,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     id = "42",
                     Name = "Theon Twin",
-                    PartitionKey = pk2
+                    PartitionKey = pk2,
                 }
             );
 
@@ -1174,7 +1174,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         await using (var context = new PartitionKeyContextCustomValueGenerator(options))
@@ -1187,7 +1187,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     Id = 42,
                     Name = "Theon Twin",
-                    PartitionKey = pk2
+                    PartitionKey = pk2,
                 }
             );
 
@@ -1231,7 +1231,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         using (var context = new PartitionKeyContextCustomValueGenerator(options))
@@ -1244,7 +1244,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
                 {
                     Id = 42,
                     Name = "Theon Twin",
-                    PartitionKey = pk2
+                    PartitionKey = pk2,
                 }
             );
 
@@ -1288,7 +1288,7 @@ public class EndToEndCosmosTest : IClassFixture<EndToEndCosmosTest.CosmosFixture
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = pk1
+            PartitionKey = pk1,
         };
 
         using (var context = new PartitionKeyContextNoValueGenerator(options))
@@ -1348,7 +1348,7 @@ OFFSET 0 LIMIT 1
         {
             Id = 42,
             Name = "Theon",
-            PartitionKey = 1
+            PartitionKey = 1,
         };
 
         await using (var context = new PartitionKeyContextNonPrimaryKey(options))
@@ -2049,7 +2049,7 @@ OFFSET 0 LIMIT 1
     private enum EntityType
     {
         Base,
-        Derived
+        Derived,
     }
 
     public class NonStringDiscriminatorContext : DbContext

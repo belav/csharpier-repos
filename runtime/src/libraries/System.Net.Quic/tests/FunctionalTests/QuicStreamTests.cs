@@ -1386,7 +1386,7 @@ namespace System.Net.Quic.Tests
                     SmallPayload,
                     BufferPayload,
                     BufferPlusPayload,
-                    BigPayload
+                    BigPayload,
                 }
                 : new[] { SmallestPayload, SmallPayload, BufferPayload, BufferPlusPayload };
             return from payload in payloadValues

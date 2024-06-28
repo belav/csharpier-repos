@@ -960,7 +960,7 @@ namespace System.Text.Tests
                     lastSegment = new MockSequenceSegment<T>
                     {
                         Memory = remainingData.Slice(0, thisSegmentLength),
-                        RunningIndex = runningTotalLength
+                        RunningIndex = runningTotalLength,
                     };
 
                     if (previousSegment != null)

@@ -22,7 +22,7 @@ namespace System.ComponentModel.Tests
         {
             var descriptors = new PropertyDescriptor[]
             {
-                new MockPropertyDescriptor("descriptor1")
+                new MockPropertyDescriptor("descriptor1"),
             };
 
             var collection = new PropertyDescriptorCollection(descriptors);
@@ -44,7 +44,7 @@ namespace System.ComponentModel.Tests
         {
             var descriptors = new PropertyDescriptor[]
             {
-                new MockPropertyDescriptor("descriptor1")
+                new MockPropertyDescriptor("descriptor1"),
             };
 
             var collection = new PropertyDescriptorCollection(descriptors, true);
@@ -104,7 +104,7 @@ namespace System.ComponentModel.Tests
                 new MockPropertyDescriptor("propertyDescriptor6"),
                 new MockPropertyDescriptor("propertyDescriptor7"),
                 new MockPropertyDescriptor("propertyDescriptor8"),
-                new MockPropertyDescriptor("propertyDescriptor9")
+                new MockPropertyDescriptor("propertyDescriptor9"),
             };
 
             // Must send in a copy to the constructor as the array itself is manipulated
@@ -154,7 +154,7 @@ namespace System.ComponentModel.Tests
                 new MockPropertyDescriptor("propertyDescriptor6"),
                 new MockPropertyDescriptor("propertyDescriptor7"),
                 new MockPropertyDescriptor("propertyDescriptor8"),
-                new MockPropertyDescriptor("propertyDescriptor9")
+                new MockPropertyDescriptor("propertyDescriptor9"),
             };
 
             // Must send in a copy to the constructor as the array itself is manipulated
@@ -206,7 +206,7 @@ namespace System.ComponentModel.Tests
                 new MockPropertyDescriptor("propertyDescriptor6"),
                 new MockPropertyDescriptor("propertyDescriptor7"),
                 new MockPropertyDescriptor("propertyDescriptor8"),
-                new MockPropertyDescriptor("propertyDescriptor9")
+                new MockPropertyDescriptor("propertyDescriptor9"),
             };
 
             // Loop through as there is caching that occurs

@@ -12,7 +12,7 @@ namespace System.Security.Cryptography.Xml
         {
             typeof(Stream),
             typeof(XmlNodeList),
-            typeof(XmlDocument)
+            typeof(XmlDocument),
         };
         private readonly Type[] _outputTypes = { typeof(XmlNodeList), typeof(XmlDocument) };
         private XmlNodeList? _inputNodeList;

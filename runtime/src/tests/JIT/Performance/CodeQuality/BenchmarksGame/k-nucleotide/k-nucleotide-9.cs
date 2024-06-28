@@ -41,11 +41,9 @@ namespace BenchmarksGame
         static int read(Stream stream, byte[] buffer, int offset, int count)
         {
             var bytesRead = stream.Read(buffer, offset, count);
-            return bytesRead == count
-                ? offset + count
-                : bytesRead == 0
-                    ? offset
-                    : read(stream, buffer, offset + bytesRead, count - bytesRead);
+            return bytesRead == count ? offset + count
+                : bytesRead == 0 ? offset
+                : read(stream, buffer, offset + bytesRead, count - bytesRead);
         }
 
         static int find(byte[] buffer, byte[] toFind, int i, ref int matchIndex)
@@ -239,7 +237,7 @@ namespace BenchmarksGame
                     Task.Run(() => countEnding(l, mask, 0)),
                     Task.Run(() => countEnding(l, mask, 1)),
                     Task.Run(() => countEnding(l, mask, 2)),
-                    Task.Run(() => countEnding(l, mask, 3))
+                    Task.Run(() => countEnding(l, mask, 3)),
                 },
                 dicts =>
                 {

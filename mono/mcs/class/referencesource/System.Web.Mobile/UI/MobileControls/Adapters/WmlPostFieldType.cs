@@ -41,6 +41,6 @@ namespace System.Web.UI.MobileControls.Adapters
         Variable,
 
         /// <include file='doc\WmlPostFieldType.uex' path='docs/doc[@for="WmlPostFieldType.Raw"]/*' />
-        Raw
+        Raw,
     }
 }

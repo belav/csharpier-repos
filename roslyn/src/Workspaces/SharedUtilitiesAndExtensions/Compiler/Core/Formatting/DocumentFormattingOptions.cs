@@ -49,7 +49,7 @@ internal static class DocumentFormattingOptionsProviders
             InsertFinalNewLine = options.GetOption(
                 FormattingOptions2.InsertFinalNewLine,
                 fallbackOptions.InsertFinalNewLine
-            )
+            ),
         };
     }
 

@@ -80,6 +80,7 @@ namespace System.Buffers.Text.Tests
             57,
             43,
             47 //4..9, +, /
+            ,
         };
 
         // Pre-computing this table using a custom string(s_characters) and GenerateDecodingMapAndVerify (found in tests)

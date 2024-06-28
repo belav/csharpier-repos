@@ -165,20 +165,14 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.FirstVisibleItemIndex"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int FirstVisibleItemIndex
         {
             get { return (IsCustomPaging || !EnablePagination) ? 0 : PagerItemIndex; }
         }
 
         /// <include file='doc\PagedControl.uex' path='docs/doc[@for="PagedControl.VisibleItemCount"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public int VisibleItemCount
         {
             get

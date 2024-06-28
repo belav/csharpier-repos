@@ -532,12 +532,10 @@ namespace System.Xml.Xsl.Xslt
                         break;
                     default:
                         this.nodeType = (
-                            !textIsWhite
-                                ? XmlNodeType.Text
-                                : textPreserveWS
-                                    ? XmlNodeType.SignificantWhitespace
-                                    :
-                                    /*default:    */XmlNodeType.Whitespace
+                            !textIsWhite ? XmlNodeType.Text
+                            : textPreserveWS ? XmlNodeType.SignificantWhitespace
+                            :
+                            /*default:    */XmlNodeType.Whitespace
                         );
                         return curTextNode;
                 }

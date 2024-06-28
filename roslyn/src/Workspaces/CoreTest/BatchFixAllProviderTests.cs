@@ -142,7 +142,7 @@ class TestClass {{
                                 "Container",
                                 fixes.ToImmutableArray(),
                                 isInlinable: false
-                            )
+                            ),
                         };
                     }
 

@@ -19,7 +19,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new EmbeddedJsonKeyConverter<TKey>() }
+                Converters = { new EmbeddedJsonKeyConverter<TKey>() },
             };
             var value = new Dictionary<TKey, byte> { [key] = 42 };
 
@@ -38,7 +38,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new EmbeddedJsonKeyConverter<TKey>() }
+                Converters = { new EmbeddedJsonKeyConverter<TKey>() },
             };
 
             string json = $"{{\"{expectedKeyEncoding}\":42}}";
@@ -63,7 +63,7 @@ namespace System.Text.Json.Serialization.Tests
                 new object[]
                 {
                     key,
-                    JavaScriptEncoder.Default.Encode(JsonSerializer.Serialize(key))
+                    JavaScriptEncoder.Default.Encode(JsonSerializer.Serialize(key)),
                 };
         }
 
@@ -72,7 +72,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new EmbeddedJsonKeyConverter<string>() }
+                Converters = { new EmbeddedJsonKeyConverter<string>() },
             };
             var value = new PocoWithExtensionDataProperty();
 
@@ -101,8 +101,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Converters =
                 {
-                    new InvalidCustomKeyConverter { OperationType = invalidOperationType }
-                }
+                    new InvalidCustomKeyConverter { OperationType = invalidOperationType },
+                },
             };
             var value = new Dictionary<string, int> { ["key"] = 42 };
 
@@ -131,8 +131,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 Converters =
                 {
-                    new InvalidCustomKeyConverter { OperationType = invalidOperationType }
-                }
+                    new InvalidCustomKeyConverter { OperationType = invalidOperationType },
+                },
             };
             string json = @"{""key1"" : 1, ""key2"" : 2 }";
 
@@ -173,7 +173,7 @@ namespace System.Text.Json.Serialization.Tests
                 DoNothing,
                 HandleEntireProperty,
                 HandleEntireParentObject,
-                ReturnNull
+                ReturnNull,
             }
 
             public InvalidOperationType OperationType { get; init; }

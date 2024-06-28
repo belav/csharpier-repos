@@ -36,6 +36,6 @@ namespace System.Windows.Forms
         PushButton = 1,
         ToggleButton = 2,
         Separator = 3,
-        DropDownButton = 4
+        DropDownButton = 4,
     }
 }

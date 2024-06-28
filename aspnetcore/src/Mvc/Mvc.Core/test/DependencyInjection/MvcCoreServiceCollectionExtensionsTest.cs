@@ -249,40 +249,40 @@ public class MvcCoreServiceCollectionExtensionsTest
             {
                 {
                     typeof(IConfigureOptions<MvcOptions>),
-                    new Type[] { typeof(MvcCoreMvcOptionsSetup), }
+                    new Type[] { typeof(MvcCoreMvcOptionsSetup) }
                 },
                 {
                     typeof(IPostConfigureOptions<MvcOptions>),
-                    new Type[] { typeof(MvcCoreMvcOptionsSetup), }
+                    new Type[] { typeof(MvcCoreMvcOptionsSetup) }
                 },
                 {
                     typeof(IConfigureOptions<RouteOptions>),
-                    new Type[] { typeof(MvcCoreRouteOptionsSetup), }
+                    new Type[] { typeof(MvcCoreRouteOptionsSetup) }
                 },
                 {
                     typeof(IConfigureOptions<ApiBehaviorOptions>),
-                    new Type[] { typeof(ApiBehaviorOptionsSetup), }
+                    new Type[] { typeof(ApiBehaviorOptionsSetup) }
                 },
                 {
                     typeof(IActionConstraintProvider),
-                    new Type[] { typeof(DefaultActionConstraintProvider), }
+                    new Type[] { typeof(DefaultActionConstraintProvider) }
                 },
                 {
                     typeof(IActionDescriptorProvider),
-                    new Type[] { typeof(ControllerActionDescriptorProvider), }
+                    new Type[] { typeof(ControllerActionDescriptorProvider) }
                 },
                 {
                     typeof(IActionInvokerProvider),
-                    new Type[] { typeof(ControllerActionInvokerProvider), }
+                    new Type[] { typeof(ControllerActionInvokerProvider) }
                 },
                 {
                     typeof(IRequestDelegateFactory),
                     new Type[] { typeof(ControllerRequestDelegateFactory) }
                 },
-                { typeof(IFilterProvider), new Type[] { typeof(DefaultFilterProvider), } },
+                { typeof(IFilterProvider), new Type[] { typeof(DefaultFilterProvider) } },
                 {
                     typeof(IControllerPropertyActivator),
-                    new Type[] { typeof(DefaultControllerPropertyActivator), }
+                    new Type[] { typeof(DefaultControllerPropertyActivator) }
                 },
                 {
                     typeof(IApplicationModelProvider),
@@ -306,7 +306,7 @@ public class MvcCoreServiceCollectionExtensionsTest
                 },
                 {
                     typeof(IProblemDetailsWriter),
-                    new Type[] { typeof(DefaultApiProblemDetailsWriter), }
+                    new Type[] { typeof(DefaultApiProblemDetailsWriter) }
                 },
             };
         }

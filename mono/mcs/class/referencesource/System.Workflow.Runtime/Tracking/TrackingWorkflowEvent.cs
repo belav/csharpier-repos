@@ -40,6 +40,6 @@ namespace System.Workflow.Runtime.Tracking
         Terminated = 9,
         Aborted = 10,
         Changed = 11,
-        Started = 12
+        Started = 12,
     }
 }

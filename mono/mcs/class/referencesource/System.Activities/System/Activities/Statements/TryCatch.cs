@@ -47,7 +47,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;

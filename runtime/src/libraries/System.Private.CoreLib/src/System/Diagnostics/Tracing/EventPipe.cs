@@ -77,7 +77,7 @@ namespace System.Diagnostics.Tracing
     internal enum EventPipeSerializationFormat
     {
         NetPerf,
-        NetTrace
+        NetTrace,
     }
 
     internal sealed class EventPipeWaitHandle : WaitHandle { }

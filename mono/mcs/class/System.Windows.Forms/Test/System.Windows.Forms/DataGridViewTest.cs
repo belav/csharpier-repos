@@ -236,7 +236,7 @@ namespace MonoTests.System.Windows.Forms
                     new CellSelection[]
                     {
                         new CellSelection(0, 0, false),
-                        new CellSelection(2, 2, true)
+                        new CellSelection(2, 2, true),
                     }
                 )
             );
@@ -631,7 +631,7 @@ namespace MonoTests.System.Windows.Forms
                     DataFormats.Text,
                     DataFormats.UnicodeText,
                     DataFormats.Html,
-                    DataFormats.CommaSeparatedValue
+                    DataFormats.CommaSeparatedValue,
                 };
 
                 foreach (bool a in bools)
@@ -825,7 +825,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(),
                     "#B2"
@@ -836,7 +836,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(true),
                     "#B3"
@@ -880,7 +880,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(),
                     "#C2"
@@ -891,7 +891,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(true),
                     "#C3"
@@ -980,7 +980,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(),
                     "#B2"
@@ -991,7 +991,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(true),
                     "#B3"
@@ -1043,7 +1043,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(),
                     "#C2"
@@ -1054,7 +1054,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(true),
                     "#C3"
@@ -1143,7 +1143,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(),
                     "#B2"
@@ -1154,7 +1154,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(true),
                     "#B3"
@@ -1198,7 +1198,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(),
                     "#C2"
@@ -1209,7 +1209,7 @@ namespace MonoTests.System.Windows.Forms
                         DataFormats.CommaSeparatedValue,
                         DataFormats.Html,
                         DataFormats.UnicodeText,
-                        DataFormats.Text
+                        DataFormats.Text,
                     },
                     data.GetFormats(true),
                     "#C3"

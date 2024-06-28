@@ -52,7 +52,7 @@ namespace System.Net.Security.Tests
                     GetSslProtocols(),
                     false
                 ),
-                ssl2.AuthenticateAsServerAsync(cert, false, GetSslProtocols(), false)
+                ssl2.AuthenticateAsServerAsync(cert, false, GetSslProtocols(), false),
             }
                 .WhenAllOrAnyFailed()
                 .ConfigureAwait(false);

@@ -84,7 +84,7 @@ namespace System.Web.Services.Discovery
                     // For the primary search the pattern is ".vsdisco"
                     primarySearchPatterns = new DiscoverySearchPattern[]
                     {
-                        new DiscoveryDocumentSearchPattern()
+                        new DiscoveryDocumentSearchPattern(),
                     };
                 }
                 return primarySearchPatterns;
@@ -109,7 +109,7 @@ namespace System.Web.Services.Discovery
                     secondarySearchPatterns = new DiscoverySearchPattern[]
                     {
                         new ContractSearchPattern(),
-                        new DiscoveryDocumentLinksPattern()
+                        new DiscoveryDocumentLinksPattern(),
                     };
                 }
 
@@ -152,7 +152,7 @@ namespace System.Web.Services.Discovery
                     {
                         DiscoverySearchPattern[] staticDiscoPattern = new DiscoverySearchPattern[]
                         {
-                            new DiscoveryDocumentLinksPattern()
+                            new DiscoveryDocumentLinksPattern(),
                         };
                         ScanDirByPattern(
                             directory,

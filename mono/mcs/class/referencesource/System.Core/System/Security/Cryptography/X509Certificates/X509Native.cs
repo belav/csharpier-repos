@@ -221,7 +221,9 @@ namespace System.Security.Cryptography.X509Certificates
             RevocationCheckEntireChain = 0x00000004, // AXL_REVOCATION_
             UrlOnlyCacheRetrieval = 0x00000008, // AXL_URL_ONLY_CACHE_RETRIEVAL
             LifetimeSigning = 0x00000010, // AXL_LIFETIME_SIGNING
-            TrustMicrosoftRootOnly = 0x00000020 // AXL_TRUST_MICROSOFT_ROOT_ONLY
+            TrustMicrosoftRootOnly =
+                0x00000020 // AXL_TRUST_MICROSOFT_ROOT_ONLY
+            ,
         }
 
         internal const uint X509_ASN_ENCODING = 0x00000001;

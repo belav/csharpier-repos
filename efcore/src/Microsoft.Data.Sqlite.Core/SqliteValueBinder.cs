@@ -284,7 +284,7 @@ namespace Microsoft.Data.Sqlite
                 { typeof(TimeSpan), SqliteType.Text },
                 { typeof(uint), SqliteType.Integer },
                 { typeof(ulong), SqliteType.Integer },
-                { typeof(ushort), SqliteType.Integer }
+                { typeof(ushort), SqliteType.Integer },
             };
 
         internal static SqliteType GetSqliteType(object? value)

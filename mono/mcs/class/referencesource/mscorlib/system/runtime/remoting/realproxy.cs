@@ -41,7 +41,7 @@ namespace System.Runtime.Remoting.Proxies
     {
         InvalidCall = 0x0,
         MethodCall = 0x1,
-        ConstructorCall = 0x2
+        ConstructorCall = 0x2,
     };
 
     [Flags]
@@ -49,7 +49,7 @@ namespace System.Runtime.Remoting.Proxies
     {
         None = 0x0,
         RemotingProxy = 0x1,
-        Initialized = 0x2
+        Initialized = 0x2,
     };
 
     // NOTE: Keep this in sync with unmanaged struct "messageData" in Remoting.h

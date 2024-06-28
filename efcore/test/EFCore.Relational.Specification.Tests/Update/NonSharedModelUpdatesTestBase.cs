@@ -38,8 +38,8 @@ public abstract class NonSharedModelUpdatesTestBase : NonSharedModelTestBase
                         Author = new Author
                         {
                             Name = "Alice",
-                            AuthorsClub = new AuthorsClub { Name = "AC South" }
-                        }
+                            AuthorsClub = new AuthorsClub { Name = "AC South" },
+                        },
                     }
                 );
 

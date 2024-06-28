@@ -41,7 +41,7 @@ namespace System.Runtime.Remoting.Channels
         MethodCall,
         MethodResponse,
         ServerFault,
-        NotRecognize
+        NotRecognize,
     }
 
     internal class SoapMessageFormatter

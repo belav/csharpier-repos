@@ -40,7 +40,7 @@ namespace System.Net.Http.Formatting.Parsers
 
         public static TheoryDataSet<string> SingleShortBodies
         {
-            get { return new TheoryDataSet<string> { "", "A", "AA", }; }
+            get { return new TheoryDataSet<string> { "", "A", "AA" }; }
         }
 
         public static TheoryDataSet<string[]> MultipleShortBodies
@@ -112,14 +112,14 @@ namespace System.Net.Http.Formatting.Parsers
                     "--úN$(Os#»Í(Bt$(Dqf(CS'.Â‚æ0j",
                     "--123456",
                     "123--456",
-                    "123456--"
+                    "123456--",
                 };
             }
         }
 
         public static TheoryDataSet<bool> TrueAndFalse
         {
-            get { return new TheoryDataSet<bool> { true, false, }; }
+            get { return new TheoryDataSet<bool> { true, false }; }
         }
 
         [Theory]

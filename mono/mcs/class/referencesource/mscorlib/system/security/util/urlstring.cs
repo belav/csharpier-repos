@@ -1284,7 +1284,7 @@ namespace System.Security.Util
             '"',
             '<',
             '>',
-            '|'
+            '|',
         };
 
         public DirectoryString()

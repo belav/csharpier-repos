@@ -121,7 +121,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             HttpResponseMessage response = new HttpResponseMessage()
             {
-                Content = new ObjectContent<string>("Hello", new XmlMediaTypeFormatter())
+                Content = new ObjectContent<string>("Hello", new XmlMediaTypeFormatter()),
             };
             return response;
         }

@@ -54,7 +54,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SimplifyInterpolation
             var diagnostics = await GetDiagnosticsWorkerAsync(workspace, parameters);
 
             Assert.Equal(
-                new[] { ("IDE0071", DiagnosticSeverity.Info), },
+                new[] { ("IDE0071", DiagnosticSeverity.Info) },
                 diagnostics.Select(d => (d.Descriptor.Id, d.Severity))
             );
         }

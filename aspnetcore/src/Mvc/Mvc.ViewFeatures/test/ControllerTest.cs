@@ -484,7 +484,7 @@ public class ControllerTest
         var controllerContext = new ControllerContext()
         {
             HttpContext = httpContext,
-            ValueProviderFactories = new[] { new SimpleValueProviderFactory(valueProvider), },
+            ValueProviderFactories = new[] { new SimpleValueProviderFactory(valueProvider) },
         };
 
         var controller = new TestableController()

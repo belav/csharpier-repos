@@ -52,7 +52,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             };
 
         public static readonly IEnumerable<KeyValuePair<ushort, string>> UInt16SpecialValues =
-            new Dictionary<ushort, string>() { { ushort.MaxValue, nameof(ushort.MaxValue) }, };
+            new Dictionary<ushort, string>() { { ushort.MaxValue, nameof(ushort.MaxValue) } };
 
         public static readonly IEnumerable<KeyValuePair<int, string>> Int32SpecialValues =
             new Dictionary<int, string>()
@@ -62,7 +62,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             };
 
         public static readonly IEnumerable<KeyValuePair<uint, string>> UInt32SpecialValues =
-            new Dictionary<uint, string>() { { uint.MaxValue, nameof(uint.MaxValue) }, };
+            new Dictionary<uint, string>() { { uint.MaxValue, nameof(uint.MaxValue) } };
 
         public static readonly IEnumerable<KeyValuePair<long, string>> Int64SpecialValues =
             new Dictionary<long, string>()
@@ -72,7 +72,7 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             };
 
         public static readonly IEnumerable<KeyValuePair<ulong, string>> UInt64SpecialValues =
-            new Dictionary<ulong, string>() { { ulong.MaxValue, nameof(ulong.MaxValue) }, };
+            new Dictionary<ulong, string>() { { ulong.MaxValue, nameof(ulong.MaxValue) } };
 
         public static readonly IEnumerable<KeyValuePair<float, string>> SingleSpecialValues =
             new Dictionary<float, string>()

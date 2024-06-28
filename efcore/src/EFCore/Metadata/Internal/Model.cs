@@ -48,7 +48,7 @@ public class Model : ConventionAnnotatable, IMutableModel, IConventionModel, IRu
                     ConfigurationSource.Explicit,
                     new SortedSet<EntityType>(TypeBaseNameComparer.Instance)
                 )
-            }
+            },
         };
 
     private ConventionDispatcher? _conventionDispatcher;

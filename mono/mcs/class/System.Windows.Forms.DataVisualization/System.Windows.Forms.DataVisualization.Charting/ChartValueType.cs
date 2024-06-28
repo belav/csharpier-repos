@@ -40,6 +40,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         DateTime = 8,
         Date = 9,
         Time = 10,
-        DateTimeOffset = 11
+        DateTimeOffset = 11,
     }
 }

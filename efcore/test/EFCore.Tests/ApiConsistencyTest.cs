@@ -78,7 +78,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                 typeof(RelationshipBuilderBase),
                 typeof(DbContextOptionsBuilder),
                 typeof(DbContextOptionsBuilder<>),
-                typeof(EntityFrameworkServiceCollectionExtensions)
+                typeof(EntityFrameworkServiceCollectionExtensions),
             };
 
         public override HashSet<MethodInfo> NonVirtualMethods { get; } =
@@ -103,7 +103,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                 typeof(JsonValueReaderWriter).GetMethod(
                     nameof(JsonValueReaderWriter.FromJsonString)
                 ),
-                typeof(JsonValueReaderWriter).GetMethod(nameof(JsonValueReaderWriter.ToJsonString))
+                typeof(JsonValueReaderWriter).GetMethod(nameof(JsonValueReaderWriter.ToJsonString)),
             };
 
         public override HashSet<MethodInfo> NotAnnotatedMethods { get; } =
@@ -113,7 +113,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                 typeof(DbContext).GetMethod(nameof(DbContext.OnModelCreating), AnyInstance),
                 typeof(IEntityTypeConfiguration<>).GetMethod(
                     nameof(IEntityTypeConfiguration<Type>.Configure)
-                )
+                ),
             };
 
         public override Dictionary<MethodInfo, string> MetadataMethodNameTransformers { get; } =
@@ -132,7 +132,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                         new[] { typeof(bool?), typeof(bool) }
                     )!,
                     "LazyLoadingEnabled"
-                }
+                },
             };
 
         public override HashSet<MethodInfo> UnmatchedMetadataMethods { get; } =
@@ -201,7 +201,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                         typeof(string),
                         typeof(Type),
                         typeof(string),
-                        typeof(Action<OwnedNavigationBuilder>)
+                        typeof(Action<OwnedNavigationBuilder>),
                     }
                 ),
                 typeof(OwnedNavigationBuilder).GetMethod(
@@ -222,7 +222,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                         typeof(string),
                         typeof(Type),
                         typeof(string),
-                        typeof(Action<OwnedNavigationBuilder>)
+                        typeof(Action<OwnedNavigationBuilder>),
                     }
                 ),
                 typeof(OwnedNavigationBuilder).GetMethod(
@@ -341,7 +341,7 @@ public class ApiConsistencyTest : ApiConsistencyTestBase<ApiConsistencyTest.ApiC
                 typeof(IMutableEntityType).GetMethod(nameof(IMutableEntityType.AddData)),
                 typeof(IConventionEntityType).GetMethod(
                     nameof(IConventionEntityType.LeastDerivedType)
-                )
+                ),
             };
     }
 }

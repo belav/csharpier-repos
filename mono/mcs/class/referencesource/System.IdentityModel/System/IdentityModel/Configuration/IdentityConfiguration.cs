@@ -382,7 +382,7 @@ namespace System.IdentityModel.Configuration
                             new SecurityTokenResolver[]
                             {
                                 serviceCertificateResolver,
-                                tokenResolver
+                                tokenResolver,
                             }
                         );
                 }
@@ -425,7 +425,7 @@ namespace System.IdentityModel.Configuration
                             new SecurityTokenResolver[]
                             {
                                 knownCertificateTokenResolver,
-                                configuredIssuerTokenResolver
+                                configuredIssuerTokenResolver,
                             }
                         );
                     }

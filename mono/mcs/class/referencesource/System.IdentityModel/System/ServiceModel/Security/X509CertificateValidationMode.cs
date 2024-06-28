@@ -39,6 +39,6 @@ namespace System.ServiceModel.Security
         /// <summary>
         /// The user must plug in a custom <c>X509CertificateValidator</c> to validate the certificate.
         /// </summary>
-        Custom
+        Custom,
     }
 }

@@ -39,7 +39,7 @@ static class C { }
 
             var ranges = new[]
             {
-                new LSP.Range { Start = new Position(0, 0), End = new Position(2, 0) }
+                new LSP.Range { Start = new Position(0, 0), End = new Position(2, 0) },
             };
             var results = await RunGetSemanticTokensRangesAsync(
                 testLspServer,

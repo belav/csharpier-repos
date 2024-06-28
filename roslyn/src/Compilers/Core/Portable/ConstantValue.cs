@@ -607,10 +607,9 @@ namespace Microsoft.CodeAnalysis
                 ConstantValueTypeDiscriminator.String => "string",
                 ConstantValueTypeDiscriminator.Decimal => "decimal",
                 ConstantValueTypeDiscriminator.DateTime => "DateTime",
-                ConstantValueTypeDiscriminator.Null
-                or ConstantValueTypeDiscriminator.Bad =>
+                ConstantValueTypeDiscriminator.Null or ConstantValueTypeDiscriminator.Bad =>
                     throw ExceptionUtilities.UnexpectedValue(Discriminator),
-                _ => throw ExceptionUtilities.UnexpectedValue(Discriminator)
+                _ => throw ExceptionUtilities.UnexpectedValue(Discriminator),
             };
         }
 
@@ -963,11 +962,9 @@ namespace Microsoft.CodeAnalysis
                 ConstantValueTypeDiscriminator.Byte => ByteValue.ToString(provider),
                 ConstantValueTypeDiscriminator.Int16 => Int16Value.ToString(provider),
                 ConstantValueTypeDiscriminator.UInt16 => UInt16Value.ToString(provider),
-                ConstantValueTypeDiscriminator.NInt
-                or ConstantValueTypeDiscriminator.Int32 =>
+                ConstantValueTypeDiscriminator.NInt or ConstantValueTypeDiscriminator.Int32 =>
                     Int32Value.ToString(provider),
-                ConstantValueTypeDiscriminator.NUInt
-                or ConstantValueTypeDiscriminator.UInt32 =>
+                ConstantValueTypeDiscriminator.NUInt or ConstantValueTypeDiscriminator.UInt32 =>
                     UInt32Value.ToString(provider),
                 ConstantValueTypeDiscriminator.UInt64 => UInt64Value.ToString(provider),
                 ConstantValueTypeDiscriminator.Int64 => Int64Value.ToString(provider),
@@ -977,7 +974,7 @@ namespace Microsoft.CodeAnalysis
                 ConstantValueTypeDiscriminator.Double => DoubleValue.ToString(provider),
                 ConstantValueTypeDiscriminator.Decimal => DecimalValue.ToString(provider),
                 ConstantValueTypeDiscriminator.DateTime => DateTimeValue.ToString(provider),
-                _ => throw ExceptionUtilities.UnexpectedValue(Discriminator)
+                _ => throw ExceptionUtilities.UnexpectedValue(Discriminator),
             };
         }
 

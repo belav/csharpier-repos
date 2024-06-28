@@ -28,37 +28,37 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
         {
             var solution = new CliOption<FileInfo>("--solution")
             {
-                Description = "input solution file"
+                Description = "input solution file",
             }.AcceptExistingOnly();
             var project = new CliOption<FileInfo>("--project")
             {
-                Description = "input project file"
+                Description = "input project file",
             }.AcceptExistingOnly();
             var compilerInvocation = new CliOption<FileInfo>("--compiler-invocation")
             {
                 Description =
-                    "path to a .json file that contains the information for a csc/vbc invocation"
+                    "path to a .json file that contains the information for a csc/vbc invocation",
             }.AcceptExistingOnly();
             var binLog = new CliOption<FileInfo>("--binlog")
             {
                 Description =
-                    "path to a MSBuild binlog that csc/vbc invocations will be extracted from"
+                    "path to a MSBuild binlog that csc/vbc invocations will be extracted from",
             }.AcceptExistingOnly();
             var output = new CliOption<string?>("--output")
             {
                 Description = "file to write the LSIF output to, instead of the console",
-                DefaultValueFactory = _ => null
+                DefaultValueFactory = _ => null,
             };
             output.AcceptLegalFilePathsOnly();
             var outputFormat = new CliOption<LsifFormat>("--output-format")
             {
                 Description = "format of LSIF output",
-                DefaultValueFactory = _ => LsifFormat.Line
+                DefaultValueFactory = _ => LsifFormat.Line,
             };
             var log = new CliOption<string?>("--log")
             {
                 Description = "file to write a log to",
-                DefaultValueFactory = _ => null
+                DefaultValueFactory = _ => null,
             };
             log.AcceptLegalFilePathsOnly();
 
@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 binLog,
                 output,
                 outputFormat,
-                log
+                log,
             };
 
             generateCommand.SetAction(
@@ -124,7 +124,7 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             {
                 LsifFormat.Json => new JsonModeLsifJsonWriter(outputWriter),
                 LsifFormat.Line => new LineModeLsifJsonWriter(outputWriter),
-                _ => throw new NotImplementedException()
+                _ => throw new NotImplementedException(),
             };
 
             using var logFile = logFileName is not null and not "stderr"

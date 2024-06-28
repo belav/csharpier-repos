@@ -859,7 +859,7 @@ namespace Microsoft.CodeAnalysis
                 null => null,
                 List<TFrom> l => CreateList(l, select),
                 IReadOnlyList<TFrom> l => CreateList(l, select),
-                _ => CreateList(enumerable.ToList(), select)
+                _ => CreateList(enumerable.ToList(), select),
             };
 
         public static GreenNode? CreateList<TFrom>(List<TFrom> list, Func<TFrom, GreenNode> select)

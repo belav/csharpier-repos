@@ -28,7 +28,7 @@ public class SevenByteStruct
         F3 = 4,
         F4 = 5,
         F5 = 6,
-        F6 = 7
+        F6 = 7,
     };
 
     [Fact]

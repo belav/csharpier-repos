@@ -25,7 +25,7 @@ internal static class Exe
             FileName = executable,
             Arguments = arguments,
             UseShellExecute = false,
-            RedirectStandardOutput = interceptOutput
+            RedirectStandardOutput = interceptOutput,
         };
         if (workingDirectory != null)
         {

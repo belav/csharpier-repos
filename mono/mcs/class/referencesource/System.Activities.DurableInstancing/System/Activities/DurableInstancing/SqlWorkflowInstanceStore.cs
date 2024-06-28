@@ -710,7 +710,7 @@ namespace System.Activities.DurableInstancing
             {
                 SurrogateOwnerId = this.storeLock.SurrogateLockOwnerId,
                 InstanceId = instanceLockTracking.InstanceId,
-                InstanceVersion = instanceLockTracking.InstanceVersion
+                InstanceVersion = instanceLockTracking.InstanceVersion,
             };
 
             using (
@@ -802,7 +802,7 @@ namespace System.Activities.DurableInstancing
                 AsynchronousProcessing = true,
                 ConnectTimeout = (int)
                     SqlWorkflowInstanceStore.defaultConnectionOpenTime.TotalSeconds,
-                ApplicationName = "DefaultPool"
+                ApplicationName = "DefaultPool",
             };
 
             return builder.ToString();
@@ -930,7 +930,7 @@ namespace System.Activities.DurableInstancing
                 UnlockInstanceState unlockInstanceState = new UnlockInstanceState
                 {
                     UnlockInstanceCommand = (UnlockInstanceCommand)(result.AsyncState),
-                    BackoffTimeoutHelper = new BackoffTimeoutHelper(TimeSpan.MaxValue)
+                    BackoffTimeoutHelper = new BackoffTimeoutHelper(TimeSpan.MaxValue),
                 };
 
                 unlockInstanceState.BackoffTimeoutHelper.WaitAndBackoff(

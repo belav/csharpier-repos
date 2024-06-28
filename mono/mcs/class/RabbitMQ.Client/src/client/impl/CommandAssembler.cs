@@ -72,7 +72,7 @@ namespace RabbitMQ.Client.Impl
         ExpectingMethod,
         ExpectingContentHeader,
         ExpectingContentBody,
-        Complete
+        Complete,
     }
 
     public class CommandAssembler

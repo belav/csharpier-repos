@@ -74,7 +74,7 @@ namespace System.Runtime.Serialization.Tests
             {
                 return new CompareResult
                 {
-                    ErrorMessage = "expected null, but actual was:\n" + actual
+                    ErrorMessage = "expected null, but actual was:\n" + actual,
                 };
             }
 
@@ -82,7 +82,7 @@ namespace System.Runtime.Serialization.Tests
             {
                 return new CompareResult
                 {
-                    ErrorMessage = "actual was null, but was expecting:\n" + expected
+                    ErrorMessage = "actual was null, but was expecting:\n" + expected,
                 };
             }
 
@@ -119,7 +119,7 @@ namespace System.Runtime.Serialization.Tests
                 {
                     ErrorMessage =
                         "actual is longer. The unwanted suffix is:\n"
-                        + actual.Substring(commonLength)
+                        + actual.Substring(commonLength),
                 };
             }
 
@@ -129,7 +129,7 @@ namespace System.Runtime.Serialization.Tests
                 {
                     ErrorMessage =
                         "expected is longer. The missing suffix is:\n"
-                        + expected.Substring(commonLength)
+                        + expected.Substring(commonLength),
                 };
             }
 
@@ -161,7 +161,7 @@ namespace System.Runtime.Serialization.Tests
                     {
                         return new CompareResult
                         {
-                            ErrorMessage = "XML comparison is also failing"
+                            ErrorMessage = "XML comparison is also failing",
                         };
                     }
                     else

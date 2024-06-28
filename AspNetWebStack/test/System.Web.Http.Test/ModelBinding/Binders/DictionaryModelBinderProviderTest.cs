@@ -21,7 +21,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     typeof(IDictionary<int, string>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
 
             DictionaryModelBinderProvider binderProvider = new DictionaryModelBinderProvider();
@@ -44,7 +44,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     typeof(int)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleHttpValueProvider { { "foo[0]", "42" } },
             };
 
             DictionaryModelBinderProvider binderProvider = new DictionaryModelBinderProvider();
@@ -93,7 +93,7 @@ namespace System.Web.Http.ModelBinding.Binders
                     typeof(IDictionary<int, string>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             DictionaryModelBinderProvider binderProvider = new DictionaryModelBinderProvider();

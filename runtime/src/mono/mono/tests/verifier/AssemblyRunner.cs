@@ -25,7 +25,7 @@ namespace AssemblyRunner
         unverifiable,
         invalid,
         strict,
-        none
+        none,
     }
 
     public class Runner
@@ -198,7 +198,7 @@ namespace AssemblyRunner
                 "FileLoadException",
                 "BadImageFormatException",
                 "TypeLoadException",
-                "VerificationException"
+                "VerificationException",
             };
 
             foreach (String str in knownErrors)

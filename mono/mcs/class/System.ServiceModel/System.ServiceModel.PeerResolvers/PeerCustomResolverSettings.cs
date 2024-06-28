@@ -38,7 +38,7 @@ namespace System.ServiceModel.PeerResolvers
             {
                 Binding = this.Binding,
                 Address = this.Address,
-                Resolver = this.Resolver
+                Resolver = this.Resolver,
             };
         }
     }

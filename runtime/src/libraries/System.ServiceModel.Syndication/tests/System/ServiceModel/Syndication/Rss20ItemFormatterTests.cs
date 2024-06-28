@@ -149,7 +149,7 @@ namespace System.ServiceModel.Syndication.Tests
                 true,
                 @"<item>
     <description />
-</item>"
+</item>",
             };
 
             yield return new object[]
@@ -158,7 +158,7 @@ namespace System.ServiceModel.Syndication.Tests
                 false,
                 @"<item>
     <description />
-</item>"
+</item>",
             };
 
             // Full item.
@@ -342,7 +342,7 @@ namespace System.ServiceModel.Syndication.Tests
 
             var attributeSyndicationLink = new SyndicationLink
             {
-                Uri = new Uri("http://link_uri.com")
+                Uri = new Uri("http://link_uri.com"),
             };
             attributeSyndicationLink.AttributeExtensions.Add(
                 new XmlQualifiedName("href"),
@@ -451,7 +451,7 @@ namespace System.ServiceModel.Syndication.Tests
     <Rss20ItemFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </Rss20ItemFormatterTests.ExtensionObject>
-</item>"
+</item>",
             };
 
             yield return new object[]
@@ -471,7 +471,7 @@ namespace System.ServiceModel.Syndication.Tests
     <Rss20ItemFormatterTests.ExtensionObject xmlns:i=""http://www.w3.org/2001/XMLSchema-instance"" xmlns=""http://schemas.datacontract.org/2004/07/System.ServiceModel.Syndication.Tests"">
         <Value>10</Value>
     </Rss20ItemFormatterTests.ExtensionObject>
-</item>"
+</item>",
             };
 
             foreach (string email in new string[] { null, "" })
@@ -486,7 +486,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <author xmlns=""http://www.w3.org/2005/Atom"" />
     <description />
-</item>"
+</item>",
                 };
 
                 yield return new object[]
@@ -495,7 +495,7 @@ namespace System.ServiceModel.Syndication.Tests
                     false,
                     @"<item>
     <description />
-</item>"
+</item>",
                 };
             }
 
@@ -511,7 +511,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <author author_name1="""" d2p1:author_name2="""" d2p1:author_name3=""author_value"" d2p2:author_name4="""" xmlns:d2p2=""xmlns"" xmlns:d2p1=""author_namespace"">author_email</author>
     <description />
-</item>"
+</item>",
                 };
             }
             ;
@@ -551,7 +551,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <description />
     <enclosure length=""100"" type=""custom_type"" url=""http://custom_url.com"" d2p1:enclosure_name4="""" xmlns:d2p1=""xmlns"" />
-</item>"
+</item>",
                 };
             }
 
@@ -569,7 +569,7 @@ namespace System.ServiceModel.Syndication.Tests
             fullFeed.ImageUrl = new Uri("http://imageurl.com");
             fullFeed.Items = new SyndicationItem[]
             {
-                new SyndicationItem("title", "content", null)
+                new SyndicationItem("title", "content", null),
             };
             fullFeed.Language = "language";
             fullFeed.LastUpdatedTime = DateTimeOffset.MinValue.AddTicks(10);
@@ -586,7 +586,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <description />
     <source name=""value"">title</source>
-</item>"
+</item>",
                 };
             }
             ;
@@ -601,7 +601,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <description />
     <source />
-</item>"
+</item>",
                 };
             }
             ;
@@ -611,7 +611,7 @@ namespace System.ServiceModel.Syndication.Tests
                 new SyndicationLink()
                 {
                     RelationshipType = "self",
-                    Uri = new Uri("http://microsoft.com")
+                    Uri = new Uri("http://microsoft.com"),
                 }
             );
 
@@ -625,7 +625,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <description />
     <source url=""http://microsoft.com/"" />
-</item>"
+</item>",
                 };
             }
             ;
@@ -636,13 +636,13 @@ namespace System.ServiceModel.Syndication.Tests
                 new SyndicationLink()
                 {
                     RelationshipType = "self",
-                    Uri = new Uri("http://microsoft.com")
+                    Uri = new Uri("http://microsoft.com"),
                 }
             );
 
             var itemWithSelfAttributeLinkFeed = new SyndicationItem()
             {
-                SourceFeed = selfAttributeLinkFeed
+                SourceFeed = selfAttributeLinkFeed,
             };
             foreach (bool serializeExtensionsAsAtom in new bool[] { true, false })
             {
@@ -653,7 +653,7 @@ namespace System.ServiceModel.Syndication.Tests
                     @"<item>
     <description />
     <source url=""url_value"" />
-</item>"
+</item>",
                 };
             }
             ;
@@ -669,7 +669,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var formatter = new Rss20ItemFormatter(item)
             {
-                SerializeExtensionsAsAtom = serializeExtensionsAsAtom
+                SerializeExtensionsAsAtom = serializeExtensionsAsAtom,
             };
             CompareHelper.AssertEqualWriteOutput(expected, writer => formatter.WriteTo(writer));
             if (serializeExtensionsAsAtom)
@@ -688,7 +688,7 @@ namespace System.ServiceModel.Syndication.Tests
 
             var genericFormatter = new Rss20ItemFormatter<SyndicationItem>(item)
             {
-                SerializeExtensionsAsAtom = serializeExtensionsAsAtom
+                SerializeExtensionsAsAtom = serializeExtensionsAsAtom,
             };
             CompareHelper.AssertEqualWriteOutput(expected, writer => formatter.WriteTo(writer));
             if (serializeExtensionsAsAtom)
@@ -1498,7 +1498,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter<SyndicationItemTryParseTrueSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
 
@@ -1967,7 +1967,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Item);
@@ -1982,7 +1982,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Item);
@@ -1995,7 +1995,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter(typeof(SyndicationItemSubclass))
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Item);
@@ -2010,7 +2010,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter(typeof(SyndicationItemSubclass))
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Item);
@@ -2023,7 +2023,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter<SyndicationItem>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Item);
@@ -2038,7 +2038,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter<SyndicationItem>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Item);
@@ -2051,7 +2051,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter<SyndicationItemSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 formatter.ReadFrom(reader);
                 verifyAction(formatter.Item);
@@ -2066,7 +2066,7 @@ namespace System.ServiceModel.Syndication.Tests
                 var formatter = new Rss20ItemFormatter<SyndicationItemSubclass>()
                 {
                     PreserveAttributeExtensions = preserveAttributeExtensions,
-                    PreserveElementExtensions = preserveElementExtensions
+                    PreserveElementExtensions = preserveElementExtensions,
                 };
                 ((IXmlSerializable)formatter).ReadXml(reader);
                 verifyAction(formatter.Item);
@@ -2228,7 +2228,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var formatter = new Rss20ItemFormatter()
             {
-                PreserveAttributeExtensions = preserveAttributeExtensions
+                PreserveAttributeExtensions = preserveAttributeExtensions,
             };
             Assert.Equal(preserveAttributeExtensions, formatter.PreserveAttributeExtensions);
         }
@@ -2240,7 +2240,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var formatter = new Rss20ItemFormatter()
             {
-                PreserveElementExtensions = preserveElementExtensions
+                PreserveElementExtensions = preserveElementExtensions,
             };
             Assert.Equal(preserveElementExtensions, formatter.PreserveElementExtensions);
         }
@@ -2252,7 +2252,7 @@ namespace System.ServiceModel.Syndication.Tests
         {
             var formatter = new Rss20ItemFormatter()
             {
-                SerializeExtensionsAsAtom = serializeExtensionsAsAtom
+                SerializeExtensionsAsAtom = serializeExtensionsAsAtom,
             };
             Assert.Equal(serializeExtensionsAsAtom, formatter.SerializeExtensionsAsAtom);
         }

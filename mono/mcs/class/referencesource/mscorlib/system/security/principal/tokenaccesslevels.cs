@@ -39,6 +39,6 @@ namespace System.Security.Principal
             | AdjustDefault
             | AdjustSessionId,
 
-        MaximumAllowed = 0x02000000
+        MaximumAllowed = 0x02000000,
     }
 }

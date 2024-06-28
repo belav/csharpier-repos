@@ -680,7 +680,7 @@ namespace MonoTests.System.Globalization
             new AutoResetEvent(false),
             new AutoResetEvent(false),
             new AutoResetEvent(false),
-            new AutoResetEvent(false)
+            new AutoResetEvent(false),
         };
 
         CultureInfo[] initial_culture = new CultureInfo[4];

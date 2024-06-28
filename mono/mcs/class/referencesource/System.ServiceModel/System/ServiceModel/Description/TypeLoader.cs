@@ -28,7 +28,7 @@ namespace System.ServiceModel.Description
         static Type[] formatterAttributes =
         {
             typeof(XmlSerializerFormatAttribute),
-            typeof(DataContractFormatAttribute)
+            typeof(DataContractFormatAttribute),
         };
 
         static Type[] knownTypesMethodParamType = new Type[] { typeof(ICustomAttributeProvider) };

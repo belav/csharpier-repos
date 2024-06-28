@@ -43,7 +43,7 @@ namespace System.Windows.Forms
                 new float[] { 0.27f, 0.27f, 0.27f, 0, 0 },
                 new float[] { 0.04f, 0.04f, 0.04f, 0, 0 },
                 new float[] { 0.365f, 0.365f, 0.365f, 0.7f, 0 },
-                new float[] { 0, 0, 0, 0, 1 }
+                new float[] { 0, 0, 0, 0, 1 },
             }
         );
 

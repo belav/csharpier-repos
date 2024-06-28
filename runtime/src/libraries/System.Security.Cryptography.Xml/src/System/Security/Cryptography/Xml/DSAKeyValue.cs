@@ -293,7 +293,7 @@ namespace System.Security.Cryptography.Xml
                                 ? Utils.ConvertByteArrayToInt(
                                     Convert.FromBase64String(pgenCounterNode.InnerText)
                                 )
-                                : 0
+                                : 0,
                     }
                 );
             }

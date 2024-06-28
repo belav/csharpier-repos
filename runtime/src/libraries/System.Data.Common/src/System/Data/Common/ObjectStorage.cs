@@ -21,7 +21,7 @@ namespace System.Data.Common
             NUMBER,
             STRING,
             BOOLEAN,
-            ARRAY
+            ARRAY,
         };
 
         private object?[] _values = default!; // Late-initialized

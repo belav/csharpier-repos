@@ -32,7 +32,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         }
                     },
                     {
@@ -40,13 +40,13 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id"),
-                            new KeyValuePair<string, object>("RouteConstraint", "Something")
+                            new KeyValuePair<string, object>("RouteConstraint", "Something"),
                         }
                     },
                     {
@@ -54,14 +54,14 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id"),
                         }
-                    }
+                    },
                 };
             }
         }
@@ -93,7 +93,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         },
                         new KeyValuePair<string, object>[] { }
                     },
@@ -102,14 +102,14 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
                             new KeyValuePair<string, object>("RouteKey", "id"),
-                            new KeyValuePair<string, object>("RouteConstraint", "Something")
+                            new KeyValuePair<string, object>("RouteConstraint", "Something"),
                         },
                         new[]
                         {
                             new KeyValuePair<string, object>("RouteValue", "Failure"),
-                            new KeyValuePair<string, object>("RouteKey", "id")
+                            new KeyValuePair<string, object>("RouteKey", "id"),
                         }
-                    }
+                    },
                 };
             }
         }
@@ -135,7 +135,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
             {
                 new KeyValuePair<string, object>("RouteConstraint", "Something"),
                 new KeyValuePair<string, object>("RouteValue", "Failure"),
-                new KeyValuePair<string, object>("RouteKey", "id")
+                new KeyValuePair<string, object>("RouteKey", "id"),
             };
             var actualLogValues = new[]
             {
@@ -198,7 +198,7 @@ namespace Microsoft.Extensions.Logging.Testing.Tests
                             new KeyValuePair<string, object>("RouteKey", "id"),
                             new KeyValuePair<string, object>("RouteValue", "FAILURE"),
                         }
-                    }
+                    },
                 };
             }
         }

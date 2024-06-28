@@ -63,7 +63,7 @@ namespace System.Threading
                 var secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
                 {
                     nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                    lpSecurityDescriptor = pSecurityDescriptor
+                    lpSecurityDescriptor = pSecurityDescriptor,
                 };
 
                 SafeWaitHandle handle = Interop.Kernel32.CreateSemaphoreEx(
@@ -180,12 +180,11 @@ namespace System.Threading
                 handle.Dispose();
                 return errorCode switch
                 {
-                    Interop.Errors.ERROR_FILE_NOT_FOUND
-                    or Interop.Errors.ERROR_INVALID_NAME =>
+                    Interop.Errors.ERROR_FILE_NOT_FOUND or Interop.Errors.ERROR_INVALID_NAME =>
                         OpenExistingResult.NameNotFound,
                     Interop.Errors.ERROR_PATH_NOT_FOUND => OpenExistingResult.PathNotFound,
                     Interop.Errors.ERROR_INVALID_HANDLE => OpenExistingResult.NameInvalid,
-                    _ => throw Win32Marshal.GetExceptionForLastWin32Error()
+                    _ => throw Win32Marshal.GetExceptionForLastWin32Error(),
                 };
             }
 

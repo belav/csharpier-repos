@@ -260,19 +260,15 @@ namespace System.Xml.Xsl.XPath
         static XPathOperator InvertOp(XPathOperator op)
         {
             return (
-                op == XPathOperator.Lt
-                    ? XPathOperator.Gt
-                    : // '<'  --> '>'
-                    op == XPathOperator.Le
-                        ? XPathOperator.Ge
-                        : // '<=' --> '>='
-                        op == XPathOperator.Gt
-                            ? XPathOperator.Lt
-                            : // '>'  --> '<'
-                            op == XPathOperator.Ge
-                                ? XPathOperator.Le
-                                : // '>=' --> '<='
-                                /*default:*/op
+                op == XPathOperator.Lt ? XPathOperator.Gt
+                : // '<'  --> '>'
+                op == XPathOperator.Le ? XPathOperator.Ge
+                : // '<=' --> '>='
+                op == XPathOperator.Gt ? XPathOperator.Lt
+                : // '>'  --> '<'
+                op == XPathOperator.Ge ? XPathOperator.Le
+                : // '>=' --> '<='
+                /*default:*/op
             );
         }
 
@@ -362,11 +358,11 @@ namespace System.Xml.Xsl.XPath
                     leftType.TypeCode == XmlTypeCode.Boolean
                     || rightType.TypeCode == XmlTypeCode.Boolean
                         ? XmlTypeCode.Boolean
-                        : leftType.TypeCode == XmlTypeCode.Double
-                        || rightType.TypeCode == XmlTypeCode.Double
-                            ? XmlTypeCode.Double
-                            :
-                            /*default:*/XmlTypeCode.String
+                    : leftType.TypeCode == XmlTypeCode.Double
+                    || rightType.TypeCode == XmlTypeCode.Double
+                        ? XmlTypeCode.Double
+                    :
+                    /*default:*/XmlTypeCode.String
                 );
                 return CompareValues(op, left, right, compType);
             }
@@ -527,16 +523,13 @@ namespace System.Xml.Xsl.XPath
                     QilLoop filter = (QilLoop)qilAxis;
                     filter.Body = f.And(
                         filter.Body,
-                        name != null && nsUri != null
-                            ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
+                        name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
                             : // ns:bar || bar
-                            nsUri != null
-                                ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                                : // ns:*
-                                name != null
-                                    ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                                    : // *:foo
-                                    /*name  == nsUri == null*/f.True() // *
+                            nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                            : // ns:*
+                            name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                            : // *:foo
+                            /*name  == nsUri == null*/f.True() // *
                     );
                     return filter;
                 }
@@ -544,16 +537,13 @@ namespace System.Xml.Xsl.XPath
 
             return f.Filter(
                 itr = f.For(qilAxis),
-                name != null && nsUri != null
-                    ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
+                name != null && nsUri != null ? f.Eq(f.NameOf(itr), f.QName(name, nsUri))
                     : // ns:bar || bar
-                    nsUri != null
-                        ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
-                        : // ns:*
-                        name != null
-                            ? f.Eq(f.LocalNameOf(itr), f.String(name))
-                            : // *:foo
-                            /*name  == nsUri == null*/f.True() // *
+                    nsUri != null ? f.Eq(f.NamespaceUriOf(itr), f.String(nsUri))
+                    : // ns:*
+                    name != null ? f.Eq(f.LocalNameOf(itr), f.String(name))
+                    : // *:foo
+                    /*name  == nsUri == null*/f.True() // *
             );
         }
 
@@ -569,7 +559,7 @@ namespace System.Xml.Xsl.XPath
             /*Whitespace           */XmlNodeKindFlags.Text,
             /*ProcessingInstruction*/XmlNodeKindFlags.PI,
             /*Comment              */XmlNodeKindFlags.Comment,
-            /*All                  */XmlNodeKindFlags.Any
+            /*All                  */XmlNodeKindFlags.Any,
         };
 
         QilNode BuildAxis(XPathAxis xpathAxis, XPathNodeType nodeType, string nsUri, string name)
@@ -1088,7 +1078,7 @@ namespace System.Xml.Xsl.XPath
             Sum,
             Floor,
             Ceiling,
-            Round
+            Round,
         };
 
         public static readonly XmlTypeCode[] argAny = { XmlTypeCode.Item };
@@ -1099,19 +1089,19 @@ namespace System.Xml.Xsl.XPath
         public static readonly XmlTypeCode[] argString2 =
         {
             XmlTypeCode.String,
-            XmlTypeCode.String
+            XmlTypeCode.String,
         };
         public static readonly XmlTypeCode[] argString3 =
         {
             XmlTypeCode.String,
             XmlTypeCode.String,
-            XmlTypeCode.String
+            XmlTypeCode.String,
         };
         public static readonly XmlTypeCode[] argFnSubstr =
         {
             XmlTypeCode.String,
             XmlTypeCode.Double,
-            XmlTypeCode.Double
+            XmlTypeCode.Double,
         };
 
         public static Dictionary<string, FunctionInfo> FunctionTable = CreateFunctionTable();

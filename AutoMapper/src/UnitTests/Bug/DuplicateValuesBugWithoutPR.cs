@@ -41,10 +41,10 @@ public class DuplicateValuesIssue
         var config = new MapperConfiguration(cfg => cfg.CreateMap<SourceObject, DestObject>());
         config.AssertConfigurationIsValid();
 
-        var source1 = new SourceObject { Id = 1, };
+        var source1 = new SourceObject { Id = 1 };
         sourceList.Add(source1);
 
-        var source2 = new SourceObject { Id = 2, };
+        var source2 = new SourceObject { Id = 2 };
         sourceList.Add(source2);
 
         source1.AddChild(source2); // This causes the problem

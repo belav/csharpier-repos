@@ -597,7 +597,7 @@ namespace MonoTests.System.Data
                         ProductID,
                         UnitPrice,
                         Quantity,
-                        Discount
+                        Discount,
                     };
                     this.Rows.Add(rowOrder_DetailsRow);
                     return rowOrder_DetailsRow;
@@ -1046,7 +1046,7 @@ namespace MonoTests.System.Data
                         ShipCity,
                         ShipRegion,
                         ShipPostalCode,
-                        ShipCountry
+                        ShipCountry,
                     };
                     this.Rows.Add(rowOrdersRow);
                     return rowOrdersRow;

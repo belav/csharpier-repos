@@ -104,7 +104,7 @@ public class DestinationTypePolymorphismTest
     {
         var order = new Order()
         {
-            Customer = new Customer() { Id = 1, Name = "A" }
+            Customer = new Customer() { Id = 1, Name = "A" },
         };
 
         var config = new MapperConfiguration(cfg =>
@@ -154,7 +154,7 @@ public class DestinationTypePolymorphismTestNonGeneric
     {
         var order = new Order()
         {
-            Customer = new Customer() { Id = 1, Name = "A" }
+            Customer = new Customer() { Id = 1, Name = "A" },
         };
         var config = new MapperConfiguration(cfg =>
         {

@@ -26,7 +26,7 @@ internal sealed class ProblemDetailsClientErrorFactory : IClientErrorFactory
         return new ObjectResult(problemDetails)
         {
             StatusCode = problemDetails.Status,
-            ContentTypes = { "application/problem+json", "application/problem+xml", },
+            ContentTypes = { "application/problem+json", "application/problem+xml" },
         };
     }
 }

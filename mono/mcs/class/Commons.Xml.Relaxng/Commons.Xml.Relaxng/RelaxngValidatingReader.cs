@@ -809,7 +809,7 @@ namespace Commons.Xml.Relaxng
             EndTag,
             EndAtt,
             Mixed,
-            TextOnly
+            TextOnly,
         }
 
         XmlQualifiedName GetQName(string local, string ns)

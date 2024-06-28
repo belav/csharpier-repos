@@ -117,7 +117,7 @@ namespace System.Security.Cryptography.Tests
                 {
                     Curve = ECCurve.NamedCurves.brainpoolP160r1,
                     KeySize = 160,
-                    CurveType = ECCurve.ECCurveType.PrimeShortWeierstrass
+                    CurveType = ECCurve.ECCurveType.PrimeShortWeierstrass,
                 };
                 yield return new CurveDef()
                 {

@@ -55,7 +55,7 @@ namespace System.Runtime.Serialization
             823117,
             1646237,
             3292489,
-            6584983
+            6584983,
         };
 
         // Constructs a new ObjectID generator, initializing all of the necessary variables.

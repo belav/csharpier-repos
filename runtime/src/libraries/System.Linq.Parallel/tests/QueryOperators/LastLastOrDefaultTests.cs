@@ -21,7 +21,7 @@ namespace System.Linq.Parallel.Tests
                     {
                         Labeled.Label("UnorderedDefault", UnorderedSources.Default(count)),
                         count,
-                        position
+                        position,
                     };
                 }
             }

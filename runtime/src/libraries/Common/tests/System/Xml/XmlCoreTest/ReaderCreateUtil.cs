@@ -36,7 +36,7 @@ namespace XmlCoreTest.Common
             CUSTOMREADER,
             CHARCHECKINGREADER,
             SUBTREEREADER,
-            WRAPPEDREADER
+            WRAPPEDREADER,
         }
 
         public enum ReadOverload
@@ -45,7 +45,7 @@ namespace XmlCoreTest.Common
             TextReader,
             Stream,
             URL,
-            XmlReader
+            XmlReader,
         }
 
         public class CreateReaderParams

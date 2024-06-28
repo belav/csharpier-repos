@@ -275,7 +275,7 @@ namespace Castle.DynamicProxy.Generators
                 interceptors
             )
             {
-                VirtualCall = true
+                VirtualCall = true,
             };
 
             emitter.CodeBuilder.AddStatement(
@@ -341,7 +341,7 @@ namespace Castle.DynamicProxy.Generators
                 SelfReference.Self,
                 methodInterceptors ?? interceptors,
                 proxiedMethodTokenExpression,
-                new ReferencesToObjectArrayExpression(dereferencedArguments)
+                new ReferencesToObjectArrayExpression(dereferencedArguments),
             };
         }
 

@@ -32,7 +32,7 @@ namespace System.Workflow.ComponentModel
                     new BrowsableAttribute(false),
                     new DesignerSerializationVisibilityAttribute(
                         DesignerSerializationVisibility.Hidden
-                    )
+                    ),
                 }
             )
         );
@@ -47,7 +47,7 @@ namespace System.Workflow.ComponentModel
                     new BrowsableAttribute(false),
                     new DesignerSerializationVisibilityAttribute(
                         DesignerSerializationVisibility.Hidden
-                    )
+                    ),
                 }
             )
         );
@@ -63,7 +63,7 @@ namespace System.Workflow.ComponentModel
                         new BrowsableAttribute(false),
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Hidden
-                        )
+                        ),
                     }
                 )
             );
@@ -78,7 +78,7 @@ namespace System.Workflow.ComponentModel
                     new BrowsableAttribute(false),
                     new DesignerSerializationVisibilityAttribute(
                         DesignerSerializationVisibility.Hidden
-                    )
+                    ),
                 }
             )
         );
@@ -282,7 +282,7 @@ namespace System.Workflow.ComponentModel
                         {
                             dependencyProperty.PropertyType.FullName,
                             dependencyProperty.Name,
-                            value.GetType().FullName
+                            value.GetType().FullName,
                         }
                     )
                 );
@@ -418,7 +418,7 @@ namespace System.Workflow.ComponentModel
                         {
                             dependencyProperty.PropertyType.FullName,
                             dependencyProperty.Name,
-                            value.GetType().FullName
+                            value.GetType().FullName,
                         }
                     ),
                     "value"
@@ -544,7 +544,7 @@ namespace System.Workflow.ComponentModel
                         {
                             dependencyEvent.PropertyType.FullName,
                             dependencyEvent.Name,
-                            value.GetType().FullName
+                            value.GetType().FullName,
                         }
                     ),
                     "value"

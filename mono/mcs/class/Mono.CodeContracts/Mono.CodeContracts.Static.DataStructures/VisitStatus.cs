@@ -31,6 +31,6 @@ namespace Mono.CodeContracts.Static.DataStructures
     enum VisitStatus
     {
         ContinueVisit,
-        StopVisit
+        StopVisit,
     }
 }

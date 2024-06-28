@@ -37,7 +37,7 @@ namespace System.Net.Mail
                         {
                             Credential = credential,
                             TargetName = spn,
-                            Binding = channelBindingToken
+                            Binding = channelBindingToken,
                         }
                     );
                 }

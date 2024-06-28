@@ -126,7 +126,7 @@ internal sealed class DefaultPageApplicationModelPartsProvider : IPageApplicatio
                 var requestPredicate = bindPropertiesAttribute.SupportsGet
                     ? _supportsAllRequests
                     : _supportsNonGetRequests;
-                bindingInfo = new BindingInfo { RequestPredicate = requestPredicate, };
+                bindingInfo = new BindingInfo { RequestPredicate = requestPredicate };
             }
         }
 

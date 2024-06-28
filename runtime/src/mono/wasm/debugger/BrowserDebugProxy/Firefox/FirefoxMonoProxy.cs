@@ -162,7 +162,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                         new
                         {
                             type = "prototypeAndProperties",
-                            to = res["result"]["actor"].Value<string>()
+                            to = res["result"]["actor"].Value<string>(),
                         }
                     ),
                     token
@@ -454,7 +454,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     {
                         url = args["location"]["sourceUrl"].Value<string>(),
                         lineNumber = args["location"]["line"].Value<int>() - 1,
-                        columnNumber = args["location"]["column"].Value<int>()
+                        columnNumber = args["location"]["column"].Value<int>(),
                     }
                 );
 
@@ -505,7 +505,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     {
                         url = args["location"]["sourceUrl"].Value<string>(),
                         lineNumber = args["location"]["line"].Value<int>() - 1,
-                        columnNumber = args["location"]["column"].Value<int>()
+                        columnNumber = args["location"]["column"].Value<int>(),
                     }
                 );
 
@@ -564,7 +564,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     {
                         type = "symbolIterator",
                         count = 0,
-                        actor = args["to"].Value<string>() + "symbolIterator"
+                        actor = args["to"].Value<string>() + "symbolIterator",
                     }
                 );
 
@@ -587,7 +587,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     {
                         type = "propertyIterator",
                         count = variables.Count,
-                        actor = args["to"].Value<string>() + "propertyIterator"
+                        actor = args["to"].Value<string>() + "propertyIterator",
                     }
                 );
 
@@ -616,7 +616,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                         scopeKind = "function",
                         function = new { displayName = scope.Method.Name },
                         bindings = new { arguments = new JArray(), variables },
-                        from = args["to"].Value<string>()
+                        from = args["to"].Value<string>(),
                     }
                 );
 
@@ -661,7 +661,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                             resultID,
                             hasException = false,
                             input = args?["text"],
-                            from = args["to"].Value<string>()
+                            from = args["to"].Value<string>(),
                         }
                     );
                     try
@@ -717,9 +717,9 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                                             kind = "Error",
                                             name = ree.Error.Value["result"]["className"],
                                             message = ree.Error.Value["result"]["description"],
-                                            isError = true
+                                            isError = true,
                                         }
-                                    )
+                                    ),
                                 }
                             )
                         );
@@ -745,9 +745,9 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                                             kind = "Error",
                                             name = "InternalError",
                                             message = e.Message,
-                                            isError = true
+                                            isError = true,
                                         }
-                                    )
+                                    ),
                                 }
                             )
                         );
@@ -761,7 +761,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                         new
                         {
                             resultID = ret.FullContent["resultID"],
-                            from = args["to"].Value<string>()
+                            from = args["to"].Value<string>(),
                         }
                     );
                     await SendEvent(sessionId, "", o, token);
@@ -851,7 +851,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                 type = "object",
                 @class = "Object",
                 actor = args?["to"],
-                from = args?["to"]
+                from = args?["to"],
             }
         );
         return o;
@@ -876,12 +876,12 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                                 @class = variable["value"]?["className"]?.Value<string>(),
                                 value = variable["value"]?["description"]?.Value<string>(),
                                 actor = variable["get"]["objectId"].Value<string>(),
-                                type = "function"
+                                type = "function",
                             }
                         ),
                         enumerable = true,
                         configurable = false,
-                        actor = variable["get"]["objectId"].Value<string>()
+                        actor = variable["get"]["objectId"].Value<string>(),
                     }
                 );
             }
@@ -896,12 +896,12 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                                 @class = variable["value"]?["className"]?.Value<string>(),
                                 value = variable["value"]?["description"]?.Value<string>(),
                                 actor = variable["value"]["objectId"].Value<string>(),
-                                type = variable["value"]?["type"]?.Value<string>() ?? "object"
+                                type = variable["value"]?["type"]?.Value<string>() ?? "object",
                             }
                         ),
                         enumerable = true,
                         configurable = false,
-                        actor = variable["value"]["objectId"].Value<string>()
+                        actor = variable["value"]["objectId"].Value<string>(),
                     }
                 );
             }
@@ -913,7 +913,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                         writable = variable["writable"],
                         enumerable = true,
                         configurable = false,
-                        type = variable["value"]?["type"]?.Value<string>()
+                        type = variable["value"]?["type"]?.Value<string>(),
                     }
                 );
                 if (variable["value"]["value"].Type != JTokenType.Null)
@@ -957,7 +957,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                 to = ctx.ActorName,
                 type = "evaluateJSAsync",
                 text = cmd.expression,
-                options = new { eager = true, mapped = new { await = true } }
+                options = new { eager = true, mapped = new { await = true } },
             }
         );
         return SendCommand(id, "evaluateJSAsync", o, token);
@@ -983,7 +983,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                 isBlackBoxed = false,
                 introductionType = "scriptElement",
                 resourceType = "source",
-                dotNetUrl = source.DotNetUrlEscaped
+                dotNetUrl = source.DotNetUrlEscaped,
             }
         );
         JObject sourcesJObj;
@@ -994,7 +994,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                 {
                     type = "resource-available-form",
                     resources = new JArray(obj),
-                    from = ctx.GlobalName
+                    from = ctx.GlobalName,
                 }
             );
         }
@@ -1005,7 +1005,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                 {
                     type = "newSource",
                     source = obj,
-                    from = ctx.ThreadName
+                    from = ctx.ThreadName,
                 }
             );
         }
@@ -1158,8 +1158,8 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     {
                         actor = location.Id.ToString(),
                         line = location.Line + 1,
-                        column = location.Column
-                    }
+                        column = location.Column,
+                    },
                 }
             );
             if (j > 0)
@@ -1249,7 +1249,7 @@ internal sealed class FirefoxMonoProxy : MonoProxy
                     source = $"// Unable to read document ({e.Message})\n"
                         + $"Local path: {src_file?.FileUriEscaped}\n"
                         + $"SourceLink path: {src_file?.SourceLinkUri}\n",
-                    from = script_id
+                    from = script_id,
                 }
             );
 

@@ -71,7 +71,7 @@ public class ShortFormDictionaryValidationStrategyTest
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));
         var valueMetadata = metadataProvider.GetMetadataForType(typeof(string));
         var strategy = new ShortFormDictionaryValidationStrategy<int, string>(
-            new Dictionary<string, int>() { { "prefix[2]", 2 }, { "prefix[3]", 3 }, },
+            new Dictionary<string, int>() { { "prefix[2]", 2 }, { "prefix[3]", 3 } },
             valueMetadata
         );
 
@@ -100,7 +100,7 @@ public class ShortFormDictionaryValidationStrategyTest
     public void EnumerateElements_RunOutOfElements()
     {
         // Arrange
-        var model = new Dictionary<int, string>() { { 2, "two" }, { 3, "three" }, };
+        var model = new Dictionary<int, string>() { { 2, "two" }, { 3, "three" } };
 
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var metadata = metadataProvider.GetMetadataForType(typeof(List<int>));

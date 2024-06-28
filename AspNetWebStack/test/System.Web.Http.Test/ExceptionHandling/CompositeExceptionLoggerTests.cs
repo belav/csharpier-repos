@@ -101,7 +101,7 @@ namespace System.Web.Http.ExceptionHandling
             IEnumerable<IExceptionLogger> loggers = new IExceptionLogger[]
             {
                 exceptionLogger1Mock.Object,
-                exceptionLogger2Mock.Object
+                exceptionLogger2Mock.Object,
             };
             IExceptionLogger product = CreateProductUnderTest(loggers);
 

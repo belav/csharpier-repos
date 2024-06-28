@@ -25,7 +25,7 @@ public class Startup
             "ja-JP",
             "fr-FR",
             "zh",
-            "zh-CN"
+            "zh-CN",
         };
         app.UseRequestLocalization(options =>
             options

@@ -91,7 +91,7 @@ public class DefaultAntiforgeryTokenStoreTest
         var httpContext = GetHttpContext("cookie-name", "cookie-value");
         httpContext.Request.ContentType = "application/x-www-form-urlencoded";
         httpContext.Request.Form = new FormCollection(
-            new Dictionary<string, StringValues> { { "form-field-name", "form-value" }, }
+            new Dictionary<string, StringValues> { { "form-field-name", "form-value" } }
         ); // header value has priority.
         httpContext.Request.Headers.Add("header-name", "header-value");
 
@@ -119,7 +119,7 @@ public class DefaultAntiforgeryTokenStoreTest
         var httpContext = GetHttpContext("cookie-name", "cookie-value");
         httpContext.Request.ContentType = "application/x-www-form-urlencoded";
         httpContext.Request.Form = new FormCollection(
-            new Dictionary<string, StringValues> { { "form-field-name", "form-value" }, }
+            new Dictionary<string, StringValues> { { "form-field-name", "form-value" } }
         );
 
         var options = new AntiforgeryOptions
@@ -366,7 +366,7 @@ public class DefaultAntiforgeryTokenStoreTest
         httpContext.SetupGet(hc => hc.Request.Path).Returns("/index.html");
         var options = new AntiforgeryOptions
         {
-            Cookie = { Name = _cookieName, Path = expectedCookiePath }
+            Cookie = { Name = _cookieName, Path = expectedCookiePath },
         };
         var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
 
@@ -395,7 +395,7 @@ public class DefaultAntiforgeryTokenStoreTest
         httpContext.SetupGet(hc => hc.Request.Path).Returns("/index.html");
         var options = new AntiforgeryOptions
         {
-            Cookie = { Name = _cookieName, Domain = expectedCookieDomain }
+            Cookie = { Name = _cookieName, Domain = expectedCookieDomain },
         };
         var tokenStore = new DefaultAntiforgeryTokenStore(new TestOptionsManager(options));
 

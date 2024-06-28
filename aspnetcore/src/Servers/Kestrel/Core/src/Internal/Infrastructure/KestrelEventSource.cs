@@ -361,7 +361,7 @@ internal sealed class KestrelEventSource : EventSource
             )
             {
                 DisplayName = "Connection Rate",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
             _totalConnectionsCounter ??= new PollingCounter(
@@ -380,7 +380,7 @@ internal sealed class KestrelEventSource : EventSource
             )
             {
                 DisplayName = "TLS Handshake Rate",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
             _totalTlsHandshakesCounter ??= new PollingCounter(
@@ -398,7 +398,7 @@ internal sealed class KestrelEventSource : EventSource
                 () => Volatile.Read(ref _currentTlsHandshakes)
             )
             {
-                DisplayName = "Current TLS Handshakes"
+                DisplayName = "Current TLS Handshakes",
             };
 
             _failedTlsHandshakesCounter ??= new PollingCounter(
@@ -407,7 +407,7 @@ internal sealed class KestrelEventSource : EventSource
                 () => Volatile.Read(ref _failedTlsHandshakes)
             )
             {
-                DisplayName = "Failed TLS Handshakes"
+                DisplayName = "Failed TLS Handshakes",
             };
 
             _currentConnectionsCounter ??= new PollingCounter(
@@ -416,7 +416,7 @@ internal sealed class KestrelEventSource : EventSource
                 () => Volatile.Read(ref _currentConnections)
             )
             {
-                DisplayName = "Current Connections"
+                DisplayName = "Current Connections",
             };
 
             _connectionQueueLengthCounter ??= new PollingCounter(
@@ -425,7 +425,7 @@ internal sealed class KestrelEventSource : EventSource
                 () => Volatile.Read(ref _connectionQueueLength)
             )
             {
-                DisplayName = "Connection Queue Length"
+                DisplayName = "Connection Queue Length",
             };
 
             _httpRequestQueueLengthCounter ??= new PollingCounter(
@@ -434,7 +434,7 @@ internal sealed class KestrelEventSource : EventSource
                 () => Volatile.Read(ref _httpRequestQueueLength)
             )
             {
-                DisplayName = "Request Queue Length"
+                DisplayName = "Request Queue Length",
             };
 
             _currrentUpgradedHttpRequestsCounter ??= new PollingCounter(
@@ -443,7 +443,7 @@ internal sealed class KestrelEventSource : EventSource
                 () => Volatile.Read(ref _currentUpgradedHttpRequests)
             )
             {
-                DisplayName = "Current Upgraded Requests (WebSockets)"
+                DisplayName = "Current Upgraded Requests (WebSockets)",
             };
 
             // Log the options here
@@ -501,27 +501,27 @@ internal sealed class KestrelEventSource : EventSource
             data[0] = new EventData
             {
                 DataPointer = (IntPtr)arg1Ptr,
-                Size = (arg1.Length + 1) * sizeof(char)
+                Size = (arg1.Length + 1) * sizeof(char),
             };
             data[1] = new EventData
             {
                 DataPointer = (IntPtr)arg2Ptr,
-                Size = (arg2.Length + 1) * sizeof(char)
+                Size = (arg2.Length + 1) * sizeof(char),
             };
             data[2] = new EventData
             {
                 DataPointer = (IntPtr)arg3Ptr,
-                Size = (arg3.Length + 1) * sizeof(char)
+                Size = (arg3.Length + 1) * sizeof(char),
             };
             data[3] = new EventData
             {
                 DataPointer = (IntPtr)arg4Ptr,
-                Size = (arg4.Length + 1) * sizeof(char)
+                Size = (arg4.Length + 1) * sizeof(char),
             };
             data[4] = new EventData
             {
                 DataPointer = (IntPtr)arg5Ptr,
-                Size = (arg5.Length + 1) * sizeof(char)
+                Size = (arg5.Length + 1) * sizeof(char),
             };
 
             WriteEventCore(eventId, EventDataCount, data);

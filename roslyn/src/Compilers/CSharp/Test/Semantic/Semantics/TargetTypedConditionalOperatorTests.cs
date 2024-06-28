@@ -265,7 +265,7 @@ class C
                 var langVersion in new[]
                 {
                     LanguageVersion.CSharp8,
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion(),
                 }
             )
             {
@@ -299,7 +299,7 @@ class C
                 var langVersion in new[]
                 {
                     LanguageVersion.CSharp8,
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion(),
                 }
             )
             {
@@ -330,7 +330,7 @@ class C
                 var langVersion in new[]
                 {
                     LanguageVersion.CSharp8,
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion(),
                 }
             )
             {
@@ -374,7 +374,7 @@ class C { }
                 var langVersion in new[]
                 {
                     LanguageVersion.CSharp8,
-                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion()
+                    MessageID.IDS_FeatureTargetTypedConditional.RequiredVersion(),
                 }
             )
             {
@@ -498,7 +498,7 @@ delegate int Del(int x);
             var convertedType = targetType switch
             {
                 "void*" => "System.Void*",
-                _ => targetType
+                _ => targetType,
             };
             Assert.Equal(
                 convertedType,
@@ -728,7 +728,7 @@ public class Program {
                 //         var c1 = a ?? (b ? 2 : 3);
                 Diagnostic(ErrorCode.ERR_BadBinaryOps, "a ?? (b ? 2 : 3)")
                     .WithArguments("??", $"{sourceType}?", "int")
-                    .WithLocation(7, 18)
+                    .WithLocation(7, 18),
             };
             CreateCompilation(
                     source,

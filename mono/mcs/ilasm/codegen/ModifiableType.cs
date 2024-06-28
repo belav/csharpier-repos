@@ -27,7 +27,7 @@ namespace Mono.ILASM
             MakeBoundArray,
             MakeManagedPointer,
             MakeUnmanagedPointer,
-            MakeCustomModified
+            MakeCustomModified,
         }
 
         public ModifiableType()

@@ -120,7 +120,7 @@ public class CookieBuilder
                 || (SecurePolicy == CookieSecurePolicy.SameAsRequest && context.Request.IsHttps),
             Expires = Expiration.HasValue
                 ? expiresFrom.Add(Expiration.GetValueOrDefault())
-                : default(DateTimeOffset?)
+                : default(DateTimeOffset?),
         };
 
         if (_extensions?.Count > 0)

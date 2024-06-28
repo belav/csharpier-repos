@@ -120,7 +120,9 @@ namespace System.Net.Http
                         InitialOneByteLengthMask => 1,
                         InitialTwoByteLengthMask => 2,
                         InitialFourByteLengthMask => 4,
-                        _ => 8 // LengthEightByte
+                        _ =>
+                            8 // LengthEightByte
+                        ,
                     };
 
                     Span<byte> temp = (stackalloc byte[8])[..length];
@@ -230,13 +232,10 @@ namespace System.Net.Http
             Debug.Assert(value >= 0);
             Debug.Assert(value <= EightByteLimit);
 
-            return value <= OneByteLimit
-                ? 1
-                : value <= TwoByteLimit
-                    ? 2
-                    : value <= FourByteLimit
-                        ? 4
-                        : 8; // EightByteLimit
+            return value <= OneByteLimit ? 1
+                : value <= TwoByteLimit ? 2
+                : value <= FourByteLimit ? 4
+                : 8; // EightByteLimit
         }
     }
 }

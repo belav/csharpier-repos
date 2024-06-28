@@ -338,7 +338,7 @@ namespace System.Data.Tests
             DataColumn[] difTable = new DataColumn[]
             {
                 _ds.Tables[0].Columns[2],
-                _ds.Tables[1].Columns[0]
+                _ds.Tables[1].Columns[0],
             };
             Assert.Throws<InvalidConstraintException>(() =>
             {
@@ -353,7 +353,7 @@ namespace System.Data.Tests
             DataColumn[] twoCol = new DataColumn[]
             {
                 _ds.Tables[0].Columns[0],
-                _ds.Tables[0].Columns[1]
+                _ds.Tables[0].Columns[1],
             };
 
             AssertExtensions.Throws<ArgumentException>(

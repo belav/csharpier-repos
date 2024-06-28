@@ -5,7 +5,7 @@ using System;
 
 enum A
 {
-    Hello
+    Hello,
 }
 
 class Y

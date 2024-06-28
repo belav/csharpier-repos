@@ -89,7 +89,7 @@ namespace System.Text.Json.Serialization.Tests
                             ""summary"": ""a summary of the album""
                         }
                     }
-                }"
+                }",
             };
 
             yield return new object[]
@@ -103,7 +103,7 @@ namespace System.Text.Json.Serialization.Tests
                             ""summary"": ""a summary of the album""
                         }
                     }
-                }"
+                }",
             };
 
             yield return new object[]
@@ -117,7 +117,7 @@ namespace System.Text.Json.Serialization.Tests
                             ""summary"": ""a summary of the album""
                         }
                     }
-                }"
+                }",
             };
 
             yield return new object[]
@@ -131,7 +131,7 @@ namespace System.Text.Json.Serialization.Tests
                         },
                         ""userPlayCount"": ""123""
                     }
-                }"
+                }",
             };
         }
 

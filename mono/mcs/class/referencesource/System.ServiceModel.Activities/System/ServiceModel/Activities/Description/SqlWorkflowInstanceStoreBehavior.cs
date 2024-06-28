@@ -47,7 +47,7 @@ namespace System.ServiceModel.Activities.Description
                 InstanceLockedExceptionAction = defaultInstanceLockedExceptionAction,
                 HostLockRenewalPeriod = defaultHostRenewalPeriod,
                 RunnableInstancesDetectionPeriod = defaultRunnableInstancesDetectionPeriod,
-                EnqueueRunCommands = true
+                EnqueueRunCommands = true,
             };
         }
 

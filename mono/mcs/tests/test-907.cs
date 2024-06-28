@@ -1,7 +1,7 @@
 public enum Foo
 {
     One,
-    Two
+    Two,
 };
 
 class MainClass

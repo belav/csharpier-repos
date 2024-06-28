@@ -71,7 +71,7 @@ namespace Mono.Data.Sqlite
             "yyyyMMddTHHmmssFFFFFFF",
             "yyyy-MM-dd",
             "yyyyMMdd",
-            "yy-MM-dd"
+            "yy-MM-dd",
         };
 
         /// <summary>
@@ -418,7 +418,7 @@ namespace Mono.Data.Sqlite
             typeof(byte[]),
             typeof(object),
             typeof(DateTime),
-            typeof(object)
+            typeof(object),
         };
 
         /// <summary>
@@ -534,7 +534,7 @@ namespace Mono.Data.Sqlite
             53,
             DBNull.Value,
             DBNull.Value,
-            DBNull.Value
+            DBNull.Value,
         };
 
         internal static object DbTypeToNumericScale(DbType typ)
@@ -568,7 +568,7 @@ namespace Mono.Data.Sqlite
             0,
             DBNull.Value,
             DBNull.Value,
-            DBNull.Value
+            DBNull.Value,
         };
 
         internal static string DbTypeToTypeName(DbType typ)
@@ -916,7 +916,7 @@ namespace Mono.Data.Sqlite
         /// This option disables the rollback journal entirely.  Interrupted transactions or a program crash can cause database
         /// corruption in this mode!
         /// </summary>
-        Off = 2
+        Off = 2,
     }
 
     /// <summary>

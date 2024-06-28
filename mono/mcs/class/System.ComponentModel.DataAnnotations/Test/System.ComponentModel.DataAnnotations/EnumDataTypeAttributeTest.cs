@@ -127,7 +127,7 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
     {
         One = 1,
         Two,
-        Three
+        Three,
     }
 
     [Flags]
@@ -135,6 +135,6 @@ namespace MonoTests.System.ComponentModel.DataAnnotations
     {
         Four = 4,
         Five = 8,
-        Six = 16
+        Six = 16,
     }
 }

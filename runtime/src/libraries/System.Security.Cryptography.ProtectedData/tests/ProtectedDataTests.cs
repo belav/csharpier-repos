@@ -22,7 +22,7 @@ namespace System.Security.Cryptography.ProtectedDataTests
                 DataProtectionScope scope in new DataProtectionScope[]
                 {
                     DataProtectionScope.CurrentUser,
-                    DataProtectionScope.LocalMachine
+                    DataProtectionScope.LocalMachine,
                 }
             )
             {
@@ -97,7 +97,7 @@ namespace System.Security.Cryptography.ProtectedDataTests
                 DataProtectionScope scope in new DataProtectionScope[]
                 {
                     DataProtectionScope.CurrentUser,
-                    DataProtectionScope.LocalMachine
+                    DataProtectionScope.LocalMachine,
                 }
             )
             {

@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a class constructor.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeConstructor : CodeMemberMethod
     {
         private CodeExpressionCollection baseConstructorArgs = new CodeExpressionCollection();

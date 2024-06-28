@@ -155,7 +155,7 @@ public class When_source_struct_config_has_custom_mappings : AutoMapperSpecBase
         {
             CNCinfo = 5,
             Reg1 = 6,
-            Reg2 = 7
+            Reg2 = 7,
         };
         var dest = Mapper.Map<matrixDigiInStruct1, DigiIn1>(source);
 

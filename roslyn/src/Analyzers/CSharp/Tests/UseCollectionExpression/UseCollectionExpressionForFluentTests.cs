@@ -1997,7 +1997,7 @@ public class UseCollectionExpressionForFluentTests
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -2030,7 +2030,7 @@ public class UseCollectionExpressionForFluentTests
                 """,
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,
-            TestState = { OutputKind = OutputKind.ConsoleApplication, },
+            TestState = { OutputKind = OutputKind.ConsoleApplication },
         }.RunAsync();
     }
 
@@ -2076,7 +2076,7 @@ public class UseCollectionExpressionForFluentTests
                         .WithSpan(8, 51, 8, 57)
                         .WithSpan(8, 33, 8, 59)
                         .WithSeverity(DiagnosticSeverity.Info),
-                }
+                },
             },
             LanguageVersion = LanguageVersion.CSharp12,
             ReferenceAssemblies = ReferenceAssemblies.Net.Net80,

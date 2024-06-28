@@ -300,7 +300,7 @@ namespace System.Net.Http.Functional.Tests
                                 {
                                     Content = withResponseContent
                                         ? new ByteArrayContent(new byte[1])
-                                        : null
+                                        : null,
                                 }
                             )
                     )
@@ -397,7 +397,7 @@ namespace System.Net.Http.Functional.Tests
                                     Content = new CustomContent(stream =>
                                     {
                                         throw e;
-                                    })
+                                    }),
                                 }
                             )
                     )
@@ -436,7 +436,7 @@ namespace System.Net.Http.Functional.Tests
                             Task.FromResult(
                                 new HttpResponseMessage()
                                 {
-                                    Content = new CustomContent(stream => Task.FromException(e))
+                                    Content = new CustomContent(stream => Task.FromException(e)),
                                 }
                             )
                     )
@@ -746,7 +746,7 @@ namespace System.Net.Http.Functional.Tests
                             HttpStatusCode.OK,
                             headers: new HttpHeaderData[]
                             {
-                                new HttpHeaderData("Content-Length", "5")
+                                new HttpHeaderData("Content-Length", "5"),
                             }
                         );
                         await connection.SendResponseBodyAsync("he");
@@ -1336,7 +1336,7 @@ namespace System.Net.Http.Functional.Tests
                                         currentThreadId,
                                         Environment.CurrentManagedThreadId
                                     );
-                                })
+                                }),
                             }
                         );
                     }
@@ -1350,7 +1350,7 @@ namespace System.Net.Http.Functional.Tests
                         Content = new CustomContent(stream =>
                         {
                             Assert.Equal(currentThreadId, Environment.CurrentManagedThreadId);
-                        })
+                        }),
                     },
                     completionOption
                 );
@@ -1393,7 +1393,7 @@ namespace System.Net.Http.Functional.Tests
                                         Environment.CurrentManagedThreadId
                                     );
                                     stream.Write(Encoding.UTF8.GetBytes(content));
-                                })
+                                }),
                             },
                             completionOption
                         );
@@ -1452,7 +1452,7 @@ namespace System.Net.Http.Functional.Tests
                                             Thread.Sleep(TimeSpan.FromSeconds(0.1));
                                         }
                                     })
-                                )
+                                ),
                             },
                             cts.Token
                         );
@@ -1511,7 +1511,7 @@ namespace System.Net.Http.Functional.Tests
                                             Thread.Sleep(TimeSpan.FromSeconds(0.1));
                                         }
                                     })
-                                )
+                                ),
                             }
                         );
                     });
@@ -1563,7 +1563,7 @@ namespace System.Net.Http.Functional.Tests
                                 Content = new CustomContent(stream =>
                                 {
                                     stream.Write(Encoding.UTF8.GetBytes(content));
-                                })
+                                }),
                             },
                             cts.Token
                         );
@@ -1588,7 +1588,7 @@ namespace System.Net.Http.Functional.Tests
                                     new HttpHeaderData(
                                         "Content-Length",
                                         (content.Length * 100).ToString()
-                                    )
+                                    ),
                                 }
                             );
                             cts.Cancel();
@@ -1626,7 +1626,7 @@ namespace System.Net.Http.Functional.Tests
                 await connection.SendResponseAsync(
                     headers: new[]
                     {
-                        new HttpHeaderData("Content-Length", (Content.Length * 100).ToString())
+                        new HttpHeaderData("Content-Length", (Content.Length * 100).ToString()),
                     }
                 );
                 for (int i = 0; i < 100; ++i)
@@ -1659,7 +1659,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrLower,
                     HttpVersion.Version11,
                     useSsl,
-                    HttpVersion.Version11
+                    HttpVersion.Version11,
                 };
                 yield return new object[]
                 {
@@ -1667,7 +1667,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionExact,
                     HttpVersion.Version11,
                     useSsl,
-                    HttpVersion.Version11
+                    HttpVersion.Version11,
                 };
                 yield return new object[]
                 {
@@ -1675,7 +1675,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrHigher,
                     HttpVersion.Version11,
                     useSsl,
-                    HttpVersion.Version11
+                    HttpVersion.Version11,
                 };
                 yield return new object[]
                 {
@@ -1683,7 +1683,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrLower,
                     HttpVersion.Version20,
                     useSsl,
-                    useSsl ? (object)HttpVersion.Version11 : typeof(HttpRequestException)
+                    useSsl ? (object)HttpVersion.Version11 : typeof(HttpRequestException),
                 };
                 yield return new object[]
                 {
@@ -1691,7 +1691,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionExact,
                     HttpVersion.Version20,
                     useSsl,
-                    useSsl ? (object)HttpVersion.Version11 : typeof(HttpRequestException)
+                    useSsl ? (object)HttpVersion.Version11 : typeof(HttpRequestException),
                 };
                 yield return new object[]
                 {
@@ -1699,7 +1699,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrHigher,
                     HttpVersion.Version20,
                     useSsl,
-                    useSsl ? (object)HttpVersion.Version20 : typeof(HttpRequestException)
+                    useSsl ? (object)HttpVersion.Version20 : typeof(HttpRequestException),
                 };
 
                 yield return new object[]
@@ -1708,7 +1708,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrLower,
                     HttpVersion.Version11,
                     useSsl,
-                    HttpVersion.Version11
+                    HttpVersion.Version11,
                 };
                 yield return new object[]
                 {
@@ -1716,7 +1716,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionExact,
                     HttpVersion.Version11,
                     useSsl,
-                    typeof(HttpRequestException)
+                    typeof(HttpRequestException),
                 };
                 yield return new object[]
                 {
@@ -1724,7 +1724,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrHigher,
                     HttpVersion.Version11,
                     useSsl,
-                    typeof(HttpRequestException)
+                    typeof(HttpRequestException),
                 };
                 yield return new object[]
                 {
@@ -1732,7 +1732,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrLower,
                     HttpVersion.Version20,
                     useSsl,
-                    useSsl ? (object)HttpVersion.Version20 : typeof(HttpRequestException)
+                    useSsl ? (object)HttpVersion.Version20 : typeof(HttpRequestException),
                 };
                 yield return new object[]
                 {
@@ -1740,7 +1740,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionExact,
                     HttpVersion.Version20,
                     useSsl,
-                    HttpVersion.Version20
+                    HttpVersion.Version20,
                 };
                 yield return new object[]
                 {
@@ -1748,7 +1748,7 @@ namespace System.Net.Http.Functional.Tests
                     HttpVersionPolicy.RequestVersionOrHigher,
                     HttpVersion.Version20,
                     useSsl,
-                    HttpVersion.Version20
+                    HttpVersion.Version20,
                 };
             }
         }
@@ -1770,7 +1770,7 @@ namespace System.Net.Http.Functional.Tests
                     var request = new HttpRequestMessage(HttpMethod.Get, uri)
                     {
                         Version = requestVersion,
-                        VersionPolicy = versionPolicy
+                        VersionPolicy = versionPolicy,
                     };
 
                     using HttpClientHandler handler = CreateHttpClientHandler(
@@ -1817,9 +1817,9 @@ namespace System.Net.Http.Functional.Tests
                             ? new List<SslApplicationProtocol>
                             {
                                 SslApplicationProtocol.Http2,
-                                SslApplicationProtocol.Http11
+                                SslApplicationProtocol.Http11,
                             }
-                            : null
+                            : null,
                 }
             );
         }
@@ -1857,7 +1857,7 @@ namespace System.Net.Http.Functional.Tests
             var request = new HttpRequestMessage(HttpMethod.Get, remoteServer.EchoUri)
             {
                 Version = requestVersion,
-                VersionPolicy = versionPolicy
+                VersionPolicy = versionPolicy,
             };
 
             using HttpClient client = CreateHttpClient();
@@ -2088,7 +2088,7 @@ namespace System.Net.Http.Functional.Tests
                 using (
                     var request = new HttpRequestMessage(HttpMethod.Get, CreateFakeUri())
                     {
-                        Content = content
+                        Content = content,
                     }
                 )
                 using (

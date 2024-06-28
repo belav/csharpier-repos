@@ -56,7 +56,7 @@ namespace Newtonsoft.Json.Tests.Issues
         {
             JsonSerializerSettings settings = new JsonSerializerSettings()
             {
-                TypeNameHandling = TypeNameHandling.Auto
+                TypeNameHandling = TypeNameHandling.Auto,
             };
 
             string s1 = JsonConvert.SerializeObject(

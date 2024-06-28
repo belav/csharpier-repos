@@ -39,6 +39,6 @@ namespace System.Net.Http
         /// <summary>
         /// https://ietf-wg-webtrans.github.io/draft-ietf-webtrans-http3/draft-ietf-webtrans-http3.html#name-bidirectional-streams
         /// </summary>
-        WebTransportBidirectional = 0x41
+        WebTransportBidirectional = 0x41,
     }
 }

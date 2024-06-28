@@ -368,7 +368,7 @@ partial interface T3
             "on",
             "equals",
             "ascending",
-            "descending"
+            "descending",
         ];
 
         /// <summary>
@@ -1391,7 +1391,7 @@ System.Console.WriteLine();";
                 Identifier("WriteLine"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon
+                Punctuation.Semicolon,
             };
 
             await TestAsync(code, code, testHost, Options.Script, expected);
@@ -1415,7 +1415,7 @@ System.Console.WriteLine();";
                 Identifier("WriteLine"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon
+                Punctuation.Semicolon,
             };
 
             await TestAsync(code, code, testHost, Options.Regular, expected);
@@ -1439,7 +1439,7 @@ System.Console.WriteLine();";
                 Identifier("WriteLine"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon
+                Punctuation.Semicolon,
             };
 
             await TestAsync(code, code, testHost, Options.Script, expected);
@@ -6023,7 +6023,7 @@ class C
                     new ClassifiedSpan(
                         ClassificationTypeNames.XmlDocCommentDelimiter,
                         new TextSpan(31, 1)
-                    )
+                    ),
                 },
                 classifications
             );
@@ -6098,7 +6098,7 @@ class C
                     new ClassifiedSpan(
                         ClassificationTypeNames.XmlDocCommentDelimiter,
                         new TextSpan(38, 1)
-                    )
+                    ),
                 },
                 classifications
             );

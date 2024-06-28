@@ -245,7 +245,7 @@ namespace Microsoft.CodeAnalysis.Workspaces.Diagnostics
                 AnalysisKind.Syntax => _syntaxLocals,
                 AnalysisKind.Semantic => _semanticLocals,
                 AnalysisKind.NonLocal => _nonLocals,
-                _ => throw ExceptionUtilities.UnexpectedValue(kind)
+                _ => throw ExceptionUtilities.UnexpectedValue(kind),
             };
 
         public ImmutableArray<DiagnosticData> GetAllDiagnostics()

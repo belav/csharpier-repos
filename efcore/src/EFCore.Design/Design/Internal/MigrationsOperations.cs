@@ -173,7 +173,7 @@ public class MigrationsOperations
             {
                 Id = id,
                 Name = idGenerator.GetName(id),
-                Applied = appliedMigrations?.Contains(id)
+                Applied = appliedMigrations?.Contains(id),
             };
     }
 

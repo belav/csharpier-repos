@@ -130,7 +130,7 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
             var candidateResults = new List<(DocumentId docId, TokenInformation tokenInformation)>
             {
-                (document.Id, mainTokenInformation)
+                (document.Id, mainTokenInformation),
             };
 
             foreach (var linkedDocumentId in linkedDocumentIds)
@@ -230,13 +230,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 symbols = symbols
                     .OrderBy(
                         (s1, s2) =>
-                            s1.Kind == s2.Kind
-                                ? 0
-                                : s1.Kind == SymbolKind.NamedType
-                                    ? -1
-                                    : s2.Kind == SymbolKind.NamedType
-                                        ? 1
-                                        : 0
+                            s1.Kind == s2.Kind ? 0
+                            : s1.Kind == SymbolKind.NamedType ? -1
+                            : s2.Kind == SymbolKind.NamedType ? 1
+                            : 0
                     )
                     .ToImmutableArray();
             }

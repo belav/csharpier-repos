@@ -893,9 +893,9 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     private CurrentValueType GetValueType(IProperty property) =>
         _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.IsStoreGenerated)
             ? CurrentValueType.StoreGenerated
-            : _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.IsTemporary)
-                ? CurrentValueType.Temporary
-                : CurrentValueType.Normal;
+        : _stateData.IsPropertyFlagged(property.GetIndex(), PropertyFlag.IsTemporary)
+            ? CurrentValueType.Temporary
+        : CurrentValueType.Normal;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2429,6 +2429,6 @@ public sealed partial class InternalEntityEntry : IUpdateEntry
     {
         Normal,
         StoreGenerated,
-        Temporary
+        Temporary,
     }
 }

@@ -22,7 +22,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         Left,
         Right,
         Neither,
-        Equal
+        Equal,
     }
 
     internal sealed partial class OverloadResolution
@@ -2789,7 +2789,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     RefKind.In or RefKind.RefReadOnlyParameter => true,
                     RefKind.Ref when isInterpolatedStringHandlerConversion => true,
-                    _ => false
+                    _ => false,
                 };
         }
 

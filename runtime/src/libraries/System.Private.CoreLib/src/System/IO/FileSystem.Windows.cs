@@ -584,7 +584,7 @@ namespace System.IO
         {
             var basicInfo = new Interop.Kernel32.FILE_BASIC_INFO
             {
-                FileAttributes = (uint)attributes
+                FileAttributes = (uint)attributes,
             };
 
             if (
@@ -639,7 +639,7 @@ namespace System.IO
                 LastAccessTime = lastAccessTime,
                 LastWriteTime = lastWriteTime,
                 ChangeTime = changeTime,
-                FileAttributes = fileAttributes
+                FileAttributes = fileAttributes,
             };
 
             if (
@@ -704,11 +704,9 @@ namespace System.IO
                     returnFullPath: true
                 );
 
-            return targetPath == null
-                ? null
-                : isDirectory
-                    ? new DirectoryInfo(targetPath)
-                    : new FileInfo(targetPath);
+            return targetPath == null ? null
+                : isDirectory ? new DirectoryInfo(targetPath)
+                : new FileInfo(targetPath);
         }
 
         internal static string? GetLinkTarget(string linkPath, bool isDirectory) =>

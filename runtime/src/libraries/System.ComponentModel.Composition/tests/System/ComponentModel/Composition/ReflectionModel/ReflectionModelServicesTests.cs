@@ -703,7 +703,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -749,7 +749,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -786,7 +786,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -859,7 +859,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -905,7 +905,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -942,7 +942,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -1012,7 +1012,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -1043,7 +1043,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             KeyValuePair<string, Type>[] expectedRequiredMetadata = new KeyValuePair<string, Type>[]
             {
                 new KeyValuePair<string, Type>("Key1", typeof(string)),
-                new KeyValuePair<string, Type>("Key2", typeof(int))
+                new KeyValuePair<string, Type>("Key2", typeof(int)),
             };
             ImportCardinality expectedCardinality = ImportCardinality.ExactlyOne;
             CreationPolicy expectedCreationPolicy = CreationPolicy.NonShared;
@@ -1290,7 +1290,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         new KeyValuePair<string, Type>[]
                         {
                             new KeyValuePair<string, Type>("Key1", typeof(string)),
-                            new KeyValuePair<string, Type>("Key2", typeof(int))
+                            new KeyValuePair<string, Type>("Key2", typeof(int)),
                         },
                         ImportCardinality.ZeroOrOne,
                         true,

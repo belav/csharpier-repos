@@ -16,7 +16,7 @@ namespace System.Xml.XmlDiff
         Before = 0,
         After = 1,
         Unknown = 2,
-        Same = 3
+        Same = 3,
     }
 
     public enum XmlDiffNodeType
@@ -29,7 +29,7 @@ namespace System.Xml.XmlDiff
         Comment = 5,
         PI = 6,
         WS = 7,
-        Document = 8
+        Document = 8,
     }
 
     internal class PositionInfo : IXmlLineInfo

@@ -39,7 +39,7 @@ Console.WriteLine(1)/*4*/;
                 new KeyValuePair<SyntaxNode, SyntaxNode>(
                     ((BlockSyntax)m1.RootNodes.First()).Statements[1],
                     ((BlockSyntax)m2.RootNodes.First()).Statements[0]
-                )
+                ),
             };
 
             // pre-matched:
@@ -51,7 +51,7 @@ Console.WriteLine(1)/*4*/;
             var expected = new MatchingPairs
             {
                 { "Console.WriteLine(1)/*1*/;", "Console.WriteLine(1)/*4*/;" },
-                { "Console.WriteLine(1)/*2*/;", "Console.WriteLine(1)/*3*/;" }
+                { "Console.WriteLine(1)/*2*/;", "Console.WriteLine(1)/*3*/;" },
             };
 
             expected.AssertEqual(actual);
@@ -65,7 +65,7 @@ Console.WriteLine(1)/*4*/;
             expected = new MatchingPairs
             {
                 { "Console.WriteLine(1)/*1*/;", "Console.WriteLine(1)/*3*/;" },
-                { "Console.WriteLine(1)/*2*/;", "Console.WriteLine(1)/*4*/;" }
+                { "Console.WriteLine(1)/*2*/;", "Console.WriteLine(1)/*4*/;" },
             };
 
             expected.AssertEqual(actual);
@@ -89,14 +89,17 @@ Console.WriteLine(2);
 
             var knownMatches = new[]
             {
-                new KeyValuePair<SyntaxNode, SyntaxNode>(m1.RootNodes.First(), m2.RootNodes.First())
+                new KeyValuePair<SyntaxNode, SyntaxNode>(
+                    m1.RootNodes.First(),
+                    m2.RootNodes.First()
+                ),
             };
             var match = m1.ComputeSingleRootMatch(m2, knownMatches);
             var actual = ToMatchingPairs(match);
 
             var expected = new MatchingPairs
             {
-                { "Console.WriteLine(1);", "Console.WriteLine(2);" }
+                { "Console.WriteLine(1);", "Console.WriteLine(2);" },
             };
 
             expected.AssertEqual(actual);
@@ -154,7 +157,7 @@ if (x > 1)
                     "while (true)     {         x++/*2B*/;     }"
                 },
                 { "{     x++/*2A*/; }", "{         x++/*2B*/;     }" },
-                { "x++/*2A*/;", "x++/*2B*/;" }
+                { "x++/*2A*/;", "x++/*2B*/;" },
             };
 
             expected.AssertEqual(actual);
@@ -187,7 +190,7 @@ return c > 7 ? c : throw new IndexOutOfRangeException();
                 {
                     "return c > 7 ? c : 7;",
                     "return c > 7 ? c : throw new IndexOutOfRangeException();"
-                }
+                },
             };
 
             expected.AssertEqual(actual);
@@ -220,7 +223,7 @@ return b > 5 ? b : 5;
                 {
                     "return b > 5 ? b : throw new OperationCanceledException();",
                     "return b > 5 ? b : 5;"
-                }
+                },
             };
 
             expected.AssertEqual(actual);
@@ -270,7 +273,7 @@ return (2, () => {
                 { "int a = 6;", "int a = 6;" },
                 { "int a = 6", "int a = 6" },
                 { "a = 6", "a = 6" },
-                { "return 1;", "return 5;" }
+                { "return 1;", "return 5;" },
             };
 
             expected.AssertEqual(actual);
@@ -298,7 +301,7 @@ int y = 1;
             {
                 { "int x = 1;", "int y = 1;" },
                 { "int x = 1", "int y = 1" },
-                { "x = 1", "y = 1" }
+                { "x = 1", "y = 1" },
             };
 
             expected.AssertEqual(actual);
@@ -322,7 +325,7 @@ byte x = 1;
             {
                 { "int x = 1;", "byte x = 1;" },
                 { "int x = 1", "byte x = 1" },
-                { "x = 1", "x = 1" }
+                { "x = 1", "x = 1" },
             };
 
             expected.AssertEqual(actual);
@@ -362,7 +365,7 @@ byte x = 1;
                 { "{     int b = 2; }", "{     int b = 5; }" },
                 { "int b = 2;", "int b = 5;" },
                 { "int b = 2", "int b = 5" },
-                { "b = 2", "b = 5" }
+                { "b = 2", "b = 5" },
             };
 
             expected.AssertEqual(actual);
@@ -408,7 +411,7 @@ if (X)
                 { "{     int b = 2; }", "{     int b = 5; }" },
                 { "int b = 2;", "int b = 5;" },
                 { "int b = 2", "int b = 5" },
-                { "b = 2", "b = 5" }
+                { "b = 2", "b = 5" },
             };
 
             expected.AssertEqual(actual);
@@ -452,7 +455,7 @@ if (X)
                 { "{         int b = 2;     }", "{     int b = 1; }" },
                 { "int b = 2;", "int b = 1;" },
                 { "int b = 2", "int b = 1" },
-                { "b = 2", "b = 1" }
+                { "b = 2", "b = 1" },
             };
 
             expected.AssertEqual(actual);
@@ -524,7 +527,7 @@ if (X)
                 { "int a = 7, b = 8", "int a = 9, b = 10" },
                 { "a = 7", "a = 9" },
                 { "b = 8", "b = 10" },
-                { "Console.WriteLine(a + b);", "Console.WriteLine(a + b);" }
+                { "Console.WriteLine(a + b);", "Console.WriteLine(a + b);" },
             };
 
             expected.AssertEqual(actual);
@@ -553,7 +556,7 @@ N(out var b);
                 { "M(out int z);", "M(out var z);" },
                 { "z", "z" },
                 { "N(out var a);", "N(out var b);" },
-                { "a", "b" }
+                { "a", "b" },
             };
 
             expected.AssertEqual(actual);
@@ -595,7 +598,7 @@ var (a1, a3) = (1, () => { return 8; });
                 { "() => { return 7; }", "() => { return 8; }" },
                 { "()", "()" },
                 { "{ return 7; }", "{ return 8; }" },
-                { "return 7;", "return 8;" }
+                { "return 7;", "return 8;" },
             };
 
             expected.AssertEqual(actual);
@@ -614,7 +617,7 @@ var (a1, a3) = (1, () => { return 8; });
             {
                 { "var (z1, z2) = (1, 2);", "var (z1, z2, z3) = (1, 2, 5);" },
                 { "z1", "z1" },
-                { "z2", "z2" }
+                { "z2", "z2" },
             };
 
             expected.AssertEqual(actual);
@@ -633,7 +636,7 @@ var (a1, a3) = (1, () => { return 8; });
             {
                 { "var (y1, y2, y3) = (1, 2, 7);", "var (y1, y2) = (1, 4);" },
                 { "y1", "y1" },
-                { "y2", "y2" }
+                { "y2", "y2" },
             };
 
             expected.AssertEqual(actual);
@@ -681,7 +684,7 @@ ref int32 a = ref G1(new int[] { 1, 2 });
                 { "(int[] p)", "(int[] p)" },
                 { "int[] p", "int[] p" },
                 { "{         return ref p[1];     }", "{         return ref p[2];     }" },
-                { "return ref p[1];", "return ref p[2];" }
+                { "return ref p[1];", "return ref p[2];" },
             };
 
             expected.AssertEqual(actual);
@@ -705,7 +708,7 @@ ref int32 a = ref G1(new int[] { 1, 2 });
                 { "Action x = a => a;", "Action x = (a) => a;" },
                 { "Action x = a => a", "Action x = (a) => a" },
                 { "x = a => a", "x = (a) => a" },
-                { "a => a", "(a) => a" }
+                { "a => a", "(a) => a" },
             };
 
             expected.AssertEqual(actual);
@@ -739,7 +742,7 @@ F(y => y + 1, G(), x => x + 1, (int x) => x, u => u, async (u, v) => u + v);
                 { "delegate(int x) { return x; }", "(int x) => x" },
                 { "(int x)", "(int x)" },
                 { "int x", "int x" },
-                { "async u => u", "async (u, v) => u + v" }
+                { "async u => u", "async (u, v) => u + v" },
             };
 
             expected.AssertEqual(actual);
@@ -763,7 +766,7 @@ F((a) => x, () => x);
             var expected = new MatchingPairs
             {
                 { "F(delegate { return x; });", "F((a) => x, () => x);" },
-                { "delegate { return x; }", "() => x" }
+                { "delegate { return x; }", "() => x" },
             };
 
             expected.AssertEqual(actual);
@@ -788,7 +791,7 @@ a += u => u;
             {
                 { "a += async u => u;", "a += u => u;" },
                 { "async u => u", "u => u" },
-                { "u", "u" }
+                { "u", "u" },
             };
 
             expected.AssertEqual(actual);
@@ -841,7 +844,11 @@ foreach (var a in z)
                 { "l => l > 10", "l => l < 0" },
                 { "l", "l" },
                 { "select q + 1", "select q + 1" }, // select clause
-                { "select q + 1", "select q + 1" } // query body
+                {
+                    "select q + 1",
+                    "select q + 1"
+                } // query body
+                ,
             };
 
             expected.AssertEqual(actual);
@@ -870,7 +877,7 @@ F(a => b => c => d);
                 { "b => c => d", "b => c => d" },
                 { "b", "b" },
                 { "c => d", "c => d" },
-                { "c", "c" }
+                { "c", "c" },
             };
 
             expected.AssertEqual(actual);
@@ -899,7 +906,7 @@ F(a => G(b => H(c => I(d))));
                 { "b => c => d", "b => H(c => I(d))" },
                 { "b", "b" },
                 { "c => d", "c => I(d)" },
-                { "c", "c" }
+                { "c", "c" },
             };
 
             expected.AssertEqual(actual);
@@ -977,7 +984,7 @@ F(a =>
                 { "c", "c" },
                 { "F(p => p);", "F(p => p*2);" },
                 { "p => p", "p => p*2" },
-                { "p", "p" }
+                { "p", "p" },
             };
 
             expected.AssertEqual(actual);
@@ -998,7 +1005,7 @@ F(a =>
                 { "var x = new int[F(a => 1)]", "var x = new int[F(a => 2)]" },
                 { "x = new int[F(a => 1)]", "x = new int[F(a => 2)]" },
                 { "a => 1", "a => 2" },
-                { "a", "a" }
+                { "a", "a" },
             };
 
             expected.AssertEqual(actual);
@@ -1019,7 +1026,7 @@ F(a =>
                 { "var x = new int[] { F(a => 1) }", "var x = new int[] { F(a => 2) }" },
                 { "x = new int[] { F(a => 1) }", "x = new int[] { F(a => 2) }" },
                 { "a => 1", "a => 2" },
-                { "a", "a" }
+                { "a", "a" },
             };
 
             expected.AssertEqual(actual);
@@ -1040,7 +1047,7 @@ F(a =>
                 { "var x = stackalloc int[F(a => 1)]", "var x = stackalloc int[F(a => 2)]" },
                 { "x = stackalloc int[F(a => 1)]", "x = stackalloc int[F(a => 2)]" },
                 { "a => 1", "a => 2" },
-                { "a", "a" }
+                { "a", "a" },
             };
 
             expected.AssertEqual(actual);
@@ -1061,7 +1068,7 @@ F(a =>
                 { "var x = stackalloc[] { F(a => 1) }", "var x = stackalloc[] { F(a => 2) }" },
                 { "x = stackalloc[] { F(a => 1) }", "x = stackalloc[] { F(a => 2) }" },
                 { "a => 1", "a => 2" },
-                { "a", "a" }
+                { "a", "a" },
             };
 
             expected.AssertEqual(actual);
@@ -1084,7 +1091,7 @@ F(a =>
                 { "(a, b) => 1", "(_, _) => 2" },
                 { "(a, b)", "(_, _)" },
                 { "a", "_" },
-                { "b", "_" }
+                { "b", "_" },
             };
 
             expected.AssertEqual(actual);
@@ -1139,7 +1146,7 @@ F(a =>
                 { "(int i)", "(int i)" },
                 { "int i", "int i" },
                 { "{ return null; }", "{ return null; }" },
-                { "return null;", "return null;" }
+                { "return null;", "return null;" },
             };
 
             expected.AssertEqual(actual);
@@ -1157,7 +1164,7 @@ F(a =>
             var expected = new MatchingPairs
             {
                 { "object x(object a) => a;", "a => a" },
-                { "F(x);", "F(a => a);" }
+                { "F(x);", "F(a => a);" },
             };
 
             expected.AssertEqual(actual);
@@ -1194,7 +1201,7 @@ F(localF1, localF2, G(), localF2, localF3, localF4, localF5);
                 { "delegate(int x) { return x; }", "int localF3(int x) => x;" },
                 { "(int x)", "(int x)" },
                 { "int x", "int x" },
-                { "async u => u", "int localF4(int u) => u;" }
+                { "async u => u", "int localF4(int u) => u;" },
             };
 
             expected.AssertEqual(actual);
@@ -1219,7 +1226,7 @@ F(localF);
             var expected = new MatchingPairs
             {
                 { "F(delegate { return x; });", "F(localF);" },
-                { "delegate { return x; }", "int localF() => x;" }
+                { "delegate { return x; }", "int localF() => x;" },
             };
 
             expected.AssertEqual(actual);
@@ -1244,7 +1251,7 @@ a += localF;
             var expected = new MatchingPairs
             {
                 { "a += async u => u;", "a += localF;" },
-                { "async u => u", "object localF(object u) => u;" }
+                { "async u => u", "object localF(object u) => u;" },
             };
 
             expected.AssertEqual(actual);
@@ -1289,7 +1296,7 @@ a += localF;
                 { "{ return 0; }", "{ return 0; }" },
                 { "return 0;", "return 0;" },
                 { "return c();", "return c();" },
-                { "return b();", "return b();" }
+                { "return b();", "return b();" },
             };
 
             expected.AssertEqual(actual);
@@ -1385,7 +1392,7 @@ void G6(int a)
                 { "return G2(w);", "return G2(w);" },
                 { "F(G3);", "F(G3);" },
                 { "F(G1);", "F(G1);" },
-                { "F(G4);", "F(G4);" }
+                { "F(G4);", "F(G4);" },
             };
 
             expected.AssertEqual(actual);
@@ -1493,7 +1500,7 @@ var q = from c in cars
                 },
                 { "from ud in users_details", "from ud in users_details" },
                 { "from bd in bids", "from bd in bids" },
-                { "select 1", "select 2" }
+                { "select 1", "select 2" },
             };
 
             expected.AssertEqual(actual);
@@ -1586,7 +1593,7 @@ var q = from c in cars
                 { "b.id descending", "b.id ascending" },
                 { "where b.carID == c.id", "where b.carID == c.id2" },
                 { "select b.bidamount", "select b.bidamount" },
-                { "select bid", "select bid" }
+                { "select bid", "select bid" },
             };
 
             expected.AssertEqual(actual);
@@ -1654,7 +1661,7 @@ var q = from a in await seq1
                 { "t => t", "tt => tt + 4" },
                 { "t", "tt" },
                 { "into g2", "into g2" },
-                { "select a", "select a + 1" }
+                { "select a", "select a + 1" },
             };
 
             expected.AssertEqual(actual);
@@ -1679,7 +1686,7 @@ var q = from a in await seq1
                 { "await b", "await c" },
                 { "from x in y select c", "from x in y select c" },
                 { "from x in y", "from x in y" },
-                { "select c", "select c" }
+                { "select c", "select c" },
             };
 
             expected.AssertEqual(actual);
@@ -1705,7 +1712,7 @@ var q = from a in await seq1
                 { "group a by a.x", "group z by z.y" },
                 { "into g  select g", "into h  select h" },
                 { "select g", "select h" },
-                { "select g", "select h" }
+                { "select g", "select h" },
             };
 
             expected.AssertEqual(actual);
@@ -1759,7 +1766,7 @@ yield return /*2*/ 2;
             var expected = new MatchingPairs
             {
                 { "yield return /*1*/ 1;", "yield return /*1*/ 1;" },
-                { "yield return /*2*/ 2;", "yield return /*2*/ 2;" }
+                { "yield return /*2*/ 2;", "yield return /*2*/ 2;" },
             };
 
             expected.AssertEqual(actual);
@@ -1794,7 +1801,7 @@ C();
                 { "yield return /*1*/ 1;", "yield return /*1*/ 1;" },
                 { "B();", "B();" },
                 { "yield return /*2*/ 2;", "yield return /*2*/ 2;" },
-                { "C();", "C();" }
+                { "C();", "C();" },
             };
 
             expected.AssertEqual(actual);
@@ -1831,7 +1838,7 @@ foreach (var x in y) { yield return /*3*/ 2; }
                 {
                     "foreach (var x in y) { yield return /*3*/ 3; }",
                     "foreach (var x in y) { yield return /*3*/ 2; }"
-                }
+                },
             };
 
             expected.AssertEqual(actual);
@@ -1854,7 +1861,7 @@ foreach (var x in y) { yield return /*3*/ 2; }
             {
                 { "F(await x, await y);", "F(await y, await x);" },
                 { "await x", "await x" },
-                { "await y", "await y" }
+                { "await y", "await y" },
             };
 
             expected.AssertEqual(actual);
@@ -1903,7 +1910,7 @@ await x;
                 { "await foreach (var (u, v) in w) {}", "await foreach (var (u, v) in w) {}" },
                 { "u", "u" },
                 { "v", "v" },
-                { "{}", "{}" }
+                { "{}", "{}" },
             };
 
             expected.AssertEqual(actual);
@@ -2027,7 +2034,7 @@ await using (D y = new D(), z = new D()) { }
                 { "await x;", "await x;" },
                 { "await x", "await x" },
                 { "foreach (T x in y) {}", "await foreach (T x in y) {}" },
-                { "{}", "{}" }
+                { "{}", "{}" },
             };
 
             expected.AssertEqual(actual);
@@ -2093,7 +2100,7 @@ await foreach (var (u, v) in y) {}
             var expected = new MatchingPairs
             {
                 { "await foreach (var x in y) {}", "await foreach (var (u, v) in y) {}" },
-                { "{}", "{}" }
+                { "{}", "{}" },
             };
 
             expected.AssertEqual(actual);
@@ -2117,7 +2124,7 @@ await foreach (var (u, v) in y) {}
                 { "await x;", "await x;" },
                 { "await x", "await x" },
                 { "foreach (T x in y) {}", "await foreach (T x in y) {}" },
-                { "{}", "{}" }
+                { "{}", "{}" },
             };
 
             expected.AssertEqual(actual);
@@ -2149,7 +2156,7 @@ await foreach (var (u, v) in y) {}
                 { "a => a + 1", "a => a + 1" },
                 { "a", "a" },
                 { "{ Console.WriteLine(1); }", "{ Console.WriteLine(1); }" },
-                { "Console.WriteLine(1);", "Console.WriteLine(1);" }
+                { "Console.WriteLine(1);", "Console.WriteLine(1);" },
             };
 
             expected.AssertEqual(actual);
@@ -2174,7 +2181,7 @@ await foreach (var (u, v) in y) {}
             {
                 { "()", "()" },
                 { "{ Console.WriteLine(1); }", "{ Console.WriteLine(1); }" },
-                { "Console.WriteLine(1);", "Console.WriteLine(1);" }
+                { "Console.WriteLine(1);", "Console.WriteLine(1);" },
             };
 
             expected.AssertEqual(actual);
@@ -2232,7 +2239,7 @@ catch (Exception e) when (filter(e)) { Console.WriteLine(30); }
                 { "(Exception e)", "(Exception e)" },
                 { "when (filter(e))", "when (filter(e))" },
                 { "{ Console.WriteLine(3); }", "{ Console.WriteLine(30); }" },
-                { "Console.WriteLine(3);", "Console.WriteLine(30);" }
+                { "Console.WriteLine(3);", "Console.WriteLine(30);" },
             };
 
             expected.AssertEqual(actual);
@@ -2307,7 +2314,7 @@ foreach (var b in e2) { }
                 { "{ }", "{ }" },
                 { "foreach (_ in e3) { A(); }", "foreach (_ in e4) { A(); }" },
                 { "{ A(); }", "{ A(); }" },
-                { "A();", "A();" }
+                { "A();", "A();" },
             };
 
             expected.AssertEqual(actual);
@@ -2346,7 +2353,7 @@ foreach ((var b6, var b4, var b5) in e) { }
                 },
                 { "b4", "b4" },
                 { "b5", "b5" },
-                { "{ }", "{ }" }
+                { "{ }", "{ }" },
             };
 
             expected.AssertEqual(actual);
@@ -2387,7 +2394,7 @@ foreach ((var b7, var b9) in e) { A2(); }
                 { "b7", "b7" },
                 { "b9", "b9" },
                 { "{ A2(); }", "{ A2(); }" },
-                { "A2();", "A2();" }
+                { "A2();", "A2();" },
             };
 
             expected.AssertEqual(actual);
@@ -2423,7 +2430,7 @@ if (a is 77) return 5;
                 },
                 { "return 3;", "return 3;" },
                 { "if (a is 7) return 5;", "if (a is 77) return 5;" },
-                { "return 5;", "return 5;" }
+                { "return 5;", "return 5;" },
             };
 
             expected.AssertEqual(actual);
@@ -2466,7 +2473,7 @@ if (!(a is int s)) return;
                 { "t", "t1" },
                 { "return;", "return;" },
                 { "if (!(c is int j)) return;", "if (!(c is int)) return;" },
-                { "return;", "return;" }
+                { "return;", "return;" },
             };
 
             expected.AssertEqual(actual);
@@ -2519,7 +2526,7 @@ if (!(o3 is (string k, int l2, int m))) return;
                 { "k", "k" },
                 { "l", "l2" },
                 { "m", "m" },
-                { "return;", "return;" }
+                { "return;", "return;" },
             };
 
             expected.AssertEqual(actual);
@@ -2578,7 +2585,7 @@ _ => 4
                 { "when c > 1", "when c1 > 2" },
                 { "(1, 1, Point { X: 0 } p) => 3", "(1, 1, Point { Y: 0 } p1) => 3" },
                 { "p", "p1" },
-                { "_ => 4", "_ => 4" }
+                { "_ => 4", "_ => 4" },
             };
 
             expected.AssertEqual(actual);
@@ -2621,7 +2628,7 @@ if (o is string { Length: 7 } s7) return 5;
                     "if (o is string { Length: 7 } s7) return 5;"
                 },
                 { "s", "s7" },
-                { "return 3;", "return 5;" }
+                { "return 3;", "return 5;" },
             };
 
             expected.AssertEqual(actual);
@@ -2697,7 +2704,7 @@ if (o is string { Length: 7 } s7) return 5;
                 { "_ => 0", "_ => 0" },
                 { "int i => i * i", "double i => i * i" },
                 { "i", "i1" },
-                { "_ => -1", "_ => -1" }
+                { "_ => -1", "_ => -1" },
             };
 
             expected.AssertEqual(actual);
@@ -2739,7 +2746,7 @@ switch(shape)
                 { "c", "c1" },
                 { "return 1;", "return 1;" },
                 { "default: return 4;", "default: return 4;" },
-                { "return 4;", "return 4;" }
+                { "return 4;", "return 4;" },
             };
 
             expected.AssertEqual(actual);
@@ -2777,7 +2784,7 @@ switch(shape)
                 { "case Circle c: return 1;", "case Circle circle: return 1;" },
                 { "case Circle c:", "case Circle circle:" },
                 { "c", "circle" },
-                { "return 1;", "return 1;" }
+                { "return 1;", "return 1;" },
             };
 
             expected.AssertEqual(actual);
@@ -2828,7 +2835,7 @@ switch(shape)
                 { "case Circle c when (c > 100):", "case Circle c2 when (c2 > 100):" },
                 { "c", "c2" },
                 { "when (c > 100)", "when (c2 > 100)" },
-                { "return 2;", "return 2;" }
+                { "return 2;", "return 2;" },
             };
 
             expected.AssertEqual(actual);
@@ -2860,7 +2867,7 @@ switch(shape)
                 { "1 => new Func<int>(() => 1)()", "1 => new Func<int>(() => 3)()" },
                 { "() => 1", "() => 3" },
                 { "()", "()" },
-                { "_ => 2", "_ => 2" }
+                { "_ => 2", "_ => 2" },
             };
 
             expected.AssertEqual(actual);
@@ -2884,7 +2891,7 @@ switch(shape)
                 },
                 { "F2() switch { 1 => 0, _ => 2 }", "F1() switch { 1 => 0, _ => 1 }" },
                 { "1 => 0", "1 => 0" },
-                { "_ => 2", "_ => 1" }
+                { "_ => 2", "_ => 1" },
             };
 
             expected.AssertEqual(actual);
@@ -2911,7 +2918,7 @@ switch(shape)
                     "Method() switch { true => G(), _ => 1 }"
                 },
                 { "true => G()", "true => G()" },
-                { "_ => F2() switch { 1 => 0, _ => 2 }", "_ => 1" }
+                { "_ => F2() switch { 1 => 0, _ => 2 }", "_ => 1" },
             };
 
             expected.AssertEqual(actual);
@@ -2959,7 +2966,7 @@ Console.WriteLine(6);
                 { "Console.WriteLine(2);", "Console.WriteLine(5);" },
                 { "var x = 0;", "var x = 1;" },
                 { "while (true) {     x++; }", "while (true) {     x--; }" },
-                { "Console.WriteLine(3);", "Console.WriteLine(6);" }
+                { "Console.WriteLine(3);", "Console.WriteLine(6);" },
             };
 
             expected.AssertEqual(actual);

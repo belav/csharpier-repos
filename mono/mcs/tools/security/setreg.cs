@@ -514,7 +514,7 @@ namespace Mono.Tools
             0x10,
             0x17,
             0x3B,
-            0x8C
+            0x8C,
         };
 
         // Mono Test Root Certificate
@@ -974,7 +974,7 @@ namespace Mono.Tools
             0xA2,
             0x13,
             0x37,
-            0xA4
+            0xA4,
         };
 
         static void AddTestRoots(bool quiet)

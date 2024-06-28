@@ -24,7 +24,7 @@ namespace Microsoft.Test.ModuleCore
             SingleEnd,
             DoubleBegin,
             DoubleEnd,
-            End
+            End,
         }
 
         //Accessors

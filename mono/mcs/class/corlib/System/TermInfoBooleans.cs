@@ -71,6 +71,6 @@ namespace System
         SemiAutoRightMargin,
         CpiChangesRes,
         LpiChangesRes, // 36
-        Last
+        Last,
     }
 }

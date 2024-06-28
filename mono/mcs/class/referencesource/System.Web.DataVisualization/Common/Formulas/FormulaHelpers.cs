@@ -145,7 +145,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                         DataField.LowerBox,
                         DataField.UpperBox,
                         DataField.Average,
-                        DataField.Median
+                        DataField.Median,
                     };
                 case SeriesChartType.Bubble:
                     return new DataField[] { DataField.Bubble, DataField.BubbleSize };
@@ -156,14 +156,14 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
                         DataField.High,
                         DataField.Low,
                         DataField.Open,
-                        DataField.Close
+                        DataField.Close,
                     };
                 case SeriesChartType.ErrorBar:
                     return new DataField[]
                     {
                         DataField.Center,
                         DataField.LowerError,
-                        DataField.UpperError
+                        DataField.UpperError,
                     };
                 case SeriesChartType.RangeBar:
                 case SeriesChartType.Range:
@@ -1349,7 +1349,7 @@ namespace System.Web.UI.DataVisualization.Charting.Formulas
         LowerError,
         UpperError,
         Top,
-        Bottom
+        Bottom,
     }
     #endregion
 

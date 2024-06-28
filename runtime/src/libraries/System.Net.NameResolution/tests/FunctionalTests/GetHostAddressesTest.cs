@@ -143,7 +143,7 @@ namespace System.Net.NameResolution.Tests
                 { false, IPAddress.Loopback, AddressFamily.InterNetworkV6 },
                 { false, IPAddress.IPv6Loopback, AddressFamily.InterNetwork },
                 { true, IPAddress.Loopback, AddressFamily.InterNetworkV6 },
-                { true, IPAddress.IPv6Loopback, AddressFamily.InterNetwork }
+                { true, IPAddress.IPv6Loopback, AddressFamily.InterNetwork },
             };
 
         [Fact]
@@ -178,7 +178,7 @@ namespace System.Net.NameResolution.Tests
                 { false, TestSettings.IPv4Host, AddressFamily.InterNetwork },
                 { false, TestSettings.IPv6Host, AddressFamily.InterNetworkV6 },
                 { true, TestSettings.IPv4Host, AddressFamily.InterNetwork },
-                { true, TestSettings.IPv6Host, AddressFamily.InterNetworkV6 }
+                { true, TestSettings.IPv6Host, AddressFamily.InterNetworkV6 },
             };
 
         [Fact]

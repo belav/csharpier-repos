@@ -188,7 +188,7 @@ namespace Microsoft.CodeAnalysis.SplitOrMergeIfStatements
         protected enum MergeDirection
         {
             Up,
-            Down
+            Down,
         }
     }
 }

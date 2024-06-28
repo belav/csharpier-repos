@@ -459,7 +459,7 @@ namespace Microsoft.Extensions.Logging.EventSource
                         null,
                         defaultLevel,
                         null
-                    )
+                    ),
                 };
             }
 
@@ -473,7 +473,7 @@ namespace Microsoft.Extensions.Logging.EventSource
                         null,
                         LogLevel.None,
                         null
-                    )
+                    ),
                 };
             }
 

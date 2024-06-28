@@ -442,7 +442,7 @@ namespace System.ServiceModel.Channels
                     Host,
                     Port,
                     Path,
-                    None
+                    None,
                 }
             }
         }

@@ -68,7 +68,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     json,
                     new JsonSerializerSettings
                     {
-                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
                     }
                 );
             Assert.IsNotNull(c);
@@ -99,7 +99,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     json,
                     new JsonSerializerSettings
                     {
-                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor
+                        ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor,
                     }
                 );
             Assert.IsNotNull(c);
@@ -230,7 +230,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     "{'Parameter2':'value!'}",
                     new JsonSerializerSettings()
                     {
-                        DefaultValueHandling = DefaultValueHandling.Populate
+                        DefaultValueHandling = DefaultValueHandling.Populate,
                     }
                 );
 
@@ -249,7 +249,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                     new JsonSerializerSettings()
                     {
                         ContractResolver =
-                            ConstructorParameterDefaultStringValueContractResolver.Instance
+                            ConstructorParameterDefaultStringValueContractResolver.Instance,
                     }
                 );
 

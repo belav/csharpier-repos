@@ -36,6 +36,6 @@ namespace System.DirectoryServices.Protocols
     {
         Add,
         Delete,
-        Replace
+        Replace,
     }
 }

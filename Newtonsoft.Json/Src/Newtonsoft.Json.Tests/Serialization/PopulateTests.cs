@@ -76,8 +76,8 @@ namespace Newtonsoft.Json.Tests.Serialization
                 {
                     ExpiryDate = new DateTime(2000, 12, 3, 0, 0, 0, DateTimeKind.Utc),
                     Name = "ProductName!",
-                    Price = 9.9m
-                }
+                    Price = 9.9m,
+                },
             };
             s.Width = 99.99d;
             s.Mottos = new List<string> { "Can do!", "We deliver!" };
@@ -121,7 +121,7 @@ namespace Newtonsoft.Json.Tests.Serialization
                 s,
                 new JsonSerializerSettings
                 {
-                    ObjectCreationHandling = ObjectCreationHandling.Replace
+                    ObjectCreationHandling = ObjectCreationHandling.Replace,
                 }
             );
 

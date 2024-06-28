@@ -76,7 +76,7 @@ namespace ILCompiler.Metadata
                     Value = HandleCustomAttributeConstantValue(
                         decodedArgument.Type,
                         decodedArgument.Value
-                    )
+                    ),
                 };
                 result.NamedArguments.Add(namedArgument);
             }
@@ -167,62 +167,62 @@ namespace ILCompiler.Metadata
                 case Cts.TypeFlags.Boolean:
                     return new ConstantBooleanArray
                     {
-                        Value = GetCustomAttributeConstantArrayElements<bool>(value)
+                        Value = GetCustomAttributeConstantArrayElements<bool>(value),
                     };
                 case Cts.TypeFlags.Byte:
                     return new ConstantByteArray
                     {
-                        Value = GetCustomAttributeConstantArrayElements<byte>(value)
+                        Value = GetCustomAttributeConstantArrayElements<byte>(value),
                     };
                 case Cts.TypeFlags.Char:
                     return new ConstantCharArray
                     {
-                        Value = GetCustomAttributeConstantArrayElements<char>(value)
+                        Value = GetCustomAttributeConstantArrayElements<char>(value),
                     };
                 case Cts.TypeFlags.Double:
                     return new ConstantDoubleArray
                     {
-                        Value = GetCustomAttributeConstantArrayElements<double>(value)
+                        Value = GetCustomAttributeConstantArrayElements<double>(value),
                     };
                 case Cts.TypeFlags.Int16:
                     return new ConstantInt16Array
                     {
-                        Value = GetCustomAttributeConstantArrayElements<short>(value)
+                        Value = GetCustomAttributeConstantArrayElements<short>(value),
                     };
                 case Cts.TypeFlags.Int32:
                     return new ConstantInt32Array
                     {
-                        Value = GetCustomAttributeConstantArrayElements<int>(value)
+                        Value = GetCustomAttributeConstantArrayElements<int>(value),
                     };
                 case Cts.TypeFlags.Int64:
                     return new ConstantInt64Array
                     {
-                        Value = GetCustomAttributeConstantArrayElements<long>(value)
+                        Value = GetCustomAttributeConstantArrayElements<long>(value),
                     };
                 case Cts.TypeFlags.SByte:
                     return new ConstantSByteArray
                     {
-                        Value = GetCustomAttributeConstantArrayElements<sbyte>(value)
+                        Value = GetCustomAttributeConstantArrayElements<sbyte>(value),
                     };
                 case Cts.TypeFlags.Single:
                     return new ConstantSingleArray
                     {
-                        Value = GetCustomAttributeConstantArrayElements<float>(value)
+                        Value = GetCustomAttributeConstantArrayElements<float>(value),
                     };
                 case Cts.TypeFlags.UInt16:
                     return new ConstantUInt16Array
                     {
-                        Value = GetCustomAttributeConstantArrayElements<ushort>(value)
+                        Value = GetCustomAttributeConstantArrayElements<ushort>(value),
                     };
                 case Cts.TypeFlags.UInt32:
                     return new ConstantUInt32Array
                     {
-                        Value = GetCustomAttributeConstantArrayElements<uint>(value)
+                        Value = GetCustomAttributeConstantArrayElements<uint>(value),
                     };
                 case Cts.TypeFlags.UInt64:
                     return new ConstantUInt64Array
                     {
-                        Value = GetCustomAttributeConstantArrayElements<ulong>(value)
+                        Value = GetCustomAttributeConstantArrayElements<ulong>(value),
                     };
             }
 
@@ -254,7 +254,7 @@ namespace ILCompiler.Metadata
                     elementRecord = new ConstantBoxedEnumValue
                     {
                         Value = elementRecord,
-                        Type = HandleType(value[i].Type)
+                        Type = HandleType(value[i].Type),
                     };
                 }
                 result.Value.Add(elementRecord);

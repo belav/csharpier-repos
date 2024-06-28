@@ -25,7 +25,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldstr 'abcd'", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldstr 'abcd'", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static string TestMethod_1()
         {
@@ -33,7 +33,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4 0x4", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4 0x4", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static byte TestMethod_2()
         {
@@ -41,7 +41,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4 0x78", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4 0x78", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static char TestMethod_3()
         {
@@ -57,7 +57,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static bool TestMethod_5()
         {
@@ -65,7 +65,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4.1", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static bool TestMethod_6()
         {
@@ -73,7 +73,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.r8 2.5", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.r8 2.5", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static double TestMethod_7()
         {
@@ -89,7 +89,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.r4 6", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.r4 6", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static float TestMethod_9()
         {
@@ -97,7 +97,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i8 0x1e240", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i8 0x1e240", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static ulong TestMethod_10()
         {
@@ -105,7 +105,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i8 0xfffffffffffffc18", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i8 0xfffffffffffffc18", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static long TestMethod_11()
         {
@@ -113,7 +113,7 @@ namespace Mono.Linker.Tests.Cases.Substitutions
         }
 
         [Kept]
-        [ExpectedInstructionSequence(new[] { "ldc.i4 0xffffffff", "ret", })]
+        [ExpectedInstructionSequence(new[] { "ldc.i4 0xffffffff", "ret" })]
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static uint TestMethod_12()
         {

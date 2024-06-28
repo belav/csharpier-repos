@@ -17,20 +17,20 @@ namespace Microsoft.Web.Mvc.Test
                 {
                     Prefix = "Prefix",
                     TestString = (string)null,
-                    Reason = "Null test string shouldn't match anything."
+                    Reason = "Null test string shouldn't match anything.",
                 },
                 new
                 {
                     Prefix = "Foo",
                     TestString = "NotFoo",
-                    Reason = "Prefix 'foo' doesn't match 'notfoo'."
+                    Reason = "Prefix 'foo' doesn't match 'notfoo'.",
                 },
                 new
                 {
                     Prefix = "Foo",
                     TestString = "FooBar",
-                    Reason = "Prefix 'foo' was not followed by a delimiter in the test string."
-                }
+                    Reason = "Prefix 'foo' was not followed by a delimiter in the test string.",
+                },
             };
 
             // Act & assert
@@ -51,25 +51,25 @@ namespace Microsoft.Web.Mvc.Test
                 {
                     Prefix = "",
                     TestString = "SomeTestString",
-                    Reason = "Empty prefix should match any non-null test string."
+                    Reason = "Empty prefix should match any non-null test string.",
                 },
                 new
                 {
                     Prefix = "SomeString",
                     TestString = "SomeString",
-                    Reason = "This was an exact match."
+                    Reason = "This was an exact match.",
                 },
                 new
                 {
                     Prefix = "Foo",
                     TestString = "foo.bar",
-                    Reason = "Prefix 'foo' matched."
+                    Reason = "Prefix 'foo' matched.",
                 },
                 new
                 {
                     Prefix = "Foo",
                     TestString = "foo[bar]",
-                    Reason = "Prefix 'foo' matched."
+                    Reason = "Prefix 'foo' matched.",
                 },
             };
 

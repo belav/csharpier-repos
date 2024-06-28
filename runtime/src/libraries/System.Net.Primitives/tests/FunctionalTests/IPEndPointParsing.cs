@@ -221,7 +221,7 @@ namespace System.Net.Primitives.Functional.Tests
             new object[]
             {
                 "FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF:FFFF",
-                "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff"
+                "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
             },
             new object[] { "0:0:0:0:0:0:0:0", "::" },
             new object[] { "1:0:0:0:0:0:0:0", "1::" },

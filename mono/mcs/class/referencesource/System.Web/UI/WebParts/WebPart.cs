@@ -258,7 +258,7 @@ namespace System.Web.UI.WebControls.WebParts
         /// <devdoc>
         /// Overriden to mark as personalizable
         /// </devdoc>
-        [Personalizable(PersonalizationScope.Shared),]
+        [Personalizable(PersonalizationScope.Shared)]
         public override string Description
         {
             get { return base.Description; }
@@ -488,7 +488,7 @@ namespace System.Web.UI.WebControls.WebParts
         /// <devdoc>
         /// Overriden to mark as personalizable
         /// </devdoc>
-        [Personalizable,]
+        [Personalizable]
         public override string Title
         {
             get { return base.Title; }

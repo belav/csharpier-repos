@@ -38,6 +38,6 @@ namespace System.EnterpriseServices
         None,
         Inherit,
         STA,
-        MTA
+        MTA,
     }
 }

@@ -1281,7 +1281,9 @@ namespace System.Text
             (char)0xff5d,
             (char)0x007d, // Fullwidth Right Curly Bracket -> }
             (char)0xff5e,
-            (char)0x007e // Fullwidth Tilde -> ~
+            (char)
+                0x007e // Fullwidth Tilde -> ~
+            ,
         };
     }
 }

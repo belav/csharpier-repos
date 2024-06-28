@@ -88,7 +88,7 @@ namespace System.Diagnostics
             Default = 0x1,
             DisableOptimizations = 0x100,
             IgnoreSymbolStoreSequencePoints = 0x2,
-            EnableEditAndContinue = 0x4
+            EnableEditAndContinue = 0x4,
         }
 
         private DebuggingModes m_debuggingModes;
@@ -147,7 +147,7 @@ namespace System.Diagnostics
         //Expanded is not supported in this release
         //Expanded = 1,
         Collapsed = 2,
-        RootHidden = 3
+        RootHidden = 3,
     }
 
     // the one currently supported with the csee.dat

@@ -31,6 +31,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         Yes = 0,
         No = 1,
-        Partial = 2
+        Partial = 2,
     }
 }

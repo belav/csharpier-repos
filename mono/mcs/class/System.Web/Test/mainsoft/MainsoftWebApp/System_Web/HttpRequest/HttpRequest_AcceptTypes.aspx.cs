@@ -61,7 +61,7 @@ namespace GHTTests.System_Web_dll.System_Web
                         num1.ToString(),
                         ": ",
                         textArray1[num1],
-                        "<br>"
+                        "<br>",
                     };
                     this.GHTSubTestAddResult(string.Concat(textArray2));
                 }

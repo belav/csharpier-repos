@@ -33,6 +33,6 @@ namespace System.Web.UI.WebControls
     {
         DataItem,
         InsertItem,
-        EmptyItem
+        EmptyItem,
     }
 }

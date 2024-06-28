@@ -38,6 +38,6 @@ namespace Commons.Xml.Relaxng.Derivative
         Invalid = 0,
         Empty = 1,
         Complex = 2,
-        Simple = 4
+        Simple = 4,
     }
 }

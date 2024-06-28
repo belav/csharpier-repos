@@ -80,9 +80,9 @@ public class PreserveReferencesSameDestination : AutoMapperSpecBase
             {
                 Ones = new List<EntityOne>
                 {
-                    new EntityOne { Two = new EntityTwo { Ones = new List<EntityOne>() } }
-                }
-            }
+                    new EntityOne { Two = new EntityTwo { Ones = new List<EntityOne>() } },
+                },
+            },
         };
         Mapper.Map<EntityOne, DtoOne>(source).ShouldBeOfType<DtoOne>();
         Mapper.Map<EntityOne, DtoThree>(source).ShouldBeOfType<DtoThree>();

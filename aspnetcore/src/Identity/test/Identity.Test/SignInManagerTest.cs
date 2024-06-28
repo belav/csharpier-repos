@@ -930,7 +930,7 @@ public class SignInManagerTest
             null
         )
         {
-            CallBase = true
+            CallBase = true,
         };
         //signInManager.Setup(s => s.SignInAsync(user, It.Is<AuthenticationProperties>(p => p.IsPersistent == isPersistent),
         //externalLogin? loginProvider : null)).Returns(Task.FromResult(0)).Verifiable();
@@ -1903,23 +1903,21 @@ public class SignInManagerTest
 
         return typeName switch
         {
-            nameof(SignInManager<PocoUser>) =>
-                new SignInManager<PocoUser>(
-                    manager,
-                    contextAccessor.Object,
-                    claimsFactory,
-                    options,
-                    NullLogger<SignInManager<PocoUser>>.Instance,
-                    Mock.Of<IAuthenticationSchemeProvider>(),
-                    new DefaultUserConfirmation<PocoUser>()
-                ),
-            nameof(NoOverridesSignInManager<PocoUser>) =>
-                new NoOverridesSignInManager<PocoUser>(
-                    manager,
-                    contextAccessor.Object,
-                    claimsFactory,
-                    options
-                ),
+            nameof(SignInManager<PocoUser>) => new SignInManager<PocoUser>(
+                manager,
+                contextAccessor.Object,
+                claimsFactory,
+                options,
+                NullLogger<SignInManager<PocoUser>>.Instance,
+                Mock.Of<IAuthenticationSchemeProvider>(),
+                new DefaultUserConfirmation<PocoUser>()
+            ),
+            nameof(NoOverridesSignInManager<PocoUser>) => new NoOverridesSignInManager<PocoUser>(
+                manager,
+                contextAccessor.Object,
+                claimsFactory,
+                options
+            ),
             nameof(OverrideAndAwaitBaseResetSignInManager<PocoUser>) =>
                 new OverrideAndAwaitBaseResetSignInManager<PocoUser>(
                     manager,

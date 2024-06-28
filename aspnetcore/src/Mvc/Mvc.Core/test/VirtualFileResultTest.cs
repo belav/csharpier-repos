@@ -75,7 +75,7 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
 
         var result = new VirtualFileResult("some-path", "text/plain")
         {
-            FileProvider = fileProvider
+            FileProvider = fileProvider,
         };
 
         // Act

@@ -118,9 +118,9 @@ namespace StandAloneTests.DataPager_NumericPagerField_Bug615315
                             "__EVENTTARGET",
                             "ctl00$ContentPlaceHolder1$ListView1$DataPager1$ctl01$ctl01"
                         },
-                        { "__EVENTARGUMENT", String.Empty }
+                        { "__EVENTARGUMENT", String.Empty },
                     },
-                    UrlDescription = "Page 2"
+                    UrlDescription = "Page 2",
                 }
             );
 #else
@@ -132,9 +132,9 @@ namespace StandAloneTests.DataPager_NumericPagerField_Bug615315
                         "__EVENTTARGET",
                         "ctl00$ContentPlaceHolder1$ListView1$DataPager1$ctl01$ctl01",
                         "__EVENTARGUMENT",
-                        String.Empty
+                        String.Empty,
                     },
-                    UrlDescription = "Page 2"
+                    UrlDescription = "Page 2",
                 }
             );
 
@@ -146,9 +146,9 @@ namespace StandAloneTests.DataPager_NumericPagerField_Bug615315
                         "__EVENTTARGET",
                         "ctl00$ContentPlaceHolder1$ListView1$DataPager1$ctl01$ctl05",
                         "__EVENTARGUMENT",
-                        String.Empty
+                        String.Empty,
                     },
-                    UrlDescription = "Page 6 (next)"
+                    UrlDescription = "Page 6 (next)",
                 }
             );
 
@@ -160,9 +160,9 @@ namespace StandAloneTests.DataPager_NumericPagerField_Bug615315
                         "__EVENTTARGET",
                         "ctl00$ContentPlaceHolder1$ListView1$DataPager1$ctl01$ctl00",
                         "__EVENTARGUMENT",
-                        String.Empty
+                        String.Empty,
                     },
-                    UrlDescription = "Page 5 (prev)"
+                    UrlDescription = "Page 5 (prev)",
                 }
             );
 #endif

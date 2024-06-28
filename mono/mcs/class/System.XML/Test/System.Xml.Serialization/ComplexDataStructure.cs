@@ -70,7 +70,7 @@ namespace MonoTests.System.XmlSerialization
             {
                 typeof(UknTestPart),
                 typeof(AnotherTestPart),
-                typeof(DblStringContainer)
+                typeof(DblStringContainer),
             };
             XmlReflectionImporter ri = new XmlReflectionImporter();
             foreach (Type t in types)
@@ -111,14 +111,14 @@ namespace MonoTests.System.XmlSerialization
             t.ta.extraTextNodes = new XmlNode[]
             {
                 doc.CreateTextNode("AA"),
-                doc.CreateTextNode("BB")
+                doc.CreateTextNode("BB"),
             };
 
             t.tam2 = new TA[][][]
             {
                 new TA[][] { new TA[] { new TA(), new TA() }, new TA[] { new TA(), new TA() } },
                 new TA[][] { new TA[] { new TB(), new TA() }, new TA[] { new TB(), new TA() } },
-                new TA[][] { new TA[] { new TA(), new TB() }, new TA[] { new TA(), new TA() } }
+                new TA[][] { new TA[] { new TA(), new TB() }, new TA[] { new TA(), new TA() } },
             };
 
             t.tam3 = t.tam2;
@@ -478,7 +478,7 @@ namespace MonoTests.System.XmlSerialization
         public TA[][] tam = new TA[][]
         {
             new TA[] { new TA(), new TB() },
-            new TA[] { new TA(), new TA() }
+            new TA[] { new TA(), new TA() },
         };
 
         //		[SoapElement(ElementName="multita2")]
@@ -751,7 +751,7 @@ namespace MonoTests.System.XmlSerialization
         [XmlEnum(Name = "xmlBB")]
         BB,
         CC,
-        DD
+        DD,
     }
 
     public class CustomHashtable : IXmlSerializable

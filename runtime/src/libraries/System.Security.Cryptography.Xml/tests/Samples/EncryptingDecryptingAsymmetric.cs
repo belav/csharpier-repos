@@ -46,7 +46,7 @@ namespace System.Security.Cryptography.Xml.Tests
                     ),
                     EncryptionMethod = new EncryptionMethod(
                         useOAEP ? EncryptedXml.XmlEncRSAOAEPUrl : EncryptedXml.XmlEncRSA15Url
-                    )
+                    ),
                 };
 
                 // Specify which EncryptedData
@@ -62,7 +62,7 @@ namespace System.Security.Cryptography.Xml.Tests
 
                     // Create an EncryptionMethod element so that the
                     // receiver knows which algorithm to use for decryption.
-                    EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncAES256Url)
+                    EncryptionMethod = new EncryptionMethod(EncryptedXml.XmlEncAES256Url),
                 };
 
                 encryptedData.KeyInfo.AddClause(new KeyInfoEncryptedKey(encryptedKey));

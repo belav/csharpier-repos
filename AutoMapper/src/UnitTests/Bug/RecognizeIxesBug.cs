@@ -20,7 +20,7 @@ namespace AutoMapper.UnitTests.Bug
                 {
                     Id = 4,
                     Name = "Foo",
-                    RankCode = "Bar"
+                    RankCode = "Bar",
                 };
                 _dest = Mapper.Map<Stuff, StuffView>(_source);
             }

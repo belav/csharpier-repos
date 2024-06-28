@@ -55,7 +55,7 @@ internal class WebTransportTestUtilities
         var controlStream = await inMemory.CreateControlStream();
         var controlStream2 = await inMemory.GetInboundControlStream();
 
-        var settings = new Http3PeerSettings() { EnableWebTransport = 1, H3Datagram = 1, };
+        var settings = new Http3PeerSettings() { EnableWebTransport = 1, H3Datagram = 1 };
 
         await controlStream.SendSettingsAsync(settings.GetNonProtocolDefaults());
         var response1 = await controlStream2.ExpectSettingsAsync();
@@ -74,7 +74,7 @@ internal class WebTransportTestUtilities
                     "server.example.com"
                 ),
                 new KeyValuePair<string, string>(HeaderNames.Origin, "server.example.com"),
-                new KeyValuePair<string, string>(WebTransportSession.CurrentSupportedVersion, "1")
+                new KeyValuePair<string, string>(WebTransportSession.CurrentSupportedVersion, "1"),
             }
         );
 

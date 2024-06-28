@@ -79,7 +79,7 @@ namespace System.ServiceModel
             using (
                 XmlTextReader reader = new XmlTextReader(new StringReader(Schema))
                 {
-                    DtdProcessing = DtdProcessing.Prohibit
+                    DtdProcessing = DtdProcessing.Prohibit,
                 }
             )
             {

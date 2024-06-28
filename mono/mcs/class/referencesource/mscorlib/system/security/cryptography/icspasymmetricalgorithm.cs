@@ -20,7 +20,7 @@ namespace System.Security.Cryptography
     public enum KeyNumber
     {
         Exchange = 1,
-        Signature = 2
+        Signature = 2,
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]

@@ -1011,7 +1011,7 @@ public class SqlServerModelValidatorTest : RelationalModelValidatorTest
                     ),
                 RelationalResources
                     .LogKeyHasDefaultValue(new TestLogger<SqlServerLoggingDefinitions>())
-                    .GenerateMessage("Id", nameof(Dog))
+                    .GenerateMessage("Id", nameof(Dog)),
             },
             modelBuilder
         );

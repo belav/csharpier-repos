@@ -18,8 +18,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Set and Get an element that ends with />")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -33,8 +33,8 @@ namespace System.Xml.Tests
                             "Set and Get an element with an attribute that ends with />"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -46,8 +46,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("Set and Get an element that ends without />")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -61,8 +61,8 @@ namespace System.Xml.Tests
                             "Set and Get an element with an attribute that ends with />"
                         )
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -72,7 +72,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_Element)
                     {
-                        Attribute = new Variation("IsEmptyElement On Element") { Pri = 0 }
+                        Attribute = new Variation("IsEmptyElement On Element") { Pri = 0 },
                     }
                 );
             }
@@ -82,7 +82,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_None)
                     {
-                        Attribute = new Variation("IsEmptyElement On None")
+                        Attribute = new Variation("IsEmptyElement On None"),
                     }
                 );
             }
@@ -92,7 +92,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_Text)
                     {
-                        Attribute = new Variation("IsEmptyElement On Text")
+                        Attribute = new Variation("IsEmptyElement On Text"),
                     }
                 );
             }
@@ -102,7 +102,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_CDATA)
                     {
-                        Attribute = new Variation("IsEmptyElement On CDATA")
+                        Attribute = new Variation("IsEmptyElement On CDATA"),
                     }
                 );
             }
@@ -112,7 +112,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_ProcessingInstruction)
                     {
-                        Attribute = new Variation("IsEmptyElement On ProcessingInstruction")
+                        Attribute = new Variation("IsEmptyElement On ProcessingInstruction"),
                     }
                 );
             }
@@ -122,7 +122,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_Comment)
                     {
-                        Attribute = new Variation("IsEmptyElement On Comment")
+                        Attribute = new Variation("IsEmptyElement On Comment"),
                     }
                 );
             }
@@ -134,7 +134,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "IsEmptyElement On Whitespace PreserveWhitespaces = true"
-                        )
+                        ),
                     }
                 );
             }
@@ -144,7 +144,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_EndElement)
                     {
-                        Attribute = new Variation("IsEmptyElement On EndElement")
+                        Attribute = new Variation("IsEmptyElement On EndElement"),
                     }
                 );
             }
@@ -154,7 +154,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_XmlDeclaration)
                     {
-                        Attribute = new Variation("IsEmptyElement On XmlDeclaration")
+                        Attribute = new Variation("IsEmptyElement On XmlDeclaration"),
                     }
                 );
             }
@@ -164,7 +164,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_EntityReference)
                     {
-                        Attribute = new Variation("IsEmptyElement On EntityReference")
+                        Attribute = new Variation("IsEmptyElement On EntityReference"),
                     }
                 );
             }
@@ -174,7 +174,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestEmptyNodeType_EndEntity)
                     {
-                        Attribute = new Variation("IsEmptyElement On EndEntity")
+                        Attribute = new Variation("IsEmptyElement On EndEntity"),
                     }
                 );
             }

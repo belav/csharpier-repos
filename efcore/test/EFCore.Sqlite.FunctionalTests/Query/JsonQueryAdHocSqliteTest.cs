@@ -18,7 +18,7 @@ public class JsonQueryAdHocSqliteTest : JsonQueryAdHocTestBase
                 new() { NonNullableScalar = 100, NullableScalar = 101 },
                 new() { NonNullableScalar = 200, NullableScalar = 201 },
                 new() { NonNullableScalar = 300, NullableScalar = null },
-            }
+            },
         };
 
         var entity2 = new MyEntity29219
@@ -28,7 +28,7 @@ public class JsonQueryAdHocSqliteTest : JsonQueryAdHocTestBase
             Collection = new List<MyJsonEntity29219>
             {
                 new() { NonNullableScalar = 1001, NullableScalar = null },
-            }
+            },
         };
 
         ctx.Entities.AddRange(entity1, entity2);
@@ -83,21 +83,21 @@ VALUES(
             Reference = new MyJsonEntityArrayOfPrimitives
             {
                 IntArray = new[] { 1, 2, 3 },
-                ListOfString = new List<string> { "Foo", "Bar", "Baz" }
+                ListOfString = new List<string> { "Foo", "Bar", "Baz" },
             },
             Collection = new List<MyJsonEntityArrayOfPrimitives>
             {
                 new()
                 {
                     IntArray = new[] { 111, 112, 113 },
-                    ListOfString = new List<string> { "Foo11", "Bar11" }
+                    ListOfString = new List<string> { "Foo11", "Bar11" },
                 },
                 new()
                 {
                     IntArray = new[] { 211, 212, 213 },
-                    ListOfString = new List<string> { "Foo12", "Bar12" }
+                    ListOfString = new List<string> { "Foo12", "Bar12" },
                 },
-            }
+            },
         };
 
         var entity2 = new MyEntityArrayOfPrimitives
@@ -106,21 +106,21 @@ VALUES(
             Reference = new MyJsonEntityArrayOfPrimitives
             {
                 IntArray = new[] { 10, 20, 30 },
-                ListOfString = new List<string> { "A", "B", "C" }
+                ListOfString = new List<string> { "A", "B", "C" },
             },
             Collection = new List<MyJsonEntityArrayOfPrimitives>
             {
                 new()
                 {
                     IntArray = new[] { 110, 120, 130 },
-                    ListOfString = new List<string> { "A1", "Z1" }
+                    ListOfString = new List<string> { "A1", "Z1" },
                 },
                 new()
                 {
                     IntArray = new[] { 210, 220, 230 },
-                    ListOfString = new List<string> { "A2", "Z2" }
+                    ListOfString = new List<string> { "A2", "Z2" },
                 },
-            }
+            },
         };
 
         ctx.Entities.AddRange(entity1, entity2);

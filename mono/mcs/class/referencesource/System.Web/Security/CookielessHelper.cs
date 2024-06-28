@@ -475,6 +475,6 @@ namespace System.Web.Security
     {
         Supported,
         NotSupported,
-        Unknown
+        Unknown,
     }
 }

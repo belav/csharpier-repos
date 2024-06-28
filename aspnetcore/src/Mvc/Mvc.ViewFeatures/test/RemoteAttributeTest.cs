@@ -36,7 +36,7 @@ public class RemoteAttributeTest
     // Null or empty property names are invalid. (Those containing just whitespace are legal.)
     public static TheoryData<string> NullOrEmptyNames
     {
-        get { return new TheoryData<string> { null, string.Empty, }; }
+        get { return new TheoryData<string> { null, string.Empty }; }
     }
 
     [Fact]
@@ -412,8 +412,8 @@ public class RemoteAttributeTest
         var routeCollection = GetRouteCollectionWithArea(serviceProvider);
         var routeData = new RouteData
         {
-            Routers = { routeCollection, },
-            Values = { { "action", "Index" }, { "controller", "Home" }, },
+            Routers = { routeCollection },
+            Values = { { "action", "Index" }, { "controller", "Home" } },
         };
         if (!string.IsNullOrEmpty(currentArea))
         {
@@ -485,11 +485,11 @@ public class RemoteAttributeTest
     {
         // Set IServiceProvider properties because TemplateRoute gets services (e.g. an ILoggerFactory instance)
         // through the HttpContext.
-        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider, };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider };
 
         if (routeData == null)
         {
-            routeData = new RouteData { Routers = { Mock.Of<IRouter>(), }, };
+            routeData = new RouteData { Routers = { Mock.Of<IRouter>() } };
         }
 
         return new ActionContext(httpContext, routeData, new ActionDescriptor());

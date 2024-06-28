@@ -26,7 +26,7 @@ public class DbContextHealthCheckTest
 
         // Act
         var result = await check.CheckHealthAsync(
-            new HealthCheckContext() { Registration = registration, }
+            new HealthCheckContext() { Registration = registration }
         );
 
         // Assert
@@ -59,7 +59,7 @@ public class DbContextHealthCheckTest
 
         // Act
         var result = await check.CheckHealthAsync(
-            new HealthCheckContext() { Registration = registration, }
+            new HealthCheckContext() { Registration = registration }
         );
 
         // Assert
@@ -94,7 +94,7 @@ public class DbContextHealthCheckTest
 
         // Act
         var result = await check.CheckHealthAsync(
-            new HealthCheckContext() { Registration = registration, }
+            new HealthCheckContext() { Registration = registration }
         );
 
         // Assert
@@ -132,7 +132,7 @@ public class DbContextHealthCheckTest
 
         // Act
         var result = await check.CheckHealthAsync(
-            new HealthCheckContext() { Registration = registration, }
+            new HealthCheckContext() { Registration = registration }
         );
 
         // Assert
@@ -157,7 +157,7 @@ public class DbContextHealthCheckTest
         builder.AddDbContextCheck<TestDbContext>(
             "test",
             failureStatus,
-            new[] { "tag1", "tag2", },
+            new[] { "tag1", "tag2" },
             testQuery
         );
         return serviceCollection.BuildServiceProvider();

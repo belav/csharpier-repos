@@ -45,7 +45,7 @@ unsafe class StdCallMemberFunctionNative
 
     public enum E : uint
     {
-        Value = 42
+        Value = 42,
     }
 
     [DllImport(nameof(StdCallMemberFunctionNative))]
@@ -191,7 +191,7 @@ public unsafe class StdCallMemberFunctionTest
             vtable = UnmanagedCallersOnlyVtable,
             dummy = StdCallMemberFunctionNative.E.Value,
             width = width,
-            height = height
+            height = height,
         };
     }
 

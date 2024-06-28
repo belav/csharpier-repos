@@ -21,7 +21,7 @@ internal enum RouteUsageType
     MinimalApi,
     MvcAction,
     MvcController,
-    Component
+    Component,
 }
 
 // RouteParameterName can be different from parameter name using FromRouteAttribute. e.g. [FromRoute(Name = "custom_name")]
@@ -47,8 +47,7 @@ internal readonly record struct RouteUsageContext(
     public RoutePatternOptions RoutePatternOptions =>
         UsageType switch
         {
-            RouteUsageType.MvcAction
-            or RouteUsageType.MvcController =>
+            RouteUsageType.MvcAction or RouteUsageType.MvcController =>
                 RoutePatternOptions.MvcAttributeRoute,
             RouteUsageType.Component => RoutePatternOptions.ComponentsRoute,
             _ => RoutePatternOptions.DefaultRoute,

@@ -165,9 +165,9 @@ namespace System.Activities.Statements
                         this.WorkflowConfirmation,
                         this.WorkflowCompensationScheduled,
                         this.IsWorkflowCompensationBehaviorScheduled,
-                        this.Id
+                        this.Id,
                     }
-                }
+                },
             };
         }
 

@@ -1261,7 +1261,7 @@ namespace System.ServiceModel.Channels
             Unknown,
             Succeeded,
             MessageNotFound,
-            MessageLockedUnderTransaction
+            MessageLockedUnderTransaction,
         }
 
         internal enum ReceiveResult
@@ -1269,7 +1269,7 @@ namespace System.ServiceModel.Channels
             Unknown,
             MessageReceived,
             Timeout,
-            OperationCancelled
+            OperationCancelled,
         }
     }
 

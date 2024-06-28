@@ -91,7 +91,7 @@ internal sealed partial class RoslynSearchItemsSourceProvider
                     roslynResult.SearchResult.NavigableItem.SourceSpan.ToSpan(),
                     searchResultView.Title.Text,
                     searchResultView.PrimaryIcon
-                )
+                ),
             };
         }
     }

@@ -21,7 +21,7 @@ public class ChangeCookieActionTests
             Lifetime = TimeSpan.FromMinutes(1440),
             Path = "/recipes",
             Secure = true,
-            HttpOnly = true
+            HttpOnly = true,
         };
 
         action.ApplyAction(context, null, null);
@@ -38,7 +38,7 @@ public class ChangeCookieActionTests
     public void ZeroLifetime()
     {
         var context = new RewriteContext { HttpContext = new DefaultHttpContext() };
-        var action = new ChangeCookieAction("Cookie") { Value = "Chocolate Chip", };
+        var action = new ChangeCookieAction("Cookie") { Value = "Chocolate Chip" };
 
         action.ApplyAction(context, null, null);
 

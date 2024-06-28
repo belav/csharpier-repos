@@ -77,7 +77,7 @@ namespace Newtonsoft.Json.Tests.Linq
             {
                 FirstName = "FirstNameValue",
                 RawContent = new JRaw("[1,2,3,4,5]"),
-                LastName = "LastNameValue"
+                LastName = "LastNameValue",
             };
 
             JObject o = JObject.FromObject(raw);
@@ -202,7 +202,7 @@ namespace Newtonsoft.Json.Tests.Linq
                     reader,
                     new JsonLoadSettings
                     {
-                        DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Ignore
+                        DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Ignore,
                     }
                 );
             string value = (string)o["Name"];

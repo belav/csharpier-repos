@@ -68,7 +68,7 @@ public class When_mapping_to_dynamic
                     Foo = "Foo",
                     Bar = "Bar",
                     Data = data,
-                    Baz = 12
+                    Baz = 12,
                 }
             );
         ((int)_destination.Count).ShouldBe(4);

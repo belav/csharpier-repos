@@ -19,6 +19,6 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// The <see cref="SyntaxTree"/> is marked as automatically generated.
         /// </summary>
-        MarkedGenerated
+        MarkedGenerated,
     }
 }

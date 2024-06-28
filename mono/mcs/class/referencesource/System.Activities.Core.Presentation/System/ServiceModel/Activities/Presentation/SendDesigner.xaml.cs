@@ -159,7 +159,7 @@ namespace System.ServiceModel.Activities.Presentation
                 new EditorOptionAttribute
                 {
                     Name = TypeCollectionPropertyEditor.AllowDuplicate,
-                    Value = false
+                    Value = false,
                 }
             );
             builder.AddCustomAttributes(
@@ -367,7 +367,7 @@ namespace System.ServiceModel.Activities.Presentation
                             correlations.Add(
                                 new RequestReplyCorrelationInitializer
                                 {
-                                    CorrelationHandle = handle
+                                    CorrelationHandle = handle,
                                 }
                             );
                         }

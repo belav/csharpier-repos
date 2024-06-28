@@ -2997,6 +2997,7 @@ namespace System.Workflow.Activities.Rules
             {
                 Normal, // no "params" expansion
                 Expanded // matched only after "params" expansion
+                ,
             }
 
             internal MemberInfo Member;

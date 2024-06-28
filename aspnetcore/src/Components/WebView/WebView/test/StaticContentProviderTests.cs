@@ -16,7 +16,7 @@ public class StaticContentProviderTests
         const string cssFilePath = "folder/file.css";
         const string cssFileContent = "this is css";
         var inMemoryFileProvider = new InMemoryFileProvider(
-            new Dictionary<string, string> { { cssFilePath, cssFileContent }, }
+            new Dictionary<string, string> { { cssFilePath, cssFileContent } }
         );
         var appBase = "fake://0.0.0.0/";
         var scp = new StaticContentProvider(

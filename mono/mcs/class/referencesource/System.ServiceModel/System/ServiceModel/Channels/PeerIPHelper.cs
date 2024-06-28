@@ -33,7 +33,7 @@ namespace System.ServiceModel.Channels
             Unknown,
             Teredo,
             Isatap,
-            Six2Four
+            Six2Four,
         }
 
         public PeerIPHelper()

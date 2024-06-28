@@ -31,7 +31,7 @@ public class SignatureProvider : ISignatureTypeProvider<string, object>
             PrimitiveTypeCode.UInt64 => "uint64",
             PrimitiveTypeCode.UIntPtr => "native uint",
             PrimitiveTypeCode.Void => "void",
-            _ => "<bad metadata>"
+            _ => "<bad metadata>",
         };
 
     public string GetTypeFromDefinition(

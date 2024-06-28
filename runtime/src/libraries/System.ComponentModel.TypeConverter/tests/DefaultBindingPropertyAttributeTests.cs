@@ -33,32 +33,32 @@ namespace System.ComponentModel.Tests
             {
                 attribute,
                 new DefaultBindingPropertyAttribute("name"),
-                true
+                true,
             };
             yield return new object[]
             {
                 attribute,
                 new DefaultBindingPropertyAttribute("name2"),
-                false
+                false,
             };
             yield return new object[]
             {
                 attribute,
                 new DefaultBindingPropertyAttribute(null),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 new DefaultBindingPropertyAttribute(null),
                 new DefaultBindingPropertyAttribute(null),
-                true
+                true,
             };
             yield return new object[]
             {
                 new DefaultBindingPropertyAttribute(null),
                 new DefaultBindingPropertyAttribute("name"),
-                false
+                false,
             };
             yield return new object[] { new DefaultBindingPropertyAttribute(null), null, false };
 

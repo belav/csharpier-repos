@@ -28,7 +28,7 @@ class Program
 
     public enum Errno
     {
-        Ok = 1
+        Ok = 1,
     }
 
     public static void Main() { }

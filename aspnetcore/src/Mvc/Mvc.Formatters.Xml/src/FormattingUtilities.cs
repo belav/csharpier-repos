@@ -27,7 +27,7 @@ internal static class FormattingUtilities
             MaxBytesPerRead = int.MaxValue,
             MaxDepth = DefaultMaxDepth,
             MaxNameTableCharCount = int.MaxValue,
-            MaxStringContentLength = int.MaxValue
+            MaxStringContentLength = int.MaxValue,
         };
     }
 
@@ -41,7 +41,7 @@ internal static class FormattingUtilities
         {
             OmitXmlDeclaration = true,
             CloseOutput = false,
-            CheckCharacters = false
+            CheckCharacters = false,
         };
     }
 }

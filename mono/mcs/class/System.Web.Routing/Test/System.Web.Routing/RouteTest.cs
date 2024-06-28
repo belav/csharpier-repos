@@ -70,98 +70,98 @@ namespace MonoTests.System.Web.Routing
             {
                 Url = "~",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#1"
+                Label = "#1",
             },
             // cannot start with '/'
             new TestUrl()
             {
                 Url = "/",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#2"
+                Label = "#2",
             },
             // cannot contain '?'
             new TestUrl()
             {
                 Url = "foo?bar",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#3"
+                Label = "#3",
             },
             // unmatched '{'
             new TestUrl()
             {
                 Url = "foo/{bar",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#4"
+                Label = "#4",
             },
             // unmatched '}'
             new TestUrl()
             {
                 Url = "foo/bar}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#5"
+                Label = "#5",
             },
             // "" is an invalid parameter name.
             new TestUrl()
             {
                 Url = "foo/{}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#6"
+                Label = "#6",
             },
             // incomplete parameter in path segment.
             new TestUrl()
             {
                 Url = "foo/{x/y/z}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#7"
+                Label = "#7",
             },
             // regarded as an incomplete parameter
             new TestUrl()
             {
                 Url = "foo/{a{{b}}c}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#8"
+                Label = "#8",
             },
             // consecutive parameters are not allowed
             new TestUrl()
             {
                 Url = "foo/{a}{b}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#9"
+                Label = "#9",
             },
             // consecutive segment separators '/' are not allowed
             new TestUrl()
             {
                 Url = "foo//bar",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#10"
+                Label = "#10",
             },
             // A catch-all parameter can only appear as the last segment of the route URL
             new TestUrl()
             {
                 Url = "{first}/{*rest}/{foo}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#11"
+                Label = "#11",
             },
             // A path segment that contains more than one section, such as a literal section or a parameter, cannot contain a catch-all parameter.
             new TestUrl()
             {
                 Url = "{first}/{*rest}-{foo}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#12"
+                Label = "#12",
             },
             // A path segment that contains more than one section, such as a literal section or a parameter, cannot contain a catch-all parameter.
             new TestUrl()
             {
                 Url = "{first}/{foo}-{*rest}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#13"
+                Label = "#13",
             },
             // A path segment that contains more than one section, such as a literal section or a parameter, cannot contain a catch-all parameter.
             new TestUrl()
             {
                 Url = "-{*rest}",
                 ExpectedExceptionType = typeof(ArgumentException),
-                Label = "#14"
+                Label = "#14",
             },
         };
 
@@ -186,85 +186,85 @@ namespace MonoTests.System.Web.Routing
             {
                 Url = "{foo}/{bar}",
                 Expected = "{foo}/{bar}",
-                Label = "#1"
+                Label = "#1",
             },
             new TestUrl()
             {
                 Url = "a~c",
                 Expected = "a~c",
-                Label = "#2"
+                Label = "#2",
             },
             new TestUrl()
             {
                 Url = "foo/",
                 Expected = "foo/",
-                Label = "#3"
+                Label = "#3",
             },
             new TestUrl()
             {
                 Url = "summary/{action}-{type}/{page}",
                 Expected = "summary/{action}-{type}/{page}",
-                Label = "#4"
+                Label = "#4",
             },
             new TestUrl()
             {
                 Url = "{first}/{*rest}",
                 Expected = "{first}/{*rest}",
-                Label = "#5"
+                Label = "#5",
             },
             new TestUrl()
             {
                 Url = "{language}-{country}/{controller}/{action}",
                 Expected = "{language}-{country}/{controller}/{action}",
-                Label = "#6"
+                Label = "#6",
             },
             new TestUrl()
             {
                 Url = "{controller}.{action}.{id}",
                 Expected = "{controller}.{action}.{id}",
-                Label = "#7"
+                Label = "#7",
             },
             new TestUrl()
             {
                 Url = "{reporttype}/{year}/{month}/{date}",
                 Expected = "{reporttype}/{year}/{month}/{date}",
-                Label = "#8"
+                Label = "#8",
             },
             new TestUrl()
             {
                 Url = "Book{title}and{foo}",
                 Expected = "Book{title}and{foo}",
-                Label = "#9"
+                Label = "#9",
             },
             new TestUrl()
             {
                 Url = "foo/{ }",
                 Expected = "foo/{ }",
-                Label = "#10"
+                Label = "#10",
             },
             new TestUrl()
             {
                 Url = "foo/{ \t}",
                 Expected = "foo/{ \t}",
-                Label = "#11"
+                Label = "#11",
             },
             new TestUrl()
             {
                 Url = "foo/{ \n}",
                 Expected = "foo/{ \n}",
-                Label = "#12"
+                Label = "#12",
             },
             new TestUrl()
             {
                 Url = "foo/{ \t\n}",
                 Expected = "foo/{ \t\n}",
-                Label = "#13"
+                Label = "#13",
             },
             new TestUrl()
             {
                 Url = "-{foo}",
                 Expected = "-{foo}",
-                Label = "#14"
+                Label = "#14",
             },
         };
 
@@ -467,7 +467,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("summary/{action}-{type}/{page}", null)
             {
-                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 })
+                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 }),
             };
             var hc = new HttpContextStub("~/summary/test-xml/1", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -611,7 +611,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("foo/{bar}-{baz}/{dancefloor}", null)
             {
-                Defaults = new RouteValueDictionary(new { bar = "BlueOyster", dancefloor = 1 })
+                Defaults = new RouteValueDictionary(new { bar = "BlueOyster", dancefloor = 1 }),
             };
 
             var hc = new HttpContextStub("~/foo/-nyc/1", String.Empty);
@@ -635,7 +635,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("foo/{bar}-{baz}/{dancefloor}", null)
             {
-                Defaults = new RouteValueDictionary(new { baz = "nyc", dancefloor = 1 })
+                Defaults = new RouteValueDictionary(new { baz = "nyc", dancefloor = 1 }),
             };
 
             var hc = new HttpContextStub("~/foo/BlueOyster-/1", String.Empty);
@@ -676,7 +676,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("foo/{bar}/{baz}/{dancefloor}", null)
             {
-                Defaults = new RouteValueDictionary(new { baz = "nyc", dancefloor = 1 })
+                Defaults = new RouteValueDictionary(new { baz = "nyc", dancefloor = 1 }),
             };
 
             var hc = new HttpContextStub("~/foo/BlueOyster", String.Empty);
@@ -719,7 +719,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("foo/{bar}/{baz}-{dancefloor}", null)
             {
-                Defaults = new RouteValueDictionary(new { baz = "nyc", dancefloor = 1 })
+                Defaults = new RouteValueDictionary(new { baz = "nyc", dancefloor = 1 }),
             };
 
             var hc = new HttpContextStub("~/foo/BlueOyster", String.Empty);
@@ -753,7 +753,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("foo/{bar}/{baz}/{dancefloor}", null)
             {
-                Defaults = new RouteValueDictionary(new { bar = "BlueOyster", dancefloor = 1 })
+                Defaults = new RouteValueDictionary(new { bar = "BlueOyster", dancefloor = 1 }),
             };
 
             var hc = new HttpContextStub("~/foo/nyc", String.Empty);
@@ -799,7 +799,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("{foo}/bar/{baz}/boo/{blah}", null)
             {
-                Defaults = new RouteValueDictionary(new { baz = "meep", blah = "blurb" })
+                Defaults = new RouteValueDictionary(new { baz = "meep", blah = "blurb" }),
             };
 
             var hc = new HttpContextStub("~/foo/bar", String.Empty);
@@ -825,7 +825,7 @@ namespace MonoTests.System.Web.Routing
             var r = new Route("{controller}/{action}", null)
             {
                 Defaults = new RouteValueDictionary(new { controller = "Home", action = "Index" }),
-                DataTokens = new RouteValueDictionary(new { foobar = "bar" })
+                DataTokens = new RouteValueDictionary(new { foobar = "bar" }),
             };
 
             var hc = new HttpContextStub("~/", String.Empty);
@@ -1068,7 +1068,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new Route("Foo", null)
             {
-                Defaults = new RouteValueDictionary(new { controller = "Foo", action = "Index" })
+                Defaults = new RouteValueDictionary(new { controller = "Foo", action = "Index" }),
             };
             var hc = new HttpContextStub("/Foo/123", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1076,7 +1076,7 @@ namespace MonoTests.System.Web.Routing
 
             r = new Route("Foo", null)
             {
-                Defaults = new RouteValueDictionary(new { controller = "Foo", action = "Index" })
+                Defaults = new RouteValueDictionary(new { controller = "Foo", action = "Index" }),
             };
             hc = new HttpContextStub("~/Foo/123", String.Empty);
             rd = r.GetRouteData(hc);
@@ -1091,7 +1091,7 @@ namespace MonoTests.System.Web.Routing
                 Defaults = new RouteValueDictionary(
                     new { controller = "Foo", action = "Retrieve" }
                 ),
-                Constraints = new RouteValueDictionary(new { id = @"\d{1,10}" })
+                Constraints = new RouteValueDictionary(new { id = @"\d{1,10}" }),
             };
 
             var hc = new HttpContextStub("~/Foo/x123", String.Empty);
@@ -1107,7 +1107,7 @@ namespace MonoTests.System.Web.Routing
             {
                 Defaults = new RouteValueDictionary(
                     new { controller = "Error", action = "NotFound" }
-                )
+                ),
             };
 
             var hc = new HttpContextStub("~/", String.Empty);
@@ -1128,7 +1128,7 @@ namespace MonoTests.System.Web.Routing
             {
                 Defaults = new RouteValueDictionary(
                     new { controller = "Error", action = "NotFound" }
-                )
+                ),
             };
 
             var hc = new HttpContextStub("~/", String.Empty);
@@ -1316,7 +1316,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("summary/{action}-{type}/{page}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 })
+                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 }),
             };
             var hc = new HttpContextStub2("~/summary/Index-test/1", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1343,7 +1343,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("summary/{action}-{type}/{page}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 })
+                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 }),
             };
             var hc = new HttpContextStub2("~/summary/Index-test/1", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1368,9 +1368,9 @@ namespace MonoTests.System.Web.Routing
                     {
                         controller = "todo",
                         action = "list",
-                        page = 0
+                        page = 0,
                     }
-                )
+                ),
             };
             var hc = new HttpContextStub2("~/todo/list/2", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1394,8 +1394,8 @@ namespace MonoTests.System.Web.Routing
                 {
                     { "controller", "todo" },
                     { "action", null },
-                    { "page", null }
-                }
+                    { "page", null },
+                },
             };
 
             var hc = new HttpContextStub2("~/todo/list/2", String.Empty);
@@ -1441,7 +1441,7 @@ namespace MonoTests.System.Web.Routing
                     {
                         page = 3,
                         another = "stuff",
-                        value = "with ; spaces & other chars"
+                        value = "with ; spaces & other chars",
                     }
                 )
             );
@@ -1458,7 +1458,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("summary/{action}/{page}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 })
+                Defaults = new RouteValueDictionary(new { action = "Index", page = 1 }),
             };
             var hc = new HttpContextStub2("~/summary/test/1", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1485,7 +1485,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("{foo}/{bar}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { bar = "baz" })
+                Defaults = new RouteValueDictionary(new { bar = "baz" }),
             };
 
             var hc = new HttpContextStub2("~/x/y", String.Empty);
@@ -1506,7 +1506,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("{foo}/{bar}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { baz = "baz" })
+                Defaults = new RouteValueDictionary(new { baz = "baz" }),
             };
             var hc = new HttpContextStub2("~/x/y", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1532,7 +1532,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     emptyValue = String.Empty,
                     nullValue = (string)null,
-                    nonEmptyValue = "SomeValue"
+                    nonEmptyValue = "SomeValue",
                 }
             );
 
@@ -1606,16 +1606,16 @@ namespace MonoTests.System.Web.Routing
                     {
                         controller = "Home",
                         action = "Hello",
-                        page = 1
+                        page = 1,
                     }
-                )
+                ),
             };
 
             var routeValues = new RouteValueDictionary
             {
                 { "controller", "Home" },
                 { "action", "Hello" },
-                { "page", 1 }
+                { "page", 1 },
             };
 
             var result = route.GetVirtualPath(rc, routeValues);
@@ -1643,9 +1643,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Home",
                             action = "Hello",
-                            page = 1
+                            page = 1,
                         }
-                    )
+                    ),
                 }
             );
             RouteTable.Routes.Add(
@@ -1654,7 +1654,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     Defaults = new RouteValueDictionary(
                         new { controller = "Home", action = "Hello" }
-                    )
+                    ),
                 }
             );
 
@@ -1662,13 +1662,13 @@ namespace MonoTests.System.Web.Routing
             {
                 { "controller", "Home" },
                 { "action", "Hello" },
-                { "page", 1 }
+                { "page", 1 },
             };
             var secondPageRouteValues = new RouteValueDictionary
             {
                 { "controller", "Home" },
                 { "action", "Hello" },
-                { "page", 2 }
+                { "page", 2 },
             };
 
             var firstPageResult = RouteTable.Routes.GetVirtualPath(rc, firstPageRouteValues);
@@ -1698,9 +1698,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Home",
                             action = "Posts",
-                            published = true
+                            published = true,
                         }
-                    )
+                    ),
                 }
             );
             RouteTable.Routes.Add(
@@ -1712,9 +1712,9 @@ namespace MonoTests.System.Web.Routing
                         {
                             controller = "Home",
                             action = "Posts",
-                            published = false
+                            published = false,
                         }
-                    )
+                    ),
                 }
             );
 
@@ -1722,13 +1722,13 @@ namespace MonoTests.System.Web.Routing
             {
                 { "controller", "Home" },
                 { "action", "Posts" },
-                { "published", true }
+                { "published", true },
             };
             var unpublishedRouteValues = new RouteValueDictionary
             {
                 { "controller", "Home" },
                 { "action", "Posts" },
-                { "published", false }
+                { "published", false },
             };
 
             var publishedResult = RouteTable.Routes.GetVirtualPath(rc, publishedRouteValues);
@@ -1753,7 +1753,7 @@ namespace MonoTests.System.Web.Routing
             {
                 Defaults = new RouteValueDictionary(
                     new { controller = "Home", action = "HelloWorld" }
-                )
+                ),
             };
 
             var lowercase = route.GetVirtualPath(
@@ -1784,7 +1784,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("summary/{controller}/{id}/{action}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index" })
+                Defaults = new RouteValueDictionary(new { action = "Index" }),
             };
             var hc = new HttpContextStub2("~/summary/kind/1/test", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1803,7 +1803,7 @@ namespace MonoTests.System.Web.Routing
                 {
                     id = "3",
                     action = "save",
-                    extra = "stuff"
+                    extra = "stuff",
                 }
             );
             vp = r.GetVirtualPath(new RequestContext(hc, rd), values);
@@ -1818,7 +1818,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("summary/{controller}/{id}/{action}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index" })
+                Defaults = new RouteValueDictionary(new { action = "Index" }),
             };
             var hc = new HttpContextStub2("~/summary/kind/1/test", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1846,7 +1846,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("summary/{controller}/{id}/{action}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index" })
+                Defaults = new RouteValueDictionary(new { action = "Index" }),
             };
             var hc = new HttpContextStub2(
                 "~/summary/kind/90941a4f-daf3-4c89-a6dc-83e8de4e3db5/test",
@@ -1898,7 +1898,7 @@ namespace MonoTests.System.Web.Routing
             var r0 = new MyRoute("summary/{id}", new MyRouteHandler());
             var r1 = new MyRoute("summary/{controller}/{id}/{action}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index" })
+                Defaults = new RouteValueDictionary(new { action = "Index" }),
             };
             var hc = new HttpContextStub2(
                 "~/summary/90941a4f-daf3-4c89-a6dc-83e8de4e3db5",
@@ -1911,7 +1911,7 @@ namespace MonoTests.System.Web.Routing
             var values = new RouteValueDictionary()
             {
                 { "controller", "SomeThing" },
-                { "action", "Index" }
+                { "action", "Index" },
             };
             var vp = r1.GetVirtualPath(new RequestContext(hc, rd), values);
 
@@ -1935,9 +1935,9 @@ namespace MonoTests.System.Web.Routing
                     {
                         action = "Index",
                         country = "us",
-                        locale = "en"
+                        locale = "en",
                     }
-                )
+                ),
             };
             var hc = new HttpContextStub2("~/login", String.Empty);
             var rd = r.GetRouteData(hc);
@@ -1947,7 +1947,7 @@ namespace MonoTests.System.Web.Routing
             {
                 { "controller", "SomeThing" },
                 { "action", "Index" },
-                { "country", "es" }
+                { "country", "es" },
             };
             var vp = r.GetVirtualPath(new RequestContext(hc, new RouteData()), values);
 
@@ -1969,7 +1969,7 @@ namespace MonoTests.System.Web.Routing
             // Case #3: make contry required.
             r = new MyRoute("{controller}/{country}-{locale}/{action}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { action = "Index", locale = "en" })
+                Defaults = new RouteValueDictionary(new { action = "Index", locale = "en" }),
             };
             vp = r.GetVirtualPath(new RequestContext(hc, new RouteData()), values);
 
@@ -2005,7 +2005,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("HelloWorld/{*path}", new MyRouteHandler());
             var hc = new HttpContextStub2("~/", String.Empty);
-            var values = new RouteValueDictionary() { { "path", "foobar" }, };
+            var values = new RouteValueDictionary() { { "path", "foobar" } };
             var vp = r.GetVirtualPath(new RequestContext(hc, new RouteData()), values);
 
             Assert.IsNotNull(vp, "#1");
@@ -2017,7 +2017,7 @@ namespace MonoTests.System.Web.Routing
         {
             var r = new MyRoute("HelloWorld/{*path}", new MyRouteHandler());
             var hc = new HttpContextStub2("~/", String.Empty);
-            var values = new RouteValueDictionary() { { "path", "foo/bar/baz" }, };
+            var values = new RouteValueDictionary() { { "path", "foo/bar/baz" } };
             var vp = r.GetVirtualPath(new RequestContext(hc, new RouteData()), values);
 
             Assert.IsNotNull(vp, "#1");
@@ -2031,7 +2031,7 @@ namespace MonoTests.System.Web.Routing
             var routes = new RouteValueDictionary();
             var route = new Route("Hello/{name}", new MyRouteHandler())
             {
-                Defaults = new RouteValueDictionary(new { controller = "Home", action = "Hello" })
+                Defaults = new RouteValueDictionary(new { controller = "Home", action = "Hello" }),
             };
 
             routes.Add("Name", route);

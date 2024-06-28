@@ -22,7 +22,7 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
         None,
         Awaiting,
         Ready,
-        Completed
+        Completed,
     }
 
     private State _state;
@@ -40,7 +40,7 @@ internal sealed class ResettableValueTaskSource : IValueTaskSource
         _hasWaiter = false;
         _valueTaskSource = new ManualResetValueTaskSourceCore<bool>()
         {
-            RunContinuationsAsynchronously = true
+            RunContinuationsAsynchronously = true,
         };
         _cancellationRegistration = default;
         _cancelledToken = default;

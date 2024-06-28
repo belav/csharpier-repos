@@ -105,7 +105,7 @@ namespace System.Data.Query.PlanCompiler
                     ProviderCommandInfoUtils.Create(
                         this.Command,
                         this.Command.Root // input node
-                    )
+                    ),
                 }
             );
 

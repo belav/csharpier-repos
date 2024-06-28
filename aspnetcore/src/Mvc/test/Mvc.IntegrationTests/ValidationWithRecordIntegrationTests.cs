@@ -40,8 +40,8 @@ public class ValidationWithRecordIntegrationTests
                     {
                         Name = "transferInfo",
                         ParameterType = typeof(TransferInfo),
-                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
-                    }
+                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
+                    },
                 },
                 new List<ParameterDescriptor>()
                 {
@@ -49,10 +49,10 @@ public class ValidationWithRecordIntegrationTests
                     {
                         Name = "transferInfo",
                         ParameterType = typeof(TransferInfo),
-                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body }
+                        BindingInfo = new BindingInfo() { BindingSource = BindingSource.Body },
                     },
-                    new ParameterDescriptor() { Name = "accountId", ParameterType = typeof(int) }
-                }
+                    new ParameterDescriptor() { Name = "accountId", ParameterType = typeof(int) },
+                },
             };
         }
     }
@@ -65,7 +65,7 @@ public class ValidationWithRecordIntegrationTests
         var actionDescriptor = new ControllerActionDescriptor()
         {
             BoundProperties = new List<ParameterDescriptor>(),
-            Parameters = parameters
+            Parameters = parameters,
         };
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
 
@@ -116,7 +116,7 @@ public class ValidationWithRecordIntegrationTests
         var actionDescriptor = new ControllerActionDescriptor()
         {
             BoundProperties = new List<ParameterDescriptor>(),
-            Parameters = parameters
+            Parameters = parameters,
         };
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
 
@@ -154,7 +154,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -191,7 +191,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -235,7 +235,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order2)
+            ParameterType = typeof(Order2),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -273,7 +273,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order2)
+            ParameterType = typeof(Order2),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -317,7 +317,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -355,7 +355,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -402,7 +402,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -440,7 +440,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -483,7 +483,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Order5>)
+            ParameterType = typeof(List<Order5>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -520,7 +520,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Order5>)
+            ParameterType = typeof(List<Order5>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -565,7 +565,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -602,7 +602,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -646,7 +646,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -683,7 +683,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -723,7 +723,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -777,7 +777,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -814,7 +814,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -880,7 +880,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order9)
+            ParameterType = typeof(Order9),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -917,7 +917,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order9)
+            ParameterType = typeof(Order9),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -964,7 +964,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Order10>)
+            ParameterType = typeof(List<Order10>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1001,7 +1001,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Order10>)
+            ParameterType = typeof(List<Order10>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1041,7 +1041,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(List<Order10>)
+            ParameterType = typeof(List<Order10>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1075,7 +1075,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(User)
+            ParameterType = typeof(User),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1115,7 +1115,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(User)
+            ParameterType = typeof(User),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1543,7 +1543,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor
         {
             Name = "parameter",
-            ParameterType = typeof(Order11)
+            ParameterType = typeof(Order11),
         };
 
         var input = "{\"Zip\":\"47\"}";
@@ -1604,9 +1604,9 @@ public class ValidationWithRecordIntegrationTests
             BindingInfo = new BindingInfo
             {
                 BinderModelName = "CustomParameter",
-                BindingSource = BindingSource.Body
+                BindingSource = BindingSource.Body,
             },
-            ParameterType = typeof(JToken)
+            ParameterType = typeof(JToken),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(
@@ -1660,7 +1660,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor
         {
             Name = "cancellationToken",
-            ParameterType = typeof(CancellationToken)
+            ParameterType = typeof(CancellationToken),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext();
@@ -1697,7 +1697,7 @@ public class ValidationWithRecordIntegrationTests
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
-            ParameterType = typeof(Greeting)
+            ParameterType = typeof(Greeting),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -1739,7 +1739,7 @@ public class ValidationWithRecordIntegrationTests
         {
             Name = "Parameter1",
             BindingInfo = new BindingInfo { BindingSource = BindingSource.Body },
-            ParameterType = typeof(Greeting)
+            ParameterType = typeof(Greeting),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -2052,7 +2052,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(IDictionary<string, int>)
+            ParameterType = typeof(IDictionary<string, int>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -2100,7 +2100,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Dictionary<string, NeverValid>)
+            ParameterType = typeof(Dictionary<string, NeverValid>),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -2288,7 +2288,7 @@ public class ValidationWithRecordIntegrationTests
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(RecursiveModel)
+            ParameterType = typeof(RecursiveModel),
         };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
@@ -2399,11 +2399,7 @@ public class ValidationWithRecordIntegrationTests
             $"Record type '{modelType}' has validation metadata defined on property 'Property1' that will be ignored. "
             + "'Property1' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
 
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "parameter",
-            ParameterType = modelType,
-        };
+        var parameter = new ParameterDescriptor() { Name = "parameter", ParameterType = modelType };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -2446,11 +2442,7 @@ public class ValidationWithRecordIntegrationTests
             $"Record type '{modelType}' has validation metadata defined on property 'Property1' that will be ignored. "
             + "'Property1' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
 
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "parameter",
-            ParameterType = modelType,
-        };
+        var parameter = new ParameterDescriptor() { Name = "parameter", ParameterType = modelType };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -2498,11 +2490,7 @@ public class ValidationWithRecordIntegrationTests
             $"Record type '{modelType}' has validation metadata defined on property 'Property2' that will be ignored. "
             + "'Property2' is a parameter in the record primary constructor and validation metadata must be associated with the constructor parameter.";
 
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "parameter",
-            ParameterType = modelType,
-        };
+        var parameter = new ParameterDescriptor() { Name = "parameter", ParameterType = modelType };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
@@ -2540,11 +2528,7 @@ public class ValidationWithRecordIntegrationTests
         var modelMetadata = modelMetadataProvider.GetMetadataForType(modelType);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(modelMetadataProvider);
 
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "parameter",
-            ParameterType = modelType,
-        };
+        var parameter = new ParameterDescriptor() { Name = "parameter", ParameterType = modelType };
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {

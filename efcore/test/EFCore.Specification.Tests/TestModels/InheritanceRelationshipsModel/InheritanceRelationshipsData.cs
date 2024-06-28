@@ -140,7 +140,7 @@ public class InheritanceRelationshipsData : ISetSource
                 OwnedCollectionOnBase = new List<OwnedEntity>
                 {
                     new() { Id = 1, Name = "OCOB11" },
-                    new() { Id = 2, Name = "OCOB12" }
+                    new() { Id = 2, Name = "OCOB12" },
                 },
                 BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                 CollectionOnBase = new List<CollectionOnBase>(),
@@ -152,7 +152,7 @@ public class InheritanceRelationshipsData : ISetSource
                 OwnedReferenceOnBase = new OwnedEntity { Name = "OROB2" },
                 OwnedCollectionOnBase = new List<OwnedEntity>
                 {
-                    new() { Id = 3, Name = "OCOB21" }
+                    new() { Id = 3, Name = "OCOB21" },
                 },
                 BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                 CollectionOnBase = new List<CollectionOnBase>(),
@@ -173,13 +173,13 @@ public class InheritanceRelationshipsData : ISetSource
                 OwnedCollectionOnBase = new List<OwnedEntity>
                 {
                     new() { Id = 4, Name = "OCOB41" },
-                    new() { Id = 5, Name = "OCOB42" }
+                    new() { Id = 5, Name = "OCOB42" },
                 },
                 OwnedReferenceOnDerived = new OwnedEntity { Name = "OROD4" },
                 OwnedCollectionOnDerived = new List<OwnedEntity>
                 {
                     new() { Id = 1, Name = "OCOD41" },
-                    new() { Id = 2, Name = "OCOD42" }
+                    new() { Id = 2, Name = "OCOD42" },
                 },
                 BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                 BaseCollectionOnDerived = new List<BaseCollectionOnDerived>(),
@@ -194,12 +194,12 @@ public class InheritanceRelationshipsData : ISetSource
                 OwnedReferenceOnBase = new OwnedEntity { Name = "OROB5" },
                 OwnedCollectionOnBase = new List<OwnedEntity>
                 {
-                    new() { Id = 6, Name = "OCOB51" }
+                    new() { Id = 6, Name = "OCOB51" },
                 },
                 OwnedReferenceOnDerived = new OwnedEntity { Name = "OROD5" },
                 OwnedCollectionOnDerived = new List<OwnedEntity>
                 {
-                    new() { Id = 3, Name = "OCOD51" }
+                    new() { Id = 3, Name = "OCOD51" },
                 },
                 BaseCollectionOnBase = new List<BaseCollectionOnBase>(),
                 BaseCollectionOnDerived = new List<BaseCollectionOnDerived>(),
@@ -228,49 +228,49 @@ public class InheritanceRelationshipsData : ISetSource
             {
                 Id = 1,
                 Name = "BROB1",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new()
             {
                 Id = 2,
                 Name = "BROB2",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new()
             {
                 Id = 3,
                 Name = "BROB3 (dangling)",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedReferenceOnBase
             {
                 Id = 4,
                 Name = "DROB1",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedReferenceOnBase
             {
                 Id = 5,
                 Name = "DROB2",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedReferenceOnBase
             {
                 Id = 6,
                 Name = "DROB3",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedReferenceOnBase
             {
                 Id = 7,
                 Name = "DROB4 (half-dangling)",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedReferenceOnBase
             {
                 Id = 8,
                 Name = "DROB5 (dangling)",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
         };
 
@@ -323,87 +323,87 @@ public class InheritanceRelationshipsData : ISetSource
             {
                 Id = 1,
                 Name = "BCOB11",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new()
             {
                 Id = 2,
                 Name = "BCOB12",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new()
             {
                 Id = 3,
                 Name = "BCOB21",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new()
             {
                 Id = 4,
                 Name = "BCOB31 (dangling)",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new()
             {
                 Id = 5,
                 Name = "BCOB32 (dangling)",
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 6,
                 Name = "DCOB11",
                 DerivedProperty = 1,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 7,
                 Name = "DCOB12",
                 DerivedProperty = 2,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 8,
                 Name = "DCOB21",
                 DerivedProperty = 3,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 9,
                 Name = "DCOB31",
                 DerivedProperty = 4,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 10,
                 Name = "DCOB32",
                 DerivedProperty = 5,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 11,
                 Name = "DCOB41",
                 DerivedProperty = 6,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 12,
                 Name = "DCOB51 (dangling)",
                 DerivedProperty = 7,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
             new DerivedCollectionOnBase
             {
                 Id = 13,
                 Name = "DCOB52 (dangling)",
                 DerivedProperty = 8,
-                NestedCollection = new List<NestedCollectionBase>()
+                NestedCollection = new List<NestedCollectionBase>(),
             },
         };
 
@@ -474,13 +474,13 @@ public class InheritanceRelationshipsData : ISetSource
             {
                 Id = 1,
                 Name = "RE1",
-                Principals = new List<PrincipalEntity>()
+                Principals = new List<PrincipalEntity>(),
             },
             new()
             {
                 Id = 2,
                 Name = "RE2",
-                Principals = new List<PrincipalEntity>()
+                Principals = new List<PrincipalEntity>(),
             },
         };
 
@@ -506,7 +506,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseReferencesOnBase[0].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[0]
+            nestedCollections[0],
         };
         nestedCollections[0].ParentReference = baseReferencesOnBase[0];
         nestedCollections[0].ParentReferenceId = baseReferencesOnBase[0].Id;
@@ -517,7 +517,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseReferencesOnBase[1].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[5]
+            nestedCollections[5],
         };
         nestedCollections[5].ParentReference = baseReferencesOnBase[1];
         nestedCollections[5].ParentReferenceId = baseReferencesOnBase[1].Id;
@@ -529,7 +529,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseReferencesOnBase[3].NestedCollection = new List<NestedCollectionBase>
         {
             nestedCollections[1],
-            nestedCollections[2]
+            nestedCollections[2],
         };
         nestedCollections[1].ParentReference = baseReferencesOnBase[3];
         nestedCollections[1].ParentReferenceId = baseReferencesOnBase[3].Id;
@@ -542,7 +542,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseReferencesOnBase[4].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[6]
+            nestedCollections[6],
         };
         nestedCollections[6].ParentReference = baseReferencesOnBase[4];
         nestedCollections[6].ParentReferenceId = baseReferencesOnBase[4].Id;
@@ -554,7 +554,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseReferencesOnBase[6].NestedCollection = new List<NestedCollectionBase>
         {
             nestedCollections[7],
-            nestedCollections[8]
+            nestedCollections[8],
         };
         nestedCollections[7].ParentReference = baseReferencesOnBase[6];
         nestedCollections[7].ParentReferenceId = baseReferencesOnBase[6].Id;
@@ -569,7 +569,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseCollectionsOnBase[0].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[0]
+            nestedCollections[0],
         };
         nestedCollections[0].ParentCollection = baseCollectionsOnBase[0];
         nestedCollections[0].ParentCollectionId = baseCollectionsOnBase[0].Id;
@@ -580,7 +580,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseCollectionsOnBase[1].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[5]
+            nestedCollections[5],
         };
         nestedCollections[5].ParentCollection = baseCollectionsOnBase[1];
         nestedCollections[5].ParentCollectionId = baseCollectionsOnBase[1].Id;
@@ -592,7 +592,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseCollectionsOnBase[3].NestedCollection = new List<NestedCollectionBase>
         {
             nestedCollections[1],
-            nestedCollections[2]
+            nestedCollections[2],
         };
         nestedCollections[1].ParentCollection = baseCollectionsOnBase[3];
         nestedCollections[1].ParentCollectionId = baseCollectionsOnBase[3].Id;
@@ -605,7 +605,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseCollectionsOnBase[5].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[6]
+            nestedCollections[6],
         };
         nestedCollections[6].ParentCollection = baseCollectionsOnBase[5];
         nestedCollections[6].ParentCollectionId = baseCollectionsOnBase[5].Id;
@@ -616,7 +616,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseCollectionsOnBase[6].NestedCollection = new List<NestedCollectionBase>
         {
-            nestedCollections[3]
+            nestedCollections[3],
         };
         nestedCollections[3].ParentCollection = baseCollectionsOnBase[6];
         nestedCollections[3].ParentCollectionId = baseCollectionsOnBase[6].Id;
@@ -628,7 +628,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseCollectionsOnBase[8].NestedCollection = new List<NestedCollectionBase>
         {
             nestedCollections[7],
-            nestedCollections[8]
+            nestedCollections[8],
         };
         nestedCollections[7].ParentCollection = baseCollectionsOnBase[8];
         nestedCollections[7].ParentCollectionId = baseCollectionsOnBase[8].Id;
@@ -642,7 +642,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseCollectionsOnBase[11].NestedCollection = new List<NestedCollectionBase>
         {
             nestedCollections[9],
-            nestedCollections[10]
+            nestedCollections[10],
         };
         nestedCollections[9].ParentCollection = baseCollectionsOnBase[11];
         nestedCollections[9].ParentCollectionId = baseCollectionsOnBase[11].Id;
@@ -679,7 +679,7 @@ public class InheritanceRelationshipsData : ISetSource
         // BaseInheritanceRelationshipEntity.CollectionOnBase (inverse: Parent)
         baseEntities[0].BaseCollectionOnBase = new List<BaseCollectionOnBase>
         {
-            baseCollectionsOnBase[0]
+            baseCollectionsOnBase[0],
         };
         baseCollectionsOnBase[0].BaseParent = baseEntities[0];
         baseCollectionsOnBase[0].BaseParentId = baseEntities[0].Id;
@@ -687,7 +687,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseEntities[0].CollectionOnBase = new List<CollectionOnBase>
         {
             collectionsOnBase[0],
-            collectionsOnBase[1]
+            collectionsOnBase[1],
         };
         collectionsOnBase[0].Parent = baseEntities[0];
         collectionsOnBase[0].ParentId = baseEntities[0].Id;
@@ -700,7 +700,7 @@ public class InheritanceRelationshipsData : ISetSource
 
         baseEntities[2].BaseCollectionOnBase = new List<BaseCollectionOnBase>
         {
-            baseCollectionsOnBase[7]
+            baseCollectionsOnBase[7],
         };
         baseCollectionsOnBase[7].BaseParent = baseEntities[2];
         baseCollectionsOnBase[7].BaseParentId = baseEntities[2].Id;
@@ -708,7 +708,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseEntities[3].BaseCollectionOnBase = new List<BaseCollectionOnBase>
         {
             baseCollectionsOnBase[5],
-            baseCollectionsOnBase[6]
+            baseCollectionsOnBase[6],
         };
         baseCollectionsOnBase[5].BaseParent = baseEntities[3];
         baseCollectionsOnBase[5].BaseParentId = baseEntities[3].Id;
@@ -718,7 +718,7 @@ public class InheritanceRelationshipsData : ISetSource
         baseEntities[3].CollectionOnBase = new List<CollectionOnBase>
         {
             collectionsOnBase[3],
-            collectionsOnBase[4]
+            collectionsOnBase[4],
         };
         collectionsOnBase[3].Parent = baseEntities[3];
         collectionsOnBase[3].ParentId = baseEntities[3].Id;
@@ -761,7 +761,7 @@ public class InheritanceRelationshipsData : ISetSource
             new List<DerivedCollectionOnDerived>
             {
                 (DerivedCollectionOnDerived)baseCollectionsOnDerived[3],
-                (DerivedCollectionOnDerived)baseCollectionsOnDerived[4]
+                (DerivedCollectionOnDerived)baseCollectionsOnDerived[4],
             };
     }
 }

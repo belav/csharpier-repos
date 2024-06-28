@@ -112,7 +112,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     @"abc def",
                     @"fi""ddle dee de""e",
                     @"""hi there ""dude",
-                    @"he""llo there"""
+                    @"he""llo there""",
                 }
             );
             VerifyCommandLineSplitter(
@@ -123,7 +123,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     @"\""straw berry",
                     @"fi\""zz",
                     @"\""buzz",
-                    @"fizzbuzz"
+                    @"fizzbuzz",
                 }
             );
             VerifyCommandLineSplitter(

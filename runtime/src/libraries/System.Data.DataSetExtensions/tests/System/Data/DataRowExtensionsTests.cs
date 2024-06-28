@@ -179,7 +179,7 @@ namespace System.Data.Tests
 
         enum SomeEnum
         {
-            Foo
+            Foo,
         }
 
         [Fact]

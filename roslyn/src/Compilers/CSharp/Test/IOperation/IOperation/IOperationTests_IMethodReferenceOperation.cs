@@ -319,7 +319,7 @@ Block[B7] - Exit
                 //         m2 = (c1 ?? c2).M1;
                 Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).M1")
                     .WithArguments("C.M1()")
-                    .WithLocation(8, 14)
+                    .WithLocation(8, 14),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

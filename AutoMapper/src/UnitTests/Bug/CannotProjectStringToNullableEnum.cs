@@ -5,7 +5,7 @@ public class CannotProjectStringToNullableEnum
     public enum DummyTypes : int
     {
         Foo = 1,
-        Bar = 2
+        Bar = 2,
     }
 
     public class DummySource

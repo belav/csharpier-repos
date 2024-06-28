@@ -30,7 +30,7 @@ namespace Microsoft.Interop
             {
                 IsUserDefined = virtualMethodIndex.IsUserDefined,
                 SetLastError = virtualMethodIndex.SetLastError,
-                StringMarshalling = virtualMethodIndex.StringMarshalling
+                StringMarshalling = virtualMethodIndex.StringMarshalling,
             };
     }
 

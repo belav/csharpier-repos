@@ -39,6 +39,6 @@ namespace System.Security.Cryptography
     {
         SameProcess,
         CrossProcess,
-        SameLogon
+        SameLogon,
     }
 }

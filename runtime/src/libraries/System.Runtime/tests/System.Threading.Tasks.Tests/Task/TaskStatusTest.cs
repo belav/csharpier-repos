@@ -35,14 +35,14 @@ namespace System.Threading.Tasks.Tests.Status
         CancelScheduledTask,
         CancelCreatedTask,
         FailedTask,
-        FailedChildTask
+        FailedChildTask,
     }
 
     public enum MyTaskCreationOptions
     {
         None = TaskCreationOptions.None,
         RespectParentCancellation = -2,
-        AttachedToParent = TaskCreationOptions.AttachedToParent
+        AttachedToParent = TaskCreationOptions.AttachedToParent,
     }
 
     public class StatusTestException : Exception { }

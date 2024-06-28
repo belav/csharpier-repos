@@ -70,7 +70,7 @@ public class HostingEnvironmentExtensionsTests
                 .AddInMemoryCollection(
                     new Dictionary<string, string>()
                     {
-                        [WebHostDefaults.EnvironmentKey] = "NewName"
+                        [WebHostDefaults.EnvironmentKey] = "NewName",
                     }
                 )
                 .Build()

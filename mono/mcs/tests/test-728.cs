@@ -5,7 +5,7 @@ public class Tests
     enum MyEnumUlong : long
     {
         Value_1,
-        Value_3 = 2
+        Value_3 = 2,
     }
 
     public static int Main()

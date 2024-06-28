@@ -328,7 +328,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                 {
                     PerformSort = false,
                     UpdateImportCompletionCacheInBackground = true,
-                    TargetTypedCompletionFilter = showCompletionItemFilters // Compute targeted types if filter is enabled
+                    TargetTypedCompletionFilter =
+                        showCompletionItemFilters // Compute targeted types if filter is enabled
+                    ,
                 };
 
                 var sessionData = CompletionSessionData.GetOrCreateSessionData(session);
@@ -344,7 +346,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                             options with
                             {
                                 ExpandedCompletionBehavior =
-                                    ExpandedCompletionMode.NonExpandedItemsOnly
+                                    ExpandedCompletionMode.NonExpandedItemsOnly,
                             },
                             cancellationToken
                         )
@@ -375,7 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                                 {
                                     ExpandedCompletionBehavior =
                                         ExpandedCompletionMode.ExpandedItemsOnly,
-                                    PerformSort = true
+                                    PerformSort = true,
                                 },
                                 expandedItemsTaskCancellationToken
                             ),
@@ -392,7 +394,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                                 options with
                                 {
                                     ExpandedCompletionBehavior =
-                                        ExpandedCompletionMode.NonExpandedItemsOnly
+                                        ExpandedCompletionMode.NonExpandedItemsOnly,
                                 },
                                 cancellationToken
                             )
@@ -485,7 +487,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
                         ) with
                         {
                             ShowItemsFromUnimportedNamespaces = true,
-                            ExpandedCompletionBehavior = ExpandedCompletionMode.ExpandedItemsOnly
+                            ExpandedCompletionBehavior = ExpandedCompletionMode.ExpandedItemsOnly,
                         };
 
                         var (context, completionList) = await GetCompletionContextWorkerAsync(

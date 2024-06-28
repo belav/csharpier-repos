@@ -89,7 +89,7 @@ namespace System.Security.Cryptography.Xml.Tests
                 new[] { new CipherReference("http://dummy.urionly.io") },
                 new[]
                 {
-                    new CipherReference("http://dummy.uri.transform.io", new TransformChain())
+                    new CipherReference("http://dummy.uri.transform.io", new TransformChain()),
                 },
             };
         }

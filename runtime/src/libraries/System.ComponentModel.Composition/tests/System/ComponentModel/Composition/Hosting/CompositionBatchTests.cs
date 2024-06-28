@@ -33,13 +33,13 @@ namespace System.ComponentModel.Composition
             {
                 PartFactory.Create(),
                 PartFactory.Create(),
-                PartFactory.Create()
+                PartFactory.Create(),
             };
             ComposablePart[] partsToRemove = new ComposablePart[]
             {
                 PartFactory.Create(),
                 PartFactory.Create(),
-                PartFactory.Create()
+                PartFactory.Create(),
             };
 
             CompositionBatch batch = new CompositionBatch(partsToAdd, partsToRemove);
@@ -58,7 +58,7 @@ namespace System.ComponentModel.Composition
             {
                 PartFactory.Create(),
                 PartFactory.Create(),
-                PartFactory.Create()
+                PartFactory.Create(),
             };
 
             var batch = new CompositionBatch(null, partsToRemove);
@@ -74,7 +74,7 @@ namespace System.ComponentModel.Composition
             {
                 PartFactory.Create(),
                 PartFactory.Create(),
-                PartFactory.Create()
+                PartFactory.Create(),
             };
 
             var batch = new CompositionBatch(partsToAdd, null);
@@ -90,13 +90,13 @@ namespace System.ComponentModel.Composition
             {
                 PartFactory.Create(),
                 null,
-                PartFactory.Create()
+                PartFactory.Create(),
             };
             ComposablePart[] partsToRemove = new ComposablePart[]
             {
                 PartFactory.Create(),
                 PartFactory.Create(),
-                PartFactory.Create()
+                PartFactory.Create(),
             };
 
             Assert.Throws<ArgumentException>(
@@ -115,13 +115,13 @@ namespace System.ComponentModel.Composition
             {
                 PartFactory.Create(),
                 PartFactory.Create(),
-                PartFactory.Create()
+                PartFactory.Create(),
             };
             ComposablePart[] partsToRemove = new ComposablePart[]
             {
                 PartFactory.Create(),
                 null,
-                PartFactory.Create()
+                PartFactory.Create(),
             };
 
             Assert.Throws<ArgumentException>(

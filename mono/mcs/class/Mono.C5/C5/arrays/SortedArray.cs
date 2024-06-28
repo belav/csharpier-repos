@@ -41,7 +41,7 @@ namespace C5
             /// <summary>
             /// A debugging artifact. To be removed.
             /// </summary>
-            Standard = 0
+            Standard = 0,
         }
 
         static Feature features = Feature.Standard;

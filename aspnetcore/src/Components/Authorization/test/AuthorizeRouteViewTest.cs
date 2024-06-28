@@ -56,7 +56,7 @@ public class AuthorizeRouteViewTest
             typeof(TestPageRequiringAuthorization),
             new Dictionary<string, object>
             {
-                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" }
+                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" },
             }
         );
         _testAuthorizationService.NextResult = AuthorizationResult.Success();
@@ -106,7 +106,7 @@ public class AuthorizeRouteViewTest
             typeof(TestPageRequiringAuthorization),
             new Dictionary<string, object>
             {
-                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" }
+                { nameof(TestPageRequiringAuthorization.Message), "Hello, world!" },
             }
         );
         var resource = "foo";
@@ -120,7 +120,7 @@ public class AuthorizeRouteViewTest
                 {
                     { nameof(AuthorizeRouteView.RouteData), routeData },
                     { nameof(AuthorizeRouteView.DefaultLayout), typeof(TestLayout) },
-                    { nameof(AuthorizeRouteView.Resource), resource }
+                    { nameof(AuthorizeRouteView.Resource), resource },
                 }
             )
         );
@@ -382,7 +382,7 @@ public class AuthorizeRouteViewTest
             ParameterView.FromDictionary(
                 new Dictionary<string, object>
                 {
-                    { nameof(AuthorizeRouteView.RouteData), routeData }
+                    { nameof(AuthorizeRouteView.RouteData), routeData },
                 }
             )
         );

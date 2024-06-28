@@ -67,7 +67,7 @@ namespace System.ComponentModel.Tests
                 new object[2, 2]
                 {
                     { typeof(int), true },
-                    { typeof(string), true }
+                    { typeof(string), true },
                 },
                 NullableConverterTests.s_intNullableConverter
             );
@@ -81,7 +81,7 @@ namespace System.ComponentModel.Tests
                 {
                     { typeof(int), true },
                     { typeof(string), true },
-                    { typeof(InstanceDescriptor), true }
+                    { typeof(InstanceDescriptor), true },
                 },
                 NullableConverterTests.s_intNullableConverter
             );
@@ -95,7 +95,7 @@ namespace System.ComponentModel.Tests
                 {
                     { "1  ", 1, CultureInfo.InvariantCulture },
                     { null, null, null },
-                    { 2, 2, null }
+                    { 2, 2, null },
                 },
                 NullableConverterTests.s_intNullableConverter
             );
@@ -110,7 +110,7 @@ namespace System.ComponentModel.Tests
                     { NullableConverterTests.s_nullableThree, 3, null },
                     { NullableConverterTests.s_uninitializedInt, string.Empty, null },
                     { null, string.Empty, null },
-                    { 4, "4", CultureInfo.InvariantCulture }
+                    { 4, "4", CultureInfo.InvariantCulture },
                 },
                 NullableConverterTests.s_intNullableConverter
             );
@@ -154,9 +154,9 @@ namespace System.ComponentModel.Tests
                     {
                         new SomeValueType(),
                         "System.ComponentModel.Tests.SomeValueType",
-                        CultureInfo.InvariantCulture
+                        CultureInfo.InvariantCulture,
                     },
-                    { nullableV, v, CultureInfo.InvariantCulture }
+                    { nullableV, v, CultureInfo.InvariantCulture },
                 },
                 NullableConverterTests.s_myNullableConverter
             );

@@ -264,7 +264,7 @@ namespace System.IO.Compression
             0xb40bbe37u,
             0xc30c8ea1u,
             0x5a05df1bu,
-            0x2d02ef8du
+            0x2d02ef8du,
         };
 
         // Calculate CRC based on the old CRC and the new bytes

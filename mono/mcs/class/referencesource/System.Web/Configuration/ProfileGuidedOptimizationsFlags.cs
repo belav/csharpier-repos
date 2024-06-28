@@ -10,6 +10,6 @@ namespace System.Web.Configuration
     public enum ProfileGuidedOptimizationsFlags
     {
         None = 0,
-        All = 1
+        All = 1,
     }
 }

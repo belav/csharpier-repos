@@ -56,7 +56,7 @@ namespace System.Web.Http.Validation
                         new Dictionary<string, string>()
                         {
                             { "Name", "The Name field is required." },
-                            { "Profession", "The Profession field is required." }
+                            { "Profession", "The Profession field is required." },
                         }
                     },
                     {
@@ -66,7 +66,7 @@ namespace System.Web.Http.Validation
                         {
                             { "Profession", "The Profession field is required." },
                             { "Friend.Name", "The Name field is required." },
-                            { "Friend.Profession", "The Profession field is required." }
+                            { "Friend.Profession", "The Profession field is required." },
                         }
                     },
                     // Collections
@@ -78,7 +78,7 @@ namespace System.Web.Http.Validation
                             { "[0].Name", "The Name field is required." },
                             { "[0].Profession", "The Profession field is required." },
                             { "[1].Name", "The Name field is required." },
-                            { "[1].Profession", "The Profession field is required." }
+                            { "[1].Profession", "The Profession field is required." },
                         }
                     },
                     {
@@ -89,14 +89,14 @@ namespace System.Web.Http.Validation
                             { "[0].Name", "The Name field is required." },
                             { "[0].Profession", "The Profession field is required." },
                             { "[1].Name", "The Name field is required." },
-                            { "[1].Profession", "The Profession field is required." }
+                            { "[1].Profession", "The Profession field is required." },
                         }
                     },
                     {
                         new Dictionary<string, Person>
                         {
                             { "Joe", new Person() },
-                            { "Mark", new Person() }
+                            { "Mark", new Person() },
                         },
                         typeof(Dictionary<string, Person>),
                         new Dictionary<string, string>()
@@ -104,7 +104,7 @@ namespace System.Web.Http.Validation
                             { "[0].Value.Name", "The Name field is required." },
                             { "[0].Value.Profession", "The Profession field is required." },
                             { "[1].Value.Name", "The Name field is required." },
-                            { "[1].Value.Profession", "The Profession field is required." }
+                            { "[1].Value.Profession", "The Profession field is required." },
                         }
                     },
                     // IValidatableObject's
@@ -116,7 +116,7 @@ namespace System.Web.Http.Validation
                             { "", "Error1" },
                             { "Property1", "Error2" },
                             { "Property2", "Error3" },
-                            { "Property3", "Error3" }
+                            { "Property3", "Error3" },
                         }
                     },
                     {
@@ -127,7 +127,7 @@ namespace System.Web.Http.Validation
                             { "[0]", "Error1" },
                             { "[0].Property1", "Error2" },
                             { "[0].Property2", "Error3" },
-                            { "[0].Property3", "Error3" }
+                            { "[0].Property3", "Error3" },
                         }
                     },
                     // Testing we don't blow up on cycles
@@ -140,7 +140,7 @@ namespace System.Web.Http.Validation
                                 "Name",
                                 "The field Name must be a string with a maximum length of 10."
                             },
-                            { "Profession", "The Profession field is required." }
+                            { "Profession", "The Profession field is required." },
                         }
                     },
                     // Testing that we don't bubble up exceptions when property getters throw
@@ -160,7 +160,7 @@ namespace System.Web.Http.Validation
                         XElement.Parse("<xml>abc</xml>"),
                         typeof(XElement),
                         new Dictionary<string, string>()
-                    }
+                    },
                 };
             }
         }
@@ -296,7 +296,7 @@ namespace System.Web.Http.Validation
             object instance = new[]
             {
                 new TypeThatOverridesEquals { Funny = "hehe" },
-                new TypeThatOverridesEquals { Funny = "hehe" }
+                new TypeThatOverridesEquals { Funny = "hehe" },
             };
 
             // Act & Assert

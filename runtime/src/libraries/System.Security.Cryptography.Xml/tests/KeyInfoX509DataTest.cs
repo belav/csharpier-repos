@@ -2511,7 +2511,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0xDA,
             0x48,
             0x6C,
-            0x9C
+            0x9C,
         };
 
         static byte[] cert2 =
@@ -3060,7 +3060,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0x59,
             0x98,
             0x41,
-            0x89
+            0x89,
         };
 
         static byte[] cert3 =
@@ -3840,7 +3840,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0x81,
             0xB9,
             0x01,
-            0x97
+            0x97,
         };
 
         static byte[] x509crl =
@@ -4109,7 +4109,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0xC1,
             0xFF,
             0xE2,
-            0x89
+            0x89,
         };
 
         [Fact]

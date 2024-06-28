@@ -1351,7 +1351,7 @@ namespace System.ServiceModel.Channels
                 communicationObjects = new ICommunicationObject[]
                 {
                     this.Acceptor,
-                    communicationObject
+                    communicationObject,
                 };
             }
 

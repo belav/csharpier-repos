@@ -235,7 +235,7 @@ public class Test
                 8,
                 0b_1000_0000_0000_0000,
                 0b_1000_0000_0000_0000,
-                0b_1111_0001_1000_0010
+                0b_1111_0001_1000_0010,
             };
             shiftBy = new int[] { 1, 1, 15, 18, 40 };
             for (int idx = 0; idx < valUshort.Length; idx++)

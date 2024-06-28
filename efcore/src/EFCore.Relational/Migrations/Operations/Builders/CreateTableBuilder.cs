@@ -93,7 +93,7 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
             PrincipalTable = principalTable,
             PrincipalColumns = principalColumns,
             OnUpdate = onUpdate,
-            OnDelete = onDelete
+            OnDelete = onDelete,
         };
         Operation.ForeignKeys.Add(operation);
 
@@ -119,7 +119,7 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
             Schema = Operation.Schema,
             Table = Operation.Name,
             Name = name,
-            Columns = Map(columns)
+            Columns = Map(columns),
         };
         // TODO: Throw if already set?
         Operation.PrimaryKey = operation;
@@ -146,7 +146,7 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
             Schema = Operation.Schema,
             Table = Operation.Name,
             Name = name,
-            Columns = Map(columns)
+            Columns = Map(columns),
         };
         Operation.UniqueConstraints.Add(operation);
 
@@ -172,7 +172,7 @@ public class CreateTableBuilder<TColumns> : OperationBuilder<CreateTableOperatio
             Schema = Operation.Schema,
             Table = Operation.Name,
             Name = name,
-            Sql = sql
+            Sql = sql,
         };
         Operation.CheckConstraints.Add(operation);
 

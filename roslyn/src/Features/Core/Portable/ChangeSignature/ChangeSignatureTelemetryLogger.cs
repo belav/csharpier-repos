@@ -60,7 +60,7 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             AddedParameterValueExplicit,
             AddedParameterValueExplicitNamed,
             AddedParameterValueTODO,
-            AddedParameterValueOmitted
+            AddedParameterValueOmitted,
         }
 
         internal static void LogChangeSignatureDialogLaunched() =>

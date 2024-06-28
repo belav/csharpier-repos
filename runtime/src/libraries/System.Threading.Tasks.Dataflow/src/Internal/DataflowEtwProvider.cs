@@ -201,7 +201,7 @@ namespace System.Threading.Tasks.Dataflow.Internal
             Faulted = (int)TaskStatus.Faulted,
 
             /// <summary>The block completed due to cancellation.</summary>
-            Canceled = (int)TaskStatus.Canceled
+            Canceled = (int)TaskStatus.Canceled,
         }
 
         [Event(BLOCKCOMPLETED_EVENTID, Level = EventLevel.Informational)]

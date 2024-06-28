@@ -107,6 +107,8 @@ namespace System.Data.OracleClient.Oci
         CHARSET_FIXEDWIDTH = 92, // Fixed-width charset byte size
         CHARSET_ID = 93, // Character set id
         NCHARSET_ID = 94, // NCharacter set id
-        MAXBUFSZ = 100 // Max buffer size for OCINlsGetInfo
+        MAXBUFSZ =
+            100 // Max buffer size for OCINlsGetInfo
+        ,
     }
 }

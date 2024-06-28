@@ -60,7 +60,7 @@ namespace Test.Sys.Drawing
                 new Point(0, 0),
                 new Point(250, 250),
                 new Point(60, 70),
-                new Point(230, 10)
+                new Point(230, 10),
             };
 
             byte[] types = new byte[]
@@ -68,7 +68,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             path = new GraphicsPath(points, types);
@@ -81,7 +81,7 @@ namespace Test.Sys.Drawing
                 new PointF(0f, 0f),
                 new PointF(250f, 250f),
                 new PointF(60f, 70f),
-                new PointF(230f, 10f)
+                new PointF(230f, 10f),
             };
             for (int i = 0; i < path.PointCount; i++)
             {
@@ -107,7 +107,7 @@ namespace Test.Sys.Drawing
                 new PointF(100.1f, 200.2f),
                 new PointF(10.2f, 150.6f),
                 new PointF(60.3f, 70.7f),
-                new PointF(250.4f, 10.7f)
+                new PointF(250.4f, 10.7f),
             };
 
             byte[] types = new byte[]
@@ -115,7 +115,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             path = new GraphicsPath(points, types, FillMode.Alternate);
@@ -148,7 +148,7 @@ namespace Test.Sys.Drawing
                 new Point(0, 0),
                 new Point(250, 250),
                 new Point(60, 70),
-                new Point(230, 10)
+                new Point(230, 10),
             };
 
             byte[] types = new byte[]
@@ -156,7 +156,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             path = new GraphicsPath(points, types, FillMode.Alternate);
@@ -185,7 +185,7 @@ namespace Test.Sys.Drawing
                 new PointF(100.1f, 200.2f),
                 new PointF(10.2f, 150.6f),
                 new PointF(60.3f, 70.7f),
-                new PointF(250.4f, 10.7f)
+                new PointF(250.4f, 10.7f),
             };
 
             byte[] types = new byte[]
@@ -193,7 +193,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             path = new GraphicsPath(points, types, FillMode.Alternate);
@@ -246,7 +246,7 @@ namespace Test.Sys.Drawing
                 new PointF(105.7625f, 135.7396f),
                 new PointF(99.54897f, 141.9534f),
                 new PointF(91.99629f, 145.2055f),
-                new PointF(84.27972f, 144.9899f)
+                new PointF(84.27972f, 144.9899f),
             };
             for (int i = 0; i < path.PointCount; i++)
             {
@@ -271,7 +271,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -316,7 +316,7 @@ namespace Test.Sys.Drawing
                 new PointF(105.8624f, 137.0791f),
                 new PointF(99.65379f, 143.288f),
                 new PointF(92.12586f, 146.533f),
-                new PointF(84.43728f, 146.3147f)
+                new PointF(84.43728f, 146.3147f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -342,7 +342,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier
+                (byte)PathPointType.Bezier,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -387,7 +387,7 @@ namespace Test.Sys.Drawing
                 new PointF(105.7625f, 135.7396f),
                 new PointF(99.54897f, 141.9534f),
                 new PointF(91.99629f, 145.2055f),
-                new PointF(84.27972f, 144.9899f)
+                new PointF(84.27972f, 144.9899f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -413,7 +413,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -458,7 +458,7 @@ namespace Test.Sys.Drawing
                 new PointF(105.8624f, 137.0791f),
                 new PointF(99.65379f, 143.288f),
                 new PointF(92.12586f, 146.533f),
-                new PointF(84.43728f, 146.3147f)
+                new PointF(84.43728f, 146.3147f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -484,7 +484,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -528,7 +528,7 @@ namespace Test.Sys.Drawing
                 new PointF(0f, 210f),
                 new PointF(50f, 6f),
                 new PointF(150f, 150f),
-                new PointF(250f, 10f)
+                new PointF(250f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -545,7 +545,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -589,7 +589,7 @@ namespace Test.Sys.Drawing
                 new PointF(0.15f, 210.23f),
                 new PointF(50.34f, 6.45f),
                 new PointF(150.65f, 150.87f),
-                new PointF(250.0001f, 10.2345f)
+                new PointF(250.0001f, 10.2345f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -606,7 +606,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -640,7 +640,7 @@ namespace Test.Sys.Drawing
                 new PointF(0f, 210f),
                 new PointF(50f, 6f),
                 new PointF(150f, 150f),
-                new PointF(250f, 10f)
+                new PointF(250f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -657,7 +657,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -691,7 +691,7 @@ namespace Test.Sys.Drawing
                 new PointF(0.15f, 210.23f),
                 new PointF(50.34f, 6.45f),
                 new PointF(150.65f, 150.87f),
-                new PointF(250.0001f, 10.2345f)
+                new PointF(250.0001f, 10.2345f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -708,7 +708,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -732,7 +732,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -748,7 +748,7 @@ namespace Test.Sys.Drawing
                 new PointF(80f, 100f),
                 new PointF(100f, 50f),
                 new PointF(120f, 150f),
-                new PointF(140f, 100f)
+                new PointF(140f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -764,7 +764,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -788,7 +788,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -804,7 +804,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -820,7 +820,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -844,7 +844,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -875,7 +875,7 @@ namespace Test.Sys.Drawing
                 new PointF(140f, 100f),
                 new PointF(123.3333f, 91.66666f),
                 new PointF(36.66666f, 104.1667f),
-                new PointF(20f, 100f)
+                new PointF(20f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -906,7 +906,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -930,7 +930,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -961,7 +961,7 @@ namespace Test.Sys.Drawing
                 new PointF(140.07f, 100.7f),
                 new PointF(123.395f, 92.28333f),
                 new PointF(36.685f, 104.35f),
-                new PointF(20.01f, 100.1f)
+                new PointF(20.01f, 100.1f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -992,7 +992,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1016,7 +1016,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -1047,7 +1047,7 @@ namespace Test.Sys.Drawing
                 new PointF(140f, 100f),
                 new PointF(110f, 84.99999f),
                 new PointF(50f, 107.5f),
-                new PointF(20f, 100f)
+                new PointF(20f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1078,7 +1078,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1102,7 +1102,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -1133,7 +1133,7 @@ namespace Test.Sys.Drawing
                 new PointF(140.07f, 100.7f),
                 new PointF(113.39f, 87.23332f),
                 new PointF(46.69f, 106.9f),
-                new PointF(20.01f, 100.1f)
+                new PointF(20.01f, 100.1f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1164,7 +1164,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1188,7 +1188,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -1216,7 +1216,7 @@ namespace Test.Sys.Drawing
                 new PointF(120f, 150f),
                 new PointF(126.6667f, 158.3333f),
                 new PointF(136.6667f, 108.3333f),
-                new PointF(140f, 100f)
+                new PointF(140f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1244,7 +1244,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1268,7 +1268,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -1296,7 +1296,7 @@ namespace Test.Sys.Drawing
                 new PointF(120.06f, 150.6f),
                 new PointF(126.73f, 158.9667f),
                 new PointF(136.735f, 109.0167f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1324,7 +1324,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1348,7 +1348,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -1376,7 +1376,7 @@ namespace Test.Sys.Drawing
                 new PointF(120f, 150f),
                 new PointF(132f, 165f),
                 new PointF(134f, 115f),
-                new PointF(140f, 100f)
+                new PointF(140f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1404,7 +1404,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1428,7 +1428,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -1456,7 +1456,7 @@ namespace Test.Sys.Drawing
                 new PointF(120.06f, 150.6f),
                 new PointF(130.732f, 163.9867f),
                 new PointF(134.734f, 114.0067f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1484,7 +1484,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1508,7 +1508,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -1527,7 +1527,7 @@ namespace Test.Sys.Drawing
                 new PointF(60f, 125f),
                 new PointF(70.66666f, 131.6667f),
                 new PointF(69.33333f, 120f),
-                new PointF(80f, 100f)
+                new PointF(80f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1546,7 +1546,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1570,7 +1570,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -1589,7 +1589,7 @@ namespace Test.Sys.Drawing
                 new PointF(60.03f, 125.3f),
                 new PointF(70.702f, 132.02f),
                 new PointF(69.368f, 120.3467f),
-                new PointF(80.04f, 100.4f)
+                new PointF(80.04f, 100.4f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1608,7 +1608,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)PathPointType.Bezier3
+                (byte)PathPointType.Bezier3,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1643,7 +1643,7 @@ namespace Test.Sys.Drawing
                 new PointF(250f, 50f),
                 new PointF(360.4569f, 50f),
                 new PointF(450f, 67.90861f),
-                new PointF(450f, 90f)
+                new PointF(450f, 90f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1665,7 +1665,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1700,7 +1700,7 @@ namespace Test.Sys.Drawing
                 new PointF(250.16f, 50.4f),
                 new PointF(360.6501f, 50.4f),
                 new PointF(450.22f, 68.33614f),
-                new PointF(450.22f, 90.4615f)
+                new PointF(450.22f, 90.4615f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1722,7 +1722,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1757,7 +1757,7 @@ namespace Test.Sys.Drawing
                 new PointF(250f, 50f),
                 new PointF(360.4569f, 50f),
                 new PointF(450f, 67.90861f),
-                new PointF(450f, 90f)
+                new PointF(450f, 90f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1779,7 +1779,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1814,7 +1814,7 @@ namespace Test.Sys.Drawing
                 new PointF(250.16f, 50.4f),
                 new PointF(360.6501f, 50.4f),
                 new PointF(450.22f, 68.33614f),
-                new PointF(450.22f, 90.4615f)
+                new PointF(450.22f, 90.4615f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1836,7 +1836,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1870,7 +1870,7 @@ namespace Test.Sys.Drawing
                 new PointF(40f, 320f),
                 new PointF(310f, 45f),
                 new PointF(300f, 300f),
-                new PointF(48f, 62f)
+                new PointF(48f, 62f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1885,7 +1885,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1919,7 +1919,7 @@ namespace Test.Sys.Drawing
                 new PointF(40f, 320.234f),
                 new PointF(310.9999f, 45.33333f),
                 new PointF(300f, 300.97f),
-                new PointF(48.18f, 62.54f)
+                new PointF(48.18f, 62.54f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1934,7 +1934,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -1968,7 +1968,7 @@ namespace Test.Sys.Drawing
                 new PointF(40f, 320f),
                 new PointF(310f, 45f),
                 new PointF(300f, 300f),
-                new PointF(48f, 62f)
+                new PointF(48f, 62f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -1983,7 +1983,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2017,7 +2017,7 @@ namespace Test.Sys.Drawing
                 new PointF(40f, 320.234f),
                 new PointF(310.9999f, 45.33333f),
                 new PointF(300f, 300.97f),
-                new PointF(48.18f, 62.54f)
+                new PointF(48.18f, 62.54f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2032,7 +2032,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2056,7 +2056,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -2072,7 +2072,7 @@ namespace Test.Sys.Drawing
                 new PointF(80f, 100f),
                 new PointF(100f, 50f),
                 new PointF(120f, 150f),
-                new PointF(140f, 100f)
+                new PointF(140f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2088,7 +2088,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2112,7 +2112,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -2128,7 +2128,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2144,7 +2144,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2165,7 +2165,7 @@ namespace Test.Sys.Drawing
                 new Point(302, 302),
                 new Point(360, 360),
                 new Point(0, 460),
-                new Point(130, 230)
+                new Point(130, 230),
             };
 
             GraphicsPath path1 = new GraphicsPath();
@@ -2176,7 +2176,7 @@ namespace Test.Sys.Drawing
                 new Point(350, 350),
                 new Point(0, 0),
                 new Point(260, 100),
-                new Point(310, 30)
+                new Point(310, 30),
             };
 
             path = new GraphicsPath();
@@ -2195,7 +2195,7 @@ namespace Test.Sys.Drawing
                 new PointF(302f, 302f),
                 new PointF(360f, 360f),
                 new PointF(0f, 460f),
-                new PointF(130f, 230f)
+                new PointF(130f, 230f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2212,7 +2212,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2233,7 +2233,7 @@ namespace Test.Sys.Drawing
                 new Point(302, 302),
                 new Point(360, 360),
                 new Point(0, 460),
-                new Point(130, 230)
+                new Point(130, 230),
             };
 
             GraphicsPath path1 = new GraphicsPath();
@@ -2244,7 +2244,7 @@ namespace Test.Sys.Drawing
                 new Point(350, 350),
                 new Point(0, 0),
                 new Point(260, 100),
-                new Point(310, 30)
+                new Point(310, 30),
             };
 
             path = new GraphicsPath();
@@ -2263,7 +2263,7 @@ namespace Test.Sys.Drawing
                 new PointF(302f, 302f),
                 new PointF(360f, 360f),
                 new PointF(0f, 460f),
-                new PointF(130f, 230f)
+                new PointF(130f, 230f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2280,7 +2280,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2327,7 +2327,7 @@ namespace Test.Sys.Drawing
                 new PointF(318.254f, 171.0288f),
                 new PointF(310.1f, 179.1831f),
                 new PointF(275.1718f, 185.0259f),
-                new PointF(234.7346f, 184.9999f)
+                new PointF(234.7346f, 184.9999f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2355,7 +2355,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier3 | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier3 | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2402,7 +2402,7 @@ namespace Test.Sys.Drawing
                 new PointF(318.254f, 171.0288f),
                 new PointF(310.1f, 179.1831f),
                 new PointF(275.1718f, 185.0259f),
-                new PointF(234.7346f, 184.9999f)
+                new PointF(234.7346f, 184.9999f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2430,7 +2430,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier3 | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier3 | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2477,7 +2477,7 @@ namespace Test.Sys.Drawing
                 new PointF(319.474f, 171.1974f),
                 new PointF(311.2924f, 179.3794f),
                 new PointF(276.1503f, 185.2439f),
-                new PointF(235.4589f, 185.2179f)
+                new PointF(235.4589f, 185.2179f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2505,7 +2505,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
                 (byte)PathPointType.Bezier3,
-                (byte)(PathPointType.Bezier3 | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Bezier3 | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2529,7 +2529,7 @@ namespace Test.Sys.Drawing
                 new Point(80, 100),
                 new Point(100, 50),
                 new Point(120, 150),
-                new Point(140, 100)
+                new Point(140, 100),
             };
 
             path = new GraphicsPath();
@@ -2545,7 +2545,7 @@ namespace Test.Sys.Drawing
                 new PointF(80f, 100f),
                 new PointF(100f, 50f),
                 new PointF(120f, 150f),
-                new PointF(140f, 100f)
+                new PointF(140f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2561,7 +2561,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2585,7 +2585,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             path = new GraphicsPath();
@@ -2601,7 +2601,7 @@ namespace Test.Sys.Drawing
                 new PointF(80.04f, 100.4f),
                 new PointF(100.05f, 50.5f),
                 new PointF(120.06f, 150.6f),
-                new PointF(140.07f, 100.7f)
+                new PointF(140.07f, 100.7f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2617,7 +2617,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2643,7 +2643,7 @@ namespace Test.Sys.Drawing
                 new PointF(50f, 50f),
                 new PointF(450f, 50f),
                 new PointF(450f, 130f),
-                new PointF(50f, 130f)
+                new PointF(50f, 130f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2656,7 +2656,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2682,7 +2682,7 @@ namespace Test.Sys.Drawing
                 new PointF(50.1f, 50.4f),
                 new PointF(450.22f, 50.4f),
                 new PointF(450.22f, 130.523f),
-                new PointF(50.1f, 130.523f)
+                new PointF(50.1f, 130.523f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2695,7 +2695,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2717,7 +2717,7 @@ namespace Test.Sys.Drawing
                 new Rectangle(50, 50, 400, 80),
                 new Rectangle(150, 150, 100, 400),
                 new Rectangle(0, 0, 200, 480),
-                new Rectangle(450, 450, 40, 80)
+                new Rectangle(450, 450, 40, 80),
             };
             path.AddRectangles(rectangles);
 
@@ -2740,7 +2740,7 @@ namespace Test.Sys.Drawing
                 new PointF(450f, 450f),
                 new PointF(490f, 450f),
                 new PointF(490f, 530f),
-                new PointF(450f, 530f)
+                new PointF(450f, 530f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2765,7 +2765,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -2787,7 +2787,7 @@ namespace Test.Sys.Drawing
                 new RectangleF(50.10f, 50.11f, 400.1f, 80.15f),
                 new RectangleF(150f, 150.87f, 100.09f, 400.99f),
                 new RectangleF(0.123245f, 0.23f, 200.98f, 480.56f),
-                new RectangleF(450.3333333333f, 450.6666666f, 40.8f, 80.4f)
+                new RectangleF(450.3333333333f, 450.6666666f, 40.8f, 80.4f),
             };
             path.AddRectangles(rectangles);
 
@@ -2810,7 +2810,7 @@ namespace Test.Sys.Drawing
                 new PointF(450.3333f, 450.6667f),
                 new PointF(491.1333f, 450.6667f),
                 new PointF(491.1333f, 531.0667f),
-                new PointF(450.3333f, 531.0667f)
+                new PointF(450.3333f, 531.0667f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -2835,7 +2835,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3029,7 +3029,7 @@ namespace Test.Sys.Drawing
                 new PointF(310f, 420f),
                 new PointF(10f, 420f),
                 new PointF(400f, 400f),
-                new PointF(400f, 10f)
+                new PointF(400f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3052,7 +3052,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3079,7 +3079,7 @@ namespace Test.Sys.Drawing
                 new PointF(310f, 420f),
                 new PointF(10f, 420f),
                 new PointF(400f, 400f),
-                new PointF(400f, 10f)
+                new PointF(400f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3102,7 +3102,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3147,7 +3147,7 @@ namespace Test.Sys.Drawing
                 new PointF(310f, 420f),
                 new PointF(10f, 420f),
                 new PointF(400f, 400f),
-                new PointF(400f, 10f)
+                new PointF(400f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3170,7 +3170,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3197,7 +3197,7 @@ namespace Test.Sys.Drawing
                 new PointF(310f, 420f),
                 new PointF(10f, 420f),
                 new PointF(400f, 400f),
-                new PointF(400f, 10f)
+                new PointF(400f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3220,7 +3220,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3346,7 +3346,7 @@ namespace Test.Sys.Drawing
                 new PointF(235.9375f, 27.875f),
                 new PointF(240.625f, 22.3125f),
                 new PointF(245.3125f, 16.375f),
-                new PointF(250f, 10f)
+                new PointF(250f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3442,7 +3442,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3624,7 +3624,7 @@ namespace Test.Sys.Drawing
                 new PointF(470.75f, 83.625f),
                 new PointF(480.0625f, 66.9375f),
                 new PointF(489.375f, 49.0625f),
-                new PointF(498.6875f, 30f)
+                new PointF(498.6875f, 30f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3774,7 +3774,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -3886,7 +3886,7 @@ namespace Test.Sys.Drawing
                 new PointF(386.1f, 784.525f),
                 new PointF(390.7f, 802.45f),
                 new PointF(395.325f, 820.95f),
-                new PointF(400f, 840f)
+                new PointF(400f, 840f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -3973,7 +3973,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -4643,7 +4643,7 @@ namespace Test.Sys.Drawing
                 new PointF(310f, 420f),
                 new PointF(10f, 420f),
                 new PointF(400f, 400f),
-                new PointF(400f, 10f)
+                new PointF(400f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -4666,7 +4666,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath | PathPointType.PathMarker),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -4708,7 +4708,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath | PathPointType.PathMarker),
                 (byte)PathPointType.Start,
-                (byte)(PathPointType.Line | PathPointType.PathMarker)
+                (byte)(PathPointType.Line | PathPointType.PathMarker),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -4802,7 +4802,7 @@ namespace Test.Sys.Drawing
                 new PointF(10f, 100f),
                 new PointF(400f, 200f),
                 new PointF(400f, 100f),
-                new PointF(100f, 100f)
+                new PointF(100f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -4827,7 +4827,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)(PathPointType.Line | PathPointType.PathMarker),
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -4884,7 +4884,7 @@ namespace Test.Sys.Drawing
                 new PointF(10f, 100f),
                 new PointF(400f, 200f),
                 new PointF(400f, 100f),
-                new PointF(100f, 100f)
+                new PointF(100f, 100f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -4913,7 +4913,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Start,
                 (byte)(PathPointType.Line | PathPointType.PathMarker),
                 (byte)PathPointType.Line,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -4961,7 +4961,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath | PathPointType.PathMarker),
                 (byte)PathPointType.Start,
-                (byte)(PathPointType.Line | PathPointType.PathMarker)
+                (byte)(PathPointType.Line | PathPointType.PathMarker),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5006,7 +5006,7 @@ namespace Test.Sys.Drawing
                 new PointF(310f, 420f),
                 new PointF(10f, 420f),
                 new PointF(400f, 400f),
-                new PointF(400f, 10f)
+                new PointF(400f, 10f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5029,7 +5029,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5077,7 +5077,7 @@ namespace Test.Sys.Drawing
                 new PointF(484.4947f, 26.50887f),
                 new PointF(226.5823f, 322.8799f),
                 new PointF(452.173f, 10.62756f),
-                new PointF(267.6254f, -281.0212f)
+                new PointF(267.6254f, -281.0212f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5100,7 +5100,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5134,7 +5134,7 @@ namespace Test.Sys.Drawing
             {
                 new PointF(0f, 0f),
                 new PointF(50f, 50f),
-                new PointF(20f, 40f)
+                new PointF(20f, 40f),
             };
 
             path.Warp(warp, rectangle);
@@ -5159,7 +5159,7 @@ namespace Test.Sys.Drawing
                 new PointF(372.5f, 482.5f),
                 new PointF(122.5f, 232.5f),
                 new PointF(350f, 450f),
-                new PointF(255f, 260f)
+                new PointF(255f, 260f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5187,7 +5187,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5221,7 +5221,7 @@ namespace Test.Sys.Drawing
             {
                 new PointF(0f, 0f),
                 new PointF(50f, 50f),
-                new PointF(20f, 40f)
+                new PointF(20f, 40f),
             };
 
             Matrix matrix = new Matrix();
@@ -5249,7 +5249,7 @@ namespace Test.Sys.Drawing
                 new PointF(558.75f, 241.25f),
                 new PointF(183.75f, 116.25f),
                 new PointF(525f, 225f),
-                new PointF(382.5f, 130f)
+                new PointF(382.5f, 130f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5277,7 +5277,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5311,7 +5311,7 @@ namespace Test.Sys.Drawing
             {
                 new PointF(0f, 0f),
                 new PointF(50f, 50f),
-                new PointF(20f, 40f)
+                new PointF(20f, 40f),
             };
 
             Matrix matrix = new Matrix();
@@ -5343,7 +5343,7 @@ namespace Test.Sys.Drawing
                 new PointF(524.9999f, 225f),
                 new PointF(382.5f, 130f),
                 new PointF(5.064195E-08f, 8.370257E-08f),
-                new PointF(3.344191E-06f, 2.124933E-06f)
+                new PointF(3.344191E-06f, 2.124933E-06f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5375,7 +5375,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5417,7 +5417,7 @@ namespace Test.Sys.Drawing
                 new PointF(558.75f, 241.25f),
                 new PointF(183.75f, 116.25f),
                 new PointF(525f, 225f),
-                new PointF(382.5f, 130f)
+                new PointF(382.5f, 130f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5445,7 +5445,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5479,7 +5479,7 @@ namespace Test.Sys.Drawing
             {
                 new PointF(0f, 0f),
                 new PointF(50f, 50f),
-                new PointF(20f, 40f)
+                new PointF(20f, 40f),
             };
 
             Matrix matrix = new Matrix();
@@ -5507,7 +5507,7 @@ namespace Test.Sys.Drawing
                 new PointF(558.75f, 241.25f),
                 new PointF(183.75f, 116.25f),
                 new PointF(525f, 225f),
-                new PointF(382.5f, 130f)
+                new PointF(382.5f, 130f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5535,7 +5535,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)(PathPointType.Line | PathPointType.CloseSubpath),
                 (byte)PathPointType.Start,
-                (byte)PathPointType.Line
+                (byte)PathPointType.Line,
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5659,7 +5659,7 @@ namespace Test.Sys.Drawing
                 new PointF(202.5f, 20f),
                 new PointF(210f, 27.5f),
                 new PointF(10f, 27.5f),
-                new PointF(17.5f, 20f)
+                new PointF(17.5f, 20f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5765,7 +5765,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -5874,7 +5874,7 @@ namespace Test.Sys.Drawing
                 new PointF(303.75f, 9.999999f),
                 new PointF(315f, 13.75f),
                 new PointF(15f, 13.75f),
-                new PointF(26.25f, 9.999999f)
+                new PointF(26.25f, 9.999999f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -5962,7 +5962,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -6116,7 +6116,7 @@ namespace Test.Sys.Drawing
                 new PointF(303.75f, 9.999999f),
                 new PointF(315f, 13.75f),
                 new PointF(15f, 13.75f),
-                new PointF(26.25f, 9.999999f)
+                new PointF(26.25f, 9.999999f),
             };
 
             for (int i = 0; i < path.PointCount; i++)
@@ -6249,7 +6249,7 @@ namespace Test.Sys.Drawing
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
                 (byte)PathPointType.Line,
-                (byte)(PathPointType.Line | PathPointType.CloseSubpath)
+                (byte)(PathPointType.Line | PathPointType.CloseSubpath),
             };
 
             for (int i = 0; i < expectedTypes.Length; i++)
@@ -6296,7 +6296,7 @@ namespace Test.Sys.Drawing
                 PathPointType t in new PathPointType[]
                 {
                     PathPointType.PathMarker,
-                    PathPointType.CloseSubpath
+                    PathPointType.CloseSubpath,
                 }
             )
                 if ((type & t) != 0)

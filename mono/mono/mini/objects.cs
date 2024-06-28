@@ -140,7 +140,7 @@ enum SampleEnum
 {
     A,
     B,
-    C
+    C,
 }
 
 struct Alpha
@@ -1239,7 +1239,7 @@ class Tests
     {
         decimal[,] a =
         {
-            { 1 }
+            { 1 },
         };
 
         if (a[0, 0] != 1m)
@@ -1617,7 +1617,7 @@ class Tests
         None = 0,
         A = 1,
         B = 2,
-        C = 4
+        C = 4,
     }
 
     public static int test_0_intrins_enum_hasflag()
@@ -2084,7 +2084,7 @@ class Tests
 
     enum ByteEnum : byte
     {
-        Zero = 0
+        Zero = 0,
     }
 
     struct BugStruct
@@ -2168,7 +2168,7 @@ class Tests
             a = 1.0,
             b = 2.0,
             c = 3.0,
-            d = 4.0
+            d = 4.0,
         };
         var res = arm64_hfa_on_stack_inner(1, 2, 3, 4, 5, 6, 7, 8, s);
         return res == 10.0 ? 0 : 1;
@@ -2260,7 +2260,7 @@ class Tests
 
     public enum ByteEnum2 : byte
     {
-        High = 142
+        High = 142,
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -2277,7 +2277,7 @@ class Tests
     enum Mine
     {
         One,
-        Two
+        Two,
     }
 
     public static int test_0_enum_gethashcode_opt()
@@ -2312,7 +2312,7 @@ class Tests
 
     enum FooEnum
     {
-        Bar
+        Bar,
     }
 
     //https://github.com/mono/mono/issues/6666
@@ -2378,7 +2378,7 @@ class Tests
         ICollection<IFoo> arr1 = new IFooImpl[1] { new IFooImpl() };
         ICollection<IFoo> arr2 = new IFooImpl[1] { new IFooImpl() };
 
-        ICollection<IFoo>[] a2d = new ICollection<IFoo>[2] { arr1, arr2, };
+        ICollection<IFoo>[] a2d = new ICollection<IFoo>[2] { arr1, arr2 };
 
         return 0;
     }

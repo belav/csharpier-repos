@@ -894,7 +894,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x78,
             0x6F,
             0x97,
-            0x67
+            0x67,
         };
 
         internal static byte[] subjectKeyIdentifierSignature =
@@ -1706,7 +1706,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
             0x78,
             0x6F,
             0x97,
-            0x67
+            0x67,
         };
 
         internal static SignerInfo GetSignerInfo(byte[] signature)
@@ -11121,7 +11121,7 @@ namespace MonoTests.System.Security.Cryptography.Pkcs
                 129,
                 85,
                 38,
-                196
+                196,
             };
 
             SignerInfo si = GetSignerInfo(data);

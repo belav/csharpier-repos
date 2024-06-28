@@ -46,7 +46,7 @@ namespace System.Reflection
                 _typeResolver = typeResolver,
                 _throwOnError = throwOnError,
                 _ignoreCase = ignoreCase,
-                _stackMark = Unsafe.AsPointer(ref stackMark)
+                _stackMark = Unsafe.AsPointer(ref stackMark),
             }.Parse();
         }
 

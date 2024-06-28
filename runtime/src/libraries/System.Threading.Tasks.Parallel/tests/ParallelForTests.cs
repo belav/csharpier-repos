@@ -2158,7 +2158,7 @@ namespace System.Threading.Tasks.Tests
                 bool reportedAsCompleted = false;
                 var parallelOptions = new ParallelOptions
                 {
-                    CancellationToken = cancellationTokenSource.Token
+                    CancellationToken = cancellationTokenSource.Token,
                 };
                 int completedCount = 0;
                 try
@@ -2201,7 +2201,7 @@ namespace System.Threading.Tasks.Tests
                 bool reportedAsCompleted = false;
                 var parallelOptions = new ParallelOptions
                 {
-                    CancellationToken = cancellationTokenSource.Token
+                    CancellationToken = cancellationTokenSource.Token,
                 };
                 int completedCount = 0;
                 try
@@ -2255,7 +2255,7 @@ namespace System.Threading.Tasks.Tests
                 bool reportedAsCompleted = false;
                 var parallelOptions = new ParallelOptions
                 {
-                    CancellationToken = cancellationTokenSource.Token
+                    CancellationToken = cancellationTokenSource.Token,
                 };
                 int completedCount = 0;
                 try

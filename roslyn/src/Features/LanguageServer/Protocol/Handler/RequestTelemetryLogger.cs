@@ -246,6 +246,6 @@ internal sealed class RequestTelemetryLogger : IDisposable, ILspService
     {
         Succeeded,
         Failed,
-        Cancelled
+        Cancelled,
     }
 }

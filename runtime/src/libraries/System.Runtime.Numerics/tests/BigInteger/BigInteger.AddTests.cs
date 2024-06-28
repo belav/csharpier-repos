@@ -14,13 +14,13 @@ namespace System.Numerics.Tests
             {
                 BigInteger.Parse(
                     "123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123"
-                )
+                ),
             };
             yield return new object[]
             {
                 BigInteger.Parse(
                     "-123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123123"
-                )
+                ),
             };
             yield return new object[] { new BigInteger(123) };
             yield return new object[] { new BigInteger(-123) };
@@ -46,50 +46,50 @@ namespace System.Numerics.Tests
             {
                 new BigInteger(int.MinValue),
                 new BigInteger(-1),
-                new BigInteger((long)int.MinValue - 1)
+                new BigInteger((long)int.MinValue - 1),
             };
             yield return new object[]
             {
                 new BigInteger(int.MinValue),
                 new BigInteger(1),
-                new BigInteger(int.MinValue + 1)
+                new BigInteger(int.MinValue + 1),
             };
             yield return new object[]
             {
                 new BigInteger(int.MaxValue),
                 new BigInteger(-1),
-                new BigInteger(int.MaxValue - 1)
+                new BigInteger(int.MaxValue - 1),
             };
             yield return new object[]
             {
                 new BigInteger(int.MaxValue),
                 new BigInteger(1),
-                new BigInteger((long)int.MaxValue + 1)
+                new BigInteger((long)int.MaxValue + 1),
             };
 
             yield return new object[]
             {
                 new BigInteger(long.MinValue),
                 new BigInteger(-1),
-                new BigInteger(new byte[] { 255, 255, 255, 255, 255, 255, 255, 127, 255 })
+                new BigInteger(new byte[] { 255, 255, 255, 255, 255, 255, 255, 127, 255 }),
             };
             yield return new object[]
             {
                 new BigInteger(long.MinValue),
                 new BigInteger(1),
-                new BigInteger(long.MinValue + 1)
+                new BigInteger(long.MinValue + 1),
             };
             yield return new object[]
             {
                 new BigInteger(long.MaxValue),
                 new BigInteger(-1),
-                new BigInteger(long.MaxValue - 1)
+                new BigInteger(long.MaxValue - 1),
             };
             yield return new object[]
             {
                 new BigInteger(long.MaxValue),
                 new BigInteger(1),
-                new BigInteger((ulong)long.MaxValue + 1)
+                new BigInteger((ulong)long.MaxValue + 1),
             };
 
             BigInteger largePositiveBigInt = BigInteger.Parse(
@@ -108,7 +108,7 @@ namespace System.Numerics.Tests
                 ),
                 BigInteger.Parse(
                     "123123123123123357357357357357357357357357357357357357357357357357357357357357357357357"
-                )
+                ),
             };
             yield return new object[]
             {
@@ -118,7 +118,7 @@ namespace System.Numerics.Tests
                 ),
                 BigInteger.Parse(
                     "123123123123122888888888888888888888888888888888888888888888888888888888888888888888889"
-                )
+                ),
             };
 
             // Big + Small
@@ -128,7 +128,7 @@ namespace System.Numerics.Tests
                 new BigInteger(123),
                 BigInteger.Parse(
                     "123123123123123123123123123123123123123123123123123123123123123123123123123123123123246"
-                )
+                ),
             };
             yield return new object[]
             {
@@ -136,7 +136,7 @@ namespace System.Numerics.Tests
                 new BigInteger(-123),
                 BigInteger.Parse(
                     "123123123123123123123123123123123123123123123123123123123123123123123123123123123123000"
-                )
+                ),
             };
 
             // Plus Zero
@@ -147,7 +147,7 @@ namespace System.Numerics.Tests
             {
                 new BigInteger(-123),
                 BigInteger.Zero,
-                new BigInteger(-123)
+                new BigInteger(-123),
             };
             yield return new object[] { BigInteger.Zero, BigInteger.Zero, BigInteger.Zero };
 
@@ -156,31 +156,31 @@ namespace System.Numerics.Tests
             {
                 new BigInteger(Math.Pow(2, 31) + Math.Pow(2, 30)),
                 new BigInteger(Math.Pow(2, 31) + Math.Pow(2, 30)),
-                new BigInteger(6442450944)
+                new BigInteger(6442450944),
             };
             yield return new object[]
             {
                 BigInteger.Zero,
                 new BigInteger(Math.Pow(2, 32)),
-                new BigInteger(Math.Pow(2, 32))
+                new BigInteger(Math.Pow(2, 32)),
             };
             yield return new object[]
             {
                 new BigInteger(Math.Pow(2, 31)),
                 new BigInteger(Math.Pow(2, 32) + Math.Pow(2, 31)),
-                new BigInteger(8589934592)
+                new BigInteger(8589934592),
             };
             yield return new object[]
             {
                 new BigInteger(Math.Pow(2, 32)),
                 new BigInteger(Math.Pow(2, 32)),
-                new BigInteger(8589934592)
+                new BigInteger(8589934592),
             };
             yield return new object[]
             {
                 new BigInteger(Math.Pow(2, 32) + Math.Pow(2, 31)),
                 new BigInteger(Math.Pow(2, 32) + Math.Pow(2, 31)),
-                new BigInteger(12884901888)
+                new BigInteger(12884901888),
             };
 
             // Very large + very large
@@ -1180,7 +1180,7 @@ namespace System.Numerics.Tests
                         185,
                         165,
                         233,
-                        141
+                        141,
                     }
                 ),
                 new BigInteger(
@@ -1631,7 +1631,7 @@ namespace System.Numerics.Tests
                         230,
                         181,
                         86,
-                        194
+                        194,
                     }
                 ),
                 new BigInteger(
@@ -2628,9 +2628,9 @@ namespace System.Numerics.Tests
                         185,
                         165,
                         233,
-                        141
+                        141,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -3375,7 +3375,7 @@ namespace System.Numerics.Tests
                         90,
                         113,
                         91,
-                        183
+                        183,
                     }
                 ),
                 new BigInteger(
@@ -3446,7 +3446,7 @@ namespace System.Numerics.Tests
                         81,
                         133,
                         113,
-                        120
+                        120,
                     }
                 ),
                 new BigInteger(
@@ -4189,9 +4189,9 @@ namespace System.Numerics.Tests
                         90,
                         113,
                         91,
-                        183
+                        183,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -4238,7 +4238,7 @@ namespace System.Numerics.Tests
                         205,
                         133,
                         15,
-                        8
+                        8,
                     }
                 ),
                 new BigInteger(
@@ -4443,7 +4443,7 @@ namespace System.Numerics.Tests
                         155,
                         113,
                         178,
-                        224
+                        224,
                     }
                 ),
                 new BigInteger(
@@ -4648,9 +4648,9 @@ namespace System.Numerics.Tests
                         155,
                         113,
                         178,
-                        224
+                        224,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -4805,7 +4805,7 @@ namespace System.Numerics.Tests
                         200,
                         152,
                         247,
-                        65
+                        65,
                     }
                 ),
                 new BigInteger(
@@ -5079,7 +5079,7 @@ namespace System.Numerics.Tests
                         49,
                         62,
                         135,
-                        34
+                        34,
                     }
                 ),
                 new BigInteger(
@@ -5353,9 +5353,9 @@ namespace System.Numerics.Tests
                         49,
                         62,
                         135,
-                        34
+                        34,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -5723,7 +5723,7 @@ namespace System.Numerics.Tests
                         44,
                         233,
                         247,
-                        31
+                        31,
                     }
                 ),
                 new BigInteger(
@@ -5997,7 +5997,7 @@ namespace System.Numerics.Tests
                         76,
                         103,
                         245,
-                        191
+                        191,
                     }
                 ),
                 new BigInteger(
@@ -6363,9 +6363,9 @@ namespace System.Numerics.Tests
                         44,
                         233,
                         247,
-                        31
+                        31,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -6574,7 +6574,7 @@ namespace System.Numerics.Tests
                         207,
                         110,
                         246,
-                        8
+                        8,
                     }
                 ),
                 new BigInteger(
@@ -7257,7 +7257,7 @@ namespace System.Numerics.Tests
                         234,
                         143,
                         13,
-                        94
+                        94,
                     }
                 ),
                 new BigInteger(
@@ -7940,9 +7940,9 @@ namespace System.Numerics.Tests
                         234,
                         143,
                         13,
-                        94
+                        94,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -8730,7 +8730,7 @@ namespace System.Numerics.Tests
                         59,
                         165,
                         132,
-                        137
+                        137,
                     }
                 ),
                 new BigInteger(
@@ -9618,7 +9618,7 @@ namespace System.Numerics.Tests
                         149,
                         247,
                         27,
-                        5
+                        5,
                     }
                 ),
                 new BigInteger(
@@ -10506,9 +10506,9 @@ namespace System.Numerics.Tests
                         149,
                         247,
                         27,
-                        5
+                        5,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -11282,7 +11282,7 @@ namespace System.Numerics.Tests
                         96,
                         189,
                         134,
-                        32
+                        32,
                     }
                 ),
                 new BigInteger(
@@ -11883,7 +11883,7 @@ namespace System.Numerics.Tests
                         194,
                         201,
                         207,
-                        154
+                        154,
                     }
                 ),
                 new BigInteger(
@@ -12655,9 +12655,9 @@ namespace System.Numerics.Tests
                         96,
                         189,
                         134,
-                        32
+                        32,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -13422,7 +13422,7 @@ namespace System.Numerics.Tests
                         5,
                         73,
                         232,
-                        179
+                        179,
                     }
                 ),
                 new BigInteger(
@@ -13545,7 +13545,7 @@ namespace System.Numerics.Tests
                         61,
                         33,
                         173,
-                        207
+                        207,
                     }
                 ),
                 new BigInteger(
@@ -14308,9 +14308,9 @@ namespace System.Numerics.Tests
                         5,
                         73,
                         232,
-                        179
+                        179,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -14960,7 +14960,7 @@ namespace System.Numerics.Tests
                         69,
                         157,
                         50,
-                        162
+                        162,
                     }
                 ),
                 new BigInteger(
@@ -15768,7 +15768,7 @@ namespace System.Numerics.Tests
                         176,
                         22,
                         56,
-                        90
+                        90,
                     }
                 ),
                 new BigInteger(
@@ -16576,9 +16576,9 @@ namespace System.Numerics.Tests
                         176,
                         22,
                         56,
-                        90
+                        90,
                     }
-                )
+                ),
             };
 
             // Very large + very small
@@ -16653,7 +16653,7 @@ namespace System.Numerics.Tests
                         40,
                         124,
                         12,
-                        106
+                        106,
                     }
                 ),
                 new BigInteger(new byte[] { 236, 141 }),
@@ -16726,9 +16726,9 @@ namespace System.Numerics.Tests
                         40,
                         124,
                         12,
-                        106
+                        106,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -17201,7 +17201,7 @@ namespace System.Numerics.Tests
                         22,
                         183,
                         133,
-                        176
+                        176,
                     }
                 ),
                 new BigInteger(new byte[] { 212, 5 }),
@@ -17673,9 +17673,9 @@ namespace System.Numerics.Tests
                         22,
                         183,
                         133,
-                        176
+                        176,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -18117,7 +18117,7 @@ namespace System.Numerics.Tests
                         137,
                         0,
                         10,
-                        125
+                        125,
                     }
                 ),
                 new BigInteger(new byte[] { 231, 249 }),
@@ -18558,9 +18558,9 @@ namespace System.Numerics.Tests
                         137,
                         0,
                         10,
-                        125
+                        125,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -18933,7 +18933,7 @@ namespace System.Numerics.Tests
                         11,
                         176,
                         6,
-                        247
+                        247,
                     }
                 ),
                 new BigInteger(new byte[] { 213, 50 }),
@@ -19305,9 +19305,9 @@ namespace System.Numerics.Tests
                         11,
                         176,
                         6,
-                        247
+                        247,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -19857,7 +19857,7 @@ namespace System.Numerics.Tests
                         189,
                         134,
                         94,
-                        68
+                        68,
                     }
                 ),
                 new BigInteger(new byte[] { 24, 75 }),
@@ -20406,9 +20406,9 @@ namespace System.Numerics.Tests
                         189,
                         134,
                         94,
-                        68
+                        68,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -20608,7 +20608,7 @@ namespace System.Numerics.Tests
                         85,
                         202,
                         184,
-                        134
+                        134,
                     }
                 ),
                 new BigInteger(new byte[] { 228, 196 }),
@@ -20807,9 +20807,9 @@ namespace System.Numerics.Tests
                         85,
                         202,
                         184,
-                        134
+                        134,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -21100,7 +21100,7 @@ namespace System.Numerics.Tests
                         96,
                         181,
                         111,
-                        66
+                        66,
                     }
                 ),
                 new BigInteger(new byte[] { 35, 164 }),
@@ -21390,7 +21390,7 @@ namespace System.Numerics.Tests
                         96,
                         181,
                         111,
-                        66
+                        66,
                     }
                 ),
             };
@@ -21520,7 +21520,7 @@ namespace System.Numerics.Tests
                         247,
                         39,
                         99,
-                        254
+                        254,
                     }
                 ),
                 new BigInteger(new byte[] { 35, 53 }),
@@ -21647,9 +21647,9 @@ namespace System.Numerics.Tests
                         247,
                         39,
                         99,
-                        254
+                        254,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -22192,7 +22192,7 @@ namespace System.Numerics.Tests
                         60,
                         178,
                         175,
-                        66
+                        66,
                     }
                 ),
                 new BigInteger(new byte[] { 103, 220 }),
@@ -22734,9 +22734,9 @@ namespace System.Numerics.Tests
                         60,
                         178,
                         175,
-                        66
+                        66,
                     }
-                )
+                ),
             };
 
             yield return new object[]
@@ -23736,7 +23736,7 @@ namespace System.Numerics.Tests
                         56,
                         104,
                         129,
-                        53
+                        53,
                     }
                 ),
                 new BigInteger(new byte[] { 32, 58 }),
@@ -24735,9 +24735,9 @@ namespace System.Numerics.Tests
                         56,
                         104,
                         129,
-                        53
+                        53,
                     }
-                )
+                ),
             };
         }
 

@@ -41,7 +41,7 @@ namespace Wasm.Build.Tests
             { /*aot*/
                 false, /*relinking*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         [MemberData(
@@ -50,7 +50,7 @@ namespace Wasm.Build.Tests
             { /*aot*/
                 false, /*relinking*/
                 true,
-                RunHost.All
+                RunHost.All,
             }
         )]
         [MemberData(
@@ -59,7 +59,7 @@ namespace Wasm.Build.Tests
             { /*aot*/
                 true, /*relinking*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         public void ResourcesFromMainAssembly(
@@ -128,7 +128,7 @@ namespace Wasm.Build.Tests
             { /*aot*/
                 false, /*relinking*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         [MemberData(
@@ -137,7 +137,7 @@ namespace Wasm.Build.Tests
             { /*aot*/
                 false, /*relinking*/
                 true,
-                RunHost.All
+                RunHost.All,
             }
         )]
         [MemberData(
@@ -146,7 +146,7 @@ namespace Wasm.Build.Tests
             { /*aot*/
                 true, /*relinking*/
                 false,
-                RunHost.All
+                RunHost.All,
             }
         )]
         public void ResourcesFromProjectReference(

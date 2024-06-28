@@ -23,25 +23,25 @@ namespace System.Text.Json.Serialization.Tests
         private static readonly JsonSerializerOptions s_optionReadFromStr =
             new JsonSerializerOptions
             {
-                NumberHandling = JsonNumberHandling.AllowReadingFromString
+                NumberHandling = JsonNumberHandling.AllowReadingFromString,
             };
 
         private static readonly JsonSerializerOptions s_optionWriteAsStr = new JsonSerializerOptions
         {
-            NumberHandling = JsonNumberHandling.WriteAsString
+            NumberHandling = JsonNumberHandling.WriteAsString,
         };
 
         private static readonly JsonSerializerOptions s_optionReadAndWriteFromStr =
             new JsonSerializerOptions
             {
                 NumberHandling =
-                    JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString
+                    JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString,
             };
 
         private static readonly JsonSerializerOptions s_optionsAllowFloatConstants =
             new JsonSerializerOptions
             {
-                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals
+                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
             };
 
         private static readonly JsonSerializerOptions s_optionReadFromStrAllowFloatConstants =
@@ -49,7 +49,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 NumberHandling =
                     JsonNumberHandling.AllowReadingFromString
-                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                    | JsonNumberHandling.AllowNamedFloatingPointLiterals,
             };
 
         private static readonly JsonSerializerOptions s_optionWriteAsStrAllowFloatConstants =
@@ -57,7 +57,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 NumberHandling =
                     JsonNumberHandling.WriteAsString
-                    | JsonNumberHandling.AllowNamedFloatingPointLiterals
+                    | JsonNumberHandling.AllowNamedFloatingPointLiterals,
             };
 
         [Fact]
@@ -112,18 +112,16 @@ namespace System.Text.Json.Serialization.Tests
         {
             return number switch
             {
-                double @double =>
-                    @double.ToString(
-                        JsonTestHelper.DoubleFormatString,
-                        CultureInfo.InvariantCulture
-                    ),
-                float @float =>
-                    @float.ToString(
-                        JsonTestHelper.SingleFormatString,
-                        CultureInfo.InvariantCulture
-                    ),
+                double @double => @double.ToString(
+                    JsonTestHelper.DoubleFormatString,
+                    CultureInfo.InvariantCulture
+                ),
+                float @float => @float.ToString(
+                    JsonTestHelper.SingleFormatString,
+                    CultureInfo.InvariantCulture
+                ),
                 decimal @decimal => @decimal.ToString(CultureInfo.InvariantCulture),
-                _ => Convert.ToString(number, CultureInfo.InvariantCulture)
+                _ => Convert.ToString(number, CultureInfo.InvariantCulture),
             };
         }
 
@@ -350,7 +348,7 @@ namespace System.Text.Json.Serialization.Tests
             var obj = new Class_With_ListsOfBoxedNumbers
             {
                 MyInts = new List<object> { @int },
-                MyNullableFloats = new object[] { nullableFloat }
+                MyNullableFloats = new object[] { nullableFloat },
             };
 
             string serialized = await Serializer.SerializeWrapper(obj);
@@ -392,7 +390,7 @@ namespace System.Text.Json.Serialization.Tests
             var obj = new Class_With_BoxedNonNumbers
             {
                 MyDateTime = dateTime,
-                MyNullableGuid = nullableGuid
+                MyNullableGuid = nullableGuid,
             };
 
             string serialized = await Serializer.SerializeWrapper(obj);
@@ -471,7 +469,7 @@ namespace System.Text.Json.Serialization.Tests
             var obj = new Class_With_ListsOfBoxedNonNumbers
             {
                 MyDateTimes = new List<object> { dateTime },
-                MyNullableGuids = new object[] { nullableGuid }
+                MyNullableGuids = new object[] { nullableGuid },
             };
 
             string serialized = await Serializer.SerializeWrapper(obj);
@@ -935,7 +933,7 @@ namespace System.Text.Json.Serialization.Tests
             var obj = new Class_With_NullableUInt64_And_Float()
             {
                 NullableUInt64Number = JsonNumberTestData.NullableULongs.LastOrDefault(),
-                FloatNumbers = JsonNumberTestData.Floats
+                FloatNumbers = JsonNumberTestData.Floats,
             };
 
             // Serialize
@@ -1393,7 +1391,7 @@ namespace System.Text.Json.Serialization.Tests
 
         private async Task AssertFloatingPointIncompatible_Fails<T>()
         {
-            string[] testCases = new[] { @"""NaN""", @"""Infinity""", @"""-Infinity""", };
+            string[] testCases = new[] { @"""NaN""", @"""Infinity""", @"""-Infinity""" };
 
             foreach (string test in testCases)
             {
@@ -1520,7 +1518,7 @@ namespace System.Text.Json.Serialization.Tests
             JavaScriptEncoder encoder = JavaScriptEncoder.Create(encoderSettings);
             var options = new JsonSerializerOptions(s_optionReadAndWriteFromStr)
             {
-                Encoder = encoder
+                Encoder = encoder,
             };
 
             await PerformEscapingTest(JsonNumberTestData.Bytes, options);
@@ -2013,8 +2011,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 MyList = new List<ClassWith_StrictAttribute>
                 {
-                    new ClassWith_StrictAttribute { Float = 1 }
-                }
+                    new ClassWith_StrictAttribute { Float = 1 },
+                },
             };
             Assert.Equal(
                 @"{""MyList"":[{""Float"":1}]}",
@@ -2104,8 +2102,8 @@ namespace System.Text.Json.Serialization.Tests
             {
                 MyDictionary = new Dictionary<string, ClassWith_StrictAttribute>
                 {
-                    ["Key"] = new ClassWith_StrictAttribute { Float = 1 }
-                }
+                    ["Key"] = new ClassWith_StrictAttribute { Float = 1 },
+                },
             };
             Assert.Equal(
                 @"{""MyDictionary"":{""Key"":{""Float"":1}}}",
@@ -2186,7 +2184,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var obj = new AttributeAppliedToFirstLevelProp
             {
-                NestedClass = new NonNumberType { MyInt = 1 }
+                NestedClass = new NonNumberType { MyInt = 1 },
             };
             Assert.Equal(
                 @"{""NestedClass"":{""MyInt"":1}}",
@@ -2235,7 +2233,7 @@ namespace System.Text.Json.Serialization.Tests
 
             var obj1 = new MyCustomDictionaryWrapper
             {
-                Dictionary = new MyCustomDictionary { ["Key"] = 1 }
+                Dictionary = new MyCustomDictionary { ["Key"] = 1 },
             };
             Assert.Equal(@"{""Dictionary"":{""Key"":1}}", await Serializer.SerializeWrapper(obj1));
         }
@@ -2348,7 +2346,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions(s_optionReadAndWriteFromStr)
             {
-                Converters = { new ConverterForInt32(), new ConverterForFloat() }
+                Converters = { new ConverterForInt32(), new ConverterForFloat() },
             };
 
             string json = @"""32""";
@@ -2432,7 +2430,7 @@ namespace System.Text.Json.Serialization.Tests
             var list = new List<int> { 1 };
             var options = new JsonSerializerOptions(s_optionReadAndWriteFromStr)
             {
-                Converters = { new ConverterForInt32() }
+                Converters = { new ConverterForInt32() },
             };
 
             // Assert converter methods are called and not Read/WriteWithNumberHandling (which would throw InvalidOperationException).
@@ -2585,7 +2583,7 @@ namespace System.Text.Json.Serialization.Tests
             var dict = new Dictionary<int, int?> { [1] = 1 };
             var options = new JsonSerializerOptions(s_optionReadAndWriteFromStr)
             {
-                Converters = { new ConverterForNullableInt32() }
+                Converters = { new ConverterForNullableInt32() },
             };
 
             // Assert converter methods are called and not Read/WriteWithNumberHandling (which would throw InvalidOperationException).
@@ -2672,7 +2670,7 @@ namespace System.Text.Json.Serialization.Tests
             {
                 NumberHandling =
                     JsonNumberHandling.AllowReadingFromString | JsonNumberHandling.WriteAsString,
-                Converters = { new AdaptableInt32Converter() }
+                Converters = { new AdaptableInt32Converter() },
             };
 
             obj = new PlainClassWithList() { Prop = new List<int>() { 1 } };

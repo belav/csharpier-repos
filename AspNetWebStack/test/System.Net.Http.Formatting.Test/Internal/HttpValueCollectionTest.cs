@@ -44,7 +44,7 @@ namespace System.Net.Http.Internal
                         new KeyValuePair<string, string>("n+4", "v+4"),
                         new KeyValuePair<string, string>("n;5", "v;5"),
                         new KeyValuePair<string, string>("n=5", "v=5"),
-                    }
+                    },
                 };
             }
         }

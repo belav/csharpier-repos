@@ -297,6 +297,7 @@ public class ByteMark
             .6225, /* Neural Net */
             .6225, /* Neural Net */
             19.3031 /* LU Decomposition */
+            ,
         };
 
         s_tests = new HarnessTest[14]
@@ -572,7 +573,7 @@ public class ByteMark
         DONNETJAGGED = 48, /* DONNETJAGGED */
         DONNETRECT = 49, /* DONNETRECT */
 
-        MAXPARAM = 49
+        MAXPARAM = 49,
     }
 
     /* Parameter names */
@@ -628,7 +629,7 @@ public class ByteMark
         "DOASSIGNJAGGED",
         "DOASSIGNRECT",
         "DONNETJAGGED",
-        "DONNETRECT"
+        "DONNETRECT",
     };
 
     /*****************

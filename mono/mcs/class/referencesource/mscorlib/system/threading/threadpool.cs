@@ -2090,7 +2090,7 @@ namespace System.Threading
             return EnumerateQueuedWorkItems(
                 new ThreadPoolWorkQueue.WorkStealingQueue[]
                 {
-                    ThreadPoolWorkQueueThreadLocals.threadLocals.workStealingQueue
+                    ThreadPoolWorkQueueThreadLocals.threadLocals.workStealingQueue,
                 },
                 null
             );

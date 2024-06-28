@@ -94,7 +94,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x89,
                 0xAB,
                 0xCD,
-                0xEF
+                0xEF,
             };
             TripleDES algo = TripleDES.Create();
             algo.Key = wk128;
@@ -129,7 +129,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xCD,
                 0xCD,
                 0xCD,
-                0xCD
+                0xCD,
             };
             TripleDES algo = TripleDES.Create();
             algo.Key = wk192;
@@ -164,7 +164,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x89,
                 0xAB,
                 0xCD,
-                0xEF
+                0xEF,
             };
             TripleDES algo = TripleDES.Create();
             algo.Key = wk192;
@@ -200,7 +200,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x89,
                 0xAB,
                 0xCD,
-                0xEF
+                0xEF,
             };
             TripleDES algo = TripleDES.Create();
             algo.Key = wk128;
@@ -235,7 +235,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x89,
                 0xAB,
                 0xCD,
-                0xEF
+                0xEF,
             };
             TripleDES algo = TripleDES.Create();
             algo.Key = wk192;

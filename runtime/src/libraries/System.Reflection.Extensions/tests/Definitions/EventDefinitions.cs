@@ -23,7 +23,7 @@ namespace System.Reflection.Tests
             "EventInternalStatic",
             "EventPrivate",
             "EventProtected",
-            "EventProtectedStatic"
+            "EventProtectedStatic",
         };
         public static string[] InheritedEvents = new string[] { };
         public static string[] InheritedButHiddenEvents = new string[] { };
@@ -50,7 +50,7 @@ namespace System.Reflection.Tests
         {
             "EventPublic",
             "EventInternal",
-            "EventProtected"
+            "EventProtected",
         };
         public static new string[] InheritedButHiddenEvents = new string[] { };
         public static new string[] PublicEvents = new string[] { };
@@ -64,12 +64,12 @@ namespace System.Reflection.Tests
         public static new string[] DeclaredEvents = new string[]
         {
             "EventProtected",
-            "EventPublicNew"
+            "EventPublicNew",
         };
         public static new string[] InheritedEvents = new string[]
         {
             "EventPublic",
-            "EventInternal"
+            "EventInternal",
         };
         public static new string[] InheritedButHiddenEvents = new string[] { "EventProtected" };
         public static new string[] PublicEvents = new string[] { "EventPublic", "EventPublicNew" };
@@ -88,21 +88,21 @@ namespace System.Reflection.Tests
             "eVentProtected",
             "eVentPublicNew",
             "eVENTInternal",
-            "eVentPriVate"
+            "eVentPriVate",
         };
         public static new string[] InheritedEvents = new string[]
         {
             "EventPublic",
             "EventInternal",
             "EventProtected",
-            "EventPublicNew"
+            "EventPublicNew",
         };
         public static new string[] InheritedButHiddenEvents = new string[] { "EventProtected" };
         public static new string[] PublicEvents = new string[]
         {
             "eVentPublicNew",
             "EventPublic",
-            "EventPublicNew"
+            "EventPublicNew",
         };
 
         protected event EventHandler eVentProtected; // overrides the ProEvent from EventFieldTest parent

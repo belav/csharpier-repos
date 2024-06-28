@@ -1233,6 +1233,6 @@ namespace System.ServiceModel.Dispatcher
     {
         Acquired,
         Wait,
-        Fault
+        Fault,
     };
 }

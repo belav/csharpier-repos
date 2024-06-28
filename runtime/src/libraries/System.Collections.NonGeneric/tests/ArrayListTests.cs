@@ -3368,7 +3368,7 @@ namespace System.Collections.Tests
             "Atom",
             "Batman",
             "Black Canary",
-            "Captain America"
+            "Captain America",
         };
 
         private IList _iList;

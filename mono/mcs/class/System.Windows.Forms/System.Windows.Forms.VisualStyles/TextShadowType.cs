@@ -32,6 +32,6 @@ namespace System.Windows.Forms.VisualStyles
     {
         None = 0,
         Single = 1,
-        Continuous = 2
+        Continuous = 2,
     }
 }

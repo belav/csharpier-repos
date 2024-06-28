@@ -253,7 +253,7 @@ namespace System.Data.SqlClient
             0xff,
             0xff,
             0xff,
-            0xff
+            0xff,
         };
 
         private static object s_tdsParserLock = new object();
@@ -271,7 +271,7 @@ namespace System.Data.SqlClient
             0x00,
             0x00,
             0x00,
-            0x00
+            0x00,
         };
 
         // size of Guid  (e.g. _clientConnectionId, ActivityId.Id)
@@ -4047,7 +4047,7 @@ namespace System.Data.SqlClient
                             _version = seqNum,
                             _dataLength = stateLen,
                             _data = buffer,
-                            _recoverable = recoverable
+                            _recoverable = recoverable,
                         };
                         sdata._deltaDirty = true;
                         if (!recoverable)

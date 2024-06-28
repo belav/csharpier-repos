@@ -32,7 +32,7 @@ public unsafe class DebugInfoTest
                 "Microsoft-Windows-DotNETRuntime",
                 eventLevel: EventLevel.Verbose,
                 keywords: (long)keywords
-            )
+            ),
         };
 
         return IpcTraceTest.RunAndValidateEventCounts(

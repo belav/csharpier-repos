@@ -107,7 +107,7 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 List<SafeHandle> extraCertHandles = new List<SafeHandle>()
                 {
-                    ((AndroidCertificatePal)cert).SafeHandle
+                    ((AndroidCertificatePal)cert).SafeHandle,
                 };
                 if (extraStore != null)
                 {
@@ -443,7 +443,7 @@ namespace System.Security.Cryptography.X509Certificates
                 return new X509ChainStatus
                 {
                     Status = statusFlags,
-                    StatusInformation = Marshal.PtrToStringUni(error.Message)
+                    StatusInformation = Marshal.PtrToStringUni(error.Message),
                 };
             }
 

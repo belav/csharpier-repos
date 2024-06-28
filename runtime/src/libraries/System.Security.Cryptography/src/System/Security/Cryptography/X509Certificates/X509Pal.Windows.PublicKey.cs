@@ -221,7 +221,7 @@ namespace System.Security.Cryptography.X509Certificates
                     ecParams.Q = new ECPoint
                     {
                         X = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbKey),
-                        Y = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbKey)
+                        Y = Interop.BCrypt.Consume(ecBlob, ref offset, pBcryptBlob->cbKey),
                     };
 
                     if (includePrivateParameters)

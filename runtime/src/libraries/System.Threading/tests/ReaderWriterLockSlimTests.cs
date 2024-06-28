@@ -474,7 +474,7 @@ namespace System.Threading.Tests
                 var readerThreads = new Thread[]
                 {
                     new Thread(EnterAndExitReadLock),
-                    new Thread(EnterAndExitReadLock)
+                    new Thread(EnterAndExitReadLock),
                 };
                 foreach (var readerThread in readerThreads)
                 {

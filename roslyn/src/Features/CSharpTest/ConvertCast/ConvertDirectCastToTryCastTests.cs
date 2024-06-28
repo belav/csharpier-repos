@@ -292,8 +292,8 @@ public class C
                         DiagnosticResult
                             .CompilerError("CS0246")
                             .WithLocation(0)
-                            .WithArguments("MissingType")
-                    }
+                            .WithArguments("MissingType"),
+                    },
                 },
                 FixedCode = InitialMarkup,
                 OffersEmptyRefactoring = false,

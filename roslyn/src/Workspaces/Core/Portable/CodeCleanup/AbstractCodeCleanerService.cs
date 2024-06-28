@@ -896,7 +896,7 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             /// <summary>
             /// Span ends at the end of the tree
             /// </summary>
-            EndOfFile
+            EndOfFile,
         }
 
         /// <summary>

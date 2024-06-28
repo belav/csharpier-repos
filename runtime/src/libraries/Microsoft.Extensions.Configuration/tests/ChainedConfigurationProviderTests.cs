@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.Configuration.Test
                         .Add(
                             new MemoryConfigurationSource
                             {
-                                InitialData = new Dictionary<string, string>() { { "a:b", "c" } }
+                                InitialData = new Dictionary<string, string>() { { "a:b", "c" } },
                             }
                         )
                         .Build(),
@@ -42,7 +42,7 @@ namespace Microsoft.Extensions.Configuration.Test
         {
             var providers = new IConfigurationProvider[]
             {
-                new TestConfigurationProvider("foo", "foo-value")
+                new TestConfigurationProvider("foo", "foo-value"),
             };
             var chainedConfigurationSource = new ChainedConfigurationSource
             {

@@ -55,14 +55,14 @@ namespace Newtonsoft.Json.Tests.LinqToSql
                 new PersonRole
                 {
                     PersonRoleId = new Guid("B012DD41-71DF-4839-B8D5-D1333FB886BC"),
-                    Role = role
+                    Role = role,
                 }
             );
 
             person.Department = new Department
             {
                 DepartmentId = new Guid("08F68BF9-929B-4434-BC47-C9489D22112B"),
-                Name = "Name!"
+                Name = "Name!",
             };
 
             string json = JsonConvert.SerializeObject(

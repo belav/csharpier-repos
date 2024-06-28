@@ -130,7 +130,7 @@ public enum TestEnum
 {
     Red = 1,
     Green,
-    Blue
+    Blue,
 }
 
 [StructLayout(LayoutKind.Sequential)]
@@ -972,7 +972,7 @@ public class Test
 
         EnregisterableNonBlittable_Seq s15 = new EnregisterableNonBlittable_Seq
         {
-            arr = new TestEnum[3] { TestEnum.Red, TestEnum.Green, TestEnum.Blue }
+            arr = new TestEnum[3] { TestEnum.Red, TestEnum.Green, TestEnum.Blue },
         };
 
         Assert.True(TakeEnregistrableNonBlittableSeqStructByVal(s15, s15.arr));
@@ -983,8 +983,8 @@ public class Test
             {
                 new SimpleStruct { fld = 10 },
                 new SimpleStruct { fld = 25 },
-                new SimpleStruct { fld = 40 }
-            }
+                new SimpleStruct { fld = 40 },
+            },
         };
 
         Assert.True(TakeEnregisterableUserTypeStructByVal(s16, s16.arr));

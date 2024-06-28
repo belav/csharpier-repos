@@ -201,7 +201,7 @@ internal sealed class RpcClient
             Method = methodName,
             Parameters = parameters.SelectAsArray(static p =>
                 p is not null ? JToken.FromObject(p) : JValue.CreateNull()
-            )
+            ),
         };
 
         var requestJson = JsonConvert.SerializeObject(

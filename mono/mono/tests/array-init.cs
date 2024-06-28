@@ -9,7 +9,7 @@ namespace Test
         {
             { 0, 1 },
             { 4, 5 },
-            { 10, 20 }
+            { 10, 20 },
         };
 
         public static int Main()
@@ -48,7 +48,7 @@ namespace Test
                 { 0, 1 },
                 { 2, 3 },
                 { 4, 5 },
-                { 6, 7 }
+                { 6, 7 },
             };
             if (j[1, 1] != 3)
                 return num;

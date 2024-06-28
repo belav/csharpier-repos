@@ -20,7 +20,7 @@ namespace System.Workflow.ComponentModel.Design
     internal enum AnchorAlignment
     {
         Near = 0,
-        Far = 1
+        Far = 1,
     }
     #endregion
 
@@ -3006,11 +3006,9 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     int index = this.items.IndexOf(ActiveItem) + incr;
                     index =
-                        (index >= this.items.Count)
-                            ? 0
-                            : (index < 0)
-                                ? this.items.Count - 1
-                                : index;
+                        (index >= this.items.Count) ? 0
+                        : (index < 0) ? this.items.Count - 1
+                        : index;
                     ActiveItem = this.items[index];
                 }
             }
@@ -3218,11 +3216,9 @@ namespace System.Workflow.ComponentModel.Design
             int index = this.items.IndexOf(ActiveItem);
             if (index >= 0)
                 newMarker =
-                    (index < this.scrollMarker)
-                        ? index
-                        : (index >= this.scrollMarker + VisibleItemCount)
-                            ? index - VisibleItemCount + 1
-                            : newMarker;
+                    (index < this.scrollMarker) ? index
+                    : (index >= this.scrollMarker + VisibleItemCount) ? index - VisibleItemCount + 1
+                    : newMarker;
 
             //If there are more items in the strip than displayed then we need to display what ever we can
             if (
@@ -3370,7 +3366,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 LeftScroll = 1,
                 Item = 2,
-                RightScroll = 3
+                RightScroll = 3,
             }
 
             private AccessibleObjectType accessibleObjectType;

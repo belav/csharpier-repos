@@ -1557,7 +1557,7 @@ namespace System.ServiceModel.Security
                     typeof(IReplyChannel),
                     typeof(IDuplexChannel),
                     typeof(IReplySessionChannel),
-                    typeof(IDuplexSessionChannel)
+                    typeof(IDuplexSessionChannel),
                 };
 
                 IChannelListener listener = null;

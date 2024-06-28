@@ -38,11 +38,12 @@ namespace System.Linq.Tests
         {
             return type switch
             {
-                { } x when x == typeof(TestReadOnlyCollection<T>) =>
-                    new TestReadOnlyCollection<T>(array),
+                { } x when x == typeof(TestReadOnlyCollection<T>) => new TestReadOnlyCollection<T>(
+                    array
+                ),
                 { } x when x == typeof(TestCollection<T>) => new TestCollection<T>(array),
                 { } x when x == typeof(TestEnumerable<T>) => new TestEnumerable<T>(array),
-                _ => throw new Exception()
+                _ => throw new Exception(),
             };
         }
 
@@ -166,7 +167,7 @@ namespace System.Linq.Tests
                     new[] { 9999, 0, 888 },
                     new[] { -1, 66, -777 },
                     new[] { 1, 2, -12345 },
-                    new[] { 10 }
+                    new[] { 10 },
                 },
                 chunks
             );

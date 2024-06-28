@@ -15,7 +15,7 @@ namespace System.Threading.RateLimiting.Tests
             {
                 PermitLimit = 10,
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 10
+                QueueLimit = 10,
             };
             var partition = RateLimitPartition.GetConcurrencyLimiter(1, key => options);
 
@@ -37,7 +37,7 @@ namespace System.Threading.RateLimiting.Tests
                 QueueLimit = 10,
                 ReplenishmentPeriod = TimeSpan.FromMinutes(1),
                 TokensPerPeriod = 1,
-                AutoReplenishment = true
+                AutoReplenishment = true,
             };
             var partition = RateLimitPartition.GetTokenBucketLimiter(1, key => options);
 
@@ -129,7 +129,7 @@ namespace System.Threading.RateLimiting.Tests
                     {
                         PermitLimit = 1,
                         QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                        QueueLimit = 10
+                        QueueLimit = 10,
                     }
                 )
             );
@@ -148,7 +148,7 @@ namespace System.Threading.RateLimiting.Tests
                         QueueLimit = 10,
                         ReplenishmentPeriod = TimeSpan.FromMilliseconds(100),
                         TokensPerPeriod = 1,
-                        AutoReplenishment = false
+                        AutoReplenishment = false,
                     }
                 )
             );
@@ -166,7 +166,7 @@ namespace System.Threading.RateLimiting.Tests
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 10,
                 Window = TimeSpan.FromMinutes(1),
-                AutoReplenishment = true
+                AutoReplenishment = true,
             };
             var partition = RateLimitPartition.GetFixedWindowLimiter(1, key => options);
 
@@ -190,7 +190,7 @@ namespace System.Threading.RateLimiting.Tests
                 QueueLimit = 10,
                 Window = TimeSpan.FromSeconds(33),
                 SegmentsPerWindow = 3,
-                AutoReplenishment = true
+                AutoReplenishment = true,
             };
             var partition = RateLimitPartition.GetSlidingWindowLimiter(1, key => options);
 

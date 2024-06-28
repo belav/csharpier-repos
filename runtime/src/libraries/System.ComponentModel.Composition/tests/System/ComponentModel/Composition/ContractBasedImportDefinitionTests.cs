@@ -113,7 +113,7 @@ namespace System.ComponentModel.Composition
         {
             var requiredMetadata = new KeyValuePair<string, Type>[]
             {
-                new KeyValuePair<string, Type>(null, typeof(object))
+                new KeyValuePair<string, Type>(null, typeof(object)),
             };
 
             var import = new ContractBasedImportDefinition(
@@ -137,7 +137,7 @@ namespace System.ComponentModel.Composition
         {
             var requiredMetadata = new KeyValuePair<string, Type>[]
             {
-                new KeyValuePair<string, Type>("key", null)
+                new KeyValuePair<string, Type>("key", null),
             };
             var import = new ContractBasedImportDefinition(
                 "requiredMetadata",
@@ -160,7 +160,7 @@ namespace System.ComponentModel.Composition
         {
             var requiredMetadata = new KeyValuePair<string, Type>[]
             {
-                new KeyValuePair<string, Type>("key", null)
+                new KeyValuePair<string, Type>("key", null),
             };
             var definition = new ContractBasedImportDefinition(
                 "metadata",

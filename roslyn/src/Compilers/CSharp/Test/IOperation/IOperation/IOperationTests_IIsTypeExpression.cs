@@ -85,7 +85,7 @@ IIsTypeOperation (OperationKind.IsType, Type: System.Boolean) (Syntax: 'myInt is
                 //             bool b = /*<bind>*/myInt is int/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_IsAlwaysTrue, "myInt is int")
                     .WithArguments("int")
-                    .WithLocation(13, 32)
+                    .WithLocation(13, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -170,7 +170,7 @@ IIsTypeOperation (OperationKind.IsType, Type: System.Boolean) (Syntax: 'null is 
                 //             bool b = /*<bind>*/null is TestType/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "null is TestType")
                     .WithArguments("TestIsOperator.TestType")
-                    .WithLocation(14, 32)
+                    .WithLocation(14, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -210,7 +210,7 @@ IIsTypeOperation (OperationKind.IsType, Type: System.Boolean) (Syntax: '1 is col
                 //         var b = /*<bind>*/1 is color/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_IsAlwaysFalse, "1 is color")
                     .WithArguments("color")
-                    .WithLocation(6, 27)
+                    .WithLocation(6, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(

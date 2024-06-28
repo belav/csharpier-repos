@@ -77,7 +77,7 @@ namespace Microsoft.Extensions.Configuration
                     _refCountedProviders.Providers
                 )
                 {
-                    provider
+                    provider,
                 };
             }
         }

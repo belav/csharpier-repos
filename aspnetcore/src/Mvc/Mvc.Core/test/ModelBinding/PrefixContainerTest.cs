@@ -207,7 +207,7 @@ public class PrefixContainerTest
             "[item1].name",
             "[item1].age",
             "foo",
-            "foo.bar"
+            "foo.bar",
         };
         var container = new PrefixContainer(keys);
 
@@ -259,7 +259,7 @@ public class PrefixContainerTest
             "foo.age",
             "foo[1].name",
             "food[item].spice",
-            "foo.name.first"
+            "foo.name.first",
         };
         var container = new PrefixContainer(keys);
 
@@ -300,7 +300,7 @@ public class PrefixContainerTest
         {
             "person[0].address[0].street",
             "person[0].address[1].street",
-            "person[0].address[1].zip"
+            "person[0].address[1].zip",
         };
         var container = new PrefixContainer(keys);
 

@@ -45,7 +45,7 @@ public class IISTestSiteFixture : IDisposable
             ApplicationPublisher = new PublishedApplicationPublisher(
                 Helpers.GetInProcessTestSitesName()
             ),
-            ServerType = DeployerSelector.ServerType
+            ServerType = DeployerSelector.ServerType,
         };
     }
 

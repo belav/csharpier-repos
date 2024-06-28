@@ -200,7 +200,7 @@ namespace MonoTests.System.Data.Connected.SqlClient
                 "insert into datetime_family (id, type_datetime) values (6000, @type_datetime)";
             string delete_data = "delete from datetime_family where id = 6000";
 
-            object[] values = new object[] { 5, true, 40L, "invalid date", };
+            object[] values = new object[] { 5, true, 40L, "invalid date" };
 
             try
             {

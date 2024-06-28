@@ -619,7 +619,7 @@ public class When_mapping_to_a_dto_member_with_custom_mapping : AutoMapperSpecBa
             Value2fff = 42,
             Value3 = 42,
             Value4 = 42,
-            Value5 = 42
+            Value5 = 42,
         };
         _result = Mapper.Map<ModelObject, ModelDto>(model);
     }
@@ -1352,7 +1352,7 @@ public class When_using_inheritance_with_value_resoluvers : AutoMapperSpecBase
         {
             Id = 1,
             NumberValue = "13",
-            ChildField = "alpha"
+            ChildField = "alpha",
         };
 
         // destination = { Ident: 1, Number: 0 /* should be 13 */, ChildField: "alpha" }
@@ -1532,7 +1532,7 @@ public class When_destination_property_does_not_have_a_setter : AutoMapperSpecBa
         {
             Name = "jon",
             Value = "value",
-            Foo = "bar"
+            Foo = "bar",
         };
         _dest = new Destination();
         _dest = Mapper.Map<Source, Destination>(_source);

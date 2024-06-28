@@ -28,7 +28,7 @@ internal sealed class InternalUseFieldName
             IsStatic.Name,
             IsNewSlot.Name,
             IsBackingField.Name,
-            ParentTypeId.Name
+            ParentTypeId.Name,
         };
 
     private InternalUseFieldName(string fieldName) => Name = $"__{fieldName}__";

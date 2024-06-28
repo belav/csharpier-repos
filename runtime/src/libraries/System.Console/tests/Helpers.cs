@@ -49,7 +49,7 @@ class Helpers
             Console.SetOut(
                 new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true)
                 {
-                    AutoFlush = true
+                    AutoFlush = true,
                 }
             );
             command(data);
@@ -73,14 +73,14 @@ class Helpers
                     Console.OpenStandardOutput(),
                     new StreamWriter(data, new UTF8Encoding(false), 0x1000, leaveOpen: true)
                     {
-                        AutoFlush = true
+                        AutoFlush = true,
                     },
                     new UTF8Encoding(false),
                     0x1000,
                     leaveOpen: true
                 )
                 {
-                    AutoFlush = true
+                    AutoFlush = true,
                 }
             );
             command(data);

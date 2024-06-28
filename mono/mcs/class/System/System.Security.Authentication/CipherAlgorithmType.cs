@@ -42,6 +42,6 @@ namespace System.Security.Authentication
         Des = 0x6601,
         Rc2 = 0x6602,
         Rc4 = 0x6801,
-        TripleDes = 0x6603
+        TripleDes = 0x6603,
     }
 }

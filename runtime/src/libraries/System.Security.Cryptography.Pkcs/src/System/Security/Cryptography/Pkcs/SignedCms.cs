@@ -634,7 +634,7 @@ namespace System.Security.Cryptography.Pkcs
             {
                 _signedData.CertificateSet[i] = new CertificateChoiceAsn
                 {
-                    Certificate = newCerts[i - existingLength].RawData
+                    Certificate = newCerts[i - existingLength].RawData,
                 };
             }
         }
@@ -738,7 +738,7 @@ namespace System.Security.Cryptography.Pkcs
 
             _signedData.CertificateSet[existingLength] = new CertificateChoiceAsn
             {
-                Certificate = rawData
+                Certificate = rawData,
             };
 
             Reencode();

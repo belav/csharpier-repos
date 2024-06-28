@@ -484,7 +484,7 @@ namespace System.Web.Mvc.Test
             CustomConverterController controller = new CustomConverterController();
             Dictionary<string, object> values = new Dictionary<string, object>
             {
-                { "foo", "fooValue" }
+                { "foo", "fooValue" },
             };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
@@ -551,7 +551,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> values = new Dictionary<string, object>
             {
                 { "foo", "fooValue" },
-                { "bar", "barValue" }
+                { "bar", "barValue" },
             };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
@@ -581,7 +581,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> values = new Dictionary<string, object>
             {
                 { "intprop", "123" },
-                { "stringprop", "hello" }
+                { "stringprop", "hello" },
             };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
@@ -612,7 +612,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> values = new Dictionary<string, object>
             {
                 { "foo", "fooValue" },
-                { "bar", "barValue" }
+                { "bar", "barValue" },
             };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
@@ -642,7 +642,7 @@ namespace System.Web.Mvc.Test
             Dictionary<string, object> values = new Dictionary<string, object>
             {
                 { "intprop", "123" },
-                { "stringprop", "hello" }
+                { "stringprop", "hello" },
             };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
@@ -677,7 +677,7 @@ namespace System.Web.Mvc.Test
                 { "foo", "fooValue" },
                 { "bar", "barValue" },
                 { "intprop", "123" },
-                { "stringprop", "hello" }
+                { "stringprop", "hello" },
             };
             ControllerContext controllerContext = GetControllerContext(controller, values);
             controller.ControllerContext = controllerContext;
@@ -735,7 +735,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> dict = new Dictionary<string, object>()
             {
-                { "id", DateTime.Now } // cannot convert DateTime to Nullable<int>
+                {
+                    "id",
+                    DateTime.Now
+                } // cannot convert DateTime to Nullable<int>
+                ,
             };
             var controller = new ParameterTestingController();
             ControllerContext context = GetControllerContext(controller, dict);
@@ -878,7 +882,7 @@ namespace System.Web.Mvc.Test
             {
                 { "foo", "MyFoo" },
                 { "bar", "MyBar" },
-                { "baz", "MyBaz" }
+                { "baz", "MyBaz" },
             };
             ControllerContext context = GetControllerContext(controller, dict);
             controller.ControllerContext = context;
@@ -907,7 +911,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Dictionary<string, object> values = new Dictionary<string, object>()
             {
-                { "foo", "fooValue" }
+                { "foo", "fooValue" },
             };
 
             CustomConverterController controller = new CustomConverterController();
@@ -951,7 +955,7 @@ namespace System.Web.Mvc.Test
                 null /* exception */
             )
             {
-                Result = actionResult
+                Result = actionResult,
             };
             ActionResult challengeResult = new EmptyResult();
             AuthenticationContext authenticationContext = new AuthenticationContext();
@@ -1165,7 +1169,7 @@ namespace System.Web.Mvc.Test
                     Assert.Same(action, filterContext.ActionDescriptor);
                     Assert.False(filterContext.ExceptionHandled);
                     filterContext.ExceptionHandled = true;
-                }
+                },
             };
             Func<ActionExecutedContext> continuation = delegate
             {
@@ -1216,7 +1220,7 @@ namespace System.Web.Mvc.Test
                     Assert.Equal("Some exception message.", filterContext.Exception.Message);
                     Assert.Same(action, filterContext.ActionDescriptor);
                     actions.Add("OnActionExecuted");
-                }
+                },
             };
             Func<ActionExecutedContext> continuation = delegate
             {
@@ -1265,7 +1269,7 @@ namespace System.Web.Mvc.Test
                     Assert.Null(filterContext.Exception);
                     Assert.False(filterContext.ExceptionHandled);
                     Assert.Same(action, filterContext.ActionDescriptor);
-                }
+                },
             };
             Func<ActionExecutedContext> continuation = delegate
             {
@@ -1368,7 +1372,7 @@ namespace System.Web.Mvc.Test
                 {
                     Assert.Equal(mockPostContext.Object, filterContext);
                     actions.Add("OnActionExecuted");
-                }
+                },
             };
             Func<ActionExecutedContext> continuation = delegate
             {
@@ -1408,7 +1412,7 @@ namespace System.Web.Mvc.Test
             ExceptionContext exContext = new ExceptionContext(context, exception)
             {
                 ExceptionHandled = true,
-                Result = actionResult
+                Result = actionResult,
             };
 
             Mock<ControllerActionInvokerHelper> mockHelper =
@@ -1535,7 +1539,7 @@ namespace System.Web.Mvc.Test
             ActionResult actionResult = new EmptyResult();
             AuthenticationContext authenticationContext = new AuthenticationContext()
             {
-                Result = actionResult
+                Result = actionResult,
             };
             ActionResult challengeActionResult = new EmptyResult();
             AuthenticationChallengeContext authenticationChallengeContext =
@@ -1599,7 +1603,7 @@ namespace System.Web.Mvc.Test
             AuthenticationContext authenticationContext = new AuthenticationContext();
             AuthorizationContext authorizationContext = new AuthorizationContext()
             {
-                Result = actionResult
+                Result = actionResult,
             };
             ActionResult challengeResult = new EmptyResult();
             AuthenticationChallengeContext authenticationChallengeContext =
@@ -1704,7 +1708,7 @@ namespace System.Web.Mvc.Test
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actions.Add("OnActionExecuted1");
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -1715,7 +1719,7 @@ namespace System.Web.Mvc.Test
                 OnActionExecutedImpl = delegate(ActionExecutedContext filterContext)
                 {
                     actions.Add("OnActionExecuted2");
-                }
+                },
             };
             Func<ActionResult> continuation = delegate
             {
@@ -1765,7 +1769,7 @@ namespace System.Web.Mvc.Test
                     Assert.False(wasCalled);
                     wasCalled = true;
                     filterContext.Result = actionResult;
-                }
+                },
             };
             Func<ActionResult> continuation = delegate
             {
@@ -1818,12 +1822,12 @@ namespace System.Web.Mvc.Test
                 null /* exception */
             )
             {
-                Result = actionResult
+                Result = actionResult,
             };
             AuthenticationContext authenticationContext = new AuthenticationContext();
             AuthorizationContext authorizationContext = new AuthorizationContext()
             {
-                Result = actionResult
+                Result = actionResult,
             };
 
             Mock<ControllerActionInvokerHelper> mockHelper =
@@ -1978,12 +1982,12 @@ namespace System.Web.Mvc.Test
                 null /* exception */
             )
             {
-                Result = actionResult
+                Result = actionResult,
             };
             ExceptionContext exContext = new ExceptionContext(context, exception)
             {
                 ExceptionHandled = true,
-                Result = actionResult
+                Result = actionResult,
             };
 
             Mock<ControllerActionInvokerHelper> mockHelper =
@@ -2105,7 +2109,7 @@ namespace System.Web.Mvc.Test
             List<AuthorizationFilterHelper> callQueue = new List<AuthorizationFilterHelper>();
             AuthorizationFilterHelper filter1 = new AuthorizationFilterHelper(callQueue)
             {
-                ShortCircuitResult = result
+                ShortCircuitResult = result,
             };
             AuthorizationFilterHelper filter2 = new AuthorizationFilterHelper(callQueue);
             IAuthorizationFilter[] filters = new IAuthorizationFilter[] { filter1, filter2 };
@@ -2204,7 +2208,7 @@ namespace System.Web.Mvc.Test
             List<AuthenticationFilterHelper> callQueue = new List<AuthenticationFilterHelper>();
             AuthenticationFilterHelper filter1 = new AuthenticationFilterHelper(callQueue)
             {
-                ShortCircuitResult = result
+                ShortCircuitResult = result,
             };
             AuthenticationFilterHelper filter2 = new AuthenticationFilterHelper(callQueue);
             IAuthenticationFilter[] filters = new IAuthenticationFilter[] { filter1, filter2 };
@@ -2241,7 +2245,7 @@ namespace System.Web.Mvc.Test
             List<AuthenticationFilterHelper> callQueue = new List<AuthenticationFilterHelper>();
             AuthenticationFilterHelper filter = new AuthenticationFilterHelper(callQueue)
             {
-                Principal = principal
+                Principal = principal,
             };
             IAuthenticationFilter[] filters = new IAuthenticationFilter[] { filter };
             AuthenticationContext postContext;
@@ -2277,7 +2281,7 @@ namespace System.Web.Mvc.Test
             List<AuthenticationFilterHelper> callQueue = new List<AuthenticationFilterHelper>();
             AuthenticationFilterHelper filter = new AuthenticationFilterHelper(callQueue)
             {
-                Principal = principal
+                Principal = principal,
             };
             IAuthenticationFilter[] filters = new IAuthenticationFilter[] { filter };
 
@@ -2408,7 +2412,7 @@ namespace System.Web.Mvc.Test
             List<ExceptionFilterHelper> callQueue = new List<ExceptionFilterHelper>();
             ExceptionFilterHelper filter1 = new ExceptionFilterHelper(callQueue)
             {
-                ShouldHandleException = true
+                ShouldHandleException = true,
             };
             ExceptionFilterHelper filter2 = new ExceptionFilterHelper(callQueue);
             IExceptionFilter[] filters = new IExceptionFilter[] { filter1, filter2 };
@@ -2443,7 +2447,7 @@ namespace System.Web.Mvc.Test
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted1");
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -2454,7 +2458,7 @@ namespace System.Web.Mvc.Test
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted2");
-                }
+                },
             };
             Action continuation = delegate
             {
@@ -2499,7 +2503,7 @@ namespace System.Web.Mvc.Test
                     Assert.False(wasCalled);
                     wasCalled = true;
                     filterContext.Cancel = true;
-                }
+                },
             };
 
             List<IResultFilter> filters = new List<IResultFilter>() { filter };
@@ -2536,7 +2540,7 @@ namespace System.Web.Mvc.Test
                         Assert.NotNull(ctx);
                         storedContext = ctx;
                     },
-                    OnResultExecutedImpl = delegate { }
+                    OnResultExecutedImpl = delegate { },
                 },
                 new ActionFilterImpl()
                 {
@@ -2545,7 +2549,7 @@ namespace System.Web.Mvc.Test
                         Assert.NotNull(ctx);
                         Assert.Same(storedContext, ctx);
                     },
-                    OnResultExecutedImpl = delegate { }
+                    OnResultExecutedImpl = delegate { },
                 },
             };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
@@ -2586,13 +2590,13 @@ namespace System.Web.Mvc.Test
                     Assert.Same(exception, filterContext.Exception);
                     Assert.False(filterContext.ExceptionHandled);
                     filterContext.ExceptionHandled = true;
-                }
+                },
             };
 
             Mock<ResultExecutingContext> mockResultExecutingContext =
                 new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
-            List<IResultFilter> filters = new List<IResultFilter>() { filter, };
+            List<IResultFilter> filters = new List<IResultFilter>() { filter };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act
@@ -2632,12 +2636,12 @@ namespace System.Web.Mvc.Test
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted");
-                }
+                },
             };
             Mock<ResultExecutingContext> mockResultExecutingContext =
                 new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
-            List<IResultFilter> filters = new List<IResultFilter>() { filter, };
+            List<IResultFilter> filters = new List<IResultFilter>() { filter };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act & Assert
@@ -2672,7 +2676,7 @@ namespace System.Web.Mvc.Test
             ActionResult actionResult = new ContinuationResult(continuation);
             Mock<ResultExecutingContext> mockPreContext = new Mock<ResultExecutingContext>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             mockPreContext.Setup(c => c.Result).Returns(actionResult);
             ActionFilterImpl filter = new ActionFilterImpl()
@@ -2688,9 +2692,9 @@ namespace System.Web.Mvc.Test
                     Assert.Same(actionResult, filterContext.Result);
                     Assert.Null(filterContext.Exception);
                     Assert.False(filterContext.ExceptionHandled);
-                }
+                },
             };
-            List<IResultFilter> filters = new List<IResultFilter>() { filter, };
+            List<IResultFilter> filters = new List<IResultFilter>() { filter };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act & Assert
@@ -2733,7 +2737,7 @@ namespace System.Web.Mvc.Test
                     actions.Add("OnResultExecuted1");
                     Assert.NotNull(filterContext.Exception);
                     Assert.Equal(filterContext.Exception.Message, expectedExceptionMessage);
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -2746,7 +2750,7 @@ namespace System.Web.Mvc.Test
                     actions.Add("OnResultExecuted2");
                     Assert.NotNull(filterContext.Exception);
                     Assert.Equal(filterContext.Exception.Message, expectedExceptionMessage);
-                }
+                },
             };
             ActionResult actionResult = new ContinuationResult(continuation);
             ControllerBase controller = new Mock<ControllerBase>().Object;
@@ -2794,7 +2798,7 @@ namespace System.Web.Mvc.Test
                     actions.Add("OnResultExecuted1");
                     filterContext.ExceptionHandled = true;
                     Assert.Same(exception, filterContext.Exception);
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -2806,7 +2810,7 @@ namespace System.Web.Mvc.Test
                 {
                     actions.Add("OnResultExecuted2");
                     Assert.Same(exception, filterContext.Exception);
-                }
+                },
             };
             ActionResult actionResult = new ContinuationResult(continuation);
             ControllerBase controller = new Mock<ControllerBase>().Object;
@@ -2854,7 +2858,7 @@ namespace System.Web.Mvc.Test
                 {
                     actions.Add("OnResultExecuted1");
                     Assert.True(filterContext.ExceptionHandled);
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -2867,7 +2871,7 @@ namespace System.Web.Mvc.Test
                     actions.Add("OnResultExecuted2");
                     Assert.Same(exception, filterContext.Exception);
                     filterContext.ExceptionHandled = true;
-                }
+                },
             };
             ActionResult actionResult = new ContinuationResult(continuation);
             ControllerBase controller = new Mock<ControllerBase>().Object;
@@ -2919,7 +2923,7 @@ namespace System.Web.Mvc.Test
             Mock<ResultExecutingContext> mockResultExecutingContext =
                 new Mock<ResultExecutingContext>() { DefaultValue = DefaultValue.Mock };
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
-            List<IResultFilter> filters = new List<IResultFilter>() { filter, };
+            List<IResultFilter> filters = new List<IResultFilter>() { filter };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act
@@ -2951,7 +2955,7 @@ namespace System.Web.Mvc.Test
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted1");
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -2962,7 +2966,7 @@ namespace System.Web.Mvc.Test
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted2");
-                }
+                },
             };
             Action continuation = delegate
             {
@@ -3004,7 +3008,7 @@ namespace System.Web.Mvc.Test
                 {
                     actions.Add("OnResultExecuted1");
                     Assert.True(filterContext.Canceled);
-                }
+                },
             };
             ActionFilterImpl filter2 = new ActionFilterImpl()
             {
@@ -3016,7 +3020,7 @@ namespace System.Web.Mvc.Test
                 OnResultExecutedImpl = delegate(ResultExecutedContext filterContext)
                 {
                     actions.Add("OnResultExecuted2");
-                }
+                },
             };
             Action continuation = delegate
             {
@@ -3070,12 +3074,12 @@ namespace System.Web.Mvc.Test
                     Assert.Null(filterContext.Exception);
                     Assert.False(filterContext.ExceptionHandled);
                     actions.Add("OnResultExecuted");
-                }
+                },
             };
             Mock<ResultExecutingContext> mockResultExecutingContext =
                 new Mock<ResultExecutingContext>();
             mockResultExecutingContext.Setup(c => c.Result).Returns(actionResult);
-            List<IResultFilter> filters = new List<IResultFilter>() { filter, };
+            List<IResultFilter> filters = new List<IResultFilter>() { filter };
             ControllerActionInvokerHelper helper = new ControllerActionInvokerHelper();
 
             // Act

@@ -18,6 +18,6 @@ namespace Castle.Components.DictionaryAdapter.Tests
     {
         Red,
         Green,
-        Blue
+        Blue,
     };
 }

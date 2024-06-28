@@ -82,7 +82,7 @@ public class PageInvokerProviderTest
             new PageActionDescriptor
             {
                 RelativePath = "/Path1",
-                FilterDescriptors = new FilterDescriptor[0]
+                FilterDescriptors = new FilterDescriptor[0],
             },
             pageType: typeof(PageWithModel),
             modelType: typeof(DerivedTestPageModel)
@@ -417,7 +417,7 @@ public class PageInvokerProviderTest
         {
             RelativePath = "/Pages/Level1/Level2/Index.cshtml",
             FilterDescriptors = new FilterDescriptor[0],
-            ViewEnginePath = "/Pages/Level1/Level2/Index.cshtml"
+            ViewEnginePath = "/Pages/Level1/Level2/Index.cshtml",
         };
 
         var compiledPageDescriptor = new CompiledPageActionDescriptor(descriptor)
@@ -473,7 +473,7 @@ public class PageInvokerProviderTest
         {
             RelativePath = "/Views/Deeper/Index.cshtml",
             FilterDescriptors = new FilterDescriptor[0],
-            ViewEnginePath = "/Views/Deeper/Index.cshtml"
+            ViewEnginePath = "/Views/Deeper/Index.cshtml",
         };
 
         var loader = new Mock<PageLoader>();

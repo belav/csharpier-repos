@@ -37,6 +37,6 @@ namespace System.DirectoryServices.Protocols
         Never,
         InSearching,
         FindingBaseObject,
-        Always
+        Always,
     }
 }

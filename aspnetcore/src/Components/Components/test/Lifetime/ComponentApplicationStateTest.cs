@@ -17,7 +17,7 @@ public class ComponentApplicationStateTest
         );
         var existingState = new Dictionary<string, byte[]>
         {
-            ["MyState"] = JsonSerializer.SerializeToUtf8Bytes(new byte[] { 1, 2, 3, 4 })
+            ["MyState"] = JsonSerializer.SerializeToUtf8Bytes(new byte[] { 1, 2, 3, 4 }),
         };
 
         // Act
@@ -38,7 +38,7 @@ public class ComponentApplicationStateTest
         );
         var existingState = new Dictionary<string, byte[]>
         {
-            ["MyState"] = new byte[] { 1, 2, 3, 4 }
+            ["MyState"] = new byte[] { 1, 2, 3, 4 },
         };
 
         applicationState.InitializeExistingState(existingState);
@@ -59,7 +59,7 @@ public class ComponentApplicationStateTest
         );
         var existingState = new Dictionary<string, byte[]>
         {
-            ["MyState"] = JsonSerializer.SerializeToUtf8Bytes(new byte[] { 1, 2, 3, 4 })
+            ["MyState"] = JsonSerializer.SerializeToUtf8Bytes(new byte[] { 1, 2, 3, 4 }),
         };
 
         // Act
@@ -81,7 +81,7 @@ public class ComponentApplicationStateTest
             new List<PersistComponentStateRegistration>()
         )
         {
-            PersistingState = true
+            PersistingState = true,
         };
         var myState = new byte[] { 1, 2, 3, 4 };
 
@@ -103,7 +103,7 @@ public class ComponentApplicationStateTest
             new List<PersistComponentStateRegistration>()
         )
         {
-            PersistingState = true
+            PersistingState = true,
         };
         var myState = new byte[] { 1, 2, 3, 4 };
 
@@ -123,7 +123,7 @@ public class ComponentApplicationStateTest
             new List<PersistComponentStateRegistration>()
         )
         {
-            PersistingState = true
+            PersistingState = true,
         };
         var myState = new byte[] { 1, 2, 3, 4 };
 
@@ -145,7 +145,7 @@ public class ComponentApplicationStateTest
             new List<PersistComponentStateRegistration>()
         )
         {
-            PersistingState = true
+            PersistingState = true,
         };
 
         // Act

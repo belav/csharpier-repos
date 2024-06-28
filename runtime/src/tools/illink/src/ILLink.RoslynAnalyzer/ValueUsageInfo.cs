@@ -61,7 +61,7 @@ namespace ILLink.RoslynAnalyzer
         /// Represents a value read or write.
         /// For example, passing an argument to a "ref" parameter.
         /// </summary>
-        ReadableWritableReference = Read | Write | Reference
+        ReadableWritableReference = Read | Write | Reference,
     }
 
     internal static class ValueUsageInfoExtensions

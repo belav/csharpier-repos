@@ -716,7 +716,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     OutVariablePendingInference outvar => outvar.FailInference(this, diagnostics),
                     BoundDiscardExpression discard when !discard.HasExpressionType() =>
                         discard.FailInference(this, diagnostics),
-                    var arg => BindToNaturalType(arg, diagnostics)
+                    var arg => BindToNaturalType(arg, diagnostics),
                 };
             }
 
@@ -1800,13 +1800,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 InvocationExpressionSyntax invocation => invocation.ArgumentList.OpenParenToken,
                 BaseObjectCreationExpressionSyntax objectCreation => objectCreation.NewKeyword,
-                ConstructorInitializerSyntax constructorInitializer =>
-                    constructorInitializer.ArgumentList.OpenParenToken,
+                ConstructorInitializerSyntax constructorInitializer => constructorInitializer
+                    .ArgumentList
+                    .OpenParenToken,
                 PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType =>
                     primaryConstructorBaseType.ArgumentList.OpenParenToken,
-                ElementAccessExpressionSyntax elementAccess =>
-                    elementAccess.ArgumentList.OpenBracketToken,
-                _ => syntax.GetFirstToken()
+                ElementAccessExpressionSyntax elementAccess => elementAccess
+                    .ArgumentList
+                    .OpenBracketToken,
+                _ => syntax.GetFirstToken(),
             };
 
             return new SourceLocation(token);
@@ -1850,7 +1852,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 // default(object)
                 defaultValue = new BoundDefaultExpression(syntax, parameterType)
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
             else if (parameter.IsIUnknownConstant)
@@ -1868,7 +1870,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // new UnknownWrapper(default(object))
                     var unknownArgument = new BoundDefaultExpression(syntax, parameterType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                     defaultValue = new BoundObjectCreationExpression(
                         syntax,
@@ -1876,7 +1878,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         unknownArgument
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             }
@@ -1895,7 +1897,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // new DispatchWrapper(default(object))
                     var dispatchArgument = new BoundDefaultExpression(syntax, parameterType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                     defaultValue = new BoundObjectCreationExpression(
                         syntax,
@@ -1903,7 +1905,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         dispatchArgument
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             }
@@ -1927,7 +1929,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ConstantValue.NotAvailable
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             }
@@ -2095,7 +2097,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     int32Type
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 array = new BoundArrayCreation(
@@ -2103,13 +2105,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ImmutableArray.Create(arraySize),
                     new BoundArrayInitialization(node, isInferred: false, arrayArgs)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     },
                     paramArrayType
                 )
                 {
                     WasCompilerGenerated = true,
-                    IsParamsArray = true
+                    IsParamsArray = true,
                 };
 
                 if (arrayArgsLength != 0)
@@ -2156,7 +2158,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     : ContainingMember() switch
                     {
                         FieldSymbol { AssociatedSymbol: { } symbol } => symbol,
-                        var c => c
+                        var c => c,
                     };
                 Debug.Assert(
                     InAttributeArgument
@@ -2268,7 +2270,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // We return a non-error expression here to ensure ERR_DefaultValueMustBeConstant (or another appropriate diagnostics) is produced by the caller.
                     return new BoundDefaultExpression(syntax, parameterType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
 
@@ -2283,7 +2285,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     // Bad default values are implicitly replaced with default(T) at call sites.
                     { IsBad: true } => ConstantValue.Null,
-                    var constantValue => constantValue
+                    var constantValue => constantValue,
                 };
                 Debug.Assert((object?)defaultConstantValue != ConstantValue.Unset);
 
@@ -2301,7 +2303,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Compilation.GetSpecialType(SpecialType.System_Int32)
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else if (callerSourceLocation is object && parameter.IsCallerFilePath)
@@ -2316,7 +2318,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Compilation.GetSpecialType(SpecialType.System_String)
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else if (
@@ -2332,7 +2334,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Compilation.GetSpecialType(SpecialType.System_String)
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else if (
@@ -2362,7 +2364,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         Compilation.GetSpecialType(SpecialType.System_String)
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else if (defaultConstantValue == ConstantValue.NotAvailable)
@@ -2385,7 +2387,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // The argument to M([Optional] int x) becomes default(int)
                         defaultValue = new BoundDefaultExpression(syntax, parameterType)
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         };
                     }
                 }
@@ -2393,7 +2395,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     defaultValue = new BoundDefaultExpression(syntax, parameterType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else
@@ -2403,7 +2405,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     );
                     defaultValue = new BoundLiteral(syntax, defaultConstantValue, constantType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
 
                     if (
@@ -2445,7 +2447,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     // then we want to silently replace it with default(ParameterType).
                     defaultValue = new BoundDefaultExpression(syntax, parameterType)
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else

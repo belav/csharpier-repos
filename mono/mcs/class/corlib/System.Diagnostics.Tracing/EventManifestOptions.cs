@@ -37,6 +37,6 @@ namespace System.Diagnostics.Tracing
         AllowEventSourceOverride = 8,
         None = 0,
         OnlyIfNeededForRegistration = 4,
-        Strict = 1
+        Strict = 1,
     }
 }

@@ -149,7 +149,7 @@ namespace System.Diagnostics.Tests
         {
             var attribute = new DebuggerVisualizerAttribute("VisualizerTypeName")
             {
-                Target = target
+                Target = target,
             };
             Assert.Equal(target, attribute.Target);
             Assert.Equal(target.AssemblyQualifiedName, attribute.TargetTypeName);

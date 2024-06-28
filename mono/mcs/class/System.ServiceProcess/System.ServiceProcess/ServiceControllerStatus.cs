@@ -37,6 +37,6 @@ namespace System.ServiceProcess
         Running = 4,
         ContinuePending = 5,
         PausePending = 6,
-        Paused = 7
+        Paused = 7,
     }
 }

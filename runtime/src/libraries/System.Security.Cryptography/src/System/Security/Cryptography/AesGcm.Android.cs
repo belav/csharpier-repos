@@ -211,7 +211,7 @@ namespace System.Security.Cryptography
                 128 => Interop.Crypto.EvpAes128Gcm(),
                 192 => Interop.Crypto.EvpAes192Gcm(),
                 256 => Interop.Crypto.EvpAes256Gcm(),
-                _ => IntPtr.Zero
+                _ => IntPtr.Zero,
             };
         }
 

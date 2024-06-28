@@ -182,7 +182,7 @@ namespace MonoTests.System.Globalization
             0x0,
             0x0,
             0x80,
-            0xB
+            0xB,
         };
 
         [Test]

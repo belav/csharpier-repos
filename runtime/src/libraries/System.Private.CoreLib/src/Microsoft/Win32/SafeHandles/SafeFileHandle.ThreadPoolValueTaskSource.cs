@@ -282,7 +282,7 @@ namespace Microsoft.Win32.SafeHandles
                 Read,
                 Write,
                 ReadScatter,
-                WriteGather
+                WriteGather,
             }
         }
     }

@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                     {
                         OpenClose = false,
                         Change = TextDocumentSyncKind.None,
-                    }
+                    },
                 };
             }
 

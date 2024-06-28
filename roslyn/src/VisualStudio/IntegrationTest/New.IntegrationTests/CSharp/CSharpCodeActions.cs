@@ -316,7 +316,7 @@ class C
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -344,7 +344,7 @@ csharp_style_expression_bodied_properties = true:warning
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -380,7 +380,7 @@ csharp_style_expression_bodied_properties = true:warning
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -898,7 +898,7 @@ public class Program
             var expectedItems = new[]
             {
                 "using System.Runtime.InteropServices;",
-                "System.Runtime.InteropServices.GCHandle"
+                "System.Runtime.InteropServices.GCHandle",
             };
 
             await TestServices.EditorVerifier.CodeActionsAsync(
@@ -933,7 +933,7 @@ public class Program
             var expectedItems = new[]
             {
                 "using System.Runtime.InteropServices;",
-                "System.Runtime.InteropServices.GCHandle"
+                "System.Runtime.InteropServices.GCHandle",
             };
 
             await TestServices.EditorVerifier.CodeActionsAsync(
@@ -1485,7 +1485,7 @@ class OtherType
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -1668,7 +1668,7 @@ class OtherType2
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -1765,7 +1765,7 @@ class C2
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -1916,7 +1916,7 @@ class C2
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );
@@ -1983,11 +1983,7 @@ public class Program
             );
 
             await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-            var expectedItems = new[]
-            {
-                "Use expression body for method",
-                "Extract base class...",
-            };
+            var expectedItems = new[] { "Use expression body for method", "Extract base class..." };
 
             await TestServices.EditorVerifier.CodeActionsAsync(
                 expectedItems,
@@ -2029,7 +2025,7 @@ public class Program
                     FeatureAttribute.Workspace,
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.ErrorSquiggles
+                    FeatureAttribute.ErrorSquiggles,
                 ],
                 HangMitigatingCancellationToken
             );

@@ -61,7 +61,7 @@ public class IndexModel : PageModel
         {
             Name = user.Name,
             Age = user.Age,
-            PhoneNumber = user.PhoneNumber
+            PhoneNumber = user.PhoneNumber,
         };
 
         return Page();

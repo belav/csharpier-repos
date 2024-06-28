@@ -25,17 +25,17 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 var dboExBuffering = new ExecutionDataflowBlockOptions
                 {
                     MaxDegreeOfParallelism = 2,
-                    CancellationToken = ct
+                    CancellationToken = ct,
                 };
                 var dboExSpsc = new ExecutionDataflowBlockOptions
                 {
-                    SingleProducerConstrained = true
+                    SingleProducerConstrained = true,
                 };
                 var dboExNoBuffering = new ExecutionDataflowBlockOptions
                 {
                     MaxDegreeOfParallelism = 2,
                     BoundedCapacity = 1,
-                    CancellationToken = ct
+                    CancellationToken = ct,
                 };
                 var dboGroupGreedy = new GroupingDataflowBlockOptions();
                 var dboGroupNonGreedy = new GroupingDataflowBlockOptions { Greedy = false };
@@ -113,7 +113,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         new BufferBlock<int>(
                             new DataflowBlockOptions()
                             {
-                                NameFormat = "foo={0}, bar={1}, kaboom={2}"
+                                NameFormat = "foo={0}, bar={1}, kaboom={2}",
                             }
                         )
                     ),

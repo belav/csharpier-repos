@@ -36,7 +36,7 @@ namespace System.Diagnostics.Metrics
                 {
                     Version = version,
                     Tags = tags,
-                    Scope = meterFactory
+                    Scope = meterFactory,
                 }
             );
         }

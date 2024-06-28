@@ -33,7 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
                     TestReferences.SymbolsTests.TypeForwarders.TypeForwarder.dll,
                     TestReferences.SymbolsTests.TypeForwarders.TypeForwarderLib.dll,
                     TestReferences.SymbolsTests.TypeForwarders.TypeForwarderBase.dll,
-                    Net40.mscorlib
+                    Net40.mscorlib,
                 }
             );
 
@@ -1985,7 +1985,7 @@ public class CF1
                 references: new[]
                 {
                     modRef1,
-                    new CSharpCompilationReference(forwardedTypesCompilation)
+                    new CSharpCompilationReference(forwardedTypesCompilation),
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -2064,7 +2064,7 @@ public class CF1
                 references: new MetadataReference[]
                 {
                     modRef2,
-                    new CSharpCompilationReference(forwardedTypesCompilation)
+                    new CSharpCompilationReference(forwardedTypesCompilation),
                 },
                 options: TestOptions.ReleaseDll
             );
@@ -2107,7 +2107,7 @@ public class CF1
                 references: new[]
                 {
                     modRef1,
-                    new CSharpCompilationReference(forwardedTypesCompilation)
+                    new CSharpCompilationReference(forwardedTypesCompilation),
                 },
                 options: TestOptions.ReleaseModule
             );
@@ -2364,7 +2364,7 @@ public class Forwarded<T>
             {
                 cA_v2_ImageRef,
                 new CSharpCompilationReference(cA_v2),
-                new CSharpCompilationReference(cA_v3)
+                new CSharpCompilationReference(cA_v3),
             };
 
             var ref2 = new MetadataReference[] { new CSharpCompilationReference(cB), cB_ImageRef };
@@ -2373,7 +2373,7 @@ public class Forwarded<T>
             {
                 new CSharpCompilationReference(cC_v1),
                 new CSharpCompilationReference(cC_v2),
-                cC_v1_ImageRef
+                cC_v1_ImageRef,
             };
 
             foreach (var r1 in ref1)
@@ -2462,7 +2462,7 @@ class Program
                 {
                     refA1,
                     compB2.EmitToImageReference(aliases: ImmutableArray.Create("B")),
-                    refBImpl
+                    refBImpl,
                 }
             );
             comp.VerifyDiagnostics(
@@ -2484,7 +2484,7 @@ class Program
                 {
                     refA1,
                     new CSharpCompilationReference(compB2, aliases: ImmutableArray.Create("B")),
-                    refBImpl
+                    refBImpl,
                 }
             );
             comp.VerifyDiagnostics(
@@ -2556,7 +2556,7 @@ class Program
                 {
                     refA1,
                     compB2.EmitToImageReference(aliases: ImmutableArray.Create("B")),
-                    refBImpl
+                    refBImpl,
                 }
             );
             comp.VerifyDiagnostics(
@@ -2578,7 +2578,7 @@ class Program
                 {
                     refA1,
                     new CSharpCompilationReference(compB2, aliases: ImmutableArray.Create("B")),
-                    refBImpl
+                    refBImpl,
                 }
             );
             comp.VerifyDiagnostics(

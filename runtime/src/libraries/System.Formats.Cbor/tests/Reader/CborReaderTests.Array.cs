@@ -42,7 +42,7 @@ namespace System.Formats.Cbor.Tests
                 22,
                 23,
                 24,
-                25
+                25,
             },
             "98190102030405060708090a0b0c0d0e0f101112131415161718181819"
         )]
@@ -76,7 +76,7 @@ namespace System.Formats.Cbor.Tests
             new object[]
             {
                 "",
-                new object[] { new object[] { }, new object[] { 1, new byte[] { 10 } } }
+                new object[] { new object[] { }, new object[] { 1, new byte[] { 10 } } },
             },
             "826082808201410a"
         )]
@@ -122,7 +122,7 @@ namespace System.Formats.Cbor.Tests
                 22,
                 23,
                 24,
-                25
+                25,
             },
             "9f0102030405060708090a0b0c0d0e0f101112131415161718181819ff"
         )]

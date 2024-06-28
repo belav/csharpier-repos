@@ -156,7 +156,7 @@ public partial class TestDbContext : DbContext
                 {
                     UseNullableReferenceTypes = false,
                     SuppressConnectionStringWarning = true,
-                    SuppressOnConfiguring = true
+                    SuppressOnConfiguring = true,
                 },
                 code =>
                 {
@@ -177,7 +177,7 @@ public partial class TestDbContext : DbContext
                 {
                     UseNullableReferenceTypes = true,
                     SuppressConnectionStringWarning = true,
-                    SuppressOnConfiguring = true
+                    SuppressOnConfiguring = true,
                 },
                 code =>
                 {
@@ -212,7 +212,7 @@ public partial class TestDbContext : DbContext
                                 new ModelCodeGenerationOptions
                                 {
                                     ContextName = null,
-                                    ConnectionString = "Initial Catalog=TestDatabase"
+                                    ConnectionString = "Initial Catalog=TestDatabase",
                                 }
                             )
                     )
@@ -232,7 +232,7 @@ public partial class TestDbContext : DbContext
                                 new ModelCodeGenerationOptions
                                 {
                                     ContextName = "TestDbContext",
-                                    ConnectionString = null
+                                    ConnectionString = null,
                                 }
                             )
                     )
@@ -256,7 +256,7 @@ public partial class TestDbContext : DbContext
                     SuppressConnectionStringWarning = true,
                     ModelNamespace = "TestNamespace",
                     ContextName = "TestDbContext",
-                    ConnectionString = "Initial Catalog=TestDatabase"
+                    ConnectionString = "Initial Catalog=TestDatabase",
                 }
             );
 
@@ -412,7 +412,7 @@ optionsBuilder
             var modelGenerationOptions = new ModelCodeGenerationOptions
             {
                 ContextNamespace = "TestNamespace",
-                ModelNamespace = "AnotherNamespaceOfModel"
+                ModelNamespace = "AnotherNamespaceOfModel",
             };
 
             const string entityInAnotherNamespaceTypeName = "EntityInAnotherNamespace";
@@ -443,7 +443,7 @@ optionsBuilder
         {
             var modelGenerationOptions = new ModelCodeGenerationOptions
             {
-                ContextNamespace = "TestNamespace"
+                ContextNamespace = "TestNamespace",
             };
 
             const string entityInAnotherNamespaceTypeName = "EntityInAnotherNamespace";
@@ -1309,7 +1309,7 @@ public partial class TestDbContext : DbContext
                 new ModelCodeGenerationOptions
                 {
                     ModelNamespace = "TestNamespace",
-                    ContextNamespace = string.Empty
+                    ContextNamespace = string.Empty,
                 },
                 code =>
                 {
@@ -1333,7 +1333,7 @@ public partial class TestDbContext : DbContext
                 new ModelCodeGenerationOptions
                 {
                     ModelNamespace = string.Empty,
-                    ContextNamespace = "TestNamespace"
+                    ContextNamespace = "TestNamespace",
                 },
                 code =>
                 {
@@ -1737,9 +1737,10 @@ public partial class TestDbContext : DbContext
             ) =>
                 annotation.Name switch
                 {
-                    "Test:TestModelAnnotation" =>
-                        new MethodCallCodeFragment(_testFluentApiCallMethodInfo),
-                    _ => base.GenerateFluentApi(model, annotation)
+                    "Test:TestModelAnnotation" => new MethodCallCodeFragment(
+                        _testFluentApiCallMethodInfo
+                    ),
+                    _ => base.GenerateFluentApi(model, annotation),
                 };
         }
 

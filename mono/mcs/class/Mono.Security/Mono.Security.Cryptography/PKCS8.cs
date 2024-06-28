@@ -45,7 +45,7 @@ namespace Mono.Security.Cryptography
         {
             PrivateKey,
             EncryptedPrivateKey,
-            Unknown
+            Unknown,
         }
 
         private PKCS8() { }

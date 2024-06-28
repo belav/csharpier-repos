@@ -7,13 +7,13 @@ namespace Mono.Debugger.Soft
     {
         Into = 0,
         Over = 1,
-        Out = 2
+        Out = 2,
     }
 
     public enum StepSize
     {
         Min = 0,
-        Line = 1
+        Line = 1,
     }
 
     /*
@@ -36,7 +36,7 @@ namespace Mono.Debugger.Soft
 
         /* Since protocol version 2.30 */
         /* Methods which have the [DebuggerNonUserCode] attribute */
-        DebuggerNonUserCode = 8
+        DebuggerNonUserCode = 8,
     }
 
     public sealed class StepEventRequest : EventRequest
@@ -66,7 +66,7 @@ namespace Mono.Debugger.Soft
                     Thread = step_thread.Id,
                     Depth = (int)Depth,
                     Size = (int)Size,
-                    Filter = (int)Filter
+                    Filter = (int)Filter,
                 }
             );
             SendReq(mods);

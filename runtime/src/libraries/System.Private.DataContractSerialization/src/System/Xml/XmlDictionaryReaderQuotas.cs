@@ -13,7 +13,7 @@ namespace System.Xml
         MaxStringContentLength = 0x02,
         MaxArrayLength = 0x04,
         MaxBytesPerRead = 0x08,
-        MaxNameTableCharCount = 0x10
+        MaxNameTableCharCount = 0x10,
     }
 
     public sealed class XmlDictionaryReaderQuotas

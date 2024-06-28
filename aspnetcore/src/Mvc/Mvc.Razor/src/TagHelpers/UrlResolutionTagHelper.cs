@@ -63,7 +63,7 @@ public class UrlResolutionTagHelper : TagHelper
         '\n',
         '\u000C',
         '\r',
-        ' '
+        ' ',
     };
     private static readonly Dictionary<string, string[]> ElementAttributeLookups =
         new(StringComparer.OrdinalIgnoreCase)

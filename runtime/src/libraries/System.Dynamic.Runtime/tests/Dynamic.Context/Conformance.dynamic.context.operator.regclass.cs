@@ -25,7 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return new MyClass[]
             {
                 new MyClass() { Field = 1 },
-                new MyClass() { Field = 4 }
+                new MyClass() { Field = 4 },
             };
         }
 
@@ -34,7 +34,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = int.MinValue }
+                new MyStruct() { Number = int.MinValue },
             };
         }
 
@@ -43,7 +43,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = int.MaxValue }
+                new MyStruct() { Number = int.MaxValue },
             };
         }
 
@@ -437,7 +437,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 }
 
@@ -1720,7 +1720,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             {
                 new MyClass() { Field = 0 },
                 new MyClass() { Field = 1 },
-                new MyClass() { Field = 2 }
+                new MyClass() { Field = 2 },
             };
             int index = 0;
             for (int i = 0; (dynamic)array[i] < 2; i++)
@@ -1915,7 +1915,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             MyStruct?[] p1 = null;
             List<Test> list = new List<Test>()
             {
-                new Test() { _field1 = (object[])dy, _field2 = (MyClass)p1 }
+                new Test() { _field1 = (object[])dy, _field2 = (MyClass)p1 },
             };
             if (list.Count != 1)
                 return 1;
@@ -1994,20 +1994,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
                 {
                     _field1 = decimal.MinValue,
                     _field2 = int.MaxValue,
-                    _field3 = byte.MaxValue
+                    _field3 = byte.MaxValue,
                 },
                 new Test(),
                 new Test()
                 {
                     _field1 = null,
                     _field2 = null,
-                    _field3 = 0
+                    _field3 = 0,
                 },
                 new Test()
                 {
                     _field1 = decimal.MinValue,
                     _field2 = int.MaxValue,
-                    _field3 = 10
+                    _field3 = 10,
                 },
             };
             MyStruct mc = new MyStruct();
@@ -2469,7 +2469,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
         {
             new MyStruct() { Number = 1 },
             new MyStruct() { Number = 2 },
-            new MyStruct() { Number = 3 }
+            new MyStruct() { Number = 3 },
         };
 
         public static void DynamicCSharpRunTest()
@@ -3077,7 +3077,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return new MyClass[]
             {
                 new MyClass() { Field = 1 },
-                new MyClass() { Field = 4 }
+                new MyClass() { Field = 4 },
             };
         }
 
@@ -3086,7 +3086,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = int.MinValue }
+                new MyStruct() { Number = int.MinValue },
             };
         }
 
@@ -3095,7 +3095,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
             return new MyStruct?[]
             {
                 null,
-                new MyStruct() { Number = int.MaxValue }
+                new MyStruct() { Number = int.MaxValue },
             };
         }
 
@@ -3488,7 +3488,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.context.operate.regclas
     {
         First = 1,
         Second = 2,
-        Third = 3
+        Third = 3,
     }
 }
 

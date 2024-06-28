@@ -43,7 +43,7 @@ namespace Microsoft.Interop
                     {
                         MarshalDirection.UnmanagedToManaged => new UnmanagedToManagedMarshaller(),
                         MarshalDirection.ManagedToUnmanaged => new ManagedToUnmanagedMarshaller(),
-                        _ => throw new UnreachableException()
+                        _ => throw new UnreachableException(),
                     }
                 );
             }

@@ -21,7 +21,7 @@ namespace System.Xml.Schema
         {
             None,
             XmlSpace,
-            XmlLang
+            XmlLang,
         };
 
         private String defExpanded; // default value in its expanded form

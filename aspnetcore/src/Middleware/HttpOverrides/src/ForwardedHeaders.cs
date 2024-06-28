@@ -37,5 +37,5 @@ public enum ForwardedHeaders
     /// <summary>
     /// Process X-Forwarded-For, X-Forwarded-Host, X-Forwarded-Proto and X-Forwarded-Prefix.
     /// </summary>
-    All = XForwardedFor | XForwardedHost | XForwardedProto | XForwardedPrefix
+    All = XForwardedFor | XForwardedHost | XForwardedProto | XForwardedPrefix,
 }

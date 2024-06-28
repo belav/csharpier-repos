@@ -475,7 +475,7 @@ namespace System.IO
         {
             FileSystemEvent,
             ErrorEvent,
-            RenameEvent
+            RenameEvent,
         }
 
         private void RaiseEvent(Delegate ev, EventArgs arg, EventType evtype)

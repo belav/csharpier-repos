@@ -49,8 +49,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -73,8 +73,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -99,8 +99,8 @@ namespace $$N;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -125,8 +125,8 @@ namespace N;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -150,8 +150,8 @@ namespace N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -174,8 +174,8 @@ $${
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -202,8 +202,8 @@ namespace N2
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -229,8 +229,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -256,8 +256,8 @@ namespace N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -287,8 +287,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -320,8 +320,8 @@ int i = 0;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -350,8 +350,8 @@ namespace $$N;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -379,8 +379,8 @@ using System;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -412,8 +412,8 @@ class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -447,8 +447,8 @@ class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -479,8 +479,8 @@ class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -512,8 +512,8 @@ class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -547,8 +547,8 @@ class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -580,8 +580,8 @@ namespace N;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -617,8 +617,8 @@ public class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -658,8 +658,8 @@ public class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -699,8 +699,8 @@ public class C
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -728,8 +728,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -750,8 +750,8 @@ namespace $$N;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.BlockScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -776,8 +776,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -802,8 +802,8 @@ namespace N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -825,8 +825,8 @@ namespace N;
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -848,8 +848,8 @@ $$
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -870,8 +870,8 @@ namespace N; $$
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -903,8 +903,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -930,8 +930,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -962,8 +962,8 @@ namespace N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -992,8 +992,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1021,8 +1021,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1051,8 +1051,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1080,8 +1080,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1113,8 +1113,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1148,8 +1148,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1180,8 +1180,8 @@ namespace N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1213,8 +1213,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 
@@ -1248,8 +1248,8 @@ namespace $$N
                     {
                         CSharpCodeStyleOptions.NamespaceDeclarations,
                         NamespaceDeclarationPreference.FileScoped
-                    }
-                }
+                    },
+                },
             }.RunAsync();
         }
 

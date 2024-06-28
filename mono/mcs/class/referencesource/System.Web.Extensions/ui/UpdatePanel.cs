@@ -131,7 +131,7 @@ namespace System.Web.UI
             }
         }
 
-        [Browsable(false),]
+        [Browsable(false)]
         public Control ContentTemplateContainer
         {
             get
@@ -145,7 +145,7 @@ namespace System.Web.UI
             }
         }
 
-        [Browsable(false),]
+        [Browsable(false)]
         public bool IsInPartialRendering
         {
             get { return _asyncPostBackMode; }

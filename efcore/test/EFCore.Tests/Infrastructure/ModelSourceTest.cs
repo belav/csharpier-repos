@@ -92,7 +92,7 @@ public class ModelSourceTest
             {
                 new DbSetProperty("One", typeof(SetA), setter: null),
                 new DbSetProperty("Two", typeof(SetB), setter: null),
-                new DbSetProperty("Three", typeof(SetA), setter: null)
+                new DbSetProperty("Three", typeof(SetA), setter: null),
             };
     }
 

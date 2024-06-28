@@ -38,7 +38,7 @@ namespace HtmlAgilityPack
         /// <summary>
         /// An end tag is invalid at this position.
         /// </summary>
-        EndTagInvalidHere
+        EndTagInvalidHere,
     }
 
     /// <summary>
@@ -1130,7 +1130,7 @@ namespace HtmlAgilityPack
             Comment,
             QuotedAttributeValue,
             ServerSideCode,
-            PcData
+            PcData,
         }
 
         private void IncrementPosition()

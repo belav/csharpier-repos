@@ -67,7 +67,7 @@ public class Startup
                     ValidateIssuer = false,
                     ValidateActor = false,
                     ValidateLifetime = true,
-                    IssuerSigningKey = SecurityKey
+                    IssuerSigningKey = SecurityKey,
                 };
             });
 
@@ -157,7 +157,7 @@ public class Startup
                             new
                             {
                                 url = $"{context.Request.Scheme}://{context.Request.Host}/authorizedHub",
-                                accessToken = GenerateJwtToken()
+                                accessToken = GenerateJwtToken(),
                             }
                         )
                     );

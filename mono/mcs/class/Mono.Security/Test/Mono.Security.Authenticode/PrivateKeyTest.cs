@@ -454,7 +454,7 @@ namespace MonoTests.Mono.Security.Authenticode
             0x8C,
             0x28,
             0xB7,
-            0x53
+            0x53,
         };
 
         [Test]
@@ -852,7 +852,7 @@ namespace MonoTests.Mono.Security.Authenticode
             0x12,
             0xE8,
             0x96,
-            0x20
+            0x20,
         };
 
         [Test]

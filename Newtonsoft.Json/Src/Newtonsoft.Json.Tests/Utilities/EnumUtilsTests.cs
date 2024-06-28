@@ -148,17 +148,17 @@ namespace Newtonsoft.Json.Tests.Utilities
             yield return new object[]
             {
                 "Blue,Red,Green",
-                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green
+                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green,
             };
             yield return new object[]
             {
                 "Blue,Red,Red,Red,Green",
-                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green
+                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green,
             };
             yield return new object[]
             {
                 "Red,Blue,   Green",
-                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green
+                SimpleEnum.Red | SimpleEnum.Blue | SimpleEnum.Green,
             };
             yield return new object[] { "1", SimpleEnum.Red };
             yield return new object[] { " 1 ", SimpleEnum.Red };
@@ -187,19 +187,19 @@ namespace Newtonsoft.Json.Tests.Utilities
             {
                 typeof(SimpleEnum),
                 "Red,Blue,",
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[]
             {
                 typeof(SimpleEnum),
                 "Red,,Blue",
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[]
             {
                 typeof(SimpleEnum),
                 "Red,Blue, ",
-                typeof(ArgumentException)
+                typeof(ArgumentException),
             };
             yield return new object[] { typeof(SimpleEnum), "Red Blue", typeof(ArgumentException) };
             yield return new object[] { typeof(SimpleEnum), "1,Blue", typeof(ArgumentException) };
@@ -209,13 +209,13 @@ namespace Newtonsoft.Json.Tests.Utilities
             {
                 typeof(SimpleEnum),
                 "2147483649",
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
             yield return new object[]
             {
                 typeof(SimpleEnum),
                 "2147483648",
-                typeof(OverflowException)
+                typeof(OverflowException),
             };
         }
 
@@ -269,7 +269,7 @@ namespace Newtonsoft.Json.Tests.Utilities
             yield return new object[]
             {
                 AttributeTargets.Class | AttributeTargets.Delegate,
-                "Class, Delegate"
+                "Class, Delegate",
             };
         }
         #endregion
@@ -282,7 +282,7 @@ namespace Newtonsoft.Json.Tests.Utilities
         Green = 3,
         Green_a = 3,
         Green_b = 3,
-        B = 4
+        B = 4,
     }
 
     public enum ByteEnum : byte

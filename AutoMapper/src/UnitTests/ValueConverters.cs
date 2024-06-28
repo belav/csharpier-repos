@@ -62,7 +62,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -138,7 +138,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -244,7 +244,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -317,7 +317,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -390,7 +390,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -463,7 +463,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -535,7 +535,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -618,7 +618,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -691,7 +691,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -764,7 +764,7 @@ public class ValueConverters
                 Value1 = 1,
                 Value2 = 2,
                 Value3 = 3,
-                Value4 = 4
+                Value4 = 4,
             };
 
             var dest = Mapper.Map<Source, Dest>(source);
@@ -818,8 +818,8 @@ public class ValueConverters
         [Fact]
         public void Should_apply_converters()
         {
-            var source = new Source { Value = 1, };
-            var otherSource = new OtherSource { Value = 2, };
+            var source = new Source { Value = 1 };
+            var otherSource = new OtherSource { Value = 2 };
 
             var dest = Mapper.Map<Source, Dest>(source);
             var otherDest = Mapper.Map<OtherSource, OtherDest>(otherSource);

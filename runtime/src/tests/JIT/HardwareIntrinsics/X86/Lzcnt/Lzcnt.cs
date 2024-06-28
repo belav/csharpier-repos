@@ -81,7 +81,7 @@ namespace IntelHardwareIntrinsicTest._Lzcnt
             new LZCNT<uint>(0x00000001U, 31),
             new LZCNT<uint>(0xffffffffU, 0),
             new LZCNT<uint>(0xf0000000U, 0),
-            new LZCNT<uint>(0x0005423fU, 13)
+            new LZCNT<uint>(0x0005423fU, 13),
         };
     }
 }

@@ -29,6 +29,6 @@ namespace System.Windows.Forms
     {
         NotSortable = 0,
         Automatic = 1,
-        Programmatic = 2
+        Programmatic = 2,
     }
 }

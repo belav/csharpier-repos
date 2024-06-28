@@ -58,7 +58,7 @@ namespace System.Web.UI.Design.MobileControls
             {
                 Constants.ItemTemplateTag,
                 Constants.AlternatingItemTemplateTag,
-                Constants.ItemDetailsTemplateTag
+                Constants.ItemDetailsTemplateTag,
             },
             new String[] { Constants.SeparatorTemplateTag },
         };

@@ -8,7 +8,7 @@ namespace System.ServiceModel
     public enum MsmqEncryptionAlgorithm
     {
         RC4Stream,
-        Aes
+        Aes,
     }
 
     static class MsmqEncryptionAlgorithmHelper

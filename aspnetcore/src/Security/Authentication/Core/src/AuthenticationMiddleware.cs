@@ -43,7 +43,7 @@ public class AuthenticationMiddleware
             new AuthenticationFeature
             {
                 OriginalPath = context.Request.Path,
-                OriginalPathBase = context.Request.PathBase
+                OriginalPathBase = context.Request.PathBase,
             }
         );
 

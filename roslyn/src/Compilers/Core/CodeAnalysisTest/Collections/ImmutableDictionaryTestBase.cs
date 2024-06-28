@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var map = this.Empty<string, int>().SetItems(template);
             Assert.Equal(2, map.Count);
 
-            var changes = new Dictionary<string, int> { { "Microsoft", 150 }, { "Dogs", 90 }, };
+            var changes = new Dictionary<string, int> { { "Microsoft", 150 }, { "Dogs", 90 } };
             map = map.SetItems(changes);
             Assert.Equal(3, map.Count);
             Assert.Equal(150, map["Microsoft"]);

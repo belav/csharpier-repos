@@ -237,7 +237,7 @@ namespace System.Web.Services.Protocols
             'C',
             'D',
             'E',
-            'F'
+            'F',
         };
     }
 

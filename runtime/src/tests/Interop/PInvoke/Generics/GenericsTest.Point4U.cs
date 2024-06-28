@@ -107,7 +107,7 @@ unsafe partial class GenericsTest
             value2,
             value3,
             *value4,
-            value5
+            value5,
         };
 
         fixed (GenericsNative.Point4<uint>* pValues = &values[0])

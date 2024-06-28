@@ -1047,7 +1047,7 @@ Block[B2] - Exit
                 // file.cs(8,22): error CS0833: An anonymous type cannot have multiple properties with the same name
                 //         p = new { i, i };
                 Diagnostic(ErrorCode.ERR_AnonymousTypeDuplicatePropertyName, "i")
-                    .WithLocation(8, 22)
+                    .WithLocation(8, 22),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1130,7 +1130,7 @@ Block[B2] - Exit
                 //         p = new { a = };
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "}")
                     .WithArguments("}")
-                    .WithLocation(8, 23)
+                    .WithLocation(8, 23),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1225,7 +1225,7 @@ Block[B2] - Exit
                     .WithLocation(8, 19),
                 // file.cs(8,19): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         p = new { M2() = i };
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "M2()").WithLocation(8, 19)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "M2()").WithLocation(8, 19),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1319,7 +1319,7 @@ Block[B2] - Exit
                 //         p = new { a[i] = j };
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "a")
                     .WithArguments("a")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

@@ -267,7 +267,7 @@ public class ForeignKeyAttributeConvention
             {
                 fkPropertiesToSet = new List<string>
                 {
-                    fkPropertyOnDependent.GetSimpleMemberName()
+                    fkPropertyOnDependent.GetSimpleMemberName(),
                 };
                 upgradeDependentToPrincipalNavigationSource = true;
             }
@@ -282,7 +282,7 @@ public class ForeignKeyAttributeConvention
                 shouldInvert = true;
                 fkPropertiesToSet = new List<string>
                 {
-                    fkPropertyOnPrincipal!.GetSimpleMemberName()
+                    fkPropertyOnPrincipal!.GetSimpleMemberName(),
                 };
                 upgradePrincipalToDependentNavigationSource = true;
             }
@@ -423,14 +423,13 @@ public class ForeignKeyAttributeConvention
             );
         }
 
-        return
-            relationshipBuilder.HasNavigation(
+        return relationshipBuilder.HasNavigation(
                 (string?)null,
                 pointsToPrincipal: false,
                 fromDataAnnotation: true
             )
                 is null
-            ? null
+                ? null
             : foreignKey.PrincipalEntityType.Builder.HasRelationship(
                 foreignKey.DeclaringEntityType,
                 principalToDependentNavigationName,
@@ -438,7 +437,7 @@ public class ForeignKeyAttributeConvention
                 fromDataAnnotation: true
             ) == null
                 ? null
-                : relationshipBuilder;
+            : relationshipBuilder;
     }
 
     private static ForeignKeyAttribute? GetForeignKeyAttribute(IConventionNavigationBase navigation)

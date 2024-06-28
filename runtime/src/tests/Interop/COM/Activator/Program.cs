@@ -110,7 +110,7 @@ namespace Activator
                 var cxt = new ComActivationContext()
                 {
                     InterfaceId = typeof(IClassFactory).GUID,
-                    AssemblyPath = "foo.dll"
+                    AssemblyPath = "foo.dll",
                 };
                 GetClassFactoryForType(cxt);
             };
@@ -136,7 +136,7 @@ namespace Activator
                 {
                     ClassId = CLSID_NotRegistered,
                     InterfaceId = typeof(IClassFactory).GUID,
-                    AssemblyPath = @"C:\foo.dll"
+                    AssemblyPath = @"C:\foo.dll",
                 };
                 GetClassFactoryForType(cxt);
             };
@@ -223,7 +223,7 @@ namespace Activator
                     AssemblyPath = assemblyBPath,
                     AssemblyName = "AssemblyB",
                     TypeName = "ClassFromB",
-                    IsolatedContext = useIsolatedContext
+                    IsolatedContext = useIsolatedContext,
                 };
 
                 var factory = GetClassFactoryForType(cxt);
@@ -275,7 +275,7 @@ namespace Activator
                     "ValidRegistrationTypeCallbacks",
                     "ValidRegistrationStringCallbacks",
                     "InheritedRegistrationTypeCallbacks",
-                    "InheritedRegistrationStringCallbacks"
+                    "InheritedRegistrationStringCallbacks",
                 };
 
                 foreach (string typeName in typeNamesToValidate)
@@ -288,7 +288,7 @@ namespace Activator
                         InterfaceId = typeof(IClassFactory).GUID,
                         AssemblyPath = assemblyAPath,
                         AssemblyName = "AssemblyA",
-                        TypeName = typeName
+                        TypeName = typeName,
                     };
 
                     var factory = GetClassFactoryForType(cxt);
@@ -332,7 +332,7 @@ namespace Activator
                         "NoRegistrationCallbacks",
                         "InvalidArgRegistrationCallbacks",
                         "InvalidInstanceRegistrationCallbacks",
-                        "MultipleRegistrationCallbacks"
+                        "MultipleRegistrationCallbacks",
                     }
                 )
                 {
@@ -344,7 +344,7 @@ namespace Activator
                         InterfaceId = typeof(IClassFactory).GUID,
                         AssemblyPath = assemblyAPath,
                         AssemblyName = "AssemblyA",
-                        TypeName = typename
+                        TypeName = typename,
                     };
 
                     var factory = GetClassFactoryForType(cxt);

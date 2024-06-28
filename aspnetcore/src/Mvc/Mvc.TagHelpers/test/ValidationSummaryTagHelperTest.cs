@@ -28,7 +28,7 @@ public class ValidationSummaryTagHelperTest
             var modelState = new ModelStateDictionary();
             SetValidModelState(modelState);
 
-            return new TheoryData<ModelStateDictionary> { emptyModelState, modelState, };
+            return new TheoryData<ModelStateDictionary> { emptyModelState, modelState };
         }
     }
 

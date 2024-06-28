@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
                     SearchReferenceAssemblies,
                     language
                 ),
-                SearchNuGetPackages = globalOptions.GetOption(SearchNuGetPackages, language)
+                SearchNuGetPackages = globalOptions.GetOption(SearchNuGetPackages, language),
             };
 
         private static readonly OptionGroup s_optionGroup =

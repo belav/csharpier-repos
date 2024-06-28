@@ -28,7 +28,7 @@ namespace System.ComponentModel.EventBasedAsync.Tests
                     new object[] { null, true, typeof(InvalidOperationException) },
                     // dummy exceptions
                     new object[] { new FormatException(), false, typeof(FormatException) },
-                    new object[] { new DllNotFoundException(), true, typeof(DllNotFoundException) }
+                    new object[] { new DllNotFoundException(), true, typeof(DllNotFoundException) },
                 };
             }
         }

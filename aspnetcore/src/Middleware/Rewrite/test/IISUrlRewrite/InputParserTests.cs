@@ -120,7 +120,7 @@ public class InputParserTests
         {
             HttpContext = new DefaultHttpContext(features),
             StaticFileProvider = null,
-            Logger = NullLogger.Instance
+            Logger = NullLogger.Instance,
         };
 
         var middle = new InputParser().ParseInputString(testString, UriMatchPart.Path);
@@ -209,7 +209,7 @@ public class InputParserTests
         {
             HttpContext = context,
             StaticFileProvider = null,
-            Logger = NullLogger.Instance
+            Logger = NullLogger.Instance,
         };
     }
 

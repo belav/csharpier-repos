@@ -965,7 +965,7 @@ namespace System.Data.Objects.DataClasses
             Attach(
                 new IEntityWrapper[]
                 {
-                    EntityWrapperFactory.WrapEntityUsingContext(entity, ObjectContext)
+                    EntityWrapperFactory.WrapEntityUsingContext(entity, ObjectContext),
                 },
                 false
             );

@@ -216,7 +216,7 @@ public class RedirectToRouteResultTest
             {
                 new RouteValueDictionary(
                     new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
-                )
+                ),
             };
         }
     }

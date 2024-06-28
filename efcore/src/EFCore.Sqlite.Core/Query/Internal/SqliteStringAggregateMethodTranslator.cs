@@ -104,7 +104,7 @@ public class SqliteStringAggregateMethodTranslator : IAggregateMethodCallTransla
                             ? arguments[0]
                             : _sqlExpressionFactory.Constant(string.Empty, typeof(string)),
                         sqlExpression.TypeMapping
-                    )
+                    ),
                 },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true },

@@ -71,7 +71,7 @@ namespace Newtonsoft.Json.Tests
             {
                 Red = 255,
                 Green = 0,
-                Blue = 0
+                Blue = 0,
             };
 
             string json = JsonConvert.SerializeObject(
@@ -89,7 +89,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters = { new HtmlColorConverter() }
+                    Converters = { new HtmlColorConverter() },
                 }
             );
             // "#FF0000"
@@ -99,7 +99,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters = { new HtmlColorConverter() }
+                    Converters = { new HtmlColorConverter() },
                 }
             );
             Assert.AreEqual(255, r2.Red);
@@ -163,7 +163,7 @@ namespace Newtonsoft.Json.Tests
                 {
                     Red = Convert.ToInt32(hexString.Substring(0, 2), 16),
                     Green = Convert.ToInt32(hexString.Substring(2, 2), 16),
-                    Blue = Convert.ToInt32(hexString.Substring(4, 2), 16)
+                    Blue = Convert.ToInt32(hexString.Substring(4, 2), 16),
                 };
             }
 
@@ -187,7 +187,7 @@ namespace Newtonsoft.Json.Tests
             IDictionary<DateTime, int> dailyRegistrations = new Dictionary<DateTime, int>
             {
                 { new DateTime(2014, 6, 1), 23 },
-                { new DateTime(2014, 6, 2), 50 }
+                { new DateTime(2014, 6, 2), 50 },
             };
 
             string regJson = JsonConvert.SerializeObject(dailyRegistrations, Formatting.Indented);
@@ -217,7 +217,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    TraceWriter = traceWriter
+                    TraceWriter = traceWriter,
                 }
             );
 
@@ -237,7 +237,7 @@ namespace Newtonsoft.Json.Tests
             var s = new Session
             {
                 Name = "Serialize All The Things",
-                Date = new DateTime(2014, 6, 4, 0, 0, 0, DateTimeKind.Utc)
+                Date = new DateTime(2014, 6, 4, 0, 0, 0, DateTimeKind.Utc),
             };
 
             string j = JsonConvert.SerializeObject(
@@ -245,7 +245,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     Formatting = Formatting.Indented,
-                    Converters = { new JavaScriptDateTimeConverter() }
+                    Converters = { new JavaScriptDateTimeConverter() },
                 }
             );
             // {
@@ -380,7 +380,7 @@ namespace Newtonsoft.Json.Tests
                 {
                     Formatting = Formatting.Indented,
                     TypeNameHandling = TypeNameHandling.Objects,
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
             // {
@@ -465,7 +465,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonSerializerSettings
                 {
                     TypeNameHandling = TypeNameHandling.Objects,
-                    PreserveReferencesHandling = PreserveReferencesHandling.Objects
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
                 }
             );
             // Name = Mike Manager
@@ -610,7 +610,7 @@ namespace Newtonsoft.Json.Tests
                 new JsonMergeSettings
                 {
                     // union arrays together to avoid duplicates
-                    MergeArrayHandling = MergeArrayHandling.Union
+                    MergeArrayHandling = MergeArrayHandling.Union,
                 }
             );
 

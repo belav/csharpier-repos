@@ -177,7 +177,7 @@ namespace System.Web.Razor.Test.Tokenizer
                 keyword,
                 new CSharpSymbol(0, 0, 0, keyword, CSharpSymbolType.Keyword)
                 {
-                    Keyword = keywordType
+                    Keyword = keywordType,
                 }
             );
         }

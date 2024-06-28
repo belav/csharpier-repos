@@ -67,7 +67,7 @@ class Program
                 "X86",
                 "Regression",
                 "GitHub_21666",
-                "GitHub_21666_ro"
+                "GitHub_21666_ro",
             },
             new string[] { "Interop", "NativeLibrary", "API", "NativeLibraryTests" },
             new string[]
@@ -75,7 +75,7 @@ class Program
                 "baseservices",
                 "compilerservices",
                 "FixedAddressValueType",
-                "FixedAddressValueType"
+                "FixedAddressValueType",
             },
             new string[] { "GC", "LargeMemory", "API", "gc", "gettotalmemory" },
             new string[] { "JIT", "jit64", "opt", "rngchk", "RngchkStress2_o" },

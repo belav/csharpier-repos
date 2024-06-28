@@ -33,6 +33,8 @@ namespace System.IO.Compression
         ReadingFooter = 22,
         VerifyingFooter = 23,
 
-        Done = 24 // Finished
+        Done =
+            24 // Finished
+        ,
     }
 }

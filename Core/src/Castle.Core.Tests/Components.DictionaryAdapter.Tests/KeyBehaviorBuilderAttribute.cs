@@ -23,7 +23,7 @@ namespace Castle.Components.DictionaryAdapter.Tests
         private static readonly object[] Behaviors =
         {
             new KeyPrefixAttribute("Foo "),
-            new KeySubstitutionAttribute("_", " ")
+            new KeySubstitutionAttribute("_", " "),
         };
 
         public object[] BuildBehaviors()

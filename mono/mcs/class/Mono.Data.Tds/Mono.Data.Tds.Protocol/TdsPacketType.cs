@@ -46,6 +46,6 @@ namespace Mono.Data.Tds.Protocol
         Logoff = 0x71,
         Normal = 0x0f,
         DBRPC = 0xe6,
-        RPC = 0x3
+        RPC = 0x3,
     }
 }

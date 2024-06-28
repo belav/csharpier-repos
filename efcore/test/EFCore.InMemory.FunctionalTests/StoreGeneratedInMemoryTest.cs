@@ -324,18 +324,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedIntClassDependentShadow(),
-                            new WrappedIntClassDependentShadow()
+                            new WrappedIntClassDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedIntClassDependentOptional(),
-                            new WrappedIntClassDependentOptional()
+                            new WrappedIntClassDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedIntClassDependentRequired(),
-                            new WrappedIntClassDependentRequired()
-                        }
+                            new WrappedIntClassDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -347,18 +347,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedIntStructDependentShadow(),
-                            new WrappedIntStructDependentShadow()
+                            new WrappedIntStructDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedIntStructDependentOptional(),
-                            new WrappedIntStructDependentOptional()
+                            new WrappedIntStructDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedIntStructDependentRequired(),
-                            new WrappedIntStructDependentRequired()
-                        }
+                            new WrappedIntStructDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -370,18 +370,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedIntRecordDependentShadow(),
-                            new WrappedIntRecordDependentShadow()
+                            new WrappedIntRecordDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedIntRecordDependentOptional(),
-                            new WrappedIntRecordDependentOptional()
+                            new WrappedIntRecordDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedIntRecordDependentRequired(),
-                            new WrappedIntRecordDependentRequired()
-                        }
+                            new WrappedIntRecordDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -760,18 +760,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new LongToIntDependentShadow(),
-                            new LongToIntDependentShadow()
+                            new LongToIntDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new LongToIntDependentOptional(),
-                            new LongToIntDependentOptional()
+                            new LongToIntDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new LongToIntDependentRequired(),
-                            new LongToIntDependentRequired()
-                        }
+                            new LongToIntDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -1151,18 +1151,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedStringClassDependentShadow(),
-                            new WrappedStringClassDependentShadow()
+                            new WrappedStringClassDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedStringClassDependentOptional(),
-                            new WrappedStringClassDependentOptional()
+                            new WrappedStringClassDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedStringClassDependentRequired(),
-                            new WrappedStringClassDependentRequired()
-                        }
+                            new WrappedStringClassDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -1174,18 +1174,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedStringStructDependentShadow(),
-                            new WrappedStringStructDependentShadow()
+                            new WrappedStringStructDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedStringStructDependentOptional(),
-                            new WrappedStringStructDependentOptional()
+                            new WrappedStringStructDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedStringStructDependentRequired(),
-                            new WrappedStringStructDependentRequired()
-                        }
+                            new WrappedStringStructDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -1197,18 +1197,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedStringRecordDependentShadow(),
-                            new WrappedStringRecordDependentShadow()
+                            new WrappedStringRecordDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedStringRecordDependentOptional(),
-                            new WrappedStringRecordDependentOptional()
+                            new WrappedStringRecordDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedStringRecordDependentRequired(),
-                            new WrappedStringRecordDependentRequired()
-                        }
+                            new WrappedStringRecordDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -1795,18 +1795,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedGuidClassDependentShadow(),
-                            new WrappedGuidClassDependentShadow()
+                            new WrappedGuidClassDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedGuidClassDependentOptional(),
-                            new WrappedGuidClassDependentOptional()
+                            new WrappedGuidClassDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedGuidClassDependentRequired(),
-                            new WrappedGuidClassDependentRequired()
-                        }
+                            new WrappedGuidClassDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -1818,18 +1818,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedGuidStructDependentShadow(),
-                            new WrappedGuidStructDependentShadow()
+                            new WrappedGuidStructDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedGuidStructDependentOptional(),
-                            new WrappedGuidStructDependentOptional()
+                            new WrappedGuidStructDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedGuidStructDependentRequired(),
-                            new WrappedGuidStructDependentRequired()
-                        }
+                            new WrappedGuidStructDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -1841,18 +1841,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedGuidRecordDependentShadow(),
-                            new WrappedGuidRecordDependentShadow()
+                            new WrappedGuidRecordDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedGuidRecordDependentOptional(),
-                            new WrappedGuidRecordDependentOptional()
+                            new WrappedGuidRecordDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedGuidRecordDependentRequired(),
-                            new WrappedGuidRecordDependentRequired()
-                        }
+                            new WrappedGuidRecordDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -2441,18 +2441,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedUriClassDependentShadow(),
-                            new WrappedUriClassDependentShadow()
+                            new WrappedUriClassDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedUriClassDependentOptional(),
-                            new WrappedUriClassDependentOptional()
+                            new WrappedUriClassDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedUriClassDependentRequired(),
-                            new WrappedUriClassDependentRequired()
-                        }
+                            new WrappedUriClassDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -2464,18 +2464,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedUriStructDependentShadow(),
-                            new WrappedUriStructDependentShadow()
+                            new WrappedUriStructDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedUriStructDependentOptional(),
-                            new WrappedUriStructDependentOptional()
+                            new WrappedUriStructDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedUriStructDependentRequired(),
-                            new WrappedUriStructDependentRequired()
-                        }
+                            new WrappedUriStructDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -2487,18 +2487,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new WrappedUriRecordDependentShadow(),
-                            new WrappedUriRecordDependentShadow()
+                            new WrappedUriRecordDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new WrappedUriRecordDependentOptional(),
-                            new WrappedUriRecordDependentOptional()
+                            new WrappedUriRecordDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new WrappedUriRecordDependentRequired(),
-                            new WrappedUriRecordDependentRequired()
-                        }
+                            new WrappedUriRecordDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -2877,13 +2877,13 @@ public class StoreGeneratedInMemoryTest
                         OptionalDependents =
                         {
                             new UriDependentOptional(),
-                            new UriDependentOptional()
+                            new UriDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new UriDependentRequired(),
-                            new UriDependentRequired()
-                        }
+                            new UriDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -2974,7 +2974,7 @@ public class StoreGeneratedInMemoryTest
         B,
         C,
         D,
-        E
+        E,
     }
 
     protected class EnumPrincipal
@@ -3032,13 +3032,13 @@ public class StoreGeneratedInMemoryTest
                         OptionalDependents =
                         {
                             new EnumDependentOptional(),
-                            new EnumDependentOptional()
+                            new EnumDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new EnumDependentRequired(),
-                            new EnumDependentRequired()
-                        }
+                            new EnumDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -3176,18 +3176,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new GuidAsStringDependentShadow(),
-                            new GuidAsStringDependentShadow()
+                            new GuidAsStringDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new GuidAsStringDependentOptional(),
-                            new GuidAsStringDependentOptional()
+                            new GuidAsStringDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new GuidAsStringDependentRequired(),
-                            new GuidAsStringDependentRequired()
-                        }
+                            new GuidAsStringDependentRequired(),
+                        },
                     }
                 )
                 .Entity;
@@ -3328,18 +3328,18 @@ public class StoreGeneratedInMemoryTest
                         Dependents =
                         {
                             new StringAsGuidDependentShadow(),
-                            new StringAsGuidDependentShadow()
+                            new StringAsGuidDependentShadow(),
                         },
                         OptionalDependents =
                         {
                             new StringAsGuidDependentOptional(),
-                            new StringAsGuidDependentOptional()
+                            new StringAsGuidDependentOptional(),
                         },
                         RequiredDependents =
                         {
                             new StringAsGuidDependentRequired(),
-                            new StringAsGuidDependentRequired()
-                        }
+                            new StringAsGuidDependentRequired(),
+                        },
                     }
                 )
                 .Entity;

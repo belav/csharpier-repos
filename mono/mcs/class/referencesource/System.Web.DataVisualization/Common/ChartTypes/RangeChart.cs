@@ -1438,7 +1438,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         SurfaceNames.Top,
                         SurfaceNames.Left,
                         SurfaceNames.Right,
-                        SurfaceNames.Front
+                        SurfaceNames.Front,
                     };
                 else
                     surfacesOrder = new SurfaceNames[]
@@ -1448,7 +1448,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
                         SurfaceNames.Bottom,
                         SurfaceNames.Left,
                         SurfaceNames.Right,
-                        SurfaceNames.Front
+                        SurfaceNames.Front,
                     };
 
                 LineSegmentType lineSegmentType = LineSegmentType.Middle;

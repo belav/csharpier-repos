@@ -12,7 +12,7 @@ namespace System.ServiceModel.Security.Tokens
         AlwaysToRecipient = 0,
         Never = 1,
         Once = 2,
-        AlwaysToInitiator = 3
+        AlwaysToInitiator = 3,
     }
 
     static class SecurityTokenInclusionModeHelper

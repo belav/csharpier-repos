@@ -16,7 +16,7 @@ public class NoContentDoNotTreatNullValueAsNoContentController : Controller
         {
             var noContentFormatter = new HttpNoContentOutputFormatter()
             {
-                TreatNullValueAsNoContent = false
+                TreatNullValueAsNoContent = false,
             };
             result.Formatters.Add(noContentFormatter);
         }

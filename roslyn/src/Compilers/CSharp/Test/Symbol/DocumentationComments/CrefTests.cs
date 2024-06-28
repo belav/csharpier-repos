@@ -1303,13 +1303,11 @@ static class D
             foreach (var crefSyntax in GetCrefSyntaxes(compilation))
             {
                 string text = crefSyntax.ToString();
-                string arguments = text.Contains("C()")
-                    ? "C()"
-                    : text.Contains("C")
-                        ? "C"
-                        : text.Contains("D()")
-                            ? "D()"
-                            : "D";
+                string arguments =
+                    text.Contains("C()") ? "C()"
+                    : text.Contains("C") ? "C"
+                    : text.Contains("D()") ? "D()"
+                    : "D";
                 Assert.Null(
                     GetReferencedSymbol(
                         crefSyntax,
@@ -2507,7 +2505,7 @@ class C
                 source,
                 new[]
                 {
-                    new CSharpCompilationReference(lib, aliases: ImmutableArray.Create("LibAlias"))
+                    new CSharpCompilationReference(lib, aliases: ImmutableArray.Create("LibAlias")),
                 }
             );
             var crefSyntax = GetCrefSyntaxes(compilation).Single();
@@ -2548,7 +2546,7 @@ class C
                 source,
                 new[]
                 {
-                    new CSharpCompilationReference(lib, aliases: ImmutableArray.Create("LibAlias"))
+                    new CSharpCompilationReference(lib, aliases: ImmutableArray.Create("LibAlias")),
                 }
             );
             var crefSyntax = GetCrefSyntaxes(compilation).Single();
@@ -2592,7 +2590,7 @@ class C
                 source,
                 new[]
                 {
-                    new CSharpCompilationReference(lib, aliases: ImmutableArray.Create("LibAlias"))
+                    new CSharpCompilationReference(lib, aliases: ImmutableArray.Create("LibAlias")),
                 }
             );
             var crefSyntax = GetCrefSyntaxes(compilation).Single();
@@ -8127,7 +8125,7 @@ class Test
                 //     /// <see cref="M(readonly ref int)"/>
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
                     .WithArguments(") expected", "1026")
-                    .WithLocation(8, 22)
+                    .WithLocation(8, 22),
             };
 
             verify(
@@ -8190,7 +8188,7 @@ class Test
                 //     /// <see cref="M(readonly ref int)"/>
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "readonly")
                     .WithArguments(") expected", "1026")
-                    .WithLocation(8, 22)
+                    .WithLocation(8, 22),
             };
 
             verify(
@@ -8285,7 +8283,7 @@ class Test
                 //     /// <see cref="M(ref readonly int)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "M(ref readonly int)")
                     .WithArguments("M(ref readonly int)")
-                    .WithLocation(8, 20)
+                    .WithLocation(8, 20),
             };
 
             verify(

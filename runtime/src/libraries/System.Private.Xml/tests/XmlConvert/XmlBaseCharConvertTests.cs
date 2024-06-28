@@ -324,7 +324,7 @@ namespace System.Xml.XmlConvertTests
             "_x3104_",
             "_x312D_",
             "_xABFF_",
-            "_xD7A4_"
+            "_xD7A4_",
         };
 
         public static byte[] _byte_BaseChar =
@@ -956,7 +956,7 @@ namespace System.Xml.XmlConvertTests
             0xFF,
             0xAB,
             0xA4,
-            0xD7
+            0xD7,
         };
 
         #endregion

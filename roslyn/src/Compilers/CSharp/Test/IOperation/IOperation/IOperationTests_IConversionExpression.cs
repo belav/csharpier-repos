@@ -155,7 +155,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
                 //         int /*<bind>*/i1 = f1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f1")
                     .WithArguments("float", "int")
-                    .WithLocation(7, 28)
+                    .WithLocation(7, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -195,7 +195,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
                 //         int /*<bind>*/i1 =/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(8, 38)
+                    .WithLocation(8, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -258,7 +258,7 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
                 //         Enum1 /*<bind>*/e1 = 0/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1")
                     .WithArguments("e1")
-                    .WithLocation(5, 25)
+                    .WithLocation(5, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -304,7 +304,7 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
                 //         Enum1 /*<bind>*/e1 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
                     .WithArguments("int", "Enum1")
-                    .WithLocation(7, 30)
+                    .WithLocation(7, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -353,7 +353,7 @@ IVariableDeclaratorOperation (Symbol: Enum1 e1) (OperationKind.VariableDeclarato
                 //         Enum1 /*<bind>*/e1 = 1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1")
                     .WithArguments("e1")
-                    .WithLocation(5, 25)
+                    .WithLocation(5, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -395,7 +395,7 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
                 //         Enum1 /*<bind>*/e1 =/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 40)
+                    .WithLocation(6, 40),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -465,7 +465,7 @@ IVariableDeclaratorOperation (Symbol: System.Object o) (OperationKind.VariableDe
                             .Initializer
                             .Value;
                         return (IConversionOperation)((ICoalesceOperation)initializer).WhenNull;
-                    }
+                    },
                 }.Verify
             );
         }
@@ -499,7 +499,7 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
             {
                 // CS8115: A throw expression is not allowed in this context.
                 //         object /*<bind>*/o = throw new Exception()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(8, 30)
+                Diagnostic(ErrorCode.ERR_ThrowMisplaced, "throw").WithLocation(8, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -540,7 +540,7 @@ IVariableDeclaratorOperation (Symbol: System.String s1) (OperationKind.VariableD
                 //         string /*<bind>*/s1 = null/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
                     .WithArguments("s1")
-                    .WithLocation(6, 26)
+                    .WithLocation(6, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -585,7 +585,7 @@ IVariableDeclaratorOperation (Symbol: S1? s1) (OperationKind.VariableDeclarator,
                 //         S1? /*<bind>*/s1 = null/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
                     .WithArguments("s1")
-                    .WithLocation(10, 23)
+                    .WithLocation(10, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -626,7 +626,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i1) (OperationKind.VariableDe
                 //         int /*<bind>*/i1 = null/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ValueCantBeNull, "null")
                     .WithArguments("int")
-                    .WithLocation(6, 28)
+                    .WithLocation(6, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -669,7 +669,7 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDe
                 //         long /*<bind>*/i1 = default(int)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(8, 24)
+                    .WithLocation(8, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -713,7 +713,7 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i1) (OperationKind.VariableDe
                 //         long /*<bind>*/i1 = default(int)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(8, 24)
+                    .WithLocation(8, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -756,7 +756,7 @@ IVariableDeclaratorOperation (Symbol: System.String i1) (OperationKind.VariableD
                 //         string /*<bind>*/i1 = default(string)/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(8, 26)
+                    .WithLocation(8, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -796,7 +796,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32? i1) (OperationKind.VariableD
                 //         int? /*<bind>*/i1 = 1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 24)
+                    .WithLocation(6, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -908,7 +908,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i2) (OperationKind.VariableDe
                 //         int /*<bind>*/i2 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
                     .WithArguments("int?", "int")
-                    .WithLocation(7, 28)
+                    .WithLocation(7, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1124,7 +1124,7 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
                 //         C1 /*<bind>*/c1 = new C2()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C2()")
                     .WithArguments("C2", "C1")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1166,7 +1166,7 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
             {
                 // file.cs(8,41): error CS1526: A new expression requires an argument list or (), [], or {} after type
                 //         C1 /*<bind>*/c1 = new/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadNewExpr, ";").WithLocation(8, 41)
+                Diagnostic(ErrorCode.ERR_BadNewExpr, ";").WithLocation(8, 41),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1259,7 +1259,7 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
                 //         I1 /*<bind>*/i1 = new C1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new C1()")
                     .WithArguments("C1", "I1")
-                    .WithLocation(12, 27)
+                    .WithLocation(12, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1307,7 +1307,7 @@ IVariableDeclaratorOperation (Symbol: C1 i1) (OperationKind.VariableDeclarator, 
                 //         C1 /*<bind>*/i1 = new I1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoNewAbstract, "new I1()")
                     .WithArguments("I1")
-                    .WithLocation(12, 27)
+                    .WithLocation(12, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1404,7 +1404,7 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
                 //         I1 /*<bind>*/i1 = i2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i2")
                     .WithArguments("I2", "I1")
-                    .WithLocation(17, 27)
+                    .WithLocation(17, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1493,7 +1493,7 @@ IVariableDeclaratorOperation (Symbol: C1[][] c1arr) (OperationKind.VariableDecla
                 //         C1[][] /*<bind>*/c1arr = c2arr/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c2arr")
                     .WithArguments("C2[]", "C1[][]")
-                    .WithLocation(9, 34)
+                    .WithLocation(9, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1541,7 +1541,7 @@ IVariableDeclaratorOperation (Symbol: C1[] c1arr) (OperationKind.VariableDeclara
                 //         C1[] /*<bind>*/c1arr = c2arr/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "c2arr")
                     .WithArguments("C2[]", "C1[]")
-                    .WithLocation(9, 32)
+                    .WithLocation(9, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1596,7 +1596,7 @@ IVariableDeclaratorOperation (Symbol: I1[] i1arr) (OperationKind.VariableDeclara
                 //         I1[] /*<bind>*/i1arr = new S1[10]/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new S1[10]")
                     .WithArguments("S1[]", "I1[]")
-                    .WithLocation(8, 32)
+                    .WithLocation(8, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1722,7 +1722,7 @@ IVariableDeclaratorOperation (Symbol: System.Array a1) (OperationKind.VariableDe
                 //         Array /*<bind>*/a1 = new object()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()")
                     .WithArguments("object", "System.Array")
-                    .WithLocation(8, 30)
+                    .WithLocation(8, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1808,7 +1808,7 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<System.In
                 //         IList<int> /*<bind>*/a1 = new object()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new object()")
                     .WithArguments("object", "System.Collections.Generic.IList<int>")
-                    .WithLocation(8, 35)
+                    .WithLocation(8, 35),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1902,7 +1902,7 @@ IVariableDeclaratorOperation (Symbol: System.Delegate d2) (OperationKind.Variabl
                 //         Delegate /*<bind>*/d2 = d1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "d1()")
                     .WithArguments("void", "System.Delegate")
-                    .WithLocation(10, 33)
+                    .WithLocation(10, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -1947,7 +1947,7 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
                 //         Delegate /*<bind>*/d2 =/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(9, 43)
+                    .WithLocation(9, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2101,7 +2101,7 @@ IVariableDeclaratorOperation (Symbol: I1<C3> c1) (OperationKind.VariableDeclarat
                 //         I1<C3> /*<bind>*/c1 = c2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2")
                     .WithArguments("C2<C4>", "I1<C3>")
-                    .WithLocation(11, 31)
+                    .WithLocation(11, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2210,7 +2210,7 @@ IVariableDeclaratorOperation (Symbol: I1<C4> c1) (OperationKind.VariableDeclarat
                 //         I1<C4> /*<bind>*/c1 = c2/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c2")
                     .WithArguments("C2<C3>", "I1<C4>")
-                    .WithLocation(11, 31)
+                    .WithLocation(11, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2340,7 +2340,7 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
                 //         C1 /*<bind>*/c1 = new T()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new T()")
                     .WithArguments("T", "C1")
-                    .WithLocation(7, 27)
+                    .WithLocation(7, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2429,7 +2429,7 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
                 //         I1 /*<bind>*/i1 = new T()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "new T()")
                     .WithArguments("T", "I1")
-                    .WithLocation(11, 27)
+                    .WithLocation(11, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2520,7 +2520,7 @@ IVariableDeclaratorOperation (Symbol: U u) (OperationKind.VariableDeclarator, Ty
                 //         U /*<bind>*/u = new T()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new T()")
                     .WithArguments("T", "U")
-                    .WithLocation(12, 25)
+                    .WithLocation(12, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2566,7 +2566,7 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
                 //         T /*<bind>*/t = null/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "t")
                     .WithArguments("t")
-                    .WithLocation(11, 21)
+                    .WithLocation(11, 21),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2612,7 +2612,7 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
                 //         T /*<bind>*/t = null/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_TypeVarCantBeNull, "null")
                     .WithArguments("T")
-                    .WithLocation(11, 25)
+                    .WithLocation(11, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2771,7 +2771,7 @@ IVariableDeclaratorOperation (Symbol: System.ValueType v1) (OperationKind.Variab
                 //         ValueType /*<bind>*/v1 = new C1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new C1()")
                     .WithArguments("C1", "System.ValueType")
-                    .WithLocation(8, 34)
+                    .WithLocation(8, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2860,7 +2860,7 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
                 //         I1 /*<bind>*/i1 = new S1()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "new S1()")
                     .WithArguments("S1", "I1")
-                    .WithLocation(10, 27)
+                    .WithLocation(10, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -2945,7 +2945,7 @@ IVariableDeclaratorOperation (Symbol: I1 i1) (OperationKind.VariableDeclarator, 
                 //         I1 /*<bind>*/i1 = s1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "s1")
                     .WithArguments("S1?", "I1")
-                    .WithLocation(11, 27)
+                    .WithLocation(11, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3038,7 +3038,7 @@ IVariableDeclaratorOperation (Symbol: System.Enum e) (OperationKind.VariableDecl
                 //         Enum /*<bind>*/e = 1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "1")
                     .WithArguments("int", "System.Enum")
-                    .WithLocation(13, 28)
+                    .WithLocation(13, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3150,7 +3150,7 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
                     .WithArguments("s1")
-                    .WithLocation(7, 31)
+                    .WithLocation(7, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3197,7 +3197,7 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "s1")
                     .WithArguments("s1")
-                    .WithLocation(7, 31)
+                    .WithLocation(7, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3239,7 +3239,7 @@ IVariableDeclaratorOperation (Symbol: System.SByte s1) (OperationKind.VariableDe
                 //         const sbyte /*<bind>*/s1 = i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "i1")
                     .WithArguments("int", "sbyte")
-                    .WithLocation(7, 36)
+                    .WithLocation(7, 36),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3336,7 +3336,7 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
                 expectedDiagnostics,
                 additionalOperationTreeVerifier: new ExpectedSymbolVerifier()
                 {
-                    ConversionChildSelector = ExpectedSymbolVerifier.NestedConversionChildSelector
+                    ConversionChildSelector = ExpectedSymbolVerifier.NestedConversionChildSelector,
                 }.Verify
             );
         }
@@ -3391,7 +3391,7 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
                 //         int i1 = 1;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3450,7 +3450,7 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
                 //         int i1 = 1;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i1")
                     .WithArguments("i1")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3618,7 +3618,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32* i1) (OperationKind.VariableD
                 //         int* /*<bind>*/i1 = v1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "v1")
                     .WithArguments("void*", "int*")
-                    .WithLocation(9, 29)
+                    .WithLocation(9, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3758,7 +3758,7 @@ IVariableDeclarationStatement (1 declarators) (OperationKind.VariableDeclaration
                 //         Expression<Func<int, bool>> /*<bind>*/exp = num => num/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_CantConvAnonMethReturns, "num")
                     .WithArguments("lambda expression")
-                    .WithLocation(9, 60)
+                    .WithLocation(9, 60),
             };
 
             // Due to https://github.com/dotnet/roslyn/issues/20291, we cannot verify that the types of the ioperation tree and the semantic model
@@ -3809,7 +3809,7 @@ IVariableDeclaratorOperation (Symbol: System.Linq.Expressions.Expression<System.
                 //         Expression<Func<int, bool>> /*<bind>*/exp = num =>/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(9, 70)
+                    .WithLocation(9, 70),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -3884,7 +3884,7 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
                 //         /*<bind>*/return f;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "f")
                     .WithArguments("float", "int")
-                    .WithLocation(7, 26)
+                    .WithLocation(7, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
@@ -3936,7 +3936,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //                 /*<bind>*/object o = null/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "o")
                     .WithArguments("o")
-                    .WithLocation(10, 34)
+                    .WithLocation(10, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -4023,7 +4023,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //         /*<bind>*/Action<int> intAction = objectAction;/*</bind>*/
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "objectAction")
                     .WithArguments("System.Action<object>", "System.Action<int>")
-                    .WithLocation(8, 43)
+                    .WithLocation(8, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -4154,7 +4154,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
                 //         int /*<bind>*/i = (int)1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4198,7 +4198,7 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i) (OperationKind.VariableDec
                 //         long /*<bind>*/i = (int)1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 24)
+                    .WithLocation(6, 24),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4236,7 +4236,7 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                 //         int i = /*<bind>*/(int)1.0/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 13)
+                    .WithLocation(6, 13),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(
@@ -4284,7 +4284,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
                 //         int /*<bind>*/i = (float)1.0/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4328,7 +4328,7 @@ IVariableDeclaratorOperation (Symbol: System.Int64 i) (OperationKind.VariableDec
                 //         long /*<bind>*/i = (int)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(6, 44)
+                    .WithLocation(6, 44),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4373,7 +4373,7 @@ IVariableDeclaratorOperation (Symbol: E1 e1) (OperationKind.VariableDeclarator, 
                 //         E1 /*<bind>*/e1 = (E1)1/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e1")
                     .WithArguments("e1")
-                    .WithLocation(6, 22)
+                    .WithLocation(6, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4420,7 +4420,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32 i) (OperationKind.VariableDec
                 //         int /*<bind>*/i = (int)E1.One/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "i")
                     .WithArguments("i")
-                    .WithLocation(6, 23)
+                    .WithLocation(6, 23),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4472,7 +4472,7 @@ IVariableDeclaratorOperation (Symbol: E2 e2) (OperationKind.VariableDeclarator, 
                 //         E2 /*<bind>*/e2 = (E2)E1.One/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e2")
                     .WithArguments("e2")
-                    .WithLocation(6, 22)
+                    .WithLocation(6, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4532,7 +4532,7 @@ IVariableDeclaratorOperation (Symbol: E2 e2) (OperationKind.VariableDeclarator, 
                 //         E2 /*<bind>*/e2 = (E2)E1.One/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "e2")
                     .WithArguments("e2")
-                    .WithLocation(6, 22)
+                    .WithLocation(6, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4751,7 +4751,7 @@ IVariableDeclaratorOperation (Symbol: C2 c2) (OperationKind.VariableDeclarator, 
                 //         C2 /*<bind>*/c2 = (C2)c1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2)c1")
                     .WithArguments("C1", "C2")
-                    .WithLocation(7, 27)
+                    .WithLocation(7, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4866,7 +4866,7 @@ IVariableDeclaratorOperation (Symbol: C1 c1) (OperationKind.VariableDeclarator, 
                 //         C1 /*<bind>*/c1 = (C1)i1/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1)i1")
                     .WithArguments("I1", "C1")
-                    .WithLocation(9, 27)
+                    .WithLocation(9, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -4947,7 +4947,7 @@ IVariableDeclaratorOperation (Symbol: I2 i2) (OperationKind.VariableDeclarator, 
                 //         I2 /*<bind>*/i2 = (I2)()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
                     .WithArguments(")")
-                    .WithLocation(8, 32)
+                    .WithLocation(8, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5026,7 +5026,7 @@ IVariableDeclaratorOperation (Symbol: C2[] c2arr) (OperationKind.VariableDeclara
                 //         C2[] /*<bind>*/c2arr = (C2[])c1arr/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C2[])c1arr")
                     .WithArguments("C1[]", "C2[]")
-                    .WithLocation(7, 32)
+                    .WithLocation(7, 32),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5067,7 +5067,7 @@ IVariableDeclaratorOperation (Symbol: C1[][] c2arr) (OperationKind.VariableDecla
                 //         C1[][] /*<bind>*/c2arr = (C1[][])c1arr/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1[][])c1arr")
                     .WithArguments("C1[]", "C1[][]")
-                    .WithLocation(7, 34)
+                    .WithLocation(7, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5184,7 +5184,7 @@ IVariableDeclaratorOperation (Symbol: System.Collections.Generic.IList<C1> c1lis
                 //         IList<C1> /*<bind>*/c1list = (IList<C1>)c1arr/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(IList<C1>)c1arr")
                     .WithArguments("C1[][]", "System.Collections.Generic.IList<C1>")
-                    .WithLocation(10, 38)
+                    .WithLocation(10, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5265,7 +5265,7 @@ IVariableDeclaratorOperation (Symbol: C1[][] c1arr) (OperationKind.VariableDecla
                 //         C1[][] /*<bind>*/c1arr = (C1[][])c1List/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(C1[][])c1List")
                     .WithArguments("System.Collections.Generic.IList<C1>", "C1[][]")
-                    .WithLocation(10, 34)
+                    .WithLocation(10, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5588,7 +5588,7 @@ IVariableDeclaratorOperation (Symbol: System.Int32? e1) (OperationKind.VariableD
                 //         int? /*<bind>*/e1 = (E1?)e/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "(E1?)e")
                     .WithArguments("E1?", "int?")
-                    .WithLocation(9, 29)
+                    .WithLocation(9, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5675,7 +5675,7 @@ IVariableDeclaratorOperation (Symbol: S1 s1) (OperationKind.VariableDeclarator, 
                 //         S1 /*<bind>*/s1 = (S1)i/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(S1)i")
                     .WithArguments("I1", "S1")
-                    .WithLocation(9, 27)
+                    .WithLocation(9, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -5793,7 +5793,7 @@ IVariableDeclaratorOperation (Symbol: T t) (OperationKind.VariableDeclarator, Ty
                 //         T /*<bind>*/t = (T)u/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(T)u")
                     .WithArguments("U", "T")
-                    .WithLocation(8, 25)
+                    .WithLocation(8, 25),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -6057,7 +6057,7 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
                 //         /*<bind>*/return (int)"";/*</bind>*/
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, @"(int)""""")
                     .WithArguments("string", "int")
-                    .WithLocation(8, 26)
+                    .WithLocation(8, 26),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
@@ -6099,7 +6099,7 @@ IReturnOperation (OperationKind.Return, Type: null, IsInvalid) (Syntax: 'return 
                 //         /*<bind>*/return (int);/*</bind>*/
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
                     .WithArguments(";")
-                    .WithLocation(8, 31)
+                    .WithLocation(8, 31),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
@@ -6150,7 +6150,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //                 /*<bind>*/object o = (object)null/*</bind>*/;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "o")
                     .WithArguments("o")
-                    .WithLocation(10, 34)
+                    .WithLocation(10, 34),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -6221,7 +6221,7 @@ IConversionOperation (TryCast: False, Unchecked) (OperationKind.Conversion, Type
                 //         Action<int> intAction = /*<bind>*/(Action<int>)objectAction/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoExplicitConv, "(Action<int>)objectAction")
                     .WithArguments("System.Action<object>", "System.Action<int>")
-                    .WithLocation(8, 43)
+                    .WithLocation(8, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<CastExpressionSyntax>(

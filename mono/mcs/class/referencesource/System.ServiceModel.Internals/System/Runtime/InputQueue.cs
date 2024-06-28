@@ -769,7 +769,7 @@ namespace System.Runtime
         {
             Open,
             Shutdown,
-            Closed
+            Closed,
         }
 
         interface IQueueReader

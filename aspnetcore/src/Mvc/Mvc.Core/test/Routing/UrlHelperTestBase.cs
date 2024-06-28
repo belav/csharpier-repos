@@ -338,7 +338,7 @@ public abstract class UrlHelperTestBase
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             )
         );
@@ -361,7 +361,7 @@ public abstract class UrlHelperTestBase
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             ),
             protocol: "http",
@@ -386,7 +386,7 @@ public abstract class UrlHelperTestBase
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             ),
             protocol: string.Empty,
@@ -411,7 +411,7 @@ public abstract class UrlHelperTestBase
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             ),
             protocol: null,
@@ -436,7 +436,7 @@ public abstract class UrlHelperTestBase
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             ),
             protocol: null,
@@ -459,7 +459,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home2",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -480,7 +480,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home2",
-                id = "someid"
+                id = "someid",
             },
             protocol: "https"
         );
@@ -502,7 +502,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home2",
-                id = "someid"
+                id = "someid",
             },
             protocol: "https",
             host: "pingüino"
@@ -552,7 +552,7 @@ public abstract class UrlHelperTestBase
                 {
                     Action = "newaction",
                     Controller = "home2",
-                    id = "someid"
+                    id = "someid",
                 }
             )
         );
@@ -574,7 +574,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home2",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -595,11 +595,11 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home2",
-                id = "someid"
+                id = "someid",
             },
             Fragment = "somefragment",
             Host = "remotetown",
-            Protocol = "ftp"
+            Protocol = "ftp",
         };
 
         // Act
@@ -622,7 +622,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home2",
-                id = "someid"
+                id = "someid",
             },
             fragment: "somefragment",
             host: "remotetown",
@@ -717,7 +717,7 @@ public abstract class UrlHelperTestBase
             Values = new { id = "idone" },
             Protocol = "ftp",
             Host = "remotelyhost",
-            Fragment = "somefragment"
+            Fragment = "somefragment",
         };
 
         // Act
@@ -760,7 +760,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -781,7 +781,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -808,7 +808,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -836,7 +836,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -901,7 +901,7 @@ public abstract class UrlHelperTestBase
             {
                 Action = "newaction",
                 Controller = "home",
-                id = "someid"
+                id = "someid",
             }
         );
 
@@ -918,7 +918,7 @@ public abstract class UrlHelperTestBase
         httpContext.SetupGet(h => h.Features).Returns(new FeatureCollection());
         var mockItems = new Dictionary<object, object>
         {
-            { typeof(IUrlHelper), expectedUrlHelper }
+            { typeof(IUrlHelper), expectedUrlHelper },
         };
         httpContext.Setup(h => h.Items).Returns(mockItems);
 
@@ -986,14 +986,14 @@ public abstract class UrlHelperTestBase
             {
                 second = "default",
                 controller = "default",
-                action = "default"
+                action = "default",
             },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
             requiredValues: new
             {
                 controller = RoutePattern.RequiredValueAny,
-                action = RoutePattern.RequiredValueAny
+                action = RoutePattern.RequiredValueAny,
             }
         );
 
@@ -1033,14 +1033,14 @@ public abstract class UrlHelperTestBase
             {
                 second = "default",
                 controller = "default",
-                action = "default"
+                action = "default",
             },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
             requiredValues: new
             {
                 controller = RoutePattern.RequiredValueAny,
-                action = RoutePattern.RequiredValueAny
+                action = RoutePattern.RequiredValueAny,
             }
         );
 
@@ -1083,14 +1083,14 @@ public abstract class UrlHelperTestBase
             {
                 second = "default",
                 controller = "default",
-                action = "default"
+                action = "default",
             },
             // Emulate ActionEndpointFactory.AddConventionalLinkGenerationRoute().
             // The "controller" and "action" keys are defined automatically by ControllerActionDescriptorBuilder.AddRouteValues().
             requiredValues: new
             {
                 controller = RoutePattern.RequiredValueAny,
-                action = RoutePattern.RequiredValueAny
+                action = RoutePattern.RequiredValueAny,
             }
         );
 
@@ -1136,7 +1136,7 @@ public abstract class UrlHelperTestBase
             new ActionContext
             {
                 RouteData = new RouteData(new RouteValueDictionary()),
-                HttpContext = new DefaultHttpContext()
+                HttpContext = new DefaultHttpContext(),
             }
         );
 

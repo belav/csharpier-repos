@@ -16,7 +16,7 @@ namespace System.Composition.Convention
         {
             typeof(IList<>),
             typeof(ICollection<>),
-            typeof(IEnumerable<>)
+            typeof(IEnumerable<>),
         };
 
         private string _contractName;
@@ -174,7 +174,7 @@ namespace System.Composition.Convention
             {
                 importAttribute = new ImportAttribute(contractName)
                 {
-                    AllowDefault = _allowDefault
+                    AllowDefault = _allowDefault,
                 };
             }
             else

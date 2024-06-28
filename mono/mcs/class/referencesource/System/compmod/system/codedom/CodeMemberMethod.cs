@@ -20,7 +20,7 @@ namespace System.CodeDom
     ///       Represents a class method.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeMemberMethod : CodeTypeMember
     {
         private CodeParameterDeclarationExpressionCollection parameters =

@@ -233,7 +233,7 @@ public class OpenIdConnectChallengeTests
                 {
                     context.ProtocolMessage.State = userState;
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -277,7 +277,7 @@ public class OpenIdConnectChallengeTests
                 {
                     eventIsHit = true;
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -315,7 +315,7 @@ public class OpenIdConnectChallengeTests
                 {
                     context.ProtocolMessage.ClientId = newClientId;
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -349,7 +349,7 @@ public class OpenIdConnectChallengeTests
         var newMessage = new MockOpenIdConnectMessage
         {
             IssuerAddress = "http://example.com/",
-            TestAuthorizeEndpoint = $"http://example.com/{Guid.NewGuid()}/oauth2/signin"
+            TestAuthorizeEndpoint = $"http://example.com/{Guid.NewGuid()}/oauth2/signin",
         };
 
         var settings = new TestSettings(opts =>
@@ -363,7 +363,7 @@ public class OpenIdConnectChallengeTests
                     context.ProtocolMessage = newMessage;
 
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -395,7 +395,7 @@ public class OpenIdConnectChallengeTests
                     context.HandleResponse();
 
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -423,7 +423,7 @@ public class OpenIdConnectChallengeTests
                 {
                     context.HandleResponse();
                     return Task.FromResult(0);
-                }
+                },
             };
         });
 
@@ -575,7 +575,7 @@ public class OpenIdConnectChallengeTests
             opt.Authority = TestServerBuilder.DefaultAuthority;
             opt.Prompt = "consent";
         });
-        var properties = new OpenIdConnectChallengeProperties() { Prompt = "login", };
+        var properties = new OpenIdConnectChallengeProperties() { Prompt = "login" };
 
         var server = settings.CreateTestServer(properties);
         var transaction = await server.SendAsync(

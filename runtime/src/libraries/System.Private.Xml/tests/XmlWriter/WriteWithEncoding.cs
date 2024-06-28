@@ -49,7 +49,7 @@ namespace System.Xml.XmlWriterTests
             {
                 OmitXmlDeclaration = false,
                 ConformanceLevel = ConformanceLevel.Document,
-                Encoding = new UTF32Encoding(false, false, true)
+                Encoding = new UTF32Encoding(false, false, true),
             };
 
             string resultString;

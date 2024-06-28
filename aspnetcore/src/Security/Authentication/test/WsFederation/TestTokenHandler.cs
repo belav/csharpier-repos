@@ -25,7 +25,7 @@ internal class TestSecurityTokenHandler : TokenHandler
                 {
                     ClaimsIdentity = new ClaimsIdentity("Test"),
                     IsValid = true,
-                    SecurityToken = new TestSecurityToken()
+                    SecurityToken = new TestSecurityToken(),
                 }
             );
         }

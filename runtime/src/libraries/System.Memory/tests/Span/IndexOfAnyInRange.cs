@@ -78,7 +78,7 @@ namespace System.SpanTests
                 {
                     (null, new RefType { Value = 42 }),
                     (null, null),
-                    (new RefType { Value = 42 }, null)
+                    (new RefType { Value = 42 }, null),
                 }
             )
             {
@@ -148,7 +148,7 @@ namespace System.SpanTests
                 null,
                 null,
                 new RefType { Value = 42 },
-                null
+                null,
             };
             RefType low = new RefType { Value = 41 },
                 high = new RefType { Value = 43 };

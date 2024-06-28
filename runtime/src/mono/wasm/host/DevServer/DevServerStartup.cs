@@ -120,7 +120,7 @@ internal sealed class DevServerStartup
                             // Browser multi-threaded runtime requires cross-origin policy headers to enable SharedArrayBuffer.
                             ApplyCrossOriginPolicyHeaders(fileContext.Context);
                         }
-                    }
+                    },
                 }
             );
         });

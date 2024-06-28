@@ -28,7 +28,7 @@ public class PageViewLocationExpanderTest
     {
         // Arrange
         var context = CreateContext(pageName: null);
-        var locations = new string[] { "/ignore-me", };
+        var locations = new string[] { "/ignore-me" };
 
         var expander = new PageViewLocationExpander();
 
@@ -47,7 +47,7 @@ public class PageViewLocationExpanderTest
         // Arrange
         var context = CreateContext(pageName: "test");
         context.ActionContext.ActionDescriptor = new ControllerActionDescriptor();
-        var locations = new string[] { "/ignore-me", };
+        var locations = new string[] { "/ignore-me" };
 
         var expander = new PageViewLocationExpander();
 
@@ -63,7 +63,7 @@ public class PageViewLocationExpanderTest
     {
         // Arrange
         var context = CreateContext(pageName: null);
-        var locations = new string[] { "/ignore-me", };
+        var locations = new string[] { "/ignore-me" };
 
         var expander = new PageViewLocationExpander();
 
@@ -86,7 +86,7 @@ public class PageViewLocationExpanderTest
         // Arrange
         var context = CreateContext(pageName: pageName);
 
-        var locations = new string[] { "/{1}/{0}.cshtml", };
+        var locations = new string[] { "/{1}/{0}.cshtml" };
 
         var expander = new PageViewLocationExpander();
 
@@ -138,7 +138,7 @@ public class PageViewLocationExpanderTest
     {
         // Arrange
         var context = CreateContext(pageName: pageName);
-        var locations = new[] { "/Areas/{2}/Pages/{1}/{0}.cshtml", };
+        var locations = new[] { "/Areas/{2}/Pages/{1}/{0}.cshtml" };
 
         var expander = new PageViewLocationExpander();
 
@@ -192,7 +192,7 @@ public class PageViewLocationExpanderTest
         string pageName = null
     )
     {
-        var actionContext = new ActionContext { ActionDescriptor = new PageActionDescriptor(), };
+        var actionContext = new ActionContext { ActionDescriptor = new PageActionDescriptor() };
 
         return new ViewLocationExpanderContext(
             actionContext,

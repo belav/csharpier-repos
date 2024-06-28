@@ -1038,7 +1038,7 @@ public class VectorTests
             15,
             16,
             17,
-            18
+            18,
         };
         var v = new Vector<byte>(elems, 16);
         for (int i = 0; i < 16; ++i)
@@ -1509,7 +1509,7 @@ public class VectorTests
                 1.0,
                 -1.0,
                 1.0,
-                -1.0
+                -1.0,
             }
         );
         var v2 = new Vector<double>(
@@ -1530,7 +1530,7 @@ public class VectorTests
                 2.0,
                 -2.0,
                 2.0,
-                -2.0
+                -2.0,
             }
         );
 
@@ -1560,7 +1560,7 @@ public class VectorTests
                 1.0f,
                 -1.0f,
                 1.0f,
-                -1.0f
+                -1.0f,
             }
         );
         var v2 = new Vector<float>(
@@ -1581,7 +1581,7 @@ public class VectorTests
                 2.0f,
                 -2.0f,
                 2.0f,
-                -2.0f
+                -2.0f,
             }
         );
 
@@ -1630,7 +1630,7 @@ public class VectorTests
                 1.0,
                 -1.0,
                 1.0,
-                -1.0
+                -1.0,
             }
         );
 
@@ -1660,7 +1660,7 @@ public class VectorTests
                 1.0f,
                 -1.0f,
                 1.0f,
-                -1.0f
+                -1.0f,
             }
         );
 
@@ -1739,7 +1739,7 @@ public class VectorTests
                 1.0,
                 -1.0,
                 1.0,
-                -1.0
+                -1.0,
             }
         );
         var v2 = new Vector<double>(new double[] { 1.0, 1.0, 1.0, 1.0 });
@@ -1770,7 +1770,7 @@ public class VectorTests
                 1.0f,
                 -1.0f,
                 1.0f,
-                -1.0f
+                -1.0f,
             }
         );
         var v2 = new Vector<float>(new float[] { 1.0f, 1.0f, 1.0f, 1.0f });

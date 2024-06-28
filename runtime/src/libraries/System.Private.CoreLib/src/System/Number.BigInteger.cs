@@ -47,6 +47,7 @@ namespace System
                     // These last two are accessed only by MultiplyPow10.
                     100000000, // 10^8
                     1000000000 // 10^9
+                    ,
                 ];
 
             private static ReadOnlySpan<int> Pow10BigNumTableIndices =>

@@ -31,6 +31,6 @@ namespace System.Windows.Forms
     public enum FrameStyle
     {
         Dashed = 0,
-        Thick = 1
+        Thick = 1,
     }
 }

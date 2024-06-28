@@ -1273,7 +1273,7 @@ namespace System.Threading
         {
             Locked,
             Spin,
-            Wait
+            Wait,
         }
     }
 }

@@ -194,7 +194,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                 {
                     FeatureAttribute.SolutionCrawlerLegacy,
                     FeatureAttribute.DiagnosticService,
-                    FeatureAttribute.Classification
+                    FeatureAttribute.Classification,
                 },
                 cancellationToken
             );

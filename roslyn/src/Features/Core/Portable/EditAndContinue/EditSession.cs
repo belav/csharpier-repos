@@ -296,14 +296,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 }
             }
 
-            return (oldLineCount == newLineCount)
-                ? default
-                : (newLineCount > oldLineCount)
-                    ? newText.Lines[oldLineCount].Span
-                    : TextSpan.FromBounds(
-                        newText.Lines[newLineCount - 1].End,
-                        newText.Lines[newLineCount - 1].EndIncludingLineBreak
-                    );
+            return (oldLineCount == newLineCount) ? default
+                : (newLineCount > oldLineCount) ? newText.Lines[oldLineCount].Span
+                : TextSpan.FromBounds(
+                    newText.Lines[newLineCount - 1].End,
+                    newText.Lines[newLineCount - 1].EndIncludingLineBreak
+                );
         }
 
         private async Task<EditAndContinueCapabilities> GetCapabilitiesAsync(

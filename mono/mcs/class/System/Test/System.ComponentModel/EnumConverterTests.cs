@@ -1150,14 +1150,14 @@ namespace MonoTests.System.ComponentModel
         enum F : byte
         {
             Bb = 1,
-            Dd = 3
+            Dd = 3,
         }
 
         [Flags]
         enum F2 : byte
         {
             Bb = 2,
-            Dd = 8
+            Dd = 8,
         }
     }
 }

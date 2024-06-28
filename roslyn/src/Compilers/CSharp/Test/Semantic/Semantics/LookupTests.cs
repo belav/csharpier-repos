@@ -84,7 +84,7 @@ class C
                 "P",
                 "ReferenceEquals",
                 "System",
-                "ToString"
+                "ToString",
             };
 
             Assert.Equal(expected_lookupNames.ListToSortedString(), actual);
@@ -113,7 +113,7 @@ class C
                 "M",
                 "ReferenceEquals",
                 "System",
-                "ToString"
+                "ToString",
             };
 
             Assert.Equal(expected_lookupNames.ListToSortedString(), actual);
@@ -176,7 +176,7 @@ class Test
                 "ReferenceEquals",
                 "System",
                 "Test",
-                "ToString"
+                "ToString",
             };
 
             List<string> expected_lookupSymbols = new List<string>
@@ -193,7 +193,7 @@ class Test
                 "System.Type System.Object.GetType()",
                 "void Test.Finalize()",
                 "void Test.Main()",
-                "Test"
+                "Test",
             };
 
             // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
@@ -422,7 +422,7 @@ class Test
                 "m",
                 "System",
                 "Microsoft",
-                "Test"
+                "Test",
             };
 
             List<string> expected_in_lookupSymbols = new List<string>
@@ -433,7 +433,7 @@ class Test
                 "System.Int32 m",
                 "System",
                 "Microsoft",
-                "Test"
+                "Test",
             };
 
             var comp = CreateCompilation(testSrc);
@@ -527,13 +527,13 @@ class Test
             List<string> expected_in_lookupSymbols = new List<string>
             {
                 "void Test.F(System.Int32 i)",
-                "void Test.F(System.Int32 i, System.Int32 j)"
+                "void Test.F(System.Int32 i, System.Int32 j)",
             };
 
             List<string> not_expected_in_lookupSymbols = new List<string>
             {
                 "void Test.F<T>(T i)",
-                "void Test.F<T, U>(T i, U j)"
+                "void Test.F<T, U>(T i, U j)",
             };
 
             // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
@@ -592,7 +592,7 @@ class Test
                 "void Test.F(System.Int32 i)",
                 "void Test.F(System.Int32 i, System.Int32 j)",
                 "void Test.F<T>(T i)",
-                "void Test.F<T, U>(T i, U j)"
+                "void Test.F<T, U>(T i, U j)",
             };
 
             // Get the list of LookupSymbols at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
@@ -655,7 +655,7 @@ class Test
             List<string> not_expected_in_lookup = new List<string>
             {
                 "<CrtImplementationDetails>",
-                "<CppImplementationDetails>"
+                "<CppImplementationDetails>",
             };
 
             // Get the list of LookupNames at the location of the CSharpSyntaxNode enclosed within the <bind> </bind> tags
@@ -760,7 +760,7 @@ class B : A
             {
                 "void start.Main()",
                 "start",
-                "System.Int32 num"
+                "System.Int32 num",
             };
 
             // Get the list of LookupNames at the location at the end of the /*pos*/ tag
@@ -800,7 +800,7 @@ class B : A
             List<string> expected_in_lookupSymbols = new List<string>
             {
                 "void start.Main()",
-                "start"
+                "start",
             };
 
             List<string> not_expected_in_lookupNames = new List<string> { "num" };
@@ -853,7 +853,7 @@ class MyClass
             {
                 "System.Int32 j",
                 "System.Int32 k",
-                "System.Int32 lambdaParam"
+                "System.Int32 lambdaParam",
             };
 
             // Get the list of LookupNames at the location at the end of the /*pos*/ tag
@@ -892,10 +892,7 @@ class MyClass
 ";
             List<string> not_expected_in_lookupNames = new List<string> { "forVar" };
 
-            List<string> not_expected_in_lookupSymbols = new List<string>
-            {
-                "System.Int32 forVar",
-            };
+            List<string> not_expected_in_lookupSymbols = new List<string> { "System.Int32 forVar" };
 
             // Get the list of LookupNames at the location at the end of the /*pos*/ tag
             var actual_lookupNames = GetLookupNames(testSrc);
@@ -931,10 +928,7 @@ class MyClass
 ";
             List<string> not_expected_in_lookupNames = new List<string> { "number" };
 
-            List<string> not_expected_in_lookupSymbols = new List<string>
-            {
-                "System.Int32 number",
-            };
+            List<string> not_expected_in_lookupSymbols = new List<string> { "System.Int32 number" };
 
             // Get the list of LookupNames at the location at the end of the /*pos*/ tag
             var actual_lookupNames = GetLookupNames(testSrc);

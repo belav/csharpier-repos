@@ -102,7 +102,7 @@ public class Test
     enum Foo
     {
         a,
-        b
+        b,
     };
 
     public static int test_0_enum_array_casting()

@@ -21,6 +21,6 @@ namespace System.Web.UI
         /// <devdoc>
         /// Specifies that the old values will also be passed to the update or delete query
         /// </devdoc>
-        CompareAllValues = 1
+        CompareAllValues = 1,
     }
 }

@@ -426,7 +426,7 @@ namespace System.Runtime.InteropServices.Tests
             Vector vector = new Vector
             {
                 Length = 3,
-                Data = Marshal.AllocCoTaskMem(sizeof(int) * 3)
+                Data = Marshal.AllocCoTaskMem(sizeof(int) * 3),
             };
             using ComVariant variant = ComVariant.CreateRaw(
                 VarEnum.VT_VECTOR | VarEnum.VT_I4,

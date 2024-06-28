@@ -36,6 +36,6 @@ namespace System.Windows.Forms
         Both = 3,
         ForcedHorizontal = 17,
         ForcedVertical = 18,
-        ForcedBoth = 19
+        ForcedBoth = 19,
     }
 }

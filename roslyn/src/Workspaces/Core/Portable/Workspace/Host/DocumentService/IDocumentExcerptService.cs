@@ -37,7 +37,7 @@ namespace Microsoft.CodeAnalysis.Host
     internal enum ExcerptMode
     {
         SingleLine,
-        Tooltip
+        Tooltip,
     }
 
     /// <summary>

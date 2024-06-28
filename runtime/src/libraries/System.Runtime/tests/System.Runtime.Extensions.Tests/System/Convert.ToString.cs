@@ -77,7 +77,7 @@ namespace System.Tests
                 // UInt64
                 ulong.MinValue,
                 (ulong)100,
-                ulong.MaxValue
+                ulong.MaxValue,
             };
 
             string[] expectedValues =
@@ -203,7 +203,7 @@ namespace System.Tests
             DateTime[] testValues =
             {
                 new DateTime(2000, 8, 15, 16, 59, 59),
-                new DateTime(1, 1, 1, 1, 1, 1)
+                new DateTime(1, 1, 1, 1, 1, 1),
             };
             string[] expectedValues = { "08/15/2000 16:59:59", "01/01/0001 01:01:01" };
 
@@ -380,7 +380,7 @@ namespace System.Tests
             {
                 "10000000000000000000000000000000",
                 "0",
-                "1111111111111111111111111111111"
+                "1111111111111111111111111111111",
             };
 
             for (int i = 0; i < testValues.Length; i++)
@@ -442,7 +442,7 @@ namespace System.Tests
             {
                 "1000000000000000000000000000000000000000000000000000000000000000",
                 "0",
-                "111111111111111111111111111111111111111111111111111111111111111"
+                "111111111111111111111111111111111111111111111111111111111111111",
             };
 
             for (int i = 0; i < testValues.Length; i++)
@@ -550,7 +550,7 @@ namespace System.Tests
                 0,
                 1,
                 1000,
-                short.MaxValue
+                short.MaxValue,
             };
 
             for (int i = 0; i < testValues.Length; i++)
@@ -645,7 +645,7 @@ namespace System.Tests
                 float.NegativeInfinity,
                 float.PositiveInfinity,
                 float.Epsilon,
-                float.NaN
+                float.NaN,
             };
 
             for (int i = 0; i < testValues.Length; i++)
@@ -670,7 +670,7 @@ namespace System.Tests
                 double.NegativeInfinity,
                 double.PositiveInfinity,
                 double.Epsilon,
-                double.NaN
+                double.NaN,
             };
 
             // Vanilla Test Cases
@@ -696,7 +696,7 @@ namespace System.Tests
                 decimal.MaxValue,
                 decimal.One,
                 decimal.Zero,
-                decimal.MinusOne
+                decimal.MinusOne,
             };
 
             for (int i = 0; i < testValues.Length; i++)
@@ -714,7 +714,7 @@ namespace System.Tests
             DateTime[] testValues = new DateTime[]
             {
                 DateTime.Parse("08/15/2000 16:59:59", DateTimeFormatInfo.InvariantInfo),
-                DateTime.Parse("01/01/0001 01:01:01", DateTimeFormatInfo.InvariantInfo)
+                DateTime.Parse("01/01/0001 01:01:01", DateTimeFormatInfo.InvariantInfo),
             };
 
             IFormatProvider formatProvider = DateTimeFormatInfo.GetInstance(

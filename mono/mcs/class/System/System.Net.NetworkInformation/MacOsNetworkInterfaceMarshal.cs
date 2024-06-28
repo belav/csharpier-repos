@@ -78,7 +78,7 @@ namespace System.Net.NetworkInformation
         SLIP = 0x1c,
         PPP = 0x17,
         LOOPBACK = 0x18,
-        FDDI = 0xf
+        FDDI = 0xf,
     }
 
     internal enum MacOsInterfaceFlags
@@ -98,6 +98,8 @@ namespace System.Net.NetworkInformation
         IFF_LINK0 = 0x1000, /* per link layer defined bit */
         IFF_LINK1 = 0x2000, /* per link layer defined bit */
         IFF_LINK2 = 0x4000, /* per link layer defined bit */
-        IFF_MULTICAST = 0x8000 /* supports multicast */
+        IFF_MULTICAST =
+            0x8000 /* supports multicast */
+        ,
     }
 }

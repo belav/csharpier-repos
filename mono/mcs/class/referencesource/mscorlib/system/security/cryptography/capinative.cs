@@ -91,7 +91,11 @@ namespace System.Security.Cryptography
             DeleteKeyset = 0x00000010, // CRYPT_DELETEKEYSET
             MachineKeyset = 0x00000020, // CRYPT_MACHINE_KEYSET
             Silent = 0x00000040, // CRYPT_SILENT
-            VerifyContext = unchecked((int)0xF0000000) // CRYPT_VERIFYCONTEXT
+            VerifyContext =
+                unchecked(
+                    (int)0xF0000000
+                ) // CRYPT_VERIFYCONTEXT
+            ,
         }
 
         /// <summary>
@@ -104,7 +108,11 @@ namespace System.Security.Cryptography
             BadHash = unchecked((int)0x80090002), // NTE_BAD_HASH
             BadData = unchecked((int)0x80090005), // NTE_BAD_DATA
             BadSignature = unchecked((int)0x80090006), // NTE_BAD_SIGNATURE
-            NoKey = unchecked((int)0x8009000d) // NTE_NO_KEY
+            NoKey =
+                unchecked(
+                    (int)0x8009000d
+                ) // NTE_NO_KEY
+            ,
         }
 
         /// <summary>
@@ -126,7 +134,9 @@ namespace System.Security.Cryptography
             None = 0x00000000,
             Exportable = 0x00000001, // CRYPT_EXPORTABLE
             UserProtected = 0x00000002, // CRYPT_USER_PROTECTED
-            Archivable = 0x00004000 // CRYPT_ARCHIVABLE
+            Archivable =
+                0x00004000 // CRYPT_ARCHIVABLE
+            ,
         }
 
         /// <summary>
@@ -136,7 +146,9 @@ namespace System.Security.Cryptography
         {
             None = 0,
             AlgorithmID = 7, // KP_ALGID
-            KeyLength = 9 // KP_KEYLEN
+            KeyLength =
+                9 // KP_KEYLEN
+            ,
         }
 
         /// <summary>
@@ -145,7 +157,9 @@ namespace System.Security.Cryptography
         internal enum KeySpec
         {
             KeyExchange = 1, // AT_KEYEXCHANGE
-            Signature = 2 // AT_SIGNATURE
+            Signature =
+                2 // AT_SIGNATURE
+            ,
         }
 
         /// <summary>
@@ -164,7 +178,9 @@ namespace System.Security.Cryptography
         /// </summary>
         internal enum ProviderType
         {
-            RsaFull = 1 // PROV_RSA_FULL
+            RsaFull =
+                1 // PROV_RSA_FULL
+            ,
         }
 
         [System.Security.SecurityCritical]

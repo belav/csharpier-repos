@@ -30,7 +30,7 @@ namespace System.Linq.Parallel.Tests
                         rightStart,
                         rightCount,
                         rightStart + rightCount,
-                        Math.Max(0, leftCount - (rightCount + 1) / 2)
+                        Math.Max(0, leftCount - (rightCount + 1) / 2),
                     };
                 }
             }
@@ -51,7 +51,7 @@ namespace System.Linq.Parallel.Tests
                                     UnorderedSources.Default(rightStart, rightCount),
                                     rightCount,
                                     rightStart + rightCount,
-                                    Math.Max(0, leftCount - (rightCount + 1) / 2)
+                                    Math.Max(0, leftCount - (rightCount + 1) / 2),
                                 }
                             )
                             .ToArray();
@@ -82,7 +82,7 @@ namespace System.Linq.Parallel.Tests
                         UnorderedSources.Default(rightStart, rightCount),
                         rightCount,
                         rightStart + rightCount,
-                        Math.Max(0, leftCount - (rightCount + 1) / 2)
+                        Math.Max(0, leftCount - (rightCount + 1) / 2),
                     };
                 }
             }

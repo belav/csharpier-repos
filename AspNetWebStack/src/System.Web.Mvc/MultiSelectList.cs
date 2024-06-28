@@ -350,7 +350,7 @@ namespace System.Web.Mvc
                 group = new SelectListGroup()
                 {
                     Name = groupName,
-                    Disabled = disabledGroups.Contains(groupName)
+                    Disabled = disabledGroups.Contains(groupName),
                 };
                 _groups.Add(group);
             }

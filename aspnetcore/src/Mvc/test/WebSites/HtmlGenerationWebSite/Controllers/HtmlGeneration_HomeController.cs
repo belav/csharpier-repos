@@ -15,14 +15,14 @@ public class HtmlGeneration_HomeController : Controller
         {
             ProductName = "Product_0",
             Number = 0,
-            HomePage = new Uri("http://www.contoso.com")
+            HomePage = new Uri("http://www.contoso.com"),
         },
-        new Product { ProductName = "Product_1", Number = 1, },
+        new Product { ProductName = "Product_1", Number = 1 },
         new Product
         {
             ProductName = "Product_2",
             Number = 2,
-            Description = "Product_2 description"
+            Description = "Product_2 description",
         },
     };
     private readonly IEnumerable<SelectListItem> _productsList;
@@ -76,7 +76,7 @@ public class HtmlGeneration_HomeController : Controller
         var product = new Product
         {
             HomePage = new System.Uri("http://www.contoso.com"),
-            Description = "Type the product description"
+            Description = "Type the product description",
         };
 
         return View(product);
@@ -106,7 +106,7 @@ public class HtmlGeneration_HomeController : Controller
 
     public IActionResult ProductListUsingTagHelpersWithNullModel()
     {
-        var model = new List<Product> { null, };
+        var model = new List<Product> { null };
 
         return View(nameof(ProductListUsingTagHelpers), model);
     }
@@ -119,20 +119,20 @@ public class HtmlGeneration_HomeController : Controller
             {
                 Name = "EmployeeName_0",
                 Number = 0,
-                Address = "Employee_0 address"
+                Address = "Employee_0 address",
             },
             new Employee
             {
                 Name = "EmployeeName_1",
                 Number = 1,
                 OfficeNumber = "1002",
-                Gender = Gender.Female
+                Gender = Gender.Female,
             },
             new Employee
             {
                 Name = "EmployeeName_2",
                 Number = 2,
-                Remote = true
+                Remote = true,
             },
         };
 
@@ -161,8 +161,8 @@ public class HtmlGeneration_HomeController : Controller
                 Number = 1,
                 Address = "Address_1",
                 PhoneNumber = "PhoneNumber_1",
-                Gender = Gender.Female
-            }
+                Gender = Gender.Female,
+            },
         };
 
         return View(warehouse);
@@ -178,7 +178,7 @@ public class HtmlGeneration_HomeController : Controller
                 Name = "EmployeeName_1",
                 OfficeNumber = "Number_1",
                 Address = "Address_1",
-            }
+            },
         };
 
         return View(warehouse);

@@ -85,7 +85,7 @@ internal static class FilterFactory
                 new FilterItem(filterItem.Descriptor)
                 {
                     Filter = filterItem.Filter,
-                    IsReusable = filterItem.IsReusable
+                    IsReusable = filterItem.IsReusable,
                 }
             );
         }

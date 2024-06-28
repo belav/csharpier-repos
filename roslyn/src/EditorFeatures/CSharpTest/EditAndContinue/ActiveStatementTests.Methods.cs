@@ -62,9 +62,9 @@ class C
                                 RudeEditKind.DeleteActiveStatement,
                                 "class C",
                                 DeletedSymbolDisplay(FeaturesResources.method, "C.Goo(int)")
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ]
             );
         }
@@ -103,7 +103,7 @@ class C
                         RudeEditKind.ChangingNameOrSignatureOfActiveMember,
                         "static void Boo(int a)",
                         GetResource("method")
-                    )
+                    ),
                 ]
             );
         }
@@ -320,7 +320,7 @@ class C
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "static void Swap<T>(T lhs, T rhs)",
                         GetResource("method")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -333,7 +333,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember("C.Swap"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -565,7 +565,7 @@ class C
                 active,
                 new[]
                 {
-                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Main"), syntaxMap[0])
+                    SemanticEdit(SemanticEditKind.Update, c => c.GetMember("C.Main"), syntaxMap[0]),
                 }
             );
         }
@@ -602,7 +602,7 @@ class C
                         SemanticEditKind.Update,
                         c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
                         partialType: "C"
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.ChangeCustomAttributes
             );
@@ -649,7 +649,7 @@ class C
                                 SemanticEditKind.Update,
                                 c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
                                 partialType: "C"
-                            )
+                            ),
                         ]
                     ),
                     DocumentResults(
@@ -661,7 +661,7 @@ class C
                                 c => c.GetMember<IMethodSymbol>("C.F").PartialImplementationPart,
                                 partialType: "C",
                                 syntaxMap: syntaxMapB
-                            )
+                            ),
                         ]
                     ),
                 ],
@@ -688,13 +688,13 @@ class C
                                 RudeEditKind.DeleteActiveStatement,
                                 "char x",
                                 GetResource("method")
-                            )
+                            ),
                         ]
                     ),
                     DocumentResults(
                         activeStatements: GetActiveStatements(srcB1, srcB2),
                         diagnostics: []
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
             );
@@ -723,9 +723,9 @@ class C
                                 RudeEditKind.DeleteActiveStatement,
                                 "byte x",
                                 GetResource("method")
-                            )
+                            ),
                         ]
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.AddMethodToExistingType
             );
@@ -1091,7 +1091,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "set",
                         GetResource("indexer setter")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1104,7 +1104,7 @@ class C<T>
                         SemanticEditKind.Update,
                         c => c.GetMember("C.set_Item"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -1219,7 +1219,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "get",
                         GetResource("indexer getter")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1232,7 +1232,7 @@ class C<T>
                         SemanticEditKind.Update,
                         c => c.GetMember("C.get_Item"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -1348,7 +1348,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "set",
                         GetResource("indexer setter")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1361,7 +1361,7 @@ class C<T>
                         SemanticEditKind.Update,
                         c => c.GetMember("C.set_Item"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );
@@ -1472,7 +1472,7 @@ class C<T>
                         RudeEditKind.UpdatingGenericNotSupportedByRuntime,
                         "get",
                         GetResource("indexer getter")
-                    )
+                    ),
                 ],
                 capabilities: EditAndContinueCapabilities.Baseline
             );
@@ -1485,7 +1485,7 @@ class C<T>
                         SemanticEditKind.Update,
                         c => c.GetMember("C.get_Item"),
                         preserveLocalVariables: true
-                    )
+                    ),
                 },
                 capabilities: EditAndContinueCapabilities.GenericUpdateMethod
             );

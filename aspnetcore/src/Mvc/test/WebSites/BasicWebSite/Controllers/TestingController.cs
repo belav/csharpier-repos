@@ -153,7 +153,7 @@ public class TestingController : Controller
             new PostRedirectGetGetResponse
             {
                 TempDataValue = (int)TempData["Value"],
-                CookieValue = Request.Cookies["Message"]
+                CookieValue = Request.Cookies["Message"],
             }
         );
     }

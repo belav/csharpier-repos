@@ -56,7 +56,7 @@ namespace System.Net.Http.Tests
                 KnownHeaders.ContentEncoding,
                 KnownHeaders.ContentType,
                 KnownHeaders.ContentRange,
-                KnownHeaders.Trailer
+                KnownHeaders.Trailer,
             }
                 .Select(h => new object[] { h.Name })
                 .ToArray();
@@ -69,7 +69,7 @@ namespace System.Net.Http.Tests
                 new[] { "Content-MD5", "Q2hlY2sgSW50ZWdyaXR5IQ==" },
                 new[] { "Accept-Encoding", "identity,gzip" },
                 new[] { "X-MyHeader", "ABC" },
-                new[] { "ETag", "\"737060cd8c284d8af7ad3082f209582d\"" }
+                new[] { "ETag", "\"737060cd8c284d8af7ad3082f209582d\"" },
             };
         }
 

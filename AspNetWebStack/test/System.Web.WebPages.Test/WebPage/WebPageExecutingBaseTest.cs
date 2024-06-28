@@ -117,7 +117,7 @@ namespace System.Web.WebPages.Test
                         new PositionTagged<string>(String.Empty, 142),
                         new PositionTagged<object>(null, 124),
                         literal: true
-                    )
+                    ),
                 },
                 expected: ""
             );
@@ -136,7 +136,7 @@ namespace System.Web.WebPages.Test
                         new PositionTagged<string>(String.Empty, 142),
                         new PositionTagged<object>(false, 124),
                         literal: true
-                    )
+                    ),
                 },
                 expected: ""
             );
@@ -155,7 +155,7 @@ namespace System.Web.WebPages.Test
                         new PositionTagged<string>("    ", 142),
                         new PositionTagged<object>("foo", 124),
                         literal: true
-                    )
+                    ),
                 },
                 expected: " alt=\"foo\""
             );
@@ -179,7 +179,7 @@ namespace System.Web.WebPages.Test
                         new PositionTagged<string>("glorb", 142),
                         new PositionTagged<object>("bar", 124),
                         literal: true
-                    )
+                    ),
                 },
                 expected: " alt=\"fooglorbbar\""
             );
@@ -203,7 +203,7 @@ namespace System.Web.WebPages.Test
                         new PositionTagged<string>("glorb", 142),
                         new PositionTagged<object>("bar", 124),
                         literal: true
-                    )
+                    ),
                 },
                 expected: " alt=\"bar\""
             );

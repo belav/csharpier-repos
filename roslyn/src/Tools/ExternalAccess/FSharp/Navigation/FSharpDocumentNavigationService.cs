@@ -150,7 +150,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                         textSpan,
                         NavigationOptions.Default with
                         {
-                            PreferProvisionalTab = true
+                            PreferProvisionalTab = true,
                         },
                         cancellationToken
                     )
@@ -192,7 +192,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                         offset,
                         NavigationOptions.Default with
                         {
-                            PreferProvisionalTab = true
+                            PreferProvisionalTab = true,
                         },
                         cancellationToken
                     )
@@ -234,7 +234,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Navigation
                         virtualSpace,
                         NavigationOptions.Default with
                         {
-                            PreferProvisionalTab = true
+                            PreferProvisionalTab = true,
                         },
                         cancellationToken
                     )

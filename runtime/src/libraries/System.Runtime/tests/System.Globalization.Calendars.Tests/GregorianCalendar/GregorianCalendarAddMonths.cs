@@ -19,12 +19,12 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 DateTime.MinValue,
-                s_randomDataGenerator.GetInt32(-55) % MaxMonths + 1
+                s_randomDataGenerator.GetInt32(-55) % MaxMonths + 1,
             };
             yield return new object[]
             {
                 DateTime.MaxValue,
-                -1 * s_randomDataGenerator.GetInt32(-55) % MaxMonths - 1
+                -1 * s_randomDataGenerator.GetInt32(-55) % MaxMonths - 1,
             };
             yield return new object[] { s_randomDataGenerator.GetDateTime(-55).AddMonths(1), -1 };
             yield return new object[] { new DateTime(2000, 2, 29, 10, 30, 24), 13 }; // February in a leap year

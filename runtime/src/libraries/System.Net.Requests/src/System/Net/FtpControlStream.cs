@@ -15,7 +15,7 @@ namespace System.Net
         NotLoggedIn,
         LoggedIn,
         LoggedInButNeedsRelogin,
-        ReloginFailed
+        ReloginFailed,
     };
 
     /// <summary>
@@ -870,7 +870,7 @@ namespace System.Net
         {
             Normal,
             AssumeFilename,
-            AssumeNoFilename
+            AssumeNoFilename,
         }
 
         /// <summary>

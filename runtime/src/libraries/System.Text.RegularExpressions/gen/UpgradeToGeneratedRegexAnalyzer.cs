@@ -69,7 +69,7 @@ namespace System.Text.RegularExpressions.Generator
                         "Match",
                         "Matches",
                         "Split",
-                        "Replace"
+                        "Replace",
                     }
                 );
 

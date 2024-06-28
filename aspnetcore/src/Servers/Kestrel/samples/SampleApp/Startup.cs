@@ -181,7 +181,7 @@ public class Startup
                                             return new ValueTask<SslServerAuthenticationOptions>(
                                                 new SslServerAuthenticationOptions
                                                 {
-                                                    ServerCertificate = localhostCert
+                                                    ServerCertificate = localhostCert,
                                                 }
                                             );
                                         },

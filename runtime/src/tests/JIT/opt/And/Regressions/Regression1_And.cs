@@ -18,7 +18,7 @@ public class Program
     {
         var vr2 = new uint[,]
         {
-            { 0 }
+            { 0 },
         };
         int vr7 = default(int);
         uint vr5 = (uint)vr7;

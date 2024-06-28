@@ -24,7 +24,7 @@ namespace System.CodeDom.Tests
             {
                 new CodePrimitiveExpression("Value1"),
                 "EventName",
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
         }
 
@@ -52,7 +52,7 @@ namespace System.CodeDom.Tests
                     new CodePrimitiveExpression("Value1"),
                     "EventName"
                 ),
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
         }
 

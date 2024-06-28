@@ -16,6 +16,7 @@ internal static class MediaTypeHelpers
         Encoding.Unicode,
         Encoding.ASCII,
         Encoding.Latin1 // TODO allowed by default? Make this configurable?
+        ,
     };
 
     // TODO Binary format https://github.com/dotnet/aspnetcore/issues/31884

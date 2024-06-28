@@ -76,7 +76,7 @@ public static class AuthorizationEndpointConventionBuilderExtensions
 
         if (authorizeData.Length == 0)
         {
-            authorizeData = new IAuthorizeData[] { new AuthorizeAttribute(), };
+            authorizeData = new IAuthorizeData[] { new AuthorizeAttribute() };
         }
 
         RequireAuthorizationCore(builder, authorizeData);

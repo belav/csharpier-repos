@@ -327,11 +327,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
 
             private static SyntaxKind GetParameterRefSyntaxKind(ParameterBehavior parameterBehavior)
             {
-                return parameterBehavior == ParameterBehavior.Ref
-                    ? SyntaxKind.RefKeyword
-                    : parameterBehavior == ParameterBehavior.Out
-                        ? SyntaxKind.OutKeyword
-                        : SyntaxKind.None;
+                return parameterBehavior == ParameterBehavior.Ref ? SyntaxKind.RefKeyword
+                    : parameterBehavior == ParameterBehavior.Out ? SyntaxKind.OutKeyword
+                    : SyntaxKind.None;
             }
 
             private ImmutableArray<StatementSyntax> CreateMethodBody(
@@ -773,7 +771,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                                         {
                                             Name: nameof(Task.ConfigureAwait),
                                             Parameters: [
-                                                { Type.SpecialType: SpecialType.System_Boolean }
+                                                { Type.SpecialType: SpecialType.System_Boolean },
                                             ],
                                         }
                                 )
@@ -865,12 +863,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 SyntaxNode newMethodDefinition = methodDefinition switch
                 {
                     MethodDeclarationSyntax method => TweakNewLinesInMethod(method),
-                    LocalFunctionStatementSyntax localFunction =>
-                        TweakNewLinesInMethod(localFunction),
-                    _ =>
-                        throw new NotSupportedException(
-                            "SyntaxNode expected to be MethodDeclarationSyntax or LocalFunctionStatementSyntax."
-                        ),
+                    LocalFunctionStatementSyntax localFunction => TweakNewLinesInMethod(
+                        localFunction
+                    ),
+                    _ => throw new NotSupportedException(
+                        "SyntaxNode expected to be MethodDeclarationSyntax or LocalFunctionStatementSyntax."
+                    ),
                 };
 
                 newDocument = await newDocument
@@ -993,7 +991,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                             BaseMethodDeclarationSyntax _ => true,
                             AnonymousFunctionExpressionSyntax _ => true,
                             LocalFunctionStatementSyntax _ => true,
-                            _ => false
+                            _ => false,
                         }
                     );
 

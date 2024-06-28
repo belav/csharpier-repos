@@ -31,7 +31,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     public void CanInsert()
     {
         PerformTest(
-            before: new[] { new Node("orig1", "A"), new Node("orig2", "B"), },
+            before: new[] { new Node("orig1", "A"), new Node("orig2", "B") },
             after: new[]
             {
                 new Node("new1", "Inserted before") { IsNew = true },
@@ -55,7 +55,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
                 new Node("orig4", "D"),
                 new Node("orig5", "E"), // Will delete at end
             },
-            after: new[] { new Node("orig2", "B"), new Node("orig4", "D edited"), }
+            after: new[] { new Node("orig2", "B"), new Node("orig4", "D edited") }
         );
     }
 
@@ -63,7 +63,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
     public void CanInsertUnkeyed()
     {
         PerformTest(
-            before: new[] { new Node("orig1", "A"), new Node("orig2", "B"), },
+            before: new[] { new Node("orig1", "A"), new Node("orig2", "B") },
             after: new[]
             {
                 new Node(null, "Inserted before") { IsNew = true },
@@ -87,7 +87,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
                 new Node("orig4", "D"),
                 new Node(null, "E"), // Will delete at end
             },
-            after: new[] { new Node("orig2", "B edited"), new Node("orig4", "D"), }
+            after: new[] { new Node("orig2", "B edited"), new Node("orig4", "D") }
         );
     }
 
@@ -210,7 +210,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
                     new Node(null, "D3 unkeyed") { IsNew = true }
                 )
                 {
-                    IsNew = true
+                    IsNew = true,
                 },
                 new Node(
                     "keyA",
@@ -373,7 +373,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
         var childNodes = nodeElem.FindElements(By.XPath("*[@class='children']/*[@class='node']"));
         return new Node(key: null, label, childNodes.Select(ReadNodeFromDOM).ToArray())
         {
-            IsNew = nodeElem.FindElement(By.ClassName("is-new")).Text == "true"
+            IsNew = nodeElem.FindElement(By.ClassName("is-new")).Text == "true",
         };
     }
 

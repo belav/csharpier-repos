@@ -260,7 +260,7 @@ namespace Sample
             {
                 results = results,
                 minTimes = minTimes,
-                timeStamp = DateTime.UtcNow
+                timeStamp = DateTime.UtcNow,
             };
             return JsonSerializer.Serialize(
                 jsonObject,

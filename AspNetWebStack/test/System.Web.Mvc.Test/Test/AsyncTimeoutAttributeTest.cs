@@ -39,7 +39,7 @@ namespace System.Web.Mvc.Test
 
             ActionExecutingContext filterContext = new ActionExecutingContext()
             {
-                Controller = controller
+                Controller = controller,
             };
 
             // Act
@@ -57,7 +57,7 @@ namespace System.Web.Mvc.Test
 
             ActionExecutingContext filterContext = new ActionExecutingContext()
             {
-                Controller = new MyController()
+                Controller = new MyController(),
             };
 
             // Act & assert

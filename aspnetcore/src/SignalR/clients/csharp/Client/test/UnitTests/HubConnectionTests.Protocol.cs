@@ -314,7 +314,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 3,
-                            result = 42
+                            result = 42,
                         }
                     )
                     .DefaultTimeout();
@@ -345,7 +345,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 3,
-                            error = "An error occurred"
+                            error = "An error occurred",
                         }
                     )
                     .DefaultTimeout();
@@ -379,7 +379,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 3,
-                            result = "Oops"
+                            result = "Oops",
                         }
                     )
                     .DefaultTimeout();
@@ -416,7 +416,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 3,
-                            error = "An error occurred"
+                            error = "An error occurred",
                         }
                     )
                     .DefaultTimeout();
@@ -450,7 +450,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 2,
-                            item = 42
+                            item = 42,
                         }
                     )
                     .DefaultTimeout();
@@ -489,7 +489,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 2,
-                            item = "1"
+                            item = "1",
                         }
                     )
                     .DefaultTimeout();
@@ -499,7 +499,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 2,
-                            item = "2"
+                            item = "2",
                         }
                     )
                     .DefaultTimeout();
@@ -509,7 +509,7 @@ public partial class HubConnectionTests
                         {
                             invocationId = "1",
                             type = 2,
-                            item = "3"
+                            item = "3",
                         }
                     )
                     .DefaultTimeout();
@@ -519,7 +519,7 @@ public partial class HubConnectionTests
 
                 var notifications = await channel.ReadAndCollectAllAsync().DefaultTimeout();
 
-                Assert.Equal(new[] { "1", "2", "3", }, notifications.ToArray());
+                Assert.Equal(new[] { "1", "2", "3" }, notifications.ToArray());
             }
             finally
             {
@@ -551,7 +551,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = args
+                            arguments = args,
                         }
                     )
                     .DefaultTimeout();
@@ -591,7 +591,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = 1
+                            arguments = 1,
                         }
                     )
                     .DefaultTimeout();
@@ -638,7 +638,7 @@ public partial class HubConnectionTests
                             invocationId = "1",
                             type = 1,
                             target = "Foo",
-                            arguments = 1
+                            arguments = 1,
                         }
                     )
                     .DefaultTimeout();

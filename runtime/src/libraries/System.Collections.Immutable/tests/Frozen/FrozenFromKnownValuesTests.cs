@@ -361,17 +361,7 @@ namespace System.Collections.Frozen.Tests
                     "2.23.140.1.2.2",
                 },
                 // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/Common/src/Interop/Linux/procfs/Interop.ProcFsStat.TryReadStatusFile.cs#L66-L102
-                new[]
-                {
-                    "Pid",
-                    "VmHWM",
-                    "VmRSS",
-                    "VmData",
-                    "VmSwap",
-                    "VmSize",
-                    "VmPeak",
-                    "VmStk",
-                },
+                new[] { "Pid", "VmHWM", "VmRSS", "VmData", "VmSwap", "VmSize", "VmPeak", "VmStk" },
                 // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Private.Xml/src/System/Xml/Xsl/XsltOld/XsltCompileContext.cs#L451-L485
                 new[]
                 {
@@ -440,7 +430,7 @@ namespace System.Collections.Frozen.Tests
                     "V",
                     "W",
                     "X",
-                    "Y"
+                    "Y",
                 },
                 // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/libraries/System.Text.RegularExpressions/src/System/Text/RegularExpressions/RegexCompiler.cs#L5810-L5879
                 new[]
@@ -480,7 +470,7 @@ namespace System.Collections.Frozen.Tests
                     "DotnetDebugger.applyUpdates",
                     "DotnetDebugger.addSymbolServerUrl",
                     "DotnetDebugger.getMethodLocation",
-                    "Runtime.callFunctionOn"
+                    "Runtime.callFunctionOn",
                 },
                 // from https://github.com/dotnet/runtime/blob/a30de6d40f69ef612b514344a5ec83fffd10b957/src/tools/illink/src/linker/Linker.Steps/DiscoverCustomOperatorsHandler.cs#L156-L221
                 new[]
@@ -559,7 +549,7 @@ namespace System.Collections.Frozen.Tests
                     "names",
                     "slurp",
                     "towed",
-                    "words"
+                    "words",
                 },
                 new[]
                 {
@@ -580,7 +570,7 @@ namespace System.Collections.Frozen.Tests
                     "slurp",
                     "towed",
                     "words",
-                    "\u03BB"
+                    "\u03BB",
                 }, // plus a non-ASCII char
                 new[] { "", "a", "b", "c", "no", "yes", "four", "alice", "blurb", "hello" },
                 new[] { "abcdefgh", "abcdefg", "abcdef", "abcde", "abcd", "abc", "ab", "a" },
@@ -594,7 +584,7 @@ namespace System.Collections.Frozen.Tests
                     "00001000",
                     "00001001",
                     "00000100",
-                    "00000101"
+                    "00000101",
                 },
                 // from https://github.com/dotnet/runtime/blob/2b8514b02f6d0e87f4645aca0be38f16864004a7/src/libraries/System.Net.Http/src/System/Net/Http/Headers/KnownHeaders.cs#L14-L108
                 new[]

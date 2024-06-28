@@ -206,7 +206,7 @@ namespace MonoTests.System.Security.Policy
             0xF8,
             0xFF,
             0xA4,
-            0xCB
+            0xCB,
         };
 
         [SetUp]

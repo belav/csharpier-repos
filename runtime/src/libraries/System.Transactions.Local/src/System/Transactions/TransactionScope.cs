@@ -30,7 +30,7 @@ namespace System.Transactions
     {
         None = 0,
         Automatic = 1,
-        Full = 2
+        Full = 2,
     }
 
     [UnsupportedOSPlatform("browser")]

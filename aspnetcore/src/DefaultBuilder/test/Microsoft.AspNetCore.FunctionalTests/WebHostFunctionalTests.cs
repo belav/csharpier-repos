@@ -221,7 +221,7 @@ public class WebHostFunctionalTests : LoggedTest
         )
         {
             TargetFramework = "net9.0",
-            HostingModel = HostingModel.InProcess
+            HostingModel = HostingModel.InProcess,
         };
 
         SetEnvironmentVariables(deploymentParameters, "Development");

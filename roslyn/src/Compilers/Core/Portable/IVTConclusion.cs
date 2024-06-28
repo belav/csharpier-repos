@@ -39,6 +39,6 @@ namespace Microsoft.CodeAnalysis
         /// This indicates that friend access should not be granted because the other assembly
         /// does not name this assembly as a friend in any way whatsoever.
         /// </summary>
-        NoRelationshipClaimed
+        NoRelationshipClaimed,
     }
 }

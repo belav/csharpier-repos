@@ -407,7 +407,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var position = hostDocument.CursorPosition.Value;
             var options = CompletionOptions.Default with
             {
-                EnterKeyBehavior = sendThroughEnterOption
+                EnterKeyBehavior = sendThroughEnterOption,
             };
 
             var service = GetCompletionService(document.Project);
@@ -433,7 +433,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 
         protected void TestCommonIsTextualTriggerCharacter()
         {
-            var alwaysTriggerList = new[] { "goo$$.", };
+            var alwaysTriggerList = new[] { "goo$$." };
 
             foreach (var markup in alwaysTriggerList)
             {

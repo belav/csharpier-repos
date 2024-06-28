@@ -169,7 +169,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
                 var tokenValidatedContext = new TokenValidatedContext(Context, Scheme, Options)
                 {
-                    Principal = principal
+                    Principal = principal,
                 };
 
                 tokenValidatedContext.SecurityToken = validatedToken;
@@ -191,7 +191,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                     tokenValidatedContext.Properties.StoreTokens(
                         new[]
                         {
-                            new AuthenticationToken { Name = "access_token", Value = token }
+                            new AuthenticationToken { Name = "access_token", Value = token },
                         }
                     );
                 }
@@ -211,7 +211,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                     Exception =
                         (validationFailures.Count == 1)
                             ? validationFailures[0]
-                            : new AggregateException(validationFailures)
+                            : new AggregateException(validationFailures),
                 };
 
                 await Events.AuthenticationFailed(authenticationFailedContext);
@@ -240,7 +240,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                 Options
             )
             {
-                Exception = ex
+                Exception = ex,
             };
 
             await Events.AuthenticationFailed(authenticationFailedContext);
@@ -326,7 +326,7 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
         var authResult = await HandleAuthenticateOnceSafeAsync();
         var eventContext = new JwtBearerChallengeContext(Context, Scheme, Options, properties)
         {
-            AuthenticateFailure = authResult?.Failure
+            AuthenticateFailure = authResult?.Failure,
         };
 
         // Avoid returning error=invalid_token if the error is not caused by an authentication failure (e.g missing token).

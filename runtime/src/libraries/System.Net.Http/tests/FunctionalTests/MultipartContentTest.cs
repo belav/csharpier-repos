@@ -614,7 +614,7 @@ namespace System.Net.Http.Functional.Tests
                     "latin1" => Encoding.Latin1,
                     "utf8" => Encoding.UTF8,
                     "ascii" => Encoding.ASCII,
-                    _ => null
+                    _ => null,
                 };
 
             var ms = new MemoryStream();
@@ -696,7 +696,7 @@ namespace System.Net.Http.Functional.Tests
         public enum MultipartContentToStringMode
         {
             ReadAsStreamAsync,
-            CopyToAsync
+            CopyToAsync,
         }
 
         private class MockContent : HttpContent

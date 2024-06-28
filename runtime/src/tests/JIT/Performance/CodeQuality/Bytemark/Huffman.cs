@@ -568,7 +568,7 @@ public class Huffman : HuffStruct
             "used",
             "shown",
             "you",
-            "know"
+            "know",
         };
     }
 }

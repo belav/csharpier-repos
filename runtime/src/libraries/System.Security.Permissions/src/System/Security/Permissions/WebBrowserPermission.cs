@@ -13,7 +13,7 @@ namespace System.Security.Permissions
     {
         None,
         Safe,
-        Unrestricted
+        Unrestricted,
     }
 
 #if NETCOREAPP

@@ -130,7 +130,7 @@ namespace System.Web.Http
             var config = new HttpConfiguration();
             Mock<MediaTypeFormatter> mockFormatter = new Mock<MediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             mockFormatter.Object.RequiredMemberSelector = null;
 
@@ -287,7 +287,7 @@ namespace System.Web.Http
             HttpControllerSettings settings = new HttpControllerSettings(config);
             Mock<IContentNegotiator> mockNegotiator = new Mock<IContentNegotiator>()
             {
-                CallBase = true
+                CallBase = true,
             };
             settings.Services.Replace(typeof(IContentNegotiator), mockNegotiator.Object);
 
@@ -335,7 +335,7 @@ namespace System.Web.Http
             HttpControllerSettings settings = new HttpControllerSettings(config);
             Mock<MediaTypeFormatter> mockFormatter = new Mock<MediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             settings.Formatters.Clear();
             settings.Formatters.Add(mockFormatter.Object);

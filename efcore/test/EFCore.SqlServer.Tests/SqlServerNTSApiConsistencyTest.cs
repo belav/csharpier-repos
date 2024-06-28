@@ -21,7 +21,7 @@ public class SqlServerNTSApiConsistencyTest
             new()
             {
                 typeof(SqlServerNetTopologySuiteDbContextOptionsBuilderExtensions),
-                typeof(SqlServerNetTopologySuiteServiceCollectionExtensions)
+                typeof(SqlServerNetTopologySuiteServiceCollectionExtensions),
             };
     }
 }

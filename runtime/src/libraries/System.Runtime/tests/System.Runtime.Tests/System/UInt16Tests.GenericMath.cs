@@ -533,7 +533,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -556,7 +556,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: false,
                     out result
@@ -579,7 +579,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: false,
                     out result
@@ -602,7 +602,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -625,7 +625,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -648,7 +648,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -671,7 +671,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: false,
                     out result
@@ -694,7 +694,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -727,7 +727,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -754,7 +754,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: false,
                     out result
@@ -781,7 +781,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: false,
                     out result
@@ -808,7 +808,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -835,7 +835,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -862,7 +862,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -889,7 +889,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: false,
                     out result
@@ -916,7 +916,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -1230,7 +1230,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -1253,7 +1253,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: true,
                     out result
@@ -1276,7 +1276,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: true,
                     out result
@@ -1299,7 +1299,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -1322,7 +1322,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -1345,7 +1345,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -1368,7 +1368,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: true,
                     out result
@@ -1391,7 +1391,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -1424,7 +1424,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -1451,7 +1451,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: true,
                     out result
@@ -1478,7 +1478,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: true,
                     out result
@@ -1505,7 +1505,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -1532,7 +1532,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -1559,7 +1559,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -1586,7 +1586,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: true,
                     out result
@@ -1613,7 +1613,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -1927,7 +1927,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -1950,7 +1950,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: false,
                     out result
@@ -1973,7 +1973,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: false,
                     out result
@@ -1996,7 +1996,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -2019,7 +2019,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -2042,7 +2042,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -2065,7 +2065,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: false,
                     out result
@@ -2088,7 +2088,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -2121,7 +2121,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -2148,7 +2148,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: false,
                     out result
@@ -2175,7 +2175,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: false,
                     out result
@@ -2202,7 +2202,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -2229,7 +2229,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -2256,7 +2256,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: false,
                     out result
@@ -2283,7 +2283,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: false,
                     out result
@@ -2310,7 +2310,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: false,
                     out result
@@ -2624,7 +2624,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -2647,7 +2647,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: true,
                     out result
@@ -2670,7 +2670,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: true,
                     out result
@@ -2693,7 +2693,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -2716,7 +2716,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -2739,7 +2739,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -2762,7 +2762,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: true,
                     out result
@@ -2785,7 +2785,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -2818,7 +2818,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -2845,7 +2845,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x01
+                        0x01,
                     },
                     isUnsigned: true,
                     out result
@@ -2872,7 +2872,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x80
+                        0x80,
                     },
                     isUnsigned: true,
                     out result
@@ -2899,7 +2899,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -2926,7 +2926,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result
@@ -2953,7 +2953,7 @@ namespace System.Tests
                         0x00,
                         0x00,
                         0x00,
-                        0x00
+                        0x00,
                     },
                     isUnsigned: true,
                     out result
@@ -2980,7 +2980,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0x7F
+                        0x7F,
                     },
                     isUnsigned: true,
                     out result
@@ -3007,7 +3007,7 @@ namespace System.Tests
                         0xFF,
                         0xFF,
                         0xFF,
-                        0xFF
+                        0xFF,
                     },
                     isUnsigned: true,
                     out result

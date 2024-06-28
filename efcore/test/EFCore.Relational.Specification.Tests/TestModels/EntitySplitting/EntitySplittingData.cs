@@ -76,7 +76,7 @@ public class EntitySplittingData : ISetSource
                 StringValue1 = "V11",
                 StringValue2 = "V12",
                 StringValue3 = "V13",
-                StringValue4 = "V14"
+                StringValue4 = "V14",
             },
             new()
             {
@@ -88,7 +88,7 @@ public class EntitySplittingData : ISetSource
                 StringValue1 = "V21",
                 StringValue2 = "V22",
                 StringValue3 = "V23",
-                StringValue4 = "V24"
+                StringValue4 = "V24",
             },
             new()
             {
@@ -100,7 +100,7 @@ public class EntitySplittingData : ISetSource
                 StringValue1 = "V31",
                 StringValue2 = "V32",
                 StringValue3 = "V33",
-                StringValue4 = "V34"
+                StringValue4 = "V34",
             },
             new()
             {
@@ -112,7 +112,7 @@ public class EntitySplittingData : ISetSource
                 StringValue1 = "V41",
                 StringValue2 = "V42",
                 StringValue3 = "V43",
-                StringValue4 = "V44"
+                StringValue4 = "V44",
             },
             new()
             {
@@ -124,7 +124,7 @@ public class EntitySplittingData : ISetSource
                 StringValue1 = "V51",
                 StringValue2 = "V52",
                 StringValue3 = "V53",
-                StringValue4 = "V54"
+                StringValue4 = "V54",
             },
         };
 
@@ -156,21 +156,21 @@ public class EntitySplittingData : ISetSource
             {
                 Id = 2,
                 BaseValue = 2,
-                MiddleValue = 21
+                MiddleValue = 21,
             },
             new SiblingEntity
             {
                 Id = 3,
                 BaseValue = 3,
-                SiblingValue = 21
+                SiblingValue = 21,
             },
             new LeafEntity
             {
                 Id = 4,
                 BaseValue = 4,
                 MiddleValue = 22,
-                LeafValue = 301
-            }
+                LeafValue = 301,
+            },
         };
 
     private void WireUp()
@@ -208,8 +208,8 @@ public class EntitySplittingData : ISetSource
                     OwnedNestedStringValue1 = "ON" + i + "1",
                     OwnedNestedStringValue2 = "ON" + i + "2",
                     OwnedNestedStringValue3 = "ON" + i + "3",
-                    OwnedNestedStringValue4 = "ON" + i + "4"
-                }
+                    OwnedNestedStringValue4 = "ON" + i + "4",
+                },
             };
 
             for (var j = 0; j < i; j++)
@@ -226,7 +226,7 @@ public class EntitySplittingData : ISetSource
                             OwnedStringValue1 = "O" + i + "1",
                             OwnedStringValue2 = "O" + i + "2",
                             OwnedStringValue3 = "O" + i + "3",
-                            OwnedStringValue4 = "O" + i + "4"
+                            OwnedStringValue4 = "O" + i + "4",
                         }
                     );
             }
@@ -253,8 +253,8 @@ public class EntitySplittingData : ISetSource
                     OwnedNestedStringValue1 = "ON" + i + "1",
                     OwnedNestedStringValue2 = "ON" + i + "2",
                     OwnedNestedStringValue3 = "ON" + i + "3",
-                    OwnedNestedStringValue4 = "ON" + i + "4"
-                }
+                    OwnedNestedStringValue4 = "ON" + i + "4",
+                },
             };
 
             for (var j = 0; j < i; j++)
@@ -271,7 +271,7 @@ public class EntitySplittingData : ISetSource
                             OwnedStringValue1 = "O" + i + "1",
                             OwnedStringValue2 = "O" + i + "2",
                             OwnedStringValue3 = "O" + i + "3",
-                            OwnedStringValue4 = "O" + i + "4"
+                            OwnedStringValue4 = "O" + i + "4",
                         }
                     );
             }

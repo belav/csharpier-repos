@@ -813,7 +813,7 @@ namespace ILCompiler.DependencyAnalysis
                 0x00,
                 0x00,
                 0x00,
-                0x00
+                0x00,
             };
 
         private bool TryGetCompactUnwindEncoding(byte[] blob, out uint encoding)

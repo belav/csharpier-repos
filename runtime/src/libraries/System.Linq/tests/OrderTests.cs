@@ -466,7 +466,7 @@ namespace System.Linq.Tests
                 "Apple1",
                 "\u00C6ble1",
                 "Apple2",
-                "\u00C6ble2"
+                "\u00C6ble2",
             };
 
             CultureInfo dk = new CultureInfo("da-DK");
@@ -546,7 +546,7 @@ namespace System.Linq.Tests
                 "Apple1",
                 "\u00C6ble1",
                 "Apple2",
-                "\u00C6ble2"
+                "\u00C6ble2",
             };
 
             CultureInfo dk = new CultureInfo("da-DK");

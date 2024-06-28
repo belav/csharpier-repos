@@ -226,7 +226,7 @@ namespace ILCompiler.DependencyAnalysis
                             debuggerStepInOffset,
                             string.Empty,
                             WellKnownLineNumber.DebuggerStepIn
-                        )
+                        ),
                     };
                 }
             }

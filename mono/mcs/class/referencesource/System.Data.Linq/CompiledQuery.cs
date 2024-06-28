@@ -1110,7 +1110,7 @@ namespace System.Data.Linq
                         arg7,
                         arg8,
                         arg9,
-                        arg10
+                        arg10,
                     }
                 );
         }
@@ -1161,7 +1161,7 @@ namespace System.Data.Linq
                         arg8,
                         arg9,
                         arg10,
-                        arg11
+                        arg11,
                     }
                 );
         }
@@ -1215,7 +1215,7 @@ namespace System.Data.Linq
                         arg9,
                         arg10,
                         arg11,
-                        arg12
+                        arg12,
                     }
                 );
         }
@@ -1272,7 +1272,7 @@ namespace System.Data.Linq
                         arg10,
                         arg11,
                         arg12,
-                        arg13
+                        arg13,
                     }
                 );
         }
@@ -1332,7 +1332,7 @@ namespace System.Data.Linq
                         arg11,
                         arg12,
                         arg13,
-                        arg14
+                        arg14,
                     }
                 );
         }
@@ -1395,7 +1395,7 @@ namespace System.Data.Linq
                         arg12,
                         arg13,
                         arg14,
-                        arg15
+                        arg15,
                     }
                 );
         }

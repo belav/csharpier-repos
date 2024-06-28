@@ -75,7 +75,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             {
                 expr = new BoundFieldAccess(syntax, expr, field, constantValueOpt: null)
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
             fields.Free();

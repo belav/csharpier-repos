@@ -91,7 +91,7 @@ namespace System.Web.Mvc
                 (actionReturnValue as ActionResult)
                 ?? new ContentResult
                 {
-                    Content = Convert.ToString(actionReturnValue, CultureInfo.InvariantCulture)
+                    Content = Convert.ToString(actionReturnValue, CultureInfo.InvariantCulture),
                 };
             return actionResult;
         }
@@ -252,7 +252,7 @@ namespace System.Web.Mvc
                 ModelName = parameterName,
                 ModelState = controllerContext.Controller.ViewData.ModelState,
                 PropertyFilter = propertyFilter,
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
 
             object result = binder.BindModel(controllerContext, bindingContext);
@@ -462,7 +462,7 @@ namespace System.Web.Mvc
                     null /* exception */
                 )
                 {
-                    Result = preContext.Result
+                    Result = preContext.Result,
                 };
             }
 
@@ -530,7 +530,7 @@ namespace System.Web.Mvc
                     null /* exception */
                 )
                 {
-                    Result = InvokeActionMethod(controllerContext, actionDescriptor, parameters)
+                    Result = InvokeActionMethod(controllerContext, actionDescriptor, parameters),
                 };
 
             // need to reverse the filter list because the continuations are built up backward

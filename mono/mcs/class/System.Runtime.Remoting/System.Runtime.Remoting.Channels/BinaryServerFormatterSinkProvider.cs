@@ -45,7 +45,7 @@ namespace System.Runtime.Remoting.Channels
         {
             "includeVersions",
             "strictBinding",
-            "typeFilterLevel"
+            "typeFilterLevel",
         };
 
         public BinaryServerFormatterSinkProvider()

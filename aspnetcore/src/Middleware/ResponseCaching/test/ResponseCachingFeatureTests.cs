@@ -14,7 +14,7 @@ public class ResponseCachingFeatureTests
                 null,
                 new string[0],
                 new string[] { null },
-                new string[] { string.Empty }
+                new string[] { string.Empty },
             };
         }
     }
@@ -39,7 +39,7 @@ public class ResponseCachingFeatureTests
                 new string[] { string.Empty, "Valid" },
                 new string[] { "Valid", string.Empty },
                 new string[] { null, "Valid" },
-                new string[] { "Valid", null }
+                new string[] { "Valid", null },
             };
         }
     }

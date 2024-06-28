@@ -407,7 +407,7 @@ IFixedOperation (OperationKind.None, Type: null, IsInvalid) (Syntax: 'fixed (int
                 //                 i3 = &p1;
                 Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "&p1")
                     .WithArguments("int**", "int")
-                    .WithLocation(15, 22)
+                    .WithLocation(15, 22),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<FixedStatementSyntax>(
@@ -442,7 +442,7 @@ unsafe public class MyClass
                 //             System.Console.WriteLine($"P is {p}");
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "p")
                     .WithArguments("int*", "object")
-                    .WithLocation(9, 46)
+                    .WithLocation(9, 46),
             };
 
             // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
@@ -539,7 +539,7 @@ unsafe public class MyClass
                 //                 System.Console.WriteLine($"P is {p}");
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, "p")
                     .WithArguments("int*", "object")
-                    .WithLocation(11, 50)
+                    .WithLocation(11, 50),
             };
 
             // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations
@@ -645,7 +645,7 @@ unsafe public class MyClass
                 Diagnostic(ErrorCode.ERR_FixedNeeded, "&i1").WithLocation(7, 29),
                 // CS0212: You can only take the address of an unfixed expression inside of a fixed statement initializer
                 //         fixed (int* p = b ? &i1 : &i2)
-                Diagnostic(ErrorCode.ERR_FixedNeeded, "&i2").WithLocation(7, 35)
+                Diagnostic(ErrorCode.ERR_FixedNeeded, "&i2").WithLocation(7, 35),
             };
 
             // https://github.com/dotnet/roslyn/issues/27491: This graph verification was added to verify general handling of operations

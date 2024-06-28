@@ -912,7 +912,7 @@ namespace GHTTests
                 new DataItem(4, "ddd"),
                 new DataItem(5, "eee"),
                 new DataItem(6, "fff"),
-                new DataItem(7, "ggg")
+                new DataItem(7, "ggg"),
             };
         }
 

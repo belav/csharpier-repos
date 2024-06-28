@@ -64,7 +64,7 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
                 {
                     custom_service_names,
                     policy_enforcement,
-                    protection_scenario
+                    protection_scenario,
                 }
             )
                 properties.Add(cp);

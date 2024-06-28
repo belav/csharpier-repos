@@ -45,7 +45,7 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'Console.
                 //         /*<bind>*/Console.WriteLine2()/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMember, "WriteLine2")
                     .WithArguments("System.Console", "WriteLine2")
-                    .WithLocation(8, 27)
+                    .WithLocation(8, 27),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -89,7 +89,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                 //         /*<bind>*/F(string.Empty)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadArgType, "string.Empty")
                     .WithArguments("1", "string", "int")
-                    .WithLocation(8, 21)
+                    .WithLocation(8, 21),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -133,7 +133,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                 //         /*<bind>*/F(string.Empty)/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_BadArgCount, "F")
                     .WithArguments("F", "1")
-                    .WithLocation(8, 19)
+                    .WithLocation(8, 19),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
@@ -179,7 +179,7 @@ IVariableDeclaratorOperation (Symbol: ? y) (OperationKind.VariableDeclarator, Ty
                 //         var y /*<bind>*/= x.MissingField/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "MissingField")
                     .WithArguments("Program", "MissingField")
-                    .WithLocation(9, 29)
+                    .WithLocation(9, 29),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<VariableDeclaratorSyntax>(
@@ -239,7 +239,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //     int i1;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "i1")
                     .WithArguments("Program.i1", "0")
-                    .WithLocation(6, 9)
+                    .WithLocation(6, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -299,7 +299,7 @@ IVariableDeclarationGroupOperation (1 declarations) (OperationKind.VariableDecla
                 //     int i1;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "i1")
                     .WithArguments("Program.i1", "0")
-                    .WithLocation(6, 9)
+                    .WithLocation(6, 9),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<LocalDeclarationStatementSyntax>(
@@ -342,7 +342,7 @@ IIncrementOrDecrementOperation (Prefix) (OperationKind.Increment, Type: ?, IsInv
                 //         Console.Write(/*<bind>*/++x/*</bind>*/);
                 Diagnostic(ErrorCode.ERR_BadUnaryOp, "++x")
                     .WithArguments("++", "Program")
-                    .WithLocation(9, 33)
+                    .WithLocation(9, 33),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<PrefixUnaryExpressionSyntax>(
@@ -394,7 +394,7 @@ IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: ?, IsInva
                 //         Console.Write(/*<bind>*/x + (y * args.Length)/*</bind>*/);
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "y")
                     .WithArguments("y")
-                    .WithLocation(9, 38)
+                    .WithLocation(9, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<BinaryExpressionSyntax>(
@@ -531,7 +531,7 @@ IFieldInitializerOperation (Field: System.Int32 Program.x) (OperationKind.FieldI
                 //         var x = new Program() { x = Program };
                 Diagnostic(ErrorCode.ERR_BadSKunknown, "Program")
                     .WithArguments("Program", "type")
-                    .WithLocation(7, 37)
+                    .WithLocation(7, 37),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -590,7 +590,7 @@ IArrayInitializerOperation (2 elements) (OperationKind.ArrayInitializer, Type: n
                 //         var x = new int[2, 2] /*<bind>*/{ { { 1, 1 } }, { 2, 2 } }/*</bind>*/;
                 Diagnostic(ErrorCode.ERR_ArrayInitializerIncorrectLength, "{ { 1, 1 } }")
                     .WithArguments("2")
-                    .WithLocation(6, 43)
+                    .WithLocation(6, 43),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<InitializerExpressionSyntax>(
@@ -650,7 +650,7 @@ IArrayCreationOperation (OperationKind.ArrayCreation, Type: X[], IsInvalid) (Syn
                     .WithLocation(6, 33),
                 // CS0623: Array initializers can only be used in a variable or field initializer. Try using a new expression instead.
                 //         var x = /*<bind>*/new X[Program] { { 1 } }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 1 }").WithLocation(6, 44)
+                Diagnostic(ErrorCode.ERR_ArrayInitInBadPlace, "{ 1 }").WithLocation(6, 44),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<ArrayCreationExpressionSyntax>(
@@ -693,7 +693,7 @@ IParameterInitializerOperation (Parameter: [System.Int32 p = default(System.Int3
                 //     void F(int p /*<bind>*/= M()/*</bind>*/)
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M()")
                     .WithArguments("p")
-                    .WithLocation(10, 30)
+                    .WithLocation(10, 30),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<EqualsValueClauseSyntax>(
@@ -734,7 +734,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.String, IsInvalid) (Synta
                     //         /*<bind>*/string.Format(format: "", format: "")/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "format")
                         .WithArguments("format")
-                        .WithLocation(6, 45)
+                        .WithLocation(6, 45),
                 }
             );
         }
@@ -774,7 +774,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                     //         /*<bind>*/N(a: 1, a: 2)/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(10, 27)
+                        .WithLocation(10, 27),
                 }
             );
         }
@@ -812,7 +812,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                     //         /*<bind>*/lambda(a: 1, a: 2, b: 3)/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(7, 32)
+                        .WithLocation(7, 32),
                 }
             );
         }
@@ -854,7 +854,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Int32, IsInvalid) (Syntax
                     //         var result = /*<bind>*/this[a: 1, a: 2, b: 3]/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(11, 43)
+                        .WithLocation(11, 43),
                 }
             );
         }
@@ -896,7 +896,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Int32, IsInvalid) (Syntax
                     //         /*<bind>*/this[a: 1, a: 2, b: 3]/*</bind>*/ = 0;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(11, 30)
+                        .WithLocation(11, 30),
                 }
             );
         }
@@ -936,7 +936,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                     //         /*<bind>*/N(b: 1, a: 2, a: 3)/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(10, 33)
+                        .WithLocation(10, 33),
                 }
             );
         }
@@ -974,7 +974,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
                     //         /*<bind>*/lambda(b: 1, a: 2, a: 3)/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(7, 38)
+                        .WithLocation(7, 38),
                 }
             );
         }
@@ -1016,7 +1016,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Int32, IsInvalid) (Syntax
                     //         var result = /*<bind>*/this[b: 1, a: 2, a: 3]/*</bind>*/;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(11, 49)
+                        .WithLocation(11, 49),
                 }
             );
         }
@@ -1058,7 +1058,7 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Int32, IsInvalid) (Syntax
                     //         /*<bind>*/this[b: 1, a: 2, a: 3]/*</bind>*/ = 0;
                     Diagnostic(ErrorCode.ERR_DuplicateNamedArgument, "a")
                         .WithArguments("a")
-                        .WithLocation(11, 36)
+                        .WithLocation(11, 36),
                 }
             );
         }
@@ -1084,7 +1084,7 @@ class C
                 //         i = M(1, __arglist(a ? w : x, b ? y : z));
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M")
                     .WithArguments("M")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
 
             string expectedFlowGraph =
@@ -1148,7 +1148,7 @@ class C
                 //         i = M(1, __arglist(x, a ? y : z));
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M")
                     .WithArguments("M")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
 
             string expectedFlowGraph =
@@ -1259,7 +1259,7 @@ class C
                 //         i = M(1, __arglist(a ? w : x, y));
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M")
                     .WithArguments("M")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
 
             string expectedFlowGraph =
@@ -1366,7 +1366,7 @@ class C
                 //         i = M(1, __arglist(a ? w : x, b ? y : z));
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "M")
                     .WithArguments("M")
-                    .WithLocation(7, 13)
+                    .WithLocation(7, 13),
             };
 
             string expectedFlowGraph =

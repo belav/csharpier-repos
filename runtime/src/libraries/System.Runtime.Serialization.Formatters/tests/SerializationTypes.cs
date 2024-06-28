@@ -239,7 +239,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
         Yellow,
         Green,
         Blue,
-        Purple
+        Purple,
     }
 
     [Serializable]
@@ -344,7 +344,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             _data = new NonSerializablePair<int, string>
             {
                 Value1 = info.GetInt32("Value1"),
-                Value2 = info.GetString("Value2")
+                Value2 = info.GetString("Value2"),
             };
         }
 

@@ -3522,7 +3522,7 @@ public abstract class B5 : B4<A, IA>
                 source2,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromImage(compilation1.EmitToArray())
+                    MetadataReference.CreateFromImage(compilation1.EmitToArray()),
                 }
             );
             compilation2.VerifyDiagnostics();
@@ -3559,7 +3559,7 @@ class C5B : B5
                 source3,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromImage(compilation2.EmitToArray())
+                    MetadataReference.CreateFromImage(compilation2.EmitToArray()),
                 }
             );
             compilation3.VerifyDiagnostics(
@@ -8571,7 +8571,7 @@ class P
                 source2,
                 references: new MetadataReference[]
                 {
-                    MetadataReference.CreateFromImage(compilation1.EmitToArray())
+                    MetadataReference.CreateFromImage(compilation1.EmitToArray()),
                 },
                 options: TestOptions.ReleaseExe
             );
@@ -9211,7 +9211,7 @@ System.Console.WriteLine(typeof(G).FullName);
                 new[]
                 {
                     metadataComp.EmitToImageReference(),
-                    remappedComp12.EmitToImageReference()
+                    remappedComp12.EmitToImageReference(),
                 },
                 targetFramework: TargetFramework.NetStandard20
             );

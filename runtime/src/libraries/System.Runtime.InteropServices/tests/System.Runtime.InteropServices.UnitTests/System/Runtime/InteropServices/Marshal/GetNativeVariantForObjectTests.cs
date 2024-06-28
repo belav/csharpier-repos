@@ -51,7 +51,7 @@ namespace System.Runtime.InteropServices.Tests
                 new char[] { 'a', 'b', 'c' },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UI2),
                 (IntPtr)(-1),
-                new ushort[] { 'a', 'b', 'c' }
+                new ushort[] { 'a', 'b', 'c' },
             };
 
             // IntPtr/UIntPtr objects are _always_ converted to int/uint respectively.
@@ -68,14 +68,14 @@ namespace System.Runtime.InteropServices.Tests
                     new IntPtr[] { (IntPtr)10, (IntPtr)11, (IntPtr)12 },
                     (VarEnum.VT_ARRAY | VarEnum.VT_INT),
                     (IntPtr)(-1),
-                    new int[] { 10, 11, 12 }
+                    new int[] { 10, 11, 12 },
                 };
                 yield return new object[]
                 {
                     new UIntPtr[] { (UIntPtr)10, (UIntPtr)11, (UIntPtr)12 },
                     (VarEnum.VT_ARRAY | VarEnum.VT_UINT),
                     (IntPtr)(-1),
-                    new uint[] { 10, 11, 12 }
+                    new uint[] { 10, 11, 12 },
                 };
             }
             else
@@ -85,14 +85,14 @@ namespace System.Runtime.InteropServices.Tests
                     new IntPtr[] { (IntPtr)10, (IntPtr)11, (IntPtr)12 },
                     (VarEnum.VT_ARRAY | VarEnum.VT_I8),
                     (IntPtr)(-1),
-                    new long[] { 10, 11, 12 }
+                    new long[] { 10, 11, 12 },
                 };
                 yield return new object[]
                 {
                     new UIntPtr[] { (UIntPtr)10, (UIntPtr)11, (UIntPtr)12 },
                     (VarEnum.VT_ARRAY | VarEnum.VT_UI8),
                     (IntPtr)(-1),
-                    new ulong[] { 10, 11, 12 }
+                    new ulong[] { 10, 11, 12 },
                 };
             }
 
@@ -103,7 +103,7 @@ namespace System.Runtime.InteropServices.Tests
                 earlyDateTime,
                 VarEnum.VT_DATE,
                 IntPtr.Zero,
-                new DateTime(1899, 12, 30)
+                new DateTime(1899, 12, 30),
             };
 
             // Wrappers.
@@ -112,14 +112,14 @@ namespace System.Runtime.InteropServices.Tests
                 new UnknownWrapper(10),
                 VarEnum.VT_UNKNOWN,
                 IntPtr.Zero,
-                null
+                null,
             };
             yield return new object[]
             {
                 new DispatchWrapper[] { new DispatchWrapper(null), new DispatchWrapper(null) },
                 (VarEnum.VT_ARRAY | VarEnum.VT_DISPATCH),
                 (IntPtr)(-1),
-                new object[] { null, null }
+                new object[] { null, null },
             };
             yield return new object[] { new ErrorWrapper(10), VarEnum.VT_ERROR, (IntPtr)10, 10 };
             yield return new object[]
@@ -127,7 +127,7 @@ namespace System.Runtime.InteropServices.Tests
                 new CurrencyWrapper(10),
                 VarEnum.VT_CY,
                 (IntPtr)100000,
-                10m
+                10m,
             };
             yield return new object[] { new BStrWrapper("a"), VarEnum.VT_BSTR, (IntPtr)(-1), "a" };
             yield return new object[] { new BStrWrapper(null), VarEnum.VT_BSTR, IntPtr.Zero, null };
@@ -137,21 +137,21 @@ namespace System.Runtime.InteropServices.Tests
                 new UnknownWrapper[] { new UnknownWrapper(null), new UnknownWrapper(10) },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UNKNOWN),
                 (IntPtr)(-1),
-                new object[] { null, 10 }
+                new object[] { null, 10 },
             };
             yield return new object[]
             {
                 new ErrorWrapper[] { new ErrorWrapper(10) },
                 (VarEnum.VT_ARRAY | VarEnum.VT_ERROR),
                 (IntPtr)(-1),
-                new uint[] { 10 }
+                new uint[] { 10 },
             };
             yield return new object[]
             {
                 new CurrencyWrapper[] { new CurrencyWrapper(10) },
                 (VarEnum.VT_ARRAY | VarEnum.VT_CY),
                 (IntPtr)(-1),
-                new decimal[] { 10 }
+                new decimal[] { 10 },
             };
             yield return new object[]
             {
@@ -159,11 +159,11 @@ namespace System.Runtime.InteropServices.Tests
                 {
                     new BStrWrapper("a"),
                     new BStrWrapper(null),
-                    new BStrWrapper("c")
+                    new BStrWrapper("c"),
                 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_BSTR),
                 (IntPtr)(-1),
-                new string[] { "a", null, "c" }
+                new string[] { "a", null, "c" },
             };
 
             // Objects.
@@ -173,7 +173,7 @@ namespace System.Runtime.InteropServices.Tests
                 new NonGenericClass[] { nonGenericClass, null },
                 (VarEnum.VT_ARRAY | VarEnum.VT_DISPATCH),
                 (IntPtr)(-1),
-                new object[] { nonGenericClass, null }
+                new object[] { nonGenericClass, null },
             };
 
             var genericClass = new GenericClass<string>();
@@ -182,7 +182,7 @@ namespace System.Runtime.InteropServices.Tests
                 new GenericClass<string>[] { genericClass, null },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UNKNOWN),
                 (IntPtr)(-1),
-                new object[] { genericClass, null }
+                new object[] { genericClass, null },
             };
 
             var classWithInterface = new ClassWithInterface();
@@ -192,14 +192,14 @@ namespace System.Runtime.InteropServices.Tests
                 new ClassWithInterface[] { classWithInterface, null },
                 (VarEnum.VT_ARRAY | VarEnum.VT_DISPATCH),
                 (IntPtr)(-1),
-                new object[] { classWithInterface, null }
+                new object[] { classWithInterface, null },
             };
             yield return new object[]
             {
                 new INonGenericInterface[] { classWithInterface, structWithInterface, null },
                 (VarEnum.VT_ARRAY | VarEnum.VT_DISPATCH),
                 (IntPtr)(-1),
-                new object[] { classWithInterface, structWithInterface, null }
+                new object[] { classWithInterface, structWithInterface, null },
             };
 
             // Enums.
@@ -217,56 +217,56 @@ namespace System.Runtime.InteropServices.Tests
                 new SByteEnum[] { SByteEnum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_I1),
                 (IntPtr)(-1),
-                new sbyte[] { 1 }
+                new sbyte[] { 1 },
             };
             yield return new object[]
             {
                 new Int16Enum[] { Int16Enum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_I2),
                 (IntPtr)(-1),
-                new short[] { 1 }
+                new short[] { 1 },
             };
             yield return new object[]
             {
                 new Int32Enum[] { Int32Enum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_I4),
                 (IntPtr)(-1),
-                new int[] { 1 }
+                new int[] { 1 },
             };
             yield return new object[]
             {
                 new Int64Enum[] { Int64Enum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_I8),
                 (IntPtr)(-1),
-                new long[] { 1 }
+                new long[] { 1 },
             };
             yield return new object[]
             {
                 new ByteEnum[] { ByteEnum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UI1),
                 (IntPtr)(-1),
-                new byte[] { 1 }
+                new byte[] { 1 },
             };
             yield return new object[]
             {
                 new UInt16Enum[] { UInt16Enum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UI2),
                 (IntPtr)(-1),
-                new ushort[] { 1 }
+                new ushort[] { 1 },
             };
             yield return new object[]
             {
                 new UInt32Enum[] { UInt32Enum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UI4),
                 (IntPtr)(-1),
-                new uint[] { 1 }
+                new uint[] { 1 },
             };
             yield return new object[]
             {
                 new UInt64Enum[] { UInt64Enum.Value2 },
                 (VarEnum.VT_ARRAY | VarEnum.VT_UI8),
                 (IntPtr)(-1),
-                new ulong[] { 1 }
+                new ulong[] { 1 },
             };
 
             // Color is converted to uint.
@@ -275,7 +275,7 @@ namespace System.Runtime.InteropServices.Tests
                 Color.FromArgb(10),
                 VarEnum.VT_UI4,
                 (IntPtr)655360,
-                (uint)655360
+                (uint)655360,
             };
         }
 
@@ -566,49 +566,49 @@ namespace System.Runtime.InteropServices.Tests
         public enum SByteEnum : sbyte
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum Int16Enum : short
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum Int32Enum : int
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum Int64Enum : long
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum ByteEnum : byte
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum UInt16Enum : ushort
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum UInt32Enum : uint
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public enum UInt64Enum : ulong
         {
             Value1,
-            Value2
+            Value2,
         }
 
         public class FakeSafeHandle : SafeHandle

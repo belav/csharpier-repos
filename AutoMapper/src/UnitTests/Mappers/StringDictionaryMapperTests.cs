@@ -71,7 +71,7 @@ public class When_mapping_from_StringDictionary : NonValidatingSpecBase
             { "NullInner.Value", "5" },
             { "SettableInner.Value", "6" },
             { "SettableInner.Child.Value", "7" },
-            { "Inner.Child.Value", "8" }
+            { "Inner.Child.Value", "8" },
         };
         var destination = Mapper.Map<Destination>(source);
         destination.Inner.Value.ShouldBe(5);
@@ -171,7 +171,7 @@ public class When_mapping_from_StringDictionary_with_whitespace : NonValidatingS
         {
             { " Foo", "Foo" },
             { " Bar", "Bar" },
-            { " Baz ", 2 }
+            { " Baz ", 2 },
         };
         _destination = Mapper.Map<Destination>(source);
     }
@@ -198,7 +198,7 @@ public class When_mapping_from_StringDictionary_multiple_matching_keys : NonVali
             { " Foo", "Foo1" },
             { "  Foo", "Foo2" },
             { "Bar", "Bar" },
-            { "Baz", 2 }
+            { "Baz", 2 },
         };
     }
 
@@ -227,7 +227,7 @@ public class When_mapping_from_StringDictionary_to_StringDictionary : NonValidat
         {
             { "Foo", "Foo" },
             { "Bar", "Bar" },
-            { "Bar ", "Bar_" }
+            { "Bar ", "Bar_" },
         };
         _destination = Mapper.Map<StringDictionary>(source);
     }

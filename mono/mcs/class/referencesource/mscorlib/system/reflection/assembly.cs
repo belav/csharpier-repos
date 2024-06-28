@@ -2048,7 +2048,7 @@ namespace System.Reflection
         static string[] s_unsafeFrameworkAssemblyNames = new string[]
         {
             "System.Reflection.Context",
-            "Microsoft.VisualBasic"
+            "Microsoft.VisualBasic",
         };
 
 #if FEATURE_APPX

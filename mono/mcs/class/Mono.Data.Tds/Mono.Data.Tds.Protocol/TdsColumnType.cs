@@ -69,6 +69,8 @@ namespace Mono.Data.Tds.Protocol
         BigChar = 0xaf, // XSYBCHAR
         SmallMoney = 0x7a, // SYBMONEY4
         Variant = 0x62, // SYBVARIANT
-        BigInt = 0x7F // SYBINT8
+        BigInt =
+            0x7F // SYBINT8
+        ,
     }
 }

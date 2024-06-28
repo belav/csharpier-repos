@@ -23,7 +23,7 @@ public class RoutePatternAnalyzer : DiagnosticAnalyzer
             new[]
             {
                 DiagnosticDescriptors.RoutePatternIssue,
-                DiagnosticDescriptors.RoutePatternUnusedParameter
+                DiagnosticDescriptors.RoutePatternUnusedParameter,
             }
         );
 

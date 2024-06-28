@@ -5,13 +5,13 @@ class X
     enum Foo
     {
         A,
-        B
+        B,
     }
 
     enum Bar
     {
         C,
-        D
+        D,
     }
 
     public static void Main()

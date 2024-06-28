@@ -77,7 +77,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Bottom.
         /// </summary>
-        Bottom = 32
+        Bottom = 32,
     }
 
     /// <summary>
@@ -273,7 +273,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Last segment.
         /// </summary>
-        Last
+        Last,
     }
 
     #endregion
@@ -4372,7 +4372,7 @@ namespace System.Web.UI.DataVisualization.Charting
                                                 point.X,
                                                 point.Y,
                                                 positionZ + markerRelativeSize.Width
-                                            )
+                                            ),
                                         };
                                         matrix.TransformPoints(centerPoint);
                                         centerPoint[0].PointF = graph.GetAbsolutePoint(

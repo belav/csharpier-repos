@@ -19,7 +19,7 @@ namespace System.CodeDom
     ///       Represents a TypeOf expression.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeTypeOfExpression : CodeExpression
     {
         private CodeTypeReference type;

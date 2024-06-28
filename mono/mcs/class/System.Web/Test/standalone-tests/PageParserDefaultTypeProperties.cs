@@ -46,7 +46,7 @@ namespace StandAloneTests.PageParserDefaultTypeProperties
             "1: DefaultApplicationBaseType: set",
             "1: DefaultPageBaseType: set",
             "1: DefaultPageParserFilterType: set",
-            "1: DefaultUserControlBaseType: set"
+            "1: DefaultUserControlBaseType: set",
         };
 
         static string[] expectedMessages_2 =
@@ -54,7 +54,7 @@ namespace StandAloneTests.PageParserDefaultTypeProperties
             "2: DefaultApplicationBaseType: exception 'System.ArgumentException' thrown.",
             "2: DefaultPageBaseType: exception 'System.ArgumentException' thrown.",
             "2: DefaultPageParserFilterType: exception 'System.ArgumentException' thrown.",
-            "2: DefaultUserControlBaseType: exception 'System.ArgumentException' thrown."
+            "2: DefaultUserControlBaseType: exception 'System.ArgumentException' thrown.",
         };
 
         static string[] expectedMessages_3 =
@@ -62,7 +62,7 @@ namespace StandAloneTests.PageParserDefaultTypeProperties
             "3: DefaultApplicationBaseType: set",
             "3: DefaultPageBaseType: set",
             "3: DefaultPageParserFilterType: set",
-            "3: DefaultUserControlBaseType: set"
+            "3: DefaultUserControlBaseType: set",
         };
 
         public string PhysicalPath
@@ -80,19 +80,19 @@ namespace StandAloneTests.PageParserDefaultTypeProperties
             runItems.Add(
                 new TestRunItem("/default.aspx", "Set correct values", Default_Aspx_1)
                 {
-                    AppDomainData = new object[] { "TestNumber", 1 }
+                    AppDomainData = new object[] { "TestNumber", 1 },
                 }
             );
             runItems.Add(
                 new TestRunItem("/default.aspx", "Set invalid values", Default_Aspx_2)
                 {
-                    AppDomainData = new object[] { "TestNumber", 2 }
+                    AppDomainData = new object[] { "TestNumber", 2 },
                 }
             );
             runItems.Add(
                 new TestRunItem("/default.aspx", "Set null values", Default_Aspx_3)
                 {
-                    AppDomainData = new object[] { "TestNumber", 3 }
+                    AppDomainData = new object[] { "TestNumber", 3 },
                 }
             );
 

@@ -12,7 +12,7 @@ class Program
         MyClass myClass = new MyClass() { Name = "trimmed" };
         MyClassWithProxyString myClassWithString = new MyClassWithProxyString()
         {
-            Name = "trimmed"
+            Name = "trimmed",
         };
 
         Type[] allTypes = typeof(MyClass).Assembly.GetTypes();

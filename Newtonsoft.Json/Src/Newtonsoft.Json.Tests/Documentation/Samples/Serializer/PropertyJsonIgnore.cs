@@ -59,7 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 FullName = "Joe User",
                 EmailAddress = "joe@example.com",
-                PasswordHash = "VHdlZXQgJ1F1aWNrc2lsdmVyJyB0byBASmFtZXNOSw=="
+                PasswordHash = "VHdlZXQgJ1F1aWNrc2lsdmVyJyB0byBASmFtZXNOSw==",
             };
 
             string json = JsonConvert.SerializeObject(account);

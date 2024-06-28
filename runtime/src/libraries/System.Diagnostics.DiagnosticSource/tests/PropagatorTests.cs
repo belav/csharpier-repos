@@ -42,7 +42,7 @@ namespace System.Diagnostics.Tests
                             new KeyValuePair<string, string>(
                                 "     LegacyKey1     ",
                                 "    LegacyValue1    "
-                            )
+                            ),
                         }
                     );
 
@@ -51,7 +51,7 @@ namespace System.Diagnostics.Tests
                         "Legacy2=true",
                         new List<KeyValuePair<string, string>>()
                         {
-                            new KeyValuePair<string, string>("LegacyKey2", "LegacyValue2")
+                            new KeyValuePair<string, string>("LegacyKey2", "LegacyValue2"),
                         }
                     );
 
@@ -70,7 +70,7 @@ namespace System.Diagnostics.Tests
                         new List<KeyValuePair<string, string>>()
                         {
                             new KeyValuePair<string, string>("B1", "V1"),
-                            new KeyValuePair<string, string>(" B2 ", " V2 ")
+                            new KeyValuePair<string, string>(" B2 ", " V2 "),
                         }
                     );
 
@@ -87,7 +87,7 @@ namespace System.Diagnostics.Tests
                         {
                             new KeyValuePair<string, string>(" B3 ", " V3"),
                             new KeyValuePair<string, string>(" B4 ", " V4 "),
-                            new KeyValuePair<string, string>("B5", "V5")
+                            new KeyValuePair<string, string>("B5", "V5"),
                         }
                     );
 
@@ -115,7 +115,10 @@ namespace System.Diagnostics.Tests
                                 "PassThroughKey1",
                                 "PassThroughValue1"
                             ),
-                            new KeyValuePair<string, string>("PassThroughKey2", "PassThroughValue2")
+                            new KeyValuePair<string, string>(
+                                "PassThroughKey2",
+                                "PassThroughValue2"
+                            ),
                         }
                     );
 
@@ -131,7 +134,7 @@ namespace System.Diagnostics.Tests
                             new KeyValuePair<string, string>(
                                 " PassThroughKey4 ",
                                 " PassThroughValue4 "
-                            )
+                            ),
                         }
                     );
 
@@ -143,7 +146,7 @@ namespace System.Diagnostics.Tests
                             new KeyValuePair<string, string>(
                                 "     PassThroughKey4     ",
                                 "    PassThroughValue4    "
-                            )
+                            ),
                         }
                     );
 
@@ -319,7 +322,7 @@ namespace System.Diagnostics.Tests
                 state + "1",
                 new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("Child1Key", "Child1Value")
+                    new KeyValuePair<string, string>("Child1Key", "Child1Value"),
                 }
             );
             using Activity c = CreateHierarchicalActivity(
@@ -328,7 +331,7 @@ namespace System.Diagnostics.Tests
                 state + "2",
                 new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("Child2Key", "Child2Value")
+                    new KeyValuePair<string, string>("Child2Key", "Child2Value"),
                 }
             );
 
@@ -389,7 +392,7 @@ namespace System.Diagnostics.Tests
                 state + "1",
                 new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("Child1Key", "Child1Value")
+                    new KeyValuePair<string, string>("Child1Key", "Child1Value"),
                 }
             );
             using Activity c = CreateHierarchicalActivity(
@@ -398,7 +401,7 @@ namespace System.Diagnostics.Tests
                 state + "2",
                 new List<KeyValuePair<string, string>>()
                 {
-                    new KeyValuePair<string, string>("Child2Key", "Child2Value")
+                    new KeyValuePair<string, string>("Child2Key", "Child2Value"),
                 }
             );
 
@@ -793,7 +796,7 @@ namespace System.Diagnostics.Tests
                         "CustomW3CState=1",
                         new List<KeyValuePair<string, string>>()
                         {
-                            new KeyValuePair<string, string>(" CustomKey1 ", "    CustomValue1  ")
+                            new KeyValuePair<string, string>(" CustomKey1 ", "    CustomValue1  "),
                         }
                     );
 

@@ -1876,7 +1876,7 @@ namespace System.Xml
         {
             None,
             Element,
-            Content
+            Content,
         }
 
         protected override XmlSigningNodeWriter CreateSigningNodeWriter()

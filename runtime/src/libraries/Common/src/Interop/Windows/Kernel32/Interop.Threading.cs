@@ -74,7 +74,7 @@ internal static partial class Interop
             Highest = 2,
             TimeCritical = 15,
 
-            ErrorReturn = 0x7FFFFFFF
+            ErrorReturn = 0x7FFFFFFF,
         }
 
         [LibraryImport(Libraries.Kernel32)]

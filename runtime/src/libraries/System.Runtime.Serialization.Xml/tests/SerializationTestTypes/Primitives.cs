@@ -36,7 +36,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     [Flags]
@@ -89,7 +89,7 @@ namespace SerializationTestTypes
             MyEnum1.black,
             MyEnum1.blue,
             Seasons1.Autumn,
-            Seasons2.Spring
+            Seasons2.Spring,
         };
 
         [DataMember]
@@ -797,7 +797,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract(Name = "Enum1")]
@@ -810,7 +810,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     internal enum MyPrivateEnum2
@@ -822,14 +822,14 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     internal enum MyPrivateEnum3
     {
         red,
         blue,
-        black
+        black,
     }
 
     internal interface SomeProperties
@@ -891,7 +891,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -904,7 +904,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -917,7 +917,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -930,7 +930,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -943,7 +943,7 @@ namespace SerializationTestTypes
         blue,
 
         [EnumMember]
-        black
+        black,
     }
 
     public class SeasonsEnumContainer

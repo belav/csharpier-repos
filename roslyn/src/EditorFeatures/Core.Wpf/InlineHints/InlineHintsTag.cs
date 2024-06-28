@@ -171,7 +171,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 Foreground = format.ForegroundBrush,
                 // Adds a little bit of padding to the left of the text relative to the border to make the text seem
                 // more balanced in the border
-                Padding = new Thickness(left: 2, top: 0, right: 2, bottom: 0)
+                Padding = new Thickness(left: 2, top: 0, right: 2, bottom: 0),
             };
 
             var (trimmedTexts, leftPadding, rightPadding) = Trim(taggedTexts);
@@ -218,7 +218,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 Height = dockPanelHeight,
                 LastChildFill = false,
                 // VerticalAlignment is set to Top because it will rest to the top relative to the StackPanel
-                VerticalAlignment = VerticalAlignment.Top
+                VerticalAlignment = VerticalAlignment.Top,
             };
 
             dockPanel.Children.Add(border);
@@ -230,7 +230,7 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 Height =
                     dockPanelHeight
                     + (block.DesiredSize.Height - (block.FontFamily.Baseline * block.FontSize)),
-                Orientation = Orientation.Vertical
+                Orientation = Orientation.Vertical,
             };
 
             stackPanel.Children.Add(dockPanel);

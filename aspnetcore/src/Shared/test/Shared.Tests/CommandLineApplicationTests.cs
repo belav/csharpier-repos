@@ -1101,7 +1101,7 @@ public class CommandLineApplicationTests
     {
         var app = new CommandLineApplication(throwOnUnexpectedArg: false)
         {
-            AllowArgumentSeparator = true
+            AllowArgumentSeparator = true,
         };
         var optHelp = app.HelpOption("--help");
         var optVersion = app.VersionOption("--version", "1", "1.0");
@@ -1231,7 +1231,7 @@ public class CommandLineApplicationTests
         var app = new CommandLineApplication()
         {
             Name = "ninja-app",
-            Description = "You can't see it until it is too late"
+            Description = "You can't see it until it is too late",
         };
 
         app.Command(
@@ -1279,7 +1279,7 @@ public class CommandLineApplicationTests
         var app = new CommandLineApplication(throwOnUnexpectedArg: false)
         {
             Name = "proxy-command",
-            AllowArgumentSeparator = true
+            AllowArgumentSeparator = true,
         };
         app.HelpOption("-h|--help");
         Assert.Contains("Usage: proxy-command [options] [[--] <arg>...]", app.GetHelpText());
@@ -1298,7 +1298,7 @@ Remarks:
 
 Examples:
   dotnet befuddle -- I Can Haz Confusion Arguments
-"
+",
         };
 
         Assert.Contains(app.ExtendedHelpText, app.GetHelpText());

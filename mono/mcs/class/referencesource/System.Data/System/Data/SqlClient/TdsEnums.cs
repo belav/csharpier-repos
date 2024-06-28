@@ -37,7 +37,7 @@ namespace System.Data.SqlClient
         {
             "off",
             "on",
-            "context"
+            "context",
         };
 
         // HACK!!!
@@ -226,7 +226,7 @@ namespace System.Data.SqlClient
             LiveId = FEDAUTHLIB_LIVEID,
             SecurityToken = FEDAUTHLIB_SECURITYTOKEN,
             ADAL = FEDAUTHLIB_ADAL,
-            Default = FEDAUTHLIB_RESERVED
+            Default = FEDAUTHLIB_RESERVED,
         }
 
         public const byte ADALWORKFLOW_ACTIVEDIRECTORYPASSWORD = 0x01;
@@ -871,7 +871,7 @@ namespace System.Data.SqlClient
         internal enum UDTFormatType
         {
             Native = 1,
-            UserDefined = 2
+            UserDefined = 2,
         }
 
         internal enum TransactionManagerRequestType
@@ -882,7 +882,7 @@ namespace System.Data.SqlClient
             Promote = 6,
             Commit = 7,
             Rollback = 8,
-            Save = 9
+            Save = 9,
         };
 
         internal enum TransactionManagerIsolationLevel
@@ -892,7 +892,7 @@ namespace System.Data.SqlClient
             ReadCommitted = 0x02,
             RepeatableRead = 0x03,
             Serializable = 0x04,
-            Snapshot = 0x05
+            Snapshot = 0x05,
         }
 
         internal enum GenericType
@@ -927,7 +927,7 @@ namespace System.Data.SqlClient
             24,
             25,
             26,
-            27
+            27,
         };
         internal static readonly int[] WHIDBEY_DATETIMEOFFSET_LENGTH =
         {
@@ -938,7 +938,7 @@ namespace System.Data.SqlClient
             31,
             32,
             33,
-            34
+            34,
         };
 
         internal enum FedAuthInfoId : byte
@@ -1072,7 +1072,7 @@ namespace System.Data.SqlClient
     {
         DisabledMode = 0,
         SequentialMode,
-        ParallelMode
+        ParallelMode,
     };
 
     internal class ActiveDirectoryAuthentication

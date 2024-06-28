@@ -160,7 +160,7 @@ namespace Castle.DynamicProxy.Tests
             var options1 = new ProxyGenerationOptions { Selector = new AllInterceptorSelector() };
             var options2 = new ProxyGenerationOptions
             {
-                Selector = new TypeInterceptorSelector<CallCountingInterceptor>()
+                Selector = new TypeInterceptorSelector<CallCountingInterceptor>(),
             };
 
             var proxy1 = generator.CreateInterfaceProxyWithTargetInterface<IOne>(
@@ -183,7 +183,7 @@ namespace Castle.DynamicProxy.Tests
             var options1 = new ProxyGenerationOptions { Selector = new AllInterceptorSelector() };
             var options2 = new ProxyGenerationOptions
             {
-                Selector = new TypeInterceptorSelector<CallCountingInterceptor>()
+                Selector = new TypeInterceptorSelector<CallCountingInterceptor>(),
             };
 
             var proxy1 = generator.CreateInterfaceProxyWithTarget<IOne>(new One(), options1);
@@ -200,7 +200,7 @@ namespace Castle.DynamicProxy.Tests
             var options1 = new ProxyGenerationOptions { Selector = new AllInterceptorSelector() };
             var options2 = new ProxyGenerationOptions
             {
-                Selector = new TypeInterceptorSelector<SetReturnValueInterceptor>()
+                Selector = new TypeInterceptorSelector<SetReturnValueInterceptor>(),
             };
 
             var proxy1 = generator.CreateInterfaceProxyWithoutTarget(
@@ -227,7 +227,7 @@ namespace Castle.DynamicProxy.Tests
             var options1 = new ProxyGenerationOptions { Selector = new AllInterceptorSelector() };
             var options2 = new ProxyGenerationOptions
             {
-                Selector = new TypeInterceptorSelector<CallCountingInterceptor>()
+                Selector = new TypeInterceptorSelector<CallCountingInterceptor>(),
             };
 
             var proxy1 = generator.CreateClassProxy(

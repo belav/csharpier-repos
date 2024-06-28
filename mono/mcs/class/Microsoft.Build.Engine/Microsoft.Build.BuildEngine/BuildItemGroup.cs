@@ -91,11 +91,9 @@ namespace Microsoft.Build.BuildEngine
             }
 
             DefinedInFileName =
-                importedProject != null
-                    ? importedProject.FullFileName
-                    : project != null
-                        ? project.FullFileName
-                        : null;
+                importedProject != null ? importedProject.FullFileName
+                : project != null ? project.FullFileName
+                : null;
         }
 
         internal virtual BuildItem CreateItem(Project project, XmlElement xe)
@@ -287,7 +285,7 @@ namespace Microsoft.Build.BuildEngine
                 // separator present, so return as a single "join'ed" string
                 return new ITaskItem[]
                 {
-                    new TaskItem(ConvertToString(transform, separator, options))
+                    new TaskItem(ConvertToString(transform, separator, options)),
                 };
 
             ITaskItem[] array = new ITaskItem[buildItems.Count];

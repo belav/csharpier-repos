@@ -292,7 +292,7 @@ public class NegotiateHandler
     {
         var errorContext = new AuthenticationFailedContext(Context, Scheme, Options)
         {
-            Exception = ex
+            Exception = ex,
         };
         await Events.AuthenticationFailed(errorContext);
 
@@ -373,7 +373,7 @@ public class NegotiateHandler
         {
             var ldapContext = new LdapContext(Context, Scheme, Options, Options.LdapSettings)
             {
-                Principal = user
+                Principal = user,
             };
 
             await Events.RetrieveLdapClaims(ldapContext);
@@ -391,14 +391,14 @@ public class NegotiateHandler
 
             authenticatedContext = new AuthenticatedContext(Context, Scheme, Options)
             {
-                Principal = ldapContext.Principal
+                Principal = ldapContext.Principal,
             };
         }
         else
         {
             authenticatedContext = new AuthenticatedContext(Context, Scheme, Options)
             {
-                Principal = user
+                Principal = user,
             };
         }
 

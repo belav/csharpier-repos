@@ -206,10 +206,9 @@ namespace System.Net
             {
                 get
                 {
-                    return
-                        (_contextFlags & Interop.SspiCli.ContextFlags.Delegate) != 0
+                    return (_contextFlags & Interop.SspiCli.ContextFlags.Delegate) != 0
                         && Package != NegotiationInfoClass.NTLM
-                        ? TokenImpersonationLevel.Delegation
+                            ? TokenImpersonationLevel.Delegation
                         : (
                             _contextFlags
                             & (
@@ -219,7 +218,7 @@ namespace System.Net
                             )
                         ) != 0
                             ? TokenImpersonationLevel.Identification
-                            : TokenImpersonationLevel.Impersonation;
+                        : TokenImpersonationLevel.Impersonation;
                 }
             }
 
@@ -232,10 +231,9 @@ namespace System.Net
                 contextFlags |= clientOptions.RequiredProtectionLevel switch
                 {
                     ProtectionLevel.Sign => Interop.SspiCli.ContextFlags.InitIntegrity,
-                    ProtectionLevel.EncryptAndSign =>
-                        Interop.SspiCli.ContextFlags.InitIntegrity
-                            | Interop.SspiCli.ContextFlags.Confidentiality,
-                    _ => 0
+                    ProtectionLevel.EncryptAndSign => Interop.SspiCli.ContextFlags.InitIntegrity
+                        | Interop.SspiCli.ContextFlags.Confidentiality,
+                    _ => 0,
                 };
 
                 contextFlags |= clientOptions.RequireMutualAuthentication
@@ -244,10 +242,12 @@ namespace System.Net
 
                 contextFlags |= clientOptions.AllowedImpersonationLevel switch
                 {
-                    TokenImpersonationLevel.Identification =>
-                        Interop.SspiCli.ContextFlags.InitIdentify,
+                    TokenImpersonationLevel.Identification => Interop
+                        .SspiCli
+                        .ContextFlags
+                        .InitIdentify,
                     TokenImpersonationLevel.Delegation => Interop.SspiCli.ContextFlags.Delegate,
-                    _ => 0
+                    _ => 0,
                 };
 
                 _isServer = false;
@@ -294,10 +294,11 @@ namespace System.Net
                     serverOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.SspiCli.ContextFlags.AcceptIntegrity,
-                        ProtectionLevel.EncryptAndSign =>
-                            Interop.SspiCli.ContextFlags.AcceptIntegrity
-                                | Interop.SspiCli.ContextFlags.Confidentiality,
-                        _ => 0
+                        ProtectionLevel.EncryptAndSign => Interop
+                            .SspiCli
+                            .ContextFlags
+                            .AcceptIntegrity | Interop.SspiCli.ContextFlags.Confidentiality,
+                        _ => 0,
                     } | Interop.SspiCli.ContextFlags.Connection;
 
                 if (serverOptions.Policy is not null)
@@ -538,11 +539,9 @@ namespace System.Net
                 }
 
                 byte[]? result =
-                    resultBlobLength == 0 || _tokenBuffer == null
-                        ? null
-                        : _tokenBuffer.Length == resultBlobLength
-                            ? _tokenBuffer
-                            : _tokenBuffer[0..resultBlobLength];
+                    resultBlobLength == 0 || _tokenBuffer == null ? null
+                    : _tokenBuffer.Length == resultBlobLength ? _tokenBuffer
+                    : _tokenBuffer[0..resultBlobLength];
 
                 // The return value will tell us correctly if the handshake is over or not
                 if (
@@ -619,7 +618,7 @@ namespace System.Net
 
                     Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(3)
                     {
-                        pBuffers = unmanagedBuffer
+                        pBuffers = unmanagedBuffer,
                     };
 
                     uint qop = requestEncryption ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
@@ -725,7 +724,7 @@ namespace System.Net
 
                     Interop.SspiCli.SecBufferDesc sdcInOut = new Interop.SspiCli.SecBufferDesc(2)
                     {
-                        pBuffers = unmanagedBuffer
+                        pBuffers = unmanagedBuffer,
                     };
 
                     uint qop;
@@ -743,7 +742,7 @@ namespace System.Net
                         {
                             (int)Interop.SECURITY_STATUS.MessageAltered =>
                                 NegotiateAuthenticationStatusCode.MessageAltered,
-                            _ => NegotiateAuthenticationStatusCode.InvalidToken
+                            _ => NegotiateAuthenticationStatusCode.InvalidToken,
                         };
                     }
 
@@ -808,7 +807,7 @@ namespace System.Net
                             2
                         )
                         {
-                            pBuffers = unmanagedBuffer
+                            pBuffers = unmanagedBuffer,
                         };
 
                         uint qop = IsEncrypted ? 0 : Interop.SspiCli.SECQOP_WRAP_NO_ENCRYPT;
@@ -868,7 +867,7 @@ namespace System.Net
 
                         Interop.SspiCli.SecBufferDesc sdcIn = new Interop.SspiCli.SecBufferDesc(2)
                         {
-                            pBuffers = unmanagedBuffer
+                            pBuffers = unmanagedBuffer,
                         };
 
                         uint qop;

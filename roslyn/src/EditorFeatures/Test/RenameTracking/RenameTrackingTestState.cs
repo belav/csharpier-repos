@@ -118,7 +118,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.RenameTracking
             _mockRefactorNotifyService = new MockRefactorNotifyService
             {
                 OnBeforeSymbolRenamedReturnValue = onBeforeGlobalSymbolRenamedReturnValue,
-                OnAfterSymbolRenamedReturnValue = onAfterGlobalSymbolRenamedReturnValue
+                OnAfterSymbolRenamedReturnValue = onAfterGlobalSymbolRenamedReturnValue,
             };
 
             // Mock the action taken by the workspace INotificationService

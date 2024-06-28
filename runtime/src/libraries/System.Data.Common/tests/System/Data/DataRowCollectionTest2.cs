@@ -61,7 +61,7 @@ namespace System.Data.Tests
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
                     1.534,
-                    true
+                    true,
                 }
             );
             Assert.Equal(6, dt.Rows.Count);
@@ -174,7 +174,7 @@ namespace System.Data.Tests
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
                     1.534,
-                    true
+                    true,
                 }
             );
             Assert.Equal(1, dt.Rows.Count);
@@ -198,7 +198,7 @@ namespace System.Data.Tests
                     "1-String1",
                     "1-String2",
                     new DateTime(2005, 1, 1, 0, 0, 0, 0),
-                    1.534
+                    1.534,
                 }
             );
             Assert.Equal(count + 1, dt.Rows.Count);

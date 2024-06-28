@@ -17,7 +17,7 @@ namespace System.Web.Mvc.Test
             NameValueCollection nvc = new NameValueCollection()
             {
                 { "foo", "fooValue" },
-                { "bar", "barValue" }
+                { "bar", "barValue" },
             };
 
             // Act
@@ -119,7 +119,7 @@ namespace System.Web.Mvc.Test
             NameValueCollection nvc = new NameValueCollection()
             {
                 { "foo", "fooValue" },
-                { "bar", "barValue" }
+                { "bar", "barValue" },
             };
             IModelBinder binder = ModelBinders.Binders.GetBinder(typeof(FormCollection));
 

@@ -20,7 +20,7 @@ namespace System
                 Escaped = 0,
                 NotEscaped = 1,
                 StartOfToken = 2,
-                EndOfLine = 3
+                EndOfLine = 3,
             }
 
             private readonly string _serializedText;

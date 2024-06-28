@@ -31,6 +31,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
     {
         Rectangle = 0,
         Line = 1,
-        Marker = 2
+        Marker = 2,
     }
 }

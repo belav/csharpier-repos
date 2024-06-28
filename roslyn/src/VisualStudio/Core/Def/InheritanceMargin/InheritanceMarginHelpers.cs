@@ -235,7 +235,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 InheritanceRelationship.ImplementingMember =>
                     ServicesVSResources.Implementing_members,
                 InheritanceRelationship.InheritedImport => item.DisplayTexts.JoinText(),
-                _ => throw ExceptionUtilities.UnexpectedValue(relationship)
+                _ => throw ExceptionUtilities.UnexpectedValue(relationship),
             };
 
             builder.Add(new HeaderMenuItemViewModel(displayContent, GetMoniker(relationship)));

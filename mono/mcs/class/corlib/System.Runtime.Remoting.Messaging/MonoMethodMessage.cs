@@ -462,6 +462,6 @@ namespace System.Runtime.Remoting.Messaging
         Sync = 0,
         BeginInvoke = 1,
         EndInvoke = 2,
-        OneWay = 3
+        OneWay = 3,
     }
 }

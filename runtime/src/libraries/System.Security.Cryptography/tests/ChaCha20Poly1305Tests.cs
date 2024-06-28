@@ -458,7 +458,7 @@ namespace System.Security.Cryptography.Tests
                     + "3ff4def08e4b7a9de576d26586cec64b"
                     + "6116"
                 ).HexToByteArray(),
-                Tag = "1ae10b594f09e26a7e902ecbd0600691".HexToByteArray()
+                Tag = "1ae10b594f09e26a7e902ecbd0600691".HexToByteArray(),
             },
             new AEADTest
             {
@@ -506,8 +506,8 @@ namespace System.Security.Cryptography.Tests
                     + "305beaba2eda04df997b714d6c6f2c29"
                     + "a6ad5cb4022b02709b"
                 ).HexToByteArray(),
-                Tag = "eead9d67890cbb22392336fea1851f38".HexToByteArray()
-            }
+                Tag = "eead9d67890cbb22392336fea1851f38".HexToByteArray(),
+            },
         };
     }
 

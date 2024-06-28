@@ -38,7 +38,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         HttpResponseMessage response = await client.SendAsync(
                             new HttpRequestMessage(HttpMethod.Get, address)
                             {
-                                Version = HttpVersion20.Value
+                                Version = HttpVersion20.Value,
                             }
                         )
                     )
@@ -93,7 +93,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         HttpResponseMessage response = await client.SendAsync(
                             new HttpRequestMessage(HttpMethod.Get, address)
                             {
-                                Version = HttpVersion20.Value
+                                Version = HttpVersion20.Value,
                             }
                         )
                     )
@@ -143,7 +143,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                 Test.Common.Configuration.Http.Http2RemoteEchoServer
             )
             {
-                Version = HttpVersion20.Value
+                Version = HttpVersion20.Value,
             };
             request.Content = new StringContent(payload);
             using (var client = new HttpClient(handler))
@@ -159,7 +159,7 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                         Method = "_",
                         BodyContent = "_",
                         ClientCertificatePresent = "_",
-                        ClientCertificate = "_"
+                        ClientCertificate = "_",
                     }
                 );
                 Assert.Equal("POST", responseContent.Method);

@@ -59,7 +59,7 @@ namespace System.Web.Http.Dispatcher
                             {
                                 "key",
                                 new ModelState() { Errors = { new ModelError("error") } }
-                            }
+                            },
                         },
                         true
                     ),
@@ -179,7 +179,7 @@ namespace System.Web.Http.Dispatcher
             HttpError error = new HttpError("error")
             {
                 { "ErrorCode", 42 },
-                { "Data", new[] { "a", "b", "c" } }
+                { "Data", new[] { "a", "b", "c" } },
             };
             MediaTypeFormatter formatter = new JsonMediaTypeFormatter();
             MemoryStream stream = new MemoryStream();
@@ -218,7 +218,7 @@ namespace System.Web.Http.Dispatcher
             HttpError error = new HttpError("error")
             {
                 { "ErrorCode", 42 },
-                { "Data", new[] { "a", "b", "c" } }
+                { "Data", new[] { "a", "b", "c" } },
             };
             MediaTypeFormatter formatter = new XmlMediaTypeFormatter();
             MemoryStream stream = new MemoryStream();
@@ -283,7 +283,7 @@ namespace System.Web.Http.Dispatcher
             HttpError error = new HttpError("error")
             {
                 { "ErrorCode", 42 },
-                { "Data", new[] { "a", "b", "c" } }
+                { "Data", new[] { "a", "b", "c" } },
             };
             MediaTypeFormatter formatter = new XmlMediaTypeFormatter() { UseXmlSerializer = true };
             MemoryStream stream = new MemoryStream();

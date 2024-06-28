@@ -47,7 +47,7 @@ public class DataTypeClientModelValidatorProviderTest
         var expectedValidatorItem = new ClientValidatorItem
         {
             Validator = new NumericClientModelValidator(),
-            IsReusable = true
+            IsReusable = true,
         };
         items.Add(expectedValidatorItem);
 

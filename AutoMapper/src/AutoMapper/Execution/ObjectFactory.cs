@@ -26,9 +26,11 @@ public static class ObjectFactory
             { IsValueType: true } => configuration.Default(type),
             Type stringType when stringType == typeof(string) => EmptyString,
             { IsInterface: true } => CreateInterfaceExpression(type),
-            { IsAbstract: true } =>
-                InvalidType(type, $"Cannot create an instance of abstract type {type}."),
-            _ => CallConstructor(type, configuration)
+            { IsAbstract: true } => InvalidType(
+                type,
+                $"Cannot create an instance of abstract type {type}."
+            ),
+            _ => CallConstructor(type, configuration),
         };
 
     private static Expression CallConstructor(Type type, IGlobalConfiguration configuration)
@@ -61,15 +63,13 @@ public static class ObjectFactory
     }
 
     private static Expression CreateInterfaceExpression(Type type) =>
-        type.IsGenericType(typeof(IDictionary<,>))
-            ? CreateCollection(type, typeof(Dictionary<,>))
-            : type.IsGenericType(typeof(IReadOnlyDictionary<,>))
-                ? CreateReadOnlyDictionary(type.GenericTypeArguments)
-                : type.IsGenericType(typeof(ISet<>))
-                    ? CreateCollection(type, typeof(HashSet<>))
-                    : type.IsCollection()
-                        ? CreateCollection(type, typeof(List<>), GetIEnumerableArguments(type))
-                        : InvalidType(type, $"Cannot create an instance of interface type {type}.");
+        type.IsGenericType(typeof(IDictionary<,>)) ? CreateCollection(type, typeof(Dictionary<,>))
+        : type.IsGenericType(typeof(IReadOnlyDictionary<,>))
+            ? CreateReadOnlyDictionary(type.GenericTypeArguments)
+        : type.IsGenericType(typeof(ISet<>)) ? CreateCollection(type, typeof(HashSet<>))
+        : type.IsCollection()
+            ? CreateCollection(type, typeof(List<>), GetIEnumerableArguments(type))
+        : InvalidType(type, $"Cannot create an instance of interface type {type}.");
 
     private static Type[] GetIEnumerableArguments(Type type) =>
         type.GetIEnumerableType()?.GenericTypeArguments ?? new[] { typeof(object) };

@@ -184,7 +184,7 @@ namespace System.ComponentModel.Tests
                             typeof(int),
                             typeof(int),
                             typeof(int),
-                            typeof(TimeSpan)
+                            typeof(TimeSpan),
                         }
                     ),
                     new object[] { 1998, 12, 5, 0, 0, 0, 0, offset.Offset }
@@ -203,7 +203,7 @@ namespace System.ComponentModel.Tests
                             typeof(int),
                             typeof(int),
                             typeof(int),
-                            typeof(TimeSpan)
+                            typeof(TimeSpan),
                         }
                     ),
                     new object[] { 1998, 12, 5, 22, 30, 30, 0, offsetWithTime.Offset }
@@ -222,7 +222,7 @@ namespace System.ComponentModel.Tests
                             typeof(int),
                             typeof(int),
                             typeof(int),
-                            typeof(TimeSpan)
+                            typeof(TimeSpan),
                         }
                     ),
                     new object[] { 1998, 12, 5, 22, 30, 30, 0, offsetWithTime.Offset }

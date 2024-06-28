@@ -69,7 +69,7 @@ namespace MonoTests.System.Configuration
             public enum UserLevel
             {
                 MachineAndExe,
-                RoamingAndExe
+                RoamingAndExe,
             }
 
             public virtual SysConfig OpenConfig(string parentFile, string configFile)

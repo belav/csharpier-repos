@@ -648,7 +648,7 @@ namespace System.Threading.Tasks.Tests
                     {
                         throw new Exception("uh oh");
                     })
-                )
+                ),
             };
 
             for (int i = 0; i < tasks.Length; i++)
@@ -726,14 +726,14 @@ namespace System.Threading.Tasks.Tests
 
                 var state = new InvokeActionOnFinalization
                 {
-                    Action = () => Volatile.Write(ref finalized, true)
+                    Action = () => Volatile.Write(ref finalized, true),
                 };
                 var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
                 t = YieldOnceAsync(state); // ensure the object is stored in the state machine
                 al.Value = null;
             })
             {
-                IsBackground = true
+                IsBackground = true,
             };
 
             runner.Start();

@@ -345,6 +345,6 @@ internal sealed class HttpConnection : ITimeoutHandler
     {
         Initializing,
         Selected,
-        Aborted
+        Aborted,
     }
 }

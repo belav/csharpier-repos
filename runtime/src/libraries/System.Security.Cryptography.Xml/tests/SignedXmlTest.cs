@@ -1563,7 +1563,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0xcf,
             0x69,
             0x31,
-            0x18
+            0x18,
         };
 
         private static byte[] _pkcs12 = new byte[]
@@ -2992,7 +2992,7 @@ namespace System.Security.Cryptography.Xml.Tests
             0x02,
             0x02,
             0x07,
-            0xd0
+            0xd0,
         };
 
         public SignedXml SignHMAC(string uri, KeyedHashAlgorithm mac, bool expectedToVerify)
@@ -3023,7 +3023,7 @@ namespace System.Security.Cryptography.Xml.Tests
         public static object[][] HmacKeys = new object[][]
         {
             new object[] { new byte[0] },
-            new object[] { new byte[5] { 1, 2, 3, 4, 10 } }
+            new object[] { new byte[5] { 1, 2, 3, 4, 10 } },
         };
 
         private const string moreHmacMD5 = "http://www.w3.org/2001/04/xmldsig-more#hmac-md5";

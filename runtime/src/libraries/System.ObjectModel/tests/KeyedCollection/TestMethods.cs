@@ -93,7 +93,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Add<T>",
                         Helper.AddItems
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -101,7 +101,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Add<T>",
                         Helper.AddItems
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -109,7 +109,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Insert<T>",
                         Helper.InsertItems
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -117,7 +117,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Insert<T>",
                         Helper.InsertItems
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -125,7 +125,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Add",
                         Helper.AddItemsObject
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -133,7 +133,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Add",
                         Helper.AddItemsObject
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -141,7 +141,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Add",
                         Helper.InsertItemsObject
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
@@ -149,7 +149,7 @@ namespace System.Collections.ObjectModel.Tests
                     new Named<AddItemsFunc<TKey, IKeyedItem<TKey, TValue>>>(
                         "Add",
                         Helper.InsertItemsObject
-                    )
+                    ),
                 };
             }
         }
@@ -163,7 +163,7 @@ namespace System.Collections.ObjectModel.Tests
                     new object[] { 0 },
                     new object[] { 1 },
                     new object[] { 16 },
-                    new object[] { 33 }
+                    new object[] { 33 },
                 };
                 object[][] generatorMethods;
                 if (s_keyNullable)
@@ -172,7 +172,7 @@ namespace System.Collections.ObjectModel.Tests
                     {
                         new object[] { GetNeverNullKeyMethod },
                         new object[] { GetSometimesNullKeyMethod },
-                        new object[] { GetAlwaysNullKeyMethod }
+                        new object[] { GetAlwaysNullKeyMethod },
                     };
                 }
                 else
@@ -1847,7 +1847,7 @@ namespace System.Collections.ObjectModel.Tests
             >[]
             {
                 (c, i, item) => c.Insert(i, item),
-                (c, i, item) => ((IList)c).Insert(i, item)
+                (c, i, item) => ((IList)c).Insert(i, item),
             };
 
             foreach (

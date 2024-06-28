@@ -59,7 +59,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 MemberInfo[] accessors = new MemberInfo[]
                 {
                     property.GetGetMethod(true)!,
-                    property.GetSetMethod(true)!
+                    property.GetSetMethod(true)!,
                 };
                 return new LazyMemberInfo(MemberTypes.Property, accessors);
             }

@@ -39,7 +39,7 @@ namespace System.Reflection.TypeLoading
 
                 CustomAttributeTypedArgument[] cats =
                 {
-                    new CustomAttributeTypedArgument(ct[CoreType.String]!, dia.Value)
+                    new CustomAttributeTypedArgument(ct[CoreType.String]!, dia.Value),
                 };
                 CustomAttributeNamedArgument[] cans =
                 {

@@ -255,7 +255,7 @@ namespace System.Text.Json.Serialization.Tests
                 return new PocoSingleInt()
                 {
                     // Use literal value to differ from the default converter's behavior.
-                    MyInt = 42
+                    MyInt = 42,
                 };
             }
 
@@ -346,7 +346,7 @@ namespace System.Text.Json.Serialization.Tests
                     JsonSerializer.Serialize(
                         new ClassWithNullableStruct_ConverterOnProperty
                         {
-                            MyStruct = new TestStruct()
+                            MyStruct = new TestStruct(),
                         }
                     )
             );
@@ -372,7 +372,7 @@ namespace System.Text.Json.Serialization.Tests
             string serialized = JsonSerializer.Serialize(
                 new ClassWithNullableStruct_ConverterOnType
                 {
-                    MyStruct = new TestStructWithConverter { InnerValue = 5 }
+                    MyStruct = new TestStructWithConverter { InnerValue = 5 },
                 }
             );
             Assert.Equal(@"{""MyStruct"":{""InnerValue"":10}}", serialized);
@@ -387,7 +387,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new JsonTestStructValueChangingConverter() }
+                Converters = { new JsonTestStructValueChangingConverter() },
             };
 
             Assert.Throws<InvalidOperationException>(
@@ -421,7 +421,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             var options = new JsonSerializerOptions
             {
-                Converters = { new JsonTestStructValueChangingConverter() }
+                Converters = { new JsonTestStructValueChangingConverter() },
             };
 
             TestStruct? obj = new TestStruct { InnerValue = 5 };

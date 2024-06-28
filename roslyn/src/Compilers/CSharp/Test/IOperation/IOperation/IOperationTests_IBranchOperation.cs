@@ -991,7 +991,7 @@ Block[B2] - Exit
             {
                 // file.cs(6,9): error CS0139: No enclosing loop out of which to break or continue
                 //         continue;
-                Diagnostic(ErrorCode.ERR_NoBreakOrCont, "continue;").WithLocation(6, 9)
+                Diagnostic(ErrorCode.ERR_NoBreakOrCont, "continue;").WithLocation(6, 9),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1214,7 +1214,7 @@ Block[B6] - Exit
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "catchlabel").WithLocation(19, 1),
                 // file.cs(26,1): warning CS0164: This label has not been referenced
                 // finallyLabel:
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "finallyLabel").WithLocation(26, 1)
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "finallyLabel").WithLocation(26, 1),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
@@ -1665,7 +1665,7 @@ Block[B2] - Exit
                     .WithLocation(10, 13),
                 // file.cs(13,1): warning CS0164: This label has not been referenced
                 // label:  ;
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label").WithLocation(13, 1)
+                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label").WithLocation(13, 1),
             };
 
             VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(

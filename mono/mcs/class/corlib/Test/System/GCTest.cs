@@ -141,7 +141,7 @@ namespace MonoTests.System
                 () => new NoPointer(),
                 () => new TwoPointer(),
                 () => new FourPointer(),
-                () => new EightPointer()
+                () => new EightPointer(),
             };
 
             Random r = new Random();

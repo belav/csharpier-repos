@@ -52,12 +52,12 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[]
             {
                 new TextSyndicationContent(""),
-                new Uri("http://microsoft.com")
+                new Uri("http://microsoft.com"),
             };
             yield return new object[]
             {
                 new TextSyndicationContent("title", TextSyndicationContentKind.Html),
-                new Uri("/relative", UriKind.Relative)
+                new Uri("/relative", UriKind.Relative),
             };
         }
 
@@ -82,28 +82,28 @@ namespace System.ServiceModel.Syndication.Tests
                 new TextSyndicationContent(""),
                 new Uri("http://microsoft.com"),
                 null,
-                true
+                true,
             };
             yield return new object[]
             {
                 new TextSyndicationContent(""),
                 new Uri("http://microsoft.com"),
                 null,
-                false
+                false,
             };
             yield return new object[]
             {
                 new TextSyndicationContent("title", TextSyndicationContentKind.Html),
                 new Uri("/relative", UriKind.Relative),
                 new CategoriesDocument[0],
-                true
+                true,
             };
             yield return new object[]
             {
                 new TextSyndicationContent("title", TextSyndicationContentKind.Html),
                 new Uri("/relative", UriKind.Relative),
                 new CategoriesDocument[0],
-                false
+                false,
             };
             yield return new object[]
             {
@@ -111,9 +111,9 @@ namespace System.ServiceModel.Syndication.Tests
                 new Uri("/relative", UriKind.Relative),
                 new CategoriesDocument[]
                 {
-                    CategoriesDocument.Create(new Uri("http://microsoft.com"))
+                    CategoriesDocument.Create(new Uri("http://microsoft.com")),
                 },
-                true
+                true,
             };
             yield return new object[]
             {
@@ -121,9 +121,9 @@ namespace System.ServiceModel.Syndication.Tests
                 new Uri("/relative", UriKind.Relative),
                 new CategoriesDocument[]
                 {
-                    CategoriesDocument.Create(new Uri("http://microsoft.com"))
+                    CategoriesDocument.Create(new Uri("http://microsoft.com")),
                 },
-                false
+                false,
             };
         }
 
@@ -161,14 +161,14 @@ namespace System.ServiceModel.Syndication.Tests
                 new TextSyndicationContent(""),
                 new Uri("http://microsoft.com"),
                 null,
-                null
+                null,
             };
             yield return new object[]
             {
                 new TextSyndicationContent("title", TextSyndicationContentKind.Html),
                 new Uri("/relative", UriKind.Relative),
                 new CategoriesDocument[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
@@ -176,9 +176,9 @@ namespace System.ServiceModel.Syndication.Tests
                 new Uri("/relative", UriKind.Relative),
                 new CategoriesDocument[]
                 {
-                    CategoriesDocument.Create(new Uri("http://microsoft.com"))
+                    CategoriesDocument.Create(new Uri("http://microsoft.com")),
                 },
-                new string[] { "accepts" }
+                new string[] { "accepts" },
             };
         }
 

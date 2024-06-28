@@ -201,7 +201,7 @@ namespace System.Linq.Parallel.Tests
                 Labeled.Label<Func<ParallelQuery<int>, Action, ParallelQuery<int>>>(
                     "OrderBy-Comparer",
                     (source, cancel) => source.OrderBy(x => x, new CancelingComparer(cancel))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -209,7 +209,7 @@ namespace System.Linq.Parallel.Tests
                     "OrderByDescending-Comparer",
                     (source, cancel) =>
                         source.OrderByDescending(x => x, new CancelingComparer(cancel))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -217,7 +217,7 @@ namespace System.Linq.Parallel.Tests
                     "ThenBy-Comparer",
                     (source, cancel) =>
                         source.OrderBy(x => 0).ThenBy(x => x, new CancelingComparer(cancel))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -227,7 +227,7 @@ namespace System.Linq.Parallel.Tests
                         source
                             .OrderBy(x => 0)
                             .ThenByDescending(x => x, new CancelingComparer(cancel))
-                )
+                ),
             };
         }
 
@@ -235,14 +235,14 @@ namespace System.Linq.Parallel.Tests
         {
             yield return new object[]
             {
-                Label("Cast", (start, count, source) => source(start, count).Cast<int>())
+                Label("Cast", (start, count, source) => source(start, count).Cast<int>()),
             };
             yield return new object[]
             {
                 Label(
                     "DefaultIfEmpty",
                     (start, count, source) => source(start, count).DefaultIfEmpty()
-                )
+                ),
             };
             yield return new object[]
             {
@@ -252,15 +252,15 @@ namespace System.Linq.Parallel.Tests
                         source(start * 2, count * 2)
                             .Select(x => x / 2)
                             .Distinct(new ModularCongruenceComparer(count))
-                )
+                ),
             };
             yield return new object[]
             {
-                Label("OfType", (start, count, source) => source(start, count).OfType<int>())
+                Label("OfType", (start, count, source) => source(start, count).OfType<int>()),
             };
             yield return new object[]
             {
-                Label("Reverse", (start, count, source) => source(start, count).Reverse())
+                Label("Reverse", (start, count, source) => source(start, count).Reverse()),
             };
 
             yield return new object[]
@@ -271,7 +271,7 @@ namespace System.Linq.Parallel.Tests
                         source(start, count * CountFactor)
                             .GroupBy(x => (x - start) % count, new ModularCongruenceComparer(count))
                             .Select(g => g.Key + start)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -285,7 +285,7 @@ namespace System.Linq.Parallel.Tests
                                 new ModularCongruenceComparer(count)
                             )
                             .Select(g => g.Min() - 1)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -298,7 +298,7 @@ namespace System.Linq.Parallel.Tests
                                 (key, g) => key + start,
                                 new ModularCongruenceComparer(count)
                             )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -312,7 +312,7 @@ namespace System.Linq.Parallel.Tests
                                 (key, g) => g.Min() - 1,
                                 new ModularCongruenceComparer(count)
                             )
-                )
+                ),
             };
 
             yield return new object[]
@@ -320,7 +320,7 @@ namespace System.Linq.Parallel.Tests
                 Label(
                     "Select",
                     (start, count, source) => source(start - count, count).Select(x => x + count)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -328,7 +328,7 @@ namespace System.Linq.Parallel.Tests
                     "Select-Index",
                     (start, count, source) =>
                         source(start - count, count).Select((x, index) => x + count)
-                )
+                ),
             };
 
             yield return new object[]
@@ -343,7 +343,7 @@ namespace System.Linq.Parallel.Tests
                                     Math.Min(CountFactor, count - x * CountFactor)
                                 )
                             )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -358,7 +358,7 @@ namespace System.Linq.Parallel.Tests
                                         Math.Min(CountFactor, count - x * CountFactor)
                                     )
                             )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -374,7 +374,7 @@ namespace System.Linq.Parallel.Tests
                                     ),
                                 (group, element) => start + group * CountFactor + element
                             )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -390,7 +390,7 @@ namespace System.Linq.Parallel.Tests
                                     ),
                                 (group, element) => start + group * CountFactor + element
                             )
-                )
+                ),
             };
 
             yield return new object[]
@@ -400,7 +400,7 @@ namespace System.Linq.Parallel.Tests
                     (start, count, source) =>
                         source(start - count / 2, count * 2)
                             .Where(x => x >= start && x < start + count)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -409,7 +409,7 @@ namespace System.Linq.Parallel.Tests
                     (start, count, source) =>
                         source(start - count / 2, count * 2)
                             .Where((x, index) => x >= start && x < start + count)
-                )
+                ),
             };
 
             yield return new object[]
@@ -418,7 +418,7 @@ namespace System.Linq.Parallel.Tests
                     "WithCancellation",
                     (start, count, source) =>
                         source(start, count).WithCancellation(CancellationToken.None)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -426,7 +426,7 @@ namespace System.Linq.Parallel.Tests
                     "WithDegreesOfParallelism",
                     (start, count, source) =>
                         source(start, count).WithDegreeOfParallelism(Environment.ProcessorCount)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -434,7 +434,7 @@ namespace System.Linq.Parallel.Tests
                     "WithExecutionMode",
                     (start, count, source) =>
                         source(start, count).WithExecutionMode(ParallelExecutionMode.Default)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -442,7 +442,7 @@ namespace System.Linq.Parallel.Tests
                     "WithMergeOptions",
                     (start, count, source) =>
                         source(start, count).WithMergeOptions(ParallelMergeOptions.Default)
-                )
+                ),
             };
         }
 
@@ -746,7 +746,7 @@ namespace System.Linq.Parallel.Tests
                 Labeled.Label<Func<ParallelQuery<int>, Action, ParallelQuery<int>>>(
                     "Distinct",
                     (source, cancel) => source.Distinct(new CancelingEqualityComparer<int>(cancel))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -756,7 +756,7 @@ namespace System.Linq.Parallel.Tests
                         source
                             .GroupBy(x => x, new CancelingEqualityComparer<int>(cancel))
                             .Select(g => g.Key)
-                )
+                ),
             };
             yield return new object[]
             {
@@ -768,7 +768,7 @@ namespace System.Linq.Parallel.Tests
                             cancel();
                             return new[] { x };
                         })
-                )
+                ),
             };
             yield return new object[]
             {
@@ -782,7 +782,7 @@ namespace System.Linq.Parallel.Tests
                                 return new[] { x };
                             }
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -797,7 +797,7 @@ namespace System.Linq.Parallel.Tests
                                 return elem;
                             }
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -812,7 +812,7 @@ namespace System.Linq.Parallel.Tests
                                 return elem;
                             }
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -824,7 +824,7 @@ namespace System.Linq.Parallel.Tests
                             cancel();
                             return true;
                         })
-                )
+                ),
             };
             yield return new object[]
             {
@@ -838,7 +838,7 @@ namespace System.Linq.Parallel.Tests
                                 return true;
                             }
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -850,7 +850,7 @@ namespace System.Linq.Parallel.Tests
                             cancel();
                             return true;
                         })
-                )
+                ),
             };
             yield return new object[]
             {
@@ -864,7 +864,7 @@ namespace System.Linq.Parallel.Tests
                                 return true;
                             }
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -876,7 +876,7 @@ namespace System.Linq.Parallel.Tests
                             cancel();
                             return true;
                         })
-                )
+                ),
             };
             yield return new object[]
             {
@@ -890,7 +890,7 @@ namespace System.Linq.Parallel.Tests
                                 return true;
                             }
                         )
-                )
+                ),
             };
         }
 
@@ -1104,7 +1104,7 @@ namespace System.Linq.Parallel.Tests
                                 DefaultSource(start * 2, count)
                                     .AsOrdered()
                                     .Zip(s(0, count), (x, y) => (x + y) / 2)
-                        )
+                        ),
                     }
                 )
                 {
@@ -1120,7 +1120,7 @@ namespace System.Linq.Parallel.Tests
                     yield return new[]
                     {
                         parameters[0],
-                        ((Labeled<Operation>)parameters[1]).Append(ordering)
+                        ((Labeled<Operation>)parameters[1]).Append(ordering),
                     };
                 }
             }
@@ -1228,7 +1228,7 @@ namespace System.Linq.Parallel.Tests
                             ParallelEnumerable.Range(DefaultStart, EventualCancellationSize),
                             new CancelingEqualityComparer<int>(cancel)
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1238,7 +1238,7 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(DefaultStart, EventualCancellationSize)
                             .Except(source, new CancelingEqualityComparer<int>(cancel))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1252,7 +1252,7 @@ namespace System.Linq.Parallel.Tests
                             (x, g) => x,
                             new CancelingEqualityComparer<int>(cancel)
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1268,7 +1268,7 @@ namespace System.Linq.Parallel.Tests
                                 (x, g) => x,
                                 new CancelingEqualityComparer<int>(cancel)
                             )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1279,7 +1279,7 @@ namespace System.Linq.Parallel.Tests
                             ParallelEnumerable.Range(DefaultStart, EventualCancellationSize),
                             new CancelingEqualityComparer<int>(cancel)
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1289,7 +1289,7 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(DefaultStart, EventualCancellationSize)
                             .Intersect(source, new CancelingEqualityComparer<int>(cancel))
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1303,7 +1303,7 @@ namespace System.Linq.Parallel.Tests
                             (x, y) => x,
                             new CancelingEqualityComparer<int>(cancel)
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1319,7 +1319,7 @@ namespace System.Linq.Parallel.Tests
                                 (x, y) => x,
                                 new CancelingEqualityComparer<int>(cancel)
                             )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1330,7 +1330,7 @@ namespace System.Linq.Parallel.Tests
                             ParallelEnumerable.Range(DefaultStart, EventualCancellationSize),
                             new CancelingEqualityComparer<int>(cancel)
                         )
-                )
+                ),
             };
             yield return new object[]
             {
@@ -1340,7 +1340,7 @@ namespace System.Linq.Parallel.Tests
                         ParallelEnumerable
                             .Range(DefaultStart, EventualCancellationSize)
                             .Union(source, new CancelingEqualityComparer<int>(cancel))
-                )
+                ),
             };
         }
 

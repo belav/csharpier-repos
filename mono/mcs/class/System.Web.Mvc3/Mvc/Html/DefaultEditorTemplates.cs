@@ -308,19 +308,19 @@
                 {
                     Text = MvcResources.Common_TriState_NotSet,
                     Value = String.Empty,
-                    Selected = !value.HasValue
+                    Selected = !value.HasValue,
                 },
                 new SelectListItem
                 {
                     Text = MvcResources.Common_TriState_True,
                     Value = "true",
-                    Selected = value.HasValue && value.Value
+                    Selected = value.HasValue && value.Value,
                 },
                 new SelectListItem
                 {
                     Text = MvcResources.Common_TriState_False,
                     Value = "false",
-                    Selected = value.HasValue && !value.Value
+                    Selected = value.HasValue && !value.Value,
                 },
             };
         }

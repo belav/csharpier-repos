@@ -48,8 +48,8 @@ namespace System.Web
                         "ExceptionType",
                         "ExceptionMessage",
                         "Description",
-                        "Details"
-                    }
+                        "Details",
+                    },
                 }
             );
 
@@ -58,7 +58,7 @@ namespace System.Web
                 {
                     Name = Template_PageCustomErrorDefaultName,
                     ResourceName = "DefaultErrorTemplate_CustomErrorDefault.html",
-                    ValidForPageType = ExceptionPageTemplateType.CustomErrorDefault
+                    ValidForPageType = ExceptionPageTemplateType.CustomErrorDefault,
                 }
             );
 
@@ -68,7 +68,7 @@ namespace System.Web
                     Name = Template_PageStandardName,
                     ResourceName = "DefaultErrorTemplate_StandardPage.html",
                     ValidForPageType = ExceptionPageTemplateType.Standard,
-                    MacroNames = new List<string> { "StackTrace" }
+                    MacroNames = new List<string> { "StackTrace" },
                 }
             );
 
@@ -82,8 +82,8 @@ namespace System.Web
                     {
                         "StackTrace",
                         "HtmlizedExceptionOrigin",
-                        "HtmlizedExceptionSourceFile"
-                    }
+                        "HtmlizedExceptionSourceFile",
+                    },
                 }
             );
 
@@ -97,8 +97,8 @@ namespace System.Web
                     {
                         "HtmlizedExceptionShortSource",
                         "HtmlizedExceptionSourceFile",
-                        "HtmlizedExceptionErrorLines"
-                    }
+                        "HtmlizedExceptionErrorLines",
+                    },
                 }
             );
 
@@ -112,9 +112,9 @@ namespace System.Web
                     {
                         "HtmlizedExceptionLongSource",
                         "HtmlizedExceptionSourceFile",
-                        "HtmlizedExceptionErrorLines"
+                        "HtmlizedExceptionErrorLines",
                     },
-                    RequiredMacros = new List<string> { "HtmlizedExceptionLongSource" }
+                    RequiredMacros = new List<string> { "HtmlizedExceptionLongSource" },
                 }
             );
 
@@ -128,9 +128,9 @@ namespace System.Web
                     {
                         "HtmlizedExceptionCompilerOutput",
                         "HtmlizedExceptionSourceFile",
-                        "HtmlizedExceptionErrorLines"
+                        "HtmlizedExceptionErrorLines",
                     },
-                    RequiredMacros = new List<string> { "HtmlizedExceptionCompilerOutput" }
+                    RequiredMacros = new List<string> { "HtmlizedExceptionCompilerOutput" },
                 }
             );
 
@@ -143,8 +143,8 @@ namespace System.Web
                     {
                         "RuntimeVersionInformation",
                         "AspNetVersionInformation",
-                        "FullStackTrace"
-                    }
+                        "FullStackTrace",
+                    },
                 }
             );
         }

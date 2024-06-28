@@ -184,14 +184,14 @@ namespace System.Net
             {
                 get
                 {
-                    return
-                        (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG) != 0
+                    return (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG)
+                            != 0
                         && Package != NegotiationInfoClass.NTLM
-                        ? TokenImpersonationLevel.Delegation
+                            ? TokenImpersonationLevel.Delegation
                         : (_contextFlags & Interop.NetSecurityNative.GssFlags.GSS_C_IDENTIFY_FLAG)
                         != 0
                             ? TokenImpersonationLevel.Identification
-                            : TokenImpersonationLevel.Impersonation;
+                        : TokenImpersonationLevel.Impersonation;
                 }
             }
 
@@ -203,10 +203,11 @@ namespace System.Net
                     clientOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG,
-                        ProtectionLevel.EncryptAndSign =>
-                            Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG
-                                | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
-                        _ => 0
+                        ProtectionLevel.EncryptAndSign => Interop
+                            .NetSecurityNative
+                            .GssFlags
+                            .GSS_C_INTEG_FLAG | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
+                        _ => 0,
                     };
 
                 contextFlags |= clientOptions.RequireMutualAuthentication
@@ -215,11 +216,15 @@ namespace System.Net
 
                 contextFlags |= clientOptions.AllowedImpersonationLevel switch
                 {
-                    TokenImpersonationLevel.Identification =>
-                        Interop.NetSecurityNative.GssFlags.GSS_C_IDENTIFY_FLAG,
-                    TokenImpersonationLevel.Delegation =>
-                        Interop.NetSecurityNative.GssFlags.GSS_C_DELEG_FLAG,
-                    _ => 0
+                    TokenImpersonationLevel.Identification => Interop
+                        .NetSecurityNative
+                        .GssFlags
+                        .GSS_C_IDENTIFY_FLAG,
+                    TokenImpersonationLevel.Delegation => Interop
+                        .NetSecurityNative
+                        .GssFlags
+                        .GSS_C_DELEG_FLAG,
+                    _ => 0,
                 };
 
                 _isServer = false;
@@ -287,10 +292,11 @@ namespace System.Net
                     serverOptions.RequiredProtectionLevel switch
                     {
                         ProtectionLevel.Sign => Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG,
-                        ProtectionLevel.EncryptAndSign =>
-                            Interop.NetSecurityNative.GssFlags.GSS_C_INTEG_FLAG
-                                | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
-                        _ => 0
+                        ProtectionLevel.EncryptAndSign => Interop
+                            .NetSecurityNative
+                            .GssFlags
+                            .GSS_C_INTEG_FLAG | Interop.NetSecurityNative.GssFlags.GSS_C_CONF_FLAG,
+                        _ => 0,
                     };
 
                 // NOTE: Historically serverOptions.Policy was ignored on Unix without an exception
@@ -391,11 +397,9 @@ namespace System.Net
                 }
 
                 byte[]? result =
-                    resultBlobLength == 0 || _tokenBuffer == null
-                        ? null
-                        : _tokenBuffer.Length == resultBlobLength
-                            ? _tokenBuffer
-                            : _tokenBuffer[0..resultBlobLength];
+                    resultBlobLength == 0 || _tokenBuffer == null ? null
+                    : _tokenBuffer.Length == resultBlobLength ? _tokenBuffer
+                    : _tokenBuffer[0..resultBlobLength];
 
                 // The return value will tell us correctly if the handshake is over or not
                 if (statusCode == NegotiateAuthenticationStatusCode.Completed)
@@ -481,7 +485,7 @@ namespace System.Net
                         {
                             Interop.NetSecurityNative.Status.GSS_S_BAD_SIG =>
                                 NegotiateAuthenticationStatusCode.MessageAltered,
-                            _ => NegotiateAuthenticationStatusCode.InvalidToken
+                            _ => NegotiateAuthenticationStatusCode.InvalidToken,
                         };
                     }
 
@@ -525,7 +529,7 @@ namespace System.Net
                         {
                             Interop.NetSecurityNative.Status.GSS_S_BAD_SIG =>
                                 NegotiateAuthenticationStatusCode.MessageAltered,
-                            _ => NegotiateAuthenticationStatusCode.InvalidToken
+                            _ => NegotiateAuthenticationStatusCode.InvalidToken,
                         };
                     }
 
@@ -728,7 +732,7 @@ namespace System.Net
                         {
                             Interop.NetSecurityNative.PackageType.NTLM => "NTLM",
                             Interop.NetSecurityNative.PackageType.Kerberos => "Kerberos",
-                            _ => "SPNEGO"
+                            _ => "SPNEGO",
                         };
                         NetEventSource.Info(
                             this,
@@ -817,7 +821,7 @@ namespace System.Net
                             {
                                 Interop.NetSecurityNative.PackageType.NTLM => "NTLM",
                                 Interop.NetSecurityNative.PackageType.Kerberos => "Kerberos",
-                                _ => isNtlmUsed ? "SPNEGO-NTLM" : "SPNEGO-Kerberos"
+                                _ => isNtlmUsed ? "SPNEGO-NTLM" : "SPNEGO-Kerberos",
                             };
                             NetEventSource.Info(this, $"actual protocol = {protocol}");
                         }

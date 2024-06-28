@@ -57,6 +57,7 @@ namespace System.Net.Mime
             "dd MMM yyyy HH:mm:ss", // without day of week
             "ddd, dd MMM yyyy HH:mm", // with day of week and without seconds
             "dd MMM yyyy HH:mm" // without day of week and without seconds
+            ,
         };
 
         internal static readonly Dictionary<string, TimeSpan> s_timeZoneOffsetLookup =

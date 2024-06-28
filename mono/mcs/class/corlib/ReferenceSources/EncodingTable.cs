@@ -519,7 +519,7 @@ namespace System.Globalization
                 codePage = cp,
                 uiFamilyCodePage = fcp,
                 flags = flags,
-                Names = names
+                Names = names,
             };
         }
 

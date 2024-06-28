@@ -33,7 +33,7 @@ namespace System.Web.Util
         private static Type[] _setPropertyParameterList = new Type[]
         {
             typeof(object),
-            typeof(object)
+            typeof(object),
         };
         private static Type[] _interfacesToImplement;
 

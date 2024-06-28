@@ -115,7 +115,7 @@ public class DatabaseErrorPageMiddleware
                                 new DatabaseContextDetails[] { details },
                                 _options,
                                 httpContext.Request.PathBase
-                            )
+                            ),
                         };
 
                         await page.ExecuteAsync(httpContext);

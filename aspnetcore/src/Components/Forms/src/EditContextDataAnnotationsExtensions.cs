@@ -111,7 +111,7 @@ public static class EditContextDataAnnotationsExtensions
                     items: null
                 )
                 {
-                    MemberName = propertyInfo.Name
+                    MemberName = propertyInfo.Name,
                 };
                 var results = new List<ValidationResult>();
 

@@ -21,7 +21,7 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         {
             LastModified = lastModified,
             EntityTag = entityTag,
-            EnableRangeProcessing = enableRangeProcessing
+            EnableRangeProcessing = enableRangeProcessing,
         };
 
         return fileStreamResult.ExecuteAsync(httpContext);
@@ -104,7 +104,7 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         var result = Assert.IsAssignableFrom<IFileHttpResult>(
             new FileStreamHttpResult(new MemoryStream(), contentType)
             {
-                FileDownloadName = downloadName
+                FileDownloadName = downloadName,
             }
         );
         Assert.Equal(contentType, result.ContentType);
@@ -122,7 +122,7 @@ public class HttpFileStreamResultTests : FileStreamResultTestBase
         var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(
             new FileStreamHttpResult(new MemoryStream(), contentType)
             {
-                FileDownloadName = downloadName
+                FileDownloadName = downloadName,
             }
         );
         Assert.Equal(contentType, result.ContentType);

@@ -41,7 +41,7 @@ class TestInput : IDisposable
         Http1ConnectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: new TestServiceContext
             {
-                Log = log ?? new KestrelTrace(NullLoggerFactory.Instance)
+                Log = log ?? new KestrelTrace(NullLoggerFactory.Instance),
             },
             connectionContext: Mock.Of<ConnectionContext>(),
             transport: Transport,

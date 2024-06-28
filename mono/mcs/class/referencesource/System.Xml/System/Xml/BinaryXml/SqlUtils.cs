@@ -60,7 +60,7 @@ namespace System.Xml
             10 * 10 * 10 * 10 * 10 * 10,
             10 * 10 * 10 * 10 * 10 * 10 * 10,
             10 * 10 * 10 * 10 * 10 * 10 * 10 * 10,
-            10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10
+            10 * 10 * 10 * 10 * 10 * 10 * 10 * 10 * 10,
         };
 
         public BinXmlSqlDecimal(byte[] data, int offset, bool trim)
@@ -509,7 +509,7 @@ namespace System.Xml
             4,
             4,
             4,
-            4
+            4,
         };
 
         private static byte CLenFromPrec(byte bPrec)

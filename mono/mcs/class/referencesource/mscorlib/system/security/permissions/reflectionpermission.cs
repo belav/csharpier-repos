@@ -41,7 +41,7 @@ namespace System.Security.Permissions
         [Obsolete(
             "This permission has been deprecated. Use PermissionState.Unrestricted to get full access."
         )]
-        AllFlags = 0x07
+        AllFlags = 0x07,
     }
 
     [ComVisible(true)]

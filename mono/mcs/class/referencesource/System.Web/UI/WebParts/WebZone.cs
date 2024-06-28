@@ -369,7 +369,7 @@ namespace System.Web.UI.WebControls.WebParts
         }
 
         // Padding = -1 means we will not render anything for the cellpadding attribute
-        [DefaultValue(2), WebCategory("Layout"), WebSysDescription(SR.Zone_Padding),]
+        [DefaultValue(2), WebCategory("Layout"), WebSysDescription(SR.Zone_Padding)]
         public virtual int Padding
         {
             get

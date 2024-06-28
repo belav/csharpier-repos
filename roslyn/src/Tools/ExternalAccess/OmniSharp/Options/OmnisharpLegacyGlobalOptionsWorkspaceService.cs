@@ -113,9 +113,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Options
                                 TabSize = lineFormattingOptions.TabSize,
                                 UseTabs = lineFormattingOptions.UseTabs,
                                 NewLine = lineFormattingOptions.NewLine,
-                            }
-                        }
-                    }
+                            },
+                        },
+                    },
                 };
                 return new ValueTask<CleanCodeGenerationOptions>(codeGenerationOptions);
             }

@@ -23,7 +23,7 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
             { nameof(DateTime.Hour), "hour" },
             { nameof(DateTime.Minute), "minute" },
             { nameof(DateTime.Second), "second" },
-            { nameof(DateTime.Millisecond), "millisecond" }
+            { nameof(DateTime.Millisecond), "millisecond" },
         };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -131,7 +131,7 @@ public class SqlServerDateTimeMemberTranslator : IMemberTranslator
                                 nullable: false,
                                 argumentsPropagateNullability: Enumerable.Empty<bool>(),
                                 typeof(DateTime)
-                            )
+                            ),
                         },
                         nullable: true,
                         argumentsPropagateNullability: new[] { false, true },

@@ -531,7 +531,7 @@ The source for this generator should be in Mono repository
             G_UNICODE_OTHER_SYMBOL,
             G_UNICODE_LINE_SEPARATOR,
             G_UNICODE_PARAGRAPH_SEPARATOR,
-            G_UNICODE_SPACE_SEPARATOR
+            G_UNICODE_SPACE_SEPARATOR,
         }
 
         GUnicodeType ToGUnicodeCategory(UnicodeCategory v)
@@ -656,7 +656,7 @@ The source for this generator should be in Mono repository
         B,
         S,
         WS,
-        ON
+        ON,
     }
 
     public enum UcdDecompositionType
@@ -677,6 +677,6 @@ The source for this generator should be in Mono repository
         Small,
         Square,
         Fraction,
-        Compat
+        Compat,
     }
 }

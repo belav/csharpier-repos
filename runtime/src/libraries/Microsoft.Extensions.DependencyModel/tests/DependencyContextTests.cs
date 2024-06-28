@@ -35,7 +35,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                         serviceable: false,
                         path: "PackagePath",
                         hashPath: "PackageHashPath"
-                    )
+                    ),
                 },
                 runtimeGraph: new RuntimeFallbacks[] { }
             );
@@ -119,7 +119,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                         serviceable: false,
                         path: "PackagePath",
                         hashPath: "PackageHashPath"
-                    )
+                    ),
                 },
                 runtimeLibraries: new[]
                 {
@@ -144,7 +144,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                                     "netstandard1.3",
                                     "System.Collections.dll"
                                 )
-                            )
+                            ),
                         },
                         new[]
                         {
@@ -177,14 +177,14 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                                     "native",
                                     "System.Banana.Native"
                                 )
-                            )
+                            ),
                         },
                         new ResourceAssembly[] { },
                         new Dependency[] { },
                         serviceable: false,
                         path: "PackagePath",
                         hashPath: "PackageHashPath"
-                    )
+                    ),
                 },
                 runtimeGraph: new[]
                 {
@@ -266,7 +266,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 CreateCompilation("PackageB"),
             };
 
-            var runtimeLibraries = new[] { CreateRuntime("PackageA"), CreateRuntime("PackageB"), };
+            var runtimeLibraries = new[] { CreateRuntime("PackageA"), CreateRuntime("PackageB") };
 
             var compilationLibrariesRedist = new[]
             {
@@ -312,20 +312,20 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             result
                 .RuntimeLibraries.Should()
                 .BeEquivalentTo(
-                    new[] { runtimeLibraries[0], runtimeLibraries[1], runtimeLibrariesRedist[1], }
+                    new[] { runtimeLibraries[0], runtimeLibraries[1], runtimeLibrariesRedist[1] }
                 );
         }
 
         [Fact]
         public void MergeMergesLibrariesWithDifferentCasing()
         {
-            var compilationLibraries = new[] { CreateCompilation("PaCkAgEA"), };
+            var compilationLibraries = new[] { CreateCompilation("PaCkAgEA") };
 
-            var runtimeLibraries = new[] { CreateRuntime("PaCkAgEA"), };
+            var runtimeLibraries = new[] { CreateRuntime("PaCkAgEA") };
 
-            var compilationLibrariesRedist = new[] { CreateCompilation("PackageA"), };
+            var compilationLibrariesRedist = new[] { CreateCompilation("PackageA") };
 
-            var runtimeLibrariesRedist = new[] { CreateRuntime("PackageA"), };
+            var runtimeLibrariesRedist = new[] { CreateRuntime("PackageA") };
 
             var context = new DependencyContext(
                 CreateTargetInfo(),
@@ -358,7 +358,7 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 CompilationOptions.Default,
                 Enumerable.Empty<CompilationLibrary>(),
                 Enumerable.Empty<RuntimeLibrary>(),
-                new RuntimeFallbacks[] { new RuntimeFallbacks("win8-x64", new[] { "win8" }), }
+                new RuntimeFallbacks[] { new RuntimeFallbacks("win8-x64", new[] { "win8" }) }
             );
 
             var contextRedist = new DependencyContext(

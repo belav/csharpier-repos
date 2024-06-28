@@ -559,7 +559,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x57,
             0xBC,
             0x63,
-            0x1C
+            0x1C,
         };
 
         private static byte[] cert_a_issuer_raw = new byte[]
@@ -660,7 +660,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x72,
             0x69,
             0x74,
-            0x79
+            0x79,
         };
 
 #if false
@@ -1384,7 +1384,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x77,
             0x4E,
             0xA3,
-            0xAB
+            0xAB,
         };
 
         public static byte[] RFC3280OptionalAttributeTypesCACert_crt =
@@ -2109,7 +2109,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
             0x19,
             0x40,
             0xDC,
-            0x13
+            0x13,
         };
 
         public static AsnEncodedData emptyData = new AsnEncodedData(new byte[0]);
@@ -2748,7 +2748,7 @@ namespace MonoTests.System.Security.Cryptography.X509Certificates
                 0x31,
                 0x32,
                 0x31,
-                0x32
+                0x32,
             };
             X500DistinguishedName dn = new X500DistinguishedName(sn);
             string subject =

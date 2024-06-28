@@ -15,7 +15,9 @@ internal static partial class Interop
         internal enum SecretAgreementFlags
         {
             None = 0x00000000,
-            UseSecretAsHmacKey = 0x00000001 // KDF_USE_SECRET_AS_HMAC_KEY_FLAG
+            UseSecretAsHmacKey =
+                0x00000001 // KDF_USE_SECRET_AS_HMAC_KEY_FLAG
+            ,
         }
 
         /// <summary>

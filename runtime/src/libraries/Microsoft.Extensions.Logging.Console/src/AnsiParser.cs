@@ -150,7 +150,9 @@ namespace Microsoft.Extensions.Logging.Console
                 ConsoleColor.Magenta => "\x1B[1m\x1B[35m",
                 ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
                 ConsoleColor.White => "\x1B[1m\x1B[37m",
-                _ => DefaultForegroundColor // default foreground color
+                _ =>
+                    DefaultForegroundColor // default foreground color
+                ,
             };
         }
 
@@ -166,7 +168,9 @@ namespace Microsoft.Extensions.Logging.Console
                 ConsoleColor.DarkMagenta => "\x1B[45m",
                 ConsoleColor.DarkCyan => "\x1B[46m",
                 ConsoleColor.Gray => "\x1B[47m",
-                _ => DefaultBackgroundColor // Use default background color
+                _ =>
+                    DefaultBackgroundColor // Use default background color
+                ,
             };
         }
 
@@ -186,7 +190,7 @@ namespace Microsoft.Extensions.Logging.Console
                 35 => isBright ? ConsoleColor.Magenta : ConsoleColor.DarkMagenta,
                 36 => isBright ? ConsoleColor.Cyan : ConsoleColor.DarkCyan,
                 37 => isBright ? ConsoleColor.White : ConsoleColor.Gray,
-                _ => null
+                _ => null,
             };
             return color != null || number == 39;
         }
@@ -203,7 +207,7 @@ namespace Microsoft.Extensions.Logging.Console
                 45 => ConsoleColor.DarkMagenta,
                 46 => ConsoleColor.DarkCyan,
                 47 => ConsoleColor.Gray,
-                _ => null
+                _ => null,
             };
             return color != null || number == 49;
         }

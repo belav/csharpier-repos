@@ -123,7 +123,7 @@ public class MvcTemplateTest : LoggedTest
         {
             PageUrls.HomeUrl,
             PageUrls.HomeUrl,
-            PageUrls.PrivacyFullUrl
+            PageUrls.PrivacyFullUrl,
         };
 
         var footerLinks = new string[] { PageUrls.PrivacyFullUrl };
@@ -133,9 +133,9 @@ public class MvcTemplateTest : LoggedTest
             new Page
             {
                 Url = PageUrls.HomeUrl,
-                Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks)
+                Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks),
             },
-            new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks) }
+            new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks) },
         };
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
@@ -258,8 +258,8 @@ public class MvcTemplateTest : LoggedTest
                     PageUrls.PrivacyUrl,
                     PageUrls.RegisterUrl,
                     PageUrls.LoginUrl,
-                    PageUrls.PrivacyUrl
-                }
+                    PageUrls.PrivacyUrl,
+                },
             },
             new Page
             {
@@ -272,8 +272,8 @@ public class MvcTemplateTest : LoggedTest
                     PageUrls.RegisterUrl,
                     PageUrls.LoginUrl,
                     PageUrls.DocsUrl,
-                    PageUrls.PrivacyUrl
-                }
+                    PageUrls.PrivacyUrl,
+                },
             },
             new Page
             {
@@ -285,8 +285,8 @@ public class MvcTemplateTest : LoggedTest
                     PageUrls.PrivacyUrl,
                     PageUrls.RegisterUrl,
                     PageUrls.LoginUrl,
-                    PageUrls.PrivacyUrl
-                }
+                    PageUrls.PrivacyUrl,
+                },
             },
             new Page
             {
@@ -302,8 +302,8 @@ public class MvcTemplateTest : LoggedTest
                     PageUrls.RegisterUrl,
                     PageUrls.ResendEmailConfirmation,
                     PageUrls.ExternalArticle,
-                    PageUrls.PrivacyUrl
-                }
+                    PageUrls.PrivacyUrl,
+                },
             },
             new Page
             {
@@ -316,9 +316,9 @@ public class MvcTemplateTest : LoggedTest
                     PageUrls.RegisterUrl,
                     PageUrls.LoginUrl,
                     PageUrls.ExternalArticle,
-                    PageUrls.PrivacyUrl
-                }
-            }
+                    PageUrls.PrivacyUrl,
+                },
+            },
         };
 
         using (var aspNetProcess = project.StartBuiltProjectAsync())
@@ -379,7 +379,7 @@ public class MvcTemplateTest : LoggedTest
                 Url = PageUrls.HomeUrl,
                 Links = menuLinks.Append(PageUrls.DocsUrl).Concat(footerLinks),
             },
-            new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks), }
+            new Page { Url = PageUrls.PrivacyFullUrl, Links = menuLinks.Concat(footerLinks) },
         };
 
         using var aspNetProcess = project.StartPublishedProjectAsync(usePublishedAppHost: true);
@@ -407,7 +407,7 @@ public class MvcTemplateTest : LoggedTest
         new[]
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData(
@@ -416,7 +416,7 @@ public class MvcTemplateTest : LoggedTest
         {
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     public Task MvcTemplate_IdentityWeb_IndividualB2C_BuildsAndPublishes(
@@ -437,7 +437,7 @@ public class MvcTemplateTest : LoggedTest
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -447,7 +447,7 @@ public class MvcTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     public Task MvcTemplate_IdentityWeb_IndividualB2C_NoHttps_BuildsAndPublishes(
@@ -467,7 +467,7 @@ public class MvcTemplateTest : LoggedTest
         new[]
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData(
@@ -476,7 +476,7 @@ public class MvcTemplateTest : LoggedTest
         {
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
-            ArgConstants.CalledApiScopesUserReadWrite
+            ArgConstants.CalledApiScopesUserReadWrite,
         }
     )]
     [InlineData("SingleOrg", new[] { ArgConstants.CallsGraph })]
@@ -497,7 +497,7 @@ public class MvcTemplateTest : LoggedTest
         {
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData(
@@ -507,7 +507,7 @@ public class MvcTemplateTest : LoggedTest
             ArgConstants.UseProgramMain,
             ArgConstants.CalledApiUrlGraphMicrosoftCom,
             ArgConstants.CalledApiScopesUserReadWrite,
-            ArgConstants.NoHttps
+            ArgConstants.NoHttps,
         }
     )]
     [InlineData("SingleOrg", new[] { ArgConstants.CallsGraph, ArgConstants.NoHttps })]

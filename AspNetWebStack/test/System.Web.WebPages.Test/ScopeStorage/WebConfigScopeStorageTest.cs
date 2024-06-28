@@ -72,7 +72,7 @@ namespace System.Web.WebPages.Test
             {
                 { "a", "b" },
                 { "c", "d" },
-                { "x12", "y34" }
+                { "x12", "y34" },
             };
             var stateStorage = GetWebConfigScopeStorage(dictionary);
 

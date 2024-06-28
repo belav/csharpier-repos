@@ -373,7 +373,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 typeof(IReadOnlyCollection<>),
                 "System.Collections.Generic.IReadOnlyCollection`1"
             ),
-            new PredefinedTypeInfo(PredefinedType.PT_FUNC, typeof(Func<>), "System.Func`1")
+            new PredefinedTypeInfo(PredefinedType.PT_FUNC, typeof(Func<>), "System.Func`1"),
         };
 
         private static readonly Dictionary<string, PredefinedType> s_typesByName =

@@ -65,8 +65,8 @@ public class MapCodeTests : AbstractLanguageServerProtocolTests
                 WorkspaceEdit = new LSP.WorkspaceEditSetting
                 {
                     DocumentChanges = supportDocumentChanges,
-                }
-            }
+                },
+            },
         };
 
     [Theory, CombinatorialData]
@@ -117,7 +117,7 @@ public class MapCodeTests : AbstractLanguageServerProtocolTests
                     TextDocument: CreateTextDocumentIdentifier(documentUri),
                     Contents: [codeBlock],
                     FocusLocations: [ranges]
-                )
+                ),
             ],
             Updates: null
         );

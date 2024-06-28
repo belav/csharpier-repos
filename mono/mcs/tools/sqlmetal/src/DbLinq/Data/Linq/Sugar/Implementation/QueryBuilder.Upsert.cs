@@ -134,7 +134,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             Input,
             InputPK,
             Output,
-            AutoSync
+            AutoSync,
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace DbLinq.Data.Linq.Sugar.Implementation
             var sqlProvider = queryContext.DataContext.Vendor.SqlProvider;
             var upsertParameters = new UpsertParameters
             {
-                Table = queryContext.DataContext.Mapping.GetTable(rowType)
+                Table = queryContext.DataContext.Mapping.GetTable(rowType),
             };
             foreach (var dataMember in upsertParameters.Table.RowType.PersistentDataMembers)
             {

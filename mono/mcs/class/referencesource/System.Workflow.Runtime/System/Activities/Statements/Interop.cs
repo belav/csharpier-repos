@@ -298,7 +298,7 @@ namespace System.Activities.Statements
                     this.runtimeTransactionHandle,
                     this.persistOnClose,
                     this.interopEnlistment,
-                    this.outstandingException
+                    this.outstandingException,
                 }
             );
 
@@ -1056,13 +1056,13 @@ namespace System.Activities.Statements
         {
             DelegateInArgument<Interop> element = new DelegateInArgument<Interop>()
             {
-                Name = "element"
+                Name = "element",
             };
             DelegateInArgument<ValidationContext> validationContext =
                 new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
             DelegateInArgument<Activity> parent = new DelegateInArgument<Activity>()
             {
-                Name = "parent"
+                Name = "parent",
             };
 
             //This will accumulate all potential violations at the root level. See the use case DIRECT of the Interop spec
@@ -1098,7 +1098,7 @@ namespace System.Activities.Statements
                                     NestedChildrenValidationData = new InArgument<
                                         HashSet<InteropValidationEnum>
                                     >(nestedChildrenValidationDataVar),
-                                    InteropActivity = element
+                                    InteropActivity = element,
                                 },
                                 //This is based off the table in the Interop spec.
                                 new ValidateAtRootAndNestedLevels()
@@ -1137,7 +1137,7 @@ namespace System.Activities.Statements
                                                             },
                                                             Right = new InArgument<Type>(context =>
                                                                 typeof(System.Activities.Statements.TransactionScope)
-                                                            )
+                                                            ),
                                                         },
                                                         Right = new Equal<string, string, bool>
                                                         {
@@ -1145,8 +1145,8 @@ namespace System.Activities.Statements
                                                                 parent.Get(env).GetType().FullName
                                                             ),
                                                             Right =
-                                                                "System.ServiceModel.Activities.TransactedReceiveScope"
-                                                        }
+                                                                "System.ServiceModel.Activities.TransactedReceiveScope",
+                                                        },
                                                     },
                                                     Then = new Sequence
                                                     {
@@ -1160,11 +1160,11 @@ namespace System.Activities.Statements
                                                                     new CheckForTransactionScope()
                                                                     {
                                                                         ValidationResults =
-                                                                            nestedChildrenValidationDataVar
+                                                                            nestedChildrenValidationDataVar,
                                                                     },
                                                                 Message = new InArgument<string>(
                                                                     ExecutionStringManager.InteropBodyNestedTransactionScope
-                                                                )
+                                                                ),
                                                             },
                                                             new AssertValidation
                                                             {
@@ -1174,24 +1174,24 @@ namespace System.Activities.Statements
                                                                         NestedChildrenValidationData =
                                                                             nestedChildrenValidationDataVar,
                                                                         RootLevelValidationData =
-                                                                            rootValidationDataVar
+                                                                            rootValidationDataVar,
                                                                     },
                                                                 Message = new InArgument<string>(
                                                                     ExecutionStringManager.InteropBodyNestedPersistOnCloseWithinTransactionScope
-                                                                )
+                                                                ),
                                                             },
-                                                        }
+                                                        },
                                                     },
                                                 },
-                                            }
-                                        }
-                                    }
+                                            },
+                                        },
+                                    },
                                 },
-                                new ActivityTreeValidation() { Interop = element }
-                            }
-                        }
-                    }
-                }
+                                new ActivityTreeValidation() { Interop = element },
+                            },
+                        },
+                    },
+                },
             };
         }
 
@@ -1798,7 +1798,7 @@ namespace System.Activities.Statements
             ICompensatable,
             PersistOnClose,
             Terminate,
-            Throw
+            Throw,
         }
 
         class ObtainType : CodeActivity<Type>

@@ -38,6 +38,8 @@ namespace Mono.Cecil
         Other = 0x0004, // Other method for property or event
         AddOn = 0x0008, // AddOn method for event
         RemoveOn = 0x0010, // RemoveOn method for event
-        Fire = 0x0020 // Fire method for event
+        Fire =
+            0x0020 // Fire method for event
+        ,
     }
 }

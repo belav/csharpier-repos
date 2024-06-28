@@ -89,7 +89,7 @@ namespace MonoTests.Remoting
                 object[] at = new object[]
                 {
                     new ContextHookAttribute("1", true),
-                    new UrlAttribute("tcp://localhost:1122")
+                    new UrlAttribute("tcp://localhost:1122"),
                 };
                 CallSeq.Add(">> Creating instance");
                 ServerList list = (ServerList)

@@ -106,7 +106,7 @@ namespace System.Net.Http.Functional.Tests
                 Version = version,
                 VersionPolicy = exactVersion
                     ? HttpVersionPolicy.RequestVersionExact
-                    : HttpVersionPolicy.RequestVersionOrLower
+                    : HttpVersionPolicy.RequestVersionOrLower,
             };
 
         protected LoopbackServerFactory LoopbackServerFactory => GetFactoryForVersion(UseVersion);
@@ -124,7 +124,7 @@ namespace System.Net.Http.Functional.Tests
 #endif
                 2 => Http2LoopbackServerFactory.Singleton,
 #endif
-                _ => Http11LoopbackServerFactory.Singleton
+                _ => Http11LoopbackServerFactory.Singleton,
             };
         }
     }
@@ -169,6 +169,6 @@ namespace System.Net.Http.Functional.Tests
             Uri uri,
             Version version,
             bool exactVersion = false
-        ) => new HttpRequestMessage(method, uri) { Version = version, };
+        ) => new HttpRequestMessage(method, uri) { Version = version };
     }
 }

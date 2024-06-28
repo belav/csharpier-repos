@@ -39,6 +39,6 @@ namespace System.Security.RightsManagement
         ReplyAll,
         Sign,
         DocumentEdit,
-        Export
+        Export,
     }
 }

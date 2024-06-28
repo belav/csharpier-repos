@@ -27,6 +27,6 @@ namespace Microsoft.CodeAnalysis.MSBuild
         /// performs final logic to resolve metadata and project references and produces the information
         /// needed to populate a <see cref="Workspace"/>.
         /// </summary>
-        Resolve
+        Resolve,
     }
 }

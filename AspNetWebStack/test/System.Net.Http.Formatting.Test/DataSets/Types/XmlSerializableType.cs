@@ -78,7 +78,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
             return new XmlSerializableType[]
             {
                 new XmlSerializableType(),
-                new XmlSerializableType(1, "SomeName")
+                new XmlSerializableType(1, "SomeName"),
             };
         }
 
@@ -88,7 +88,7 @@ namespace System.Net.Http.Formatting.DataSets.Types
             {
                 new DerivedXmlSerializableType(),
                 new DerivedXmlSerializableType(1, "SomeName", null),
-                new DerivedXmlSerializableType(1, "SomeName", new WcfPocoType(2, "SomeOtherName"))
+                new DerivedXmlSerializableType(1, "SomeName", new WcfPocoType(2, "SomeOtherName")),
             };
         }
     }

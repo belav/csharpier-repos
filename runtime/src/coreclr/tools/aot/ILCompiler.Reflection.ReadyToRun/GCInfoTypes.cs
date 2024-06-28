@@ -21,7 +21,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         SET_UNTRACKED_MAX = 3,
         SET_RET_KIND_MAX = 4,
         ADJ_ENCODING_MAX = 0x7f,
-        MORE_BYTES_TO_FOLLOW = 0x80
+        MORE_BYTES_TO_FOLLOW = 0x80,
     };
 
     /// <summary>
@@ -64,7 +64,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         NEXT_FOUR_FRAMESIZE = 0x50,
         NEXT_FOUR_ARGCOUNT = 0x60,
         NEXT_THREE_PROLOGSIZE = 0x70,
-        NEXT_THREE_EPILOGSIZE = 0x78
+        NEXT_THREE_EPILOGSIZE = 0x78,
     };
 
     /// <summary>
@@ -245,7 +245,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         RT_ByRef_Obj = RT_Object << 2 | RT_ByRef,
         RT_ByRef_ByRef = RT_ByRef << 2 | RT_ByRef,
 
-        RT_Illegal = 0xFF
+        RT_Illegal = 0xFF,
     };
 
     [Flags]
@@ -256,7 +256,7 @@ namespace ILCompiler.Reflection.ReadyToRun
         GC_SLOT_PINNED = 0x2,
         GC_SLOT_UNTRACKED = 0x4,
 
-        GC_SLOT_INVALID = -1
+        GC_SLOT_INVALID = -1,
     };
 
     public enum GcStackSlotBase

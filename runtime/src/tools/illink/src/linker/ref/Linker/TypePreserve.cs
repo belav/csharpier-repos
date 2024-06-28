@@ -8,6 +8,6 @@ namespace Mono.Linker
         Nothing,
         All,
         Fields,
-        Methods
+        Methods,
     }
 }

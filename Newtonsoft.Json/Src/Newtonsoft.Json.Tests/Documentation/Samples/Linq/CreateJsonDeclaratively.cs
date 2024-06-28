@@ -66,8 +66,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                     Title = "Title!",
                     Categories = new List<string> { "Category1" },
                     Description = "Description!",
-                    Link = "Link!"
-                }
+                    Link = "Link!",
+                },
             };
         }
 

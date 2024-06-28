@@ -619,7 +619,7 @@ namespace System.Activities.Debugger
                             StartLine = sourceLocation.StartLine,
                             StartColumn = sourceLocation.StartColumn,
                             EndLine = sourceLocation.EndLine,
-                            EndColumn = sourceLocation.EndColumn
+                            EndColumn = sourceLocation.EndColumn,
                         }
                     );
                 }

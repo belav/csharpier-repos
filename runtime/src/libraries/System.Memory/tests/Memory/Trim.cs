@@ -202,7 +202,7 @@ namespace System.MemoryTests
             new object[][]
             {
                 new object[1] { new Foo[] { } },
-                new object[1] { new Foo[] { null, 1, 2, 3, null, 2, 1, null } }
+                new object[1] { new Foo[] { null, 1, 2, 3, null, 2, 1, null } },
             };
 
         [Theory]

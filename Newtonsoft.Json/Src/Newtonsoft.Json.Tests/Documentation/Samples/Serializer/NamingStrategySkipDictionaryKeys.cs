@@ -62,13 +62,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 {
                     ["JamesNK"] = 9001,
                     ["JoC"] = 1337,
-                    ["JessicaN"] = 1000
-                }
+                    ["JessicaN"] = 1000,
+                },
             };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = false }
+                NamingStrategy = new CamelCaseNamingStrategy { ProcessDictionaryKeys = false },
             };
 
             string json = JsonConvert.SerializeObject(
@@ -76,7 +76,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 new JsonSerializerSettings
                 {
                     ContractResolver = contractResolver,
-                    Formatting = Formatting.Indented
+                    Formatting = Formatting.Indented,
                 }
             );
 

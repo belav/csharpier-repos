@@ -125,61 +125,61 @@ namespace Novell.Directory.Ldap.Utilclass
             new System.Object[]
             {
                 "CONNECTION_IMPOSSIBLE",
-                "Unable to reconnect to server, application has never called connect()"
+                "Unable to reconnect to server, application has never called connect()",
             },
             new System.Object[]
             {
                 "CONNECTION_WAIT",
-                "Connection lost waiting for results from {0}:{1}"
+                "Connection lost waiting for results from {0}:{1}",
             },
             new System.Object[]
             {
                 "CONNECTION_FINALIZED",
-                "Connection closed by the application finalizing the object"
+                "Connection closed by the application finalizing the object",
             },
             new System.Object[]
             {
                 "CONNECTION_CLOSED",
-                "Connection closed by the application disconnecting"
+                "Connection closed by the application disconnecting",
             },
             new System.Object[] { "CONNECTION_READER", "Reader thread terminated" },
             new System.Object[]
             {
                 "DUP_ERROR",
-                "RfcLdapMessage: Cannot duplicate message built from the input stream"
+                "RfcLdapMessage: Cannot duplicate message built from the input stream",
             },
             new System.Object[]
             {
                 "REFERENCE_ERROR",
-                "Error attempting to follow a search continuation reference"
+                "Error attempting to follow a search continuation reference",
             },
             new System.Object[] { "REFERRAL_ERROR", "Error attempting to follow a referral" },
             new System.Object[]
             {
                 "REFERRAL_LOCAL",
-                "LdapSearchResults.{0}(): No entry found & request is not complete"
+                "LdapSearchResults.{0}(): No entry found & request is not complete",
             },
             new System.Object[] { "REFERRAL_SEND", "Error sending request to referred server" },
             new System.Object[]
             {
                 "REFERENCE_NOFOLLOW",
-                "Search result reference received, and referral following is off"
+                "Search result reference received, and referral following is off",
             },
             new System.Object[] { "REFERRAL_BIND", "LdapBind.bind() function returned null" },
             new System.Object[]
             {
                 "REFERRAL_BIND_MATCH",
-                "Could not match LdapBind.bind() connection with Server Referral URL list"
+                "Could not match LdapBind.bind() connection with Server Referral URL list",
             },
             new System.Object[]
             {
                 "NO_DUP_REQUEST",
-                "Cannot duplicate message to follow referral for {0} request, not allowed"
+                "Cannot duplicate message to follow referral for {0} request, not allowed",
             },
             new System.Object[]
             {
                 "SERVER_CONNECT_ERROR",
-                "Error connecting to server {0} while attempting to follow a referral"
+                "Error connecting to server {0} while attempting to follow a referral",
             },
             new System.Object[] { "NO_SUP_PROPERTY", "Requested property is not supported." },
             new System.Object[] { "ENTRY_PARAM_ERROR", "Invalid Entry parameter" },
@@ -188,7 +188,7 @@ namespace Novell.Directory.Ldap.Utilclass
             new System.Object[]
             {
                 "OP_PARAM_ERROR",
-                "Invalid extended operation parameter, no OID specified"
+                "Invalid extended operation parameter, no OID specified",
             },
             new System.Object[] { "PARAM_ERROR", "Invalid parameter" },
             new System.Object[] { "DECODING_ERROR", "Error Decoding responseValue" },
@@ -200,23 +200,23 @@ namespace Novell.Directory.Ldap.Utilclass
             new System.Object[]
             {
                 "MISSING_LEFT_PAREN",
-                "Unmatched parentheses, left parenthesis missing"
+                "Unmatched parentheses, left parenthesis missing",
             },
             new System.Object[] { "NO_OPTION", "Semicolon present, but no option specified" },
             new System.Object[]
             {
                 "MISSING_RIGHT_PAREN",
-                "Unmatched parentheses, right parenthesis missing"
+                "Unmatched parentheses, right parenthesis missing",
             },
             new System.Object[]
             {
                 "EXPECTING_RIGHT_PAREN",
-                "Expecting right parenthesis, found \"{0}\""
+                "Expecting right parenthesis, found \"{0}\"",
             },
             new System.Object[]
             {
                 "EXPECTING_LEFT_PAREN",
-                "Expecting left parenthesis, found \"{0}\""
+                "Expecting left parenthesis, found \"{0}\"",
             },
             new System.Object[] { "NO_ATTRIBUTE_NAME", "Missing attribute description" },
             new System.Object[] { "NO_DN_NOR_MATCHING_RULE", "DN and matching rule not specified" },
@@ -225,91 +225,91 @@ namespace Novell.Directory.Ldap.Utilclass
             new System.Object[]
             {
                 "INVALID_CHAR_IN_FILTER",
-                "The invalid character \"{0}\" needs to be escaped as \"{1}\""
+                "The invalid character \"{0}\" needs to be escaped as \"{1}\"",
             },
             new System.Object[]
             {
                 "INVALID_ESC_IN_DESCR",
-                "Escape sequence not allowed in attribute description"
+                "Escape sequence not allowed in attribute description",
             },
             new System.Object[]
             {
                 "INVALID_CHAR_IN_DESCR",
-                "Invalid character \"{0}\" in attribute description"
+                "Invalid character \"{0}\" in attribute description",
             },
             new System.Object[]
             {
                 "NOT_AN_ATTRIBUTE",
-                "Schema element is not an LdapAttributeSchema object"
+                "Schema element is not an LdapAttributeSchema object",
             },
             new System.Object[]
             {
                 "UNEQUAL_LENGTHS",
-                "Length of attribute Name array does not equal length of Flags array"
+                "Length of attribute Name array does not equal length of Flags array",
             },
             new System.Object[] { "IMPROPER_REFERRAL", "Referral not supported for command {0}" },
             new System.Object[]
             {
                 "NOT_IMPLEMENTED",
-                "Method LdapConnection.startTLS not implemented"
+                "Method LdapConnection.startTLS not implemented",
             },
             new System.Object[]
             {
                 "NO_MEMORY",
-                "All results could not be stored in memory, sort failed"
+                "All results could not be stored in memory, sort failed",
             },
             new System.Object[]
             {
                 "SERVER_SHUTDOWN_REQ",
-                "Received unsolicited notification from server {0}:{1} to shutdown"
+                "Received unsolicited notification from server {0}:{1} to shutdown",
             },
             new System.Object[] { "INVALID_ADDRESS", "Invalid syntax for address with port; {0}" },
             new System.Object[] { "UNKNOWN_RESULT", "Unknown Ldap result code {0}" },
             new System.Object[]
             {
                 "OUTSTANDING_OPERATIONS",
-                "Cannot start or stop TLS because outstanding Ldap operations exist on this connection"
+                "Cannot start or stop TLS because outstanding Ldap operations exist on this connection",
             },
             new System.Object[]
             {
                 "WRONG_FACTORY",
-                "StartTLS cannot use the set socket factory because it does not implement LdapTLSSocketFactory"
+                "StartTLS cannot use the set socket factory because it does not implement LdapTLSSocketFactory",
             },
             new System.Object[]
             {
                 "NO_TLS_FACTORY",
-                "StartTLS failed because no LdapTLSSocketFactory has been set for this Connection"
+                "StartTLS failed because no LdapTLSSocketFactory has been set for this Connection",
             },
             new System.Object[]
             {
                 "NO_STARTTLS",
-                "An attempt to stopTLS on a connection where startTLS had not been called"
+                "An attempt to stopTLS on a connection where startTLS had not been called",
             },
             new System.Object[]
             {
                 "STOPTLS_ERROR",
-                "Error stopping TLS: Error getting input & output streams from the original socket"
+                "Error stopping TLS: Error getting input & output streams from the original socket",
             },
             new System.Object[]
             {
                 "MULTIPLE_SCHEMA",
-                "Multiple schema found when reading the subschemaSubentry for {0}"
+                "Multiple schema found when reading the subschemaSubentry for {0}",
             },
             new System.Object[]
             {
                 "NO_SCHEMA",
-                "No schema found when reading the subschemaSubentry for {0}"
+                "No schema found when reading the subschemaSubentry for {0}",
             },
             new System.Object[]
             {
                 "READ_MULTIPLE",
-                "Read response is ambiguous, multiple entries returned"
+                "Read response is ambiguous, multiple entries returned",
             },
             new System.Object[]
             {
                 "CANNOT_BIND",
-                "Cannot bind. Use PoolManager.getBoundConnection()"
-            }
+                "Cannot bind. Use PoolManager.getBoundConnection()",
+            },
         };
     } //End ExceptionMessages
 }

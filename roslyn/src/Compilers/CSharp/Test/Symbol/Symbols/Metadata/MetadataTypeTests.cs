@@ -305,7 +305,7 @@ namespace System.Diagnostics.Eventing
                 {
                     TestMetadata.Net40.mscorlib,
                     TestMetadata.Net40.SystemCore,
-                    compilation1.EmitToImageReference()
+                    compilation1.EmitToImageReference(),
                 },
                 options: TestOptions.ReleaseDll.WithMetadataImportOptions(
                     MetadataImportOptions.Internal

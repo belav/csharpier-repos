@@ -32,6 +32,6 @@ namespace System.Windows.Forms
         FullRowSelect = 1,
         FullColumnSelect = 2,
         RowHeaderSelect = 3,
-        ColumnHeaderSelect = 4
+        ColumnHeaderSelect = 4,
     }
 }

@@ -44,7 +44,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
             new HashSet<SyntaxKind>(SyntaxFacts.EqualityComparer)
             {
                 SyntaxKind.StaticKeyword,
-                SyntaxKind.UnsafeKeyword
+                SyntaxKind.UnsafeKeyword,
             };
 
         public ExternKeywordRecommender()

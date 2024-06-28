@@ -19,7 +19,7 @@ public class WebConfigurationLevelSwitchTests
     {
         var configuration = new ConfigurationBuilder()
             .AddInMemoryCollection(
-                new[] { new KeyValuePair<string, string>("levelKey", levelValue), }
+                new[] { new KeyValuePair<string, string>("levelKey", levelValue) }
             )
             .Build();
 

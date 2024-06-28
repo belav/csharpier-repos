@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csi.ScriptArguments = new[]
             {
                 @"C:\Some Path\Some File.ini",
-                @"C:\Some Path\Some Other File.bak"
+                @"C:\Some Path\Some Other File.bak",
             };
             Assert.Equal(
                 @"/i- test.csx ""C:\Some Path\Some File.ini"" ""C:\Some Path\Some Other File.bak""",
@@ -84,7 +84,7 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             csi.ScriptArguments = new[]
             {
                 @"""C:\Some Path\Some File.ini""",
-                @"""C:\Some Path\Some Other File.bak"""
+                @"""C:\Some Path\Some Other File.bak""",
             };
             Assert.Equal(
                 @"/i- test.csx ""\""C:\Some Path\Some File.ini\"""" ""\""C:\Some Path\Some Other File.bak\""""",

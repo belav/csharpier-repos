@@ -35,7 +35,7 @@ namespace System.Text.Json.Tests
     {
         private static readonly JsonSerializerOptions s_indentedOption = new JsonSerializerOptions
         {
-            WriteIndented = true
+            WriteIndented = true,
         };
 
         #region List
@@ -345,7 +345,7 @@ namespace System.Text.Json.Tests
                 {
                     { 1, "One" },
                     { 2, "II" },
-                    { 3, "3" }
+                    { 3, "3" },
                 }
             );
 
@@ -412,7 +412,7 @@ namespace System.Text.Json.Tests
                 {
                     { 1, "One" },
                     { 2, "II" },
-                    { 3, "3" }
+                    { 3, "3" },
                 }
             );
 

@@ -61,7 +61,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             SingleDimensional,
             MultiDimensional,
             JaggedSzArray,
-            Jagged
+            Jagged,
         };
 
         private readonly struct TypeNameConfig
@@ -424,7 +424,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 expectedTopLevelType: "Y`1",
                 expectedTypeArguments: new[]
                 {
-                    new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null)
+                    new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null),
                 },
                 expectedArrayRanks: new[] { 0, 2 }
             );
@@ -443,7 +443,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         pointerCount: 0,
                         arrayRanks: new[] { 0 },
                         assemblyName: "mscorlib"
-                    )
+                    ),
                 },
                 expectedArrayRanks: new[] { 3, 0, 2 }
             );
@@ -463,7 +463,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         arrayRanks: new[] { 0 },
                         assemblyName: "mscorlib"
                     ),
-                    new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null)
+                    new MetadataHelpers.AssemblyQualifiedTypeName("W", null, null, 0, null, null),
                 },
                 expectedArrayRanks: new[] { 0, 2 }
             );
@@ -518,7 +518,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         0,
                         null,
                         "Assembly"
-                    )
+                    ),
                 },
                 expectedArrayRanks: null
             );

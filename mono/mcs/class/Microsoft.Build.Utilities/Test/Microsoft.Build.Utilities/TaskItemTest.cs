@@ -58,7 +58,7 @@ namespace MonoTests.Microsoft.Build.Utilities
                 "Identity",
                 "ModifiedTime",
                 "CreatedTime",
-                "AccessedTime"
+                "AccessedTime",
             };
             ArrayList al = new ArrayList();
             foreach (string s in temp)

@@ -69,7 +69,7 @@ namespace System.Net
                 AddressFamily.InterNetwork => IPv4AddressSize,
                 AddressFamily.InterNetworkV6 => IPv6AddressSize,
                 AddressFamily.Unix => UdsAddressSize,
-                _ => MaxAddressSize
+                _ => MaxAddressSize,
             };
 
         public SocketAddress(AddressFamily family)

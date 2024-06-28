@@ -27,7 +27,7 @@ namespace System.Web.Http.Cors.Test.Controllers
                 HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor
                 {
                     ControllerName = "Sample",
-                    ControllerType = typeof(SampleController)
+                    ControllerType = typeof(SampleController),
                 };
                 Action action = new SampleController().Head;
                 return new ReflectedHttpActionDescriptor(controllerDescriptor, action.Method);

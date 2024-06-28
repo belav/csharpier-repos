@@ -67,6 +67,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// A <see cref="JsonWriter"/> write method has not been called.
         /// </summary>
-        Start = 6
+        Start = 6,
     }
 }

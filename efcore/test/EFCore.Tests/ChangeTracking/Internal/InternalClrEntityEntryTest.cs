@@ -114,7 +114,7 @@ public class InternalClrEntityEntryTest
                 new OwnerClass
                 {
                     Id = 1,
-                    Owned = new OwnedClass { Value = "Kool" }
+                    Owned = new OwnedClass { Value = "Kool" },
                 }
             )
             .GetInfrastructure();

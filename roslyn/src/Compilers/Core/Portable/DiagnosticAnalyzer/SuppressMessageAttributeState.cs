@@ -26,7 +26,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 { "resource", TargetScope.Resource },
                 { "type", TargetScope.Type },
                 { "member", TargetScope.Member },
-                { "namespaceanddescendants", TargetScope.NamespaceAndDescendants }
+                { "namespaceanddescendants", TargetScope.NamespaceAndDescendants },
             };
 
         private static bool TryGetTargetScope(SuppressMessageInfo info, out TargetScope scope) =>
@@ -67,7 +67,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     suppressions = new Dictionary<string, SuppressMessageInfo>()
                     {
-                        { info.Id, info }
+                        { info.Id, info },
                     };
                     _globalSymbolSuppressions.Add(symbol, suppressions);
                 }

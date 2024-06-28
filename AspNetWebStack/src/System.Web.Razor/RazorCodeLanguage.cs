@@ -18,7 +18,7 @@ namespace System.Web.Razor
         >(StringComparer.OrdinalIgnoreCase)
         {
             { "cshtml", new CSharpRazorCodeLanguage() },
-            { "vbhtml", new VBRazorCodeLanguage() }
+            { "vbhtml", new VBRazorCodeLanguage() },
         };
 
         /// <summary>

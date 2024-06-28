@@ -50,7 +50,7 @@ namespace System.Workflow.Activities
                     {
                         new DesignerSerializationVisibilityAttribute(
                             DesignerSerializationVisibility.Content
-                        )
+                        ),
                     }
                 )
             );

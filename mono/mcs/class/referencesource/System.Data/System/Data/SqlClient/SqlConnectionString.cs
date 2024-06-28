@@ -204,7 +204,7 @@ namespace System.Data.SqlClient
         internal enum TransactionBindingEnum
         {
             ImplicitUnbind,
-            ExplicitUnbind
+            ExplicitUnbind,
         }
 
         internal static class TRANSACIONBINDING

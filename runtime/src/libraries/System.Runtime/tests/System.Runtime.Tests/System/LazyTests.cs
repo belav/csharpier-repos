@@ -337,7 +337,7 @@ namespace System.Tests
                 new Lazy<int>(() =>
                 {
                     throw new MyException(99);
-                })
+                }),
             };
             yield return new object[]
             {
@@ -347,7 +347,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     true
-                )
+                ),
             };
             yield return new object[]
             {
@@ -357,7 +357,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     false
-                )
+                ),
             };
             yield return new object[]
             {
@@ -367,7 +367,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     LazyThreadSafetyMode.ExecutionAndPublication
-                )
+                ),
             };
             yield return new object[]
             {
@@ -377,7 +377,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     LazyThreadSafetyMode.None
-                )
+                ),
             };
             yield return new object[]
             {
@@ -387,7 +387,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     LazyThreadSafetyMode.PublicationOnly
-                )
+                ),
             };
         }
 
@@ -403,29 +403,29 @@ namespace System.Tests
             yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99)) };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true)
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true),
             };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false)
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false),
             };
             yield return new object[]
             {
                 new Lazy<ExceptionInCtor>(
                     () => new ExceptionInCtor(99),
                     LazyThreadSafetyMode.ExecutionAndPublication
-                )
+                ),
             };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None)
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None),
             };
             yield return new object[]
             {
                 new Lazy<ExceptionInCtor>(
                     () => new ExceptionInCtor(99),
                     LazyThreadSafetyMode.PublicationOnly
-                )
+                ),
             };
         }
 
@@ -443,12 +443,12 @@ namespace System.Tests
             yield return new object[] { new Lazy<ExceptionInCtor>(false) };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication)
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication),
             };
             yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.None) };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly)
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly),
             };
         }
 
@@ -466,7 +466,7 @@ namespace System.Tests
                 new Lazy<int>(() =>
                 {
                     throw new MyException(99);
-                })
+                }),
             };
             yield return new object[]
             {
@@ -476,7 +476,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     true
-                )
+                ),
             };
             yield return new object[]
             {
@@ -486,7 +486,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     false
-                )
+                ),
             };
             yield return new object[]
             {
@@ -496,7 +496,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     LazyThreadSafetyMode.ExecutionAndPublication
-                )
+                ),
             };
             yield return new object[]
             {
@@ -506,7 +506,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     LazyThreadSafetyMode.None
-                )
+                ),
             };
         }
 
@@ -523,22 +523,22 @@ namespace System.Tests
             yield return new object[] { new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99)) };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true)
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), true),
             };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false)
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), false),
             };
             yield return new object[]
             {
                 new Lazy<ExceptionInCtor>(
                     () => new ExceptionInCtor(99),
                     LazyThreadSafetyMode.ExecutionAndPublication
-                )
+                ),
             };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None)
+                new Lazy<ExceptionInCtor>(() => new ExceptionInCtor(99), LazyThreadSafetyMode.None),
             };
         }
 
@@ -560,7 +560,7 @@ namespace System.Tests
                         throw new MyException(99);
                     },
                     LazyThreadSafetyMode.PublicationOnly
-                )
+                ),
             };
         }
 
@@ -571,19 +571,19 @@ namespace System.Tests
             yield return new object[] { new Lazy<ExceptionInCtor>(false) };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication)
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.ExecutionAndPublication),
             };
             yield return new object[] { new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.None) };
             yield return new object[]
             {
-                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly)
+                new Lazy<ExceptionInCtor>(LazyThreadSafetyMode.PublicationOnly),
             };
             yield return new object[]
             {
                 new Lazy<ExceptionInCtor>(
                     () => new ExceptionInCtor(99),
                     LazyThreadSafetyMode.PublicationOnly
-                )
+                ),
             };
         }
 

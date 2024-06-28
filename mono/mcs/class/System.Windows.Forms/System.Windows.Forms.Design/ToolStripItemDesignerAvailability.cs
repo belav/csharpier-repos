@@ -38,6 +38,6 @@ namespace System.Windows.Forms.Design
         MenuStrip = 2,
         ContextMenuStrip = 4,
         StatusStrip = 8,
-        All = 15
+        All = 15,
     }
 }

@@ -22,14 +22,14 @@ public class JumpTableSingleEntryBenchmark
         _trie = new ILEmitTrieJumpTable(
             0,
             -1,
-            new[] { ("hello-world", 1), },
+            new[] { ("hello-world", 1) },
             vectorize: false,
             _default
         );
         _vectorTrie = new ILEmitTrieJumpTable(
             0,
             -1,
-            new[] { ("hello-world", 1), },
+            new[] { ("hello-world", 1) },
             vectorize: true,
             _default
         );

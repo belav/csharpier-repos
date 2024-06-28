@@ -23,7 +23,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions() { AttributesToSkip = 0 }
             )
             {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => entry.IsDirectory
+                ShouldIncludePredicate = (ref FileSystemEntry entry) => entry.IsDirectory,
             };
 
             // Windows differentiates between dir symlinks and file symlinks
@@ -43,7 +43,7 @@ namespace System.IO.Tests.Enumeration
                 new EnumerationOptions() { AttributesToSkip = 0 }
             )
             {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory
+                ShouldIncludePredicate = (ref FileSystemEntry entry) => !entry.IsDirectory,
             };
 
             // Windows differentiates between dir symlinks and file symlinks

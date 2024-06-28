@@ -60,7 +60,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\Panel.uex' path='docs/doc[@for="Panel.BreakAfter"]/*' />
-        [DefaultValue(false),]
+        [DefaultValue(false)]
         public override bool BreakAfter
         {
             get { return base.BreakAfter; }

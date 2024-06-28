@@ -4623,7 +4623,7 @@ namespace N2
             await new RefactoringTest
             {
                 TestState = { Sources = { initialMarkup1, initialMarkup2 } },
-                FixedState = { Sources = { changedMarkup1, changedMarkup2 } }
+                FixedState = { Sources = { changedMarkup1, changedMarkup2 } },
             }
                 .RunAsync()
                 .ConfigureAwait(false);

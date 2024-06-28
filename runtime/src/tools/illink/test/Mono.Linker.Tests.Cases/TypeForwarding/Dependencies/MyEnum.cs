@@ -4,7 +4,7 @@ namespace Mono.Linker.Tests.Cases.TypeForwarding.Dependencies
     {
         A,
         B,
-        C
+        C,
     }
 
     public class UsedToReferenceForwarderAssembly { }

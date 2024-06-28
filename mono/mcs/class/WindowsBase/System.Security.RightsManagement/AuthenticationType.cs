@@ -30,6 +30,6 @@ namespace System.Security.RightsManagement
         Windows,
         Passport,
         WindowsPassport,
-        Internal
+        Internal,
     }
 }

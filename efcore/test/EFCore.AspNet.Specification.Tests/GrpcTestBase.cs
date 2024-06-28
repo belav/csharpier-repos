@@ -30,7 +30,7 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
                     "Property: PostTag (Dictionary<string, object>).PostsInTagDataPostId (no field, int) Indexer Required PK FK AfterSave:Throw",
                     "Property: PostTag (Dictionary<string, object>).TagsInPostDataTagId (no field, int) Indexer Required PK FK Index AfterSave:Throw",
                 },
-                Indexes = { "{'TagsInPostDataTagId'} ", },
+                Indexes = { "{'TagsInPostDataTagId'} " },
                 FKs =
                 {
                     "ForeignKey: PostTag (Dictionary<string, object>) {'PostsInTagDataPostId'} -> Post {'PostId'} Required Cascade",
@@ -62,7 +62,7 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
                     "Property: Post.PostStat (postStat_, PostStatus) Required",
                     "Property: Post.Title (title_, string)",
                 },
-                Indexes = { "{'AuthorId'} ", },
+                Indexes = { "{'AuthorId'} " },
                 FKs =
                 {
                     "ForeignKey: Post {'AuthorId'} -> Author {'AuthorId'} Required Cascade ToPrincipal: PostAuthor",
@@ -176,14 +176,14 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
                     DateCreated = Timestamp.FromDateTime(
                         new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc)
                     ),
-                    Name = "Arthur"
+                    Name = "Arthur",
                 },
                 PostStat = PostStatus.Published,
                 TagsInPostData =
                 {
                     new Tag { Name = "Kittens" },
-                    new Tag { Name = "Puppies" }
-                }
+                    new Tag { Name = "Puppies" },
+                },
             };
 
             context.Add(post);

@@ -287,7 +287,7 @@ internal sealed class MacOSCertificateManager : CertificateManager
         )
         {
             RedirectStandardOutput = true,
-            RedirectStandardError = true
+            RedirectStandardError = true,
         };
 
         if (Log.IsEnabled())
@@ -346,7 +346,7 @@ internal sealed class MacOSCertificateManager : CertificateManager
                 )
             )
             {
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             }
         );
 
@@ -423,7 +423,7 @@ internal sealed class MacOSCertificateManager : CertificateManager
         )
         {
             RedirectStandardOutput = true,
-            RedirectStandardError = true
+            RedirectStandardError = true,
         };
 
         if (Log.IsEnabled())

@@ -54,6 +54,6 @@ namespace Microsoft.Build.Framework
 
         // Diagnostic verbosity, which displays all errors, warnings,
         // messages, status events, and a build summary.
-        Diagnostic
+        Diagnostic,
     }
 }

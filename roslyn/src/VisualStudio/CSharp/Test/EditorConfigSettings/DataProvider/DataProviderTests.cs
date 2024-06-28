@@ -239,7 +239,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditorConfigSettings.Da
                 FormattingOptions2.NewLine,
                 FormattingOptions2.TabSize,
                 FormattingOptions2.UseTabs,
-                CodeStyleOptions2.OperatorPlacementWhenWrapping
+                CodeStyleOptions2.OperatorPlacementWhenWrapping,
             };
 
             AssertEx.Equal(

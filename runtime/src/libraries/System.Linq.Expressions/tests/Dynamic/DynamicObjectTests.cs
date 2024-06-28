@@ -478,7 +478,7 @@ namespace System.Dynamic.Tests
                 "Quuux",
                 "Quuuux",
                 "Quuuuux",
-                "Quuuuuux"
+                "Quuuuuux",
             };
 
             public override IEnumerable<string> GetDynamicMemberNames() => Names;

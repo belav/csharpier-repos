@@ -244,7 +244,7 @@ internal static class SymbolApiConventionMatcher
     internal enum SymbolApiConventionTypeMatchBehavior
     {
         Any,
-        AssignableFrom
+        AssignableFrom,
     }
 
     internal enum SymbolApiConventionNameMatchBehavior

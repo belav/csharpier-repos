@@ -72,7 +72,7 @@ public class SqlServerModificationCommandBatchTest
                 TypeMapping = intMapping,
                 IsWrite = true,
                 OriginalValue = 8,
-                GenerateParameterName = () => "p" + paramIndex++
+                GenerateParameterName = () => "p" + paramIndex++,
             };
     }
 
@@ -126,7 +126,7 @@ public class SqlServerModificationCommandBatchTest
                 TypeMapping = intMapping,
                 IsWrite = true,
                 OriginalValue = 8,
-                GenerateParameterName = () => "p" + paramIndex++
+                GenerateParameterName = () => "p" + paramIndex++,
             };
     }
 

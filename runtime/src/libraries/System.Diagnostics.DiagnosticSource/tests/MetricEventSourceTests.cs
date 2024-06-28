@@ -1158,7 +1158,7 @@ namespace System.Diagnostics.Metrics.Tests
                 {
                     { "hk1", "hv1" },
                     { "hk2", "hv2" },
-                    { "hk3", "hv3" }
+                    { "hk3", "hv3" },
                 }
             );
             UpDownCounter<int> udc = meter.CreateUpDownCounter<int>(
@@ -1633,7 +1633,7 @@ namespace System.Diagnostics.Metrics.Tests
                 {
                     { "Mk1", "Mv1" },
                     { "Mk2", "Mv2" },
-                    { "Mk3", null }
+                    { "Mk3", null },
                 }
             );
             using Meter meterB = new Meter("TestMeter11", null, null, new object());
@@ -2263,7 +2263,7 @@ namespace System.Diagnostics.Metrics.Tests
                             2 * counterState,
                             new KeyValuePair<string, object?>("Color", "blue"),
                             new KeyValuePair<string, object?>("Size", 4)
-                        )
+                        ),
                     };
                 }
             );
@@ -2284,7 +2284,7 @@ namespace System.Diagnostics.Metrics.Tests
                             2 * gaugeState,
                             new KeyValuePair<string, object?>("Color", "blue"),
                             new KeyValuePair<string, object?>("Size", 4)
-                        )
+                        ),
                     };
                 }
             );
@@ -2307,7 +2307,7 @@ namespace System.Diagnostics.Metrics.Tests
                             2 * upDownCounterState,
                             new KeyValuePair<string, object?>("Color", "blue"),
                             new KeyValuePair<string, object?>("Size", 4)
-                        )
+                        ),
                     };
                 }
             );
@@ -2800,7 +2800,7 @@ namespace System.Diagnostics.Metrics.Tests
                 {
                     { "hk1", "hv1" },
                     { "hk2", "hv2" },
-                    { "hk3", "hv3" }
+                    { "hk3", "hv3" },
                 }
             );
             UpDownCounter<int> udc = meterA.CreateUpDownCounter<int>(
@@ -2931,7 +2931,7 @@ namespace System.Diagnostics.Metrics.Tests
                 {
                     { "ock1", "ocv1" },
                     { "ock2", "ocv2" },
-                    { "ock3", "ocv3" }
+                    { "ock3", "ocv3" },
                 }
             );
             int gaugeState = 0;
@@ -2954,7 +2954,7 @@ namespace System.Diagnostics.Metrics.Tests
                 {
                     { "hk1", "hv1" },
                     { "hk2", "" },
-                    { "hk3", null }
+                    { "hk3", null },
                 }
             );
             UpDownCounter<int> udc = meterA.CreateUpDownCounter<int>(
@@ -3593,7 +3593,7 @@ namespace System.Diagnostics.Metrics.Tests
                     Description = e.Payload[6].ToString(),
                     InstrumentTags = e.Payload[7].ToString(),
                     MeterTags = e.Payload[8].ToString(),
-                    ScopeHash = e.Payload[9].ToString()
+                    ScopeHash = e.Payload[9].ToString(),
                 })
                 .ToArray();
 
@@ -3638,7 +3638,7 @@ namespace System.Diagnostics.Metrics.Tests
                     Description = e.Payload[6].ToString(),
                     InstrumentTags = e.Payload[7].ToString(),
                     MeterTags = e.Payload[8].ToString(),
-                    ScopeHash = e.Payload[9].ToString()
+                    ScopeHash = e.Payload[9].ToString(),
                 })
                 .ToArray();
 
@@ -3709,7 +3709,7 @@ namespace System.Diagnostics.Metrics.Tests
                     Description = e.Payload[6].ToString(),
                     InstrumentTags = e.Payload[7].ToString(),
                     MeterTags = e.Payload[8].ToString(),
-                    ScopeHash = e.Payload[9].ToString()
+                    ScopeHash = e.Payload[9].ToString(),
                 })
                 .ToArray();
 
@@ -3797,7 +3797,7 @@ namespace System.Diagnostics.Metrics.Tests
                     Unit = e.Payload[4].ToString(),
                     Tags = e.Payload[5].ToString(),
                     Rate = e.Payload[6].ToString(),
-                    Value = e.Payload[7].ToString()
+                    Value = e.Payload[7].ToString(),
                 })
                 .ToArray();
             var filteredEvents = counterEvents
@@ -3828,7 +3828,7 @@ namespace System.Diagnostics.Metrics.Tests
                     MeterName = e.Payload[1].ToString(),
                     MeterVersion = e.Payload[2].ToString(),
                     InstrumentName = e.Payload[3].ToString(),
-                    Tags = e.Payload[5].ToString()
+                    Tags = e.Payload[5].ToString(),
                 })
                 .ToArray();
             var filteredEvents = counterEvents
@@ -3893,7 +3893,7 @@ namespace System.Diagnostics.Metrics.Tests
                     Tags = e.Payload[5].ToString(),
                     Quantiles = (string)e.Payload[6],
                     Count = e.Payload[7].ToString(),
-                    Sum = e.Payload[8].ToString()
+                    Sum = e.Payload[8].ToString(),
                 })
                 .ToArray();
             var filteredEvents = counterEvents
@@ -3925,7 +3925,7 @@ namespace System.Diagnostics.Metrics.Tests
                     MeterName = e.Payload[1].ToString(),
                     MeterVersion = e.Payload[2].ToString(),
                     InstrumentName = e.Payload[3].ToString(),
-                    Tags = e.Payload[5].ToString()
+                    Tags = e.Payload[5].ToString(),
                 })
                 .ToArray();
             var filteredEvents = counterEvents
@@ -3984,7 +3984,7 @@ namespace System.Diagnostics.Metrics.Tests
         {
             var errorEvents = events
                 .Where(e => e.EventName == "ObservableInstrumentCallbackError")
-                .Select(e => new { ErrorText = e.Payload[1].ToString(), })
+                .Select(e => new { ErrorText = e.Payload[1].ToString() })
                 .ToArray();
             Assert.NotEmpty(errorEvents);
             Assert.Contains("Example user exception", errorEvents[0].ErrorText);

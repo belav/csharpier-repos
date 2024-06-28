@@ -46,7 +46,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             NotConfirmed,
             Active,
-            Deleted
+            Deleted,
         }
 
         public class User

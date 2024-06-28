@@ -14,7 +14,7 @@ namespace System.Globalization.Tests
             yield return new object[]
             {
                 CultureInfo.GetCultureInfo("en-US").NumberFormat,
-                new int[] { 3 }
+                new int[] { 3 },
             };
         }
 

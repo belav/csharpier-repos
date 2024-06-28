@@ -109,7 +109,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x20,
                 0xe9,
                 0x8d,
-                0xbc
+                0xbc,
             };
 
             CheckCBC(r.CreateEncryptor(key, iv), r.CreateDecryptor(key, iv), plaintext, expected);
@@ -171,7 +171,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x4d,
                 0x1e,
                 0x45,
-                0x3b
+                0x3b,
             };
 
             CheckCBC(r.CreateEncryptor(key, iv), r.CreateDecryptor(key, iv), plaintext, expected);
@@ -240,7 +240,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x70,
                 0xb4,
                 0xc5,
-                0x5a
+                0x5a,
             };
             byte[] exp24 =
             {
@@ -259,7 +259,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xec,
                 0x0d,
                 0x71,
-                0x91
+                0x91,
             };
             byte[] exp32 =
             {
@@ -278,7 +278,7 @@ namespace MonoTests.System.Security.Cryptography
                 0x4b,
                 0x49,
                 0x60,
-                0x89
+                0x89,
             };
 
             r.Key = key16;
@@ -505,7 +505,7 @@ namespace MonoTests.System.Security.Cryptography
                 0xE6,
                 0x30,
                 0x67,
-                0x6B
+                0x6B,
             };
             byte[] encdata;
             byte[] decdata;

@@ -31,7 +31,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 Category = principal,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
             principal.Products.Add(dependent);
 
@@ -68,7 +68,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -89,7 +89,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
             principal.Products.Add(dependent);
 
@@ -112,7 +112,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
                 CategoryId2 = principal.Id2,
-                Category = principal
+                Category = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -161,7 +161,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 Category = principal,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
             principal.Products.Add(dependent);
 
@@ -197,7 +197,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -218,7 +218,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
             principal.Products.Add(dependent);
 
@@ -241,7 +241,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
                 CategoryId2 = principal.Id2,
-                Category = principal
+                Category = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -328,7 +328,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -349,7 +349,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -370,7 +370,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
             principal.Products.Add(dependent);
 
@@ -406,7 +406,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
             principal.Products.Add(dependent);
 
@@ -479,7 +479,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -501,7 +501,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
                 CategoryId2 = principal.Id2,
-                Category = principal
+                Category = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -535,7 +535,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -557,7 +557,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
                 CategoryId2 = principal.Id2,
-                Category = principal
+                Category = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -628,7 +628,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -649,7 +649,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 CategoryId1 = principal.Id1,
-                CategoryId2 = principal.Id2
+                CategoryId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -698,7 +698,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 Parent = principal,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
             principal.Child = dependent;
 
@@ -734,7 +734,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -755,7 +755,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
             principal.Child = dependent;
 
@@ -778,7 +778,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
                 ParentId2 = principal.Id2,
-                Parent = principal
+                Parent = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -827,7 +827,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 Parent = principal,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
             principal.Child = dependent;
 
@@ -863,7 +863,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -884,7 +884,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
             principal.Child = dependent;
 
@@ -907,7 +907,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
                 ParentId2 = principal.Id2,
-                Parent = principal
+                Parent = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -994,7 +994,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1015,7 +1015,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1036,7 +1036,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
             principal.Child = dependent;
 
@@ -1072,7 +1072,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
             principal.Child = dependent;
 
@@ -1145,7 +1145,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1167,7 +1167,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
                 ParentId2 = principal.Id2,
-                Parent = principal
+                Parent = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1201,7 +1201,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1223,7 +1223,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
                 ParentId2 = principal.Id2,
-                Parent = principal
+                Parent = principal,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1296,7 +1296,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -1317,7 +1317,7 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
                 Id1 = -78,
                 Id2 = Guid78,
                 ParentId1 = principal.Id1,
-                ParentId2 = principal.Id2
+                ParentId2 = principal.Id2,
             };
 
             MarkIdsTemporary(context, dependent, principal);
@@ -4230,12 +4230,12 @@ public abstract class StoreGeneratedFixupTestBase<TFixture> : IClassFixture<TFix
         {
             new()
             {
-                ThirdLevels = new List<ThirdLevel> { new(), new() }
+                ThirdLevels = new List<ThirdLevel> { new(), new() },
             },
             new()
             {
-                ThirdLevels = new List<ThirdLevel> { new(), new() }
-            }
+                ThirdLevels = new List<ThirdLevel> { new(), new() },
+            },
         };
 
     protected class SecondLevel

@@ -367,8 +367,10 @@ public ref struct TypeMapPlanBuilder
         static Expression GetSetter(MemberExpression memberExpression) =>
             memberExpression.Member switch
             {
-                PropertyInfo { CanWrite: true } property =>
-                    Property(memberExpression.Expression, property),
+                PropertyInfo { CanWrite: true } property => Property(
+                    memberExpression.Expression,
+                    property
+                ),
                 FieldInfo { IsInitOnly: false } field => Field(memberExpression.Expression, field),
                 _ => null,
             };
@@ -412,20 +414,20 @@ public ref struct TypeMapPlanBuilder
                     constructUsingFunc,
                     GetParameters(second: ContextParameter)
                 ),
-            { ConstructorMap: { CanResolve: true } constructorMap } =>
-                ConstructorMapping(constructorMap),
-            { DestinationType: { IsInterface: true } interfaceType } =>
-                Throw(
-                    Constant(
-                        new AutoMapperMappingException(
-                            "Cannot create interface " + interfaceType,
-                            null,
-                            _typeMap
-                        )
-                    ),
-                    interfaceType
+            { ConstructorMap: { CanResolve: true } constructorMap } => ConstructorMapping(
+                constructorMap
+            ),
+            { DestinationType: { IsInterface: true } interfaceType } => Throw(
+                Constant(
+                    new AutoMapperMappingException(
+                        "Cannot create interface " + interfaceType,
+                        null,
+                        _typeMap
+                    )
                 ),
-            _ => ObjectFactory.GenerateConstructorExpression(DestinationType, _configuration)
+                interfaceType
+            ),
+            _ => ObjectFactory.GenerateConstructorExpression(DestinationType, _configuration),
         };
 
     private Expression ConstructorMapping(ConstructorMap constructorMap)
@@ -517,7 +519,7 @@ public ref struct TypeMapPlanBuilder
                             _destination,
                             mappedMemberVariable,
                             destinationMemberGetter,
-                            ContextParameter
+                            ContextParameter,
                         }
                     ),
                     mapperExpr
@@ -811,12 +813,17 @@ public class ValueConverter : ValueResolverConfig, IValueResolver
         var sourceMemberType = InterfaceType.GenericTypeArguments[0];
         var sourceMember = this switch
         {
-            { SourceMemberLambda: { } } =>
-                configuration.ReplaceParameters(SourceMemberLambda, source),
+            { SourceMemberLambda: { } } => configuration.ReplaceParameters(
+                SourceMemberLambda,
+                source
+            ),
             { SourceMemberName: { } } => PropertyOrField(source, SourceMemberName),
-            _ when memberMap.SourceMembers.Length > 0 =>
-                memberMap.ChainSourceMembers(configuration, source, destinationMember),
-            _ => Throw(Constant(BuildExceptionMessage()), sourceMemberType)
+            _ when memberMap.SourceMembers.Length > 0 => memberMap.ChainSourceMembers(
+                configuration,
+                source,
+                destinationMember
+            ),
+            _ => Throw(Constant(BuildExceptionMessage()), sourceMemberType),
         };
         return Call(
             ToType(_instance, InterfaceType),
@@ -835,7 +842,7 @@ public class ValueConverter : ValueResolverConfig, IValueResolver
         {
             { SourceMemberLambda: { } lambda } => lambda.GetMember(),
             { SourceMemberName: { } } => null,
-            _ => memberMap.SourceMembers.Length == 1 ? memberMap.SourceMembers[0] : null
+            _ => memberMap.SourceMembers.Length == 1 ? memberMap.SourceMembers[0] : null,
         };
 }
 
@@ -877,7 +884,7 @@ public class ClassValueResolver : ValueResolverConfig, IValueResolver
                         typeMap.SourceType,
                         typeMap.DestinationType,
                         sourceMember?.Type,
-                        destinationMember.Type
+                        destinationMember.Type,
                     }.Where(t => t != null),
                     (declaredType, runtimeType) =>
                         declaredType.ContainsGenericParameters ? runtimeType : declaredType

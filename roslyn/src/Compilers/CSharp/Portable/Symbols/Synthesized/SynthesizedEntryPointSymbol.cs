@@ -326,7 +326,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 type: method.ReturnType
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
         }
 
@@ -396,7 +396,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     type: userMain.ReturnType
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 // The diagnostics that would be produced here will already have been captured and returned.
@@ -447,7 +447,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 expression: _getAwaiterGetResultCall
                             )
                             {
-                                WasCompilerGenerated = true
+                                WasCompilerGenerated = true,
                             },
                             new BoundReturnStatement(
                                 syntax: syntax,
@@ -456,12 +456,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 @checked: false
                             )
                             {
-                                WasCompilerGenerated = true
+                                WasCompilerGenerated = true,
                             }
                         )
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
                 else
@@ -479,7 +479,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         )
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
                 }
             }
@@ -546,7 +546,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     _containingType
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 Debug.Assert(!initializer.ReturnType.IsDynamic());
@@ -586,31 +586,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                                 scriptLocal,
                                 new BoundObjectCreationExpression(syntax, ctor)
                                 {
-                                    WasCompilerGenerated = true
+                                    WasCompilerGenerated = true,
                                 },
                                 _containingType
                             )
                             {
-                                WasCompilerGenerated = true
+                                WasCompilerGenerated = true,
                             }
                         )
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         },
                         // script.<Initialize>().GetAwaiter().GetResult();
                         new BoundExpressionStatement(syntax, getAwaiterGetResultCall)
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         },
                         // return;
                         new BoundReturnStatement(syntax, RefKind.None, null, @checked: false)
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         }
                     )
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
         }
@@ -671,7 +671,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 var submissionArrayParameter = new BoundParameter(syntax, _parameters[0])
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 var submissionLocal = new BoundLocal(
                     syntax,
@@ -684,7 +684,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     _containingType
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 // var submission = new Submission#N(submissionArray);
@@ -707,16 +707,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             type: _containingType
                         )
                         {
-                            WasCompilerGenerated = true
+                            WasCompilerGenerated = true,
                         },
                         _containingType
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     }
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 // return submission.<Initialize>();
@@ -740,7 +740,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     @checked: false
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 return new BoundBlock(
@@ -749,7 +749,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     ImmutableArray.Create<BoundStatement>(submissionAssignment, returnStatement)
                 )
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
             }
         }

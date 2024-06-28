@@ -68,9 +68,9 @@ namespace StandAloneTests.MD5PasswordAuth_Bug601727
                         "loginControl$Password",
                         "test",
                         "loginControl$UserName",
-                        "admin"
+                        "admin",
                     },
-                    UrlDescription = "Login postback"
+                    UrlDescription = "Login postback",
                 }
             );
             return true;

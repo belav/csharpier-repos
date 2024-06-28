@@ -43,5 +43,6 @@ public class HstsOptions
             "localhost",
             "127.0.0.1", // ipv4
             "[::1]" // ipv6
+            ,
         };
 }

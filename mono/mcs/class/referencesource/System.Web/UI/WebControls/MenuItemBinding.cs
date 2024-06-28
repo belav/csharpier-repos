@@ -23,7 +23,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         ///     The data member to use in the mapping
         /// </devdoc>
-        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.Binding_DataMember),]
+        [DefaultValue(""), WebCategory("Data"), WebSysDescription(SR.Binding_DataMember)]
         public string DataMember
         {
             get

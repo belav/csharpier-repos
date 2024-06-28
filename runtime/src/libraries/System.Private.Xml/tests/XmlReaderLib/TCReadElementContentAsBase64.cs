@@ -16,7 +16,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_1)
                     {
-                        Attribute = new Variation("ReadBase64 Element with all valid value")
+                        Attribute = new Variation("ReadBase64 Element with all valid value"),
                     }
                 );
             }
@@ -28,8 +28,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadBase64 Element with all valid Num value")
                         {
-                            Pri = 0
-                        }
+                            Pri = 0,
+                        },
                     }
                 );
             }
@@ -39,7 +39,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_3)
                     {
-                        Attribute = new Variation("ReadBase64 Element with all valid Text value")
+                        Attribute = new Variation("ReadBase64 Element with all valid Text value"),
                     }
                 );
             }
@@ -51,7 +51,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadBase64 Element with all valid value (from concatenation), Pri=0"
-                        )
+                        ),
                     }
                 );
             }
@@ -63,7 +63,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadBase64 Element with Long valid value (from concatenation), Pri=0"
-                        )
+                        ),
                     }
                 );
             }
@@ -73,7 +73,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadBase64_7)
                     {
-                        Attribute = new Variation("ReadBase64 with count > buffer size")
+                        Attribute = new Variation("ReadBase64 with count > buffer size"),
                     }
                 );
             }
@@ -83,7 +83,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadBase64_8)
                     {
-                        Attribute = new Variation("ReadBase64 with count < 0")
+                        Attribute = new Variation("ReadBase64 with count < 0"),
                     }
                 );
             }
@@ -93,7 +93,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadBase64_9)
                     {
-                        Attribute = new Variation("ReadBase64 with index > buffer size")
+                        Attribute = new Variation("ReadBase64 with index > buffer size"),
                     }
                 );
             }
@@ -103,7 +103,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadBase64_10)
                     {
-                        Attribute = new Variation("ReadBase64 with index < 0")
+                        Attribute = new Variation("ReadBase64 with index < 0"),
                     }
                 );
             }
@@ -113,7 +113,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadBase64_11)
                     {
-                        Attribute = new Variation("ReadBase64 with index + count exceeds buffer")
+                        Attribute = new Variation("ReadBase64 with index + count exceeds buffer"),
                     }
                 );
             }
@@ -123,7 +123,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(ReadBase64_12)
                     {
-                        Attribute = new Variation("ReadBase64 index & count =0")
+                        Attribute = new Variation("ReadBase64 index & count =0"),
                     }
                 );
             }
@@ -135,7 +135,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "ReadBase64 Element multiple into same buffer (using offset), Pri=0"
-                        )
+                        ),
                     }
                 );
             }
@@ -145,7 +145,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_14)
                     {
-                        Attribute = new Variation("ReadBase64 with buffer == null")
+                        Attribute = new Variation("ReadBase64 with buffer == null"),
                     }
                 );
             }
@@ -155,7 +155,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_15)
                     {
-                        Attribute = new Variation("ReadBase64 after failure")
+                        Attribute = new Variation("ReadBase64 after failure"),
                     }
                 );
             }
@@ -165,7 +165,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_16)
                     {
-                        Attribute = new Variation("Read after partial ReadBase64") { Pri = 0 }
+                        Attribute = new Variation("Read after partial ReadBase64") { Pri = 0 },
                     }
                 );
             }
@@ -175,7 +175,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_17)
                     {
-                        Attribute = new Variation("Current node on multiple calls")
+                        Attribute = new Variation("Current node on multiple calls"),
                     }
                 );
             }
@@ -185,7 +185,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestTextReadBase64_23)
                     {
-                        Attribute = new Variation("ReadBase64 with incomplete sequence")
+                        Attribute = new Variation("ReadBase64 with incomplete sequence"),
                     }
                 );
             }
@@ -195,7 +195,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestTextReadBase64_24)
                     {
-                        Attribute = new Variation("ReadBase64 when end tag doesn't exist")
+                        Attribute = new Variation("ReadBase64 when end tag doesn't exist"),
                     }
                 );
             }
@@ -205,7 +205,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestTextReadBase64_26)
                     {
-                        Attribute = new Variation("ReadBase64 with whitespace in the middle")
+                        Attribute = new Variation("ReadBase64 with whitespace in the middle"),
                     }
                 );
             }
@@ -215,7 +215,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestTextReadBase64_27)
                     {
-                        Attribute = new Variation("ReadBase64 with = in the middle")
+                        Attribute = new Variation("ReadBase64 with = in the middle"),
                     }
                 );
             }
@@ -227,8 +227,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadBase64 runs into an Overflow")
                         {
-                            Params = new object[] { "1000000" }
-                        }
+                            Params = new object[] { "1000000" },
+                        },
                     }
                 );
                 this.AddChild(
@@ -236,8 +236,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadBase64 runs into an Overflow")
                         {
-                            Params = new object[] { "10000" }
-                        }
+                            Params = new object[] { "10000" },
+                        },
                     }
                 );
                 this.AddChild(
@@ -245,8 +245,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadBase64 runs into an Overflow")
                         {
-                            Params = new object[] { "10000000" }
-                        }
+                            Params = new object[] { "10000000" },
+                        },
                     }
                 );
             }
@@ -258,7 +258,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "WS:WireCompat:hex binary fails to send/return data after 1787 bytes"
-                        )
+                        ),
                     }
                 );
             }
@@ -270,7 +270,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "SubtreeReader inserted attributes don't work with ReadContentAsBase64"
-                        )
+                        ),
                     }
                 );
             }
@@ -280,7 +280,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_28)
                     {
-                        Attribute = new Variation("call ReadContentAsBase64 on two or more nodes")
+                        Attribute = new Variation("call ReadContentAsBase64 on two or more nodes"),
                     }
                 );
             }
@@ -290,7 +290,7 @@ namespace System.Xml.Tests
                 this.AddChild(
                     new CVariation(TestReadBase64_29)
                     {
-                        Attribute = new Variation("read Base64 over invalid text node")
+                        Attribute = new Variation("read Base64 over invalid text node"),
                     }
                 );
             }
@@ -302,7 +302,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "goto to text node, ask got.Value, readcontentasBase64"
-                        )
+                        ),
                     }
                 );
             }
@@ -314,7 +314,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "goto to text node, readcontentasBase64, ask got.Value"
-                        )
+                        ),
                     }
                 );
             }
@@ -326,7 +326,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "goto to huge text node, read several chars with ReadContentAsBase64 and Move forward with .Read()"
-                        )
+                        ),
                     }
                 );
             }
@@ -338,7 +338,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "goto to huge text node with invalid chars, read several chars with ReadContentAsBase64 and Move forward with .Read()"
-                        )
+                        ),
                     }
                 );
             }
@@ -350,8 +350,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadContentAsBase64 on an xmlns attribute")
                         {
-                            Param = "<foo xmlns='default'> <bar id='1'/> </foo>"
-                        }
+                            Param = "<foo xmlns='default'> <bar id='1'/> </foo>",
+                        },
                     }
                 );
                 this.AddChild(
@@ -359,8 +359,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadContentAsBase64 on an xml:lang attribute")
                         {
-                            Param = "<foo xml:lang='default'> <bar id='1'/> </foo>"
-                        }
+                            Param = "<foo xml:lang='default'> <bar id='1'/> </foo>",
+                        },
                     }
                 );
                 this.AddChild(
@@ -368,8 +368,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadContentAsBase64 on an xmlns:k attribute")
                         {
-                            Param = "<k:foo xmlns:k='default'> <k:bar id='1'/> </k:foo>"
-                        }
+                            Param = "<k:foo xmlns:k='default'> <k:bar id='1'/> </k:foo>",
+                        },
                     }
                 );
                 this.AddChild(
@@ -377,8 +377,8 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation("ReadContentAsBase64 on an xml:space attribute")
                         {
-                            Param = "<foo xml:space='default'> <bar id='1'/> </foo>"
-                        }
+                            Param = "<foo xml:space='default'> <bar id='1'/> </foo>",
+                        },
                     }
                 );
             }
@@ -390,7 +390,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "call ReadContentAsBase64 on two or more nodes and whitespace"
-                        )
+                        ),
                     }
                 );
             }
@@ -402,7 +402,7 @@ namespace System.Xml.Tests
                     {
                         Attribute = new Variation(
                             "call ReadContentAsBase64 on two or more nodes and whitespace after call Value"
-                        )
+                        ),
                     }
                 );
             }

@@ -21,6 +21,6 @@ namespace System.Web.UI.WebControls.WebParts
         /// <devdoc>
         /// Indicates that the personalized data applies to all users.
         /// </devdoc>
-        Shared = 1
+        Shared = 1,
     }
 }

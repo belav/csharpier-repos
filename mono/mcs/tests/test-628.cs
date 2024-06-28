@@ -4,7 +4,7 @@ namespace N1
     {
         A_1,
         A_2,
-        A_3
+        A_3,
     }
 
     public class B
@@ -16,7 +16,7 @@ namespace N1
 enum A
 {
     a,
-    b
+    b,
 }
 
 class X
@@ -27,14 +27,14 @@ class X
 public enum EX : byte
 {
     a,
-    b
+    b,
 }
 
 public class X2
 {
     public enum Blah
     {
-        A
+        A,
     }
 }
 

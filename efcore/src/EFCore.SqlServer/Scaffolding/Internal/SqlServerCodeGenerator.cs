@@ -18,7 +18,7 @@ public class SqlServerCodeGenerator : ProviderCodeGenerator
             {
                 typeof(DbContextOptionsBuilder),
                 typeof(string),
-                typeof(Action<SqlServerDbContextOptionsBuilder>)
+                typeof(Action<SqlServerDbContextOptionsBuilder>),
             }
         )!;
 
@@ -46,7 +46,7 @@ public class SqlServerCodeGenerator : ProviderCodeGenerator
                 : new object[]
                 {
                     connectionString,
-                    new NestedClosureCodeFragment("x", providerOptions)
+                    new NestedClosureCodeFragment("x", providerOptions),
                 }
         );
 }

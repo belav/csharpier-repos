@@ -41,7 +41,7 @@ namespace System.Web.Http.WebHost
                     HttpMethod.Delete,
                     HttpMethod.Head,
                     HttpMethod.Options,
-                    HttpMethod.Trace
+                    HttpMethod.Trace,
                 };
             }
         }
@@ -163,7 +163,7 @@ namespace System.Web.Http.WebHost
                 IDictionary<string, object> expectedEnvironment = new Dictionary<string, object>();
                 IDictionary items = new Hashtable
                 {
-                    { HttpControllerHandler.OwinEnvironmentHttpContextKey, expectedEnvironment }
+                    { HttpControllerHandler.OwinEnvironmentHttpContextKey, expectedEnvironment },
                 };
                 HttpContextBase context = CreateStubContextBase(stubRequest, items);
 
@@ -514,7 +514,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             HttpRequestMessage request = new HttpRequestMessage();
             HttpResponseMessage response = new HttpResponseMessage();
@@ -532,7 +532,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             HttpRequestMessage request = new HttpRequestMessage();
             HttpResponseMessage response = new HttpResponseMessage();
@@ -554,12 +554,12 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<HttpResponseBase> responseMock = new Mock<HttpResponseBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             responseMock.SetupGet(r => r.OutputStream).Returns(Stream.Null);
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(hcb => hcb.Response).Returns(responseMock.Object);
             IDictionary items = new Dictionary<object, object>();
@@ -606,12 +606,12 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<HttpResponseBase> responseMock = new Mock<HttpResponseBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             responseMock.SetupGet(r => r.OutputStream).Returns(Stream.Null);
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(hcb => hcb.Response).Returns(responseMock.Object);
             IDictionary items = new Dictionary<object, object>();
@@ -620,14 +620,14 @@ namespace System.Web.Http.WebHost
 
             HttpRequestMessage request = new HttpRequestMessage()
             {
-                Content = new StringContent("request")
+                Content = new StringContent("request"),
             };
             context.SetHttpRequestMessage(request);
             SpyDisposable spy = new SpyDisposable();
             request.RegisterForDispose(spy);
             HttpResponseMessage response = new HttpResponseMessage()
             {
-                Content = new StringContent("response")
+                Content = new StringContent("response"),
             };
 
             Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> sendAsync = (
@@ -666,7 +666,7 @@ namespace System.Web.Http.WebHost
             responseMock.SetupGet(r => r.OutputStream).Returns(Stream.Null);
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(hcb => hcb.Response).Returns(responseMock.Object);
             IDictionary items = new Dictionary<object, object>();
@@ -714,7 +714,7 @@ namespace System.Web.Http.WebHost
                 .Verifiable();
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             IDictionary contextItems = new Hashtable();
             contextMock.SetupGet(hcb => hcb.Response).Returns(responseMock.Object);
@@ -743,7 +743,7 @@ namespace System.Web.Http.WebHost
                 .Verifiable();
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             IDictionary contextItems = new Hashtable();
             contextMock.SetupGet(hcb => hcb.Response).Returns(responseMock.Object);
@@ -804,7 +804,7 @@ namespace System.Web.Http.WebHost
             using (
                 HttpResponseMessage response = new HttpResponseMessage()
                 {
-                    RequestMessage = request
+                    RequestMessage = request,
                 }
             )
             {
@@ -833,7 +833,7 @@ namespace System.Web.Http.WebHost
             using (
                 HttpResponseMessage response = new HttpResponseMessage()
                 {
-                    RequestMessage = request
+                    RequestMessage = request,
                 }
             )
             {
@@ -860,7 +860,7 @@ namespace System.Web.Http.WebHost
             using (
                 HttpResponseMessage response = new HttpResponseMessage()
                 {
-                    RequestMessage = request
+                    RequestMessage = request,
                 }
             )
             {
@@ -891,7 +891,7 @@ namespace System.Web.Http.WebHost
             using (
                 HttpResponseMessage response = new HttpResponseMessage()
                 {
-                    RequestMessage = request
+                    RequestMessage = request,
                 }
             )
             {
@@ -924,7 +924,7 @@ namespace System.Web.Http.WebHost
             using (
                 HttpResponseMessage response = new HttpResponseMessage()
                 {
-                    RequestMessage = request
+                    RequestMessage = request,
                 }
             )
             {
@@ -949,7 +949,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             try
@@ -1038,7 +1038,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             formatterMock
                 .Setup(m =>
@@ -1121,7 +1121,7 @@ namespace System.Web.Http.WebHost
 
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             formatterMock
                 .Setup(m =>
@@ -1170,7 +1170,7 @@ namespace System.Web.Http.WebHost
 
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             formatterMock
                 .Setup(m =>
@@ -1217,7 +1217,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
             tcs.SetException(new NotSupportedException("Expected error"));
@@ -1276,7 +1276,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This formatter throws on any write attempt
@@ -1333,7 +1333,7 @@ namespace System.Web.Http.WebHost
             // Create a content negotiator that works attempting a normal response but fails when creating the error response.
             Mock<IContentNegotiator> negotiatorMock = new Mock<IContentNegotiator>()
             {
-                CallBase = true
+                CallBase = true,
             };
             negotiatorMock
                 .Setup(m =>
@@ -1360,7 +1360,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This formatter throws on any write attempt
@@ -1418,7 +1418,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
 
             // This formatter throws on any write attempt
@@ -1501,7 +1501,7 @@ namespace System.Web.Http.WebHost
             // Arrange
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             formatterMock
                 .Setup(m =>
@@ -1525,7 +1525,7 @@ namespace System.Web.Http.WebHost
             ).Object;
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(m => m.Response).Returns(responseBase);
             HttpContextBase contextBase = CreateStubContextBase(requestBase, responseBase);
@@ -1551,7 +1551,7 @@ namespace System.Web.Http.WebHost
 
             Mock<JsonMediaTypeFormatter> formatterMock = new Mock<JsonMediaTypeFormatter>()
             {
-                CallBase = true
+                CallBase = true,
             };
             formatterMock
                 .Setup(m =>
@@ -2405,7 +2405,7 @@ namespace System.Web.Http.WebHost
             HttpRequestBase request = CreateStubRequestBase(httpMethod, bufferedStream);
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(m => m.Request).Returns(request);
             return contextMock.Object;
@@ -2423,7 +2423,7 @@ namespace System.Web.Http.WebHost
         {
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(m => m.Request).Returns(request);
             contextMock.SetupGet(m => m.Items).Returns(items);
@@ -2603,7 +2603,7 @@ namespace System.Web.Http.WebHost
 
             Mock<HttpResponseBase> responseBaseMock = new Mock<HttpResponseBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             responseBaseMock.Setup(m => m.OutputStream).Returns(outputStream);
             responseBaseMock.Setup(m => m.Headers).Returns(testHeaders);
@@ -2630,7 +2630,7 @@ namespace System.Web.Http.WebHost
             HttpResponseBase responseBase = responseBaseMock.Object;
             Mock<HttpContextBase> contextMock = new Mock<HttpContextBase>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             contextMock.SetupGet(m => m.Response).Returns(responseBase);
 

@@ -126,6 +126,7 @@ namespace System.Xml
             false,
             true,
             false // '<', '>'
+            ,
         };
         private static readonly bool[] s_defaultIsEscapedElementChar = new bool[]
         {
@@ -193,6 +194,7 @@ namespace System.Xml
             false,
             true,
             false // '<', '>'
+            ,
         };
 
         public XmlUTF8NodeWriter()

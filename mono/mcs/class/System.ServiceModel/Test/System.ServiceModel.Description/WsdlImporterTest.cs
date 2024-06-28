@@ -660,7 +660,7 @@ namespace MonoTests.System.ServiceModel.Description
                 new MetadataSection()
                 {
                     Dialect = MetadataSection.ServiceDescriptionDialect,
-                    Metadata = sd
+                    Metadata = sd,
                 }
             );
 

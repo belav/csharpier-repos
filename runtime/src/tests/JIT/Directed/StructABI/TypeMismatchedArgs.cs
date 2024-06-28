@@ -12,19 +12,19 @@ public unsafe class TypeMismatchedArgs
 {
     private static readonly HfaUnion s_hfaDblFlt = new HfaUnion
     {
-        DblHfa = { FirstDblValue = 1.0, SecondDblValue = 2.0 }
+        DblHfa = { FirstDblValue = 1.0, SecondDblValue = 2.0 },
     };
     private static readonly HfaDblLngUnion s_dblLngHfa = new HfaDblLngUnion
     {
-        DblLng = { FirstLngValue = 10, SecondLngValue = 20 }
+        DblLng = { FirstLngValue = 10, SecondLngValue = 20 },
     };
     private static readonly FourDblLngUnion s_fourDblLngHfa = new FourDblLngUnion
     {
-        Lngs = { LongOne = 30 }
+        Lngs = { LongOne = 30 },
     };
     private static readonly Vtor128Union s_vtor128 = new Vtor128Union
     {
-        Vtor4 = new Vector4(4, 3, 2, 1)
+        Vtor4 = new Vector4(4, 3, 2, 1),
     };
 
     [Fact]
@@ -67,7 +67,7 @@ public unsafe class TypeMismatchedArgs
                     LongOne = 1,
                     LongTwo = 2,
                     LongThree = 3,
-                    LongFour = 4
+                    LongFour = 4,
                 }
             )
         )

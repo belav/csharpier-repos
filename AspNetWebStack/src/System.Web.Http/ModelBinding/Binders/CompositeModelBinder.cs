@@ -95,7 +95,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 ModelMetadata = oldBindingContext.ModelMetadata,
                 ModelName = modelName,
                 ModelState = oldBindingContext.ModelState,
-                ValueProvider = oldBindingContext.ValueProvider
+                ValueProvider = oldBindingContext.ValueProvider,
             };
 
             // validation is expensive to create, so copy it over if we can

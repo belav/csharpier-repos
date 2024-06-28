@@ -31,7 +31,7 @@ namespace System.Workflow.Runtime.Hosting
         {
             Instance,
             CompletedScope,
-            ActivationComplete
+            ActivationComplete,
         };
 
         public ItemType Type;

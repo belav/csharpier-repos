@@ -18,7 +18,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum QueryCompilerFlags
     {
         None = 0x00000000,
-        InverseQuery = 0x00000001
+        InverseQuery = 0x00000001,
     }
 
     internal struct FilterResult
@@ -289,7 +289,7 @@ namespace System.ServiceModel.Dispatcher
         {
             QueryMatcher.defaultFunctionLibs = new IFunctionLibrary[]
             {
-                new XPathFunctionLibrary()
+                new XPathFunctionLibrary(),
             };
 
             // For some incomprehensible reason, the Framework XPath compiler requires an instance of an XPath navigator

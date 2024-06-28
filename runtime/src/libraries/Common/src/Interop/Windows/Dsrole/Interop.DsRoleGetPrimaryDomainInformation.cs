@@ -13,7 +13,7 @@ internal static partial class Interop
             DsRolePrimaryDomainInfoBasic = 1,
             DsRoleUpgradeStatus = 2,
             DsRoleOperationState = 3,
-            DsRolePrimaryDomainInfoBasicEx = 4
+            DsRolePrimaryDomainInfoBasicEx = 4,
         }
 
         [LibraryImport(Libraries.Dsrole, StringMarshalling = StringMarshalling.Utf16)]

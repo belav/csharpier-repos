@@ -167,47 +167,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                 or ForEachStatementSyntax
                 or ForStatementSyntax
                 or LockStatementSyntax
-                or UsingStatementSyntax =>
-                    ReplaceStatementOwnerAndInsertStatement(
-                        services,
-                        root,
-                        oldNode: embeddedStatementOwner,
-                        newNode: AddBlockToEmbeddedStatementOwner(
-                            embeddedStatementOwner,
-                            formattingOptions
-                        ),
-                        anchorNode: embeddedStatementOwner,
-                        nodesToInsert: ImmutableArray<StatementSyntax>.Empty.Add(statement),
-                        formattingOptions,
-                        cancellationToken
+                or UsingStatementSyntax => ReplaceStatementOwnerAndInsertStatement(
+                    services,
+                    root,
+                    oldNode: embeddedStatementOwner,
+                    newNode: AddBlockToEmbeddedStatementOwner(
+                        embeddedStatementOwner,
+                        formattingOptions
                     ),
-                DoStatementSyntax doStatementNode =>
-                    AddBraceToDoStatement(
-                        services,
-                        root,
-                        doStatementNode,
-                        formattingOptions,
-                        statement,
-                        cancellationToken
-                    ),
-                IfStatementSyntax ifStatementNode =>
-                    AddBraceToIfStatement(
-                        services,
-                        root,
-                        ifStatementNode,
-                        formattingOptions,
-                        statement,
-                        cancellationToken
-                    ),
-                ElseClauseSyntax elseClauseNode =>
-                    AddBraceToElseClause(
-                        services,
-                        root,
-                        elseClauseNode,
-                        formattingOptions,
-                        statement,
-                        cancellationToken
-                    ),
+                    anchorNode: embeddedStatementOwner,
+                    nodesToInsert: ImmutableArray<StatementSyntax>.Empty.Add(statement),
+                    formattingOptions,
+                    cancellationToken
+                ),
+                DoStatementSyntax doStatementNode => AddBraceToDoStatement(
+                    services,
+                    root,
+                    doStatementNode,
+                    formattingOptions,
+                    statement,
+                    cancellationToken
+                ),
+                IfStatementSyntax ifStatementNode => AddBraceToIfStatement(
+                    services,
+                    root,
+                    ifStatementNode,
+                    formattingOptions,
+                    statement,
+                    cancellationToken
+                ),
+                ElseClauseSyntax elseClauseNode => AddBraceToElseClause(
+                    services,
+                    root,
+                    elseClauseNode,
+                    formattingOptions,
+                    statement,
+                    cancellationToken
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(embeddedStatementOwner),
             };
         }
@@ -599,35 +595,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     ShouldAddBraceForAccessorDeclaration(accessorDeclarationNode),
                 IndexerDeclarationSyntax indexerDeclarationNode =>
                     ShouldAddBraceForIndexerDeclaration(indexerDeclarationNode, caretPosition),
-                SwitchStatementSyntax switchStatementNode =>
-                    ShouldAddBraceForSwitchStatement(switchStatementNode),
-                TryStatementSyntax tryStatementNode =>
-                    ShouldAddBraceForTryStatement(tryStatementNode, caretPosition),
-                CatchClauseSyntax catchClauseNode =>
-                    ShouldAddBraceForCatchClause(catchClauseNode, caretPosition),
-                FinallyClauseSyntax finallyClauseNode =>
-                    ShouldAddBraceForFinallyClause(finallyClauseNode, caretPosition),
-                DoStatementSyntax doStatementNode =>
-                    ShouldAddBraceForDoStatement(doStatementNode, caretPosition),
+                SwitchStatementSyntax switchStatementNode => ShouldAddBraceForSwitchStatement(
+                    switchStatementNode
+                ),
+                TryStatementSyntax tryStatementNode => ShouldAddBraceForTryStatement(
+                    tryStatementNode,
+                    caretPosition
+                ),
+                CatchClauseSyntax catchClauseNode => ShouldAddBraceForCatchClause(
+                    catchClauseNode,
+                    caretPosition
+                ),
+                FinallyClauseSyntax finallyClauseNode => ShouldAddBraceForFinallyClause(
+                    finallyClauseNode,
+                    caretPosition
+                ),
+                DoStatementSyntax doStatementNode => ShouldAddBraceForDoStatement(
+                    doStatementNode,
+                    caretPosition
+                ),
                 CommonForEachStatementSyntax commonForEachStatementNode =>
                     ShouldAddBraceForCommonForEachStatement(
                         commonForEachStatementNode,
                         caretPosition
                     ),
-                ForStatementSyntax forStatementNode =>
-                    ShouldAddBraceForForStatement(forStatementNode, caretPosition),
-                IfStatementSyntax ifStatementNode =>
-                    ShouldAddBraceForIfStatement(ifStatementNode, caretPosition),
-                ElseClauseSyntax elseClauseNode =>
-                    ShouldAddBraceForElseClause(elseClauseNode, caretPosition),
-                LockStatementSyntax lockStatementNode =>
-                    ShouldAddBraceForLockStatement(lockStatementNode, caretPosition),
-                UsingStatementSyntax usingStatementNode =>
-                    ShouldAddBraceForUsingStatement(usingStatementNode, caretPosition),
-                WhileStatementSyntax whileStatementNode =>
-                    ShouldAddBraceForWhileStatement(whileStatementNode, caretPosition),
-                CheckedStatementSyntax checkedStatementNode =>
-                    ShouldAddBraceForCheckedStatement(checkedStatementNode, caretPosition),
+                ForStatementSyntax forStatementNode => ShouldAddBraceForForStatement(
+                    forStatementNode,
+                    caretPosition
+                ),
+                IfStatementSyntax ifStatementNode => ShouldAddBraceForIfStatement(
+                    ifStatementNode,
+                    caretPosition
+                ),
+                ElseClauseSyntax elseClauseNode => ShouldAddBraceForElseClause(
+                    elseClauseNode,
+                    caretPosition
+                ),
+                LockStatementSyntax lockStatementNode => ShouldAddBraceForLockStatement(
+                    lockStatementNode,
+                    caretPosition
+                ),
+                UsingStatementSyntax usingStatementNode => ShouldAddBraceForUsingStatement(
+                    usingStatementNode,
+                    caretPosition
+                ),
+                WhileStatementSyntax whileStatementNode => ShouldAddBraceForWhileStatement(
+                    whileStatementNode,
+                    caretPosition
+                ),
+                CheckedStatementSyntax checkedStatementNode => ShouldAddBraceForCheckedStatement(
+                    checkedStatementNode,
+                    caretPosition
+                ),
                 _ => false,
             };
 
@@ -1004,8 +1023,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                     ShouldRemoveBraceForAccessorDeclaration(accessorDeclarationNode, caretPosition),
                 PropertyDeclarationSyntax propertyDeclarationNode =>
                     ShouldRemoveBraceForPropertyDeclaration(propertyDeclarationNode, caretPosition),
-                EventDeclarationSyntax eventDeclarationNode =>
-                    ShouldRemoveBraceForEventDeclaration(eventDeclarationNode, caretPosition),
+                EventDeclarationSyntax eventDeclarationNode => ShouldRemoveBraceForEventDeclaration(
+                    eventDeclarationNode,
+                    caretPosition
+                ),
                 _ => false,
             };
 
@@ -1144,10 +1165,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
                         localFunctionStatementNode,
                         formattingOptions
                     ),
-                AccessorDeclarationSyntax accessorDeclarationNode =>
-                    AddBlockToAccessorDeclaration(accessorDeclarationNode, formattingOptions),
-                _ when node.IsEmbeddedStatementOwner() =>
-                    AddBlockToEmbeddedStatementOwner(node, formattingOptions),
+                AccessorDeclarationSyntax accessorDeclarationNode => AddBlockToAccessorDeclaration(
+                    accessorDeclarationNode,
+                    formattingOptions
+                ),
+                _ when node.IsEmbeddedStatementOwner() => AddBlockToEmbeddedStatementOwner(
+                    node,
+                    formattingOptions
+                ),
                 _ => throw ExceptionUtilities.UnexpectedValue(node),
             };
 
@@ -1229,15 +1254,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.AutomaticCompletion
             return embeddedStatementOwner switch
             {
                 DoStatementSyntax doStatementNode => doStatementNode.WithStatement(block),
-                ForEachStatementSyntax forEachStatementNode =>
-                    forEachStatementNode.WithStatement(block),
+                ForEachStatementSyntax forEachStatementNode => forEachStatementNode.WithStatement(
+                    block
+                ),
                 ForStatementSyntax forStatementNode => forStatementNode.WithStatement(block),
                 IfStatementSyntax ifStatementNode => ifStatementNode.WithStatement(block),
                 ElseClauseSyntax elseClauseNode => elseClauseNode.WithStatement(block),
                 WhileStatementSyntax whileStatementNode => whileStatementNode.WithStatement(block),
                 UsingStatementSyntax usingStatementNode => usingStatementNode.WithStatement(block),
                 LockStatementSyntax lockStatementNode => lockStatementNode.WithStatement(block),
-                _ => throw ExceptionUtilities.UnexpectedValue(embeddedStatementOwner)
+                _ => throw ExceptionUtilities.UnexpectedValue(embeddedStatementOwner),
             };
         }
 

@@ -80,7 +80,7 @@ internal partial class XmlSnippetParser
 
                     return this with
                     {
-                        DefaultText = simplifiedTypeName
+                        DefaultText = simplifiedTypeName,
                     };
                 case "ClassName":
                     var className = await snippetFunctionService
@@ -97,7 +97,7 @@ internal partial class XmlSnippetParser
 
                     return this with
                     {
-                        DefaultText = className
+                        DefaultText = className,
                     };
                 case "GenerateSwitchCases":
                     // Generate switch cases requires a multi-step snippet interaction, where the snippet is inserted first then the

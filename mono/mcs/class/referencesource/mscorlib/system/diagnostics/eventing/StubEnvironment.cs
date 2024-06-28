@@ -467,7 +467,7 @@ namespace System.Security
 
     enum SecurityAction
     {
-        Demand
+        Demand,
     }
 }
 

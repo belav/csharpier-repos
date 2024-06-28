@@ -92,9 +92,9 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             {
                 // Swagger uses this to group endpoints together.
                 // Group methods together using the service name.
-                ["controller"] = methodDescriptor.Service.Name
+                ["controller"] = methodDescriptor.Service.Name,
             },
-            EndpointMetadata = routeEndpoint.Metadata.ToList()
+            EndpointMetadata = routeEndpoint.Metadata.ToList(),
         };
         apiDescription.SupportedRequestFormats.Add(
             new ApiRequestFormat { MediaType = "application/json" }
@@ -113,7 +113,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
             {
                 ApiResponseFormats = { new ApiResponseFormat { MediaType = "application/json" } },
                 ModelMetadata = new GrpcModelMetadata(ModelMetadataIdentity.ForType(responseType)),
-                StatusCode = 200
+                StatusCode = 200,
             }
         );
         apiDescription.SupportedResponseTypes.Add(
@@ -123,7 +123,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                 ModelMetadata = new GrpcModelMetadata(
                     ModelMetadataIdentity.ForType(typeof(Google.Rpc.Status))
                 ),
-                IsDefaultResponse = true
+                IsDefaultResponse = true,
             }
         );
         var explorerSettings = routeEndpoint.Metadata.GetMetadata<ApiExplorerSettingsAttribute>();
@@ -169,7 +169,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     Name = routeParameter.Value.JsonPath,
                     ModelMetadata = new GrpcModelMetadata(identity),
                     Source = BindingSource.Path,
-                    DefaultValue = string.Empty
+                    DefaultValue = string.Empty,
                 }
             );
         }
@@ -196,7 +196,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                 bodyDescriptor.ParameterInfo != null
                     ? new ControllerParameterDescriptor
                     {
-                        ParameterInfo = bodyDescriptor.ParameterInfo
+                        ParameterInfo = bodyDescriptor.ParameterInfo,
                     }
                     : null;
 
@@ -206,7 +206,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     Name = "Input",
                     ModelMetadata = new GrpcModelMetadata(identity),
                     Source = BindingSource.Body,
-                    ParameterDescriptor = parameterDescriptor!
+                    ParameterDescriptor = parameterDescriptor!,
                 }
             );
         }
@@ -227,7 +227,7 @@ internal sealed class GrpcJsonTranscodingDescriptionProvider : IApiDescriptionPr
                     Name = queryDescription.Key,
                     ModelMetadata = new GrpcModelMetadata(ModelMetadataIdentity.ForType(fieldType)),
                     Source = BindingSource.Query,
-                    DefaultValue = string.Empty
+                    DefaultValue = string.Empty,
                 }
             );
         }

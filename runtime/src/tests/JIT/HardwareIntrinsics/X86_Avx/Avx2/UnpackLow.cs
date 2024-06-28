@@ -55,7 +55,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             1,
                             5,
                             100,
-                            0
+                            0,
                         },
                         new byte[32]
                         {
@@ -90,7 +90,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             22,
                             1,
                             50,
-                            0
+                            0,
                         },
                         new byte[32]
                     )
@@ -130,7 +130,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             1,
                             -5,
                             100,
-                            0
+                            0,
                         },
                         new sbyte[32]
                         {
@@ -165,7 +165,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             22,
                             -1,
                             -50,
-                            0
+                            0,
                         },
                         new sbyte[32]
                     )
@@ -189,7 +189,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             1,
                             -5,
                             100,
-                            0
+                            0,
                         },
                         new short[16]
                         {
@@ -208,7 +208,7 @@ namespace IntelHardwareIntrinsicTest._Avx2
                             22,
                             -1,
                             -50,
-                            0
+                            0,
                         },
                         new short[16]
                     )

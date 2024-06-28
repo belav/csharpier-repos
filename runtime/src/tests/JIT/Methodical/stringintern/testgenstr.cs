@@ -11,7 +11,7 @@ public class GenC<T>
     {
         "GenC \u3F2Aarray element 0",
         "GenC array element 1\uCB53",
-        "GenC array \u47BBelement 2"
+        "GenC array \u47BBelement 2",
     };
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]

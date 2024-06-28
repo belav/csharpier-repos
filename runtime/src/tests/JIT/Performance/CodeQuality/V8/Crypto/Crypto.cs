@@ -2269,7 +2269,7 @@ namespace V8.Crypto
             491,
             499,
             503,
-            509
+            509,
         };
         private static int s_lplim = (1 << 26) / s_lowprimes[s_lowprimes.Length - 1];
 
@@ -2411,7 +2411,7 @@ namespace V8.Crypto
             string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
                 new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         // Random number generator - requires a PRNG backend, e.g. prng4.js

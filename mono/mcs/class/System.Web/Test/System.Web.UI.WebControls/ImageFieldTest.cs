@@ -115,7 +115,7 @@ namespace MonoTests.System.Web.UI.WebControls
         {
             nullDS,
             stringDS,
-            emptyDS
+            emptyDS,
         };
 
         [SetUp]

@@ -23,7 +23,7 @@ public static class SessionExtensions
             (byte)(value >> 24),
             (byte)(0xFF & (value >> 16)),
             (byte)(0xFF & (value >> 8)),
-            (byte)(0xFF & value)
+            (byte)(0xFF & value),
         };
         session.Set(key, bytes);
     }

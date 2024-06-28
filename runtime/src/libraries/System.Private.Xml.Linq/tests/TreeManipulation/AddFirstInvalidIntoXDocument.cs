@@ -20,8 +20,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XDocument invalid add - double DTD")
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -31,8 +31,8 @@ namespace XLinqTests
                         "XDocument invalid add - multiple root elements"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -42,8 +42,8 @@ namespace XLinqTests
                         "XDocument invalid add - CData, attribute, text (no whitespace)"
                     )
                     {
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
         }
@@ -106,7 +106,7 @@ namespace XLinqTests
                     new XAttribute("a1", "avalue"),
                     "text1",
                     new XText("text2"),
-                    new XDocument()
+                    new XDocument(),
                 }
             )
             {

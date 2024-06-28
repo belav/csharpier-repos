@@ -17,21 +17,21 @@ namespace Moq.Tests
             {
                 yield return new object[]
                 {
-                    typeof(HasAbstractActionEvent).GetEvent(nameof(HasAbstractActionEvent.Event))
+                    typeof(HasAbstractActionEvent).GetEvent(nameof(HasAbstractActionEvent.Event)),
                 };
                 yield return new object[]
                 {
                     typeof(HasAbstractEventHandlerEvent).GetEvent(
                         nameof(HasAbstractEventHandlerEvent.Event)
-                    )
+                    ),
                 };
                 yield return new object[]
                 {
-                    typeof(IHasActionEvent).GetEvent(nameof(IHasActionEvent.Event))
+                    typeof(IHasActionEvent).GetEvent(nameof(IHasActionEvent.Event)),
                 };
                 yield return new object[]
                 {
-                    typeof(IHasEventHandlerEvent).GetEvent(nameof(IHasEventHandlerEvent.Event))
+                    typeof(IHasEventHandlerEvent).GetEvent(nameof(IHasEventHandlerEvent.Event)),
                 };
             }
         }
@@ -42,7 +42,7 @@ namespace Moq.Tests
             {
                 yield return new object[]
                 {
-                    typeof(HasActionEvent).GetEvent(nameof(HasActionEvent.Event))
+                    typeof(HasActionEvent).GetEvent(nameof(HasActionEvent.Event)),
                 };
             }
         }
@@ -143,15 +143,15 @@ namespace Moq.Tests
             {
                 yield return new object[]
                 {
-                    typeof(IHasProperty).GetProperty(nameof(IHasProperty.Property))
+                    typeof(IHasProperty).GetProperty(nameof(IHasProperty.Property)),
                 };
                 yield return new object[]
                 {
-                    typeof(HasAbstractProperty).GetProperty(nameof(HasAbstractProperty.Property))
+                    typeof(HasAbstractProperty).GetProperty(nameof(HasAbstractProperty.Property)),
                 };
                 yield return new object[]
                 {
-                    typeof(HasProperty).GetProperty(nameof(HasProperty.Property))
+                    typeof(HasProperty).GetProperty(nameof(HasProperty.Property)),
                 };
             }
         }

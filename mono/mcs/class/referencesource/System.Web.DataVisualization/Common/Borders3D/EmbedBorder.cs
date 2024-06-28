@@ -394,7 +394,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     smallRadius,
                     largeRadius,
                     largeRadius,
-                    largeRadius
+                    largeRadius,
                 };
                 innerCorners = corners;
             }
@@ -447,7 +447,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     radius,
                     radius,
                     radius,
-                    radius
+                    radius,
                 };
                 innerCorners = corners;
             }
@@ -498,7 +498,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     smallRadius,
                     smallRadius,
                     smallRadius,
-                    largeRadius
+                    largeRadius,
                 };
                 cornerRadius = corners;
                 innerCorners = corners;
@@ -548,7 +548,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     radius,
                     radius,
                     radius,
-                    radius
+                    radius,
                 };
                 cornerRadius = corners;
                 innerCorners = corners;
@@ -597,7 +597,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     radius,
                     radius,
                     radius,
-                    radius
+                    radius,
                 };
             }
         }
@@ -670,7 +670,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     radius,
                     radius,
                     radius,
-                    radius
+                    radius,
                 };
                 innerCorners = corners;
             }
@@ -723,7 +723,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     radius,
                     radius,
                     radius,
-                    radius
+                    radius,
                 };
                 sizeLeftTop = new SizeF(defaultRadiusSize * .8f, defaultRadiusSize * .8f);
                 sizeRightBottom = new SizeF(defaultRadiusSize * .8f, defaultRadiusSize * .8f);
@@ -937,7 +937,7 @@ namespace System.Web.UI.DataVisualization.Charting.Borders3D
                     defaultRadiusSize,
                     defaultRadiusSize,
                     defaultRadiusSize,
-                    defaultRadiusSize
+                    defaultRadiusSize,
                 };
             }
         }

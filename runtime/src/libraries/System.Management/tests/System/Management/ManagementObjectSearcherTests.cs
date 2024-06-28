@@ -55,7 +55,7 @@ namespace System.Management.Tests
                     "Win32_ComputerSystem",
                     "Win32_QuotaSetting",
                     "Win32_SystemAccount",
-                    "Win32_Group"
+                    "Win32_Group",
                 };
 
                 foreach (ManagementObject instance in instances)
@@ -91,7 +91,7 @@ namespace System.Management.Tests
                     "Win32_LogicalDiskToPartition",
                     "Win32_SystemDevices",
                     "Win32_VolumeQuotaSetting",
-                    "Win32_DiskQuota"
+                    "Win32_DiskQuota",
                 };
 
                 foreach (ManagementObject instance in instances)

@@ -25,7 +25,7 @@ namespace Castle.Components.DictionaryAdapter.Xml
         {
             Xmlns.NamespaceUri,
             Xsi.NamespaceUri,
-            XRef.NamespaceUri
+            XRef.NamespaceUri,
         };
 
         public IEnumerable<string> ReservedNamespaceUris

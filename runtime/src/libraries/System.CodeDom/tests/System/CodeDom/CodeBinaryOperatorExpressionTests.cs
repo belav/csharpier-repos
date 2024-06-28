@@ -25,19 +25,19 @@ namespace System.CodeDom.Tests
             {
                 new CodePrimitiveExpression("Value1"),
                 CodeBinaryOperatorType.Add,
-                null
+                null,
             };
             yield return new object[]
             {
                 null,
                 CodeBinaryOperatorType.Add | CodeBinaryOperatorType.BitwiseAnd,
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
             yield return new object[]
             {
                 new CodePrimitiveExpression("Value1"),
                 (CodeBinaryOperatorType)int.MaxValue,
-                new CodePrimitiveExpression("Value2")
+                new CodePrimitiveExpression("Value2"),
             };
         }
 

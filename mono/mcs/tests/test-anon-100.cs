@@ -6,7 +6,7 @@ class C
     static Action f = new Action(
         delegate
         {
-            Assembly[] aa = { typeof(object).Assembly, };
+            Assembly[] aa = { typeof(object).Assembly };
         }
     );
 

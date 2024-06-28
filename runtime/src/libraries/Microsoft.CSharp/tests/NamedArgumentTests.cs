@@ -40,7 +40,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -64,7 +64,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "s"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -98,7 +98,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "z"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -122,7 +122,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "nada"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -153,7 +153,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "y"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -184,7 +184,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "z"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -215,7 +215,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "nada"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -247,7 +247,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "z"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -278,7 +278,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "nada"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -523,7 +523,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -549,7 +549,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 CSharpArgumentInfoFlags.NamedArgument
                                     | CSharpArgumentInfoFlags.UseCompileTimeType,
                                 "a"
-                            )
+                            ),
                         }
                     )
                 );
@@ -592,7 +592,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -798,7 +798,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 | CSharpArgumentInfoFlags.NamedArgument,
                             "b"
                         ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -846,7 +846,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                     {
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "b"),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -889,7 +889,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfoFlags.NamedArgument
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "first"
-                        )
+                        ),
                     }
                 )
             );
@@ -940,7 +940,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -970,7 +970,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -994,7 +994,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1034,7 +1034,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "c"
                         ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -1074,7 +1074,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "x"
                         ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -1111,7 +1111,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfoFlags.NamedArgument
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "x"
-                        )
+                        ),
                     }
                 )
             );
@@ -1162,7 +1162,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 CSharpArgumentInfoFlags.NamedArgument
                                     | CSharpArgumentInfoFlags.UseCompileTimeType,
                                 "y"
-                            )
+                            ),
                         }
                     )
                 );
@@ -1189,7 +1189,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1218,7 +1218,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1243,7 +1243,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 CSharpArgumentInfoFlags.NamedArgument
                                     | CSharpArgumentInfoFlags.UseCompileTimeType,
                                 "x"
-                            )
+                            ),
                         }
                     )
                 );
@@ -1271,7 +1271,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         {
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "y")
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "y"),
                         }
                     )
                 );
@@ -1287,7 +1287,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         {
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -1305,7 +1305,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         {
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -1322,7 +1322,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         new[]
                         {
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x")
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "x"),
                         }
                     )
                 );
@@ -1359,7 +1359,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfoFlags.NamedArgument
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "x"
-                        )
+                        ),
                     }
                 )
             );
@@ -1400,7 +1400,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "y"
                         ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -1441,7 +1441,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 | CSharpArgumentInfoFlags.UseCompileTimeType,
                             "y"
                         ),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -1494,7 +1494,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                 CSharpArgumentInfoFlags.NamedArgument
                                     | CSharpArgumentInfoFlags.UseCompileTimeType,
                                 "x"
-                            )
+                            ),
                         }
                     )
                 );
@@ -1532,7 +1532,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             "c"
                         ),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -1585,7 +1585,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1612,7 +1612,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "c"),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -1659,7 +1659,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1685,7 +1685,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         {
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "c"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -1730,7 +1730,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1756,7 +1756,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         {
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                             CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "a"),
-                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                            CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                         }
                     )
                 );
@@ -1794,7 +1794,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             "b"
                         ),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.UseCompileTimeType, null),
                     }
                 )
             );
@@ -1823,7 +1823,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.IsStaticType, null),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.NamedArgument, "b"),
                         CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                        CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                     }
                 )
             );
@@ -1881,7 +1881,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                             CSharpArgumentInfo.Create(
                                 CSharpArgumentInfoFlags.UseCompileTimeType,
                                 null
-                            )
+                            ),
                         }
                     )
                 );
@@ -1914,7 +1914,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
                                     "b"
                                 ),
                                 CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
-                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
+                                CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null),
                             }
                         )
                     );

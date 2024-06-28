@@ -60,7 +60,7 @@ namespace System.Linq.Tests
                 {
                     funcCalled = true;
                     return true;
-                }
+                },
             };
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
@@ -80,7 +80,7 @@ namespace System.Linq.Tests
                 {
                     funcCalled = true;
                     return true;
-                }
+                },
             };
 
             IEnumerable<Func<bool>> query = source.Where(value => value());
@@ -101,7 +101,7 @@ namespace System.Linq.Tests
                     {
                         funcCalled = true;
                         return true;
-                    }
+                    },
                 }
             );
 
@@ -123,7 +123,7 @@ namespace System.Linq.Tests
                     {
                         funcCalled = true;
                         return true;
-                    }
+                    },
                 }
             );
 
@@ -166,7 +166,7 @@ namespace System.Linq.Tests
                 {
                     funcCalled = true;
                     return true;
-                }
+                },
             };
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
@@ -186,7 +186,7 @@ namespace System.Linq.Tests
                 {
                     funcCalled = true;
                     return true;
-                }
+                },
             };
 
             IEnumerable<Func<bool>> query = source.Where(value => value()).Where(value => value());
@@ -207,7 +207,7 @@ namespace System.Linq.Tests
                     {
                         funcCalled = true;
                         return true;
-                    }
+                    },
                 }
             );
 
@@ -229,7 +229,7 @@ namespace System.Linq.Tests
                     {
                         funcCalled = true;
                         return true;
-                    }
+                    },
                 }
             );
 
@@ -1026,7 +1026,7 @@ namespace System.Linq.Tests
                     "Calling Twice",
                     null,
                     "SoS",
-                    string.Empty
+                    string.Empty,
                 }
                 select x;
 
@@ -1241,7 +1241,7 @@ namespace System.Linq.Tests
                 IEnumerable<int> equivalent in new[]
                 {
                     source.Where(s => true),
-                    source.Where(s => true).Select(s => s)
+                    source.Where(s => true).Select(s => s),
                 }
             )
             {

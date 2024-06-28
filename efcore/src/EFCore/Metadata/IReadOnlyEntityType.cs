@@ -64,12 +64,11 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     object? GetDiscriminatorValue()
     {
         var annotation = FindAnnotation(CoreAnnotationNames.DiscriminatorValue);
-        return annotation != null
-            ? annotation.Value
+        return annotation != null ? annotation.Value
             : !ClrType.IsInstantiable()
             || (BaseType == null && GetDirectlyDerivedTypes().Count() == 0)
                 ? null
-                : (object?)GetDefaultDiscriminatorValue();
+            : (object?)GetDefaultDiscriminatorValue();
     }
 
     /// <summary>
@@ -234,11 +233,9 @@ public interface IReadOnlyEntityType : IReadOnlyTypeBase
     ///     If the given entity types are not related, then <see langword="null" /> is returned.
     /// </returns>
     IReadOnlyEntityType? LeastDerivedType(IReadOnlyEntityType otherEntityType) =>
-        IsAssignableFrom(Check.NotNull(otherEntityType, nameof(otherEntityType)))
-            ? this
-            : otherEntityType.IsAssignableFrom(this)
-                ? otherEntityType
-                : null;
+        IsAssignableFrom(Check.NotNull(otherEntityType, nameof(otherEntityType))) ? this
+        : otherEntityType.IsAssignableFrom(this) ? otherEntityType
+        : null;
 
     /// <summary>
     ///     Gets primary key for this entity type. Returns <see langword="null" /> if no primary key is defined.

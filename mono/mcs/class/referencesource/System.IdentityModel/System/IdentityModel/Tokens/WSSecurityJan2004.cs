@@ -182,7 +182,7 @@ namespace System.IdentityModel.Tokens
                     new string[]
                     {
                         SecurityJan2004Strings.KerberosTokenTypeGSS,
-                        SecurityJan2004Strings.KerberosTokenType1510
+                        SecurityJan2004Strings.KerberosTokenType1510,
                     }
                 ) { }
 
@@ -191,7 +191,7 @@ namespace System.IdentityModel.Tokens
                 return new Type[]
                 {
                     typeof(KerberosReceiverSecurityToken),
-                    typeof(KerberosRequestorSecurityToken)
+                    typeof(KerberosRequestorSecurityToken),
                 };
             }
         }

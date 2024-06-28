@@ -281,7 +281,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxLength and length specified in same derivation step.
@@ -295,7 +295,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has minLength; derived type has lesser length
@@ -313,7 +313,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has maxLength; derived type has greater length
@@ -331,7 +331,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has length; derived type has lesser maxLength
@@ -349,7 +349,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has length; derived type has greater minLength
@@ -367,7 +367,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has maxLength; derived type has greater length
@@ -385,8 +385,8 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -451,7 +451,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has length; derived type has greater maxLength
@@ -469,7 +469,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has length; derived type has equal minLength
@@ -487,7 +487,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has length; derived type has lesser minLength
@@ -505,7 +505,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has minLength; derived type has equal length
@@ -523,7 +523,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has minLength; derived type has greater length
@@ -541,7 +541,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has maxLength; derived type has equal length
@@ -559,7 +559,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // base type has maxLength; derived type has lesser length
@@ -577,7 +577,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minLength is equal to maxLength
@@ -591,7 +591,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minLength is less than maxLength
@@ -605,8 +605,8 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -804,7 +804,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // length, derived type has smaller value
@@ -822,7 +822,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minLength, derived type has larger value.
@@ -840,7 +840,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minLength, derived type has smaller value.
@@ -858,7 +858,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxLength, derived type has lower value.
@@ -876,7 +876,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxLength, derived type has larger value.
@@ -894,7 +894,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // whiteSpace
@@ -912,7 +912,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxInclusive, derived type with larger value
@@ -930,7 +930,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxInclusive, derived type with smaller value
@@ -948,7 +948,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxExclusive, derived type has larger value
@@ -966,7 +966,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxExclusive, derived type has smaller value
@@ -984,7 +984,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minExclusive, derived type has larger value
@@ -1002,7 +1002,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minExclusive, derived type has smaller value
@@ -1020,7 +1020,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minInclusive, derived type has larger value
@@ -1038,7 +1038,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // minInclusive, derived type has smaller value
@@ -1056,8 +1056,8 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -1220,7 +1220,7 @@ namespace System.Xml.XmlSchemaTests
         <xs:group ref='foods' minOccurs='2' maxOccurs='2'/>
     </xs:complexType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     { // maxOccurs too large
@@ -1239,8 +1239,8 @@ namespace System.Xml.XmlSchemaTests
         <xs:group ref='foods' maxOccurs='2'/>
     </xs:complexType>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -1314,7 +1314,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     {
@@ -1332,8 +1332,8 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -1381,8 +1381,8 @@ namespace System.Xml.XmlSchemaTests
         </xs:restriction>
     </xs:simpleType>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -1430,7 +1430,7 @@ namespace System.Xml.XmlSchemaTests
         </xs:attributeGroup>
     </xs:redefine>
 </xs:schema>
-"
+",
                     },
                     new object[]
                     {
@@ -1448,8 +1448,8 @@ namespace System.Xml.XmlSchemaTests
         </xs:attributeGroup>
     </xs:redefine>
 </xs:schema>
-"
-                    }
+",
+                    },
                 };
             }
         }
@@ -1499,7 +1499,7 @@ namespace System.Xml.XmlSchemaTests
         <xs:anyAttribute namespace='##local'/>
     </xs:attributeGroup>
 </xs:schema>
-"
+",
                 };
 
                 return new MemoryStream(Encoding.UTF8.GetBytes(schema[uriIndex]));

@@ -99,7 +99,7 @@ namespace tests.system_data_dll.System_Data
                 "System.TimeSpan",
                 "System.UInt16",
                 "System.UInt32",
-                "System.UInt64"
+                "System.UInt64",
             };
 
             //Checking default value (string)

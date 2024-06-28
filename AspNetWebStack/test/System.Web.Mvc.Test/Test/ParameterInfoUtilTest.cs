@@ -17,7 +17,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ParameterInfo> mockPInfo = new Mock<ParameterInfo>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             mockPInfo.Setup(p => p.DefaultValue).Returns(42);
             mockPInfo.Setup(p => p.Name).Returns("someParameter");
@@ -54,7 +54,7 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<ParameterInfo> mockPInfo = new Mock<ParameterInfo>()
             {
-                DefaultValue = DefaultValue.Mock
+                DefaultValue = DefaultValue.Mock,
             };
             mockPInfo.Setup(p => p.DefaultValue).Returns(null);
             mockPInfo.Setup(p => p.Name).Returns("someParameter");
@@ -196,7 +196,7 @@ namespace System.Web.Mvc.Test
         private enum MyEnum
         {
             None = 0,
-            All = 1
+            All = 1,
         }
     }
 }

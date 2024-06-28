@@ -63,7 +63,7 @@ namespace System.Windows.Threading
     {
         ShutdownStarted = 1,
         Shutdown = 2,
-        Disabled = 4
+        Disabled = 4,
     }
 
     public sealed class Dispatcher

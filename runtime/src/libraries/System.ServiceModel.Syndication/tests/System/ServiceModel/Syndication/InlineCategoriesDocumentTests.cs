@@ -32,7 +32,7 @@ namespace System.ServiceModel.Syndication.Tests
             yield return new object[] { new SyndicationCategory[0] };
             yield return new object[]
             {
-                new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") }
+                new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") },
             };
         }
 
@@ -58,7 +58,7 @@ namespace System.ServiceModel.Syndication.Tests
             {
                 new SyndicationCategory[] { new SyndicationCategory("name", "scheme", "label") },
                 true,
-                "scheme"
+                "scheme",
             };
         }
 

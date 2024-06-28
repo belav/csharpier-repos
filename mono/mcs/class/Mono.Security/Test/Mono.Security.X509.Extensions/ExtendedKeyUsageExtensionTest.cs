@@ -33,7 +33,7 @@ namespace MonoTests.Mono.Security.X509.Extensions
             // timeStamping
             "1.3.6.1.5.5.7.3.8",
             // OCSPSigning
-            "1.3.6.1.5.5.7.3.9"
+            "1.3.6.1.5.5.7.3.9",
         };
 
         private void Empty(ExtendedKeyUsageExtension eku)

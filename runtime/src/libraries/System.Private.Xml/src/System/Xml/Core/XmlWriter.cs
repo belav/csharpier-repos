@@ -32,7 +32,7 @@ namespace System.Xml
         Closed,
 
         // Writer is in error state.
-        Error
+        Error,
     };
 
     // Represents a writer that provides fast non-cached forward-only way of generating XML streams containing XML documents

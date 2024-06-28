@@ -61,7 +61,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Each point value defines surface of each segment.
         /// </summary>
-        Surface
+        Surface,
     }
 
     /// <summary>
@@ -87,7 +87,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
             "CA1704:IdentifiersShouldBeSpelledCorrectly",
             MessageId = "YIs"
         )]
-        YIsWidth
+        YIsWidth,
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Labels are placed on the left side of the funnel.
         /// </summary>
-        Left
+        Left,
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Label placed on the bottom.
         /// </summary>
-        Bottom
+        Bottom,
     }
 
     /// <summary>
@@ -140,7 +140,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Square will be used as a shape of the base.
         /// </summary>
-        SquareBase
+        SquareBase,
     }
 
     /// <summary>
@@ -166,7 +166,7 @@ namespace System.Web.UI.DataVisualization.Charting.ChartTypes
         /// <summary>
         /// Data point labels are disabled.
         /// </summary>
-        Disabled
+        Disabled,
     }
 
     #endregion // Enumerations

@@ -44,9 +44,9 @@ public class Executable
                 Arguments = args,
                 UseShellExecute = false,
                 RedirectStandardError = true,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = true,
             },
-            EnableRaisingEvents = true
+            EnableRaisingEvents = true,
         };
         var tcs = new TaskCompletionSource<int>();
 

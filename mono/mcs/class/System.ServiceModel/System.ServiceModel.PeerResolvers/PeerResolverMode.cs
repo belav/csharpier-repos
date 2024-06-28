@@ -15,6 +15,6 @@ namespace System.ServiceModel.PeerResolvers
     {
         Auto,
         Pnrp,
-        Custom
+        Custom,
     }
 }

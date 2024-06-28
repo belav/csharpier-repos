@@ -208,7 +208,7 @@ namespace System.Xml.NameTableTests
             'A',
             'Y',
             'Y',
-            'Y'
+            'Y',
         };
 
         public static string[] strPerVal =
@@ -253,7 +253,7 @@ namespace System.Xml.NameTableTests
             "PlaY",
             "Play",
             "PLaY",
-            "PLAy"
+            "PLAy",
         };
 
         public static string strInv = "Unatomized";
@@ -703,7 +703,7 @@ namespace System.Xml.NameTableTests
             'O',
             'O',
             'O',
-            'O'
+            'O',
         };
 
         public static string[] strPerVal = { "OFO", "OOF" };

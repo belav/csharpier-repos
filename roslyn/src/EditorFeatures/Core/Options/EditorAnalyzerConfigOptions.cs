@@ -40,7 +40,7 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 {
                     null => null,
                     string s => s,
-                    object o => o.ToString()
+                    object o => o.ToString(),
                 };
 
                 return value != null;

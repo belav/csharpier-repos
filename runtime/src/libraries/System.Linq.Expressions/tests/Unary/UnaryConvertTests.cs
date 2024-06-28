@@ -85,7 +85,7 @@ namespace System.Linq.Expressions.Tests
                 {
                     Expression.Constant(value, typeof(int)),
                     Expression.Constant(value, typeof(ValueType)),
-                    Expression.Constant(value, typeof(object))
+                    Expression.Constant(value, typeof(object)),
                 }
             )
             {
@@ -157,7 +157,7 @@ namespace System.Linq.Expressions.Tests
             var factories = new Func<Expression, Type, Expression>[]
             {
                 Expression.Convert,
-                Expression.ConvertChecked
+                Expression.ConvertChecked,
             };
 
             foreach (var factory in factories)
@@ -219,7 +219,7 @@ namespace System.Linq.Expressions.Tests
             var factories = new Func<Expression, Type, Expression>[]
             {
                 Expression.Convert,
-                Expression.ConvertChecked
+                Expression.ConvertChecked,
             };
 
             foreach (var factory in factories)
@@ -250,7 +250,7 @@ namespace System.Linq.Expressions.Tests
             var factories = new Func<Expression, Type, Expression>[]
             {
                 Expression.Convert,
-                Expression.ConvertChecked
+                Expression.ConvertChecked,
             };
 
             foreach (var factory in factories)
@@ -282,7 +282,7 @@ namespace System.Linq.Expressions.Tests
             var factories = new Func<Expression, Type, Expression>[]
             {
                 Expression.Convert,
-                Expression.ConvertChecked
+                Expression.ConvertChecked,
             };
 
             foreach (var factory in factories)
@@ -334,7 +334,7 @@ namespace System.Linq.Expressions.Tests
                     {
                         (int?)1,
                         (DayOfWeek?)DayOfWeek.Monday,
-                        (TimeSpan?)new TimeSpan(3, 14, 15)
+                        (TimeSpan?)new TimeSpan(3, 14, 15),
                     }
                 )
                 {
@@ -382,7 +382,7 @@ namespace System.Linq.Expressions.Tests
             var factories = new Func<Expression, Type, Expression>[]
             {
                 Expression.Convert,
-                Expression.ConvertChecked
+                Expression.ConvertChecked,
             };
 
             foreach (var factory in factories)
@@ -451,7 +451,7 @@ namespace System.Linq.Expressions.Tests
             var factories = new Func<Expression, Type, Expression>[]
             {
                 Expression.Convert,
-                Expression.ConvertChecked
+                Expression.ConvertChecked,
             };
 
             foreach (var factory in factories)

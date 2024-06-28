@@ -41,6 +41,6 @@ namespace System.Web.Services.Description
         Document,
 
         [XmlEnum("rpc")]
-        Rpc
+        Rpc,
     }
 }

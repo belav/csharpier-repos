@@ -13,7 +13,7 @@ namespace System.Web.UI.WebControls
     /// <devdoc>
     /// Represents a Parameter that gets its value from the user's profile data.
     /// </devdoc>
-    [DefaultProperty("PropertyName"),]
+    [DefaultProperty("PropertyName")]
     public class ProfileParameter : Parameter
     {
         /// <devdoc>

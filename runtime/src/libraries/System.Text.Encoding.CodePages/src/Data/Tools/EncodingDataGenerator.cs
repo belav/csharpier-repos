@@ -206,7 +206,7 @@ namespace EncodingDataGenerator
                             {
                                 kv.Value.Value,
                                 kv.Key,
-                                nextStart += kv.Value.Value.Length
+                                nextStart += kv.Value.Value.Length,
                             }
                     );
                 }

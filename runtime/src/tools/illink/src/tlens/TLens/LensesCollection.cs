@@ -75,7 +75,7 @@ namespace TLens
                 typeof(LargeStaticArraysAnalyzer)
             )
             {
-                DefaultSet = true
+                DefaultSet = true,
             },
             new LensAnalyzerDetails(
                 "large-cctors",
@@ -88,7 +88,7 @@ namespace TLens
                 typeof(LargeStringsAnalyzer)
             )
             {
-                DefaultSet = true
+                DefaultSet = true,
             },
             new LensAnalyzerDetails(
                 "operator-null",
@@ -106,7 +106,7 @@ namespace TLens
                 typeof(TypeInstatiationAnalyzer)
             )
             {
-                DefaultSet = true
+                DefaultSet = true,
             },
             new LensAnalyzerDetails(
                 "unused-param",

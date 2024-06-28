@@ -42,7 +42,7 @@ namespace System.Data.EntityClient
             NameParameterName,
             MetadataParameterName,
             ProviderParameterName,
-            ProviderConnectionStringParameterName
+            ProviderConnectionStringParameterName,
         };
 
         private static Hashtable s_synonyms;

@@ -179,7 +179,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     0x89,
                     0xAB,
                     0xCD,
-                    0xEF
+                    0xEF,
                 }.AsImmutableOrNull()
             );
             Assert.Equal(

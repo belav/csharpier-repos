@@ -27,18 +27,18 @@ public static class TestData
     {
         InvalidString,
         InvalidString,
-        InvalidString
+        InvalidString,
     };
     public static readonly string[] UnmappableStringArray = new string[]
     {
         UnmappableString,
         UnmappableString,
-        UnmappableString
+        UnmappableString,
     };
     public static readonly string[] ValidStringArray = new string[]
     {
         ValidString,
         ValidString,
-        ValidString
+        ValidString,
     };
 }

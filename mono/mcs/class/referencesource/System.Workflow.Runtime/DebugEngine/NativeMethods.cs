@@ -45,7 +45,7 @@ namespace System.Workflow.Runtime.DebugEngine
             UNPROTECTED_SACL_SECURITY_INFORMATION = 0x10000000,
             UNPROTECTED_DACL_SECURITY_INFORMATION = 0x20000000,
             PROTECTED_SACL_SECURITY_INFORMATION = 0x40000000,
-            PROTECTED_DACL_SECURITY_INFORMATION = 0x80000000
+            PROTECTED_DACL_SECURITY_INFORMATION = 0x80000000,
         }
 
         [Flags]
@@ -57,7 +57,7 @@ namespace System.Workflow.Runtime.DebugEngine
             Call = 3,
             Pkt = 4,
             PktIntegrity = 5,
-            PktPrivacy = 6
+            PktPrivacy = 6,
         }
 
         public enum EoAuthnCap
@@ -76,7 +76,7 @@ namespace System.Workflow.Runtime.DebugEngine
             RequireFullSIC = 0x200,
             AutoImpersonate = 0x400,
             NoCustomMarshal = 0x2000,
-            DisableAAA = 0x1000
+            DisableAAA = 0x1000,
         }
 
         public enum RpcImpLevel
@@ -85,7 +85,7 @@ namespace System.Workflow.Runtime.DebugEngine
             Anonymous = 1,
             Identify = 2,
             Impersonate = 3,
-            Delegate = 4
+            Delegate = 4,
         }
 
         [DllImport("kernel32.dll", SetLastError = false)]

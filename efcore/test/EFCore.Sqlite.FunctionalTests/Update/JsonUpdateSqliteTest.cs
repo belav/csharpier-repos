@@ -2387,21 +2387,21 @@ LIMIT 2
         {
             true => "[\"A\"]",
             false => "[]",
-            _ => "null"
+            _ => "null",
         };
 
         string parameterSize = value switch
         {
             true => "1541",
             false => "1538",
-            _ => "1540"
+            _ => "1540",
         };
 
         string updateParameter = value switch
         {
             true => "NULL (Nullable = false)",
             false => "'[\"Z\"]' (Nullable = false) (Size = 5)",
-            _ => "'[]' (Nullable = false) (Size = 2)"
+            _ => "'[]' (Nullable = false) (Size = 2)",
         };
 
         AssertSql(

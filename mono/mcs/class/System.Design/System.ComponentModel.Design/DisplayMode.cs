@@ -35,6 +35,6 @@ namespace System.ComponentModel.Design
         Ansi = 2,
         Auto = 4,
         Hexdump = 1,
-        Unicode = 3
+        Unicode = 3,
     }
 }

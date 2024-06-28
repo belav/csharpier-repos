@@ -14,7 +14,7 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Initialization
             new AppDomainSetup
             {
                 ApplicationBase = AppDomain.CurrentDomain.BaseDirectory,
-                ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile
+                ConfigurationFile = AppDomain.CurrentDomain.SetupInformation.ConfigurationFile,
             }
         );
 

@@ -34,9 +34,8 @@ namespace System.IO
             string result =
                 builder.AsSpan().IndexOf('~') >= 0
                     ? TryExpandShortFileName(ref builder, originalPath: path)
-                    : builder.AsSpan().Equals(path.AsSpan(), StringComparison.Ordinal)
-                        ? path
-                        : builder.ToString();
+                : builder.AsSpan().Equals(path.AsSpan(), StringComparison.Ordinal) ? path
+                : builder.ToString();
 
             // Clear the buffer
             builder.Dispose();

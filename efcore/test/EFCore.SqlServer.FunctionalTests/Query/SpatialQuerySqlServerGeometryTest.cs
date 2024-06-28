@@ -378,7 +378,7 @@ FROM [PointEntity] AS [p]
                     .Select(e => new
                     {
                         e.Id,
-                        Distance = (double?)e.Point.Distance(new Point(1, 1) { SRID = 4326 })
+                        Distance = (double?)e.Point.Distance(new Point(1, 1) { SRID = 4326 }),
                     }),
             ss =>
                 ss.Set<PointEntity>()
@@ -387,7 +387,7 @@ FROM [PointEntity] AS [p]
                         e.Id,
                         Distance = e.Point == null
                             ? (double?)null
-                            : e.Point.Distance(new Point(1, 1) { SRID = 4326 })
+                            : e.Point.Distance(new Point(1, 1) { SRID = 4326 }),
                     }),
             elementSorter: e => e.Id,
             elementAsserter: (e, a) =>

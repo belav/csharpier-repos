@@ -170,11 +170,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ArgumentSyntax argument => InferTypeInArgument(argument),
                     ArrayCreationExpressionSyntax arrayCreationExpression =>
                         InferTypeInArrayCreationExpression(arrayCreationExpression),
-                    ArrayRankSpecifierSyntax arrayRankSpecifier =>
-                        InferTypeInArrayRankSpecifier(arrayRankSpecifier),
+                    ArrayRankSpecifierSyntax arrayRankSpecifier => InferTypeInArrayRankSpecifier(
+                        arrayRankSpecifier
+                    ),
                     ArrayTypeSyntax arrayType => InferTypeInArrayType(arrayType),
-                    ArrowExpressionClauseSyntax arrowClause =>
-                        InferTypeInArrowExpressionClause(arrowClause),
+                    ArrowExpressionClauseSyntax arrowClause => InferTypeInArrowExpressionClause(
+                        arrowClause
+                    ),
                     AssignmentExpressionSyntax assignmentExpression =>
                         InferTypeInBinaryOrAssignmentExpression(
                             assignmentExpression,
@@ -185,8 +187,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                     AttributeArgumentSyntax attribute => InferTypeInAttributeArgument(attribute),
                     AttributeSyntax _ => InferTypeInAttribute(),
-                    AwaitExpressionSyntax awaitExpression =>
-                        InferTypeInAwaitExpression(awaitExpression),
+                    AwaitExpressionSyntax awaitExpression => InferTypeInAwaitExpression(
+                        awaitExpression
+                    ),
                     BinaryExpressionSyntax binaryExpression =>
                         InferTypeInBinaryOrAssignmentExpression(
                             binaryExpression,
@@ -195,68 +198,92 @@ namespace Microsoft.CodeAnalysis.CSharp
                             binaryExpression.Right,
                             expression
                         ),
-                    CastExpressionSyntax castExpression =>
-                        InferTypeInCastExpression(castExpression, expression),
-                    CatchDeclarationSyntax catchDeclaration =>
-                        InferTypeInCatchDeclaration(catchDeclaration),
-                    CatchFilterClauseSyntax catchFilterClause =>
-                        InferTypeInCatchFilterClause(catchFilterClause),
+                    CastExpressionSyntax castExpression => InferTypeInCastExpression(
+                        castExpression,
+                        expression
+                    ),
+                    CatchDeclarationSyntax catchDeclaration => InferTypeInCatchDeclaration(
+                        catchDeclaration
+                    ),
+                    CatchFilterClauseSyntax catchFilterClause => InferTypeInCatchFilterClause(
+                        catchFilterClause
+                    ),
                     CheckedExpressionSyntax checkedExpression => InferTypes(checkedExpression),
                     ConditionalAccessExpressionSyntax conditionalAccessExpression =>
                         InferTypeInConditionalAccessExpression(conditionalAccessExpression),
                     ConditionalExpressionSyntax conditionalExpression =>
                         InferTypeInConditionalExpression(conditionalExpression, expression),
-                    ConstantPatternSyntax constantPattern =>
-                        InferTypeInConstantPattern(constantPattern),
+                    ConstantPatternSyntax constantPattern => InferTypeInConstantPattern(
+                        constantPattern
+                    ),
                     DoStatementSyntax doStatement => InferTypeInDoStatement(doStatement),
-                    EqualsValueClauseSyntax equalsValue =>
-                        InferTypeInEqualsValueClause(equalsValue),
-                    ExpressionColonSyntax expressionColon =>
-                        InferTypeInExpressionColon(expressionColon),
+                    EqualsValueClauseSyntax equalsValue => InferTypeInEqualsValueClause(
+                        equalsValue
+                    ),
+                    ExpressionColonSyntax expressionColon => InferTypeInExpressionColon(
+                        expressionColon
+                    ),
                     ExpressionStatementSyntax _ => InferTypeInExpressionStatement(),
-                    ForEachStatementSyntax forEachStatement =>
-                        InferTypeInForEachStatement(forEachStatement, expression),
-                    ForStatementSyntax forStatement =>
-                        InferTypeInForStatement(forStatement, expression),
+                    ForEachStatementSyntax forEachStatement => InferTypeInForEachStatement(
+                        forEachStatement,
+                        expression
+                    ),
+                    ForStatementSyntax forStatement => InferTypeInForStatement(
+                        forStatement,
+                        expression
+                    ),
                     IfStatementSyntax ifStatement => InferTypeInIfStatement(ifStatement),
                     InitializerExpressionSyntax initializerExpression =>
                         InferTypeInInitializerExpression(initializerExpression, expression),
-                    IsPatternExpressionSyntax isPatternExpression =>
-                        InferTypeInIsPatternExpression(isPatternExpression, node),
+                    IsPatternExpressionSyntax isPatternExpression => InferTypeInIsPatternExpression(
+                        isPatternExpression,
+                        node
+                    ),
                     LockStatementSyntax lockStatement => InferTypeInLockStatement(lockStatement),
                     MemberAccessExpressionSyntax memberAccessExpression =>
                         InferTypeInMemberAccessExpression(memberAccessExpression, expression),
                     NameColonSyntax nameColon => InferTypeInNameColon(nameColon),
                     NameEqualsSyntax nameEquals => InferTypeInNameEquals(nameEquals),
-                    LambdaExpressionSyntax lambdaExpression =>
-                        InferTypeInLambdaExpression(lambdaExpression),
-                    PostfixUnaryExpressionSyntax postfixUnary =>
-                        InferTypeInPostfixUnaryExpression(postfixUnary),
-                    PrefixUnaryExpressionSyntax prefixUnary =>
-                        InferTypeInPrefixUnaryExpression(prefixUnary),
-                    RecursivePatternSyntax propertyPattern =>
-                        InferTypeInRecursivePattern(propertyPattern),
+                    LambdaExpressionSyntax lambdaExpression => InferTypeInLambdaExpression(
+                        lambdaExpression
+                    ),
+                    PostfixUnaryExpressionSyntax postfixUnary => InferTypeInPostfixUnaryExpression(
+                        postfixUnary
+                    ),
+                    PrefixUnaryExpressionSyntax prefixUnary => InferTypeInPrefixUnaryExpression(
+                        prefixUnary
+                    ),
+                    RecursivePatternSyntax propertyPattern => InferTypeInRecursivePattern(
+                        propertyPattern
+                    ),
                     PropertyPatternClauseSyntax propertySubpattern =>
                         InferTypeInPropertyPatternClause(propertySubpattern),
                     RefExpressionSyntax refExpression => InferTypeInRefExpression(refExpression),
-                    ReturnStatementSyntax returnStatement =>
-                        InferTypeForReturnStatement(returnStatement),
+                    ReturnStatementSyntax returnStatement => InferTypeForReturnStatement(
+                        returnStatement
+                    ),
                     SubpatternSyntax subpattern => InferTypeInSubpattern(subpattern, node),
                     SwitchExpressionArmSyntax arm => InferTypeInSwitchExpressionArm(arm),
                     SwitchLabelSyntax switchLabel => InferTypeInSwitchLabel(switchLabel),
-                    SwitchStatementSyntax switchStatement =>
-                        InferTypeInSwitchStatement(switchStatement),
-                    ThrowExpressionSyntax throwExpression =>
-                        InferTypeInThrowExpression(throwExpression),
-                    ThrowStatementSyntax throwStatement =>
-                        InferTypeInThrowStatement(throwStatement),
-                    UsingStatementSyntax usingStatement =>
-                        InferTypeInUsingStatement(usingStatement),
+                    SwitchStatementSyntax switchStatement => InferTypeInSwitchStatement(
+                        switchStatement
+                    ),
+                    ThrowExpressionSyntax throwExpression => InferTypeInThrowExpression(
+                        throwExpression
+                    ),
+                    ThrowStatementSyntax throwStatement => InferTypeInThrowStatement(
+                        throwStatement
+                    ),
+                    UsingStatementSyntax usingStatement => InferTypeInUsingStatement(
+                        usingStatement
+                    ),
                     WhenClauseSyntax whenClause => InferTypeInWhenClause(whenClause),
-                    WhileStatementSyntax whileStatement =>
-                        InferTypeInWhileStatement(whileStatement),
-                    YieldStatementSyntax yieldStatement =>
-                        InferTypeInYieldStatement(yieldStatement),
+                    WhileStatementSyntax whileStatement => InferTypeInWhileStatement(
+                        whileStatement
+                    ),
+                    YieldStatementSyntax yieldStatement => InferTypeInYieldStatement(
+                        yieldStatement
+                    ),
                     _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>(),
                 };
             }
@@ -281,11 +308,14 @@ namespace Microsoft.CodeAnalysis.CSharp
                     ArgumentSyntax argument => InferTypeInArgument(argument, token),
                     ArrayCreationExpressionSyntax arrayCreationExpression =>
                         InferTypeInArrayCreationExpression(arrayCreationExpression, token),
-                    ArrayRankSpecifierSyntax arrayRankSpecifier =>
-                        InferTypeInArrayRankSpecifier(arrayRankSpecifier, token),
+                    ArrayRankSpecifierSyntax arrayRankSpecifier => InferTypeInArrayRankSpecifier(
+                        arrayRankSpecifier,
+                        token
+                    ),
                     ArrayTypeSyntax arrayType => InferTypeInArrayType(arrayType, token),
-                    ArrowExpressionClauseSyntax arrowClause =>
-                        InferTypeInArrowExpressionClause(arrowClause),
+                    ArrowExpressionClauseSyntax arrowClause => InferTypeInArrowExpressionClause(
+                        arrowClause
+                    ),
                     AssignmentExpressionSyntax assignmentExpression =>
                         InferTypeInBinaryOrAssignmentExpression(
                             assignmentExpression,
@@ -296,14 +326,20 @@ namespace Microsoft.CodeAnalysis.CSharp
                         ),
                     AttributeArgumentListSyntax attributeArgumentList =>
                         InferTypeInAttributeArgumentList(attributeArgumentList, token),
-                    AttributeArgumentSyntax argument =>
-                        InferTypeInAttributeArgument(argument, token),
-                    AttributeListSyntax attributeDeclaration =>
-                        InferTypeInAttributeDeclaration(attributeDeclaration, token),
+                    AttributeArgumentSyntax argument => InferTypeInAttributeArgument(
+                        argument,
+                        token
+                    ),
+                    AttributeListSyntax attributeDeclaration => InferTypeInAttributeDeclaration(
+                        attributeDeclaration,
+                        token
+                    ),
                     AttributeTargetSpecifierSyntax attributeTargetSpecifier =>
                         InferTypeInAttributeTargetSpecifier(attributeTargetSpecifier, token),
-                    AwaitExpressionSyntax awaitExpression =>
-                        InferTypeInAwaitExpression(awaitExpression, token),
+                    AwaitExpressionSyntax awaitExpression => InferTypeInAwaitExpression(
+                        awaitExpression,
+                        token
+                    ),
                     BinaryExpressionSyntax binaryExpression =>
                         InferTypeInBinaryOrAssignmentExpression(
                             binaryExpression,
@@ -315,30 +351,45 @@ namespace Microsoft.CodeAnalysis.CSharp
                     BinaryPatternSyntax binaryPattern => GetPatternTypes(binaryPattern),
                     BracketedArgumentListSyntax bracketedArgumentList =>
                         InferTypeInBracketedArgumentList(bracketedArgumentList, token),
-                    CastExpressionSyntax castExpression =>
-                        InferTypeInCastExpression(castExpression, previousToken: token),
-                    CatchDeclarationSyntax catchDeclaration =>
-                        InferTypeInCatchDeclaration(catchDeclaration, token),
-                    CatchFilterClauseSyntax catchFilterClause =>
-                        InferTypeInCatchFilterClause(catchFilterClause, token),
+                    CastExpressionSyntax castExpression => InferTypeInCastExpression(
+                        castExpression,
+                        previousToken: token
+                    ),
+                    CatchDeclarationSyntax catchDeclaration => InferTypeInCatchDeclaration(
+                        catchDeclaration,
+                        token
+                    ),
+                    CatchFilterClauseSyntax catchFilterClause => InferTypeInCatchFilterClause(
+                        catchFilterClause,
+                        token
+                    ),
                     CheckedExpressionSyntax checkedExpression => InferTypes(checkedExpression),
                     ConditionalExpressionSyntax conditionalExpression =>
                         InferTypeInConditionalExpression(
                             conditionalExpression,
                             previousToken: token
                         ),
-                    DefaultExpressionSyntax defaultExpression =>
-                        InferTypeInDefaultExpression(defaultExpression),
+                    DefaultExpressionSyntax defaultExpression => InferTypeInDefaultExpression(
+                        defaultExpression
+                    ),
                     DoStatementSyntax doStatement => InferTypeInDoStatement(doStatement, token),
-                    EqualsValueClauseSyntax equalsValue =>
-                        InferTypeInEqualsValueClause(equalsValue, token),
-                    ExpressionColonSyntax expressionColon =>
-                        InferTypeInExpressionColon(expressionColon, token),
+                    EqualsValueClauseSyntax equalsValue => InferTypeInEqualsValueClause(
+                        equalsValue,
+                        token
+                    ),
+                    ExpressionColonSyntax expressionColon => InferTypeInExpressionColon(
+                        expressionColon,
+                        token
+                    ),
                     ExpressionStatementSyntax _ => InferTypeInExpressionStatement(token),
-                    ForEachStatementSyntax forEachStatement =>
-                        InferTypeInForEachStatement(forEachStatement, previousToken: token),
-                    ForStatementSyntax forStatement =>
-                        InferTypeInForStatement(forStatement, previousToken: token),
+                    ForEachStatementSyntax forEachStatement => InferTypeInForEachStatement(
+                        forEachStatement,
+                        previousToken: token
+                    ),
+                    ForStatementSyntax forStatement => InferTypeInForStatement(
+                        forStatement,
+                        previousToken: token
+                    ),
                     IfStatementSyntax ifStatement => InferTypeInIfStatement(ifStatement, token),
                     ImplicitArrayCreationExpressionSyntax implicitArray =>
                         InferTypeInImplicitArrayCreation(implicitArray),
@@ -347,8 +398,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                             initializerExpression,
                             previousToken: token
                         ),
-                    LockStatementSyntax lockStatement =>
-                        InferTypeInLockStatement(lockStatement, token),
+                    LockStatementSyntax lockStatement => InferTypeInLockStatement(
+                        lockStatement,
+                        token
+                    ),
                     MemberAccessExpressionSyntax memberAccessExpression =>
                         InferTypeInMemberAccessExpression(
                             memberAccessExpression,
@@ -358,35 +411,58 @@ namespace Microsoft.CodeAnalysis.CSharp
                     NameEqualsSyntax nameEquals => InferTypeInNameEquals(nameEquals, token),
                     BaseObjectCreationExpressionSyntax objectCreation =>
                         InferTypeInObjectCreationExpression(objectCreation, token),
-                    LambdaExpressionSyntax lambdaExpression =>
-                        InferTypeInLambdaExpression(lambdaExpression, token),
-                    PostfixUnaryExpressionSyntax postfixUnary =>
-                        InferTypeInPostfixUnaryExpression(postfixUnary, token),
-                    PrefixUnaryExpressionSyntax prefixUnary =>
-                        InferTypeInPrefixUnaryExpression(prefixUnary, token),
-                    RelationalPatternSyntax relationalPattern =>
-                        InferTypeInRelationalPattern(relationalPattern),
-                    ReturnStatementSyntax returnStatement =>
-                        InferTypeForReturnStatement(returnStatement, token),
+                    LambdaExpressionSyntax lambdaExpression => InferTypeInLambdaExpression(
+                        lambdaExpression,
+                        token
+                    ),
+                    PostfixUnaryExpressionSyntax postfixUnary => InferTypeInPostfixUnaryExpression(
+                        postfixUnary,
+                        token
+                    ),
+                    PrefixUnaryExpressionSyntax prefixUnary => InferTypeInPrefixUnaryExpression(
+                        prefixUnary,
+                        token
+                    ),
+                    RelationalPatternSyntax relationalPattern => InferTypeInRelationalPattern(
+                        relationalPattern
+                    ),
+                    ReturnStatementSyntax returnStatement => InferTypeForReturnStatement(
+                        returnStatement,
+                        token
+                    ),
                     SingleVariableDesignationSyntax singleVariableDesignationSyntax =>
                         InferTypeForSingleVariableDesignation(singleVariableDesignationSyntax),
                     SwitchLabelSyntax switchLabel => InferTypeInSwitchLabel(switchLabel, token),
-                    SwitchExpressionSyntax switchExpression =>
-                        InferTypeInSwitchExpression(switchExpression, token),
-                    SwitchStatementSyntax switchStatement =>
-                        InferTypeInSwitchStatement(switchStatement, token),
-                    ThrowStatementSyntax throwStatement =>
-                        InferTypeInThrowStatement(throwStatement, token),
-                    TupleExpressionSyntax tupleExpression =>
-                        InferTypeInTupleExpression(tupleExpression, token),
+                    SwitchExpressionSyntax switchExpression => InferTypeInSwitchExpression(
+                        switchExpression,
+                        token
+                    ),
+                    SwitchStatementSyntax switchStatement => InferTypeInSwitchStatement(
+                        switchStatement,
+                        token
+                    ),
+                    ThrowStatementSyntax throwStatement => InferTypeInThrowStatement(
+                        throwStatement,
+                        token
+                    ),
+                    TupleExpressionSyntax tupleExpression => InferTypeInTupleExpression(
+                        tupleExpression,
+                        token
+                    ),
                     UnaryPatternSyntax unaryPattern => GetPatternTypes(unaryPattern),
-                    UsingStatementSyntax usingStatement =>
-                        InferTypeInUsingStatement(usingStatement, token),
+                    UsingStatementSyntax usingStatement => InferTypeInUsingStatement(
+                        usingStatement,
+                        token
+                    ),
                     WhenClauseSyntax whenClause => InferTypeInWhenClause(whenClause, token),
-                    WhileStatementSyntax whileStatement =>
-                        InferTypeInWhileStatement(whileStatement, token),
-                    YieldStatementSyntax yieldStatement =>
-                        InferTypeInYieldStatement(yieldStatement, token),
+                    WhileStatementSyntax whileStatement => InferTypeInWhileStatement(
+                        whileStatement,
+                        token
+                    ),
+                    YieldStatementSyntax yieldStatement => InferTypeInYieldStatement(
+                        yieldStatement,
+                        token
+                    ),
                     _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>(),
                 };
             }
@@ -1626,11 +1702,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                     (conditional.WhenFalse == expressionOpt)
                     || (previousToken == conditional.ColonToken);
 
-                var otherTypes = inTrueClause
-                    ? GetTypes(conditional.WhenFalse)
-                    : inFalseClause
-                        ? GetTypes(conditional.WhenTrue)
-                        : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
+                var otherTypes =
+                    inTrueClause ? GetTypes(conditional.WhenFalse)
+                    : inFalseClause ? GetTypes(conditional.WhenTrue)
+                    : SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>();
 
                 return otherTypes.IsEmpty() ? InferTypes(conditional) : otherTypes;
             }
@@ -2085,21 +2160,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return pattern switch
                 {
                     ConstantPatternSyntax constantPattern => GetTypes(constantPattern.Expression),
-                    RecursivePatternSyntax recursivePattern =>
-                        GetTypesForRecursivePattern(recursivePattern),
+                    RecursivePatternSyntax recursivePattern => GetTypesForRecursivePattern(
+                        recursivePattern
+                    ),
                     _
                         when SemanticModel.GetOperation(pattern, CancellationToken)
                             is IPatternOperation patternOperation =>
-                        // In cases like this: c is Color.Green or $$
-                        // "pattern" is a DeclarationPatternSyntax and Color.Green is assumed to be the narrowed type.
-                        // If the narrowed type can not be resolved, we fall back to the input type of the pattern, which
-                        // is a good default for any related case.
-                        CreateResult(
-                            patternOperation.NarrowedType.IsErrorType()
-                                ? patternOperation.InputType
-                                : patternOperation.NarrowedType
-                        ),
-                    _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>()
+                    // In cases like this: c is Color.Green or $$
+                    // "pattern" is a DeclarationPatternSyntax and Color.Green is assumed to be the narrowed type.
+                    // If the narrowed type can not be resolved, we fall back to the input type of the pattern, which
+                    // is a good default for any related case.
+                    CreateResult(
+                        patternOperation.NarrowedType.IsErrorType()
+                            ? patternOperation.InputType
+                            : patternOperation.NarrowedType
+                    ),
+                    _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>(),
                 };
             }
 
@@ -2265,9 +2341,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return nameColon.Parent switch
                 {
                     ArgumentSyntax argumentSyntax => InferTypeInArgument(argumentSyntax),
-                    SubpatternSyntax subPattern =>
-                        InferTypeInSubpattern(subPattern, subPattern.Pattern),
-                    _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>()
+                    SubpatternSyntax subPattern => InferTypeInSubpattern(
+                        subPattern,
+                        subPattern.Pattern
+                    ),
+                    _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>(),
                 };
             }
 
@@ -2284,9 +2362,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return expressionColon.Parent switch
                 {
-                    SubpatternSyntax subPattern =>
-                        InferTypeInSubpattern(subPattern, subPattern.Pattern),
-                    _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>()
+                    SubpatternSyntax subPattern => InferTypeInSubpattern(
+                        subPattern,
+                        subPattern.Pattern
+                    ),
+                    _ => SpecializedCollections.EmptyEnumerable<TypeInferenceInfo>(),
                 };
             }
 
@@ -3023,7 +3103,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                                 inferredDescendantTypes
                                 is not []
                                     and not [
-                                        { InferredType.SpecialType: SpecialType.System_Object }
+                                        { InferredType.SpecialType: SpecialType.System_Object },
                                     ]
                             )
                                 return inferredDescendantTypes;

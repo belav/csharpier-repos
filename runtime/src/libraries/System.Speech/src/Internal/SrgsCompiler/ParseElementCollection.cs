@@ -189,7 +189,7 @@ namespace System.Speech.Internal.SrgsCompiler
         internal enum Position
         {
             Before,
-            After
+            After,
         }
 
         /// <summary>

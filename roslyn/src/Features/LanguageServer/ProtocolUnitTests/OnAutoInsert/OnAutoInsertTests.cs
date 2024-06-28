@@ -442,7 +442,7 @@ End Class";
                     new InitializationOptions
                     {
                         ClientCapabilities = CapabilitiesWithVSExtensions,
-                        ServerKind = serverKind
+                        ServerKind = serverKind,
                     }
                 );
             }
@@ -454,7 +454,7 @@ End Class";
                     new InitializationOptions
                     {
                         ClientCapabilities = CapabilitiesWithVSExtensions,
-                        ServerKind = serverKind
+                        ServerKind = serverKind,
                     }
                 );
             }
@@ -553,8 +553,8 @@ End Class";
                 Options = new LSP.FormattingOptions
                 {
                     InsertSpaces = insertSpaces,
-                    TabSize = tabSize
-                }
+                    TabSize = tabSize,
+                },
             };
     }
 }

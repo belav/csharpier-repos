@@ -312,7 +312,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return diffService.DiffStrings(
                 oldString,
                 newString,
-                new StringDifferenceOptions() { DifferenceType = StringDifferenceTypes.Line, }
+                new StringDifferenceOptions() { DifferenceType = StringDifferenceTypes.Line }
             );
         }
     }

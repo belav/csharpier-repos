@@ -280,7 +280,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     (message: { }, isError: false, isColInit: true) =>
                         ErrorCode.WRN_DeprecatedCollectionInitAddStr,
                     (message: { }, isError: false, isColInit: false) =>
-                        ErrorCode.WRN_DeprecatedSymbolStr
+                        ErrorCode.WRN_DeprecatedSymbolStr,
                 };
 
                 var arguments = data.Message is string message

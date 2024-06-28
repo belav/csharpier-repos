@@ -47,7 +47,7 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
                         new[]
                         {
                             KeyValuePairUtil.Create(x1, x2),
-                            KeyValuePairUtil.Create(x1, new TestNode(0, 0))
+                            KeyValuePairUtil.Create(x1, new TestNode(0, 0)),
                         }
                     )
             );
@@ -68,7 +68,7 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             var m = TestTreeComparer.Instance.ComputeMatch(
                 oldRoot,
                 newRoot,
-                new[] { KeyValuePairUtil.Create(x1, x2), KeyValuePairUtil.Create(y1, x2), }
+                new[] { KeyValuePairUtil.Create(x1, x2), KeyValuePairUtil.Create(y1, x2) }
             );
 
             // the first one wins:
@@ -93,7 +93,7 @@ namespace Microsoft.CodeAnalysis.Differencing.UnitTests
             var m = TestTreeComparer.Instance.ComputeMatch(
                 oldRoot,
                 newRoot,
-                new[] { KeyValuePairUtil.Create(x1, newRoot), }
+                new[] { KeyValuePairUtil.Create(x1, newRoot) }
             );
 
             // the root wins:

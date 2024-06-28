@@ -31,6 +31,6 @@ namespace Mono.Net.Dns
         Hesiod = 4,
         HS = 4,
         None = 254,
-        Any = 255
+        Any = 255,
     }
 }

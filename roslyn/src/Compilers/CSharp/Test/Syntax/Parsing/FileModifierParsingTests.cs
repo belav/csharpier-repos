@@ -111,7 +111,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,19): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                 // file partial enum C { }
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "C").WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "C").WithLocation(1, 19),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -145,7 +145,7 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,14): error CS1002: ; expected
                 // partial file {{SyntaxFacts.GetText(typeKeyword)}} C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, SyntaxFacts.GetText(typeKeyword))
-                    .WithLocation(1, 14)
+                    .WithLocation(1, 14),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -162,7 +162,7 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,14): error CS1002: ; expected
                 // partial file {{SyntaxFacts.GetText(typeKeyword)}} C { }
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, SyntaxFacts.GetText(typeKeyword))
-                    .WithLocation(1, 14)
+                    .WithLocation(1, 14),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -208,7 +208,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                 // partial file record C { }
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -263,7 +263,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,1): error CS0267: The 'partial' modifier can only appear immediately before 'class', 'record', 'struct', 'interface', or a method return type.
                 // partial file record struct C { }
-                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_PartialMisplaced, "partial").WithLocation(1, 1),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -300,7 +300,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -321,7 +321,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -372,7 +372,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -393,7 +393,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // file partial ref struct C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18),
             }
         );
 
@@ -445,7 +445,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // partial file ref struct C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -466,7 +466,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 14),
                 // (1,18): error CS1002: ; expected
                 // partial file ref struct C { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "struct").WithLocation(1, 18),
             }
         );
 
@@ -566,7 +566,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,20): error CS9052: File-local type 'C' cannot use accessibility modifiers.
                 // public file {{SyntaxFacts.GetText(typeKeyword)}} C { }
-                Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C")
+                Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C"),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -601,7 +601,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,19): error CS9052: File-local type 'C' cannot use accessibility modifiers.
                 // file public {{SyntaxFacts.GetText(typeKeyword)}} C { }
-                Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C")
+                Diagnostic(ErrorCode.ERR_FileTypeNoExplicitAccessibility, "C").WithArguments("C"),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -634,7 +634,7 @@ public class FileModifierParsingTests : ParsingTests
                 // file class C { }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C")
                     .WithArguments("file types", "11.0")
-                    .WithLocation(1, 12)
+                    .WithLocation(1, 12),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -771,7 +771,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file class C { }
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "C")
                     .WithArguments("Outer.C")
-                    .WithLocation(3, 16)
+                    .WithLocation(3, 16),
             }
         );
 
@@ -821,7 +821,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file delegate*<int, void> M();
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "M")
                     .WithArguments("C.M()")
-                    .WithLocation(3, 31)
+                    .WithLocation(3, 31),
             }
         );
 
@@ -891,7 +891,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file void M() { }
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "M")
                     .WithArguments("file")
-                    .WithLocation(3, 15)
+                    .WithLocation(3, 15),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -948,7 +948,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file int x;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "x")
                     .WithArguments("C.x")
-                    .WithLocation(3, 14)
+                    .WithLocation(3, 14),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -1007,7 +1007,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file event Action x;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "x")
                     .WithArguments("C.x")
-                    .WithLocation(3, 23)
+                    .WithLocation(3, 23),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -1059,7 +1059,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file int x { get; set; }
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "x")
                     .WithArguments("file")
-                    .WithLocation(3, 14)
+                    .WithLocation(3, 14),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -1121,7 +1121,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(3, 21),
                 // (3,21): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
                 //     async file void M() { }
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(3, 21)
+                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(3, 21),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -1174,7 +1174,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     int file;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "file")
                     .WithArguments("C.file")
-                    .WithLocation(3, 9)
+                    .WithLocation(3, 9),
             }
         );
 
@@ -1277,7 +1277,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     event Action file;
                 Diagnostic(ErrorCode.WRN_UnreferencedEvent, "file")
                     .WithArguments("C.file")
-                    .WithLocation(3, 18)
+                    .WithLocation(3, 18),
             }
         );
 
@@ -1366,7 +1366,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,12): error CS9056: Types and aliases cannot be named 'file'.
                 // file class file { }
-                Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 12)
+                Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 12),
             }
         );
 
@@ -1407,7 +1407,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file async;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "async")
                     .WithArguments("C.async")
-                    .WithLocation(3, 10)
+                    .WithLocation(3, 10),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -1505,7 +1505,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file item;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "item")
                     .WithArguments("C.item")
-                    .WithLocation(3, 10)
+                    .WithLocation(3, 10),
             }
         );
 
@@ -1559,7 +1559,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file item;
                 Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
                     .WithArguments(";")
-                    .WithLocation(3, 14)
+                    .WithLocation(3, 14),
             }
         );
 
@@ -1596,7 +1596,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,8): error CS9056: Types and aliases cannot be named 'file'.
                 // record file { }
-                Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 8)
+                Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 8),
             }
         );
 
@@ -1625,7 +1625,7 @@ public class FileModifierParsingTests : ParsingTests
             {
                 // (1,7): error CS9056: Types and aliases cannot be named 'file'.
                 // class file { }
-                Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 7)
+                Diagnostic(ErrorCode.ERR_FileTypeNameDisallowed, "file").WithLocation(1, 7),
             }
         );
 
@@ -1657,7 +1657,7 @@ public class FileModifierParsingTests : ParsingTests
                 // class file { }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "file")
                     .WithArguments("file")
-                    .WithLocation(1, 7)
+                    .WithLocation(1, 7),
             }
         );
 
@@ -1728,7 +1728,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 15),
                 // (3,21): error CS0227: Unsafe code may only appear if compiling with /unsafe
                 // public unsafe class C
-                Diagnostic(ErrorCode.ERR_IllegalUnsafe, "C").WithLocation(3, 21)
+                Diagnostic(ErrorCode.ERR_IllegalUnsafe, "C").WithLocation(3, 21),
             }
         );
 
@@ -1962,7 +1962,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_TypeExpected, "*").WithLocation(7, 16),
                 // (8,16): error CS1031: Type expected
                 //     public file? _nullable;
-                Diagnostic(ErrorCode.ERR_TypeExpected, "?").WithLocation(8, 16)
+                Diagnostic(ErrorCode.ERR_TypeExpected, "?").WithLocation(8, 16),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2010,7 +2010,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     public file? _nullable;
                 Diagnostic(ErrorCode.ERR_BadMemberFlag, "_nullable")
                     .WithArguments("file")
-                    .WithLocation(8, 18)
+                    .WithLocation(8, 18),
             }
         );
 
@@ -2218,7 +2218,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 5),
                 // (1,5): error CS1002: ; expected
                 // file
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2232,7 +2232,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 5),
                 // (1,5): error CS1002: ; expected
                 // file
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5),
             }
         );
 
@@ -2275,7 +2275,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 5),
                 // (1,5): error CS1002: ; expected
                 // file
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2289,7 +2289,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 5),
                 // (1,5): error CS1002: ; expected
                 // file
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(1, 5),
             }
         );
 
@@ -2335,7 +2335,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 1),
                 // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 // file;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1),
             }
         );
 
@@ -2373,7 +2373,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(1, 1),
                 // (1,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 // file;
-                Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_IllegalStatement, "file").WithLocation(1, 1),
             }
         );
 
@@ -2410,7 +2410,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "namespace").WithLocation(1, 6),
                 // (1,6): error CS1002: ; expected
                 // file namespace NS;
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2428,7 +2428,7 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,16): error CS8956: File-scoped namespace must precede all other members in a file.
                 // file namespace NS;
                 Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "NS")
-                    .WithLocation(1, 16)
+                    .WithLocation(1, 16),
             }
         );
 
@@ -2480,7 +2480,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "namespace").WithLocation(1, 6),
                 // (1,6): error CS1002: ; expected
                 // file namespace NS;
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2498,7 +2498,7 @@ public class FileModifierParsingTests : ParsingTests
                 // (1,16): error CS8956: File-scoped namespace must precede all other members in a file.
                 // file namespace NS;
                 Diagnostic(ErrorCode.ERR_FileScopedNamespaceNotBeforeAllMembers, "NS")
-                    .WithLocation(1, 16)
+                    .WithLocation(1, 16),
             }
         );
 
@@ -2551,7 +2551,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "namespace").WithLocation(1, 6),
                 // (1,6): error CS1002: ; expected
                 // file namespace NS { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2565,7 +2565,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "namespace").WithLocation(1, 6),
                 // (1,6): error CS1002: ; expected
                 // file namespace NS { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6),
             }
         );
 
@@ -2618,7 +2618,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "namespace").WithLocation(1, 6),
                 // (1,6): error CS1002: ; expected
                 // file namespace NS { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -2632,7 +2632,7 @@ public class FileModifierParsingTests : ParsingTests
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "namespace").WithLocation(1, 6),
                 // (1,6): error CS1002: ; expected
                 // file namespace NS { }
-                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6)
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "namespace").WithLocation(1, 6),
             }
         );
 
@@ -2680,7 +2680,7 @@ public class FileModifierParsingTests : ParsingTests
             manyFileModifiers,
             expectedParsingDiagnostics: new[]
             {
-                Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 499996)
+                Diagnostic(ErrorCode.ERR_NamespaceUnexpected, "file").WithLocation(1, 499996),
             }
         );
 
@@ -2705,14 +2705,14 @@ public class FileModifierParsingTests : ParsingTests
             manyFileModifiers + " class { }",
             expectedParsingDiagnostics: new[]
             {
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 500007)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 500007),
             },
             expectedBindingDiagnostics: new[]
             {
                 Diagnostic(ErrorCode.ERR_DuplicateModifier, "file")
                     .WithArguments("file")
                     .WithLocation(1, 6),
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 500007)
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "{").WithLocation(1, 500007),
             }
         );
 
@@ -2756,7 +2756,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record();
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "record")
                     .WithArguments("C.record()")
-                    .WithLocation(3, 10)
+                    .WithLocation(3, 10),
             }
         );
 
@@ -2807,7 +2807,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(3, 10),
                 // (3,10): error CS1520: Method must have a return type
                 //     file record();
-                Diagnostic(ErrorCode.ERR_MemberNeedsType, "record").WithLocation(3, 10)
+                Diagnostic(ErrorCode.ERR_MemberNeedsType, "record").WithLocation(3, 10),
             }
         );
 
@@ -2858,7 +2858,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record() { }
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "record")
                     .WithArguments("C.record()")
-                    .WithLocation(3, 10)
+                    .WithLocation(3, 10),
             }
         );
 
@@ -2913,7 +2913,7 @@ public class FileModifierParsingTests : ParsingTests
                     .WithLocation(3, 10),
                 // (3,10): error CS1520: Method must have a return type
                 //     file record() { }
-                Diagnostic(ErrorCode.ERR_MemberNeedsType, "record").WithLocation(3, 10)
+                Diagnostic(ErrorCode.ERR_MemberNeedsType, "record").WithLocation(3, 10),
             }
         );
 
@@ -2973,7 +2973,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record X();
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "X")
                     .WithArguments("C.X()")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
 
@@ -3022,7 +3022,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record X();
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
                     .WithArguments("C.X")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
 
@@ -3079,7 +3079,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record X() { }
                 Diagnostic(ErrorCode.ERR_ReturnExpected, "X")
                     .WithArguments("C.X()")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
 
@@ -3132,7 +3132,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record X() { }
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
                     .WithArguments("C.X")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
 
@@ -3190,7 +3190,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record X;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "X")
                     .WithArguments("C.X")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
 
@@ -3240,7 +3240,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file record X;
                 Diagnostic(ErrorCode.ERR_FileTypeNested, "X")
                     .WithArguments("C.X")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
 
@@ -3319,7 +3319,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     file file;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
                     .WithArguments("file")
-                    .WithLocation(3, 10)
+                    .WithLocation(3, 10),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -3386,7 +3386,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     int file;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
                     .WithArguments("file")
-                    .WithLocation(3, 9)
+                    .WithLocation(3, 9),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -3453,7 +3453,7 @@ public class FileModifierParsingTests : ParsingTests
                 // file file;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
                     .WithArguments("file")
-                    .WithLocation(1, 6)
+                    .WithLocation(1, 6),
             }
         );
 
@@ -3498,7 +3498,7 @@ public class FileModifierParsingTests : ParsingTests
                 // int file;
                 Diagnostic(ErrorCode.WRN_UnreferencedVar, "file")
                     .WithArguments("file")
-                    .WithLocation(1, 5)
+                    .WithLocation(1, 5),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -3543,7 +3543,7 @@ public class FileModifierParsingTests : ParsingTests
                 // bool file;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "file")
                     .WithArguments("file")
-                    .WithLocation(1, 6)
+                    .WithLocation(1, 6),
             }
         );
 
@@ -3613,7 +3613,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     bool file;
                 Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "file")
                     .WithArguments("file")
-                    .WithLocation(3, 10)
+                    .WithLocation(3, 10),
             }
         );
 
@@ -3692,7 +3692,7 @@ public class FileModifierParsingTests : ParsingTests
                 // _ = file () => { };
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
-                    .WithLocation(1, 5)
+                    .WithLocation(1, 5),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -3758,7 +3758,7 @@ public class FileModifierParsingTests : ParsingTests
                 // file local() { };
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")
                     .WithArguments("local")
-                    .WithLocation(1, 6)
+                    .WithLocation(1, 6),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -3815,7 +3815,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     void M(file int x) { }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "int")
                     .WithArguments(",")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             },
             expectedBindingDiagnostics: new[]
             {
@@ -3831,7 +3831,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     void M(file int x) { }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "int")
                     .WithArguments(",")
-                    .WithLocation(3, 17)
+                    .WithLocation(3, 17),
             }
         );
         N(SyntaxKind.CompilationUnit);
@@ -3899,7 +3899,7 @@ public class FileModifierParsingTests : ParsingTests
                 //     void M(file x) { }
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "file")
                     .WithArguments("file")
-                    .WithLocation(3, 12)
+                    .WithLocation(3, 12),
             }
         );
         N(SyntaxKind.CompilationUnit);

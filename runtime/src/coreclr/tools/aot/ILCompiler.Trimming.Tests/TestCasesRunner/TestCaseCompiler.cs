@@ -118,7 +118,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 Defines = defines.Concat(_metadataProvider.GetDefines()).ToArray(),
                 Resources = resources,
                 AdditionalArguments = additionalArguments,
-                CompilerToUse = _metadataProvider.GetCSharpCompilerToUse()
+                CompilerToUse = _metadataProvider.GetCSharpCompilerToUse(),
             };
         }
 
@@ -150,7 +150,7 @@ namespace Mono.Linker.Tests.TestCasesRunner
                 Defines = allDefines,
                 Resources = resources,
                 AdditionalArguments = additionalArguments,
-                CompilerToUse = setupCompileInfo.CompilerToUse?.ToLowerInvariant()
+                CompilerToUse = setupCompileInfo.CompilerToUse?.ToLowerInvariant(),
             };
         }
 

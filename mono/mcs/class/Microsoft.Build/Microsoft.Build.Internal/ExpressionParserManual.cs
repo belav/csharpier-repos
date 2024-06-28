@@ -143,7 +143,7 @@ namespace Microsoft.Build.Internal.Expressions
                     ret = new QuotedExpression()
                     {
                         QuoteChar = quoteChar,
-                        Contents = Parse(start, last)
+                        Contents = Parse(start, last),
                     };
                     start = last + 1;
                     return ret;
@@ -258,7 +258,7 @@ namespace Microsoft.Build.Internal.Expressions
                 var access = new PropertyAccess()
                 {
                     Name = new NameToken() { Name = name },
-                    TargetType = PropertyTargetType.Object
+                    TargetType = PropertyTargetType.Object,
                 };
                 if (parenAt > 0)
                 { // method arguments
@@ -281,7 +281,7 @@ namespace Microsoft.Build.Internal.Expressions
                 {
                     Name = new NameToken() { Name = name },
                     TargetType = PropertyTargetType.Object,
-                    Target = dotAt < 0 ? null : Parse(start, dotAt).FirstOrDefault()
+                    Target = dotAt < 0 ? null : Parse(start, dotAt).FirstOrDefault(),
                 };
                 if (parenAt > 0)
                 { // method arguments
@@ -316,7 +316,7 @@ namespace Microsoft.Build.Internal.Expressions
                 {
                     Name = new NameToken() { Name = member },
                     TargetType = PropertyTargetType.Type,
-                    Target = new StringLiteral() { Value = new NameToken() { Name = type } }
+                    Target = new StringLiteral() { Value = new NameToken() { Name = type } },
                 };
                 if (parenAt > 0)
                 { // method arguments
@@ -367,8 +367,8 @@ namespace Microsoft.Build.Internal.Expressions
                     Application = new ItemApplication()
                     {
                         Name = new NameToken() { Name = name },
-                        Expressions = Parse(idx + 2, end)
-                    }
+                        Expressions = Parse(idx + 2, end),
+                    },
                 };
             }
             else
@@ -376,7 +376,7 @@ namespace Microsoft.Build.Internal.Expressions
                 string name = source.Substring(start, end - start);
                 return new ItemAccessExpression()
                 {
-                    Application = new ItemApplication() { Name = new NameToken() { Name = name } }
+                    Application = new ItemApplication() { Name = new NameToken() { Name = name } },
                 };
             }
         }
@@ -392,7 +392,7 @@ namespace Microsoft.Build.Internal.Expressions
             var access = new MetadataAccess()
             {
                 ItemType = item == null ? null : new NameToken() { Column = start, Name = item },
-                Metadata = new NameToken() { Column = idx < 0 ? start : idx + 1, Name = meta }
+                Metadata = new NameToken() { Column = idx < 0 ? start : idx + 1, Name = meta },
             };
             return new MetadataAccessExpression() { Access = access };
         }

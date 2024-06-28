@@ -540,7 +540,7 @@ namespace System.Net.Http.Formatting
                         {
                             FormattingUtilities.EnumerableInterfaceGenericType.MakeGenericType(
                                 elementType
-                            )
+                            ),
                         }
                     );
                     _delegatingEnumerableConstructorCache.TryAdd(

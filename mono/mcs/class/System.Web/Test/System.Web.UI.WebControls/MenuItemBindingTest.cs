@@ -64,7 +64,7 @@ namespace MonoTests.System.Web.UI.WebControls
             { "PopOutImageUrl", TO_STRING_EMPTY_VALUE },
             { "PopOutImageUrlField", TO_STRING_EMPTY_VALUE },
             { "SeparatorImageUrl", TO_STRING_EMPTY_VALUE },
-            { "SeparatorImageUrlField", TO_STRING_EMPTY_VALUE }
+            { "SeparatorImageUrlField", TO_STRING_EMPTY_VALUE },
         };
 
         [Test]

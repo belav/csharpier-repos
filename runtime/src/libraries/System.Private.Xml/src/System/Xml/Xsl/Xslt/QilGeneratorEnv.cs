@@ -426,14 +426,14 @@ namespace System.Xml.Xsl.Xslt
         private static readonly XmlTypeCode[] s_argFnDocument =
         {
             XmlTypeCode.Item,
-            XmlTypeCode.Node
+            XmlTypeCode.Node,
         };
         private static readonly XmlTypeCode[] s_argFnKey = { XmlTypeCode.String, XmlTypeCode.Item };
         private static readonly XmlTypeCode[] s_argFnFormatNumber =
         {
             XmlTypeCode.Double,
             XmlTypeCode.String,
-            XmlTypeCode.String
+            XmlTypeCode.String,
         };
 
         public static Dictionary<string, FunctionInfo> FunctionTable = CreateFunctionTable();

@@ -20,7 +20,7 @@ public static class CosmosDbContextOptionsBuilderExtensions
                         new HttpClientHandler
                         {
                             ServerCertificateCustomValidationCallback =
-                                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                         }
                     )
             )

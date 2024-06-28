@@ -19,7 +19,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { Emails = new[] { "foo@bar.com" } })
+            CustomData = JObject.FromObject(new { Emails = new[] { "foo@bar.com" } }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -40,7 +40,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" })
+            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -61,7 +61,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" })
+            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -85,7 +85,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { Email = "foo@bar.com" })
+            CustomData = JObject.FromObject(new { Email = "foo@bar.com" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -106,7 +106,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { FirstName = "Foo", LastName = "Bar" })
+            CustomData = JObject.FromObject(new { FirstName = "Foo", LastName = "Bar" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -127,7 +127,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { FirstName = "Bar" })
+            CustomData = JObject.FromObject(new { FirstName = "Bar" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -189,7 +189,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" })
+            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 
@@ -210,7 +210,7 @@ public class JsonPatchDocumentJObjectTest
         // Arrange
         var model = new ObjectWithJObject
         {
-            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" })
+            CustomData = JObject.FromObject(new { Email = "foo@bar.com", Name = "Bar" }),
         };
         var patch = new JsonPatchDocument<ObjectWithJObject>();
 

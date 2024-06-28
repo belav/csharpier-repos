@@ -46,7 +46,7 @@ namespace Mono.Btls
         Title,
         Surname,
         GivenName,
-        Initial
+        Initial,
     }
 }
 #endif

@@ -27,7 +27,7 @@ public class ControllerActionInvokerProviderTest
             {
                 MaxValidationDepth = 1,
                 MaxModelBindingRecursionDepth = 2,
-                MaxModelValidationErrors = 3
+                MaxModelValidationErrors = 3,
             }
         );
 

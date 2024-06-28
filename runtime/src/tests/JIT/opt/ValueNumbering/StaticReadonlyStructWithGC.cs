@@ -44,7 +44,7 @@ public class StaticReadonlyStructWithGC
             E = () => 42,
             F = new MyStruct3 { A = typeof(double), B = typeof(string) },
             G = new int[0],
-            H = null
+            H = null,
         };
 
     [MethodImpl(MethodImplOptions.NoInlining)]

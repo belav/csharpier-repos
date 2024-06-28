@@ -336,38 +336,38 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
             yield return new[]
             {
                 "ActionLink_ActionOnSameController",
-                @"<a href=""/Links/Details"">linktext</a>"
+                @"<a href=""/Links/Details"">linktext</a>",
             };
             yield return new[]
             {
                 "ActionLink_ActionOnOtherController",
-                @"<a href=""/Products/Details?print=true"">linktext</a>"
+                @"<a href=""/Products/Details?print=true"">linktext</a>",
             };
             yield return new[]
             {
                 "ActionLink_SecurePage_ImplicitHostName",
-                @"<a href=""https://localhost/Products/Details?print=true"">linktext</a>"
+                @"<a href=""https://localhost/Products/Details?print=true"">linktext</a>",
             };
             yield return new[]
             {
                 "ActionLink_HostNameFragmentAttributes",
                 // note: attributes are alphabetically ordered
-                @"<a href=""https://www.contoso.com:9000/Products/Details?print=true#details"" p1=""p1-value"">linktext</a>"
+                @"<a href=""https://www.contoso.com:9000/Products/Details?print=true#details"" p1=""p1-value"">linktext</a>",
             };
             yield return new[]
             {
                 "RouteLink_RestLinkToOtherController",
-                @"<a href=""/api/orders/10"">linktext</a>"
+                @"<a href=""/api/orders/10"">linktext</a>",
             };
             yield return new[]
             {
                 "RouteLink_SecureApi_ImplicitHostName",
-                @"<a href=""https://localhost/api/orders/10"">linktext</a>"
+                @"<a href=""https://localhost/api/orders/10"">linktext</a>",
             };
             yield return new[]
             {
                 "RouteLink_HostNameFragmentAttributes",
-                @"<a href=""https://www.contoso.com:9000/api/orders/10?print=True#details"" p1=""p1-value"">linktext</a>"
+                @"<a href=""https://www.contoso.com:9000/api/orders/10?print=True#details"" p1=""p1-value"">linktext</a>",
             };
         }
     }
@@ -577,11 +577,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAttribute_CanBeAppliedToControllers()
     {
         // Arrange
-        var formContent = new Dictionary<string, string>
-        {
-            { "Name", "TestName" },
-            { "Id", "10" },
-        };
+        var formContent = new Dictionary<string, string> { { "Name", "TestName" }, { "Id", "10" } };
 
         // Act
         var response = await Client.PostAsync(
@@ -635,10 +631,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAttribute_DoesNotCausePropertiesWithBindNeverAttributeToBeModelBound()
     {
         // Arrange
-        var formContent = new Dictionary<string, string>
-        {
-            { "BindNeverProperty", "Hello world" },
-        };
+        var formContent = new Dictionary<string, string> { { "BindNeverProperty", "Hello world" } };
 
         // Act
         var response = await Client.PostAsync(
@@ -661,7 +654,7 @@ public class BasicTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWitho
     public async Task BindPropertiesAttributeWithSupportsGet_BindsOnNonGet()
     {
         // Arrange
-        var formContent = new Dictionary<string, string> { { "Name", "TestName" }, };
+        var formContent = new Dictionary<string, string> { { "Name", "TestName" } };
 
         // Act
         var response = await Client.PostAsync(

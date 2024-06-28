@@ -25,7 +25,7 @@ namespace System.ComponentModel.Tests
             {
                 BrowsableAttribute.Yes,
                 new BrowsableAttribute(false),
-                false
+                false,
             };
             yield return new object[] { BrowsableAttribute.Yes, BrowsableAttribute.No, false };
 

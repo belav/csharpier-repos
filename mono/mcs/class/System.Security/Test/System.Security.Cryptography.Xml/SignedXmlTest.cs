@@ -1634,7 +1634,7 @@ namespace MonoTests.System.Security.Cryptography.Xml
             0xcf,
             0x69,
             0x31,
-            0x18
+            0x18,
         };
 
         private static byte[] _pkcs12 = new byte[]
@@ -3063,7 +3063,7 @@ namespace MonoTests.System.Security.Cryptography.Xml
             0x02,
             0x02,
             0x07,
-            0xd0
+            0xd0,
         };
 
         public SignedXml SignHMAC(string uri, KeyedHashAlgorithm mac, bool ok)

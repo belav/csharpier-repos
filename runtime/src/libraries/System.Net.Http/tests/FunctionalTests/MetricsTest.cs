@@ -75,7 +75,7 @@ namespace System.Net.Http.Functional.Tests
                 {
                     1 => "1.1",
                     2 => "2",
-                    _ => "3"
+                    _ => "3",
                 };
 
         protected static void VerifyRequestDuration(
@@ -586,7 +586,7 @@ namespace System.Net.Http.Functional.Tests
         {
             Empty,
             ContentLength,
-            TransferEncodingChunked
+            TransferEncodingChunked,
         }
 
         [Theory]
@@ -658,7 +658,7 @@ namespace System.Net.Http.Functional.Tests
                             content: content,
                             additionalHeaders: new[]
                             {
-                                new HttpHeaderData("Content-Length", $"{contentLength}")
+                                new HttpHeaderData("Content-Length", $"{contentLength}"),
                             }
                         );
                     }
@@ -669,7 +669,7 @@ namespace System.Net.Http.Functional.Tests
                             content: content,
                             additionalHeaders: new[]
                             {
-                                new HttpHeaderData("Transfer-Encoding", "chunked")
+                                new HttpHeaderData("Transfer-Encoding", "chunked"),
                             }
                         );
                     }
@@ -978,7 +978,7 @@ namespace System.Net.Http.Functional.Tests
                         :
                         [
                             typeof(TaskCanceledException).FullName,
-                            typeof(OperationCanceledException).FullName
+                            typeof(OperationCanceledException).FullName,
                         ];
 
                     Measurement<double> m = Assert.Single(recorder.GetMeasurements());
@@ -1220,7 +1220,7 @@ namespace System.Net.Http.Functional.Tests
                         acceptedErrorTypes:
                         [
                             typeof(TaskCanceledException).FullName,
-                            "response_ended"
+                            "response_ended",
                         ]
                     );
                 },
@@ -1267,7 +1267,7 @@ namespace System.Net.Http.Functional.Tests
                         new(HttpMethod.Get, server.Address)
                         {
                             Version = HttpVersion.Version20,
-                            VersionPolicy = HttpVersionPolicy.RequestVersionOrLower
+                            VersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
                         };
 
                     Task<HttpResponseMessage> clientTask = SendAsync(client, request);
@@ -1356,7 +1356,7 @@ namespace System.Net.Http.Functional.Tests
                                     using HttpRequestMessage request =
                                         new(HttpMethod.Get, originalUri)
                                         {
-                                            Version = HttpVersion.Version20
+                                            Version = HttpVersion.Version20,
                                         };
 
                                     Task clientTask = SendAsync(client, request);
@@ -1364,7 +1364,7 @@ namespace System.Net.Http.Functional.Tests
                                         HttpStatusCode.Redirect,
                                         new[]
                                         {
-                                            new HttpHeaderData("Location", redirectUri.AbsoluteUri)
+                                            new HttpHeaderData("Location", redirectUri.AbsoluteUri),
                                         }
                                     );
 

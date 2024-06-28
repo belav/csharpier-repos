@@ -387,7 +387,7 @@ namespace System.Web.Mvc.Html.Test
                                     passedHtmlHelper = _htmlHelper;
                                     return "content";
                                 }
-                            }
+                            },
                         };
                     }
                 );
@@ -422,7 +422,7 @@ namespace System.Web.Mvc.Html.Test
                             {
                                 passedHtmlHelper = _htmlHelper;
                                 return "content";
-                            }
+                            },
                         }
                     );
 
@@ -1815,7 +1815,7 @@ namespace System.Web.Mvc.Html.Test
                 {
                     FormattedModelValue = metadata.Model,
                     HtmlFieldPrefix = "FieldPrefix",
-                }
+                },
             };
         }
 

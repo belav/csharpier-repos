@@ -64,6 +64,6 @@ namespace System.ComponentModel
         NonEditPosition = -54,
 
         // Position not in the range of indexes.
-        PositionOutOfRange = -55
+        PositionOutOfRange = -55,
     }
 }

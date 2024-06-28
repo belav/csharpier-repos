@@ -62,7 +62,7 @@ namespace Mono.Directory.LDAP
     {
         Base = 0x0000,
         OneLevel = 0x0001,
-        SubTree = 0x0002
+        SubTree = 0x0002,
     }
 
     public class LDAP

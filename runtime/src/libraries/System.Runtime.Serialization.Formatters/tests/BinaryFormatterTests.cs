@@ -292,7 +292,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             // For this test 9.98.7.987 is being used
             var obj = new GenericTypeWithArg<SomeType>()
             {
-                Test = new SomeType() { SomeField = 9 }
+                Test = new SomeType() { SomeField = 9 },
             };
             string serializedObj =
                 @"AAEAAAD/////AQAAAAAAAAAMAgAAAHBTeXN0ZW0uUnVudGltZS5TZXJpYWxpemF0aW9uLkZvcm1hdHRlcnMuVGVzdHMsIFZlcnNpb249NS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1jYzdiMTNmZmNkMmRkZDUxBQEAAADuAVN5c3RlbS5SdW50aW1lLlNlcmlhbGl6YXRpb24uRm9ybWF0dGVycy5UZXN0cy5HZW5lcmljVHlwZVdpdGhBcmdgMVtbU3lzdGVtLlJ1bnRpbWUuU2VyaWFsaXphdGlvbi5Gb3JtYXR0ZXJzLlRlc3RzLlNvbWVUeXBlLCBTeXN0ZW0uUnVudGltZS5TZXJpYWxpemF0aW9uLkZvcm1hdHRlcnMuVGVzdHMsIFZlcnNpb249NS4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1jYzdiMTNmZmNkMmRkZDUxXV0BAAAABFRlc3QENlN5c3RlbS5SdW50aW1lLlNlcmlhbGl6YXRpb24uRm9ybWF0dGVycy5UZXN0cy5Tb21lVHlwZQIAAAACAAAACQMAAAAFAwAAADZTeXN0ZW0uUnVudGltZS5TZXJpYWxpemF0aW9uLkZvcm1hdHRlcnMuVGVzdHMuU29tZVR5cGUBAAAACVNvbWVGaWVsZAAIAgAAAAkAAAAL";
@@ -367,7 +367,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             {
                 AssemblyFormat = assemblyFormat,
                 FilterLevel = filterLevel,
-                TypeFormat = typeFormat
+                TypeFormat = typeFormat,
             };
             using (var s = new MemoryStream())
             {
@@ -544,7 +544,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             f = new BinaryFormatter() { AssemblyFormat = style };
             f.Binder = new DelegateBinder
             {
-                BindToTypeDelegate = (_, __) => typeof(Version2ClassWithoutOptionalField)
+                BindToTypeDelegate = (_, __) => typeof(Version2ClassWithoutOptionalField),
             };
             if (exceptionExpected)
             {
@@ -571,7 +571,7 @@ namespace System.Runtime.Serialization.Formatters.Tests
             f = new BinaryFormatter() { AssemblyFormat = style };
             f.Binder = new DelegateBinder
             {
-                BindToTypeDelegate = (_, __) => typeof(Version2ClassWithOptionalField)
+                BindToTypeDelegate = (_, __) => typeof(Version2ClassWithOptionalField),
             };
             var result = (Version2ClassWithOptionalField)f.Deserialize(s);
             Assert.NotNull(result);
@@ -924,33 +924,33 @@ namespace System.Runtime.Serialization.Formatters.Tests
             yield return new object[]
             {
                 "NullableEqualityComparer`1",
-                EqualityComparer<byte?>.Default
+                EqualityComparer<byte?>.Default,
             };
             yield return new object[]
             {
                 "NullableEqualityComparer`1",
-                EqualityComparer<int?>.Default
+                EqualityComparer<int?>.Default,
             };
             yield return new object[]
             {
                 "NullableEqualityComparer`1",
-                EqualityComparer<float?>.Default
+                EqualityComparer<float?>.Default,
             };
             yield return new object[]
             {
                 "NullableEqualityComparer`1",
-                EqualityComparer<Guid?>.Default
+                EqualityComparer<Guid?>.Default,
             }; // implements IEquatable<>
 
             yield return new object[]
             {
                 "ObjectEqualityComparer`1",
-                EqualityComparer<MyStruct?>.Default
+                EqualityComparer<MyStruct?>.Default,
             }; // doesn't implement IEquatable<>
             yield return new object[]
             {
                 "ObjectEqualityComparer`1",
-                EqualityComparer<DayOfWeek?>.Default
+                EqualityComparer<DayOfWeek?>.Default,
             };
 
             yield return new object[] { "NullableComparer`1", Comparer<byte?>.Default };

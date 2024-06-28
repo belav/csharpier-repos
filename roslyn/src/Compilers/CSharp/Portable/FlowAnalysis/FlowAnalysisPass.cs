@@ -140,7 +140,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         newStatements
                     )
                     {
-                        WasCompilerGenerated = true
+                        WasCompilerGenerated = true,
                     };
 #if DEBUG
                     // It should not be necessary to repeat analysis after adding this node, because adding a trailing

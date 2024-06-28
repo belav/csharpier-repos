@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.Formatting
                 {
                     PlaceSystemNamespaceFirst = placeSystemNamespaceFirst,
                     SeparateImportDirectiveGroups = separateImportDirectiveGroups,
-                    NewLine = newLine
+                    NewLine = newLine,
                 }
             ) { }
 

@@ -1221,9 +1221,8 @@ namespace System.Net.Security
                 inUnmanagedBuffer.pvBuffer =
                     inSecBuffer.unmanagedToken != null
                         ? inSecBuffer.unmanagedToken.DangerousGetHandle()
-                        : inSecBuffer.token == null || inSecBuffer.token.Length == 0
-                            ? IntPtr.Zero
-                            : (IntPtr)(pinnedInSecBufferToken + inSecBuffer.offset);
+                    : inSecBuffer.token == null || inSecBuffer.token.Length == 0 ? IntPtr.Zero
+                    : (IntPtr)(pinnedInSecBufferToken + inSecBuffer.offset);
 
                 Interop.SspiCli.CredHandle contextHandle =
                     refContext != null ? refContext._handle : default;

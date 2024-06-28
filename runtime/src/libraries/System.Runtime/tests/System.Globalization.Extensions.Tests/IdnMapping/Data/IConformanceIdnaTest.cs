@@ -7,7 +7,7 @@ namespace System.Globalization.Tests
     {
         Transitional,
         Nontransitional,
-        Both
+        Both,
     };
 
     public interface IConformanceIdnaTest

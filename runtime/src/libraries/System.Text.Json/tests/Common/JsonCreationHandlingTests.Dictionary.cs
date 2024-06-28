@@ -75,7 +75,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -145,7 +145,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -157,7 +157,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -204,7 +204,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -280,7 +280,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -298,7 +298,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -368,7 +368,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -441,7 +441,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -456,7 +456,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -501,7 +501,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -574,7 +574,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -589,7 +589,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -647,7 +647,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -720,7 +720,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -732,7 +732,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -782,7 +782,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -861,7 +861,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -879,7 +879,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1217,7 +1217,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1290,7 +1290,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1302,7 +1302,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1351,7 +1351,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1430,7 +1430,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1448,7 +1448,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1534,7 +1534,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         {
             ["a"] = 1,
             ["b"] = 2,
-            ["c"] = 3
+            ["c"] = 3,
         };
     }
 
@@ -1615,7 +1615,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         {
             ["a"] = 1,
             ["b"] = 2,
-            ["c"] = 3
+            ["c"] = 3,
         };
     }
 
@@ -1628,7 +1628,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
         {
             ["a"] = 1,
             ["b"] = 2,
-            ["c"] = 3
+            ["c"] = 3,
         };
     }
 
@@ -1695,7 +1695,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1765,7 +1765,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1777,7 +1777,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1822,7 +1822,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1895,7 +1895,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1910,7 +1910,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -1979,7 +1979,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -2051,7 +2051,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -2065,7 +2065,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -2112,7 +2112,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -2188,7 +2188,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 
@@ -2206,7 +2206,7 @@ public abstract partial class JsonCreationHandlingTests : SerializerTests
             {
                 ["a"] = 1,
                 ["b"] = 2,
-                ["c"] = 3
+                ["c"] = 3,
             };
     }
 

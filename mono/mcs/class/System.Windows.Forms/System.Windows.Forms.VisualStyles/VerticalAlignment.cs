@@ -32,6 +32,6 @@ namespace System.Windows.Forms.VisualStyles
     {
         Top = 0,
         Center = 1,
-        Bottom = 2
+        Bottom = 2,
     }
 }

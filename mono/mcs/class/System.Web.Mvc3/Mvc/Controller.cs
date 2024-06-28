@@ -167,7 +167,7 @@
             {
                 Content = content,
                 ContentType = contentType,
-                ContentEncoding = contentEncoding
+                ContentEncoding = contentEncoding,
             };
         }
 
@@ -232,7 +232,7 @@
         {
             return new FileContentResult(fileContents, contentType)
             {
-                FileDownloadName = fileDownloadName
+                FileDownloadName = fileDownloadName,
             };
         }
 
@@ -253,7 +253,7 @@
         {
             return new FileStreamResult(fileStream, contentType)
             {
-                FileDownloadName = fileDownloadName
+                FileDownloadName = fileDownloadName,
             };
         }
 
@@ -274,7 +274,7 @@
         {
             return new FilePathResult(fileName, contentType)
             {
-                FileDownloadName = fileDownloadName
+                FileDownloadName = fileDownloadName,
             };
         }
 
@@ -377,7 +377,7 @@
                 Data = data,
                 ContentType = contentType,
                 ContentEncoding = contentEncoding,
-                JsonRequestBehavior = behavior
+                JsonRequestBehavior = behavior,
             };
         }
 
@@ -436,7 +436,7 @@
             {
                 ViewName = viewName,
                 ViewData = ViewData,
-                TempData = TempData
+                TempData = TempData,
             };
         }
 
@@ -830,7 +830,7 @@
                 ModelName = prefix,
                 ModelState = ModelState,
                 PropertyFilter = propertyFilter,
-                ValueProvider = valueProvider
+                ValueProvider = valueProvider,
             };
             binder.BindModel(ControllerContext, bindingContext);
             return ModelState.IsValid;
@@ -1059,7 +1059,7 @@
                 ViewName = viewName,
                 MasterName = masterName,
                 ViewData = ViewData,
-                TempData = TempData
+                TempData = TempData,
             };
         }
 
@@ -1094,7 +1094,7 @@
             {
                 View = view,
                 ViewData = ViewData,
-                TempData = TempData
+                TempData = TempData,
             };
         }
 

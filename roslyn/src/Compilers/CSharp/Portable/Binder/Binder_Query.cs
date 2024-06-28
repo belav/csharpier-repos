@@ -1012,11 +1012,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var x1Expression = new BoundParameter(node, lambdaSymbol.Parameters[0])
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 var x2Expression = new BoundParameter(node, lambdaSymbol.Parameters[1])
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
                 var construction = MakePair(
                     node,
@@ -1081,7 +1081,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 var xExpression = new BoundParameter(let, lambdaSymbol.Parameters[0])
                 {
-                    WasCompilerGenerated = true
+                    WasCompilerGenerated = true,
                 };
 
                 lambdaBodyBinder = lambdaBodyBinder.GetRequiredBinder(let.Expression);
@@ -1417,7 +1417,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 hasErrors: false
             )
             {
-                WasCompilerGenerated = true
+                WasCompilerGenerated = true,
             };
             state.SetUnboundLambda(lambda);
             return lambda;

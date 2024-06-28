@@ -157,7 +157,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 {
                     Hierarchy = hierarchy,
                     FilePath = hierarchy.TryGetProjectFilePath(),
-                    ProjectGuid = projectGuid
+                    ProjectGuid = projectGuid,
                 };
 
                 project = _threadingContext.JoinableTaskFactory.Run(

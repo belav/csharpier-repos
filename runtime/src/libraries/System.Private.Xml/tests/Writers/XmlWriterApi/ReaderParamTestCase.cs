@@ -9,7 +9,7 @@ namespace System.Xml.XmlWriterApiTests
 {
     public enum ReaderType
     {
-        CoreReader
+        CoreReader,
     }
 
     public partial class ReaderParamTestCase

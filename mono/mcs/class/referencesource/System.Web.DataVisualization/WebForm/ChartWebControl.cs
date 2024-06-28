@@ -68,7 +68,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Images is saved in temp. file using ImageLocation specified.
         /// </summary>
-        UseImageLocation
+        UseImageLocation,
     }
 
     /// <summary>
@@ -140,7 +140,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Chart image map is rendered.
         /// </summary>
-        ImageMap
+        ImageMap,
     }
 
     #endregion
@@ -3285,6 +3285,6 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Not used
         /// </summary>
         [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
-        Inherit = No
+        Inherit = No,
     }
 }

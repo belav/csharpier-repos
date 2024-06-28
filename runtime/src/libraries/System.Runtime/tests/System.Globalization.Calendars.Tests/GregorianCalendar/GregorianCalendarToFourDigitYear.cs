@@ -23,7 +23,7 @@ namespace System.Globalization.Tests
                 GregorianCalendarTypes.MiddleEastFrench,
                 GregorianCalendarTypes.TransliteratedEnglish,
                 GregorianCalendarTypes.TransliteratedFrench,
-                GregorianCalendarTypes.USEnglish
+                GregorianCalendarTypes.USEnglish,
             };
 
             foreach (GregorianCalendarTypes calendarType in calendarTypes)
@@ -32,7 +32,7 @@ namespace System.Globalization.Tests
                 yield return new object[]
                 {
                     calendarType,
-                    s_randomDataGenerator.GetInt32(-55) % (MaxTwoDigitYear + 1)
+                    s_randomDataGenerator.GetInt32(-55) % (MaxTwoDigitYear + 1),
                 };
 
                 // Min two digit year

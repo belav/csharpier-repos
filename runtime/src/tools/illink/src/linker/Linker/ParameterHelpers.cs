@@ -21,10 +21,7 @@ namespace Mono.Linker
             Code code = operation.OpCode.Code;
             return code switch
             {
-                Code.Ldarg_0
-                or Code.Ldarg_1
-                or Code.Ldarg_2
-                or Code.Ldarg_3 =>
+                Code.Ldarg_0 or Code.Ldarg_1 or Code.Ldarg_2 or Code.Ldarg_3 =>
                     GetLdargParamIndex(),
 
                 Code.Starg
@@ -32,13 +29,11 @@ namespace Mono.Linker
                 or Code.Starg_S
                 or Code.Ldarg_S
                 or Code.Ldarga
-                or Code.Ldarga_S =>
-                    GetParamSequence(),
+                or Code.Ldarga_S => GetParamSequence(),
 
-                _ =>
-                    throw new ArgumentException(
-                        $"{nameof(GetParameterIndex)} expected an ldarg or starg instruction, got {operation.OpCode.Name}"
-                    )
+                _ => throw new ArgumentException(
+                    $"{nameof(GetParameterIndex)} expected an ldarg or starg instruction, got {operation.OpCode.Name}"
+                ),
             };
 
             ParameterIndex GetLdargParamIndex()

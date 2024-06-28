@@ -148,7 +148,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 s_codeAnalysisPrefixList,
                 s_explicitlyIgnoredAssemblyList,
                 s_assembliesIgnoredByNameList,
-                loadedAssembliesList
+                loadedAssembliesList,
             };
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -192,7 +192,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         {
                             conflict.AnalyzerFilePath1,
                             conflict.AnalyzerFilePath2,
-                            conflict.Identity.ToString()
+                            conflict.Identity.ToString(),
                         };
                         if (
                             DiagnosticData.TryCreate(
@@ -215,7 +215,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                         var messageArguments = new string[]
                         {
                             missingDependency.AnalyzerPath,
-                            missingDependency.DependencyIdentity.ToString()
+                            missingDependency.DependencyIdentity.ToString(),
                         };
                         if (
                             DiagnosticData.TryCreate(

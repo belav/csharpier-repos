@@ -217,7 +217,7 @@ namespace System.Web.WebPages.Razor.Test
             RazorWebSectionGroup config = new RazorWebSectionGroup()
             {
                 Host = new HostSection() { FactoryType = null },
-                Pages = null
+                Pages = null,
             };
 
             // Act
@@ -238,7 +238,7 @@ namespace System.Web.WebPages.Razor.Test
             RazorWebSectionGroup config = new RazorWebSectionGroup()
             {
                 Host = new HostSection() { FactoryType = typeof(TestFactory).FullName },
-                Pages = null
+                Pages = null,
             };
             WebRazorHostFactory.TypeFactory = name =>
                 Assembly.GetExecutingAssembly().GetType(name, throwOnError: false);
@@ -261,7 +261,7 @@ namespace System.Web.WebPages.Razor.Test
             RazorWebSectionGroup config = new RazorWebSectionGroup()
             {
                 Host = new HostSection() { FactoryType = "Foo" },
-                Pages = null
+                Pages = null,
             };
             WebRazorHostFactory.TypeFactory = name =>
                 Assembly.GetExecutingAssembly().GetType(name, throwOnError: false);
@@ -280,7 +280,7 @@ namespace System.Web.WebPages.Razor.Test
             RazorWebSectionGroup config = new RazorWebSectionGroup()
             {
                 Host = null,
-                Pages = new RazorPagesSection() { PageBaseType = "System.Foo.Bar" }
+                Pages = new RazorPagesSection() { PageBaseType = "System.Foo.Bar" },
             };
             WebRazorHostFactory.TypeFactory = name =>
                 Assembly.GetExecutingAssembly().GetType(name, throwOnError: false);
@@ -303,7 +303,7 @@ namespace System.Web.WebPages.Razor.Test
             RazorWebSectionGroup config = new RazorWebSectionGroup()
             {
                 Host = null,
-                Pages = new RazorPagesSection() { PageBaseType = "System.Foo.Bar" }
+                Pages = new RazorPagesSection() { PageBaseType = "System.Foo.Bar" },
             };
             WebRazorHostFactory.TypeFactory = name =>
                 Assembly.GetExecutingAssembly().GetType(name, throwOnError: false);
@@ -326,7 +326,7 @@ namespace System.Web.WebPages.Razor.Test
             RazorWebSectionGroup config = new RazorWebSectionGroup()
             {
                 Host = null,
-                Pages = new RazorPagesSection() { PageBaseType = "System.Foo.Bar" }
+                Pages = new RazorPagesSection() { PageBaseType = "System.Foo.Bar" },
             };
             WebRazorHostFactory.TypeFactory = name =>
                 Assembly.GetExecutingAssembly().GetType(name, throwOnError: false);
@@ -354,9 +354,9 @@ namespace System.Web.WebPages.Razor.Test
                     Namespaces = new NamespaceCollection()
                     {
                         new NamespaceInfo("System"),
-                        new NamespaceInfo("Foo")
-                    }
-                }
+                        new NamespaceInfo("Foo"),
+                    },
+                },
             };
             WebRazorHostFactory.TypeFactory = name =>
                 Assembly.GetExecutingAssembly().GetType(name, throwOnError: false);

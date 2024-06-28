@@ -1036,7 +1036,7 @@ namespace System.Security.Cryptography.Pkcs.Tests
             using (X509Certificate2 cert2 = Certificates.DHKeyAgree1.GetCertificate())
             {
                 firstSigner.ComputeCounterSignature(
-                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None, }
+                    new CmsSigner(cert) { IncludeOption = X509IncludeOption.None }
                 );
 
                 CmsSigner counterSigner;

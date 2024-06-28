@@ -112,7 +112,7 @@ namespace System.Web.Caching
         /// <devdoc>
         ///    <para>The default value is Normal.</para>
         /// </devdoc>
-        Default = Normal
+        Default = Normal,
     }
 
     /// <devdoc>
@@ -140,7 +140,7 @@ namespace System.Web.Caching
         ///    <para>The item was removed from the cache because a file or key dependency was
         ///       changed.</para>
         /// </devdoc>
-        DependencyChanged
+        DependencyChanged,
     }
 
     /// <devdoc>
@@ -162,7 +162,7 @@ namespace System.Web.Caching
         ///    <para>The item needs to be updated because a file or key dependency was
         ///       changed.</para>
         /// </devdoc>
-        DependencyChanged
+        DependencyChanged,
     }
 
     /// <devdoc>
@@ -522,7 +522,7 @@ namespace System.Web.Caching
                 {
                     Dependencies = dependencies,
                     AbsoluteExpiration = utcAbsoluteExpiration,
-                    SlidingExpiration = slidingExpiration
+                    SlidingExpiration = slidingExpiration,
                 }
             );
         }
@@ -549,7 +549,7 @@ namespace System.Web.Caching
                     AbsoluteExpiration = utcAbsoluteExpiration,
                     SlidingExpiration = slidingExpiration,
                     Priority = priority,
-                    OnRemovedCallback = onRemoveCallback
+                    OnRemovedCallback = onRemoveCallback,
                 }
             );
         }
@@ -610,7 +610,7 @@ namespace System.Web.Caching
                     AbsoluteExpiration = utcAbsoluteExpiration,
                     SlidingExpiration = slidingExpiration,
                     Priority = CacheItemPriority.NotRemovable,
-                    OnRemovedCallback = Cache.s_sentinelRemovedCallback
+                    OnRemovedCallback = Cache.s_sentinelRemovedCallback,
                 }
             );
         }
@@ -637,7 +637,7 @@ namespace System.Web.Caching
                     AbsoluteExpiration = utcAbsoluteExpiration,
                     SlidingExpiration = slidingExpiration,
                     Priority = priority,
-                    OnRemovedCallback = onRemoveCallback
+                    OnRemovedCallback = onRemoveCallback,
                 }
             );
         }

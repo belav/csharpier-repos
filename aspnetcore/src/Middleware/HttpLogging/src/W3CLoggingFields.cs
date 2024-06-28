@@ -170,5 +170,5 @@ public enum W3CLoggingFields : long
         | Referer
         | ConnectionInfoFields
         | UserName
-        | Cookie
+        | Cookie,
 }

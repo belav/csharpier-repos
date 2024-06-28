@@ -37,6 +37,6 @@ namespace System.Windows.Forms
         ErrorIcon = 16,
         Focus = 32,
         SelectionBackground = 64,
-        All = 127
+        All = 127,
     }
 }

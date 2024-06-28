@@ -132,7 +132,7 @@ public sealed class EntityFrameworkEventSource : EventSource
                 () => Interlocked.Read(ref _activeDbContexts)
             )
             {
-                DisplayName = "Active DbContexts"
+                DisplayName = "Active DbContexts",
             };
 
             _totalQueriesCounter ??= new PollingCounter(
@@ -141,7 +141,7 @@ public sealed class EntityFrameworkEventSource : EventSource
                 () => Interlocked.Read(ref _totalQueries)
             )
             {
-                DisplayName = "Queries (Total)"
+                DisplayName = "Queries (Total)",
             };
 
             _queriesPerSecondCounter ??= new IncrementingPollingCounter(
@@ -151,7 +151,7 @@ public sealed class EntityFrameworkEventSource : EventSource
             )
             {
                 DisplayName = "Queries",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
             _totalSaveChangesCounter ??= new PollingCounter(
@@ -160,7 +160,7 @@ public sealed class EntityFrameworkEventSource : EventSource
                 () => Interlocked.Read(ref _totalSaveChanges)
             )
             {
-                DisplayName = "SaveChanges (Total)"
+                DisplayName = "SaveChanges (Total)",
             };
 
             _saveChangesPerSecondCounter ??= new IncrementingPollingCounter(
@@ -170,7 +170,7 @@ public sealed class EntityFrameworkEventSource : EventSource
             )
             {
                 DisplayName = "SaveChanges",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
             _compiledQueryCacheHitRateCounter ??= new PollingCounter(
@@ -180,7 +180,7 @@ public sealed class EntityFrameworkEventSource : EventSource
             )
             {
                 DisplayName = "Query Cache Hit Rate",
-                DisplayUnits = "%"
+                DisplayUnits = "%",
             };
 
             _totalExecutionStrategyOperationFailuresCounter ??= new PollingCounter(
@@ -189,7 +189,7 @@ public sealed class EntityFrameworkEventSource : EventSource
                 () => Interlocked.Read(ref _totalExecutionStrategyOperationFailures)
             )
             {
-                DisplayName = "Execution Strategy Operation Failures (Total)"
+                DisplayName = "Execution Strategy Operation Failures (Total)",
             };
 
             _executionStrategyOperationFailuresPerSecondCounter ??= new IncrementingPollingCounter(
@@ -199,7 +199,7 @@ public sealed class EntityFrameworkEventSource : EventSource
             )
             {
                 DisplayName = "Execution Strategy Operation Failures",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
             _totalOptimisticConcurrencyFailuresCounter ??= new PollingCounter(
@@ -208,7 +208,7 @@ public sealed class EntityFrameworkEventSource : EventSource
                 () => Interlocked.Read(ref _totalOptimisticConcurrencyFailures)
             )
             {
-                DisplayName = "Optimistic Concurrency Failures (Total)"
+                DisplayName = "Optimistic Concurrency Failures (Total)",
             };
 
             _optimisticConcurrencyFailuresPerSecondCounter ??= new IncrementingPollingCounter(
@@ -218,7 +218,7 @@ public sealed class EntityFrameworkEventSource : EventSource
             )
             {
                 DisplayName = "Optimistic Concurrency Failures",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
         }
     }

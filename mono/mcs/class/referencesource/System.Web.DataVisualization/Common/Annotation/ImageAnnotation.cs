@@ -55,7 +55,7 @@ namespace System.Web.UI.DataVisualization.Charting
     /// <summary>
     /// <b>ImageAnnotation</b> is a class that represents an image annotation.
     /// </summary>
-    [SRDescription("DescriptionAttributeImageAnnotation_ImageAnnotation"),]
+    [SRDescription("DescriptionAttributeImageAnnotation_ImageAnnotation")]
 #if ASPPERM_35
     [AspNetHostingPermission(
         System.Security.Permissions.SecurityAction.InheritanceDemand,

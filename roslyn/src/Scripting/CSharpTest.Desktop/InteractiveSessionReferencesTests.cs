@@ -195,7 +195,7 @@ new System.Data.DataSet()
                     ),
                     files: new Dictionary<string, PortableExecutableReference>
                     {
-                        { @"C:\dir\x.dll", (PortableExecutableReference)SystemCoreRef }
+                        { @"C:\dir\x.dll", (PortableExecutableReference)SystemCoreRef },
                     }
                 )
             );

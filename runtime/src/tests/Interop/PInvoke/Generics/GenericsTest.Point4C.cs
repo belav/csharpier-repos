@@ -71,7 +71,7 @@ unsafe partial class GenericsTest
             default,
             default,
             default,
-            default
+            default,
         };
 
         Assert.Throws<MarshalDirectiveException>(

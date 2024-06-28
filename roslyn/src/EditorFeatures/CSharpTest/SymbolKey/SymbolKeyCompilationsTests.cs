@@ -358,7 +358,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 new[]
                 {
                     SyntaxFactory.ParseSyntaxTree(src1, path: "file1.cs"),
-                    SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs")
+                    SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs"),
                 },
                 assemblyName: "Test"
             );
@@ -366,7 +366,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
                 new[]
                 {
                     SyntaxFactory.ParseSyntaxTree(src1, path: "file1.cs"),
-                    SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs")
+                    SyntaxFactory.ParseSyntaxTree(src1, path: "file2.cs"),
                 },
                 assemblyName: "Test"
             );

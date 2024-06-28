@@ -78,7 +78,7 @@ public class DefaultEndpointDataSourceTests
                     TestConstants.EmptyRequestDelegate,
                     EndpointMetadataCollection.Empty,
                     "2"
-                )
+                ),
             }
         );
 

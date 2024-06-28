@@ -33,7 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
                 UpdateAction.TreatAsUsed => ProjectSystemUpdateAction.SetTreatAsUsed,
                 UpdateAction.TreatAsUnused => ProjectSystemUpdateAction.UnsetTreatAsUsed,
                 UpdateAction.Remove => ProjectSystemUpdateAction.Remove,
-                _ => throw ExceptionUtilities.Unreachable()
+                _ => throw ExceptionUtilities.Unreachable(),
             };
             return new ProjectSystemReferenceUpdate(
                 updateAction,

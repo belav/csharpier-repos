@@ -43,7 +43,7 @@ namespace XLinqTests
 
             SingleAndArray,
 
-            IEnumerable
+            IEnumerable,
         };
 
         #endregion
@@ -58,8 +58,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XElement - multiple nodes, not connected")
                     {
                         Params = new object[] { false, 4 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -68,8 +68,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XElement - single node, not connected")
                     {
                         Params = new object[] { false, 1 },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -78,8 +78,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XElement - single node, connected")
                     {
                         Params = new object[] { true, 1 },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -88,8 +88,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("(BVT)XElement - multiple nodes, connected")
                     {
                         Params = new object[] { true, 2 },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -100,8 +100,8 @@ namespace XLinqTests
                     )
                     {
                         Params = new object[] { false, 2 },
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -110,8 +110,8 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XElement - multiple nodes, connected")
                     {
                         Params = new object[] { true, 4 },
-                        Priority = 1
-                    }
+                        Priority = 1,
+                    },
                 }
             );
             AddChild(
@@ -121,8 +121,8 @@ namespace XLinqTests
                         "XElement - Not allowed - duplicate attributes"
                     )
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -130,8 +130,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XElement - Not allowed - XDocument")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -140,14 +140,14 @@ namespace XLinqTests
                     Attribute = new VariationAttribute("XElement - Not allowed - XDocumentType")
                     {
                         Param = 3,
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
                 new TestVariation(XElementEmptyArray)
                 {
-                    Attribute = new VariationAttribute("XElement - nulls") { Priority = 3 }
+                    Attribute = new VariationAttribute("XElement - nulls") { Priority = 3 },
                 }
             );
             AddChild(
@@ -155,8 +155,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("XElement - build from Query result")
                     {
-                        Priority = 2
-                    }
+                        Priority = 2,
+                    },
                 }
             );
             AddChild(
@@ -164,8 +164,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("IsEmpty property Manipulation I.")
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
             AddChild(
@@ -173,8 +173,8 @@ namespace XLinqTests
                 {
                     Attribute = new VariationAttribute("IsEmpty property Manipulation II.")
                     {
-                        Priority = 0
-                    }
+                        Priority = 0,
+                    },
                 }
             );
         }
@@ -281,7 +281,7 @@ namespace XLinqTests
                 "text",
                 new XElement("aa"),
                 new XProcessingInstruction("PI", "click"),
-                new XComment("comment")
+                new XComment("comment"),
             };
 
             try
@@ -306,8 +306,8 @@ namespace XLinqTests
                 {
                     null,
                     new object[] { null, null },
-                    new List<object> { null, null, null }
-                }
+                    new List<object> { null, null, null },
+                },
             };
             foreach (object paras in nulls)
             {
@@ -329,7 +329,7 @@ namespace XLinqTests
                 new XDocument(),
                 new XElement("aa"),
                 new XProcessingInstruction("PI", "click"),
-                new XComment("comment")
+                new XComment("comment"),
             };
             try
             {
@@ -351,7 +351,7 @@ namespace XLinqTests
                 null,
                 new XElement("aa"),
                 new XProcessingInstruction("PI", "click"),
-                new XComment("comment")
+                new XComment("comment"),
             };
             try
             {
@@ -377,7 +377,7 @@ namespace XLinqTests
                     "",
                     null,
                     new XElement("C"),
-                    new XAttribute("xx", "yy")
+                    new XAttribute("xx", "yy"),
                 },
                 new XElement("{NS1}A"),
                 new XAttribute("id", "a1"),
@@ -392,7 +392,7 @@ namespace XLinqTests
                 new XText("text1"),
                 new XCData("textCDATA"),
                 "textPlain1",
-                "textPlain2"
+                "textPlain2",
             };
 
             XElement dummy = null;

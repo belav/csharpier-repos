@@ -34,7 +34,7 @@ namespace System.Activities.XamlIntegration
             {
                 return new OutArgument<T>
                 {
-                    Expression = this.expressionHelper.ConvertFromString(text.Trim(), context)
+                    Expression = this.expressionHelper.ConvertFromString(text.Trim(), context),
                 };
             }
         }

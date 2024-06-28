@@ -130,7 +130,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 new PostEvictionCallbackRegistration
                 {
                     EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
+                    State = null,
                 }
             );
 
@@ -162,7 +162,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 {
                     ExpirationScanFrequency = TimeSpan.Zero,
                     SizeLimit = 10,
-                    CompactionPercentage = 0.5
+                    CompactionPercentage = 0.5,
                 }
             );
 
@@ -172,7 +172,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 new PostEvictionCallbackRegistration
                 {
                     EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
+                    State = null,
                 }
             );
 
@@ -263,7 +263,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 new PostEvictionCallbackRegistration
                 {
                     EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
+                    State = null,
                 }
             );
 
@@ -334,7 +334,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 new PostEvictionCallbackRegistration
                 {
                     EvictionCallback = (k, v, r, s) => sem.Release(),
-                    State = null
+                    State = null,
                 }
             );
 
@@ -365,7 +365,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var entryOptions = new MemoryCacheEntryOptions
             {
                 Size = 5,
-                AbsoluteExpiration = testClock.UtcNow.Add(TimeSpan.FromMinutes(-1))
+                AbsoluteExpiration = testClock.UtcNow.Add(TimeSpan.FromMinutes(-1)),
             };
 
             cache.Set("key", "value", entryOptions);
@@ -382,7 +382,7 @@ namespace Microsoft.Extensions.Caching.Memory
             var entryOptions = new MemoryCacheEntryOptions
             {
                 Size = 5,
-                ExpirationTokens = { testExpirationToken }
+                ExpirationTokens = { testExpirationToken },
             };
 
             cache.Set("key", "value", entryOptions);
@@ -401,7 +401,7 @@ namespace Microsoft.Extensions.Caching.Memory
                 {
                     Clock = testClock,
                     SizeLimit = 10,
-                    CompactionPercentage = 0.3
+                    CompactionPercentage = 0.3,
                 }
             );
 
@@ -415,7 +415,7 @@ namespace Microsoft.Extensions.Caching.Memory
                     new PostEvictionCallbackRegistration
                     {
                         EvictionCallback = (k, v, r, s) => sem.Release(),
-                        State = null
+                        State = null,
                     }
                 );
                 cache.Set($"key{i}", $"value{i}", entryOptions);

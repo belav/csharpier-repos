@@ -293,18 +293,18 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
                             Dependents =
                             {
                                 new LongToDecimalDependentShadow(),
-                                new LongToDecimalDependentShadow()
+                                new LongToDecimalDependentShadow(),
                             },
                             OptionalDependents =
                             {
                                 new LongToDecimalDependentOptional(),
-                                new LongToDecimalDependentOptional()
+                                new LongToDecimalDependentOptional(),
                             },
                             RequiredDependents =
                             {
                                 new LongToDecimalDependentRequired(),
-                                new LongToDecimalDependentRequired()
-                            }
+                                new LongToDecimalDependentRequired(),
+                            },
                         }
                     )
                     .Entity;
@@ -434,18 +434,18 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
                             Dependents =
                             {
                                 new WrappedIntHiLoClassDependentShadow(),
-                                new WrappedIntHiLoClassDependentShadow()
+                                new WrappedIntHiLoClassDependentShadow(),
                             },
                             OptionalDependents =
                             {
                                 new WrappedIntHiLoClassDependentOptional(),
-                                new WrappedIntHiLoClassDependentOptional()
+                                new WrappedIntHiLoClassDependentOptional(),
                             },
                             RequiredDependents =
                             {
                                 new WrappedIntHiLoClassDependentRequired(),
-                                new WrappedIntHiLoClassDependentRequired()
-                            }
+                                new WrappedIntHiLoClassDependentRequired(),
+                            },
                         }
                     )
                     .Entity;
@@ -458,18 +458,18 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
                             Dependents =
                             {
                                 new WrappedIntHiLoStructDependentShadow(),
-                                new WrappedIntHiLoStructDependentShadow()
+                                new WrappedIntHiLoStructDependentShadow(),
                             },
                             OptionalDependents =
                             {
                                 new WrappedIntHiLoStructDependentOptional(),
-                                new WrappedIntHiLoStructDependentOptional()
+                                new WrappedIntHiLoStructDependentOptional(),
                             },
                             RequiredDependents =
                             {
                                 new WrappedIntHiLoStructDependentRequired(),
-                                new WrappedIntHiLoStructDependentRequired()
-                            }
+                                new WrappedIntHiLoStructDependentRequired(),
+                            },
                         }
                     )
                     .Entity;
@@ -482,18 +482,18 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
                             Dependents =
                             {
                                 new WrappedIntHiLoRecordDependentShadow(),
-                                new WrappedIntHiLoRecordDependentShadow()
+                                new WrappedIntHiLoRecordDependentShadow(),
                             },
                             OptionalDependents =
                             {
                                 new WrappedIntHiLoRecordDependentOptional(),
-                                new WrappedIntHiLoRecordDependentOptional()
+                                new WrappedIntHiLoRecordDependentOptional(),
                             },
                             RequiredDependents =
                             {
                                 new WrappedIntHiLoRecordDependentRequired(),
-                                new WrappedIntHiLoRecordDependentRequired()
-                            }
+                                new WrappedIntHiLoRecordDependentRequired(),
+                            },
                         }
                     )
                     .Entity;
@@ -828,15 +828,15 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
                     Species = new Species
                     {
                         Id = Fixture.IntSentinel,
-                        Name = "Goldfish (with legs)"
+                        Name = "Goldfish (with legs)",
                     },
                     MixedMetaphors = new List<Species>
                     {
                         new() { Id = Fixture.IntSentinel, Name = "Large ground finch" },
                         new() { Id = Fixture.IntSentinel, Name = "Medium ground finch" },
                         new() { Id = Fixture.IntSentinel, Name = "Small tree finch" },
-                        new() { Id = Fixture.IntSentinel, Name = "Green warbler-finch" }
-                    }
+                        new() { Id = Fixture.IntSentinel, Name = "Green warbler-finch" },
+                    },
                 }
             );
         }
@@ -851,8 +851,8 @@ public abstract class StoreGeneratedSqlServerTestBase<TFixture> : StoreGenerated
                     new() { Id = Fixture.IntSentinel, Name = "Large ground finch" },
                     new() { Id = Fixture.IntSentinel, Name = "Medium ground finch" },
                     new() { Id = Fixture.IntSentinel, Name = "Small tree finch" },
-                    new() { Id = Fixture.IntSentinel, Name = "Green warbler-finch" }
-                }
+                    new() { Id = Fixture.IntSentinel, Name = "Green warbler-finch" },
+                },
             }
         );
 

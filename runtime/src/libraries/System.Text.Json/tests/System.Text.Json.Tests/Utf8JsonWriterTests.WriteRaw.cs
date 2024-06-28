@@ -524,7 +524,7 @@ namespace System.Text.Json.Tests
             ROSChar,
             String,
             ByteArray,
-            ROSeqByte
+            ROSeqByte,
         }
 
         private static void WriteRawValueWithSetting(
@@ -744,7 +744,7 @@ namespace System.Text.Json.Tests
             {
                 var newSegment = new TestSequenceSegment(memory)
                 {
-                    RunningIndex = RunningIndex + Memory.Length
+                    RunningIndex = RunningIndex + Memory.Length,
                 };
 
                 Next = newSegment;

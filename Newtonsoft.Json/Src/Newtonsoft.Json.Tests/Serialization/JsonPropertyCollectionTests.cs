@@ -45,7 +45,7 @@ namespace Newtonsoft.Json.Tests.Serialization
             {
                 OverriddenProperty = "OverriddenProperty",
                 PropertyA = "PropertyA",
-                PropertyB = "PropertyB"
+                PropertyB = "PropertyB",
             };
 
             var resolver = new DefaultContractResolver();

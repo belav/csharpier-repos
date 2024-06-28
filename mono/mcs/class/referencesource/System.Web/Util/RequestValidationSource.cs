@@ -23,6 +23,6 @@ namespace System.Web.Util
         RawUrl,
         Path,
         PathInfo,
-        Headers
+        Headers,
     }
 }

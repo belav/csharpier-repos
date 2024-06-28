@@ -151,7 +151,7 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
             SelfSkipPayloadRight = new List<EntityOne> { new() { Id = 7780 } },
             BranchSkip = new List<EntityBranch> { new() { Id = 7781 } },
             ThreeSkipPayloadFull = new List<EntityThree> { new() { Id = 7782 } },
-            ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } }
+            ThreeSkipPayloadFullShared = new List<EntityThree> { new() { Id = 7783 } },
         };
 
         context.Attach(left);
@@ -931,7 +931,7 @@ public abstract class ManyToManyFieldsLoadTestBase<TFixture> : IClassFixture<TFi
                 e.Id,
                 e.Name,
                 Count1 = e.OneSkipShared.Count,
-                Count3 = e.ThreeSkipFull.Count
+                Count3 = e.ThreeSkipFull.Count,
             });
 
         var projected = async ? await queryable.ToListAsync() : queryable.ToList();

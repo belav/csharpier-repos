@@ -836,7 +836,7 @@ namespace System.IO
             FileMode.Append,
             FileMode.Create,
             FileMode.CreateNew,
-            FileMode.Truncate
+            FileMode.Truncate,
             // Excludes OpenOrCreate because it has a different behavior compared to Create/CreateNew
         };
 
@@ -847,7 +847,7 @@ namespace System.IO
             FileSystemRights.ReadAttributes,
             FileSystemRights.ReadData,
             FileSystemRights.ReadExtendedAttributes,
-            FileSystemRights.ReadPermissions
+            FileSystemRights.ReadPermissions,
         };
 
         private static readonly FileSystemRights[] s_writableRights = new[]
@@ -856,7 +856,7 @@ namespace System.IO
             FileSystemRights.AppendData, // Same as CreateDirectories
             FileSystemRights.WriteAttributes,
             FileSystemRights.WriteData,
-            FileSystemRights.WriteExtendedAttributes
+            FileSystemRights.WriteExtendedAttributes,
         };
 
         private void FileInfo_Create_FileSecurity_ArgumentOutOfRangeException(

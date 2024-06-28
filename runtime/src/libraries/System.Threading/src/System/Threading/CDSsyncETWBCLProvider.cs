@@ -80,12 +80,12 @@ namespace System.Threading
                     eventPayload[0] = new EventData
                     {
                         Size = sizeof(int),
-                        DataPointer = ((IntPtr)(&senseAsInt32))
+                        DataPointer = ((IntPtr)(&senseAsInt32)),
                     };
                     eventPayload[1] = new EventData
                     {
                         Size = sizeof(long),
-                        DataPointer = ((IntPtr)(&phaseNum))
+                        DataPointer = ((IntPtr)(&phaseNum)),
                     };
 
                     WriteEventCore(BARRIER_PHASEFINISHED_ID, 2, eventPayload);

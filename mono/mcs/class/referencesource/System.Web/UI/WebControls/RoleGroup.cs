@@ -36,7 +36,7 @@ namespace System.Web.UI.WebControls
         /// <devdoc>
         /// The roles associated with the template.
         /// </devdoc>
-        [TypeConverterAttribute(typeof(StringArrayConverter)),]
+        [TypeConverterAttribute(typeof(StringArrayConverter))]
         public string[] Roles
         {
             get

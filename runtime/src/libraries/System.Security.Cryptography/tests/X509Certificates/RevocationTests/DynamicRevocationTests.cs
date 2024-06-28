@@ -114,7 +114,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
 
                             yield return new object[]
                             {
-                                designationOptions | issuerRevocation | endEntityRevocation
+                                designationOptions | issuerRevocation | endEntityRevocation,
                             };
                         }
                     }

@@ -82,7 +82,7 @@ namespace System.Net.Http.Formatting
                         new Point[]
                         {
                             new Point() { x = 10, Y = 10 },
-                            new Point() { x = 20, Y = 20 }
+                            new Point() { x = 20, Y = 20 },
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
@@ -99,7 +99,7 @@ namespace System.Net.Http.Formatting
                         new List<Point>
                         {
                             new Point() { x = 10, Y = 10 },
-                            new Point() { x = 20, Y = 20 }
+                            new Point() { x = 20, Y = 20 },
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
@@ -115,7 +115,7 @@ namespace System.Net.Http.Formatting
                         new MyList<Point>
                         {
                             new Point() { x = 10, Y = 10 },
-                            new Point() { x = 20, Y = 20 }
+                            new Point() { x = 20, Y = 20 },
                         },
                         "[{\"x\":10,\"Y\":10},{\"x\":20,\"Y\":20}]"
                     },
@@ -137,7 +137,7 @@ namespace System.Net.Http.Formatting
                         {
                             s = "foo",
                             i = 49,
-                            NotAMember = "Error"
+                            NotAMember = "Error",
                         },
                         "{\"s\":\"foo\",\"i\":49}"
                     },
@@ -153,7 +153,7 @@ namespace System.Net.Http.Formatting
                             protectedInternalField = "protected internal",
                             internalField = "internal",
                             PublicProperty = "private",
-                            nonSerializedField = "Error"
+                            nonSerializedField = "Error",
                         },
                         "{\"publicField\":\"public\",\"internalField\":\"internal\",\"protectedInternalField\":\"protected internal\",\"protectedField\":\"protected\",\"privateField\":\"private\"}"
                     },
@@ -165,7 +165,7 @@ namespace System.Net.Http.Formatting
                             protectedInternalField = "protected internal",
                             internalField = "internal",
                             PublicProperty = "private",
-                            nonSerializedField = "Error"
+                            nonSerializedField = "Error",
                         },
                         "{\"publicField\":\"public\",\"PublicProperty\":\"private\"}"
                     },
@@ -175,7 +175,7 @@ namespace System.Net.Http.Formatting
                         {
                             field1 = "x",
                             field2 = (string)null,
-                            field3 = "y"
+                            field3 = "y",
                         },
                         "{\"field1\":\"x\",\"field2\":null,\"field3\":\"y\"}"
                     },

@@ -23,7 +23,7 @@ public class CompositeKeyEndToEndTest
                 {
                     Id1 = ticks,
                     Id2 = ticks + 1,
-                    Name = "Rainbow Dash"
+                    Name = "Rainbow Dash",
                 }
             );
             await context.SaveChangesAsync();

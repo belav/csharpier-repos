@@ -18,13 +18,13 @@ public class ServerInitializationTests : AbstractLanguageServerHostTests
         await using var server = await CreateLanguageServerAsync();
         var document = new VersionedTextDocumentIdentifier
         {
-            Uri = ProtocolConversions.CreateAbsoluteUri("C:\\\ue25b\ud86d\udeac.cs")
+            Uri = ProtocolConversions.CreateAbsoluteUri("C:\\\ue25b\ud86d\udeac.cs"),
         };
         var response = await server.ExecuteRequestAsync<DidOpenTextDocumentParams, object>(
             Methods.TextDocumentDidOpenName,
             new DidOpenTextDocumentParams
             {
-                TextDocument = new TextDocumentItem { Uri = document.Uri, Text = "Write" }
+                TextDocument = new TextDocumentItem { Uri = document.Uri, Text = "Write" },
             },
             CancellationToken.None
         );
@@ -44,11 +44,11 @@ public class ServerInitializationTests : AbstractLanguageServerHostTests
                         Range = new VisualStudio.LanguageServer.Protocol.Range
                         {
                             Start = new Position(0, 0),
-                            End = new Position(0, 0)
+                            End = new Position(0, 0),
                         },
-                        Text = "Console."
-                    }
-                ]
+                        Text = "Console.",
+                    },
+                ],
             },
             CancellationToken.None
         );

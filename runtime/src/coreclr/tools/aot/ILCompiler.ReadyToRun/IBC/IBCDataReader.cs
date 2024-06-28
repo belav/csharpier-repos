@@ -451,7 +451,7 @@ namespace ILCompiler.IBC
                     {
                         Token = token,
                         Flags = flags,
-                        ScenarioMask = scenarioMask
+                        ScenarioMask = scenarioMask,
                     }
                 );
             }

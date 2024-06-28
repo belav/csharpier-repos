@@ -51,7 +51,7 @@ public class When_mapping_to_an_array_as_ICollection_with_MapAtRuntime : AutoMap
     {
         new SourceItem { Value = "1" },
         new SourceItem { Value = "2" },
-        new SourceItem { Value = "3" }
+        new SourceItem { Value = "3" },
     };
 
     public class Source
@@ -425,7 +425,7 @@ public class When_mapping_to_a_concrete_non_generic_ienumerable : AutoMapperSpec
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int> { 9, 8, 7, 6 }
+                Values2 = new List<int> { 9, 8, 7, 6 },
             }
         );
     }
@@ -479,7 +479,7 @@ public class When_mapping_to_a_concrete_generic_ienumerable : AutoMapperSpecBase
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int> { 9, 8, 7, 6 }
+                Values2 = new List<int> { 9, 8, 7, 6 },
             }
         );
     }
@@ -532,7 +532,7 @@ public class When_mapping_to_a_getter_only_ienumerable : AutoMapperSpecBase
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int> { 9, 8, 7, 6 }
+                Values2 = new List<int> { 9, 8, 7, 6 },
             }
         );
 
@@ -571,7 +571,7 @@ public class When_mapping_to_a_getter_only_existing_ienumerable : AutoMapperSpec
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int> { 9, 8, 7, 6 }
+                Values2 = new List<int> { 9, 8, 7, 6 },
             },
             _destination
         );
@@ -612,7 +612,7 @@ public class When_mapping_to_a_concrete_non_generic_icollection : AutoMapperSpec
             new Source
             {
                 Values = new[] { 1, 2, 3, 4 },
-                Values2 = new List<int> { 9, 8, 7, 6 }
+                Values2 = new List<int> { 9, 8, 7, 6 },
             }
         );
     }
@@ -779,7 +779,7 @@ public class When_mapping_to_a_custom_list_with_the_same_type : AutoMapperSpecBa
     {
         _source = new Source
         {
-            Values = new ValueCollection { 1, 2, 3, 4 }
+            Values = new ValueCollection { 1, 2, 3, 4 },
         };
         _destination = Mapper.Map<Source, Destination>(_source);
     }
@@ -837,8 +837,8 @@ public class When_mapping_to_a_collection_with_instantiation_managed_by_the_dest
             Values = new List<SourceItem>
             {
                 new SourceItem { Value = 5 },
-                new SourceItem { Value = 10 }
-            }
+                new SourceItem { Value = 10 },
+            },
         };
         _destination = Mapper.Map<Source, Destination>(_source);
     }
@@ -897,8 +897,8 @@ public class When_mapping_to_an_existing_list_with_existing_items : AutoMapperSp
             Values = new List<SourceItem>
             {
                 new SourceItem { Value = 5 },
-                new SourceItem { Value = 10 }
-            }
+                new SourceItem { Value = 10 },
+            },
         };
         _destination = new Destination();
         _destination.Values.Add(new DestItem());

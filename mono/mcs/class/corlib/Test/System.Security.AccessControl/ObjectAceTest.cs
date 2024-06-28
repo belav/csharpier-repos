@@ -78,7 +78,7 @@ namespace MonoTests.System.Security.AccessControl
                     new Guid("{C0F9DF22-C320-4400-B41F-754F69668640}"),
                     true,
                     new byte[4]
-                )
+                ),
             };
 
             // Make sure this created right, first of all.
@@ -396,7 +396,7 @@ namespace MonoTests.System.Security.AccessControl
                 (byte)0x00,
                 (byte)0x00,
                 (byte)0x00,
-                (byte)0x00
+                (byte)0x00,
             };
 
             CompareBinaryForms(binaryForm2, binaryForm1);

@@ -21,7 +21,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(int[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" } },
             };
 
             ArrayModelBinderProvider binderProvider = new ArrayModelBinderProvider();
@@ -44,7 +44,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(int[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" } },
             };
             bindingContext.ModelMetadata.IsReadOnly = true;
 
@@ -68,7 +68,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(ICollection<int>)
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" }, }
+                ValueProvider = new SimpleValueProvider { { "foo[0]", "42" } },
             };
 
             ArrayModelBinderProvider binderProvider = new ArrayModelBinderProvider();
@@ -91,7 +91,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                     typeof(int[])
                 ),
                 ModelName = "foo",
-                ValueProvider = new SimpleValueProvider()
+                ValueProvider = new SimpleValueProvider(),
             };
 
             ArrayModelBinderProvider binderProvider = new ArrayModelBinderProvider();

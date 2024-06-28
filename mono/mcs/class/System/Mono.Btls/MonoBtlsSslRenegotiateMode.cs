@@ -34,7 +34,7 @@ namespace Mono.Btls
         NEVER = 0,
         ONCE,
         FREELY,
-        IGNORE
+        IGNORE,
     }
 }
 #endif

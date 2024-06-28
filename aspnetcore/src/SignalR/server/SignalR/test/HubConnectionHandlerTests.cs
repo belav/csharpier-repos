@@ -2026,7 +2026,7 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                 var secondAndThirdClients = new HashSet<string>
                 {
                     secondClient.Connection.ConnectionId,
-                    thirdClient.Connection.ConnectionId
+                    thirdClient.Connection.ConnectionId,
                 };
 
                 await firstClient
@@ -2235,7 +2235,7 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
 
                 var excludedConnectionIds = new List<string>
                 {
-                    firstClient.Connection.ConnectionId
+                    firstClient.Connection.ConnectionId,
                 };
 
                 await firstClient
@@ -3045,7 +3045,7 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                         {
                             o.PayloadSerializerSettings = new JsonSerializerSettings
                             {
-                                ContractResolver = new DefaultContractResolver()
+                                ContractResolver = new DefaultContractResolver(),
                             };
                         });
                 },
@@ -5752,8 +5752,8 @@ public partial class HubConnectionHandlerTests : VerifiableLoggedTest
                     // or ensure you're restricting to only known types with a custom SerializationBinder like we are here.
                     // See https://github.com/dotnet/aspnetcore/issues/11495#issuecomment-505047422
                     TypeNameHandling = TypeNameHandling.All,
-                    SerializationBinder = StreamingHub.DerivedParameterKnownTypesBinder.Instance
-                }
+                    SerializationBinder = StreamingHub.DerivedParameterKnownTypesBinder.Instance,
+                },
             };
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>

@@ -357,14 +357,14 @@ namespace System.Net
         private enum InputState
         {
             RequestLine,
-            Headers
+            Headers,
         }
 
         private enum LineState
         {
             None,
             CR,
-            LF
+            LF,
         }
 
         // true -> done processing

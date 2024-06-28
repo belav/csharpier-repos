@@ -180,51 +180,51 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                 {
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.FilePath
+                        UniqueName = ReferenceEntryFieldNames.FilePath,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.LineNumber
+                        UniqueName = ReferenceEntryFieldNames.LineNumber,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.ColumnNumber
+                        UniqueName = ReferenceEntryFieldNames.ColumnNumber,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.ReferenceText
+                        UniqueName = ReferenceEntryFieldNames.ReferenceText,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.ReferenceStart
+                        UniqueName = ReferenceEntryFieldNames.ReferenceStart,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.ReferenceEnd
+                        UniqueName = ReferenceEntryFieldNames.ReferenceEnd,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.ReferenceLongDescription
+                        UniqueName = ReferenceEntryFieldNames.ReferenceLongDescription,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.ReferenceImageId
+                        UniqueName = ReferenceEntryFieldNames.ReferenceImageId,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.TextBeforeReference2
+                        UniqueName = ReferenceEntryFieldNames.TextBeforeReference2,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.TextBeforeReference1
+                        UniqueName = ReferenceEntryFieldNames.TextBeforeReference1,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.TextAfterReference1
+                        UniqueName = ReferenceEntryFieldNames.TextAfterReference1,
                     },
                     new CodeLensDetailHeaderDescriptor()
                     {
-                        UniqueName = ReferenceEntryFieldNames.TextAfterReference2
+                        UniqueName = ReferenceEntryFieldNames.TextAfterReference2,
                     },
                 };
 
@@ -284,7 +284,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                     Description = referenceCount.GetDescription(),
                     IntValue = referenceCount.Count,
                     TooltipText = referenceCount.GetToolTip(codeElementKind),
-                    ImageId = null
+                    ImageId = null,
                 };
 
                 static string GetCodeElementKindsString(CodeElementKinds kind)
@@ -361,52 +361,52 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                             {
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.FilePath
+                                    Text = referenceLocationDescriptor.FilePath,
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.LineNumber.ToString()
+                                    Text = referenceLocationDescriptor.LineNumber.ToString(),
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.ColumnNumber.ToString()
+                                    Text = referenceLocationDescriptor.ColumnNumber.ToString(),
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.ReferenceLineText
+                                    Text = referenceLocationDescriptor.ReferenceLineText,
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.ReferenceStart.ToString()
+                                    Text = referenceLocationDescriptor.ReferenceStart.ToString(),
                                 },
                                 new CodeLensDetailEntryField()
                                 {
                                     Text = (
                                         referenceLocationDescriptor.ReferenceStart
                                         + referenceLocationDescriptor.ReferenceLength
-                                    ).ToString()
+                                    ).ToString(),
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.LongDescription
+                                    Text = referenceLocationDescriptor.LongDescription,
                                 },
                                 new CodeLensDetailEntryField() { ImageId = imageId },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.BeforeReferenceText2
+                                    Text = referenceLocationDescriptor.BeforeReferenceText2,
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.BeforeReferenceText1
+                                    Text = referenceLocationDescriptor.BeforeReferenceText1,
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.AfterReferenceText1
+                                    Text = referenceLocationDescriptor.AfterReferenceText1,
                                 },
                                 new CodeLensDetailEntryField()
                                 {
-                                    Text = referenceLocationDescriptor.AfterReferenceText2
-                                }
+                                    Text = referenceLocationDescriptor.AfterReferenceText2,
+                                },
                             },
                         };
                     })
@@ -420,7 +420,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CodeLens
                         ?? SpecializedCollections.EmptyList<CodeLensDetailEntryDescriptor>(),
 
                     // use default behavior
-                    PaneNavigationCommands = null
+                    PaneNavigationCommands = null,
                 };
             }
 

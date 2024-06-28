@@ -36,6 +36,6 @@ namespace System.Windows.Forms
         Custom = 0,
 
         System = 1,
-        Professional = 2
+        Professional = 2,
     }
 }

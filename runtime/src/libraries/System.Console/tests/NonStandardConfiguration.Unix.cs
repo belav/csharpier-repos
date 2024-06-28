@@ -32,7 +32,7 @@ namespace System.Tests
                 },
                 new RemoteInvokeOptions
                 {
-                    StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true }
+                    StartInfo = new ProcessStartInfo() { RedirectStandardOutput = true },
                 }
             );
 

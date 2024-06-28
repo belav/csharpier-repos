@@ -147,7 +147,7 @@ namespace System.Xml
             (byte)'8',
             (byte)'"',
             (byte)'?',
-            (byte)'>'
+            (byte)'>',
         };
         static readonly byte[] digits =
         {
@@ -166,7 +166,7 @@ namespace System.Xml
             (byte)'C',
             (byte)'D',
             (byte)'E',
-            (byte)'F'
+            (byte)'F',
         };
         static readonly bool[] defaultIsEscapedAttributeChar = new bool[]
         {
@@ -234,6 +234,7 @@ namespace System.Xml
             false,
             true,
             false // '<', '>'
+            ,
         };
         static readonly bool[] defaultIsEscapedElementChar = new bool[]
         {
@@ -301,6 +302,7 @@ namespace System.Xml
             false,
             true,
             false // '<', '>'
+            ,
         };
 
         public XmlUTF8NodeWriter()

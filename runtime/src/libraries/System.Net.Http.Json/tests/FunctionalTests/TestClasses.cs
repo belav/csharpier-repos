@@ -28,7 +28,7 @@ namespace System.Net.Http.Json.Functional.Tests
             {
                 Name = "R. Daneel Olivaw",
                 Age = 19_230,
-                PlaceOfBirth = "Horn\u00ED Doln\u00ED"
+                PlaceOfBirth = "Horn\u00ED Doln\u00ED",
             };
         }
 
@@ -63,25 +63,25 @@ namespace System.Net.Http.Json.Functional.Tests
             {
                 Name = "Ada Lovelace",
                 Age = 13_140,
-                PlaceOfBirth = "London, England"
+                PlaceOfBirth = "London, England",
             },
             new Person
             {
                 Name = "Jean Bartik",
                 Age = 31_390,
-                PlaceOfBirth = "Alanthus Grove, Missouri, U.S."
+                PlaceOfBirth = "Alanthus Grove, Missouri, U.S.",
             },
             new Person
             {
                 Name = "Grace Hopper",
                 Age = 31_025,
-                PlaceOfBirth = "New York City, New York, U.S."
+                PlaceOfBirth = "New York City, New York, U.S.",
             },
             new Person
             {
                 Name = "Margaret Hamilton",
                 Age = 31_390,
-                PlaceOfBirth = "Paoli, Indiana, U.S."
+                PlaceOfBirth = "Paoli, Indiana, U.S.",
             },
         };
 
@@ -99,7 +99,7 @@ namespace System.Net.Http.Json.Functional.Tests
         public static readonly JsonSerializerOptions DefaultSerializerOptions_StrictNumberHandling =
             new JsonSerializerOptions(DefaultSerializerOptions)
             {
-                NumberHandling = JsonNumberHandling.Strict
+                NumberHandling = JsonNumberHandling.Strict,
             };
     }
 

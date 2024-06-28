@@ -32,6 +32,6 @@ namespace System.Windows.Forms
         Property = 0,
         Category = 1,
         ArrayValue = 2,
-        Root = 3
+        Root = 3,
     }
 }

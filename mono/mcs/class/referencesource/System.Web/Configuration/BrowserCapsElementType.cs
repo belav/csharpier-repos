@@ -24,6 +24,6 @@ namespace System.Web.Configuration
         Capture,
         ControlAdapters,
         Identification,
-        SampleHeaders
+        SampleHeaders,
     }
 }

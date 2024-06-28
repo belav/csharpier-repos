@@ -175,23 +175,23 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 b.Id = 7776;
                 b.TwoSkip = new ObservableCollection<UnidirectionalEntityTwo>
                 {
-                    new() { Id = 7777 }
+                    new() { Id = 7777 },
                 };
                 b.TwoSkipShared = new ObservableCollection<UnidirectionalEntityTwo>
                 {
-                    new() { Id = 7778 }
+                    new() { Id = 7778 },
                 };
                 b.SelfSkipPayloadLeft = new ObservableCollection<UnidirectionalEntityOne>
                 {
-                    new() { Id = 7779 }
+                    new() { Id = 7779 },
                 };
                 b.BranchSkip = new ObservableCollection<UnidirectionalEntityBranch>
                 {
-                    new() { Id = 7781 }
+                    new() { Id = 7781 },
                 };
                 b.ThreeSkipPayloadFullShared = new ObservableCollection<UnidirectionalEntityThree>
                 {
-                    new() { Id = 7783 }
+                    new() { Id = 7783 },
                 };
             })
             : new UnidirectionalEntityOne
@@ -203,8 +203,8 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                 BranchSkip = new List<UnidirectionalEntityBranch> { new() { Id = 7781 } },
                 ThreeSkipPayloadFullShared = new List<UnidirectionalEntityThree>
                 {
-                    new() { Id = 7783 }
-                }
+                    new() { Id = 7783 },
+                },
             };
 
         var entityThreeCollection = context
@@ -1132,7 +1132,7 @@ public abstract partial class ManyToManyLoadTestBase<TFixture>
                     .Where(e => e.Id == 13 || e.Id == 11)
             )
             .OrderBy(e => e.Id)
-            .Select(e => new { e.Id, e.Name, });
+            .Select(e => new { e.Id, e.Name });
 
         var projected = async ? await queryable.ToListAsync() : queryable.ToList();
 

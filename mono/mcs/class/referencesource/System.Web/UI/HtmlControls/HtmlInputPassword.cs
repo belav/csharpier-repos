@@ -31,7 +31,7 @@ namespace System.Web.UI.HtmlControls
     ///       password&gt; elements on the server.
     ///    </para>
     /// </devdoc>
-    [DefaultEvent("ServerChange"), ValidationProperty("Value"), SupportsEventValidation,]
+    [DefaultEvent("ServerChange"), ValidationProperty("Value"), SupportsEventValidation]
     public class HtmlInputPassword : HtmlInputText, IPostBackDataHandler
     {
         private static readonly object EventServerChange = new object();

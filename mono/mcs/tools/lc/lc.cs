@@ -79,7 +79,7 @@ namespace LC
                 },
                 { "o|outdir=", "Output directory for the .licenses file", v => targetdir = v },
                 { "nologo", "Do not display logo", v => nologo = null != v },
-                { "h|?|help", "Show help", v => help = v != null }
+                { "h|?|help", "Show help", v => help = v != null },
             };
             List<string> extra;
             try

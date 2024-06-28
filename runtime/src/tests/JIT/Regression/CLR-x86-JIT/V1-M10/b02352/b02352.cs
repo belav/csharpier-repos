@@ -46,6 +46,7 @@ namespace DefaultNamespace
             "Method_Covered:  Convert.ToByte( Object )" //System/Object
             ,
             "Method_Covered:  Convert.ToByte( String, Int32 )" //System/String, int
+            ,
         };
 
         internal static void printoutCoveredMethods()
@@ -83,8 +84,8 @@ namespace DefaultNamespace
                 Console.WriteLine("Method: Byte Convert.ToByte( Int32 )");
             try
             {
-                Int32[] int3Array = { 10, 0, 100, 255, };
-                Byte[] int3Results = { 10, 0, 100, 255, };
+                Int32[] int3Array = { 10, 0, 100, 255 };
+                Byte[] int3Results = { 10, 0, 100, 255 };
                 for (int i = 0; i < int3Array.Length; i++)
                 {
                     inCountTestcases++;
@@ -187,7 +188,7 @@ namespace DefaultNamespace
                 Console.WriteLine("Method: Byte Convert.ToByte( Int64 )");
             try
             {
-                Int64[] int6Array = { 10L, 100L, };
+                Int64[] int6Array = { 10L, 100L };
                 Byte[] int6Results =
                 {
                     (((IConvertible)10)).ToByte(null),
@@ -295,8 +296,8 @@ namespace DefaultNamespace
                 Console.WriteLine("Method: Byte Convert.ToByte( Int16 )");
             try
             {
-                Int16[] int1Array = { 0, 255, 100, 2, };
-                Byte[] int1Results = { 0, 255, 100, 2, };
+                Int16[] int1Array = { 0, 255, 100, 2 };
+                Byte[] int1Results = { 0, 255, 100, 2 };
                 for (int i = 0; i < int1Array.Length; i++)
                 {
                     inCountTestcases++;
@@ -406,7 +407,7 @@ namespace DefaultNamespace
                     new Decimal(254.01),
                     ((IConvertible)(Byte.MaxValue / 2)).ToDecimal(null),
                 };
-                Byte[] deciResults = { Byte.MaxValue, Byte.MinValue, 254, Byte.MaxValue / 2, };
+                Byte[] deciResults = { Byte.MaxValue, Byte.MinValue, 254, Byte.MaxValue / 2 };
                 for (int i = 0; i < deciArray.Length; i++)
                 {
                     inCountTestcases++;
@@ -509,8 +510,8 @@ namespace DefaultNamespace
                 Console.WriteLine("Method: Byte Convert.ToByte( String )");
             try
             {
-                String[] striArray = { (Byte.MaxValue).ToString(), (Byte.MinValue).ToString(), };
-                Byte[] striResults = { Byte.MaxValue, Byte.MinValue, };
+                String[] striArray = { (Byte.MaxValue).ToString(), (Byte.MinValue).ToString() };
+                Byte[] striResults = { Byte.MaxValue, Byte.MinValue };
                 for (int i = 0; i < striArray.Length; i++)
                 {
                     inCountTestcases++;
@@ -549,7 +550,7 @@ namespace DefaultNamespace
                     Console.WriteLine("Testing : Argument null");
                 try
                 {
-                    String[] dummy = { null, };
+                    String[] dummy = { null };
 
                     throw new System.ArgumentNullException();
                 }
@@ -670,10 +671,10 @@ namespace DefaultNamespace
                 Console.WriteLine("Method: Byte Convert.ToByte( String, Int32 )");
             try
             {
-                String[] striArray = { "10", "100", "1011", "ff", "0xff", "77", "11", "11111111", };
-                Int32[] striBase = { 10, 10, 2, 16, 16, 8, 2, 2, };
+                String[] striArray = { "10", "100", "1011", "ff", "0xff", "77", "11", "11111111" };
+                Int32[] striBase = { 10, 10, 2, 16, 16, 8, 2, 2 };
 
-                Byte[] striResults = { 10, 100, 11, 255, 255, 63, 3, 255, };
+                Byte[] striResults = { 10, 100, 11, 255, 255, 63, 3, 255 };
                 for (int i = 0; i < striArray.Length; i++)
                 {
                     inCountTestcases++;
@@ -713,7 +714,7 @@ namespace DefaultNamespace
                     Console.WriteLine("Testing : Argument (bad base)");
                 try
                 {
-                    String[] dummy = { null, };
+                    String[] dummy = { null };
 
                     Byte result = Convert.ToByte(dummy[0], 11);
                     inCountErrors++;
@@ -744,7 +745,7 @@ namespace DefaultNamespace
                     Console.WriteLine("Testing : Argument null");
                 try
                 {
-                    String[] dummy = { null, };
+                    String[] dummy = { null };
 
                     Byte result = Convert.ToByte(dummy[0], 10);
                     if (result != 0)

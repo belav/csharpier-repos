@@ -652,7 +652,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                 TestCode = source,
                 FixedCode = source,
                 LanguageVersion = LanguageVersion.CSharp12,
-                ReferenceAssemblies = Testing.ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = Testing.ReferenceAssemblies.Net.Net60,
             };
 
             await test.RunAsync();
@@ -779,8 +779,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddAccessibilityModifie
                     {
                         CodeStyleOptions2.AccessibilityModifiersRequired,
                         AccessibilityModifiersRequired.OmitIfDefault
-                    }
-                }
+                    },
+                },
             };
 
             await test.RunAsync();

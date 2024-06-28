@@ -34,6 +34,6 @@ namespace System.Data
         ModifiedCurrent = DataRowState.Modified,
         ModifiedOriginal = (((int)ModifiedCurrent) << 1),
         OriginalRows = Unchanged | Deleted | ModifiedOriginal,
-        CurrentRows = Unchanged | Added | ModifiedCurrent
+        CurrentRows = Unchanged | Added | ModifiedCurrent,
     }
 }

@@ -33,7 +33,7 @@ namespace System.Web.Http.ValueProviders.Providers
             var controllerContext = new HttpControllerContext()
             {
                 Request = new HttpRequestMessage(),
-                RouteData = routeData.Object
+                RouteData = routeData.Object,
             };
             var context = new HttpActionContext() { ControllerContext = controllerContext };
 

@@ -22,7 +22,7 @@ namespace System.Xml.XmlReaderTests
                         new XmlReaderSettings { CloseInput = true },
                         s
                     )
-                )
+                ),
             };
             yield return new[]
             {
@@ -32,19 +32,19 @@ namespace System.Xml.XmlReaderTests
                         new XmlReaderSettings { CloseInput = true },
                         s
                     )
-                )
+                ),
             };
             yield return new[] { new Func<string, XmlReader>(s => new XmlTextReader(s)) };
             yield return new[]
             {
-                new Func<string, XmlReader>(s => new XmlTextReader(s, File.OpenRead(s)))
+                new Func<string, XmlReader>(s => new XmlTextReader(s, File.OpenRead(s))),
             };
             yield return new[]
             {
                 new Func<string, XmlReader>(s => new XmlTextReader(
                     s,
                     new StreamReader(File.OpenRead(s))
-                ))
+                )),
             };
         }
 

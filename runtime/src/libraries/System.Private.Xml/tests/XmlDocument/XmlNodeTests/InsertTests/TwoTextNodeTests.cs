@@ -11,7 +11,7 @@ namespace System.Xml.XmlDocumentTests
         {
             InsertType.Prepend,
             InsertType.Append,
-            InsertType.InsertBefore
+            InsertType.InsertBefore,
         };
         private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[]
         {
@@ -19,6 +19,7 @@ namespace System.Xml.XmlDocumentTests
             XmlNodeType.SignificantWhitespace,
             XmlNodeType.CDATA,
             XmlNodeType.Element /*, XmlNodeType.EntityReference*/
+            ,
         };
 
         private static void TwoTextNodeBase(
@@ -132,7 +133,7 @@ namespace System.Xml.XmlDocumentTests
                     new XmlNodeType[]
                     {
                         XmlNodeType.SignificantWhitespace,
-                        XmlNodeType.SignificantWhitespace
+                        XmlNodeType.SignificantWhitespace,
                     },
                     insertType,
                     nodeType

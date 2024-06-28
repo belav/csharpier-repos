@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             "AnalyzeSyntaxTree",
             "AnalyzeAdditionalFile",
             "Initialize",
-            "SupportedDiagnostics"
+            "SupportedDiagnostics",
         }.ToImmutableArray();
 
         protected static readonly DiagnosticDescriptor DefaultDiagnostic =

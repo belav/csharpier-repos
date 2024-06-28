@@ -10,6 +10,6 @@ namespace Mono.Linker
     {
         Visible = 1 << 1,
         Internal = 1 << 2,
-        Library = 1 << 3
+        Library = 1 << 3,
     }
 }

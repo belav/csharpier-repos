@@ -24,7 +24,7 @@ namespace System.Net.Http.HPack
             HeaderValueLength,
             HeaderValueLengthContinue,
             HeaderValue,
-            DynamicTableSizeUpdate
+            DynamicTableSizeUpdate,
         }
 
         public const int DefaultHeaderTableSize = 4096;

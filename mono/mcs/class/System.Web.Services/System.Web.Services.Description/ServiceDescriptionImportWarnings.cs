@@ -40,6 +40,6 @@ namespace System.Web.Services.Description
         UnsupportedBindingsIgnored = 0x10,
         UnsupportedOperationsIgnored = 0x8,
         SchemaValidation = 0x40,
-        WsiConformance = 0x80
+        WsiConformance = 0x80,
     }
 }

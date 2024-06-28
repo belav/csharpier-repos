@@ -30,7 +30,7 @@ namespace System.Buffers
             OverMaximumSize,
 
             /// <summary>The pool has already allocated for pooling as many buffers of a particular size as it's allowed.</summary>
-            PoolExhausted
+            PoolExhausted,
         }
 
         /// <summary>The reason for a BufferDropped event.</summary>

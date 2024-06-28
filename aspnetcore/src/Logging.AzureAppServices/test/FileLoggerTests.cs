@@ -163,7 +163,7 @@ public class FileLoggerTests : IDisposable
                 "LogFile.20160511.txt",
                 "LogFile.20160512.txt",
                 "LogFile.20160513.txt",
-                "randomFile.txt"
+                "randomFile.txt",
             },
             actualFiles
         );

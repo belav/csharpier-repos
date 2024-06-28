@@ -26,7 +26,7 @@ namespace System.Net.Http.Formatting
         : MediaTypeFormatterTestBase<DataContractJsonMediaTypeFormatter>
     {
         public static readonly TheoryDataSet<Type> AFewValidTypes =
-            new() { typeof(bool), typeof(int), typeof(string), };
+            new() { typeof(bool), typeof(int), typeof(string) };
 
         public override IEnumerable<MediaTypeHeaderValue> ExpectedSupportedMediaTypes
         {
@@ -517,7 +517,7 @@ namespace System.Net.Http.Formatting
             {
                 if (AddDBNullKnownType)
                 {
-                    return new DataContractJsonSerializer(type, new Type[] { typeof(DBNull), });
+                    return new DataContractJsonSerializer(type, new Type[] { typeof(DBNull) });
                 }
                 else
                 {

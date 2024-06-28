@@ -64,7 +64,7 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
         0x9E,
         0x4B,
         0x9E,
-        0x2B
+        0x2B,
     };
 
     // 192 "00-01-00-00-00-18-00-00-00-0C-00-00-00-10-00-00-00-10-0D-AA-01-3A-95-0A-DA-2B-79-8F-5F-F2-72-FA-D3-63"
@@ -103,7 +103,7 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
         0x72,
         0xFA,
         0xD3,
-        0x63
+        0x63,
     };
 
     // 256 00-01-00-00-00-20-00-00-00-0C-00-00-00-10-00-00-00-10-E7-DC-CE-66-DF-85-5A-32-3A-6B-B7-BD-7A-59-BE-45
@@ -142,7 +142,7 @@ internal sealed unsafe class AesGcmAuthenticatedEncryptor
         0x7A,
         0x59,
         0xBE,
-        0x45
+        0x45,
     };
 
     private static readonly Func<byte[], HashAlgorithm> _kdkPrfFactory = key => new HMACSHA512(key); // currently hardcoded to SHA512

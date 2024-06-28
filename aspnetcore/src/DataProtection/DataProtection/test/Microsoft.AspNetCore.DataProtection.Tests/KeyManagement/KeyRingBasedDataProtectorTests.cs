@@ -291,7 +291,7 @@ public class KeyRingBasedDataProtectorTests
             loggerFactory: NullLoggerFactory.Instance
         )
         {
-            CacheableKeyRingProvider = cacheableKeyRingProvider
+            CacheableKeyRingProvider = cacheableKeyRingProvider,
         };
     }
 

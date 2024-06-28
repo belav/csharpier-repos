@@ -623,7 +623,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions
             {
                 IgnoreNullValues = true,
-                Converters = { new UriToNullConverter() }
+                Converters = { new UriToNullConverter() },
             };
 
             // Baseline - null values ignored, converter is not called.

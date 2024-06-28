@@ -18,6 +18,6 @@ namespace Mono.ILASM
         None = 0x0,
         Instance = 0x1,
         Rtspecialname = 0x2,
-        Specialname = 0x4
+        Specialname = 0x4,
     }
 }

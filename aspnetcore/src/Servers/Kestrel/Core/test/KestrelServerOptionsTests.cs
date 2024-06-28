@@ -80,7 +80,7 @@ public class KestrelServerOptionsTests
     {
         var options = new KestrelServerOptions
         {
-            ApplicationServices = new ServiceCollection().BuildServiceProvider()
+            ApplicationServices = new ServiceCollection().BuildServiceProvider(),
         };
 
         Assert.Throws<InvalidOperationException>(() => options.Configure());

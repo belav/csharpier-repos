@@ -42,7 +42,7 @@ namespace System.Activities.DurableInstancing
                 {
                     ParameterName = "@instanceId",
                     SqlDbType = SqlDbType.UniqueIdentifier,
-                    Value = unlockCommand.InstanceId
+                    Value = unlockCommand.InstanceId,
                 }
             );
             sqlCommand.Parameters.Add(
@@ -50,7 +50,7 @@ namespace System.Activities.DurableInstancing
                 {
                     ParameterName = "@surrogateLockOwnerId",
                     SqlDbType = SqlDbType.BigInt,
-                    Value = unlockCommand.SurrogateOwnerId
+                    Value = unlockCommand.SurrogateOwnerId,
                 }
             );
             sqlCommand.Parameters.Add(
@@ -58,7 +58,7 @@ namespace System.Activities.DurableInstancing
                 {
                     ParameterName = "@handleInstanceVersion",
                     SqlDbType = SqlDbType.BigInt,
-                    Value = unlockCommand.InstanceVersion
+                    Value = unlockCommand.InstanceVersion,
                 }
             );
         }

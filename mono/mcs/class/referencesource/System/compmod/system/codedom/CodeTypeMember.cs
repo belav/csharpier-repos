@@ -21,7 +21,7 @@ namespace System.CodeDom
     ///       Represents a class member.
     ///    </para>
     /// </devdoc>
-    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable,]
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
     public class CodeTypeMember : CodeObject
     {
         private MemberAttributes attributes = MemberAttributes.Private | MemberAttributes.Final;

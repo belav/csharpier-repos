@@ -65,7 +65,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
     {
         int bInt = One.A.{|caret:|}aInt;
     }
-}"
+}",
             };
 
             await using var testLspServer = await CreateTestLspServerAsync(
@@ -107,7 +107,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.Definitions
                     Uri = ProtocolConversions.CreateAbsoluteUri(
                         $"C:\\{TestSpanMapper.GeneratedFileName}"
                     ),
-                    Range = new LSP.Range { Start = position, End = position }
+                    Range = new LSP.Range { Start = position, End = position },
                 }
             );
             AssertLocationsEqual(ImmutableArray.Create(TestSpanMapper.MappedFileLocation), results);

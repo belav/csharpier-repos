@@ -69,7 +69,7 @@ namespace System.Web.Mvc
                     {
                         return new ModelValidationResult[]
                         {
-                            new ModelValidationResult() { Message = errorMessage }
+                            new ModelValidationResult() { Message = errorMessage },
                         };
                     }
                 }
@@ -102,7 +102,7 @@ namespace System.Web.Mvc
                     {
                         return new ModelValidationResult[]
                         {
-                            new ModelValidationResult() { Message = errorMessage }
+                            new ModelValidationResult() { Message = errorMessage },
                         };
                     }
                 }

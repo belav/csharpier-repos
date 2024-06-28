@@ -18,7 +18,7 @@ namespace TLens
             this.additionalFolders = additionalFolders;
             ReaderParameters = new ReaderParameters(ReadingMode.Deferred)
             {
-                AssemblyResolver = this
+                AssemblyResolver = this,
             };
         }
 

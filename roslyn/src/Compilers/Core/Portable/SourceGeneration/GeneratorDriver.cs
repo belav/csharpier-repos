@@ -683,7 +683,7 @@ namespace Microsoft.CodeAnalysis
                 {
                     IncrementalGeneratorWrapper igw => igw.Generator,
                     IIncrementalGenerator ig => ig,
-                    _ => new SourceGeneratorAdaptor(g, sourceExtension)
+                    _ => new SourceGeneratorAdaptor(g, sourceExtension),
                 }
             );
         }

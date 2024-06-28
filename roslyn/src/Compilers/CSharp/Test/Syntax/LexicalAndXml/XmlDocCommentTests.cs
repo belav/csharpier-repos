@@ -2487,7 +2487,7 @@ class C{}";
                 {
                     { "attr1", "a" },
                     { "attr2", "b" },
-                    { "attr3", "test" }
+                    { "attr3", "test" },
                 }
             );
         }
@@ -3010,7 +3010,7 @@ class A {}
                     new TestError(1570, true),
                     new TestError(1570, true),
                     new TestError(1570, true),
-                    new TestError(1570, true)
+                    new TestError(1570, true),
                 }
             );
         }
@@ -3040,7 +3040,7 @@ class A {}
                     new TestError(1570, true),
                     new TestError(1570, true),
                     new TestError(1570, true),
-                    new TestError(1570, true)
+                    new TestError(1570, true),
                 }
             );
         }
@@ -3571,7 +3571,7 @@ public class Program
 /// <summary> b
 /// </summary>
 "
-                    )
+                    ),
                 }
             );
 

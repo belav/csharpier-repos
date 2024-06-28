@@ -8,7 +8,7 @@ enum IrishBeer
     Lager = 0x3000,
 
     Guinness = 1 | Stout,
-    Smithwicks = 2 | Ale
+    Smithwicks = 2 | Ale,
 }
 
 struct IrishPub

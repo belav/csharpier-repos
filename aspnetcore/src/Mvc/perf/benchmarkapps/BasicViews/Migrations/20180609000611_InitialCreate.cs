@@ -32,7 +32,7 @@ namespace BasicViews.Migrations
                         ),
                     Name = table.Column<string>(maxLength: 27, nullable: true),
                     Age = table.Column<int>(nullable: false),
-                    BirthDate = table.Column<DateTimeOffset>(nullable: false)
+                    BirthDate = table.Column<DateTimeOffset>(nullable: false),
                 },
                 constraints: table =>
                 {

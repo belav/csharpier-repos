@@ -7,5 +7,5 @@ internal enum TransactionOutcome
 {
     NotKnownYet = 0,
     Committed = 1,
-    Aborted = 2
+    Aborted = 2,
 }

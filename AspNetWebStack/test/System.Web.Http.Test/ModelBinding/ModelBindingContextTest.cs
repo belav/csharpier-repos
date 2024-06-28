@@ -23,7 +23,7 @@ namespace System.Web.Http.ModelBinding
                 ),
                 ModelName = "theName",
                 ModelState = new ModelStateDictionary(),
-                ValueProvider = new SimpleHttpValueProvider()
+                ValueProvider = new SimpleHttpValueProvider(),
             };
 
             // Act
@@ -45,7 +45,7 @@ namespace System.Web.Http.ModelBinding
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     null,
                     typeof(int)
-                )
+                ),
             };
 
             // Act & assert
@@ -95,7 +95,7 @@ namespace System.Web.Http.ModelBinding
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => 42,
                     typeof(int)
-                )
+                ),
             };
 
             // Assert
@@ -112,7 +112,7 @@ namespace System.Web.Http.ModelBinding
                 ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
                     () => 42,
                     typeof(int)
-                )
+                ),
             };
 
             // Act & assert
@@ -133,7 +133,7 @@ namespace System.Web.Http.ModelBinding
                     () => 42,
                     typeof(int)
                 ),
-                ModelName = "theInt"
+                ModelName = "theInt",
             };
 
             // Act

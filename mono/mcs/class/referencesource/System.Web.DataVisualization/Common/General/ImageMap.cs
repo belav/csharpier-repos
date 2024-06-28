@@ -82,7 +82,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// The shape of the map area is polygonal.
         /// </summary>
-        Polygon
+        Polygon,
     }
 
     #endregion

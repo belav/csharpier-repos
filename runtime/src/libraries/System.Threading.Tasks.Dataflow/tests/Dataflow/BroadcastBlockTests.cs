@@ -26,7 +26,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new DataflowBlockOptions
                     {
                         MaxMessagesPerTask = 1,
-                        CancellationToken = new CancellationToken(true)
+                        CancellationToken = new CancellationToken(true),
                     }
                 ),
                 new BroadcastBlock<int>(
@@ -34,9 +34,9 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new DataflowBlockOptions
                     {
                         MaxMessagesPerTask = 1,
-                        CancellationToken = new CancellationToken(true)
+                        CancellationToken = new CancellationToken(true),
                     }
-                )
+                ),
             };
             foreach (var block in blocks)
             {
@@ -315,7 +315,7 @@ namespace System.Threading.Tasks.Dataflow.Tests
                     new GroupingDataflowBlockOptions
                     {
                         CancellationToken = cts.Token,
-                        BoundedCapacity = 2
+                        BoundedCapacity = 2,
                     }
                 );
                 Task<bool>[] sends = Enumerable.Range(0, 4).Select(i => bb.SendAsync(i)).ToArray();
@@ -349,8 +349,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         QueueTaskDelegate = delegate
                         {
                             throw new FormatException();
-                        }
-                    }
+                        },
+                    },
                 }
             );
             Task<bool> t1 = bb.SendAsync(1);

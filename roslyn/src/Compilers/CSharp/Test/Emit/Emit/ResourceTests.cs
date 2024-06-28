@@ -240,7 +240,7 @@ class C
                             throw new Exception("bad stuff");
                         },
                         false
-                    )
+                    ),
                 }
             );
 
@@ -253,7 +253,7 @@ class C
                 new MemoryStream(),
                 manifestResources: new[]
                 {
-                    new ResourceDescription("r2", "file", () => null, false)
+                    new ResourceDescription("r2", "file", () => null, false),
                 }
             );
 
@@ -279,7 +279,7 @@ class C
                 manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
-                    new ResourceDescription("A", "y.goo", dataProvider, true)
+                    new ResourceDescription("A", "y.goo", dataProvider, true),
                 }
             );
 
@@ -308,7 +308,7 @@ class C
                         true,
                         isEmbedded: true,
                         checkArgs: true
-                    )
+                    ),
                 }
             );
 
@@ -337,7 +337,7 @@ class C
                         true,
                         isEmbedded: false,
                         checkArgs: true
-                    )
+                    ),
                 }
             );
 
@@ -363,7 +363,7 @@ class C
                 manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
-                    new ResourceDescription("B", "x.goo", dataProvider, true)
+                    new ResourceDescription("B", "x.goo", dataProvider, true),
                 }
             );
 
@@ -392,7 +392,7 @@ class C
                         true,
                         isEmbedded: true,
                         checkArgs: true
-                    )
+                    ),
                 }
             );
 
@@ -418,7 +418,7 @@ class C
                         true,
                         isEmbedded: false,
                         checkArgs: true
-                    )
+                    ),
                 }
             );
 
@@ -440,7 +440,7 @@ class C
                 manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
-                    new ResourceDescription("A", "x.goo", dataProvider, true)
+                    new ResourceDescription("A", "x.goo", dataProvider, true),
                 }
             );
 
@@ -457,7 +457,7 @@ class C
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
                     new ResourceDescription("B", "x.goo", dataProvider, true),
-                    new ResourceDescription("B", "y.goo", dataProvider, true)
+                    new ResourceDescription("B", "y.goo", dataProvider, true),
                 }
             );
 
@@ -531,7 +531,7 @@ class C
                         resourceFileName,
                         () => new MemoryStream(resourceFileData),
                         false
-                    )
+                    ),
                 }
             );
 
@@ -605,7 +605,7 @@ class C
                         resourceFileName,
                         () => new MemoryStream(resourceFileData),
                         false
-                    )
+                    ),
                 }
             );
 
@@ -629,7 +629,7 @@ class C
                         r1Name,
                         () => new MemoryStream(arrayOfEmbeddedData),
                         true
-                    )
+                    ),
                 }
             );
 
@@ -648,7 +648,7 @@ class C
                         resourceFileName,
                         () => new MemoryStream(resourceFileData),
                         false
-                    )
+                    ),
                 }
             );
 
@@ -674,7 +674,7 @@ class C
                         r1Name,
                         () => new MemoryStream(arrayOfEmbeddedData),
                         true
-                    )
+                    ),
                 }
             );
 
@@ -735,7 +735,7 @@ class C
                         () => new MemoryStream(arrayOfEmbeddedData),
                         true
                     ),
-                    new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), true)
+                    new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), true),
                 }
             );
 
@@ -795,7 +795,11 @@ class C
                 output_mod3,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), false)
+                    new ResourceDescription(
+                        r2Name,
+                        () => new MemoryStream(resourceFileData),
+                        false
+                    ),
                 }
             );
 
@@ -818,7 +822,7 @@ class C
                             r1Name,
                             () => new MemoryStream(arrayOfEmbeddedData),
                             false
-                        )
+                        ),
                     }
                 );
 
@@ -939,7 +943,7 @@ class C
                             r2Name,
                             () => new MemoryStream(resourceFileData),
                             false
-                        )
+                        ),
                     }
                 );
 
@@ -975,7 +979,7 @@ class C
                             r2Name,
                             () => new MemoryStream(resourceFileData),
                             false
-                        )
+                        ),
                     }
                 );
 
@@ -1014,7 +1018,7 @@ public class Maine
                             throw new NotSupportedException("error in data provider");
                         },
                         false
-                    )
+                    ),
                 }
             );
 

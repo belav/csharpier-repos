@@ -38,6 +38,6 @@ namespace System.Windows.Forms.DataVisualization.Charting
         TopRight = 32,
         BottomLeft = 64,
         BottomRight = 128,
-        Center = 256
+        Center = 256,
     }
 }

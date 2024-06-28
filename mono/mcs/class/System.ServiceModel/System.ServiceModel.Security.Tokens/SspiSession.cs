@@ -20,7 +20,7 @@ namespace System.ServiceModel.Security
             0x53,
             0x53,
             0x50,
-            0x00
+            0x00,
         };
 
         public long Challenge,

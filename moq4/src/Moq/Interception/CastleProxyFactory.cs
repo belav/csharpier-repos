@@ -77,7 +77,7 @@ namespace Moq
             this.generationOptions = new ProxyGenerationOptions
             {
                 Hook = new IncludeObjectMethodsHook(),
-                BaseTypeForInterfaceProxy = typeof(InterfaceProxy)
+                BaseTypeForInterfaceProxy = typeof(InterfaceProxy),
             };
             this.generator = new ProxyGenerator();
         }

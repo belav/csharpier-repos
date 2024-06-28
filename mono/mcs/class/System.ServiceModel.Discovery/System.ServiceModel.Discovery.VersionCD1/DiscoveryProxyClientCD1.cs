@@ -44,7 +44,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
         {
             var req = new MessageContractsCD1.FindRequest()
             {
-                Body = new FindCriteriaCD1(criteria)
+                Body = new FindCriteriaCD1(criteria),
             };
             return Channel.BeginFind(req, callback, state);
         }
@@ -66,7 +66,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
         {
             var req = new MessageContractsCD1.ResolveRequest()
             {
-                Body = new ResolveCriteriaCD1(criteria)
+                Body = new ResolveCriteriaCD1(criteria),
             };
             return Channel.BeginResolve(req, callback, state);
         }

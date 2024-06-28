@@ -296,7 +296,7 @@ public class RouteValuesAddressSchemeTest
                 AmbientValues = new RouteValueDictionary(
                     new { controller = "Home", action = "Index" }
                 ),
-                RouteName = "OrdersApi"
+                RouteName = "OrdersApi",
             }
         );
 
@@ -354,7 +354,7 @@ public class RouteValuesAddressSchemeTest
             {
                 ExplicitValues = new RouteValueDictionary(),
                 AmbientValues = new RouteValueDictionary(),
-                RouteName = "OrdersApi"
+                RouteName = "OrdersApi",
             }
         );
 

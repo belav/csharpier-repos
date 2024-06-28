@@ -16,7 +16,7 @@ namespace System.CommandLine.Tests
         {
             _outerCommand = new CliCommand("outer")
             {
-                new CliCommand("inner") { new CliOption<string>("--option") }
+                new CliCommand("inner") { new CliOption<string>("--option") },
             };
         }
 
@@ -160,7 +160,7 @@ namespace System.CommandLine.Tests
             var outer = new CliCommand("outer")
             {
                 new CliCommand("inner") { new CliCommand("inner-er") },
-                new CliCommand("sibling")
+                new CliCommand("sibling"),
             };
 
             var result = outer.Parse(input);

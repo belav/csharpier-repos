@@ -203,7 +203,7 @@ namespace System.Reflection.Tests
                 "s_field",
                 "s_readonlyField",
                 "s_volatileField",
-                "s_arrayField"
+                "s_arrayField",
             }
         )]
         [InlineData(
@@ -216,7 +216,7 @@ namespace System.Reflection.Tests
                 "s_field",
                 "s_readonlyField",
                 "s_volatileField",
-                "s_arrayField"
+                "s_arrayField",
             }
         )]
         public void DeclaredMembers(Type type, string[] expected)
@@ -412,14 +412,14 @@ namespace System.Reflection.Tests
             {
                 typeof(GenericInterface1<int>),
                 new Type[] { typeof(int) },
-                null
+                null,
             };
             yield return new object[] { typeof(GenericInterface2<,>), new Type[0], null };
             yield return new object[]
             {
                 typeof(GenericInterface2<int, string>),
                 new Type[] { typeof(int), typeof(string) },
-                null
+                null,
             };
 
             // Structs
@@ -427,87 +427,87 @@ namespace System.Reflection.Tests
             {
                 typeof(NonGenericStructWithNoInterfaces),
                 new Type[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces1<>),
                 new Type[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces1<int>),
                 new Type[] { typeof(int) },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces2<,>),
                 new Type[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces2<int, string>),
                 new Type[] { typeof(int), typeof(string) },
-                null
+                null,
             };
 
             yield return new object[]
             {
                 typeof(NonGenericStructWithNonGenericInterface),
                 new Type[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface1<>),
                 new Type[0],
-                new string[] { "TS" }
+                new string[] { "TS" },
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface1<int>),
                 new Type[] { typeof(int) },
-                new string[] { "Int32" }
+                new string[] { "Int32" },
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface2<,>),
                 new Type[0],
-                new string[] { "TS", "VS" }
+                new string[] { "TS", "VS" },
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface2<int, string>),
                 new Type[] { typeof(int), typeof(string) },
-                new string[] { "Int32", "String" }
+                new string[] { "Int32", "String" },
             };
 
             yield return new object[]
             {
                 typeof(NonGenericStructWithGenericInterface1),
                 new Type[0],
-                new string[] { "Int32" }
+                new string[] { "Int32" },
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface3<>),
                 new Type[0],
-                new string[] { "TS", "Int32" }
+                new string[] { "TS", "Int32" },
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface3<string>),
                 new Type[] { typeof(string) },
-                new string[] { "String", "Int32" }
+                new string[] { "String", "Int32" },
             };
             yield return new object[]
             {
                 typeof(NonGenericStructWithGenericInterface2),
                 new Type[0],
-                new string[] { "Int32", "Int32" }
+                new string[] { "Int32", "Int32" },
             };
 
             // Classes
@@ -515,82 +515,82 @@ namespace System.Reflection.Tests
             {
                 typeof(NonGenericClassWithNoInterfaces),
                 new Type[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces1<>),
                 new Type[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces1<int>),
                 new Type[] { typeof(int) },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces2<,>),
                 new Type[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces2<int, string>),
                 new Type[] { typeof(int), typeof(string) },
-                null
+                null,
             };
 
             yield return new object[]
             {
                 typeof(NonGenericClassWithNonGenericInterface),
                 new Type[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface1<int>),
                 new Type[] { typeof(int) },
-                new string[] { "Int32" }
+                new string[] { "Int32" },
             };
 
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface2<,>),
                 new Type[0],
-                new string[] { "T", "V" }
+                new string[] { "T", "V" },
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface2<int, string>),
                 new Type[] { typeof(int), typeof(string) },
-                new string[] { "Int32", "String" }
+                new string[] { "Int32", "String" },
             };
 
             yield return new object[]
             {
                 typeof(NonGenericClassWithGenericInterface1),
                 new Type[0],
-                new string[] { "Int32" }
+                new string[] { "Int32" },
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface3<>),
                 new Type[0],
-                new string[] { "T", "Int32" }
+                new string[] { "T", "Int32" },
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface3<string>),
                 new Type[] { typeof(string) },
-                new string[] { "String", "Int32" }
+                new string[] { "String", "Int32" },
             };
             yield return new object[]
             {
                 typeof(NonGenericClassWithGenericInterface2),
                 new Type[0],
-                new string[] { "Int32", "Int32" }
+                new string[] { "Int32", "Int32" },
             };
         }
 
@@ -639,13 +639,13 @@ namespace System.Reflection.Tests
             {
                 typeof(GenericInterface2<,>),
                 new string[] { "TI", "VI" },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericInterface2<int, string>),
                 new string[0],
-                null
+                null,
             };
 
             // Structs
@@ -653,87 +653,87 @@ namespace System.Reflection.Tests
             {
                 typeof(NonGenericStructWithNoInterfaces),
                 new string[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces1<>),
                 new string[] { "TS" },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces1<int>),
                 new string[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces2<,>),
                 new string[] { "TS", "VS" },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericStructWithNoInterfaces2<int, string>),
                 new string[0],
-                null
+                null,
             };
 
             yield return new object[]
             {
                 typeof(NonGenericStructWithNonGenericInterface),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface1<>),
                 new string[] { "TS" },
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface1<int>),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface2<,>),
                 new string[] { "TS", "VS" },
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface2<int, string>),
                 new string[0],
-                new string[0]
+                new string[0],
             };
 
             yield return new object[]
             {
                 typeof(NonGenericStructWithGenericInterface1),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface3<>),
                 new string[] { "TS" },
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericStructWithGenericInterface3<string>),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(NonGenericStructWithGenericInterface2),
                 new string[0],
-                new string[0]
+                new string[0],
             };
 
             // Classes
@@ -741,87 +741,87 @@ namespace System.Reflection.Tests
             {
                 typeof(NonGenericClassWithNoInterfaces),
                 new string[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces1<>),
                 new string[] { "T" },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces1<int>),
                 new string[0],
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces2<,>),
                 new string[] { "T", "V" },
-                null
+                null,
             };
             yield return new object[]
             {
                 typeof(GenericClassWithNoInterfaces2<int, string>),
                 new string[0],
-                null
+                null,
             };
 
             yield return new object[]
             {
                 typeof(NonGenericClassWithNonGenericInterface),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface1<>),
                 new string[] { "T" },
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface1<int>),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface2<,>),
                 new string[] { "T", "V" },
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface2<int, string>),
                 new string[0],
-                new string[0]
+                new string[0],
             };
 
             yield return new object[]
             {
                 typeof(NonGenericClassWithGenericInterface1),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface3<>),
                 new string[] { "T" },
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(GenericClassWithGenericInterface3<string>),
                 new string[0],
-                new string[0]
+                new string[0],
             };
             yield return new object[]
             {
                 typeof(NonGenericClassWithGenericInterface2),
                 new string[0],
-                new string[0]
+                new string[0],
             };
         }
 
@@ -888,7 +888,7 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 typeof(IntEnum),
-                new string[] { "Enum1", "Enum2", "Enum10", "Enum18", "Enum45" }
+                new string[] { "Enum1", "Enum2", "Enum10", "Enum18", "Enum45" },
             };
             yield return new object[] { typeof(UIntEnum), new string[] { "A", "B" } };
         }
@@ -1018,7 +1018,7 @@ namespace System.Reflection.Tests
             {
                 typeof(TI_NonGenericInterface2),
                 typeof(TI_NonGenericInterface1),
-                typeof(InheritedInteraface)
+                typeof(InheritedInteraface),
             }
         )]
         [InlineData(
@@ -1027,7 +1027,7 @@ namespace System.Reflection.Tests
             {
                 typeof(TI_NonGenericInterface2),
                 typeof(TI_NonGenericInterface1),
-                typeof(InheritedInteraface)
+                typeof(InheritedInteraface),
             }
         )]
         [InlineData(
@@ -1036,7 +1036,7 @@ namespace System.Reflection.Tests
             {
                 typeof(TI_NonGenericInterface2),
                 typeof(TI_NonGenericInterface1),
-                typeof(InheritedInteraface)
+                typeof(InheritedInteraface),
             }
         )]
         [InlineData(
@@ -1044,7 +1044,7 @@ namespace System.Reflection.Tests
             new Type[]
             {
                 typeof(GenericInterface1<InheritedInteraface>),
-                typeof(TI_NonGenericInterface1)
+                typeof(TI_NonGenericInterface1),
             }
         )]
         [InlineData(
@@ -1087,13 +1087,13 @@ namespace System.Reflection.Tests
             {
                 typeof(TI_ClassWithInterface1),
                 new TI_ClassWithInterface1(),
-                true
+                true,
             };
             yield return new object[]
             {
                 typeof(TI_NonGenericInterface1),
                 new TI_ClassWithInterface1(),
-                true
+                true,
             };
         }
 
@@ -1378,7 +1378,7 @@ namespace System.Reflection.Tests
             {
                 typeof(ClassWithNoInterfaces),
                 typeof(ClassWithNoInterfaces),
-                true
+                true,
             };
         }
 
@@ -2060,19 +2060,19 @@ namespace System.Reflection.Tests
             {
                 typeof(TI_BaseClass.InternalNestedClass).MakeByRefType(),
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
                 typeof(TI_BaseClass.InternalNestedClass).MakePointerType(),
                 true,
-                false
+                false,
             };
             yield return new object[]
             {
                 typeof(List<TI_BaseClass.InternalNestedClass>),
                 true,
-                false
+                false,
             };
             yield return new object[] { typeof(TI_BaseClass.InternalNestedClass), false, false };
             yield return new object[] { typeof(TI_BaseClass).MakeByRefType(), true, true };
@@ -2486,14 +2486,14 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 typeof(ClassWithNoInterfaces),
-                typeof(ClassWithNoInterfaces)
+                typeof(ClassWithNoInterfaces),
             };
 
             Type type = typeof(List<>);
             yield return new object[]
             {
                 type.MakeGenericType(typeof(object)),
-                typeof(List<object>)
+                typeof(List<object>),
             };
         }
 
@@ -2518,18 +2518,18 @@ namespace System.Reflection.Tests
                 yield return new object[]
                 {
                     Array.CreateInstance(typeof(int), new[] { 2 }, new[] { -1 }).GetType(),
-                    false
+                    false,
                 };
                 yield return new object[]
                 {
                     Array.CreateInstance(typeof(int), new[] { 2 }, new[] { 1 }).GetType(),
-                    false
+                    false,
                 };
             }
             yield return new object[]
             {
                 Array.CreateInstance(typeof(int), new[] { 2 }, new[] { 0 }).GetType(),
-                true
+                true,
             };
             yield return new object[] { typeof(int[][]), true };
             yield return new object[] { Type.GetType("System.Int32[]"), true };
@@ -2542,17 +2542,17 @@ namespace System.Reflection.Tests
             yield return new object[]
             {
                 typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>),
-                false
+                false,
             };
             yield return new object[]
             {
                 typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>[]),
-                true
+                true,
             };
             yield return new object[]
             {
                 typeof(OutsideTypeInfoTests<int>.InsideTypeInfoTests<string>[,]),
-                false
+                false,
             };
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
@@ -2565,7 +2565,7 @@ namespace System.Reflection.Tests
                             new[] { -1 }
                         )
                         .GetType(),
-                    false
+                    false,
                 };
             }
         }
@@ -2582,33 +2582,33 @@ namespace System.Reflection.Tests
             {
                 typeof(TI_GenericTypeWithAllMembers<>),
                 typeof(TI_GenericTypeWithAllMembers<int>),
-                true
+                true,
             };
             yield return new object[]
             {
                 typeof(TI_GenericTypeWithAllMembers<>),
                 typeof(TI_GenericTypeWithAllMembers<ClassWithMultipleConstructors>),
-                true
+                true,
             };
 
             yield return new object[]
             {
                 typeof(TI_GenericTypeWithAllMembers<>),
                 typeof(TI_TypeDerivedFromGenericTypeWithAllMembers<int>),
-                false
+                false,
             };
             yield return new object[]
             {
                 typeof(TI_GenericTypeWithAllMembers<>),
                 typeof(TI_TypeDerivedFromGenericTypeWithAllMembers<ClassWithMultipleConstructors>),
-                false
+                false,
             };
 
             yield return new object[]
             {
                 typeof(TI_GenericTypeWithAllMembers<>),
                 typeof(TI_TypeDerivedFromGenericTypeWithAllMembersClosed),
-                false
+                false,
             };
 
             static TypeInfo GetTypeDelegator(Type t) => new TypeDelegator(t);
@@ -2616,7 +2616,7 @@ namespace System.Reflection.Tests
             {
                 GetTypeDelegator(typeof(TI_GenericTypeWithAllMembers<>)),
                 typeof(TI_GenericTypeWithAllMembers<ClassWithMultipleConstructors>),
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2624,7 +2624,7 @@ namespace System.Reflection.Tests
                 GetTypeDelegator(
                     typeof(TI_GenericTypeWithAllMembers<ClassWithMultipleConstructors>)
                 ),
-                true
+                true,
             };
             yield return new object[]
             {
@@ -2632,7 +2632,7 @@ namespace System.Reflection.Tests
                 GetTypeDelegator(
                     typeof(TI_GenericTypeWithAllMembers<ClassWithMultipleConstructors>)
                 ),
-                true
+                true,
             };
 
             if (RuntimeFeature.IsDynamicCodeSupported)
@@ -2810,7 +2810,7 @@ namespace System.Reflection.Tests
         public enum UIntEnum : uint
         {
             A = 1,
-            B = 10
+            B = 10,
         }
 
         public enum IntEnum
@@ -2819,7 +2819,7 @@ namespace System.Reflection.Tests
             Enum2 = 2,
             Enum10 = 10,
             Enum18 = 18,
-            Enum45 = 45
+            Enum45 = 45,
         }
 
         public interface InheritedInteraface : TI_NonGenericInterface2 { }

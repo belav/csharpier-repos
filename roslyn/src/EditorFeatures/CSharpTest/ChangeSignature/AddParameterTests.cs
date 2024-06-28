@@ -80,7 +80,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "string", "newString", CallSiteKind.Value, ""),
                     "System.String"
                 ),
-                new AddedParameterOrExistingIndex(5)
+                new AddedParameterOrExistingIndex(5),
             };
             var updatedCode = """
                 static class Ext
@@ -156,7 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                         "12345"
                     ),
                     "System.Int32"
-                )
+                ),
             };
             var updatedCode = """
                 static class Ext
@@ -199,7 +199,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -246,7 +246,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -289,7 +289,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -329,7 +329,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -370,7 +370,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -420,7 +420,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
             {
                 new AddedParameterOrExistingIndex(1),
                 AddedParameterOrExistingIndex.CreateAdded("byte", "b", CallSiteKind.Value, "34"),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -476,7 +476,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 [My(8, 34, "test")]
@@ -529,7 +529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 ),
                 new AddedParameterOrExistingIndex(5),
                 new AddedParameterOrExistingIndex(4),
-                new AddedParameterOrExistingIndex(3)
+                new AddedParameterOrExistingIndex(3),
             };
 
             var updatedCode = """
@@ -588,7 +588,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 ),
                 new AddedParameterOrExistingIndex(5),
                 new AddedParameterOrExistingIndex(4),
-                new AddedParameterOrExistingIndex(3)
+                new AddedParameterOrExistingIndex(3),
             };
             var updatedCode = """
                 public class C
@@ -638,7 +638,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     isRequired: false,
                     defaultValue: "3"
                 ),
-                new AddedParameterOrExistingIndex(2)
+                new AddedParameterOrExistingIndex(2),
             };
             var updatedCode = """
                 public class C
@@ -678,7 +678,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(2)
+                new AddedParameterOrExistingIndex(2),
             };
             var updatedCode = """
                 public class C
@@ -718,7 +718,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(2)
+                new AddedParameterOrExistingIndex(2),
             };
 
             var updatedCode = """
@@ -772,7 +772,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new AddedParameterOrExistingIndex(5),
                 new AddedParameterOrExistingIndex(4),
                 new AddedParameterOrExistingIndex(3),
-                new AddedParameterOrExistingIndex(6)
+                new AddedParameterOrExistingIndex(6),
             };
             var updatedCode = """
                 public class C
@@ -828,7 +828,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 class Program
@@ -878,7 +878,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -923,7 +923,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "bb", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -974,7 +974,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1026,7 +1026,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1074,7 +1074,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 class Program
@@ -1119,7 +1119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 class Program
@@ -1163,7 +1163,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1208,7 +1208,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1252,7 +1252,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1297,7 +1297,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1343,7 +1343,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1390,7 +1390,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "byte"
                 ),
                 new AddedParameterOrExistingIndex(1),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 public class C
@@ -1434,7 +1434,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 class C
@@ -1482,7 +1482,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 interface I
@@ -1537,7 +1537,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 interface I
@@ -1595,7 +1595,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     "bb",
                     CallSiteKind.Value,
                     callSiteValue: "34"
-                )
+                ),
             };
 
             var updatedCode = """
@@ -1650,7 +1650,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     new AddedParameter(null, "byte", "b", CallSiteKind.Value, callSiteValue: "34"),
                     "byte"
                 ),
-                new AddedParameterOrExistingIndex(0)
+                new AddedParameterOrExistingIndex(0),
             };
             var updatedCode = """
                 using System;
@@ -1694,7 +1694,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new(
                     new AddedParameter(null, "int", "Forth", CallSiteKind.Value, "12345"),
                     "System.Int32"
-                )
+                ),
             };
             var updatedCode = """
                 /// <param name="First"></param>
@@ -1735,7 +1735,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new(
                     new AddedParameter(null, "int", "Forth", CallSiteKind.Value, "12345"),
                     "System.Int32"
-                )
+                ),
             };
             var updatedCode = """
                 /// <param name="First"></param>
@@ -1776,7 +1776,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 new(
                     new AddedParameter(null, "int", "Forth", CallSiteKind.Value, "12345"),
                     "System.Int32"
-                )
+                ),
             };
             var updatedCode = """
                 /// <param name="First"></param>

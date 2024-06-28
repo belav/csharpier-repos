@@ -234,7 +234,7 @@ namespace System.ServiceModel.Channels
                 Dictionary<string, string> dictionary = new Dictionary<string, string>(2)
                 {
                     { "Uri", uri.ToString() },
-                    { "VirtualPath", virtualPath }
+                    { "VirtualPath", virtualPath },
                 };
                 TraceUtility.TraceEvent(
                     TraceEventType.Information,
@@ -268,7 +268,7 @@ namespace System.ServiceModel.Channels
                     Dictionary<string, string> dictionary = new Dictionary<string, string>(2)
                     {
                         { "MSMQMessageId", msmqId.ToString() },
-                        { "WCFMessageId", indigoId.ToString() }
+                        { "WCFMessageId", indigoId.ToString() },
                     };
                     record = new DictionaryTraceRecord(dictionary);
                 }

@@ -18,7 +18,7 @@ namespace System.Diagnostics
     {
         NotInitialized,
         Initializing,
-        Initialized
+        Initialized,
     }
 
     internal static class DiagnosticsConfiguration

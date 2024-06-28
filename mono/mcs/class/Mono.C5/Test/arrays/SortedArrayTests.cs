@@ -1505,11 +1505,9 @@ namespace C5UnitTests.arrays.sorted
 
             public int CompareTo(int that)
             {
-                return that < b
-                    ? 1
-                    : that > t
-                        ? -1
-                        : 0;
+                return that < b ? 1
+                    : that > t ? -1
+                    : 0;
             }
 
             public bool Equals(int that)

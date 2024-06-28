@@ -222,7 +222,7 @@ public class InteractivityTest
                 AddServerPrerenderedId,
                 AddWebAssemblyId,
                 AddWebAssemblyPrerenderedId,
-                AddServerId
+                AddServerId,
             },
         };
 

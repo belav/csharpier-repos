@@ -72,7 +72,7 @@ public class InternalForeignKeyBuilderTest
                         .Metadata,
                     dependentEntityBuilder
                         .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
-                        .Metadata
+                        .Metadata,
                 },
                 ConfigurationSource.Explicit
             );
@@ -206,7 +206,7 @@ public class InternalForeignKeyBuilderTest
                     .Metadata,
                 orderEntityBuilder
                     .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
-                    .Metadata
+                    .Metadata,
             },
             customerKeyBuilder.Metadata,
             customerEntityBuilder.Metadata,
@@ -606,7 +606,7 @@ public class InternalForeignKeyBuilderTest
                     .Metadata,
                 orderEntityBuilder
                     .Property(Order.CustomerUniqueProperty, ConfigurationSource.Convention)
-                    .Metadata
+                    .Metadata,
             },
             customerKeyBuilder.Metadata,
             customerEntityBuilder.Metadata,
@@ -1213,7 +1213,7 @@ public class InternalForeignKeyBuilderTest
                     .Metadata,
                 dependentEntityBuilder
                     .Property(Order.CustomerUniqueProperty, ConfigurationSource.Explicit)
-                    .Metadata
+                    .Metadata,
             },
             principalEntityBuilder.Metadata.FindPrimaryKey(),
             principalEntityBuilder.Metadata,

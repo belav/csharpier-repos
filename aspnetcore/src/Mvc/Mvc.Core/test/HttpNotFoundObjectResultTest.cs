@@ -38,7 +38,7 @@ public class HttpNotFoundObjectResultTest
     {
         // Arrange
         var httpContext = GetHttpContext();
-        var actionContext = new ActionContext() { HttpContext = httpContext, };
+        var actionContext = new ActionContext() { HttpContext = httpContext };
 
         var result = new NotFoundObjectResult("Test Content");
 

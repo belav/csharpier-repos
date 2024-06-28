@@ -247,7 +247,7 @@ public abstract class NullKeysTestBase<TFixture> : IClassFixture<TFixture>
                 {
                     Id = "Wendy",
                     Fk = "Stereo",
-                    SelfFk = "Rodrigue"
+                    SelfFk = "Rodrigue",
                 }
             );
             context.Add(new WithStringFk { Id = "And", SelfFk = "By" });

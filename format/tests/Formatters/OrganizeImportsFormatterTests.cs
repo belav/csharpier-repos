@@ -45,7 +45,7 @@ class C
             {
                 ["end_of_line"] = EndOfLineFormatter.GetEndOfLineOption(Environment.NewLine),
                 ["dotnet_sort_system_directives_first"] = "false",
-                ["dotnet_separate_import_directive_groups"] = "false"
+                ["dotnet_separate_import_directive_groups"] = "false",
             };
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
@@ -78,7 +78,7 @@ class C
             {
                 ["end_of_line"] = EndOfLineFormatter.GetEndOfLineOption(Environment.NewLine),
                 ["dotnet_sort_system_directives_first"] = "true",
-                ["dotnet_separate_import_directive_groups"] = "false"
+                ["dotnet_separate_import_directive_groups"] = "false",
             };
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
@@ -112,7 +112,7 @@ class C
             {
                 ["end_of_line"] = EndOfLineFormatter.GetEndOfLineOption(Environment.NewLine),
                 ["dotnet_sort_system_directives_first"] = "false",
-                ["dotnet_separate_import_directive_groups"] = "true"
+                ["dotnet_separate_import_directive_groups"] = "true",
             };
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
@@ -146,7 +146,7 @@ class C
             {
                 ["end_of_line"] = EndOfLineFormatter.GetEndOfLineOption(Environment.NewLine),
                 ["dotnet_sort_system_directives_first"] = "true",
-                ["dotnet_separate_import_directive_groups"] = "true"
+                ["dotnet_separate_import_directive_groups"] = "true",
             };
 
             await AssertCodeChangedAsync(testCode, expectedCode, editorConfig);
@@ -167,7 +167,7 @@ class C
 
             var editorConfig = new Dictionary<string, string>()
             {
-                ["end_of_line"] = EndOfLineFormatter.GetEndOfLineOption(Environment.NewLine)
+                ["end_of_line"] = EndOfLineFormatter.GetEndOfLineOption(Environment.NewLine),
             };
 
             await AssertCodeUnchangedAsync(code, editorConfig);

@@ -58,7 +58,7 @@ namespace SharedTypes.ComInterfaces.MarshallingFails
         {
             new int[] { 1, 2, 3 },
             new int[] { 4, 5 },
-            new int[] { 6, 7, 8, 9 }
+            new int[] { 6, 7, 8, 9 },
         };
         int[] _widths = new int[] { 3, 2, 4 };
 

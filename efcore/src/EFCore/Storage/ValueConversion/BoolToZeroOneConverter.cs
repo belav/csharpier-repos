@@ -64,29 +64,18 @@ public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvi
         );
 
         return (TProvider)(
-            type == typeof(int)
-                ? 0
-                : type == typeof(short)
-                    ? (short)0
-                    : type == typeof(long)
-                        ? (long)0
-                        : type == typeof(sbyte)
-                            ? (sbyte)0
-                            : type == typeof(uint)
-                                ? (uint)0
-                                : type == typeof(ushort)
-                                    ? (ushort)0
-                                    : type == typeof(ulong)
-                                        ? (ulong)0
-                                        : type == typeof(byte)
-                                            ? (byte)0
-                                            : type == typeof(decimal)
-                                                ? (decimal)0
-                                                : type == typeof(double)
-                                                    ? (double)0
-                                                    : type == typeof(float)
-                                                        ? (float)0
-                                                        : (object)0
+            type == typeof(int) ? 0
+            : type == typeof(short) ? (short)0
+            : type == typeof(long) ? (long)0
+            : type == typeof(sbyte) ? (sbyte)0
+            : type == typeof(uint) ? (uint)0
+            : type == typeof(ushort) ? (ushort)0
+            : type == typeof(ulong) ? (ulong)0
+            : type == typeof(byte) ? (byte)0
+            : type == typeof(decimal) ? (decimal)0
+            : type == typeof(double) ? (double)0
+            : type == typeof(float) ? (float)0
+            : (object)0
         );
     }
 
@@ -95,29 +84,18 @@ public class BoolToZeroOneConverter<TProvider> : BoolToTwoValuesConverter<TProvi
         var type = typeof(TProvider).UnwrapNullableType();
 
         return (TProvider)(
-            type == typeof(int)
-                ? 1
-                : type == typeof(short)
-                    ? (short)1
-                    : type == typeof(long)
-                        ? (long)1
-                        : type == typeof(sbyte)
-                            ? (sbyte)1
-                            : type == typeof(uint)
-                                ? (uint)1
-                                : type == typeof(ushort)
-                                    ? (ushort)1
-                                    : type == typeof(ulong)
-                                        ? (ulong)1
-                                        : type == typeof(byte)
-                                            ? (byte)1
-                                            : type == typeof(decimal)
-                                                ? (decimal)1
-                                                : type == typeof(double)
-                                                    ? (double)1
-                                                    : type == typeof(float)
-                                                        ? (float)1
-                                                        : (object)1
+            type == typeof(int) ? 1
+            : type == typeof(short) ? (short)1
+            : type == typeof(long) ? (long)1
+            : type == typeof(sbyte) ? (sbyte)1
+            : type == typeof(uint) ? (uint)1
+            : type == typeof(ushort) ? (ushort)1
+            : type == typeof(ulong) ? (ulong)1
+            : type == typeof(byte) ? (byte)1
+            : type == typeof(decimal) ? (decimal)1
+            : type == typeof(double) ? (double)1
+            : type == typeof(float) ? (float)1
+            : (object)1
         );
     }
 }

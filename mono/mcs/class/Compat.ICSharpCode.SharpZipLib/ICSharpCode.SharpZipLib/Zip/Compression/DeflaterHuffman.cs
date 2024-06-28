@@ -80,7 +80,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             2,
             14,
             1,
-            15
+            15,
         };
 
         private static byte[] bit4Reverse =
@@ -100,7 +100,7 @@ namespace ICSharpCode.SharpZipLib.Zip.Compression
             3,
             11,
             7,
-            15
+            15,
         };
 
         [System.ObsoleteAttribute(

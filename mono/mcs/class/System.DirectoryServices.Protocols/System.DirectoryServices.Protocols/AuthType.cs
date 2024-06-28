@@ -43,6 +43,6 @@ namespace System.DirectoryServices.Protocols
         Dpa,
         Msn,
         External,
-        Kerberos
+        Kerberos,
     }
 }
